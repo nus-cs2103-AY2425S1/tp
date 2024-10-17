@@ -9,8 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -18,98 +16,62 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicySet;
-import seedu.address.model.tag.Tag;
 
 public class AddPolicyCommandTest {
-
     private final LifePolicy life = new LifePolicy();
     private final HealthPolicy health = new HealthPolicy();
-    private final EducationPolicy education = new EducationPolicy();
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        final PolicySet policies = new PolicySet();
-        assertThrows(NullPointerException.class, () -> new AddPolicyCommand(null, policies));
+        assertThrows(NullPointerException.class, () -> new AddPolicyCommand(null, health));
         assertThrows(NullPointerException.class, () -> new AddPolicyCommand(INDEX_FIRST_PERSON, null));
+    }
+
+    @Test
+    public void execute_addPolicy_success() throws Exception {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        // Person at index has no health policies
+        AddPolicyCommand command = new AddPolicyCommand(INDEX_FIRST_PERSON, health);
+
+        String expectedMessage = String.format(AddPolicyCommand.POLICY_ADD_PERSON_SUCCESS,
+                health.toString());
+
+        assertCommandSuccess(command, model, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        AddPolicyCommand command = new AddPolicyCommand(INDEX_FIRST_PERSON, health);
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
+    public void execute_duplicatePolicy_throwsCommandException() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        // Person at second index already has health policy
+        AddPolicyCommand command = new AddPolicyCommand(INDEX_SECOND_PERSON, health);
+
+        assertCommandFailure(command, model, AddPolicyCommand.MESSAGE_DUPLICATES);
     }
 
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        final PolicySet policies = new PolicySet();
-        policies.add(life);
-
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(outOfBoundIndex, policies);
-
+        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(outOfBoundIndex, life);
         assertCommandFailure(addPolicyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_addMultiplePolicies_success() throws Exception {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        final PolicySet policies = new PolicySet();
-        policies.add(life);
-        policies.add(health);
-
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, policies);
-
-        Person personToAddPolicy = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
-        String expectedMessage = String.format(AddPolicyCommand.POLICY_ADD_PERSON_SUCCESS,
-                String.format("%s; Phone: %s; Email: %s; Address: %s; Tags: %s",
-                        personToAddPolicy.getName(),
-                        personToAddPolicy.getPhone(),
-                        personToAddPolicy.getEmail(),
-                        personToAddPolicy.getAddress(),
-                        personToAddPolicy.getTags().stream()
-                                .map(Tag::toString) // Convert each Tag to its string representation
-                                .collect(Collectors.joining(", ")) // Join them with a comma and space
-                ));
-
-        assertCommandSuccess(addPolicyCommand, model, expectedMessage, model);
-    }
-
-    @Test
-    public void execute_emptyPolicySet_success() throws Exception {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        final PolicySet policies = new PolicySet();
-
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, policies);
-
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String expectedMessage = String.format(AddPolicyCommand.POLICY_ADD_PERSON_SUCCESS,
-                String.format("%s; Phone: %s; Email: %s; Address: %s; Tags: %s",
-                        personToEdit.getName(),
-                        personToEdit.getPhone(),
-                        personToEdit.getEmail(),
-                        personToEdit.getAddress(),
-                        personToEdit.getTags().stream()
-                                .map(Tag::toString) // Convert each Tag to its string representation
-                                .collect(Collectors.joining(", ")) // Join them with a comma and space
-                ));
-
-        assertCommandSuccess(addPolicyCommand, model, expectedMessage, model);
-    }
-
-    @Test
     public void equals() {
-        final PolicySet lifePolicies = new PolicySet();
-        lifePolicies.add(life);
-        final PolicySet educationPolicies = new PolicySet();
-        educationPolicies.add(education);
-
-        final AddPolicyCommand standardCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
-        final AddPolicyCommand commandWithSameValues = new AddPolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
-        final AddPolicyCommand differentIndexCommand = new AddPolicyCommand(INDEX_SECOND_PERSON, lifePolicies);
-        final AddPolicyCommand differentPoliciesCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, educationPolicies);
+        final AddPolicyCommand standardCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, health);
+        final AddPolicyCommand commandWithSameValues = new AddPolicyCommand(INDEX_FIRST_PERSON, health);
+        final AddPolicyCommand differentIndexCommand = new AddPolicyCommand(INDEX_SECOND_PERSON, health);
+        final AddPolicyCommand differentPoliciesCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, life);
 
         // same values -> returns true
         assertTrue(standardCommand.equals(commandWithSameValues));
@@ -123,20 +85,5 @@ public class AddPolicyCommandTest {
         assertFalse(standardCommand.equals(differentIndexCommand));
         // different policies -> returns false
         assertFalse(standardCommand.equals(differentPoliciesCommand));
-    }
-
-    @Test
-    public void equals_differentPolicies_returnsFalse() {
-        final PolicySet firstPolicySet = new PolicySet();
-        firstPolicySet.add(life);
-
-        final PolicySet secondPolicySet = new PolicySet();
-        secondPolicySet.add(education);
-
-        AddPolicyCommand firstCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, firstPolicySet);
-        AddPolicyCommand secondCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, secondPolicySet);
-
-        // Different policies, same index -> returns false
-        assertFalse(firstCommand.equals(secondCommand));
     }
 }

@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_COVERAGE_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
@@ -8,15 +7,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
-import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -51,21 +47,16 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         }
 
         assert argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent() : "Expected value for 'pt/' but none found.";
-        PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
+        PolicyType policyType = ParserUtil.parsePolicyType(
+                argMultimap.getValue(PREFIX_POLICY_TYPE).get());
+        double premiumAmount = ParserUtil.parsePolicyAmount(
+                argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).orElse(""));
+        double coverageAmount = ParserUtil.parsePolicyAmount(
+                argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).orElse(""));
+        LocalDate expiryDate = ParserUtil.parseExpiryDate(
+                argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).orElse(""));
 
-        try {
-            double premiumAmount = argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT)
-                    .map(Double::parseDouble).orElse(-1.0);
-            double coverageAmount = argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT)
-                    .map(Double::parseDouble).orElse(-1.0);
-            LocalDate expiryDate = argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE)
-                    .<LocalDate>map(date -> LocalDate.parse(date, MM_DD_YYYY_FORMATTER)).orElse(null);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
-        }
-
-        return new AddPolicyCommand(index, policySet);
+        Policy policy = Policy.makePolicy(policyType, premiumAmount, coverageAmount, expiryDate);
+        return new AddPolicyCommand(index, policy);
     }
 }

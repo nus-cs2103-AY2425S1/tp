@@ -40,6 +40,23 @@ public abstract class Policy {
     }
 
     /**
+     * Return a suitable Policy based on the PolicyType passed.
+     */
+    public static Policy makePolicy(PolicyType policyType, double premiumAmount, double coverageAmount,
+            LocalDate expiryDate) {
+        switch (policyType) {
+        case LIFE:
+            return new LifePolicy(premiumAmount, coverageAmount, expiryDate);
+        case HEALTH:
+            return new HealthPolicy(premiumAmount, coverageAmount, expiryDate);
+        case EDUCATION:
+            return new EducationPolicy(premiumAmount, coverageAmount, expiryDate);
+        default:
+            throw new RuntimeException("Policy type " + policyType + " is not accounted for.");
+        }
+    }
+
+    /**
      * Throws IllegalArgumentException if amount is less than zero.
      *
      * @param amount to be tested.
