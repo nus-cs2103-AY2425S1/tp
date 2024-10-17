@@ -15,14 +15,15 @@ public class StringUtil {
      * Returns true if the {@code sentence} contains the {@code substring}.
      *   Ignores case, does not require full word match.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == true
-     *       containsWordIgnoreCase("ABc def", "cde") == false // Sentence does not contain substring.
-     *       containsWordIgnoreCase("ABc def", "c de") == true
+     *       containsSubstringIgnoreCase("ABc def", "abc") == true
+     *       containsSubstringIgnoreCase("ABc def", "DEF") == true
+     *       containsSubstringIgnoreCase("ABc def", "AB") == true
+     *       containsSubstringIgnoreCase("ABc def", "cde") == false // Sentence does not contain substring.
+     *       containsSubstringIgnoreCase("ABc def", "c de") == true
      *       </pre>
      * @param sentence cannot be null
      * @param substring cannot be null, cannot be empty
+     * @return true if the {@code sentence} contains the {@code substring}, ignoring case
      */
     public static boolean containsSubstringIgnoreCase(String sentence, String substring) {
         requireNonNull(sentence);
@@ -36,6 +37,35 @@ public class StringUtil {
         String upperCaseSubstring = preppedSubstring.toUpperCase();
 
         return upperCaseSentence.contains(upperCaseSubstring);
+    }
+
+    /**
+     * Returns true if the {@code sentence} starts with {@code substring}
+     *   Ignores case, does not require full word match.
+     *   <br>examples:<pre>
+     *       startsWithSubstringIgnoreCase("ABc def", "abc") == true
+     *       startsWithSubstringIgnoreCase("ABc def", "DEF") == false // "DEF" is not at the start.
+     *       startsWithSubstringIgnoreCase("ABc def", "AB") == true
+     *       startsWithSubstringIgnoreCase("ABc def", "cde") == false // "cde" is not at the start.
+     *       startsWithSubstringIgnoreCase("ABc def", "ABc d") == true
+     *       startsWithSubstringIgnoreCase("ABc def", "bc") == false // "bc" is not at the start.
+     *       </pre>
+     * @param sentence cannot be null
+     * @param substring cannot be null, cannot be empty
+     * @return true if the {@code sentence} starts with the {@code substring}, ignoring case
+     */
+    public static boolean startsWithSubstringIgnoreCase(String sentence, String substring) {
+        requireNonNull(sentence);
+        requireNonNull(substring);
+
+        String preppedSubstring = substring.trim();
+        checkArgument(!preppedSubstring.isEmpty(), "Substring parameter cannot be empty");
+
+        // Convert both sentence and substring to upper case to ignore case
+        String upperCaseSentence = sentence.toUpperCase();
+        String upperCaseSubstring = preppedSubstring.toUpperCase();
+
+        return upperCaseSentence.startsWith(upperCaseSubstring);
     }
 
     /**
