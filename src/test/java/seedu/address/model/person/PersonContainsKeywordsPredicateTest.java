@@ -106,7 +106,7 @@ public class PersonContainsKeywordsPredicateTest {
 
     @Test
     public void test_personMatchesFullyInRoleField_returnsTrue() {
-        // A partial match is not possible for Role, since parser validation prevents partial roles.
+        // A partial match is not possible for Role, since parser validation prevents partial roles
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(null, null, null, "brUdder", null, null, null);
         assertTrue(predicate.test(TypicalPersons.BENSON));
@@ -114,7 +114,7 @@ public class PersonContainsKeywordsPredicateTest {
 
     @Test
     public void test_personMatchesFullyInMajorField_returnsTrue() {
-        // A partial match is not possible for Major, since parser validation prevents partial majors.
+        // A partial match is not possible for Major, since parser validation prevents partial majors
         PersonContainsKeywordsPredicate predicate =
                 new PersonContainsKeywordsPredicate(null, null, null, null, "cs", null, null);
         assertTrue(predicate.test(TypicalPersons.BENSON));
