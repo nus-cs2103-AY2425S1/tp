@@ -3,12 +3,12 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "female",
-    "module": "CS2103T",
+    "modules": [ "CS2103T" ],
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "gender": "female",
-    "module": "CS2103T"
+    "modules": [ "CS2103T" ]
   } ]
 }
