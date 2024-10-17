@@ -2,11 +2,11 @@ package seedu.address.storage;
 
 import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -65,7 +65,7 @@ class JsonAdaptedPolicy {
         } catch (IllegalArgumentException e) {
             throw new IllegalValueException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
         }
-        
+
         try {
             switch (modelPolicyType) {
             case LIFE:

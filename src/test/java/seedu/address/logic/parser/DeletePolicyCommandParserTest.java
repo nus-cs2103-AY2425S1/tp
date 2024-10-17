@@ -14,7 +14,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeletePolicyCommand;
-import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
 

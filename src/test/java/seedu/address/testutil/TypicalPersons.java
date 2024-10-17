@@ -27,7 +27,7 @@ import seedu.address.model.policy.LifePolicy;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-    private static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.parse("12/23/2024", MM_DD_YYYY_FORMATTER);
+    public static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.parse("12/23/2024", MM_DD_YYYY_FORMATTER);
     public static final LifePolicy DEFAULT_LIFE_POLICY = new LifePolicy(200.0, 2000.0, DEFAULT_EXPIRY_DATE);
     public static final HealthPolicy DEFAULT_HEALTH_POLICY = new HealthPolicy(300.0, 3000.0, DEFAULT_EXPIRY_DATE);
     public static final EducationPolicy DEFAULT_EDUCATION_POLICY =
