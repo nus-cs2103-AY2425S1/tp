@@ -279,7 +279,8 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **After a property is added** it is not instantly reflected on the Ui. To resolve this, scroll the screen up and down or click on the contact you added the property to.
+4. **Bug in delSell and delBuy commands**, instead of deleting the specified property, these commands are currently deleting the contact instead. This issue needs to be addressed to ensure the correct functionality of the application.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
