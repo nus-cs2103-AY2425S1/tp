@@ -25,7 +25,7 @@ public class RetrievePublicAddressCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves public addresses of a contact.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PUBLIC_ADDRESS + "NETWORK "
-            + "[" + PREFIX_PUBLIC_ADDRESS_LABEL + "WALLET NAME]\n"
+            + "[" + PREFIX_PUBLIC_ADDRESS_LABEL + "LABEL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PUBLIC_ADDRESS + "BTC "
             + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet";
@@ -35,26 +35,26 @@ public class RetrievePublicAddressCommand extends Command {
 
     private final Index index;
     private final Network network;
-    private final String walletName;
+    private final String label;
 
     /**
      * Creates a RetrievePublicAddressCommand to retrieve the corresponding public address.
      *
-     * @param index      of the person to retrieve the public address from
-     * @param network    network type of desired public address
-     * @param walletName wallet name of desired public address
+     * @param index   of the person to retrieve the public address from
+     * @param network network type of desired public address
+     * @param label   label of desired public address
      */
-    public RetrievePublicAddressCommand(Index index, Network network, String walletName) {
+    public RetrievePublicAddressCommand(Index index, Network network, String label) {
         requireNonNull(index);
         requireNonNull(network);
 
         this.index = index;
         this.network = network;
-        this.walletName = walletName;
+        this.label = label;
     }
 
     /**
-     * Creates a RetrievePublicAddressCommand with default value for walletName.
+     * Creates a RetrievePublicAddressCommand with default value for label.
      *
      * @param index   of the person to retrieve the public address from
      * @param network network type of desired public address
@@ -75,7 +75,7 @@ public class RetrievePublicAddressCommand extends Command {
         Person desiredPerson = lastShownList.get(index.getZeroBased());
         List<PublicAddress> desiredPublicAddresses = desiredPerson.getPublicAddressesByNetwork(network)
                 .stream()
-                .filter(publicAddress -> publicAddress.label.toLowerCase().contains(walletName.toLowerCase()))
+                .filter(publicAddress -> publicAddress.label.toLowerCase().contains(label.toLowerCase()))
                 .sorted((a, b) -> a.label.compareToIgnoreCase(b.label))
                 .toList();
 
@@ -100,7 +100,7 @@ public class RetrievePublicAddressCommand extends Command {
         RetrievePublicAddressCommand otherCommand = (RetrievePublicAddressCommand) other;
         return index.equals(otherCommand.index)
                 && network.equals(otherCommand.network)
-                && walletName.equals(otherCommand.walletName);
+                && label.equals(otherCommand.label);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class RetrievePublicAddressCommand extends Command {
         return new ToStringBuilder(this)
                 .add("index", index)
                 .add("network", network)
-                .add("walletName", walletName)
+                .add("label", label)
                 .toString();
     }
 

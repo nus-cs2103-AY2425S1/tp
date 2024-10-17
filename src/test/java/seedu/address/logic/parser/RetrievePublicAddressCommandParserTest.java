@@ -60,9 +60,9 @@ public class RetrievePublicAddressCommandParserTest {
     public void parse_validArgsWithTag_returnsRetrievePublicAddressCommand() {
         Index expectedIndex = Index.fromOneBased(1);
         Network expectedNetwork = Network.BTC;
-        String expectedWalletName = "MyWallet";
+        String expectedLabel = "MyWallet";
         RetrievePublicAddressCommand expectedCommand =
-                new RetrievePublicAddressCommand(expectedIndex, expectedNetwork, expectedWalletName);
+                new RetrievePublicAddressCommand(expectedIndex, expectedNetwork, expectedLabel);
 
         assertParseSuccess(parser, "1 " + PREFIX_PUBLIC_ADDRESS + "BTC " + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet",
                 expectedCommand);
