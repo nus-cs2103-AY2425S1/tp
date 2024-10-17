@@ -23,8 +23,16 @@ CareConnect is a **CLI-first** **case management application** that enables soci
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+1. Type the command in the command box.
+
+   - Note that the command entered will be coloured red until it a valid command is entered.<br>
+       ![incomplete command](images/incompleteCommand.png)
+   - Once the completed, valid command is entered, the command will return to colour black.<br>
+       ![complete command](images/completedCommand.png)
+   - Press Enter to execute command. e.g. typing **`help`** and pressing Enter
+     will open the help window.<br>
+
+4. Some example commands you can try:
 
    * `list` : Lists all contacts.
 
@@ -92,6 +100,20 @@ Examples:
 Shows a list of all beneficiaries in the case management system.
 
 Format: `list`
+
+### Viewing a client's details: `view`
+
+View the details of the specified client in the case management system.
+
+Format: `view INDEX`
+
+* Opens up record of the client at the specified `INDEX`.
+* The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `view 2` opens up the record of the 2nd client in the case management system.
+* `find Betsy` followed by `delete 1` opens up the record of the 1st client in the results of the `find` command.
 
 ### Editing a client : `edit`
 
@@ -164,6 +186,10 @@ CareConnect data are saved in the hard disk automatically after any command that
 save
 manually.
 
+### Autocomplete commands
+
+CareConnect provides command autocompletion when pressing the Tab key. For example, typing `f` and pressing Tab will auto complete the command to `find`.
+
 ### Editing the data file
 
 CareConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
@@ -204,4 +230,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**View** | `view INDEX` <br> e.g., `delete 3`
 **Help** | `help`

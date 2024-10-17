@@ -1,12 +1,15 @@
 package careconnect.ui;
 
 import careconnect.logic.Logic;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 
 /**
@@ -18,6 +21,8 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final SyntaxValidator syntaxValidator;
+    private final CommandAutocompleter commandAutocompleter;
 
     @FXML
     private TextField commandTextField;
@@ -25,12 +30,47 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, CommandAutocompleter commandAutocompleter,
+                      SyntaxValidator syntaxValidator) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.commandAutocompleter = commandAutocompleter;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        this.syntaxValidator = syntaxValidator;
     }
+
+    /**
+     * Initializes the tab button listener.
+     */
+    @FXML
+    public void initialize() {
+        // Add a key listener for the Tab key
+        commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.TAB) {
+                handleTabPressed();
+                event.consume(); // Prevents default behavior
+            }
+        });
+    }
+
+    /**
+     * Handles the Tab button pressed event.
+     */
+    private void handleTabPressed() {
+        String commandText = commandTextField.getText();
+
+        try {
+            String autocompletedCommand = commandAutocompleter.autocompleteCommand(commandText);
+            String autocompletedCommandWithSpace = autocompletedCommand + " ";
+            commandTextField.setText(autocompletedCommandWithSpace);
+            commandTextField.positionCaret(commandTextField.getText().length());
+        } catch (AutocompleteException e) {
+            setStyleToIndicateCommandFailure();
+        }
+
+    }
+
 
     /**
      * Handles the Enter button pressed event.
@@ -51,6 +91,26 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
+     * Validates command typed on every key press.
+     */
+    @FXML
+    private void handleCommandTyped() {
+        String commandText = commandTextField.getText();
+        if (commandText.equals("")) {
+            return;
+        }
+
+        if (syntaxValidator.validateSyntax(commandText)) {
+            // Sets style back to default if command is valid
+            this.setStyleToDefault();
+            assert(!(this.commandTextField.getStyleClass()
+                            .contains(ERROR_STYLE_CLASS)));
+        } else {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
@@ -58,7 +118,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Sets the command box style to indicate a failed command.
+     * Sets the command box style to indicate a incorrect / failed command.
      */
     private void setStyleToIndicateCommandFailure() {
         ObservableList<String> styleClass = commandTextField.getStyleClass();
@@ -68,6 +128,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+        assert(styleClass.contains(ERROR_STYLE_CLASS));
     }
 
     /**
@@ -81,6 +142,32 @@ public class CommandBox extends UiPart<Region> {
          * @see Logic#execute(String)
          */
         CommandResult execute(String commandText) throws CommandException, ParseException;
+    }
+
+    /**
+     * Represents a function that can autocomplete commands.
+     */
+    @FunctionalInterface
+    public interface CommandAutocompleter {
+        /**
+         * Autocompletes the command and returns the suggestion.
+         *
+         * @see Logic#autocompleteCommand(String)
+         */
+        String autocompleteCommand(String commandText) throws AutocompleteException;
+    }
+
+    /**
+     * Represents a function that can validate syntax
+     */
+    @FunctionalInterface
+    public interface SyntaxValidator {
+        /**
+         * Checks if the string provided is valid syntax
+         *
+         * @see Logic#validateSyntax(String)
+         */
+        boolean validateSyntax(String syntax);
     }
 
 }

@@ -5,9 +5,11 @@ import java.util.logging.Logger;
 import careconnect.commons.core.GuiSettings;
 import careconnect.commons.core.LogsCenter;
 import careconnect.logic.Logic;
+import careconnect.logic.autocompleter.exceptions.AutocompleteException;
 import careconnect.logic.commands.CommandResult;
 import careconnect.logic.commands.exceptions.CommandException;
 import careconnect.logic.parser.exceptions.ParseException;
+import careconnect.model.person.Person;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -33,7 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final PersonDetailFallback personDetailFallback = new PersonDetailFallback();
+    private final HelpWindow helpWindow = new HelpWindow();
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -46,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane personDetailPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -64,8 +70,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -107,19 +111,32 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Displays the details of the selected {@code Person} on the right pane.
+     *
+     * @param index of the selected {@code Person}
+     */
+    protected void showSelectedPerson(int index) {
+        Person selectedPerson = logic.getFilteredPersonList().get(index);
+        PersonDetailCard personDetailCard = new PersonDetailCard(selectedPerson);
+        personDetailPlaceholder.getChildren().setAll(personDetailCard.getRoot());
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::showSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        personDetailPlaceholder.getChildren().add(personDetailFallback.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        CommandBox commandBox = new CommandBox(this::executeCommand, this::autocompleteCommand, this::validateSyntax);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -186,6 +203,15 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            int selectedIndex = commandResult.getSelectedIndex();
+            if (selectedIndex == CommandResult.NO_RECORD_SELECTED) {
+                // display fallback ui if no index is selected
+                personDetailPlaceholder.getChildren().setAll(personDetailFallback.getRoot());
+            } else {
+                // display detail page
+                showSelectedPerson(selectedIndex);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -193,4 +219,32 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Autocompletes the command and returns the suggestion.
+     *
+     * @see Logic#autocompleteCommand(String)
+     */
+    private String autocompleteCommand(String commandText) throws AutocompleteException {
+        try {
+            String autocompletedCommand = logic.autocompleteCommand(commandText);
+            logger.info("Autocompleted Command: " + autocompletedCommand);
+            return autocompletedCommand;
+        } catch (AutocompleteException e) {
+            logger.info("An error occurred while autocompleting command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+    /**
+     * Checks if given string is valid syntax
+     *
+     * @see Logic#validateSyntax(String)
+     */
+    private boolean validateSyntax(String syntax) {
+        boolean isValidSyntax = logic.validateSyntax(syntax);
+        logger.info("isValidSyntax: " + isValidSyntax);
+        return isValidSyntax;
+    }
+
 }
