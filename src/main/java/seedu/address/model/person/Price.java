@@ -18,6 +18,12 @@ public class Price {
         this.value = price;
     }
 
+    /**
+     * Returns true if a given string is a valid price.
+     */
+    public static boolean isValidPrice(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
 
     @Override
     public String toString() {
