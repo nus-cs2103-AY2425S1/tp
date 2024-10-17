@@ -65,7 +65,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to use the commands with description descriptions.
+Shows a message explaning how to use the commands with detailed descriptions.
 
 ![help message](images/helpMessage.png)
 
@@ -76,11 +76,12 @@ Format: `help`
 
 Adds a person to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
 **Tip:** Fields can be added in any order. The order of the fields does not matter.
+**Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
@@ -97,7 +98,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB]`
+Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
 
 * Edits the person at with the specified `NAME`.
 * At least one of the optional fields must be provided.
@@ -194,7 +195,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/Wedding 1`
 **Clear**  | `clear`
 **Delete** | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
 **Edit**   | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
