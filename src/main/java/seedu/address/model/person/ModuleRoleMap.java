@@ -27,6 +27,9 @@ public class ModuleRoleMap {
     public static final String MESSAGE_INPUT_SIZE_CONSTRAINTS =
             "ModuleCode array and RoleType array must be of the same length";
 
+    public static final String MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS =
+            "A person should have only one role per module. Check that there are no duplicate module codes";
+
     /*
      * Input keyword must match one of the keyword provided in the regex.
      * Note that the pattern is only matching lower case, so the other methods

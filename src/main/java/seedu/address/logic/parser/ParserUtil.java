@@ -3,8 +3,10 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -203,10 +205,17 @@ public class ParserUtil {
         requireNonNull(moduleRolePairs);
 
         final HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        final List<ModuleCode> moduleCodes = new ArrayList<>();
 
         for (String moduleRolePair : moduleRolePairs) {
             ModuleRolePair parsedPair = parseModuleRolePair(moduleRolePair);
             hashMap.put(parsedPair.moduleCode, parsedPair.roleType);
+            moduleCodes.add(parsedPair.moduleCode);
+        }
+
+        Set<ModuleCode> uniqueModuleCodes = new HashSet<>(moduleCodes);
+        if (uniqueModuleCodes.size() != moduleCodes.size()) {
+            throw new ParseException(ModuleRoleMap.MESSAGE_SINGLE_ROLE_PER_MODULE_CONSTRAINTS);
         }
 
         final ModuleRoleMap moduleRoleMap = new ModuleRoleMap(hashMap);
