@@ -1,0 +1,19 @@
+.error {
+    -fx-text-fill: #FF4500 !important; /* Bright orange for error messages */
+}
+
+.list-cell:empty {
+    /* Empty cells will be filled with a base theme color */
+    -fx-background-color: #2B3A67; /* Deep blue background */
+}
+
+.tag-selector {
+    -fx-border-width: 1;
+    -fx-border-color: #FFA500;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+}
+
+.tooltip-text {
+    -fx-text-fill: #2B3A67; /* Ensure tooltip text remains white for legibility */
+}

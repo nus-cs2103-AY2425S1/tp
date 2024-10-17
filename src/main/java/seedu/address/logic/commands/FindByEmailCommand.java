@@ -8,7 +8,7 @@ import seedu.address.model.person.EmailContainsKeywordsPredicate;
  */
 public class FindByEmailCommand extends AbstractFindCommand {
 
-    public static final String COMMAND_WORD = "find /e";
+    public static final String COMMAND_WORD = "find e/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose email "
             + "is the same as the specified keywords (case-insensitive) and displays them as a list with indices.\n"
