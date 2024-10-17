@@ -62,6 +62,7 @@ public class PersonUtil {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.getTagName()).append(" "));
             }
         }
+        sb.append(" ");
         if (descriptor.getWeddings().isPresent()) {
             Set<Wedding> weddings = descriptor.getWeddings().get();
             if (weddings.isEmpty()) {
