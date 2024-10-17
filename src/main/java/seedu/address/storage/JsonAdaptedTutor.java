@@ -31,9 +31,9 @@ class JsonAdaptedTutor extends JsonAdaptedPerson {
     public JsonAdaptedTutor(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                             @JsonProperty("email") String email, @JsonProperty("address") String address,
                             @JsonProperty("hours") String hours,
-                            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role) {
+                            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
 
-        super(name, phone, email, address, hours, tags, role);
+        super(name, phone, email, address, hours, tags, "Tutor");
     }
 
     /**

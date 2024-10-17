@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
@@ -66,8 +67,10 @@ public class LogicManager implements Logic {
             logger.info("Address book modified, saving to file.");
             try {
                 storage.saveAddressBook(model.getAddressBook());
-            } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+            } catch (AccessDeniedException ade) {
+                throw new CommandException(FILE_OPS_PERMISSION_ERROR_FORMAT, ade);
+            }catch (IOException ioe) {
+                throw new CommandException(FILE_OPS_ERROR_FORMAT, ioe);
             }
         }
 

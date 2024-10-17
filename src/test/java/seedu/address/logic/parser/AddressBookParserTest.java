@@ -11,10 +11,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTuteeCommand;
+import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -29,20 +29,30 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TuteeBuilder;
+import seedu.address.testutil.TutorBuilder;
 
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
 
-    @Disabled
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+    public void parseCommand_addTutor() throws Exception {
+        Tutor tutor = new TutorBuilder().build();
+        AddTutorCommand command = (AddTutorCommand) parser.parseCommand(PersonUtil.getAddTutorCommand(tutor));
+        assertEquals(new AddTutorCommand(tutor), command);
+    }
+
+    @Test
+    public void parseCommand_addTutee() throws Exception {
+        Tutee tutee = new TuteeBuilder().build();
+        AddTuteeCommand command = (AddTuteeCommand) parser.parseCommand(PersonUtil.getAddTuteeCommand(tutee));
+        assertEquals(new AddTuteeCommand(tutee), command);
     }
 
     @Test
