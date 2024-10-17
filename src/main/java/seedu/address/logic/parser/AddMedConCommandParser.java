@@ -35,6 +35,8 @@ public class AddMedConCommandParser implements Parser<AddMedConCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMedConCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
+
         // Parse NRIC
         String nricStr = argMultimap.getValue(PREFIX_NRIC).get();
         Nric nric = ParserUtil.parseNric(nricStr);

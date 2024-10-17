@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.MedCon;
@@ -30,7 +29,7 @@ public class DelMedConCommand extends Command {
             + PREFIX_NRIC + "T0123456F "
             + "c/Diabetes c/Hypertension";
 
-    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition(s) from Person: %1$s";
+    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition: %1$s from Person: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String MESSAGE_MEDCON_NOT_FOUND = "Condition not found: %1$s";
 
@@ -83,7 +82,18 @@ public class DelMedConCommand extends Command {
      * Generates a command execution success message based on the removed medical conditions.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_DELETE_MEDCON_SUCCESS, Messages.formatMedCon(personToEdit));
+        StringBuilder medConsString = new StringBuilder();
+        medCons.forEach(medCon -> medConsString.append(medCon.value).append(", "));
+
+        // Remove trailing comma and space, if any
+        if (medConsString.length() > 0) {
+            medConsString.setLength(medConsString.length() - 2);
+        }
+
+        String resultMedCon = '[' + medConsString.toString() + ']';
+
+        return String.format(MESSAGE_DELETE_MEDCON_SUCCESS, resultMedCon, personToEdit.getName().fullName);
+
     }
 
     @Override
