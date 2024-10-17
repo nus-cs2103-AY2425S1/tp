@@ -82,7 +82,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgsAllEmptyString_throwsParseException() {
-        assertParseFailure(parser, "" + DEFAULT_DELIMITER  + DEFAULT_DELIMITER,
+        assertParseFailure(parser, "" + DEFAULT_DELIMITER + DEFAULT_DELIMITER,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
 
