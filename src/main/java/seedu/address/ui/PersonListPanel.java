@@ -46,12 +46,10 @@ public class PersonListPanel extends UiPart<Region> {
     private void handlePersonClick(MouseEvent event) {
         Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
-            personDetailsWindow.show(selectedPerson.getName().fullName,
-                    selectedPerson.getEmail().value,
-                    selectedPerson.getAddress().value,
-                    selectedPerson.getPhone().value);
+            personDetailsWindow.show(selectedPerson);
         }
     }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
