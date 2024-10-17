@@ -7,7 +7,7 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_ADDRESS_B
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 import static seedu.academyassist.testutil.TypicalPersons.ALICE;
-import static seedu.academyassist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -22,25 +22,25 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.exceptions.DuplicatePersonException;
 import seedu.academyassist.testutil.PersonBuilder;
 
-public class AddressBookTest {
+public class AcademyAssistTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final AcademyAssist academyAssist = new AcademyAssist();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), academyAssist.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> academyAssist.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyAcademyAssist_replacesData() {
+        AcademyAssist newData = getTypicalAcademyAssist();
+        academyAssist.resetData(newData);
+        assertEquals(newData, academyAssist);
     }
 
     @Test
@@ -49,53 +49,53 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AcademyAssistStub newData = new AcademyAssistStub(newPersons);
 
-        assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePersonException.class, () -> academyAssist.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> academyAssist.hasPerson(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+    public void hasPerson_personNotInAcademyAssist_returnsFalse() {
+        assertFalse(academyAssist.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+    public void hasPerson_personInAcademyAssist_returnsTrue() {
+        academyAssist.addPerson(ALICE);
+        assertTrue(academyAssist.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+    public void hasPerson_personWithSameIdentityFieldsInAcademyAssist_returnsTrue() {
+        academyAssist.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(academyAssist.hasPerson(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> academyAssist.getPersonList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = AcademyAssist.class.getCanonicalName() + "{persons=" + academyAssist.getPersonList() + "}";
+        assertEquals(expected, academyAssist.toString());
     }
 
     /**
      * A stub ReadOnlyAcademyAssist whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAcademyAssist {
+    private static class AcademyAssistStub implements ReadOnlyAcademyAssist {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AcademyAssistStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

@@ -13,13 +13,13 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandSu
 import static seedu.academyassist.logic.commands.CommandTestUtil.showPersonWithIc;
 import static seedu.academyassist.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.academyassist.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.academyassist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ModelManager;
 import seedu.academyassist.model.UserPrefs;
@@ -34,7 +34,7 @@ import seedu.academyassist.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAcademyAssist(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +45,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
                 model.getFilteredPersonList().get(0).getName(), "F2234567X", Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AcademyAssist(model.getAcademyAssist()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -68,7 +68,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
             lastPerson.getName(), lastPerson.getIc(), Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AcademyAssist(model.getAcademyAssist()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -83,7 +83,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getName(),
                 "F1264567X", Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AcademyAssist(model.getAcademyAssist()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -100,7 +100,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, personInFilteredList.getName(),
                 "F1264567X", Messages.format(editedPerson));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAcademyAssist()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AcademyAssist(model.getAcademyAssist()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -124,7 +124,7 @@ public class EditCommandTest {
         Ic firstPersonIc = new Ic("F2234567X");
         showPersonWithIc(model, firstPersonIc);
 
-        // edit person in filtered list into a duplicate in address book
+        // edit person in filtered list into a duplicate in academy assist
         Person personInList = model.getAcademyAssist().getPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(firstPersonIc,
                 new EditPersonDescriptorBuilder(personInList).build());

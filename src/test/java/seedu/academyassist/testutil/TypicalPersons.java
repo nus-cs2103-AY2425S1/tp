@@ -66,10 +66,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AcademyAssist} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static AcademyAssist getTypicalAcademyAssist() {
+        AcademyAssist ab = new AcademyAssist();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

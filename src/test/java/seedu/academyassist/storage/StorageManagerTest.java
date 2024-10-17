@@ -2,7 +2,7 @@ package seedu.academyassist.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.academyassist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
 
 import java.nio.file.Path;
 
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.academyassist.commons.core.GuiSettings;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.UserPrefs;
 
@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAcademyAssistStorage addressBookStorage = new JsonAcademyAssistStorage(getTempFilePath("ab"));
+        JsonAcademyAssistStorage academyAssistStorage = new JsonAcademyAssistStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(academyAssistStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,20 +48,20 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void academyAssistReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link JsonAcademyAssistStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonAcademyAssistStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
+        AcademyAssist original = getTypicalAcademyAssist();
+        storageManager.saveAcademyAssist(original);
         ReadOnlyAcademyAssist retrieved = storageManager.readAcademyAssist().get();
-        assertEquals(original, new AddressBook(retrieved));
+        assertEquals(original, new AcademyAssist(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getAcademyAssistFilePath() {
         assertNotNull(storageManager.getAcademyAssistFilePath());
     }
 

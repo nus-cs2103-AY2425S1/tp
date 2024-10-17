@@ -8,7 +8,7 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandSu
 import static seedu.academyassist.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.academyassist.testutil.TypicalIcs.IC_FIRST_PERSON;
 import static seedu.academyassist.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.academyassist.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +26,7 @@ import seedu.academyassist.model.person.Person;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAcademyAssist(), new UserPrefs());
 
     @Test
     public void execute_validIcUnfilteredList_success() {

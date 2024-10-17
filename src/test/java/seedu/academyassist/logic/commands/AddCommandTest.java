@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
 import seedu.academyassist.commons.core.GuiSettings;
 import seedu.academyassist.logic.Messages;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
-import seedu.academyassist.model.AddressBook;
+import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.ReadOnlyUserPrefs;
@@ -116,7 +116,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAcademyAssistFilePath(Path addressBookFilePath) {
+        public void setAcademyAssistFilePath(Path academyAssistFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -126,7 +126,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAcademyAssist newData) {
+        public void setAcademyAssist(ReadOnlyAcademyAssist newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -229,7 +229,7 @@ public class AddCommandTest {
 
         @Override
         public ReadOnlyAcademyAssist getAcademyAssist() {
-            return new AddressBook();
+            return new AcademyAssist();
         }
     }
 
