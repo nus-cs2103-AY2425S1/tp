@@ -31,5 +31,7 @@ public class CliSyntax {
     /* Prefix meant for assigning */
     public static final Prefix ASSIGN_VOLUNTEER_PREFIX_NAME = new Prefix("v/");
     public static final Prefix ASSIGN_EVENT_PREFIX_NAME = new Prefix("e/");
+    public static final Prefix UNASSIGN_VOLUNTEER_PREFIX_NAME = new Prefix("v/");
+    public static final Prefix UNASSIGN_EVENT_PREFIX_NAME = new Prefix("e/"); 
 
 }

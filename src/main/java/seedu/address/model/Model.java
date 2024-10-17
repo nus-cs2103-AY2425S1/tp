@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
@@ -129,5 +130,19 @@ public interface Model {
      * @return The event with the matching ID, or null if not found.
      */
     Event getEvent(int eventId);
+
+//    /**
+//     * Retrieves a volunteer by its index.
+//     * @param volunteerIndex The index of the volunteer to retrieve.
+//     * @return The volunteer with the matching ID, or null if not found.
+//     */
+//    Volunteer getVolunteerByIndex(Index volunteerIndex);
+//
+//    /**
+//     * Retrieves an event by its its index.
+//     * @param eventIndex The index of the event to retrieve.
+//     * @return The event with the matching ID, or null if not found.
+//     */
+//    Event getEventByIndex(Index eventIndex);
 
 }
