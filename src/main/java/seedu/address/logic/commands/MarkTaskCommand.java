@@ -63,7 +63,8 @@ public class MarkTaskCommand extends Command {
         }
         Task taskToMark = lastShownList.get(index.getZeroBased());
         Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;
-        Task editedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus);
+        Task editedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus,
+                taskToMark.getGroupsWithTask());
 
         model.setTask(taskToMark, editedTask, group);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus));
