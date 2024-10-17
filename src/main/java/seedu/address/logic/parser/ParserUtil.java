@@ -138,10 +138,10 @@ public class ParserUtil {
     public static Game parseGame(String game) throws ParseException {
         requireNonNull(game);
         String trimmedGame = game.trim();
-        if (!Tag.isValidTagName(trimmedGame)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (!Game.isValidGameName(trimmedGame)) {
+            throw new ParseException(Game.MESSAGE_CONSTRAINTS);
         }
-        return new Game(trimmedGame);
+        return new Game(trimmedGame, new Username("tbc"), new SkillLevel("tbc"), new Role("tbc"));
     }
 
     /**

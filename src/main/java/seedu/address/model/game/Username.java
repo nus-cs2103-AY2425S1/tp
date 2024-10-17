@@ -16,7 +16,7 @@ public class Username {
      */
     private static final String VALIDATION_REGEX = "^(?!\\s*$).+";
 
-    private final String username;
+    public final String username;
 
     /**
      * Constructs a {@code Username}.

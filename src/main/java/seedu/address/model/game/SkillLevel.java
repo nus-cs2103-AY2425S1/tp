@@ -16,7 +16,7 @@ public class SkillLevel {
      */
     private static final String VALIDATION_REGEX = "^(?!\\s*$).+";
 
-    private final String skillLevel;
+    public final String skillLevel;
 
     /**
      * Constructs a {@code SkillLevel}.
