@@ -8,6 +8,7 @@ import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static hallpointer.address.model.Model.PREDICATE_SHOW_NO_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +25,8 @@ import hallpointer.address.model.session.Session;
 public class AddSessionCommand extends Command {
     public static final String COMMAND_WORD = "add_session";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a session to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a session to the address book. "
             + "Parameters: "
             + PREFIX_SESSION_NAME + "NAME "
             + PREFIX_DATE + "DATE "
@@ -58,17 +60,19 @@ public class AddSessionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasSession(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_SESSION);
-        }
-
         List<Member> lastShownList = model.getFilteredMemberList();
-
+        List<Member> memberToUpdate = new ArrayList<>();
         for (Index index : memberIndexes) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
             Member member = lastShownList.get(index.getZeroBased());
+            if (member.hasSession(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_SESSION);
+            }
+            memberToUpdate.add(member);
+        }
+        for (Member member : memberToUpdate) {
             member.addSession(toAdd);
         }
 
@@ -99,9 +103,7 @@ public class AddSessionCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        return new ToStringBuilder(this).add("toAdd", toAdd).toString();
     }
 
 }

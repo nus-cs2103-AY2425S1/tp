@@ -115,6 +115,17 @@ public class Member {
         addPoints(session.getPoints());
     }
 
+
+    /**
+     *  Returns true if the member has the given session.
+     *
+     *  @param session Session to checked.
+     */
+    public boolean hasSession(Session session) {
+        requireNonNull(session);
+        return this.sessions.contains(session);
+    }
+
     /**
      * Removes the given session from the member's list of sessions.
      *
