@@ -50,7 +50,7 @@ public class MarkPaidCommand extends Command {
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(personToMarkPayment)));
+        return new CommandResult(String.format(MESSAGE_MARKED_PAID_SUCCESS, Messages.format(markedPerson)));
     }
 
     @Override
