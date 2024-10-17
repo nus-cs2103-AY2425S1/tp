@@ -98,6 +98,26 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Archives a person by moving them to the archived list.
+     */
+    public void archivePerson(Person toArchive, ArchivedPersonList archivedPersonList) {
+        requireNonNull(toArchive);
+        if (!internalList.remove(toArchive)) {
+            throw new PersonNotFoundException();
+        }
+        archivedPersonList.addArchivedPerson(toArchive);
+    }
+
+    /**
+     * Unarchives a person by moving them back to the active list.
+     */
+    public void unarchivePerson(Person toUnarchive, ArchivedPersonList archivedPersonList) {
+        requireNonNull(toUnarchive);
+        archivedPersonList.removeArchivedPerson(toUnarchive);
+        internalList.add(toUnarchive);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
