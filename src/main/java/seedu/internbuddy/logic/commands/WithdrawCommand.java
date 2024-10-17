@@ -1,5 +1,6 @@
 package seedu.internbuddy.logic.commands;
 
+import java.io.ObjectInputFilter;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import seedu.internbuddy.logic.commands.exceptions.CommandException;
 import seedu.internbuddy.model.Model;
 import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
+import seedu.internbuddy.model.company.Status;
 
 /**
  * Withdraws an application identified using it's displayed index from the address book.
@@ -58,9 +60,15 @@ public class WithdrawCommand extends Command {
         Application applicationToWithdraw = applicationList.get(applicationIndex.getZeroBased());
         applicationList.remove(applicationToWithdraw);
 
-
+        Status newStatus;
+        if (applicationList.isEmpty()) {
+            newStatus = new Status("CLOSED");
+        } else {
+            newStatus = companyToEdit.getStatus();
+        }
+        
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
-                companyToEdit.getAddress(), companyToEdit.getTags(), companyToEdit.getStatus(), applicationList);
+                companyToEdit.getAddress(), companyToEdit.getTags(), newStatus, applicationList);
         model.setCompany(companyToEdit, editedCompany);
         return new CommandResult(String.format(MESSAGE_WITHDRAW_APPLICATION_SUCCESS, applicationToWithdraw));
     }
