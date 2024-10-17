@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -24,7 +25,6 @@ public class StatisticsCommand extends Command {
     public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
     public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
     public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
-    public static final String MESSAGE_LACK_PRIORITY = "Each person should have a priority";
     private String resultMessage;
 
     /**
@@ -63,7 +63,7 @@ public class StatisticsCommand extends Command {
                 break;
 
             default:
-                throw new CommandException(MESSAGE_LACK_PRIORITY);
+                throw new CommandException(Messages.MESSAGE_LACK_PRIORITY);
             }
         }
         allStats[1] = String.format("Number Of HIGH Priority People: %s", highPriority);
