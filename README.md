@@ -6,25 +6,30 @@
 # Teacher's Pet (TP)
 
 - **Teacher's Pet** is an application for NUS Teaching Assistants (TAs) to handle students' information with ease.
-- **TP** utilizes a Command Line Interface (CLI) which improves the speed and efficiency of handling administrative tasks.
+- **TP** utilizes a Command Line Interface (CLI) which improves the speed and efficiency of
+handling administrative tasks.
 
 ## Features
 - Add a student
 - Edit a student
 - Delete a student
 - List all student
+- Add a comment to students
+- Randomized generator of a student name
 - Filter students by name
 - Filter students by class
-- Mark attendance of a student
-- Give a participation score to a student
+- Give an attendance score to a student
 
 ## Example of Expected Usage
 - **Tutor's Simplified Usage:**
   - As a tutor when I arrive to class, I can immediately start up the TP application
   - I can add any new students to my list of students.
   - I can then edit/delete/list and filter students based on the criteria I need.
-  - I can mark the attendance of the students in the class.
-  - At the end of the session or during the session I cna award participation marks to students.
+  - I can give a cumulated attendance to the students in the class.
+  - I can add comments to students. 
+  - I can generate a random name to decide which student to call upon.
+  - I can filter the list of students to find student by group or names.
+  - At the end of class, I can close the application and on next use the data will be available as it is stored locally.
 
 ## Documentation
 * For the detailed documentation of this project, see the
