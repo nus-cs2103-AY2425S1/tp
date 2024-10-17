@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -43,11 +44,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STUDENTID + "STUDENTID] "
             + "[" + PREFIX_NETID + "EMAIL] "
-            + "[" + PREFIX_MAJOR + "ADDRESS] "
+            + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_YEAR + "YEAR] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_STUDENTID + "91234567 "
-            + PREFIX_NETID + "johndoe@example.com";
+            + PREFIX_STUDENTID + "A1234567B "
+            + PREFIX_NETID + "e1234567";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -99,10 +101,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Major updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getMajor());
+        Major updatedAddress = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        //TODO
-        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedTags, new Year(""));
+        Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
+        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedTags, updatedYear);
     }
 
     @Override
@@ -137,8 +139,9 @@ public class EditCommand extends Command {
         private Name name;
         private StudentId studentId;
         private Email email;
-        private Major address;
+        private Major major;
         private Set<Tag> tags;
+        private Year year;
 
         public EditPersonDescriptor() {}
 
@@ -150,15 +153,16 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setStudentId(toCopy.studentId);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setMajor(toCopy.major);
             setTags(toCopy.tags);
+            setYear(toCopy.year);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, studentId, email, major, tags, year);
         }
 
         public void setName(Name name) {
@@ -185,12 +189,18 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Major address) {
-            this.address = address;
+        public void setMajor(Major major) {
+            this.major = major;
         }
 
-        public Optional<Major> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Major> getMajor() {
+            return Optional.ofNullable(major);
+        }
+        public void setYear(Year year) {
+            this.year = year;
+        }
+        public Optional<Year> getYear() {
+            return Optional.ofNullable(year);
         }
 
         /**
@@ -225,7 +235,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(studentId, otherEditPersonDescriptor.studentId)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(major, otherEditPersonDescriptor.major)
+                    && Objects.equals(year, otherEditPersonDescriptor.year)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -235,7 +246,8 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", studentId)
                     .add("email", email)
-                    .add("address", address)
+                    .add("major", major)
+                    .add("year", year)
                     .add("tags", tags)
                     .toString();
         }
