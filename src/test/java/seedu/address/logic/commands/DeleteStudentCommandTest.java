@@ -35,7 +35,7 @@ public class DeleteStudentCommandTest {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Tan"));
 
-        assertThrows(CommandException.class, "This student is not in your student list: John Tan", () ->
+        assertThrows(CommandException.class, "This student is not in your student list.", () ->
                 command.execute(modelStub));
     }
 

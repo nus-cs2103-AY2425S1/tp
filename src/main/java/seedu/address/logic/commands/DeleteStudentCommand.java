@@ -18,9 +18,9 @@ public class DeleteStudentCommand extends Command {
             + "Parameters: STUDENT (must be a valid student name)\n"
             + "Example: " + COMMAND_WORD + " Jerrell Lee";
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: ";
 
-    public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list: %1$s";
+    public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
 
     private final Name name;
 
@@ -51,7 +51,7 @@ public class DeleteStudentCommand extends Command {
         }
 
         model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, name));
     }
 
     /**
