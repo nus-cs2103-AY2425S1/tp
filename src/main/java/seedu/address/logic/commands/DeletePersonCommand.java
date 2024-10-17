@@ -19,7 +19,8 @@ public class DeletePersonCommand extends Command {
     public static final String COMMAND_WORD = "deletep";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the person identified by the index number used in the displayed person list"
+            + "and from any concerts they are associated to\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
@@ -42,6 +43,7 @@ public class DeletePersonCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        model.deleteConcertContact(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
