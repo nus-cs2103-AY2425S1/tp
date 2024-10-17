@@ -52,6 +52,13 @@ public class PersonContainsKeywordsPredicateTest {
                 .asList(PREFIX_EMAIL.getPrefix(), "bob@example.com"));
         assertFalse(predicateWithEmail.equals(predicateWithDifferentEmail));
 
+        // Different values (address) -> returns false
+        PersonContainsKeywordsPredicate predicateWithAddress = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_ADDRESS.getPrefix(), "123 Main St"));
+        PersonContainsKeywordsPredicate predicateWithDifferentAddress = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_ADDRESS.getPrefix(), "456 Elm St"));
+        assertFalse(predicateWithAddress.equals(predicateWithDifferentAddress));
+
         // Different values (tags) -> returns false
         PersonContainsKeywordsPredicate predicateWithTag = new PersonContainsKeywordsPredicate(Arrays
                 .asList(PREFIX_TAG.getPrefix(), "friends"));
