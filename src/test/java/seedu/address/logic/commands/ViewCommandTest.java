@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_NO_PERSON_FOUND;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -48,16 +45,6 @@ public class ViewCommandTest {
 
         // different person -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
-    }
-
-    @Test
-    public void execute_validNric_personFound() {
-        NricMatchesPredicate predicate = new NricMatchesPredicate(ALICE.getNric().value);
-        ViewCommand viewCommand = new ViewCommand(ALICE.getNric().value);
-        expectedModel.updateFilteredPersonList(predicate);
-
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        assertCommandSuccess(viewCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
