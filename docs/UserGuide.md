@@ -202,6 +202,33 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a property to be sold : `delSell`
+
+Deletes the specified property to be sold under specified person from the address book.
+
+Format: `delSell INDEX_PERSON INDEX_PROPERTY`
+
+* Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* The index refers to the index number displayed in the selling properties list and person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2 1` deletes the 1st selling property under 2nd person in the address book.
+
+### Deleting a property to be bought : `delSell`
+
+Deletes the specified property to be bought under specified person from the address book.
+
+Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
+
+* Deletes the property to be bought at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* The index refers to the index number displayed in the buying properties list and person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2 1` deletes the 1st buying property under 2nd person in the address book.
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -264,6 +291,8 @@ Action     | Format, Examples
 **Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delete 3 2`
+**Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delete 3 2`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jake`
 **Find Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
