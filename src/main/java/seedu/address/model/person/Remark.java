@@ -21,6 +21,11 @@ public class Remark {
         value = remark;
     }
 
+    public void addNotes(String notes) {
+        requireNonNull(notes);
+        this.value += "\n" + notes;
+    }
+
     /**
      * Returns the remark string.
      *

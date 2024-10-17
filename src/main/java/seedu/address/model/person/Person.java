@@ -63,6 +63,10 @@ public class Person implements Appointmentable {
         return remark;
     }
 
+    public void addNotes(String notes) {
+        this.remark.addNotes(notes);
+    }
+
     public Id getId() {
         return id;
     }

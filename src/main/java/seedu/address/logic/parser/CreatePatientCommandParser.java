@@ -21,9 +21,6 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 
-
-
-
 /**
  * Parses input arguments and creates a new CreatePatientCommand object
  */
