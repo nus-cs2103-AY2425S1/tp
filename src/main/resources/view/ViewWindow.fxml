@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+<fx:root resizable="false" title="View" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/address_book_32.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@DarkTheme.css" />
+                <URL value="@Extensions.css" />
+            </stylesheets>
+
+            <VBox>
+                <StackPane VBox.vgrow="NEVER" fx:id="feedbackDisplayPlaceholder" styleClass="pane-with-border">
+                    <padding>
+                        <Insets top="5" right="10" bottom="5" left="10" />
+                    </padding>
+                </StackPane>
+
+                <StackPane VBox.vgrow="ALWAYS" fx:id="personDisplayPlaceholder" styleClass="pane-with-border"
+                           minWidth="340" prefWidth="340" minHeight="100" prefHeight="100" maxHeight="100">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                    <VBox>
+                        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+                        <FlowPane fx:id="tags" />
+                        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+                        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+                        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+                        <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+                        <Label fx:id="nric" styleClass="cell_small_label" text="\$nric"  />
+                    </VBox>
+                </StackPane>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

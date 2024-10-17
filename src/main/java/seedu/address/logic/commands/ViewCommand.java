@@ -7,6 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.NricMatchesPredicate;
 
 /**
@@ -38,8 +39,8 @@ public class ViewCommand extends Command {
         if (model.getFilteredPersonList().isEmpty()) {
             throw new CommandException(Messages.MESSAGE_NO_PERSON_FOUND);
         } else {
-            return new CommandResult(String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                                                   model.getFilteredPersonList().size()));
+            Nric nric = model.getFilteredPersonList().get(0).getNric();
+            return new CommandResult(String.format(Messages.MESSAGE_VIEW, nric), false, true, false);
         }
     }
 
