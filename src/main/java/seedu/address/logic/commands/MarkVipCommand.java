@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -73,8 +74,9 @@ public class MarkVipCommand extends Command {
         Address address = personToMark.getAddress();
         Email email = personToMark.getEmail();
         Phone phone = personToMark.getPhone();
+        Comment comment = personToMark.getComment();
         Set<Tag> tags = personToMark.getTags();
-        Person updatedPerson = new Person(name, phone, email, address, tags, newState);
+        Person updatedPerson = new Person(name, phone, email, address, comment, tags, newState);
         model.setPerson(personToMark, updatedPerson);
         return new CommandResult(String.format(messageSuccess, Messages.format(personToMark)));
     }

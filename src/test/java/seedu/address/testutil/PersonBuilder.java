@@ -102,6 +102,9 @@ public class PersonBuilder {
      */
     public PersonBuilder withVipState(boolean isVip) {
         this.isVip = isVip;
+        return this;
+    }
+
     /**
      * Sets the {@code Comment} of the {@code Person} that we are building.
      */

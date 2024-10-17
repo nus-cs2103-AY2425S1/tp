@@ -39,7 +39,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("comment") String comment, @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("isVip") boolean isVip) {
+            @JsonProperty("comment") String comment, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("isVip") boolean isVip) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,8 +55,9 @@ class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details, treating isVip as false.
      */
-    public JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tags) {
-        this(name, phone, email, address, tags, false);
+    public JsonAdaptedPerson(String name, String phone, String email, String address,
+            String comment, List<JsonAdaptedTag> tags) {
+        this(name, phone, email, address, comment, tags, false);
     }
 
     /**

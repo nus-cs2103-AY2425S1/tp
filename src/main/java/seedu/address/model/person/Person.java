@@ -27,6 +27,10 @@ public class Person {
     private final boolean isVip;
     private final Comment comment;
 
+    public Person(Name name, Phone phone, Email email, Address address, Comment comment, Set<Tag> tags) {
+        this(name, phone, email, address, comment, tags, false);
+    }
+
     /**
      * Every field must be present and not null.
      */
