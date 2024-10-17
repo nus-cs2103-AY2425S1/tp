@@ -146,7 +146,6 @@ public class PersonBuilder {
         return this;
     }
 
-    
      /**
      * Sets the {@code EmergencyPhone} of the {@code Person} that we are building.
      */

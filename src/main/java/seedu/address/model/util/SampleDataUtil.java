@@ -22,7 +22,6 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-  
     public static final EmergencyContactName EMPTY_ECNAME = new EmergencyContactName("");
     public static final EmergencyPhone EMPTY_EMERGENCY_PHONE = new EmergencyPhone("");
 
