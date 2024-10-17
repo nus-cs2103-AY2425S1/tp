@@ -2,14 +2,18 @@ package seedu.address.model.volunteer;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents a Volunteer in the system.
  */
 public class Volunteer {
 
-    private static int NEXT_ID = 0;
+    private static int nextId = 0;
 
     // Identity fields
     private final int id;
@@ -21,6 +25,7 @@ public class Volunteer {
     private final Date availableDate;
     private final Time startTimeAvailability;
     private final Time endTimeAvailability;
+    private final ObservableList<String> involvedIn;
 
     /**
      * Represents a Volunteer in the system.
@@ -33,20 +38,31 @@ public class Volunteer {
      * @param endTimeAvailability The end time of the volunteer's availability.
      */
     public Volunteer(Name name, Phone phone, Email email, Date availableDate,
-                     Time startTimeAvailability, Time endTimeAvailability) {
+                     Time startTimeAvailability, Time endTimeAvailability, List<String> involvedIn) {
         requireAllNonNull(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability);
-        this.id = NEXT_ID;
-        NEXT_ID++;
 
+        this.id = nextId++;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.availableDate = availableDate;
         this.startTimeAvailability = startTimeAvailability;
         this.endTimeAvailability = endTimeAvailability;
+        this.involvedIn = FXCollections.observableArrayList(involvedIn);
     }
 
-    public int getId() { return id; }
+    /**
+     * Constructs an {@code Volunteer} without events.
+     */
+    public Volunteer(Name name, Phone phone, Email email, Date availableDate,
+                 Time startTimeAvailability, Time endTimeAvailability) {
+        this(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability,
+                FXCollections.observableArrayList());
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public Name getName() {
         return name;
@@ -97,7 +113,6 @@ public class Volunteer {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Volunteer)) {
             return false;
         }
@@ -111,9 +126,26 @@ public class Volunteer {
                 && endTimeAvailability.equals(otherVolunteer.endTimeAvailability);
     }
 
+    /**
+     * Adds an event to the volunteer's list of events.
+     *
+     * @param newEvent The event to add.
+     */
+    public void addEvent(String newEvent) {
+        involvedIn.add(newEvent);
+    }
+
+    /**
+     * Returns the list of events the volunteer is involved in as an unmodifiable list.
+     *
+     * @return An unmodifiable ObservableList of events.
+     */
+    public ObservableList<String> getEvents() {
+        return FXCollections.unmodifiableObservableList(involvedIn);
+    }
+
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability);
     }
 
@@ -126,5 +158,4 @@ public class Volunteer {
                 + ", startTimeAvailability=" + startTimeAvailability
                 + ", endTimeAvailability=" + endTimeAvailability + "}";
     }
-
 }
