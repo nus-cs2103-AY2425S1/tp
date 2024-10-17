@@ -11,7 +11,7 @@ import seedu.address.model.internshipapplication.InternshipApplication;
  */
 public class ListCommand extends Command<InternshipApplication> {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "/list";
 
     public static final String MESSAGE_SUCCESS = "Listed all internship applications";
 

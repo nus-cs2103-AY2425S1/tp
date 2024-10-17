@@ -30,7 +30,7 @@ public interface Logic<T extends HireMeComparable<T>> {
      */
     ReadOnlyAddressBook<T> getAddressBook();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of internship applications */
     ObservableList<T> getFilteredList();
 
     /**

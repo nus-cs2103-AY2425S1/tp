@@ -1,8 +1,5 @@
 package seedu.address.model.internshipapplication;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.InternshipApplicationBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,6 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOFA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOFA;
 import static seedu.address.testutil.TypicalInternshipApplications.APPLE;
 import static seedu.address.testutil.TypicalInternshipApplications.BOFA;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.InternshipApplicationBuilder;
+
 
 public class InternshipApplicationTest {
 
@@ -62,7 +64,8 @@ public class InternshipApplicationTest {
         assertFalse(APPLE.equals(BOFA));
 
         // different company name -> returns false
-        InternshipApplication editedApple = new InternshipApplicationBuilder(APPLE).withName(VALID_COMPANY_NAME_BOFA).build();
+        InternshipApplication editedApple =
+                new InternshipApplicationBuilder(APPLE).withName(VALID_COMPANY_NAME_BOFA).build();
         assertFalse(APPLE.equals(editedApple));
 
         // different role -> returns false
