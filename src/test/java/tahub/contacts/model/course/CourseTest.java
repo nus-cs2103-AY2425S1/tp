@@ -41,21 +41,21 @@ public class CourseTest {
         assertThrows(NullPointerException.class, () -> Course.isValidCourseCode(null));
 
         // invalid course codes
-        assertFalse(Course.isValidCourseName("")); // empty string
-        assertFalse(Course.isValidCourseName(" ")); // spaces only
-        assertFalse(Course.isValidCourseName("^")); // only non-alphanumeric characters
-        assertFalse(Course.isValidCourseName("course*")); // contains non-alphanumeric characters
-        assertFalse(Course.isValidCourseName("cS1010")); // contains lowercase character at the start
-        assertFalse(Course.isValidCourseName("Cs1010")); // contains lowercase character at the start
-        assertFalse(Course.isValidCourseName("CS")); // contains no digits after uppercase alphabetical characters
-        assertFalse(Course.isValidCourseName("CS110")); // not enough digits
-        assertFalse(Course.isValidCourseName("CS1101SS")); // contains extra alphabetical characters at the end
+        assertFalse(Course.isValidCourseCode("")); // empty string
+        assertFalse(Course.isValidCourseCode(" ")); // spaces only
+        assertFalse(Course.isValidCourseCode("^")); // only non-alphanumeric characters
+        assertFalse(Course.isValidCourseCode("course*")); // contains non-alphanumeric characters
+        assertFalse(Course.isValidCourseCode("cS1010")); // contains lowercase character at the start
+        assertFalse(Course.isValidCourseCode("Cs1010")); // contains lowercase character at the start
+        assertFalse(Course.isValidCourseCode("CS")); // contains no digits after uppercase alphabetical characters
+        assertFalse(Course.isValidCourseCode("CS110")); // not enough digits
+        assertFalse(Course.isValidCourseCode("CS1101SS")); // contains extra alphabetical characters at the end
 
         // valid course codes
-        assertTrue(Course.isValidCourseName("CS1101S"));
-        assertTrue(Course.isValidCourseName("BT1152"));
-        assertTrue(Course.isValidCourseName("ST2334"));
-        assertTrue(Course.isValidCourseName("PL9087"));
+        assertTrue(Course.isValidCourseCode("CS1101S"));
+        assertTrue(Course.isValidCourseCode("BT1152"));
+        assertTrue(Course.isValidCourseCode("ST2334"));
+        assertTrue(Course.isValidCourseCode("PL9087"));
     }
 
     @Test
@@ -78,9 +78,9 @@ public class CourseTest {
 
     @Test
     public void equals() {
-        Course course1 = new Course("CS101", "Programming");
-        Course course2 = new Course("CS101", "Programming");
-        Course course3 = new Course("CS102", "Programming");
+        Course course1 = new Course("CS1011", "Programming");
+        Course course2 = new Course("CS1011", "Programming");
+        Course course3 = new Course("CS1021", "Programming");
 
         // same object
         assertTrue(course1.equals(course1));
@@ -100,15 +100,15 @@ public class CourseTest {
 
     @Test
     public void hashCode_sameCourseName_sameHashCode() {
-        Course course1 = new Course("CS101", "Programming Method");
-        Course course2 = new Course("CS101", "Programming Method");
+        Course course1 = new Course("CS1011", "ProgrammingMethod");
+        Course course2 = new Course("CS1011", "ProgrammingMethod");
 
         assertEquals(course1.hashCode(), course2.hashCode());
     }
 
     @Test
     public void toString_validCourse_correctFormat() {
-        Course course = new Course("CS101", "Programming");
-        assertEquals("[CS101: Programming]", course.toString());
+        Course course = new Course("CS1011", "Programming");
+        assertEquals("[CS1011: Programming]", course.toString());
     }
 }

@@ -3,6 +3,7 @@ package tahub.contacts.logic.parser;
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
@@ -14,6 +15,7 @@ import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
@@ -31,21 +33,22 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_MATRICULATION_NUMBER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MATRICULATION_NUMBER, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_MATRICULATION_NUMBER, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        MatriculationNumber matricNumber = ParserUtil.parseMatriculationNumber(argMultimap.getValue(PREFIX_MATRICULATION_NUMBER).get());
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Person person = new Person(matricNumber, name, phone, email, address, tagList);
 
         return new AddCommand(person);
     }

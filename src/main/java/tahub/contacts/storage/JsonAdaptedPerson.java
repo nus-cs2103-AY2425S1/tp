@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
@@ -24,6 +25,7 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
+    private final String matriculationNumber;
     private final String name;
     private final String phone;
     private final String email;
@@ -34,9 +36,10 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPerson(@JsonProperty("matriculationNumber") String matriculationNumber, @JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.matriculationNumber = matriculationNumber;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +53,7 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
+        matriculationNumber = source.getMatricNumber().value;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -69,7 +73,15 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
-
+        
+        if (matriculationNumber == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MatriculationNumber.class.getSimpleName()));
+        }
+        if (!MatriculationNumber.isValidMatriculationNumber(matriculationNumber)) {
+            throw new IllegalValueException(MatriculationNumber.MESSAGE_CONSTRAINTS);
+        }
+        final MatriculationNumber modelMatriculationNumber = new MatriculationNumber(matriculationNumber);
+        
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -103,7 +115,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelMatriculationNumber, modelName, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
 }

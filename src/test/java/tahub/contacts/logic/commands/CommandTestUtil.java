@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tahub.contacts.logic.parser.CliSyntax.PREFIX_MATRICULATION_NUMBER;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_TAG;
@@ -26,6 +27,8 @@ import tahub.contacts.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_MATRICULATION_NUMBER_AMY = "A0123456Y";
+    public static final String VALID_MATRICULATION_NUMBER_BOB = "A1234567Y";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -37,6 +40,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String MATRICULATION_NUMBER_DESC_AMY = " " + PREFIX_MATRICULATION_NUMBER + VALID_MATRICULATION_NUMBER_AMY;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
