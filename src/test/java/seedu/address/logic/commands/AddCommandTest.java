@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -180,12 +181,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Pet> getFilteredPetList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredOwnerList(Predicate<Owner> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPetList(Predicate<Pet> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

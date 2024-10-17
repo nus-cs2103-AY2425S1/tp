@@ -13,6 +13,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -22,18 +23,22 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_OWNER = "Owner list contains duplicate owner(s).";
+    public static final String MESSAGE_DUPLICATE_PET = "Pets list contains duplicate pet(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedOwner> owners = new ArrayList<>();
+    private final List<JsonAdaptedPet> pets = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given owners and pets.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners) {
+                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners,
+                                       @JsonProperty("pets") List<JsonAdaptedPet> pets) {
         this.persons.addAll(persons);
         this.owners.addAll(owners);
+        this.pets.addAll(pets);
     }
 
     /**
@@ -44,6 +49,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
+        pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
     }
 
     /**
@@ -67,6 +73,15 @@ class JsonSerializableAddressBook {
             }
             addressBook.addOwner(owner);
         }
+
+        for (JsonAdaptedPet jsonAdaptedPet : pets) {
+            Pet pet = jsonAdaptedPet.toModelType();
+            if (addressBook.hasPet(pet)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
+            }
+            addressBook.addPet(pet);
+        }
+
         return addressBook;
     }
 
