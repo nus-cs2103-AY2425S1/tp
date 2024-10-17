@@ -82,6 +82,23 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
         }
     }
 
+    /**
+     * Favourites the equivalent restaurant from the list.
+     * The restaurant must exist in the list.
+     */
+    public void favourite(Restaurant restaurant) {
+        requireNonNull(restaurant);
+        int index = internalList.indexOf(restaurant);
+        if (index == -1) {
+            throw new RestaurantNotFoundException();
+        }
+
+        restaurant.setFavourite(true);
+
+        internalList.remove(index);
+        internalList.add(0, restaurant);
+    }
+
     public void setRestaurants(UniqueRestaurantList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

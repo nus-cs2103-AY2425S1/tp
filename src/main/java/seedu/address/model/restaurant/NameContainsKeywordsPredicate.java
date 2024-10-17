@@ -18,8 +18,6 @@ public class NameContainsKeywordsPredicate implements Predicate<Restaurant> {
 
     @Override
     public boolean test(Restaurant restaurant) {
-        String filterBy = keywords.get(0);
-
         return keywords.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(restaurant.getName().fullName, keyword));
     }

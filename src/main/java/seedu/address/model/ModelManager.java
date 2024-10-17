@@ -111,6 +111,11 @@ public class ModelManager implements Model {
         addressBook.setRestaurant(target, editedRestaurant);
     }
 
+    @Override
+    public void favouriteRestaurant(Restaurant target) {
+        addressBook.favouriteRestaurant(target);
+    }
+
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
