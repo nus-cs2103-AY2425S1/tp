@@ -40,6 +40,10 @@ public class Role {
         return GUARDIAN.equals(role) || STUDENT.equals(role);
     }
 
+    public String getRoleString() {
+        return this.value;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
