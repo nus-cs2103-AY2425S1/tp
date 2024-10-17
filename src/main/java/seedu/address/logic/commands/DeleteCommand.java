@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
     /**
      * Instantiates a DeleteCommand for deleting multiple indices assuming
      * no invalid arguments inputted by user.
-     * 
+     *
      * @param targetIndices
      */
     public DeleteCommand(ArrayList<Index> targetIndices) {
