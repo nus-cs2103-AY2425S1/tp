@@ -9,5 +9,5 @@
       "z" : 99
     }
   },
-  "eduLogFilePath" : "edulog.json"
+  "addressBookFilePath" : "addressbook.json"
 }

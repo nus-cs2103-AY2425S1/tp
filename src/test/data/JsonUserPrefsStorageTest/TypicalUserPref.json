@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "eduLogFilePath" : "edulog.json"
+  "addressBookFilePath" : "addressbook.json"
 }
