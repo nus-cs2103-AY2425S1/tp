@@ -72,13 +72,14 @@ public class UntagCommand extends Command {
         }
 
         UntagCommand otherUntagCommand = (UntagCommand) other;
-        return tagsToDelete.equals(otherUntagCommand)
+        return tagsToDelete.equals(otherUntagCommand.tagsToDelete)
                 && targetIndex.equals(otherUntagCommand.targetIndex);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
                 .add("tags", tagsToDelete)
                 .toString();
     }

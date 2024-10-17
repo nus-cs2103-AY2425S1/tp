@@ -73,6 +73,7 @@ public class TagCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
                 .add("tags", newTags)
                 .toString();
     }
