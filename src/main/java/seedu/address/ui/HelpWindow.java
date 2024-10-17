@@ -7,8 +7,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -22,16 +20,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
-    private static final String USER_GUIDE_PATH = "docs/UserGuide.md";
-
     @FXML
     private Button copyButton;
 
     @FXML
     private Label helpMessage;
-
-    @FXML
-    private WebView helpContent;
 
     /**
      * Creates a new HelpWindow.
@@ -41,7 +34,6 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
-        loadUserGuide();
     }
 
     /**
@@ -49,14 +41,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow() {
         this(new Stage());
-    }
-
-    /**
-     * Loads and renders the user guide.
-     */
-    private void loadUserGuide() {
-        WebEngine webEngine = helpContent.getEngine();
-        webEngine.load(USERGUIDE_URL);
     }
 
     /**
@@ -79,7 +63,6 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        loadUserGuide();
         getRoot().show();
         getRoot().centerOnScreen();
     }
