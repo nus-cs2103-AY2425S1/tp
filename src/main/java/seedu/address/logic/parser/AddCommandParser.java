@@ -43,10 +43,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
-        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
+        Set<Module> moduleList = ParserUtil.parseModules(argMultimap.getAllValues(PREFIX_MODULE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, gender, module, tagList);
+        Person person = new Person(name, phone, gender, moduleList, tagList);
 
         return new AddCommand(person);
     }
