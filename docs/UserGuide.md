@@ -6,7 +6,7 @@ pageNav: 3
 
 # HiredFiredPro User Guide
 
-HiredFiredPro is a **desktop app for managing interviews, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your contact management tasks done faster than traditional GUI apps.
+HiredFiredPro is a **desktop app for managing interviews, optimized for use via a Command  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HiredFiredPro can get your interview management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,9 +17,9 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for HiredFiredPro.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -30,7 +30,7 @@ HiredFiredPro is a **desktop app for managing interviews, optimized for use via 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe j/Software Developer p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe j/Software Developer p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to HiredFiredPro.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to HiredFiredPro.
 
 Format: `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -92,13 +92,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in HiredFiredPro.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in HiredFiredPro.
 
 Format: `edit INDEX [n/NAME] [j/JOB] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -115,7 +115,7 @@ Examples:
 
 ### Hiring a person by name and job: `hire`
 
-Changes an existing person's status to "Hired" in the address book.
+Changes an existing person's status to "Hired" in HiredFiredPro.
 
 Format: `hire n/NAME j/JOB`
 
@@ -137,20 +137,20 @@ Format: `reject n/NAME j/JOB`
 * Changes the person's status to `Rejected`
 * Both the name of the person and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Rejected` status.
-* The search is case-insensitive for both name and job. e.g `hans` will match `Hans` and `software engineer` will match
+* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
   `Software Engineer`
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
   `Software Engineer`
 
 ### View a person's status by name and job: `view`
 
-Changes an existing person's status to "Rejected" in the address book.
+Shows a person's status in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
 * Views the person's status (Hired / Rejected / Pending)
 * Both the name of the person and the job that he/she is applying for must be provided.
-* The search is case-insensitive for both name and job. e.g `hans` will match `Hans` and `software engineer` will match
+* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
   `Software Engineer`
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
   `Software Engineer`
@@ -161,7 +161,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -175,7 +175,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from HiredFiredPro.
 
 Format: `delete INDEX`
 
@@ -184,12 +184,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in HiredFiredPro.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from HiredFiredPro.
 
 Format: `clear`
 
@@ -201,17 +201,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+HiredFiredPro data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+HiredFiredPro data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, HiredFiredPro will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause HiredFiredPro to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -223,7 +223,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous HiredFiredPro home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -241,14 +241,11 @@ Action     | Format, Examples
 **Add**    | `add n/NAME j/JOB p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho j/Site Reliability Engineer p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-<<<<<<< HEAD
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Hire**   | `hire n/NAME j/JOB`<br> e.g., `hire n/James Jake j/Software Engineer`
 **Reject**   | `reject n/NAME j/JOB` <br> e.g., `reject n/James Jake j/Software Engineer`
 **View**   | `view n/NAME j/JOB` <br>e.g., `view n/James Jake j/Software Engineer`
-=======
 **Edit**   | `edit INDEX [n/NAME] [j/JOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
->>>>>>> 3484e7e5 (Update Add Command in User Guide)
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
