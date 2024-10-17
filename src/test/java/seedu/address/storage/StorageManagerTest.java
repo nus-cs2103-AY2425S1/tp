@@ -22,13 +22,13 @@ public class StorageManagerTest {
     @TempDir
     public Path testFolder;
 
-    private StorageManager<? extends HireMeComparable> storageManager;
+    private StorageManager<InternshipApplication> storageManager;
 
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager<>(addressBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -56,9 +56,9 @@ public class StorageManagerTest {
          * {@link JsonAddressBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
+        AddressBook<InternshipApplication> original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyAddressBook<InternshipApplication> retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook<InternshipApplication>(retrieved));
     }
 

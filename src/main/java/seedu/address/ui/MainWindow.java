@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    public MainWindow(Stage primaryStage, Logic<InternshipApplication> logic) {
         super(FXML, primaryStage);
 
         // Set dependencies

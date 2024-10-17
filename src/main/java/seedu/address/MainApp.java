@@ -42,8 +42,8 @@ public class MainApp extends Application {
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
-    protected Logic logic;
-    protected Storage storage;
+    protected Logic<InternshipApplication> logic;
+    protected Storage<InternshipApplication> storage;
     protected Model<InternshipApplication> model;
     protected Config config;
 
@@ -58,8 +58,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getHireMeFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AddressBookStorage<InternshipApplication> addressBookStorage =
+                new JsonAddressBookStorage(userPrefs.getHireMeFilePath());
+        storage = new StorageManager<>(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
 

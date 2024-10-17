@@ -125,12 +125,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setAddressBook(ReadOnlyAddressBook<InternshipApplication> newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook<InternshipApplication> getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -197,7 +197,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyAddressBook<InternshipApplication> getAddressBook() {
             return new AddressBook<InternshipApplication>();
         }
     }

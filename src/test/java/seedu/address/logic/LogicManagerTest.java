@@ -50,7 +50,7 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager<InternshipApplication> storage = new StorageManager<InternshipApplication>(addressBookStorage,
                 userPrefsStorage);
-        logic = new LogicManager<InternshipApplication>(model, storage);
+        logic = new LogicManager(model, storage);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+            Model<InternshipApplication> expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
@@ -163,7 +163,7 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager<InternshipApplication> storage = new StorageManager<>(addressBookStorage, userPrefsStorage);
 
-        logic = new LogicManager<InternshipApplication>(model, storage);
+        logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + COMPANY_NAME_DESC_APPLE + ROLE_DESC_APPLE

@@ -18,7 +18,7 @@ import seedu.address.model.internshipapplication.InternshipApplication;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonAddressBookStorage implements AddressBookStorage<InternshipApplication> {
 
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
@@ -64,7 +64,7 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook<InternshipApplication> addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
@@ -73,7 +73,8 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook<InternshipApplication> addressBook, Path filePath)
+            throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
