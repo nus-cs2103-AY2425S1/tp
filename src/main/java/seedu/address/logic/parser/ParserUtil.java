@@ -168,9 +168,9 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemark(trimmedRemark)) {
+            System.out.println("exception thrown");
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
-        System.out.println(trimmedRemark);
         return new Remark(trimmedRemark);
     }
 
