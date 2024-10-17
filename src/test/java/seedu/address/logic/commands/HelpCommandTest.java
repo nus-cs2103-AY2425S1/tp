@@ -14,7 +14,29 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE,
+                true, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
+
+        CommandResult expectedCommandResultAdd = new CommandResult(AddCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+                model, expectedCommandResultAdd, expectedModel);
+
+        CommandResult expectedCommandResultClear = new CommandResult(AddCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+                model, expectedCommandResultClear, expectedModel);
+
+        CommandResult expectedCommandResultDelete = new CommandResult(AddCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+                model, expectedCommandResultDelete, expectedModel);
+
+        CommandResult expectedCommandResultEdit = new CommandResult(AddCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(new HelpCommand(AddCommand.MESSAGE_USAGE),
+                model, expectedCommandResultEdit, expectedModel);
     }
+
 }
