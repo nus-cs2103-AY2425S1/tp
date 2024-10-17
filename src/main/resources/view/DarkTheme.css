@@ -297,7 +297,7 @@
 /* SCROLL BAR STYLING */
 
 .scroll-bar {
-    -fx-background-color: transparent; /* Optional: makes the scrollbar background transparent */
+    -fx-background-color: #534338; /* Optional: makes the scrollbar background transparent */
 }
 .scroll-bar:vertical .thumb {
     -fx-background-color: #9a6447; /* Sets the vertical scrollbar thumb to brown */
