@@ -105,6 +105,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void insertPerson(Person p , int ind) {
+        campusConnect.addPerson(p, ind);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
