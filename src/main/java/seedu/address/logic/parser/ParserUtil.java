@@ -5,8 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -188,5 +190,25 @@ public class ParserUtil {
             throw new ParseException(null);
         }
         return trimmedFileName;
+    }
+
+    /**
+     * Parses a String containing the field to search and keywords,
+     * into a String representing the field to search.
+     */
+    public static String parseField(String fieldAndKeywords) {
+        requireNonNull(fieldAndKeywords);
+        String field = fieldAndKeywords.split(" ")[0].trim();
+        return field;
+    }
+
+    /**
+     * Parses a String containing the field to search and keywords,
+     * into a List containing the keywords.
+     */
+    public static List<String> parseSearchKeywords(String fieldAndValues) {
+        requireNonNull(fieldAndValues);
+        List<String> splitFieldAndKeywords = Arrays.asList(fieldAndValues.split(" "));
+        return splitFieldAndKeywords.subList(1, splitFieldAndKeywords.size());
     }
 }

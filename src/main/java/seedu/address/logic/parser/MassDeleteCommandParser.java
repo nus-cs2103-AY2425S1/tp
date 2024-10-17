@@ -28,17 +28,26 @@ public class MassDeleteCommandParser implements Parser<MassDeleteCommand> {
 
         String[] indexStrings = trimmedArgs.split("\\s+");
         List<Index> indices = new ArrayList<>();
+        List<String> invalidInputs = new ArrayList<>();
 
-        try {
-            for (String indexString : indexStrings) {
-                Index index = ParserUtil.parseIndex(indexString);
-                indices.add(index);
+        for (String indexString : indexStrings) {
+            try {
+                int index = Integer.parseInt(indexString);
+                if (index > 0) {
+                    indices.add(Index.fromOneBased(index));
+                } else {
+                    invalidInputs.add(indexString);
+                }
+            } catch (NumberFormatException e) {
+                invalidInputs.add(indexString);
             }
-            return new MassDeleteCommand(indices);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassDeleteCommand.MESSAGE_USAGE), pe);
         }
+
+        if (indices.isEmpty() && invalidInputs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassDeleteCommand.MESSAGE_USAGE));
+        }
+
+        return new MassDeleteCommand(indices, invalidInputs);
     }
 }
-
