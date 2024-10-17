@@ -3,11 +3,14 @@ package tahub.contacts.model.studentcourseassociation;
 import seedu.address.model.GradingSystem;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
-import tahub.contacts.model.person.Name;
-import tahub.contacts.model.person.Person;
 import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
+import tahub.contacts.model.person.Person;
 
+
+/**
+ * Represents an association between a student, course, grading system, and tutorial/recitation.
+ */
 public class StudentCourseAssociation {
     private Person student;
     private Course course;
@@ -30,13 +33,11 @@ public class StudentCourseAssociation {
      *
      * @param student the student associated with this association
      * @param course the course associated with this association
-     * @param grades the grading system to manage student grades for the associated course
      * @param tutorial the tutorial associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, GradingSystem grades, Tutorial tutorial) {
+    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial) {
         this.student = student;
         this.course = course;
-        this.grades = grades;
         this.tutorial = tutorial;
         this.grades = new GradingSystem();
     }
@@ -48,13 +49,11 @@ public class StudentCourseAssociation {
      *
      * @param student the student associated with this association
      * @param course the course associated with this association
-     * @param grades the grading system to manage student grades for the associated course
      * @param recitation the recitation associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial, GradingSystem grades, Recitation recitation) {
+    public StudentCourseAssociation(Person student, Course course, Recitation recitation) {
         this.student = student;
         this.course = course;
-        this.grades = grades;
         this.recitation = recitation;
         this.grades = new GradingSystem();
     }
@@ -122,18 +121,18 @@ public class StudentCourseAssociation {
             return false;
         }
 
-        StudentCourseAssociation otherSCA = (StudentCourseAssociation) other;
-        boolean checkStudentAndCourse = this.student.equals(otherSCA.student) &&
-                         this.course.equals(otherSCA.course);
+        StudentCourseAssociation otherStudentCourseAssociation = (StudentCourseAssociation) other;
+        boolean checkStudentAndCourse = this.student.equals(otherStudentCourseAssociation.student)
+                && this.course.equals(otherStudentCourseAssociation.course);
 
         if (!checkStudentAndCourse) {
             return false;
         }
 
         if (this.tutorial != null) {
-            return this.tutorial.equals(otherSCA.tutorial);
+            return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
         } else {
-            return this.recitation.equals(otherSCA.recitation);
+            return this.recitation.equals(otherStudentCourseAssociation.recitation);
         }
     }
 }

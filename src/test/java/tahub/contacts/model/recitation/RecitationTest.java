@@ -1,11 +1,13 @@
 package tahub.contacts.model.recitation;
 
-import org.junit.jupiter.api.Test;
-import tahub.contacts.model.course.Course;
-import tahub.contacts.model.courseclass.recitation.Recitation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.courseclass.recitation.Recitation;
 
 /**
  * This test class contains unit tests for the Recitation class.

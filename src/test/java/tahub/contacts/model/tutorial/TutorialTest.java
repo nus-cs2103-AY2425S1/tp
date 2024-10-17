@@ -1,13 +1,14 @@
 package tahub.contacts.model.tutorial;
 
-import org.junit.jupiter.api.Test;
-import tahub.contacts.model.courseclass.tutorial.Tutorial;
-import tahub.contacts.model.course.Course;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.courseclass.tutorial.Tutorial;
 
 public class TutorialTest {
 

@@ -1,9 +1,9 @@
 package tahub.contacts.model.courseclass.tutorial;
 
+import java.util.Objects;
+
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
-
-import java.util.Objects;
 
 /**
  * Represents a Tutorial in the system.
@@ -12,6 +12,12 @@ public class Tutorial extends CourseClass {
     private String tutorialId;
     private Course course;
 
+    /**
+     * Initializes a new Tutorial with the given tutorial ID and associated Course.
+     *
+     * @param tutorialId the ID of the tutorial
+     * @param course the Course associated with the tutorial
+     */
     public Tutorial(String tutorialId, Course course) {
         this.tutorialId = tutorialId;
         this.course = course;
@@ -47,8 +53,8 @@ public class Tutorial extends CourseClass {
         }
 
         Tutorial otherTutorial = (Tutorial) other;
-        return this.tutorialId.equals(otherTutorial.tutorialId) &&
-               this.course.equals(otherTutorial.course);
+        return this.tutorialId.equals(otherTutorial.tutorialId)
+                && this.course.equals(otherTutorial.course);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package tahub.contacts.model.courseclass.recitation;
 
+import java.util.Objects;
+
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
-
-import java.util.Objects;
 
 /**
  * Represents a recitation in a course.
@@ -12,6 +12,12 @@ public class Recitation extends CourseClass {
     private String recitationId;
     private Course course;
 
+    /**
+     * Initializes a Recitation object with the given recitation ID and Course.
+     *
+     * @param recitationId The ID of the recitation.
+     * @param course The Course object for the recitation.
+     */
     public Recitation(String recitationId, Course course) {
         this.recitationId = recitationId;
         this.course = course;
@@ -47,8 +53,8 @@ public class Recitation extends CourseClass {
         }
 
         Recitation otherRecitation = (Recitation) other;
-        return this.recitationId.equals(otherRecitation.recitationId) &&
-                this.course.equals(otherRecitation.course);
+        return this.recitationId.equals(otherRecitation.recitationId)
+                && this.course.equals(otherRecitation.course);
     }
 
     @Override
