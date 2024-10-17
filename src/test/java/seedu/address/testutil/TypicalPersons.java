@@ -41,6 +41,12 @@ public class TypicalPersons {
             .withEmail("lydia@example.com").withTelegram("fionaKunz").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withTelegram("georgeBest").build();
+    public static final Person JAVIER = new PersonBuilder().withName("Javier Tan").withPhone("93453421")
+            .withEmail("javier@gmail.com").withTelegram("javierTan").withTags("friend").build();
+    public static final Person KELLY = new PersonBuilder().withName("Kelly Lim").withPhone("89453765")
+            .withEmail("kelly@gmail.com").withTelegram("kellyLim").withTags("relative").build();
+    public static final Person LENOR = new PersonBuilder().withName("Lenor Kim").withPhone("90784567")
+            .withEmail("lenor@gmail.com").withTelegram("lenor").withTags("relative", "friend").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -72,5 +78,20 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersonsWithTags() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JAVIER, KELLY, LENOR));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons including tags.
+     */
+    public static AddressBook getTypicalAddressBookWithTags() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersonsWithTags()) {
+            ab.addPerson(person);
+        }
+        return ab;
     }
 }
