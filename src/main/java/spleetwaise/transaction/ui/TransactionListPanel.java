@@ -23,7 +23,7 @@ public class TransactionListPanel extends UiPart<Region> {
     /**
      * Creates a {@code TransactionListPanel} with the given {@code ObservableList}.
      */
-    public TransactionListPanel(ObservableList<Transaction> personList) {
+    public TransactionListPanel(ObservableList<Transaction> transactionList) {
         super(FXML);
         transactionListView.setItems(personList);
         transactionListView.setCellFactory(listView -> new TransactionListPanel.TransactionListViewCell());
