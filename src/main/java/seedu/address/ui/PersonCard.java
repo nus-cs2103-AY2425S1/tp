@@ -45,9 +45,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label studentClass;
     @FXML
-    private Label emergencyContactName;
+    private Label ecName;
     @FXML
-    private Label emergencyPhone;
+    private Label ecNumber;
     @FXML
     private FlowPane tags;
 
@@ -65,8 +65,8 @@ public class PersonCard extends UiPart<Region> {
         registerNumber.setText(person.getRegisterNumber().value);
         sex.setText(person.getSex().value);
         studentClass.setText(person.getStudentClass().value);
-        emergencyContactName.setText(person.getEmergencyContactName().fullName);
-        emergencyPhone.setText(person.getEmergencyPhone().value);
+        ecName.setText(person.getEcName().value);
+        ecNumber.setText(person.getEcNumber().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -10,40 +10,37 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.EmergencyPhone;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Person;
 
 /**
- * Add or remove the emergency phone number of an existing student in the address book
+ * Adds an emergency contact number to an existing student in the address book.
  */
-public class EmergencyPhoneCommand extends Command {
+public class AddEcNumberCommand extends Command {
 
-    public static final String COMMAND_WORD = "emergencyPhone";
+    public static final String COMMAND_WORD = "addECNumber";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds an emergency phone number to the student "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an emergency contact number to the student "
             + "identified by the index.\n"
             + "Parameters: [INDEX] en/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
 
-    public static final String MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS = "Added emergency phone for %1$s\n"
-            + "Emergency Contact Number: %2$s";
+    public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for Person: %1$s\n";
 
-    public static final String MESSAGE_DELETE_EMERGENCY_PHONE_SUCCESS = "Removed emergency phone for %1$s\n"
-            + "Emergency Contact Number: %2$s";
+    public static final String MESSAGE_DELETE_ECNUMBER_SUCCESS = "Removed emergency contact number for Person: %1$s\n";
 
     private final Index index;
-    private final EmergencyPhone emergencyPhone;
+    private final EcNumber ecNumber;
 
     /**
      * @param index index of the person in the filtered person list to edit the emergency contact phone
-     * @param emergencyPhone emergency contact phone of the person to be updated to
+     * @param ecNumber emergency contact number of the person to be updated to
      */
-    public EmergencyPhoneCommand(Index index, EmergencyPhone emergencyPhone) {
-        requireAllNonNull(index, emergencyPhone);
+    public AddEcNumberCommand(Index index, EcNumber ecNumber) {
+        requireAllNonNull(index, ecNumber);
 
         this.index = index;
-        this.emergencyPhone = emergencyPhone;
+        this.ecNumber = ecNumber;
     }
 
     @Override
@@ -58,8 +55,9 @@ public class EmergencyPhoneCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getRegisterNumber(), personToEdit.getSex(),
-                personToEdit.getStudentClass(), personToEdit.getEmergencyContactName(), emergencyPhone,
+                personToEdit.getStudentClass(), personToEdit.getEcName(), ecNumber,
                 personToEdit.getTags());
+
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));
@@ -67,13 +65,12 @@ public class EmergencyPhoneCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the emergency phone is added to or removed from
+     * the emergency contact number is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !emergencyPhone.value.isEmpty()
-                ? MESSAGE_ADD_EMERGENCY_PHONE_SUCCESS : MESSAGE_DELETE_EMERGENCY_PHONE_SUCCESS;
-        return String.format(message, personToEdit.getName(), personToEdit.getEmergencyPhone());
+        String message = !ecNumber.value.isEmpty() ? MESSAGE_ADD_ECNUMBER_SUCCESS : MESSAGE_DELETE_ECNUMBER_SUCCESS;
+        return String.format(message, personToEdit);
     }
 
     @Override
@@ -82,12 +79,12 @@ public class EmergencyPhoneCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof EmergencyPhoneCommand)) {
+        if (!(other instanceof AddEcNumberCommand)) {
             return false;
         }
 
-        EmergencyPhoneCommand e = (EmergencyPhoneCommand) other;
+        AddEcNumberCommand e = (AddEcNumberCommand) other;
         return index.equals(e.index)
-                && emergencyPhone.equals(e.emergencyPhone);
+                && ecNumber.equals(e.ecNumber);
     }
 }

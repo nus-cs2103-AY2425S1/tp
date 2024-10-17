@@ -166,11 +166,11 @@ Examples:
 in the list.
 * `addEmergencyContactName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
 
-### Adding an Emergency phone number : `emergencyPhone`
+### Adding an Emergency phone number : `ECNumber`
 
 Adds a emergency phone number to the specified person in the address book.
 
-Format: `emergencyPhone INDEX [ep/PHONE]`
+Format: `ECNumber INDEX [ep/PHONE]`
 
 <box type="tip" seamless>
 
@@ -180,8 +180,8 @@ Format: `emergencyPhone INDEX [ep/PHONE]`
 * Adds the phone number `PHONE` to the person at the specified `INDEX`
 
 Examples:
-* `emergencyPhone 1 ep/91234567` to add the emergency number 91234567 to the 1st person in the list.
-* `emergencyPhone 2 ep/` to delete the emergency number from the 2nd person in the list.
+* `ECNumber 1 ep/91234567` to add the emergency number 91234567 to the 1st person in the list.
+* `ECNumber 2 ep/` to delete the emergency number from the 2nd person in the list.
 
 ### Clearing all entries : `clear`
 
@@ -241,4 +241,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Add Emergency Phone Number**  | `emergencyPhone INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `emergencyPhone 2 ep/91231234`
+**Add Emergency Phone Number**  | `ECNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `ECNumber 2 ep/91231234`

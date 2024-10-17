@@ -10,9 +10,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EmergencyContactName;
-import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
@@ -151,13 +151,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code ecName} is invalid.
      */
-    public static EmergencyContactName parseEmergencyContactName(String ecName) throws ParseException {
+    public static EcName parseEmergencyContactName(String ecName) throws ParseException {
         requireNonNull(ecName);
         String trimmedEcName = ecName.trim();
-        if (!EmergencyContactName.isValidEmergencyContactName(trimmedEcName)) {
-            throw new ParseException(EmergencyContactName.MESSAGE_CONSTRAINTS);
+        if (!EcName.isValidEcName(trimmedEcName)) {
+            throw new ParseException(EcName.MESSAGE_CONSTRAINTS);
         }
-        return new EmergencyContactName(trimmedEcName);
+        return new EcName(trimmedEcName);
     }
 
     /**
@@ -166,13 +166,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code emergencyPhone} is invalid.
      */
-    public static EmergencyPhone parseEmergencyPhone(String emergencyPhone) throws ParseException {
+    public static EcNumber parseEmergencyPhone(String emergencyPhone) throws ParseException {
         requireNonNull(emergencyPhone);
         String trimmedEmergencyPhone = emergencyPhone.trim();
-        if (!EmergencyPhone.isValidEmergencyPhone(trimmedEmergencyPhone)) {
-            throw new ParseException(EmergencyPhone.MESSAGE_CONSTRAINTS);
+        if (!EcNumber.isValidEcNumber(trimmedEmergencyPhone)) {
+            throw new ParseException(EcNumber.MESSAGE_CONSTRAINTS);
         }
-        return new EmergencyPhone(trimmedEmergencyPhone);
+        return new EcNumber(trimmedEmergencyPhone);
     }
 
     /**

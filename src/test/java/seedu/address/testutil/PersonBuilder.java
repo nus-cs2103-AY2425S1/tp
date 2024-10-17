@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EmergencyContactName;
-import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,8 +28,8 @@ public class PersonBuilder {
     public static final String DEFAULT_REGISTER_NUMBER = "1";
     public static final String DEFAULT_SEX = "F";
     public static final String DEFAULT_STUDENT_CLASS = "1A";
-    public static final String DEFAULT_EMERGENCY_CONTACT_NAME = "Joe Hardy";
-    public static final String DEFAULT_EMERGENCY_PHONE = "";
+    public static final String DEFAULT_ECNAME = "Joe Hardy";
+    public static final String DEFAULT_ECNUMBER = "";
 
     private Name name;
     private Phone phone;
@@ -38,8 +38,8 @@ public class PersonBuilder {
     private RegisterNumber registerNumber;
     private Sex sex;
     private StudentClass studentClass;
-    private EmergencyContactName ecName = new EmergencyContactName("Joe Hardy");
-    private EmergencyPhone emergencyPhone;
+    private EcName ecName = new EcName("Joe Hardy");
+    private EcNumber ecNumber;
     private Set<Tag> tags;
 
     /**
@@ -53,8 +53,8 @@ public class PersonBuilder {
         registerNumber = new RegisterNumber(DEFAULT_REGISTER_NUMBER);
         sex = new Sex(DEFAULT_SEX);
         studentClass = new StudentClass(DEFAULT_STUDENT_CLASS);
-        ecName = new EmergencyContactName(DEFAULT_EMERGENCY_CONTACT_NAME);
-        emergencyPhone = new EmergencyPhone(DEFAULT_EMERGENCY_PHONE);
+        ecName = new EcName(DEFAULT_ECNAME);
+        ecNumber = new EcNumber(DEFAULT_ECNUMBER);
         tags = new HashSet<>();
     }
 
@@ -69,8 +69,8 @@ public class PersonBuilder {
         registerNumber = personToCopy.getRegisterNumber();
         sex = personToCopy.getSex();
         studentClass = personToCopy.getStudentClass();
-        ecName = personToCopy.getEmergencyContactName();
-        emergencyPhone = personToCopy.getEmergencyPhone();
+        ecName = personToCopy.getEcName();
+        ecNumber = personToCopy.getEcNumber();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -141,16 +141,16 @@ public class PersonBuilder {
     /**
      * Sets the {@code ecName} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmergencyContactName(String ecName) {
-        this.ecName = new EmergencyContactName(ecName);
+    public PersonBuilder withEcName(String ecName) {
+        this.ecName = new EcName(ecName);
         return this;
     }
 
     /**
      * Sets the {@code EmergencyPhone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEmergencyPhone(String emergencyPhone) {
-        this.emergencyPhone = new EmergencyPhone(emergencyPhone);
+    public PersonBuilder withEcNumber(String emergencyPhone) {
+        this.ecNumber = new EcNumber(emergencyPhone);
         return this;
     }
 
@@ -158,7 +158,7 @@ public class PersonBuilder {
      * Builds a new Person with all the required attributes.
      */
     public Person build() {
-        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, emergencyPhone, tags);
+        return new Person(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags);
     }
 
 }
