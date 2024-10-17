@@ -9,11 +9,13 @@ import java.util.Set;
 import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.commons.util.StringUtil;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
+import seedu.internbuddy.model.application.AppStatus;
+import seedu.internbuddy.model.application.Description;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Email;
-import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -58,7 +60,10 @@ public class ParserUtil {
      * @throws ParseException if the given {@code phone} is invalid.
      */
     public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
+        if (phone == null) {
+            return Phone.NO_PHONE;
+        }
+
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
@@ -73,7 +78,10 @@ public class ParserUtil {
      * @throws ParseException if the given {@code address} is invalid.
      */
     public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
+        if (address == null) {
+            return Address.NO_ADDRESS;
+        }
+
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
@@ -136,5 +144,35 @@ public class ParserUtil {
             throw new ParseException(Status.MESSAGE_CONSTRAINTS);
         }
         return new Status(trimmedStatus);
+    }
+
+    /**
+     * Parses {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses {@code String appStatus} into a {@code AppStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appStatus} is invalid.
+     */
+    public static AppStatus parseAppStatus(String appStatus) throws ParseException {
+        requireNonNull(appStatus);
+        String trimmedAppStatus = appStatus.trim();
+        if (!AppStatus.isValidStatus(trimmedAppStatus)) {
+            throw new ParseException(AppStatus.MESSAGE_CONSTRAINTS);
+        }
+        return new AppStatus(trimmedAppStatus);
     }
 }

@@ -13,13 +13,15 @@
     "phone": "2062661000",
     "email": "contact@amazon.com",
     "address": "410 Terry Ave N, Seattle, WA",
-    "status": "APPLIED",
+    "status": "INTERESTED",
     "tags": ["ecommerce", "cloud"],
     "applications": [ {
-      "description": "Software Engineering Intern",
+      "name": "Software Engineering Intern",
+      "description": "Requires: ReactJS and ExpressJS",
       "status": "APPLIED"
     }, {
-      "description": "Data Science Intern",
+      "name": "Data Science Intern",
+      "description": "Requires: Python",
       "status": "REJECTED"
     } ]
   }, {

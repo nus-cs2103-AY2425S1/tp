@@ -13,10 +13,12 @@ import org.junit.jupiter.api.Test;
 
 import seedu.internbuddy.commons.exceptions.IllegalValueException;
 import seedu.internbuddy.model.company.Address;
+import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
-import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.name.Name;
+import seedu.internbuddy.testutil.CompanyBuilder;
 
 public class JsonAdaptedCompanyTest {
     private static final String INVALID_NAME = "R@chel";
@@ -71,11 +73,11 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
+    public void toModelType_nullPhone_returnsCompanyWithNoPhone() throws Exception {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
                 VALID_TAGS, VALID_STATUS, VALID_APPLICATIONS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
+        Company expectedCompany = new CompanyBuilder(AMAZON).withNoPhone().build();
+        assertEquals(expectedCompany, company.toModelType());
     }
 
     @Test
@@ -96,11 +98,11 @@ public class JsonAdaptedCompanyTest {
     }
 
     @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
+    public void toModelType_nullAddress_returnsCompanyWithNoAddress() throws Exception {
         JsonAdaptedCompany company = new JsonAdaptedCompany(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
                 VALID_TAGS, VALID_STATUS, VALID_APPLICATIONS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
+        Company expectedCompany = new CompanyBuilder(AMAZON).withNoAddress().build();
+        assertEquals(expectedCompany, company.toModelType());
     }
 
     @Test

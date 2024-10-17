@@ -18,9 +18,9 @@ import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
-import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -45,11 +45,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElseGet(() -> "000"));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse(null));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElseGet(() -> "No Address"));
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse(null));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElseGet(() -> "INTERESTED"));
+        Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("INTERESTED"));
         ArrayList<Application> applications = new ArrayList<>();
 
         Company company = new Company(name, phone, email, address, tagList, status, applications);

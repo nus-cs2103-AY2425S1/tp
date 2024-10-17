@@ -2,7 +2,7 @@
   "baseUrl": "",
   "titlePrefix": "InternBuddy",
   "titleSuffix": "AddressBook Level-3",
-  "faviconPath": "images/SeEduLogo.png",
+  "faviconPath": "images/InternBuddyLogo.png",
   "style": {
     "codeTheme": "light"
   },

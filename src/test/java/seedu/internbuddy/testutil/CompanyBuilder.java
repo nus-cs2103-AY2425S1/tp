@@ -9,9 +9,9 @@ import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
-import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 import seedu.internbuddy.model.util.SampleDataUtil;
 
@@ -95,10 +95,26 @@ public class CompanyBuilder {
     }
 
     /**
+     * Sets the {@code Address} to no address.
+     */
+    public CompanyBuilder withNoAddress() {
+        this.address = Address.NO_ADDRESS;
+        return this;
+    }
+
+    /**
      * Sets the {@code Phone} of the {@code company} that we are building.
      */
     public CompanyBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} to no phone.
+     */
+    public CompanyBuilder withNoPhone() {
+        this.phone = Phone.NO_PHONE;
         return this;
     }
 

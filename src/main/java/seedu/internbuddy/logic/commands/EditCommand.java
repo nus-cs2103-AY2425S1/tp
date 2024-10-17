@@ -5,6 +5,7 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
@@ -25,9 +26,9 @@ import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Address;
 import seedu.internbuddy.model.company.Company;
 import seedu.internbuddy.model.company.Email;
-import seedu.internbuddy.model.company.Name;
 import seedu.internbuddy.model.company.Phone;
 import seedu.internbuddy.model.company.Status;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
@@ -104,11 +105,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
         Set<Tag> updatedTags = editCompanyDescriptor.getTags().orElse(companyToEdit.getTags());
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
-        List<Application> applications = companyToEdit.getApplications();
-
+        List<Application> updatedApplications = editCompanyDescriptor.getApplications()
+                .orElse(companyToEdit.getApplications());
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, applications);
+                updatedStatus, updatedApplications);
     }
 
     public static Company setStatusApplied(Company companyToEdit) {
@@ -131,10 +132,10 @@ public class EditCommand extends Command {
         Address updatedAddress = companyToEdit.getAddress();
         Set<Tag> updatedTags = companyToEdit.getTags();
         Status updatedStatus = new Status(STATUS_CLOSED);
-        List<Application> applications = companyToEdit.getApplications();
+        List<Application> updatedApplications = companyToEdit.getApplications();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, applications);
+                updatedStatus, updatedApplications);
     }
 
     @Override
@@ -172,6 +173,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private Status status;
+        private List<Application> applications;
 
         public EditCompanyDescriptor() {}
 
@@ -186,6 +188,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setStatus(toCopy.status);
+            setApplications(toCopy.applications);
         }
 
         /**
@@ -241,6 +244,14 @@ public class EditCommand extends Command {
 
         public Optional<Status> getStatus() {
             return Optional.ofNullable(status);
+        }
+
+        public void setApplications(List<Application> applications) {
+            this.applications = applications;
+        }
+
+        public Optional<List<Application>> getApplications() {
+            return Optional.ofNullable(applications);
         }
 
         /**

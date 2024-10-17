@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.internbuddy.commons.util.ToStringBuilder;
 import seedu.internbuddy.model.application.Application;
+import seedu.internbuddy.model.name.Name;
 import seedu.internbuddy.model.tag.Tag;
 
 /**
