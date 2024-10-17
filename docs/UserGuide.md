@@ -145,15 +145,15 @@ This feature allows you to enter and save detailed records for new customers. Ea
 
 #### Parameters {#add-command-parameters}
 | Parameter | Expected Format                                  | Explanation                                                                                                       |
-|----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
-| NAME     | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
-| PHONE    | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
-| EMAIL    | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                          |
-| ADDRESS  | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                    |
-| JOB      | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                  |
-| INCOME   | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                        |
-| TIER     | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                  |
-| REMARK   | [optional] Any string                            | Notes are case-insensitive and can include any textual information.                                               |
+|-----------|--------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|
+| NAME      | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
+| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
+| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                          |
+| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                    |
+| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                  |
+| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                        |
+| TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                  |
+| REMARK    | [optional] Any string                            | Notes are case-insensitive and can include any textual information.                                               |
 
 #### What to Expect
 - **If Successful:** 
@@ -233,17 +233,17 @@ This feature allows users to update the details of an existing customer in the d
     ```
 
 #### Parameters
-| Parameter | Expected Format                                       | Explanation                                                                                                                                 |
-|--------|-------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
-| INDEX  | Integer (1 to the last INDEX)                         | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
-| NAME   | Alphanumeric, capitalized                             | Names are in block letters for clarity and consistency.                                                                                     |
-| PHONE  | 8-digit number, starts with 8 or 9                    | Ensures the contact number is valid in Singapore.                                                                                           |
-| EMAIL  | Must include "@" and domain, case insensitive         | Verifies that the email address is in a standard format.                                                                                    |
-| ADDRESS | Any text, case insensitive                            | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                                              |
-| JOB    | Any text, case insensitive                            | Accepts all job titles without case sensitivity.                                                                                            |
-| INCOME | Non-negative integers                                 | Only positive numbers or zero are valid for income fields.                                                                                  |
-| TIER   | [optional] String (gold, silver, bronze, reject)      | Defines the specific credit card tier to be assigned or updated.                                                                            |
-| REMARK    | [optional] Any string                                 | For both `rn/` and `ra/`, remarks are case-insensitive and can include any textual information.                                               |
+| Parameter | Expected Format                                  | Explanation                                                                                                                                 |
+|-----------|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| INDEX     | Integer (1 to the last INDEX)                    | The index must be a valid integer within the registered range (either the original list or any filtered list after using `filter` command). |
+| NAME      | Alphanumeric, capitalized                        | Names are in block letters for clarity and consistency.                                                                                     |
+| PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                                           |
+| EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                                                    |
+| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                                              |
+| JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                                            |
+| INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                                                  |
+| TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                                            |
+| REMARK    | [optional] Any string                            | For both `rn/` and `ra/`, remarks are case-insensitive and can include any textual information.                                             |
 
 #### What to Expect
 - **If Successful:**
@@ -408,12 +408,12 @@ Allows users to exit the application through a simple command, eliminating the n
 
 ## Command Summary {#command-summary}
 
-| Action                           | Command Format                                                                                                                                                | Example                                                                                                        |
-|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Save Data Automatically**      | *Automatic*                                                                                                                                                   | *No command required*                                                                                          |
-| **Add New Customer**             | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]`                                                            | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
-| **Remove Old Customer**          | `delete <INDEX>`                                                                                                                                              | `delete 69`                                                                                                     |
-| **Edit Existing Customer**       | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE]`| `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care`  |
-| **Find a Customer by Details**   | `filter <FLAG>/ <FLAG FIELD>`                                                                                                                                 | `filter n/ TAN LESHEW`                                                                                         |
-| **Help**                         | `help`                                                                                                                                                        | `help`                                                                                                         |
-| **Exit**                         | `exit`                                                                                                                                                        | `exit`                                                                                                         |
+| Action                         | Command Format                                                                                                                                                 | Example                                                                                                        |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Save Data Automatically**    | *Automatic*                                                                                                                                                    | *No command required*                                                                                          |
+| **Add New Customer**           | `add n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <REMARK>]`                                                             | `add n/ TAN LESHEW p/ 99007766 e/ mrtan@ntu.sg a/ com3 j/ doctor i/ 99999 t/ gold rn/ got anger issue`         |
+| **Remove Old Customer**        | `delete <INDEX>`                                                                                                                                               | `delete 69`                                                                                                    |
+| **Edit Existing Customer**     | `edit <INDEX> n/ <NAME> p/ <PHONE> e/ <EMAIL> a/ <ADDRESS> j/ <JOB> i/ <INCOME> [t/ <TIER>] [rn/ <NEW REMARK>] [ra/ <REMARK TO BE APPENDED ONTO EXISTING ONE]` | `edit 69 n/ TAN LESHEW p/ 77337733 e/ mrtan@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ Specialist in eye care` |
+| **Find a Customer by Details** | `filter <FLAG>/ <FLAG FIELD>`                                                                                                                                  | `filter n/ TAN LESHEW`                                                                                         |
+| **Help**                       | `help`                                                                                                                                                         | `help`                                                                                                         |
+| **Exit**                       | `exit`                                                                                                                                                         | `exit`                                                                                                         |
