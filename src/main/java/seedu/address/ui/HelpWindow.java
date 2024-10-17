@@ -15,11 +15,32 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f14b-1.github.io/tp/UserGuide.html";
+    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL + "\n";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+
+    private static final String TITLE = "Below are the commands you can use in the application:\n";
+
+    private static final String ADD_COMMAND = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…\u200B\n";
+
+    private static final String LIST_COMMAND = "list\n";
+
+    private static final String EDIT_COMMAND = "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…\u200B\n";
+
+    private static final String FIND_COMMAND = "find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]\n";
+
+    private static final String DELETE_COMMAND = "delete INDEXES\n";
+
+    private static final String CLEAR_COMMAND = "clear\n";
+
+    private static final String EXIT_COMMAND = "exit\n";
+
+    private static final String HELP_COMMAND = "help [COMMANDS]\n";
+
+    private static final String[] COMMANDS = {ADD_COMMAND, LIST_COMMAND, EDIT_COMMAND, FIND_COMMAND,
+        DELETE_COMMAND, CLEAR_COMMAND, EXIT_COMMAND, HELP_COMMAND};
 
     @FXML
     private Button copyButton;
@@ -34,7 +55,12 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        StringBuilder helpMessageBuilder = new StringBuilder(TITLE);
+        for (String command : COMMANDS) {
+            helpMessageBuilder.append(command);
+        }
+        helpMessageBuilder.append(HELP_MESSAGE);
+        helpMessage.setText(helpMessageBuilder.toString());
     }
 
     /**

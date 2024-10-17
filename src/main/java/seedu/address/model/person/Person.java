@@ -27,22 +27,24 @@ public class Person {
     private final Address address;
     private final Priority priority;
     private final Remark remark;
+    private final DateOfBirth dateOfBirth;
+    private final Income income;
     private final Appointment appointment;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Priority priority, Remark remark, Set<Tag> tags) {
-        this(name, phone, email, address, priority, remark, null, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, Set<Tag> tags) {
+        this(name, phone, email, address, priority, remark, dateOfBirth, income, null, tags);
     }
 
     /**
      * Every field must be present and not null, except the appointment.
      */
-    public Person(Name name, Phone phone, Email email, Address address,
-                  Priority priority, Remark remark, Appointment appointment, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Priority priority, Remark remark,
+                  DateOfBirth dateOfBirth, Income income, Appointment appointment, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -50,12 +52,14 @@ public class Person {
         this.address = address;
         this.priority = priority;
         this.remark = remark;
+        this.dateOfBirth = dateOfBirth;
+        this.income = income;
         this.appointment = appointment;
         this.tags.addAll(tags);
     }
 
     public Person withAppointment(Appointment appointment) {
-        return new Person(name, phone, email, address, priority, remark, appointment, tags);
+        return new Person(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
     }
 
     public Name getName() {
@@ -80,6 +84,14 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public DateOfBirth getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public Income getIncome() {
+        return income;
     }
 
     public Appointment getAppointment() {
@@ -129,6 +141,8 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && priority.equals(otherPerson.priority)
                 && remark.equals(otherPerson.remark)
+                && dateOfBirth.equals(otherPerson.dateOfBirth)
+                && income.equals(otherPerson.income)
                 && Objects.equals(appointment, otherPerson.appointment)
                 && tags.equals(otherPerson.tags);
     }
@@ -136,7 +150,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, priority, remark, appointment, tags);
+        return Objects.hash(name, phone, email, address, priority, remark, dateOfBirth, income, appointment, tags);
     }
 
     @Override
@@ -148,6 +162,8 @@ public class Person {
                 .add("address", address)
                 .add("priority", priority)
                 .add("remark", remark)
+                .add("dateOfBirth", dateOfBirth)
+                .add("income", income)
                 .add("appointment", appointment)
                 .add("tags", tags)
                 .toString();

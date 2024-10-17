@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -44,6 +46,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
+    private Label dateOfBirth;
+    @FXML
+    private Label householdIncome;
+    @FXML
     private FlowPane tags;
 
     @FXML
@@ -85,8 +91,23 @@ public class PersonCard extends UiPart<Region> {
                     appointment.getFormattedEndTime()));
         }
 
+        dateOfBirth.setText(
+                String.format("%s (Age: %d)",
+                        person.getDateOfBirth(),
+                        getPersonAge(person)
+                )
+        );
+
+        householdIncome.setText(String.format("[Household Income] %s", person.getIncome()));
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private static int getPersonAge(Person person) {
+        LocalDate date = person.getDateOfBirth().toLocalDate();
+        LocalDate now = LocalDate.now();
+        return Period.between(date, now).getYears();
     }
 }

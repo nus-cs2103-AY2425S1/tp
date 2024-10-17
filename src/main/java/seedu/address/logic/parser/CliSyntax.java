@@ -12,9 +12,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("pri/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
+    public static final Prefix PREFIX_DATE_OF_BIRTH = new Prefix("dob/");
+    public static final Prefix PREFIX_INCOME = new Prefix("income/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+
     public static final Prefix PREFIX_DATE = new Prefix("date/");
     public static final Prefix PREFIX_FROM = new Prefix("from/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
-
 }

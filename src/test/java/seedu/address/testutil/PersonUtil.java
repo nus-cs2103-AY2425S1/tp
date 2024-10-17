@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -38,6 +39,7 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS).append(person.getAddress().value).append(" ");
         sb.append(PREFIX_PRIORITY).append(person.getPriority()).append(" ");
         sb.append(PREFIX_REMARK).append(person.getRemark().value).append(" ");
+        sb.append(PREFIX_DATE_OF_BIRTH).append(person.getDateOfBirth().getValue()).append(" ");
         person.getTags().forEach(
             s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
@@ -53,6 +55,8 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
+        descriptor.getPriority().ifPresent(priority -> sb.append(PREFIX_PRIORITY).append(priority).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

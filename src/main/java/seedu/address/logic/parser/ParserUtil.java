@@ -13,7 +13,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Priority;
@@ -98,6 +101,36 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateOfBirth} is invalid.
+     */
+    public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
+        requireNonNull(dateOfBirth);
+        String trimmedDate = dateOfBirth.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new DateOfBirth(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String income} into a {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code income} is invalid.
+     */
+    public static Income parseIncome(String income) throws ParseException {
+        requireNonNull(income);
+        String trimmedIncome = income.trim();
+        if (!Income.isValidIncome(trimmedIncome)) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+        return new Income(trimmedIncome);
     }
 
     /**

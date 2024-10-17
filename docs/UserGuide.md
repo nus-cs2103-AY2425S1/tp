@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# SocialBook User Guide
 
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
@@ -68,12 +68,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to access the help page or display how to use a specified command.
 
-![help message](images/helpMessage.png)
+![help message](images/updatedHelpMessage.png)
 
-Format: `help`
+Format: `help [COMMAND]`
 
+Examples:
+* `help` 
+* `help add`
+* `help edit`
 
 ### Adding a person: `add`
 
@@ -92,7 +96,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the address book, automatically sorted by their priority from HIGH to LOW.
 
 Format: `list`
 
@@ -113,36 +117,38 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Finding persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons that match the specified filters.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/StartOfName] [a/PartOfAddress] [pri/PRIORITY]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The search is case-insensitive. e.g `n/alex` will match `Alex`.
+* For names, only those that start with the given filter will be matched e.g. find n/A returns all persons whose first name starts with A only. 
+* For addresses, those that contain the given filter are returned e.g. find a/clementi returns all persons who stay at clementi only.
+* For priorities, exact priorities must be specified to filter accurately e.g. find pri/high returns all persons with high priority only.
+* At least one filter must be specified.
+* To specify multiple filters of the same type, use the corresponding prefix for every new filter e.g. find n/alex n/david n/bobby
+* Per type of prefix, all persons matching any of the filters given will be returned (i.e. `OR`search) but when combined, only those who also pass the filters of other types are are returned (i.e. `AND` search) e.g. find n/A n/B pri/HIGH returns all persons whose name starts with either A or B but have high priority. 
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex n/david pri/high` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/newFindAlexDavidResult.png)
+
+### Deleting people : `delete`
+
+Deletes the specified people from the address book.
+
+Format: `delete INDEXES`
+
+* Deletes the people at the specified `INDEXES`.
+* The indexes refer to the index numbers shown in the displayed person list.
+* The indexes **must be a positive integer** 1, 2, 3, …​
+* The indexes can be in **any order** so long as all the indexes fall within the size of the current list.
+
+Examples:
+* `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
