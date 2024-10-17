@@ -79,9 +79,9 @@ Adds a person to the address book.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
 <box type="note" seamless>**NOTE:** 
-1. <b>SCHEDULE</b> must be in the format of <DAY OF THE WEEK>-<START TIME>-<END TIME>
-* <b>DAY OF THE WEEK</b> includes Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
-* <b>START TIME</b> and <b>END TIME</b> are represented as `HHmm`.
+1. <b>SCHEDULE</b> must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
+* <b>DAY_OF_THE_WEEK</b> includes Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+* <b>START_TIME</b> and <b>END_TIME</b> are represented as `HHmm`.
 
 2. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-person--edit)
 
