@@ -12,7 +12,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Product Name: AgentConnect
 
-Target User: Insurance agents tracking their clients 
+Target User: Insurance agents tracking their clients
 
 Value proposition: provides quick and efficient access to client details, tailored for insurance agents who need a streamlined interface to manage contacts, track policy updates, and schedule client follow-ups.
 

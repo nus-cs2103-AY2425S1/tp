@@ -46,7 +46,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_BIRTHDAY_AMY = "2000-12-12";
     public static final String VALID_BIRTHDAY_BOB = "1990-10-10";
-    public static final String VALID_APPOINTMENT_AMY = "2024-12-12 12:00";
+    public static final String VALID_APPOINTMENT_AMY = "2024-12-12 10:00";
+    public static final String VALID_APPOINTMENT_FIONA = "2024-12-12 10:00";
     public static final String VALID_APPOINTMENT_BOB = "2024-10-10 11:00";
     public static final String VALID_POLICY_NAME_LIFE = "life insurance ";
     public static final String VALID_POLICY_NAME_INVESTMENT = "Investment Insurance ";

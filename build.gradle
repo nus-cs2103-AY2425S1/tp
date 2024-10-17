@@ -80,7 +80,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'agentconnect.jar'
 }
 
 defaultTasks 'clean', 'test'

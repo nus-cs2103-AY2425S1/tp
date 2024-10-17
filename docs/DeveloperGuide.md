@@ -297,13 +297,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AgentConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person** 
+**Use case: Add a person**
 
 **MSS**
 
-1.  User adds a new person by entering the command with name, phone number, email, address, insurance type, and appointment dates. 
-2.  AgentConnect validates the input. 
-3.  AgentConnect adds the new person with all the details provided. 
+1.  User adds a new person by entering the command with name, phone number, email, address, insurance type, and appointment dates.
+2.  AgentConnect validates the input.
+3.  AgentConnect adds the new person with all the details provided.
 4.  AgentConnect shows a success message confirming the person has been added.
 
     Use case ends.
@@ -312,13 +312,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Some fields are invalid (e.g., name, phone, email).
-  * 2a1. AgentConnect shows an error message for the invalid fields. 
-  * 2a2. User corrects the fields and resubmits the command. 
+  * 2a1. AgentConnect shows an error message for the invalid fields.
+  * 2a2. User corrects the fields and resubmits the command.
   * Use case resumes from step 2.
 
 * 2b. Duplicate person detected (same name + address).
-    * 2b1. AgentConnect shows a warning message about the duplicate entry. 
-    * 2b2. User decides whether to overwrite or cancel the operation. 
+    * 2b1. AgentConnect shows a warning message about the duplicate entry.
+    * 2b2. User decides whether to overwrite or cancel the operation.
     * Use case resumes at step 2 if user decides to proceed
 
 
@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. AgentConnect validates the input.
 3. AgentConnect confirms the deletion request by showing the contact details.
 4. AgentConnect deletes the contact and shows a success message
-    
+
     Use case ends.
 
 **Extensions**
@@ -393,8 +393,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to list clients.
 2.  User selects a client to assign a policy.
 3.  AgentConnect assigns the policy to the client.
-4.  AgentConnect shows updated client information.  
-    Use case ends.
+4.  AgentConnect shows updated client information. 
+Use case ends.
 
 **Extensions**
 
@@ -414,8 +414,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list clients.
 2.  User requests to view a client’s appointment dates.
-3.  AgentConnect retrieves and displays the requested appointment date.  
-    Use case ends.
+3.  AgentConnect retrieves and displays the requested appointment date.
+Use case ends.
 
 **Extensions**
 
@@ -435,8 +435,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list clients.
 2.  User requests to view a specific client’s birthday.
-3.  AgentConnect retrieves and displays the client’s birthday.  
-    Use case ends.
+3.  AgentConnect retrieves and displays the client’s birthday.
+Use case ends.
 
 **Extensions**
 
@@ -455,8 +455,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to list clients.
 2.  User requests to view a client's payment date.
-3.  AgentConnect retrieves and display the next payment date.  
-    Use case ends.
+3.  AgentConnect retrieves and display the next payment date.
+Use case ends.
 
 **Extensions**
 
@@ -473,8 +473,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should be able to hold up to 1000 persons without noticeable lag for typical usage. 
-2.  A user with above-average typing speed for regular English text should be able to add a new contact (including insurance and appointment details) faster using commands than with the mouse. 
+1.  Should be able to hold up to 1000 persons without noticeable lag for typical usage.
+2.  A user with above-average typing speed for regular English text should be able to add a new contact (including insurance and appointment details) faster using commands than with the mouse.
 3.  The system should provide real-time validation (e.g., when typing the phone number or email) to reduce error rates and ensure correct input formats.
 4.  Novice users should be able to complete a typical workflow in under 5 minutes, without external help.
 5.  The system codebase should allow for the introduction of new features with less than 10% of existing code modification.

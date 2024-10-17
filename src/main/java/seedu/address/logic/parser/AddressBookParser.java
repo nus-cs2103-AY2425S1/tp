@@ -54,7 +54,8 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-
+        case "search":
+            return new SearchCommandParser().parse(arguments);
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
