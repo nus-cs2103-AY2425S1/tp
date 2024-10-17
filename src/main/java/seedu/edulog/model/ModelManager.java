@@ -16,7 +16,7 @@ import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 
 /**
- * Represents the in-memory model of the edulog book data.
+ * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -26,6 +26,7 @@ public class ModelManager implements Model {
 
     private final EdulogCalendar edulogCalendar;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Lesson> lessons;
 
     /**
      * Initializes a ModelManager with the given eduLog and userPrefs.
@@ -33,14 +34,17 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyEduLog eduLog, ReadOnlyUserPrefs userPrefs, EdulogCalendar edulogCalendar) {
         requireAllNonNull(eduLog, userPrefs);
 
-        logger.fine("Initializing with edulog book: " + eduLog + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + eduLog + " and user prefs " + userPrefs);
 
         this.eduLog = new EduLog(eduLog);
         this.userPrefs = new UserPrefs(userPrefs);
         // Simple version - do without a persistent calendar first.
         // TODO: Persistent storage for MVP release.
         this.edulogCalendar = new EdulogCalendar();
+
         filteredStudents = new FilteredList<>(this.eduLog.getStudentList());
+        lessons = new FilteredList<>(this.edulogCalendar.getLessons());
+
     }
 
     public ModelManager() {
@@ -118,7 +122,7 @@ public class ModelManager implements Model {
         eduLog.setStudent(target, editedStudent);
     }
 
-    //=========== EduLog ================================================================================
+    //=========== EdulogCalendar ================================================================================
 
     @Override
     public boolean hasLesson(Lesson lesson) {
@@ -150,6 +154,10 @@ public class ModelManager implements Model {
         edulogCalendar.removeLesson(lesson);
     }
 
+    public EdulogCalendar getEdulogCalendar() {
+        return edulogCalendar;
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**
@@ -159,6 +167,15 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Lesson} backed by the internal list of
+     * {@code ?? - fill}
+     */
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return lessons;
     }
 
     @Override
@@ -180,8 +197,8 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
         return eduLog.equals(otherModelManager.eduLog)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+            && userPrefs.equals(otherModelManager.userPrefs)
+            && filteredStudents.equals(otherModelManager.filteredStudents);
     }
 
 }

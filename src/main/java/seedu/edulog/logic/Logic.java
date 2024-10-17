@@ -8,6 +8,7 @@ import seedu.edulog.logic.commands.CommandResult;
 import seedu.edulog.logic.commands.exceptions.CommandException;
 import seedu.edulog.logic.parser.exceptions.ParseException;
 import seedu.edulog.model.ReadOnlyEduLog;
+import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 
 /**
@@ -24,19 +25,22 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the EduLog.
+     * Returns the AddressBook.
      *
-     * @see seedu.edulog.model.Model#getEduLog()
+     * @see seedu.address.model.Model#getEduLog()
      */
     ReadOnlyEduLog getEduLog();
 
     /** Returns an unmodifiable view of the filtered list of students */
     ObservableList<Student> getFilteredStudentList();
 
+    /** Returns an unmodifiable view of the filtered list of lessons */
+    ObservableList<Lesson> getLessonList();
+
     /**
-     * Returns the user prefs' edulog book file path.
+     * Returns the user prefs' address book file path.
      */
-    Path getEduLogFilePath();
+    Path getAddressBookFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

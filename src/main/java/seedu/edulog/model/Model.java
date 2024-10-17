@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.edulog.commons.core.GuiSettings;
+import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 
@@ -36,17 +37,17 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' edulog book file path.
+     * Returns the user prefs' address book file path.
      */
     Path getEduLogFilePath();
 
     /**
-     * Sets the user prefs' edulog book file path.
+     * Sets the user prefs' address book file path.
      */
     void setEduLogFilePath(Path eduLogFilePath);
 
     /**
-     * Replaces edulog book data with the data in {@code eduLog}.
+     * Replaces address book data with the data in {@code eduLog}.
      */
     void setEduLog(ReadOnlyEduLog eduLog);
 
@@ -54,25 +55,25 @@ public interface Model {
     ReadOnlyEduLog getEduLog();
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the edulog book.
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
      */
     boolean hasStudent(Student student);
 
     /**
      * Deletes the given student.
-     * The student must exist in the edulog book.
+     * The student must exist in the address book.
      */
     void deleteStudent(Student target);
 
     /**
      * Adds the given student.
-     * {@code student} must not already exist in the edulog book.
+     * {@code student} must not already exist in the address book.
      */
     void addStudent(Student student);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
-     * {@code target} must exist in the edulog book.
+     * {@code target} must exist in the address book.
      * The student identity of {@code editedStudent} must not be the same as another existing student in EduLog.
      */
     void setStudent(Student target, Student editedStudent);
@@ -104,10 +105,18 @@ public interface Model {
      */
     boolean checkTimeslot(Lesson lesson);
 
+    /**
+     * Returns edulog calendar.
+     */
+    EdulogCalendar getEdulogCalendar();
+
 
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
+
+    /** Returns an unmodifiable view of the filtered student list */
+    ObservableList<Lesson> getLessonList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.

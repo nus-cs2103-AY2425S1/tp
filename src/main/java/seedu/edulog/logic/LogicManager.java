@@ -15,6 +15,7 @@ import seedu.edulog.logic.parser.EduLogParser;
 import seedu.edulog.logic.parser.exceptions.ParseException;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ReadOnlyEduLog;
+import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.storage.Storage;
 
@@ -25,13 +26,13 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_FORMAT = "Could not save data due to the following error: %s";
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
-            "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+        "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
-    private final EduLogParser eduLogParser;
+    private final EduLogParser addressBookParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -39,7 +40,7 @@ public class LogicManager implements Logic {
     public LogicManager(Model model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        eduLogParser = new EduLogParser();
+        addressBookParser = new EduLogParser();
     }
 
     @Override
@@ -47,7 +48,7 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = eduLogParser.parseCommand(commandText);
+        Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
@@ -72,7 +73,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getEduLogFilePath() {
+    public ObservableList<Lesson> getLessonList() {
+        return model.getLessonList();
+    }
+
+    @Override
+    public Path getAddressBookFilePath() {
         return model.getEduLogFilePath();
     }
 
