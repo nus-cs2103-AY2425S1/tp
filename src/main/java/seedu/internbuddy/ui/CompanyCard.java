@@ -1,12 +1,16 @@
 package seedu.internbuddy.ui;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.internbuddy.model.application.Application;
 import seedu.internbuddy.model.company.Company;
 
 /**
@@ -39,6 +43,10 @@ public class CompanyCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label application;
+    @FXML
+    private Label status;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -49,11 +57,49 @@ public class CompanyCard extends UiPart<Region> {
         this.company = company;
         id.setText(displayedIndex + ". ");
         name.setText(company.getName().fullName);
-        phone.setText(company.getPhone().getValue());
-        address.setText(company.getAddress().getValue());
         email.setText(company.getEmail().value);
+        status.setText(company.getStatus().value);
+
+        if ("INTERESTED".equals(status.getText())) {
+            status.setStyle("-fx-background-color: purple;");
+        } else if ("APPLIED".equals(status.getText())) {
+            status.setStyle("-fx-background-color: green;");
+        } else if ("CLOSED".equals(status.getText())) {
+            status.setStyle("-fx-background-color: #db0303;");
+        }
+
+        /* setting optional fields: phone and address */
+        setOptionals();
+
+        List<Application> applications = company.getApplications();
+        application.setText(applications.isEmpty()
+                ? "Applications: CLOSED"
+                : "Applications: " + IntStream.range(0, applications.size())
+                    .mapToObj(i -> (i + 1) + ". " + applications.get(i))
+                    .collect(Collectors.joining(", ")));
+
+        tags.getChildren().add(status);
+
         company.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void setOptionals() {
+        boolean hasPhoneNumber = !company.getPhone().getValue().equals("No Phone Number");
+        boolean hasAddress = !company.getAddress().getValue().equals("No Address");
+
+        if (hasPhoneNumber) {
+            phone.setText(company.getPhone().getValue());
+        } else {
+            phone.setManaged(false);
+            phone.setVisible(false);
+        }
+        if (hasAddress) {
+            address.setText(company.getAddress().getValue());
+        } else {
+            address.setManaged(false);
+            address.setVisible(false);
+        }
     }
 }
