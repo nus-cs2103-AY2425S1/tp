@@ -150,7 +150,7 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD) instanceof IncomeCommand);
         assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD + " 3") instanceof IncomeCommand);
     }
-  
+
     @Test
     public void parseCommand_incomeRandomCase() throws Exception {
         assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD_RANDOM_CASE) instanceof IncomeCommand);
