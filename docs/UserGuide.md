@@ -30,9 +30,9 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete n/John Doe` followed by `delete-y` : Deletes the contact named John Doe in the contacts list.
 
    * `clear` : Deletes all contacts.
 
@@ -51,9 +51,6 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -68,7 +65,7 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaning how to use the commands with detailed descriptions.
 
 ![help message](images/helpMessage.png)
 
@@ -77,32 +74,33 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to the contact list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 <box type="tip" seamless>
 
+**Tip:** Fields can be added in any order. The order of the fields does not matter.
 **Tip:** A person can have any number of tags (including 0)
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 j/Photographer`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 j/Caterer`
 
-### Listing all persons : `list`
+### Listing All Contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the contact list.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing A Contact : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at with the specified `NAME`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -110,8 +108,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit n/John Doe p/91234567 e/johndoe@example.com` Edits the phone number and email address of John Doe to be `91234567` and `johndoe@example.com` respectively.
+*  `edit n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -131,19 +129,20 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the address book, with confirmation prompt.
 
-Format: `delete INDEX`
+Format: `delete INDEX` followed by `delete-y` or `delete-n`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person with the specified `NAME` from the address book.
+* The contact's details are shown for confirmation.
+* The contact is deleted if `delete-y` is entered.
+* The contact is not deleted if `delete-n` is entered, cancelling the delete operation.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/John Doe` followed by `delete-y` deletes the person named `John Doe` from the address book.
+* `delete n/John Doe` followed by `delete-n` cancels the delete operation.
 
 ### Clearing all entries : `clear`
 
@@ -153,7 +152,7 @@ Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program and saves data.
 
 Format: `exit`
 
@@ -196,10 +195,10 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/Wedding 1`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
+**Edit**   | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
