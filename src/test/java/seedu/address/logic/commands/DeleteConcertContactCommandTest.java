@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showConcertAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
@@ -20,8 +19,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.concert.Concert;
-import seedu.address.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -30,23 +27,6 @@ import seedu.address.model.person.Person;
 public class DeleteConcertContactCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-// WIP
-//    @Test
-//    public void execute_validIndexUnfilteredList_success() {
-//        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        Concert concertToEdit = model.getFilteredConcertList().get(INDEX_FIRST_CONCERT.getZeroBased());
-//
-//        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(INDEX_FIRST_PERSON,
-//                INDEX_FIRST_CONCERT);
-//
-//        String expectedMessage = String.format(DeleteConcertContactCommand.MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS,
-//                Messages.format(personToDelete), Messages.format(concertToEdit));
-//
-//        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-//        expectedModel.deleteConcertContact(personToDelete, concertToEdit);
-//
-//        assertCommandSuccess(deleteConcertContactCommand, model, expectedMessage, expectedModel);
-//    }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_throwsCommandException() {
@@ -65,28 +45,6 @@ public class DeleteConcertContactCommandTest {
 
         assertCommandFailure(deleteConcertContactCommand, model, Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
     }
-
-// WIP
-//    @Test
-//    public void execute_validIndexFilteredList_success() {
-//        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-//        showConcertAtIndex(model, INDEX_FIRST_CONCERT);
-//
-//        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        Concert concertToEdit = model.getFilteredConcertList().get(INDEX_FIRST_PERSON.getZeroBased());
-//        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(INDEX_FIRST_PERSON,
-//                INDEX_FIRST_CONCERT);
-//
-//        String expectedMessage = String.format(DeleteConcertContactCommand.MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS,
-//                Messages.format(personToDelete), Messages.format(concertToEdit));
-//
-//        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-//        expectedModel.deleteConcertContact(personToDelete, concertToEdit);
-//        showNoPerson(expectedModel);
-//        showNoConcert(expectedModel);
-//
-//        assertCommandSuccess(deleteConcertContactCommand, model, expectedMessage, expectedModel);
-//    }
 
     @Test
     public void execute_invalidPersonIndexFilteredList_throwsCommandException() {
