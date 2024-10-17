@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane roles;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -63,8 +65,15 @@ public class PersonCard extends UiPart<Region> {
         email = new Label(person.getEmail().value);
         email.getStyleClass().add("cell_small_label");
         vBox.getChildren().add(email);
+
+        // Add tags
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        // Add module role pairs
+        person.getModuleRoleMap().getData().stream()
+                .sorted(Comparator.comparing(moduleRolePair -> moduleRolePair.moduleCode.toString()))
+                .forEach(moduleRolePair -> roles.getChildren().add(new Label(moduleRolePair.toString())));
     }
 }

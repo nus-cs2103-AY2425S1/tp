@@ -41,7 +41,7 @@ public class PersonTest {
         Person betty = new PersonBuilder(BETTY).build();
 
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
-                Optional.empty(), BETTY.getTags());
+                Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap());
 
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);
@@ -58,7 +58,7 @@ public class PersonTest {
         Person betty = new PersonBuilder(BETTY).buildEmptyAddressPerson();
 
         Person person = new Person(BETTY.getName(), BETTY.getPhone(), BETTY.getEmail(),
-                Optional.empty(), BETTY.getTags());
+                Optional.empty(), BETTY.getTags(), BETTY.getModuleRoleMap());
 
         assertNotNull(person, "The person object should not be null");
         assertEquals(betty, person);

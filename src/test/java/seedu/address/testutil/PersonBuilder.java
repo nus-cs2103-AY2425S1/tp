@@ -26,6 +26,9 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    public static final ModuleCode DEFAULT_MODULE_CODE = new ModuleCode("CS1101S");
+    public static final RoleType DEFAULT_ROLE_TYPE = RoleType.STUDENT;
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -42,7 +45,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
-        moduleRoleMap = new ModuleRoleMap(new HashMap<ModuleCode, RoleType>());
+
+        HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+        hashMap.put(DEFAULT_MODULE_CODE, DEFAULT_ROLE_TYPE);
+        moduleRoleMap = new ModuleRoleMap(hashMap);
     }
 
     /**
