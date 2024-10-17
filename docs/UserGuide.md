@@ -128,6 +128,16 @@ Format: `untag INDEX t/TAG`
 Examples:
 * `untag 2 t/Groom's Friends`
 
+### Setting RSVP status for a guest : `rsvp` and `unrsvp`
+
+Toggles the RSVP status for a guest. `rsvp` sets the guest's status as RSVPed, while `unrsvp` sets the guest's status as not yet RSVPed.
+
+Format: `rsvp INDEX` or `unrsvp INDEX`
+
+Example:
+* `rsvp 2` marks the 2nd person as RSVPed.
+* `unrsvp 1` marks the 1st person as not yet RSVPed.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -235,5 +245,7 @@ Action | Format, Examples
 **Newtag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Family`
 **Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/Groom's Friends`
 **Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Family`
+**RSVP** | `rsvp INDEX`
+**UnRSVP** | `unrsvp INDEX`
 **Help** | `help`
 
