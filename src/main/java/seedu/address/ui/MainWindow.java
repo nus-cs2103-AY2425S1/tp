@@ -157,12 +157,12 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the view window to display patient details.
      */
     @FXML
-    public void handleView() {
+    public void handleView(String feedback) {
         if (viewWindow != null && viewWindow.isShowing()) {
             viewWindow.hide();
         }
 
-        this.viewWindow = ViewWindow.createView(logic.getFilteredPersonList());
+        this.viewWindow = new ViewWindow(feedback, logic.getFilteredPersonList().get(0));
         viewWindow.show();
     }
 
@@ -203,7 +203,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isShowView()) {
-                handleView();
+                handleView(commandResult.getFeedbackToUser());
             }
 
             if (commandResult.isExit()) {

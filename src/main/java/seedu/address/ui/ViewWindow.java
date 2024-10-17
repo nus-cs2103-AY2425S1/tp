@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -15,12 +14,11 @@ import seedu.address.model.person.Person;
 public class ViewWindow extends UiPart<Stage>{
     private final Logger logger = LogsCenter.getLogger(getClass());
     private static final String FXML = "ViewWindow.fxml";
-    private final boolean personFound;
 
     @FXML
     private StackPane feedbackDisplayPlaceholder;
     @FXML
-    private StackPane personDisplayPlaceholder;
+    private Label feedback;
     @FXML
     private Label name;
     @FXML
@@ -36,15 +34,10 @@ public class ViewWindow extends UiPart<Stage>{
     @FXML
     private FlowPane tags;
 
-    private ViewWindow(Stage root) {
+    private ViewWindow(Stage root, String feedbackDisplayText, Person person) {
         super(FXML, root);
-        personFound = false;
-    }
 
-    private ViewWindow(Stage root, Person person) {
-        super(FXML, root);
-        personFound = true;
-
+        feedback.setText(feedbackDisplayText);
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
@@ -56,12 +49,8 @@ public class ViewWindow extends UiPart<Stage>{
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    public static ViewWindow createView(List<Person> personList) {
-        if (personList.isEmpty()) {
-            return new ViewWindow(new Stage());
-        } else {
-            return new ViewWindow(new Stage(), personList.get(0));
-        }
+    public ViewWindow(String feedbackDisplayText, Person person) {
+        this(new Stage(), feedbackDisplayText, person);
     }
 
     public void show() {
