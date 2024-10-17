@@ -40,7 +40,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/prave1n)] [[portfolio](team/johndoe.md)]
 
 * Role: Deliverables and deadlines
-* Responsibilities: Ensure project deliverables are done on dateTime and in the right format.
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Jian Yi
 
@@ -50,7 +50,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Testing
-* Responsibilities: Ensures the testing of the project is done properly and on dateTime
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### Chen Jianzhi
 
