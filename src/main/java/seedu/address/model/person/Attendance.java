@@ -1,9 +1,14 @@
 package seedu.address.model.person;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Student's Attendance.
  */
 public class Attendance {
+
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should be either 'Attended' or 'Absent'";
+
     private final boolean hasAttended;
 
     /**
@@ -15,6 +20,23 @@ public class Attendance {
      */
     public Attendance(boolean hasAttended) {
         this.hasAttended = hasAttended;
+    }
+
+    /**
+     * Converts a {@code String attendance} to an {@code Attendance} object.
+     *
+     * @param attendance A valid string that represents attendance.
+     */
+    public static Attendance fromString(String attendance) {
+        checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
+        return new Attendance(attendance.equals("Attended"));
+    }
+
+    /**
+     * Returns true if a given string is a valid attendance.
+     */
+    public static boolean isValidAttendance(String test) {
+        return test.equals("Attended") || test.equals("Absent");
     }
 
     public boolean hasAttended() {

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
@@ -21,10 +22,12 @@ public class UnmarkAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Remove an attendance record from the person identified by the index number.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + ": Remove an attendance record from the person identified by the index number "
+            + "and a datetime.\n"
+            + "Parameters: INDEX (must be a positive integer) "
+            + PREFIX_DATE + "DATETIME \n"
             + "Example: \n"
-            + COMMAND_WORD + " 1";
+            + COMMAND_WORD + " 1" + PREFIX_DATE + "31/01/2024 12:00 \n";
 
     public static final String MESSAGE_UNMARK_ATTENDANCE_SUCCESS = "Removed attendance for %1$s on %2$s";
 
