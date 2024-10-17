@@ -182,7 +182,7 @@ public class History {
         for (LocalDateTime date : appointments) {
             Appointment appointment = appointmentDatabase.get(date);
             if (appointment.getPatientId().equals(patientId)) {
-                result.append(formatAppointment(date, appointment)).append("\n");
+                result.append(appointment).append("\n");
             }
         }
         return result.toString();
@@ -201,7 +201,7 @@ public class History {
             if (checkId.equals(doctorId)) {
                 LocalDateTime date = entry.getKey();
                 Appointment appointment = entry.getValue();
-                sb.append(formatAppointment(date, appointment)).append("\n");
+                sb.append(appointment).append("\n");
             }
         }
         return sb.toString();
@@ -224,7 +224,8 @@ public class History {
             if (appointmentDateTime.toLocalDate().equals(date)
                     && appointment.getPatientId().equals(patientId)
                     && appointment.getDoctorId().equals(doctorId)) {
-                sb.append(formatAppointment(appointmentDateTime, appointment));
+                sb.append(appointment)
+                        .append(System.lineSeparator());
             }
         }
         if (sb.isEmpty()) {
@@ -233,6 +234,30 @@ public class History {
         return sb.toString();
     }
 
+    /**
+     * Retrieves all appointments for a specific day for a doctor.
+     *
+     * @param date The date to check.
+     * @param doctorId The ID of the doctor.
+     * @return A list of appointments on the specified day.
+     * @throws AppNotFoundException if no appointments are found for the specified date.
+     */
+    public String getDoctorAppointmentsForDay(LocalDate date, Id doctorId)
+            throws AppNotFoundException {
+        StringBuilder sb = new StringBuilder();
+        for (LocalDateTime appointmentDateTime : appointments) {
+            Appointment appointment = appointmentDatabase.get(appointmentDateTime);
+            if (appointmentDateTime.toLocalDate().equals(date)
+                    && appointment.getDoctorId().equals(doctorId)) {
+                sb.append(appointment)
+                        .append(System.lineSeparator());
+            }
+        }
+        if (sb.isEmpty()) {
+            throw new AppNotFoundException("No appointments found for the specified date.");
+        }
+        return sb.toString();
+    }
     /**
      * Retrieves all appointments for a specific patient within the past 'n' days.
      *
@@ -255,7 +280,8 @@ public class History {
 
             if (!appointmentDate.isBefore(startDate) && !appointmentDate.isAfter(currentDate)
                     && appointment.getPatientId().equals(patientId)) {
-                sb.append(formatAppointment(appointmentDateTime, appointment));
+                sb.append(appointment)
+                        .append(System.lineSeparator());
             }
         }
 
@@ -297,7 +323,8 @@ public class History {
 
             if (!appointmentDate.isBefore(startDate) && !appointmentDate.isAfter(mostRecentDate)
                     && appointment.getDoctorId().equals(doctorId)) {
-                sb.append(formatAppointment(entry.getKey(), appointment));
+                sb.append(appointment)
+                        .append(System.lineSeparator());
             }
         }
 
@@ -310,6 +337,20 @@ public class History {
         return sb.toString();
     }
 
+    /**
+     * Removes all appointments from a patient's history.
+     *
+     * @param patientId The ID of the patient that is removed.
+     */
+    public static void deletePatientsAppointments(Id patientId) {
+        Patient patient = Patient.getPatientWithId(patientId);
+        for (LocalDateTime date : patient.getHistory().appointments) {
+            Appointment appointment = appointmentDatabase.get(date);
+            if (appointment.getPatientId().equals(patientId)) {
+                appointmentDatabase.remove(date);
+            }
+        }
+    }
 
     /**
      * Formats the appointment details for display.
