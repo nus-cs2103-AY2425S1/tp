@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@code ViewCommand} object.

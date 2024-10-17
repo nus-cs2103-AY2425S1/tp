@@ -1,23 +1,25 @@
 package seedu.address.logic.commands;
 
-import com.sun.glass.ui.View;
-import javafx.application.Platform;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Remark;
-
-import seedu.address.logic.commands.exceptions.CommandException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.concurrent.CountDownLatch;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import javafx.application.Platform;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+
+
 
 class ViewCommandTest {
     public static final Index VIEW_STUB = Index.fromOneBased(1);
@@ -25,7 +27,7 @@ class ViewCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @BeforeAll
     static void initToolkit() {
-        Platform.startup(() -> {});  // Initialize the JavaFX toolkit
+        Platform.startup(() -> {}); // Initialize the JavaFX toolkit
     }
 
     @Test
@@ -48,10 +50,8 @@ class ViewCommandTest {
         // Set up CountDownLatch to wait for JavaFX thread
         CountDownLatch latch = new CountDownLatch(1);
 
-        // Prepare your model and other objects here
         Index validIndex = Index.fromZeroBased(0);
 
-        // Create a ViewCommand
         ViewCommand viewCommand = new ViewCommand(validIndex);
 
         // Use Platform.runLater to execute UI-related code on JavaFX Application Thread
@@ -64,11 +64,9 @@ class ViewCommandTest {
             } catch (CommandException e) {
                 fail("Command execution failed.");
             } finally {
-                latch.countDown();  // Signal completion of the task
+                latch.countDown();
             }
         });
-
-        // Wait for the latch to reach 0, ensuring the test doesn't exit before UI task is done
         latch.await();
     }
 
@@ -86,10 +84,10 @@ class ViewCommandTest {
                 assertThrows(CommandException.class, () -> viewCommand.execute(model));
 
             } finally {
-                latch.countDown();  // Signal completion of the task
+                latch.countDown();
             }
         });
 
-        latch.await();  // Wait for the task to complete
+        latch.await();
     }
 }

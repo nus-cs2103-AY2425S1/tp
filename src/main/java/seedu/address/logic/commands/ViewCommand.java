@@ -1,34 +1,54 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.util.List;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.Window;
 import seedu.address.ui.PersonDetails;
 
-import java.io.IOException;
-import java.util.List;
 
-import static java.util.Objects.requireNonNull;
 
+/**
+ * Represents a command to view the details of a person identified by their index in the last shown list.
+ */
 public class ViewCommand extends Command {
+
     public static final String COMMAND_WORD = "view";
 
-//    public static final String MESSAGE_NaN = "Please provide a proper ID (integer)";
-//    public static final String MESSAGE_OUT_OF_BOUNDS = "Please provide a proper ID within the range";
+    // Messages for validation (commented out)
+    // public static final String MESSAGE_NaN = "Please provide a proper ID (integer)";
+    // public static final String MESSAGE_OUT_OF_BOUNDS = "Please provide a proper ID within the range";
 
     private final Index index;
 
-    public ViewCommand(Index index){
+    /**
+     * Constructs a {@code ViewCommand} with the specified {@code Index}.
+     *
+     * @param index The index of the person to view.
+     * @throws NullPointerException if the index is null.
+     */
+    public ViewCommand(Index index) {
         requireNonNull(index);
         this.index = index;
     }
+
+    /**
+     * Executes the view command, displaying the details of the person identified by the index.
+     *
+     * @param model The model containing the list of persons.
+     * @return A {@code CommandResult} indicating the success of the command.
+     * @throws CommandException If the index is out of bounds or if an error occurs when loading the new window.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -50,7 +70,6 @@ public class ViewCommand extends Command {
             // Pass the selected person to the controller
             controller.setPersonDetails(personToShow);
 
-
             // Create a new stage (window) for the new window
             Stage newStage = new Stage();
             newStage.setTitle("Person Details");
@@ -59,7 +78,7 @@ public class ViewCommand extends Command {
             Scene scene = new Scene(root);
             newStage.setScene(scene);
 
-            // Show the new window (non-modal, separate from main window)
+            // Show the new window (non-modal, separate from the main window)
             newStage.show();
 
         } catch (IOException e) {
@@ -67,16 +86,20 @@ public class ViewCommand extends Command {
         }
 
         return new CommandResult("Person details displayed.");
-
     }
 
+    /**
+     * Compares this {@code ViewCommand} with another object for equality.
+     *
+     * @param other The other object to compare against.
+     * @return {@code true} if the other object is the same as this one, otherwise {@code false}.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ViewCommand)) {
             return false;
         }
@@ -84,6 +107,4 @@ public class ViewCommand extends Command {
         ViewCommand otherViewCommand = (ViewCommand) other;
         return index.equals(otherViewCommand.index);
     }
-
-
 }
