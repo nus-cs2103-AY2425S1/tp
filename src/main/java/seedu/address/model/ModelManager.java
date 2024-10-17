@@ -124,8 +124,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeGroup(Group group) {
-        requireNonNull(group);
+    public void removeGroup(String groupName) {
+        requireNonNull(groupName);
+        Group group = new Group(groupName);
         addressBook.removeGroup(group);
     }
 
