@@ -38,11 +38,11 @@ public interface Logic {
      */
     ObservableList<Person> getFilteredPersonList();
 
-
-    /**
-     * Returns an unmodifiable view of the filtered list of persons
-     */
+    /** Returns an unmodifiable view of the filtered list of owners */
     ObservableList<Owner> getFilteredOwnerList();
+
+    /** Returns an unmodifiable view of the filtered list of pets */
+    ObservableList<Pet> getFilteredPetList();
 
     /**
      * Returns an unmodifiable view of the filtered list of persons

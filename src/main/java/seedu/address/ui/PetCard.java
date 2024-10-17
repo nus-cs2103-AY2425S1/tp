@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.pet.Pet;
 
 /**
- * An UI component that displays information of a {@code Pet}.
+ * A UI component that displays information of a {@code Pet}.
  */
 public class PetCard extends UiPart<Region> {
 
