@@ -149,7 +149,7 @@ This feature allows you to enter and save detailed records for new customers. Ea
 | NAME      | Alphanumeric, case insensitive                   | Accepts all names without case sensitivity. Names will be displayed in block letters for clarity and consistency. |
 | PHONE     | 8-digit number, starts with 8 or 9               | Ensures the contact number is valid in Singapore.                                                                 |
 | EMAIL     | Must include "@" and domain, case insensitive    | Verifies that the email address is in a standard format.                                                          |
-| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbol alike /.                    |
+| ADDRESS   | Any text, case insensitive                       | Accepts all addresses without case sensitivity. Addresses can have numbers and symbols alike /.                    |
 | JOB       | Any text, case insensitive                       | Accepts all job titles without case sensitivity.                                                                  |
 | INCOME    | Non-negative integers                            | Only positive numbers or zero are valid for income fields.                                                        |
 | TIER      | [optional] String (gold, silver, bronze, reject) | Defines the specific credit card tier to be assigned or updated.                                                  |
