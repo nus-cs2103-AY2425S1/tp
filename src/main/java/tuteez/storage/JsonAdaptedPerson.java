@@ -15,6 +15,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String telegramUsername;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
@@ -38,11 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("telegramUsername") String telegramUsername,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.telegramUsername = telegramUsername;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -59,6 +64,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        telegramUsername = source.getTelegramUsername().telegramUsername;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -114,10 +120,24 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        TelegramUsername modelTelegramUsername = getModelTelegramUsername(telegramUsername);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         final Set<Lesson> modelLessons = new HashSet<>(personLessons);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelLessons);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTelegramUsername, modelTags,
+                modelLessons);
+    }
+
+    private TelegramUsername getModelTelegramUsername(String username) throws IllegalValueException {
+        if (username == null) {
+            return TelegramUsername.empty();
+        }
+        if (!TelegramUsername.isValidTelegramHandle(username)) {
+            throw new IllegalValueException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return TelegramUsername.of(username);
     }
 
 }

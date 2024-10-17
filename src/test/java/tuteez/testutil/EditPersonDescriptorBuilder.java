@@ -10,6 +10,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setTelegramUsername(person.getTelegramUsername());
         descriptor.setTags(person.getTags());
         descriptor.setLessons(person.getLessons());
     }
@@ -70,6 +72,18 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code TelegramUsername} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTelegram(String username) {
+        if (username == null) {
+            descriptor.setTelegramUsername(TelegramUsername.empty());
+        } else {
+            descriptor.setTelegramUsername(TelegramUsername.of(username));
+        }
         return this;
     }
 
