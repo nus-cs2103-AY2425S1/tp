@@ -26,7 +26,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(NameValidator.of().validate(name), MESSAGE_CONSTRAINTS);
-        this.value = name;
+        this.value = name.trim();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Name {
         }
 
         Name otherName = (Name) other;
-        return value.equals(otherName.value);
+        return value.equalsIgnoreCase(otherName.value);
     }
 
     /**
