@@ -24,7 +24,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -77,11 +76,6 @@ public class AddCommandParserTest {
         // multiple phones
         assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-
-        // multiple modules
-        assertParseFailure(parser, MODULE_DESC_AMY + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
-
         // multiple genders
         assertParseFailure(parser, GENDER_DESC_BOB + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GENDER));
@@ -89,9 +83,9 @@ public class AddCommandParserTest {
         // multiple fields repeated
         assertParseFailure(parser,
                 validExpectedPersonString + PHONE_DESC_AMY + NAME_DESC_AMY + GENDER_DESC_BOB
-                        + MODULE_DESC_BOB + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_MODULE, PREFIX_GENDER,
-                        PREFIX_PHONE, PREFIX_MODULE));
+                        + validExpectedPersonString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_GENDER,
+                        PREFIX_PHONE));
 
         // invalid value followed by valid value
 
@@ -102,11 +96,6 @@ public class AddCommandParserTest {
         // invalid phone
         assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-
-        // invalid module
-        assertParseFailure(parser, INVALID_MODULE_DESC + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
-
         // invalid gender
         assertParseFailure(parser, INVALID_GENDER_DESC + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GENDER));
@@ -124,10 +113,6 @@ public class AddCommandParserTest {
         // invalid gender
         assertParseFailure(parser, validExpectedPersonString + INVALID_GENDER_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GENDER));
-
-        // invalid module
-        assertParseFailure(parser, validExpectedPersonString + INVALID_MODULE_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_MODULE));
     }
 
     @Test
@@ -149,12 +134,11 @@ public class AddCommandParserTest {
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + GENDER_DESC_BOB + MODULE_DESC_BOB,
                 expectedMessage);
-
-        // missing module prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + VALID_MODULE_BOB,
-                expectedMessage);
         // missing gender prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_GENDER_BOB,
+                expectedMessage);
+        // missing module prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + GENDER_DESC_BOB + VALID_MODULE_BOB,
                 expectedMessage);
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_GENDER_BOB + VALID_MODULE_BOB,

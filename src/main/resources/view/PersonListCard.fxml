@@ -45,6 +45,5 @@
         <FlowPane fx:id="modules" />
       </HBox>
     </HBox>
-
   </GridPane>
 </HBox>

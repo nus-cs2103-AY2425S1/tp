@@ -498,7 +498,7 @@ Priorities: High (must have) - `* * *`, Medium (Good to have) - `* *`, Low (nice
     * *a1. StoreClass restores the previous action and display a success message.
 
       Use case ends.
-  
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.

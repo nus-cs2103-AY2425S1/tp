@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -80,9 +81,16 @@ public class PersonTest {
     }
 
     @Test
+    public void testSamplePersonData() {
+        int expectedSize = 10;
+        Person[] expectedPersons = SampleDataUtil.getSamplePersons();
+        assertEquals(expectedSize, expectedPersons.length);
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", gender=" + ALICE.getGender() + ", module=" + ALICE.getModule()
+                + ", gender=" + ALICE.getGender() + ", modules=" + ALICE.getModules()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

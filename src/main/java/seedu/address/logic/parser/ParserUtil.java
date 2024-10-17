@@ -94,7 +94,17 @@ public class ParserUtil {
         }
         return new Module(trimmedModuleName);
     }
-
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     */
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String module : modules) {
+            moduleSet.add(parseModule(module));
+        }
+        return moduleSet;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
