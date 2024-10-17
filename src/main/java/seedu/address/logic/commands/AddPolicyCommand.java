@@ -59,7 +59,7 @@ public class AddPolicyCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
 
-        PolicySet editedPolicySet = addPoliciesToPerson(policies, personToEdit.getPolicySet());
+        PolicySet editedPolicySet = updatePolicies(policies, personToEdit.getPolicySet());
 
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -81,7 +81,7 @@ public class AddPolicyCommand extends Command {
      * @return A new PolicySet with the added policies.
      * @throws CommandException if there are duplicate policies.
      */
-    private PolicySet addPoliciesToPerson(PolicySet policiesToAdd, PolicySet existingPolicies) throws CommandException {
+    private PolicySet updatePolicies(PolicySet policiesToAdd, PolicySet existingPolicies) throws CommandException {
         for (Policy policy : policiesToAdd) {
             if (existingPolicies.contains(policy.getType())) { // Checking for duplicates
                 throw new CommandException(MESSAGE_DUPLICATES);
