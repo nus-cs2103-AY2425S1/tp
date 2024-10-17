@@ -112,21 +112,23 @@ Examples:
 
 ### Locating beneficiaries by name: `find`
 
-Finds beneficiaries whose names or address contain any of the given keywords.
+Finds beneficiaries whose names and address contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find n/KEYWORD [MORE_KEYWORDS] a/KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Partial names will also be matched e.g. `Han` will match `Hans`
 * Beneficiaries matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-  e.g. `Hans serangoon` will return `Hans Gruber` who has the address `Serangoon street 2, blk 111`
+  - e.g. `find n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  - e.g. `find n/Hans a/serangoon` will return `Hans Gruber` who has the address `Serangoon street 2, blk 111`
+
 
 Examples:
-* `find John` returns `johnny` and `John Doe`
-* `find benson carl` returns `Benson Meier`, `Carl Kurz`<br>
+* `find n/ John` returns `johnny` and `John Doe`
+* `find n/ benson carl` returns `Benson Meier`, `Carl Kurz`<br>
+* `find a/ serangoon` will return `Bernice Yu` with address `Blk 30 Lorong Serangoon Gardens, #07-18` and `David Li` with address `Blk 436 Serangoon Gardens 26, #16-43`
   ![result for 'find benson carl'](images/findBensonCarlResult.png)
 
 
