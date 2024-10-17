@@ -1,8 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,15 +21,14 @@ class JsonAdaptedOwner {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedOwner} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedOwner(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                            @JsonProperty("email") String email, @JsonProperty("address") String address
-    ) {
+                            @JsonProperty("email") String email, @JsonProperty("address") String address) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
