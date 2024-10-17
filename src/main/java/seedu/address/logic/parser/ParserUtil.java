@@ -61,7 +61,7 @@ public class ParserUtil {
      */
     public static IdentityNumber parseIdentityNumber(String identityNumber) throws ParseException {
         requireNonNull(identityNumber);
-        String trimmedIdentityNumber = identityNumber.trim();
+        String trimmedIdentityNumber = identityNumber.trim().toUpperCase();
         if (!IdentityNumber.isValidIdentityNumber(trimmedIdentityNumber)) {
             throw new ParseException(IdentityNumber.MESSAGE_CONSTRAINTS);
         }
@@ -171,18 +171,5 @@ public class ParserUtil {
             logSet.add(parseLog(logDetails));
         }
         return logSet;
-    }
-
-
-    /**
-     * Parses a {@code String id} into a formatted {@code String}.
-     * @param id in the form of a string
-     * @return Formatted string
-     * @throws ParseException
-     */
-    public static String parseId(String id) throws ParseException {
-        requireNonNull(id);
-        String formattedId = id.trim().toUpperCase();
-        return formattedId;
     }
 }

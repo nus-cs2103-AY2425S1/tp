@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.log.Log;
 import seedu.address.model.person.IdentityNumber;
 
 /**
@@ -12,7 +15,7 @@ public class ListLogsCommand extends Command {
     public static final String COMMAND_WORD = "logs";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
-    public static final String MESSAGE_SUCCESS = "Listed all logs";
+    public static final String MESSAGE_SUCCESS = "Listed all logs for: ";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all logs of a person identified by the NRIC.\n"
@@ -23,24 +26,26 @@ public class ListLogsCommand extends Command {
     /**
      * Creates a ListLogsCommand to list the logs of the specified person
      */
-    public ListLogsCommand(String id) {
-        try {
-            this.identityNumber = new IdentityNumber(id);
-        } catch (IllegalArgumentException e) {
-            //TODO: handle exception later
-            throw new IllegalArgumentException("Invalid NRIC");
-        }
+    public ListLogsCommand(IdentityNumber id) {
+        this.identityNumber = id;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException("ListLogsCommand not implemented yet");
-
         //TODO: Handle behaviour later
-        //requireNonNull(model);
-        // Temporary stub
-        //model.updateFilteredLogsListById(this.identityNumber);
-        //return new CommandResult("The NRIC you inputted is: " + "nric");
+        requireNonNull(model);
+        model.updateFilteredLogListById(this.identityNumber);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("The NRIC you inputted is: ").append(this.identityNumber.toString()).append("\n");
+        sb.append("The logs for this person are:\n");
+
+        for (Log log : model.getFilteredLogList()) {
+            sb.append("Appointment Date: ").append(log.getAppointmentDate())
+                    .append(", Entry: ").append(log.getEntry()).append("\n");
+        }
+
+        return new CommandResult(sb.toString());
     }
 
     @Override
@@ -53,6 +58,8 @@ public class ListLogsCommand extends Command {
             return false;
         }
         ListLogsCommand e = (ListLogsCommand) other;
+
+        // Since ListLogsCommand relies soley on id, last check to compare only id
         return identityNumber.equals(e.identityNumber);
     }
 }

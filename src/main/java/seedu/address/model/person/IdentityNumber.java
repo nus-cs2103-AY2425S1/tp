@@ -30,6 +30,7 @@ public class IdentityNumber {
      * @param identificationNumber a valid and unique Identification Number of the patient.
      */
     public IdentityNumber(String identificationNumber) {
+        identificationNumber = identificationNumber.toUpperCase();
         requireNonNull(identificationNumber);
         checkArgument(isValidIdentityNumber(identificationNumber), MESSAGE_CONSTRAINTS);
         this.identificationNumber = identificationNumber;
