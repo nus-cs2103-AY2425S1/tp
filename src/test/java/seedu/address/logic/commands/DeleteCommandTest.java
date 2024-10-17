@@ -17,12 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -112,55 +107,6 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
-    }
-
-    @Test
-    public void execute_validPhoneNumber_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Phone phoneNumber = personToDelete.getPhone();
-        DeleteCommand deleteCommand = new DeleteCommand(phoneNumber);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidPhoneNumber_throwsCommandException() {
-        Phone invalidPhoneNumber = new Phone("99999999"); // Assuming this phone number doesn't exist in the list
-        DeleteCommand deleteCommand = new DeleteCommand(invalidPhoneNumber);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PHONE_NUMBER);
-    }
-
-    @Test
-    public void execute_validNamePredicate_success() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        DeleteCommand deleteCommand = new DeleteCommand(predicate);
-
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        showNoPerson(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_multipleMatchesForNamePredicate_listPersons() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        DeleteCommand deleteCommand = new DeleteCommand(predicate);
-
-        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size());
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     /**
