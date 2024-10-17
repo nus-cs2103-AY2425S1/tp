@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
