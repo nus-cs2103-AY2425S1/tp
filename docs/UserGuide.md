@@ -4,9 +4,15 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Eventory User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Eventory is a **desktop app for managing contacts and events, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+Main Features:
+- Manage big and complex contact webs with numerous information fields, with ability to save critical details
+- Schedule and manage daily tasks across large teams, track their completion
+- Have advanced automated messaging tools, send and schedule reminders/updates in bulk
+
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -30,9 +36,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add p n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete p 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -49,7 +55,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add p n/NAME`, `NAME` is a parameter which can be used as `add p n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -128,11 +134,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name: `find p`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find p KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -142,15 +148,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find p John` returns `john` and `John Doe`
+* `find p alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Locating event by name: `find`
+### Locating event by name: `find e`
 
 Finds events whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find e KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `sentosa` will match `Sentosa`
 * The order of the keywords does not matter. e.g. `Sentosa Party` will match `Party Sentosa`
@@ -160,11 +166,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
   e.g. `Sentosa Party` will return events with the words `Party`, `Sentosa`
 
 Examples:
-* `find Sentosa` returns `sentosa` and `Sentosa Party`
-* `find Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find e Sentosa` returns `sentosa` and `Sentosa Party`
+* `find e Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
+  ![result for 'find sentosa party'](images/findSentosaParty.png)
 
-### Locating persons by tag: `search`
+### Locating persons by tag: `search p`
 
 Finds persons whose tags contain any of the given keywords.
 
@@ -178,9 +184,9 @@ Format: `search KEYWORD [MORE_KEYWORDS]`
   e.g. `Work Friends` will return persons with tags `Hobby Friends`, `Work Partners`
 
 Examples:
-* `search Friends` returns persons with tag name `Friends` and `Work Friends`
-* `search Work Friends` returns persons with tag name `Gaming Friends`, `Work Supplier`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `search p Friends` returns persons with tags named `Friends`
+* `search p Work Friends` returns persons with tags named `Friends` or `Work`<br>
+  ![result for 'search Work Friends'](images/searchWorkFriendsResult.png)
 
 ### Deleting a person : `delete p`
 
@@ -194,7 +200,9 @@ Format: `delete p INDEX`
 
 Examples:
 * `list` followed by `delete p 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
+  ![result for 'delete p 2'](images/deletePersonBefore.png)
+  ![result for 'delete p 2'](images/deletePersonAfter.png)
+* `find p Betsy` followed by `delete p 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting an event : `delete e`
 
@@ -208,7 +216,9 @@ Format: `delete e INDEX`
 
 Examples:
 * `list` followed by `delete e 2` deletes the 2nd event in the address book.
-* `find Friends` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
+    ![result for 'delete e 2'](images/deleteEventBefore.png)
+    ![result for 'delete e 2'](images/deleteEventAfter.png)
+* `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -259,16 +269,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Person**    | `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Add Event**    | `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​` <br> e.g., `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`
-**Clear**  | `clear`
-**Delete Person** | `delete p INDEX`<br> e.g., `delete p 3`
-**Delete Event** | `delete e INDEX`<br> e.g., `delete e 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find Person**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Find Event**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Sentosa`
-**Search Person by Tag**   | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search Friends`
-**List**   | `list`
-**Help**   | `help`
+| Action                   | Format, Examples                                                                                                                                                          |
+|--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Person**           | `add p n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add p n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add Event**            | `add e n/NAME a/ADDRESS s/START_TIME [t/TAG]…​` <br> e.g., `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`                                                 |
+| **Clear**                | `clear`                                                                                                                                                                   |
+| **Delete Person**        | `delete p INDEX`<br> e.g., `delete p 3`                                                                                                                                   |
+| **Delete Event**         | `delete e INDEX`<br> e.g., `delete e 3`                                                                                                                                   |
+| **Edit**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Find Person**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p James Jake`                                                                                                              |
+| **Find Event**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e Sentosa`                                                                                                                 |
+| **Search Person by Tag** | `search KEYWORD [MORE_KEYWORDS]`<br> e.g., `search Friends`                                                                                                               |
+| **List**                 | `list`                                                                                                                                                                    |
+| **Help**                 | `help`                                                                                                                                                                    |
