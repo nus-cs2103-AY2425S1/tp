@@ -36,6 +36,6 @@ public class Bto extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Bto " + super.toString();
     }
 }

@@ -39,6 +39,6 @@ public class Condo extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Condo " + super.toString();
     }
 }

@@ -18,7 +18,6 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Person objects.
  */
 public class PersonBuilder {
-
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -30,6 +29,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private List<Property> buyingProperties = new ArrayList<>();
+    private List<Property> sellingProperties = new ArrayList<>();
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,6 +40,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        buyingProperties = new ArrayList<>();
+        sellingProperties = new ArrayList<>();
     }
 
     /**
@@ -51,6 +53,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        buyingProperties = new ArrayList<>(personToCopy.getListOfBuyingProperties());
+        sellingProperties = new ArrayList<>(personToCopy.getListOfSellingProperties());
     }
 
     /**
@@ -101,8 +105,15 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags, null, buyingProperties);
+    /**
+     * Sets the {@code sellingProperties} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSellProperty(Property property) {
+        this.sellingProperties.add(property);
+        return this;
     }
 
+    public Person build() {
+        return new Person(name, phone, email, address, tags, sellingProperties, buyingProperties);
+    }
 }

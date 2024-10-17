@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -135,6 +136,22 @@ public class Person {
      */
     public void addSellProperty(Property property) {
         sellingProperties.add(property);
+    }
+
+    /**
+     * Deletes a property from the list of properties to sell.
+     * @param index One based Index of property to delete based on user's view.
+     */
+    public void deleteSellProperty(Index index) {
+        sellingProperties.remove(index.getZeroBased());
+    }
+
+    /**
+     * Deletes a property from the list of properties to buy.
+     * @param index One based Index of property to delete based on user's view.
+     */
+    public void deleteBuyProperty(Index index) {
+        buyingProperties.remove(index.getZeroBased());
     }
 
     /**

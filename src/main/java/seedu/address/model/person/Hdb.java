@@ -40,6 +40,6 @@ public class Hdb extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Hdb " + super.toString();
     }
 }

@@ -40,6 +40,6 @@ public class OtherProperty extends Property {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "OtherProperty " + super.toString();
     }
 }

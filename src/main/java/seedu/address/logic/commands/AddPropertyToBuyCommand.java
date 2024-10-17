@@ -23,12 +23,12 @@ import seedu.address.model.person.Property;
 public class AddPropertyToBuyCommand extends Command {
     public static final String COMMAND_WORD = "addBuy";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to buy"
-            + " for this specific person. "
-            + "Parameters: INDEX (Must be a positive integer)"
-            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
-            + PREFIX_BUYING_PRICE + "[BUYING_PRICE]"
-            + PREFIX_POSTAL_CODE + "[POSTAL_CODE]"
-            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
+            + " for this specific person. \n"
+            + "Parameters: INDEX (Must be a positive integer) "
+            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE] "
+            + PREFIX_BUYING_PRICE + "[SELLING_PRICE] "
+            + PREFIX_POSTAL_CODE + "[POSTAL_CODE] "
+            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER] "
             + PREFIX_TAG + "[TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
@@ -79,7 +79,7 @@ public class AddPropertyToBuyCommand extends Command {
         }
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, propertyToBuyToBeAdded));
     }
 
     @Override

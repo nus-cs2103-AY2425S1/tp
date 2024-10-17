@@ -136,7 +136,7 @@ public class HdbTest {
 
     @Test
     public void toString_success() {
-        String expectedString = "[123456] Unit Number: 01-01";
+        String expectedString = "Hdb Postal Code: 123456;  Unit Number: 01-01;  Price: 1000000; Tags: [Tag1]";
         assertEquals(expectedString, hdb1.toString());
     }
 }
