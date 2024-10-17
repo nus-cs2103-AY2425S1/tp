@@ -48,7 +48,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
    Type the command in the command box and press Enter to execute it. For example, typing **help** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   - `list` : Lists all contacts.
+   - `list-client` : Lists all contacts.
 
    - `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a client named John Doe to MATER.
 
@@ -198,11 +198,11 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ​
 
 ---
 
-<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature">list</span></h3>
+<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature">list-client</span></h3>
 
 Shows a list of all clients in MATER.
 
-**Format:** `list`
+**Format:** `list-client`
 
 **Parameters:** None.
 
@@ -337,7 +337,7 @@ delete-client INDEX
 
 **Examples:**
 
-- `list`
+- `list-client`
   `delete-client 2`
   Deletes the 2nd client in the MATER.
 - `find Betsy`
@@ -432,9 +432,9 @@ Action             | Format & Examples
 **Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>
 e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
 e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
-**List Clients**   | `list`
+**List Clients**   | `list-client`
 **Edit Client**    | `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit-client 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit-client 2 n/Betsy Crower i/`
-**Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH 9514 P`
+**Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH9514P`
 **Delete Client**  | `delete-client INDEX`<br>e.g., `delete-client 3`
 **Clear**          | `clear`
 **Exit**           | `exit`
