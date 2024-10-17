@@ -18,10 +18,10 @@ public class IncomeComparisonPredicate implements Predicate<Person> {
     /**
      * Constructs an {@code IncomeComparisonPredicate}.
      *
-     * @param incomeThreshold The threshold income to compare against.
      * @param incomeComparisonOperator The operator used to compare the person's income with the threshold.
+     * @param incomeThreshold          The threshold income to compare against.
      */
-    public IncomeComparisonPredicate(int incomeThreshold, IncomeComparisonOperator incomeComparisonOperator) {
+    public IncomeComparisonPredicate(IncomeComparisonOperator incomeComparisonOperator, int incomeThreshold) {
         requireNonNull(incomeComparisonOperator);
         this.incomeThreshold = incomeThreshold;
         this.incomeComparisonOperator = incomeComparisonOperator;

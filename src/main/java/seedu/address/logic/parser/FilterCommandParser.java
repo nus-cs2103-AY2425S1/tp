@@ -114,11 +114,11 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             String operatorAndIncome = argMultimap.getValue(PREFIX_INCOME).get();
 
-            IncomeComparisonOperator operator = ParserUtil.parseIncomeComparisonOperator(
-                    operatorAndIncome.substring(0, 1));
+            IncomeComparisonOperator operator =
+                    ParserUtil.parseIncomeComparisonOperator(operatorAndIncome.substring(0, 1));
             int income = ParserUtil.parseIncome(operatorAndIncome.substring(1)).value;
 
-            predicates.add(new IncomeComparisonPredicate(income, operator));
+            predicates.add(new IncomeComparisonPredicate(operator, income));
         }
         if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
             String substring = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
