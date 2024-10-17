@@ -41,12 +41,12 @@ public class AddressBookParser {
      */
     public Command parseCommand(String userInput) throws ParseException {
         if (userInput.trim().length() >= 2
-                && userInput.trim().substring(userInput.trim().length() - 2).equals(PREFIX_TAG.getPrefix().trim())
-                && userInput.trim().length() < userInput.length()) {
+                && userInput.trim().substring(userInput.trim().length() - 2).equals(
+                PREFIX_TAG.getPrefix().trim()) && userInput.trim().length() < userInput.length()) {
+
             int lastIndex = userInput.lastIndexOf(PREFIX_TAG.getPrefix());
             userInput = userInput.substring(0, lastIndex + 2)
-                    + userInput.substring(lastIndex + 2)
-                        .replaceAll("\\s+", " ");
+                    + userInput.substring(lastIndex + 2).replaceAll("\\s+", " ");
         } else {
             userInput = userInput.trim();
         }
@@ -65,7 +65,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddCommand.SHORT_COMMAND_WORD, AddCommand.LONG_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD:

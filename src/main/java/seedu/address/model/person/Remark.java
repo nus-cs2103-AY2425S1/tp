@@ -13,6 +13,7 @@ public class Remark {
 
     public static final String VALIDATION_REGEX =
             "[\\p{Alnum}][\\p{Alnum} ]*";
+
     public final String value;
 
     /**
@@ -25,6 +26,10 @@ public class Remark {
         value = remark;
     }
 
+    public static boolean isValidRemark(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
     @Override
     public String toString() {
         return value;
@@ -35,10 +40,6 @@ public class Remark {
         return other == this // short circuit if same object
                 || (other instanceof Remark // instanceof handles nulls
                 && value.equals(((Remark) other).value)); // state check
-    }
-
-    public static boolean isValidRemark(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override
