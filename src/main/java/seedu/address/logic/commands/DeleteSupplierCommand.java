@@ -35,8 +35,16 @@ public class DeleteSupplierCommand extends Command {
     }
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof DeleteSupplierCommand
-                && targetIndex.equals(((DeleteSupplierCommand) other).targetIndex));
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeleteSupplierCommand)) {
+            return false;
+        }
+
+        DeleteSupplierCommand otherDeleteCommand = (DeleteSupplierCommand) other;
+        return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 }

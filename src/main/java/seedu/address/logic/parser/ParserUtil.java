@@ -165,11 +165,12 @@ public class ParserUtil {
      * @throws ParseException if the given {@code statusString} is invalid.
      */
     public static SupplierStatus parseSupplierStatus(String statusString) throws ParseException {
-        try {
-            return new SupplierStatus(statusString.trim());
-        } catch (IllegalArgumentException e) {
+        requireNonNull(statusString);
+        String trimmedStatus = statusString.trim();
+        if (!SupplierStatus.isValidStatus(trimmedStatus)) {
             throw new ParseException(SupplierStatus.MESSAGE_CONSTRAINTS);
         }
+        return new SupplierStatus(trimmedStatus);
     }
 
     /**

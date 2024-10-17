@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SupplierStatus {
     public static final String MESSAGE_CONSTRAINTS = "Status should be either active or inactive";
-    public static final String VALIDATION_REGEX = "^$|active|inactive";
+    public static final String VALIDATION_REGEX = "^(active|inactive)$";
     public final String status;
 
     /**

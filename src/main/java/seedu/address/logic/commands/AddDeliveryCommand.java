@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_INDEX;
@@ -24,14 +25,15 @@ public class AddDeliveryCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     //to change later
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a delivery to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
+            + " : Adds a delivery to the address book. "
             + "Parameters: "
             + PREFIX_DATETIME + " dd-mm-yyyy hh:mm "
             + PREFIX_SUPPLIER_INDEX + " SUPPLIER_INDEX "
             + PREFIX_PRODUCT + " PRODUCT "
             + PREFIX_QUANTITY + " QUANTITY kg/g/litres/ml/units"
             + PREFIX_COST + " COST\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + PREFIX_DATETIME + " 18-06-2024 17:00 "
             + PREFIX_SUPPLIER_INDEX + " 1 "
             + PREFIX_PRODUCT + " bread "

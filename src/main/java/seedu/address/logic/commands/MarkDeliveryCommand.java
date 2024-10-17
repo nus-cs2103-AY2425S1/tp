@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DELIVERIES;
 
 import seedu.address.commons.core.index.Index;
@@ -17,10 +18,10 @@ public class MarkDeliveryCommand extends Command {
 
     public static final String COMMAND_WORD = "mark";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + ": Marks the status of the delivery identified by the index number used in the displayed delivery list.\n"
-            + "Parameters: -d INDEX (must be a positive integer) STATUS (PENDING, DELIVERED, CANCELLED)\n"
-            + "Example: " + COMMAND_WORD + " -d 1 DELIVERED";
+            + "Parameters: INDEX (must be a positive integer) STATUS (PENDING, DELIVERED, CANCELLED)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " 1 DELIVERED";
 
     public static final String MESSAGE_MARK_DELIVERY_SUCCESS = "Marked Delivery: %1$s as %2$s";
 

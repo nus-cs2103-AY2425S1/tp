@@ -4,6 +4,8 @@ package seedu.address.logic.parser;
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
 public class CliSyntax {
+    public static final Prefix PREFIX_SUPPLIER = new Prefix("-s");
+    public static final Prefix PREFIX_DELIVERY = new Prefix("-d");
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
@@ -13,8 +15,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_COMPANY = new Prefix("com/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_PRODUCT = new Prefix("pro/");
+    public static final Prefix PREFIX_SUPPLIER_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_DATETIME = new Prefix("on/");
-    public static final Prefix PREFIX_SUPPLIER_INDEX = new Prefix("s/");
+    public static final Prefix PREFIX_SUPPLIER_INDEX = new Prefix("i/");
     public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
     public static final Prefix PREFIX_COST = new Prefix("c/");
 }

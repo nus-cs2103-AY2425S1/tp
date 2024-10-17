@@ -48,8 +48,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Product> productList = ParserUtil.parseProducts(argMultimap.getAllValues(PREFIX_PRODUCT));
-        SupplierStatus status = new SupplierStatus("");
-
+        // SupplierStatus status = ParserUtil.parseSupplierStatus(argMultimap.getValue(PREFIX_SUPPLIER_STATUS).get());
+        SupplierStatus status = new SupplierStatus("active");
         Person person = new Person(name, phone, email, company, tagList, productList, status);
 
         return new AddCommand(person);
