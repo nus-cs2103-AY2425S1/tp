@@ -14,6 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 
 /**
@@ -55,13 +56,7 @@ public class EditScheduleCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Meeting> lastShownList = model.getWeeklySchedule();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_SCHEDULE_INDEX);
-        }
-
-        Meeting meetingToEdit = lastShownList.get(targetIndex.getZeroBased());
+        Meeting meetingToEdit = getMeeting(model);
 
         String updatedName = editScheduleDescriptor.getName().orElse(meetingToEdit.getMeetingName());
         LocalDate updatedDate = editScheduleDescriptor.getDate().orElse(meetingToEdit.getMeetingDate());
@@ -85,6 +80,23 @@ public class EditScheduleCommand extends Command {
                 updatedName, updatedDate.toString(), updatedTime.toString()));
     }
 
+    private Meeting getMeeting(Model model) throws CommandException {
+        List<Meeting> lastShownMeetingList = model.getWeeklySchedule();
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+
+        int contactIndex = editScheduleDescriptor.getContactIndex().orElseThrow();
+
+        if (contactIndex < 0 || contactIndex >= lastShownPersonList.size()) {
+            throw new CommandException("The contact index provided is invalid.");
+        }
+
+        if (targetIndex.getZeroBased() >= lastShownMeetingList.size()) {
+            throw new CommandException(MESSAGE_INVALID_SCHEDULE_INDEX);
+        }
+
+        return lastShownMeetingList.get(targetIndex.getZeroBased());
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -92,11 +104,10 @@ public class EditScheduleCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditScheduleCommand)) {
+        if (!(other instanceof EditScheduleCommand otherEditScheduleCommand)) {
             return false;
         }
 
-        EditScheduleCommand otherEditScheduleCommand = (EditScheduleCommand) other;
         return targetIndex.equals(otherEditScheduleCommand.targetIndex)
                 && editScheduleDescriptor.equals(otherEditScheduleCommand.editScheduleDescriptor);
     }
@@ -117,6 +128,7 @@ public class EditScheduleCommand extends Command {
         private String name;
         private LocalDate date; // Use LocalDate for date representation
         private LocalTime time; // Use LocalTime for time representation
+        private int contactIndex;
 
         public EditScheduleDescriptor() {
         }
@@ -145,6 +157,14 @@ public class EditScheduleCommand extends Command {
             this.time = time;
         }
 
+        public Optional<Integer> getContactIndex() {
+            return Optional.of(contactIndex);
+        }
+
+        public void setContactIndex(int contactIndex) {
+            this.contactIndex = contactIndex;
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -152,11 +172,10 @@ public class EditScheduleCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditScheduleDescriptor)) {
+            if (!(other instanceof EditScheduleDescriptor otherDescriptor)) {
                 return false;
             }
 
-            EditScheduleDescriptor otherDescriptor = (EditScheduleDescriptor) other;
             return getName().equals(otherDescriptor.getName())
                     && getDate().equals(otherDescriptor.getDate())
                     && getTime().equals(otherDescriptor.getTime());
