@@ -83,6 +83,6 @@ public class PersonUtil {
      * Returns a find command string for finding a person by tag.
      */
     public static String getFindCommandByTag(Person person) {
-        return FindCommand.COMMAND_WORD + " " + PREFIX_TAG + person.getTags().iterator().next().tagName;
+        return FindCommand.COMMAND_WORD + " " + PREFIX_TAG + person.getTag().tagCode;
     }
 }

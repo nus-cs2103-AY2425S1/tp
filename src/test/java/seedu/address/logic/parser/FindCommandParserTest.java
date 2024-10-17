@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NEW;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -125,8 +125,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_validTag_returnsFindCommand() {
         // Test parsing by tag
-        FindCommand expectedCommand = new FindCommand(new TagPredicate(Arrays.asList(VALID_TAG_FRIEND)));
-        assertParseSuccess(parser, " t/friend", expectedCommand);
+        FindCommand expectedCommand = new FindCommand(new TagPredicate(Arrays.asList(VALID_TAG_NEW)));
+        assertParseSuccess(parser, " t/N", expectedCommand);
     }
 
 
