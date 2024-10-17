@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.concert.Concert;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Concert> filteredConcerts;
+    private final FilteredList<ConcertContact> filteredConcertContacts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredConcerts = new FilteredList<>(this.addressBook.getConcertList());
+        filteredConcertContacts = new FilteredList<>(this.addressBook.getConcertContactList());
     }
 
     public ModelManager() {
@@ -109,6 +112,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasConcertContact(ConcertContact concertContact) {
+        requireNonNull(concertContact);
+        return addressBook.hasConcertContact(concertContact);
+    }
+
+    @Override
+    public void addConcertContact(ConcertContact concertContact) {
+        addressBook.addConcertContact(concertContact);
+        updateFilteredConcertContactList(PREDICATE_SHOW_ALL_CONCERT_CONTACTS);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -153,6 +168,18 @@ public class ModelManager implements Model {
     public void updateFilteredConcertList(Predicate<Concert> predicate) {
         requireNonNull(predicate);
         filteredConcerts.setPredicate(predicate);
+    }
+
+    //=========== Filtered ConcertContact List Accessors =============================================================
+    @Override
+    public ObservableList<ConcertContact> getFilteredConcertContactList() {
+        return filteredConcertContacts;
+    }
+
+    @Override
+    public void updateFilteredConcertContactList(Predicate<ConcertContact> predicate) {
+        requireNonNull(predicate);
+        filteredConcertContacts.setPredicate(predicate);
     }
 
     @Override
