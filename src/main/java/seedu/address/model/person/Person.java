@@ -25,6 +25,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Remark remark;
+    private final Birthday birthday;
     /**
      * Every field must be present and not null.
      */
@@ -35,18 +36,37 @@ public class Person {
         this.email = email;
         this.address = address;
         this.remark = Remark.EMPTY_REMARK;
+        this.birthday = Birthday.EMPTY_BIRTHDAY;
         this.tags.addAll(tags);
     }
+
     /**
      * Every field must be present and not null. with non-empty remark
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+        this.birthday = Birthday.EMPTY_BIRTHDAY;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Every field must be present and not null. with non-empty remark and non-empty birthday
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Birthday birthday,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.remark = remark;
+        this.birthday = birthday;
         this.tags.addAll(tags);
     }
 
@@ -82,6 +102,10 @@ public class Person {
         return this.remark;
     }
 
+    public Birthday getBirthday() {
+        return birthday;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -115,8 +139,9 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && remark.equals(otherPerson.remark);
+                && remark.equals(otherPerson.remark)
+                && birthday.equals(otherPerson.birthday)
+                && tags.equals(otherPerson.tags);
     }
 
     @Override
@@ -134,6 +159,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
+                .add("birthday", birthday)
                 .toString();
     }
 
