@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -25,6 +26,7 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    private CommandTablePanel commandTablePanel;
     @FXML
     private Button copyButton;
 
@@ -33,6 +35,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
+
+    @FXML
+    private StackPane commandTablePlaceholder;
 
     /**
      * Creates a new HelpWindow.
@@ -151,5 +156,13 @@ public class HelpWindow extends UiPart<Stage> {
             e.printStackTrace();
         }
         return false;
+    }
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void fillInnerParts() {
+        commandTablePanel = new CommandTablePanel();
+        commandTablePlaceholder.getChildren().add(commandTablePanel.getRoot());
     }
 }
