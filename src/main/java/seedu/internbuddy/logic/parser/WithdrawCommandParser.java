@@ -19,7 +19,7 @@ public class WithdrawCommandParser implements Parser<WithdrawCommand> {
     @Override
     public WithdrawCommand parse(String args) throws ParseException {
         try {
-            Index[] indexes = ParserUtil.parseIndexes(args);
+            Index[] indexes = ParserUtil.parseWithdrawIndex(args);
             Index companyIndex = indexes[0];
             Index applicationIndex = indexes[1];
             return new WithdrawCommand(companyIndex, applicationIndex);

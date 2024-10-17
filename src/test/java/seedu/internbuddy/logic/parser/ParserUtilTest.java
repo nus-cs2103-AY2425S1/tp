@@ -59,12 +59,12 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndexes_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndexes("1 a"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWithdrawIndex("1 a"));
     }
 
     @Test
     public void parseIndexes_invalidNumberOfIndexes_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndexes("1"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseWithdrawIndex("1"));
     }
 
     @Test
@@ -72,12 +72,12 @@ public class ParserUtilTest {
         Index[] expectedIndexes = { Index.fromOneBased(1), Index.fromOneBased(2) };
 
         // No whitespaces
-        assertEquals(expectedIndexes[0], ParserUtil.parseIndexes(" 1 2 ")[0]);
-        assertEquals(expectedIndexes[1], ParserUtil.parseIndexes(" 1 2 ")[1]);
+        assertEquals(expectedIndexes[0], ParserUtil.parseWithdrawIndex(" 1 2 ")[0]);
+        assertEquals(expectedIndexes[1], ParserUtil.parseWithdrawIndex(" 1 2 ")[1]);
 
         // Leading and trailing whitespaces
-        assertEquals(expectedIndexes[0], ParserUtil.parseIndexes("  1 2  ")[0]);
-        assertEquals(expectedIndexes[1], ParserUtil.parseIndexes("  1 2  ")[1]);
+        assertEquals(expectedIndexes[0], ParserUtil.parseWithdrawIndex("  1 2  ")[0]);
+        assertEquals(expectedIndexes[1], ParserUtil.parseWithdrawIndex("  1 2  ")[1]);
     }
 
     @Test

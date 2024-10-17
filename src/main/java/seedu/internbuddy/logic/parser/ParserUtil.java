@@ -41,7 +41,7 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integers).
      */
-    public static Index[] parseIndexes(String indexes) throws ParseException {
+    public static Index[] parseWithdrawIndex(String indexes) throws ParseException {
         String[] trimmedIndexes = indexes.trim().split(" ");
         if (trimmedIndexes.length != 2) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
