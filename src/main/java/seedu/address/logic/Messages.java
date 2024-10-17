@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.PolicySet;
 
 /**
  * Container for user visible messages.
@@ -46,6 +47,11 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public static String formatPolicies(PolicySet policies) {
+
+        return policies.toString();
     }
 
 }
