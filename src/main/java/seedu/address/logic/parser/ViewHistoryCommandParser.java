@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.stream.Stream;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 
 import seedu.address.commons.exceptions.InvalidIdException;
 import seedu.address.logic.commands.ViewHistoryCommand;
