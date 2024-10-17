@@ -28,6 +28,7 @@ import seedu.address.model.person.predicates.JobContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.RemarkContainsSubstringPredicate;
+import seedu.address.model.person.predicates.TierStartsWithSubstringPredicate;
 import seedu.address.model.util.IncomeComparisonOperator;
 
 /**
@@ -124,7 +125,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             String substring = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get()).value;
             predicates.add(new RemarkContainsSubstringPredicate(substring));
         }
-
+        if (argMultimap.getValue(PREFIX_TIER).isPresent()) {
+            String substring = argMultimap.getValue(PREFIX_TIER).get();
+            predicates.add(new TierStartsWithSubstringPredicate(substring));
+        }
         return predicates;
     }
 

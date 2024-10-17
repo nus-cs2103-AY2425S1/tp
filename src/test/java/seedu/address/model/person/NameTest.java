@@ -63,5 +63,8 @@ public class NameTest {
         // case-insensitive: all lowercase -> returns true
         assertTrue(name.equals(new Name("valid name")));
 
+        // case-insensitive: mix of uppercase and lowercase -> returns true
+        assertTrue(name.equals(new Name("vAliD NamE")));
+
     }
 }

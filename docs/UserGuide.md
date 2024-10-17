@@ -266,7 +266,7 @@ This feature allows users to search for customers by specific details such as na
 
 **How to Use It:**  
 To perform a search, use the `filter` command followed by one or more flags (indicating the fields to search) and the corresponding search terms. 
- Searches are **case-insensitive** and use [**substring-matching**](#substring-matching).
+ Searches are **case-insensitive** and use [**substring-matching**](#substring-matching), **except for Tier**, which must start with the specified substring.
 
 - **Command Format:** 
   ```
@@ -300,6 +300,7 @@ To perform a search, use the `filter` command followed by one or more flags (ind
 - `a/` for Address
 - `j/` for Job
 - `r/` for Remarks
+- `t/` for Tier
 
 #### Substring Matching:
 - Substring matching is used for searches, meaning that the search term must match a part of the field in the same order as it appears in the customer record.
@@ -307,9 +308,9 @@ To perform a search, use the `filter` command followed by one or more flags (ind
 
 #### What to Expect
 - **If Successful:**
-  - Message: "Here are all the customers that match your search: (List of customers)."
+  - Message: "`x` person listed!", where `x` is the number of matching results.
 - **If Unsuccessful (No Matches Found):**
-  - Message: "No customers match your search criteria."
+  - Message: "0 persons listed!"
 - **If There is an Error:** 
   - No Valid Flags Used:
     - Message:
@@ -324,7 +325,7 @@ To perform a search, use the `filter` command followed by one or more flags (ind
 
       This will find all customers whose names contain 'Alice' and has phone number '91112222'."
 
-  - If Search Term Fails to Meet Requirement (i.e. Phone Number longer than 8 digits):
+  - Search Term Fails to Meet Requirement (i.e. Phone Number longer than 8 digits):
     - The system will display usage hints specific to the first invalid search term.
 
 ---
