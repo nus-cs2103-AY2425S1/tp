@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -159,7 +160,7 @@ class JsonAdaptedPerson {
         final Hours modelHours = new Hours(hours);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        if (role == "Tutor") {
+        if (Objects.equals(role, "Tutor")) {
             return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
         } else {
             return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
