@@ -2,9 +2,9 @@ package hallpointer.address.logic.commands;
 
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_MEMBER;
 import static hallpointer.address.logic.parser.CliSyntax.PREFIX_SESSION_NAME;
-import static hallpointer.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import hallpointer.address.commons.core.index.Index;
@@ -32,6 +32,8 @@ public class DeleteSessionCommand extends Command {
             + PREFIX_MEMBER + "1";
 
     public static final String MESSAGE_DELETE_SESSION_SUCCESS = "Deleted Session: %1$s from %2$s sessions";
+    public static final String MESSAGE_INVALID_INDEX = "Error: Invalid index specified.";
+    public static final String MESSAGE_DELETE_SESSION_FAIL = "Error: Session %1$s does not exist in member %2$s.";
 
     private final List<Index> memberIndexes;
     private final SessionName sessionName;
@@ -50,25 +52,24 @@ public class DeleteSessionCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Member> lastShownList = model.getFilteredMemberList();
+        List<Member> memberToUpdate = new ArrayList<>();
         // Check if the index is valid
         for (Index index : memberIndexes) {
             if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException("part1");
+                throw new CommandException(MESSAGE_INVALID_INDEX);
             }
-            Member memberToDeleteFrom = lastShownList.get(index.getZeroBased());
-            if (memberToDeleteFrom.getSessions().stream().noneMatch(
+            Member member = lastShownList.get(index.getZeroBased());
+            if (member.getSessions().stream().noneMatch(
                     element -> element.getSessionName().toString().equals(sessionName.toString()))) {
-                throw new CommandException(memberToDeleteFrom.toString());
+                throw new CommandException(String.format(MESSAGE_DELETE_SESSION_FAIL, sessionName.toString(),
+                        member.getName().toString()));
             }
-            try {
-                memberToDeleteFrom.removeSession(sessionName);
-                model.setMember(memberToDeleteFrom, memberToDeleteFrom);
-            } catch (Exception e) {
-                throw new CommandException("Failed to delete session: " + e.getMessage());
-            }
+            memberToUpdate.add(member);
         }
-        model.updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
-
+        for (Member member : memberToUpdate) {
+            member.removeSession(sessionName);
+            model.setMember(member, member);
+        }
 
         return new CommandResult(
                 String.format(MESSAGE_DELETE_SESSION_SUCCESS, sessionName.toString(), memberIndexes.size())

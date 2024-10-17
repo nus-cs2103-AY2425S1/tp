@@ -3,14 +3,12 @@ package hallpointer.address.logic.commands;
 import static hallpointer.address.testutil.Assert.assertThrows;
 import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
 import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -25,7 +23,6 @@ import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionName;
 import hallpointer.address.testutil.MemberBuilder;
 import hallpointer.address.testutil.SessionBuilder;
 import javafx.collections.ObservableList;
@@ -173,12 +170,6 @@ class AddSessionCommandTest {
         public void setMember(Member target, Member editedMember) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public void addSession(Session session) {
-            throw new AssertionError("This method should not be called");
-        }
-
         @Override
         public ObservableList<Member> getFilteredMemberList() {
             throw new AssertionError("This method should not be called.");
@@ -188,32 +179,7 @@ class AddSessionCommandTest {
         public void updateFilteredMemberList(Predicate<Member> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-        @Override
-        public boolean hasSession(Session session) {
-            throw new AssertionError("This method should not be called.");
-        }
 
-        @Override
-        public void deleteSession(Session sessionToDelete) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-
-        @Override
-        public void deleteSession(Member target, SessionName sessionName) {
-            throw new AssertionError("This method should not be called.");
-
-        }
-
-        @Override
-        public void setSession(Session target, Session editedSession) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public List<Session> getSessionList() {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -235,18 +201,6 @@ class AddSessionCommandTest {
 
         @Override
         public void updateFilteredMemberList(Predicate<Member> predicate) {}
-
-        @Override
-        public boolean hasSession(Session session) {
-            requireNonNull(session);
-            return sessionsAdded.stream().anyMatch(session::isSameSession);
-        }
-
-        @Override
-        public void addSession(Session session) {
-            requireNonNull(session);
-            sessionsAdded.add(session);
-        }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {

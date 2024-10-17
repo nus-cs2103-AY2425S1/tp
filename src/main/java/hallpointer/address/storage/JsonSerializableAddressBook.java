@@ -12,7 +12,6 @@ import hallpointer.address.commons.exceptions.IllegalValueException;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.member.Member;
-import hallpointer.address.model.session.Session;
 
 
 /**
@@ -25,7 +24,6 @@ class JsonSerializableAddressBook {
     private static final String MESSAGE_DUPLICATE_SESSION = "Session list contains duplicate session(s).";
 
     private final List<JsonAdaptedMember> members = new ArrayList<>();
-    private final List<JsonAdaptedSession> sessions = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given members.
@@ -37,9 +35,6 @@ class JsonSerializableAddressBook {
         if (members != null) {
             this.members.addAll(members);
         }
-        if (sessions != null) {
-            this.sessions.addAll(sessions);
-        }
     }
 
     /**
@@ -49,7 +44,6 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         members.addAll(source.getMemberList().stream().map(JsonAdaptedMember::new).collect(Collectors.toList()));
-        sessions.addAll(source.getSessionList().stream().map(JsonAdaptedSession::new).collect(Collectors.toList()));
     }
 
     /**
@@ -65,13 +59,6 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_MEMBER);
             }
             addressBook.addMember(member);
-        }
-        for (JsonAdaptedSession jsonAdaptedSession : sessions) {
-            Session session = jsonAdaptedSession.toModelType();
-            if (addressBook.hasSession(session)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_SESSION);
-            }
-            addressBook.addSession(session);
         }
         return addressBook;
     }
