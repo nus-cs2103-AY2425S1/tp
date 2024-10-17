@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
@@ -54,6 +55,14 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a set of class names containing the list of strings given.
+     */
+    public static Set<String> getClassSet(String... strings) {
+        return Arrays.stream(strings)
                 .collect(Collectors.toSet());
     }
 
