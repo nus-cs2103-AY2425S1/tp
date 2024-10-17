@@ -182,6 +182,10 @@ CareConnect data are saved in the hard disk automatically after any command that
 save
 manually.
 
+### Autocomplete commands
+
+CareConnect provides command autocompletion when pressing the Tab key. For example, typing `f` and pressing Tab will auto complete the command to `find`.
+
 ### Editing the data file
 
 CareConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are
