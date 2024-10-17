@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
@@ -22,8 +22,8 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Hours hours;
     private final Address address;
+    private final Hours hours;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -38,6 +38,10 @@ public class Person {
         this.hours = hours;
         this.tags.addAll(tags);
     }
+
+    public abstract boolean isTutor();
+
+    public abstract boolean isTutee();
 
     public Name getName() {
         return name;
@@ -58,6 +62,11 @@ public class Person {
     public Hours getHours() {
         return hours;
     }
+
+    public String getRole() {
+        return "Person";
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
