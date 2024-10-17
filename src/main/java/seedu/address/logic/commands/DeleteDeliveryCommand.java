@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -14,7 +15,7 @@ import seedu.address.model.delivery.Delivery;
 public class DeleteDeliveryCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY + " "
             + ": Deletes the delivery identified by the index number used in the displayed delivery list.\n"
             + "Parameters: -d INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " -d 1";

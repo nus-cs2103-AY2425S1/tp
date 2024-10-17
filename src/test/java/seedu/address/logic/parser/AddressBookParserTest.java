@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
 import static seedu.address.model.delivery.Status.DELIVERED;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_DELIVERY;
@@ -67,15 +69,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteSupplierCommand command = (DeleteSupplierCommand) parser.parseCommand(
+                DeleteSupplierCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteSupplierCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
     public void parseCommand_delete_delivery() throws Exception {
         DeleteDeliveryCommand command = (DeleteDeliveryCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " -d " + INDEX_FIRST_DELIVERY.getOneBased());
+                DeleteCommand.COMMAND_WORD + " " + PREFIX_DELIVERY + " " + INDEX_FIRST_DELIVERY.getOneBased());
         assertEquals(new DeleteDeliveryCommand(INDEX_FIRST_DELIVERY), command);
     }
     @Test

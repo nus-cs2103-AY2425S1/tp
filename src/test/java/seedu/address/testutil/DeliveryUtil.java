@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_INDEX;
@@ -18,7 +19,7 @@ public class DeliveryUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getDeliveryCommand(Delivery delivery) {
-        return AddDeliveryCommand.COMMAND_WORD + " -d " + getDeliveryDetails(delivery);
+        return AddDeliveryCommand.COMMAND_WORD + " " + PREFIX_DELIVERY + " " + getDeliveryDetails(delivery);
     }
 
     /**

@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLIER_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -24,7 +26,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddCommand.COMMAND_WORD + " " + PREFIX_SUPPLIER + " " + getPersonDetails(person);
     }
 
     /**
@@ -70,6 +72,7 @@ public class PersonUtil {
                 products.forEach(s -> sb.append(PREFIX_PRODUCT).append(s.productName).append(" "));
             }
         }
+        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_SUPPLIER_STATUS).append(status.status).append(" "));
         return sb.toString();
     }
 }

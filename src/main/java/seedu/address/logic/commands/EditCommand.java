@@ -146,6 +146,7 @@ public class EditCommand extends Command {
         private Company company;
         private Set<Tag> tags;
         private Set<Product> products;
+        private SupplierStatus status;
 
         public EditPersonDescriptor() {}
 
@@ -160,13 +161,14 @@ public class EditCommand extends Command {
             setCompany(toCopy.company);
             setTags(toCopy.tags);
             setProducts(toCopy.products);
+            setStatus(toCopy.status);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, company, tags, products);
+            return CollectionUtil.isAnyNonNull(name, phone, email, company, tags, products, status);
         }
 
         public void setName(Name name) {
@@ -233,6 +235,14 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Product>> getProducts() {
             return (products != null) ? Optional.of(Collections.unmodifiableSet(products)) : Optional.empty();
+        }
+
+        public void setStatus(SupplierStatus status) {
+            this.status = status;
+        }
+
+        public Optional<SupplierStatus> getStatus() {
+            return Optional.ofNullable(status);
         }
 
         @Override

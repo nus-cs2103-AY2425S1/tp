@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane products;
+    @FXML
+    private Label status;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -60,5 +62,6 @@ public class PersonCard extends UiPart<Region> {
         person.getProducts().stream()
                 .sorted(Comparator.comparing(product -> product.productName))
                 .forEach(product -> products.getChildren().add(new Label(product.productName)));
+        status.setText(person.getStatus().status);
     }
 }

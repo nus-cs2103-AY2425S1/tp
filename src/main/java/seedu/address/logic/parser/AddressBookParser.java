@@ -9,15 +9,19 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddDeliveryCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDeliveryCommand;
+import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkDeliveryCommand;
+import seedu.address.logic.commands.MarkSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -55,22 +59,26 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-d")) {
+            if (arguments.trim().startsWith("-s")) {
+                return new AddCommandParser().parse(arguments.trim().substring(2));
+            } else if (arguments.trim().startsWith("-d")) {
                 return new AddDeliveryCommandParser().parse(arguments.trim().substring(2));
             } else {
-                return new AddCommandParser().parse(arguments);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddCommand.MESSAGE_USAGE + "\nOR\n" + AddDeliveryCommand.MESSAGE_USAGE));
             }
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-d")) {
-                return new DeleteDeliveryCommandParser().parse(arguments.trim());
-            } else if (arguments.trim().startsWith("-s")) {
+            if (arguments.trim().startsWith("-s")) {
                 return new DeleteSupplierCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-d")) {
+                return new DeleteDeliveryCommandParser().parse(arguments.trim());
             } else {
-                return new DeleteCommandParser().parse(arguments.trim());
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteSupplierCommand.MESSAGE_USAGE + "\nOR\n" + DeleteDeliveryCommand.MESSAGE_USAGE));
             }
 
         case ClearCommand.COMMAND_WORD:
@@ -83,13 +91,13 @@ public class AddressBookParser {
             return new ListCommand();
 
         case MarkDeliveryCommand.COMMAND_WORD:
-            if (arguments.trim().startsWith("-d")) {
-                return new MarkDeliveryCommandParser().parse(arguments.trim());
-            } else if (arguments.trim().startsWith("-s")) {
+            if (arguments.trim().startsWith("-s")) {
                 return new MarkSupplierCommandParser().parse(arguments.trim());
+            } else if (arguments.trim().startsWith("-d")) {
+                return new MarkDeliveryCommandParser().parse(arguments.trim());
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        MarkDeliveryCommand.MESSAGE_USAGE));
+                        MarkSupplierCommand.MESSAGE_USAGE + "\nOR\n" + MarkDeliveryCommand.MESSAGE_USAGE));
             }
 
         case ExitCommand.COMMAND_WORD:

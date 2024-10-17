@@ -7,7 +7,7 @@
     "company" : "company A",
     "tags" : [ "friends" ],
     "products" : [ "bread"],
-    "status" : ""
+    "status" : "active"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -15,7 +15,7 @@
     "company" : "company B",
     "tags" : [ "owesMoney", "friends" ],
     "products" : [ "rice"],
-    "status" : ""
+    "status" : "active"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,14 +23,14 @@
     "company" : "company C",
     "tags" : [ ],
     "products" : [ "pasta"],
-    "status" : ""
+    "status" : "active"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "company" : "company D",
     "tags" : [ "friends" ],
-    "status" : ""
+    "status" : "active"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -38,7 +38,7 @@
     "company" : "company E",
     "tags" : [ ],
     "products" : [ "coca cola"],
-    "status" : ""
+    "status" : "active"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -46,14 +46,14 @@
     "company" : "company F",
     "tags" : [ ],
     "products" : [ "power tools"],
-    "status" : ""
+    "status" : "active"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "company" : "company G",
     "tags" : [ ],
-    "status" : ""
+    "status" : "active"
   } ],
 
   "deliveries" : []
