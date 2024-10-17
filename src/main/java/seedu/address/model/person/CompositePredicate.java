@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
+import java.util.Objects;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.Objects;
 
 /**
  * Combines multiple predicates into one.

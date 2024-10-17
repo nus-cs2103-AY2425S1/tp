@@ -114,7 +114,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 policyType = PolicyType.fromString(policyTypeInput);
             } catch (IllegalArgumentException e) {
                 throw new ParseException(
-                        "Error: Invalid policy type. Please provide a valid policy type (e.g., Life, Health, Education).");
+                    "Error: Invalid policy type. Please provide a valid policy type (e.g., Life, Health, Education).");
             }
 
             predicatesList.add(new PolicyTypeMatchesPredicate(policyType));
