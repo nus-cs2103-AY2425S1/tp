@@ -27,7 +27,7 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         Game sampleGame = new Game("LoL",
                 new Username("LeagueGamer"), new SkillLevel("bad"), new Role("Support"));
-        HashMap<String,Game> sample = new HashMap<String, Game>();
+        HashMap<String, Game> sample = new HashMap<String, Game>();
         sample.put("LoL", sampleGame);
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
