@@ -9,7 +9,7 @@ public class JobCodePredicate implements Predicate<Person> {
     private final String jobCode;
 
     public JobCodePredicate(String jobCode) {
-        this.jobCode = jobCode.toLowerCase(); // Make comparison case-insensitive
+        this.jobCode = jobCode;
     }
 
     @Override

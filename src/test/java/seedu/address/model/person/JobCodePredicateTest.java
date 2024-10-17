@@ -22,9 +22,9 @@ public class JobCodePredicateTest {
     }
 
     @Test
-    public void test_jobCodeDifferentCase_returnsTrue() {
+    public void test_jobCodeDifferentCase_returnsFalse() {
         JobCodePredicate predicate = new JobCodePredicate("eng123");
-        assertTrue(predicate.test(new PersonBuilder().withJobCode("ENG123").build()));
+        assertFalse(predicate.test(new PersonBuilder().withJobCode("ENG123").build()));
     }
 }
 

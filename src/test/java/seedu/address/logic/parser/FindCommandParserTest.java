@@ -112,8 +112,6 @@ public class FindCommandParserTest {
         // Test parsing by name
         FindCommand expectedCommand = new FindCommand(new JobCodePredicate("SWE2024"));
         assertParseSuccess(parser, " j/SWE2024", expectedCommand);
-        assertParseSuccess(parser, " j/swe2024", expectedCommand);
-        assertParseSuccess(parser, " j/Swe2024", expectedCommand);
     }
 
     @Test
