@@ -17,17 +17,20 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TelegramHandle;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TELEHANDLE = "rachel";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_TELEHANDLE = "@rachel123";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -120,6 +123,29 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseTelegramHandle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTelegramHandle((String) null));
+    }
+
+    @Test
+    public void parseTelegramHandle_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegramHandle(INVALID_TELEHANDLE));
+    }
+
+    @Test
+    public void parseTelegramHandle_validValueWithoutWhitespace_returnsTelegramHandle() throws Exception {
+        TelegramHandle expectedTelegramHandle = new TelegramHandle(VALID_TELEHANDLE);
+        assertEquals(expectedTelegramHandle, ParserUtil.parseTelegramHandle(VALID_TELEHANDLE));
+    }
+
+    @Test
+    public void parseTelegramHandle_validValueWithWhitespace_returnsTrimmedTelegramHandle() throws Exception {
+        String telegramHandleWithWhitespace = WHITESPACE + VALID_TELEHANDLE + WHITESPACE;
+        TelegramHandle expectedTelegramHandle = new TelegramHandle(VALID_TELEHANDLE);
+        assertEquals(expectedTelegramHandle, ParserUtil.parseTelegramHandle(telegramHandleWithWhitespace));
     }
 
     @Test
