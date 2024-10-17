@@ -200,7 +200,9 @@ Format: `sort [ORDER]`
 Examples:
 * `sort` will sort by persons names alphabetically in ascending order
 * `sort ascending` will sort by persons names alphabetically in ascending order
+  ![result for 'sort and sort ascending'](images/sortResult.png)
 * `sort descending` will sort by persons names alphabetically in descending order
+  ![result for 'sort descending'](images/sortDescendingResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -260,3 +262,6 @@ Action | Format, Examples
 **Help** | `help`
 **Restore** | `restore`
 **Sort** | `sort [ORDER]`<br> e.g., `sort asc`
+**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss` 
+**Filter** | `filter [t/TAG]`<br> e.g., `filter t/friends`
+
