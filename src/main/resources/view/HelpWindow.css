@@ -1,4 +1,8 @@
-#copyButton, #helpMessage {
+#helpMessage {
+    -fx-text-fill: #87CEEB;
+}
+
+#copyButton, #helpKeywords {
     -fx-text-fill: white;
 }
 
@@ -15,5 +19,9 @@
 }
 
 #helpMessageContainer {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+#helpContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
