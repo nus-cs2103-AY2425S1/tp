@@ -81,5 +81,4 @@ public class JsonSerializableAddressBookTest {
         AddressBook emptyAddressBook = new AddressBook();
         assertEquals(addressBookFromFile, emptyAddressBook);
     }
-
 }
