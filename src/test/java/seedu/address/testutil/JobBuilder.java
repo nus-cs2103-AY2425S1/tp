@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalCompanies.NUS;
 
+import java.util.HashSet;
+
 import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
@@ -58,6 +60,6 @@ public class JobBuilder {
      * @return Job object.
      */
     public Job build() {
-        return new Job(jobName, jobCompany, jobSalary, jobRequirements, jobDescription);
+        return new Job(jobName, jobCompany, jobSalary, new JobDescription(""), new HashSet<>());
     }
 }
