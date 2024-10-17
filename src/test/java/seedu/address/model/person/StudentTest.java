@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.StudentBuilder;
-
 public class StudentTest {
 
     @Test
@@ -58,5 +57,16 @@ public class StudentTest {
         Student student1 = new StudentBuilder().withName("John Doe").build();
         Student student2 = new StudentBuilder().withName("John Doe").build();
         assertEquals(student1.hashCode(), student2.hashCode());
+    }
+    @Test
+    public void getSubjectString_validSubject_returnsSubjectString() {
+        Student student = new StudentBuilder().withSubject("Mathematics").build();
+        assertEquals("Mathematics", student.getSubjectString());
+    }
+
+    @Test
+    public void getClassesString_validClasses_returnsClassesString() {
+        Student student = new StudentBuilder().withClasses("Class A", "Class B").build();
+        assertEquals("Class A, Class B", student.getClassesString());
     }
 }

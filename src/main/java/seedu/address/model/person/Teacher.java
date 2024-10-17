@@ -60,6 +60,16 @@ public class Teacher extends Person {
         return this.classes;
     }
 
+    @Override
+    public String getSubjectString() {
+        return subject.toString();
+    }
+
+    @Override
+    public String getClassesString() {
+        return String.join(", ", classes);
+    }
+
     /**
      * Returns true if both teachers have the same name.
      * This defines a weaker notion of equality between two teachers.
