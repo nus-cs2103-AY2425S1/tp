@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.commons.core.index.Index;
 
 public class GradeListTest {
 
@@ -40,13 +41,10 @@ public class GradeListTest {
         gradeList.addGrade(thirdGrade);
 
         // same name -> returns true
-        assertEquals(gradeList.getGrade("midterm"), firstGrade);
-        assertEquals(gradeList.getGrade("Final"), secondGrade);
-        assertEquals(gradeList.getGrade("AsSiGnMeNt"), thirdGrade);
+        assertEquals(gradeList.getGrade(Index.fromOneBased(1)), firstGrade);
+        assertEquals(gradeList.getGrade(Index.fromOneBased(2)), secondGrade);
+        assertEquals(gradeList.getGrade(Index.fromOneBased(3)), thirdGrade);
 
-        // different name -> returns false
-        assertEquals(gradeList.getGrade("Tutorial"), null);
-        assertEquals(gradeList.getGrade("assignment "), null);
     }
 
     @Test
