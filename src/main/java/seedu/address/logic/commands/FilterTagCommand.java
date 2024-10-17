@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
@@ -49,6 +50,8 @@ public class FilterTagCommand extends Command {
 
     @Override
     public String toString() {
-        return predicate.toString();
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }
