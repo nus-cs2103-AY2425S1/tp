@@ -11,9 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_LAST_SEEN_DES
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ORGANISATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRIORITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LAST_SEEN_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LAST_SEEN_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -25,10 +25,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_DESC_LOW;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_HANDSOME;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_PRETTY;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -36,8 +36,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LOW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_HANDSOME;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_PRETTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
@@ -61,8 +59,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -76,8 +74,8 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_FRIEND +
-                PRIORITY_DESC_LOW+ REMARK_DESC_HANDSOME, new AddCommand(expectedPerson));
+                + ADDRESS_DESC_BOB + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_FRIEND
+                + PRIORITY_DESC_LOW + REMARK_DESC_HANDSOME, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)

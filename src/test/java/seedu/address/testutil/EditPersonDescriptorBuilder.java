@@ -117,7 +117,7 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withRemark(String remark) {
         descriptor.setRemark(new Remark(remark));
-         return this;
+        return this;
     }
 
     public EditPersonDescriptor build() {
