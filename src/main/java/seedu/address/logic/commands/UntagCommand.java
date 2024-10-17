@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND_IN_CONTACT;
 
@@ -40,6 +41,8 @@ public class UntagCommand extends Command {
      * @param tagsToRemove The list of tags to be removed.
      */
     public UntagCommand(Index index, HashSet<Tag> tagsToRemove) {
+        requireNonNull(index);
+        requireNonNull(tagsToRemove);
         this.index = index;
         this.tagsToRemove = tagsToRemove;
     }
@@ -72,14 +75,15 @@ public class UntagCommand extends Command {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
 
-        if (tagsToRemove.isEmpty()) {
-            throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
-        }
-
         if (!updatedTags.containsAll(tagsToRemove)) {
             throw new CommandException(MESSAGE_TAG_NOT_FOUND_IN_CONTACT);
         }
+
         updatedTags.removeAll(tagsToRemove);
+
+        for (Tag tag : tagsToRemove) {
+            tag.decreaseTaggedCount();
+        }
 
         Person editedPerson = new Person(
                 personToEdit.getName(),

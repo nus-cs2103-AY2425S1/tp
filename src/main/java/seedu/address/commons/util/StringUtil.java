@@ -61,6 +61,25 @@ public class StringUtil {
     }
 
     /**
+     * Returns true if the {@code phoneNumber} contains the {@code searchNumber}.
+     *   Only a partial match is required.
+     *   <br>examples:<pre>
+     *       containsPhoneNumber("99209378", "92") == true // partial match
+     *       containsPhoneNumber("99209378", "9378") == true // partial match
+     *       containsPhoneNumber("82810284", "82810284") == true // full match
+     *       containsPhoneNumber("99209378", "86") == false // no partial match with number
+     *       </pre>
+     * @param phoneNumber cannot be null
+     * @param searchNumber cannot be null, cannot be empty
+     */
+    public static boolean containsPhoneNumber(String phoneNumber, String searchNumber) {
+        requireNonNull(phoneNumber);
+        requireNonNull(searchNumber);
+        checkArgument(!searchNumber.isEmpty(), "Phone number parameter cannot be empty");
+        return phoneNumber.toLowerCase().contains(searchNumber.toLowerCase());
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {

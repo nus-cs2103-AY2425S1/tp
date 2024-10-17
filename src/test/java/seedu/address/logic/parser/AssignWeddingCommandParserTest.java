@@ -56,4 +56,20 @@ public class AssignWeddingCommandParserTest {
         assertParseFailure(parser, "1 w/ w/Jeslyn's_Wedding",
                 WeddingName.MESSAGE_CONSTRAINTS);
     }
+
+    @Test
+    public void parse_validArgsWithForce_returnsAssignWeddingCommand() {
+        Index targetIndex = Index.fromOneBased(1);
+
+        // Expected weddings
+        Wedding wedding1 = new Wedding(new WeddingName("Jeslyn's Wedding"));
+        Wedding wedding2 = new Wedding(new WeddingName("Wedding April 17th 2025"));
+
+        AssignWeddingCommand expectedCommand = new AssignWeddingCommand(targetIndex,
+                new HashSet<>(Arrays.asList(wedding1, wedding2)), true);
+
+        String userInput = "1 w/Jeslyn's Wedding w/Wedding April 17th 2025 f/";
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 }
