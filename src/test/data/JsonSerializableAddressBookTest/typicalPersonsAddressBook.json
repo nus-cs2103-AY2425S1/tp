@@ -14,10 +14,10 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ],
     "policies": [{
-      "premiumAmount" : 200.0,
-      "coverageAmount" : 20000.0,
-      "policyType" : "HEALTH",
-      "expiryDate" : "11/11/2025"
+      "policyType" : "health",
+      "premiumAmount" : 300.0,
+      "coverageAmount" : 3000.0,
+      "expiryDate" : "12/23/2024"
     }]
   }, {
     "name" : "Carl Kurz",

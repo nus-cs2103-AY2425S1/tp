@@ -21,24 +21,17 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.policy.EducationPolicy;
-import seedu.address.model.policy.HealthPolicy;
-import seedu.address.model.policy.LifePolicy;
-import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 import seedu.address.testutil.PersonBuilder;
 
 
 public class DeletePolicyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final LifePolicy life = new LifePolicy();
-    private final HealthPolicy health = new HealthPolicy();
-    private final EducationPolicy education = new EducationPolicy();
 
     @Test
     public void execute_deletePolicyUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withPolicies(new PolicySet()).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withPolicies().build();
 
         Set<PolicyType> policiesToDelete = new HashSet<>();
         policiesToDelete.add(PolicyType.HEALTH);
