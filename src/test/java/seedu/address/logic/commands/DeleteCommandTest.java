@@ -109,7 +109,7 @@ public class DeleteCommandTest {
                 .asList(INDEX_FIRST_PERSON, outOfBoundIndex)));
 
         String expectedMessage = DeleteCommand.MESSAGE_DELETE_PEOPLE_SUCCESS + firstPersonToDelete.getName().toString()
-                + DeleteCommand.MESSAGE_INVALID_INDICES + outOfBoundIndex.getOneBased();
+                + DeleteCommand.MESSAGE_INVALID_INDICES;
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(firstPersonToDelete);

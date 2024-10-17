@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.commons.core.index.DescendingIndexComparator;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -29,16 +30,43 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted: ";
 
-    public static final String MESSAGE_INVALID_INDICES = ". The following indices were invalid: ";
+    public static final String MESSAGE_INVALID_INDICES = "\nThe remaining inputs were invalid.";
 
     private final ArrayList<Index> targetIndices;
 
+    private final boolean hasInvalidArgs;
+
+    /**
+     * Instantiates a DeleteCommand for deleting a single index assuming
+     * no invalid arguments inputted by user.
+     *
+     * @param targetIndex
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndices = new ArrayList<Index>(Arrays.asList(targetIndex));
+        this.hasInvalidArgs = false;
     }
 
+    /**
+     * Instantiates a DeleteCommand for deleting multiple indices assuming
+     * no invalid arguments inputted by user.
+     * @param targetIndices
+     */
     public DeleteCommand(ArrayList<Index> targetIndices) {
         this.targetIndices = targetIndices;
+        this.hasInvalidArgs = false;
+    }
+
+    /**
+     * Instantiates a DeleteCommand with the option of specifying if invalid
+     * arguments were inputted by user.
+     *
+     * @param targetIndices
+     * @param hasInvalidArgs
+     */
+    public DeleteCommand(ArrayList<Index> targetIndices, boolean hasInvalidArgs) {
+        this.targetIndices = targetIndices;
+        this.hasInvalidArgs = hasInvalidArgs;
     }
 
     @Override
@@ -52,6 +80,7 @@ public class DeleteCommand extends Command {
 
         ArrayList<Index> invalidIndices = new ArrayList<>();
         ArrayList<String> deletedPersons = new ArrayList<>();
+        targetIndices.sort(new DescendingIndexComparator()); //sort in descending order for smooth deletion
         for (Index targetIndex : targetIndices) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 invalidIndices.add(targetIndex);
@@ -61,15 +90,14 @@ public class DeleteCommand extends Command {
             model.deletePerson(personToDelete);
             deletedPersons.add(personToDelete.getName().toString());
         }
-        if (invalidIndices.isEmpty()) {
+        if (invalidIndices.isEmpty() && !hasInvalidArgs) {
             return new CommandResult(MESSAGE_DELETE_PEOPLE_SUCCESS + String.join(", ", deletedPersons));
         }
         if (deletedPersons.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         return new CommandResult(MESSAGE_DELETE_PEOPLE_SUCCESS + String.join(", ", deletedPersons)
-                + MESSAGE_INVALID_INDICES + String.join(", ", invalidIndices.stream()
-                .map(x -> String.valueOf(x.getOneBased())).toList()));
+                + MESSAGE_INVALID_INDICES);
     }
 
     @Override
@@ -101,6 +129,10 @@ public class DeleteCommand extends Command {
         }
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
+        String commandResult = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
+        if (hasInvalidArgs) {
+            commandResult += MESSAGE_INVALID_INDICES;
+        }
+        return new CommandResult(commandResult);
     }
 }

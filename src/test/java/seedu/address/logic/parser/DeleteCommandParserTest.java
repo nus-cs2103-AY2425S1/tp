@@ -38,11 +38,17 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_validIndices_returnsDeleteCommand() {
         assertParseSuccess(parser, "1 2", new DeleteCommand(new ArrayList<Index>(Arrays
-                .asList(INDEX_SECOND_PERSON, INDEX_FIRST_PERSON))));
+                .asList(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON))));
     }
 
     @Test
     public void parse_invalidIndices_throwsParseException() {
-        assertParseFailure(parser, "1 a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "b a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_someValidIndices_success() {
+        assertParseSuccess(parser, "1 a", new DeleteCommand(new ArrayList<Index>(Arrays
+                .asList(INDEX_FIRST_PERSON)), true));
     }
 }
