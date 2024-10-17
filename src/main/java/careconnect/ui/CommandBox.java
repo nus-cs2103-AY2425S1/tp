@@ -68,6 +68,8 @@ public class CommandBox extends UiPart<Region> {
 
             // Sets style back to default if command is valid
             this.setStyleToDefault();
+            assert(!(this.commandTextField.getStyleClass()
+                            .contains(ERROR_STYLE_CLASS)));
         } catch (ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -91,6 +93,7 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+        assert(styleClass.contains(ERROR_STYLE_CLASS));
     }
 
     /**
