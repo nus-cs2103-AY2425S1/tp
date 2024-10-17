@@ -59,7 +59,7 @@
 
 * Items in **round** brackets and with `+`​ after them can be used one or more times.<br>
   e.g. `(t/TAG)+​` can be used as `t/friend`, `t/friend t/family` etc.
-* 
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
