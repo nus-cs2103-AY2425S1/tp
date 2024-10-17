@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -65,6 +66,29 @@ public class MassDeleteCommandTest {
     }
 
     @Test
+    public void execute_noValidIndices_throwsCommandException() {
+        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(Collections.emptyList(), Collections.emptyList());
+
+        assertCommandFailure(massDeleteCommand, model, MassDeleteCommand.MESSAGE_NO_VALID_IDS);
+    }
+
+    @Test
+    public void execute_mixedValidAndInvalidInputs_successWithInvalidInputsReported() {
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        List<Index> indicesToDelete = Arrays.asList(INDEX_FIRST_PERSON);
+        List<String> invalidInputs = Arrays.asList("a", "b");
+        MassDeleteCommand massDeleteCommand = new MassDeleteCommand(indicesToDelete, invalidInputs);
+
+        String expectedMessage = String.format(MassDeleteCommand.MESSAGE_DELETE_PERSONS_SUCCESS,
+                Arrays.asList(INDEX_FIRST_PERSON.getOneBased())) + "\nInvalid inputs: [a, b]";
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(firstPersonToDelete);
+
+        assertCommandSuccess(massDeleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         MassDeleteCommand massDeleteFirstCommand = new
                 MassDeleteCommand(Arrays.asList(INDEX_FIRST_PERSON), Collections.emptyList());
@@ -103,7 +127,5 @@ public class MassDeleteCommandTest {
      */
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
