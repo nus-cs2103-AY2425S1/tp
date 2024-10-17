@@ -72,11 +72,13 @@ public class CompanyCard extends UiPart<Region> {
         setOptionals();
 
         List<Application> applications = company.getApplications();
-        application.setText(applications.isEmpty()
-                ? "Applications: CLOSED"
-                : "Applications: " + IntStream.range(0, applications.size())
-                    .mapToObj(i -> (i + 1) + ". " + applications.get(i))
-                    .collect(Collectors.joining(", ")));
+        application.setText(applications.isEmpty() ? "Applications: CLOSED"
+                    : "Applications: " + IntStream.range(0, applications.size())
+                        .mapToObj(i -> String.format("%d. %s (%s)",
+                                i + 1,
+                                applications.get(i).getName(),
+                                applications.get(i).getAppStatus()))
+                        .collect(Collectors.joining(", ")));
 
         tags.getChildren().add(status);
 
