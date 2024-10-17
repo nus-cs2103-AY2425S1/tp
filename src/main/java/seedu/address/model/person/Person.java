@@ -74,7 +74,7 @@ public class Person {
      * if modification is attempted.
      */
     public Map<String, Game> getGames() {
-        return Collections.unmodifiableMap(games);
+        return games;
     }
     /**
      * Returns true if both persons have the same name.
