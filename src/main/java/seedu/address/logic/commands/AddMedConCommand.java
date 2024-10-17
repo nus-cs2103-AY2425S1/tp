@@ -29,7 +29,7 @@ public class AddMedConCommand extends Command {
             + PREFIX_NRIC + "T0123456F "
             + "c/Diabetes c/Hypertension";
 
-    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition: %1$s to Person: %2$s";
+    public static final String MESSAGE_ADD_MEDCON_SUCCESS = "Added medical condition: %1$s to Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String MESSAGE_DUPLICATE_MEDCON = "Condition already assigned: %1$s";
 
@@ -86,7 +86,7 @@ public class AddMedConCommand extends Command {
 
         String resultMedCon = '[' + medConsString.toString() + ']';
 
-        return String.format(MESSAGE_ADD_MEDCON_SUCCESS, resultMedCon, personToEdit.getName().fullName);
+        return String.format(MESSAGE_ADD_MEDCON_SUCCESS, resultMedCon, personToEdit.getNric().value);
     }
 
     @Override

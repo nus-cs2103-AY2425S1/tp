@@ -29,7 +29,7 @@ public class DelMedConCommand extends Command {
             + PREFIX_NRIC + "T0123456F "
             + "c/Diabetes c/Hypertension";
 
-    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition: %1$s from Person: %2$s";
+    public static final String MESSAGE_DELETE_MEDCON_SUCCESS = "Removed medical condition: %1$s from Nric: %2$s";
     public static final String PATIENT_DOES_NOT_EXIST = "Patient does not exist in contact list";
     public static final String MESSAGE_MEDCON_NOT_FOUND = "Condition not found: %1$s";
 
@@ -92,7 +92,7 @@ public class DelMedConCommand extends Command {
 
         String resultMedCon = '[' + medConsString.toString() + ']';
 
-        return String.format(MESSAGE_DELETE_MEDCON_SUCCESS, resultMedCon, personToEdit.getName().fullName);
+        return String.format(MESSAGE_DELETE_MEDCON_SUCCESS, resultMedCon, personToEdit.getNric().value);
 
     }
 
