@@ -57,7 +57,8 @@ public class AssignWeddingCommandTest {
         HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(unseenWedding));
         AssignWeddingCommand assignWeddingCommand = new AssignWeddingCommand(
                 INDEX_FIRST_PERSON, weddingsToAdd);
-        String expectedMessage = Messages.MESSAGE_WEDDING_NOT_FOUND;
+        String expectedMessage = Messages.MESSAGE_WEDDING_NOT_FOUND + "\n"
+                + Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
         CommandTestUtil.assertCommandFailure(assignWeddingCommand, model, expectedMessage);
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.Messages.MESSAGE_ADD_WEDDING_SUCCESS;
+import static seedu.address.logic.Messages.MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_WEDDING_NOT_FOUND;
 
@@ -86,7 +87,8 @@ public class AssignWeddingCommand extends Command {
                     CreateWeddingCommand newWedding = new CreateWeddingCommand(wedding);
                     newWedding.execute(model);
                 } else {
-                    throw new CommandException(MESSAGE_WEDDING_NOT_FOUND);
+                    throw new CommandException(
+                            MESSAGE_WEDDING_NOT_FOUND + "\n" + MESSAGE_FORCE_ASSIGN_WEDDING_TO_CONTACT);
                 }
             }
         }
