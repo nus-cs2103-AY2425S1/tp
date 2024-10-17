@@ -77,7 +77,7 @@ public class InternshipApplicationBuilder {
      * Sets the {@code CompanyName} of the {@code InternshipApplication} that we are building.
      */
     public InternshipApplicationBuilder withName(String name) {
-        this.company = new Company(this.company.getEmail(), new Name(name));
+        this.company = new Company(this.company.getEmail(), new Name(name.trim()));
         return this;
     }
 

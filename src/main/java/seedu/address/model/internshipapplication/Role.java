@@ -33,7 +33,7 @@ public class Role {
     public Role(String role) {
         requireNonNull(role);
         checkArgument(RoleValidator.of().validate(role), MESSAGE_CONSTRAINTS);
-        this.value = role;
+        this.value = role.trim();
     }
 
     /**
