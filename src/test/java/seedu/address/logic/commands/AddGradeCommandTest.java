@@ -11,26 +11,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.assignment.PredefinedAssignment;
-import seedu.address.model.assignment.PredefinedAssignmentsData;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleAssignmentsUtil;
 import seedu.address.testutil.TypicalPersons;
 
 public class AddGradeCommandTest {
     private final Model model = new ModelManager(
-        getTypicalAddressBook(),
-        new UserPrefs(),
-        AddGradeCommandTest.getPredefinedAssignmentsData());
-
-
-    public static PredefinedAssignmentsData getPredefinedAssignmentsData() {
-        PredefinedAssignmentsData predefinedAssignmentsData = new PredefinedAssignmentsData();
-        predefinedAssignmentsData.addPredefinedAssignment(new PredefinedAssignment("Ex01", 10.0f));
-        predefinedAssignmentsData.addPredefinedAssignment(new PredefinedAssignment("Ex02", 10.0f));
-        predefinedAssignmentsData.addPredefinedAssignment(new PredefinedAssignment("Ex09", 10.0f));
-        return predefinedAssignmentsData;
-    }
-
+            getTypicalAddressBook(),
+            new UserPrefs(),
+            SampleAssignmentsUtil.getSamplePredefinedAssignments());
 
 
     @Test
@@ -38,11 +27,13 @@ public class AddGradeCommandTest {
 
         assertThrows(NullPointerException.class, () -> new AddGradeCommand(null, 0f, null));
     }
+
     @Test
     public void assignment_invalidName() {
         AddGradeCommand command = new AddGradeCommand("John Doe", 0f, "ex10");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
+
     @Test
     public void person_invalidName() {
         AddGradeCommand command = new AddGradeCommand("John DoeDoedoe", 0f, "ex01");
@@ -52,14 +43,14 @@ public class AddGradeCommandTest {
     @Test
     public void assignment_invalidHighScore() {
         AddGradeCommand command = new AddGradeCommand("John Doe",
-            100f, "ex01");
+                100f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void assignment_invalidLowScore() {
         AddGradeCommand command = new AddGradeCommand("John Doe",
-            -1f, "ex01");
+                -1f, "ex01");
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 

@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.PredefinedAssignmentsData;
 import seedu.address.model.assignment.ReadOnlyPredefinedAssignmentsData;
+import seedu.address.model.util.SampleAssignmentsUtil;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -92,8 +93,13 @@ public class MainApp extends Application {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
+            if (!readAssignmentOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getAssignmentFilePath()
+                        + " populated with a sample assignment file.");
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            predefinedAssignments = readAssignmentOptional.orElseGet(PredefinedAssignmentsData::new);
+            predefinedAssignments = readAssignmentOptional
+                    .orElseGet(SampleAssignmentsUtil::getSamplePredefinedAssignments);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");
