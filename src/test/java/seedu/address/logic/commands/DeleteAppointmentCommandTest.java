@@ -20,13 +20,14 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.Date;
+import seedu.address.model.appointment.From;
+import seedu.address.model.appointment.To;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Property;
 
-
-
-public class DeletePropertyCommandTest {
+public class DeleteAppointmentCommandTest {
     private static final Name DO_NOT_EXIST_NAME = new Name("DO NOT EXIST NAME");
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -36,26 +37,29 @@ public class DeletePropertyCommandTest {
         Random random = new Random();
         List<Name> typicalNames = getTypicalNames();
         int randomIndex = random.nextInt(typicalNames.size() - 1);
-        Person personToDeleteProperty = model.getPersonByName(typicalNames.get(randomIndex));
-        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(personToDeleteProperty.getName());
+        Person personToDeleteAppointment = model.getPersonByName(typicalNames.get(randomIndex));
+        DeleteAppointmentCommand deleteAppointmentCommand =
+                new DeleteAppointmentCommand(personToDeleteAppointment.getName());
 
-        String expectedMessage = String.format(DeletePropertyCommand.MESSAGE_DELETE_PROPERTY_SUCCESS,
-                personToDeleteProperty.getName());
+        String expectedMessage = String.format(DeleteAppointmentCommand.MESSAGE_DELETE_APPOINTMENT_SUCCESS,
+                personToDeleteAppointment.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person personWithoutProperty = new Person(personToDeleteProperty.getName(), personToDeleteProperty.getPhone(),
-                personToDeleteProperty.getEmail(), personToDeleteProperty.getTags(),
-                personToDeleteProperty.getAppointment(), new Property(""));
-        expectedModel.setPerson(personToDeleteProperty, personWithoutProperty);
+        Person personWithoutAppointment = new Person(personToDeleteAppointment.getName(),
+                personToDeleteAppointment.getPhone(), personToDeleteAppointment.getEmail(),
+                personToDeleteAppointment.getTags(),
+                new Appointment(new Date(""), new From(""), new To("")),
+                personToDeleteAppointment.getProperty());
+        expectedModel.setPerson(personToDeleteAppointment, personWithoutAppointment);
 
-        assertCommandSuccess(deletePropertyCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteAppointmentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(DO_NOT_EXIST_NAME);
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(DO_NOT_EXIST_NAME);
 
-        assertCommandFailure(deletePropertyCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
+        assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
 
     /*
@@ -91,39 +95,38 @@ public class DeletePropertyCommandTest {
         int randomIndex = random.nextInt(typicalNames.size() - 2);
         showPersonWithName(model, typicalNames.get(randomIndex));
 
-        DeletePropertyCommand deletePropertyCommand = new DeletePropertyCommand(typicalNames
+        DeleteAppointmentCommand deleteAppointmentCommand = new DeleteAppointmentCommand(typicalNames
                 .get(randomIndex + 1));
 
-        assertCommandFailure(deletePropertyCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
+        assertCommandFailure(deleteAppointmentCommand, model, Messages.MESSAGE_INVALID_PERSON_INPUT);
     }
 
     @Test
     public void equals() {
-        DeletePropertyCommand deleteFirstPropertyCommand = new DeletePropertyCommand(ALICE.getName());
-        DeletePropertyCommand deleteSecondPropertyCommand = new DeletePropertyCommand(BENSON.getName());
+        DeleteAppointmentCommand deleteFirstAppointmentCommand = new DeleteAppointmentCommand(ALICE.getName());
+        DeleteAppointmentCommand deleteSecondAppointmentCommand = new DeleteAppointmentCommand(BENSON.getName());
 
         // same object -> returns true
-        assertTrue(deleteFirstPropertyCommand.equals(deleteFirstPropertyCommand));
+        assertTrue(deleteFirstAppointmentCommand.equals(deleteFirstAppointmentCommand));
 
         // same values -> returns true
-        DeletePropertyCommand deleteFirstCommandCopy = new DeletePropertyCommand(ALICE.getName());
-        assertTrue(deleteFirstPropertyCommand.equals(deleteFirstCommandCopy));
+        DeleteAppointmentCommand deleteFirstCommandCopy = new DeleteAppointmentCommand(ALICE.getName());
+        assertTrue(deleteFirstAppointmentCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstPropertyCommand.equals(1));
+        assertFalse(deleteFirstAppointmentCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstPropertyCommand.equals(null));
+        assertFalse(deleteFirstAppointmentCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteFirstPropertyCommand.equals(deleteSecondPropertyCommand));
+        assertFalse(deleteFirstAppointmentCommand.equals(deleteSecondAppointmentCommand));
     }
 
     @Test
     public void toStringMethod() {
-        DeletePropertyCommand deleteCommand = new DeletePropertyCommand(ALICE.getName());
-        String expected = DeletePropertyCommand.class.getCanonicalName() + "{targetName=" + ALICE.getName() + "}";
+        DeleteAppointmentCommand deleteCommand = new DeleteAppointmentCommand(ALICE.getName());
+        String expected = DeleteAppointmentCommand.class.getCanonicalName() + "{targetName=" + ALICE.getName() + "}";
         assertEquals(expected, deleteCommand.toString());
     }
-
 }
