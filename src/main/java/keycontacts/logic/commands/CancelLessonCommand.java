@@ -28,7 +28,7 @@ public class CancelLessonCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DATE + "DATE "
             + PREFIX_START_TIME + "START_TIME\n"
-            + "Example: " + COMMAND_WORD + PREFIX_DATE + " 06-07-2022 " + PREFIX_START_TIME + "12:00";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_DATE + "06-07-2022 " + PREFIX_START_TIME + "12:00";
     public static final String MESSAGE_SUCCESS = "Cancelled lesson at %1$s, %2$s for student: %3$s";
     public static final String MESSAGE_LESSON_NOT_FOUND = "No lesson with the "
             + "specified parameters found for student %1$s.\n"
