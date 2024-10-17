@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -25,8 +24,8 @@ public class UniqueAndArchivedPersonListTest {
 
     @Test
     public void archivePerson_validPerson_archivesSuccessfully() {
-        uniquePersonList.add(ALICE);  // Add ALICE to the UniquePersonList
-        uniquePersonList.archivePerson(ALICE, archivedPersonList);  // Archive ALICE
+        uniquePersonList.add(ALICE); // Add ALICE to the UniquePersonList
+        uniquePersonList.archivePerson(ALICE, archivedPersonList); // Archive ALICE
 
         // Ensure ALICE is removed from UniquePersonList and added to ArchivedPersonList
         assertFalse(uniquePersonList.contains(ALICE));
@@ -40,8 +39,8 @@ public class UniqueAndArchivedPersonListTest {
 
     @Test
     public void unarchivePerson_validPerson_unarchivesSuccessfully() {
-        archivedPersonList.addArchivedPerson(BOB);  // Add BOB to the ArchivedPersonList
-        uniquePersonList.unarchivePerson(BOB, archivedPersonList);  // Unarchive BOB
+        archivedPersonList.addArchivedPerson(BOB); // Add BOB to the ArchivedPersonList
+        uniquePersonList.unarchivePerson(BOB, archivedPersonList); // Unarchive BOB
 
         // Ensure BOB is removed from ArchivedPersonList and added to UniquePersonList
         assertFalse(archivedPersonList.contains(BOB));
@@ -55,8 +54,8 @@ public class UniqueAndArchivedPersonListTest {
 
     @Test
     public void archiveAndUnarchivePerson_personSuccessfullyMovesBetweenLists() {
-        uniquePersonList.add(ALICE);  // Add ALICE to the UniquePersonList
-        uniquePersonList.archivePerson(ALICE, archivedPersonList);  // Archive ALICE
+        uniquePersonList.add(ALICE); // Add ALICE to the UniquePersonList
+        uniquePersonList.archivePerson(ALICE, archivedPersonList); // Archive ALICE
 
         // ALICE should now be in ArchivedPersonList, not UniquePersonList
         assertFalse(uniquePersonList.contains(ALICE));
@@ -72,13 +71,13 @@ public class UniqueAndArchivedPersonListTest {
 
     @Test
     public void archivePerson_personAlreadyArchived_throwsPersonNotFoundException() {
-        archivedPersonList.addArchivedPerson(ALICE);  // ALICE is already in the archived list
+        archivedPersonList.addArchivedPerson(ALICE); // ALICE is already in the archived list
         assertThrows(PersonNotFoundException.class, () -> uniquePersonList.archivePerson(ALICE, archivedPersonList));
     }
 
     @Test
     public void unarchivePerson_personAlreadyInUniqueList_throwsPersonNotFoundException() {
-        uniquePersonList.add(BOB);  // BOB is already in the unique person list
+        uniquePersonList.add(BOB); // BOB is already in the unique person list
         assertThrows(PersonNotFoundException.class, () -> uniquePersonList.unarchivePerson(BOB, archivedPersonList));
     }
 
