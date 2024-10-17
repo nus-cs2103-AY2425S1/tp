@@ -11,10 +11,16 @@ import org.junit.jupiter.api.Test;
 public class AllergyTest {
 
     @Test
+    public void constructor_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new Allergy(null));
+    }
+
+    @Test
     public void constructor_invalidAllergy_throwsIllegalArgumentException() {
         String invalidAllergy = "";
         assertThrows(IllegalArgumentException.class, () -> new Allergy(invalidAllergy));
     }
+
     @Test
     public void isValidAllergy() {
         // null allergy
@@ -24,11 +30,12 @@ public class AllergyTest {
         assertFalse(Allergy.isValidAllergy("")); // empty string
         assertFalse(Allergy.isValidAllergy(" ")); // spaces only
 
-        // valid addresses
+        // valid allergy
         assertTrue(Allergy.isValidAllergy("Nuts"));
         assertTrue(Allergy.isValidAllergy("-")); // one character
         assertTrue(Allergy.isValidAllergy("Shellfish, Gluten"));
     }
+
     @Test
     public void equals() {
         Allergy allergy = new Allergy("Valid Allergy");
@@ -46,6 +53,6 @@ public class AllergyTest {
         assertFalse(allergy.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(allergy.equals(new Address("Other Valid Allergy")));
+        assertFalse(allergy.equals(new Allergy("Other Valid Allergy")));
     }
 }

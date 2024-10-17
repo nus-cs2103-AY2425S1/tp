@@ -58,6 +58,7 @@ public class AddFCommandParser implements Parser<AddFCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFCommand.MESSAGE_USAGE));
         }
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
