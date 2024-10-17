@@ -156,4 +156,12 @@ public class ModuleRoleMap {
     public int hashCode() {
         return this.roles.hashCode();
     }
+
+    /**
+     * Gets the roles in HashMap.
+     *
+     */
+    public HashMap<ModuleCode, RoleType> getRoles() {
+        return this.roles;
+    }
 }

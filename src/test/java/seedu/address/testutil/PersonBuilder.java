@@ -1,14 +1,18 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
+import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RoleType;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,6 +31,7 @@ public class PersonBuilder {
     private Email email;
     private Optional<Address> address;
     private Set<Tag> tags;
+    private ModuleRoleMap moduleRoleMap;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -37,6 +42,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
+        moduleRoleMap = new ModuleRoleMap(new HashMap<ModuleCode, RoleType>());
     }
 
     /**
@@ -48,6 +54,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        moduleRoleMap = personToCopy.getModuleRoleMap();
     }
 
     /**
@@ -63,6 +70,26 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ModuleRoleMap} into a {@code ModuleRoleMap} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withModuleRoleMap(ModuleCode moduleCode, RoleType roleType) {
+        HashMap<ModuleCode, RoleType> moduleRoleMap = new HashMap<>();
+        moduleRoleMap.put(moduleCode, roleType);
+        this.moduleRoleMap = new ModuleRoleMap(moduleRoleMap);
+        return this;
+    }
+
+    /**
+     * Parses the {@code ModuleRoleMap} into a {@code ModuleRoleMap} and set it to the {@code Person}
+     * that we are building.
+     */
+    public PersonBuilder withModuleRoleMap(ModuleCode[] moduleCodes, RoleType[] roleTypes) {
+        this.moduleRoleMap = new ModuleRoleMap(moduleCodes, roleTypes);
         return this;
     }
 
@@ -105,14 +132,14 @@ public class PersonBuilder {
      * Builds the {@code Person} that we are testing.
      */
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, moduleRoleMap);
     }
 
     /**
      * Builds the {@code Person} that we are testing without address.
      */
     public Person buildEmptyAddressPerson() {
-        return new Person(name, phone, email, Optional.empty(), tags);
+        return new Person(name, phone, email, Optional.empty(), tags, moduleRoleMap);
     }
 
 }
