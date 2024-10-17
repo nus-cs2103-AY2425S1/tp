@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FILEPATH;
 
 import java.util.ArrayList;
 
+import seedu.address.commons.exceptions.ImproperFormatException;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -35,7 +36,13 @@ public class ImportCommand extends Command {
         requireNonNull(model);
 
         CsvImport importer = new CsvImport(importFilePath);
-        int personsAdded = importer.readCsv(model);
+        int personsAdded;
+        try {
+            personsAdded = importer.readCsv(model);
+        } catch (ImproperFormatException e) {
+            throw new CommandException(e.getMessage());
+        }
+
         ArrayList<Integer> personsFailed = importer.getFailed();
         model.commitAddressBook();
         if (!importer.hasFailures()) {

@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import com.opencsv.bean.AbstractBeanField;
 
@@ -12,12 +12,13 @@ import com.opencsv.bean.AbstractBeanField;
  * This class extends AbstractBeanField from OpenCSV to handle conversion
  * of tag data.
  */
-public class PersonBeanTagConverter extends AbstractBeanField<Set<String>, String> {
+public class JsonAdaptedTagConverter extends AbstractBeanField<List<JsonAdaptedTag>, String> {
     @Override
-    protected Set<String> convert(String value) {
+    protected List<JsonAdaptedTag> convert(String value) {
         if (value == null || value.trim().isEmpty()) {
-            return new HashSet<>();
+            return new ArrayList<>();
         }
-        return new HashSet<>(Arrays.asList(value.split(";")));
+        List<String> stringList = Arrays.asList(value.split(";"));
+        return stringList.stream().map(string -> new JsonAdaptedTag(string)).toList();
     }
 }
