@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddCustomerOrderCommand;
 import seedu.address.logic.commands.AddIngredientCommand;
 import seedu.address.logic.commands.AddPastryCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.AddSupplyOrderCommand;
 import seedu.address.logic.commands.DeleteCustomerOrderCommand;
 import seedu.address.logic.commands.DeleteSupplyOrderCommand;
@@ -69,6 +70,9 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case AddSupplierCommand.COMMAND_WORD:
+            return new AddSupplierCommandParser().parse(arguments);
 
         // Add this case for the "add customer" command
         case AddCustomerCommand.COMMAND_WORD:
