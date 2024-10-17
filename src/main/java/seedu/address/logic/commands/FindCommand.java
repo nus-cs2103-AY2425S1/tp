@@ -5,20 +5,21 @@ import static java.util.Objects.requireNonNull;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-// import seedu.address.logic.Messages;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Finds and lists all persons in address book matching the given criteria.
+ * Finds and lists all persons in address book that match the specified criteria.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find-client";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds clients based on given parameters.\n"
-            + "Parameters: n/[NAME] p/[PHONE] e/[EMAIL] a/[ADDRESS] pt/[POLICY_TYPE]\n"
-            + "Example: " + COMMAND_WORD + " n/John Doe";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons that match the specified criteria "
+            + "and displays them as a list with index numbers.\n"
+            + "Parameters: [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [pt/POLICY_TYPE]\n"
+            + "Example: " + COMMAND_WORD + " n/John Doe p/99998888";
 
     private final Predicate<Person> predicate;
 
@@ -30,18 +31,15 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
-        int resultSize = model.getFilteredPersonList().size();
-        if (resultSize == 0) {
-            return new CommandResult("No clients found matching the given criteria.");
-        }
-        return new CommandResult("Search completed successfully.");
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this
-                || (other instanceof FindCommand
-                && predicate.equals(((FindCommand) other).predicate));
+        return other == this // short circuit if same object
+                || (other instanceof FindCommand // instanceof handles nulls
+                && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 
     @Override
@@ -49,5 +47,9 @@ public class FindCommand extends Command {
         return new ToStringBuilder(this)
                 .add("predicate", predicate)
                 .toString();
+    }
+
+    public Predicate<Person> getPredicate() {
+        return predicate;
     }
 }
