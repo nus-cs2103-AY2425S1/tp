@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -23,12 +24,12 @@ public class AddClientProfile extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-            //  + "[" + PREFIX_TAG + "TAG]...\n"
+             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            //  + PREFIX_TAG + "friends "
-            //  + PREFIX_TAG + "owesMoney"
+            + PREFIX_TAG + "friends "
+            + PREFIX_TAG + "owesMoney"
             + PREFIX_EMAIL + "johnd@example.com";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";

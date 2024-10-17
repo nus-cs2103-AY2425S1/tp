@@ -17,12 +17,12 @@
         <Label fx:id="id" styleClass="cell_big_label" text="ID:" textFill="#FFD700" />
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="#FFD700" />
       </HBox>
-      <FlowPane fx:id="tags" style="-fx-background-color: #1a1a1a; -fx-padding: 5; -fx-background-radius: 5;">
-      </FlowPane>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" textFill="#FFD700" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" textFill="#FFD700" />
       <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" textFill="#FFD700" />
       <Label fx:id="property" styleClass="cell_small_label" text="\$property" textFill="#FFD700" />
+      <FlowPane fx:id="tags" style="-fx-background-color: #1a1a1a; -fx-padding: 5; -fx-background-radius: 5;">
+      </FlowPane>
     </VBox>
       <rowConstraints>
          <RowConstraints />
