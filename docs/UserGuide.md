@@ -223,7 +223,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find**   | `find n/NAMEKEYWORD p/PHONEKEYWORD a/ADDRESSKEYWORD`<br> e.g., `find n/James Jake a/clementi street_woodlands`
 **List**   | `list`
 **Help**   | `help`
 **Seed**   | `seed`
