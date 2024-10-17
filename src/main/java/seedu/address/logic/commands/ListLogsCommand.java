@@ -33,9 +33,9 @@ public class ListLogsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         //TODO: Handle behaviour later
         requireNonNull(model);
-        // Temporary stub
-        model.updateFilteredLogsListById(this.identityNumber);
-        return new CommandResult("The NRIC you inputted is: " + this.identityNumber.toString());
+        model.updateFilteredLogListById(this.identityNumber);
+        return new CommandResult("The NRIC you inputted is: " + this.identityNumber.toString()
+        + "\n" + "The logs for this person are: " + model.getFilteredLogList().toString());
     }
 
     @Override

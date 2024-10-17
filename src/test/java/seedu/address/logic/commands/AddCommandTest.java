@@ -165,7 +165,7 @@ public class AddCommandTest {
          * @param identityNumber
          */
         @Override
-        public void updateFilteredLogsListById(IdentityNumber identityNumber) {
+        public void updateFilteredPersonListById(IdentityNumber identityNumber) {
             throw new AssertionError("This method should not be called.");
         }
 
