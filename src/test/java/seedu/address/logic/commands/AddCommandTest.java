@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.IdentityNumber;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -155,6 +156,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        /**
+         * Updates the filter of the logs list to filter by the given {@code identityNumber}.
+         *
+         * @param identityNumber
+         */
+        @Override
+        public void updateFilteredLogsListById(IdentityNumber identityNumber) {
             throw new AssertionError("This method should not be called.");
         }
 
