@@ -111,6 +111,8 @@ public class EditRentalCommand extends Command {
 
         model.setPerson(clientToEdit, editedClient);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateVisibleRentalInformationList(editedClient.getRentalInformation());
+        model.setLastViewedClient(editedClient);
 
         return new CommandResult(String.format(MESSAGE_EDIT_RENTAL_SUCCESS,
                 Messages.formatRentalInformation(editedClient.getRentalInformation().get(rentalIndex.getZeroBased()))));

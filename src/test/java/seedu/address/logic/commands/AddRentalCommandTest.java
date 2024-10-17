@@ -188,6 +188,16 @@ public class AddRentalCommandTest {
         public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Client getLastViewedClient() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLastViewedClient(Client client) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -238,6 +248,22 @@ public class AddRentalCommandTest {
         @Override
         public void updateFilteredPersonList(Predicate<Client> predicate) {
             filteredList.setPredicate(predicate);
+        }
+
+        @Override
+        public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
+            // do nothing as UI related
+        }
+
+        @Override
+        public Client getLastViewedClient() {
+            // object returned is not used
+            return new PersonBuilder().build();
+        }
+
+        @Override
+        public void setLastViewedClient(Client client) {
+            // do nothing as UI related
         }
     }
 
