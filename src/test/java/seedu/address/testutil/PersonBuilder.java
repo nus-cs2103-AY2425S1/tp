@@ -102,7 +102,6 @@ public class PersonBuilder {
         this.hours = new Hours(hours);
         return this;
     }
-    
     // TODO DEAD CODE, REMOVE
     public Person build() {
         return new Tutor(name, phone, email, address, hours, tags);
