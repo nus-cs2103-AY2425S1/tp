@@ -40,7 +40,7 @@ public class DeletePropertyToBuyCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 " + "2\n"
             + "This means that we want to delete the 2nd property the 1st person wants to buy.";
 
-    public static final String MESSAGE_PERSON_PROPERTY_SUCCESS = "Updated Person: %1$s";
+    public static final String MESSAGE_PERSON_PROPERTY_SUCCESS = "Deleted Buying Property: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
 
@@ -77,19 +77,18 @@ public class DeletePropertyToBuyCommand extends Command {
         Person personToEdit = lastShownList.get(personIndex.getZeroBased());
 
         editPersonPropertyDescriptor.setBuyingProperties(personToEdit.getListOfBuyingProperties());
-//        if (editPersonPropertyDescriptor.getBuyingProperties().get() == null) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
-//        }
-//
-//        if (personToEdit.getListOfBuyingProperties().isEmpty()) {
-//            throw new CommandException(Messages.MESSAGE_NO_PROPERTIES_TO_DELETE);
-//        }
-//
-//
-//        if (propertyIndex.getZeroBased() >= personToEdit.getListOfBuyingProperties().size()) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
-//        }
 
+        if (editPersonPropertyDescriptor.getBuyingProperties().get() == null) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
+        }
+
+        if (personToEdit.getListOfBuyingProperties().isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_NO_PROPERTIES_TO_DELETE);
+        }
+
+        if (propertyIndex.getZeroBased() >= personToEdit.getListOfBuyingProperties().size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX);
+        }
 
         editPersonPropertyDescriptor.deleteBuyingProperties(propertyIndex);
 
@@ -101,7 +100,7 @@ public class DeletePropertyToBuyCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_PERSON_PROPERTY_SUCCESS, Messages.format(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_PERSON_PROPERTY_SUCCESS, Messages.formatProperties(editedPerson)));
     }
 
     /**
