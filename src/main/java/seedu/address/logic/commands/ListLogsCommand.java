@@ -31,10 +31,18 @@ public class ListLogsCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        throw new CommandException("ListLogsCommand not implemented yet");
+
         //TODO: Handle behaviour later
+        //requireNonNull(model);
+        // Temporary stub
+        //model.updateFilteredLogsListById(this.identityNumber);
+        //return new CommandResult("The NRIC you inputted is: " + "nric");
+
+
+        //requireNonNull(model);
         //model.updateFilteredLogsList(this.identityNumber);
-        return new CommandResult(MESSAGE_SUCCESS + this.identityNumber.toString());
+        //return new CommandResult(MESSAGE_SUCCESS + this.identityNumber.toString());
     }
 
     @Override
