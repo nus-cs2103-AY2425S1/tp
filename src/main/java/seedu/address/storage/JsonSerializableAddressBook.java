@@ -31,8 +31,6 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedOwner> owners = new ArrayList<>();
     private final List<JsonAdaptedPet> pets = new ArrayList<>();
 
-    private final List<JsonAdaptedOwner> owners = new ArrayList<>();
-
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given owners and pets.
      */
