@@ -27,7 +27,7 @@ tasks done faster than traditional GUI apps.
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `:list` : Lists all contacts.
 
    * `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` : Adds a contact named `John 
      Doe` to the Address Book.
@@ -61,7 +61,7 @@ tasks done faster than traditional GUI apps.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-n NAME -p PHONE_NUMBER`, `-p PHONE_NUMBER -n NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `:list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -91,11 +91,11 @@ Examples:
 * `:add -n John Doe -p 98765432 -e johnd@example.com -l John street, block 123, #01-01`
 * `:a -n Betsy Crowe -t friend -e betsycrowe@example.com -l Newgate Prison -p 1234567 -t criminal`
 
-### Listing all persons : `list`
+### Listing all persons : `:list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `:ls` or `:list`
 
 ### Editing a person : `edit`
 
@@ -144,7 +144,7 @@ Format: `:rm -i INDEX` or `:remove -i INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `:rm -i 2` deletes the 2nd person in the address book.
+* `:list` followed by `:rm -i 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
@@ -201,5 +201,5 @@ Action | Format, Examples
 **Delete** | `:rm -i INDEX`<br> e.g., `:rm -i 3`
 **Edit** | `:edit INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`<br> e.g.,`edit 2 -n James Lee -e jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**List** | `:list`
 **Help** | `help`
