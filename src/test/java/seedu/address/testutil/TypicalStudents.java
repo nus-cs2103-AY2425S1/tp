@@ -9,6 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_HUGH;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.model.AddressBook;
 import seedu.address.model.student.Student;
 
 /**
@@ -25,4 +30,19 @@ public class TypicalStudents {
             .withStudentNumber(VALID_STUDENT_NUMBER_HUGH).build();
 
     private TypicalStudents() {} // prevents instantiation
+
+    /**
+     * Returns an {@code AddressBook} with all the typical students.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Student student : getTypicalStudents()) {
+            ab.addStudent(student);
+        }
+        return ab;
+    }
+
+    public static List<Student> getTypicalStudents() {
+        return new ArrayList<>(Arrays.asList(DIDDY, HUGH));
+    }
 }

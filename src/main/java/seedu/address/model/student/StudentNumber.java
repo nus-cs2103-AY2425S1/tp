@@ -19,7 +19,7 @@ public class StudentNumber {
      */
     public static final String VALIDATION_REGEX = "[A-Za-z][0-9]{7}[A-Za-z]";
 
-    public final String studentNumber;
+    public final String value;
 
     /**
      * Returns true if a given string is a valid student number.
@@ -29,7 +29,7 @@ public class StudentNumber {
     public StudentNumber(String studentNumber) {
         requireNonNull(studentNumber);
         checkArgument(isValidStudentNumber(studentNumber), MESSAGE_CONSTRAINTS);
-        this.studentNumber = studentNumber;
+        this.value = studentNumber;
     }
 
     /**
@@ -41,7 +41,7 @@ public class StudentNumber {
 
     @Override
     public String toString() {
-        return studentNumber;
+        return value;
     }
 
     @Override
@@ -54,11 +54,11 @@ public class StudentNumber {
             return false;
         }
 
-        return studentNumber.equalsIgnoreCase(otherStudentNumber.studentNumber);
+        return value.equalsIgnoreCase(otherStudentNumber.value);
     }
 
     @Override
     public int hashCode() {
-        return studentNumber.hashCode();
+        return value.hashCode();
     }
 }
