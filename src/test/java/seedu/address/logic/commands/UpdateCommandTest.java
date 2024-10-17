@@ -50,7 +50,7 @@ public class UpdateCommandTest {
 
     @Test
 
-    public void execute_allFieldsSpecified_success1() {
+    public void execute_allFieldsSpecified_success1() throws IOException {
 
         Person editedPerson = new PersonBuilder().withNric("S1234567Z").build();
         UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(editedPerson).build();
@@ -67,7 +67,7 @@ public class UpdateCommandTest {
     }
 
     @Test
-    public void execute_allFieldsSpecified_success2() {
+    public void execute_allFieldsSpecified_success2() throws IOException {
         Person editedPerson = new PersonBuilder().withName("Alice Pauline").build();
         UpdateCommand.UpdatePersonDescriptor descriptor = new UpdatePersonDescriptorBuilder(editedPerson).build();
         UpdateCommand updateCommand = new UpdateCommand(editedPerson.getName(), descriptor);
