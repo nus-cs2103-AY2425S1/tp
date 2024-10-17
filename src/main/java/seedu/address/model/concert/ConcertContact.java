@@ -2,62 +2,50 @@ package seedu.address.model.concert;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
  * Represent association between a person and concert in the address book
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Guarantees: details are present and not null, field values are validated,
+ * immutable.
  */
 public class ConcertContact {
-    private static final Map<Concert, ArrayList<ConcertContact>> concertContacts = new HashMap<>();
     private final Person person;
     private final Concert concert;
 
     /**
-     * Constructs Concert Contact
+     * Constructs Concert Contact.
      *
-     * @param person
-     * @param concert
+     * @param person Person in the association
+     * @param concert Concert in the association
      */
     public ConcertContact(Person person, Concert concert) {
         requireAllNonNull(person, concert);
-
         this.person = person;
         this.concert = concert;
-
-        addContactToConcert(this); //instantly adds Person to Concert list as ConcertContact created
     }
 
     public Person getPerson() {
         return person;
     }
+
     public Concert getConcert() {
         return concert;
     }
 
-    /**
-     * Adds ConcertContact to Concert list in the map, based on concert linked to Person
-     *
-     * @param contact
-     */
-    private static void addContactToConcert(ConcertContact contact) {
-        concertContacts.computeIfAbsent(contact.getConcert(), key -> new ArrayList<>()).add(contact);
+    public boolean isAssociated(Concert otherConcert) {
+        return concert.isSameConcert(otherConcert);
     }
 
-    /**
-     * Returns the list of ConcertContacts in the Concert
-     *
-     * @return List of ConcertContact
-     */
-    public List<ConcertContact> getConcertContactList(Concert concert) {
-        return Collections.unmodifiableList(concertContacts.get(concert));
+    public boolean isAssociated(Person otherPerson) {
+        return person.isSamePerson(otherPerson);
+    }
+
+    public boolean isSameConcertContact(ConcertContact otherConcertContact) {
+        return equals(otherConcertContact);
     }
 
     @Override
@@ -82,7 +70,9 @@ public class ConcertContact {
 
     @Override
     public String toString() {
-        return person.getName() + " is a " + person.getRole() + " for " + concert.getName();
+        return new ToStringBuilder(this)
+                .add("concert", concert)
+                .add("person", person).toString();
     }
 
 }
