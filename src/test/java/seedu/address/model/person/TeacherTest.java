@@ -138,4 +138,22 @@ public class TeacherTest {
         assertFalse(teacher1.hashCode() == teacher3.hashCode());
     }
 
+    @Test
+    public void getSubjectString_validSubject_returnsSubjectString() {
+        Teacher teacher = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("12345678"),
+                new Email("johndoe@hotmail.com"), new Address("123 Main St"),
+                SampleDataUtil.getTagSet("Friends"), new Subject("Math"),
+                SampleDataUtil.getClassSet("1A"));
+        assertEquals("Math", teacher.getSubjectString());
+    }
+
+    @Test
+    public void getClassesString_validClasses_returnsClassesString() {
+        Teacher teacher = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("12345678"),
+                new Email("johndoe@hotmail.com"), new Address("123 Main St"),
+                SampleDataUtil.getTagSet("Friends"), new Subject("Math"),
+                SampleDataUtil.getClassSet("1A", "2B"));
+        assertEquals("1A, 2B", teacher.getClassesString());
+    }
+
 }
