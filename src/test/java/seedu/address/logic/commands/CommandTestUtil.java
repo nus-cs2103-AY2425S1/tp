@@ -2,15 +2,11 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -49,14 +45,18 @@ public class CommandTestUtil {
     public static final String SEX_DESC_BOB = " " + PREFIX_SEX + VALID_SEX_BOB;
     public static final String BIRTHDATE_DESC_AMY = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_AMY;
     public static final String BIRTHDATE_DESC_BOB = " " + PREFIX_BIRTHDATE + VALID_BIRTHDATE_BOB;
-    public static final String HEALTHSERVICE_DESC_VACCINATION = " " + PREFIX_HEALTHSERVICE + VALID_HEALTHSERVICE_VACCINATION;
-    public static final String HEALTHSERVICE_DESC_BLOOD_TEST = " " + PREFIX_HEALTHSERVICE + VALID_HEALTHSERVICE_BLOOD_TEST;
+    public static final String HEALTHSERVICE_DESC_VACCINATION = " " + PREFIX_HEALTHSERVICE
+            + VALID_HEALTHSERVICE_VACCINATION;
+    public static final String HEALTHSERVICE_DESC_BLOOD_TEST = " " + PREFIX_HEALTHSERVICE
+            + VALID_HEALTHSERVICE_BLOOD_TEST;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_NRIC_DESC = " " + PREFIX_NRIC + "T0123456z"; // lowercase 'z' not allowed in nric
     public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "male"; // only 'M' or 'F' allowed
-    public static final String INVALID_BIRTHDATE_DESC = " " + PREFIX_BIRTHDATE + "2001/12/02"; // slashes not allowed for birthdates
-    public static final String INVALID_HEALTHSERVICE_DESC = " " + PREFIX_HEALTHSERVICE; // empty strings not allowed for Health Services
+    public static final String INVALID_BIRTHDATE_DESC = " " + PREFIX_BIRTHDATE
+            + "2001/12/02"; // slashes not allowed for birthdates
+    public static final String INVALID_HEALTHSERVICE_DESC = " "
+            + PREFIX_HEALTHSERVICE; // empty strings not allowed for Health Services
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

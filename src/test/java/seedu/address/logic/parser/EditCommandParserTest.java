@@ -3,29 +3,29 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_BLOOD_TEST;
+import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HEALTHSERVICE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_BLOOD_TEST;
-import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_VACCINATION;
+import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_BLOOD_TEST;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_BLOOD_TEST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_VACCINATION;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -44,6 +44,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Sex;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+
 
 public class EditCommandParserTest {
 
@@ -86,21 +87,27 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_NRIC_DESC, Nric.MESSAGE_CONSTRAINTS); // invalid nric
         assertParseFailure(parser, "1" + INVALID_SEX_DESC, Sex.MESSAGE_CONSTRAINTS); // invalid sex
-        assertParseFailure(parser, "1" + INVALID_BIRTHDATE_DESC, Birthdate.MESSAGE_CONSTRAINTS); // invalid birthdate
-        assertParseFailure(parser, "1" + INVALID_HEALTHSERVICE_DESC, HealthService.MESSAGE_CONSTRAINTS); // invalid health service
+        assertParseFailure(parser, "1" + INVALID_BIRTHDATE_DESC,
+                Birthdate.MESSAGE_CONSTRAINTS); // invalid birthdate
+        assertParseFailure(parser, "1" + INVALID_HEALTHSERVICE_DESC,
+                HealthService.MESSAGE_CONSTRAINTS); // invalid health service
 
         // invalid nric followed by valid sex
         assertParseFailure(parser, "1" + INVALID_NRIC_DESC + SEX_DESC_AMY, Nric.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_HEALTHSERVICE} alone will reset the health services of the {@code Person} being edited,
+        // while parsing {@code PREFIX_HEALTHSERVICE} alone will reset the
+        // health services of the {@code Person} being edited,
         // parsing it together with a valid health service results in error
-        assertParseFailure(parser, "1" + HEALTHSERVICE_DESC_VACCINATION + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_EMPTY, HealthService.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + HEALTHSERVICE_DESC_VACCINATION + HEALTHSERVICE_EMPTY + HEALTHSERVICE_DESC_BLOOD_TEST, HealthService.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + HEALTHSERVICE_EMPTY + HEALTHSERVICE_DESC_VACCINATION + HEALTHSERVICE_DESC_BLOOD_TEST, HealthService.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + HEALTHSERVICE_DESC_VACCINATION + HEALTHSERVICE_DESC_BLOOD_TEST
+                + HEALTHSERVICE_EMPTY, HealthService.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + HEALTHSERVICE_DESC_VACCINATION + HEALTHSERVICE_EMPTY
+                + HEALTHSERVICE_DESC_BLOOD_TEST, HealthService.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + HEALTHSERVICE_EMPTY + HEALTHSERVICE_DESC_VACCINATION
+                + HEALTHSERVICE_DESC_BLOOD_TEST, HealthService.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_NRIC_DESC + VALID_BIRTHDATE_AMY + VALID_SEX_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_NRIC_DESC
+                        + VALID_BIRTHDATE_AMY + VALID_SEX_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
