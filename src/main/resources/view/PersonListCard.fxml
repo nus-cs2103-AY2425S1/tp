@@ -25,7 +25,10 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <HBox spacing="15">
+          <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+          <Label fx:id="contactType" text="\$contactType" styleClass="contact_type_label" />
+        </HBox>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
