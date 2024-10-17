@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.showPersonAtIndex;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
@@ -19,8 +18,6 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Person;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for

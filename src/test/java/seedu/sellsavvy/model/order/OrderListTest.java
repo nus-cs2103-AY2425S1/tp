@@ -9,6 +9,7 @@ import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.model.order.exceptions.OrderNotFoundException;
 import seedu.sellsavvy.testutil.OrderBuilder;
 
@@ -50,13 +51,13 @@ public class OrderListTest {
 
     @Test
     public void remove_orderDoesNotExist_throwsOrderNotFoundException() {
-        assertThrows(OrderNotFoundException.class, () -> orderList.remove(ATLAS));
+        assertThrows(OrderNotFoundException.class, () -> orderList.remove(Index.fromZeroBased(0)));
     }
 
     @Test
     public void remove_existingOrder_removesOrder() {
         orderList.add(ATLAS);
-        orderList.remove(ATLAS);
+        orderList.remove(Index.fromZeroBased(0));
         OrderList expectedOrderList = new OrderList();
         assertEquals(expectedOrderList, orderList);
     }
