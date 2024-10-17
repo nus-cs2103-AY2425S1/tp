@@ -26,7 +26,7 @@ import seedu.address.model.internshipapplication.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing internship application in the address book.
  */
 public class EditCommand extends Command<InternshipApplication> {
 
@@ -53,8 +53,8 @@ public class EditCommand extends Command<InternshipApplication> {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the internship application in the filtered internship application list to edit
+     * @param editPersonDescriptor details to edit the internship application with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
@@ -128,8 +128,8 @@ public class EditCommand extends Command<InternshipApplication> {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the internship application with. Each non-empty field value will replace the
+     * corresponding field value of the internship application.
      */
     public static class EditPersonDescriptor {
         private Name name;
