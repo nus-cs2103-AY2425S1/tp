@@ -36,6 +36,7 @@ public class ImportCommandTest {
     private static final String MULTIPLE_PERSON_ENTRIES = "\"Jane Doe\",\"91234567\",\"jane@example.com\","
             + "\"123, Main St\",\"family\"\n"
             + "\"John Smith\",\"87654321\",\"john@example.com\",\"456, Secondary St\",\"coworkers\"";
+    private static final String INVALID_PARSE_LINE_FILE = "./data/InvalidParseLineEntry.csv"; // New invalid parse line file path
     private static final String TEST_DIRECTORY = "./data";
 
     private Model model;
@@ -44,7 +45,7 @@ public class ImportCommandTest {
     private Path invalidFilePath;
     private Path emptyFilePath;
     private Path multipleFilePath;
-    private Path invalidTrimFilePath; // New path for invalid trim file
+    private Path invalidParseLineFilePath; // New path for invalid parse line file
     private Path nonExistentFilePath;
 
     @BeforeEach
@@ -52,12 +53,12 @@ public class ImportCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        // Create paths for valid, invalid, empty, multiple, and trim error CSV files
+        // Create paths for valid, invalid, empty, multiple, and parse line error CSV files
         validFilePath = Paths.get(TEST_DIRECTORY, "ValidImportContacts.csv");
         invalidFilePath = Paths.get(TEST_DIRECTORY, "InvalidImportContacts.csv");
         emptyFilePath = Paths.get(TEST_DIRECTORY, "EmptyImportContacts.csv");
         multipleFilePath = Paths.get(TEST_DIRECTORY, "MultipleImportContacts.csv");
-        invalidTrimFilePath = Paths.get(TEST_DIRECTORY, "InvalidTrimLineEntry.csv"); // New invalid trim file path
+        invalidParseLineFilePath = Paths.get(TEST_DIRECTORY, "InvalidParseLineEntry.csv"); // New invalid parse line file path
         nonExistentFilePath = Paths.get(TEST_DIRECTORY, "NonExistentFile.csv");
 
         // Ensure the directory exists
@@ -89,11 +90,12 @@ public class ImportCommandTest {
             writer.write(MULTIPLE_PERSON_ENTRIES);
         }
 
-        // Create an invalid CSV file entry that will cause trimLine to throw an error
-        try (BufferedWriter writer = Files.newBufferedWriter(invalidTrimFilePath)) {
+        // Create an invalid CSV file entry that will cause parseLine to throw an error
+        // For example, this entry has too many fields
+        try (BufferedWriter writer = Files.newBufferedWriter(invalidParseLineFilePath)) {
             writer.write(VALID_CSV_HEADERS);
             writer.newLine();
-            writer.write("\""); // Empty entry that will cause trimLine to fail
+            writer.write("\"John Doe\",\"98765432\",\"johnd@example.com\",\"311, Clementi Ave 2, #02-25\",\"friends\",\"ExtraField\""); // Extra field
         }
     }
 
@@ -112,8 +114,8 @@ public class ImportCommandTest {
         if (Files.exists(multipleFilePath)) {
             Files.delete(multipleFilePath);
         }
-        if (Files.exists(invalidTrimFilePath)) { // Clean up invalid trim file
-            Files.delete(invalidTrimFilePath);
+        if (Files.exists(invalidParseLineFilePath)) {
+            Files.delete(invalidParseLineFilePath); // Clean up invalid parse line file
         }
     }
 
@@ -194,8 +196,8 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_invalidTrimLineEntry_throwsCommandException() {
-        ImportCommand importCommand = new ImportCommand("InvalidTrimLineEntry.csv");
+    public void execute_invalidParseLineEntry_throwsCommandException() {
+        ImportCommand importCommand = new ImportCommand("InvalidParseLineEntry.csv");
         try {
             importCommand.execute(model);
         } catch (CommandException e) {
