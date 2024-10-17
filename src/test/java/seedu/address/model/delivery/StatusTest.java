@@ -41,8 +41,8 @@ public class StatusTest {
         Status deliveredStatus = new Status("delivered");
         Status deliveringStatus = new Status("delivering");
         Status notDeliveredStatus = new Status("not delivered");
-        assertEquals("DELIVERED", deliveredStatus.getValue());
-        assertEquals("DELIVERING", deliveringStatus.getValue());
-        assertEquals("NOT_DELIVERED", notDeliveredStatus.getValue());
+        assertEquals("delivered", deliveredStatus.getValue());
+        assertEquals("delivering", deliveringStatus.getValue());
+        assertEquals("not delivered", notDeliveredStatus.getValue());
     }
 }
