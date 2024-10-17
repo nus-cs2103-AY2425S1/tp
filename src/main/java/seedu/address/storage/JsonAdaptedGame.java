@@ -9,7 +9,7 @@ import seedu.address.model.game.Role;
 import seedu.address.model.game.SkillLevel;
 import seedu.address.model.game.Username;
 
-/**1
+/**
  * Jackson-friendly version of {@link Game}.
  */
 class JsonAdaptedGame {
