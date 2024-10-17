@@ -58,7 +58,7 @@ public class StringUtil {
 
         String preppedSentence = sentence;
 
-        return preppedSentence.toLowerCase().contains(substring.toLowerCase());
+        return preppedSentence.toLowerCase().contains(preppedSubstring.toLowerCase());
 
     }
 

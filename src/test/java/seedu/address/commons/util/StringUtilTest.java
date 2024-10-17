@@ -123,6 +123,52 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+
+    @Test
+    public void containsSubstringIgnoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", null));
+    }
+    @Test
+    public void containsSubstringIgnoreCase_emptyWord_throwsNullPointerException() {
+        assertThrows(IllegalArgumentException.class, ()
+                -> StringUtil.containsSubstringIgnoreCase("typical sentence", "   "));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_nullSentence_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.containsWordIgnoreCase(null, "abc"));
+    }
+
+    @Test
+    public void containsSubstringIgnoreCase_validInputs_correctResult() {
+        assertFalse(StringUtil.containsSubstringIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsSubstringIgnoreCase("    ", "123"));
+
+        // No valid substring
+        assertFalse(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "bbbb"));
+
+        // Matches word in the sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc", "Bbb")); // First word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bBb ccc@1", "CCc@1")); // Last word (boundary case)
+        assertTrue(StringUtil.containsSubstringIgnoreCase("  AAA   bBb   ccc  ", "aaa")); // Sentence has extra spaces
+        assertTrue(StringUtil.containsSubstringIgnoreCase("Aaa", "aaa")); // Only one word in sentence (boundary case)
+        // Whitespace removed and matches a substring in sentence
+        assertTrue(StringUtil.containsSubstringIgnoreCase("aaa bbb ccc", "  cc  "));
+
+        // Matches multiple words in sentence
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "bbB"));
+
+        // Matches within a word
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "aa"));
+
+        // Matches across words, substring has a space
+        assertTrue(StringUtil.containsSubstringIgnoreCase("AAA bBb ccc  bbb", "a b"));
+
+    }
+
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*
