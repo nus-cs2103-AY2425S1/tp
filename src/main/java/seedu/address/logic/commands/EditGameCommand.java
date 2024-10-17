@@ -78,7 +78,7 @@ public class EditGameCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Map<String, Game> gameMap = lastShownList.get(index.getZeroBased()).getGames();
+        Map<String, Game> gameMap = personToEdit.getGames();
         Game gameToEdit = gameMap.get(gameName);
         if (gameToEdit == null) {
             throw new CommandException("That game doesn't exist for this user...");

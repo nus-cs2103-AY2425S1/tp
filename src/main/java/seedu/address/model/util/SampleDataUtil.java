@@ -75,7 +75,8 @@ public class SampleDataUtil {
     public static Map<String, Game> getGameMap(String... strings) {
         Map<String, Game> gameMap = new HashMap<>();
         Arrays.stream(strings)
-                .forEach((gameName) -> gameMap.put(gameName, new Game(gameName)));
+                .forEach((gameName) -> gameMap.put(gameName, new Game(gameName, new Username("nil"),
+                        new SkillLevel("nil"), new Role("nil"))));
         return gameMap;
     }
 

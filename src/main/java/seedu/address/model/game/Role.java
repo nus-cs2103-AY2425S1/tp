@@ -16,7 +16,7 @@ public class Role {
      */
     private static final String VALIDATION_REGEX = "^(?!\\s*$).+";
 
-    private final String role;
+    public final String role;
 
     /**
      * Constructs a {@code Role}.
