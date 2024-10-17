@@ -25,9 +25,12 @@ class ViewCommandTest {
     public static final Index VIEW_STUB = Index.fromOneBased(1);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @BeforeAll
     static void initToolkit() {
-        Platform.startup(() -> {}); // Initialize the JavaFX toolkit
+        if (!Platform.isFxApplicationThread()) {
+            Platform.startup(() -> {}); // Initialize the JavaFX toolkit
+        }
     }
 
     @Test
