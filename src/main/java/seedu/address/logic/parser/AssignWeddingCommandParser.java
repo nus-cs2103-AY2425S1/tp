@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FORCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.HashSet;
@@ -32,7 +33,7 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
     public AssignWeddingCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEDDING);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEDDING, PREFIX_FORCE);
         Index index;
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)) {
@@ -63,7 +64,12 @@ public class AssignWeddingCommandParser implements Parser<AssignWeddingCommand> 
                 .map(Wedding::new)
                 .collect(Collectors.toList()));
 
-        return new AssignWeddingCommand(index, weddings);
+        if (arePrefixesPresent(argMultimap, PREFIX_FORCE)) {
+            return new AssignWeddingCommand(index, weddings, true);
+        } else {
+            return new AssignWeddingCommand(index, weddings);
+        }
+
     }
 
     /**

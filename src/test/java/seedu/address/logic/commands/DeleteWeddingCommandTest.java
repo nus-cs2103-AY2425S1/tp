@@ -33,7 +33,8 @@ public class DeleteWeddingCommandTest {
         assertCommandSuccess(deleteWeddingCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test void execute_invalidNotFoundDeleteWeddingCommand() {
+    @Test
+    public void execute_invalidNotFoundDeleteWeddingCommand() {
         Wedding weddingToDelete = model.getFilteredWeddingList().get(0);
 
         String expectedMessage = String.format(DeleteWeddingCommand.MESSAGE_DELETE_WEDDING_FAILURE_NOT_FOUND,
