@@ -4,10 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import seedu.address.logic.commands.FindConcertCommand;
-import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.Name;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
