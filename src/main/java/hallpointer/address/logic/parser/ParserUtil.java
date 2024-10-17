@@ -148,11 +148,22 @@ public class ParserUtil {
     public static Point parsePoints(String points) throws ParseException {
         requireNonNull(points);
         String trimmedPoints = points.trim();
-        try {
-            int parsedPoints = Integer.parseInt(trimmedPoints);
-            return new Point(parsedPoints);
-        } catch (NumberFormatException e) {
-            throw new ParseException("Points should be a valid integer.");
+        if (!Point.isValidPoints(trimmedPoints)) {
+            throw new ParseException(Point.MESSAGE_CONSTRAINTS);
         }
+        return new Point(trimmedPoints);
+    }
+
+    /**
+     * Parses {@code Collection<String> indices} into a {@code Set<Index>}.
+     */
+    public static Set<Index> parseIndices(Collection<String> indices) throws ParseException {
+        requireNonNull(indices);
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : indices) {
+            String trimmedIndex = index.trim();
+            indexSet.add(parseIndex(trimmedIndex));
+        }
+        return indexSet;
     }
 }

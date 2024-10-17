@@ -55,6 +55,47 @@ public class MemberTest {
     }
 
     @Test
+    public void addPoints_validPoints_increasesTotalPoints() {
+        Member member = new MemberBuilder(ALICE).build();
+        Point pointsToAdd = new Point("10");
+        member.addPoints(pointsToAdd);
+        assertEquals(new Point("10"), member.getTotalPoints());
+    }
+
+    @Test
+    public void addSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.addSession(null));
+    }
+
+    @Test
+    public void removeSession_nullSession_throwsNullPointerException() {
+        Member member = new MemberBuilder(ALICE).build();
+        assertThrows(NullPointerException.class, () -> member.removeSession(null));
+    }
+
+    @Test
+    public void addSession_validSession_increasesSessions() {
+        Member member = new MemberBuilder(ALICE).build();
+        Session newSession = new Session(new SessionName(VALID_NAME_BOB),
+                new SessionDate("16 Oct 2024"), new Point("10"));
+        member.addSession(newSession);
+        assertTrue(member.getSessions().contains(newSession));
+        assertEquals(newSession.getPoints(), member.getTotalPoints());
+    }
+
+    @Test
+    public void removeSession_validSession_decreasesSessions() {
+        Member member = new MemberBuilder(ALICE).build();
+        Session newSession = new Session(new SessionName(VALID_NAME_BOB),
+                new SessionDate("10 Nov 2025"), new Point("10"));
+        member.addSession(newSession);
+        member.removeSession(newSession.getSessionName());
+        assertFalse(member.getSessions().contains(newSession));
+        assertEquals(new Point("0"), member.getTotalPoints());
+    }
+
+    @Test
     public void equals() {
         // same values -> returns true
         Member aliceCopy = new MemberBuilder(ALICE).build();
@@ -90,44 +131,12 @@ public class MemberTest {
     }
 
     @Test
-    public void addPoints_validPoints_increasesTotalPoints() {
+    public void hashCode_remainsConsistentAcrossCalls() {
         Member member = new MemberBuilder(ALICE).build();
-        Point pointsToAdd = new Point(10);
-        member.addPoints(pointsToAdd);
-        assertEquals(new Point(10), member.getTotalPoints());
-    }
 
-    @Test
-    public void addSession_validSession_increasesSessions() {
-        Member member = new MemberBuilder(ALICE).build();
-        Session newSession = new Session(new SessionName(VALID_NAME_BOB),
-                                new SessionDate("16 Oct 2024"), new Point(10));
-        member.addSession(newSession);
-        assertTrue(member.getSessions().contains(newSession));
-        assertEquals(newSession.getPoints(), member.getTotalPoints());
-    }
-
-    @Test
-    public void removeSession_validSession_decreasesSessions() {
-        Member member = new MemberBuilder(ALICE).build();
-        Session newSession = new Session(new SessionName(VALID_NAME_BOB),
-                                new SessionDate("10 Nov 2025"), new Point(10));
-        member.addSession(newSession);
-        //member.removeSession(newSession);
-        assertFalse(member.getSessions().contains(newSession));
-        assertEquals(new Point(0), member.getTotalPoints());
-    }
-
-    @Test
-    public void addSession_nullSession_throwsNullPointerException() {
-        Member member = new MemberBuilder(ALICE).build();
-        assertThrows(NullPointerException.class, () -> member.addSession(null));
-    }
-
-    @Test
-    public void removeSession_nullSession_throwsNullPointerException() {
-        Member member = new MemberBuilder(ALICE).build();
-        assertThrows(NullPointerException.class, () -> member.removeSession(null));
+        // Ensure that hash code remains consistent for the same object across calls
+        int initialHashCode = member.hashCode();
+        assertTrue(initialHashCode == member.hashCode());
     }
 
     @Test

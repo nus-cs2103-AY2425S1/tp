@@ -107,7 +107,7 @@ class JsonAdaptedMember {
 
         final Set<Tag> modelTags = new HashSet<>(memberTags);
 
-        final Point modelTotalPoints = new Point(this.totalPoints);
+        final Point modelTotalPoints = new Point(Integer.toString(this.totalPoints));
 
         final Set<Session> modelSessions = new HashSet<>();
         for (JsonAdaptedSession session : sessions) {

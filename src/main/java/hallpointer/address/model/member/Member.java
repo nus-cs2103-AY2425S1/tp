@@ -36,54 +36,24 @@ public class Member {
     public Member(Name name, Telegram telegram, Room room, Set<Tag> tags) {
         requireAllNonNull(name, telegram, room, tags);
 
-        // Validate each field using regex
-        if (!name.fullName.matches("^[a-zA-Z][a-zA-Z ]{0,99}$")) {
-            throw new IllegalArgumentException("Error: Invalid name format.");
-        }
-        if (!room.value.matches("^[0-9]+/[0-9]+/[0-9]+$")) {
-            throw new IllegalArgumentException(
-                "Error: Room number must be in the format <block>/<floor>/<room_number>.");
-        }
-        if (!telegram.value.matches("^[a-zA-Z](?:[a-zA-Z0-9]|_(?=.*[a-zA-Z0-9]$)){4,31}$")) {
-            throw new IllegalArgumentException(
-                "Error: Telegram handle must only contain alphanumeric characters or underscores "
-                + "and be between 5 to 32 characters long.");
-        }
-
-        // Set values after validation
         this.name = name;
         this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
-        this.totalPoints = new Point(0);
+        this.totalPoints = new Point("0");
     }
 
     /**
      * Every field must be present and not null. Overloaded constructor to include totalPoints and sessions.
      */
     public Member(Name name, Telegram telegram, Room room, Set<Tag> tags, Point totalPoints, Set<Session> sessions) {
-        requireAllNonNull(name, telegram, room, tags);
+        requireAllNonNull(name, telegram, room, tags, totalPoints, sessions);
 
-        // Validate each field using regex
-        if (!name.fullName.matches("^[a-zA-Z][a-zA-Z ]{0,99}$")) {
-            throw new IllegalArgumentException("Error: Invalid name format.");
-        }
-        if (!room.value.matches("^[0-9]+/[0-9]+/[0-9]+$")) {
-            throw new IllegalArgumentException(
-                "Error: Room number must be in the format <block>/<floor>/<room_number>.");
-        }
-        if (!telegram.value.matches("^[a-zA-Z](?:[a-zA-Z0-9]|_(?=.*[a-zA-Z0-9]$)){4,31}$")) {
-            throw new IllegalArgumentException(
-                "Error: Telegram handle must only contain alphanumeric characters or underscores "
-                + "and be between 5 to 32 characters long.");
-        }
-
-        // Set values after validation
         this.name = name;
         this.telegram = telegram;
         this.room = room;
         this.tags.addAll(tags);
-        this.totalPoints = totalPoints != null ? totalPoints : new Point(0);
+        this.totalPoints = totalPoints;
         this.sessions.addAll(sessions);
     }
 
@@ -160,18 +130,16 @@ public class Member {
     /**
      * Removes the given session from the member's list of sessions.
      *
-     * @param session Session to be removed from the member.
+     * @param sessionName Name of the Session to be removed from the member.
      */
-    public void removeSession(SessionName session) {
-        if (session == null) {
-            throw new IllegalArgumentException("Session is null: " + session);
-        }
+    public void removeSession(SessionName sessionName) {
+        requireNonNull(sessionName);
         Session target = this.sessions.stream()
-                .filter(object -> object.getSessionName().toString().equals(session.toString()))
-                .findFirst()   // get the first match, wrapped in Optional
+                .filter(object -> object.getSessionName().toString().equals(sessionName.toString()))
+                .findFirst() // get the first match, wrapped in Optional
                 .orElse(null); // return null if no match is found
         if (target == null) {
-            throw new IllegalArgumentException("Session not found: " + session);
+            throw new IllegalArgumentException("Session not found: " + sessionName);
         }
         this.sessions.remove(target);
         subtractPoints(target.getPoints());

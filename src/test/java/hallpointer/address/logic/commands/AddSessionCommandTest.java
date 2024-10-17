@@ -1,54 +1,75 @@
 package hallpointer.address.logic.commands;
 
 import static hallpointer.address.testutil.Assert.assertThrows;
+import static hallpointer.address.testutil.TypicalIndexes.INDEX_FIRST_MEMBER;
+import static hallpointer.address.testutil.TypicalSessions.ATTENDANCE;
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import hallpointer.address.commons.core.GuiSettings;
+import hallpointer.address.commons.core.index.Index;
 import hallpointer.address.model.AddressBook;
 import hallpointer.address.model.Model;
 import hallpointer.address.model.ReadOnlyAddressBook;
 import hallpointer.address.model.ReadOnlyUserPrefs;
 import hallpointer.address.model.member.Member;
+import hallpointer.address.model.member.UniqueMemberList;
 import hallpointer.address.model.session.Session;
+import hallpointer.address.model.session.SessionName;
+import hallpointer.address.testutil.MemberBuilder;
+import hallpointer.address.testutil.SessionBuilder;
 import javafx.collections.ObservableList;
 
 class AddSessionCommandTest {
 
     @Test
     public void constructor_nullSession_throwsNullPointerException() {
+        Session session = new SessionBuilder(ATTENDANCE).build();
+        Set<Index> indices = new HashSet<Index>();
+        indices.add(INDEX_FIRST_MEMBER);
+
+        assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, indices));
+        assertThrows(NullPointerException.class, () -> new AddSessionCommand(session, null));
         assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, null));
-
-        //assertThrows(NullPointerException.class, () -> new AddSessionCommand(, null));
-        //assertThrows(NullPointerException.class, () -> new AddSessionCommand(null, null));
-    }
-
-    /*@Test
-    public void execute_sessionAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
-        Member validMember = new MemberBuilder().build();
-
-        CommandResult commandResult = new AddMemberCommand(validMember).execute(modelStub);
-
-        assertEquals(
-                String.format(
-                        AddMemberCommand.MESSAGE_SUCCESS,
-                        validMember.getName().fullName,
-                        validMember.getRoom().value,
-                        validMember.getTelegram().value
-                ),
-                commandResult.getFeedbackToUser()
-        );
-        assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
     }
 
     @Test
+    public void execute_sessionAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingSessionAdded modelStub = new ModelStubAcceptingSessionAdded();
+        Session validSession = new SessionBuilder().build();
+        Set<Index> indices = new HashSet<Index>();
+        Set<Session> resultSessions = new HashSet<>();
+
+        indices.add(INDEX_FIRST_MEMBER);
+        modelStub.addMember(new MemberBuilder().build());
+        CommandResult commandResult = new AddSessionCommand(validSession, indices).execute(modelStub);
+
+        assertEquals(
+                String.format(
+                        AddSessionCommand.MESSAGE_SUCCESS,
+                        validSession.getSessionName().sessionName,
+                        validSession.getDate().fullDate,
+                        validSession.getPoints().points,
+                        indices.size()
+                ),
+                commandResult.getFeedbackToUser()
+        );
+        resultSessions.add(validSession);
+        assertEquals(Collections.unmodifiableSet(resultSessions),
+                modelStub.getFilteredMemberList().get(0).getSessions());
+    }
+
+    /*@Test
     public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
         AddMemberCommand addMemberCommand = new AddMemberCommand(validMember);
@@ -153,9 +174,6 @@ class AddSessionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * @param session
-         */
         @Override
         public void addSession(Session session) {
             throw new AssertionError("This method should not be called");
@@ -180,6 +198,13 @@ class AddSessionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
+        @Override
+        public void deleteSession(Member target, SessionName sessionName) {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
         @Override
         public void setSession(Session target, Session editedSession) {
             throw new AssertionError("This method should not be called.");
@@ -192,39 +217,35 @@ class AddSessionCommandTest {
     }
 
     /**
-     * A Model stub that contains a single member.
+     * A Model stub that always accept the session being added.
      */
-    private class ModelStubWithMember extends AddSessionCommandTest.ModelStub {
-        private final Member member;
-
-        ModelStubWithMember(Member member) {
-            requireNonNull(member);
-            this.member = member;
-        }
-
-        @Override
-        public boolean hasMember(Member member) {
-            requireNonNull(member);
-            return this.member.isSameMember(member);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the member being added.
-     */
-    private class ModelStubAcceptingSessionAdded extends AddSessionCommandTest.ModelStub {
-        final ArrayList<Member> membersAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasMember(Member member) {
-            requireNonNull(member);
-            return membersAdded.stream().anyMatch(member::isSameMember);
-        }
+    private class ModelStubAcceptingSessionAdded extends ModelStub {
+        final UniqueMemberList members = new UniqueMemberList();
+        final ArrayList<Session> sessionsAdded = new ArrayList<>();
 
         @Override
         public void addMember(Member member) {
-            requireNonNull(member);
-            membersAdded.add(member);
+            members.add(member);
+        }
+
+        @Override
+        public ObservableList<Member> getFilteredMemberList() {
+            return members.asUnmodifiableObservableList();
+        }
+
+        @Override
+        public void updateFilteredMemberList(Predicate<Member> predicate) {}
+
+        @Override
+        public boolean hasSession(Session session) {
+            requireNonNull(session);
+            return sessionsAdded.stream().anyMatch(session::isSameSession);
+        }
+
+        @Override
+        public void addSession(Session session) {
+            requireNonNull(session);
+            sessionsAdded.add(session);
         }
 
         @Override
