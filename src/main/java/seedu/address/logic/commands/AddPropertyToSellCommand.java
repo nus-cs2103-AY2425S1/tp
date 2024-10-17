@@ -38,7 +38,6 @@ public class AddPropertyToSellCommand extends Command {
             + PREFIX_TAG + "Extremely spacious "
             + PREFIX_TAG + "Near MRT";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED = "This command (addSell) is not implemented yet";
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists "
             + "in the list of properties to sell";
@@ -48,6 +47,10 @@ public class AddPropertyToSellCommand extends Command {
 
     /**
      * Creates an AddPropertyToSellCommand to add the specified {@code Property}
+     * to the list of properties to sell for the contact at the specified {@code Index}.
+     *
+     * @param personIndex of the person in the filtered person list to edit
+     * @param property property to be added to the list of properties to sell
      */
     public AddPropertyToSellCommand(Index personIndex, Property property) {
         requireNonNull(property);

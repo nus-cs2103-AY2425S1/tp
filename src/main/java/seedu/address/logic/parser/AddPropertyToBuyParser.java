@@ -29,6 +29,7 @@ import seedu.address.model.tag.Tag;
  * Parses input arguments and creates a new AddPropertyToBuyCommand object
  */
 public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddPropertyToBuyCommand
      * and returns an AddPropertyToBuyCommand object for execution.
@@ -68,10 +69,29 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
         return new AddPropertyToBuyCommand(index, property);
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Creates a specific Property object based on the given {@code HousingType}
+     * The type of property will be one of {@code Condo}, {@code Hdb},
+     * {@code Apartment}, {@code Bto}, or {@code OtherProperty} depending on
+     * provided {@code HousingType}
+     *
+     * @param housingType the type of housing,
+     *                    used to determine the specific subclass of {@code Property} to instantiate
+     * @param buyingPrice the price at which the property is being bought
+     * @param postalCode the postal code of the property
+     * @param unitNumber the unit number of the property
+     * @param tagList set of tags associated with the property
+     * @return a specific {@code Property} object corresponding to the {@code HousingType},
+     *          or {@code null} if {@code HousingType is not recognised}
+     */
     private static Property getSpecificPropertyObject(HousingType housingType, Price buyingPrice,
                                                       PostalCode postalCode, UnitNumber unitNumber, Set<Tag> tagList) {
         return switch (housingType) {

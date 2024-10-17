@@ -12,6 +12,14 @@ public class Hdb extends Property {
 
     public static final String MESSAGE_CONSTRAINTS = "HDB names should be alphanumeric";
 
+
+    /**
+     * Constructs a {@code Hdb}.
+     *
+     * @param postalCode A valid Hdb postalCode.
+     * @param unitNumber A valid unit number.
+     * @param price A valid price.
+     */
     public Hdb(PostalCode postalCode, UnitNumber unitNumber, Price price, Set<Tag> tags) {
         super(postalCode, unitNumber, price, tags);
     }

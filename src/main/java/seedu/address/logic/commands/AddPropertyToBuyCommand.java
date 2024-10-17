@@ -36,7 +36,7 @@ public class AddPropertyToBuyCommand extends Command {
             + PREFIX_BUYING_PRICE + "1650000 "
             + PREFIX_POSTAL_CODE + "567510 "
             + PREFIX_UNIT_NUMBER + "10-65 "
-            + PREFIX_TAG + "Extremely spacious "
+            + PREFIX_TAG + "Extremely spacious"
             + PREFIX_TAG + "Near MRT";
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
@@ -47,14 +47,17 @@ public class AddPropertyToBuyCommand extends Command {
     private final Property propertyToBuyToBeAdded;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     *  Creates an AddPropertyToBuyCommand to add the specified {@code Property}
+     * to the list of properties to buy for the contact at the specified {@code Index}.
+     *
+     * @param personIndex of the person in the filtered person list to edit
      * @param property property to be added to the list of properties to buy
      */
-    public AddPropertyToBuyCommand(Index index, Property property) {
-        requireNonNull(index);
+    public AddPropertyToBuyCommand(Index personIndex, Property property) {
+        requireNonNull(personIndex);
         requireNonNull(property);
 
-        this.index = index;
+        this.index = personIndex;
         this.propertyToBuyToBeAdded = property;
     }
 
