@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.core.index.IndexComparator;
+import seedu.address.commons.core.index.DescendingIndexComparator;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,12 +24,13 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         try {
             args = args.trim();
-            ArrayList<String> stringIndices = new ArrayList<>(new HashSet<String>((Arrays.asList(args.split("\\s+")))));
+            ArrayList<String> stringIndices = new ArrayList<>(new HashSet<String>((Arrays
+                    .asList(args.split("\\s+"))))); //Hashset to remove duplicates
             ArrayList<Index> indices = new ArrayList<>();
             for (String s: stringIndices) {
                 indices.add(ParserUtil.parseIndex(s));
             }
-            indices.sort(new IndexComparator()); //sort in descending order for smooth deletion
+            indices.sort(new DescendingIndexComparator()); //sort in descending order for smooth deletion
             return new DeleteCommand(indices);
         } catch (ParseException pe) {
             throw new ParseException(
