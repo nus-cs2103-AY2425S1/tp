@@ -132,29 +132,15 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String policy} into a {@code Policy}.
+     * Parse a {@code String policy} into a {@code PolicyType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Policy} is not a valid policy type.
+     * @throws ParseException if the given {@code policy} is invalid.
      */
-    public static Policy parsePolicy(String policy) throws ParseException {
+    public static PolicyType parsePolicyType(String policy) throws ParseException {
         requireNonNull(policy);
 
-        final String lowerCaseTrimmedPolicy = policy.trim().toLowerCase();
-        String life = PolicyType.LIFE.toString().toLowerCase();
-        String health = PolicyType.HEALTH.toString().toLowerCase();
-        String education = PolicyType.EDUCATION.toString().toLowerCase();
-
-        // Cannot use switch cases here because life, health and education are dynamic variables.
-        if (lowerCaseTrimmedPolicy.equals(life)) {
-            return new LifePolicy();
-        } else if (lowerCaseTrimmedPolicy.equals(health)) {
-            return new HealthPolicy();
-        } else if (lowerCaseTrimmedPolicy.equals(education)) {
-            return new EducationPolicy();
-        } else {
-            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
-        }
+        try 
     }
 
     /**

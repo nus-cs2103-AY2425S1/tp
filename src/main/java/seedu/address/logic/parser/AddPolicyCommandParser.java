@@ -8,11 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
+import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
@@ -49,6 +52,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
 
         assert argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent() : "Expected value for 'pt/' but none found.";
         PolicyType policyType = ParserUtil.parsePolicyType(argMultimap.getValue(PREFIX_POLICY_TYPE).get());
+
         try {
             double premiumAmount = argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT)
                     .map(Double::parseDouble).orElse(-1.0);
@@ -59,7 +63,7 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         } catch (NumberFormatException e) {
             throw new ParseException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
         } catch (DateTimeParseException e) {
-            throw new ParseException(Policy.)
+            throw new ParseException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
         }
 
         return new AddPolicyCommand(index, policySet);
