@@ -164,14 +164,27 @@ public class ParserUtil {
 
         String trimmed = moduleRolePair.trim();
 
-        // Verify able to split by -
-        String[] parsed = trimmed.split("-", 2);
-        if (parsed.length != 2) {
-            throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
+        // Assume that if the - separator is missing, only module code is provided.
+        // e.g. r/CS1101S => CS1101S student.
+        boolean onlyModuleCodePresent = trimmed.indexOf('-') == -1;
+
+        ModuleCode moduleCode;
+        RoleType roleType;
+
+        if (onlyModuleCodePresent) {
+            moduleCode = new ModuleCode(trimmed);
+            roleType = RoleType.STUDENT;
+        } else {
+            // Verify able to split by -
+            String[] parsed = trimmed.split("-", 2);
+            if (parsed.length != 2) {
+                throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
+            }
+
+            moduleCode = new ModuleCode(parsed[0]);
+            roleType = parseRoleType(parsed[1]);
         }
 
-        ModuleCode moduleCode = new ModuleCode(parsed[0]);
-        RoleType roleType = parseRoleType(parsed[1]);
         return new ModuleRolePair(moduleCode, roleType);
     }
 
