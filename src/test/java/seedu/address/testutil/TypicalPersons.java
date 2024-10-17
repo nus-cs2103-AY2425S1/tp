@@ -28,7 +28,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withPhone("98765432").withTags("owesMoney", "friends").withModule("MA1522").withGender("male").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withPhone("95352563").withModule("EL1101").withGender("female").build();
+            .withPhone("95352563").withTags("runner").withModule("EL1101").withGender("female").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withPhone("87652533").withTags("friends").withModule("CS1101").withGender("male").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
