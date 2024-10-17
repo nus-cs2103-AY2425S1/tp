@@ -6,8 +6,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
-
 /**
  * Represents a Person's BirthDate in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBirthdate(String)}
