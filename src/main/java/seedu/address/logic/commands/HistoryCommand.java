@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -67,7 +68,7 @@ public class HistoryCommand extends Command {
         }
 
         ContactRecordList callHistory = model.getCallHistory(personFound);
-
+        Collections.reverse(callHistory);
         model.updateDisplayedList(callHistory);
 
         return new CommandResult(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personFound.getName()));
