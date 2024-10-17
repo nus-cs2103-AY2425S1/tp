@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -74,5 +75,26 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Returns true if objects are equal based on {@code HashMap}.
+     */
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ArgumentMultimap // instanceof handles nulls
+                && argMultimap.equals(((ArgumentMultimap) other).argMultimap));
+    }
+
+    /**
+     * @return Set of prefixes in this ArgumentMultimap.
+     */
+    public Set<Prefix> getPrefixes() {
+        return argMultimap.keySet();
+    }
+
+    @Override
+    public String toString() {
+        return argMultimap.toString();
     }
 }
