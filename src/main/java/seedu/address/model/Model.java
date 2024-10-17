@@ -87,7 +87,7 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Adds the given meeting.
+     * Adds the given meeting with a person.
      */
-    void addMeeting(Meeting meeting);
+    void addMeeting(Person target, Meeting meeting);
 }
