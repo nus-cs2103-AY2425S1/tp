@@ -30,6 +30,7 @@ public class Point {
      */
     public static boolean isValidPoints(String test) {
         try {
+            test = test.substring(0, 1);
             int dummy = Integer.parseInt(test);
             return test.matches(VALIDATION_REGEX); // Points must be non-negative
         } catch (NumberFormatException e) {
