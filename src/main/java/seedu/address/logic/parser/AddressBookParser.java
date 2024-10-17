@@ -19,7 +19,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NewtagCommand;
+import seedu.address.logic.commands.NotRsvpListCommand;
 import seedu.address.logic.commands.RsvpCommand;
+import seedu.address.logic.commands.RsvpListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UnRsvpCommand;
 import seedu.address.logic.commands.UntagCommand;
@@ -101,6 +103,12 @@ public class AddressBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case RsvpListCommand.COMMAND_WORD:
+            return new RsvpListCommand();
+
+        case NotRsvpListCommand.COMMAND_WORD:
+            return new NotRsvpListCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

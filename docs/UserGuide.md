@@ -12,22 +12,26 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your computer. To check, open a command terminal, and type `java -version`.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W11-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. To open the application,
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+    * Open a command terminal
+    * `cd` into the folder you put the jar file in
+    * Use the `java -jar addressbook.jar` command to run the application.<br>
+    * A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+      ![Ui](images/Ui.png)
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -35,7 +39,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -49,7 +53,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/Bride's Side` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -65,7 +69,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -76,15 +80,17 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
-
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​`
+* Names cannot be more than 100 characters long.
+* Phone numbers must be exactly 8 digits.
+* Tags must be created before they can be assigned to a person. Refer to [newtag](#creating-a-new-tag-newtag) on how to create a tag.
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com t/Groom's Side`
+* `add n/Betsy Crowe t/Bride's Side e/betsycrowe@example.com p/12345678`
 
 ### Listing all persons : `list`
 
@@ -92,16 +98,68 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Creating a new tag: `newtag`
+
+Creates a new tag.
+
+Format: `newtag TAG_NAME`
+* Tag name cannot be more than 50 characters long.
+
+Examples:
+* `newtag Bride's Side`
+
+### Tagging a person: `tag`
+
+Tags a person with the given tag.
+
+Format: `tag INDEX t/TAG`
+* Tag must already exist before tagging it to a person.
+
+Examples:
+* `tag 1 t/Bride's Side` Adds the tag "Bride's Side" to the 1st person in the list.
+
+### Removing a tag from a person: `untag`
+
+Removes a tag from a person.
+
+Format: `untag INDEX t/TAG`
+* A person must already have the tag for it to be removed.
+
+Examples:
+* `untag 2 t/Groom's Side`
+
+### Setting RSVP status for a guest : `rsvp` and `unrsvp`
+
+Toggles the RSVP status for a guest. `rsvp` sets the guest's status as RSVPed, while `unrsvp` sets the guest's status as not yet RSVPed.
+
+Format: `rsvp INDEX` or `unrsvp INDEX`
+
+Example:
+* `rsvp 2` marks the 2nd person as RSVPed.
+* `unrsvp 1` marks the 1st person as not yet RSVPed.
+
+### Listing all persons who have RSVPed: `rsvplist`
+
+Shows a list of all persons in the address book who have already RSVPed.
+
+Format: `rsvplist`
+
+### Listing all persons who have not yet RSVPed: `notrsvplist`
+
+Shows a list of all persons in the address book who have not yet RSVPed.
+
+Format: `rsvplist`
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -115,7 +173,7 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
@@ -190,10 +248,18 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, t/Groom's Side`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
+**Newtag** | `newtag TAG_NAME` <br> e.g. `newtag Bride's Side`
+**Tag** | `tag INDEX t/TAG` <br> e.g. `tag 2 t/Groom's Side`
+**Untag** | `untag INDEX t/TAG` <br> e.g. `untag 1 t/Bride's Side`
+**RSVP** | `rsvp INDEX`
+**UnRSVP** | `unrsvp INDEX`
+**RSVPList** | `rsvplist`
+**NotRSVPList** | `notrsvplist`
 **Help** | `help`
+
