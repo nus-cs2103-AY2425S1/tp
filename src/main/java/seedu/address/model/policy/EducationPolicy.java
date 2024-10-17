@@ -19,16 +19,23 @@ public class EducationPolicy extends Policy {
     }
 
     /**
-     * Constructor for a new EducationPolicy with all its fields initialized.
+     * Constructor for a new EducationPolicy with selected fields initialized.
+     * Use a negative number (i.e., -1) for premiumAmount and coverageAmount to initialize
+     * the default values for these fields.
+     * Use null for expiryDate to initialize the default expiryDate.
      *
      * @param premiumAmount the price of the policy, paid per month.
+     *                      Use a negative number to initialize this policy with the default premiumAmount.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
+     *                       Use a negative number to initialize this policy with the default coverageAmount.
      * @param expiryDate the date of Policy's expiry.
-     * @throws IllegalArgumentException if the premiumAmount or coverageAmount is negative.
-     * @throws NullPointerException if the given expiryDate or insuree is null.
+     *                   Use null to initialize this policy with the default expiryDate.
      */
     public EducationPolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
-        super(premiumAmount, coverageAmount, expiryDate);
+        super(
+                premiumAmount < 0 ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
+                coverageAmount < 0 ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
+                expiryDate == null ? LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD) : expiryDate);
     }
 
     @Override
