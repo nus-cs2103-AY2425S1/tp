@@ -22,7 +22,7 @@ import seedu.address.model.person.Role;
 public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindPersonCommand.
+     * Parses the given {@code String} of arguments in the context of the FindPersonCommand
      * and returns a FindPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
