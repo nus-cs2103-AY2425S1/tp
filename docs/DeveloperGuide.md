@@ -390,6 +390,18 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 2. Cher saves contacts in memory into local file. <br>
    Use case ends.
 
+#### Use case: UC5 - Batch delete
+**MSS**
+1. User enters a command to delete all contacts with specific tags.
+2. Cher will remove all contacts containing specified tags.
+3. Cher will show the contacts that have been removed.<br>
+   Use case ends.
+
+**Extensions**
+* 1a. Cher detects error in user input.
+    - 1a1. Cher shows correct input format. <br>
+      Use case ends.
+
 ### Non-Functional Requirements
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
