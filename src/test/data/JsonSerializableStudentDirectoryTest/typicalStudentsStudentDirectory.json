@@ -33,8 +33,8 @@
     },
     "makeupLessons": [{
       "lessonDate": "2021-10-01",
-      "startTime": "13:00",
-      "endTime": "15:00"
+      "startTime": "12:00",
+      "endTime": "14:00"
     }]
   }, {
     "name" : "Carl Kurz",
