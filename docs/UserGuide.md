@@ -3,7 +3,14 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+PlanPal is an **address book** designed for **student event planners** at NUS who need to manage contacts 
+(e.g., attendees, vendors, sponsors, and volunteers) for their events. 
+
+PlanPal offers a **centralized platform** to organize, track, and access contact information, ensuring 
+efficient coordination and smooth communication throughout the event planning process.
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
 
 * Table of Contents
 {:toc}
@@ -18,7 +25,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar planpal.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
