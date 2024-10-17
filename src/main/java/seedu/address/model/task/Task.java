@@ -1,7 +1,6 @@
 package seedu.address.model.task;
 
 import java.util.Objects;
-import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 

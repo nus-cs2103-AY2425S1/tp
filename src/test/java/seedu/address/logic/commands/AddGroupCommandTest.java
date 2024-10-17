@@ -319,6 +319,16 @@ public class AddGroupCommandTest {
         public void deleteTask(Task task) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public void increaseGroupWithTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void decreaseGroupWithTask(Task task) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
