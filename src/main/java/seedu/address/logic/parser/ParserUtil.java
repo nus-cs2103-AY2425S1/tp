@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -12,7 +13,9 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
+import seedu.address.model.person.ModuleRolePair;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RoleType;
@@ -148,6 +151,47 @@ public class ParserUtil {
             throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
         }
     }
+
+    /**
+     * Parses a {@code String moduleRolePair} into a {@code ModuleRolePair}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleRolePair} is invalid.
+     */
+    public static ModuleRolePair parseModuleRolePair(String moduleRolePair)
+            throws ParseException {
+        requireNonNull(moduleRolePair);
+
+        String trimmed = moduleRolePair.trim();
+
+        // Verify able to split by -
+        String[] parsed = trimmed.split("-", 2);
+        if (parsed.length != 2) {
+            throw new ParseException(ModuleRoleMap.MESSAGE_CONSTRAINTS);
+        }
+
+        ModuleCode moduleCode = new ModuleCode(parsed[0]);
+        RoleType roleType = parseRoleType(parsed[1]);
+        return new ModuleRolePair(moduleCode, roleType);
+    }
+
+    /**
+     * Parses {@code Collection<String> moduleRolePairs} into a {@code ModuleRoleMap}.
+     */
+    public static ModuleRoleMap parseModuleRolePairs(Collection<String> moduleRolePairs) throws ParseException {
+        requireNonNull(moduleRolePairs);
+
+        final HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
+
+        for (String moduleRolePair : moduleRolePairs) {
+            ModuleRolePair parsedPair = parseModuleRolePair(moduleRolePair);
+            hashMap.put(parsedPair.moduleCode, parsedPair.roleType);
+        }
+
+        final ModuleRoleMap moduleRoleMap = new ModuleRoleMap(hashMap);
+        return moduleRoleMap;
+    }
+
 
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
