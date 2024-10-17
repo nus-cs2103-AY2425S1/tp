@@ -19,7 +19,7 @@ public class RemoveCategoryCommand extends Command {
      */
     public static final String COMMAND_WORD = "removeTxnCat";
 
-    public static final String MESSAGE_SUCCESS = "Category removed from transaction: %s";
+    public static final String MESSAGE_SUCCESS = "Category removed from transaction: [%s] with [%s]";
 
     public static final String MESSAGE_MISSING_CATEGORY = "No such category found in the specified transaction.";
 
@@ -58,6 +58,6 @@ public class RemoveCategoryCommand extends Command {
 
         transaction.removeCategory(category);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.getId(), category));
     }
 }

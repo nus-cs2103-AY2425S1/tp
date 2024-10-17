@@ -20,7 +20,7 @@ public class AddCategoryCommand extends Command {
      */
     public static final String COMMAND_WORD = "addTxnCat";
 
-    public static final String MESSAGE_SUCCESS = "Category added to transaction: %s";
+    public static final String MESSAGE_SUCCESS = "Category added to transaction: [%s] with [%s]";
 
     public static final String MESSAGE_NO_SUCH_CATEGORY = "No such category found.";
 
@@ -59,6 +59,6 @@ public class AddCategoryCommand extends Command {
 
         transaction.addCategory(category);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, transaction.getId(), category));
     }
 }

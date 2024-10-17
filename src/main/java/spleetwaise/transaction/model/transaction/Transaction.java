@@ -37,6 +37,11 @@ public class Transaction {
         this.date = date;
     }
 
+    public Transaction(Person person, Amount amount, Description description, Date date, Categories cats) {
+        this(IdUtil.getId(), person, amount, description, date);
+        this.cats = cats;
+    }
+
     public Transaction(Person person, Amount amount, Description description, Date date) {
         this(IdUtil.getId(), person, amount, description, date);
     }
