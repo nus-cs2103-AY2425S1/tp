@@ -16,17 +16,22 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ImportCommandTest {
 
     private static final String VALID_CSV_HEADERS = "Name,Phone Number,Email Address,Address,Tags";
-    private static final String VALID_PERSON_ENTRY = "\"John Doe\",\"98765432\",\"johnd@example.com\",\"311, Clementi Ave 2, #02-25\",\"friends\"";
+    private static final String VALID_PERSON_ENTRY = "\"John Doe\",\"98765432\",\"johnd@example.com\","
+            + "\"311, Clementi Ave 2, #02-25\",\"friends\"";
     private static final String INVALID_PERSON_ENTRY = "\"John Doe\",\"98765432\""; // Incomplete person entry
     private static final String TEST_DIRECTORY = "./data";
 
@@ -108,6 +113,7 @@ public class ImportCommandTest {
         Person person = new Person(name, phone, email, address, tagSet);
         expectedModel.addPerson(person);
         // Ensure success of import
-        assertCommandSuccess(importCommand, model, String.format(ImportCommand.MESSAGE_SUCCESS, "ValidImportContacts.csv"), expectedModel);
+        assertCommandSuccess(importCommand, model,
+                String.format(ImportCommand.MESSAGE_SUCCESS, "ValidImportContacts.csv"), expectedModel);
     }
 }
