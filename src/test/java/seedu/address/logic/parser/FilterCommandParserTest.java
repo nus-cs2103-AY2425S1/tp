@@ -19,6 +19,7 @@ import seedu.address.model.person.predicates.JobContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.RemarkContainsSubstringPredicate;
+import seedu.address.model.person.predicates.TierStartsWithSubstringPredicate;
 
 public class FilterCommandParserTest {
 
@@ -95,6 +96,15 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_tierFlag_returnsRemarkFilterCommand() {
+        List<Predicate<Person>> expectedPredicates = new ArrayList<>();
+        expectedPredicates.add(new TierStartsWithSubstringPredicate("gOLD"));
+        FilterCommand expectedFilterCommand = new FilterCommand(new CombinedPredicate(expectedPredicates));
+
+        assertParseSuccess(parser, " t/ GOLD", expectedFilterCommand);
+    }
+
+    @Test
     public void parse_validMultipleArgs_returnsFilterCommand() {
         List<Predicate<Person>> expectedPredicates = new ArrayList<>();
         expectedPredicates.add(new NameContainsSubstringPredicate("Alice"));
@@ -103,11 +113,12 @@ public class FilterCommandParserTest {
         expectedPredicates.add(new AddressContainsSubstringPredicate("Block 123"));
         expectedPredicates.add(new JobContainsSubstringPredicate("Software Engineer"));
         expectedPredicates.add(new RemarkContainsSubstringPredicate("is a celebrity"));
+        expectedPredicates.add(new TierStartsWithSubstringPredicate("GOLD"));
 
         FilterCommand expectedFilterCommand = new FilterCommand(new CombinedPredicate(expectedPredicates));
 
         assertParseSuccess(parser, " n/ Alice p/ 91112222 e/ alice@example.com a/ Block 123 "
-                + "j/ Software Engineer r/ is a celebrity", expectedFilterCommand);
+                + "j/ Software Engineer r/ is a celebrity t/ gold", expectedFilterCommand);
     }
 
     @Test
