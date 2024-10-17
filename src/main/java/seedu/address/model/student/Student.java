@@ -91,10 +91,17 @@ public class Student {
     }
 
     /**
-     * Returns a copy of student which has no group
+     * Returns a copy of student which has no group.
      */
     public Student removeGroup() {
         return new Student(name, email, tags, studentNumber, Optional.empty());
+    }
+
+    /**
+     * Returns a copy of student which has {@code groupName}.
+     */
+    public Student addGroup(GroupName groupName) {
+        return new Student(name, email, tags, studentNumber, Optional.of(groupName));
     }
 
     /**
