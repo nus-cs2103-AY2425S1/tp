@@ -67,7 +67,7 @@ public class PersonBuilder {
      * to the {@code Person} that we are building.
      */
     public PersonBuilder withStudyGroups(String... studyGroups) {
-        this.studyGroups = SampleDataUtil.getStudyGroupSet(studyGroups);
+        this.studyGroups = SampleDataUtil.getStudyGroupTagSet(studyGroups);
         return this;
     }
 
