@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import seedu.address.commons.exceptions.AppNotFoundException;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
@@ -70,6 +71,21 @@ public class Person implements Appointmentable {
     public History getHistory() {
         return history;
     }
+
+    public String getHistoryBase() {
+        return History.getHistoryDataBase();
+    }
+
+    // Method in the class (e.g., Patient or Doctor) to retrieve the appointment details
+    public String getOneHistory(LocalDateTime dateTime, Id patientId) {
+        try {
+            Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
+            return appointment.toString(); // Assuming the Appointment class has a toString() method for formatting
+        } catch (AppNotFoundException e) {
+            return "No appointment found for the given date, patient, and doctor.";
+        }
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

@@ -5,11 +5,14 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Id;
+import seedu.address.model.person.Person;
 
 /**
  * Views the medical history of an existing patient in the system.
@@ -34,44 +37,45 @@ public class ViewHistoryCommand extends Command {
      * @param patientId of the patient to view the history of
      * @param dateTime the specific date and time of the history to view (optional)
      */
-    public ViewHistoryCommand(Id patientId, Optional<LocalDateTime> dateTime) {
+    public ViewHistoryCommand(Id patientId, LocalDateTime dateTime) {
         requireNonNull(patientId); // Only patientId is mandatory
-
         this.patientId = patientId;
-        this.dateTime = dateTime.orElse(null); // Handle the case when dateTime is not provided
+        this.dateTime = dateTime;
     }
 
+    /**
+     * @param patientId of the patient to view the history of
+     */
+    public ViewHistoryCommand(Id patientId, Id doctorId) {
+        requireNonNull(patientId); // Only patientId is mandatory
+        this.patientId = patientId;
+        this.dateTime = null; // Handle the case when dateTime is not provided
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        // Retrieve patient directly without using Optional
-        Patient patientToView = Patient.getPatientWithId(patientId);
-
-        // If no patient is found, throw an exception
+        requireNonNull(model);
+        ObservableList<Person> allPersons = model.getFilteredPersonList();
+        Patient patientToView= model.getFilteredPatientById(allPersons, patientId);
         if (patientToView == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         LocalDateTime historyDateTime;
-        // Use the provided dateTime or default to the current time
-        if (dateTime == null) {
+        String history;
+        if (dateTime != null) {
             historyDateTime = dateTime;
+            history = patientToView.getOneHistory(historyDateTime, patientId);
         } else {
-            historyDateTime = LocalDateTime.now();
+            history = patientToView.getHistory().toString();
         }
 
-        // Retrieve the history for the patient at the specified dateTime
-        String history = model.getPatientHistory(patientToView, historyDateTime);
-
-        // If no history is found, throw an exception
         if (history == null || history.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_NO_HISTORY_FOUND, patientToView.getName(), historyDateTime));
+            throw new CommandException(String.format(MESSAGE_NO_HISTORY_FOUND, patientToView.getName()));
         }
 
-        // Return a success result
-        return new CommandResult(String.format(MESSAGE_VIEW_HISTORY_SUCCESS, patientToView.getName(), historyDateTime));
+        return new CommandResult(history);
     }
-
 
     @Override
     public boolean equals(Object other) {
