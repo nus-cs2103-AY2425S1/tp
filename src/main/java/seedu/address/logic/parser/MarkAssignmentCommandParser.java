@@ -29,7 +29,6 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
         }
         Index studentIndex;
         Index assignmentIndex;
-
         argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_INDEX, PREFIX_ASSIGNMENT_INDEX);
         try {
             studentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_STUDENT_INDEX).get());
