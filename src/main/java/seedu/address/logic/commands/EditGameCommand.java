@@ -6,17 +6,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILLLEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.Role;
 import seedu.address.model.game.SkillLevel;
 import seedu.address.model.game.Username;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a command to edit information about a game.
@@ -36,8 +40,8 @@ public class EditGameCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_GAME + "Valorant "
-            + PREFIX_USERNAME + "johndoe123"
-            + PREFIX_SKILLLEVEL + "Gold 1"
+            + PREFIX_USERNAME + "johndoe123 "
+            + PREFIX_SKILLLEVEL + "Gold 1 "
             + PREFIX_ROLE + "Duelist";
 
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game: %1$s";
@@ -47,15 +51,6 @@ public class EditGameCommand extends Command {
     private final Index index;
     private final String gameName;
     private final EditGameDescriptor editGameDescriptor;
-
-    /**
-     * Default constructor for an edit game command.
-     */
-    public EditGameCommand() {
-        this.index = null;
-        this.gameName = null;
-        this.editGameDescriptor = null;
-    }
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -73,7 +68,19 @@ public class EditGameCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException("This command should return an edited game");
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        Game gameToEdit = lastShownList.get(index.getZeroBased()).getGames().get(gameName);
+        if (gameToEdit == null) {
+            throw new CommandException("That game doesn't exist for this user...");
+        }
+        Game editedGame = createEditedGame(gameToEdit, editGameDescriptor);
+
+        return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, Messages.format(editedGame)));
     }
 
     /**
@@ -113,6 +120,9 @@ public class EditGameCommand extends Command {
         /**
          * Returns true if at least one field is edited.
          */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(username, skillLevel, role);
+        }
         public void setUsername(Username username) {
             this.username = username;
         }

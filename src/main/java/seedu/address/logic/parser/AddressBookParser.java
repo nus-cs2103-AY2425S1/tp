@@ -79,7 +79,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case EditGameCommand.COMMAND_WORD:
-            return new EditGameCommand();
+            return new EditGameCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

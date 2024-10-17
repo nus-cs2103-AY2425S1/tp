@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Username {
 
-    private static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_CONSTRAINTS =
             "Username should not be blank";
 
     /*
@@ -25,14 +25,14 @@ public class Username {
      */
     public Username(String username) {
         requireNonNull(username);
-        checkArgument(isValidGameName(username), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
         this.username = username;
     }
 
     /**
      * Returns true if a given string is a valid Username.
      */
-    public static boolean isValidGameName(String test) {
+    public static boolean isValidUsername(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
