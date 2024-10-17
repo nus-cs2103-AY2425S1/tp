@@ -78,6 +78,22 @@ public class LogicManager implements Logic {
         throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, commandText));
     }
 
+    /**
+     * Checks if the command is related to transactions.
+     *
+     * @param commandText The command to check.
+     * @return True if the command is a transaction command, false otherwise.
+     */
+    public boolean isTransactionCommand(String commandText) {
+        try {
+            spleetwaise.transaction.logic.commands.Command transactionCommand = transactionParser.parseCommand(
+                    commandText);
+            return transactionCommand != null;
+        } catch (ParseException pe) {
+            return false;
+        }
+    }
+
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBookModel.getAddressBook();

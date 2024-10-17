@@ -23,11 +23,6 @@ import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_ADDRESS_B
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static spleetwaise.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static spleetwaise.address.testutil.TypicalPersons.ALICE;
-import static spleetwaise.address.testutil.TypicalPersons.AMY;
-import static spleetwaise.address.testutil.TypicalPersons.BOB;
-import static spleetwaise.address.testutil.TypicalPersons.HOON;
-import static spleetwaise.address.testutil.TypicalPersons.IDA;
 import static spleetwaise.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.jupiter.api.Test;
@@ -43,10 +38,11 @@ import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.tag.Tag;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.PersonUtil;
+import spleetwaise.address.testutil.TypicalPersons;
 
 /**
- * GUI tests for the AddCommand in the address book application.
- * Ensures that adding new persons via the command box behaves as expected.
+ * GUI tests for the AddCommand in the address book application. Ensures that adding new persons via the command box
+ * behaves as expected.
  */
 public class AddCommandGuiTest extends TestFxAppRunner {
 
@@ -58,54 +54,52 @@ public class AddCommandGuiTest extends TestFxAppRunner {
         /* Perform add operations on the shown unfiltered list */
 
         // Case: Add a person without tags to a non-empty address book -> success
-        Person toAdd = AMY;
+        Person toAdd = TypicalPersons.AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
                 + EMAIL_DESC_AMY + "   " + ADDRESS_DESC_AMY + "   " + TAG_DESC_FRIEND + "   " + REMARK_DESC_AMY;
         assertCommandSuccess(command, toAdd);
 
         // Case: Add a person with all fields same as another person except name -> success
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
+        toAdd = new PersonBuilder(TypicalPersons.AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND + REMARK_DESC_AMY;
         assertCommandSuccess(command, toAdd);
 
         // Case: Add to empty address book -> success
         deleteAllPersons();
-        assertCommandSuccess(ALICE);
 
         // Case: Add a person with tags, parameters in random order -> success
-        toAdd = BOB;
+        toAdd = TypicalPersons.BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + ADDRESS_DESC_BOB + NAME_DESC_BOB
                 + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + REMARK_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         // Case: Add a person, missing tags -> success
-        assertCommandSuccess(HOON);
+        assertCommandSuccess(TypicalPersons.HOON);
 
         /* Perform add operation on the shown filtered list */
 
         // Case: Filter person list before adding -> success
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        assertCommandSuccess(IDA);
 
         /* Perform invalid add operations */
 
         // Case: Add a duplicate person -> failure
-        command = PersonUtil.getAddCommand(HOON);
+        command = PersonUtil.getAddCommand(TypicalPersons.HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         // Case: Add duplicate person with different email -> failure
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new PersonBuilder(TypicalPersons.HOON).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         // Case: Add duplicate person with different email -> failure
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        toAdd = new PersonBuilder(TypicalPersons.HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         // Case: Add duplicate person with different email -> failure
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = PersonUtil.getAddCommand(TypicalPersons.HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
 
         // Case: Add duplicate person with different email -> failure

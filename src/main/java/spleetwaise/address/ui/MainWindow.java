@@ -140,22 +140,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Checks if the command is related to transactions.
-     *
-     * @param command The command to check.
-     * @return True if the command is 'addTxn' or 'listTxn', false otherwise.
-     */
-    private boolean isTransactionCommand(String command) {
-        return command.equals("addTxn") || command.equals("listTxn");
-    }
-
-    /**
      * Adjusts the visibility of the panes based on window width.
      */
     private void adjustPaneVisibility(double width) {
         if (width < MIN_WIDTH_FOR_SPLIT) {
             hideRightPane();
-            setLeftPaneContent(isTransactionCommand(currCommand));
+            setLeftPaneContent(logic.isTransactionCommand(currCommand));
         } else {
             showBothPanes();
         }
