@@ -3,6 +3,12 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.person.Apartment;
+import seedu.address.model.person.Bto;
+import seedu.address.model.person.Condo;
+import seedu.address.model.person.Hdb;
+import seedu.address.model.person.HousingType;
+import seedu.address.model.person.OtherProperty;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.person.Price;
 import seedu.address.model.person.Property;
@@ -22,6 +28,7 @@ public class PropertyToBuyBuilder {
     private PostalCode postalCode;
     private UnitNumber unitNumber;
     private Price price;
+    private HousingType housingType;
     private Set<Tag> tags;
 
     /**
@@ -31,6 +38,7 @@ public class PropertyToBuyBuilder {
         postalCode = new PostalCode(DEFAULT_POSTAL_CODE);
         unitNumber = new UnitNumber(DEFAULT_UNIT_NUMBER);
         price = new Price(DEFAULT_PRICE);
+        housingType = HousingType.HDB;
         tags = new HashSet<>();
     }
 
@@ -59,14 +67,38 @@ public class PropertyToBuyBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code [Property]} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Property} that we are building.
      */
     public PropertyToBuyBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
+    /**
+     * Sets the {@code HousingType} of the {@code Property} that we are building.
+     */
+    public PropertyToBuyBuilder withHousingType(String housingType) {
+        this.housingType = HousingType.getHousingType(housingType);
+        return this;
+    }
+
+    /**
+     * Builds the property.
+     */
     public Property build() {
-        return new Property(postalCode, unitNumber, price, tags) {};
+        switch (housingType) {
+        case HDB:
+            return new Hdb(postalCode, unitNumber, price, tags);
+        case BTO:
+            return new Bto(postalCode, unitNumber, price, tags);
+        case CONDO:
+            return new Condo(postalCode, unitNumber, price, tags);
+        case APARTMENT:
+            return new Apartment(postalCode, unitNumber, price, tags);
+        case OTHERS:
+            return new OtherProperty(postalCode, unitNumber, price, tags);
+        default:
+            return new Property(postalCode, unitNumber, price, tags) {};
+        }
     }
 }

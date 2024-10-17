@@ -112,7 +112,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addBuy() throws Exception {
         Index index = Index.fromOneBased(1);
-        Property property = new PropertyToBuyBuilder().build();
+        Property property = new PropertyToBuyBuilder().withHousingType("c").build();
         AddPropertyToBuyCommand command =
                 (AddPropertyToBuyCommand) parser.parseCommand("addBuy 1 ht/c bp/1500000 pc/123456 un/10-01");
         assertEquals(new AddPropertyToBuyCommand(index, property), command);

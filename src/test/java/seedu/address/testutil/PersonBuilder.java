@@ -32,7 +32,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private List<Property> buyingProperties = new ArrayList<>();
-    private List<Property> sellingProperties;
+    private List<Property> sellingProperties = new ArrayList<>();
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -43,10 +43,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        sellingProperties = new ArrayList<>();
+//         sellingProperties.add(DEFAULT_SELLING_PROPERTY);
+//         buyingProperties.add(DEFAULT_BUYING_PROPERTY);
         buyingProperties = new ArrayList<>();
-        sellingProperties.add(DEFAULT_SELLING_PROPERTY);
-        buyingProperties.add(DEFAULT_BUYING_PROPERTY);
+        sellingProperties = new ArrayList<>();
     }
 
     /**
@@ -58,8 +58,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        sellingProperties = new ArrayList<>(personToCopy.getListOfSellingProperties());
         buyingProperties = new ArrayList<>(personToCopy.getListOfBuyingProperties());
+        sellingProperties = new ArrayList<>(personToCopy.getListOfSellingProperties());
     }
 
     /**
@@ -135,6 +135,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withSellProperty() {
         this.sellingProperties = new ArrayList<>();
+        return this;
+    }
+
+    /**
+     * Sets the {@code sellingProperties} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSellProperty(Property property) {
+        this.sellingProperties.add(property);
         return this;
     }
 
