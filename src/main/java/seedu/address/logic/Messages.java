@@ -51,14 +51,38 @@ public class Messages {
         builder.append(person.getName())
                 .append("; Student ID: ")
                 .append(person.getStudentId())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Major: ")
-                .append(person.getMajor())
-                .append("; Year: ")
-                .append(person.getYear());
+                .append(formatOptionalFields(person));
 
         return builder.toString();
     }
+
+    /**
+     * Formats the optional fields for {@code person} for display to the user.
+     */
+    private static String formatOptionalFields(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        boolean emailIsEmpty = person.getEmail().value.isEmpty();
+        boolean majorIsEmpty = person.getMajor().value.isEmpty();
+        boolean yearIsEmpty = person.getYear().value.isEmpty();
+
+        if (!emailIsEmpty) {
+            builder.append("; Email: ")
+                    .append(person.getEmail());
+        }
+
+        if (!majorIsEmpty) {
+            builder.append("; Major: ")
+                    .append(person.getMajor());
+        }
+
+        if (!yearIsEmpty) {
+            builder.append("; Year: ")
+                    .append(person.getYear());
+        }
+
+        return builder.toString();
+    }
+
+
 
 }
