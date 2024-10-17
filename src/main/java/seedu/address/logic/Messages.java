@@ -66,7 +66,7 @@ public class Messages {
 
         builder.append("Selling Properties: ").append("\n");
 
-        index[0] = 1;  // Reset the index for selling properties
+        index[0] = 1;
         person.getListOfSellingProperties().forEach(property ->
                 builder.append(index[0]++).append(". ").append(property).append("\n")
         );

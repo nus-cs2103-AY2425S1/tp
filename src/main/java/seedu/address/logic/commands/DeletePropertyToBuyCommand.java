@@ -100,7 +100,8 @@ public class DeletePropertyToBuyCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_PERSON_PROPERTY_SUCCESS, Messages.formatProperties(editedPerson)));
+        return new CommandResult(String.format(MESSAGE_PERSON_PROPERTY_SUCCESS,
+                Messages.formatProperties(editedPerson)));
     }
 
     /**
