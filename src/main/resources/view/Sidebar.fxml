@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="sidebar" styleClass="sidebar"
+      HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" maxWidth="Infinity"
+      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+  <StackPane styleClass="sidebar-pane">
+    <HBox>
+      <Label styleClass="sidebar-title" text="${'Dream Day\nDesigner'}" />
+    </HBox>
+  </StackPane>
+  <StackPane styleClass="sidebar-pane">
+    <HBox>
+      <Label styleClass="sidebar-text" text="Contacts" />
+    </HBox>
+  </StackPane>
+  <StackPane styleClass="sidebar-pane">
+    <HBox>
+      <Label styleClass="sidebar-text" text="Events" />
+    </HBox>
+  </StackPane>
+</VBox>

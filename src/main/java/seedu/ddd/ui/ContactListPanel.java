@@ -16,8 +16,8 @@ import seedu.ddd.model.contact.vendor.Vendor;
  * Panel containing the list of contacts.
  */
 public class ContactListPanel extends UiPart<Region> {
+
     private static final String FXML = "ContactListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ContactListPanel.class);
 
     @FXML
     private ListView<Contact> contactListView;
