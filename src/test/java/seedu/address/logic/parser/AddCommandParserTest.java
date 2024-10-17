@@ -42,6 +42,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_SEEN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORGANISATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -125,7 +126,7 @@ public class AddCommandParserTest {
                 validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + ORGANISATION_DESC_AMY + LAST_SEEN_DESC_AMY + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL,
-                        PREFIX_ORGANISATION, PREFIX_LAST_SEEN, PREFIX_PHONE));
+                        PREFIX_ORGANISATION, PREFIX_LAST_SEEN, PREFIX_PHONE, PREFIX_PRIORITY, PREFIX_REMARK));
 
         // invalid value followed by valid value
 
@@ -239,7 +240,7 @@ public class AddCommandParserTest {
         // invalid organisation
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_ORGANISATION_DESC + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
-                + PRIORITY_DESC_LOW + REMARK_DESC_HANDSOME, Organisation.MESSAGE_CONSTRAINTS);
+                + INVALID_PRIORITY_DESC + REMARK_DESC_HANDSOME, Organisation.MESSAGE_CONSTRAINTS);
 
         // invalid lastSeen
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -253,12 +254,12 @@ public class AddCommandParserTest {
 
         //invalid priority
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + VALID_TAG_HUSBAND + VALID_TAG_FRIEND
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                 + INVALID_PRIORITY_DESC + REMARK_DESC_HANDSOME, Priority.MESSAGE_CONSTRAINTS);
 
         //invalid remark
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + VALID_TAG_HUSBAND + VALID_TAG_FRIEND
+                + ORGANISATION_DESC_BOB + LAST_SEEN_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
                 + PRIORITY_DESC_LOW + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported

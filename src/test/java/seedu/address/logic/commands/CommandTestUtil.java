@@ -75,7 +75,7 @@ public class CommandTestUtil {
     public static final String INVALID_ORGANISATION_DESC = " " + PREFIX_ORGANISATION;
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "very high"; // invalid input
-    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK ; // empty string not allowed for addresses
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK; // empty string not allowed for addresses
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
