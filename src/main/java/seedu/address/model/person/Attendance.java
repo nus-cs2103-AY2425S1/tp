@@ -1,15 +1,14 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Student's Attendance.
  */
 public class Attendance {
-    private final LocalDateTime date;
+
+    public static final String MESSAGE_CONSTRAINTS = "Attendance should be either 'Attended' or 'Absent'";
+
     private final boolean hasAttended;
 
     /**
@@ -18,16 +17,26 @@ public class Attendance {
      * attendance.
      *
      * @param hasAttended A Boolean indicating if the person has attended.
-     * @param date        The date and time of the attendance.
      */
-    public Attendance(boolean hasAttended, LocalDateTime date) {
-        requireNonNull(date);
-        this.date = date;
+    public Attendance(boolean hasAttended) {
         this.hasAttended = hasAttended;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    /**
+     * Converts a {@code String attendance} to an {@code Attendance} object.
+     *
+     * @param attendance A valid string that represents attendance.
+     */
+    public static Attendance fromString(String attendance) {
+        checkArgument(isValidAttendance(attendance), MESSAGE_CONSTRAINTS);
+        return new Attendance(attendance.equals("Attended"));
+    }
+
+    /**
+     * Returns true if a given string is a valid attendance.
+     */
+    public static boolean isValidAttendance(String test) {
+        return test.equals("Attended") || test.equals("Absent");
     }
 
     public boolean hasAttended() {
@@ -36,8 +45,7 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return this.date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + " "
-                + (hasAttended ? "Attended" : "Absent");
+        return hasAttended ? "Attended" : "Absent";
     }
 
     @Override
@@ -50,7 +58,7 @@ public class Attendance {
             return false;
         }
 
-        return this.hasAttended == otherAttendance.hasAttended && this.date.equals(otherAttendance.date);
+        return this.hasAttended == otherAttendance.hasAttended;
     }
 
     @Override
