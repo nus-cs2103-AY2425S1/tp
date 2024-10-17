@@ -7,11 +7,11 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
 
-    public static final String COMMAND_WORD = "/help";
+    public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows commands that ClinicConnect provides.\n"
             + "Example: " + COMMAND_WORD
-            + "\n" + "OR" + "\n"
+            + "\n\n" + "OR" + "\n\n"
             + COMMAND_WORD + " <keyword>: Shows usage of the command of the specific keyword.\n"
             + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " add";

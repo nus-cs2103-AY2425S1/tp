@@ -14,11 +14,12 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String HELP_MESSAGE = "ClinicConnect provides you with the commands shown below.\n"
-            + "For more information on any specific command, close this window and type /help <command keyword>";
+            + "For more information on any specific command, type help <command keyword>";
     private static final String HELP_KEYWORDS = """
-            /add - Adds a new patient record into the database system
-            /appt - Records appointment times for registered patients into the system
-            /delete - Deletes an existing patient record from the database system
+            add - Adds a new patient record into the database system
+            addf - Adds a new patient record (with additional information) into the database system
+            appt - Records appointment times for registered patients into the system
+            delete - Deletes an existing patient record from the database system
             """;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
