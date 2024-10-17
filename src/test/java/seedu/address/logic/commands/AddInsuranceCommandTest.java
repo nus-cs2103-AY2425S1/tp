@@ -8,6 +8,7 @@ import static seedu.address.model.client.insurance.InsurancePlanFactory.INVALID_
 import static seedu.address.model.client.insurance.InsurancePlansManager.DUPLICATE_PLAN_DETECTED_MESSAGE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIFTH_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
@@ -35,6 +36,7 @@ class AddInsuranceCommandTest {
      */
     @Test
     public void execute_validIndexValidInsuranceId_success() throws Exception {
+        // DANIEL (fourth client) does not have basic insurance plan
         Client originalClient = model.getFilteredClientList().get(INDEX_FOURTH_CLIENT.getZeroBased());
 
         // Assume valid insurance plan
@@ -54,6 +56,46 @@ class AddInsuranceCommandTest {
         expectedModel.setClient(originalClient, updatedClient);
 
         assertCommandSuccess(addInsuranceCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_multipleInsurancePlans_success() throws Exception {
+        // ELLE (fifth client) does not have any insurance plans
+        Client originalClient = model.getFilteredClientList().get(INDEX_FIFTH_CLIENT.getZeroBased());
+
+        // Add first insurance plan (basic insurance plan)
+        int firstInsuranceId = 0;
+        InsurancePlan firstPlan = InsurancePlanFactory.createInsurancePlan(firstInsuranceId);
+        AddInsuranceCommand firstAddCommand = new AddInsuranceCommand(INDEX_FIFTH_CLIENT, firstInsuranceId);
+
+        // Create intermediate client with first insurance plan added
+        Client clientWithFirstPlan = new ClientBuilder(originalClient)
+                .withInsurancePlansManager(firstPlan.toString())
+                .build();
+
+        String firstExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
+                firstPlan, Messages.format(clientWithFirstPlan));
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setClient(originalClient, clientWithFirstPlan);
+
+        assertCommandSuccess(firstAddCommand, model, firstExpectedMessage, expectedModel);
+
+        // Second insurance plan (travel insurance plan)
+        int secondInsuranceId = 1;
+        InsurancePlan secondPlan = InsurancePlanFactory.createInsurancePlan(secondInsuranceId);
+        AddInsuranceCommand secondAddCommand = new AddInsuranceCommand(INDEX_FIFTH_CLIENT, secondInsuranceId);
+
+        // Create final client with both insurance plans
+        Client clientWithBothPlans = new ClientBuilder(clientWithFirstPlan)
+                .withInsurancePlansManager(firstPlan.toString() + ", " + secondPlan.toString())
+                .build();
+
+        String secondExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
+                secondPlan, Messages.format(clientWithBothPlans));
+        ModelManager finalExpectedModel = new ModelManager(expectedModel.getAddressBook(), new UserPrefs());
+        finalExpectedModel.setClient(clientWithFirstPlan, clientWithBothPlans);
+
+        assertCommandSuccess(secondAddCommand, expectedModel, secondExpectedMessage, finalExpectedModel);
     }
 
     /**
