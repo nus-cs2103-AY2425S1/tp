@@ -53,6 +53,11 @@ public class TagCommand extends Command {
 
         Person personToTag = lastShownList.get(targetIndex.getZeroBased());
         String addedTagsString = Tag.tagSetToString(addedTags);
+        for (Tag t:addedTags) {
+            if (personToTag.getTags().contains(t)) {
+                throw new CommandException("Person already has that Tag!");
+            }
+        }
         // Union of existing tags and new tags
         addedTags.addAll(personToTag.getTags());
 
