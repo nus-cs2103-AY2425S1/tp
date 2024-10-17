@@ -32,10 +32,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private PersonDetailsWindow personDetailsWindow;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PersonDetailsWindow personDetailsWindow;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ImportWindow importWindow;
@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
+        personDetailsWindow = new PersonDetailsWindow();
         helpWindow = new HelpWindow();
         importWindow = new ImportWindow(this.logic);
         exportWindow = new ExportWindow(this.logic);
@@ -118,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetailsWindow);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -155,6 +155,8 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
         }
     }
+
+
 
     /**
      * Opens the import window or focuses on it if it's already opened.
@@ -193,10 +195,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        personDetailsWindow.hide();
         importWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
-        personDetailsWindow.hide();
+
 
     }
 
