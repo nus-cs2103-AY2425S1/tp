@@ -38,7 +38,6 @@ public class DeleteClientProfileCommandTest {
         Random random = new Random();
         List<Name> typicalNames = getTypicalNames();
         int randomIndex = random.nextInt(typicalNames.size() - 1);
-        
         Person personToDelete = model.getPersonByName(typicalNames.get(randomIndex));
         DeleteClientProfileCommand deleteCommand = new DeleteClientProfileCommand(personToDelete.getName());
 

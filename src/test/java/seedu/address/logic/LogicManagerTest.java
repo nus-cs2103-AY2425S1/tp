@@ -65,10 +65,28 @@ public class LogicManagerTest {
      */
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_listCommandWhenClientsExist_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
+
+        Person expectedPerson = new PersonBuilder(AMY).build();
+        model.addPerson(expectedPerson);
+
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
+
+    @Test
+    public void execute_listCommandWhenNoClients_throwsCommandException() {
+        model = new ModelManager();
+        logic = new LogicManager(model, new StorageManager(
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json")),
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"))
+        ));
+
+        String listCommand = ListCommand.COMMAND_WORD;
+
+        assertCommandException(listCommand, ListCommand.MESSAGE_NO_CLIENT_IN_LIST);
+    }
+
 
     /*
     @Test
