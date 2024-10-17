@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 public class Remark {
 
     /** The remark string of the person. */
-    public final String value;
+    private String value;
 
     /**
      * Constructs a {@code Remark}.
@@ -19,6 +19,22 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
+    }
+
+    /**
+     * Adds notes to this Remark
+     * @param notes notes to be added
+     */
+    public void addNotes(String notes) {
+        requireNonNull(notes);
+        this.value += "\n" + notes;
+    }
+
+    /**
+     * @return the String value of this Remark
+     */
+    public String getValue() {
+        return this.value;
     }
 
     /**
