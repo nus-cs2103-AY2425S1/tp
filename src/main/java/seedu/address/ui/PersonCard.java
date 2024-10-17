@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import static seedu.address.model.addresses.Network.BTC;
+
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -39,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label publicAddress;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -47,11 +52,17 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+        String publicAddressString = person.getPublicAddressesByNetwork(BTC).stream()
+                .map(address -> "  " + address.toString())
+                .collect(Collectors.joining("\n"));
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        if (!publicAddressString.isEmpty()) {
+            publicAddress.setText("BTC\n" + publicAddressString);
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

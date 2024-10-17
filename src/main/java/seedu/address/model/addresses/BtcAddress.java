@@ -9,8 +9,10 @@ public class BtcAddress extends PublicAddress {
     public static final String MESSAGE_CONSTRAINTS =
             "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
 
+
     public BtcAddress(String publicAddress, String label) {
         super(publicAddress, label);
+
     }
 
     /**
