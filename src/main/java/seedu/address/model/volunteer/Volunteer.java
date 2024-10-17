@@ -50,7 +50,7 @@ public class Volunteer {
         this.endTimeAvailability = endTimeAvailability;
         this.involvedIn = FXCollections.observableArrayList(involvedIn);
     }
-  
+
     /**
      * Constructs an {@code Volunteer} without events.
      */
