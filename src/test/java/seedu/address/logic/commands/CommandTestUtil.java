@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIER;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -40,7 +41,7 @@ public class CommandTestUtil {
     public static final String VALID_JOB_AMY = "Teacher";
     public static final String VALID_JOB_BOB = "Developer";
     public static final String VALID_INCOME_AMY = "999999999";
-    public static final String VALID_INCOME_BOB = "9";
+    public static final String VALID_INCOME_BOB = "0";
     public static final String VALID_TIER_REJECT = "REJECT";
     public static final String VALID_TIER_GOLD = "GOLD";
 
@@ -56,6 +57,7 @@ public class CommandTestUtil {
     public static final String JOB_DESC_BOB = " " + PREFIX_JOB + VALID_JOB_BOB;
     public static final String INCOME_DESC_AMY = " " + PREFIX_INCOME + VALID_INCOME_AMY;
     public static final String INCOME_DESC_BOB = " " + PREFIX_INCOME + VALID_INCOME_BOB;
+
     public static final String TIER_DESC_REJECT = " " + PREFIX_TIER + VALID_TIER_REJECT;
     public static final String TIER_DESC_GOLD = " " + PREFIX_TIER + VALID_TIER_GOLD;
 
@@ -67,14 +69,16 @@ public class CommandTestUtil {
     public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + "-999"; // negative numbers should not be
     // allowed
     public static final String INVALID_TIER_DESC = " " + PREFIX_TIER + "platinum"; // not one of the 4 TierEnums
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK;
+    public static final String INVALID_NEW_REMARK_DESC = " " + PREFIX_NEW_REMARK;
+    public static final String INVALID_APPEND_REMARK_DESC = " " + PREFIX_APPEND_REMARK;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final String VALID_REMARK_AMY = "Like skiing.";
     public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
-    public static final String REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
-
+    public static final String NEW_REMARK_DESC_BOB = " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB;
     public static final String APPEND_REMARK_DESC_BOB = " " + PREFIX_APPEND_REMARK + VALID_REMARK_BOB;
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
@@ -134,6 +138,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
