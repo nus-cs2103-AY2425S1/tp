@@ -3,11 +3,15 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +27,21 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private Map<Network, Set<PublicAddress>> publicAddresses;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Map<Network, Set<PublicAddress>> publicAddresses, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, publicAddresses, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.publicAddresses = new HashMap<>(publicAddresses);
+        publicAddresses.forEach((network, addresses) -> this.publicAddresses.put(network, new HashSet<>(addresses)));
         this.tags.addAll(tags);
     }
 
@@ -51,6 +59,27 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Set<PublicAddress> getPublicAddressesByNetwork(Network network) {
+        return Collections.unmodifiableSet(publicAddresses.getOrDefault(network, new HashSet<>()));
+    }
+
+    public void setPublicAddressesByNetwork(Network network, HashSet<PublicAddress> addresses) {
+        if (publicAddresses.containsKey(network)) {
+            this.publicAddresses.put(network, new HashSet<>(addresses));
+        }
+    }
+
+
+    /**
+     * Gets the current Public address map
+     * Should be replaced with a better method in the future
+     *
+     * @return publicAddresses
+     */
+    public Map<Network, Set<PublicAddress>> getPublicAddresses() {
+        return Collections.unmodifiableMap(publicAddresses);
     }
 
     /**
@@ -94,13 +123,14 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && publicAddresses.equals(otherPerson.publicAddresses)
                 && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, publicAddresses, tags);
     }
 
     @Override
@@ -110,6 +140,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("publicAddresses", publicAddresses)
                 .add("tags", tags)
                 .toString();
     }

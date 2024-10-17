@@ -1,15 +1,18 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.addresses.Network;
+import seedu.address.model.addresses.PublicAddress;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -28,6 +31,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final Map<Network, List<JsonAdaptedPublicAddress>> publicAddresses = new HashMap<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +39,20 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("publicAddresses") Map<Network, List<JsonAdaptedPublicAddress>>
+                                     publicAddresses, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+
+        if (publicAddresses != null) {
+            publicAddresses.forEach((network, addresses) ->
+                    this.publicAddresses.put(network, new ArrayList<>(addresses))
+            );
+        }
+
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,9 +66,18 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+
+        source.getPublicAddresses().forEach(((network, addresses) -> {
+            List<JsonAdaptedPublicAddress> copiedAddresses =
+                    addresses.stream()
+                            .map(JsonAdaptedPublicAddress::new)
+                            .toList();
+            publicAddresses.put(network, copiedAddresses);
+        }));
+
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+                .toList());
     }
 
     /**
@@ -102,8 +123,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Map<Network, Set<PublicAddress>> modelPublicAddresses = new HashMap<>();
+        for (Map.Entry<Network, List<JsonAdaptedPublicAddress>> entry : publicAddresses.entrySet()) {
+            final Set<PublicAddress> personPublicAddresses = new HashSet<>();
+            for (JsonAdaptedPublicAddress publicAddress : entry.getValue()) {
+                personPublicAddresses.add(publicAddress.toModelType(entry.getKey()));
+            }
+            modelPublicAddresses.put(entry.getKey(), personPublicAddresses);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPublicAddresses, modelTags);
     }
 
 }
