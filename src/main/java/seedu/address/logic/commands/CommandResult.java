@@ -76,7 +76,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, showView, exit);
     }
 
     @Override
@@ -84,6 +84,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
+                .add("showView", showView)
                 .add("exit", exit)
                 .toString();
     }
