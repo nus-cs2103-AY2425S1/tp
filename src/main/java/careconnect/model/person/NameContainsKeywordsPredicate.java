@@ -30,7 +30,6 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        System.out.println("Hello NameContainsKeywordsPrecdicate");
         if (other == this) {
             return true;
         }
