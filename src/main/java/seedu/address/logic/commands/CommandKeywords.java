@@ -2,13 +2,15 @@ package seedu.address.logic.commands;
 
 public enum CommandKeywords {
     add,
-    edit,
-    delete,
+    addf,
+    appt,
     clear,
-    find,
-    list,
+    delete,
+    edit,
     exit,
-    appt;
+    find,
+    help,
+    list;
 
     public static boolean isValidCommandKeyword(String keyword) {
         for (CommandKeywords command : CommandKeywords.values()) {

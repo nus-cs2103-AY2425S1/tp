@@ -65,6 +65,9 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         case "add":
             setTextAddCommand();
             break;
+        case "addf":
+            setTextAddfCommand();
+            break;
         case "appt":
             setTextApptCommand();
             break;
@@ -84,18 +87,41 @@ public class HelpKeywordWindow extends UiPart<Stage> {
         example.setText("add n/Abraham Tan i/S9758366N s/M d/1997-10-27 h/Blood Test");
     }
 
+    private void setTextAddfCommand() {
+        header.setText("Add Full Command: "
+                + "Adds a new patient record (with additional information) into the database system.");
+        parametersHeader.setText("Parameters:");
+        parameters.setText("NAME | NRIC | SEX(M/F) | DATE OF BIRTH(YYYY-MM-DD) | HEALTH SERVICE | PHONE NO. | EMAIL "
+                + "| ADDRESS | BLOOD TYPE | NEXT-OF-KIN NAME | NEXT-OF-KIN PHONE NO. | ALLERGIES | "
+                + "HEALTH RISK LEVEL(HIGH, MEDIUM, LOW) | PAST HEALTH RECORDS | ADDITIONAL NOTES");
+        usageHeader.setText("Command Usage:");
+        usage.setText("addf n/[NAME] i/[NRIC] s/[SEX] d/[DATE OF BIRTH] h/[HEALTH SERVICE] p/[PHONE NO.] e/[EMAIL] "
+                        + "a/[ADDRESS] b/[BLOOD TYPE] nokn/[NEXT-OF-KIN NAME] nokp/[NEXT-OF-KIN PHONE NO.] "
+                        + "al/[ALLERGIES] rl/[HEALTH RISK LEVEL] hr/[PAST HEALTH RECORDS] no/[ADDITIONAL NOTES]");
+        exampleHeader.setText("Example:");
+        example.setText("addf n/Abraham Tan i/S9758366N s/M d/1997-10-27 h/Blood Test p/87596666 e/abrahamtan@gmail.com "
+                + "a/Blk 123, NUS Road, S123123 b/A+ nokn/Lincoln Tan nokp/91234567 al/nuts, shellfish rl/HIGH "
+                + "hr/Diabetes no/Patient needs extra care");
+    }
+
     private void setTextApptCommand() {
-        header.setText("Add Command: ");
-        parameters.setText("");
-        usage.setText("");
-        example.setText("");
+        header.setText("Appointment Command: Records appointment times for registered patients into the system.");
+        parametersHeader.setText("Parameters:");
+        parameters.setText("APPOINTMENT DATE(YYYY-MM-DD) | APPOINTMENT TIME(24 HOURS FORMAT) | NRIC");
+        usageHeader.setText("Command Usage:");
+        usage.setText("appt [APPOINTMENT DATE] [APPOINTMENT TIME] [NRIC]");
+        exampleHeader.setText("Example:");
+        example.setText("appt 2024-12-29 1330 S9758366N");
     }
 
     private void setTextDeleteCommand() {
-        header.setText("Add Command: ");
-        parameters.setText("");
-        usage.setText("");
-        example.setText("");
+        header.setText("Delete Command: Deletes an existing patient record from the database system.");
+        parametersHeader.setText("Parameters:");
+        parameters.setText("NRIC");
+        usageHeader.setText("Command Usage:");
+        usage.setText("delete [NRIC]");
+        exampleHeader.setText("Example:");
+        example.setText("delete S9758366N");
     }
 
     /**
