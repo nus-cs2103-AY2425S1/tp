@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -100,5 +102,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_sortByName_success() throws Exception {
+        SortCommand commandByName = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " name");
+        Comparator<Person> comparatorByName = Comparator.comparing(Person::getNameString);
+        assertEquals(new SortCommand(comparatorByName), commandByName);
+    }
+
+    @Test
+    public void parseCommand_sortInvalidParameter_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " invalidParameter"));
     }
 }

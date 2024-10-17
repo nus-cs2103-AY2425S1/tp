@@ -61,6 +61,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public String getNameString() {
+        return name.toString();
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
