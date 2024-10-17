@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -8,10 +12,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Deletes a client's property identified by the client's name.
+ * The name must correspond to a person in the current list of persons.
+ */
 public class DeletePropertyCommand extends Command {
     public static final String COMMAND_WORD = "delprop";
 
@@ -24,10 +28,23 @@ public class DeletePropertyCommand extends Command {
 
     private final Name targetName;
 
+    /**
+     * Creates a {@code DeletePropertyCommand} to delete the property of the person with the specified {@code Name}.
+     *
+     * @param targetName The name of the person whose property will be deleted.
+     */
     public DeletePropertyCommand(Name targetName) {
         this.targetName = targetName;
     }
 
+    /**
+     * Executes the command to delete the property of the person identified by the {@code targetName}.
+     * If the person is found, the property is removed by setting it to an empty {@code Property}.
+     *
+     * @param model The model which contains the list of persons.
+     * @return The result of the command execution.
+     * @throws CommandException If the person cannot be found in the list.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
