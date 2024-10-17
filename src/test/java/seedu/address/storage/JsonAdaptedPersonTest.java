@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -117,6 +118,17 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags,
                         VALID_EMPTY_MODULE_ROLE_MAP);
+        assertThrows(IllegalValueException.class, person :: toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidRoleTypeInModuleRoleMap_throwsIllegalValueException() {
+        HashMap<String, String> invalidMap = new HashMap<>();
+        invalidMap.put("CS1101S", "invalid string");
+        JsonAdaptedModuleRoleMap invalidJsonMap = new JsonAdaptedModuleRoleMap(invalidMap);
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS,
+                        invalidJsonMap);
         assertThrows(IllegalValueException.class, person :: toModelType);
     }
 }

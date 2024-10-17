@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.RoleType;
@@ -61,7 +62,7 @@ public class JsonAdaptedModuleRoleMap {
     public ModuleRoleMap toModelType() throws IllegalValueException {
         HashMap<ModuleCode, RoleType> map = new HashMap<>();
         for (String key : moduleRoleMap.keySet()) {
-            map.put(new ModuleCode(key), RoleType.valueOf(moduleRoleMap.get(key).toUpperCase()));
+            map.put(new ModuleCode(key), ParserUtil.parseRoleType(moduleRoleMap.get(key)));
         }
 
         return new ModuleRoleMap(map);
