@@ -11,6 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.preferredtime.PreferredTime;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -30,6 +31,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Map<String, Game> games;
+    private Set<PreferredTime> preferredTimes;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +43,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         games = new HashMap<>();
+        preferredTimes = new HashSet<>();
     }
 
     /**
@@ -53,6 +56,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         games = new HashMap<>(personToCopy.getGames());
+        preferredTimes = new HashSet<>(personToCopy.getPreferredTimes());
     }
 
     /**
@@ -78,6 +82,16 @@ public class PersonBuilder {
         this.games = SampleDataUtil.getGameMap(games);
         return this;
     }
+
+    /**
+     * Parses the {@code preferredTimes} into a {@code Set<PreferredTime>}
+     * and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withPreferredTimes(String ... preferredTimes) {
+        this.preferredTimes = SampleDataUtil.getPreferredTimeSet(preferredTimes);
+        return this;
+    }
+
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
      */
@@ -103,7 +117,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, games);
+        return new Person(name, phone, email, address, tags, games, preferredTimes);
     }
 
 }
