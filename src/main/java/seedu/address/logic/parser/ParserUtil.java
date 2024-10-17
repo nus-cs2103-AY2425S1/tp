@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -21,6 +23,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDICES =
+            "One of the provided indices is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_EMPTY_INDICES = "No valid indices provided.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -120,5 +125,28 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        String[] trimmedIndexes = oneBasedIndexes.trim().split(" ");
+
+        List<Index> indexes = new ArrayList<>();
+        for (String index : trimmedIndexes) {
+            if (!StringUtil.isNonZeroUnsignedInteger(index)) {
+                throw new ParseException(MESSAGE_INVALID_INDICES);
+            }
+            indexes.add(Index.fromOneBased(Integer.parseInt(index)));
+        }
+
+        if (indexes.isEmpty()) {
+            throw new ParseException(MESSAGE_INVALID_EMPTY_INDICES);
+        }
+
+        return indexes;
     }
 }
