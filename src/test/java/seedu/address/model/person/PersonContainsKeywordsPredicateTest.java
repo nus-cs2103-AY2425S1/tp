@@ -35,21 +35,49 @@ public class PersonContainsKeywordsPredicateTest {
         // Different type -> returns false
         assertFalse(predicateOne.equals(5));
 
-        // Different values -> returns false
+        // Different values (name) -> returns false
         PersonContainsKeywordsPredicate differentPredicate = new PersonContainsKeywordsPredicate(Arrays
                 .asList(PREFIX_NAME.getPrefix(), "Alice"));
         assertFalse(predicateOne.equals(differentPredicate));
 
-        // Different fields -> returns false
+        // Different values (phone) -> returns false
         PersonContainsKeywordsPredicate predicateTwo = new PersonContainsKeywordsPredicate(Arrays
                 .asList(PREFIX_PHONE.getPrefix(), "12345678"));
         assertFalse(predicateOne.equals(predicateTwo));
 
-        // Multiple different fields -> returns false
+        // Different values (email) -> returns false
+        PersonContainsKeywordsPredicate predicateWithEmail = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_EMAIL.getPrefix(), "alice@example.com"));
+        PersonContainsKeywordsPredicate predicateWithDifferentEmail = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_EMAIL.getPrefix(), "bob@example.com"));
+        assertFalse(predicateWithEmail.equals(predicateWithDifferentEmail));
+
+        // Different values (tags) -> returns false
+        PersonContainsKeywordsPredicate predicateWithTag = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_TAG.getPrefix(), "friends"));
+        PersonContainsKeywordsPredicate predicateWithDifferentTag = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_TAG.getPrefix(), "colleagues"));
+        assertFalse(predicateWithTag.equals(predicateWithDifferentTag));
+
+        // Different fields (name and email) -> returns false
+        PersonContainsKeywordsPredicate predicateWithNameAndEmail = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_NAME.getPrefix(), "John", PREFIX_EMAIL.getPrefix(), "john@example.com"));
+        assertFalse(predicateOne.equals(predicateWithNameAndEmail));
+
+        // Same email and tags -> returns true
+        PersonContainsKeywordsPredicate predicateWithSameEmailAndTag = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_EMAIL.getPrefix(), "alice@example.com", PREFIX_TAG.getPrefix(), "friends"));
+        PersonContainsKeywordsPredicate predicateWithSameEmailAndTagCopy = new PersonContainsKeywordsPredicate(Arrays
+                .asList(PREFIX_EMAIL.getPrefix(), "alice@example.com", PREFIX_TAG.getPrefix(), "friends"));
+        assertTrue(predicateWithSameEmailAndTag.equals(predicateWithSameEmailAndTagCopy));
+
+        // Multiple different fields (name, phone, email, and tags) -> returns false
         PersonContainsKeywordsPredicate predicateWithMultipleFields = new PersonContainsKeywordsPredicate(Arrays
-                .asList(PREFIX_NAME.getPrefix(), "John", PREFIX_PHONE.getPrefix(), "12345678"));
+                .asList(PREFIX_NAME.getPrefix(), "John", PREFIX_PHONE.getPrefix(), "12345678",
+                        PREFIX_EMAIL.getPrefix(), "john@example.com", PREFIX_TAG.getPrefix(), "friends"));
         assertFalse(predicateOne.equals(predicateWithMultipleFields));
     }
+
 
     @Test
     public void test_personContainsKeywords_returnsTrue() throws ParseException {
