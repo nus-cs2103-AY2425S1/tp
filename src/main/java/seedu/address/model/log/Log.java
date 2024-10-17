@@ -5,8 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 /**
  * Represents a log in the address book.
  */
