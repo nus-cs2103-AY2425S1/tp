@@ -12,6 +12,7 @@ import tuteez.logic.commands.AddCommand;
 import tuteez.logic.commands.ClearCommand;
 import tuteez.logic.commands.Command;
 import tuteez.logic.commands.DeleteCommand;
+import tuteez.logic.commands.DisplayCommand;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.ExitCommand;
 import tuteez.logic.commands.FindCommand;
@@ -61,6 +62,9 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DisplayCommand.COMMAND_WORD:
+            return new DisplayCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
