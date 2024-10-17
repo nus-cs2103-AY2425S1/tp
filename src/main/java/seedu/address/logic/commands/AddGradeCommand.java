@@ -36,6 +36,7 @@ public class AddGradeCommand extends Command {
      * @param grade Grade to be added to the person.
      */
     public AddGradeCommand(Index index, Grade grade) {
+        requireNonNull(index);
         requireNonNull(grade);
         this.index = index;
         toAdd = grade;
