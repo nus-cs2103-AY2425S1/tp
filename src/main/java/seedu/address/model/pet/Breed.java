@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Breed {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Breeds should only contain alphanumeric characters, spaces, or hyphens, and it should not be blank";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} \\-]*";
+            "Breeds should only contain alphabetic characters, spaces, or hyphens, and it should not be blank";
+    public static final String VALIDATION_REGEX = "[a-zA-Z][a-zA-Z \\-]*";
 
     public final String value;
 

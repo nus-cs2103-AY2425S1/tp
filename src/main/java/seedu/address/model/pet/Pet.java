@@ -2,9 +2,13 @@ package seedu.address.model.pet;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Pet in the address book.
@@ -19,16 +23,20 @@ public class Pet {
     private final Age age;
     private final Sex sex;
 
+    // Data fields
+    private final Set<Tag> tags = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Pet(Name name, Species species, Breed breed, Age age, Sex sex) {
+    public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
         requireAllNonNull(name, species, breed, age, sex);
         this.name = name;
         this.species = species;
         this.breed = breed;
         this.age = age;
         this.sex = sex;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -49,6 +57,14 @@ public class Pet {
 
     public Sex getSex() {
         return sex;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -103,5 +119,4 @@ public class Pet {
                 .add("sex", sex)
                 .toString();
     }
-
 }

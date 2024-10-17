@@ -25,10 +25,10 @@ public class PetTest {
         // null -> returns false
         assertFalse(BELLA.isSamePet(null));
 
-        // same name, all other attributes different -> returns true
+        // same name, all other attributes different -> returns false
         Pet editedBella = new PetBuilder(FLUFFY).withSpecies(VALID_SPECIES_FLUFFY).withBreed(VALID_BREED_FLUFFY)
                 .withAge(VALID_AGE_FLUFFY).withSex(VALID_SEX_FLUFFY).build();
-        assertTrue(BELLA.isSamePet(editedBella));
+        assertFalse(BELLA.isSamePet(editedBella));
 
         // different name, all other attributes same -> returns false
         editedBella = new PetBuilder(BELLA).withName(VALID_NAME_FLUFFY).build();
