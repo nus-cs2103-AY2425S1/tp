@@ -8,14 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AbstractFindCommand;
-import seedu.address.logic.commands.FindByContactCommand;
 import seedu.address.logic.commands.FindByEmailCommand;
 import seedu.address.logic.commands.FindByNameCommand;
+import seedu.address.logic.commands.FindByPhoneCommand;
 import seedu.address.logic.commands.FindByTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
@@ -24,7 +24,7 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<AbstractFindCommand> {
 
     public static final Pattern KEYWORD_EXTRACTOR =
-            Pattern.compile("^(?<type>[cent]/)\\s*(?<arguments>[\\S\\s]+)$");
+            Pattern.compile("^(?<type>[pent]/)\\s*(?<arguments>[\\S\\s]+)$");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -51,9 +51,9 @@ public class FindCommandParser implements Parser<AbstractFindCommand> {
         case "n/":
             return new FindByNameCommand(
                     new NameContainsKeywordsPredicate(searchTermArray));
-        case "c/":
-            return new FindByContactCommand(
-                    new ContactContainsKeywordsPredicate(searchTermArray));
+        case "p/":
+            return new FindByPhoneCommand(
+                    new PhoneContainsKeywordsPredicate(searchTermArray));
         case "e/":
             return new FindByEmailCommand(
                     new EmailContainsKeywordsPredicate(searchTermArray));

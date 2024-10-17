@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
@@ -18,31 +19,31 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.ContactContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindByContactCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindByPhoneCommand}.
  */
-public class FindByContactCommandTest {
+public class FindByPhoneCommandTest {
     private final Model expectedModel = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
     private final Model model = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
 
     @Test
     public void equals() {
-        ContactContainsKeywordsPredicate firstPredicate =
-                new ContactContainsKeywordsPredicate(Collections.singletonList("first"));
-        ContactContainsKeywordsPredicate secondPredicate =
-                new ContactContainsKeywordsPredicate(Collections.singletonList("second"));
+        PhoneContainsKeywordsPredicate firstPredicate =
+                new PhoneContainsKeywordsPredicate(Collections.singletonList("first"));
+        PhoneContainsKeywordsPredicate secondPredicate =
+                new PhoneContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindByContactCommand findFirstCommand = new FindByContactCommand(firstPredicate);
-        FindByContactCommand findSecondCommand = new FindByContactCommand(secondPredicate);
+        FindByPhoneCommand findFirstCommand = new FindByPhoneCommand(firstPredicate);
+        FindByPhoneCommand findSecondCommand = new FindByPhoneCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindByContactCommand findFirstCommandCopy = new FindByContactCommand(firstPredicate);
+        FindByPhoneCommand findFirstCommandCopy = new FindByPhoneCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -58,8 +59,8 @@ public class FindByContactCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        ContactContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindByContactCommand command = new FindByContactCommand(predicate);
+        PhoneContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindByPhoneCommand command = new FindByPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -68,23 +69,24 @@ public class FindByContactCommandTest {
     @Test
     public void execute_resultsWithPartialMatch_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        ContactContainsKeywordsPredicate predicate = preparePredicate("82");
-        FindByContactCommand command = new FindByContactCommand(predicate);
+        PhoneContainsKeywordsPredicate predicate = preparePredicate("82");
+        FindByPhoneCommand command = new FindByPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
 
-    // Commented out because expectedModel does not contain contact numbers
-    //    @Test
-    //    public void execute_multipleKeywords_multiplePersonsFound() {
-    //        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-    //        ContactContainsKeywordsPredicate predicate = preparePredicate("999");
-    //        FindByContactCommand command = new FindByContactCommand(predicate);
-    //        expectedModel.updateFilteredPersonList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
-    //    }
+    @Test
+    public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        PhoneContainsKeywordsPredicate predicate = preparePredicate("9482 563");
+        FindByPhoneCommand command = new FindByPhoneCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        System.out.println(command);
+        System.out.println(expectedModel.getFilteredPersonList().toString());
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+    }
 
     @Test
     public void toStringMethod() {
@@ -97,7 +99,7 @@ public class FindByContactCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private ContactContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new ContactContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private PhoneContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new PhoneContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
