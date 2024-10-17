@@ -32,7 +32,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, GradeList gradeList,
-                  AttendanceList attendanceList) {
+            AttendanceList attendanceList) {
         requireAllNonNull(name, phone, email, address, tags, gradeList, attendanceList);
         this.name = name;
         this.phone = phone;
@@ -76,10 +76,28 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Person addGrade(Grade grade) {
+        requireAllNonNull(grade);
+
+        GradeList newGradeList = this.gradeList.addGrade(grade);
+
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradeList,
+                          this.attendanceList);
+    }
+
+    /**
+     * Remove grade from gradeList based on index.
+     *
+     * @param index The index to remove the grade.
+     * @return new immutable Person
+     */
     public Person removeGrade(Index index) {
+        requireAllNonNull(index);
+
         GradeList newGradelist = this.gradeList.removeGrade(index);
 
-        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist, this.attendanceList);
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist,
+                          this.attendanceList);
     }
 
     /**
@@ -92,7 +110,7 @@ public class Person {
         }
 
         return otherPerson != null
-            && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -112,12 +130,12 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return name.equals(otherPerson.name)
-            && phone.equals(otherPerson.phone)
-            && email.equals(otherPerson.email)
-            && address.equals(otherPerson.address)
-            && tags.equals(otherPerson.tags)
-            && gradeList.equals(otherPerson.gradeList)
-            && attendanceList.equals(otherPerson.attendanceList);
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && address.equals(otherPerson.address)
+                && tags.equals(otherPerson.tags)
+                && gradeList.equals(otherPerson.gradeList)
+                && attendanceList.equals(otherPerson.attendanceList);
     }
 
     @Override
@@ -129,14 +147,14 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("name", name)
-            .add("phone", phone)
-            .add("email", email)
-            .add("address", address)
-            .add("tags", tags)
-            .add("gradeList", gradeList)
-            .add("attendanceList", attendanceList)
-            .toString();
+                .add("name", name)
+                .add("phone", phone)
+                .add("email", email)
+                .add("address", address)
+                .add("tags", tags)
+                .add("gradeList", gradeList)
+                .add("attendanceList", attendanceList)
+                .toString();
     }
 
 }
