@@ -43,10 +43,10 @@ public class EdulogCalendar {
      */
     public boolean checkTimeslot(Lesson lesson) {
         return lessons.stream()
-                      .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
-                      .filter(l -> l.getStartTime().equals(lesson.getStartTime()))
-                      .filter(l -> l.getEndTime().equals(lesson.getEndTime()))
-                      .count() < MAX_IDENTICAL_TIMING;
+            .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
+            .filter(l -> l.getStartTime().isBefore(lesson.getEndTime())
+                && lesson.getStartTime().isBefore(l.getEndTime()))
+            .count() < MAX_IDENTICAL_TIMING;
     }
 
     /**
