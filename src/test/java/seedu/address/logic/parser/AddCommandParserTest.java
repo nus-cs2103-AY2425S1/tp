@@ -6,10 +6,10 @@ import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_BLOOD_TEST;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_BIRTHDATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HEALTHSERVICE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SEX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
@@ -58,10 +58,12 @@ public class AddCommandParserTest {
 
 
         // multiple health services - all accepted
-        Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB).withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST, VALID_HEALTHSERVICE_VACCINATION)
+        Person expectedPersonMultipleHealthServices = new PersonBuilder(BOB)
+                .withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST, VALID_HEALTHSERVICE_VACCINATION)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION,
+                NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB
+                        + BIRTHDATE_DESC_BOB + HEALTHSERVICE_DESC_BLOOD_TEST + HEALTHSERVICE_DESC_VACCINATION,
                 new AddCommand(expectedPersonMultipleHealthServices));
     }
 
