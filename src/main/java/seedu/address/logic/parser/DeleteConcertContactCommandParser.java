@@ -9,12 +9,12 @@ import seedu.address.logic.commands.DeleteConcertContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new LinkCommand object
+ * Parses input arguments and creates a new DeleteConcertContactCommand object
  */
 public class DeleteConcertContactCommandParser implements Parser<DeleteConcertContactCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the LinkCommand
-     * and returns an LinkCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteConcertContactCommand
+     * and returns an DeleteConcertContactCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteConcertContactCommand parse(String args) throws ParseException {
