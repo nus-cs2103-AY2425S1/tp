@@ -119,10 +119,9 @@ public class Log {
      */
     @Override
     public String toString() {
-        String truncatedEntry = entry.length() > 100 ? entry.substring(0, 100) : entry;
-        return new ToStringBuilder(this)
-                .add("Appointment Date", appointmentDate.toString())
-                .add("Entry", truncatedEntry)
-                .toString();
+        String truncatedEntry = entry.length() > 100
+                ? entry.substring(0, 100) + "..."
+                : entry;
+        return String.format("Log{Appointment Date=%s, Entry=%s}", appointmentDate.toString(), truncatedEntry);
     }
 }

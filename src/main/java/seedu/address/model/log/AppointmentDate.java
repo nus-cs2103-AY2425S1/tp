@@ -1,6 +1,7 @@
 package seedu.address.model.log;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,11 +32,9 @@ public class AppointmentDate {
      * @param dateString A valid date string in the format of "dd MMM yyyy".
      */
     public AppointmentDate(String dateString) {
-        try {
-            this.date = LocalDate.parse(dateString, FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS, e);
-        }
+        requireNonNull(dateString);
+        checkArgument(isValidDateString(dateString), MESSAGE_CONSTRAINTS);
+        this.date = LocalDate.parse(dateString, FORMATTER);
     }
 
     /**
@@ -43,6 +42,22 @@ public class AppointmentDate {
      */
     public LocalDate getDate() {
         return date;
+    }
+
+    /**
+     * Returns true if the given string is a valid date string in the format "dd MMM yyyy".
+     *
+     * @param dateString the string to validate
+     * @return true if valid, false otherwise
+     */
+    public static boolean isValidDateString(String dateString) {
+        requireNonNull(dateString);
+        try {
+            LocalDate.parse(dateString, FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     /**
@@ -78,4 +93,3 @@ public class AppointmentDate {
         return Objects.hash(date);
     }
 }
-
