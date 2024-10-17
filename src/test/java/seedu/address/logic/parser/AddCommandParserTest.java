@@ -139,8 +139,8 @@ public class AddCommandParserTest {
     public void parse_tagFieldMissing_success() {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().withDefaultModuleRoleMap().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + MODULE_ROLE_DESC,
-                new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -148,8 +148,8 @@ public class AddCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(BETTY).withTags("friend")
             .withDefaultModuleRoleMap().buildEmptyAddressPerson();
-        assertParseSuccess(parser, NAME_DESC_BETTY + PHONE_DESC_BETTY + EMAIL_DESC_BETTY + TAG_DESC_FRIEND + MODULE_ROLE_DESC,
-                new AddCommand(expectedPerson));
+        assertParseSuccess(parser, NAME_DESC_BETTY + PHONE_DESC_BETTY + EMAIL_DESC_BETTY
+                + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
     }
 
     @Test

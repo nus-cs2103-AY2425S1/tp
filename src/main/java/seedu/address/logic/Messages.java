@@ -50,7 +50,8 @@ public class Messages {
         person.getTags().forEach(builder :: append);
 
         builder.append("; Roles: ");
-        String moduleRoleMapData = person.getModuleRoleMap().getData().stream().map(Object::toString).collect(Collectors.joining(", "));
+        String moduleRoleMapData = person.getModuleRoleMap().getData().stream()
+            .map(Object::toString).collect(Collectors.joining(", "));
         builder.append(moduleRoleMapData);
 
         return builder.toString();
