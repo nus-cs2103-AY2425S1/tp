@@ -34,7 +34,7 @@
         <Label fx:id="clientCarDetailsLabel" text="Client's Car Details Not Found" styleClass="client_details_field_label"/>
         <!--Client Issues-->
         <Label text="Car Issues" styleClass="client_details_header_label"/>
-        <FlowPane fx:id="tags"/>
+        <FlowPane fx:id="issues"/>
         <Button fx:id="closeButton" mnemonicParsing="false" onAction="#handleClose" text="Close">
           <VBox.margin>
             <Insets top="10.0" />
