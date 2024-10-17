@@ -135,17 +135,27 @@ public class UniqueCourseListTest {
 
     @Test
     public void setCourses_nullList_throwsNullPointerException() {
+        // Test for the method that takes a List<Course>
         assertThrows(NullPointerException.class, () -> uniqueCourseList.setCourses((List<Course>) null));
+
+        // Test for the method that takes a UniqueCourseList
+        assertThrows(NullPointerException.class, () -> uniqueCourseList.setCourses((UniqueCourseList) null));
     }
 
     @Test
     public void setCourses_list_replacesOwnListWithProvidedList() {
-        Course course = new Course("CS1010", "Programming Methodology");
-        List<Course> courseList = List.of(course);
+        Course course1 = new Course("CS1010", "Programming Methodology");
+        Course course2 = new Course("CS1020", "Data Structures");
+        uniqueCourseList.add(course1);
+        List<Course> courseList = List.of(course2);
         uniqueCourseList.setCourses(courseList);
+
         UniqueCourseList expectedUniqueCourseList = new UniqueCourseList();
-        expectedUniqueCourseList.add(course);
+        expectedUniqueCourseList.add(course2);
+
         assertEquals(expectedUniqueCourseList, uniqueCourseList);
+        assertFalse(uniqueCourseList.contains(course1));
+        assertTrue(uniqueCourseList.contains(course2));
     }
 
     @Test
