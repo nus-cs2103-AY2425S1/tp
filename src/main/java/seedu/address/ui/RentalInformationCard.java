@@ -1,13 +1,9 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.client.Client;
 import seedu.address.model.rentalinformation.RentalInformation;
 
 /**
@@ -55,7 +51,7 @@ public class RentalInformationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         address.setText(rentalInformation.getAddress().toString());
         rentalStartDate.setText("Rental Start Date: " + rentalInformation.getRentalStartDate().toString());
-        rentalEndDate.setText("Rental End Date: " +rentalInformation.getRentalEndDate().toString());
+        rentalEndDate.setText("Rental End Date: " + rentalInformation.getRentalEndDate().toString());
         rentDueDate.setText("Rental Monthly Payment Date: " + rentalInformation.getRentDueDate().toString());
         monthlyRent.setText("Monthly Rent Amount: " + rentalInformation.getMonthlyRent().toString());
         deposit.setText("Deposit Amount: " + rentalInformation.getDeposit().toString());
