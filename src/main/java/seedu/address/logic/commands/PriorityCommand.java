@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
@@ -81,7 +80,7 @@ public class PriorityCommand extends Command {
      */
     private String generateSuccessMessage(Person editedPerson) {
         String message = !priority.isEmpty() ? PRIORITY_ASSIGN_SUCCESS : PRIORITY_SET_TO_NONE_SUCCESS;
-        return String.format(message, Messages.format(editedPerson));
+        return String.format(message, editedPerson.getName().fullName);
     }
 
     /**
