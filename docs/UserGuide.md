@@ -174,6 +174,21 @@ Examples:
 * `list` followed by `listt 1` lists transactions for the 1st person in the address book.
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st person in the results of the `find` command.
 
+
+### Deleting Transactions for a specified person: `deletet`
+
+Format: `deletet INDEX`
+
+* Deletes the transactions at the specified `INDEX`.
+* The index refers to the index number of the transaction.
+* This command is intended to be used in conjunction with listt
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listt 1` followed by `deletet 1` loads the transaction list for the first person, then deletes the first transaction.
+* `findt 1 flowers` followed by `deletet 1` loads the list of transactions containing 'flowers' for the first person, then deletes the first transaction
+in the results of the `findt` command.
+
 ### Finding transactions by description: `findt`
 
 Finds transactions of a given person whose descriptions contain any of the given keywords.
@@ -198,6 +213,7 @@ Format: `findt INDEX KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
 ![result for 'findt 1 materials invest'](images/findt.png)
+
 
 ### Clearing all entries : `clear`
 
