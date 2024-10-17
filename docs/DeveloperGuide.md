@@ -597,3 +597,15 @@ testers are expected to do more *exploratory* testing.
 2. Test case: see d/11-10-2024
 
     1. Expected: Sun 06-10-2024 to Sat 12-10-2024 schedule listed!
+
+### Edit schedule
+
+1. Test case:
+
+    1. Expected: 
+
+### Delete schedule
+
+1. Test case: 
+
+    1. Expected: 
