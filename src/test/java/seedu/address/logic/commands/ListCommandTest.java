@@ -33,7 +33,7 @@ public class ListCommandTest {
     //Todo when FILTER feature is implemented
     //    @Test
     //    public void execute_listIsFiltered_showsEverything() {
-    //        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    //        showPersonAtIndex(model, INDEX_FIRST_INTERNSHIP_APPLICATION);
     //        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     //    }
 }
