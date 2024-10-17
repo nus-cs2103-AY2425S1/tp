@@ -78,9 +78,9 @@ public class Messages {
         builder.append("Assignment Id:\n")
                 .append(assignment.getAssignmentId())
                 .append("\nProject Id:\n")
-                .append(assignment.getProjectId())
+                .append(assignment.getProject().getId())
                 .append("\nEmployee Id:\n")
-                .append(assignment.getEmployeeId());
+                .append(assignment.getPerson().getEmployeeId());
         return builder.toString();
     }
 }

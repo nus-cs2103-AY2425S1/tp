@@ -49,11 +49,11 @@ public class AssignmentTest {
         assertFalse(ALICE_ALPHA.equals(editedAlice));
 
         // different project -> returns false
-        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withProjectId(BETA.getId().toString()).build();
+        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withProject(BETA).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
 
         // different person -> returns false
-        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withEmployeeId(BENSON.getEmployeeId().toString()).build();
+        editedAlice = new AssignmentBuilder(ALICE_ALPHA).withPerson(BENSON).build();
         assertFalse(ALICE_ALPHA.equals(editedAlice));
     }
 }

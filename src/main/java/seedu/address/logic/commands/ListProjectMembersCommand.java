@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class ListProjectMembersCommand extends Command {
         List<Assignment> filteredAssignments = model.getFilteredAssignmentList();
 
         // Step 3: Extract unique persons from the filtered assignments
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> projectMembers = filteredAssignments.stream()
                 .map(Assignment::getPerson)
                 .distinct()
