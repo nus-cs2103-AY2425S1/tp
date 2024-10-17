@@ -67,11 +67,6 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         internalList.set(index, editedWedding);
     }
 
-    public void setTag(UniqueWeddingList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Removes the equivalent wedding from the list.
      * The wedding must exist in the list.

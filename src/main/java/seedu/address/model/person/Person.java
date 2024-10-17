@@ -65,7 +65,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable wedding set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Wedding> getWeddings() {

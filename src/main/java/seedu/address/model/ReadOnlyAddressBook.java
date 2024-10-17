@@ -23,8 +23,8 @@ public interface ReadOnlyAddressBook {
     ObservableList<Tag> getTagList();
 
     /**
-     * Returns an unmodifiable view of the tags list.
-     * This list will not contain any duplicate tags.
+     * Returns an unmodifiable view of the weddings list.
+     * This list will not contain any duplicate weddings.
      */
     ObservableList<Wedding> getWeddingList();
 
