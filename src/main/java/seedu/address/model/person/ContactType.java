@@ -27,6 +27,8 @@ public class ContactType {
      */
     public ContactType(String contactType) {
         requireNonNull(contactType);
+        System.out.println("ContactType received: " + contactType); // Add this for debugging
+
         checkArgument(isValidContactType(contactType), MESSAGE_CONSTRAINTS);
         switch(contactType) {
         case ("WORK"):
