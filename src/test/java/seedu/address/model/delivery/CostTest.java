@@ -15,7 +15,7 @@ public class CostTest {
 
     @Test
     public void constructor_invalidCost_throwsIllegalArgumentException() {
-        String invalidCost="#20";
+        String invalidCost = "#20";
         assertThrows(IllegalArgumentException.class, () -> new Cost(invalidCost));
     }
 
