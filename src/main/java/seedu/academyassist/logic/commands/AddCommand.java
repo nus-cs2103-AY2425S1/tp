@@ -39,8 +39,8 @@ public class AddCommand extends Command {
             + PREFIX_IC + "S1234567A "
             + PREFIX_SUBJECT + "English "
             + PREFIX_SUBJECT + "Science "
-            + PREFIX_TAG + "Clementi Primary School"
-            + PREFIX_TAG + "English speaker";
+            + PREFIX_TAG + "ClementiPrimarySchool "
+            + PREFIX_TAG + "EnglishSpeaker";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the system";
