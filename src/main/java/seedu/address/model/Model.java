@@ -90,4 +90,6 @@ public interface Model {
      * Adds the given meeting with a person.
      */
     void addMeeting(Person target, Meeting meeting);
+
+    String listMeetings();
 }
