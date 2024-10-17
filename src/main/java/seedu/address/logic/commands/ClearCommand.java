@@ -22,6 +22,7 @@ public class ClearCommand extends Command {
         model.setAddressBook(new AddressBook());
         model.setLastViewedClient(null);
         model.updateVisibleRentalInformationList(List.of());
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
