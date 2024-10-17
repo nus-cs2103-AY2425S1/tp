@@ -37,11 +37,11 @@ public class ConcertContact {
     }
 
     public boolean isAssociated(Concert otherConcert) {
-        return concert.isSameConcert(otherConcert);
+        return concert.equals(otherConcert);
     }
 
     public boolean isAssociated(Person otherPerson) {
-        return person.isSamePerson(otherPerson);
+        return person.equals(otherPerson);
     }
 
     public boolean isSameConcertContact(ConcertContact otherConcertContact) {
