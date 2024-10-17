@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertMeetupCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -22,12 +22,9 @@ public class ViewMeetupCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertMeetupCommandSuccess(new ViewMeetUpCommand(), model, ViewMeetUpCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void execute_listIsFiltered_showsEverything() {
-        assertMeetupCommandSuccess(new ViewMeetUpCommand(), model, ViewMeetUpCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_viewMeetUp_success() {
+        CommandResult expectedCommandResult = new CommandResult(ViewMeetUpCommand.MESSAGE_SUCCESS,
+                false, false, true, false);
+        assertCommandSuccess(new ViewMeetUpCommand(), model, expectedCommandResult, expectedModel);
     }
 }

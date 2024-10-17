@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.Schedule;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,7 +25,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<MeetUp> filteredMeetUps;
-    private final FilteredList<Schedule> filteredSchedules = null; //TODO
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -49,6 +47,24 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new MeetUpList());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredMeetUps.equals(otherModelManager.filteredMeetUps);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -84,6 +100,15 @@ public class ModelManager implements Model {
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    public Path getMeetUpListFilePath() {
+        return userPrefs.getMeetUpListFilePath();
+    }
+
+    public void setMeetUpListFilePath(Path meetUpListFilePath) {
+        requireNonNull(meetUpListFilePath);
+        userPrefs.setMeetUpListFilePath(meetUpListFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -139,24 +164,25 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    //=========== MeetUp List ================================================================================
 
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+    public void setMeetUpList(ReadOnlyMeetUpList meetUpList) {
+        this.meetUpList.resetData(meetUpList);
     }
 
-    //=========== MeetUp List ================================================================================
+    public ReadOnlyMeetUpList getMeetUpList() {
+        return meetUpList;
+    }
+
+    @Override
+    public boolean hasMeetUp(MeetUp meetUp) {
+        requireNonNull(meetUp);
+        return meetUpList.hasMeetUp(meetUp);
+    }
+    @Override
+    public void deleteMeetUp(MeetUp target) {
+        meetUpList.removeMeetUp(target);
+    }
 
     @Override
     public void addMeetUp(MeetUp meetUp) {
@@ -171,35 +197,7 @@ public class ModelManager implements Model {
         meetUpList.setMeetUp(target, editedMeetUp);
     }
 
-    @Override
-    public void deleteMeetUp(MeetUp target) {
-        meetUpList.removeMeetUp(target);
-    }
-
-    @Override
-    public boolean hasMeetUp(MeetUp meetUp) {
-        requireNonNull(meetUp);
-        return meetUpList.hasMeetUp(meetUp);
-    }
-
     //=========== Filtered MeetUp List Accessors =============================================================
-    public Path getMeetUpListFilePath() {
-        return userPrefs.getMeetUpListFilePath();
-    }
-
-    public void setMeetUpListFilePath(Path meetUpListFilePath) {
-        requireNonNull(meetUpListFilePath);
-        userPrefs.setMeetUpListFilePath(meetUpListFilePath);
-    }
-
-    public void setMeetUpList(ReadOnlyMeetUpList meetUpList) {
-        this.meetUpList.resetData(meetUpList);
-    }
-
-    /** Returns the MeetUpList */
-    public ReadOnlyMeetUpList getMeetUpList() {
-        return meetUpList;
-    }
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of

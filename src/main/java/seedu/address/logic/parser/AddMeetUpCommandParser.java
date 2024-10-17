@@ -35,10 +35,10 @@ public class AddMeetUpCommandParser implements Parser<AddMeetUpCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
-        Name name = new Name(argMultimap.getValue(PREFIX_NAME).get());
-        Info info = new Info(argMultimap.getValue(PREFIX_INFO).get());
-        From from = new From(argMultimap.getValue(PREFIX_FROM).get());
-        To to = new To(argMultimap.getValue(PREFIX_TO).get());
+        Name name = ParserUtil.parseMeetUpName(argMultimap.getValue(PREFIX_NAME).get());
+        Info info = ParserUtil.parseMeetUpInfo(argMultimap.getValue(PREFIX_INFO).get());
+        From from = ParserUtil.parseMeetUpFrom(argMultimap.getValue(PREFIX_FROM).get());
+        To to = ParserUtil.parseMeetUpTo(argMultimap.getValue(PREFIX_TO).get());
 
         MeetUp meetUp = new MeetUp(name, info, from, to);
 

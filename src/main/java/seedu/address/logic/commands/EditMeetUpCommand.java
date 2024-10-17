@@ -30,11 +30,11 @@ public class EditMeetUpCommand extends Command {
 
     public static final String COMMAND_WORD = "editm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meetup in the address book. "
-            + "Existing meetup will be overwritten by the input meetup.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meet-up in the address book. "
+            + "Existing meet-up will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_INFO + "MEETUP INFO] "
+            + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_FROM + "YYYY-MM-DD HH:mm] "
             + "[" + PREFIX_TO + "YYYY-MM-DD HH:mm]\n"
             + "Example: " + COMMAND_WORD + " 2 "
@@ -42,9 +42,9 @@ public class EditMeetUpCommand extends Command {
             + PREFIX_FROM + "2024-02-03 12:00 "
             + PREFIX_TO + "2024-02-03 14:00 ";
 
-    public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited Meetup: %1$s";
+    public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
     public static final String MESSAGE_MEETUP_NOT_EDITED = "Please check for missing fields or invalid format.";
-    public static final String MESSAGE_DUPLICATE_MEETUP = "This meetup already exists in the meetup list.";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
 
     private final Index targetIndex;
     private final EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor;

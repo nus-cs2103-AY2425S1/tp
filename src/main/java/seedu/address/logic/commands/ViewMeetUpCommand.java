@@ -15,7 +15,7 @@ public class ViewMeetUpCommand extends Command {
 
     public static final String COMMAND_WORD = "viewMeetUp";
 
-    public static final String MESSAGE_SUCCESS = "Viewing all meet ups";
+    public static final String MESSAGE_SUCCESS = "Viewing all meet-ups";
 
     private final Logger logger = LogsCenter.getLogger(ViewMeetUpCommand.class);
 

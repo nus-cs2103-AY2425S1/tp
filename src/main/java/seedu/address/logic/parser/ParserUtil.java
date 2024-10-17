@@ -151,7 +151,7 @@ public class ParserUtil {
         requireNonNull(meetUpName);
         String trimmedName = meetUpName.trim();
         if (!Name.isValidMeetUpName(trimmedName)) {
-            throw new ParseException(seedu.address.model.person.Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(seedu.address.model.meetup.Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -166,7 +166,7 @@ public class ParserUtil {
         requireNonNull(meetUpInfo);
         String trimmedInfo = meetUpInfo.trim();
         if (!Info.isValidMeetUpInfo(trimmedInfo)) {
-            throw new ParseException(seedu.address.model.person.Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(seedu.address.model.meetup.Info.MESSAGE_CONSTRAINTS);
         }
         return new Info(trimmedInfo);
     }
@@ -180,8 +180,8 @@ public class ParserUtil {
     public static From parseMeetUpFrom(String meetUpFrom) throws ParseException {
         requireNonNull(meetUpFrom);
         String trimmedFrom = meetUpFrom.trim();
-        if (!From.isValidMeetUpFromTime(trimmedFrom)) {
-            throw new ParseException(seedu.address.model.person.Name.MESSAGE_CONSTRAINTS);
+        if (!From.isValidFrom(trimmedFrom)) {
+            throw new ParseException(seedu.address.model.meetup.From.MESSAGE_CONSTRAINTS);
         }
         return new From(meetUpFrom);
     }
@@ -195,8 +195,8 @@ public class ParserUtil {
     public static To parseMeetUpTo(String meetUpTo) throws ParseException {
         requireNonNull(meetUpTo);
         String trimmedTo = meetUpTo.trim();
-        if (!To.isValidMeetUpToTime(trimmedTo)) {
-            throw new ParseException(seedu.address.model.person.Name.MESSAGE_CONSTRAINTS);
+        if (!To.isValidTo(trimmedTo)) {
+            throw new ParseException(seedu.address.model.meetup.To.MESSAGE_CONSTRAINTS);
         }
         return new To(meetUpTo);
     }

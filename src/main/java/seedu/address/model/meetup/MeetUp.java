@@ -38,9 +38,10 @@ public class MeetUp {
             return true;
         }
 
-        return otherMeetUp != null
+        return otherMeetUp != null // Can have different info
                 && otherMeetUp.getName().equals(getName())
-                && otherMeetUp.getInfo().equals(getInfo());
+                && otherMeetUp.getFrom().equals(getFrom())
+                && otherMeetUp.getTo().equals(getTo());
     }
 
     /**

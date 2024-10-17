@@ -73,7 +73,7 @@ class JsonAdaptedMeetUp {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     From.class.getSimpleName()));
         }
-        if (!From.isValidMeetUpFromTime(from)) {
+        if (!From.isValidFrom(from)) {
             throw new IllegalValueException(From.MESSAGE_CONSTRAINTS);
         }
         final From modelFrom = new From(from);
@@ -82,7 +82,7 @@ class JsonAdaptedMeetUp {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     To.class.getSimpleName()));
         }
-        if (!To.isValidMeetUpToTime(to)) {
+        if (!To.isValidTo(to)) {
             throw new IllegalValueException(To.MESSAGE_CONSTRAINTS);
         }
         final To modelTo = new To(to);

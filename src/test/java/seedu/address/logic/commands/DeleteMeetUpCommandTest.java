@@ -106,7 +106,7 @@ public class DeleteMeetUpCommandTest {
      * Updates {@code model}'s filtered list to show no one.
      */
     private void showNoMeetUp(Model model) {
-        model.updateFilteredMeetUpList(p -> false);
+        model.updateFilteredMeetUpList(m -> false);
 
         assertTrue(model.getFilteredMeetUpList().isEmpty());
     }

@@ -25,19 +25,19 @@ public class From {
     /**
      * Constructs a {@code MeetUpFromType}.
      *
-     * @param str A valid string that can transformed to a date.
+     * @param from A valid string that can transformed to a date.
      */
-    public From(String str) {
-        requireNonNull(str);
-        checkArgument(isValidMeetUpFromTime(str), MESSAGE_CONSTRAINTS);
+    public From(String from) {
+        requireNonNull(from);
+        checkArgument(isValidFrom(from), MESSAGE_CONSTRAINTS);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        this.value = LocalDateTime.parse(str, formatter);
+        this.value = LocalDateTime.parse(from, formatter);
     }
 
     /**
      * Returns true if a given string is a valid start timing.
      */
-    public static boolean isValidMeetUpFromTime(String test) {
+    public static boolean isValidFrom(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

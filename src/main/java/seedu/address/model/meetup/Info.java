@@ -9,13 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Info {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Meetup details should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Meetup details should not be blank.";
 
     /*
-     * The first character of the detail must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Must have at least one non-whitespace character.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "(.|\\s)*\\S(.|\\s)*";
 
     public final String meetUpInfo;
 

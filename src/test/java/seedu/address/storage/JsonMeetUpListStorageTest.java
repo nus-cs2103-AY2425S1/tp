@@ -3,8 +3,8 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMeetUps.BUYER_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.SELLER_MEETUP;
+import static seedu.address.testutil.TypicalMeetUps.NETWORKING_MEETUP;
+import static seedu.address.testutil.TypicalMeetUps.PITCH_MEETUP;
 import static seedu.address.testutil.TypicalMeetUps.THIRD_MEETUP;
 import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
 
@@ -72,14 +72,14 @@ public class JsonMeetUpListStorageTest {
         assertEquals(original, new MeetUpList(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addMeetUp(SELLER_MEETUP);
+        original.addMeetUp(NETWORKING_MEETUP);
         original.removeMeetUp(THIRD_MEETUP);
         jsonMeetUpListStorage.saveMeetUpList(original, filePath);
         readBack = jsonMeetUpListStorage.readMeetUpList(filePath).get();
         assertEquals(original, new MeetUpList(readBack));
 
         // Save and read without specifying file path
-        original.addMeetUp(BUYER_MEETUP);
+        original.addMeetUp(PITCH_MEETUP);
         jsonMeetUpListStorage.saveMeetUpList(original); // file path not specified
         readBack = jsonMeetUpListStorage.readMeetUpList().get(); // file path not specified
         assertEquals(original, new MeetUpList(readBack));
