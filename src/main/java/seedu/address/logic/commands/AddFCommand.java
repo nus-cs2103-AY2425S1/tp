@@ -50,7 +50,7 @@ public class AddFCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_NRIC + "T0123456A "
-            + PREFIX_BIRTHDATE + "2001/12/31 "
+            + PREFIX_BIRTHDATE + "2001-12-31 "
             + PREFIX_SEX + "M "
             + PREFIX_PHONE + "81234567 "
             + PREFIX_EMAIL + "johndoe123@gmail.com "
