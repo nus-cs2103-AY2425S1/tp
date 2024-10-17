@@ -139,6 +139,14 @@ public class Person {
     }
 
     /**
+     * Deletes a property from the list of properties to sell.
+     * @param index One based Index of property to delete based on user's view.
+     */
+    public void deleteSellProperty(Index index) {
+        sellingProperties.remove(index.getZeroBased());
+    }
+
+    /**
      * Deletes a property from the list of properties to buy.
      * @param index One based Index of property to delete based on user's view.
      */

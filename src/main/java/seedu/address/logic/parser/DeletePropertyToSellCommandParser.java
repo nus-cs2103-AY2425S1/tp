@@ -4,21 +4,21 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeletePropertyToBuyCommand;
-import seedu.address.logic.commands.DeletePropertyToBuyCommand.EditPersonPropertyToBuyDescriptor;
+import seedu.address.logic.commands.DeletePropertyToSellCommand;
+import seedu.address.logic.commands.DeletePropertyToSellCommand.EditPersonPropertyToSellDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class DeletePropertyToBuyCommandParser implements Parser<DeletePropertyToBuyCommand> {
+public class DeletePropertyToSellCommandParser implements Parser<DeletePropertyToSellCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeletePropertyToBuyCommand parse(String args) throws ParseException {
+    public DeletePropertyToSellCommand parse(String args) throws ParseException {
         requireNonNull(args);
         Index personIndex;
         Index propertyIndex;
@@ -28,10 +28,10 @@ public class DeletePropertyToBuyCommandParser implements Parser<DeletePropertyTo
             propertyIndex = ParserUtil.parsePropertyIndex(args);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeletePropertyToBuyCommand.MESSAGE_USAGE), pe);
+                    DeletePropertyToSellCommand.MESSAGE_USAGE), pe);
         }
-        EditPersonPropertyToBuyDescriptor editPersonPropertyDescriptor = new EditPersonPropertyToBuyDescriptor();
-        return new DeletePropertyToBuyCommand(personIndex, propertyIndex, editPersonPropertyDescriptor);
+        EditPersonPropertyToSellDescriptor editPersonPropertyDescriptor = new EditPersonPropertyToSellDescriptor();
+        return new DeletePropertyToSellCommand(personIndex, propertyIndex, editPersonPropertyDescriptor);
     }
 
 }

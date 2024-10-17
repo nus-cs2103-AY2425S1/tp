@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
-//import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +19,7 @@ import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePropertyToBuyCommand;
+import seedu.address.logic.commands.DeletePropertyToSellCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -31,10 +31,12 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.EditPersonPropertyDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
+import seedu.address.testutil.EditPersonPropertyToSellDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PropertyToBuyBuilder;
+
 
 public class AddressBookParserTest {
 
@@ -119,17 +121,31 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_delSell() throws Exception {
+        Index personIndex = Index.fromOneBased(1);
+        Index propertyIndex = Index.fromOneBased(1);
+        DeletePropertyToSellCommand.EditPersonPropertyToSellDescriptor descriptor =
+                new EditPersonPropertyToSellDescriptorBuilder().build();
+
+        DeletePropertyToSellCommand expectedCommand = new DeletePropertyToSellCommand(personIndex,
+                propertyIndex, descriptor);
+        DeletePropertyToSellCommand command =
+                (DeletePropertyToSellCommand) parser.parseCommand("delSell 1 1");
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
     public void parseCommand_delBuy() throws Exception {
         Index personIndex = Index.fromOneBased(1);
         Index propertyIndex = Index.fromOneBased(1);
-        DeletePropertyToBuyCommand.EditPersonPropertyDescriptor descriptor =
-                new EditPersonPropertyDescriptorBuilder().build();
+        DeletePropertyToBuyCommand.EditPersonPropertyToBuyDescriptor descriptor =
+                new EditPersonPropertyToBuyDescriptorBuilder().build();
+
 
         DeletePropertyToBuyCommand expectedCommand = new DeletePropertyToBuyCommand(personIndex,
                 propertyIndex, descriptor);
         DeletePropertyToBuyCommand command =
                 (DeletePropertyToBuyCommand) parser.parseCommand("delBuy 1 1");
-
         assertEquals(expectedCommand, command);
     }
 
