@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -7,7 +8,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
 
 /**
  * A Detail Panel that displays individual person details in the UI.
@@ -124,7 +124,7 @@ public class DetailPanel extends UiPart<Region> implements SelectionListener {
         case "ceg":
             return "Computer Engineering";
         default:
-            return "Others";  // Default case if the major code doesn't match known ones
+            return "Others"; // Default case if the major code doesn't match known ones
         }
     }
 }

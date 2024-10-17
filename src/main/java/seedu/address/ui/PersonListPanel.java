@@ -50,8 +50,8 @@ public class PersonListPanel extends UiPart<Region> {
 
     /**
      * Attaches a {@code SelectionListener} to the entire list's members.
-     * @see PersonListPanel#setupSelectionModel() for details of what this listener does.
      * @param listener a {@code SelectionListener} object/instance.
+     * @see PersonListPanel#setupSelectionModel() for details of what this listener does.
      */
     public void setSelectionListener(SelectionListener listener) {
         this.listener = listener;
