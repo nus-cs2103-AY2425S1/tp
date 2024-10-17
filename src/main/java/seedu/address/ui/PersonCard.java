@@ -57,13 +57,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-
-        // Set grades label with person's grades
-        if (person.getGradeList() != null && !person.getGradeList().isEmpty()) {
-            grades.setText(formatGrades(person.getGradeList().toString())); // Format and set grades
-        } else {
-            grades.setText("No grades available");
-        }
+        grades.setText(formatGrades(person.getGradeList().toString())); // Format and set grades
     }
 
     /**

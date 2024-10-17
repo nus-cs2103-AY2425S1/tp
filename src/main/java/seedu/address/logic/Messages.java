@@ -47,7 +47,7 @@ public class Messages {
         person.getTags().forEach(builder::append);
         // Append the GradeList (exams and scores)
         builder.append("; Exams: ")
-                .append(person.getGradeList().toString());
+                .append(person.getGradeList());
         return builder.toString();
     }
 

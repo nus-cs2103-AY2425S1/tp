@@ -118,6 +118,9 @@ public class GradeList {
 
     @Override
     public String toString() {
+        if (grades.isEmpty()) {
+            return "No grades available";
+        }
         StringBuilder result = new StringBuilder();
         for (Grade grade : grades) {
             result.append(grade.toString()).append("\n");

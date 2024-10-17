@@ -59,8 +59,7 @@ public class AddGradeCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        GradeList gradeList = personToEdit.getGradeList();
-        gradeList.addGrade(this.toAdd);
+        personToEdit.getGradeList().addGrade(this.toAdd);
         // need help here: this doesn't obey Law of Demeter
         // How to resolve it?
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
