@@ -39,7 +39,7 @@ public class CsvGoodsStorageTest {
 
     @Test
     public void saveGoods_nullFilePath_throwsNullPointerException() {
-        // TODO Implement this
+        // TODO: Implement this
     }
 
     @Test
@@ -60,11 +60,11 @@ public class CsvGoodsStorageTest {
 
     @Test
     public void readGoods_invalidCsvFormat_throwsException() throws IOException {
-        // TODO Implement this
+        // TODO: Implement this
     }
 
     @Test
     public void readGoods_validCsv_success() throws IOException {
-        // TODO Implement this
+        // TODO: Implement this
     }
 }

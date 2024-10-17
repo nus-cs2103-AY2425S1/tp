@@ -135,26 +135,26 @@ public class ModelManagerTest {
 
     @Test
     public void setGoods_nullGoods_throwsNullPointerException() {
-        // TODO Implement this
+        // TODO: Implement this
     }
 
     @Test
     public void setGoods_validGoods_setsGoods() {
-        // TODO Implement this
+        // TODO: Implement this
     }
 
     @Test
     public void getGoods_modifyList_throwsUnsupportedOperationException() {
-        // TODO Implement this
+        // TODO: Implement this
     }
 
     @Test
     public void addGoods_nullGoods_throwsNullPointerException() {
-        // TODO Implement this
+        // TODO: Implement this
     }
 
     @Test
     public void addGoods_validGoods_addsGoods() {
-        // TODO Implement this
+        // TODO: Implement this
     }
 }
