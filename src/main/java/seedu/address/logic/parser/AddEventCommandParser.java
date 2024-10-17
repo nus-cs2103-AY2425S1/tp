@@ -10,12 +10,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+
 
 /**
  * Parses the user input to create a new instance of an AddEventCommand

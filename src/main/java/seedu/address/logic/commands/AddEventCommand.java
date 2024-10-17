@@ -91,10 +91,10 @@ public class AddEventCommand extends AddCommand {
         }
 
         AddEventCommand otherAddEventCommand = (AddEventCommand) other;
-        return eventName.equals(otherAddEventCommand.eventName) &&
-                time.equals(otherAddEventCommand.time) &&
-                    venue.equals(otherAddEventCommand.venue) &&
-                        personName.equals(otherAddEventCommand.personName);
+        return eventName.equals(otherAddEventCommand.eventName)
+                && time.equals(otherAddEventCommand.time)
+                && venue.equals(otherAddEventCommand.venue)
+                && personName.equals(otherAddEventCommand.personName);
     }
 
     @Override
