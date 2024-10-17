@@ -20,7 +20,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.internshipapplication.InternshipApplication;
 import seedu.address.model.internshipapplication.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -80,33 +79,10 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
-    static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
-    }
     //The list ends here
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    //    Todo when EDIT feature implemented
-    //    public static final EditCommand.EditPersonDescriptor DESC_APPLE;
-    //    public static final EditCommand.EditPersonDescriptor DESC_BOFA;
-    //
-    //    static {
-    //        DESC_APPLE = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
-    //                .withPhone(VALID_DATE_APPLE).withEmail(VALID_COMPANY_EMAIL_APPLE).withAddress(VALID_ROLE_APPLE)
-    //                .withTags(VALID_TAG_FRIEND).build();
-    //        DESC_BOFA = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_BOFA)
-    //                .withPhone(VALID_DATE_BOFA).withEmail(VALID_COMPANY_EMAIL_BOFA).withAddress(VALID_ROLE_BOFA)
-    //                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
-    //    }
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -158,7 +134,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model<InternshipApplication> model, Index targetIndex) {
+    public static void showInternshipApplicationAtIndex(Model<InternshipApplication> model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredList().size());
 
         InternshipApplication internshipApplication = model.getFilteredList().get(targetIndex.getZeroBased());

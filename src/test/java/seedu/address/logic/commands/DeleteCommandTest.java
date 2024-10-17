@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP_APPLICATION;
 import static seedu.address.testutil.TypicalInternshipApplications.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -31,8 +31,8 @@ public class DeleteCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         InternshipApplication internshipApplicationToDelete = model
-                .getFilteredList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+                .getFilteredList().get(INDEX_FIRST_INTERNSHIP_APPLICATION.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_INTERNSHIP_APPLICATION);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS,
                 Messages.format(internshipApplicationToDelete));
@@ -48,50 +48,50 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_INTERNSHIP_APPLICATION);
 
         InternshipApplication internshipApplicationToDelete = model
-                .getFilteredList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+                .getFilteredList().get(INDEX_FIRST_INTERNSHIP_APPLICATION.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_INTERNSHIP_APPLICATION);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_INTERNSHIP_APPLICATION_SUCCESS,
                 Messages.format(internshipApplicationToDelete));
 
         Model<InternshipApplication> expectedModel = new ModelManager<>(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteItem(internshipApplicationToDelete);
-        showNoPerson(expectedModel);
+        showNoInternshipApplication(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST_INTERNSHIP_APPLICATION);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND_INTERNSHIP_APPLICATION;
         // ensures that outOfBoundIndex is still in bounds of the internship application list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_INTERNSHIP_APPLICATION_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_INTERNSHIP_APPLICATION);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_INTERNSHIP_APPLICATION);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_INTERNSHIP_APPLICATION);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -115,7 +115,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model<InternshipApplication> model) {
+    private void showNoInternshipApplication(Model<InternshipApplication> model) {
         model.updateFilteredList(p -> false);
 
         assertTrue(model.getFilteredList().isEmpty());

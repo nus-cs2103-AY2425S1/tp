@@ -72,23 +72,23 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasInternshipApplication_nullInternshipApplication_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasItem(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasInternshipApplication_internshipApplicationNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasItem(GOOGLE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasInternshipApplication_internshipApplicationInAddressBook_returnsTrue() {
         modelManager.addItem(GOOGLE);
         assertTrue(modelManager.hasItem(GOOGLE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredInternshipApplicationList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredList().remove(0));
     }
 

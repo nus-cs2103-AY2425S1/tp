@@ -33,7 +33,7 @@ public class FindCommand extends Command<InternshipApplication> {
         requireNonNull(model);
         model.updateFilteredList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredList().size()));
+                String.format(Messages.MESSAGE_INTERNSHIP_APPLICATIONS_LISTED_OVERVIEW, model.getFilteredList().size()));
     }
 
     @Override

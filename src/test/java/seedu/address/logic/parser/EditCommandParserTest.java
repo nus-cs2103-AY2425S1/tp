@@ -28,9 +28,9 @@
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 //import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 //import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-//import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_INTERNSHIP_APPLICATION;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_INTERNSHIP_APPLICATION;
+//import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_INTERNSHIP_APPLICATION;
 //
 //import org.junit.jupiter.api.Test;
 //
@@ -105,7 +105,7 @@
 //
 //    @Test
 //    public void parse_allFieldsSpecified_success() {
-//        Index targetIndex = INDEX_SECOND_PERSON;
+//        Index targetIndex = INDEX_SECOND_INTERNSHIP_APPLICATION;
 //        String userInput = targetIndex.getOneBased() + DATE_DESC_BOFA + TAG_DESC_HUSBAND
 //                + COMPANY_EMAIL_DESC_APPLE + ROLE_DESC_APPLE + COMPANY_NAME_DESC_APPLE + TAG_DESC_FRIEND;
 //
@@ -119,7 +119,7 @@
 //
 //    @Test
 //    public void parse_someFieldsSpecified_success() {
-//        Index targetIndex = INDEX_FIRST_PERSON;
+//        Index targetIndex = INDEX_FIRST_INTERNSHIP_APPLICATION;
 //        String userInput = targetIndex.getOneBased() + DATE_DESC_BOFA + COMPANY_EMAIL_DESC_APPLE;
 //
 //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_DATE_BOFA)
@@ -132,7 +132,7 @@
 //    @Test
 //    public void parse_oneFieldSpecified_success() {
 //        // name
-//        Index targetIndex = INDEX_THIRD_PERSON;
+//        Index targetIndex = INDEX_THIRD_INTERNSHIP_APPLICATION;
 //        String userInput = targetIndex.getOneBased() + COMPANY_NAME_DESC_APPLE;
 //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_COMPANY_NAME_APPLE)
 //        .build();
@@ -170,7 +170,7 @@
 //        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 //
 //        // valid followed by invalid
-//        Index targetIndex = INDEX_FIRST_PERSON;
+//        Index targetIndex = INDEX_FIRST_INTERNSHIP_APPLICATION;
 //        String userInput = targetIndex.getOneBased() + INVALID_DATE_DESC + DATE_DESC_BOFA;
 //
 //        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_DATE));
@@ -198,7 +198,7 @@
 //
 //    @Test
 //    public void parse_resetTags_success() {
-//        Index targetIndex = INDEX_THIRD_PERSON;
+//        Index targetIndex = INDEX_THIRD_INTERNSHIP_APPLICATION;
 //        String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 //
 //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
