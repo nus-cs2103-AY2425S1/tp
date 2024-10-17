@@ -15,11 +15,11 @@
       "BTC" : [
         {
           "address" : "14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd",
-          "tag" : "Daily wallet"
+          "label" : "Daily wallet"
         },
         {
           "address" : "24qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd",
-          "tag" : "Special wallet"
+          "label" : "Special wallet"
         }
       ]
     },

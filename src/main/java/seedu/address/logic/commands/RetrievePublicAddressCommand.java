@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS_LABEL;
 
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class RetrievePublicAddressCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Retrieves public addresses of a contact.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_PUBLIC_ADDRESS + "NETWORK "
-            + "[" + PREFIX_PUBLIC_ADDRESS_TAG + "WALLET NAME]\n"
+            + "[" + PREFIX_PUBLIC_ADDRESS_LABEL + "WALLET NAME]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PUBLIC_ADDRESS + "BTC "
-            + PREFIX_PUBLIC_ADDRESS_TAG + "MyWallet";
+            + PREFIX_PUBLIC_ADDRESS_LABEL + "MyWallet";
 
     public static final String MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS =
             "Retrieved %1$d %2$s public addresses for %3$s:\n%4$s";
@@ -75,8 +75,8 @@ public class RetrievePublicAddressCommand extends Command {
         Person desiredPerson = lastShownList.get(index.getZeroBased());
         List<PublicAddress> desiredPublicAddresses = desiredPerson.getPublicAddressesByNetwork(network)
                 .stream()
-                .filter(publicAddress -> publicAddress.tag.toLowerCase().contains(walletName.toLowerCase()))
-                .sorted((a, b) -> a.tag.compareToIgnoreCase(b.tag))
+                .filter(publicAddress -> publicAddress.label.toLowerCase().contains(walletName.toLowerCase()))
+                .sorted((a, b) -> a.label.compareToIgnoreCase(b.label))
                 .toList();
 
         return new CommandResult(String.format(MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,

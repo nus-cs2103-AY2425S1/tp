@@ -25,9 +25,9 @@ import seedu.address.model.person.Person;
  */
 public class TypicalPersons {
 
-    public static final PublicAddress FAKE_BTC_DAILY_ADDRESS =
+    public static final PublicAddress BTC_DAILY_ADDRESS =
             new BtcAddress("14qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd", "Daily wallet");
-    public static final PublicAddress FAKE_BTC_SPECIAL_ADDRESS =
+    public static final PublicAddress BTC_SPECIAL_ADDRESS =
             new BtcAddress("24qViLJfdGaP4EeHnDyJbEGQysnCpwk3gd", "Special wallet");
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
@@ -37,7 +37,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withPublicAddresses(FAKE_BTC_DAILY_ADDRESS, FAKE_BTC_SPECIAL_ADDRESS)
+            .withPublicAddresses(BTC_DAILY_ADDRESS, BTC_SPECIAL_ADDRESS)
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
@@ -57,7 +57,7 @@ public class TypicalPersons {
             .withEmail("hans@example.com").withAddress("chicago ave").build();
     public static final Person JOE = new PersonBuilder().withName("Joe Mama").withPhone("87654321")
             .withEmail("joe@example.com").withAddress("kent ridge")
-            .withPublicAddresses(FAKE_BTC_DAILY_ADDRESS, FAKE_BTC_SPECIAL_ADDRESS).build();
+            .withPublicAddresses(BTC_DAILY_ADDRESS, BTC_SPECIAL_ADDRESS).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

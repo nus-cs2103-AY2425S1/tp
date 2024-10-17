@@ -6,8 +6,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.FAKE_BTC_DAILY_ADDRESS;
-import static seedu.address.testutil.TypicalPersons.FAKE_BTC_SPECIAL_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.BTC_DAILY_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.BTC_SPECIAL_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.JOE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -36,7 +36,7 @@ public class RetrievePublicAddressCommandParserTest {
                 new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC);
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                2, Network.BTC, JOE.getName(), FAKE_BTC_DAILY_ADDRESS + "\n" + FAKE_BTC_SPECIAL_ADDRESS);
+                2, Network.BTC, JOE.getName(), BTC_DAILY_ADDRESS + "\n" + BTC_SPECIAL_ADDRESS);
 
         assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
@@ -47,10 +47,10 @@ public class RetrievePublicAddressCommandParserTest {
 
         RetrievePublicAddressCommand retrieveCommand =
                 new RetrievePublicAddressCommand(Index.fromOneBased(model.getFilteredPersonList().size()), Network.BTC,
-                        FAKE_BTC_DAILY_ADDRESS.tag);
+                        BTC_DAILY_ADDRESS.label);
 
         String expectedMessage = String.format(RetrievePublicAddressCommand.MESSAGE_RETRIEVE_PUBLIC_ADDRESS_SUCCESS,
-                1, Network.BTC, JOE.getName(), FAKE_BTC_DAILY_ADDRESS);
+                1, Network.BTC, JOE.getName(), BTC_DAILY_ADDRESS);
 
         assertCommandSuccess(retrieveCommand, model, expectedMessage, model);
     }
