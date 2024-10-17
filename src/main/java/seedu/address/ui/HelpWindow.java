@@ -1,5 +1,14 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.AddCommand.HELP_ADD_COMMAND;
+import static seedu.address.logic.commands.DeleteCommand.HELP_DELETE_COMMAND;
+import static seedu.address.logic.commands.EditCommand.HELP_EDIT_COMMAND;
+import static seedu.address.logic.commands.ExitCommand.HELP_EXIT_COMMAND;
+import static seedu.address.logic.commands.FindCommand.HELP_FIND_COMMAND;
+import static seedu.address.logic.commands.FindTagCommand.HELP_FINDTAG_COMMAND;
+import static seedu.address.logic.commands.ListCommand.HELP_LIST_COMMAND;
+import static seedu.address.logic.commands.RemarkCommand.HELP_REMARK_COMMAND;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -14,42 +23,7 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     private static final String HELP_INTRO = "Below are some basic instructions to get started using PROperty!";
-    private static final String HELP_ADD_COMMAND = "Add Command \n"
-            + "- Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
-            + "- Example: add n/John Doe p/12345678 t/Student\n"
-            + "- Items in the [square brackets] are optional and can be input in any order!";
-    private static final String HELP_EDIT_COMMAND = "Edit Command \n"
-            + "- Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [dt/TAG] [r/REMARK]\n"
-            + "- Example: edit 1 p/87654321 t/Tutor dt/Student"
-            + "- INDEX is the index of the customer displayed. Items in the [square brackets] are optional"
-            + " and can be input in any order! TAG can be both a tag to be added or removed, depending on"
-            + " the prefix for the item.";
-    private static final String HELP_DELETE_COMMAND = "Delete Command\n"
-            + "- Format: delete INDEX\n"
-            + "- Example: delete 1\n"
-            + "- INDEX is the index of the customer displayed.";
-    private static final String HELP_LIST_COMMAND = "List Command\n"
-            + "- Format: list\n"
-            + "- Example: list";
-    private static final String HELP_FIND_COMMAND = "Find Command\n"
-            + "- Format: find KEYWORDS [MORE_KEYWORDS]\n"
-            + "- Example: find John Doe\n"
-            + "- Only names can be searched; Only full words will be matched. "
-            + "The command is case insensitive. When more than one keyword is used,"
-            + " persons matching at least one keyword will be returned.";
-    private static final String HELP_FINDTAG_COMMAND = "Findtag Command\n"
-            + "- Format: findtag TAG [MORE_TAGS]\n"
-            + "- Example: findtag HDB Condo\n"
-            + "- Tags are case insensitive.\n"
-            + "- Items in the [square brackets] are optional. Persons with at least one matching tag will be returned.";
-    private static final String HELP_REMARK_COMMAND = "Remark Command\n"
-            + "- Format: remark INDEX r/[REMARKS]\n"
-            + "- Example: remark 1 r/Prefers high rise apartments\n"
-            + "- Items in the [square brackets] are optional.\n"
-            + "- If [REMARKS] is left blank, the remark will be deleted from the specified Person at INDEX.";
-    private static final String HELP_EXIT_COMMAND = "Exit Command\n"
-            + "- Format: exit\n"
-            + "- Example: exit";
+
     private static final String HELP_MORE_INFORMATION = "For more detailed information,"
             + " visit the PROperty User Guide at: https://ay2425s1-cs2103t-f15-3.github.io/tp/UserGuide.html";
 

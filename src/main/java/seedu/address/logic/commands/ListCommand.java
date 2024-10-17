@@ -13,7 +13,9 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
-
+    public static final String HELP_LIST_COMMAND = "List Command\n"
+            + "- Format: list\n"
+            + "- Example: list";
 
     @Override
     public CommandResult execute(Model model) {

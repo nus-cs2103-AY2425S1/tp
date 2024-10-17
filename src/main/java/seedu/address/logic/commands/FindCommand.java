@@ -19,6 +19,12 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String HELP_FIND_COMMAND = "Find Command\n"
+            + "- Format: find KEYWORDS [MORE_KEYWORDS]\n"
+            + "- Example: find John Doe\n"
+            + "- Only names can be searched; Only full words will be matched. "
+            + "The command is case insensitive. When more than one keyword is used,"
+            + " persons matching at least one keyword will be returned.";
 
     private final NameContainsKeywordsPredicate predicate;
 

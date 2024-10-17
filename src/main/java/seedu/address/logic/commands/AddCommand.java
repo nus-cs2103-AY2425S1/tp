@@ -40,7 +40,10 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
+    public static final String HELP_ADD_COMMAND = "Add Command \n"
+            + "- Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
+            + "- Example: add n/John Doe p/12345678 t/Student\n"
+            + "- Items in the [square brackets] are optional and can be input in any order!";
     private final Person toAdd;
 
     /**
