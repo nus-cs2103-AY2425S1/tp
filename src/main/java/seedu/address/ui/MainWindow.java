@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-        personDetailsWindow = new PersonDetailsWindow();
+        personDetailsWindow = new PersonDetailsWindow(logic);
         helpWindow = new HelpWindow();
         importWindow = new ImportWindow(this.logic);
         exportWindow = new ExportWindow(this.logic);

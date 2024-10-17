@@ -2,38 +2,50 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 
-<fx:root title="Detail Information" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Detail Information" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@DarkTheme.css" />
-                <URL value="@Extensions.css" />
+                <URL value="@DarkTheme.css"/>
+                <URL value="@Extensions.css"/>
             </stylesheets>
 
-            <GridPane
-                    alignment="CENTER"
-                    hgap="10"
-                    vgap="10"
-                    style="-fx-background-color: #383838; -fx-padding: 20;">
+            <GridPane alignment="CENTER" hgap="10" vgap="10"
+                      style="-fx-background-color: #383838; -fx-padding: 20;">
                 <children>
-                    <Label fx:id="nameLabel" text="Name: "
-                           GridPane.rowIndex="0" GridPane.columnIndex="0"
+                    <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
-                    <Label fx:id="phoneLabel" text="Phone: "
-                           GridPane.rowIndex="1" GridPane.columnIndex="0"
+                    <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                    <Label text="Phone:" GridPane.rowIndex="1" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
-                    <Label fx:id="emailLabel" text="Email: "
-                           GridPane.rowIndex="2" GridPane.columnIndex="0"
+                    <TextField fx:id="phoneField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                    <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
-                    <Label fx:id="addressLabel" text="Address: "
-                           GridPane.rowIndex="3" GridPane.columnIndex="0"
+                    <TextField fx:id="emailField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                    <Label text="Address:" GridPane.rowIndex="3" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
+                    <TextField fx:id="addressField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                    <!-- Save and Cancel Buttons -->
+                    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="4" GridPane.columnIndex="1">
+                        <children>
+                            <Button text="Save" onAction="#handleSave"/>
+                            <Button text="Cancel" onAction="#handleCancel"/>
+                        </children>
+                    </HBox>
                 </children>
                 <padding>
-                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                    <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
                 </padding>
             </GridPane>
 
