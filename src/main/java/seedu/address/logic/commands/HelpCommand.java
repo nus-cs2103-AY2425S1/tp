@@ -8,7 +8,7 @@ import seedu.address.model.internshipapplication.InternshipApplication;
  */
 public class HelpCommand extends Command<InternshipApplication> {
 
-    public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_WORD = "/help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
