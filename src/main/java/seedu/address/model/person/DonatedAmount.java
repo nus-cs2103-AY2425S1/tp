@@ -24,10 +24,10 @@ public class DonatedAmount {
      *
      * @param amount A valid non-negative number representing the donated amount.
      */
-    public DonatedAmount(Double amount) {
+    public DonatedAmount(String amount) {
         requireNonNull(amount);
-        checkArgument(isValidAmount(amount.toString()), MESSAGE_CONSTRAINTS);
-        this.amount = amount;
+        checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
+        this.amount = Double.parseDouble(amount);
     }
 
     /**
@@ -58,5 +58,10 @@ public class DonatedAmount {
     @Override
     public int hashCode() {
         return amount.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return amount.toString();
     }
 }
