@@ -87,7 +87,7 @@ class AddInsuranceCommandTest {
 
         // Create final client with both insurance plans
         Client clientWithBothPlans = new ClientBuilder(clientWithFirstPlan)
-                .withInsurancePlansManager(firstPlan.toString() + ", " + secondPlan.toString())
+                .withInsurancePlansManager(firstPlan + ", " + secondPlan)
                 .build();
 
         String secondExpectedMessage = String.format(AddInsuranceCommand.MESSAGE_ADD_INSURANCE_PLAN_SUCCESS,
