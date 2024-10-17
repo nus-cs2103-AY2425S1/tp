@@ -166,9 +166,11 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
+### Archiving data files `archive`
 
-_Details coming soon ..._
+AddressBook data will be archived as a JSON file `[JAR file location]/archived/archivedaddressbook.json`.
+
+All the entries in the current address book will be cleared.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -197,3 +199,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Archive** | `archive`
