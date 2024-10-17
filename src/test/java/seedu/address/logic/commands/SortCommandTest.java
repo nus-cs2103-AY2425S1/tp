@@ -26,7 +26,6 @@ public class SortCommandTest {
         String expectedMessage = "List sorted successfully.";
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
         sortedList.sort(comparator);
         expectedModel.setFilteredPersonList(sortedList);
@@ -43,7 +42,6 @@ public class SortCommandTest {
         String expectedMessage = "List sorted successfully.";
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         List<Person> sortedList = new ArrayList<>(expectedModel.getFilteredPersonList());
         sortedList.sort(comparator);
         expectedModel.setFilteredPersonList(sortedList);

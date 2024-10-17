@@ -18,12 +18,12 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of persons by the specified parameter. "
-            + "Parameters: name\n"
+            + "Parameters: name/subject/classes\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    private final Comparator<Person> comparator;
+    private final Comparator<? extends Person> comparator;
 
-    public SortCommand(Comparator<Person> comparator) {
+    public SortCommand(Comparator<? extends Person> comparator) {
         this.comparator = comparator;
     }
 
@@ -32,8 +32,21 @@ public class SortCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         List<Person> sortedList = new ArrayList<>(model.getFilteredPersonList());
-        sortedList.sort(comparator);
+        sortedList.sort((Comparator<? super Person>) comparator);
         model.setFilteredPersonList(sortedList);
         return new CommandResult("List sorted successfully.");
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+        SortCommand otherCommand = (SortCommand) other;
+        return true;
+    }
+
 }

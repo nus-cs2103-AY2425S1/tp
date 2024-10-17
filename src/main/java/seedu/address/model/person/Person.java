@@ -41,10 +41,6 @@ public class Person {
         return name;
     }
 
-    public String getNameString() {
-        return name.toString();
-    }
-
     public Phone getPhone() {
         return phone;
     }
@@ -63,6 +59,10 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getNameString() {
+        return name.toString();
     }
 
     /**

@@ -14,7 +14,7 @@ public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        Comparator<Person> comparator;
+        Comparator<? extends Person> comparator;
 
         switch (trimmedArgs) {
         case "name" -> comparator = Comparator.comparing(Person::getNameString);
