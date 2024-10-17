@@ -282,6 +282,7 @@ _Details coming soon ..._
 3. **After a property is added** it is not instantly reflected on the Ui. It is reflected on the Ui after a delay. To resolve this,can either wait for a bit or scroll the screen up and down or click on the contact you added the property to.
 4. **Bug in edit command**, the edit command overwrites the property list and deletes them when a person is edited/modified.
 5. **Same Property to Sell** can be tagged to various contacts
+6. **delSell and delBuy** only works with the index displayed using the `list` command and not `findn` or `findp` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
