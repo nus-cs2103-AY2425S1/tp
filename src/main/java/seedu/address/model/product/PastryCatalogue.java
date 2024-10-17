@@ -10,7 +10,6 @@ public class PastryCatalogue extends Catalogue {
 
     public PastryCatalogue() {
         addDefaultProducts();
-        super.nextProductId += 3;
     }
 
     @Override

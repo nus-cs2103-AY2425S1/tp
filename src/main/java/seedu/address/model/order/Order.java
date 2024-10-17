@@ -3,7 +3,10 @@ package seedu.address.model.order;
 import seedu.address.model.product.Product;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Abstract class representing a general order.
@@ -69,5 +72,18 @@ public abstract class Order {
                 ", items=" + items +
                 ", status='" + status + '\'' +
                 '}';
+    }
+
+    public String viewOrder() {
+        StringBuilder sb = new StringBuilder();
+
+        for (Product entry: items) {
+            sb.append(entry.viewProduct());
+            sb.append("\n");
+        }
+
+        return "Phone Number: " + phoneNumber + "\n" +
+                "Order Date: " + orderDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n" +
+                "Items: \n" + sb.toString();
     }
 }
