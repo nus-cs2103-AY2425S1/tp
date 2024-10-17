@@ -3,13 +3,17 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Set;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,20 +39,20 @@ class BatchDeleteCommandTest {
 
     @Test
     public void execute_validTags_success() {
-        //        Set<Tag> tagsV1 = Set.of(new Tag("friends"), new Tag("owesMoney"));
-        //        PersonContainsTagsPredicate predicate1 = new PersonContainsTagsPredicate(tagsV1);
-        //        BatchDeleteCommand batchDeleteCommand = new BatchDeleteCommand(tagsV1, predicate1);
-        //
-        //        String expectedMessage =
-        //        String.format(BatchDeleteCommand.MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
-        //        Messages.format(BENSON));
-        //
-        //        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        //        expectedModel.deletePerson(BENSON);
-        //
-        //        assertCommandSuccess(batchDeleteCommand, model,
-        //        zexpectedMessage, expectedModel);
-        // TODO
+        Set<Tag> tagsV1 = Set.of(new Tag("friends"), new Tag("owesMoney"));
+        PersonContainsTagsPredicate predicate1 = new PersonContainsTagsPredicate(tagsV1);
+        BatchDeleteCommand batchDeleteCommand = new BatchDeleteCommand(tagsV1, predicate1);
+
+        String expectedMessage = String.format(
+                BatchDeleteCommand.MESSAGE_BATCH_DELETE_EACH_PERSON_SUCCESS,
+                Messages.format(BENSON)
+        );
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(BENSON);
+        expectedModel.updateFilteredPersonList(Predicate.not(Model.PREDICATE_SHOW_ALL_PERSONS));
+
+        assertCommandSuccess(batchDeleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
