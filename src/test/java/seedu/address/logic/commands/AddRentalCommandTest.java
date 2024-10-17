@@ -239,6 +239,11 @@ public class AddRentalCommandTest {
         public void updateFilteredPersonList(Predicate<Client> predicate) {
             filteredList.setPredicate(predicate);
         }
+
+        @Override
+        public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
+            // do nothing as UI related
+        }
     }
 
 }
