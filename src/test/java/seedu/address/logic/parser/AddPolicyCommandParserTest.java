@@ -4,8 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POLICY_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_HEALTH;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_LIFE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_TYPE_HEALTH;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_POLICY_TYPE_LIFE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -64,7 +62,8 @@ public class AddPolicyCommandParserTest {
         assertParseFailure(parser, "foo" + POLICY_TYPE_DESC_HEALTH, expectedMessage);
 
         // Invalid policy type
-        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC, Policy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
+                Policy.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -78,7 +77,8 @@ public class AddPolicyCommandParserTest {
     @Test
     public void parse_validIndexAndInvalidPolicyType_failure() {
         // Valid index but invalid policy type
-        assertParseFailure(parser, INDEX_SECOND_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC, Policy.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INDEX_SECOND_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
+                Policy.MESSAGE_CONSTRAINTS);
     }
 
     @Test

@@ -89,7 +89,7 @@ public class AddPolicyCommand extends Command {
             }
             updatedPolicies.add(policy);
         }
-        return updatedPolicies; // Return the new instance
+        return updatedPolicies;
     }
 
 

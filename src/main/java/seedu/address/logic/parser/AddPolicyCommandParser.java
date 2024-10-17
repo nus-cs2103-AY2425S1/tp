@@ -32,7 +32,8 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
             // Parse the preamble as the index of the person
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPolicyCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPolicyCommand.MESSAGE_USAGE), ive);
         }
 
         // Parse all policy types from the input and add them to a PolicySet

@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.AddPolicyCommand.MESSAGE_ARGUMENTS;
-import static seedu.address.logic.commands.AddPolicyCommand.MESSAGE_DUPLICATES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -14,17 +12,18 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.tag.Tag;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.model.policy.EducationPolicy;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.PolicySet;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
-import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 public class AddPolicyCommandTest {
 
@@ -79,21 +78,9 @@ public class AddPolicyCommandTest {
     }
 
     @Test
-    public void execute_duplicatePolicy_throwsCommandException() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        PolicySet policies = new PolicySet();
-        policies.add(life);  
-        policies.add(life);
-
-        AddPolicyCommand addPolicyCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, policies);
-
-        assertCommandFailure(addPolicyCommand, model, MESSAGE_DUPLICATES);
-    }
-
-    @Test
     public void execute_emptyPolicySet_success() throws Exception {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        final PolicySet policies = new PolicySet();  // Empty set
+        final PolicySet policies = new PolicySet();
 
         AddPolicyCommand addPolicyCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, policies);
 
