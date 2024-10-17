@@ -14,23 +14,16 @@ public class CommentTest {
     }
 
     @Test
-    public void constructor_invalidComment_throwsIllegalArgumentException() {
-        String invalidComment = "";
-        assertThrows(IllegalArgumentException.class, () -> new Comment(invalidComment));
-    }
-
-    @Test
     public void isValidComment() {
         // null name
         assertThrows(NullPointerException.class, () -> Comment.isValidComment(null));
 
-        // invalid name
-        assertFalse(Comment.isValidComment("")); // empty string
-        assertFalse(Comment.isValidComment(" ")); // spaces only
-        assertFalse(Comment.isValidComment("^")); // only non-alphanumeric characters
-        assertFalse(Comment.isValidComment("prefer another set of cutlery*")); // contains non-alphanumeric characters
-
         // valid name
+        assertTrue(Comment.isValidComment("")); // empty string
+        assertTrue(Comment.isValidComment(" ")); // spaces only
+        assertTrue(Comment.isValidComment("^")); // only non-alphanumeric characters
+        assertTrue(Comment.isValidComment("prefer another set of cutlery*")); // contains non-alphanumeric characters
+
         assertTrue(Comment.isValidComment("prefer another set of cutlery")); // alphabets only
         assertTrue(Comment.isValidComment("12345")); // numbers only
         assertTrue(Comment.isValidComment("is 1st member")); // alphanumeric characters
