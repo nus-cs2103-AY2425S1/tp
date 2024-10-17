@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -44,6 +45,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_STUDENTID + "STUDENTID] "
             + "[" + PREFIX_NETID + "EMAIL] "
             + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_YEAR + "YEAR] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENTID + "A1234567B "
@@ -153,13 +155,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setMajor(toCopy.major);
             setTags(toCopy.tags);
+            setYear(toCopy.year);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, email, major, tags);
+            return CollectionUtil.isAnyNonNull(name, studentId, email, major, tags, year);
         }
 
         public void setName(Name name) {
@@ -190,16 +193,14 @@ public class EditCommand extends Command {
             this.major = major;
         }
 
-        public Optional<Year> getYear() {
-            return Optional.ofNullable(year);
+        public Optional<Major> getMajor() {
+            return Optional.ofNullable(major);
         }
-
         public void setYear(Year year) {
             this.year = year;
         }
-
-        public Optional<Major> getMajor() {
-            return Optional.ofNullable(major);
+        public Optional<Year> getYear() {
+            return Optional.ofNullable(year);
         }
 
         /**
@@ -235,6 +236,7 @@ public class EditCommand extends Command {
                     && Objects.equals(studentId, otherEditPersonDescriptor.studentId)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(major, otherEditPersonDescriptor.major)
+                    && Objects.equals(year, otherEditPersonDescriptor.year)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -245,6 +247,7 @@ public class EditCommand extends Command {
                     .add("phone", studentId)
                     .add("email", email)
                     .add("major", major)
+                    .add("year", year)
                     .add("tags", tags)
                     .toString();
         }
