@@ -1,6 +1,5 @@
 package seedu.internbuddy.logic.commands;
 
-import java.io.ObjectInputFilter;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
@@ -60,16 +59,19 @@ public class WithdrawCommand extends Command {
         Application applicationToWithdraw = applicationList.get(applicationIndex.getZeroBased());
         applicationList.remove(applicationToWithdraw);
 
-        Status newStatus;
-        if (applicationList.isEmpty()) {
-            newStatus = new Status("CLOSED");
-        } else {
-            newStatus = companyToEdit.getStatus();
-        }
-        
+        Status newStatus = getNewStatus(companyToEdit, applicationList);
+
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
                 companyToEdit.getAddress(), companyToEdit.getTags(), newStatus, applicationList);
         model.setCompany(companyToEdit, editedCompany);
         return new CommandResult(String.format(MESSAGE_WITHDRAW_APPLICATION_SUCCESS, applicationToWithdraw));
+    }
+
+    public static Status getNewStatus(Company companyToEdit, List<Application> applicationList) {
+        if (applicationList.isEmpty()) {
+            return new Status("CLOSED");
+        } else {
+            return companyToEdit.getStatus();
+        }
     }
 }
