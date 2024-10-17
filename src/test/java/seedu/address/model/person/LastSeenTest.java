@@ -14,9 +14,9 @@ public class LastSeenTest {
     }
 
     @Test
-    public void constructor_invalidPriority_throwsIllegalArgumentException() {
-        String invalidPriority = "";
-        assertThrows(IllegalArgumentException.class, () -> new Address(invalidPriority));
+    public void constructor_invalidLastSeen_throwsIllegalArgumentException() {
+        String invalidLastSeen = "2024-01-01";
+        assertThrows(IllegalArgumentException.class, () -> new LastSeen(invalidLastSeen));
     }
 
     @Test
