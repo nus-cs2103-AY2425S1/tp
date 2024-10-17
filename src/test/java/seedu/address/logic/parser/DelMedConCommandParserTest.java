@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDCON_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDCON_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -62,6 +63,13 @@ public class DelMedConCommandParserTest {
         // NRIC parameter missing
         assertParseFailure(parser, MEDCON_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DelMedConCommand.MESSAGE_USAGE));
+
+        // MedCon parameter missing
+        assertParseFailure(parser, NRIC_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DelMedConCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, NRIC_DESC_AMY + " " + PREFIX_MEDCON, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DelMedConCommand.MESSAGE_USAGE));
+
     }
 
     @Test
