@@ -8,7 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModule(String)}
  */
 public class Module {
-    public static final String MESSAGE_CONSTRAINTS = "Modules can take an values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Modules should consist of alphanumeric characters only,"
+            + "and it should not be blank.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String module;

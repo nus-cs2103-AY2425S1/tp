@@ -74,6 +74,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
+
         final List<Module> personModules = new ArrayList<>();
         for (JsonAdaptedModule module : modules) {
             personModules.add(module.toModelType());
