@@ -63,7 +63,7 @@ public class LinkCommand extends Command {
         Concert concert = lastShownConcertList.get(indexC.getZeroBased());
 
         ConcertContact linkedPerson = new ConcertContact(personToLink, concert);
-        model.addConcertContact(linkedPerson);
+
         return new CommandResult(String.format(MESSAGE_LINK_PERSON_SUCCESS, Messages.format(personToLink),
                 Messages.format(concert)));
     }
