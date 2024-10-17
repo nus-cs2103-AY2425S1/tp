@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.pet.Pet;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Pet}.
  */
 public class PetCard extends UiPart<Region> {
 
@@ -39,7 +39,7 @@ public class PetCard extends UiPart<Region> {
     private Label sex;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PetCode} with the given {@code Pet} and index to display.
      */
     public PetCard(Pet pet, int displayedIndex) {
         super(FXML);
