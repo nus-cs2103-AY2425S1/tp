@@ -41,8 +41,8 @@ public class ViewRentalCommand extends Command {
 
         Client clientToViewRentalInformation = lastShownList.get(targetIndex.getZeroBased());
         List<RentalInformation> rentalInformationListOfClient = clientToViewRentalInformation.getRentalInformation();
-        model.updateVisibleRentalInformationList(rentalInformationListOfClient);
         model.setLastViewedClient(clientToViewRentalInformation);
+        model.updateVisibleRentalInformationList(rentalInformationListOfClient);
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_RENTAL_INFORMATION_LISTED_OVERVIEW,

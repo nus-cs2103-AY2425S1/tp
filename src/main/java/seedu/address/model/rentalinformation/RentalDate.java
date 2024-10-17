@@ -13,7 +13,7 @@ import seedu.address.commons.util.RentalUtil;
  */
 public class RentalDate {
     public static final String MESSAGE_CONSTRAINTS =
-            "Rental start or end date should be in the format of dd/mm/yyyy";
+            "Rental start or end date should be in the format of dd/mm/yyyy and must be valid date";
     public static final String VALIDATION_REGEX = "^(0[0-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\\d{2}$";
 
     public final LocalDate rentalDate;
@@ -26,6 +26,7 @@ public class RentalDate {
     public RentalDate(String rentalDate) {
         requireNonNull(rentalDate);
         checkArgument(isValidRentalDate(rentalDate), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidDateTime(rentalDate), MESSAGE_CONSTRAINTS);
         this.rentalDate = RentalUtil.convertStringToLocalDate(rentalDate);
     }
 
@@ -38,6 +39,23 @@ public class RentalDate {
      */
     public static boolean isValidRentalDate(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Validates a rental date string to see if it is a valid date time.
+     *
+     * @param date The string to be validated as a rental date.
+     * @return {@code true} if the string is a valid date;
+     *         {@code false} otherwise.
+     */
+    public static boolean isValidDateTime(String date) {
+        try {
+            RentalUtil.convertStringToLocalDate(date);
+        } catch (RuntimeException e) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override

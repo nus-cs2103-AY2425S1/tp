@@ -16,6 +16,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -190,6 +191,11 @@ public class AddRentalCommandTest {
         }
 
         @Override
+        public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Client getLastViewedClient() {
             throw new AssertionError("This method should not be called.");
         }
@@ -258,7 +264,12 @@ public class AddRentalCommandTest {
         @Override
         public Client getLastViewedClient() {
             // object returned is not used
-            return new PersonBuilder().build();
+            return null;
+        }
+
+        public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
+            // object returned is not used
+            return null;
         }
 
         @Override
