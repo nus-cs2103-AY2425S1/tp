@@ -1,14 +1,12 @@
 package seedu.address.logic.parser;
 
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PhonePredicate;
-import seedu.address.model.person.RoomNumberPredicate;
+import seedu.address.model.person.*;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -56,15 +54,37 @@ public class ViewCommandParser implements Parser<ViewCommand> {
         return new ViewCommand(combinedPredicate);
     }
 
-    private Optional<String> parseName(String name) {
-        return Optional.ofNullable(name).filter(s -> !s.trim().isEmpty());
+    private Optional<String> parseName(String name) throws ParseException {
+        if (name != null && !name.trim().isEmpty()) {
+            if (!Name.isValidName(name.trim())) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, Name.MESSAGE_CONSTRAINTS));
+            }
+            return Optional.of(name.trim());
+        }
+        return Optional.empty();
     }
 
-    private Optional<String> parseContactNumber(String contactNumber) {
-        return Optional.ofNullable(contactNumber).filter(s -> !s.trim().isEmpty());
+
+    private Optional<String> parseContactNumber(String contactNumber) throws ParseException {
+        if (contactNumber != null && !contactNumber.trim().isEmpty()) {
+            if (!Phone.isValidPhone(contactNumber.trim())) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, Phone.MESSAGE_CONSTRAINTS));
+            }
+            return Optional.of(contactNumber.trim());
+        }
+        return Optional.empty();
     }
 
-    private Optional<String> parseRoomNumber(String roomNumber) {
-        return Optional.ofNullable(roomNumber).filter(s -> !s.trim().isEmpty());
+    private Optional<String> parseRoomNumber(String roomNumber) throws ParseException {
+        if (roomNumber != null && !roomNumber.trim().isEmpty()) {
+            if (!RoomNumber.isValidRoomNumber(roomNumber.trim())) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, RoomNumber.MESSAGE_CONSTRAINTS));
+            }
+            return Optional.of(roomNumber.trim());
+        }
+        return Optional.empty();
     }
 }
