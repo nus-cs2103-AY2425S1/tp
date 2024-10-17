@@ -48,7 +48,6 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-    @Disabled
     @Test
     public void addressBookReadSave() throws Exception {
         /*
