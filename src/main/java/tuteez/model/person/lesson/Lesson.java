@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -107,6 +108,16 @@ public class Lesson {
         lessonSet.add(lesson);
     }
 
+
+    /**
+     * Adds one or more lessons to the HashSet.
+     *
+     * @param newLessons Hashset containing lesson / lessons to add.
+     */
+    public static void addAllLesson(Set<Lesson> newLessons) {
+        lessonSet.addAll(newLessons);
+    }
+
     /**
      * Removes a lesson from the HashSet.
      *
@@ -114,6 +125,15 @@ public class Lesson {
      */
     public static void removeLesson(Lesson lesson) {
         lessonSet.remove(lesson);
+    }
+
+    /**
+     * Removes one or more lessons to the HashSet.
+     *
+     * @param lessonsToDelete Hashset containing lesson / lessons to add.
+     */
+    public static void removeAllLesson(Set<Lesson> lessonsToDelete) {
+        lessonSet.removeAll(lessonsToDelete);
     }
 
     /**
@@ -125,6 +145,18 @@ public class Lesson {
     public static boolean isDuplicateLesson(Lesson lesson) {
         return lessonSet.contains(lesson);
     }
+
+    public static boolean containsAll(HashSet<Lesson> lessonsToCompare) {
+        return Lesson.lessonSet.containsAll(lessonsToCompare);
+    }
+
+    /**
+     * This method is used only for testing. Should not be used elsewhere
+     */
+    public static void clearLessonSet() {
+        Lesson.lessonSet.clear();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

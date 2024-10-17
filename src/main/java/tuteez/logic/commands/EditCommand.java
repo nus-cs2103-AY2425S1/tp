@@ -1,5 +1,7 @@
 package tuteez.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static tuteez.logic.commands.AddCommand.MESSAGE_DUPLICATE_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
@@ -65,8 +67,8 @@ public class EditCommand extends Command {
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        Objects.requireNonNull(index);
-        Objects.requireNonNull(editPersonDescriptor);
+        requireNonNull(index);
+        requireNonNull(editPersonDescriptor);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
@@ -74,7 +76,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Objects.requireNonNull(model);
+        requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -88,9 +90,29 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
+        Optional<Set<Lesson>> lessons = editPersonDescriptor.getLessons();
+        if (lessons.isPresent()) {
+            for (Lesson newLesson : lessons.get()) {
+                if (personToEdit.getLessons().contains(newLesson)) {
+                    continue;
+                }
+
+                if (checkForClashingLesson(newLesson)) {
+                    throw new CommandException(MESSAGE_DUPLICATE_LESSON);
+                    //return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
+                }
+            }
+        }
+
+        Lesson.removeAllLesson(personToEdit.getLessons());
+        Lesson.addAllLesson(editPersonDescriptor.getLessons().orElse(Collections.emptySet()));
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+    }
+
+    public boolean checkForClashingLesson(Lesson lesson) {
+        return Lesson.isDuplicateLesson(lesson);
     }
 
     /**
