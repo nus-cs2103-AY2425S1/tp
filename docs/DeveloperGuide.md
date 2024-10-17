@@ -353,9 +353,9 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 #### Use case: UC2 - Delete a contact
 
 **MSS**
-1. User enters delete contact command with the contact's detail (full name or phone number).
+1. User enters delete contact command with the contact's full name.
 2. Cher shows list of contacts with name that matches user input.
-3. User re-enters delete command with phone number of the contact to delete.
+3. User re-enters delete command with index of the contact in list shown to delete.
 4. Cher prompts for delete confirmation.
 5. User confirms deletion.
 6. Cher deletes the contact from memory.
@@ -368,7 +368,7 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
     - 1a1. Cher shows correct input format.<br>
       Use case ends.
 * 1b. Cher detects only 1 contact
-    - Use Case jumps to step 5
+    - Use Case jumps to step 4
 * 3a. Cher detects error in user input.
     - 3a1. Cher shows error message. <br>
       Use case ends.
@@ -388,12 +388,6 @@ Priorities: High (Must-Have), Medium (Nice-to-Have), Low (Could-Have), Trivial (
 **MSS**
 1. Cher opens a local file.
 2. Cher saves contacts in memory into local file. <br>
-   Use case ends.
-
-#### Use case: UC5 - Sync disk and memory
-**MSS**
-1. Cher reads from local file.
-2. Cher store contact data to memory. <br>
    Use case ends.
 
 ### Non-Functional Requirements
