@@ -66,7 +66,8 @@ public class EditCompanyDescriptorTest {
                 + editCompanyDescriptor.getPhone().orElse(null) + ", email="
                 + editCompanyDescriptor.getEmail().orElse(null) + ", address="
                 + editCompanyDescriptor.getAddress().orElse(null) + ", tags="
-                + editCompanyDescriptor.getTags().orElse(null) + "}";
+                + editCompanyDescriptor.getTags().orElse(null) + ", status="
+                + editCompanyDescriptor.getStatus().orElse(null) + "}";
         assertEquals(expected, editCompanyDescriptor.toString());
     }
 }

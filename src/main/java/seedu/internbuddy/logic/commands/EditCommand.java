@@ -5,7 +5,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
@@ -37,6 +36,8 @@ import seedu.internbuddy.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String STATUS_APPLIED = "APPLIED";
+    public static final String STATUS_CLOSED = "CLOSED";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the company identified "
             + "by the index number used in the displayed company list. "
@@ -46,8 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_STATUS + "STATUS] \n"
+            + "[" + PREFIX_TAG + "TAG]...\n "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -81,22 +81,21 @@ public class EditCommand extends Command {
         }
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
-        Company editedcompany = createEditedcompany(companyToEdit, editCompanyDescriptor);
+        Company editedCompany = createEditedCompany(companyToEdit, editCompanyDescriptor);
 
-        if (!companyToEdit.isSameCompany(editedcompany) && model.hasCompany(editedcompany)) {
+        if (!companyToEdit.isSameCompany(editedCompany) && model.hasCompany(editedCompany)) {
             throw new CommandException(MESSAGE_DUPLICATE_COMPANY);
         }
-
-        model.setCompany(companyToEdit, editedcompany);
+        model.setCompany(companyToEdit, editedCompany);
         model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedcompany)));
+        return new CommandResult(String.format(MESSAGE_EDIT_COMPANY_SUCCESS, Messages.format(editedCompany)));
     }
 
     /**
      * Creates and returns a {@code company} with the details of {@code companyToEdit}
      * edited with {@code editCompanyDescriptor}.
      */
-    private static Company createEditedcompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
+    private static Company createEditedCompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
         assert companyToEdit != null;
 
         Name updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getName());
@@ -107,6 +106,32 @@ public class EditCommand extends Command {
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
         List<Application> updatedApplications = editCompanyDescriptor.getApplications()
                 .orElse(companyToEdit.getApplications());
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedStatus, updatedApplications);
+    }
+
+    public static Company setStatusApplied(Company companyToEdit) {
+        Name updatedName = companyToEdit.getName();
+        Phone updatedPhone = companyToEdit.getPhone();
+        Email updatedEmail = companyToEdit.getEmail();
+        Address updatedAddress = companyToEdit.getAddress();
+        Set<Tag> updatedTags = companyToEdit.getTags();
+        Status updatedStatus = new Status(STATUS_APPLIED);
+        List<Application> applications = companyToEdit.getApplications();
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedStatus, applications);
+    }
+
+    public static Company setStatusClosed(Company companyToEdit) {
+        Name updatedName = companyToEdit.getName();
+        Phone updatedPhone = companyToEdit.getPhone();
+        Email updatedEmail = companyToEdit.getEmail();
+        Address updatedAddress = companyToEdit.getAddress();
+        Set<Tag> updatedTags = companyToEdit.getTags();
+        Status updatedStatus = new Status(STATUS_CLOSED);
+        List<Application> updatedApplications = companyToEdit.getApplications();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedStatus, updatedApplications);
@@ -265,6 +290,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("status", status)
                     .toString();
         }
     }

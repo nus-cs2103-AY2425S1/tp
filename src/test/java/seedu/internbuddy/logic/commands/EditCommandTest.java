@@ -151,6 +151,17 @@ public class EditCommandTest {
     }
 
     @Test
+    public void test_setCompanyStatus() {
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_COMPANY, new EditCompanyDescriptor());
+        Company companyInList = model.getAddressBook().getCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        Company updatedCompany = editCommand.setStatusApplied(companyInList);
+        assertFalse(companyInList.equals(updatedCompany));
+
+        Company updatedCompany2 = editCommand.setStatusClosed(updatedCompany);
+        assertFalse(updatedCompany2.equals(updatedCompany));
+    }
+
+    @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_COMPANY, DESC_GOOGLE);
 
