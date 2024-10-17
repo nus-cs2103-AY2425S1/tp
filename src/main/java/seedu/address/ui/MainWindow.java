@@ -118,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         // TODO: replace dummy data with real rental information
-        rentalInformationListPanel = new RentalInformationListPanel(logic.getFilteredPersonList());
+        rentalInformationListPanel = new RentalInformationListPanel(logic.getVisibleRentalInformationList());
         rentalInformationListPanelPlaceholder.getChildren().add(rentalInformationListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

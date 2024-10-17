@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -91,4 +92,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Client> predicate);
+
+    /** Returns a list of the visible rental information. */
+    ObservableList<RentalInformation> getVisibleRentalInformationList();
+
+    /**
+     * Updates the rental information that is visible in the right pane.
+     * @throws NullPointerException if {@code rentalInformation} is null.
+     */
+    void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList);
 }
