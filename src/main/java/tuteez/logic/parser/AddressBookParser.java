@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import tuteez.commons.core.LogsCenter;
 import tuteez.logic.commands.AddCommand;
 import tuteez.logic.commands.ClearCommand;
-import tuteez.logic.commands. Command;
+import tuteez.logic.commands.Command;
 import tuteez.logic.commands.DeleteCommand;
 import tuteez.logic.commands.DisplayCommand;
 import tuteez.logic.commands.EditCommand;
@@ -18,7 +18,6 @@ import tuteez.logic.commands.ExitCommand;
 import tuteez.logic.commands.FindCommand;
 import tuteez.logic.commands.HelpCommand;
 import tuteez.logic.commands.ListCommand;
-
 import tuteez.logic.parser.exceptions.ParseException;
 
 /**
