@@ -75,7 +75,6 @@ public class LogicManagerTest {
 
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
     }
-  
     @Test
     public void execute_listCommandWhenNoClients_throwsCommandException() {
         model = new ModelManager();
@@ -88,7 +87,6 @@ public class LogicManagerTest {
 
         assertCommandException(listCommand, ListCommand.MESSAGE_NO_CLIENT_IN_LIST);
     }
-  
     /*
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
