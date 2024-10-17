@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
  * The API of the Model component.
@@ -67,6 +68,11 @@ public interface Model {
      */
     boolean hasOwner(Owner owner);
 
+    /***
+     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     */
+    boolean hasPet(Pet pet);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -81,7 +87,7 @@ public interface Model {
 
     /**
      * Deletes the given pet.
-     * The owner must exist in the address book.
+     * The pet must exist in the address book.
      */
     void deletePet(Pet target);
 
@@ -98,6 +104,12 @@ public interface Model {
     void addOwner(Owner owner);
 
     /**
+     * Adds the given pet.
+     * {@code pet} must not already exist in the address book.
+     */
+    void addPet(Pet pet);
+
+    /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -111,6 +123,13 @@ public interface Model {
      */
     void setOwner(Owner target, Owner editedOwner);
 
+    /**
+     * Replaces the given pet {@code target} with {@code editedPet}.
+     * {@code target} must exist in the address book.
+     * The pet identity of {@code editedPet} must not be the same as another existing pet in the address book.
+     */
+    void setPet(Pet target, Pet editedPet);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -118,7 +137,7 @@ public interface Model {
     ObservableList<Owner> getFilteredOwnerList();
 
     /** Returns an unmodifiable view of the filtered pet list */
-    ObservableList<Owner> getFilteredPetList();
+    ObservableList<Pet> getFilteredPetList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -132,5 +151,9 @@ public interface Model {
      */
     void updateFilteredOwnerList(Predicate<Owner> predicate);
 
+    /**
+     * Updates the filter of the filtered pet list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredPetList(Predicate<Pet> predicate);
 }

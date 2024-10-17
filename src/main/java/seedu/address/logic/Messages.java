@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
+import seedu.address.model.pet.Pet;
 
 /**
  * Container for user visible messages.
@@ -16,9 +16,10 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_INVALID_OWNER_DISPLAYED_INDEX = "The owner index provided is invalid";
     public static final String MESSAGE_INVALID_PET_DISPLAYED_INDEX = "The pet index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_OWNERS_LISTED_OVERVIEW = "%1$d owners listed!";
+    public static final String MESSAGE_PETS_LISTED_OVERVIEW = "%1$d pets listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -37,48 +38,39 @@ public class Messages {
     /**
      * Formats the {@code person} for display to the user.
      */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
-    }
+    public static String format(Object object) {
+        if (object instanceof Person) {
+            Person person = (Person) object;
 
-    /**
-     * Formats the {@code owner} for display to the user.
-     */
-    public static String format(Owner owner) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(owner.getName())
-                .append("; Phone: ")
-                .append(owner.getPhone())
-                .append("; Email: ")
-                .append(owner.getEmail())
-                .append("; Address: ")
-                .append(owner.getAddress());
-        return builder.toString();
-    }
+            final StringBuilder builder = new StringBuilder();
+            builder.append(person.getName())
+                    .append("; Phone: ")
+                    .append(person.getPhone())
+                    .append("; Email: ")
+                    .append(person.getEmail())
+                    .append("; Address: ")
+                    .append(person.getAddress())
+                    .append("; Tags: ");
+            person.getTags().forEach(builder::append);
+            return builder.toString();
 
-    /**
-     * Formats the {@code owner} for display to the user.
-     */
-    public static String format(Pet pet) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(pet.getName())
-                .append("; Phone: ")
-                .append(pet.getPhone())
-                .append("; Email: ")
-                .append(pet.getEmail())
-                .append("; Address: ")
-                .append(pet.getAddress());
-        return builder.toString();
-    }
+        } else if (object instanceof Pet) {
+            Pet pet = (Pet) object;
 
+            final StringBuilder builder = new StringBuilder();
+            builder.append(pet.getName().name)
+                    .append("; Species: ")
+                    .append(pet.getSpecies().value)
+                    .append("; Breed: ")
+                    .append(pet.getBreed().value)
+                    .append("; Age: ")
+                    .append(pet.getAge().value)
+                    .append("; Sex: ")
+                    .append(pet.getSex().value)
+                    .append("; Tags: ");
+            pet.getTags().forEach(builder::append);
+            return builder.toString();
+        }
+        return "";
+    }
 }
