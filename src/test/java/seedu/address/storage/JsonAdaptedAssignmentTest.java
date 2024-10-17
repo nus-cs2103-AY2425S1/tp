@@ -21,7 +21,8 @@ public class JsonAdaptedAssignmentTest {
 
     private static final String VALID_ASSIGNMENT_NAME = MATH_ASSIGNMENT_SUBMITTED.getAssignmentName().fullName;
     private static final String VALID_DEADLINE = MATH_ASSIGNMENT_SUBMITTED.getDeadline().deadline.toString();
-    private static final String VALID_SUBMISSION_STATUS = MATH_ASSIGNMENT_SUBMITTED.getSubmissionStatus().status.toString();
+    private static final String VALID_SUBMISSION_STATUS = MATH_ASSIGNMENT_SUBMITTED
+            .getSubmissionStatus().status.toString();
     private static final String VALID_GRADING_STATUS = MATH_ASSIGNMENT_SUBMITTED.getGradingStatus().status.toString();
     private static final String VALID_GRADE = MATH_ASSIGNMENT_SUBMITTED.getGrade().grade
             .map(x -> x.toString()).orElse("NULL");

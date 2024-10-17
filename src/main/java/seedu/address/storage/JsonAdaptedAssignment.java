@@ -10,9 +10,10 @@ import seedu.address.model.assignment.Deadline;
 import seedu.address.model.assignment.Grade;
 import seedu.address.model.assignment.Status;
 
-import java.time.LocalDate;
 
-
+/**
+ * Jackson-friendly version of {@link Assignment}.
+ */
 public class JsonAdaptedAssignment {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Assignment's %s field is missing!";
     private final String assignmentName;
@@ -25,9 +26,11 @@ public class JsonAdaptedAssignment {
      * Constructs a {@code JsonAdaptedAssignment} with the given assignment details.
      */
     @JsonCreator
-    public JsonAdaptedAssignment(@JsonProperty("assignmentName") String assignmentName, @JsonProperty("deadline") String deadline,
-            @JsonProperty("submissionStatus") String submissionStatus, @JsonProperty("gradingStatus") String gradingStatus,
-            @JsonProperty("grade") String grade) {
+    public JsonAdaptedAssignment(@JsonProperty("assignmentName") String assignmentName,
+                                 @JsonProperty("deadline") String deadline,
+                                 @JsonProperty("submissionStatus") String submissionStatus,
+                                 @JsonProperty("gradingStatus") String gradingStatus,
+                                 @JsonProperty("grade") String grade) {
         this.assignmentName = assignmentName;
         this.deadline = deadline;
         this.submissionStatus = submissionStatus;
@@ -56,8 +59,9 @@ public class JsonAdaptedAssignment {
      */
 
     public Assignment toModelType() throws IllegalValueException {
-        if (assignmentName == null)  {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, AssignmentName.class.getSimpleName()));
+        if (assignmentName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AssignmentName.class.getSimpleName()));
         }
         if (!AssignmentName.isValidName(assignmentName)) {
             throw new IllegalValueException(AssignmentName.MESSAGE_CONSTRAINTS);
@@ -66,14 +70,15 @@ public class JsonAdaptedAssignment {
         final AssignmentName modelAssignmentName = new AssignmentName(assignmentName);
 
         if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Deadline.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deadline.class.getSimpleName()));
         }
         if (!Deadline.isValidDeadline(deadline)) {
             throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
         }
         final Deadline modelDeadline = new Deadline(deadline);
 
-        if(submissionStatus == null) {
+        if (submissionStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
 
@@ -82,7 +87,7 @@ public class JsonAdaptedAssignment {
         }
         final Status modelSubmissionStatus = new Status(submissionStatus);
 
-        if(gradingStatus == null) {
+        if (gradingStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Status.class.getSimpleName()));
         }
 
@@ -91,7 +96,7 @@ public class JsonAdaptedAssignment {
         }
         final Status modelGradingStatus = new Status(gradingStatus);
 
-        if(grade == null) {
+        if (grade == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Grade.class.getSimpleName()));
         }
 

@@ -1,14 +1,19 @@
 package seedu.address.testutil;
 
-import seedu.address.model.assignment.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.Deadline;
+import seedu.address.model.assignment.Grade;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A utility class to help with building StudentTest objects.
