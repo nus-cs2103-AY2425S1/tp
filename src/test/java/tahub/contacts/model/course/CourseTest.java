@@ -51,7 +51,6 @@ public class CourseTest {
         assertFalse(Course.isValidCourseName("CS110")); // not enough digits
         assertFalse(Course.isValidCourseName("CS1101SS")); // contains extra alphabetical characters at the end
         
-
         // valid course codes
         assertTrue(Course.isValidCourseName("CS1101S"));
         assertTrue(Course.isValidCourseName("BT1152"));
