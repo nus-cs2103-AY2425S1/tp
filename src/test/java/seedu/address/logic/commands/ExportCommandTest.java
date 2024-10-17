@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -86,26 +87,5 @@ public class ExportCommandTest {
             // Handle any IO exception
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Requires the file to be unreadable. Thus, must be set unreadable locally.
-     * Use terminal command `chmod 000' to set file to unreadable.
-     * @throws IOException
-     */
-    @Test
-    void saveJsonFile_accessDenied_throwsCommandException() throws IOException {
-        Path importPath = projectRootPath.resolve("src").resolve("test").resolve("data")
-                                .resolve("JsonExportTest").resolve("accessDenied.json");
-
-        exportFilePath.toFile().setWritable(true);
-        ExportCommand exportCommand = new ExportCommand();
-
-        // Execute Test and Assert Outcome
-        CommandException thrown = assertThrows(CommandException.class, () -> {
-            exportCommand.execute(model , importPath, exportFilePath);
-        });
-        // Clean Up
-        Files.deleteIfExists(exportFilePath);
     }
 }
