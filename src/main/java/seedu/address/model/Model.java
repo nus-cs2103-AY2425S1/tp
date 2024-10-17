@@ -92,6 +92,8 @@ public interface Model {
 
     void setMeeting(Meeting target, Meeting editedMeeting);
 
+    boolean hasMeeting(Meeting meeting);
+
     ObservableList<Meeting> getWeeklySchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
