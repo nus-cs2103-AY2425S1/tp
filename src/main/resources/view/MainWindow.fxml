@@ -11,12 +11,15 @@
 <?import javafx.scene.layout.VBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@CommandText.css" />
+        <URL value="@MainWindow.css" />
+        <URL value="@Menu.css" />
+        <URL value="@PersonListPanel.css" />
+        <URL value="@ResultDisplay.css" />
       </stylesheets>
 
       <VBox>

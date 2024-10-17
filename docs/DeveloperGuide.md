@@ -435,8 +435,8 @@ Fault Tolerance
 10. Ensure that invalid input (e.g., incorrect phone format) does not result in data corruption.
 
 Performance Requirements
-11. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors. 
-12. Backup operations must complete within five seconds for a wedding list of up to 500 entries. 
+11. The system should respond to user input within two seconds, even for lists of up to 500 guests and 50 vendors.
+12. Backup operations must complete within five seconds for a wedding list of up to 500 entries.
 13. System startup time should not exceed five seconds on standard hardware.
 
 
