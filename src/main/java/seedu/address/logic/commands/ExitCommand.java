@@ -9,7 +9,7 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "exit";
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting ResearchRoster as requested ...";
+    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting ResearchRoster. See you again soon!";
 
     @Override
     public CommandResult execute(Model model) {

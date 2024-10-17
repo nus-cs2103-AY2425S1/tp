@@ -19,7 +19,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.StudyGroupTag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -29,12 +29,13 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER, PREFIX_AGE,
-                        PREFIX_DETAIL, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER,
+                PREFIX_AGE,
+                PREFIX_DETAIL, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER, PREFIX_AGE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,16 +49,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
         Detail detail = argMultimap.getValue(PREFIX_DETAIL).map(ParserUtil::parseDetail).orElse(null);
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<StudyGroupTag> studyGroupList = ParserUtil.parseStudyGroups(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, email, gender, age, tagList, detail);
+        Person person = new Person(name, email, gender, age, studyGroupList, detail);
 
         return new AddCommand(person);
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * Returns true if none of the prefixes contains empty {@code Optional} values
+     * in the given {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());

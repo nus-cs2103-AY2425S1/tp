@@ -13,21 +13,22 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Person} objects to be used in
+ * tests.
  */
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com").withGender("F").withAge("20").withDetail("detail")
-            .withTags("friends").build();
+            .withStudyGroups("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withGender("M").withAge("40").withDetail("detail")
-            .withTags("owesMoney", "friends").build();
+            .withStudyGroups("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
             .withGender("M").withAge("30").withDetail("detail").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withEmail("cornelia@example.com").withGender("M").withAge("50").withDetail("detail")
-            .withTags("friends").build();
+            .withStudyGroups("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withEmail("werner@example.com").withGender("F").withAge("60").withDetail("detail").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
@@ -45,11 +46,12 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withEmail(VALID_EMAIL_BOB).withGender("M").withAge("30").withDetail("01-01-2024 1234")
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withStudyGroups(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
-    private TypicalPersons() {} // prevents instantiation
+    private TypicalPersons() {
+    } // prevents instantiation
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

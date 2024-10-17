@@ -43,8 +43,8 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(
+                temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -59,7 +59,8 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, model.getFilteredPersonList().size()));
     }
 
     @Test
@@ -68,17 +69,20 @@ public class LogicManagerTest {
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_EMPTY, model);
     }
 
-    //    @Test
-    //    public void execute_storageThrowsIoException_throwsCommandException() {
-    //        assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
-    //                LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
-    //    }
+    // @Test
+    // public void execute_storageThrowsIoException_throwsCommandException() {
+    // assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION,
+    // String.format(
+    // LogicManager.FILE_OPS_ERROR_FORMAT, DUMMY_IO_EXCEPTION.getMessage()));
+    // }
     //
-    //    @Test
-    //    public void execute_storageThrowsAdException_throwsCommandException() {
-    //        assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION, String.format(
-    //                LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
-    //    }
+    // @Test
+    // public void execute_storageThrowsAdException_throwsCommandException() {
+    // assertCommandFailureForExceptionFromStorage(DUMMY_AD_EXCEPTION,
+    // String.format(
+    // LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT,
+    // DUMMY_AD_EXCEPTION.getMessage()));
+    // }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
@@ -86,10 +90,11 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command and confirms that
-     * - no exceptions are thrown <br>
+     * Executes the command and confirms that - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
@@ -100,7 +105,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
+     * Executes the command, confirms that a ParseException is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
@@ -108,7 +115,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
+     * Executes the command, confirms that a CommandException is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
@@ -116,7 +125,9 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command, confirms that the exception is thrown and that the result message is correct.
+     * Executes the command, confirms that the exception is thrown and that the
+     * result message is correct.
+     *
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -126,10 +137,12 @@ public class LogicManagerTest {
     }
 
     /**
-     * Executes the command and confirms that
-     * - the {@code expectedException} is thrown <br>
+     * Executes the command and confirms that - the {@code expectedException} is
+     * thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * - the internal model manager state is the same as that in
+     * {@code expectedModel} <br>
+     *
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
@@ -139,15 +152,18 @@ public class LogicManagerTest {
     }
 
     /**
-     * Tests the Logic component's handling of an {@code IOException} thrown by the Storage component.
+     * Tests the Logic component's handling of an {@code IOException} thrown by the
+     * Storage component.
      *
-     * @param e the exception to be thrown by the Storage component
-     * @param expectedMessage the message expected inside exception thrown by the Logic component
+     * @param e               the exception to be thrown by the Storage component
+     * @param expectedMessage the message expected inside exception thrown by the
+     *                        Logic component
      */
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
+        // Inject LogicManager with an AddressBookStorage that throws the IOException e
+        // when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
@@ -156,15 +172,15 @@ public class LogicManagerTest {
             }
         };
 
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(
+                temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withStudyGroups().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
