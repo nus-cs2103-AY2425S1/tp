@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.model.util.ContactType.STUDENT;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import seedu.address.model.person.Student;
@@ -20,7 +22,7 @@ public class StudentCard extends PersonCard {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public StudentCard(Student person, int displayedIndex) {
-        super(person, displayedIndex);
+        super(STUDENT, person, displayedIndex);
         parentName.setText("");
         parentPhone.setText("");
         parentEmail.setText("");
