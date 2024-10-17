@@ -27,6 +27,9 @@ public class Person {
     private final boolean isVip;
     private final Comment comment;
 
+    /**
+     * Every field must be present and not null. The customer will start as a non-VIP.
+     */
     public Person(Name name, Phone phone, Email email, Address address, Comment comment, Set<Tag> tags) {
         this(name, phone, email, address, comment, tags, false);
     }
