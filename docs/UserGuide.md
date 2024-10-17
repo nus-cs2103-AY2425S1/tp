@@ -79,9 +79,7 @@ Format: `help`
 
 Adds a company to the address book.
 
-Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [s/STATUS] [t/TAG]…​`
-
-* `STATUS` can only take the values `INTERESTED`, `APPLIED`, `CLOSED` and will be `INTERESTED` if not specified.
+Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 <box type="tip" seamless>
 
@@ -90,7 +88,7 @@ Format: `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [s/STATUS] [t/TAG]…�
 
 Examples:
 * `add n/Apple e/contact@apple.com`
-* `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA s/INTERESTED`
+* `add n/Netflix e/contact@netflix.com p/4085403700 a/100 Winchester Circle, Los Gatos, CA`
 * `add n/Google LLC t/FAANG e/contact@google.com p/1234567 t/tech`
 
 ### Listing all companies : `list`
@@ -103,7 +101,7 @@ Format: `list`
 
 Edits an existing company in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [s/STATUS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the company at the specified `INDEX`. The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -128,7 +126,7 @@ and will take be `APPLIED` if not specified.
 
 <box type="tip" seamless>
 
-**Tip:** Applying to a company automatically changes its `STATUS` to `APPLIED`.
+**tip:** applying to a company automatically changes the company's status to `applied`.
 </box>
 
 ### Withdrawing application for a company: `withdraw`
@@ -139,6 +137,11 @@ Format: `withdraw INDEX APPLICATION_INDEX`
 
 * Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`. 
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
+
+<box type="tip" seamless>
+
+**tip:** withdrawing all applications from a company automatically changes the company's status to `CLOSED`.
+</box>
 
 ### Locating companies by name: `find`
 
@@ -155,8 +158,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find Inc` returns `inc` and `Apple Inc`
-* `find Apple Inc` returns `Apple Inc`, `Facebook Inc`<br>
-  ![result for 'find apple google'](images/findAppleFacebookResult.png)
+* `find apple facebook` returns `Apple`, `Facebook`<br>
+  ![result for 'find apple facebook'](images/findAppleFacebookResult.png)
 
 ### Deleting a company : `delete`
 
@@ -221,14 +224,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action       | Format, Examples                                                                                                                                                              |
-|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**      | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
-| **Clear**    | `clear`                                                                                                                                                                       |
-| **Delete**   | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                           |
-| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                     |
-| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                     |
-| **Withdraw** | `withdraw INDEX APPLICATION_INDEX`<br> e.g., `withdraw 3 1`                                                                                                                   |
-| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                     |
-| **List**     | `list`                                                                                                                                                                        |
-| **Help**     | `help`                                                                                                                                                                        |
+| Action       | Format, Examples                                                                                                                                                                  |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**      | `add n/NAME e/EMAIL [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/Google LLC p/22224444 e/careers@google.com a/70 Pasir Panjang Rd, #03-71, 117371 t/tech t/software` |
+| **Clear**    | `clear`                                                                                                                                                                           |
+| **Edit**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/Meta Platforms e/jobs@meta.com`                                                         |
+| **Apply**    | `apply INDEX n/NAME d/DESCRIPTION [as/APPLICATION_STATUS]`<br> e.g., `apply 1 n/Software Engineering Intern d/Uses React`                                                         |
+| **Withdraw** | `withdraw INDEX APPLICATION_INDEX`<br> e.g., `withdraw 3 1`                                                                                                                       |
+| **Find**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find Apple Inc`                                                                                                                         |
+| **List**     | `list`                                                                                                                                                                            |
+| **Help**     | `help`                                                                                                                                                                            |
