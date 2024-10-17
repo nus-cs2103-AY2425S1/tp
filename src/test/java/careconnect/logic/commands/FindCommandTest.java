@@ -13,12 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import careconnect.model.Model;
 import careconnect.model.ModelManager;
 import careconnect.model.UserPrefs;
+import careconnect.model.person.NameAndAddressContainsKeywordPredicate;
 import careconnect.model.person.NameOrAddressContainsKeywordPredicate;
 
 /**
@@ -30,10 +32,14 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameOrAddressContainsKeywordPredicate firstPredicate =
-                new NameOrAddressContainsKeywordPredicate(Collections.singletonList("first"));
-        NameOrAddressContainsKeywordPredicate secondPredicate =
-                new NameOrAddressContainsKeywordPredicate(Collections.singletonList("second"));
+        NameAndAddressContainsKeywordPredicate firstPredicate =
+                new NameAndAddressContainsKeywordPredicate(
+                        Collections.singletonList("first"),
+                        Collections.singletonList("first"));
+        NameAndAddressContainsKeywordPredicate secondPredicate =
+                new NameAndAddressContainsKeywordPredicate(
+                        Collections.singletonList("second"),
+                        Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -58,7 +64,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameOrAddressContainsKeywordPredicate predicate = preparePredicate(" ");
+        NameAndAddressContainsKeywordPredicate predicate = preparePredicate(" ", " ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -68,7 +74,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameOrAddressContainsKeywordPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameAndAddressContainsKeywordPredicate predicate = preparePredicate("Kurz Elle Kunz", "");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -78,7 +84,7 @@ public class FindCommandTest {
     @Test
     public void execute_addressKeyword_onePersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
-        NameOrAddressContainsKeywordPredicate predicate = preparePredicate("jurong");
+        NameAndAddressContainsKeywordPredicate predicate = preparePredicate("", "jurong");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -87,8 +93,8 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() {
-        NameOrAddressContainsKeywordPredicate predicate =
-                new NameOrAddressContainsKeywordPredicate(Arrays.asList("keyword"));
+        NameAndAddressContainsKeywordPredicate predicate =
+                new NameAndAddressContainsKeywordPredicate(Arrays.asList("keyword"), Arrays.asList("keyword 2"));
         FindCommand findCommand = new FindCommand(predicate);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, findCommand.toString());
@@ -97,7 +103,14 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameOrAddressContainsKeywordPredicate preparePredicate(String userInput) {
-        return new NameOrAddressContainsKeywordPredicate(Arrays.asList(userInput.split("\\s+")));
+    private NameAndAddressContainsKeywordPredicate preparePredicate(String userInputName, String userInputAddress) {
+        return new NameAndAddressContainsKeywordPredicate(
+                userInputName.length() == 0
+                        ? Arrays.asList(new String[] {})
+                        : Arrays.asList(userInputName.split("\\s+")),
+                userInputAddress.length() == 0
+                        ? Arrays.asList(new String[] {})
+                        : Arrays.asList(userInputAddress.split("\\s+"))
+        );
     }
 }

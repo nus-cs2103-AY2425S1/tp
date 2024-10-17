@@ -24,7 +24,13 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         requireNonNull(args);
-
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        } else if (trimmedArgs.length() < 2) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_TOO_SHORT_SEARCH, FindCommand.MESSAGE_USAGE));
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS);
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS);
@@ -45,13 +51,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             String addressString = argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get();
             addressKeywords = addressString.split("\\s+");
         }
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        } else if (trimmedArgs.length() < 2) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_TOO_SHORT_SEARCH, FindCommand.MESSAGE_USAGE));
-        }
+
 
         return new FindCommand(
                 new NameAndAddressContainsKeywordPredicate(Arrays.asList(nameKeywords), Arrays.asList(addressKeywords))
