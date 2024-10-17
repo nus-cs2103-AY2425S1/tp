@@ -151,4 +151,7 @@ public class Event {
                 .toString();
     }
 
+    public boolean hasPartitipant(String volunteerName) {
+        return this.volunteers.contains(volunteerName);
+    }
 }

@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.eventcommands;
+package seedu.address.logic.commands.volunteercommands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -11,41 +11,41 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.Event;
+import seedu.address.model.volunteer.Volunteer;
 
 /**
- * Displays volunteers involved in the selected event
+ * Displays events the selected volunteer is participating in
  */
-public class EventViewCommand extends Command {
+public class VolunteerViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Views the volunteer details of the event identified by the index number used in the displayed event "
-            + "list.\n"
+            + ": Views the event details of the volunteer identified by the index number used in the displayed "
+            + "volunteer list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    private static final String MESSAGE_VIEW_EVENT_SUCCESS = "Viewing details of volunteers involved in %s";
+    private static final String MESSAGE_VIEW_VOLUNTEER_SUCCESS = "Viewing details of events that %s is involved in.";
 
     private final Index targetIndex;
 
-    public EventViewCommand(Index targetIndex) {
+    public VolunteerViewCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
+        List<Volunteer> lastShownList = model.getFilteredVolunteerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX);
         }
 
-        Event eventToView = lastShownList.get(targetIndex.getZeroBased());
-        model.viewEvent(eventToView);
-        return new CommandResult(String.format(MESSAGE_VIEW_EVENT_SUCCESS, eventToView.getName().toString()));
+        Volunteer volunteerToView = lastShownList.get(targetIndex.getZeroBased());
+        model.viewVolunteer(volunteerToView);
+        return new CommandResult(String.format(MESSAGE_VIEW_VOLUNTEER_SUCCESS, volunteerToView.getName().toString()));
     }
 
     @Override
@@ -55,12 +55,12 @@ public class EventViewCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EventViewCommand)) {
+        if (!(other instanceof VolunteerViewCommand)) {
             return false;
         }
 
-        EventViewCommand otherViewEventCommand = (EventViewCommand) other;
-        return targetIndex.equals(otherViewEventCommand.targetIndex);
+        VolunteerViewCommand otherViewCommand = (VolunteerViewCommand) other;
+        return targetIndex.equals(otherViewCommand.targetIndex);
     }
 
     @Override
@@ -70,4 +70,3 @@ public class EventViewCommand extends Command {
                 .toString();
     }
 }
-

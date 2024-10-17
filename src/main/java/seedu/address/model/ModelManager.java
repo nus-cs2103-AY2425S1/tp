@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventParticipatedByVolunteerPredicate;
 import seedu.address.model.volunteer.Volunteer;
 import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 
@@ -159,6 +160,14 @@ public class ModelManager implements Model {
         String eventName = eventToView.getName().toString();
         VolunteerInvolvedInEventPredicate volsInEventPredicate = new VolunteerInvolvedInEventPredicate(eventName);
         filteredVolunteers.setPredicate(volsInEventPredicate);
+    }
+
+    @Override
+    public void viewVolunteer(Volunteer volunteerToView) {
+        String volunteerName = volunteerToView.getName().toString();
+        EventParticipatedByVolunteerPredicate eventInVolPredicate =
+                new EventParticipatedByVolunteerPredicate(volunteerName);
+        filteredEvents.setPredicate(eventInVolPredicate);
     }
 
 

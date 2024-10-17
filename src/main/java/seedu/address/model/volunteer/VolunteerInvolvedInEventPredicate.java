@@ -1,9 +1,12 @@
 package seedu.address.model.volunteer;
 
-import seedu.address.commons.util.ToStringBuilder;
-
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
+
+/**
+ * Tests that a {@code Volunteer}'s {@code involvedIn} contains the event name given.
+ */
 public class VolunteerInvolvedInEventPredicate implements Predicate<Volunteer> {
 
     private final String eventName;
