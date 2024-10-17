@@ -158,8 +158,8 @@ Format: `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`
 * If the quantity is not provided, the quantity will be set to a default value of **1**.
 
 Examples:
-* `addOrder 2 i/Lamp d/20-11-2024 c/3` 
-* `addOrder 1 i/Books d/02-03-2026` adds the order with item `Books` with quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
+* `addOrder 2 i/Lamp d/20-11-2024 c/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
+* `addOrder 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
 * `find Betsy` followed by `addOrder 1 i/Bottles d/12-12-2002 c/1` adds an order under the 1st person in the results of the `find` command.
 
 ### Listing all orders under a Person : `listOrder`
