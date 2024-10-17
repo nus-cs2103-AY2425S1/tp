@@ -47,10 +47,10 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().value);
-        patientId.setText(person.getId().value);
-        ward.setText(person.getWard().value);
-        diagnosis.setText(person.getDiagnosis().value);
-        medication.setText(person.getMedication().value);
+        patientId.setText("ID: " + person.getId().value);
+        ward.setText("Ward: " + person.getWard().value);
+        diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
+        medication.setText("Medication: " + person.getMedication().value);
         /*
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
