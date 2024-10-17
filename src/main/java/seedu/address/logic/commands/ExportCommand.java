@@ -60,7 +60,7 @@ public class ExportCommand extends Command {
         return new CommandResult(SUCCESS_MESSAGE);
     }
 
-    private static List<Map<String, String>> readAndParseJson(String filePath) throws IOException {
+    static List<Map<String, String>> readAndParseJson(String filePath) throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
         String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
 
@@ -86,7 +86,7 @@ public class ExportCommand extends Command {
         return jsonData;
     }
 
-    private static Set<String> extractHeaders(List<Map<String, String>> jsonData) {
+    static Set<String> extractHeaders(List<Map<String, String>> jsonData) {
         Set<String> headers = new LinkedHashSet<>();
         for (Map<String, String> row : jsonData) {
             headers.addAll(row.keySet());
@@ -94,7 +94,7 @@ public class ExportCommand extends Command {
         return headers;
     }
 
-    private static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
+    static void writeCsvFile(List<Map<String, String>> jsonData, Set<String> headers, String csvFilePath)
             throws FileNotFoundException {
         try (PrintWriter writer = new PrintWriter(csvFilePath)) {
             writer.println(String.join(",", headers));
