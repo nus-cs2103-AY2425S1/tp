@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_DO_NOT_SHOW_ALL_PERSONS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -94,4 +95,6 @@ public interface Model {
      * Sorts the filter of the filtered person list in alphabetical order
      */
     void sortFilteredPersonList(String order);
+
+    ObservableList<Person> getPersonList();
 }

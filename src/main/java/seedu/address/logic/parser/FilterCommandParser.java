@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
@@ -22,6 +23,10 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String tag = argMultimap.getValue(PREFIX_TAG).orElseThrow(() -> new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)));
 
-        return new FilterCommand(tag);
+        try {
+            return new FilterCommand(new Tag(tag));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
     }
 }

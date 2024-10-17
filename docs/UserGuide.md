@@ -109,6 +109,22 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Renaming a Tag : `renameTag`
+
+Renames an existing tag in the address book.
+
+Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
+
+* Renames the tags called `OLDTAG` to `NEWTAG`.
+* Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
+* If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
+
+Examples:
+*  `renameTag ot/manager nt/boss` Renames the tag `colleagues` to be `boss`.
+![result for 'rename tag1'](images/renameTagResult1.png)
+*  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
+![result for 'rename tag2'](images/renameTagResult2.png)
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -126,6 +142,23 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Filter persons by tag: `filter`
+
+Filters the list of contacts and displays those with the provided tag.
+
+Format: `filter [t/TAG]`
+
+* The filter is case-sensitive.
+* Only exact matches of tags will be considered.
+* The tag provided must only contain alphanumeric characters
+* If the provided tag does not match any contact, an empty list will be shown.
+
+Examples:
+* `filter t/friends` will filter for contacts with the tag `friends`<br>
+  ![result for 'filter_friends'](images/filterFriendsResult.png)
+* `filter t/bestFriends` will display an empty list if there are no contacts with tag `bestFriends`<br>
+  ![result for 'filter bestFriends'](images/filterBestFriendsResult.png)
 
 ### Deleting a person : `delete`
 
@@ -150,6 +183,20 @@ format: `restore`
 * Restores the last person deleted from the address book by the 'delete' command.
 * Only works if person has been deleted by the 'delete' command within the session.
 * Does not work if same person has been added to the address book after deletion using add command.
+
+### Sort persons by name: `sort`
+
+Sorts and displays the list of persons by name in either ascending or descending alphabetical order
+
+Format: `sort [ORDER]`
+
+* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive)
+* If no order is provided, persons will be sorted in ascending order by default
+
+Examples:
+* `sort` will sort by persons names alphabetically in ascending order
+* `sort ascending` will sort by persons names alphabetically in ascending order
+* `sort descending` will sort by persons names alphabetically in descending order
 
 ### Clearing all entries : `clear`
 
@@ -207,3 +254,4 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Sort** | `sort [ORDER]`<br> e.g., `sort asc`
