@@ -2,20 +2,22 @@ package seedu.address.commons.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Email;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.PostalCode;
 import seedu.address.model.tag.Tag;
 
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Unit tests for CsvUtil.
