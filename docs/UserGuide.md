@@ -54,11 +54,11 @@
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in sqaure brackets and with `+`​ after them can be used zero or more times.<br>
-  e.g. `[t/TAG]+​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Items in sqaure brackets and with `+` after them can be used zero or more times.<br>
+  e.g. `[t/TAG]+` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Items in **round** brackets and with `+`​ after them can be used one or more times.<br>
-  e.g. `(t/TAG)+​` can be used as `t/friend`, `t/friend t/family` etc.
+* Items in **round** brackets and with `+` after them can be used one or more times.<br>
+  e.g. `(t/TAG)+` can be used as `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
