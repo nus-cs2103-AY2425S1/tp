@@ -30,12 +30,13 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCustomerCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_PREFERENCE, PREFIX_INFORMATION);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         DietaryPreference preference = ParserUtil.parsePreference(argMultimap.getValue(PREFIX_PREFERENCE).get());
-        String information = argMultimap.getValue(PREFIX_INFORMATION).get();
+        Information information = ParserUtil.parseInformation(argMultimap.getValue(PREFIX_INFORMATION).get());
         Remark remark = new Remark(""); // No direct remark input allowed
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
@@ -48,7 +49,7 @@ public class AddCustomerCommandParser implements Parser<AddCustomerCommand> {
         System.out.println("Parsed information: " + information);
         System.out.println("Parsed tags: " + tagList);
 
-        Customer customer = new Customer(name, phone, email, address, preference, remark, tagList, "Standard", information);
+        Customer customer = new Customer(name, phone, email, address, preference, information, remark, tagList);
 
         return new AddCustomerCommand(customer);
     }
