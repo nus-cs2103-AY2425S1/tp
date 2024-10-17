@@ -1499,8 +1499,8 @@ net worth") or removing those tags as needed.
 
 ### **Error Scenarios:**
 
-- **Invalid ContactID:**  
-  Example: `t abc hnw`  
+- **Invalid ContactID:**
+  Example: `t abc hnw`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
 - **Contact Not Found:**  
