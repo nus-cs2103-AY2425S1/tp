@@ -135,9 +135,6 @@ public class LoginWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         logger.info("Forcibly exiting HR Helper");
-        getRoot().close();
-        primaryStage.close();
-        Platform.exit();
         System.exit(0);
     }
 }
