@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.job.exceptions.DuplicateJobException;
+import seedu.address.model.job.exceptions.JobNotFoundException;
 
 /**
  * A list of unique jobs.
@@ -46,6 +47,17 @@ public class UniqueJobList implements Iterable<Job> {
         }
 
         internalList.setAll(jobs);
+    }
+
+    /**
+     * Removes the equivalent job from the list.
+     * The job must exist in the list.
+     */
+    public void remove(Job toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new JobNotFoundException();
+        }
     }
 
     /**
