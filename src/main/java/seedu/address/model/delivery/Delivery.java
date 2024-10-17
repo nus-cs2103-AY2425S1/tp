@@ -25,7 +25,8 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Product product, Person sender, Status status, DateTime deliveryDateTime, Cost cost, Quantity quantity) {
+    public Delivery(Product product, Person sender, Status status,
+                    DateTime deliveryDateTime, Cost cost, Quantity quantity) {
         requireAllNonNull(product, sender, status, deliveryDateTime, cost, quantity);
         this.product = product;
         this.sender = sender;

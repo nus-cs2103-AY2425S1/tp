@@ -1,7 +1,11 @@
 package seedu.address.testutil;
 
-import seedu.address.model.delivery.*;
+import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Quantity;
+import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.SupplierIndex;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 

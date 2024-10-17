@@ -4,8 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.delivery.*;
+import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.DateTime;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Quantity;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -83,7 +86,8 @@ public class JsonAdaptedDelivery {
 
 
         if (deliveryTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
         }
         if (!DateTime.isValidTime(this.deliveryTime)) {
             throw new IllegalValueException(DateTime.MESSAGE_CONSTRAINTS);
