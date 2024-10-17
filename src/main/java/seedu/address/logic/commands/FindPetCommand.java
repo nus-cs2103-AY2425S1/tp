@@ -11,6 +11,9 @@ import seedu.address.model.pet.PetNameContainsKeywordsPredicate;
  * Finds and lists all pets in the address book whose name contains any of the argument keywords.
  */
 public class FindPetCommand extends FindCommand<Pet> {
+
+    public static final String COMMAND_WORD = "find pet";
+
     /**
      * Constructs a {@code FindPetCommand} with the specified {@code PetNameContainsKeywordsPredicate}.
      */

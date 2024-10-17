@@ -11,6 +11,9 @@ import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
  * Finds and lists all owners in the address book whose name contains any of the argument keywords.
  */
 public class FindOwnerCommand extends FindCommand<Owner> {
+
+    public static final String COMMAND_WORD = "find owner";
+
     /**
      * Constructs a {@code FindOwnerCommand} with the specified {@code OwnerNameContainsKeywordsPredicate}.
      */
