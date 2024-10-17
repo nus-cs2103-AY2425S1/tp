@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showOwnerAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPetAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_OWNER;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.pet.Pet;
+import seedu.address.testutil.TypicalOwners;
+import seedu.address.testutil.TypicalPets;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -27,110 +30,111 @@ import seedu.address.model.pet.Pet;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithOwners = new ModelManager(TypicalOwners.getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithPets = new ModelManager(TypicalPets.getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredOwnerList_success() {
-        Owner ownerToDelete = model.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
+        Owner ownerToDelete = modelWithOwners.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
         DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(INDEX_FIRST_OWNER);
 
         String expectedMessage = String.format(DeleteOwnerCommand.MESSAGE_DELETE_OWNER_SUCCESS,
                 Messages.format(ownerToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(modelWithOwners.getAddressBook(), new UserPrefs());
         expectedModel.deleteOwner(ownerToDelete);
 
-        assertCommandSuccess(deleteOwnerCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteOwnerCommand, modelWithOwners, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexUnfilteredPetList_success() {
-        Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet petToDelete = modelWithPets.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         DeletePetCommand deletePetCommand = new DeletePetCommand(INDEX_FIRST_PET);
 
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS,
                 Messages.format(petToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(modelWithPets.getAddressBook(), new UserPrefs());
         expectedModel.deletePet(petToDelete);
 
-        assertCommandSuccess(deletePetCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePetCommand, modelWithPets, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredOwnerList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredOwnerList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(modelWithOwners.getFilteredOwnerList().size() + 1);
         DeleteOwnerCommand deleteOwnerCommand = new DeleteOwnerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteOwnerCommand, model, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteOwnerCommand, modelWithOwners, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredPetList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPetList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(modelWithPets.getFilteredPetList().size() + 1);
         DeletePetCommand deletePetCommand = new DeletePetCommand(outOfBoundIndex);
 
-        assertCommandFailure(deletePetCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deletePetCommand, modelWithPets, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredOwnerList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_OWNER);
+        showOwnerAtIndex(modelWithOwners, INDEX_FIRST_OWNER);
 
-        Owner ownerToDelete = model.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
+        Owner ownerToDelete = modelWithOwners.getFilteredOwnerList().get(INDEX_FIRST_OWNER.getZeroBased());
         DeleteCommand deleteCommand = new DeleteOwnerCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteOwnerCommand.MESSAGE_DELETE_OWNER_SUCCESS,
                 Messages.format(ownerToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(modelWithOwners.getAddressBook(), new UserPrefs());
         expectedModel.deleteOwner(ownerToDelete);
         showNoOwner(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, modelWithOwners, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validIndexFilteredPetList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PET);
+        showPetAtIndex(modelWithPets, INDEX_FIRST_PET);
 
-        Pet petToDelete = model.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
+        Pet petToDelete = modelWithPets.getFilteredPetList().get(INDEX_FIRST_PET.getZeroBased());
         DeleteCommand deleteCommand = new DeletePetCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeletePetCommand.MESSAGE_DELETE_PET_SUCCESS,
                 Messages.format(petToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(modelWithPets.getAddressBook(), new UserPrefs());
         expectedModel.deletePet(petToDelete);
         showNoPet(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, modelWithPets, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredOwnerList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_OWNER);
+        showOwnerAtIndex(modelWithOwners, INDEX_FIRST_OWNER);
 
         Index outOfBoundIndex = INDEX_SECOND_OWNER;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getOwnerList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < modelWithOwners.getAddressBook().getOwnerList().size());
 
         DeleteCommand deleteCommand = new DeleteOwnerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, modelWithOwners, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidIndexFilteredPetList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_OWNER);
+        showPetAtIndex(modelWithPets, INDEX_FIRST_PET);
 
-        Index outOfBoundIndex = INDEX_SECOND_OWNER;
+        Index outOfBoundIndex = INDEX_SECOND_PET;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPetList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < modelWithPets.getAddressBook().getPetList().size());
 
-        DeleteCommand deleteCommand = new DeleteOwnerCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeletePetCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, modelWithPets, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX);
     }
 
     @Test
