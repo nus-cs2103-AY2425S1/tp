@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.AddClientProfile;
 import seedu.address.logic.commands.AppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
@@ -40,7 +39,7 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         }
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_FROM, PREFIX_TO)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AppointmentCommand.MESSAGE_USAGE));
         }
         String date = argMultimap.getValue(PREFIX_DATE).orElse("");
         String from = argMultimap.getValue(PREFIX_FROM).orElse("");

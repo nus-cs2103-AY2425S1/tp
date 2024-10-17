@@ -36,7 +36,7 @@ public class AddPropertyCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToAddProperty, personWithAddedProperty);
         String expectedMessage = String.format(AddPropertyCommand.MESSAGE_ADD_PROPERTY_SUCCESS,
-                property, personWithAddedProperty);
+                property, Messages.format(personWithAddedProperty));
 
         assertCommandSuccess(addPropertyCommand, model, expectedMessage, expectedModel);
     }
@@ -64,7 +64,7 @@ public class AddPropertyCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToAddProperty, personWithAddedProperty);
         String expectedMessage = String.format(AddPropertyCommand.MESSAGE_ADD_PROPERTY_SUCCESS,
-                property, personWithAddedProperty);
+                property, Messages.format(personWithAddedProperty));
 
         assertCommandSuccess(addPropertyCommand, model, expectedMessage, expectedModel);
     }
