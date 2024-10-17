@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -37,17 +36,21 @@ public class TagsContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<Tag> tags = person.getTags();
-        //handling case where keywords are empty
+
+        // Handling case where keywords are empty
         if (keywords.isEmpty()) {
             return false;
         }
-        //converting tags and keywords to stream to iterate through effectively
-        Stream<Tag> tagStream = tags.stream();
-        Stream<String> keywordStream = keywords.stream().map(String::toLowerCase);
 
-        // Stream through the tags and check if any match the keyword (case-insensitive)
-        return tagStream.anyMatch(tag ->
-                keywordStream.anyMatch(keyword -> tag.tagName.toLowerCase().contains(keyword))
+        // Convert all keywords to lowercase
+        List<String> lowerCaseKeywords = keywords.stream()
+                .map(String::toLowerCase)
+                .toList();
+
+        // Stream through the tags and check if any tag matches a keyword (case-insensitive)
+        return tags.stream().anyMatch(tag ->
+                lowerCaseKeywords.stream()
+                        .anyMatch(keyword -> tag.getTagName().toString().toLowerCase().contains(keyword))
         );
     }
 
