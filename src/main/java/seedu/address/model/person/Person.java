@@ -31,7 +31,6 @@ public class Person {
     private final University university;
     private final Major major;
     private final Experience experience;
-    private final Interest interest;
     private final WorkExp workExp;
 
     /**
