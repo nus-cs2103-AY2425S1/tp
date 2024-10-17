@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.company.BillingDate;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
 import seedu.address.model.job.JobName;
@@ -55,6 +57,23 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code CompanyName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param name Name of the company.
+     * @return {@code CompanyName} representing the name.
+     * @throws ParseException If name is not valid.
+     */
+    public static CompanyName parseCompanyName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!CompanyName.isValidName(trimmedName)) {
+            throw new ParseException(CompanyName.MESSAGE_CONSTRAINTS);
+        }
+        return new CompanyName(trimmedName);
     }
 
     /**
@@ -222,5 +241,22 @@ public class ParserUtil {
             skillSet.add(parseSkills(skillName));
         }
         return skillSet;
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code BillingDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param date Billing date of the company.
+     * @return {@code BillingDate} representing company billing date.
+     * @throws ParseException If billing date is not valid.
+     */
+    public static BillingDate parseBillingDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!BillingDate.isValidBillingDate(trimmedDate)) {
+            throw new ParseException(BillingDate.MESSAGE_CONSTRAINTS);
+        }
+        return new BillingDate(trimmedDate);
     }
 }
