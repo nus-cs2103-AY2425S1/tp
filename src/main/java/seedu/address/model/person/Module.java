@@ -8,15 +8,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModule(String)}
  */
 public class Module {
-    public static final String MESSAGE_CONSTRAINTS = "Modules can take an values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Modules should consist of alphanumeric characters only,"
+            + "and it should not be blank.";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    /*
-     * The first character of the Module must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-
-    public final String value;
+    public final String module;
 
     /**
      * Constructs an {@code Module}.
@@ -26,7 +22,7 @@ public class Module {
     public Module(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
-        value = module;
+        this.module = module;
     }
 
     /**
@@ -38,7 +34,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return value;
+        return '[' + module + ']';
     }
 
     @Override
@@ -53,11 +49,11 @@ public class Module {
         }
 
         Module otherModule = (Module) other;
-        return value.equals(otherModule.value);
+        return module.equals(otherModule.module);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return module.hashCode();
     }
 }
