@@ -17,6 +17,7 @@ public class Transaction {
     private final Amount amount;
     private final Description description;
     private final Date date;
+    private Categories cats = new Categories();
 
     /**
      * Represents a Transaction in the transaction book.
@@ -64,6 +65,18 @@ public class Transaction {
         return date;
     }
 
+    public void addCategory(String cat) {
+        cats.add(cat);
+    }
+
+    public void removeCategory(String cat) {
+        cats.remove(cat);
+    }
+
+    public boolean containsCategory(String cat) {
+        return cats.contains(cat);
+    }
+
     /**
      * Returns true if both transactions have the same uuid.
      *
@@ -105,6 +118,4 @@ public class Transaction {
                 date, amount
         );
     }
-
-
 }
