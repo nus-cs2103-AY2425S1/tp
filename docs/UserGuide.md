@@ -122,7 +122,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Searching persons by name: `search`
+### Searching persons by field: `search`
 
 Search persons whose fields match the keywords given.
 
@@ -137,9 +137,12 @@ Format: `search PREFIX/ KEYWORD [MORE_PREFIX/ KEYWORD ...]`
 * For searches with multiple prefixes, only persons matching all keywords corresponding to the prefixes will be returned
 
 Examples:
-* `search n/ john` returns persons with the name `john` and `John Doe`
+* Person 1: `name`: John Doe `tag`: colleague
+* Person 2: `name`: Alex Yeoh `tag`: friends 
+* Person 3: `name`: David Li `tag`: friends
+* `search n/ john` returns persons with the name `john` like `John Doe`
 * `search t/ friends` returns all persons tagged as friends, like `Alex Yeoh`, `David Li`
-* `search n/ Alex t/ friends` returns all persons with name matching `Alex` and tag matching `friends`
+* `search n/ Alex t/ friends` returns all persons with name matching `Alex` and tag matching `friends` like `Alex Yeoh` <br>
     ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
