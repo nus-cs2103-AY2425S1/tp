@@ -18,9 +18,10 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students matching the specified "
             + "criteria and displays them as a list with index numbers.\n"
-            + "Parameters: [/n NAME] [/id STUDENT_ID]\n"
+            + "Parameters: n/ KEYWORD [MORE_KEYWORDS] id/ STUDENT_ID [MORE_STUDENT_IDS]\n"
             + "At least one parameter must be provided.\n"
-            + "Example: " + COMMAND_WORD + " /n John Doe /id A1234567E";
+            + "Example: " + COMMAND_WORD + " n/ John Doe id/ A1234567E A2345678B";
+
 
     private final Predicate<Person> predicate;
 
