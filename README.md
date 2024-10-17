@@ -1,7 +1,7 @@
 # DLTbook
 
 [![CI Status](https://github.com/AY2425S1-CS2103T-T08-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2425S1-CS2103T-T08-1/tp/actions)
-[![Codecov](https://app.codecov.io/gh/AY2425S1-CS2103T-T08-1/tp/settings/badge)](https://app.codecov.io/gh/AY2425S1-CS2103T-T08-1/tp)
+[![codecov](https://codecov.io/github/AY2425S1-CS2103T-T08-1/tp/graph/badge.svg?token=GJFEY8Q088)](https://codecov.io/github/AY2425S1-CS2103T-T08-1/tp)
 
 ![Ui](docs/images/Ui.png)
 
