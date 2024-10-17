@@ -159,7 +159,7 @@ class JsonAdaptedPerson {
         final Hours modelHours = new Hours(hours);
 
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        if (Objects.equals(role, "Tutor")) {
+        if (role == "Tutor") {
             return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
         } else {
             return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
