@@ -7,11 +7,9 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
@@ -76,13 +75,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " n/foo c/cs2101 n/bar c/cs2102 n/baz");
         FindCommand expectedCommand = new FindCommand(List.of(
-            new NameContainsKeywordsPredicate(List.of("foo")),
+                new NameContainsKeywordsPredicate(List.of("foo")),
                 new NameContainsKeywordsPredicate(List.of("bar")),
-                new NameContainsKeywordsPredicate(List.of("baz"))
+                new NameContainsKeywordsPredicate(List.of("baz")),
+                new IsStudentOfCoursePredicate(List.of("CS2101")),
+                new IsStudentOfCoursePredicate(List.of("CS2102"))
         ));
         assertEquals(expectedCommand, command);
     }
