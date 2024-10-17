@@ -29,8 +29,8 @@ public class TeacherTest {
         assertEquals("Math", teacher.getSubject().toString());
         assertEquals(1, teacher.getTags().size());
         assertEquals(1, teacher.getClasses().size());
-        assertEquals("Teacher: John Doe, Gender: male, Phone: 12345678, Email: johndoe@hotmail.com, "
-                + "Address: 123 Main St, Subject: Math, Tags: [Friends], Classes: [1A]", teacher.toString());
+        assertEquals("Teacher{name=John Doe, gender=male, phone=12345678, email=johndoe@hotmail.com, "
+                + "address=123 Main St, tags=[Friends], subject=Math, classes=[1A]}", teacher.toString());
     }
 
     @Test

@@ -95,7 +95,6 @@ public class Teacher extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("Role", "Teacher")
             .add("name", getName())
             .add("gender", gender)
             .add("phone", getPhone())
