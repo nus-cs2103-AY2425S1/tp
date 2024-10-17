@@ -258,6 +258,11 @@ public class AddTaskCommandTest {
         public void updateFilteredTaskList(Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void resetPersonPriority(Person target) {
+            // No operation needed for this stub; this line is necessary to satisfy the interface.
+        }
     }
 
     /**
