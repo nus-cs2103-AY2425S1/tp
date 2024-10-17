@@ -127,6 +127,18 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Adding a tag : `tag`
+
+Adds a tag to a specified person.
+
+Format: `tag INDEX t/TAG`
+
+### Deleting a tag : `untag`
+
+Deletes a tag of a specified person.
+
+Format: `untag INDEX t/TAG`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
