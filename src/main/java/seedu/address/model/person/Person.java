@@ -41,6 +41,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.publicAddresses = new HashMap<>(publicAddresses);
+        publicAddresses.forEach((network, addresses) -> this.publicAddresses.put(network, new HashSet<>(addresses)));
         this.tags.addAll(tags);
     }
 
@@ -80,7 +81,6 @@ public class Person {
     public Map<Network, Set<PublicAddress>> getPublicAddresses() {
         return Collections.unmodifiableMap(publicAddresses);
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
