@@ -1,6 +1,12 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.findcommand;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.Model;
+import seedu.address.model.person.keywordspredicate.TraitContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -19,4 +25,22 @@ public abstract class FindCommand extends Command {
 
     public static final String MESSAGE_FIND_PERSON_UNSUCCESSFUL = "No contacts found.";
 
+    protected final TraitContainsKeywordsPredicate<?> predicate;
+
+    public FindCommand(TraitContainsKeywordsPredicate<?> predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public abstract CommandResult execute(Model model);
+
+    @Override
+    public abstract boolean equals(Object other);
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
+    }
 }

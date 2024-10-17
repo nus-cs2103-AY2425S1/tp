@@ -10,16 +10,18 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindAddressCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindEmailCommand;
-import seedu.address.logic.commands.FindNameCommand;
-import seedu.address.logic.commands.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindAddressCommand;
+import seedu.address.logic.commands.findcommand.FindCommand;
+import seedu.address.logic.commands.findcommand.FindEmailCommand;
+import seedu.address.logic.commands.findcommand.FindNameCommand;
+import seedu.address.logic.commands.findcommand.FindPhoneCommand;
+import seedu.address.logic.commands.findcommand.FindTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
-import seedu.address.model.person.EmailContainsKeywordsPredicate;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -172,6 +174,29 @@ public class FindCommandParserTest {
 
         // Check for correct error message
         assertEquals("Email address cannot be empty!", thrown.getMessage());
+    }
+
+    @Test
+    public void parse_validFindTagArgs_returnsFindTagCommand() {
+        // no leading and trailing whitespaces
+        FindTagCommand expectedFindCommand =
+                new FindTagCommand(new TagContainsKeywordsPredicate(Arrays.asList("florist")));
+        assertParseSuccess(parser, "find t/florist", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find t/ \t florist", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingTagAfterPrefix_throwsParseException() {
+        String input = "find t/"; // Nothing after tag prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Tag cannot be empty!", thrown.getMessage());
+
     }
 
 }
