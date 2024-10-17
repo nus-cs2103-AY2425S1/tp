@@ -7,8 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -57,7 +57,7 @@ public class RemarkCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getOrganisation(), personToEdit.getLastSeen(),
-                personToEdit.getTags(), personToEdit.getPriority(),remark);
+                personToEdit.getTags(), personToEdit.getPriority(), remark);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
