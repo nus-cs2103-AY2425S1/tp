@@ -155,7 +155,7 @@ class JsonAdaptedPerson {
             final Date modelPartnershipEndDate = new Date(partnershipEndDate);
             return new Partner(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelPartnershipEndDate);
         } else {
-            throw new IllegalValueException("Person type information missing. Unable to determine role.");
+            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
         }
     }
 

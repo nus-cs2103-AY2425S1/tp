@@ -93,6 +93,8 @@ public class PersonFactory {
             Date partnershipEndDate =
                     ParserUtil.parsePartnershipEndDate(argMultimap.getValue(PREFIX_PARTNERSHIP_END_DATE).get());
             return new Partner(name, phone, email, address, tags, partnershipEndDate);
+        case PERSON:
+            return new Person(name, phone, email, address, tags);
         default:
             throw new ParseException("Unknown role:" + role);
         }
@@ -128,6 +130,9 @@ public class PersonFactory {
         case PARTNER:
             Date endDate = retrievePartnerEndDate(editPersonDescriptor, personToEdit);
             return new Partner(name, phone, email, address, tags, endDate);
+
+        case PERSON:
+            return new Person(name, phone, email, address, tags);
 
         default:
             throw new CommandException("Unknown role: " + role);
@@ -199,5 +204,4 @@ public class PersonFactory {
 
 
 }
-
 

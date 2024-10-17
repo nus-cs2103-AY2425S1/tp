@@ -7,10 +7,11 @@ package seedu.address.model.person;
 public enum Role {
     VOLUNTEER,
     DONOR,
-    PARTNER;
+    PARTNER,
+    PERSON;
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Invalid role. Valid roles are: Volunteer, Donor, Partner.";
+            "Invalid role. Valid roles are: Volunteer, Donor, Partner, Person..";
     /**
      * Returns the Role corresponding to the given string.
      * Throws an IllegalArgumentException if no matching Role is found.
@@ -23,6 +24,8 @@ public enum Role {
             return DONOR;
         case "partner":
             return PARTNER;
+        case "person":
+            return PERSON;
         default:
             throw new IllegalArgumentException("Invalid role: " + role);
         }
@@ -37,9 +40,8 @@ public enum Role {
      */
     public static boolean isValidRole(String test) {
         return test.equalsIgnoreCase("volunteer")
-                ||
-                test.equalsIgnoreCase("donor")
-                ||
-                test.equalsIgnoreCase("partner");
+                || test.equalsIgnoreCase("donor")
+                || test.equalsIgnoreCase("partner")
+                || test.equalsIgnoreCase("person");
     }
 }
