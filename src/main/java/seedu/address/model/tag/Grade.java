@@ -37,13 +37,7 @@ public class Grade {
         return testInt >= 1 && testInt <= 4;
     }
 
-    /**
-     * Converts grade index to grade name.
-     *
-     * @param index A Grade index
-     * @return A Grade name
-     */
-    public String convertIndexToName(String index) {
+    private String convertIndexToName(String index) {
         String name = "";
         switch (parseInt(index)) {
         case 1:
@@ -71,11 +65,10 @@ public class Grade {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Grade)) {
+        if (!(other instanceof Grade otherGrade)) {
             return false;
         }
 
-        Grade otherGrade = (Grade) other;
         return gradeName.equals(otherGrade.gradeName);
     }
 
