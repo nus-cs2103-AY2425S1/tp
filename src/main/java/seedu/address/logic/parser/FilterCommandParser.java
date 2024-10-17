@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_FILTER_CRITERIA;
+
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FilterTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_FILTER_CRITERIA;
 
 /**
  * Parses the user's input and create a FilterCommand object
