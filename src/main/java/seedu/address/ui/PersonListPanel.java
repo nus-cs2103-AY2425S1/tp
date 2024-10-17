@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 
 /**
@@ -18,7 +19,7 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Person> ownerListView;
+    private ListView<Owner> ownerListView;
 
     @FXML
     private ListView<Person> petListView;
@@ -26,13 +27,13 @@ public class PersonListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> ownerList) {
+    public PersonListPanel(ObservableList<Person> personList, ObservableList<Owner> ownerList) {
         super(FXML);
         ownerListView.setItems(ownerList);
-        ownerListView.setCellFactory(listView -> new PersonListViewCell());
+        ownerListView.setCellFactory(listView -> new OwnerListViewCell());
 
         // Temporarily using ownerList for both, but you can modify this once the petList is implemented
-        petListView.setItems(ownerList); // Replace with petList later
+        petListView.setItems(personList); // Replace with petList later
         petListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
@@ -52,5 +53,23 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Owner} using a {@code OwnerCard}.
+     */
+    class OwnerListViewCell extends ListCell<Owner> {
+        @Override
+        protected void updateItem(Owner owner, boolean empty) {
+            super.updateItem(owner, empty);
+
+            if (empty || owner == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new OwnerCard(owner, getIndex() + 1).getRoot());
+            }
+        }
+    }
+
 
 }
