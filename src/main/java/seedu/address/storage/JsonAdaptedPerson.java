@@ -49,16 +49,16 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedHealthService> healthServices = new ArrayList<>();
 
 
-    /**
-     * Constructs a {@code JsonAdaptedPerson} with only name, NRIC, sex, birthdate and health service details.
-     */
-    @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
-                             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
-                             @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices) {
-        this(name, nric, sex, birthDate, healthServices, null, null, null, null,
-                null, null, null, null, null, null);
-    }
+//    /**
+//     * Constructs a {@code JsonAdaptedPerson} with only name, NRIC, sex, birthdate and health service details.
+//     */
+//    @JsonCreator
+//    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("NRIC") String nric,
+//                             @JsonProperty("Sex") String sex, @JsonProperty("Birth Date") String birthDate,
+//                             @JsonProperty("healthServices") List<JsonAdaptedHealthService> healthServices) {
+//        this(name, nric, sex, birthDate, healthServices, null, null, null, null,
+//                null, null, null, null, null, null);
+//    }
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
