@@ -1,11 +1,12 @@
 package tuteez.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static tuteez.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static tuteez.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import static tuteez.logic.parser.CliSyntax.PREFIX_NAME;
 import static tuteez.logic.parser.CliSyntax.PREFIX_PHONE;
 import static tuteez.logic.parser.CliSyntax.PREFIX_TAG;
+import static tuteez.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static tuteez.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -26,6 +27,8 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -43,7 +46,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_TELEGRAM + "TELEGRAM USERNAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_LESSON + "LESSON]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -60,8 +65,8 @@ public class EditCommand extends Command {
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        Objects.requireNonNull(index);
+        Objects.requireNonNull(editPersonDescriptor);
 
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
@@ -69,7 +74,7 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        Objects.requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
@@ -99,9 +104,14 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        TelegramUsername updatedTelegramUser = editPersonDescriptor.getTelegramUsername()
+                .orElse(personToEdit.getTelegramUsername());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Lesson> updatedLessons = editPersonDescriptor.getLessons().orElse(personToEdit.getLessons());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTelegramUser, updatedTags,
+                updatedLessons);
     }
 
     @Override
@@ -138,6 +148,9 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private TelegramUsername telegramUsername;
+        private Set<Lesson> lessons;
+
 
         public EditPersonDescriptor() {}
 
@@ -151,13 +164,16 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setTelegramUsername(toCopy.telegramUsername);
+            setLessons(toCopy.lessons);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
+                    telegramUsername, tags, lessons);
         }
 
         public void setName(Name name) {
@@ -192,6 +208,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setTelegramUsername(TelegramUsername username) {
+            this.telegramUsername = username;
+        }
+
+        public Optional<TelegramUsername> getTelegramUsername() {
+            return Optional.ofNullable(telegramUsername);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -207,6 +231,23 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code lessons} to this object's {@code lessons}.
+         * A defensive copy of {@code lessons} is used internally.
+         */
+        public void setLessons(Set<Lesson> lessons) {
+            this.lessons = (lessons != null) ? new HashSet<>(lessons) : null;
+        }
+
+        /**
+         * Returns an unmodifiable lesson set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code lessons} is null.
+         */
+        public Optional<Set<Lesson>> getLessons() {
+            return (lessons != null) ? Optional.of(Collections.unmodifiableSet(lessons)) : Optional.empty();
         }
 
         @Override
@@ -225,7 +266,9 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(telegramUsername, otherEditPersonDescriptor.telegramUsername)
+                    && Objects.equals(lessons, otherEditPersonDescriptor.lessons);
         }
 
         @Override
@@ -235,7 +278,9 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("telegramUsername", telegramUsername)
                     .add("tags", tags)
+                    .add("lessons", lessons)
                     .toString();
         }
     }

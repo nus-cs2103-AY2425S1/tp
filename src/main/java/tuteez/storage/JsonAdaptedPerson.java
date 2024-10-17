@@ -16,6 +16,8 @@ import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.remark.RemarkList;
+import tuteez.model.person.TelegramUsername;
+import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
 /**
@@ -29,24 +31,31 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String telegramUsername;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
     private final JsonAdaptedRemarkList remarkList;
-
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("remarkList") JsonAdaptedRemarkList remarkList) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("telegramUsername") String telegramUsername,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessons") List<JsonAdaptedLesson> lessons,
+            @JsonProperty("remarkList") JsonAdaptedRemarkList remarkList) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.telegramUsername = telegramUsername;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (lessons != null) {
+            this.lessons.addAll(lessons);
         }
         this.remarkList = remarkList;
     }
@@ -59,8 +68,12 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        telegramUsername = source.getTelegramUsername().telegramUsername;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+        lessons.addAll(source.getLessons().stream()
+                .map(JsonAdaptedLesson::new)
                 .collect(Collectors.toList()));
         remarkList = new JsonAdaptedRemarkList(source.getRemarkList());
     }
@@ -74,6 +87,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        final List<Lesson> personLessons = new ArrayList<>();
+        for (JsonAdaptedLesson lesson : lessons) {
+            personLessons.add(lesson.toModelType());
         }
 
         if (name == null) {
@@ -108,11 +125,24 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        TelegramUsername modelTelegramUsername = getModelTelegramUsername(telegramUsername);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final RemarkList modelRemarkList = remarkList == null ? new RemarkList() : remarkList.toModelType();
+        final Set<Lesson> modelLessons = new HashSet<>(personLessons);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelRemarkList);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTelegramUsername, modelTags,
+                modelLessons);
+    }
+
+    private TelegramUsername getModelTelegramUsername(String username) throws IllegalValueException {
+        if (username == null) {
+            return TelegramUsername.empty();
+        }
+        if (!TelegramUsername.isValidTelegramHandle(username)) {
+            throw new IllegalValueException(TelegramUsername.MESSAGE_CONSTRAINTS);
+        }
+        return TelegramUsername.of(username);
     }
 
 }
