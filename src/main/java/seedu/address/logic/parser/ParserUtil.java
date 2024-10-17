@@ -61,7 +61,7 @@ public class ParserUtil {
      */
     public static IdentityNumber parseIdentityNumber(String identityNumber) throws ParseException {
         requireNonNull(identityNumber);
-        String trimmedIdentityNumber = identityNumber.trim();
+        String trimmedIdentityNumber = identityNumber.trim().toUpperCase();
         if (!IdentityNumber.isValidIdentityNumber(trimmedIdentityNumber)) {
             throw new ParseException(IdentityNumber.MESSAGE_CONSTRAINTS);
         }
