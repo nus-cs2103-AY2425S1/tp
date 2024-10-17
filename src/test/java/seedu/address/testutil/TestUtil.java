@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the internship application in the {@code model}'s internship application list at {@code index}.
      */
-    public static InternshipApplication getPerson(Model<InternshipApplication> model, Index index) {
+    public static InternshipApplication getInternshipApplication(Model<InternshipApplication> model, Index index) {
         return model.getFilteredList().get(index.getZeroBased());
     }
 }

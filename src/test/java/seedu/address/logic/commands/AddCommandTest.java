@@ -45,7 +45,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateInternshipApplication_throwsCommandException() {
         InternshipApplication validApplication = new InternshipApplicationBuilder().build();
         AddCommand addCommand = new AddCommand(validApplication);
         ModelStub modelStub = new ModelStubWithInternshipApplication(validApplication);
