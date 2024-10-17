@@ -94,6 +94,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getVisibleRentalInformationList_initialContents_empty() {
+        assertEquals(0, modelManager.getVisibleRentalInformationList().size());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
