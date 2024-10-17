@@ -16,7 +16,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts students based on name/class. "
             + "Parameters: "
-            + PREFIX_SORT_PARAM + "'name'/'class' "
+            + PREFIX_SORT_PARAM + "'name' or 'class'\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_PARAM + "name";
 
