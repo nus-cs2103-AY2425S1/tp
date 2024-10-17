@@ -1,3 +1,19 @@
+/*
+:root {
+    --background-color: #1a1a1a;
+    --text-color: #FFD700;
+    --dark-gray: #4d4d4d;
+    --hover-bg-color: rgba(255, 215, 0, 0.4);
+    --border-radius: 12px;
+    --font-family-regular: 'Raleway', sans-serif;
+    --font-family-header: 'Lora', serif;
+    --transition-speed: 0.3s;
+    --shadow-effect: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.7));
+    --hover-shadow: drop-shadow(4px 4px 10px rgba(255, 215, 0, 0.7));
+    --focused-border: 3px solid rgba(255, 215, 0, 0.8);
+}
+*/
+
 .background {
     -fx-background-color: #1a1a1a;
 }

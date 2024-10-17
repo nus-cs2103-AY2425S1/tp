@@ -23,8 +23,6 @@
                -fx-font-family: 'Georgia'; 
                -fx-border-color: #1a1a1a; 
                -fx-border-radius: 8; 
-               -fx-padding: 12; 
-               -fx-effect: dropshadow(gaussian, rgba(255, 215, 0, 0.5), 5, 0.5, 0, 0);"
+               -fx-padding: 12;"
           styleClass="result-display" />
 </StackPane>
-
