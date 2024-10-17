@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.internbuddy.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Application's description in the address book.
+ * Represents an Application's description in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {

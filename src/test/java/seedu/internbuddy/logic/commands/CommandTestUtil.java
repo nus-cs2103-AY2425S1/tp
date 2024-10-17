@@ -66,10 +66,6 @@ public class CommandTestUtil {
     public static final EditCommand.EditCompanyDescriptor DESC_GOOGLE;
     public static final EditCommand.EditCompanyDescriptor DESC_MICROSOFT;
 
-    public static final String VALID_STATUS_AMY_INTERESTED = "INTERESTED";
-    public static final String VALID_STATUS_BOB_APPLIED = "APPLIED";
-    public static final String VALID_STATUS_PERSONC_CLOSED = "CLOSED";
-
     static {
         DESC_GOOGLE = new EditCompanyDescriptorBuilder().withName(VALID_NAME_GOOGLE)
                 .withPhone(VALID_PHONE_GOOGLE).withEmail(VALID_EMAIL_GOOGLE).withAddress(VALID_ADDRESS_GOOGLE)

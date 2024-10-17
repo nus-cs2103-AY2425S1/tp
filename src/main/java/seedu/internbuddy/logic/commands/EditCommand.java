@@ -5,7 +5,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.internbuddy.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
@@ -37,6 +36,8 @@ import seedu.internbuddy.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String STATUS_APPLIED = "APPLIED";
+    public static final String STATUS_CLOSED = "CLOSED";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the company identified "
             + "by the index number used in the displayed company list. "
@@ -46,8 +47,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + "[" + PREFIX_STATUS + "STATUS] \n"
+            + "[" + PREFIX_TAG + "TAG]...\n "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -106,6 +106,32 @@ public class EditCommand extends Command {
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
         List<Application> applications = companyToEdit.getApplications();
 
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedStatus, applications);
+    }
+
+    private static Company setStatusApplied(Company companyToEdit) {
+        Name updatedName = companyToEdit.getName();
+        Phone updatedPhone = companyToEdit.getPhone();
+        Email updatedEmail = companyToEdit.getEmail();
+        Address updatedAddress = companyToEdit.getAddress();
+        Set<Tag> updatedTags = companyToEdit.getTags();
+        Status updatedStatus = new Status(STATUS_APPLIED);
+        List<Application> applications = companyToEdit.getApplications();
+
+        return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedStatus, applications);
+    }
+
+    private static Company setStatusClosed(Company companyToEdit) {
+        Name updatedName = companyToEdit.getName();
+        Phone updatedPhone = companyToEdit.getPhone();
+        Email updatedEmail = companyToEdit.getEmail();
+        Address updatedAddress = companyToEdit.getAddress();
+        Set<Tag> updatedTags = companyToEdit.getTags();
+        Status updatedStatus = new Status(STATUS_CLOSED);
+        List<Application> applications = companyToEdit.getApplications();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedStatus, applications);
