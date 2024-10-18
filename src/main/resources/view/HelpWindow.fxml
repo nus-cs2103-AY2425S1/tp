@@ -60,8 +60,11 @@
           <Label text="List" GridPane.rowIndex="6" GridPane.columnIndex="0" />
           <Label text="`list`" GridPane.rowIndex="6" GridPane.columnIndex="1" />
 
-          <Label text="Help" GridPane.rowIndex="7" GridPane.columnIndex="0" />
-          <Label text="`help`" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+          <Label text="Mark" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+          <Label text="`mark INDEX/NRIC [d/DATE] [o/NOTES]` e.g., `mark 2 d/2021-10-01 o/This person is sad`" GridPane.rowIndex="7" GridPane.columnIndex="1" wrapText="true" />
+
+          <Label text="Help" GridPane.rowIndex="8" GridPane.columnIndex="0" />
+          <Label text="`help`" GridPane.rowIndex="8" GridPane.columnIndex="1" />
         </GridPane>
       </VBox>
     </Scene>

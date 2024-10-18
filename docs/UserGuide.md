@@ -99,6 +99,7 @@ Edits an existing person in ContactMate.
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The `NRIC` has to be a valid NRIC.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -136,11 +137,28 @@ Format: `delete INDEX/NRIC`
 * Deletes the person at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The NRIC has to be a valid NRIC
+* The `NRIC` has to be a valid NRIC
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in ContactMate.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Marking a person as contacted: `mark`
+
+Marks a person in ContactMate as contacted.
+
+Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
+
+* Marks the person at the specified `INDEX` or `NRIC`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The `NRIC` has to be a valid NRIC.
+* The date must be in the format `YYYY-MM-DD` and must not be a future date.
+* If the parameter `d/DATE` is not provided, the current date will be used.
+
+Examples:
+* `mark 1 d/2021-10-01 o/This person is sad`
+* `mark S6878830G d/2021-10-01`
+* `mark 2` Marks the 2nd person in the list with the current date and no notes.
 
 ### Clearing all entries : `clear`
 
@@ -197,4 +215,5 @@ Action | Format, Examples
 **Edit** | `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**Mark** | `mark INDEX/NRIC [d/DATE] [o/NOTES]`<br> e.g., `mark 2 d/2021-10-01 o/This person is sad`
 **Help** | `help`
