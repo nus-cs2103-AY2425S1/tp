@@ -34,7 +34,7 @@ public class MarkSupplierCommandTest {
         MarkSupplierCommand markCommand = new MarkSupplierCommand(INDEX_FIRST_PERSON,
                 new SupplierStatus(editedPerson.getStatus().status));
         String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
-                editedPerson, editedPerson.getStatus().status);
+                INDEX_FIRST_PERSON.getOneBased(), editedPerson.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(markCommand, model, expectedMessage, expectedModel);
@@ -47,8 +47,8 @@ public class MarkSupplierCommandTest {
                 .withStatus(SUPPLIER_STATUS_STUB).build();
         MarkSupplierCommand remarkCommand = new MarkSupplierCommand(INDEX_FIRST_PERSON,
                 new SupplierStatus(editedPerson.getStatus().status));
-        String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS, editedPerson,
-                editedPerson.getStatus().status);
+        String expectedMessage = String.format(MarkSupplierCommand.MESSAGE_MARK_SUPPLIER_SUCCESS,
+                INDEX_FIRST_PERSON.getOneBased(), editedPerson.getStatus().status);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
