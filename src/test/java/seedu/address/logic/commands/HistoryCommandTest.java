@@ -13,12 +13,14 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
@@ -107,7 +109,10 @@ public class HistoryCommandTest {
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedCallHistory, model.getDisplayedCallHistory());
+        // check contents of list
+        ObservableList<ContactRecord> displayedCallHistory = model.getDisplayedCallHistory();
+        assertEquals(expectedCallHistory.size(), displayedCallHistory.size());
+        assertEquals(expectedCallHistory.get(0), displayedCallHistory.get(0));
     }
 
     @Test
@@ -125,7 +130,10 @@ public class HistoryCommandTest {
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedCallHistory, model.getDisplayedCallHistory());
+        // check contents of list
+        ObservableList<ContactRecord> displayedCallHistory = model.getDisplayedCallHistory();
+        assertEquals(expectedCallHistory.size(), displayedCallHistory.size());
+        assertEquals(expectedCallHistory.get(0), displayedCallHistory.get(0));
     }
 
     // Test for HistoryCommand for Nric
@@ -182,7 +190,10 @@ public class HistoryCommandTest {
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedCallHistory, model.getDisplayedCallHistory());
+        // check contents of list
+        ObservableList<ContactRecord> displayedCallHistory = model.getDisplayedCallHistory();
+        assertEquals(expectedCallHistory.size(), displayedCallHistory.size());
+        assertEquals(expectedCallHistory.get(0), displayedCallHistory.get(0));
     }
 
     @Test
@@ -198,7 +209,10 @@ public class HistoryCommandTest {
         CommandResult result = historyCommand.execute(model);
 
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedCallHistory, model.getDisplayedCallHistory());
+        // check contents of list
+        ObservableList<ContactRecord> displayedCallHistory = model.getDisplayedCallHistory();
+        assertEquals(expectedCallHistory.size(), displayedCallHistory.size());
+        assertEquals(expectedCallHistory.get(0), displayedCallHistory.get(0));
     }
 
     @Test

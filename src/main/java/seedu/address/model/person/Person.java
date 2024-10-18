@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -47,7 +48,7 @@ public class Person {
     }
 
     /**
-     * For creating a new person. Every field but contact date must be present and not null.
+     * For creating a new person. Every field but contact record must be present and not null.
      */
     public Person(Nric nric, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
             CallFrequency callFrequency) {
@@ -87,7 +88,7 @@ public class Person {
         return callFrequency;
     }
 
-    public ContactRecord getNextContactRecord() {
+    public LocalDate getNextContactDate() {
         return getLastContacted().add(callFrequency);
     }
 
