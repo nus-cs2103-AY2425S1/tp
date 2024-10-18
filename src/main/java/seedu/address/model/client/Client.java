@@ -83,15 +83,19 @@ public class Client {
             return true;
         }
 
-        return otherClient != null
-                && otherClient.getName().equals(getName());
-//        return ((otherClient != null && (otherClient.getName().equals(getName())
-//        && otherClient.getEmail().equals(getEmail())))
-//                || (otherClient != null && (otherClient.getName().equals(getName())
-//                && otherClient.getPhone().equals(getPhone())))
-//                || (otherClient != null && (otherClient.getName().equals(getName()) &&
-//                otherClient.getEmail().equals(getEmail()) &&
-//                otherClient.getPhone().equals(getPhone()))));
+        return (isSameName(otherClient) && isSamePhone(otherClient) && isSameEmail(otherClient));
+    }
+
+    private boolean isSameName(Client otherClient) {
+        return otherClient != null && otherClient.getName().equals(getName());
+    }
+
+    private boolean isSamePhone(Client otherClient) {
+        return otherClient != null && otherClient.getPhone().equals(getPhone());
+    }
+
+    private boolean isSameEmail(Client otherClient) {
+        return otherClient != null && otherClient.getEmail().equals(getEmail());
     }
 
     /**
@@ -126,6 +130,7 @@ public class Client {
                 && this.email.equals(otherClient.email)
                 && this.rentalInformationList.equals(otherClient.rentalInformationList)
                 && this.tags.equals(otherClient.tags);
+
     }
 
     @Override
