@@ -11,6 +11,7 @@ import tahub.contacts.commons.core.LogsCenter;
 import tahub.contacts.logic.commands.AddCommand;
 import tahub.contacts.logic.commands.ClearCommand;
 import tahub.contacts.logic.commands.Command;
+import tahub.contacts.logic.commands.CourseCommand;
 import tahub.contacts.logic.commands.DeleteCommand;
 import tahub.contacts.logic.commands.EditCommand;
 import tahub.contacts.logic.commands.ExitCommand;
@@ -55,6 +56,9 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case CourseCommand.COMMAND_WORD:
+            return new CourseCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

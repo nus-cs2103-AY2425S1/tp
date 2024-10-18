@@ -89,6 +89,23 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasCourse(Course course) {
+        requireNonNull(course);
+        return courseList.hasCourse(course);
+    }
+
+    @Override
+    public void deleteCourse(Course target) {
+        courseList.remove(target);
+    }
+
+    @Override
+    public void addCourse(Course course) {
+        courseList.addCourse(course);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public UniqueCourseList getCourseList() {
         return courseList;
     }

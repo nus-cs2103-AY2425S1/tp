@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
+import tahub.contacts.model.course.Course;
 
 /**
  * The API of the Model component.
@@ -84,6 +85,10 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    void addCourse(Course course);
+    void deleteCourse(Course course);
+    boolean hasCourse(Course course);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
