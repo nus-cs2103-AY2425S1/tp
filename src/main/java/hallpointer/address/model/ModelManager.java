@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.commons.core.LogsCenter;
 import hallpointer.address.model.member.Member;
-import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionName;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -24,7 +22,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
-    private final FilteredList<Session> filteredSessions;
 
 
     /**
@@ -38,7 +35,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-        filteredSessions = new FilteredList<>(this.addressBook.getSessionList());
     }
 
     public ModelManager() {
@@ -103,32 +99,6 @@ public class ModelManager implements Model {
         addressBook.removeMember(target);
     }
 
-    /**
-     * Deletes the given session from the given member.
-     * The member must exist in the address book and the
-     * session must exist in the member.
-     *
-     * @param target
-     * @param sessionName
-     */
-    @Override
-    public void deleteSession(Member target, SessionName sessionName) {
-        requireNonNull(target);
-        requireNonNull(sessionName);
-        target.removeSession(sessionName);
-    }
-
-    /**
-     * Removes the given session {@code target} in the list.
-     *
-     * @param target session to be deleted
-     */
-    @Override
-    public void deleteSession(Session target) {
-        addressBook.deleteSession(target);
-    }
-
-
     @Override
     public void addMember(Member member) {
         addressBook.addMember(member);
@@ -139,6 +109,7 @@ public class ModelManager implements Model {
     public void setMember(Member target, Member editedMember) {
         requireAllNonNull(target, editedMember);
         addressBook.setMember(target, editedMember);
+        updateFilteredMemberList(PREDICATE_SHOW_ALL_MEMBERS);
     }
 
     //=========== Filtered Member List Accessors =============================================================
@@ -157,64 +128,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredMembers.setPredicate(predicate);
     }
-
-    //=========== Session ================================================================================
-
-    /**
-     * Returns true if a session with the same identity as {@code session} exists in the address book.
-     *
-     * @param session The session to check.
-     * @return True if the session exists, false otherwise.
-     */
-    public boolean hasSession(Session session) {
-        requireNonNull(session);
-        return addressBook.hasSession(session);
-    }
-
-    /**
-     * Adds the given session to the address book.
-     * {@code session} must not already exist in the address book.
-     *
-     * @param session The session to add.
-     */
-    public void addSession(Session session) {
-        requireNonNull(session);
-        addressBook.addSession(session);
-    }
-
-    /**
-     * Replaces the given session {@code target} with {@code editedSession}.
-     * {@code target} must exist in the address book.
-     * The session identity of {@code editedSession} must not be the same as
-     * another existing session in the address book.
-     *
-     * @param target        The session to replace.
-     * @param editedSession The new session.
-     */
-    @Override
-    public void setSession(Session target, Session editedSession) {
-        requireNonNull(target);
-        requireNonNull(editedSession);
-        addressBook.setSession(target, editedSession);
-    }
-
-
-    @Override
-    public ObservableList<Session> getSessionList() {
-        return addressBook.getSessionList();
-    }
-
-    /**
-     * Updates the filtered session list based on the given predicate.
-     *
-     * @param predicate The predicate to filter the sessions.
-     * @throws NullPointerException If the predicate is null.
-     */
-    public void updateFilteredSessionList(Predicate<Session> predicate) {
-        requireNonNull(predicate);
-        filteredSessions.setPredicate(predicate); // Assuming you have a FilteredList<Session>
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -1,13 +1,10 @@
 package hallpointer.address.model;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 
 import hallpointer.address.commons.core.GuiSettings;
 import hallpointer.address.model.member.Member;
-import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionName;
 import javafx.collections.ObservableList;
 
 /**
@@ -74,16 +71,6 @@ public interface Model {
      * The member must exist in the address book.
      */
     void deleteMember(Member target);
-
-    /**
-     * Deletes the given session from the given member.
-     * The member must exist in the address book and the
-     * session must exist in the member.
-     */
-    void deleteSession(Member target, SessionName sessionName);
-
-    void deleteSession(Session sessionToDelete);
-
     /**
      * Adds the given member.
      * {@code member} must not already exist in the address book.
@@ -106,19 +93,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredMemberList(Predicate<Member> predicate);
-
-    /**
-     * Returns true if a session with the same identity as {@code session} exists in the address book.
-     */
-    boolean hasSession(Session session);
-
-    /**
-     * Adds the given session.
-     * {@code session} must not already exist in the address book.
-     */
-    void addSession(Session session);
-
-    void setSession(Session target, Session editedSession);
-
-    List<Session> getSessionList();
 }
