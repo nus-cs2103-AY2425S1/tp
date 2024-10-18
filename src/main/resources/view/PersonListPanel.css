@@ -1,0 +1,12 @@
+.vbox {
+    -fx-background-color: #e5eaf2; /* Set the background color of the VBox */
+}
+
+.list-view {
+    -fx-background-color: #e5eaf2; /* Match the VBox background color */
+    -fx-control-inner-background: transparent; /* Ensures the ListView background blends in */
+}
+
+.list-cell {
+    -fx-background-color: transparent; /* Make each cell background transparent */
+}

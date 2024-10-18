@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTuteeCommand;
+import seedu.address.logic.commands.AddTutorCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -17,10 +18,12 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewTuteeChartCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,9 +60,11 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+        case AddTuteeCommand.COMMAND_WORD:
+            return new AddTuteeCommandParser().parse(arguments);
 
+        case AddTutorCommand.COMMAND_WORD:
+            return new AddTutorCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -92,6 +97,12 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
+
+        case ViewTuteeChartCommand.COMMAND_WORD:
+            return new ViewTuteeChartCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

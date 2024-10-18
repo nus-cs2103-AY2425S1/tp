@@ -31,6 +31,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -110,7 +112,14 @@ public class EditCommand extends Command {
         Hours updatedHours = editPersonDescriptor.getHours().orElse(personToEdit.getHours());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjectsOp().orElse(personToEdit.getSubjects());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+        //return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+        // TODO CHANGE
+        if (personToEdit instanceof Tutor) {
+            return new Tutor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+        } else {
+            return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+        }
+
     }
 
     @Override
@@ -165,9 +174,6 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setSubjects(toCopy.subjects);
         }
-
-
-
 
         /**
          * Returns true if at least one field is edited.

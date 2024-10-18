@@ -35,7 +35,6 @@ public class ViewCommand extends Command {
             throw new CommandException("The person index provided is invalid");
         }
         Person personToView = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        System.out.println(personToView);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView)));
     }
 }

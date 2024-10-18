@@ -39,7 +39,6 @@ public class EditCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
-    @Disabled
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Person editedPerson = new PersonBuilder().build();
@@ -78,7 +77,6 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
@@ -92,7 +90,6 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
-    @Disabled
     @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);

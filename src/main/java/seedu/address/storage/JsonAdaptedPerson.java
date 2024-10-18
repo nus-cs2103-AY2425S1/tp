@@ -3,11 +3,14 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvCustomBindByName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
@@ -17,21 +20,33 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
  */
-class JsonAdaptedPerson {
+public class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
-    private final String name;
-    private final String phone;
-    private final String email;
-    private final String address;
-    private final String hours;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    @CsvBindByName
+    private String name;
+    @CsvBindByName
+    private String phone;
+    @CsvBindByName
+    private String email;
+    @CsvBindByName
+    private String address;
+    @CsvBindByName
+    private String hours;
+    @CsvCustomBindByName(converter = JsonAdaptedTagConverter.class)
+    private List<JsonAdaptedTag> tags = new ArrayList<>();
+    @CsvBindByName()
+    private String role;
+
+    public JsonAdaptedPerson() {}
 
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
 
@@ -42,8 +57,8 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("hours") String hours,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -55,6 +70,8 @@ class JsonAdaptedPerson {
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
+        // TODO IMPLEMENT A BETTER ROLE, FOR NOW THIS WILL PLACEHOLDER
+        this.role = role;
     }
 
     /**
@@ -72,6 +89,63 @@ class JsonAdaptedPerson {
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
+        role = (source instanceof Tutor) ? "Tutor" : "Tutee";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public List<JsonAdaptedTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<JsonAdaptedTag> tags) {
+        this.tags = tags;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     /**
@@ -80,9 +154,17 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        String name = this.getName();
+        String phone = this.getPhone();
+        String email = this.getEmail();
+        String address = this.getAddress();
+        String hours = this.getHours();
+        List<JsonAdaptedTag> tags = this.getTags();
+        String role = this.getRole();
+
+        final List<Tag> tuteeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            tuteeTags.add(tag.toModelType());
         }
 
         final List<Subject> personSubjects = new ArrayList<>();
@@ -130,11 +212,18 @@ class JsonAdaptedPerson {
         }
         final Hours modelHours = new Hours(hours);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        //final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+        //return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
 
+
+        final Set<Tag> modelTags = new HashSet<>(tuteeTags);
+        if (Objects.equals(role, "Tutor")) {
+            return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+        } else {
+            return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+        }
 
     }
 
