@@ -12,11 +12,13 @@ import seedu.address.model.Model;
  */
 public class ListStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "list_students";
+    public static final String COMMAND_WORD = "list_s";
+    public static final String COMMAND_WORD_ALIS = "ls";
     public static final int LIST_STUDENT_MARKER = 0;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all students. "
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIS
+        + ": Lists all students.\n"
+        + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
 
@@ -37,6 +39,6 @@ public class ListStudentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+            .toString();
     }
 }

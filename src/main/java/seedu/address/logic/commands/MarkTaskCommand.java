@@ -21,14 +21,16 @@ import seedu.address.model.task.Task;
  */
 public class MarkTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "mark_task";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the status of a task. "
-            + "Parameters: "
-            + PREFIX_GROUP_NAME + "GROUP_NAME "
-            + PREFIX_INDEX + "INDEX\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP_NAME + "Team 5 "
-            + PREFIX_INDEX + "2";
+    public static final String COMMAND_WORD = "mark_t";
+    public static final String COMMAND_WORD_ALIAS = "mt";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Changes the status of a task.\n"
+        + "Parameters: "
+        + PREFIX_GROUP_NAME + "GROUP_NAME "
+        + PREFIX_INDEX + "INDEX\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GROUP_NAME + "Team 5 "
+        + PREFIX_INDEX + "2";
 
     public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s to %2$s";
     public static final String GROUP_NOT_FOUND = "Group not found";
@@ -64,7 +66,7 @@ public class MarkTaskCommand extends Command {
         Task taskToMark = lastShownList.get(index.getZeroBased());
         Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;
         Task editedTask = new Task(taskToMark.getTaskName(), taskToMark.getDeadline(), changedStatus,
-                taskToMark.getGroupsWithTask());
+            taskToMark.getGroupsWithTask());
 
         model.setTask(taskToMark, editedTask, group);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus));
@@ -82,15 +84,15 @@ public class MarkTaskCommand extends Command {
 
         MarkTaskCommand otherMarkTaskCommand = (MarkTaskCommand) other;
         return index.equals(otherMarkTaskCommand.index)
-                && toMarkFrom.equals(otherMarkTaskCommand.toMarkFrom);
+            && toMarkFrom.equals(otherMarkTaskCommand.toMarkFrom);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("toMarkFrom", toMarkFrom)
-                .toString();
+            .add("index", index)
+            .add("toMarkFrom", toMarkFrom)
+            .toString();
     }
 
 }
