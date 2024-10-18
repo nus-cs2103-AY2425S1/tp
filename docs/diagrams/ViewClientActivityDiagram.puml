@@ -1,26 +1,27 @@
 @startuml
 skin rose
-skinparam ActivityFontSize 15
-skinparam ArrowFontSize 12
+skinparam ActivityFontSize 20
+skinparam ArrowFontSize 15
 start
 :User executes the
 view-client command;
 
-'Since the beta syntax does not support placing the condition outside the
-'diamond we place it as the true branch instead.
+if () then ([valid Client index])
+    :Update Client details, Car details
+    and Car Issues for latest request;
 
-if () then ([Window already open])
-    :Update Client details
-    for latest request;
-else ([else])
-    :View Client Window
-    visibility set to True;
-    :Display Client details
-    of current request;
-endif
+    if () then ([Window already open])
+    else ([else])
+        :Set visibility of View
+        Client Window to True;
+    endif
 
-:User close window;
+:User clicks the Close
+or Terminate button;
 :View Client Window
 visibility set to False;
+
+else ([invalid Client index])
+endif
 stop
 @enduml
