@@ -151,7 +151,8 @@ public class LogicManagerTest {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath, temporaryFolder.resolve("save.json")) {
+        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath,
+                temporaryFolder.resolve("save.json")) {
             @Override
             public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
                     throws IOException {

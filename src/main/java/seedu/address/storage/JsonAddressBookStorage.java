@@ -24,6 +24,12 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     private Path filePath;
     private Path manualSaveFilePath;
 
+    /**
+     * Creates a new JsonAddressBookStorage object.
+     *
+     * @param filePath The path to the JSON file where the address book data will be stored.
+     * @param manualSaveFilePath The path to the JSON file where the address book data will be manually saved.
+     */
     public JsonAddressBookStorage(Path filePath, Path manualSaveFilePath) {
         this.filePath = filePath;
         this.manualSaveFilePath = manualSaveFilePath;

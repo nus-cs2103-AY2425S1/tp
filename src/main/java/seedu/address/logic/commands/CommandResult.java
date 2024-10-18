@@ -92,6 +92,7 @@ public class CommandResult {
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .add("save", save)
+                .add("load", load)
                 .toString();
     }
 
