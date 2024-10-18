@@ -1,8 +1,10 @@
 package seedu.address.model.util;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
@@ -28,37 +30,90 @@ public class SampleDataUtil {
     @SuppressWarnings("checkstyle:Indentation")
     public static Person[] getSamplePersons() {
         return new Person[]{
-            new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                        new Address("Blk 30 Geylang Street 29, #06-40"), EMPTY_REMARK, EMPTY_BIRTHDAY,
-                        getTagSet("friends"),
-                        new DateOfCreation(LocalDate.of(2024, 1, 1)),
-                        new History(LocalDate.of(2024, 1, 1))),
-            new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                        new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), EMPTY_REMARK, EMPTY_BIRTHDAY,
-                        getTagSet("colleagues", "friends"),
-                        new DateOfCreation(LocalDate.of(2024, 1, 2)),
-                        new History(LocalDate.of(2024, 1, 2))),
-            new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                        new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), EMPTY_REMARK, EMPTY_BIRTHDAY,
-                        getTagSet("neighbours"),
-                        new DateOfCreation(LocalDate.of(2024, 1, 3)),
-                        new History(LocalDate.of(2024, 1, 3))),
-            new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                        new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), EMPTY_REMARK, EMPTY_BIRTHDAY,
-                        getTagSet("family"),
-                        new DateOfCreation(LocalDate.of(2024, 1, 4)),
-                        new History(LocalDate.of(2024, 1, 4))),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                        new Address("Blk 47 Tampines Street 20, #17-35"), EMPTY_REMARK, EMPTY_BIRTHDAY,
-                        getTagSet("classmates"),
-                        new DateOfCreation(LocalDate.of(2024, 1, 5)),
-                        new History(LocalDate.of(2024, 1, 5))),
-            new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                        new Address("Blk 45 Aljunied Street 85, #11-31"), EMPTY_REMARK, EMPTY_BIRTHDAY,
-                        getTagSet("colleagues"),
-                        new DateOfCreation(LocalDate.of(2024, 1, 6)),
-                        new History(LocalDate.of(2024, 1, 6)))
+            new Person(new Name("John Doe"), new Phone("81234567"), new Email("john.doe@example.com"),
+                    new Address("Blk 101 Clementi Street 12, #02-05"),
+                    new Remark("Looking for a 3-room HDB in Clementi"),
+                    new Birthday("1985-04-12"),
+                    getTagSet("potential buyer", "friends"),
+                    new DateOfCreation(LocalDate.of(2024, 1, 7)),
+                    createHistory(new String[][]{
+                        {"2024-02-02", "Inquired about Clementi flat"}
+                    })),
+
+            new Person(new Name("Jane Smith"), new Phone("92345678"), new Email("jane.smith@example.com"),
+                    new Address("Blk 20 Queenstown Avenue, #12-34"),
+                    new Remark("Looking for a 4-room condo in Queenstown"),
+                    new Birthday("1990-07-21"),
+                    getTagSet("potential buyer"),
+                    new DateOfCreation(LocalDate.of(2024, 1, 8)),
+                    createHistory()), // Empty history
+
+            new Person(new Name("Samuel Tan"), new Phone("94561234"), new Email("samuel.tan@example.com"),
+                    new Address("Blk 54 Punggol Field, #09-12"),
+                    new Remark("First-time buyer, needs advice on financing"),
+                    new Birthday("1992-03-15"),
+                    getTagSet("first-time buyer", "finance"),
+                    new DateOfCreation(LocalDate.of(2024, 1, 9)),
+                    createHistory(new String[][]{
+                        {"2024-10-17", "Discussed loan options"},
+                        {"2024-10-17", "Attended meeting"}
+                    })),
+
+            new Person(new Name("Emily Lim"), new Phone("98765432"), new Email("emily.lim@example.com"),
+                    new Address("Blk 123 Bukit Timah Road, #03-45"),
+                    new Remark("Selling 5-room flat, prefers high floor"),
+                    new Birthday("1988-10-22"),
+                    getTagSet("seller", "family"),
+                    new DateOfCreation(LocalDate.of(2024, 1, 10)),
+                    createHistory()), // Empty history
+
+            new Person(new Name("Michael Ong"), new Phone("95678901"), new Email("michael.ong@example.com"),
+                    new Address("Blk 88 Tanjong Pagar Street 10, #08-16"),
+                    new Remark("Investing in rental properties"),
+                    new Birthday("1975-12-30"),
+                    getTagSet("investor", "long-term client"),
+                    new DateOfCreation(LocalDate.of(2024, 1, 11)),
+                    createHistory()), // Empty history
+
+            new Person(new Name("Sarah Lee"), new Phone("96234125"), new Email("sarah.lee@example.com"),
+                    new Address("Blk 9 Tiong Bahru Road, #04-01"),
+                    new Remark("Relocating, looking for a 2-bedroom condo"),
+                    new Birthday("1983-09-02"),
+                    getTagSet("expat", "condo seeker"),
+                    new DateOfCreation(LocalDate.of(2024, 1, 12)),
+                    createHistory(new String[][]{
+                        {"2024-10-17", "Event 1"},
+                        {"2024-10-17", "Event 2"}
+                    }))
         };
+    }
+
+    /**
+     * Creates a new {@code History} object with the provided entries.
+     * Each entry is represented by a date and an array of activities for that date.
+     *
+     * @param entries A 2D string array where each element is a date followed by a list of activities.
+     * @return A new {@code History} object with the provided entries.
+     */
+    public static History createHistory(String[][] entries) {
+        TreeMap<LocalDate, ArrayList<String>> historyMap = new TreeMap<>();
+
+        for (String[] entry : entries) {
+            LocalDate date = LocalDate.parse(entry[0]);
+            ArrayList<String> activities = new ArrayList<>(Arrays.asList(entry).subList(1, entry.length));
+            historyMap.put(date, activities);
+        }
+
+        return new History(historyMap, LocalDate.now()); // Use current date as the creation date
+    }
+
+    /**
+     * Creates an empty {@code History} object.
+     *
+     * @return A new empty {@code History} object.
+     */
+    public static History createHistory() {
+        return new History(new TreeMap<>(), LocalDate.now());
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -75,5 +130,4 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings).map(Tag::new).collect(Collectors.toSet());
     }
-
 }
