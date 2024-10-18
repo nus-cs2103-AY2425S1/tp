@@ -45,7 +45,7 @@ public class VolunteerCard extends UiPart<Region> {
 
         // Set the text values from the volunteer data.
         id.setText(displayedIndex + ". ");
-        name.setText(volunteer.getName().fullName + " (#" + volunteer.getId() + ")");
+        name.setText(volunteer.getName().fullName);
         phone.setText(volunteer.getPhone().value);
         email.setText(volunteer.getEmail().value);
         date.setText(volunteer.getAvailableDate().toString());
