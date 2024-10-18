@@ -287,6 +287,6 @@ Action     | Format, Examples
 **DeleteInsurance**   | `deleteInsurance INDEX iid/INSURANCE_ID`<br> eg., `deleteInsurance 1 id/ 1`
 **AddClaim**   | `addClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID ca/CLAIM_AMOUNT_IN_DOLLARS_AND_CENTS`<br> eg., `addClaim 1 iid/1 cid/1 ca/151.20`
 **DeleteClaim**   | `deleteClaim INDEX iid/INSURANCE_ID cid/CLAIM_ID`<br> eg., `deleteClaim 1 iid/1 cid/B1234`
-**ListClaims**   | `listClaims INDEX` eg., `listClaims 1`
+**ListClaims**   | `listClaims INDEX` <br> eg., `listClaims 1`
 **List**   | `list`
 **Help**   | `help`
