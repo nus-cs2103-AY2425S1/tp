@@ -384,15 +384,15 @@ number, physical address, birthday, email address, and optional social media han
 
 ### **Command Format:**
 
-`add /name <Full Name> /phone <Phone Number> [/address <Physical Address>] [/birthday <Birthday>] [/email <Email Address>] [/instagram <IG Handle>]`
+`add n/<Full Name> p/<Phone Number> a/<Physical Address> [b/<Birthday>] e/<Email Address> [r/<Remark>] [t/<Tag>]`
 
 *Note: Fields in `[]` are optional.*
 
 **Example Commands:**
 
-- `add /name John Smith /phone +123456789 /address 123 Main Street, City, Country /birthday 1990-05-12 /email john.smith@email.com /instagram @johnsmith`
-- `add /name Emily Davis /phone (555) 123-4567 /address 987 Elm St, Apt 5B, City /birthday 1985-07-22 /email emily.davis@email.com`
-- `add /name Emily Davis /phone (555) 123-4567 /birthday 1985-07-22`
+- `add n/John Smith p/+123456789 a/123 Main Street, City, Country b/1990-05-12 e/john.smith@email.com r/@johnsmith t/instagram`
+- `add n/Emily Davis p/(555) 123-4567 a/987 Elm St, Apt 5B, City b/1985-07-22 e/emily.davis@email.com`
+- `add n/Emily Davis p/(555) 123-4567 b/1985-07-22 a/Singapore e/emmm@gmail.com`
 
 ### **Main Success Scenario (MSS)**
 
@@ -459,7 +459,7 @@ number, physical address, birthday, email address, and optional social media han
 
 ---
 
-#### **Physical Address (Optional):**
+#### **Physical Address:**
 
 **Acceptable Values:**
 
@@ -495,7 +495,7 @@ number, physical address, birthday, email address, and optional social media han
 
 ---
 
-#### **Email Address (Optional):**
+#### **Email Address:**
 
 **Acceptable Values:**
 
@@ -1105,12 +1105,13 @@ review their communication history.
 
 #### **Command Format:**
 
-`log <ContactID> /interaction <InteractionDetails>`
+`log <ContactID> [d/<Event date>] l/<InteractionDetails>`
 
 **Example Commands:**
 
-- `log 123 /interaction "Called on 2024-09-15, discussed project updates"`
-- `log 4567 /interaction "Meeting on 2024-09-16, reviewed quarterly report"`
+- `log 123 l/Called today, discussed project updates`
+- `log 4567 l/Meeting today, reviewed quarterly report`
+- `log 4567 d/2024-09-16 l/Meeting on 2024-09-16, reviewed quarterly report`
 
 ### **Main Success Scenario (MSS):**
 
@@ -1143,7 +1144,18 @@ review their communication history.
 
 - Ensures the correct contact is updated with interaction details, preventing errors.
 
-#### **Interaction Details:**
+#### **Date: (Optional)**
+**Acceptable Values:**
+
+- The date must be in the format yyyy-mm-dd, and must be no earlier than the date of creation of the contact,
+- and no later than today (System time)
+- Examples: `2024-02-01`, `2021-12-31`, `1999-09-23`.
+
+**Rationale:**
+
+- Ensure no event happening before the contact is added, or in the future is logged.
+
+#### **Logging message:**
 
 **Acceptable Values:**
 
@@ -1179,11 +1191,11 @@ review their communication history.
 ### **Error Scenarios:**
 
 - **Invalid ContactID:**
-  Example: `log abc /interaction "Called on 2024-09-15"`
+  Example: `log abc l/Called on 2024-09-15`
   `Error: Invalid ContactID. Please provide a valid numeric identifier.`
 
 - **Contact Not Found:**
-  Example: `log 9999 /interaction "Meeting on 2024-09-16"`
+  Example: `log 9999 l/Meeting on 2024-09-16`
   `Error: Contact not found. Please check the ContactID and try again.`
 
 - **Missing Interaction Details:**
@@ -1631,6 +1643,91 @@ retrieval of client information based on various criteria.
   `Error: Invalid search parameter entered. Please ensure that the search parameters match the syntax requirements.`
 
 ---
+
+### 16. **Feature: Add or Edit Remarks for a Contact**
+
+**Purpose:**
+To allow users to add or update a remark for a contact, providing additional notes or information that may not be captured in other fields (e.g., preferences, additional details).
+
+#### **Command Format:**
+
+`remark <index> r/<remark message>`
+
+**Example Commands:**
+
+- `remark 1 r/Interested in buying a condo`
+- `remark 3 r/Prefers communication via email`
+- `remark 5 r/Follow up in June regarding new listings`
+
+### **Main Success Scenario (MSS):**
+
+1. The user issues the `remark` command with a valid index and a remark message.
+2. The system updates the contact at the given index with the provided remark.
+3. A success message is displayed confirming that the remark has been added or updated.
+4. The contact’s remark field is updated and displayed in the contact list.
+
+   Use case ends.
+
+---
+
+### **Parameters:**
+
+#### **Index:**
+
+**Acceptable Values:**
+
+- Must be a valid index number referencing a contact in the current contact list.
+- Must be a positive integer.
+
+**Error Message:**
+
+- If invalid: `Error: Invalid index. Please provide a valid contact index.`
+
+**Rationale:**
+
+- Ensures the correct contact is being updated with the new remark, preventing errors.
+
+#### **Remark Message:**
+
+**Acceptable Values:**
+
+- Any string can be entered as a remark (e.g., client notes, preferences, etc.).
+- Leading/trailing spaces are ignored.
+
+**Error Message:**
+
+- If missing: `Error: Remark message is required.`
+
+**Rationale:**
+
+- Allows flexibility in adding any kind of additional notes or information for the contact.
+
+---
+
+### **Outputs:**
+
+#### **Success:**
+
+- Message: `Remark updated for contact at index <index>: "<remark message>"`
+- GUI Change: The remark is updated and shown in the contact list.
+
+#### **Failure:**
+
+- Invalid Index: `Error: Invalid index. Please provide a valid contact index.`
+- Missing Remark: `Error: Remark message is required.`
+
+---
+
+### **Error Scenarios:**
+
+- **Invalid Index:**
+  Example: `remark abc r/Important client`
+  `Error: Invalid index. Please provide a valid contact index.`
+
+- **Missing Remark:**
+  Example: `remark 1`
+  `Error: Remark message is required.`
+
 
 *{More to be added}*
 
