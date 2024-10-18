@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
+
+import java.util.ArrayList;
 
 /**
  * Deletes a student from the system based on the student number provided.
@@ -21,6 +24,10 @@ public class DeleteStudentCommand extends Command {
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: ";
 
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
+
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n" +
+            "Their student numbers are as follows: %s" + "\n" +
+            "Please use 'deletestu <student number>' to delete the student.";
 
     private final Name name;
 
@@ -44,6 +51,30 @@ public class DeleteStudentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        ObservableList<Student> studentList = model.getFilteredStudentList();
+        ArrayList<Student> listToCheck = new ArrayList<>();
+
+        for (Student student : studentList) {
+            if (student.getName().equals(name)) {
+                listToCheck.add(student);
+            }
+        }
+
+        if (listToCheck.isEmpty()) {
+            throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
+        }
+
+        if (listToCheck.size() > 1) {
+            StringBuilder duplicates = new StringBuilder();
+            for (Student student : listToCheck) {
+                duplicates.append(student.getStudentNumber());
+                duplicates.append(" ");
+            }
+            String duplicateStudentNumbers = duplicates.toString();
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers));
+        }
+
+        // happy path if exactly 1 student with the name is found
         Student studentToDelete = model.getStudentByName(name);
 
         if (studentToDelete == null) {
