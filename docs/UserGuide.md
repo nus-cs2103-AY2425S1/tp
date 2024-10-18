@@ -7,14 +7,10 @@
 ![](images/doctrack.png)
 # User Guide
 
-<<<<<<< HEAD
 DocTrack is a desktop application for general practitioners (GPs) to quickly 
 access patient contact details, appointments, and treatment records.
 If you type fast, this application can serve as an excellent substitute
 for your large medical files.
-=======
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
->>>>>>> 0d7b3517294c8f1ffc0d2f6ea5df099b141e70c4
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -29,8 +25,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 2. Download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It is a `.jar` file.
 For more information, see this: 
-   - [What is a JAR file?](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html)
-   - [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
+- [What is a JAR file?](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html)
+- [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
    
 
 3. Copy the file to the folder you want to use as the _home folder_ for your DocTrack.
@@ -68,19 +64,8 @@ For more information, see this:
    * `exit` : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
-=======
-   - `list` : Lists all contacts.
 
-   - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   - `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   - `clear` : Deletes all contacts.
-
-   - `exit` : Exits the app.
-
-1. Refer to the [Command Overview](#command-overview) below for details of each command.
->>>>>>> 0d7b3517294c8f1ffc0d2f6ea5df099b141e70c4
+8. Refer to the [Command Overview](#command-overview) below for details of each command.
 
 ---
 
