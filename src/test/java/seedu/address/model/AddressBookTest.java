@@ -104,6 +104,13 @@ public class AddressBookTest {
     }
 
     @Test
+    public void deleteTag_tagInList_returnsFalse() {
+        Tag tag = new Tag(VALID_TAG_HUSBAND);
+        addressBook.deleteTag(tag);
+        assertFalse(addressBook.hasTag(tag));
+    }
+
+    @Test
     public void hasTag_tagNotInList_returnsFalse() {
         Tag tag = new Tag(VALID_TAG_HUSBAND);
         assertFalse(addressBook.hasTag(tag));
@@ -113,6 +120,13 @@ public class AddressBookTest {
     public void hasTag_tagInList_returnsTrue() {
         Tag tag = new Tag(VALID_TAG_HUSBAND);
         addressBook.addTag(tag);
+        assertTrue(addressBook.hasTag(tag));
+    }
+
+    @Test
+    public void hasTag_tagWithTheSameNameInAddressBook_returnsTrue() {
+        Tag tag = new Tag(VALID_TAG_HUSBAND);
+        addressBook.addTag(new Tag(VALID_TAG_HUSBAND));
         assertTrue(addressBook.hasTag(tag));
     }
 
