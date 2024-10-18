@@ -84,6 +84,19 @@ public class UniqueVolunteerList implements Iterable<Volunteer> {
         }
     }
 
+    /**
+     * Removes the equivalent event from all volunteers' list of events they are involved in.
+     * @param eventToRemove The event to remove.
+     */
+    public void removeEvent(String eventToRemove) {
+        requireNonNull(eventToRemove);
+        internalList.forEach(volunteer -> {
+            if (volunteer.getEvents().contains(eventToRemove)) {
+                volunteer.removeEvent(eventToRemove);
+            }
+        });
+    }
+
     public void setVolunteers(UniqueVolunteerList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
