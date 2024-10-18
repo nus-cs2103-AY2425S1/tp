@@ -331,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a Client.
+1.  User requests to add a Client.
 2.  MATER adds the Client and displays a confirmation message.
 
     Use case ends.
@@ -347,17 +347,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list a limited number of Clients.
+1.  User requests to list Clients.
 2.  MATER shows the list of Clients and displays a confirmation message.
 
     Use case ends.
-
-**Extensions**
-
-* 1a. The given list size limit is invalid.
-    * 1a1. MATER shows an error message.
-
-      Use case resumes from step 1.
 
 **Use case: UC3 - Delete a Client**
 
@@ -376,7 +369,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -398,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -432,7 +425,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -454,7 +447,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -494,144 +487,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-* 2b. The given Client id is invalid.
+* 2b. The given index is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-**Use case: UC8 - Edit a Car of a Client**
+**Use case: UC8 - Check in/out Client**
 
 **MSS**
 
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to edit a specific field of the Client's Car.
-3.  MATER edits the field of the Client's Car and displays a confirmation message.
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to check in/out a specific Client in the list.
+3.  MATER checks in/out Client and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
+* 1a. The list is empty.
 
-      Use case resumes from step 1.
+  Use case ends.
 
-
-* 2b. The given Client id is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2c. The given field tag is invalid.
-    * 2c1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2d. The given new value is invalid.
-    * 2d1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-**Use case: UC9 - Add Issue to Client's Car**
+**Use case: UC9 - List Clients which are checked in/out**
 
 **MSS**
 
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to add an Issue to the Client's Car.
-3.  MATER adds the Issue to the Client's Car and displays a confirmation message.
+1.  User requests to list all Clients which are checked in/out
+2.  MATER shows the list of Clients which are checked in/out and displays a confirmation message.
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2b. The given Client id is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2c. The given Issue description is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-**Use case: UC10 - Delete Issue from Client's Car**
+**Use case: UC10 - Filter Clients by keywords**
 
 **MSS**
 
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to delete an Issue from the Client's Car.
-3.  MATER deletes the Issue from the Client's Car and displays a confirmation message.
+1.  User requests to filter Clients by keywords
+2.  MATER shows the list of filtered Clients and displays a confirmation message.
 
     Use case ends.
-
-**Extensions**
-
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2b. The Car does not have an Issue associated to it.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2c. The given Client id number is invalid.
-    * 2c1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2d. The given Issue id is invalid.
-    * 2d1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-**Use case: UC11 - Edit Issue of Client's Car**
-
-**MSS**
-
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to edit an Issue of the Client's Car
-3.  MATER edits the Issue of the Client's Car and displays a confirmation message.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2b. The given Client id is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2c. The given Issue id is invalid.
-    * 2c1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2d. The given new Issue description is invalid.
-    * 2d1. MATER shows an error message.
-
-      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
@@ -644,7 +537,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7. The system shall handle errors gracefully without crashing.
 8. All exceptions shall be caught and managed appropriately to maintain system stability.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -654,7 +546,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client**: A customer whose personal details and associated car information are stored in the system. This refers to anyone bringing a vehicle in for servicing.
 * **Car**: A vehicle brought in by a client for servicing. Each car is associated with a client.
 * **Issue**: A problem or task that needs to be addressed for a specific car with its status and details. Each client can have multiple issues associated with them.
-
 
 
 --------------------------------------------------------------------------------------------------------------------
