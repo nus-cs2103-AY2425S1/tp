@@ -61,8 +61,8 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
-    public static Set<Subject> getSubjectSet( String... subjects) {
-        return  Arrays.stream(subjects).map(Subject::new).collect(Collectors.toSet());
+    public static Set<Subject> getSubjectSet(String... subjects) {
+        return Arrays.stream(subjects).map(Subject::new).collect(Collectors.toSet());
     }
 
 }

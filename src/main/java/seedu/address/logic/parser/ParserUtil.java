@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -141,6 +140,14 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses a {@code String subject} into a {@code Subject} object.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param subject The subject name to be parsed.
+     * @return A {@code Subject} object representing the parsed subject name.
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
@@ -150,6 +157,14 @@ public class ParserUtil {
         return new Subject(subject);
     }
 
+    /**
+     * Parses a collection of subject names into a {@code Set<Subject>}.
+     * Each subject name in the collection will be parsed individually.
+     *
+     * @param subjects A collection of subject names to be parsed.
+     * @return A {@code Set<Subject>} containing all the parsed subject names.
+     * @throws ParseException if any of the given {@code subjects} are invalid.
+     */
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
 
         final Set<Subject> subjectSet = new HashSet<>();

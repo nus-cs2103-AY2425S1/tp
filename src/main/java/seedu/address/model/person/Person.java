@@ -2,10 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -33,7 +31,8 @@ public abstract class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags, Set<Subject> subjects) {
+    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
+                  Set<Subject> subjects) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -145,6 +144,14 @@ public abstract class Person {
         return Collections.unmodifiableSet(subjects);
     }
 
+
+    /**
+     * Checks if this person has a subject with the specified name.
+     * The check is case-insensitive.
+     *
+     * @param subject
+     * @return {@code true} if the person has a subject with the given name, {@code false} otherwise.
+     */
     public boolean hasSubject(String subject) {
         return subjects.stream()
                 .anyMatch(s -> s.subject.equalsIgnoreCase(subject));

@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.swing.text.html.Option;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
@@ -99,7 +98,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (subjects.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> subjectSet = subjects.size() == 1 && subjects.contains("") ? Collections.emptySet() : subjects;
+        Collection<String> subjectSet = subjects.size() == 1 && subjects.contains("") ?
+                Collections.emptySet() : subjects;
         return Optional.of(ParserUtil.parseSubjects(subjectSet));
     }
 

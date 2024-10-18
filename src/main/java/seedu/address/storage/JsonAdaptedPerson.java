@@ -48,7 +48,8 @@ public class JsonAdaptedPerson {
 
     public JsonAdaptedPerson() {}
 
-    final List<JsonAdaptedSubject> subjects = new ArrayList<>();
+    @CsvCustomBindByName(converter = JsonAdaptedSubjectConverter.class)
+    private List<JsonAdaptedSubject> subjects = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.

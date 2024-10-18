@@ -10,6 +10,11 @@ public class Subject {
     public static final String[] AVAILABLE_SUBJECTS = {"english", "math", "science"};
     public final String subject;
 
+
+    /**
+     * subject must be one of available subjects
+     * @param subject
+     */
     public Subject(String subject) {
         if (!isValidSubject(subject)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
@@ -46,6 +51,11 @@ public class Subject {
         return subject;
     }
 
+    /**
+     * checks if subject is valid
+     * @param subject
+     * @return {@code true} if subject is valid and {@code false} if it is not valid
+     */
     public static boolean isValidSubject(String subject) {
         for (String availableSubject : AVAILABLE_SUBJECTS) {
             if (availableSubject.equalsIgnoreCase(subject)) {

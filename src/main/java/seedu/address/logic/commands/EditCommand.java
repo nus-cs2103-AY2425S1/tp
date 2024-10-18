@@ -112,12 +112,14 @@ public class EditCommand extends Command {
         Hours updatedHours = editPersonDescriptor.getHours().orElse(personToEdit.getHours());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Set<Subject> updatedSubjects = editPersonDescriptor.getSubjectsOp().orElse(personToEdit.getSubjects());
-        //return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+
         // TODO CHANGE
         if (personToEdit instanceof Tutor) {
-            return new Tutor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+            return new Tutor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags,
+                    updatedSubjects);
         } else {
-            return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
+            return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags,
+                    updatedSubjects);
         }
 
     }
