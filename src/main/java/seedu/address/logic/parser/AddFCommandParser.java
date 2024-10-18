@@ -17,6 +17,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -25,6 +27,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Allergy;
+import seedu.address.model.person.Appt;
 import seedu.address.model.person.Birthdate;
 import seedu.address.model.person.BloodType;
 import seedu.address.model.person.Email;
@@ -36,6 +39,7 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
+
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -78,9 +82,10 @@ public class AddFCommandParser implements Parser<AddFCommand> {
                 argMultimap.getValue(PREFIX_HEALTHRISK).orElse(""));
         Name nokName = ParserUtil.parseNokName(argMultimap.getValue(PREFIX_NOKNAME).orElse(""));
         Phone nokPhone = ParserUtil.parseNokPhone(argMultimap.getValue(PREFIX_NOKPHONE).orElse(""));
+        List<Appt> appts = new ArrayList<>();
 
         Person person = new Person(name, nric, birthDate, sex, healthServicesList, phone, email, address, allergy,
-                bloodType, healthRIsk, healthRecord, note, nokName, nokPhone);
+                bloodType, healthRIsk, healthRecord, note, nokName, nokPhone, appts);
 
         return new AddFCommand(person);
     }

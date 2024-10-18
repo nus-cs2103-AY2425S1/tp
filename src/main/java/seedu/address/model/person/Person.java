@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,6 +37,7 @@ public class Person {
     private Name nokName;
     private Phone nokPhone;
     private final Set<HealthService> healthServices = new HashSet<>();
+    private List<Appt> appts = new ArrayList<>();
 
     /**
      * Name, Nric, Sex, Birthdate and healthservice must be present and not null
@@ -64,6 +67,7 @@ public class Person {
         this.note = null;
         this.nokName = null;
         this.nokPhone = null;
+        this.appts.clear();
     }
 
     /**
@@ -72,7 +76,7 @@ public class Person {
      */
     public Person(Name name, Nric nric, Birthdate birthdate, Sex sex, Set<HealthService> healthServices, Phone phone,
                   Email email, Address address, Allergy allergy, BloodType bloodType, HealthRisk healthRisk,
-                  HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone) {
+                  HealthRecord healthRecord, Note note, Name nokName, Phone nokPhone, List<Appt> appts) {
         requireAllNonNull(name, nric, birthdate, sex, healthServices, phone, email);
         this.name = name;
         this.nric = nric;
@@ -89,6 +93,7 @@ public class Person {
         this.note = note;
         this.nokName = nokName;
         this.nokPhone = nokPhone;
+        this.appts = appts;
     }
 
     public Name getName() {
@@ -145,6 +150,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public void addAppt(Appt appt) {
+        appts.add(appt);
+    }
+
+    public List<Appt> getAppts() {
+        return appts;
     }
 
     /**

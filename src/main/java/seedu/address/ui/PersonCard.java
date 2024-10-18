@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label sex;
     @FXML
     private FlowPane healthServices;
+    @FXML
+    private Label appointmentDateTime;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -55,5 +57,6 @@ public class PersonCard extends UiPart<Region> {
         person.getHealthServices().stream()
                 .sorted(Comparator.comparing(healthservice -> healthservice.healthServiceName))
                 .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
+        appointmentDateTime.setText(person.getAppts().toString());
     }
 }
