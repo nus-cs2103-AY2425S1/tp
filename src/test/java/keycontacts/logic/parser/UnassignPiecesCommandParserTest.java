@@ -49,8 +49,7 @@ public class UnassignPiecesCommandParserTest {
         assertParseFailure(parser, "-1" + PIANO_PIECE_DESC_BEETHOVEN, invalidFormatMessage);
         assertParseFailure(parser, "0" + PIANO_PIECE_DESC_BEETHOVEN, invalidFormatMessage);
         assertParseFailure(parser, "1 r" + PIANO_PIECE_DESC_BEETHOVEN, invalidFormatMessage);
-        assertParseFailure(parser, "1 i/s" + PIANO_PIECE_DESC_BEETHOVEN,
-                invalidFormatMessage);
+        assertParseFailure(parser, "1 i/s" + PIANO_PIECE_DESC_BEETHOVEN, invalidFormatMessage);
     }
     @Test
     public void parse_invalidPianoPiece_failure() {

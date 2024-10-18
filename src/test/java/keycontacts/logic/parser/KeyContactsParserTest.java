@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import keycontacts.logic.commands.UnassignPiecesCommand;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.index.Index;
@@ -28,6 +27,7 @@ import keycontacts.logic.commands.FindCommand;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.commands.ScheduleCommand;
+import keycontacts.logic.commands.UnassignPiecesCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;

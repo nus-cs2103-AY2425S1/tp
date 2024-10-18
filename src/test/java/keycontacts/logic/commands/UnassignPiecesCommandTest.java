@@ -115,7 +115,8 @@ public class UnassignPiecesCommandTest {
         assertTrue(identicalCommand.equals(baseCommand));
 
         // different values -> returns false
-        UnassignPiecesCommand differentIndexCommand = new UnassignPiecesCommand(INDEX_SECOND_STUDENT, bensonPianoPieces);
+        UnassignPiecesCommand differentIndexCommand = new UnassignPiecesCommand(INDEX_SECOND_STUDENT,
+                bensonPianoPieces);
         assertFalse(baseCommand.equals(differentIndexCommand));
 
         UnassignPiecesCommand differentPianoPiecesCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT,
