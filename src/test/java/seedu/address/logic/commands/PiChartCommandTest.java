@@ -14,10 +14,10 @@ import seedu.address.testutil.PersonBuilder;
 public class PiChartCommandTest {
 
     @Test
-    public void execute_pieChartCommand_success() {
+    public void execute_piChartCommand_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        // Create new persons with fees before ClassId
+        // Create new persons
         Person person1 = new PersonBuilder().withName("Amy").withPhone("12345678").withEmail("alice@example.com")
                 .withAddress("123 Street").withFees("100").withClassId("1").build();
         Person person2 = new PersonBuilder().withName("Benny").withPhone("87654321").withEmail("bob@example.com")
