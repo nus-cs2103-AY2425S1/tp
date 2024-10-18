@@ -109,7 +109,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Hours updatedHours = editPersonDescriptor.getHours().orElse(personToEdit.getHours());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
+        Set<Subject> updatedSubjects = editPersonDescriptor.getSubjectsOp().orElse(personToEdit.getSubjects());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags, updatedSubjects);
     }
 
@@ -148,7 +148,6 @@ public class EditCommand extends Command {
         private Address address;
         private Hours hours;
         private Set<Tag> tags;
-
         private Set<Subject> subjects;
 
         public EditPersonDescriptor() {}
@@ -164,7 +163,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setHours(toCopy.hours);
             setTags(toCopy.tags);
-            setSubject(toCopy.subjects);
+            setSubjects(toCopy.subjects);
         }
 
 
@@ -174,7 +173,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, hours, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, hours, tags, subjects);
         }
 
         public void setName(Name name) {
@@ -217,7 +216,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(hours);
         }
 
-        private void setSubject(Set<Subject> subjects) {
+        public void setSubjects(Set<Subject> subjects) {
             this.subjects = subjects;
         }
 
@@ -257,7 +256,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(hours, otherEditPersonDescriptor.hours)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects);
         }
 
         @Override
@@ -269,11 +269,14 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("hours", hours)
                     .add("tags", tags)
+                    .add("subjects", subjects)
                     .toString();
         }
 
-        public Optional<Set<Subject>> getSubjects() {
+        public Optional<Set<Subject>> getSubjectsOp() {
             return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
         }
+
+
     }
 }

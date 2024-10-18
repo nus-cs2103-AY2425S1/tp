@@ -150,6 +150,7 @@ public class ParserUtil {
     }
 
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+
         final Set<Subject> subjectSet = new HashSet<>();
         for (String subjectName : subjects) {
             subjectSet.add(parseSubject(subjectName));
