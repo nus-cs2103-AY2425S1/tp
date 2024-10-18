@@ -27,8 +27,10 @@ public class StorageManager implements Storage {
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-        TransactionBookStorage transactionBookStorage) {
+    public StorageManager(
+            AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+            TransactionBookStorage transactionBookStorage
+    ) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.transactionBookStorage = transactionBookStorage;
@@ -93,7 +95,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTransactionBook> readTransactionBook(Path filePath, AddressBookModel abModel) throws DataLoadingException {
+    public Optional<ReadOnlyTransactionBook> readTransactionBook(Path filePath, AddressBookModel abModel)
+            throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
         return transactionBookStorage.readTransactionBook(filePath, abModel);
     }

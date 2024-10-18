@@ -3,8 +3,8 @@ package spleetwaise.transaction.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBook;
+import spleetwaise.transaction.model.TransactionBookModel;
 
 /**
  * Represents a command to clear the transaction book.

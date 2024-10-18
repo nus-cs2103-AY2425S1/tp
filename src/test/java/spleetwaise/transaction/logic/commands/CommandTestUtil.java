@@ -19,8 +19,10 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br> - the returned {@link CommandResult} matches
      * {@code expectedCommandResult} <br> - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(Command command, TransactionBookModel actualModel, CommandResult expectedCommandResult,
-                                            TransactionBookModel expectedModel) {
+    public static void assertCommandSuccess(
+            Command command, TransactionBookModel actualModel, CommandResult expectedCommandResult,
+            TransactionBookModel expectedModel
+    ) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -31,11 +33,14 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, TransactionBookModel, CommandResult, TransactionBookModel)} that takes a string
-     * {@code expectedMessage}.
+     * Convenience wrapper to
+     * {@link #assertCommandSuccess(Command, TransactionBookModel, CommandResult, TransactionBookModel)} that takes a
+     * string {@code expectedMessage}.
      */
-    public static void assertCommandSuccess(Command command, TransactionBookModel actualModel, String expectedMessage,
-                                            TransactionBookModel expectedModel) {
+    public static void assertCommandSuccess(
+            Command command, TransactionBookModel actualModel, String expectedMessage,
+            TransactionBookModel expectedModel
+    ) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }

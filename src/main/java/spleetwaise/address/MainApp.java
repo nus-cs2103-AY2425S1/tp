@@ -35,7 +35,6 @@ import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
-import spleetwaise.transaction.storage.StorageUtil;
 import spleetwaise.transaction.storage.TransactionBookStorage;
 
 /**
@@ -70,7 +69,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         TransactionBookStorage transactionBookStorage =
-            new JsonTransactionBookStorage(userPrefs.getTransactionBookFilePath());
+                new JsonTransactionBookStorage(userPrefs.getTransactionBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
         addressBookModel = initAddressBookModelManager(storage, userPrefs);
@@ -98,12 +97,12 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                    + " populated with a sample AddressBook.");
+                        + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
 
@@ -159,7 +158,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                + " Using default config properties.");
+                    + " Using default config properties.");
             initializedConfig = new Config();
         }
 
@@ -189,7 +188,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                + " Using default preferences.");
+                    + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 

@@ -2,9 +2,9 @@ package spleetwaise.transaction.logic.commands;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.TransactionBook;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.testutil.TypicalTransactions;
 
 public class ClearCommandTest {

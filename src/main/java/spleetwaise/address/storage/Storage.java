@@ -36,7 +36,8 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, Transacti
     Path getTransactionBookFilePath();
 
     @Override
-    Optional<ReadOnlyTransactionBook> readTransactionBook(AddressBookModel addressBookModel) throws DataLoadingException;
+    Optional<ReadOnlyTransactionBook> readTransactionBook(AddressBookModel addressBookModel)
+            throws DataLoadingException;
 
     @Override
     void saveTransactionBook(ReadOnlyTransactionBook transactionBook) throws IOException;

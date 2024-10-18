@@ -91,8 +91,8 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, AddressBookModel, CommandResult, AddressBookModel)} that takes a string
-     * {@code expectedMessage}.
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, AddressBookModel, CommandResult, AddressBookModel)}
+     * that takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(
             Command command, AddressBookModel actualModel, String expectedMessage,
