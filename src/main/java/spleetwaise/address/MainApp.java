@@ -52,7 +52,7 @@ public class MainApp extends Application {
     protected CommonModel model;
 
     protected AddressBookModel addressBookModel;
-    protected TransactionBookModel transactionModel;
+    protected TransactionBookModel transactionBookModel;
 
     protected Config config;
 
@@ -73,12 +73,12 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
         addressBookModel = initAddressBookModelManager(storage, userPrefs);
-        transactionModel = initTransactionModelManager(storage, addressBookModel);
+        transactionBookModel = initTransactionModelManager(storage, addressBookModel);
 
         // Initialise Common Model
-        CommonModel.initialise(addressBookModel, transactionModel);
+        CommonModel.initialise(addressBookModel, transactionBookModel);
 
-        logic = new LogicManager(addressBookModel, transactionModel, storage);
+        logic = new LogicManager(storage);
 
         ui = new UiManager(logic);
     }

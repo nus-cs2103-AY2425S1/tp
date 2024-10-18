@@ -14,14 +14,12 @@ import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.AddressBookParser;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
-import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.Storage;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
-import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.logic.parser.TransactionParser;
-import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -35,9 +33,6 @@ public class LogicManager implements Logic {
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-
-    private final AddressBookModel addressBookModel;
-    private final TransactionBookModel transactionModel;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
     private final TransactionParser transactionParser;
@@ -45,19 +40,10 @@ public class LogicManager implements Logic {
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(
-            AddressBookModel addressBookModel,
-            TransactionBookModel transactionModel, Storage storage
-    ) {
-        this.addressBookModel = addressBookModel;
-        this.transactionModel = transactionModel;
+    public LogicManager(Storage storage) {
         this.storage = storage;
-
-        addressBookParser = new AddressBookParser();
-        transactionParser = new TransactionParser();
-
-        // Pass model into ParserUtil class
-        ParserUtil.setAddressBookModel(addressBookModel);
+        this.addressBookParser = new AddressBookParser();
+        this.transactionParser = new TransactionParser();
     }
 
     @Override
@@ -96,32 +82,32 @@ public class LogicManager implements Logic {
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBookModel.getAddressBook();
+        return CommonModel.getInstance().getAddressBook();
     }
 
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return addressBookModel.getFilteredPersonList();
+        return CommonModel.getInstance().getFilteredPersonList();
     }
 
     @Override
     public Path getAddressBookFilePath() {
-        return addressBookModel.getAddressBookFilePath();
+        return CommonModel.getInstance().getAddressBookFilePath();
     }
 
     @Override
     public GuiSettings getGuiSettings() {
-        return addressBookModel.getGuiSettings();
+        return CommonModel.getInstance().getGuiSettings();
     }
 
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
-        addressBookModel.setGuiSettings(guiSettings);
+        CommonModel.getInstance().setGuiSettings(guiSettings);
     }
 
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
-        return transactionModel.getFilteredTransactionList();
+        return CommonModel.getInstance().getFilteredTransactionList();
     }
 
     // TODO: We need to write both storages because AB commands might result in changes to TB data

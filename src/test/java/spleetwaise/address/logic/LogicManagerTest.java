@@ -27,6 +27,7 @@ import spleetwaise.address.storage.StorageManager;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.logic.parser.ParserUtil;
@@ -53,7 +54,8 @@ public class LogicManagerTest {
         JsonTransactionBookStorage transactionBookStorage =
                 new JsonTransactionBookStorage(temporaryFolder.resolve("transactionBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
-        logic = new LogicManager(addressBookModel, transactionModel, storage);
+        CommonModel.initialise(addressBookModel, transactionModel);
+        logic = new LogicManager(storage);
     }
 
     @Test
@@ -243,7 +245,8 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
-        logic = new LogicManager(addressBookModel, transactionModel, storage);
+        CommonModel.initialise(addressBookModel, transactionModel);
+        logic = new LogicManager(storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String abAddCommand = AddCommand.COMMAND_WORD + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY

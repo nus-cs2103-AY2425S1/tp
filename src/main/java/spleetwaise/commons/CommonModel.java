@@ -1,5 +1,7 @@
 package spleetwaise.commons;
 
+import static java.util.Objects.requireNonNull;
+
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -29,10 +31,8 @@ public class CommonModel implements Model {
         transactionBookModel = tbModel;
     }
 
-    public static synchronized CommonModel getInstance() throws Exception {
-        if (model == null) {
-            throw new Exception("CommonModel not initialised.");
-        }
+    public static synchronized CommonModel getInstance() {
+        requireNonNull(model);
         return model;
     }
 
@@ -43,11 +43,8 @@ public class CommonModel implements Model {
      * @param tbModel The transaction book model to use
      * @throws Exception If the CommonModel is already initialised
      */
-    public static synchronized void initialise(AddressBookModel abModel, TransactionBookModel tbModel)
-            throws Exception {
-        if (model != null) {
-            throw new Exception("CommonModel already initialised.");
-        }
+    public static synchronized void initialise(AddressBookModel abModel, TransactionBookModel tbModel) {
+        assert model == null;
         model = new CommonModel(abModel, tbModel);
     }
 
