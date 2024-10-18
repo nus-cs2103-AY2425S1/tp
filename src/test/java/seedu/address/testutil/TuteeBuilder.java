@@ -108,6 +108,9 @@ public class TuteeBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Subjects} of the {@code Tutee} that we are building
+     */
     public TuteeBuilder withSubjects(String... subject) {
         this.subjects = SampleDataUtil.getSubjectSet(subject);
         return this;

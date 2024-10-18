@@ -111,6 +111,9 @@ public class TutorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Subjects} of the {@code Tutor} that we are building
+     */
     public TutorBuilder withSubjects(String... subject) {
         this.subjects = SampleDataUtil.getSubjectSet(subject);
         return this;

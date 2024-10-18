@@ -33,7 +33,7 @@ public class JsonAdaptedTutorTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private  static final List<JsonAdaptedSubject> VALID_SUBJECTS = BENSON.getSubjects().stream()
+    private static final List<JsonAdaptedSubject> VALID_SUBJECTS = BENSON.getSubjects().stream()
             .map(JsonAdaptedSubject::new).collect(Collectors.toList());
 
     @Test
