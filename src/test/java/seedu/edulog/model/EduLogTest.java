@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.edulog.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.edulog.testutil.Assert.assertThrows;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalStudents.ALICE;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.edulog.model.calendar.EdulogCalendar;
+import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.model.student.exceptions.DuplicateStudentException;
 import seedu.edulog.testutil.StudentBuilder;
@@ -90,18 +92,26 @@ public class EduLogTest {
     }
 
     /**
-     * A stub ReadOnlyEduLog whose students list can violate interface constraints.
+     * A stub ReadOnlyEduLog whose students or/and lessons list can violate interface constraints.
      */
     private static class EduLogStub implements ReadOnlyEduLog {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<Lesson> lessons = FXCollections.observableArrayList();
 
-        EduLogStub(Collection<Student> students) {
+        // TODO
+        EduLogStub(Collection<Student> students, Collection<Lesson> lessons) {
             this.students.setAll(students);
+
         }
 
         @Override
         public ObservableList<Student> getStudentList() {
             return students;
+        }
+
+        @Override
+        public ObservableList<Lesson> getLessonList() {
+            return lessons;
         }
     }
 

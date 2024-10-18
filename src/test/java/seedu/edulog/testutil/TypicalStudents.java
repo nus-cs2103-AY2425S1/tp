@@ -59,17 +59,6 @@ public class TypicalStudents {
 
     private TypicalStudents() {} // prevents instantiation
 
-    /**
-     * Returns an {@code EduLog} with all the typical students.
-     */
-    public static EduLog getTypicalEduLog() {
-        EduLog ab = new EduLog();
-        for (Student student : getTypicalStudents()) {
-            ab.addStudent(student);
-        }
-        return ab;
-    }
-
     public static List<Student> getTypicalStudents() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }

@@ -2,7 +2,7 @@ package seedu.edulog.logic.commands;
 
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,6 @@ import seedu.edulog.logic.Messages;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.testutil.StudentBuilder;
 
@@ -24,14 +23,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalEduLog(), new UserPrefs(), new EdulogCalendar());
+        model = new ModelManager(getTypicalEduLog(), new UserPrefs());
     }
 
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs(), new EdulogCalendar());
+        Model expectedModel = new ModelManager(getTypicalEduLog(), new UserPrefs());
         expectedModel.addStudent(validStudent);
 
         assertCommandSuccess(new AddCommand(validStudent), model,

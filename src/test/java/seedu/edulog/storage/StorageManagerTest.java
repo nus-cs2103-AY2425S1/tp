@@ -2,7 +2,7 @@ package seedu.edulog.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import java.nio.file.Path;
 

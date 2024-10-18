@@ -2,6 +2,7 @@ package seedu.edulog.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.edulog.testutil.Assert.assertThrows;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.commons.util.JsonUtil;
 import seedu.edulog.model.EduLog;
-import seedu.edulog.testutil.TypicalStudents;
 
 public class JsonSerializableEduLogTest {
 
@@ -25,7 +25,7 @@ public class JsonSerializableEduLogTest {
         JsonSerializableEduLog dataFromFile = JsonUtil.readJsonFile(TYPICAL_STUDENTS_FILE,
                 JsonSerializableEduLog.class).get();
         EduLog eduLogFromFile = dataFromFile.toModelType();
-        EduLog typicalStudentsEduLog = TypicalStudents.getTypicalEduLog();
+        EduLog typicalStudentsEduLog = getTypicalEduLog();
         assertEquals(eduLogFromFile, typicalStudentsEduLog);
     }
 

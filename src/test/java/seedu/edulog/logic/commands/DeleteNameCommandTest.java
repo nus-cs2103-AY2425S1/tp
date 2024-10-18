@@ -9,7 +9,7 @@ import static seedu.edulog.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalNames.NAME_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalNames.NAME_SECOND_STUDENT;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ import seedu.edulog.model.student.Student;
  */
 public class DeleteNameCommandTest {
 
-    private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs(), new EdulogCalendar());
+    private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
 
     @Test
     public void execute_validNameUnfilteredList_success() {
@@ -39,7 +39,7 @@ public class DeleteNameCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getEduLog(), new UserPrefs(), new EdulogCalendar());
+        ModelManager expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -63,7 +63,7 @@ public class DeleteNameCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
                 Messages.format(studentToDelete));
 
-        Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs(), new EdulogCalendar());
+        Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
         showNoStudent(expectedModel);
 

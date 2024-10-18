@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.logic.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalStudents.CARL;
 import static seedu.edulog.testutil.TypicalStudents.ELLE;
 import static seedu.edulog.testutil.TypicalStudents.FIONA;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.edulog.model.student.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs(), new EdulogCalendar());
-    private Model expectedModel = new ModelManager(getTypicalEduLog(), new UserPrefs(), new EdulogCalendar());
+    private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalEduLog(), new UserPrefs());
 
     @Test
     public void equals() {
