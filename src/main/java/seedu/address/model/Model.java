@@ -95,6 +95,14 @@ public interface Model {
     boolean addTag(Tag tag);
 
     /**
+     * Deletes a tag from the tag list.
+     *
+     * @param tag The tag to be deleted.
+     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     */
+    boolean deleteTag(Tag tag);
+
+    /**
      * Checks if a tag exists in the tag list.
      *
      * @param tag The tag to check for existence.
