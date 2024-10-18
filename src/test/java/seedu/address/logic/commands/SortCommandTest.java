@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_SUCCESS;
 import static seedu.address.model.Model.COMPARATOR_SORT_BY_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -33,6 +35,16 @@ public class SortCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    }
+
+    @Test
+    public void execute_invalidSortOption_throwsCommandException() {
+        InvalidSortOptionStub sortOption = new InvalidSortOptionStub("Invalid");
+        SortCommand sortCommand = new SortCommand(sortOption);
+
+        assertThrows(CommandException.class,
+                String.format(SortCommand.MESSAGE_UNSUPPORTED_SORT_OPTION, sortOption),
+                () -> sortCommand.execute(model));
     }
 
     @Test
@@ -91,5 +103,23 @@ public class SortCommandTest {
 
         // Different types -> returns false
         assertNotEquals(sortByNameCommand1, new ListCommand());
+    }
+
+    /**
+     * A SortOption stub that allows for invalid sort options.
+     */
+    private class InvalidSortOptionStub extends SortOption {
+
+        private final String value;
+
+        public InvalidSortOptionStub(String invalidOption) {
+            super(SORT_NAME); // Call super with a valid option to pass validation
+            this.value = invalidOption; // Set the invalid value directly
+        }
+
+        @Override
+        public String toString() {
+            return value; // Return the invalid option
+        }
     }
 }

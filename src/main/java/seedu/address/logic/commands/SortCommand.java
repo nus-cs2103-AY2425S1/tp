@@ -22,6 +22,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_DEFAULT_SUCCESS = "Sorted by default order";
     public static final String MESSAGE_SORT_SUCCESS = "Sorted by %s";
+    public static final String MESSAGE_UNSUPPORTED_SORT_OPTION = "Unsupported sort option: %s";
 
     private final SortOption sortOption;
 
@@ -43,8 +44,13 @@ public class SortCommand extends Command {
         }
 
         switch (sortOption.toString()) {
-        case SortOption.SORT_NAME -> model.updatePersonListSort(COMPARATOR_SORT_BY_NAME);
-        default -> throw new CommandException("Unsupported sort option: " + sortOption);
+        case SortOption.SORT_NAME:
+            model.updatePersonListSort(COMPARATOR_SORT_BY_NAME);
+            break;
+        default:
+            // Defensive programming: This should not happen as SortOption validates input,
+            // but we include this to catch any unexpected cases due to future changes.
+            throw new CommandException(String.format(MESSAGE_UNSUPPORTED_SORT_OPTION, sortOption));
         }
         return new CommandResult(String.format(MESSAGE_SORT_SUCCESS, sortOption));
     }
@@ -64,4 +70,6 @@ public class SortCommand extends Command {
         return (sortOption == null && otherCommand.sortOption == null)
                 || (sortOption != null && sortOption.equals(otherCommand.sortOption));
     }
+
+
 }
