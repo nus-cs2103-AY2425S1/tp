@@ -167,8 +167,6 @@ public class MainWindow extends UiPart<Stage> {
         if (!helpWindow.isShowing()) {
             helpWindow.fillInnerParts();
             helpWindow.show();
-            
-
         } else {
             helpWindow.focus();
         }
