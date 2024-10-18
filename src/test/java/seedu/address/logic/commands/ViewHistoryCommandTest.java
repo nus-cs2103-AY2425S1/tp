@@ -72,16 +72,20 @@ public class ViewHistoryCommandTest {
         LocalDateTime firstAppointmentTime = LocalDateTime.of(2024, 12, 31, 12, 0);
         LocalDateTime secondAppointmentTime = LocalDateTime.of(2024, 11, 30, 15, 0);
 
-        validPatient.addAppointment(firstAppointmentTime, validPatient.getId(), validDoctor.getId(), "First appointment");
-        validPatient.addAppointment(secondAppointmentTime, validPatient.getId(), validDoctor.getId(), "Second appointment");
+        validPatient.addAppointment(firstAppointmentTime, validPatient.getId(),
+                validDoctor.getId(), "First appointment");
+        validPatient.addAppointment(secondAppointmentTime, validPatient.getId(),
+                validDoctor.getId(), "Second appointment");
 
         // Execute the ViewHistoryCommand without specifying a time
         ViewHistoryCommand viewHistoryCommand = new ViewHistoryCommand(validPatient.getId());
         CommandResult commandResult = viewHistoryCommand.execute(modelStub);
 
         // Validate that both appointments are retrieved correctly
-        String expectedMessage = String.format("DateTime: %s Appointment: %s (patient id) with %s (doctor id). Remarks: First appointment\n"
-                        + "DateTime: %s Appointment: %s (patient id) with %s (doctor id). Remarks: Second appointment\n",
+        String expectedMessage = String.format("DateTime: %s Appointment: %s (patient id) "
+                        + "with %s (doctor id). Remarks: First appointment\n"
+                        + "DateTime: %s Appointment: %s (patient id) "
+                        + "with %s (doctor id). Remarks: Second appointment\n",
                 firstAppointmentTime.format(formatter), validPatient.getId(), validDoctor.getId(),
                 secondAppointmentTime.format(formatter), validPatient.getId(), validDoctor.getId());
 
