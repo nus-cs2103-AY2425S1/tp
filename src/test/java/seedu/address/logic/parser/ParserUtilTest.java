@@ -84,6 +84,13 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseName_validValueWithMultipleWhitespace_returnsTrimmedName() throws Exception {
+        String nameWithWhitespace = WHITESPACE + "Rachel   Walker" + WHITESPACE;
+        Name expectedName = new Name(VALID_NAME);
+        assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
+    }
+
+    @Test
     public void parsePhone_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
     }
