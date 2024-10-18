@@ -35,18 +35,37 @@ public class CompanyTest {
 
     @Test
     public void equals() {
-        // same values -> true
+        // same values -> returns true
         Company nusCopy = new CompanyBuilder().build();
         assertTrue(NUS.equals(nusCopy));
 
-        // same object -> true
+        // same object -> returns true
         assertTrue(NUS.equals(NUS));
 
-        // null -> false
+        // null -> returns false
         assertFalse(NUS.equals(null));
 
-        // TODO add more tests for equality
+        // different type -> returns false
+        assertFalse(NUS.equals("Not a company"));
+
+        // different name -> returns false
+        Company differentNameCompany = new CompanyBuilder().withName("NUS High").build();
+        assertFalse(NUS.equals(differentNameCompany));
+
+        // different address -> returns false
+        Company differentAddressCompany = new CompanyBuilder()
+                .withAddress("20 Clementi Ave 1, Singapore 129957").build();
+        assertFalse(NUS.equals(differentAddressCompany));
+
+        // different billing date -> returns false
+        Company differentBillingDateCompany = new CompanyBuilder().withBillingDate("12").build();
+        assertFalse(NUS.equals(differentBillingDateCompany));
+
+        // different phone -> returns false
+        Company differentPhoneCompany = new CompanyBuilder().withPhone("65161709").build();
+        assertFalse(NUS.equals(differentPhoneCompany));
     }
+
 
     @Test
     public void toStringMethod() {
