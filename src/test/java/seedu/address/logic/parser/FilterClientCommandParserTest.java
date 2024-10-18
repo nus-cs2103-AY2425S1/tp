@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -17,14 +17,14 @@ public class FilterClientCommandParserTest {
     @Test
     public void parse_nameSpecified_success() {
         // Test for valid phone number
-        String userInput = FilterClientCommand.COMMAND_WORD + " " + PREFIX_FILTER + name;
+        String userInput = FilterClientCommand.COMMAND_WORD + " " + PREFIX_NAME + name;
         assertParseSuccess(parser, userInput, new FilterClientCommand(new Name(name)));
     }
 
     @Test
     public void parse_emptyName_failure() {
         // Test for empty phone number
-        String userInput = FilterClientCommand.COMMAND_WORD + " " + PREFIX_FILTER + "";
+        String userInput = FilterClientCommand.COMMAND_WORD + " " + PREFIX_NAME + "";
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterClientCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }

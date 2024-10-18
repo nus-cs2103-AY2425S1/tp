@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
@@ -184,7 +183,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_filterClient() throws Exception {
         FilterClientCommand command = (FilterClientCommand) parser.parseCommand(FilterClientCommand.COMMAND_WORD + " "
-                + PREFIX_FILTER + VALID_NAME_AMY);
+                + PREFIX_NAME + VALID_NAME_AMY);
         assertEquals(new FilterClientCommand(new Name(VALID_NAME_AMY)), command);
     }
 

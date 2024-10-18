@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,11 +21,13 @@ public class FilterClientCommand extends Command {
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the clients based on their name. "
             + "Parameters: NAME (must be a string) "
-            + PREFIX_FILTER + "[NAME]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_FILTER + " Bob";
+            + PREFIX_NAME + "[NAME]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Bob";
 
     /** Message indicating that the filtering operation failed. */
     public static final String MESSAGE_FAILURE = "Unable to filter clients.";
+
+    public static final String MESSAGE_SUCCESS = "Listed all clients";
 
     /** Message used to format the arguments passed to the command. */
     public static final String MESSAGE_ARGUMENTS = "Name: %1$s";
@@ -53,7 +55,9 @@ public class FilterClientCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_FAILURE);
+        model.updateFilteredClientList(client -> client.getName().toString().matches("(?i)^" + name.toString() + ".*"));
+        model.setDisplayClients();
+        return new CommandResult(String.format(MESSAGE_SUCCESS + " with name starting with: " + name.toString()));
     }
 
     @Override
