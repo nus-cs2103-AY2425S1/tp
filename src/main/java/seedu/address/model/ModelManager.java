@@ -2,8 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.UnassignCommand.MESSAGE_NOT_ASSIGNED;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +15,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -204,5 +210,33 @@ public class ModelManager implements Model {
     public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
+    }
+
+    @Override
+    public void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException {
+        List<Volunteer> lastShownVolunteerList = getFilteredVolunteerList();
+        List<Event> lastShownEventList = getFilteredEventList();
+
+        if (volunteerIndex.getZeroBased() >= lastShownVolunteerList.size()) {
+            throw new CommandException(MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX);
+        }
+
+        if (eventIndex.getZeroBased() >= lastShownEventList.size()) {
+            throw new CommandException(MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        Event event = lastShownEventList.get(eventIndex.getZeroBased());
+        Volunteer volunteer = lastShownVolunteerList.get(volunteerIndex.getZeroBased());
+
+        if (!event.getVolunteers().contains(volunteer.getName().toString())) {
+            throw new CommandException(MESSAGE_NOT_ASSIGNED);
+        }
+
+        if (!volunteer.getEvents().contains(event.getName().toString())) {
+            throw new CommandException(MESSAGE_NOT_ASSIGNED);
+        }
+
+        event.unassignVolunteer(volunteer.getName().toString());
+        volunteer.unassignEvent(event.getName().toString());
     }
 }

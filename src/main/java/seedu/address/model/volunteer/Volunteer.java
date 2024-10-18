@@ -138,16 +138,10 @@ public class Volunteer {
     /**
      * Removes the specified event from the list of events the volunteer is involved in.
      *
-     * @param removedEvent The name of the event to be removed.
-     * @return True if the event was successfully removed, false if the event was not found in the list.
+     * @param unassignedEvent The name of the event to be unassigned.
      */
-    public boolean removeEvent(String removedEvent) {
-        if (involvedIn.contains(removedEvent)) {
-            involvedIn.remove(removedEvent);
-            return true;
-        } else {
-            return false;
-        }
+    public void unassignEvent(String unassignedEvent) {
+        involvedIn.remove(unassignedEvent);
     }
 
     /**

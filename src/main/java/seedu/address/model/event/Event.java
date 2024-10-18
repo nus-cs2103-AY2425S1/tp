@@ -99,17 +99,10 @@ public class Event {
     /**
      * Removes a volunteer from the event.
      *
-     * @param removedVolunteer The name of the volunteer to remove.
-     * @return True if the volunteer was removed, false if they weren't found.
+     * @param unassignedVolunteer The name of the volunteer to unassign.
      */
-    public boolean removeVolunteer(String removedVolunteer) {
-        // Check if the volunteer exists in the list
-        if (volunteers.contains(removedVolunteer)) {
-            volunteers.remove(removedVolunteer);
-            return true;
-        } else {
-            return false;
-        }
+    public void unassignVolunteer(String unassignedVolunteer) {
+        volunteers.remove(unassignedVolunteer);
     }
 
     /**
