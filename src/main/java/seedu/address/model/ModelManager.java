@@ -148,6 +148,7 @@ public class ModelManager implements Model {
     public ObservableList<Person> getFilteredPhoneNumberList() {
         return filteredPersons;
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
