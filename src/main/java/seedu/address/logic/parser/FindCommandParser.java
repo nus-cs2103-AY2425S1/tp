@@ -24,12 +24,8 @@ public class FindCommandParser implements Parser<Command> {
     public Command parse(ModelType modelType, String args) throws ParseException {
         if (modelType == ModelType.PERSON) {
             return parseForPerson(args);
-        } else if (modelType == ModelType.EVENT) {
-            return parseForEvent(args);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Please specify with \"find c\" or \"find e\""));
-            //TODO: Temporary fix, include as final string in superclass when created
+            return parseForEvent(args);
         }
     }
 
