@@ -40,6 +40,10 @@ public class TypicalAssignments {
         for (Assignment assignment : getTypicalAssignments()) {
             ab.addAssignment(assignment);
         }
+        ab.addProject(ALPHA);
+        ab.addProject(BETA);
+        ab.addPerson(ALICE);
+        ab.addPerson(BENSON);
         return ab;
     }
 
