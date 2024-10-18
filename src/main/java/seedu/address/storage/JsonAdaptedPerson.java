@@ -30,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String telegramHandle;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String contactType;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,11 +38,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("telegramHandle") String telegramHandle,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("contactType") String contactType) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegramHandle = telegramHandle;
+        this.contactType = contactType;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -55,6 +58,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         telegramHandle = source.getTelegramHandle().value;
+        contactType = source.getContactType().value.toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -104,8 +108,14 @@ class JsonAdaptedPerson {
         }
         final TelegramHandle modelTelegramHandle = new TelegramHandle(telegramHandle);
 
-        //Placeholder Work contact type first but will have to add ContactType as a new field
-        final ContactType modelContactType = new ContactType("Work");
+        if (contactType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContactType.class.getSimpleName()));
+        }
+        if (!ContactType.isValidContactType(contactType)) {
+            throw new IllegalValueException(ContactType.MESSAGE_CONSTRAINTS);
+        }
+        final ContactType modelContactType = new ContactType(contactType);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelContactType, modelName, modelPhone, modelEmail, modelTelegramHandle, modelTags);

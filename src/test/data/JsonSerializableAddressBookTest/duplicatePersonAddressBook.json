@@ -4,11 +4,13 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "telegramHandle": "@alicepauline",
-    "tags": [ "friends" ]
+    "tags": [ "friends" ],
+    "contactType" : "PERSONAL"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "telegramHandle": "@alicepauline"
+    "telegramHandle": "@alicepauline",
+    "contactType" : "PERSONAL"
   } ]
 }
