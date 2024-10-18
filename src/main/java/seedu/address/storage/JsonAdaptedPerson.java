@@ -45,11 +45,11 @@ public class JsonAdaptedPerson {
     private List<JsonAdaptedTag> tags = new ArrayList<>();
     @CsvBindByName()
     private String role;
-
-    public JsonAdaptedPerson() {}
-
     @CsvCustomBindByName(converter = JsonAdaptedSubjectConverter.class)
     private List<JsonAdaptedSubject> subjects = new ArrayList<>();
+    public JsonAdaptedPerson() {}
+
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
