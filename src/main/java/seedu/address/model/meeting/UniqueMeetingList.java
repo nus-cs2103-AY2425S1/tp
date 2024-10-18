@@ -13,10 +13,10 @@ import seedu.address.model.meeting.exceptions.MeetingNotFoundException;
 
 /**
  * A list of meetings that enforces uniqueness between its elements and does not allow nulls.
- * A meeting is considered unique by comparing using {@code Meeting#isSameMeeting(Meeting)}. As such, adding and updating of
- * meetings uses Meeting#isSameMeeting(Meeting) for equality so as to ensure that the meeting being added or updated is
- * unique in terms of identity in the UniqueMeetingList. However, the removal of a meeting uses Meeting#equals(Object) so
- * as to ensure that the meeting with exactly the same fields will be removed.
+ * A meeting is considered unique by comparing using {@code Meeting#isSameMeeting(Meeting)}. As such, adding and
+ * updating of meetings uses Meeting#isSameMeeting(Meeting) for equality so as to ensure that the meeting being added
+ * or updated is unique in terms of identity in the UniqueMeetingList. However, the removal of a meeting uses
+ * Meeting#equals(Object) so as to ensure that the meeting with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
