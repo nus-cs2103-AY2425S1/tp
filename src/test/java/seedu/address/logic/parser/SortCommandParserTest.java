@@ -7,21 +7,21 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 
-public class ListCommandParserTest {
+public class SortCommandParserTest {
 
-    private ListCommandParser parser = new ListCommandParser();
+    SortCommandParser parser = new SortCommandParser();
 
     @Test
     public void parse_noArgs_returnsListCommand() {
-        assertParseSuccess(parser, "", new ListCommand());
+        assertParseSuccess(parser, "", new SortCommand());
     }
 
     @Test
     public void parse_validSortOption_returnsListCommand() {
         SortOption sortOption = new SortOption("name");
-        assertParseSuccess(parser, " s/name", new ListCommand(sortOption));
+        assertParseSuccess(parser, " s/name", new SortCommand(sortOption));
     }
 
     @Test

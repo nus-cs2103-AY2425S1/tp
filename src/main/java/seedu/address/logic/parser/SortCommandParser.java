@@ -6,25 +6,21 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ListCommand object
+ * Parses input arguments and creates a new SortCommand object.
  */
-public class ListCommandParser implements Parser<ListCommand> {
+public class SortCommandParser implements Parser<SortCommand> {
 
-    /**
-     * Parses the given {@code String} of arguments in the context of the ListCommand
-     * and returns a ListCommand object for execution.
-     * @throws ParseException if the user input does not conform to the expected format
-     */
-    public ListCommand parse(String args) throws ParseException {
+    @Override
+    public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_SORT);
 
         if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
         // Ensure there are no duplicate sort prefixes
@@ -34,7 +30,7 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         if (sortOption.isEmpty()) {
             // No sort option
-            return new ListCommand();
+            return new SortCommand();
         }
 
         String sortOptionValue = sortOption.get().trim();
@@ -45,6 +41,6 @@ public class ListCommandParser implements Parser<ListCommand> {
 
         // Ensure sort option is supported
         SortOption validSortOption = ParserUtil.parseSortOption(sortOptionValue);
-        return new ListCommand(validSortOption);
+        return new SortCommand(validSortOption);
     }
 }
