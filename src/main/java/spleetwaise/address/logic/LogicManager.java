@@ -113,11 +113,11 @@ public class LogicManager implements Logic {
     // TODO: We need to write both storages because AB commands might result in changes to TB data
     private CommandResult executeAddressBookCommand(spleetwaise.address.logic.commands.Command addressBookCommand)
             throws SpleetWaiseCommandException {
-        CommandResult commandResult = addressBookCommand.execute(addressBookModel);
+        CommandResult commandResult = addressBookCommand.execute();
 
         // Save AddressBook data
         try {
-            storage.saveAddressBook(addressBookModel.getAddressBook());
+            storage.saveAddressBook(CommonModel.getInstance().getAddressBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -129,11 +129,11 @@ public class LogicManager implements Logic {
 
     private CommandResult executeTransactionCommand(spleetwaise.transaction.logic.commands.Command transactionCommand)
             throws SpleetWaiseCommandException {
-        CommandResult commandResult = transactionCommand.execute(transactionModel);
+        CommandResult commandResult = transactionCommand.execute();
 
         // Save TransactionBook data
         try {
-            storage.saveTransactionBook(transactionModel.getTransactionBook());
+            storage.saveTransactionBook(CommonModel.getInstance().getTransactionBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {

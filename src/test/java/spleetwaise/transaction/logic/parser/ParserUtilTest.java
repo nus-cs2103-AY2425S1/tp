@@ -12,6 +12,7 @@ import spleetwaise.address.model.ModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -83,17 +84,17 @@ public class ParserUtilTest {
 
     @Test
     public void getPersonFromPhone_personNotFound_exceptionThrown() {
-        AddressBookModel modelManager = new ModelManager();
-        ParserUtil.setAddressBookModel(modelManager);
+        AddressBookModel abModel = new ModelManager();
+        CommonModel.initialise(abModel, null);
 
         assertThrows(ParseException.class, () -> ParserUtil.getPersonFromPhone(TEST_PHONE));
     }
 
     @Test
     public void getPersonFromPhone_personFound_success() {
-        AddressBookModel modelManager = new ModelManager();
-        ParserUtil.setAddressBookModel(modelManager);
-        modelManager.addPerson(TypicalPersons.ALICE);
+        AddressBookModel abModel = new ModelManager();
+        CommonModel.initialise(abModel, null);
+        abModel.addPerson(TypicalPersons.ALICE);
 
         Person testPerson = assertDoesNotThrow(() -> ParserUtil.getPersonFromPhone(TEST_PHONE));
         assertEquals(TypicalPersons.ALICE, testPerson);

@@ -44,7 +44,6 @@ public class CommonModel implements Model {
      * @throws Exception If the CommonModel is already initialised
      */
     public static synchronized void initialise(AddressBookModel abModel, TransactionBookModel tbModel) {
-        assert model == null;
         model = new CommonModel(abModel, tbModel);
     }
 

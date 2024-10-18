@@ -1,10 +1,8 @@
 package spleetwaise.transaction.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import spleetwaise.address.logic.commands.CommandResult;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.transaction.model.TransactionBook;
-import spleetwaise.transaction.model.TransactionBookModel;
 
 /**
  * Represents a command to clear the transaction book.
@@ -16,8 +14,8 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(TransactionBookModel model) {
-        requireNonNull(model);
+    public CommandResult execute() {
+        CommonModel model = CommonModel.getInstance();
         model.setTransactionBook(new TransactionBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }

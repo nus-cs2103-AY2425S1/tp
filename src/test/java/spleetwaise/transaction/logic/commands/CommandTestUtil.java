@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.commands.CommandResult;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.transaction.logic.commands.exceptions.CommandException;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
@@ -24,7 +25,8 @@ public class CommandTestUtil {
             TransactionBookModel expectedModel
     ) {
         try {
-            CommandResult result = command.execute(actualModel);
+            CommonModel.initialise(null, actualModel);
+            CommandResult result = command.execute();
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {

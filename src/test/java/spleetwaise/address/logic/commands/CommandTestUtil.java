@@ -16,6 +16,7 @@ import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
+import spleetwaise.commons.CommonModel;
 
 /**
  * Contains helper methods for testing commands.
@@ -82,7 +83,8 @@ public class CommandTestUtil {
             AddressBookModel expectedModel
     ) {
         try {
-            CommandResult result = command.execute(actualModel);
+            CommonModel.initialise(actualModel, null);
+            CommandResult result = command.execute();
             assertEquals(expectedCommandResult, result);
             assertEquals(expectedModel, actualModel);
         } catch (CommandException ce) {
@@ -113,7 +115,8 @@ public class CommandTestUtil {
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
-        Assert.assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        CommonModel.initialise(actualModel, null);
+        Assert.assertThrows(CommandException.class, expectedMessage, command::execute);
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }

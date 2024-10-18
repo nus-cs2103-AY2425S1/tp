@@ -30,7 +30,6 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.CommonModel;
 import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
-import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
@@ -98,7 +97,7 @@ public class LogicManagerTest {
         String listCommand = ListCommand.COMMAND_WORD;
 
         addressBookModel.addPerson(TypicalPersons.ALICE);
-        ParserUtil.setAddressBookModel(addressBookModel);
+        CommonModel.initialise(addressBookModel, transactionModel);
 
         // TODO: add a TransactionUtil class to handle generation of commands and expected messages
         String addTxnCommand = "addTxn p/94351253 amt/12.3 desc/Test date/01012024";
@@ -145,8 +144,7 @@ public class LogicManagerTest {
      * {@code expectedMessage} <br> - the internal model manager state is the same as that in {@code expectedModel}
      * <br>
      *
-     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
-     * TransactionBookModel)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel, TransactionBookModel)
      */
     private void assertCommandSuccess(
             String inputCommand, String expectedMessage,
@@ -163,8 +161,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      *
-     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
-     * TransactionBookModel)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel, TransactionBookModel)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
@@ -173,8 +170,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      *
-     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
-     * TransactionBookModel)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel, TransactionBookModel)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
@@ -183,8 +179,7 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      *
-     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
-     * TransactionBookModel)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel, TransactionBookModel)
      */
     private void assertCommandFailure(
             String inputCommand, Class<? extends Throwable> expectedException,

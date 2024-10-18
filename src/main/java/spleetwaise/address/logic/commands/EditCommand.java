@@ -28,6 +28,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.model.tag.Tag;
+import spleetwaise.commons.CommonModel;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -92,8 +93,9 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(AddressBookModel model) throws CommandException {
-        requireNonNull(model);
+    public CommandResult execute() throws CommandException {
+        CommonModel model = CommonModel.getInstance();
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
