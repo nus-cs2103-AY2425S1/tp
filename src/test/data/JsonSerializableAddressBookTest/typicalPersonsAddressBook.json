@@ -7,6 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "priority" : "MEDIUM",
     "remark" : "She likes pygmy hippos.",
+    "dateOfBirth": "10 Jun 1999",
+    "appointment" : null,
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +17,12 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "priority" : "HIGH",
     "remark" : "Promises to pay back next week.",
+    "dateOfBirth": "29 Jan 1999",
+    "appointment" : {
+      "date" : "2024-10-20",
+      "startTime" : "14:00",
+      "endTime" : "16:00"
+    },
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +31,8 @@
     "address" : "wall street",
     "priority" : "LOW",
     "remark" : "",
+    "dateOfBirth": "1 Jan 2000",
+    "appointment" : null,
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +41,8 @@
     "address" : "10th street",
     "priority" : "LOW",
     "remark" : "",
+    "dateOfBirth": "1 Jan 1990",
+    "appointment" : null,
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +51,8 @@
     "address" : "michegan ave",
     "priority" : "LOW",
     "remark" : "",
+    "dateOfBirth": "1 May 2000",
+    "appointment" : null,
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +61,8 @@
     "address" : "little tokyo",
     "priority" : "LOW",
     "remark" : "",
+    "dateOfBirth": "31 May 2000",
+    "appointment" : null,
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +71,8 @@
     "address" : "4th street",
     "priority" : "LOW",
     "remark" : "",
+    "dateOfBirth": "25 Dec 2010",
+    "appointment" : null,
     "tags" : [ ]
   } ]
 }
