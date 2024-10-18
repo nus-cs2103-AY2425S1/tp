@@ -16,11 +16,11 @@ public class TimeTest {
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalidTime_empty = "";
-        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime_empty));
+        String invalidTimeEmpty = "";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTimeEmpty));
 
-        String invalidTime_out_of_range = "4500";
-        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime_out_of_range));
+        String invalidTimeOutOfRange = "4500";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTimeOutOfRange));
     }
 
 

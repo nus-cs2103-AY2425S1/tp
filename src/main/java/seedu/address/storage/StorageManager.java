@@ -20,12 +20,16 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    // Path for the manual save/load file
+    private Path manualSaveFilePath;
+
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        manualSaveFilePath = addressBookStorage.getManualSaveFilePath();
     }
 
     // ================ UserPrefs methods ==============================
@@ -73,6 +77,40 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    // ================ Manual Save/Load Methods ==============================
+
+    public Path getManualSaveFilePath() {
+        return addressBookStorage.getManualSaveFilePath();
+    }
+
+    /**
+     * Manually saves the address book to the specified file path.
+     *
+     * @param addressBook The address book data to save.
+     * @throws IOException If there is an error saving the file.
+     */
+    @Override
+    public void saveAddressBookManually(ReadOnlyAddressBook addressBook) throws IOException {
+        if (manualSaveFilePath == null) {
+            throw new IOException("Manual save file path is not set.");
+        }
+        logger.fine("Attempting to manually write to file: " + manualSaveFilePath);
+        addressBookStorage.saveAddressBook(addressBook, manualSaveFilePath);
+    }
+
+    /**
+     * Manually loads the address book from the specified file path.
+     *
+     * @return An optional containing the address book if successfully loaded, otherwise an empty optional.
+     * @throws DataLoadingException If there is an error loading the file.
+     */
+    @Override
+    public Optional<ReadOnlyAddressBook> loadAddressBookManually() throws DataLoadingException {
+
+        logger.fine("Attempting to manually read from file: " + manualSaveFilePath);
+        return addressBookStorage.readAddressBook(manualSaveFilePath);
     }
 
 }

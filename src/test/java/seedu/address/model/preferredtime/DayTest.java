@@ -16,11 +16,11 @@ public class DayTest {
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalid_empty = "";
-        assertThrows(IllegalArgumentException.class, () -> new Day(invalid_empty));
+        String invalidEmpty = "";
+        assertThrows(IllegalArgumentException.class, () -> new Day(invalidEmpty));
 
-        String invalid_out_of_range = "Wednes";
-        assertThrows(IllegalArgumentException.class, () -> new Time(invalid_out_of_range));
+        String invalidOutOfRange = "Wednes";
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidOutOfRange));
     }
 
     @Test
