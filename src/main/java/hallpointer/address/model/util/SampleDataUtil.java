@@ -13,8 +13,8 @@ import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
 import hallpointer.address.model.point.Point;
 import hallpointer.address.model.session.Session;
-import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.session.SessionDate;
+import hallpointer.address.model.session.SessionName;
 import hallpointer.address.model.tag.Tag;
 
 /**
@@ -63,7 +63,7 @@ public class SampleDataUtil {
                 new Room("8/04/258"),
                 getTagSet("team2"),
                 new Point("5"),
-                getSessionSet())  // Empty session set
+                getSessionSet()) // Empty session set
         };
     }
 
