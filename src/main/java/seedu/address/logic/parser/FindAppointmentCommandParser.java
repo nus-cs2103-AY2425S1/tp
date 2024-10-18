@@ -22,7 +22,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentPersonContainsNamePredicate;
 
-public class FindAppointmentCommandParser implements Parser<FindAppointmentCommand>{
+/**
+ * Parses input arguments and creates a new FindAppointmentCommand object
+ */
+public class FindAppointmentCommandParser implements Parser<FindAppointmentCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindAppointmentCommand

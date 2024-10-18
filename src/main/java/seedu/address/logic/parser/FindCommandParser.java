@@ -6,11 +6,9 @@ import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.util.Arrays;
 
-import seedu.address.logic.commands.FindAppointmentCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.appointment.AppointmentPersonContainsNamePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**

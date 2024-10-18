@@ -20,6 +20,10 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
         + "Parameters: n/[NAME]\n"
         + "Example: " + COMMAND_WORD + " " + ParserUtil.APPOINTMENT_ENTITY_STRING + " n/alice bob";
 
+    /**
+     * Creates the command
+     * @param predicate predicate to filter appointments
+     */
     public FindAppointmentCommand(Predicate<Appointment> predicate) {
         super(predicate);
     }
@@ -41,5 +45,17 @@ public class FindAppointmentCommand extends FindCommand<Appointment> {
     @Override
     public String getSuccessMessage(Model model) {
         return String.format(Messages.MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, model.getFilteredAppointmentList().size());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof FindAppointmentCommand)) {
+            return false;
+        }
+        FindAppointmentCommand otherFindAppointmentCommand = (FindAppointmentCommand) other;
+        return predicate.equals(otherFindAppointmentCommand.predicate);
     }
 }
