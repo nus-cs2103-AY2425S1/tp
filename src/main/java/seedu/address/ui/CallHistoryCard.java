@@ -11,18 +11,25 @@ import seedu.address.model.contactrecord.ContactRecord;
 public class CallHistoryCard extends UiPart<HBox> {
     private static final String FXML = "CallHistoryCard.fxml";
 
+    public final ContactRecord contactRecord;
+
     @FXML
     private Label indexLabel;
     @FXML
     private Label contactRecordLabel;
 
+    @FXML
+    private Label notesLabel;
+
     /**
-     * Creates a {@code CallHistoryCard} with the given {@code CallHistory} and index to display.
+     * Creates a {@code CallHistoryCard} with the given {@code ContactRecord} and index to display.
      */
     public CallHistoryCard(ContactRecord contactRecord, int index) {
         super(FXML);
+        this.contactRecord = contactRecord;
         indexLabel.setText(index + ". ");
-        contactRecordLabel.setText(contactRecord.toString());
+        contactRecordLabel.setText(contactRecord.getDate());
+        notesLabel.setText(contactRecord.getNotes());
     }
 }
 

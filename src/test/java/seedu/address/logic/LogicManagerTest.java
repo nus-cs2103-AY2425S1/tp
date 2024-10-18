@@ -20,6 +20,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -96,7 +97,10 @@ public class LogicManagerTest {
         ContactRecordList callHistory = new ContactRecordList();
         callHistory.add(new ContactRecord("2021-01-01", ""));
         model.updateDisplayedList(callHistory);
-        assertEquals(callHistory, logic.getCallHistory());
+        ObservableList<ContactRecord> displayedCallHistory = logic.getDisplayedCallHistory();
+        // check contents of list
+        assertEquals(callHistory.size(), displayedCallHistory.size());
+        assertEquals(callHistory.get(0), displayedCallHistory.get(0));
     }
 
     /**
