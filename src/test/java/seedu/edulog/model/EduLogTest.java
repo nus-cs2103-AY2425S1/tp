@@ -158,7 +158,6 @@ public class EduLogTest {
         assertEquals(eduLog.getEdulogCalendar().findLesson(SEC_2_MATH.getDescription()), SEC_2_MATH);
     }
 
-
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> eduLog.getStudentList().remove(0));
@@ -167,7 +166,8 @@ public class EduLogTest {
     // TODO: update this test
     @Test
     public void toStringMethod() {
-        String expected = EduLog.class.getCanonicalName() + "{students=" + eduLog.getStudentList() + "}";
+        String expected = EduLog.class.getCanonicalName() + "{students=" + eduLog.getStudentList() + ", "
+            + "lessons=" + eduLog.getLessonList() + "}";
         assertEquals(expected, eduLog.toString());
     }
 

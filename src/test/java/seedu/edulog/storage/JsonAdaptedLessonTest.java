@@ -4,29 +4,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.edulog.storage.JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.edulog.testutil.Assert.assertThrows;
 import static seedu.edulog.testutil.TypicalLessons.SEC_2_MATH;
-import java.time.DayOfWeek;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.model.calendar.Lesson;
-import seedu.edulog.model.student.Address;
-import seedu.edulog.model.student.Email;
-import seedu.edulog.model.student.Name;
-import seedu.edulog.model.student.Phone;
 
 public class JsonAdaptedLessonTest {
+    private static final String EMPTY_DESCRIPTION = "";
     private static final String INVALID_DESCRIPTION = "d".repeat(Lesson.MAX_CHARACTER_LIMIT + 1);
     private static final String INVALID_DAY_OF_WEEK = "qwrqwrjqwrpwqjorqwjpor";
-    private static final String INVALID_TIME = "2461";
+    private static final String INVALID_TIME_BOUNDS_MINUTE = "2061";
+
+    private static final String INVALID_TIME_BOUNDS_HOUR = "3900";
+
+    private static final String INVALID_TIME_LENGTH = "20:61";
 
     private static final String VALID_DESCRIPTION = SEC_2_MATH.getDescription();
 
     private static final String VALID_DAY_OF_WEEK = SEC_2_MATH.getStartDay().toString();
 
-    private static final String VALID_START_TIME = SEC_2_MATH.getStartTime().toString();
-    private static final String VALID_END_TIME = SEC_2_MATH.getEndTime().toString();
+    private static final String VALID_START_TIME = SEC_2_MATH.getFormattedStartTime();
+    private static final String VALID_END_TIME = SEC_2_MATH.getFormattedEndTime();
 
     @Test
     public void toModelType_validLessonDetails_returnsLesson() throws Exception {
@@ -35,71 +34,106 @@ public class JsonAdaptedLessonTest {
     }
 
     @Test
-    public void toModelType_invalidDescription_throwsIllegalValueException() {
+    public void toModelType_invalidDescriptionEmpty_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
-                new JsonAdaptedLesson(INVALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
+            new JsonAdaptedLesson(EMPTY_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
+        String expectedMessage = Lesson.DESCRIPTION_EMPTY;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
     @Test
-    public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidPhone_throwsIllegalValueException() {
+    public void toModelType_invalidDescriptionTooLong_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
-                new JsonAdaptedLesson(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+            new JsonAdaptedLesson(INVALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
+        String expectedMessage = Lesson.DESCRIPTION_TOO_LONG;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
     @Test
-    public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+    public void toModelType_nullDescription_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(null, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
+        // TODO: Use "Description.class.getSimpleName()" once OOP-ized.
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "description");
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
     @Test
-    public void toModelType_invalidEmail_throwsIllegalValueException() {
+    public void toModelType_invalidDayOfWeek_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
-                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Email.MESSAGE_CONSTRAINTS;
+                new JsonAdaptedLesson(VALID_DESCRIPTION, INVALID_DAY_OF_WEEK, VALID_START_TIME, VALID_END_TIME);
+        String expectedMessage = Lesson.INVALID_DAY_OF_WEEK;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
     @Test
-    public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidAddress_throwsIllegalValueException() {
+    public void toModelType_invalidStartTimeHour_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
-                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+                new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, INVALID_TIME_BOUNDS_HOUR, VALID_END_TIME);
+        String expectedMessage = Lesson.NOT_24H_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
     @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+    public void toModelType_invalidStartTimeMinute_throwsIllegalValueException() {
         JsonAdaptedLesson lesson =
-                new JsonAdaptedLesson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags);
-        assertThrows(IllegalValueException.class, lesson::toModelType);
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, INVALID_TIME_BOUNDS_MINUTE, VALID_END_TIME);
+        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
     }
 
+    @Test
+    public void toModelType_invalidStartTimeLength_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, INVALID_TIME_LENGTH, VALID_END_TIME);
+        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullStartTime_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, null, VALID_END_TIME);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "start time");
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEndTimeHour_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, INVALID_TIME_BOUNDS_HOUR);
+        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEndTimeMinute_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, INVALID_TIME_BOUNDS_MINUTE);
+        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEndTimeLength_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, INVALID_TIME_LENGTH);
+        String expectedMessage = Lesson.NOT_24H_FORMAT;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEndTime_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, null);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "end time");
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
+
+    @Test
+    public void toModelType_sameStartAndEndTime_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson =
+            new JsonAdaptedLesson(VALID_DESCRIPTION, VALID_DAY_OF_WEEK, VALID_START_TIME, VALID_START_TIME);
+        String expectedMessage = Lesson.NO_SAME_TIME;
+        assertThrows(IllegalValueException.class, expectedMessage, lesson::toModelType);
+    }
 }
