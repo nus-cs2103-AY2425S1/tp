@@ -11,7 +11,7 @@ import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.CliSyntax;
 import spleetwaise.address.model.AddressBook;
-import spleetwaise.address.model.Model;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
@@ -78,8 +78,8 @@ public class CommandTestUtil {
      * {@code expectedCommandResult} <br> - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(
-            Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel
+            Command command, AddressBookModel actualModel, CommandResult expectedCommandResult,
+            AddressBookModel expectedModel
     ) {
         try {
             CommandResult result = command.execute(actualModel);
@@ -91,12 +91,12 @@ public class CommandTestUtil {
     }
 
     /**
-     * Convenience wrapper to {@link #assertCommandSuccess(Command, Model, CommandResult, Model)} that takes a string
+     * Convenience wrapper to {@link #assertCommandSuccess(Command, AddressBookModel, CommandResult, AddressBookModel)} that takes a string
      * {@code expectedMessage}.
      */
     public static void assertCommandSuccess(
-            Command command, Model actualModel, String expectedMessage,
-            Model expectedModel
+            Command command, AddressBookModel actualModel, String expectedMessage,
+            AddressBookModel expectedModel
     ) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
@@ -107,7 +107,7 @@ public class CommandTestUtil {
      * CommandException message matches {@code expectedMessage} <br> - the address book, filtered person list and
      * selected person in {@code actualModel} remain unchanged
      */
-    public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
+    public static void assertCommandFailure(Command command, AddressBookModel actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
@@ -122,7 +122,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showPersonAtIndex(AddressBookModel model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());

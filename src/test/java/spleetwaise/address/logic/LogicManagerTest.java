@@ -17,6 +17,7 @@ import spleetwaise.address.logic.commands.CommandTestUtil;
 import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
@@ -30,6 +31,7 @@ import spleetwaise.commons.IdUtil;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
 
 public class LogicManagerTest {
@@ -39,8 +41,8 @@ public class LogicManagerTest {
 
     @TempDir
     public Path temporaryFolder;
-    private spleetwaise.address.model.Model addressBookModel = new spleetwaise.address.model.ModelManager();
-    private spleetwaise.transaction.model.Model transactionModel = new spleetwaise.transaction.model.ModelManager();
+    private AddressBookModel addressBookModel = new spleetwaise.address.model.ModelManager();
+    private TransactionBookModel transactionModel = new spleetwaise.transaction.model.ModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -141,13 +143,13 @@ public class LogicManagerTest {
      * {@code expectedMessage} <br> - the internal model manager state is the same as that in {@code expectedModel}
      * <br>
      *
-     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
-     * spleetwaise.transaction.model.Model)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
+     * TransactionBookModel)
      */
     private void assertCommandSuccess(
             String inputCommand, String expectedMessage,
-            spleetwaise.address.model.Model expectedAddressBookModel,
-            spleetwaise.transaction.model.Model expectedTransactionModel
+            AddressBookModel expectedAddressBookModel,
+            TransactionBookModel expectedTransactionModel
     )
             throws SpleetWaiseCommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
@@ -159,8 +161,8 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      *
-     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
-     * spleetwaise.transaction.model.Model)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
+     * TransactionBookModel)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
@@ -169,8 +171,8 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
      *
-     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
-     * spleetwaise.transaction.model.Model)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
+     * TransactionBookModel)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
@@ -179,17 +181,17 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      *
-     * @see #assertCommandFailure(String, Class, String, spleetwaise.address.model.Model,
-     * spleetwaise.transaction.model.Model)
+     * @see #assertCommandFailure(String, Class, String, AddressBookModel,
+     * TransactionBookModel)
      */
     private void assertCommandFailure(
             String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage
     ) {
-        spleetwaise.address.model.Model expectedAddressBookModel =
+        AddressBookModel expectedAddressBookModel =
                 new spleetwaise.address.model.ModelManager(addressBookModel.getAddressBook(), new UserPrefs());
 
-        spleetwaise.transaction.model.Model expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
+        TransactionBookModel expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedAddressBookModel,
                 expectedTransactionModel
         );
@@ -200,12 +202,12 @@ public class LogicManagerTest {
      * message is equal to {@code expectedMessage} <br> - the internal model manager state is the same as that in
      * {@code expectedModel} <br>
      *
-     * @see #assertCommandSuccess(String, String, spleetwaise.address.model.Model, spleetwaise.transaction.model.Model)
+     * @see #assertCommandSuccess(String, String, AddressBookModel, TransactionBookModel)
      */
     private void assertCommandFailure(
             String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, spleetwaise.address.model.Model expectedAddressBookModel,
-            spleetwaise.transaction.model.Model expectedTransactionModel
+            String expectedMessage, AddressBookModel expectedAddressBookModel,
+            TransactionBookModel expectedTransactionModel
     ) {
         Assert.assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedAddressBookModel, addressBookModel);
@@ -252,10 +254,10 @@ public class LogicManagerTest {
         IdUtil.setDeterminate(true);
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withId(IdUtil.getId()).withTags().build();
 
-        spleetwaise.address.model.Model expectedAddressBookModel = new spleetwaise.address.model.ModelManager();
+        AddressBookModel expectedAddressBookModel = new spleetwaise.address.model.ModelManager();
         expectedAddressBookModel.addPerson(expectedPerson);
 
-        spleetwaise.transaction.model.Model expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
+        TransactionBookModel expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
 
 
         assertCommandFailure(abAddCommand, CommandException.class, expectedMessage, expectedAddressBookModel,

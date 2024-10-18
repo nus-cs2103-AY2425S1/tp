@@ -8,8 +8,9 @@ import static spleetwaise.transaction.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 
 import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.logic.commands.CommandResult;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.transaction.logic.commands.exceptions.CommandException;
-import spleetwaise.transaction.model.Model;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -58,7 +59,7 @@ public class AddCommand extends Command {
      * @return the result of the execution.
      */
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(TransactionBookModel model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasTransaction(transactionToAdd)) {

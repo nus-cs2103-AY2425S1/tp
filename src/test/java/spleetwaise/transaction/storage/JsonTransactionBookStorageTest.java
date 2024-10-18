@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import spleetwaise.address.commons.exceptions.DataLoadingException;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -36,7 +37,7 @@ public class JsonTransactionBookStorageTest {
 
     @BeforeEach
     public void setUp() {
-        spleetwaise.address.model.Model addressBookModel = new spleetwaise.address.model.ModelManager();
+        AddressBookModel addressBookModel = new spleetwaise.address.model.ModelManager();
         for (Person p : TEST_PEOPLE) {
             addressBookModel.addPerson(p);
         }

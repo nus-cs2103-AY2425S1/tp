@@ -3,7 +3,7 @@ package spleetwaise.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import spleetwaise.address.model.AddressBook;
-import spleetwaise.address.model.Model;
+import spleetwaise.address.model.AddressBookModel;
 
 /**
  * Clears the address book.
@@ -15,7 +15,7 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(AddressBookModel model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);

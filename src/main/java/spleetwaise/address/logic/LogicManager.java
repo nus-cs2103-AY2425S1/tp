@@ -14,12 +14,14 @@ import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.AddressBookParser;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.Storage;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
 import spleetwaise.transaction.logic.parser.ParserUtil;
 import spleetwaise.transaction.logic.parser.TransactionParser;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
@@ -34,8 +36,8 @@ public class LogicManager implements Logic {
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final spleetwaise.address.model.Model addressBookModel;
-    private final spleetwaise.transaction.model.Model transactionModel;
+    private final AddressBookModel addressBookModel;
+    private final TransactionBookModel transactionModel;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
     private final TransactionParser transactionParser;
@@ -44,8 +46,8 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(
-            spleetwaise.address.model.Model addressBookModel,
-            spleetwaise.transaction.model.Model transactionModel, Storage storage
+            AddressBookModel addressBookModel,
+            TransactionBookModel transactionModel, Storage storage
     ) {
         this.addressBookModel = addressBookModel;
         this.transactionModel = transactionModel;
@@ -122,6 +124,7 @@ public class LogicManager implements Logic {
         return transactionModel.getFilteredTransactionList();
     }
 
+    // TODO: We need to write both storages because AB commands might result in changes to TB data
     private CommandResult executeAddressBookCommand(spleetwaise.address.logic.commands.Command addressBookCommand)
             throws SpleetWaiseCommandException {
         CommandResult commandResult = addressBookCommand.execute(addressBookModel);

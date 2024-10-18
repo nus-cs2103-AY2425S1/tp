@@ -16,6 +16,7 @@ import spleetwaise.address.commons.util.StringUtil;
 import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.LogicManager;
 import spleetwaise.address.model.AddressBook;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
@@ -29,8 +30,10 @@ import spleetwaise.address.storage.StorageManager;
 import spleetwaise.address.storage.UserPrefsStorage;
 import spleetwaise.address.ui.Ui;
 import spleetwaise.address.ui.UiManager;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
 import spleetwaise.transaction.storage.StorageUtil;
 import spleetwaise.transaction.storage.TransactionBookStorage;
@@ -47,8 +50,11 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected spleetwaise.address.model.Model addressBookModel;
-    protected spleetwaise.transaction.model.Model transactionModel;
+    protected CommonModel model;
+
+    protected AddressBookModel addressBookModel;
+    protected TransactionBookModel transactionModel;
+
     protected Config config;
 
     @Override
@@ -68,11 +74,10 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
         addressBookModel = initAddressBookModelManager(storage, userPrefs);
+        transactionModel = initTransactionModelManager(storage, addressBookModel);
 
-        // Pass ab model into StorageUtil
-        StorageUtil.setAddressBookModel(addressBookModel);
-
-        transactionModel = initTransactionModelManager(storage);
+        // Initialise Common Model
+        CommonModel.initialise(addressBookModel, transactionModel);
 
         logic = new LogicManager(addressBookModel, transactionModel, storage);
 
@@ -84,7 +89,7 @@ public class MainApp extends Application {
      * data from the sample address book will be used instead if {@code storage}'s address book is not found, or an
      * empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private spleetwaise.address.model.Model initAddressBookModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private AddressBookModel initAddressBookModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -105,13 +110,13 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs);
     }
 
-    private spleetwaise.transaction.model.Model initTransactionModelManager(Storage storage) {
+    private TransactionBookModel initTransactionModelManager(Storage storage, AddressBookModel addressBookModel) {
         logger.info("Using data file : " + storage.getTransactionBookFilePath());
 
         Optional<ReadOnlyTransactionBook> txnBookOptional;
         ReadOnlyTransactionBook initialData;
         try {
-            txnBookOptional = storage.readTransactionBook();
+            txnBookOptional = storage.readTransactionBook(addressBookModel);
             if (!txnBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getTransactionBookFilePath()
                         + " populated with a sample TransactionBook.");

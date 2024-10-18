@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
-import spleetwaise.address.model.Model;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.transaction.model.transaction.Amount;
@@ -17,9 +17,9 @@ import spleetwaise.transaction.model.transaction.Description;
  */
 public class ParserUtil {
 
-    private static Model aBModel;
+    private static AddressBookModel aBModel;
 
-    public static void setAddressBookModel(Model model) {
+    public static void setAddressBookModel(AddressBookModel model) {
         aBModel = model;
     }
 

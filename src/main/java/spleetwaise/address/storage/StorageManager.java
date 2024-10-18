@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.commons.exceptions.DataLoadingException;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.UserPrefs;
@@ -87,14 +88,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyTransactionBook> readTransactionBook() throws DataLoadingException {
-        return readTransactionBook(transactionBookStorage.getTransactionBookFilePath());
+    public Optional<ReadOnlyTransactionBook> readTransactionBook(AddressBookModel abModel) throws DataLoadingException {
+        return readTransactionBook(transactionBookStorage.getTransactionBookFilePath(), abModel);
     }
 
     @Override
-    public Optional<ReadOnlyTransactionBook> readTransactionBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyTransactionBook> readTransactionBook(Path filePath, AddressBookModel abModel) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return transactionBookStorage.readTransactionBook(filePath);
+        return transactionBookStorage.readTransactionBook(filePath, abModel);
     }
 
     @Override

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.exceptions.IllegalValueException;
 import spleetwaise.address.commons.util.JsonUtil;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -35,7 +36,7 @@ public class JsonSerializableTransactionBookTest {
 
     @BeforeEach
     public void setUp() {
-        spleetwaise.address.model.Model addressBookModel = new spleetwaise.address.model.ModelManager();
+        AddressBookModel addressBookModel = new spleetwaise.address.model.ModelManager();
         for (Person p : TEST_PEOPLE) {
             addressBookModel.addPerson(p);
         }

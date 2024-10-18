@@ -18,7 +18,7 @@ import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.model.AddressBook;
-import spleetwaise.address.model.Model;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.person.Person;
@@ -89,7 +89,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private class ModelStub implements AddressBookModel {
 
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {

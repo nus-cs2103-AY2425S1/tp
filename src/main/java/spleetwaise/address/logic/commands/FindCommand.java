@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import spleetwaise.address.commons.util.ToStringBuilder;
 import spleetwaise.address.logic.Messages;
-import spleetwaise.address.model.Model;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(AddressBookModel model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
