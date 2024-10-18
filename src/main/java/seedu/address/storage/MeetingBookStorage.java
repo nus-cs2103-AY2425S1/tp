@@ -8,7 +8,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyMeetingBook;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link seedu.address.model.MeetingBook}.
  */
 public interface MeetingBookStorage {
 
@@ -18,7 +18,7 @@ public interface MeetingBookStorage {
     Path getMeetingBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyMeetingBook}.
+     * Returns MeetingBook data as a {@link ReadOnlyMeetingBook}.
      * Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if loading the data from storage failed.
