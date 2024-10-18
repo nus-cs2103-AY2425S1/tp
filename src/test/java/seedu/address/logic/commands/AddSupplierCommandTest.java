@@ -23,6 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
+import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.testutil.SupplierBuilder;
 
@@ -154,6 +156,11 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public void deleteProduct(Product target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setSupplier(Supplier target, Supplier editedSupplier) {
             throw new AssertionError("This method should not be called.");
         }
@@ -166,6 +173,25 @@ public class AddSupplierCommandTest {
         @Override
         public void updateFilteredSupplierList(Predicate<Supplier> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public ObservableList<Product> getFilteredProductList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredProductList(Predicate<Product> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Product findProductByName(ProductName productName) {
+            return null;
+        }
+
+        @Override
+        public Supplier findSupplier(Name supplierName) {
+            return null;
         }
     }
 

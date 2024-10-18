@@ -7,6 +7,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
+import seedu.address.model.product.ProductName;
+import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -15,7 +17,8 @@ import seedu.address.model.supplier.Supplier;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Supplier> PREDICATE_SHOW_ALL_SUPPLIERS = unused -> true;
-
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Product> PREDICATE_SHOW_ALL_PRODUCTS = unused -> true;
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -70,6 +73,12 @@ public interface Model {
     void deleteSupplier(Supplier target);
 
     /**
+     * Deletes the given product.
+     * The product must exist in the address book.
+     */
+    void deleteProduct(Product target);
+
+    /**
      * Adds the given supplier.
      * {@code supplier} must not already exist in the address book.
      */
@@ -93,7 +102,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
 
-    /** Returns an unmodifiable view of the filtered supplier list */
+    /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
 
     /**
@@ -107,4 +116,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);
+
+    Product findProductByName(ProductName productName);
+
+    Supplier findSupplier(Name supplierName);
 }
+

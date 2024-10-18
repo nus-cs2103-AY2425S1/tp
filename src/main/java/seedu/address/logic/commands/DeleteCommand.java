@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -41,7 +42,17 @@ public class DeleteCommand extends Command {
         }
 
         Supplier supplierToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        List<Product> productList = model.getFilteredProductList();
+
+        for (Product product : productList) {
+            if (supplierToDelete.getName().equals(product.getSupplierName())) {
+                product.unsetSupplier();
+            }
+        }
+
         model.deleteSupplier(supplierToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_SUPPLIER_SUCCESS, Messages.format(supplierToDelete)));
     }
 

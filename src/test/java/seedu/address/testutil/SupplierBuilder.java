@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
@@ -26,6 +27,7 @@ public class SupplierBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private Set<Product> products;
 
     /**
      * Creates a {@code SupplierBuilder} with the default details.
@@ -36,6 +38,7 @@ public class SupplierBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        products = new HashSet<>();
     }
 
     /**
@@ -47,6 +50,7 @@ public class SupplierBuilder {
         email = supplierToCopy.getEmail();
         address = supplierToCopy.getAddress();
         tags = new HashSet<>(supplierToCopy.getTags());
+        products = new HashSet<>(supplierToCopy.getProducts());
     }
 
     /**
@@ -89,8 +93,16 @@ public class SupplierBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code products} into a {@code Set<Product>} and set it to the {@code Supplier} that we are building.
+     */
+    public SupplierBuilder withProducts(Set<Product> products) {
+        this.products = products;
+        return this;
+    }
+
     public Supplier build() {
-        return new Supplier(name, phone, email, address, tags);
+        return new Supplier(name, phone, email, address, tags, products);
     }
 
 }

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Address;
 import seedu.address.model.supplier.Email;
 import seedu.address.model.supplier.Name;
@@ -62,7 +63,7 @@ class JsonAdaptedSupplier {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        products.addAll(source.getAssignedProducts().stream()
+        products.addAll(source.getProducts().stream()
                 .map(JsonAdaptedProduct::new)
                 .collect(Collectors.toList()));
     }
@@ -77,7 +78,10 @@ class JsonAdaptedSupplier {
         for (JsonAdaptedTag tag : tags) {
             supplierTags.add(tag.toModelType());
         }
-
+        final List<Product> supplierProductList = new ArrayList<>();
+        for (JsonAdaptedProduct product : products) {
+            supplierProductList.add(product.toModelType());
+        }
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -111,11 +115,8 @@ class JsonAdaptedSupplier {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(supplierTags);
-        Supplier supplier = new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-
-        for (JsonAdaptedProduct product : products) {
-            supplier.addProduct(product.toModelType());
-        }
+        final Set<Product> modelProductList = new HashSet<>(supplierProductList);
+        Supplier supplier = new Supplier(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelProductList);
 
         return supplier;
     }

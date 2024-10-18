@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.ProductName;
+import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
 
 /**
@@ -98,9 +100,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteProduct(Product target) {
+        addressBook.removeProduct(target);
+    }
+
+    @Override
     public boolean hasProduct(Product product) {
-        System.out.println("has Product in model manager.");
-        return true;
+        requireNonNull(product);
+        return addressBook.hasProduct(product);
     }
 
     @Override
@@ -117,8 +124,19 @@ public class ModelManager implements Model {
 
     @Override
     public void addProduct(Product product) {
-        System.out.println("Add Product in model manager.");
+        addressBook.addProduct(product);
+        updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
 
+    }
+
+    @Override
+    public Product findProductByName(ProductName productName) {
+        return addressBook.findProductByName(productName);
+    }
+
+    @Override
+    public Supplier findSupplier(Name supplierName) {
+        return addressBook.findSupplier(supplierName);
     }
 
     //=========== Filtered Supplier List Accessors =============================================================

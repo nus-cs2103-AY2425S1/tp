@@ -10,15 +10,18 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddProductCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
+import seedu.address.logic.commands.AssignProductCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteProductCommand;
+import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.UnassignProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,8 +67,11 @@ public class AddressBookParser {
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeleteSupplierCommand.COMMAND_WORD:
+            return new DeleteSupplierCommandParser().parse(arguments);
+
+        case DeleteProductCommand.COMMAND_WORD:
+            return new DeleteProductCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -84,6 +90,12 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
+
+        case AssignProductCommand.COMMAND_WORD:
+            return new AssignProductCommandParser().parse(arguments);
+
+        case UnassignProductCommand.COMMAND_WORD:
+            return new UnassignProductCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -137,4 +137,17 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String phone} into a {@code Phone}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code phone} is invalid.
+     */
+    public static int parseInteger(String num) throws ParseException, NumberFormatException {
+        // TODO: check if the number is a valid integer
+        requireNonNull(num);
+        String trimmedNum = num.trim();
+        return Integer.parseInt(trimmedNum);
+    }
 }
