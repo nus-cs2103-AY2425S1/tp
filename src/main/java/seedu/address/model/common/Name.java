@@ -1,32 +1,34 @@
-package seedu.address.model.job;
+package seedu.address.model.common;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Job's name in the address book.
+ * Represents an entity's name in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class JobName {
-    public static final String MESSAGE_CONSTRAINTS =
-            "Job names should only contain alphanumeric characters, symbols and spaces, and it should not be blank";
+public class Name {
 
-    /*
+    public static final String MESSAGE_CONSTRAINTS =
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Graph}][\\p{Graph} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum},. ]*";
 
-    public final String value;
+    public final String fullName;
 
     /**
-     * Constructs a {@code JobName}.
+     * Constructs a {@code Name}.
      *
      * @param name A valid name.
      */
-    public JobName(String name) {
+    public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        value = name;
+        fullName = name;
     }
 
     /**
@@ -36,9 +38,10 @@ public class JobName {
         return test.matches(VALIDATION_REGEX);
     }
 
+
     @Override
-    public int hashCode() {
-        return value.hashCode();
+    public String toString() {
+        return fullName;
     }
 
     @Override
@@ -48,17 +51,17 @@ public class JobName {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof JobName)) {
+        if (!(other instanceof Name)) {
             return false;
         }
 
-        JobName otherName = (JobName) other;
-        return value.equals(otherName.value);
+        Name otherName = (Name) other;
+        return fullName.equals(otherName.fullName);
     }
 
     @Override
-    public String toString() {
-        return value;
+    public int hashCode() {
+        return fullName.hashCode();
     }
 
 }

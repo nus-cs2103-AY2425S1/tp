@@ -9,16 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
-import seedu.address.model.company.CompanyName;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Role;
 import seedu.address.model.skill.Skill;
@@ -34,6 +32,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -57,38 +56,6 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String name} into a {@code CompanyName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @param name Name of the company.
-     * @return {@code CompanyName} representing the name.
-     * @throws ParseException If name is not valid.
-     */
-    public static CompanyName parseCompanyName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!CompanyName.isValidName(trimmedName)) {
-            throw new ParseException(CompanyName.MESSAGE_CONSTRAINTS);
-        }
-        return new CompanyName(trimmedName);
-    }
-
-    /**
-     * Parses a {@code String name} into a {@code JobName}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code name} is invalid.
-     */
-    public static JobName parseJobName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!JobName.isValidName(trimmedName)) {
-            throw new ParseException(JobName.MESSAGE_CONSTRAINTS);
-        }
-        return new JobName(trimmedName);
     }
 
     /**
@@ -152,8 +119,8 @@ public class ParserUtil {
     }
 
     /**
-     *  Parses a {@code String company} into a {@code JobCompany}.
-     *  Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String company} into a {@code JobCompany}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code company} is invalid.
      */
@@ -167,8 +134,8 @@ public class ParserUtil {
     }
 
     /**
-     *  Parses a {@code String salary} into a {@code JobSalary}.
-     *  Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String salary} into a {@code JobSalary}.
+     * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code salary} is invalid.
      */
@@ -182,8 +149,8 @@ public class ParserUtil {
     }
 
     /**
-     *  Parses a {@code String requirements} into a {@code JobRequirements}.
-     *  Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String requirements} into a {@code JobRequirements}.
+     * Leading and trailing whitespaces will be trimmed.
      */
     public static JobRequirements parseRequirements(String requirements) {
         requireNonNull(requirements);
@@ -192,8 +159,8 @@ public class ParserUtil {
     }
 
     /**
-     *  Parses a {@code String description} into a {@code JobDescription}.
-     *  Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String description} into a {@code JobDescription}.
+     * Leading and trailing whitespaces will be trimmed.
      */
     public static JobDescription parseDescription(String description) {
         requireNonNull(description);

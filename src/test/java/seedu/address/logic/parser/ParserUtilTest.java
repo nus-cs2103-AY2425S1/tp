@@ -14,11 +14,10 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
-import seedu.address.model.company.CompanyName;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
@@ -84,29 +83,6 @@ public class ParserUtilTest {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
         assertEquals(expectedName, ParserUtil.parseName(nameWithWhitespace));
-    }
-
-    @Test
-    public void parseCompanyName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseCompanyName(null));
-    }
-
-    @Test
-    public void parseCompanyName_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseCompanyName(INVALID_COMPANY_NAME));
-    }
-
-    @Test
-    public void parseCompanyName_validValueWithoutWhitespace_returnsName() throws Exception {
-        CompanyName expectedName = new CompanyName(VALID_COMPANY_NAME);
-        assertEquals(expectedName, ParserUtil.parseCompanyName(VALID_COMPANY_NAME));
-    }
-
-    @Test
-    public void parseCompanyName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_COMPANY_NAME + WHITESPACE;
-        CompanyName expectedName = new CompanyName(VALID_COMPANY_NAME);
-        assertEquals(expectedName, ParserUtil.parseCompanyName(nameWithWhitespace));
     }
 
     @Test
@@ -219,8 +195,8 @@ public class ParserUtilTest {
     @Test
     public void parseSkills_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
-        Set<Skill> expectedTagSet = new HashSet<Skill>(
-                Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
+        Set<Skill> expectedTagSet =
+                new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
         assertEquals(expectedTagSet, actualTagSet);
     }
 

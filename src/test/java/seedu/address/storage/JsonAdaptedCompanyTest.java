@@ -8,9 +8,9 @@ import static seedu.address.testutil.TypicalCompanies.NUS;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
-import seedu.address.model.company.CompanyName;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedCompanyTest {
@@ -33,7 +33,7 @@ public class JsonAdaptedCompanyTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedCompany company =
                 new JsonAdaptedCompany(INVALID_NAME, VALID_ADDRESS, VALID_BILLING_DATE, VALID_PHONE);
-        String expectedMessage = CompanyName.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
 
@@ -41,7 +41,7 @@ public class JsonAdaptedCompanyTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedCompany company =
                 new JsonAdaptedCompany(null, VALID_ADDRESS, VALID_BILLING_DATE, VALID_PHONE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, CompanyName.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, company::toModelType);
     }
 

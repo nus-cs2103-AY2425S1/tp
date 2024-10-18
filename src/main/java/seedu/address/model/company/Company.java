@@ -5,14 +5,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Address;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.person.Phone;
 
 /**
  * Represents a company in the address book.
  */
 public class Company {
-    private final CompanyName name;
+    private final Name name;
     private final Address address;
     private final BillingDate billingDate;
     private final Phone phone;
@@ -20,7 +21,7 @@ public class Company {
     /**
      * Every field must be present and not null.
      */
-    public Company(CompanyName name, Address address, BillingDate billingDate, Phone phone) {
+    public Company(Name name, Address address, BillingDate billingDate, Phone phone) {
         requireAllNonNull(name, address, billingDate, phone);
         this.name = name;
         this.address = address;
@@ -28,7 +29,7 @@ public class Company {
         this.phone = phone;
     }
 
-    public CompanyName getName() {
+    public Name getName() {
         return this.name;
     }
 

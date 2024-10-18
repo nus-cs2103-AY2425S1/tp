@@ -10,13 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobSalary;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Jackson-friendly version of {@link Job}.
@@ -51,7 +50,7 @@ class JsonAdaptedJob {
      * Converts a given {@code Job} into this class for Jackson use.
      */
     public JsonAdaptedJob(Job source) {
-        name = source.getName().value;
+        name = source.getName().fullName;
         company = source.getCompany().value;
         salary = String.valueOf(source.getSalary().value);
         description = source.getDescription().value;
@@ -68,19 +67,19 @@ class JsonAdaptedJob {
     public Job toModelType() throws IllegalValueException {
 
         // TODO: Input validation
+        Name modelName = new Name(name);
 
         List<Tag> jobRequirements = new ArrayList<>();
         for (JsonAdaptedTag requirement : requirements) {
             jobRequirements.add(requirement.toModelType());
         }
-        JobName modelJobName = new JobName(name);
         JobCompany modelJobCompany = new JobCompany(company);
         JobSalary modelJobSalary = new JobSalary(salary);
         JobDescription modelJobDescription = new JobDescription(description);
 
         Set<Tag> modelJobRequirements = new HashSet<>(jobRequirements);
 
-        return new Job(modelJobName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements);
+        return new Job(modelName, modelJobCompany, modelJobSalary, modelJobDescription, modelJobRequirements);
     }
 
 }

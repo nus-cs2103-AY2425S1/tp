@@ -10,10 +10,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.company.Company;
-import seedu.address.model.company.CompanyName;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
 
 
@@ -37,6 +37,7 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCompanyCommand
      * and returns an AddCompanyCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCompanyCommand parse(String args) throws ParseException {
@@ -49,7 +50,7 @@ public class AddCompanyCommandParser implements Parser<AddCompanyCommand> {
         }
 
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_BILLING_DATE, PREFIX_PHONE);
-        CompanyName name = ParserUtil.parseCompanyName(argMultiMap.getValue(PREFIX_NAME).get());
+        Name name = ParserUtil.parseName(argMultiMap.getValue(PREFIX_NAME).get());
         Address address = ParserUtil.parseAddress(argMultiMap.getValue(PREFIX_ADDRESS).get());
         BillingDate date = ParserUtil.parseBillingDate(argMultiMap.getValue(PREFIX_BILLING_DATE).get());
         Phone phone = ParserUtil.parsePhone(argMultiMap.getValue(PREFIX_PHONE).get());
