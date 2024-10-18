@@ -24,6 +24,7 @@ import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.util.SampleDataUtil;
 import tahub.contacts.storage.AddressBookStorage;
 import tahub.contacts.storage.JsonAddressBookStorage;
+import tahub.contacts.storage.JsonUniqueCourseListStorage;
 import tahub.contacts.storage.JsonUserPrefsStorage;
 import tahub.contacts.storage.Storage;
 import tahub.contacts.storage.StorageManager;
@@ -58,7 +59,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUniqueCourseListStorage courseListStorage =
+                new JsonUniqueCourseListStorage(userPrefs.getCourseListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -90,7 +93,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, new tahub.contacts.model.course.UniqueCourseList());
     }
 
     private void initLogging(Config config) {

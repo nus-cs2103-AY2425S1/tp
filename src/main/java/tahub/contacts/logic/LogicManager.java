@@ -15,6 +15,7 @@ import tahub.contacts.logic.parser.AddressBookParser;
 import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.storage.Storage;
 
@@ -52,6 +53,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
+            storage.saveCourseList(model.getCourseList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -74,6 +76,14 @@ public class LogicManager implements Logic {
     @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
+    }
+
+    public UniqueCourseList getCourseList() {
+        return model.getCourseList();
+    }
+
+    public Path getCourseListFilePath() {
+        return model.getCourseListFilePath();
     }
 
     @Override
