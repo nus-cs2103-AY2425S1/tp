@@ -50,7 +50,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedPerson person = 
+        JsonAdaptedPerson person =
             new JsonAdaptedPerson(null, VALID_NRIC, VALID_SEX, VALID_BIRTHDATE, VALID_SERVICES,
                 null, null, null, null, null, null,
                 null, null, null, null, null);
@@ -70,7 +70,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        JsonAdaptedPerson person = 
+        JsonAdaptedPerson person =
             new JsonAdaptedPerson(VALID_NAME, null, VALID_SEX, VALID_BIRTHDATE, VALID_SERVICES,
                 null, null, null, null, null, null,
                 null, null, null, null, null);
@@ -90,7 +90,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        JsonAdaptedPerson person = 
+        JsonAdaptedPerson person =
             new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, null, VALID_BIRTHDATE, VALID_SERVICES,
                 null, null, null, null, null, null,
                 null, null, null, null, null);
@@ -110,7 +110,7 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedPerson person = 
+        JsonAdaptedPerson person =
             new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, VALID_SEX, null, VALID_SERVICES,
                 null, null, null, null, null, null,
                 null, null, null, null, null);
