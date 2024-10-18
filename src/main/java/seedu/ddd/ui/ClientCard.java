@@ -26,16 +26,16 @@ public class ClientCard extends UiPart<Region> {
 
     @FXML
     private Label name;
-    
+
     @FXML
     private Label phone;
-    
+
     @FXML
     private Label email;
-    
+
     @FXML
     private Label address;
-    
+
     @FXML
     private Label date;
 
@@ -54,7 +54,7 @@ public class ClientCard extends UiPart<Region> {
 
         name.setText(String.format("%s. %s", displayedIndex, client.getName().fullName));
         id.setText(String.format("Client: #%d", client.getId().id));
-        
+
         phone.setText(String.format("📞  Phone Number: %s", client.getPhone()));
         email.setText(String.format("📫  Email: %s", client.getEmail()));
         address.setText(String.format("🏠  Address: %s", client.getAddress()));

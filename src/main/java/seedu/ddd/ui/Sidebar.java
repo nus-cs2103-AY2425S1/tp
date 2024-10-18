@@ -27,6 +27,6 @@ public class Sidebar extends UiPart<HBox> {
         appTitleContainer.widthProperty().addListener((obs, oldVal, newVal) -> {
             appTitle.setFitHeight(appTitleContainer.getHeight());
             appTitle.setFitWidth(appTitleContainer.getWidth());
-       });
+        });
     }
 }

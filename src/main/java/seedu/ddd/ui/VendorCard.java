@@ -27,16 +27,16 @@ public class VendorCard extends UiPart<Region> {
 
     @FXML
     private Label name;
-    
+
     @FXML
     private Label phone;
-    
+
     @FXML
     private Label email;
-    
+
     @FXML
     private Label address;
-    
+
     @FXML
     private Label service;
 
@@ -55,7 +55,7 @@ public class VendorCard extends UiPart<Region> {
 
         name.setText(String.format("%s. %s", displayedIndex, vendor.getName().fullName));
         id.setText(String.format("Vendor: #%d", vendor.getId().id));
-        
+
         phone.setText(String.format("📞  Phone Number: %s", vendor.getPhone()));
         email.setText(String.format("📫  Email: %s", vendor.getEmail()));
         address.setText(String.format("🏠  Address: %s", vendor.getAddress()));
