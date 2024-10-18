@@ -29,7 +29,7 @@
     content: ' ✓ Copied!';
     margin-left: 5px;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.4em;
   }
 
   .icon {
