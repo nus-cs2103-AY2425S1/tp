@@ -14,11 +14,13 @@ import seedu.address.model.group.GroupName;
  * Adds a group to the address book.
  */
 public class ListTaskCommand extends Command {
-    public static final String COMMAND_WORD = "list_tasks";
+    public static final String COMMAND_WORD = "list_t";
+    public static final String COMMAND_WORD_ALIAS = "lt";
     public static final int LIST_TASK_MARKER = 2;
     public static final int LIST_GROUP_TASK_MARKER = 3;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all tasks of a specified group. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Lists all tasks of a specified group. "
         + "Example: " + COMMAND_WORD
         + PREFIX_GROUP_NAME + "GROUP_NAME "
         + "Example: " + COMMAND_WORD + " "

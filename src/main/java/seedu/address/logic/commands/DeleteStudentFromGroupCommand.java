@@ -19,15 +19,17 @@ import seedu.address.model.student.StudentNumber;
  * Deletes a student from a group
  */
 public class DeleteStudentFromGroupCommand extends Command {
-    public static final String COMMAND_WORD = "delete_student_grp";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified from the target group by the student number used.\n"
-            + "Parameter: GROUP_NAME (must only contain alphanumeric characters and spaces, "
-            + "and it should not be blank)\n"
-            + "Parameter: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
-            + "and ends with a capital letter')\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_NAME + "Team 5" + " "
-            + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
+    public static final String COMMAND_WORD = "del_s_g";
+    public static final String COMMAND_WORD_ALIAS = "dsg";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Deletes the student identified from the target group by the student number used.\n"
+        + "Parameter: GROUP_NAME (must only contain alphanumeric characters and spaces, "
+        + "and it should not be blank)\n"
+        + "Parameter: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
+        + "and ends with a capital letter')\n"
+        + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_NAME + "Team 5" + " "
+        + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s from %2$s";
 
@@ -65,7 +67,7 @@ public class DeleteStudentFromGroupCommand extends Command {
 
         model.deleteStudentFromGroup(targetGroup, studentToBeDeleted);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.format(targetStudentNo), Messages.format(targetGroupName)));
+            Messages.format(targetStudentNo), Messages.format(targetGroupName)));
     }
 
     @Override
@@ -81,14 +83,14 @@ public class DeleteStudentFromGroupCommand extends Command {
 
         DeleteStudentFromGroupCommand otherDeleteStudentCommand = (DeleteStudentFromGroupCommand) other;
         return targetStudentNo.equals(otherDeleteStudentCommand.targetStudentNo)
-                && targetGroupName.equals(otherDeleteStudentCommand.targetGroupName);
+            && targetGroupName.equals(otherDeleteStudentCommand.targetGroupName);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetGroupName", targetGroupName)
-                .add("targetStudentNumber", targetStudentNo)
-                .toString();
+            .add("targetGroupName", targetGroupName)
+            .add("targetStudentNumber", targetStudentNo)
+            .toString();
     }
 }

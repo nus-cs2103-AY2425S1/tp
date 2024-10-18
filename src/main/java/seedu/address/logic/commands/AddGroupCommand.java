@@ -14,13 +14,15 @@ import seedu.address.model.group.Group;
  */
 public class AddGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_group";
+    public static final String COMMAND_WORD = "add_g";
+    public static final String COMMAND_WORD_ALIAS = "ag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a group to the address book. "
-            + "Parameters: "
-            + PREFIX_GROUP_NAME + "GROUPNAME "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP_NAME + "Group 1 ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Adds a group to the address book. "
+        + "Parameters: "
+        + PREFIX_GROUP_NAME + "GROUPNAME \n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GROUP_NAME + "Group 1 ";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book";
@@ -65,7 +67,7 @@ public class AddGroupCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

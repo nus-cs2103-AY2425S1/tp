@@ -17,20 +17,22 @@ import seedu.address.model.student.Student;
  */
 public class AddStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_student";
+    public static final String COMMAND_WORD = "add_s";
+    public static final String COMMAND_WORD_ALIAS = "as";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
-            + "Parameters: "
-            + PREFIX_STUDENT_NAME + "NAME "
-            + PREFIX_EMAIL + "EMAIL "
-            + "[" + PREFIX_TAG + "TAG]... "
-            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_NAME + "John Doe "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
-            + PREFIX_STUDENT_NUMBER + "A02345678J";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Adds a student to the address book.\n"
+        + "Parameters: "
+        + PREFIX_STUDENT_NAME + "NAME "
+        + PREFIX_EMAIL + "EMAIL "
+        + "[" + PREFIX_TAG + "TAG]... "
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_STUDENT_NAME + "John Doe "
+        + PREFIX_EMAIL + "johnd@example.com "
+        + PREFIX_TAG + "friends "
+        + PREFIX_TAG + "owesMoney "
+        + PREFIX_STUDENT_NUMBER + "A02345678J";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
@@ -75,7 +77,7 @@ public class AddStudentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+            .add("toAdd", toAdd)
+            .toString();
     }
 }

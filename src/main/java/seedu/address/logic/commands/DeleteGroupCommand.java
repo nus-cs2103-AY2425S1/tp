@@ -15,9 +15,10 @@ import seedu.address.model.student.Student;
  * Deletes a group from the address book and removes students in the group.
  */
 public class DeleteGroupCommand extends Command {
-    public static final String COMMAND_WORD = "delete_group";
+    public static final String COMMAND_WORD = "del_g";
+    public static final String COMMAND_WORD_ALIAS = "dg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the group identified by the group name used.\n"
         + "Parameters: GROUP_NAME\n"
         + "Example: " + COMMAND_WORD + " " + "CS2103";
