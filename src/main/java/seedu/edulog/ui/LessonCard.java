@@ -41,7 +41,7 @@ public class LessonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         description.setText(lesson.getDescription());
         startDay.setText(lesson.getStartDay().toString());
-        startTime.setText(lesson.getStartTime().toString());
-        endTime.setText(lesson.getEndTime().toString());
+        startTime.setText(lesson.getFormattedStartTime());
+        endTime.setText(lesson.getFormattedEndTime());
     }
 }

@@ -3,10 +3,10 @@ package seedu.edulog.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.edulog.testutil.Assert.assertThrows;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalStudents.ALICE;
 import static seedu.edulog.testutil.TypicalStudents.HOON;
 import static seedu.edulog.testutil.TypicalStudents.IDA;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
 
 import java.io.IOException;
 import java.nio.file.Path;

@@ -20,7 +20,7 @@ public class LessonBuilder {
     private LocalTime endTime; //TODO: change to type endTime
 
     /**
-     * Creates a {@code StudentBuilder} with the default details.
+     * Creates a {@code LessonBuilder} with the default details.
      * once the todos above are done we can rewrite this as
      *         description = new Description(DEFAULT_DESCRIPTION);
      *         startDay = new StartDay(DEFAULT_START_DAY);

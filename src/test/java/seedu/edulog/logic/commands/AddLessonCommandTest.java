@@ -51,7 +51,7 @@ public class AddLessonCommandTest {
     public void execute_overloadIdenticalTimingLesson_throwsCommandException() throws CommandException {
         DayOfWeek day = DayOfWeek.MONDAY;
 
-        for (int i = 0; i < EdulogCalendar.MAX_IDENTICAL_TIMING; i++) {
+        for (int i = 0; i < EdulogCalendar.MAX_SIMULTANEOUS_TIMING; i++) {
             LocalTime startTime = LocalTime.of(12 - i, 0);
             LocalTime endTime = LocalTime.of(13 + i, 0);
 
@@ -62,10 +62,10 @@ public class AddLessonCommandTest {
                     String.format(AddLessonCommand.MESSAGE_SUCCESS, lesson));
         }
 
-        LocalTime endTime = LocalTime.of(13 + EdulogCalendar.MAX_IDENTICAL_TIMING, 0);
-        LocalTime startTime = LocalTime.of(12 - EdulogCalendar.MAX_IDENTICAL_TIMING, 0);
-        Lesson lesson = new Lesson("Math" + EdulogCalendar.MAX_IDENTICAL_TIMING, day, startTime, endTime);
+        LocalTime endTime = LocalTime.of(13 + EdulogCalendar.MAX_SIMULTANEOUS_TIMING, 0);
+        LocalTime startTime = LocalTime.of(12 - EdulogCalendar.MAX_SIMULTANEOUS_TIMING, 0);
+        Lesson lesson = new Lesson("Math" + EdulogCalendar.MAX_SIMULTANEOUS_TIMING, day, startTime, endTime);
         AddLessonCommand command = new AddLessonCommand(lesson);
-        assertCommandFailure(command, model, AddLessonCommand.OVERLOAD_IDENTICAL_TIMING);
+        assertCommandFailure(command, model, AddLessonCommand.OVERLOAD_SIMULTANEOUS_TIMING);
     }
 }

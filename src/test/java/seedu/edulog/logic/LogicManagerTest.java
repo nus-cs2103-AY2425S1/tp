@@ -27,7 +27,6 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.ReadOnlyEduLog;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.storage.JsonEduLogStorage;
 import seedu.edulog.storage.JsonUserPrefsStorage;
@@ -124,7 +123,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs(), new EdulogCalendar());
+        Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

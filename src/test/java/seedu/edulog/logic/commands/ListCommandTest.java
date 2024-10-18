@@ -2,8 +2,8 @@ package seedu.edulog.logic.commands;
 
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulog.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -23,8 +22,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalEduLog(), new UserPrefs(), new EdulogCalendar());
-        expectedModel = new ModelManager(model.getEduLog(), new UserPrefs(), new EdulogCalendar());
+        model = new ModelManager(getTypicalEduLog(), new UserPrefs());
+        expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
     }
 
     @Test

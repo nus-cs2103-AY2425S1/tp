@@ -1,21 +1,35 @@
 package seedu.edulog.model.calendar;
 
+import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.edulog.model.calendar.exceptions.DuplicateLessonException;
 
 /**
  * Calendar class
  */
 public class EdulogCalendar {
-    public static final int MAX_IDENTICAL_TIMING = 2;
+    public static final int MAX_SIMULTANEOUS_TIMING = 2;
     private ObservableList<Lesson> lessons;
 
     public EdulogCalendar() {
         lessons = FXCollections.observableArrayList();
     }
 
-    public ObservableList<Lesson> getLessons() {
+    public ObservableList<Lesson> getLessonList() {
         return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        requireAllNonNull(lessons);
+        if (!lessonsAreUnique(lessons)) {
+            throw new DuplicateLessonException();
+        }
+
+        this.lessons = FXCollections.observableArrayList(lessons);
     }
 
     /**
@@ -50,7 +64,7 @@ public class EdulogCalendar {
             .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
             .filter(l -> l.getStartTime().isBefore(lesson.getEndTime())
                 && lesson.getStartTime().isBefore(l.getEndTime()))
-            .count() < MAX_IDENTICAL_TIMING;
+            .count() < MAX_SIMULTANEOUS_TIMING;
     }
 
     /**
@@ -58,5 +72,19 @@ public class EdulogCalendar {
      */
     public void removeLesson(Lesson lesson) {
         lessons.remove(lesson);
+    }
+
+    /**
+     * Returns true if {@code lessons} contains only unique lessons.
+     */
+    private boolean lessonsAreUnique(List<Lesson> lessons) {
+        for (int i = 0; i < lessons.size() - 1; i++) {
+            for (int j = i + 1; j < lessons.size(); j++) {
+                if (lessons.get(i).isSameLesson(lessons.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

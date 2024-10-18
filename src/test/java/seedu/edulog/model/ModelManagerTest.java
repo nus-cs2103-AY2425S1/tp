@@ -15,7 +15,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulog.commons.core.GuiSettings;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.NameContainsKeywordsPredicate;
 import seedu.edulog.testutil.EduLogBuilder;
 
@@ -99,11 +98,10 @@ public class ModelManagerTest {
         EduLog eduLog = new EduLogBuilder().withStudent(ALICE).withStudent(BENSON).build();
         EduLog differentEduLog = new EduLog();
         UserPrefs userPrefs = new UserPrefs();
-        EdulogCalendar edulogCalendar = new EdulogCalendar();
 
         // same values -> returns true
-        modelManager = new ModelManager(eduLog, userPrefs, edulogCalendar);
-        ModelManager modelManagerCopy = new ModelManager(eduLog, userPrefs, edulogCalendar);
+        modelManager = new ModelManager(eduLog, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(eduLog, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -116,12 +114,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different eduLog -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentEduLog, userPrefs, edulogCalendar)));
+        assertFalse(modelManager.equals(new ModelManager(differentEduLog, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(eduLog, userPrefs, edulogCalendar)));
+        assertFalse(modelManager.equals(new ModelManager(eduLog, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -129,6 +127,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setEduLogFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(eduLog, differentUserPrefs, edulogCalendar)));
+        assertFalse(modelManager.equals(new ModelManager(eduLog, differentUserPrefs)));
     }
 }

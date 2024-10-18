@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.edulog.commons.exceptions.IllegalValueException;
 import seedu.edulog.model.EduLog;
 import seedu.edulog.model.ReadOnlyEduLog;
+import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 
 /**
@@ -20,15 +21,19 @@ import seedu.edulog.model.student.Student;
 class JsonSerializableEduLog {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_LESSON = "Lessons list contains duplicate lesson(s).";
 
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
+    private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableEduLog} with the given students.
+     * Constructs a {@code JsonSerializableEduLog} with the given students and lessons.
      */
     @JsonCreator
-    public JsonSerializableEduLog(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+    public JsonSerializableEduLog(@JsonProperty("students") List<JsonAdaptedStudent> students,
+                                  @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.students.addAll(students);
+        this.lessons.addAll(lessons);
     }
 
     /**
@@ -38,6 +43,7 @@ class JsonSerializableEduLog {
      */
     public JsonSerializableEduLog(ReadOnlyEduLog source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
+        lessons.addAll(source.getLessonList().stream().map(JsonAdaptedLesson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -54,6 +60,15 @@ class JsonSerializableEduLog {
             }
             eduLog.addStudent(student);
         }
+
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            Lesson lesson = jsonAdaptedLesson.toModelType();
+            if (eduLog.hasLesson(lesson)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LESSON);
+            }
+            eduLog.addLesson(lesson);
+        }
+
         return eduLog;
     }
 

@@ -11,9 +11,9 @@ import static seedu.edulog.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulog.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.edulog.testutil.TypicalStudents.getTypicalEduLog;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,6 @@ import seedu.edulog.model.EduLog;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.testutil.EditStudentDescriptorBuilder;
 import seedu.edulog.testutil.StudentBuilder;
@@ -34,7 +33,7 @@ import seedu.edulog.testutil.StudentBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs(), new EdulogCalendar());
+    private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -46,7 +45,7 @@ public class EditCommandTest {
             Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(
-                new EduLog(model.getEduLog()), new UserPrefs(), new EdulogCalendar());
+                new EduLog(model.getEduLog()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -69,7 +68,7 @@ public class EditCommandTest {
             Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(
-                new EduLog(model.getEduLog()), new UserPrefs(), new EdulogCalendar());
+                new EduLog(model.getEduLog()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -84,7 +83,7 @@ public class EditCommandTest {
             Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(
-                new EduLog(model.getEduLog()), new UserPrefs(), new EdulogCalendar());
+                new EduLog(model.getEduLog()), new UserPrefs());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -102,7 +101,7 @@ public class EditCommandTest {
             Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(
-                new EduLog(model.getEduLog()), new UserPrefs(), new EdulogCalendar());
+                new EduLog(model.getEduLog()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

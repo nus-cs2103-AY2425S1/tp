@@ -90,7 +90,7 @@ public class MainApp extends Application {
             initialData = new EduLog();
         }
 
-        return new ModelManager(initialData, userPrefs, SampleDataUtil.getSampleEdulogCalendar());
+        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
