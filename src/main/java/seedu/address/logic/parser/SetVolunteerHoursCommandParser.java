@@ -28,7 +28,8 @@ public class SetVolunteerHoursCommandParser implements Parser<SetVolunteerHoursC
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SetVolunteerHoursCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_HOURS).isPresent()) {
