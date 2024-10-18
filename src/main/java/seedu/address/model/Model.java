@@ -130,4 +130,7 @@ public interface Model {
      */
     Event getEvent(int eventId);
 
+    void viewEvent(Event eventToView);
+
+    void viewVolunteer(Volunteer volunteerToView);
 }
