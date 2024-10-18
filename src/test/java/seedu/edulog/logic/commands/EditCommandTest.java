@@ -11,9 +11,9 @@ import static seedu.edulog.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulog.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,6 @@ import seedu.edulog.model.EduLog;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.testutil.EditStudentDescriptorBuilder;
 import seedu.edulog.testutil.StudentBuilder;

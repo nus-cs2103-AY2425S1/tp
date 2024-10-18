@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.edulog.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.edulog.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalNames.NAME_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalNames.NAME_SECOND_STUDENT;
-import static seedu.edulog.testutil.TypicalEdulog.getTypicalEduLog;
 
 import java.util.List;
 
@@ -19,7 +19,6 @@ import seedu.edulog.logic.Messages;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Student;
 

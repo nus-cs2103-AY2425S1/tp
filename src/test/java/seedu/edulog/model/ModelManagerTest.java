@@ -15,7 +15,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.edulog.commons.core.GuiSettings;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.NameContainsKeywordsPredicate;
 import seedu.edulog.testutil.EduLogBuilder;
 

@@ -27,7 +27,6 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.ReadOnlyEduLog;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.storage.JsonEduLogStorage;
 import seedu.edulog.storage.JsonUserPrefsStorage;

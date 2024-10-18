@@ -9,7 +9,6 @@ import seedu.edulog.model.EduLog;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
 import seedu.edulog.model.UserPrefs;
-import seedu.edulog.model.calendar.EdulogCalendar;
 
 public class ClearCommandTest {
 

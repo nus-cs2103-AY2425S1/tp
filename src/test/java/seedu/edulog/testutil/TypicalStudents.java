@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.edulog.model.EduLog;
 import seedu.edulog.model.student.Student;
 
 /**
