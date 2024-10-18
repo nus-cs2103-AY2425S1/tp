@@ -9,7 +9,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.GradingSystem;
+import  tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;

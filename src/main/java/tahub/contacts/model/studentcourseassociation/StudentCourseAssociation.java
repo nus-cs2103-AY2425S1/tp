@@ -1,6 +1,6 @@
 package tahub.contacts.model.studentcourseassociation;
 
-import seedu.address.model.GradingSystem;
+import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
 import tahub.contacts.model.courseclass.recitation.Recitation;
@@ -100,6 +100,35 @@ public class StudentCourseAssociation {
      */
     public GradingSystem getGrades() {
         return grades;
+    }
+
+    /**
+     * Adds a grade for a specific assessment.
+     *
+     * @param assessmentName the name of the assessment
+     * @param score the score achieved
+     */
+    public void addGrade(String assessmentName, double score) {
+        grades.addGrade(assessmentName, score);
+    }
+
+    /**
+     * Gets the letter grade for this StudentCourseAssociation.
+     *
+     * @return the letter grade
+     */
+    public String getLetterGrade() {
+        String name = String.valueOf (this.student.getName ());
+        return grades.getLetterGrade(name);
+    }
+
+    /**
+     * Gets the overall score for this StudentCourseAssociation.
+     *
+     * @return the overall score
+     */
+    public double getOverallScore() {
+        return grades.getOverallScore();
     }
 
     /**
