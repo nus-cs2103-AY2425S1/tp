@@ -25,15 +25,41 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name"  text="\$first" style="-fx-text-fill: #D9B08C;" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$first" style="-fx-text-fill: #D9B08C;" styleClass="cell_big_label" />
       </HBox>
+
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-      <Label fx:id="history" styleClass="cell_small_label" text="\$history" />
-      <Label fx:id="birthday" styleClass="cell_small_label" text="\$birthday" />
+
+      <HBox>
+        <Label text="Phone:" styleClass="cell_small_label"/>
+        <Label fx:id="phone" styleClass="cell_small_label" />
+      </HBox>
+
+      <HBox>
+        <Label text="Address:" styleClass="cell_small_label"/>
+        <Label fx:id="address" styleClass="cell_small_label" />
+      </HBox>
+
+      <HBox>
+        <Label text="Email:" styleClass="cell_small_label"/>
+        <Label fx:id="email" styleClass="cell_small_label" />
+      </HBox>
+
+      <HBox>
+        <Label text="Remark:" styleClass="cell_small_label"/>
+        <Label fx:id="remark" styleClass="cell_small_label" />
+      </HBox>
+
+      <HBox>
+        <Label text="Birthday:" styleClass="cell_small_label"/>
+        <Label fx:id="birthday" styleClass="cell_small_label" />
+      </HBox>
+
+      <VBox>
+        <Label text="History:" styleClass="cell_small_label"/>
+        <VBox fx:id="history" />
+      </VBox>
+
     </VBox>
   </GridPane>
 </HBox>
