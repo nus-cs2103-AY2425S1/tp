@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -77,8 +78,14 @@ public class ListAppointmentsCommand extends Command {
 
         return appointments.stream()
                 .map(person -> {
-                    LocalDateTime dateTime = LocalDateTime.parse(person.getSchedule().dateTime, inputFormatter);
-                    return String.format("%s: %s", person.getName(), dateTime.format(outputFormatter));
+                    Name personName = person.getName();
+                    String formattedSchedules = person.getSchedules().stream()
+                            .map(schedule -> {
+                                LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
+                                return dateTime.format(outputFormatter);
+                            })
+                            .collect(Collectors.joining(", "));
+                    return String.format("%s: %s", personName.fullName, formattedSchedules);
                 })
                 .collect(Collectors.joining("\n"));
     }

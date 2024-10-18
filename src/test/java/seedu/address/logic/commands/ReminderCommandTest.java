@@ -35,7 +35,8 @@ public class ReminderCommandTest {
         Reminder validReminder = new Reminder("1 day");
 
         Person scheduledPerson = new PersonBuilder(personToRemind)
-                .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
+                .withSchedule(new String[]{validSchedule.getDateTime()},
+                        new String[]{validSchedule.getNotes()}).build();
         model.setPerson(personToRemind, scheduledPerson);
 
         ReminderCommand command = new ReminderCommand(personToRemind.getName().toString(),
@@ -61,7 +62,8 @@ public class ReminderCommandTest {
 
         // Set the schedule first
         Person personWithSchedule = new PersonBuilder(personToRemind)
-                .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
+                .withSchedule(new String[]{validSchedule.getDateTime()},
+                        new String[]{validSchedule.getNotes()}).build();
         model.setPerson(personToRemind, personWithSchedule);
 
         // Create reminder command
@@ -80,7 +82,7 @@ public class ReminderCommandTest {
 
         // Set the schedule and reminder
         Person personWithReminder = new PersonBuilder(personToRemind)
-                .withSchedule(validSchedule.dateTime, validSchedule.getNotes())
+                .withSchedule(new String[]{validSchedule.getDateTime()}, new String[]{validSchedule.getNotes()})
                 .withReminder(existingReminder.getReminderTime())
                 .build();
         model.setPerson(personToRemind, personWithReminder);
@@ -103,7 +105,7 @@ public class ReminderCommandTest {
     public void execute_appointmentNotFound_throwsCommandException() {
         Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personWithoutSchedule = new PersonBuilder(personToRemind)
-                .withSchedule("", "")
+                .withSchedule(new String[]{""}, new String[]{""})
                 .build();
         model.setPerson(personToRemind, personWithoutSchedule);
 

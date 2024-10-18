@@ -4,15 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import com.fasterxml.jackson.databind.ser.impl.IteratorSerializer;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +119,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String date} and {@code String note} into a {@code Schedule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Schedule} is invalid.
+     */
+    public static Schedule parseSchedule(String dateTime, String note) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        String trimmedNote = note.trim();
+
+        Schedule.isValidDateTime(trimmedDateTime);
+        return new Schedule(trimmedDateTime, trimmedNote);
+    }
+
+    /**
+     * Parses {@code Collection<String> schedules} into a {@code Set<Schedule>}.
+     */
+    public static Set<Schedule> parseSchedules(Collection<String> dateTimes, Collection<String> notes)
+            throws ParseException {
+        requireNonNull(dateTimes);
+        final Set<Schedule> scheduleSet = new HashSet<>();
+        Iterator<String> dateTimeIterator = dateTimes.iterator();
+        Iterator<String> noteIterator = notes.iterator();
+        while (dateTimeIterator.hasNext()) {
+            scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
+        }
+        return scheduleSet;
     }
 }

@@ -106,11 +106,11 @@ public class PersonTest {
 
         // Person with future appointment
         Person personWithFutureAppointment = new PersonBuilder()
-                .withSchedule("2024-10-16 1400", "").build();
+                .withSchedule(new String[]{"2024-10-16 1400"}, new String[]{""}).build();
 
         // Person with past appointment
         Person personWithPastAppointment = new PersonBuilder()
-                .withSchedule("2024-10-14 1400", "").build();
+                .withSchedule(new String[]{"2024-10-14 1400"}, new String[]{""}).build();
 
         // Test without filters
         assertTrue(personWithFutureAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));
@@ -141,7 +141,7 @@ public class PersonTest {
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", schedule="
-                + ALICE.getSchedule() + ", reminder=" + ALICE.getReminder() + ", tags=" + ALICE.getTags() + "}";
+                + ALICE.getSchedules() + ", reminder=" + ALICE.getReminder() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }

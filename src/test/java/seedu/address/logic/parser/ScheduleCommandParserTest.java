@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +47,9 @@ public class ScheduleCommandParserTest {
         String userInput = VALID_NAME + " d/" + VALID_DATE;
         LocalDateTime expectedDate = LocalDateTime.parse(VALID_DATE, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         Schedule expectedSchedule = new Schedule(VALID_DATE, "");
-        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, expectedSchedule);
+        Set<Schedule> schedules = new HashSet<>();
+        schedules.add(expectedSchedule);
+        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, schedules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -56,7 +60,9 @@ public class ScheduleCommandParserTest {
         String userInput = "    " + VALID_NAME + "     d/" + VALID_DATE + "   ";
         LocalDateTime expectedDate = LocalDateTime.parse(VALID_DATE, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         Schedule expectedSchedule = new Schedule(VALID_DATE, "");
-        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, expectedSchedule);
+        Set<Schedule> schedules = new HashSet<>();
+        schedules.add(expectedSchedule);
+        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, schedules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
