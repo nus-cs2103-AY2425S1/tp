@@ -140,6 +140,15 @@ public class Volunteer {
     }
 
     /**
+     * Removes an event from the volunteer's list of events.
+     *
+     * @param eventToRemove The event to remove.
+     */
+    public void removeEvent(String eventToRemove) {
+        involvedIn.remove(eventToRemove);
+    }
+
+    /**
      * Returns the list of events the volunteer is involved in as an unmodifiable list.
      *
      * @return An unmodifiable ObservableList of events.
