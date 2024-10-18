@@ -35,6 +35,7 @@ import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterClientCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -175,6 +176,11 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers") instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties") instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_filterClient() throws Exception {
+        assertTrue(parser.parseCommand(FilterClientCommand.COMMAND_WORD) instanceof FilterClientCommand);
     }
 
     @Test
