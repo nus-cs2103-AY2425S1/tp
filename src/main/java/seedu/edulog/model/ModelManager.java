@@ -16,39 +16,33 @@ import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of all data, inclusive of both the student and lesson list.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final EduLog eduLog;
     private final UserPrefs userPrefs;
-
-    private final EdulogCalendar edulogCalendar;
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Lesson> lessons;
 
     /**
      * Initializes a ModelManager with the given eduLog and userPrefs.
      */
-    public ModelManager(ReadOnlyEduLog eduLog, ReadOnlyUserPrefs userPrefs, EdulogCalendar edulogCalendar) {
+    public ModelManager(ReadOnlyEduLog eduLog, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(eduLog, userPrefs);
 
-        logger.fine("Initializing with address book: " + eduLog + " and user prefs " + userPrefs);
+        logger.fine("Initializing with edulog storage: " + eduLog + " and user prefs " + userPrefs);
 
         this.eduLog = new EduLog(eduLog);
         this.userPrefs = new UserPrefs(userPrefs);
-        // Simple version - do without a persistent calendar first.
-        // TODO: Persistent storage for MVP release.
-        this.edulogCalendar = new EdulogCalendar();
 
         filteredStudents = new FilteredList<>(this.eduLog.getStudentList());
-        lessons = new FilteredList<>(this.edulogCalendar.getLessons());
-
+        lessons = new FilteredList<>(this.eduLog.getLessonList());
     }
 
     public ModelManager() {
-        this(new EduLog(), new UserPrefs(), new EdulogCalendar());
+        this(new EduLog(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -127,35 +121,35 @@ public class ModelManager implements Model {
     @Override
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        return edulogCalendar.hasLesson(lesson);
+        return eduLog.hasLesson(lesson);
     }
 
     @Override
     public void addLesson(Lesson lesson) {
         requireNonNull(lesson);
-        edulogCalendar.addLesson(lesson);
+        eduLog.addLesson(lesson);
     }
 
     @Override
     public Lesson findLesson(String description) {
         requireNonNull(description);
-        return edulogCalendar.findLesson(description);
+        return eduLog.getEdulogCalendar().findLesson(description);
     }
 
     @Override
     public boolean checkTimeslot(Lesson lesson) {
         requireNonNull(lesson);
-        return edulogCalendar.checkTimeslot(lesson);
+        return eduLog.getEdulogCalendar().checkTimeslot(lesson);
     }
 
     @Override
     public void removeLesson(Lesson lesson) {
         requireNonNull(lesson);
-        edulogCalendar.removeLesson(lesson);
+        eduLog.getEdulogCalendar().removeLesson(lesson);
     }
 
     public EdulogCalendar getEdulogCalendar() {
-        return edulogCalendar;
+        return eduLog.getEdulogCalendar();
     }
 
     //=========== Filtered Student List Accessors =============================================================

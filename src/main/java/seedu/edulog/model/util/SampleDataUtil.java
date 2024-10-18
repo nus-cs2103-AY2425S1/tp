@@ -45,11 +45,16 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyEduLog getSampleEduLog() {
-        EduLog sampleAb = new EduLog();
+        EduLog sampleEdulog = new EduLog();
         for (Student sampleStudent : getSampleStudents()) {
-            sampleAb.addStudent(sampleStudent);
+            sampleEdulog.addStudent(sampleStudent);
         }
-        return sampleAb;
+
+        for (Lesson l: getSampleLessons()) {
+            sampleEdulog.addLesson(l);
+        }
+
+        return sampleEdulog;
     }
 
     /**
@@ -72,14 +77,4 @@ public class SampleDataUtil {
         };
     }
 
-    /**
-     * Returns an EdulogCalendar to populate Edulog with sample lesson data.
-     */
-    public static EdulogCalendar getSampleEdulogCalendar() {
-        EdulogCalendar sampleCalendar = new EdulogCalendar();
-        for (Lesson l: getSampleLessons()) {
-            sampleCalendar.addLesson(l);
-        }
-        return sampleCalendar;
-    }
 }

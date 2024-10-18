@@ -1,5 +1,6 @@
 package seedu.edulog.model.calendar;
 
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -7,15 +8,19 @@ import javafx.collections.ObservableList;
  * Calendar class
  */
 public class EdulogCalendar {
-    public static final int MAX_IDENTICAL_TIMING = 2;
+    public static final int MAX_SIMULTANEOUS_TIMING = 2;
     private ObservableList<Lesson> lessons;
 
     public EdulogCalendar() {
         lessons = FXCollections.observableArrayList();
     }
 
-    public ObservableList<Lesson> getLessons() {
+    public ObservableList<Lesson> getLessonList() {
         return lessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = FXCollections.observableArrayList(lessons);
     }
 
     /**
@@ -50,7 +55,7 @@ public class EdulogCalendar {
             .filter(l -> l.getStartDay().equals(lesson.getStartDay()))
             .filter(l -> l.getStartTime().isBefore(lesson.getEndTime())
                 && lesson.getStartTime().isBefore(l.getEndTime()))
-            .count() < MAX_IDENTICAL_TIMING;
+            .count() < MAX_SIMULTANEOUS_TIMING;
     }
 
     /**

@@ -18,8 +18,8 @@ import seedu.edulog.model.calendar.Lesson;
 public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "addc";
-    public static final String OVERLOAD_IDENTICAL_TIMING =
-            "There are already " + EdulogCalendar.MAX_IDENTICAL_TIMING + " lessons with the same start and end time.";
+    public static final String OVERLOAD_SIMULTANEOUS_TIMING =
+            "There are already " + EdulogCalendar.MAX_SIMULTANEOUS_TIMING + " lessons overlapping this lesson's time.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the calendar. "
             + "Parameters: "
@@ -55,7 +55,7 @@ public class AddLessonCommand extends Command {
         }
 
         if (!model.checkTimeslot(toAdd)) {
-            throw new CommandException(OVERLOAD_IDENTICAL_TIMING);
+            throw new CommandException(OVERLOAD_SIMULTANEOUS_TIMING);
         }
 
         model.addLesson(toAdd);

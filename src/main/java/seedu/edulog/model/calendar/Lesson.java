@@ -72,10 +72,20 @@ public class Lesson {
         return startDay;
     }
 
+    /**
+     * Getter method that attains the DayOfWeek representation of the start time for time-based methods. <br> <br>
+     * NOTE: If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
+     * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
+     */
     public LocalTime getStartTime() {
         return startTime;
     }
 
+    /**
+     * Getter method that attains the DayOfWeek representation of the end time for time-based methods. <br> <br>
+     * NOTE: If you want to attain a printable representation of time, please use {@link #getFormattedStartTime()}
+     * instead, which ensures that times can be presented and stored in an acceptable 24-hour format.
+     */
     public LocalTime getEndTime() {
         return endTime;
     }
@@ -101,7 +111,7 @@ public class Lesson {
     /**
      * Checks that lesson times are not ambiguous, i.e. not the same start and end time.
      */
-    private static boolean checkValidTimes(LocalTime time1, LocalTime time2) {
+    public static boolean checkValidTimes(LocalTime time1, LocalTime time2) {
         return !time1.equals(time2);
     }
 

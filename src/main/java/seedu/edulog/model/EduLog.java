@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.edulog.commons.util.ToStringBuilder;
+import seedu.edulog.model.calendar.EdulogCalendar;
+import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Student;
 import seedu.edulog.model.student.UniqueStudentList;
 
@@ -16,6 +18,7 @@ import seedu.edulog.model.student.UniqueStudentList;
 public class EduLog implements ReadOnlyEduLog {
 
     private final UniqueStudentList students;
+    private final EdulogCalendar edulogCalendar;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +29,7 @@ public class EduLog implements ReadOnlyEduLog {
      */
     {
         students = new UniqueStudentList();
+        edulogCalendar = new EdulogCalendar();
     }
 
     public EduLog() {}
@@ -49,12 +53,21 @@ public class EduLog implements ReadOnlyEduLog {
     }
 
     /**
+     * Replaces the contents of the lesson list with {@code lessons}.
+     * {@code lessons} must not contain duplicate lessons.
+     */
+    public void setLessons(List<Lesson> lessons) {
+        this.edulogCalendar.setLessons(lessons);
+    }
+
+    /**
      * Resets the existing data of this {@code EduLog} with {@code newData}.
      */
     public void resetData(ReadOnlyEduLog newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setLessons(newData.getLessonList());
     }
 
     //// student-level operations
@@ -94,18 +107,54 @@ public class EduLog implements ReadOnlyEduLog {
         students.remove(key);
     }
 
+    //// lesson-level operations
+
+    /**
+     * Returns true if a lesson with the same identity as {@code lesson} exists in the edulog book.
+     */
+    public boolean hasLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return edulogCalendar.hasLesson(lesson);
+    }
+
+    /**
+     * Adds a student to the edulog book.
+     * The student must not already exist in the edulog book - callee functions should consider the use
+     * of hasLesson(Lesson) before to ensure that this precondition is met.
+     */
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        edulogCalendar.addLesson(lesson);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("students", students)
+                .add("lessons", edulogCalendar.getLessonList())
                 .toString();
     }
 
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Simple getter function to obtain just the list of lessons for printing and UI.
+     */
+    @Override
+    public ObservableList<Lesson> getLessonList() {
+        return edulogCalendar.getLessonList();
+    }
+
+    /**
+     * Advanced getter function to obtain the entire calendar with more advanced validators.
+     */
+    public EdulogCalendar getEdulogCalendar() {
+        return edulogCalendar;
     }
 
     @Override
@@ -120,7 +169,8 @@ public class EduLog implements ReadOnlyEduLog {
         }
 
         EduLog otherEduLog = (EduLog) other;
-        return students.equals(otherEduLog.students);
+        return students.equals(otherEduLog.students)
+            && edulogCalendar.getLessonList().equals(otherEduLog.edulogCalendar.getLessonList());
     }
 
     @Override

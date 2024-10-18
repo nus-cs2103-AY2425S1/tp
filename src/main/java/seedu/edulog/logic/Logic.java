@@ -25,9 +25,9 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the Edulog book, inclusive of both lessons and students.
      *
-     * @see seedu.address.model.Model#getEduLog()
+     * @see seedu.edulog.model.Model#getEduLog()
      */
     ReadOnlyEduLog getEduLog();
 
@@ -38,7 +38,7 @@ public interface Logic {
     ObservableList<Lesson> getLessonList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' edulog book file path.
      */
     Path getAddressBookFilePath();
 
