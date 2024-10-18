@@ -54,35 +54,19 @@ public class GetCommand extends Command {
             switch (parameters[i]) {
 
             case "e/":
-                for (int j = 0; j < size - 1; j++) {
-                    s += lastShownList.get(j).getEmail() + ",\n";
-                }
-                s += lastShownList.get(size - 1).getEmail() + "\n";
-                resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "EMAIL", s) + "\n";
+                resultString += getEmailMessage(lastShownList);
                 break;
 
             case "p/":
-                for (int j = 0; j < size - 1; j++) {
-                    s += lastShownList.get(j).getPhone() + ",\n";
-                }
-                s += lastShownList.get(size - 1).getPhone() + "\n";
-                resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "PHONE NUMBER", s) + "\n";
+                resultString += getPhoneNumberMessage(lastShownList);
                 break;
 
             case "n/":
-                for (int j = 0; j < size - 1; j++) {
-                    s += lastShownList.get(j).getName() + ",\n";
-                }
-                s += lastShownList.get(size - 1).getName() + "\n";
-                resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "NAME", s) + "\n";
+                resultString += getNameMessage(lastShownList);
                 break;
 
             case "a/":
-                for (int j = 0; j < size - 1; j++) {
-                    s += lastShownList.get(j).getAddress() + ",\n";
-                }
-                s += lastShownList.get(size - 1).getAddress() + "\n";
-                resultString += String.format(MESSAGE_GET_PARAMETER_SUCCESS, "ADDRESS", s) + "\n";
+                resultString += getAddressMessage(lastShownList);
                 break;
 
             default:
@@ -91,6 +75,62 @@ public class GetCommand extends Command {
         }
 
         return new CommandResult(resultString);
+    }
+
+    /**
+     * Returns the emails of all the people in current list.
+     *
+     * @param currList current list.
+     * @return string message of all the emails.
+     */
+    public static String getEmailMessage(List<Person> currList) {
+        String message = currList.stream()
+                .map(person -> person.getEmail().toString())
+                .reduce((email1, email2) -> email1 + ",\n" + email2)
+                .orElse("");
+        return String.format(MESSAGE_GET_PARAMETER_SUCCESS, "EMAIL", message) + "\n\n";
+    }
+
+    /**
+     * Returns the phone numbers of all the people in current list.
+     *
+     * @param currList current list.
+     * @return string message of all the phone numbers.
+     */
+    public static String getPhoneNumberMessage(List<Person> currList) {
+        String message = currList.stream()
+                .map(person -> person.getPhone().toString())
+                .reduce((phone1, phone2) -> phone1 + ",\n" + phone2)
+                .orElse("");
+        return String.format(MESSAGE_GET_PARAMETER_SUCCESS, "PHONE NUMBER", message) + "\n\n";
+    }
+
+    /**
+     * Returns the name of all the people in current list.
+     *
+     * @param currList current list.
+     * @return string message of all the names.
+     */
+    public static String getNameMessage(List<Person> currList) {
+        String message = currList.stream()
+                .map(person -> person.getName().toString())
+                .reduce((name1, name2) -> name1 + ",\n" + name2)
+                .orElse("");
+        return String.format(MESSAGE_GET_PARAMETER_SUCCESS, "NAME", message) + "\n\n";
+    }
+
+    /**
+     * Returns the addresses of all the people in current list.
+     *
+     * @param currList current list.
+     * @return string message of all the addresses.
+     */
+    public static String getAddressMessage(List<Person> currList) {
+        String message = currList.stream()
+                .map(person -> person.getAddress().toString())
+                .reduce((address1, address2) -> address1 + ",\n" + address2)
+                .orElse("");
+        return String.format(MESSAGE_GET_PARAMETER_SUCCESS, "ADDRESS", message) + "\n\n";
     }
 
     @Override

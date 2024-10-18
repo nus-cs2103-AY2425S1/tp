@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.GetCommand.getAddressMessage;
+import static seedu.address.logic.commands.GetCommand.getEmailMessage;
+import static seedu.address.logic.commands.GetCommand.getNameMessage;
+import static seedu.address.logic.commands.GetCommand.getPhoneNumberMessage;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_ALL;
 import static seedu.address.testutil.TypicalParams.PARAMS_ARRAY_FIRST;
@@ -39,32 +43,12 @@ public class GetCommandTest {
     public void execute_validParamsUnfilteredList_success() {
         GetCommand getCommand = new GetCommand(PARAMS_ARRAY_ALL);
         ObservableList<Person> personList = expectedModel.getAddressBook().getPersonList();
-        String names = "";
-        String phoneNumbers = "";
-        String emails = "";
-        String addresses = "";
-        for (int i = 0; i < personList.size() - 1; i++) {
-            names += personList.get(i).getName() + "," + "\n";
-        }
-        names += personList.get(personList.size() - 1).getName() + "\n\n";
-        for (int i = 0; i < personList.size() - 1; i++) {
-            phoneNumbers += personList.get(i).getPhone() + "," + "\n";
-        }
-        phoneNumbers += personList.get(personList.size() - 1).getPhone() + "\n\n";
-        for (int i = 0; i < personList.size() - 1; i++) {
-            emails += personList.get(i).getEmail() + "," + "\n";
-        }
-        emails += personList.get(personList.size() - 1).getEmail() + "\n\n";
-        for (int i = 0; i < personList.size() - 1; i++) {
-            addresses += personList.get(i).getAddress() + "," + "\n";
-        }
-        addresses += personList.get(personList.size() - 1).getAddress() + "\n\n";
-        String expectedMessage = String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "NAME", names)
-                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS, "PHONE NUMBER", phoneNumbers)
-                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS, "EMAIL", emails)
-                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS, "ADDRESS", addresses);
+        String names = getNameMessage(personList);
+        String phoneNumbers = getPhoneNumberMessage(personList);
+        String emails = getEmailMessage(personList);
+        String addresses = getAddressMessage(personList);
 
+        String expectedMessage = names + phoneNumbers + emails + addresses;
         assertCommandSuccess(getCommand, model, expectedMessage, expectedModel);
     }
 
@@ -80,13 +64,12 @@ public class GetCommandTest {
     public void execute_validParamsFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        ObservableList<Person> curr = model.getFilteredPersonList();
+        ObservableList<Person> currList = model.getFilteredPersonList();
         GetCommand getCommand = new GetCommand(PARAMS_ARRAY_SECOND);
 
-        String expectedMessage = String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "NAME", curr.get(0).getName()) + "\n\n"
-                + String.format(GetCommand.MESSAGE_GET_PARAMETER_SUCCESS,
-                "ADDRESS", curr.get(0).getAddress()) + "\n\n";
+        String names = getNameMessage(currList);
+        String addresses = getAddressMessage(currList);
+        String expectedMessage = names + addresses;
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
         assertCommandSuccess(getCommand, model, expectedMessage, expectedModel);
     }

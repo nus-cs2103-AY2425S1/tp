@@ -2,9 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -25,7 +26,7 @@ public class StatisticsCommand extends Command {
     public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
     public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
     public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
-    private String resultMessage;
+    private String resultMessage = "";
 
     /**
      * Displays all the overall statistics to be shown.
@@ -36,44 +37,65 @@ public class StatisticsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String s = "";
-        int nbOfPeople = lastShownList.size();
-        int highPriority = 0;
-        int mediumPriority = 0;
-        int lowPriority = 0;
         String[] allStats = new String[4];
-        allStats[0] = String.format(MESSAGE_DISPLAY_TOTAL_PEOPLE, nbOfPeople);
-        allStats[1] = String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, highPriority);
-        allStats[2] = String.format(MESSAGE_DISPLAY_MEDIUM_PRIORITY, mediumPriority);
-        allStats[3] = String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
-        for (int i = 0; i < nbOfPeople; i++) {
-            Priority pri = lastShownList.get(i).getPriority();
+        allStats[0] = nbOfPeople(lastShownList);
+        allStats[1] = highPriorityPeople(lastShownList);
+        allStats[2] = mediumPriorityPeople(lastShownList);
+        allStats[3] = lowPriorityPeople(lastShownList);
 
-            switch (pri) {
+        resultMessage = Arrays.stream(allStats)
+                .collect(Collectors.joining("\n"));
 
-            case HIGH:
-                highPriority++;
-                break;
-            case MEDIUM:
-                mediumPriority++;
-                break;
-
-            case LOW:
-                lowPriority++;
-                break;
-
-            default:
-                throw new CommandException(Messages.MESSAGE_LACK_PRIORITY);
-            }
-        }
-        allStats[1] = String.format("Number Of HIGH Priority People: %s", highPriority);
-        allStats[2] = String.format("Number Of MEDIUM Priority People: %s", mediumPriority);
-        allStats[3] = String.format("Number Of LOW Priority People: %s", lowPriority);
-        for (int i = 0; i < allStats.length; i++) {
-            s += allStats[i] + "\n";
-        }
-        resultMessage = s;
         return new CommandResult(String.format(MESSAGE_DISPLAY_STATISTICS_SUCCESS, resultMessage));
+    }
+
+    /**
+     * Returns a message with total number of people in current list.
+     *
+     * @param currList current list.
+     * @return string message of total number of people.
+     */
+    public static String nbOfPeople(List<Person> currList) {
+        return String.format(MESSAGE_DISPLAY_TOTAL_PEOPLE, currList.size());
+    }
+
+    /**
+     * Returns a message with number of high priority people in current list.
+     *
+     * @param currList current list.
+     * @return string message of number of high priority people.
+     */
+    public static String highPriorityPeople(List<Person> currList) {
+        long highPriority = currList.stream()
+                .filter(person -> person.getPriority() == Priority.HIGH)
+                .count();
+        return String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, highPriority);
+    }
+
+    /**
+     * Returns a message with number of medium priority people in current list.
+     *
+     * @param currList current list.
+     * @return string message of number of medium priority people.
+     */
+    public static String mediumPriorityPeople(List<Person> currList) {
+        long mediumPriority = currList.stream()
+                .filter(person -> person.getPriority() == Priority.MEDIUM)
+                .count();
+        return String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, mediumPriority);
+    }
+
+    /**
+     * Returns a message with number of low priority people in current list.
+     *
+     * @param currList current list.
+     * @return string message of number of low priority people.
+     */
+    public static String lowPriorityPeople(List<Person> currList) {
+        long lowPriority = currList.stream()
+                .filter(person -> person.getPriority() == Priority.LOW)
+                .count();
+        return String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, lowPriority);
     }
 
     public String getResultMessage() {

@@ -18,24 +18,21 @@ public class GetCommandParser implements Parser<GetCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GetCommand parse(String args) throws ParseException {
-        try {
-            String[] parameters = args.trim().split(" ");
-            int size = parameters.length;
-            for (int i = 0; i < size; i++) {
-                String trimmedParam = parameters[i].trim();
-                if (!trimmedParam.matches("^[a-zA-Z]+/$")) {
-                    throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
-                }
-            }
-            String[] uniqueParams = Arrays.stream(parameters)
-                    .distinct()
-                    .toArray(String[]::new);
-            return new GetCommand(uniqueParams);
 
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE), pe);
+        String[] parameters = args.trim().split(" ");
+        int size = parameters.length;
+        for (int i = 0; i < size; i++) {
+            String trimmedParam = parameters[i].trim();
+            if (!trimmedParam.matches("^[a-zA-Z]+/$")) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetCommand.MESSAGE_USAGE));
+            }
         }
+        String[] uniqueParams = Arrays.stream(parameters)
+                .distinct()
+                .toArray(String[]::new);
+        return new GetCommand(uniqueParams);
+
     }
 }
+
