@@ -36,10 +36,6 @@ public class Messages {
      * Formats the {@code person} for display to the user.
      */
     public static String format(Person person) {
-        if (person instanceof Student student) {
-            return student.getName().toString();
-        }
-
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; Phone: ")
@@ -53,4 +49,26 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code student} for display to the user.
+     */
+    public static String format(Student student) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(student.getName())
+                .append("; Phone: ")
+                .append(student.getPhone())
+                .append("; Tutorial Group: ")
+                .append(student.getTutorialGroup())
+                .append("; Student Number: ")
+                .append(student.getStudentNumber());
+
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code studentName} for display to the user.
+     */
+    public static String formatStudentName(Student student) {
+        return student.getName().toString();
+    }
 }

@@ -13,7 +13,7 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Hugh Jackman";
     public static final String DEFAULT_CONTACT_NUMBER = "91234567";
     public static final String DEFAULT_TUTORIAL_GROUP = "G01";
-    public static final String DEFAULT_STUDENT_NUMBER = "A1234567A";
+    public static final String DEFAULT_STUDENT_NUMBER = "A1234568A";
 
     private Name name;
     private Phone phone;

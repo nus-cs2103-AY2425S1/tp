@@ -52,13 +52,13 @@ public class AddStudentCommand extends Command {
         }
 
         model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.formatStudentName(toAdd)));
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddStudentCommand // instanceof handles nulls
+        return other == this
+                || (other instanceof AddStudentCommand
                 && toAdd.equals(((AddStudentCommand) other).toAdd));
     }
 }

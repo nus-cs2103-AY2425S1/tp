@@ -25,12 +25,14 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
+    // ----------------- Student related fields --------------------------------------------
     public static final String VALID_NAME_HUGH = "Hugh Jackman";
     public static final String VALID_NAME_DIDDY = "Puff Daddy";
     public static final String VALID_PHONE_HUGH = "33333333";
@@ -39,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_TUTORIAL_GROUP_DIDDY = "G04";
     public static final String VALID_STUDENT_NUMBER_HUGH = "A1234567A";
     public static final String VALID_STUDENT_NUMBER_DIDDY = "A7654321A";
+
+    // ----------------- Person related fields --------------------------------------------
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
@@ -101,7 +105,6 @@ public class CommandTestUtil {
     public static final String GRADE_DESC_80 = " " + PREFIX_GRADE + VALID_GRADE_80;
     public static final String GRADE_DESC_95 = " " + PREFIX_GRADE + VALID_GRADE_95;
 
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -115,6 +118,19 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    }
+
+    public static final EditStudentCommand.EditStudentDescriptor DESC_HUGH;
+    public static final EditStudentCommand.EditStudentDescriptor DESC_DIDDY;
+
+    // ----------------- Student edit descriptors --------------------------------------------
+    static {
+        DESC_HUGH = new EditStudentDescriptorBuilder().withName(VALID_NAME_HUGH)
+                .withPhone(VALID_PHONE_HUGH).withTutorialGroup(VALID_TUTORIAL_GROUP_HUGH)
+                .withStudentNumber(VALID_STUDENT_NUMBER_HUGH).build();
+        DESC_DIDDY = new EditStudentDescriptorBuilder().withName(VALID_NAME_DIDDY)
+                .withPhone(VALID_PHONE_DIDDY).withTutorialGroup(VALID_TUTORIAL_GROUP_DIDDY)
+                .withStudentNumber(VALID_STUDENT_NUMBER_DIDDY).build();
     }
 
     /**

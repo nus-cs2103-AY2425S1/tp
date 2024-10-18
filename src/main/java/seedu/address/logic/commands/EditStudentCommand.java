@@ -55,10 +55,10 @@ public class EditStudentCommand extends Command {
      */
     public EditStudentCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
-        requireNonNull(EditStudentCommand.this.editStudentDescriptor);
+        requireNonNull(editStudentDescriptor);
 
         this.index = index;
-        this.editStudentDescriptor = new EditStudentDescriptor(EditStudentCommand.this.editStudentDescriptor);
+        this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
     }
 
     @Override
@@ -68,6 +68,10 @@ public class EditStudentCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (!editStudentDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(MESSAGE_NOT_EDITED);
         }
 
         Student personToEdit = lastShownList.get(index.getZeroBased());
@@ -117,7 +121,7 @@ public class EditStudentCommand extends Command {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editStudentDescriptor", editStudentDescriptor)
+                .add("editStudentDescriptor", editStudentDescriptor.toString())
                 .toString();
     }
 
