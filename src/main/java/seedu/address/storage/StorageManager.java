@@ -20,6 +20,9 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
+    // Path for the manual save/load file
+    private Path manualSaveFilePath;
+
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
@@ -75,4 +78,38 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ Manual Save/Load Methods ==============================
+
+    public Path getManualSaveFilePath() {
+        return addressBookStorage.getManualSaveFilePath();
+    }
+
+    /**
+     * Manually saves the address book to the specified file path.
+     *
+     * @param addressBook The address book data to save.
+     * @throws IOException If there is an error saving the file.
+     */
+    public void saveAddressBookManually(ReadOnlyAddressBook addressBook) throws IOException {
+        if (manualSaveFilePath == null) {
+            throw new IOException("Manual save file path is not set.");
+        }
+        logger.fine("Attempting to manually write to file: " + manualSaveFilePath);
+        addressBookStorage.saveAddressBook(addressBook, manualSaveFilePath);
+    }
+
+    /**
+     * Manually loads the address book from the specified file path.
+     *
+     * @return An optional containing the address book if successfully loaded, otherwise an empty optional.
+     * @throws DataLoadingException If there is an error loading the file.
+     */
+    public Optional<ReadOnlyAddressBook> loadAddressBookManually() throws Exception {
+        if (manualSaveFilePath == null) {
+            throw new Exception("Manual load file path is not set.");
+        }
+        logger.fine("Attempting to manually read from file: " + manualSaveFilePath);
+        return addressBookStorage.readAddressBook(manualSaveFilePath);
+    }
+    
 }
