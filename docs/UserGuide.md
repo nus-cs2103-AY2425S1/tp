@@ -100,6 +100,34 @@ Format: `reset`
 Examples: 
 * `view e/ 1` followed by `reset` causes the volunteer and event lists to display all volunteers and events respectively.
 
+### Locating volunteers by name : `/v find`
+
+Find volunteers whose name contains the given keyword.
+
+Format: `/v find KEYWORD`
+
+* The search is case-insensitive
+* Only the name is searched
+* The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
+    * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
+
+Examples:
+* `/v find Yeoh` returns `Alexa Yeoh` and `Yeoh Rain`
+
+### Locating events by name : `/e find`
+
+Find events with names containing the given keyword.
+
+Format: `/e find KEYWORD`
+
+* The search is case-insensitive.
+* Only the name is searched.
+* The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
+    * e.g. `Group` will match `Group Project`, `Grouping Task` and `Group`.
+
+Examples:
+* `/v find Forest` returns `Forest Ranger Camp` and `Reforesting`
+
 ### Deleting a volunteer : `/v del`
 
 Deletes the specified volunteer from the database.
@@ -208,8 +236,10 @@ AddressBook data are saved in the hard disk automatically after any command that
 |----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIME e/ END_TIME`<br/>`e.g. /v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`                                                                                                |
 | **Delete Volunteer**                         | `/v del EVENT_INDEX`<br/>`e.g. /v del 1`                                                                                                                                                                                                                                           |
+| **Find Volunteer** | `/v find KEYWORD`<br/>`e.g. /v find Yeoh`|
 | **Add Event**                                | `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`<br/>`e.g. /e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`<br/>`e.g. /e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12` |
 | **Delete Event**                             | `/e del EVENT_INDEX`<br/>`e.g. /e del 1`                                                                                                                                                                                                                                           |
+| **Find Event** | `/e find KEYWORD`<br/>`e.g. /e find Forest`|
 | **Add Volunteer to Event**                   | `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. assign v/ 1 e/ 2`                                                                                                                                                                                                             |
 | **Remove Volunteer from Event**              | `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. unassign v/ 1 e/ 2`                                                                                                                                                                                                         |
 | **List all Volunteers involved in an Event** | `view e/ EVENT_INDEX`<br/>`e.g. view e/ 1`                                                                                                                                                                                                                                         |
