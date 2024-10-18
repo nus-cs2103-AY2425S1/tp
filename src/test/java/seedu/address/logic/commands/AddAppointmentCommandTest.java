@@ -44,10 +44,11 @@ public class AddAppointmentCommandTest {
 
         assertEquals(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
                 commandResult.getFeedbackToUser());
-        String expectedAppointments = "All appointments for you in the database:\n"
-                + "Appointment: Id{id=4, role=Patient} (patient id) "
-                + "with Id{id=4, role=Doctor} (doctor id). Remarks: "
-                + "\n";
+        String expectedAppointments = String.format("All appointments for you in the database:\n"
+                + "Appointment: Id{id=%1$d, role=Patient} (patient id) "
+                + "with Id{id=%2$d, role=Doctor} (doctor id). Remarks: "
+                + "\n", validPatient.getId().getIdValue(), validDoctor.getId().getIdValue());
+
         assertEquals(expectedAppointments, validDoctor.getAllAppointments());
     }
     @Test
@@ -193,7 +194,6 @@ public class AddAppointmentCommandTest {
     private class ModelStubAcceptingAppointmentAdded extends AddAppointmentCommandTest.ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
-        // Maps to store patients and doctors by their IDs
         private final ArrayList<Person> personList = new ArrayList<>();
 
         @Override
