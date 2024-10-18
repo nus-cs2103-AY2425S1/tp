@@ -7,7 +7,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.contactrecord.ContactRecord;
-import seedu.address.model.contactrecord.ContactRecordList;
 
 /**
  * Panel containing the list of call history.
@@ -26,6 +25,7 @@ public class CallHistoryPanel extends UiPart<Region> {
         super(FXML);
         items = FXCollections.observableArrayList();
         callHistoryView.setItems(items);
+        System.out.println("DEBUG" + items.toString());
         callHistoryView.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(ContactRecord contactRecord, boolean empty) {
@@ -45,7 +45,7 @@ public class CallHistoryPanel extends UiPart<Region> {
     /**
      * Initializes the call history panel with the given {@code ContactRecordList}.
      */
-    public void initializeCallHistory(ContactRecordList history) {
+    public void initializeCallHistory(ObservableList<ContactRecord> history) {
         items.clear();
         items.addAll(FXCollections.observableArrayList(history));
     }
