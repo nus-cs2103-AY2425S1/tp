@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: mutable, claim description must follow validation rules.
  */
 public class Claim {
-
+    public static final String CLAIM_STATUS_MESSAGE_CONSTRAINTS = "Claim status can only be "
+            + getValidClaimStatusesAsString() + ".";
     /**
      * Error message if the claim description does not meet validation requirements.
      */
@@ -127,5 +128,17 @@ public class Claim {
     @Override
     public int hashCode() {
         return description.hashCode();
+    }
+
+    private static String getValidClaimStatusesAsString() {
+        StringBuilder result = new StringBuilder();
+        ClaimStatus[] validClaimStatuses = ClaimStatus.values();  // Assuming ClaimStatus is an enum
+
+        for (int i = 0; i < validClaimStatuses.length - 1; i++) {
+            result.append(validClaimStatuses[i] + ", ");
+        }
+        result.append("or " + validClaimStatuses[validClaimStatuses.length - 1]);
+
+        return result.toString();
     }
 }
