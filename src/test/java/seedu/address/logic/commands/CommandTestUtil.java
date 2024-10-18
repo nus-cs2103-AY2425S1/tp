@@ -10,7 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -41,6 +43,19 @@ public class CommandTestUtil {
     public static final String VALID_TUTORIAL_GROUP_DIDDY = "G04";
     public static final String VALID_STUDENT_NUMBER_HUGH = "A1234567A";
     public static final String VALID_STUDENT_NUMBER_DIDDY = "A7654321A";
+
+    public static final String NAME_DESC_HUGH = " " + PREFIX_NAME + VALID_NAME_HUGH;
+    public static final String NAME_DESC_DIDDY = " " + PREFIX_NAME + VALID_NAME_DIDDY;
+    public static final String PHONE_DESC_HUGH = " " + PREFIX_PHONE + VALID_PHONE_HUGH;
+    public static final String PHONE_DESC_DIDDY = " " + PREFIX_PHONE + VALID_PHONE_DIDDY;
+    public static final String TUTORIAL_GROUP_DESC_HUGH = " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_HUGH;
+    public static final String TUTORIAL_GROUP_DESC_DIDDY = " " + PREFIX_TUTORIAL_GROUP + VALID_TUTORIAL_GROUP_DIDDY;
+    public static final String STUDENT_NUMBER_DESC_HUGH = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_HUGH;
+    public static final String STUDENT_NUMBER_DESC_DIDDY = " " + PREFIX_STUDENT_NUMBER + VALID_STUDENT_NUMBER_DIDDY;
+    public static final String INVALID_TUTORIAL_GROUP_DESC = " " + PREFIX_TUTORIAL_GROUP
+            + "G0!"; // '!' not allowed in tutorial groups
+    public static final String INVALID_STUDENT_NUMBER_DESC = " " + PREFIX_STUDENT_NUMBER
+            + "A1234567"; // missing last character
 
     // ----------------- Person related fields --------------------------------------------
     public static final String VALID_NAME_AMY = "Amy Bee";
@@ -108,6 +123,7 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
+    // ----------------- Person edit descriptors --------------------------------------------
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 

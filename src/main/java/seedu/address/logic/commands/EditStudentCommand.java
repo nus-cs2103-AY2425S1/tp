@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
@@ -95,8 +95,10 @@ public class EditStudentCommand extends Command {
 
         Name updatedName = editStudentDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editStudentDescriptor.getPhone().orElse(personToEdit.getPhone());
-        TutorialGroup updatedTutorialGroup = editStudentDescriptor.getTutorialGroup().orElse(personToEdit.getTutorialGroup());
-        StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber().orElse(personToEdit.getStudentNumber());
+        TutorialGroup updatedTutorialGroup = editStudentDescriptor.getTutorialGroup()
+                .orElse(personToEdit.getTutorialGroup());
+        StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber()
+                .orElse(personToEdit.getStudentNumber());
 
         return new Student(updatedName, updatedPhone, updatedTutorialGroup,
                 updatedStudentNumber, personToEdit.getAssignments());

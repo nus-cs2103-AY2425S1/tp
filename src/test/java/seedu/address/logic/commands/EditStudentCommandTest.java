@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_HUGH;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_HUGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -25,14 +24,10 @@ import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
-import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.UserPrefs;
-import seedu.address.testutil.StudentBuilder;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class EditStudentCommandTest {
 
@@ -44,7 +39,8 @@ public class EditStudentCommandTest {
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent));
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
@@ -64,7 +60,8 @@ public class EditStudentCommandTest {
                 .withPhone(VALID_PHONE_DIDDY).build();
         EditStudentCommand editStudentCommand = new EditStudentCommand(indexLastPerson, descriptor);
 
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent));
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_STUDENT_SUCCESS,
+                Messages.format(editedStudent));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(lastStudent, editedStudent);
 
