@@ -158,102 +158,62 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### \[Proposed\] View Client feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `ViewClientCommandPasrse#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
+* `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+Given below is an example usage scenario and how the View Client mechanism behaves at each step.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Step 1. The user launches the application, all clients will be listed by default.
+        OR The user calls a List/ Find command.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 2. The user executes `view-client 1` command to view the first person in the Client list.
 
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view-client 2` command to view the second person in the Client list.
 
 <box type="info" seamless>
 
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+**Note:** Only one `MATER - View Client` Window to be displayed at all times. Calling `view-client` will display the latest request. Concurrent edits to Client details will not be updated on the `MATER - View Client` Window, `view-client` must be called again to reflect the changes.
 
 </box>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user closes the `MATER - View Client` Window by either pressing the Close button (bottom) or Terminate button (top).
 
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+The following sequence diagram shows how a `view-client` operation goes through the `UI` and `Logic` component:
 
+<puml src="diagrams/ViewClientSequenceDiagram.puml" alt="ViewClientSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+**Note:** The lifeline for `ViewClientCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+The following activity diagram summarizes what happens when a user executes a `view-client` command:
 
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+<puml src="diagrams/ViewClientActivityDiagram.puml" width="250" />
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How View Client executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Opens a new `MATER - View Client` Window
+  * Pros: Easy to implement, possible to extend the feature to open multiple windows for multiple different clients in the future.
+  * Cons: Fussy users may prefer to view client details within one `MATER` Main Window.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** Displays Client details on the `MATER` Main Window.
+  * Pros: Will only ever have one window for the whole application.
+  * Cons: List of clients will be replaced by the Client details, extra effort to list Clients again.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### \[Proposed\] Check in/ out feature
 
-_{Explain here how the data archiving feature will be implemented}_
+_{Explain here how the check in/out feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -331,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a Client.
+1.  User requests to add a Client.
 2.  MATER adds the Client and displays a confirmation message.
 
     Use case ends.
@@ -347,17 +307,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list a limited number of Clients.
+1.  User requests to list Clients.
 2.  MATER shows the list of Clients and displays a confirmation message.
 
     Use case ends.
-
-**Extensions**
-
-* 1a. The given list size limit is invalid.
-    * 1a1. MATER shows an error message.
-
-      Use case resumes from step 1.
 
 **Use case: UC3 - Delete a Client**
 
@@ -376,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -398,7 +351,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -432,7 +385,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -454,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   Use case ends.
 
 
-* 2a. The given Client id is invalid.
+* 2a. The given index is invalid.
     * 2a1. MATER shows an error message.
 
       Use case resumes from step 2.
@@ -494,144 +447,44 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes from step 2.
 
 
-* 2b. The given Client id is invalid.
+* 2b. The given index is invalid.
     * 2b1. MATER shows an error message.
 
       Use case resumes from step 2.
 
-**Use case: UC8 - Edit a Car of a Client**
+**Use case: UC8 - Check in/out Client**
 
 **MSS**
 
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to edit a specific field of the Client's Car.
-3.  MATER edits the field of the Client's Car and displays a confirmation message.
+1.  User <u>list Clients (UC2)</u>.
+2.  User requests to check in/out a specific Client in the list.
+3.  MATER checks in/out Client and displays a confirmation message.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
+* 1a. The list is empty.
 
-      Use case resumes from step 1.
+  Use case ends.
 
-
-* 2b. The given Client id is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2c. The given field tag is invalid.
-    * 2c1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2d. The given new value is invalid.
-    * 2d1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-**Use case: UC9 - Add Issue to Client's Car**
+**Use case: UC9 - List Clients which are checked in/out**
 
 **MSS**
 
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to add an Issue to the Client's Car.
-3.  MATER adds the Issue to the Client's Car and displays a confirmation message.
+1.  User requests to list all Clients which are checked in/out
+2.  MATER shows the list of Clients which are checked in/out and displays a confirmation message.
 
     Use case ends.
 
-**Extensions**
-
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2b. The given Client id is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2c. The given Issue description is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-**Use case: UC10 - Delete Issue from Client's Car**
+**Use case: UC10 - Filter Clients by keywords**
 
 **MSS**
 
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to delete an Issue from the Client's Car.
-3.  MATER deletes the Issue from the Client's Car and displays a confirmation message.
+1.  User requests to filter Clients by keywords
+2.  MATER shows the list of filtered Clients and displays a confirmation message.
 
     Use case ends.
-
-**Extensions**
-
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2b. The Car does not have an Issue associated to it.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2c. The given Client id number is invalid.
-    * 2c1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2d. The given Issue id is invalid.
-    * 2d1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-**Use case: UC11 - Edit Issue of Client's Car**
-
-**MSS**
-
-1.  User <u>views a Client (UC5)</u>.
-2.  User requests to edit an Issue of the Client's Car
-3.  MATER edits the Issue of the Client's Car and displays a confirmation message.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The Client does not have a Car associated to them.
-    * 2a1. MATER shows an error message.
-
-      Use case resumes from step 1.
-
-
-* 2b. The given Client id is invalid.
-    * 2b1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2c. The given Issue id is invalid.
-    * 2c1. MATER shows an error message.
-
-      Use case resumes from step 2.
-
-
-* 2d. The given new Issue description is invalid.
-    * 2d1. MATER shows an error message.
-
-      Use case resumes from step 2.
 
 ### Non-Functional Requirements
 
@@ -644,7 +497,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 7. The system shall handle errors gracefully without crashing.
 8. All exceptions shall be caught and managed appropriately to maintain system stability.
 
-*{More to be added}*
 
 ### Glossary
 
@@ -654,7 +506,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client**: A customer whose personal details and associated car information are stored in the system. This refers to anyone bringing a vehicle in for servicing.
 * **Car**: A vehicle brought in by a client for servicing. Each car is associated with a client.
 * **Issue**: A problem or task that needs to be addressed for a specific car with its status and details. Each client can have multiple issues associated with them.
-
 
 
 --------------------------------------------------------------------------------------------------------------------
