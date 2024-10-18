@@ -71,6 +71,7 @@ public class AddClaimCommand extends Command {
 
         AddClaimCommand otherCommand = (AddClaimCommand) other;
         return index.equals(otherCommand.index)
+                && policyType.equals(otherCommand.policyType)
                 && claim.equals(otherCommand.claim);
     }
 }

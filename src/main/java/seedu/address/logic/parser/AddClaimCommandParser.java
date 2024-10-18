@@ -26,8 +26,6 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
     public AddClaimCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_POLICY_TYPE, PREFIX_CLAIM_STATUS,
                 PREFIX_CLAIM_DESC);
-
-        // Ensure the claim status is present and that the preamble is not empty
         if (!(argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent()) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClaimCommand.MESSAGE_USAGE));
         }
@@ -39,11 +37,11 @@ public class AddClaimCommandParser implements Parser<AddClaimCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddClaimCommand.MESSAGE_USAGE), ive);
         }
-        assert argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent() : "Expected value for 'cs/' but none found.";
+        assert argMultimap.getValue(PREFIX_CLAIM_STATUS).isPresent() : "Expected value for 's/' but none found.";
         PolicyType policyType = ParserUtil.parsePolicyType(
                 argMultimap.getValue(PREFIX_POLICY_TYPE).get());
         ClaimStatus claimStatus = ParserUtil.parseClaimStatus(argMultimap.getValue(PREFIX_CLAIM_STATUS).get());
-        String desc = argMultimap.getValue(PREFIX_CLAIM_STATUS).get();
+        String desc = argMultimap.getValue(PREFIX_CLAIM_DESC).get();
         Claim claim = new Claim(claimStatus, desc);
         return new AddClaimCommand(index, claim, policyType);
     }

@@ -3,6 +3,8 @@ package seedu.address.model.claim;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Claim in the system.
  * A claim has a description and status.
@@ -117,7 +119,7 @@ public class Claim {
             return false;
         }
         Claim otherClaim = (Claim) other;
-        return description.equals(otherClaim.description) && status.equals(otherClaim.status);
+        return status.equals(otherClaim.status) && description.equals(otherClaim.description);
     }
 
     /**
@@ -127,7 +129,7 @@ public class Claim {
      */
     @Override
     public int hashCode() {
-        return description.hashCode();
+        return Objects.hash(status, description);
     }
 
     private static String getValidClaimStatusesAsString() {
