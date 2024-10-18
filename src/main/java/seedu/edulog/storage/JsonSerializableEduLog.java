@@ -1,6 +1,5 @@
 package seedu.edulog.storage;
 
-import static seedu.edulog.logic.commands.AddLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

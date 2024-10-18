@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import seedu.edulog.model.EduLog;
 import seedu.edulog.model.ReadOnlyEduLog;
-import seedu.edulog.model.calendar.EdulogCalendar;
 import seedu.edulog.model.calendar.Lesson;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;

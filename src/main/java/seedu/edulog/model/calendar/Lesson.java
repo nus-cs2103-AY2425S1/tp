@@ -6,7 +6,6 @@ import static seedu.edulog.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
