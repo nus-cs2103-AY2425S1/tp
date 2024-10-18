@@ -37,19 +37,20 @@ import seedu.address.testutil.PersonBuilder;
 public class EditCommandTest {
 
     private final Helper helper = new Helper();
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        Person personToEdit = model.getFilteredPersonList().get(0);
+        Person editedPerson = new PersonBuilder().withAppointment(personToEdit.getAppointment()).build();
+
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(personToEdit, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -220,6 +221,7 @@ public class EditCommandTest {
                     remark,
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
+                    personToBeEdited.getAppointment(),
                     personToBeEdited.getTags());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()
@@ -250,6 +252,7 @@ public class EditCommandTest {
                     personToBeEdited.getRemark(),
                     personToBeEdited.getDateOfBirth(),
                     personToBeEdited.getIncome(),
+                    personToBeEdited.getAppointment(),
                     personToBeEdited.getTags());
 
             EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder()

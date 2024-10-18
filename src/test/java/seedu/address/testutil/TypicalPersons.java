@@ -34,6 +34,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
             .withEmail("johnd@example.com").withAddress("311, Clementi Ave 2, #02-25")
             .withPriority("HIGH").withRemark("Promises to pay back next week.").withDateOfBirth("29 Jan 1999")
+            .withAppointment("2024-10-20", "14:00", "16:00")
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withDateOfBirth("1 Jan 2000").build();
@@ -55,12 +56,12 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND)
-            .withDateOfBirth("1 Jan 2000").withIncome(VALID_INCOME_AMY).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withDateOfBirth("1 Jan 2000")
+            .withIncome(VALID_INCOME_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withPriority(VALID_PRIORITY_BOB)
-            .withRemark(VALID_REMARK_BOB).withDateOfBirth("1 Jan 2000").withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withIncome(VALID_INCOME_BOB).build();
+            .withRemark(VALID_REMARK_BOB).withDateOfBirth("1 Jan 2000").withIncome(VALID_INCOME_BOB)
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -19,6 +19,8 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_CONFLICTING_APPOINTMENT =
+            "Persons list contains conflicting appointment(s).";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
@@ -51,9 +53,13 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
+
+            if (addressBook.hasConflictingAppointment(person.getAppointment())) {
+                throw new IllegalValueException(MESSAGE_CONFLICTING_APPOINTMENT);
+            }
+
             addressBook.addPerson(person);
         }
         return addressBook;
     }
-
 }

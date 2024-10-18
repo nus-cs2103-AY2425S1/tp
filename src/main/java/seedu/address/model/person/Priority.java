@@ -7,5 +7,5 @@ package seedu.address.model.person;
 public enum Priority {
     HIGH, MEDIUM, LOW;
 
-    public static final String MESSAGE_CONSTRAINTS = "Priority should be either HIGH, MEDIUM, or LOW";
+    public static final String MESSAGE_CONSTRAINTS = "Priority should be HIGH, MEDIUM, or LOW";
 }

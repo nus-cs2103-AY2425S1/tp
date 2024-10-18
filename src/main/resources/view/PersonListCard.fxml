@@ -25,7 +25,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
         <Label fx:id="priority" text="\$priority">
           <HBox.margin>
             <Insets left="4" />
@@ -39,6 +39,13 @@
       <Label fx:id="dateOfBirth" styleClass="cell_small_label" text="\$dateOfBirth" />
       <Label fx:id="householdIncome" styleClass="cell_small_label" text="\$householdIncome" />
       <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+    </VBox>
+    <VBox alignment="TOP_RIGHT" minHeight="105" GridPane.columnIndex="1">
+      <padding>
+        <Insets top="10" right="15" bottom="5" left="5" />
+      </padding>
+      <Label fx:id="date" styleClass="cell_big_label" />
+      <Label fx:id="time" styleClass="cell_big_label" />
     </VBox>
   </GridPane>
 </HBox>

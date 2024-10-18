@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 
 /**
@@ -51,6 +52,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private Label date;
+    @FXML
+    private Label time;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -71,8 +77,19 @@ public class PersonCard extends UiPart<Region> {
         priority.setText(person.getPriority().name());
 
         String value = person.getRemark().value;
-        remark.setText(value);
-        remark.setManaged(!value.isEmpty());
+        if (value.isEmpty()) {
+            remark.setManaged(false);
+        } else {
+            remark.setText(value);
+        }
+
+        Appointment appointment = person.getAppointment();
+        if (appointment != null) {
+            date.setText(appointment.getFormattedDate());
+            time.setText("%s – %s".formatted(
+                    appointment.getFormattedStartTime(),
+                    appointment.getFormattedEndTime()));
+        }
 
         dateOfBirth.setText(
                 String.format("%s (Age: %d)",

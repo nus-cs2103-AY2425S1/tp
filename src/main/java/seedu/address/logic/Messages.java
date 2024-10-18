@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -51,9 +52,14 @@ public class Messages {
                 .append("; Priority: ")
                 .append(person.getPriority());
 
-        String value = person.getRemark().value;
-        if (!value.isEmpty()) {
-            builder.append("; Remark: ").append(value);
+        String remark = person.getRemark().value;
+        if (!remark.isEmpty()) {
+            builder.append("; Remark: ").append(remark);
+        }
+
+        Appointment appointment = person.getAppointment();
+        if (appointment != null) {
+            builder.append("; Appointment: ").append(appointment);
         }
 
         Set<Tag> tags = person.getTags();
@@ -64,5 +70,4 @@ public class Messages {
 
         return builder.toString();
     }
-
 }
