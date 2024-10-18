@@ -48,6 +48,7 @@ public class AddAppointmentCommandTest {
                 + "Appointment: Id{id=2, role=Patient} (patient id) "
                 + "with Id{id=2, role=Doctor} (doctor id). Remarks: "
                 + "\n";
+
         assertEquals(expectedAppointments, validDoctor.getAllAppointments());
     }
     @Test
