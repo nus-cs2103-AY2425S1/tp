@@ -58,7 +58,7 @@ public class SampleDataUtil {
                 new Room("8/04/258"),
                 getTagSet("team2"),
                 new Point("0"),
-                getSessionSet())  // Empty session set
+                getSessionSet()) // Empty session set
         };
     }
 
