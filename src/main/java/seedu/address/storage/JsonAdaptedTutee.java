@@ -69,6 +69,7 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
         String address = this.getAddress();
         String hours = this.getHours();
         List<JsonAdaptedTag> tags = this.getTags();
+        List<JsonAdaptedSubject> subjects = this.getSubjects();
 
         final List<Tag> tuteeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
@@ -76,7 +77,7 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
         }
 
         final List<Subject> personSubjects = new ArrayList<>();
-        for (JsonAdaptedSubject subject : super.subjects) {
+        for (JsonAdaptedSubject subject : subjects) {
             personSubjects.add(subject.toModelType());
         }
 

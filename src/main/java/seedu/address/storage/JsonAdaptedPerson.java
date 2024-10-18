@@ -141,6 +141,10 @@ public class JsonAdaptedPerson {
         this.tags = tags;
     }
 
+    public List<JsonAdaptedSubject> getSubjects() {
+        return subjects;
+    }
+
     public String getRole() {
         return role;
     }
