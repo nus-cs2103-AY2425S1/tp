@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteCompanyCommand;
 import seedu.address.logic.commands.DeleteContactCommand;
+import seedu.address.logic.commands.DeleteJobCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -43,11 +44,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         switch (entityType) {
         case DeleteContactCommand.ENTITY_WORD:
             return new DeleteContactCommand(index);
+        case DeleteJobCommand.ENTITY_WORD:
+            return new DeleteJobCommand(index);
         case DeleteCompanyCommand.ENTITY_WORD:
             return new DeleteCompanyCommand(index);
         default:
             throw new ParseException(DELETE_COMMAND_USAGE);
         }
     }
-
 }

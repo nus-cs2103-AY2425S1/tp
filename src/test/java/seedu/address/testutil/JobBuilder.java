@@ -1,28 +1,31 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
+import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building Job objects.
  */
 public class JobBuilder {
 
-    public static final String DEFAULT_NAME = "Waiter";
-    public static final String DEFAULT_COMPANY = "Starbucks";
-    public static final String DEFAULT_SALARY = "2500";
-    public static final String DEFAULT_REQUIREMENTS = "Hands and feet";
-    public static final String DEFAULT_DESCRIPTION =
-            "At Starbucks, we are looking for someone who brings a lot to the table";
+    public static final String DEFAULT_NAME = "Software Engineer";
+    public static final String DEFAULT_COMPANY = "NUS";
+    public static final String DEFAULT_SALARY = "5000";
+    public static final String[] DEFAULT_REQUIREMENTS = {"Java", "Python", "C++"};
+    public static final String DEFAULT_DESCRIPTION = "Develop software solutions";
 
     private Name name;
     private JobCompany company;
     private JobSalary salary;
-    private JobRequirements requirements;
+    private Set<Tag> requirements;
     private JobDescription description;
 
     /**
@@ -32,7 +35,7 @@ public class JobBuilder {
         name = new Name(DEFAULT_NAME);
         company = new JobCompany(DEFAULT_COMPANY);
         salary = new JobSalary(DEFAULT_SALARY);
-        requirements = new JobRequirements(DEFAULT_REQUIREMENTS);
+        requirements = Arrays.stream(DEFAULT_REQUIREMENTS).map(Tag::new).collect(Collectors.toSet());
         description = new JobDescription(DEFAULT_DESCRIPTION);
     }
 
@@ -74,8 +77,8 @@ public class JobBuilder {
     /**
      * Sets the {@code JobRequirements} of the {@code Job} that we are building.
      */
-    public JobBuilder withRequirements(String requirements) {
-        this.requirements = new JobRequirements(requirements);
+    public JobBuilder withRequirements(String... requirements) {
+        this.requirements = Arrays.stream(requirements).map(Tag::new).collect(Collectors.toSet());
         return this;
     }
 
@@ -87,8 +90,14 @@ public class JobBuilder {
         return this;
     }
 
+
+    /**
+     * Builds a Job with the initialized attributes.
+     *
+     * @return Job object.
+     */
     public Job build() {
-        return new Job(name, company, salary, requirements, description);
+        return new Job(name, company, salary, description, requirements);
     }
 
 }
