@@ -16,7 +16,7 @@ public class EventParticipatedByVolunteerPredicate implements Predicate<Event> {
 
     @Override
     public boolean test(Event event) {
-        return event.hasPartitipant(volunteerName);
+        return event.hasParticipant(volunteerName);
     }
 
     @Override

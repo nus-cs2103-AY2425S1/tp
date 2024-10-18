@@ -140,6 +140,14 @@ public class Volunteer {
     }
 
     /**
+     * Removes the specified event from the list of events the volunteer is involved in.
+     *
+     * @param unassignedEvent The name of the event to be unassigned.
+     */
+    public void unassignEvent(String unassignedEvent) {
+        involvedIn.remove(unassignedEvent);
+    }
+    /**
      * Removes an event from the volunteer's list of events.
      *
      * @param eventToRemove The event to remove.

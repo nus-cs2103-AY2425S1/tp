@@ -102,6 +102,14 @@ public class Event {
     }
 
     /**
+     * Removes a volunteer from the event.
+     *
+     * @param unassignedVolunteer The name of the volunteer to unassign.
+     */
+    public void unassignVolunteer(String unassignedVolunteer) {
+        volunteers.remove(unassignedVolunteer);
+    }
+    /**
      * Removes a volunteer from the event's list of participants.
      *
      * @param volunteerToRemove The volunteer to remove.
@@ -165,7 +173,7 @@ public class Event {
                 .toString();
     }
 
-    public boolean hasPartitipant(String volunteerName) {
+    public boolean hasParticipant(String volunteerName) {
         return this.volunteers.contains(volunteerName);
     }
 }
