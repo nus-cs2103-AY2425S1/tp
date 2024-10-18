@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.personCommands;
+package seedu.address.logic.commands.personcommands;
 
 import static java.util.Objects.requireNonNull;
 

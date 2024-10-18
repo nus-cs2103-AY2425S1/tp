@@ -5,22 +5,22 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.types.person.Person;
+import seedu.address.model.types.event.Event;
 
 /**
- * Tests that a {@code Person}'s {@code Tag Name} matches any of the keywords given.
+ * Tests that a {@code Event}'s {@code Tag Name} matches any of the keywords given.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Person> {
+public class EventTagContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
+    public EventTagContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(Event event) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getTags().stream()
+                .anyMatch(keyword -> event.getTags().stream()
                         .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.getTagName(), keyword)));
     }
 
@@ -31,11 +31,12 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TagContainsKeywordsPredicate)) {
+        if (!(other instanceof EventTagContainsKeywordsPredicate)) {
             return false;
         }
 
-        TagContainsKeywordsPredicate otherTagContainsKeywordsPredicate = (TagContainsKeywordsPredicate) other;
+        EventTagContainsKeywordsPredicate otherTagContainsKeywordsPredicate =
+                (EventTagContainsKeywordsPredicate) other;
         return keywords.equals(otherTagContainsKeywordsPredicate.keywords);
     }
 

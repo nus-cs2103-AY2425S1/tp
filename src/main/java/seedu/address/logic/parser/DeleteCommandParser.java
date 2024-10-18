@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.eventCommands.DeleteEventCommand;
-import seedu.address.logic.commands.personCommands.Command;
-import seedu.address.logic.commands.personCommands.DeleteCommand;
+import seedu.address.logic.commands.eventcommands.DeleteEventCommand;
+import seedu.address.logic.commands.personcommands.Command;
+import seedu.address.logic.commands.personcommands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 //TODO: Replace Command with DeleteCommand
