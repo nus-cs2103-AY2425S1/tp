@@ -21,9 +21,9 @@ import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
 import seedu.address.testutil.TypicalProducts;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ViewProductCommand}.
  */
-public class ViewCommandTest {
+public class ViewProductCommandTest {
     private Model model = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
 
@@ -34,14 +34,14 @@ public class ViewCommandTest {
         ProductNameContainsKeywordsPredicate secondPredicate =
                 new ProductNameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        ViewCommand findFirstCommand = new ViewCommand(firstPredicate);
-        ViewCommand findSecondCommand = new ViewCommand(secondPredicate);
+        ViewProductCommand findFirstCommand = new ViewProductCommand(firstPredicate);
+        ViewProductCommand findSecondCommand = new ViewProductCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        ViewCommand findFirstCommandCopy = new ViewCommand(firstPredicate);
+        ViewProductCommand findFirstCommandCopy = new ViewProductCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -58,7 +58,7 @@ public class ViewCommandTest {
     public void execute_zeroKeywords_noProductFound() {
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 0);
         ProductNameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        ViewCommand command = new ViewCommand(predicate);
+        ViewProductCommand command = new ViewProductCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredProductList());
@@ -68,7 +68,7 @@ public class ViewCommandTest {
     public void execute_multipleKeywords_multipleProductsFound() {
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 3);
         ProductNameContainsKeywordsPredicate predicate = preparePredicate("APPLE JUICE");
-        ViewCommand command = new ViewCommand(predicate);
+        ViewProductCommand command = new ViewProductCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(APPLE, APPLE_JUICE, PINEAPPLE), model.getFilteredProductList());
@@ -78,9 +78,9 @@ public class ViewCommandTest {
     public void toStringMethod() {
         ProductNameContainsKeywordsPredicate predicate =
                 new ProductNameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        ViewCommand viewCommand = new ViewCommand(predicate);
-        String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, viewCommand.toString());
+        ViewProductCommand viewProductCommand = new ViewProductCommand(predicate);
+        String expected = ViewProductCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, viewProductCommand.toString());
     }
 
     /**

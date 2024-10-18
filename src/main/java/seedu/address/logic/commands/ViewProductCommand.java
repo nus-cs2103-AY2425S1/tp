@@ -11,9 +11,9 @@ import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
  * Finds and lists all suppliers in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class ViewCommand extends Command {
+public class ViewProductCommand extends Command {
 
-    public static final String COMMAND_WORD = "view";
+    public static final String COMMAND_WORD = "VIEW_PRODUCT";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all products whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -22,7 +22,7 @@ public class ViewCommand extends Command {
 
     private final ProductNameContainsKeywordsPredicate predicate;
 
-    public ViewCommand(ProductNameContainsKeywordsPredicate predicate) {
+    public ViewProductCommand(ProductNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -41,12 +41,12 @@ public class ViewCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewCommand)) {
+        if (!(other instanceof ViewProductCommand)) {
             return false;
         }
 
-        ViewCommand otherViewCommand = (ViewCommand) other;
-        return predicate.equals(otherViewCommand.predicate);
+        ViewProductCommand otherViewProductCommand = (ViewProductCommand) other;
+        return predicate.equals(otherViewProductCommand.predicate);
     }
 
     @Override

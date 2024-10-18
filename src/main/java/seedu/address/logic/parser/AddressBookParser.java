@@ -17,11 +17,11 @@ import seedu.address.logic.commands.DeleteProductCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ViewSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UnassignProductCommand;
-import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -76,7 +76,7 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case ViewSupplierCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
@@ -88,7 +88,7 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ViewCommand.COMMAND_WORD:
+        case ViewProductCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
         case AssignProductCommand.COMMAND_WORD:
