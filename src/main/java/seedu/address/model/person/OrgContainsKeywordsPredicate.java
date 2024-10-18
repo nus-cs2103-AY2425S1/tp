@@ -7,9 +7,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Organization} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class OrgContainsKeywordsPredicate implements Predicate<Person> {
+
     private final List<String> keywords;
     private final Boolean returnAllTrue;
 
@@ -17,7 +18,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
      * Initialises keywords and if it is empty then ensure predicate always returns true
      * @param keywords
      */
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public OrgContainsKeywordsPredicate(List<String> keywords) {
 
         this.keywords = keywords;
         this.returnAllTrue = keywords.size() == 1 && keywords.get(0).trim().isEmpty();
@@ -26,7 +27,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return returnAllTrue || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getOrganisation().toString(), keyword));
     }
 
     @Override
@@ -36,12 +37,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof OrgContainsKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        OrgContainsKeywordsPredicate otherOrgContainsKeywordsPredicate = (OrgContainsKeywordsPredicate) other;
+        return keywords.equals(otherOrgContainsKeywordsPredicate.keywords);
     }
 
     @Override
@@ -49,3 +50,4 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }
+
