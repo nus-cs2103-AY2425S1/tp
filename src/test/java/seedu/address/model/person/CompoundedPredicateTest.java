@@ -96,9 +96,9 @@ public class CompoundedPredicateTest {
 
         String expected =
                 CompoundedPredicate.class.getCanonicalName() + "{name predicate="
-                        + NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}, " +
-                        "organisation predicate=" + OrgContainsKeywordsPredicate.class.getCanonicalName() +
-                        "{keywords=" + keywords + "}" + "}";
+                        + NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}, "
+                        + "organisation predicate=" + OrgContainsKeywordsPredicate.class.getCanonicalName()
+                        + "{keywords=" + keywords + "}" + "}";
         assertEquals(expected, predicate.toString());
     }
 }
