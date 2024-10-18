@@ -4,17 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
 
 public class JsonAdaptedTutorialTest {
 
-    private final Tutorial validTutorial = new Tutorial("T01", new Course("CS1010", "Computer Science"));
-   
+    private final Tutorial validTutorial = new Tutorial("T01", new Course("CS1010",
+            "Computer Science"));
     @Test
     public void toModelType_validTutorialDetails_returnsTutorial() throws Exception {
-        JsonAdaptedTutorial tutorial = new JsonAdaptedTutorial(validTutorial.getTutorialId(), validTutorial.getCourse());
+        JsonAdaptedTutorial tutorial = new JsonAdaptedTutorial(validTutorial.getTutorialId(),
+                validTutorial.getCourse());
         assertEquals(validTutorial, tutorial.toModelType());
     }
 

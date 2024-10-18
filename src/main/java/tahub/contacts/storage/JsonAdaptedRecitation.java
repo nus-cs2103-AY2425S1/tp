@@ -9,8 +9,7 @@ import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
 
 /**
- * Represents a JSON-adapted Recitation object. An adaptation is necessary to bridge the differences in data format and constraints between the JSON representation and the model's
- * Recitation object.
+ * Represents a JSON-adapted Recitation object.
  */
 class JsonAdaptedRecitation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Recitation's %s field is missing!";
