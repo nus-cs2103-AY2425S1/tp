@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -150,13 +150,18 @@ public class StringUtilTest {
     @Test
     void copyToClipboard_validUrl_copiesToClipboard() throws IOException, UnsupportedFlavorException {
         System.setProperty("java.awt.headless", "false");
-        String url = "https://example.com";
-        StringSelection selection = new StringSelection(url);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
-        StringUtil.copyToClipboard(url);
+        try {
+            String url = "https://example.com";
+            StringSelection selection = new StringSelection(url);
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
-        assertEquals(selection.getTransferData(DataFlavor.stringFlavor),
-                clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor));
+            StringUtil.copyToClipboard(url);
+
+            assertEquals(selection.getTransferData(DataFlavor.stringFlavor),
+                    clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor));
+        } catch(AWTError e) {
+            // Skip test if system does not support AWT
+        }
     }
 }
