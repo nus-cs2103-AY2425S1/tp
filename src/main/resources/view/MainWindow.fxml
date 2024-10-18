@@ -17,7 +17,7 @@
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Dream Day Designer" minWidth="600" minHeight="400" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/logo.png" />
   </icons>
   <scene>
     <Scene>
@@ -25,8 +25,7 @@
         <URL value="@CommandBox.css" />
         <URL value="@ContactCard.css" />
         <URL value="@ContactListPanel.css" />
-        <URL value="@DarkTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@MainWindow.css" />
         <URL value="@ResultDisplay.css" />
         <URL value="@Sidebar.css" />
       </stylesheets>
@@ -47,13 +46,13 @@
 
           <VBox styleClass="padding-8" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <StackPane fx:id="contactListPanelPlaceholder"
-                       VBox.vgrow="ALWAYS" maxHeight="Infinity" minHeight="220" />
-            <StackPane styleClass="padding-8" maxHeight="160" minHeight="100" prefHeight="160">
+                       VBox.vgrow="ALWAYS" maxHeight="Infinity" minHeight="200" />
+            <StackPane styleClass="padding-8" maxHeight="160" minHeight="120" prefHeight="160">
               <VBox>
                 <StackPane fx:id="resultDisplayPlaceholder" styleClass=""
                            maxHeight="100" minHeight="60" prefHeight="100"/>
                 <StackPane fx:id="commandBoxPlaceholder" styleClass=""
-                           maxHeight="60" minHeight="40" prefHeight="60" />
+                           maxHeight="60" minHeight="60" prefHeight="60" />
               </VBox>
             </StackPane>
           </VBox>
