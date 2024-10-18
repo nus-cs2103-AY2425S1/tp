@@ -21,8 +21,6 @@ public class TypicalProducts {
     public static final Product GRAPE = new ProductBuilder().withName("Grape").build();
 
     // Manually added
-    public static final Product HONEYDEW = new ProductBuilder().withName("Honeydew").build();
-    public static final Product ITALIAN_PLUM = new ProductBuilder().withName("Italian Plum").build();
     public static final Product PINEAPPLE = new ProductBuilder().withName("Pineapple").build();
     public static final Product APPLE_JUICE= new ProductBuilder().withName("Apple Juice").build();
 
@@ -44,6 +42,6 @@ public class TypicalProducts {
     }
 
     public static List<Product> getTypicalProducts() {
-        return new ArrayList<>(Arrays.asList(APPLE, BANANA, CARROT, DATE, EGGPLANT, APPLE_JUICE, FIG, GRAPE, PINEAPPLE));
+        return new ArrayList<>(Arrays.asList(APPLE, BANANA, CARROT, DATE, APPLE_JUICE, FIG, GRAPE, PINEAPPLE));
     }
 }
