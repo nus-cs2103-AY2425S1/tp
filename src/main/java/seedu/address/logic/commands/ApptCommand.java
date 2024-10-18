@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  */
 public class ApptCommand extends Command {
 
-    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Name: %1$s";
+    public static final String MESSAGE_ARGUMENTS = "Appt: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "appt";
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
