@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-VolunSync is a **desktop app for keeping track of volunteers and volunteering events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+VolunSync is a **desktop app for keeping track of volunteers and volunteering events, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, VolunSync can get your event and personnel management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,24 +14,28 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W12-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your VolunSync application.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar volunsync.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the User Guide on your browser.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `reset` : Lists all volunteers and events in the VolunSync database.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
+   
+   * `/v del 3` : Deletes the third volunteer on the list of volunteers.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28` : Creates a new record for an event named `Coding Exam` to the VolunSync database.
+   
+   * `/e del 3` : Deletes the third event from the list of events.
 
-   * `clear` : Deletes all contacts.
+   * `reset` : Displays all volunteers and events in the database.
 
    * `exit` : Exits the app.
 
@@ -49,15 +53,12 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `des/ DESCRIPTION`
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `reset` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -65,87 +66,143 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Opens the webpage of the User Guide in your computer's default browser.
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a volunteer: `/v new`
 
-Adds a person to the address book.
+Adds a volunteer to the database.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIME e/ END_TIME`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+Examples:
+* `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`
+* `/v new n/ Ellen Joe p/ 81234567 em/ ellen@gmail.com d/ 2024-05-23 s/ 12:00 e/ 15:59`
+
+### Adding an event: `/e new`
+
+Adds an event to the database.
+
+Format: `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`
+
+Examples:
+* `/e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12`
+* `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`
+
+### Listing all volunteers and events : `reset`
+
+Shows a list of all volunteers and events in the database.
+
+Format: `reset`
+
+Examples: 
+* `view e/ 1` followed by `reset` causes the volunteer and event lists to display all volunteers and events respectively.
+
+### Locating volunteers by name : `/v find`
+
+Find volunteers whose name contains the given keyword.
+
+Format: `/v find KEYWORD`
+
+* The search is case-insensitive
+* Only the name is searched
+* The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
+    * e.g. `Joe` will match `Joelle`, `Enjoeline` and `Joe`
+
+Examples:
+* `/v find Yeoh` returns `Alexa Yeoh` and `Yeoh Rain`
+
+### Locating events by name : `/e find`
+
+Find events with names containing the given keyword.
+
+Format: `/e find KEYWORD`
+
+* The search is case-insensitive.
+* Only the name is searched.
+* The searching algorithm returns volunteers with any part of their name matching the `KEYWORD`
+    * e.g. `Group` will match `Group Project`, `Grouping Task` and `Group`.
+
+Examples:
+* `/v find Forest` returns `Forest Ranger Camp` and `Reforesting`
+
+### Deleting a volunteer : `/v del`
+
+Deletes the specified volunteer from the database.
+
+Format: `/v del VOLUNTEER_INDEX`
+
+* Deletes the volunteer at the specified `VOLUNTEER_INDEX`.
+* The index refers to the number before the event's name in the displayed volunteer list.
+* The index **must be a non-negative integer** 1, 2, 3, …​
+
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Deleting a volunteer removes the volunteer from the list of participants of all events which the volunteer 
+is involved in.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `reset` followed by `/v del 2` deletes the 2nd volunteer in the volunteer list.
 
-### Listing all persons : `list`
+### Deleting an event : `/e del `
 
-Shows a list of all persons in the address book.
+Deletes the specified event from the database.
 
-Format: `list`
+Format: `/e del EVENT_INDEX`
 
-### Editing a person : `edit`
+* Deletes the event with the specified `EVENT_INDEX`. 
+* The index refers to the number before the event's name in the displayed event list.
+* The index **must be a non-negative integer** 1, 2, 3, …​
 
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+<div markdown="span" class="alert alert-primary">:bulb: **Note:**
+Deleting an event causes that event to be removed from all participants' list of events which they are involved in.
+</div>
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `reset` followed by `/e del 2` deletes the 2nd event in the event list.
 
-### Locating persons by name: `find`
+### Adding a volunteer to an event's list of participants: `assign`
 
-Finds persons whose names contain any of the given keywords.
+Adds a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
-### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `assign v/ 1 e/ 2` assigns the first volunteer on the volunteer list to the list of participants of the second event on the event list.
 
-### Clearing all entries : `clear`
+### Removing a volunteer from an event's list of participants: `unassign`
 
-Clears all entries from the address book.
+Removes a volunteer with the specified `VOLUNTEER_INDEX` to the list of participants of the event with the specified `EVENT_INDEX`.
 
-Format: `clear`
+Format: `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
+
+* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `unassign v/ 1 e/ 2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
+
+### Listing all volunteers participating in an event: `view`
+
+Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.
+
+Format: `view e/ EVENT_INDEX`
+
+* The index refers to the number on the left of the event and volunteer's name in their respective lists.
+* The index **must be a positive integer** 1, 2, 3, …​)
+
+### Export database to a CSV file : `export`
+
+Exports all records within the database to a CSV file.
+
+Format : `export`
+
+* The .csv files will be stored in the `/output` folder as events.csv and volunteers.csv.
 
 ### Exiting the program : `exit`
 
@@ -157,25 +214,12 @@ Format: `exit`
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
-
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: Can I undo an action that I just made?<br>
+**A**: Currently VolunSync does not support the `undo` function, but we are planning to implement it in the future so stay tuned for the update!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -188,12 +232,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action                                       | Format, Examples                                                                                                                                                                                                                                                                   |
+|----------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Volunteer**                            | `/v new n/ NAME p/ PHONE_NUMBER em/ EMAIL d/ AVAILABLE_DATE s/ START_TIME e/ END_TIME`<br/>`e.g. /v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59`                                                                                                |
+| **Delete Volunteer**                         | `/v del EVENT_INDEX`<br/>`e.g. /v del 1`                                                                                                                                                                                                                                           |
+| **Find Volunteer** | `/v find KEYWORD`<br/>`e.g. /v find Yeoh`|
+| **Add Event**                                | `/e new n/ EVENT_NAME s/ START_TIME e/ END_TIME d/ DATE l/ LOCATION [des/ DESCRIPTION]`<br/>`e.g. /e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28 des/ Final Exam`<br/>`e.g. /e new n/ Buffet Lunch s/ 12:00 e/ 15:00 d/ 2024-08-09 l/ Blk 123 Woodlands Avenue 12` |
+| **Delete Event**                             | `/e del EVENT_INDEX`<br/>`e.g. /e del 1`                                                                                                                                                                                                                                           |
+| **Find Event** | `/e find KEYWORD`<br/>`e.g. /e find Forest`|
+| **Add Volunteer to Event**                   | `assign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. assign v/ 1 e/ 2`                                                                                                                                                                                                             |
+| **Remove Volunteer from Event**              | `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`<br/>`e.g. unassign v/ 1 e/ 2`                                                                                                                                                                                                         |
+| **List all Volunteers involved in an Event** | `view e/ EVENT_INDEX`<br/>`e.g. view e/ 1`                                                                                                                                                                                                                                         |
+| **List all Volunteers and Events**           | `reset`                                                                                                                                                                                                                                                                            |
+| **Export database to csv file**              | `export`                                                                                                                                                                                                                                                                           |
+| **Help**                                     | `help`                                                                                                                                                                                                                                                                             |
+| **Exit**                                     | `exit`                                                                                                                                                                                                                                                                             |

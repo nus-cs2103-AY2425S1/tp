@@ -10,8 +10,10 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerDeleteCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerViewCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -52,6 +54,10 @@ public class VolunteerCommandParser {
             return new VolunteerAddCommandParser().parse(arguments);
         case VolunteerDeleteCommand.COMMAND_WORD:
             return new VolunteerDeleteCommandParser().parse(arguments);
+        case FindVolunteerCommand.COMMAND_WORD:
+            return new FindVolunteerCommandParser().parse(arguments);
+        case VolunteerViewCommand.COMMAND_WORD:
+            return new VolunteerViewCommandParser().parse(arguments);
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
