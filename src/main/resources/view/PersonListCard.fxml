@@ -35,7 +35,7 @@
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       </HBox>
       <HBox>
-        <Label styleClass="cell_small_label" text="Last Contacted: " />
+        <Label styleClass="cell_small_label" text="Next Contact Date: " />
         <Label fx:id="nextContactDate" styleClass="cell_small_label" text="\$nextContactDate" />
       </HBox>
       <HBox>
