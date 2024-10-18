@@ -101,7 +101,7 @@ public class Person {
     }
 
     /**
-     * Mark the person as contacted today.
+     * Mark the person as contacted.
      */
     public void markAsContacted(ContactRecord contactRecord) {
         contactRecords.markAsContacted(contactRecord);

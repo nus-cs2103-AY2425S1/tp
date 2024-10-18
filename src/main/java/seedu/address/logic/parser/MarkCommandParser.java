@@ -4,11 +4,15 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 
+import java.time.LocalDate;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.person.Nric;
+
+
 
 /**
  * Parses input arguments and creates a new MarkCommand object
@@ -27,7 +31,7 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         String notes = argMultimap.getValue(PREFIX_NOTES).orElse("");
         ContactRecord contactRecord;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            String date = argMultimap.getValue(PREFIX_DATE).get();
+            LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
             contactRecord = new ContactRecord(date, notes);
         } else {
             contactRecord = ContactRecord.createCurrentRecord(notes);

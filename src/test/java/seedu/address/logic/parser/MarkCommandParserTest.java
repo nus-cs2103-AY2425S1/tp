@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NOTES_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -49,5 +52,19 @@ public class MarkCommandParserTest {
     public void parse_emptyNotes_returnsMarkCommand() {
         ContactRecord validRecord = new ContactRecordBuilder().withNotes("").build();
         assertParseSuccess(parser, "1", new MarkCommand(INDEX_FIRST_PERSON, validRecord));
+    }
+
+    @Test
+    public void parse_validDate_returnsMarkCommand() {
+        ContactRecord validRecord = new ContactRecordBuilder().withDate(VALID_DATE).withNotes(VALID_NOTES).build();
+        assertParseSuccess(parser, "1" + DATE_DESC + NOTES_DESC,
+                new MarkCommand(INDEX_FIRST_PERSON, validRecord));
+    }
+
+    @Test
+    public void parse_invalidDate_throwsParseException() {
+        // invalid date format
+        assertParseFailure(parser, "1" + INVALID_DATE_DESC,
+                ContactRecord.MESSAGE_CONSTRAINTS);
     }
 }

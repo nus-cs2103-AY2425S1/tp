@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.ContactRecordBuilder;
 
+import java.time.LocalDate;
+
 public class ContactRecordListTest {
     @Test
     public void getLastContacted() {
@@ -23,13 +25,22 @@ public class ContactRecordListTest {
 
         // test 1
         ContactRecord contactRecord = new ContactRecordBuilder().build();
-        contactRecordList.add(contactRecord);
+        contactRecordList.markAsContacted(contactRecord);
         assertEquals(contactRecord, contactRecordList.getLastContacted());
 
         // test 2
         ContactRecord newContactRecord = new ContactRecordBuilder().build();
-        contactRecordList.add(newContactRecord);
+        contactRecordList.markAsContacted(newContactRecord);
         assertEquals(newContactRecord, contactRecordList.getLastContacted());
+
+        // Add not in order, but returns the correct last contacted
+        ContactRecordList contactRecordList2 = new ContactRecordList();
+        ContactRecord newContactRecordOld = new ContactRecordBuilder().withDate("2021-10-10").build();
+        ContactRecord newContactRecordNew = new ContactRecordBuilder().withDate("2024-10-11").build();
+        contactRecordList2.markAsContacted(newContactRecordNew);
+        contactRecordList2.markAsContacted(newContactRecordOld);
+        assertEquals(newContactRecordNew, contactRecordList2.getLastContacted());
+
     }
 
     @Test
@@ -54,8 +65,10 @@ public class ContactRecordListTest {
     public void equals() {
         ContactRecordList contactRecordList = new ContactRecordList();
         ContactRecordList contactRecordListCopy = new ContactRecordList();
-        ContactRecordList contactRecordListCopy2 = new ContactRecordList(new ContactRecord("2021-10-10", ""));
-        ContactRecordList contactRecordListCopy3 = new ContactRecordList(new ContactRecord("2021-10-11", ""));
+        ContactRecordList contactRecordListCopy2 =
+                new ContactRecordList(new ContactRecord(LocalDate.parse("2021-10-10"), ""));
+        ContactRecordList contactRecordListCopy3 =
+                new ContactRecordList(new ContactRecord(LocalDate.parse("2021-10-11"), ""));
 
         // same object -> returns true
         assertTrue(contactRecordList.equals(contactRecordList));

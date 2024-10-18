@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.model.contactrecord.ContactRecord;
 
+import java.time.LocalDate;
+
 /**
  * A utility class to help with building ContactRecord objects.
  */
@@ -51,6 +53,6 @@ public class ContactRecordBuilder {
         if (date == null) {
             return ContactRecord.createCurrentRecord(notes);
         }
-        return new ContactRecord(date, notes);
+        return new ContactRecord(LocalDate.parse(date), notes);
     }
 }

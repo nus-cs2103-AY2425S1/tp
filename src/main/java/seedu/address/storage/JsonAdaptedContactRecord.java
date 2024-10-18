@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.contactrecord.ContactRecord;
 
+import java.time.LocalDate;
+
 /**
  * Jackson-friendly version of {@link ContactRecord}.
  */
@@ -42,6 +44,7 @@ public class JsonAdaptedContactRecord {
         if (!ContactRecord.isValidContactRecord(date)) {
             throw new IllegalValueException(ContactRecord.MESSAGE_CONSTRAINTS);
         }
+        LocalDate date = LocalDate.parse(this.date);
         if (notes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "notes"));
         }
