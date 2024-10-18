@@ -4,27 +4,41 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tahub.contacts.model.course.exceptions.AttendanceOperationException;
+import tahub.contacts.model.courseclass.CourseClass;
+import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
 /**
  * Represents the attendance of a student in the address book.
  */
 public class Attendance {
     private final ArrayList<Boolean> attendanceList;
+    private final StudentCourseAssociation studentCourseAssociation;
+    private final CourseClass courseClass;
 
     /**
      * Constructs an {@code Attendance} object.
+     *
+     * @param studentCourseAssociation To refer to the student and course this is for.
+     * @param courseClass The specific class that this is for.
      */
-    public Attendance() {
+    public Attendance(StudentCourseAssociation studentCourseAssociation, CourseClass courseClass) {
         attendanceList = new ArrayList<>();
+        this.studentCourseAssociation = studentCourseAssociation;
+        this.courseClass = courseClass;
     }
 
     /**
      * Constructs an {@code Attendance} object from an attendance list.
      *
      * @param attendanceList Preexisting attendance list as a {@link List} of {@link Boolean}.
+     * @param studentCourseAssociation To refer to the student and course this is for.
+     * @param courseClass The specific class that this is for.
      */
-    public Attendance(List<Boolean> attendanceList) {
+    public Attendance(
+            List<Boolean> attendanceList, StudentCourseAssociation studentCourseAssociation, CourseClass courseClass) {
         this.attendanceList = new ArrayList<>(attendanceList);
+        this.studentCourseAssociation = studentCourseAssociation;
+        this.courseClass = courseClass;
     }
 
     /**
@@ -82,11 +96,33 @@ public class Attendance {
     }
 
     /**
-     * Checks whether this {@link Attendance} is equal to another {@link Attendance} object.
+     * Compares this {@link Attendance} object to another object for weak equality, whether they belong to the same
+     * student, course, and class.
      *
      * @param other Object to be compared against.
      * @return {@code true} if the other object is another {@link Attendance} object with the same
-     *      {@code attendanceList}.
+     *      {@link StudentCourseAssociation} and {@link CourseClass}.
+     */
+    public boolean isSameAttendance(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Attendance otherAttendance)) {
+            return false;
+        }
+
+        return studentCourseAssociation.equals(otherAttendance.studentCourseAssociation)
+                && courseClass.equals(otherAttendance.courseClass);
+    }
+
+    /**
+     * Compares this {@link Attendance} object to another object for strict equality.
+     *
+     * @param other Object to be compared against.
+     * @return {@code true} if the other object is another {@link Attendance} object with the same
+     *      {@link StudentCourseAssociation} and {@link CourseClass}, and has the same {@code attendanceList}.
      */
     @Override
     public boolean equals(Object other) {
@@ -99,7 +135,9 @@ public class Attendance {
             return false;
         }
 
-        return attendanceList.equals(otherAttendance.attendanceList);
+        return attendanceList.equals(otherAttendance.attendanceList)
+                && studentCourseAssociation.equals(otherAttendance.studentCourseAssociation)
+                && courseClass.equals(otherAttendance.courseClass);
     }
 
     @Override
