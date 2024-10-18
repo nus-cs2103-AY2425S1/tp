@@ -149,6 +149,7 @@ public class StringUtilTest {
 
     @Test
     void copyToClipboard_validUrl_copiesToClipboard() throws IOException, UnsupportedFlavorException {
+        System.setProperty("java.awt.headless", "false");
         String url = "https://example.com";
         StringSelection selection = new StringSelection(url);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
