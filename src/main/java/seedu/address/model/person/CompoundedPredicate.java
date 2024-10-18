@@ -44,7 +44,7 @@ public class CompoundedPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("name keywords", namePredicate.toString()).add("org keywords",
-                orgPredicate.toString()).toString();
+        return new ToStringBuilder(this).add("name predicate", namePredicate.toString())
+                .add("organisation predicate", orgPredicate.toString()).toString();
     }
 }
