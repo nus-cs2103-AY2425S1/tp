@@ -214,6 +214,15 @@ public class ParserUtil {
             throw new ParseException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
         }
     }
+    /**
+     * Parses a {@code String} into a {@code ClaimStatus}.
+     * This method trims the input string and attempts to convert it into a valid {@code ClaimStatus}
+     * using the {@code ClaimStatus.fromString()} method. If the string is not a valid claim status,
+     * a {@code ParseException} is thrown with an appropriate error message.
+     * @param claimStatus The string to parse into a {@code ClaimStatus}.
+     * @return The corresponding {@code ClaimStatus} after parsing.
+     * @throws ParseException if the string does not represent a valid {@code ClaimStatus}.
+     */
     public static ClaimStatus parseClaimStatus(String claimStatus) throws ParseException {
         requireNonNull(claimStatus);
         String trimmedClaimStatus = claimStatus.trim();

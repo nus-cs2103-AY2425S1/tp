@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
-import seedu.address.logic.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -51,9 +52,9 @@ public class AddClaimCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         throw new CommandException("still implementing");
-//        if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
-//            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-//        }
+        //        if (index.getZeroBased() >= model.getFilteredPersonList().size()) {
+        //            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        //        }
 
         //return new CommandResult(String.format(MESSAGE_ADD_CLAIM_SUCCESS, claim));
     }

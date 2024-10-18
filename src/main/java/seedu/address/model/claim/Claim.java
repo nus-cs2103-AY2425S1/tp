@@ -132,8 +132,7 @@ public class Claim {
 
     private static String getValidClaimStatusesAsString() {
         StringBuilder result = new StringBuilder();
-        ClaimStatus[] validClaimStatuses = ClaimStatus.values();  // Assuming ClaimStatus is an enum
-
+        ClaimStatus[] validClaimStatuses = ClaimStatus.values();
         for (int i = 0; i < validClaimStatuses.length - 1; i++) {
             result.append(validClaimStatuses[i] + ", ");
         }
