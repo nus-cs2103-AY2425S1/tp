@@ -41,10 +41,9 @@ public class SortCommandTest {
     public void execute_invalidSortOption_throwsCommandException() {
         InvalidSortOptionStub sortOption = new InvalidSortOptionStub("Invalid");
         SortCommand sortCommand = new SortCommand(sortOption);
+        String expectedMessage = String.format(SortCommand.MESSAGE_UNSUPPORTED_SORT_OPTION, sortOption);
 
-        assertThrows(CommandException.class,
-                String.format(SortCommand.MESSAGE_UNSUPPORTED_SORT_OPTION, sortOption),
-                () -> sortCommand.execute(model));
+        assertThrows(CommandException.class, expectedMessage, () -> sortCommand.execute(model));
     }
 
     @Test
