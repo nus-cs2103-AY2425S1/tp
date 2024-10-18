@@ -1,11 +1,17 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -13,6 +19,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +128,88 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parse a {@code String policy} into a {@code PolicyType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code policy} is invalid.
+     */
+    public static PolicyType parsePolicyType(String policy) throws ParseException {
+        requireNonNull(policy);
+        String trimmedPolicy = policy.trim();
+        try {
+            return PolicyType.fromString(trimmedPolicy);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code Optional<String>} policy into a {@code PolicyType}.
+     *
+     * @param policies The List of string representing the policy type.
+     *               The policy string will be trimmed and converted to lowercase
+     *               for comparison with predefined {@code PolicyType} values.
+     * @return The {@code PolicyType} corresponding to the given policy string.
+     * @throws ParseException If the given {@code policy} is empty or does not match
+     *                        any valid {@code PolicyType}.
+     */
+    public static Set<PolicyType> parsePolicyTypes(List<String> policies) throws ParseException {
+        requireNonNull(policies);
+        if (policies.isEmpty()) {
+            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+        }
+
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        for (String policy : policies) {
+            policyTypes.add(parsePolicyType(policy));
+        }
+        return Collections.unmodifiableSet(policyTypes);
+    }
+
+    /**
+     * Parse a {@code String amount} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static double parsePolicyAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        if (amount == "") {
+            return -1.0;
+        }
+
+        String trimmedAmount = amount.trim();
+        try {
+            double parsedDouble = Double.parseDouble(trimmedAmount);
+            if (parsedDouble < 0) {
+                throw new ParseException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
+            }
+            return parsedDouble;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parse a {@code String expiryDate} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code expiryDate} is invalid.
+     */
+    public static LocalDate parseExpiryDate(String expiryDate) throws ParseException {
+        requireNonNull(expiryDate);
+        if (expiryDate == "") {
+            return null;
+        }
+
+        String trimmedExpiryDate = expiryDate.trim();
+        try {
+            return LocalDate.parse(trimmedExpiryDate, MM_DD_YYYY_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
+        }
     }
 }

@@ -4,27 +4,40 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeletePolicyCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListExpiringPoliciesCommand;
+import seedu.address.logic.commands.UpdatePolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.PolicySet;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -69,12 +82,22 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    public void parseCommand_findClient() throws Exception {
+        String input = "find-client n/Alice Bob";
+
+        // Construct expected FindCommand
+        List<Predicate<Person>> predicatesList = new ArrayList<>();
+        predicatesList.add(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        Predicate<Person> combinedPredicate = new CompositePredicate(predicatesList);
+        FindCommand expectedCommand = new FindCommand(combinedPredicate);
+
+        // Parse command using AddressBookParser
+        Command command = parser.parseCommand(input);
+
+        // Assert that the parsed command matches the expected command
+        assertEquals(expectedCommand, command);
     }
+
 
     @Test
     public void parseCommand_help() throws Exception {
@@ -86,6 +109,51 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_addPolicy() throws Exception {
+        // This is hardcoded for now.
+        // Will change in future commits.
+        AddPolicyCommand command = (AddPolicyCommand) parser.parseCommand(
+                AddPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " pt/life");
+        LifePolicy life = new LifePolicy();
+        assertEquals(new AddPolicyCommand(INDEX_FIRST_PERSON, life), command);
+    }
+    @Test
+    public void parseCommand_updatePolicy() throws Exception {
+        // This is hardcoded for now.
+        // Will change in future commits.
+        UpdatePolicyCommand command = (UpdatePolicyCommand) parser.parseCommand(
+                UpdatePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_POLICY_TYPE + "life");
+        PolicySet policies = new PolicySet();
+        assertEquals(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), command);
+    }
+    @Test
+    public void parseCommand_deletePolicy() throws Exception {
+        // This is hardcoded for now.
+        // Will change in future commits.
+        DeletePolicyCommand command = (DeletePolicyCommand) parser.parseCommand(
+                DeletePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                        + " " + PREFIX_POLICY_TYPE + "life");
+        final Set<PolicyType> policyTypes = new HashSet<>();
+        policyTypes.add(PolicyType.LIFE);
+        assertEquals(new DeletePolicyCommand(INDEX_FIRST_PERSON, policyTypes), command);
+    }
+
+    @Test
+    public void parseCommand_listExpiringPolicies() throws Exception {
+        // This will be changed in future iterations when args are introduced to the command
+        // Test valid usage of the command without arguments
+        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
+                instanceof ListExpiringPoliciesCommand);
+
+        // Test invalid usage where extra arguments are provided
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " extraArgument"));
     }
 
     @Test

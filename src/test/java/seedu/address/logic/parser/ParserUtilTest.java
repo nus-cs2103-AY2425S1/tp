@@ -2,10 +2,12 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -18,6 +20,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.PolicyType;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_POLICY_TYPE = "live";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -33,7 +37,9 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
+    private static final String VALID_POLICY_TYPE_LIFE = "life";
+    private static final String VALID_POLICY_TYPE_HEALTH = "health";
+    private static final String VALID_POLICY_TYPE_EDUCATION = "education";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -192,5 +198,116 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePolicyType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicyType(null));
+    }
+
+    @Test
+    public void parsePolicyType_validPolicyWithoutWhitespace_returnsPolicy() throws Exception {
+        assertEquals(PolicyType.LIFE, ParserUtil.parsePolicyType(VALID_POLICY_TYPE_LIFE));
+    }
+
+    @Test
+    public void parsePolicyType_validValueWithWhitespace_returnsPolicy() throws Exception {
+        String policyWithWhitespace = WHITESPACE + VALID_POLICY_TYPE_LIFE + WHITESPACE;
+        assertEquals(PolicyType.LIFE, ParserUtil.parsePolicyType(policyWithWhitespace));
+    }
+
+    @Test
+    public void parsePolicyType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyType(INVALID_POLICY_TYPE));
+    }
+
+    @Test
+    public void parsePolicyTypes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicyTypes(null));
+    }
+
+    @Test
+    public void parsePolicyTypes_collectionWithInvalidPolicies_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(
+                Arrays.asList(VALID_POLICY_TYPE_LIFE, INVALID_POLICY_TYPE)));
+    }
+
+    // @Test
+    // public void parsePolicyTypes_emptyCollection_returnsEmptySet() throws Exception {
+    //     assertTrue(ParserUtil.parsePolicyTypes(Collections.emptyList()).isEmpty());
+    // }
+
+    @Test
+    public void parsePolicyTypes_collectionWithValidPolicies_returnsSet() throws Exception {
+        Set<PolicyType> actual = ParserUtil.parsePolicyTypes(Arrays.asList(VALID_POLICY_TYPE_LIFE,
+                VALID_POLICY_TYPE_HEALTH, VALID_POLICY_TYPE_EDUCATION));
+        Set<PolicyType> expected = new HashSet<>();
+        expected.add(PolicyType.LIFE);
+        expected.add(PolicyType.HEALTH);
+        expected.add(PolicyType.EDUCATION);
+        assertEquals(expected, actual);
+    }
+
+    // @Test
+    // public void parsePolicyTypes_collectionWithDuplicatePolicies_throwsParseException() {
+    //     assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(
+    //             Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_LIFE)));
+    // }
+
+    @Test
+    public void parsePolicyAmount_validValueWithoutWhitespace_returnsDouble() throws ParseException {
+        String amount = "200.0";
+        double expected = Double.parseDouble(amount);
+        double actual = ParserUtil.parsePolicyAmount(amount);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parsePolicyAmount_validValueWithWhitespace_returnsDouble() throws ParseException {
+        String amount = "200.0";
+        double expected = Double.parseDouble(amount);
+        double actual = ParserUtil.parsePolicyAmount(WHITESPACE + amount + WHITESPACE);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parsePolicyAmount_null_throwsNullPointerException() throws ParseException {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicyAmount(null));
+    }
+
+    @Test
+    public void parsePolicyAmount_emptyString_returnNegative() throws ParseException {
+        double amount = ParserUtil.parsePolicyAmount("");
+        assertTrue(amount < 0);
+    }
+
+    @Test
+    public void parsePolicyAmount_negativeValue_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyAmount("-1"));
+    }
+
+    @Test
+    public void parseExpiryDate_validValueWithWhitespace_returnExpiryDate() throws ParseException {
+        String expiryDate = "12/23/2024";
+        LocalDate expected = LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER);
+        LocalDate actual = ParserUtil.parseExpiryDate(expiryDate);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseExpiryDate_validValueWithoutWhitespace_returnExpiryDate() throws ParseException {
+        String expiryDate = "12/23/2024";
+        LocalDate expected = LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER);
+        LocalDate actual = ParserUtil.parseExpiryDate(WHITESPACE + expiryDate + WHITESPACE);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseExpiryDate_invalidValue_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExpiryDate("99/99/9999"));
     }
 }
