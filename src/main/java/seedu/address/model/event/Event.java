@@ -49,9 +49,12 @@ public class Event {
         return value.equals(otherEvent.value);
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
     }
-
 }
