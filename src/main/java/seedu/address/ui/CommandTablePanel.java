@@ -30,8 +30,6 @@ public class CommandTablePanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(CommandTablePanel.class);
 
-    
-    
 
     @FXML
     private TableView<CommandEntry> commandTable;
