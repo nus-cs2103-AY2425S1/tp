@@ -721,85 +721,7 @@ To allow users to sort their contact list in alphabetical order (A-Z or Z-A) bas
 
 ---
 
-### 4. **Feature: Single Page View for Full Contact Details**
-
-**Purpose:**
-To provide a detailed view of a single contact’s information on a dedicated page, allowing users to view and review all
-details associated with that contact.
-
-#### **Command Format:**
-
-`view <ContactID>`
-
-**Example Commands:**
-
-- `view 123`
-- `view 4567`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `view` command with a valid ContactID.
-2. The system retrieves and displays the full details of the contact on a dedicated page.
-3. The user views all available information on the contact.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-- Case-insensitive.
-- Leading/trailing spaces are ignored.
-- Format: Must be a positive integer.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If contact does not exist: `Error: Contact not found. Please check the ContactID and try again.`
-
-**Rationale:**
-
-- Ensures that the contact is correctly identified and retrieved using a unique numeric ID, minimizing errors.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: The contact’s profile page is displayed.
-- GUI Change: The contact’s detailed information is shown on a dedicated page.
-
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- Contact Not Found: `Error: Contact not found. Please check the ContactID and try again.`
-- Empty ContactID: `Error: No ContactID provided. Please specify a valid ContactID to view details.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `view abc`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **Non-existent Contact:**
-  Example: `view 9999` (assuming 9999 does not exist)
-  `Error: Contact not found. Please check the ContactID and try again.`
-
-- **Missing ContactID:**
-  Example: `view`
-  `Error: No ContactID provided. Please specify a valid ContactID to view details.`
-
----
-
-### 5. **Feature: Undo Contact Deletion**
+### 4. **Feature: Undo Contact Deletion**
 
 **Purpose:**
 To allow users to recover a contact that was recently deleted, providing a grace period during which deletions can be
@@ -875,7 +797,7 @@ reversed.
 
 ---
 
-### 6. **Feature: Interaction History Log for Each Contact**
+### 5. **Feature: Interaction History Log for Each Contact**
 
 **Purpose:**
 To maintain a log of interactions (such as calls, messages, meetings) with each contact, allowing users to track and
@@ -982,7 +904,7 @@ review their communication history.
 
 ---
 
-### 7. **Feature: Create Tags for Contact Categorization**
+### 6. **Feature: Create Tags for Contact Categorization**
 
 **Purpose:**
 To allow users to create custom tags for contacts, categorizing them based on certain characteristics, such as "high net
@@ -1050,7 +972,7 @@ worth," "first-time buyer," etc., for better organization and personalization of
 
 ---
 
-### 8. **Feature: Find Function**
+### 7. **Feature: Find Function**
 
 **Purpose:**
 To enable users to search for clients by matching on specific fields (e.g., name, address, tag), allowing for efficient
@@ -1123,7 +1045,7 @@ retrieval of client information based on various criteria.
 
 ---
 
-### 9. **Feature: Add or Edit Remarks for a Contact**
+### 8. **Feature: Add or Edit Remarks for a Contact**
 
 **Purpose:**
 To allow users to add or update a remark for a contact, providing additional notes or information that may not be captured in other fields (e.g., preferences, additional details).
