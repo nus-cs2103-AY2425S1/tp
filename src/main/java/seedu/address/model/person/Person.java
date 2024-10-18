@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -85,10 +86,17 @@ public class Person implements Appointmentable {
     public String getOneHistory(LocalDateTime dateTime, Id patientId) {
         try {
             Appointment appointment = history.getOneAppointmentDetail(dateTime, patientId);
-            return appointment.toString(); // Assuming the Appointment class has a toString() method for formatting
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String time = "DateTime: " + dateTime.format(formatter);
+            return time + " " + appointment.toString();
         } catch (AppNotFoundException e) {
             return "No appointment found for the given date, patient, and doctor.";
         }
+    }
+
+    public String getPatientHistory(Id patientId) {
+        String appointments = history.getAllPatientsAppointments(patientId);
+        return appointments; // Assuming the Appointment class has a toString() method for formatting
     }
 
     public String getOneDayDoctorAppointment(LocalDate date, Id doctorId) {

@@ -26,9 +26,7 @@ public class ViewHistoryCommand extends Command {
             + "Parameters: PATIENT_ID (must be a valid ID) "
             + "LOCAL_DATETIME \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_ID + "01" + PREFIX_DATE + "2023-09-25 10:15";
-
-    public static final String MESSAGE_VIEW_HISTORY_SUCCESS = "Viewed history for Patient: %1$s on %2$s";
-    public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for Patient: %1$s on %2$s";
+    public static final String MESSAGE_NO_HISTORY_FOUND = "No history found for Patient";
 
     private final Id patientId;
     private final LocalDateTime dateTime;
@@ -67,11 +65,11 @@ public class ViewHistoryCommand extends Command {
             historyDateTime = dateTime;
             history = patientToView.getOneHistory(historyDateTime, patientId);
         } else {
-            history = patientToView.getHistory().toString();
+            history = patientToView.getPatientHistory(patientId);
         }
 
         if (history == null || history.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_NO_HISTORY_FOUND, patientToView.getName()));
+            throw new CommandException(MESSAGE_NO_HISTORY_FOUND);
         }
 
         return new CommandResult(history);
