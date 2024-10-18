@@ -96,7 +96,7 @@ public class ParserUtil {
      */
     public static LocalDateTime parseDate(String date) throws ParseException {
         requireNonNull(date);
-        String trimmedDate = date.trim();
+        String trimmedDate = date.trim().replace("Optional[", "").replace("]", "");
         LocalDateTime time;
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
