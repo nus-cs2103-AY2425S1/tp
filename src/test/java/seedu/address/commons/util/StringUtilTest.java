@@ -162,6 +162,7 @@ public class StringUtilTest {
                     clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor));
         } catch(AWTError e) {
             // Skip test if system does not support AWT
+            return;
         }
     }
 }
