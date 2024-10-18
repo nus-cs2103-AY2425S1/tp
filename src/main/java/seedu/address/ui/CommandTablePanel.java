@@ -90,15 +90,28 @@ public class CommandTablePanel extends UiPart<Region> {
         private String commandWord;
         private String commandUsage;
 
+        /**
+         * Creates a {@code CommandEntry} with the given command word and usage string.
+         */
         public CommandEntry(String commandWord, String commandUsage) {
             this.commandWord = commandWord;
             this.commandUsage = commandUsage;
         }
 
+        /**
+         * Gets the command word.
+         *
+         * @return command word.
+         */
         public String getCommandWord() {
             return this.commandWord;
         }
 
+        /**
+         * Gets the command usage syntax.
+         *
+         * @return command usage.
+         */
         public String getCommandUsage() {
             return this.commandUsage;
         }
