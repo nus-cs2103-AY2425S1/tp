@@ -10,6 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String TAG_CONSTRAINTS = "Invalid tag. Please provide a valid PersonTag "
+            + "(Buyer, Seller, Landlord, Tenant) or PropertyTag (HDB, Condo, Landed).";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;

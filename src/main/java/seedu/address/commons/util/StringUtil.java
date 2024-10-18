@@ -65,4 +65,17 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Capitalises the first letter of the string, leaving the rest unchanged.
+     *
+     * @param input The input string.
+     * @return The string with the first letter capitalised.
+     */
+    public static String capitaliseFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
+    }
 }
