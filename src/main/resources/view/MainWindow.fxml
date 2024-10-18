@@ -43,7 +43,7 @@
 
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" maxHeight="Infinity" maxWidth="Infinity">
           <HBox fx:id="sidebarPlaceholder" alignment="CENTER"
-                VBox.vgrow="ALWAYS" maxHeight="Infinity" maxWidth="400" minWidth="160" />
+                VBox.vgrow="ALWAYS" maxHeight="Infinity" maxWidth="400" minWidth="160" prefWidth="400" />
 
           <VBox styleClass="padding-8" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
             <StackPane fx:id="contactListPanelPlaceholder"

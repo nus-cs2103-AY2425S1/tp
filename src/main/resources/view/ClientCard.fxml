@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox styleClass="contact-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
@@ -17,15 +15,18 @@
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="100" GridPane.columnIndex="0">
 
-      <HBox styleClass="contact-title" spacing="8" alignment="CENTER_LEFT">
+      <HBox styleClass="contact-title" alignment="CENTER_LEFT">
         <Label fx:id="name" styleClass="contact-name" />
         <Label fx:id="id" styleClass="client-id" />
       </HBox>
       <Separator styleClass="contact-pane-divider" />
 
-      <Label fx:id="phone" styleClass="contact-details" text="\$phone" />
-      <Label fx:id="email" styleClass="contact-details" text="\$email" />
-      <Label fx:id="address" styleClass="contact-details" text="\$address" />
+      <VBox styleClass="contact-details-container">
+        <Label fx:id="phone" styleClass="contact-details" text="\$phone" />
+        <Label fx:id="email" styleClass="contact-details" text="\$email" />
+        <Label fx:id="address" styleClass="contact-details" text="\$address" />
+        <Label fx:id="date" styleClass="contact-details" text="\$date" />
+      </VBox>
 
       <FlowPane fx:id="tags" styleClass="contact-tags" />
     </VBox>

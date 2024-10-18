@@ -5,7 +5,6 @@ import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.ddd.model.contact.client.Client;
 
@@ -38,6 +37,9 @@ public class ClientCard extends UiPart<Region> {
     private Label address;
     
     @FXML
+    private Label date;
+
+    @FXML
     private FlowPane tags;
 
     @FXML
@@ -53,9 +55,10 @@ public class ClientCard extends UiPart<Region> {
         name.setText(String.format("%s. %s", displayedIndex, client.getName().fullName));
         id.setText(String.format("Client: #%d", client.getId().id));
         
-        phone.setText(String.format("📞 Phone Number: %s", client.getPhone()));
-        email.setText(String.format("📫 Email: %s", client.getEmail()));
-        address.setText(String.format("🏠 Address: %s", client.getAddress()));
+        phone.setText(String.format("📞  Phone Number: %s", client.getPhone()));
+        email.setText(String.format("📫  Email: %s", client.getEmail()));
+        address.setText(String.format("🏠  Address: %s", client.getAddress()));
+        date.setText(String.format("📅  Date: %s", client.getDate()));
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
