@@ -98,7 +98,8 @@ public class EditStudentCommand extends Command {
         TutorialGroup updatedTutorialGroup = editStudentDescriptor.getTutorialGroup().orElse(personToEdit.getTutorialGroup());
         StudentNumber updatedStudentNumber = editStudentDescriptor.getStudentNumber().orElse(personToEdit.getStudentNumber());
 
-        return new Student(updatedName, updatedPhone, updatedTutorialGroup, updatedStudentNumber);
+        return new Student(updatedName, updatedPhone, updatedTutorialGroup,
+                updatedStudentNumber, personToEdit.getAssignments());
     }
 
     @Override

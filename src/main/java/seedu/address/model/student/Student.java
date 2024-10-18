@@ -50,6 +50,15 @@ public class Student extends Person {
         this.studentNumber = studentNumber;
     }
 
+    public Student(Name name, Phone phone, TutorialGroup tutorialGroup,
+                   StudentNumber studentNumber, ObservableList<Assignment> assignments) {
+        super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
+        requireAllNonNull(tutorialGroup, studentNumber);
+        this.tutorialGroup = tutorialGroup;
+        this.studentNumber = studentNumber;
+        this.assignments.addAll(assignments);
+    }
+
     public TutorialGroup getTutorialGroup() {
         return tutorialGroup;
     }
