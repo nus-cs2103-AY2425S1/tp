@@ -36,7 +36,8 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "M "
             + PREFIX_AGE + "30 "
             + PREFIX_DETAIL + "Some detail here "
-            + PREFIX_TAG + "friends Group1";
+            + PREFIX_TAG + "Group1 "
+            + PREFIX_TAG + "Group2";
 
     public static final String MESSAGE_SUCCESS = "Added successfully! Added participant: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";
