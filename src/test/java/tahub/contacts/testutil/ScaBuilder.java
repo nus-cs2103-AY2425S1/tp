@@ -4,7 +4,12 @@ import java.util.HashSet;
 
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
-import tahub.contacts.model.person.*;
+import tahub.contacts.model.person.Address;
+import tahub.contacts.model.person.Email;
+import tahub.contacts.model.person.MatriculationNumber;
+import tahub.contacts.model.person.Name;
+import tahub.contacts.model.person.Person;
+import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 
 /**

@@ -6,13 +6,11 @@ import static tahub.contacts.testutil.Assert.assertThrows;
 
 import java.util.List;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.exceptions.AttendanceOperationException;
-import tahub.contacts.model.courseclass.CourseClass;
 import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
