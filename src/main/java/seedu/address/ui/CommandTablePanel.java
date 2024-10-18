@@ -26,8 +26,8 @@ public class CommandTablePanel extends UiPart<Region> {
     private static final String FXML = "CommandTablePanel.fxml";
     private final Logger logger = LogsCenter.getLogger(CommandTablePanel.class);
 
-    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * 0.15; // 15% of table width  
-    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * 0.85; // 85% of table width  
+    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * 0.15; // 15% of table width
+    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * 0.85; // 85% of table width
 
     @FXML
     private TableView<CommandEntry> commandTable;
@@ -37,7 +37,7 @@ public class CommandTablePanel extends UiPart<Region> {
 
     @FXML
     private TableColumn<CommandEntry, String> formatColumn;
-    
+
     /**
      * Creates a {@code CommandTablePanel}
      */
@@ -64,7 +64,7 @@ public class CommandTablePanel extends UiPart<Region> {
 
     /**
      * Fills up the table with the commands.
-     * 
+     *
      * @param commandList list of commands to print.
      */
     private void populateData() {
@@ -76,7 +76,7 @@ public class CommandTablePanel extends UiPart<Region> {
             new CommandEntry(DeleteCommand.COMMAND_WORD, DeleteCommand.MESSAGE_USAGE),
             new CommandEntry(EditCommand.COMMAND_WORD, EditCommand.MESSAGE_USAGE),
             new CommandEntry(FindCommand.COMMAND_WORD, FindCommand.MESSAGE_USAGE),
-            new CommandEntry(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE)   
+            new CommandEntry(ViewCommand.COMMAND_WORD, ViewCommand.MESSAGE_USAGE)
         );
         commandTable.setItems(commandList);
     }
