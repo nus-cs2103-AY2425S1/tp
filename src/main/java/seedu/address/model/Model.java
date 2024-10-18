@@ -100,17 +100,17 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
 
+    /** Returns an unmodifiable view of the filtered product list */
+    ObservableList<Product> getFilteredProductList();
+
     /**
      * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSupplierList(Predicate<Supplier> predicate);
 
-    /** Returns an unmodifiable view of the filtered product list */
-    ObservableList<Product> getFilteredProductList();
-
     /**
-     * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered product list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProductList(Predicate<Product> predicate);

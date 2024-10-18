@@ -5,33 +5,33 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.supplier.NameContainsKeywordsPredicate;
+import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all suppliers in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindCommand extends Command {
+public class ViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all suppliers whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all products whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " chocolate ice cream";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ProductNameContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public ViewCommand(ProductNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredSupplierList(predicate);
+        model.updateFilteredProductList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_SUPPLIERS_LISTED_OVERVIEW, model.getFilteredSupplierList().size()));
+                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
     }
 
     @Override
@@ -41,12 +41,12 @@ public class FindCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
+        if (!(other instanceof ViewCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        ViewCommand otherViewCommand = (ViewCommand) other;
+        return predicate.equals(otherViewCommand.predicate);
     }
 
     @Override
