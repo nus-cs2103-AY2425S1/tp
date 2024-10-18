@@ -12,7 +12,7 @@ Class AddressBook
 Class ModelManager
 Class UserPrefs
 
-Class UniquePersonList
+Class UniqueStudentList
 Class Person
 Class Address
 Class Email

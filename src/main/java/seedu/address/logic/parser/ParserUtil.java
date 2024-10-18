@@ -5,15 +5,15 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.OwedAmount;
-import seedu.address.model.person.Paid;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Schedule;
-import seedu.address.model.person.Subject;
+import seedu.address.model.Student.Address;
+import seedu.address.model.Student.Email;
+import seedu.address.model.Student.Name;
+import seedu.address.model.Student.OwedAmount;
+import seedu.address.model.Student.Paid;
+import seedu.address.model.Student.Phone;
+import seedu.address.model.Student.Rate;
+import seedu.address.model.Student.Schedule;
+import seedu.address.model.Student.Subject;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

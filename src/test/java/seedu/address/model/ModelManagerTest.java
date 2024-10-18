@@ -3,12 +3,12 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.HOON;
+import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalStudents.HOON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,8 +18,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.Student.NameContainsKeywordsPredicate;
+import seedu.address.model.Student.Student;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -77,65 +77,65 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
+    public void hasStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasStudent(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+    public void hasStudent_studentNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+    public void hasStudent_studentInAddressBook_returnsTrue() {
+        modelManager.addStudent(ALICE);
+        assertTrue(modelManager.hasStudent(ALICE));
     }
 
     @Test
-    public void countClashes_nullPerson_throwsNullPointerException() {
+    public void countClashes_nullStudent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.checkClashes(null));
     }
 
     @Test
     public void checkClashes_noClashes_returnsZero() {
-        modelManager.addPerson(ALICE);
+        modelManager.addStudent(ALICE);
         assertEquals(modelManager.checkClashes(BOB), 0);
     }
 
     @Test
     public void checkClashes_someClashes_returnsCorrectCount() {
-        modelManager.addPerson(ALICE);
+        modelManager.addStudent(ALICE);
         assertEquals(modelManager.checkClashes(HOON), 1);
     }
 
     @Test
-    public void getClashingPersons_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.getClashingPersons(null));
+    public void getClashingStudents_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.getClashingStudents(null));
     }
 
     @Test
-    public void getClashingPersons_noClashes_returnsEmptyList() {
-        modelManager.addPerson(ALICE);
-        assertEquals(modelManager.getClashingPersons(BENSON), new ArrayList<>());
+    public void getClashingStudents_noClashes_returnsEmptyList() {
+        modelManager.addStudent(ALICE);
+        assertEquals(modelManager.getClashingStudents(BENSON), new ArrayList<>());
     }
 
     @Test
-    public void getClashingPersons_someClashes_returnsCorrectList() {
-        modelManager.addPerson(ALICE);
-        ArrayList<Person> testList = new ArrayList<>();
+    public void getClashingStudents_someClashes_returnsCorrectList() {
+        modelManager.addStudent(ALICE);
+        ArrayList<Student> testList = new ArrayList<>();
         testList.add(ALICE);
-        assertEquals(modelManager.getClashingPersons(HOON), testList);
+        assertEquals(modelManager.getClashingStudents(HOON), testList);
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
     }
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -158,11 +158,11 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

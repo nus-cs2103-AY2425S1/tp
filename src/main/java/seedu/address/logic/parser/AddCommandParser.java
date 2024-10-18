@@ -15,16 +15,16 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.OwedAmount;
-import seedu.address.model.person.Paid;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Schedule;
-import seedu.address.model.person.Subject;
+import seedu.address.model.Student.Address;
+import seedu.address.model.Student.Email;
+import seedu.address.model.Student.Name;
+import seedu.address.model.Student.OwedAmount;
+import seedu.address.model.Student.Paid;
+import seedu.address.model.Student.Student;
+import seedu.address.model.Student.Phone;
+import seedu.address.model.Student.Rate;
+import seedu.address.model.Student.Schedule;
+import seedu.address.model.Student.Subject;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -67,9 +67,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         } else {
             owedAmount = new OwedAmount();
         }
-        Person person = new Person(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
+        Student student = new Student(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
 
-        return new AddCommand(person);
+        return new AddCommand(student);
     }
 
     /**

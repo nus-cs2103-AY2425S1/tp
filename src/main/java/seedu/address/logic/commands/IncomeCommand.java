@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.Student.Student;
 
 
 /**
@@ -20,11 +20,11 @@ public class IncomeCommand extends Command {
         requireNonNull(model);
         double totalOwed = 0;
         double totalPaid = 0;
-        ObservableList<Person> personList = model.getFilteredPersonList();
+        ObservableList<Student> studentList = model.getFilteredStudentList();
 
-        for (Person person: personList) {
-            totalOwed += person.getOwedAmount().value;
-            totalPaid += person.getPaid().value;
+        for (Student student: studentList) {
+            totalOwed += student.getOwedAmount().value;
+            totalPaid += student.getPaid().value;
         }
         return new CommandResult("Total Paid: " + totalPaid + "   Total Owed: " + totalOwed);
     }
