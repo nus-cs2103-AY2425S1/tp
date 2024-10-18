@@ -80,7 +80,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(tagName -> {
+        Set<Tag> tagSet = Stream.of(tags)
+                .map(tagName -> {
                     if (PersonTagType.isValidPersonTag(tagName)) {
                         return new PersonTag(tagName);
                     } else if (PropertyTagType.isValidPropertyTag(tagName)) {
@@ -93,6 +94,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setAddTags(tagSet);
         return this;
     }
+
+
 
     public EditPersonDescriptor build() {
         return descriptor;
