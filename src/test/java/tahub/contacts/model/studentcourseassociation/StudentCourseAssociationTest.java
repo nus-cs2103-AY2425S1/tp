@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
-import  tahub.contacts.model.grade.GradingSystem;
+import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.MatriculationNumber;
