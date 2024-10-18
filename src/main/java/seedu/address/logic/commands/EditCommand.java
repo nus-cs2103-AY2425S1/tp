@@ -244,7 +244,7 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("phone", studentId)
+                    .add("studentId", studentId)
                     .add("email", email)
                     .add("major", major)
                     .add("year", year)
