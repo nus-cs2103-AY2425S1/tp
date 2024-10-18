@@ -48,7 +48,7 @@ public class JsonAdaptedPerson {
 
     public JsonAdaptedPerson() {}
 
-    private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
+    final List<JsonAdaptedSubject> subjects = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -58,7 +58,7 @@ public class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("hours") String hours,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("role") String role,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
+            @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
         this.name = name;
         this.phone = phone;
         this.email = email;

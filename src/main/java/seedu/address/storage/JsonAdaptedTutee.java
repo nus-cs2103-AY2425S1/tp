@@ -16,6 +16,7 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.tag.Tag;
 
@@ -35,9 +36,10 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
     public JsonAdaptedTutee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("hours") String hours,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("subjects") List<JsonAdaptedSubject> subjects) {
 
-        super(name, phone, email, address, hours, tags, "Tutee");
+        super(name, phone, email, address, hours, tags, "Tutee", subjects);
     }
 
     /**
@@ -49,7 +51,7 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
                         source.getTags().stream()
                         .map(JsonAdaptedTag::new)
                         .collect(Collectors.toList()),
-                "Tutee"
+                "Tutee", source.getSubjects().stream().map(JsonAdaptedSubject::new).collect(Collectors.toList())
         );
     }
 
@@ -71,6 +73,11 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
         final List<Tag> tuteeTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             tuteeTags.add(tag.toModelType());
+        }
+
+        final List<Subject> personSubjects = new ArrayList<>();
+        for (JsonAdaptedSubject subject : super.subjects) {
+            personSubjects.add(subject.toModelType());
         }
 
         if (name == null) {
@@ -113,8 +120,12 @@ class JsonAdaptedTutee extends JsonAdaptedPerson {
         }
         final Hours modelHours = new Hours(hours);
 
+        final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
+
+
         final Set<Tag> modelTags = new HashSet<>(tuteeTags);
-        return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags);
+
+        return new Tutee(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
     }
 
 }
