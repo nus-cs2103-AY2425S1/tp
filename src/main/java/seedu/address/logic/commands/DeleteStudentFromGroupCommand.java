@@ -24,11 +24,11 @@ public class DeleteStudentFromGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the student identified from the target group by the student number used.\n"
-        + "Parameter: GROUP_NAME (must only contain alphanumeric characters and spaces, "
-        + "and it should not be blank)\n"
-        + "Parameter: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
-        + "and ends with a capital letter')\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_GROUP_NAME + "Team 5" + " "
+        + "Parameters: "
+        + PREFIX_GROUP_NAME + "GROUP_NAME "
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GROUP_NAME + "Team 5" + " "
         + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s from %2$s";

@@ -20,8 +20,8 @@ public class ListTaskCommand extends Command {
     public static final int LIST_GROUP_TASK_MARKER = 3;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Lists all tasks of a specified group. "
-        + "Example: " + COMMAND_WORD
+        + ": Lists all tasks of a specified group.\n"
+        + "PARAMETERS: " + COMMAND_WORD
         + PREFIX_GROUP_NAME + "GROUP_NAME "
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GROUP_NAME + "Group 1 ";

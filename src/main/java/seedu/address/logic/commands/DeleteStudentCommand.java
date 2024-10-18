@@ -21,9 +21,10 @@ public class DeleteStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the student identified by the student number used.\n"
-        + "Parameters: STUDENT_NUMBER (must be a string starting with 'A0', followed by 6 numeric figures, "
-        + "and ends with a capital letter')\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
+        + "Parameters:"
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_STUDENT_NUMBER + " " + "A0123456B";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Student: %1$s";
 

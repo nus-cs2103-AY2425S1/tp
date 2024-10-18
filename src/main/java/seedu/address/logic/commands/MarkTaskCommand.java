@@ -24,7 +24,7 @@ public class MarkTaskCommand extends Command {
     public static final String COMMAND_WORD = "mark_t";
     public static final String COMMAND_WORD_ALIAS = "mt";
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Changes the status of a task. "
+        + ": Changes the status of a task.\n"
         + "Parameters: "
         + PREFIX_GROUP_NAME + "GROUP_NAME "
         + PREFIX_INDEX + "INDEX\n"

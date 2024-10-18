@@ -30,8 +30,8 @@ public class AddStudentCommand extends Command {
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_STUDENT_NAME + "John Doe "
         + PREFIX_EMAIL + "johnd@example.com "
-        + PREFIX_TAG + "friends "
-        + PREFIX_TAG + "owesMoney "
+        + PREFIX_TAG + "experienced coder "
+        + PREFIX_TAG + "good at UI "
         + PREFIX_STUDENT_NUMBER + "A02345678J";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
