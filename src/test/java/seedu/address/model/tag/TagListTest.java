@@ -23,25 +23,36 @@ public class TagListTest {
 
     @Test
     public void addTag_newTag_success() {
-        assertTrue(tagList.addTag(tag1)); // Tag should be added.
-        assertTrue(tagList.contains(tag1)); // Tag should be present in the list.
+        assertTrue(tagList.addTag(tag1));
+        assertTrue(tagList.contains(tag1));
     }
 
     @Test
     public void addTag_duplicateTag_failure() {
         tagList.addTag(tag1);
-        assertFalse(tagList.addTag(tag1)); // Adding the same tag again should return false.
+        assertFalse(tagList.addTag(tag1));
+    }
+
+    @Test
+    public void deleteTag_existingTag_success() {
+        tagList.addTag(tag1);
+        assertTrue(tagList.deleteTag(tag1));
+    }
+
+    @Test
+    public void deleteTag_nonExistentTag_failure() {
+        assertFalse(tagList.deleteTag(tag1));
     }
 
     @Test
     public void contains_tagInList_success() {
         tagList.addTag(tag2);
-        assertTrue(tagList.contains(tag2)); // Tag should be found in the list.
+        assertTrue(tagList.contains(tag2));
     }
 
     @Test
     public void contains_tagNotInList_failure() {
-        assertFalse(tagList.contains(tag3)); // Tag should not be found in the empty list.
+        assertFalse(tagList.contains(tag3));
     }
 
     @Test
