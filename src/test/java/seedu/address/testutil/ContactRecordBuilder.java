@@ -7,7 +7,7 @@ import seedu.address.model.contactrecord.ContactRecord;
  */
 public class ContactRecordBuilder {
     public static final String DEFAULT_DATE = null;
-    public static final String DEFAULT_NOTES = "";
+    public static final String DEFAULT_NOTES = "This is a default note";
 
     private String date;
     private String notes;
