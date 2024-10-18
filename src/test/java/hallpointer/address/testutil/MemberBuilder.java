@@ -7,6 +7,8 @@ import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.Name;
 import hallpointer.address.model.member.Room;
 import hallpointer.address.model.member.Telegram;
+import hallpointer.address.model.point.Point;
+import hallpointer.address.model.session.Session;
 import hallpointer.address.model.tag.Tag;
 import hallpointer.address.model.util.SampleDataUtil;
 
@@ -23,7 +25,8 @@ public class MemberBuilder {
     private Telegram telegram;
     private Room room;
     private Set<Tag> tags;
-
+    private Point points = new Point("0");
+    private Set<Session> sessions;
     /**
      * Creates a {@code MemberBuilder} with the default details.
      */
@@ -32,6 +35,8 @@ public class MemberBuilder {
         telegram = new Telegram(DEFAULT_TELEGRAM);
         room = new Room(DEFAULT_ROOM);
         tags = new HashSet<>();
+        points = new Point("0");
+        sessions = new HashSet<>();
     }
 
     /**
@@ -42,6 +47,8 @@ public class MemberBuilder {
         telegram = memberToCopy.getTelegram();
         room = memberToCopy.getRoom();
         tags = new HashSet<>(memberToCopy.getTags());
+        points = memberToCopy.getTotalPoints();
+        sessions = new HashSet<>(memberToCopy.getSessions());
     }
 
     /**
@@ -78,7 +85,13 @@ public class MemberBuilder {
     }
 
     public Member build() {
-        return new Member(name, telegram, room, tags);
+        return new Member(name, telegram, room, tags, points, sessions);
     }
-
+    /**
+     * Parses the {@code session} into a {@code Set<Session>} and set it to the {@code Member} that we are building.
+     */
+    public MemberBuilder withSession(Session session) {
+        this.sessions.add(session);
+        return this;
+    }
 }

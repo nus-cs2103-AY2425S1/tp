@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import hallpointer.address.model.member.Member;
 import hallpointer.address.model.member.exceptions.DuplicateMemberException;
-import hallpointer.address.model.session.Session;
 import hallpointer.address.testutil.MemberBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -103,11 +102,6 @@ public class AddressBookTest {
         @Override
         public ObservableList<Member> getMemberList() {
             return members;
-        }
-
-        @Override
-        public ObservableList<Session> getSessionList() {
-            return null;
         }
     }
 

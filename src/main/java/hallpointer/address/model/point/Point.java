@@ -36,7 +36,6 @@ public class Point {
             return false;
         }
     }
-
     /**
      * Takes in a Point object and returns a new Point object with the points added.
      */
