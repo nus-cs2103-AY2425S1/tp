@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.awt.*;
+import java.awt.AWTError;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
@@ -160,7 +161,7 @@ public class StringUtilTest {
 
             assertEquals(selection.getTransferData(DataFlavor.stringFlavor),
                     clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor));
-        } catch(AWTError e) {
+        } catch (AWTError e) {
             // Skip test if system does not support AWT
             return;
         }
