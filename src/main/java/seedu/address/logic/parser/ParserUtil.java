@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.ClassId;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Fees;
+import seedu.address.model.person.MonthPaid;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -152,6 +153,34 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> monthsPaid} into a {@code Set<MonthPaid>}.
+     */
+    public static Set<MonthPaid> parseMonthsPaid(Collection<String> monthsPaid) throws ParseException {
+        requireNonNull(monthsPaid);
+        final Set<MonthPaid> monthPaidSet = new HashSet<>();
+        for (String monthPaid : monthsPaid) {
+            monthPaidSet.add(parseMonthPaid(monthPaid));
+        }
+        return monthPaidSet;
+    }
+
+    /**
+     * Parses a {@code String monthPaid} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static MonthPaid parseMonthPaid(String monthPaid) throws ParseException {
+        requireNonNull(monthPaid);
+
+        String trimmedMonthsPaid = monthPaid.trim();
+        if (!MonthPaid.isValidMonthPaid(trimmedMonthsPaid)) {
+            throw new ParseException(MonthPaid.MESSAGE_CONSTRAINTS);
+        }
+        return new MonthPaid(trimmedMonthsPaid);
     }
 
     public static boolean isValidIndex(String preamble) {

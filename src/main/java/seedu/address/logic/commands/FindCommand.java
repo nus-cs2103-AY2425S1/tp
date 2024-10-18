@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -21,9 +23,9 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example 1: " + COMMAND_WORD + " n/alice bob charlie\n"
-            + "Example 2: " + COMMAND_WORD + " c/1 2\n"
-            + "Example 3: " + COMMAND_WORD + " n/alice c/1\n";
+            + "Example 1: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie\n"
+            + "Example 2: " + COMMAND_WORD + " " + PREFIX_CLASSID + "1 2\n"
+            + "Example 3: " + COMMAND_WORD + " " + PREFIX_NAME + "alice " + PREFIX_CLASSID + "1\n";
 
     public static final String NO_SEARCH_FIELDS_PROVIDED = "At least one field to search by must be provided.";
 
