@@ -102,7 +102,7 @@ public class AddressBookParser {
         case DeletePropertyCommand.COMMAND_WORD:
             return new DeletePropertyCommandParser().parse(arguments);
         case FilterClientCommand.COMMAND_WORD:
-            return new FilterClientCommand();
+            return new FilterClientCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

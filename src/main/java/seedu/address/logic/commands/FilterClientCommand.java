@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILTER;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.client.Name;
 
 /**
  * Filters clients based on their name.
@@ -22,17 +24,50 @@ public class FilterClientCommand extends Command {
             + PREFIX_FILTER + "[NAME]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_FILTER + " Bob";
 
-    /** Message indicating the command is not yet implemented. */
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "filterclient command not implemented yet";
+    /** Message indicating that the filtering operation failed. */
+    public static final String MESSAGE_FAILURE = "Unable to filter clients.";
+
+    /** Message used to format the arguments passed to the command. */
+    public static final String MESSAGE_ARGUMENTS = "Name: %1$s";
+
+    /** The client whose name is being used for filtering. */
+    private final Name name;
+
+    /**
+     * Constructs a FilterClientCommand to filter the specified {@code Client}.
+     *
+     * @param name The client to filter by.
+     * @throws NullPointerException If the provided client is null.
+     */
+    public FilterClientCommand(Name name) {
+        requireAllNonNull(name);
+        this.name = name;
+    }
 
     /**
      * Executes the command to filter clients based on the provided name.
      *
      * @param model The model which contains the client data to be filtered.
      * @return The result of the command execution.
-     * @throws CommandException If the command is not yet implemented.
+     * @throws CommandException If the filtering operation fails.
      */
+    @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        throw new CommandException(MESSAGE_FAILURE);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof FilterClientCommand)) {
+            return false;
+        }
+        // state check
+        FilterClientCommand e = (FilterClientCommand) other;
+        return name.equals(e.name);
     }
 }
