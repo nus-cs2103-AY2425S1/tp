@@ -13,6 +13,7 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.testutil.TypicalProjects;
+import seedu.address.testutil.TypicalAssignments;
 
 public class JsonSerializableAddressBookTest {
 
@@ -25,6 +26,7 @@ public class JsonSerializableAddressBookTest {
     private static final Path INVALID_PROJECT_FILE = TEST_DATA_FOLDER.resolve("invalidProjectAddressBook.json");
     private static final Path DUPLICATE_PROJECT_FILE = TEST_DATA_FOLDER.resolve("duplicateProjectAddressBook.json");
 
+    private static final Path TYPICAL_ASSIGNMENTS_FILE = TEST_DATA_FOLDER.resolve("typicalAssignmentsAddressBook.json");
     private static final Path INVALID_ASSIGNMENT_FILE = TEST_DATA_FOLDER.resolve("invalidAssignmentAddressBook.json");
     private static final Path DUPLICATE_ASSIGNMENT_FILE = TEST_DATA_FOLDER
             .resolve("duplicateAssignmentAddressBook.json");
@@ -75,6 +77,15 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PROJECT,
                 dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_typicalAssignmentsFile_success() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_ASSIGNMENTS_FILE,
+                JsonSerializableAddressBook.class).get();
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalAssignmentsAddressBook = TypicalAssignments.getTypicalAddressBook();
+        assertEquals(addressBookFromFile, typicalAssignmentsAddressBook);
     }
 
     @Test
