@@ -119,21 +119,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String income} into a {@code Income}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code income} is invalid.
-     */
-    public static Income parseIncome(String income) throws ParseException {
-        requireNonNull(income);
-        String trimmedIncome = income.trim();
-        if (!Income.isValidIncome(trimmedIncome)) {
-            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
-        }
-        return new Income(trimmedIncome);
-    }
-
-    /**
      * Parses a {@code String priority} into a {@code Priority}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -155,6 +140,31 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) {
         requireNonNull(remark);
         return new Remark(remark.trim());
+    }
+
+    /**
+     * Parses a {@code String income} into a {@code Income}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code income} is invalid.
+     */
+    public static Income parseIncome(String income) throws ParseException {
+        double parsedIncome;
+        requireNonNull(income);
+
+        String trimmedIncome = income.trim();
+
+        try {
+            parsedIncome = Double.parseDouble(trimmedIncome);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+
+        if (!Income.isValidIncome(parsedIncome)) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Income(parsedIncome);
     }
 
     /**
