@@ -29,6 +29,7 @@ public class StorageManager implements Storage {
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        manualSaveFilePath = addressBookStorage.getManualSaveFilePath();
     }
 
     // ================ UserPrefs methods ==============================
@@ -90,6 +91,7 @@ public class StorageManager implements Storage {
      * @param addressBook The address book data to save.
      * @throws IOException If there is an error saving the file.
      */
+    @Override
     public void saveAddressBookManually(ReadOnlyAddressBook addressBook) throws IOException {
         if (manualSaveFilePath == null) {
             throw new IOException("Manual save file path is not set.");
@@ -104,12 +106,11 @@ public class StorageManager implements Storage {
      * @return An optional containing the address book if successfully loaded, otherwise an empty optional.
      * @throws DataLoadingException If there is an error loading the file.
      */
-    public Optional<ReadOnlyAddressBook> loadAddressBookManually() throws Exception {
-        if (manualSaveFilePath == null) {
-            throw new Exception("Manual load file path is not set.");
-        }
+    @Override
+    public Optional<ReadOnlyAddressBook> loadAddressBookManually() throws DataLoadingException {
+
         logger.fine("Attempting to manually read from file: " + manualSaveFilePath);
         return addressBookStorage.readAddressBook(manualSaveFilePath);
     }
-    
+
 }

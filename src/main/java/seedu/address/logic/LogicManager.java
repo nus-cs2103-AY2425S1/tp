@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -49,9 +50,19 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
-
+        if (commandResult.isLoad()) {
+            try {
+                storage.loadAddressBookManually();
+            } catch (Exception e) {
+                throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, e.getMessage()), e);
+            }
+        }
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            if (commandResult.isSave()) {
+                storage.saveAddressBookManually(model.getAddressBook());
+            } else {
+                storage.saveAddressBook(model.getAddressBook());
+            }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
