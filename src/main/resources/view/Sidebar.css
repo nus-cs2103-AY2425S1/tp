@@ -1,6 +1,6 @@
 .sidebar {
     -fx-background-color: d9d9d9;
-    -fx-padding: 0 8 0 8;
+    -fx-padding: 16 16 16 16;
 }
 
 .sidebar-title {
