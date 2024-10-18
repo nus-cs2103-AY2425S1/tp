@@ -16,17 +16,12 @@ public class TypicalProducts {
     public static final Product BANANA = new ProductBuilder().withName("Banana").build();
     public static final Product CARROT = new ProductBuilder().withName("Carrot").build();
     public static final Product DATE = new ProductBuilder().withName("Date").build();
-    public static final Product EGGPLANT = new ProductBuilder().withName("Eggplant").build();
     public static final Product FIG = new ProductBuilder().withName("Fig").build();
     public static final Product GRAPE = new ProductBuilder().withName("Grape").build();
 
     // Manually added
     public static final Product PINEAPPLE = new ProductBuilder().withName("Pineapple").build();
-    public static final Product APPLE_JUICE= new ProductBuilder().withName("Apple Juice").build();
-
-    // Manually added - Product's details found in {@code CommandTestUtil}
-    public static final Product JACKFRUIT = new ProductBuilder().withName("Jackfruit").build();
-    public static final Product KIWI = new ProductBuilder().withName("Kiwi").build();
+    public static final Product APPLE_JUICE = new ProductBuilder().withName("Apple Juice").build();
 
     private TypicalProducts() {} // prevents instantiation
 
