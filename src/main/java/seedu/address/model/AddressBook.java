@@ -111,6 +111,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the volunteer book.
      */
     public void removeVolunteer(Volunteer key) {
+        events.removeParticipant(key.getName().fullName);
         volunteers.remove(key);
     }
     //// event level operations
@@ -150,8 +151,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeEvent(Event key) {
+        volunteers.removeEvent(key.getName().toString());
         events.remove(key);
-
     }
     //// util methods
     @Override

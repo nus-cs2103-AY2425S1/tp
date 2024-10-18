@@ -92,7 +92,12 @@ public class Event {
         return volunteers;
     }
 
-    public void addVolunteer(String newVolunteer) {
+    /**
+     * Adds a volunteer to the event's list of participants.
+     *
+     * @param newVolunteer The volunteer to add.
+     */
+    public void addParticipant(String newVolunteer) {
         volunteers.add(newVolunteer);
     }
 
@@ -103,6 +108,14 @@ public class Event {
      */
     public void unassignVolunteer(String unassignedVolunteer) {
         volunteers.remove(unassignedVolunteer);
+    }
+    /**
+     * Removes a volunteer from the event's list of participants.
+     *
+     * @param volunteerToRemove The volunteer to remove.
+     */
+    public void removeParticipant(String volunteerToRemove) {
+        volunteers.remove(volunteerToRemove);
     }
 
     /**
@@ -160,7 +173,7 @@ public class Event {
                 .toString();
     }
 
-    public boolean hasPartitipant(String volunteerName) {
+    public boolean hasParticipant(String volunteerName) {
         return this.volunteers.contains(volunteerName);
     }
 }
