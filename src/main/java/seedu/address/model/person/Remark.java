@@ -18,6 +18,7 @@ public class Remark {
     public static Remark of(String remark) {
         return new Remark(remark);
     }
+
     public String getValue() {
         return this.value;
     }

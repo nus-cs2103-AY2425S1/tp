@@ -18,7 +18,12 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
             "Multiple values specified for the following single-valued field(s): ";
-
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format! Please use yyyy-mm-dd.";
+    public static final String MESSAGE_REMARK_PERSON_SUCCESS = "";
+    public static final String MESSAGE_BEFORE_DATE_OF_CREATION =
+            "%1$s is before the date of creation of this log %2$s!";
+    public static final String MESSAGE_NO_ENTRY_ON_DATE = "%1$s has no entry!";
+    public static final String MESSAGE_ACTIVITY_LIST_NOT_INITIALIZED = "Activity list not initialized!";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -45,6 +50,8 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Remark: ")
                 .append(person.getRemark())
+                .append("; Birthday: ")
+                .append(person.getBirthday().toString())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
