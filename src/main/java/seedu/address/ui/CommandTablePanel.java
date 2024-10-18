@@ -24,10 +24,14 @@ import seedu.address.logic.commands.ViewCommand;
  */
 public class CommandTablePanel extends UiPart<Region> {
     private static final String FXML = "CommandTablePanel.fxml";
+
+    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * 0.85; // 85% of table width
+    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * 0.15; // 15% of table width
+
     private final Logger logger = LogsCenter.getLogger(CommandTablePanel.class);
 
-    private static final double COMMAND_WORD_COLUMN_SIZE = Integer.MAX_VALUE * 0.15; // 15% of table width
-    private static final double COMMAND_USAGE_COLUMN_SIZE = Integer.MAX_VALUE * 0.85; // 85% of table width
+    
+    
 
     @FXML
     private TableView<CommandEntry> commandTable;
@@ -81,7 +85,9 @@ public class CommandTablePanel extends UiPart<Region> {
         commandTable.setItems(commandList);
     }
 
-
+    /**
+     * Custom table record that displays onto table.
+     */
     public class CommandEntry {
         private String commandWord;
         private String commandUsage;
@@ -100,6 +106,9 @@ public class CommandTablePanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Custom {@code TableCell} that displays the graphics of a command record.
+     */
     class CommandTableCell extends TableCell<CommandEntry, String> {
         private final Text text = new Text();
 
