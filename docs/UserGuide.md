@@ -92,6 +92,20 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
+### Sorting contacts: `sort`
+
+Sorts the contacts in the address book by their names in either ascending or descending order.
+
+Format: `sort ORDER`
+
+- `ORDER` must be either `asc` for ascending (A-Z) or `desc` for descending (Z-A).
+- If an invalid or no order is provided, an error message will be shown.
+
+Examples:
+* `sort asc` – Sorts contacts in alphabetical order (A-Z).
+* `sort desc` – Sorts contacts in reverse alphabetical order (Z-A).
+
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
