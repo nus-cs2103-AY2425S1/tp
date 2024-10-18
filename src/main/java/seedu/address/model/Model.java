@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -129,8 +131,7 @@ public interface Model {
      * @return The event with the matching ID, or null if not found.
      */
     Event getEvent(int eventId);
-
     void viewEvent(Event eventToView);
-
     void viewVolunteer(Volunteer volunteerToView);
+    void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException;
 }
