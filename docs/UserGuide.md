@@ -187,11 +187,11 @@ Format: `unassign v/ VOLUNTEER_INDEX e/ EVENT_INDEX`
 Examples:
 * `unassign v/ 1 e/ 2` removes the first volunteer on the volunteer list from the list of participants of the second event on the event list.
 
-### Listing all volunteers participating in an event: `view`
+### Listing all volunteers participating in an event: `/e view`
 
 Displays all volunteers participating in the event at the specified `INDEX` under the `Volunteers` display.
 
-Format: `view e/ EVENT_INDEX`
+Format: `/e view EVENT_INDEX`
 
 * The index refers to the number on the left of the event and volunteer's name in their respective lists.
 * The index **must be a positive integer** 1, 2, 3, …​)
