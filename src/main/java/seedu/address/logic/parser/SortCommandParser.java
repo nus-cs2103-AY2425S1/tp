@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.SortOption.MESSAGE_EMPTY_SORT_OPTION;
 
 import java.util.Optional;
 
@@ -36,7 +37,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         String sortOptionValue = sortOption.get().trim();
 
         if (sortOptionValue.isEmpty()) {
-            throw new ParseException("Sort option cannot be empty.");
+            throw new ParseException(MESSAGE_EMPTY_SORT_OPTION);
         }
 
         // Ensure sort option is supported

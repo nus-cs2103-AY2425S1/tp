@@ -21,6 +21,8 @@ public class SortOption {
     public static final String MESSAGE_CONSTRAINTS = "Invalid sort option.\nValid options are: "
             + String.join(", ", VALID_SORT_OPTIONS);
 
+    public static final String MESSAGE_EMPTY_SORT_OPTION = "Sort option cannot be empty.";
+
     private final String value;
 
     /**
