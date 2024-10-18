@@ -133,4 +133,6 @@ public interface Model {
     Event getEvent(int eventId);
 
     void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException;
+    void viewEvent(Event eventToView);
+    void viewVolunteer(Volunteer volunteerToView);
 }

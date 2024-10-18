@@ -25,7 +25,6 @@ public class VolunteerAddCommand extends Command {
     private static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a volunteer to the system. "
             + "Parameters: "
-            + "type/volunteer "
             + VOLUNTEER_PREFIX_NAME + "NAME "
             + VOLUNTEER_PREFIX_PHONE + "PHONE "
             + VOLUNTEER_PREFIX_EMAIL + "EMAIL "
@@ -36,17 +35,11 @@ public class VolunteerAddCommand extends Command {
             + VOLUNTEER_PREFIX_NAME + "John Doe "
             + VOLUNTEER_PREFIX_PHONE + "98765432 "
             + VOLUNTEER_PREFIX_EMAIL + "johndoe@example.com "
-            + VOLUNTEER_PREFIX_AVAILABLE_DATE + "2020-10-10"
+            + VOLUNTEER_PREFIX_AVAILABLE_DATE + "2020-10-10 "
             + VOLUNTEER_PREFIX_START_TIME + "11:00 "
             + VOLUNTEER_PREFIX_END_TIME + "12:00 ";
-
-    /**
-     * Creates a {@code VolunteerAddCommand} to add the specified {@code Volunteer}.
-     *
-     * @param volunteer The volunteer to be added.
-     */
+    // Example: /v new n/John Doe p/98765432 em/johndoe@example.com d/2024-10-15 s/09:00 e/17:00
     private final Volunteer toAdd;
-    // Example: /v new n/John Doe p/98765432 em/johndoe@example.com d/2024-10-15 s/09:00 ee/17:00
 
     /**
      * Constructs a {@code VolunteerAddCommand} that adds the specified {@code Volunteer} to the system.
