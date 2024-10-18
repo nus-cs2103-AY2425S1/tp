@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_HUGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_DIDDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -146,6 +148,28 @@ public class EditStudentCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditStudentCommand(INDEX_FIRST_PERSON, DESC_DIDDY)));
+
+        // ----------------- EditStudentDescriptor equals test --------------------------------------------
+        EditStudentDescriptorBuilder descriptorBuilder = new EditStudentDescriptorBuilder(DESC_HUGH);
+
+        // same object -> returns true
+        assertTrue(copyDescriptor.equals(copyDescriptor));
+
+        // different name
+        EditStudentDescriptor editedHugh = descriptorBuilder.withName(VALID_NAME_DIDDY).build();
+        assertFalse(copyDescriptor.equals(editedHugh));
+
+        // different phone
+        editedHugh = descriptorBuilder.withPhone(VALID_PHONE_DIDDY).build();
+        assertFalse(copyDescriptor.equals(editedHugh));
+
+        // different tutorial group
+        editedHugh = descriptorBuilder.withTutorialGroup(VALID_TUTORIAL_GROUP_DIDDY).build();
+        assertFalse(copyDescriptor.equals(editedHugh));
+
+        // different student number
+        editedHugh = descriptorBuilder.withStudentNumber(VALID_STUDENT_NUMBER_DIDDY).build();
+        assertFalse(copyDescriptor.equals(editedHugh));
     }
 
     @Test
