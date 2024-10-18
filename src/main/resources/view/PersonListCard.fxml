@@ -30,11 +30,26 @@
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="nextContactDate" styleClass="cell_small_label" text="\$nextContactDate" />
-      <Label fx:id="callFrequency" styleClass="cell_small_label" text="\$callFrequency" />
+      <HBox>
+        <Label styleClass="cell_small_label" text="Phone Number: " />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+      </HBox>
+      <HBox>
+        <Label styleClass="cell_small_label" text="Next Contact Date: " />
+        <Label fx:id="nextContactDate" styleClass="cell_small_label" text="\$nextContactDate" />
+      </HBox>
+      <HBox>
+        <Label styleClass="cell_small_label" text="Address: " />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      </HBox>
+      <HBox>
+        <Label styleClass="cell_small_label" text="Email: " />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      </HBox>
+      <HBox>
+        <Label styleClass="cell_small_label" text="Call Frequency (Days): " />
+        <Label fx:id="callFrequency" styleClass="cell_small_label" text="\$callFrequency" />
+      </HBox>
     </VBox>
   </GridPane>
 </HBox>
