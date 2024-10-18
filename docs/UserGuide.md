@@ -15,7 +15,7 @@
 
   .highlight-feature:hover {
     background-color: #b3b3b3;
-    pointer: cursor;
+    cursor: pointer;
   }
 
   .icon {
@@ -26,6 +26,7 @@
 
 <script>
   function copyToClipboard(text) {
+    console.log("Copying to clipboard: " + text);
     navigator.clipboard.writeText(text);
   }
 </script>
@@ -164,6 +165,7 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 - **VRN** must follow the format listed [earlier](#glossary)
 - **VIN** must be a 17-character alphanumeric string.
 - **VRN** and **VIN** must be unique for each car.
+- **Issue** must be alphanumeric and can contain spaces, with a maximum length of 20 characters.
 
 <box type="tip" seamless>
 
@@ -279,6 +281,7 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 - When editing issues, the existing issues of the client will be removed; adding issues is not cumulative.
 - To remove all issues from the client, type `i/` without specifying any issues after it.
 - VRN and VIN requirements are the same as for the [add-client](#adding-a-client-add-client) command.
+- **Issue** must be alphanumeric and can contain spaces, with a maximum length of 20 characters.
 
 **Examples:**
 
