@@ -137,8 +137,8 @@
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#f0f0f0, 20%);
-     -fx-border-color: derive(#f0f0f0, 10%);
+     -fx-background-color: derive(#3e7b91, 20%);
+     -fx-border-color: derive(#4b4b4b, 10%);
      -fx-border-top-width: 1px;
 }
 
@@ -286,7 +286,7 @@
 }
 
 .scroll-bar:vertical > .increment-button, .scroll-bar:vertical > .decrement-button {
-    -fx-background-color: derive(#f0f0f0, 20%);
+    -fx-background-color: derive(#c0c0c0, 20%);
 }
 
 
