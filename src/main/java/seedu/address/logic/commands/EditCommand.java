@@ -217,6 +217,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(hours);
         }
 
+        private void setSubject(Set<Subject> subjects) {
+            this.subjects = subjects;
+        }
+
 
 
         /**
