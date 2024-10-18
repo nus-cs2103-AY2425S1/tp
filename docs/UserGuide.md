@@ -4,9 +4,9 @@
     pageNav: 3
 ---
 
-# AB-3 User Guide
+# TutorEase User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while
+TutorEase is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while
 still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management
 tasks done faster than traditional GUI apps.
 
@@ -32,12 +32,12 @@ tasks done faster than traditional GUI apps.
    open the help window.<br>
    Some example commands you can try:
 
-    * `list` : Lists all contacts.
+    * `contact list` : Lists all contacts.
 
-    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe`
-      to the Address Book.
+    * `contact add /n John Doe /p 98765432 /e johnd@example.com /a John street, block 123, #01-01 /r Student /tfriends`:
+      Adds a contact named `John Doe` to the Address Book.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `contact delete 3` : Deletes the 3rd contact shown in the current list.
 
     * `clear` : Deletes all contacts.
 
@@ -54,16 +54,16 @@ tasks done faster than traditional GUI apps.
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `contact add /nNAME`, `NAME` is a parameter which can be used as `contact add /nJohn Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `/nNAME [/tTAG]` can be used as `/nJohn Doe /tfriend` or as `/nJohn Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[/tTAG]…​` can be used as ` ` (i.e. 0 times), `/tfriend`, `/tfriend /tfamily` etc.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `/nNAME /pPHONE_NUMBER`, `/pPHONE_NUMBER /nNAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be
   ignored.<br>
@@ -81,21 +81,23 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-### Adding a person: `add`
+### Adding a person: `contact add`
 
-Adds a person to the address book.
+Adds a person to Address Book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS /rROLE [/tTAG]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of tags (including 0)
+**Tip 1:** A person can have any number of tags (including 0)
+
+**Tip 2:** Role can only be Student or Guardian
 </box>
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `contact add /nJohn Doe /p98765432 /ejohnd@example.com /aJohn street, block 123, #01-01 /rStudent`
+* `contact add /nBetsy Crowe /tfriend /ebetsycrowe@example.com /rGuardian /aNewgate Prison /p1234567 /tcriminal`
 
 ### Adding a lesson : `lesson add`
 
@@ -113,11 +115,11 @@ Format: `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION`
 * The duration must be between 0 and 24 hours inclusive.
 * The student ID and location and duration **must be a positive integer** 1, 2, 3, …​
 
-### Listing all persons : `list`
+### Listing all persons : `contact list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: `contact list`
 
 ### Listing all lessons : `lesson list`
 
@@ -129,21 +131,21 @@ Format: `lesson list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [/nNAME] [/pPHONE] [/eEMAIL] [/aADDRESS] [/tTAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* You can remove all the person’s tags by typing `/t` without
   specifying any tags after it.
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
+* `edit 1 /p91234567 /ejohndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 2 /nBetsy Crower /t` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -164,11 +166,11 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person : `contact delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `contact delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -176,7 +178,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `contact list` followed by `contact delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Deleting a lesson : `lesson delete`
@@ -253,12 +255,12 @@ the data of your previous AddressBook home folder.
 
  Action             | Format, Examples                                                                                                                                                      
 --------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+ **Add Contact**    | `contact add /nNAME /pPHONE_NUMBER /eEMAIL /aADDRESS [/tTAG]…​` <br> e.g., `contact add /nJames Ho /p22224444 /ejamesho@example.com /rStudent /a123, Clementi Rd, 1234665 /tfriend /tcolleague` 
  **Clear**          | `clear`                                                                                                                                                               
- **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
- **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
+ **Delete Contact** | `contact delete INDEX`<br> e.g., `contact delete 3`                                                                                                                                   
+ **Edit**           | `edit INDEX [/nNAME] [/pPHONE_NUMBER] [/eEMAIL] [/aADDRESS] [/tTAG]…​`<br> e.g.,`edit 2 /nJames Lee /ejameslee@example.com`                                           
  **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
- **List**           | `list`                                                                                                                                                                
+ **List Contacts**  | `contact list`                                                                                                                                                                
  **Add Lesson**     | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
  **List Lessons**   | `lesson list`                                                                                                                                                         
  **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`                                                                                                                    
