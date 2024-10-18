@@ -1,24 +1,47 @@
+# EduTUTU User Guide
+
+**EduTUTU** is a desktop application designed to streamline contact management for tuition centers, making it easier to 
+organise and access student information. Optimised for use through a Command Line Interface (CLI) while incorporating 
+the convenience of a Graphical User Interface (GUI), EduTUTU allows you to manage student details with speed and 
+efficiency. Whether you’re handling student registrations, updating records, or searching for students, EduTUTU helps 
+you complete these tasks more quickly than traditional applications, making it an ideal solution for tuition center 
+administrators.
 ---
-layout: page
-title: User Guide
+# Table of Contents
+
+1. [Installation/Setup](#installationsetup)
+2. [Main Features](#main-features)
+    - [Dashboard Overview](#dashboard-overview)
+    - [Student Management](#student-management)
+    - [Payment Tracking](#payment-tracking)
+        - [Mark Paid Feature](#mark-paid-feature)
+    - [Task Management](#task-management)
+3. [Command Instructions](#command-instructions)
+    - [Adding/Deleting/Editing a New Student](#addingdeletingediting-a-new-student)
+        - [Command](#command)
+        - [Example](#example)
+    - [Managing Payments](#managing-payments)
+        - [Command](#command-1)
+        - [Example](#example-1)
+    - [Marking Tasks as Completed](#marking-tasks-as-completed)
+        - [Command](#command-2)
+        - [Example](#example-2)
+    - [Advanced Features (Filtering by Class ID and Name, Pie Chart)](#advanced-features-filtering-by-class-id-and-name-pie-chart)
+        - [Command](#command-3)
+        - [Example](#example-3)
+4. [FAQs](#faqs)
+
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
-
-## Quick start
+# 1.Installation/Setup
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T15-2/tp/releases/tag/v1.3).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar edututu.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -39,7 +62,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+# 2. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -172,7 +195,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+# 3. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
