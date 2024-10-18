@@ -13,6 +13,21 @@ public class ContactRecordList extends ArrayList<ContactRecord> {
     }
 
     /**
+     * Creates a ContactRecordList with the given ContactRecords.
+     * @param contactRecordsToAdd
+     */
+    public ContactRecordList(ContactRecord...contactRecordsToAdd) {
+        super();
+        for (ContactRecord contactRecord : contactRecordsToAdd) {
+            this.add(contactRecord);
+        }
+    }
+
+    public ContactRecordList(ArrayList<ContactRecord> contactRecords) {
+        super(contactRecords);
+    }
+
+    /**
      * {@inheritDoc}
      * Guarantees that the ContactRecordList is always sorted.
      */
@@ -28,21 +43,6 @@ public class ContactRecordList extends ArrayList<ContactRecord> {
             }
         }
         return super.add(contactRecord);
-    }
-
-    /**
-     * Creates a ContactRecordList with the given ContactRecords.
-     * @param contactRecordsToAdd
-     */
-    public ContactRecordList(ContactRecord...contactRecordsToAdd) {
-        super();
-        for (ContactRecord contactRecord : contactRecordsToAdd) {
-            this.add(contactRecord);
-        }
-    }
-
-    public ContactRecordList(ArrayList<ContactRecord> contactRecords) {
-        super(contactRecords);
     }
 
     /**

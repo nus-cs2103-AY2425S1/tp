@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.contactrecord.ContactRecord;
-
 import java.time.LocalDate;
+
+import seedu.address.model.contactrecord.ContactRecord;
 
 /**
  * A utility class to help with building ContactRecord objects.
