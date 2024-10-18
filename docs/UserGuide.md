@@ -358,7 +358,7 @@ Parameter | Requirements | Explanation
 - `find SJH9514P`
   Returns client with car [VRN](#glossary) `SJH9514P`.
 
-![Result for 'find alex david'](images/findAlexDavidResult.png)
+![Result for 'find John SJH9514P'](images/findResult.png)
 
 ---
 
@@ -382,6 +382,8 @@ Parameter | Requirements | Explanation
 
 - `view-client 1`
   Returns client details of the 1st client in MATER.
+
+- ![Result for 'view-client 2'](images/viewClientResult.png)
 
 ---
 
