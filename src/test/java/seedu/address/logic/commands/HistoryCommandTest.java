@@ -90,7 +90,7 @@ public class HistoryCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         HistoryCommand historyCommand = new HistoryCommand(outOfBoundIndex);
 
         assertCommandFailure(historyCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -98,7 +98,7 @@ public class HistoryCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() throws CommandException {
-        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToViewHistory = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HistoryCommand historyCommand = new HistoryCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
@@ -119,7 +119,7 @@ public class HistoryCommandTest {
     public void execute_validIndexFilteredList_success() throws CommandException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToViewHistory = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HistoryCommand historyCommand = new HistoryCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
@@ -179,7 +179,7 @@ public class HistoryCommandTest {
     public void execute_validNricFilteredList_success() throws CommandException {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToViewHistory = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HistoryCommand historyCommand = new HistoryCommand(personToViewHistory.getNric());
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
@@ -198,7 +198,7 @@ public class HistoryCommandTest {
 
     @Test
     public void execute_validNricUnfilteredList_success() throws CommandException {
-        Person personToViewHistory = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToViewHistory = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         HistoryCommand historyCommand = new HistoryCommand(personToViewHistory.getNric());
 
         String expectedMessage = String.format(HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS,
