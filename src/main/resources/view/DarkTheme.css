@@ -96,11 +96,15 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #dcdcdc; /* Light grey for even rows */
+    -fx-background-color: #c0c0c0; /* Light grey for even rows */
 }
 
 .list-cell:filled:odd {
     -fx-background-color: #e0e0e0; /* Slightly lighter for odd rows */
+}
+
+.list-cell:empty {
+    -fx-background-color: derive(#f0f0f0, 30%); /* Lighten the color for empty cells */
 }
 
 .list-cell:filled:selected {
@@ -204,13 +208,6 @@
     -fx-background-color: #ffffff; /* White background */
 }
 
-
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-  
 .button {
     -fx-padding: 5 22 5 22;
     -fx-border-color: #b0b0b0;
@@ -290,6 +287,37 @@
 
 .scroll-bar:vertical > .increment-button, .scroll-bar:vertical > .decrement-button {
     -fx-background-color: derive(#f0f0f0, 20%);
+}
+
+
+#cardPane {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+#commandTypeLabel {
+    -fx-font-size: 11px;
+    -fx-text-fill: #F70D1A;
+}
+
+#commandTextField {
+    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-insets: 0;
+    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-insets: 0;
+    -fx-border-width: 1;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-text-fill: black;
+}
+
+#filterField, #personListPanel, #personWebpage {
+    -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
+}
+
+#resultDisplay .content {
+    -fx-background-color: transparent, #c0c0c0, transparent, #c0c0c0;
+    -fx-background-radius: 0;
 }
 
 #tags .label {
