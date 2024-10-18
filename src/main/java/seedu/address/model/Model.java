@@ -131,8 +131,7 @@ public interface Model {
      * @return The event with the matching ID, or null if not found.
      */
     Event getEvent(int eventId);
-
-    void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException;
     void viewEvent(Event eventToView);
     void viewVolunteer(Volunteer volunteerToView);
+    void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException;
 }
