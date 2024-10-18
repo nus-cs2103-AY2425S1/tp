@@ -57,7 +57,7 @@ public class AddressBookParser {
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
-        logger.info("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
+        logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
         switch (commandWord) {
 
