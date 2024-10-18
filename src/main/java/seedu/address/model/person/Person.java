@@ -114,4 +114,7 @@ public class Person {
                 .toString();
     }
 
+    public Role getRole() {
+        return Role.PERSON;
+    }
 }

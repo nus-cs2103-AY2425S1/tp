@@ -19,7 +19,7 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.volunteer.Volunteer;
+import seedu.address.model.person.Volunteer;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,13 +40,13 @@ public class SetVolunteerHoursCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "The new number of hours must be provided.";
     public static final String MESSAGE_NOT_IMPLEMENTED = "The execute function has not been implemented.";
     private final Index index;
-    private final Integer newHours;
+    private final String newHours;
 
     /**
      * @param index of the volunteer in the filtered person list to change hours for
      * @param newHours the new hours to input for the person
      */
-    public SetVolunteerHoursCommand(Index index, int newHours) {
+    public SetVolunteerHoursCommand(Index index, String newHours) {
         requireNonNull(index);
 
         this.index = index;
@@ -65,9 +65,7 @@ public class SetVolunteerHoursCommand extends Command {
         if (!(personToEdit instanceof Volunteer)) {
             throw new CommandException(MESSAGE_INVALID_COMMAND_FOR_PERSON_TYPE);
         }
-
-        Hours newHoursAsHours = new Hours(newHours);
-        Volunteer editedVolunteer = createUpdatedHoursVolunteer(personToEdit, newHoursAsHours);
+        Volunteer editedVolunteer = createUpdatedHoursVolunteer(personToEdit, new Hours(newHours));
         model.setPerson(personToEdit, editedVolunteer);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 

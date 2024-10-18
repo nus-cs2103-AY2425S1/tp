@@ -34,6 +34,10 @@ public class Donor extends Person {
         this.donatedAmount = donatedAmount;
     }
 
+    public DonatedAmount getDonatedAmount() {
+        return donatedAmount;
+    }
+
     /**
      * Compares this Donor to another for equality.
      *
@@ -86,6 +90,10 @@ public class Donor extends Person {
                 .add("tags", tags)
                 .add("hours", donatedAmount)
                 .toString();
+    }
+
+    public Role getRole() {
+        return Role.DONOR;
     }
 
 }
