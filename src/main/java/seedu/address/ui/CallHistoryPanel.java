@@ -25,7 +25,6 @@ public class CallHistoryPanel extends UiPart<Region> {
         super(FXML);
         items = FXCollections.observableArrayList();
         callHistoryView.setItems(items);
-        System.out.println("DEBUG" + items.toString());
         callHistoryView.setCellFactory(param -> new ListCell<>() {
             @Override
             protected void updateItem(ContactRecord contactRecord, boolean empty) {
