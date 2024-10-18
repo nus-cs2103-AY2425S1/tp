@@ -17,11 +17,11 @@ import seedu.address.logic.commands.DeleteProductCommand;
 import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.ViewSupplierCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.UnassignProductCommand;
 import seedu.address.logic.commands.ViewProductCommand;
+import seedu.address.logic.commands.ViewSupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
