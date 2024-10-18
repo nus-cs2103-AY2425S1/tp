@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventParticipatedByVolunteerPredicate;
 import seedu.address.model.volunteer.Volunteer;
+import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -151,6 +153,21 @@ public class ModelManager implements Model {
                 .filter(event -> event.getId() == eventId)
                 .findFirst()
                 .orElse(null); // Return null if not found
+    }
+
+    @Override
+    public void viewEvent(Event eventToView) {
+        String eventName = eventToView.getName().toString();
+        VolunteerInvolvedInEventPredicate volsInEventPredicate = new VolunteerInvolvedInEventPredicate(eventName);
+        filteredVolunteers.setPredicate(volsInEventPredicate);
+    }
+
+    @Override
+    public void viewVolunteer(Volunteer volunteerToView) {
+        String volunteerName = volunteerToView.getName().toString();
+        EventParticipatedByVolunteerPredicate eventInVolPredicate =
+                new EventParticipatedByVolunteerPredicate(volunteerName);
+        filteredEvents.setPredicate(eventInVolPredicate);
     }
 
 
