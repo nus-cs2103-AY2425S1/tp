@@ -40,7 +40,7 @@ public class GradeAssignmentCommandParser implements Parser<GradeAssignmentComma
         try {
             studentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_STUDENT_INDEX).get());
             assignmentIndex = ParserUtil.parseIndex(argumentMultimap.getValue(PREFIX_ASSIGNMENT_INDEX).get());
-            score = Integer.parseInt(argumentMultimap.getValue(PREFIX_ASSIGNMENT_SCORE).get());
+            score = ParserUtil.parseScore(argumentMultimap.getValue(PREFIX_ASSIGNMENT_SCORE).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GradeAssignmentCommand.MESSAGE_USAGE), pe);
