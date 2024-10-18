@@ -79,4 +79,8 @@ public class Priority {
         return priority.hashCode();
     }
 
+    public int compareTo(Priority otherPriority) {
+        return priority.compareTo(otherPriority.priority);
+    }
+
 }
