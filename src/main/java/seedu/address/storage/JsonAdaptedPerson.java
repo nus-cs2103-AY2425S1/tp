@@ -12,10 +12,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,7 +33,10 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String organisation;
+    private final String lastSeen;
+    private final String priority;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,15 +44,20 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("organisation") String organisation, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("organisation") String organisation, @JsonProperty("lastSeen") String lastSeen,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("priority") String priority,
+            @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.organisation = organisation;
+        this.lastSeen = lastSeen;
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.priority = priority;
+        this.remark = remark;
     }
 
     /**
@@ -58,9 +69,12 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         organisation = source.getOrganisation().value;
+        lastSeen = source.getLastSeen().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        priority = source.getPriority().toString();
+        remark = source.getRemark().value;
     }
 
     /**
@@ -105,6 +119,19 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
+        if (!LastSeen.isValidDate(lastSeen)) {
+            throw new IllegalValueException(LastSeen.MESSAGE_CONSTRAINTS);
+        }
+        final LastSeen modelLastSeen = new LastSeen(lastSeen);
+
+        if (priority == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                                                          Priority.class.getSimpleName()));
+        }
+        if (!Priority.isValidPriority(priority)) {
+            throw new IllegalValueException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        final Priority modelPriority = new Priority(priority);
 
         if (organisation == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -115,8 +142,17 @@ class JsonAdaptedPerson {
         }
         final Organisation modelOrganisation = new Organisation(organisation);
 
+        if (remark == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        }
+        if (!Remark.isValidRemark(remark)) {
+            throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+        }
+        final Remark modelRemark = new Remark(remark);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelOrganisation,
+                modelLastSeen, modelTags, modelPriority, modelRemark);
     }
 
 }

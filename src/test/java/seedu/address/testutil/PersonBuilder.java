@@ -5,10 +5,13 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.LastSeen;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Organisation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Priority;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,14 +24,20 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_REMARK = "She likes aardvarks.";
+    public static final String DEFAULT_PRIORITY = "low";
     public static final String DEFAULT_ORGANISATION = "NUS";
+    public static final String DEFAULT_LAST_SEEN = "01-01-2024";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Organisation organisation;
+    private LastSeen lastSeen;
     private Set<Tag> tags;
+    private Priority priority;
+    private Remark remark;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,7 +48,10 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         organisation = new Organisation(DEFAULT_ORGANISATION);
+        lastSeen = new LastSeen(DEFAULT_LAST_SEEN);
         tags = new HashSet<>();
+        priority = new Priority(DEFAULT_PRIORITY);
+        remark = new Remark(DEFAULT_REMARK);
     }
 
     /**
@@ -51,7 +63,10 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         organisation = personToCopy.getOrganisation();
+        lastSeen = personToCopy.getLastSeen();
         tags = new HashSet<>(personToCopy.getTags());
+        priority = personToCopy.getPriority();
+        remark = personToCopy.getRemark();
     }
 
     /**
@@ -101,8 +116,32 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Priority} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastSeen} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withLastSeen(String lastSeen) {
+        this.lastSeen = new LastSeen(lastSeen);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, organisation, tags);
+        return new Person(name, phone, email, address, organisation, lastSeen, tags, priority, remark);
     }
 
 }
