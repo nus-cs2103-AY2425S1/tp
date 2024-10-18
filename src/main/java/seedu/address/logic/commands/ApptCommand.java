@@ -24,7 +24,7 @@ public class ApptCommand extends Command {
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds an appointment to the patient with the given NRIC. "
-        + "Format: appt dt/YYYY-MM-DDTHH:MM /iNRIC)\n"
+        + "Format: appt dt/YYYY-MM-DDTHH:MM i/NRIC \n"
         + "Example: " + COMMAND_WORD + " dt/2022-12-31T14:00 i/S1234567A";
 
     private final LocalDateTime dateTime;
