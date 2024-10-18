@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<String> displayedCallHistory;
+    private final ObservableList<ContactRecord> displayedCallHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -173,19 +173,15 @@ public class ModelManager implements Model {
     public void updateDisplayedList(ContactRecordList callHistory) {
         requireNonNull(callHistory);
         displayedCallHistory.clear();
-        for (ContactRecord record : callHistory) {
-            displayedCallHistory.add(record.toString());
-        }
+        displayedCallHistory.addAll(callHistory);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code ContactRecords}
+     */
     @Override
-    public ContactRecordList getDisplayedCallHistory() {
-        ContactRecordList callHistory = new ContactRecordList();
-        for (String call : displayedCallHistory) {
-            ContactRecord contactRecord = new ContactRecord(call, "");
-            callHistory.add(contactRecord);
-        }
-        return callHistory;
+    public ObservableList<ContactRecord> getDisplayedCallHistory() {
+        return displayedCallHistory;
     }
 
     @Override

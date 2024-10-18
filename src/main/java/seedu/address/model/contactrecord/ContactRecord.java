@@ -62,13 +62,18 @@ public class ContactRecord {
      *                      which determines how many days to add to the current date.
      * @return A new {@code ContactRecord} that is {@code callFrequency} days after the current date.
      */
-    public ContactRecord add(CallFrequency callFrequency) {
+    public LocalDate add(CallFrequency callFrequency) {
         int daysToAdd = Integer.parseInt(callFrequency.value); // Parse the number of days from callFrequency
-        return new ContactRecord(value.plusDays(daysToAdd).toString(), ""); // Create and return a new ContactRecord
+        LocalDate nextDate = value.plusDays(daysToAdd);
+        return nextDate;
     }
 
     @Override
     public String toString() {
+        return "Date: " + value.toString() + " Notes: " + notes;
+    }
+
+    public String getDate() {
         return value.toString();
     }
 
