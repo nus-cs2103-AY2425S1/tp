@@ -103,9 +103,8 @@ public class ViewHistoryCommandTest {
         ViewHistoryCommand viewHistoryCommand = new ViewHistoryCommand(validPatient.getId());
 
         // Expect CommandException with the no history found message
-        assertThrows(CommandException.class,
-                MESSAGE_NO_HISTORY_FOUND,
-                () -> viewHistoryCommand.execute(modelStub));
+        assertThrows(CommandException.class, MESSAGE_NO_HISTORY_FOUND, () ->
+                viewHistoryCommand.execute(modelStub));
     }
 
 
