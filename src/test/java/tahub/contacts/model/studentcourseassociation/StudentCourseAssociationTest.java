@@ -93,7 +93,7 @@ class StudentCourseAssociationTest {
         Tutorial tutorial = new Tutorial("T4", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
-        GradingSystem grades = sca.getGrades ();
+        GradingSystem grades = sca.getGrades();
         assertNotNull(grades);
     }
     @Test
