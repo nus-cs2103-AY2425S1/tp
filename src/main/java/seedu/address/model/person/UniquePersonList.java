@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,14 @@ public class UniquePersonList implements Iterable<Person> {
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSamePerson);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent person as the given argument.
+     */
+    public boolean contains(PersonDescriptor toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
@@ -97,6 +106,14 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Finds the person with corresponding person ID, if exists.
+     */
+    public Optional<Person> findPerson(int personId) {
+        return internalList.stream()
+                .filter(person -> person.getPersonId() == personId)
+                .findFirst();
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

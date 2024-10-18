@@ -2,7 +2,6 @@ package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ public class ConfigTest {
     public void toStringMethod() {
         Config config = new Config();
         String expected = Config.class.getCanonicalName() + "{logLevel=" + config.getLogLevel()
-                + ", userPrefsFilePath=" + config.getUserPrefsFilePath() + "}";
+            + ", userPrefsFilePath=" + config.getUserPrefsFilePath() + "}";
         assertEquals(expected, config.toString());
     }
 
@@ -20,7 +19,7 @@ public class ConfigTest {
     public void equalsMethod() {
         Config defaultConfig = new Config();
         assertNotNull(defaultConfig);
-        assertTrue(defaultConfig.equals(defaultConfig));
+        assertEquals(defaultConfig, defaultConfig);
     }
 
 

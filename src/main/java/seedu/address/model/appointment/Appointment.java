@@ -6,21 +6,20 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
- * Represents a Person in the address book.
+ * Represents an Appointment in the appointment book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Appointment {
 
     // Identity fields
-    private final AppointmentType appointmentType;
-    private final LocalDateTime appointmentDateTime;
-    private final int personId;
+    private final int appointmentId;
+    private final Person person;
 
     // Data fields
-    private final Sickness sickness;
-    private final Medicine medicine;
+    private final AppointmentDescriptor appointmentDescriptor;
 
     /**
      * Every field must be present and not null.
@@ -28,51 +27,88 @@ public class Appointment {
     public Appointment(
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
-            int personId,
+            Person person,
             Sickness sickness,
             Medicine medicine) {
 
-        requireAllNonNull(appointmentType, personId, sickness, medicine);
-        this.appointmentType = appointmentType;
-        this.appointmentDateTime = appointmentDateTime;
-        this.personId = personId;
-        this.sickness = sickness;
-        this.medicine = medicine;
-    }
+        requireAllNonNull(appointmentType, appointmentDateTime, person, sickness, medicine);
+        this.appointmentDescriptor = new AppointmentDescriptor(
+                appointmentType,
+                appointmentDateTime,
+                sickness,
+                medicine);
+        this.person = person;
 
-    public AppointmentType getAppointmentType() {
-        return appointmentType;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public Sickness getSickness() {
-        return sickness;
-    }
-
-    public LocalDateTime getAppointmentDateTime() {
-        return appointmentDateTime;
-    }
-
-    public Medicine getMedicine() {
-        return medicine;
+        // Increment the static counter and assign a unique ID to the appointment
+        this.appointmentId = 0;
     }
 
     /**
-     * Returns true if both appointments have the same name.
+     * Creates an appointment object using appointmentDescriptor.
+     */
+    public Appointment(
+            AppointmentType appointmentType,
+            LocalDateTime appointmentDateTime,
+            Person person,
+            Sickness sickness,
+            Medicine medicine,
+            int appointmentId) {
+        this.appointmentDescriptor = new AppointmentDescriptor(
+                appointmentType,
+                appointmentDateTime,
+                sickness,
+                medicine);
+        this.person = person;
+
+        // Increment the static counter and assign a unique ID to the appointment
+        this.appointmentId = appointmentId;
+    }
+
+    /**
+     * Creates an appointment object using person and appointmentDescriptor.
+     */
+    public Appointment(int appointmentId, Person person, AppointmentDescriptor appointmentDescriptor) {
+        requireAllNonNull(appointmentId, appointmentDescriptor, person);
+        this.appointmentId = appointmentId;
+        this.person = person;
+        this.appointmentDescriptor = appointmentDescriptor;
+    }
+
+    public int getAppointmentId() {
+        return appointmentId;
+    }
+
+    public AppointmentDescriptor getAppointmentDescriptor() {
+        return appointmentDescriptor;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public AppointmentType getAppointmentType() {
+        return appointmentDescriptor.getAppointmentType();
+    }
+
+    public Sickness getSickness() {
+        return appointmentDescriptor.getSickness();
+    }
+
+    public LocalDateTime getAppointmentDateTime() {
+        return appointmentDescriptor.getAppointmentDateTime();
+    }
+
+    public Medicine getMedicine() {
+        return appointmentDescriptor.getMedicine();
+    }
+
+    /**
+     * Returns true if both appointments have the same person, appointmentDateTime, appointmentType.
      * This defines a weaker notion of equality between two appointments.
      */
     public boolean isSameAppointment(Appointment otherAppointment) {
-        if (otherAppointment == this) {
-            return true;
-        }
-
-        return otherAppointment != null
-                && otherAppointment.getAppointmentType().equals(getAppointmentType())
-                && otherAppointment.getPersonId() == getPersonId()
-                && otherAppointment.getAppointmentDateTime() == getAppointmentDateTime();
+        return appointmentDescriptor.isSameAppointment(otherAppointment.appointmentDescriptor)
+                && person.isSamePerson(otherAppointment.person);
     }
 
     /**
@@ -86,31 +122,29 @@ public class Appointment {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Appointment)) {
+        if (!(other instanceof Appointment otherAppointment)) {
             return false;
         }
 
-        Appointment otherAppointment = (Appointment) other;
-        return appointmentType.equals(otherAppointment.appointmentType)
-                && appointmentDateTime == otherAppointment.appointmentDateTime
-                && personId == otherAppointment.personId
-                && medicine.equals(otherAppointment.medicine)
-                && sickness.equals(otherAppointment.sickness);
+        return appointmentDescriptor.equals(otherAppointment.appointmentDescriptor)
+                && person == otherAppointment.person
+                && appointmentId == otherAppointment.appointmentId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appointmentType, appointmentDateTime, personId, medicine, sickness);
+        return Objects.hash(appointmentId, person, appointmentDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("appointmentType", appointmentType)
-                .add("appointmentDateTime", appointmentDateTime)
-                .add("personId", personId)
-                .add("medicine", medicine)
-                .add("sickness", sickness)
+                .add("appointmentId", appointmentId)
+                .add("person", person)
+                .add("appointmentType", getAppointmentType())
+                .add("appointmentDateTime", getAppointmentDateTime())
+                .add("medicine", getMedicine())
+                .add("sickness", getSickness())
                 .toString();
     }
 

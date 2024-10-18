@@ -6,11 +6,11 @@ import seedu.address.model.appointment.Appointment;
 /**
  * A utility class to help with building AppointmentBook objects.
  * Example usage: <br>
- *     {@code AppointmentBook ab = new AppointmentBookBuilder().withPerson("John", "Doe").build();}
+ * {@code AppointmentBook ab = new AppointmentBookBuilder().withPerson("John", "Doe").build();}
  */
 public class AppointmentBookBuilder {
 
-    private AppointmentBook appointmentBook;
+    private final AppointmentBook appointmentBook;
 
     public AppointmentBookBuilder() {
         appointmentBook = new AppointmentBook();
