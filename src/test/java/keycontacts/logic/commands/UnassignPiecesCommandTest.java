@@ -64,6 +64,24 @@ public class UnassignPiecesCommandTest {
         assertCommandSuccess(command, model, commandResult, expectedModel);
     }
     @Test
+    public void execute_validIndexAndNoPianoPiece_success() {
+        Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Set<PianoPiece> studentPieces = student.getPianoPieces();
+
+        Set<PianoPiece> noPieces = Set.of();
+        UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, noPieces);
+
+        Student updatedStudent = student.withRemovedPianoPieces(studentPieces);
+        Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
+
+        CommandResult commandResult = new CommandResult(String.format(UnassignPiecesCommand.MESSAGE_SUCCESS,
+                Messages.format(studentPieces),
+                Messages.format(student)));
+
+        assertCommandSuccess(command, model, commandResult, expectedModel);
+    }
+    @Test
     public void execute_indexOutOfBounds_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         UnassignPiecesCommand command = new UnassignPiecesCommand(outOfBoundsIndex, validPianoPieces);
