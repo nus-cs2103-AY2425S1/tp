@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,7 @@ import keycontacts.model.UserPrefs;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
 
-public class AssignPiecesCommandTest {
+public class UnassignPiecesCommandTest {
 
     private final Set<PianoPiece> validPianoPieces = PianoPiece.getPianoPieceSet(VALID_PIANO_PIECE_BEETHOVEN,
             VALID_PIANO_PIECE_PACHELBEL);
@@ -37,24 +38,27 @@ public class AssignPiecesCommandTest {
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AssignPiecesCommand(null, validPianoPieces));
+        assertThrows(NullPointerException.class, () -> new UnassignPiecesCommand(null, validPianoPieces));
     }
     @Test
     public void constructor_nullPianoPieces_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AssignPiecesCommand(INDEX_FIRST_STUDENT, null));
+        assertThrows(NullPointerException.class, () -> new UnassignPiecesCommand(INDEX_FIRST_STUDENT, null));
     }
 
     @Test
     public void execute_validIndexAndPianoPiece_success() {
-        AssignPiecesCommand command = new AssignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
         Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student updatedStudent = student.withAddedPianoPieces(validPianoPieces);
+        Set<PianoPiece> studentFirstPianoPiece = student.getPianoPieces().stream()
+                .limit(1).collect(Collectors.toSet());
 
+        UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, studentFirstPianoPiece);
+
+        Student updatedStudent = student.withRemovedPianoPieces(studentFirstPianoPiece);
         Model expectedModel = new ModelManager(new StudentDirectory(model.getStudentDirectory()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedStudent);
 
-        CommandResult commandResult = new CommandResult(String.format(AssignPiecesCommand.MESSAGE_SUCCESS,
-                Messages.format(validPianoPieces),
+        CommandResult commandResult = new CommandResult(String.format(UnassignPiecesCommand.MESSAGE_SUCCESS,
+                Messages.format(studentFirstPianoPiece),
                 Messages.format(student)));
 
         assertCommandSuccess(command, model, commandResult, expectedModel);
@@ -62,42 +66,59 @@ public class AssignPiecesCommandTest {
     @Test
     public void execute_indexOutOfBounds_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        AssignPiecesCommand command = new AssignPiecesCommand(outOfBoundsIndex, validPianoPieces);
+        UnassignPiecesCommand command = new UnassignPiecesCommand(outOfBoundsIndex, validPianoPieces);
 
         assertCommandFailure(command, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     @Test
-    public void execute_duplicatePianoPiece_throwsCommandException() throws Exception {
-        AssignPiecesCommand setupCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
-        setupCommand.execute(model);
-
-        Set<PianoPiece> firstPianoPiece = validPianoPieces.stream().limit(1).collect(Collectors.toSet());
-        AssignPiecesCommand command = new AssignPiecesCommand(INDEX_FIRST_STUDENT, firstPianoPiece);
-
-        assertCommandFailure(command, model, String.format(AssignPiecesCommand.MESSAGE_DUPLICATE_PIANO_PIECE,
-                Messages.format(firstPianoPiece)));
+    public void execute_studentNoPianoPiece_throwsCommandException() {
+        UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
+        Student student = model.getFilteredStudentList().get(0);
+        model.setStudent(model.getFilteredStudentList().get(0),
+                student.withRemovedPianoPieces(student.getPianoPieces()));
+        assertCommandFailure(command, model, UnassignPiecesCommand.MESSAGE_NO_PIANO_PIECE_FOUND);
     }
+    @Test
+    public void execute_allPianoPiecesNotOnStudent_throwsCommandException() {
+        model.setStudent(model.getFilteredStudentList().get(0), ALICE);
+        Set<PianoPiece> piecesToRemove = BENSON.getPianoPieces();
+        UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, piecesToRemove);
 
+        assertCommandFailure(command, model, String.format(UnassignPiecesCommand.MESSAGE_PIANO_PIECE_NOT_FOUND,
+                Messages.format(piecesToRemove)));
+    }
+    @Test
+    public void execute_subsetOfPianoPiecesNotOnStudent_throwsCommandException() {
+        model.setStudent(model.getFilteredStudentList().get(0), ALICE);
+        Set<PianoPiece> subsetNotPresent = BENSON.getPianoPieces();
+        Set<PianoPiece> piecesToRemove = new HashSet<>(subsetNotPresent);
+        piecesToRemove.addAll(ALICE.getPianoPieces());
+
+        UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, piecesToRemove);
+
+        assertCommandFailure(command, model, String.format(UnassignPiecesCommand.MESSAGE_PIANO_PIECE_NOT_FOUND,
+                Messages.format(subsetNotPresent)));
+    }
     @Test
     public void equals() {
         Set<PianoPiece> bensonPianoPieces = BENSON.getPianoPieces();
         Set<PianoPiece> alicePianoPieces = ALICE.getPianoPieces();
 
-        AssignPiecesCommand baseCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT, bensonPianoPieces);
+        UnassignPiecesCommand baseCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, bensonPianoPieces);
 
         // same object -> returns true
         assertTrue(baseCommand.equals(baseCommand));
 
         // same values -> returns true
-        AssignPiecesCommand identicalCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT, bensonPianoPieces);
+        UnassignPiecesCommand identicalCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, bensonPianoPieces);
         assertTrue(baseCommand.equals(identicalCommand));
         assertTrue(identicalCommand.equals(baseCommand));
 
         // different values -> returns false
-        AssignPiecesCommand differentIndexCommand = new AssignPiecesCommand(INDEX_SECOND_STUDENT, bensonPianoPieces);
+        UnassignPiecesCommand differentIndexCommand = new UnassignPiecesCommand(INDEX_SECOND_STUDENT, bensonPianoPieces);
         assertFalse(baseCommand.equals(differentIndexCommand));
 
-        AssignPiecesCommand differentPianoPiecesCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT,
+        UnassignPiecesCommand differentPianoPiecesCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT,
                 alicePianoPieces);
         assertFalse(baseCommand.equals(differentPianoPiecesCommand));
 
@@ -108,9 +129,9 @@ public class AssignPiecesCommandTest {
 
     @Test
     public void toStringMethod() {
-        AssignPiecesCommand assignPiecesCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
-        String expected = AssignPiecesCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST_STUDENT + ", "
+        UnassignPiecesCommand unassignPiecesCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
+        String expected = UnassignPiecesCommand.class.getCanonicalName() + "{index=" + INDEX_FIRST_STUDENT + ", "
                 + "pianoPieces=" + validPianoPieces + "}";
-        assertEquals(expected, assignPiecesCommand.toString());
+        assertEquals(expected, unassignPiecesCommand.toString());
     }
 }

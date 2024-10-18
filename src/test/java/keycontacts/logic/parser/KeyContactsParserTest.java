@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import keycontacts.logic.commands.UnassignPiecesCommand;
 import org.junit.jupiter.api.Test;
 
 import keycontacts.commons.core.index.Index;
@@ -106,6 +107,22 @@ public class KeyContactsParserTest {
                 AssignPiecesCommand.COMMAND_WORD + " " + index.getOneBased() + " " + pianoPieceArguments);
 
         AssignPiecesCommand expectedCommand = new AssignPiecesCommand(
+                index,
+                PianoPiece.getPianoPieceSet(pianoPieces));
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_unassign() throws Exception {
+        String[] pianoPieces = new String[] {"Moonlight Sonata", "Clair de Lune", "Nocturne Op. 9 No. 2"};
+        String pianoPieceArguments = Arrays.stream(pianoPieces)
+                .map(piece -> PREFIX_PIECE_NAME + piece)
+                .collect(Collectors.joining(" "));
+        Index index = Index.fromOneBased(4);
+        UnassignPiecesCommand command = (UnassignPiecesCommand) parser.parseCommand(
+                UnassignPiecesCommand.COMMAND_WORD + " " + index.getOneBased() + " " + pianoPieceArguments);
+
+        UnassignPiecesCommand expectedCommand = new UnassignPiecesCommand(
                 index,
                 PianoPiece.getPianoPieceSet(pianoPieces));
         assertEquals(expectedCommand, command);

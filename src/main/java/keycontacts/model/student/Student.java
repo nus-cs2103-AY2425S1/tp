@@ -154,6 +154,16 @@ public class Student {
         return new Updater().withPianoPieces(updatedPianoPieces).update();
     }
 
+    /**
+     * Creates and returns a new {@code Student} with the {@code removedPianoPieces} removed.
+     */
+    public Student withRemovedPianoPieces(Set<PianoPiece> removedPianoPieces) {
+        Set<PianoPiece> updatedPianoPieces = new HashSet<>(pianoPieces);
+        updatedPianoPieces.removeAll(removedPianoPieces);
+
+        return new Updater().withPianoPieces(updatedPianoPieces).update();
+    }
+
 
     /**
      * Creates and returns a new {@code Student} with the updated {@code regularLesson}.

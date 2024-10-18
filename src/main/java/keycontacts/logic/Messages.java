@@ -50,9 +50,7 @@ public class Messages {
     /**
      * Formats a {@code Collection<T>} for display to the user.
      */
-    public static <T> String format(Collection<T> t) {
-        final StringBuilder builder = new StringBuilder();
-        t.forEach(builder::append);
-        return builder.toString();
+    public static <T> String format(Collection<T> collection) {
+        return collection.stream().map(T::toString).collect(Collectors.joining(", "));
     }
 }
