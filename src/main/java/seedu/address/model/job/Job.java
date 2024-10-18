@@ -5,9 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
-
 import seedu.address.model.common.Name;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Job Listing in the address book.

@@ -4,11 +4,11 @@ import static seedu.address.testutil.TypicalCompanies.NUS;
 
 import java.util.HashSet;
 
+import seedu.address.model.common.Name;
 import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobName;
 import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 
@@ -22,7 +22,7 @@ public class JobBuilder {
     public static final String DEFAULT_JOB_SALARY = "5000";
     public static final String DEFAULT_JOB_REQUIREMENTS = "Java, Python, C++";
     public static final String DEFAULT_JOB_DESCRIPTION = "Develop software solutions";
-    private JobName jobName;
+    private Name jobName;
     private JobCompany jobCompany;
     private JobSalary jobSalary;
     private JobRequirements jobRequirements;
@@ -31,7 +31,7 @@ public class JobBuilder {
      * Constructs a new JobBuilder with the default values.
      */
     public JobBuilder() {
-        jobName = new JobName(DEFAULT_JOB_NAME);
+        jobName = new Name(DEFAULT_JOB_NAME);
         jobCompany = new JobCompany(DEFAULT_COMPANY.toString());
         jobSalary = new JobSalary(DEFAULT_JOB_SALARY);
         jobRequirements = new JobRequirements(DEFAULT_JOB_REQUIREMENTS);
@@ -39,10 +39,10 @@ public class JobBuilder {
     }
 
     /**
-     * Sets the {@code JobName} of the {@code Job} that we are building.
+     * Sets the {@code Name} of the {@code Job} that we are building.
      */
-    public JobBuilder withJobName(String name) {
-        this.jobName = new JobName(name);
+    public JobBuilder withName(String name) {
+        this.jobName = new Name(name);
         return this;
     }
 

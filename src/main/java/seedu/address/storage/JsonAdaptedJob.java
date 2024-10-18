@@ -14,10 +14,8 @@ import seedu.address.model.common.Name;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Jackson-friendly version of {@link Job}.

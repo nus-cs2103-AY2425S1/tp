@@ -13,7 +13,6 @@ import seedu.address.model.company.Company;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.JobCompany;
 import seedu.address.model.job.JobDescription;
-import seedu.address.model.job.JobRequirements;
 import seedu.address.model.job.JobSalary;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;

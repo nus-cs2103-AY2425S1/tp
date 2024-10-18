@@ -66,7 +66,7 @@ public class ScreenJobCommand extends ScreenCommand {
      * @return A predicate that can be used to filter persons based on their role matching the job.
      */
     private Predicate<Person> roleMatchesJobPredicate(Job job) {
-        String jobName = job.getName().value.toLowerCase();
+        String jobName = job.getName().fullName.toLowerCase();
 
         // Return a predicate that checks if the person's role matches the job's name
         return person -> jobName.contains(person.getRole().value.toLowerCase());
