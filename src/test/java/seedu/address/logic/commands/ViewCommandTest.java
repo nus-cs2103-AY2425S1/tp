@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalProducts.APPLE;
-import static seedu.address.testutil.TypicalProducts.DATE;
-import static seedu.address.testutil.TypicalProducts.HONEYDEW;
+import static seedu.address.testutil.TypicalProducts.APPLE_JUICE;
+import static seedu.address.testutil.TypicalProducts.PINEAPPLE;
 import static seedu.address.testutil.TypicalSuppliers.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
+import seedu.address.testutil.TypicalProducts;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ViewCommand}.
@@ -56,24 +57,26 @@ public class ViewCommandTest {
 
     @Test
     public void execute_zeroKeywords_noProductFound() {
+        Model model1 = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel1 = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 0);
         ProductNameContainsKeywordsPredicate predicate = preparePredicate(" ");
         ViewCommand command = new ViewCommand(predicate);
-        expectedModel.updateFilteredProductList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredProductList());
+        expectedModel1.updateFilteredProductList(predicate);
+        assertCommandSuccess(command, model1, expectedMessage, expectedModel1);
+        assertEquals(Collections.emptyList(), model1.getFilteredProductList());
     }
 
     @Test
     public void execute_multipleKeywords_multipleProductsFound() {
+        Model model2 = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
+        Model expectedModel2 = new ModelManager(TypicalProducts.getTypicalAddressBook(), new UserPrefs());
         String expectedMessage = String.format(MESSAGE_PRODUCTS_LISTED_OVERVIEW, 3);
-        ProductNameContainsKeywordsPredicate predicate = preparePredicate("APPLE HONEYDEW DATE");
+        ProductNameContainsKeywordsPredicate predicate = preparePredicate("APPLE JUICE");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredProductList(predicate);
-        System.out.println(command.execute(model).toString());
-        System.out.println(expectedMessage);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, HONEYDEW, DATE), model.getFilteredProductList());
+        assertCommandSuccess(command, model2, expectedMessage, expectedModel2);
+        assertEquals(Arrays.asList(APPLE, APPLE_JUICE, PINEAPPLE), model2.getFilteredProductList());
     }
 
     @Test
