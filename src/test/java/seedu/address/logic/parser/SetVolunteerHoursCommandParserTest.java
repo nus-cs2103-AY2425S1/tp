@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SetVolunteerHoursCommand;
+import seedu.address.model.person.Hours;
 
 public class SetVolunteerHoursCommandParserTest {
 
@@ -50,7 +51,7 @@ public class SetVolunteerHoursCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_HOURS_DESC, SetVolunteerHoursCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "1" + INVALID_HOURS_DESC, Hours.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class SetVolunteerHoursCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + HOURS_DESC_AMY;
         SetVolunteerHoursCommand expectedCommand = new SetVolunteerHoursCommand(targetIndex,
-                Integer.parseInt(VALID_HOURS_AMY));
+                VALID_HOURS_AMY);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
