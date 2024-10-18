@@ -119,13 +119,13 @@ Changes an existing person's status to "Hired" in HiredFiredPro.
 
 Format: `hire n/NAME j/JOB`
 
-* Changes the person's status to `Hired`
+* Changes the person's status to `Hired`.
 * Both the name of the person and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Hired` status.
-* The search is case-insensitive for both name and job. e.g `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`
+* The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
+  `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`
+  `Software Engineer`.
 
 
 ### Rejecting a person by name and job: `reject`
@@ -134,13 +134,13 @@ Changes an existing person's status to "Rejected" in the address book.
 
 Format: `reject n/NAME j/JOB`
 
-* Changes the person's status to `Rejected`
+* Changes the person's status to `Rejected`.
 * Both the name of the person and the job that he/she is applying for must be provided.
 * Existing status will be updated to the `Rejected` status.
 * The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`
+  `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`
+  `Software Engineer`.
 
 ### View a person's status by name and job: `view`
 
@@ -148,12 +148,12 @@ Shows a person's status in HiredFiredPro.
 
 Format: `view n/NAME j/JOB`
 
-* Views the person's status (Hired / Rejected / Pending)
+* Views the person's status (Hired / Rejected / Pending).
 * Both the name of the person and the job that he/she is applying for must be provided.
 * The search is case-insensitive for both name and job. e.g. `hans` will match `Hans` and `software engineer` will match
-  `Software Engineer`
+  `Software Engineer`.
 * Only full words will be matched e.g. `Han` will not match `Hans` and `software engineers` will not match
-  `Software Engineer`
+  `Software Engineer`.
 
 ### Locating persons by name: `find`
 
@@ -161,12 +161,12 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
