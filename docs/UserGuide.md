@@ -13,11 +13,22 @@
     color: #000000;
   }
 
+  .highlight-feature:hover {
+    background-color: #b3b3b3;
+    pointer: cursor;
+  }
+
   .icon {
     margin-right: 7px;
   }
 
 </style>
+
+<script>
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text);
+  }
+</script>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -111,7 +122,7 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 </box>
 
-<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature">help</span></h3>
+<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature" onclick="copyToClipboard(`help`)">help</span></h3>
 
 Shows a message explaining how to access the help page.
 
@@ -180,6 +191,7 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ​
 
 **Parameters:**
 
+- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
 - `vrn/CAR_VRN`: Car's Vehicle Registration Number 
 - `vin/CAR_VIN`: Car's Vehicle Identification Number
 - `make/CAR_MAKE`: Car's make
@@ -196,13 +208,39 @@ add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ​
 
 - `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
 
+
+<h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature">delete-car</span></h3>
+
+**Format:**
+
+Deletes a car from a user
+```shell
+delete-car INDEX​
+```
+
+**Parameters:**
+
+- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
+
+**Requirements:**
+
+- Client must have a car to delete.
+
+**Examples:**
+
+- `delete-car 1`
+
 ---
 
 <h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature">list-client</span></h3>
 
 Shows a list of all clients in MATER.
 
-**Format:** `list-client`
+**Format:** 
+
+```shell
+list-client
+```
 
 **Parameters:** None.
 
@@ -231,7 +269,7 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 - `vin/CAR_VIN`: New Vehicle Identification Number of the client's car (optional).
 - `make/CAR_MAKE`: New make of the client's car (optional).
 - `model/CAR_MODEL`: New model of the client's car (optional).
-- `i/ISSUE`: New issue for the client (optional, multiple entries allowed).
+- `i/ISSUE`: Updates list of the client's current issues (optional, multiple entries allowed).
 
 **Requirements:**
 
