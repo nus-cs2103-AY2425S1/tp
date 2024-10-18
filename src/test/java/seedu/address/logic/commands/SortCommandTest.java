@@ -87,6 +87,11 @@ public class SortCommandTest {
 
     @Test
     public void equals() {
+        SortCommand sortCommand1 = new SortCommand();
+        SortCommand sortCommand2 = new SortCommand();
+
+        assertEquals(sortCommand1, sortCommand2);
+
         SortOption sortOptionName = new SortOption(SortOption.SORT_NAME);
         SortCommand sortByNameCommand1 = new SortCommand(sortOptionName);
         SortCommand sortByNameCommand2 = new SortCommand(sortOptionName);
