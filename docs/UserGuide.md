@@ -24,8 +24,13 @@ for your large medical files.
 - To check your Java version, refer [here](https://www.java.com/en/download/help/version_manual.html#).
 
 2. Download our latest release file from [here](https://github.com/se-edu/addressbook-level3/releases). It is a `.jar` file.
+For more information, see this: 
+   - [What is a JAR file?](https://docs.oracle.com/javase/8/docs/technotes/guides/jar/jarGuide.html)
+   - [How to run a JAR file](https://stackoverflow.com/questions/5774970/run-jar-file-in-command-prompt).
+   
 
 3. Copy the file to the folder you want to use as the _home folder_ for your DocTrack.
+
 
 4. Open a command terminal of your preference, and run the commands:
     ```
@@ -38,9 +43,11 @@ for your large medical files.
    cd C:/Users/user/Documents
    java -jar DocTrack.jar
    ```
+    
 
 5. A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+
 
 6. Type the command in the command box, indicated by `Enter Command Here`
    and press Enter to execute it. 
@@ -49,10 +56,10 @@ for your large medical files.
    
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list person` : Lists all contacts.
    * `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-   * `clear` : Deletes all contacts.
+   * `delete person 3` : Deletes the 3rd contact shown in the current list.
+   * `clear person` : Deletes all contacts.
    * `exit` : Exits the app.
 
 7. Refer to the [Features](#features) below for details of each command.
