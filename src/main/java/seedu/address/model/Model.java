@@ -1,12 +1,10 @@
 package seedu.address.model;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.product.Product;
-import seedu.address.model.product.ProductNameContainsKeywordsPredicate;
 import seedu.address.model.product.ProductName;
 import seedu.address.model.supplier.Name;
 import seedu.address.model.supplier.Supplier;
