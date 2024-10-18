@@ -2,7 +2,6 @@ package tahub.contacts.model.studentcourseassociation;
 
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
-import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
@@ -23,7 +22,7 @@ public class StudentCourseAssociation {
      * Represents a Recitation
      * May be null, if this TA is not the student's recitation TA.
      * */
-    private Recitation recitation = null;
+    private tahub.contacts.model.courseclass.recitation.Recitation recitation = null;
     private GradingSystem grades;
 
     /**
@@ -51,7 +50,7 @@ public class StudentCourseAssociation {
      * @param course the course associated with this association
      * @param recitation the recitation associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, Recitation recitation) {
+    public StudentCourseAssociation(Person student, Course course, tahub.contacts.model.courseclass.recitation.Recitation recitation) {
         this.student = student;
         this.course = course;
         this.recitation = recitation;
