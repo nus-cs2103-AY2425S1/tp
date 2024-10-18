@@ -383,7 +383,7 @@ Parameter | Requirements | Explanation
 - `view-client 1`
   Returns client details of the 1st client in MATER.
 
-- ![Result for 'view-client 2'](images/viewClientResult.png)
+![Result for 'view-client 2'](images/viewClientResult.png)
 
 ---
 
