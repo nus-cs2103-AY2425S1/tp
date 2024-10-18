@@ -343,10 +343,43 @@
 }
 
 #roles .label {
-    -fx-text-fill: white;
-    -fx-background-color: #3e7b91; /*change colour of the tag*/
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+#roles .label#president {
+    -fx-text-fill: black;
+    -fx-background-color: #e76f51;
+}
+
+#roles .label#vice-president {
+    -fx-text-fill: black;
+    -fx-background-color: #fb8500;
+}
+
+#roles .label#admin {
+    -fx-text-fill: black;
+    -fx-background-color: #2a9d8f;
+}
+
+#roles .label#marketing {
+    -fx-text-fill: black;
+    -fx-background-color: #ffb703;
+}
+
+#roles .label#events-internal {
+    -fx-text-fill: black;
+    -fx-background-color: #219ebc;
+}
+
+#roles .label#events-external {
+    -fx-text-fill: black;
+    -fx-background-color: #8ecae6;
+}
+
+#roles .label#external-relations {
+    -fx-text-fill: black;
+    -fx-background-color: #dad7cd;
 }
