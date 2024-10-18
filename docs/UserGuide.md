@@ -11,11 +11,24 @@
     border-radius: 15px;
     background-color: #d3d3d3;
     color: #000000;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   .highlight-feature:hover {
     background-color: #b3b3b3;
     cursor: pointer;
+  }
+
+  /* New styles for the copied state */
+  .highlight-feature.copied {
+    background-color: #28a745; /* Green background to indicate success */
+    color: #ffffff;
+  }
+
+  .highlight-feature.copied::after {
+    content: ' ✓ Copied!';
+    margin-left: 5px;
+    font-weight: bold;
   }
 
   .icon {
@@ -25,9 +38,19 @@
 </style>
 
 <script>
-  function copyToClipboard(text) {
+  function copyToClipboard(text, element) {
     console.log("Copying to clipboard: " + text);
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(text).then(function() {
+      // Add 'copied' class to the element
+      element.classList.add('copied');
+
+      // Remove the 'copied' class after 2 seconds
+      setTimeout(function() {
+        element.classList.remove('copied');
+      }, 2000);
+    }, function(err) {
+      console.error('Could not copy text: ', err);
+    });
   }
 </script>
 
@@ -123,21 +146,23 @@ MATER is a **desktop app for managing clients and their cars, optimized for use 
 
 </box>
 
-<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature" onclick="copyToClipboard(`help`)">help</span></h3>
+<h3 style="color: #1877F2;">Viewing Help: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">help</span></h3>
 
 Shows a message explaining how to access the help page.
 
 **Format:** `help`
 
-**Parameters:** None.
+**Parameters:**
 
-**Requirements:** None.
+Parameter | Requirements | Explanation
+--- | --- | ---
+*(None)* | *(None)* | The `help` command takes no parameters.
 
 ![help message](images/helpMessage.png)
 
 ---
 
-<h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature">add-client</span></h3>
+<h3 id="adding-a-client-add-client" style="color: #1877F2;">Adding a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-client</span></h3>
 
 Adds a client to MATER.
 
@@ -149,23 +174,22 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 
 **Parameters:**
 
-- `n/NAME`: Client's name (required).
-- `p/PHONE_NUMBER`: Client's phone number (required).
-- `e/EMAIL`: Client's email address (required).
-- `a/ADDRESS`: Client's address (required).
-- `vrn/CAR_VRN`: Car's Vehicle Registration Number (optional).
-- `vin/CAR_VIN`: Car's Vehicle Identification Number (optional).
-- `make/CAR_MAKE`: Car's make (optional).
-- `model/CAR_MODEL`: Car's model (optional).
-- `i/ISSUE`: Issue(s) associated with the client (optional, multiple entries allowed).
+Parameter | Requirements | Explanation
+--- | --- | ---
+`n/NAME` | Required | Client's name.
+`p/PHONE_NUMBER` | Required | Client's phone number.
+`e/EMAIL` | Required | Client's email address.
+`a/ADDRESS` | Required | Client's address.
+`vrn/CAR_VRN` | Optional; Required if adding a car; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
+`vin/CAR_VIN` | Optional; Required if adding a car; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
+`make/CAR_MAKE` | Optional; Required if adding a car; First letter must be capitalized | Car's make.
+`model/CAR_MODEL` | Optional; Required if adding a car; First letter must be capitalized | Car's model.
+`i/ISSUE` | Optional; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Issue(s) associated with the car.
 
-**Requirements:**
+**Notes:**
 
-- If adding a client with a car, all car fields (i.e., `vrn`, `vin`, `make`, and `model`) must be provided, but if the client does not have a car, these fields should be omitted completely.
-- **VRN** must follow the format listed [earlier](#glossary)
-- **VIN** must be a 17-character alphanumeric string.
-- **VRN** and **VIN** must be unique for each car.
-- **Issue** must be alphanumeric and can contain spaces, with a maximum length of 20 characters.
+- If adding a client with a car, all car fields (`vrn`, `vin`, `make`, `model`) must be provided.
+- If the client does not have a car, these fields should be omitted completely.
 
 <box type="tip" seamless>
 
@@ -179,54 +203,60 @@ add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [
 **Examples:**
 
 - `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-- `add-client n/Betsy Crowe e/betsycrowe@example.com p/92345678 a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+- `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
 
 ---
-<h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature">add-car</span></h3>
+
+<h3 style="color: #1877F2;">Adding a Car to a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">add-car</span></h3>
+
+Adds a car to a client.
 
 **Format:**
 
-Adds a Car to a client (client must not already have a car).
 ```shell
-add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ​
+add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL​
 ```
 
 **Parameters:**
 
-- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
-- `vrn/CAR_VRN`: Car's Vehicle Registration Number 
-- `vin/CAR_VIN`: Car's Vehicle Identification Number
-- `make/CAR_MAKE`: Car's make
-- `model/CAR_MODEL`: Car's model
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+`vrn/CAR_VRN` | Required; Must follow the [VRN format](#glossary) and be unique | Car's [Vehicle Registration Number](#glossary).
+`vin/CAR_VIN` | Required; Must be a unique 17-character alphanumeric string | Car's [Vehicle Identification Number](#glossary).
+`make/CAR_MAKE` | Required; First letter must be capitalized | Car's make.
+`model/CAR_MODEL` | Required; First letter must be capitalized | Car's model.
 
-**Requirements:**
+**Notes:**
 
-- As stated above, client cannot already have a car.
-- **VRN** must follow the format listed [earlier](#glossary)
-- **VIN** must be a 17-character alphanumeric string.
-- **VRN** and **VIN** must be unique for each car.
+- The client must not already have a car.
 
 **Examples:**
 
 - `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
 
+---
 
-<h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature">delete-car</span></h3>
+<h3 style="color: #1877F2;">Deleting a Car of a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">delete-car</span></h3>
+
+Deletes a car from a client.
 
 **Format:**
 
-Deletes a car from a user
 ```shell
 delete-car INDEX​
 ```
 
 **Parameters:**
 
-- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
 
-**Requirements:**
+**Notes:**
 
-- Client must have a car to delete.
+- The client must have a car to delete.
+- Issues associated with the car will be removed.
 
 **Examples:**
 
@@ -234,23 +264,25 @@ delete-car INDEX​
 
 ---
 
-<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature">list-client</span></h3>
+<h3 style="color: #1877F2;">Listing All Clients: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">list-client</span></h3>
 
 Shows a list of all clients in MATER.
 
-**Format:** 
+**Format:**
 
 ```shell
 list-client
 ```
 
-**Parameters:** None.
+**Parameters:**
 
-**Requirements:** None.
+Parameter | Requirements | Explanation
+--- | --- | ---
+*(None)* | *(None)* | The `list-client` command takes no parameters.
 
 ---
 
-<h3 style="color: #1877F2;">Editing a Client: <span class="highlight-feature">edit-client</span></h3>
+<h3 style="color: #1877F2;">Editing a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">edit-client</span></h3>
 
 Edits an existing client in MATER.
 
@@ -262,26 +294,25 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 
 **Parameters:**
 
-- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
-- `n/NAME`: New name of the client (optional).
-- `p/PHONE`: New phone number of the client (optional).
-- `e/EMAIL`: New email address of the client (optional).
-- `a/ADDRESS`: New address of the client (optional).
-- `vrn/CAR_VRN`: New Vehicle Registration Number of the client's car (optional).
-- `vin/CAR_VIN`: New Vehicle Identification Number of the client's car (optional).
-- `make/CAR_MAKE`: New make of the client's car (optional).
-- `model/CAR_MODEL`: New model of the client's car (optional).
-- `i/ISSUE`: Updates list of the client's current issues (optional, multiple entries allowed).
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
+`n/NAME` | Optional | New name of the client.
+`p/PHONE` | Optional | New phone number of the client.
+`e/EMAIL` | Optional | New email address of the client.
+`a/ADDRESS` | Optional | New address of the client.
+`vrn/CAR_VRN` | Optional; Must follow [VRN format](#glossary) and be unique | New [Vehicle Registration Number](#glossary) of the client's car.
+`vin/CAR_VIN` | Optional; Must be a unique 17-character alphanumeric string | New [Vehicle Identification Number](#glossary) of the client's car.
+`make/CAR_MAKE` | Optional; First letter must be capitalized | New make of the client's car.
+`model/CAR_MODEL` | Optional; First letter must be capitalized | New model of the client's car.
+`i/ISSUE` | Optional; Multiple entries allowed only if client has a car; Each [Issue](#glossary) must be alphanumeric (max 20 characters) | Updates list of the client's current issues.
 
-**Requirements:**
+**Notes:**
 
-- The `INDEX` must be a positive integer (1, 2, 3, ...).
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing issues, the existing issues of the client will be removed; adding issues is not cumulative.
+- When editing issues, the existing issues of the client will be replaced with the new issues.
 - To remove all issues from the client, type `i/` without specifying any issues after it.
-- VRN and VIN requirements are the same as for the [add-client](#adding-a-client-add-client) command.
-- **Issue** must be alphanumeric and can contain spaces, with a maximum length of 20 characters.
 
 **Examples:**
 
@@ -292,9 +323,9 @@ edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CA
 
 ---
 
-<h3 style="color: #1877F2;">Locating Clients by Name or Car VRN: <span class="highlight-feature">find</span></h3>
+<h3 style="color: #1877F2;">Locating Clients by Name or Car VRN: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">find</span></h3>
 
-Finds clients whose names/ car VRN contain any of the given keywords.
+Finds clients whose names or car VRN contain any of the given keywords.
 
 **Format:**
 
@@ -304,16 +335,18 @@ find KEYWORD [MORE_KEYWORDS]
 
 **Parameters:**
 
-- `KEYWORD`: A keyword to search for in client names / car VRN (required).
-- `[MORE_KEYWORDS]`: Additional keywords (optional).
+Parameter | Requirements | Explanation
+--- | --- | ---
+`KEYWORD` | Required | A keyword to search for in client names or car [VRN](#glossary).
+`[MORE_KEYWORDS]` | Optional | Additional keywords.
 
-**Requirements:**
+**Notes:**
 
-- The search checks both the client's name and the car's Vehicle Registration Number (VRN).
+- The search checks both the client's name and the car's [Vehicle Registration Number (VRN)](#glossary).
 - The search is case-insensitive (e.g., `hans` will match `Hans`).
 - The order of the keywords does not matter (e.g., `Hans Bo` will match `Bo Hans`).
 - Only full words will be matched (e.g., `Han` will not match `Hans`).
-- Clients / VRN matching at least one keyword will be returned (i.e., an `OR` search).
+- Clients matching at least one keyword will be returned (i.e., an `OR` search).
 
 **Examples:**
 
@@ -322,16 +355,15 @@ find KEYWORD [MORE_KEYWORDS]
 - `find alex david`
   Returns `Alex Yeoh`, `David Li`.
 - `find SJH9514P`
-  Returns client with car VRN `SJH9514P`.
+  Returns client with car [VRN](#glossary) `SJH9514P`.
 
-<!-- TODO CHANGE IMAGE -->
 ![Result for 'find alex david'](images/findAlexDavidResult.png)
 
 ---
 
-<h3 style="color: #1877F2;">Getting Client's details: <span class="highlight-feature">view-client</span></h3>
+<h3 style="color: #1877F2;">Getting Client's Details: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">view-client</span></h3>
 
-View Client's details in MATER.
+Views a client's details in MATER.
 
 **Format:**
 
@@ -341,23 +373,18 @@ view-client INDEX
 
 **Parameters:**
 
-- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
-
-**Requirements:**
-
-- The `INDEX` must be a positive integer (1, 2, 3, ...).
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
 
 **Examples:**
 
 - `view-client 1`
-  Returns client details of the 1st client in the MATER.
-
-<!-- TODO CHANGE IMAGE -->
-
+  Returns client details of the 1st client in MATER.
 
 ---
 
-<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature">delete-client</span></h3>
+<h3 style="color: #1877F2;">Deleting a Client: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">delete-client</span></h3>
 
 Deletes the specified client from MATER.
 
@@ -369,25 +396,22 @@ delete-client INDEX
 
 **Parameters:**
 
-- `INDEX`: The index of the client in the displayed client list (must be a positive integer).
-
-**Requirements:**
-
-- The `INDEX` must be a positive integer (1, 2, 3, ...).
-- The index refers to the index number shown in the displayed client list.
+Parameter | Requirements | Explanation
+--- | --- | ---
+`INDEX` | Required; Must be a positive integer | The [Index](#glossary) of the client in the displayed client list.
 
 **Examples:**
 
-- `list-client`
-  `delete-client 2`
-  Deletes the 2nd client in the MATER.
-- `find Betsy`
-  `delete-client 1`
+- `list-client`<br>
+  `delete-client 2`<br>
+  Deletes the 2nd client in MATER.
+- `find Betsy`<br>
+  `delete-client 1`<br>
   Deletes the 1st client in the results of the `find` command.
 
 ---
 
-<h3 style="color: #1877F2;">Clearing All Entries: <span class="highlight-feature">clear</span></h3>
+<h3 style="color: #1877F2;">Clearing All Entries: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">clear</span></h3>
 
 Clears all entries from MATER.
 
@@ -403,13 +427,15 @@ Clears all entries from MATER.
 clear
 ```
 
-**Parameters:** None.
+**Parameters:**
 
-**Requirements:** None.
+Parameter | Requirements | Explanation
+--- | --- | ---
+*(None)* | *(None)* | The `clear` command takes no parameters.
 
 ---
 
-<h3 style="color: #1877F2;">Exiting the Program: <span class="highlight-feature">exit</span></h3>
+<h3 style="color: #1877F2;">Exiting the Program: <span class="highlight-feature" onclick="copyToClipboard(this.textContent, this)">exit</span></h3>
 
 Closes the MATER application.
 
@@ -419,9 +445,11 @@ Closes the MATER application.
 exit
 ```
 
-**Parameters:** None.
+**Parameters:**
 
-**Requirements:** None.
+Parameter | Requirements | Explanation
+--- | --- | ---
+*(None)* | *(None)* | The `exit` command takes no parameters.
 
 ---
 
@@ -470,12 +498,13 @@ MATER data are saved automatically as a JSON file at `[JAR file location]/data/a
 
 Action             | Format & Examples
 -------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>
-e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br>
-e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
+**Add Client**     | `add-client n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br> e.g., `add-client n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`<br> e.g., `add-client n/Betsy Crowe p/92345678 e/betsycrowe@example.com a/Newgate Prison vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla i/engine i/wheels`
+**Add Car**   | `add-car INDEX vrn/CAR_VRN vin/CAR_VIN make/CAR_MAKE model/CAR_MODEL ` <br>e.g., `add-car 1 vrn/SJH9514P vin/1G6ABC129P5123456 make/Toyota model/Corolla`
+**Delete Car**   | `delete-car INDEX`<br>e.g., `delete-car 1`
 **List Clients**   | `list-client`
 **Edit Client**    | `edit-client INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [vrn/CAR_VRN] [vin/CAR_VIN] [make/CAR_MAKE] [model/CAR_MODEL] [i/ISSUE]...`<br>e.g., `edit-client 1 p/91234567 e/johndoe@example.com`<br>e.g., `edit-client 2 n/Betsy Crower i/`
 **Find Clients**   | `find KEYWORD [MORE_KEYWORDS]`<br>e.g., `find John`<br>e.g., `find SJH9514P`
+**View Client**   | `view-client INDEX`<br>e.g., `view-client 1`
 **Delete Client**  | `delete-client INDEX`<br>e.g., `delete-client 3`
 **Clear**          | `clear`
 **Exit**           | `exit`
