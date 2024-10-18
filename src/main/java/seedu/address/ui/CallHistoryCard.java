@@ -28,7 +28,7 @@ public class CallHistoryCard extends UiPart<HBox> {
         super(FXML);
         this.contactRecord = contactRecord;
         indexLabel.setText(index + ". ");
-        contactRecordLabel.setText(contactRecord.toString());
+        contactRecordLabel.setText(contactRecord.getDate());
         notesLabel.setText(contactRecord.getNotes());
     }
 }

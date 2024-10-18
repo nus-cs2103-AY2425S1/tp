@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -87,7 +88,7 @@ public class Person {
         return callFrequency;
     }
 
-    public ContactRecord getNextContactRecord() {
+    public LocalDate getNextContactDate() {
         return getLastContacted().add(callFrequency);
     }
 
