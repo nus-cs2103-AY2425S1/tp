@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Issue {
 
-    public static final String MESSAGE_CONSTRAINTS = "Issues names should be alphanumeric, can contain spaces, with a maximum of 20 characters";
+    public static final String MESSAGE_CONSTRAINTS = "Issues names should be " 
+            + "alphanumeric, can contain spaces, with a maximum of 20 characters";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum} ]{1,20}$";
 
     public final String issueName;
