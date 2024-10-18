@@ -91,9 +91,14 @@ public class CompoundedPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        OrgContainsKeywordsPredicate predicate = new OrgContainsKeywordsPredicate(keywords);
+        CompoundedPredicate predicate = new CompoundedPredicate(new NameContainsKeywordsPredicate(keywords),
+                new OrgContainsKeywordsPredicate(keywords));
 
-        String expected = OrgContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected =
+                CompoundedPredicate.class.getCanonicalName() + "{name predicate="
+                        + NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}, " +
+                        "organisation predicate=" + OrgContainsKeywordsPredicate.class.getCanonicalName() +
+                        "{keywords=" + keywords + "}" + "}";
         assertEquals(expected, predicate.toString());
     }
 }
