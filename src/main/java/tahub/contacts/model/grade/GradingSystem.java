@@ -37,7 +37,8 @@ public class GradingSystem {
      * @return the grade for the assessment, or null if not found
      */
     public Double getGrade(String assessmentName) {
-        return assessmentScores.get(assessmentName);
+        Double grade = assessmentScores.get(assessmentName);
+        return grade != null ? grade : -1.0; // Return -1.0 if grade not found
     }
 
     /**

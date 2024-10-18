@@ -93,7 +93,7 @@ class StudentCourseAssociationTest {
         Tutorial tutorial = new Tutorial("T4", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
-        GradingSystem grades = sca.getGrades();
+        GradingSystem grades = sca.getGrades ();
         assertNotNull(grades);
     }
     @Test
@@ -166,6 +166,61 @@ class StudentCourseAssociationTest {
 
         Course retrievedCourse = sca.getCourse();
         assertSame(course, retrievedCourse);
+    }
+
+    @Test
+    void testAddGrade() {
+        Person student = new Person(
+                new MatriculationNumber("A123456I"),
+                new Name("Prof Ian Tsang"),
+                new Phone("12345678"),
+                new Email("iantsang@example.com"),
+                new Address("Computing 1, 13 Computing Dr, 117417"),
+                new HashSet<>()
+        );
+        Course course = new Course("IS2102", "Enterprise Systems Architecture and Design");
+        Tutorial tutorial = new Tutorial("T7", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+
+        sca.addGrade("Midterm", 85.0);
+        assertEquals(85.0, sca.getGrades().getGrade("Midterm"));
+    }
+
+    @Test
+    void testGetLetterGrade() {
+        Person student = new Person(
+                new MatriculationNumber("A123456J"),
+                new Name("Prof John Doe"),
+                new Phone("12345678"),
+                new Email("johndoe@example.com"),
+                new Address("Computing 1, 13 Computing Dr, 117417"),
+                new HashSet<>()
+        );
+        Course course = new Course("IS2103", "Enterprise Systems Server-side Design and Development");
+        Recitation recitation = new Recitation("R4", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, recitation);
+
+        sca.addGrade("Midterm", 85.0);
+        assertEquals("B", sca.getLetterGrade());
+    }
+
+    @Test
+    void testGetOverallScore() {
+        Person student = new Person(
+                new MatriculationNumber("A123456K"),
+                new Name("Prof Kelly Tan"),
+                new Phone("12345678"),
+                new Email("kellytan@example.com"),
+                new Address("Computing 1, 13 Computing Dr, 117417"),
+                new HashSet<>()
+        );
+        Course course = new Course("IS3103", "Information Systems Leadership and Communication");
+        Tutorial tutorial = new Tutorial("T8", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+
+        sca.addGrade("Midterm", 85.0);
+        sca.addGrade("Final", 95.0);
+        assertEquals(90.0, sca.getOverallScore());
     }
 }
 
