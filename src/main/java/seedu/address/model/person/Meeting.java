@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -35,17 +38,23 @@ public class Meeting {
      * @param endTime A valid ending time of the meeting.
      * @param location A valid location.
      */
-    public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime, String location) {
+    public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime, String location) throws CommandException {
         requireNonNull(person);
         requireNonNull(location);
         requireNonNull(startTime);
         requireNonNull(endTime);
 
-        checkArgument(isValidStartAndEndTime(startTime, endTime), MESSAGE_CONSTRAINTS_TIME);
+        if (!isValidStartAndEndTime(startTime, endTime)) {
+            throw new CommandException(MESSAGE_CONSTRAINTS_TIME);
+        }
+
         this.startTime = startTime;
         this.endTime = endTime;
 
-        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS_LOCATION);
+        if (!isValidLocation(location)) {
+            throw new CommandException(MESSAGE_CONSTRAINTS_LOCATION);
+        }
+
         this.location = location;
 
         this.personToMeet = person;
