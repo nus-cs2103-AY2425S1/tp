@@ -29,6 +29,7 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 
@@ -108,7 +109,12 @@ public class EditCommand extends Command {
         Hours updatedHours = editPersonDescriptor.getHours().orElse(personToEdit.getHours());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         // TODO CHANGE
-        return new Tutor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags);
+        if (personToEdit instanceof Tutor) {
+            return new Tutor(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags);
+        } else {
+            return new Tutee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedHours, updatedTags);
+        }
+
     }
 
     @Override
