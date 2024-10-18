@@ -10,8 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.person.Nric;
 
-import java.time.LocalDate;
-
 /**
  * Parses input arguments and creates a new MarkCommand object
  */
@@ -27,16 +25,6 @@ public class MarkCommandParser implements Parser<MarkCommand> {
 
         String preamble = argMultimap.getPreamble();
         String notes = argMultimap.getValue(PREFIX_NOTES).orElse("");
-<<<<<<< Updated upstream
-        ContactDate contactDate = ContactDate.createCurrentDate(notes);
-        ContactRecord currentRecord = ContactRecord.createCurrentRecord(notes);
-        if (ParserUtil.isParsingIndex(preamble)) {
-            Index index = ParserUtil.parseIndex(preamble);
-            return new MarkCommand(index, currentRecord);
-        } else if (ParserUtil.isParsingNric(preamble)) {
-            Nric nric = ParserUtil.parseNric(preamble);
-            return new MarkCommand(nric, contactDate);
-=======
         ContactRecord contactRecord;
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             String date = argMultimap.getValue(PREFIX_DATE).get();
@@ -51,8 +39,6 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         } else if (ParserUtil.isParsingNric(preamble)) {
             Nric nric = ParserUtil.parseNric(preamble);
             return new MarkCommand(nric, contactRecord);
->>>>>>> Stashed changes
-            return new MarkCommand(nric, currentRecord);
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkCommand.MESSAGE_USAGE));
