@@ -68,7 +68,7 @@ public class AddEcNameCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !ecName.value.isEmpty() ? MESSAGE_ADD_ECNAME_SUCCESS : MESSAGE_DELETE_ECNAME_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override

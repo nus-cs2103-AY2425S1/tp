@@ -34,7 +34,7 @@ public class AddEcNameCommandTest {
         AddEcNameCommand addEcNameCommand = new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(editedPerson.getEcName().value));
         String expectedMessage = String.format(AddEcNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
-                editedPerson);
+                Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addEcNameCommand, model, expectedMessage, expectedModel);
@@ -46,7 +46,7 @@ public class AddEcNameCommandTest {
         AddEcNameCommand ecNameCommand = new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(editedPerson.getEcName().toString()));
         String expectedMessage = String.format(AddEcNameCommand.MESSAGE_DELETE_ECNAME_SUCCESS,
-                editedPerson);
+                Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(ecNameCommand, model, expectedMessage, expectedModel);
@@ -60,7 +60,7 @@ public class AddEcNameCommandTest {
         AddEcNameCommand ecNameCommand = new AddEcNameCommand(INDEX_FIRST_PERSON,
                 new EcName(editedPerson.getEcName().value));
         String expectedMessage = String.format(AddEcNameCommand.MESSAGE_ADD_ECNAME_SUCCESS,
-                editedPerson);
+                Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(ecNameCommand, model, expectedMessage, expectedModel);

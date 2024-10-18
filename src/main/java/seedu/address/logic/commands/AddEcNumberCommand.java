@@ -70,7 +70,7 @@ public class AddEcNumberCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !ecNumber.value.isEmpty() ? MESSAGE_ADD_ECNUMBER_SUCCESS : MESSAGE_DELETE_ECNUMBER_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override

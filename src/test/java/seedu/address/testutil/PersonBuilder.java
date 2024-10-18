@@ -149,8 +149,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code EmergencyPhone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withEcNumber(String emergencyPhone) {
-        this.ecNumber = new EcNumber(emergencyPhone);
+    public PersonBuilder withEcNumber(String ecNumber) {
+        this.ecNumber = new EcNumber(ecNumber);
         return this;
     }
 

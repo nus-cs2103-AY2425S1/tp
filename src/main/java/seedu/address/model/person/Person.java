@@ -129,7 +129,6 @@ public class Person {
                 && registerNumber.equals(otherPerson.registerNumber)
                 && sex.equals(otherPerson.sex)
                 && studentClass.equals(otherPerson.studentClass)
-                && ecNumber.equals(otherPerson.ecNumber)
                 && tags.equals(otherPerson.tags);
     }
 

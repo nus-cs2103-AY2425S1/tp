@@ -22,7 +22,7 @@ public class EcNumberTest {
     @Test
     public void isValidEcNumber() {
         // null phone number
-        assertThrows(NullPointerException.class, () -> EcNumber.isValidEcNumber(null));
+        assertFalse(EcNumber.isValidEcNumber(null));
 
         // invalid phone numbers
         assertFalse(EcNumber.isValidEcNumber(" ")); // spaces only

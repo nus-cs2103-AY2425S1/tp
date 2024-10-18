@@ -37,7 +37,7 @@ public class AddEcNumberCommandTest {
         AddEcNumberCommand addEcNumberCommand = new AddEcNumberCommand(INDEX_FIRST_PERSON,
                 new EcNumber(editedPerson.getEcNumber().value));
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_ADD_ECNUMBER_SUCCESS,
-                editedPerson);
+                Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addEcNumberCommand, model, expectedMessage, expectedModel);
@@ -50,7 +50,7 @@ public class AddEcNumberCommandTest {
         AddEcNumberCommand addEcNumberCommand = new AddEcNumberCommand(INDEX_FIRST_PERSON,
                 new EcNumber(editedPerson.getEcNumber().toString()));
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_DELETE_ECNUMBER_SUCCESS,
-                editedPerson);
+                Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addEcNumberCommand, model, expectedMessage, expectedModel);
@@ -65,7 +65,7 @@ public class AddEcNumberCommandTest {
         AddEcNumberCommand addEcNumberCommand = new AddEcNumberCommand(INDEX_FIRST_PERSON,
                 new EcNumber(editedPerson.getEcNumber().value));
         String expectedMessage = String.format(AddEcNumberCommand.MESSAGE_ADD_ECNUMBER_SUCCESS,
-                editedPerson);
+                Messages.format(editedPerson));
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
         assertCommandSuccess(addEcNumberCommand, model, expectedMessage, expectedModel);
