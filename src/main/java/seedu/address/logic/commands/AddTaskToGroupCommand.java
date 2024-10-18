@@ -20,16 +20,18 @@ import seedu.address.model.task.TaskName;
 public class AddTaskToGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_task_grp";
+    public static final String COMMAND_WORD_ALIAS = "atg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a group. "
-            + "Parameters: "
-            + PREFIX_TASK_NAME + "TASK_NAME "
-            + PREFIX_TASK_DEADLINE + "TASK_DATE "
-            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_NAME + "Complete this task "
-            + PREFIX_TASK_DEADLINE + "2024-01-01 1300 "
-            + PREFIX_GROUP_NAME + "Team 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Adds a task to a group.\n"
+        + "Parameters: "
+        + PREFIX_TASK_NAME + "TASK_NAME "
+        + PREFIX_TASK_DEADLINE + "TASK_DATE "
+        + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_TASK_NAME + "Complete this task "
+        + PREFIX_TASK_DEADLINE + "2024-01-01 1300 "
+        + PREFIX_GROUP_NAME + "Team 1";
 
     public static final String MESSAGE_SUCCESS = "Added task: %1$s to %2$s";
 
@@ -76,7 +78,7 @@ public class AddTaskToGroupCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-                group.getGroupName().fullName));
+            group.getGroupName().fullName));
     }
 
     @Override
@@ -91,16 +93,16 @@ public class AddTaskToGroupCommand extends Command {
 
         AddTaskToGroupCommand otherAddTaskToGroupCommand = (AddTaskToGroupCommand) other;
         return taskName.equals(otherAddTaskToGroupCommand.taskName)
-                && deadline.equals(otherAddTaskToGroupCommand.deadline)
-                && toAddInto.equals(otherAddTaskToGroupCommand.toAddInto);
+            && deadline.equals(otherAddTaskToGroupCommand.deadline)
+            && toAddInto.equals(otherAddTaskToGroupCommand.toAddInto);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("taskName", taskName)
-                .add("deadline", deadline)
-                .add("toAddInto", toAddInto)
-                .toString();
+            .add("taskName", taskName)
+            .add("deadline", deadline)
+            .add("toAddInto", toAddInto)
+            .toString();
     }
 }

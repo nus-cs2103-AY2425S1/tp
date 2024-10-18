@@ -62,14 +62,59 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
+        // Student
+        case ListStudentCommand.COMMAND_WORD_ALIS:
+        case ListStudentCommand.COMMAND_WORD:
+            return new ListStudentCommandParser().parse(arguments);
+
+        case AddStudentCommand.COMMAND_WORD_ALIAS:
         case AddStudentCommand.COMMAND_WORD:
             return new AddStudentCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
+        case DeleteStudentCommand.COMMAND_WORD_ALIAS:
         case DeleteStudentCommand.COMMAND_WORD:
             return new DeleteStudentCommandParser().parse(arguments);
+
+        case AddStudentToGroupCommand.COMMAND_WORD_ALIAS:
+        case AddStudentToGroupCommand.COMMAND_WORD:
+            return new AddStudentToGroupCommandParser().parse(arguments);
+
+        case DeleteStudentFromGroupCommand.COMMAND_WORD_ALIAS:
+        case DeleteStudentFromGroupCommand.COMMAND_WORD:
+            return new DeleteStudentFromGroupCommandParser().parse(arguments);
+
+        // Group
+        case ListGroupCommand.COMMAND_WORD_ALIAS:
+        case ListGroupCommand.COMMAND_WORD:
+            return new ListGroupCommandParser().parse(arguments);
+
+        case AddGroupCommand.COMMAND_WORD_ALIAS:
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD_ALIAS:
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        // Task
+        case ListTaskCommand.COMMAND_WORD_ALIAS:
+        case ListTaskCommand.COMMAND_WORD:
+            return new ListTaskCommandParser().parse(arguments);
+
+        case AddTaskToGroupCommand.COMMAND_WORD_ALIAS:
+        case AddTaskToGroupCommand.COMMAND_WORD:
+            return new AddTaskToGroupCommandParser().parse(arguments);
+
+        case DeleteTaskFromGroupCommand.COMMAND_WORD_ALIAS:
+        case DeleteTaskFromGroupCommand.COMMAND_WORD:
+            return new DeleteTaskFromGroupCommandParser().parse(arguments);
+
+        case MarkTaskCommand.COMMAND_WORD_ALIAS:
+        case MarkTaskCommand.COMMAND_WORD:
+            return new MarkTaskCommandParser().parse(arguments);
+        // Others
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -84,36 +129,6 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case AddGroupCommand.COMMAND_WORD:
-            return new AddGroupCommandParser().parse(arguments);
-
-        case ListStudentCommand.COMMAND_WORD:
-            return new ListStudentCommandParser().parse(arguments);
-
-        case ListGroupCommand.COMMAND_WORD:
-            return new ListGroupCommandParser().parse(arguments);
-
-        case AddStudentToGroupCommand.COMMAND_WORD:
-            return new AddStudentToGroupCommandParser().parse(arguments);
-
-        case DeleteStudentFromGroupCommand.COMMAND_WORD:
-            return new DeleteStudentFromGroupCommandParser().parse(arguments);
-
-        case ListTaskCommand.COMMAND_WORD:
-            return new ListTaskCommandParser().parse(arguments);
-
-        case DeleteGroupCommand.COMMAND_WORD:
-            return new DeleteGroupCommandParser().parse(arguments);
-
-        case AddTaskToGroupCommand.COMMAND_WORD:
-            return new AddTaskToGroupCommandParser().parse(arguments);
-
-        case DeleteTaskFromGroupCommand.COMMAND_WORD:
-            return new DeleteTaskFromGroupCommandParser().parse(arguments);
-
-        case MarkTaskCommand.COMMAND_WORD:
-            return new MarkTaskCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

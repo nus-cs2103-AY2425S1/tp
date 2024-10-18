@@ -12,11 +12,13 @@ import seedu.address.model.Model;
  */
 public class ListGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "list_groups";
+    public static final String COMMAND_WORD = "list_g";
+    public static final String COMMAND_WORD_ALIAS = "lg";
     public static final int LIST_GROUP_MARKER = 1;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all groups. "
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Lists all groups.\n"
+        + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all groups";
 
@@ -37,6 +39,6 @@ public class ListGroupCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .toString();
+            .toString();
     }
 }

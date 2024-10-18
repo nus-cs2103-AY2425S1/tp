@@ -20,15 +20,17 @@ import seedu.address.model.student.exceptions.PersonNotFoundException;
  */
 public class AddStudentToGroupCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_student_grp";
+    public static final String COMMAND_WORD = "add_s_g";
+    public static final String COMMAND_WORD_ALIAS = "asg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to a group. "
-            + "Parameters: "
-            + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
-            + PREFIX_GROUP_NAME + "GROUP_NAME\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_STUDENT_NUMBER + "A02345678J "
-            + PREFIX_GROUP_NAME + "Group 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Adds a student to a group. \n"
+        + "Parameters: "
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER "
+        + PREFIX_GROUP_NAME + "GROUP_NAME\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_STUDENT_NUMBER + "A02345678J "
+        + PREFIX_GROUP_NAME + "Group 1";
 
     public static final String MESSAGE_SUCCESS = "Added student: %1$s to %2$s";
 
@@ -96,14 +98,14 @@ public class AddStudentToGroupCommand extends Command {
 
         AddStudentToGroupCommand otherAddStudentToGroupCommand = (AddStudentToGroupCommand) other;
         return toAdd.equals(otherAddStudentToGroupCommand.toAdd)
-                && toAddInto.equals(otherAddStudentToGroupCommand.toAddInto);
+            && toAddInto.equals(otherAddStudentToGroupCommand.toAddInto);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .add("toAddInto", toAddInto)
-                .toString();
+            .add("toAdd", toAdd)
+            .add("toAddInto", toAddInto)
+            .toString();
     }
 }
