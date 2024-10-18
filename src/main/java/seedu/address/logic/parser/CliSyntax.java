@@ -14,4 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_CALL_FREQUENCY = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_NOTES = new Prefix("o/");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
 }
