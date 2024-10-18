@@ -31,7 +31,7 @@ public class FindCommandParserTest {
                         new OrgContainsKeywordsPredicate(Arrays.asList("NUS"))));
         assertParseSuccess(parser, " n/ Alice Bob o/NUS", expectedFindCommand);
 
-//         multiple whitespaces between keywords
+        // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/ Alice \n \t Bob  \t o/ NUS", expectedFindCommand);
     }
 
