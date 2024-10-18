@@ -29,6 +29,7 @@
     content: ' ✓ Copied!';
     margin-left: 5px;
     font-weight: bold;
+    font-size: 0.8em;
   }
 
   .icon {
@@ -44,10 +45,10 @@
       // Add 'copied' class to the element
       element.classList.add('copied');
 
-      // Remove the 'copied' class after 2 seconds
+      // Remove the 'copied' class after 1.4 seconds
       setTimeout(function() {
         element.classList.remove('copied');
-      }, 2000);
+      }, 1400);
     }, function(err) {
       console.error('Could not copy text: ', err);
     });
