@@ -82,7 +82,7 @@ public class StatisticsCommand extends Command {
         long mediumPriority = currList.stream()
                 .filter(person -> person.getPriority() == Priority.MEDIUM)
                 .count();
-        return String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, mediumPriority);
+        return String.format(MESSAGE_DISPLAY_MEDIUM_PRIORITY, mediumPriority);
     }
 
     /**
@@ -95,7 +95,7 @@ public class StatisticsCommand extends Command {
         long lowPriority = currList.stream()
                 .filter(person -> person.getPriority() == Priority.LOW)
                 .count();
-        return String.format(MESSAGE_DISPLAY_HIGH_PRIORITY, lowPriority);
+        return String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
     }
 
     public String getResultMessage() {
