@@ -17,9 +17,9 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
 
     // Add color constants for priority levels
-    private static final String HIGH_PRIORITY_COLOR = "#eb3434";  // Red
-    private static final String MEDIUM_PRIORITY_COLOR = "#ebb134";  // Orange
-    private static final String LOW_PRIORITY_COLOR = "#289e35";  // Blue
+    private static final String HIGH_PRIORITY_COLOR = "#eb3434"; // Red
+    private static final String MEDIUM_PRIORITY_COLOR = "#ebb134"; // Orange
+    private static final String LOW_PRIORITY_COLOR = "#289e35"; // Green
 
     public final Person person;
 
