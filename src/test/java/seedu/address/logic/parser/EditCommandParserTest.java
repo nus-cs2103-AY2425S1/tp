@@ -46,7 +46,6 @@ import seedu.address.model.person.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
-@Disabled
 public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
@@ -83,6 +82,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
     }
 
+    @Disabled
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
@@ -106,6 +106,7 @@ public class EditCommandParserTest {
                 Name.MESSAGE_CONSTRAINTS);
     }
 
+    @Disabled
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
@@ -132,6 +133,7 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    @Disabled
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
@@ -141,7 +143,7 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
+        // studentId
         userInput = targetIndex.getOneBased() + STUDENTID_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_STUDENTID_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -198,6 +200,7 @@ public class EditCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENTID, PREFIX_NETID, PREFIX_MAJOR));
     }
 
+    @Disabled
     @Test
     public void parse_resetTags_success() {
         Index targetIndex = INDEX_THIRD_PERSON;

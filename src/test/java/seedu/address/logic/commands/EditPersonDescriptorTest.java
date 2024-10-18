@@ -11,13 +11,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
-@Disabled
+
 public class EditPersonDescriptorTest {
 
     @Test
@@ -63,10 +62,11 @@ public class EditPersonDescriptorTest {
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
+                + editPersonDescriptor.getName().orElse(null) + ", studentId="
                 + editPersonDescriptor.getStudentId().orElse(null) + ", email="
-                + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getMajor().orElse(null) + ", tags="
+                + editPersonDescriptor.getEmail().orElse(null) + ", major="
+                + editPersonDescriptor.getMajor().orElse(null) + ", year="
+                + editPersonDescriptor.getYear().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
