@@ -70,6 +70,7 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && showPieChart == otherCommandResult.showPieChart
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
@@ -83,6 +84,7 @@ public class CommandResult {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
+                .add("showPieChart", showPieChart)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
                 .toString();
