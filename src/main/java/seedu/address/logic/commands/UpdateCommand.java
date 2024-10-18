@@ -80,7 +80,7 @@ public class UpdateCommand extends Command {
         }
 
         Person personToUpdate = lastShownList.stream()
-                .filter(person -> person.getName().fullName.equals(name.toString()))
+                .filter(person -> person.getName().equals(name))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE));
         Person updatedPerson = createUpdatedPerson(personToUpdate, updatePersonDescriptor);
