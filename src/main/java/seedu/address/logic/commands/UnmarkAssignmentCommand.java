@@ -29,7 +29,7 @@ public class UnmarkAssignmentCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
-            + "\nExample: " + COMMAND_WORD
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 ";
 
@@ -70,7 +70,7 @@ public class UnmarkAssignmentCommand extends Command {
         assignmentToUnmark.setScore(0);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS, assignmentToUnmark.getName(),
-                studentToUnmark.getName().fullName));
+                studentToUnmark.getName().fullName), studentToUnmark, studentIndex.getZeroBased());
     }
     @Override
     public boolean equals(Object other) {

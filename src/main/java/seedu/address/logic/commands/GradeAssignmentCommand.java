@@ -30,7 +30,7 @@ public class GradeAssignmentCommand extends Command {
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_SCORE + "ASSIGNMENT SCORE]\n"
-            + "Example: " + COMMAND_WORD
+            + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_SCORE + "100";
@@ -79,7 +79,8 @@ public class GradeAssignmentCommand extends Command {
         assignmentToGrade.setHasSubmitted(true);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_GRADE_SUCCESS, assignmentToGrade.getName(),
-                studentToGrade.getName().fullName, assignmentToGrade.getScore()));
+                studentToGrade.getName().fullName, assignmentToGrade.getScore()),
+                studentToGrade, studentIndex.getZeroBased());
     }
     @Override
     public boolean equals(Object other) {
