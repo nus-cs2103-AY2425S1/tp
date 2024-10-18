@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
-
-import java.util.ArrayList;
+import seedu.address.model.student.StudentNumber;
 
 /**
  * Deletes a student from the system based on the student number provided.
@@ -18,8 +21,8 @@ public class DeleteStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student name used in the displayed student list.\n"
-            + "Parameters: STUDENT (must be a valid student name)\n"
-            + "Example: " + COMMAND_WORD + " Jerrell Lee";
+            + "Parameters: NAME (must be a valid student name) STUDENT NUMBER (optional, must be a valid student number)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Jerrell Lee " + PREFIX_STUDENT_NUMBER + "A1234567X";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: ";
 
@@ -27,9 +30,11 @@ public class DeleteStudentCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n" +
             "Their student numbers are as follows: %s" + "\n" +
-            "Please use 'deletestu <student number>' to delete the student.";
+            "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s " + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER" + " to delete the student.";
 
     private final Name name;
+
+    private final StudentNumber studentNumber;
 
     /**
      * Constructs a DeleteStudentCommand to delete the specified student by student number.
@@ -39,6 +44,13 @@ public class DeleteStudentCommand extends Command {
     public DeleteStudentCommand(Name name) {
         requireNonNull(name);
         this.name = name;
+        this.studentNumber = null;
+    }
+
+    public DeleteStudentCommand(Name name, StudentNumber studentNumber) {
+        requireNonNull(name);
+        this.name = name;
+        this.studentNumber = studentNumber;
     }
 
     /**
@@ -64,14 +76,26 @@ public class DeleteStudentCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
 
-        if (listToCheck.size() > 1) {
+        // if there are multiple students with the same name, ensure that student number is provided
+        if (listToCheck.size() > 1 && this.studentNumber == null) {
             StringBuilder duplicates = new StringBuilder();
             for (Student student : listToCheck) {
                 duplicates.append(student.getStudentNumber());
                 duplicates.append(" ");
             }
             String duplicateStudentNumbers = duplicates.toString();
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers));
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, duplicateStudentNumbers, name));
+        }
+
+        if (listToCheck.size() > 1) {
+            for (Student student : listToCheck) {
+                if (student.getStudentNumber().equals(studentNumber)) {
+                    model.deleteStudent(student);
+                    return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + student.getName()
+                            + " " + student.getStudentNumber());
+                }
+            }
+            throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
 
         // happy path if exactly 1 student with the name is found
@@ -81,8 +105,14 @@ public class DeleteStudentCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
         }
 
+        // if student number is provided, check that it matches the student number of the student to delete
+        if (!studentToDelete.getStudentNumber().equals(this.studentNumber) && this.studentNumber != null) {
+            throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
+        }
+
         model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + studentToDelete.getName());
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS) + studentToDelete.getName()
+                + " " + studentToDelete.getStudentNumber());
     }
 
     /**
