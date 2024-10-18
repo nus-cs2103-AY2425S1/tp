@@ -60,6 +60,10 @@ public class Volunteer {
                 FXCollections.observableArrayList());
     }
 
+    public boolean isInvolvedInEvent(String eventName) {
+        return this.involvedIn.contains(eventName);
+    }
+
     public int getId() {
         return id;
     }

@@ -11,7 +11,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.HostServiceManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -35,7 +37,6 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private VolunteerListPanel volunteerListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
     private EventListPanel eventListPanel;
 
 
@@ -70,8 +71,6 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
-        helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -151,11 +150,15 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        //@@ author ytw - adapted
+        // method to open a web browser from javafx app was sourced from the following source and adapted to be used
+        // in the project.
+        // source:
+        // https://forums.oracle.com/ords/apexds/post/opening-an-external-web-browser-from-a-javafx-application-4429
+        HostServiceManager.getHostServices().showDocument(MainApp.USERGUIDE_URL);
+        //@@ author
+
+        logger.fine("Showing user guide of VolunSync.");
     }
 
     void show() {
@@ -170,7 +173,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 

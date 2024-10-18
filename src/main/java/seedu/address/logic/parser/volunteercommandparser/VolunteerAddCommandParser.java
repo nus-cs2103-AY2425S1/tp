@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.VolunteerParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,7 +27,7 @@ import seedu.address.model.volunteer.Volunteer;
 /**
  * Parses input arguments and creates a new VolunteerAddCommand object.
  */
-public class VolunteerAddCommandParser {
+public class VolunteerAddCommandParser implements Parser<VolunteerAddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the VolunteerAddCommand
      * and returns a VolunteerAddCommand object for execution.
