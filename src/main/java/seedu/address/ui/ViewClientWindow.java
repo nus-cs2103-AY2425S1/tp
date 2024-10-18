@@ -80,8 +80,9 @@ public class ViewClientWindow extends UiPart<Stage> {
     /**
      * Focuses on the client details window.
      */
-    public void focus() {
+    public void focus(Person client) {
         getRoot().requestFocus();
+        fillClientDetails(client);
     }
 
     /**

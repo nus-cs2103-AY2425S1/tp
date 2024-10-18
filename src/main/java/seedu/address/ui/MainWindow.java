@@ -158,7 +158,7 @@ public class MainWindow extends UiPart<Stage> {
         if (!viewclientWindow.isShowing()) {
             viewclientWindow.show(client);
         } else {
-            viewclientWindow.focus();
+            viewclientWindow.focus(client);
         }
     }
 
@@ -204,6 +204,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowView()) {
                 handleShowView(commandResult.getClient());
+            } else {
+                viewclientWindow.hide(); //TODO: change to adding last updated timing instead of hiding
             }
 
             return commandResult;
