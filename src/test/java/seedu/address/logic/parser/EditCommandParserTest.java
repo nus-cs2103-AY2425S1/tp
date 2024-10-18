@@ -48,13 +48,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.address.model.Student.Address;
-import seedu.address.model.Student.Email;
-import seedu.address.model.Student.Name;
-import seedu.address.model.Student.OwedAmount;
-import seedu.address.model.Student.Phone;
-import seedu.address.model.Student.Rate;
-import seedu.address.model.Student.Schedule;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.OwedAmount;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Rate;
+import seedu.address.model.student.Schedule;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 public class EditCommandParserTest {

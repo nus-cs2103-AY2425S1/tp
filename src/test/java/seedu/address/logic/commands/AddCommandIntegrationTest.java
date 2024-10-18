@@ -11,7 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.Student.Student;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
 /**

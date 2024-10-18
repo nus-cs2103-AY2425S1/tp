@@ -8,10 +8,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Student.Address;
-import seedu.address.model.Student.Email;
-import seedu.address.model.Student.Name;
-import seedu.address.model.Student.Phone;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Phone;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

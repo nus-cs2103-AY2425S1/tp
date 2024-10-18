@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
-import seedu.address.model.Student.Student;
+import seedu.address.model.student.Student;
 
 
 /**

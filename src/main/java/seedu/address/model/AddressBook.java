@@ -6,8 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.Student.Student;
-import seedu.address.model.Student.UniqueStudentList;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
@@ -98,7 +98,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the address book.
+     * The student identity of {@code editedStudent} must not be the same as another existing student
+     * in the address book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
