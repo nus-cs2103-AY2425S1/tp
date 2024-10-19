@@ -13,6 +13,8 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
+import javax.swing.text.html.Option;
+
 /**
  * A utility class to help with building Person objects.
  */
@@ -29,7 +31,7 @@ public class PersonBuilder {
     private Optional<Email> email;
     private Optional<Address> address;
     private Set<Tag> tags;
-    private DateOfLastVisit dateOfLastVisit;
+    private Optional<DateOfLastVisit> dateOfLastVisit;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,7 +42,7 @@ public class PersonBuilder {
         email = Optional.of(new Email(DEFAULT_EMAIL));
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
-        dateOfLastVisit = new DateOfLastVisit(DEFAULT_DATEOFLASTVISIT);
+        dateOfLastVisit = Optional.of(new DateOfLastVisit(DEFAULT_DATEOFLASTVISIT));
     }
 
     /**
@@ -115,7 +117,15 @@ public class PersonBuilder {
      * Sets the {@code DateOfLastVisit} of the {@code Person} that we are building.
      */
     public PersonBuilder withDateOfLastVisit(String dateOfLastVisit) {
-        this.dateOfLastVisit = new DateOfLastVisit(dateOfLastVisit);
+        this.dateOfLastVisit = Optional.of(new DateOfLastVisit(dateOfLastVisit));
+        return this;
+    }
+
+    /**
+     * Sets the {@code DateOfLastVisit} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDateOfLastVisit() {
+        this.dateOfLastVisit = Optional.empty();
         return this;
     }
 
