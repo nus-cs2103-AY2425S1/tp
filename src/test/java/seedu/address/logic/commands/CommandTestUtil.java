@@ -91,7 +91,8 @@ public class CommandTestUtil {
     public static final String DATETIME_DESC_ONE = " " + PREFIX_DATETIME + VALID_DATETIME_ONE;
     public static final String DATETIME_DESC_TWO = " " + PREFIX_DATETIME + VALID_DATETIME_TWO;
 
-    public static final String INVALID_WEDDING_NAME_DESC = " " + PREFIX_WEDDING_NAME + "John Loh and Jean Tan"; // '&' not allowed alone
+    public static final String INVALID_WEDDING_NAME_DESC = " " + PREFIX_WEDDING_NAME
+            + "John Loh and Jean Tan"; // 'and' not allowed
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + " "; // empty venue description not allowed
     public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "42/02/2023"; // invalid date
 
