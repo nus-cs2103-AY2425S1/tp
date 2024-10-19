@@ -127,20 +127,40 @@ Examples:
   ![result for 'find n/ alex david'](images/findAlexDavidResult.png)
 * `find n/ Alice id/ A1234567E` returns persons whose name contains `Alice` or whose student ID is `A1234567E`.
 
-### Deleting a person : `delete`
+---
+## <u>**Deleting a person :</u> `delete`**
 
-Deletes the specified person from the address book.
+### -> <span style="font-size: 1rem;">You can remove a student from your list easily! Here's how to do it: </span>
 
-Format: `delete INDEX`
+<br>
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+### <span style="font-size: 1rem; color:#4CAF50;">Just type: `delete INDEX`</span>
 
+* The `INDEX` is the position of the person your looking at to delete in your current list. Like 1, 2, 3, …​
+* Ensure the `INDEX` is a **positive integer**. (We wouldn't want any negative or decimal people right?!)
+
+<br> 
+
+### <span style="font-size: 1rem;">Examples:</span>
+* If you type `list` followed by `delete 2` it will delete the 2nd student from your current list.
+* Or if you search`find /n Nic` followed by `delete 1`, it will delete the 1st student named Nic!
+
+<br> 
+
+### <span style="font-size: 1rem;">Expected Results:</span>
+* Easy-peasy! If you managed to delete the student you should see something similar to this!
+![result for 'delete 2'](images/delete_success.png)
+
+<br> 
+
+### <span style="font-size: 1rem; color:#FF9800;">Common Errors:</span>
+* I know it can be hard to learn a new command but don't worry I got you!
+* 9 out of 10 times the error you are facing is due to incorrect `INDEX` being used. 
+* I'll tell you the exact error in the application itself so just keep a look out for it, here is an example!
+![result for delete fail](images/delete_fail.png)
+
+---
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
