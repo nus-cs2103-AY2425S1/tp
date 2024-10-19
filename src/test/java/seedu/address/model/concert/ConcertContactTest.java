@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class ConcertContactTest {
     @Test
@@ -47,6 +48,10 @@ public class ConcertContactTest {
 
         // person is null returns false
         assertFalse(ALICE_COACHELLA.isAssociated((Person) null));
+
+        // person's email is different returns false
+        Person editedAlice = new PersonBuilder(ALICE).withEmail("edited_email@gmail.com").build();
+        assertFalse(ALICE_COACHELLA.isAssociated(editedAlice));
     }
 
     @Test
@@ -60,8 +65,9 @@ public class ConcertContactTest {
         // null returns false
         assertFalse(ALICE_COACHELLA.isAssociated((Concert) null));
     }
+
     @Test
-    void equals() {
+    public void equals() {
         ConcertContact contactTest1 = new ConcertContact(ALICE, COACHELLA);
         ConcertContact contactTest2 = new ConcertContact(BOB, COACHELLA);
 

@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalConcertContacts.ALICE_COACHELLA;
 import static seedu.address.testutil.TypicalConcertContacts.BOB_COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.COACHELLA;
+import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -19,6 +20,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.concert.exceptions.ConcertContactNotFoundException;
 import seedu.address.model.concert.exceptions.DuplicateConcertContactException;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.ConcertContactBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class UniqueConcertContactListTest {
     private final UniqueConcertContactList uniqueConcertContactList =
@@ -65,6 +68,16 @@ public class UniqueConcertContactListTest {
         uniqueConcertContactList.add(ALICE_COACHELLA);
         assertThrows(DuplicateConcertContactException.class, () -> uniqueConcertContactList.add(
                 ALICE_COACHELLA));
+    }
+
+    @Test
+    public void add_differentFieldConcertContact_success() {
+        uniqueConcertContactList.add(ALICE_COACHELLA);
+
+        // change email field
+        Person editedAlice = new PersonBuilder(ALICE).withEmail("new_email@example.com").build();
+        ConcertContact cc = new ConcertContactBuilder(ALICE_COACHELLA).withPerson(editedAlice).build();
+        assertDoesNotThrow(() -> uniqueConcertContactList.add(cc));
     }
 
     @Test
@@ -126,6 +139,26 @@ public class UniqueConcertContactListTest {
         // overloaded methods do not throw
         assertDoesNotThrow(() -> uniqueConcertContactList.remove(ALICE));
         assertDoesNotThrow(() -> uniqueConcertContactList.remove(COACHELLA));
+    }
+
+    @Test
+    public void remove_multipleConcertContacts_success() {
+        // Remove all instances of Coachella concert
+        uniqueConcertContactList.add(ALICE_COACHELLA);
+        uniqueConcertContactList.add(BOB_COACHELLA);
+
+        uniqueConcertContactList.remove(COACHELLA);
+        assertFalse(uniqueConcertContactList.contains(ALICE_COACHELLA));
+        assertFalse(uniqueConcertContactList.contains(BOB_COACHELLA));
+
+        // Remove all instances of Alice
+        uniqueConcertContactList.add(ALICE_COACHELLA);
+        ConcertContact cc = new ConcertContactBuilder(ALICE_COACHELLA).withConcert(GLASTONBURY).build();
+        uniqueConcertContactList.add(cc);
+
+        uniqueConcertContactList.remove(ALICE);
+        assertFalse(uniqueConcertContactList.contains(ALICE_COACHELLA));
+        assertFalse(uniqueConcertContactList.contains(cc));
     }
 
     @Test
