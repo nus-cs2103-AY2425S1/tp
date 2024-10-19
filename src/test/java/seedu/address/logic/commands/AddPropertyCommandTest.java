@@ -7,8 +7,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_CONDO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_LANDED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BEDOK;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -96,6 +98,48 @@ public class AddPropertyCommandTest {
                 new Type(VALID_TYPE_LANDED));
         Property secondLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), Unit.DEFAULT_LANDED_UNIT,
                 new Type(VALID_TYPE_LANDED));
+        AddPropertyCommand addPropertyCommand = new AddPropertyCommand(firstLanded);
+        AddPropertyCommand addPropertyCommand2 = new AddPropertyCommand(secondLanded);
+
+        // Act & Assert
+        assertEquals(addPropertyCommand, addPropertyCommand2);
+    }
+
+    @Test
+    void equals_differentTypeSamePostalCode_returnsTrue() {
+        // Arrange
+        Property firstLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), new Unit(VALID_UNIT_BEDOK),
+                new Type(VALID_TYPE_HDB));
+        Property secondLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), new Unit(VALID_UNIT_ADMIRALTY),
+                new Type(VALID_TYPE_CONDO));
+        AddPropertyCommand addPropertyCommand = new AddPropertyCommand(firstLanded);
+        AddPropertyCommand addPropertyCommand2 = new AddPropertyCommand(secondLanded);
+
+        // Act & Assert
+        assertEquals(addPropertyCommand, addPropertyCommand2);
+    }
+
+    @Test
+    void equals_sameTypeSamePostalCodeDifferentUnit_returnsFalse() {
+        // Arrange
+        Property firstLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), new Unit(VALID_UNIT_BEDOK),
+                new Type(VALID_TYPE_HDB));
+        Property secondLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), new Unit(VALID_UNIT_ADMIRALTY),
+                new Type(VALID_TYPE_HDB));
+        AddPropertyCommand addPropertyCommand = new AddPropertyCommand(firstLanded);
+        AddPropertyCommand addPropertyCommand2 = new AddPropertyCommand(secondLanded);
+
+        // Act & Assert
+        assertNotEquals(addPropertyCommand, addPropertyCommand2);
+    }
+
+    @Test
+    void equals_sameTypeSamePostalCodeSameUnit_returnsTrue() {
+        // Arrange
+        Property firstLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), new Unit(VALID_UNIT_BEDOK),
+                new Type(VALID_TYPE_HDB));
+        Property secondLanded = new Property(new PostalCode(VALID_POSTALCODE_BEDOK), new Unit(VALID_UNIT_BEDOK),
+                new Type(VALID_TYPE_HDB));
         AddPropertyCommand addPropertyCommand = new AddPropertyCommand(firstLanded);
         AddPropertyCommand addPropertyCommand2 = new AddPropertyCommand(secondLanded);
 

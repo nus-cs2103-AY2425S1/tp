@@ -15,6 +15,8 @@ public class TypicalProperty {
             .withType("CONDO").build();
     public static final Property BEDOK = new PropertyBuilder().withUnit("11-12").withPostalCode("321456")
             .withType("HDB").build();
+    public static final Property CLEMENTI = new PropertyBuilder().withUnit("00-00").withPostalCode("321499")
+            .withType("LANDED").build();
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

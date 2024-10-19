@@ -44,22 +44,23 @@ public class Property {
 
     /**
      * Returns true if either property is landed and have same postal code
-     * OR is not landed and have same postal code and unit number
+     * OR is not landed and different type and have same postal code
+     * OR is not landed and same type and same postal code and unit number
      * This defines a weaker notion of equality between two properties.
      */
     public boolean isSameProperty(Property otherProperty) {
         if (otherProperty == this) {
             return true;
+        } else if (otherProperty == null) {
+            return false;
         }
 
         boolean hasLanded = this.type.equals(new Type(PropertyType.LANDED.toString()));
 
-        if (hasLanded) {
-            return otherProperty != null
-                && otherProperty.getPostalCode().equals(getPostalCode());
+        if (hasLanded || !otherProperty.getType().equals(getType())) {
+            return otherProperty.getPostalCode().equals(getPostalCode());
         } else {
-            return otherProperty != null
-                && otherProperty.getPostalCode().equals(getPostalCode())
+            return otherProperty.getPostalCode().equals(getPostalCode())
                 && otherProperty.getUnit().equals(getUnit());
         }
     }
