@@ -67,7 +67,7 @@ public class MarkAttendanceCommand extends Command {
         model.setPerson(studentToMark, studentMarked);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(
-                String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, studentMarked.getName(), classDate));
+                String.format(MESSAGE_MARK_ATTENDANCE_SUCCESS, studentMarked.getName(), attendance, classDate));
     }
 
     @Override
