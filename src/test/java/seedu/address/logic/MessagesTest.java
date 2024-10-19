@@ -13,6 +13,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 
 class MessagesTest {
@@ -71,13 +72,13 @@ class MessagesTest {
     @Test
     void formatProperty_success() {
         // Arrange
-        Property property = new Property(new PostalCode("123456"), new Unit("12-75"));
+        Property property = new Property(new PostalCode("123456"), new Unit("12-75"), new Type("CONDO"));
 
         // Act
         String result = Messages.format(property);
 
         // Assert
-        String expected = "PostalCode: 123456; Unit: 12-75";
+        String expected = "PostalCode: 123456; Unit: 12-75; Type: CONDO";
         assertEquals(expected, result);
     }
 }

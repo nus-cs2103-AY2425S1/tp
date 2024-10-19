@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -20,10 +21,11 @@ public class AddPropertyCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the address book. "
             + "Parameters: "
             + PREFIX_POSTALCODE + "POSTALCODE "
-            + PREFIX_UNITNUMBER + "UNIT ";
+            + PREFIX_UNITNUMBER + "UNIT "
+            + PREFIX_TYPE + "TYPE ";
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This property already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists in the address book";
 
     private final Property toAdd;
 
@@ -48,7 +50,7 @@ public class AddPropertyCommand extends Command {
         requireNonNull(model);
 
         if (model.hasProperty(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PROPERTY);
         }
 
         model.addProperty(toAdd);
@@ -67,7 +69,7 @@ public class AddPropertyCommand extends Command {
         }
 
         AddPropertyCommand otherAddCommand = (AddPropertyCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return toAdd.isSameProperty(otherAddCommand.toAdd);
     }
 
     @Override

@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
@@ -140,7 +141,7 @@ public class AddressBookParserTest {
         Property property = new PropertyBuilder(ADMIRALTY).build();
         AddPropertyCommand command = (AddPropertyCommand) parser.parseCommand(
                 AddPropertyCommand.COMMAND_WORD + " " + PREFIX_POSTALCODE + ADMIRALTY.getPostalCode() + " "
-                        + PREFIX_UNITNUMBER + ADMIRALTY.getUnit()
+                        + PREFIX_UNITNUMBER + ADMIRALTY.getUnit() + " " + PREFIX_TYPE + ADMIRALTY.getType()
         );
 
         assertEquals(new AddPropertyCommand(property), command);

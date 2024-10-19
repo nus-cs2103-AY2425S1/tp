@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.model.tag.Tag;
 
@@ -152,6 +153,21 @@ public class ParserUtil {
             throw new ParseException(Unit.MESSAGE_CONSTRAINTS);
         }
         return new Unit(trimmedUnitNumber);
+    }
+
+    /**
+     * Parses a {@code String type} into a {@code Type}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Type} is invalid.
+     */
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
+        }
+        return new Type(trimmedType);
     }
 
 
