@@ -183,7 +183,9 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
+            if (commandResult.isLoad()) {
+                refreshPersonListPanel();
+            }
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -194,5 +196,15 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+    private void refreshPersonListPanel() {
+        // Clear existing components from the placeholder
+        personListPanelPlaceholder.getChildren().clear();
+
+        // Recreate the PersonListPanel with the updated list
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+
+        // Add the new PersonListPanel to the placeholder
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 }

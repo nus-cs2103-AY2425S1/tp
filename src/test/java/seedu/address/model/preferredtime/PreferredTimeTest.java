@@ -17,14 +17,14 @@ public class PreferredTimeTest {
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        String invalid_empty = "";
-        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalid_empty));
+        String invalidEmpty = "";
+        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalidEmpty));
 
-        String invalid_out_of_range = "Monday 4500";
-        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalid_out_of_range));
+        String invalidOutOfRange = "Monday 4500";
+        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalidOutOfRange));
 
-        String invalid_day = "weekday 1200";
-        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalid_day));
+        String invalidDay = "weekday 1200";
+        assertThrows(IllegalArgumentException.class, () -> new PreferredTime(invalidDay));
     }
 
     @Test
