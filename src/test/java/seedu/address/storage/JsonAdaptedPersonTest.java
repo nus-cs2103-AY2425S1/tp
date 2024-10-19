@@ -191,7 +191,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_noAddressNoDateOfLastVisit_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                VALID_EMPTY_FIELD, VALID_TAGS, VALID_DATEOFLASTVISIT);
+                VALID_EMPTY_FIELD, VALID_TAGS, VALID_EMPTY_FIELD);
         String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
                 .withEmail(VALID_EMAIL).withAddress().withTags(validTagsInString)
