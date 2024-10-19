@@ -200,7 +200,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ContactRecordList getDisplayedCallHistory() {
+        public ObservableList<ContactRecord> getDisplayedCallHistory() {
             throw new AssertionError("This method should not be called.");
         }
 

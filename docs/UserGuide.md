@@ -65,53 +65,56 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message that help window is open.
 
-![help message](images/helpMessage.png)
+![help message](images/HelpWindow.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding an elderly: `add`
 
-Adds a person to ContactMate.
+Adds an elderly to ContactMate.
 
-Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​`
+
+* The call frequency is in days and has to be a positive number less than or equal to 7.
+* NRIC must be a valid, government issued NRIC.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+An elderly can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add i/S6878830G n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/7`
+* `add i/S6878830G n/Betsy Crowe t/wheelchair e/betsycrowe@example.com a/Newgate Prison p/1234567 c/2`
 
-### Listing all persons : `list`
+### Listing all elderly : `list`
 
-Shows a list of all persons in ContactMate.
+Shows a list of all elderly in ContactMate.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing an elderly : `edit`
 
-Edits an existing person in ContactMate.
+Edits an existing elderly in ContactMate.
 
-Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
+* When editing tags, the existing tags of the elderly will be removed i.e adding of tags is not cumulative.
+* You can remove all the elderly’s tags by typing `t/` without
     specifying any tags after it.
 
 Examples:
-*  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit S6878830G n/Betsy Crower t/` Edits the name of the person with NRIC S6878830G to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st elderly to be `91234567` and `johndoe@example.com` respectively.
+*  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC S6878830G to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating elderly by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds all elderly whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -119,7 +122,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* All elderly matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -127,20 +130,52 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting an elderly : `delete`
 
-Deletes the specified person from ContactMate.
+Deletes the specified elderly from ContactMate.
 
 Format: `delete INDEX/NRIC`
 
-* Deletes the person at the specified `INDEX` or `NRIC`.
+* Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * The NRIC has to be a valid NRIC
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in ContactMate.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd elderly in ContactMate.
+* `find Betsy` followed by `delete 1` deletes the 1st elderly in the results of the `find` command.
+
+### Marking an elderly : `mark`
+
+Marks the specified elderly from ContactMate and adds the current date and optional notes to their call history. 
+ContactMate will update the next contact date for the specified elderly in the Main Window.
+
+Format: `mark INDEX/NRIC [o/notes]`
+
+* Marks the elderly at the specified `INDEX` or `NRIC`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The NRIC has to be a valid NRIC
+
+Examples:
+* `list` followed by `mark 2 o/Feels better today` marks the 2nd elderly in ContactMate and updates his/her call history with the corresponding note "Feels better today".
+* `mark S6878830G` marks the elderly with NRIC S6878830G and updates his/her call history.
+
+### Getting call history : `history`
+
+Shows a list of call history dates and corresponding notes for the specified elderly.
+
+Format: `history INDEX/NRIC`
+
+* Shows call history of the elderly at the specified `INDEX` or `NRIC`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The NRIC has to be a valid NRIC
+
+Examples:
+* `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
+* `history S6878830G` shows the call history of the elderly with NRIC S6878830G.
+  ![result for 'history S6878830G'](images/historyAlice.png)
 
 ### Clearing all entries : `clear`
 
@@ -191,10 +226,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add i/S2208201I n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​` <br> e.g., `add i/S2208201I n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 c/5 t/fallrisk`
 **Clear** | `clear`
 **Delete** | `delete INDEX/NRIC`<br> e.g., `delete 3`, `delete S2208201I`
-**Edit** | `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**History** | `history INDEX/NRIC`<br> e.g., `history 1, history S2208201I`
 **List** | `list`
+**Mark** | `mark INDEX/NRIC [o/notes]`<br> e.g., `mark 1, mark S2208201I o/Broke wheelchair today`
 **Help** | `help`

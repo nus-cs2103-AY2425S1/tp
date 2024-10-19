@@ -219,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
         if (callHistoryPanel.getRoot().getParent() != null) {
             mainListPanelPlaceholder.getChildren().remove(callHistoryPanel.getRoot());
         }
-        callHistoryPanel.initializeCallHistory(logic.getCallHistory());
+        callHistoryPanel.initializeCallHistory(logic.getDisplayedCallHistory());
         mainListPanelPlaceholder.getChildren().remove(toPanel.getRoot());
         mainListPanelPlaceholder.getChildren().add(toPanel.getRoot());
     }

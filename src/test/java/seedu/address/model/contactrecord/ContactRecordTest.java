@@ -50,7 +50,7 @@ public class ContactRecordTest {
     public void addCallFrequency_validCallFrequency_success() {
         ContactRecord contactRecord = new ContactRecordBuilder().withDate("2020-01-01").build();
         CallFrequency callFrequency = new CallFrequency("7");
-        ContactRecord newContactRecord = contactRecord.add(callFrequency);
+        LocalDate newContactRecord = contactRecord.add(callFrequency);
         ContactRecord targetContactRecord = new ContactRecordBuilder().withDate("2020-01-08").build();
         assertEquals(newContactRecord, targetContactRecord);
     }
