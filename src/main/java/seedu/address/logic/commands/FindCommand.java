@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
@@ -35,7 +34,8 @@ public class FindCommand extends Command {
      * The command will find all clients whose name, phone and email matches the predicates.
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, PhoneContainsKeywordsPredicate phonePredicate,
-                       EmailContainsKeywordsPredicate emailPredicate, RentalInformationContainsKeywordsPredicate rentalInfoPredicate) {
+                       EmailContainsKeywordsPredicate emailPredicate,
+                       RentalInformationContainsKeywordsPredicate rentalInfoPredicate) {
         this.namePredicate = namePredicate;
         this.phonePredicate = phonePredicate;
         this.emailPredicate = emailPredicate;
