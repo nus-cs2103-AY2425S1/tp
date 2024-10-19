@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -49,6 +50,8 @@ public class CheckClientCommand extends Command {
         }
 
         clientToCheck.setServicing();
+        model.setPerson(clientToCheck, clientToCheck); // Line required to update GUI.
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         if (clientToCheck.isServicing()) {
             return new CommandResult(String.format(MESSAGE_CHECK_IN_CLIENT_SUCCESS, Messages.format(clientToCheck)));
         }

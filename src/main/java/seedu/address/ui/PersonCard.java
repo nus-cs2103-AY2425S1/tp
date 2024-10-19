@@ -34,7 +34,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label isServicing;
 
-
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -47,8 +46,6 @@ public class PersonCard extends UiPart<Region> {
         if (this.client.getCar() != null) {
             vrn.setText(person.getCar().getVrn().vrn);
         }
-        if (!client.isServicing()) {
-            isServicing.setVisible(false);
-        }
+        isServicing.setVisible(client.isServicing());
     }
 }
