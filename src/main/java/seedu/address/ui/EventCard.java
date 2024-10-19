@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -58,6 +59,14 @@ public class EventCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         setEventStatusLabel(event.getStartTime().value);
+        initializeUpdateTimeline();
+    }
+
+    private void initializeUpdateTimeline() {
+        Timeline updateTimeline = DateTimeUtil.createTimeline(() -> {
+            setEventStatusLabel(this.event.getStartTime().value);
+        });
+        updateTimeline.play();
     }
 
     private void setEventStatusLabel(String startTime) {
@@ -72,17 +81,26 @@ public class EventCard extends UiPart<Region> {
         } else if (duration.isZero()) {
             statusText = "Ongoing";
             statusLabel.getStyleClass().add("event-status-ongoing");
-        } else if (duration.toDays() > 0) {
-            statusText = duration.toDays() + " days left";
-            statusLabel.getStyleClass().add("event-status-incomplete");
-        } else if (duration.toHours() > 0) {
-            statusText = duration.toHours() + " hours left";
-            statusLabel.getStyleClass().add("event-status-incomplete");
         } else {
-            statusText = duration.toMinutes() + " minutes left";
+            long minutesLeft = duration.toMinutes();
+            long hoursLeft = duration.toHours();
+            long daysLeft = duration.toDays();
             statusLabel.getStyleClass().add("event-status-incomplete");
+
+            if (daysLeft > 0) {
+                statusText = daysLeft + (daysLeft == 1 ? " day left" : " days left");
+            } else if (hoursLeft > 0) {
+                long effectiveHoursLeft = (minutesLeft % 60 >= 30) ? hoursLeft + 1 : hoursLeft;
+                statusText = effectiveHoursLeft + " hour" + (effectiveHoursLeft == 1 ? " left" : "s left");
+            } else if (minutesLeft > 0) {
+                long roundedMinutesLeft = (duration.getSeconds() % 60 >= 0) ? minutesLeft + 1 : minutesLeft;
+                statusText = roundedMinutesLeft + " minute" + (roundedMinutesLeft == 1 ? " left" : "s left");
+            } else {
+                statusText = "<1 minute left";
+            }
         }
 
         statusLabel.setText(statusText);
     }
+
 }

@@ -3,6 +3,10 @@ package seedu.address.model.types.common;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+
 /**
  * Utility class for handling date and time operations.
  */
@@ -35,10 +39,21 @@ public class DateTimeUtil {
      * @return The parsed {@link LocalDateTime} object corresponding to the given string.
      */
     public static LocalDateTime parse(String dateTimeString) {
-        // Validate the dateTimeString using DateTime class
         if (!DateTime.isValidDateTime(dateTimeString)) {
             throw new IllegalArgumentException("Invalid dateTime format");
         }
         return LocalDateTime.parse(dateTimeString, DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * Creates a Timeline that updates at a specified interval.
+     *
+     * @param action The action to perform on each update.
+     * @return The configured Timeline.
+     */
+    public static Timeline createTimeline(Runnable action) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> action.run()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        return timeline;
     }
 }

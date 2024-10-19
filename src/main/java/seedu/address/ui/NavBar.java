@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.util.Duration;
 import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.DateTimeUtil;
 
@@ -54,10 +51,9 @@ public class NavBar extends UiPart<HBox> {
     }
 
     private void initializeDateTime() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateDateTime()));
-        timeline.setCycleCount(Animation.INDEFINITE);
+        Timeline timeline = DateTimeUtil.createTimeline(this::updateDateTime);
         timeline.play();
-        updateDateTime(); // Initial display
+        updateDateTime();
     }
 
     private void updateDateTime() {
