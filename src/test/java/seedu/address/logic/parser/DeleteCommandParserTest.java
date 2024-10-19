@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,35 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "delete n/Alice Pauline p/94351253 e/alice@example.com",
+                new DeleteCommand(Optional.of(ALICE.getName().toString()),
+                        Optional.of(ALICE.getPhone().toString()), Optional.of(ALICE.getEmail().toString())));
+        assertParseSuccess(parser, "delete n/Alice Pauline",
+                new DeleteCommand(Optional.of(ALICE.getName().toString()), Optional.empty(), Optional.empty()));
+    }
+
+    @Test
+    public void parse_invalidEmail_throwsParseException() {
+        // Invalid email input
+        String userInput = "delete n/Alice Pauline p/12345678 e/ @gmail.com";
+
+        // Expected error message
+        String expectedMessage = "ERROR: Invalid email format. Please provide a valid email address.";
+
+        assertParseFailure(parser, userInput, expectedMessage);
+
+    }
+
+    @Test
+    public void parse_invalidPhone_throwsParseException() {
+        // Simulate an input with an invalid phone number (e.g., less than 8 digits)
+        String userInput = "delete n/Alice Pauline p/1234"; // Invalid phone number
+
+        // Expected error message when the phone number is invalid
+        String expectedMessage = "ERROR: Invalid phone number format. Enter a valid 8 digit phone number.";
+
+        // Call the parser and expect a ParseException with the specific message
+        assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
