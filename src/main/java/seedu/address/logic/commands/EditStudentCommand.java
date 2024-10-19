@@ -37,7 +37,7 @@ public class EditStudentCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP] "
-            + "[" + PREFIX_STUDENT_NUMBER + "ADDRESS] \n"
+            + "[" + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_TUTORIAL_GROUP + "G20";
