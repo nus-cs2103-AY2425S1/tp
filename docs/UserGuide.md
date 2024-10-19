@@ -51,6 +51,9 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Names with multiple spaces are treated as if they contain a single space, and names are not case-sensitive.<br>
+  e.g. `alex yeoh` and `Alex  yeoh` are the same as `Alex Yeoh`.
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [s/SUBJECT]` can be used as `n/John Doe s/MATH` or as `n/John Doe`.
 
@@ -72,90 +75,126 @@ Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
 
-Format: `help`
+**Format**: `help`
 
+### Adding a student: `add`
 
-### Adding a person: `add`
+Adds a student to the address book.
 
-Adds a person to the address book.
-
-Format: `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [s/SUBJECT]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/SCHOOL_LEVEL] [s/SUBJECT]…​`
 
 <box type="tip" seamless>
 
-**Tip:** A person can have any number of subjects (including 0)
+**Tip:** A student can have any number of subjects (including 0)
 </box>
 
-Examples:
+**Examples**:
 * `add n/John Doe p/98765432 e/99999999 a/John street, block 123, #01-01`
-* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 s/ENGLISH`
+* `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 s/ENGLISH`
 
-### Listing all persons : `list`
+### Listing all students : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all students in the address book.
 
-Format: `list`
+**Format**: `list`
 
-### Updating a person : `update`
+### Updating a student's details : `update`
 
-Updates an existing person in the address book.
+Updates the details of an existing student in the address book.
 
-Format: `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​`
+**Format**: `update NAME [n/NAME] [p/PHONE] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​`
 
-* Updates the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+* Updates the student with the specified `NAME`. The name refers to the full name shown in the displayed student list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When updating subjects, the existing subjects of the person will be removed i.e adding of subjects is not cumulative.
-* You can remove all the person’s subjects by typing `s/` without
-    specifying any subjects after it.
+* When updating subjects, the existing subjects of the student will be removed i.e adding of subjects is not cumulative.
+* You can remove all the student’s subjects by typing `s/` without specifying any subjects after it.
 
-Examples:
-*  `update Alex Yeoh p/91234567 e/99999999` Updates the phone number and emergency contact of `Alex Yeoh` to be `91234567` and `99999999` respectively.
-*  `update Alex Yeoh n/Betsy Crower s/` Updates the name of `Alex Yeoh` to be `Betsy Crower` and clears all existing subjects.
+**Examples**:
+*  `update Alex Yeoh p/91234567 e/99999999` updates the phone number and emergency contact of `Alex Yeoh` to be `91234567` and `99999999` respectively.
+*  `update Alex Yeoh n/Betsy Crower s/` updates the name of `Alex Yeoh` to be `Betsy Crower` and clears all existing subjects.
 
-### Locating persons by name: `find`
+### Locating students by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Find students by either their name, level or subject.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Format**:
+1. `find n/KEYWORD [MORE_KEYWORDS]`
+1. `find l/LEVEL`
+1. `find s/SUBJECT`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+**Examples**:
 * `find John` returns `john` and `John Doe`
+* `find l/S3` returns all students tagged with level `S3`
+* `find s/MATH` returns all students tagged with subject `MATH`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a student : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
-Format: `delete INDEX`
+**Format**: `delete i/INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+**Examples**:
+* `list` followed by `delete 2` deletes the 2nd student in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+### Recording notes for a student
+
+### Adding tasks to a student
+
+Adds a task to the task list of the specified student.
+
+**Format**: `addtask n/NAME t/TASK d/DEADLINE`
+
+* Deadline must be a valid date in the format of YYYY-MM-DD
+
+**Examples**:
+* `addtask n/John Doe t/Mark CA1 d/2024-10-15`
+* `addtask n/Jane Smith t/Handle MC d/2024-02-13`
+
+### Deleting task of a student
+
+### Updating a task of a student
+
+Updates the details of an existing task in a student's task list.
+
+**Format**: `updatetask n/NAME ti/INDEX [t/TASK] [d/DEADLINE]`
+* The task index refers to the index number shown in the student's task list.
+* The task index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+**Examples**:
+* `updatetask n/John Doe ti/2 t/Mark assignment` updates the 2nd task in John Doe's task list to be `Mark assignment`
+* `updatetask n/Jane Smith ti/1 t/Handle MC d/2024-10-13` updates the 1st task in Jane Smith's task list to be `Handle MC` with a deadline `2024-10-13`
+
+### View all tasks
+
+### View a specific student
+
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
+**Format**: `clear`
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
 ### Saving the data
 
@@ -196,10 +235,18 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [s/SUBJECT]…​` <br> e.g., `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 s/MATH s/CHEMISTRY`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​` <br> e.g. `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 s/MATH s/CHEMISTRY`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Update**   | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/level] [s/SUBJECT]…​`<br> e.g.,`update Alex Yeoh n/James Lee e/99999999`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
+**Update**   | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​`<br> e.g.`update Alex Yeoh n/James Lee e/99999999`
+**Find**   | `find n/KEYWORD [MORE_KEYWORDS]` or `find l/LEVEL` or `find s/SUBJECT`<br> e.g. `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Tag**    | `tag n/NAME [l/LEVEL] [s/SUBJECT]`<br> e.g. `tag n/John Doe l/S1 s/Math`
+**Note**   | `note n/NAME nt/NOTES`<br> e.g. `note n/John Doe nt/Doing well in all subjects`
+**Add Task**   | `addtask n/NAME t/TASK d/DEADLINE`<br> e.g. `addtask n/John Doe t/Mark CA1 d/2024-10-15`
+**Delete Task**   | `deletetask n/NAME ti/TASK_INDEX`<br> e.g. `deletetask n/John Doe ti/1`
+**Update Task**   | `updatetask n/NAME ti/INDEX [t/TASK] [d/DEADLINE]`<br> e.g. `updatetask n/John Doe ti/2 t/Mark assignment`
+**View All Tasks**| `viewtask n/NAME`<br> e.g. `viewtask n/John Doe`
+**View Specific Student** | `view n/NAME`<br> e.g. `view n/John Doe`
+
