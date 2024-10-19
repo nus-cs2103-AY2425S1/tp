@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
+
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SetThresholdCommand;
@@ -16,8 +17,8 @@ import seedu.address.model.product.ProductName;
 public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
     public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a positive integer";
-    public static  final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces, " +
-            "and it should not be blank";
+    public static final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces,"
+            + " and it should not be blank";
     /**
      * Parses the given {@code String} of arguments in the context of the SetThresholdCommand
      * and returns an SetThresholdCommand object for execution.
@@ -37,7 +38,8 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
 
         ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-        int  stockLevel = 0;
+        int stockLevel = 100;
+
         try {
             stockLevel = Integer.parseInt(argMultimap.getValue(PREFIX_STOCK_LEVEL).get());
         } catch (IllegalArgumentException e) {
