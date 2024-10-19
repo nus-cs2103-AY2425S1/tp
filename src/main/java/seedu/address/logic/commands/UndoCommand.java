@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_PERSON;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -29,11 +27,21 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_EDIT = "Edits to %s has been reverted";
     public static final String MESSAGE_UNDO_DELETE = "%s have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
+    private final ArrayList<Command> pastCommands;
+
+    /**
+     * Loads the past commands into constructor.
+     *
+     * @param pastCommands all the past commands during this code run.
+     */
+    public UndoCommand(ArrayList<Command> pastCommands) {
+        this.pastCommands = pastCommands;
+
+    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        ArrayList<Command> pastCommands = LogicManager.getPastCommands();
         if (pastCommands.size() == 0) {
             throw new CommandException(Messages.MESSAGE_NO_LATEST_COMMAND);
         }
@@ -53,11 +61,6 @@ public class UndoCommand extends Command {
             EditCommand editCommand = (EditCommand) latestCommand;
             Person bfrEdit = editCommand.getUneditedPerson();
             Person afterEdit = editCommand.getEditedPerson();
-
-            if (model.hasPerson(bfrEdit)) {
-                pastCommands.remove(pastCommands.size() - 1);
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
             model.setPerson(afterEdit, bfrEdit);
             pastCommands.remove(pastCommands.size() - 1);
             resultMessage = String.format(MESSAGE_UNDO_EDIT, bfrEdit.getName());

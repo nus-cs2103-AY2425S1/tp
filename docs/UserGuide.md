@@ -173,6 +173,19 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Undo the previous command: `undo`
+Undoes the previous command from SocialBook.
+
+Format: `undo`
+
+* Undo works for: add, edit, delete, clear
+* Able to undo until no previous command for current execution.
+
+Examples:
+* `delete 1,2` followed by `undo` will add persons at index 1 and 2 back to that index on SocialBook.
+* `clear` followed by `undo` will retrieve back the uncleared SocialBook.
+* `edit 1 n/John` followed by `undo` will change name back to what it was before.
+
 ### Displaying overall statistics : `statistics`
 
 Displays the statistics of filtered list.

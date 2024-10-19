@@ -43,7 +43,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         sortedPersons = new SortedList<>(filteredPersons); // sortedPersons is updated along with filteredPersons
         sortedPersons.setComparator(Comparator.comparing(Person::getPriority) // sort by descending priority
-                .thenComparing(person -> person.getName().toString())); // sort name alphabetically after
+                .thenComparing(person -> person.getName().toString())); // sort by name alphabetically after
     }
 
     public ModelManager() {

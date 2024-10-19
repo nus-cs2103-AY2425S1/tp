@@ -12,6 +12,7 @@ import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.StatisticsCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -64,6 +65,10 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case GetCommand.COMMAND_WORD:
             message = GetCommand.MESSAGE_USAGE;
+            break;
+
+        case UndoCommand.COMMAND_WORD:
+            message = UndoCommand.MESSAGE_USAGE;
             break;
 
         case ExitCommand.COMMAND_WORD:
