@@ -14,8 +14,8 @@ import seedu.address.model.student.Student;
 public class Consultation {
 
     // Identity fields
-    private final String date;
-    private final String time;
+    private final Date date;
+    private final Time time;
 
     // Data field
     private final List<Student> students;
@@ -24,7 +24,7 @@ public class Consultation {
      * Every field must be present and not null.
      * The list of students can be empty but not null.
      */
-    public Consultation(String date, String time, List<Student> students) {
+    public Consultation(Date date, Time time, List<Student> students) {
         requireAllNonNull(date, time);
         this.date = date;
         this.time = time;
@@ -32,11 +32,11 @@ public class Consultation {
         this.students = students != null ? new ArrayList<>(students) : new ArrayList<>();
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public String getTime() {
+    public Time getTime() {
         return time;
     }
 
