@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SearchCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -85,12 +86,19 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
-    public void parseCommand_unrecognisedExtraInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
-                -> parser.parseCommand("list extraInput"));
+    public void parseCommand_sort() throws Exception {
+        SortOption sortOption = new SortOption(SortOption.SORT_NAME);
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " s/" + SortOption.SORT_NAME);
+        assertEquals(new SortCommand(sortOption), command);
+
+        // Test for no sort option (default behavior)
+        command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD);
+        assertEquals(new SortCommand(), command);
     }
 
     @Test
