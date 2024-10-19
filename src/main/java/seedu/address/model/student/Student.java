@@ -22,14 +22,14 @@ public class Student {
     private final Schedule schedule;
     private final Subject subject;
     private final Rate rate;
-    private final Paid paid;
+    private final PaidAmount paidAmount;
     private final OwedAmount owedAmount;
 
     /**
      * Every field must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Address address, Schedule schedule,
-            Subject subject, Rate rate, Paid paid, OwedAmount owedAmount) {
+            Subject subject, Rate rate, PaidAmount paidAmount, OwedAmount owedAmount) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
@@ -38,7 +38,7 @@ public class Student {
         this.schedule = schedule;
         this.subject = subject;
         this.rate = rate;
-        this.paid = paid;
+        this.paidAmount = paidAmount;
         this.owedAmount = owedAmount;
     }
 
@@ -69,8 +69,8 @@ public class Student {
     public Rate getRate() {
         return rate;
     }
-    public Paid getPaid() {
-        return paid;
+    public PaidAmount getPaidAmount() {
+        return paidAmount;
     }
 
     public OwedAmount getOwedAmount() {
@@ -127,14 +127,14 @@ public class Student {
                 && schedule.equals(otherStudent.schedule)
                 && subject.equals(otherStudent.subject)
                 && rate.equals(otherStudent.rate)
-                && paid.equals(otherStudent.paid)
+                && paidAmount.equals(otherStudent.paidAmount)
                 && owedAmount.equals(otherStudent.owedAmount);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
+        return Objects.hash(name, phone, email, address, schedule, subject, rate, paidAmount, owedAmount);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class Student {
                 .add("schedule", schedule)
                 .add("subject", subject)
                 .add("rate", rate)
-                .add("paid", paid)
+                .add("paidAmount", paidAmount)
                 .add("owedAmount", owedAmount)
                 .toString();
     }
