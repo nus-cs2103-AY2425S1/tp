@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.tutorial;
 
 import static java.util.Objects.requireNonNull;
 
@@ -27,7 +27,7 @@ public class Tutorial {
     }
 
     /**
-     * Returns true if both tutorials hare of the same subject.
+     * Returns true if both tutorials are of the same subject.
      * This defines a weaker notion of equality between two tutorials.
      */
     public boolean isSameTutorial(Tutorial otherTutorial) {
