@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
+import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -56,7 +57,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(new NameContainsKeywordsPredicate(keywordList),
                 new PhoneContainsKeywordsPredicate(keywordList),
-                new EmailContainsKeywordsPredicate(keywordList));
+                new EmailContainsKeywordsPredicate(keywordList),
+                new RentalInformationContainsKeywordsPredicate(keywordList));
     }
 
     private boolean isValidKeyword(String keyword) {

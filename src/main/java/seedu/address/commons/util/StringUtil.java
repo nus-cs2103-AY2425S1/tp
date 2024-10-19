@@ -67,4 +67,25 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code phrase}.
+     * Ignores case, substring is valid.
+     * <br>examples:<pre>
+     *       containsWordIgnoreCase("ABc def", "abc") == true
+     *       containsWordIgnoreCase("ABc def", "DEF") == true
+     *       </pre>
+     *
+     * @param sentence cannot be null
+     * @param phrase     cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsIgnoreCase(String sentence, String phrase) {
+        requireNonNull(sentence);
+        requireNonNull(phrase);
+
+        String preppedSentence = sentence.trim().toLowerCase();
+        String preppedPhrase = phrase.trim().toLowerCase();
+
+        return preppedSentence.contains(preppedPhrase);
+    }
 }

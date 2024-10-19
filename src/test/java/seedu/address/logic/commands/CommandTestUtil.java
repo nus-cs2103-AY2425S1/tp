@@ -52,9 +52,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_EMPTY_PHONE = "";
     public static final String VALID_EMPTY_EMAIL = "";
-    public static final String KEYWORD_NAME_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_NAME_ALICE;
-    public static final String KEYWORD_PHONE_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_PHONE_ALICE;
-    public static final String KEYWORD_EMAIL_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_EMAIL_ALICE;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
 
@@ -63,11 +60,9 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String PHONE_DESC_CHARLIE = " " + PREFIX_PHONE + VALID_PHONE_CHARLIE;
-    public static final String PHONE_DESC_DENVER = " " + PREFIX_PHONE + VALID_PHONE_DENVER;
     public static final String PHONE_DESC_EMPTY = " " + PREFIX_PHONE + VALID_EMPTY_PHONE;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String EMAIL_DESC_CHARLIE = " " + PREFIX_EMAIL + VALID_EMAIL_CHARLIE;
     public static final String EMAIL_DESC_DENVER = " " + PREFIX_EMAIL + VALID_EMAIL_DENVER;
     public static final String EMAIL_DESC_EMPTY = " " + PREFIX_EMAIL + VALID_EMPTY_EMAIL;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -134,7 +129,10 @@ public class CommandTestUtil {
     public static final String MONTHLY_RENT_DESC_TWO = " " + PREFIX_MONTHLY_RENT + VALID_MONTHLY_RENT_TWO;
     public static final String DEPOSIT_DESC_TWO = " " + PREFIX_DEPOSIT + VALID_DEPOSIT_TWO;
     public static final String CUSTOMER_LIST_DESC_TWO = " " + PREFIX_CUSTOMER_LIST + VALID_CUSTOMER_LIST_TWO;
-
+    public static final String KEYWORD_NAME_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_NAME_ALICE;
+    public static final String KEYWORD_PHONE_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_PHONE_ALICE;
+    public static final String KEYWORD_EMAIL_DESC_ALICE = " " + PREFIX_KEYWORD + VALID_EMAIL_ALICE;
+    public static final String KEYWORD_ADDRESS_DESC_ONE = " " + PREFIX_KEYWORD + VALID_ADDRESS_ONE;
 
     public static final EditRentalCommand.EditRentalDescriptor DESC_RENTAL_ONE;
     public static final EditRentalCommand.EditRentalDescriptor DESC_RENTAL_TWO;

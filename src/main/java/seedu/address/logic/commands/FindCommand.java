@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
+import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -26,21 +27,24 @@ public class FindCommand extends Command {
     private final PhoneContainsKeywordsPredicate phonePredicate;
     private final EmailContainsKeywordsPredicate emailPredicate;
 
+    private final RentalInformationContainsKeywordsPredicate rentalInfoPredicate;
+
     /**
      * Constructs a {@code FindCommand} with the given name, phone and email predicates.
      * The command will find all clients whose name, phone and email matches the predicates.
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, PhoneContainsKeywordsPredicate phonePredicate,
-                       EmailContainsKeywordsPredicate emailPredicate) {
+                       EmailContainsKeywordsPredicate emailPredicate, RentalInformationContainsKeywordsPredicate rentalInfoPredicate) {
         this.namePredicate = namePredicate;
         this.phonePredicate = phonePredicate;
         this.emailPredicate = emailPredicate;
+        this.rentalInfoPredicate = rentalInfoPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(namePredicate.or(phonePredicate).or(emailPredicate));
+        model.updateFilteredPersonList(namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
@@ -60,7 +64,8 @@ public class FindCommand extends Command {
         FindCommand otherFindCommand = (FindCommand) other;
         return namePredicate.equals(otherFindCommand.namePredicate)
                 && phonePredicate.equals(otherFindCommand.phonePredicate)
-                && emailPredicate.equals(otherFindCommand.emailPredicate);
+                && emailPredicate.equals(otherFindCommand.emailPredicate)
+                && rentalInfoPredicate.equals(otherFindCommand.rentalInfoPredicate);
     }
 
     @Override
@@ -69,6 +74,7 @@ public class FindCommand extends Command {
                 .add("namePredicate", namePredicate)
                 .add("phonePredicate", phonePredicate)
                 .add("emailPredicate", emailPredicate)
+                .add("rentalInfoPredicate", rentalInfoPredicate)
                 .toString();
     }
 }

@@ -18,6 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
+import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -34,6 +35,8 @@ public class FindCommandTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("98761111"));
         EmailContainsKeywordsPredicate emailPredicate1 =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("alice@example.com"));
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate1 =
+                new RentalInformationContainsKeywordsPredicate(Collections.singletonList("8100"));
 
         NameContainsKeywordsPredicate namePredicate2 =
                 new NameContainsKeywordsPredicate(Collections.singletonList("Bob"));
@@ -41,15 +44,17 @@ public class FindCommandTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("22222222"));
         EmailContainsKeywordsPredicate emailPredicate2 =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("bob@example.com"));
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate2 =
+                new RentalInformationContainsKeywordsPredicate(Collections.singletonList("2700"));
 
-        FindCommand findFirstCommand = new FindCommand(namePredicate1, phonePredicate1, emailPredicate1);
-        FindCommand findSecondCommand = new FindCommand(namePredicate2, phonePredicate2, emailPredicate2);
+        FindCommand findFirstCommand = new FindCommand(namePredicate1, phonePredicate1, emailPredicate1, rentalInfoPredicate1);
+        FindCommand findSecondCommand = new FindCommand(namePredicate2, phonePredicate2, emailPredicate2, rentalInfoPredicate2);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(namePredicate1, phonePredicate1, emailPredicate1);
+        FindCommand findFirstCommandCopy = new FindCommand(namePredicate1, phonePredicate1, emailPredicate1, rentalInfoPredicate1);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -68,8 +73,9 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
         PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(" ");
         EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(" ");
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(" ");
 
-        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate);
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
         expectedModel.updateFilteredPersonList(namePredicate.or(phonePredicate).or(emailPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -95,11 +101,14 @@ public class FindCommandTest {
                 new PhoneContainsKeywordsPredicate(Collections.singletonList("98761111"));
         EmailContainsKeywordsPredicate emailPredicate =
                 new EmailContainsKeywordsPredicate(Collections.singletonList("alice@example.com"));
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate =
+                new RentalInformationContainsKeywordsPredicate(Collections.singletonList("8100"));
 
-        FindCommand findCommand = new FindCommand(namePredicate, phonePredicate, emailPredicate);
+        FindCommand findCommand = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
         String expected = FindCommand.class.getCanonicalName() + "{namePredicate=" + namePredicate
                 + ", phonePredicate=" + phonePredicate
-                + ", emailPredicate=" + emailPredicate + "}";
+                + ", emailPredicate=" + emailPredicate
+                + ", rentalInfoPredicate=" + rentalInfoPredicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
@@ -116,5 +125,9 @@ public class FindCommandTest {
 
     private EmailContainsKeywordsPredicate prepareEmailPredicate(String userInput) {
         return new EmailContainsKeywordsPredicate(Arrays.asList(userInput));
+    }
+
+    private RentalInformationContainsKeywordsPredicate prepareRentalInfoPredicate(String userInput) {
+        return new RentalInformationContainsKeywordsPredicate(Arrays.asList(userInput));
     }
 }

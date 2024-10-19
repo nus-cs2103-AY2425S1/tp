@@ -28,7 +28,7 @@ public class EmailContainsKeywordsPredicate implements Predicate<Client> {
                 return false;
             } else {
                 return keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(client.getEmail().value, keyword));
+                        .anyMatch(keyword -> StringUtil.containsIgnoreCase(client.getEmail().value, keyword));
             }
         }
     }
