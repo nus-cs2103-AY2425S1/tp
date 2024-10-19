@@ -9,10 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,6 +80,34 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+    /**
+     * Parses a {@code String studentClass} into an {@code StudentClass}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentClass} is invalid.
+     */
+    public static StudentClass parseClass(String studentClass) throws ParseException {
+        requireNonNull(studentClass);
+        String studentClassTrimmed = studentClass.trim();
+        if (!StudentClass.isValidClass(studentClassTrimmed)) {
+            throw new ParseException(StudentClass.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentClass(studentClassTrimmed);
+    }
+    /**
+     * Parses a {@code String groupName} into an {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String groupNameTrimmed = groupName.trim();
+        if (!GroupName.isValidName(groupNameTrimmed)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
+        return new GroupName(groupNameTrimmed);
     }
 
     /**

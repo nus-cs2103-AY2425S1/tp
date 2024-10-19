@@ -11,12 +11,19 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -89,9 +96,80 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void addTagTest() {
+        Person expectedPerson = new PersonBuilder().withTags("tag").build();
+        Person actualPerson = new PersonBuilder().build();
+        modelManager.addPerson(actualPerson);
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        modelManager.addTag(actualPerson, tags);
+        assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void deleteTagTest() {
+        Person actualPerson = new PersonBuilder().withTags("tag").build();
+        Person expectedPerson = new PersonBuilder().build();
+        modelManager.addPerson(actualPerson);
+        Tag tag = new Tag("tag");
+        Set<Tag> tags = Set.of(tag);
+        modelManager.deleteTag(actualPerson, tags);
+        assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void addGroup_validGroup_addsGroup() {
+        Group group = new Group("group A", List.of(new PersonBuilder().build()));
+        modelManager.addGroup(group);
+        assertTrue(modelManager.hasGroupName(group));
+    }
+
+    @Test
+    public void hasGroupName_nullGroup_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasGroupName(null));
+    }
+
+    @Test
+    public void hasGroupName_groupNotInModel_returnsFalse() {
+        Group group = new Group("group A", List.of(new PersonBuilder().build()));
+        assertFalse(modelManager.hasGroupName(group));
+    }
+
+    @Test
+    public void hasGroupName_groupInModel_returnsTrue() {
+        Group group = new Group("group A", List.of(new PersonBuilder().build()));
+        modelManager.addGroup(group);
+        assertTrue(modelManager.hasGroupName(group));
+    }
+
+    @Test
+    public void updateFilteredGroupList_nullPredicate_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.updateFilteredGroupList(null));
+    }
+
+    @Test
+    public void updateFilteredGroupList_validPredicate_returnsMatchingGroups() {
+        Group groupA = new Group("group A", List.of(new PersonBuilder().build()));
+        Group groupB = new Group("group B", List.of(new PersonBuilder().build()));
+        Group groupC = new Group("group C", List.of(new PersonBuilder().build()));
+        modelManager.addGroup(groupA);
+        modelManager.addGroup(groupB);
+        modelManager.addGroup(groupC);
+
+        GroupContainsKeywordsPredicate predicate = new GroupContainsKeywordsPredicate(List.of("Group A", "Group B"));
+        List<Group> matchingGroups = modelManager.updateFilteredGroupList(predicate);
+
+        assertEquals(2, matchingGroups.size());
+        assertTrue(matchingGroups.contains(groupA));
+        assertTrue(matchingGroups.contains(groupB));
+        assertFalse(matchingGroups.contains(groupC));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
+
 
     @Test
     public void equals() {

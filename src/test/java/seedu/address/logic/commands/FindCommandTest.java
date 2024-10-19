@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalGroups.GOONERS;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
@@ -12,12 +13,15 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -29,35 +33,43 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
+        NameContainsKeywordsPredicate firstNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
+        NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        GroupContainsKeywordsPredicate firstGroupPredicate =
+                new GroupContainsKeywordsPredicate(Collections.singletonList("firstGroup"));
+        GroupContainsKeywordsPredicate secondGroupPredicate =
+                new GroupContainsKeywordsPredicate(Collections.singletonList("secondGroup"));
+
+        FindCommand findFirstNameCommand = new FindCommand(firstNamePredicate);
+        FindCommand findSecondNameCommand = new FindCommand(secondNamePredicate);
+        FindCommand findFirstGroupCommand = new FindCommand(firstGroupPredicate);
+        FindCommand findSecondGroupCommand = new FindCommand(secondGroupPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(findFirstNameCommand.equals(findFirstNameCommand));
+        assertTrue(findFirstGroupCommand.equals(findFirstGroupCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        FindCommand findFirstNameCommandCopy = new FindCommand(firstNamePredicate);
+        assertTrue(findFirstNameCommand.equals(findFirstNameCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(findFirstNameCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(findFirstNameCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(findFirstNameCommand.equals(findSecondNameCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,12 +79,40 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        NameContainsKeywordsPredicate predicate = prepareNamePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
+    @Test
+    public void execute_findGroup() {
+        // Make sure the model has the GOONERS group before running the command
+        model.addGroup(GOONERS);
+
+        // Prepare the group-based predicate
+        GroupContainsKeywordsPredicate groupPredicate = prepareGroupPredicate("gooners");
+
+        // Create the FindCommand for group-based search
+        FindCommand command = new FindCommand(groupPredicate);
+
+        // Get the matching groups and filter persons accordingly
+        List<Group> matchingGroups = model.updateFilteredGroupList(groupPredicate);
+
+        // Update the expectedModel to filter persons based on matching groups
+        expectedModel.updateFilteredPersonList(person -> matchingGroups.stream()
+                .flatMap(group -> group.getMembers().stream())
+                .anyMatch(member -> member.isSamePerson(person)));
+
+        // Calculate the expected message based on the number of persons in the filtered list
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
+                expectedModel.getFilteredPersonList().size());
+
+        // Assert command success with the correct number of persons
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+
+    }
+
 
     @Test
     public void toStringMethod() {
@@ -85,7 +125,14 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+    private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code GroupContainsKeywordsPredicate}.
+     */
+    private GroupContainsKeywordsPredicate prepareGroupPredicate(String userInput) {
+        return new GroupContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

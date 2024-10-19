@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +28,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private final List<Group> groups = new ArrayList<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,17 +48,18 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
+    }
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
-    }
-
-    @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
     }
 
     @Override
@@ -75,16 +84,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
-
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
     }
 
     @Override
@@ -107,14 +117,27 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void addTag(Person target, Set<Tag> newTags) {
+        Person updatedPerson = target.addTags(newTags);
+        setPerson(target, updatedPerson);
+    }
+
+    @Override
+    public void deleteTag(Person target, Set<Tag> tagsToDelete) {
+        Person updatedPerson = target.deleteTags(tagsToDelete);
+        setPerson(target, updatedPerson);
+    }
+
+    // =========== Filtered Person List Accessors
+    // =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -126,6 +149,60 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    // =========== Group Logic
+    // =============================================================
+
+    /**
+     * Adds a group to the Model
+     *
+     * @param group Group to be added
+     */
+    @Override
+    public void addGroup(Group group) {
+        groups.add(group);
+    }
+
+    /**
+     * Deletes the specified group from the list of groups.
+     *
+     * @param groupToDelete The group to be deleted.
+     * @throws NullPointerException if {@code groupToDelete} is null.
+     * @throws IllegalArgumentException if the group does not exist in the list.
+     */
+    @Override
+    public void deleteGroup(Group groupToDelete) {
+        requireNonNull(groupToDelete);
+
+        boolean isRemoved = groups.remove(groupToDelete);
+
+        if (!isRemoved) {
+            throw new IllegalArgumentException("Group not found: " + groupToDelete.getGroupName());
+        }
+    }
+
+    /**
+     * Adds a group to the Model
+     */
+    @Override
+    public String groupsString() {
+        return groups.toString();
+    }
+
+    /**
+     * Checks if a group with the same name already exists in the Model
+     *
+     * @param group Group to be checked
+     * @return true if the group exists, false otherwise
+     */
+    @Override
+    public boolean hasGroupName(Group group) {
+        if (group == null) {
+            throw new NullPointerException();
+        }
+        return groups.stream().anyMatch(existingGroup -> existingGroup.getGroupName().equals(group
+                .getGroupName()));
     }
 
     @Override
@@ -143,6 +220,20 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public List<Group> updateFilteredGroupList(GroupContainsKeywordsPredicate groupPredicate) {
+        requireNonNull(groupPredicate);
+
+        // Filter and collect the matching groups based on the predicate
+        List<Group> matchingGroups = groups.stream()
+                .filter(group -> groupPredicate.getKeywords().stream()
+                        .anyMatch(keyword -> group.getGroupName().groupName.equalsIgnoreCase(keyword)))
+                .toList();
+
+        // Return the list of matching groups
+        return matchingGroups;
     }
 
 }
