@@ -22,11 +22,13 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortByPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompoundedPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.OrgContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityHighToLowComparator;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -114,6 +116,22 @@ public class AddressBookParserTest {
         assertEquals(new FindCommand(new CompoundedPredicate(new NameContainsKeywordsPredicate(keywords),
                         new OrgContainsKeywordsPredicate(Arrays.asList("")))),
                 command);
+    }
+
+    @Test
+    public void parseCommand_sort_priority() throws Exception {
+        SortByPriorityCommand command = (SortByPriorityCommand) parser.parseCommand(
+                SortByPriorityCommand.COMMAND_WORD + " high");
+
+        assertEquals(new SortByPriorityCommand(new PriorityHighToLowComparator()), command);
+    }
+
+    @Test
+    public void parseCommand_sort_priority_alt() throws Exception {
+        SortByPriorityCommand command = (SortByPriorityCommand) parser.parseCommand(
+                SortByPriorityCommand.ALT_COMMAND_WORD + " high");
+
+        assertEquals(new SortByPriorityCommand(new PriorityHighToLowComparator()), command);
     }
 
     @Test

@@ -36,4 +36,18 @@ public class SortByPriorityCommand extends Command {
         model.updateSortedPersonList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(o instanceof SortByPriorityCommand)) {
+            return false;
+        }
+
+        SortByPriorityCommand e = (SortByPriorityCommand) o;
+        return comparator.equals(e.comparator);
+    }
 }
