@@ -65,7 +65,16 @@ public class AttendanceList {
         }
         Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
         newAttendanceList.remove(date);
-        return new AttendanceList(attendanceList);
+        return new AttendanceList(newAttendanceList);
+    }
+
+    /**
+     * Returns a copy of the map from {@code LocalDateTime} to {@code Attendance} in this {@code AttendanceList}
+     *
+     * @return A map from {@code LocalDateTime} to {@code Attendance} representing all the attendances.
+     */
+    public Map<LocalDateTime, Attendance> getMap() {
+        return new TreeMap<>(attendanceList);
     }
 
     @Override
