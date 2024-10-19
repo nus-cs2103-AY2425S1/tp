@@ -41,7 +41,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label subjectAndSchedule;
     @FXML
-    private Label rateAndPaidAndOwedAmount;
+    private Label rateAndPaidAmountAndOwedAmount;
 
 
 
@@ -62,8 +62,9 @@ public class StudentCard extends UiPart<Region> {
         address.setText(student.getAddress().value);
         email.setText(student.getEmail().value);
         subjectAndSchedule.setText(student.getSubject().toString() + ": " + student.getSchedule().toString());
-        rateAndPaidAndOwedAmount.setText("Rate: $" + student.getRate().toString() + "/h, "
-            + "Paid: $" + student.getPaid().toString() + ", " + "Owed: $" + student.getOwedAmount().toString());
+        rateAndPaidAmountAndOwedAmount.setText("Rate: $" + student.getRate().toString() + "/h, "
+            + "Paid: $" + student.getPaidAmount().toString() + ", "
+                + "Owed: $" + student.getOwedAmount().toString());
 
         // This is the code to show blue tags. I will comment it out instead of deleting it.
         /*

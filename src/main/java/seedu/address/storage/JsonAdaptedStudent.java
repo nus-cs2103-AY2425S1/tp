@@ -8,7 +8,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -29,7 +29,7 @@ class JsonAdaptedStudent {
     private final String schedule;
     private final String subject;
     private final String rate;
-    private final String paid;
+    private final String paidAmount;
     private final String owedAmount;
 
     /**
@@ -39,7 +39,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                     @JsonProperty("schedule") String schedule, @JsonProperty("subject") String subject,
-                            @JsonProperty("rate") String rate, @JsonProperty("paid") String paid,
+                            @JsonProperty("rate") String rate, @JsonProperty("paidAmount") String paidAmount,
                                     @JsonProperty("owedAmount") String owedAmount) {
         this.name = name;
         this.phone = phone;
@@ -48,7 +48,7 @@ class JsonAdaptedStudent {
         this.schedule = schedule;
         this.subject = subject;
         this.rate = rate;
-        this.paid = paid;
+        this.paidAmount = paidAmount;
         this.owedAmount = owedAmount;
     }
 
@@ -63,7 +63,7 @@ class JsonAdaptedStudent {
         schedule = source.getSchedule().value;
         subject = source.getSubject().toString();
         rate = source.getRate().toString();
-        paid = source.getPaid().toString();
+        paidAmount = source.getPaidAmount().toString();
         owedAmount = source.getOwedAmount().toString();
     }
 
@@ -131,13 +131,14 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(Rate.MESSAGE_CONSTRAINTS);
         }
         final Rate modelRate = new Rate(rate);
-        if (paid == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Paid.class.getSimpleName()));
+        if (paidAmount == null) {
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, PaidAmount.class.getSimpleName()));
         }
-        if (!Paid.isValidPaid(paid)) {
-            throw new IllegalValueException(Paid.MESSAGE_CONSTRAINTS);
+        if (!PaidAmount.isValidPaidAmount(paidAmount)) {
+            throw new IllegalValueException(PaidAmount.MESSAGE_CONSTRAINTS);
         }
-        final Paid modelPaid = new Paid(paid);
+        final PaidAmount modelPaidAmount = new PaidAmount(paidAmount);
 
         if (owedAmount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -149,7 +150,7 @@ class JsonAdaptedStudent {
         final OwedAmount modelOwedAmount = new OwedAmount(owedAmount);
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelSchedule,
-                modelSubject, modelRate, modelPaid, modelOwedAmount);
+                modelSubject, modelRate, modelPaidAmount, modelOwedAmount);
     }
 
 }

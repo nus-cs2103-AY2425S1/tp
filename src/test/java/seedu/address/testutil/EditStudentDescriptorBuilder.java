@@ -5,7 +5,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -39,7 +39,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setSchedule(student.getSchedule());
         descriptor.setSubject(student.getSubject());
         descriptor.setRate(student.getRate());
-        descriptor.setPaid(student.getPaid());
+        descriptor.setPaidAmount(student.getPaidAmount());
         descriptor.setOwedAmount(student.getOwedAmount());
     }
 
@@ -99,10 +99,10 @@ public class EditStudentDescriptorBuilder {
         return this;
     }
     /**
-     * Sets the {@code Paid} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code PaidAmount} of the {@code EditStudentDescriptor} that we are building.
      */
-    public EditStudentDescriptorBuilder withPaid(String paid) {
-        descriptor.setPaid(new Paid(paid));
+    public EditStudentDescriptorBuilder withPaidAmount(String paidAmount) {
+        descriptor.setPaidAmount(new PaidAmount(paidAmount));
         return this;
     }
 
