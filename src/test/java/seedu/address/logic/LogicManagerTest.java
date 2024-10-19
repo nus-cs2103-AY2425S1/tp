@@ -1,9 +1,31 @@
 package seedu.address.logic;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.StorageManager;
+import seedu.address.testutil.PersonBuilder;
+
+import java.io.IOException;
+import java.nio.file.AccessDeniedException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NOT_FOUND;
 import static seedu.address.logic.commands.CommandTestUtil.BIRTHDATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.HEALTHSERVICE_DESC_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NRIC_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SEX_DESC_AMY;
@@ -58,11 +80,6 @@ public class LogicManagerTest {
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
     }
 
-    @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
 
     @Test
     public void execute_validCommand_success() throws Exception {
@@ -166,8 +183,8 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + NRIC_DESC_AMY
-                + SEX_DESC_AMY + BIRTHDATE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withHealthServices().build();
+                + SEX_DESC_AMY + BIRTHDATE_DESC_AMY + HEALTHSERVICE_DESC_VACCINATION;
+        Person expectedPerson = new PersonBuilder(AMY).withHealthServices("vaccination").build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

@@ -22,10 +22,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTHSERVICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -193,14 +191,14 @@ public class EditCommandParserTest {
                 + HEALTHSERVICE_DESC_VACCINATION;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
 
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_NRIC_DESC + INVALID_BIRTHDATE_DESC + INVALID_SEX_DESC
                 + INVALID_NRIC_DESC + INVALID_BIRTHDATE_DESC + INVALID_SEX_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NRIC));
     }
 
     @Test

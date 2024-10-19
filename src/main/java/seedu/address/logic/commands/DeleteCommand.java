@@ -35,12 +35,10 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
         Person personToDelete = lastShownList.stream()
             .filter(person -> person.getNric().equals(targetNric))
             .findFirst()
             .orElse(null);
-
         if (personToDelete == null) {
             throw new CommandException(String.format(Messages.MESSAGE_PERSON_NOT_FOUND, targetNric));
         }
