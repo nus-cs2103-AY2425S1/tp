@@ -6,7 +6,7 @@
 
 # AB-3 User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+TAHub Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,11 +17,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar TAHub.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -68,19 +68,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
     
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/TAHub-level3/releases).
 
-    1. Visit the [GitHub releases page](https://github.com/se-edu/addressbook-level3/releases).
-    2. Download the `.jar` file (for example, `addressbook.jar`) from the latest release.
-    3. Save the `.jar` file to the folder where you want to store your AddressBook project.
+    1. Visit the [GitHub releases page](https://github.com/se-edu/TAHub-level3/releases).
+    2. Download the `.jar` file (for example, `TAHub.jar`) from the latest release.
+    3. Save the `.jar` file to the folder where you want to store your TAHub project.
 
     
-3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your TAHub.
 
     1. **Windows**:
         - Locate the downloaded `.jar` file in your `Downloads` folder.
         - Right-click on the `.jar` file, select **Copy**.
-        - Navigate to the folder where you want to store the AddressBook, right-click and select **Paste**.
+        - Navigate to the folder where you want to store the TAHub, right-click and select **Paste**.
 
     2. **Mac**:
         - Open the **Finder** and go to your `Downloads` folder.
@@ -100,16 +100,16 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
         - To get the full path of the folder:
             1. Right-click on the folder and select **Properties**.
             2. In the **General** tab, you will see the **Location** field. Copy the location path.
-            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\AddressBook`).
+            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\TAHub`).
         - Open the **Command Prompt**:
             - Press `Windows + R`, type `cmd`, and press Enter.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
           ```bash
-          cd C:\Users\YourName\Documents\AddressBook
+          cd C:\Users\YourName\Documents\TAHub
           ```
         - Run the app with:
           ```bash
-          java -jar addressbook.jar
+          java -jar TAHub.jar
           ```
 
     2. **Mac/Linux**:
@@ -120,11 +120,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
             - Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy the path.
         - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
           ```bash
-          cd /Users/YourName/Documents/AddressBook
+          cd /Users/YourName/Documents/TAHub
           ```
         - Run the app with:
           ```bash
-          java -jar addressbook.jar
+          java -jar TAHub.jar
           ```
 
    After a few seconds, the GUI similar to the one below should appear:
@@ -291,17 +291,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TAHub data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAHub data are saved automatically as a JSON file `[JAR file location]/data/TAHub.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, TAHub will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the TAHub to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -313,7 +313,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TAHub home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
