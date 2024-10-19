@@ -30,6 +30,9 @@ public class Income {
     public String getValue() {
         return value;
     }
+    public double getDoubleValue() {
+        return Double.parseDouble(value);
+    }
 
     public double toDouble() {
         return Double.parseDouble(value);
