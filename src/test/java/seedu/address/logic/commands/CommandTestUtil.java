@@ -52,7 +52,6 @@ public class CommandTestUtil {
     public static final String VALID_TYPE_HDB = "HDB";
     public static final String VALID_TYPE_CONDO = "CONDO";
     public static final String VALID_TYPE_LANDED = "LANDED";
-  
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
