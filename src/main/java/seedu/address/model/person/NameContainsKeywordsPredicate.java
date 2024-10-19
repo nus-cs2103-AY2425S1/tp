@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
@@ -25,7 +26,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
      * Evaluates this predicate on the given {@code Person}.
      *
      * @param person The person whose name is to be tested.
-     * @return {@code true} if the {@code Person}'s full name starts with the specified keyword; {@code false} otherwise.
+     * @return {@code true} if the person's name starts with the keyword; {@code false} otherwise.
      */
     @Override
     public boolean test(Person person) {
