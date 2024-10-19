@@ -16,6 +16,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Status;
 import seedu.address.model.task.TaskName;
 
 /**
@@ -152,6 +153,20 @@ public class ParserUtil {
             throw new ParseException(Deadline.MESSAGE_CONSTRAINTS);
         }
         return new Deadline(LocalDateTime.parse(trimmedName, Deadline.DATETIME_FORMATTER));
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code Status}
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Status parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        if (!Status.isValidStatus(trimmedStatus)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        }
+        return Status.valueOf(trimmedStatus);
     }
 
 }
