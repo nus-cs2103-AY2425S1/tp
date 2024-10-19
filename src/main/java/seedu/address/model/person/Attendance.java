@@ -32,7 +32,7 @@ public class Attendance {
      */
     public static Boolean isValidAttendance(String test) {
         try {
-            LocalDate.parse(test, VALID_DATE_FORMAT);
+            LocalDate.parse(test.trim(), VALID_DATE_FORMAT);
             return true;
         } catch (DateTimeParseException e) {
             return false;

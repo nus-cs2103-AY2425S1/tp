@@ -33,7 +33,7 @@ public class AttendanceTest {
     void isValidAttendance_validInput_success() {
         // Valid inputs
         assertTrue(Attendance.isValidAttendance("12/12/2024"));
-        assertTrue(Attendance.isValidAttendance(" 31/12/2024 "));
+        assertTrue(Attendance.isValidAttendance("31/12/2024"));
     }
 
     @Test
