@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Poppins;
+    src: url('Poppins-Regular.ttf');
+}
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
     -fx-font-family: "Poppins";

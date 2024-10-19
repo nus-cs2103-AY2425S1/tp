@@ -1,10 +1,10 @@
-.background {
-    -fx-background-color: #FF8080; /* The pink background */
-}
-
 @font-face {
     font-family: Poppins;
     src: url('Poppins-Regular.ttf');
+}
+
+.background {
+    -fx-background-color: #FF8080; /* The pink background */
 }
 
 .label {
