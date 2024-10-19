@@ -3,11 +3,13 @@ package seedu.ddd.model.event;
 import static seedu.ddd.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.ddd.commons.util.AppUtil;
 import seedu.ddd.commons.util.ToStringBuilder;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
@@ -19,7 +21,7 @@ import seedu.ddd.model.contact.vendor.Vendor;
 public class Event {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "There must be at least one client in a specific event,";
+            "There must be at least one client in a specific event.";
     private final ArrayList<Client> clients;
     private final ArrayList<Vendor> vendors;
     private final Description description;
@@ -31,27 +33,38 @@ public class Event {
      * @param vendors A list of vendors.
      */
     public Event(ArrayList<Client> clients, ArrayList<Vendor> vendors, Description description) {
-        requireAllNonNull(clients, vendors);
-        // another test to check
-        this.clients = clients;
-        this.vendors = vendors;
+        requireAllNonNull(clients, vendors, description);
+        AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
+        this.clients = new ArrayList<>();
+        this.clients.addAll(clients);
+        this.vendors = new ArrayList<>();
+        this.vendors.addAll(vendors);
         this.description = description;
+    }
+
+    /**
+     * Returns true if it is a valid event, which means there must
+     * be at least one {@Client} in clients list.
+     * @param testList The {@code ArrayList} of {@code Client} at the constructor.
+     */
+    public static boolean isValidEvent(ArrayList<Client> testList) {
+        return !testList.isEmpty();
     }
 
     /**
      * Returns the clients list.
      * @return An {@code ArrayList} of {@code Client}.
      */
-    public ArrayList<Client> getClients() {
-        return clients;
+    public List<Client> getClients() {
+        return Collections.unmodifiableList(clients);
     }
 
     /**
      * Returns the vendors list.
      * @return An {@code ArrayList} of {@code Vendor}.
      */
-    public ArrayList<Vendor> getVendors() {
-        return vendors;
+    public List<Vendor> getVendors() {
+        return Collections.unmodifiableList(vendors);
     }
 
     /**
@@ -68,7 +81,12 @@ public class Event {
      * @return A boolean value which represents the result.
      */
     public boolean isSameEvent(Event otherEvent) {
-        return this.equals(otherEvent);
+        Set<Client> thisClients = new HashSet<>(this.getClients());
+        Set<Client> otherClients = new HashSet<>(otherEvent.getClients());
+        Description thisDescription = this.getDescription();
+        Description otherDescription = otherEvent.getDescription();
+        return thisClients.equals(otherClients)
+                && thisDescription.equals(otherDescription);
     }
 
     @Override
