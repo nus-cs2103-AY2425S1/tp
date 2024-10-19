@@ -5,9 +5,15 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 1. [Quick Start](#quick-start)
 2. [Features](#features)
     1. [Viewing Help](#viewing-help--help)
-    2. [Adding a Person](#adding-a-person--add)
+    2. [Adding a Patient Profile](#adding-a-patient-profile--add)
     3. [Adding a Remark](#adding-a-remark--remark)
     4. [Adding an Appointment](#adding-an-appointment--appointment)
+    5. [Listing all profiles](#listing-all-patient-profiles--list)
+    6. [Editing a patient profile](#editing-a-patient-profile--edit)
+    7. [Locating patients by name](#locating-patients-by-name-find)
+    8. [Deleting patient profile](#deleting-a-patient-profile--delete)
+    9. [Clear all entries](#clearing-all-entries--clear)
+   10. [Exiting the program](#exiting-the-program--exit)
 3. [Command Summary](#command-summary)
 4. [FAQ](#faq)
 5. [Known Issues](#known-issues)
@@ -78,14 +84,14 @@ Displays a list of accepted commands.
 Format: `help`
 
 
-### Adding a person : `add`
+### Adding a patient profile : `add`
 
 Adds a patient profile to the database.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A patient profile can have any number of tags (including 0)
 </div>
 
 Examples:
@@ -108,13 +114,13 @@ Adds the appointment date of a patient to the patient profile. Note that appoint
 
 Format: `appointment NRIC app/APPOINTMENT`
 
-### Listing all persons : `list`
+### Listing all patient profiles : `list`
 
 Shows a list of all patient profiles in the database.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a patient profile : `edit`
 
 Edits the details of the patient identified by the index number used in the displayed patient profile list. **Existing information will be overwritten by the input values**
 
@@ -129,7 +135,7 @@ Format: `edit INDEX(must be positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [i/NR
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient profile displayed to be `Betsy Crower` and clears all existing tags.
 
 ### Locating patients by name: `find`
 
@@ -141,7 +147,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Profiles matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
