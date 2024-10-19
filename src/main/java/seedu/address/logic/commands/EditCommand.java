@@ -173,6 +173,7 @@ public class EditCommand extends Command {
             setPriority(toCopy.priority);
             setRemark(toCopy.remark);
             setDateOfBirth(toCopy.dateOfBirth);
+            setIncome(toCopy.income);
             setTags(toCopy.tags);
         }
 
@@ -180,7 +181,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, remark, priority, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, income,
+                    remark, priority, tags);
         }
 
         public void setName(Name name) {
@@ -282,6 +284,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
+                    && Objects.equals(income, otherEditPersonDescriptor.income)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -293,9 +296,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("dateOfBirth", dateOfBirth)
                     .add("priority", priority)
                     .add("remark", remark)
+                    .add("dateOfBirth", dateOfBirth)
+                    .add("income", income)
                     .add("tags", tags)
                     .toString();
         }
