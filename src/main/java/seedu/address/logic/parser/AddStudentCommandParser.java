@@ -56,11 +56,11 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
+        Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
         Set<String> classes = parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
 
         // Create the Student object
-        Student student = new Student(name, phone, email, address, tagList, subject, classes);
+        Student student = new Student(name, phone, email, address, tagList, subjectList, classes);
 
         return new AddStudentCommand(student);
     }

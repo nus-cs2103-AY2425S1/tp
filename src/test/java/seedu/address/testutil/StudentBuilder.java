@@ -27,7 +27,7 @@ public class StudentBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Subject subject;
+    private Set<Subject> subjects;
     private Set<Tag> tags;
     private Set<String> classes;
 
@@ -39,7 +39,7 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        subject = new Subject(DEFAULT_SUBJECT);
+        subjects = new HashSet<>(SampleDataUtil.getSubjectSet(DEFAULT_SUBJECT));
         tags = new HashSet<>();
         classes = new HashSet<>();
     }
@@ -52,7 +52,7 @@ public class StudentBuilder {
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
-        subject = studentToCopy.getSubject();
+        subjects = studentToCopy.getSubjects();
         tags = new HashSet<>(studentToCopy.getTags());
         classes = new HashSet<>(studentToCopy.getClasses());
     }
@@ -92,8 +92,8 @@ public class StudentBuilder {
     /**
      * Sets the {@code Subject} of the {@code Student} that we are building.
      */
-    public StudentBuilder withSubject(String subject) {
-        this.subject = new Subject(subject);
+    public StudentBuilder withSubject(String... subjects) {
+        this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
 
@@ -114,7 +114,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, tags, subject, classes);
+        return new Student(name, phone, email, address, tags, subjects, classes);
     }
 
 }

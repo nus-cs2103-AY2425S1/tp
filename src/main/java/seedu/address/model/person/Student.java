@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
-    private final Subject subject; // Subject the student is associated with
+    private final Set<Subject> subjects; // Subject the student is associated with
     private final Set<String> classes; // Classes the student attends
 
     /**
@@ -22,20 +23,20 @@ public class Student extends Person {
      * @param email    Email of the student
      * @param address  Address of the student
      * @param tags     Tags associated with the student
-     * @param subject  Subject the student is taking
+     * @param subjects  Subject the student is taking
      * @param classes  Set of class names the student is attending
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                   Subject subject, Set<String> classes) {
+                   Set<Subject> subjects, Set<String> classes) {
         super(name, phone, email, address, tags);
-        Objects.requireNonNull(subject, "Subject must not be null");
+        Objects.requireNonNull(subjects, "Subject must not be null");
         Objects.requireNonNull(classes, "Classes must not be null");
-        this.subject = subject;
+        this.subjects = subjects;
         this.classes = classes;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
     }
 
     public Set<String> getClasses() {
@@ -54,7 +55,7 @@ public class Student extends Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Subject: ")
-                .append(getSubject())
+                .append(getSubjects())
                 .append("; Classes: ")
                 .append(String.join(", ", classes));
 
@@ -81,13 +82,13 @@ public class Student extends Person {
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getAddress().equals(getAddress())
-                && otherStudent.getSubject().equals(getSubject())
+                && otherStudent.getSubjects().equals(getSubjects())
                 && otherStudent.getClasses().equals(getClasses())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getSubject(), getClasses(), getTags());
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getSubjects(), getClasses(), getTags());
     }
 }

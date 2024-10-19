@@ -11,6 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,6 +57,15 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Tag::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a Subject set containing the list of strings given.
+     */
+    public static Set<Subject> getSubjectSet(String... strings) {
+        return Arrays.stream(strings)
+            .map(Subject::new)
+            .collect(Collectors.toSet());
     }
 
     /**
