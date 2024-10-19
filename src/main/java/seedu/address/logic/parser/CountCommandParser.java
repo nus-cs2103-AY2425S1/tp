@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.CountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.Optional;
 
 /**
  * Parses input arguments and creates a new CountCommand object.
