@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.model.tag.PropertyTagType;
 
 /**
@@ -26,10 +27,6 @@ public class Listing {
         this.address = address;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     /**
      * Constructs an {@code Listing} - meant for use for Jackson.
      *
@@ -41,6 +38,10 @@ public class Listing {
                    @JsonProperty("address") Address address) {
         this.propertyType = PropertyTagType.fromString(propertyType);
         this.address = address;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     @Override

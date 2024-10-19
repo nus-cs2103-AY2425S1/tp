@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -47,7 +46,6 @@ public class Person {
         for (Tag tag: tags) {
             if (PropertyTagType.isValidPropertyTag(tag.tagName)) {
                 this.tags.remove(tag);
-                System.out.println("Removed tag: " + tag.tagName);
             }
         }
 

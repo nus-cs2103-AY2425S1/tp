@@ -45,7 +45,7 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder()
                 .withTags("seller") // first tag of alice needs to be present
                 .withRemark(ALICE.getRemark().toString())
-                .withListings(new String[]{"hdb", "1245 SUTD street"}).build();
+                .withListings(ALICE.getListings()).build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 

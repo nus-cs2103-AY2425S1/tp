@@ -9,8 +9,8 @@ import seedu.address.commons.util.StringUtil;
  */
 public class PropertyTag extends Tag {
 
-    private final PropertyTagType propertyTagType;
     public static final String ALLOWED_PROPERTY_TAGS = "HDB, Condo, Landed";
+    private final PropertyTagType propertyTagType;
 
     /**
      * Constructs a {@code PropertyTag}.

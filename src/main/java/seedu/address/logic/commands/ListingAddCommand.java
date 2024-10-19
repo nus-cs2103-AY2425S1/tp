@@ -1,5 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -8,10 +12,6 @@ import seedu.address.model.person.Listing;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniqueListingList;
 import seedu.address.model.person.exceptions.DuplicateListingException;
-
-import java.util.List;
-
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -61,8 +61,7 @@ public class ListingAddCommand extends Command {
         UniqueListingList editedListings = new UniqueListingList(personToEdit.getListings());
         try {
             editedListings.add(listing);
-        }
-        catch (DuplicateListingException e) {
+        } catch (DuplicateListingException e) {
             throw new CommandException(e.getMessage());
         }
 

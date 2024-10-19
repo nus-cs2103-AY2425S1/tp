@@ -8,7 +8,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTagCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListingAddCommand;
+import seedu.address.logic.commands.ListingDeleteCommand;
+import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,56 +57,57 @@ public class AddressBookParser {
         logger.info("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-            case AddCommand.COMMAND_WORD:
-                return new AddCommandParser().parse(arguments);
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
 
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
-            case FindCommand.COMMAND_WORD:
-                return new FindCommandParser().parse(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case FindTagCommand.COMMAND_WORD:
-                return new FindTagCommandParser().parse(arguments);
+        case FindTagCommand.COMMAND_WORD:
+            return new FindTagCommandParser().parse(arguments);
 
-            case RemarkCommand.COMMAND_WORD:
-                return new RemarkCommandParser().parse(arguments);
+        case RemarkCommand.COMMAND_WORD:
+            return new RemarkCommandParser().parse(arguments);
 
-            case ListingAddCommand.COMMAND_WORD_PREFIX:
-                final Matcher listingMatcher = LISTING_COMMAND_FORMAT.matcher(arguments.trim());
+        case ListingAddCommand.COMMAND_WORD_PREFIX:
+            final Matcher listingMatcher = LISTING_COMMAND_FORMAT.matcher(arguments.trim());
 
-                if (!listingMatcher.matches()) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-                }
+            if (!listingMatcher.matches()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            }
 
-                final String listingCommandWord = listingMatcher.group("commandWord").trim();
-                final String listingArguments = listingMatcher.group("arguments");
+            final String listingCommandWord = listingMatcher.group("commandWord").trim();
+            final String listingArguments = listingMatcher.group("arguments");
 
-                if (listingCommandWord.equals(ListingAddCommand.COMMAND_WORD_SUFFIX)) {
-                    return new ListingAddCommandParser().parse(listingArguments);
-                }
-                else if (listingCommandWord.equals(ListingDeleteCommand.COMMAND_WORD_SUFFIX)) {
-                    return new ListingDeleteCommandParser().parse(listingArguments);
-                }
+            if (listingCommandWord.equals(ListingAddCommand.COMMAND_WORD_SUFFIX)) {
+                return new ListingAddCommandParser().parse(listingArguments);
+            } else if (listingCommandWord.equals(ListingDeleteCommand.COMMAND_WORD_SUFFIX)) {
+                return new ListingDeleteCommandParser().parse(listingArguments);
+            }
 
-            default:
-                logger.finer("This user input caused a ParseException: " + userInput);
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+
+        default:
+            logger.finer("This user input caused a ParseException: " + userInput);
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
