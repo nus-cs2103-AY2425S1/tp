@@ -42,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_FINANCIAL_INFO_BOB = "No income";
     public static final String VALID_SOCIAL_MEDIA_HANDLE_AMY = "Amy_A";
     public static final String VALID_SOCIAL_MEDIA_HANDLE_BOB = "Bob_B";
+    public static final String VALID_TAG_FRIEND_COUNT = "friend:2";
+    public static final String VALID_TAG_PRIORITY_VALUE = "priority:high";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

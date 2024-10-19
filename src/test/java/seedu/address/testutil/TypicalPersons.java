@@ -13,7 +13,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOCIAL_MEDIA_HANDLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SOCIAL_MEDIA_HANDLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND_COUNT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PRIORITY_VALUE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -97,6 +99,18 @@ public class TypicalPersons {
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
+    // Manually added - Person's details found for {@code SortCommandTest}
+    public static final Person AMY_CLONE = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withFinancialInfo(VALID_FINANCIAL_INFO_AMY)
+            .withSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE_AMY)
+            .withTags(VALID_TAG_PRIORITY_VALUE).build();
+    public static final Person BOB_CLONE = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        .withFinancialInfo(VALID_FINANCIAL_INFO_BOB)
+        .withSocialMediaHandle(VALID_SOCIAL_MEDIA_HANDLE_BOB)
+        .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND_COUNT)
+        .build();
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation

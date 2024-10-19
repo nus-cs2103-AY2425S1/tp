@@ -104,10 +104,22 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        if (trimmedTag.contains(":")) {
+            String[] tagKeyValue = trimmedTag.split(":");
+            if (!Tag.isValidTagName(tagKeyValue[0])) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+            if (!Tag.isValidTagName(tagKeyValue[1])) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+            return new Tag(tagKeyValue[0], tagKeyValue[1]);
+        } else {
+            if (!Tag.isValidTagName(trimmedTag)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+            return new Tag(trimmedTag);
         }
-        return new Tag(trimmedTag);
+
     }
 
     /**

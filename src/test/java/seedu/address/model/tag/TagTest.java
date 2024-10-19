@@ -18,6 +18,13 @@ public class TagTest {
     }
 
     @Test
+    public void constructor_invalidTagValue_throwsIllegalArgumentException() {
+        String invalidTagValue = "";
+        String someValidTagName = "someValidTagName";
+        assertThrows(IllegalArgumentException.class, () -> new Tag(someValidTagName, invalidTagValue));
+    }
+
+    @Test
     public void isValidTagName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));

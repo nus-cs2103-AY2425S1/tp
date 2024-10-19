@@ -2,6 +2,7 @@
 /.gradle/
 /build/
 src/main/resources/docs/
+/bin
 
 # IDEA files
 /.idea/
@@ -22,3 +23,5 @@ src/test/data/sandbox/
 .DS_Store
 docs/_site/
 docs/_markbind/logs/
+
+
