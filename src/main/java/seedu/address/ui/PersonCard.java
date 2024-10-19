@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
         if (person.getAppts().size() == 0) {
             appointmentDateTime.setText("No appointments currently");
-        } else { 
+        } else {
             appointmentDateTime.setText(person.getApptsString());
         }
     }
