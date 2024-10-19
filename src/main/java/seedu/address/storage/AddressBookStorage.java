@@ -42,4 +42,5 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
+    Path getManualSaveFilePath();
 }
