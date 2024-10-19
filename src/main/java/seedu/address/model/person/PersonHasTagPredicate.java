@@ -1,14 +1,17 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
-
-import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.model.tag.Tag;
+
+
+/**
+ * Tests that a {@code Person}'s {@code Tag} matches any of the tags given.
+ */
 public class PersonHasTagPredicate implements Predicate<Person> {
-    ArrayList<Tag> tagList;
-    public PersonHasTagPredicate(ArrayList<Tag> tagList) {
+    private List<Tag> tagList;
+    public PersonHasTagPredicate(List<Tag> tagList) {
         this.tagList = tagList;
     }
     @Override
@@ -28,6 +31,7 @@ public class PersonHasTagPredicate implements Predicate<Person> {
         }
 
         PersonHasTagPredicate otherPersonHasTagPredicate = (PersonHasTagPredicate) other;
+        System.out.println("1" + tagList.equals(otherPersonHasTagPredicate.tagList));
         return tagList.equals(otherPersonHasTagPredicate.tagList);
     }
 }
