@@ -12,7 +12,7 @@
     "email" : "johnd@example.com",
     "gender" : "M",
     "age" : "40",
-    "detail" : "detail",
+    "detail" : "Study completed",
     "study groups" : [ "Control", "1A" ]
   }, {
     "name" : "Carl Kurz",
