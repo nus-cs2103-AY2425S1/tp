@@ -173,7 +173,7 @@ Format: `history INDEX/NRIC`
 * The NRIC has to be a valid NRIC
 
 Examples:
-* `history 2` shows the call history of the 2nd elderly in ContactMate.
+* `list` followed by `history 2` shows the call history of the 2nd elderly in ContactMate.
 * `history S6878830G` shows the call history of the elderly with NRIC S6878830G.
   ![result for 'history S6878830G'](images/historyAlice.png)
 
