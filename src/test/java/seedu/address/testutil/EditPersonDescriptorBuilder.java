@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -84,12 +87,25 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tutorials} into a {@code Set<Tutorial>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Parses the {@code tutorials} and calls the overloaded method, with defaulted true attendance for all
+     * tutorials.
      */
     public EditPersonDescriptorBuilder withTutorials(String... tutorials) {
-        Set<Tutorial> tutorialSet = Stream.of(tutorials).map(Tutorial::new).collect(Collectors.toSet());
-        descriptor.setTutorials(tutorialSet);
+        Boolean[] attendance = new Boolean[tutorials.length];
+        Arrays.fill(attendance, Boolean.TRUE);
+        return withTutorials(tutorials, attendance);
+    }
+
+    /**
+     * Parses the {@code tutorials} into a {@code Map<Tutorial, Boolean>} and set it to the
+     * {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTutorials(String[] tutorials, Boolean[] attendance) {
+        Map<Tutorial, Boolean> tutorialMap = new HashMap<>();
+        for (int i = 0; i < tutorials.length; i++) {
+            tutorialMap.put(new Tutorial(tutorials[i]), attendance[i]);
+        }
+        descriptor.setTutorials(tutorialMap);
         return this;
     }
 

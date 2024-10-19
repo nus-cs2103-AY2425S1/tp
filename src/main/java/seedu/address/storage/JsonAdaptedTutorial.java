@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Tutorial;
@@ -12,25 +12,34 @@ import seedu.address.model.person.Tutorial;
 class JsonAdaptedTutorial {
 
     private final String tutorialNumber;
+    private final Boolean completed;
 
     /**
      * Constructs a {@code JsonAdaptedTutorial} with the given {@code tutorial}.
      */
     @JsonCreator
-    public JsonAdaptedTutorial(String tutorial) {
-        this.tutorialNumber = tutorial;
+    public JsonAdaptedTutorial(@JsonProperty("tutorialNumber") String tutorialNumber,
+                               @JsonProperty("completed") Boolean completed) {
+        this.tutorialNumber = tutorialNumber;
+        this.completed = completed;
     }
 
     /**
      * Converts a given {@code Tutorial} into this class for Jackson use.
      */
-    public JsonAdaptedTutorial(Tutorial source) {
-        tutorialNumber = source.tutorial;
+    public JsonAdaptedTutorial(Tutorial source, Boolean completed) {
+        this.tutorialNumber = source.tutorial;
+        this.completed = completed;
     }
 
-    @JsonValue
+    @JsonProperty("tutorialNumber")
     public String getTutorialNumber() {
         return tutorialNumber;
+    }
+
+    @JsonProperty("completed")
+    public Boolean getCompleted() {
+        return completed;
     }
 
     /**

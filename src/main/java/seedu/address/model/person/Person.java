@@ -3,7 +3,9 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +18,15 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    /**
+     * Represents the Attendance Status of a tutorial. Mainly used for GUI generation and testing.
+     */
+    public enum AttendanceStatus {
+        ATTENDED,
+        ABSENT,
+        NOT_TAKEN_PLACE
+    }
+
     // Identity fields
     private final Name name;
     private final StudentId studentId;
@@ -24,20 +35,20 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Tutorial> tutorials = new HashSet<>();
+    private final Map<Tutorial, Boolean> tutorials = new HashMap<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, StudentId studentId, Phone phone, Email email, Set<Tag> tags,
-                  Set<Tutorial> tutorials) {
+                  Map<Tutorial, Boolean> tutorials) {
         requireAllNonNull(name, studentId, phone, email, tags, tutorials);
         this.name = name;
         this.studentId = studentId;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
-        this.tutorials.addAll(tutorials);
+        this.tutorials.putAll(tutorials);
     }
 
     public Name getName() {
@@ -65,18 +76,24 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tutorial set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tutorial map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tutorial> getTutorials() {
-        return Collections.unmodifiableSet(tutorials);
+    public Map<Tutorial, Boolean> getTutorials() {
+        return Collections.unmodifiableMap(tutorials);
     }
 
     /**
-     * Returns true if the person has attended the stated tutorial.
+     * Returns true if the person has attended the stated tutorial, false otherwise.
      */
-    public boolean hasAttendedTutorial(String index) {
-        return tutorials.contains(new Tutorial(index));
+    public AttendanceStatus hasAttendedTutorial(String index) {
+        if (tutorials.containsKey(new Tutorial(index))) {
+            return tutorials.get(new Tutorial(index))
+                    ? AttendanceStatus.ATTENDED
+                    : AttendanceStatus.ABSENT;
+        }
+
+        return AttendanceStatus.NOT_TAKEN_PLACE;
     }
 
     /**

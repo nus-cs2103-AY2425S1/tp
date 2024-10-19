@@ -96,14 +96,18 @@ public class PersonTest {
     public void correctlyChecksAttendance() {
         Person alice = new PersonBuilder(ALICE).build();
 
-        // Alice currently has no tutorials attended, should return false.
-        assertFalse(alice.hasAttendedTutorial("0"));
+        // Alice currently has no tutorials attended, should return NOT_TAKEN_PLACE
+        assertEquals(Person.AttendanceStatus.NOT_TAKEN_PLACE, alice.hasAttendedTutorial("0"));
 
-        // Set Alice to have attended tutorial 1, 3, 7.
-        alice = new PersonBuilder(ALICE).withTutorials("1", "3", "7").build();
-        assertTrue(alice.hasAttendedTutorial("1"));
-        assertTrue(alice.hasAttendedTutorial("3"));
-        assertFalse(alice.hasAttendedTutorial("2")); // Did not attend tutorial 2
+        // Set Alice to have attended tutorial 1, 3.
+        alice = new PersonBuilder(ALICE).withTutorials("1", "3").build();
+        assertEquals(Person.AttendanceStatus.ATTENDED, alice.hasAttendedTutorial("1"));
+        assertEquals(Person.AttendanceStatus.ATTENDED, alice.hasAttendedTutorial("3"));
+
+        // Set Alice to have not attended tutorial 2 and 4.
+        alice = new PersonBuilder(ALICE).withTutorials(new String[] {"2", "4"}, new Boolean[] {false, false}).build();
+        assertEquals(Person.AttendanceStatus.ABSENT, alice.hasAttendedTutorial("2"));
+        assertEquals(Person.AttendanceStatus.ABSENT, alice.hasAttendedTutorial("4"));
     }
 
     @Test

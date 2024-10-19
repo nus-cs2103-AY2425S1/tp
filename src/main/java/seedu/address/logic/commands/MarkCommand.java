@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -52,11 +52,13 @@ public class MarkCommand extends Command {
         }
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
-        Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        if (!newTutorials.add(tutorial)) {
+        Map<Tutorial, Boolean> newTutorials = new HashMap<>(personToEdit.getTutorials());
+        if (newTutorials.containsKey(tutorial) && newTutorials.get(tutorial)) {
             throw new CommandException(
                     String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
         }
+
+        newTutorials.put(tutorial, true);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),

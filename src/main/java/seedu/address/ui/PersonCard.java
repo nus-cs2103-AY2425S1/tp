@@ -65,9 +65,14 @@ public class PersonCard extends UiPart<Region> {
             Label tutorialLabel = new Label(String.valueOf(index));
             tutorialLabel.getStyleClass().add("tutorial-label");
 
-            if (person.hasAttendedTutorial(String.valueOf(index))) {
+            if (person.hasAttendedTutorial(String.valueOf(index)) == Person.AttendanceStatus.ATTENDED) {
                 tutorialLabel.getStyleClass().add("tutorial-attended");
             }
+
+            if (person.hasAttendedTutorial(String.valueOf(index)) == Person.AttendanceStatus.ABSENT) {
+                tutorialLabel.getStyleClass().add("tutorial-absent");
+            }
+
             tutorials.getChildren().add(tutorialLabel);
         });
     }

@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.person.Email;
@@ -27,7 +29,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
-    private Set<Tutorial> tutorials;
+    private Map<Tutorial, Boolean> tutorials;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -38,7 +40,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
-        tutorials = new HashSet<>();
+        tutorials = new HashMap<>();
     }
 
     /**
@@ -50,7 +52,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         tags = new HashSet<>(personToCopy.getTags());
-        tutorials = new HashSet<>(personToCopy.getTutorials());
+        tutorials = new HashMap<>(personToCopy.getTutorials());
     }
 
     /**
@@ -78,10 +80,20 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tutorials} into a {@code Set<Tutorial>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tutorials} into a {@code Map<Tutorial, Boolean>} and set it to the {@code Person}
+     * that we are building.
      */
     public PersonBuilder withTutorials(String ... tutorials) {
-        this.tutorials = SampleDataUtil.getTutorialSet(tutorials);
+        this.tutorials = SampleDataUtil.getTutorialMap(tutorials);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tutorials} and {@code attendance} into a {@code Map<Tutorial, Boolean>} and set it to the
+     * {@code Person} that we are building.
+     */
+    public PersonBuilder withTutorials(String[] tutorials, Boolean[] attendance) {
+        this.tutorials = SampleDataUtil.getTutorialMap(tutorials, attendance);
         return this;
     }
 

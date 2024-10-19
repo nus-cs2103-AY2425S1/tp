@@ -1,8 +1,10 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,8 +65,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        tutorials.addAll(source.getTutorials().stream()
-                .map(JsonAdaptedTutorial::new)
+        tutorials.addAll(source.getTutorials().entrySet().stream()
+                .map(entry -> new JsonAdaptedTutorial(entry.getKey().tutorial, entry.getValue()))
                 .collect(Collectors.toList()));
     }
 
@@ -79,9 +81,10 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Tutorial> personTutorials = new ArrayList<>();
+        final Map<Tutorial, Boolean> personTutorials = new HashMap<>();
         for (JsonAdaptedTutorial tut : tutorials) {
-            personTutorials.add(tut.toModelType());
+            Boolean completed = tut.getCompleted();
+            personTutorials.put(tut.toModelType(), completed);
         }
 
         if (name == null) {
@@ -117,10 +120,9 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Set<Tutorial> modelTutorials = new HashSet<>(personTutorials);
+        final Map<Tutorial, Boolean> modelTutorials = new HashMap<>(personTutorials);
 
         return new Person(modelName, modelStudentId, modelPhone, modelEmail, modelTags, modelTutorials);
     }

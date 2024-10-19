@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,22 +24,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new StudentId("E0000001"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"),
-                getTagSet("friends"), getTutorialSet()),
+                getTagSet("friends"), getTutorialMap()),
             new Person(new Name("Bernice Yu"), new StudentId("E0000002"), new Phone("99272758"),
                     new Email("berniceyu@example.com"),
-                getTagSet("colleagues", "friends"), getTutorialSet()),
+                getTagSet("colleagues", "friends"), getTutorialMap()),
             new Person(new Name("Charlotte Oliveiro"), new StudentId("E0000003"), new Phone("93210283"),
                     new Email("charlotte@example.com"),
-                getTagSet("neighbours"), getTutorialSet()),
+                getTagSet("neighbours"), getTutorialMap()),
             new Person(new Name("David Li"), new StudentId("E0000004"), new Phone("91031282"),
                     new Email("lidavid@example.com"),
-                getTagSet("family"), getTutorialSet()),
+                getTagSet("family"), getTutorialMap()),
             new Person(new Name("Irfan Ibrahim"), new StudentId("E0000005"), new Phone("92492021"),
                     new Email("irfan@example.com"),
-                getTagSet("classmates"), getTutorialSet()),
+                getTagSet("classmates"), getTutorialMap()),
             new Person(new Name("Roy Balakrishnan"), new StudentId("E0000006"), new Phone("92624417"),
                     new Email("royb@example.com"),
-                getTagSet("colleagues"), getTutorialSet("1", "2"))
+                getTagSet("colleagues"), getTutorialMap("1", "2"))
         };
     }
 
@@ -59,12 +61,20 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tutorial set containing the list of strings given.
+     * Returns a tutorial set containing the list of strings given and all are defaulted to true.
      */
-    public static Set<Tutorial> getTutorialSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tutorial::new)
-                .collect(Collectors.toSet());
+    public static Map<Tutorial, Boolean> getTutorialMap(String... strings) {
+        Boolean[] attendance = new Boolean[strings.length];
+        Arrays.fill(attendance, Boolean.TRUE);
+        return getTutorialMap(strings, attendance);
+    }
+
+    public static Map<Tutorial, Boolean> getTutorialMap(String[] strings, Boolean[] attendance) {
+        Map<Tutorial, Boolean> tutorialMap = new HashMap<>();
+        for (int i = 0; i < strings.length; i++) {
+            tutorialMap.put(new Tutorial(strings[i]), attendance[i]);
+        }
+        return tutorialMap;
     }
 
 }

@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -51,11 +51,13 @@ public class UnmarkCommand extends Command {
         }
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
-        Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        if (!newTutorials.remove(tutorial)) {
+        Map<Tutorial, Boolean> newTutorials = new HashMap<>(personToEdit.getTutorials());
+        if (newTutorials.containsKey(tutorial) && !newTutorials.get(tutorial)) {
             throw new CommandException(
                     String.format(MESSAGE_UNMARK_UNNECESSARY, tutorial.tutorial, Messages.format(personToEdit)));
         }
+
+        newTutorials.put(tutorial, false);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
