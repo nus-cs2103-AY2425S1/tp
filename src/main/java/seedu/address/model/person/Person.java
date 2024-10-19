@@ -100,6 +100,10 @@ public class Person {
      */
     public boolean hasAppointment(LocalDateTime now, Optional<LocalDate> dateFilter, Optional<LocalTime> timeFilter) {
 
+        if (schedules == null || schedules.isEmpty()) {
+            return false; // Return false if schedules are null or empty
+        }
+
         for (Schedule schedule : schedules) {
             if (schedule == null || schedule.getDateTime().isEmpty()) {
                 return false;
@@ -126,8 +130,6 @@ public class Person {
                 // If time filter is present but date filter is not, ignore the time filter
                 return true;
             }
-
-            return true;
         }
         return true;
     }

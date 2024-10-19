@@ -112,6 +112,10 @@ public class PersonTest {
         Person personWithPastAppointment = new PersonBuilder()
                 .withSchedule(new String[]{"2024-10-14 1400"}, new String[]{""}).build();
 
+        // Test with null schedule
+        Person personWithNullSchedule = new PersonBuilder().build(); // Person with no schedules
+        assertFalse(personWithNullSchedule.hasAppointment(now, Optional.empty(), Optional.empty()));
+
         // Test without filters
         assertTrue(personWithFutureAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));
         assertFalse(personWithPastAppointment.hasAppointment(now, Optional.empty(), Optional.empty()));

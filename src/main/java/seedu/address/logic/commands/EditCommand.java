@@ -262,7 +262,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("schedule", schedules)
+                    .add("schedules", schedules)
                     .add("reminder", reminder)
                     .add("tags", tags)
                     .toString();

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
@@ -22,6 +24,17 @@ import seedu.address.model.person.Schedule;
 public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule appointments for client. "
+            + "Parameters: "
+            + "NAME "
+            + PREFIX_DATE + "DATE_AND_TIME "
+            + "[" + PREFIX_NOTE + "NOTE]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "John Doe "
+            + PREFIX_DATE + "2024-10-17 1200 "
+            + PREFIX_NOTE + "first appointment ";
+
     public static final String MESSAGE_SUCCESS = "Scheduled %s for %s";
     public static final String MESSAGE_INVALID_TIME = "Scheduled time must be a weekday and"
             + "on the hour between 0900 and 1700";
