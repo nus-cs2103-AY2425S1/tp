@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -26,10 +28,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.product.Product;
 import seedu.address.model.supplier.Supplier;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.ProductBuilder;
 import seedu.address.testutil.SupplierBuilder;
 
 public class LogicManagerTest {
@@ -79,6 +83,31 @@ public class LogicManagerTest {
     public void getFilteredSupplierList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredSupplierList().remove(0));
     }
+
+    @Test
+    public void getFilteredProductList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredProductList().remove(0));
+    }
+
+    @Test
+    public void getFilteredProductList_initialState_success() {
+        // Set up test products
+        Product productA = new ProductBuilder().withName("Product A").build();
+        Product productB = new ProductBuilder().withName("Product B").build();
+
+        // Add products to the model
+        model.addProduct(productA);
+        model.addProduct(productB);
+
+        // Get the filtered product list from logic
+        ObservableList<Product> productList = logic.getFilteredProductList();
+
+        // Verify that the list contains the added products
+        assertEquals(2, productList.size());
+        assertTrue(productList.contains(productA));
+        assertTrue(productList.contains(productB));
+    }
+
 
     /**
      * Executes the command and confirms that
