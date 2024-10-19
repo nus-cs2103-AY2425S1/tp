@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -137,6 +138,40 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String subject} into a {@code Subject} object.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param subject The subject name to be parsed.
+     * @return A {@code Subject} object representing the parsed subject name.
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Subject.isValidSubject(subject)) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
+        }
+        return new Subject(subject);
+    }
+
+    /**
+     * Parses a collection of subject names into a {@code Set<Subject>}.
+     * Each subject name in the collection will be parsed individually.
+     *
+     * @param subjects A collection of subject names to be parsed.
+     * @return A {@code Set<Subject>} containing all the parsed subject names.
+     * @throws ParseException if any of the given {@code subjects} are invalid.
+     */
+    public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
+
+        final Set<Subject> subjectSet = new HashSet<>();
+        for (String subjectName : subjects) {
+            subjectSet.add(parseSubject(subjectName));
+        }
+        return subjectSet;
     }
 
     /**

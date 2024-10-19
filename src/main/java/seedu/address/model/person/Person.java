@@ -26,10 +26,13 @@ public abstract class Person {
     private final Hours hours;
     private final Set<Tag> tags = new HashSet<>();
 
+    private Set<Subject> subjects = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
+                  Set<Subject> subjects) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -37,6 +40,7 @@ public abstract class Person {
         this.address = address;
         this.hours = hours;
         this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
     }
 
     public abstract boolean isTutor();
@@ -116,7 +120,7 @@ public abstract class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, hours, tags);
+        return Objects.hash(name, phone, email, address, hours, tags, subjects);
     }
 
     @Override
@@ -128,7 +132,30 @@ public abstract class Person {
                 .add("address", address)
                 .add("hours", hours)
                 .add("tags", tags)
+                .add("subjects", subjects)
                 .toString();
     }
+
+    public void addSubject(Subject subject) {
+        subjects.add(subject);
+    }
+
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
+    }
+
+
+    /**
+     * Checks if this person has a subject with the specified name.
+     * The check is case-insensitive.
+     *
+     * @param subject
+     * @return {@code true} if the person has a subject with the given name, {@code false} otherwise.
+     */
+    public boolean hasSubject(String subject) {
+        return subjects.stream()
+                .anyMatch(s -> s.subject.equalsIgnoreCase(subject));
+    }
+
 
 }

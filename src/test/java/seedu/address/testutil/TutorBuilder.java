@@ -8,6 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -22,6 +23,8 @@ public class TutorBuilder {
     public static final String DEFAULT_EMAIL = "james@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #12-111";
     public static final String DEFAULT_HOURS = "10";
+    public static final String DEFAULT_SUBJECT = "english";
+
 
     private Name name;
     private Phone phone;
@@ -29,6 +32,8 @@ public class TutorBuilder {
     private Address address;
     private Hours hours;
     private Set<Tag> tags;
+    private Set<Subject> subjects;
+
 
     /**
      * Creates a {@code TutorBuilder} with the default details.
@@ -40,6 +45,8 @@ public class TutorBuilder {
         address = new Address(DEFAULT_ADDRESS);
         hours = new Hours(DEFAULT_HOURS);
         tags = new HashSet<>();
+        subjects = new HashSet<>();
+
     }
 
     /**
@@ -52,6 +59,8 @@ public class TutorBuilder {
         address = tutorToCopy.getAddress();
         hours = tutorToCopy.getHours();
         tags = new HashSet<>(tutorToCopy.getTags());
+        subjects = new HashSet<>(tutorToCopy.getSubjects());
+
     }
 
     /**
@@ -102,8 +111,16 @@ public class TutorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Subjects} of the {@code Tutor} that we are building
+     */
+    public TutorBuilder withSubjects(String... subject) {
+        this.subjects = SampleDataUtil.getSubjectSet(subject);
+        return this;
+    }
+
     public Tutor build() {
-        return new Tutor(name, phone, email, address, hours, tags);
+        return new Tutor(name, phone, email, address, hours, tags, subjects);
     }
 
 }
