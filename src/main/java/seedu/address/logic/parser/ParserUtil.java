@@ -202,10 +202,16 @@ public class ParserUtil {
         requireNonNull(nameStrings);
 
         // Ensure names are not null and split by whitespace, then filter out empty strings
-        return nameStrings.stream()
+        Set<String> nameStringsSet = nameStrings.stream()
                 .flatMap(name -> Set.of(name.split("\\s+")).stream()) // Split each name by whitespace
                 .filter(name -> !name.isEmpty()) // Filter out empty results
                 .collect(Collectors.toSet()); // Collect into a Set to ensure uniqueness
+
+        HashSet<String> nameSet = new HashSet<>();
+        for (String name : nameStringsSet) {
+            nameSet.add(name);
+        }
+        return nameSet;
     }
 
 

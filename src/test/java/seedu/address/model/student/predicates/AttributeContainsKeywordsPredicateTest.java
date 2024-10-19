@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
 
 
@@ -35,7 +36,8 @@ class AttributeContainsKeywordsPredicateTest {
         List<String> keywords = List.of("keyword1", "keyword2");
         AttributeContainsKeywordsPredicate<String> predicate = generatePredicate(keywords);
 
-        String expected = AttributeContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        // anonymous class do not have canonical name
+        String expected = "null{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 
@@ -45,6 +47,7 @@ class AttributeContainsKeywordsPredicateTest {
             public boolean test(Student student) {
                 return false;
             }
+
         };
     }
 }
