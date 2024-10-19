@@ -6,48 +6,48 @@
     "email" : "e1234567@u.nus.edu",
     "major" : "Computer Science",
     "year" : "2",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "Benson Meier",
     "studentId" : "A0000000P",
     "email" : "e1224567@u.nus.edu",
     "major" : "Mechanical Engineering",
     "year" : "1",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "Carl Kurz",
     "studentId" : "A0100000P",
     "email" : "e1234467@u.nus.edu",
     "major" : "Business",
     "year" : "3",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "Daniel Meier",
     "studentId" : "A0005000P",
     "email" : "e1234667@u.nus.edu",
     "major" : "English Literature",
     "year" : "5",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "Elle Meyer",
     "studentId" : "A0004000P",
     "email" : "e1234557@u.nus.edu",
     "major" : "China Studies",
     "year" : "2",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "Fiona Kunz",
     "studentId" : "A0200000P",
     "email" : "e1234577@u.nus.edu",
     "major" : "Electrical Engineering",
     "year" : "1",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "George Best",
     "studentId" : "A1000000P",
     "email" : "e1134567@u.nus.edu",
     "major" : "Religious Studies",
     "year" : "1",
-    "tags" : [ ]
+    "groups": [ ]
   } ]
 }

@@ -1,4 +1,4 @@
-package seedu.address.model.tag;
+package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -7,22 +7,22 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class Group {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_CONSTRAINTS = "Group is written as g/group [number] (in lowercase)";
+    public static final String VALIDATION_REGEX = "^group \\d+$";
 
-    public final String tagName;
+    public final String groupName;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param groupName A valid tag name.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+    public Group(String groupName) {
+        requireNonNull(groupName);
+        checkArgument(isValidTagName(groupName), MESSAGE_CONSTRAINTS);
+        this.groupName = groupName;
     }
 
     /**
@@ -39,24 +39,24 @@ public class Tag {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Tag)) {
+        if (!(other instanceof Group)) {
             return false;
         }
 
-        Tag otherTag = (Tag) other;
-        return tagName.equals(otherTag.tagName);
+        Group otherGroup = (Group) other;
+        return groupName.equals(otherGroup.groupName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return groupName.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return '[' + groupName + ']';
     }
 
 }

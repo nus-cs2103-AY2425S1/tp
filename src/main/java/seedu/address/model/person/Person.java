@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 /**
  * Represents a Person in the address book.
@@ -24,19 +24,19 @@ public class Person {
     // Data fields
     private final Major major;
     private final Year year;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Group> groups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, Email email, Major major, Set<Tag> tags, Year year) {
-        requireAllNonNull(name, studentId, email, major, tags, year);
+    public Person(Name name, StudentId studentId, Email email, Major major, Set<Group> groups, Year year) {
+        requireAllNonNull(name, studentId, email, major, groups, year);
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.major = major;
         this.year = year;
-        this.tags.addAll(tags);
+        this.groups.addAll(groups);
     }
 
     public Name getName() {
@@ -63,8 +63,8 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Group> getGroups() {
+        return Collections.unmodifiableSet(groups);
     }
 
     /**
@@ -106,7 +106,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentId, email, major, year, tags);
+        return Objects.hash(name, studentId, email, major, year, groups);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class Person {
                 .add("email", email)
                 .add("major", major)
                 .add("year", year)
-                .add("tags", tags)
+                .add("groups", groups)
                 .toString();
     }
 

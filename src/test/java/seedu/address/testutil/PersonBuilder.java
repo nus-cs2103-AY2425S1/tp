@@ -3,13 +3,13 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Year;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -29,7 +29,7 @@ public class PersonBuilder {
     private Email email;
     private Major major;
     private Year year;
-    private Set<Tag> tags;
+    private Set<Group> groups;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,7 +40,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         major = new Major(DEFAULT_MAJOR);
         year = new Year(DEFAULT_YEAR);
-        tags = new HashSet<>();
+        groups = new HashSet<>();
     }
 
     /**
@@ -52,7 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         major = personToCopy.getMajor();
         year = personToCopy.getYear();
-        tags = new HashSet<>(personToCopy.getTags());
+        groups = new HashSet<>(personToCopy.getGroups());
     }
 
     /**
@@ -67,7 +67,7 @@ public class PersonBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+        this.groups = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -104,7 +104,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, studentId, email, major, tags, year);
+        return new Person(name, studentId, email, major, groups, year);
     }
 
 }
