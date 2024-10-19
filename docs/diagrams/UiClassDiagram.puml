@@ -55,7 +55,8 @@ ViewClientWindow ..> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 
-PersonListPanel -[hidden]left- HelpWindow
+ViewClientWindow -[hidden]left- HelpWindow
+PersonListPanel -[hidden]left- ViewClientWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
