@@ -288,20 +288,20 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 | Priority | As a … | I want to … | So that I can… |
 |----------|--------|-------------|----------------|
-| `***` | financial consultant | add a new client (add) | track and store client details |
-| `***` | financial consultant with fast turnaround on clients | delete a client (delete) | remove contacts I no longer need |
-| `***` | financial consultant with many clients | view a list of all clients (list) | quickly glance all clients' broad information |
-| `***` | financial consultant with many clients | search for a client by name (find) | quickly find their information |
-| `***` | financial consultant | add transactions to a client's record (addt) | keep track of financial activities for each client |
-| `***` | financial consultant with clients having complex transaction histories | view a list of transactions for a specific client (listt) | assess their financial history at a glance |
-| `***` | financial consultant | delete a transaction from a client's record (deletet) | correct errors or remove outdated information |
-| `**` | financial consultant prone to making typos | use fuzzy search | find clients even when I'm not sure of the exact spelling |
-| `**` | financial consultant with clients having complex transaction histories | calculate the balance for a client | quickly assess their overall financial standing |
-| `**` | financial consultant with clients from various industries | tag clients based on industry or other characteristics | easily group and categorise my client base |
-| `**` | financial consultant with volatile clients | edit an existing client's details | update their information when needed |
-| `**` | financial consultant managing clients with interrelated businesses | use nested tags | simulate relationships between clients more accurately |
-| `**` | financial consultant dealing with many transactions | search transactions by description (findt) | quickly locate specific financial activities |
-| `*` | financial consultant with a growing client base | import and export client data | easily transfer information between systems or share with colleagues |
+| `***`    | financial consultant | add a new client (add) | track and store client details |
+| `***`    | financial consultant with fast turnaround on clients | delete a client (delete) | remove contacts I no longer need |
+| `***`    | financial consultant with many clients | view a list of all clients (list) | quickly glance all clients' broad information |
+| `***`    | financial consultant with many clients | search for a client by name (find) | quickly find their information |
+| `***`    | financial consultant | add transactions to a client's record (addt) | keep track of financial activities for each client |
+| `***`    | financial consultant with clients having complex transaction histories | view a list of transactions for a specific client (listt) | assess their financial history at a glance |
+| `***`    | financial consultant | delete a transaction from a client's record (deletet) | correct errors or remove outdated information |
+| `***`    | financial consultant dealing with many transactions | search transactions by description (findt) | quickly locate specific financial activities |
+| `**`     | financial consultant prone to making typos | use fuzzy search | find clients even when I'm not sure of the exact spelling |
+| `**`     | financial consultant with clients having complex transaction histories | calculate the balance for a client | quickly assess their overall financial standing |
+| `**`     | financial consultant with clients from various industries | tag clients based on industry or other characteristics | easily group and categorise my client base |
+| `**`     | financial consultant with volatile clients | edit an existing client's details | update their information when needed |
+| `**`     | financial consultant managing clients with interrelated businesses | use nested tags | simulate relationships between clients more accurately |
+| `*`      | financial consultant with a growing client base | import and export client data | easily transfer information between systems or share with colleagues |
 
 ### Use cases
 
