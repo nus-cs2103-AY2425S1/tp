@@ -54,7 +54,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingNameAfterPrefix_throwsParseException() {
-        String input = "find n/"; // Input with empty name prefix
+        String input = "find n/"; // Nothing after name prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -66,7 +66,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingNameWithTrailingWhiteSpace_throwsParseException() {
-        String input = "find n/ \n \t"; // Input with empty name prefix
+        String input = "find n/ \n \t"; // Nothing after name prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -89,7 +89,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingAddressAfterPrefix_throwsParseException() {
-        String input = "find a/"; // Input with empty name prefix
+        String input = "find a/"; // Nothing after address prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -101,7 +101,7 @@ public class FindCommandParserTest {
 
     @Test
     public void missingAddressWithTrailingWhiteSpace_throwsParseException() {
-        String input = "find a/ \t \n"; // Input with empty name prefix
+        String input = "find a/ \t \n"; // Nothing after address prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -123,7 +123,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingPhoneAfterPrefix_throwsParseException() {
-        String input = "find p/"; // Input with empty name prefix
+        String input = "find p/"; // Nothing after phone prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -135,7 +135,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingPhoneWithTrailingWhiteSpace_throwsParseException() {
-        String input = "find p/ \n \t"; // Input with empty name prefix
+        String input = "find p/ \n \t"; // Nothing after phone prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -157,7 +157,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingEmailAfterPrefix_throwsParseException() {
-        String input = "find e/"; // Input with empty name prefix
+        String input = "find e/"; // Nothing after email prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -169,7 +169,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingEmailWithTrailingWhiteSpace_throwsParseException() {
-        String input = "find e/ \n \t"; // Input with empty name prefix
+        String input = "find e/ \n \t"; // Nothing after email prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -202,7 +202,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingTagWithTrailingWhiteSpace_throwsParseException() {
-        String input = "find t/ \n \t"; // Input with empty name prefix
+        String input = "find t/ \n \t"; // Nothing after tag prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -224,7 +224,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingWeddingAfterPrefix_throwsParseException() {
-        String input = "find w/"; // Input with empty name prefix
+        String input = "find w/"; // Nothing after wedding prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
@@ -236,7 +236,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingWeddingWithTrailingWhiteSpace_throwsParseException() {
-        String input = "find w/ \n \t"; // Input with empty name prefix
+        String input = "find w/ \n \t"; // Nothing after wedding prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });

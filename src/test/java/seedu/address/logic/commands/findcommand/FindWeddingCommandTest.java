@@ -92,7 +92,7 @@ public class FindWeddingCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code WeddingContainsKeywordsPredicate}.
      */
     private WeddingContainsKeywordsPredicate preparePredicate(String userInput) {
         return new WeddingContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
