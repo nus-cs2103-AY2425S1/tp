@@ -42,4 +42,9 @@ public class ViewTuteeChartCommand extends Command {
                 true, tuteeArray);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || other instanceof ViewTuteeChartCommand; // instanceof handles nulls
+    }
 }

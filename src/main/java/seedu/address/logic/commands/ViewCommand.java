@@ -32,10 +32,17 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         if (targetIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
-            throw new CommandException("The person index provided is invalid");
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToView = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }
 
