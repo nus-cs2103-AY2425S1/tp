@@ -53,6 +53,7 @@ public class PersonTest {
         assertFalse(BOB.isSamePerson(editedBob));
     }
 
+
     @Test
     public void equals() {
         // same values -> returns true
