@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
@@ -27,11 +28,11 @@ public class EditAssignmentCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_STUDENT_INDEX + "INDEX] "
             + "[" + PREFIX_ASSIGNMENT_INDEX + "INDEX] "
-            + "SCORE "
+            + "[" + PREFIX_ASSIGNMENT_SCORE + "SCORE] "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_STUDENT_INDEX + "1 "
             + PREFIX_ASSIGNMENT_INDEX + "1 "
-            + "85";
+            + PREFIX_ASSIGNMENT_SCORE + "85";
 
     public static final String MESSAGE_EDIT_SUCCESS = "Edited Assignment: %1$s belonging "
             + "to Student: %2$s with new score of: %3$d";
