@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "e1234567@u.nus.edu";
     public static final String DEFAULT_MAJOR = "Computer Science";
     public static final String DEFAULT_YEAR = "1";
+    public static final String DEFAULT_COMMENT = "Shes a very vocal person";
 
 
     private Name name;
@@ -30,6 +32,7 @@ public class PersonBuilder {
     private Major major;
     private Year year;
     private Set<Group> groups;
+    private Comment comment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +44,7 @@ public class PersonBuilder {
         major = new Major(DEFAULT_MAJOR);
         year = new Year(DEFAULT_YEAR);
         groups = new HashSet<>();
+        comment = new Comment(DEFAULT_COMMENT);
     }
 
     /**
@@ -53,6 +57,7 @@ public class PersonBuilder {
         major = personToCopy.getMajor();
         year = personToCopy.getYear();
         groups = new HashSet<>(personToCopy.getGroups());
+        comment = personToCopy.getComment();
     }
 
     /**
@@ -103,8 +108,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Comment} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withComment(String comment) {
+        this.comment = new Comment(comment);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, studentId, email, major, groups, year);
+        return new Person(name, studentId, email, major, groups, year, comment);
     }
 
 }

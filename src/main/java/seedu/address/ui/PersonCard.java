@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane groups;
     @FXML
     private VBox fields;
+    @FXML
+    private Label comment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -71,6 +73,7 @@ public class PersonCard extends UiPart<Region> {
         });
 
         year.setText("Year " + year.getText());
+        comment.setText(person.getComment().value);
     }
 
 }

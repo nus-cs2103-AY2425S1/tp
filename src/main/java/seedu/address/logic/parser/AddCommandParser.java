@@ -14,6 +14,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -64,7 +65,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Set<Group> groupList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_GROUP));
 
-        Person person = new Person(name, studentId, email, major, groupList, year);
+        Comment comment = new Comment("");
+
+        Person person = new Person(name, studentId, email, major, groupList, year, comment);
 
         return new AddCommand(person);
     }

@@ -25,18 +25,21 @@ public class Person {
     private final Major major;
     private final Year year;
     private final Set<Group> groups = new HashSet<>();
+    private final Comment comment;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId studentId, Email email, Major major, Set<Group> groups, Year year) {
-        requireAllNonNull(name, studentId, email, major, groups, year);
+    public Person(Name name, StudentId studentId, Email email, Major major, Set<Group> groups,
+                  Year year, Comment comment) {
+        requireAllNonNull(name, studentId, email, major, groups, year, comment);
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.major = major;
         this.year = year;
         this.groups.addAll(groups);
+        this.comment = comment;
     }
 
     public Name getName() {
@@ -57,6 +60,10 @@ public class Person {
 
     public Year getYear() {
         return year;
+    }
+
+    public Comment getComment() {
+        return comment;
     }
 
     /**
@@ -118,6 +125,7 @@ public class Person {
                 .add("major", major)
                 .add("year", year)
                 .add("groups", groups)
+                .add("comment", comment)
                 .toString();
     }
 
