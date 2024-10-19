@@ -111,10 +111,10 @@ public class GradeList {
             totalScore += g.getScore() * currentWeightage / 100;
         }
 
-        String summary = "Overall score: " + totalScore;
+        String summary = String.format("Overall score: %.2f/100", totalScore);
 
         if (totalWeightage < FULL_WEIGHTAGE) {
-            summary += NOT_ALL_WEIGHTAGE + totalWeightage + "%";
+            summary += String.format(NOT_ALL_WEIGHTAGE + "%.2f%%", totalWeightage * 100);
         }
 
         return summary;
