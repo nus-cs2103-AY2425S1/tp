@@ -80,9 +80,13 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).build();
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withDepartment(VALID_DEPARTMENT_AMY).withRole(VALID_ROLE_AMY)
+                .withContractEndDate(VALID_CONTRACT_END_DATE_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).build();
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withDepartment(VALID_DEPARTMENT_BOB).withRole(VALID_ROLE_BOB)
+                .withContractEndDate(VALID_CONTRACT_END_DATE_BOB).build();
     }
 
     /**

@@ -106,25 +106,25 @@
     "address" : "hougang ave",
     "department": "IT",
     "role": "SWE",
-    "contractEndDate": "2024-10-09",
+    "contractEndDate": "2020-01-01",
     "isEmployee": true
   }, {
     "name" : "Kevin Lee",
     "phone" : "87654321",
     "email" : "kevin@example.com",
     "address" : "sengkang street",
-    "department": "IT",
-    "role": "SWE",
-    "contractEndDate": "2024-10-09",
+    "department": "IT2",
+    "role": "SWE2",
+    "contractEndDate": "2020-01-02",
     "isEmployee": true
   }, {
     "name" : "Lily B",
     "phone" : "12348765",
     "email" : "lily@example.com",
     "address" : "punggol cove",
-    "department": "IT",
-    "role": "SWE",
-    "contractEndDate": "2024-10-09",
+    "department": "IT3",
+    "role": "SWE3",
+    "contractEndDate": "2020-01-03",
     "isEmployee": true
   } ]
 }
