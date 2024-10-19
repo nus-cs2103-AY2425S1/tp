@@ -82,8 +82,8 @@ public class AddressBookParser {
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
 
-        case "sort_p":
-            return new SortByPriorityCommand();
+        case SortByPriorityCommand.COMMAND_WORD, SortByPriorityCommand.ALT_COMMAND_WORD:
+            return new SortByPriorityCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
