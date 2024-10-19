@@ -137,8 +137,8 @@ public class UniqueConcertListTest {
     @Test
     public void setConcerts_list_replacesOwnListWithProvidedList() {
         uniqueConcertList.add(COACHELLA);
-        List<Concert> personList = Collections.singletonList(GLASTONBURY);
-        uniqueConcertList.setConcerts(personList);
+        List<Concert> concertList = Collections.singletonList(GLASTONBURY);
+        uniqueConcertList.setConcerts(concertList);
         UniqueConcertList expectedUniqueConcertList = new UniqueConcertList();
         expectedUniqueConcertList.add(GLASTONBURY);
         assertEquals(expectedUniqueConcertList, uniqueConcertList);
