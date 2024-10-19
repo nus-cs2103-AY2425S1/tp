@@ -53,8 +53,8 @@ public class Messages {
                 .append(student.getSubject())
                 .append("; Fee: ")
                 .append(student.getRate())
-                .append("; Paid: ")
-                .append(student.getPaid())
+                .append("; PaidAmount: ")
+                .append(student.getPaidAmount())
                 .append("; Owed: ")
                 .append(student.getOwedAmount());
 

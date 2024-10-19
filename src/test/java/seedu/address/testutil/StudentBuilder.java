@@ -4,7 +4,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -33,7 +33,7 @@ public class StudentBuilder {
     private Schedule schedule;
     private Subject subject;
     private Rate rate;
-    private Paid paid;
+    private PaidAmount paidAmount;
     private OwedAmount owedAmount;
 
     /**
@@ -47,7 +47,7 @@ public class StudentBuilder {
         schedule = new Schedule(DEFAULT_SCHEDULE);
         subject = new Subject(DEFAULT_SUBJECT);
         rate = new Rate(DEFAULT_FEE);
-        paid = new Paid(DEFAULT_PAID);
+        paidAmount = new PaidAmount(DEFAULT_PAID);
         owedAmount = new OwedAmount(DEFAULT_OWED_AMOUNT);
     }
 
@@ -62,7 +62,7 @@ public class StudentBuilder {
         schedule = studentToCopy.getSchedule();
         subject = studentToCopy.getSubject();
         rate = studentToCopy.getRate();
-        paid = studentToCopy.getPaid();
+        paidAmount = studentToCopy.getPaidAmount();
         owedAmount = studentToCopy.getOwedAmount();
     }
 
@@ -124,10 +124,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Paid} of the {@code Student} that we are building.
+     * Sets the {@code PaidAmount} of the {@code Student} that we are building.
      */
-    public StudentBuilder withPaid(String paid) {
-        this.paid = new Paid(paid);
+    public StudentBuilder withPaidAmount(String paidAmount) {
+        this.paidAmount = new PaidAmount(paidAmount);
         return this;
     }
 
@@ -140,7 +140,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
+        return new Student(name, phone, email, address, schedule, subject, rate, paidAmount, owedAmount);
     }
 
 }

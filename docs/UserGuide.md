@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a student to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID] [owed/OWED]`
 
 <box type="note" seamless>**NOTE:** 
 1. <b>SCHEDULE</b> must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
@@ -90,7 +90,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE 
 
 4. <b>FEE</b> is the tuition fee per hour.
 
-5. <b>FEE</b>, <b>PAID_AMOUNT</b> and <b>OWED_AMOUNT</b> must be at least 0 with at most 2 decimal places.
+5. <b>FEE</b>, <b>PAID</b> and <b>OWED</b> must be at least 0 with at most 2 decimal places.
 <i>Example: </i> `12.00`, `0.0` or `7`
 </box>
 
@@ -208,7 +208,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP f/300 paid/300`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP f/300 paid/300`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
