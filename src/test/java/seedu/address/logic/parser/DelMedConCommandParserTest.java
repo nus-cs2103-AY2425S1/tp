@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEDCON_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NRIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEDCON_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.MEDCON_DESC_BOB;
@@ -57,26 +59,28 @@ public class DelMedConCommandParserTest {
     @Test
     public void parse_compulsoryFieldsMissing_failure() {
         // Both NRIC and MedCon missing
-        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DelMedConCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelMedConCommand.MESSAGE_USAGE));
 
         // NRIC parameter missing
-        assertParseFailure(parser, MEDCON_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DelMedConCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, MEDCON_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelMedConCommand.MESSAGE_USAGE));
 
         // MedCon parameter missing
-        assertParseFailure(parser, NRIC_DESC_AMY, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DelMedConCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, NRIC_DESC_AMY + " " + PREFIX_MEDCON, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DelMedConCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, NRIC_DESC_AMY,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelMedConCommand.MESSAGE_USAGE));
 
+        // MedCon prefix present, but no value
+        assertParseFailure(parser, NRIC_DESC_AMY + " " + PREFIX_MEDCON,
+                "Medical condition " + MESSAGE_EMPTY_FIELD);
     }
 
+
     @Test
-    public void parse_medConLengthGreaterThan45Characters_failure() {
-        // Medical condition exceeds 45 characters
-        String input = NRIC_DESC_AMY + " c/ThisMedicalConditionIsWayTooLongAndExceedsTheCharacterLimit";
-        assertParseFailure(parser, input, MESSAGE_CONSTRAINTS_LENGTH);
+    public void parse_medConLengthGreaterThan30Characters_failure() {
+        // Medical condition exceeds 30 characters
+        String input = NRIC_DESC_AMY + INVALID_MEDCON_DESC;
+        assertParseFailure(parser, input, "Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
     }
 
 }
