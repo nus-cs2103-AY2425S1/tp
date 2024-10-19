@@ -182,7 +182,7 @@ Statistics include:
 * Nb of HIGH Priority People
 * Nb of MEDIUM Priority People
 * Nb of LOW Priority People
-* Nb of People With Monthly Household Income < 2500
+* Nb of People Eligible for ComCare
 
 Format: `statistics`
 
