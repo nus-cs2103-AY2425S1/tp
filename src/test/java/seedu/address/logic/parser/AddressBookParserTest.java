@@ -27,8 +27,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.PersonHasTagPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonHasTagPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -97,11 +97,10 @@ public class AddressBookParserTest {
     public void parseCommand_filterByTag() throws Exception {
         List<Tag> tags = Arrays.asList(new Tag("High Risk"), new Tag("Low Risk"));
         FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(
-              FilterByTagCommand.COMMAND_WORD + " " +
-                    tags.stream()
-                          .map(Tag::toString)  // Convert each Tag to its String representation
-                          .collect(Collectors.joining(" t/ ", "t/", ""))
-              // Join them with "t/" prefix
+              FilterByTagCommand.COMMAND_WORD + " "
+                    + tags.stream()
+                          .map(Tag::toString) // Convert each Tag to its String representation
+                          .collect(Collectors.joining(" t/ ", "t/", "")) // add tag prefix
         );
         assertEquals(new FilterByTagCommand(new PersonHasTagPredicate(tags)), command);
     }
