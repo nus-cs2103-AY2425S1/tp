@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a StudyGroupTag in the address book. Guarantees: immutable; name
- * is valid as declared in {@link #isValidTagName(String)}
+ * is valid as declared in {@link #isValidStudyGroupName(String)}
  */
 public class StudyGroupTag {
 

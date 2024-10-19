@@ -17,12 +17,12 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.STUDY_GROUP_TAG_DESC_1A;
+import static seedu.address.logic.commands.CommandTestUtil.STUDY_GROUP_TAG_DESC_2B;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDY_GROUP_TAG_1A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDY_GROUP_TAG_2B;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -49,27 +49,27 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withStudyGroups(VALID_TAG_FRIEND).build();
+        Person expectedPerson = new PersonBuilder(BOB).withStudyGroupTags(VALID_STUDY_GROUP_TAG_2B).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + EMAIL_DESC_BOB
-                + GENDER_DESC_BOB + AGE_DESC_BOB + TAG_DESC_FRIEND + DETAIL_DESC_BOB,
+                + GENDER_DESC_BOB + AGE_DESC_BOB + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB,
                 new AddCommand(expectedPerson));
 
         // multiple study groups - all accepted
         Person expectedPersonMultipleStudyGroups = new PersonBuilder(BOB)
-                .withStudyGroups(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+                .withStudyGroupTags(VALID_STUDY_GROUP_TAG_2B, VALID_STUDY_GROUP_TAG_1A)
                 .build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB + TAG_DESC_HUSBAND
-                        + TAG_DESC_FRIEND + DETAIL_DESC_BOB,
+                NAME_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB + STUDY_GROUP_TAG_DESC_1A
+                        + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB,
                 new AddCommand(expectedPersonMultipleStudyGroups));
     }
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonStudyGroupTagValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB
-                + TAG_DESC_FRIEND + DETAIL_DESC_BOB;
+                + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
@@ -124,21 +124,19 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void parse_tagFieldsMissing_success() {
-        // zero study group
-        Person expectedPerson = new PersonBuilder(AMY).withStudyGroups().withDetail("detail").build();
-        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
-                + GENDER_DESC_AMY + AGE_DESC_AMY + DETAIL_DESC_AMY,
-                new AddCommand(expectedPerson));
+    public void parse_detailFieldsMissing_success() {
+        // no detail
+        Person expectedPerson = new PersonBuilder(AMY).withDetail("").build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + GENDER_DESC_AMY + AGE_DESC_AMY
+                + STUDY_GROUP_TAG_DESC_1A, new AddCommand(expectedPerson));
     }
 
     @Test
-    public void parse_detailFieldsMissing_success() {
-        // no detail
-        Person expectedPerson = new PersonBuilder(AMY).withStudyGroups().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY
-                + GENDER_DESC_AMY + AGE_DESC_AMY,
-                new AddCommand(expectedPerson));
+    public void parse_studyGroupTagFieldsMissing_success() {
+        // zero study group
+        Person expectedPerson = new PersonBuilder(AMY).withStudyGroupTags().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + GENDER_DESC_AMY + AGE_DESC_AMY
+                + DETAIL_DESC_AMY, new AddCommand(expectedPerson));
     }
 
     @Test
@@ -159,27 +157,27 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + EMAIL_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DETAIL_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + STUDY_GROUP_TAG_DESC_1A + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_EMAIL_DESC + GENDER_DESC_BOB + AGE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DETAIL_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
+                + STUDY_GROUP_TAG_DESC_1A + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB, Email.MESSAGE_CONSTRAINTS);
 
         // invalid gender
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + INVALID_GENDER_DESC + AGE_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DETAIL_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
+                + STUDY_GROUP_TAG_DESC_1A + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB, Gender.MESSAGE_CONSTRAINTS);
 
         // invalid age
         assertParseFailure(parser, NAME_DESC_BOB + EMAIL_DESC_BOB + GENDER_DESC_BOB + INVALID_AGE_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + DETAIL_DESC_BOB, Age.MESSAGE_CONSTRAINTS);
+                + STUDY_GROUP_TAG_DESC_1A + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB, Age.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + EMAIL_DESC_BOB + INVALID_GENDER_DESC + AGE_DESC_BOB
-                + TAG_DESC_FRIEND + DETAIL_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
+                + STUDY_GROUP_TAG_DESC_2B + DETAIL_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + EMAIL_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + STUDY_GROUP_TAG_DESC_1A + STUDY_GROUP_TAG_DESC_2B,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

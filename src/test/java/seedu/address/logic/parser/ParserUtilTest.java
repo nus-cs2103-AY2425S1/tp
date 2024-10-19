@@ -26,15 +26,15 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_GENDER = "A";
     private static final String INVALID_AGE = "A";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_STUDY_GROUP_TAG = "#1A";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_GENDER = "F";
     private static final String VALID_AGE = "30";
     private static final String VALID_DETAIL = "detail";
-    private static final String VALID_TAG_1 = "friend";
-    private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_STUDY_GROUP_TAG_1 = "friend";
+    private static final String VALID_STUDY_GROUP_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -157,48 +157,50 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_null_throwsNullPointerException() {
+    public void parseStudyGroup_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseStudyGroup(null));
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStudyGroup(INVALID_TAG));
+    public void parseStudyGroup_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudyGroup(INVALID_STUDY_GROUP_TAG));
     }
 
     @Test
-    public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
-        StudyGroupTag expectedTag = new StudyGroupTag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseStudyGroup(VALID_TAG_1));
+    public void parseStudyGroup_validValueWithoutWhitespace_returnsTag() throws Exception {
+        StudyGroupTag expectedTag = new StudyGroupTag(VALID_STUDY_GROUP_TAG_1);
+        assertEquals(expectedTag, ParserUtil.parseStudyGroup(VALID_STUDY_GROUP_TAG_1));
     }
 
     @Test
-    public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        StudyGroupTag expectedTag = new StudyGroupTag(VALID_TAG_1);
+    public void parseStudyGroup_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
+        String tagWithWhitespace = WHITESPACE + VALID_STUDY_GROUP_TAG_1 + WHITESPACE;
+        StudyGroupTag expectedTag = new StudyGroupTag(VALID_STUDY_GROUP_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseStudyGroup(tagWithWhitespace));
     }
 
     @Test
-    public void parseTags_null_throwsNullPointerException() {
+    public void parseStudyGroups_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseStudyGroups(null));
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStudyGroups(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseStudyGroups_collectionWithInvalidTags_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudyGroups(Arrays.asList(VALID_STUDY_GROUP_TAG_1,
+                INVALID_STUDY_GROUP_TAG)));
     }
 
     @Test
-    public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseStudyGroups_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseStudyGroups(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<StudyGroupTag> actualTagSet = ParserUtil.parseStudyGroups(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+    public void parseStudyGroups_collectionWithValidTags_returnsTagSet() throws Exception {
+        Set<StudyGroupTag> actualTagSet = ParserUtil.parseStudyGroups(Arrays.asList(VALID_STUDY_GROUP_TAG_1,
+                VALID_STUDY_GROUP_TAG_2));
         Set<StudyGroupTag> expectedTagSet = new HashSet<StudyGroupTag>(
-                Arrays.asList(new StudyGroupTag(VALID_TAG_1), new StudyGroupTag(VALID_TAG_2)));
+                Arrays.asList(new StudyGroupTag(VALID_STUDY_GROUP_TAG_1), new StudyGroupTag(VALID_STUDY_GROUP_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

@@ -29,7 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String gender;
     private final String age;
-    private final List<JsonAdaptedStudyGroupTag> studyGroups = new ArrayList<>();
+    private final List<JsonAdaptedStudyGroupTag> studyGroupTags = new ArrayList<>();
     private final String detail;
 
     /**
@@ -38,14 +38,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("email") String email,
             @JsonProperty("gender") String gender, @JsonProperty("age") String age,
-            @JsonProperty("study groups") List<JsonAdaptedStudyGroupTag> studyGroups,
+            @JsonProperty("study groups") List<JsonAdaptedStudyGroupTag> studyGroupTags,
             @JsonProperty("detail") String detail) {
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.age = age;
-        if (studyGroups != null) {
-            this.studyGroups.addAll(studyGroups);
+        if (studyGroupTags != null) {
+            this.studyGroupTags.addAll(studyGroupTags);
         }
         this.detail = detail;
     }
@@ -58,7 +58,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         gender = source.getGender().value;
         age = source.getAge().value;
-        studyGroups.addAll(source.getStudyGroupTags().stream()
+        studyGroupTags.addAll(source.getStudyGroupTags().stream()
                 .map(JsonAdaptedStudyGroupTag::new)
                 .collect(Collectors.toList()));
         detail = source.getDetail().value;
@@ -72,9 +72,9 @@ class JsonAdaptedPerson {
      *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<StudyGroupTag> personStudyGroups = new ArrayList<>();
-        for (JsonAdaptedStudyGroupTag tag : studyGroups) {
-            personStudyGroups.add(tag.toModelType());
+        final List<StudyGroupTag> personStudyGroupTags = new ArrayList<>();
+        for (JsonAdaptedStudyGroupTag tag : studyGroupTags) {
+            personStudyGroupTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -109,11 +109,11 @@ class JsonAdaptedPerson {
         }
         final Age modelAge = new Age(age);
 
-        final Set<StudyGroupTag> modelStudyGroups = new HashSet<>(personStudyGroups);
-
         final Detail modelDetail = new Detail(detail);
 
-        return new Person(modelName, modelEmail, modelGender, modelAge, modelStudyGroups, modelDetail);
+        final Set<StudyGroupTag> modelStudyGroupTags = new HashSet<>(personStudyGroupTags);
+
+        return new Person(modelName, modelEmail, modelGender, modelAge, modelStudyGroupTags, modelDetail);
     }
 
 }

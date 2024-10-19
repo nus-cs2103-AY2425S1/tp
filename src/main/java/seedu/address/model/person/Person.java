@@ -24,19 +24,19 @@ public class Person {
     private final Gender gender;
     private final Age age;
     private final Detail detail;
-    private final Set<StudyGroupTag> studyGroups = new HashSet<>();
+    private final Set<StudyGroupTag> studyGroupTags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Gender gender, Age age, Set<StudyGroupTag> studyGroups, Detail detail) {
-        requireAllNonNull(name, email, studyGroups);
+    public Person(Name name, Email email, Gender gender, Age age, Set<StudyGroupTag> studyGroupTags, Detail detail) {
+        requireAllNonNull(name, email, studyGroupTags);
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.age = age;
         this.detail = (detail != null) ? detail : new Detail("");
-        this.studyGroups.addAll(studyGroups);
+        this.studyGroupTags.addAll(studyGroupTags);
     }
 
     public Name getName() {
@@ -64,7 +64,7 @@ public class Person {
      * {@code UnsupportedOperationException} if modification is attempted.
      */
     public Set<StudyGroupTag> getStudyGroupTags() {
-        return Collections.unmodifiableSet(studyGroups);
+        return Collections.unmodifiableSet(studyGroupTags);
     }
 
     /**
@@ -102,13 +102,13 @@ public class Person {
                 && gender.equals(otherPerson.gender)
                 && age.equals(otherPerson.age)
                 && detail.equals(otherPerson.detail)
-                && studyGroups.equals(otherPerson.studyGroups);
+                && studyGroupTags.equals(otherPerson.studyGroupTags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, gender, age, detail, studyGroups);
+        return Objects.hash(name, email, gender, age, detail, studyGroupTags);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Person {
                 .add("gender", gender)
                 .add("age", age)
                 .add("detail", detail)
-                .add("study groups", studyGroups)
+                .add("study groups", studyGroupTags)
                 .toString();
     }
 
