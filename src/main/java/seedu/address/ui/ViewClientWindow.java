@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -33,6 +35,9 @@ public class ViewClientWindow extends UiPart<Stage> {
 
     @FXML
     private Label clientCarDetailsLabel;
+
+    @FXML
+    private Label correctAsOfLabel;
 
     @FXML
     private FlowPane issues;
@@ -92,22 +97,24 @@ public class ViewClientWindow extends UiPart<Stage> {
         issues.getChildren().clear(); // issues is reused.
 
         // Client Details.
-        clientNameLabel.setText("        Name: " + client.getName());
-        clientPhoneLabel.setText("        Phone: " + client.getPhone());
-        clientEmailLabel.setText("        Email: " + client.getEmail());
-        clientAddressLabel.setText("        Address: " + client.getAddress());
+        clientNameLabel.setText("Name: " + client.getName());
+        clientPhoneLabel.setText("Phone: " + client.getPhone());
+        clientEmailLabel.setText("Email: " + client.getEmail());
+        clientAddressLabel.setText("Address: " + client.getAddress());
+
+        correctAsOfLabel.setText("Correct as of: " + getCurrentDateTimeString());
 
         // Car Details.
         Car car = client.getCar();
         if (car == null) {
-            clientCarDetailsLabel.setText("        No Car associated to Client");
+            clientCarDetailsLabel.setText("No Car associated to Client");
             issues.getChildren().add(new Label("Not Applicable"));
             return;
         }
-        String carDetails = String.format("        VRN: %s\n"
-                + "        VIN: %s\n"
-                + "        Make: %s\n"
-                + "        Model: %s",
+        String carDetails = String.format("VRN: %s\n"
+                + "VIN: %s\n"
+                + "Make: %s\n"
+                + "Model: %s",
                 car.getVrn(), car.getVin(), car.getCarMake(), car.getCarModel());
         clientCarDetailsLabel.setText(carDetails);
 
@@ -119,6 +126,15 @@ public class ViewClientWindow extends UiPart<Stage> {
         client.getIssues().stream()
                 .sorted(Comparator.comparing(issue -> issue.issueName))
                 .forEach(issue -> issues.getChildren().add(new Label(issue.issueName)));
+    }
+
+    /**
+     * Gets the current date as a formatted string.
+     */
+    private String getCurrentDateTimeString() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss");
+        return currentDateTime.format(formatter);
     }
 
     /**
