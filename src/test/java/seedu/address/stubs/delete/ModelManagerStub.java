@@ -1,6 +1,5 @@
 package seedu.address.stubs.delete;
 
-
 import java.nio.file.Path;
 import java.util.function.Predicate;
 

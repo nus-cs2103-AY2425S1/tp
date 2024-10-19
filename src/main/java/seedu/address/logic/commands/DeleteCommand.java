@@ -19,9 +19,8 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE =
-            "Hi it looks like your trying to use the delete command, but your not formatting it quite right!\n"
-            + "Ensure the Parameter: INDEX (must be a positive integer, no decimals!)\n"
-            + "For Example: " + COMMAND_WORD + " 1\n"
+            "Ensure the Parameter: INDEX (must be a positive integer)\n"
+            + "Format Example: " + COMMAND_WORD + " INDEX e.g delete 1\n"
             + "This will delete the person identified by the index number used in the displayed person list.\n";
 
 

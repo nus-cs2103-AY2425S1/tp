@@ -15,6 +15,9 @@ public class Messages {
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_DELETE_EMPTY_INDEX = "Error: The index cannot be empty";
+    public static final String MESSAGE_OVERFLOW_INDEX = "Error: Index is too large!"
+                + " The largest possible value is 2147483647.";
     public static final String MESSAGE_DELETE_UPPERBOUND_ERROR = "Sorry but the index was too large "
                 + "compared to your list size!";
     public static final String MESSAGE_DELETE_EMPTY_ERROR = "Sorry but you cannot delete from an empty list.";
