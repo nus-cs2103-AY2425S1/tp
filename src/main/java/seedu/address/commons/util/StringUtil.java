@@ -76,22 +76,17 @@ public class StringUtil {
     public static boolean isNotIntegerOverflow(String trimmedIndex) {
         requireNonNull(trimmedIndex);
 
-        try {
-            if (trimmedIndex.startsWith("-")) {
-                return true;
-            }
-            if (trimmedIndex.length() > 10) {
-                return false;
-            }
-            if (trimmedIndex.length() == 10) {
-                // lexicographically checks if index is less than max integer
-                return trimmedIndex.compareTo(String.valueOf(Integer.MAX_VALUE)) <= 0;
-            }
-            // checks for valid integer value if length is less than 10
-            Integer value = Integer.parseInt(trimmedIndex);
-            return !(value > Integer.MAX_VALUE && !trimmedIndex.startsWith("+"));
-        } catch (NumberFormatException nfe) {
+        if (trimmedIndex.startsWith("-") || trimmedIndex.startsWith("+")) {
             return true;
         }
+        if (trimmedIndex.length() > 10) {
+            return false;
+        }
+        if (trimmedIndex.length() == 10) {
+            // lexicographically checks if index is less than max integer
+            return trimmedIndex.compareTo(String.valueOf(Integer.MAX_VALUE)) <= 0;
+        }
+        // checks for valid integer value if length is less than 10, which is checked by isNonZeroUnsignedInteger
+        return true;
     }
 }
