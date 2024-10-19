@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 
 import java.util.Set;
@@ -13,13 +13,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Year;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -34,7 +34,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENTID, PREFIX_NETID,
-                        PREFIX_MAJOR, PREFIX_TAG, PREFIX_YEAR);
+                        PREFIX_MAJOR, PREFIX_GROUP, PREFIX_YEAR);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENTID)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -62,9 +62,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             major = ParserUtil.parseMajor(argMultimap.getValue(PREFIX_MAJOR).get());
         }
 
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Group> groupList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_GROUP));
 
-        Person person = new Person(name, studentId, email, major, tagList, year);
+        Person person = new Person(name, studentId, email, major, groupList, year);
 
         return new AddCommand(person);
     }

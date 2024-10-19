@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,13 +22,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Year;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -46,7 +46,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NETID + "EMAIL] "
             + "[" + PREFIX_MAJOR + "MAJOR] "
             + "[" + PREFIX_YEAR + "YEAR] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_GROUP + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENTID + "A1234567B "
             + PREFIX_NETID + "e1234567";
@@ -104,9 +104,9 @@ public class EditCommand extends Command {
         StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Major updatedAddress = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
         Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
-        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedTags, updatedYear);
+        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedGroups, updatedYear);
     }
 
     @Override
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private Email email;
         private Major major;
-        private Set<Tag> tags;
+        private Set<Group> groups;
         private Year year;
 
         public EditPersonDescriptor() {}
@@ -156,7 +156,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.studentId);
             setEmail(toCopy.email);
             setMajor(toCopy.major);
-            setTags(toCopy.tags);
+            setTags(toCopy.groups);
             setYear(toCopy.year);
         }
 
@@ -164,7 +164,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, email, major, tags, year);
+            return CollectionUtil.isAnyNonNull(name, studentId, email, major, groups, year);
         }
 
         public void setName(Name name) {
@@ -209,8 +209,8 @@ public class EditCommand extends Command {
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTags(Set<Group> groups) {
+            this.groups = (groups != null) ? new HashSet<>(groups) : null;
         }
 
         /**
@@ -218,8 +218,8 @@ public class EditCommand extends Command {
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Group>> getGroups() {
+            return (groups != null) ? Optional.of(Collections.unmodifiableSet(groups)) : Optional.empty();
         }
 
         @Override
@@ -239,7 +239,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(major, otherEditPersonDescriptor.major)
                     && Objects.equals(year, otherEditPersonDescriptor.year)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(groups, otherEditPersonDescriptor.groups);
         }
 
         @Override
@@ -250,7 +250,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("major", major)
                     .add("year", year)
-                    .add("tags", tags)
+                    .add("groups", groups)
                     .toString();
         }
     }

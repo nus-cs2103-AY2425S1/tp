@@ -42,7 +42,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane groups;
     @FXML
     private VBox fields;
 
@@ -58,9 +58,9 @@ public class PersonCard extends UiPart<Region> {
         major.setText(person.getMajor().value);
         year.setText(person.getYear().value);
         email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getGroups().stream()
+                .sorted(Comparator.comparing(group -> group.groupName))
+                .forEach(group -> groups.getChildren().add(new Label(group.groupName)));
 
         fields.getChildren().removeIf(node -> {
             if (node instanceof Label) {

@@ -5,13 +5,13 @@
     "email" : "e1234567@u.nus.edu",
     "major" : "Computer Science",
     "year" : "2",
-    "tags" : [ ]
+    "groups": [ ]
   }, {
     "name" : "Alice Pauline",
     "studentId" : "A1234567P",
     "email" : "e1234567@u.nus.edu",
     "major" : "Computer Science",
     "year" : "2",
-    "tags" : [ ]
+    "groups": [ ]
   } ]
 }
