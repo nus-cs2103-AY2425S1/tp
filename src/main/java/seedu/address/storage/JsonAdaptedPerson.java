@@ -34,6 +34,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String isServicing;
     private final String vin;
     private final String vrn;
     private final String make;
@@ -46,8 +47,11 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("isServicing") String isServicing,
             @JsonProperty("issues") List<JsonAdaptedIssue> issues,
             @JsonProperty("vin") String vin,
             @JsonProperty("vrn") String vrn,
@@ -57,6 +61,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.isServicing = isServicing;
         this.vin = vin;
         this.vrn = vrn;
         this.make = make;
@@ -75,6 +80,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        isServicing = Boolean.toString(source.isServicing());
         if (source.getCar() != null) {
             vin = source.getCar().getVin().toString();
             vrn = source.getCar().getVrn().toString();
@@ -134,6 +140,15 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final boolean modelIsServicing;
+        boolean temp;
+        try {
+            temp = Boolean.parseBoolean(isServicing);
+        } catch (Exception e){
+            temp = false;
+        }
+        modelIsServicing = temp;
+
         final Set<Issue> modelIssues = new HashSet<>(personIssues);
 
 
@@ -146,7 +161,11 @@ class JsonAdaptedPerson {
 
         // If all car details are present and valid, return a person with a car
         final Car car = new Car(new Vrn(vrn), new Vin(vin), new CarMake(make), new CarModel(model));
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIssues, car);
+        Person client = new Person(modelName, modelPhone, modelEmail, modelAddress, modelIssues, car);
+        if (modelIsServicing) {
+            client.setServicing();
+        }
+        return client;
     }
 
     public void checkForMissingCarField() throws IllegalValueException {
