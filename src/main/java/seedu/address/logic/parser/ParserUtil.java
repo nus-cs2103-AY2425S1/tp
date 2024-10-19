@@ -112,7 +112,7 @@ public class ParserUtil {
     public static DateOfBirth parseDateOfBirth(String dateOfBirth) throws ParseException {
         requireNonNull(dateOfBirth);
         String trimmedDate = dateOfBirth.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        if (!DateOfBirth.isValidDate(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new DateOfBirth(trimmedDate);
