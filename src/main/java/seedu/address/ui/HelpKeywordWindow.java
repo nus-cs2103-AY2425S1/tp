@@ -110,11 +110,11 @@ public class HelpKeywordWindow extends UiPart<Stage> {
     private void setTextApptCommand() {
         header.setText("Appointment Command: Records appointment times for registered patients into the system.");
         parametersHeader.setText("Parameters:");
-        parameters.setText("APPOINTMENT DATE(YYYY-MM-DD) | APPOINTMENT TIME(24 HOURS FORMAT) | NRIC");
+        parameters.setText("APPOINTMENT DATE(YYYY-MM-DD), APPOINTMENT TIME(24 HOURS FORMAT) | NRIC");
         usageHeader.setText("Command Usage:");
-        usage.setText("appt [APPOINTMENT DATE] [APPOINTMENT TIME] [NRIC]");
+        usage.setText("appt dt/[APPOINTMENT DATE T APPOINTMENT TIME] i/[NRIC]");
         exampleHeader.setText("Example:");
-        example.setText("appt 2024-12-29 1330 S9758366N");
+        example.setText("appt dt/2024-12-29T13:30 i/S9758366N");
     }
 
     private void setTextDeleteCommand() {
