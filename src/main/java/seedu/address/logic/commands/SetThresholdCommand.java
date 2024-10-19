@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STOCK_LEVEL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PRODUCTS;
 
@@ -23,7 +23,7 @@ public class SetThresholdCommand extends Command {
             + "by the product name used in the displayed product list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters:  "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_PRODUCT_NAME + "NAME "
             + PREFIX_STOCK_LEVEL + "STOCK_LEVEL "
             + "Example: " + COMMAND_WORD + " n/John stk/25000 ";
 
