@@ -4,6 +4,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING_NAME;
 
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.wedding.Wedding;
@@ -25,10 +27,12 @@ public class AddWeddingCommand extends Command {
             + PREFIX_WEDDING_NAME + "Jonus Ho & Izzat Syazani "
             + PREFIX_VENUE + "Pasir Ris Hotel "
             + PREFIX_DATETIME + "11/11/2024 ";
+
+    public static final String MESSAGE_SUCCESS = "New Wedding added: %1$s";
     private final Wedding toAdd;
 
     /**
-     *  Creates an AddCommand to add the specified {@code Wedding}
+     *  Creates an AddWeddingCommand to add the specified {@code Wedding}
      * @param wedding
      */
     public AddWeddingCommand(Wedding wedding) {
@@ -38,6 +42,28 @@ public class AddWeddingCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddWeddingCommand)) {
+            return false;
+        }
+
+        AddWeddingCommand otherAddWeddingCommand = (AddWeddingCommand) other;
+        return toAdd.equals(otherAddWeddingCommand.toAdd);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAdd", toAdd)
+                .toString();
     }
 }
