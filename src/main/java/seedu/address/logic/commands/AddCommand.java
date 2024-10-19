@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_NRIC + "T0123456A "
-            + PREFIX_BIRTHDATE + "BIRTHDATE "
+            + PREFIX_BIRTHDATE + "2001-06-24 "
             + PREFIX_SEX + "M "
             + PREFIX_HEALTHSERVICE + "Blood Test "
             + PREFIX_HEALTHSERVICE + "Vaccination";

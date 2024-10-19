@@ -30,6 +30,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NRIC_AMY = "T0123456A";
     public static final String VALID_NRIC_BOB = "S0123456B";
+    public static final String VALID_NRIC_ALICE = "S1234567A";
     public static final String VALID_SEX_AMY = "F";
     public static final String VALID_SEX_BOB = "M";
     public static final String VALID_BIRTHDATE_AMY = "2001-05-10";

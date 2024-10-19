@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_BIRTHDATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_VACCINATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SEX_BOB;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -30,23 +31,23 @@ public class PersonTest {
         // null -> returns false
         assertFalse(ALICE.isSamePerson(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).withSex(VALID_SEX_BOB)
+        // same nric, all other attributes different -> returns True
+        Person editedAlice = new PersonBuilder(BOB).withNric(VALID_NRIC_ALICE).withSex(VALID_SEX_BOB)
                 .withBirthdate(VALID_BIRTHDATE_BOB).withHealthServices(VALID_HEALTHSERVICE_VACCINATION).build();
         assertTrue(ALICE.isSamePerson(editedAlice));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        // different nric, all other attributes same -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB).build();
         assertFalse(ALICE.isSamePerson(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
+        // name differs in case and nric same -> returns true
         Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, nric same -> returns true
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
         editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        assertTrue(BOB.isSamePerson(editedBob));
     }
 
     @Test
@@ -76,7 +77,8 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", nric=" + ALICE.getNric()
-                + ", sex=" + ALICE.getSex() + ", birthdate=" + ALICE.getBirthdate();
+                + ", sex=" + ALICE.getSex() + ", birthdate=" + ALICE.getBirthdate() + ", phone=" + ALICE.getPhone()
+                + ", email=" + ALICE.getEmail() + ", Health Services=" + ALICE.getHealthServices() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
