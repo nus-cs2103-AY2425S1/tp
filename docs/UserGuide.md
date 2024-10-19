@@ -105,6 +105,11 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[s/SUBJECT]…​` can be used as ` ` (i.e. 0 times), `s/MATH`, `s/MATH s/PHYSICS` etc.
 
+* `lt/LESSON_TIMING` must follow the format:`lt/day-start-end`
+  * Acceptable values for `day` are `MON`, `TUE`, `WED`, `THU`, `FRI`, `SAT`, `SUN`.
+  * `start` must be in `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive.
+  * `end` must be in `HH:MM`, `HH` must be between 0 and 23 inclusive, `MM` must be between 0 and 59 inclusive, and `end` must be later than `start`.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
