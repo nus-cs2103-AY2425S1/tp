@@ -38,7 +38,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedGrade> grades = new ArrayList<>();
-    private final Map<LocalDateTime, JsonAdaptedAttendance> attendances = new HashMap<>();
+    private final Map<LocalDateTime, JsonAdaptedAttendance> attendances = new TreeMap<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -77,8 +77,8 @@ class JsonAdaptedPerson {
         grades.addAll(source.getGradeList().getList().stream() // Convert GradeList to JSON
                               .map(JsonAdaptedGrade::new)
                               .collect(Collectors.toList()));
-        attendances.putAll(source.getAttendanceList().getMap().entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> new JsonAdaptedAttendance(e.getValue()))));
+        source.getAttendanceList().getMap().forEach((key, value) ->
+                attendances.put(key, new JsonAdaptedAttendance(value)));
     }
 
     /**
@@ -133,9 +133,7 @@ class JsonAdaptedPerson {
         final GradeList modelGradeList = new GradeList(convertedGrades);
 
         final Map<LocalDateTime, Attendance> convertedAttendances = new TreeMap<>();
-        for (Map.Entry<LocalDateTime, JsonAdaptedAttendance> entry : attendances.entrySet()) {
-            convertedAttendances.put(entry.getKey(), entry.getValue().toModelType());
-        }
+        attendances.forEach((key, value) -> convertedAttendances.put(key, value.toModelType()));
         final AttendanceList modelAttendancelist = new AttendanceList(convertedAttendances);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeList,
