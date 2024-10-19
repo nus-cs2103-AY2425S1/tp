@@ -17,7 +17,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 3. [Command Summary](#command-summary)
 4. [FAQ](#faq)
 5. [Known Issues](#known-issues)
-6. [Commannd Summary](#command-summary)
+6. [Command Summary](#command-summary)
 
 
 --------------------------------------------------------------------------------------------------------------------
