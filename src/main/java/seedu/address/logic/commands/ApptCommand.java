@@ -22,6 +22,7 @@ public class ApptCommand extends Command {
     public static final String COMMAND_WORD = "appt";
     public static final String MESSAGE_APPT_ADDED_SUCCESS = "Appointment added successfully";
     public static final String MESSAGE_PERSON_NOT_FOUND = "Person not found";
+    public static final String MESSAGE_DUPLICATE_APPT = "Appointment already exists";
     public static final String MESSAGE_USAGE = COMMAND_WORD
         + ": Adds an appointment to the patient with the given NRIC. "
         + "Format: appt dt/YYYY-MM-DDTHH:MM i/NRIC \n"
@@ -61,6 +62,14 @@ public class ApptCommand extends Command {
         }
 
         Person person = optionalPerson.get();
+
+        // Check for duplicate appointments
+        boolean hasDuplicate = person.getAppts().stream()
+            .anyMatch(appt -> appt.getDateTime().equals(dateTime));
+        
+        if (hasDuplicate) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPT);
+        }
 
         // Add the appointment to the person's list of appointments
         person.addAppt(new Appt(dateTime));
