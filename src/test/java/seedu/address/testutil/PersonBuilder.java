@@ -1,16 +1,15 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
+
+import static seedu.address.model.util.SampleDataUtil.getListingsList;
 
 /**
  * A utility class to help with building Person objects.
@@ -28,6 +27,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Remark remark;
+    private UniqueListingList listings;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -39,6 +39,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         remark = new Remark("");
+        listings = new UniqueListingList();
     }
 
     /**
@@ -51,6 +52,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         remark = personToCopy.getRemark();
+        listings = personToCopy.getListings();
     }
 
     /**
@@ -101,8 +103,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code listings} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withListings(String[]... listings) {
+        this.listings = getListingsList(listings);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, remark);
+        return new Person(name, phone, email, address, tags, remark, listings);
     }
 
 }

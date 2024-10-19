@@ -18,7 +18,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
  */
 public class ListingAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "listing add";
+    public static final String COMMAND_WORD_PREFIX = "listing";
+    public static final String COMMAND_WORD_SUFFIX = "add";
+    public static final String COMMAND_WORD = COMMAND_WORD_PREFIX + " " + COMMAND_WORD_SUFFIX;
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a property listing to a Person "
             + "by the index number passed into INDEX parameter. "

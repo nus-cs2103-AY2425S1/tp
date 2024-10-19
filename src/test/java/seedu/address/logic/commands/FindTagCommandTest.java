@@ -71,7 +71,7 @@ public class FindTagCommandTest {
     @Test
     public void execute_singleTag_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends");
+        TagContainsKeywordsPredicate predicate = preparePredicate("seller");
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -81,7 +81,7 @@ public class FindTagCommandTest {
     @Test
     public void execute_multipleTags_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        TagContainsKeywordsPredicate predicate = preparePredicate("friends owesMoney");
+        TagContainsKeywordsPredicate predicate = preparePredicate("seller hdb");
         FindTagCommand command = new FindTagCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

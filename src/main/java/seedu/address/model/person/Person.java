@@ -47,12 +47,13 @@ public class Person {
         for (Tag tag: tags) {
             if (PropertyTagType.isValidPropertyTag(tag.tagName)) {
                 this.tags.remove(tag);
+                System.out.println("Removed tag: " + tag.tagName);
             }
         }
 
         // We then add in the current property tags
         for (Listing listing: listings) {
-            Tag currentTag = new Tag(listing.propertyType.toString().toLowerCase());
+            Tag currentTag = new PropertyTag(listing.propertyType.toString().toLowerCase());
             if (!this.tags.contains(currentTag)) {
                 this.tags.add(currentTag);
             }

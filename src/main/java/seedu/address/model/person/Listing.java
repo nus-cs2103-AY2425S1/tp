@@ -31,7 +31,7 @@ public class Listing {
     }
 
     /**
-     * Constructs an {@code Listing} meant for use for Jackson.
+     * Constructs an {@code Listing} - meant for use for Jackson.
      *
      * @param propertyType Type of property, follows the propertyType enum
      * @param address The address of the property

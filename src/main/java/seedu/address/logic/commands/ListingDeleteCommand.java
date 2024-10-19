@@ -10,6 +10,7 @@ import seedu.address.model.person.exceptions.ListingNotFoundException;
 
 import java.util.List;
 
+import static seedu.address.logic.commands.ListingAddCommand.COMMAND_WORD_PREFIX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
@@ -17,7 +18,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
  */
 public class ListingDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "listing delete";
+    public static final String COMMAND_WORD_SUFFIX = "delete";
+    public static final String COMMAND_WORD = COMMAND_WORD_PREFIX + " " + COMMAND_WORD_SUFFIX;
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a property listing from a Person "
             + "by the index number passed into INDEX parameter and LISTING_INDEX parameter"
