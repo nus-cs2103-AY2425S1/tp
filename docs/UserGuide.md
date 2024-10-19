@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Sellsavvy User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Sellsavvy is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -145,6 +145,23 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an order under a Person : `addOrder`
+
+Adds an order under a specified person from the address book.
+
+Format: `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`
+
+* Add an order under the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index and quantity **must be a positive integer** 1, 2, 3, …​
+* Date must follow the following format: `DD-MM-YYYY`
+* If the quantity is not provided, the quantity will be set to a default value of **1**.
+
+Examples:
+* `addOrder 2 i/Lamp d/20-11-2024 c/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
+* `addOrder 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
+* `find Betsy` followed by `addOrder 1 i/Bottles d/12-12-2002 c/1` adds an order under the 1st person in the results of the `find` command.
+
 ### Listing all orders under a Person : `listOrder`
 
 List all orders of a specified person from the address book.
@@ -158,6 +175,21 @@ Format: `listOrder INDEX`
 Examples:
 * `list` followed by `listOrder 2` lists all orders of the 2nd person in the address book.
 * `find Betsy` followed by `listOrder 1` lists all orders of the 1st person from the list of persons found with "Betsy".
+
+### Deleting an order under a Person : `deleteOrder`
+
+Deletes an order under a selected person whose orders are displayed using `listOrder`.
+
+Format: `deleteOrder ORDER_INDEX`
+
+* A person's order list must be selected using `listOrder` before deleting an order from that person.
+* Deletes an order under the selected person at the specified `ORDER_INDEX`.
+* The order index refers to the index number shown in the displayed **order** list of the selected person.
+* The index and quantity **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deleteOrder 1` deletes the order with index 1 from the selected person.
+* `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
 
 ### Clearing all entries : `clear`
 
@@ -216,5 +248,7 @@ Action                | Format, Examples
 **Edit a person**     | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find person(s)**    | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List all persons**  | `list`
+**Add an order**      | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
 **List all orders**   | `listOrder INDEX`<br> e.g., `listOrder 3`
+**Delete an order**   | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
 **Help**              | `help`
