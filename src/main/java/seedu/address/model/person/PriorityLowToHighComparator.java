@@ -2,8 +2,6 @@ package seedu.address.model.person;
 
 import java.util.Comparator;
 
-import seedu.address.logic.commands.SortByPriorityCommand;
-
 /**
  * Comparator to sort persons from high priority to low priority
  */

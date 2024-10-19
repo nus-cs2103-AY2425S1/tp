@@ -119,7 +119,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_sort_priority() throws Exception {
+    public void parseCommand_sortPriority() throws Exception {
         SortByPriorityCommand command = (SortByPriorityCommand) parser.parseCommand(
                 SortByPriorityCommand.COMMAND_WORD + " high");
 
@@ -127,7 +127,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_sort_priority_alt() throws Exception {
+    public void parseCommand_sortPriority_alt() throws Exception {
         SortByPriorityCommand command = (SortByPriorityCommand) parser.parseCommand(
                 SortByPriorityCommand.ALT_COMMAND_WORD + " high");
 

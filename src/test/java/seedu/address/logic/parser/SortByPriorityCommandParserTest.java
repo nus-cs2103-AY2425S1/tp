@@ -15,18 +15,19 @@ public class SortByPriorityCommandParserTest {
     private SortByPriorityCommandParser parser = new SortByPriorityCommandParser();
 
     @Test
-    public void parse_validArgs_highToLow_returnsCommand() {
+    public void parse_highToLow_returnsCommand() {
         assertParseSuccess(parser, "high", new SortByPriorityCommand(new PriorityHighToLowComparator()));
     }
 
     @Test
-    public void parse_validArgs_lowToHigh_returnsCommand() {
+    public void parse_lowToHigh_returnsCommand() {
         assertParseSuccess(parser, "low", new SortByPriorityCommand(new PriorityLowToHighComparator()));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseExcpetion() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortByPriorityCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortByPriorityCommand.MESSAGE_USAGE));
     }
 
 }
