@@ -41,7 +41,7 @@ public class EditOrderCommand extends Command {
             + PREFIX_ITEM + "LED light bulb "
             + PREFIX_DATE + "20-12-2024 ";
 
-    public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Order: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has an order for this item"

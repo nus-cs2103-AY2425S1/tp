@@ -170,6 +170,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setOrder(Index index, Order order) {
+        OrderList orderList = getSelectedPerson2().getOrderList();
+        orderList.setOrder(index, order);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

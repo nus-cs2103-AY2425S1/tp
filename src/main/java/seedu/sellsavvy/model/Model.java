@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.sellsavvy.commons.core.GuiSettings;
+import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 
@@ -107,5 +108,7 @@ public interface Model {
      * Updates the selected person whose orders are displayed.
      */
     void updateSelectedPerson(Person person);
+
+    void setOrder(Index index, Order order);
 
 }
