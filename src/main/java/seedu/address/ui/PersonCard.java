@@ -62,9 +62,8 @@ public class PersonCard extends UiPart<Region> {
             eventName.setVisible(true);
             eventName.setManaged(true);
         } else {
-            eventName.setVisible(false);  // Hides the eventName FlowPane
-            eventName.setManaged(false);  // Prevents eventName from occupying space in the layout
+            eventName.setVisible(false); // Hides the eventName FlowPane
+            eventName.setManaged(false); // Prevents eventName from occupying space in the layout
         }
     }
 }
-        
