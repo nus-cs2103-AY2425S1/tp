@@ -13,9 +13,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Sort the contact list based on tag names and values.
  */
-public class SortCommand extends Command {
+public class AdvFilterCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort";
+    public static final String COMMAND_WORD = "advfilter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by tag values.\n"
@@ -33,7 +33,7 @@ public class SortCommand extends Command {
     /**
      * Class that handles SortCommand
      */
-    public SortCommand(String tagName, String operator, String tagValue) {
+    public AdvFilterCommand(String tagName, String operator, String tagValue) {
         this.tagName = tagName;
         this.operator = operator;
         this.tagValue = tagValue;
@@ -87,11 +87,11 @@ public class SortCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof SortCommand)) {
+        if (!(other instanceof AdvFilterCommand)) {
             return false;
         }
 
-        SortCommand otherCommand = (SortCommand) other;
+        AdvFilterCommand otherCommand = (AdvFilterCommand) other;
 
         boolean isTagNameEqual = (tagName == null && otherCommand.tagName == null)
                 || (tagName != null && tagName.equals(otherCommand.tagName));
