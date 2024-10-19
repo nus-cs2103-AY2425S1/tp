@@ -15,9 +15,9 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.eventcommands.EditEventCommand;
 import seedu.address.logic.commands.eventcommands.EditEventCommand.EditEventDescriptor;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.personcommands.EditCommand;
 import seedu.address.logic.commands.personcommands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
