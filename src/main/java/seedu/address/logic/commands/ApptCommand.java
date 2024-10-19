@@ -68,6 +68,12 @@ public class ApptCommand extends Command {
         return new CommandResult(generateSuccessMessage(person));
     }
 
+    /**
+     * Returns true if both appt commands have the same nric and dateTime.
+     * This defines a stronger notion of equality between two appt commands.
+     * @param other appt command
+     * @return boolean
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
