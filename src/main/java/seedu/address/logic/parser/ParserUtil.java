@@ -125,7 +125,7 @@ public class ParserUtil {
         }
 
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate attendanceDate = LocalDate.parse(attendance, formatter);
             return new Attendance(attendanceDate);
         } catch (DateTimeParseException e) {
