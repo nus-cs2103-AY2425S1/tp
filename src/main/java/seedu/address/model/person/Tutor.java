@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.Set;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 
@@ -88,7 +89,7 @@ public class Tutor extends Person {
      */
     @Override
     public String toString() {
-        return "Tutor: " + super.toString();
+        return super.toString();
     }
 
 }
