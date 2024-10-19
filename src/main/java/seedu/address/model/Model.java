@@ -84,4 +84,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Displays the given person {@code personToDisplay} and their details.
+     * {@code target} must exist in the address book.
+     */
+    void setPersonToDisplay(Person personToDisplay);
+
+    /**
+     * Returns the Person object to display.
+     */
+    Person getPersonToDisplay();
 }

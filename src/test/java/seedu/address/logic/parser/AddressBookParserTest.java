@@ -23,6 +23,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GradeCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -140,6 +141,14 @@ public class AddressBookParserTest {
                 GradeCommand.COMMAND_WORD + " " + PREFIX_STUDENTID + validStudentId + " "
                         + PREFIX_MODULE + validModule.value + " " + PREFIX_GRADE + validGrade);
         assertEquals(new GradeCommand(validStudentId, validModule, validGrade), command);
+    }
+
+    @Test
+    public void parseCommand_find() throws Exception {
+        StudentId validStudentId = new StudentId(CommandTestUtil.VALID_STUDENTID_BOB);
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + validStudentId);
+        assertEquals(new FindCommand(validStudentId), command);
     }
 
     @Test

@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person personToDisplay;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,20 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+    }
+
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs and personToDisplay.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Person personToDisplay) {
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.personToDisplay = personToDisplay;
     }
 
     public ModelManager() {
@@ -129,6 +144,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setPersonToDisplay(Person personToDisplay) {
+        requireNonNull(personToDisplay);
+
+        this.personToDisplay = personToDisplay;
+    }
+
+    @Override
+    public Person getPersonToDisplay() {
+        return personToDisplay;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -140,9 +167,17 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+
+        boolean areOtherFieldsEqual = addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+        if (!areOtherFieldsEqual) {
+            return false;
+        } else if (personToDisplay == null) {
+            return otherModelManager.personToDisplay == null;
+        } else {
+            return personToDisplay.equals(otherModelManager.personToDisplay);
+        }
     }
 
 }

@@ -2,11 +2,12 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -94,6 +95,30 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setPersonToDisplay_validPerson_success() {
+        modelManager.setPersonToDisplay(ALICE);
+
+        // same person -> returns true
+        assertEquals(modelManager,
+                new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE));
+
+        // different person -> returns false
+        assertNotEquals(modelManager,
+                new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), BOB));
+    }
+
+    @Test
+    public void getPersonToDisplay_personToDisplayEqualToPersonSet_returnsTrue() {
+        modelManager = new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE);
+
+        // same person -> returns true
+        assertEquals(ALICE, modelManager.getPersonToDisplay());
+
+        // different person -> returns false
+        assertNotEquals(BOB, modelManager.getPersonToDisplay());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -102,6 +127,10 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        modelManager = new ModelManager(addressBook, userPrefs, ALICE);
+        modelManagerCopy = new ModelManager(addressBook, userPrefs, ALICE);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -121,8 +150,11 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
+        // different personToDisplay -> returns false
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager = new ModelManager(addressBook, userPrefs);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
