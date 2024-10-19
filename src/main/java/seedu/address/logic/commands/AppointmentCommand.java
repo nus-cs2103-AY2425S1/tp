@@ -13,7 +13,9 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 
 /**
  * Adds or updates an appointment for a specified person in the address book.
@@ -66,8 +68,18 @@ public class AppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                 personToEdit.getEmail(), personToEdit.getTags(), appointment, personToEdit.getProperty());
+        Person editedPerson;
+
+        if (personToEdit instanceof Buyer buyer) {
+            editedPerson = new Buyer(buyer.getName(), buyer.getPhone(),
+                    buyer.getEmail(), buyer.getTags(),
+                    appointment, buyer.getProperty());
+        } else {
+            Seller seller = (Seller) personToEdit;
+            editedPerson = new Seller(seller.getName(), seller.getPhone(),
+                    seller.getEmail(), seller.getTags(),
+                    appointment, seller.getProperty());
+        }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));

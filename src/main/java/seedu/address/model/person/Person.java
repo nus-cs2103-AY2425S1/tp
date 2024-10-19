@@ -18,12 +18,14 @@ import seedu.address.model.tag.Tag;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public abstract class Person {
 
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
+
+    private final Role role;
 
     // Data fields
     private final Property property;
@@ -33,7 +35,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Role role, Appointment appointment, Property property) {
+        this.role = role;
         requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
@@ -41,7 +44,9 @@ public class Person {
         this.appointment = appointment;
         this.property = property;
         this.tags.addAll(tags);
+
     }
+
     /**
      * Constructs a {@code Person} object with the specified name.
      * Initializes the phone number as {@code null}, sets the property to a default empty value,
@@ -49,8 +54,9 @@ public class Person {
      *
      * @param name The {@code Name} of the person. Must not be {@code null}.
      */
-    public Person(Name name) {
+    public Person(Name name, Role role) {
         this.name = name;
+        this.role = role;
         this.phone = null;
         this.email = null;
         this.property = new Property("");
@@ -64,6 +70,8 @@ public class Person {
     public Phone getPhone() {
         return phone;
     }
+
+    public Role getRole() {return role; }
 
     public Email getEmail() {
         return email;
@@ -129,6 +137,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
+                .add("role", role)
                 .add("tags", tags)
                 .add("appointment", appointment)
                 .add("property", property)

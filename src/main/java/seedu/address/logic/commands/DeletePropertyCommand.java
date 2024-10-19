@@ -8,9 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Property;
+import seedu.address.model.person.*;
 
 /**
  * Deletes a client's property identified by the client's name.
@@ -55,10 +53,17 @@ public class DeletePropertyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
         }
 
-        Person personWithoutProperty = new Person(personToDeleteProperty.getName(),
-                personToDeleteProperty.getPhone(), personToDeleteProperty.getEmail(),
-                personToDeleteProperty.getTags(), personToDeleteProperty.getAppointment(), new Property(""));
-        model.setPerson(personToDeleteProperty, personWithoutProperty);
+        Person personWithoutProperty;
+        if (personToDeleteProperty instanceof Buyer buyer) {
+            personWithoutProperty = new Buyer(buyer.getName(),
+                    buyer.getPhone(), buyer.getEmail(),
+                    buyer.getTags(), buyer.getAppointment(), new Property(""));
+        } else {
+            Seller seller = (Seller) personToDeleteProperty;
+            personWithoutProperty = new Seller(seller.getName(),
+                    seller.getPhone(), seller.getEmail(),
+                    seller.getTags(), seller.getAppointment(), new Property(""));
+        }
 
         return new CommandResult(String.format(MESSAGE_DELETE_PROPERTY_SUCCESS,
                 personToDeleteProperty.getName()));
@@ -71,11 +76,10 @@ public class DeletePropertyCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeletePropertyCommand)) {
+        if (!(other instanceof DeletePropertyCommand otherDeletePropertyCommand)) {
             return false;
         }
 
-        DeletePropertyCommand otherDeletePropertyCommand = (DeletePropertyCommand) other;
         return targetName.equals(otherDeletePropertyCommand.targetName);
     }
 

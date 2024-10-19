@@ -30,32 +30,43 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddClientProfile;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.logic.commands.AddBuyerProfile;
+import seedu.address.logic.commands.AddSellerProfile;
+import seedu.address.model.person.*;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddClientProfileParserTest {
     private AddClientParser parser = new AddClientParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+    public void parse_addBuyer_success() {
+        Buyer expectedBuyer = new PersonBuilder().buildBuyer();
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + EMAIL_DESC_BOB + TAG_DESC_FRIEND,
-                new AddClientProfile(expectedPerson));
-
-
-        // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB)
-                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         assertParseSuccess(parser,
-                NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                new AddClientProfile(expectedPersonMultipleTags));
+                "buyer " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
+                new AddBuyerProfile(expectedBuyer));
+    }
+
+    @Test
+    public void parse_addSeller_success() {
+        Seller expectedSeller = (Seller) new PersonBuilder().buildSeller();
+
+        assertParseSuccess(parser,
+                "seller " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
+                new AddSellerProfile(expectedSeller));
+    }
+
+    @Test
+    public void parse_allFieldsPresent_success() {
+        Buyer expectedBuyer = new PersonBuilder(BOB).withTags("friends").buildBuyer();
+        assertParseSuccess(parser,
+                "buyer " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_FRIEND,
+                new AddBuyerProfile(expectedBuyer));
+
+        Seller expectedSeller =  new PersonBuilder(BOB).withTags("friends").buildSeller();
+        assertParseSuccess(parser,
+                "seller " + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_FRIEND,
+                new AddSellerProfile(expectedSeller));
     }
 
     @Test
@@ -112,15 +123,18 @@ public class AddClientProfileParserTest {
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
-                new AddClientProfile(expectedPerson));
+        Buyer expectedBuyer = new PersonBuilder(AMY).withTags().buildBuyer();
+        assertParseSuccess(parser, "buyer " + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
+                new AddBuyerProfile(expectedBuyer));
+
+        Seller expectedSeller = new PersonBuilder(AMY).withTags().buildSeller();
+        assertParseSuccess(parser, "seller " + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY,
+                new AddSellerProfile(expectedSeller));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerProfile.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB, expectedMessage);
@@ -159,7 +173,10 @@ public class AddClientProfileParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClientProfile.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerProfile.MESSAGE_USAGE));
+
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerProfile.MESSAGE_USAGE));
         //   + TAG_DESC_HUSBAND + TAG_DESC_FRIEND
     }
 }

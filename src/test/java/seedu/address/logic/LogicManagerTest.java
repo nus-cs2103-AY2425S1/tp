@@ -18,7 +18,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddClientProfile;
+import seedu.address.logic.commands.AddBuyerProfile;
+import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,8 +28,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -60,6 +63,27 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void execute_addBuyerProfile_success() throws Exception {
+        String addBuyerCommand = AddBuyerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " " +
+                PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
+
+        Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
+        model.addPerson(expectedBuyer);
+
+        assertCommandSuccess(addBuyerCommand, String.format(AddBuyerProfile.MESSAGE_SUCCESS, expectedBuyer), model);
+    }
+
+    public void execute_addSellerProfile_success() throws Exception {
+        String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " " +
+                PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
+
+        Seller expectedSeller = new PersonBuilder(AMY).buildSeller();
+        model.addPerson(expectedSeller);
+
+        assertCommandSuccess(addSellerCommand, String.format(AddSellerProfile.MESSAGE_SUCCESS, expectedSeller), model);
+    }
+
+    @Test
     public void execute_commandExecutionError_throwsCommandException() {
         Name invalidName = new Name("aaaaaaaaaaaaaaa");
         String deleteCommand = "delete " + PREFIX_NAME + invalidName;
@@ -70,7 +94,7 @@ public class LogicManagerTest {
     public void execute_listCommandWhenClientsExist_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
 
-        Person expectedPerson = new PersonBuilder(AMY).build();
+        Person expectedPerson = new PersonBuilder(AMY).buildBuyer();
         model.addPerson(expectedPerson);
 
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
@@ -171,25 +195,25 @@ public class LogicManagerTest {
         // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(prefPath) {
             @Override
-            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath)
-                    throws IOException {
-                throw e;
+            public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+                throw e; // Simulate an IOException
             }
         };
 
-        JsonUserPrefsStorage userPrefsStorage =
-                new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
+        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddClientProfile.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
+        // Trigger the saveAddressBook method by executing an add command
+        String addBuyerCommand = AddBuyerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " " +
+                PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
 
-        Person expectedPerson = new PersonBuilder(AMY).build();
-        // .withTags()
-        ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        String addSellerCommand = AddSellerProfile.COMMAND_WORD + " " + NAME_DESC_AMY + " " +
+                PHONE_DESC_AMY + " " + EMAIL_DESC_AMY;
+
+        // Use a loop or separate assertions if needed
+        assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage);
+        assertCommandFailure(addSellerCommand, CommandException.class, expectedMessage);
     }
 }

@@ -10,21 +10,22 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
  */
-public class AddClientProfile extends Command {
+public class AddBuyerProfile extends Command {
 
-    public static final String COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "buyer";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a buyer to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
-             + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -32,17 +33,17 @@ public class AddClientProfile extends Command {
             + PREFIX_TAG + "owesMoney "
             + PREFIX_EMAIL + "johnd@example.com";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New buyer added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This buyer already exists in the address book";
 
-    private final Person toAdd;
+    private final Buyer toAdd;
 
     /**
      * Creates an AddClientProfile to add the specified {@code Person}
      */
-    public AddClientProfile(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddBuyerProfile(Buyer buyer) {
+        requireNonNull(buyer);
+        toAdd = buyer;
     }
 
     @Override
@@ -64,11 +65,11 @@ public class AddClientProfile extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddClientProfile)) {
+        if (!(other instanceof AddBuyerProfile)) {
             return false;
         }
 
-        AddClientProfile otherAddCommand = (AddClientProfile) other;
+        AddBuyerProfile otherAddCommand = (AddBuyerProfile) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
