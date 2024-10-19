@@ -25,12 +25,14 @@ import seedu.address.logic.commands.DeleteYCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByJobCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.commands.TagDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.JobContainsKeywordsPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -155,6 +157,14 @@ public class AddressBookParserTest {
         Set<Tag> stubTagList = new HashSet<>();
         stubTagList.add(stubTag);
         assertEquals(new TagDeleteCommand(stubName, stubTagList), command);
+    }
+
+    @Test
+    public void parseCommand_filterByJob() throws Exception {
+        List<String> keywords = Arrays.asList("Engineer", "Doctor");
+        FilterByJobCommand command = (FilterByJobCommand) parser.parseCommand(
+                FilterByJobCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterByJobCommand(new JobContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
