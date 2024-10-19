@@ -23,7 +23,7 @@
 
       <VBox>
         <children>
-          <HBox alignment="CENTER" fx:id="helpMessageContainer">
+          <HBox alignment="CENTER" fx:id="helpMessageContainer" >
             <children>
               <Label fx:id="helpMessage" text="Label">
                 <HBox.margin>
@@ -40,7 +40,7 @@
           <!-- Command Summary Table -->
           <GridPane hgap="10" vgap="10">
             <VBox.margin>
-              <Insets left="10" right="10" top="10" bottom="10"/>
+              <Insets left="10" right="10" top="10" bottom="10" />
             </VBox.margin>
             <Label text="Action" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
             <Label text="Format, Examples" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-font-weight: bold;" />
