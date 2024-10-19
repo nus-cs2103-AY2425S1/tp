@@ -43,7 +43,7 @@ public class ViewCommand extends Command{
         Person person = optionalPerson.get();
 
         // View the person's details
-        person.showDetails();
+        // person.showDetails();
 
         return new CommandResult(generateSuccessMessage(person));
     }
