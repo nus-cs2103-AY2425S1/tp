@@ -38,7 +38,7 @@ public class GradeList {
         requireNonNull(grade, "Grade cannot be null");
 
         List<Grade> newGrades = new ArrayList<>(this.grades);
-
+        newGrades.removeIf(existingGrade -> existingGrade.getTestName().equalsIgnoreCase(grade.getTestName()));
         newGrades.add(grade);
 
         return new GradeList(newGrades);
