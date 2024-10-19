@@ -2,11 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -76,6 +78,36 @@ public class Person {
     }
 
     /**
+     * Add grade to gradeList
+     *
+     * @param grade New grade to be added
+     * @return new immutable Person
+     */
+    public Person addGrade(Grade grade) {
+        requireAllNonNull(grade);
+
+        GradeList newGradeList = this.gradeList.addGrade(grade);
+
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradeList,
+                          this.attendanceList);
+    }
+
+    /**
+     * Remove grade from gradeList based on index.
+     *
+     * @param index The index to remove the grade.
+     * @return new immutable Person
+     */
+    public Person removeGrade(Index index) {
+        requireAllNonNull(index);
+
+        GradeList newGradelist = this.gradeList.removeGrade(index);
+
+        return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist,
+                          this.attendanceList);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -86,6 +118,30 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+
+    /**
+     * Sets the attendance for a specific date and returns a new Person object with the updated attendance list.
+     *
+     * @param date The date for which the attendance is to be set.
+     * @param attendance The attendance status to be set for the specified date.
+     * @return A new Person object with the updated attendance list.
+     */
+    public Person setAttendance(LocalDateTime date, Attendance attendance) {
+        AttendanceList newAttendanceList = attendanceList.setAttendance(date, attendance);
+        return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
+    }
+
+    /**
+     * Removes the attendance record for the specified date from the person's attendance list.
+     *
+     * @param date The date of the attendance record to be removed.
+     * @return A new Person object with the updated attendance list.
+     */
+    public Person removeAttendance(LocalDateTime date) {
+        AttendanceList newAttendanceList = attendanceList.removeAttendance(date);
+        return new Person(name, phone, email, address, tags, gradeList, newAttendanceList);
     }
 
     /**

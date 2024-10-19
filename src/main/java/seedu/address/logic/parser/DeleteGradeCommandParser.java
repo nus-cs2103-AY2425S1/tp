@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteGradeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -19,12 +21,12 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
         String[] splitArgs = args.trim().split("\\s+", 2);
 
         if (splitArgs.length != 2) {
-            throw new ParseException(String.format("Invalid command format! \n%1$s", DeleteGradeCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGradeCommand.MESSAGE_USAGE));
         }
 
         Index index = ParserUtil.parseIndex(splitArgs[0]);
-        String testName = splitArgs[1].trim();
+        Index testIndex = ParserUtil.parseIndex(splitArgs[1]);
 
-        return new DeleteGradeCommand(index, testName);
+        return new DeleteGradeCommand(index, testIndex);
     }
 }

@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 public class GradeListTest {
 
     @Test
@@ -17,13 +19,12 @@ public class GradeListTest {
         GradeList secondGradeList = new GradeList();
 
         // same size and values -> returns true
-        firstGradeList.addGrade(firstGrade);
-        secondGradeList.addGrade(firstGrade);
-        secondGradeList.addGrade(firstGrade);
+        firstGradeList = firstGradeList.addGrade(firstGrade);
+        secondGradeList = secondGradeList.addGrade(firstGrade);
         assertTrue(firstGradeList.equals(secondGradeList));
 
         // different size -> returns false
-        secondGradeList.addGrade(secondGrade);
+        secondGradeList = secondGradeList.addGrade(secondGrade);
         assertFalse(firstGradeList.equals(secondGradeList));
     }
 
@@ -35,18 +36,15 @@ public class GradeListTest {
         Grade fourthGrade = new Grade("Tutorial", 100.0F, 5.0F);
 
         GradeList gradeList = new GradeList();
-        gradeList.addGrade(firstGrade);
-        gradeList.addGrade(secondGrade);
-        gradeList.addGrade(thirdGrade);
+        gradeList = gradeList.addGrade(firstGrade);
+        gradeList = gradeList.addGrade(secondGrade);
+        gradeList = gradeList.addGrade(thirdGrade);
 
         // same name -> returns true
-        assertEquals(gradeList.getGrade("midterm"), firstGrade);
-        assertEquals(gradeList.getGrade("Final"), secondGrade);
-        assertEquals(gradeList.getGrade("AsSiGnMeNt"), thirdGrade);
+        assertEquals(gradeList.getGrade(Index.fromOneBased(1)), firstGrade);
+        assertEquals(gradeList.getGrade(Index.fromOneBased(2)), secondGrade);
+        assertEquals(gradeList.getGrade(Index.fromOneBased(3)), thirdGrade);
 
-        // different name -> returns false
-        assertEquals(gradeList.getGrade("Tutorial"), null);
-        assertEquals(gradeList.getGrade("assignment "), null);
     }
 
     @Test
@@ -59,8 +57,8 @@ public class GradeListTest {
         GradeList firstGradeList = new GradeList();
         GradeList secondGradeList = new GradeList();
 
-        firstGradeList.addGrade(firstGrade);
-        secondGradeList.addGrade(fourthGrade);
+        firstGradeList = firstGradeList.addGrade(firstGrade);
+        secondGradeList = secondGradeList.addGrade(fourthGrade);
 
         // same object -> returns true
         assertTrue(firstGradeList.equals(firstGradeList));
@@ -72,11 +70,11 @@ public class GradeListTest {
         assertFalse(firstGradeList.equals(null));
 
         // different values -> returns false
-        secondGradeList.addGrade(thirdGrade);
+        secondGradeList = secondGradeList.addGrade(thirdGrade);
         assertFalse(firstGradeList.equals(secondGradeList));
 
         // different size -> returns false
-        secondGradeList.addGrade(secondGrade);
+        secondGradeList = secondGradeList.addGrade(secondGrade);
         assertFalse(firstGradeList.equals(secondGradeList));
     }
 }
