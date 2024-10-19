@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Id {
     private static int patientIdCounter = 0;
-    private static int doctorIdCounter = 0;
+    private static int doctorIdCounter = 1000;
     private static int personIdCounter = 0; // TODO REMOVE AFTER V1.3
     protected int idValue;
     private Class<? extends Person> role;

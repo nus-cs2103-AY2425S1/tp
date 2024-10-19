@@ -73,4 +73,13 @@ public class Patient extends Person {
         }
         return null; // Return null if no matching patient is found
     }
+
+    /**
+     * adds a patient to the collection of patients
+     *
+     * @param patient The patient to be added
+     */
+    public static void addPatient(Patient patient) {
+        patients.add(patient);
+    }
 }

@@ -61,4 +61,13 @@ public class Doctor extends Person {
         }
         return null;
     }
+
+    /**
+     * adds a doctor to the collection of doctors
+     *
+     * @param doctor The doctor to be added
+     */
+    public static void addDoctors(Doctor doctor) {
+        doctors.add(doctor);
+    }
 }

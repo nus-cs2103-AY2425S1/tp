@@ -37,6 +37,14 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        for (Person person : filteredPersons) {
+            if (person instanceof Doctor) {
+                Doctor.addDoctors((Doctor) person);
+            }
+            if (person instanceof Patient) {
+                Patient.addPatient((Patient) person);
+            }
+        }
     }
 
     public ModelManager() {
@@ -134,7 +142,7 @@ public class ModelManager implements Model {
     public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
         Patient patient = null;
         for (Person person : allPersons) {
-            if (Patient.class.isAssignableFrom(person.getId().getRole())) {
+            if (person.getId().equals(id)) {
                 patient = (Patient) person;
                 break;
             }
