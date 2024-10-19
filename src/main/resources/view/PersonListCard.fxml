@@ -28,7 +28,7 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
-        <Label fx:id="isRsvp" style="-fx-background-color: #4297d4; -fx-background-radius: 2;" styleClass="cell_small_label" text="\$isRsvp">
+        <Label fx:id="isRsvp" style="-fx-background-color: #85bd80; -fx-background-radius: 2;" styleClass="cell_small_label" text="\$isRsvp">
             <padding>
                 <Insets bottom="1.0" left="2.0" right="2.0" top="1.0" />
             </padding>
