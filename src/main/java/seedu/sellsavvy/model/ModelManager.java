@@ -13,7 +13,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.commons.core.LogsCenter;
-import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
@@ -170,9 +169,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setOrder(Index index, Order order) {
+    public void setOrder(Order target, Order editedOrder) {
         OrderList orderList = getSelectedPerson2().getOrderList();
-        orderList.setOrder(index, order);
+        orderList.setOrder(target, editedOrder);
     }
 
     @Override

@@ -82,7 +82,7 @@ public class EditOrderCommand extends Command {
                 ? MESSAGE_DUPLICATE_ORDER_WARNING
                 : "";
 
-        model.setOrder(index, editedOrder);
+        model.setOrder(orderToEdit, editedOrder);
         //TODO after filtrerable list is impelemeted by kx
         //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));

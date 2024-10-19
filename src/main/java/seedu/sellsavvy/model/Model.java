@@ -109,6 +109,10 @@ public interface Model {
      */
     void updateSelectedPerson(Person person);
 
-    void setOrder(Index index, Order order);
+    /**
+     * Replaces the given order {@code target} with {@code editedOrder}.
+     * {@code target} must exist in the displayed order list.
+     */
+    void setOrder(Order target, Order editedOrder);
 
 }
