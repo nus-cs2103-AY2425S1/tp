@@ -64,7 +64,8 @@ public class AddPolicyCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        PolicySet personPolicies = personToEdit.getPolicySet();
+        PolicySet personPolicies = new PolicySet();
+        personPolicies.addAll(personToEdit.getPolicies());
 
         if (!personPolicies.add(policy)) {
             throw new CommandException(MESSAGE_DUPLICATES);

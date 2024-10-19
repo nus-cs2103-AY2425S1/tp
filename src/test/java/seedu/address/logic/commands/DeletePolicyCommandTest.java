@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 import seedu.address.testutil.PersonBuilder;
 
@@ -30,19 +31,21 @@ public class DeletePolicyCommandTest {
 
     @Test
     public void execute_deletePolicyUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withPolicies().build();
+        Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(secondPerson).withPolicies().build();
 
         Set<PolicyType> policiesToDelete = new HashSet<>();
         policiesToDelete.add(PolicyType.HEALTH);
         DeletePolicyCommand deletePolicyCommand = new DeletePolicyCommand(INDEX_SECOND_PERSON, policiesToDelete);
 
+        PolicySet expectedPolicies = new PolicySet();
+        expectedPolicies.addAll(editedPerson.getPolicies());
         String expectedMessage = String.format(DeletePolicyCommand.POLICY_DELETE_PERSON_SUCCESS,
-                Messages.formatPolicies(editedPerson.getPolicySet()));
+                Messages.formatPolicies(expectedPolicies));
 
         // Create a new expected model with the person having the "health" policy (i.e., the "life" policy is removed)
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
+        expectedModel.setPerson(secondPerson, editedPerson);
 
         // Act and Assert: Execute the command and compare results
         assertCommandSuccess(deletePolicyCommand, model, expectedMessage, expectedModel);

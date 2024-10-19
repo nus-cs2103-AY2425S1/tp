@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-// import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
+import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POLICY_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_LIFE;
@@ -12,6 +12,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,35 +37,35 @@ public class AddPolicyCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    // @Test
-    // public void parse_optionalFieldsPresent_success() {
-    //     // Absent premiumAmount
-    //     String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
-    //             + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount + " "
-    //             + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
-    //     Policy expectedPolicy = new LifePolicy(-1.0, Double.parseDouble(coverageAmount),
-    //             LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER));
-    //     AddPolicyCommand expectedCommand = new AddPolicyCommand(INDEX_SECOND_PERSON, expectedPolicy);
-    //     assertParseSuccess(parser, userInput, expectedCommand);
+    @Test
+    public void parse_optionalFieldsPresent_success() {
+        // Absent premiumAmount
+        String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount + " "
+                + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
+        Policy expectedPolicy = new LifePolicy(-1.0, Double.parseDouble(coverageAmount),
+                LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER));
+        AddPolicyCommand expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
-    //     // Absent premiumAmount
-    //     userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
-    //             + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
-    //             + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
-    //     expectedPolicy = new LifePolicy(Double.parseDouble(premiumAmount), -1.0,
-    //             LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER));
-    //     expectedCommand = new AddPolicyCommand(INDEX_SECOND_PERSON, expectedPolicy);
-    //     assertParseSuccess(parser, userInput, expectedCommand);
+        // Absent premiumAmount
+        userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
+                + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
+        expectedPolicy = new LifePolicy(Double.parseDouble(premiumAmount), -1.0,
+                LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER));
+        expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
+        assertParseSuccess(parser, userInput, expectedCommand);
 
-    //     // Absent expiryDate
-    //     userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
-    //             + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
-    //             + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount;
-    //     expectedPolicy = new LifePolicy(Double.parseDouble(premiumAmount), Double.parseDouble(coverageAmount),
-    //             null);
-    //     expectedCommand = new AddPolicyCommand(INDEX_SECOND_PERSON, expectedPolicy);
-    //     assertParseSuccess(parser, userInput, expectedCommand);
-    // }
+        // Absent expiryDate
+        userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
+                + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount;
+        expectedPolicy = new LifePolicy(Double.parseDouble(premiumAmount), Double.parseDouble(coverageAmount),
+                null);
+        expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
 
     @Test
     public void parse_missingCompulsoryField_failure() {

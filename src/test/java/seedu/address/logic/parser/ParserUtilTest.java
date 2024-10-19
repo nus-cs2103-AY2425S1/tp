@@ -232,10 +232,10 @@ public class ParserUtilTest {
                 Arrays.asList(VALID_POLICY_TYPE_LIFE, INVALID_POLICY_TYPE)));
     }
 
-    // @Test
-    // public void parsePolicyTypes_emptyCollection_returnsEmptySet() throws Exception {
-    //     assertTrue(ParserUtil.parsePolicyTypes(Collections.emptyList()).isEmpty());
-    // }
+    @Test
+    public void parsePolicyTypes_emptyCollection_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(Collections.emptyList()));
+    }
 
     @Test
     public void parsePolicyTypes_collectionWithValidPolicies_returnsSet() throws Exception {
@@ -248,11 +248,11 @@ public class ParserUtilTest {
         assertEquals(expected, actual);
     }
 
-    // @Test
-    // public void parsePolicyTypes_collectionWithDuplicatePolicies_throwsParseException() {
-    //     assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(
-    //             Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_LIFE)));
-    // }
+    @Test
+    public void parsePolicyTypes_collectionWithDuplicatePolicies_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyTypes(
+                Arrays.asList(VALID_POLICY_TYPE_LIFE, VALID_POLICY_TYPE_LIFE)));
+    }
 
     @Test
     public void parsePolicyAmount_validValueWithoutWhitespace_returnsDouble() throws ParseException {

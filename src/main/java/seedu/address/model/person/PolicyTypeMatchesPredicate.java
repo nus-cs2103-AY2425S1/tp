@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
+import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
 
 /**
@@ -16,7 +17,9 @@ public class PolicyTypeMatchesPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return person.getPolicySet().contains(policyType);
+        PolicySet policySet = new PolicySet();
+        policySet.addAll(person.getPolicies());
+        return policySet.contains(policyType);
     }
 
     @Override
