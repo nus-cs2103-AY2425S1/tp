@@ -6,9 +6,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeAll;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
@@ -24,8 +24,8 @@ public class FindCommandParserTest {
 
     @BeforeAll
     public static void setUp() {
-        namePredicateKeywords = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Alice1"));
-        schedulePredicateKeywords = new ScheduleContainsKeywordsPredicate(Arrays.asList(Days.MONDAY, Days.TUESDAY));
+        namePredicateKeywords = new NameContainsKeywordsPredicate(Set.of("Bob", "Alice1"));
+        schedulePredicateKeywords = new ScheduleContainsKeywordsPredicate(Set.of(Days.MONDAY, Days.TUESDAY));
     }
 
 
@@ -55,7 +55,7 @@ public class FindCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS));
 
     }
-    
+
     @Test
     public void parse_emptyDayArgument_throwsParseException() {
         assertParseFailure(parser, " d/ n/Alice",
@@ -72,7 +72,7 @@ public class FindCommandParserTest {
         FindCommand expectedFindCommand = new FindCommand(List.of(namePredicateKeywords));
 
         // alnum characters and extra whitespaces allowed
-        assertParseSuccess(parser, " n/Alice1      Bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Bob Alice1", expectedFindCommand);
     }
 
     @Test
@@ -95,10 +95,10 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, " n/Alice1 Bob d/Monday Tuesday", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " n/\n Alice \n \t Bob  \t d/Monday     Tuesday", expectedFindCommand);
+        assertParseSuccess(parser, " n/\n Alice1 \n \t Bob  \t d/Monday     Tuesday", expectedFindCommand);
 
         // swapped order of arguments
-        assertParseSuccess(parser, " d/Monday Tuesday n/Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " d/Monday Tuesday n/Alice1 Bob", expectedFindCommand);
     }
 
 

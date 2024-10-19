@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -201,15 +200,17 @@ public class ParserUtil {
     public static Set<String> parseNameStrings(Collection<String> nameStrings) throws ParseException {
         requireNonNull(nameStrings);
 
-        // Ensure names are not null and split by whitespace, then filter out empty strings
-        Set<String> nameStringsSet = nameStrings.stream()
-                .flatMap(name -> Set.of(name.split("\\s+")).stream()) // Split each name by whitespace
-                .filter(name -> !name.isEmpty()) // Filter out empty results
-                .collect(Collectors.toSet()); // Collect into a Set to ensure uniqueness
 
         HashSet<String> nameSet = new HashSet<>();
-        for (String name : nameStringsSet) {
-            nameSet.add(name);
+
+        for (String nameString : nameStrings) {
+            // Split by whitespace
+            String[] names = nameString.split("\\s+");
+            for (String name : names) {
+                if (!name.isEmpty()) { // Filter out empty names
+                    nameSet.add(name); // Add to set to ensure uniqueness
+                }
+            }
         }
         return nameSet;
     }
@@ -223,18 +224,17 @@ public class ParserUtil {
     public static Set<Days> parseDays(Collection<String> days) throws ParseException {
         requireNonNull(days);
 
-        // Ensure names are not null and split by whitespace, then filter out empty strings
-        Set<String> dayStringsSet = days.stream()
-                .flatMap(day -> Set.of(day.split("\\s+")).stream()) // Split each name by whitespace
-                .filter(day -> !day.isEmpty()) // Filter out empty results
-                .collect(Collectors.toSet()); // Collect into a Set to ensure uniqueness
-
-        // Convert the set of day strings to a set of Days
         HashSet<Days> daySet = new HashSet<>();
-        for (String day : dayStringsSet) {
-            daySet.add(parseDay(day));
-        }
 
+        for (String dayString : days) {
+            // Split by whitespace
+            String[] dayStrings = dayString.split("\\s+");
+            for (String day : dayStrings) {
+                if (!day.isEmpty()) { // Filter out empty day strings
+                    daySet.add(parseDay(day)); // Convert and add to the set
+                }
+            }
+        }
         return daySet;
     }
 

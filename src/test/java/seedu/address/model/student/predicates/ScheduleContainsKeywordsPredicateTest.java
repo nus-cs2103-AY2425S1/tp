@@ -49,12 +49,12 @@ public class ScheduleContainsKeywordsPredicateTest {
         Collection<Days> firstPredicateKeywordList = Collections.singletonList(Days.MONDAY);
 
         ScheduleContainsKeywordsPredicate predicate = new ScheduleContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(predicate.test(new StudentBuilder().withSchedule("Alice Bob").build()));
+        assertTrue(predicate.test(new StudentBuilder().withSchedule("Monday-1000-2000").build()));
 
         // Multiple keywords
         Collection<Days> secondPredicateKeywordList = Arrays.asList(Days.MONDAY, Days.TUESDAY);
         predicate = new ScheduleContainsKeywordsPredicate(secondPredicateKeywordList);
-        assertTrue(predicate.test(new StudentBuilder().withSchedule("Alice Bob").build()));
+        assertTrue(predicate.test(new StudentBuilder().withSchedule("Monday-1000-2000").build()));
     }
 
     @Test

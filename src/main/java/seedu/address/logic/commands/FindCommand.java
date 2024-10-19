@@ -2,14 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+import java.util.Objects;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.student.Student;
 import seedu.address.model.student.predicates.AttributeContainsKeywordsPredicate;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Finds and lists all students in address book whose name contains any of the argument keywords.
@@ -28,7 +27,7 @@ public class FindCommand extends Command {
             + "and displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie" + " d/monday tuesday";
 
-    public static final String MESSAGE_NO_PARAMETERS = "At least one field to find must be provided.";
+    public static final String MESSAGE_NO_PARAMETERS = "At least one field to find must be provided.\n" + MESSAGE_USAGE;
     public static final String MESSAGE_NO_NAME_KEYWORDS = "At least one name keyword to find must be provided.";
     public static final String MESSAGE_NO_SCHEDULE_KEYWORDS = "At least one schedule keyword to find must be provided.";
     private final List<AttributeContainsKeywordsPredicate<?>> predicates;
@@ -57,12 +56,11 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicates.equals(otherFindCommand.predicates);
+        return Objects.equals(predicates, otherFindCommand.predicates);
     }
 
     @Override
     public String toString() {
-        System.out.println(new ToStringBuilder(this));
         String str = new ToStringBuilder(this)
                 .add("predicates", predicates)
                 .toString();
@@ -72,6 +70,6 @@ public class FindCommand extends Command {
 
     @Override
     public int hashCode() {
-        return predicates.hashCode();
+        return Objects.hash(predicates);
     }
 }

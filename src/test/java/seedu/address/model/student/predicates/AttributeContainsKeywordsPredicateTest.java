@@ -6,11 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.student.Student;
-
-
-
 
 class AttributeContainsKeywordsPredicateTest {
 

@@ -1,6 +1,7 @@
 package seedu.address.model.student.predicates;
 
 import java.util.Collection;
+import java.util.Objects;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -33,11 +34,16 @@ public class NameContainsKeywordsPredicate extends AttributeContainsKeywordsPred
         }
 
         NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return getKeywords().equals(otherNameContainsKeywordsPredicate.getKeywords());
+        return Objects.equals(getKeywords(), otherNameContainsKeywordsPredicate.getKeywords());
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("keywords", getKeywords()).toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getKeywords());
     }
 }

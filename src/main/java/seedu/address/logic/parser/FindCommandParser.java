@@ -56,23 +56,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_PARAMETERS));
         }
         return new FindCommand(predicates);
-
-//
-//        if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
-//            List<String> dayKeywords = argMultimap.getAllValues(PREFIX_DAY);
-//            Collection<Days> days = parseDaysForFind(dayKeywords);
-//            predicates.add(new ScheduleContainsKeywordsPredicate(days));
-//        }
-//        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-//            List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
-//            Collection<String> names = parseNameStringsForFind(nameKeywords);
-//            predicates.add(new NameContainsKeywordsPredicate(names));
-//
-//        }
-
-
-
-
     }
 
     /**
