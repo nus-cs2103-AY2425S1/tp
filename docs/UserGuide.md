@@ -137,8 +137,11 @@ Just type: `delete INDEX`
 * Ensure the `INDEX` is a **positive integer**. (We wouldn't want any negative or decimal people right?!)
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* If you type `list` followed by `delete 2` it will delete the 2nd student from your current list.
+* Or if you search`find /n Nic` followed by `delete 1`, it will delete the 1st student named Nic!
+
+Easy stuff right! If you managed to delete the student successfully you should see something similar to this!
+
 
 ### Clearing all entries : `clear`
 
