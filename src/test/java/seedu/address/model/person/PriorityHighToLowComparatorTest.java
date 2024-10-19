@@ -12,6 +12,7 @@ public class PriorityHighToLowComparatorTest {
         PriorityHighToLowComparator highToLowComparator = new PriorityHighToLowComparator();
         PriorityLowToHighComparator lowToHighComparator = new PriorityLowToHighComparator();
 
+        assertTrue(highToLowComparator.equals(highToLowComparator));
         assertTrue(highToLowComparator.equals(new PriorityHighToLowComparator()));
         assertFalse(highToLowComparator.equals(lowToHighComparator));
         assertFalse(highToLowComparator.equals(null));
