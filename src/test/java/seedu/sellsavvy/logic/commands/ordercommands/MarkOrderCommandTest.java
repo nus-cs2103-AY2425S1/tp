@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FOURTH_PERSON;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
 import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -18,6 +19,7 @@ import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 public class MarkOrderCommandTest {
@@ -27,7 +29,7 @@ public class MarkOrderCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
-        Person personToMarkOrderUnder = model.getFilteredPersonList().get(3);
+        Person personToMarkOrderUnder = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
         model.updateSelectedPerson(personToMarkOrderUnder);
     }
 
@@ -36,11 +38,12 @@ public class MarkOrderCommandTest {
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(INDEX_FIRST_ORDER);
 
         Model expectedModel = model.createCopy();
-        Order orderToBeMarked = expectedModel.getFilteredPersonList().get(3)
+        Order orderToBeMarked = expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased())
                 .getOrderList().get(INDEX_FIRST_ORDER.getZeroBased());
         Order markedOrder = MarkOrderCommand.createMarkedOrder(orderToBeMarked);
 
-        expectedModel.getFilteredPersonList().get(3).getOrderList().setOrder(orderToBeMarked, markedOrder);
+        expectedModel.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased()).getOrderList()
+                .setOrder(orderToBeMarked, markedOrder);
         String expectedMessage = String.format(MarkOrderCommand.MESSAGE_MARK_ORDER_SUCCESS,
                 Messages.format(markedOrder));
 
@@ -49,7 +52,7 @@ public class MarkOrderCommandTest {
 
     @Test
     public void execute_invalidIndexOrderList_throwsCommandException() {
-        Person person = model.getFilteredPersonList().get(3);
+        Person person = model.getFilteredPersonList().get(INDEX_FOURTH_PERSON.getZeroBased());
         model.updateSelectedPerson(person);
         Index outOfBoundIndex = Index.fromOneBased(person.getOrderList().size() + 1);
         MarkOrderCommand markOrderCommand = new MarkOrderCommand(outOfBoundIndex);
@@ -63,6 +66,19 @@ public class MarkOrderCommandTest {
         model.updateSelectedPerson(null);
 
         assertCommandFailure(markOrderCommand, model, Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_orderAlreadyMarked_throwsCommandException() {
+        Index targetIndex = INDEX_FIRST_ORDER;
+        MarkOrderCommand markOrderCommand = new MarkOrderCommand(targetIndex);
+
+        // mark the first order
+        OrderList orderList = model.getSelectedPerson().get().getOrderList();
+        Order order = orderList.get(targetIndex.getZeroBased());
+        orderList.setOrder(order, MarkOrderCommand.createMarkedOrder(order));
+
+        assertCommandFailure(markOrderCommand, model, MarkOrderCommand.MESSAGE_ORDER_ALREADY_MARKED);
     }
 
     @Test

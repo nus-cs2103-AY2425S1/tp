@@ -191,20 +191,20 @@ Examples:
 * `deleteOrder 1` deletes the order with index 1 from the selected person.
 * `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
 
-### Mark an order as complete : `markOrder`
+### Mark an order as completed : `markOrder`
 
 Marks an order under the person whose orders are displayed as complete.
 
 Format: `markOrder ORDER_INDEX`
 
 * A person's order list must be selected using `listOrder` before marking an order from that person.
-* Marks an order under the selected person at the specified `ORDER_INDEX` as complete.
+* Marks an order under the selected person at the specified `ORDER_INDEX` as completed.
 * The order index refers to the index number shown in the **displayed order list**.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `markOrder 1` marks the order with index 1 from the displayed order list as complete.
-* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as complete.
+* `markOrder 1` marks the order with index 1 from the displayed order list as completed.
+* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
 
 ### Clearing all entries : `clear`
 
@@ -266,5 +266,5 @@ Action                | Format, Examples
 **Add an order**                | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
 **List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
 **Delete an order**             | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
-**Mark an order as complete**   | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
+**Mark an order as completed**  | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
 **Help**                        | `help`
