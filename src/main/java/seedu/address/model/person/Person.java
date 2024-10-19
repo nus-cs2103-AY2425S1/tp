@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.car.Car;
 import seedu.address.model.issue.Issue;
@@ -28,6 +30,7 @@ public class Person {
 
     private final Set<Issue> issues = new HashSet<>();
 
+    private final Logger logger = LogsCenter.getLogger(Person.class);
     /**
      * Every field must be present and not null.
      */
@@ -39,7 +42,7 @@ public class Person {
         this.address = address;
         this.issues.addAll(issues);
         this.car = null;
-        System.out.println("Person without car created");
+        logger.info("Person without car created");
     }
 
     /**
@@ -59,7 +62,7 @@ public class Person {
         this.address = address;
         this.car = car;
         this.issues.addAll(issues);
-        System.out.println("Person with car created" + car);
+        logger.info("Person with car created" + car);
     }
 
     public Name getName() {
