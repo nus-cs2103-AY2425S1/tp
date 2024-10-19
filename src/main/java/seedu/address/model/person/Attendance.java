@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Attendance {
 
-    public static final String MESSAGE_CONSTRAINTS = "Attendance must be either present (true) or absent (false).";
+    public static final String MESSAGE_CONSTRAINTS = "Attendance must be in date format: dd/MM/yy.";
     public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/\\d{2}$";
 
     public final LocalDate attendanceDate;
@@ -29,7 +29,7 @@ public class Attendance {
     /**
      * Returns true if a given string is a valid attendance status (either true or false).
      */
-    public static Boolean isValidAttendance(String test) {
+    public static boolean isValidAttendance(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
