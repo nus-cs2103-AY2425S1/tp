@@ -35,7 +35,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_SUBJECT = BENSON.getSubject().toString();
     private static final String VALID_SCHEDULE = BENSON.getSchedule().value;
     private static final String VALID_RATE = BENSON.getRate().toString();
-    private static final String VALID_PAID = BENSON.getPaid().toString();
+    private static final String VALID_PAID = BENSON.getPaidAmount().toString();
     private static final String VALID_OWED_AMOUNT = BENSON.getOwedAmount().toString();
 
     @Test

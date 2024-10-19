@@ -68,7 +68,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editStudentDescriptor.setRate(ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get()));
         }
         if (argMultimap.getValue(PREFIX_PAID_AMOUNT).isPresent()) {
-            editStudentDescriptor.setPaid(ParserUtil.parsePaid(argMultimap.getValue(PREFIX_PAID_AMOUNT).get()));
+            editStudentDescriptor.setPaid(ParserUtil.parsePaidAmount(argMultimap.getValue(PREFIX_PAID_AMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_OWED_AMOUNT).isPresent()) {
             editStudentDescriptor.setOwedAmount(ParserUtil.parseOwedAmount(

@@ -24,7 +24,7 @@ public class IncomeCommandTest {
         model.addStudent(validStudent);
         CommandResult commandResult = new IncomeCommand().execute(model);
 
-        String expectedOutput = "Total PaidAmount: " + validStudent.getPaid().value
+        String expectedOutput = "Total PaidAmount: " + validStudent.getPaidAmount().value
                 + "   Total Owed: " + validStudent.getOwedAmount().value;
 
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);

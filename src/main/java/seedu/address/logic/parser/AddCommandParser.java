@@ -58,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         PaidAmount paidAmount = null;
         OwedAmount owedAmount = null;
         if (argMultimap.getValue(PREFIX_PAID_AMOUNT).isPresent()) {
-            paidAmount = ParserUtil.parsePaid(argMultimap.getValue(PREFIX_PAID_AMOUNT).get());
+            paidAmount = ParserUtil.parsePaidAmount(argMultimap.getValue(PREFIX_PAID_AMOUNT).get());
         } else {
             paidAmount = new PaidAmount();
         }

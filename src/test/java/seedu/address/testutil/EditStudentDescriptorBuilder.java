@@ -39,7 +39,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setSchedule(student.getSchedule());
         descriptor.setSubject(student.getSubject());
         descriptor.setRate(student.getRate());
-        descriptor.setPaid(student.getPaid());
+        descriptor.setPaid(student.getPaidAmount());
         descriptor.setOwedAmount(student.getOwedAmount());
     }
 

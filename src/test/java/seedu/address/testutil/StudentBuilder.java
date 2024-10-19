@@ -62,7 +62,7 @@ public class StudentBuilder {
         schedule = studentToCopy.getSchedule();
         subject = studentToCopy.getSubject();
         rate = studentToCopy.getRate();
-        paidAmount = studentToCopy.getPaid();
+        paidAmount = studentToCopy.getPaidAmount();
         owedAmount = studentToCopy.getOwedAmount();
     }
 

@@ -63,7 +63,7 @@ class JsonAdaptedStudent {
         schedule = source.getSchedule().value;
         subject = source.getSubject().toString();
         rate = source.getRate().toString();
-        paidAmount = source.getPaid().toString();
+        paidAmount = source.getPaidAmount().toString();
         owedAmount = source.getOwedAmount().toString();
     }
 

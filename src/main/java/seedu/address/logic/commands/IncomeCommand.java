@@ -18,14 +18,14 @@ public class IncomeCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        double totalOwed = 0;
-        double totalPaid = 0;
+        double totalOwedAmount = 0;
+        double totalPaidAmount = 0;
         ObservableList<Student> studentList = model.getFilteredStudentList();
 
         for (Student student: studentList) {
-            totalOwed += student.getOwedAmount().value;
-            totalPaid += student.getPaid().value;
+            totalOwedAmount += student.getOwedAmount().value;
+            totalPaidAmount += student.getPaidAmount().value;
         }
-        return new CommandResult("Total PaidAmount: " + totalPaid + "   Total Owed: " + totalOwed);
+        return new CommandResult("Total PaidAmount: " + totalPaidAmount + "   Total Owed: " + totalOwedAmount);
     }
 }

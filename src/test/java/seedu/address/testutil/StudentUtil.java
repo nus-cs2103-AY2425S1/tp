@@ -45,7 +45,7 @@ public class StudentUtil {
         sb.append(PREFIX_SCHEDULE + student.getSchedule().value + " ");
         sb.append(PREFIX_SUBJECT + student.getSubject().toString() + " ");
         sb.append(PREFIX_RATE + student.getRate().toString() + " ");
-        sb.append(PREFIX_PAID_AMOUNT + student.getPaid().toString() + " ");
+        sb.append(PREFIX_PAID_AMOUNT + student.getPaidAmount().toString() + " ");
         sb.append(PREFIX_OWED_AMOUNT + student.getOwedAmount().toString() + " ");
         return sb.toString();
     }

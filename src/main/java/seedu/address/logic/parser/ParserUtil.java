@@ -140,18 +140,18 @@ public class ParserUtil {
         return new Rate(trimmedRate);
     }
     /**
-     * Parses a {@code String paid} into a {@code PaidAmount}
+     * Parses a {@code String paidAmount} into a {@code PaidAmount}
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code paid} is invalid.
+     * @throws ParseException if the given {@code paidAmount} is invalid.
      */
-    public static PaidAmount parsePaid(String paid) throws ParseException {
-        requireNonNull(paid);
-        String trimmedPaid = paid.trim();
-        if (!PaidAmount.isValidPaidAmount(trimmedPaid)) {
+    public static PaidAmount parsePaidAmount(String paidAmount) throws ParseException {
+        requireNonNull(paidAmount);
+        String trimmedPaidAmount = paidAmount.trim();
+        if (!PaidAmount.isValidPaidAmount(trimmedPaidAmount)) {
             throw new ParseException(PaidAmount.MESSAGE_CONSTRAINTS);
         }
-        return new PaidAmount(trimmedPaid);
+        return new PaidAmount(trimmedPaidAmount);
     }
 
     /**

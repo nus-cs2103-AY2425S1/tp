@@ -127,7 +127,7 @@ public class EditCommand extends Command {
         Schedule updatedSchedule = editStudentDescriptor.getSchedule().orElse(studentToEdit.getSchedule());
         Subject updatedSubject = editStudentDescriptor.getSubject().orElse(studentToEdit.getSubject());
         Rate updatedRate = editStudentDescriptor.getRate().orElse(studentToEdit.getRate());
-        PaidAmount updatedPaidAmount = editStudentDescriptor.getPaid().orElse(studentToEdit.getPaid());
+        PaidAmount updatedPaidAmount = editStudentDescriptor.getPaid().orElse(studentToEdit.getPaidAmount());
         OwedAmount updatedOwedAmount = editStudentDescriptor.getOwedAmount().orElse(studentToEdit.getOwedAmount());
 
         return new Student(

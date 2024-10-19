@@ -69,7 +69,7 @@ public class Student {
     public Rate getRate() {
         return rate;
     }
-    public PaidAmount getPaid() {
+    public PaidAmount getPaidAmount() {
         return paidAmount;
     }
 
