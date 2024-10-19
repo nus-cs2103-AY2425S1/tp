@@ -12,6 +12,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.tag.PersonTag;
+import seedu.address.model.tag.PersonTagType;
+import seedu.address.model.tag.PropertyTag;
+import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,8 +58,17 @@ public class SampleDataUtil {
      */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Tag::new)
+                .map(tagName -> {
+                    if (PersonTagType.isValidPersonTag(tagName)) {
+                        return new PersonTag(tagName);
+                    } else if (PropertyTagType.isValidPropertyTag(tagName)) {
+                        return new PropertyTag(tagName);
+                    } else {
+                        return new Tag(tagName);
+                    }
+                })
                 .collect(Collectors.toSet());
     }
+
 
 }
