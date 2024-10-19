@@ -19,7 +19,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.PersonTag;
-import seedu.address.model.tag.PropertyTag;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -34,7 +33,8 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "Buyer";
-    private static final String VALID_TAG_2 = "HDB";
+    private static final String VALID_TAG_2 = "Landlord";
+    private static final String VALID_TAG_3 = "HDB";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -188,7 +188,7 @@ public class ParserUtilTest {
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new PersonTag(VALID_TAG_1),
-                new PropertyTag(VALID_TAG_2)));
+                new PersonTag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

@@ -16,8 +16,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.PersonTag;
 import seedu.address.model.tag.PersonTagType;
-import seedu.address.model.tag.PropertyTag;
-import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,8 +118,6 @@ public class ParserUtil {
 
         if (PersonTagType.isValidPersonTag(trimmedTag)) {
             return new PersonTag(trimmedTag);
-        } else if (PropertyTagType.isValidPropertyTag(trimmedTag)) {
-            return new PropertyTag(trimmedTag);
         } else {
             throw new ParseException(Tag.TAG_CONSTRAINTS);
         }

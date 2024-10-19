@@ -43,7 +43,8 @@ public class AddCommand extends Command {
     public static final String HELP_ADD_COMMAND = "Add Command \n"
             + "- Format: add n/NAME p/NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARK]\n"
             + "- Example: add n/John Doe p/12345678 t/Student\n"
-            + "- Items in the [square brackets] are optional and can be input in any order!";
+            + "- Items in the [square brackets] are optional and can be input in any order!"
+            + "- Only the following tags may be added: Buyer, Seller, Landlord, Tenant";
     private final Person toAdd;
 
     /**
