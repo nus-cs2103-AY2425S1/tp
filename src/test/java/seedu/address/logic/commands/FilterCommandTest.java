@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -31,16 +32,18 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        Set<Tag> expectedTags = new HashSet<>();
-        expectedTags.add(new Tag("friend"));
-        FilterCommand filterFirstCommand = new FilterCommand("first", null);
-        FilterCommand filterSecondCommand = new FilterCommand(null, expectedTags);
+        Set<String> firstNames = new HashSet<>(Arrays.asList("first"));
+        Set<String> secondNames = new HashSet<>(Arrays.asList("second"));
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friend")));
+
+        FilterCommand filterFirstCommand = new FilterCommand(firstNames, new HashSet<>());
+        FilterCommand filterSecondCommand = new FilterCommand(secondNames, tags);
 
         // same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
 
         // same values -> returns true
-        FilterCommand filterFirstCommandCopy = new FilterCommand("first", null);
+        FilterCommand filterFirstCommandCopy = new FilterCommand(firstNames, new HashSet<>());
         assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
 
         // different types -> returns false
@@ -53,70 +56,74 @@ public class FilterCommandTest {
         assertFalse(filterFirstCommand.equals(filterSecondCommand));
     }
 
-    // Test case for filtering using name only
     @Test
     public void execute_nameKeyword_personsFound() {
-        Set<Tag> expectedTags = new HashSet<>();
-        String expectedMessage = FilterCommand.constructSuccessMessage("Meier", expectedTags);
-        FilterCommand command = new FilterCommand("Meier", expectedTags);
+        Set<String> names = new HashSet<>(Arrays.asList("Meier"));
+        String expectedMessage = FilterCommand.constructSuccessMessage(names, new HashSet<>());
+        FilterCommand command = new FilterCommand(names, new HashSet<>());
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
-    // Test case for filtering using tag only
     @Test
     public void execute_tagKeyword_personsFound() {
-        Set<Tag> expectedTags = new HashSet<>();
-        expectedTags.add(new Tag("owesMoney"));
-        String expectedMessage = FilterCommand.constructSuccessMessage(null, expectedTags);
-        FilterCommand command = new FilterCommand(null, expectedTags);
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("owesMoney")));
+        String expectedMessage = FilterCommand.constructSuccessMessage(new HashSet<>(), tags);
+        FilterCommand command = new FilterCommand(new HashSet<>(), tags);
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
 
-    // Test case for filtering using both name and tags
     @Test
     public void execute_nameAndTagKeywords_personsFound() {
-        Set<Tag> expectedTags = new HashSet<>();
-        expectedTags.add(new Tag("friends"));
-        String expectedMessage = FilterCommand.constructSuccessMessage("Meier", expectedTags);
-        FilterCommand command = new FilterCommand("Meier", expectedTags);
+        Set<String> names = new HashSet<>(Arrays.asList("Meier"));
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("friends")));
+        String expectedMessage = FilterCommand.constructSuccessMessage(names, tags);
+        FilterCommand command = new FilterCommand(names, tags);
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
     }
 
-    // Test case for when there is no one after filtering
     @Test
     public void execute_noMatchingNameOrTag_allPersonsReturned() {
+        Set<String> names = new HashSet<>(Arrays.asList("Damith"));
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("2103")));
         String expectedMessage = FilterCommand.MESSAGE_NO_CONTACT_FOUND;
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("2103"));
-        FilterCommand command = new FilterCommand("Damith", tags);
+        FilterCommand command = new FilterCommand(names, tags);
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
-    // Test case to test partial string filtering
     @Test
     public void execute_partialNameMatch_personsFound() {
-        Set<Tag> expectedTags = new HashSet<>();
-        String expectedMessage = FilterCommand.constructSuccessMessage("er", expectedTags);
-        FilterCommand command = new FilterCommand("er", expectedTags);
+        Set<String> names = new HashSet<>(Arrays.asList("er"));
+        String expectedMessage = FilterCommand.constructSuccessMessage(names, new HashSet<>());
+        FilterCommand command = new FilterCommand(names, new HashSet<>());
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(BENSON, DANIEL, ELLE), model.getFilteredPersonList());
     }
 
     @Test
+    public void execute_multipleNames_personsFound() {
+        Set<String> names = new HashSet<>(Arrays.asList("Meier", "Kurz"));
+        String expectedMessage = FilterCommand.constructSuccessMessage(names, new HashSet<>());
+        FilterCommand command = new FilterCommand(names, new HashSet<>());
+        CommandResult result = command.execute(model);
+        assertEquals(expectedMessage, result.getFeedbackToUser());
+        assertEquals(Arrays.asList(BENSON, CARL, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("client"));
-        FilterCommand filterCommand = new FilterCommand("John", tags);
-        String expected = FilterCommand.class.getCanonicalName() + "{name=John, tags=[[client]]}";
+        Set<String> names = new HashSet<>(Arrays.asList("John", "Doe"));
+        Set<Tag> tags = new HashSet<>(Arrays.asList(new Tag("client")));
+        FilterCommand filterCommand = new FilterCommand(names, tags);
+        String expected = FilterCommand.class.getCanonicalName() + "{names=[John, Doe], tags=[[client]]}";
         assertEquals(expected, filterCommand.toString());
     }
 }

@@ -26,32 +26,30 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_NO_CONTACT_FOUND = "No contacts match the filter criteria.";
 
-    private final String name;
+    private final Set<String> names;
     private final Set<Tag> tags;
 
     /**
      * Constructs a FilterCommand.
      *
-     * @param name The name to filter by.
+     * @param names The set of name to filter by.
      * @param tags The set of tags to filter by.
      */
-    public FilterCommand(String name, Set<Tag> tags) {
-        this.name = name;
+    public FilterCommand(Set<String> names, Set<Tag> tags) {
+        this.names = names;
         this.tags = tags;
     }
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
         Predicate<Person> predicate = person -> {
-            // Check if the person's name matches the filter name (if provided)
-            boolean nameMatches = name == null || name.isEmpty()
-                    || person.getName().toString().toLowerCase().contains(name.toLowerCase());
+            // Check if the person's name matches any of the filter names (if provided)
+            boolean nameMatches = names.isEmpty() || names.stream()
+                    .anyMatch(name -> person.getName().toString().toLowerCase().contains(name.toLowerCase()));
 
             // Check if the person's tags contain all filter tags (if provided)
-            boolean tagsMatch = tags.isEmpty()
-                    || person.getTags().containsAll(tags);
+            boolean tagsMatch = tags.isEmpty() || person.getTags().containsAll(tags);
 
             return nameMatches && tagsMatch;
         };
@@ -65,23 +63,27 @@ public class FilterCommand extends Command {
             return new CommandResult(MESSAGE_NO_CONTACT_FOUND);
         }
 
-        return new CommandResult(constructSuccessMessage(name, tags));
+        return new CommandResult(constructSuccessMessage(names, tags));
     }
 
     /**
      * Constructs the success message based on the name and tags.
      */
-    public static String constructSuccessMessage(String name, Set<Tag> tags) {
+    public static String constructSuccessMessage(Set<String> names, Set<Tag> tags) {
         StringBuilder messageBuilder = new StringBuilder("Displaying filtered results: ");
-        if (name != null && !name.isEmpty()) {
-            messageBuilder.append("Name: ").append(name).append(" ");
+
+        if (!names.isEmpty()) {
+            String namesString = String.join(", ", names);
+            messageBuilder.append("Names: ").append(namesString).append(" ");
         }
+
         if (!tags.isEmpty()) {
             String tagsString = tags.stream()
                     .map(tag -> tag.tagName)
                     .collect(Collectors.joining(", "));
-            messageBuilder.append("Tags: ").append(tagsString).append(" ");
+            messageBuilder.append("Tags: ").append(tagsString);
         }
+
         return messageBuilder.toString().trim();
     }
 
@@ -97,8 +99,8 @@ public class FilterCommand extends Command {
 
         FilterCommand otherCommand = (FilterCommand) other;
 
-        boolean isNameEqual = (name == null && otherCommand.name == null)
-                || (name != null && name.equals(otherCommand.name));
+        boolean isNameEqual = (names == null && otherCommand.names == null)
+                || (names != null && names.equals(otherCommand.names));
 
         boolean isTagsEqual = (tags == null && otherCommand.tags == null)
                 || (tags != null && tags.equals(otherCommand.tags));
@@ -109,7 +111,7 @@ public class FilterCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
+                .add("names", names)
                 .add("tags", tags)
                 .toString();
     }
