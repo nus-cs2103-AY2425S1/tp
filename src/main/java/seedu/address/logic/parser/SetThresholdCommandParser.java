@@ -16,7 +16,8 @@ import seedu.address.model.product.ProductName;
 public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
     public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a positive integer";
-    public static  final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static  final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces, " +
+            "and it should not be blank";
     /**
      * Parses the given {@code String} of arguments in the context of the SetThresholdCommand
      * and returns an SetThresholdCommand object for execution.
@@ -57,4 +58,3 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
     }
 
 }
-
