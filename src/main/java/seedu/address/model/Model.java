@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.appointment.Appointment;
@@ -73,6 +74,8 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    void addPerson(Person person, int index);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -87,6 +90,7 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

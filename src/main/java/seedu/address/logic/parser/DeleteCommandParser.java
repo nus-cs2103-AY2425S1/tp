@@ -6,6 +6,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.Arrays;
+
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
@@ -27,7 +29,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 }
             }
             Index[] indexes = new Index[size];
+            int[] intArr = new int[size];
 
+            //convert string indexes to int indexes and sort int indexes in ascending order
+            for (int i = 0; i < size; i++) {
+                intArr[i] = Integer.parseInt(arr[i].trim());
+            }
+            Arrays.sort(intArr);
+            //convert sorted int arr back into str arr to be parsed
+            for (int i = 0; i < size; i++) {
+                arr[i] = String.valueOf(intArr[i]);
+            }
             for (int i = 0; i < size; i++) {
                 indexes[i] = ParserUtil.parseIndex(arr[i]);
             }

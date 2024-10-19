@@ -73,6 +73,10 @@ public class DeleteCommand extends Command {
         return personsToDelete;
     }
 
+    public Index[] getTargetIndexes() {
+        return targetIndexes;
+    }
+
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;

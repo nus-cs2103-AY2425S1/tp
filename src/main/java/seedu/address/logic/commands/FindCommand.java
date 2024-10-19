@@ -8,6 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -39,6 +42,8 @@ public class FindCommand extends Command {
     private final List<String> names;
     private final List<String> addresses;
     private final List<String> priorities;
+    private Predicate<Person> finalPredicate;
+    private ObservableList<Person> beforeFilterList;
 
     /**
      * Creates a FindCommand to filter the address book by the given lists of
@@ -55,7 +60,7 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        Predicate<Person> finalPredicate = person -> true; // default starting predicate
+        finalPredicate = person -> true; // default starting predicate
 
         if (!this.names.isEmpty()) {
             finalPredicate = finalPredicate.and(new NameContainsKeywordsPredicate(names));
@@ -68,7 +73,6 @@ public class FindCommand extends Command {
         if (!this.priorities.isEmpty()) {
             finalPredicate = finalPredicate.and(new PriorityPredicate(priorities));
         }
-
         model.updateFilteredPersonList(finalPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
@@ -78,6 +82,7 @@ public class FindCommand extends Command {
     public String getCommandWord() {
         return COMMAND_WORD;
     }
+
 
     @Override
     public boolean equals(Object other) {

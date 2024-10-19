@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -14,6 +16,7 @@ import seedu.address.model.person.Person;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
@@ -69,13 +72,14 @@ public class UndoCommand extends Command {
                 DeleteCommand dltCommand = (DeleteCommand) latestCommand;
                 ArrayList<Person> personsToAddBack = dltCommand.getPersonsToDelete();
                 for (int i = 0; i < personsToAddBack.size(); i++) {
-                    model.addPerson(personsToAddBack.get(i));
+                    model.addPerson(personsToAddBack.get(i), dltCommand.getTargetIndexes()[i].getZeroBased());
                 }
                 pastCommands.remove(pastCommands.size() - 1);
                 break;
             case "find":
 
-            case "clear":
+                break;
+             case "clear":
                 ClearCommand clearCommand = (ClearCommand) latestCommand;
                 model.setAddressBook(clearCommand.getModel().getAddressBook());
                 model.setUserPrefs(clearCommand.getModel().getUserPrefs());
