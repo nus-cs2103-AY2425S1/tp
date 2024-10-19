@@ -10,7 +10,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
-public class ViewCommand extends Command{
+/**
+ * Views the full profile of a patient in the database.
+ */
+public class ViewCommand extends Command {
+
     public static final String MESSAGE_ARGUMENTS = "View: %2$s, Nric: %1$s";
     public static final String COMMAND_WORD = "view";
     public static final String MESSAGE_VIEW_SUCCESS = "Here are the patient details.";
@@ -60,7 +64,7 @@ public class ViewCommand extends Command{
         }
 
         ViewCommand e = (ViewCommand) other;
-            return nric.equals(e.nric);
+        return nric.equals(e.nric);
     }
 
     private String generateSuccessMessage(Person person) {

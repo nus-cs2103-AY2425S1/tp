@@ -33,7 +33,7 @@ public class ApptCommand extends Command {
 
     /**
      * @param dateTime of the appointment
-     * @param name of the person
+     * @param nric of the person
      */
     public ApptCommand(LocalDateTime dateTime, Nric nric) {
         requireAllNonNull(dateTime, nric);
@@ -66,7 +66,7 @@ public class ApptCommand extends Command {
         // Check for duplicate appointments
         boolean hasDuplicate = person.getAppts().stream()
             .anyMatch(appt -> appt.getDateTime().toLocalDate().equals(dateTime.toLocalDate()));
-        
+
         if (hasDuplicate) {
             throw new CommandException(MESSAGE_DUPLICATE_APPT);
         }
