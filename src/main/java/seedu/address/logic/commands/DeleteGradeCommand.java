@@ -52,10 +52,9 @@ public class DeleteGradeCommand extends Command {
             throw new CommandException("The person index provided is invalid.");
         }
 
-
         final Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        Grade gradeToDelete = personToEdit.getGradeList().getGrade(this.testName);
+        Grade gradeToDelete = personToEdit.getGrade(this.testName);
         if (gradeToDelete == null) {
             throw new CommandException(String.format(MESSAGE_GRADE_NOT_FOUND, testName));
         }
