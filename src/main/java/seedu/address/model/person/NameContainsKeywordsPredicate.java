@@ -10,19 +10,21 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final String keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public NameContainsKeywordsPredicate(String keywords) {
+        this.keywords = keywords.toLowerCase();
     }
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        Name name = person.getName();
+        String fullName = name.fullName;
+        fullName = fullName.toLowerCase();
+        return fullName.startsWith(this.keywords);
     }
 
-    @Override
+     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;

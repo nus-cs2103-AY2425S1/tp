@@ -43,10 +43,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
 
-            String[] nameKeywords = args.split("\\s+");
-            List<String> nameKeywordsList = Arrays.asList(nameKeywords);
             NameContainsKeywordsPredicate predicate =
-                    new NameContainsKeywordsPredicate(nameKeywordsList);
+                    new NameContainsKeywordsPredicate(args);
             return new DeleteCommand(predicate);
 
 
