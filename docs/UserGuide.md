@@ -129,13 +129,12 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+You can remove a student from your list easily! Here's how to do it: 
 
-Format: `delete INDEX`
+Just type: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The `INDEX` is the position of the person your looking at to delete in your current list. Like 1, 2, 3, …​
+* Ensure the `INDEX` is a **positive integer**. (We wouldn't want any negative or decimal people right?!)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
