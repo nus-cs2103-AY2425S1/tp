@@ -1,13 +1,6 @@
 package seedu.address.model.event;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.exceptions.EventNotFoundException;
-import seedu.address.model.event.exceptions.EventException;
-import seedu.address.model.person.Person;
 
 /**
  * Wraps all {@code Event} and abstracts away
@@ -26,15 +19,33 @@ public class EventManager implements ReadOnlyEventManager {
     }
 
     // Minimal Functions needed to deal with Events
-    public void addEvent(Event e) {
-        this.eventList.add(e);
+
+    /**
+     * Adds an event into the event list.
+     *
+     * @param event A event to be added.
+     */
+    public void addEvent(Event event) {
+        this.eventList.add(event);
     }
 
-    public void removeEvent(Event e) {
+    /**
+     * Removes an event from the event list.
+     *
+     * @param event An event to be removed.
+     */
+    public void removeEvent(Event event) {
         // probably need to add a check here
-        this.eventList.remove(e);
+        this.eventList.remove(event);
     }
 
+    /**
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the event list.
+     *
+     * @param target The event to be replaced.
+     * @param editedEvent The event that replaces the target.
+     */
     public void setEvent(Event target, Event editedEvent) {
         this.eventList.setEvent(target, editedEvent);
     }
