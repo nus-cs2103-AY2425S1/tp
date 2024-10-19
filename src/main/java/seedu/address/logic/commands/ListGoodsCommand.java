@@ -41,4 +41,19 @@ public class ListGoodsCommand extends Command {
         // USE THE LIST FOR UI
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListGoodsCommand)) {
+            return false;
+        }
+
+        ListGoodsCommand otherListGoodsCommand = (ListGoodsCommand) other;
+        return predicate.equals(otherListGoodsCommand.predicate);
+    }
 }

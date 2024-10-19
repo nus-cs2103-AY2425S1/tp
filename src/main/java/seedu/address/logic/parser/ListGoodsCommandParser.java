@@ -39,16 +39,16 @@ public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
         Predicate<GoodsReceipt> predicate = null;
 
         // check for the three optional inputs and chain if needed
-        if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
-            GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
-            Predicate<GoodsReceipt> catPredicate = new CategoryPredicate(category);
-            predicate = (predicate == null) ? catPredicate : predicate.and(catPredicate);
-        }
         if (arePrefixesPresent(argMultimap, PREFIX_GOODS_NAME)) {
             // Allow for partial matches here
             String matchName = argMultimap.getValue(PREFIX_GOODS_NAME).get();
             Predicate<GoodsReceipt> goodsNamePredicate = new GoodsNamePredicate(matchName);
             predicate = (predicate == null) ? goodsNamePredicate : predicate.and(goodsNamePredicate);
+        }
+        if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY)) {
+            GoodsCategories category = ParserUtil.parseGoodsCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+            Predicate<GoodsReceipt> categoryPredicate = new CategoryPredicate(category);
+            predicate = (predicate == null) ? categoryPredicate : predicate.and(categoryPredicate);
         }
         if (arePrefixesPresent(argMultimap, PREFIX_NAME)) {
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
