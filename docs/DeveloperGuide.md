@@ -158,11 +158,11 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] View Client feature
+### View Client feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
+The View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
 * `ViewClientCommandPasrse#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
 * `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
@@ -206,12 +206,13 @@ The following activity diagram summarizes what happens when a user executes a `v
   * Pros: Easy to implement, possible to extend the feature to open multiple windows for multiple different clients in the future.
   * Cons: Fussy users may prefer to view client details within one `MATER` Main Window.
 
+
 * **Alternative 2:** Displays Client details on the `MATER` Main Window.
   * Pros: Will only ever have one window for the whole application.
   * Cons: List of clients will be replaced by the Client details, extra effort to list Clients again.
 
 
-### \[Proposed\] Check in/ out feature
+### Check in/ out feature
 
 _{Explain here how the check in/out feature will be implemented}_
 
