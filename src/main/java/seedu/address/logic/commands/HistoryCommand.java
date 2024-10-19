@@ -71,6 +71,9 @@ public class HistoryCommand extends Command {
             throw new CommandException(Messages.MESSAGE_EMPTY_CALL_HISTORY);
         }
 
+        if (callHistory.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_CALL_HISTORY);
+        }
         model.updateDisplayedList(callHistory);
 
         return new CommandResult(String.format(MESSAGE_SHOW_HISTORY_SUCCESS, personFound.getName()));

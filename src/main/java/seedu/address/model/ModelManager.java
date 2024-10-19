@@ -174,7 +174,9 @@ public class ModelManager implements Model {
     public void updateDisplayedList(ContactRecordList callHistory) {
         requireNonNull(callHistory);
         displayedCallHistory.clear();
-        displayedCallHistory.addAll(callHistory);
+        for (int i = callHistory.size() - 1; i >= 0; i--) {
+            displayedCallHistory.add(callHistory.get(i));
+        }
     }
 
     /**
