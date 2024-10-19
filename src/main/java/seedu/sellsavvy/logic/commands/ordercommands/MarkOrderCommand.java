@@ -58,7 +58,7 @@ public class MarkOrderCommand extends Command {
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 
-    private static Order createMarkedOrder(Order order) {
+    public static Order createMarkedOrder(Order order) {
         assert order != null;
 
         Item item = order.getItem();
@@ -87,7 +87,7 @@ public class MarkOrderCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("order index", index)
+                .add("index", index)
                 .toString();
     }
 }

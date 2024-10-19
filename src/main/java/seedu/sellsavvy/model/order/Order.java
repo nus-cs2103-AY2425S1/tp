@@ -78,7 +78,8 @@ public class Order {
         Order otherOrder = (Order) other;
         return item.equals(otherOrder.item)
                 && count.equals(otherOrder.count)
-                && date.equals(otherOrder.date);
+                && date.equals(otherOrder.date)
+                && status.equals(otherOrder.status);
     }
 
     @Override
