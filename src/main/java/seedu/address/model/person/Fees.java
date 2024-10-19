@@ -15,9 +15,9 @@ public class Fees {
     public final String value;
 
     /**
-     * Constructs an {@code Payment}.
+     * Constructs an {@code Fees}.
      *
-     * @param balance Boolean for payment status
+     * @param balance String for payment status
      */
     public Fees(String balance) {
         requireNonNull(balance);
@@ -25,7 +25,7 @@ public class Fees {
     }
 
     /**
-     * Returns true if a given string is a valid payment status (either true or false).
+     * Returns true if a given string is a valid fees status (either true or false).
      */
     public static Boolean isValidFees(String test) {
         return test.matches(VALIDATION_REGEX);
