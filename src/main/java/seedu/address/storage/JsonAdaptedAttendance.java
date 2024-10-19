@@ -22,6 +22,10 @@ public class JsonAdaptedAttendance {
         this.hasAttended = hasAttended;
     }
 
+    public JsonAdaptedAttendance(Attendance source) {
+        hasAttended = source.hasAttended();
+    }
+
     /**
      * Converts this Jackson-friendly adapted attendance object into the model's {@code Attendance} object.
      */

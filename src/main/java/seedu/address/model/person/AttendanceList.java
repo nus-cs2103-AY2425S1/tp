@@ -68,6 +68,15 @@ public class AttendanceList {
         return new AttendanceList(attendanceList);
     }
 
+    /**
+     * Returns a copy of the map from {@code LocalDateTime} to {@code Attendance} in this {@code AttendanceList}
+     *
+     * @return A map from {@code LocalDateTime} to {@code Attendance} representing all the attendances.
+     */
+    public Map<LocalDateTime, Attendance> getMap() {
+        return new TreeMap<>(attendanceList);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

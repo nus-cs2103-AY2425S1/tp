@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("grades") List<JsonAdaptedGrade> grades,
-            @JsonProperty("attendances") Map<String, JsonAdaptedAttendance> attendances) {
+            @JsonProperty("attendances") Map<LocalDateTime, JsonAdaptedAttendance> attendances) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +57,9 @@ class JsonAdaptedPerson {
         }
         if (grades != null) {
             this.grades.addAll(grades);
+        }
+        if (attendances != null) {
+            this.attendances.putAll(attendances);
         }
     }
 
@@ -74,6 +77,8 @@ class JsonAdaptedPerson {
         grades.addAll(source.getGradeList().getList().stream() // Convert GradeList to JSON
                               .map(JsonAdaptedGrade::new)
                               .collect(Collectors.toList()));
+        attendances.putAll(source.getAttendanceList().getMap().entrySet().stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> new JsonAdaptedAttendance(e.getValue()))));
     }
 
     /**
