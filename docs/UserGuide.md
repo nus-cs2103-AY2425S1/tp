@@ -140,7 +140,10 @@ Examples:
 * If you type `list` followed by `delete 2` it will delete the 2nd student from your current list.
 * Or if you search`find /n Nic` followed by `delete 1`, it will delete the 1st student named Nic!
 
-Easy stuff right! If you managed to delete the student successfully you should see something similar to this!
+Expected Results: 
+* Easy-peasy! If you managed to delete the student you should see something similar to this!
+![result for 'delete 2'](images/delete_success.png)
+
 
 
 ### Clearing all entries : `clear`
