@@ -31,27 +31,27 @@ public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withSchedule("Sunday-1800-1900").withSubject("Economics")
+            .withPhone("94351253").withSchedule("Monday-1800-1900").withSubject("Economics")
             .withRate("250.50").withPaid("0").withOwedAmount("250.50").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
-            .withEmail("johnd@example.com").withPhone("98765432").withSchedule("Monday-1800-1900")
+            .withEmail("johnd@example.com").withPhone("98765432").withSchedule("Tuesday-1800-1900")
             .withSubject("Mathematics").withRate("100.80").withPaid("201.6").withOwedAmount("0").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withSchedule("Tuesday-1800-1900").withSubject("Mathematics").withRate("300")
+            .withSchedule("Wednesday-1800-1900").withSubject("Mathematics").withRate("300")
             .withPaid("1200").withOwedAmount("900").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
-            .withSchedule("Wednesday-1800-1900").withSubject("Mathematics").withRate("450.5")
+            .withSchedule("Thursday-1800-1900").withSubject("Mathematics").withRate("450.5")
             .withPaid("450.5").withOwedAmount("901.00").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withPhone("94802224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withSchedule("Thursday-1800-1900").withSubject("Mathematics").withRate("350")
+            .withSchedule("Friday-1800-1900").withSubject("Mathematics").withRate("350")
             .withPaid("2800").withOwedAmount("0").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("94824270")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withSchedule("Friday-1800-1900").withSubject("Mathematics").withRate("260.25")
+            .withSchedule("Saturday-1800-1900").withSubject("Mathematics").withRate("260.25")
             .withPaid("0").withOwedAmount("520.50").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("94824420")
             .withEmail("anna@example.com").withAddress("4th street").withSchedule("Saturday-1800-1900")
@@ -59,10 +59,10 @@ public class TypicalStudents {
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withPhone("84820424")
-            .withEmail("stefan@example.com").withAddress("little india").withSchedule("Sunday-1800-1900")
+            .withEmail("stefan@example.com").withAddress("little india").withSchedule("Saturday-1800-1900")
             .withSubject("Science").withRate("200").withPaid("8000").withOwedAmount("1000").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withPhone("84820131")
-            .withEmail("hans@example.com").withAddress("chicago ave").withSchedule("Monday-1800-1900")
+            .withEmail("hans@example.com").withAddress("chicago ave").withSchedule("Saturday-1800-1900")
             .withSubject("Economics").withRate("450").withPaid("900").withOwedAmount("900").build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}

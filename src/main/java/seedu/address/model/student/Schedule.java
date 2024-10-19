@@ -117,6 +117,15 @@ public class Schedule {
                 && otherSchedule.startTimeValue.isBefore(endTimeValue);
     }
 
+    /**
+     * Determines whether this schedule is on the specified day.
+     * @param day The day to check against.
+     * @return True if this schedule is on the specified day.
+     */
+    public boolean isOn(Days day) {
+        return dayValue == day;
+    }
+
     @Override
     public String toString() {
         return dayValue + " " + startTimeValue + " - " + endTimeValue;

@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +25,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
+import seedu.address.model.student.predicates.ScheduleContainsKeywordsPredicate;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
@@ -106,19 +109,31 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
+        // keywords for each prefix
+        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> dayKeywords = Arrays.asList("Monday", "Tuesday", "Wednesday");
 
-    @Test
-    public void parseCommand_findRandomCase() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD_RANDOM_CASE + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        // Collection of keyword for day
+        List<Days> daySet = Arrays.asList(Days.MONDAY, Days.TUESDAY, Days.WEDNESDAY);
+
+        // Predicates for prefixes
+        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        ScheduleContainsKeywordsPredicate dayPredicate = new ScheduleContainsKeywordsPredicate(daySet);
+        FindCommand expectedFindCommand = new FindCommand(List.of(namePredicate, dayPredicate));
+
+        // Constructing the input string
+        String nameInput = PREFIX_NAME + String.join(" ", nameKeywords);
+        String dayInput = PREFIX_DAY + String.join(" ", dayKeywords);
+        String userInput = FindCommand.COMMAND_WORD + " " + nameInput + " " + dayInput;
+        String userInputRandomCase = FindCommand.COMMAND_WORD_RANDOM_CASE + " " + nameInput + " " + dayInput;
+
+        // Parsing the input string
+        FindCommand command = (FindCommand) parser.parseCommand(userInput);
+        FindCommand commandRandomCase = (FindCommand) parser.parseCommand(userInputRandomCase);
+
+        // Random case allowed
+        assertEquals(expectedFindCommand, command);
+        assertEquals(expectedFindCommand, commandRandomCase);
     }
 
     @Test

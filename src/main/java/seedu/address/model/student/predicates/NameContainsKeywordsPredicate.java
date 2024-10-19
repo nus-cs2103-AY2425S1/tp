@@ -1,25 +1,24 @@
-package seedu.address.model.student;
+package seedu.address.model.student.predicates;
 
-import java.util.List;
-import java.util.function.Predicate;
+import java.util.Collection;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.student.Student;
 
 /**
  * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Student> {
-    private final List<String> keywords;
+public class NameContainsKeywordsPredicate extends AttributeContainsKeywordsPredicate<String> {
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public NameContainsKeywordsPredicate(Collection<String> keywords) {
+        super(keywords);
     }
 
     @Override
     public boolean test(Student student) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().fullName, keyword));
+        return getKeywords().stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(student.getName().toString(), keyword));
     }
 
     @Override
@@ -34,11 +33,11 @@ public class NameContainsKeywordsPredicate implements Predicate<Student> {
         }
 
         NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return getKeywords().equals(otherNameContainsKeywordsPredicate.getKeywords());
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("keywords", getKeywords()).toString();
     }
 }

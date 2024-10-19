@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.AttributeContainsKeywordsPredicate;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -139,6 +140,18 @@ public class ModelManager implements Model {
     public void updateFilteredStudentList(Predicate<Student> predicate) {
         requireNonNull(predicate);
         filteredStudents.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredStudentList(List<AttributeContainsKeywordsPredicate<?>> predicates) {
+        requireNonNull(predicates);
+
+        Predicate<Student> combinedPredicate = predicates.stream()
+                .map(predicate -> (Predicate<Student>) predicate) // Cast each to Predicate<Student>
+                .reduce(Predicate::or) // combine all predicates using OR
+                .orElse(PREDICATE_SHOW_ALL_STUDENTS); // Default to show all if no predicates are given
+
+        filteredStudents.setPredicate(combinedPredicate);
     }
 
     @Override
