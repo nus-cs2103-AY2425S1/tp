@@ -167,11 +167,29 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                         + DATEOFLASTVISIT_DESC_BOB, new AddCommand(expectedPersonWithoutAddress));
 
+        // no dateOfLastVisit provided
+        Person expectedPersonWithoutDateOfLastVisit = new PersonBuilder(BOB)
+                .withDateOfLastVisit().withTags().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB,
+                new AddCommand(expectedPersonWithoutDateOfLastVisit));
+
         // no email or address provided
         Person expectedPersonWithoutAddressOrEmail = new PersonBuilder(BOB)
                 .withAddress().withEmail().withTags().build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + DATEOFLASTVISIT_DESC_BOB,
                 new AddCommand(expectedPersonWithoutAddressOrEmail));
+
+        // no email or dateOfLastVisit provided
+        Person expectedPersonWithoutEmailOrDateOfLastVisit = new PersonBuilder(BOB)
+                .withEmail().withTags().withDateOfLastVisit().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB,
+                new AddCommand(expectedPersonWithoutEmailOrDateOfLastVisit));
+
+        // no address or dateOfLastVisit provided
+        Person expectedPersonWithoutAddressOrDateOfLastVisit = new PersonBuilder(BOB)
+                .withAddress().withTags().withDateOfLastVisit().build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB,
+                new AddCommand(expectedPersonWithoutAddressOrDateOfLastVisit));
     }
 
     @Test
@@ -185,10 +203,6 @@ public class AddCommandParserTest {
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + DATEOFLASTVISIT_DESC_BOB, expectedMessage);
-
-        // missing dateOfLastVisit prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + VALID_DATEOFLASTVISIT_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
