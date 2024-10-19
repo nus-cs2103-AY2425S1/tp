@@ -79,6 +79,9 @@ public class Messages {
     }
 
     private static void addTags(StringBuilder sb, Person person) {
+        if (person.getTags().isEmpty()) {
+            return;
+        }
         sb.append("; Tags: ");
         person.getTags().forEach(sb::append);
     }
