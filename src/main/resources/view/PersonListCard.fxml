@@ -15,15 +15,10 @@
     </columnConstraints>
     <VBox alignment="CENTER_LEFT" minHeight="50" GridPane.columnIndex="0">
       <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
+        <Insets top="5" right="5" bottom="5" left="5" />
       </padding>
       <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_index_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
+        <Label fx:id="id" styleClass="cell_index_label" />
         <VBox>
           <Label fx:id="name" text="\$first" styleClass="cell_field_label" />
           <Label fx:id="vrn" text="No Car associated to Client" styleClass="cell_field_label"/>

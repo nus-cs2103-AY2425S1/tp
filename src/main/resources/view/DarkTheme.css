@@ -124,7 +124,9 @@
     -fx-font-family: "Segoe UI Black";
     -fx-font-size: 40px;
     -fx-text-fill: #FFFFFF;
-    -fx-padding: 0 20 0 5;
+    -fx-padding: 0 5 0 0;
+    -fx-min-width: 50;
+    -fx-alignment: center;
 }
 
 .cell_field_label {
