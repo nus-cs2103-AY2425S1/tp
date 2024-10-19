@@ -1,9 +1,13 @@
 package seedu.address.storage;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.AttendanceList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -33,6 +38,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedGrade> grades = new ArrayList<>();
+    private final Map<LocalDateTime, JsonAdaptedAttendance> attendances = new HashMap<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,7 +46,8 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("grades") List<JsonAdaptedGrade> grades) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("grades") List<JsonAdaptedGrade> grades,
+            @JsonProperty("attendances") Map<String, JsonAdaptedAttendance> attendances) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -120,8 +127,11 @@ class JsonAdaptedPerson {
         }
         final GradeList modelGradeList = new GradeList(convertedGrades);
 
-        // TODO: Store attendanceList properly
-        final AttendanceList modelAttendancelist = new AttendanceList();
+        final Map<LocalDateTime, Attendance> convertedAttendances = new TreeMap<>();
+        for (Map.Entry<LocalDateTime, JsonAdaptedAttendance> entry : attendances.entrySet()) {
+            convertedAttendances.put(entry.getKey(), entry.getValue().toModelType());
+        }
+        final AttendanceList modelAttendancelist = new AttendanceList(convertedAttendances);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGradeList,
                           modelAttendancelist);
