@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 
 import java.util.stream.Stream;
@@ -10,6 +11,7 @@ import seedu.address.logic.commands.AddPropertyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 
 /**
@@ -25,18 +27,19 @@ public class AddPropertyCommandParser implements Parser<AddPropertyCommand> {
      */
     public AddPropertyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_POSTALCODE, PREFIX_UNITNUMBER);
+                ArgumentTokenizer.tokenize(args, PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_POSTALCODE, PREFIX_UNITNUMBER)
+        if (!arePrefixesPresent(argMultimap, PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPropertyCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POSTALCODE, PREFIX_UNITNUMBER);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_POSTALCODE, PREFIX_UNITNUMBER, PREFIX_TYPE);
         PostalCode postalCode = ParserUtil.parsePostalCode(argMultimap.getValue(PREFIX_POSTALCODE).get());
         Unit unit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNITNUMBER).get());
+        Type type = ParserUtil.parseType(argMultimap.getValue(PREFIX_TYPE).get());
 
-        Property property = new Property(postalCode, unit);
+        Property property = new Property(postalCode, unit, type);
 
         return new AddPropertyCommand(property);
     }

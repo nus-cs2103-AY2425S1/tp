@@ -1,6 +1,7 @@
 {
   "properties": [ {
     "postalCode": "12345",
-    "unit": "88-88"
+    "unit": "88-88",
+    "type": "HDB"
   } ]
 }

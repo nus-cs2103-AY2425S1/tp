@@ -8,6 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; unit is valid as declared in {@link #isValidUnit(String)}.
  */
 public class Unit {
+    public static final Unit DEFAULT_LANDED_UNIT =
+            new Unit("00-00");
     public static final String MESSAGE_CONSTRAINTS =
             "Unit numbers should only contain numbers delimited by a dash, and it should be minimally 2 digits long";
     public static final String VALIDATION_REGEX =

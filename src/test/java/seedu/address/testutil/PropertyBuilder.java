@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -11,9 +12,11 @@ import seedu.address.model.util.SampleDataUtil;
 public class PropertyBuilder {
     public static final String DEFAULT_POSTALCODE = "123456";
     public static final String DEFAULT_UNIT = "08-20";
+    public static final String DEFAULT_TYPE = "CONDO";
 
     private Unit unit;
     private PostalCode postalCode;
+    private Type type;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -21,6 +24,7 @@ public class PropertyBuilder {
     public PropertyBuilder() {
         unit = new Unit(DEFAULT_UNIT);
         postalCode = new PostalCode(DEFAULT_POSTALCODE);
+        type = new Type(DEFAULT_TYPE);
         SampleDataUtil.getSamplePropertyBook();
     }
 
@@ -30,6 +34,7 @@ public class PropertyBuilder {
     public PropertyBuilder(Property propertyToCopy) {
         unit = propertyToCopy.getUnit();
         postalCode = propertyToCopy.getPostalCode();
+        type = propertyToCopy.getType();
     }
 
     /**
@@ -48,7 +53,15 @@ public class PropertyBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Type} of the {@code Property} that we are building.
+     */
+    public PropertyBuilder withType(String type) {
+        this.type = new Type(type);
+        return this;
+    }
+
     public Property build() {
-        return new Property(postalCode, unit);
+        return new Property(postalCode, unit, type);
     }
 }
