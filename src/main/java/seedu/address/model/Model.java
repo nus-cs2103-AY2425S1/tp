@@ -92,6 +92,8 @@ public interface Model {
 
     void removeEvent(Event target);
 
+    void setEvent(Event target, Event editedEvent);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -109,4 +111,5 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
 }
