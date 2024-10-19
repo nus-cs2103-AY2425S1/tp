@@ -7,7 +7,7 @@
     "schedule": "Sunday-1800-1900",
     "subject" : "Mathematics",
     "rate": "250.50",
-    "paid": "0.00",
+    "paidAmount": "0.00",
     "owedAmount": "250.50"
   }, {
     "name": "Alice Pauline",
@@ -17,7 +17,7 @@
     "schedule": "Saturday-1800-1900",
     "subject" : "Mathematics",
     "rate": "250.50",
-    "paid": "0.00",
+    "paidAmount": "0.00",
     "owedAmount": "250.50"
   } ]
 }
