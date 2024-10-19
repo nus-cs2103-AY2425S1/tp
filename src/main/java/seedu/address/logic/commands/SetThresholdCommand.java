@@ -62,4 +62,19 @@ public class SetThresholdCommand extends Command {
                 Messages.format(editedProduct), stockLevel));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SetThresholdCommand)) {
+            return false;
+        }
+
+        SetThresholdCommand otherSetThresholdCommand = (SetThresholdCommand) other;
+        return productName.equals(otherSetThresholdCommand.productName);
+    }
+
 }
