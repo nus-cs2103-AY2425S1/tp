@@ -334,7 +334,7 @@ _Details coming soon ..._
 | **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
 | **Add Grade**    | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
-| **Delete Grade** | `deleteGrade INDEX TEST_NAME` <br> e.g., `delete grade 1 Midterm`                                                                                                     |
+| **Delete Grade** | `deleteGrade INDEX TEST_NAME` <br> e.g., `deleteGrade 1 Midterm`                                                                                                      |
 | **Edit Grade**   | Simply add a new grade with the same test name, and the grade will be updated automatically. <br> e.g., `grade 1 Midterm 90 30`                                       |
 | **List**         | `list`                                                                                                                                                                |
 | **Help**         | `help`                                                                                                                                                                |
