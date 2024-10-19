@@ -97,7 +97,7 @@ public class PersonTest {
         Person alice = new PersonBuilder(ALICE).build();
 
         // Alice currently has no tutorials attended, should return false.
-        assertFalse(alice.hasAttendedTutorial("0"));
+        assertFalse(alice.hasAttendedTutorial("2"));
 
         // Set Alice to have attended tutorial 1, 3, 7.
         alice = new PersonBuilder(ALICE).withTutorials("1", "3", "7").build();

@@ -124,18 +124,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tutorials} into a {@code Set<Tutorial>}.
-     */
-    public static Set<Tutorial> parseTutorials(Collection<String> tutorials) throws ParseException {
-        requireNonNull(tutorials);
-        final Set<Tutorial> tutorialSet = new HashSet<>();
-        for (String tutorial : tutorials) {
-            tutorialSet.add(parseTutorial(tutorial));
-        }
-        return tutorialSet;
-    }
-
-    /**
      * Parses a {@code String studentId} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
