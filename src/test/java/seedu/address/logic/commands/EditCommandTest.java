@@ -176,10 +176,16 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_TWELFTH_PERSON, DESC_AMY)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+
+        final EditCommand employeeStandardCommand = new EditCommand(INDEX_TWELFTH_PERSON, DESC_AMY);
+        // same values -> returns true
+        EditPersonDescriptor employeeCopyDescriptor = new EditPersonDescriptor(DESC_AMY);
+        EditCommand employeeCommandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, employeeCopyDescriptor);
+        assertTrue(standardCommand.equals(employeeCommandWithSameValues));
     }
 
     @Test
