@@ -42,6 +42,7 @@ public class DateTest {
 
         // valid dates
         assertTrue(Date.isValidDate("2024-10-19")); // correct format
+        assertTrue(Date.isValidDate("2020-02-29")); // leap year valid date
     }
 
     @Test

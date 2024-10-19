@@ -1,5 +1,8 @@
 package seedu.address.model.consultation;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
@@ -7,9 +10,10 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
-    
-    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format YYYY-MM-DD";
-    
+
+    public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format YYYY-MM-DD, "
+            + "and must be a valid date (e.g. no month 13 or day 32).";
+
     private final String value;
 
     /**
@@ -29,11 +33,19 @@ public class Date {
     }
 
     /**
-     * Returns true if a given string is a valid date format (YYYY-MM-DD).
+     * Returns true if a given string is a valid date format (YYYY-MM-DD) and represents a real date.
      */
     public static boolean isValidDate(String test) {
-        // A simple regex to check the date format. Can be extended for more rigorous checks.
-        return test.matches("\\d{4}-\\d{2}-\\d{2}");
+        // Define the date format
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            // Parse the date and ensure it's valid
+            LocalDate.parse(test, dateFormatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override

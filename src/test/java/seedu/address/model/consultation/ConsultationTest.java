@@ -110,7 +110,7 @@ public class ConsultationTest {
         students.add(student1);
         Consultation consultation = new Consultation(validDate, validTime, students);
 
-        String expected = String.format("Consultation[date=%s, time=%s, students=%s]", 
+        String expected = String.format("Consultation[date=%s, time=%s, students=%s]",
                                         validDate.toString(), validTime.toString(), students.toString());
 
         assertEquals(expected, consultation.toString());

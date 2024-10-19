@@ -1,5 +1,8 @@
 package seedu.address.model.consultation;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
@@ -8,8 +11,9 @@ import java.util.Objects;
  */
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:MM";
-    
+    public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:MM, "
+            + "where hour is between 00 and 23, and minute between 00 and 59.";
+
     private final String value;
 
     /**
@@ -29,11 +33,19 @@ public class Time {
     }
 
     /**
-     * Returns true if a given string is a valid time format (HH:MM).
+     * Returns true if a given string is a valid time format (HH:MM) and represents a real time.
      */
     public static boolean isValidTime(String test) {
-        // A simple regex to check time format. Can be extended for more rigorous checks.
-        return test.matches("\\d{2}:\\d{2}");
+        // Define the time format
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        try {
+            // Parse the time and ensure it's valid
+            LocalTime.parse(test, timeFormatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
