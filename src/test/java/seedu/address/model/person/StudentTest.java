@@ -64,7 +64,7 @@ public class StudentTest {
     @Test
     public void getSubjectString_validSubject_returnsSubjectString() {
         Student student = new StudentBuilder().withSubject("Mathematics").build();
-        assertEquals("Mathematics", student.getSubjectString());
+        assertEquals("[Mathematics]", student.getSubjectString());
     }
 
     @Test

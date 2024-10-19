@@ -143,16 +143,16 @@ public class TeacherTest {
     public void getSubjectString_validSubject_returnsSubjectString() {
         Teacher teacher = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("12345678"),
                 new Email("johndoe@hotmail.com"), new Address("123 Main St"),
-                SampleDataUtil.getTagSet("Friends"), new Subject("Math"),
+                SampleDataUtil.getTagSet("Friends"), SampleDataUtil.getSubjectSet("Math"),
                 SampleDataUtil.getClassSet("1A"));
-        assertEquals("Math", teacher.getSubjectString());
+        assertEquals("[Math]", teacher.getSubjectString());
     }
 
     @Test
     public void getClassesString_validClasses_returnsClassesString() {
         Teacher teacher = new Teacher(new Name("John Doe"), new Gender("male"), new Phone("12345678"),
                 new Email("johndoe@hotmail.com"), new Address("123 Main St"),
-                SampleDataUtil.getTagSet("Friends"), new Subject("Math"),
+                SampleDataUtil.getTagSet("Friends"), SampleDataUtil.getSubjectSet("Math"),
                 SampleDataUtil.getClassSet("1A", "2B"));
         assertEquals("1A, 2B", teacher.getClassesString());
     }
