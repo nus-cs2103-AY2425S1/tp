@@ -29,8 +29,8 @@ public class ListExpiringPoliciesCommand extends Command {
     private static final String MESSAGE_SUCCESS = "The following policies are near expiry:\n\n";
     private static final String MESSAGE_NO_EXPIRING_POLICY = "No policies expiring within the next 30 days!";
     private static final String MESSAGE_FAILURE = "Failed to retrieve expiring policies. Please try again.";
-    private static final String MESSAGE_POLICY_LISTED_DETAILS = "Insuree phone: %1$s\nPolicy Type: %2$s\n"
-            + "Premium Amount: %3$.2f\nCoverage Amount: %4$.2f\nExpiry Date: %5$s\n\n";
+    private static final String MESSAGE_POLICY_LISTED_DETAILS = "Insuree name: %1$s   |   Insuree phone: %2$s\n"
+            + "Policy Type: %3$s   |   Premium Amount: %4$.2f\nCoverage Amount: %5$.2f   |   Expiry Date: %6$s\n\n";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -39,30 +39,25 @@ public class ListExpiringPoliciesCommand extends Command {
         try {
             LocalDate currentDate = LocalDate.now();
 
-            // Create a predicate to filter policies expiring within the next 30 days
             PolicyExpiryDatePredicate predicate = new PolicyExpiryDatePredicate(currentDate);
 
-            // Retrieve all persons from the model
             List<Person> persons = model.getFilteredPersonList();
 
-            // StringBuilder to hold the result message
             StringBuilder resultMessage = new StringBuilder(MESSAGE_SUCCESS);
 
             boolean hasExpiringPolicies = false;
 
-            // Iterate over all persons and their policies
             for (Person person : persons) {
                 Set<Policy> policies = person.getPolicies();
 
                 // Filter the policies based on expiry date predicate
                 for (Policy policy : policies) {
                     if (predicate.test(policy)) {
-                        // At least one expiring policy exists
                         hasExpiringPolicies = true;
 
-                        // Append the policy details to the result message
                         resultMessage.append(String.format(
                                 MESSAGE_POLICY_LISTED_DETAILS,
+                                person.getName().toString(),
                                 person.getPhone().toString(),
                                 policy.getType().toString(),
                                 policy.getPremiumAmount(),
