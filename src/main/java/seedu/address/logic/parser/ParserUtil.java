@@ -141,7 +141,8 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dateOfLastVisit} is invalid.
      */
-    public static Optional<DateOfLastVisit> parseDateOfLastVisit(Optional<String> dateOfLastVisit) throws ParseException {
+    public static Optional<DateOfLastVisit> parseDateOfLastVisit(Optional<String> dateOfLastVisit)
+            throws ParseException {
         requireNonNull(dateOfLastVisit);
 
         if (dateOfLastVisit.isEmpty()) {
