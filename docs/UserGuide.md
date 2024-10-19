@@ -257,7 +257,7 @@ Updates the details of an existing task in a student's task list.
 
 ### Viewing all tasks
 
-Views all tasks, sorted by students.
+Views all tasks, organized by student.
 
 **Format:** `viewtasks`
 
@@ -267,7 +267,8 @@ Views a specific student on the right side window.
 
 **Format:** `view n/NAME`
 
-**Example:** `view n/John Doe`
+**Examples:**
+* `view n/John Doe`
 
 ### Exiting EduManage
 
