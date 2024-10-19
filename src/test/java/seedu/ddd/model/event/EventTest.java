@@ -20,10 +20,8 @@ public class EventTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        ArrayList<Client> clients = new ArrayList<>();
-        ArrayList<Vendor> vendors = new ArrayList<>();
-        assertThrows(NullPointerException.class, () -> new Event(null, vendors));
-        assertThrows(NullPointerException.class, () -> new Event(clients, vendors));
+        assertThrows(NullPointerException.class, () -> new Event(null, null, null));
+        //assertThrows(NullPointerException.class, () -> new Event());
     }
 
     @Test
@@ -47,8 +45,8 @@ public class EventTest {
         vendorList2.add(BENSON);
         assertNotEquals(vendorList1, vendorList2);
 
-        Event event1 = new Event(clientList1, vendorList1);
-        Event event2 = new Event(clientList2, vendorList2);
+        Event event1 = new Event(clientList1, vendorList1, dummyDescription);
+        Event event2 = new Event(clientList2, vendorList2, dummyDescription);
 
         assertEquals(event1, event2);
     }
