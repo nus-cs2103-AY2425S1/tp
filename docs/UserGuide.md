@@ -148,7 +148,7 @@ Common Errors:
 * I know it can be hard to learn a new command but don't worry I got you!
 * 9 out of 10 times the error you are facing is due to incorrect `INDEX` being used. 
 * I'll tell you the exact error in the application itself so just keep a look our for it here is an example!
-
+![result for delete fail](images/delete_fail.png)
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
