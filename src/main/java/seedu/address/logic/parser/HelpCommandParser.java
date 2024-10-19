@@ -8,8 +8,10 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.StatisticsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -54,6 +56,14 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case ListCommand.COMMAND_WORD:
             message = ListCommand.MESSAGE_USAGE;
+            break;
+
+        case StatisticsCommand.COMMAND_WORD:
+            message = StatisticsCommand.MESSAGE_USAGE;
+            break;
+
+        case GetCommand.COMMAND_WORD:
+            message = GetCommand.MESSAGE_USAGE;
             break;
 
         case ExitCommand.COMMAND_WORD:
