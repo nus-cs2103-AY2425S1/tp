@@ -3,9 +3,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,9 +20,13 @@
       <HBox spacing="0.5" alignment="CENTER_LEFT">
         <Label fx:id="id" styleClass="cell_index_label" />
         <VBox>
+          <padding>
+            <Insets right="15"/>
+          </padding>
           <Label fx:id="name" text="\$first" styleClass="cell_field_label" />
           <Label fx:id="vrn" text="No Car associated to Client" styleClass="cell_field_label"/>
         </VBox>
+        <Label fx:id="isServicing" text="Checked-In" styleClass="isServicing_label"/>
       </HBox>
     </VBox>
   </GridPane>

@@ -135,6 +135,21 @@
     -fx-text-fill: #FFFFFF;
 }
 
+.isServicing_label {
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-padding: 5px 5px 5px 5px;
+    -fx-background-color: #573088;
+    -fx-background-radius: 10;
+    -fx-font-size: 13px;
+}
+
+.isServicing_label:hover {
+    -fx-background-color: #472078;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
 
 /* The Enter Command Here Container Styling */
 .stack-pane {
