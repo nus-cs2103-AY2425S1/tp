@@ -1,17 +1,14 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
-import static seedu.sellsavvy.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.CollectionUtil;
@@ -21,14 +18,10 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
+import seedu.sellsavvy.model.order.Count;
+import seedu.sellsavvy.model.order.Date;
+import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.order.OrderList;
-import seedu.sellsavvy.model.person.Address;
-import seedu.sellsavvy.model.person.Email;
-import seedu.sellsavvy.model.person.Name;
-import seedu.sellsavvy.model.person.Person;
-import seedu.sellsavvy.model.person.Phone;
-import seedu.sellsavvy.model.tag.Tag;
 
 /**
  * Edits the details of an existing order in the address book.
@@ -50,7 +43,7 @@ public class EditOrderCommand extends Command {
 
     public static final String MESSAGE_EDIT_ORDER_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ORDER = "Note: "
+    public static final String MESSAGE_DUPLICATE_ORDER_WARNING = "Note: "
             + "This customer already has an order for this item"
             + ", verify if this is a mistake\n";
 
@@ -59,7 +52,7 @@ public class EditOrderCommand extends Command {
 
     /**
      * @param index of the order in the filtered order list to edit
-     * @param editOrderDescriptor details to edit the person with
+     * @param editOrderDescriptor details to edit the order with
      */
     public EditOrderCommand(Index index, EditOrderDescriptor editOrderDescriptor) {
         requireNonNull(index);
@@ -72,43 +65,43 @@ public class EditOrderCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        //TODO after Sutong fix his law of demeter for his part I will do this as well. Too many parallel branch now.
-        Person selectedPerson = model.getSelectedPerson().get();
-        //TODO change to filterable list depending on how kx implement
-        List<Order> lastShownList = selectedPerson.getOrderUnmodifiableObservableList();
+        List<Order> lastShownList = model.getFilteredOrderList();
+
+        if (lastShownList == null) {
+            throw new CommandException(MESSAGE_ORDERLIST_DOES_NOT_EXIST);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_ORDER_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editOrderDescriptor);
+        Order orderToEdit = lastShownList.get(index.getZeroBased());
+        Order editedOrder = createEditedOrder(orderToEdit, editOrderDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        String feedbackToUser = !orderToEdit.isSameOrder(editedOrder) && lastShownList.contains(orderToEdit)
+                ? MESSAGE_DUPLICATE_ORDER_WARNING
+                : "";
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+        model.setOrder(index, editedOrder);
+        //TODO after filtrerable list is impelemeted by kx
+        //model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_ORDER_SUCCESS, Messages.format(editedOrder)));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Order} with the details of {@code orderToEdit}
+     * edited with {@code editOrderDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Order createEditedOrder(Order orderToEdit, EditOrderDescriptor editOrderDescriptor) {
+        assert orderToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        // edit command does not allow editing person's order list
-        OrderList updatedOrderList = personToEdit.getOrderList();
+        Item updatedItem = editOrderDescriptor.getItem().orElse(orderToEdit.getItem());
+        Count updatedQuantity = editOrderDescriptor.getQuantity().orElse(orderToEdit.getCount());
+        Date updatedDate = editOrderDescriptor.getDate().orElse(orderToEdit.getDate());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedOrderList);
+        Order orderToReturn =  new Order(updatedItem, updatedQuantity, updatedDate);
+        //TODO mark as completed if needed after ky has been merged
+        return orderToReturn;
     }
 
     @Override
@@ -118,20 +111,20 @@ public class EditOrderCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditPersonCommand)) {
+        if (!(other instanceof EditOrderCommand)) {
             return false;
         }
 
-        EditPersonCommand otherEditPersonCommand = (EditPersonCommand) other;
-        return index.equals(otherEditPersonCommand.index)
-                && editPersonDescriptor.equals(otherEditPersonCommand.editPersonDescriptor);
+        EditOrderCommand otherEditOrderCommand = (EditOrderCommand) other;
+        return index.equals(otherEditOrderCommand.index)
+                && editOrderDescriptor.equals(otherEditOrderCommand.editOrderDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editOrderDescriptor", editOrderDescriptor)
                 .toString();
     }
 
@@ -140,81 +133,53 @@ public class EditOrderCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditOrderDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
-        private Set<Tag> tags;
+        private Item item;
+        private Date date;
+        private Count quantity;
 
-        public EditPersonDescriptor() {}
+        public EditOrderDescriptor() {
+        }
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+        public EditOrderDescriptor(EditOrderDescriptor toCopy) {
+            setItem(toCopy.item);
+            setDate(toCopy.date);
+            setQuantity(toCopy.quantity);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(item, date, quantity);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setItem(Item item) {
+            this.item = item;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<Item> getItem() {
+            return Optional.ofNullable(item);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setQuantity(Count quantity) {
+            this.quantity = quantity;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Count> getQuantity() {
+            return Optional.ofNullable(quantity);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setDate(Date date) {
+            this.date = date;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Date> getDate() {
+            return Optional.ofNullable(date);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
-        }
-
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
 
         @Override
         public boolean equals(Object other) {
@@ -223,26 +188,22 @@ public class EditOrderCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditOrderDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            EditOrderDescriptor otherEditOrderDescriptor = (EditOrderDescriptor) other;
+            return Objects.equals(item, otherEditOrderDescriptor.item)
+                    && Objects.equals(date, otherEditOrderDescriptor.date)
+                    && Objects.equals(quantity, otherEditOrderDescriptor.quantity);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
+                    .add("item", item)
+                    .add("quantity", quantity)
+                    .add("date", date)
                     .toString();
         }
     }

@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.sellsavvy.commons.core.GuiSettings;
 import seedu.sellsavvy.commons.core.LogsCenter;
+import seedu.sellsavvy.commons.core.index.Index;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
 import seedu.sellsavvy.model.person.Person;
 
 /**
@@ -150,6 +153,20 @@ public class ModelManager implements Model {
     @Override
     public void updateSelectedPerson(Person person) {
         selectedPerson.set(person);
+    }
+
+    @Override
+    public Person getSelectedPerson2() {
+        return selectedPerson.get();
+    }
+
+    @Override
+    public ObservableList<Order> getFilteredOrderList() {
+        //TODO change implementation after kx merge
+        if (getSelectedPerson2() == null) {
+            return null;
+        }
+        return getSelectedPerson2().getOrderUnmodifiableObservableList();
     }
 
     @Override
