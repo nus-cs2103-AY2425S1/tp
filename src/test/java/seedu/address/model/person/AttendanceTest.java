@@ -33,7 +33,7 @@ public class AttendanceTest {
     void isValidAttendance_validInput_success() {
         // Valid inputs
         assertTrue(Attendance.isValidAttendance("12/12/2024"));
-        assertTrue(Attendance.isValidAttendance("31/12/2024"));
+        assertTrue(Attendance.isValidAttendance(" 31/12/2024 "));
     }
 
     @Test
@@ -49,6 +49,7 @@ public class AttendanceTest {
         assertFalse(Attendance.isValidAttendance("30/12/")); // missing year
         assertFalse(Attendance.isValidAttendance("//2024")); // missing day & month
         assertFalse(Attendance.isValidAttendance("//")); // missing field
+        assertFalse(Attendance.isValidAttendance("1 Jan")); // non-numerical input
         assertFalse(Attendance.isValidAttendance("")); // empty string
         assertFalse(Attendance.isValidAttendance(" ")); // spaces only
     }
