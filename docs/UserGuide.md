@@ -188,7 +188,23 @@ Shows a list of all students in the address book.
 
 ### Tagging a Student
 
+Allows tagging a student by their level and subject. A student must have a level assigned before they can be tagged with a subject.
+
+**Format:** `tag n/NAME [l/level] [s/SUBJECT]…​`
+
+**Examples:**
+* `tag n/John Doe l/S3 s/ENGLISH`
+* `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a `level` assigned previously
+
 ### Recording Notes
+
+Records a note for the specified student.
+
+**Format:** `note n/NAME nt/NOTES`
+
+**Examples:**
+* `note n/John Doe nt/Doing well in all subjects`
+* `note n/Jane Smith nt/Struggling with trigonometry`
 
 ### Clearing All Contacts
 
@@ -198,7 +214,7 @@ Clears all entries from the address book.
 
 ### Viewing Help
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -217,6 +233,13 @@ Adds a task to the task list of the specified student.
 * `addtask n/Jane Smith t/Handle MC d/2024-02-13`
 
 ### Deleting a task
+
+Deletes a task from the specified student's task list.
+
+**Format:** `deletetask n/NAME ti/TASK_INDEX`
+
+**Examples:**
+* `deletetask n/John Doe ti/1`
 
 ### Updating a Task
 
