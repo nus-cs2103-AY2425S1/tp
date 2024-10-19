@@ -5,7 +5,6 @@ import java.util.Comparator;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PriorityHighToLowComparator;
 
 /**
  * Sorts all Persons by priority
@@ -25,7 +24,6 @@ public class SortByPriorityCommand extends Command {
     private final Comparator<Person> comparator;
 
     /**
-     *
      * @param comparator comparator to be used to sort persons
      */
     public SortByPriorityCommand(Comparator<Person> comparator) {
