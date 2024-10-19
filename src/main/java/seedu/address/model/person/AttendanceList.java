@@ -65,7 +65,7 @@ public class AttendanceList {
         }
         Map<LocalDateTime, Attendance> newAttendanceList = new TreeMap<>(attendanceList);
         newAttendanceList.remove(date);
-        return new AttendanceList(attendanceList);
+        return new AttendanceList(newAttendanceList);
     }
 
     /**
