@@ -164,7 +164,7 @@ public class Lesson {
     }
 
     /**
-     *
+     * @return A string with only day and time
      */
     public String dayTimeString() {
         return this.toString().replace("[", "").replace("]", "");
@@ -177,16 +177,22 @@ public class Lesson {
     public static class LessonComparator implements Comparator<Lesson> {
 
         /**
-         * Compares two {@code Lesson} objects by their start times.
+         * Compares two {@code Lesson} objects first by their day of the week and then by their start times.
+         *
+         * <p>If the lessons occur on different days, the comparison is based on the day of the week.
+         * If the lessons occur on the same day, the comparison is based on their start times.</p>
          *
          * @param o1 The first {@code Lesson} to compare.
          * @param o2 The second {@code Lesson} to compare.
-         * @return A negative integer, zero, or a positive integer as the start time of the
-         *         first {@code Lesson} is less than, equal to, or greater than the start time
-         *         of the second {@code Lesson}.
+         * @return If first {@code Lesson} is smaller than, equals to or greater than second {@code Lesson}
          */
         @Override
         public int compare(Lesson o1, Lesson o2) {
+            int dayComparison = o1.lessonDay.compareTo(o2.lessonDay);
+            if (dayComparison != 0) {
+                return dayComparison;
+            }
+
             return o1.startTime.compareTo(o2.startTime);
         }
     }
