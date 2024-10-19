@@ -26,6 +26,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.YEAR_DESC_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NETID;
@@ -93,10 +94,11 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + STUDENTID_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + MAJOR_DESC_AMY
+                validExpectedPersonString + STUDENTID_DESC_AMY + EMAIL_DESC_AMY
+                        + NAME_DESC_AMY + MAJOR_DESC_AMY
                         + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_STUDENTID,
-                        PREFIX_NETID, PREFIX_MAJOR));
+                        PREFIX_NETID, PREFIX_MAJOR, PREFIX_GROUP));
 
         // invalid value followed by valid value
 
