@@ -114,6 +114,13 @@ public class ModelManager implements Model {
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
+    /**
+     * Adds person to addressbook at specified index
+     *
+     * @param person person to be added.
+     * @param index position to be added at.
+     */
+    @Override
     public void addPerson(Person person, int index) {
         addressBook.addPerson(person, index);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

@@ -28,7 +28,7 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
-    public static ArrayList<Command> pastCommands = new ArrayList<>();
+    private static ArrayList<Command> pastCommands = new ArrayList<>();
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -90,5 +90,9 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    public static ArrayList<Command> getPastCommands() {
+        return pastCommands;
     }
 }

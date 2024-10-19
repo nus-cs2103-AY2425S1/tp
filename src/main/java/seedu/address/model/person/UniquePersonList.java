@@ -48,6 +48,12 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Adds person to observablelist.
+     *
+     * @param toAdd person to be added.
+     * @param index position to be added it.
+     */
     public void add(Person toAdd, int index) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
