@@ -25,12 +25,12 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withMajor("Computer Science").withEmail("e1234567@u.nus.edu")
-            .withStudentId("A1234567P").withYear("2")
+            .withStudentId("A1234567P").withYear("2").withComment("Shes a very vocal person")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withMajor("Mechanical Engineering")
             .withEmail("e1224567@u.nus.edu").withStudentId("A0000000P")
-            .withYear("1")
+            .withYear("1").withComment("He sleeps in class")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withStudentId("A0100000P")
             .withEmail("e1234467@u.nus.edu").withMajor("Business").withYear("3").build();

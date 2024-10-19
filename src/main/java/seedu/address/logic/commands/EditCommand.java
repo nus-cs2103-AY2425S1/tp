@@ -23,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -106,7 +107,8 @@ public class EditCommand extends Command {
         Major updatedAddress = editPersonDescriptor.getMajor().orElse(personToEdit.getMajor());
         Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
         Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
-        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedGroups, updatedYear);
+        Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
+        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedGroups, updatedYear, updatedComment);
     }
 
     @Override
@@ -144,6 +146,7 @@ public class EditCommand extends Command {
         private Major major;
         private Set<Group> groups;
         private Year year;
+        private Comment comment;
 
         public EditPersonDescriptor() {}
 
@@ -158,6 +161,7 @@ public class EditCommand extends Command {
             setMajor(toCopy.major);
             setTags(toCopy.groups);
             setYear(toCopy.year);
+            setComment(toCopy.comment);
         }
 
         /**
@@ -203,6 +207,13 @@ public class EditCommand extends Command {
         }
         public Optional<Year> getYear() {
             return Optional.ofNullable(year);
+        }
+        public Optional<Comment> getComment() {
+            return Optional.ofNullable(comment);
+        }
+
+        public void setComment(Comment comment) {
+            this.comment = comment;
         }
 
         /**

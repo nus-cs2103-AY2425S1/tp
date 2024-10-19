@@ -20,6 +20,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Year;
+import seedu.address.model.person.Comment;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -64,7 +65,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Set<Group> groupList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_GROUP));
 
-        Person person = new Person(name, studentId, email, major, groupList, year);
+        Comment comment = new Comment("");
+
+        Person person = new Person(name, studentId, email, major, groupList, year, comment);
 
         return new AddCommand(person);
     }

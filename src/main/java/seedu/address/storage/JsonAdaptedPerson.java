@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String major;
     private final String year;
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
+    private final String comment;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -38,12 +40,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("studentId") String studentId,
             @JsonProperty("email") String email, @JsonProperty("major") String major, @JsonProperty("year") String year,
-            @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
+            @JsonProperty("groups") List<JsonAdaptedGroup> groups, @JsonProperty("comment") String comment) {
         this.name = name;
         this.studentId = studentId;
         this.email = email;
         this.major = major;
         this.year = year;
+        this.comment = comment;
         if (groups != null) {
             this.groups.addAll(groups);
         }
@@ -61,6 +64,7 @@ class JsonAdaptedPerson {
         groups.addAll(source.getGroups().stream()
                 .map(JsonAdaptedGroup::new)
                 .collect(Collectors.toList()));
+        comment = source.getComment().value;
     }
 
     /**
@@ -133,8 +137,13 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Year.MESSAGE_CONSTRAINTS);
         }
 
+        if (comment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Comment.class.getSimpleName()));
+        }
+        final Comment modelComment = new Comment(comment);
+
         final Set<Group> modelGroups = new HashSet<>(personGroups);
-        return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear);
+        return new Person(modelName, modelStudentId, modelEmail, modelMajor, modelGroups, modelYear, modelComment);
     }
 
 }
