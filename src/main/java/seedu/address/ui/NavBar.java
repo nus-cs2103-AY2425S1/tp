@@ -1,9 +1,17 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-
+import javafx.util.Duration;
+import seedu.address.model.types.common.DateTime;
 
 /**
  * Represents a navigation bar to toggle between different pages,
@@ -12,12 +20,15 @@ import javafx.scene.layout.HBox;
 public class NavBar extends UiPart<HBox> {
 
     private static final String FXML = "NavBar.fxml";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @FXML
     private Button contactsButton;
 
     @FXML
     private Button eventsButton;
+    @FXML
+    private Label dateTimeLabel;
 
     private final NavHandler navHandler;
 
@@ -30,6 +41,7 @@ public class NavBar extends UiPart<HBox> {
         super(FXML);
         this.navHandler = navHandler;
         initializeButtons();
+        initializeDateTime();
     }
 
     private void initializeButtons() {
@@ -42,6 +54,20 @@ public class NavBar extends UiPart<HBox> {
             navHandler.handleNav("Events");
             setActiveButton(eventsButton);
         });
+    }
+
+    private void initializeDateTime() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateDateTime()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+        updateDateTime(); // Initial display
+    }
+
+    private void updateDateTime() {
+        LocalDateTime now = LocalDateTime.now();
+        String formattedDateTime = DATE_TIME_FORMATTER.format(now);
+        DateTime dateTime = new DateTime(formattedDateTime);
+        dateTimeLabel.setText(dateTime.toString());
     }
 
     public void setActiveButton(Button activeButton) {

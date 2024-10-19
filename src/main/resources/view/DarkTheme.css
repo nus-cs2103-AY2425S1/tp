@@ -386,3 +386,10 @@
     -fx-opacity: 0.5;
     -fx-background-color: derive(#1d1d1d, 30%);
 }
+
+.nav-bar .date-time-label {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-alignment: CENTER_RIGHT;
+}
