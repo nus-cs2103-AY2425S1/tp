@@ -24,6 +24,7 @@ public class PiChartCommand extends Command {
             String classId = person.getClassId().value;
             numOfStudentsInEachClass.put(classId, numOfStudentsInEachClass.getOrDefault(classId, 0) + 1);
         });
+        assert numOfStudentsInEachClass != null : "numOfStudentsInEachClass map should not be null";
         PiChartWindow.setData(numOfStudentsInEachClass);
         return new CommandResult(MESSAGE_SUCCESS, false, true, false);
     }
