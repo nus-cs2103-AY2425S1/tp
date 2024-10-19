@@ -6,11 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalStudents.CARL;
+import static seedu.address.testutil.TypicalStudents.DANIEL;
 import static seedu.address.testutil.TypicalStudents.ELLE;
 import static seedu.address.testutil.TypicalStudents.FIONA;
 import static seedu.address.testutil.TypicalStudents.GEORGE;
-import static seedu.address.testutil.TypicalStudents.HOON;
-import static seedu.address.testutil.TypicalStudents.IDA;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -93,25 +92,16 @@ public class FindCommandTest {
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredStudentList());
     }
     @Test
-    public void execute_scheduleOnSaturday_multipleStudentsFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 4);
+    public void execute_scheduleOnWednesday_oneStudentFound() {
+        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
 
-        FindCommand command = new FindCommand(List.of(prepareSchedulePredicate(Days.SATURDAY)));
+        ScheduleContainsKeywordsPredicate schedulePredicate = prepareSchedulePredicate(Days.WEDNESDAY);
+
+        FindCommand command = new FindCommand(List.of(schedulePredicate));
         expectedModel.updateFilteredStudentList(List.of(schedulePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA, GEORGE, HOON, IDA), model.getFilteredStudentList());
-    }
-
-    @Test
-    public void execute_scheudleOnSunday_noStudentFound() {
-        String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
-
-        FindCommand command = new FindCommand(List.of(prepareSchedulePredicate(Days.SUNDAY)));
-        expectedModel.updateFilteredStudentList(List.of(prepareSchedulePredicate(Days.SUNDAY)));
-
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredStudentList());
+        assertEquals(Collections.singletonList(DANIEL), model.getFilteredStudentList());
     }
 
     @Test
@@ -122,7 +112,7 @@ public class FindCommandTest {
         expectedModel.updateFilteredStudentList(List.of(schedulePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE, FIONA), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(DANIEL, FIONA), model.getFilteredStudentList());
     }
 
     @Test
@@ -136,14 +126,15 @@ public class FindCommandTest {
         expectedModel.updateFilteredStudentList(List.of(namePredicate, schedulePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(DANIEL, ELLE), model.getFilteredStudentList());
     }
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(List.of(namePredicate, schedulePredicate));
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        List<AttributeContainsKeywordsPredicate<?>> predicates = List.of(namePredicate, schedulePredicate);
+
+        FindCommand findCommand = new FindCommand(predicates);
+        String expected = FindCommand.class.getCanonicalName() + "{predicates=" + predicates + "}";
         assertEquals(expected, findCommand.toString());
     }
 

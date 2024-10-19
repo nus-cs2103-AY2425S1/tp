@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -200,11 +201,11 @@ public class ParserUtil {
     public static Set<String> parseNameStrings(Collection<String> nameStrings) throws ParseException {
         requireNonNull(nameStrings);
 
-        final Set<String> nameSet = new HashSet<>();
-        for (String name : nameStrings) {
-            nameSet.add(parseName(name).toString());
-        }
-        return nameSet;
+        // Ensure names are not null and split by whitespace, then filter out empty strings
+        return nameStrings.stream()
+                .flatMap(name -> Set.of(name.split("\\s+")).stream()) // Split each name by whitespace
+                .filter(name -> !name.isEmpty()) // Filter out empty results
+                .collect(Collectors.toSet()); // Collect into a Set to ensure uniqueness
     }
 
 
@@ -216,11 +217,19 @@ public class ParserUtil {
     public static Set<Days> parseDays(Collection<String> days) throws ParseException {
         requireNonNull(days);
 
-        final Set<Days> daysSet = new HashSet<>();
-        for (String day : days) {
-            daysSet.add(parseDay(day));
+        // Ensure names are not null and split by whitespace, then filter out empty strings
+        Set<String> dayStringsSet = days.stream()
+                .flatMap(day -> Set.of(day.split("\\s+")).stream()) // Split each name by whitespace
+                .filter(day -> !day.isEmpty()) // Filter out empty results
+                .collect(Collectors.toSet()); // Collect into a Set to ensure uniqueness
+
+        // Convert the set of day strings to a set of Days
+        HashSet<Days> daySet = new HashSet<>();
+        for (String day : dayStringsSet) {
+            daySet.add(parseDay(day));
         }
-        return daysSet;
+
+        return daySet;
     }
 
 

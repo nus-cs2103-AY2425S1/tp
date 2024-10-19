@@ -20,10 +20,10 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String COMMAND_WORD_RANDOM_CASE = "FiNd";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose:"
-            + "1. names contain any of the specified KEYWORDS (case-insensitive)"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose:\n"
+            + "1. names contain any of the specified KEYWORDS (case-insensitive)\n"
             + "Parameters: [n/KEYWORD [MORE_KEYWORDS]]...\n"
-            + "2. schedules contain any of the specified KEYWORDS (case-insensitive)"
+            + "2. schedules contain any of the specified KEYWORDS (case-insensitive)\n"
             + "Parameters: [d/KEYWORD [MORE_KEYWORDS]]...\n"
             + "and displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie" + " d/monday tuesday";

@@ -10,7 +10,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -110,22 +112,22 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         // keywords for each prefix
-        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
-        List<String> dayKeywords = Arrays.asList("Monday", "Tuesday", "Wednesday");
+        Collection<String> nameKeywords = Set.of("foo", "bar", "baz");
+        Collection<String> dayKeywords = Set.of("Monday", "Tuesday", "Wednesday");
 
         // Collection of keyword for day
-        List<Days> daySet = Arrays.asList(Days.MONDAY, Days.TUESDAY, Days.WEDNESDAY);
+        Collection<Days> daySet = Set.of(Days.MONDAY, Days.TUESDAY, Days.WEDNESDAY);
 
         // Predicates for prefixes
         NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         ScheduleContainsKeywordsPredicate dayPredicate = new ScheduleContainsKeywordsPredicate(daySet);
-        FindCommand expectedFindCommand = new FindCommand(List.of(namePredicate, dayPredicate));
+        FindCommand expectedFindCommand = new FindCommand(List.of(dayPredicate, namePredicate));
 
         // Constructing the input string
         String nameInput = PREFIX_NAME + String.join(" ", nameKeywords);
         String dayInput = PREFIX_DAY + String.join(" ", dayKeywords);
         String userInput = FindCommand.COMMAND_WORD + " " + nameInput + " " + dayInput;
-        String userInputRandomCase = FindCommand.COMMAND_WORD_RANDOM_CASE + " " + nameInput + " " + dayInput;
+        String userInputRandomCase = FindCommand.COMMAND_WORD_RANDOM_CASE + " " + dayInput + " " + nameInput;
 
         // Parsing the input string
         FindCommand command = (FindCommand) parser.parseCommand(userInput);
