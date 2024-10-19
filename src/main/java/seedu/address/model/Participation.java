@@ -4,6 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.address.model.person.Person;
 
+/**
+ * Represents participation of a student in a tutorial
+ */
 public class Participation {
     private Person student;
     private Tutorial tutorial;
