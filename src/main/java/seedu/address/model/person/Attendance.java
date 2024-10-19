@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be in date format: dd/MM/yyyy.";
-    public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/\\d{2}$";
+    public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/(20)\\d{2}$";
 
     public final LocalDate attendanceDate;
 
