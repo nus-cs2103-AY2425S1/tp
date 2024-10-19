@@ -128,9 +128,9 @@ Examples:
 * `find n/ Alice id/ A1234567E` returns persons whose name contains `Alice` or whose student ID is `A1234567E`.
 
 ---
-## **Deleting a person : `delete`**
+## <u>**Deleting a person :</u> `delete`**
 
-### <span style="font-size: 1rem;">You can remove a student from your list easily! Here's how to do it: </span>
+### -> <span style="font-size: 1rem;">You can remove a student from your list easily! Here's how to do it: </span>
 
 <br>
 
