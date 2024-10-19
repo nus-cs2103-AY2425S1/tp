@@ -126,8 +126,8 @@ public class StudentBuilder {
     /**
      * Sets the {@code PaidAmount} of the {@code Student} that we are building.
      */
-    public StudentBuilder withPaid(String paid) {
-        this.paidAmount = new PaidAmount(paid);
+    public StudentBuilder withPaidAmount(String paidAmount) {
+        this.paidAmount = new PaidAmount(paidAmount);
         return this;
     }
 

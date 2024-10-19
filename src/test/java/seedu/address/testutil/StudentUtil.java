@@ -62,8 +62,8 @@ public class StudentUtil {
         descriptor.getSchedule().ifPresent(schedule -> sb.append(PREFIX_SCHEDULE).append(schedule.value).append(" "));
         descriptor.getSubject().ifPresent(subject -> sb.append(PREFIX_SUBJECT).append(subject.toString()).append(" "));
         descriptor.getRate().ifPresent(rate -> sb.append(PREFIX_RATE).append(rate.toString()).append(" "));
-        descriptor.getPaid().ifPresent(paid -> sb.append(PREFIX_PAID_AMOUNT
-        ).append(paid.toString()).append(" "));
+        descriptor.getPaidAmount().ifPresent(paidAmount -> sb.append(PREFIX_PAID_AMOUNT
+        ).append(paidAmount.toString()).append(" "));
         descriptor.getOwedAmount().ifPresent(owedAmount -> sb.append(PREFIX_OWED_AMOUNT)
                                                              .append(owedAmount.toString()).append(" "));
         return sb.toString();

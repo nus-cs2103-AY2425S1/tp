@@ -127,7 +127,7 @@ public class EditCommand extends Command {
         Schedule updatedSchedule = editStudentDescriptor.getSchedule().orElse(studentToEdit.getSchedule());
         Subject updatedSubject = editStudentDescriptor.getSubject().orElse(studentToEdit.getSubject());
         Rate updatedRate = editStudentDescriptor.getRate().orElse(studentToEdit.getRate());
-        PaidAmount updatedPaidAmount = editStudentDescriptor.getPaid().orElse(studentToEdit.getPaidAmount());
+        PaidAmount updatedPaidAmount = editStudentDescriptor.getPaidAmount().orElse(studentToEdit.getPaidAmount());
         OwedAmount updatedOwedAmount = editStudentDescriptor.getOwedAmount().orElse(studentToEdit.getOwedAmount());
 
         return new Student(
@@ -188,7 +188,7 @@ public class EditCommand extends Command {
             setSchedule(toCopy.schedule);
             setSubject(toCopy.subject);
             setRate(toCopy.rate);
-            setPaid(toCopy.paidAmount);
+            setPaidAmount(toCopy.paidAmount);
             setOwedAmount(toCopy.owedAmount);
         }
 
@@ -254,10 +254,10 @@ public class EditCommand extends Command {
             return Optional.ofNullable(rate);
         }
 
-        public void setPaid(PaidAmount paidAmount) {
+        public void setPaidAmount(PaidAmount paidAmount) {
             this.paidAmount = paidAmount;
         }
-        public Optional<PaidAmount> getPaid() {
+        public Optional<PaidAmount> getPaidAmount() {
             return Optional.ofNullable(paidAmount);
         }
 

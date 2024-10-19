@@ -14,9 +14,9 @@ public class PaidAmountTest {
     }
 
     @Test
-    void constructor_invalidPaid_throwsIllegalArgumentException() {
-        String invalidPaid = "";
-        assertThrows(IllegalArgumentException.class, () -> new PaidAmount(invalidPaid));
+    void constructor_invalidPaidAmount_throwsIllegalArgumentException() {
+        String invalidPaidAmount = "";
+        assertThrows(IllegalArgumentException.class, () -> new PaidAmount(invalidPaidAmount));
     }
 
     @Test

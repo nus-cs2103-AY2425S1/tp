@@ -15,7 +15,7 @@ public class IncomeCommandTest {
     @Test
     public void execute_emptyAddressBook_noPaidAmountNoOwedAmount() {
         CommandResult commandResult = new IncomeCommand().execute(model);
-        assertEquals(commandResult.getFeedbackToUser(), "Total PaidAmount: 0.0   Total Owed: 0.0");
+        assertEquals(commandResult.getFeedbackToUser(), "Total PaidAmount: 0.0   Total OwedAmount: 0.0");
     }
 
     @Test
@@ -25,7 +25,7 @@ public class IncomeCommandTest {
         CommandResult commandResult = new IncomeCommand().execute(model);
 
         String expectedOutput = "Total PaidAmount: " + validStudent.getPaidAmount().value
-                + "   Total Owed: " + validStudent.getOwedAmount().value;
+                + "   Total OwedAmount: " + validStudent.getOwedAmount().value;
 
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
 

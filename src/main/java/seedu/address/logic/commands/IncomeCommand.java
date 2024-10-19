@@ -26,6 +26,6 @@ public class IncomeCommand extends Command {
             totalOwedAmount += student.getOwedAmount().value;
             totalPaidAmount += student.getPaidAmount().value;
         }
-        return new CommandResult("Total PaidAmount: " + totalPaidAmount + "   Total Owed: " + totalOwedAmount);
+        return new CommandResult("Total PaidAmount: " + totalPaidAmount + "   Total OwedAmount: " + totalOwedAmount);
     }
 }

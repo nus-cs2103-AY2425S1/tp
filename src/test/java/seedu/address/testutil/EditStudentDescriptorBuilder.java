@@ -39,7 +39,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setSchedule(student.getSchedule());
         descriptor.setSubject(student.getSubject());
         descriptor.setRate(student.getRate());
-        descriptor.setPaid(student.getPaidAmount());
+        descriptor.setPaidAmount(student.getPaidAmount());
         descriptor.setOwedAmount(student.getOwedAmount());
     }
 
@@ -101,8 +101,8 @@ public class EditStudentDescriptorBuilder {
     /**
      * Sets the {@code PaidAmount} of the {@code EditStudentDescriptor} that we are building.
      */
-    public EditStudentDescriptorBuilder withPaid(String paid) {
-        descriptor.setPaid(new PaidAmount(paid));
+    public EditStudentDescriptorBuilder withPaidAmount(String paidAmount) {
+        descriptor.setPaidAmount(new PaidAmount(paidAmount));
         return this;
     }
 
