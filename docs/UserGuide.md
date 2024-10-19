@@ -136,6 +136,7 @@ Examples:
 
 * The `INDEX` is the position of the person your looking at to delete in your current list. Like 1, 2, 3, …​
 * Ensure the `INDEX` is a **positive integer**. (We wouldn't want any negative or decimal people right?!)
+  ![result for delete example command](images/delete_example.png)
 
 ### Examples:
 * If you type `list` followed by `delete 2` it will delete the 2nd student from your current list.
@@ -143,8 +144,7 @@ Examples:
 
 ### Expected Results:
 * Easy-peasy! If you managed to delete the student you should see something similar to this!
-![result for 'delete 2'](images/delete_success.png)
-
+![result for delete success](images/delete_success.png)
 
 ### <span style="color:#D25B7A;">Common Errors:</span>
 * I know it can be hard to learn a new command but don't worry I got you!
