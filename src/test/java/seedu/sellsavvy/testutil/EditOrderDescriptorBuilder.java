@@ -17,6 +17,10 @@ public class EditOrderDescriptorBuilder {
         this.descriptor = new EditOrderDescriptor();
     }
 
+    public EditOrderDescriptorBuilder(EditOrderDescriptor descriptor) {
+        this.descriptor = new EditOrderDescriptor(descriptor);
+    }
+
     /**
      * Returns an {@code EditOrderDescriptor} with fields containing {@code order}'s details
      */
@@ -30,24 +34,24 @@ public class EditOrderDescriptorBuilder {
     /**
      * Sets the {@code Item} of the {@code EditOrderDescriptor} that we are building.
      */
-    public EditOrderDescriptorBuilder withItem(Item item) {
-        descriptor.setItem(item);
+    public EditOrderDescriptorBuilder withItem(String item) {
+        descriptor.setItem(new Item(item));
         return this;
     }
 
     /**
      * Sets the {@code Quantity} of the {@code EditOrderDescriptor} that we are building.
      */
-    public EditOrderDescriptorBuilder withQuantity(Count quantity) {
-        descriptor.setQuantity(quantity);
+    public EditOrderDescriptorBuilder withQuantity(String quantity) {
+        descriptor.setQuantity(new Count(quantity));
         return this;
     }
 
     /**
      * Sets the {@code Date} of the {@code EditOrderDescriptor} that we are building.
      */
-    public EditOrderDescriptorBuilder withDate(Date date) {
-        descriptor.setDate(date);
+    public EditOrderDescriptorBuilder withDate(String date) {
+        descriptor.setDate(new Date(date));
         return this;
     }
 
