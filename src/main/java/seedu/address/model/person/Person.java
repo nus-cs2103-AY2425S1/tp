@@ -160,6 +160,11 @@ public class Person {
         return appts;
     }
 
+    /**
+     * Returns a string representation of the appointments
+     * in the form of a list of strings.
+     * @return String representation of the appointments.
+     */
     public String getApptsString() {
         StringBuilder sb = new StringBuilder();
         for (Appt appt : appts) {
