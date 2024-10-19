@@ -1,6 +1,7 @@
 package seedu.address.model.student.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.List;
 
@@ -25,6 +26,16 @@ class AttributeContainsKeywordsPredicateTest {
 
         // same object -> returns true
         assertEquals(predicate, predicate);
+
+        // same values -> returns true
+        AttributeContainsKeywordsPredicate<String> predicateCopy = generatePredicate(keywords);
+        assertEquals(predicate, predicateCopy);
+
+        // different types -> returns false
+        assertNotEquals(predicate, 1);
+
+        // null -> returns false
+        assertNotEquals(predicate, null);
     }
 
     @Test

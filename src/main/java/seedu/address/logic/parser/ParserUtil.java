@@ -208,6 +208,7 @@ public class ParserUtil {
             String[] names = nameString.split("\\s+");
             for (String name : names) {
                 if (!name.isEmpty()) { // Filter out empty names
+                    parseName(name); // Check if name is valid
                     nameSet.add(name); // Add to set to ensure uniqueness
                 }
             }

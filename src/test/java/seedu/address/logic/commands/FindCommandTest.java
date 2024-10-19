@@ -14,6 +14,7 @@ import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -135,6 +136,15 @@ public class FindCommandTest {
         FindCommand findCommand = new FindCommand(predicates);
         String expected = FindCommand.class.getCanonicalName() + "{predicates=" + predicates + "}";
         assertEquals(expected, findCommand.toString());
+    }
+
+    @Test
+    public void hashCodeMethod() {
+        List<AttributeContainsKeywordsPredicate<?>> predicates = List.of(namePredicate, schedulePredicate);
+
+        FindCommand findCommand = new FindCommand(predicates);
+        int expected = Objects.hash(predicates);
+        assertEquals(expected, findCommand.hashCode());
     }
 
     /**

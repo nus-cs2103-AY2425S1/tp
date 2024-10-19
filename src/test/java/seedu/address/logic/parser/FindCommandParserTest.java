@@ -36,6 +36,11 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidInput_throwsParseException() {
+        assertParseFailure(parser, " hello",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_PARAMETERS));
+    }
+    @Test
     public void parse_emptyNameArgument_throwsParseException() {
         // day argument is present
         assertParseFailure(parser, " n/  d/Saturday",
@@ -100,6 +105,8 @@ public class FindCommandParserTest {
         // swapped order of arguments
         assertParseSuccess(parser, " d/Monday Tuesday n/Alice1 Bob", expectedFindCommand);
     }
+
+
 
 
 }
