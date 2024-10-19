@@ -7,16 +7,16 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.personcommands.Command;
-import seedu.address.logic.commands.personcommands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.types.event.Event;
 
 /**
  * Deletes an event identified using its displayed index from the event list.
  */
-public class DeleteEventCommand extends Command {
+public class DeleteEventCommand extends DeleteCommand {
 
     public static final String COMMAND_WORD = "delete";
 

@@ -4,8 +4,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
-import seedu.address.logic.commands.personcommands.Command;
 import seedu.address.logic.commands.personcommands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;

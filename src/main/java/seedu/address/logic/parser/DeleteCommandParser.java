@@ -3,24 +3,22 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.eventcommands.DeleteEventCommand;
-import seedu.address.logic.commands.personcommands.Command;
-import seedu.address.logic.commands.personcommands.DeleteCommand;
+import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-//TODO: Replace Command with DeleteCommand
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class DeleteCommandParser implements Parser<Command> {
+public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the Command
      * and returns a Command object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parse(ModelType modelType, String args) throws ParseException {
+    public DeleteCommand parse(ModelType modelType, String args) throws ParseException {
         if (modelType == ModelType.PERSON) {
             return parseForPerson(args);
         } else {
@@ -33,13 +31,13 @@ public class DeleteCommandParser implements Parser<Command> {
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand parseForPerson(String args) throws ParseException {
+    public DeletePersonCommand parseForPerson(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            return new DeletePersonCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
         }
     }
 

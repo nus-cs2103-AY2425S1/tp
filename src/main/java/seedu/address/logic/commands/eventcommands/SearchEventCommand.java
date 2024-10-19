@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.personcommands.Command;
-import seedu.address.logic.commands.personcommands.CommandResult;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
 
