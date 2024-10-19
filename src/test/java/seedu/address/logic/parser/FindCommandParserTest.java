@@ -16,12 +16,14 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -196,7 +198,51 @@ public class FindCommandParserTest {
 
         // Check for correct error message
         assertEquals("Tag cannot be empty!", thrown.getMessage());
+    }
 
+    @Test
+    public void parse_missingTagWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find t/ \n \t"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Tag cannot be empty!", thrown.getMessage());
+    }
+
+    @Test
+    public void parse_validFindWeddingArgs_returnsFindWeddingCommand() {
+        // no leading and trailing whitespaces
+        FindWeddingCommand expectedFindCommand =
+                new FindWeddingCommand(new WeddingContainsKeywordsPredicate(Arrays.asList("Dave's", "wedding")));
+        assertParseSuccess(parser, "find w/Dave's wedding", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "find w/ \t Dave's wedding", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_missingWeddingAfterPrefix_throwsParseException() {
+        String input = "find w/"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Wedding cannot be empty!", thrown.getMessage());
+
+    }
+
+    @Test
+    public void parse_missingWeddingWithTrailingWhiteSpace_throwsParseException() {
+        String input = "find w/ \n \t"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Wedding cannot be empty!", thrown.getMessage());
     }
 
 }

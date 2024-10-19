@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +18,14 @@ import seedu.address.logic.commands.findcommand.FindEmailCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.commands.findcommand.FindPhoneCommand;
 import seedu.address.logic.commands.findcommand.FindTagCommand;
+import seedu.address.logic.commands.findcommand.FindWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.keywordspredicate.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.keywordspredicate.TagContainsKeywordsPredicate;
+import seedu.address.model.person.keywordspredicate.WeddingContainsKeywordsPredicate;
 
 
 /**
@@ -38,9 +41,11 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_TAG, PREFIX_WEDDING);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_TAG, PREFIX_WEDDING);
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -54,6 +59,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasEmailPrefix = argMultimap.getValue(PREFIX_EMAIL).isPresent();
         boolean hasAddressPrefix = argMultimap.getValue(PREFIX_ADDRESS).isPresent();
         boolean hasTagPrefix = argMultimap.getValue(PREFIX_TAG).isPresent();
+        boolean hasWeddingPrefix = argMultimap.getValue(PREFIX_WEDDING).isPresent();
 
         if (hasNamePrefix) {
             String nameInput = argMultimap.getValue(PREFIX_NAME).get().trim(); // Get the actual name input
@@ -98,6 +104,15 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
             List<String> tagKeywords = Arrays.asList(tagInput.split("\\s+"));
             return new FindTagCommand(new TagContainsKeywordsPredicate(tagKeywords));
+        }
+
+        if (hasWeddingPrefix) {
+            String weddingInput = argMultimap.getValue(PREFIX_WEDDING).get().trim(); // Get the actual wedding input
+            if (weddingInput.isEmpty()) {
+                throw new ParseException("Wedding cannot be empty!");
+            }
+            List<String> weddingKeywords = Arrays.asList(weddingInput.split("\\s+"));
+            return new FindWeddingCommand(new WeddingContainsKeywordsPredicate(weddingKeywords));
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
