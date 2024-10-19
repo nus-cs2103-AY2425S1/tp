@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.tag.PropertyTag.ALLOWED_PROPERTY_TAGS;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,13 +10,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.PersonTag;
 import seedu.address.model.tag.PersonTagType;
+import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -146,5 +144,24 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Listing parseListing(String propertyTypeStr, String addressStr) throws ParseException {
+
+        PropertyTagType propertyTag;
+        try {
+            propertyTag = PropertyTagType.fromString(propertyTypeStr);
+        } catch (IllegalArgumentException ive) {
+            throw new ParseException(ive.getMessage() + " | Allowed tags: " + ALLOWED_PROPERTY_TAGS, ive);
+        }
+        Address address = new Address(addressStr.trim());
+
+        return new Listing(propertyTag, address);
     }
 }

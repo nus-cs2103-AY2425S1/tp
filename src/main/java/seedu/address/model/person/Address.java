@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -24,11 +27,13 @@ public class Address {
      *
      * @param address A valid address.
      */
-    public Address(String address) {
+    @JsonCreator
+    public Address(@JsonProperty("value") String address) {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
     }
+
 
     /**
      * Returns true if a given string is a valid email.
