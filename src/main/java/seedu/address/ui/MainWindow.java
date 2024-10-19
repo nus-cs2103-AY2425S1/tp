@@ -218,7 +218,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Changes the list panel to show the wedding list.
+     * Changes the list panel to show the {@code Wedding} list.
      */
     public void changeToWeddingView() {
         weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
@@ -227,7 +227,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Changes the list panel to show the wedding list.
+     * Changes the list panel to show the {@code Person} list.
      */
     public void changeToPersonView() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());

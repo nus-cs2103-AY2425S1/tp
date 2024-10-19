@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.wedding.Wedding;
 
 /**
- * A UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Wedding}.
  */
 public class WeddingCard extends UiPart<Region> {
 
@@ -31,7 +31,7 @@ public class WeddingCard extends UiPart<Region> {
     private Label id;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code WeddingCard} with the given {@code Wedding} and index to display.
      */
     public WeddingCard(Wedding wedding, int displayedIndex) {
         super(FXML);
