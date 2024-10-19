@@ -63,9 +63,4 @@ public class Name {
     public int hashCode() {
         return fullName.hashCode();
     }
-
-    public int compareTo(Name otherName) {
-        return fullName.compareTo(otherName.fullName);
-    }
-
 }

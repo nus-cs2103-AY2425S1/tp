@@ -15,9 +15,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    Comparator<Person> DEFAULT_COMPARATOR = (personOne, personTwo) ->
-            personOne.getName().compareTo(personTwo.getName());
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
