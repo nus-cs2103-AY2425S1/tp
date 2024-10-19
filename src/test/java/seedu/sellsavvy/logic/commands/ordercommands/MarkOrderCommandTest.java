@@ -1,7 +1,17 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
+import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.Messages;
 import seedu.sellsavvy.model.Model;
@@ -9,13 +19,6 @@ import seedu.sellsavvy.model.ModelManager;
 import seedu.sellsavvy.model.UserPrefs;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandFailure;
-import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.assertCommandSuccess;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_SECOND_ORDER;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class MarkOrderCommandTest {
 

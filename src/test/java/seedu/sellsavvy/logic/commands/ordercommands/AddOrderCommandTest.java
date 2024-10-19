@@ -63,8 +63,8 @@ public class AddOrderCommandTest {
         Model expectedModel = model.createCopy();
         Person personToAddUnder = expectedModel.getFilteredPersonList().get(0);
         personToAddUnder.getOrderList().add(ABACUS);
-        String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS,
-                personToAddUnder.getName(), Messages.format(ABACUS));
+        String expectedMessage = String.format(MESSAGE_DUPLICATE_ORDER_WARNING
+                + AddOrderCommand.MESSAGE_ADD_ORDER_SUCCESS, personToAddUnder.getName(), Messages.format(ABACUS));
 
         assertCommandSuccess(addOrderCommand, model, expectedMessage, expectedModel);
     }

@@ -1,12 +1,13 @@
 package seedu.sellsavvy.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
-
 import static seedu.sellsavvy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.sellsavvy.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations

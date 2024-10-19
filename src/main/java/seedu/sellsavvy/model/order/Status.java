@@ -2,8 +2,12 @@ package seedu.sellsavvy.model.order;
 
 import seedu.sellsavvy.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents the status of a Person's Order in the address book.
+ * An order is either PENDING or COMPLETED.
+ */
 public enum Status {
-    PENDING  {
+    PENDING {
         @Override
         public String toString() {
             return "Pending";
@@ -16,8 +20,11 @@ public enum Status {
         }
     };
 
-    public static String MESSAGE_CONSTRAINTS = "Status should be \"Pending\" or \"Completed\"";
+    public static final String MESSAGE_CONSTRAINTS = "Status should be \"Pending\" or \"Completed\"";
 
+    /**
+     * Returns the enum name of the given string.
+     */
     public static Status fromString(String status) throws IllegalValueException {
         try {
             return Status.valueOf(status.toUpperCase());

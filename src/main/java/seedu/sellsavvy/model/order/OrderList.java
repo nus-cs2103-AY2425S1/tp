@@ -134,7 +134,7 @@ public class OrderList implements Iterable<Order> {
      * Gets the index of the target {@code Order} using "==".
      */
     private int indexOf(Order target) {
-        for (int i = 0; i < size(); i++ ) {
+        for (int i = 0; i < size(); i++) {
             if (target == internalList.get(i)) {
                 return i;
             }

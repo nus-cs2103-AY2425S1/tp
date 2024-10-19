@@ -1,12 +1,12 @@
 package seedu.sellsavvy.model.order;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.sellsavvy.commons.exceptions.IllegalValueException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import seedu.sellsavvy.commons.exceptions.IllegalValueException;
 
 public class StatusTest {
 

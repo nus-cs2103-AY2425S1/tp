@@ -1,5 +1,8 @@
 package seedu.sellsavvy.logic.commands.ordercommands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
+
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.commons.util.ToStringBuilder;
 import seedu.sellsavvy.logic.Messages;
@@ -7,11 +10,13 @@ import seedu.sellsavvy.logic.commands.Command;
 import seedu.sellsavvy.logic.commands.CommandResult;
 import seedu.sellsavvy.logic.commands.exceptions.CommandException;
 import seedu.sellsavvy.model.Model;
-import seedu.sellsavvy.model.order.*;
+import seedu.sellsavvy.model.order.Count;
+import seedu.sellsavvy.model.order.Date;
+import seedu.sellsavvy.model.order.Item;
+import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.Person;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.sellsavvy.logic.Messages.MESSAGE_ORDERLIST_DOES_NOT_EXIST;
 
 /**
  * Marks an order as completed.
@@ -58,6 +63,9 @@ public class MarkOrderCommand extends Command {
         return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, Messages.format(newOrder)));
     }
 
+    /**
+     * Creates a marked version of the given {@code Order}.
+     */
     public static Order createMarkedOrder(Order order) {
         assert order != null;
 
