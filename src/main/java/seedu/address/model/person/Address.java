@@ -20,14 +20,29 @@ public class Address {
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs a {@code Address}.
      *
      * @param address A valid address.
      */
     public Address(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
-        value = address;
+        this(address, true);
+    }
+
+    /**
+     * Constructs a {@code Address}.
+     *
+     * @param address A valid address.
+     * @param isDeclared Boolean variable representing if address is declared
+     */
+    public Address(String address, Boolean isDeclared) {
+        if (isDeclared) {
+            requireNonNull(address);
+            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+            value = address;
+        } else {
+            requireNonNull(address);
+            value = "";
+        }
     }
 
     /**

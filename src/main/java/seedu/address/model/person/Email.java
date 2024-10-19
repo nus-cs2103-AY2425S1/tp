@@ -34,14 +34,29 @@ public class Email {
     public final String value;
 
     /**
-     * Constructs an {@code Email}.
+     * Constructs a {@code Email}.
      *
      * @param email A valid email address.
      */
     public Email(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-        value = email;
+        this(email, true);
+    }
+
+    /**
+     * Constructs a {@code Email}.
+     *
+     * @param email A valid email address.
+     * @param isDeclared Boolean variable representing if email address is declared
+     */
+    public Email(String email, Boolean isDeclared) {
+        if (isDeclared) {
+            requireNonNull(email);
+            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+            value = email;
+        } else {
+            requireNonNull(email);
+            value = "";
+        }
     }
 
     /**
