@@ -23,7 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    public static final Boolean DEFAULT_PAYMENT = false;
+    public static final String DEFAULT_PAYMENT = "0";
     public static final Boolean DEFAULT_ATTENDANCE = false;
 
     private Name name;
@@ -103,8 +103,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Payment} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPayment(Boolean hasPaid) {
-        this.payment = new Payment(hasPaid);
+    public PersonBuilder withPayment(String value) {
+        this.payment = new Payment(value);
         return this;
     }
 
