@@ -407,9 +407,9 @@
 }
 
 .event-status-ongoing {
-    -fx-background-color: #ff8c00;
+    -fx-background-color: #e67100;
 }
 
 .event-status-completed {
-    -fx-background-color: #e67100;
+    -fx-background-color: #006400;
 }

@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -12,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 import seedu.address.model.types.common.DateTime;
+import seedu.address.model.types.common.DateTimeUtil;
 
 /**
  * Represents a navigation bar to toggle between different pages,
@@ -20,7 +18,6 @@ import seedu.address.model.types.common.DateTime;
 public class NavBar extends UiPart<HBox> {
 
     private static final String FXML = "NavBar.fxml";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     @FXML
     private Button contactsButton;
@@ -64,8 +61,7 @@ public class NavBar extends UiPart<HBox> {
     }
 
     private void updateDateTime() {
-        LocalDateTime now = LocalDateTime.now();
-        String formattedDateTime = DATE_TIME_FORMATTER.format(now);
+        String formattedDateTime = DateTimeUtil.getCurrentDateTimeString();
         DateTime dateTime = new DateTime(formattedDateTime);
         dateTimeLabel.setText(dateTime.toString());
     }

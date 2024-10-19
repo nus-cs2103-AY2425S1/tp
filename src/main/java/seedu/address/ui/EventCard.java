@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -10,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.types.common.DateTimeUtil;
 import seedu.address.model.types.event.Event;
 
 /**
@@ -18,7 +18,6 @@ import seedu.address.model.types.event.Event;
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -62,8 +61,8 @@ public class EventCard extends UiPart<Region> {
     }
 
     private void setEventStatusLabel(String startTime) {
-        LocalDateTime eventStart = LocalDateTime.parse(startTime, DATE_TIME_FORMATTER);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime eventStart = DateTimeUtil.parse(startTime);
+        LocalDateTime now = DateTimeUtil.getCurrentDateTime();
         Duration duration = Duration.between(now, eventStart);
 
         String statusText;
