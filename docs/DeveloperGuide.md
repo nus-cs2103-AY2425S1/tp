@@ -644,3 +644,11 @@ testers are expected to do more *exploratory* testing.
 
     2. Launch EduContacts by double-clicking the jar file.<br>
        Expected: EduContacts has a blank list of persons. A new `address.json` file will be created in the `data` folder after closing the app or executing a command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Effort**
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
