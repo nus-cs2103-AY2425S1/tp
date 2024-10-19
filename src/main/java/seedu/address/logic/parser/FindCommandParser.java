@@ -29,7 +29,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DAY);
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -41,25 +40,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<AttributeContainsKeywordsPredicate<?>> predicates = new ArrayList<>();
 
-//        try {
-//            if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
-//                List<String> dayKeywords = argMultimap.getAllValues(PREFIX_DAY);
-//                Collection<Days> days = parseDaysForFind(dayKeywords);
-//                predicates.add(new ScheduleContainsKeywordsPredicate(days));
-//            }
-//            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-//                List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
-//                Collection<String> names = parseNameStringsForFind(nameKeywords);
-//                predicates.add(new NameContainsKeywordsPredicate(names));
-//            }
-//            if (predicates.isEmpty()) {
-//                throw new ParseException(
-//                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_PARAMETERS));
-//            }
-//        } catch (ParseException pe) {
-//            throw new ParseException(
-//                    pe.getMessage() , pe);
-//        }
 
         if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
             List<String> dayKeywords = argMultimap.getAllValues(PREFIX_DAY);
@@ -70,12 +50,29 @@ public class FindCommandParser implements Parser<FindCommand> {
             List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
             Collection<String> names = parseNameStringsForFind(nameKeywords);
             predicates.add(new NameContainsKeywordsPredicate(names));
-
         }
-
-
-
+        if (predicates.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_PARAMETERS));
+        }
         return new FindCommand(predicates);
+
+//
+//        if (argMultimap.getValue(PREFIX_DAY).isPresent()) {
+//            List<String> dayKeywords = argMultimap.getAllValues(PREFIX_DAY);
+//            Collection<Days> days = parseDaysForFind(dayKeywords);
+//            predicates.add(new ScheduleContainsKeywordsPredicate(days));
+//        }
+//        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+//            List<String> nameKeywords = argMultimap.getAllValues(PREFIX_NAME);
+//            Collection<String> names = parseNameStringsForFind(nameKeywords);
+//            predicates.add(new NameContainsKeywordsPredicate(names));
+//
+//        }
+
+
+
+
     }
 
     /**
