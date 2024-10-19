@@ -26,8 +26,8 @@ public class ListExpiringPoliciesCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all policies nearing expiry within the specified number of days.\n"
             + "If no number is provided, it defaults to 30 days.\n"
-            + "Parameters: [DAYS_FROM_EXPIRY] (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 60";
+            + "Parameters: [days from expiry] (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " d/60";
 
     private static final String MESSAGE_SUCCESS = "The following policies are expiring within %1$d days:\n\n";
     private static final String MESSAGE_NO_EXPIRING_POLICY = "No policies expiring within the next %1$d days!";
