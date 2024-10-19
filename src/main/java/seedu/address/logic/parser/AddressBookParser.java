@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +37,28 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
+     * Used to keep track of all the commands available
+     */
+    private final Map<String, ParseCommandFunction> commands;
+
+    /**
+     * Creates an AddressBookParser and registers all commands available
+     */
+    public AddressBookParser() {
+        commands = new HashMap<>();
+        commands.put(AddCommand.COMMAND_WORD, arguments -> new AddCommandParser().parse(arguments));
+        commands.put(EditCommand.COMMAND_WORD, arguments -> new EditCommandParser().parse(arguments));
+        commands.put(DeleteCommand.COMMAND_WORD, arguments -> new DeleteCommandParser().parse(arguments));
+        commands.put(ClearCommand.COMMAND_WORD, arguments -> new ClearCommand());
+        commands.put(FindCommand.COMMAND_WORD, arguments -> new FindCommandParser().parse(arguments));
+        commands.put(ListCommand.COMMAND_WORD, arguments -> new ListCommand());
+        commands.put(ExitCommand.COMMAND_WORD, arguments -> new ExitCommand());
+        commands.put(HelpCommand.COMMAND_WORD, arguments -> new HelpCommand());
+        commands.put(FindTagCommand.COMMAND_WORD, arguments -> new FindTagCommandParser().parse(arguments));
+        commands.put(RemarkCommand.COMMAND_WORD, arguments -> new RemarkCommandParser().parse(arguments));
+    }
+
+    /**
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
@@ -55,47 +79,20 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.info("Command word: " + commandWord + "; Arguments: " + arguments);
 
-        switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
-
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
-
-        case FindTagCommand.COMMAND_WORD:
-            return new FindTagCommandParser().parse(arguments);
-
-        case RemarkCommand.COMMAND_WORD:
-            return new RemarkCommandParser().parse(arguments);
-
-        case ShowCommand.COMMAND_WORD:
-            return new ShowCommandParser().parse(arguments);
-
-        case ListingAddCommand.COMMAND_WORD_PREFIX:
-            return new ListingCommandsParser().parse(arguments);
-
-        default:
+        if (!commands.containsKey(commandWord)) {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+
+        return commands.get(commandWord).process(arguments);
+    }
+
+    /**
+     * This is a private functional interface to hold the command parsing process
+     */
+    @FunctionalInterface
+    private interface ParseCommandFunction {
+        Command process(String arguments) throws ParseException;
     }
 
 }
