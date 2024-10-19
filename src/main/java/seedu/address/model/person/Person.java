@@ -29,6 +29,7 @@ public class Person {
     private final Car car;
 
     private final Set<Issue> issues = new HashSet<>();
+    private boolean isServicing;
 
     private final Logger logger = LogsCenter.getLogger(Person.class);
     /**
@@ -40,6 +41,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.isServicing = false;
         this.issues.addAll(issues);
         this.car = null;
         logger.info("Person without car created");
@@ -60,6 +62,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.isServicing = false;
         this.car = car;
         this.issues.addAll(issues);
         logger.info("Person with car created" + car);
@@ -91,6 +94,27 @@ public class Person {
      */
     public Set<Issue> getIssues() {
         return Collections.unmodifiableSet(issues);
+    }
+
+    /**
+     * Servicing status of a Client's Car.
+     *
+     * @return true if Checked in. False if not Checked in or no Car.
+     */
+    public boolean isServicing() {
+        if (this.car == null) {
+            return false; // Safeguard.
+        }
+        return this.isServicing;
+    }
+
+    /**
+     * Toggle isServicing for Clients with Car.
+     */
+    public void setServicing() {
+        if (this.car != null) {
+            this.isServicing = !this.isServicing;
+        }
     }
 
     /**

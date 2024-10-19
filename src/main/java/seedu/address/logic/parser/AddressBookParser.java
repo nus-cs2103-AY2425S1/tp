@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCarCommand;
 import seedu.address.logic.commands.AddClientCommand;
+import seedu.address.logic.commands.CheckClientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClientCommand;
@@ -55,6 +56,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
+        // Client and Car Commands
         case AddClientCommand.COMMAND_WORD:
             return new AddClientCommandParser().parse(arguments);
 
@@ -64,26 +66,31 @@ public class AddressBookParser {
         case DeleteClientCommand.COMMAND_WORD:
             return new DeleteClientCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case AddCarCommand.COMMAND_WORD:
+            return new AddCarCommandParser().parse(arguments);
+
+        case CheckClientCommand.COMMAND_WORD:
+            return new CheckClientCommandParser().parse(arguments);
+
+        // GUI Commands
+        case ListClientCommand.COMMAND_WORD:
+            return new ListClientCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListClientCommand.COMMAND_WORD:
-            return new ListClientCommand();
+        case ViewClientCommand.COMMAND_WORD:
+            return new ViewClientCommandParser().parse(arguments);
+
+        // Miscellaneous Commands.
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case ViewClientCommand.COMMAND_WORD:
-            return new ViewClientCommandParser().parse(arguments);
-
-        case AddCarCommand.COMMAND_WORD:
-            return new AddCarCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
