@@ -23,12 +23,16 @@ import seedu.address.logic.commands.DeletePropertyToSellCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindBuyCommand;
 import seedu.address.logic.commands.FindNameCommand;
+import seedu.address.logic.commands.FindPhoneNumberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.BuyPropertyContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
 import seedu.address.model.person.Property;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
@@ -78,11 +82,29 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findName() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
                 FindNameCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findPhoneNumber() throws Exception {
+        List<String> keywords = Arrays.asList("99122112", "88118811", "90019000");
+        FindPhoneNumberCommand command = (FindPhoneNumberCommand) parser.parseCommand(
+                FindPhoneNumberCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindPhoneNumberCommand(new PhoneNumberContainsKeywordPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findBuyProperty() throws Exception {
+        List<String> keywords = Arrays.asList("522522", "10-09", "hdb");
+        FindBuyCommand command = (FindBuyCommand) parser.parseCommand(
+                FindBuyCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindBuyCommand(new BuyPropertyContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test

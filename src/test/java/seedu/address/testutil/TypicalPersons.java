@@ -10,16 +10,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_A_HDB;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_B_BTO;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_C_CONDO;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_D_CONDO;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_E_APARTMENT;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_F_OTHERPROPERTY;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_G_OTHERPROPERTY;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_H_HDB;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_I_APARTMENT;
-import static seedu.address.testutil.TypicalProperties.PROPERTY_J_BTO;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_APARTMENT_WITH_TAG;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_BTO;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_BTO_WITH_TAG;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_CONDO_WITH_MULTIPLE_TAGS;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_CONDO_WITH_TAG;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_HDB;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_HDB_WITH_MULTIPLE_TAGS;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_OTHERPROPERTY;
+import static seedu.address.testutil.TypicalProperties.PROPERTY_OTHERPROPERTY_WITH_MULTIPLE_TAGS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,8 +38,8 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
-            .withBuyProperty(PROPERTY_I_APARTMENT)
-            .withSellProperty(PROPERTY_J_BTO)
+            .withBuyProperty(PROPERTY_APARTMENT_WITH_TAG)
+            .withSellProperty(PROPERTY_BTO_WITH_TAG)
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
@@ -49,24 +49,24 @@ public class TypicalPersons {
             .withAddress("312, Clementi Ave 2, #02-26")
             .withEmail("billm@example.com").withPhone("98765444")
             .withTags("owesMoney", "friends")
-            .withBuyProperty(PROPERTY_A_HDB)
-            .withBuyProperty(PROPERTY_B_BTO)
-            .withSellProperty(PROPERTY_C_CONDO)
-            .withSellProperty(PROPERTY_D_CONDO).build();
+            .withBuyProperty(PROPERTY_HDB)
+            .withBuyProperty(PROPERTY_BTO)
+            .withSellProperty(PROPERTY_CONDO_WITH_TAG)
+            .withSellProperty(PROPERTY_CONDO_WITH_MULTIPLE_TAGS).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Person CARRINE = new PersonBuilder().withName("Carrine Kurry").withPhone("95352544")
             .withEmail("carrine@example.com").withAddress("new york avenue")
-            .withBuyProperty(PROPERTY_C_CONDO)
-            .withBuyProperty(PROPERTY_D_CONDO).build();
+            .withBuyProperty(PROPERTY_CONDO_WITH_TAG)
+            .withBuyProperty(PROPERTY_CONDO_WITH_MULTIPLE_TAGS).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
     public static final Person DANIELLE = new PersonBuilder().withName("Danielle Meier").withPhone("87652534")
             .withEmail("danielle@example.com").withAddress("11th street").withTags("friends")
-            .withSellProperty(PROPERTY_E_APARTMENT)
-            .withSellProperty(PROPERTY_F_OTHERPROPERTY)
-            .withSellProperty(PROPERTY_G_OTHERPROPERTY)
-            .withBuyProperty(PROPERTY_H_HDB)
+            .withSellProperty(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
+            .withSellProperty(PROPERTY_OTHERPROPERTY_WITH_MULTIPLE_TAGS)
+            .withSellProperty(PROPERTY_OTHERPROPERTY)
+            .withBuyProperty(PROPERTY_HDB_WITH_MULTIPLE_TAGS)
             .withBuyProperty(new PropertyToBuyBuilder().build()).build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").build();
