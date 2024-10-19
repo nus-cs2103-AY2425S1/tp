@@ -8,6 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; type is valid as declared in {@link #isValidType(String)}.
  */
 public class Type {
+    /**
+     * Specifies allowed property types
+     */
     public enum PropertyType {
         HDB, CONDO, LANDED;
     }
