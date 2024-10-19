@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Counts the number of persons in the address book, with optional filters.
