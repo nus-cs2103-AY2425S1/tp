@@ -60,6 +60,7 @@ PersonListPanel -[hidden]left- ViewClientWindow
 HelpWindow -[hidden]left- CommandBox
 CommandBox -[hidden]left- ResultDisplay
 ResultDisplay -[hidden]left- StatusBarFooter
+StatusBarFooter -[hidden]left- PersonListPanel
 
 MainWindow -[hidden]-|> UiPart
 @enduml
