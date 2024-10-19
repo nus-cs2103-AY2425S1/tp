@@ -186,7 +186,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
+        @Override
+        public List<GoodsReceipt> getFilteredGoods(Predicate<GoodsReceipt> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

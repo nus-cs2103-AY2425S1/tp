@@ -1,14 +1,13 @@
-package seedu.address.model.goods;
+package seedu.address.model.goodsReceipt;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.person.Person;
-
+import seedu.address.model.goods.GoodsCategories;
 
 /**
  * Tests that a {@code Person}'s {@code Goods}' {@code Category} matches the category given.
  */
-public class CategoryPredicate implements Predicate<Person> {
+public class CategoryPredicate implements Predicate<GoodsReceipt> {
     private final GoodsCategories category;
 
     public CategoryPredicate(GoodsCategories category) {
@@ -16,9 +15,8 @@ public class CategoryPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
+    public boolean test(GoodsReceipt goodsData) {
         // TODO: Uncomment when goods storage is implemented
-        // return person.getGoods().stream(good -> category.equals(good.getCategory()));
         return false;
     }
 
@@ -37,5 +35,7 @@ public class CategoryPredicate implements Predicate<Person> {
     }
 
     @Override
-    public String toString() { return this.category.toString(); }
+    public String toString() {
+        return this.category.toString();
+    }
 }

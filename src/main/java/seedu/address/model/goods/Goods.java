@@ -27,6 +27,10 @@ public class Goods {
         this.category = category;
     }
 
+    public String getReadableGoodsName() {
+        return goodsName.toString();
+    }
+
     /**
      * Returns True if the goods name is valid.
      *

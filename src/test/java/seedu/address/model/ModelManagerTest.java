@@ -157,4 +157,9 @@ public class ModelManagerTest {
     public void addGoods_validGoods_addsGoods() {
         // TODO: Implement this
     }
+
+    @Test
+    public void getFilteredGoods() {
+        // TODO: Implement this
+    }
 }
