@@ -77,7 +77,18 @@ public class StringUtil {
         requireNonNull(trimmedIndex);
 
         try {
-            long value = Long.parseLong(trimmedIndex);
+            if (trimmedIndex.startsWith("-")) {
+                return true;
+            }
+            if (trimmedIndex.length() > 10) {
+                return false;
+            }
+            if (trimmedIndex.length() == 10) {
+                // lexicographically checks if index is less than max integer
+                return trimmedIndex.compareTo(String.valueOf(Integer.MAX_VALUE)) <= 0;
+            }
+            // checks for valid integer value if length is less than 10
+            Integer value = Integer.parseInt(trimmedIndex);
             return !(value > Integer.MAX_VALUE && !trimmedIndex.startsWith("+"));
         } catch (NumberFormatException nfe) {
             return true;
