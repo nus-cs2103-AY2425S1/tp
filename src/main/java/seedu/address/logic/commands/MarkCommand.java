@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,35 +31,60 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
     public static final String MESSAGE_MARK_UNNECESSARY =
             "Person: %1$s is already marked as present for Tutorial: %2$s";
-
-    private final Index index;
+    private final List<Index> indexList = new ArrayList<>();
     private final Tutorial tutorial;
+    private final boolean shouldMarkAll;
 
     /**
      * @param index of the person in the display list
      * @param tutorial number to mark attendance for
      */
     public MarkCommand(Index index, Tutorial tutorial) {
-        this.index = index;
+        this.indexList.add(index);
+        this.shouldMarkAll = false;
         this.tutorial = tutorial;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> currDisplayedList = model.getFilteredPersonList();
+    /**
+     * @param shouldMarkAll whether to mark all persons in the display list
+     * @param tutorial number to mark attendance for
+     */
+    public MarkCommand(boolean shouldMarkAll, Tutorial tutorial) {
+        this.shouldMarkAll = shouldMarkAll;
+        this.tutorial = tutorial;
+    }
 
-        if (index.getZeroBased() >= currDisplayedList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    /**
+     * @param currDisplayedList list of persons currently displayed
+     * @return personList
+     * @throws CommandException when index is out of range
+     */
+    private List<Person> filterPersonsByIndex(List<Person> currDisplayedList) throws CommandException {
+        if (this.shouldMarkAll) {
+            return currDisplayedList;
+        } else {
+            List<Person> personList = new ArrayList<>();
+            for (Index index : this.indexList) {
+                if (index.getZeroBased() >= currDisplayedList.size()) {
+                    throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                }
+                personList.add(currDisplayedList.get(index.getZeroBased()));
+            }
+            return personList;
         }
+    }
 
-        Person personToEdit = currDisplayedList.get(index.getZeroBased());
+    /**
+     * @param personToEdit person whose attendance will be marked
+     */
+    private Person generateMarkedPerson(Person personToEdit) throws CommandException {
         Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
         if (!newTutorials.add(tutorial)) {
             throw new CommandException(
                     String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
         }
 
-        Person editedPerson = new Person(
+        return new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),
                 personToEdit.getPhone(),
@@ -66,10 +92,20 @@ public class MarkCommand extends Command {
                 personToEdit.getTags(),
                 newTutorials
         );
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+    }
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        List<Person> currDisplayedList = model.getFilteredPersonList();
+        List<Person> personToEditList = this.filterPersonsByIndex(currDisplayedList);
+        List<Person> editedPersonList = new ArrayList<>();
+        for (Person personToEdit : personToEditList) {
+            Person editedPerson = this.generateMarkedPerson(personToEdit);
+            editedPersonList.add(editedPerson);
+            model.setPerson(personToEdit, editedPerson);
+        }
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPersonList));
     }
 
     /**
@@ -77,8 +113,11 @@ public class MarkCommand extends Command {
      * the remark is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_MARK_SUCCESS, Messages.format(personToEdit), tutorial.tutorial);
+    private String generateSuccessMessage(List<Person> personListToEdit) {
+        return String.join("\n", personListToEdit.stream()
+                .map(personToEdit -> String.format(MESSAGE_MARK_SUCCESS,
+                        Messages.format(personToEdit), tutorial.tutorial))
+                .toArray(String[]::new));
     }
 
     @Override
@@ -95,7 +134,7 @@ public class MarkCommand extends Command {
 
         // state check
         MarkCommand e = (MarkCommand) other;
-        return index.equals(e.index)
+        return indexList.equals(e.indexList)
                 && tutorial.equals(e.tutorial);
     }
 }

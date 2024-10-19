@@ -11,7 +11,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -71,6 +73,48 @@ public class MarkCommandTest {
                             Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
                             new Tutorial("1").tutorial));
         }
+    }
+
+    /**
+     * Mark all persons in the list.
+     */
+    @Test
+    public void execute_shouldMarkAll_success() {
+        Tutorial tutorialToBeAdded = new Tutorial("1");
+
+        MarkCommand markCommand = new MarkCommand(true, tutorialToBeAdded);
+
+        try {
+            markCommand.execute(model);
+        } catch (CommandException e) {
+            throw new RuntimeException(e);
+        }
+
+        List<Person> editedPersonList = new ArrayList<>();
+        // Check all persons are edited
+        for (Person person : model.getFilteredPersonList()) {
+            Set<Tutorial> newTutorials = new HashSet<>(person.getTutorials());
+            newTutorials.add(tutorialToBeAdded);
+            Person expectedEditedPerson = new Person(
+                    person.getName(),
+                    person.getStudentId(),
+                    person.getPhone(),
+                    person.getEmail(),
+                    person.getTags(),
+                    newTutorials
+            );
+            editedPersonList.add(expectedEditedPerson);
+            assertEquals(expectedEditedPerson, person);
+        }
+
+        // Check model is updated with new person attribute
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        String expectedMessage = String.join("\n",
+                model.getFilteredPersonList().stream()
+                        .map(personToEdit -> String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
+                                Messages.format(personToEdit), tutorialToBeAdded.tutorial)).toArray(String[]::new));
+        Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        assertCommandSuccess(markCommand, typicalModel, expectedMessage, expectedModel);
     }
 
     @Test

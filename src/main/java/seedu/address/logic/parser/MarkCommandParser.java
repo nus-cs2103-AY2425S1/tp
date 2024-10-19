@@ -14,6 +14,8 @@ import seedu.address.model.person.Tutorial;
  */
 public class MarkCommandParser implements Parser<MarkCommand> {
 
+    private static final String WILDCARD = "*";
+
     @Override
     public MarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -23,8 +25,13 @@ public class MarkCommandParser implements Parser<MarkCommand> {
         Index index;
         Tutorial tutorial;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String indexStr = argMultimap.getPreamble();
             tutorial = new Tutorial(argMultimap.getValue(PREFIX_TUTORIAL).orElse(""));
+            if (indexStr.equals(WILDCARD)) {
+                return new MarkCommand(true, tutorial);
+            } else {
+                index = ParserUtil.parseIndex(indexStr);
+            }
         } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkCommand.MESSAGE_USAGE), ive);
