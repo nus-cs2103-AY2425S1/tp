@@ -18,9 +18,11 @@ import seedu.ddd.model.contact.vendor.Vendor;
  */
 public class Event {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "There must be at least one client in a specific event,";
     private final ArrayList<Client> clients;
     private final ArrayList<Vendor> vendors;
-    private final String eventDescription;
+    private final Description description;
 
     /**
      * Constructs a {@code Event}.
@@ -28,12 +30,12 @@ public class Event {
      * @param clients A list of client.
      * @param vendors A list of vendors.
      */
-    public Event(ArrayList<Client> clients, ArrayList<Vendor> vendors, String description) {
+    public Event(ArrayList<Client> clients, ArrayList<Vendor> vendors, Description description) {
         requireAllNonNull(clients, vendors);
         // another test to check
         this.clients = clients;
         this.vendors = vendors;
-        this.eventDescription = description;
+        this.description = description;
     }
 
     /**
@@ -56,8 +58,8 @@ public class Event {
      * Returns the event description.
      * @return A {@code String} which represents the description of the event.
      */
-    public String getEventDescription() {
-        return this.eventDescription;
+    public Description getDescription() {
+        return this.description;
     }
 
     /**
@@ -86,10 +88,10 @@ public class Event {
         //same vendors and have same description.
         Set<Client> thisClients = new HashSet<>(this.getClients());
         Set<Vendor> thisVendors = new HashSet<>(this.getVendors());
-        String thisDescription = this.getEventDescription();
+        Description thisDescription = this.getDescription();
         Set<Client> otherClients = new HashSet<>(otherEvent.getClients());
         Set<Vendor> otherVendors = new HashSet<>(otherEvent.getVendors());
-        String otherDescription = otherEvent.getEventDescription();
+        Description otherDescription = otherEvent.getDescription();
 
         return thisClients.equals(otherClients)
                 && thisVendors.equals(otherVendors)
@@ -98,7 +100,7 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getClients(), this.getVendors(), this.getEventDescription());
+        return Objects.hash(this.getClients(), this.getVendors(), this.getDescription());
     }
 
     @Override
@@ -106,7 +108,7 @@ public class Event {
         return new ToStringBuilder(this)
                 .add("clients", this.getClients())
                 .add("vendors", this.getVendors())
-                .add("event description", this.getEventDescription())
+                .add("description", this.getDescription())
                 .toString();
     }
 }

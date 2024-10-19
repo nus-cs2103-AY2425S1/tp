@@ -26,7 +26,7 @@ public class EventTest {
 
     @Test
     public void equalsTest() {
-        String dummyDescription = "";
+        Description dummyDescription = new Description("Something not important.");
 
         ArrayList<Client> clientList1 = new ArrayList<>();
         ArrayList<Vendor> vendorList1 = new ArrayList<>();
