@@ -4,9 +4,9 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# AB-3 User Guide
+# Bridal Boss User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Bridal Boss is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Bridal Boss can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -137,10 +137,10 @@ View the contact of a specified person from the address book.
 
 Format: `view KEYWORD`
 
-* This command is case-insensitive. e.g `alex` will match `alex`
+* This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
 * The keyword can be either the full name (consisting multiple words) or partial name (consisting of only one word).
-* Full name view will match the exact name given e.g. `Alex Tan` will only give `Alex Tan`
-* Partial name view will find all contacts that has names containing the keyword e.g. `Alex` will give `Alex Tan` and `Alex Yeo`
+* Viewing the full name will match the exact name given e.g. `Alex Tan` will only give `Alex Tan`
+* Viewing partial name will find all contacts that has names containing the keyword e.g. `Alex` will give `Alex Tan` and `Alex Yeo`
 * Only the name can be used for viewing
 
 ### Deleting a person : `delete`
@@ -167,18 +167,14 @@ Format: `clear`
 
 Filters all persons whose tags contain any of the specified keywords. The filtering is case-insensitive.
 
-Format: `filter KEYWORD [MORE_KEYWORDS]...`
+Format: `filter t/KEYWORD t/[MORE_KEYWORDS]...`
 
 * Filters all persons whose tags contain any of the specified keywords.
-* The search is case-insensitive. e.g `friend` will match `Friend`
-* The order of the keywords does not matter. e.g. `friend colleague` will match `colleague friend`
-* Only full words will be matched e.g. `col` will not match `colleague`
+* The search is case-insensitive. e.g `t/friend` will match `t/Friend`
+* The order of the keywords does not matter. e.g. `t/friend t/colleague` will match `t/colleague t/friend`
+* Only full words will be matched e.g. `t/col` will not match `t/colleague`
 
-Example: `filter friends family` Lists all persons in the address book whose tags match any of the specified keywords.
-
-**Change Highlight**:
-- Added the **filter** command to the list of available commands.
-- Detailed usage and example of the **filter** command added.
+Example: `filter t/friends t/family` Lists all persons in the address book whose tags match any of the specified keywords.
 
 ### Exiting the program : `exit`
 
@@ -230,6 +226,7 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter** | `filter t/KEYWORD t/[MORE_KEYWORDS]...`<br> e.g., `filter t/friends
 **View**   | `view KEYWORD`<br> e.g., `view Alex`, `view Alex Tan`
 **List**   | `list`
 **Help**   | `help`
