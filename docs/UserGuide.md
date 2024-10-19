@@ -98,12 +98,13 @@ Format: `list`
 
 ### Sorting the displayed list: `sort`
 
-Sorts the list of persons currently displayed by a specified field.
+Sorts the currently visible list of persons by a specified field. 
 
 Format: `sort [s/SORT_OPTION]`
 
-* If no sort option is provided, the list is reset to its original order (i.e., the order in which contacts were added).
-* This command only affects the order of the visible contacts and does not change any filters or searches that are currently applied.
+* The sort order will remain active across future searches or filters until a new sort option is applied or the list is sorted again.
+* If no sort option is provided, calling `sort` will restore the list to its original order (i.e., the order in which contacts were added).
+* This command only changes the order of the visible contacts without affecting any filters or searches that are currently applied.
 
 <box type="tip" seamless>
 
