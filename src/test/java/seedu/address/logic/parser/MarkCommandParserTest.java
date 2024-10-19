@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.TUTORIAL_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -34,19 +35,21 @@ public class MarkCommandParserTest {
         String expectedMessage;
 
         // missing index
-        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MarkCommand.MESSAGE_USAGE);
+        expectedMessage = ParserUtil.MESSAGE_INVALID_INDEX;
         assertParseFailure(parser, TUTORIAL_DESC_ONE, expectedMessage);
 
-        // missing tutorial
+        // missing tutorial number with prefix
         expectedMessage = Tutorial.MESSAGE_CONSTRAINTS;
 
-        assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased(),
+        assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_TUTORIAL,
                 expectedMessage);
 
-        // missing both
+        // missing tutorial prefix
         expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MarkCommand.MESSAGE_USAGE);
+        assertParseFailure(parser, "" + INDEX_FIRST_PERSON.getOneBased(), expectedMessage);
+
+        // missing both
         assertParseFailure(parser, "", expectedMessage);
     }
 }
