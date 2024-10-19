@@ -50,14 +50,14 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, input, Nric.MESSAGE_CONSTRAINTS);
 
         // Invalid caregiver NRIC
-        input = " " + PREFIX_PATIENT + "S1234567A" + " " + PREFIX_CAREGIVER + "INVALID_NRIC";
+        input = " " + PREFIX_PATIENT + "S8484131E" + " " + PREFIX_CAREGIVER + "INVALID_NRIC";
         assertParseFailure(parser, input, Nric.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_missingPrefixes_throwsParseException() {
         // Missing both prefixes
-        String input = "S1234567A S7654321B";
+        String input = "S8484131E S7654321B";
         assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
     }
 
