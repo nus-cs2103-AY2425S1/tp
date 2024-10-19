@@ -32,6 +32,7 @@ public class JsonAdaptedCompany {
     private final String status;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedApplication> applications = new ArrayList<>();
+    private final Boolean isFavourite;
 
     /**
      * Constructs a {@link JsonAdaptedCompany} with the given company details.
@@ -41,12 +42,14 @@ public class JsonAdaptedCompany {
                  @JsonProperty("email") String email, @JsonProperty("address") String address,
                  @JsonProperty("tags") List<JsonAdaptedTag> tags,
                  @JsonProperty("status") String status,
-                 @JsonProperty("applications") List<JsonAdaptedApplication> applications) {
+                 @JsonProperty("applications") List<JsonAdaptedApplication> applications,
+                 @JsonProperty("isFavourite") Boolean isFavourite) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.status = status;
+        this.isFavourite = isFavourite;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -70,6 +73,7 @@ public class JsonAdaptedCompany {
         applications.addAll(source.getApplications().stream()
                 .map(JsonAdaptedApplication::new)
                 .toList());
+        isFavourite = source.getIsFavourite();
     }
 
     /**
@@ -129,7 +133,10 @@ public class JsonAdaptedCompany {
 
         final Set<Tag> modelTags = new HashSet<>(companyTags);
 
-        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelStatus, modelApplications);
+        final Boolean modelIsFavourite = isFavourite;
+
+        return new Company(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+            modelStatus, modelApplications, modelIsFavourite);
     }
 
 }

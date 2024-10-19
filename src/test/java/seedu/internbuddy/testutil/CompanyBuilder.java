@@ -134,6 +134,10 @@ public class CompanyBuilder {
         return this;
     }
 
+    public CompanyBuilder withIsFavourite(Boolean isFavourite) {
+        return this;
+    }
+
     public Company build() {
         return new Company(name, phone, email, address, tags, status, applications);
     }

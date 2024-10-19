@@ -5,13 +5,15 @@
     "email": "contact@apple.com",
     "address": "1 Apple Park Way, Cupertino, CA",
     "status": "INTERESTED",
-    "tags": []
+    "tags": [],
+    "isFavourite": false
   }, {
     "name": "Amazon",
     "phone": "20626asdf61000",
     "email": "contact@amazon.com",
     "address": "410 Terry Ave N, Seattle, WA",
     "status": "INTERESTED",
-    "tags": ["ecommerce", "cloud"]
+    "tags": ["ecommerce", "cloud"],
+    "isFavourite": false
   } ]
 }

@@ -106,9 +106,10 @@ public class EditCommand extends Command {
         Status updatedStatus = editCompanyDescriptor.getStatus().orElse(companyToEdit.getStatus());
         List<Application> updatedApplications = editCompanyDescriptor.getApplications()
                 .orElse(companyToEdit.getApplications());
+        Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, updatedApplications);
+                updatedStatus, updatedApplications, updatedIsFavourite);
     }
 
     public static Company setStatusApplied(Company companyToEdit) {
@@ -119,9 +120,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = companyToEdit.getTags();
         Status updatedStatus = new Status(STATUS_APPLIED);
         List<Application> applications = companyToEdit.getApplications();
+        Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, applications);
+                updatedStatus, applications, updatedIsFavourite);
     }
 
     public static Company setStatusClosed(Company companyToEdit) {
@@ -132,9 +134,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = companyToEdit.getTags();
         Status updatedStatus = new Status(STATUS_CLOSED);
         List<Application> updatedApplications = companyToEdit.getApplications();
+        Boolean updatedIsFavourite = companyToEdit.getIsFavourite();
 
         return new Company(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
-                updatedStatus, updatedApplications);
+                updatedStatus, updatedApplications, updatedIsFavourite);
     }
 
     @Override
@@ -173,6 +176,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Status status;
         private List<Application> applications;
+        private Boolean isFavourite;
 
         public EditCompanyDescriptor() {}
 
@@ -188,6 +192,7 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setStatus(toCopy.status);
             setApplications(toCopy.applications);
+            setIsFavourite(toCopy.isFavourite);
         }
 
         /**
@@ -227,6 +232,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setIsFavourite(Boolean isFavourite) {
+            this.isFavourite = isFavourite;
+        }
+
+        public Optional<Boolean> getIsFavourite() {
+            return Optional.ofNullable(isFavourite);
         }
 
         /**
