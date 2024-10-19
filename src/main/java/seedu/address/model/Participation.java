@@ -1,7 +1,8 @@
 package seedu.address.model;
 
-import seedu.address.model.person.Person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import seedu.address.model.person.Person;
 
 public class Participation {
     private Person student;

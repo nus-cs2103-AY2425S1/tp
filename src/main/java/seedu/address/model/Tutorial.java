@@ -1,12 +1,15 @@
 package seedu.address.model;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.util.ToStringBuilder;
 
-
+/**
+ * Represents a Tutorial class for the students
+ * Guarantees: details are present and not null, field values are validated
+ */
 public class Tutorial {
 
     private String subject;
