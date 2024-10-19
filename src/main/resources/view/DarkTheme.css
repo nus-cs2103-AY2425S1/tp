@@ -393,3 +393,23 @@
     -fx-text-fill: white;
     -fx-alignment: CENTER_RIGHT;
 }
+
+.event-status-label {
+    -fx-font-size: 12px;
+    -fx-background-color: #555555;
+    -fx-text-fill: white;
+    -fx-padding: 2px 5px;
+    -fx-background-radius: 5px;
+}
+
+.event-status-incomplete {
+    -fx-background-color: #b22222;
+}
+
+.event-status-ongoing {
+    -fx-background-color: #ff8c00;
+}
+
+.event-status-completed {
+    -fx-background-color: #e67100;
+}

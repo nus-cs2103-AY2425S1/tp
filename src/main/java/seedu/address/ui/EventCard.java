@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import seedu.address.model.types.event.Event;
 public class EventCard extends UiPart<Region> {
 
     private static final String FXML = "EventListCard.fxml";
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,6 +42,8 @@ public class EventCard extends UiPart<Region> {
     private Label address;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label statusLabel;
 
     /**
      * Creates a {@code EventCode} with the given {@code Event} and index to display.
@@ -52,5 +58,32 @@ public class EventCard extends UiPart<Region> {
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        setEventStatusLabel(event.getStartTime().value);
+    }
+
+    private void setEventStatusLabel(String startTime) {
+        LocalDateTime eventStart = LocalDateTime.parse(startTime, DATE_TIME_FORMATTER);
+        LocalDateTime now = LocalDateTime.now();
+        Duration duration = Duration.between(now, eventStart);
+
+        String statusText;
+        if (duration.isNegative()) {
+            statusText = "Completed";
+            statusLabel.getStyleClass().add("event-status-completed");
+        } else if (duration.isZero()) {
+            statusText = "Ongoing";
+            statusLabel.getStyleClass().add("event-status-ongoing");
+        } else if (duration.toDays() > 0) {
+            statusText = duration.toDays() + " days left";
+            statusLabel.getStyleClass().add("event-status-incomplete");
+        } else if (duration.toHours() > 0) {
+            statusText = duration.toHours() + " hours left";
+            statusLabel.getStyleClass().add("event-status-incomplete");
+        } else {
+            statusText = duration.toMinutes() + " minutes left";
+            statusLabel.getStyleClass().add("event-status-incomplete");
+        }
+
+        statusLabel.setText(statusText);
     }
 }

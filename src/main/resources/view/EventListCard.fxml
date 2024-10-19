@@ -31,5 +31,11 @@
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
         </VBox>
+        <VBox alignment="TOP_RIGHT">
+            <padding>
+                <Insets top="10" right="10" />
+            </padding>
+            <Label fx:id="statusLabel" styleClass="event-status-label" />
+        </VBox>
     </GridPane>
 </HBox>
