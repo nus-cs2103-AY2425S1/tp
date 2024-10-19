@@ -58,7 +58,10 @@ public class Messages {
     }
 
     private static void addDateOfLastVisit(StringBuilder sb, Person person) {
-        sb.append("; Last visit: ").append(person.getDateOfLastVisit());
+        if (!person.hasDateOfLastVisit()) {
+            return;
+        }
+        sb.append("; Last visit: ").append(person.getDateOfLastVisit().get());
     }
 
     private static void addEmail(StringBuilder sb, Person person) {
