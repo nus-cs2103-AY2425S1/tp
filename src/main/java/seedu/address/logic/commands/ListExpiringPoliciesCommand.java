@@ -94,6 +94,10 @@ public class ListExpiringPoliciesCommand extends Command {
         }
     }
 
+    public int getDaysFromExpiry() {
+        return daysFromExpiry;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
