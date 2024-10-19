@@ -180,7 +180,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, remark, priority, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, remark, priority, tags);
         }
 
         public void setName(Name name) {
@@ -280,6 +280,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(dateOfBirth, otherEditPersonDescriptor.dateOfBirth)
                     && Objects.equals(priority, otherEditPersonDescriptor.priority)
                     && Objects.equals(remark, otherEditPersonDescriptor.remark)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
@@ -292,6 +293,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("dateOfBirth", dateOfBirth)
                     .add("priority", priority)
                     .add("remark", remark)
                     .add("tags", tags)
