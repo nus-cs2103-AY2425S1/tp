@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -39,6 +41,13 @@ class JsonAdaptedMedCon {
      * @throws IllegalValueException if there were any data constraints violated in the adapted MedCon.
      */
     public MedCon toModelType() throws IllegalValueException {
+        if (medConName == null) {
+            throw new IllegalValueException(String.format("%s cannot be null", MedCon.class.getSimpleName()));
+        }
+        if (!MedCon.isValidMedCon(medConName)) {
+            throw new IllegalValueException(String.format("%s: %s", MedCon.class.getSimpleName(),
+                    MESSAGE_CONSTRAINTS_LENGTH));
+        }
         return new MedCon(medConName);
     }
 
