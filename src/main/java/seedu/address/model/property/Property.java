@@ -13,14 +13,21 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Property {
     private final PostalCode postalCode;
     private final Unit unit;
+    private final Type type;
 
     /**
      * Every field must be present and not null.
+     * If the type is landed, then unit of a landed property will always default to 00-00
      */
-    public Property(PostalCode postalCode, Unit unit) {
-        requireAllNonNull(postalCode, unit);
+    public Property(PostalCode postalCode, Unit unit, Type type) {
+        requireAllNonNull(postalCode, unit, type);
         this.postalCode = postalCode;
-        this.unit = unit;
+        this.type = type;
+        if (this.type.isLandedType()) {
+            this.unit = Unit.DEFAULT_LANDED_UNIT;
+        } else {
+            this.unit = unit;
+        }
     }
 
     public PostalCode getPostalCode() {
@@ -31,18 +38,30 @@ public class Property {
         return unit;
     }
 
+    public Type getType() {
+        return type;
+    }
+
     /**
-     * Returns true if both properties have the same unit number and postal code.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if either property is landed and have same postal code
+     * OR is not landed and have same postal code and unit number
+     * This defines a weaker notion of equality between two properties.
      */
     public boolean isSameProperty(Property otherProperty) {
         if (otherProperty == this) {
             return true;
         }
 
-        return otherProperty != null
+        boolean hasLanded = this.type.equals(new Type(PropertyType.LANDED.toString()));
+
+        if (hasLanded) {
+            return otherProperty != null
+                && otherProperty.getPostalCode().equals(getPostalCode());
+        } else {
+            return otherProperty != null
                 && otherProperty.getPostalCode().equals(getPostalCode())
                 && otherProperty.getUnit().equals(getUnit());
+        }
     }
 
     /**
@@ -64,7 +83,8 @@ public class Property {
 
         return otherProperty != null
                 && otherProperty.getPostalCode().equals(getPostalCode())
-                && otherProperty.getUnit().equals(getUnit());
+                && otherProperty.getUnit().equals(getUnit())
+                && otherProperty.getType().equals(getType());
     }
 
     @Override
@@ -77,6 +97,7 @@ public class Property {
         return new ToStringBuilder(this)
                 .add("postalCode", postalCode)
                 .add("unit", unit)
+                .add("type", type)
                 .toString();
     }
 }

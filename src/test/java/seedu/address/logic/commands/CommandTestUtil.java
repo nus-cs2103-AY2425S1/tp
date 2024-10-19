@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -62,6 +63,8 @@ public class CommandTestUtil {
     public static final String POSTALCODE_DESC_BEDOK = " " + PREFIX_POSTALCODE + VALID_POSTALCODE_BEDOK;
     public static final String UNIT_DESC_ADMIRALTY = " " + PREFIX_UNITNUMBER + VALID_UNIT_ADMIRALTY;
     public static final String UNIT_DESC_BEDOK = " " + PREFIX_UNITNUMBER + VALID_UNIT_BEDOK;
+    public static final String TYPE_DESC_ADMIRALTY = " " + PREFIX_TYPE + VALID_TYPE_CONDO;
+    public static final String TYPE_DESC_BEDOK = " " + PREFIX_TYPE + VALID_TYPE_HDB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -70,6 +73,7 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_POSTALCODE_DESC = " " + PREFIX_POSTALCODE + "1234"; //PostalCode with few numbers
     public static final String INVALID_UNIT_DESC = " " + PREFIX_UNITNUMBER + "11 11"; //'-' delimiter missing
+    public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "PUBLIC"; //iNVALID TYPE
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

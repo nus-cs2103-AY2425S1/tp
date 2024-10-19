@@ -78,7 +78,9 @@ public class Messages {
         builder.append("PostalCode: ")
                 .append(property.getPostalCode())
                 .append("; Unit: ")
-                .append(property.getUnit());
+                .append(property.getUnit())
+                .append("; Type: ")
+                .append(property.getType());
         return builder.toString();
     }
 }

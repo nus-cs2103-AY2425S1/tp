@@ -66,7 +66,7 @@ public class PropertyTest {
     @Test
     public void toStringMethod() {
         String expected = Property.class.getCanonicalName() + "{postalCode=" + ADMIRALTY.getPostalCode()
-                + ", unit=" + ADMIRALTY.getUnit() + "}";
+                + ", unit=" + ADMIRALTY.getUnit() + ", type=" + ADMIRALTY.getType() + "}";
         assertEquals(expected, ADMIRALTY.toString());
     }
 }

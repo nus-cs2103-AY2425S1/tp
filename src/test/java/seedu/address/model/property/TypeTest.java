@@ -45,6 +45,16 @@ public class TypeTest {
     }
 
     @Test
+    public void isLandedType() {
+        // invalid type
+        assertFalse(new Type("condo").isLandedType()); // not landed type
+        assertFalse(new Type("hDB").isLandedType()); // not landed type
+
+        // valid type
+        assertTrue(new Type("landed").isLandedType()); // landed type
+    }
+
+    @Test
     public void equals() {
         Type type = new Type(VALID_TYPE_LANDED);
 
