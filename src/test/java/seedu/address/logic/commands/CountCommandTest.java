@@ -13,7 +13,7 @@ import seedu.address.model.ModelManager;
 public class CountCommandTest {
 
     @Test
-    public void execute_countPerson_success_noFilter() throws CommandException {
+    public void executeSuccessNoFilter() throws CommandException {
         Model model = new ModelManager();
         int expectedCount = model.getFilteredPersonList().size();
 
@@ -25,7 +25,7 @@ public class CountCommandTest {
     }
 
     @Test
-    public void execute_countPerson_success_withNamePrefix() throws CommandException {
+    public void executeSuccessWithNamePrefix() throws CommandException {
         Model model = new ModelManager();
         String namePrefix = "Al";
 
@@ -42,7 +42,7 @@ public class CountCommandTest {
     }
 
     @Test
-    public void execute_countPerson_success_withTag() throws CommandException {
+    public void executeSuccessWithTag() throws CommandException {
         Model model = new ModelManager();
         String tag = "friend";
 
@@ -60,7 +60,7 @@ public class CountCommandTest {
     }
 
     @Test
-    public void execute_countPerson_noMatches() throws CommandException {
+    public void executeNoMatches() throws CommandException {
         Model model = new ModelManager();
         String namePrefix = "Zzz"; // unlikely to match
 
