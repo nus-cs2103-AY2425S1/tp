@@ -20,7 +20,7 @@ import seedu.address.model.student.Student;
  * Edits the score of an existing assignment belonging to an existing student in the app.
  */
 public class EditAssignmentCommand extends Command {
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit_assignment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the score of an existing assignment "
             + "belonging to an existing student based on the student's index number in the displayed student list, "
