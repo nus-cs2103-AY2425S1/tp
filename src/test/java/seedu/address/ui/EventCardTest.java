@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -25,14 +26,16 @@ public class EventCardTest extends ApplicationTest {
 
     @Override
     public void start(Stage stage) {
-        event = new Event(new EventName("Meeting"), new EventDescription("Project discussion"),
-                new EventDuration(LocalDate.parse("2024-01-01"), LocalDate.parse("2024-01-02")));
-        eventCard = new EventCard(event, 1);
+        Platform.runLater(() -> {
+            event = new Event(new EventName("Meeting"), new EventDescription("Project discussion"),
+                    new EventDuration(LocalDate.parse("2024-01-01"), LocalDate.parse("2024-01-02")));
+            eventCard = new EventCard(event, 1);
 
-        StackPane root = new StackPane();
-        root.getChildren().add(eventCard.getRoot());
-        stage.setScene(new Scene(root));
-        stage.show();
+            StackPane root = new StackPane();
+            root.getChildren().add(eventCard.getRoot());
+            stage.setScene(new Scene(root));
+            stage.show();
+        });
     }
 
     @Test
