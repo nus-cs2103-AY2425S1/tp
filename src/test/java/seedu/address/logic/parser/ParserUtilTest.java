@@ -21,6 +21,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
+import seedu.address.model.person.MedCon;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Phone;
@@ -31,6 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_ALLERGY = "#friend";
+    private static final String INVALID_MEDCON = "@Diabetes";
     private static final String INVALID_NRIC = "S123456";
     private static final String INVALID_GENDER = "x";
     private static final String INVALID_DATE_OF_BIRTH_FORMAT = "2020/12/12";
@@ -42,6 +44,7 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_ALLERGY_1 = "friend";
+    private static final String VALID_MEDCON = "Diabetes";
     private static final String VALID_NRIC = "T0123456A";
     private static final String VALID_GENDER = "f";
     private static final String VALID_DOB = "2020-11-11";
@@ -282,4 +285,26 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseMedCon_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMedCon(null));
+    }
+
+    @Test
+    public void parseMedCon_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMedCon(INVALID_MEDCON));
+    }
+
+    @Test
+    public void parseMedCon_validValueWithoutWhitespace_returnsMedCon() throws Exception {
+        MedCon expectedMedCon = new MedCon(VALID_MEDCON);
+        assertEquals(expectedMedCon, ParserUtil.parseMedCon(VALID_MEDCON));
+    }
+
+    @Test
+    public void parseMedCons_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMedCon(null));
+    }
+
 }
