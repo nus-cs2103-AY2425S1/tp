@@ -36,8 +36,8 @@ public class ViewHistoryCommandParser implements Parser<ViewHistoryCommand> {
         // Tokenize the arguments and look for the /d (date) and /id (patient ID) prefixes
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_ID);
 
-        // Check if both /d and /id prefixes are present, and there is no unexpected preamble
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_DATE, PREFIX_ID)
+        // Check if /z prefixes is present, and there is no unexpected preamble
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_ID)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewHistoryCommand.MESSAGE_USAGE));

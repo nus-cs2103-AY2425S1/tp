@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -178,11 +179,12 @@ public class History {
      * @return A string listing all the appointments for the patient.
      */
     public String getAllPatientsAppointments(Id patientId) {
-        StringBuilder result = new StringBuilder("These are all the appointments this patient has:\n");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        StringBuilder result = new StringBuilder();
         for (LocalDateTime date : appointments) {
             Appointment appointment = appointmentDatabase.get(date);
             if (appointment.getPatientId().equals(patientId)) {
-                result.append(appointment).append("\n");
+                result.append("DateTime: " + date.format(formatter) + " " + appointment).append("\n");
             }
         }
         return result.toString();

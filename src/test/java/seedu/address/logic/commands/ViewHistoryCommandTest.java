@@ -2,10 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.ViewHistoryCommand.MESSAGE_NO_HISTORY_FOUND;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -22,51 +24,90 @@ import seedu.address.model.person.Id;
 import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
-public class AddAppointmentCommandTest {
-    private final LocalDateTime defaultTime = LocalDateTime.of(2024, 12, 31, 12, 0);
-    private final String defaultRemark = "";
+
+public class ViewHistoryCommandTest {
+
+    private final LocalDateTime appointmentTime = LocalDateTime.of(2024, 12, 31, 12, 0);
+    private final String appointmentRemark = "Follow-up check";
+
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddAppointmentCommand(null, null, null, null));
-    }
-    @Test
-    public void execute_appointmentAcceptedByModel_addSuccessful() throws Exception {
-        AddAppointmentCommandTest.ModelStubAcceptingAppointmentAdded modelStub = new AddAppointmentCommandTest
-                .ModelStubAcceptingAppointmentAdded();
+    public void execute_viewHistoryWithTime_success() throws Exception {
+        // Create a ModelStub that can accept appointments
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         Person validPatient = new PersonBuilder().buildPatient();
         Person validDoctor = new PersonBuilder().buildDoctor();
 
+        // Add doctor and patient to the model
         modelStub.addPersonToList(validPatient);
         modelStub.addPersonToList(validDoctor);
 
-        CommandResult commandResult = new AddAppointmentCommand(defaultTime, validPatient.getId(),
-                validDoctor.getId(), defaultRemark).execute(modelStub);
+        // Add an appointment to the patient
+        validPatient.addAppointment(appointmentTime, validPatient.getId(), validDoctor.getId(), appointmentRemark);
 
-        assertEquals(AddAppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS,
-                commandResult.getFeedbackToUser());
-        String expectedAppointments = String.format("All appointments for you in the database:\n"
-                + "Appointment: Id{id=%1$d, role=Patient} (patient id) "
-                + "with Id{id=%2$d, role=Doctor} (doctor id). Remarks: "
-                + "\n", validPatient.getId().getIdValue(), validDoctor.getId().getIdValue());
+        // Execute the ViewHistoryCommand
+        ViewHistoryCommand viewHistoryCommand = new ViewHistoryCommand(validPatient.getId(), appointmentTime);
+        CommandResult commandResult = viewHistoryCommand.execute(modelStub);
 
-        assertEquals(expectedAppointments, validDoctor.getAllAppointments());
+        // Validate that the appointment was retrieved correctly
+        String expectedMessage = String.format("DateTime: %s Appointment: %s (patient id) with %s (doctor id). "
+                        + "Remarks: %s", appointmentTime.format(formatter), validPatient.getId(),
+                        validDoctor.getId(), appointmentRemark);
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
+
     @Test
-    public void execute_duplicateAppointment_throwsCommandException() {
-        Patient validPatient = new PersonBuilder().buildPatient();
-        Doctor validDoctor = new PersonBuilder().buildDoctor();
-        validPatient.addAppointment(defaultTime, validPatient.getId(), validDoctor.getId(), defaultRemark);
-        AddAppointmentCommand addAppointmentCommand = new AddAppointmentCommand(defaultTime,
-                validPatient.getId(), validDoctor.getId(), defaultRemark);
-        AddAppointmentCommandTest.ModelStub modelStub = new AddAppointmentCommandTest
-                .ModelStubWithAppointment(validPatient, validDoctor);
+    public void execute_viewHistoryWithoutTime_success() throws Exception {
+        // Create a ModelStub that can accept appointments
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        Person validPatient = new PersonBuilder().buildPatient();
+        Person validDoctor = new PersonBuilder().buildDoctor();
 
-        assertThrows(CommandException.class, AddAppointmentCommand
-                .MESSAGE_DUPLICATE_APPOINTMENT, () -> addAppointmentCommand.execute(modelStub));
+        // Add doctor and patient to the model
+        modelStub.addPersonToList(validPatient);
+        modelStub.addPersonToList(validDoctor);
+
+        // Add multiple appointments to the patient
+        LocalDateTime firstAppointmentTime = LocalDateTime.of(2024, 12, 31, 12, 0);
+        LocalDateTime secondAppointmentTime = LocalDateTime.of(2024, 11, 30, 15, 0);
+
+        validPatient.addAppointment(firstAppointmentTime, validPatient.getId(),
+                validDoctor.getId(), "First appointment");
+        validPatient.addAppointment(secondAppointmentTime, validPatient.getId(),
+                validDoctor.getId(), "Second appointment");
+
+        // Execute the ViewHistoryCommand without specifying a time
+        ViewHistoryCommand viewHistoryCommand = new ViewHistoryCommand(validPatient.getId());
+        CommandResult commandResult = viewHistoryCommand.execute(modelStub);
+
+        // Validate that both appointments are retrieved correctly
+        String expectedMessage = String.format("DateTime: %s Appointment: %s (patient id) "
+                        + "with %s (doctor id). Remarks: First appointment\n"
+                        + "DateTime: %s Appointment: %s (patient id) "
+                        + "with %s (doctor id). Remarks: Second appointment\n",
+                firstAppointmentTime.format(formatter), validPatient.getId(), validDoctor.getId(),
+                secondAppointmentTime.format(formatter), validPatient.getId(), validDoctor.getId());
+
+        assertEquals(expectedMessage, commandResult.getFeedbackToUser());
     }
-    /**
-     * A default model stub that have all methods failing.
-     */
+
+    @Test
+    public void execute_noHistoryFound_throwsCommandException() {
+        // Create a ModelStub that contains a patient without any medical history
+        ModelStubAcceptingAppointmentAdded modelStub = new ModelStubAcceptingAppointmentAdded();
+        Person validPatient = new PersonBuilder().buildPatient();
+        modelStub.addPersonToList(validPatient);
+
+        // Execute the ViewHistoryCommand for a patient with no history
+        ViewHistoryCommand viewHistoryCommand = new ViewHistoryCommand(validPatient.getId());
+
+        // Expect CommandException with the no history found message
+        assertThrows(CommandException.class, MESSAGE_NO_HISTORY_FOUND, () ->
+                viewHistoryCommand.execute(modelStub));
+    }
+
+
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -155,7 +196,7 @@ public class AddAppointmentCommandTest {
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithAppointment extends AddAppointmentCommandTest.ModelStub {
+    private class ModelStubWithAppointment extends ViewHistoryCommandTest.ModelStub {
         private final Patient patient;
         private final Doctor doctor;
 
@@ -191,7 +232,7 @@ public class AddAppointmentCommandTest {
     /**
      * A Model stub that always accept the appointment being added.
      */
-    public class ModelStubAcceptingAppointmentAdded extends AddAppointmentCommandTest.ModelStub {
+    public class ModelStubAcceptingAppointmentAdded extends ViewHistoryCommandTest.ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         private final ArrayList<Person> personList = new ArrayList<>();
