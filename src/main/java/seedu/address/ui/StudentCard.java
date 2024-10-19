@@ -63,7 +63,7 @@ public class StudentCard extends UiPart<Region> {
         email.setText(student.getEmail().value);
         subjectAndSchedule.setText(student.getSubject().toString() + ": " + student.getSchedule().toString());
         rateAndPaidAmountAndOwedAmount.setText("Rate: $" + student.getRate().toString() + "/h, "
-            + "PaidAmount: $" + student.getPaidAmount().toString() + ", "
+            + "Paid: $" + student.getPaidAmount().toString() + ", "
                 + "Owed: $" + student.getOwedAmount().toString());
 
         // This is the code to show blue tags. I will comment it out instead of deleting it.
