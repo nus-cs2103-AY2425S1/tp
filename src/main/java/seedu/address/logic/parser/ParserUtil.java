@@ -9,7 +9,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -140,18 +140,18 @@ public class ParserUtil {
         return new Rate(trimmedRate);
     }
     /**
-     * Parses a {@code String paid} into a {@code Paid}
+     * Parses a {@code String paid} into a {@code PaidAmount}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code paid} is invalid.
      */
-    public static Paid parsePaid(String paid) throws ParseException {
+    public static PaidAmount parsePaid(String paid) throws ParseException {
         requireNonNull(paid);
         String trimmedPaid = paid.trim();
-        if (!Paid.isValidPaid(trimmedPaid)) {
-            throw new ParseException(Paid.MESSAGE_CONSTRAINTS);
+        if (!PaidAmount.isValidPaid(trimmedPaid)) {
+            throw new ParseException(PaidAmount.MESSAGE_CONSTRAINTS);
         }
-        return new Paid(trimmedPaid);
+        return new PaidAmount(trimmedPaid);
     }
 
     /**

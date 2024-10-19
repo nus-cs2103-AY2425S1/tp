@@ -8,7 +8,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -132,12 +132,12 @@ class JsonAdaptedStudent {
         }
         final Rate modelRate = new Rate(rate);
         if (paid == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Paid.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PaidAmount.class.getSimpleName()));
         }
-        if (!Paid.isValidPaid(paid)) {
-            throw new IllegalValueException(Paid.MESSAGE_CONSTRAINTS);
+        if (!PaidAmount.isValidPaid(paid)) {
+            throw new IllegalValueException(PaidAmount.MESSAGE_CONSTRAINTS);
         }
-        final Paid modelPaid = new Paid(paid);
+        final PaidAmount modelPaidAmount = new PaidAmount(paid);
 
         if (owedAmount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -149,7 +149,7 @@ class JsonAdaptedStudent {
         final OwedAmount modelOwedAmount = new OwedAmount(owedAmount);
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelSchedule,
-                modelSubject, modelRate, modelPaid, modelOwedAmount);
+                modelSubject, modelRate, modelPaidAmount, modelOwedAmount);
     }
 
 }

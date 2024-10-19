@@ -153,7 +153,7 @@ public class StudentTest {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
                 + ", schedule=" + ALICE.getSchedule() + ", subject=" + ALICE.getSubject()
-                + ", rate=" + ALICE.getRate() + ", paid=" + ALICE.getPaid()
+                + ", rate=" + ALICE.getRate() + ", paidAmount=" + ALICE.getPaid()
                 + ", owedAmount=" + ALICE.getOwedAmount() + "}";
         assertEquals(expected, ALICE.toString());
     }

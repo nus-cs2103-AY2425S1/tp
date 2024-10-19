@@ -26,7 +26,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -127,12 +127,12 @@ public class EditCommand extends Command {
         Schedule updatedSchedule = editStudentDescriptor.getSchedule().orElse(studentToEdit.getSchedule());
         Subject updatedSubject = editStudentDescriptor.getSubject().orElse(studentToEdit.getSubject());
         Rate updatedRate = editStudentDescriptor.getRate().orElse(studentToEdit.getRate());
-        Paid updatedPaid = editStudentDescriptor.getPaid().orElse(studentToEdit.getPaid());
+        PaidAmount updatedPaidAmount = editStudentDescriptor.getPaid().orElse(studentToEdit.getPaid());
         OwedAmount updatedOwedAmount = editStudentDescriptor.getOwedAmount().orElse(studentToEdit.getOwedAmount());
 
         return new Student(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
-                updatedPaid, updatedOwedAmount
+                updatedPaidAmount, updatedOwedAmount
         );
     }
 
@@ -172,7 +172,7 @@ public class EditCommand extends Command {
         private Schedule schedule;
         private Subject subject;
         private Rate rate;
-        private Paid paid;
+        private PaidAmount paidAmount;
         private OwedAmount owedAmount;
 
         public EditStudentDescriptor() {}
@@ -188,7 +188,7 @@ public class EditCommand extends Command {
             setSchedule(toCopy.schedule);
             setSubject(toCopy.subject);
             setRate(toCopy.rate);
-            setPaid(toCopy.paid);
+            setPaid(toCopy.paidAmount);
             setOwedAmount(toCopy.owedAmount);
         }
 
@@ -196,7 +196,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, schedule, subject, rate, paidAmount, owedAmount);
         }
 
         public void setName(Name name) {
@@ -254,11 +254,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(rate);
         }
 
-        public void setPaid(Paid paid) {
-            this.paid = paid;
+        public void setPaid(PaidAmount paidAmount) {
+            this.paidAmount = paidAmount;
         }
-        public Optional<Paid> getPaid() {
-            return Optional.ofNullable(paid);
+        public Optional<PaidAmount> getPaid() {
+            return Optional.ofNullable(paidAmount);
         }
 
         public void setOwedAmount(OwedAmount owedAmount) {
@@ -288,7 +288,7 @@ public class EditCommand extends Command {
                     && Objects.equals(schedule, otherEditStudentDescriptor.schedule)
                     && Objects.equals(subject, otherEditStudentDescriptor.subject)
                     && Objects.equals(rate, otherEditStudentDescriptor.rate)
-                    && Objects.equals(paid, otherEditStudentDescriptor.paid)
+                    && Objects.equals(paidAmount, otherEditStudentDescriptor.paidAmount)
                     && Objects.equals(owedAmount, otherEditStudentDescriptor.owedAmount);
         }
 
@@ -302,7 +302,7 @@ public class EditCommand extends Command {
                     .add("schedule", schedule)
                     .add("subject", subject)
                     .add("rate", rate)
-                    .add("paid", paid)
+                    .add("paidAmount", paidAmount)
                     .add("owedAmount", owedAmount)
                     .toString();
         }

@@ -19,7 +19,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -55,19 +55,19 @@ public class AddCommandParser implements Parser<AddCommand> {
         Schedule schedule = ParserUtil.parseSchedule(argMultimap.getValue(PREFIX_SCHEDULE).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Rate rate = ParserUtil.parseRate(argMultimap.getValue(PREFIX_RATE).get());
-        Paid paid = null;
+        PaidAmount paidAmount = null;
         OwedAmount owedAmount = null;
         if (argMultimap.getValue(PREFIX_PAID).isPresent()) {
-            paid = ParserUtil.parsePaid(argMultimap.getValue(PREFIX_PAID).get());
+            paidAmount = ParserUtil.parsePaid(argMultimap.getValue(PREFIX_PAID).get());
         } else {
-            paid = new Paid();
+            paidAmount = new PaidAmount();
         }
         if (argMultimap.getValue(PREFIX_OWED_AMOUNT).isPresent()) {
             owedAmount = ParserUtil.parseOwedAmount(argMultimap.getValue(PREFIX_OWED_AMOUNT).get());
         } else {
             owedAmount = new OwedAmount();
         }
-        Student student = new Student(name, phone, email, address, schedule, subject, rate, paid, owedAmount);
+        Student student = new Student(name, phone, email, address, schedule, subject, rate, paidAmount, owedAmount);
 
         return new AddCommand(student);
     }

@@ -59,7 +59,7 @@ import seedu.address.model.student.Address;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Rate;
 import seedu.address.model.student.Schedule;
@@ -303,7 +303,7 @@ public class AddCommandParserTest {
         // invalid paid
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB
-                + RATE_DESC_BOB + INVALID_PAID_DESC, Paid.MESSAGE_CONSTRAINTS);
+                + RATE_DESC_BOB + INVALID_PAID_DESC, PaidAmount.MESSAGE_CONSTRAINTS);
 
         // invalid owedAmount
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB
