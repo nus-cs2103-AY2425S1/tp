@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD;
@@ -85,10 +87,33 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_noPastCommand() throws CommandException {
+    public void execute_noPastCommand() {
         UndoCommand undoCommand = new UndoCommand(EMPTY_COMMAND_LAST);
 
         assertCommandFailure(undoCommand, model, Messages.MESSAGE_NO_LATEST_COMMAND);
     }
+
+    @Test
+    public void equals() {
+        UndoCommand undoFirstCommand = new UndoCommand(ADD_COMMAND_LAST);
+        UndoCommand undoSecondCommand = new UndoCommand(DELETE_COMMAND_LAST);
+
+        // same object -> returns true
+        assertTrue(undoFirstCommand.equals(undoFirstCommand));
+
+        // same values -> returns true
+        UndoCommand undoFirstCommandCopy = new UndoCommand(ADD_COMMAND_LAST);
+        assertTrue(undoFirstCommand.equals(undoFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(undoFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(undoFirstCommand.equals(null));
+
+        // different past commands -> returns false
+        assertFalse(undoFirstCommand.equals(undoSecondCommand));
+    }
+
 
 }

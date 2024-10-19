@@ -95,8 +95,27 @@ public class UndoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS, resultMessage));
     }
 
+    public ArrayList<Command> getPastCommands() {
+        return pastCommands;
+    }
+
     @Override
     public String getCommandWord() {
         return COMMAND_WORD;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UndoCommand)) {
+            return false;
+        }
+
+        UndoCommand otherUndoCommand = (UndoCommand) other;
+        return pastCommands.equals(otherUndoCommand.getPastCommands());
     }
 }
