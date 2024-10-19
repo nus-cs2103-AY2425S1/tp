@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Priority;
 
 /**
- * Displays the statistics of the filtered people in the SocialBook.
+ * Displays the statistics of the filtered people in SocialBook.
  */
 public class StatisticsCommand extends Command {
 
