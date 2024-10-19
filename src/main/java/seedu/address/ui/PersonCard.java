@@ -72,13 +72,13 @@ public class PersonCard extends UiPart<Region> {
         SkillLevel skillLevel = game.getSkillLevel();
         Role role = game.getRole();
         sb.append(game.getGameName()).append("\n");
-        if (username != null) {
+        if (username.getUsername() != "") {
             sb.append("Username: ").append(game.getUsername()).append("\n");
         }
-        if (skillLevel != null) {
+        if (skillLevel.getSkillLevel() != "") {
             sb.append("Skill Lvl: ").append(game.getSkillLevel()).append("\n");
         }
-        if (role != null) {
+        if (role.getRole() != "") {
             sb.append("Role: ").append(game.getRole());
         }
         return new Label(sb.toString());
