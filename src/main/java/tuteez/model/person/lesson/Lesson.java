@@ -6,6 +6,7 @@ import static tuteez.logic.parser.CliSyntax.PREFIX_LESSON;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,8 +26,11 @@ public class Lesson {
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
-    private static final HashSet<Lesson> lessonSet = new HashSet<>();
-    public final String dayAndTime;
+//    private static final HashSet<Lesson> lessonSet = new HashSet<>();
+    private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+    private final Day lessonDay;
+    private final LocalTime startTime;
+    private final LocalTime endTime;
 
 
     /**
@@ -37,7 +41,11 @@ public class Lesson {
     public Lesson(String lesson) {
         requireNonNull(lesson);
         checkArgument(isValidLesson(lesson), MESSAGE_CONSTRAINTS);
-        this.dayAndTime = lesson.toUpperCase();
+        String[] lessonDayTimeArr = lesson.split(" ");
+        String[] timeArr = lessonDayTimeArr[1].split("-");
+        this.lessonDay = Day.convertDayToEnum(lessonDayTimeArr[0].toLowerCase());
+        this.startTime = LocalTime.parse(timeArr[0], timeFormatter);
+        this.endTime = LocalTime.parse(timeArr[1], timeFormatter);
     }
 
     /**
@@ -98,63 +106,75 @@ public class Lesson {
         String timeRange = parts[1];
         return isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
     }
+//
+//    /**
+//     * Adds a lesson to the HashSet.
+//     *
+//     * @param lesson The lesson to add.
+//     */
+//    public static void addLesson(Lesson lesson) {
+//        lessonSet.add(lesson);
+//    }
+//
+//
+//    /**
+//     * Adds one or more lessons to the HashSet.
+//     *
+//     * @param newLessons Hashset containing lesson / lessons to add.
+//     */
+//    public static void addAllLesson(Set<Lesson> newLessons) {
+//        lessonSet.addAll(newLessons);
+//    }
+//
+//    /**
+//     * Removes a lesson from the HashSet.
+//     *
+//     * @param lesson The lesson to remove.
+//     */
+//    public static void removeLesson(Lesson lesson) {
+//        lessonSet.remove(lesson);
+//    }
+//
+//    /**
+//     * Removes one or more lessons to the HashSet.
+//     *
+//     * @param lessonsToDelete Hashset containing lesson / lessons to add.
+//     */
+//    public static void removeAllLesson(Set<Lesson> lessonsToDelete) {
+//        lessonSet.removeAll(lessonsToDelete);
+//    }
+//
+//    /**
+//     * Checks if the given lesson is a duplicate by checking the HashSet.
+//     *
+//     * @param lesson The lesson to check for duplication.
+//     * @return true if the lesson is a duplicate, false otherwise.
+//     */
+//    public static boolean isDuplicateLesson(Lesson lesson) {
+//        return lessonSet.contains(lesson);
+//    }
+//
+//    public static boolean containsAll(HashSet<Lesson> lessonsToCompare) {
+//        return Lesson.lessonSet.containsAll(lessonsToCompare);
+//    }
+//
+//    /**
+//     * This method is used only for testing. Should not be used elsewhere
+//     */
+//    public static void clearLessonSet() {
+//        Lesson.lessonSet.clear();
+//    }
 
-    /**
-     * Adds a lesson to the HashSet.
-     *
-     * @param lesson The lesson to add.
-     */
-    public static void addLesson(Lesson lesson) {
-        lessonSet.add(lesson);
+    public static boolean isClashingWithOtherLesson(Lesson firstLs, Lesson secondls) {
+         boolean completelyBefore = firstLs.endTime.isBefore(secondls.startTime)
+                 || firstLs.endTime.equals(secondls.startTime);
+         boolean completelyAfter = firstLs.startTime.isAfter(secondls.endTime)
+                 || firstLs.startTime.equals(secondls.endTime);
+         return !(completelyBefore || completelyAfter);
     }
 
-
-    /**
-     * Adds one or more lessons to the HashSet.
-     *
-     * @param newLessons Hashset containing lesson / lessons to add.
-     */
-    public static void addAllLesson(Set<Lesson> newLessons) {
-        lessonSet.addAll(newLessons);
-    }
-
-    /**
-     * Removes a lesson from the HashSet.
-     *
-     * @param lesson The lesson to remove.
-     */
-    public static void removeLesson(Lesson lesson) {
-        lessonSet.remove(lesson);
-    }
-
-    /**
-     * Removes one or more lessons to the HashSet.
-     *
-     * @param lessonsToDelete Hashset containing lesson / lessons to add.
-     */
-    public static void removeAllLesson(Set<Lesson> lessonsToDelete) {
-        lessonSet.removeAll(lessonsToDelete);
-    }
-
-    /**
-     * Checks if the given lesson is a duplicate by checking the HashSet.
-     *
-     * @param lesson The lesson to check for duplication.
-     * @return true if the lesson is a duplicate, false otherwise.
-     */
-    public static boolean isDuplicateLesson(Lesson lesson) {
-        return lessonSet.contains(lesson);
-    }
-
-    public static boolean containsAll(HashSet<Lesson> lessonsToCompare) {
-        return Lesson.lessonSet.containsAll(lessonsToCompare);
-    }
-
-    /**
-     * This method is used only for testing. Should not be used elsewhere
-     */
-    public static void clearLessonSet() {
-        Lesson.lessonSet.clear();
+    public Day getLessonDay() {
+        return lessonDay;
     }
 
     @Override
@@ -168,18 +188,33 @@ public class Lesson {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return dayAndTime.equals(((Lesson) other).dayAndTime);
+        return otherLesson.startTime.equals(this.startTime) && otherLesson.endTime.equals(this.endTime);
     }
 
-    @Override
-    public int hashCode() {
-        return dayAndTime.hashCode();
-    }
+//    @Override
+//    public int hashCode() {
+//        return dayAndTime.hashCode();
+//    }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + dayAndTime + ']';
+        return '[' + lessonDay.toString() + " " + startTime.toString().replace(":","") + "-"
+                + endTime.toString().replace(":", "")+ ']';
+    }
+
+    /**
+     *
+     */
+    public String dayTimeString() {
+        return this.toString().replace("[","").replace("]", "");
+    }
+
+    public static class LessonComparator implements Comparator<Lesson> {
+        @Override
+        public int compare(Lesson o1, Lesson o2) {
+            return o1.startTime.compareTo(o2.startTime);
+        }
     }
 }

@@ -53,7 +53,7 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            Lesson.addAllLesson(person.getLessons());
+//            Lesson.addAllLesson(person.getLessons());
             addressBook.addPerson(person);
         }
         return addressBook;

@@ -13,6 +13,7 @@ import tuteez.commons.core.GuiSettings;
 import tuteez.commons.core.LogsCenter;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
+import tuteez.model.person.lesson.Lesson;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -121,6 +122,11 @@ public class ModelManager implements Model {
     public Person findPersonByName(Name targetName) {
         requireNonNull(targetName);
         return addressBook.findPersonByName(targetName);
+    }
+
+    @Override
+    public boolean isClashingWithExistingLesson(Lesson lesson) {
+        return addressBook.isClashingWithExistingLesson(lesson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
