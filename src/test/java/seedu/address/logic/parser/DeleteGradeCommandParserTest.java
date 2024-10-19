@@ -30,13 +30,13 @@ public class DeleteGradeCommandParserTest {
         // Less arguments
         assertParseFailure(parser, "15", errorMessage);
 
-        // Wrong arguments structure
-        assertParseFailure(parser, "Alice 17", ParserUtil.MESSAGE_INVALID_INDEX);
+        // Wrong arguments structure (Invalid index)
+        assertParseFailure(parser, "Alice Midterm", ParserUtil.MESSAGE_INVALID_INDEX);
 
         // Missing test name
         assertParseFailure(parser, "15 ", errorMessage);
 
         // Too many arguments
-        assertParseFailure(parser, "15 Midterm 17", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "15 Midterm 17", errorMessage);
     }
 }
