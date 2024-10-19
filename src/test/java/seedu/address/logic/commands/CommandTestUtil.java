@@ -86,13 +86,18 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                                                     .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                                                     .withSchedule(VALID_SCHEDULE_AMY).withSubject(VALID_SUBJECT_AMY).withRate(VALID_RATE_AMY)
-                                                     .withPaidAmount(VALID_PAID_AMOUNT_AMY).withOwedAmount(VALID_OWED_AMOUNT_AMY).build();
+                                                     .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
+                                                     .withAddress(VALID_ADDRESS_AMY)
+                                                     .withSchedule(VALID_SCHEDULE_AMY).withSubject(VALID_SUBJECT_AMY)
+                                                     .withRate(VALID_RATE_AMY)
+                                                     .withPaidAmount(VALID_PAID_AMOUNT_AMY)
+                                                     .withOwedAmount(VALID_OWED_AMOUNT_AMY).build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
-                                                     .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                                                     .withSchedule(VALID_SCHEDULE_BOB).withSubject(VALID_SUBJECT_BOB).withRate(VALID_RATE_BOB)
-                                                     .withPaidAmount(VALID_PAID_AMOUNT_BOB).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
+                                                     .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
+                                                     .withAddress(VALID_ADDRESS_BOB)
+                                                     .withSchedule(VALID_SCHEDULE_BOB).withSubject(VALID_SUBJECT_BOB)
+                                                     .withRate(VALID_RATE_BOB).withPaidAmount(VALID_PAID_AMOUNT_BOB)
+                                                     .withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
     }
 
     /**
