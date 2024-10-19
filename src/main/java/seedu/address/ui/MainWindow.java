@@ -12,7 +12,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -190,9 +189,11 @@ public class MainWindow extends UiPart<Stage> {
             //Written by ChatGPT
             if (commandResult.getPersonToShow() != null) {
                 Person personToShow = commandResult.getPersonToShow();
-                PersonPane personPane = new PersonPane(personToShow); // Create a new PersonPane with the selected person
+                // Create a new PersonPane with the selected person
+                PersonPane personPane = new PersonPane(personToShow);
                 personPanePlaceholder.getChildren().clear(); // Clear existing content
-                personPanePlaceholder.getChildren().add(personPane.getRoot()); // Add the new PersonPane to the placeholder
+                // Add the new PersonPane to the placeholder
+                personPanePlaceholder.getChildren().add(personPane.getRoot());
             }
             //@@author
 
@@ -211,15 +212,4 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
-    //@@author tayxuenye-reused
-    //Written by ChatGPT
-    public void updatePersonPane(Index index) {
-        Person personToShow = logic.getFilteredPersonList().get(index.getZeroBased());
-        PersonPane personPane = new PersonPane(personToShow);
-        personPanePlaceholder.getChildren().clear();
-        personPanePlaceholder.getChildren().add(personPane.getRoot());
-    }
-    //@@author
-
 }
