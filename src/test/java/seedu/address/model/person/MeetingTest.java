@@ -46,7 +46,7 @@ public class MeetingTest {
     }
 
     @Test
-    public void test_isOverlap(){
+    public void test_isOverlap() {
         LocalDateTime time1030 = LocalDateTime.parse("30-07-2024 10:30", formatter);
         LocalDateTime time1045 = LocalDateTime.parse("30-07-2024 10:45", formatter);
         LocalDateTime time1100 = LocalDateTime.parse("30-07-2024 11:00", formatter);
@@ -65,8 +65,8 @@ public class MeetingTest {
             assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1045, time1200, location)));
 
             // valid timings
-            assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1030, time1045, location))); // defaultMeeting after
-            assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1145, time1200, location))); // defaultMeeting before
+            assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1030, time1045, location))); // after
+            assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1145, time1200, location))); //  before
         } catch (CommandException e) {
             throw new RuntimeException("Error while creating the meeting: " + e.getMessage(), e);
         }
