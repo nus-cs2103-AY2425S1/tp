@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -32,7 +33,6 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
-    <Region prefWidth="1" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="divider"/>
     <VBox alignment="TOP_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0">
       <padding>
         <Insets top="10" right="8" bottom="5" left="15" />
