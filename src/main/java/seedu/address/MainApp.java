@@ -46,10 +46,8 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
-    private final Path customStoragePath;
-
-    public MainApp(Path customStoragePath) {
-        this.customStoragePath = customStoragePath;
+    public MainApp() {
+        // empty constructor
     }
 
 
@@ -177,7 +175,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting EZSTATES " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

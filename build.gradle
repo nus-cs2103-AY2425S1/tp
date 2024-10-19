@@ -37,8 +37,19 @@ test {
         html.required = true
     }
     doLast {
-        def testReportPath = "${buildDir}/reports/tests/test/index.html"
-        println "\nTest report generated at: file:///${testReportPath}"
+        def reportFile = file("${buildDir}/reports/tests/test/index.html")
+        def osName = System.getProperty("os.name").toLowerCase()
+
+        if (osName.contains("win")) {
+            // For Windows
+            def path = reportFile.absolutePath
+            def driveLetter = path.charAt(0).toLowerCase()
+            def remainingPath = path.substring(2).replace('\\', '/')
+            println "\nTest report generated at: file:///${driveLetter}${remainingPath}"
+        } else {
+            // For macOS/Linux
+            println "\nTest report generated at: file://${reportFile.absolutePath}"
+        }
     }
     finalizedBy jacocoTestReport
 }
@@ -80,10 +91,21 @@ jacocoTestReport {
         html.required = true
         xml.required = true
     }
+
     doLast {
-        // Print the path to the HTML report in the terminal
-        def reportPath = "${buildDir}/reports/jacoco/test/html/index.html"
-        println "\nTest coverage report generated at: file:///${reportPath}"
+        def reportFile = file("${buildDir}/reports/jacoco/test/html/index.html")
+        def osName = System.getProperty("os.name").toLowerCase()
+
+        if (osName.contains("win")) {
+            // For Windows
+            def path = reportFile.absolutePath
+            def driveLetter = path.charAt(0).toLowerCase()
+            def remainingPath = path.substring(2).replace('\\', '/')
+            println "\nTest coverage report generated at: file:///${driveLetter}${remainingPath}"
+        } else {
+            // For macOS/Linux
+            println "\nTest coverage report generated at: file://${reportFile.absolutePath}"
+        }
     }
 }
 

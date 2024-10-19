@@ -78,7 +78,7 @@ public class AddPropertyCommand extends Command {
         String message = !property.toString().isEmpty()
                 ? MESSAGE_ADD_PROPERTY_SUCCESS
                 : MESSAGE_DELETE_PROPERTY_SUCCESS;
-        return String.format(message, property, personToEdit);
+        return String.format(message, property, Messages.format(personToEdit));
     }
 
     @Override

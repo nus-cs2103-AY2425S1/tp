@@ -13,6 +13,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -75,10 +76,13 @@ public class PersonBuilder {
         return this;
     }
 
-    //  public PersonBuilder withTags(String ... tags) {
-    //      this.tags = SampleDataUtil.getTagSet(tags);
-    //      return this;
-    //  }
+    /**
+     * Sets the {@code Tags} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
 
     /**
     * Sets the {@code Email} of the {@code Person} that we are building.
@@ -92,7 +96,7 @@ public class PersonBuilder {
      * Sets the {@code Property} of the {@code Person} that we are building.
      */
     public PersonBuilder withProperty(String property) {
-        this.property = new Property("property");
+        this.property = new Property(property);
         return this;
     }
 

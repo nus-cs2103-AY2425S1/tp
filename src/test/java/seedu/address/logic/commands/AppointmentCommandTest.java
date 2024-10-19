@@ -78,7 +78,7 @@ public class AppointmentCommandTest {
 
         // Assert
         Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO).build();
-        assertEquals(String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson),
+        assertEquals(String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
                 result.getFeedbackToUser());
     }
 
