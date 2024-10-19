@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsReceipt.CategoryPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
