@@ -6,8 +6,18 @@ title: User Guide
 Murphy's List is a **desktop app for managing patient contact info for institutes providing palliative care, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Murphy's List can get your healthcare administrative tasks done faster than other traditional GUI apps.
 
-* Table of Contents
-{:toc}
+## Table of Contents
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+    1. [Viewing Help](#viewing-help--help)
+    2. [Adding a Person](#adding-a-person--add)
+    3. [Adding a Remark](#adding-a-remark--remark)
+    4. [Adding an Appointment](#adding-an-appointment--appointment)
+3. [Command Summary](#command-summary)
+4. [FAQ](#faq)
+5. [Known Issues](#known-issues)
+6. [Commannd Summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -30,7 +40,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 
    * `add n/John Doe p/98765432 e/johnd@example.com i/S1234567A a/John street, block 123, #01-01` : Adds a patient profile of a patient named `John Doe` to the Address Book.
 
-   * `delete 3` : Deletes the 3rd patient profile shown in the current list.
+   * `delete S1231231D` : Deletes the patient profile of the patient with `NRIC S1231231D`.
 
    * `clear` : Deletes all patient profiles in the database.
 
@@ -44,7 +54,7 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -68,12 +78,12 @@ If you can type fast, Murphy's List can get your healthcare administrative tasks
 
 Displays a list of accepted commands.
 
-![help message](images/helpMessage.png)
+![help page](images/HelpPage.png)
 
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a person : `add`
 
 Adds a patient profile to the database.
 
@@ -86,6 +96,22 @@ A person can have any number of tags (including 0)
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com i/S1234567A a/John street, block 123, #01-01`
 * `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/criminal t/friend`
+
+### Adding a remark to a patient profile : `remark`
+
+Adds a remark to a specified patient profile.
+
+Format: `remark NRIC r/REMARK`
+
+Examples: 
+* `remark S1234567A r/allergic to dogs`
+* `remark T1231231D r/keep away from flashing lights`
+
+### Adding an appointment : `appointment`
+
+Adds the appointment date of a patient to the patient profile. Note that appointment date must be in the format DD-MM-YYYY HH:MM.
+
+Format: `appointment NRIC app/APPOINTMENT`
 
 ### Listing all persons : `list`
 
@@ -126,11 +152,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/searchResult.png)
 
 ### Deleting a patient profile : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified patient profile from the database.
 
 Format: `delete NRIC`
 
@@ -174,7 +200,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Murphy's List home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,9 +216,12 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL i/NRIC a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Betsy Crowe p/24681357 e/betsycrowe@example.com i/T1234567D a/Newgate Prison t/criminal t/friend`
+**Add Remark** | `remark NRIC r/REMARK` <br> e.g., `remark S1231231D r/allergic to seafood`
+**Add Appointment** | `appointment NRIC app/appointment` <br> e.g., `appointment S1234567A app/25-12-2024 14:30`
 **Clear** | `clear`
 **Delete** | `delete NRIC`<br> e.g., `delete S1234567A`
 **Edit** | `edit INDEX(must be positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [i/NRIC] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
