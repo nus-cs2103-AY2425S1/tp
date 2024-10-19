@@ -2,8 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -13,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes the people identified using the displayed index from the address book.
  */
 public class DeleteCommand extends Command {
 
@@ -25,7 +27,7 @@ public class DeleteCommand extends Command {
                 + "Parameters: INDEXES (must be a positive integer)\n"
                 + "Example: " + COMMAND_WORD + " 1, 2";
 
-    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People: %s";
+    public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People:\n%s";
     private final Index[] targetIndexes;
 
 
@@ -51,19 +53,18 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         String s = "";
-        Person[] personsToDelete = new Person[targetIndexes.length];
-        for (int i = targetIndexes.length - 1; i >= 0; i--) {
+        ArrayList<Person> personsToDelete = new ArrayList<>();
+        for (int i = 0; i < targetIndexes.length; i++) {
             if (targetIndexes[i].getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            personsToDelete[targetIndexes.length - i - 1] = lastShownList.get(targetIndexes[i].getZeroBased());
+            personsToDelete.add(lastShownList.get(targetIndexes[i].getZeroBased()));
         }
 
-        for (int j = 0; j < personsToDelete.length; j++) {
-            model.deletePerson(personsToDelete[j]);
-            s += Messages.format(personsToDelete[j]);
-            s += "\n";
-        }
+        s = personsToDelete.stream()
+                .peek(person -> model.deletePerson(person))
+                .map(person -> Messages.format(person))
+                .collect(Collectors.joining("\n\n"));
 
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
     }

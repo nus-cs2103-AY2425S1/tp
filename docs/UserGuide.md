@@ -60,7 +60,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `statistics`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -151,11 +151,40 @@ Examples:
 * `list` followed by `delete 2,3` or `delete 3,2` deletes the 2nd and 3rd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Getting that parameter of all these people: `get` 
+Gets the specified parameter of the filtered people from SocialBook.
+
+Format: `get PARAMETERS`
+
+* Gets the specified parameters for each person in the filtered list.
+* The only valid parameters are: n/, p/, e/, a/.
+* All inputted parameters must be valid for the details to be displayed. 
+* The details will be displayed in the order of the inputted parameters.
+* Executing the same parameter multiple times in the same command will still only return one set of that detail.
+
+Examples:
+* `list` followed by `get p/ e/` gets the phone numbers followed by the emails of the people in SocialBook.
+* `list` followed by `get p/ p/` gets only one set of the phone numbers of the people in SocialBook.
+* `find p/HIGH` followed by `get n/ a/` gets the names followed by the addresses of the high priority people.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Displaying overall statistics : `statistics`
+
+Displays the statistics of filtered list.
+
+Statistics include: 
+* Nb of People
+* Nb of HIGH Priority People
+* Nb of MEDIUM Priority People
+* Nb of LOW Priority People
+* Nb of People With Monthly Household Income < 2500
+
+Format: `statistics`
 
 ### Exiting the program : `exit`
 
@@ -200,12 +229,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+Action           | Format, Examples
+-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**        | `clear`
+**Delete**       | `delete INDEXES`<br> e.g., `delete 2,3`
+**Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Get**          | `get PARAMETERS`<br> e.g.,`get e/ p/`
+**List**         | `list`
+**Statistics**   | `statistics`
+**Help**         | `help`
