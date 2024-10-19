@@ -1,5 +1,6 @@
 #copyButton, #helpMessage {
     -fx-text-fill: white;
+    -fx-font-family: "Poppins";
 }
 
 #copyButton {
