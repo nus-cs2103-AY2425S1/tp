@@ -20,9 +20,9 @@ public class ListExpiringPoliciesCommandParser implements Parser<ListExpiringPol
     public ListExpiringPoliciesCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DAYS_FROM_EXPIRY);
 
-        int days = 30; // Default value
+        int days = 30;
 
-        // Check if the 'd/' prefix is provided
+        // check if the 'd/' prefix is provided
         if (argMultimap.getValue(PREFIX_DAYS_FROM_EXPIRY).isPresent()) {
             String daysString = argMultimap.getValue(PREFIX_DAYS_FROM_EXPIRY).get();
             try {
@@ -38,7 +38,12 @@ public class ListExpiringPoliciesCommandParser implements Parser<ListExpiringPol
             }
         }
 
-        // Create and return the command with the parsed days or default
+        // check if there are extra arguments (those not recognised by the prefixes)
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListExpiringPoliciesCommand.MESSAGE_USAGE));
+        }
+
         return new ListExpiringPoliciesCommand(days);
     }
 }

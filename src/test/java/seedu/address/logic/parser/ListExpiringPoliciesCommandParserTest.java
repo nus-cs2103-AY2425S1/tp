@@ -37,7 +37,7 @@ public class ListExpiringPoliciesCommandParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ListExpiringPoliciesCommand.MESSAGE_USAGE), () -> parser.parse(" d/abc"));
 
-        // Test invalid arguments with negative or zero days (eg. d/0, d/-5)
+        // test invalid arguments with negative or zero days (eg. d/0, d/-5)
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ListExpiringPoliciesCommand.MESSAGE_USAGE), () -> parser.parse(" d/0"));
 

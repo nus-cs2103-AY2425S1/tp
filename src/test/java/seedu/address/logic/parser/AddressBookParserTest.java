@@ -145,16 +145,25 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listExpiringPolicies() throws Exception {
-        // This will be changed in future iterations when args are introduced to the command
-        // Test valid usage of the command without arguments
+        // test valid usage of the command with no arguments (should default to 30 days)
         assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
                 instanceof ListExpiringPoliciesCommand);
 
-        // Test invalid usage where extra arguments are provided
+        // test valid usage of the command with days argument (eg. "listExpiringPolicies d/60")
+        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " d/60")
+                instanceof ListExpiringPoliciesCommand);
+
+        // test invalid usage where extra invalid arguments are provided (eg., "listExpiringPolicies extraArgument")
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " extraArgument"));
+
+        // test invalid usage where days argument is not an integer (eg. "listExpiringPolicies d/abc")
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " d/abc"));
     }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
