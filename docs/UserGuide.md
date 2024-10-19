@@ -144,7 +144,10 @@ Expected Results:
 * Easy-peasy! If you managed to delete the student you should see something similar to this!
 ![result for 'delete 2'](images/delete_success.png)
 
-
+Common Errors: 
+* I know it can be hard to learn a new command but don't worry I got you!
+* 9 out of 10 times the error you are facing is due to incorrect `INDEX` being used. 
+* I'll tell you the exact error in the application itself so just keep a look our for it here is an example!
 
 ### Clearing all entries : `clear`
 
