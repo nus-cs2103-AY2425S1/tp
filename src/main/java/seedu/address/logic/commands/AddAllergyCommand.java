@@ -32,8 +32,6 @@ public class AddAllergyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added allergy: %1$s to Nric: %2$s";
     public static final String MESSAGE_DUPLICATE_ALLERGY = "This allergy already exists in the address book: %1$s";
-    public static final String MESSAGE_CONSTRAINT = "Allergy should be alphanumeric "
-            + "and not exceed 30 characters long. \n%1$s";
     private final Nric nric;
     private final Set<Allergy> allergies;
 
