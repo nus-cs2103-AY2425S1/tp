@@ -29,6 +29,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People:\n%s";
     private final Index[] targetIndexes;
+    private ArrayList<Person> personsToDelete = new ArrayList<>();
 
 
     /**
@@ -53,7 +54,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         String s = "";
-        ArrayList<Person> personsToDelete = new ArrayList<>();
+
         for (int i = 0; i < targetIndexes.length; i++) {
             if (targetIndexes[i].getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -65,8 +66,16 @@ public class DeleteCommand extends Command {
                 .peek(person -> model.deletePerson(person))
                 .map(person -> Messages.format(person))
                 .collect(Collectors.joining("\n\n"));
-
         return new CommandResult(String.format(MESSAGE_DELETE_PEOPLE_SUCCESS, s));
+    }
+
+    public ArrayList<Person> getPersonsToDelete() {
+        return personsToDelete;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 
 

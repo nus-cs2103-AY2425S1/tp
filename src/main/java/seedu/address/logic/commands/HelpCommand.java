@@ -51,4 +51,9 @@ public class HelpCommand extends Command {
         HelpCommand otherHelpCommand = (HelpCommand) other;
         return usage.equals(otherHelpCommand.usage);
     }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

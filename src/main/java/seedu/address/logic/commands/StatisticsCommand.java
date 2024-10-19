@@ -100,19 +100,10 @@ public class StatisticsCommand extends Command {
         return String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
     }
 
-    //    /**
-    //     * Returns a message with number of people with monthly household income < 2500 in current list.
-    //     *
-    //     * @param currList current list.
-    //     * @return string message of number of people with monthly household income < 2500.
-    //     */
-    //    public static String incomeLessThan2500(List<Person> currList) {
-    //        long lowIncome = currList.stream()
-    //                .map(person -> person.getIncome().toDouble())
-    //                .filter(income -> income < 2500)
-    //                .count();
-    //        return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
-    //    }
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 
     public String getResultMessage() {
         return this.resultMessage;
