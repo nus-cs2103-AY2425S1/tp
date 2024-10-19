@@ -71,6 +71,7 @@ public class AddCommandTest {
     }
 
 
+
     @Test
     public void equals() {
         Student alice = new StudentBuilder().withName("Alice").build();
