@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class SampleDataUtilTest {
         assertEquals("alexyeoh@example.com", alex.getEmail().value);
         assertEquals("Blk 30 Geylang Street 29, #06-40", alex.getAddress().value);
         assertFalse(alex.getPayment().hasPaid);
-        assertFalse(alex.getAttendance().isPresent);
+        assertEquals(alex.getAttendance().attendanceDate, LocalDate.now());
         assertTrue(alex.getTags().contains(new Tag("friends")));
     }
 

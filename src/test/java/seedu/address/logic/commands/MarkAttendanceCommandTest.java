@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -18,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -32,8 +35,8 @@ public class MarkAttendanceCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        assertFalse(personToMarkAttendance.getAttendance().isPresent);
-        Person markedPerson = new PersonBuilder(personToMarkAttendance).withAttendance(true).build();
+        Person markedPerson = new PersonBuilder(personToMarkAttendance)
+                .withAttendance(LocalDate.now().format(Attendance.VALID_DATE_FORMAT)).build();
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_SECOND_PERSON);
 
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
@@ -57,8 +60,8 @@ public class MarkAttendanceCommandTest {
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
 
         Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        assertFalse(personToMarkAttendance.getAttendance().isPresent);
-        Person markedPerson = new PersonBuilder(personToMarkAttendance).withAttendance(true).build();
+        Person markedPerson = new PersonBuilder(personToMarkAttendance)
+                .withAttendance(LocalDate.now().format(Attendance.VALID_DATE_FORMAT)).build();
         MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
