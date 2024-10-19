@@ -18,3 +18,8 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+.person-pane-label {
+    -fx-text-fill: white;
+    -fx-font-size: 22px;
+}

@@ -12,10 +12,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane personPanePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +126,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        PersonPane personPane = new PersonPane();
+        personPanePlaceholder.getChildren().add(personPane.getRoot());
     }
 
     /**
@@ -178,6 +186,16 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            //@@author tayxuenye-reused
+            //Written by ChatGPT
+            if (commandResult.getPersonToShow() != null) {
+                Person personToShow = commandResult.getPersonToShow();
+                PersonPane personPane = new PersonPane(personToShow); // Create a new PersonPane with the selected person
+                personPanePlaceholder.getChildren().clear(); // Clear existing content
+                personPanePlaceholder.getChildren().add(personPane.getRoot()); // Add the new PersonPane to the placeholder
+            }
+            //@@author
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -193,4 +211,15 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    //@@author tayxuenye-reused
+    //Written by ChatGPT
+    public void updatePersonPane(Index index) {
+        Person personToShow = logic.getFilteredPersonList().get(index.getZeroBased());
+        PersonPane personPane = new PersonPane(personToShow);
+        personPanePlaceholder.getChildren().clear();
+        personPanePlaceholder.getChildren().add(personPane.getRoot());
+    }
+    //@@author
+
 }
