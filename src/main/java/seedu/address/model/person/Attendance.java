@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Person's attendance in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
@@ -9,18 +12,18 @@ import static java.util.Objects.requireNonNull;
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be either present (true) or absent (false).";
-    public static final String VALIDATION_REGEX = "^(true|false)$";
+    public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/\\d{2}$";
 
-    public final Boolean isPresent;
+    public final LocalDate attendanceDate;
 
     /**
      * Constructs an {@code Attendance}.
      *
-     * @param isPresent A Boolean indicating if the person is present (true) or absent (false).
+     * @param date A LocalDate indicating the date the person attended a tutorial.
      */
-    public Attendance(Boolean isPresent) {
-        requireNonNull(isPresent);
-        this.isPresent = isPresent;
+    public Attendance(LocalDate date) {
+        requireNonNull(date);
+        this.attendanceDate = date;
     }
 
     /**
@@ -32,7 +35,8 @@ public class Attendance {
 
     @Override
     public String toString() {
-        return isPresent ? "Present" : "Absent";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM");
+        return attendanceDate.format(formatter);
     }
 
     @Override
@@ -46,12 +50,12 @@ public class Attendance {
         }
 
         Attendance otherAttendance = (Attendance) other;
-        return isPresent == otherAttendance.isPresent;
+        return attendanceDate.equals(otherAttendance.attendanceDate);
     }
 
     @Override
     public int hashCode() {
-        return Boolean.hashCode(isPresent);
+        return attendanceDate.hashCode();
     }
 }
 
