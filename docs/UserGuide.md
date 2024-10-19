@@ -156,15 +156,16 @@ Gets the specified parameter of the filtered people from SocialBook.
 
 Format: `get PARAMETERS`
 
-* Gets the specified parameters for each of the people in the filtered list.
-* The accepted parameter inputs only includes those that are already defined by SocialBook like n/, p/, e/, a/.
+* Gets the specified parameters for each person in the filtered list.
+* The only valid parameters are: n/, p/, e/, a/.
 * All inputted parameters must be valid for the details to be displayed. 
+* The details will be displayed in the order of the inputted parameters.
 * Executing the same parameter multiple times in the same command will still only return one set of that detail.
 
 Examples:
-* `list` followed by `get p/ e/` gets the phone numbers and emails of the people in SocialBook.
+* `list` followed by `get p/ e/` gets the phone numbers followed by the emails of the people in SocialBook.
 * `list` followed by `get p/ p/` gets only one set of the phone numbers of the people in SocialBook.
-* `find p/HIGH` followed by `get n/ a/` gets the names and addresses of the high priority people.
+* `find p/HIGH` followed by `get n/ a/` gets the names followed by the addresses of the high priority people.
 
 ### Clearing all entries : `clear`
 
@@ -174,7 +175,14 @@ Format: `clear`
 
 ### Displaying overall statistics : `statistics`
 
-Displays the overall statistics of SocialBook.
+Displays the statistics of filtered list.
+
+Statistics include: 
+* Nb of People
+* Nb of HIGH Priority People
+* Nb of MEDIUM Priority People
+* Nb of LOW Priority People
+* Nb of People With Monthly Household Income < 2500
 
 Format: `statistics`
 
@@ -228,6 +236,7 @@ Action           | Format, Examples
 **Delete**       | `delete INDEXES`<br> e.g., `delete 2,3`
 **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Get**          | `get PARAMETERS`<br> e.g.,`get e/ p/`
 **List**         | `list`
 **Statistics**   | `statistics`
 **Help**         | `help`

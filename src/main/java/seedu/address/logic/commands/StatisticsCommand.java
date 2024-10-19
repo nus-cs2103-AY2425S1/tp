@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +26,7 @@ public class StatisticsCommand extends Command {
     public static final String MESSAGE_DISPLAY_HIGH_PRIORITY = "Number Of HIGH Priority People: %s";
     public static final String MESSAGE_DISPLAY_MEDIUM_PRIORITY = "Number Of MEDIUM Priority People: %s";
     public static final String MESSAGE_DISPLAY_LOW_PRIORITY = "Number Of LOW Priority People: %s";
+    public static final String MESSAGE_DISPLAY_LOW_INCOME = "Number Of Income < 2500 People: %s";
     private String resultMessage = "";
 
     /**
@@ -37,13 +38,14 @@ public class StatisticsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        String[] allStats = new String[4];
-        allStats[0] = nbOfPeople(lastShownList);
-        allStats[1] = highPriorityPeople(lastShownList);
-        allStats[2] = mediumPriorityPeople(lastShownList);
-        allStats[3] = lowPriorityPeople(lastShownList);
+        ArrayList<String> allStats = new ArrayList<>();
+        allStats.add(nbOfPeople(lastShownList));
+        allStats.add(highPriorityPeople(lastShownList));
+        allStats.add(mediumPriorityPeople(lastShownList));
+        allStats.add(lowPriorityPeople(lastShownList));
+        allStats.add(incomeLessThan2500(lastShownList));
 
-        resultMessage = Arrays.stream(allStats)
+        resultMessage = allStats.stream()
                 .collect(Collectors.joining("\n"));
 
         return new CommandResult(String.format(MESSAGE_DISPLAY_STATISTICS_SUCCESS, resultMessage));
@@ -96,6 +98,21 @@ public class StatisticsCommand extends Command {
                 .filter(person -> person.getPriority() == Priority.LOW)
                 .count();
         return String.format(MESSAGE_DISPLAY_LOW_PRIORITY, lowPriority);
+    }
+
+    /**
+     * Returns a message with number of people with monthly household income < 2500 in current list.
+     *
+     * @param currList current list.
+     * @return string message of number of people with monthly household income < 2500.
+     */
+    public static String incomeLessThan2500(List<Person> currList) {
+        long lowIncome = currList.stream()
+                .map(person -> person.getIncome().getValue())
+                .map(income -> Double.parseDouble(income))
+                .filter(income -> income < 2500)
+                .count();
+        return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
     }
 
     public String getResultMessage() {

@@ -46,7 +46,6 @@ public class GetCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        int size = lastShownList.size();
         String resultString = "";
 
         for (int i = 0; i < parameters.length; i++) {
