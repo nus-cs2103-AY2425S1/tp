@@ -23,8 +23,8 @@ public class RenameTagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Renames the specified tag.\n "
             + "Parameters: "
-            + "[" + PREFIX_OLDTAG + "OLDTAG] "
-            + "[" + PREFIX_NEWTAG + "NEWTAG] "
+            + PREFIX_OLDTAG + "OLDTAG "
+            + PREFIX_NEWTAG + "NEWTAG "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_OLDTAG + "client "
             + PREFIX_NEWTAG + "ex-client";

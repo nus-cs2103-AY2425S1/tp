@@ -20,6 +20,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.RestoreCommand;
+import seedu.address.logic.commands.SocialMediaCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -92,6 +93,9 @@ public class AddressBookParser {
 
         case RenameTagCommand.COMMAND_WORD:
             return new RenameTagParser().parse(arguments);
+
+        case SocialMediaCommand.COMMAND_WORD:
+            return new SocialMediaCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
