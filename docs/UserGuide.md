@@ -193,7 +193,7 @@ Examples:
 
 ### Mark an order as completed : `markOrder`
 
-Marks an order under the person whose orders are displayed as complete.
+Marks an order under the person whose orders are displayed as completed.
 
 Format: `markOrder ORDER_INDEX`
 
