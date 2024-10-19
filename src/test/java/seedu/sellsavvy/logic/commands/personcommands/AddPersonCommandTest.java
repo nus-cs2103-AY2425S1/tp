@@ -24,6 +24,7 @@ import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.Model;
 import seedu.sellsavvy.model.ReadOnlyAddressBook;
 import seedu.sellsavvy.model.ReadOnlyUserPrefs;
+import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.Person;
 import seedu.sellsavvy.testutil.PersonBuilder;
 
@@ -173,6 +174,27 @@ public class AddPersonCommandTest {
 
         @Override
         public void updateSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isSelectedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getSelectedPerson2() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Order> getFilteredOrderList() {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
+        public void setOrder(Order target, Order editedOrder) {
             throw new AssertionError("This method should not be called.");
         }
     }

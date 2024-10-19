@@ -194,9 +194,15 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
+        boolean isSameDisplayedPerson = getSelectedPerson2() == null
+                ? otherModelManager.getSelectedPerson2() == null
+                : getSelectedPerson2().equals(otherModelManager.getSelectedPerson2());
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && isSameDisplayedPerson;
     }
 
 }
