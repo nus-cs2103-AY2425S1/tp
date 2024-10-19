@@ -171,41 +171,65 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Allergy} of the {@code Person} that we are building.
+     */
     public PersonBuilder withAllergy(String allergy) {
         this.allergy = new Allergy(allergy);
         return this;
     }
 
+    /**
+     * Sets the {@code Blood Type} of the {@code Person} that we are building.
+     */
     public PersonBuilder withBloodType(String bloodType) {
         this.bloodType = new BloodType(bloodType);
         return this;
     }
 
+    /**
+     * Sets the {@code Health Risk} of the {@code Person} that we are building.
+     */
     public PersonBuilder withHealthRisk(String healthRisk) {
         this.healthRisk = new HealthRisk(healthRisk);
         return this;
     }
 
+    /**
+     * Sets the {@code Health Record} of the {@code Person} that we are building.
+     */
     public PersonBuilder withHealthRecord(String healthRecord) {
         this.healthRecord = new HealthRecord(healthRecord);
         return this;
     }
 
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
     public PersonBuilder withNote(String note) {
         this.note = new Note(note);
         return this;
     }
 
+    /**
+     * Sets the {@code NokName} of the {@code Person} that we are building.
+     */
     public PersonBuilder withNokName(String nokName) {
         this.nokName = new Name(nokName);
         return this;
     }
 
+    /**
+     * Sets the {@code NokPhone} of the {@code Person} that we are building.
+     */
     public PersonBuilder withNokPhone(String nokPhone) {
         this.nokPhone = new Phone(nokPhone);
         return this;
     }
 
+    /**
+     * Builds a person based on the fields that were set.
+     */
     public Person build() {
         return new Person(name, nric, birthdate, sex, healthServices, phone, email, address, allergy, bloodType,
                 healthRisk, healthRecord, note, nokName, nokPhone, new ArrayList<>());
