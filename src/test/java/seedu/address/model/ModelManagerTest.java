@@ -3,12 +3,16 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BUYERS_ONLY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS_ONLY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalProperty.BEDOK;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +20,15 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.client.Buyer;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
+import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
@@ -136,19 +148,43 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
     }
 
-    // ==================== Equality Tests ====================
+    // ==================== PropertyBook Related Tests ====================
+    @Test
+    public void setPropertyBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setPropertyBookFilePath(null));
+    }
 
+    @Test
+    public void setPropertyBookFilePath_validPath_setsAddressBookFilePath() {
+        Path path = Paths.get("address/book/file/path");
+        modelManager.setPropertyBookFilePath(path);
+        assertEquals(path, modelManager.getPropertyBookFilePath());
+    }
+
+    @Test
+    public void hasProperty_propertyInAddressBook_returnsTrue() {
+        modelManager.addProperty(BEDOK);
+        assertTrue(modelManager.hasProperty(BEDOK));
+    }
+
+    @Test
+    public void getFilteredPropertyList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
+    }
+
+    // ==================== Equality Tests ====================
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         ClientBook clientBook = new ClientBookBuilder().withClient(CARL).withClient(DANIEL).build();
         AddressBook differentAddressBook = new AddressBook();
+        PropertyBook propertyBook = new PropertyBook();
         ClientBook differentClientBook = new ClientBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, clientBook);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, clientBook);
+        modelManager = new ModelManager(addressBook, userPrefs, propertyBook, clientBook);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, propertyBook, clientBook);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -161,12 +197,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, differentClientBook)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new PropertyBook(),
+                differentClientBook)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, clientBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new PropertyBook(), clientBook)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -174,6 +211,73 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, clientBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(),
+                clientBook)));
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+        // Call the method
+        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of BooleanProperty
+        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_isObservable() {
+        // Call the method
+        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of Observable
+        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
+    }
+
+    @Test
+    public void testBuyerPredicate() {
+        Name nameBuyer = mock(Name.class);
+        Phone phoneBuyer = mock(Phone.class);
+        Email emailBuyer = mock(Email.class);
+
+        Client mockBuyer = new Buyer(nameBuyer, phoneBuyer, emailBuyer);
+
+        Name nameSeller = mock(Name.class);
+        Phone phoneSeller = mock(Phone.class);
+        Email emailSeller = mock(Email.class);
+
+        Client mockSeller = new Seller(nameSeller, phoneSeller, emailSeller);
+
+        assertTrue(PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockBuyer), "Buyer should pass the buyer predicate");
+
+        // Predicate should return false for  (when client is a buyer)
+        assertFalse(
+                PREDICATE_SHOW_ALL_BUYERS_ONLY.test(mockSeller),
+                "Seller should not pass the buyer predicate"
+        );
+    }
+
+    @Test
+    public void testSellerPredicate() {
+        // Mocking the buyer and seller details
+        Name nameBuyer = mock(Name.class);
+        Phone phoneBuyer = mock(Phone.class);
+        Email emailBuyer = mock(Email.class);
+
+        Client mockBuyer = new Buyer(nameBuyer, phoneBuyer, emailBuyer);
+
+        Name nameSeller = mock(Name.class);
+        Phone phoneSeller = mock(Phone.class);
+        Email emailSeller = mock(Email.class);
+
+        Client mockSeller = new Seller(nameSeller, phoneSeller, emailSeller);
+
+        // Predicate should return true for sellers
+        assertTrue(PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockSeller), "Seller should pass the seller predicate");
+
+        // Predicate should return false for buyers (when client is a buyer)
+        assertFalse(
+                PREDICATE_SHOW_ALL_SELLERS_ONLY.test(mockBuyer),
+                "Buyer should not pass the seller predicate"
+        );
     }
 }

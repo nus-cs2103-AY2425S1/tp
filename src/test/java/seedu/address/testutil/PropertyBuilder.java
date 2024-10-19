@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Unit;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Property objects.
@@ -20,6 +21,7 @@ public class PropertyBuilder {
     public PropertyBuilder() {
         unit = new Unit(DEFAULT_UNIT);
         postalCode = new PostalCode(DEFAULT_POSTALCODE);
+        SampleDataUtil.getSamplePropertyBook();
     }
 
     /**

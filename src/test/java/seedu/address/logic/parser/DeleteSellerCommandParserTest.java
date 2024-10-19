@@ -8,16 +8,17 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteSellerCommand;
+import seedu.address.model.client.Phone;
 
 public class DeleteSellerCommandParserTest {
 
     private DeleteSellerCommandParser parser = new DeleteSellerCommandParser();
-    private final String nonEmptyphoneNumber = "12345678";
+    private final String nonEmptyphoneNumber = "92345678";
     @Test
     public void parse_phoneNumberSpecified_success() {
         // Test for valid phone number
         String userInput = DeleteSellerCommand.COMMAND_WORD + " " + PREFIX_PHONE + nonEmptyphoneNumber;
-        assertParseSuccess(parser, userInput, new DeleteSellerCommand(nonEmptyphoneNumber));
+        assertParseSuccess(parser, userInput, new DeleteSellerCommand(new Phone(nonEmptyphoneNumber)));
     }
 
     @Test

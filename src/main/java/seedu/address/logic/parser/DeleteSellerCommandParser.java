@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.client.Phone;
 
 /**
  * Parses input arguments and creates a new {@code DeleteSellerCommand} object.
@@ -29,6 +30,6 @@ public class DeleteSellerCommandParser implements Parser<DeleteSellerCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteSellerCommand.MESSAGE_USAGE));
         }
-        return new DeleteSellerCommand(phoneNumber);
+        return new DeleteSellerCommand(new Phone(phoneNumber));
     }
 }

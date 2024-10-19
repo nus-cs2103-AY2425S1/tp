@@ -29,17 +29,17 @@ public class TypicalClients {
             .withEmail("heinz@example.com").buildBuyer();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").buildSeller();
-    public static final Client ELLE = new ClientBuilder().withName("Elle Meyer").withPhone("9482224")
+    public static final Client ELLE = new ClientBuilder().withName("Elle Meyer").withPhone("94822242")
             .withEmail("werner@example.com").buildBuyer();
-    public static final Client FIONA = new ClientBuilder().withName("Fiona Kunz").withPhone("9482427")
+    public static final Client FIONA = new ClientBuilder().withName("Fiona Kunz").withPhone("94824272")
             .withEmail("lydia@example.com").buildSeller();
-    public static final Client GEORGE = new ClientBuilder().withName("George Best").withPhone("9482442")
+    public static final Client GEORGE = new ClientBuilder().withName("George Best").withPhone("94824422")
             .withEmail("anna@example.com").buildBuyer();
 
     // Manually added
-    public static final Client HOON = new ClientBuilder().withName("Hoon Meier").withPhone("8482424")
+    public static final Client HOON = new ClientBuilder().withName("Hoon Meier").withPhone("84824242")
             .withEmail("stefan@example.com").buildBuyer();
-    public static final Client IDA = new ClientBuilder().withName("Ida Mueller").withPhone("8482131")
+    public static final Client IDA = new ClientBuilder().withName("Ida Mueller").withPhone("84821312")
             .withEmail("hans@example.com").buildSeller();
 
     // Manually added - Person's details found in {@code CommandTestUtil}

@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -22,9 +23,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.Property;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -209,6 +212,62 @@ public class AddCommandTest {
         public void updateFilteredClientList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Path getPropertyBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPropertyBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyPropertyBook getPropertyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Property> getFilteredPropertyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPropertyList(Predicate<Property> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public BooleanProperty getIsDisplayClientsProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayClients() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayProperties() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
