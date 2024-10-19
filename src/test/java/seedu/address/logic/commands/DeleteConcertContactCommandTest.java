@@ -4,13 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showConcertAtIndex;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcerts.COACHELLA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CONCERT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,21 +32,33 @@ public class DeleteConcertContactCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
+    public void execute_validParams_success() {
+        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(
+                INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        String expectedMessage = String.format(
+                DeleteConcertContactCommand.MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS, Messages.format(
+                        ALICE), Messages.format(COACHELLA));
+        assertCommandSuccess(deleteConcertContactCommand, model, expectedMessage, model);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(outOfBoundIndex,
-                INDEX_FIRST_CONCERT);
+        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(
+                outOfBoundIndex, INDEX_FIRST_CONCERT);
 
-        assertCommandFailure(deleteConcertContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteConcertContactCommand, model,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidConcertIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredConcertList().size() + 1);
-        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(INDEX_FIRST_PERSON,
-                outOfBoundIndex);
+        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(
+                INDEX_FIRST_PERSON, outOfBoundIndex);
 
-        assertCommandFailure(deleteConcertContactCommand, model, Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteConcertContactCommand, model,
+                Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -55,10 +70,11 @@ public class DeleteConcertContactCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(outOfBoundIndex,
-                INDEX_FIRST_CONCERT);
+        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(
+                outOfBoundIndex, INDEX_FIRST_CONCERT);
 
-        assertCommandFailure(deleteConcertContactCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteConcertContactCommand, model,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -70,25 +86,26 @@ public class DeleteConcertContactCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getConcertList().size());
 
-        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(INDEX_FIRST_PERSON,
-                outOfBoundIndex);
+        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(
+                INDEX_FIRST_PERSON, outOfBoundIndex);
 
-        assertCommandFailure(deleteConcertContactCommand, model, Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteConcertContactCommand, model,
+                Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteConcertContactCommand deleteConcertContactFirstCommand = new DeleteConcertContactCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
-        DeleteConcertContactCommand deleteConcertContactFirstSecondCommand = new DeleteConcertContactCommand(
-                INDEX_SECOND_PERSON, INDEX_SECOND_CONCERT);
+        DeleteConcertContactCommand deleteConcertContactFirstCommand =
+                new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        DeleteConcertContactCommand deleteConcertContactFirstSecondCommand =
+                new DeleteConcertContactCommand(INDEX_SECOND_PERSON, INDEX_SECOND_CONCERT);
 
         // same object -> returns true
         assertTrue(deleteConcertContactFirstCommand.equals(deleteConcertContactFirstCommand));
 
         // same values -> returns true
-        DeleteConcertContactCommand deleteConcertContactFirstCommandCopy = new DeleteConcertContactCommand(
-                INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
+        DeleteConcertContactCommand deleteConcertContactFirstCommandCopy =
+                new DeleteConcertContactCommand(INDEX_FIRST_PERSON, INDEX_FIRST_CONCERT);
         assertTrue(deleteConcertContactFirstCommand.equals(deleteConcertContactFirstCommandCopy));
 
         // different types -> returns false
@@ -98,17 +115,18 @@ public class DeleteConcertContactCommandTest {
         assertFalse(deleteConcertContactFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(deleteConcertContactFirstCommand.equals(deleteConcertContactFirstSecondCommand));
+        assertFalse(deleteConcertContactFirstCommand.equals(
+                deleteConcertContactFirstSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
         Index indexP = Index.fromOneBased(1);
         Index indexC = Index.fromOneBased(2);
-        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(indexP,
-                indexC);
-        String expected = DeleteConcertContactCommand.class.getCanonicalName() + "{indexP=" + indexP + ", indexC="
-                + indexC + "}";
+        DeleteConcertContactCommand deleteConcertContactCommand = new DeleteConcertContactCommand(
+                indexP, indexC);
+        String expected = DeleteConcertContactCommand.class.getCanonicalName() + "{indexP=" + indexP
+                + ", indexC=" + indexC + "}";
         assertEquals(expected, deleteConcertContactCommand.toString());
     }
 
