@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
 /**
@@ -68,9 +69,21 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        Text priorityText = new Text("Priority: ");
+        priorityText.getStyleClass().add("label-text");
+        priority.getChildren().add(priorityText);
         applyPriorityBackground(priority, person.getPriority().priority);
+        Text medConsText = new Text("Medical Conditions:");
+        medConsText.getStyleClass().add("label-text");
+        medCons.getChildren().add(medConsText);
         addLabelsToFlowPane(person.getMedCons(), medCons);
+        Text allergyText = new Text("Allergies:");
+        allergyText.getStyleClass().add("label-text");
+        tags.getChildren().add(allergyText);
         addLabelsToFlowPane(person.getAllergies(), tags);
+        Text appointmentText = new Text("Appointments:");
+        appointmentText.getStyleClass().add("label-text");
+        appointments.getChildren().add(appointmentText);
         addLabelsToFlowPane(person.getAppointments(), appointments);
     }
 
