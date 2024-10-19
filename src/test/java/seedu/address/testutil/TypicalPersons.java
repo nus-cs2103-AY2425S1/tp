@@ -20,9 +20,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CLARA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEACON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLLEAGUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLLEAGUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
 
 import java.util.ArrayList;
