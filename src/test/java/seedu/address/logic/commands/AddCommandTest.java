@@ -81,6 +81,8 @@ public class AddCommandTest {
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        System.out.println(expected);
+        System.out.println(addCommand.toString());
         assertEquals(expected, addCommand.toString());
     }
 
