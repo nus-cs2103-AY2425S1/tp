@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.group.Group;
+import seedu.address.model.person.Comment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
@@ -11,7 +12,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Year;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.model.person.Comment;
 
 /**
  * A utility class to help with building Person objects.
@@ -32,7 +32,7 @@ public class PersonBuilder {
     private Major major;
     private Year year;
     private Set<Group> groups;
-    public Comment comment;
+    private Comment comment;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.

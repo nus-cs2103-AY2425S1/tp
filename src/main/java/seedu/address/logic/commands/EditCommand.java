@@ -108,7 +108,8 @@ public class EditCommand extends Command {
         Set<Group> updatedGroups = editPersonDescriptor.getGroups().orElse(personToEdit.getGroups());
         Year updatedYear = editPersonDescriptor.getYear().orElse(personToEdit.getYear());
         Comment updatedComment = editPersonDescriptor.getComment().orElse(personToEdit.getComment());
-        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress, updatedGroups, updatedYear, updatedComment);
+        return new Person(updatedName, updatedStudentId, updatedEmail, updatedAddress,
+                updatedGroups, updatedYear, updatedComment);
     }
 
     @Override

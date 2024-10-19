@@ -5,10 +5,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Comment;
 import seedu.address.model.person.Person;
 
@@ -32,11 +32,12 @@ public class CommentCommand extends Command {
             "Comment command not implemented yet";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Comment: %2$s";
+    public static final String MESSAGE_ADD_COMMENT_SUCCESS = "Added comment to Person: %1$s";
+    public static final String MESSAGE_DELETE_COMMENT_SUCCESS = "Removed comment from Person: %1$s";
 
     private final Index index;
     private final Comment comment;
-    public static final String MESSAGE_ADD_COMMENT_SUCCESS = "Added comment to Person: %1$s";
-    public static final String MESSAGE_DELETE_COMMENT_SUCCESS = "Removed comment from Person: %1$s";
+
 
     /**
      * @param index of the person in the filtered person list to edit the comment

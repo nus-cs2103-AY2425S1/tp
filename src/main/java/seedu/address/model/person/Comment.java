@@ -6,6 +6,12 @@ import static java.util.Objects.requireNonNull;
  */
 public class Comment {
     public final String value;
+
+    /**
+     * Constructs an {@code Comment}.
+     *
+     * @param comment A valid comment.
+     */
     public Comment(String comment) {
         requireNonNull(comment);
         value = comment;
