@@ -144,7 +144,7 @@ class JsonAdaptedPerson {
         boolean temp;
         try {
             temp = Boolean.parseBoolean(isServicing);
-        } catch (Exception e){
+        } catch (Exception e) {
             temp = false;
         }
         modelIsServicing = temp;

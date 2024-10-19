@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CAR_MAKE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CAR_MODEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CAR_VIN_0;
