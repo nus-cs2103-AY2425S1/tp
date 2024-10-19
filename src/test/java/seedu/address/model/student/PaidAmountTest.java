@@ -20,22 +20,22 @@ public class PaidAmountTest {
     }
 
     @Test
-    void isValidPaid() {
-        // null paid
-        assertThrows(NullPointerException.class, () -> PaidAmount.isValidPaid(null));
+    void isValidPaidAmount() {
+        // null paidAmount
+        assertThrows(NullPointerException.class, () -> PaidAmount.isValidPaidAmount(null));
 
-        // invalid paids
-        assertFalse(PaidAmount.isValidPaid("")); // empty string
-        assertFalse(PaidAmount.isValidPaid(" ")); // spaces only
-        assertFalse(PaidAmount.isValidPaid("1.234")); // more than 2 decimal places
-        assertFalse(PaidAmount.isValidPaid("1.2.3")); // more than 1 decimal point
-        assertFalse(PaidAmount.isValidPaid("-1.23")); // negative number
+        // invalid paidAmounts
+        assertFalse(PaidAmount.isValidPaidAmount("")); // empty string
+        assertFalse(PaidAmount.isValidPaidAmount(" ")); // spaces only
+        assertFalse(PaidAmount.isValidPaidAmount("1.234")); // more than 2 decimal places
+        assertFalse(PaidAmount.isValidPaidAmount("1.2.3")); // more than 1 decimal point
+        assertFalse(PaidAmount.isValidPaidAmount("-1.23")); // negative number
 
-        // valid paids
-        assertTrue(PaidAmount.isValidPaid("1")); // 0 decimal places
-        assertTrue(PaidAmount.isValidPaid("1.2")); // 1 decimal place
-        assertTrue(PaidAmount.isValidPaid("123.23")); // 2 decimal places
-        assertTrue(PaidAmount.isValidPaid("0")); // 3 digits
+        // valid paidAmounts
+        assertTrue(PaidAmount.isValidPaidAmount("1")); // 0 decimal places
+        assertTrue(PaidAmount.isValidPaidAmount("1.2")); // 1 decimal place
+        assertTrue(PaidAmount.isValidPaidAmount("123.23")); // 2 decimal places
+        assertTrue(PaidAmount.isValidPaidAmount("0")); // 3 digits
     }
 
     @Test

@@ -25,7 +25,7 @@ public class PaidAmount extends Fee {
         super("0");
     }
 
-    public static boolean isValidPaid(String test) {
+    public static boolean isValidPaidAmount(String test) {
         return Fee.isValidFee(test);
     }
 

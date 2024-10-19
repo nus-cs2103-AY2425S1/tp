@@ -134,7 +134,7 @@ class JsonAdaptedStudent {
         if (paid == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, PaidAmount.class.getSimpleName()));
         }
-        if (!PaidAmount.isValidPaid(paid)) {
+        if (!PaidAmount.isValidPaidAmount(paid)) {
             throw new IllegalValueException(PaidAmount.MESSAGE_CONSTRAINTS);
         }
         final PaidAmount modelPaidAmount = new PaidAmount(paid);

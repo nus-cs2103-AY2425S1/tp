@@ -148,7 +148,7 @@ public class ParserUtil {
     public static PaidAmount parsePaid(String paid) throws ParseException {
         requireNonNull(paid);
         String trimmedPaid = paid.trim();
-        if (!PaidAmount.isValidPaid(trimmedPaid)) {
+        if (!PaidAmount.isValidPaidAmount(trimmedPaid)) {
             throw new ParseException(PaidAmount.MESSAGE_CONSTRAINTS);
         }
         return new PaidAmount(trimmedPaid);
