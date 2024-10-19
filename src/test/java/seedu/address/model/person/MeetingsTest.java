@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.exceptions.TimeClashException;
 
 public class MeetingsTest {
@@ -18,6 +19,9 @@ public class MeetingsTest {
     private String location = "A Valid Location";
     private Name name = new Name("A Valid Name");
     private Meeting defaultMeeting = new Meeting(name, startTime, endTime, location);
+
+    public MeetingsTest() throws CommandException {
+    }
 
     @Test
     public void isClash() {
@@ -44,7 +48,7 @@ public class MeetingsTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws CommandException {
         Meetings meetings = new Meetings();
         meetings.addMeeting(defaultMeeting);
 
