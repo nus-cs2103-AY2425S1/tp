@@ -84,6 +84,7 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 |  12   |      Update Task      |                                  `updatetask n/NAME ti/INDEX [t/TASK] [d/DEADLINE]`                                  |                       `updatetask n/Joht Doe ti/2 t/Mark assignment`                       |
 |  13   |    View All Tasks     |                                                     `viewtasks`                                                      |                                        `viewtasks`                                         |
 |  14   | View Specific Student |                                                    `view n/NAME`                                                     |                                     `view n/John Doe`                                      |
+|  15   |         Exit          |                                                        `exit`                                                        |                                           `exit`                                           |
 
 --------------------------------------------------------------------------------------------------------------------
 
