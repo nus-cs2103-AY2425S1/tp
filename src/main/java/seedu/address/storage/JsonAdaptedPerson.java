@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final String priority;
     private final String remark;
     private final String dateOfBirth;
-    private final String income;
+    private final Double income;
     private final JsonAdaptedAppointment appointment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -53,7 +53,7 @@ class JsonAdaptedPerson {
             @JsonProperty("priority") String priority,
             @JsonProperty("remark") String remark,
             @JsonProperty("dateOfBirth") String dateOfBirth,
-            @JsonProperty("income") String income,
+            @JsonProperty("income") Double income,
             @JsonProperty("appointment") JsonAdaptedAppointment appointment,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
@@ -155,7 +155,14 @@ class JsonAdaptedPerson {
         }
         final DateOfBirth modelDateOfBirth = new DateOfBirth(dateOfBirth);
 
-        final Income modelIncome = new Income(income == null ? Income.EMPTY_VALUE_STRING : income);
+        final Income modelIncome;
+        if (income == null) {
+            modelIncome = new Income(0);
+        } else if (Income.isValidIncome(income)) {
+            modelIncome = new Income(income);
+        } else {
+            throw new IllegalValueException(Income.MESSAGE_CONSTRAINTS);
+        }
 
         final Appointment modelAppointment = Optional.ofNullable(appointment)
                 .map(JsonAdaptedAppointment::toModelType)

@@ -58,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Priority priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).orElse("LOW"));
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATE_OF_BIRTH).get());
-        Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).orElse(Income.EMPTY_VALUE_STRING));
+        Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).orElse("0"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, priority, remark, dateOfBirth, income, tagList);

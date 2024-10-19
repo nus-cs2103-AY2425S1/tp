@@ -1,43 +1,35 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's income in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidIncome(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidIncome(double)}
  */
 public class Income {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Income is a non-negative floating point number with up to 2 decimal places e.g. 2.01, 0, 0.1";
+            "Income is a non-negative floating point number";
 
-    public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
-
-    public static final String EMPTY_VALUE_STRING = "0";
-
-    private final String value;
+    private final double value;
 
     /**
      * Constructs an {@code Income}.
-     * @param value The value of a peron's income
+     *
+     * @param value The value of a person's income
      */
-    public Income(String value) {
+    public Income(double value) {
         checkArgument(isValidIncome(value), MESSAGE_CONSTRAINTS);
-        this.value = value;
+        this.value = roundTwoDecimalPlaces(value);
     }
 
-    public String getValue() {
+    public double getValue() {
         return value;
-    }
-
-    public double toDouble() {
-        return Double.parseDouble(value);
     }
 
     @Override
     public String toString() {
-        return String.format("$%.2f", toDouble());
+        return String.format("$%.2f", value);
     }
 
     @Override
@@ -50,7 +42,7 @@ public class Income {
             return false;
         }
 
-        return toDouble() == otherIncome.toDouble();
+        return value == otherIncome.value;
     }
 
     @Override
@@ -59,22 +51,15 @@ public class Income {
     }
 
     /**
-     * Returns true if a given string is a valid income.
-     * @param test A string to be tested
-     * @return {@code true} if the string is valid, {@code false} otherwise
+     * Returns true if a given value is a valid income.
+     * @param test A double value to be tested
+     * @return {@code true} if the value is valid, {@code false} otherwise
      */
-    public static boolean isValidIncome(String test) {
-        requireNonNull(test);
+    public static boolean isValidIncome(double test) {
+        return test >= 0;
+    }
 
-        if (!test.matches(VALIDATION_REGEX)) {
-            return false;
-        }
-
-        try {
-            Double.parseDouble(test);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
+    private static double roundTwoDecimalPlaces(double value) {
+        return Math.round(value * 100.0) / 100.0;
     }
 }
