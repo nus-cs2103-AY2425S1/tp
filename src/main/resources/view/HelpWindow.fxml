@@ -14,6 +14,7 @@
 
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <fx:root minHeight="600" minWidth="460" maxWidth="460" title="Help" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
@@ -30,66 +31,81 @@
               <items>
                   <MenuButton mnemonicParsing="false" text="List of Commands">
                       <items>
-                          <MenuItem fx:id="menuDelete" mnemonicParsing="false" text="delete"/>
-                          <MenuItem fx:id="menuEmployee" mnemonicParsing="false" text="employee"/>
-                          <MenuItem fx:id="menuExit" mnemonicParsing="false" text="exit"/>
-                          <MenuItem fx:id="menuFind" mnemonicParsing="false" text="find"/>
-                          <MenuItem fx:id="menuHelp" mnemonicParsing="false" text="help"/>
-                          <MenuItem fx:id="menuList" mnemonicParsing="false" text="list"/>
-                          <MenuItem fx:id="menuPotential" mnemonicParsing="false" text="potential"/>
+                          <MenuItem fx:id="deleteMenuItem" mnemonicParsing="false" text="delete"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="demoteMenuItem" mnemonicParsing="false" text="demote"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="employeeMenuItem" mnemonicParsing="false" text="employee"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" text="exit"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="findMenuItem" mnemonicParsing="false" text="find"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" text="help"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="listMenuItem" mnemonicParsing="false" text="list"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="potentialMenuItem" mnemonicParsing="false" text="potential"/>
+                          <SeparatorMenuItem />
+                          <MenuItem fx:id="promoteMenuItem" mnemonicParsing="false" text="promote"/>
                       </items>
                   </MenuButton>
               </items>
           </ToolBar>
           <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="493.0"
-                      prefWidth="460.0" vbarPolicy="ALWAYS">
+                      prefWidth="460.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
               <content>
                   <VBox>
                       <BorderPane>
-                          <top> </top>
                           <center>
                               <TextFlow stylesheets="@HelpWindow.css">
                                   <VBox fx:id="textVBox">
-                                      <Separator styleClass="separatorStyle"/>
-                                      <VBox>
-                                          <Text fx:id="deleteText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="deleteText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <Separator styleClass="separatorStyle"/>
-                                      <VBox>
-                                          <Text fx:id="employeeText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="demoteText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <VBox>
-                                          <Text fx:id="exitText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="employeeText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <Separator styleClass="separatorStyle"/>
-                                      <VBox>
-                                          <Text fx:id="findText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="exitText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <Separator styleClass="separatorStyle"/>
-                                      <VBox>
-                                          <Text fx:id="helpText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="findText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <Separator styleClass="separatorStyle"/>
-                                      <VBox>
-                                          <Text fx:id="listText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="helpText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <Separator styleClass="separatorStyle"/>
-                                      <VBox>
-                                          <Text fx:id="potentialText" styleClass="commandStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="listText" wrappingWidth="450" styleClass="text-command"/>
                                       </VBox>
-                                      <Separator styleClass="separatorStyle"/>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="potentialText" wrappingWidth="450" styleClass="text-command"/>
+                                      </VBox>
+                                      <Separator styleClass="hori-separator"/>
+                                      <VBox styleClass="text-box">
+                                          <Text fx:id="promoteText" wrappingWidth="450" styleClass="text-command"/>
+                                      </VBox>
+                                      <Separator styleClass="hori-separator"/>
                                   </VBox>
                               </TextFlow>
                           </center>
                           <left>
-                              <Separator orientation="VERTICAL" styleClass="vertSeparator"/>
+                              <Separator orientation="VERTICAL" styleClass="vert-separator"/>
                           </left>
                           <right>
-                              <Separator orientation="VERTICAL" styleClass="vertSeparator"/>
+                              <Separator orientation="VERTICAL" styleClass="vert-separator"/>
                           </right>
-                          <bottom>
-                              <Separator styleClass="separatorStyle"/>
-                          </bottom>
                       </BorderPane>
                   </VBox>
               </content>

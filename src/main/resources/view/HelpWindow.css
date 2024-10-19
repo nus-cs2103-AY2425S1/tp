@@ -2,19 +2,24 @@
     -fx-background-color: #ffffffff;
 }
 
-.separatorStyle {
+.hori-separator {
     -fx-min-width: 420px;
     -fx-max-width: 420px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 3, 0.0, 1, 1);
 }
 
-.vertSeparator {
+.vert-separator {
     -fx-padding: 0;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 3, 0.0, 1, 1);
 }
 
-.commandStyle {
+.text-command {
     -fx-font-size: 13px;
+    -fx-wrap-text: true;
+}
+
+.text-box {
+    -fx-padding: 10 0 0 10;
 }
 
 

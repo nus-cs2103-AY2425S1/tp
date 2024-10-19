@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -22,90 +25,123 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String DELETE_COMMAND =
             """
+            Format: delete (e or ph) INDEX
 
-                Format: delete (e or ph) INDEX
+            Purpose: Deletes the entry of the index in the current
+            list that is being displayed. The 2nd parameter (e or ph) must
+            correspond to the type of entry in the index.
 
-                Purpose: Deletes the entry of the index in the current
-                list that is being displayed. The 2nd parameter (e or ph)
-                must correspond to the type of entry in the index.
+            Example: delete e 1
+            """;
+    public static final String DEMOTE_COMMAND =
+            """
+            Format: demote NAME
 
-                Example: delete e 1
-             """;
+            Purpose: Change the status of an employee in the list to a
+            potential hire.
+
+            Example: demote John Doe
+            """;
     public static final String EMPLOYEE_COMMAND =
             """
+            Format: employee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
+            d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE
 
-                Format: employee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
-                d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE
+            Purpose: Adds an entry in the employee list with the
+            corresponding information.
 
-                Purpose: Adds an entry in the employee list with the
-                corresponding information.
-
-                Example: employee n/John Doe p/81234567 e/johndoe@gmail.com
-                a/21 Lower Kent Ridge Rd d/Department of informatics
-                r/Head of Informatics ced/2021-01-21
+            Example: employee n/John Doe p/81234567 e/johndoe@gmail.com
+            a/21 Lower Kent Ridge Rd d/Department of informatics
+            r/Head of Informatics ced/2021-01-21
              """;
 
     public static final String EXIT_COMMAND =
             """
+            Format: exit
 
-                Format: exit
+            Purpose: Terminates the program.
 
-                Purpose: Terminates the program.
-
-                Example: exit
-             """;
+            Example: exit
+            """;
 
     public static final String FIND_COMMAND =
             """
+            Format: find (e or ph or all) KEYWORD(S)
 
-                Format: find (e or ph or all) KEYWORD(S)
+            Purpose: Displays a list of entries that contains the keyword(s)
+            in the corresponding employee and/or potential hire list.
 
-                Purpose: Displays a list of entries that contains the keyword(s)
-                in the corresponding employee and/or potential hire list.
-
-                Example: find e John
-             """;
+            Example: find e John
+            """;
     public static final String HELP_COMMAND =
-             """
+            """
+            Format: help
 
-                Format: help
+            Purpose: Displays a window containing all the format of all
+            commands, its purpose and an example on how to use them.
 
-                Purpose: Displays a window containing all the format of all
-                commands, its purpose and an example on how to use them.
-
-                Example: help
-             """;
+            Example: help
+            """;
 
     public static final String LIST_COMMAND =
             """
+            Format: list (e or ph or all)
 
-                Format: list (e or ph or all)
+            Purpose: Displays a list of entries with their information in
+            the corresponding employee and/or potential hire list.
 
-                Purpose: Displays a list of entries with their information in
-                the corresponding employee and/or potential hire list.
-
-                Example: list e
-             """;
+            Example: list e
+            """;
 
     public static final String POTENTIAL_COMMAND =
             """
+            Format: potential n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
+            d/DEPARTMENT r/ROLE
 
-                Format: potential n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
-                d/DEPARTMENT r/ROLE
+            Purpose: Adds an entry in the potential hire list with the
+            corresponding information.
 
-                Purpose: Adds an entry in the potential hire list with the
-                corresponding information.
+            Example: potential n/John Doe p/81234567 e/johndoe@gmail.com
+            a/21 Lower Kent Ridge Rd d/Department of informatics
+            r/Head of Informatics
+            """;
 
-                Example: potential n/John Doe p/81234567 e/johndoe@gmail.com
-                a/21 Lower Kent Ridge Rd d/Department of informatics
-                r/Head of Informatics
-             """;
+    public static final String PROMOTE_COMMAND =
+            """
+            Format: promote NAME
+
+            Purpose: Change the status of a potential hire in the list
+            to an employee.
+
+            Example: promote John Doe
+            """;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
+    /**
+     * Array of String containing the format, purpose and examples of all the commands in StaffSync.
+     * Arranged in alphabetical order.
+     * To be updated when new commands are added
+     */
+    private static final String[] ARRAY_OF_COMMAND_STRING = {
+        DELETE_COMMAND,
+        DEMOTE_COMMAND,
+        EMPLOYEE_COMMAND,
+        EXIT_COMMAND,
+        FIND_COMMAND,
+        HELP_COMMAND,
+        LIST_COMMAND,
+        POTENTIAL_COMMAND,
+        PROMOTE_COMMAND
+    };
+
+    private int numOfCommands;
+
     @FXML
     private Text deleteText;
+    @FXML
+    private Text demoteText;
     @FXML
     private Text employeeText;
     @FXML
@@ -119,26 +155,70 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Text potentialText;
     @FXML
-    private Text lastHighlighted;
+    private Text promoteText;
+
+    /**
+     * Collection of Text objects to be added into HelpWindow.fxml.
+     * Arranged in alphabetical order.
+     * To be updated together with adding a Text component in HelpWindow.fxml when new commands are added.
+     */
+    private final Text[] arrayText = {
+        deleteText,
+        demoteText,
+        employeeText,
+        exitText,
+        findText,
+        helpText,
+        listText,
+        potentialText,
+        promoteText
+    };
+    @FXML
+    private MenuItem deleteMenuItem;
+    @FXML
+    private MenuItem demoteMenuItem;
+    @FXML
+    private MenuItem employeeMenuItem;
+    @FXML
+    private MenuItem exitMenuItem;
+    @FXML
+    private MenuItem findMenuItem;
+    @FXML
+    private MenuItem helpMenuItem;
+    @FXML
+    private MenuItem listMenuItem;
+    @FXML
+    private MenuItem potentialMenuItem;
+    @FXML
+    private MenuItem promoteMenuItem;
+
+    /**
+     * Collection of MenuItem objects to be added into HelpWindow.fxml.
+     * Arranged in alphabetical order.
+     * To be updated together with adding a MenuItem component in HelpWindow.fxml when new commands are added.
+     */
+    private final MenuItem[] arrayMenuItem = {
+        deleteMenuItem,
+        demoteMenuItem,
+        employeeMenuItem,
+        exitMenuItem,
+        findMenuItem,
+        helpMenuItem,
+        listMenuItem,
+        potentialMenuItem,
+        promoteMenuItem
+    };
 
     @FXML
-    private MenuItem menuDelete;
-    @FXML
-    private MenuItem menuEmployee;
-    @FXML
-    private MenuItem menuExit;
-    @FXML
-    private MenuItem menuFind;
-    @FXML
-    private MenuItem menuHelp;
-    @FXML
-    private MenuItem menuList;
-    @FXML
-    private MenuItem menuPotential;
+    private Text lastHighlighted;
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox textVBox;
+
+    private ArrayList<Text> textArrayList;
+
+    private ArrayList<MenuItem> menuItemArrayList;
 
     /**
      * Creates a new HelpWindow. HelpWindow will display a list of commands
@@ -147,21 +227,30 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        deleteText.setText(DELETE_COMMAND);
-        employeeText.setText(EMPLOYEE_COMMAND);
-        exitText.setText(EXIT_COMMAND);
-        findText.setText(FIND_COMMAND);
-        helpText.setText(HELP_COMMAND);
-        listText.setText(LIST_COMMAND);
-        potentialText.setText(POTENTIAL_COMMAND);
 
-        menuDelete.setOnAction(event -> scrollAndHighlightText(deleteText));
-        menuEmployee.setOnAction(event -> scrollAndHighlightText(employeeText));
-        menuExit.setOnAction(event -> scrollAndHighlightText(exitText));
-        menuFind.setOnAction(event -> scrollAndHighlightText(findText));
-        menuHelp.setOnAction(event -> scrollAndHighlightText(helpText));
-        menuList.setOnAction(event -> scrollAndHighlightText(listText));
-        menuPotential.setOnAction(event -> scrollAndHighlightText(potentialText));
+        // Check if ARRAY_OF_COMMAND_STRING, arrayText and arrayMenuItem are updated
+        assert (ARRAY_OF_COMMAND_STRING.length == arrayText.length)
+                : "Number of command String is not equal to number of Text object";
+        assert (ARRAY_OF_COMMAND_STRING.length == arrayMenuItem.length)
+                : "Number of command String is not equal to number of MenuItem object";
+
+        // Initialize the ArrayList and NUM_OF_COMMANDS
+        List<Text> textList = Arrays.asList(arrayText);
+        List<MenuItem> menuItemList = Arrays.asList(arrayMenuItem);
+        textArrayList = new ArrayList<>(textList);
+        menuItemArrayList = new ArrayList<>(menuItemList);
+        numOfCommands = textArrayList.size();
+
+        for (int i = 0; i < numOfCommands; i++) {
+            // Setting the corresponding String content in the Text object
+            Text commandText = textArrayList.get(i);
+            String commandString = ARRAY_OF_COMMAND_STRING[i];
+            commandText.setText(commandString);
+
+            // Setting the corresponding MenuItem to scroll to the Text object
+            MenuItem commandMenuItem = menuItemArrayList.get(i);
+            commandMenuItem.setOnAction(event -> scrollAndHighlightText(commandText));
+        }
     }
 
     /**
@@ -200,16 +289,28 @@ public class HelpWindow extends UiPart<Stage> {
      * @param targetText text to be scrolled to
      */
     private void scrollAndHighlightText(Text targetText) {
-        // if the text to be scrolled to is the last text, just scroll to the end
-        if (targetText == potentialText) {
+        // if the command to be scrolled to is the last command, just scroll to the end
+        int lastIndex = numOfCommands - 1;
+        Text lastText = textArrayList.get(lastIndex);
+        if (targetText == lastText) {
             scrollPane.setVvalue(1);
             highlightText(targetText);
             return;
         }
+
+        // if the command to be scrolled to is the first command, just scroll to the top
+        Text firstText = textArrayList.get(0);
+        if (targetText == firstText) {
+            scrollPane.setVvalue(0);
+            highlightText(targetText);
+            return;
+        }
+
         // type-casted to Vbox as every Text in helpWindow is wrapped by a Vbox as its parent
         VBox box = (VBox) targetText.getParent();
         Bounds bounds = box.getBoundsInParent();
-        double yOffset = bounds.getMinY();
+        double yPadding = 100;
+        double yOffset = bounds.getMinY() + yPadding;
         double totalLength = textVBox.getHeight();
         double ratio = yOffset / totalLength;
         scrollPane.setVvalue(ratio);
