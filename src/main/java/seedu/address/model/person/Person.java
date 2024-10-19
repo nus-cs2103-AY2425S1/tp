@@ -118,4 +118,11 @@ public class Person {
                 .toString();
     }
 
+    public String getSubjectString() {
+        return "";
+    }
+
+    public String getClassesString() {
+        return "";
+    }
 }

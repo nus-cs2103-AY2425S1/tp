@@ -99,6 +99,16 @@
     -fx-padding: 0 0 0 0;
 }
 
+.student-card {
+    -fx-background-color: #349beb; /* Blue background for students */
+    -fx-text-fill: white; /* Ensure text is readable on the blue background */
+}
+
+.teacher-card {
+    -fx-background-color: #269e2e; /* Green background for teachers */
+    -fx-text-fill: white; /* Ensure text is readable on the green background */
+}
+
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
 }

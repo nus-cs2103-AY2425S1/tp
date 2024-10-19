@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -41,6 +42,22 @@ public class Student extends Person {
 
     public Set<String> getClasses() {
         return classes;
+    }
+
+    private static Set<Tag> addStudentTag(Set<Tag> tags) {
+        Set<Tag> modifiedTags = new HashSet<>(tags);
+        modifiedTags.add(new Tag("student"));
+        return modifiedTags;
+    }
+
+    @Override
+    public String getSubjectString() {
+        return subjects.toString();
+    }
+
+    @Override
+    public String getClassesString() {
+        return String.join(", ", classes);
     }
 
     @Override

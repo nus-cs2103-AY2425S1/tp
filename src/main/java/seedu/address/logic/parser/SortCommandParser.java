@@ -18,6 +18,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         switch (trimmedArgs) {
         case "name" -> comparator = Comparator.comparing(Person::getNameString);
+        case "subject" -> comparator = Comparator.comparing(Person::getSubjectString);
+        case "classes" -> comparator = Comparator.comparing(Person::getClassesString);
         default -> throw new ParseException(SortCommand.MESSAGE_USAGE);
         }
 

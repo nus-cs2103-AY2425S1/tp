@@ -61,4 +61,15 @@ public class StudentTest {
         Student student2 = new StudentBuilder().withName("John Doe").build();
         assertEquals(student1.hashCode(), student2.hashCode());
     }
+    @Test
+    public void getSubjectString_validSubject_returnsSubjectString() {
+        Student student = new StudentBuilder().withSubject("Mathematics").build();
+        assertEquals("Mathematics", student.getSubjectString());
+    }
+
+    @Test
+    public void getClassesString_validClasses_returnsClassesString() {
+        Student student = new StudentBuilder().withClasses("Class A", "Class B").build();
+        assertEquals("Class A, Class B", student.getClassesString());
+    }
 }
