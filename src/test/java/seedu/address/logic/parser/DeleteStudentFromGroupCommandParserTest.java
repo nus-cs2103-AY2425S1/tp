@@ -7,7 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
+import seedu.address.logic.commands.deletecommands.DeleteStudentFromGroupCommand;
+import seedu.address.logic.parser.deletecommands.DeleteStudentFromGroupCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.StudentNumber;

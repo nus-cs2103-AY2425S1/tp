@@ -17,6 +17,10 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.panels.GroupListPanel;
+import seedu.address.ui.panels.GroupTaskPanel;
+import seedu.address.ui.panels.StudentListPanel;
+import seedu.address.ui.panels.TaskListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
