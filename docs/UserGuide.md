@@ -111,9 +111,9 @@ Examples:
 * `add e n/Sentosa a/sentosa coast s/2024-10-15 14:30 t/Friends`
 * `add e n/Pizza Party a/Clementi Ave 2, #02-25 s/2024-12-01 10:30 t/Work`
 
-### Listing all persons : `list`
+### Listing all persons and events : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons and events in the address book.
 
 Format: `list`
 
