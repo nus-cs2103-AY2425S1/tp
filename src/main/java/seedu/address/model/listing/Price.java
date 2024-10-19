@@ -2,6 +2,10 @@ package seedu.address.model.listing;
 
 import java.math.BigDecimal;
 
+/**
+ * Represents the price of a listing in the real estate application.
+ * The price is stored both as a formatted string (e.g., "5 mil", "600k") and as a raw {@code BigDecimal} value.
+ */
 public class Price {
     private final String formattedValue;
     private final BigDecimal rawValue;
@@ -9,6 +13,12 @@ public class Price {
     // Parse the formatted value into mil, k, etc.
     // e.g. 5 mil, 600k
 
+    /**
+     * Constructs a {@code Price}.
+     *
+     * @param formattedValue The formatted price value, such as "5 mil" or "600k".
+     * @param rawValue       The raw price value, represented as a {@code BigDecimal}.
+     */
     public Price(String formattedValue, BigDecimal rawValue) {
         this.formattedValue = formattedValue;
         this.rawValue = rawValue;
