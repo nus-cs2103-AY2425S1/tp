@@ -22,7 +22,8 @@ public class FindNricCommandParser implements Parser<FindNricCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindNricCommand parse(String args) throws ParseException {
-        if (args.isEmpty()) {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
             logger.warning("Received empty NRIC for FindNricCommand");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNricCommand.MESSAGE_USAGE));
