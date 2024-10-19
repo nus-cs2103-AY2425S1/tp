@@ -21,12 +21,15 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterByTagCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PersonHasTagPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -88,6 +91,19 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD) instanceof ViewCommand);
         assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " 3") instanceof ViewCommand);
+    }
+
+    @Test
+    public void parseCommand_filterByTag() throws Exception {
+        List<Tag> tags = Arrays.asList(new Tag("High Risk"), new Tag("Low Risk"));
+        FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(
+              FilterByTagCommand.COMMAND_WORD + " " +
+                    tags.stream()
+                          .map(Tag::toString)  // Convert each Tag to its String representation
+                          .collect(Collectors.joining(" t/ ", "t/", ""))
+              // Join them with "t/" prefix
+        );
+        assertEquals(new FilterByTagCommand(new PersonHasTagPredicate(tags)), command);
     }
 
     @Test
