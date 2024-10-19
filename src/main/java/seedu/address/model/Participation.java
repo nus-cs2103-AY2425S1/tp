@@ -5,8 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import seedu.address.model.person.Attendance;
-import seedu.address.model.tutorial.Tutorial;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Represents participation of a student in a tutorial
