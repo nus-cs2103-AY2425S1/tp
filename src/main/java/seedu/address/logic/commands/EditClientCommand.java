@@ -63,6 +63,7 @@ public class EditClientCommand extends Command {
     public static final String MESSAGE_CAR_DOES_NOT_EXIST = "This person does not have a car to edit.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_CAR = "This car already exists in the address book.";
+    public static final String MESSAGE_NO_CAR_TO_EDIT_ISSUES = "This person does not have a car to edit issues to";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -116,6 +117,11 @@ public class EditClientCommand extends Command {
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor, editedCar);
         if (personToEdit.equals(editedPerson) && model.hasPerson(editedPerson) && isPersonEdited) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // check if there is a car to edit issues to
+        if (editedPerson.getCar() == null && editedPerson.getIssues().size() > 0) {
+            throw new CommandException(MESSAGE_NO_CAR_TO_EDIT_ISSUES);
         }
 
         model.setPerson(personToEdit, editedPerson);

@@ -48,6 +48,7 @@ public class AddClientCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_SUCCESS_WITH_CAR = "with VIN: ";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_NO_CAR_TO_ADD_ISSUES = "This person does not have a car to add issues to";
 
     private final Person toAdd;
 
@@ -70,6 +71,11 @@ public class AddClientCommand extends Command {
 
         if (model.hasCar(toAdd.getCar())) {
             throw new CommandException("This car already exists in the address book");
+        }
+
+        // check if there is a car to add issues to
+        if (toAdd.getCar() == null && toAdd.getIssues().size() > 0) {
+            throw new CommandException(MESSAGE_NO_CAR_TO_ADD_ISSUES);
         }
 
         model.addPerson(toAdd);
