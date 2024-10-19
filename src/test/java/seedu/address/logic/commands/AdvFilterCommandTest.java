@@ -81,8 +81,8 @@ public class AdvFilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        AdvFilterCommand ADVFilterCommand = new AdvFilterCommand("priority", "=", "high");
+        AdvFilterCommand AdvFilterCommand = new AdvFilterCommand("priority", "=", "high");
         String expected = AdvFilterCommand.class.getCanonicalName() + "{tagName=priority, operator==, tagValue=high}";
-        assertEquals(expected, ADVFilterCommand.toString());
+        assertEquals(expected, AdvFilterCommand.toString());
     }
 }
