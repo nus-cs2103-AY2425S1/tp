@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BILL;
-import static seedu.address.testutil.TypicalPersons.CARRINE;
 import static seedu.address.testutil.TypicalPersons.DANIELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -18,30 +18,30 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.BuyPropertyContainsKeywordsPredicate;
+import seedu.address.model.person.SellPropertyContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindBuyCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindSellCommand}.
  */
-public class FindBuyCommandTest {
+public class FindSellCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        BuyPropertyContainsKeywordsPredicate firstPredicate =
-                new BuyPropertyContainsKeywordsPredicate(Collections.singletonList("first"));
-        BuyPropertyContainsKeywordsPredicate secondPredicate =
-                new BuyPropertyContainsKeywordsPredicate(Collections.singletonList("second"));
+        SellPropertyContainsKeywordsPredicate firstPredicate =
+                new SellPropertyContainsKeywordsPredicate(Collections.singletonList("first"));
+        SellPropertyContainsKeywordsPredicate secondPredicate =
+                new SellPropertyContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindBuyCommand findFirstCommand = new FindBuyCommand(firstPredicate);
-        FindBuyCommand findSecondCommand = new FindBuyCommand(secondPredicate);
+        FindSellCommand findFirstCommand = new FindSellCommand(firstPredicate);
+        FindSellCommand findSecondCommand = new FindSellCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindBuyCommand findFirstCommandCopy = new FindBuyCommand(firstPredicate);
+        FindSellCommand findFirstCommandCopy = new FindSellCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -57,8 +57,8 @@ public class FindBuyCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        BuyPropertyContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindBuyCommand command = new FindBuyCommand(predicate);
+        SellPropertyContainsKeywordsPredicate predicate = preparePredicate(" ");
+        FindSellCommand command = new FindSellCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -67,26 +67,26 @@ public class FindBuyCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        BuyPropertyContainsKeywordsPredicate predicate = preparePredicate("522522 12-33 luxury");
-        FindBuyCommand command = new FindBuyCommand(predicate);
+        SellPropertyContainsKeywordsPredicate predicate = preparePredicate("544488 16-65 penthouse");
+        FindSellCommand command = new FindSellCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BILL, CARRINE, DANIELLE), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BILL, DANIELLE), model.getFilteredPersonList());
     }
 
     @Test
     public void toStringMethod() {
-        BuyPropertyContainsKeywordsPredicate predicate =
-                new BuyPropertyContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindBuyCommand findBuyCommand = new FindBuyCommand(predicate);
-        String expected = FindBuyCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findBuyCommand.toString());
+        SellPropertyContainsKeywordsPredicate predicate =
+                new SellPropertyContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FindSellCommand findSellCommand = new FindSellCommand(predicate);
+        String expected = FindSellCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, findSellCommand.toString());
     }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private BuyPropertyContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new BuyPropertyContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private SellPropertyContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new SellPropertyContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

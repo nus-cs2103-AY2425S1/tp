@@ -5,30 +5,30 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.BuyPropertyContainsKeywordsPredicate;
+import seedu.address.model.person.SellPropertyContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindBuyCommand extends Command {
+public class FindSellCommand extends Command {
 
-    public static final String COMMAND_WORD = "findBuy";
+    public static final String COMMAND_WORD = "findSell";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a particular property that a person "
-            + "wants to buy, by any of its fields (housing type, postal code, unit number, buying price, tags).\n "
+            + "wants to sell, by any of its fields (housing type, postal code, unit number, buying price, tags).\n "
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " condo 533221 01-21";
 
-    private final BuyPropertyContainsKeywordsPredicate predicate;
+    private final SellPropertyContainsKeywordsPredicate predicate;
 
 
     /**
-     * Creates an FindBuyCommand to find a name matching the specified {@code BuyPropertyContainsKeywordPredicate}
+     * Creates an FindSellCommand to find a name matching the specified {@code SellPropertyContainsKeywordPredicate}
      *
      * @param predicate the predicate used to filter buy properties based on given keywords
      */
-    public FindBuyCommand(BuyPropertyContainsKeywordsPredicate predicate) {
+    public FindSellCommand(SellPropertyContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -47,11 +47,11 @@ public class FindBuyCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindBuyCommand otherFindBuyCommand)) {
+        if (!(other instanceof FindSellCommand otherFindSellCommand)) {
             return false;
         }
 
-        return predicate.equals(otherFindBuyCommand.predicate);
+        return predicate.equals(otherFindSellCommand.predicate);
     }
 
     @Override
