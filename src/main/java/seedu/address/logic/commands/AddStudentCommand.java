@@ -20,6 +20,7 @@ public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "add_s";
     public static final String COMMAND_WORD_ALIAS = "as";
+    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Adds a student to the address book.\n"
@@ -57,7 +58,8 @@ public class AddStudentCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.setStateStudents();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)), LIST_STUDENT_MARKER);
     }
 
     @Override

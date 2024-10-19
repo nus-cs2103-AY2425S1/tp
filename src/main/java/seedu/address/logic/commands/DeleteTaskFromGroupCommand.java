@@ -23,6 +23,7 @@ public class DeleteTaskFromGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_task_grp";
     public static final String COMMAND_WORD_ALIAS = "dtg";
+    public static final int LIST_GROUP_TASK_MARKER = 3;
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes a task from a group.\n"
         + "Parameters: "
@@ -63,8 +64,12 @@ public class DeleteTaskFromGroupCommand extends Command {
 
         model.deleteTaskFromGroup(task, group);
         model.decreaseGroupWithTask(task);
+        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.setStateGroupTask();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)),
+                LIST_GROUP_TASK_MARKER);
     }
 
     @Override

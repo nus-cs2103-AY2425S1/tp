@@ -23,6 +23,7 @@ public class AddStudentToGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_s_g";
     public static final String COMMAND_WORD_ALIAS = "asg";
+    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Adds a student to a group. \n"
@@ -84,7 +85,9 @@ public class AddStudentToGroupCommand extends Command {
         }
 
         model.addPersonToGroup(student, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(toAddInto)));
+        model.setStateGroups();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(toAddInto)),
+                LIST_GROUP_MARKER);
     }
 
     @Override
