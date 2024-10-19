@@ -108,7 +108,7 @@ public class StatisticsCommand extends Command {
      */
     public static String incomeLessThan2500(List<Person> currList) {
         long lowIncome = currList.stream()
-                .map(person -> person.getIncome().getDoubleValue())
+                .map(person -> person.getIncome().toDouble())
                 .filter(income -> income < 2500)
                 .count();
         return String.format(MESSAGE_DISPLAY_LOW_INCOME, lowIncome);
