@@ -46,7 +46,7 @@ public class MeetingTest {
     }
 
     @Test
-    public void isOverlap() throws CommandException {
+    public void isOverlap(){
         LocalDateTime time1030 = LocalDateTime.parse("30-07-2024 10:30", formatter);
         LocalDateTime time1045 = LocalDateTime.parse("30-07-2024 10:45", formatter);
         LocalDateTime time1100 = LocalDateTime.parse("30-07-2024 11:00", formatter);
@@ -54,18 +54,23 @@ public class MeetingTest {
         LocalDateTime time1145 = LocalDateTime.parse("30-07-2024 11:45", formatter);
         LocalDateTime time1200 = LocalDateTime.parse("30-07-2024 12:00", formatter);
 
-        Meeting defaultMeeting = new Meeting(name, time1045, time1145, location);
+        try {
+            Meeting defaultMeeting = new Meeting(name, time1045, time1145, location);
 
-        // overlapping meeting timings
-        assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1030, time1100, location)));
-        assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1130, time1200, location)));
-        assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1100, time1130, location)));
-        assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1030, time1145, location)));
-        assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1045, time1200, location)));
+            // overlapping meeting timings
+            assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1030, time1100, location)));
+            assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1130, time1200, location)));
+            assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1100, time1130, location)));
+            assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1030, time1145, location)));
+            assertTrue(defaultMeeting.isOverlap(new Meeting(name, time1045, time1200, location)));
 
-        // valid timings
-        assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1030, time1045, location))); // defaultMeeting after
-        assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1145, time1200, location))); // defaultMeeting before
+            // valid timings
+            assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1030, time1045, location))); // defaultMeeting after
+            assertFalse(defaultMeeting.isOverlap(new Meeting(name, time1145, time1200, location))); // defaultMeeting before
+        } catch (CommandException e) {
+            throw new RuntimeException("Error while creating the meeting: " + e.getMessage(), e);
+        }
+
     }
 
     @Test
@@ -84,30 +89,35 @@ public class MeetingTest {
     }
 
     @Test
-    public void equals() throws CommandException {
-        Meeting meeting = new Meeting(name, startTime, endTime, location);
+    public void equals() {
+        try {
+            Meeting meeting = new Meeting(name, startTime, endTime, location);
 
-        // same values -> returns true
-        assertTrue(meeting.equals(new Meeting(name, startTime, endTime, location)));
+            // same values -> returns true
+            assertTrue(meeting.equals(new Meeting(name, startTime, endTime, location)));
 
-        // same object -> returns true
-        assertTrue(meeting.equals(meeting));
+            // same object -> returns true
+            assertTrue(meeting.equals(meeting));
 
-        // null -> returns false
-        assertFalse(meeting.equals(null));
+            // null -> returns false
+            assertFalse(meeting.equals(null));
 
-        // different types -> returns false
-        assertFalse(meeting.equals(5.0f));
+            // different types -> returns false
+            assertFalse(meeting.equals(5.0f));
 
-        LocalDateTime otherStartTime = LocalDateTime.parse("30-01-2024 11:00", formatter);
-        LocalDateTime otherEndTime = LocalDateTime.parse("30-12-2024 12:00", formatter);
-        String otherLocation = "Other Valid Location";
-        Name otherName = new Name("Other Valid Name");
+            LocalDateTime otherStartTime = LocalDateTime.parse("30-01-2024 11:00", formatter);
+            LocalDateTime otherEndTime = LocalDateTime.parse("30-12-2024 12:00", formatter);
+            String otherLocation = "Other Valid Location";
+            Name otherName = new Name("Other Valid Name");
 
-        // different values -> returns false
-        assertFalse(meeting.equals(new Meeting(otherName, startTime, endTime, location)));
-        assertFalse(meeting.equals(new Meeting(name, otherStartTime, endTime, location)));
-        assertFalse(meeting.equals(new Meeting(name, startTime, otherEndTime, location)));
-        assertFalse(meeting.equals(new Meeting(name, startTime, endTime, otherLocation)));
+            // different values -> returns false
+            assertFalse(meeting.equals(new Meeting(otherName, startTime, endTime, location)));
+            assertFalse(meeting.equals(new Meeting(name, otherStartTime, endTime, location)));
+            assertFalse(meeting.equals(new Meeting(name, startTime, otherEndTime, location)));
+            assertFalse(meeting.equals(new Meeting(name, startTime, endTime, otherLocation)));
+
+        } catch (CommandException e) {
+            throw new RuntimeException("Error while creating the meeting: " + e.getMessage(), e);
+        }
     }
 }
