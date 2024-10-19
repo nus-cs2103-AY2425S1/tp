@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Person's attendance in the address book.
@@ -12,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 public class Attendance {
 
     public static final String MESSAGE_CONSTRAINTS = "Attendance must be in date format: dd/MM/yyyy.";
-    public static final String VALIDATION_REGEX = "^(0[1-9]|[12]\\d|3[01])/(0[1-9]|1[0-2])/(20)\\d{2}$";
+    public static final DateTimeFormatter VALID_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public final LocalDate attendanceDate;
 
@@ -30,7 +31,12 @@ public class Attendance {
      * Returns true if a given string is a valid attendance status (either true or false).
      */
     public static Boolean isValidAttendance(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDate.parse(test, VALID_DATE_FORMAT);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
