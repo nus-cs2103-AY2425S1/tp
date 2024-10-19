@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -52,7 +52,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SCHEDULE + "SCHEDULE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
             + "[" + PREFIX_RATE + "RATE] "
-            + "[" + PREFIX_PAID + "PAID] "
+            + "[" + PREFIX_PAID_AMOUNT + "PAID] "
             + "[" + PREFIX_OWED_AMOUNT + "OWED] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
             + PREFIX_SCHEDULE + "Saturday-1000-1200 "
             + PREFIX_SUBJECT + "Mathematics "
             + PREFIX_RATE + "300 "
-            + PREFIX_PAID + "600 "
+            + PREFIX_PAID_AMOUNT + "600 "
             + PREFIX_OWED_AMOUNT + "300 ";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

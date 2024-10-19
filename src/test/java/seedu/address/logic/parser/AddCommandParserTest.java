@@ -41,7 +41,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -122,7 +122,7 @@ public class AddCommandParserTest {
 
         // multiple payment_amounts
         assertParseFailure(parser, PAID_DESC_AMY + validExpectedStudentString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID_AMOUNT));
 
         // multiple fields repeated
         assertParseFailure(parser,
@@ -131,7 +131,7 @@ public class AddCommandParserTest {
                         + PAID_DESC_AMY + OWED_AMOUNT_DESC_AMY + validExpectedStudentString,
                         Messages.getErrorMessageForDuplicatePrefixes(
                                 PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
-                                PREFIX_SCHEDULE, PREFIX_SUBJECT, PREFIX_RATE, PREFIX_PAID, PREFIX_OWED_AMOUNT));
+                                PREFIX_SCHEDULE, PREFIX_SUBJECT, PREFIX_RATE, PREFIX_PAID_AMOUNT, PREFIX_OWED_AMOUNT));
 
         // invalid value followed by valid value
 
@@ -165,7 +165,7 @@ public class AddCommandParserTest {
 
         // invalid paid
         assertParseFailure(parser, INVALID_PAID_DESC + validExpectedStudentString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID_AMOUNT));
 
         // invalid owedAmount
         assertParseFailure(parser, INVALID_OWED_AMOUNT_DESC + validExpectedStudentString,
@@ -203,7 +203,7 @@ public class AddCommandParserTest {
 
         // invalid paid
         assertParseFailure(parser, validExpectedStudentString + INVALID_PAID_DESC,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID_AMOUNT));
 
         // invalid owedAmount
         assertParseFailure(parser, validExpectedStudentString + INVALID_OWED_AMOUNT_DESC,

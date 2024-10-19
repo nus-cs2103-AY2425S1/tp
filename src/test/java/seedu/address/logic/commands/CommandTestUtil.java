@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -63,8 +63,8 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String RATE_DESC_AMY = " " + PREFIX_RATE + VALID_RATE_AMY;
     public static final String RATE_DESC_BOB = " " + PREFIX_RATE + VALID_RATE_BOB;
-    public static final String PAID_DESC_AMY = " " + PREFIX_PAID + VALID_PAID_AMY;
-    public static final String PAID_DESC_BOB = " " + PREFIX_PAID + VALID_PAID_BOB;
+    public static final String PAID_DESC_AMY = " " + PREFIX_PAID_AMOUNT + VALID_PAID_AMY;
+    public static final String PAID_DESC_BOB = " " + PREFIX_PAID_AMOUNT + VALID_PAID_BOB;
     public static final String OWED_AMOUNT_DESC_AMY = " " + PREFIX_OWED_AMOUNT + VALID_OWED_AMOUNT_AMY;
     public static final String OWED_AMOUNT_DESC_BOB = " " + PREFIX_OWED_AMOUNT + VALID_OWED_AMOUNT_BOB;
 
@@ -75,7 +75,7 @@ public class CommandTestUtil {
     public static final String INVALID_SCHEDULE_DESC = " " + PREFIX_SCHEDULE + "Sunday 1800-1900";
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Physical education";
     public static final String INVALID_RATE_DESC = " " + PREFIX_RATE + "12.398";
-    public static final String INVALID_PAID_DESC = " " + PREFIX_PAID + " ";
+    public static final String INVALID_PAID_DESC = " " + PREFIX_PAID_AMOUNT + " ";
     public static final String INVALID_OWED_AMOUNT_DESC = " " + PREFIX_OWED_AMOUNT + "19.000";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
