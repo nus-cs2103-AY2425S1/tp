@@ -55,9 +55,15 @@ public class Property {
             return false;
         }
 
-        boolean hasLanded = this.type.equals(new Type(PropertyType.LANDED.toString()));
+        boolean isLandedProperty = this.type.equals(new Type(PropertyType.LANDED.toString()));
 
-        if (hasLanded || !otherProperty.getType().equals(getType())) {
+        //If either property to be compared is LANDED, then their uniqueness can only be determined by their postal code
+        //because their unit numbers are the same (i.e 00-00)
+        //Likewise, if the properties to be compared are HDB and CONDO, then their uniqueness can already be determined
+        //by their postal code because two different property types cannot exist in the same location
+        //Finally, if HDB or CONDO are being compared within its type, then their uniqueness also needs to consider
+        //unit number
+        if (isLandedProperty || !otherProperty.getType().equals(getType())) {
             return otherProperty.getPostalCode().equals(getPostalCode());
         } else {
             return otherProperty.getPostalCode().equals(getPostalCode())
