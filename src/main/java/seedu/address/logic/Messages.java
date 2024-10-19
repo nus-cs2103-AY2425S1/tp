@@ -80,7 +80,11 @@ public class Messages {
                 .append("; Unit: ")
                 .append(property.getUnit())
                 .append("; Type: ")
-                .append(property.getType());
+                .append(property.getType())
+                .append("; Ask: ")
+                .append(property.getAsk())
+                .append("; Bid: ")
+                .append(property.getBid());
         return builder.toString();
     }
 }

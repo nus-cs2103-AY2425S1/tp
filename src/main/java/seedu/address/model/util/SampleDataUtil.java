@@ -18,6 +18,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.Ask;
+import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Type;
@@ -94,10 +96,14 @@ public class SampleDataUtil {
 
     public static Property[] getSampleProperty() {
         return new Property[] {
-            new Property(new PostalCode("123456"), new Unit("11-11"), new Type("HDB")),
-            new Property(new PostalCode("123457"), new Unit("00-00"), new Type("landed")),
-            new Property(new PostalCode("776688"), new Unit("01-00"), new Type("LANDED")),
-            new Property(new PostalCode("567333"), new Unit("01-00"), new Type("CONDO")),
+            new Property(new PostalCode("123456"), new Unit("11-11"), new Type("HDB"),
+                    new Ask("50000"), new Bid("10000")),
+            new Property(new PostalCode("123457"), new Unit("00-00"), new Type("landed"),
+                    new Ask("50000"), new Bid("10000")),
+            new Property(new PostalCode("776688"), new Unit("01-00"), new Type("LANDED"),
+                    new Ask("50000"), new Bid("10000")),
+            new Property(new PostalCode("567333"), new Unit("01-00"), new Type("CONDO"),
+                    new Ask("50000"), new Bid("10000")),
         };
     }
 

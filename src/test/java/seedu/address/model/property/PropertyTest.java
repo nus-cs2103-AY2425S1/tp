@@ -90,7 +90,8 @@ public class PropertyTest {
     @Test
     public void toStringMethod() {
         String expected = Property.class.getCanonicalName() + "{postalCode=" + ADMIRALTY.getPostalCode()
-                + ", unit=" + ADMIRALTY.getUnit() + ", type=" + ADMIRALTY.getType() + "}";
+                + ", unit=" + ADMIRALTY.getUnit() + ", type=" + ADMIRALTY.getType()
+                + ", ask=" + ADMIRALTY.getAsk() + ", bid=" + ADMIRALTY.getBid() + "}";
         assertEquals(expected, ADMIRALTY.toString());
     }
 }

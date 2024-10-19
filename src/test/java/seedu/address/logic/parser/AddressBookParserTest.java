@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -142,6 +144,7 @@ public class AddressBookParserTest {
         AddPropertyCommand command = (AddPropertyCommand) parser.parseCommand(
                 AddPropertyCommand.COMMAND_WORD + " " + PREFIX_POSTALCODE + ADMIRALTY.getPostalCode() + " "
                         + PREFIX_UNITNUMBER + ADMIRALTY.getUnit() + " " + PREFIX_TYPE + ADMIRALTY.getType()
+                        + " " + PREFIX_ASK + ADMIRALTY.getAsk() + " " + PREFIX_BID + ADMIRALTY.getBid()
         );
 
         assertEquals(new AddPropertyCommand(property), command);

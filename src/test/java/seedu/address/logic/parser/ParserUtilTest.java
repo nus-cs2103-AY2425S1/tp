@@ -18,7 +18,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.Ask;
+import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.model.tag.Tag;
 
@@ -30,6 +33,9 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_POSTALCODE = "123 45";
     private static final String INVALID_UNIT = "11";
+    private static final String INVALID_TYPE = "PUBLIC";
+    private static final String INVALID_ASK = "11.00";
+    private static final String INVALID_BID = "11.00";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
@@ -39,6 +45,9 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_POSTALCODE = "123456";
     private static final String VALID_UNIT = "11-11";
+    private static final String VALID_TYPE = "HDB";
+    private static final String VALID_ASK = "60000";
+    private static final String VALID_BID = "50000";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -320,5 +329,77 @@ public class ParserUtilTest {
         String unitWithWhitespace = WHITESPACE + VALID_UNIT + WHITESPACE;
         Unit expectedUnit = new Unit(VALID_UNIT);
         assertEquals(expectedUnit, ParserUtil.parseUnit(unitWithWhitespace));
+    }
+
+    // Tests for property Type
+    @Test
+    public void parsePropertyType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseType((String) null));
+    }
+
+    @Test
+    public void parsePropertyType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseType(INVALID_TYPE));
+    }
+
+    @Test
+    public void parsePropertyType_validValueWithoutWhitespace_returnsClientEmail() throws Exception {
+        Type expectedType = new Type(VALID_TYPE);
+        assertEquals(expectedType, ParserUtil.parseType(VALID_TYPE));
+    }
+
+    @Test
+    public void parsePropertyType_validValueWithWhitespace_returnsTrimmedClientEmail() throws Exception {
+        String typeWithWhitespace = WHITESPACE + VALID_TYPE + WHITESPACE;
+        Type expectedType = new Type(VALID_TYPE);
+        assertEquals(expectedType, ParserUtil.parseType(typeWithWhitespace));
+    }
+
+    // Tests for property Ask
+    @Test
+    public void parsePropertyAsk_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAsk((String) null));
+    }
+
+    @Test
+    public void parsePropertyAsk_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAsk(INVALID_ASK));
+    }
+
+    @Test
+    public void parsePropertyAsk_validValueWithoutWhitespace_returnsClientEmail() throws Exception {
+        Ask expectedAsk = new Ask(VALID_ASK);
+        assertEquals(expectedAsk, ParserUtil.parseAsk(VALID_ASK));
+    }
+
+    @Test
+    public void parsePropertyAsk_validValueWithWhitespace_returnsTrimmedClientEmail() throws Exception {
+        String askWithWhitespace = WHITESPACE + VALID_ASK + WHITESPACE;
+        Ask expectedAsk = new Ask(VALID_ASK);
+        assertEquals(expectedAsk, ParserUtil.parseAsk(askWithWhitespace));
+    }
+
+    // Tests for property Bid
+    @Test
+    public void parsePropertyBid_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBid((String) null));
+    }
+
+    @Test
+    public void parsePropertyBid_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBid(INVALID_BID));
+    }
+
+    @Test
+    public void parsePropertyBid_validValueWithoutWhitespace_returnsClientEmail() throws Exception {
+        Bid expectedBid = new Bid(VALID_BID);
+        assertEquals(expectedBid, ParserUtil.parseBid(VALID_BID));
+    }
+
+    @Test
+    public void parsePropertyBid_validValueWithWhitespace_returnsTrimmedClientEmail() throws Exception {
+        String bidWithWhitespace = WHITESPACE + VALID_BID + WHITESPACE;
+        Bid expectedBid = new Bid(VALID_BID);
+        assertEquals(expectedBid, ParserUtil.parseBid(bidWithWhitespace));
     }
 }

@@ -2,6 +2,8 @@
   "properties": [ {
     "postalCode": "12345",
     "unit": "88-88",
-    "type": "HDB"
+    "type": "HDB",
+    "ask": "50000",
+    "bid": "60000"
   } ]
 }

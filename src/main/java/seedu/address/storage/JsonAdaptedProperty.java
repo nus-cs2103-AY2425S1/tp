@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.property.Ask;
+import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Type;
@@ -18,16 +20,21 @@ public class JsonAdaptedProperty {
     private final String postalCode;
     private final String unit;
     private final String type;
+    private final String ask;
+    private final String bid;
 
     /**
      * Constructs a {@code JsonAdaptedProperty} with the given property details.
      */
     @JsonCreator
     public JsonAdaptedProperty(@JsonProperty("postalCode") String postalCode, @JsonProperty("unit") String unit,
-                               @JsonProperty("type") String type) {
+                               @JsonProperty("type") String type, @JsonProperty("ask") String ask,
+                               @JsonProperty("bid") String bid) {
         this.postalCode = postalCode;
         this.unit = unit;
         this.type = type;
+        this.ask = ask;
+        this.bid = bid;
     }
 
     /**
@@ -37,6 +44,8 @@ public class JsonAdaptedProperty {
         postalCode = source.getPostalCode().value;
         unit = source.getUnit().value;
         type = source.getType().value;
+        ask = source.getAsk().value;
+        bid = source.getBid().value;
     }
 
     /**
@@ -69,6 +78,22 @@ public class JsonAdaptedProperty {
             throw new IllegalValueException(Type.MESSAGE_CONSTRAINTS);
         }
         final Type modelType = new Type(type);
-        return new Property(modelPostalCode, modelUnit, modelType);
+
+        if (ask == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Ask.class.getSimpleName()));
+        }
+        if (!Ask.isValidAsk(ask)) {
+            throw new IllegalValueException(Ask.MESSAGE_CONSTRAINTS);
+        }
+        final Ask modelAsk = new Ask(ask);
+
+        if (bid == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Bid.class.getSimpleName()));
+        }
+        if (!Bid.isValidBid(bid)) {
+            throw new IllegalValueException(Bid.MESSAGE_CONSTRAINTS);
+        }
+        final Bid modelBid = new Bid(bid);
+        return new Property(modelPostalCode, modelUnit, modelType, modelAsk, modelBid);
     }
 }
