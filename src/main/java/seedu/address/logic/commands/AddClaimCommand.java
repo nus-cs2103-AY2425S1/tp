@@ -43,6 +43,7 @@ public class AddClaimCommand extends Command {
     public AddClaimCommand(Index index, Claim claim, PolicyType policyType) {
         requireNonNull(index);
         requireNonNull(claim);
+        requireNonNull(policyType);
         this.index = index;
         this.claim = claim;
         this.policyType = policyType;
