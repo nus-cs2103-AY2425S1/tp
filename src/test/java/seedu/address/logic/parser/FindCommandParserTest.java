@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -25,7 +24,7 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validSingleNameArg_returnsFindCommand() throws ParseException {
+    public void parse_validSingleNameArg_returnsFindCommand() {
         FindCommand expectedFindCommand = new FindCommand(
                 new NameContainsKeywordsPredicate(List.of("Alice"))
         );
@@ -38,7 +37,20 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validSingleCourseArg_returnsFindCommand() throws ParseException {
+    public void parse_validSpacedNameArg_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(List.of("Alice Tan"))
+        );
+
+        // no leading and trailing whitespaces
+        assertParseSuccess(parser, " n/Alice Tan", expectedFindCommand);
+
+        // multiple whitespaces around keyword
+        assertParseSuccess(parser, " \n n/Alice Tan\n  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validSingleCourseArg_returnsFindCommand() {
         FindCommand expectedFindCommand = new FindCommand(
                 new IsStudentOfCoursePredicate(List.of("CS2030S"))
         );

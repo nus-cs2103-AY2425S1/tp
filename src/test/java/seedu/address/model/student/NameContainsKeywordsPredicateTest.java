@@ -49,6 +49,10 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new StudentBuilder().withName("Alice Bob").build()));
 
+        // One big keyword
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice Bob"));
+        assertTrue(predicate.test(new StudentBuilder().withName("Alice Bob").build()));
+
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
         assertTrue(predicate.test(new StudentBuilder().withName("Alice Carol").build()));
