@@ -20,7 +20,7 @@ public class AddPropertyToBuyCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Property property = new PropertyToBuyBuilder().build();
-    private final Index indexWithProperty = Index.fromZeroBased(7);
+    private final Index indexWithProperty = Index.fromOneBased(7);
     private final Index indexWithoutProperty = Index.fromZeroBased(0);
     private final Index invalidIndex = Index.fromZeroBased(1000);
 
