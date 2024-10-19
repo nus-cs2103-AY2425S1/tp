@@ -109,10 +109,6 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
-//    public boolean checkForClashingLesson(Lesson lesson) {
-//        return Lesson.isDuplicateLesson(lesson);
-//    }
-
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.

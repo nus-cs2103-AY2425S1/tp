@@ -7,8 +7,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -26,7 +24,6 @@ public class Lesson {
 
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private static final String VALID_TIME_RANGE_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
-//    private static final HashSet<Lesson> lessonSet = new HashSet<>();
     private static final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
     private final Day lessonDay;
     private final LocalTime startTime;
@@ -106,77 +103,44 @@ public class Lesson {
         String timeRange = parts[1];
         return isValidDay(day) && isValidTimeRange(timeRange) && isValidTimeOrder(timeRange);
     }
-//
-//    /**
-//     * Adds a lesson to the HashSet.
-//     *
-//     * @param lesson The lesson to add.
-//     */
-//    public static void addLesson(Lesson lesson) {
-//        lessonSet.add(lesson);
-//    }
-//
-//
-//    /**
-//     * Adds one or more lessons to the HashSet.
-//     *
-//     * @param newLessons Hashset containing lesson / lessons to add.
-//     */
-//    public static void addAllLesson(Set<Lesson> newLessons) {
-//        lessonSet.addAll(newLessons);
-//    }
-//
-//    /**
-//     * Removes a lesson from the HashSet.
-//     *
-//     * @param lesson The lesson to remove.
-//     */
-//    public static void removeLesson(Lesson lesson) {
-//        lessonSet.remove(lesson);
-//    }
-//
-//    /**
-//     * Removes one or more lessons to the HashSet.
-//     *
-//     * @param lessonsToDelete Hashset containing lesson / lessons to add.
-//     */
-//    public static void removeAllLesson(Set<Lesson> lessonsToDelete) {
-//        lessonSet.removeAll(lessonsToDelete);
-//    }
-//
-//    /**
-//     * Checks if the given lesson is a duplicate by checking the HashSet.
-//     *
-//     * @param lesson The lesson to check for duplication.
-//     * @return true if the lesson is a duplicate, false otherwise.
-//     */
-//    public static boolean isDuplicateLesson(Lesson lesson) {
-//        return lessonSet.contains(lesson);
-//    }
-//
-//    public static boolean containsAll(HashSet<Lesson> lessonsToCompare) {
-//        return Lesson.lessonSet.containsAll(lessonsToCompare);
-//    }
-//
-//    /**
-//     * This method is used only for testing. Should not be used elsewhere
-//     */
-//    public static void clearLessonSet() {
-//        Lesson.lessonSet.clear();
-//    }
 
-    public static boolean isClashingWithOtherLesson(Lesson firstLs, Lesson secondls) {
-         boolean completelyBefore = firstLs.endTime.isBefore(secondls.startTime)
-                 || firstLs.endTime.equals(secondls.startTime);
-         boolean completelyAfter = firstLs.startTime.isAfter(secondls.endTime)
-                 || firstLs.startTime.equals(secondls.endTime);
-         return !(completelyBefore || completelyAfter);
+    /**
+     * Determines whether two lessons clash in time.
+     * A clash is defined as any overlap in the start and end times of the two lessons.
+     *
+     * <p>Note: Lessons that are back-to-back, meaning one ends exactly when the other starts
+     * (e.g., 19:00-20:00 and 20:00-21:00), are not considered clashing.</p>
+     *
+     * @param firstLs The first {@code Lesson} to compare.
+     * @param secondLs The second {@code Lesson} to compare.
+     * @return {@code true} if the two lessons overlap in time, otherwise {@code false}.
+     */
+    public static boolean isClashingWithOtherLesson(Lesson firstLs, Lesson secondLs) {
+        boolean completelyBefore = firstLs.endTime.isBefore(secondLs.startTime)
+                 || firstLs.endTime.equals(secondLs.startTime);
+        boolean completelyAfter = firstLs.startTime.isAfter(secondLs.endTime)
+                 || firstLs.startTime.equals(secondLs.endTime);
+        return !(completelyBefore || completelyAfter);
     }
 
+    /**
+     * Returns the day on which this lesson occurs.
+     *
+     * @return The {@code Day} enum representing the day of the week for this lesson.
+     */
     public Day getLessonDay() {
         return lessonDay;
     }
 
+    /**
+     * Compares this lesson to another object for equality.
+     * Returns {@code true} if the other object is a {@code Lesson} with the
+     * same start and end times as this lesson.
+     *
+     * @param other The object to compare for equality.
+     * @return {@code true} if the other object is a {@code Lesson} and has the same
+     *         start and end times as this lesson, {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -191,27 +155,36 @@ public class Lesson {
         return otherLesson.startTime.equals(this.startTime) && otherLesson.endTime.equals(this.endTime);
     }
 
-//    @Override
-//    public int hashCode() {
-//        return dayAndTime.hashCode();
-//    }
-
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + lessonDay.toString() + " " + startTime.toString().replace(":","") + "-"
-                + endTime.toString().replace(":", "")+ ']';
+        return '[' + lessonDay.toString() + " " + startTime.toString().replace(":", "") + "-"
+                + endTime.toString().replace(":", "") + ']';
     }
 
     /**
      *
      */
     public String dayTimeString() {
-        return this.toString().replace("[","").replace("]", "");
+        return this.toString().replace("[", "").replace("]", "");
     }
 
+    /**
+     * A comparator for {@code Lesson} objects that compares them based on their start times.
+     * This comparator orders lessons in ascending order of their start time.
+     */
     public static class LessonComparator implements Comparator<Lesson> {
+
+        /**
+         * Compares two {@code Lesson} objects by their start times.
+         *
+         * @param o1 The first {@code Lesson} to compare.
+         * @param o2 The second {@code Lesson} to compare.
+         * @return A negative integer, zero, or a positive integer as the start time of the
+         *         first {@code Lesson} is less than, equal to, or greater than the start time
+         *         of the second {@code Lesson}.
+         */
         @Override
         public int compare(Lesson o1, Lesson o2) {
             return o1.startTime.compareTo(o2.startTime);
