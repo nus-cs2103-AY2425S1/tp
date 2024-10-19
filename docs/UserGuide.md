@@ -1,8 +1,3 @@
----
-layout: page
-title: User Guide
----
-
 Murphy's List is a **desktop app for managing patient contact info for institutes providing palliative care, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, Murphy's List can get your healthcare administrative tasks done faster than other traditional GUI apps.
 
