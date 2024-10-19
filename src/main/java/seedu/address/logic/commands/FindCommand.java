@@ -30,8 +30,8 @@ public class FindCommand extends Command {
     private final RentalInformationContainsKeywordsPredicate rentalInfoPredicate;
 
     /**
-     * Constructs a {@code FindCommand} with the given name, phone and email predicates.
-     * The command will find all clients whose name, phone and email matches the predicates.
+     * Constructs a {@code FindCommand} with the given name, phone, email, and rental information predicates.
+     * The command will find all clients whose name, phone, email, and rental information matches the predicates.
      */
     public FindCommand(NameContainsKeywordsPredicate namePredicate, PhoneContainsKeywordsPredicate phonePredicate,
                        EmailContainsKeywordsPredicate emailPredicate,

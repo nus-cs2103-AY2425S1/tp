@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithRental;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,6 +28,8 @@ public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private Model modelWithRental = new ModelManager(getTypicalAddressBookWithRental(), new UserPrefs());
+    private Model expectedModelWithRental = new ModelManager(getTypicalAddressBookWithRental(), new UserPrefs());
     @Test
     public void equals() {
         NameContainsKeywordsPredicate namePredicate1 =
@@ -79,22 +82,113 @@ public class FindCommandTest {
         RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(" ");
 
         FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
-        expectedModel.updateFilteredPersonList(namePredicate.or(phonePredicate).or(emailPredicate));
+        expectedModel.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
-    //TODO: WRITE TEST CASE FOR THE BELOW MULTIPLE KEYWORDS IN THE FUTURE
+    @Test
+    public void execute_addressKeyword_success() {
+        String address = "BLK";
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
 
-    //    @Test
-    //    public void execute_multipleKeywords_multiplePersonsFound() {
-    //        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-    //        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-    //        FindCommand command = new FindCommand(predicate);
-    //        expectedModel.updateFilteredPersonList(predicate);
-    //        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-    //        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
-    //    }
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(address);
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(address);
+        EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        expectedModelWithRental.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+        assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
+        assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_monthlyRentKeyword_success() {
+        String address = "2900";
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(address);
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(address);
+        EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        expectedModelWithRental.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+        assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
+        assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_depositKeyword_success() {
+        String address = "5800";
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(address);
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(address);
+        EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        expectedModelWithRental.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+        assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
+        assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_tenantsKeyword_success() {
+        String address = "carl";
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(address);
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(address);
+        EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        expectedModelWithRental.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+        assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
+        assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_rentalStartDateKeyword_success() {
+        String address = "01 Jan";
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(address);
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(address);
+        EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        expectedModelWithRental.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+        assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
+        assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_rentalEndDateKeyword_success() {
+        String address = "31 Dec";
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(address);
+        PhoneContainsKeywordsPredicate phonePredicate = preparePhonePredicate(address);
+        EmailContainsKeywordsPredicate emailPredicate = prepareEmailPredicate(address);
+        RentalInformationContainsKeywordsPredicate rentalInfoPredicate = prepareRentalInfoPredicate(address);
+
+        FindCommand command = new FindCommand(namePredicate, phonePredicate, emailPredicate, rentalInfoPredicate);
+        expectedModelWithRental.updateFilteredPersonList(
+                namePredicate.or(phonePredicate).or(emailPredicate).or(rentalInfoPredicate));
+        assertCommandSuccess(command, modelWithRental, expectedMessage, expectedModelWithRental);
+        assertEquals(expectedModelWithRental.getFilteredPersonList(), modelWithRental.getFilteredPersonList());
+    }
 
     @Test
     public void toStringMethod() {
