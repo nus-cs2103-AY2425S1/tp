@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
@@ -40,6 +41,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterClientCommand;
+import seedu.address.logic.commands.FilterPropertyCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -52,6 +54,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -148,6 +151,15 @@ public class AddressBookParserTest {
         );
 
         assertEquals(new AddPropertyCommand(property), command);
+    }
+
+    @Test
+    public void parseCommand_filterProperty() throws Exception {
+        FilterPropertyCommand command = (FilterPropertyCommand) parser.parseCommand(
+                FilterPropertyCommand.COMMAND_WORD + " " + PREFIX_TYPE + VALID_TYPE_HDB
+        );
+
+        assertEquals(new FilterPropertyCommand(new Type(VALID_TYPE_HDB)), command);
     }
 
     @Test
