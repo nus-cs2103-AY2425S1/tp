@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
@@ -36,7 +37,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
         return versionHistory;
     }
 

@@ -186,7 +186,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void incrementTask(Task task) {
         tasks.forEach(x -> {
-            if (x.isSameTask(x)) {
+            if (x.isSameTask(task)) {
                 x.increaseGroupWithTask();
             }
         });
@@ -198,7 +198,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void decrementTask(Task task) {
         tasks.forEach(x -> {
-            if (x.isSameTask(x)) {
+            if (x.isSameTask(task)) {
                 x.decreaseGroupWithTask();
             }
         });

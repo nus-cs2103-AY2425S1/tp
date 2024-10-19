@@ -23,6 +23,7 @@ public abstract class Command {
      * @param versionHistory
      * @param model
      */
-    public abstract VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model);
+    public abstract VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model)
+            throws CommandException;
 
 }

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
 
@@ -21,7 +22,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
         return versionHistory;
     }
 }

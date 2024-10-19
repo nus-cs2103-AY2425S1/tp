@@ -66,7 +66,7 @@ public class ListTaskCommand extends Command {
     }
 
     @Override
-    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
         return versionHistory;
     }
 

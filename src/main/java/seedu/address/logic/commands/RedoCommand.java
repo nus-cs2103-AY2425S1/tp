@@ -6,25 +6,25 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.VersionHistory;
-import seedu.address.model.exceptions.UndoLimitException;
+import seedu.address.model.exceptions.RedoLimitException;
 
 /**
- * Undo the previous command.
+ * Reverses the previously undone command.
  */
-public class UndoCommand extends Command {
+public class RedoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
+    public static final String COMMAND_WORD = "redo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undo most recent instruction.\n"
+            + ": Reverses the most recent undo instruction.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Undo successful";
+    public static final String MESSAGE_SUCCESS = "Redo successful";
 
     /**
-     * Creates an UndoCommand to undo the previous instruction
+     * Creates an RedoCommand to undo the previous instruction
      */
-    public UndoCommand() {
+    public RedoCommand() {
     }
 
     @Override
@@ -36,11 +36,10 @@ public class UndoCommand extends Command {
     @Override
     public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
         try {
-            versionHistory.undoVersion();
-        } catch (UndoLimitException e) {
+            versionHistory.redoVersion();
+        } catch (RedoLimitException e) {
             throw new CommandException(e.getMessage());
         }
-
         return versionHistory;
     }
 
