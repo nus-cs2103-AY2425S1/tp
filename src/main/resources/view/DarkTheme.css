@@ -156,6 +156,7 @@
     -fx-border-width: 2px; /* Set the border width */
     -fx-border-radius: 5px; /* Optional: Rounded corners */
     -fx-padding: 10px; /* Optional: Add some padding for the text */
+    -fx-font-family: "Poppins";
     -fx-font-size: 13pt;
 }
 
@@ -341,6 +342,7 @@
 }
 
 #resultDisplay .content {
+    -fx-font-family: "Poppins";
     -fx-background-color: white;
     -fx-background-radius: 0;
 }
@@ -351,6 +353,7 @@
 }
 
 #tags .label {
+    -fx-font-family: "Poppins";
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
