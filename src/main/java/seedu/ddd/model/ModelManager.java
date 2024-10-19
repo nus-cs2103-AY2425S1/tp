@@ -146,4 +146,9 @@ public class ModelManager implements Model {
                 && filteredContacts.equals(otherModelManager.filteredContacts);
     }
 
+    @Override
+    public int getFilteredContactListSize() {
+        return getFilteredContactList().size();
+    }
+
 }

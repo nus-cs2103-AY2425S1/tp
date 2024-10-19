@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredContactList(Predicate<Contact> predicate);
+
+    /**
+     * Returns the size of the filtered contact list.
+     * @return an integer denoting the size of the filtered contact list.
+     */
+    int getFilteredContactListSize();
 }
