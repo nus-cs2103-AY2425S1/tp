@@ -95,13 +95,13 @@ public class Person {
     /**
      * Remove grade from gradeList based on index.
      *
-     * @param index The index to remove the grade.
+     * @param testName The name of the test whose grade needs to be removed.
      * @return new immutable Person
      */
-    public Person removeGrade(Index index) {
-        requireAllNonNull(index);
+    public Person removeGrade(String testName) {
+        requireAllNonNull(testName);
 
-        GradeList newGradelist = this.gradeList.removeGrade(index);
+        GradeList newGradelist = this.gradeList.removeGrade(testName);
 
         return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist,
                           this.attendanceList);

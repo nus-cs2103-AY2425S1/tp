@@ -25,8 +25,8 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
         }
 
         Index index = ParserUtil.parseIndex(splitArgs[0]);
-        Index testIndex = ParserUtil.parseIndex(splitArgs[1]);
+        String testName = ParserUtil.parseTestName(splitArgs[1]);
 
-        return new DeleteGradeCommand(index, testIndex);
+        return new DeleteGradeCommand(index, testName);
     }
 }

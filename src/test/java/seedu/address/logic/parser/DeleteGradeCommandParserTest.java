@@ -14,13 +14,13 @@ public class DeleteGradeCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        DeleteGradeCommand command = new DeleteGradeCommand(Index.fromOneBased(15), Index.fromOneBased(17));
+        DeleteGradeCommand command = new DeleteGradeCommand(Index.fromOneBased(15), "Midterm");
 
         // Trailing whitespaces
-        assertParseSuccess(parser, "15 17 ", command);
+        assertParseSuccess(parser, "15 Midterm ", command);
 
         // Leading whitespaces
-        assertParseSuccess(parser, " 15 17", command);
+        assertParseSuccess(parser, " 15 Midterm", command);
     }
 
     @Test
@@ -32,9 +32,11 @@ public class DeleteGradeCommandParserTest {
 
         // Wrong arguments structure
         assertParseFailure(parser, "Alice 17", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "15 Midterm", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Missing test name
+        assertParseFailure(parser, "15 ", errorMessage);
 
         // Too many arguments
-        assertParseFailure(parser, "15 16 17", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "15 Midterm 17", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 }
