@@ -77,7 +77,7 @@ public class OrderTest {
     @Test
     public void toStringMethod() {
         String expected = Order.class.getCanonicalName() + "{item=" + ATLAS.getItem() + ", count=" + ATLAS.getCount()
-                + ", date=" + ATLAS.getDate() + "}";
+                + ", date=" + ATLAS.getDate() + ", status=" + ATLAS.getStatus() + "}";
         assertEquals(expected, ATLAS.toString());
     }
 }

@@ -6,7 +6,7 @@ public enum Status {
     PENDING  {
         @Override
         public String toString() {
-            return "Not completed";
+            return "Pending";
         }
     },
     COMPLETED {
@@ -16,7 +16,7 @@ public enum Status {
         }
     };
 
-    public static String MESSAGE_CONSTRAINTS = "Status should be \"pending\" or \"completed\"";
+    public static String MESSAGE_CONSTRAINTS = "Status should be \"Pending\" or \"Completed\"";
 
     public static Status fromString(String status) throws IllegalValueException {
         try {

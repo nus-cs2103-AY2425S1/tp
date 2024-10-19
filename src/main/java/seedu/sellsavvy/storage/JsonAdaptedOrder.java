@@ -40,6 +40,7 @@ class JsonAdaptedOrder {
         item = source.getItem().fullDescription;
         date = source.getDate().value;
         count = source.getCount().value;
+        status = source.getStatus().toString();
     }
 
     /**

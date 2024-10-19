@@ -84,7 +84,7 @@ public class Order {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(item, count, date);
+        return Objects.hash(item, count, date, status);
     }
 
     @Override
