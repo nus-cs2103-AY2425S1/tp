@@ -56,5 +56,6 @@
     "payment" : "false",
     "attendance": "true",
     "tags" : [ ]
-  } ]
+  } ],
+  "tutorials" : [ ]
 }
