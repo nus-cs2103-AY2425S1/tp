@@ -50,7 +50,7 @@ public class ListExpiringPoliciesCommandTest {
 
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(30);
         String expectedMessage = String.format(
-                "The following policies are expiring within %d days:\n\n", 30)
+                "The following policies are expiring within %d day(s):\n\n", 30)
                 + "Insuree name: Alice Pauline   |   "
                 + "Insuree phone: 94351253\nPolicy Type: Health   |   "
                 + "Premium Amount: 250.00\nCoverage Amount: 15000.00   |   Expiry Date: "
@@ -70,7 +70,7 @@ public class ListExpiringPoliciesCommandTest {
         // Command with 60 days time frame
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(60);
         String expectedMessage = String.format(
-                "The following policies are expiring within %d days:\n\n", 60)
+                "The following policies are expiring within %d day(s):\n\n", 60)
                 + "Insuree name: Alice Pauline   |   Insuree phone: 94351253\n"
                 + "Policy Type: Health   |   Premium Amount: 250.00\n"
                 + "Coverage Amount: 15000.00   |   Expiry Date: " + formattedExpiryDate + "\n\n";
