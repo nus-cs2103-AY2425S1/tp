@@ -70,6 +70,6 @@ public class GradeLevel {
      * @return
      */
     public static boolean isValidGradeLevel(String gradeLevel) {
-        return gradeLevel.matches("^[a-zA-Z0-9 ]{1,50} [1-9]|1[0-2]$");
+        return gradeLevel.matches("^[a-zA-Z0-9 ]{1,50} ([1-9]|1[0-2])$");
     }
 }
