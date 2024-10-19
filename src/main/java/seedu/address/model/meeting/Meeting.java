@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Meeting {
-    // Data fields
+    // Identity fields
     private final MeetingTitle meetingTitle;
     private final MeetingDate meetingDate;
 
