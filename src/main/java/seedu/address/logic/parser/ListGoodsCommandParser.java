@@ -20,6 +20,14 @@ import seedu.address.model.person.Name;
  * Parses input arguments and creates a new ListGoodsCommand object with the given predicate.
  */
 public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
+    // Dummy predicate for no provided args
+    public static final Predicate<GoodsReceipt> DUMMY_PREDICATE = new Predicate<GoodsReceipt>() {
+        @Override
+        public boolean test(GoodsReceipt gr) {
+            return true;
+        }
+    };
+
     /**
      * Parses the given {@code String} of arguments in the context of the ListGoodsCommand
      * and returns a ListGoodsCommand object for execution.
@@ -50,12 +58,7 @@ public class ListGoodsCommandParser implements Parser<ListGoodsCommand> {
 
         // default predicate to return all items
         if (predicate == null) {
-            predicate = new Predicate<GoodsReceipt>() {
-                @Override
-                public boolean test(GoodsReceipt gr) {
-                    return true;
-                }
-            };
+            predicate = DUMMY_PREDICATE;
         }
 
         return new ListGoodsCommand(predicate);

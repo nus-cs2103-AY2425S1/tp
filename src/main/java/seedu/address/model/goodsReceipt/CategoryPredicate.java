@@ -35,5 +35,7 @@ public class CategoryPredicate implements Predicate<GoodsReceipt> {
     }
 
     @Override
-    public String toString() { return this.category.toString(); }
+    public String toString() {
+        return this.category.toString();
+    }
 }
