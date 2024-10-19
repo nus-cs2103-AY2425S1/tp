@@ -1,14 +1,11 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 /**
  * Represents a Person's meetings in the Meetings field.
  * Guarantees: immutable
@@ -37,8 +34,10 @@ public class Meeting {
      * @param startTime A valid starting time of the meeting.
      * @param endTime A valid ending time of the meeting.
      * @param location A valid location.
+     * @throws CommandException if startTime is after endTime or location is invalid.
      */
-    public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime, String location) throws CommandException {
+    public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime,
+                   String location) throws CommandException {
         requireNonNull(person);
         requireNonNull(location);
         requireNonNull(startTime);
@@ -56,23 +55,35 @@ public class Meeting {
         }
 
         this.location = location;
-
         this.personToMeet = person;
     }
 
+    /**
+     * Checks if the start time is before the end time.
+     *
+     * @param start The start time of the meeting.
+     * @param end The end time of the meeting.
+     * @return True if start is before end, otherwise false.
+     */
     public static boolean isValidStartAndEndTime(LocalDateTime start, LocalDateTime end) {
         return start.isBefore(end);
     }
 
     /**
      * Returns true if a given string is a valid location.
+     *
+     * @param location The location string to validate.
+     * @return True if the location matches the VALIDATION_REGEX, otherwise false.
      */
     public static boolean isValidLocation(String location) {
         return location.matches(VALIDATION_REGEX);
     }
 
     /**
-     * Returns true if a given meeting overlaps with another meeting.
+     * Checks if the current meeting overlaps with another meeting.
+     *
+     * @param other The other meeting to check for overlap.
+     * @return True if there is an overlap, otherwise false.
      */
     public boolean isOverlap(Meeting other) {
         boolean isStartBeforeOtherEnd = this.startTime.isBefore(other.endTime);

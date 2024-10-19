@@ -37,8 +37,8 @@ public class ScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New meeting with %1$s added: %2$s";
 
-    public static final String MESSAGE_TIME_CLASH = "A meeting with anUdder will occur at that time. " +
-            "Please reschedule to a timing when you are available!";
+    public static final String MESSAGE_TIME_CLASH = "A meeting with anUdder will occur at that time. "
+            + "Please reschedule to a timing when you are available!";
 
     public static final String MESSAGE_INVALID_ARGUMENT = "Invalid argument received! %1$s.";
 
