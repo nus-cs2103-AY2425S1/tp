@@ -14,5 +14,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_KEY = new Prefix("k/");
     public static final Prefix PREFIX_POSTALCODE = new Prefix("c/");
     public static final Prefix PREFIX_UNITNUMBER = new Prefix("u/");
-    public static final Prefix PREFIX_TYPE = new Prefix("y/");
+    public static final Prefix PREFIX_TYPE = new Prefix("t/");
 }
