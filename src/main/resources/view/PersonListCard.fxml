@@ -32,10 +32,12 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
+    <Region prefWidth="1" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="divider"/>
     <VBox alignment="TOP_RIGHT" GridPane.columnIndex="1" GridPane.rowIndex="0">
       <padding>
         <Insets top="10" right="8" bottom="5" left="15" />
       </padding>
+      <Label text="Appointment details" styleClass="cell_appointment" style="-fx-text-fill: #ffffff;" />
       <Label fx:id="schedule" styleClass="cell_small_label" text="\$schedule" />
       <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
       <Label fx:id="reminder" styleClass="cell_small_label" text="\$reminder" />
