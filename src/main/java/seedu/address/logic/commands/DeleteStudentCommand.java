@@ -21,7 +21,8 @@ public class DeleteStudentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student name used in the displayed student list.\n"
-            + "Parameters: NAME (must be a valid student name) STUDENT NUMBER (optional, must be a valid student number)\n"
+            + "Parameters: NAME (must be a valid student name) STUDENT NUMBER (optional,"
+            + " must be a valid student number)\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Jerrell Lee " + PREFIX_STUDENT_NUMBER + "A1234567X";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: ";
@@ -29,8 +30,9 @@ public class DeleteStudentCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student is not in your student list.";
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name.\n" +
-            "Their student numbers are as follows: %s" + "\n" +
-            "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s " + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER" + " to delete the student.";
+            "Their student numbers are as follows: %s" + "\n"
+            + "Use the following command: " + COMMAND_WORD + " " + PREFIX_NAME + "%s "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER" + " to delete the student.";
 
     private final Name name;
 
@@ -47,6 +49,12 @@ public class DeleteStudentCommand extends Command {
         this.studentNumber = null;
     }
 
+    /**
+     * Constructs a DeleteStudentCommand to delete the specified student by student number.
+     *
+     * @param name The student name of the student to be deleted.
+     * @param studentNumber The student number of the student to be deleted.
+     */
     public DeleteStudentCommand(Name name, StudentNumber studentNumber) {
         requireNonNull(name);
         this.name = name;
