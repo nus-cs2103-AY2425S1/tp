@@ -37,6 +37,22 @@ public class DeleteCommandParserTest {
     }
 
     @Test
+    public void parse_prefixPositive_throwsParseException() {
+        String errorMessage = String.format("%s \n%s",
+                MESSAGE_INVALID_INDEX,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "+", errorMessage);
+    }
+
+    @Test
+    public void parse_prefixNegative_throwsParseException() {
+        String errorMessage = String.format("%s \n%s",
+                MESSAGE_INVALID_INDEX,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-", errorMessage);
+    }
+
+    @Test
     public void parse_overflowArgs_throwsParseException() {
         String errorMessage = String.format("%s \n%s",
                 MESSAGE_OVERFLOW_INDEX,
