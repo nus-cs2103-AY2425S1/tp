@@ -19,13 +19,30 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** Person List should be shown to the user, and Event List should be hidden. */
+    private final boolean showPersonList;
+
+    /** Event List should be shown to the user, and Person List should be hidden. */
+    private final boolean showEventList;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp,
+            boolean exit, boolean showPersonList, boolean showEventList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.showPersonList = showPersonList;
+        this.showEventList = showEventList;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * {@code showHelp}, {@code exit} and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, true, false);
     }
 
     /**
@@ -33,7 +50,16 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, true, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified
+     * {@code feedbackToUser}, {@code showEventList},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showEventList) {
+        this(feedbackToUser, false, false, !showEventList, showEventList);
     }
 
     public String getFeedbackToUser() {
@@ -46,6 +72,14 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public boolean isShowPersonList() {
+        return showPersonList;
+    }
+
+    public boolean isShowEventList() {
+        return showEventList;
     }
 
     @Override
