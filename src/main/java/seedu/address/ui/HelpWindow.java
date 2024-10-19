@@ -125,18 +125,18 @@ public class HelpWindow extends UiPart<Stage> {
      * To be updated when new commands are added
      */
     private static final String[] ARRAY_OF_COMMAND_STRING = {
-            DELETE_COMMAND,
-            DEMOTE_COMMAND,
-            EMPLOYEE_COMMAND,
-            EXIT_COMMAND,
-            FIND_COMMAND,
-            HELP_COMMAND,
-            LIST_COMMAND,
-            POTENTIAL_COMMAND,
-            PROMOTE_COMMAND
+        DELETE_COMMAND,
+        DEMOTE_COMMAND,
+        EMPLOYEE_COMMAND,
+        EXIT_COMMAND,
+        FIND_COMMAND,
+        HELP_COMMAND,
+        LIST_COMMAND,
+        POTENTIAL_COMMAND,
+        PROMOTE_COMMAND
     };
 
-    private final int NUM_OF_COMMANDS;
+    private int numOfCommands;
 
     @FXML
     private Text deleteText;
@@ -162,16 +162,16 @@ public class HelpWindow extends UiPart<Stage> {
      * Arranged in alphabetical order.
      * To be updated together with adding a Text component in HelpWindow.fxml when new commands are added.
      */
-    private final Text[] ARRAY_OF_COMMAND_TEXT = {
-            deleteText,
-            demoteText,
-            employeeText,
-            exitText,
-            findText,
-            helpText,
-            listText,
-            potentialText,
-            promoteText
+    private final Text[] arrayText = {
+        deleteText,
+        demoteText,
+        employeeText,
+        exitText,
+        findText,
+        helpText,
+        listText,
+        potentialText,
+        promoteText
     };
     @FXML
     private MenuItem deleteMenuItem;
@@ -197,16 +197,16 @@ public class HelpWindow extends UiPart<Stage> {
      * Arranged in alphabetical order.
      * To be updated together with adding a MenuItem component in HelpWindow.fxml when new commands are added.
      */
-    private final MenuItem[] ARRAY_OF_COMMAND_MENUITEM = {
-            deleteMenuItem,
-            demoteMenuItem,
-            employeeMenuItem,
-            exitMenuItem,
-            findMenuItem,
-            helpMenuItem,
-            listMenuItem,
-            potentialMenuItem,
-            promoteMenuItem
+    private final MenuItem[] arrayMenuItem = {
+        deleteMenuItem,
+        demoteMenuItem,
+        employeeMenuItem,
+        exitMenuItem,
+        findMenuItem,
+        helpMenuItem,
+        listMenuItem,
+        potentialMenuItem,
+        promoteMenuItem
     };
 
     @FXML
@@ -228,20 +228,20 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
 
-        // Check if ARRAY_OF_COMMAND_STRING, ARRAY_OF_COMMAND_TEXT and ARRAY_OF_COMMAND_MENUITEM are updated
-        assert (ARRAY_OF_COMMAND_STRING.length == ARRAY_OF_COMMAND_TEXT.length)
+        // Check if ARRAY_OF_COMMAND_STRING, arrayText and arrayMenuItem are updated
+        assert (ARRAY_OF_COMMAND_STRING.length == arrayText.length)
                 : "Number of command String is not equal to number of Text object";
-        assert (ARRAY_OF_COMMAND_STRING.length == ARRAY_OF_COMMAND_MENUITEM.length)
+        assert (ARRAY_OF_COMMAND_STRING.length == arrayMenuItem.length)
                 : "Number of command String is not equal to number of MenuItem object";
 
         // Initialize the ArrayList and NUM_OF_COMMANDS
-        List<Text> textList= Arrays.asList(ARRAY_OF_COMMAND_TEXT);
-        List<MenuItem> menuItemList = Arrays.asList(ARRAY_OF_COMMAND_MENUITEM);
+        List<Text> textList = Arrays.asList(arrayText);
+        List<MenuItem> menuItemList = Arrays.asList(arrayMenuItem);
         textArrayList = new ArrayList<>(textList);
         menuItemArrayList = new ArrayList<>(menuItemList);
-        NUM_OF_COMMANDS = textArrayList.size();
+        numOfCommands = textArrayList.size();
 
-        for (int i = 0; i < NUM_OF_COMMANDS; i++) {
+        for (int i = 0; i < numOfCommands; i++) {
             // Setting the corresponding String content in the Text object
             Text commandText = textArrayList.get(i);
             String commandString = ARRAY_OF_COMMAND_STRING[i];
@@ -290,7 +290,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private void scrollAndHighlightText(Text targetText) {
         // if the command to be scrolled to is the last command, just scroll to the end
-        int lastIndex = NUM_OF_COMMANDS - 1;
+        int lastIndex = numOfCommands - 1;
         Text lastText = textArrayList.get(lastIndex);
         if (targetText == lastText) {
             scrollPane.setVvalue(1);
