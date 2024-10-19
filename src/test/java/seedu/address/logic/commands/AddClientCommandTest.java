@@ -57,6 +57,16 @@ public class AddClientCommandTest {
     }
 
     @Test
+    public void execute_personWithIssueNoCar_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withIssues("lol").build();
+        AddClientCommand addClientCommand = new AddClientCommand(validPerson);
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        assertThrows(CommandException.class,
+            AddClientCommand.MESSAGE_NO_CAR_TO_ADD_ISSUES, () -> addClientCommand.execute(modelStub));
+    }
+
+    @Test
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
