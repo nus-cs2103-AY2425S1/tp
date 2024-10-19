@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -48,6 +50,10 @@ public class CommandTestUtil {
     public static final String VALID_TYPE_HDB = "HDB";
     public static final String VALID_TYPE_CONDO = "CONDO";
     public static final String VALID_TYPE_LANDED = "LANDED";
+    public static final String VALID_BID_ADMIRALTY = "10000";
+    public static final String VALID_BID_BEDOK = "20000";
+    public static final String VALID_ASK_ADMIRALTY = "50000";
+    public static final String VALID_ASK_BEDOK = "60000";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -65,6 +71,10 @@ public class CommandTestUtil {
     public static final String UNIT_DESC_BEDOK = " " + PREFIX_UNITNUMBER + VALID_UNIT_BEDOK;
     public static final String TYPE_DESC_ADMIRALTY = " " + PREFIX_TYPE + VALID_TYPE_CONDO;
     public static final String TYPE_DESC_BEDOK = " " + PREFIX_TYPE + VALID_TYPE_HDB;
+    public static final String BID_DESC_ADMIRALTY = " " + PREFIX_BID + VALID_BID_ADMIRALTY;
+    public static final String BID_DESC_BEDOK = " " + PREFIX_BID + VALID_BID_BEDOK;
+    public static final String ASK_DESC_ADMIRALTY = " " + PREFIX_ASK + VALID_ASK_ADMIRALTY;
+    public static final String ASK_DESC_BEDOK = " " + PREFIX_ASK + VALID_ASK_BEDOK;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -74,6 +84,8 @@ public class CommandTestUtil {
     public static final String INVALID_POSTALCODE_DESC = " " + PREFIX_POSTALCODE + "1234"; //PostalCode with few numbers
     public static final String INVALID_UNIT_DESC = " " + PREFIX_UNITNUMBER + "11 11"; //'-' delimiter missing
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "PUBLIC"; //iNVALID TYPE
+    public static final String INVALID_BID_DESC = " " + PREFIX_BID + "ONE THOUSAND";
+    public static final String INVALID_ASK_DESC = " " + PREFIX_ASK + "TWO THOUSAND";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
