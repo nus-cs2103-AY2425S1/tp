@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.event.Event;
-import seedu.address.model.person.Person;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -32,23 +31,6 @@ public class Messages {
                 Stream.of(duplicatePrefixes).map(Prefix::toString).collect(Collectors.toSet());
 
         return MESSAGE_DUPLICATE_FIELDS + String.join(" ", duplicateFields);
-    }
-
-    /**
-     * Formats the {@code person} for display to the user.
-     */
-    public static String format(Person person) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(person.getName())
-                .append("; Phone: ")
-                .append(person.getPhone())
-                .append("; Email: ")
-                .append(person.getEmail())
-                .append("; Address: ")
-                .append(person.getAddress())
-                .append("; Tags: ");
-        person.getTags().forEach(builder::append);
-        return builder.toString();
     }
 
     /**
