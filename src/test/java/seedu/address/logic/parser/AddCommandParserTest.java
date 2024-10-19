@@ -48,87 +48,87 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalStudents.AMY;
+import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.OwedAmount;
-import seedu.address.model.person.Paid;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Schedule;
-import seedu.address.model.person.Subject;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.OwedAmount;
+import seedu.address.model.student.Paid;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Rate;
+import seedu.address.model.student.Schedule;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
+import seedu.address.testutil.StudentBuilder;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).build();
+        Student expectedStudent = new StudentBuilder(BOB).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_DESC_BOB
                         + OWED_AMOUNT_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddCommand(expectedStudent));
     }
 
     @Test
     public void parse_repeatedValue_failure() {
         /*public void parse_repeatedNonTagValue_failure() {*/
-        String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+        String validExpectedStudentString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHEDULE_DESC_BOB + SUBJECT_DESC_BOB + RATE_DESC_BOB + PAID_DESC_BOB
                         + OWED_AMOUNT_DESC_BOB;
 
         // multiple names
-        assertParseFailure(parser, NAME_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, NAME_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // multiple phones
-        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PHONE_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // multiple emails
-        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, EMAIL_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // multiple addresses
-        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, ADDRESS_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // multiple schedules
-        assertParseFailure(parser, SCHEDULE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, SCHEDULE_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
 
         // multiple rates
-        assertParseFailure(parser, RATE_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, RATE_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // multiple owedAmounts
-        assertParseFailure(parser, OWED_AMOUNT_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, OWED_AMOUNT_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
 
         // multiple subjects
-        assertParseFailure(parser, SUBJECT_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, SUBJECT_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SUBJECT));
 
         // multiple payment_amounts
-        assertParseFailure(parser, PAID_DESC_AMY + validExpectedPersonString,
+        assertParseFailure(parser, PAID_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
+                validExpectedStudentString + PHONE_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY + ADDRESS_DESC_AMY
                         + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY
-                        + PAID_DESC_AMY + OWED_AMOUNT_DESC_AMY + validExpectedPersonString,
+                        + PAID_DESC_AMY + OWED_AMOUNT_DESC_AMY + validExpectedStudentString,
                         Messages.getErrorMessageForDuplicatePrefixes(
                                 PREFIX_NAME, PREFIX_ADDRESS, PREFIX_EMAIL, PREFIX_PHONE,
                                 PREFIX_SCHEDULE, PREFIX_SUBJECT, PREFIX_RATE, PREFIX_PAID, PREFIX_OWED_AMOUNT));
@@ -136,87 +136,87 @@ public class AddCommandParserTest {
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PHONE_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_ADDRESS_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // invalid schedule
-        assertParseFailure(parser, INVALID_SCHEDULE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_SCHEDULE_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
 
         // invalid subject
-        assertParseFailure(parser, INVALID_SUBJECT_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_SUBJECT_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SUBJECT));
 
         // invalid rate
-        assertParseFailure(parser, INVALID_RATE_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_RATE_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // invalid paid
-        assertParseFailure(parser, INVALID_PAID_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_PAID_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
 
         // invalid owedAmount
-        assertParseFailure(parser, INVALID_OWED_AMOUNT_DESC + validExpectedPersonString,
+        assertParseFailure(parser, INVALID_OWED_AMOUNT_DESC + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
 
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedPersonString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
-        assertParseFailure(parser, validExpectedPersonString + INVALID_EMAIL_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_EMAIL_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMAIL));
 
         // invalid phone
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PHONE_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_PHONE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
         // invalid address
-        assertParseFailure(parser, validExpectedPersonString + INVALID_ADDRESS_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_ADDRESS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ADDRESS));
 
         // invalid schedule
-        assertParseFailure(parser, validExpectedPersonString + INVALID_SCHEDULE_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_SCHEDULE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SCHEDULE));
 
         // invalid subject
-        assertParseFailure(parser, validExpectedPersonString + INVALID_SUBJECT_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_SUBJECT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_SUBJECT));
 
         // invalid rate
-        assertParseFailure(parser, validExpectedPersonString + INVALID_RATE_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_RATE_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_RATE));
 
         // invalid paid
-        assertParseFailure(parser, validExpectedPersonString + INVALID_PAID_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_PAID_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PAID));
 
         // invalid owedAmount
-        assertParseFailure(parser, validExpectedPersonString + INVALID_OWED_AMOUNT_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_OWED_AMOUNT_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_OWED_AMOUNT));
     }
 
     // seems like this is for tags
     @Test
     public void parse_optionalFieldsMissing_success() {
-        Person expectedPerson = new PersonBuilder(AMY).withOwedAmount("0").build();
+        Student expectedStudent = new StudentBuilder(AMY).withOwedAmount("0").build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + SCHEDULE_DESC_AMY + SUBJECT_DESC_AMY + RATE_DESC_AMY + PAID_DESC_AMY,
-                        new AddCommand(expectedPerson));
+                        new AddCommand(expectedStudent));
     }
 
     @Test

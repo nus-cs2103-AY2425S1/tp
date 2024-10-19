@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,27 +22,27 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.OwedAmount;
-import seedu.address.model.person.Paid;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Rate;
-import seedu.address.model.person.Schedule;
-import seedu.address.model.person.Subject;
+import seedu.address.model.student.Address;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.OwedAmount;
+import seedu.address.model.student.Paid;
+import seedu.address.model.student.Phone;
+import seedu.address.model.student.Rate;
+import seedu.address.model.student.Schedule;
+import seedu.address.model.student.Student;
+import seedu.address.model.student.Subject;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing student in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_WORD_RANDOM_CASE = "EdiT";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
+            + "by the index number used in the displayed Student list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
@@ -62,75 +62,75 @@ public class EditCommand extends Command {
             + PREFIX_RATE + "300 "
             + PREFIX_PAID + "600 "
             + PREFIX_OWED_AMOUNT + "300 ";
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This Student already exists in the address book.";
 
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditStudentDescriptor editStudentDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the student in the filtered student list to edit
+     * @param editStudentDescriptor details to edit the student with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditStudentDescriptor editStudentDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editStudentDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Student> lastShownList = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        long clashes = model.checkClashes(editedPerson);
-        List<Person> clashingPersons = model.getClashingPersons(editedPerson);
+        model.setStudent(studentToEdit, editedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        long clashes = model.checkClashes(editedStudent);
+        List<Student> clashingStudents = model.getClashingStudents(editedStudent);
         if (clashes == 0) {
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
+            return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
         } else {
             return new CommandResult(
-                    String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson))
-                    + Messages.getWarningMessageForClashes(clashes, clashingPersons)
+                    String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent))
+                    + Messages.getWarningMessageForClashes(clashes, clashingStudents)
             );
         }
 
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
+     * edited with {@code editStudentDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+        assert studentToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
-        Subject updatedSubject = editPersonDescriptor.getSubject().orElse(personToEdit.getSubject());
-        Rate updatedRate = editPersonDescriptor.getRate().orElse(personToEdit.getRate());
-        Paid updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
-        OwedAmount updatedOwedAmount = editPersonDescriptor.getOwedAmount().orElse(personToEdit.getOwedAmount());
+        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        Phone updatedPhone = editStudentDescriptor.getPhone().orElse(studentToEdit.getPhone());
+        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Address updatedAddress = editStudentDescriptor.getAddress().orElse(studentToEdit.getAddress());
+        Schedule updatedSchedule = editStudentDescriptor.getSchedule().orElse(studentToEdit.getSchedule());
+        Subject updatedSubject = editStudentDescriptor.getSubject().orElse(studentToEdit.getSubject());
+        Rate updatedRate = editStudentDescriptor.getRate().orElse(studentToEdit.getRate());
+        Paid updatedPaid = editStudentDescriptor.getPaid().orElse(studentToEdit.getPaid());
+        OwedAmount updatedOwedAmount = editStudentDescriptor.getOwedAmount().orElse(studentToEdit.getOwedAmount());
 
-        return new Person(
+        return new Student(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
                 updatedPaid, updatedOwedAmount
         );
@@ -149,22 +149,22 @@ public class EditCommand extends Command {
 
         EditCommand otherEditCommand = (EditCommand) other;
         return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+                && editStudentDescriptor.equals(otherEditCommand.editStudentDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("editStudentDescriptor", editStudentDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the student with. Each non-empty field value will replace the
+     * corresponding field value of the student.
      */
-    public static class EditPersonDescriptor {
+    public static class EditStudentDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
@@ -175,12 +175,12 @@ public class EditCommand extends Command {
         private Paid paid;
         private OwedAmount owedAmount;
 
-        public EditPersonDescriptor() {}
+        public EditStudentDescriptor() {}
 
         /**
          * Copy constructor.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditStudentDescriptor(EditStudentDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -276,20 +276,20 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditStudentDescriptor)) {
                 return false;
             }
 
-            EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
-                    && Objects.equals(subject, otherEditPersonDescriptor.subject)
-                    && Objects.equals(rate, otherEditPersonDescriptor.rate)
-                    && Objects.equals(paid, otherEditPersonDescriptor.paid)
-                    && Objects.equals(owedAmount, otherEditPersonDescriptor.owedAmount);
+            EditStudentDescriptor otherEditStudentDescriptor = (EditStudentDescriptor) other;
+            return Objects.equals(name, otherEditStudentDescriptor.name)
+                    && Objects.equals(phone, otherEditStudentDescriptor.phone)
+                    && Objects.equals(email, otherEditStudentDescriptor.email)
+                    && Objects.equals(address, otherEditStudentDescriptor.address)
+                    && Objects.equals(schedule, otherEditStudentDescriptor.schedule)
+                    && Objects.equals(subject, otherEditStudentDescriptor.subject)
+                    && Objects.equals(rate, otherEditStudentDescriptor.rate)
+                    && Objects.equals(paid, otherEditStudentDescriptor.paid)
+                    && Objects.equals(owedAmount, otherEditStudentDescriptor.owedAmount);
         }
 
         @Override

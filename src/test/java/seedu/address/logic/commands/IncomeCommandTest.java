@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 
 public class IncomeCommandTest {
@@ -19,13 +19,13 @@ public class IncomeCommandTest {
     }
 
     @Test
-    public void execute_addPerson_showUpdatedPaidAndOwed() {
-        Person validPerson = new PersonBuilder().build();
-        model.addPerson(validPerson);
+    public void execute_addStudent_showUpdatedPaidAndOwed() {
+        Student validStudent = new StudentBuilder().build();
+        model.addStudent(validStudent);
         CommandResult commandResult = new IncomeCommand().execute(model);
 
-        String expectedOutput = "Total Paid: " + validPerson.getPaid().value
-                + "   Total Owed: " + validPerson.getOwedAmount().value;
+        String expectedOutput = "Total Paid: " + validStudent.getPaid().value
+                + "   Total Owed: " + validStudent.getOwedAmount().value;
 
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
 
