@@ -2,14 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.Appt;
-import seedu.address.model.person.Nric;
-import seedu.address.model.person.Person;
-
 import java.util.List;
 import java.util.Optional;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
 
 public class ViewCommand extends Command{
     public static final String MESSAGE_ARGUMENTS = "View: %2$s, Nric: %1$s";
