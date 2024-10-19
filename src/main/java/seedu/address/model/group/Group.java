@@ -56,7 +56,7 @@ public class Group {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + groupName + ']';
+        return groupName;
     }
 
 }
