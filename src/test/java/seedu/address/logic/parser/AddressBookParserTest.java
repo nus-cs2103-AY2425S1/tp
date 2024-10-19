@@ -15,14 +15,22 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AssignWeddingCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateTagCommand;
+import seedu.address.logic.commands.CreateWeddingCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTagCommand;
+import seedu.address.logic.commands.DeleteWeddingCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListWeddingsCommand;
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.UnassignWeddingCommand;
+import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.commands.findcommand.FindCommand;
 import seedu.address.logic.commands.findcommand.FindNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,6 +38,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.keywordspredicate.NameContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -102,6 +112,87 @@ public class AddressBookParserTest {
 
         TagCommand command = (TagCommand) parser.parseCommand(userInput);
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_untag() throws Exception {
+        HashSet<Tag> tagsToRemove = new HashSet<>(Arrays.asList(new Tag(new TagName("colleague")),
+                new Tag(new TagName("gym"))));
+        String userInput = UntagCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " t/gym t/colleague";
+        UntagCommand expectedCommand = new UntagCommand(INDEX_FIRST_PERSON, tagsToRemove);
+
+        UntagCommand command = (UntagCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_createTag() throws Exception {
+        Tag tagToCreate = new Tag(new TagName("colleague"));
+        String userInput = CreateTagCommand.COMMAND_WORD + " t/colleague";
+        CreateTagCommand expectedCommand = new CreateTagCommand(tagToCreate);
+
+        CreateTagCommand command = (CreateTagCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_deleteTag() throws Exception {
+        Tag tagToDelete = new Tag(new TagName("vendor"));
+        String userInput = DeleteTagCommand.COMMAND_WORD + " t/vendor";
+        DeleteTagCommand expectedCommand = new DeleteTagCommand(tagToDelete);
+
+        DeleteTagCommand command = (DeleteTagCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_createWedding() throws Exception {
+        Wedding weddingToCreate = new Wedding(new WeddingName("Wedding 19"));
+        String userInput = CreateWeddingCommand.COMMAND_WORD + " w/Wedding 19";
+        CreateWeddingCommand expectedCommand = new CreateWeddingCommand(weddingToCreate);
+
+        CreateWeddingCommand command = (CreateWeddingCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_deleteWedding() throws Exception {
+        Wedding weddingToDelete = new Wedding(new WeddingName("Joe's Wedding"));
+        String userInput = DeleteWeddingCommand.COMMAND_WORD + " w/Joe's Wedding";
+        DeleteWeddingCommand expectedCommand = new DeleteWeddingCommand(weddingToDelete);
+
+        DeleteWeddingCommand command = (DeleteWeddingCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_assignWedding() throws Exception {
+        HashSet<Wedding> weddingsToAdd = new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 19")),
+                new Wedding(new WeddingName("Joe's Wedding"))));
+        String userInput = AssignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " w/Wedding 19 w/Joe's Wedding";
+        AssignWeddingCommand expectedCommand = new AssignWeddingCommand(INDEX_FIRST_PERSON, weddingsToAdd);
+
+        AssignWeddingCommand command = (AssignWeddingCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_unassignWedding() throws Exception {
+        HashSet<Wedding> weddingsToRemove = new HashSet<>(Arrays.asList(new Wedding(new WeddingName("Wedding 19")),
+                new Wedding(new WeddingName("Joe's Wedding"))));
+        String userInput = UnassignWeddingCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " w/Wedding 19 w/Joe's Wedding";
+        UnassignWeddingCommand expectedCommand = new UnassignWeddingCommand(INDEX_FIRST_PERSON, weddingsToRemove);
+
+        UnassignWeddingCommand command = (UnassignWeddingCommand) parser.parseCommand(userInput);
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_listWeddings() throws Exception {
+        assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD) instanceof ListWeddingsCommand);
+        assertTrue(parser.parseCommand(ListWeddingsCommand.COMMAND_WORD + " 3") instanceof ListWeddingsCommand);
     }
 
     @Test
