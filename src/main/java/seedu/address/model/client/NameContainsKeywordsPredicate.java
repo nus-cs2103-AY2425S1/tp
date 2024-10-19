@@ -28,7 +28,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Client> {
                 return false;
             } else {
                 return keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(client.getName().fullName, keyword));
+                        .anyMatch(keyword -> StringUtil.containsIgnoreCase(client.getName().fullName, keyword));
             }
         }
     }

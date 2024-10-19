@@ -37,6 +37,7 @@ public class Email {
     public Email() {
         value = null;
     }
+
     /**
      * Constructs an {@code Email}.
      *
@@ -80,6 +81,7 @@ public class Email {
         if (value == null && otherEmail.value == null) {
             return true;
         }
+
         return value.equals(otherEmail.value);
     }
 

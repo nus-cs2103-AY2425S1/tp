@@ -60,9 +60,11 @@ public class Phone {
         }
 
         Phone otherPhone = (Phone) other;
+
         if (value == null && otherPhone.value == null) {
             return true;
         }
+
         return value.equals(otherPhone.value);
     }
 

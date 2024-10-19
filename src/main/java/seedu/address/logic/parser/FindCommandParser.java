@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.client.PhoneContainsKeywordsPredicate;
+import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -29,8 +30,6 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        //TODO: Now can only recognise ONE FULL keyword, FUTURE implement MULTIPLE keyword
-        // + substring of NAME/PHONE/EMAIL can also find
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_KEYWORD);
 
@@ -41,7 +40,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         //Keep as list now for future keywords
         List<String> keywordList = new ArrayList<>();
-        //TODO can migrate KEYWORD to another class
+
         if (isKeywordPresent(argMultimap, PREFIX_KEYWORD)) {
             String keyword = argMultimap.getValue(PREFIX_KEYWORD).get();
             requireNonNull(keyword);
@@ -56,7 +55,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         return new FindCommand(new NameContainsKeywordsPredicate(keywordList),
                 new PhoneContainsKeywordsPredicate(keywordList),
-                new EmailContainsKeywordsPredicate(keywordList));
+                new EmailContainsKeywordsPredicate(keywordList),
+                new RentalInformationContainsKeywordsPredicate(keywordList));
     }
 
     private boolean isValidKeyword(String keyword) {

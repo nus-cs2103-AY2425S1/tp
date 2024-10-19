@@ -28,7 +28,7 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Client> {
                 return false;
             } else {
                 return keywords.stream()
-                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(client.getPhone().value, keyword));
+                        .anyMatch(keyword -> StringUtil.containsIgnoreCase(client.getPhone().value, keyword));
             }
         }
     }

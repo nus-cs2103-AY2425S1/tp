@@ -15,11 +15,10 @@ public class StringUtil {
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
      * Ignores case, but a full word match is required.
-     * <br>examples:<pre>
+     * Examples:
      *       containsWordIgnoreCase("ABc def", "abc") == true
      *       containsWordIgnoreCase("ABc def", "DEF") == true
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
-     *       </pre>
      *
      * @param sentence cannot be null
      * @param word     cannot be null, cannot be empty, must be a single word
@@ -66,5 +65,25 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code phrase}.
+     * Ignores case, substring is valid.
+     * Examples:
+     *       containsWordIgnoreCase("ABc def", "abc") == true
+     *       containsWordIgnoreCase("ABc def", "DEF") == true
+     *
+     * @param sentence cannot be null
+     * @param phrase     cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsIgnoreCase(String sentence, String phrase) {
+        requireNonNull(sentence);
+        requireNonNull(phrase);
+
+        String preppedSentence = sentence.trim().toLowerCase();
+        String preppedPhrase = phrase.trim().toLowerCase();
+
+        return preppedSentence.contains(preppedPhrase);
     }
 }

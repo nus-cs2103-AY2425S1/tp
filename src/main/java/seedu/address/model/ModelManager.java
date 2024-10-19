@@ -142,6 +142,11 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+
+        if (filteredClients.isEmpty()) {
+            updateVisibleRentalInformationList(List.of());
+            setLastViewedClient(null);
+        }
     }
 
     //=========== Visible Rental Information =================================================================

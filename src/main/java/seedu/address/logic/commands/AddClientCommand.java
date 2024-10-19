@@ -77,4 +77,5 @@ public class AddClientCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
+
 }
