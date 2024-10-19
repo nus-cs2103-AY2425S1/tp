@@ -120,7 +120,7 @@ public interface Model {
     /**
      * Returns the displayed call history.
      */
-    ContactRecordList getDisplayedCallHistory();
+    ObservableList<ContactRecord> getDisplayedCallHistory();
 
     Person getPersonByNric(Nric nric);
 

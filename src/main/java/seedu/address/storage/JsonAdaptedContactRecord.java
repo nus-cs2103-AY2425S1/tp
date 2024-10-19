@@ -32,8 +32,8 @@ public class JsonAdaptedContactRecord {
         notes = source.getNotes();
     }
     /**
-     * Converts this Jackson-friendly adapted contact date object into the model's {@code ContactRecord} object.
-     * @throws IllegalValueException if there were any data constraints violated in the adapted contact date.
+     * Converts this Jackson-friendly adapted contact record object into the model's {@code ContactRecord} object.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted contact record.
      */
     public ContactRecord toModelType() throws IllegalValueException {
         if (date == null) {

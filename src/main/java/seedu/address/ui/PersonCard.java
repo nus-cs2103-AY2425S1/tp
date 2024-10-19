@@ -41,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label lastContacted;
+    private Label nextContactDate;
     @FXML
     private Label callFrequency;
     @FXML
@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        lastContacted.setText(person.getLastContacted().toString());
+        nextContactDate.setText(person.getNextContactDate().toString());
         callFrequency.setText(person.getCallFrequency().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
