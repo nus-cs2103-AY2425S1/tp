@@ -21,9 +21,24 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-        value = phone;
+        this(phone, true);
+    }
+
+    /**
+     * Constructs a {@code Phone}.
+     *
+     * @param phone A valid phone number.
+     * @param isDeclared Boolean variable representing if phone number is declared
+     */
+    public Phone(String phone, Boolean isDeclared) {
+        if (isDeclared) {
+            requireNonNull(phone);
+            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+            value = phone;
+        } else {
+            requireNonNull(phone);
+            value = "";
+        }
     }
 
     /**

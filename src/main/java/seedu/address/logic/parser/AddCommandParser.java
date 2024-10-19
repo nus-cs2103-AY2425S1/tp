@@ -10,6 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -36,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION, PREFIX_TAG,
                 PREFIX_REMARK);
 
-        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_LOCATION, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -44,26 +46,42 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
                 PREFIX_REMARK);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
+        Phone phone = parseOptionalValue(
+                argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone, new Phone("", false)
+        );
 
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_LOCATION).get());
-        //needed because Remark is optional
-        Optional<String> possibleRemark = argMultimap.getValue(PREFIX_REMARK);
-        Remark remark = null;
-        if (possibleRemark.isEmpty()) {
-            remark = new Remark("");
-        } else {
-            remark = ParserUtil.parseRemark(possibleRemark.get());
-        }
+        Email email = parseOptionalValue(
+                argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail, new Email("", false)
+        );
 
-        System.out.println(remark.value);
+        Address address = parseOptionalValue(
+                argMultimap.getValue(PREFIX_LOCATION), ParserUtil::parseAddress, new Address("", false)
+        );
+
+        Remark remark = parseOptionalValue(
+                argMultimap.getValue(PREFIX_REMARK), ParserUtil::parseRemark, new Remark("")
+        );
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, remark, tagList);
 
         return new AddCommand(person);
     }
+
+    @FunctionalInterface
+    public interface FunctionWithException<T, R, E extends Exception> {
+        R apply(T t) throws E;
+    }
+
+    public static <T> T parseOptionalValue(Optional<String> value, FunctionWithException<String,T,
+            ParseException> parser, T defaultValue) throws ParseException {
+        if (value.isPresent()) {
+            return parser.apply(value.get());
+        } else {
+            return defaultValue;
+        }
+    }
+
 
 
 
