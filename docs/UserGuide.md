@@ -77,7 +77,7 @@ Adds a person to Cher.
 
 Format: `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-Role can either be student, teacher, parent or staff, case-insensitive. 
+Role can either be student, teacher, parent or staff, case-insensitive.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
