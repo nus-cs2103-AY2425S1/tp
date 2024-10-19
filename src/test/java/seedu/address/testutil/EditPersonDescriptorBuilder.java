@@ -88,7 +88,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code DateOfLastVisit} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withDateOfLastVisit(String dateOfLastVisit) {
-        descriptor.setDateOfLastVisit(new DateOfLastVisit(dateOfLastVisit));
+        descriptor.setDateOfLastVisit(Optional.of(new DateOfLastVisit(dateOfLastVisit)));
         return this;
     }
 
