@@ -7,6 +7,7 @@
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
       "ic": "F2234567X",
+      "year group": "1",
       "tags": ["friends"],
       "subjects": ["English"]
     },
@@ -16,6 +17,7 @@
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
       "ic": "F1264567X",
+      "year group": "1",
       "tags": ["owesMoney", "friends"],
       "subjects": ["Maths"]
     },
@@ -25,6 +27,7 @@
       "email": "heinz@example.com",
       "address": "wall street",
       "ic": "F1254567X",
+      "year group": "1",
       "tags": [],
       "subjects": ["Science"]
     },
@@ -34,6 +37,7 @@
       "email": "cornelia@example.com",
       "address": "10th street",
       "ic": "F1234569X",
+      "year group": "1",
       "tags": ["friends"],
       "subjects": ["English"]
     },
@@ -43,6 +47,7 @@
       "email": "werner@example.com",
       "address": "michegan ave",
       "ic": "F2238567X",
+      "year group": "1",
       "tags": [],
       "subjects": ["English"]
     },
@@ -52,6 +57,7 @@
       "email": "lydia@example.com",
       "address": "little tokyo",
       "ic": "F1334567X",
+      "year group": "1",
       "tags": [],
       "subjects": ["English"]
     },
@@ -61,6 +67,7 @@
       "email": "anna@example.com",
       "address": "4th street",
       "ic": "F1294667X",
+      "year group": "1",
       "tags": [],
       "subjects": ["Science"]
     }
