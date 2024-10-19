@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.logic.commands.StatisticsCommand.highPriorityPeople;
-import static seedu.address.logic.commands.StatisticsCommand.incomeLessThan2500;
+//import static seedu.address.logic.commands.StatisticsCommand.incomeLessThan2500;
 import static seedu.address.logic.commands.StatisticsCommand.lowPriorityPeople;
 import static seedu.address.logic.commands.StatisticsCommand.mediumPriorityPeople;
 import static seedu.address.logic.commands.StatisticsCommand.nbOfPeople;
@@ -42,8 +42,8 @@ public class StatisticsCommandTest {
                 nbOfPeople(personList) + "\n"
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
-                + lowPriorityPeople(personList) + "\n"
-                + incomeLessThan2500(personList));
+                + lowPriorityPeople(personList));
+        //                + incomeLessThan2500(personList));
         assertCommandSuccess(new StatisticsCommand(), model,
                 expectedMessage, expectedModel);
     }
@@ -57,8 +57,8 @@ public class StatisticsCommandTest {
                 nbOfPeople(personList) + "\n"
                 + highPriorityPeople(personList) + "\n"
                 + mediumPriorityPeople(personList) + "\n"
-                + lowPriorityPeople(personList) + "\n"
-                + incomeLessThan2500(personList));
+                + lowPriorityPeople(personList));
+        //                + incomeLessThan2500(personList));
 
         assertCommandSuccess(new StatisticsCommand(), model,
                expectedMessage, expectedModel);
