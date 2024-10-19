@@ -1,5 +1,6 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -40,6 +41,19 @@ public class Group {
     public Group(GroupName groupName) {
         requireAllNonNull(groupName);
         this.groupName = groupName;
+    }
+
+    public Group(Group otherGroup) {
+        requireNonNull(otherGroup);
+        this.groupName = otherGroup.groupName;
+        for (Task task: otherGroup.getTasks()) {
+            Task newTask = new Task(task);
+            tasks.add(newTask);
+        }
+        for (Student student: otherGroup.getStudents()) {
+            Student newStudent = new Student(student);
+            this.students.add(newStudent);
+        }
     }
 
     public GroupName getGroupName() {

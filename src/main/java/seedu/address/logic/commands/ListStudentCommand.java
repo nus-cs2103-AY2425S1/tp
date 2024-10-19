@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 
 /**
  * Adds a group to the address book.
@@ -34,6 +35,11 @@ public class ListStudentCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.setStateStudents();
         return new CommandResult(MESSAGE_SUCCESS, LIST_STUDENT_MARKER);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+        return versionHistory;
     }
 
     @Override

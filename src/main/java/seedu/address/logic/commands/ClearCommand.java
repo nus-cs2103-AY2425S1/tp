@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 
 /**
  * Clears the address book.
@@ -19,5 +20,11 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 }

@@ -19,6 +19,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
@@ -98,6 +99,12 @@ public class EditCommand extends Command {
         System.out.println(updatedEmail);
         System.out.println(updatedStudentNumber);
         return new Student(updatedName, updatedEmail, updatedTags, updatedStudentNumber);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 
     @Override

@@ -11,6 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Task;
@@ -87,5 +88,11 @@ public class DeleteTaskFromGroupCommand extends Command {
             .add("index", index)
             .add("toDeleteFrom", toDeleteFrom)
             .toString();
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 }

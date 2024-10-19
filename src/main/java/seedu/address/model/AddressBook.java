@@ -86,6 +86,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTasks(newData.getTaskList());
     }
 
+    public AddressBook duplicateCopy(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        AddressBook newAddressBook = new AddressBook();
+        for (Student student: newData.getStudentList()) {
+            Student newStudent = new Student(student);
+            newAddressBook.students.add(newStudent);
+        }
+        for (Group group: newData.getGroupList()) {
+            Group newGroup = new Group(group);
+            newAddressBook.groups.add(newGroup);
+        }
+        for (Task task: newData.getTaskList()) {
+            Task newTask = new Task(task);
+            newAddressBook.tasks.add(newTask);
+        }
+        return newAddressBook;
+    }
+
     //// student-level operations
 
     /**

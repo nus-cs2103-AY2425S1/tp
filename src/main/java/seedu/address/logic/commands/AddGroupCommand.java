@@ -7,6 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 
 /**
@@ -47,6 +48,12 @@ public class AddGroupCommand extends Command {
 
         model.addGroup(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 
     @Override

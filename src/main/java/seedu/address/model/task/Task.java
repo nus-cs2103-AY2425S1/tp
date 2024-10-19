@@ -34,6 +34,13 @@ public class Task {
         this.groupsWithTask = groupsWithTask;
     }
 
+    public Task(Task otherTask) {
+        this.name = otherTask.name;
+        this.deadline = otherTask.getDeadline();
+        this.status = otherTask.getStatus();
+        this.groupsWithTask = otherTask.getGroupsWithTask();
+    }
+
     public TaskName getTaskName() {
         return name;
     }

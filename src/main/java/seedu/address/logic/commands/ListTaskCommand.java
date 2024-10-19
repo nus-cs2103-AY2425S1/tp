@@ -8,6 +8,7 @@ import java.util.Optional;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -62,6 +63,11 @@ public class ListTaskCommand extends Command {
         model.setStateTasks();
         model.setMostRecentGroupTaskDisplay("");
         return new CommandResult(MESSAGE_SUCCESS_ALL_TASKS, LIST_TASK_MARKER);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) {
+        return versionHistory;
     }
 
     @Override
