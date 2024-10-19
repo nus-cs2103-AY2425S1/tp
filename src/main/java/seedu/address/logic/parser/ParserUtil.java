@@ -32,7 +32,7 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
 
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex) && !StringUtil.isNotIntegerOverflow(trimmedIndex)) {
+        if (!StringUtil.isNotIntegerOverflow(trimmedIndex)) {
             throw new ParseException(MESSAGE_OVERFLOW_INDEX);
         }
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
