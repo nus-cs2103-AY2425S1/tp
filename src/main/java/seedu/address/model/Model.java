@@ -97,6 +97,14 @@ public interface Model {
      */
     void setSupplier(Supplier target, Supplier editedSupplier);
 
+    /**
+     * Replaces the given Product {@code target} with {@code editedProduct}.
+     * {@code target} must exist in the address book.
+     * The product identity of {@code editedProduct} must not be
+     * the same as another existing product in the address book.
+     */
+    void setProduct(Product target, Product editedProduct);
+
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
 

@@ -123,6 +123,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setProduct(Product target, Product editedProduct) {
+        requireAllNonNull(target, editedProduct);
+        addressBook.setProduct(target, editedProduct);
+    }
+
+    @Override
     public void addProduct(Product product) {
         addressBook.addProduct(product);
         updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
