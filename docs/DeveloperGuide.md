@@ -13,7 +13,7 @@ pageNav: 3
 
 ## **Acknowledgements**
 
-This application is an evolution of a past project application AddressBook-Level3 (AB3) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html), [GitHub Page](https://github.com/se-edu/addressbook-level3)).
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org) ([UG](https://se-education.org/addressbook-level3/UserGuide.html), [DG](https://se-education.org/addressbook-level3/DeveloperGuide.html), [GitHub Page](https://github.com/se-edu/addressbook-level3)).
 
 --------------------------------------------------------------------------------------------------------------------
 
