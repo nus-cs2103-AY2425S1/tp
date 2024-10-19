@@ -39,7 +39,8 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, validRecord);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+                Messages.format(personToMark),
+                validRecord);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark, validRecord);
@@ -67,7 +68,8 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, validRecord);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+                Messages.format(personToMark),
+                validRecord);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark, validRecord);
@@ -171,7 +173,8 @@ public class MarkCommandTest {
         MarkCommand markCommand = new MarkCommand(personToMark.getNric(), validRecord);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+                Messages.format(personToMark),
+                validRecord);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark, validRecord);
