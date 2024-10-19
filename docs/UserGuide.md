@@ -126,11 +126,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
-### Locating suppliers by name: `find`
+### Locating suppliers and products by name: `view`
 
-Finds suppliers whose names contain any of the given keywords.
+Finds suppliers or products whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `VIEW_SUPPLIER KEYWORD`, `VIEW_PRODUCT KEYWORD`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -138,11 +138,11 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Suppliers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Same goes for the product names
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `VIEW_SUPPLIER Smith`
+* `VIEW_PRODUCT Chocolate`
 
 ### Deleting a supplier : `delete`
 Deletes the specified supplier from the address book.
@@ -156,6 +156,17 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd supplier in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st supplier in the results of the `find` command.
+
+### Setting threshold for a product: `threshold`
+
+Updates the minimum stock level for a product.
+
+Format: `threshold pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+Examples:
+* `threshold pr/sweater stk/1000`
+* `threshold apr/chocolates stk/2623900`
+
 
 ### Clearing all entries : `clear`
 

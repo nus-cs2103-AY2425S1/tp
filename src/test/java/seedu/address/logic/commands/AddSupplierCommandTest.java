@@ -166,6 +166,11 @@ public class AddSupplierCommandTest {
         }
 
         @Override
+        public void setProduct(Product target, Product editedSupplier) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Supplier> getFilteredSupplierList() {
             throw new AssertionError("This method should not be called.");
         }
