@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_EMAIL_DESC_AL
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_NAME_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.KEYWORD_PHONE_DESC_ALICE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ALICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KEYWORD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -17,7 +16,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditRentalCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.client.EmailContainsKeywordsPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
@@ -25,14 +23,13 @@ import seedu.address.model.client.PhoneContainsKeywordsPredicate;
 import seedu.address.model.client.RentalInformationContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
-    private FindCommandParser parser = new FindCommandParser();
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+    private FindCommandParser parser = new FindCommandParser();
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
-
     @Test
     public void parse_validName_returnsFindCommand() {
         List<String> keywords = new ArrayList<>();
