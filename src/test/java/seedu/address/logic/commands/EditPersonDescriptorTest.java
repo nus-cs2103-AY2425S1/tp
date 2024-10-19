@@ -43,10 +43,10 @@ public class EditPersonDescriptorTest {
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
-                + editPersonDescriptor.getName().orElse(null) + ", phone="
-                + editPersonDescriptor.getNric().orElse(null) + ", email="
-                + editPersonDescriptor.getSex().orElse(null) + ", address="
-                + editPersonDescriptor.getBirthDate().orElse(null) + ", tags="
+                + editPersonDescriptor.getName().orElse(null) + ", nric="
+                + editPersonDescriptor.getNric().orElse(null) + ", sex="
+                + editPersonDescriptor.getSex().orElse(null) + ", birthdate="
+                + editPersonDescriptor.getBirthDate().orElse(null) + ", Health Services="
                 + editPersonDescriptor.getHealthServices().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
