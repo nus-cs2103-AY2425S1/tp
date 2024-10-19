@@ -17,7 +17,7 @@ public class Subject {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String value;
+    public final String subjectName;
 
     /**
      * Constructs a {@code Subject}.
@@ -27,7 +27,7 @@ public class Subject {
     public Subject(String subject) {
         requireNonNull(subject);
         checkArgument(isValidSubject(subject), MESSAGE_CONSTRAINTS);
-        value = subject;
+        subjectName = subject;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return value;
+        return subjectName;
     }
 
     @Override
@@ -54,12 +54,12 @@ public class Subject {
         }
 
         Subject otherSubject = (Subject) other;
-        return value.equals(otherSubject.value);
+        return subjectName.equals(otherSubject.subjectName);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return subjectName.hashCode();
     }
 }
 

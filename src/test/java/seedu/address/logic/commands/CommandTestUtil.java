@@ -42,8 +42,8 @@ public class CommandTestUtil {
 
     public static final String VALID_SUBJECT_AMY = "Mathematics";
     public static final String VALID_SUBJECT_BOB = "Physics";
-    public static final String VALID_CLASSES_AMY = "Class 1";
-    public static final String VALID_CLASS_BOB = "7A";
+    public static final String VALID_CLASSES_AMY = "8H";
+    public static final String VALID_CLASSES_BOB = "7A";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -62,7 +62,7 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
     public static final String CLASS_DESC_AMY = " " + PREFIX_CLASSES + VALID_CLASSES_AMY;
-    public static final String CLASS_DESC_BOB = " " + PREFIX_CLASSES + VALID_CLASS_BOB;
+    public static final String CLASS_DESC_BOB = " " + PREFIX_CLASSES + VALID_CLASSES_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "unknown"; // 'unknown' is not a valid gender
@@ -74,6 +74,7 @@ public class CommandTestUtil {
     public static final String INVALID_CLASSES_DESC = " " + PREFIX_CLASSES + "*"; // '*' is not a valid class
 
     public static final String VALID_NAME_MICHAEL = "Michael Tan";
+    public static final String VALID_GENDER_MICHAEL = "male";
     public static final String VALID_PHONE_MICHAEL = "98765432";
     public static final String VALID_EMAIL_MICHAEL = "michael@example.com";
     public static final String VALID_ADDRESS_MICHAEL = "311, Clementi Ave 2, #02-25";
@@ -92,6 +93,7 @@ public class CommandTestUtil {
 
     // Descriptions for fields for Michael
     public static final String NAME_DESC_MICHAEL = " " + PREFIX_NAME + VALID_NAME_MICHAEL;
+    public static final String GENDER_DESC_MICHAEL = " " + PREFIX_GENDER + VALID_GENDER_MICHAEL;
     public static final String PHONE_DESC_MICHAEL = " " + PREFIX_PHONE + VALID_PHONE_MICHAEL;
     public static final String EMAIL_DESC_MICHAEL = " " + PREFIX_EMAIL + VALID_EMAIL_MICHAEL;
     public static final String ADDRESS_DESC_MICHAEL = " " + PREFIX_ADDRESS + VALID_ADDRESS_MICHAEL;

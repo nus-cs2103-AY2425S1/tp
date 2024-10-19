@@ -29,7 +29,7 @@ public class StudentTest {
                 .withPhone("91234567")
                 .withEmail("john@example.com")
                 .withAddress("456, Clementi Ave 3, #12-34")
-                .withSubject("Physics", "Chemistry")
+                .withSubjects("Physics", "Chemistry")
                 .withTags("friend", "classmate")
                 .withClasses("Math101", "Science202")
                 .build();
@@ -63,7 +63,7 @@ public class StudentTest {
     }
     @Test
     public void getSubjectString_validSubject_returnsSubjectString() {
-        Student student = new StudentBuilder().withSubject("Mathematics").build();
+        Student student = new StudentBuilder().withSubjects("Mathematics").build();
         assertEquals("[Mathematics]", student.getSubjectString());
     }
 

@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
@@ -18,6 +19,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class StudentBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
+    public static final String DEFAULT_GENDER = "female";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
@@ -25,6 +27,7 @@ public class StudentBuilder {
 
     private Name name;
     private Phone phone;
+    private Gender gender;
     private Email email;
     private Address address;
     private Set<Subject> subjects;
@@ -36,6 +39,7 @@ public class StudentBuilder {
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
+        gender = new Gender(DEFAULT_GENDER);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -49,6 +53,7 @@ public class StudentBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
+        gender = studentToCopy.getGender();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
@@ -62,6 +67,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withName(String name) {
         this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Gender} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withGender(String gender) {
+        this.gender = new Gender(gender);
         return this;
     }
 
@@ -92,7 +105,7 @@ public class StudentBuilder {
     /**
      * Sets the {@code Subject} of the {@code Student} that we are building.
      */
-    public StudentBuilder withSubject(String... subjects) {
+    public StudentBuilder withSubjects(String... subjects) {
         this.subjects = SampleDataUtil.getSubjectSet(subjects);
         return this;
     }
@@ -114,7 +127,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, tags, subjects, classes);
+        return new Student(name, gender, phone, email, address, tags, subjects, classes);
     }
 
 }

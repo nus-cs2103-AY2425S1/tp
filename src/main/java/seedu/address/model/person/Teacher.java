@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,10 +13,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Teacher extends Person {
-
-    private final Gender gender;
-    private final Set<Subject> subjects;
-    private final Set<String> classes;
 
     /**
      * Constructs a {@code Teacher} with the specified details.
@@ -34,25 +29,8 @@ public class Teacher extends Person {
      */
     public Teacher(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Set<Subject> subjects, Set<String> classes) {
-        super(name, phone, email, address, tags);
-        Objects.requireNonNull(gender, "Gender cannot be null");
-        this.gender = gender;
-        Objects.requireNonNull(subjects, "Subject cannot be null");
-        this.subjects = subjects;
-        Objects.requireNonNull(classes, "Classes cannot be null");
-        this.classes = classes;
-    }
-
-    public Gender getGender() {
-        return this.gender;
-    }
-
-    public Set<Subject> getSubjects() {
-        return Collections.unmodifiableSet(subjects);
-    }
-
-    public Set<String> getClasses() {
-        return this.classes;
+        super(name, gender, phone, email, address, tags, subjects, classes);
+        addTeacherTag(tags);
     }
 
     private static Set<Tag> addTeacherTag(Set<Tag> tags) {
@@ -63,12 +41,12 @@ public class Teacher extends Person {
 
     @Override
     public String getSubjectString() {
-        return subjects.toString();
+        return getSubjects().toString();
     }
 
     @Override
     public String getClassesString() {
-        return String.join(", ", classes);
+        return String.join(", ", getClasses());
     }
 
     /**
@@ -114,13 +92,13 @@ public class Teacher extends Person {
     public String toString() {
         return new ToStringBuilder(this)
             .add("name", getName())
-            .add("gender", gender)
+            .add("gender", getGender())
             .add("phone", getPhone())
             .add("email", getEmail())
             .add("address", getAddress())
             .add("tags", getTags())
             .add("subject", getSubjects())
-            .add("classes", classes)
+            .add("classes", getClasses())
             .toString();
     }
 
