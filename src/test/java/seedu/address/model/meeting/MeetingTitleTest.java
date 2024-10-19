@@ -28,13 +28,16 @@ public class MeetingTitleTest {
         assertFalse(MeetingTitle.isValidMeetingTitle("")); // empty string
         assertFalse(MeetingTitle.isValidMeetingTitle(" ")); // spaces only
         assertFalse(MeetingTitle.isValidMeetingTitle("^")); // only non-alphanumeric characters
-        assertFalse(MeetingTitle.isValidMeetingTitle("Client Viewing - Admiralty HDB")); // contains non-alphanumeric characters
+        assertFalse(MeetingTitle.isValidMeetingTitle("Client Viewing - Admiralty HDB"));
+        // contains non-alphanumeric characters
 
         // valid meeting title
-        assertTrue(MeetingTitle.isValidMeetingTitle("clementi apartment lease agreement discussion")); // alphabets only
+        assertTrue(MeetingTitle.isValidMeetingTitle("clementi apartment lease agreement discussion"));
+        // alphabets only
         assertTrue(MeetingTitle.isValidMeetingTitle("12345")); // numbers only
         assertTrue(MeetingTitle.isValidMeetingTitle("12 marine parade rd viewing")); // alphanumeric characters
-        assertTrue(MeetingTitle.isValidMeetingTitle("Clementi Apartment Lease Agreement Discussion")); // with capital letters
+        assertTrue(MeetingTitle.isValidMeetingTitle("Clementi Apartment Lease Agreement Discussion"));
+        // with capital letters
     }
 
     @Test
