@@ -14,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandResult.SwitchView;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private WeddingListPanel weddingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,7 +113,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -186,6 +188,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isSwitchView()) {
+                switchView(commandResult.getView());
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
@@ -193,4 +199,40 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Switches the view shown to the user.
+     * @param switchView The view that should be shown.
+     */
+    public void switchView(SwitchView switchView) {
+        switch (switchView) {
+        case PERSON:
+            changeToPersonView();
+            break;
+        case WEDDING:
+            changeToWeddingView();
+            break;
+        default:
+            throw new UnsupportedOperationException("Invalid view selected.");
+        }
+    }
+
+    /**
+     * Changes the list panel to show the wedding list.
+     */
+    public void changeToWeddingView() {
+        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
+    }
+
+    /**
+     * Changes the list panel to show the wedding list.
+     */
+    public void changeToPersonView() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    }
+
 }
