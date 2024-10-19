@@ -24,7 +24,6 @@ public class Datetime {
      * @param datetime A valid datetime.
      */
     public Datetime(String datetime) {
-        System.out.println(datetime);
         requireNonNull(datetime);
         checkArgument(isValidDatetime(datetime), MESSAGE_CONSTRAINTS);
         this.value = datetime;

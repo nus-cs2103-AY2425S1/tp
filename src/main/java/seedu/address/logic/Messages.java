@@ -59,9 +59,9 @@ public class Messages {
     public static String format(Wedding wedding) {
         final StringBuilder builder = new StringBuilder();
         builder.append(wedding.getWeddingName())
-                .append("; Phone: ")
+                .append("; Venue: ")
                 .append(wedding.getVenue())
-                .append("; Email: ")
+                .append("; Datetime: ")
                 .append(wedding.getDatetime());
         return builder.toString();
     }

@@ -149,8 +149,8 @@ public class ParserUtil {
     public static WeddingName parseWeddingName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Job.isValidJob(trimmedName)) {
-            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        if (!WeddingName.isValidWeddingName(trimmedName)) {
+            throw new ParseException(WeddingName.MESSAGE_CONSTRAINTS);
         }
         return new WeddingName(trimmedName);
     }
@@ -164,8 +164,8 @@ public class ParserUtil {
     public static Venue parseVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedVenue = venue.trim();
-        if (!Job.isValidJob(trimmedVenue)) {
-            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
         }
         return new Venue(trimmedVenue);
     }
@@ -179,8 +179,8 @@ public class ParserUtil {
     public static Datetime parseDatetime(String datetime) throws ParseException {
         requireNonNull(datetime);
         String trimmedDatetime = datetime.trim();
-        if (!Job.isValidJob(trimmedDatetime)) {
-            throw new ParseException(Job.MESSAGE_CONSTRAINTS);
+        if (!Datetime.isValidDatetime(trimmedDatetime)) {
+            throw new ParseException(Datetime.MESSAGE_CONSTRAINTS);
         }
         return new Datetime(trimmedDatetime);
     }
