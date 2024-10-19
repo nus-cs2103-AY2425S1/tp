@@ -161,6 +161,28 @@ public class Person {
     }
 
     /**
+     * Returns the view of all patient details.
+     */
+    public void showDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("NRIC: " + nric);
+        System.out.println("Birthdate: " + birthdate);
+        System.out.println("Sex: " + sex);
+        System.out.println("Phone: " + phone);
+        System.out.println("Email: " + email);
+        System.out.println("Address: " + address);
+        System.out.println("Allergy: " + allergy);
+        System.out.println("Blood Type: " + bloodType);
+        System.out.println("Health Risk: " + healthRisk);
+        System.out.println("Health Record: " + healthRecord);
+        System.out.println("Note: " + note);
+        System.out.println("Next of Kin Name: " + nokName);
+        System.out.println("Next of Kin Phone: " + nokPhone);
+        System.out.println("Health Services: " + healthServices);
+        System.out.println("Appointments: " + appts);
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
