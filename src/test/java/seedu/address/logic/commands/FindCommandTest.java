@@ -89,7 +89,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_addressKeyword_success() {
+    public void execute_findAddress_success() {
         String address = "BLK";
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
 
@@ -106,7 +106,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_monthlyRentKeyword_success() {
+    public void execute_findMonthlyRent_success() {
         String address = "2900";
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
 
@@ -123,7 +123,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_depositKeyword_success() {
+    public void execute_findDeposit_success() {
         String address = "5800";
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
 
@@ -140,7 +140,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_tenantsKeyword_success() {
+    public void execute_findTenants_success() {
         String address = "carl";
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
 
@@ -157,7 +157,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_rentalStartDateKeyword_success() {
+    public void execute_findRentalStartDate_success() {
         String address = "01 Jan";
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
 
@@ -174,7 +174,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_rentalEndDateKeyword_success() {
+    public void execute_findRentalEndDate_success() {
         String address = "31 Dec";
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
 

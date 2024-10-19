@@ -10,7 +10,6 @@ import seedu.address.commons.util.ToStringBuilder;
  * Tests that a {@code Client}'s {@code Rental Information} matches any of the keywords given.
  */
 public class RentalInformationContainsKeywordsPredicate implements Predicate<Client> {
-
     private final List<String> keywords;
 
     public RentalInformationContainsKeywordsPredicate(List<String> keywords) {
@@ -24,11 +23,9 @@ public class RentalInformationContainsKeywordsPredicate implements Predicate<Cli
         } else {
             boolean allEmpty = keywords.stream()
                     .allMatch(keyword -> keyword.trim().isEmpty());
-
             if (allEmpty) {
                 return false;
             } else {
-
                 return keywords.stream()
                         .anyMatch(keyword -> client.getRentalInformation().stream()
                                 .anyMatch(rentalInformation ->
