@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_BEDOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
@@ -52,6 +54,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.MatchingPrice;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Type;
@@ -159,7 +162,9 @@ public class AddressBookParserTest {
                 FilterPropertyCommand.COMMAND_WORD + " " + PREFIX_TYPE + VALID_TYPE_HDB
         );
 
-        assertEquals(new FilterPropertyCommand(new Type(VALID_TYPE_HDB)), command);
+        assertEquals(new FilterPropertyCommand(new Type(VALID_TYPE_HDB),
+                new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY),
+                new MatchingPrice(VALID_MATCHINGPRICE_BEDOK)), command);
     }
 
     @Test

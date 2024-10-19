@@ -2,10 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.FilterPropertyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.property.MatchingPrice;
 import seedu.address.model.property.PropertyType;
 import seedu.address.model.property.Type;
 
@@ -20,16 +23,31 @@ public class FilterPropertyCommandParser implements Parser<FilterPropertyCommand
      */
     public FilterPropertyCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE);
         String type = argMultimap.getValue(PREFIX_TYPE).orElse("");
-        if (type.isEmpty()) {
+        String lte = argMultimap.getValue(PREFIX_LTE).orElse("");
+        String gte = argMultimap.getValue(PREFIX_GTE).orElse("");
+        if (type.isEmpty() && lte.isEmpty() && gte.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterPropertyCommand.MESSAGE_USAGE));
         }
-        if (!PropertyType.isValidEnumValue(type)) {
+        if (!type.isEmpty() && !PropertyType.isValidEnumValue(type)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, Type.MESSAGE_CONSTRAINTS));
         }
-        return new FilterPropertyCommand(new Type(type));
+
+        Type typeObj = null;
+        MatchingPrice lteObj = null;
+        MatchingPrice gteObj = null;
+        if (!type.isEmpty()) {
+            typeObj = new Type(type);
+        }
+        if (!lte.isEmpty()) {
+            lteObj = new MatchingPrice(lte);
+        }
+        if (!gte.isEmpty()) {
+            gteObj = new MatchingPrice(gte);
+        }
+        return new FilterPropertyCommand(typeObj, lteObj, gteObj);
     }
 }

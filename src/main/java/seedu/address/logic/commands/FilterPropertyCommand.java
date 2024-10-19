@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.property.MatchingPrice;
 import seedu.address.model.property.Type;
 
 /**
@@ -24,9 +25,12 @@ public class FilterPropertyCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "CONDO" + " " + PREFIX_LTE + "30000000";
 
     public static final String MESSAGE_SUCCESS = "Listed filtered properties";
+    public static final String MESSAGE_UNSUCCESS = "Filtered properties failed";
 
     /** The type used for filtering. */
     private Type type;
+    private MatchingPrice lteObj;
+    private MatchingPrice gteObj;
 
     /**
      * Constructs a FilterClientCommand to filter the specified {@code Property}.
@@ -34,8 +38,10 @@ public class FilterPropertyCommand extends Command {
      * @param type The client to filter by.
      * @throws NullPointerException If the provided client is null.
      */
-    public FilterPropertyCommand(Type type) {
+    public FilterPropertyCommand(Type type, MatchingPrice lteObj, MatchingPrice gteObj) {
         this.type = type;
+        this.lteObj = lteObj;
+        this.gteObj = gteObj;
     }
 
     /**
@@ -47,10 +53,16 @@ public class FilterPropertyCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        String typeString = type == null ? "" : type.toString();
+        int lte = lteObj == null ? Integer.MAX_VALUE : lteObj.toInteger();
+        int gte = gteObj == null ? 0 : gteObj.toInteger();
+
         model.updateFilteredPropertyList(property -> property.getType().toString()
-                .matches("(?i)^" + type.toString() + ".*"));
+                .matches("(?i)^" + typeString + ".*")
+            && MatchingPrice.getMatchingPrice(property.getAsk(), property.getBid()) <= lte
+            && MatchingPrice.getMatchingPrice(property.getAsk(), property.getBid()) >= gte);
         model.setDisplayProperties();
-        return new CommandResult(String.format(MESSAGE_SUCCESS + " with properties of type: " + type.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     @Override
