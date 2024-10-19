@@ -17,6 +17,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypiAddressBookAllWithCars;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -27,6 +30,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.issue.Issue;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -180,6 +184,17 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
             new EditPersonDescriptor(), new EditCarDescriptor(), true, true);
         assertCommandFailure(editClientCommand, modelWithoutCar, EditClientCommand.MESSAGE_CAR_DOES_NOT_EXIST);
+    }
+
+    @Test
+    public void execute_editIssueWithNoCar_failure() {
+        Set<Issue> issues = new HashSet<>();
+        issues.add(new Issue("lol"));
+        EditPersonDescriptor descriptor = new EditPersonDescriptor();
+        descriptor.setIssues(issues);
+        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_PERSON,
+            descriptor, new EditCarDescriptor(), true, false);
+        assertCommandFailure(editClientCommand, modelWithoutCar, EditClientCommand.MESSAGE_NO_CAR_TO_EDIT_ISSUES);
     }
 
     @Test
