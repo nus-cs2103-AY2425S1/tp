@@ -110,6 +110,11 @@ public interface Model {
     void updateSelectedPerson(Person person);
 
     /**
+     * Checks if the given {@code person} is the selected person whose orders are displayed.
+     */
+    boolean isSelectedPerson(Person person);
+
+    /**
      * Replaces the given order {@code target} with {@code editedOrder}.
      * {@code target} must exist in the displayed order list.
      */

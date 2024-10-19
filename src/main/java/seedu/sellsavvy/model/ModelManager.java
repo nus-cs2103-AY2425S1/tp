@@ -155,6 +155,14 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isSelectedPerson(Person person) {
+        if (getSelectedPerson2() == null) {
+            return person == null;
+        }
+        return getSelectedPerson2().equals(person);
+    }
+
+    @Override
     public Person getSelectedPerson2() {
         return selectedPerson.get();
     }
