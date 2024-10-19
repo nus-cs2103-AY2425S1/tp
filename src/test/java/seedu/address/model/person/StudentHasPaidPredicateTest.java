@@ -53,9 +53,11 @@ public class StudentHasPaidPredicateTest {
         StudentHasPaidPredicate predicateHasPaid = new StudentHasPaidPredicate(true);
         StudentHasPaidPredicate predicateHasNotPaid = new StudentHasPaidPredicate(false);
 
-        String expectedHasPaid = StudentHasPaidPredicate.class.getCanonicalName() + "{hasPaid=" + true + "}";
+        String expectedHasPaid = StudentHasPaidPredicate.class.getCanonicalName() + "{payment up to date=" + true +
+                "}";
         assertEquals(expectedHasPaid, predicateHasPaid.toString());
-        String expectedHasNotPaid = StudentHasPaidPredicate.class.getCanonicalName() + "{hasPaid=" + false + "}";
+        String expectedHasNotPaid =
+                StudentHasPaidPredicate.class.getCanonicalName() + "{payment up to date=" + false + "}";
         assertEquals(expectedHasNotPaid, predicateHasNotPaid.toString());
     }
 }

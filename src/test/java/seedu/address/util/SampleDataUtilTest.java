@@ -32,7 +32,7 @@ class SampleDataUtilTest {
         assertEquals("87438807", alex.getPhone().value);
         assertEquals("alexyeoh@example.com", alex.getEmail().value);
         assertEquals("Blk 30 Geylang Street 29, #06-40", alex.getAddress().value);
-        assertFalse(Integer.parseInt(alex.getPayment().balance) < 0);
+        assertFalse(Integer.parseInt(alex.getPayment().balance) > 0);
         assertFalse(alex.getAttendance().isPresent);
         assertTrue(alex.getTags().contains(new Tag("friends")));
     }

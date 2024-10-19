@@ -40,6 +40,6 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("payment up to date: ", this.paymentUpToDate).toString();
+        return new ToStringBuilder(this).add("payment up to date", this.paymentUpToDate).toString();
     }
 }
