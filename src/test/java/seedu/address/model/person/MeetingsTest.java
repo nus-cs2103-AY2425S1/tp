@@ -25,7 +25,7 @@ public class MeetingsTest {
     }
 
     @Test
-    public void isClash() {
+    public void test_isClash() {
         assertFalse(new Meetings().isClash(defaultMeeting)); // empty Meeting
 
         Meetings meetings = new Meetings();
@@ -36,7 +36,7 @@ public class MeetingsTest {
     }
 
     @Test
-    public void add_clashMeeting_throwsTimeClashException() {
+    public void tadd_clashMeeting_throwsTimeClashException() {
         Meetings meetings = new Meetings();
         meetings.addMeeting(defaultMeeting);
         assertThrows(TimeClashException.class, () -> meetings.addMeeting(defaultMeeting));
@@ -49,7 +49,7 @@ public class MeetingsTest {
     }
 
     @Test
-    public void equals() {
+    public void test_equals() {
         Meetings meetings = new Meetings();
         meetings.addMeeting(defaultMeeting);
 

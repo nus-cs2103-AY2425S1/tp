@@ -28,12 +28,12 @@ public class Meeting {
     public final Name personToMeet;
 
     /**
-     * Constructs an {@code Meeting}.
+     * Constructs a {@code Meeting}.
      *
      * @param person A valid name of a person to meet.
      * @param startTime A valid starting time of the meeting.
      * @param endTime A valid ending time of the meeting.
-     * @param location A valid location.
+     * @param location A valid location (a non-empty string).
      * @throws CommandException if startTime is after endTime or location is invalid.
      */
     public Meeting(Name person, LocalDateTime startTime, LocalDateTime endTime,

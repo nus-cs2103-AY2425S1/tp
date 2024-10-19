@@ -34,7 +34,7 @@ public class MeetingTest {
     }
 
     @Test
-    public void isValidStartAndEndTime() {
+    public void test_isValidStartAndEndTime() {
         LocalDateTime otherStartTime = LocalDateTime.parse("20-12-2024 00:00", formatter);
         LocalDateTime otherEndTime = LocalDateTime.parse("20-12-2024 01:00", formatter);
 
@@ -46,7 +46,7 @@ public class MeetingTest {
     }
 
     @Test
-    public void isOverlap(){
+    public void test_isOverlap(){
         LocalDateTime time1030 = LocalDateTime.parse("30-07-2024 10:30", formatter);
         LocalDateTime time1045 = LocalDateTime.parse("30-07-2024 10:45", formatter);
         LocalDateTime time1100 = LocalDateTime.parse("30-07-2024 11:00", formatter);
@@ -74,7 +74,7 @@ public class MeetingTest {
     }
 
     @Test
-    public void isValidLocation() {
+    public void test_isValidLocation() {
         // null location
         assertThrows(NullPointerException.class, () -> Meeting.isValidLocation(null));
 
@@ -89,7 +89,7 @@ public class MeetingTest {
     }
 
     @Test
-    public void equals() {
+    public void test_equals() {
         try {
             Meeting meeting = new Meeting(name, startTime, endTime, location);
 
