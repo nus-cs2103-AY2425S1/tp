@@ -89,7 +89,5 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    ObservableList<Person> getSortedPersonList();
-
     void updateSortedPersonList(Comparator<Person> comparator);
 }

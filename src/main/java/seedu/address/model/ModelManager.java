@@ -37,8 +37,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        sortedPersons = new SortedList<>(filteredPersons);
+        sortedPersons = new SortedList<>(this.addressBook.getPersonList());
+        filteredPersons = new FilteredList<>(sortedPersons);
     }
 
     public ModelManager() {
@@ -131,11 +131,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public ObservableList<Person> getSortedPersonList() {
-        return sortedPersons;
     }
 
     @Override
