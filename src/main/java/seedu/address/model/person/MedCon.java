@@ -33,8 +33,12 @@ public class MedCon implements Comparable<MedCon> {
      * @return true if the string is not empty and does not exceed 45 characters.
      */
     public static boolean isValidMedCon(String medCon) {
+        if (medCon == null || medCon.isEmpty()) {
+            return false;
+        }
         return medCon.matches(VALIDATION_REGEX) && medCon.length() <= 30;
     }
+
 
     /**
      * Returns the medical condition of the patient.
