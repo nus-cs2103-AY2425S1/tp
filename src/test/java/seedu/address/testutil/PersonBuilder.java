@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.ArrayList;
-import java.util.List;
 
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Address;
@@ -15,8 +13,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
 import seedu.address.model.util.SampleDataUtil;
-
-import java.time.LocalDateTime;
 
 /**
  * A utility class to help with building Person objects.
