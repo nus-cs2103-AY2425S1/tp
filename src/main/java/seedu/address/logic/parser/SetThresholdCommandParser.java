@@ -15,6 +15,8 @@ import seedu.address.model.product.ProductName;
  */
 public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
+    public static final String MESSAGE_INVALID_STOCK_LEVEL = "Stock Level should be a positive integer";
+    public static  final String MESSAGE_INVALID_STOCK = "Names should only contain alphanumeric characters and spaces, and it should not be blank";
     /**
      * Parses the given {@code String} of arguments in the context of the SetThresholdCommand
      * and returns an SetThresholdCommand object for execution.
@@ -32,10 +34,18 @@ public class SetThresholdCommandParser implements Parser<SetThresholdCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PRODUCT_NAME, PREFIX_STOCK_LEVEL);
 
-        ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
-        int StockLevel = Integer.parseInt(argMultimap.getValue(PREFIX_STOCK_LEVEL).get());
 
-        return new SetThresholdCommand(productName, StockLevel);
+        ProductName productName = ParserUtil.parseProductName(argMultimap.getValue(PREFIX_PRODUCT_NAME).get());
+        int  stockLevel = 0;
+        try {
+            stockLevel = Integer.parseInt(argMultimap.getValue(PREFIX_STOCK_LEVEL).get());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(MESSAGE_INVALID_STOCK);
+        }
+        if (stockLevel <= 0) {
+            throw new ParseException(MESSAGE_INVALID_STOCK_LEVEL);
+        }
+        return new SetThresholdCommand(productName, stockLevel);
     }
 
     /**

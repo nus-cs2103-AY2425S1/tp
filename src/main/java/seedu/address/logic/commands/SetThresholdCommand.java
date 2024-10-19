@@ -28,7 +28,7 @@ public class SetThresholdCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/John stk/25000 ";
 
     public static final String MESSAGE_EDIT_PRODUCT_SUCCESS = "Edited Product: %1$s " + "with Stock Level: %2$s";
-    public static final String MESSAGE_NOT_EDITED = "Stock level to be updated must be provided.";
+    public static final String MESSAGE_NOT_EDITED = "Stock level not provided.";
     public static final String MESSAGE_PRODUCT_NOT_FOUND = "Product not found in the list: %1$s";
 
     private ProductName productName;
