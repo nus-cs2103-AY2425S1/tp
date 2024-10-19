@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE;
 
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.model.event.Event;
@@ -31,5 +31,5 @@ public class EventUtil {
         sb.append(PREFIX_EVENT_END_DATE + event.getEventEndDate().toString() + " ");
         return sb.toString();
     }
-    
+
 }

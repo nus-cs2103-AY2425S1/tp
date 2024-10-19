@@ -28,5 +28,5 @@ public class ListEventsCommandTest {
     public void execute_listIsNotFiltered_showsSameList() {
         assertEventCommandSuccess(new ListEventsCommand(), model, ListEventsCommand.MESSAGE_SUCCESS, expectedModel);
     }
-    
+
 }

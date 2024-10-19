@@ -113,7 +113,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
     }
-        
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
