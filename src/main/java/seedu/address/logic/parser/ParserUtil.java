@@ -122,14 +122,8 @@ public class ParserUtil {
         if (!Attendance.isValidAttendance(trimmedAttendance)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
-
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate attendanceDate = LocalDate.parse(attendance, formatter);
-            return new Attendance(attendanceDate);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
-        }
+        LocalDate attendanceDate = LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT);
+        return new Attendance(attendanceDate);
     }
 
     /**
