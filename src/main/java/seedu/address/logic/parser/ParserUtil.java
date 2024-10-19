@@ -7,11 +7,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.fasterxml.jackson.databind.ser.impl.IteratorSerializer;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -146,7 +149,11 @@ public class ParserUtil {
         Iterator<String> dateTimeIterator = dateTimes.iterator();
         Iterator<String> noteIterator = notes.iterator();
         while (dateTimeIterator.hasNext()) {
-            scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
+            if (noteIterator.hasNext()) {
+                scheduleSet.add(parseSchedule(dateTimeIterator.next(), noteIterator.next()));
+            } else {
+                scheduleSet.add(parseSchedule(dateTimeIterator.next(), ""));
+            }
         }
         return scheduleSet;
     }

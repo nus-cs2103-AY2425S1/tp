@@ -77,10 +77,10 @@ public class PersonCard extends UiPart<Region> {
                         LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
                         String formattedDate = dateTime.format(outputFormatter);
                         String noteText = schedule.getNotes();
-                        return String.format("%s, %s", formattedDate, noteText);
+                        return String.format("%s [ %s ]\n", formattedDate, noteText);
                     })
-                    .collect(Collectors.joining(", "));
-            schedule.setText("Appointments: " + formattedSchedules);
+                    .collect(Collectors.joining(""));
+            schedule.setText(formattedSchedules);
         }
 
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {

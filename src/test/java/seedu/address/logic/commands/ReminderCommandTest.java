@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -103,9 +104,9 @@ public class ReminderCommandTest {
 
     @Test
     public void execute_appointmentNotFound_throwsCommandException() {
-        Person personToRemind = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToRemind = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         Person personWithoutSchedule = new PersonBuilder(personToRemind)
-                .withSchedule(new String[]{""}, new String[]{""})
+                .withSchedule(new String[]{}, new String[]{""})
                 .build();
         model.setPerson(personToRemind, personWithoutSchedule);
 

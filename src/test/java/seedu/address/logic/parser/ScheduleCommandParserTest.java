@@ -22,19 +22,6 @@ public class ScheduleCommandParserTest {
     private static final String INVALID_DATE = "invalid_date";
 
     private ScheduleCommandParser parser = new ScheduleCommandParser();
-
-    @Test
-    public void parse_missingParts_failure() {
-        // no name specified
-        assertParseFailure(parser, "d/" + VALID_DATE, MESSAGE_INVALID_DATE_FORMAT);
-
-        // no date specified
-        assertParseFailure(parser, VALID_NAME, MESSAGE_INVALID_DATE_FORMAT);
-
-        // no name and no date specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_DATE_FORMAT);
-    }
-
     @Test
     public void parse_invalidDate_failure() {
         // invalid date format

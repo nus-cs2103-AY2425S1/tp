@@ -1,14 +1,12 @@
 package seedu.address.model.person;
 
-
-import javafx.util.converter.LocalDateTimeStringConverter;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Person's scheduled appointment in the address book.

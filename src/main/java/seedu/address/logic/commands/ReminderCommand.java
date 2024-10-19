@@ -52,7 +52,7 @@ public class ReminderCommand extends Command {
 
         // Check if the appointment exists
         Set<Schedule> appointmentSchedule = personToEdit.getSchedules();
-        if (appointmentSchedule.toString().isEmpty()) {
+        if (appointmentSchedule.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT);
         }
 
