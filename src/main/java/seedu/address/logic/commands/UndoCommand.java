@@ -3,11 +3,13 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.AddressBookParser;
-import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
 
 import java.util.ArrayList;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.LogicManager.pastCommands;
+import static seedu.address.logic.commands.EditCommand.MESSAGE_DUPLICATE_PERSON;
 
 /**
  * Undoes the latest command.
@@ -42,12 +45,29 @@ public class UndoCommand extends Command {
 
         switch (latestCommandWord) {
             case "add":
-
+                AddCommand addCommand = (AddCommand) latestCommand;
+                Person personToRemove = addCommand.getToAdd();
+                model.deletePerson(personToRemove);
+                pastCommands.remove(pastCommands.size() - 1);
+                break;
             case "edit":
+                EditCommand editCommand = (EditCommand) latestCommand;
+
+                Person bfrEdit = editCommand.getUneditedPerson();
+
+                Person afterEdit = editCommand.getEditedPerson();
+
+                if (model.hasPerson(bfrEdit)) {
+                    pastCommands.remove(pastCommands.size() - 1);
+                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                }
+                model.setPerson(afterEdit, bfrEdit);
+                pastCommands.remove(pastCommands.size() - 1);
+                break;
 
             case "delete":
-                DeleteCommand currCommand = (DeleteCommand) latestCommand;
-                ArrayList<Person> personsToAddBack = currCommand.getPersonsToDelete();
+                DeleteCommand dltCommand = (DeleteCommand) latestCommand;
+                ArrayList<Person> personsToAddBack = dltCommand.getPersonsToDelete();
                 for (int i = 0; i < personsToAddBack.size(); i++) {
                     model.addPerson(personsToAddBack.get(i));
                 }
@@ -56,7 +76,11 @@ public class UndoCommand extends Command {
             case "find":
 
             case "clear":
-
+                ClearCommand clearCommand = (ClearCommand) latestCommand;
+                model.setAddressBook(clearCommand.getModel().getAddressBook());
+                model.setUserPrefs(clearCommand.getModel().getUserPrefs());
+                pastCommands.remove(pastCommands.size() - 1);
+                break;
             default:
                 break;
 
@@ -71,21 +95,6 @@ public class UndoCommand extends Command {
           if latest command is clear, then undo changes bring back person list
  */
         return new CommandResult(String.format(MESSAGE_UNDO_COMMAND_SUCCESS));
-    }
-
-    public String convertPersonToInput(Person person) {
-        String name = String.format("n/%s ", person.getName());
-        String phoneNumber = String.format("p/%s ", person.getPhone());
-        String address = String.format("a/%s ", person.getAddress());
-        String email = String.format("e/%s ", person.getEmail());
-        String dob = String.format("dob/%s ", person.getDateOfBirth());
-        String income = String.format("income/%s ", person.getIncome());
-        String tagList = person.getTags().stream()
-                .map(tag -> String.format("t/%s", tag))
-                .collect(Collectors.joining(" "));
-        String s = name + phoneNumber + address + email + dob + income + tagList;
-
-        return String.format("add %s", s);
     }
 
     @Override
