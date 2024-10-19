@@ -59,8 +59,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        nextContactDate.setText(person.getNextContactDate().toString());
-        callFrequency.setText(person.getCallFrequency().toString());
+        nextContactDate.setText("Next contact date: " + person.getNextContactDate().toString());
+        callFrequency.setText("Call frequency: " + person.getCallFrequency().toString() + " Days");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.contactrecord.ContactRecordList;
@@ -124,8 +125,10 @@ public interface Model {
 
     Person getPersonByNric(Nric nric);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /**
+     * Returns an unmodifiable view of the sorted and filtered person list
+     */
+    SortedList<Person> getSortedFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
