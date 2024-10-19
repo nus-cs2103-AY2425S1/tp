@@ -30,7 +30,7 @@ public class MeetingTest {
     @Test
     public void constructor_invalidLocation_throwsIllegalArgumentException() {
         String invalidLocation = "";
-        assertThrows(IllegalArgumentException.class, () -> new Meeting(name, startTime, endTime, invalidLocation));
+        assertThrows(CommandException.class, () -> new Meeting(name, startTime, endTime, invalidLocation));
     }
 
     @Test
