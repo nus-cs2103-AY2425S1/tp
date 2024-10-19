@@ -1,13 +1,18 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.UNASSIGN_EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.UNASSIGN_VOLUNTEER_PREFIX_NAME;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.exceptions.NotAssignedException;
+import seedu.address.model.volunteer.Volunteer;
 
 /**
  * Unassigns a volunteer from an event.
@@ -44,8 +49,30 @@ public class UnassignCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-        model.unassignVolunteer(volunteerIndex, eventIndex);
+        requireAllNonNull(model);
+
+        System.out.println("We are assigning volunteer " + this.volunteerIndex + " to event " + this.eventIndex);
+
+        List<Volunteer> lastShownVolunteerList = model.getFilteredVolunteerList();
+        List<Event> lastShownEventList = model.getFilteredEventList();
+
+        if (volunteerIndex.getZeroBased() >= lastShownVolunteerList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_VOLUNTEER_DISPLAYED_INDEX);
+        }
+
+        if (eventIndex.getZeroBased() >= lastShownEventList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
+        Event e = lastShownEventList.get(eventIndex.getZeroBased());
+        Volunteer v = lastShownVolunteerList.get(volunteerIndex.getZeroBased());
+
+        try {
+            model.unassignVolunteerFromEvent(v, e);
+        } catch (NotAssignedException exception) {
+            throw new CommandException(MESSAGE_NOT_ASSIGNED);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }

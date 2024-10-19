@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.volunteer.Volunteer;
@@ -131,7 +130,32 @@ public interface Model {
      * @return The event with the matching ID, or null if not found.
      */
     Event getEvent(int eventId);
+
+    /**
+     * Displays the full list of volunteers participating in the event.
+     * @param eventToView The event to view.
+     */
     void viewEvent(Event eventToView);
+
+    /**
+     * Displays the full list of events that the volunteer is participating in.
+     * @param volunteerToView The volunteer to view.
+     */
     void viewVolunteer(Volunteer volunteerToView);
-    void unassignVolunteer(Index volunteerIndex, Index eventIndex) throws CommandException;
+
+    /**
+     * Assigns a volunteer to an event.
+     * @param volunteer The volunteer to assign.
+     * @param event The event to assign the volunteer to.
+     * @throws CommandException If the volunteer is already assigned to the event.
+     */
+    void assignVolunteerToEvent(Volunteer volunteer, Event event) throws CommandException;
+
+    /**
+     * Unassigns a volunteer from an event.
+     * @param volunteer The volunteer to unassign.
+     * @param event The event to unassign the volunteer from.
+     * @throws CommandException If the volunteer is not assigned to the event.
+     */
+    void unassignVolunteerFromEvent(Volunteer volunteer, Event event) throws CommandException;
 }

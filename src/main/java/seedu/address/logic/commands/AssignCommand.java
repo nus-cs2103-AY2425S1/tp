@@ -11,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.exceptions.DuplicateAssignException;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
@@ -67,18 +68,11 @@ public class AssignCommand extends Command {
         Event e = lastShownEventList.get(eventIndex.getZeroBased());
         Volunteer v = lastShownVolunteerList.get(volunteerIndex.getZeroBased());
 
-        // Check if the volunteer is already assigned to the event
-        if (e.getVolunteers().contains(v.getName().toString())) {
+        try {
+            model.assignVolunteerToEvent(v, e);
+        } catch (DuplicateAssignException exception) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
         }
-
-        // Check if the event is already in the volunteer's list
-        if (v.getEvents().contains(e.getName().toString())) {
-            throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
-        }
-
-        e.addParticipant(v.getName().toString());
-        v.addEvent(e.getName().toString());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
