@@ -3,13 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -30,20 +24,30 @@ import seedu.address.testutil.PersonBuilder;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditCommandTest {
+public class EditStudentCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Student editedStudent = new PersonBuilder().build(); //Amy Bee, amy@gmail.com, A01234567X
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedStudent).build();
-        EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_PERSON, descriptor);
+        Student studentToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND).build();
 
-        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent));
+        PersonBuilder personInList = new PersonBuilder(studentToEdit);
+        Student editedStudent = personInList.withName(VALID_NAME_BOB)
+            .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND)
+            .withStudentNumber(studentToEdit.getStudentNumber().toString()).build();
+
+        EditStudentCommand editStudentCommand = new EditStudentCommand(studentToEdit.getStudentNumber(), descriptor);
+
+        String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+            Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedStudent);
+        expectedModel.setPerson(studentToEdit, editedStudent);
 
         assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
     }
@@ -58,14 +62,14 @@ public class EditCommandTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        EditStudentCommand editStudentCommand = new EditStudentCommand(indexLastPerson, descriptor);
+        EditStudentCommand editStudentCommand = new EditStudentCommand(lastStudent.getStudentNumber(), descriptor);
 
         String expectedMessage = String.format(EditStudentCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastStudent, editedStudent);
 
-        assertCommandSuccess(editStudentCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
