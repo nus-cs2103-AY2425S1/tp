@@ -141,12 +141,18 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code dateOfLastVisit} is invalid.
      */
-    public static DateOfLastVisit parseDateOfLastVisit(String dateOfLastVisit) throws ParseException {
+    public static Optional<DateOfLastVisit> parseDateOfLastVisit(Optional<String> dateOfLastVisit) throws ParseException {
         requireNonNull(dateOfLastVisit);
-        String trimmedDateOfLastVisit = dateOfLastVisit.trim();
+
+        if (dateOfLastVisit.isEmpty()) {
+            // if dateOfLastVisit prefix was never entered by the user
+            return Optional.empty();
+        }
+
+        String trimmedDateOfLastVisit = dateOfLastVisit.get().trim();
         if (!DateOfLastVisit.isValidDateOfLastVisit(trimmedDateOfLastVisit)) {
             throw new ParseException(DateOfLastVisit.MESSAGE_CONSTRAINTS);
         }
-        return new DateOfLastVisit(trimmedDateOfLastVisit);
+        return Optional.of(new DateOfLastVisit(trimmedDateOfLastVisit));
     }
 }

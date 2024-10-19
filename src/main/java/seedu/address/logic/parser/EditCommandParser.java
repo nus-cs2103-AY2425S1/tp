@@ -64,7 +64,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
             editPersonDescriptor.setDateOfLastVisit(
-                    ParserUtil.parseDateOfLastVisit(argMultimap.getValue(PREFIX_DATEOFLASTVISIT).get()));
+                    ParserUtil.parseDateOfLastVisit(argMultimap.getValue(PREFIX_DATEOFLASTVISIT)));
         }
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
