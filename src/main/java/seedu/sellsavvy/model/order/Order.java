@@ -18,15 +18,17 @@ public class Order {
 
     // Data fields
     private final Date date;
+    private final Status status;
 
     /**
      * Every field must be present and not null.
      */
-    public Order(Item item, Count count, Date date) {
+    public Order(Item item, Count count, Date date, Status status) {
         requireAllNonNull(item, count, date);
         this.item = item;
         this.count = count;
         this.date = date;
+        this.status = status;
     }
 
     public Item getItem() {
@@ -39,6 +41,10 @@ public class Order {
 
     public Date getDate() {
         return date;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -87,6 +93,7 @@ public class Order {
                 .add("item", item)
                 .add("count", count)
                 .add("date", date)
+                .add("status", status)
                 .toString();
     }
 
