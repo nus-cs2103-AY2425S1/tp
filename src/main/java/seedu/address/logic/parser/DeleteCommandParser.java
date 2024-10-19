@@ -24,7 +24,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         if (args.isEmpty()) {
-            logger.warning("Unable to parse the NRIC for DeleteCommand: " + args);
+            logger.warning("Received empty NRIC for DeleteCommand");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
@@ -34,8 +34,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             return new DeleteCommand(new NricMatchesPredicate(patientNric));
         } catch (ParseException pe) {
             logger.warning("Unable to parse the NRIC for DeleteCommand: " + args);
-            throw new ParseException(
-                    String.format(pe.getMessage(), DeleteCommand.MESSAGE_USAGE));
+            throw new ParseException(pe.getMessage());
         }
     }
 
