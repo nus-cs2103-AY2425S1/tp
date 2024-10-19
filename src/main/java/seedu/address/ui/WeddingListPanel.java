@@ -30,6 +30,13 @@ public class WeddingListPanel extends UiPart<Region> {
     }
 
     /**
+     * Updates the {@code WeddingListView} with an updated list of weddings.
+     */
+    public void updateWeddingList(ObservableList<Wedding> weddingList) {
+        weddingListView.setItems(weddingList);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Wedding} using a {@code WeddingCard}.
      */
     class WeddingListViewCell extends ListCell<Wedding> {

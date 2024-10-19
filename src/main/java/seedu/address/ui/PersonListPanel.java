@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Panel containing the list of persons.
@@ -27,6 +28,13 @@ public class PersonListPanel extends UiPart<Region> {
         super(FXML);
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+    }
+
+    /**
+     * Updates the {@code PersonListView} with an updated list of persons.
+     */
+    public void updatePersonList(ObservableList<Person> personList) {
+        personListView.setItems(personList);
     }
 
     /**

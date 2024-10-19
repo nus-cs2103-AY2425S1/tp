@@ -115,6 +115,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -221,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
      * Changes the list panel to show the {@code Wedding} list.
      */
     public void changeToWeddingView() {
-        weddingListPanel = new WeddingListPanel(logic.getFilteredWeddingList());
+        weddingListPanel.updateWeddingList(logic.getFilteredWeddingList());
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(weddingListPanel.getRoot());
     }
@@ -230,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
      * Changes the list panel to show the {@code Person} list.
      */
     public void changeToPersonView() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel.updatePersonList(logic.getFilteredPersonList());
         listPanelPlaceholder.getChildren().clear();
         listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
