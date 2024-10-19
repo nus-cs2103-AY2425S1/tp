@@ -10,7 +10,7 @@ It is meant for organisers to quickly and efficiently retrieve important details
 
 ## Getting Started
 
-Visit the application [website](https://github.com/AY2425S1-CS2103T-F11-1/tp) for the quick start guide and detailed documentation.
+Visit the application [website](https://ay2425s1-cs2103t-f11-1.github.io/tp/) for the quick start guide and detailed documentation.
 
 ## Acknowledgement
 
