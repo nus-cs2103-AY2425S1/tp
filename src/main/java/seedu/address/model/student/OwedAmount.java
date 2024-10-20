@@ -36,6 +36,10 @@ public class OwedAmount extends Fee {
         return new OwedAmount(Double.toString(super.value - value));
     }
 
+    public boolean isGreater(double value) {
+        return value > super.value;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

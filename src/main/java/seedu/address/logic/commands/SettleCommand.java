@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.OwedAmount;
-import seedu.address.model.student.Paid;
+import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Student;
 
 import java.util.List;
@@ -17,19 +18,22 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 public class SettleCommand extends Command{
 
     public static final String COMMAND_WORD = "settle";
+    public static final String COMMAND_WORD_RANDOM_CASE = "sEttLe";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates owed amount and paid amount of the student "
             + "identified by the index number used in the displayed Student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_AMOUNT + "AMOUNT] ";
 
-    public static final String MESSAGE_SETTLE_SUCCESS = "";
+    public static final String MESSAGE_SETTLE_SUCCESS = "Payment of %.2f has been settled for %s";
+    public static final String MESSAGE_INVALID_AMOUNT = "Entered amount is more than amount owed";
 
     private final Index index;
     private final double amount;
 
     public SettleCommand(Index index, double amount) {
         requireNonNull(index);
+        assert amount > 0;
 
         this.index = index;
         this.amount = amount;
@@ -49,13 +53,13 @@ public class SettleCommand extends Command{
         model.setStudent(studentToUpdate, updatedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult("settle");
+        return new CommandResult(String.format(MESSAGE_SETTLE_SUCCESS, amount, studentToUpdate.getName()));
     }
 
-    public Student createUpdatedStudent(Student studentToUpdate) {
+    public Student createUpdatedStudent(Student studentToUpdate) throws CommandException{
         assert studentToUpdate != null;
 
-        Paid updatedPaidAmount = updatePaidAmount(studentToUpdate.getPaid(), amount);
+        PaidAmount updatedPaidAmount = updatePaidAmount(studentToUpdate.getPaidAmount(), amount);
         OwedAmount updatedOwedAmount = updateOwedAmount(studentToUpdate.getOwedAmount(), amount);
 
         return new Student(
@@ -71,11 +75,38 @@ public class SettleCommand extends Command{
                 );
     }
 
-    private static Paid updatePaidAmount(Paid paidAmount, double amountPaid) {
+    private static PaidAmount updatePaidAmount(PaidAmount paidAmount, double amountPaid) {
         return paidAmount.updateValue(amountPaid);
     }
 
-    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, double amountPaid) {
+    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, double amountPaid) throws CommandException{
+        if (owedAmount.isGreater(amountPaid)) {
+            throw new CommandException(MESSAGE_INVALID_AMOUNT);
+        }
         return owedAmount.decreaseValue(amountPaid);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SettleCommand)) {
+            return false;
+        }
+
+        SettleCommand otherSettleCommand = (SettleCommand) other;
+        return index.equals(otherSettleCommand.index)
+                && amount == otherSettleCommand.amount;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", index)
+                .add("amount", amount)
+                .toString();
     }
 }

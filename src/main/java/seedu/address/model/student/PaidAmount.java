@@ -29,8 +29,8 @@ public class PaidAmount extends Fee {
         return Fee.isValidFee(test);
     }
 
-    public Paid updateValue(double value) {
-        return new Paid(Double.toString(super.value + value));
+    public PaidAmount updateValue(double value) {
+        return new PaidAmount(Double.toString(super.value + value));
     }
 
     @Override
