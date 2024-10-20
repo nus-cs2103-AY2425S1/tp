@@ -1,5 +1,11 @@
 package tahub.contacts.model.studentcourseassociation;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.HashSet;
 import java.util.Map;
 
@@ -16,7 +22,7 @@ import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class StudentCourseAssociationTest {
     @Test
@@ -217,7 +223,7 @@ class StudentCourseAssociationTest {
         sca.addGrade("Midterm", 85.0);
         sca.addGrade("Final", 95.0);
 
-        Map<String, Double> allGrades = sca.getAllGrades ();
+        Map<String, Double> allGrades = sca.getAllGrades();
         assertEquals(2, allGrades.size());
         assertTrue(allGrades.containsKey("Midterm"));
         assertTrue(allGrades.containsKey("Final"));
