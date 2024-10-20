@@ -36,6 +36,17 @@ public class Course {
     }
 
     /**
+     * Returns true if both courses have the same name or course code.
+     * This defines a weaker notion of equality between two courses.
+     */
+    public boolean isConflictCourse(Course otherCourse) {
+        if (this.equals(otherCourse)) {
+            return true;
+        }
+        return courseCode.equals(otherCourse.courseCode) || courseName.equals(otherCourse.courseName);
+    }
+
+    /**
      * Returns true if a given string is a valid course code.
      */
     public static boolean isValidCourseCode(String test) {

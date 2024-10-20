@@ -77,6 +77,23 @@ public class CourseTest {
     }
 
     @Test
+    public void isConflictCourse() {
+        Course course1 = new Course("CS1011", "Programming");
+        Course course2 = new Course("CS1011", "Data Structures");
+        Course course3 = new Course("CS1021", "Programming");
+        Course course4 = new Course("CS1021", "Data Structures");
+
+        // same course code
+        assertTrue(course1.isConflictCourse(course2));
+
+        // same course name
+        assertTrue(course1.isConflictCourse(course3));
+
+        // different course code and name
+        assertFalse(course1.isConflictCourse(course4));
+    }
+
+    @Test
     public void equals() {
         Course course1 = new Course("CS1011", "Programming");
         Course course2 = new Course("CS1011", "Programming");
