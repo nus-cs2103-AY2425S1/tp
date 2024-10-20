@@ -51,9 +51,12 @@ public class EventTest {
         final Description description2 = new Description("Another description");
 
         Event sampleEvent = new Event(clientList1, vendorList1, description1, DUMMY_EVENTID);
-        Event sameClientDifferentVendorSameDescription = new Event(clientList1, vendorList2, description1, DUMMY_EVENTID);
-        Event sameClientSameVendorDifferentDescription = new Event(clientList1, vendorList1, description2, DUMMY_EVENTID);
-        Event differentClientSameVendorSameDescription = new Event(clientList2, vendorList1, description1, DUMMY_EVENTID);
+        Event sameClientDifferentVendorSameDescription = new Event(clientList1, vendorList2,
+                description1, DUMMY_EVENTID);
+        Event sameClientSameVendorDifferentDescription = new Event(clientList1, vendorList1,
+                description2, DUMMY_EVENTID);
+        Event differentClientSameVendorSameDescription = new Event(clientList2, vendorList1,
+                description1, DUMMY_EVENTID);
 
         assertTrue(sampleEvent.isSameEvent(sameClientDifferentVendorSameDescription));
         assertFalse(sampleEvent.isSameEvent(sameClientSameVendorDifferentDescription));
