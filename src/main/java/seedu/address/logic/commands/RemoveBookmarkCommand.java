@@ -10,28 +10,24 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.company.Company;
 
-/**
- * Bookmarks a company identified using its displayed index from the address book.
- */
-public class BookmarkCommand extends Command {
+public class RemoveBookmarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "bookmark";
+    public static final String COMMAND_WORD = "removebm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": bookmarks the company based on the index"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": removes bookmarked company based on the index"
             + "in the list of contacts.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
-
-    public static final String MESSAGE_BOOKMARK_SUCCESS = "Bookmarked company: %1$s";
+    public static final String MESSAGE_REMOVE_BOOKMARK_SUCCESS = "Removed bookmarked company: %1$s";
 
     private final Index index;
 
     /**
-     * Constructor for the BookmarkCommand
+     * Constructor for the RemoveBookmarkCommand
      *
-     * @param index The index of the company to be bookmarked in the address book.
+     * @param index The index of the bookmarked company in the address book.
      */
-    public BookmarkCommand(Index index) {
+    public RemoveBookmarkCommand(Index index) {
         requireAllNonNull(index);
         this.index = index;
     }
@@ -44,13 +40,13 @@ public class BookmarkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
         }
 
-        Company companyToBookmark = lastShownList.get(index.getZeroBased());
-        companyToBookmark.setBookmark(true);
+        Company companyToRemoveBookmark = lastShownList.get(index.getZeroBased());
+        companyToRemoveBookmark.setBookmark(false);
 
-        model.setCompany(companyToBookmark, companyToBookmark);
+        model.setCompany(companyToRemoveBookmark, companyToRemoveBookmark);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
-        return new CommandResult(generateSuccessMessage(companyToBookmark));
+        return new CommandResult(generateSuccessMessage(companyToRemoveBookmark));
     }
 
     @Override
@@ -59,15 +55,15 @@ public class BookmarkCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof BookmarkCommand)) {
+        if (!(other instanceof RemoveBookmarkCommand)) {
             return false;
         }
 
-        BookmarkCommand e = (BookmarkCommand) other;
+        RemoveBookmarkCommand e = (RemoveBookmarkCommand) other;
         return index.equals(e.index);
     }
 
     private String generateSuccessMessage(Company companyToBookmark) {
-        return String.format(MESSAGE_BOOKMARK_SUCCESS, Messages.format(companyToBookmark));
+        return String.format(MESSAGE_REMOVE_BOOKMARK_SUCCESS, Messages.format(companyToBookmark));
     }
 }
