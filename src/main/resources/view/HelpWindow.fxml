@@ -5,20 +5,15 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.TextFlow?>
 <?import javafx.stage.Stage?>
 <?import javafx.scene.layout.GridPane?>
 
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Region?>
 <fx:root minHeight="600" minWidth="460" title="Help" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
