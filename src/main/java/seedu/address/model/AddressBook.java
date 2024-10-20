@@ -32,6 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         events = new UniqueEventList();
+        events.checkAndSortEvents();
     }
 
     public AddressBook() {}

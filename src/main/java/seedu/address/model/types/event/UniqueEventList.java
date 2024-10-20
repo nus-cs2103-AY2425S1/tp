@@ -32,12 +32,13 @@ public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
-    /**
-     * Periodically sorts the events especially when an event becomes completed.
-     */
-    public UniqueEventList() {
-        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents);
-        eventReSortTimeline.play();
+    public void checkAndSortEvents() {
+        boolean anyCompleted = internalList.stream()
+                .anyMatch(event -> getEventTimeRemaining(event) < 0);
+
+        if (anyCompleted) {
+            sortEvents();
+        }
     }
 
     private void sortEvents() {
