@@ -14,8 +14,6 @@ public class Appointment {
     public final LocalDateTime start;
     public final LocalDateTime end;
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm");
-
     /**
      * Constructs an {@code Appointment}.
      *
