@@ -24,3 +24,43 @@
     -fx-border-width: 1;
     -fx-border-color: white;
 }
+
+.appointment-header {
+    -fx-font-size: 13px;
+    -fx-background-color: #7b3e91;
+    -fx-text-fill: white !important;
+    -fx-padding: 3;  /* Add padding to make the background color more visible */
+    -fx-font-header: bold;
+    -fx-margin: 5;
+    -fx-background-radius: 5;
+}
+
+.appointment-normal {
+    -fx-font-size: 11px;
+    -fx-background-color: transparent;
+    -fx-text-fill: white !important;
+    -fx-padding: 3;  /* Add padding to make the background color more visible */
+    -fx-font-header: normal;
+    -fx-margin: 5;
+    -fx-background-radius: 5;
+}
+
+.appointment-date {
+    -fx-font-size: 11px;
+    -fx-background-color: darkblue;
+    -fx-text-fill: white !important;
+    -fx-padding: 5;  /* Add padding to make the background color more visible */
+    -fx-background-radius: 5 0 0 5; /* Optional: Add rounded corners */
+    -fx-border-radius: 5 0 0 5;
+    -fx-border-width: 0;
+}
+
+.appointment-time {
+    -fx-font-size: 11px;
+    -fx-background-color: darkgreen;
+    -fx-text-fill: white !important;
+    -fx-padding: 5;  /* Add padding to make the background color more visible */
+    -fx-background-radius: 0 5 5 0; /* Optional: Add rounded corners */
+    -fx-border-radius: 0 5 5 0;
+    -fx-border-width: 0;
+}

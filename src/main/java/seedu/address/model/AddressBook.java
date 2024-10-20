@@ -18,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    private final ObservableList<OwnedAppointment> appointments = FXCollections.observableArrayList();
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -104,7 +104,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updateAppointmentList() {
         appointments.clear();
         for (Person person : persons) {
-            appointments.addAll(person.getAppointments());
+            appointments.addAll(person.getAppointments()
+                                      .stream()
+                                      .map(appt -> new OwnedAppointment(appt, person))
+                                      .toList());
         }
     }
     //// util methods
@@ -119,11 +122,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Appointment> getAppointmentList() {
-        return appointments;
     }
 
     @Override
@@ -144,5 +142,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public ObservableList<OwnedAppointment> getOwnedAppointmentList() {
+       return appointments;
     }
 }

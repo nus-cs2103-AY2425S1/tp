@@ -4,7 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.OwnedAppointment;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Person;
 
 /**
  * UI component that displays information of a {@code Appointment}.
@@ -21,7 +23,7 @@ public class AppointmentCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Appointment appt;
+    public final OwnedAppointment appt;
 
     @FXML
     private HBox cardPane;
@@ -31,15 +33,18 @@ public class AppointmentCard extends UiPart<Region> {
     private Label timePeriod;
     @FXML
     private Label appointmentName;
+    @FXML
+    private Label personName;
 
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
      */
-    public AppointmentCard(Appointment appt) {
+    public AppointmentCard(OwnedAppointment appt) {
         super(FXML);
         this.appt = appt;
-        date.setText(appt.getAppointmentDate());
-        timePeriod.setText(appt.getAppointmentTimePeriod());
-        appointmentName.setText(appt.getAppointmentName());
+        date.setText(appt.appointment().getAppointmentDate());
+        timePeriod.setText(appt.appointment().getAppointmentTimePeriod());
+        appointmentName.setText(appt.appointment().getAppointmentName());
+        personName.setText(appt.owner().getName().fullName);
     }
 }

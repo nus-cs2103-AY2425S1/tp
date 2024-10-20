@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.model.OwnedAppointment;
 import seedu.address.model.appointment.Appointment;
 
 /**
@@ -14,23 +15,23 @@ public class AppointmentListPanel extends UiPart<Region> {
     private static final String FXML = "AppointmentListPanel.fxml";
 
     @FXML
-    private ListView<Appointment> appointmentListView;
+    private ListView<OwnedAppointment> appointmentListView;
 
     /**
      * Creates a {@code NoteListPanel} with the given {@code ObservableList}.
      */
-    public AppointmentListPanel(ObservableList<Appointment> appointmentList) {
+    public AppointmentListPanel(ObservableList<OwnedAppointment> appointmentList) {
         super(FXML);
         appointmentListView.setItems(appointmentList);
         appointmentListView.setCellFactory(listView -> new AppointmentListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Appointment} using a {@code AppointmentCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code OwnedAppointment} using a {@code AppointmentCard}.
      */
-    class AppointmentListViewCell extends ListCell<Appointment> {
+    class AppointmentListViewCell extends ListCell<OwnedAppointment> {
         @Override
-        protected void updateItem(Appointment appointment, boolean empty) {
+        protected void updateItem(OwnedAppointment appointment, boolean empty) {
             super.updateItem(appointment, empty);
 
             if (empty || appointment == null) {
