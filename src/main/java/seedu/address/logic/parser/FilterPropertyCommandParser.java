@@ -35,6 +35,14 @@ public class FilterPropertyCommandParser implements Parser<FilterPropertyCommand
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, Type.MESSAGE_CONSTRAINTS));
         }
+        if (!lte.isEmpty() && !MatchingPrice.isValidMatchingPrice(lte)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchingPrice.MESSAGE_CONSTRAINTS));
+        }
+        if (!gte.isEmpty() && !MatchingPrice.isValidMatchingPrice(gte)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchingPrice.MESSAGE_CONSTRAINTS));
+        }
 
         Type typeObj = null;
         MatchingPrice lteObj = null;

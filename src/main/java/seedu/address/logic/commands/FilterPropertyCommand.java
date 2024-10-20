@@ -21,8 +21,8 @@ public class FilterPropertyCommand extends Command {
      */
     public static final String MESSAGE_USAGE = String
             .format("%s: Filters the properties based on PropertyType and MatchingPrice. \n"
-                    + "Parameters: %s[TYPE]%s[MATCHING_PRICE] \n"
-                    + "Restrictions: %s[TYPE] is case insensetive HDB, CONDO, LANDED. \n"
+                    + "Parameters: %s[TYPE] %s[MATCHING_PRICE] \n"
+                    + "Restrictions: %s[TYPE] is case insensetive HDB, CONDO, LANDED, "
                     + "%s[MATCHING_PRICE] is a non-negative integer.",
                     COMMAND_WORD, PREFIX_TYPE, PREFIX_LTE, PREFIX_TYPE, PREFIX_LTE);
 
