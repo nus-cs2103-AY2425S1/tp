@@ -1,12 +1,12 @@
 package seedu.address.model.appointment;
 
+import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-
-import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
 
 /**
  * Represents an Appointment in the address book.
