@@ -82,8 +82,6 @@ public class FindByPhoneCommandTest {
         PhoneContainsKeywordsPredicate predicate = preparePredicate("9482 563");
         FindByPhoneCommand command = new FindByPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
-        System.out.println(command);
-        System.out.println(expectedModel.getFilteredPersonList().toString());
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
     }
