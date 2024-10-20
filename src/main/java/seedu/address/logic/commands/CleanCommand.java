@@ -29,6 +29,9 @@ public class CleanCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Creates a CleanCommand to delete the people whose graduation dates have past
+     */
     public CleanCommand() {
         // TO DO: CHANGE THIS TO USE A GradDate Predicate comparing to LocalDateTime.now()
         this.predicate = p -> true;
