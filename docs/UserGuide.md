@@ -85,8 +85,10 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 role/patient`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 role/caregiver`
+* `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient`
+
+![add Patient Command](images/addPatient.png)
+![add Patient Succeeds](images/addPatientSucceed.png)
 
 ### Listing all persons : `list`
 
@@ -190,13 +192,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                      |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**       | `clear`                                                                                                                                                               |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Find Person** | `findnric KEYWORD [MORE_KEYWORDS]`<br> e.g., `find S1234567D`                                                                                                         |
-| **List**        | `list`                                                                                                                                                                |
-| **Help**        | `help`                                                                                                                                                                |
+| Action          | Format, Examples                                                                                                                                                                                            |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nric/NRIC role/ROLE [t/TAG]…​` <br> e.g., `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient` |
+| **Clear**       | `clear`                                                                                                                                                                                                     |
+| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                         |
+| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                 |
+| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                  |
+| **Find Person** | `findnric KEYWORD [MORE_KEYWORDS]`<br> e.g., `find S1234567D`                                                                                                                                               |
+| **List**        | `list`                                                                                                                                                                                                      |
+| **Help**        | `help`                                                                                                                                                                                                      |
