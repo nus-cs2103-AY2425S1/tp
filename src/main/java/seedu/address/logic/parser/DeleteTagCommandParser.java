@@ -9,6 +9,9 @@ import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parse the delete tag command.
+ */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     private static final String MESSAGE_TAG_NOT_FOUND = "There is no tag presented in the command!";
 

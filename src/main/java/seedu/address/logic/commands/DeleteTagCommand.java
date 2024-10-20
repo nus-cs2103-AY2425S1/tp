@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -27,11 +26,19 @@ public class DeleteTagCommand extends Command {
     private final Index targetIndex;
     private final Tag targetTag;
 
+    /**
+     * Constructs new DeleteTag command.
+     * @param targetIndex the index of the person in the list.
+     * @param target the tag the user wants to delete.
+     */
     public DeleteTagCommand(Index targetIndex, Tag target) {
         this.targetIndex = targetIndex;
         this.targetTag = target;
     }
 
+    /**
+     * Executes the command and delete a tag from a specific person.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

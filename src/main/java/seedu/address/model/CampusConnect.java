@@ -104,8 +104,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     /**
-     *
-     * @return
+     * Delete a tag from a person.
      */
     public void removePersonTag(Person p, Tag t) {
         persons.deletePersonTag(p, t);
