@@ -20,6 +20,9 @@ public class PersonHasTagPredicateTest {
     private PersonHasFeaturePredicate mediumTagOnlyPredicate =
           new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null);
 
+    private PersonHasFeaturePredicate phoneAndTagPredicate =
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value));
+
     @Test
     public void equals() {
 
@@ -30,6 +33,9 @@ public class PersonHasTagPredicateTest {
         PersonHasFeaturePredicate firstPredicateCopy =
               new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null);
         assertTrue(highTagOnlyPredicate.equals(firstPredicateCopy));
+
+        //same values for tag and phone
+        assertTrue(phoneAndTagPredicate.equals(phoneAndTagPredicate));
 
         // different types -> returns false
         assertFalse(mediumTagOnlyPredicate.equals(1));
