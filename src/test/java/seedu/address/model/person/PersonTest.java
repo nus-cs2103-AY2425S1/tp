@@ -74,6 +74,21 @@ public class PersonTest {
         Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        //different id -> returns false
+        editedAlice = new PersonBuilder(ALICE).withId(VALID_ID_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        //different ward -> returns false
+        editedAlice = new PersonBuilder(ALICE).withWard(VALID_WARD_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        //different diagnosis -> returns false
+        editedAlice = new PersonBuilder(ALICE).withDiagnosis(VALID_DIAGNOSIS_BOB).build();
+
+        //different medication -> returns false
+        editedAlice = new PersonBuilder(ALICE).withMedication(VALID_MEDICATION_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
         /*
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
