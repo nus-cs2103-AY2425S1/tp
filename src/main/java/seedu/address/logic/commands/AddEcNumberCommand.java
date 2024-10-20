@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
  */
 public class AddEcNumberCommand extends Command {
 
-    public static final String COMMAND_WORD = "addECNumber";
+    public static final String COMMAND_WORD = "addEcNumber";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an emergency contact number to the student "
             + "identified by the index.\n"
