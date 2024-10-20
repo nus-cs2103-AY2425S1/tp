@@ -25,7 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
-public class SortCommandTest {
+public class AdvFilterCommandTest {
     private Model model;
 
     @BeforeEach
@@ -40,14 +40,14 @@ public class SortCommandTest {
 
     @Test
     public void equals() {
-        SortCommand sortFirstCommand = new SortCommand("friend", ">=", "1");
-        SortCommand sortSecondCommand = new SortCommand("friend", "!=", "1");
+        AdvFilterCommand sortFirstCommand = new AdvFilterCommand("friend", ">=", "1");
+        AdvFilterCommand sortSecondCommand = new AdvFilterCommand("friend", "!=", "1");
 
         // same object -> returns true
         assertTrue(sortFirstCommand.equals(sortFirstCommand));
 
         // same values -> returns true
-        SortCommand sortFirstCommandCopy = new SortCommand("friend", ">=", "1");
+        AdvFilterCommand sortFirstCommandCopy = new AdvFilterCommand("friend", ">=", "1");
         assertTrue(sortFirstCommand.equals(sortFirstCommandCopy));
 
         // different types -> returns false
@@ -62,8 +62,8 @@ public class SortCommandTest {
 
     //Test case for sorting using tag value more than (numeric)
     public void execute_tagValue_moreThanOne() {
-        String expectedMessage = SortCommand.constructSuccessMessage("friend", ">=", "1");
-        SortCommand command = new SortCommand("friend", ">=", "1");
+        String expectedMessage = AdvFilterCommand.constructSuccessMessage("friend", ">=", "1");
+        AdvFilterCommand command = new AdvFilterCommand("friend", ">=", "1");
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(BOB_CLONE), model.getFilteredPersonList());
@@ -72,8 +72,8 @@ public class SortCommandTest {
     //Test case for sorting using tag value equals (string comparison)
     @Test
     public void execute_tagValue_equalsHigh() {
-        String expectedMessage = SortCommand.constructSuccessMessage("priority", "=", "high");
-        SortCommand command = new SortCommand("priority", "=", "high");
+        String expectedMessage = AdvFilterCommand.constructSuccessMessage("priority", "=", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
         CommandResult result = command.execute(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(Arrays.asList(AMY_CLONE), model.getFilteredPersonList());
@@ -81,8 +81,8 @@ public class SortCommandTest {
 
     @Test
     public void toStringMethod() {
-        SortCommand sortCommand = new SortCommand("priority", "=", "high");
-        String expected = SortCommand.class.getCanonicalName() + "{tagName=priority, operator==, tagValue=high}";
-        assertEquals(expected, sortCommand.toString());
+        AdvFilterCommand AdvFilterCommand = new AdvFilterCommand("priority", "=", "high");
+        String expected = AdvFilterCommand.class.getCanonicalName() + "{tagName=priority, operator==, tagValue=high}";
+        assertEquals(expected, AdvFilterCommand.toString());
     }
 }
