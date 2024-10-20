@@ -25,19 +25,12 @@ class GradingSystemTest {
     }
 
     @Test
-    void testGetLetterGrade() {
-        gradingSystem.addGrade("Midterm", 85.0);
-        assertEquals("B", gradingSystem.getLetterGrade("Student Name"));
-
-        gradingSystem.addGrade("Final", 95.0);
-        assertEquals("A", gradingSystem.getLetterGrade("Student Name"));
-    }
-
-    @Test
     void testGetOverallScore() {
         gradingSystem.addGrade("Midterm", 85.0);
         gradingSystem.addGrade("Final", 95.0);
-        assertEquals(90.0, gradingSystem.getOverallScore(), 0.001);
+        gradingSystem.setAssessmentWeight("Midterm", 0.4);
+        gradingSystem.setAssessmentWeight("Final", 0.6);
+        assertEquals(91.0, gradingSystem.getOverallScore(), 0.001);
     }
 
     @Test
@@ -55,28 +48,38 @@ class GradingSystemTest {
     @Test
     void testNoGradesRecorded() {
         assertEquals(-1.0, gradingSystem.getOverallScore(), 0.001);
-        assertEquals("No grade recorded", gradingSystem.getLetterGrade("Student Name"));
     }
 
     @Test
-    void testLetterGradeScale() {
-        gradingSystem.addGrade("Test", 95.0);
-        assertEquals("A", gradingSystem.getLetterGrade("Student Name"));
+    void testWeightedGrades() {
+        gradingSystem.addGrade("Assignment1", 90.0);
+        gradingSystem.addGrade("Assignment2", 80.0);
+        gradingSystem.addGrade("FinalExam", 85.0);
 
-        gradingSystem = new GradingSystem(); // Reset
-        gradingSystem.addGrade("Test", 85.0);
-        assertEquals("B", gradingSystem.getLetterGrade("Student Name"));
+        gradingSystem.setAssessmentWeight("Assignment1", 0.2);
+        gradingSystem.setAssessmentWeight("Assignment2", 0.2);
+        gradingSystem.setAssessmentWeight("FinalExam", 0.6);
 
-        gradingSystem = new GradingSystem(); // Reset
-        gradingSystem.addGrade("Test", 75.0);
-        assertEquals("C", gradingSystem.getLetterGrade("Student Name"));
+        assertEquals(85.0, gradingSystem.getOverallScore(), 0.001);
+    }
 
-        gradingSystem = new GradingSystem(); // Reset
-        gradingSystem.addGrade("Test", 65.0);
-        assertEquals("D", gradingSystem.getLetterGrade("Student Name"));
+    @Test
+    void testUnweightedGrades() {
+        gradingSystem.addGrade("Quiz1", 80.0);
+        gradingSystem.addGrade("Quiz2", 90.0);
 
-        gradingSystem = new GradingSystem(); // Reset
-        gradingSystem.addGrade("Test", 55.0);
-        assertEquals("F", gradingSystem.getLetterGrade("Student Name"));
+        assertEquals(85.0, gradingSystem.getOverallScore(), 0.001);
+    }
+
+    @Test
+    void testPartialWeights() {
+        gradingSystem.addGrade("Midterm", 80.0);
+        gradingSystem.addGrade("Final", 90.0);
+        gradingSystem.addGrade("Project", 85.0);
+
+        gradingSystem.setAssessmentWeight("Midterm", 0.3);
+        gradingSystem.setAssessmentWeight("Final", 0.5);
+
+        assertEquals(86.0, gradingSystem.getOverallScore(), 0.001);
     }
 }
