@@ -22,7 +22,6 @@ import keycontacts.model.student.Student;
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
 
-
         return new Student[] {
             new Student(new Name("Alex Yeoh"), new Phone("87438807"), new Address("Blk 30 Geylang Street 29, #06-40"),
                     new GradeLevel("ABRSM 1"), PianoPiece.getPianoPieceSet("Canon in D"),

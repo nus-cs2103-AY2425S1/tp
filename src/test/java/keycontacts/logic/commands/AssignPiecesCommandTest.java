@@ -74,7 +74,8 @@ public class AssignPiecesCommandTest {
         Set<PianoPiece> firstPianoPiece = validPianoPieces.stream().limit(1).collect(Collectors.toSet());
         AssignPiecesCommand command = new AssignPiecesCommand(INDEX_FIRST_STUDENT, firstPianoPiece);
 
-        assertCommandFailure(command, model, AssignPiecesCommand.MESSAGE_DUPLICATE_PIANO_PIECE);
+        assertCommandFailure(command, model, String.format(AssignPiecesCommand.MESSAGE_DUPLICATE_PIANO_PIECE,
+                Messages.format(firstPianoPiece)));
     }
 
     @Test

@@ -14,17 +14,17 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import keycontacts.logic.commands.AssignPiecesCommand;
+import keycontacts.logic.commands.UnassignPiecesCommand;
 import keycontacts.model.pianopiece.PianoPiece;
 
-public class AssignPiecesCommandParserTest {
+public class UnassignPiecesCommandParserTest {
     private final String invalidFormatMessage =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignPiecesCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignPiecesCommand.MESSAGE_USAGE);
 
-    private final AssignPiecesCommandParser parser = new AssignPiecesCommandParser();
+    private final UnassignPiecesCommandParser parser = new UnassignPiecesCommandParser();
     @Test
     public void parse_noMissingParts_success() {
-        AssignPiecesCommand expectedCommand = new AssignPiecesCommand(
+        UnassignPiecesCommand expectedCommand = new UnassignPiecesCommand(
                 INDEX_FIRST_STUDENT,
                 Set.of(new PianoPiece(VALID_PIANO_PIECE_BEETHOVEN))
         );
@@ -34,9 +34,10 @@ public class AssignPiecesCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
-    public void parse_pianoPieceNotPresent_failure() {
+    public void parse_pianoPieceNotPresent_success() {
+        UnassignPiecesCommand expectedCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, Set.of());
         String userInput = "1";
-        assertParseFailure(parser, userInput, invalidFormatMessage);
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
     public void parse_indexNotPresent_failure() {
@@ -60,7 +61,7 @@ public class AssignPiecesCommandParserTest {
         String userInput = "1" + PIANO_PIECE_DESC_BEETHOVEN + PIANO_PIECE_DESC_PACHELBEL;
         Set<PianoPiece> pianoPieceSet = PianoPiece.getPianoPieceSet(VALID_PIANO_PIECE_BEETHOVEN,
                 VALID_PIANO_PIECE_PACHELBEL);
-        AssignPiecesCommand expectedCommand = new AssignPiecesCommand(INDEX_FIRST_STUDENT, pianoPieceSet);
+        UnassignPiecesCommand expectedCommand = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, pianoPieceSet);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

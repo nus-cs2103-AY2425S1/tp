@@ -21,6 +21,7 @@ import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.commands.MakeupLessonCommand;
 import keycontacts.logic.commands.ScheduleCommand;
+import keycontacts.logic.commands.UnassignPiecesCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 
 /**
@@ -67,6 +68,7 @@ public class KeyContactsParser {
         case MakeupLessonCommand.COMMAND_WORD -> new MakeupCommandParser().parse(arguments);
         case ScheduleCommand.COMMAND_WORD -> new ScheduleCommandParser().parse(arguments);
         case AssignPiecesCommand.COMMAND_WORD -> new AssignPiecesCommandParser().parse(arguments);
+        case UnassignPiecesCommand.COMMAND_WORD -> new UnassignPiecesCommandParser().parse(arguments);
         case CancelLessonCommand.COMMAND_WORD -> new CancelLessonCommandParser().parse(arguments);
         default -> {
             logger.finer("This user input caused a ParseException: " + userInput);

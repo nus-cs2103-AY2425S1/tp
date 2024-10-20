@@ -6,7 +6,6 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_PIECE_NAME;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import keycontacts.commons.core.index.Index;
 import keycontacts.commons.util.ToStringBuilder;
@@ -17,32 +16,35 @@ import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
 
 /**
- * Assigns one or more piano pieces to a student
+ * Unassigns one or more piano pieces from a student
  */
-public class AssignPiecesCommand extends Command {
+public class UnassignPiecesCommand extends Command {
 
-    public static final String COMMAND_WORD = "assign";
+    public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Assigns one or more piano pieces to the student identified "
-            + "by the index number used in the displayed student list.\n"
+            + ": Unassigns one or more piano pieces from the student identified "
+            + "by the index number used in the displayed student list\n"
+            + "All piano pieces will be unassigned if none are given as argument\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_PIECE_NAME + "PIECE_NAME...\n"
+            + PREFIX_PIECE_NAME + "[PIECE_NAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PIECE_NAME + "Für Elise "
             + PREFIX_PIECE_NAME + "Moonlight Sonata";
 
-    public static final String MESSAGE_SUCCESS = "Piano piece(s): %1$s\nAdded to student: %2$s";
-    public static final String MESSAGE_DUPLICATE_PIANO_PIECE = "The student already"
-            + " has the following piano piece(s): %1$s";
+    public static final String MESSAGE_SUCCESS = "Piano piece(s): %1$s\nRemoved from student: %2$s";
+    public static final String MESSAGE_PIANO_PIECE_NOT_FOUND = "The student does not have"
+            + " the piano piece(s) %1$s assigned.";
+    public static final String MESSAGE_NO_PIANO_PIECE_FOUND = "The student does not have any"
+            + " piano pieces assigned";
     private final Index index;
     private final Set<PianoPiece> pianoPieces;
 
     /**
      * @param index of the student in the filtered student list to edit
-     * @param pianoPieces the names of the pieces to be added
+     * @param pianoPieces the names of the pieces to be removed
      */
-    public AssignPiecesCommand(Index index, Set<PianoPiece> pianoPieces) {
+    public UnassignPiecesCommand(Index index, Set<PianoPiece> pianoPieces) {
         requireAllNonNull(index, pianoPieces);
 
         this.index = index;
@@ -61,18 +63,28 @@ public class AssignPiecesCommand extends Command {
 
         Student studentToUpdate = lastShownList.get(index.getZeroBased());
 
-        Set<PianoPiece> duplicatePieces = pianoPieces.stream()
-                .filter(studentToUpdate.getPianoPieces()::contains).collect(Collectors.toSet());
-        if (!duplicatePieces.isEmpty()) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_PIANO_PIECE, Messages.format(duplicatePieces)));
+        if (studentToUpdate.getPianoPieces().isEmpty()) {
+            throw new CommandException(MESSAGE_NO_PIANO_PIECE_FOUND);
         }
 
-        Student updatedStudent = studentToUpdate.withAddedPianoPieces(pianoPieces);
+        Set<PianoPiece> piecesToRemove = pianoPieces;
+        if (piecesToRemove.isEmpty()) {
+            piecesToRemove = studentToUpdate.getPianoPieces();
+        }
+
+        List<PianoPiece> piecesNotInStudent = piecesToRemove.stream()
+                .filter(pianoPiece -> !studentToUpdate.getPianoPieces().contains(pianoPiece)).toList();
+        if (!piecesNotInStudent.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_PIANO_PIECE_NOT_FOUND,
+                    Messages.format(piecesNotInStudent)));
+        }
+
+        Student updatedStudent = studentToUpdate.withRemovedPianoPieces(piecesToRemove);
 
         model.setStudent(studentToUpdate, updatedStudent);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                Messages.format(pianoPieces), Messages.format(updatedStudent)));
+                Messages.format(piecesToRemove), Messages.format(updatedStudent)));
     }
 
     @Override
@@ -82,12 +94,13 @@ public class AssignPiecesCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AssignPiecesCommand)) {
+        if (!(other instanceof UnassignPiecesCommand)) {
             return false;
         }
 
-        AssignPiecesCommand otherAssignPiecesCommand = (AssignPiecesCommand) other;
-        return index.equals(otherAssignPiecesCommand.index) && pianoPieces.equals(otherAssignPiecesCommand.pianoPieces);
+        UnassignPiecesCommand otherUnassignPiecesCommand = (UnassignPiecesCommand) other;
+        return index.equals(otherUnassignPiecesCommand.index)
+                && pianoPieces.equals(otherUnassignPiecesCommand.pianoPieces);
     }
 
     @Override
