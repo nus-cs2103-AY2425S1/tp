@@ -170,7 +170,7 @@ public class HelpWindow extends UiPart<Stage> {
         commandList.add(new HistoryCommand(Index.fromOneBased(1)));
         commandList.add(new ListCommand());
         commandList.add(new MarkCommand(Index.fromOneBased(1),
-                new ContactRecord(LocalDate.parse("2020-13-01"), "")));
+                new ContactRecord(LocalDate.parse("2020-12-01"), "")));
         commandList.add(new HelpCommand());
         commandList.add(new ExitCommand());
     }
