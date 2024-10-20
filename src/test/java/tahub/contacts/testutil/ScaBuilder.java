@@ -5,8 +5,6 @@ import static tahub.contacts.testutil.AttendanceExamples.ATTENDANCE_EXAMPLE_1;
 import java.util.HashSet;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.courseclass.recitation.Recitation;
-import tahub.contacts.model.courseclass.tutorial.Tutorial;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
 import tahub.contacts.model.person.MatriculationNumber;
@@ -14,6 +12,7 @@ import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
+import tahub.contacts.model.tutorial.Tutorial;
 
 /**
  * A utility class to help build sample {@link tahub.contacts.model.studentcourseassociation.StudentCourseAssociation}
@@ -50,7 +49,7 @@ public class ScaBuilder {
                 new HashSet<>()
         );
         Course course = new Course("CS1001", "Computer Testing");
-        Recitation rec = new Recitation("R1", course);
-        return new StudentCourseAssociation(student, course, rec, ATTENDANCE_EXAMPLE_1);
+        Tutorial tutorial = new Tutorial("T1", course);
+        return new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
     }
 }
