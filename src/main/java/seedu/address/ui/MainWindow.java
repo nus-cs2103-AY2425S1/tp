@@ -16,8 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Context;
-import seedu.address.model.ModelManager;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -47,6 +45,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane jobListPanelPlaceholder;
+
+    @FXML
+    private StackPane companyListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -116,16 +120,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-
         jobListPanel = new JobListPanel(logic.getFilteredJobList());
-        jobListPanel.getRoot().setVisible(false);
-
         companyListPanel = new CompanyListPanel(logic.getFilteredCompanyList());
-        companyListPanel.getRoot().setVisible(false);
 
-        personListPanelPlaceholder
-                .getChildren()
-                .addAll(personListPanel.getRoot(), jobListPanel.getRoot(), companyListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        jobListPanelPlaceholder.getChildren().add(jobListPanel.getRoot());
+        companyListPanelPlaceholder.getChildren().add(companyListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -184,25 +184,6 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    private void updateListPanel(Context context) {
-        personListPanel.getRoot().setVisible(false);
-        jobListPanel.getRoot().setVisible(false);
-        companyListPanel.getRoot().setVisible(false);
-        switch (context) {
-        case JOB:
-            jobListPanel.getRoot().setVisible(true);
-            break;
-        case COMPANY:
-            companyListPanel.getRoot().setVisible(true);
-            break;
-        case CONTACT:
-            personListPanel.getRoot().setVisible(true);
-            break;
-        default:
-            assert (false); // this should never happen
-        }
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -212,7 +193,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            updateListPanel(ModelManager.getContext());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
