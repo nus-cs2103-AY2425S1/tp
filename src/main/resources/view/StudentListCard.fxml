@@ -34,7 +34,7 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <HBox spacing="20">
-        <Label fx:id="rateAndPaidAndOwedAmount" styleClass="cell_small_label" text="\$rateAndPaidAndOwedAmount" />
+        <Label fx:id="rateAndPaidAmountAndOwedAmount" styleClass="cell_small_label" text="\$rateAndPaidAndOwedAmount" />
       </HBox>
     </VBox>
   </GridPane>

@@ -30,7 +30,7 @@ public class Student {
      */
     public Student(Name name, Phone phone, Email email, Address address, Schedule schedule,
             Subject subject, Rate rate, PaidAmount paidAmount, OwedAmount owedAmount) {
-        requireAllNonNull(name, phone, email, address);
+        requireAllNonNull(name, phone, email, address, schedule, subject, rate, paidAmount, owedAmount);
         this.name = name;
         this.phone = phone;
         this.email = email;
