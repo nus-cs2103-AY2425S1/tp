@@ -1,9 +1,8 @@
-package seedu.address.logic.commands;
+package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.CommandTextHistory;
 
 /**
  * Contains unit tests for CommandTextHistory.

@@ -29,6 +29,10 @@ public class CommandTextHistory {
      * @param commandText The command text to be added.
      */
     public void addCommandToHistory(String commandText) {
+        if (commandText == null) {
+            // this should not happen, but just in case
+            return;
+        }
         commandHistory.add(commandText);
         currentCommandIndex = commandHistory.size();
         logger.info("Command added to history: " + commandText);

@@ -2,12 +2,9 @@ package seedu.address.ui;
 
 import static seedu.address.logic.commands.HistoryCommand.MESSAGE_SHOW_HISTORY_SUCCESS;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;

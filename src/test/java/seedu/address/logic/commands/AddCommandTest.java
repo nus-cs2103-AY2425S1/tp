@@ -209,6 +209,21 @@ public class AddCommandTest {
         public ContactRecordList getCallHistory(Person target) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addCommandTextToHistory(String commandText) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getNextCommandTextFromHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousCommandTextFromHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
