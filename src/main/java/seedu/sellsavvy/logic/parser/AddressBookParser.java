@@ -16,6 +16,7 @@ import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.DeleteOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.EditPersonCommand;
@@ -92,6 +93,9 @@ public class AddressBookParser {
 
         case EditOrderCommand.COMMAND_WORD:
             return new EditOrderCommandParser().parse(arguments);
+            
+        case MarkOrderCommand.COMMAND_WORD:
+            return new MarkOrderCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

@@ -72,12 +72,16 @@ public class OrderTest {
         // different date -> returns false
         editedAtlas = new OrderBuilder(ATLAS).withDate(VALID_DATE_BOTTLE).build();
         assertFalse(ATLAS.equals(editedAtlas));
+
+        // different status -> returns false
+        editedAtlas = new OrderBuilder(ATLAS).withStatus(Status.COMPLETED).build();
+        assertFalse(ATLAS.equals(editedAtlas));
     }
 
     @Test
     public void toStringMethod() {
         String expected = Order.class.getCanonicalName() + "{item=" + ATLAS.getItem() + ", count=" + ATLAS.getCount()
-                + ", date=" + ATLAS.getDate() + "}";
+                + ", date=" + ATLAS.getDate() + ", status=" + ATLAS.getStatus() + "}";
         assertEquals(expected, ATLAS.toString());
     }
 }

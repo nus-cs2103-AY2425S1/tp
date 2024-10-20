@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -30,6 +31,8 @@ public class OrderCard extends UiPart<Region> {
     @FXML
     private Label heading;
     @FXML
+    private Label status;
+    @FXML
     private Label date;
 
 
@@ -42,6 +45,15 @@ public class OrderCard extends UiPart<Region> {
         heading.setText(String.format(ORDER_HEADING_FORMAT, displayedIndex,
                 order.getItem().fullDescription, order.getCount().value));
         date.setText(String.format(DELIVER_BY_FORMAT, order.getDate().value));
+        setStatus(order.getStatus());
+    }
+
+    /**
+     * Sets the status displayed with the given {@code Status}.
+     */
+    private void setStatus(Status orderStatus) {
+        status.setText(orderStatus.toString());
+        status.getStyleClass().add(orderStatus.toString().toLowerCase());
     }
 }
 

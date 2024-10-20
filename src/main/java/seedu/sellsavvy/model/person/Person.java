@@ -61,6 +61,10 @@ public class Person {
         return orders;
     }
 
+    public Order getOrder(int index) {
+        return orders.get(index);
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

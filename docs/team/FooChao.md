@@ -24,7 +24,7 @@ Given below are my contributions to the project.
     * Added documentation for the features `listOrder` [\#ToBeUpdated]()
   * Developer Guide:
     * Added a few terms to the glossary [\#27](https://github.com/AY2425S1-CS2103T-F14a-2/tp/pull/27)
-  * README: 
+  * README:
     * Added description and brief summary of features.
 
 * **Community**:
