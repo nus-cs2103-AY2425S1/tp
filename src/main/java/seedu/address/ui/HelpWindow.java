@@ -3,18 +3,23 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.geometry.Insets;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.text.Text;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -25,38 +30,46 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String DELETE_COMMAND =
             """
+            delete
+            
             Format: delete (e or ph) INDEX
 
-            Purpose: Deletes the entry of the index in the current
-            list that is being displayed. The 2nd parameter (e or ph) must
+            Purpose: Deletes the entry of the index in the current \
+            list that is being displayed. The 2nd parameter (e or ph) must \
             correspond to the type of entry in the index.
 
             Example: delete e 1
             """;
     public static final String DEMOTE_COMMAND =
             """
+            demote
+            
             Format: demote NAME
 
-            Purpose: Change the status of an employee in the list to a
+            Purpose: Change the status of an employee in the list to a \
             potential hire.
 
             Example: demote John Doe
             """;
     public static final String EMPLOYEE_COMMAND =
             """
-            Format: employee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
+            employee
+            
+            Format: employee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS \
             d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE
 
-            Purpose: Adds an entry in the employee list with the
+            Purpose: Adds an entry in the employee list with the \
             corresponding information.
 
-            Example: employee n/John Doe p/81234567 e/johndoe@gmail.com
-            a/21 Lower Kent Ridge Rd d/Department of informatics
+            Example: employee n/John Doe p/81234567 e/johndoe@gmail.com \
+            a/21 Lower Kent Ridge Rd d/Department of informatics \
             r/Head of Informatics ced/2021-01-21
-             """;
+            """;
 
     public static final String EXIT_COMMAND =
             """
+            exit
+            
             Format: exit
 
             Purpose: Terminates the program.
@@ -66,18 +79,22 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String FIND_COMMAND =
             """
+            find
+            
             Format: find (e or ph or all) KEYWORD(S)
 
-            Purpose: Displays a list of entries that contains the keyword(s)
+            Purpose: Displays a list of entries that contains the keyword(s) \
             in the corresponding employee and/or potential hire list.
 
             Example: find e John
             """;
     public static final String HELP_COMMAND =
             """
+            help
+            
             Format: help
 
-            Purpose: Displays a window containing all the format of all
+            Purpose: Displays a window containing all the format of all \
             commands, its purpose and an example on how to use them.
 
             Example: help
@@ -85,9 +102,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String LIST_COMMAND =
             """
+            list
+            
             Format: list (e or ph or all)
 
-            Purpose: Displays a list of entries with their information in
+            Purpose: Displays a list of entries with their information in \
             the corresponding employee and/or potential hire list.
 
             Example: list e
@@ -95,22 +114,26 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String POTENTIAL_COMMAND =
             """
-            Format: potential n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS
+            potential
+            
+            Format: potential n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS \
             d/DEPARTMENT r/ROLE
 
-            Purpose: Adds an entry in the potential hire list with the
+            Purpose: Adds an entry in the potential hire list with the \
             corresponding information.
 
-            Example: potential n/John Doe p/81234567 e/johndoe@gmail.com
-            a/21 Lower Kent Ridge Rd d/Department of informatics
+            Example: potential n/John Doe p/81234567 e/johndoe@gmail.com \
+            a/21 Lower Kent Ridge Rd d/Department of informatics \
             r/Head of Informatics
             """;
 
     public static final String PROMOTE_COMMAND =
             """
+            promote
+            
             Format: promote NAME
 
-            Purpose: Change the status of a potential hire in the list
+            Purpose: Change the status of a potential hire in the list \
             to an employee.
 
             Example: promote John Doe
@@ -246,8 +269,20 @@ public class HelpWindow extends UiPart<Stage> {
             Text commandText = textArrayList.get(i);
             String commandString = ARRAY_OF_COMMAND_STRING[i];
             commandText.setText(commandString);
+//            System.out.println(commandText.getPrefHeight());
+//            commandText.setMinHeight((commandString.chars().filter(num -> num == '\n').count() + 1)
+//                    * commandText.getFont().getSize() * 2 + 80);
 
             // Setting the corresponding MenuItem to scroll to the Text object
+            ChangeListener<Number> listener = (obs, oldText, newText) -> {
+                Platform.runLater(() -> {
+                    commandText.setWrappingWidth(getRoot().getScene().getWidth() - 112);
+                    logger.log(Level.INFO, "Setting Height of ResultDisplay to "
+                            + (getRoot().getScene().getWidth() - 112));
+                });
+            };
+            getRoot().widthProperty().addListener(listener);
+
             MenuItem commandMenuItem = menuItemArrayList.get(i);
             commandMenuItem.setOnAction(event -> scrollAndHighlightText(commandText));
         }
@@ -307,7 +342,7 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         // type-casted to Vbox as every Text in helpWindow is wrapped by a Vbox as its parent
-        VBox box = (VBox) targetText.getParent();
+        HBox box = (HBox) targetText.getParent();
         Bounds bounds = box.getBoundsInParent();
         double yPadding = 100;
         double yOffset = bounds.getMinY() + yPadding;
@@ -324,12 +359,12 @@ public class HelpWindow extends UiPart<Stage> {
      */
     private void highlightText(Text targetText) {
         if (lastHighlighted != null) {
-            VBox prevBox = (VBox) lastHighlighted.getParent();
-            prevBox.setBackground(null);
+            HBox prevBox = (HBox) lastHighlighted.getParent();
+            prevBox.setBackground(new Background(new BackgroundFill(Color.rgb(255, 152, 36, 0.4), new CornerRadii(15), new Insets(16, 16, 0, 16))));
         }
         // type-casted to Vbox as every Text in helpWindow is wrapped by a Vbox as its parent
-        VBox vBox = (VBox) targetText.getParent();
-        Background highlight = new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, null));
+        HBox vBox = (HBox) targetText.getParent();
+        Background highlight = new Background(new BackgroundFill(Color.rgb(255, 40, 40, 0.2), new CornerRadii(15), new Insets(16, 16, 0, 16)));
         vBox.setBackground(highlight);
         lastHighlighted = targetText;
     }
