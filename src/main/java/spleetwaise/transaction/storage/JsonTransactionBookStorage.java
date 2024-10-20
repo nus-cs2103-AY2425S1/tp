@@ -43,7 +43,7 @@ public class JsonTransactionBookStorage implements TransactionBookStorage {
     /**
      * Reads transaction book from file
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param filePath         location of the data. Cannot be null.
      * @param addressBookModel reference to address book. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */

@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import spleetwaise.address.commons.util.AppUtil;
 
 /**
- * Represents a Transaction's description in the transaction book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
+ * Represents a Transaction's description in the transaction book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidDescription(String)}
  */
 public class Description {
 
