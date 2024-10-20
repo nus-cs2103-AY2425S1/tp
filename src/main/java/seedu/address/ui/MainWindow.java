@@ -115,6 +115,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        if (logic.getFilteredPersonList().isEmpty()) {
+            resultDisplay.setFeedbackToUser("The contact list is empty! :(");
+        }
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCampusConnectFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());

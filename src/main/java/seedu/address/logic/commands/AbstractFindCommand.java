@@ -42,6 +42,12 @@ public abstract class AbstractFindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(this.predicate);
+
+        // if the result find list is empty
+        if (model.getFilteredPersonList().isEmpty()) {
+            return new CommandResult(String.format("No persons found!"));
+        }
+
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
