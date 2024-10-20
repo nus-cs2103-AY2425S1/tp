@@ -7,6 +7,6 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Text text="Appointments" styleClass="label-bright" style="-fx-fill: white" />
-    <ListView fx:id="personListView" VBox.vgrow="ALWAYS" />
+    <ListView fx:id="appointmentListView" VBox.vgrow="ALWAYS" />
 </VBox>
 
