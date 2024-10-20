@@ -25,7 +25,7 @@ class JsonAdaptedSubject {
      * Converts a given {@code Subject} into this class for Jackson use.
      */
     public JsonAdaptedSubject(Subject source) {
-        subject = source.subject;
+        subject = source.toString();
     }
 
     @JsonValue

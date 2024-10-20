@@ -10,10 +10,9 @@ import seedu.academyassist.commons.util.AppUtil;
 public class Subject {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Subjects should only contain alphanumeric characters";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+            "Subjects should only be one of the following: English, Math, Chinese, Science";
 
-    public final String subject;
+    private final SubjectEnum subjectEnum;
 
     /**
      * Constructs a {@code Subject}.
@@ -23,19 +22,19 @@ public class Subject {
     public Subject(String subject) {
         requireNonNull(subject);
         AppUtil.checkArgument(isValidSubject(subject), MESSAGE_CONSTRAINTS);
-        this.subject = subject;
+        this.subjectEnum = SubjectEnum.fromString(subject);
     }
 
     /**
      * Returns true if a given string is a valid subject name.
      */
     public static boolean isValidSubject(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return SubjectEnum.isValidSubject(test);
     }
 
     @Override
     public String toString() {
-        return subject;
+        return subjectEnum.getSubjectName();
     }
 
     @Override
@@ -50,11 +49,11 @@ public class Subject {
         }
 
         Subject otherSubject = (Subject) other;
-        return subject.equals(otherSubject.subject);
+        return subjectEnum == otherSubject.subjectEnum;
     }
 
     @Override
     public int hashCode() {
-        return subject.hashCode();
+        return subjectEnum.hashCode();
     }
 }
