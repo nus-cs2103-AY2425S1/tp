@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Notes;
 
 /**
  * Adds or updates the notes for a specific patient identified by an index in the patient listing.
@@ -25,7 +26,7 @@ public class AddNotesCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Notes: %2$s";
 
     private final Index index;
-    private final String notes;
+    private final Notes notes;
 
     /**
      * Constructs an AddNotesCommand.
@@ -33,7 +34,7 @@ public class AddNotesCommand extends Command {
      * @param index Index of the patient whose notes are to be modified.
      * @param notes The new notes to replace the existing ones.
      */
-    public AddNotesCommand(Index index, String notes) {
+    public AddNotesCommand(Index index, Notes notes) {
         requireAllNonNull(index, notes);
         this.index = index;
         this.notes = notes;

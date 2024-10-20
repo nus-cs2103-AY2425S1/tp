@@ -26,6 +26,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -92,9 +93,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_remark() throws Exception {
-        final String notes = "Some notes.";
+        final Notes notes = new Notes("Some notes.");
         AddNotesCommand command = (AddNotesCommand) parser.parseCommand(AddNotesCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NOTES + notes);
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NOTES + notes.notes);
         assertEquals(new AddNotesCommand(INDEX_FIRST_PERSON, notes), command);
     }
 

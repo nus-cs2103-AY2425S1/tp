@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Notes;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for AddNotesCommand.
  */
@@ -22,15 +23,15 @@ public class AddNotesCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     @Test
     public void execute() {
-        final String remark = "Some remark";
-        assertCommandFailure(new AddNotesCommand(INDEX_FIRST_PERSON, remark), model,
-                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), remark));
+        final Notes notes = new Notes("Some notes");
+        assertCommandFailure(new AddNotesCommand(INDEX_FIRST_PERSON, notes), model,
+                String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), notes));
     }
     @Test
     public void equals() {
-        final AddNotesCommand standardCommand = new AddNotesCommand(INDEX_FIRST_PERSON, VALID_NOTES_AMY);
+        final AddNotesCommand standardCommand = new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(VALID_NOTES_AMY));
         // same values -> returns true
-        AddNotesCommand commandWithSameValues = new AddNotesCommand(INDEX_FIRST_PERSON, VALID_NOTES_AMY);
+        AddNotesCommand commandWithSameValues = new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(VALID_NOTES_AMY));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));
@@ -39,8 +40,8 @@ public class AddNotesCommandTest {
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
         // different index -> returns false
-        assertFalse(standardCommand.equals(new AddNotesCommand(INDEX_SECOND_PERSON, VALID_NOTES_AMY)));
+        assertFalse(standardCommand.equals(new AddNotesCommand(INDEX_SECOND_PERSON, new Notes(VALID_NOTES_AMY))));
         // different remark -> returns false
-        assertFalse(standardCommand.equals(new AddNotesCommand(INDEX_FIRST_PERSON, VALID_NOTES_BOB)));
+        assertFalse(standardCommand.equals(new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(VALID_NOTES_BOB))));
     }
 }
