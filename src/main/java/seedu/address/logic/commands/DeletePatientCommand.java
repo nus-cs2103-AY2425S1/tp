@@ -41,10 +41,6 @@ public class DeletePatientCommand extends Command {
 
         ObservableList<Person> allPersons = model.getFilteredPersonList();
 
-        if (patientId.getIdValue() >= allPersons.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
         Patient patientToDelete = model.getFilteredPatientById(allPersons, patientId);
         model.deletePerson(patientToDelete);
         History.deletePatientsAppointments(patientId);
