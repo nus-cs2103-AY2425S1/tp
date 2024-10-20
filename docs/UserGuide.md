@@ -164,7 +164,7 @@ Examples:
 * `addECName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
 * `addECName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
 
-### Adding an Emergency contact's number : `addECNumber`
+### Adding an Emergency contact's number : `addEcNumber`
 
 Adds a emergency contact's number to the specified person in the address book.
 
