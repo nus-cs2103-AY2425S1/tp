@@ -152,4 +152,21 @@ public class ConsultationTest {
 
         assertEquals(expected, consultation.toString());
     }
+    @Test
+    public void equals_sameObject_returnsTrue() {
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+        Consultation consultation = new Consultation(validDate, validTime, students);
+
+        assertTrue(consultation.equals(consultation));
+    }
+
+    @Test
+    public void equals_differentType_returnsFalse() {
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+        Consultation consultation = new Consultation(validDate, validTime, students);
+
+        assertFalse(consultation.equals("Not a Consultation object"));
+    }
 }
