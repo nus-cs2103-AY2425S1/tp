@@ -15,6 +15,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+/**
+ * Updates owedAmount and paidAmount of a student in the address book by provided amount.
+ */
 public class SettleCommand extends Command{
 
     public static final String COMMAND_WORD = "settle";
@@ -31,6 +34,10 @@ public class SettleCommand extends Command{
     private final Index index;
     private final double amount;
 
+    /**
+     * @param index The index of the student in the filtered student list.
+     * @param amount The amount to settle for the student.
+     */
     public SettleCommand(Index index, double amount) {
         requireNonNull(index);
         assert amount > 0;
@@ -56,6 +63,13 @@ public class SettleCommand extends Command{
         return new CommandResult(String.format(MESSAGE_SETTLE_SUCCESS, amount, studentToUpdate.getName()));
     }
 
+    /**
+     * Creates a new student instance with updated paid and owed amounts based on the provided amount.
+     *
+     * @param studentToUpdate The student whose amounts need to be updated.
+     * @return A new Student object with updated payment details.
+     * @throws CommandException If the amount to settle exceeds the owed amount.
+     */
     public Student createUpdatedStudent(Student studentToUpdate) throws CommandException{
         assert studentToUpdate != null;
 

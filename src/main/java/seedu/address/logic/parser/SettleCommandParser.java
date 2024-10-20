@@ -8,8 +8,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
+/**
+ * Parses input arguments and creates a new SettleCommand object
+ */
 public class SettleCommandParser implements Parser<SettleCommand>{
-    @Override
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the SettleCommand
+     * and returns a SettleCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     public SettleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
