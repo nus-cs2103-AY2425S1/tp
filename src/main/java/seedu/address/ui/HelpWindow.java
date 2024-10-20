@@ -28,6 +28,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CallFrequency;
@@ -159,6 +161,7 @@ public class HelpWindow extends UiPart<Stage> {
         Person samplePerson = new Person(new Nric("S4260423B"), new Name("John Doe"), new Phone("98765432"),
                 new Email("johnd@example.com"), new Address("John street"), new HashSet<>(),
                 new CallFrequency("7"));
+
         commandList.add(new AddCommand(samplePerson));
         commandList.add(new ClearCommand());
         commandList.add(new DeleteCommand(Index.fromOneBased(1)));
@@ -167,8 +170,12 @@ public class HelpWindow extends UiPart<Stage> {
         commandList.add(new FindCommand(new NameContainsKeywordsPredicate(new ArrayList<>())));
         commandList.add(new HistoryCommand(Index.fromOneBased(1)));
         commandList.add(new ListCommand());
-        commandList.add(new MarkCommand(Index.fromOneBased(1),
-                new ContactRecord("2024-10-20", "")));
+        try {
+            commandList.add(new MarkCommand(Index.fromOneBased(1),
+                    new ContactRecord(ParserUtil.parseDate("2020-13-01"), "")));
+        } catch (ParseException e) {
+            logger.warning("HelpWindow parse error: Date format is incorrect.");
+        }
         commandList.add(new HelpCommand());
         commandList.add(new ExitCommand());
     }
