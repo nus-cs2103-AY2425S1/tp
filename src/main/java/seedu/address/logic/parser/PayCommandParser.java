@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.PayCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.PayCommand;
@@ -19,6 +19,9 @@ public class PayCommandParser implements Parser<PayCommand> {
 
     private static final Logger logger = Logger.getLogger(PayCommandParser.class.getName());
 
+    /**
+     * Parses input arguments and creates a new PayCommand object.
+     */
     public PayCommand parse(String args) throws ParseException {
         requireNonNull(args);
         logger.log(Level.INFO, "Parsing PayCommand with arguments: " + args);
@@ -36,25 +39,16 @@ public class PayCommandParser implements Parser<PayCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
-        try {
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HOUR);
-        } catch (Exception e) {
-            logger.log(Level.WARNING, "Duplicate hour prefix found in the input.", e);
-        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HOUR);
 
         if (argMultimap.getValue(PREFIX_HOUR).isPresent()) {
-            try {
-                hour = ParserUtil.parseHoursPaid(argMultimap.getValue(PREFIX_HOUR).get());
-            } catch (ParseException pe) {
-                logger.log(Level.WARNING, "Failed to parse hours paid. Invalid value.", pe);
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
-            }
+            hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
         } else {
             logger.log(Level.WARNING, "Failed to parse hours paid. Invalid parameters.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
-        logger.log(Level.INFO,"Successfully parsed PayCommand.");
+        logger.log(Level.INFO, "Successfully parsed PayCommand.");
         return new PayCommand(index, hour);
     }
 

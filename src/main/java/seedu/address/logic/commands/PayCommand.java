@@ -70,10 +70,6 @@ public class PayCommand extends Command {
         Student editedStudent = createEditedStudent(studentToEdit, amountPaid);
         String name = editedStudent.getName().toString();
 
-        if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
-        }
-
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, name, amountPaid));

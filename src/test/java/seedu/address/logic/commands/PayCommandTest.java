@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -125,6 +126,17 @@ public class PayCommandTest {
                 new PaidAmount(Double.toString(updatedPaidAmount)),
                 studentToEdit.getOwedAmount()
         );
+    }
+
+    @Test
+    public void toStringMethod() {
+        Index index = Index.fromOneBased(1);
+        double hour = 3.5;
+        PayCommand payCommand = new PayCommand(index, hour);
+
+        String expected = PayCommand.class.getCanonicalName() + "{index=" + index + ", hour=" + hour + "}";
+
+        assertEquals(expected, payCommand.toString());
     }
 }
 

@@ -171,26 +171,26 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String hoursPaid} into a {@code double}.
+     * Parses a {@code String hour} into a {@code double}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the {@code hoursPaid} is invalid.
+     * @throws ParseException if the {@code hour} is invalid.
      */
-    public static double parseHoursPaid(String hoursPaid) throws ParseException {
-        requireNonNull(hoursPaid);
-        String trimmedHoursPaid = hoursPaid.trim();
-        double hour;
+    public static double parseHour(String hour) throws ParseException {
+        requireNonNull(hour);
+        String trimmedHoursPaid = hour.trim();
+        double result;
 
         try {
-            hour = Double.parseDouble(trimmedHoursPaid);
+            result = Double.parseDouble(trimmedHoursPaid);
         } catch (NumberFormatException nfe) {
             throw new ParseException(String.format(MESSAGE_INVALID_HOUR));
         }
 
-        if (hour <= 0) {
+        if (result <= 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_HOUR));
         }
 
-        return hour;
+        return result;
     }
 }
