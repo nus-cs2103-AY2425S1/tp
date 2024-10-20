@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Job;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -112,6 +113,48 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String skill} into a {@code Skill}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code skill} is invalid.
+     */
+    public static Skill parseSkill(String skill) throws ParseException {
+        requireNonNull(skill);
+        String trimmedSkill = skill.trim();
+        if (!Skill.isValidSkillName(trimmedSkill)) {
+            throw new ParseException(Skill.MESSAGE_CONSTRAINTS);
+        }
+        return new Skill(trimmedSkill);
+    }
+
+    /**
+     * Parses {@code Collection<String> skills} into a {@code Set<Skill>}.
+     */
+    public static Set<Skill> parseSkills(Collection<String> skills) throws ParseException {
+        requireNonNull(skills);
+        final Set<Skill> skillSet = new HashSet<>();
+        for (String skillName : skills) {
+            skillSet.add(parseSkill(skillName));
+        }
+        return skillSet;
+    }
+
+    /**
+     * Parses a {@code String interviewScore} into a {@code InterviewScore}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interviewScore} is invalid.
+     */
+    public static InterviewScore parseInterviewScore(String interviewScore) throws ParseException {
+        requireNonNull(interviewScore);
+        String trimmedInterviewScore = interviewScore.trim();
+        if (!Tag.isValidInterviewScore(trimmedInterviewScore)) {
+            throw new ParseException(InterviewScore.MESSAGE_CONSTRAINTS);
+        }
+        return new InterviewScore(trimmedInterviewScore);
     }
 
     /**

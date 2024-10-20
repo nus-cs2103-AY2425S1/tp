@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +28,9 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Set<Skill> skills = new HashSet<>();
+    private final InterviewScore interviewScore;
+
     private final Set<Tag> tags = new HashSet<>();
 
     // Status fields
@@ -35,13 +39,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Job job, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Job job, Phone phone, Email email, Address address, Set<Skill> skills,
+                  InterviewScore interviewScore, Set<Tag> tags) {
         requireAllNonNull(name, job, phone, email, address, tags);
         this.name = name;
         this.job = job;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.skills.addAll(skills);
+        this.interviewScore = interviewScore;
         this.tags.addAll(tags);
         if (!isHired() && !isRejected()) {
             this.tags.add(DEFAULT_TAG_PENDING);
@@ -66,6 +73,25 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+    /**
+     * Returns an immutable skill set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Skill> getSkills() {
+        return Collections.unmodifiableSet(skills);
+    }
+
+    public void addSkill(Skill skill) {
+        skills.add(skill);
+    }
+
+    public void removeSkill(Skill skill) {
+        skills.remove(skill);
+    }
+
+    public InterviewScore getInterviewScore() {
+        return interviewScore;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -74,7 +100,6 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
 
     public void addTag(Tag tag) {
         tags.add(tag);
@@ -157,6 +182,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && skills.equals(otherPerson.skills)
+                && interviewScore.equals(otherPerson.interviewScore)
                 && tags.equals(otherPerson.tags);
     }
 
@@ -167,7 +194,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, job, phone, email, address, tags);
+        return Objects.hash(name, job, phone, email, address, skills, interviewScore, tags);
     }
 
     @Override
@@ -178,6 +205,8 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
+                .add("skills", skills)
+                .add("interview score", interviewScore)
                 .add("tags", tags)
                 .toString();
     }
