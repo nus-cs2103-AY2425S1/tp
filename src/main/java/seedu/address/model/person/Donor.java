@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -76,14 +75,12 @@ public class Donor extends Person {
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .add("donatedAmount", donatedAmount)
-                .toString();
+        String parentToString = super.toString();
+
+        // Remove the last '}' from parentToString before appending child class fields
+        parentToString = parentToString.substring(0, parentToString.length() - 1);
+
+        return parentToString + ", donatedAmount=" + donatedAmount + "}";
     }
 
     @Override

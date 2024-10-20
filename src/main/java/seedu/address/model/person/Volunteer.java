@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 
@@ -95,14 +94,12 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
      */
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .add("hours", hours)
-                .toString();
+        String parentToString = super.toString();
+
+        // Remove the last '}' from parentToString before appending child class fields
+        parentToString = parentToString.substring(0, parentToString.length() - 1);
+
+        return parentToString + ", hours=" + hours + "}";
     }
 
     @Override
