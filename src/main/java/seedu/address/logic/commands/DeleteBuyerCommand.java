@@ -16,11 +16,12 @@ import seedu.address.model.client.Phone;
 public class DeleteBuyerCommand extends Command {
     /** The command word for this specific action. */
     public static final String COMMAND_WORD = "deletebuyer";
+    public static final String PARAMETER_PHONE = String.format("%s/PHONE", PREFIX_PHONE);
     public static final String MESSAGE_ARGUMENTS = "phoneNumber: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the buyer identified by the phone number used in the displayed person list.\n"
-            + "Parameters: phone number (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "81621234";
+            + ": Deletes a buyer from the address book.\n"
+            + "Parameters: " + PARAMETER_PHONE + "\n"
+            + "Restrictions: " + PARAMETER_PHONE + "is an 8 digit positive integer which starts with the number 8 or 9";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Buyer: %1$s";
     private final Phone phoneNumber;
 

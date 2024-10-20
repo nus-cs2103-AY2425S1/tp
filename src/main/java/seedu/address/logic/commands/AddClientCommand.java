@@ -22,6 +22,8 @@ public abstract class AddClientCommand extends Command {
     public static final String CLIENT_PARAMETERS = PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL";
+    public static final String CLIENT_RESTRICTIONS = "Restrictions: "
+            + "p/PHONE is an 8 digit positive integer which starts with the number 8 or 9";
 
     /** The client to be added to the address book. */
     protected final Client toAdd;

@@ -20,15 +20,11 @@ public abstract class ListCommand extends Command {
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all existing properties, sellers, "
             + "buyers, or clients in the database.\n"
-            + "Command format: " + COMMAND_WORD + " k/KEY\n"
-            + "Example commands:\n"
-            + "1. List all the buyers: " + COMMAND_WORD + " k/buyers\n"
-            + "2. List all the properties: " + COMMAND_WORD + " k/properties\n"
-            + "\n"
-            + "Parameter considerations:\n"
-            + "The key must be one of the following: \"buyers\", \"sellers\", \"clients\", or "
+            + "Parameters: " + "k/KEY\n"
+            + "Restrictions: "
+            + "k/KEY must be one of the following: \"buyers\", \"sellers\", \"clients\", or "
             + "\"properties\".\n"
-            + "Only these four types of records are stored in the database.\n";
+            + "Only these four types of records are stored in the database.";
 
     /**
      * Success message template used to confirm that the listing operation has been successfully executed

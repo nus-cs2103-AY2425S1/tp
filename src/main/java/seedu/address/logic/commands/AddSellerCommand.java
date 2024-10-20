@@ -20,9 +20,10 @@ public class AddSellerCommand extends AddClientCommand {
      * Describes the format and usage of the addseller command.
      * Includes the command word and expected parameters inherited from {@link AddClientCommand#CLIENT_PARAMETERS}.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book.\n"
             + "Parameters: "
-            + AddClientCommand.CLIENT_PARAMETERS;
+            + AddClientCommand.CLIENT_PARAMETERS
+            + AddClientCommand.CLIENT_RESTRICTIONS;
 
     /** Success message for adding a new seller, with a placeholder for the seller's details. */
     public static final String MESSAGE_SUCCESS_SELLER = "New seller added: %1$s";

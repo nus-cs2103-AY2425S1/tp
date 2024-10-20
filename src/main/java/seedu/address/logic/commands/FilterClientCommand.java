@@ -19,10 +19,10 @@ public class FilterClientCommand extends Command {
      * Usage information for the filterclient command.
      * Provides a description of the command's purpose and the format for entering client names.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the clients based on their name. "
-            + "Parameters: NAME (must be a string) "
-            + PREFIX_NAME + "[NAME]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "Bob";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the clients based on their name.\n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME\n"
+            + "Restrictions: " + "n/NAME has to be a String";
 
     /** Message indicating that the filtering operation failed. */
     public static final String MESSAGE_FAILURE = "Unable to filter clients.";
