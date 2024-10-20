@@ -19,14 +19,14 @@ public class DeleteMeetingCommand extends Command {
 
     public static final String COMMAND_WORD = "deletemeeting";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the meeting identified by its title and date.\n"
-            + "Parameters: "
-            + PREFIX_MEETING_TITLE + " "
-            + PREFIX_MEETING_DATE + "\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MEETING_TITLE + "Meeting 1 "
-            + PREFIX_MEETING_DATE + "01-01-2024";
+    public static final String MESSAGE_USAGE = String.format(
+            "%s: Deletes the meeting identified by its title and date."
+                    + "\nParameters: %sTITLE %sDATE\nRestrictions: "
+                    + "Title has to be a valid String and Date has to be in the format dd-mm-yyyy",
+            COMMAND_WORD,
+            PREFIX_MEETING_TITLE,
+            PREFIX_MEETING_DATE
+    );
 
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Deleted meeting: %1$s";
 

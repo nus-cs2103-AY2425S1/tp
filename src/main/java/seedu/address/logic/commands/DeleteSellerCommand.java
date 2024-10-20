@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.logic.Messages;
@@ -13,16 +12,19 @@ import seedu.address.model.client.Phone;
 /**
  * Represents a command to delete a seller in the seller management system.
  */
-public class DeleteSellerCommand extends Command {
+public class DeleteSellerCommand extends DeleteClientCommand {
     /** The command word for this specific action. */
     public static final String COMMAND_WORD = "deleteseller";
+    public static final String PARAMETER_PHONE = String.format("%sPHONE", PREFIX_PHONE);
     public static final String MESSAGE_ARGUMENTS = "phoneNumber: %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the seller identified by the phone number used in the displayed person list.\n"
-            + "Parameters: phone number (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PHONE + "81621234";
+    public static final String MESSAGE_USAGE = String.format(
+            "%s: Deletes a seller from the address book.\nParameters: %s\n%s",
+            COMMAND_WORD,
+            DeleteClientCommand.CLIENT_PARAMETERS,
+            DeleteClientCommand.CLIENT_RESTRICTIONS
+    );
+
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Seller: %1$s";
-    private final Phone phoneNumber;
 
     /**
      * Constructs a {@code DeleteSellerCommand} with the specified phone number.
@@ -30,8 +32,7 @@ public class DeleteSellerCommand extends Command {
      * @param phoneNumber The phone number of the buyer to delete.
      */
     public DeleteSellerCommand(Phone phoneNumber) {
-        requireAllNonNull(phoneNumber);
-        this.phoneNumber = phoneNumber;
+        super(phoneNumber);
     }
     /**
      * Executes the delete seller command and removes the seller from the model.
