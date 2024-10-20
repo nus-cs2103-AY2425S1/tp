@@ -186,6 +186,21 @@ Examples:
 
   ![result for 'deleteproperty c/124894 u/15-20'](images/deleteproperty.png)
 
+### Filtering clients : `filterclient`
+
+Filters the clients that starts with the prefix provided.
+
+Format: `filterclient n/NAME`
+
+* Filters the client with the specified prefix `NAME`.
+* The `NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+
+Examples:
+* `filterclient n/A` filters the clients that starts with the prefix `A`.
+
+  ![result for 'filterclient n/A'](images/filterclient.png)
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
