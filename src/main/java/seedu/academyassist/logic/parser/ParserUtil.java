@@ -15,6 +15,7 @@ import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.sort.SortParam;
 import seedu.academyassist.model.tag.Tag;
 
@@ -138,6 +139,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String yearGroup} into a {@code YearGroup}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code yearGroup} is invalid.
+     */
+    public static YearGroup parseYearGroup(String yearGroup) throws ParseException {
+        requireNonNull(yearGroup);
+        String trimmedYearGroup = yearGroup.trim();
+        if (!YearGroup.isValidYearGroup(trimmedYearGroup)) {
+            throw new ParseException(YearGroup.MESSAGE_CONSTRAINTS);
+        }
+        return new YearGroup(trimmedYearGroup);
     }
 
     /**

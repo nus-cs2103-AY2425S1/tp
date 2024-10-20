@@ -29,6 +29,7 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.tag.Tag;
 
 /**
@@ -47,9 +48,10 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_IC + "IC] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_IC + "YEARGROUP] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " S1234567A "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -108,11 +110,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
+        YearGroup updatedYearGroup = editPersonDescriptor.getYearGroup().orElse(personToEdit.getYearGroup());
         Set<Subject> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIc, updatedSubject,
-                updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIc, updatedYearGroup,
+                updatedSubject, updatedTags);
     }
 
     @Override
@@ -149,6 +152,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Ic ic;
+        private YearGroup yearGroup;
         private Set<Subject> subjects;
         private Set<Tag> tags;
 
@@ -164,6 +168,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setIc(toCopy.ic);
+            setYearGroup(toCopy.yearGroup);
             setSubjects(toCopy.subjects);
             setTags(toCopy.tags);
         }
@@ -172,7 +177,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, ic, subjects, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, ic, yearGroup, subjects, tags);
         }
 
         public void setName(Name name) {
@@ -212,6 +217,13 @@ public class EditCommand extends Command {
 
         public Optional<Ic> getIc() {
             return Optional.ofNullable(ic);
+        }
+        public void setYearGroup(YearGroup yearGroup) {
+            this.yearGroup = yearGroup;
+        }
+
+        public Optional<YearGroup> getYearGroup() {
+            return Optional.ofNullable(yearGroup);
         }
 
         public void setSubjects(Set<Subject> subjects) {
@@ -256,6 +268,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(ic, otherEditPersonDescriptor.ic)
+                    && Objects.equals(yearGroup, otherEditPersonDescriptor.yearGroup)
                     && Objects.equals(subjects, otherEditPersonDescriptor.subjects)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -268,6 +281,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("ic", ic)
+                    .add("year group", yearGroup)
                     .add("subjects", subjects)
                     .add("tags", tags)
                     .toString();

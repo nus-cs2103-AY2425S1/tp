@@ -14,6 +14,7 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.tag.Tag;
 
 /**
@@ -29,25 +30,27 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
-                        CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_TAG);
+                        CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT,
+                        CliSyntax.PREFIX_YEARGROUP, CliSyntax.PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT,
+                CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_YEARGROUP,
                 CliSyntax.PREFIX_EMAIL) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_IC);
+                CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_YEARGROUP);
         Name name = ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(CliSyntax.PREFIX_IC).get());
+        YearGroup yg = ParserUtil.parseYearGroup(argMultimap.getValue(CliSyntax.PREFIX_YEARGROUP).get());
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(CliSyntax.PREFIX_SUBJECT));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, ic, subjects, tagList);
+        Person person = new Person(name, phone, email, address, ic, yg, subjects, tagList);
 
         return new AddCommand(person);
     }
