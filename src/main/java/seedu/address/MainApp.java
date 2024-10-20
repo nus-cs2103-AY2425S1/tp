@@ -80,12 +80,8 @@ public class MainApp extends Application {
         try {
             campusConnectOptional = storage.readCampusConnect();
             if (!campusConnectOptional.isPresent()) {
-                // logger.info("Creating a new data file " + storage.getCampusConnectFilePath()
-                //         + " populated with a sample CampusConnect.");
-
                 logger.info("Creating a new data file at: " + storage.getCampusConnectFilePath());
             }
-            // initialData = campusConnectOptional.orElseGet(SampleDataUtil::getSampleCampusConnect);
             initialData = campusConnectOptional.orElseGet(EmptyDataUtil::getSampleCampusConnect);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getCampusConnectFilePath() + " could not be loaded."

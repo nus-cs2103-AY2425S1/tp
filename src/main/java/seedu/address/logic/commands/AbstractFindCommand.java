@@ -47,7 +47,7 @@ public abstract class AbstractFindCommand extends Command {
 
         // if the result find list is empty
         if (model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_NO_PERSONS_FOUND));
+            return new CommandResult(MESSAGE_NO_PERSONS_FOUND);
         }
 
         return new CommandResult(
