@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PredicateContainer;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEmployeeCommand}.
@@ -30,19 +31,23 @@ public class FindPotentialCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate1 =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
+        PredicateContainer predicateContainer1 =
+                new PredicateContainer().addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate1);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate2 =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        PredicateContainer predicateContainer2 =
+                new PredicateContainer().addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate2);
 
-        FindPotentialCommand findFirstCommand = new FindPotentialCommand(firstPredicate);
-        FindPotentialCommand findSecondCommand = new FindPotentialCommand(secondPredicate);
+        FindPotentialCommand findFirstCommand = new FindPotentialCommand(predicateContainer1);
+        FindPotentialCommand findSecondCommand = new FindPotentialCommand(predicateContainer2);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindPotentialCommand findFirstCommandCopy = new FindPotentialCommand(firstPredicate);
+        FindPotentialCommand findFirstCommandCopy = new FindPotentialCommand(predicateContainer1);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -59,7 +64,8 @@ public class FindPotentialCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindPotentialCommand command = new FindPotentialCommand(predicate);
+        PredicateContainer predicateContainer = new PredicateContainer().addNameContainsKeywordsPredicate(predicate);
+        FindPotentialCommand command = new FindPotentialCommand(predicateContainer);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_POTENTIAL_HIRES.and(predicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -69,7 +75,8 @@ public class FindPotentialCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindPotentialCommand command = new FindPotentialCommand(predicate);
+        PredicateContainer predicateContainer = new PredicateContainer().addNameContainsKeywordsPredicate(predicate);
+        FindPotentialCommand command = new FindPotentialCommand(predicateContainer);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_POTENTIAL_HIRES.and(predicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -78,8 +85,9 @@ public class FindPotentialCommandTest {
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindPotentialCommand findCommand = new FindPotentialCommand(predicate);
-        String expected = FindPotentialCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        PredicateContainer predicateContainer = new PredicateContainer().addNameContainsKeywordsPredicate(predicate);
+        FindPotentialCommand findCommand = new FindPotentialCommand(predicateContainer);
+        String expected = FindPotentialCommand.class.getCanonicalName() + "{predicate=" + predicateContainer + "}";
         assertEquals(expected, findCommand.toString());
     }
 

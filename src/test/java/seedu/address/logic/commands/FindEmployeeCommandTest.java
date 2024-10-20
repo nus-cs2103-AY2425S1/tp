@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PredicateContainer;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindEmployeeCommand}.
@@ -31,19 +32,23 @@ public class FindEmployeeCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate1 =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
+        PredicateContainer predicateContainer1 =
+                new PredicateContainer().addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate1);
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate2 =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        PredicateContainer predicateContainer2 =
+                new PredicateContainer().addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate2);
 
-        FindEmployeeCommand findFirstCommand = new FindEmployeeCommand(firstPredicate);
-        FindEmployeeCommand findSecondCommand = new FindEmployeeCommand(secondPredicate);
+        FindEmployeeCommand findFirstCommand = new FindEmployeeCommand(predicateContainer1);
+        FindEmployeeCommand findSecondCommand = new FindEmployeeCommand(predicateContainer2);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindEmployeeCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindEmployeeCommand(predicateContainer1);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -60,7 +65,8 @@ public class FindEmployeeCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindEmployeeCommand command = new FindEmployeeCommand(predicate);
+        PredicateContainer predicateContainer = new PredicateContainer().addNameContainsKeywordsPredicate(predicate);
+        FindEmployeeCommand command = new FindEmployeeCommand(predicateContainer);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_POTENTIAL_HIRES.and(predicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -70,7 +76,8 @@ public class FindEmployeeCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Jevan Lee Lily");
-        FindEmployeeCommand command = new FindEmployeeCommand(predicate);
+        PredicateContainer predicateContainer = new PredicateContainer().addNameContainsKeywordsPredicate(predicate);
+        FindEmployeeCommand command = new FindEmployeeCommand(predicateContainer);
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_EMPLOYEES.and(predicate));
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(JEVAN, KEVIN, LILY), model.getFilteredPersonList());
@@ -79,8 +86,9 @@ public class FindEmployeeCommandTest {
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindEmployeeCommand findCommand = new FindEmployeeCommand(predicate);
-        String expected = FindEmployeeCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        PredicateContainer predicateContainer = new PredicateContainer().addNameContainsKeywordsPredicate(predicate);
+        FindEmployeeCommand findCommand = new FindEmployeeCommand(predicateContainer);
+        String expected = FindEmployeeCommand.class.getCanonicalName() + "{predicate=" + predicateContainer + "}";
         assertEquals(expected, findCommand.toString());
     }
 
