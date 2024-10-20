@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.FindCommand.COMMAND_WORD;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -14,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.util.FieldQuery;
 import seedu.address.logic.commands.util.SearchField;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonSearchPredicate;
 
 public class FindCommandParserTest {
@@ -38,12 +39,12 @@ public class FindCommandParserTest {
                 new FieldQuery(SearchField.REMARK, "remark"));
         FindCommand expectedFindCommand =
                 new FindCommand(new PersonSearchPredicate(fieldQueryList));
-        assertParseSuccess(parser,  " " + PREFIX_NAME + " name " + PREFIX_PHONE + " phone "
+        assertParseSuccess(parser, " " + PREFIX_NAME + " name " + PREFIX_PHONE + " phone "
                         + PREFIX_EMAIL + " email " + PREFIX_LOCATION + " location "
                 + PREFIX_REMARK + " remark", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser,  " " + PREFIX_NAME + " name  \n " + PREFIX_PHONE + " phone "
+        assertParseSuccess(parser, " " + PREFIX_NAME + " name  \n " + PREFIX_PHONE + " phone "
                 + PREFIX_EMAIL + " \t email " + PREFIX_LOCATION + "\t location "
                 + PREFIX_REMARK + " remark \t", expectedFindCommand);
     }
