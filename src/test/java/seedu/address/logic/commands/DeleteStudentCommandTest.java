@@ -136,6 +136,9 @@ public class DeleteStudentCommandTest {
     }
 
     private class ModelStub implements Model {
+
+        private final ObservableList<Student> studentList = FXCollections.observableArrayList();
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -231,7 +234,6 @@ public class DeleteStudentCommandTest {
         public void deleteStudent(Student target) {
         }
 
-        private final ObservableList<Student> studentList = FXCollections.observableArrayList();
 
         @Override
         public ObservableList<Student> getFilteredStudentList() {
