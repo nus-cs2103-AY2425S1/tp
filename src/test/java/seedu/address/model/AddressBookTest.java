@@ -7,11 +7,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -81,6 +84,35 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void sortPersons_emptyList_noChange() {
+        AddressBook emptyAddressBook = new AddressBook();
+        emptyAddressBook.sortPersons(Comparator.comparing(person -> person.getName().toString()));
+        assertEquals(0, emptyAddressBook.getPersonList().size());
+    }
+
+    @Test
+    public void sortPersons_singlePerson_noChange() {
+        AddressBook singlePersonBook = new AddressBook();
+        Person singlePerson = new PersonBuilder().withName("Single Person").build();
+        singlePersonBook.addPerson(singlePerson);
+
+        singlePersonBook.sortPersons(Comparator.comparing(person -> person.getName().toString()));
+        assertEquals(1, singlePersonBook.getPersonList().size());
+        assertEquals(singlePerson, singlePersonBook.getPersonList().get(0));
+    }
+
+    @Test
+    public void sortPersons_typicalList_sortedCorrectly() {
+        AddressBook addressBook = getTypicalAddressBook();
+
+        addressBook.sortPersons(Comparator.comparing(person -> person.getName().toString()));
+
+        assertEquals(ALICE, addressBook.getPersonList().get(0));
+        assertEquals(BENSON, addressBook.getPersonList().get(1));
+        assertEquals(CARL, addressBook.getPersonList().get(2));
     }
 
     @Test

@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -119,6 +121,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         return result;
+    }
+
+    /**
+     * Sorts the list of persons in the address book according to the given comparator.
+     */
+    public void sortPersons(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        FXCollections.sort(persons.asModifiableObservableList(), comparator);
     }
 
     //// util methods

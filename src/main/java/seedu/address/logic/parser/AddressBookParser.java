@@ -19,6 +19,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTagsCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -65,39 +66,30 @@ public class AddressBookParser {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
-
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
-
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
         case ListTagsCommand.COMMAND_WORD:
             return new ListTagsCommand();
-
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
-
         case UntagCommand.COMMAND_WORD:
             return new UntagCommandParser().parse(arguments);
-
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+        case SortCommand.COMMAND_WORD:
+            return new SortCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

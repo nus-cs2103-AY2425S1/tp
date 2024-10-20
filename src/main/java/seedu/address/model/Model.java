@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -91,4 +92,9 @@ public interface Model {
      * @return
      */
     ActiveTags getActiveTags();
+
+    /**
+     * Sorts the list of persons in the address book according to the given comparator.
+     */
+    void sortPersonList(Comparator<Person> comparator);
 }
