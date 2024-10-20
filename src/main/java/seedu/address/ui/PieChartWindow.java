@@ -13,8 +13,8 @@ import seedu.address.commons.core.LogsCenter;
 /**
  * The Pie Chart window. Displays a Pie Chart of the number of students in each class.
  */
-public class PiChartWindow extends UiPart<Stage> {
-    private static final Logger logger = LogsCenter.getLogger(PiChartWindow.class);
+public class PieChartWindow extends UiPart<Stage> {
+    private static final Logger logger = LogsCenter.getLogger(PieChartWindow.class);
     private static final String FXML = "PiChartWindow.fxml";
     private static Map<String, Integer> numOfStudentsInEachClass;
 
@@ -26,14 +26,14 @@ public class PiChartWindow extends UiPart<Stage> {
      *
      * @param root Stage to use as the root of the PiChartWindow.
      */
-    public PiChartWindow(Stage root) {
+    public PieChartWindow(Stage root) {
         super(FXML, root);
     }
 
     /**
      * Creates a new PiChartWindow.
      */
-    public PiChartWindow() {
+    public PieChartWindow() {
         this(new Stage());
     }
 

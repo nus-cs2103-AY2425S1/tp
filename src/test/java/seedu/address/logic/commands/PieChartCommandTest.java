@@ -11,7 +11,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class PiChartCommandTest {
+public class PieChartCommandTest {
 
     @Test
     public void execute_piChartCommand_success() {
@@ -34,10 +34,10 @@ public class PiChartCommandTest {
         model.addPerson(person4);
 
         // Execute the command
-        PiChartCommand piChartCommand = new PiChartCommand();
-        CommandResult result = piChartCommand.execute(model);
+        PieChartCommand pieChartCommand = new PieChartCommand();
+        CommandResult result = pieChartCommand.execute(model);
 
         // Verify the result
-        assertEquals(PiChartCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        assertEquals(PieChartCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
     }
 }

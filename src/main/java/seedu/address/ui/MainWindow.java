@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private PiChartWindow piChartWindow;
+    private PieChartWindow pieChartWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -155,8 +155,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handlePieChart() {
-        piChartWindow = new PiChartWindow();
-        piChartWindow.show();
+        pieChartWindow = new PieChartWindow();
+        pieChartWindow.show();
     }
 
 

@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import seedu.address.model.Model;
-import seedu.address.ui.PiChartWindow;
+import seedu.address.ui.PieChartWindow;
 
 /**
  * Displays a Pie Chart of the number of students in each class.
  */
-public class PiChartCommand extends Command {
-    public static final String COMMAND_WORD = "pi";
+public class PieChartCommand extends Command {
+    public static final String COMMAND_WORD = "pie";
     public static final String MESSAGE_SUCCESS = "Displayed Pie Chart of number of students in each class";
 
 
@@ -25,7 +25,7 @@ public class PiChartCommand extends Command {
             numOfStudentsInEachClass.put(classId, numOfStudentsInEachClass.getOrDefault(classId, 0) + 1);
         });
         assert numOfStudentsInEachClass != null : "numOfStudentsInEachClass map should not be null";
-        PiChartWindow.setData(numOfStudentsInEachClass);
+        PieChartWindow.setData(numOfStudentsInEachClass);
         return new CommandResult(MESSAGE_SUCCESS, false, true, false);
     }
 }
