@@ -174,7 +174,7 @@ public class UniquePersonListTest {
         uniquePersonList.add(ALICE);
         ObservableList<Person> modifiableList = uniquePersonList.asModifiableObservableList();
         modifiableList.add(BOB);
-        
+
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(BOB);
