@@ -24,7 +24,7 @@ public class DeleteMeetingCommand extends Command {
             + "Parameters: "
             + PREFIX_MEETING_TITLE + "TITLE "
             + PREFIX_MEETING_DATE + "DATE" + "\n"
-            + "Restrictions: " + "Title has to be a valid String and Date has to be in the format xx-xx-xxxx";
+            + "Restrictions: " + "t/Title has to be a valid String and d/Date has to be in the format xx-xx-xxxx";
 
     public static final String MESSAGE_DELETE_MEETING_SUCCESS = "Deleted meeting: %1$s";
 

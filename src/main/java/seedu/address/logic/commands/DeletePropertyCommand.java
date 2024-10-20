@@ -24,9 +24,9 @@ public class DeletePropertyCommand extends Command {
             + "Parameters: "
             + PREFIX_POSTALCODE + "POSTAL_CODE "
             + PREFIX_UNITNUMBER + "UNIT_NUMBER\n"
-            + "Restrictions: " + "C/POSTAL_CODE must follow the Singapore postal code format i.e. be a 6 digit integer "
+            + "Restrictions: " + "c/POSTAL_CODE must follow the Singapore postal code format i.e. be a 6 digit integer "
             + "(between 000000 to 999999)\n"
-            + "U/UNIT_NUMBER must be in the format (XXX-XXX)";
+            + "u/UNIT_NUMBER must be in the format (XXX-XXX)";
 
     public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Deleted property: %1$s";
 

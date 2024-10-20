@@ -22,7 +22,7 @@ public class AddSellerCommand extends AddClientCommand {
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book.\n"
             + "Parameters: "
-            + AddClientCommand.CLIENT_PARAMETERS
+            + AddClientCommand.CLIENT_PARAMETERS + "\n"
             + AddClientCommand.CLIENT_RESTRICTIONS;
 
     /** Success message for adding a new seller, with a placeholder for the seller's details. */
