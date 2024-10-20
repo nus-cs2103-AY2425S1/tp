@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -50,8 +51,8 @@ public class ReminderCommand extends Command {
         }
 
         // Check if the appointment exists
-        Schedule appointmentSchedule = personToEdit.getSchedule();
-        if (appointmentSchedule.toString().isEmpty()) {
+        Set<Schedule> appointmentSchedule = personToEdit.getSchedules();
+        if (appointmentSchedule.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_APPOINTMENT);
         }
 
@@ -70,7 +71,7 @@ public class ReminderCommand extends Command {
         Reminder newReminder = new Reminder(reminderTime);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getSchedule(), newReminder, personToEdit.getTags());
+                personToEdit.getAddress(), personToEdit.getSchedules(), newReminder, personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, name, this.reminderTime));

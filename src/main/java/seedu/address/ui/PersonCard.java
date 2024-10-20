@@ -3,6 +3,8 @@ package seedu.address.ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,6 +12,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -61,18 +64,25 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        if (person.getSchedule().toString().isEmpty()) {
-            schedule.setText(person.getSchedule().toString());
+        // Handle multiple schedules
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+
+        Set<Schedule> schedules = person.getSchedules();
+        if (schedules.isEmpty()) {
+            schedule.setText("No scheduled appointments");
         } else {
-            schedule.setText(
-                    LocalDateTime.parse(person.getSchedule().toString(), DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"))
-                            .format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
+            String formattedSchedules = schedules.stream()
+                    .map(schedule -> {
+                        LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
+                        String formattedDate = dateTime.format(outputFormatter);
+                        String noteText = schedule.getNotes();
+                        return String.format("%s [ %s ]\n", formattedDate, noteText);
+                    })
+                    .collect(Collectors.joining(""));
+            schedule.setText(formattedSchedules);
         }
-        if (person.getSchedule().getNotes() == null || person.getSchedule().getNotes().isEmpty()) {
-            note.setText("");
-        } else {
-            note.setText("Notes: " + person.getSchedule().getNotes());
-        }
+
         if (person.getReminder() != null && !person.getReminder().toString().isEmpty()) {
             reminder.setText(String.format("Reminder: %s before",
                     person.getReminder().getReminderTime()));

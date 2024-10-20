@@ -10,8 +10,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -99,7 +101,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_schedule() throws Exception {
         String dateTime = "2024-10-04 1000";
-        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", new Schedule(dateTime, ""));
+        Set<Schedule> scheduleSet = new HashSet<>();
+        scheduleSet.add(new Schedule(dateTime, ""));
+        ScheduleCommand expectedCommand = new ScheduleCommand("Jane", scheduleSet);
 
         ScheduleCommand actualCommand = (ScheduleCommand) parser.parseCommand(
                 ScheduleCommand.COMMAND_WORD + " Jane" + " d/" + dateTime);

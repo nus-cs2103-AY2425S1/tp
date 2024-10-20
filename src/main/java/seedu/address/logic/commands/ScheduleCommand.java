@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -21,23 +24,34 @@ import seedu.address.model.person.Schedule;
 public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Schedule appointments for client. "
+            + "Parameters: "
+            + "NAME "
+            + PREFIX_DATE + "DATE_AND_TIME "
+            + "[" + PREFIX_NOTE + "NOTE]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + "John Doe "
+            + PREFIX_DATE + "2024-10-17 1200 "
+            + PREFIX_NOTE + "first appointment ";
+
     public static final String MESSAGE_SUCCESS = "Scheduled %s for %s";
     public static final String MESSAGE_INVALID_TIME = "Scheduled time must be a weekday and"
             + "on the hour between 0900 and 1700";
     public static final String MESSAGE_SLOT_TAKEN = "The selected time slot is already taken.";
     public static final String MESSAGE_INVALID_NAME = "Person not found";
     private String name;
-    private Schedule schedule;
+    private Set<Schedule> scheduleSet;
 
     /**
      * Constructs a ScheduleCommand to schedule an appointment for the specified person.
      *
      * @param name The name of the person.
-     * @param schedule The schedule date and time and optional notes.
+     * @param scheduleSet The set of schedule date and time and optional notes.
      */
-    public ScheduleCommand(String name, Schedule schedule) {
+    public ScheduleCommand(String name, Set<Schedule> scheduleSet) {
         this.name = name;
-        this.schedule = schedule;
+        this.scheduleSet = scheduleSet;
     }
 
 
@@ -67,23 +81,25 @@ public class ScheduleCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_NAME);
         }
 
-        // Check if the schedule time is valid (on the hour and within weekday working hours)
-        if (!isOnTheHour(schedule.dateTime) || !isWithinWorkingHours(schedule.dateTime)) {
-            throw new CommandException(MESSAGE_INVALID_TIME);
-        }
+        for (Schedule schedule : scheduleSet) {
+            // Check if the schedule time is valid (on the hour and within weekday working hours)
+            if (!isOnTheHour(schedule.getDateTime()) || !isWithinWorkingHours(schedule.getDateTime())) {
+                throw new CommandException(MESSAGE_INVALID_TIME);
+            }
 
-        // Check if the time slot is already taken
-        if (isTimeSlotTaken(lastShownList, schedule.dateTime)) {
-            throw new CommandException(MESSAGE_SLOT_TAKEN);
+            // Check if the time slot is already taken
+            if (isTimeSlotTaken(lastShownList, schedule.getDateTime())) {
+                throw new CommandException(MESSAGE_SLOT_TAKEN);
+            }
         }
 
         Person personToEdit = lastShownList.get(index);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), schedule, personToEdit.getReminder(), personToEdit.getTags());
+                personToEdit.getAddress(), scheduleSet, personToEdit.getReminder(), personToEdit.getTags());
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.schedule, name));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, this.scheduleSet, name));
     }
 
     /**
@@ -120,8 +136,8 @@ public class ScheduleCommand extends Command {
      */
     private boolean isTimeSlotTaken(List<Person> personList, String dateTime) {
         for (Person person : personList) {
-            Schedule schedule = person.getSchedule();
-            if (schedule != null && schedule.dateTime.equals(dateTime)) {
+            Set<Schedule> schedules = person.getSchedules();
+            if (schedules.stream().map(Schedule::getDateTime).anyMatch(x -> x.equals(dateTime))) {
                 return true;
             }
         }
@@ -143,6 +159,6 @@ public class ScheduleCommand extends Command {
         // State check
         ScheduleCommand otherCommand = (ScheduleCommand) other;
         return name.equals(otherCommand.name)
-                && schedule.equals(otherCommand.schedule);
+                && scheduleSet.equals(otherCommand.scheduleSet);
     }
 }

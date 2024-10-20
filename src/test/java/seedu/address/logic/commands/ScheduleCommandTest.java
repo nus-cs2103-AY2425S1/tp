@@ -7,6 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,12 +36,13 @@ public class ScheduleCommandTest {
     @Test
     public void execute_validSchedule_success() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule validSchedule = new Schedule("2024-10-04 1000", "");
+        Set<Schedule> validSchedule = new HashSet<>();
+        validSchedule.add(new Schedule("2024-10-04 1000", ""));
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), validSchedule);
 
         Person scheduledPerson = new PersonBuilder(personToSchedule)
-                .withSchedule(validSchedule.dateTime, validSchedule.getNotes()).build();
+                .withSchedule(new String[]{"2024-10-04 1000"}, new String[]{""}).build();
 
         String expectedMessage = String.format(ScheduleCommand.MESSAGE_SUCCESS,
                 validSchedule, personToSchedule.getName());
@@ -52,7 +56,8 @@ public class ScheduleCommandTest {
     @Test
     public void execute_invalidTime_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule invalidSchedule = new Schedule("2024-10-05 1730", ""); // Outside working hours
+        Set<Schedule> invalidSchedule = new HashSet<>();
+        invalidSchedule.add(new Schedule("2024-10-05 1730", "")); // Outside working hours
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), invalidSchedule);
 
@@ -62,11 +67,12 @@ public class ScheduleCommandTest {
     @Test
     public void execute_slotTaken_throwsCommandException() throws CommandException {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule takenSchedule = new Schedule("2024-10-04 1000", "");
+        Set<Schedule> takenSchedule = new HashSet<>();
+        takenSchedule.add(new Schedule("2024-10-04 1000", ""));
 
         // Schedule first person with the time slot
         Person scheduledPerson = new PersonBuilder(personToSchedule)
-                .withSchedule(takenSchedule.dateTime, takenSchedule.getNotes()).build();
+                .withSchedule(new String[]{"2024-10-04 1000"}, new String[]{""}).build();
         model.setPerson(personToSchedule, scheduledPerson);
 
         // Try to schedule another person with the same time slot
@@ -77,15 +83,17 @@ public class ScheduleCommandTest {
 
     @Test
     public void execute_personNotFound_throwsCommandException() {
-        ScheduleCommand command = new ScheduleCommand("Unknown Person",
-                new Schedule("2024-10-05 1000", ""));
+        Set<Schedule> schedules = new HashSet<>();
+        schedules.add(new Schedule("2024-10-04 1000", ""));
+        ScheduleCommand command = new ScheduleCommand("Unknown Person", schedules);
 
         assertCommandFailure(command, model, ScheduleCommand.MESSAGE_INVALID_NAME);
     }
     @Test
     public void execute_scheduleOnWeekend_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule weekendSchedule = new Schedule("2024-10-06 1000", ""); // Saturday
+        Set<Schedule> weekendSchedule = new HashSet<>();
+        weekendSchedule.add(new Schedule("2024-10-06 1000", "")); // Saturday
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), weekendSchedule);
 
@@ -95,7 +103,8 @@ public class ScheduleCommandTest {
     @Test
     public void execute_scheduleBeforeWorkingHours_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule earlySchedule = new Schedule("2024-10-04 0800", ""); // Before 9 AM
+        Set<Schedule> earlySchedule = new HashSet<>();
+        earlySchedule.add(new Schedule("2024-10-04 0800", "")); // Before 9 AM
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), earlySchedule);
 
@@ -105,7 +114,8 @@ public class ScheduleCommandTest {
     @Test
     public void execute_scheduleAfterWorkingHours_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule lateSchedule = new Schedule("2024-10-04 1800", ""); // After 5 PM
+        Set<Schedule> lateSchedule = new HashSet<>();
+        lateSchedule.add(new Schedule("2024-10-04 1800", "")); // After 5 PM
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), lateSchedule);
 
@@ -115,7 +125,8 @@ public class ScheduleCommandTest {
     @Test
     public void execute_scheduleNotOnTheHour_throwsCommandException() {
         Person personToSchedule = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Schedule notOnTheHourSchedule = new Schedule("2024-10-04 1015", ""); // Not on the hour
+        Set<Schedule> notOnTheHourSchedule = new HashSet<>();
+        notOnTheHourSchedule.add(new Schedule("2024-10-04 1015", "")); // Not on the hour
 
         ScheduleCommand command = new ScheduleCommand(personToSchedule.getName().toString(), notOnTheHourSchedule);
 

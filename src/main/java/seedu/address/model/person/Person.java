@@ -28,21 +28,21 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private Schedule schedule;
+    private Set<Schedule> schedules;
     private final Reminder reminder;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Schedule schedule,
+    public Person(Name name, Phone phone, Email email, Address address, Set<Schedule> schedules,
                   Reminder reminder, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, schedule, reminder, tags);
+        requireAllNonNull(name, phone, email, address, schedules, reminder, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.schedule = schedule;
+        this.schedules = schedules;
         this.reminder = reminder;
         this.tags.addAll(tags);
     }
@@ -62,8 +62,8 @@ public class Person {
     public Address getAddress() {
         return address;
     }
-    public Schedule getSchedule() {
-        return schedule;
+    public Set<Schedule> getSchedules() {
+        return Collections.unmodifiableSet(schedules);
     }
     public Reminder getReminder() {
         return reminder;
@@ -99,32 +99,38 @@ public class Person {
      * @return true if the person has a matching appointment, false otherwise.
      */
     public boolean hasAppointment(LocalDateTime now, Optional<LocalDate> dateFilter, Optional<LocalTime> timeFilter) {
-        if (schedule == null || schedule.dateTime.isEmpty()) {
-            return false;
+
+        if (schedules == null || schedules.isEmpty()) {
+            return false; // Return false if schedules are null or empty
         }
 
-        LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.dateTime,
-                DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-
-        // Check if the appointment is in the future
-        if (appointmentDateTime.isBefore(now)) {
-            return false;
-        }
-
-        // Apply date filter if present
-        if (dateFilter.isPresent()) {
-            if (!appointmentDateTime.toLocalDate().equals(dateFilter.get())) {
+        for (Schedule schedule : schedules) {
+            if (schedule == null || schedule.getDateTime().isEmpty()) {
                 return false;
             }
-            // Only apply time filter if date filter is present
-            if (timeFilter.isPresent() && !appointmentDateTime.toLocalTime().equals(timeFilter.get())) {
+
+            LocalDateTime appointmentDateTime = LocalDateTime.parse(schedule.getDateTime(),
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+
+            // Check if the appointment is in the future
+            if (appointmentDateTime.isBefore(now)) {
                 return false;
             }
-        } else if (timeFilter.isPresent()) {
-            // If time filter is present but date filter is not, ignore the time filter
-            return true;
-        }
 
+            // Apply date filter if present
+            if (dateFilter.isPresent()) {
+                if (!appointmentDateTime.toLocalDate().equals(dateFilter.get())) {
+                    return false;
+                }
+                // Only apply time filter if date filter is present
+                if (timeFilter.isPresent() && !appointmentDateTime.toLocalTime().equals(timeFilter.get())) {
+                    return false;
+                }
+            } else if (timeFilter.isPresent()) {
+                // If time filter is present but date filter is not, ignore the time filter
+                return true;
+            }
+        }
         return true;
     }
 
@@ -132,7 +138,7 @@ public class Person {
      * Removes the appointment of the person by setting the schedule to an empty string.
      */
     public void removeAppointment() {
-        schedule = new Schedule(null, null);
+        schedules = new HashSet<>();
     }
 
     /**
@@ -171,7 +177,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("schedule", schedule)
+                .add("schedule", schedules)
                 .add("reminder", reminder)
                 .add("tags", tags)
                 .toString();
