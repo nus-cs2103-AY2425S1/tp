@@ -9,13 +9,13 @@ import tahub.contacts.model.Model;
 import tahub.contacts.model.course.Course;
 
 /**
- * Adds a person to the address book.
+ * Adds a course to the course book.
  */
 public class CourseCommand extends Command {
 
     public static final String COMMAND_WORD = "course";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a course to the course book. "
             + "eg course c/CS2103T n/Software Engineering";
 
     public static final String MESSAGE_SUCCESS = "New course added: %1$s";
@@ -24,7 +24,7 @@ public class CourseCommand extends Command {
     private final Course toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an CourseCommand to add the specified {@code Course}
      */
     public CourseCommand(Course course) {
         requireNonNull(course);
