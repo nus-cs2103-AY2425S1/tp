@@ -103,13 +103,13 @@ public class FindCommandTest {
     @Test
     public void execute_multipleIncomes_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        incomes = Arrays.asList("1000.00", "1500");
+        incomes = Arrays.asList("1000.00", "800");
 
         FindCommand command = new FindCommand(nameKeywords, addressKeywords, priorities, incomes);
         expectedModel.updateFilteredPersonList(new IncomePredicate(incomes));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(DANIEL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BENSON, ALICE, CARL), model.getFilteredPersonList());
     }
 
     @Test
@@ -130,7 +130,7 @@ public class FindCommandTest {
                 namePredicate.and(addressPredicate).and(priorityPredicate).and(incomePredicate));
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(List.of(ALICE), model.getFilteredPersonList());
+        assertEquals(List.of(BENSON), model.getFilteredPersonList());
     }
 
     @Test

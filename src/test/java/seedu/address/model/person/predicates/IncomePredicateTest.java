@@ -41,13 +41,13 @@ public class IncomePredicateTest {
 
     @Test
     public void test_incomeMatches_returnsTrue() {
-        // One value
-        IncomePredicate predicate = new IncomePredicate(Collections.singletonList("500.00"));
+        // One value higher than person's income
+        IncomePredicate predicate = new IncomePredicate(Collections.singletonList("1500.00"));
         assertTrue(predicate.test(new PersonBuilder().withIncome(1000.00).build()));
 
-        // Multiple values
+        // Multiple values with some higher but some lower than person's income
         predicate = new IncomePredicate(Arrays.asList("500.00", "1000"));
-        assertTrue(predicate.test(new PersonBuilder().withIncome(2000).build()));
+        assertTrue(predicate.test(new PersonBuilder().withIncome(800).build()));
 
         // Boundary values
         predicate = new IncomePredicate(Arrays.asList("500.01", "500.00"));
@@ -56,13 +56,13 @@ public class IncomePredicateTest {
 
     @Test
     public void test_incomeDoesNotMatch_returnsFalse() {
-        // Value greater than person's income
-        IncomePredicate predicate = new IncomePredicate(Arrays.asList("10000.00"));
-        assertFalse(predicate.test(new PersonBuilder().withIncome(500).build()));
+        // Value less than person's income
+        IncomePredicate predicate = new IncomePredicate(Arrays.asList("1000.00"));
+        assertFalse(predicate.test(new PersonBuilder().withIncome(1500).build()));
 
-        // Multiple values but at least one greater than person's income
-        predicate = new IncomePredicate(Arrays.asList("1000", "2000", "3000.00"));
-        assertFalse(predicate.test(new PersonBuilder().withIncome(1500.00).build()));
+        // Multiple values all lower than person's income
+        predicate = new IncomePredicate(Arrays.asList("1000", "1500", "300.00"));
+        assertFalse(predicate.test(new PersonBuilder().withIncome(2000.00).build()));
     }
 
     @Test

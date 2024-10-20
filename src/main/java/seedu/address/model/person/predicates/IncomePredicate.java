@@ -19,7 +19,7 @@ public class IncomePredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return incomes.stream().map(Double::valueOf)
-                        .allMatch(income -> person.getIncome().getValue() >= income);
+                        .anyMatch(income -> person.getIncome().getValue() <= income);
     }
 
     @Override
