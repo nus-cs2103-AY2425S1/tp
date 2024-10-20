@@ -38,7 +38,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags,
                   int personId) {
-        requireAllNonNull(name, phone, email, address, tags, personId);
+        requireAllNonNull(name, phone, email, address, status, tags, personId);
         this.personDescriptor = new PersonDescriptor(
                 name, phone, email, address, status, tags
         );
@@ -46,7 +46,6 @@ public class Person {
         // Increment the static counter and assign a unique ID to the person
         this.personId = personId;
     }
-
 
     /**
      * Builds a person given a personId and a personDescriptor.

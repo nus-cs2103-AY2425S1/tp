@@ -10,9 +10,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Status {
 
     public static final String MESSAGE_CONSTRAINTS = "The status should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
-    public final String status;
+    public static final String VALIDATION_REGEX = "[\\p{Alnum} ]+";
+
+    public final String value;
 
     /**
      * Constructs a {@code Status}.
@@ -22,7 +23,7 @@ public class Status {
     public Status(String status) {
         requireNonNull(status);
         checkArgument(isValidStatus(status), MESSAGE_CONSTRAINTS);
-        this.status = status;
+        this.value = status;
     }
 
     /**
@@ -44,19 +45,12 @@ public class Status {
         }
 
         Status otherStatus = (Status) other;
-        return status.equals(otherStatus.status);
+        return value.equals(otherStatus.value);
     }
 
     @Override
     public int hashCode() {
-        return status.hashCode();
-    }
-
-    /**
-     * Format state as text for viewing.
-     */
-    public String toString() {
-        return '[' + status + ']';
+        return value.hashCode();
     }
 
 }

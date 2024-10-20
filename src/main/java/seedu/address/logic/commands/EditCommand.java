@@ -76,29 +76,28 @@ public abstract class EditCommand extends Command {
         return new CommandResult(String.format(getSuccessMessage(), formatEntity(editedEntity)));
     }
 
-    /*
+    /**
      * Checks if entity already exists in list
      */
     protected abstract boolean hasEntity(Model model, Object entity) throws CommandException;
 
-    /*
+    /**
      * Checks if entity to edit is the same as edited entity
      */
     protected abstract boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
             throws CommandException;
-
 
     /**
      * Gets the filtered list of entities in the model.
      */
     protected abstract List<?> getFilteredList(Model model);
 
-    /*
+    /**
      * Edits Entity
      */
     protected abstract void editEntity(Model model, Object editedEntity, Object entityToEdit) throws CommandException;
 
-    /*
+    /**
      * Adds the entity to the model.
      */
     protected abstract Object createEditedEntity(Model model, Object entityToEdit,

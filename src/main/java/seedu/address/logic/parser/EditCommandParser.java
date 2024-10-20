@@ -53,7 +53,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                             PREFIX_ADDRESS, PREFIX_STATUS, PREFIX_TAG);
             Index index = ParserUtil.parseIndex(indexString);
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                    PREFIX_ADDRESS);
+                    PREFIX_ADDRESS, PREFIX_STATUS);
 
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
