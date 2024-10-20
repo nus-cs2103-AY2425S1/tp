@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label balance;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,5 +60,12 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person.getBalance() < 0) {
+            balance.setText("Balance: -$" + person.getBalance() * -1);
+            balance.setStyle("-fx-background-color: red");
+        } else {
+            balance.setText("Balance: $" + person.getBalance());
+            balance.setStyle("-fx-background-color: green");
+        }
     }
 }
