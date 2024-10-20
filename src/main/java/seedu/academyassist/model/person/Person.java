@@ -25,19 +25,22 @@ public class Person {
     // Data fields
     private final Address address;
     private final Ic ic;
+    private final YearGroup yearGroup;
     private final Set<Subject> subjects = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Ic ic, Set<Subject> subjects, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, subjects, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Ic ic, YearGroup yearGroup,
+                  Set<Subject> subjects, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yearGroup, subjects, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.ic = ic;
+        this.yearGroup = yearGroup;
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
     }
@@ -59,6 +62,9 @@ public class Person {
     }
     public Ic getIc() {
         return ic;
+    }
+    public YearGroup getYearGroup() {
+        return yearGroup;
     }
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
@@ -96,7 +102,8 @@ public class Person {
         updatedSubjects.add(subjectToAdd);
 
         // Return a new Person object with the updated subjects
-        return new Person(this.name, this.phone, this.email, this.address, this.ic, updatedSubjects, this.tags);
+        return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, updatedSubjects,
+                this.tags);
     }
 
     /**
@@ -120,6 +127,7 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && ic.equals(otherPerson.ic)
+                && yearGroup.equals(otherPerson.yearGroup)
                 && subjects.equals(otherPerson.subjects)
                 && tags.equals(otherPerson.tags);
     }
@@ -127,7 +135,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, ic, subjects, tags);
+        return Objects.hash(name, phone, email, address, ic, yearGroup, subjects, tags);
     }
 
     @Override
@@ -138,6 +146,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("ic", ic)
+                .add("year group", yearGroup)
                 .add("subjects", subjects)
                 .add("tags", tags)
                 .toString();

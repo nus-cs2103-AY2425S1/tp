@@ -10,6 +10,7 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.tag.Tag;
 import seedu.academyassist.model.util.SampleDataUtil;
 
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_IC = "S1234567B";
+    public static final String DEFAULT_YEARGROUP = "2";
     public static final Subject DEFAULT_SUBJECT = new Subject("Computing");
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
@@ -30,6 +32,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Ic ic;
+    private YearGroup yearGroup;
     private Set<Subject> subjects;
     private Set<Tag> tags;
 
@@ -42,6 +45,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         ic = new Ic(DEFAULT_IC);
+        yearGroup = new YearGroup(DEFAULT_YEARGROUP);
         subjects = new HashSet<>();
         subjects.add(DEFAULT_SUBJECT);
         tags = new HashSet<>();
@@ -56,6 +60,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         ic = personToCopy.getIc();
+        yearGroup = personToCopy.getYearGroup();
         subjects = new HashSet<>(personToCopy.getSubjects());
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -99,11 +104,20 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+
     /**
      * Sets the {@code Ic} of the {@code Person} that we are building.
      */
     public PersonBuilder withIc(String ic) {
         this.ic = new Ic(ic);
+        return this;
+    }
+
+    /**
+     * Sets the {@code YearGroup} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withYearGroup(String yearGroup) {
+        this.yearGroup = new YearGroup(yearGroup);
         return this;
     }
 
@@ -116,7 +130,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, ic, subjects, tags);
+        return new Person(name, phone, email, address, ic, yearGroup, subjects, tags);
     }
 
 }
