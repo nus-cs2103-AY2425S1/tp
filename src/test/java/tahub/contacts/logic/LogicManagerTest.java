@@ -30,6 +30,7 @@ import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.storage.JsonAddressBookStorage;
+import tahub.contacts.storage.JsonUniqueCourseListStorage;
 import tahub.contacts.storage.JsonUserPrefsStorage;
 import tahub.contacts.storage.StorageManager;
 import tahub.contacts.testutil.PersonBuilder;
@@ -49,7 +50,9 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUniqueCourseListStorage courseListStorage =
+                new JsonUniqueCourseListStorage(temporaryFolder.resolve("courseList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -124,7 +127,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -161,8 +164,9 @@ public class LogicManagerTest {
 
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
+        JsonUniqueCourseListStorage courseListStorage =
+                new JsonUniqueCourseListStorage(temporaryFolder.resolve("ExceptionCourseList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command

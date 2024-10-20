@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
+import tahub.contacts.model.course.UniqueCourseList;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -22,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList());
     }
 
     @Test

@@ -22,6 +22,8 @@ import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.testutil.PersonBuilder;
 
@@ -114,7 +116,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getCourseListFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setCourseListFilePath(Path courseListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,6 +146,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setCourseList(UniqueCourseList courseList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueCourseList getCourseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -145,6 +167,21 @@ public class AddCommandTest {
 
         @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteCourse(Course course) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCourse(Course course) {
             throw new AssertionError("This method should not be called.");
         }
 
