@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.listcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import java.util.Optional;
@@ -30,7 +31,6 @@ public class ListTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks for this group";
     public static final String MESSAGE_SUCCESS_ALL_TASKS = "Listed all tasks available";
-    public static final String GROUP_NOT_FOUND = "Group not found!";
 
     private final Optional<GroupName> groupNameOptional;
 
@@ -51,7 +51,7 @@ public class ListTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         if (groupNameOptional.isPresent() && !model.containsGroupName(groupNameOptional.get())) {
-            throw new CommandException(GROUP_NOT_FOUND);
+            throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
         }
         if (groupNameOptional.isPresent()) {
             requireNonNull(model);

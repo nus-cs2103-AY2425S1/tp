@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
@@ -39,8 +40,6 @@ public class AddTaskToGroupCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_TASK_IN_GROUP = "This task is already in the group";
 
-    public static final String GROUP_NOT_FOUND = "Group not found!";
-
     private final TaskName taskName;
 
     private final Deadline deadline;
@@ -62,7 +61,7 @@ public class AddTaskToGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!model.containsGroupName(toAddInto)) {
-            throw new CommandException(GROUP_NOT_FOUND);
+            throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
         }
 
         Task task = new Task(taskName, deadline);

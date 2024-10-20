@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.addcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_STUDENT_NO_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
@@ -36,14 +38,7 @@ public class AddStudentToGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Added student: %1$s to %2$s";
 
-    public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "This student is already in the group";
-
-    public static final String MESSAGE_NO_SUCH_STUDENT = "Student does not exist!";
-
-    public static final String MESSAGE_NO_SUCH_GROUP = "Group does not exist!";
-
-    public static final String MESSAGE_STUDENT_IN_GROUP_ALREADY = "This student already belongs to a group!";
-
+    public static final String MESSAGE_DUPLICATE_STUDENT_IN_GROUP = "This student already belongs to a group!";
 
     private final StudentNumber toAdd;
 
@@ -68,20 +63,16 @@ public class AddStudentToGroupCommand extends Command {
         try {
             group = model.getGroupByName(toAddInto);
         } catch (GroupNotFoundException e) {
-            throw new CommandException(MESSAGE_NO_SUCH_GROUP);
+            throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
         }
         try {
             student = model.getPersonByNumber(toAdd);
         } catch (PersonNotFoundException e) {
-            throw new CommandException(MESSAGE_NO_SUCH_STUDENT);
-        }
-
-        if (model.hasPersonInGroup(student, group)) {
-            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_IN_GROUP);
+            throw new CommandException(MESSAGE_STUDENT_NO_NOT_FOUND);
         }
 
         if (student.getGroupName().isPresent()) {
-            throw new CommandException(MESSAGE_STUDENT_IN_GROUP_ALREADY);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT_IN_GROUP);
         }
 
         model.addPersonToGroup(student, group);

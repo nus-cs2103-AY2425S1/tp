@@ -96,12 +96,6 @@ public interface Model {
     void setPerson(Student target, Student editedStudent);
 
     /**
-     * Replaces the given task {@code target} with {@code editedTask} in {@code group}.
-     * {@code target} must exist in the address book.
-     */
-    void setTask(Task target, Task editedTask, Group group);
-
-    /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
      */
     boolean hasGroup(Group group);
@@ -143,6 +137,12 @@ public interface Model {
      * Returns true if a task with the same identity as {@code task} exists in the address book.
      */
     boolean hasTask(Task task);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask} in {@code group}.
+     * {@code target} must exist in the address book.
+     */
+    void setTask(Task target, Task editedTask, Group group);
 
     /**
      * Returns a {@code Student} with the student number {@code studentNumber}.
@@ -201,12 +201,6 @@ public interface Model {
     void setStateTasks();
 
     State getState();
-
-    /**
-     * Returns a {@code Group} with the group name {@code groupName}.
-     * There must exist such a {@code Group} in the address book.
-     */
-    Group findGroup(GroupName groupName);
 
     /**
      * Returns true if group with {@code groupName} exists in the address book.

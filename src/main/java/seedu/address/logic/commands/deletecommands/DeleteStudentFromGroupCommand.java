@@ -55,7 +55,7 @@ public class DeleteStudentFromGroupCommand extends Command {
         if (!model.containsGroupName(targetGroupName)) {
             throw new CommandException(Messages.MESSAGE_GROUP_NAME_NOT_FOUND);
         }
-        Group targetGroup = model.findGroup(targetGroupName);
+        Group targetGroup = model.getGroupByName(targetGroupName);
         Set<Student> students = targetGroup.getStudents();
         for (Student stu : students) {
             if (stu.getStudentNumber().equals(targetStudentNo)) {

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.deletecommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
@@ -34,7 +35,6 @@ public class DeleteTaskFromGroupCommand extends Command {
         + PREFIX_INDEX + "2";
 
     public static final String MESSAGE_SUCCESS = "Deleted task: %1$s from %2$s";
-    public static final String MESSAGE_TASK_NOT_IN_GROUP = "This task is not in the group";
 
     private final Index index;
     private final GroupName toDeleteFrom;
@@ -58,7 +58,7 @@ public class DeleteTaskFromGroupCommand extends Command {
         List<Task> lastShownList = group.getTasks().stream().toList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_INDEX);
         }
         Task task = lastShownList.get(index.getZeroBased());
 
