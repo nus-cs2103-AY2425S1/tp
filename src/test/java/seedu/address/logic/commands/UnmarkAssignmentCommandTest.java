@@ -1,10 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
 import java.util.ArrayList;
 
@@ -68,6 +71,40 @@ public class UnmarkAssignmentCommandTest {
         UnmarkAssignmentCommand unmarkAssignmentCommand = new UnmarkAssignmentCommand(
                 INDEX_FIRST_STUDENT, Index.fromOneBased(2));
         assertCommandFailure(unmarkAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        UnmarkAssignmentCommand unmarkFirstCommand = new UnmarkAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+        UnmarkAssignmentCommand unmarkSecondCommand = new UnmarkAssignmentCommand(INDEX_SECOND_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+
+        // same object -> returns true
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
+
+        // same values -> returns true
+        UnmarkAssignmentCommand unmarkFirstCommandCopy = new UnmarkAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(unmarkFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(unmarkFirstCommand.equals(null));
+
+        // different student -> returns false
+        assertFalse(unmarkFirstCommand.equals(unmarkSecondCommand));
+    }
+
+    @Test
+    public void toStringMethod() {
+        UnmarkAssignmentCommand unmarkAssignmentCommand = new UnmarkAssignmentCommand(INDEX_FIRST_STUDENT,
+                INDEX_FIRST_ASSIGNMENT);
+        String expected = UnmarkAssignmentCommand.class.getCanonicalName() + "{studentIndex=" + INDEX_FIRST_STUDENT
+                + ", assignmentIndex=" + INDEX_FIRST_ASSIGNMENT + "}";
+        assertEquals(expected, unmarkAssignmentCommand.toString());
     }
 
 }
