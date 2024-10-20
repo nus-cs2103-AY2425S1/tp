@@ -34,7 +34,7 @@
         </VBox>
         <VBox alignment="CENTER_LEFT" minHeight="105" spacing="10.0"  GridPane.columnIndex="0" GridPane.rowIndex="1">
             <FlowPane fx:id="appointments" />
-            <FlowPane fx:id="tags" />
+            <FlowPane fx:id="allergies" />
             <FlowPane fx:id="medCons" />
             <FlowPane fx:id="priority" />
             <padding>
