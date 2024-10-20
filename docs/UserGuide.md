@@ -99,8 +99,12 @@ Format: `assign <Index> pon/<Policy Name> /pos<Policy start date> /poe <Policy e
 
 Examples:
 * `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
-
-
+* This command assigns the Policy object to the person listed at index 1 with the following information
+  * Policy Name: PolicyOne
+  * Policy start date: 2022-12-12
+  * Policy end date: 2023-12-12
+  * Premium due date: 2023-11-01
+  * Amount Due: $300.00
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
