@@ -32,7 +32,7 @@ private ContextMenu entriesPopup;
 
 public AutoSuggestionTextField() {
     super();
-    this.entries = new TreeSet<>();
+    this.entries = PopUpCommandsSet.commands();
     this.entriesPopup = new ContextMenu();
     setListner();
 }

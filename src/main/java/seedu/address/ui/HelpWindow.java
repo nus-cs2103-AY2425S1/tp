@@ -16,7 +16,36 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-t12-4.github.io/tp/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String HELP_MESSAGE = "Refer to the user guide for more info: " + USERGUIDE_URL
+            + "\n **Add**    \n" +
+            "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…\u200B`  \n" +
+            "e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 g/Overwatch t/friend t/colleague`\n" +
+            "\n" +
+            "**Clear**  \n" +
+            "`clear`\n" +
+            "\n" +
+            "**Delete**  \n" +
+            "`delete INDEX`  \n" +
+            "e.g., `delete 3`\n" +
+            "\n" +
+            "**Edit**  \n" +
+            "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…\u200B`  \n" +
+            "e.g., `edit 2 n/James Lee e/jameslee@example.com`\n" +
+            "\n" +
+            "**Edit Game**  \n" +
+            "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]\u200B`  \n" +
+            "e.g., `editgame 1 g/Overwatch u/Potato`\n" +
+            "\n" +
+            "**Find**  \n" +
+            "`find KEYWORD [MORE_KEYWORDS]`  \n" +
+            "e.g., `find James Jake`\n" +
+            "\n" +
+            "**List**  \n" +
+            "`list`\n" +
+            "\n" +
+            "**Help**  \n" +
+            "`help`\n";
+
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
