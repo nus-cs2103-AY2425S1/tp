@@ -16,6 +16,7 @@ import spleetwaise.address.commons.util.StringUtil;
 import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.LogicManager;
 import spleetwaise.address.model.AddressBook;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.ModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
@@ -29,10 +30,11 @@ import spleetwaise.address.storage.StorageManager;
 import spleetwaise.address.storage.UserPrefsStorage;
 import spleetwaise.address.ui.Ui;
 import spleetwaise.address.ui.UiManager;
+import spleetwaise.commons.CommonModel;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
+import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
-import spleetwaise.transaction.storage.StorageUtil;
 import spleetwaise.transaction.storage.TransactionBookStorage;
 
 /**
@@ -47,8 +49,11 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected spleetwaise.address.model.Model addressBookModel;
-    protected spleetwaise.transaction.model.Model transactionModel;
+    protected CommonModel model;
+
+    protected AddressBookModel addressBookModel;
+    protected TransactionBookModel transactionBookModel;
+
     protected Config config;
 
     @Override
@@ -64,17 +69,16 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         TransactionBookStorage transactionBookStorage =
-            new JsonTransactionBookStorage(userPrefs.getTransactionBookFilePath());
+                new JsonTransactionBookStorage(userPrefs.getTransactionBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, transactionBookStorage);
 
         addressBookModel = initAddressBookModelManager(storage, userPrefs);
+        transactionBookModel = initTransactionModelManager(storage, addressBookModel);
 
-        // Pass ab model into StorageUtil
-        StorageUtil.setAddressBookModel(addressBookModel);
+        // Initialise Common Model
+        CommonModel.initialise(addressBookModel, transactionBookModel);
 
-        transactionModel = initTransactionModelManager(storage);
-
-        logic = new LogicManager(addressBookModel, transactionModel, storage);
+        logic = new LogicManager(storage);
 
         ui = new UiManager(logic);
     }
@@ -84,7 +88,7 @@ public class MainApp extends Application {
      * data from the sample address book will be used instead if {@code storage}'s address book is not found, or an
      * empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private spleetwaise.address.model.Model initAddressBookModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private AddressBookModel initAddressBookModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
 
         Optional<ReadOnlyAddressBook> addressBookOptional;
@@ -93,25 +97,25 @@ public class MainApp extends Application {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                    + " populated with a sample AddressBook.");
+                        + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                + " Will be starting with an empty AddressBook.");
+                    + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
 
         return new ModelManager(initialData, userPrefs);
     }
 
-    private spleetwaise.transaction.model.Model initTransactionModelManager(Storage storage) {
+    private TransactionBookModel initTransactionModelManager(Storage storage, AddressBookModel addressBookModel) {
         logger.info("Using data file : " + storage.getTransactionBookFilePath());
 
         Optional<ReadOnlyTransactionBook> txnBookOptional;
         ReadOnlyTransactionBook initialData;
         try {
-            txnBookOptional = storage.readTransactionBook();
+            txnBookOptional = storage.readTransactionBook(addressBookModel);
             if (!txnBookOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getTransactionBookFilePath()
                         + " populated with a sample TransactionBook.");
@@ -154,7 +158,7 @@ public class MainApp extends Application {
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataLoadingException e) {
             logger.warning("Config file at " + configFilePathUsed + " could not be loaded."
-                + " Using default config properties.");
+                    + " Using default config properties.");
             initializedConfig = new Config();
         }
 
@@ -184,7 +188,7 @@ public class MainApp extends Application {
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
         } catch (DataLoadingException e) {
             logger.warning("Preference file at " + prefsFilePath + " could not be loaded."
-                + " Using default preferences.");
+                    + " Using default preferences.");
             initializedPrefs = new UserPrefs();
         }
 
