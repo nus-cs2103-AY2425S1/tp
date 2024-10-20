@@ -43,7 +43,6 @@ public class ModuleCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), expectedStudent);
-        expectedModel.setPersonToDisplay(expectedStudent);
 
         assertCommandSuccess(moduleCommand, model, expectedMessage, expectedModel);
     }

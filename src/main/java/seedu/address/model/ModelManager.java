@@ -96,6 +96,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        setPersonToDisplay(null);
     }
 
     @Override
@@ -112,11 +113,16 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        if (target.isSamePerson(personToDisplay)) {
+            setPersonToDisplay(null);
+        }
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+
+        setPersonToDisplay(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -125,6 +131,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        setPersonToDisplay(editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -145,9 +152,10 @@ public class ModelManager implements Model {
     }
 
     //=========== Person To Display =========================================================================
+
     @Override
     public void setPersonToDisplay(Person personToDisplay) {
-        if (filteredPersons.contains(personToDisplay)) {
+        if (personToDisplay == null || addressBook.hasPerson(personToDisplay)) {
             this.personToDisplay = personToDisplay;
         }
     }

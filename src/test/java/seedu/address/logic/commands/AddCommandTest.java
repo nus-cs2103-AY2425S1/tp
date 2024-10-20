@@ -205,11 +205,6 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
-        }
-
-        @Override
-        public void setPersonToDisplay(Person person) {
-            requireNonNull(person);
             personDisplayed = person;
         }
 
