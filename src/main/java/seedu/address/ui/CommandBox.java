@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandTextHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -18,6 +19,8 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
+    private final CommandTextHistory commandTextHistory;
+
     @FXML
     private TextField commandTextField;
 
@@ -29,6 +32,20 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        commandTextHistory = new CommandTextHistory();
+        commandTextField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+            case UP:
+                commandTextField.setText(commandTextHistory.getPreviousCommand());
+                break;
+            case DOWN:
+                commandTextField.setText(commandTextHistory.getNextCommand());
+                break;
+            default:
+                break;
+            }
+        });
     }
 
     /**
@@ -46,6 +63,8 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        } finally {
+            commandTextHistory.addCommand(commandText);
         }
     }
 
