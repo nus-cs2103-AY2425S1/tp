@@ -1,5 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.EMPLOYEE_ID_DESC_BOB;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.UnassignCommand;
@@ -8,13 +16,6 @@ import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.testutil.TypicalProjects;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.commands.CommandTestUtil.EMPLOYEE_ID_DESC_BOB;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class UnassignCommandParserTest {
     private UnassignCommandParser parser = new UnassignCommandParser();
@@ -31,7 +32,7 @@ public class UnassignCommandParserTest {
     }
 
     @Test
-    public void parse_ProjectIdAndEmployeeIdPresent_success() {
+    public void parse_projectIdAndEmployeeIdPresent_success() {
         Assignment expectedAssignment = new AssignmentBuilder().withAssignmentId(VALID_ASSIGNMENT_ID_ONE)
                 .withPerson(TypicalPersons.BOB).withProject(TypicalProjects.BETA).build();
 
@@ -39,7 +40,8 @@ public class UnassignCommandParserTest {
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + PROJECT_ID_DESC_BETA
                         + EMPLOYEE_ID_DESC_BOB,
-                new UnassignCommand(expectedAssignment.getProject().getId(), expectedAssignment.getPerson().getEmployeeId()));
+                new UnassignCommand(expectedAssignment.getProject().getId(),
+                        expectedAssignment.getPerson().getEmployeeId()));
     }
 
     @Test
@@ -53,7 +55,7 @@ public class UnassignCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ASSIGNMENT_ID));
 
         // multiple projectIds
-        assertParseFailure(parser,  PROJECT_ID_DESC_ALPHA + validExpectedProjectIdAndEmployeeIdString,
+        assertParseFailure(parser, PROJECT_ID_DESC_ALPHA + validExpectedProjectIdAndEmployeeIdString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PROJECT_ID));
 
         // multiple employeeIds
