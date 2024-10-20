@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +10,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -117,9 +118,11 @@ public class DeletePropertyToBuyCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        List<Property> updatedListOfSellingProperties = editPersonDescriptor.getSellingProperties()
+        ObservableList<Property> updatedListOfSellingProperties = (ObservableList<Property>)
+                editPersonDescriptor.getSellingProperties()
                 .orElse(personToEdit.getListOfSellingProperties());
-        List<Property> updatedListOfBuyingProperties = editPersonDescriptor.getBuyingProperties()
+        ObservableList<Property> updatedListOfBuyingProperties = (ObservableList<Property>)
+                editPersonDescriptor.getBuyingProperties()
                 .orElse(personToEdit.getListOfBuyingProperties());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
@@ -162,8 +165,8 @@ public class DeletePropertyToBuyCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private List<Property> sellingProperties;
-        private List<Property> buyingProperties;
+        private ObservableList<Property> sellingProperties;
+        private ObservableList<Property> buyingProperties;
 
         public EditPersonPropertyToBuyDescriptor() {}
 
@@ -238,7 +241,8 @@ public class DeletePropertyToBuyCommand extends Command {
         }
 
         public void setSellingProperties(List<Property> sellingProperties) {
-            this.sellingProperties = (sellingProperties != null) ? new ArrayList<>(sellingProperties) : null;
+            this.sellingProperties = (sellingProperties != null) ? FXCollections.observableArrayList(sellingProperties)
+                    : null;
         }
 
         public Optional<List<Property>> getSellingProperties() {
@@ -246,7 +250,8 @@ public class DeletePropertyToBuyCommand extends Command {
         }
 
         public void setBuyingProperties(List<Property> buyingProperties) {
-            this.buyingProperties = (buyingProperties != null) ? new ArrayList<>(buyingProperties) : null;
+            this.buyingProperties = (buyingProperties != null) ? FXCollections.observableArrayList(buyingProperties)
+                    : null;
         }
 
         public Optional<List<Property>> getBuyingProperties() {
