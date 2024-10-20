@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -118,7 +117,7 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     }
 
     @Override
-    public Set<Tag> getTagsList() {
+    public ObservableList<Tag> getTagList() {
         return persons.asTagList();
     }
 

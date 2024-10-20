@@ -123,12 +123,12 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Returns the tag list of the Persons recorded
      */
-    public Set<Tag> asTagList() {
+    public ObservableList<Tag> asTagList() {
         Set<Tag> tagSet = new HashSet<>();
         for (Person person : internalList) {
             tagSet.addAll(person.getTags());
         }
-        return tagSet;
+        return FXCollections.observableArrayList(tagSet);
     }
 
     @Override

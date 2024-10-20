@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,7 +23,7 @@ public class ModelManager implements Model {
     private final CampusConnect campusConnect;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private Set<Tag> currentlyDefinedTags;
+    private ObservableList<Tag> currentlyDefinedTags;
 
     /**
      * Initializes a ModelManager with the given campusConnect and userPrefs.
@@ -37,7 +36,7 @@ public class ModelManager implements Model {
         this.campusConnect = new CampusConnect(campusConnect);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.campusConnect.getPersonList());
-        this.currentlyDefinedTags = this.campusConnect.getTagsList();
+        this.currentlyDefinedTags = this.campusConnect.getTagList();
     }
 
     public ModelManager() {
@@ -136,7 +135,7 @@ public class ModelManager implements Model {
      * Returns a list of tags currently defined in CampusConnect
      */
     @Override
-    public Set<Tag> getListOfCurrentTags() {
+    public ObservableList<Tag> getListOfCurrentTags() {
         return this.currentlyDefinedTags;
     }
 

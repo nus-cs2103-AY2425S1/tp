@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -89,7 +88,7 @@ public interface Model {
     /**
      * Returns a list of tags currently defined in CampusConnect
      */
-    Set<Tag> getListOfCurrentTags();
+    ObservableList<Tag> getListOfCurrentTags();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.

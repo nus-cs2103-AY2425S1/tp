@@ -4,9 +4,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-import java.util.Set;
-
 /**
  * Unmodifiable view of an address book
  */
@@ -21,6 +18,6 @@ public interface ReadOnlyCampusConnect {
     /**
      * Returns a list of persons as a list of strings representing their tags.
      */
-    Set<Tag> getTagsList();
+    ObservableList<Tag> getTagList();
 
 }

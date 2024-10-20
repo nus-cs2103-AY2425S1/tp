@@ -20,8 +20,6 @@
   <scene>
     <Scene>
       <stylesheets>
-<!--        <URL value="@DarkTheme.css" />-->
-<!--        <URL value="@Extensions.css" />-->
         <URL value="@CampusConnectTheme.css" />
         <URL value="@CampusConnectExtensions.css" />
       </stylesheets>
@@ -49,27 +47,24 @@
           </padding>
         </StackPane>
 
-<!--        <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">-->
-<!--          <padding>-->
-<!--            <Insets top="10" right="10" bottom="10" left="10" />-->
-<!--          </padding>-->
-<!--          <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>-->
-<!--        </VBox>-->
-
-<!--        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />-->
-
         <SplitPane VBox.vgrow="ALWAYS">
-          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340">
+          <!-- Person List Section -->
+          <VBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <ScrollPane fx:id="tagsScrollPane" minWidth="100" prefWidth="150">
-            <VBox fx:id="tagsListContainer" />
-          </ScrollPane>
+          <!-- Tags List Section -->
+          <VBox fx:id="tagsList" styleClass="pane-with-border" minWidth="250" prefWidth="250" VBox.vgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="tagsListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
         </SplitPane>
+
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

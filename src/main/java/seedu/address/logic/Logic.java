@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
-import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -36,7 +35,7 @@ public interface Logic {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns a list of currently defined tags */
-    Set<Tag> getListOfCurrentTags();
+    ObservableList<Tag> getListOfCurrentTags();
 
     /**
      * Returns the user prefs' address book file path.
