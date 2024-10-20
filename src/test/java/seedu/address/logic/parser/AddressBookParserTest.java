@@ -135,9 +135,9 @@ public class AddressBookParserTest {
         //wrong parameter (is not e or ph)
         assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
 
-        //additional text behind parameter
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " e 3") instanceof ListEmployeeCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3") instanceof ListPotentialCommand);
+        //additional text behind parameter should not work
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " e 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3"));
     }
 
     @Test
