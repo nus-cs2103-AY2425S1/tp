@@ -10,6 +10,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS_ONLY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.DANIEL;
+import static seedu.address.testutil.TypicalMeetings.MEETING_BEDOK;
+import static seedu.address.testutil.TypicalMeetings.MEETING_CLEMENTI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalProperty.BEDOK;
@@ -32,6 +34,7 @@ import seedu.address.model.client.Seller;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
+import seedu.address.testutil.MeetingBookBuilder;
 
 public class ModelManagerTest {
 
@@ -177,14 +180,18 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         ClientBook clientBook = new ClientBookBuilder().withClient(CARL).withClient(DANIEL).build();
+        MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK).withMeeting(MEETING_CLEMENTI)
+                .build();
+
         AddressBook differentAddressBook = new AddressBook();
         PropertyBook propertyBook = new PropertyBook();
         ClientBook differentClientBook = new ClientBook();
+        MeetingBook differentMeetingBook = new MeetingBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, propertyBook, clientBook);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, propertyBook, clientBook);
+        modelManager = new ModelManager(addressBook, userPrefs, propertyBook, clientBook, meetingBook);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, propertyBook, clientBook, meetingBook);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -198,12 +205,13 @@ public class ModelManagerTest {
 
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new PropertyBook(),
-                differentClientBook)));
+                differentClientBook, differentMeetingBook)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new PropertyBook(), clientBook)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new PropertyBook(), clientBook,
+                meetingBook)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -212,7 +220,7 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new PropertyBook(),
-                clientBook)));
+                clientBook, meetingBook)));
     }
 
     @Test
