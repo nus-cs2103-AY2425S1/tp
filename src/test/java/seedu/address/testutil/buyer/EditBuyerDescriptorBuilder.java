@@ -1,38 +1,38 @@
-package seedu.address.testutil;
+package seedu.address.testutil.buyer;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.buyer.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
 import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
-import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditBuyerDescriptor objects.
  */
 public class EditBuyerDescriptorBuilder {
 
-    private EditPersonDescriptor descriptor;
+    private EditBuyerDescriptor descriptor;
 
     public EditBuyerDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditBuyerDescriptor();
     }
 
-    public EditBuyerDescriptorBuilder(EditPersonDescriptor descriptor) {
-        this.descriptor = new EditPersonDescriptor(descriptor);
+    public EditBuyerDescriptorBuilder(EditBuyerDescriptor descriptor) {
+        this.descriptor = new EditBuyerDescriptor(descriptor);
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code buyer}'s details
+     * Returns an {@code EditBuyerDescriptor} with fields containing {@code buyer}'s details
      */
     public EditBuyerDescriptorBuilder(Buyer buyer) {
-        descriptor = new EditPersonDescriptor();
+        descriptor = new EditBuyerDescriptor();
         descriptor.setName(buyer.getName());
         descriptor.setPhone(buyer.getPhone());
         descriptor.setEmail(buyer.getEmail());
@@ -42,7 +42,7 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -50,7 +50,7 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Phone} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
@@ -58,7 +58,7 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -66,7 +66,7 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Address} of the {@code EditBuyerDescriptor} that we are building.
      */
     public EditBuyerDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
@@ -74,15 +74,15 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code BuyerType} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code BuyerType} of the {@code EditBuyerDescriptor} that we are building.
      */
-    public EditBuyerDescriptorBuilder withPersonType(String personType) {
-        descriptor.setBuyerType(new BuyerType(personType));
+    public EditBuyerDescriptorBuilder withBuyerType(String buyerType) {
+        descriptor.setBuyerType(new BuyerType(buyerType));
         return this;
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditBuyerDescriptor}
      * that we are building.
      */
     public EditBuyerDescriptorBuilder withTags(String... tags) {
@@ -91,7 +91,7 @@ public class EditBuyerDescriptorBuilder {
         return this;
     }
 
-    public EditPersonDescriptor build() {
+    public EditBuyerDescriptor build() {
         return descriptor;
     }
 }

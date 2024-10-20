@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a meetup's starting time in the address book.
+ * Represents a meetup's starting time in the buyer list.
  */
 public class To {
 

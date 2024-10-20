@@ -114,12 +114,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getBuyerListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setBuyerListFilePath(Path buyerListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -129,12 +129,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyBuyerList newData) {
+        public void setBuyerList(ReadOnlyBuyerList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyBuyerList getAddressBook() {
+        public ReadOnlyBuyerList getBuyerList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,7 +144,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson(Buyer target) {
+        public void deleteBuyer(Buyer target) {
             throw new AssertionError("This method should not be called.");
         }
 

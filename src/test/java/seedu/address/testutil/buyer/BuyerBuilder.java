@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.buyer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,7 @@ import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SamplePersonDataUtil;
+import seedu.address.model.util.SampleBuyerDataUtil;
 
 /**
  * A utility class to help with building Buyer objects.
@@ -21,7 +21,7 @@ public class BuyerBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_PERSON_TYPE = "buyer";
+    public static final String DEFAULT_BUYER_TYPE = "buyer";
 
     private Name name;
     private Phone phone;
@@ -38,7 +38,7 @@ public class BuyerBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        buyerType = new BuyerType(DEFAULT_PERSON_TYPE);
+        buyerType = new BuyerType(DEFAULT_BUYER_TYPE);
         tags = new HashSet<>();
     }
 
@@ -66,7 +66,7 @@ public class BuyerBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Buyer} that we are building.
      */
     public BuyerBuilder withTags(String ... tags) {
-        this.tags = SamplePersonDataUtil.getTagSet(tags);
+        this.tags = SampleBuyerDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -97,8 +97,8 @@ public class BuyerBuilder {
     /**
      * Sets the {@code BuyerType} of the {@code Buyer} that we are building.
      */
-    public BuyerBuilder withPersonType(String personType) {
-        this.buyerType = new BuyerType(personType);
+    public BuyerBuilder withBuyerType(String buyerType) {
+        this.buyerType = new BuyerType(buyerType);
         return this;
     }
 

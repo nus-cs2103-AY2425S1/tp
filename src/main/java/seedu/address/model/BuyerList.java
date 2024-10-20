@@ -13,7 +13,7 @@ import seedu.address.model.buyer.UniqueBuyerList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameBuyer comparison)
  */
-public class AddressBook implements ReadOnlyBuyerList {
+public class BuyerList implements ReadOnlyBuyerList {
 
     private final UniqueBuyerList buyers;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyBuyerList {
         buyers = new UniqueBuyerList();
     }
 
-    public AddressBook() {}
+    public BuyerList() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an BuyerList using the Buyers in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyBuyerList toBeCopied) {
+    public BuyerList(ReadOnlyBuyerList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,7 +49,7 @@ public class AddressBook implements ReadOnlyBuyerList {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code BuyerList} with {@code newData}.
      */
     public void resetData(ReadOnlyBuyerList newData) {
         requireNonNull(newData);
@@ -60,7 +60,7 @@ public class AddressBook implements ReadOnlyBuyerList {
     //// buyer-level operations
 
     /**
-     * Returns true if a buyer with the same identity as {@code buyer} exists in the address book.
+     * Returns true if a buyer with the same identity as {@code buyer} exists in the buyer list.
      */
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
@@ -68,8 +68,8 @@ public class AddressBook implements ReadOnlyBuyerList {
     }
 
     /**
-     * Adds a buyer to the address book.
-     * The buyer must not already exist in the address book.
+     * Adds a buyer to the buyer list.
+     * The buyer must not already exist in the buyer list.
      */
     public void addBuyer(Buyer p) {
         buyers.add(p);
@@ -77,8 +77,8 @@ public class AddressBook implements ReadOnlyBuyerList {
 
     /**
      * Replaces the given buyer {@code target} in the list with {@code editedBuyer}.
-     * {@code target} must exist in the address book.
-     * The buyer identity of {@code editedBuyer} must not be the same as another existing buyer in the address book.
+     * {@code target} must exist in the buyer list.
+     * The buyer identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
     public void setBuyer(Buyer target, Buyer editedBuyer) {
         requireNonNull(editedBuyer);
@@ -87,10 +87,10 @@ public class AddressBook implements ReadOnlyBuyerList {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code BuyerList}.
+     * {@code key} must exist in the buyer list.
      */
-    public void removePerson(Buyer key) {
+    public void removeBuyer(Buyer key) {
         buyers.remove(key);
     }
 
@@ -115,12 +115,12 @@ public class AddressBook implements ReadOnlyBuyerList {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof BuyerList)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return buyers.equals(otherAddressBook.buyers);
+        BuyerList otherBuyerList = (BuyerList) other;
+        return buyers.equals(otherBuyerList.buyers);
     }
 
     @Override

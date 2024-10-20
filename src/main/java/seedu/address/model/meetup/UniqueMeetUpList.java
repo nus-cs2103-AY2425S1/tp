@@ -11,15 +11,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.exceptions.DuplicateMeetUpException;
 import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
-import seedu.address.model.buyer.Buyer;
 
 /**
  * TODO JAVADOC + ENTIRE DOCUMENTATION
  * A list of meet ups that enforces uniqueness between its elements and does not allow nulls.
  * A meet ups is considered unique by comparing using {@code Buyer#isSameBuyer(Buyer)}. As such, adding and updating
- * of persons uses Buyer#isSameBuyer(Buyer) for equality so as to ensure that the buyer being added or updated is
+ * of buyers uses Buyer#isSameBuyer(Buyer) for equality so as to ensure that the buyer being added or updated is
  * unique in terms of identity in the UniqueBuyerList. However, the removal of a buyer uses Buyer#equals(Object) so
  * as to ensure that the buyer with exactly the same fields will be removed.
  * <p>
@@ -91,8 +91,8 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code buyers}.
+     * {@code buyers} must not contain duplicate buyers.
      */
     public void setMeetUps(List<MeetUp> meetUps) {
         requireAllNonNull(meetUps);

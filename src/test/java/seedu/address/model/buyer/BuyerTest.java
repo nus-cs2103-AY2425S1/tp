@@ -9,12 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBuyers.ALICE;
-import static seedu.address.testutil.TypicalBuyers.BOB;
+import static seedu.address.testutil.buyer.TypicalBuyers.ALICE;
+import static seedu.address.testutil.buyer.TypicalBuyers.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class BuyerTest {
 

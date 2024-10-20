@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.meetup.EditCommand.EditMeetUpDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -34,7 +34,7 @@ import seedu.address.testutil.meetup.MeetUpBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -45,7 +45,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setMeetUp(model.getFilteredMeetUpList().get(0), editedMeetUp);
 
@@ -66,7 +66,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setMeetUp(lastMeetUp, editedMeetUp);
 
@@ -81,7 +81,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -99,7 +99,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setMeetUp(model.getFilteredMeetUpList().get(0), editedMeetUp);
 
@@ -119,7 +119,7 @@ public class EditCommandTest {
     public void execute_duplicateMeetUpFilteredList_failure() {
         showMeetUpAtIndex(model, INDEX_FIRST_MEETUP);
 
-        // edit meetup in filtered list into a duplicate in address book
+        // edit meetup in filtered list into a duplicate in buyer list
         MeetUp meetUpInList = model.getMeetUpList().getMeetUpList().get(INDEX_SECOND_MEETUP.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MEETUP,
                 new EditMeetUpDescriptorBuilder(meetUpInList).build());

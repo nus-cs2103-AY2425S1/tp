@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Deletes a meetup identified using it's displayed index from the meetup list.
+ * Deletes a meet-up identified using it's displayed index from the meet-up list.
  */
 public class DeleteCommand extends Command {
 

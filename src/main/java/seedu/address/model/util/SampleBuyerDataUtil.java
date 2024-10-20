@@ -4,21 +4,21 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.buyer.Address;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
-import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code ReadOnlyBuyerList} with sample data.
  */
-public class SamplePersonDataUtil {
-    public static Buyer[] getSamplePersons() {
+public class SampleBuyerDataUtil {
+    public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -47,9 +47,9 @@ public class SamplePersonDataUtil {
         };
     }
 
-    public static ReadOnlyBuyerList getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Buyer sampleBuyer : getSamplePersons()) {
+    public static ReadOnlyBuyerList getSampleBuyerList() {
+        BuyerList sampleAb = new BuyerList();
+        for (Buyer sampleBuyer : getSampleBuyers()) {
             sampleAb.addBuyer(sampleBuyer);
         }
         return sampleAb;

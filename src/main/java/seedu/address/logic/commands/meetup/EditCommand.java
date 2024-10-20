@@ -26,13 +26,14 @@ import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
 
 /**
- * Edits the details of an existing meetup in the address book.
+ * Edits the details of an existing meet-up in the meet-up list.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "editm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meet-up in the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meet-up identified "
+            + "by the index number used in the displayed meet-up list. "
             + "Existing meet-up will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_NAME + "NAME] "
@@ -85,7 +86,7 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code MeetUp} with the details of {@code meetUpToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editBuyerDescriptor}.
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
                                                  EditCommand.EditMeetUpDescriptor editMeetUpDescriptor) {

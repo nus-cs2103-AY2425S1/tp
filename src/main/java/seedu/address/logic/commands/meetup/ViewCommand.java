@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 
 /**
- * Lists all meetUps in the address book to the user.
+ * Lists all meet-ups in the meet-up list.
  */
 public class ViewCommand extends Command {
 

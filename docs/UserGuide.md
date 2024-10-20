@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a buyer: `add`
 
-Adds a buyer to the address book.
+Adds a buyer to the buyer list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/<buyer,seller> [t/TAG]…​`
 
@@ -91,13 +91,13 @@ Examples:
 
 ### Listing all buyers : `list`
 
-Shows a list of all buyers in the address book.
+Shows a list of all buyers in the buyer list.
 
 Format: `list`
 
 <div markdown="block" class="alert alert-info">:hourglass_flowing_sand: **Expected change in release v1.2**
 
-You will be able to view all people or filter by your contact type in the address book.
+You will be able to view all people or filter by your contact type in the buyer list.
 
 Format: `view [t/<buyer,seller>]`
 
@@ -108,7 +108,7 @@ Examples:
 
 ### Editing a buyer : `edit`
 
-Edits an existing buyer in the address book.
+Edits an existing buyer in the buyer list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -133,7 +133,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Buyers matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -143,7 +143,7 @@ Examples:
 
 ### Deleting a buyer : `delete`
 
-Deletes the specified buyer from the address book.
+Deletes the specified buyer from the buyer list.
 
 Format: `delete INDEX`
 
@@ -152,12 +152,12 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd buyer in the address book.
+* `list` followed by `delete 2` deletes the 2nd buyer in the buyer list.
 * `find Betsy` followed by `delete 1` deletes the 1st buyer in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the buyer list.
 
 Format: `clear`
 
@@ -169,15 +169,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+BuyerList data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+BuyerList data are saved automatically as a JSON file `[JAR file location]/data/buyerlist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, BuyerList will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the BuyerList to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Meet up `[coming in v1.2]`
@@ -197,7 +197,7 @@ Examples:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous BuyerList home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

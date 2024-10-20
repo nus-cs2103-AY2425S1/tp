@@ -10,44 +10,44 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.buyer.EditCommand.EditPersonDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
+import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.testutil.BuyerBuilder;
-import seedu.address.testutil.EditBuyerDescriptorBuilder;
+import seedu.address.testutil.buyer.BuyerBuilder;
+import seedu.address.testutil.buyer.EditBuyerDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Buyer editedBuyer = new BuyerBuilder().build();
-        EditPersonDescriptor descriptor = new EditBuyerDescriptorBuilder(editedBuyer).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(editedBuyer).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
                 Messages.format(editedBuyer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
 
@@ -56,21 +56,21 @@ public class EditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredBuyerList().size());
-        Buyer lastBuyer = model.getFilteredBuyerList().get(indexLastPerson.getZeroBased());
+        Index indexLastBuyer = Index.fromOneBased(model.getFilteredBuyerList().size());
+        Buyer lastBuyer = model.getFilteredBuyerList().get(indexLastBuyer.getZeroBased());
 
-        BuyerBuilder personInList = new BuyerBuilder(lastBuyer);
-        Buyer editedBuyer = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
+        BuyerBuilder buyerInList = new BuyerBuilder(lastBuyer);
+        Buyer editedBuyer = buyerInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
-        EditPersonDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastBuyer, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
                 Messages.format(editedBuyer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setBuyer(lastBuyer, editedBuyer);
 
@@ -79,13 +79,13 @@ public class EditCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
-        Buyer editedBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER, new EditBuyerDescriptor());
+        Buyer editedBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
                 Messages.format(editedBuyer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -93,17 +93,17 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
 
-        Buyer buyerInFilteredList = model.getFilteredBuyerList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Buyer buyerInFilteredList = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
         Buyer editedBuyer = new BuyerBuilder(buyerInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER,
                 new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_BUYER_SUCCESS,
                 Messages.format(editedBuyer));
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+        Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
 
@@ -111,59 +111,59 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Buyer firstBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_PERSON.getZeroBased());
-        EditPersonDescriptor descriptor = new EditBuyerDescriptorBuilder(firstBuyer).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor);
+    public void execute_duplicateBuyerUnfilteredList_failure() {
+        Buyer firstBuyer = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(firstBuyer).build();
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_BUYER, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_BUYER);
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+    public void execute_duplicateBuyerFilteredList_failure() {
+        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
 
-        // edit buyer in filtered list into a duplicate in address book
-        Buyer buyerInList = model.getAddressBook().getBuyerList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
+        // edit buyer in filtered list into a duplicate in buyer list
+        Buyer buyerInList = model.getBuyerList().getBuyerList().get(INDEX_SECOND_BUYER.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_BUYER,
                 new EditBuyerDescriptorBuilder(buyerInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_BUYER);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
+    public void execute_invalidBuyerIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBuyerList().size() + 1);
-        EditPersonDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB).build();
+        EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
     }
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * but smaller than size of buyer list
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getBuyerList().size());
+    public void execute_invalidBuyerIndexFilteredList_failure() {
+        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
+        Index outOfBoundIndex = INDEX_SECOND_BUYER;
+        // ensures that outOfBoundIndex is still in bounds of buyer list list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getBuyerList().getBuyerList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_PERSON, DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_BUYER, DESC_AMY);
 
         // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditBuyerDescriptor copyDescriptor = new EditBuyerDescriptor(DESC_AMY);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_BUYER, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -176,19 +176,19 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_BUYER, DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_PERSON, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_BUYER, DESC_BOB)));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        EditCommand editCommand = new EditCommand(index, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editPersonDescriptor="
-                + editPersonDescriptor + "}";
+        EditBuyerDescriptor editBuyerDescriptor = new EditBuyerDescriptor();
+        EditCommand editCommand = new EditCommand(index, editBuyerDescriptor);
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editBuyerDescriptor="
+                + editBuyerDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }
 

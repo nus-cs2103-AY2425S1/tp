@@ -15,13 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Adds a meetup to the address book.
+ * Adds a meet-up to the meet-up list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meet-up to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meet-up to the application. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_INFO + "INFO "
@@ -34,7 +34,7 @@ public class AddCommand extends Command {
             + PREFIX_TO + "2024-02-03 15:30 ";
 
     public static final String MESSAGE_SUCCESS = "New meet-up added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the application";
 
     private final MeetUp toAdd;
 

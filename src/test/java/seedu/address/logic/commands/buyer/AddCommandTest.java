@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBuyers.ALICE;
+import static seedu.address.testutil.buyer.TypicalBuyers.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -19,24 +19,24 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullBuyer_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_buyerAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
         Buyer validBuyer = new BuyerBuilder().build();
 
@@ -48,13 +48,13 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateBuyer_throwsCommandException() {
         Buyer validBuyer = new BuyerBuilder().build();
         AddCommand addCommand = new AddCommand(validBuyer);
         ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+                AddCommand.MESSAGE_DUPLICATE_BUYER, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -113,12 +113,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getBuyerListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setBuyerListFilePath(Path buyerListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -128,12 +128,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyBuyerList newData) {
+        public void setBuyerList(ReadOnlyBuyerList newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyBuyerList getAddressBook() {
+        public ReadOnlyBuyerList getBuyerList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -143,7 +143,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deletePerson(Buyer target) {
+        public void deleteBuyer(Buyer target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -252,8 +252,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyBuyerList getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyBuyerList getBuyerList() {
+            return new BuyerList();
         }
     }
 

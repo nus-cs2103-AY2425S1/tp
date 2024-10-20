@@ -10,17 +10,17 @@ import seedu.address.model.Model;
 import seedu.address.model.buyer.BuyerFulfilsPredicate;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all buyers in the buyer list.
  */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_SUCCESS = "Viewing all persons satisfying client type";
+    public static final String MESSAGE_SUCCESS = "Viewing all buyers satisfying client type";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose buyer types match the keyword"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all buyers whose buyer types match the keyword"
             + "(buyer/seller) and displays them as a list with index numbers.\n"
-            + "If there are no keywords specified, all persons are listed.\n"
+            + "If there are no keywords specified, all buyers are listed.\n"
             + "Parameters: [buyer/seller](optional)\n"
             + "Example: " + COMMAND_WORD + " buyer";
 
@@ -35,7 +35,7 @@ public class ViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredBuyerList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredBuyerList().size())
+                String.format(Messages.MESSAGE_BUYERS_LISTED_OVERVIEW, model.getFilteredBuyerList().size())
         );
     }
 

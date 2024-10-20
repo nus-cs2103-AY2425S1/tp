@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 
 import java.nio.file.Path;
 
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.buyer.JsonBuyerListStorage;
@@ -26,10 +26,10 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonBuyerListStorage addressBookStorage = new JsonBuyerListStorage(getTempFilePath("ab"));
+        JsonBuyerListStorage buyerListStorage = new JsonBuyerListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         JsonMeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(getTempFilePath("ml"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
+        storageManager = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -51,21 +51,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void buyerListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonAddressBookStorageTest} class.
+         * {@link JsonBuyerListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonBuyerListStorageTest} class.
          */
-        AddressBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyBuyerList retrieved = storageManager.readAddressBook().get();
-        assertEquals(original, new AddressBook(retrieved));
+        BuyerList original = getTypicalBuyerList();
+        storageManager.saveBuyerList(original);
+        ReadOnlyBuyerList retrieved = storageManager.readBuyerList().get();
+        assertEquals(original, new BuyerList(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getBuyerListFilePath() {
+        assertNotNull(storageManager.getBuyerListFilePath());
     }
 
 }

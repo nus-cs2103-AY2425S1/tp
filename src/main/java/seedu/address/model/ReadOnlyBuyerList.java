@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.buyer.Buyer;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a buyer list
  */
 public interface ReadOnlyBuyerList {
 

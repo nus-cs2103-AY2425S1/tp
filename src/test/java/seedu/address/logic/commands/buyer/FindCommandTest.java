@@ -3,13 +3,13 @@ package seedu.address.logic.commands.buyer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_BUYERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.buyer.TypicalBuyers.CARL;
+import static seedu.address.testutil.buyer.TypicalBuyers.ELLE;
+import static seedu.address.testutil.buyer.TypicalBuyers.FIONA;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalBuyers.CARL;
-import static seedu.address.testutil.TypicalBuyers.ELLE;
-import static seedu.address.testutil.TypicalBuyers.FIONA;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.address.model.buyer.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
+    private Model expectedModel = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
 
     @Test
     public void equals() {
@@ -56,8 +56,8 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_zeroKeywords_noBuyerFound() {
+        String expectedMessage = String.format(MESSAGE_BUYERS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBuyerList(predicate);
@@ -66,8 +66,8 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+    public void execute_multipleKeywords_multipleBuyersFound() {
+        String expectedMessage = String.format(MESSAGE_BUYERS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredBuyerList(predicate);

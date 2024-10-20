@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.buyer;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
 import seedu.address.model.buyer.Buyer;
 
 /**
@@ -26,13 +26,13 @@ public class TypicalBuyers {
     public static final Buyer ALICE = new BuyerBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withPersonType("seller")
+            .withBuyerType("seller")
             .withTags("friends").build();
     public static final Buyer BENSON = new BuyerBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withPersonType("buyer")
+            .withBuyerType("buyer")
             .withTags("owesMoney", "friends").build();
     public static final Buyer CARL = new BuyerBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();
@@ -63,17 +63,17 @@ public class TypicalBuyers {
     private TypicalBuyers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical buyers.
+     * Returns an {@code BuyerList} with all the typical buyers.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Buyer buyer : getTypicalPersons()) {
+    public static BuyerList getTypicalBuyerList() {
+        BuyerList ab = new BuyerList();
+        for (Buyer buyer : getTypicalBuyers()) {
             ab.addBuyer(buyer);
         }
         return ab;
     }
 
-    public static List<Buyer> getTypicalPersons() {
+    public static List<Buyer> getTypicalBuyers() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

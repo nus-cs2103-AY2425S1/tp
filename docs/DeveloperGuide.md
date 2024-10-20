@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Buyer` object residing in the `Model`.
 
 ### Logic component
 
@@ -100,7 +100,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
+1. When `Logic` is called upon to execute a command, it is passed to an `BuyerListParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a buyer).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
@@ -111,7 +111,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `BuyerListParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `BuyerListParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Buyer` objects (which are contained in a `UniqueBuyerList` object).
-* stores the currently 'selected' `Buyer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the buyer list data i.e., all `Buyer` objects (which are contained in a `UniqueBuyerList` object).
+* stores the currently 'selected' `Buyer` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Buyer>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `BuyerList`, which `Buyer` references. This allows `BuyerList` to only require one `Tag` object per unique tag, instead of each `Buyer` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -141,8 +141,8 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* can save both buyer list data and user preference data in JSON format, and read them back into corresponding objects.
+* inherits from both `BuyerListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -159,37 +159,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedBuyerList`. It extends `BuyerList` with an undo/redo history, stored internally as an `buyerListStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedBuyerList#commit()` — Saves the current buyer list state in its history.
+* `VersionedBuyerList#undo()` — Restores the previous buyer list state from its history.
+* `VersionedBuyerList#redo()` — Restores a previously undone buyer list state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitBuyerList()`, `Model#undoBuyerList()` and `Model#redoBuyerList()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedBuyerList` will be initialized with the initial buyer list state, and the `currentStatePointer` pointing to that single buyer list state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th buyer in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th buyer in the buyer list. The `delete` command calls `Model#commitBuyerList()`, causing the modified state of the buyer list after the `delete 5` command executes to be saved in the `buyerListStateList`, and the `currentStatePointer` is shifted to the newly inserted buyer list state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new buyer. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new buyer. The `add` command also calls `Model#commitBuyerList()`, causing another modified buyer list state to be saved into the `buyerListStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitBuyerList()`, so the buyer list state will not be saved into the `buyerListStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the buyer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the buyer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBuyerList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous buyer list state, and restores the buyer list to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial BuyerList state, then there are no previous BuyerList states to restore. The `undo` command uses `Model#canUndoBuyerList()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -206,17 +206,17 @@ Similarly, how an undo operation goes through the `Model` component is shown bel
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoBuyerList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the buyer list to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `buyerListStateList.size() - 1`, pointing to the latest buyer list state, then there are no undone BuyerList states to restore. The `redo` command uses `Model#canRedoBuyerList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the buyer list, such as `list`, will usually not call `Model#commitBuyerList()`, `Model#undoBuyerList()` or `Model#redoBuyerList()`. Thus, the `buyerListStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitBuyerList()`. Since the `currentStatePointer` is not pointing at the end of the `buyerListStateList`, all buyer list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -228,7 +228,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire buyer list.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -291,7 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *` | user                      | collect the name, contact number and email of my clients                                                   |                                                                            |
 | `* * *` | user                      | have a meeting schedule                                                                                    | keep track of future meetings                                              |
 | `* * * ` | user                      | tag clients with labels like `high priority` or `first time buyer`                                         | prioritise my outreach efforts                                             |
-| `* *`  | long-term user of the app | archive old client contacts                                                                                | my address book remains up-to-date without deleting past information       |
+| `* *`  | long-term user of the app | archive old client contacts                                                                                | my buyer list remains up-to-date without deleting past information       |
 | `* *`  | long-term user of the app | mark clients as `inactive` or `closed deal`                                                                | focus on active prospects                                                  |
 | `* *`  | user                      | hide private contact details                                                                               | minimize chance of someone else seeing them by accident                    |
 | `* *`  | user                      | store notes about clients' property preferences                                                            | tailor property recommendations to their needs                             |
@@ -300,7 +300,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`  | user                      | track status of property deals for each client (e.g. `interested`, `offer made`, `contract signed`)        | stay organised                                                             |
 | `* *`  | long-term user of the app | log the last interaction date with the client                                                              | maintain regular communication                                             |
 | `* *`  | expert user               | export my contact list to Excel or CSV                                                                     | share it with colleagues or for reporting purposes                         |
-| `* *`  | expert user               | import contacts from my phone or other databases                                                           | quickly build by address book                                              |
+| `* *`  | expert user               | import contacts from my phone or other databases                                                           | quickly build by buyer list                                              |
 | `* *`  | user                      | add notes to client interactions                                                                           | capture important details discussed in meetings or phone calls             |
 | `* *`  | user                      | set a follow-up frequency for each client                                                                  | stay in regular contact                                                    |
 | `* *`  | user                      | track a client's viewing history                                                                           | know which client have been shown to which property                        |
@@ -317,7 +317,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`    | user                      | generate reports on the number of leads genrated per listing                                               | show sellers the interest their property is receiving                      |
 | `*`    | user                      | manage and log referral partner interactions (e.g. contractors, photographers)                             | maintain strong professional relationships                                 |
 | `*`    | user                      | send property performance updates to sellers (e.g. number of views, showings)                              | keep them informed and engaged                                             |
-| `*`    | user                      | track which clients were referre by past clients                                                           | send personalised appreciation messages and foster long-term relationships |
+| `*`    | user                      | track which clients were referre by past clients                                                           | send buyeralised appreciation messages and foster long-term relationships |
 
 ### Use cases
 

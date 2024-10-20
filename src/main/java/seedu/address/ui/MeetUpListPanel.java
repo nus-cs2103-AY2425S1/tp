@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of buyers.
  */
 public class MeetUpListPanel extends UiPart<Region> {
     private static final String FXML = "MeetUpListPanel.fxml";
@@ -31,7 +31,7 @@ public class MeetUpListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
     class MeetUpListViewCell extends ListCell<MeetUp> {
         @Override

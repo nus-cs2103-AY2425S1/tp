@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 

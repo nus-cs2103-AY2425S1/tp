@@ -2,8 +2,8 @@ package seedu.address.logic.commands.meetup;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
+        model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
     }
 
     @Test
     public void execute_newMeetUp_success() {
         MeetUp meetUp = new MeetUpBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), getTypicalMeetUpList());
+        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), getTypicalMeetUpList());
         expectedModel.addMeetUp(meetUp);
 
         assertCommandSuccess(new AddCommand(meetUp), model,

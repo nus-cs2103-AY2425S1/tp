@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.BuyerBuilder;
+import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class BuyerFulfilsPredicateTest {
 
@@ -35,7 +35,7 @@ public class BuyerFulfilsPredicateTest {
     }
 
     @Test
-    public void test_personFulfilsPredicate_returnsTrue() {
+    public void test_buyerFulfilsPredicate_returnsTrue() {
         // valid buyer-type
         BuyerFulfilsPredicate predicate = new BuyerFulfilsPredicate("buyer");
         assertTrue(predicate.test(new BuyerBuilder().build()));
@@ -46,17 +46,17 @@ public class BuyerFulfilsPredicateTest {
     }
 
     @Test
-    public void test_personDoesNotFulfilPredicate_returnsFalse() {
+    public void test_buyerDoesNotFulfilPredicate_returnsFalse() {
         // non-matching buyer-type
         BuyerFulfilsPredicate predicate = new BuyerFulfilsPredicate("buyer");
-        assertFalse(predicate.test(new BuyerBuilder().withPersonType("seller").build()));
+        assertFalse(predicate.test(new BuyerBuilder().withBuyerType("seller").build()));
     }
 
     @Test
     public void toStringMethod() {
         BuyerFulfilsPredicate predicate = new BuyerFulfilsPredicate("buyer");
 
-        String expected = BuyerFulfilsPredicate.class.getCanonicalName() + "{personType=buyer}";
+        String expected = BuyerFulfilsPredicate.class.getCanonicalName() + "{buyerType=buyer}";
         assertEquals(expected, predicate.toString());
     }
 }

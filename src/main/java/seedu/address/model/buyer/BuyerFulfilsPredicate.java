@@ -39,6 +39,6 @@ public class BuyerFulfilsPredicate implements Predicate<Buyer> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("personType", keyword).toString();
+        return new ToStringBuilder(this).add("buyerType", keyword).toString();
     }
 }

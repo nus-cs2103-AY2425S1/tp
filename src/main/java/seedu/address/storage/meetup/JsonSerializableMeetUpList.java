@@ -24,7 +24,7 @@ public class JsonSerializableMeetUpList {
     private final List<JsonAdaptedMeetUp> meetUps = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableMeetUpList} with the given persons.
+     * Constructs a {@code JsonSerializableMeetUpList} with the given buyers.
      */
     @JsonCreator
     public JsonSerializableMeetUpList(@JsonProperty("meetUps") List<JsonAdaptedMeetUp> meetUps) {
@@ -41,7 +41,7 @@ public class JsonSerializableMeetUpList {
     }
 
     /**
-     * Converts this address book into the model's {@code MeetUpList} object.
+     * Converts this buyer list into the model's {@code MeetUpList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

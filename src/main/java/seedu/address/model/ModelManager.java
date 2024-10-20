@@ -15,38 +15,38 @@ import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the buyer list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final BuyerList buyerList;
     private final MeetUpList meetUpList;
     private final UserPrefs userPrefs;
     private final FilteredList<Buyer> filteredBuyers;
     private final FilteredList<MeetUp> filteredMeetUps;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given buyerList and userPrefs.
      */
-    public ModelManager(ReadOnlyBuyerList addressBook, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList) {
-        requireAllNonNull(addressBook, userPrefs, meetUpList);
+    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList) {
+        requireAllNonNull(buyerList, userPrefs, meetUpList);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+        logger.fine("Initializing with buyer list: " + buyerList + " and user prefs " + userPrefs
                 + "and meet up list " + meetUpList);
 
         logger.info("initial meet up list contains " + meetUpList);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.buyerList = new BuyerList(buyerList);
         this.userPrefs = new UserPrefs(userPrefs);
         this.meetUpList = new MeetUpList(meetUpList);
-        filteredBuyers = new FilteredList<>(this.addressBook.getBuyerList());
+        filteredBuyers = new FilteredList<>(this.buyerList.getBuyerList());
         filteredMeetUps = new FilteredList<>(this.meetUpList.getMeetUpList());
 
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new MeetUpList());
+        this(new BuyerList(), new UserPrefs(), new MeetUpList());
     }
 
     @Override
@@ -61,7 +61,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return buyerList.equals(otherModelManager.buyerList)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBuyers.equals(otherModelManager.filteredBuyers)
                 && filteredMeetUps.equals(otherModelManager.filteredMeetUps);
@@ -92,14 +92,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getBuyerListFilePath() {
+        return userPrefs.getBuyerListFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setBuyerListFilePath(Path buyerListFilePath) {
+        requireNonNull(buyerListFilePath);
+        userPrefs.setBuyerListFilePath(buyerListFilePath);
     }
 
     public Path getMeetUpListFilePath() {
@@ -111,47 +111,47 @@ public class ModelManager implements Model {
         userPrefs.setMeetUpListFilePath(meetUpListFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== BuyerList ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyBuyerList addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setBuyerList(ReadOnlyBuyerList buyerList) {
+        this.buyerList.resetData(buyerList);
     }
 
     @Override
-    public ReadOnlyBuyerList getAddressBook() {
-        return addressBook;
+    public ReadOnlyBuyerList getBuyerList() {
+        return buyerList;
     }
 
     @Override
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.hasBuyer(buyer);
+        return buyerList.hasBuyer(buyer);
     }
 
     @Override
-    public void deletePerson(Buyer target) {
-        addressBook.removePerson(target);
+    public void deleteBuyer(Buyer target) {
+        buyerList.removeBuyer(target);
     }
 
     @Override
     public void addBuyer(Buyer buyer) {
-        addressBook.addBuyer(buyer);
-        updateFilteredBuyerList(PREDICATE_SHOW_ALL_PERSONS);
+        buyerList.addBuyer(buyer);
+        updateFilteredBuyerList(PREDICATE_SHOW_ALL_BUYERS);
     }
 
     @Override
     public void setBuyer(Buyer target, Buyer editedBuyer) {
         requireAllNonNull(target, editedBuyer);
 
-        addressBook.setBuyer(target, editedBuyer);
+        buyerList.setBuyer(target, editedBuyer);
     }
 
     //=========== Filtered Buyer List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedBuyerList}
      */
     @Override
     public ObservableList<Buyer> getFilteredBuyerList() {
@@ -201,7 +201,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedBuyerList}
      */
     @Override
     public ObservableList<MeetUp> getFilteredMeetUpList() {

@@ -3,10 +3,10 @@ package seedu.address.logic.commands.buyer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_BUYERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import java.util.Collections;
 
@@ -28,13 +28,13 @@ public class ViewCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getMeetUpList());
+        model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
+        expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
     }
 
     @Test
     public void execute_zeroKeywords_showsEverything() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_BUYERS_LISTED_OVERVIEW, 7);
         BuyerFulfilsPredicate predicate = preparePredicate("");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredBuyerList(predicate);
@@ -42,8 +42,8 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_invalidKeyword_noPersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+    public void execute_invalidKeyword_noBuyersFound() {
+        String expectedMessage = String.format(MESSAGE_BUYERS_LISTED_OVERVIEW, 0);
         BuyerFulfilsPredicate predicate = preparePredicate("hello");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredBuyerList(predicate);

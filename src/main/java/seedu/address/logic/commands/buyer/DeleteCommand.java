@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.buyer.Buyer;
 
 /**
- * Deletes a buyer identified using it's displayed index from the address book.
+ * Deletes a buyer identified using it's displayed index from the buyer list.
  */
 public class DeleteCommand extends Command {
 
@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Buyer: %1$s";
+    public static final String MESSAGE_DELETE_BUYER_SUCCESS = "Deleted Buyer: %1$s";
 
     private final Index targetIndex;
 
@@ -39,12 +39,12 @@ public class DeleteCommand extends Command {
         List<Buyer> lastShownList = model.getFilteredBuyerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
         }
 
         Buyer buyerToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(buyerToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(buyerToDelete)));
+        model.deleteBuyer(buyerToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_BUYER_SUCCESS, Messages.format(buyerToDelete)));
     }
 
     @Override

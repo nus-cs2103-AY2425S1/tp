@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.buyer.exceptions.DuplicatePersonException;
-import seedu.address.model.buyer.exceptions.PersonNotFoundException;
+import seedu.address.model.buyer.exceptions.BuyerNotFoundException;
+import seedu.address.model.buyer.exceptions.DuplicateBuyerException;
 
 /**
  * A list of buyers that enforces uniqueness between its elements and does not allow nulls.
@@ -42,7 +42,7 @@ public class UniqueBuyerList implements Iterable<Buyer> {
     public void add(Buyer toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateBuyerException();
         }
         internalList.add(toAdd);
     }
@@ -57,11 +57,11 @@ public class UniqueBuyerList implements Iterable<Buyer> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new BuyerNotFoundException();
         }
 
         if (!target.isSameBuyer(editedBuyer) && contains(editedBuyer)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateBuyerException();
         }
 
         internalList.set(index, editedBuyer);
@@ -74,7 +74,7 @@ public class UniqueBuyerList implements Iterable<Buyer> {
     public void remove(Buyer toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
+            throw new BuyerNotFoundException();
         }
     }
 
@@ -90,7 +90,7 @@ public class UniqueBuyerList implements Iterable<Buyer> {
     public void setBuyers(List<Buyer> buyers) {
         requireAllNonNull(buyers);
         if (!buyersAreUnique(buyers)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateBuyerException();
         }
 
         internalList.setAll(buyers);

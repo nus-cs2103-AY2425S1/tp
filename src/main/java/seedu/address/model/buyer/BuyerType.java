@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Buyer's type in the address book.
+ * Represents a Buyer's type in the buyer list.
  */
 public class BuyerType {
 

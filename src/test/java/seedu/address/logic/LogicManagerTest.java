@@ -1,16 +1,16 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_BUYERS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BUYER_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PERSON_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalBuyers.AMY;
+import static seedu.address.testutil.buyer.TypicalBuyers.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -20,8 +20,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.buyer.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.buyer.AddCommand;
 import seedu.address.logic.commands.buyer.ViewCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -32,9 +32,9 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.BuyerBuilder;
 import seedu.address.storage.buyer.JsonBuyerListStorage;
 import seedu.address.storage.meetup.JsonMeetUpListStorage;
+import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -48,12 +48,12 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonBuyerListStorage addressBookStorage =
-                new JsonBuyerListStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonBuyerListStorage buyerListStorage =
+                new JsonBuyerListStorage(temporaryFolder.resolve("buyerList.json"));
         JsonMeetUpListStorage meetUpListStorage =
                 new JsonMeetUpListStorage(temporaryFolder.resolve("meetUpList.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
+        StorageManager storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -66,13 +66,13 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandException(deleteCommand, MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String viewCommand = ViewCommand.COMMAND_WORD;
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
+        String expectedMessage = String.format(MESSAGE_BUYERS_LISTED_OVERVIEW,
                 model.getFilteredBuyerList().size());
         assertCommandSuccess(viewCommand, expectedMessage, model);
     }
@@ -134,7 +134,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getMeetUpList());
+        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -161,10 +161,10 @@ public class LogicManagerTest {
     private void assertCommandFailureForExceptionFromStorage(IOException e, String expectedMessage) {
         Path prefPath = temporaryFolder.resolve("ExceptionUserPrefs.json");
 
-        // Inject LogicManager with an AddressBookStorage that throws the IOException e when saving
-        JsonBuyerListStorage addressBookStorage = new JsonBuyerListStorage(prefPath) {
+        // Inject LogicManager with an BuyerListStorage that throws the IOException e when saving
+        JsonBuyerListStorage buyerListStorage = new JsonBuyerListStorage(prefPath) {
             @Override
-            public void saveBuyerList(ReadOnlyBuyerList addressBook, Path filePath)
+            public void saveBuyerList(ReadOnlyBuyerList buyerList, Path filePath)
                     throws IOException {
                 throw e;
             }
@@ -172,13 +172,13 @@ public class LogicManagerTest {
 
         JsonMeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(prefPath);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(prefPath);
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
+        StorageManager storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
 
         logic = new LogicManager(model, storage);
 
-        // Triggers the saveAddressBook method by executing an add command
+        // Triggers the saveBuyerList method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + PERSON_TYPE_DESC_AMY;
+                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + BUYER_TYPE_DESC_AMY;
         Buyer expectedBuyer = new BuyerBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addBuyer(expectedBuyer);

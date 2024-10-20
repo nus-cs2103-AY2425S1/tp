@@ -52,12 +52,12 @@ public class JsonMeetUpListStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidMeetUpList_throwDataLoadingException() {
+    public void readBuyerList_invalidMeetUpList_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readMeetUpList("invalidMeetUpList.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidMeetUpList_throwDataLoadingException() {
+    public void readBuyerList_invalidAndValidMeetUpList_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readMeetUpList("invalidAndValidMeetUpList.json"));
     }
 
@@ -93,7 +93,7 @@ public class JsonMeetUpListStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code buyerList} at the specified {@code filePath}.
      */
     private void saveMeetUpList(ReadOnlyMeetUpList meetUpList, String filePath) {
         try {

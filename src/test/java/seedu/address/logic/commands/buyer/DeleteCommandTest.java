@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
+import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,18 +26,18 @@ import seedu.address.model.buyer.Buyer;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Buyer buyerToDelete = model.getFilteredBuyerList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Buyer buyerToDelete = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_BUYER);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BUYER_SUCCESS,
                 Messages.format(buyerToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getMeetUpList());
-        expectedModel.deletePerson(buyerToDelete);
+        ModelManager expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        expectedModel.deleteBuyer(buyerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
@@ -47,49 +47,49 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredBuyerList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
 
-        Buyer buyerToDelete = model.getFilteredBuyerList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
+        Buyer buyerToDelete = model.getFilteredBuyerList().get(INDEX_FIRST_BUYER.getZeroBased());
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_BUYER);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BUYER_SUCCESS,
                 Messages.format(buyerToDelete));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getMeetUpList());
-        expectedModel.deletePerson(buyerToDelete);
-        showNoPerson(expectedModel);
+        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        expectedModel.deleteBuyer(buyerToDelete);
+        showNoBuyer(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showBuyerAtIndex(model, INDEX_FIRST_BUYER);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getBuyerList().size());
+        Index outOfBoundIndex = INDEX_SECOND_BUYER;
+        // ensures that outOfBoundIndex is still in bounds of buyer list list
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getBuyerList().getBuyerList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_BUYER);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_BUYER);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_BUYER);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -113,7 +113,7 @@ public class DeleteCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
+    private void showNoBuyer(Model model) {
         model.updateFilteredBuyerList(p -> false);
 
         assertTrue(model.getFilteredBuyerList().isEmpty());

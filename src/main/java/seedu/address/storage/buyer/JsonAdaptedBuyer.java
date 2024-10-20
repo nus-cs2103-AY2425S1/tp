@@ -12,9 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.buyer.Address;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
-import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -29,22 +29,22 @@ public class JsonAdaptedBuyer {
     private final String phone;
     private final String email;
     private final String address;
-    private final String personType;
+    private final String buyerType;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given buyer details.
+     * Constructs a {@code JsonAdaptedBuyer} with the given buyer details.
      */
     @JsonCreator
     public JsonAdaptedBuyer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("personType") String personType,
+            @JsonProperty("buyerType") String buyerType,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.personType = personType;
+        this.buyerType = buyerType;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,7 +58,7 @@ public class JsonAdaptedBuyer {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        personType = source.getBuyerType().value.toString();
+        buyerType = source.getBuyerType().value.toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -70,9 +70,9 @@ public class JsonAdaptedBuyer {
      * @throws IllegalValueException if there were any data constraints violated in the adapted buyer.
      */
     public Buyer toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> buyerTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+            buyerTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -106,9 +106,9 @@ public class JsonAdaptedBuyer {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-        final BuyerType modelBuyerType = new BuyerType(personType);
+        final BuyerType modelBuyerType = new BuyerType(buyerType);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Tag> modelTags = new HashSet<>(buyerTags);
         return new Buyer(modelName, modelPhone, modelEmail, modelAddress, modelBuyerType, modelTags);
     }
 

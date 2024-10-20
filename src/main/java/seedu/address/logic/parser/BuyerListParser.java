@@ -8,14 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.buyer.FindCommand;
-import seedu.address.logic.commands.meetup.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.meetup.DeleteCommand;
-import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.buyer.FindCommand;
+import seedu.address.logic.commands.meetup.AddCommand;
+import seedu.address.logic.commands.meetup.DeleteCommand;
+import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.logic.commands.meetup.ViewCommand;
 import seedu.address.logic.parser.buyer.FindCommandParser;
 import seedu.address.logic.parser.buyer.ViewCommandParser;
@@ -27,13 +27,13 @@ import seedu.address.logic.parser.meetup.EditCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class BuyerListParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(BuyerListParser.class);
 
     /**
      * Parses user input into command for execution.
