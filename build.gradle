@@ -152,7 +152,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'EZSTATES.jar'
 }
 
 run {
