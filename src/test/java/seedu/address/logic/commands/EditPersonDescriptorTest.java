@@ -55,15 +55,15 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different department -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_DEPARTMENT_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withDepartment(VALID_DEPARTMENT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different role -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ROLE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withRole(VALID_ROLE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different contractEndDate -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_CONTRACT_END_DATE_BOB).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withContractEndDate(VALID_CONTRACT_END_DATE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
