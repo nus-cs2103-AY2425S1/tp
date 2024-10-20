@@ -114,6 +114,7 @@ public class Person {
     public void setServicing() {
         if (this.car != null) {
             this.isServicing = !this.isServicing;
+            logger.info("Client " + name + " has been " + (this.isServicing ? "Checked-In" : "Checked-Out"));
         }
     }
 
