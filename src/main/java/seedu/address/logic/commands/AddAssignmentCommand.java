@@ -35,8 +35,8 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_ASSIGNMENT_MAX_SCORE + "100";
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the address book";
-    private final AssignmentDescriptor toAddDescriptor;
     private final Index index;
+    private final AssignmentDescriptor toAddDescriptor;
 
     /**
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
@@ -85,6 +85,7 @@ public class AddAssignmentCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("index", index)
                 .add("toAddDescriptor", toAddDescriptor)
                 .toString();
     }
