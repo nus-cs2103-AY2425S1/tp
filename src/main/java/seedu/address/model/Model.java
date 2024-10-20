@@ -49,10 +49,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setAddressBook(ReadOnlyBuyerList addressBook);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyBuyerList getAddressBook();
 
     /**
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book.

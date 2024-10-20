@@ -12,8 +12,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.buyer.JsonBuyerListStorage;
+import seedu.address.storage.meetup.JsonMeetUpListStorage;
 
 public class StorageManagerTest {
 
@@ -24,7 +26,7 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonBuyerListStorage addressBookStorage = new JsonBuyerListStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         JsonMeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(getTempFilePath("ml"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
@@ -57,7 +59,7 @@ public class StorageManagerTest {
          */
         AddressBook original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyBuyerList retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new AddressBook(retrieved));
     }
 

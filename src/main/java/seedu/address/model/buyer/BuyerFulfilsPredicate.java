@@ -19,7 +19,7 @@ public class BuyerFulfilsPredicate implements Predicate<Buyer> {
         if (keyword.isEmpty()) {
             return true;
         }
-        return buyer.getPersonType().value.toString().equals(keyword);
+        return buyer.getBuyerType().value.toString().equals(keyword);
     }
 
     @Override

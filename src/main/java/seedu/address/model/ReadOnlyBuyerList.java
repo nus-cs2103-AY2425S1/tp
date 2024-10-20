@@ -6,12 +6,11 @@ import seedu.address.model.buyer.Buyer;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyBuyerList {
 
     /**
      * Returns an unmodifiable view of the buyers list.
      * This list will not contain any duplicate buyers.
      */
     ObservableList<Buyer> getBuyerList();
-
 }

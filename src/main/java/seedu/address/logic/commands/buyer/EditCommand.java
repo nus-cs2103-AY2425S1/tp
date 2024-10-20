@@ -104,7 +104,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(buyerToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(buyerToEdit.getAddress());
-        BuyerType updatedBuyerType = editPersonDescriptor.getPersonType().orElse(buyerToEdit.getPersonType());
+        BuyerType updatedBuyerType = editPersonDescriptor.getBuyerType().orElse(buyerToEdit.getBuyerType());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(buyerToEdit.getTags());
 
         return new Buyer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBuyerType, updatedTags);
@@ -204,7 +204,7 @@ public class EditCommand extends Command {
             this.buyerType = buyerType;
         }
 
-        public Optional<BuyerType> getPersonType() {
+        public Optional<BuyerType> getBuyerType() {
             return Optional.ofNullable(buyerType);
         }
 

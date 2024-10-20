@@ -65,7 +65,7 @@ public class EditBuyerDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getAddress().orElse(null) + ", type="
-                + editPersonDescriptor.getPersonType().orElse(null) + ", tags="
+                + editPersonDescriptor.getBuyerType().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }

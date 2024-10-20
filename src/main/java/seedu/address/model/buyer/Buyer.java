@@ -55,7 +55,7 @@ public class Buyer {
         return address;
     }
 
-    public BuyerType getPersonType() {
+    public BuyerType getBuyerType() {
         return buyerType;
     }
 

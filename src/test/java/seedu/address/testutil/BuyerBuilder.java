@@ -50,7 +50,7 @@ public class BuyerBuilder {
         phone = buyerToCopy.getPhone();
         email = buyerToCopy.getEmail();
         address = buyerToCopy.getAddress();
-        buyerType = buyerToCopy.getPersonType();
+        buyerType = buyerToCopy.getBuyerType();
         tags = new HashSet<>(buyerToCopy.getTags());
     }
 

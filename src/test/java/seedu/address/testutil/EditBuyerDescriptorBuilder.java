@@ -37,7 +37,7 @@ public class EditBuyerDescriptorBuilder {
         descriptor.setPhone(buyer.getPhone());
         descriptor.setEmail(buyer.getEmail());
         descriptor.setAddress(buyer.getAddress());
-        descriptor.setBuyerType(buyer.getPersonType());
+        descriptor.setBuyerType(buyer.getBuyerType());
         descriptor.setTags(buyer.getTags());
     }
 

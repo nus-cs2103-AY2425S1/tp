@@ -13,7 +13,7 @@ import seedu.address.model.buyer.UniqueBuyerList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameBuyer comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyBuyerList {
 
     private final UniqueBuyerList buyers;
 
@@ -33,7 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyBuyerList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -51,7 +51,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyBuyerList newData) {
         requireNonNull(newData);
 
         setBuyers(newData.getBuyerList());

@@ -92,8 +92,13 @@ public class AddressBookTest {
     /**
      * A stub ReadOnlyAddressBook whose buyers list can violate interface constraints.
      */
+<<<<<<< HEAD
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Buyer> buyers = FXCollections.observableArrayList();
+=======
+    private static class AddressBookStub implements ReadOnlyBuyerList {
+        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+>>>>>>> 3b7da801ba1480d359a05de2fa378e9b14b95c1c
 
         AddressBookStub(Collection<Buyer> buyers) {
             this.buyers.setAll(buyers);

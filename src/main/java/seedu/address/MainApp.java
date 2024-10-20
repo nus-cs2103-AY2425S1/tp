@@ -19,20 +19,20 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleMeetUpDataUtil;
 import seedu.address.model.util.SamplePersonDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonMeetUpListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.MeetUpListStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.buyer.BuyerListStorage;
+import seedu.address.storage.buyer.JsonBuyerListStorage;
+import seedu.address.storage.meetup.JsonMeetUpListStorage;
+import seedu.address.storage.meetup.MeetUpListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 /**
@@ -61,7 +61,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        BuyerListStorage addressBookStorage = new JsonBuyerListStorage(userPrefs.getAddressBookFilePath());
         MeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(userPrefs.getMeetUpListFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
 
@@ -81,9 +81,9 @@ public class MainApp extends Application {
         logger.info("Using data file : " + storage.getAddressBookFilePath());
         logger.info("Using meetUp file : " + storage.getMeetUpListFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyBuyerList> addressBookOptional;
         Optional<ReadOnlyMeetUpList> meetUpListOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyBuyerList initialData;
         ReadOnlyMeetUpList initialMeetUpList;
         try {
             addressBookOptional = storage.readAddressBook();

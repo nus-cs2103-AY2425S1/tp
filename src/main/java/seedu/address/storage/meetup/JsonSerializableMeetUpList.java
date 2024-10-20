@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.meetup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ import seedu.address.model.meetup.MeetUp;
  * An Immutable MeetUpList that is serializable to JSON format.
  */
 @JsonRootName(value = "meetuplist")
-class JsonSerializableMeetUpList {
+public class JsonSerializableMeetUpList {
 
     public static final String MESSAGE_DUPLICATE_MEETUP = "Meet up list contains duplicate meet up(s).";
 

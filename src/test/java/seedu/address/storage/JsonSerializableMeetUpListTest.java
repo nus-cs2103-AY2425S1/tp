@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.MeetUpList;
 import seedu.address.testutil.meetup.TypicalMeetUps;
+import seedu.address.storage.meetup.JsonSerializableMeetUpList;
 
 public class JsonSerializableMeetUpListTest {
 

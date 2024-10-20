@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.buyer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,24 +10,24 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.buyer.Buyer;
+import seedu.address.model.ReadOnlyBuyerList;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
 @JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+public class JsonSerializableBuyerList {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate buyer(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedBuyer> persons = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableBuyerList(@JsonProperty("persons") List<JsonAdaptedBuyer> persons) {
         this.persons.addAll(persons);
     }
 
@@ -36,8 +36,8 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getBuyerList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+    public JsonSerializableBuyerList(ReadOnlyBuyerList source) {
+        persons.addAll(source.getBuyerList().stream().map(JsonAdaptedBuyer::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,8 +47,9 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Buyer buyer = jsonAdaptedPerson.toModelType();
+
+        for (JsonAdaptedBuyer jsonAdaptedBuyer : persons) {
+            Buyer buyer = jsonAdaptedBuyer.toModelType();
             if (addressBook.hasBuyer(buyer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

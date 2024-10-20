@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.meetup;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +13,7 @@ import seedu.address.model.meetup.To;
 /**
  * Jackson-friendly version of {@link MeetUp}.
  */
-class JsonAdaptedMeetUp {
+public class JsonAdaptedMeetUp {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
     private final String name;

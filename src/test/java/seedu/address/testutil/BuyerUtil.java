@@ -35,7 +35,7 @@ public class BuyerUtil {
         sb.append(PREFIX_PHONE + buyer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + buyer.getAddress().value + " ");
-        sb.append(PREFIX_PERSON_TYPE + buyer.getPersonType().value.toString() + " ");
+        sb.append(PREFIX_PERSON_TYPE + buyer.getBuyerType().value.toString() + " ");
         buyer.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -51,7 +51,7 @@ public class BuyerUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
-        descriptor.getPersonType().ifPresent(personType -> sb.append(PREFIX_PERSON_TYPE).append(personType.value)
+        descriptor.getBuyerType().ifPresent(personType -> sb.append(PREFIX_PERSON_TYPE).append(personType.value)
                 .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

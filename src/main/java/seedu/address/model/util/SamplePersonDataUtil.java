@@ -5,17 +5,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.buyer.Address;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ReadOnlyBuyerList} with sample data.
  */
 public class SamplePersonDataUtil {
     public static Buyer[] getSamplePersons() {
@@ -47,7 +47,7 @@ public class SamplePersonDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
+    public static ReadOnlyBuyerList getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Buyer sampleBuyer : getSamplePersons()) {
             sampleAb.addBuyer(sampleBuyer);

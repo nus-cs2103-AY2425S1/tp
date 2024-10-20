@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.buyer;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Jackson-friendly version of {@link Buyer}.
  */
-class JsonAdaptedPerson {
+public class JsonAdaptedBuyer {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Buyer's %s field is missing!";
 
@@ -36,7 +36,7 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given buyer details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedBuyer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("personType") String personType,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
@@ -53,12 +53,12 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Buyer} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Buyer source) {
+    public JsonAdaptedBuyer(Buyer source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        personType = source.getPersonType().value.toString();
+        personType = source.getBuyerType().value.toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
