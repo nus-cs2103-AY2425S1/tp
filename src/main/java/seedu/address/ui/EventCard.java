@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.DateTimeUtil;
 import seedu.address.model.types.event.Event;
 
@@ -58,19 +59,19 @@ public class EventCard extends UiPart<Region> {
         event.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        setEventStatusLabel(event.getStartTime().value);
+        setEventStatusLabel(event.getStartTime());
         initializeUpdateTimeline();
     }
 
     private void initializeUpdateTimeline() {
         Timeline updateTimeline = DateTimeUtil.createTimeline(() -> {
-            setEventStatusLabel(this.event.getStartTime().value);
+            setEventStatusLabel(this.event.getStartTime());
         });
         updateTimeline.play();
     }
 
-    private void setEventStatusLabel(String startTime) {
-        LocalDateTime eventStart = DateTimeUtil.parse(startTime);
+    private void setEventStatusLabel(DateTime startTime) {
+        LocalDateTime eventStart = startTime.toLocalDateTime();
         LocalDateTime now = DateTimeUtil.getCurrentDateTime();
         Duration duration = Duration.between(now, eventStart);
 

@@ -11,28 +11,31 @@ import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.EventUpcomingPredicate;
 
 /**
- * todo write
+ * Filters events in address book based on input
+ * If the input is positive integer N, shows all events in next N days
+ * If the input is negative integer N, shows all events in past N days
+ * If the input is a date YYYY-MM-DD, shows all events on that date
  */
 public class UpcomingEventCommand extends Command {
 
     public static final String COMMAND_WORD = "upcoming";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events that happen in the next N days (when "
-            + "N is positive), or has happened in the past N days (when N is negative), and displays them as a list "
-            + "with index numbers.\n"
-            + "Parameters: NUM_OF_DAYS (must be integer)\n"
-            + "Example: " + COMMAND_WORD + " 5";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Input an integer to find all events that happen in "
+            + "the next/past N days or input a date to find events on that date\n"
+            + "The events are displayed as a list with index numbers.\n"
+            + "Parameters: NUM_OF_DAYS or YYYY-MM-DD\n"
+            + "Example: " + COMMAND_WORD + " 5 or " + COMMAND_WORD + " 2024-01-01";
 
     private enum CommandType {
         NUM_OF_DAYS,
-        SPECIFIC_DAY,
+        SPECIFIC_DATE,
     }
 
     private final CommandType commandType;
 
     private Integer numOfDays;
 
-    private DateTime specificDay;
+    private DateTime specificDate;
 
     /**
      * Constructs an UpcomingEventCommand with a positive or negative number of days
@@ -47,11 +50,11 @@ public class UpcomingEventCommand extends Command {
     /**
      * Constructs an UpcomingEventCommand with a specific date
      * This constructor is used when you want to specify a date for which events before/after that are displayed
-     * @param specificDay the number of days in the future/past.
+     * @param specificDate the number of days in the future/past.
      */
-    public UpcomingEventCommand(DateTime specificDay) {
-        this.commandType = CommandType.SPECIFIC_DAY;
-        this.specificDay = specificDay;
+    public UpcomingEventCommand(DateTime specificDate) {
+        this.commandType = CommandType.SPECIFIC_DATE;
+        this.specificDate = specificDate;
     }
 
     @Override
@@ -60,7 +63,7 @@ public class UpcomingEventCommand extends Command {
         if (commandType == CommandType.NUM_OF_DAYS) {
             model.updateFilteredEventList(new EventUpcomingPredicate(numOfDays));
         } else {
-            model.updateFilteredEventList(new EventUpcomingPredicate(specificDay));
+            model.updateFilteredEventList(new EventUpcomingPredicate(specificDate));
         }
 
         return new CommandResult(
@@ -87,15 +90,21 @@ public class UpcomingEventCommand extends Command {
         if (commandType == CommandType.NUM_OF_DAYS) {
             return otherUpcomingEventCommand.numOfDays.equals(numOfDays);
         } else {
-            return otherUpcomingEventCommand.specificDay.equals(specificDay);
+            return otherUpcomingEventCommand.specificDate.equals(specificDate);
         }
 
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("Number of Days", numOfDays)
-                .toString();
+        if (commandType == CommandType.NUM_OF_DAYS) {
+            return new ToStringBuilder(this)
+                    .add("Number of Days", numOfDays)
+                    .toString();
+        } else {
+            return new ToStringBuilder(this)
+                    .add("Specific Date", specificDate)
+                    .toString();
+        }
     }
 }

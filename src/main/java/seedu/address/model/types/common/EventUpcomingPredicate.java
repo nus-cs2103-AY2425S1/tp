@@ -7,7 +7,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.types.event.Event;
 
 /**
- * Tests that a {@code Event}'s {@code StartDate} happens on or before a given Date.
+ * Tests that a {@code Event}'s {@code StartDate} between a start and end date.
  */
 public class EventUpcomingPredicate implements Predicate<Event> {
     private final LocalDateTime startDate;
@@ -33,11 +33,11 @@ public class EventUpcomingPredicate implements Predicate<Event> {
     /**
      * Constructs an UpcomingEventCommand with a specific date
      * This constructor is used to create a filter for events that happen on that date
-     * @param dateTime the number of days in the future/past.
+     * @param date the specific date.
      */
-    public EventUpcomingPredicate(DateTime dateTime) {
-        startDate = dateTime.toLocalDateTime().withHour(0).withMinute(0).withSecond(0).withNano(0);
-        endDate = dateTime.toLocalDateTime().withHour(23).withMinute(59).withSecond(59).withNano(999999999);
+    public EventUpcomingPredicate(DateTime date) {
+        startDate = date.toLocalDateTime().withHour(0).withMinute(0).withSecond(0).withNano(0);
+        endDate = date.toLocalDateTime().withHour(23).withMinute(59).withSecond(59).withNano(999999999);
     }
 
     @Override
@@ -57,8 +57,7 @@ public class EventUpcomingPredicate implements Predicate<Event> {
             return false;
         }
 
-        EventUpcomingPredicate otherEventUpcomingPredicate =
-                (EventUpcomingPredicate) other;
+        EventUpcomingPredicate otherEventUpcomingPredicate = (EventUpcomingPredicate) other;
         return startDate.equals(otherEventUpcomingPredicate.startDate)
                 && endDate.equals(otherEventUpcomingPredicate.endDate);
     }

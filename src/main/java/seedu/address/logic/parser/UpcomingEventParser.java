@@ -12,6 +12,8 @@ import seedu.address.model.types.common.DateTime;
  */
 public class UpcomingEventParser implements Parser<Command> {
 
+    private static final DateTime DEFAULT_DATE = new DateTime("1970-01-01 00:00");
+
     /**
      * Parses the given {@code String} of arguments in the context of the UpcomingEventCommand
      * and returns a UpcomingEventCommand object for execution.
@@ -22,7 +24,7 @@ public class UpcomingEventParser implements Parser<Command> {
         boolean isInt = true;
         boolean isDate = true;
         int range = 0;
-        DateTime date = new DateTime("1970-01-01 00:00");
+        DateTime date = DEFAULT_DATE;
 
         try {
             range = Integer.parseInt(args);
