@@ -189,6 +189,7 @@ public class LogicManagerTest {
         Person expectedPerson = new PersonBuilder(AMY).emptyModuleList().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
+        expectedModel.setPersonToDisplay(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

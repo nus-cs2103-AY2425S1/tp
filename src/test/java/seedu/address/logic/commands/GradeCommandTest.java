@@ -52,6 +52,7 @@ public class GradeCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), newStudent);
+        expectedModel.setPersonToDisplay(newStudent);
 
         assertCommandSuccess(gradeCommand, model, expectedMessage, expectedModel);
     }

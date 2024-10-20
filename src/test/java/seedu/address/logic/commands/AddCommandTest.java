@@ -42,6 +42,7 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(validPerson, modelStub.personDisplayed);
     }
 
     @Test
@@ -192,6 +193,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Person personDisplayed;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -203,6 +205,12 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void setPersonToDisplay(Person person) {
+            requireNonNull(person);
+            personDisplayed = person;
         }
 
         @Override

@@ -147,7 +147,6 @@ public class ModelManager implements Model {
     //=========== Person To Display =========================================================================
     @Override
     public void setPersonToDisplay(Person personToDisplay) {
-        requireNonNull(personToDisplay);
         if (filteredPersons.contains(personToDisplay)) {
             this.personToDisplay = personToDisplay;
         }

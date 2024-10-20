@@ -82,6 +82,7 @@ public class GradeCommand extends Command {
         Person updatedPerson = person.setModuleGrade(module, grade);
         model.setPerson(person, updatedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.setPersonToDisplay(updatedPerson);
         return new CommandResult(String.format(MESSAGE_SUCCESS, module));
     }
 
