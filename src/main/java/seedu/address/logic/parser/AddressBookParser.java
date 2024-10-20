@@ -8,14 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.personcommands.AddCommand;
-import seedu.address.logic.commands.personcommands.ClearCommand;
-import seedu.address.logic.commands.personcommands.Command;
-import seedu.address.logic.commands.personcommands.DeleteCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.personcommands.AddPersonCommand;
+import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
 import seedu.address.logic.commands.personcommands.ExitCommand;
 import seedu.address.logic.commands.personcommands.FindCommand;
-import seedu.address.logic.commands.personcommands.HelpCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.commands.personcommands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -61,13 +61,13 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddPersonCommand.COMMAND_WORD:
             return new AddCommandParser().parse(modelType, arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(modelType, arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeletePersonCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(modelType, arguments);
 
         case ClearCommand.COMMAND_WORD:
