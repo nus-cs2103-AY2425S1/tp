@@ -34,7 +34,7 @@ mark {
 }
 
 .slim-scroll-blue::-webkit-scrollbar-thumb {
-  background: #00b0ef;
+  background: rgba(138, 120, 112, 0.47);
   border-radius: 20px;
 }
 
@@ -166,5 +166,5 @@ h3,
 h4,
 h5,
 h6 {
-  color: #e46c0a;
+  color: #b47454;
 }
