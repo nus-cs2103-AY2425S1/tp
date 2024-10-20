@@ -1,8 +1,8 @@
 package tahub.contacts.model.tutorial;
 
-import tahub.contacts.model.course.Course;
-
 import java.util.Objects;
+
+import tahub.contacts.model.course.Course;
 
 /**
  * Represents a Tutorial in the system.

@@ -2,16 +2,15 @@ package tahub.contacts.model.studentcourseassociation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -19,6 +18,7 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.tutorial.Tutorial;
 
 class StudentCourseAssociationTest {
     @Test
