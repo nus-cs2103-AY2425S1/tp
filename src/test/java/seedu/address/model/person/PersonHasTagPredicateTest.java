@@ -6,58 +6,51 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HIGH_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LOW_RISK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MEDIUM_RISK;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.Tag;
 
-
-
 public class PersonHasTagPredicateTest {
-    private PersonHasTagPredicate highPredicate =
-          new PersonHasTagPredicate(Collections.singletonList(new Tag(VALID_TAG_HIGH_RISK)));
-    private PersonHasTagPredicate lowPredicate =
-          new PersonHasTagPredicate(Collections.singletonList(new Tag(VALID_TAG_LOW_RISK)));
+    private PersonHasFeaturePredicate highTagOnlyPredicate =
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null);
+    private PersonHasFeaturePredicate lowTagOnlyPredicate =
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null);
 
-    private PersonHasTagPredicate mediumPredicate =
-          new PersonHasTagPredicate(Collections.singletonList(new Tag(VALID_TAG_MEDIUM_RISK)));
+    private PersonHasFeaturePredicate mediumTagOnlyPredicate =
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null);
 
     @Test
     public void equals() {
 
         // same object -> returns true
-        assertTrue(highPredicate.equals(highPredicate));
+        assertTrue(highTagOnlyPredicate.equals(highTagOnlyPredicate));
 
         // same values -> returns true
-        PersonHasTagPredicate firstPredicateCopy =
-              new PersonHasTagPredicate(Collections.singletonList(new Tag(VALID_TAG_HIGH_RISK)));
-        assertTrue(highPredicate.equals(firstPredicateCopy));
+        PersonHasFeaturePredicate firstPredicateCopy =
+              new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null);
+        assertTrue(highTagOnlyPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
-        assertFalse(mediumPredicate.equals(1));
+        assertFalse(mediumTagOnlyPredicate.equals(1));
 
         // null -> returns false
-        assertFalse(lowPredicate.equals(null));
+        assertFalse(lowTagOnlyPredicate.equals(null));
 
         // different person -> returns false
-        assertFalse(highPredicate.equals(lowPredicate));
+        assertFalse(highTagOnlyPredicate.equals(lowTagOnlyPredicate));
     }
 
     @Test
     public void test_personHasTags_returnsTrue() {
         // One tag
-        assertTrue(highPredicate.test(ALICE));
+        assertTrue(highTagOnlyPredicate.test(ALICE));
 
 
-        // Multiple TAGS
-        PersonHasTagPredicate multipleTagsPredicate =
-              new PersonHasTagPredicate(List.of(new Tag(VALID_TAG_LOW_RISK), new Tag(VALID_TAG_HIGH_RISK)));
-        assertTrue(highPredicate.test(ALICE));
-        assertTrue(highPredicate.test(BENSON));
+        PersonHasFeaturePredicate phoneAndTagPredicate =
+              new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value));
+        assertTrue(highTagOnlyPredicate.test(ALICE));
+
 
 
     }

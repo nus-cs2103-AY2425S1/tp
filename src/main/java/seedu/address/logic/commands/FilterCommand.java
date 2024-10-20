@@ -6,22 +6,21 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonHasTagPredicate;
+import seedu.address.model.person.PersonHasFeaturePredicate;
 
 /**
  * Finds and lists all persons in address book according to their tag.
  */
-public class FilterByTagCommand extends Command {
+public class FilterCommand extends Command {
     public static final String COMMAND_WORD = "filter";
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Filter by Command has not been implemented yet.";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose tag is"
-          + "the specified tag name (case-insensitive) and displays them as a list with index numbers.\n"
-          + "Parameters: t/TAG_NAME + [t/MORE_TAG_NAMES...]\n"
-          + "Example: " + COMMAND_WORD + " t/High Risk t/Low Risk";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons with the specified tag and/or phone"
+          + " number and displays them as a list with index numbers.\n"
+          + "Parameters: PREFIX/PREFIX_NAME + [PREFIX/MORE_PREFIX_NAMES...]\n"
+          + "Example: " + COMMAND_WORD + " t/High Risk p/88506657";
 
-    private final PersonHasTagPredicate predicate;
+    private final PersonHasFeaturePredicate predicate;
 
-    public FilterByTagCommand(PersonHasTagPredicate predicate) {
+    public FilterCommand(PersonHasFeaturePredicate predicate) {
         this.predicate = predicate;
     }
     @Override
@@ -39,11 +38,11 @@ public class FilterByTagCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FilterByTagCommand)) {
+        if (!(other instanceof FilterCommand)) {
             return false;
         }
 
-        FilterByTagCommand otherFindCommand = (FilterByTagCommand) other;
+        FilterCommand otherFindCommand = (FilterCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 

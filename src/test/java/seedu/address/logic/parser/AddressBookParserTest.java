@@ -21,14 +21,14 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterByTagCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonHasTagPredicate;
+import seedu.address.model.person.PersonHasFeaturePredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -95,14 +95,13 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filterByTag() throws Exception {
-        List<Tag> tags = Arrays.asList(new Tag("High Risk"), new Tag("Low Risk"));
-        FilterByTagCommand command = (FilterByTagCommand) parser.parseCommand(
-              FilterByTagCommand.COMMAND_WORD + " "
-                    + tags.stream()
-                          .map(Tag::toString) // Convert each Tag to its String representation
-                          .collect(Collectors.joining(" t/ ", "t/", "")) // add tag prefix
+        //tag only
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+              FilterCommand.COMMAND_WORD + " " + "t/ High Risk"
         );
-        assertEquals(new FilterByTagCommand(new PersonHasTagPredicate(tags)), command);
+        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null)),
+              command);
+
     }
 
     @Test
