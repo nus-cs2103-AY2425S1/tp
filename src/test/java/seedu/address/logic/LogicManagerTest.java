@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_SHOWN;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -11,7 +12,10 @@ import static seedu.address.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,6 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,6 +31,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.course.Course;
 import seedu.address.model.student.Student;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -172,5 +178,38 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addStudent(expectedStudent);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_exportCommand_success() throws Exception {
+        // Add a sample student to the model
+        Student sampleStudent = new StudentBuilder().withName("John Doe")
+                .withPhone("12345678")
+                .withEmail("johndoe@example.com")
+                .withCourses("CS2103T").build();
+        model.addStudent(sampleStudent);
+
+        String exportCommand = ExportCommand.COMMAND_WORD + " " + temporaryFolder.resolve("export.csv").toString();
+        assertCommandSuccess(exportCommand, String.format(
+                ExportCommand.MESSAGE_SUCCESS,
+                1,
+                temporaryFolder.resolve("export.csv")),
+                model);
+
+        // Verify that the file was created
+        Path exportPath = temporaryFolder.resolve("export.csv");
+        assertTrue(Files.exists(exportPath));
+
+        // Verify the content of the exported file
+        List<String> lines = Files.readAllLines(exportPath);
+        assertEquals(2, lines.size()); // Header + 1 student
+        assertEquals("Name,Phone,Email,Courses", lines.get(0)); // Verify the header
+
+        String expectedLine = String.format("%s,%s,%s,%s",
+                sampleStudent.getName(),
+                sampleStudent.getPhone(),
+                sampleStudent.getEmail(),
+                sampleStudent.getCourses().stream().map(Course::toString).collect(Collectors.joining(";")));
+        assertEquals(expectedLine, lines.get(1));
     }
 }
