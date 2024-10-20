@@ -1,14 +1,13 @@
-package tahub.contacts.model.courseclass.tutorial;
-
-import java.util.Objects;
+package tahub.contacts.model.tutorial;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.courseclass.CourseClass;
+
+import java.util.Objects;
 
 /**
  * Represents a Tutorial in the system.
  */
-public class Tutorial extends CourseClass {
+public class Tutorial {
     private String tutorialId;
     private Course course;
 
