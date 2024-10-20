@@ -39,13 +39,16 @@ public class Attendance {
         }
     }
 
+    /**
+     * Returns the date attended in the valid format
+     */
     @Override
     public String toString() {
         return attendanceDate.format(VALID_DATE_FORMAT);
     }
 
     /**
-     * Returns a date in a different format to be displayed in the UI
+     * Returns the date in a different format to be displayed in the UI
      */
     public String toDisplayString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM");
