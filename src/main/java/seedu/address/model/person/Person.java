@@ -29,7 +29,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Gender gender, Age age, Set<StudyGroupTag> studyGroupTags, Detail detail) {
+    public Person(Name name, Email email, Gender gender, Age age, Detail detail, Set<StudyGroupTag> studyGroupTags) {
         requireAllNonNull(name, email, studyGroupTags);
         this.name = name;
         this.email = email;
@@ -60,7 +60,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable study group set, which throws
+     * Returns an immutable study group tag set, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
      */
     public Set<StudyGroupTag> getStudyGroupTags() {

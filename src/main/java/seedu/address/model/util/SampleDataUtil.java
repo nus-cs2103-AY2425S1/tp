@@ -21,22 +21,22 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("1A"), new Detail("To be assigned")),
+                    new Age("19"), new Detail("To be assigned"), getStudyGroupTagSet("1A")),
 
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("Control", "1A"), new Detail("")),
+                    new Age("19"), new Detail(""), getStudyGroupTagSet("Control", "1A")),
 
             new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"), new Gender("F"),
-                    new Age("19"), getStudyGroupTagSet("Treatment", "1B"), new Detail("")),
+                    new Age("19"), new Detail(""), getStudyGroupTagSet("Treatment", "1B")),
 
             new Person(new Name("David Li"), new Email("lidavid@example.com"), new Gender("M"), new Age("19"),
-                    getStudyGroupTagSet("1B"), new Detail("To be assigned")),
+                    new Detail("To be assigned"), getStudyGroupTagSet("1B")),
 
             new Person(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("2A"), new Detail("Follow up on 19 Nov")),
+                    new Age("19"), new Detail("Follow up on 19 Nov"), getStudyGroupTagSet("2A")),
 
             new Person(new Name("Roy Balakrishnan"), new Email("royb@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("2B"), new Detail("Follow up on 19 Nov"))
+                    new Age("19"), new Detail("Follow up on 19 Nov"), getStudyGroupTagSet("2B"))
         };
     }
 
@@ -49,7 +49,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a study group set containing the list of strings given.
+     * Returns a study group tag set containing the list of strings given.
      */
     public static Set<StudyGroupTag> getStudyGroupTagSet(String... strings) {
         return Arrays.stream(strings)
