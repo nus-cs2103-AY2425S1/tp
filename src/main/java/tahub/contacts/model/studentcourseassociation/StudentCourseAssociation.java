@@ -1,13 +1,13 @@
 package tahub.contacts.model.studentcourseassociation;
 
-import java.util.Map;
-
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
 import tahub.contacts.model.courseclass.recitation.Recitation;
 import tahub.contacts.model.courseclass.tutorial.Tutorial;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
+
+import java.util.Map;
 
 
 /**
