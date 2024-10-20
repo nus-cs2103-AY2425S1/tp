@@ -13,9 +13,12 @@ import seedu.address.model.person.Person;
 
 import java.util.List;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code CleanCommand}.
+ */
 public class CleanCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    //private Model expectedModel = new ModelManager();
 
     @Test
     public void execute_clean_success() {
