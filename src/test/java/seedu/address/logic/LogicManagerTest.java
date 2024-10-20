@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -95,7 +96,7 @@ public class LogicManagerTest {
     @Test
     public void getCallHistory_modifyList_throwsUnsupportedOperationException() {
         ContactRecordList callHistory = new ContactRecordList();
-        callHistory.add(new ContactRecord("2021-01-01", ""));
+        callHistory.add(new ContactRecord(LocalDate.parse("2021-01-01"), ""));
         model.updateDisplayedList(callHistory);
         ObservableList<ContactRecord> displayedCallHistory = logic.getDisplayedCallHistory();
         // check contents of list

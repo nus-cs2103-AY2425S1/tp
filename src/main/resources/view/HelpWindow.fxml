@@ -40,8 +40,10 @@
             </children>
           </HBox>
           <!-- Command Summary Table -->
+
           <TableView fx:id="commandSummary">
           </TableView>
+          
         </children>
       </VBox>
     </Scene>

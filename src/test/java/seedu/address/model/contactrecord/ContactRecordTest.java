@@ -20,12 +20,6 @@ public class ContactRecordTest {
     }
 
     @Test
-    public void constructor_invalidContactRecord_throwsIllegalArgumentException() {
-        String invalidDate = "";
-        assertThrows(IllegalArgumentException.class, () -> new ContactRecord(invalidDate, VALID_NOTES));
-    }
-
-    @Test
     public void isValidContactRecord() {
         // null tag contact date
         assertThrows(NullPointerException.class, () -> ContactRecord.isValidContactRecord(null));
@@ -34,6 +28,8 @@ public class ContactRecordTest {
         assertFalse(ContactRecord.isValidContactRecord("2020-13-01"));
         assertFalse(ContactRecord.isValidContactRecord("2020-01-32"));
         assertFalse(ContactRecord.isValidContactRecord(""));
+        assertFalse(ContactRecord.isValidContactRecord("2020-01-01 12:00"));
+        assertFalse(ContactRecord.isValidContactRecord(LocalDate.now().plusDays(1).toString()));
 
         // valid date in contact record
         assertTrue(ContactRecord.isValidContactRecord("2020-01-01"));
