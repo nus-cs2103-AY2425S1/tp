@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EmergencyContactName;
-import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final String sex;
     private final String studentClass;
     private final String ecName;
-    private final String emergencyPhone;
+    private final String ecNumber;
 
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -46,10 +46,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
-            @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
-            @JsonProperty("emergency phone") String emergencyPhone, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+             @JsonProperty("email") String email, @JsonProperty("address") String address,
+             @JsonProperty("register number") String registerNumber, @JsonProperty("sex") String sex,
+             @JsonProperty("class") String studentClass, @JsonProperty("emergency contact name") String ecName,
+             @JsonProperty("emergency contact number") String ecNumber,
+             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
 
         this.name = name;
         this.phone = phone;
@@ -59,7 +60,7 @@ class JsonAdaptedPerson {
         this.sex = sex;
         this.studentClass = studentClass;
         this.ecName = ecName;
-        this.emergencyPhone = emergencyPhone;
+        this.ecNumber = ecNumber;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -76,8 +77,8 @@ class JsonAdaptedPerson {
         registerNumber = source.getRegisterNumber().value;
         sex = source.getSex().value;
         studentClass = source.getStudentClass().value;
-        ecName = source.getEmergencyContactName().fullName;
-        emergencyPhone = source.getEmergencyPhone().value;
+        ecName = source.getEcName().value;
+        ecNumber = source.getEcNumber().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -152,28 +153,27 @@ class JsonAdaptedPerson {
         }
         final StudentClass modelStudentClass = new StudentClass(studentClass);
 
-
         if (ecName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EmergencyContactName.class.getSimpleName()));
+                    EcName.class.getSimpleName()));
         }
-        if (!EmergencyContactName.isValidEmergencyContactName(ecName)) {
-            throw new IllegalValueException(EmergencyContactName.MESSAGE_CONSTRAINTS);
+        if (!EcName.isValidEcName(ecName)) {
+            throw new IllegalValueException(EcName.MESSAGE_CONSTRAINTS);
         }
-        final EmergencyContactName modelEmergencyContactName = new EmergencyContactName(ecName);
+        final EcName modelEcName = new EcName(ecName);
 
-        if (emergencyPhone == null) {
+        if (ecNumber == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    EmergencyPhone.class.getSimpleName()));
+                    EcNumber.class.getSimpleName()));
         }
-        if (!EmergencyPhone.isValidEmergencyPhone(emergencyPhone)) {
-            throw new IllegalValueException(EmergencyPhone.MESSAGE_CONSTRAINTS);
+        if (!EcNumber.isValidEcNumber(ecNumber)) {
+            throw new IllegalValueException(EcNumber.MESSAGE_CONSTRAINTS);
         }
-        final EmergencyPhone modelEmergencyPhone = new EmergencyPhone(emergencyPhone);
+        final EcNumber modelEcNumber = new EcNumber(ecNumber);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelRegisterNumber, modelSex,
-                modelStudentClass, modelEmergencyContactName, modelEmergencyPhone, modelTags);
+                modelStudentClass, modelEcName, modelEcNumber, modelTags);
 
     }
 

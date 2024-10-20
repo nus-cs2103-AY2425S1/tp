@@ -8,8 +8,8 @@
     "register number" : "3",
     "sex": "F",
     "class": "1A",
-    "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact name": "Joe Hardy",
+    "emergency contact number": "26283728",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -19,8 +19,8 @@
     "register number" : "4",
     "sex": "M",
     "class": "2B",
-    "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact name": "John Boone",
+    "emergency contact number": "92837201",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -30,8 +30,8 @@
     "register number" : "5",
     "sex": "M",
     "class": "3C",
-    "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact name": "James Dol",
+    "emergency contact number": "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -42,7 +42,7 @@
     "sex": "M",
     "class": "4D",
     "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact number": "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -53,7 +53,7 @@
     "sex": "F",
     "class": "3E",
     "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact number": "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -64,7 +64,7 @@
     "sex": "F",
     "class": "2A",
     "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact number": "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -75,7 +75,7 @@
     "sex": "M",
     "class": "1A",
     "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact number": "",
     "tags" : [ ]
   } ]
 }

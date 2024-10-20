@@ -145,12 +145,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-
-### Adding an Emergency contact's name : 'addEmergencyContactName' 
+### Adding an Emergency contact's name : `addEcName` 
 
 Adds an emergency contact's name to the specified person in the address book.
 
-Format: 'addEmergencyContactName INDEX en/[ECNAME]'
+Format: `addEcName INDEX en/[ECNAME]`
 
 <box type="tip" seamless>
 
@@ -162,26 +161,27 @@ Format: 'addEmergencyContactName INDEX en/[ECNAME]'
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `addEmergencyContactName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person 
-in the list.
-* `addEmergencyContactName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
+* `addEcName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
+* `addEcName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
 
-### Adding an Emergency phone number : `emergencyPhone`
+### Adding an Emergency contact's number : `addEcNumber`
 
-Adds a emergency phone number to the specified person in the address book.
+Adds a emergency contact's number to the specified person in the address book.
 
-Format: `emergencyPhone INDEX [ep/PHONE]`
+Format: `addEcNumber INDEX [ep/ECNUMBER]`
 
 <box type="tip" seamless>
 
-**Tip:** You can delete the emergency phone number by leaving the `PHONE` field empty.
+**Tip:** You can delete the emergency contact's number by leaving the `ECNUMBER` field empty.
 </box>
 
-* Adds the phone number `PHONE` to the person at the specified `INDEX`
+* Adds the emergency contact's number `ECNUMBER` to the person at the specified `INDEX`
+* Deletes the emergency contact's number at the specified `INDEX`
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `emergencyPhone 1 ep/91234567` to add the emergency number 91234567 to the 1st person in the list.
-* `emergencyPhone 2 ep/` to delete the emergency number from the 2nd person in the list.
+* `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
+* `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
 
 ### Clearing all entries : `clear`
 
@@ -241,4 +241,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Add Emergency Phone Number**  | `emergencyPhone INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `emergencyPhone 2 ep/91231234`
+**Add Emergency Phone Number**  | `EcNumber INDEX [ep/EMERGENCY_PHONE_NUMBER]`<br> e.g., `EcNumber 2 ep/91231234`

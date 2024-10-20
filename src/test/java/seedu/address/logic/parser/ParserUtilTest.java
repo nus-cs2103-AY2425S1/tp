@@ -15,9 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.EmergencyContactName;
-import seedu.address.model.person.EmergencyPhone;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.RegisterNumber;
@@ -244,14 +244,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmergencyContactName_validValueWithoutWhitespace_returnsEcName() throws Exception {
-        EmergencyContactName expectedEcName = new EmergencyContactName(VALID_EMERGENCY_CONTACT_NAME);
+        EcName expectedEcName = new EcName(VALID_EMERGENCY_CONTACT_NAME);
         assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(VALID_EMERGENCY_CONTACT_NAME));
     }
 
     @Test
     public void parseEmergencyContactName_validValueWithWhitespace_returnsTrimmedEcName() throws Exception {
         String ecNameWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NAME + WHITESPACE;
-        EmergencyContactName expectedEcName = new EmergencyContactName(VALID_EMERGENCY_CONTACT_NAME);
+        EcName expectedEcName = new EcName(VALID_EMERGENCY_CONTACT_NAME);
         assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(ecNameWithWhitespace));
     }
 
@@ -267,15 +267,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmergencyPhone_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
-        EmergencyPhone expectedEmergencyPhone = new EmergencyPhone(VALID_EMERGENCY_PHONE);
-        assertEquals(expectedEmergencyPhone, ParserUtil.parseEmergencyPhone(VALID_EMERGENCY_PHONE));
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
+        assertEquals(expectedEcNumber, ParserUtil.parseEmergencyPhone(VALID_EMERGENCY_PHONE));
     }
 
     @Test
     public void parseEmergencyPhone_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
         String emergencyPhoneWithWhitespace = WHITESPACE + VALID_EMERGENCY_PHONE + WHITESPACE;
-        EmergencyPhone expectedEmergencyPhone = new EmergencyPhone(VALID_EMERGENCY_PHONE);
-        assertEquals(expectedEmergencyPhone, ParserUtil.parseEmergencyPhone(emergencyPhoneWithWhitespace));
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
+        assertEquals(expectedEcNumber, ParserUtil.parseEmergencyPhone(emergencyPhoneWithWhitespace));
 
     }
 

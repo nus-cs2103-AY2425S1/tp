@@ -8,7 +8,7 @@
     "sex": "F",
     "class": "1A",
     "emergency contact name": "",
-    "emergency phone": "",
+    "emergency contact number": "",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -19,6 +19,6 @@
     "sex": "F",
     "class": "1A",
     "emergency contact name": "",
-    "emergency phone": ""
+    "emergency contact number": ""
   } ]
 }

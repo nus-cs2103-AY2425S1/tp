@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
@@ -38,18 +39,18 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_ECNAME_AMY = "Robert";
-    public static final String VALID_ECNAME_BOB = "Sally";
     public static final String VALID_REGISTER_NUMBER_AMY = "1";
     public static final String VALID_REGISTER_NUMBER_BOB = "2";
     public static final String VALID_SEX_AMY = "F";
     public static final String VALID_SEX_BOB = "M";
     public static final String VALID_STUDENT_CLASS_AMY = "1A";
     public static final String VALID_STUDENT_CLASS_BOB = "2B";
+    public static final String VALID_ECNAME_AMY = "Robert";
+    public static final String VALID_ECNAME_BOB = "Sally";
+    public static final String VALID_ECNUMBER_AMY = "91234567";
+    public static final String VALID_ECNUMBER_BOB = "98765432";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_EMERGENCY_PHONE_AMY = "91234567";
-    public static final String VALID_EMERGENCY_PHONE_BOB = "98765432";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -65,8 +66,10 @@ public class CommandTestUtil {
     public static final String SEX_DESC_BOB = " " + PREFIX_SEX + VALID_SEX_BOB;
     public static final String STUDENT_CLASS_DESC_AMY = " " + PREFIX_STUDENT_CLASS + VALID_STUDENT_CLASS_AMY;
     public static final String STUDENT_CLASS_DESC_BOB = " " + PREFIX_STUDENT_CLASS + VALID_STUDENT_CLASS_BOB;
-    public static final String EMERGENCY_PHONE_DESC_AMY = " " + PREFIX_EMERGENCY_PHONE + VALID_EMERGENCY_PHONE_AMY;
-    public static final String EMERGENCY_PHONE_DESC_BOB = " " + PREFIX_EMERGENCY_PHONE + VALID_EMERGENCY_PHONE_BOB;
+    public static final String ECNAME_DESC_AMY = " " + PREFIX_ECNAME + VALID_ECNAME_AMY;
+    public static final String ECNAME_DESC_BOB = " " + PREFIX_ECNAME + VALID_ECNAME_BOB;
+    public static final String ECNUMBER_DESC_AMY = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_AMY;
+    public static final String ECNUMBER_DESC_BOB = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -79,7 +82,8 @@ public class CommandTestUtil {
     public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "H"; // Only 'M' and 'F' are allowed
     public static final String INVALID_STUDENT_CLASS_DESC = " " + PREFIX_STUDENT_CLASS
             + "A1"; // wrong format used for student class
-    public static final String INVALID_EMERGENCY_PHONE_DESC = " " + PREFIX_EMERGENCY_PHONE + "1234"; // 4 digit number
+    public static final String INVALID_ECNAME_DESC = " " + PREFIX_ECNAME + "John%"; // "%" not allowed in ecname
+    public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
