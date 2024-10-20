@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
+import seedu.address.model.wedding.Wedding;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -164,6 +165,26 @@ public class AddCommandTest {
         public ActiveTags getActiveTags() {
             return new ActiveTags(new HashMap<>());
         }
+
+        @Override
+        public ObservableList<Wedding> getFilteredWeddingList() {
+            return null;
+        }
+
+        @Override
+        public void addWedding(Wedding wedding) {}
+
+        @Override
+        public void removeWedding(Wedding wedding) {}
+
+        @Override
+        public void setWedding(Wedding wedding, Wedding newWedding){}
+
+        @Override
+        public void assignPerson(Wedding wedding, Person person){}
+
+        @Override
+        public void unassignPerson(Wedding wedding, Person person) {}
     }
 
     /**
