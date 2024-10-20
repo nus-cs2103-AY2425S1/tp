@@ -28,6 +28,7 @@ public class Appointment implements Comparable<Appointment> {
                                                                                     + "time should be before ending "
                                                                                     + "time of appointment";
     public static final String MESSAGE_CONSTRAINTS = "Appointment names should be alphanumeric";
+    public static final String MESSAGE_TOO_LONG_CONSTRAINT = "Appointment names should be less than 30 characters";
     public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}[\\p{Alnum} ]*";
     static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]-([01]?[0-9]|2[0-3])[0-5][0-9]";
 
