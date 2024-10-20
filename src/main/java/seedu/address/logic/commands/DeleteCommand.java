@@ -25,6 +25,8 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    public static final String MESSAGE_DELETE_LIST_EMPTY = "\nThe contact list is empty! :(";
+
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -43,9 +45,9 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
 
-        String result = String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
+        String result = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete));
         if (model.getFilteredPersonList().isEmpty()) {
-            result += "\nThe contact list is empty! :(";
+            result += MESSAGE_DELETE_LIST_EMPTY;
         }
         return new CommandResult(result);
     }

@@ -58,7 +58,7 @@ public class FindByPhoneCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = AbstractFindCommand.MESSAGE_NO_PERSONS_FOUND;
         PhoneContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindByPhoneCommand command = new FindByPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

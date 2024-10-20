@@ -28,6 +28,8 @@ public abstract class AbstractFindCommand extends Command {
             + COMMAND_WORD + PHONE_COMMAND_WORD + "12345678\n"
             + COMMAND_WORD + TAG_COMMAND_WORD + "CS2100_classmate\n";
 
+    public static final String MESSAGE_NO_PERSONS_FOUND = "No persons found!";
+
     private final ContainsKeywordsPredicate predicate;
 
     public AbstractFindCommand(ContainsKeywordsPredicate predicate) {
@@ -45,7 +47,7 @@ public abstract class AbstractFindCommand extends Command {
 
         // if the result find list is empty
         if (model.getFilteredPersonList().isEmpty()) {
-            return new CommandResult(String.format("No persons found!"));
+            return new CommandResult(String.format(MESSAGE_NO_PERSONS_FOUND));
         }
 
         return new CommandResult(
