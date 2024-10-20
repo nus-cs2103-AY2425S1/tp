@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -36,11 +37,11 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
 
     protected final Index targetIndex;
     protected final EditEntityDescriptor editEntityDescriptor;
@@ -66,7 +67,6 @@ public abstract class EditCommand extends Command {
 
         Object entityToEdit = lastShownList.get(targetIndex.getZeroBased());
         Object editedEntity = createEditedEntity(model, entityToEdit, editEntityDescriptor);
-
 
         if (isSameEntity(model, editedEntity, entityToEdit) && hasEntity(model, editedEntity)) {
             throw new CommandException(getDuplicateMessage());
@@ -104,13 +104,12 @@ public abstract class EditCommand extends Command {
     protected abstract Object createEditedEntity(Model model, Object entityToEdit,
                                                  EditEntityDescriptor editEntityDescriptor) throws CommandException;
 
-
-    /*
+    /**
      * Returns success message to display upon adding entity.
      */
     protected abstract String getSuccessMessage();
 
-    /*
+    /**
      * Returns duplicate message to display upon adding entity.
      */
     protected abstract String getDuplicateMessage();

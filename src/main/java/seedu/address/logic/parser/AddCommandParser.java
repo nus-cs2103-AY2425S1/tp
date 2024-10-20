@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
@@ -31,6 +32,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonDescriptor;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,7 +48,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TAG, PREFIX_PERSON_ID, PREFIX_DATETIME,
+                        PREFIX_STATUS, PREFIX_TAG, PREFIX_PERSON_ID, PREFIX_DATETIME,
                         PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
         String entityType = argMultimap.getEntityType();
 
@@ -61,9 +63,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
             Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
             Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+            Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
             Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-            PersonDescriptor person = new PersonDescriptor(name, phone, email, address, tagList);
+            PersonDescriptor person = new PersonDescriptor(name, phone, email, address, status, tagList);
 
             return new AddPersonCommand(person);
         case APPOINTMENT_ENTITY_STRING:
