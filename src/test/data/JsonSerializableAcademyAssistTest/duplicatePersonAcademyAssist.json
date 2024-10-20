@@ -6,7 +6,6 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "ic" : "S1274567A",
     "year group": "1",
-    "tags" : [ "owesMoney", "friends" ],
     "subjects" : [ "English", "Science" ]
   }, {
     "name" : "John",
@@ -15,7 +14,6 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "ic" : "S1274567A",
     "year group": "1",
-    "tags" : [ "owesMoney", "friends" ],
     "subjects" : [ "English", "Science" ]
   } ]
 }
