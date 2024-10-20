@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -68,11 +70,11 @@ public class Person {
     }
 
     /**
-     * Returns an immutable monthPaid set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable monthPaid sortedset, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<MonthPaid> getMonthsPaid() {
-        return Collections.unmodifiableSet(monthsPaid);
+    public SortedSet<MonthPaid> getMonthsPaid() {
+        return Collections.unmodifiableSortedSet(new TreeSet<>(monthsPaid));
     }
 
     /**

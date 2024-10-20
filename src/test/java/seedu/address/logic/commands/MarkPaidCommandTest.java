@@ -33,7 +33,7 @@ public class MarkPaidCommandTest {
         Person modifiedPerson = createMarkedPerson(
                 model.getFilteredPersonList().get(index.getZeroBased()), VALID_MONTHSPAID);
         String expectedMessage = String.format(MarkPaidCommand.MESSAGE_MARKPAID_PERSON_SUCCESS,
-                Messages.format(modifiedPerson));
+                Messages.markPaidFormat(modifiedPerson));
         expectedModel.setPerson(model.getFilteredPersonList().get(index.getZeroBased()),
                 modifiedPerson);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -43,7 +43,7 @@ public class MarkPaidCommandTest {
     public void toStringMethod() {
         MarkPaidCommand command = new MarkPaidCommand(INDEX_FIRST_PERSON, VALID_MONTHSPAID);
         assertEquals(MarkPaidCommand.class.getCanonicalName()
-                        + "{monthsPaid=[" + VALID_MONTHPAID_STRING + "]}",
+                        + "{monthsPaid=[[" + VALID_MONTHPAID_STRING + "]]}",
                 command.toString());
     }
     @Test

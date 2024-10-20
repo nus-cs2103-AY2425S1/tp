@@ -47,5 +47,15 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+    /**
+     * Formats the {@code person} for display to the user when marking paid
+     */
+    public static String markPaidFormat(Person person) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(person.getName())
+                .append("; MonthsPaid: ");
+        person.getMonthsPaid().forEach(builder::append);
+        return builder.toString();
+    }
 
 }
