@@ -36,7 +36,6 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
         //invalid NRIC
-        assertParseFailure(parser, INVALID_NRIC, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, INVALID_NRIC, Nric.MESSAGE_CONSTRAINTS);
     }
 }

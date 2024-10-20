@@ -23,14 +23,19 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public DeleteCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            logger.warning("Received empty NRIC for DeleteCommand");
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
         try {
             Nric patientNric = ParserUtil.parseNric(args);
             logger.info("Successfully parsed the NRIC for DeleteCommand: " + patientNric);
             return new DeleteCommand(new NricMatchesPredicate(patientNric));
         } catch (ParseException pe) {
             logger.warning("Unable to parse the NRIC for DeleteCommand: " + args);
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
     }
 
