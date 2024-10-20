@@ -6,11 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalConcertContacts.ALICE_COACHELLA;
-import static seedu.address.testutil.TypicalConcertContacts.BOB_COACHELLA;
+import static seedu.address.testutil.TypicalConcertContacts.BENSON_COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,14 +39,14 @@ public class UniqueConcertContactListTest {
 
     @Test
     public void contains_person_concert() {
-        uniqueConcertContactList.add(BOB_COACHELLA);
+        uniqueConcertContactList.add(BENSON_COACHELLA);
 
         // null throws NullPointerException
         assertThrows(NullPointerException.class, () -> uniqueConcertContactList.contains(
                 (Person) null, (Concert) null));
 
         // inside returns true
-        assertTrue(uniqueConcertContactList.contains(BOB, COACHELLA));
+        assertTrue(uniqueConcertContactList.contains(BENSON, COACHELLA));
 
         // not inside returns false
         assertFalse(uniqueConcertContactList.contains(ALICE, COACHELLA));
@@ -95,7 +95,7 @@ public class UniqueConcertContactListTest {
     @Test
     public void setConcertContact_targetConcertContactNotInList_throwsConcertNotFoundException() {
         assertThrows(ConcertContactNotFoundException.class, () -> uniqueConcertContactList
-                .setConcertContact(BOB_COACHELLA, ALICE_COACHELLA));
+                .setConcertContact(BENSON_COACHELLA, ALICE_COACHELLA));
     }
 
     @Test
@@ -110,9 +110,9 @@ public class UniqueConcertContactListTest {
     @Test
     public void setConcertContact_editedConcertDifferent_success() {
         uniqueConcertContactList.add(ALICE_COACHELLA);
-        uniqueConcertContactList.setConcertContact(ALICE_COACHELLA, BOB_COACHELLA);
+        uniqueConcertContactList.setConcertContact(ALICE_COACHELLA, BENSON_COACHELLA);
         UniqueConcertContactList expectedConcertContactList = new UniqueConcertContactList();
-        expectedConcertContactList.add(BOB_COACHELLA);
+        expectedConcertContactList.add(BENSON_COACHELLA);
         assertEquals(expectedConcertContactList, uniqueConcertContactList);
     }
 
@@ -145,11 +145,11 @@ public class UniqueConcertContactListTest {
     public void remove_multipleConcertContacts_success() {
         // Remove all instances of Coachella concert
         uniqueConcertContactList.add(ALICE_COACHELLA);
-        uniqueConcertContactList.add(BOB_COACHELLA);
+        uniqueConcertContactList.add(BENSON_COACHELLA);
 
         uniqueConcertContactList.remove(COACHELLA);
         assertFalse(uniqueConcertContactList.contains(ALICE_COACHELLA));
-        assertFalse(uniqueConcertContactList.contains(BOB_COACHELLA));
+        assertFalse(uniqueConcertContactList.contains(BENSON_COACHELLA));
 
         // Remove all instances of Alice
         uniqueConcertContactList.add(ALICE_COACHELLA);
@@ -163,10 +163,10 @@ public class UniqueConcertContactListTest {
 
     @Test
     public void setConcertContact_duplicateConcertContact_throwsDuplicateConcertContactException() {
-        uniqueConcertContactList.add(BOB_COACHELLA);
+        uniqueConcertContactList.add(BENSON_COACHELLA);
         uniqueConcertContactList.add(ALICE_COACHELLA);
         assertThrows(DuplicateConcertContactException.class, () -> uniqueConcertContactList
-                .setConcertContact(ALICE_COACHELLA, BOB_COACHELLA));
+                .setConcertContact(ALICE_COACHELLA, BENSON_COACHELLA));
     }
 
     @Test
@@ -174,17 +174,17 @@ public class UniqueConcertContactListTest {
         // valid replacement
         uniqueConcertContactList.add(ALICE_COACHELLA);
         UniqueConcertContactList expectedConcertContactList = new UniqueConcertContactList();
-        expectedConcertContactList.add(BOB_COACHELLA);
+        expectedConcertContactList.add(BENSON_COACHELLA);
         uniqueConcertContactList.setConcertContacts(expectedConcertContactList);
         assertEquals(expectedConcertContactList, uniqueConcertContactList);
 
         // valid list
-        List<ConcertContact> valid = Arrays.asList(BOB_COACHELLA);
+        List<ConcertContact> valid = Arrays.asList(BENSON_COACHELLA);
         uniqueConcertContactList.setConcertContacts(valid);
         assertEquals(expectedConcertContactList, uniqueConcertContactList);
 
         // duplicates in replacement -> throws exception
-        List<ConcertContact> duplicates = Arrays.asList(BOB_COACHELLA, BOB_COACHELLA);
+        List<ConcertContact> duplicates = Arrays.asList(BENSON_COACHELLA, BENSON_COACHELLA);
         assertThrows(DuplicateConcertContactException.class, () -> uniqueConcertContactList
                 .setConcertContacts(duplicates));
 
@@ -207,9 +207,9 @@ public class UniqueConcertContactListTest {
 
     @Test
     public void equals() {
-        uniqueConcertContactList.add(BOB_COACHELLA);
+        uniqueConcertContactList.add(BENSON_COACHELLA);
         UniqueConcertContactList test = new UniqueConcertContactList();
-        test.add(BOB_COACHELLA);
+        test.add(BENSON_COACHELLA);
 
         // same object returns true
         assertTrue(uniqueConcertContactList.equals(uniqueConcertContactList));

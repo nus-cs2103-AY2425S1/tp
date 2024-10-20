@@ -70,5 +70,51 @@
       "date": "10 Oct 2024 2200"
     }
   ],
-  "concertContacts": []
+  "concertContacts": [
+    {
+      "concert": {
+        "name": "Coachella",
+        "address": "81800 51st Ave, Indio, Southern California, United States",
+        "date": "12 Apr 2024 0000"
+      },
+      "person": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "role": "artist",
+        "tags": ["friends"]
+      }
+    },
+    {
+      "concert": {
+        "name": "Glastonbury",
+        "address": "1 Stadium Dr, Singapore 397629",
+        "date": "10 Oct 2024 2200"
+      },
+      "person": {
+        "name": "Alice Pauline",
+        "phone": "94351253",
+        "email": "alice@example.com",
+        "address": "123, Jurong West Ave 6, #08-111",
+        "role": "artist",
+        "tags": ["friends"]
+      }
+    },
+    {
+      "concert": {
+        "name": "Coachella",
+        "address": "81800 51st Ave, Indio, Southern California, United States",
+        "date": "12 Apr 2024 0000"
+      },
+      "person": {
+        "name": "Benson Meier",
+        "phone": "98765432",
+        "email": "johnd@example.com",
+        "address": "311, Clementi Ave 2, #02-25",
+        "role": "organiser",
+        "tags": ["owesMoney", "friends"]
+      }
+    }
+  ]
 }

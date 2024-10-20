@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalConcertContacts.ALICE_COACHELLA;
 import static seedu.address.testutil.TypicalConcertContacts.ALICE_GLASTONBURY;
-import static seedu.address.testutil.TypicalConcertContacts.BOB_COACHELLA;
+import static seedu.address.testutil.TypicalConcertContacts.BENSON_COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -32,7 +32,7 @@ public class ConcertContactTest {
         assertTrue(ALICE_COACHELLA.isSameConcertContact(ALICE_COACHELLA));
 
         // different person returns false
-        assertFalse(ALICE_COACHELLA.isSameConcertContact(BOB_COACHELLA));
+        assertFalse(ALICE_COACHELLA.isSameConcertContact(BENSON_COACHELLA));
 
         // different concert returns false
         assertFalse(ALICE_COACHELLA.isSameConcertContact(ALICE_GLASTONBURY));
