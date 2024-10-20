@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.ASSIGN_EVENT_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.ASSIGN_VOLUNTEER_PREFIX_NAME;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -52,7 +53,9 @@ public class AssignCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireAllNonNull(model);
 
-        System.out.println("We are assigning volunteer " + this.volunteerIndex + " to event " + this.eventIndex);
+
+        Logger.getLogger("AssignCommand").fine("Assigning volunteer " + this.volunteerIndex
+                + " to event " + this.eventIndex);
 
         List<Volunteer> lastShownVolunteerList = model.getFilteredVolunteerList();
         List<Event> lastShownEventList = model.getFilteredEventList();
