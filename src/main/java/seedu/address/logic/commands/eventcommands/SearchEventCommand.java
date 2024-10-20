@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.model.Model;
 import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
 
@@ -13,7 +13,7 @@ import seedu.address.model.types.common.EventTagContainsKeywordsPredicate;
  * Finds and lists all events in address book who has a tag with a name containing any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class SearchEventCommand extends Command {
+public class SearchEventCommand extends SearchCommand {
     public static final String COMMAND_WORD = "search";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Searches all events who have tags containing any of "
