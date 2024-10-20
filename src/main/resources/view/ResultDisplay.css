@@ -1,6 +1,7 @@
 .result-display {
-    -fx-background-color: white; /* Optional: Set the background color */
-    -fx-text-fill: #6272b0;      /* Optional: Set the text color */
-    -fx-wrap-text: true; /* Enable text wrapping */
-    -fx-text-alignment: justify; /* Justify text alignment */
+    -fx-background-color: white;
+    -fx-text-fill: #6272b0;
+    -fx-wrap-text: true;
+    -fx-text-alignment: justify;
+    -fx-background-radius: 5;
 }

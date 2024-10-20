@@ -13,7 +13,8 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.layout.HBox?>
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="VolunTier" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="750" onCloseRequest="#handleExit" title="VolunTier" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -25,11 +26,11 @@
       </stylesheets>
 
       <VBox>
-        <HBox alignment="CENTER" spacing="10">
-          <Label fx:id="headerlabel"  text="VOLUNTIER" styleClass="header-label"/>
+        <HBox alignment="CENTER" spacing="10" >
+          <Label fx:id="headerlabel"  text="VOLUNTIER" styleClass="header-label" />
         </HBox>
 
-        <MenuBar fx:id="menuBar" style="-fx-background-color: #e7ebf0;" VBox.vgrow="NEVER">
+        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
@@ -39,18 +40,19 @@
         </MenuBar>
 
         <HBox spacing="10" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-        <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+        <VBox fx:id="personList" minWidth="360" prefWidth="450" styleClass="pane-with-border" VBox.vgrow="ALWAYS"
+              HBox.hgrow="ALWAYS" maxWidth="700">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />
           </padding>
           <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
         </VBox>
           <!-- Right Panel: Content + Chart -->
-          <VBox spacing="10" VBox.vgrow="ALWAYS">
+          <VBox spacing="10" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <!-- Result Display Box -->
               <StackPane fx:id="resultDisplayPlaceholder"  styleClass="pane-with-border" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                   <padding>
-                      <Insets bottom="5" left="10" right="10" top="5" />
+                      <Insets bottom="5" right="20" top="10" />
                   </padding>
               </StackPane>
             <!-- Chart -->

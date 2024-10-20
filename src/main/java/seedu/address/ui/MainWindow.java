@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane chartPlaceholder; // Placeholder for the chart
+    private StackPane chartPlaceholder;
 
 
     /**

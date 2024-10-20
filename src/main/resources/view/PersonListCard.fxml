@@ -10,7 +10,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import java.net.URL?>
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" HBox.hgrow="ALWAYS">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+      HBox.hgrow="ALWAYS" >
   <stylesheets>
     <URL value="@PersonListCard.css" />
     <URL value="@Extensions.css" />
@@ -41,7 +42,6 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="hours" styleClass="cell_small_label" text="\$hours" />
     </VBox>
   </GridPane>
 </HBox>

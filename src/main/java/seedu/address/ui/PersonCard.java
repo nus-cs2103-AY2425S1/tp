@@ -41,8 +41,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
-    private Label hours;
-    @FXML
     private Label role;
 
     /**
@@ -56,10 +54,18 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        hours.setText(person.getHours().value);
+        role.setText(person.getRole());
+        assignRoleStyle(person.getRole());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        role.setText(person.getRole());
+    }
+
+    private void assignRoleStyle(String role) {
+        if (role.equalsIgnoreCase("Tutor")) {
+            cardPane.getStyleClass().add("tutor");
+        } else if (role.equalsIgnoreCase("Tutee")) {
+            cardPane.getStyleClass().add("tutee");
+        }
     }
 }
