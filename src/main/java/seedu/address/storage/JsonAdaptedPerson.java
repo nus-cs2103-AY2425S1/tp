@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String socialMedia;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,7 +38,7 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("socialmedia") String socialMedia) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -44,6 +46,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.socialMedia = socialMedia;
     }
 
     /**
@@ -57,6 +60,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        socialMedia = source.getSocialMedia().toString();
     }
 
     /**
@@ -102,8 +106,27 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (socialMedia == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    SocialMedia.class.getSimpleName()));
+        }
+        final SocialMedia modelSocialMedia;
+        if (socialMedia.startsWith("[ig-")) {
+            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1), SocialMedia.Platform.INSTAGRAM);
+        }
+        else if (socialMedia.startsWith("[fb-")) {
+            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1), SocialMedia.Platform.FACEBOOK);
+        }
+        else if (socialMedia.startsWith("[cs-")) {
+            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1), SocialMedia.Platform.CAROUSELL);
+        }
+        else {
+            modelSocialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
+        }
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        Person person = new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        person.setSocialMedia(modelSocialMedia);
+        return person;
     }
 
 }

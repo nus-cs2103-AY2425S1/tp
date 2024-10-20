@@ -11,7 +11,7 @@ public class SocialMedia {
     private Platform platform;
 
     public enum Platform {
-        INSTAGRAM, FACEBOOK, CAROUSELL
+        INSTAGRAM, FACEBOOK, CAROUSELL, UNNAMED
     }
 
     /**
@@ -21,7 +21,9 @@ public class SocialMedia {
      */
     public SocialMedia(String handle, Platform platform) {
         requireNonNull(handle);
-        checkArgument(isValidHandleName(handle), MESSAGE_CONSTRAINTS);
+        if (!platform.equals(Platform.UNNAMED)) {
+            checkArgument(isValidHandleName(handle), MESSAGE_CONSTRAINTS);
+        }
         this.handle = handle;
         this.platform = platform;
     }
@@ -31,6 +33,10 @@ public class SocialMedia {
      */
     public static boolean isValidHandleName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public Platform getPlatform() {
+        return platform;
     }
 
     @Override
@@ -65,8 +71,11 @@ public class SocialMedia {
             return "[fb-" + handle + ']';
         case CAROUSELL:
             return "[cs-" + handle + ']';
+        case UNNAMED:
+            return handle;
         default:
-            return "";
+            return "error";
         }
+
     }
 }

@@ -54,16 +54,20 @@ public class SocialMediaCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         if (personToEdit.hasSocialMedia()) {
             throw new CommandException(MESSAGE_SOCIAL_MEDIA_EXISTING);
         }
-        SocialMedia socialMediaToAdd = new SocialMedia(handle, platform);
-        personToEdit.setSocialMedia(socialMediaToAdd);
 
+        Person editedPerson = new Person(
+                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTags());
+        SocialMedia socialMediaToAdd = new SocialMedia(handle, platform);
+        editedPerson.setSocialMedia(socialMediaToAdd);
+        model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
         return new CommandResult(String.format(MESSAGE_SOCIAL_MEDIA_SUCCESS, Messages.format(personToEdit)));
     }
 

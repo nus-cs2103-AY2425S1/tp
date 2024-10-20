@@ -24,7 +24,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private SocialMedia socialMedia = null;
+    private SocialMedia socialMedia;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +36,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.socialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
     }
 
     public Name getName() {
@@ -71,7 +72,7 @@ public class Person {
     }
 
     public boolean hasSocialMedia() {
-        return socialMedia != null;
+        return !socialMedia.getPlatform().equals(SocialMedia.Platform.UNNAMED);
     }
 
     /**
