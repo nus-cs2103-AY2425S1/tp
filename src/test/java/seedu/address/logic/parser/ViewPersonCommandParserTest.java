@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.ViewPersonCommand;
+import seedu.address.logic.commands.buyer.ViewPersonCommand;
 import seedu.address.model.person.PersonFulfilsPredicate;
 
 public class ViewPersonCommandParserTest {

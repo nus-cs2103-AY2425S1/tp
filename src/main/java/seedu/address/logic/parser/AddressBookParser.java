@@ -8,19 +8,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddMeetUpCommand;
-import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.meetup.AddMeetUpCommand;
+import seedu.address.logic.commands.buyer.AddPersonCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteMeetUpCommand;
-import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.EditMeetUpCommand;
-import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.meetup.DeleteMeetUpCommand;
+import seedu.address.logic.commands.buyer.DeletePersonCommand;
+import seedu.address.logic.commands.meetup.EditMeetUpCommand;
+import seedu.address.logic.commands.buyer.EditPersonCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindPersonCommand;
+import seedu.address.logic.commands.buyer.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ViewMeetUpCommand;
-import seedu.address.logic.commands.ViewPersonCommand;
+import seedu.address.logic.commands.meetup.ViewMeetUpCommand;
+import seedu.address.logic.commands.buyer.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

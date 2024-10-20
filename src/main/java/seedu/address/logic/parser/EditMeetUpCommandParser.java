@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditMeetUpCommand;
+import seedu.address.logic.commands.meetup.EditMeetUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.ViewPersonCommand;
+import seedu.address.logic.commands.buyer.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonFulfilsPredicate;
 /**
