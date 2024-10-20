@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "commit_msg hook has been set up"
+
 # Capture the commit message
 commit_msg=$(cat "$1")
 
