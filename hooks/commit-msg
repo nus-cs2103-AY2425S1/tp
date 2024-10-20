@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# Capture the commit message
+commit_msg=$(cat "$1")
+
+# Check for subject length (hard limit: 72 characters)
+subject=$(echo "$commit_msg" | head -n1)
+if [ ${#subject} -gt 72 ]; then
+  echo "Error: Subject line exceeds 72 characters." >&2
+  exit 1
+fi
+
+# Check if subject is in imperative mood (e.g., starts with a verb in command form)
+if ! echo "$subject" | grep -Eq "^(Add|Remove|Update|Fix|Improve|Change|Move|Refactor|Unify|Implement|etc.)"; then
+  echo "Error: Subject line should be in imperative mood (e.g., 'Add feature', not 'Adding feature')." >&2
+  exit 1
+fi
+
+# Ensure the subject is capitalized and does not end with a period
+if ! echo "$subject" | grep -Eq "^[A-Z]" || echo "$subject" | grep -Eq "\.$"; then
+  echo "Error: Subject line should be capitalized and not end with a period." >&2
+  exit 1
+fi
+
+# Check if body exists and is separated by a blank line (if applicable)
+body=$(echo "$commit_msg" | sed -n '2,$p')
+if [ -n "$body" ] && ! echo "$commit_msg" | grep -Eq "^.{0,72}$"; then
+  echo "Error: Wrap commit body text to 72 characters." >&2
+  exit 1
+fi
+
+exit 0
