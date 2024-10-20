@@ -10,8 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,6 +20,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.FunctionWithException;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -47,15 +46,15 @@ public class AddCommandParser implements Parser<AddCommand> {
                 PREFIX_REMARK);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = parseOptionalValue(
-                argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone, new Phone("", false)
+                argMultimap.getValue(PREFIX_PHONE), ParserUtil::parsePhone, new Phone("")
         );
 
         Email email = parseOptionalValue(
-                argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail, new Email("", false)
+                argMultimap.getValue(PREFIX_EMAIL), ParserUtil::parseEmail, new Email("")
         );
 
         Address address = parseOptionalValue(
-                argMultimap.getValue(PREFIX_LOCATION), ParserUtil::parseAddress, new Address("", false)
+                argMultimap.getValue(PREFIX_LOCATION), ParserUtil::parseAddress, new Address("")
         );
 
         Remark remark = parseOptionalValue(
@@ -68,13 +67,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         return new AddCommand(person);
     }
 
-    @FunctionalInterface
-    public interface FunctionWithException<T, R, E extends Exception> {
-        R apply(T t) throws E;
-    }
-
     public static <T> T parseOptionalValue(Optional<String> value, FunctionWithException<String,T,
-            ParseException> parser, T defaultValue) throws ParseException {
+                ParseException> parser, T defaultValue) throws ParseException {
         if (value.isPresent()) {
             return parser.apply(value.get());
         } else {
