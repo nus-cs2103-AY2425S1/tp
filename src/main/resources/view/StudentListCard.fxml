@@ -5,6 +5,7 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,87 +18,98 @@
     <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets bottom="5" left="15" right="5" top="5" />
-      </padding>
-      <HBox alignment="CENTER_LEFT" spacing="0.5">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
-      </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="15.0" spacing="4.5">
-            <children>
-               <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/phone-icon.png" />
-                  </image>
-                  <effect>
-                     <ColorAdjust brightness="1.0" />
-                  </effect>
-               </ImageView>
-            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="32.0" spacing="4.5">
-            <children>
-               <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/home-icon.png" />
-                  </image>
-                  <effect>
-                     <ColorAdjust brightness="1.0" />
-                  </effect>
-               </ImageView>
-            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="100.0" spacing="4.5">
-            <children>
-               <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/graduation-cap-icon.png" />
-                  </image>
-                  <effect>
-                     <ColorAdjust brightness="1.0" />
-                  </effect>
-               </ImageView>
-            <Label fx:id="gradeLevel" styleClass="cell_small_label" text="\$gradeLevel" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="66.0" spacing="4.5">
-            <children>
-               <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/audio-playlist-icon.png" />
-                  </image>
-                  <effect>
-                     <ColorAdjust brightness="1.0" />
-                  </effect>
-               </ImageView>
-            <Label fx:id="pianoPieces" styleClass="cell_small_label" text="\$pianoPieces" />
-            </children>
-         </HBox>
-         <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="168.0" spacing="4.5">
-            <children>
-               <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../images/clock-icon.png" />
-                  </image>
-                  <effect>
-                     <ColorAdjust brightness="1.0" />
-                  </effect>
-               </ImageView>
-            <Label fx:id="regularLesson" styleClass="cell_small_label" text="\$regularLesson" />
-            </children>
-         </HBox>
-      <Label fx:id="cancelledLessons" styleClass="cell_small_label" text="\$cancelledLessons" />
-      <Label fx:id="makeupLessons" styleClass="cell_small_label" text="\$makeupLessons" />
-    </VBox>
+      <AnchorPane>
+         <children>
+          <VBox minHeight="105" AnchorPane.leftAnchor="0.0">
+            <padding>
+              <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="0.5">
+              <Label fx:id="id" styleClass="cell_big_label">
+                <minWidth>
+                  <!-- Ensures that the label text is never truncated -->
+                  <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+              </Label>
+              <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
+            </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="15.0" spacing="4.5">
+                  <children>
+                     <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/phone-icon.png" />
+                        </image>
+                        <effect>
+                           <ColorAdjust brightness="1.0" />
+                        </effect>
+                     </ImageView>
+                  <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="32.0" spacing="4.5">
+                  <children>
+                     <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/home-icon.png" />
+                        </image>
+                        <effect>
+                           <ColorAdjust brightness="1.0" />
+                        </effect>
+                     </ImageView>
+                  <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="100.0" spacing="4.5">
+                  <children>
+                     <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/graduation-cap-icon.png" />
+                        </image>
+                        <effect>
+                           <ColorAdjust brightness="1.0" />
+                        </effect>
+                     </ImageView>
+                  <Label fx:id="gradeLevel" styleClass="cell_small_label" text="\$gradeLevel" />
+                  </children>
+               </HBox>
+               <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="168.0" spacing="4.5">
+                  <children>
+                     <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../images/clock-icon.png" />
+                        </image>
+                        <effect>
+                           <ColorAdjust brightness="1.0" />
+                        </effect>
+                     </ImageView>
+                  <Label fx:id="regularLesson" styleClass="cell_small_label" text="\$regularLesson" />
+                  </children>
+               </HBox>
+            <Label fx:id="cancelledLessons" styleClass="cell_small_label" text="\$cancelledLessons" />
+            <Label fx:id="makeupLessons" styleClass="cell_small_label" text="\$makeupLessons" />
+          </VBox>
+            <VBox alignment="TOP_RIGHT" minHeight="105" AnchorPane.rightAnchor="0.0">
+               <padding>
+                  <Insets bottom="5" left="15" right="5" top="5" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="66.0" spacing="4.5">
+                     <children>
+                        <ImageView fitHeight="10.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/audio-playlist-icon.png" />
+                           </image>
+                           <effect>
+                              <ColorAdjust brightness="1.0" />
+                           </effect>
+                        </ImageView>
+                        <Label fx:id="pianoPieces" styleClass="cell_small_label" text="\$pianoPieces" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
       <rowConstraints>
          <RowConstraints />
       </rowConstraints>

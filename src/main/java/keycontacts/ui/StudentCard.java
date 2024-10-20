@@ -31,6 +31,7 @@ public class StudentCard extends UiPart<Region> {
      */
 
     public final Student student;
+    public final int displayedIndex;
 
     @FXML
     private HBox cardPane;
@@ -60,6 +61,7 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        this.displayedIndex = displayedIndex;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
@@ -112,5 +114,19 @@ public class StudentCard extends UiPart<Region> {
                         i + 1,
                         sortedLessons.get(i).toDisplay()))
                 .collect(Collectors.joining("\n", "Makeup Lessons:\n", ""));
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+
+        if (!(object instanceof StudentCard)) {
+            return false;
+        }
+
+        StudentCard card = (StudentCard) object;
+        return this.displayedIndex == card.displayedIndex && student.equals(card.student);
     }
 }

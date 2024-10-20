@@ -42,10 +42,11 @@ public class StudentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                if (studentCard == null || !studentCard.student.equals(student)) {
-                    studentCard = new StudentCard(student, getIndex() + 1);
+                StudentCard studentCard = new StudentCard(student, getIndex() + 1);
+                if (this.studentCard == null || !this.studentCard.equals(studentCard)) {
+                    this.studentCard = studentCard;
                 }
-                setGraphic(studentCard.getRoot());
+                setGraphic(this.studentCard.getRoot());
             }
         }
     }
