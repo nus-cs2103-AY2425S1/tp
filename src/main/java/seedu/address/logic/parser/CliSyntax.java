@@ -15,6 +15,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_POSTALCODE = new Prefix("c/");
     public static final Prefix PREFIX_UNITNUMBER = new Prefix("u/");
     public static final Prefix PREFIX_TYPE = new Prefix("t/");
+    public static final Prefix PREFIX_MEETING_TITLE = new Prefix("t/");
+    public static final Prefix PREFIX_MEETING_DATE = new Prefix("d/");
     public static final Prefix PREFIX_BID = new Prefix("b/");
     public static final Prefix PREFIX_ASK = new Prefix("a/");
 }

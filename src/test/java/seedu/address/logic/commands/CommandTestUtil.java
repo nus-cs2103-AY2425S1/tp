@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
@@ -90,6 +92,15 @@ public class CommandTestUtil {
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "PUBLIC"; //iNVALID TYPE
     public static final String INVALID_BID_DESC = " " + PREFIX_BID + "ONE THOUSAND";
     public static final String INVALID_ASK_DESC = " " + PREFIX_ASK + "TWO THOUSAND";
+
+    public static final String VALID_MEETING_TITLE_ADMIRALTY = "Admiralty HDB Client Viewing";
+    public static final String VALID_NOTFOUND_MEETING_TITLE = "Nonexistent Meeting";
+    public static final String VALID_MEETING_DATE_ADMIRALTY = "31-10-2024";
+    public static final String VALID_NOTFOUND_MEETING_DATE = "31-12-2025";
+    public static final String MEETING_TITLE_DESC_ADMIRALTY = " " + PREFIX_MEETING_TITLE
+            + VALID_MEETING_TITLE_ADMIRALTY;
+    public static final String MEETING_DATE_DESC_ADMIRALTY = " " + PREFIX_MEETING_DATE
+            + VALID_MEETING_DATE_ADMIRALTY;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

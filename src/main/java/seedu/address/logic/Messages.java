@@ -9,6 +9,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientTypes;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
@@ -85,6 +86,18 @@ public class Messages {
                 .append(property.getAsk())
                 .append("; Bid: ")
                 .append(property.getBid());
+        return builder.toString();
+    }
+
+    /**
+     * Formats the {@code meeting} for display to the user.
+     */
+    public static String format(Meeting meeting) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("MeetingTitle: ")
+                .append(meeting.getMeetingTitle())
+                .append("; MeetingDate: ")
+                .append(meeting.getMeetingDate());
         return builder.toString();
     }
 }

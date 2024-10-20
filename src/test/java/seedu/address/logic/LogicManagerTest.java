@@ -32,6 +32,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonMeetingBookStorage;
 import seedu.address.storage.JsonPropertyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -57,8 +58,10 @@ public class LogicManagerTest {
                 .resolve("userPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+        JsonMeetingBookStorage meetingBookStorage =
+                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
-                clientBookStorage);
+                clientBookStorage, meetingBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -140,7 +143,7 @@ public class LogicManagerTest {
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -188,8 +191,10 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+        JsonMeetingBookStorage meetingBookStorage =
+                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
-                clientBookStorage);
+                clientBookStorage, meetingBookStorage);
 
         logic = new LogicManager(model, storage);
 
