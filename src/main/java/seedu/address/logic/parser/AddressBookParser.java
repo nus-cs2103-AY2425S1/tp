@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.eventcommands.UpcomingEventCommand;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
@@ -51,7 +52,9 @@ public class AddressBookParser {
         final String modelTypeShortHand = matcher.group("modelType");
         final ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
         final String arguments = (modelType == ModelType.NEITHER)
-                ? " " + modelTypeShortHand : " " + matcher.group("arguments");
+                ? " " + modelTypeShortHand + " " + (matcher.group("arguments") == null
+                                                    ? "" : matcher.group("arguments"))
+                : " " + matcher.group("arguments");
         // todo Not sure why spaces need to be added but it doesn't work without them
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
@@ -87,6 +90,9 @@ public class AddressBookParser {
 
         case SearchCommand.COMMAND_WORD:
             return new SearchCommandParser().parse(modelType, arguments);
+
+        case UpcomingEventCommand.COMMAND_WORD:
+            return new UpcomingEventParser().parse(modelType, arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

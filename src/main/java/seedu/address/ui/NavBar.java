@@ -58,8 +58,7 @@ public class NavBar extends UiPart<HBox> {
 
     private void updateDateTime() {
         String formattedDateTime = DateTimeUtil.getCurrentDateTimeString();
-        DateTime dateTime = new DateTime(formattedDateTime);
-        dateTimeLabel.setText(dateTime.toString());
+        dateTimeLabel.setText(formattedDateTime);
     }
 
     public void setActiveButton(Button activeButton) {

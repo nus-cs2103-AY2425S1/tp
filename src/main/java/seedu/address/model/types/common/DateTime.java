@@ -3,6 +3,11 @@ package seedu.address.model.types.common;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents an Event's datetime in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateTime(String)}
@@ -18,7 +23,10 @@ public class DateTime {
     public static final String VALIDATION_REGEX = "\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])"
         + " ([01][0-9]|2[0-3]):[0-5][0-9]";
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     public final String value;
+    public final LocalDateTime localDateTimeValue;
 
     /**
      * Constructs a {@code DateTime}.
@@ -29,13 +37,40 @@ public class DateTime {
         requireNonNull(dateTime);
         checkArgument(isValidDateTime(dateTime), MESSAGE_CONSTRAINTS);
         value = dateTime;
+        localDateTimeValue = LocalDateTime.parse(dateTime, DATE_TIME_FORMATTER);
     }
 
     /**
      * Returns true if a given string is a valid date and time.
      */
     public static boolean isValidDateTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        boolean internalValidation;
+        boolean externalValidation;
+
+        internalValidation = test.matches(VALIDATION_REGEX);
+
+        try {
+            //todo Find out why its being called so often
+            System.out.println(test);
+            LocalDateTime parsedValue;
+            parsedValue = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
+            externalValidation = true;
+        } catch (DateTimeParseException e) {
+            externalValidation = false;
+        }
+
+        return internalValidation && externalValidation;
+    }
+
+    /**
+     * Returns a Duration object (can be negative) representing the difference from another LocalDateTime
+     */
+    public Duration compareTo(LocalDateTime otherLocalDateTime) {
+        return Duration.between(localDateTimeValue, otherLocalDateTime);
+    }
+
+    public LocalDateTime toLocalDateTime() {
+        return localDateTimeValue;
     }
 
     @Override
