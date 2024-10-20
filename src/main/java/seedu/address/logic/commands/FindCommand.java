@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PersonSearchPredicate;
 
 /**
@@ -16,10 +17,17 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = ":find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose specified fields contain "
+            + "the keywords in the given parameters (case-insensitive).\n"
+            + "Parameters are optional but there must be at least one.\n"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_LOCATION + "LOCATION "
+            + PREFIX_REMARK + "REMARK\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe "
+            + PREFIX_LOCATION + "serangoon";
 
     private final PersonSearchPredicate predicate;
 
