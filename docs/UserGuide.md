@@ -149,7 +149,7 @@ Examples:
 
 Adds an emergency contact's name to the specified person in the address book.
 
-Format: `addECName INDEX en/[ECNAME]`
+Format: `addEcName INDEX en/[ECNAME]`
 
 <box type="tip" seamless>
 
