@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tier in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTierName(String)}
  */
 public class Tier {
@@ -15,9 +15,9 @@ public class Tier {
     public final TierEnum tierName;
 
     /**
-     * Constructs a {@code Tag}.
+     * Constructs a {@code Tier}.
      *
-     * @param tierName A valid tag name.
+     * @param tierName A valid tier name.
      */
     public Tier(String tierName) {
         requireNonNull(tierName);
@@ -30,7 +30,7 @@ public class Tier {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns true if a given string is a valid tier name.
      */
     public static boolean isValidTierName(String test) {
         if (test.isEmpty()) {

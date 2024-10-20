@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void createTier() {
-        // Create a label for the tier tag
+        // Create a label for the tier
         Label tierLabel = new Label(person.getTier().toDecodeString());
 
         // Apply a different style class based on the tier value

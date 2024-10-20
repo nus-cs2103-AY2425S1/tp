@@ -130,11 +130,11 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        JsonAdaptedTier invalidTag = new JsonAdaptedTier(INVALID_TIER);;
+    public void toModelType_invalidTier_throwsIllegalValueException() {
+        JsonAdaptedTier invalidTier = new JsonAdaptedTier(INVALID_TIER);;
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_JOB, VALID_INCOME_STRING, invalidTag, VALID_REMARK);
+                        VALID_JOB, VALID_INCOME_STRING, invalidTier, VALID_REMARK);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

@@ -27,7 +27,7 @@ public class TierTest {
 
     @Test
     public void isValidTierName() {
-        // null tag name
+        // null tier name
         assertThrows(NullPointerException.class, () -> Tier.isValidTierName(null));
 
         // valid tiers -> return true
