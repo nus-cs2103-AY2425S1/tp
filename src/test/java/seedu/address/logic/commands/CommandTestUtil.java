@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
@@ -47,6 +48,8 @@ public class CommandTestUtil {
     public static final String VALID_CLIENT_STATUS_UNRESPONSIVE = "unresponsive";
     public static final String VALID_CLIENT_STATUS_POTENTIAL = "potential";
     public static final String VALID_CLIENT_STATUS_OLD = "old";
+    public static final String VALID_DEADLINE = "10-10-2024";
+    public static final String VALID_DEADLINE_2 = "10-11-2024";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -58,6 +61,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String DEADLINE_DESC_AMY = " " + PREFIX_DEADLINE + VALID_DEADLINE;
+    public static final String DEADLINE_DESC_BOB = " " + PREFIX_DEADLINE + VALID_DEADLINE_2;
     public static final String PROJECT_STATUS_DESC_IN_PROGRESS = " "
             + PREFIX_PROJECT_STATUS + VALID_PROJECT_STATUS_IN_PROGRESS;
     public static final String PROJECT_STATUS_DESC_COMPLETE = " "
@@ -74,6 +79,7 @@ public class CommandTestUtil {
             + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_POTENTIAL;
     public static final String CLIENT_STATUS_OLD = " "
             + PREFIX_CLIENT_STATUS + VALID_CLIENT_STATUS_OLD;
+    public static final String DEADLINE_DESC = " " + PREFIX_DEADLINE + VALID_DEADLINE;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -87,6 +93,7 @@ public class CommandTestUtil {
             + PREFIX_PAYMENT_STATUS + "unknown"; // invalid payment status
     public static final String INVALID_CLIENT_STATUS_DESC = " "
             + PREFIX_CLIENT_STATUS + "referral"; // invalid client status
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "12-13-2024"; //invalid month
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -99,13 +106,15 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
                 .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
-                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
+                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE)
+                .withDeadline(VALID_DEADLINE).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .withProjectStatus(VALID_PROJECT_STATUS_IN_PROGRESS)
                 .withPaymentStatus(VALID_PAYMENT_STATUS_UNPAID)
-                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE).build();
+                .withClientStatus(VALID_CLIENT_STATUS_ACTIVE)
+                .withDeadline(VALID_DEADLINE_2).build();
     }
 
     /**

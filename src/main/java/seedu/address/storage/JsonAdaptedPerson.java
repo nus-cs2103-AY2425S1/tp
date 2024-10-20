@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.ClientStatus;
+import seedu.address.model.person.Deadline;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PaymentStatus;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final String projectStatus;
     private final String paymentStatus;
     private final String clientStatus;
+    private final String deadline;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,6 +48,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("projectStatus") String projectStatus,
                              @JsonProperty("paymentStatus") String paymentStatus,
                              @JsonProperty("clientStatus") String clientStatus,
+                             @JsonProperty("deadline") String deadline,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
@@ -57,6 +60,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.deadline = deadline;
     }
 
     /**
@@ -70,6 +74,7 @@ class JsonAdaptedPerson {
         projectStatus = source.getProjectStatus().toString();
         paymentStatus = source.getPaymentStatus().toString();
         clientStatus = source.getClientStatus().toString();
+        deadline = source.getDeadline().value.format(Deadline.INPUT_FORMATTER);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -147,7 +152,18 @@ class JsonAdaptedPerson {
         }
         final ClientStatus modelClientStatus = new ClientStatus(clientStatus);
 
+        if (deadline == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Deadline.class.getSimpleName()));
+        }
+
+        if (!Deadline.isValidDeadline(deadline)) {
+            throw new IllegalValueException(Deadline.MESSAGE_CONSTRAINTS);
+        }
+
+        final Deadline modelDeadline = new Deadline(deadline);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelProjectStatus, modelPaymentStatus, modelClientStatus);
+                modelProjectStatus, modelPaymentStatus, modelClientStatus, modelDeadline);
     }
 }

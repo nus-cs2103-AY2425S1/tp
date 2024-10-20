@@ -100,7 +100,8 @@ public class PersonTest {
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()
                 + ", projectStatus=" + ALICE.getProjectStatus()
                 + ", paymentStatus=" + ALICE.getPaymentStatus()
-                + ", clientStatus=" + ALICE.getClientStatus() + "}";
+                + ", clientStatus=" + ALICE.getClientStatus()
+                + ", deadline=" + ALICE.getDeadline() + "}";
         assertEquals(expected, ALICE.toString());
     }
 }
