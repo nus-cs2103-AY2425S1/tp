@@ -99,7 +99,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
-
+        expectedModel.updateFilteredStudentList(x -> x.getName().equals(VALID_NAME_BOB));
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
