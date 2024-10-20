@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# Make the commit-msg hook executable
-chmod +x hooks/commit-msg
+# Loop through all files in the hooks directory and make them executable
+for hook in hooks/*; do
+    if [ -f "$hook" ]; then
+        chmod +x "$hook"
+        echo "Made $hook executable."
+    fi
+done
 
-echo "Setup completed: Hooks are now executable."
+echo "Setup completed: All hooks are now executable."
