@@ -2,11 +2,17 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Date;
+import seedu.address.model.person.Person;
+
 
 
 /**
@@ -25,8 +31,8 @@ public class DateCommand extends Command {
             + PREFIX_DATE + "12 October 2024";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Date: %2$s";
-
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Date command not implemented yet";
+    public static final String MESSAGE_ADD_DATE_SUCCESS = "Added date to Person: %1$s";
+    public static final String MESSAGE_DELETE_DATE_SUCCESS = "Removed date from Person: %1$s";
 
     private final Index index;
     private final Date date;
@@ -44,9 +50,27 @@ public class DateCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        throw new CommandException(
-                String.format(MESSAGE_ARGUMENTS, index.getOneBased(), date));
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getTag(), date);
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
+
+    /**
+     * Generates a command execution success message based on whether the date is added to or removed from
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        String message = !date.value.isEmpty() ? MESSAGE_ADD_DATE_SUCCESS : MESSAGE_DELETE_DATE_SUCCESS;
+        return String.format(message, personToEdit);
+    }
+
 
     @Override
     public boolean equals(Object other) {

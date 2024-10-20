@@ -53,5 +53,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         tags.getChildren().add(new Label(person.getTag().tagName));
+        date.setText(person.getDate().value);
     }
 }
