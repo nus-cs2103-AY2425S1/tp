@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.role.Role;
@@ -27,6 +28,7 @@ public class Person implements Comparable<Person> {
 
     private final TelegramUsername telegramUsername;
     private final Set<Role> roles = new HashSet<>();
+    private UUID uniqueId;
 
     /**
      * Every field must be present and not null
@@ -41,26 +43,8 @@ public class Person implements Comparable<Person> {
         this.address = address;
         this.telegramUsername = telegramUsername;
         this.roles.addAll(roles);
+        this.uniqueId = UUID.randomUUID(); // Generate a unique ID
     }
-
-    /**
-     * Constructor that takes in a variable number of roles(optional field)
-     */
-    //    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-    //                    TelegramUsername telegramUsername, Role... roles) {
-    //        requireAllNonNull(name, phone, email, address, tags);
-    //        this.name = name;
-    //        this.phone = phone;
-    //        this.email = email;
-    //        this.address = address;
-    //        this.tags.addAll(tags);
-    //        this.telegramUsername = telegramUsername;
-    //        for (Role role : roles) {
-    //            this.roles.add(role);
-    //        }
-    //
-    //    }
-
 
     public Name getName() {
         return name;
@@ -80,8 +64,6 @@ public class Person implements Comparable<Person> {
     public TelegramUsername getTelegramUsername() {
         return telegramUsername;
     }
-
-
 
 
     /**
@@ -117,9 +99,6 @@ public class Person implements Comparable<Person> {
                 || otherPerson.getEmail().equals(getEmail())
                 || otherPerson.getTelegramUsername().equals(getTelegramUsername());
     }
-
-
-
 
     /**
      * Returns true if both persons have the same phone number.
@@ -163,17 +142,14 @@ public class Person implements Comparable<Person> {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-
                 && telegramUsername.equals(otherPerson.telegramUsername)
                 && roles.equals(otherPerson.roles);
-
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, roles);
-
+        return Objects.hash(name, phone, email, address, telegramUsername, roles);
     }
 
     /**
@@ -182,7 +158,6 @@ public class Person implements Comparable<Person> {
     public boolean hasRole(Role role) {
         return roles.contains(role);
     }
-
 
     @Override
     public String toString() {
