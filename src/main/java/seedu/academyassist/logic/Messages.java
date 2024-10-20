@@ -48,10 +48,11 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; NRIC: ")
                 .append(person.getIc())
+                .append("; Year group: ")
+                .append(person.getYearGroup())
                 .append("; Subjects: ");
-        person.getSubjects().forEach(builder::append);
-        builder.append(person.getSubjects())
-                .append("; Tags: ");
+        person.getSubjects().forEach(s -> builder.append(s + " "));
+        builder.append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

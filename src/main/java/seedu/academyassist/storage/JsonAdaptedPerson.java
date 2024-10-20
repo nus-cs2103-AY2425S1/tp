@@ -17,6 +17,7 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String ic;
+    private final String yearGroup;
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -40,13 +42,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("ic") String ic, @JsonProperty("subject") List<JsonAdaptedSubject> subjects,
+            @JsonProperty("ic") String ic, @JsonProperty("year group") String yearGroup,
+            @JsonProperty("subject") List<JsonAdaptedSubject> subjects,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.ic = ic;
+        this.yearGroup = yearGroup;
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
@@ -64,6 +68,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         ic = source.getIc().value;
+        yearGroup = source.getYearGroup().value;
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
@@ -122,6 +127,10 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Ic.MESSAGE_CONSTRAINTS);
         }
         final Ic modelIc = new Ic(ic);
+        if (!YearGroup.isValidYearGroup(yearGroup)) {
+            throw new IllegalValueException(YearGroup.MESSAGE_CONSTRAINTS);
+        }
+        final YearGroup modelYearGroup = new YearGroup(yearGroup);
 
         if (subjects == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
@@ -136,7 +145,8 @@ class JsonAdaptedPerson {
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelSubjects, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelSubjects,
+                modelTags);
     }
 
 }
