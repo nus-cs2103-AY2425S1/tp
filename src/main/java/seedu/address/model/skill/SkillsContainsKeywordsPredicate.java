@@ -1,6 +1,8 @@
 package seedu.address.model.skill;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
@@ -11,10 +13,10 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code Skills} matches any of the keywords given.
  */
 public class SkillsContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+    private final Set<String> keywords;
 
     public SkillsContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        this.keywords = new HashSet<String>(keywords);
     }
 
     @Override
