@@ -21,9 +21,11 @@ public class EventUpcomingPredicate implements Predicate<Event> {
     public EventUpcomingPredicate(Integer range) {
         if (range >= 0) {
             startDate = DateTimeUtil.getCurrentDateTime();
-            endDate = DateTimeUtil.getCurrentDateTime().plusDays(range);
+            endDate = DateTimeUtil.getCurrentDateTime().withHour(23).withMinute(59).withSecond(59).withNano(999999999)
+                    .plusDays(range);
         } else {
-            startDate = DateTimeUtil.getCurrentDateTime().minusDays(range);
+            startDate = DateTimeUtil.getCurrentDateTime().withHour(0).withMinute(0).withSecond(0).withNano(0)
+                    .minusDays(-range);
             endDate = DateTimeUtil.getCurrentDateTime();
         }
     }
