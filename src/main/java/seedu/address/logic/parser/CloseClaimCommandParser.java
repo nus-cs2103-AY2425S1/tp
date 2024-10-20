@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.CloseClaimCommand;
-import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -34,14 +33,14 @@ public class CloseClaimCommandParser implements Parser<CloseClaimCommand> {
             if (argMultimap.getValue(PREFIX_INSURANCE_ID).isEmpty()
                     || argMultimap.getValue(PREFIX_CLAIM_ID).isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteClaimCommand.MESSAGE_USAGE));
+                        CloseClaimCommand.MESSAGE_USAGE));
             }
 
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
             insuranceId = ParserUtil.parseInsurancePlan(argMultimap.getValue(PREFIX_INSURANCE_ID).get());
             claimId = ParserUtil.parseClaimId(argMultimap.getValue(PREFIX_CLAIM_ID).get());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(ive.getMessage(), DeleteClaimCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(ive.getMessage(), CloseClaimCommand.MESSAGE_USAGE), ive);
         }
 
         return new CloseClaimCommand(index, insuranceId, claimId);
