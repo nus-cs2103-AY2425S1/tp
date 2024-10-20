@@ -7,8 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalConcertContacts.ALICE_COACHELLA;
+import static seedu.address.testutil.TypicalConcertContacts.BENSON_COACHELLA;
 import static seedu.address.testutil.TypicalConcerts.COACHELLA;
+import static seedu.address.testutil.TypicalConcerts.GLASTONBURY;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -112,6 +116,43 @@ public class AddressBookTest {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook
                 .getPersonList() + ", concerts=" + addressBook.getConcertList() + "}";
         assertEquals(expected, addressBook.toString());
+    }
+
+    @Test
+    public void equals() {
+        AddressBook other = new AddressBook();
+        addressBook.addConcert(COACHELLA);
+        addressBook.addConcert(GLASTONBURY);
+        other.addConcert(COACHELLA);
+
+        // dofferent concerts return false
+        assertFalse(addressBook.equals(other));
+        other.addConcert(GLASTONBURY);
+
+        // same concert returns true
+        assertTrue(addressBook.equals(other));
+
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(BENSON);
+        other.addPerson(ALICE);
+
+        // different persons return false
+        assertFalse(addressBook.equals(other));
+        other.addPerson(BENSON);
+
+        // same persons return true
+        assertTrue(addressBook.equals(other));
+
+        addressBook.addConcertContact(ALICE_COACHELLA);
+        addressBook.addConcertContact(BENSON_COACHELLA);
+        other.addConcertContact(ALICE_COACHELLA);
+
+        // different concertContacts return false
+        assertFalse(addressBook.equals(other));
+        other.addConcertContact(BENSON_COACHELLA);
+
+        // same people same conert smae concertContacts returns true
+        assertEquals(addressBook, other);
     }
 
     /**

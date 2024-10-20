@@ -24,6 +24,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.commons.Address;
 import seedu.address.model.commons.Name;
+import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -84,6 +85,13 @@ public class EditCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // replace all occurences of the personToEdit with editedPerson
+        for (ConcertContact cc : model.getFilteredConcertContactList()) {
+            if (cc.getPerson().equals(personToEdit)) {
+                model.setConcertContact(cc, new ConcertContact(editedPerson, cc.getConcert()));
+            }
         }
 
         model.setPerson(personToEdit, editedPerson);
