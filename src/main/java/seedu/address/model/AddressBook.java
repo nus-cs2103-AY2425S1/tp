@@ -3,19 +3,23 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameStudent comparison)
+ * Duplicate students are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
+    private final ObservableList<Consultation> consults;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,12 +30,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        consults = FXCollections.observableArrayList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an AddressBook using the data in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -49,12 +54,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the consultation list with {@code consults}.
+     */
+    public void setConsults(List<Consultation> consults) {
+        this.consults.setAll(consults);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setConsults(newData.getConsultList());
     }
 
     //// student-level operations
@@ -68,11 +81,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a consult with the same details as the given consult exists in TAHub.
+     * @param consult The consultation to search for.
+     * @return True if a consultation is found.
+     */
+    public boolean hasConsult(Consultation consult) {
+        requireNonNull(consult);
+        return consults.contains(consult);
+    }
+
+    /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
     public void addStudent(Student p) {
         students.add(p);
+    }
+
+    /**
+     * Adds a consultation to TAHub.
+     */
+    public void addConsult(Consultation c) {
+        consults.add(c);
     }
 
     /**
@@ -101,12 +131,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("students", students)
+                .add("consults", consults)
                 .toString();
     }
 
     @Override
     public ObservableList<Student> getStudentList() {
         return students.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Consultation> getConsultList() {
+        return FXCollections.unmodifiableObservableList(consults);
     }
 
     @Override
@@ -121,11 +156,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students);
+        return students.equals(otherAddressBook.students)
+                && consults.equals(otherAddressBook.consults);
     }
 
     @Override
     public int hashCode() {
-        return students.hashCode();
+        return Objects.hash(students, consults);
     }
 }
