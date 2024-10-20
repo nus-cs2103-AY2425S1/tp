@@ -12,6 +12,7 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
     public StudentHasPaidPredicate(boolean hasPaid) {
         this.hasPaid = hasPaid;
     }
+    
     @Override
     public boolean test(Person person) {
         return this.hasPaid == person.getPayment().hasPaid;
