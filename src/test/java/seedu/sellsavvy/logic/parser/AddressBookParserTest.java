@@ -19,6 +19,7 @@ import seedu.sellsavvy.logic.commands.generalcommands.ExitCommand;
 import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.DeleteOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
 import seedu.sellsavvy.logic.commands.personcommands.DeletePersonCommand;
@@ -115,6 +116,12 @@ public class AddressBookParserTest {
         DeleteOrderCommand command = (DeleteOrderCommand) parser.parseCommand(
                 DeleteOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
         assertEquals(new DeleteOrderCommand(INDEX_FIRST_ORDER), command);
+    }
+
+    @Test
+    public void parseCommand_editOrder() throws Exception {
+        EditOrderCommand command = (EditOrderCommand) parser.parseCommand(
+                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased())
     }
 
     @Test
