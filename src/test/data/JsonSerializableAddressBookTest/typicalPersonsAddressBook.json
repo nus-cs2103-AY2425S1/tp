@@ -57,5 +57,9 @@
     "attendance": "true",
     "tags" : [ ]
   } ],
-  "tutorials" : [ ]
+  "tutorials" : [  {
+    "subject" : "Math"
+  }, {
+    "subject" : "Science"
+  } ]
 }

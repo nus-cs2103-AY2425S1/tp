@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.MATH;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -21,7 +22,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tutorial.Tutorial;
+import seedu.address.model.tutorial.exceptions.DuplicateTutorialException;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TutorialBuilder;
 
 public class AddressBookTest {
 
@@ -51,9 +54,19 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        AddressBookStub newData = new AddressBookStub(newPersons, Collections.singletonList(MATH));
 
         assertThrows(DuplicatePersonException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void resetData_withDuplicateTutorials_throwsDuplicateTutorialException() {
+        // Two tutorials with the same subject fields
+        Tutorial editedMath = new TutorialBuilder(MATH).build();
+        List<Tutorial> newTutorials = Arrays.asList(MATH, editedMath);
+        AddressBookStub newData = new AddressBookStub(Collections.singletonList(ALICE), newTutorials);
+
+        assertThrows(DuplicateTutorialException.class, () -> addressBook.resetData(newData));
     }
 
 
@@ -63,14 +76,28 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasTutorial_nullTutorial_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasTutorial(null));
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
+    }
+    @Test
+    public void hasTutorial_tutorialNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasTutorial(MATH));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
+    }
+    @Test
+    public void hasTutorial_tutorialInAddressBook_returnsTrue() {
+        addressBook.addTutorial(MATH);
+        assertTrue(addressBook.hasTutorial(MATH));
     }
 
     @Test
@@ -80,10 +107,20 @@ public class AddressBookTest {
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
+    @Test
+    public void hasTutorial_tutorialWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addTutorial(MATH);
+        Tutorial editedMath = new TutorialBuilder(MATH).build();
+        assertTrue(addressBook.hasTutorial(editedMath));
+    }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+    @Test
+    public void getTutorialList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTutorialList().remove(0));
     }
 
     @Test
@@ -101,8 +138,9 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Tutorial> tutorials = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Tutorial> tutorials) {
             this.persons.setAll(persons);
+            this.tutorials.setAll(tutorials);
         }
 
         @Override
