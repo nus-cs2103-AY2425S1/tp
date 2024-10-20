@@ -96,6 +96,42 @@ public class EmergencyContactCommandTest {
     }
 
     @Test
+    public void execute_addEmergencyContactWithOnlyNameUnfilteredList_failure() {
+        Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(thirdPerson).withEmergencyContact(EMERGENCY_CONTACT_NAME_STUB,
+                "").build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = EmergencyContactCommand.MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS;
+        assertCommandFailure(emergencyContactCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_addEmergencyContactWithOnlyNumberUnfilteredList_failure() {
+        Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(thirdPerson).withEmergencyContact("",
+                EMERGENCY_CONTACT_NUMBER_STUB).build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = EmergencyContactCommand.MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS;
+        assertCommandFailure(emergencyContactCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_addEmergencyContactWithNoNameAndNumberUnfilteredList_failure() {
+        Person thirdPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Person editedPerson = new PersonBuilder(thirdPerson).withEmergencyContact("",
+                "").build();
+        EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(INDEX_THIRD_PERSON,
+                new EmergencyContact(editedPerson.getEmergencyContact().contactName,
+                        editedPerson.getEmergencyContact().contactNumber));
+        String expectedMessage = EmergencyContactCommand.MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS;
+        assertCommandFailure(emergencyContactCommand, model, expectedMessage);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         EmergencyContactCommand emergencyContactCommand = new EmergencyContactCommand(outOfBoundIndex,
