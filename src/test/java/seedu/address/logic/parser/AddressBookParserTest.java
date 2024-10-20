@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -116,7 +116,7 @@ public class AddressBookParserTest {
 
         // parse study groups criteria
         FindCommand studyGroupsCommand = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + FindUtil.getFindCriteria(PREFIX_TAG, generalKeywords));
+                FindCommand.COMMAND_WORD + " " + FindUtil.getFindCriteria(PREFIX_STUDY_GROUP_TAG, generalKeywords));
         assertEquals(new FindCommand(new PredicateGroup(
                 new StudyGroupsContainKeywordsPredicate(generalKeywords))),
                 studyGroupsCommand);
@@ -134,7 +134,7 @@ public class AddressBookParserTest {
                         + " " + FindUtil.getFindCriteria(PREFIX_EMAIL, generalKeywords)
                         + " " + FindUtil.getFindCriteria(PREFIX_GENDER, genderKeywords)
                         + " " + FindUtil.getFindCriteria(PREFIX_AGE, ageKeywords)
-                        + " " + FindUtil.getFindCriteria(PREFIX_TAG, generalKeywords)
+                        + " " + FindUtil.getFindCriteria(PREFIX_STUDY_GROUP_TAG, generalKeywords)
                         + " " + FindUtil.getFindCriteria(PREFIX_DETAIL, generalKeywords));
         PredicateGroup expectedPredicateGroup = new PredicateGroup(
                 new NameContainsKeywordsPredicate(generalKeywords),
@@ -167,7 +167,6 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
-                parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
 }

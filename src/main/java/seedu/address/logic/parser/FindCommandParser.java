@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 
 import java.util.Arrays;
 
@@ -39,7 +39,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER,
-                PREFIX_AGE, PREFIX_DETAIL, PREFIX_TAG);
+                PREFIX_AGE, PREFIX_DETAIL, PREFIX_STUDY_GROUP_TAG);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER, PREFIX_AGE, PREFIX_DETAIL);
 
@@ -61,8 +61,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             String[] ageKeywords = argMultimap.getValue(PREFIX_AGE).get().split("\\s+");
             predicateGroup.add(new AgeContainsKeywordsPredicate(Arrays.asList(ageKeywords)));
         }
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            String[] tagKeywords = argMultimap.getValue(PREFIX_TAG).get().split("\\s+");
+        if (argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).isPresent()) {
+            String[] tagKeywords = argMultimap.getValue(PREFIX_STUDY_GROUP_TAG).get().split("\\s+");
             predicateGroup.add(new StudyGroupsContainKeywordsPredicate(Arrays.asList(tagKeywords)));
         }
         if (argMultimap.getValue(PREFIX_DETAIL).isPresent()) {

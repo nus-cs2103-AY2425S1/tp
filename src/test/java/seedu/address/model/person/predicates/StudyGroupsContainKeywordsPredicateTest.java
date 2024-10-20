@@ -47,19 +47,19 @@ public class StudyGroupsContainKeywordsPredicateTest {
         // One keyword
         StudyGroupsContainKeywordsPredicate predicate = new StudyGroupsContainKeywordsPredicate(
                 Collections.singletonList("Group1"));
-        assertTrue(predicate.test(new PersonBuilder().withStudyGroups("Group1", "Group2").build()));
+        assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Multiple keywords
         predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("Group1", "Group2"));
-        assertTrue(predicate.test(new PersonBuilder().withStudyGroups("Group1", "Group2").build()));
+        assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Only one matching keyword
         predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("Group1", "NotGroup"));
-        assertTrue(predicate.test(new PersonBuilder().withStudyGroups("Group1", "Group2").build()));
+        assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Mixed-case keywords
         predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("gRoUP1", "GRouP2"));
-        assertTrue(predicate.test(new PersonBuilder().withStudyGroups("Group1", "Group2").build()));
+        assertTrue(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
     }
 
     @Test
@@ -67,11 +67,11 @@ public class StudyGroupsContainKeywordsPredicateTest {
         // Zero keywords
         StudyGroupsContainKeywordsPredicate predicate = new StudyGroupsContainKeywordsPredicate(
                 Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withStudyGroups("Group1", "Group2").build()));
+        assertFalse(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
 
         // Non-matching keyword
         predicate = new StudyGroupsContainKeywordsPredicate(Arrays.asList("Group3", "Group4"));
-        assertFalse(predicate.test(new PersonBuilder().withStudyGroups("Group1", "Group2").build()));
+        assertFalse(predicate.test(new PersonBuilder().withStudyGroupTags("Group1", "Group2").build()));
     }
 
     @Test

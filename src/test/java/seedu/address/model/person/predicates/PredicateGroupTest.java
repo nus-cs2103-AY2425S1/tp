@@ -82,7 +82,7 @@ public class PredicateGroupTest {
 
         Person person = new PersonBuilder().withName("Alice Kingsleigh").withEmail("alice@wonderland.com")
                 .withGender("F").withAge("22").withDetail("Went through the Looking Glass")
-                .withStudyGroups("H1", "H2", "G1").build();
+                .withStudyGroupTags("H1", "H2", "G1").build();
         PredicateGroup predicateGroup = new PredicateGroup(namePredicate, emailPredicate, genderPredicate,
                 agePredicate, detailsPredicate, studyGroupsPredicate);
 
@@ -107,7 +107,7 @@ public class PredicateGroupTest {
         // Fail all predicates
         Person person = new PersonBuilder().withName("Dorothy Gale").withEmail("dorothy@land.oz")
                 .withGender("F").withAge("18").withDetail("Up the tornado")
-                .withStudyGroups("O1", "O2", "O3").build();
+                .withStudyGroupTags("O1", "O2", "O3").build();
         PredicateGroup predicateGroup = new PredicateGroup(namePredicate, emailPredicate, genderPredicate,
                 agePredicate, detailsPredicate, studyGroupsPredicate);
 
@@ -116,7 +116,7 @@ public class PredicateGroupTest {
         // Fail one predicate (detail predicate will fail)
         person = new PersonBuilder().withName("Alice Kingsleigh").withEmail("alice@wonderland.com")
                 .withGender("F").withAge("22").withDetail("Went through the unlooking Glass")
-                .withStudyGroups("H1", "H2", "G1").build();
+                .withStudyGroupTags("H1", "H2", "G1").build();
 
         assertFalse(predicateGroup.test(person));
     }
