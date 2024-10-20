@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_ASSIGNMENT_ID
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMPLOYEE_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PROJECT_ID_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_ALPHA;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_ID_ONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
@@ -27,7 +28,6 @@ import seedu.address.testutil.TypicalProjects;
 
 
 public class UnassignCommandParserTest {
-    private static final String PROJECT_ID_DESC_ALPHA = ;
     private UnassignCommandParser parser = new UnassignCommandParser();
 
     @Test
