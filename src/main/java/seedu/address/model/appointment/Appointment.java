@@ -3,7 +3,10 @@ package seedu.address.model.appointment;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+
+import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
 
 /**
  * Represents an Appointment in the address book.
@@ -50,6 +53,15 @@ public class Appointment {
     @Override
     public int hashCode() {
         return Objects.hash(description, start, end);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("description", description)
+                .add("start", start.format(DATE_TIME_FORMATTER))
+                .add("end", end.format(DATE_TIME_FORMATTER))
+                .toString();
     }
 
 }
