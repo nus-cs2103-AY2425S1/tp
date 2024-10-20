@@ -10,6 +10,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -44,7 +45,7 @@ public class DeleteEventCommand extends DeleteCommand {
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.removeEvent(eventToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, Messages.eventFormat(eventToDelete)),
-                                                                false, false, CommandTabChange.EVENT);
+                false, false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }
 
     @Override
