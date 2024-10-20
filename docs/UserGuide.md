@@ -102,7 +102,7 @@ Edits an existing elderly in ContactMate.
 
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
-* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list.The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -140,7 +140,7 @@ Format: `delete INDEX/NRIC`
 
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC
 
 Examples:
@@ -151,11 +151,12 @@ Examples:
 
 Marks the specified elderly from ContactMate as called. 
 As a result, ContactMate will also update the next contact date for the specified elderly in the Main Window.
+Besides, you can also mark the specified elderly on the specified date with optional notes.
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
 * Marks the person at the specified `INDEX` or `NRIC`.
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC.
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
@@ -173,7 +174,7 @@ Format: `history INDEX/NRIC`
 
 * Shows call history of the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The NRIC has to be a valid NRIC
 
 Examples:
