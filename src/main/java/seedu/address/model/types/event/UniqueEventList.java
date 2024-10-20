@@ -36,10 +36,9 @@ public class UniqueEventList implements Iterable<Event> {
      * Periodically sorts the events especially when an event becomes completed.
      */
     public UniqueEventList() {
-//        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
-//                javafx.util.Duration.seconds(10));
-//        eventReSortTimeline.play();
-        System.out.println("Hi");
+        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
+                javafx.util.Duration.seconds(10));
+        eventReSortTimeline.play();
     }
 
     private void sortEvents() {
