@@ -15,6 +15,12 @@ public class Wedding {
     private final String date;
     private final List<PersonId> assignees; //Stores a list of UserIDs
 
+    public Wedding(String name, String date) {
+        this.name = name;
+        this.date = date;
+        this.assignees = new ArrayList<>();
+    }
+
     public Wedding(String name, String date, List<PersonId> assignees) {
         this.name = name;
         this.date = date;
