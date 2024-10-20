@@ -23,11 +23,11 @@ public class DoctorTest {
         Doctor.getDoctors().clear();
 
         testDoctor1 = new Doctor(
-                new Name("Alice"), new Phone("12345678"), new Email("alice@example.com"),
+                new Name("Alice"), "doctor", new Phone("12345678"), new Email("alice@example.com"),
                 new Address("123 Wonderland"), new Remark("Diabetic"), Set.of(new Tag("Chronic")));
 
         testDoctor2 = new Doctor(
-                new Name("Bob"), new Phone("87654321"), new Email("bob@example.com"),
+                new Name("Bob"), "doctor", new Phone("87654321"), new Email("bob@example.com"),
                 new Address("456 Nowhere Street"), new Remark("Healthy"), Set.of(new Tag("General")));
     }
 

@@ -21,11 +21,10 @@ import seedu.address.model.tag.Tag;
 public class Person implements Appointmentable {
     // Identity fields
     private final Name name;
+    private final String role;
     private final Phone phone;
     private final Email email;
     private final Id id;
-
-    // Data fields
     private final Address address;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
@@ -34,9 +33,10 @@ public class Person implements Appointmentable {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, String role, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
+        this.role = role;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -48,6 +48,9 @@ public class Person implements Appointmentable {
 
     public Name getName() {
         return name;
+    }
+    public String getRole() {
+        return role;
     }
 
     public Phone getPhone() {
@@ -223,6 +226,8 @@ public class Person implements Appointmentable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" ID: ")
+                .append(getRole())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")

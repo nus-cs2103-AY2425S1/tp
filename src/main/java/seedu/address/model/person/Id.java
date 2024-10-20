@@ -10,7 +10,6 @@ public class Id {
     private static int doctorIdCounter = 1000;
     private static int personIdCounter = 0; // TODO REMOVE AFTER V1.3
     protected int idValue;
-    private Class<? extends Person> role;
 
     /**
      * Creates an Id that is associated with a specific class.
@@ -19,7 +18,6 @@ public class Id {
      */
     public Id(Class<? extends Person> personClass) {
         requireNonNull(personClass);
-        this.role = personClass;
 
         // Check if the class is Patient or Doctor and assign the appropriate ID
         if (personClass.equals(Patient.class)) {
@@ -37,12 +35,8 @@ public class Id {
         return idValue;
     }
 
-    public Class<? extends Person> getRole() {
-        return role;
-    }
-
     @Override
     public String toString() {
-        return "Id{" + "id=" + idValue + ", role=" + role.getSimpleName() + '}';
+        return "Id{" + "id=" + idValue + '}';
     }
 }
