@@ -1,12 +1,15 @@
 ---
-layout: page
-title: User Guide
+  layout: default.md
+  title: "User Guide"
+  pageNav: 3
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+# Sellsavvy User Guide
 
-* Table of Contents
-{:toc}
+Sellsavvy is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SellSavvy can get your contact management tasks done faster than traditional GUI apps.
+
+<!-- * Table of Contents -->
+<page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +44,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
+<box type="info" seamless>
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -61,7 +64,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
+</box>
 
 ### Viewing help : `help`
 
@@ -78,9 +81,10 @@ Adds a person to the address book.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+<box type="tip" seamless>
+
+**Tip:** A person can have any number of tags (including 0)
+</box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -141,6 +145,67 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding an order under a Person : `addOrder`
+
+Adds an order under a specified person from the address book.
+
+Format: `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]`
+
+* Add an order under the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index and quantity **must be a positive integer** 1, 2, 3, …​
+* Date must follow the following format: `DD-MM-YYYY`
+* If the quantity is not provided, the quantity will be set to a default value of **1**.
+
+Examples:
+* `addOrder 2 i/Lamp d/20-11-2024 c/3` adds the order with item `Lamp`, quantity of **3** and delivery date `20-11-2024`, to the 2nd person in the address book.
+* `addOrder 1 i/Books d/02-03-2026` adds the order with item `Books`, quantity of **1** and delivery date `02-03-2026`, to the first person in the address book.
+* `find Betsy` followed by `addOrder 1 i/Bottles d/12-12-2002 c/1` adds an order under the 1st person in the results of the `find` command.
+
+### Listing all orders under a Person : `listOrder`
+
+List all orders of a specified person from the address book.
+
+Format: `listOrder INDEX`
+
+* List all orders of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `listOrder 2` lists all orders of the 2nd person in the address book.
+* `find Betsy` followed by `listOrder 1` lists all orders of the 1st person from the list of persons found with "Betsy".
+
+### Deleting an order under a Person : `deleteOrder`
+
+Deletes an order under a selected person whose orders are displayed using `listOrder`.
+
+Format: `deleteOrder ORDER_INDEX`
+
+* A person's order list must be selected using `listOrder` before deleting an order from that person.
+* Deletes an order under the selected person at the specified `ORDER_INDEX`.
+* The order index refers to the index number shown in the displayed **order** list of the selected person.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `deleteOrder 1` deletes the order with index 1 from the selected person.
+* `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
+
+### Mark an order as completed : `markOrder`
+
+Marks an order under the person whose orders are displayed as completed.
+
+Format: `markOrder ORDER_INDEX`
+
+* A person's order list must be selected using `listOrder` before marking an order from that person.
+* Marks an order under the selected person at the specified `ORDER_INDEX` as completed.
+* The order index refers to the index number shown in the **displayed order list**.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `markOrder 1` marks the order with index 1 from the displayed order list as completed.
+* `listOrder 1` followed by `markOrder 2` selects the 1st person in the address book and marks the 2nd order under the 1st person as completed.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -161,10 +226,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
+<box type="warning" seamless>
+
+**Caution:**
+If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+</box>
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -188,12 +255,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+Action                | Format, Examples
+----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add a person**                | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear**                       | `clear`
+**Delete a person**             | `delete INDEX`<br> e.g., `delete 3`
+**Edit a person**               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find person(s)**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List all persons**            | `list`
+**Add an order**                | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
+**List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
+**Delete an order**             | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
+**Mark an order as completed**  | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
+**Help**                        | `help`
