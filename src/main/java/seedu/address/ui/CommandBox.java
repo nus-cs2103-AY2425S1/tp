@@ -64,7 +64,7 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         } finally {
-            commandTextHistory.addCommand(commandText);
+            commandTextHistory.addCommandToHistory(commandText);
         }
     }
 

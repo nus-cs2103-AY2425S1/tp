@@ -12,8 +12,8 @@ public class CommandTextHistoryTest {
     @Test
     public void getPreviousCommand() {
         CommandTextHistory commandTextHistory = new CommandTextHistory();
-        commandTextHistory.addCommand("list");
-        commandTextHistory.addCommand("invalid command"); // works for invalid commands too
+        commandTextHistory.addCommandToHistory("list");
+        commandTextHistory.addCommandToHistory("invalid command"); // works for invalid commands too
         assertEquals("invalid command", commandTextHistory.getPreviousCommand());
         assertEquals("list", commandTextHistory.getPreviousCommand());
         assertEquals("list", commandTextHistory.getPreviousCommand());
@@ -23,8 +23,8 @@ public class CommandTextHistoryTest {
     @Test
     public void getNextCommand() {
         CommandTextHistory commandTextHistory = new CommandTextHistory();
-        commandTextHistory.addCommand("list");
-        commandTextHistory.addCommand("invalid command"); // works for invalid commands too
+        commandTextHistory.addCommandToHistory("list");
+        commandTextHistory.addCommandToHistory("invalid command"); // works for invalid commands too
         assertEquals("", commandTextHistory.getNextCommand());
 
         commandTextHistory.getPreviousCommand();

@@ -28,7 +28,7 @@ public class CommandTextHistory {
      * Adds a command text to the history.
      * @param commandText The command text to be added.
      */
-    public void addCommand(String commandText) {
+    public void addCommandToHistory(String commandText) {
         commandHistory.add(commandText);
         currentCommandIndex = commandHistory.size();
         logger.info("Command added to history: " + commandText);
