@@ -62,7 +62,7 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a tutorial set containing the list of strings given and all are defaulted to true.
+     * Returns a tutorial set containing the list of strings given and all are defaulted to not taken place.
      */
     public static Map<Tutorial, AttendanceStatus> getTutorialMap() {
         String[] strings = new String[Person.MAXIMUM_TUTORIALS];

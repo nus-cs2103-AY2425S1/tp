@@ -90,7 +90,7 @@ public class MarkCommandTest {
 
         // Check person is edited
         Map<Tutorial, AttendanceStatus> newTutorials = new HashMap<>(personToEdit.getTutorials());
-        newTutorials.put(tutorialToBeAdded, AttendanceStatus.ATTENDED);
+        newTutorials.put(tutorialToBeAdded, AttendanceStatus.PRESENT);
         Person expectedEditedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),

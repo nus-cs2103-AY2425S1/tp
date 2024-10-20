@@ -78,10 +78,16 @@ public class Person {
     }
 
     /**
-     * Gets the attendance status of a specific tutorial.
+     * Returns the relevant CSS class based on the status of the tutorial.
      */
-    public AttendanceStatus getAttendanceStatus(String index) {
-        return tutorials.get(new Tutorial(index));
+    public String getAttendanceCssClass(String index) {
+        if (tutorials.get(new Tutorial(index)) == AttendanceStatus.NOT_TAKEN_PLACE) {
+            return "tutorial-not-taken-place";
+        } else if (tutorials.get(new Tutorial(index)) == AttendanceStatus.PRESENT) {
+            return "tutorial-present";
+        } else {
+            return "tutorial-absent";
+        }
     }
 
     /**

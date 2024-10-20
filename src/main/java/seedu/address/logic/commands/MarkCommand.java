@@ -54,12 +54,12 @@ public class MarkCommand extends Command {
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
-        if (newTutorials.get(tutorial) == AttendanceStatus.ATTENDED) {
+        if (newTutorials.get(tutorial) == AttendanceStatus.PRESENT) {
             throw new CommandException(
                     String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
         }
 
-        newTutorials.put(tutorial, AttendanceStatus.ATTENDED);
+        newTutorials.put(tutorial, AttendanceStatus.PRESENT);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),

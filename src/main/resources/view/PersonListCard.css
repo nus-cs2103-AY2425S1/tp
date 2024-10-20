@@ -7,11 +7,14 @@
     -fx-border-width: 2px;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
-    -fx-background-color: #6d727a;
     -fx-font-weight: bold;
 }
 
-.tutorial-attended {
+.tutorial-not-taken-place {
+    -fx-background-color: #6d727a;
+}
+
+.tutorial-present {
     -fx-background-color: #32cf39;
 }
 
