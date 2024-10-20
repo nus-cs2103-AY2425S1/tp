@@ -7,12 +7,34 @@
 UniVerse is a **comprehensive platform** tailored for university students to seamlessly **build and manage their professional networks**. Whether you're looking to make new friends or expand your career connections, UniVerse brings everything you need into one place. By consolidating key information such as academic backgrounds, work experiences, and personal interests, students can **easily connect and engage with their peers**.
 
 **Key Features:**
- 
-  * **Search by Major:** Quickly find and connect with students from the same academic field to foster meaningful academic and professional relationships.
-  * **Add New Contacts:** Build your professional network by adding new contacts, complete with essential details such as name, phone, email, address, university, and major.
-  * **Associate Interests:** Link interests or hobbies to contacts, making it easier to discover peers with common interests in both academic and social circles.
-  * **Delete Contacts:** Keep your network organized by easily removing outdated or unnecessary contacts.
-  * **Add Work Experience:** Enhance your contacts by adding their internship or work experience, allowing you to connect with people who have relevant industry experience.
+
+**1. Search for Contacts by University**
+- **Purpose**: Find peers enrolled in the same university.
+- **Command**: `findu u/KEYWORD`
+- **Example**:
+    - Command: `findu u/NUS`
+    - Output: Displays a list of students enrolled in NUS.
+
+**2. Search for Contacts by Major**
+- **Purpose**: Find peers studying the same major.
+- **Command**: `findm m/KEYWORD`
+- **Example**:
+    - Command: `findm m/Computer Science`
+    - Output: Displays a list of students enrolled in Computer Science.
+
+**3. Add a New Contact**
+- **Purpose**: Allows users to add detailed contact information to build a professional network.
+- **Command**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS u/UNIVERSITY m/MAJOR`
+- **Example**:
+    - Command: `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 u/NUS m/Computer Science`
+    - Output: "Contact [Name] added successfully."
+
+**4. Add Work Experience**
+- **Purpose**: Add detailed work experience to a contact's profile, helping build a more comprehensive professional network by including relevant roles, companies, and years of employment.
+- **Command**: `add n/NAME w/ROLE,COMPANY,YEAR`
+- **Example Command**:
+    - Command: `add n/John Doe w/Intern,Google,2024`
+    - Output: "Work experience added for John Doe: Intern at Google, 2024."
 
 UniVerse provides university students with a **streamlined solution to manage their personal and professional networks**, enabling them to grow both socially and academically in one unified platform.
 
