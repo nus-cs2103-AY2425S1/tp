@@ -12,6 +12,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.UniqueWeddingList;
 
 /**
  * Wraps all data at the address-book level
@@ -20,6 +22,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueWeddingList weddings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -30,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        weddings = new UniqueWeddingList();
     }
 
     public AddressBook() {}
@@ -96,6 +100,30 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    //// Wedding level operations
+
+    public void addWedding (Wedding wedding) {
+        weddings.addWedding(wedding);
+    }
+
+    public void removeWedding (Wedding wedding) {
+        weddings.removeWedding(wedding);
+    }
+
+    public void assignPerson (Wedding wedding, Person person) {
+        requireNonNull(wedding);
+        requireNonNull(person);
+
+        weddings.assignToWedding(wedding, person);
+    }
+
+    public void unassignPerson (Wedding wedding, Person person) {
+        requireNonNull(wedding);
+        requireNonNull(person);
+
+        weddings.unassignFromWedding(wedding, person);
     }
 
     /**
