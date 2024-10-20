@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CloseClaimCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Creates an {@code CloseClaimCommand} object after parsing the user inputs.
+ * Creates a {@code CloseClaimCommand} object after parsing the user inputs.
  */
 public class CloseClaimCommandParser implements Parser<CloseClaimCommand> {
     /**

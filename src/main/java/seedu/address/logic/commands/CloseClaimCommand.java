@@ -64,26 +64,26 @@ public class CloseClaimCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToCloseClaim = lastShownList.get(index.getZeroBased());
 
         try {
 
-            InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+            InsurancePlansManager clientToEditInsurancePlansManager = clientToCloseClaim.getInsurancePlansManager();
             InsurancePlan planToBeUsed = clientToEditInsurancePlansManager.getInsurancePlan(insuranceId);
 
             Claim claimToBeMarkedAsClosed = planToBeUsed.getClaim(claimId);
             claimToBeMarkedAsClosed.close();
 
             Client clientWithClosedClaim = lastShownList.get(index.getZeroBased());
-            model.setClient(clientToEdit, clientWithClosedClaim);
+            model.setClient(clientToCloseClaim, clientWithClosedClaim);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-            return new CommandResult(String.format(MESSAGE_CLOSE_CLAIM_SUCCESS, clientToEdit.getName().toString(),
+            return new CommandResult(String.format(MESSAGE_CLOSE_CLAIM_SUCCESS, clientToCloseClaim.getName().toString(),
                     planToBeUsed, claimId));
         } catch (ClaimException e) {
-            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToCloseClaim)));
         } catch (InsurancePlanException e) {
-            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToCloseClaim)));
         }
     }
 }
