@@ -29,12 +29,13 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
+
     Optional<UniqueCourseList> readCourseList() throws DataLoadingException;
+
+    Optional<UniqueCourseList> readCourseList(Path filePath) throws DataLoadingException;
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
-
-    Optional<UniqueCourseList> readCourseList(Path filePath) throws DataLoadingException;
 
     void saveCourseList(UniqueCourseList courseList) throws IOException;
 

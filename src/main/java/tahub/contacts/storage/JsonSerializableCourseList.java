@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
-import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.UniqueCourseList;
 
 /**
  * An Immutable UniqueCourseList that is serializable to JSON format.

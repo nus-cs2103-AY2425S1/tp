@@ -49,6 +49,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code course} for display to the user.
+     */
     public static String format(Course course) {
         // Implement the formatting logic for Course objects
         return course.toString();

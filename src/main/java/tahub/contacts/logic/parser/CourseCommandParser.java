@@ -4,7 +4,6 @@ import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_CODE;
 import static tahub.contacts.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import tahub.contacts.logic.commands.CourseCommand;

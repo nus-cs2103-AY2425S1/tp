@@ -5,9 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
+import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
-import tahub.contacts.model.course.Course;
 
 /**
  * The API of the Model component.
