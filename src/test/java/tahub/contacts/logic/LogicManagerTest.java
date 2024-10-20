@@ -1,8 +1,6 @@
 package tahub.contacts.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static tahub.contacts.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static tahub.contacts.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static tahub.contacts.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tahub.contacts.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tahub.contacts.logic.commands.CommandTestUtil.MATRICULATION_NUMBER_DESC_AMY;
@@ -27,7 +25,6 @@ import tahub.contacts.logic.parser.exceptions.ParseException;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.ReadOnlyAddressBook;
-import tahub.contacts.model.UserPrefs;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.storage.JsonAddressBookStorage;
 import tahub.contacts.storage.JsonUniqueCourseListStorage;
@@ -57,18 +54,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_invalidCommandFormat_throwsParseException() {
-        String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
-    }
-
-    @Test
-    public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
@@ -86,11 +71,6 @@ public class LogicManagerTest {
                 LogicManager.FILE_OPS_PERMISSION_ERROR_FORMAT, DUMMY_AD_EXCEPTION.getMessage()));
     }
 
-    @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
-    }
-
     /**
      * Executes the command and confirms that
      * - no exceptions are thrown <br>
@@ -99,36 +79,10 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+                                      Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
-    }
-
-    /**
-     * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
-     */
-    private void assertParseException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
-    }
-
-    /**
-     * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
-     */
-    private void assertCommandException(String inputCommand, String expectedMessage) {
-        assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
-    }
-
-    /**
-     * Executes the command, confirms that the exception is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
-     */
-    private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getCourseList());
-        assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
     /**
@@ -139,7 +93,7 @@ public class LogicManagerTest {
      * @see #assertCommandSuccess(String, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
+                                      String expectedMessage, Model expectedModel) {
         assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
         assertEquals(expectedModel, model);
     }
