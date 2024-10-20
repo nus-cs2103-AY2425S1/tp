@@ -56,7 +56,8 @@
                     <content>
                         <VBox HBox.hgrow="ALWAYS" fx:id="textVBox">
                             <GridPane HBox.hgrow="ALWAYS">
-                                <VBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT" GridPane.columnIndex="0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
+                                <VBox HBox.hgrow="ALWAYS" alignment="CENTER_LEFT"
+                                      GridPane.columnIndex="0" maxWidth="Infinity" VBox.vgrow="ALWAYS">
                                     <HBox HBox.hgrow="ALWAYS" styleClass="text-box" VBox.vgrow="ALWAYS">
                                         <Text fx:id="deleteText" styleClass="text-command"/>
                                     </HBox>
