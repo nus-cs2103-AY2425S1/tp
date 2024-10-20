@@ -19,4 +19,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_MEETING_DATE = new Prefix("d/");
     public static final Prefix PREFIX_BID = new Prefix("b/");
     public static final Prefix PREFIX_ASK = new Prefix("a/");
+    public static final Prefix PREFIX_GTE = new Prefix("gte/");
+    public static final Prefix PREFIX_LTE = new Prefix("lte/");
 }
