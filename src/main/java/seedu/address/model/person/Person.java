@@ -17,6 +17,10 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
+
+    // Each student can only attend up to 12 tutorials.
+    public static final int MAXIMUM_TUTORIALS = 12;
+
     // Identity fields
     private final Name name;
     private final StudentId studentId;
@@ -74,9 +78,9 @@ public class Person {
     }
 
     /**
-     * Returns true if the person has attended the stated tutorial, false otherwise.
+     * Gets the attendance status of a specific tutorial.
      */
-    public AttendanceStatus hasAttendedTutorial(String index) {
+    public AttendanceStatus getAttendanceStatus(String index) {
         return tutorials.get(new Tutorial(index));
     }
 

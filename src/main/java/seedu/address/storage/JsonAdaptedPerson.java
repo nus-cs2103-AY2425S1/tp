@@ -84,7 +84,7 @@ class JsonAdaptedPerson {
 
         final Map<Tutorial, AttendanceStatus> personTutorials = new LinkedHashMap<>();
         if (tutorials.isEmpty()) {
-            for (int i = 1; i <= 13; i++) {
+            for (int i = 1; i <= Person.MAXIMUM_TUTORIALS; i++) {
                 Tutorial tutorial = new Tutorial(String.valueOf(i));
                 personTutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
             }

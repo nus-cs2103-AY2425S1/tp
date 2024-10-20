@@ -97,19 +97,19 @@ public class PersonTest {
         Person alice = new PersonBuilder(ALICE).build();
 
         // Alice currently has no tutorials attended, should return NOT_TAKEN_PLACE
-        assertEquals(AttendanceStatus.NOT_TAKEN_PLACE, alice.hasAttendedTutorial("1"));
+        assertEquals(AttendanceStatus.NOT_TAKEN_PLACE, alice.getAttendanceStatus("1"));
 
         // Set Alice to have attended tutorial 1, 3.
         alice = new PersonBuilder(ALICE).withTutorials(new String[] {"1", "3"},
                 new AttendanceStatus[] {AttendanceStatus.ATTENDED, AttendanceStatus.ATTENDED}).build();
-        assertEquals(AttendanceStatus.ATTENDED, alice.hasAttendedTutorial("1"));
-        assertEquals(AttendanceStatus.ATTENDED, alice.hasAttendedTutorial("3"));
+        assertEquals(AttendanceStatus.ATTENDED, alice.getAttendanceStatus("1"));
+        assertEquals(AttendanceStatus.ATTENDED, alice.getAttendanceStatus("3"));
 
         // Set Alice to have not attended tutorial 2 and 4.
         alice = new PersonBuilder(ALICE).withTutorials(new String[] {"2", "4"},
                 new AttendanceStatus[] {AttendanceStatus.ABSENT, AttendanceStatus.ABSENT}).build();
-        assertEquals(AttendanceStatus.ABSENT, alice.hasAttendedTutorial("2"));
-        assertEquals(AttendanceStatus.ABSENT, alice.hasAttendedTutorial("4"));
+        assertEquals(AttendanceStatus.ABSENT, alice.getAttendanceStatus("2"));
+        assertEquals(AttendanceStatus.ABSENT, alice.getAttendanceStatus("4"));
     }
 
     @Test

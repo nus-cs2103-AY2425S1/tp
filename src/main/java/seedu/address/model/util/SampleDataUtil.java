@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -40,7 +40,7 @@ public class SampleDataUtil {
                 getTagSet("classmates"), getTutorialMap()),
             new Person(new Name("Roy Balakrishnan"), new StudentId("E0000006"), new Phone("92624417"),
                     new Email("royb@example.com"),
-                getTagSet("colleagues"), getTutorialMap("1", "2"))
+                getTagSet("colleagues"), getTutorialMap())
         };
     }
 
@@ -64,14 +64,26 @@ public class SampleDataUtil {
     /**
      * Returns a tutorial set containing the list of strings given and all are defaulted to true.
      */
-    public static Map<Tutorial, AttendanceStatus> getTutorialMap(String... strings) {
+    public static Map<Tutorial, AttendanceStatus> getTutorialMap() {
+        String[] strings = new String[Person.MAXIMUM_TUTORIALS];
+        for (int i = 0; i < Person.MAXIMUM_TUTORIALS; i++) {
+            strings[i] = String.valueOf(i + 1);
+        }
+        AttendanceStatus[] attendance = new AttendanceStatus[Person.MAXIMUM_TUTORIALS];
+        Arrays.fill(attendance, AttendanceStatus.NOT_TAKEN_PLACE);
+        return getTutorialMap(strings, attendance);
+    }
+
+    public static Map<Tutorial, AttendanceStatus> getTutorialMap(String ... strings) {
         AttendanceStatus[] attendance = new AttendanceStatus[strings.length];
         Arrays.fill(attendance, AttendanceStatus.NOT_TAKEN_PLACE);
         return getTutorialMap(strings, attendance);
     }
 
     public static Map<Tutorial, AttendanceStatus> getTutorialMap(String[] strings, AttendanceStatus[] attendance) {
-        Map<Tutorial, AttendanceStatus> tutorialMap = new HashMap<>();
+        System.out.println(Arrays.toString(strings));
+        System.out.println(Arrays.toString(attendance));
+        Map<Tutorial, AttendanceStatus> tutorialMap = new LinkedHashMap<>();
         for (int i = 0; i < strings.length; i++) {
             tutorialMap.put(new Tutorial(strings[i]), attendance[i]);
         }

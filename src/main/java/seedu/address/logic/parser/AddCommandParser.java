@@ -50,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Map<Tutorial, AttendanceStatus> tutorialList = new LinkedHashMap<>();
-        for (int i = 1; i <= 13; i++) {
+        for (int i = 1; i <= Person.MAXIMUM_TUTORIALS; i++) {
             Tutorial tutorial = new Tutorial(String.valueOf(i));
             tutorialList.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
         }

@@ -43,7 +43,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
         tutorials = new LinkedHashMap<>();
-        for (int i = 1; i <= 13; i++) {
+        for (int i = 1; i <= Person.MAXIMUM_TUTORIALS; i++) {
             Tutorial tutorial = new Tutorial(String.valueOf(i));
             tutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
         }
