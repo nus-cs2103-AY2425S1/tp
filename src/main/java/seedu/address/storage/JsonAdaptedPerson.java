@@ -84,13 +84,10 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-
-
         final List<Role> personRoles = new ArrayList<>();
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
         }
-
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -126,23 +123,9 @@ class JsonAdaptedPerson {
 
         final TelegramUsername modelTelegramUsername = new TelegramUsername(telegramUsername);
 
-
-        //        Role[] roles = new Role[this.roles.size()];
-        //
-        //        if (this.roles.size() != 0) {
-        //            for (int i = 0; i < this.roles.size(); i++) {
-        //                try {
-        //                    roles[i] = this.roles.get(i).toModelType();
-        //                } catch (IllegalValueException e) {
-        //                    throw new RuntimeException(e);
-        //                }
-        //            }
-        //        }
-
         final Set<Role> modelRoles = new HashSet<>(personRoles);
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
                 modelTelegramUsername, modelRoles);
-
     }
 
 }
