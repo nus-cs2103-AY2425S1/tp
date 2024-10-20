@@ -127,11 +127,15 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Returns an unmodifiable view of the filtered wedding list.
+     * @return
+     */
+    ObservableList<Wedding> getFilteredWeddingList();
+
+    /**
      * Returns a HashMap of the current active Tags and their occurences
      * @return
      */
-
-    ObservableList<Wedding> getWeddingList();
 
     ActiveTags getActiveTags();
 }
