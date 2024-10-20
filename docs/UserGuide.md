@@ -122,7 +122,7 @@ Format: `tag-add n/NAME t/TAG...`
 * Existing values will be updated together with the input values.
 
 Examples:
-*  `tag-add n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Adds the tags `Adam and Eve 12 June` 
+*  `tag-add n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Adds the tags `Adam and Eve 12 June`
 and `Adam and Steve 16 June` to John Doe.
 *  `tag-add n/Betsy Crower t/Wedding at Park Gala` Adds the tag `Wedding at Park Gala` to Betsy Crower.
 
@@ -135,7 +135,7 @@ Format: `tag-delete n/NAME t/TAG...`
 * Existing values that match input values will be deleted.
 
 Examples:
-*  `tag-delete n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Deletes the tags `Adam and Eve 12 June` 
+*  `tag-delete n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Deletes the tags `Adam and Eve 12 June`
 and `Adam and Steve 16 June` from John Doe.
 *  `tag-delete n/Betsy Crower t/Wedding at Park Gala` Deletes the tag `Wedding at Park Gala` from Betsy Crower.
 
