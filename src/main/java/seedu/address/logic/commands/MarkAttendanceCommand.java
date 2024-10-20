@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -29,13 +30,16 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked attendance of person: %1$s";
 
     private final Index targetIndex;
+    private final Attendance attendance;
 
     /**
-     * @param targetIndex index of the person in the filtered person list to mark
+     * @param targetIndex Index of the person in the filtered person list to mark
+     * @param attendance Attendance of the person specified by index
      */
-    public MarkAttendanceCommand(Index targetIndex) {
-        requireNonNull(targetIndex);
+    public MarkAttendanceCommand(Index targetIndex, Attendance attendance) {
+        requireAllNonNull(targetIndex, attendance);
         this.targetIndex = targetIndex;
+        this.attendance = attendance;
     }
 
     @Override
