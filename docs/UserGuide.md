@@ -13,13 +13,13 @@ title: User Guide
 1. [Quick Start](#quick-start)
 2. [Using AgentAssist](#using-agentassist)
 3. [Features Overview](#features-overview)
-    - [Save Current Data](#save-current-data)
     - [Add New Customer](#add-new-customer)
     - [Remove Old Customer](#remove-old-customer)
     - [Edit Existing Customer](#edit-existing-customer)
     - [Find a Customer by Details](#find-a-customer-by-details)
     - [Help](#help)
     - [Exit](#exit)
+    - [Save Current Data](#saving-data)
 4. [FAQ](#faq)
 5. [Known Issues](#known-issues)
 6. [Command Summary](#command-summary)
@@ -105,24 +105,7 @@ Refer to the [Features](#features-overview) section for more detailed instructio
 
 ## Features Overview {#features-overview}
 
-### Feature 1: Ability to Save Current Data {#save-current-data}
-
-**Purpose:**  
-This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
-
-**How it Works:**
-- **Command Format and Example:** Not applicable, as this process is automatic.
-
-#### Parameters
-- **Flags and Parameters:** There are no parameters needed for this feature.
-
-#### What to Expect
-- **If Successful:** You can access all the data you've entered previously.
-- **If There is an Error:** There's a chance that the data might not be saved due to an error, and you could lose information.
-
----
-
-### Feature 2: Add New Customer {#add-new-customer}
+### Feature 1: Add New Customer {#add-new-customer}
 
 **Purpose:**  
 This feature allows you to enter and save detailed records for new customers. Each customer's record includes their name, contact number, email, occupation, and income. You can also enter the optional fields for credit card tier and remark here. Otherwise, new users are assigned a default value of "N.A".
@@ -167,7 +150,7 @@ If a customer with the same name, email, job, and income is already saved, you'l
 
 ---
 
-### Feature 3: Remove Old Customer {#remove-old-customer}
+### Feature 2: Remove Old Customer {#remove-old-customer}
 
 **Purpose:**  
 This feature allows you to remove records of customers who are no longer using your credit card services.
@@ -201,7 +184,7 @@ Since customer INDEX are unique identifiers:
 
 ---
 
-### Feature 4: Edit the existing customer {#edit-existing-customer}
+### Feature 3: Edit the existing customer {#edit-existing-customer}
 
 **Purpose:**  
 This feature allows users to update the details of an existing customer in the database. All customer information can be modified, including contact details, address, job information, and other relevant data. Additionally, users can either append to or replace existing remarks and adjust the customer's tier status.
@@ -259,7 +242,7 @@ This feature allows users to update the details of an existing customer in the d
 
 ---
 
-### Feature 5: Find a Customer by Details {#find-a-customer-by-details}
+### Feature 4: Find a Customer by Details {#find-a-customer-by-details}
 
 **Purpose:**  
 This feature allows users to search for customers by specific details such as name, address, email, phone number, job title, or remarks. 
@@ -344,7 +327,7 @@ Searches are **case-insensitive** and use [**substring-matching**](#substring-ma
 
 ---
 
-### Feature 6: Help {#help}
+### Feature 5: Help {#help}
 
 **Purpose:**  
 This feature provides users with quick access to the command summary and the user guide for the application, helping them understand how to use various features effectively.
@@ -372,7 +355,7 @@ This feature provides users with quick access to the command summary and the use
 - N/A as this command does not involve processing or displaying data that could involve duplicates.
 
 ---
-### Feature 7: Exit {#exit}
+### Feature 6: Exit {#exit}
 
 **Purpose:**  
 Allows users to exit the application through a simple command, eliminating the need to use the window's close button or external controls.
@@ -398,6 +381,23 @@ Allows users to exit the application through a simple command, eliminating the n
 
 **Handling Duplicates:**
 - N/A as this command is unique and does not process data that could involve duplicates.
+
+---
+
+### Feature 7: Automatically Save Data {#saving-data}
+
+**Purpose:**  
+This feature ensures that any details you add to the app are saved automatically. When you close and reopen the app, all your data will still be there.
+
+**How it Works:**
+- **Command Format and Example:** Not applicable, as this process is automatic.
+
+#### Parameters
+- **Flags and Parameters:** There are no parameters needed for this feature.
+
+#### What to Expect
+- **If Successful:** You can access all the data you've entered previously.
+- **If There is an Error:** There's a chance that the data might not be saved due to an error, and you could lose information.
 
 --------------------------------------------------------------------------------------------------------------------
 
