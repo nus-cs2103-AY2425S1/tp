@@ -36,6 +36,7 @@ public class AttendanceTest {
         Attendance a = new Attendance(SAMPLE_SCA, SAMPLE_TUTORIAL);
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
+        assertEquals(a.getAttendanceList(), EMPTY_ATTENDANCE_LIST);
     }
 
     @Test
@@ -44,6 +45,7 @@ public class AttendanceTest {
         Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
+        assertEquals(a.getAttendanceList(), EMPTY_ATTENDANCE_LIST);
     }
 
     @Test
@@ -52,6 +54,7 @@ public class AttendanceTest {
         Attendance a = new Attendance(SINGULAR_ABSENT_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 1);
+        assertEquals(a.getAttendanceList(), SINGULAR_ABSENT_ATTENDANCE_LIST);
     }
 
     @Test
@@ -60,6 +63,8 @@ public class AttendanceTest {
         Attendance a = new Attendance(SINGULAR_ATTENDED_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
         assertEquals(a.getAttendanceAttendedCount(), 1);
         assertEquals(a.getAttendanceTotalCount(), 1);
+        assertEquals(a.getAttendanceList(), SINGULAR_ATTENDED_ATTENDANCE_LIST);
+
     }
 
     @Test
@@ -68,6 +73,8 @@ public class AttendanceTest {
         Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
         assertEquals(a.getAttendanceAttendedCount(), 3);
         assertEquals(a.getAttendanceTotalCount(), 5);
+        assertEquals(a.getAttendanceList(), EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+
     }
 
     // Attendance-marking tests
@@ -81,6 +88,7 @@ public class AttendanceTest {
         a.addAbsentLesson();
         assertEquals(a.getAttendanceAttendedCount(), 3);
         assertEquals(a.getAttendanceTotalCount(), 9);
+        assertEquals(a.getAttendanceList(), List.of(false, true, true, false, true, false, false, false, false));
     }
 
     @Test
@@ -92,6 +100,7 @@ public class AttendanceTest {
         a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 6);
         assertEquals(a.getAttendanceTotalCount(), 8);
+        assertEquals(a.getAttendanceList(), List.of(false, true, true, false, true, true, true, true));
     }
 
     @Test
@@ -108,6 +117,8 @@ public class AttendanceTest {
         a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 8);
         assertEquals(a.getAttendanceTotalCount(), 13);
+        assertEquals(a.getAttendanceList(), List.of(false, true, true, false, true, true, false,
+                false, true, true, false, true, true));
     }
 
     // removal tests
@@ -118,6 +129,7 @@ public class AttendanceTest {
         a.clear();
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
+        assertEquals(a.getAttendanceList(), EMPTY_ATTENDANCE_LIST);
     }
 
     @Test
@@ -127,6 +139,7 @@ public class AttendanceTest {
         a.clear();
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
+        assertEquals(a.getAttendanceList(), EMPTY_ATTENDANCE_LIST);
     }
 
     @Test
@@ -138,6 +151,7 @@ public class AttendanceTest {
         a.removeLast(); // remove attended session
         assertEquals(a.getAttendanceAttendedCount(), 1);
         assertEquals(a.getAttendanceTotalCount(), 2);
+        assertEquals(a.getAttendanceList(), List.of(false, true));
     }
 
     @Test
@@ -147,6 +161,7 @@ public class AttendanceTest {
         a.removeLast(); // remove attended session
         assertEquals(a.getAttendanceAttendedCount(), 2);
         assertEquals(a.getAttendanceTotalCount(), 4);
+        assertEquals(a.getAttendanceList(), List.of(false, true, true, false));
     }
 
     @Test

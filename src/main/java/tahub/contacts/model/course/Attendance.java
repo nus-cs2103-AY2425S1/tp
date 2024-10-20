@@ -78,7 +78,7 @@ public class Attendance {
     }
 
     /**
-     * Gets the total number of attended sessions in this `Attendance` object.
+     * Gets the total number of attended sessions in this {@link Attendance} object.
      *
      * @return Number of attended sessions.
      */
@@ -87,12 +87,19 @@ public class Attendance {
     }
 
     /**
-     * Gets the total number of sessions in this `Attendance` object.
+     * Gets the total number of sessions in this {@link Attendance} object.
      *
      * @return Number of sessions.
      */
     public int getAttendanceTotalCount() {
         return attendanceList.size();
+    }
+
+    /**
+     * Gets the attendance list of this {@link Attendance} object.
+     */
+    public List<Boolean> getAttendanceList() {
+        return attendanceList;
     }
 
     /**
