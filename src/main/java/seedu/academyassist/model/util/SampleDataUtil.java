@@ -14,7 +14,6 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -24,22 +23,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Ic("F1234568X"), new YearGroup("1"),
-                getSubjectSet("English"), getTagSet("friends")),
+                getSubjectSet("English")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"), new Ic("F1234569X"), new YearGroup("2"),
-                getSubjectSet("English"), getTagSet("junior", "friends")),
+                getSubjectSet("English")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), new Ic("F1236567X"), new YearGroup("1"),
-                getSubjectSet("English"), getTagSet("neighbours")),
+                getSubjectSet("English")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), new Ic("F1134567X"), new YearGroup("3"),
-                getSubjectSet("English"), getTagSet("senior")),
+                getSubjectSet("English")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Ic("F1234777X"), new YearGroup("1"),
-                getSubjectSet("English"), getTagSet("classmates")),
+                getSubjectSet("English")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Ic("F1235567X"), new YearGroup("5"),
-                getSubjectSet("English"), getTagSet("classmates"))
+                getSubjectSet("English"))
         };
     }
 
@@ -49,15 +48,6 @@ public class SampleDataUtil {
             sampleAa.addPerson(samplePerson);
         }
         return sampleAa;
-    }
-
-    /**
-     * Returns a tag set containing the list of strings given.
-     */
-    public static Set<Tag> getTagSet(String... strings) {
-        return Arrays.stream(strings)
-                .map(Tag::new)
-                .collect(Collectors.toSet());
     }
 
     /**

@@ -7,9 +7,10 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_IC_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -52,8 +53,12 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different tags -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
+        // different ic -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withAddress(VALID_IC_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different subjects -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withSubjects(VALID_SUBJECT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -67,8 +72,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", ic="
                 + editPersonDescriptor.getYearGroup().orElse(null) + ", year group="
                 + editPersonDescriptor.getIc().orElse(null) + ", subjects="
-                + editPersonDescriptor.getSubjects().orElse(null) + ", tags="
-                + editPersonDescriptor.getTags().orElse(null) + "}";
+                + editPersonDescriptor.getSubjects().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

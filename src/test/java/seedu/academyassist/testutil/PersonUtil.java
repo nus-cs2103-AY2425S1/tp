@@ -6,7 +6,6 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
@@ -14,7 +13,6 @@ import seedu.academyassist.logic.commands.AddCommand;
 import seedu.academyassist.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Subject;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * A utility class for Person.
@@ -41,9 +39,6 @@ public class PersonUtil {
         person.getSubjects().stream().forEach(
                 s -> sb.append(PREFIX_SUBJECT + s.subject + " ")
         );
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
         return sb.toString();
     }
 
@@ -63,14 +58,6 @@ public class PersonUtil {
                 sb.append(PREFIX_SUBJECT);
             } else {
                 subjects.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.subject).append(" "));
-            }
-        }
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
         }
         return sb.toString();

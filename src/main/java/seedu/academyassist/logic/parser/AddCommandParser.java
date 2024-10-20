@@ -15,7 +15,6 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object

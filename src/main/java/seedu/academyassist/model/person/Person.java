@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.academyassist.commons.util.CollectionUtil;
 import seedu.academyassist.commons.util.ToStringBuilder;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Represents a Person(student) in the management system.
@@ -121,7 +120,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && ic.equals(otherPerson.ic)
                 && yearGroup.equals(otherPerson.yearGroup)
-                && subjects.equals(otherPerson.subjects)
+                && subjects.equals(otherPerson.subjects);
     }
 
     @Override

@@ -7,10 +7,8 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -30,7 +28,6 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Edits the details of an existing student in the management system.
@@ -257,7 +254,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(ic, otherEditPersonDescriptor.ic)
                     && Objects.equals(yearGroup, otherEditPersonDescriptor.yearGroup)
-                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects)
+                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects);
         }
 
         @Override

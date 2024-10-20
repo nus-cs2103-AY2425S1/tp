@@ -52,8 +52,6 @@ public class Messages {
                 .append(person.getYearGroup())
                 .append("; Subjects: ");
         person.getSubjects().forEach(s -> builder.append(s + " "));
-        builder.append("; Tags: ");
-        person.getTags().forEach(builder::append);
         return builder.toString();
     }
 

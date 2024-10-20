@@ -8,7 +8,6 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +18,6 @@ import seedu.academyassist.logic.commands.EditCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Subject;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
