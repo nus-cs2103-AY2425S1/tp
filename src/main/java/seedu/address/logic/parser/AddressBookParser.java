@@ -19,7 +19,6 @@ import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListingAddCommand;
-import seedu.address.logic.commands.ListingDeleteCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -32,7 +31,6 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final Pattern LISTING_COMMAND_FORMAT = Pattern.compile("(?<commandWord>[^0-9]+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
@@ -88,22 +86,7 @@ public class AddressBookParser {
             return new RemarkCommandParser().parse(arguments);
 
         case ListingAddCommand.COMMAND_WORD_PREFIX:
-            final Matcher listingMatcher = LISTING_COMMAND_FORMAT.matcher(arguments.trim());
-
-            if (!listingMatcher.matches()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-            }
-
-            final String listingCommandWord = listingMatcher.group("commandWord").trim();
-            final String listingArguments = listingMatcher.group("arguments");
-
-            if (listingCommandWord.equals(ListingAddCommand.COMMAND_WORD_SUFFIX)) {
-                return new ListingAddCommandParser().parse(listingArguments);
-            } else if (listingCommandWord.equals(ListingDeleteCommand.COMMAND_WORD_SUFFIX)) {
-                return new ListingDeleteCommandParser().parse(listingArguments);
-            }
-
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            return new ListingCommandsParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
