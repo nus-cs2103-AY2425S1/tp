@@ -70,7 +70,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable monthPaid set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable monthPaid sortedset, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public SortedSet<MonthPaid> getMonthsPaid() {

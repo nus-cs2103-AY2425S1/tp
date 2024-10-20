@@ -39,7 +39,7 @@ public class MarkPaidCommand extends Command {
             + PREFIX_MONTHPAID + "2024-01"
             + PREFIX_MONTHPAID + "2024-02";
 
-    public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Markedpaid: %1$s";
+    public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Marked person as paid: %1$s";
     private final Index index;
     private final Set<MonthPaid> monthsPaid;
 
@@ -79,6 +79,7 @@ public class MarkPaidCommand extends Command {
     private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthPaid) {
         assert personToMark != null;
         assert monthPaid != null;
+        // TODO: should we use editPersonDescriptor here instead?
         Name name = personToMark.getName();
         Phone phone = personToMark.getPhone();
         Email email = personToMark.getEmail();
