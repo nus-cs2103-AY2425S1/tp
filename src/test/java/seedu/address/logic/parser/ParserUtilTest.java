@@ -22,7 +22,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_INCOME = "one thousand";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TIER = "#friend";
     private static final String INVALID_INCOME_COMPARISON_OPERATOR_1 = "==";
     private static final String INVALID_INCOME_COMPARISON_OPERATOR_2 = "!";
 
@@ -31,8 +31,8 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_INCOME = "1000";
-    private static final String VALID_TAG_1 = "BRONZE";
-    private static final String VALID_TAG_2 = "SILVER";
+    private static final String VALID_TIER_1 = "BRONZE";
+    private static final String VALID_TIER_2 = "SILVER";
     private static final String VALID_INCOME_COMPARISON_OPERATOR_EQUAL = ">";
     private static final String VALID_INCOME_COMPARISON_OPERATOR_GREATER_THAN = ">";
     private static final String VALID_INCOME_COMPARISON_OPERATOR_LESS_THAN = "<";
@@ -181,20 +181,20 @@ public class ParserUtilTest {
 
     @Test
     public void parseTier_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTier(INVALID_TAG));
+        assertThrows(ParseException.class, () -> ParserUtil.parseTier(INVALID_TIER));
     }
 
     @Test
-    public void parseTier_validValueWithoutWhitespace_returnsTag() throws Exception {
-        Tier expectedTier = new Tier(VALID_TAG_1);
-        assertEquals(expectedTier, ParserUtil.parseTier(VALID_TAG_1));
+    public void parseTier_validValueWithoutWhitespace_returnsTier() throws Exception {
+        Tier expectedTier = new Tier(VALID_TIER_1);
+        assertEquals(expectedTier, ParserUtil.parseTier(VALID_TIER_1));
     }
 
     @Test
-    public void parseTier_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
-        Tier expectedTier = new Tier(VALID_TAG_1);
-        assertEquals(expectedTier, ParserUtil.parseTier(tagWithWhitespace));
+    public void parseTier_validValueWithWhitespace_returnsTrimmedTier() throws Exception {
+        String tierWithWhitespace = WHITESPACE + VALID_TIER_1 + WHITESPACE;
+        Tier expectedTier = new Tier(VALID_TIER_1);
+        assertEquals(expectedTier, ParserUtil.parseTier(tierWithWhitespace));
     }
 
     @Test

@@ -39,7 +39,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane tags;
+    private FlowPane assignedTier;
     @FXML
     private VBox cardFields;
     /**
@@ -64,11 +64,11 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void createTier() {
-        // Create a label for the tier tag
-        Label tierLabel = new Label(person.getTier().tagName.toString());
+        // Create a label for the tier
+        Label tierLabel = new Label(person.getTier().toParsableString());
 
         // Apply a different style class based on the tier value
-        String tier = person.getTier().tagName.toString().toUpperCase();
+        String tier = person.getTier().toParsableString().toUpperCase();
         switch (tier) {
         case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
         case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
@@ -78,7 +78,7 @@ public class PersonCard extends UiPart<Region> {
         }
         if (tierLabel != null) {
             // Add the label to the FlowPane
-            tags.getChildren().add(tierLabel);
+            assignedTier.getChildren().add(tierLabel);
         }
     }
 }

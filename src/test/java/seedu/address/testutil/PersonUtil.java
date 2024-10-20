@@ -36,7 +36,7 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_JOB + person.getJob().value + " ");
         sb.append(PREFIX_INCOME + (String.valueOf(person.getIncome().value)) + " ");
-        sb.append(PREFIX_TIER + person.getTier().tagName.toString() + " ");
+        sb.append(PREFIX_TIER + person.getTier().toParsableString() + " ");
         sb.append(PREFIX_NEW_REMARK + person.getRemark().value + " ");
         return sb.toString();
     }
@@ -52,7 +52,7 @@ public class PersonUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getJob().ifPresent(job -> sb.append(PREFIX_JOB).append(job.value).append(" "));
         descriptor.getIncome().ifPresent(income -> sb.append(PREFIX_INCOME).append(income.value).append(" "));
-        descriptor.getTiers().ifPresent(tier -> sb.append(PREFIX_TIER).append(tier.tagName).append(" "));
+        descriptor.getTiers().ifPresent(tier -> sb.append(PREFIX_TIER).append(tier.toParsableString()).append(" "));
         descriptor.getNewRemark().ifPresent(newRemark -> sb.append(PREFIX_NEW_REMARK).append(newRemark.value)
                 .append(" "));
         return sb.toString();

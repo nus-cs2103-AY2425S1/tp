@@ -162,16 +162,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tier} is invalid.
      */
-    public static Tier parseTier(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (trimmedTag.isEmpty()) {
-            trimmedTag = Tier.TierEnum.NA.toString();
-        }
-        if (!Tier.isValidTierName(trimmedTag)) {
+    public static Tier parseTier(String tier) throws ParseException {
+        requireNonNull(tier);
+        String trimmedTier = tier.trim();
+        if (tier.equals(Tier.TierEnum.NA.toString())) {
             throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
         }
-        return new Tier(trimmedTag);
+        if (!Tier.isValidTierName(trimmedTier)) {
+            throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
+        }
+        return new Tier(trimmedTier);
     }
 
     /**

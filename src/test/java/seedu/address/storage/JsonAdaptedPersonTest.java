@@ -29,7 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final String VALID_JOB = BENSON.getJob().toString();
     private static final String VALID_INCOME_STRING = BENSON.getIncome().toString();
-    private static final JsonAdaptedTag VALID_TIER = new JsonAdaptedTag(BENSON.getTier());
+    private static final JsonAdaptedTier VALID_TIER = new JsonAdaptedTier(BENSON.getTier());
     private static final String VALID_REMARK = BENSON.getRemark().toString();
 
     @Test
@@ -130,11 +130,11 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidTags_throwsIllegalValueException() {
-        JsonAdaptedTag invalidTag = new JsonAdaptedTag(INVALID_TIER);;
+    public void toModelType_invalidTier_throwsIllegalValueException() {
+        JsonAdaptedTier invalidTier = new JsonAdaptedTier(INVALID_TIER);;
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_JOB, VALID_INCOME_STRING, invalidTag, VALID_REMARK);
+                        VALID_JOB, VALID_INCOME_STRING, invalidTier, VALID_REMARK);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
