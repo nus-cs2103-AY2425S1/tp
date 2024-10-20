@@ -33,8 +33,8 @@ public class ParserUtilTest {
     private static final String VALID_GENDER = "F";
     private static final String VALID_AGE = "30";
     private static final String VALID_DETAIL = "detail";
-    private static final String VALID_STUDY_GROUP_TAG_1 = "friend";
-    private static final String VALID_STUDY_GROUP_TAG_2 = "neighbour";
+    private static final String VALID_STUDY_GROUP_TAG_1 = "1A";
+    private static final String VALID_STUDY_GROUP_TAG_2 = "2B";
 
     private static final String WHITESPACE = " \t\r\n";
 
