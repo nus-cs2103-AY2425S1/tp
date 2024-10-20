@@ -127,7 +127,7 @@ public class EditAppointmentCommand extends EditCommand {
 
     @Override
     protected String getInvalidIndexMessage() {
-        return Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        return Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX;
     }
 
     @Override
