@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.tutorial.exceptions.DuplicateTutorialException;
 import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
+
 /**
  * A list of tutorials that enforces uniqueness between its elements and does not allow nulls.
  * A tutorial is considered unique by comparing using {@code Tutorial#isSameTutorial(Tutorial)}. As such, adding and

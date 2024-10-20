@@ -12,6 +12,7 @@ import seedu.address.model.tutorial.Tutorial;
 public class JsonAdaptedTutorial {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
     private final String subject;
+
     /**
      * Constructs a {@code JsonAdaptedTutorial} with the given tutorial details.
      */
@@ -19,12 +20,14 @@ public class JsonAdaptedTutorial {
     public JsonAdaptedTutorial(@JsonProperty("subject") String subject) {
         this.subject = subject;
     }
+
     /**
      * Converts a given {@code Tutorial} into this class for Jackson use.
      */
     public JsonAdaptedTutorial(Tutorial source) {
         subject = source.getSubject();
     }
+
     /**
      * Converts this Jackson-friendly adapted tutorial object into the model's {@code Tutorial} object.
      *
