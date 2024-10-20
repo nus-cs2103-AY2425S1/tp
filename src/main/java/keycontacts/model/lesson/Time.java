@@ -20,7 +20,7 @@ public class Time {
      */
     public static final String VALIDATION_REGEX = "^(?:[01]\\d|2[0-3]):[0-5]\\d$";
 
-    private final LocalTime time;
+    public final LocalTime value;
 
     /**
      * Constructs a {@code Time}.
@@ -30,7 +30,7 @@ public class Time {
     public Time(String time) {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
+        this.value = LocalTime.parse(time, DateTimeFormatter.ofPattern("HH:mm"));
     }
 
     /**
@@ -40,13 +40,9 @@ public class Time {
         return test.matches(VALIDATION_REGEX);
     }
 
-    public LocalTime getTime() {
-        return time;
-    }
-
     @Override
     public String toString() {
-        return time.toString();
+        return value.toString();
     }
 
     @Override
@@ -61,12 +57,12 @@ public class Time {
         }
 
         Time otherTime = (Time) other;
-        return time.equals(otherTime.time);
+        return value.equals(otherTime.value);
     }
 
     @Override
     public int hashCode() {
-        return time.hashCode();
+        return value.hashCode();
     }
 
 }

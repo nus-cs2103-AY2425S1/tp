@@ -34,9 +34,9 @@ public class RegularLessonTest {
     public void equals() {
         RegularLesson regularLesson1 = ALICE.getRegularLesson();
         RegularLesson regularLesson1Duplicate = ALICE.getRegularLesson();
-        String oneDayAfterDay = regularLesson1.getLessonDay().getDay().plus(1).toString();
-        String oneMinuteBeforeStartTime = regularLesson1.getStartTime().getTime().plusMinutes(-1).toString();
-        String oneMinuteAfterEndTime = regularLesson1.getEndTime().getTime().plusMinutes(1).toString();
+        String oneDayAfterDay = regularLesson1.getLessonDay().value.plus(1).toString();
+        String oneMinuteBeforeStartTime = regularLesson1.getStartTime().value.plusMinutes(-1).toString();
+        String oneMinuteAfterEndTime = regularLesson1.getEndTime().value.plusMinutes(1).toString();
         // different start time
         RegularLesson regularLesson2 = new RegularLessonBuilder(regularLesson1).withStartTime(oneMinuteBeforeStartTime)
                 .build();
