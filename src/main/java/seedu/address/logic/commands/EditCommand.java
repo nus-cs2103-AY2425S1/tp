@@ -21,6 +21,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -101,8 +102,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Telegram updatedAddress = editPersonDescriptor.getTelegram().orElse(personToEdit.getTelegram());
         Set<Role> updatedRoles = editPersonDescriptor.getRoles().orElse(personToEdit.getRoles());
+        Set<Attendance> attendance = personToEdit.getAttendance();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRoles, attendance);
     }
 
     @Override

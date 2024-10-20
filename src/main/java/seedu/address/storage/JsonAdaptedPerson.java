@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String telegram;
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
+    private final List<JsonAdaptedAttendance> attendance = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -36,13 +37,17 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("telegram") String telegram,
-            @JsonProperty("roles") List<JsonAdaptedRole> roles) {
+            @JsonProperty("roles") List<JsonAdaptedRole> roles,
+            @JsonProperty("attendance") List<JsonAdaptedAttendance> attendance) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         if (roles != null) {
             this.roles.addAll(roles);
+        }
+        if (attendance != null) {
+            this.attendance.addAll(attendance);
         }
     }
 
@@ -56,7 +61,10 @@ class JsonAdaptedPerson {
         telegram = source.getTelegram().value;
         roles.addAll(source.getRoles().stream()
                 .map(JsonAdaptedRole::new)
-                .collect(Collectors.toList()));
+                .toList());
+        attendance.addAll(source.getAttendance().stream()
+                .map(JsonAdaptedAttendance::new)
+                .toList());
     }
 
     /**
@@ -66,8 +74,14 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Role> personRoles = new ArrayList<>();
+        final List<Attendance> personAttendance = new ArrayList<>();
+
         for (JsonAdaptedRole role : roles) {
             personRoles.add(role.toModelType());
+        }
+
+        for (JsonAdaptedAttendance session : attendance) {
+            personAttendance.add(session.toModelType());
         }
 
         if (name == null) {
@@ -103,7 +117,8 @@ class JsonAdaptedPerson {
         }
         final Telegram modelTelegram = new Telegram(telegram);
         final Set<Role> modelRoles = new HashSet<>(personRoles);
-        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles);
+        final Set<Attendance> modelAttendance = new HashSet<>(personAttendance);
+        return new Person(modelName, modelPhone, modelEmail, modelTelegram, modelRoles, modelAttendance);
     }
 
 }

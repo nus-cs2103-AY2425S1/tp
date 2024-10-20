@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.role.Role;
 
 /**
@@ -26,17 +27,20 @@ public class Person {
 
     // Data fields
     private final Set<Role> roles = new HashSet<>();
+    private final Set<Attendance> attendance = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Telegram telegram, Set<Role> roles) {
+    public Person(Name name, Phone phone, Email email, Telegram telegram,
+                  Set<Role> roles, Set<Attendance> attendance) {
         requireAllNonNull(name, phone, email, telegram, roles);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.telegram = telegram;
         this.roles.addAll(roles);
+        this.attendance.addAll(attendance);
     }
 
     public Name getName() {
@@ -56,11 +60,20 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable role set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Role> getRoles() {
         return Collections.unmodifiableSet(roles);
+    }
+
+    /**
+     * Returns an immutable attendance set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted
+     * @return the attendance set encapsulated by Person
+     */
+    public Set<Attendance> getAttendance() {
+        return Collections.unmodifiableSet(attendance);
     }
 
     /**
