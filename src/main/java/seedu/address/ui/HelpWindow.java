@@ -141,6 +141,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final int ABSOLUTE_PADDING = 112;
+    private static final int INSET_PADDING = 16;
+    private static final Color HIGHLIGHT_RED_BACKGROUND = Color.rgb(255, 40, 40, 0.2);
+    private static final Color HIGHLIGHT_ORANGE_BACKGROUND = Color.rgb(255, 152, 36, 0.4);
+    private static final CornerRadii DEFAULT_CORNER_RADII = new CornerRadii(15);
 
     /**
      * Array of String containing the format, purpose and examples of all the commands in StaffSync.
@@ -273,9 +278,9 @@ public class HelpWindow extends UiPart<Stage> {
             // Setting the corresponding MenuItem to scroll to the Text object
             ChangeListener<Number> listener = (obs, oldText, newText) -> {
                 Platform.runLater(() -> {
-                    commandText.setWrappingWidth(getRoot().getScene().getWidth() - 112);
+                    commandText.setWrappingWidth(getRoot().getScene().getWidth() - ABSOLUTE_PADDING);
                     logger.log(Level.INFO, "Setting Height of ResultDisplay to "
-                            + (getRoot().getScene().getWidth() - 112));
+                            + (getRoot().getScene().getWidth() - ABSOLUTE_PADDING));
                 });
             };
             getRoot().widthProperty().addListener(listener);
@@ -338,7 +343,7 @@ public class HelpWindow extends UiPart<Stage> {
             return;
         }
 
-        // type-casted to Vbox as every Text in helpWindow is wrapped by a Vbox as its parent
+        // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
         HBox box = (HBox) targetText.getParent();
         Bounds bounds = box.getBoundsInParent();
         double yPadding = 100;
@@ -350,20 +355,24 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Highlights the VBox that the target text is in
+     * Highlights the HBox that the target text is in
      *
-     * @param targetText text where the VBox is to be highlighted
+     * @param targetText text where the HBox is to be highlighted
      */
     private void highlightText(Text targetText) {
         if (lastHighlighted != null) {
             HBox prevBox = (HBox) lastHighlighted.getParent();
             prevBox.setBackground(new Background(new BackgroundFill(
-                    Color.rgb(255, 152, 36, 0.4), new CornerRadii(15), new Insets(16, 16, 0, 16))));
+                    HIGHLIGHT_ORANGE_BACKGROUND,
+                    DEFAULT_CORNER_RADII,
+                    new Insets(INSET_PADDING, INSET_PADDING, 0, INSET_PADDING))));
         }
-        // type-casted to Vbox as every Text in helpWindow is wrapped by a Vbox as its parent
+        // type-casted to Hbox as every Text in helpWindow is wrapped by a Hbox as its parent
         HBox vBox = (HBox) targetText.getParent();
         Background highlight = new Background(new BackgroundFill(
-                Color.rgb(255, 40, 40, 0.2), new CornerRadii(15), new Insets(16, 16, 0, 16)));
+                HIGHLIGHT_RED_BACKGROUND,
+                DEFAULT_CORNER_RADII,
+                new Insets(INSET_PADDING, INSET_PADDING, 0, INSET_PADDING)));
         vBox.setBackground(highlight);
         lastHighlighted = targetText;
     }
