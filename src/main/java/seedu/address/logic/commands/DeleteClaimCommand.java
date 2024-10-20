@@ -79,7 +79,7 @@ public class DeleteClaimCommand extends Command {
             model.setClient(clientToEdit, clientWithDeletedClaim);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-            return new CommandResult(String.format(MESSAGE_DELETE_CLAIM_SUCCESS, Messages.format(clientToEdit),
+            return new CommandResult(String.format(MESSAGE_DELETE_CLAIM_SUCCESS, clientToEdit.getName().toString(),
                     planToBeUsed, claimId));
         } catch (ClaimException e) {
             throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToEdit)));
