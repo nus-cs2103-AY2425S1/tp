@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.ActiveTags;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * The API of the Model component.
@@ -77,6 +78,45 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /**
+     * Adds a new Wedding specified by a name and date to the AddressBook.
+     * The name of the new Wedding must not be the same as another existing Wedding in the AddressBook.
+     * @param wedding the Wedding to add
+     */
+    void addWedding(Wedding wedding);
+
+    /**
+     * Removes a Wedding specified by name.
+     * The Wedding must already exist in the AddressBook.
+     * @param wedding the Wedding to remove
+     */
+    void removeWedding(Wedding wedding);
+
+    /**
+     * Replaces the specified wedding with a new one
+     * @param wedding
+     * @param editedWedding
+     */
+    void setWedding(Wedding wedding, Wedding editedWedding);
+
+    /**
+     * Assigns a Person to a Wedding specified by name.
+     * Both the Person and Wedding must already exist in the AddressBook.
+     * The Person must not be currently assigned to the Wedding.
+     * @param wedding
+     * @param toAssign
+     */
+    void assignPerson(Wedding wedding, Person toAssign);
+
+    /**
+     * Unassigns a Person from a Wedding specified by name.
+     * Both the Person and Wedding must already exist in the AddressBook.
+     * The Person must be currently assigned to the Wedding.
+     * @param wedding
+     * @param toUnassign
+     */
+    void unassignPerson(Wedding wedding, Person toUnassign);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -90,5 +130,8 @@ public interface Model {
      * Returns a HashMap of the current active Tags and their occurences
      * @return
      */
+
+    ObservableList<Wedding> getWeddingList();
+
     ActiveTags getActiveTags();
 }
