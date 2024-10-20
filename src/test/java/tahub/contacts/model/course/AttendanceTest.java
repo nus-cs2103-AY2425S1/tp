@@ -20,10 +20,15 @@ import tahub.contacts.testutil.ScaBuilder;
 
 @DisplayName("Attendance")
 public class AttendanceTest {
-    public static final List<Boolean> EMPTY_ATTENDANCE_LIST = List.of();
-    public static final List<Boolean> SINGULAR_ATTENDED_ATTENDANCE_LIST = List.of(true);
-    public static final List<Boolean> SINGULAR_ABSENT_ATTENDANCE_LIST = List.of(false);
-    public static final List<Boolean> EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5 = List.of(false, true, true, false, true);
+    public static final AttendanceSession ATTENDED = AttendanceSession.createAttended();
+    public static final AttendanceSession ABSENT = AttendanceSession.createAbsent();
+    public static final List<AttendanceSession> EMPTY_ATTENDANCE_LIST = List.of();
+    public static final List<AttendanceSession> SINGULAR_ATTENDED_ATTENDANCE_LIST =
+            List.of(ATTENDED);
+    public static final List<AttendanceSession> SINGULAR_ABSENT_ATTENDANCE_LIST =
+            List.of(ABSENT);
+    public static final List<AttendanceSession> EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5 =
+            List.of(ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED);
     public static final StudentCourseAssociation SAMPLE_SCA = ScaBuilder.createDefault();
     public static final StudentCourseAssociation SAMPLE_SCA_2 = ScaBuilder.createSampleSecond();
     public static final Tutorial SAMPLE_TUTORIAL = new Tutorial("T1", SAMPLE_SCA.getCourse());
@@ -88,7 +93,8 @@ public class AttendanceTest {
         a.addAbsentLesson();
         assertEquals(a.getAttendanceAttendedCount(), 3);
         assertEquals(a.getAttendanceTotalCount(), 9);
-        assertEquals(a.getAttendanceList(), List.of(false, true, true, false, true, false, false, false, false));
+        assertEquals(a.getAttendanceList(),
+                List.of(ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED, ABSENT, ABSENT, ABSENT, ABSENT));
     }
 
     @Test
@@ -100,7 +106,8 @@ public class AttendanceTest {
         a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 6);
         assertEquals(a.getAttendanceTotalCount(), 8);
-        assertEquals(a.getAttendanceList(), List.of(false, true, true, false, true, true, true, true));
+        assertEquals(a.getAttendanceList(),
+                List.of(ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED, ATTENDED, ATTENDED, ATTENDED));
     }
 
     @Test
@@ -117,8 +124,9 @@ public class AttendanceTest {
         a.addAttendedLesson();
         assertEquals(a.getAttendanceAttendedCount(), 8);
         assertEquals(a.getAttendanceTotalCount(), 13);
-        assertEquals(a.getAttendanceList(), List.of(false, true, true, false, true, true, false,
-                false, true, true, false, true, true));
+        assertEquals(a.getAttendanceList(),
+                List.of(ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED, ATTENDED, ABSENT,
+                        ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED, ATTENDED));
     }
 
     // removal tests
@@ -151,7 +159,7 @@ public class AttendanceTest {
         a.removeLast(); // remove attended session
         assertEquals(a.getAttendanceAttendedCount(), 1);
         assertEquals(a.getAttendanceTotalCount(), 2);
-        assertEquals(a.getAttendanceList(), List.of(false, true));
+        assertEquals(a.getAttendanceList(), List.of(ABSENT, ATTENDED));
     }
 
     @Test
@@ -161,7 +169,7 @@ public class AttendanceTest {
         a.removeLast(); // remove attended session
         assertEquals(a.getAttendanceAttendedCount(), 2);
         assertEquals(a.getAttendanceTotalCount(), 4);
-        assertEquals(a.getAttendanceList(), List.of(false, true, true, false));
+        assertEquals(a.getAttendanceList(), List.of(ABSENT, ATTENDED, ATTENDED, ABSENT));
     }
 
     @Test

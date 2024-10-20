@@ -11,7 +11,7 @@ import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
  * Represents the attendance of a student in the address book.
  */
 public class Attendance {
-    private final ArrayList<Boolean> attendanceList;
+    private final ArrayList<AttendanceSession> attendanceList;
     private final StudentCourseAssociation studentCourseAssociation;
     private final CourseClass courseClass;
 
@@ -30,12 +30,14 @@ public class Attendance {
     /**
      * Constructs an {@code Attendance} object from an attendance list.
      *
-     * @param attendanceList Preexisting attendance list as a {@link List} of {@link Boolean}.
+     * @param attendanceList Preexisting attendance list as a {@link List} of {@link AttendanceSession}.
      * @param studentCourseAssociation To refer to the student and course this is for.
      * @param courseClass The specific class that this is for.
      */
     public Attendance(
-            List<Boolean> attendanceList, StudentCourseAssociation studentCourseAssociation, CourseClass courseClass) {
+            List<AttendanceSession> attendanceList,
+            StudentCourseAssociation studentCourseAssociation,
+            CourseClass courseClass) {
         this.attendanceList = new ArrayList<>(attendanceList);
         this.studentCourseAssociation = studentCourseAssociation;
         this.courseClass = courseClass;
@@ -45,14 +47,14 @@ public class Attendance {
      * Adds a new lesson marked as attended.
      */
     public void addAttendedLesson() {
-        attendanceList.add(true);
+        attendanceList.add(AttendanceSession.createAttended());
     }
 
     /**
      * Adds a new lesson marked as absent.
      */
     public void addAbsentLesson() {
-        attendanceList.add(false);
+        attendanceList.add(AttendanceSession.createAbsent());
     }
 
     /**
@@ -83,7 +85,7 @@ public class Attendance {
      * @return Number of attended sessions.
      */
     public int getAttendanceAttendedCount() {
-        return (int) attendanceList.stream().filter(x -> x).count();
+        return (int) attendanceList.stream().filter(AttendanceSession::getIsSessionAttended).count();
     }
 
     /**
@@ -98,7 +100,7 @@ public class Attendance {
     /**
      * Gets the attendance list of this {@link Attendance} object.
      */
-    public List<Boolean> getAttendanceList() {
+    public List<AttendanceSession> getAttendanceList() {
         return attendanceList;
     }
 
