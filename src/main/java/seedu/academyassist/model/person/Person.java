@@ -32,15 +32,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Ic ic, YearGroup yg, Set<Subject> subjects,
-                  Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yg, subjects, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Ic ic, YearGroup yearGroup,
+                  Set<Subject> subjects, Set<Tag> tags) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yearGroup, subjects, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.ic = ic;
-        this.yearGroup = yg;
+        this.yearGroup = yearGroup;
         this.subjects.addAll(subjects);
         this.tags.addAll(tags);
     }
