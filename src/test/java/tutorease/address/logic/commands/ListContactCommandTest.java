@@ -1,5 +1,6 @@
 package tutorease.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static tutorease.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static tutorease.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -28,6 +29,17 @@ public class ListContactCommandTest {
     }
 
     @Test
+    public void execute_noContactsFound_showsNoContactsMessage() {
+        // Clear the model's filtered person list to simulate no contacts
+        model.updateFilteredPersonList(p -> false);
+
+        CommandResult result = new ListContactCommand().execute(model);
+
+        // Check that the command returns the expected message
+        assertEquals(ListContactCommand.MESSAGE_NO_CONTACTS_FOUND, result.getFeedbackToUser());
+    }
+
+    @Test
     public void execute_listIsNotFiltered_showsSameList() {
         assertCommandSuccess(new ListContactCommand(), model, ListContactCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -38,4 +50,5 @@ public class ListContactCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListContactCommand(), model, ListContactCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
 }
