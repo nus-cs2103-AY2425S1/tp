@@ -24,6 +24,8 @@ public class FilterPropertyCommandParser implements Parser<FilterPropertyCommand
     public FilterPropertyCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE);
+
         String type = argMultimap.getValue(PREFIX_TYPE).orElse("");
         String lte = argMultimap.getValue(PREFIX_LTE).orElse("");
         String gte = argMultimap.getValue(PREFIX_GTE).orElse("");

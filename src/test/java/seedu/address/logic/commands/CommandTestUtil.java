@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -83,6 +85,8 @@ public class CommandTestUtil {
     public static final String BID_DESC_BEDOK = " " + PREFIX_BID + VALID_BID_BEDOK;
     public static final String ASK_DESC_ADMIRALTY = " " + PREFIX_ASK + VALID_ASK_ADMIRALTY;
     public static final String ASK_DESC_BEDOK = " " + PREFIX_ASK + VALID_ASK_BEDOK;
+    public static final String LTE_DESC_BEDOK = " " + PREFIX_LTE + VALID_MATCHINGPRICE_BEDOK;
+    public static final String GTE_DESC_BEDOK = " " + PREFIX_GTE + VALID_MATCHINGPRICE_BEDOK;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
