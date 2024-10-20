@@ -42,6 +42,15 @@ public class BuyPropertyContainsKeywordsPredicateTest {
     }
 
     @Test
+    public void equals_differentPredicateType_returnsFalse() {
+        BuyPropertyContainsKeywordsPredicate predicate1 =
+                new BuyPropertyContainsKeywordsPredicate(Collections.singletonList("keyword"));
+        SellPropertyContainsKeywordsPredicate predicate2 =
+                new SellPropertyContainsKeywordsPredicate(Collections.singletonList("keyword"));
+        assertFalse(predicate1.equals(predicate2));
+    }
+
+    @Test
     public void test_buyPropertyContainsKeyword_returnsTrue() {
         BuyPropertyContainsKeywordsPredicate predicate =
                 new BuyPropertyContainsKeywordsPredicate(Collections.singletonList("hdb"));

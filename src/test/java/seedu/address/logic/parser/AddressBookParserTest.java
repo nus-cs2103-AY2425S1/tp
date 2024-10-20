@@ -26,6 +26,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindBuyCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPhoneNumberCommand;
+import seedu.address.logic.commands.FindSellCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,6 +35,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.SellPropertyContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditPersonPropertyToBuyDescriptorBuilder;
 import seedu.address.testutil.EditPersonPropertyToSellDescriptorBuilder;
@@ -99,12 +101,21 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_findBuyProperty() throws Exception {
+    public void parseCommand_findBuyProperty() throws ParseException {
         List<String> keywords = Arrays.asList("522522", "10-09", "hdb");
         FindBuyCommand command = (FindBuyCommand) parser.parseCommand(
                 FindBuyCommand.COMMAND_WORD + " "
                         + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindBuyCommand(new BuyPropertyContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_findSellProperty() throws ParseException {
+        List<String> keywords = Arrays.asList("522522", "10-09", "hdb");
+        FindSellCommand command = (FindSellCommand) parser.parseCommand(
+                FindSellCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindSellCommand(new SellPropertyContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
