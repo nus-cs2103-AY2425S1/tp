@@ -45,17 +45,19 @@ public class FindCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        // Must have this check
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
+        // Must have this check
         if (!(other instanceof FindCommand)) {
             return false;
         }
 
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        // Compare the predicates, not the object references
+        FindCommand otherCommand = (FindCommand) other;
+        return predicate.equals(otherCommand.predicate);
     }
 
     @Override

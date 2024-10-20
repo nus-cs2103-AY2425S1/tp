@@ -39,6 +39,21 @@ public class PersonSearchPredicate implements Predicate<Person> {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PersonSearchPredicate)) {
+            return false;
+        }
+
+        PersonSearchPredicate otherNameContainsKeywordsPredicate = (PersonSearchPredicate) other;
+        return fieldQueries.equals(otherNameContainsKeywordsPredicate.fieldQueries);
+    }
+
+    @Override
     public String toString() {
         return this.fieldQueries.stream().map(FieldQuery::toString).reduce("",
                 (x,y) -> x + " " + y);

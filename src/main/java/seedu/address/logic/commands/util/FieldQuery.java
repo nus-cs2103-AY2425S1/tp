@@ -1,5 +1,6 @@
 package seedu.address.logic.commands.util;
 
+
 public class FieldQuery {
     private SearchField field;
     private String keyword;
@@ -21,5 +22,20 @@ public class FieldQuery {
     @Override
     public String toString() {
         return field.toString() + ": " + keyword;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof FieldQuery)) {
+            return false;
+        }
+
+        FieldQuery fieldQuery = (FieldQuery) other;
+        return field.equals(fieldQuery.field) && keyword.equals(fieldQuery.keyword);
     }
 }
