@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -49,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane personDetailedViewPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -110,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -121,6 +126,18 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // if contact list is not empty, show first person upon initialisation
+        if (!logic.getFilteredPersonList().isEmpty()) {
+            PersonDetailedView personDetailedView = new PersonDetailedView(logic.getFilteredPersonList().get(0));
+            personDetailedViewPlaceholder.getChildren().add(personDetailedView.getRoot());
+        } else {
+            // show some placeholder - could use better data abstraction for this
+            Label placeholderLabel = new Label("No contacts available, add one now");
+            placeholderLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: gray;");
+            placeholderLabel.setAlignment(Pos.CENTER);
+            personDetailedViewPlaceholder.getChildren().add(placeholderLabel);
+        }
     }
 
     /**
@@ -192,5 +209,14 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Updates the right panel of the Main Window with a detailed view
+     * @param personDetailedView
+     */
+    public void updatePersonDetailedView(PersonDetailedView personDetailedView) {
+        personDetailedViewPlaceholder.getChildren().clear();
+        personDetailedViewPlaceholder.getChildren().add(personDetailedView.getRoot());
     }
 }

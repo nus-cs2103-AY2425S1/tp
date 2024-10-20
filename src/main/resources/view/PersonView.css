@@ -1,0 +1,73 @@
+/* Root container background and padding */
+.root {
+    -fx-background-color: #2c2c2c;
+    -fx-padding: 20;
+}
+
+/* Profile image */
+.image-view {
+    -fx-background-radius: 50;
+    -fx-effect: innershadow(gaussian, black, 4, 0.2, 2, 2);
+}
+
+/* Name label (blue, bold) */
+.label-name {
+    -fx-text-fill: #1e90ff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI Bold";
+}
+
+/* Phone and email labels */
+.label-phone, .label-email {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+/* Email underline */
+.label-email {
+    -fx-underline: true;
+    -fx-font-size: 18px;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+/* Section labels */
+.label-small {
+    -fx-text-fill: white;
+}
+
+/* FlowPane tag styling */
+.flow-pane .label {
+    -fx-text-fill: white;
+    -fx-padding: 3 8;
+    -fx-background-color: #444;
+    -fx-background-radius: 5;
+}
+
+/* CardPane styling */
+.card-pane {
+    -fx-background-color: #3b3b3b;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+.tags-pane {
+    -fx-hgap: 8;
+    -fx-vgap: 4;
+}
+
+.tag-label {
+    -fx-background-color: #4a90e2;
+    -fx-text-fill: white;
+    -fx-padding: 4 8;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+.other-label-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a90e2;
+}

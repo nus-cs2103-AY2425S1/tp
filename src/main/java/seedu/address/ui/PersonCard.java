@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays brief information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -35,31 +35,33 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
     @FXML
-    private Label birthday;
-    @FXML
-    private Label hasPaid;
-    @FXML
     private FlowPane tags;
+    private MainWindow mainWindow;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, MainWindow mainWindow) {
         super(FXML);
         this.person = person;
+        this.mainWindow = mainWindow;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        birthday.setText(person.getBirthday().value);
         email.setText(person.getEmail().value);
-        hasPaid.setText(person.getHasPaid() ? "Paid" : "Not Paid");
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Creates a detailed view of the contact
+     */
+    @FXML
+    private void handleOnClick() {
+        PersonDetailedView personDetailedView = new PersonDetailedView(person);
+        mainWindow.updatePersonDetailedView(personDetailedView);
     }
 }
