@@ -33,19 +33,6 @@ public class DateTimeUtil {
     }
 
     /**
-     * Parses a date and time string into a {@link LocalDateTime} object.
-     *
-     * @param dateTimeString The date and time string to be parsed. It must be in the format "yyyy-MM-dd HH:mm".
-     * @return The parsed {@link LocalDateTime} object corresponding to the given string.
-     */
-    public static LocalDateTime parse(String dateTimeString) {
-        if (!DateTime.isValidDateTime(dateTimeString)) {
-            throw new IllegalArgumentException("Invalid dateTime format");
-        }
-        return LocalDateTime.parse(dateTimeString, DATE_TIME_FORMATTER);
-    }
-
-    /**
      * Creates a Timeline that updates at a specified interval.
      *
      * @param action The action to perform on each update.

@@ -70,7 +70,7 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     private long getEventTimeRemaining(Event event) {
-        LocalDateTime eventStart = DateTimeUtil.parse(event.getStartTime().value);
+        LocalDateTime eventStart = event.getStartTime().toLocalDateTime();
         LocalDateTime now = DateTimeUtil.getCurrentDateTime();
         Duration duration = Duration.between(now, eventStart);
         return duration.toMillis();
