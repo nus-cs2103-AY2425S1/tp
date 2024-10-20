@@ -168,7 +168,7 @@ Format: `find e KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find e Sentosa` returns `sentosa` and `Sentosa Party`
 * `find e Sentosa Party` returns `Sentosa Vacation`, `Beach Party`<br>
-  ![result for 'find alex david'](images/findBeachTimeResult.png)
+  ![result for 'find sentosa party'](images/findSentosaParty.png)
 
 ### Locating persons by tag: `search p`
 
@@ -216,8 +216,8 @@ Format: `delete e INDEX`
 
 Examples:
 * `list` followed by `delete e 2` deletes the 2nd event in the address book.
-    ![result for 'delete p 2'](images/deleteEventBefore.png)
-    ![result for 'delete p 2'](images/deleteEventAfter.png)
+    ![result for 'delete e 2'](images/deleteEventBefore.png)
+    ![result for 'delete e 2'](images/deleteEventAfter.png)
 * `find e Party` followed by `delete e 1` deletes the 1st event in the results of the `find` command.
 
 ### Clearing all entries : `clear`

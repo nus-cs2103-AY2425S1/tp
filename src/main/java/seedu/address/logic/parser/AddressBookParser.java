@@ -29,7 +29,7 @@ public class AddressBookParser {
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-        "(?<commandWord>\\S+)(?:\\s+(?<modelType>\\S)(?:\\s+(?<arguments>.*))?)?"
+        "(?<commandWord>\\S+)(\\s+(?<modelType>\\S+)?(\\s+(?<arguments>.*)?)?)?"
     );
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
@@ -50,7 +50,9 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String modelTypeShortHand = matcher.group("modelType");
         final ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
-        final String arguments = " " + matcher.group("arguments");
+        final String arguments = (modelType == ModelType.NEITHER)
+                ? " " + modelTypeShortHand : " " + matcher.group("arguments");
+        // todo Not sure why spaces need to be added but it doesn't work without them
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
