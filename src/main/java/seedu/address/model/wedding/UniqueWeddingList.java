@@ -1,5 +1,11 @@
 package seedu.address.model.wedding;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -7,18 +13,20 @@ import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
 import seedu.address.model.wedding.exceptions.PersonNotAssignedToWeddingException;
 import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Contains a list of Weddings accessible by an ObservableList
+ */
 public class UniqueWeddingList implements Iterable<Wedding> {
     private final ObservableList<Wedding> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Wedding> internalUnmodifiableList
-            = FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Wedding> internalUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Checks if a Wedding is in the UniqueWeddingList
+     * @param toCheck the Wedding to check
+     * @return
+     */
     public boolean contains(Wedding toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameWedding);
@@ -28,7 +36,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
      * Adds a new Wedding to the list. Throws an error if the Wedding already exists
      * @param wedding The Wedding to add
      */
-    public void addWedding (Wedding wedding) {
+    public void addWedding(Wedding wedding) {
         requireNonNull(wedding);
         if (contains(wedding)) {
             throw new DuplicateWeddingException();
@@ -40,7 +48,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
      * Removes a Wedding from the list. Throws an error if the Wedding cannot be found
      * @param wedding The Wedding to remove
      */
-    public void removeWedding (Wedding wedding) {
+    public void removeWedding(Wedding wedding) {
         requireNonNull(wedding);
         if (!internalList.remove(wedding)) {
             throw new WeddingNotFoundException();
@@ -52,9 +60,10 @@ public class UniqueWeddingList implements Iterable<Wedding> {
      * @param wedding The wedding to replace
      * @param newWedding The new wedding to replace with
      */
-    public void setWedding (Wedding wedding, Wedding newWedding) {
+    public void setWedding(Wedding wedding, Wedding newWedding) {
         requireAllNonNull(wedding, newWedding);
-        if(!contains(wedding)) {
+
+        if (!contains(wedding)) {
             throw new WeddingNotFoundException();
         }
         int index = internalList.indexOf(wedding);
@@ -67,7 +76,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
      * @param wedding
      * @param assignee
      */
-    public void assignToWedding (Wedding wedding, Person assignee) {
+    public void assignToWedding(Wedding wedding, Person assignee) {
         requireNonNull(wedding);
         requireNonNull(assignee);
 
@@ -91,7 +100,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
      * @param wedding
      * @param assignee
      */
-    public void unassignFromWedding (Wedding wedding, Person assignee) {
+    public void unassignFromWedding(Wedding wedding, Person assignee) {
         requireNonNull(wedding);
         requireNonNull(assignee);
 

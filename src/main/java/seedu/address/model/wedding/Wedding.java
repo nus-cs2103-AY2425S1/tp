@@ -1,11 +1,9 @@
 package seedu.address.model.wedding;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.person.PersonId;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.model.person.PersonId;
 
 /**
  * Represents a wedding event and tracks the date and people related to the event, immutable
@@ -15,12 +13,23 @@ public class Wedding {
     private final String date;
     private final List<PersonId> assignees; //Stores a list of UserIDs
 
+    /**
+     * Initialize with empty assignee list
+     * @param name
+     * @param date
+     */
     public Wedding(String name, String date) {
         this.name = name;
         this.date = date;
         this.assignees = new ArrayList<>();
     }
 
+    /**
+     * Initialize with assignee list
+     * @param name
+     * @param date
+     * @param assignees
+     */
     public Wedding(String name, String date, List<PersonId> assignees) {
         this.name = name;
         this.date = date;
