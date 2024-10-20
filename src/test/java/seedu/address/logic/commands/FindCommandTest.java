@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
-import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -91,11 +90,12 @@ public class FindCommandTest {
     @Test
     public void execute_multipleNameAndNricKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
-        NameNricContainsKeywordsPredicate predicate = preparePredicate("S5207047C Kunz S8596794J Mueller");
+        NameNricContainsKeywordsPredicate predicate = preparePredicate("S5207047C Kunz S8596794J Meyer");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, FIONA, GEORGE, IDA), model.getSortedFilteredPersonList());
+        // getSortedFilteredPersonList() will return the list in alphabetical sorted order
+        assertEquals(Arrays.asList(ALICE, ELLE, FIONA, GEORGE), model.getSortedFilteredPersonList());
     }
 
     @Test

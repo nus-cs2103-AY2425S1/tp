@@ -19,14 +19,17 @@ public class NameNricContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameNricContainsKeywordsPredicate firstPredicate = new NameNricContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameNricContainsKeywordsPredicate secondPredicate = new NameNricContainsKeywordsPredicate(secondPredicateKeywordList);
+        NameNricContainsKeywordsPredicate firstPredicate =
+                new NameNricContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameNricContainsKeywordsPredicate secondPredicate =
+                new NameNricContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameNricContainsKeywordsPredicate firstPredicateCopy = new NameNricContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameNricContainsKeywordsPredicate firstPredicateCopy =
+                new NameNricContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class NameNricContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameNricContainsKeywordsPredicate predicate = new NameNricContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        NameNricContainsKeywordsPredicate predicate =
+                new NameNricContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -61,7 +65,8 @@ public class NameNricContainsKeywordsPredicateTest {
     @Test
     public void test_nricContainsKeywords_returnsTrue() {
         // One keyword
-        NameNricContainsKeywordsPredicate predicate = new NameNricContainsKeywordsPredicate(Collections.singletonList("S1751126B"));
+        NameNricContainsKeywordsPredicate predicate =
+                new NameNricContainsKeywordsPredicate(Collections.singletonList("S1751126B"));
         assertTrue(predicate.test(new PersonBuilder().withNric("S1751126B").build()));
 
         // Multiple keywords
