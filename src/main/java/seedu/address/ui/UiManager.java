@@ -41,6 +41,8 @@ public class UiManager implements Ui {
 
         try {
             mainWindow = new MainWindow(primaryStage, logic);
+            // feed theme controller with the scene and stage
+            ThemeController.setUp(mainWindow.getScene(), mainWindow.getPrimaryStage());
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
