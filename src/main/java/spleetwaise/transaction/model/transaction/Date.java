@@ -9,8 +9,8 @@ import java.time.format.DateTimeParseException;
 import spleetwaise.address.commons.util.AppUtil;
 
 /**
- * Represents a Transaction's date in the transaction book.
- * Guarantees: immutable; is valid or declared in {@link #isValidDate(String)}
+ * Represents a Transaction's date in the transaction book. Guarantees: immutable; is valid or declared in
+ * {@link #isValidDate(String)}
  */
 public class Date {
     public static final String MESSAGE_CONSTRAINTS = "Date should only in the format of DDMMYYYY";
@@ -44,12 +44,12 @@ public class Date {
         }
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
     public static Date getNowDate() {
         return new Date(LocalDate.now().format(VALIDATION_FORMATTER));
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override

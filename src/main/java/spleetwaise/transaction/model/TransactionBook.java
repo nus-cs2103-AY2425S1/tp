@@ -94,6 +94,7 @@ public class TransactionBook implements ReadOnlyTransactionBook {
 
     /**
      * Removes {@code key} from this {@code TransactionBook}. {@code key} must exist in the transaction book.
+     *
      * @return whether the removal was successful
      */
     public boolean removeTransaction(Transaction key) {

@@ -3,8 +3,8 @@ package guitests.guihandles;
 import javafx.stage.Stage;
 
 /**
- * A handle for the main application window, providing access to its various components
- * such as the person list panel, result display, command box, status bar, and menu bar.
+ * A handle for the main application window, providing access to its various components such as the person list panel,
+ * result display, command box, status bar, and menu bar.
  */
 public class MainWindowHandle extends StageHandle {
 

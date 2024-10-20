@@ -30,11 +30,10 @@ public class MainWindow extends UiPart<Stage> {
     private static final double MIN_WIDTH_FOR_SPLIT = 800;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-    private String currCommand = "list";
-
     private final Stage primaryStage;
     private final Logic logic;
     private final HelpWindow helpWindow;
+    private String currCommand = "list";
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private TransactionListPanel transactionListPanel;

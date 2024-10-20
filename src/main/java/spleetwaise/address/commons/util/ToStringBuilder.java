@@ -20,8 +20,8 @@ public class ToStringBuilder {
     }
 
     /**
-     * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed with the
-     * canonical class name of {@code object}.
+     * Constructs a {@code ToStringBuilder} whose formatted output will be prefixed with the canonical class name of
+     * {@code object}.
      */
     public ToStringBuilder(Object object) {
         this(object.getClass().getCanonicalName());
@@ -30,7 +30,7 @@ public class ToStringBuilder {
     /**
      * Adds a field name/value pair to the output string.
      *
-     * @param fieldName The name of the field.
+     * @param fieldName  The name of the field.
      * @param fieldValue The value of the field.
      * @return A reference to this {@code ToStringBuilder} object, allowing method calls to be chained.
      */
