@@ -43,8 +43,8 @@ public class CloseClaimCommand extends Command {
     /**
      * Constructs a CloseClaimCommand object with the values passed in by the user.
      *
-     * @param index       of the client in the filtered client list whose claim to be marked as closed
-     * @param insuranceId of insurance plan the claim is to be marked as closed.
+     * @param index       of the client in the filtered client list whose claim to be marked as closed.
+     * @param insuranceId of insurance plan that contains the claim is to be marked as closed.
      * @param claimId     the claimID received when a claim is created through official channels.
      */
     public CloseClaimCommand(Index index, int insuranceId, final String claimId) {
