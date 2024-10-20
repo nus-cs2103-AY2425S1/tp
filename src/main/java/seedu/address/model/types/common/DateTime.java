@@ -50,8 +50,6 @@ public class DateTime {
         internalValidation = test.matches(VALIDATION_REGEX);
 
         try {
-            //todo Find out why its being called so often
-            System.out.println(test);
             LocalDateTime parsedValue;
             parsedValue = LocalDateTime.parse(test, DATE_TIME_FORMATTER);
             externalValidation = true;

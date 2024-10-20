@@ -49,11 +49,16 @@ public class DateTimeUtil {
      * Creates a Timeline that updates at a specified interval.
      *
      * @param action The action to perform on each update.
+     * @param interval The duration interval to perform an update.
      * @return The configured Timeline.
      */
-    public static Timeline createTimeline(Runnable action) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> action.run()));
+    public static Timeline createTimeline(Runnable action, Duration interval) {
+        Timeline timeline = new Timeline(new KeyFrame(interval, e -> action.run()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         return timeline;
+    }
+
+    public static Timeline createTimeline(Runnable action) {
+        return createTimeline(action, Duration.seconds(1));
     }
 }

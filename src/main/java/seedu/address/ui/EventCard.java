@@ -75,32 +75,40 @@ public class EventCard extends UiPart<Region> {
         Duration duration = Duration.between(now, eventStart);
 
         String statusText;
+        String styleClass;
+
         if (duration.isNegative()) {
             statusText = "Completed";
-            statusLabel.getStyleClass().add("event-status-completed");
+            styleClass = "event-status-completed";
         } else if (duration.isZero()) {
             statusText = "Ongoing";
-            statusLabel.getStyleClass().add("event-status-ongoing");
+            styleClass = "event-status-ongoing";
         } else {
-            long minutesLeft = duration.toMinutes();
-            long hoursLeft = duration.toHours();
-            long daysLeft = duration.toDays();
-            statusLabel.getStyleClass().add("event-status-incomplete");
-
-            if (daysLeft > 0) {
-                statusText = daysLeft + (daysLeft == 1 ? " day left" : " days left");
-            } else if (hoursLeft > 0) {
-                long effectiveHoursLeft = (minutesLeft % 60 >= 30) ? hoursLeft + 1 : hoursLeft;
-                statusText = effectiveHoursLeft + " hour" + (effectiveHoursLeft == 1 ? " left" : "s left");
-            } else if (minutesLeft > 0) {
-                long roundedMinutesLeft = (duration.getSeconds() % 60 >= 0) ? minutesLeft + 1 : minutesLeft;
-                statusText = roundedMinutesLeft + " minute" + (roundedMinutesLeft == 1 ? " left" : "s left");
-            } else {
-                statusText = "<1 minute left";
-            }
+            styleClass = "event-status-incomplete";
+            statusText = calculateRemainingTimeText(duration, now, eventStart);
         }
 
         statusLabel.setText(statusText);
+        statusLabel.getStyleClass().add(styleClass);
     }
 
+    private String calculateRemainingTimeText(Duration duration, LocalDateTime now, LocalDateTime eventStart) {
+        long minutesLeft = duration.toMinutes();
+        long hoursLeft = duration.toHours();
+        long daysLeft = duration.toDays();
+
+        if (daysLeft > 0) {
+            boolean condition = hoursLeft % 24 > 0 && now.getHour() >= eventStart.getHour();
+            long roundedDaysLeft = daysLeft + (condition ? 1 : 0);
+            return roundedDaysLeft + (roundedDaysLeft == 1 ? " day left" : " days left");
+        } else if (hoursLeft > 0) {
+            long effectiveHoursLeft = hoursLeft + ((minutesLeft % 60 >= 30) ? 1 : 0);
+            return effectiveHoursLeft + " hour" + (effectiveHoursLeft == 1 ? " left" : "s left");
+        } else if (minutesLeft > 0) {
+            long roundedMinutesLeft = minutesLeft + ((duration.getSeconds() % 60 >= 0) ? 1 : 0);
+            return roundedMinutesLeft + " minute" + (roundedMinutesLeft == 1 ? " left" : "s left");
+        } else {
+            return "<1 minute left";
+        }
+    }
 }
