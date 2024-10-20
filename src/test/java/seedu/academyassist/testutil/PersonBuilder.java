@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_IC = "S1234567B";
     public static final String DEFAULT_YEARGROUP = "2";
-    public static final Subject DEFAULT_SUBJECT = new Subject("Computing");
+    public static final String DEFAULT_SUBJECT = "MATH";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
@@ -47,7 +47,7 @@ public class PersonBuilder {
         ic = new Ic(DEFAULT_IC);
         yearGroup = new YearGroup(DEFAULT_YEARGROUP);
         subjects = new HashSet<>();
-        subjects.add(DEFAULT_SUBJECT);
+        subjects.add(new Subject(DEFAULT_SUBJECT));
         tags = new HashSet<>();
     }
 

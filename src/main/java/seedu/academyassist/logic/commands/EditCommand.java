@@ -227,11 +227,11 @@ public class EditCommand extends Command {
         }
 
         public void setSubjects(Set<Subject> subjects) {
-            this.subjects = subjects;
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
         public Optional<Set<Subject>> getSubjects() {
-            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+            return (subjects != null) ? Optional.of(new HashSet<>(subjects)) : Optional.empty();
         }
 
         /**

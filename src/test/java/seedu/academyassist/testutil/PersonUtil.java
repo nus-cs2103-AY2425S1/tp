@@ -39,7 +39,7 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
         sb.append(PREFIX_IC + person.getIc().value + " ");
         person.getSubjects().stream().forEach(
-                s -> sb.append(PREFIX_SUBJECT + s.subject + " ")
+                s -> sb.append(PREFIX_SUBJECT + s.toString() + " ")
         );
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
@@ -62,7 +62,7 @@ public class PersonUtil {
             if (subjects.isEmpty()) {
                 sb.append(PREFIX_SUBJECT);
             } else {
-                subjects.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.subject).append(" "));
+                subjects.forEach(s -> sb.append(PREFIX_SUBJECT).append(s.toString()).append(" "));
             }
         }
         if (descriptor.getTags().isPresent()) {
