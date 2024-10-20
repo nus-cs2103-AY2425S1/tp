@@ -1,7 +1,9 @@
 package tahub.contacts.model.course;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.testutil.Assert.assertThrows;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class AttendanceTest {
     public static final List<Boolean> SINGULAR_ABSENT_ATTENDANCE_LIST = List.of(false);
     public static final List<Boolean> EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5 = List.of(false, true, true, false, true);
     public static final StudentCourseAssociation SAMPLE_SCA = ScaBuilder.createDefault();
+    public static final StudentCourseAssociation SAMPLE_SCA_2 = ScaBuilder.createSampleSecond();
     public static final Tutorial SAMPLE_TUTORIAL = new Tutorial("T1", SAMPLE_SCA.getCourse());
     public static final Recitation SAMPLE_RECITATION = new Recitation("R1", SAMPLE_SCA.getCourse());
 
@@ -201,6 +204,66 @@ public class AttendanceTest {
                 Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
                 String a2 = "different-type";
                 assertNotEquals(a1, a2);
+            }
+        }
+    }
+
+    // isSame tests
+    @Nested
+    @DisplayName("isSameAttendance")
+    class IsSame {
+        @Nested
+        @DisplayName("returns true for")
+        class TrueIsSame {
+            @Test
+            @DisplayName("same Attendance object")
+            public void sameAttendanceObject() {
+                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                assertTrue(a1.isSameAttendance(a1));
+            }
+
+            @Test
+            @DisplayName("same attendance list, SCA and class")
+            public void sameAttendanceList() {
+                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                assertTrue(a1.isSameAttendance(a2));
+            }
+
+            @Test
+            @DisplayName("same SCA and class but different attendance list")
+            public void bothEmptyAttendanceList() {
+                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                assertTrue(a1.isSameAttendance(a2));
+            }
+        }
+
+        @Nested
+        @DisplayName("returns false for")
+        class FalseIsSame {
+            @Test
+            @DisplayName("different class")
+            public void differentAttendanceList() {
+                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_RECITATION);
+                assertFalse(a1.isSameAttendance(a2));
+            }
+
+            @Test
+            @DisplayName("different SCA")
+            public void differentSca() {
+                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA_2, SAMPLE_RECITATION);
+                assertFalse(a1.isSameAttendance(a2));
+            }
+
+            @Test
+            @DisplayName("different type")
+            public void differentType() {
+                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                String a2 = "different-type";
+                assertFalse(a1.isSameAttendance(a2));
             }
         }
     }
