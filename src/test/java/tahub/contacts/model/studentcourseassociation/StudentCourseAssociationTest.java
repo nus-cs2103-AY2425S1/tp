@@ -2,9 +2,9 @@ package tahub.contacts.model.studentcourseassociation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
@@ -13,7 +13,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -21,6 +20,7 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+import tahub.contacts.model.tutorial.Tutorial;
 
 
 
@@ -143,7 +143,14 @@ class StudentCourseAssociationTest {
 
     @Test
     void testAddGrade() {
-        Person student = createTestPerson("A1234567I", "Prof Ian Tsang");
+        Person student = new Person(
+                new MatriculationNumber("A1234556J"),
+                new Name("Prof John Doe"),
+                new Phone("12345678"),
+                new Email("johndoe@example.com"),
+                new Address("Computing 1, 13 Computing Dr, 117417"),
+                new HashSet<>()
+        );
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T7", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
@@ -165,8 +172,18 @@ class StudentCourseAssociationTest {
         Course course = new Course("IS2102", "Financial Management");
         Tutorial tutorial = new Tutorial("T4", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+    }
+
+    @Test
     void testSetAssessmentWeight() {
-        Person student = createTestPerson("A1234567J", "Prof John Doe");
+        Person student = new Person(
+                new MatriculationNumber("A1234556J"),
+                new Name("Prof John Doe"),
+                new Phone("12345678"),
+                new Email("johndoe@example.com"),
+                new Address("Computing 1, 13 Computing Dr, 117417"),
+                new HashSet<>()
+        );
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T4", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);

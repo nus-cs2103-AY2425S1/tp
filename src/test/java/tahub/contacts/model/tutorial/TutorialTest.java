@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.tutorial.Tutorial;
 
 public class TutorialTest {
 
