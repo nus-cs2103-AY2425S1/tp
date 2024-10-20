@@ -128,7 +128,9 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
+
+#### By name
 
 Finds persons whose names contain any of the given keywords.
 
@@ -145,7 +147,36 @@ Format: `find (n/KEYWORD)+`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david li` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find n/alex n/david'](images/findAlexDavidResult.png)
+
+#### By module-role
+
+Finds persons whose module-role pairs contain any of the given keywords.
+
+Format: `find (r/MODULECODE[-ROLETYPE])+`
+
+* Search by module code and optionally specify the role type (separated by a dash). For example, `CS2103T-Prof` will search for the module `CS2103T` with the role `Professor`.
+* The search is case-insensitive. e.g. `cs2103t-student` will match `CS2103T-Student`.
+* If the role type is not specified, role `STUDENT` will be assumed. For example, `find r/CS2103T` will return all students taking `CS2103T`.
+* Persons matching at least one module-role keyword will be returned (i.e. OR search).
+
+Examples:
+* `find r/CS2103T` returns all students taking the module `CS2103T`
+* `find r/CS2103T-Prof r/CS1101S` returns all persons with the role Prof in CS2103T or Student in CS1101S 
+  ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
+
+#### By name and module-role
+
+Finds persons whose names and module-role pairs contain any of the given keywords.
+
+Format: `find (n/KEYWORD)+ (r/MODULECODE[-ROLETYPE])+`
+
+* Search by both name and module code (role optional).
+* Person matching at least one name keyword AND one module-role keyword will be returned (i.e. AND search).
+
+Examples:
+* `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+  ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 ### Deleting a person or multiple persons: `delete`
 
@@ -216,6 +247,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find (n/KEYWORD)+`<br> e.g., `find n/James n/Jake`
+**Find**   | `find (n/KEYWORD)+ (r/KEYWORD)+`<br> e.g., `find n/James n/Jake r/CS1101S r/MA1521`
 **List**   | `list`
 **Help**   | `help`
