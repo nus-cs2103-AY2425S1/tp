@@ -109,15 +109,18 @@ public class Person {
     public boolean hasRole(Role role) {
         return this.roles.contains(role);
     }
+    public boolean hasTag(Tag tag) {
+        return this.tags.contains(tag);
+    }
+    public boolean hasName(Name name) {
+        return this.name.equals(name);
+    }
     public void addCaregiver(Nric caregiver) {
         caregivers.add(caregiver);
     }
 
     public void addPatient(Nric patient) {
         patients.add(patient);
-    }
-    public boolean hasTag(Tag tag) {
-        return this.tags.contains(tag);
     }
 
     /**
