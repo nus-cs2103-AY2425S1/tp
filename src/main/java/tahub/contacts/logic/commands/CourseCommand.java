@@ -24,7 +24,7 @@ public class CourseCommand extends Command {
     private final Course toAdd;
 
     /**
-     * Creates an CourseCommand to add the specified {@code Course}
+     * Creates a CourseCommand to add the specified {@code Course}
      */
     public CourseCommand(Course course) {
         requireNonNull(course);

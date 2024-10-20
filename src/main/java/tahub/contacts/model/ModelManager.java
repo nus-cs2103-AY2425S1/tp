@@ -79,10 +79,14 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    //=========== Course ==================================================================================
+
+    @Override
     public Path getCourseListFilePath() {
         return userPrefs.getCourseListFilePath();
     }
 
+    @Override
     public void setCourseListFilePath(Path courseListFilePath) {
         requireNonNull(courseListFilePath);
         userPrefs.setCourseListFilePath(courseListFilePath);
