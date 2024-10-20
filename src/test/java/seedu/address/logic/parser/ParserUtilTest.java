@@ -14,6 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -39,6 +41,11 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_POSTALCODE = "123456";
     private static final String VALID_UNIT = "11-11";
+    private static final String VALID_MEETING_TITLE = "Project Meeting";
+    private static final String INVALID_MEETING_TITLE = "Project@Meeting"; // Invalid due to special character
+    private static final String VALID_MEETING_DATE = "01-01-2024";
+    private static final String INVALID_MEETING_DATE = "32-13-2024"; // Invalid due to incorrect day and month
+
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -320,5 +327,51 @@ public class ParserUtilTest {
         String unitWithWhitespace = WHITESPACE + VALID_UNIT + WHITESPACE;
         Unit expectedUnit = new Unit(VALID_UNIT);
         assertEquals(expectedUnit, ParserUtil.parseUnit(unitWithWhitespace));
+    }
+
+    @Test
+    public void parseMeetingTitle_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMeetingTitle(null));
+    }
+
+    @Test
+    public void parseMeetingTitle_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingTitle(INVALID_MEETING_TITLE));
+    }
+
+    @Test
+    public void parseMeetingTitle_validValueWithoutWhitespace_returnsMeetingTitle() throws Exception {
+        MeetingTitle expectedMeetingTitle = new MeetingTitle(VALID_MEETING_TITLE);
+        assertEquals(expectedMeetingTitle, ParserUtil.parseMeetingTitle(VALID_MEETING_TITLE));
+    }
+
+    @Test
+    public void parseMeetingTitle_validValueWithWhitespace_returnsTrimmedMeetingTitle() throws Exception {
+        String meetingTitleWithWhitespace = WHITESPACE + VALID_MEETING_TITLE + WHITESPACE;
+        MeetingTitle expectedMeetingTitle = new MeetingTitle(VALID_MEETING_TITLE);
+        assertEquals(expectedMeetingTitle, ParserUtil.parseMeetingTitle(meetingTitleWithWhitespace));
+    }
+
+    @Test
+    public void parseMeetingDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseMeetingDate(null));
+    }
+
+    @Test
+    public void parseMeetingDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMeetingDate(INVALID_MEETING_DATE));
+    }
+
+    @Test
+    public void parseMeetingDate_validValueWithoutWhitespace_returnsMeetingDate() throws Exception {
+        MeetingDate expectedMeetingDate = new MeetingDate(VALID_MEETING_DATE);
+        assertEquals(expectedMeetingDate, ParserUtil.parseMeetingDate(VALID_MEETING_DATE));
+    }
+
+    @Test
+    public void parseMeetingDate_validValueWithWhitespace_returnsTrimmedMeetingDate() throws Exception {
+        String meetingDateWithWhitespace = WHITESPACE + VALID_MEETING_DATE + WHITESPACE;
+        MeetingDate expectedMeetingDate = new MeetingDate(VALID_MEETING_DATE);
+        assertEquals(expectedMeetingDate, ParserUtil.parseMeetingDate(meetingDateWithWhitespace));
     }
 }

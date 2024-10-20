@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
@@ -22,6 +23,7 @@ public class DeleteMeetingCommandParser implements Parser<DeleteMeetingCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteMeetingCommand parse(String args) throws ParseException {
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MEETING_TITLE, PREFIX_MEETING_DATE);
 

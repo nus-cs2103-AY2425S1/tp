@@ -19,11 +19,14 @@ import static seedu.address.testutil.TypicalProperty.BEDOK;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
 import javafx.beans.property.BooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
@@ -31,6 +34,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
@@ -173,6 +177,60 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPropertyList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
+    }
+
+    // ==================== MeetingBook Related Tests ====================
+
+    @Test
+    public void getFilteredMeetingList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredMeetingList().remove(0));
+    }
+
+    @Test
+    public void getMeetingBook_returnsCorrectMeetingBook() {
+        MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
+                .withMeeting(MEETING_CLEMENTI).build();
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new PropertyBook(), new ClientBook(), meetingBook);
+        assertEquals(meetingBook, modelManager.getMeetingBook());
+    }
+
+    @Test
+    public void deleteMeeting_meetingInMeetingBook_success() {
+        MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
+                .withMeeting(MEETING_CLEMENTI).build();
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new PropertyBook(), new ClientBook(), meetingBook);
+        modelManager.deleteMeeting(MEETING_BEDOK);
+
+        MeetingBook expectedMeetingBook = new MeetingBookBuilder().withMeeting(MEETING_CLEMENTI).build();
+        assertEquals(expectedMeetingBook, modelManager.getMeetingBook());
+    }
+
+    @Test
+    public void getFilteredMeetingList_returnsCorrectFilteredMeetingList() {
+        ObservableList<Meeting> expectedList = FXCollections.observableArrayList(MEETING_BEDOK, MEETING_CLEMENTI);
+        MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
+                .withMeeting(MEETING_CLEMENTI).build();
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new PropertyBook(), new ClientBook(), meetingBook);
+
+        assertEquals(expectedList, modelManager.getFilteredMeetingList());
+    }
+
+    @Test
+    public void updateFilteredMeetingList_predicateUpdatesList() {
+        MeetingBook meetingBook = new MeetingBookBuilder().withMeeting(MEETING_BEDOK)
+                .withMeeting(MEETING_CLEMENTI).build();
+        modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new PropertyBook(), new ClientBook(), meetingBook);
+
+        // Apply predicate to only include meetings with the title "Meeting at Bedok"
+        Predicate<Meeting> predicate = meeting -> meeting.getMeetingTitle().equals(MEETING_BEDOK.getMeetingTitle());
+        modelManager.updateFilteredMeetingList(predicate);
+
+        ObservableList<Meeting> expectedList = FXCollections.observableArrayList(MEETING_BEDOK);
+        assertEquals(expectedList, modelManager.getFilteredMeetingList());
     }
 
     // ==================== Equality Tests ====================

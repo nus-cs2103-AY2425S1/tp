@@ -227,7 +227,7 @@ public class ParserUtil {
     public static MeetingTitle parseMeetingTitle(String meetingTitle) throws ParseException {
         requireNonNull(meetingTitle);
         String trimmedMeetingTitle = meetingTitle.trim();
-        if (!MeetingTitle.isValidMeetingTitle(meetingTitle)) {
+        if (!MeetingTitle.isValidMeetingTitle(trimmedMeetingTitle)) {
             throw new ParseException(MeetingTitle.MESSAGE_CONSTRAINTS);
         }
         return new MeetingTitle(trimmedMeetingTitle);
@@ -242,7 +242,7 @@ public class ParserUtil {
     public static MeetingDate parseMeetingDate(String meetingDate) throws ParseException {
         requireNonNull(meetingDate);
         String trimmedMeetingDate = meetingDate.trim();
-        if (!MeetingDate.isValidMeetingDate(meetingDate)) {
+        if (!MeetingDate.isValidMeetingDate(trimmedMeetingDate)) {
             throw new ParseException(MeetingTitle.MESSAGE_CONSTRAINTS);
         }
         return new MeetingDate(trimmedMeetingDate);
