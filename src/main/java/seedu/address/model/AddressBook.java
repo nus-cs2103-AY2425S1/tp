@@ -249,13 +249,17 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code assignment} from this {@code AddressBook}.
      * {@code assignment} must exist in the address book.
      */
-    public void removeAssignment(AssignmentId assignmentId) { assignments.remove(assignmentId); }
+    public void removeAssignment(AssignmentId assignmentId) {
+        assignments.remove(assignmentId);
+    }
 
     /**
      * Removes {@code assignment} from this {@code AddressBook}.
      * {@code assignment} must exist in the address book.
      */
-    public void removeAssignment(ProjectId ProjectId, EmployeeId EmployeeId) { assignments.remove(ProjectId, EmployeeId); }
+    public void removeAssignment(ProjectId projectId, EmployeeId employeeId) {
+        assignments.remove(projectId, employeeId);
+    }
     //// util methods
 
     @Override
