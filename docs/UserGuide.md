@@ -168,7 +168,7 @@ Examples:
 
 Adds a emergency contact's number to the specified person in the address book.
 
-Format: `addECNumber INDEX [ep/ECNUMBER]`
+Format: `addEcNumber INDEX [ep/ECNUMBER]`
 
 <box type="tip" seamless>
 
