@@ -28,7 +28,7 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 
    * `list` : Lists all contacts.
 
-   * `add i/S4260423B n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ContactMate.
+   * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7 t/friends t/owesMoney` : Adds a contact named `John Doe` to ContactMate.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
