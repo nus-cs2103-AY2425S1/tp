@@ -69,10 +69,6 @@ public class UpdateTaskCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (name.equals("")) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_UPDATE);
-        }
-
         Person personToUpdate = lastShownList.stream()
                 .filter(person -> person.getName().equals(name))
                 .findFirst()

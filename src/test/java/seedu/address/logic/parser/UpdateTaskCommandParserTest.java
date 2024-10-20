@@ -46,6 +46,10 @@ public class UpdateTaskCommandParserTest {
         // no name specified
         assertParseFailure(parser, TASK_INDEX_DESC + TASK_DESCRIPTION_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
+        // non-empty preamble specified
+        assertParseFailure(parser, "goonmaster" + NAME_DESC_AMY + TASK_INDEX_DESC + TASK_DESCRIPTION_DESC_AMY,
+                MESSAGE_INVALID_FORMAT);
+
         // no field specified
         assertParseFailure(parser, NAME_DESC_AMY + TASK_INDEX_DESC, UpdateTaskCommand.MESSAGE_NOT_UPDATED);
 
