@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.TimeClashException;
 
 /**
  * Schedules a meeting with another person from the address book.
@@ -35,6 +36,11 @@ public class ScheduleCommand extends Command {
             + PREFIX_END_TIME + "09-10-2024 10:00 ";
 
     public static final String MESSAGE_SUCCESS = "New meeting with %1$s added: %2$s";
+
+    public static final String MESSAGE_TIME_CLASH = "A meeting with anUdder will occur at that time. "
+            + "Please reschedule to a timing when you are available!";
+
+    public static final String MESSAGE_INVALID_ARGUMENT = "Invalid argument received! %1$s.";
 
     private final Index index;
     private final LocalDateTime startTime;
@@ -70,9 +76,17 @@ public class ScheduleCommand extends Command {
 
         Person personToScheduleMeetingWith = lastShownList.get(index.getZeroBased());
 
-        toAdd = new Meeting(personToScheduleMeetingWith.getName(), startTime, endTime, location);
+        try {
+            toAdd = new Meeting(personToScheduleMeetingWith.getName(), startTime, endTime, location);
+        } catch (CommandException e) {
+            return new CommandResult(String.format(MESSAGE_INVALID_ARGUMENT, e.getMessage()));
+        }
 
-        model.addMeeting(personToScheduleMeetingWith, toAdd);
+        try {
+            model.addMeeting(personToScheduleMeetingWith, toAdd);
+        } catch (TimeClashException e) {
+            return new CommandResult(MESSAGE_TIME_CLASH);
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, personToScheduleMeetingWith.getName(),
                 Messages.format(toAdd)));
