@@ -20,7 +20,7 @@ import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.client.insurance.claim.Claim;
 
 /**
- * Marks a claim tagged to a Client's insurance as "closed"
+ * Marks a claim tagged to a Client's insurance plan as "closed"
  */
 public class CloseClaimCommand extends Command {
     public static final String COMMAND_WORD = "closeClaim";
