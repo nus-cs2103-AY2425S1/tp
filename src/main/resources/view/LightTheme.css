@@ -367,6 +367,13 @@
     -fx-font-family: "Segoe UI";
 }
 
+.custom-title {
+    -fx-font-size: 20px;
+    -fx-font-family: "Segoe UI";
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 0 15px
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #007BFF;
