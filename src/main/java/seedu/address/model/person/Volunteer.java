@@ -64,12 +64,7 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
         }
 
         Volunteer otherVolunteer = (Volunteer) other;
-        return name.equals(otherVolunteer.name)
-                && phone.equals(otherVolunteer.phone)
-                && email.equals(otherVolunteer.email)
-                && address.equals(otherVolunteer.address)
-                && tags.equals(otherVolunteer.tags)
-                && hours.equals(otherVolunteer.hours);
+        return super.equals(other) && hours.equals(otherVolunteer.hours);
     }
 
     /**
@@ -79,7 +74,6 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
      */
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags, hours);
     }
 
@@ -111,6 +105,7 @@ public class Volunteer extends Person implements Comparable<Volunteer> {
                 .toString();
     }
 
+    @Override
     public Role getRole() {
         return Role.VOLUNTEER;
     }

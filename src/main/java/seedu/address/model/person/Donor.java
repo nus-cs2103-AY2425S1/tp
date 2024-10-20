@@ -51,17 +51,12 @@ public class Donor extends Person {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Donor)) {
+        if (!(other instanceof Donor)) {
             return false;
         }
 
-        seedu.address.model.person.Donor otherDonor = (seedu.address.model.person.Donor) other;
-        return name.equals(otherDonor.name)
-                && phone.equals(otherDonor.phone)
-                && email.equals(otherDonor.email)
-                && address.equals(otherDonor.address)
-                && tags.equals(otherDonor.tags)
-                && donatedAmount.equals(otherDonor.donatedAmount);
+        seedu.address.model.person.Donor otherDonor = (Donor) other;
+        return super.equals(otherDonor) && (donatedAmount.equals(otherDonor.donatedAmount));
     }
 
     /**
@@ -71,7 +66,6 @@ public class Donor extends Person {
      */
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, tags, donatedAmount);
     }
 
@@ -88,10 +82,11 @@ public class Donor extends Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
-                .add("hours", donatedAmount)
+                .add("donatedAmount", donatedAmount)
                 .toString();
     }
 
+    @Override
     public Role getRole() {
         return Role.DONOR;
     }
