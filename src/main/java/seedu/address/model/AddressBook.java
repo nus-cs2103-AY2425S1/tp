@@ -112,6 +112,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         weddings.removeWedding(wedding);
     }
 
+    public void setWedding (Wedding wedding, Wedding editedWedding) {
+        weddings.setWedding(wedding, editedWedding);
+    }
+
     public void assignPerson (Wedding wedding, Person person) {
         requireNonNull(wedding);
         requireNonNull(person);
@@ -161,6 +165,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Wedding> getWeddingList() {
+        return weddings.asUnmodifiableObservableList();
     }
 
     @Override
