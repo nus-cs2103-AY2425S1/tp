@@ -8,6 +8,7 @@ import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.exceptions.ChronologicalOrderException;
 
 /**
  * Represents an Event in the address book.
@@ -30,8 +31,13 @@ public class Event {
      * Every field must be present and not null.
      */
     public Event(EventName eventName, Location location, Date date,
-                 Time startTime, Time endTime, Description description, List<String> volunteers) {
+                 Time startTime, Time endTime, Description description, List<String> volunteers)
+                    throws ChronologicalOrderException {
         requireAllNonNull(eventName, location, date, startTime, endTime, description, volunteers);
+        if (!startTime.isBefore(endTime)) {
+            throw new ChronologicalOrderException();
+        }
+
         this.id = nextId;
         nextId++;
 
@@ -49,7 +55,7 @@ public class Event {
      * Uses an empty description and volunteer list by default.
      */
     public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime,
-                 Description description) {
+                 Description description) throws ChronologicalOrderException {
         this(eventName, location, date, startTime, endTime, description, FXCollections.observableArrayList());
     }
 
@@ -57,7 +63,8 @@ public class Event {
      * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
      * Uses an empty description and volunteer list by default.
      */
-    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime) {
+    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime)
+            throws ChronologicalOrderException {
         this(eventName, location, date, startTime, endTime, new Description(), FXCollections.observableArrayList());
     }
 

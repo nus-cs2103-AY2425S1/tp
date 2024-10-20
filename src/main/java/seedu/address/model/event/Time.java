@@ -15,6 +15,8 @@ public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Time should follow the format hh:mm, and it should not be blank";
+    public static final String MESSAGE_CHRONOLOGICAL_CONSTRAINTS =
+            "Start time should be before end time";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -39,6 +41,15 @@ public class Time {
      */
     public static boolean isValidTime(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if this time is before the other time.
+     * @param other The other time to compare with.
+     * @return True if this time is before the other time.
+     */
+    public boolean isBefore(Time other) {
+        return eventTime.isBefore(other.eventTime);
     }
 
 
