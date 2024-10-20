@@ -153,4 +153,9 @@ public class ModelManager implements Model {
         addressBook.addConsult(consult);
     }
 
+    @Override
+    public boolean hasConsult(Consultation consult) {
+        return addressBook.hasConsult(consult);
+    }
+
 }

@@ -81,6 +81,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a consult with the same details as the given consult exists in TAHub.
+     * @param consult The consultation to search for.
+     * @return True if a consultation is found.
+     */
+    public boolean hasConsult(Consultation consult) {
+        requireNonNull(consult);
+        return consults.contains(consult);
+    }
+
+    /**
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */

@@ -92,4 +92,10 @@ public interface Model {
      * @param consult Consultation to be added.
      */
     void addConsult(Consultation consult);
+
+    /**
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
+     */
+    boolean hasConsult(Consultation consult);
 }
