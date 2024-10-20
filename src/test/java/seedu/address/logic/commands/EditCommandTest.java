@@ -42,14 +42,14 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Person ogPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(ogPerson, editedPerson);
+        expectedModel.setPerson(originalPerson, editedPerson);
         expectedModel.getFilteredConcertContactList().forEach(cc -> {
-            if (cc.getPerson().equals(ogPerson)) {
+            if (cc.getPerson().equals(originalPerson)) {
                 expectedModel.setConcertContact(cc, new ConcertContact(editedPerson, cc.getConcert()));
             }
         });
@@ -61,12 +61,12 @@ public class EditCommandTest {
         Person editedPerson = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_THIRD_PERSON, descriptor);
-        Person ogPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(ogPerson, editedPerson);
+        expectedModel.setPerson(originalPerson, editedPerson);
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -115,7 +115,7 @@ public class EditCommandTest {
                 .getZeroBased());
         Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB)
                 .build();
-        Person ogPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person originalPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -127,7 +127,7 @@ public class EditCommandTest {
                 new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
         expectedModel.getFilteredConcertContactList().forEach(cc -> {
-            if (cc.getPerson().equals(ogPerson)) {
+            if (cc.getPerson().equals(originalPerson)) {
                 expectedModel.setConcertContact(cc, new ConcertContact(editedPerson, cc.getConcert()));
             }
         });
