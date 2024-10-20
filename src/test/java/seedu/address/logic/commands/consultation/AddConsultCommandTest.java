@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.consultation.Consultation;
@@ -68,6 +69,13 @@ public class AddConsultCommandTest {
         AddConsultCommand addConsultCommand = new AddConsultCommand(consult);
         String expected = AddConsultCommand.class.getCanonicalName() + "{newConsult=" + consult + "}";
         assertEquals(expected, addConsultCommand.toString());
+    }
+
+    @Test
+    public void getCommandTypeMethod() {
+        Consultation consult = new ConsultationBuilder().build();
+        AddConsultCommand addConsultCommand = new AddConsultCommand(consult);
+        assertEquals(addConsultCommand.getCommandType(), CommandType.ADDCONSULT);
     }
 
     /**
