@@ -38,27 +38,27 @@ public class AssignCommandTest {
         assertThrows(NullPointerException.class, () -> new AssignCommand(null));
     }
 
-    // @Test
-    // public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
-    //     ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
-    //     Assignment validAssignment = new AssignmentBuilder().build();
-
-    //     CommandResult commandResult = new AssignCommand(validAssignment).execute(modelStub);
-
-    //     assertEquals(String.format(AssignCommand.MESSAGE_SUCCESS, Messages.format(validAssignment)),
-    //             commandResult.getFeedbackToUser());
-    //     assertEquals(Arrays.asList(validAssignment), modelStub.assignmentsAdded);
-    // }
-
-    // @Test
-    // public void execute_duplicateAssignment_throwsCommandException() {
-    //     Assignment validAssignment = new AssignmentBuilder().build();
-    //     AssignCommand assignCommand = new AssignCommand(validAssignment);
-    //     ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
-
-    //     assertThrows(CommandException.class,
-    //             AssignCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> assignCommand.execute(modelStub));
-    // }
+//     @Test
+//     public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
+//         ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
+//         Assignment validAssignment = new AssignmentBuilder().build();
+//
+//         CommandResult commandResult = new AssignCommand(validAssignment).execute(modelStub);
+//
+//         assertEquals(String.format(AssignCommand.MESSAGE_SUCCESS, Messages.format(validAssignment)),
+//                 commandResult.getFeedbackToUser());
+//         assertEquals(Arrays.asList(validAssignment), modelStub.assignmentsAdded);
+//     }
+//
+//     @Test
+//     public void execute_duplicateAssignment_throwsCommandException() {
+//         Assignment validAssignment = new AssignmentBuilder().build();
+//         AssignCommand assignCommand = new AssignCommand(validAssignment);
+//         ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
+//
+//         assertThrows(CommandException.class,
+//                 AssignCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> assignCommand.execute(modelStub));
+//     }
 
     @Test
     public void equals() {
