@@ -1,0 +1,40 @@
+package seedu.address.model.person;
+
+import seedu.address.logic.commands.util.FieldQuery;
+import seedu.address.logic.commands.util.SearchField;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+
+// Main search predicate
+public class PersonSearchPredicate implements Predicate<Person> {
+    private final List<FieldQuery> fieldQueries;
+
+    public PersonSearchPredicate(List<FieldQuery> fieldQueries) {
+        this.fieldQueries = fieldQueries;
+    }
+
+    @Override
+    public boolean test(Person person) {
+        return fieldQueries.stream()
+                .allMatch(query -> matchesQuery(person, query));
+    }
+
+    private boolean matchesQuery(Person person, FieldQuery query) {
+        String fieldValue = getFieldValue(person, query.getField());
+        return fieldValue != null &&
+                fieldValue.toLowerCase()
+                        .contains(query.getKeyword().toLowerCase());
+    }
+
+    private String getFieldValue(Person person, SearchField field) {
+        return switch (field) {
+            case NAME -> person.getName().fullName;
+            case PHONE -> person.getPhone().value;
+            case EMAIL -> person.getEmail().value;
+            case LOCATION -> person.getAddress().value;
+            case REMARK -> person.getRemark().value;
+        };
+    }
+}
