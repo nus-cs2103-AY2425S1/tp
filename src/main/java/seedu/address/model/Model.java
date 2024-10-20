@@ -100,6 +100,11 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Gets list of persons in the address book.
+     */
+    ObservableList<Person> getPersonList();
+
+    /**
      * Returns true if a project with the same identity as {@code project} exists in
      * the address book.
      */
@@ -129,6 +134,11 @@ public interface Model {
      * The person identity of {@code project} must not be the same as another existing project in the address book.
      */
     void setProject(Project target, Project editedProject);
+
+    /**
+     * Gets list of projects in the address book.
+     */
+    ObservableList<Project> getProjectList();
 
     /**
      * Returns true if an assignment with the same identity as {@code assignment}

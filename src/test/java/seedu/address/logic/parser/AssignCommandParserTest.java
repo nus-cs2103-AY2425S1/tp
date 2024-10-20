@@ -11,13 +11,13 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_ALPHA;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_ID_ONE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPLOYEE_ID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_ID_BETA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalProjects.BETA;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,14 +32,15 @@ public class AssignCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Assignment expectedAssignment = new AssignmentBuilder().withAssignmentId(VALID_ASSIGNMENT_ID_ONE)
-                .withEmployeeId(VALID_EMPLOYEE_ID_BOB).withProjectId(VALID_PROJECT_ID_BETA).build();
+                .withPerson(BOB).withProject(BETA).build();
 
         // whitespace only preamble
         assertParseSuccess(parser,
                 PREAMBLE_WHITESPACE + ASSIGNMENT_ID_DESC_ONE + PROJECT_ID_DESC_BETA
                         + EMPLOYEE_ID_DESC_BOB,
                 new AssignCommand(expectedAssignment.getAssignmentId(),
-                        expectedAssignment.getProjectId(), expectedAssignment.getEmployeeId()));
+                        expectedAssignment.getProject().getId(),
+                        expectedAssignment.getPerson().getEmployeeId()));
     }
 
     @Test
@@ -61,7 +62,8 @@ public class AssignCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + ASSIGNMENT_ID_DESC_TWO + PROJECT_ID_DESC_ALPHA + EMPLOYEE_ID_DESC_BOB
+                validExpectedPersonString + ASSIGNMENT_ID_DESC_TWO + PROJECT_ID_DESC_ALPHA
+                        + EMPLOYEE_ID_DESC_BOB
                         + validExpectedPersonString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_ASSIGNMENT_ID, PREFIX_PROJECT_ID,
                         PREFIX_EMPLOYEE_ID));

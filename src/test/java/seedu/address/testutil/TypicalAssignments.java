@@ -19,14 +19,14 @@ import seedu.address.model.assignment.Assignment;
  */
 public class TypicalAssignments {
     public static final Assignment ALICE_ALPHA = new AssignmentBuilder().withAssignmentId("1")
-            .withProjectId(ALPHA.getId().toString())
-            .withEmployeeId(ALICE.getEmployeeId().toString()).build();
+            .withProject(ALPHA)
+            .withPerson(ALICE).build();
     public static final Assignment BENSON_BETA = new AssignmentBuilder().withAssignmentId("2")
-            .withProjectId(BETA.getId().toString())
-            .withEmployeeId(BENSON.getEmployeeId().toString()).build();
+            .withProject(BETA)
+            .withPerson(BENSON).build();
     public static final Assignment BOB_BETA = new AssignmentBuilder().withAssignmentId("2")
-            .withProjectId(BETA.getId().toString())
-            .withEmployeeId(BOB.getEmployeeId().toString()).build();
+            .withProject(BETA)
+            .withPerson(BOB).build();
 
 
     private TypicalAssignments() {
@@ -40,6 +40,10 @@ public class TypicalAssignments {
         for (Assignment assignment : getTypicalAssignments()) {
             ab.addAssignment(assignment);
         }
+        ab.addProject(ALPHA);
+        ab.addProject(BETA);
+        ab.addPerson(ALICE);
+        ab.addPerson(BENSON);
         return ab;
     }
 

@@ -175,6 +175,11 @@ public class AddProjectCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasProject(Project project) {
             throw new AssertionError("This method should not be called.");
         }
@@ -191,6 +196,11 @@ public class AddProjectCommandTest {
 
         @Override
         public void setProject(Project target, Project editedproject) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Project> getProjectList() {
             throw new AssertionError("This method should not be called.");
         }
 

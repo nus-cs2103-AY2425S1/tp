@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PROJECT_DISPLAYED_INDEX = "The project index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_PROJECTS_LISTED_OVERVIEW = "%1$d projects listed!";
+    public static final String MESSAGE_PROJECT_MEMBERS_LISTED = "%1$d project members listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
@@ -77,9 +78,9 @@ public class Messages {
         builder.append("Assignment Id:\n")
                 .append(assignment.getAssignmentId())
                 .append("\nProject Id:\n")
-                .append(assignment.getProjectId())
+                .append(assignment.getProject().getId())
                 .append("\nEmployee Id:\n")
-                .append(assignment.getEmployeeId());
+                .append(assignment.getPerson().getEmployeeId());
         return builder.toString();
     }
 }

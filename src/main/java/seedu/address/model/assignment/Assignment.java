@@ -2,8 +2,8 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.person.EmployeeId;
-import seedu.address.model.project.ProjectId;
+import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Represents a (Project) Assignment in the address book.
@@ -12,34 +12,34 @@ import seedu.address.model.project.ProjectId;
  */
 public class Assignment {
     private final AssignmentId assignmentId;
-    private final ProjectId projectId;
-    private final EmployeeId employeeId;
+    private final Project project;
+    private final Person person;
 
     /**
      * Every field must be present and not null.
      */
-    public Assignment(AssignmentId assignmentId, ProjectId projectId, EmployeeId employeeId) {
-        requireAllNonNull(projectId, employeeId);
+    public Assignment(AssignmentId assignmentId, Project project, Person person) {
+        requireAllNonNull(project, person);
         this.assignmentId = assignmentId;
-        this.projectId = projectId;
-        this.employeeId = employeeId;
+        this.project = project;
+        this.person = person;
     }
 
     public AssignmentId getAssignmentId() {
         return assignmentId;
     }
 
-    public ProjectId getProjectId() {
-        return projectId;
+    public Project getProject() {
+        return project;
     }
 
-    public EmployeeId getEmployeeId() {
-        return employeeId;
+    public Person getPerson() {
+        return person;
     }
 
     /**
-     * Returns true if both {@code ProjectId#equals(ProjectId)} and
-     * {@code EmployeeId#equals(EmployeeId)} returns true.
+     * Returns true if both {@code Project#equals(Project)} and
+     * {@code Person#equals(Person)} returns true.
      * This defines a weaker notion of equality between two assignments.
      */
     public boolean isSameAssignment(Assignment otherAssignment) {
@@ -51,8 +51,8 @@ public class Assignment {
             return false;
         }
 
-        boolean isSameProject = otherAssignment.getProjectId().equals(projectId);
-        boolean isSamePerson = otherAssignment.getEmployeeId().equals(employeeId);
+        boolean isSameProject = otherAssignment.getProject().equals(project);
+        boolean isSamePerson = otherAssignment.getPerson().equals(person);
         return isSamePerson && isSameProject;
     }
 
@@ -100,7 +100,7 @@ public class Assignment {
 
         Assignment otherAssignment = (Assignment) other;
         return assignmentId.equals(otherAssignment.assignmentId)
-                && (projectId.equals(otherAssignment.projectId)
-                && employeeId.equals(otherAssignment.employeeId));
+                && project.equals(otherAssignment.project)
+                && person.equals(otherAssignment.person);
     }
 }

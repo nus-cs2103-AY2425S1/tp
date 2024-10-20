@@ -42,7 +42,7 @@ public class UniqueAssignmentListTest {
     @Test
     public void contains_assignmentWithDifferentProjectFieldInList_returnsFalse() {
         uniqueAssignmentList.add(ALICE_ALPHA);
-        Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA).withProjectId(BETA.getId().toString())
+        Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA).withProject(BETA)
                 .build();
         assertFalse(uniqueAssignmentList.contains(editedAssignment));
     }
@@ -51,7 +51,7 @@ public class UniqueAssignmentListTest {
     public void contains_assignmentWithDifferentPersonFieldInList_returnsFalse() {
         uniqueAssignmentList.add(ALICE_ALPHA);
         Assignment editedAssignment = new AssignmentBuilder(ALICE_ALPHA)
-                .withEmployeeId(BENSON.getEmployeeId().toString())
+                .withPerson(BENSON)
                 .build();
         assertFalse(uniqueAssignmentList.contains(editedAssignment));
     }
