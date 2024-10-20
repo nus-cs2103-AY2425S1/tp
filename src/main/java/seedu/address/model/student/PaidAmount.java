@@ -5,27 +5,27 @@ import java.util.Objects;
 /**
  * Represents a Student's paid tuition fee in the address book.
  */
-public class Paid extends Fee {
-    public static final String MESSAGE_CONSTRAINTS = "Paid " + Fee.MESSAGE_CONSTRAINTS;
+public class PaidAmount extends Fee {
+    public static final String MESSAGE_CONSTRAINTS = "PaidAmount " + Fee.MESSAGE_CONSTRAINTS;
 
     /**
-     * Constructs a {@code Paid}.
+     * Constructs a {@code PaidAmount}.
      *
      * @param paid A valid paid.
      */
-    public Paid(String paid) {
+    public PaidAmount(String paid) {
         super(paid);
     }
 
     /**
-     * Constructs a {@code Paid}
+     * Constructs a {@code PaidAmount}
      * with a default {@code value} of 0.0
      */
-    public Paid() {
+    public PaidAmount() {
         super("0");
     }
 
-    public static boolean isValidPaid(String test) {
+    public static boolean isValidPaidAmount(String test) {
         return Fee.isValidFee(test);
     }
 
@@ -40,16 +40,16 @@ public class Paid extends Fee {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Paid)) {
+        if (!(other instanceof PaidAmount)) {
             return false;
         }
 
-        Paid otherPaid = (Paid) other;
-        return value == otherPaid.value;
+        PaidAmount otherPaidAmount = (PaidAmount) other;
+        return value == otherPaidAmount.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, Paid.class);
+        return Objects.hash(value, PaidAmount.class);
     }
 }
