@@ -180,7 +180,7 @@ Format: `addECNumber INDEX [ep/ECNUMBER]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `addECNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
+* `addEcNumber 1 ep/91234567` to add the emergency contact's number 91234567 to the 1st person in the list.
 * `addEcNumber 2 ep/` to delete the emergency contact's number from the 2nd person in the list.
 
 ### Clearing all entries : `clear`
