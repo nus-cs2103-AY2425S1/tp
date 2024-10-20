@@ -5,11 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DESCRIPTION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DESCRIPTION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_INDEX_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DEADLINE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_PROJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.util.Arrays;
@@ -19,6 +26,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
@@ -29,6 +37,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.UpdateCommand;
 import seedu.address.logic.commands.UpdateCommand.UpdatePersonDescriptor;
+import seedu.address.logic.commands.UpdateTaskCommand;
+import seedu.address.logic.commands.UpdateTaskCommand.UpdateTaskDescriptor;
 import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
@@ -39,6 +49,7 @@ import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.UpdatePersonDescriptorBuilder;
+import seedu.address.testutil.UpdateTaskDescriptorBuilder;
 
 public class AddressBookParserTest {
 
@@ -49,6 +60,15 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_addTask() throws Exception {
+        String userInput = AddTaskCommand.COMMAND_WORD + NAME_DESC_AMY + TASK_DESCRIPTION_DESC_AMY
+                + TASK_DEADLINE_DESC_AMY;
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(userInput);
+        assertEquals(new AddTaskCommand(new Name(VALID_NAME_AMY), ParserUtil.parseTask(VALID_TASK_DESCRIPTION_AMY,
+                VALID_TASK_DEADLINE_AMY)), command);
     }
 
     @Test
@@ -78,6 +98,16 @@ public class AddressBookParserTest {
         UpdateCommand command = (UpdateCommand) parser.parseCommand(UpdateCommand.COMMAND_WORD + " "
                 + person.getName() + " " + PersonUtil.getUpdatePersonDescriptorDetails(descriptor));
         assertEquals(new UpdateCommand(person.getName(), descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_updateTask() throws Exception {
+        String userInput = UpdateTaskCommand.COMMAND_WORD + NAME_DESC_AMY + TASK_INDEX_DESC + TASK_DESCRIPTION_DESC_BOB
+                + TASK_DEADLINE_DESC_AMY;
+        UpdateTaskDescriptor descriptor = new UpdateTaskDescriptorBuilder(
+                ParserUtil.parseTask(VALID_TASK_DESCRIPTION_PROJECT, VALID_TASK_DEADLINE_AMY)).build();
+        UpdateTaskCommand command = (UpdateTaskCommand) parser.parseCommand(userInput);
+        assertEquals(new UpdateTaskCommand(new Name(VALID_NAME_AMY), INDEX_FIRST_TASK, descriptor), command);
     }
 
     @Test
