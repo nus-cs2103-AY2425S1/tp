@@ -3,9 +3,14 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SICKNESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
@@ -17,6 +22,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditAppointmentCommand;
+import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPersonCommand;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
@@ -44,13 +51,15 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         String entityType = splitArgs[0];
         String indexString = splitArgs[1];
+        Index index = ParserUtil.parseIndex(indexString);
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_TAG, PREFIX_PERSON_ID, PREFIX_DATETIME,
+                        PREFIX_APPOINTMENT_TYPE, PREFIX_SICKNESS, PREFIX_MEDICINE);
 
         switch (entityType) {
         case PERSON_ENTITY_STRING:
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                            PREFIX_ADDRESS, PREFIX_TAG);
-            Index index = ParserUtil.parseIndex(indexString);
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
 
             EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -75,13 +84,39 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditPersonCommand(index, editPersonDescriptor);
 
         case APPOINTMENT_ENTITY_STRING:
-                //TODO
+            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PERSON_ID, PREFIX_DATETIME, PREFIX_APPOINTMENT_TYPE,
+                    PREFIX_MEDICINE, PREFIX_SICKNESS);
+
+            EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
+
+            if (argMultimap.getValue(PREFIX_PERSON_ID).isPresent()) {
+                editAppointmentDescriptor.setPersonId(
+                        ParserUtil.parsePersonId(argMultimap.getValue(PREFIX_PERSON_ID).get()));
+            }
+            if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
+                editAppointmentDescriptor.setAppointmentDateTime(
+                        ParserUtil.parseAppointmentDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
+            }
+            if (argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).isPresent()) {
+                editAppointmentDescriptor.setAppointmentType(
+                        ParserUtil.parseAppointmentType(argMultimap.getValue(PREFIX_APPOINTMENT_TYPE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_MEDICINE).isPresent()) {
+                editAppointmentDescriptor.setMedicine(
+                        ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get()));
+            }
+            if (argMultimap.getValue(PREFIX_SICKNESS).isPresent()) {
+                editAppointmentDescriptor.setSickness(
+                        ParserUtil.parseSickness(argMultimap.getValue(PREFIX_SICKNESS).get()));
+            }
+
+            if (!editAppointmentDescriptor.isAnyFieldEdited()) {
+                throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            }
+            return new EditAppointmentCommand(index, editAppointmentDescriptor);
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-
         }
-
-
     }
 
     /**
