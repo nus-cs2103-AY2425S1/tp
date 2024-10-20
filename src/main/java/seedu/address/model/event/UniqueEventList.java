@@ -83,8 +83,8 @@ public class UniqueEventList implements Iterable<Event> {
     public void removeParticipant(String volunteerToRemove) {
         requireNonNull(volunteerToRemove);
         internalList.forEach(event -> {
-            if (event.hasParticipant(volunteerToRemove)) {
-                event.removeParticipant(volunteerToRemove);
+            if (event.hasVolunteer(volunteerToRemove)) {
+                event.unassignVolunteer(volunteerToRemove);
             }
         });
 

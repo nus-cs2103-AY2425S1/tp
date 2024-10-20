@@ -254,6 +254,6 @@ public class ModelManager implements Model {
         }
 
         event.unassignVolunteer(volunteer.getName().toString());
-        volunteer.unassignEvent(event.getName().toString());
+        volunteer.removeEvent(event.getName().toString());
     }
 }

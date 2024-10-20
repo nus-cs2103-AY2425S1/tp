@@ -77,7 +77,7 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
         }
 
-        e.addParticipant(v.getName().toString());
+        e.assignVolunteer(v.getName().toString());
         v.addEvent(e.getName().toString());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));

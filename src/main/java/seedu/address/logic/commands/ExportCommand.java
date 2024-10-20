@@ -34,17 +34,26 @@ public class ExportCommand extends Command {
         StringBuilder volunteerCsvOutput = new StringBuilder();
 
         // CSV headers
-        volunteerCsvOutput.append("Name,Phone,Email,Available Date,Start Time,End Time\n");
+        volunteerCsvOutput.append("Name,Phone,Email,Available Date,Start Time,End Time,Events\n");
 
         // Build the CSV content
         for (Volunteer volunteer : volunteers) {
+            // Generate the list of events
+            StringBuilder events = new StringBuilder();
+            events.append("[");
+            events.append(volunteer.getInvolvedIn().stream()
+                    .reduce((a, b) -> a + " | " + b)
+                    .orElse(""));
+            events.append("]");
+
             // Enclose fields to prevent commas from messing with CSV
             volunteerCsvOutput.append("\"").append(volunteer.getName()).append("\",")
                     .append(volunteer.getPhone()).append(",")
                     .append(volunteer.getEmail()).append(",")
                     .append(volunteer.getAvailableDate()).append(",")
                     .append(volunteer.getStartTimeAvailability()).append(",")
-                    .append(volunteer.getEndTimeAvailability())
+                    .append(volunteer.getEndTimeAvailability()).append(",")
+                    .append(events)
                     .append("\n");
         }
 
@@ -53,17 +62,26 @@ public class ExportCommand extends Command {
         StringBuilder eventCsvOutput = new StringBuilder();
 
         // CSV headers
-        eventCsvOutput.append("Name,Date,Start Time,End Time,Location,Description\n");
+        eventCsvOutput.append("Name,Date,Start Time,End Time,Location,Description,Volunteers\n");
 
         // Build the CSV content
         for (Event event : events) {
+            // Generate the list of participants
+            StringBuilder participants = new StringBuilder();
+            participants.append("[");
+            participants.append(event.getVolunteers().stream()
+                    .reduce((a, b) -> a + " | " + b)
+                    .orElse(""));
+            participants.append("]");
+
             // Enclose fields to prevent commas from messing with CSV
             eventCsvOutput.append("\"").append(event.getName()).append("\",")
                     .append(event.getDate()).append(",")
                     .append(event.getStartTime()).append(",")
                     .append(event.getEndTime()).append(",")
                     .append(event.getLocation()).append(",")
-                    .append(event.getDescription())
+                    .append(event.getDescription()).append(",")
+                    .append(participants)
                     .append("\n");
         }
 
