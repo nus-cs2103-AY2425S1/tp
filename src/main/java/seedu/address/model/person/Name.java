@@ -72,6 +72,11 @@ public class Name {
         }
 
         Name otherName = (Name) other;
+
+        // Assert that fullName is not null
+        assert this.fullName != null : "fullName of the current object is null";
+        assert otherName.fullName != null : "fullName of the other object is null";
+
         return fullName.equals(otherName.fullName);
     }
 
