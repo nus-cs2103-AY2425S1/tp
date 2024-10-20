@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -214,5 +216,35 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new seedu.address.model.client.Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String meetingTitle} into an {@code MeetingTitle}.
+     * Titles should only contain alphanumeric characters and spaces, and it should not be blank.
+     *
+     * @throws ParseException if the given {@code meetingTitle} is invalid.
+     */
+    public static MeetingTitle parseMeetingTitle(String meetingTitle) throws ParseException {
+        requireNonNull(meetingTitle);
+        String trimmedMeetingTitle = meetingTitle.trim();
+        if (!MeetingTitle.isValidMeetingTitle(meetingTitle)) {
+            throw new ParseException(MeetingTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetingTitle(trimmedMeetingTitle);
+    }
+
+    /**
+     * Parses a {@code String meetingDate} into an {@code MeetingDate}.
+     * Meeting dates should be in the format dd-MM-yyyy and must be a valid date.
+     *
+     * @throws ParseException if the given {@code meetingDate} is invalid.
+     */
+    public static MeetingDate parseMeetingDate(String meetingDate) throws ParseException {
+        requireNonNull(meetingDate);
+        String trimmedMeetingDate = meetingDate.trim();
+        if (!MeetingDate.isValidMeetingDate(meetingDate)) {
+            throw new ParseException(MeetingTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new MeetingDate(trimmedMeetingDate);
     }
 }

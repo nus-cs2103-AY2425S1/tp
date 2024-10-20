@@ -17,11 +17,13 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ClientBook;
+import seedu.address.model.MeetingBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -30,8 +32,10 @@ import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.ClientBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonMeetingBookStorage;
 import seedu.address.storage.JsonPropertyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.MeetingBookStorage;
 import seedu.address.storage.PropertyBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -68,7 +72,9 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         PropertyBookStorage propertyBookStorage = new JsonPropertyBookStorage(userPrefs.getPropertyBookFilePath());
         ClientBookStorage clientBookStorage = new JsonClientBookStorage(userPrefs.getClientBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage, clientBookStorage);
+        MeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(userPrefs.getMeetingBookBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
+                clientBookStorage, meetingBookStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -88,9 +94,12 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyPropertyBook> propertyBookOptional;
         Optional<ReadOnlyClientBook> clientBookOptional;
+        Optional<ReadOnlyMeetingBook> meetingBookOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlyPropertyBook initialPropertyData;
         ReadOnlyClientBook initialClientData;
+        ReadOnlyMeetingBook initialMeetingData;
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -131,7 +140,21 @@ public class MainApp extends Application {
             initialClientData = new ClientBook();
         }
 
-        return new ModelManager(initialData, userPrefs, initialPropertyData, initialClientData);
+        try {
+            meetingBookOptional = storage.readMeetingBook();
+            if (!meetingBookOptional.isPresent()) {
+                logger.info("Creating a new meeting data file " + storage.getClientBookFilePath()
+                        + " populated with a sample MettingBook.");
+            }
+            initialMeetingData = meetingBookOptional.orElseGet(SampleDataUtil::getSampleMeetingBook);
+            System.out.println(initialClientData);
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getClientBookFilePath() + " could not be loaded."
+                    + " Will be starting with an empty ClientBook.");
+            initialMeetingData = new MeetingBook();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialPropertyData, initialClientData, initialMeetingData);
     }
 
     private void initLogging(Config config) {
