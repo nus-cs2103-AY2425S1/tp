@@ -3,9 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Represents a Person's telegram username in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTelegram(String)}
@@ -13,12 +10,14 @@ import java.util.regex.Pattern;
 public class Telegram {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Telegram handle must not contain whitespaces, and cannot be empty";
+            "Telegram handle must only have characters that are alphanumeric "
+                    + "or ‘_’, and cannot be empty";
 
     /*
-     * The telegram handle cannot have any whitespaces or be empty
+     * The telegram handle cannot have any whitespaces or be empty, and must
+     * only contain characters that are alphanumeric or '_'
      */
-    public static final String VALIDATION_REGEX = "^$|\\s+";
+    public static final String VALIDATION_REGEX = "^(?=\\S)[a-zA-Z0-9_]+$";
 
     public final String value;
 
@@ -37,9 +36,7 @@ public class Telegram {
      * Returns true if a given string is a valid telegram username.
      */
     public static boolean isValidTelegram(String test) {
-        Pattern pattern = Pattern.compile(VALIDATION_REGEX);
-        Matcher matcher = pattern.matcher(test);
-        return !matcher.find();
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

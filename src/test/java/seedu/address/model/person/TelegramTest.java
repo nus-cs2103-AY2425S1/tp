@@ -27,11 +27,13 @@ public class TelegramTest {
         // invalid telegrams
         assertFalse(Telegram.isValidTelegram("")); // empty string
         assertFalse(Telegram.isValidTelegram(" ")); // spaces only
-        assertFalse(Telegram.isValidTelegram("two words")); // space in between words
+        assertFalse(Telegram.isValidTelegram("two words")); // whitespace
+        assertFalse(Telegram.isValidTelegram("*")); // not alphanumeric or '_' character
 
         // valid telegrams
-        assertTrue(Telegram.isValidTelegram("bruceWayne"));
-        assertTrue(Telegram.isValidTelegram("a2b34C5"));
+        assertTrue(Telegram.isValidTelegram("bruceWayne")); // alphabetical characters
+        assertTrue(Telegram.isValidTelegram("a2b34C5")); // numeric characters
+        assertTrue(Telegram.isValidTelegram("_test")); // '_' character
     }
 
     @Test
