@@ -23,6 +23,7 @@ public class IncomeComparisonPredicate implements Predicate<Person> {
      */
     public IncomeComparisonPredicate(IncomeComparisonOperator incomeComparisonOperator, int incomeThreshold) {
         requireNonNull(incomeComparisonOperator);
+        checkPositiveIncomeThreshold(incomeThreshold);
         this.incomeThreshold = incomeThreshold;
         this.incomeComparisonOperator = incomeComparisonOperator;
     }
@@ -66,6 +67,18 @@ public class IncomeComparisonPredicate implements Predicate<Person> {
                 .add("incomeThreshold", incomeThreshold)
                 .add("incomeComparisonOperator", incomeComparisonOperator)
                 .toString();
+    }
+
+    /**
+     * Ensures that the income threshold is positive.
+     *
+     * @param incomeThreshold The threshold to check.
+     * @throws IllegalArgumentException if {@code incomeThreshold} is not greater than 1.
+     */
+    private void checkPositiveIncomeThreshold(int incomeThreshold) {
+        if (incomeThreshold < 0) {
+            throw new IllegalArgumentException("Income threshold cannot be less than 0.");
+        }
     }
 }
 
