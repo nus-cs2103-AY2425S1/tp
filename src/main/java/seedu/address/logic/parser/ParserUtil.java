@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -249,17 +251,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a string representing a medical condition and returns a {@link MedCon} object.
+     * Parses and validates the given medical condition string.
      *
-     * @param medConStr the string representing the medical condition to be parsed.
-     * @return A {@link MedCon} object corresponding to the provided medical condition string.
-     * @throws ParseException if the provided string does not conform to the expected
-     *         format or is invalid as per the priority constraints defined in the
-     *         {@link Priority} class.
+     * @param medConStr The medical condition string to parse.
+     * @return A {@code MedCon} object.
+     * @throws ParseException If the medical condition string is invalid.
      */
     public static MedCon parseMedCon(String medConStr) throws ParseException {
-        requireNonNull(medConStr);
-        String trimmedMedCon = medConStr.trim();
-        return new MedCon(trimmedMedCon);
+        if (medConStr.isEmpty()) {
+            throw new ParseException("Medical condition " + MESSAGE_EMPTY_FIELD);
+        } else if (medConStr.length() > 30) {
+            throw new ParseException("Medical condition " + MESSAGE_CONSTRAINTS_LENGTH);
+        } else if (!medConStr.matches(MedCon.VALIDATION_REGEX)) {
+            throw new ParseException("Invalid medical condition format.");
+        }
+        return new MedCon(medConStr);
     }
 }

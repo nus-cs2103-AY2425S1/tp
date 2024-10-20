@@ -3,6 +3,12 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+.label-text {
+    -fx-fill: white;
+    -fx-font-size: 9pt;
+    -fx-font-family: "Segoe UI";
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -318,11 +324,12 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: dimgray;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: transparent;
     -fx-border-insets: 0;
-    -fx-border-width: 1;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: white;
@@ -333,7 +340,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: dimgray;
     -fx-background-radius: 0;
 }
 

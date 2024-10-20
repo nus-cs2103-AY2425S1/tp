@@ -12,6 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class Messages {
 
+    public static final String MESSAGE_EMPTY_FIELD = "field should not by empty";
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_PERSON_NRIC_NOT_FOUND = "The patient with the specified NRIC does not exist";
@@ -19,7 +20,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_CONSTRAINTS_LENGTH =
-            "Medical condition length exceeds the limit of 45 characters";
+            "length should not exceed the limit of 30 characters";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

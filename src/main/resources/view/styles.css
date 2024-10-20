@@ -1,27 +1,26 @@
 .priority-high-bg {
-    -fx-background-color: red !important;
-    -fx-padding: 5;  /* Add padding to make the background color more visible */
-    -fx-background-radius: 5; /* Optional: Add rounded corners */
+    -fx-background-color: darkred !important;
 }
 
 .priority-medium-bg {
-    -fx-background-color: orange !important;
-    -fx-padding: 5;
-    -fx-background-radius: 5;
+    -fx-background-color: darkorange !important;
 }
 
 .priority-low-bg {
-    -fx-background-color: green !important;
-    -fx-padding: 5;
-    -fx-background-radius: 5;
+    -fx-background-color: darkgreen !important;
 }
 
 .priority-none-bg {
-    -fx-background-color: white !important;
-    -fx-padding: 5;
-    -fx-background-radius: 5;
+    -fx-background-color: transparent;
 }
 
 .priority-label {
     -fx-font-size: 11px;
+    -fx-background-color: transparent;
+    -fx-text-fill: white !important;
+    -fx-padding: 5;  /* Add padding to make the background color more visible */
+    -fx-background-radius: 5; /* Optional: Add rounded corners */
+    -fx-border-radius: 5;
+    -fx-border-width: 1;
+    -fx-border-color: white;
 }
