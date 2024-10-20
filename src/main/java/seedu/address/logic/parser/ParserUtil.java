@@ -21,6 +21,7 @@ import seedu.address.model.student.Subject;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_HOUR = "Number of hours should be a positive real number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -167,5 +168,29 @@ public class ParserUtil {
             throw new ParseException(OwedAmount.MESSAGE_CONSTRAINTS);
         }
         return new OwedAmount(trimmedOwedAmount);
+    }
+
+    /**
+     * Parses a {@code String hoursPaid} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the {@code hoursPaid} is invalid.
+     */
+    public static double parseHoursPaid(String hoursPaid) throws ParseException {
+        requireNonNull(hoursPaid);
+        String trimmedHoursPaid = hoursPaid.trim();
+        double hour;
+
+        try {
+            hour = Double.parseDouble(trimmedHoursPaid);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_HOUR));
+        }
+
+        if (hour <= 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_HOUR));
+        }
+
+        return hour;
     }
 }

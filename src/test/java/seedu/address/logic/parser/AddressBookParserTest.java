@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -155,6 +157,20 @@ public class AddressBookParserTest {
     public void parseCommand_incomeRandomCase() throws Exception {
         assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD_RANDOM_CASE) instanceof IncomeCommand);
         assertTrue(parser.parseCommand(IncomeCommand.COMMAND_WORD_RANDOM_CASE + " 3") instanceof IncomeCommand);
+    }
+
+    @Test
+    public void parseCommand_pay() throws Exception {
+        PayCommand command = (PayCommand) parser.parseCommand(PayCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        assertEquals(new PayCommand(INDEX_FIRST_STUDENT, 1), command);
+    }
+
+    @Test
+    public void parseCommand_payRandomCase() throws Exception {
+        PayCommand command = (PayCommand) parser.parseCommand(PayCommand.COMMAND_WORD_RANDOM_CASE + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        assertEquals(new PayCommand(INDEX_FIRST_STUDENT, 1), command);
     }
 
     @Test
