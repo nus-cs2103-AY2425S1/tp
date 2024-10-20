@@ -169,4 +169,25 @@ public class UniqueTutorialListTest {
     public void toStringMethod() {
         assertEquals(uniqueTutorialList.asUnmodifiableObservableList().toString(), uniqueTutorialList.toString());
     }
+
+    @Test
+    public void equals() {
+        UniqueTutorialList uniqueTutorialList2 = new UniqueTutorialList();
+
+        // same values -> returns true
+        assertTrue(uniqueTutorialList.equals(uniqueTutorialList2));
+
+        // same object -> returns true
+        assertTrue(uniqueTutorialList.equals(uniqueTutorialList));
+
+        // null -> returns false
+        assertFalse(uniqueTutorialList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueTutorialList.equals(5.0f));
+
+        //different values -> returns false
+        uniqueTutorialList2.add(MATH);
+        assertFalse(uniqueTutorialList.equals(uniqueTutorialList2));
+    }
 }

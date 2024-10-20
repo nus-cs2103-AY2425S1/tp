@@ -131,6 +131,28 @@ public class AddressBookTest {
         assertEquals(expected, addressBook.toString());
     }
 
+    @Test
+    public void equals() {
+        AddressBook addressBook2 = new AddressBook();
+
+        // same values -> returns true
+        assertTrue(addressBook.equals(addressBook2));
+
+        // same object -> returns true
+        assertTrue(addressBook.equals(addressBook));
+
+        // null -> returns false
+        assertFalse(addressBook.equals(null));
+
+        // different type -> returns false
+        assertFalse(addressBook.equals(5.0f));
+
+        //different values -> returns false
+        addressBook.addPerson(ALICE);
+        addressBook.addTutorial(MATH);
+        assertFalse(addressBook.equals(addressBook2));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list and tutorials list can violate interface constraints.
      */
