@@ -149,4 +149,17 @@ public class Lesson {
                 && startDateTime.equals(otherLesson.startDateTime)
                 && endDateTime.equals(otherLesson.endDateTime);
     }
+    /**
+     * Compares this lesson with another lesson.
+     *
+     * @param lesson The other lesson to compare with.
+     * @return A negative integer, zero, or a positive integer as this lesson is before, same time, or after
+     *         the specified lesson.
+     */
+    public int compareTo(Lesson lesson) {
+        if (this.startDateTime.equals(lesson.startDateTime)) {
+            return this.endDateTime.compareTo(lesson.endDateTime);
+        }
+        return this.startDateTime.compareTo(lesson.startDateTime);
+    }
 }
