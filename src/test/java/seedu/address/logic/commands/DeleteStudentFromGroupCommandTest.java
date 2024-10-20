@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.task.Task;
@@ -274,11 +275,6 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
-        public Group findGroup(GroupName groupName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean containsGroupName(GroupName groupName) {
             throw new AssertionError("This method should not be called.");
         }
@@ -340,13 +336,18 @@ public class DeleteStudentFromGroupCommandTest {
         }
 
         @Override
-        public Group findGroup(GroupName groupName) {
-            return groups.stream().filter(group -> group.getGroupName().equals(groupName)).findFirst().orElseThrow();
+        public void deleteStudentFromGroup(Group group, Student student) {
+            group.delete(student);
         }
 
         @Override
-        public void deleteStudentFromGroup(Group group, Student student) {
-            group.delete(student);
+        public Group getGroupByName(GroupName groupName) {
+            for (Group group : groups) {
+                if (groupName.equals(group.getGroupName())) {
+                    return group;
+                }
+            }
+            throw new GroupNotFoundException();
         }
     }
 

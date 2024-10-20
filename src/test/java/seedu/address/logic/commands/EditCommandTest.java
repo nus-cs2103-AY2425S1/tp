@@ -102,7 +102,6 @@ public class EditCommandTest {
     public void execute_duplicatePersonUnfilteredList_failure() {
         Student firstStudent = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()); //0
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstStudent).build();
-        System.out.println(descriptor);
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor); //1
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);

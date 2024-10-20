@@ -282,11 +282,6 @@ public class AddGroupCommandTest {
         }
 
         @Override
-        public Group findGroup(GroupName groupName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean containsGroupName(GroupName groupName) {
             throw new AssertionError("This method should not be called.");
         }
