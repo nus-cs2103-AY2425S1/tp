@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.Iterator;
 import java.util.List;
 
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.types.common.DateTimeUtil;
@@ -35,11 +34,11 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      * Periodically sorts the events especially when an event becomes completed.
      */
-    public UniqueEventList() {
-        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
-                javafx.util.Duration.minutes(1));
-        eventReSortTimeline.play();
-    }
+    //    public UniqueEventList() {
+    //        Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
+    //                javafx.util.Duration.minutes(1));
+    //        eventReSortTimeline.play();
+    //    }
 
     private void sortEvents() {
         internalList.sort((event1, event2) -> {

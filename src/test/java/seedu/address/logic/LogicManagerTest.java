@@ -14,12 +14,10 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import javafx.embed.swing.JFXPanel;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
@@ -63,10 +61,10 @@ public class LogicManagerTest {
      * If JavaFX is not initialized, this results in a java.lang.NullPointerException:
      * Cannot invoke "com.sun.glass.ui.Timer.resume()" because "this.pulseTimer" is null.
      */
-    @BeforeAll
-    public static void initJfxRuntime() {
-        new JFXPanel(); // This will initialize the JavaFX runtime.
-    }
+    //    @BeforeAll
+    //    public static void initJfxRuntime() {
+    //        new JFXPanel(); // This will initialize the JavaFX runtime.
+    //    }
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
