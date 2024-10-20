@@ -13,7 +13,7 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
-public class WeddingList implements Iterable<Wedding> {
+public class UniqueWeddingList implements Iterable<Wedding> {
     private final ObservableList<Wedding> internalList = FXCollections.observableArrayList();
     private final ObservableList<Wedding> internalUnmodifiableList
             = FXCollections.unmodifiableObservableList(internalList);
