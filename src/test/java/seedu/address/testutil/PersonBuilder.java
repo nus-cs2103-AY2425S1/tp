@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Telegram telegram;
     private Set<Role> roles;
+    private Set<Attendance> attendance;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         telegram = new Telegram(DEFAULT_TELEGRAM);
         roles = new HashSet<>();
+        attendance = new HashSet<>();
     }
 
     /**
@@ -47,6 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         telegram = personToCopy.getTelegram();
         roles = new HashSet<>(personToCopy.getRoles());
+        attendance = new HashSet<>(personToCopy.getAttendance());
     }
 
     /**
@@ -60,10 +64,12 @@ public class PersonBuilder {
     /**
      * Parses the {@code roles} into a {@code Set<Role>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withRoles(String ... tags) {
-        this.roles = SampleDataUtil.getRoleSet(tags);
+    public PersonBuilder withRoles(String ... roles) {
+        this.roles = SampleDataUtil.getRoleSet(roles);
         return this;
     }
+
+    // TODO: make a withAttendance method like withRoles to help test attendance
 
     /**
      * Sets the {@code Address} of the {@code Person} that we are building.
@@ -90,7 +96,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, telegram, roles);
+        return new Person(name, phone, email, telegram, roles, attendance);
     }
 
 }
