@@ -2,12 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -48,7 +43,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditPersonCommand parseForPerson(ModelType modelType, String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_EVENT);
 
         Index index;
 
@@ -59,7 +54,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                     EditPersonCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_EVENT);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -76,6 +71,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_EVENT).isPresent()) {
+            editPersonDescriptor.setEvent(ParserUtil.parseEvent(argMultimap.getValue(PREFIX_EVENT).get()));
+        }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditPersonCommand.MESSAGE_NOT_EDITED);

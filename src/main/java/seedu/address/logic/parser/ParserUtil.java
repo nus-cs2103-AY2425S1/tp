@@ -15,6 +15,7 @@ import seedu.address.model.types.common.DateTime;
 import seedu.address.model.types.common.Email;
 import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.Phone;
+import seedu.address.model.types.event.Event;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -136,5 +137,14 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Name parseEvent(String event) throws ParseException {
+        requireNonNull(event);
+        String trimmedEvent = event.trim();
+        if (!Name.isValidName(trimmedEvent)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedEvent);
     }
 }
