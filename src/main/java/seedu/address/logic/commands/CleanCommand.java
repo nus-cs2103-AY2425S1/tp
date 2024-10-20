@@ -39,7 +39,7 @@ public class CleanCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
-        for (int i = 0; i < lastShownList.size(); i++) {
+        for (int i = lastShownList.size() - 1; i >= 0; i--) {
             model.deletePerson(lastShownList.get(i));
         }
 
