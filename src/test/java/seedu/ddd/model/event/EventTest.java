@@ -20,10 +20,11 @@ import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
 
 public class EventTest {
+    public static final EventId DUMMY_EVENTID = new EventId(0);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Event(null, null, null));
+        assertThrows(NullPointerException.class, () -> new Event(null, null, null, DUMMY_EVENTID));
     }
 
     @Test
@@ -49,10 +50,10 @@ public class EventTest {
         final Description description1 = new Description("Some description.");
         final Description description2 = new Description("Another description");
 
-        Event sampleEvent = new Event(clientList1, vendorList1, description1);
-        Event sameClientDifferentVendorSameDescription = new Event(clientList1, vendorList2, description1);
-        Event sameClientSameVendorDifferentDescription = new Event(clientList1, vendorList1, description2);
-        Event differentClientSameVendorSameDescription = new Event(clientList2, vendorList1, description1);
+        Event sampleEvent = new Event(clientList1, vendorList1, description1, DUMMY_EVENTID);
+        Event sameClientDifferentVendorSameDescription = new Event(clientList1, vendorList2, description1, DUMMY_EVENTID);
+        Event sameClientSameVendorDifferentDescription = new Event(clientList1, vendorList1, description2, DUMMY_EVENTID);
+        Event differentClientSameVendorSameDescription = new Event(clientList2, vendorList1, description1, DUMMY_EVENTID);
 
         assertTrue(sampleEvent.isSameEvent(sameClientDifferentVendorSameDescription));
         assertFalse(sampleEvent.isSameEvent(sameClientSameVendorDifferentDescription));
@@ -80,8 +81,8 @@ public class EventTest {
         vendorList2.add(BENSON);
         assertNotEquals(vendorList1, vendorList2);
 
-        Event event1 = new Event(clientList1, vendorList1, dummyDescription);
-        Event event2 = new Event(clientList2, vendorList2, dummyDescription);
+        Event event1 = new Event(clientList1, vendorList1, dummyDescription, DUMMY_EVENTID);
+        Event event2 = new Event(clientList2, vendorList2, dummyDescription, DUMMY_EVENTID);
 
         assertEquals(event1, event1);
         assertEquals(event1, event2);
