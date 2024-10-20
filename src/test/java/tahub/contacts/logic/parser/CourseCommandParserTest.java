@@ -1,7 +1,13 @@
 package tahub.contacts.logic.parser;
 
 import static tahub.contacts.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static tahub.contacts.logic.commands.CommandTestUtil.*;
+import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_CODE_DESC;
+import static tahub.contacts.logic.commands.CommandTestUtil.COURSE_NAME_DESC;
+import static tahub.contacts.logic.commands.CommandTestUtil.INVALID_COURSE_CODE_DESC;
+import static tahub.contacts.logic.commands.CommandTestUtil.INVALID_COURSE_NAME_DESC;
+import static tahub.contacts.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static tahub.contacts.logic.commands.CommandTestUtil.VALID_COURSE_CODE;
+import static tahub.contacts.logic.commands.CommandTestUtil.VALID_COURSE_NAME;
 import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tahub.contacts.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
