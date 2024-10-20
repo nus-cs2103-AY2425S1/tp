@@ -54,7 +54,7 @@ public class Donor extends Person {
             return false;
         }
 
-        seedu.address.model.person.Donor otherDonor = (Donor) other;
+        Donor otherDonor = (Donor) other;
         return super.equals(otherDonor) && (donatedAmount.equals(otherDonor.donatedAmount));
     }
 
