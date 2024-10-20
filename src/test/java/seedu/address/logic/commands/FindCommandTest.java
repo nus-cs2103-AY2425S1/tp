@@ -106,4 +106,12 @@ public class FindCommandTest {
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
+    @Test
+    public void getCommandTypeMethod() {
+        NameContainsKeywordsPredicate firstPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        FindCommand findCommand = new FindCommand(firstPredicate);
+        assertEquals(findCommand.getCommandType(), CommandType.FINDSTUDENT);
+    }
 }

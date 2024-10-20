@@ -65,6 +65,8 @@ public class CommandResult {
         return commandType;
     }
 
+    public Index getTabIndex() { return tabIndex; }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -91,6 +93,7 @@ public class CommandResult {
         return new ToStringBuilder(this)
                 .add("feedbackToUser", feedbackToUser)
                 .add("commandType", commandType)
+                .add("tabIndex", tabIndex)
                 .toString();
     }
 

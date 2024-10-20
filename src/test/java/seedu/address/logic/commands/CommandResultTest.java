@@ -7,14 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+
 public class CommandResultTest {
     @Test
     public void equals() {
-        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT);
+        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT, Index.fromOneBased(1));
 
         // same values -> returns true
-        assertTrue(commandResult.equals(new CommandResult("feedback", CommandType.EXIT)));
-        assertTrue(commandResult.equals(new CommandResult("feedback", CommandType.EXIT, null)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", CommandType.EXIT, Index.fromOneBased(1))));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -34,7 +35,7 @@ public class CommandResultTest {
 
     @Test
     public void hashcode() {
-        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT);
+        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT, Index.fromOneBased(1));
 
         // same values -> returns same hashcode
         assertEquals(commandResult.hashCode(), new CommandResult("feedback", CommandType.EXIT).hashCode());
@@ -48,9 +49,11 @@ public class CommandResultTest {
 
     @Test
     public void toStringMethod() {
-        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT);
-        String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", commandType=" + commandResult.getCommandType() + "}";
+        CommandResult commandResult = new CommandResult("feedback", CommandType.EXIT, Index.fromOneBased(1));
+        String expected = CommandResult.class.getCanonicalName()
+                + "{feedbackToUser=" + commandResult.getFeedbackToUser()
+                + ", commandType=" + commandResult.getCommandType()
+                + ", tabIndex=" + commandResult.getTabIndex() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

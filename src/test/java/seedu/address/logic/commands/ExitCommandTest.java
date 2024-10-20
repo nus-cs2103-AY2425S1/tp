@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
@@ -17,4 +18,11 @@ public class ExitCommandTest {
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, CommandType.EXIT);
         assertCommandSuccess(new ExitCommand(), model, expectedCommandResult, expectedModel);
     }
+
+    @Test
+    public void getCommandTypeMethod() {
+        ExitCommand exitCommand = new ExitCommand();
+        assertEquals(exitCommand.getCommandType(), CommandType.EXIT);
+    }
+
 }

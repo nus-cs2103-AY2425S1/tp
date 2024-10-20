@@ -84,6 +84,12 @@ public class AddCommandTest {
         assertEquals(expected, addCommand.toString());
     }
 
+    @Test
+    public void getCommandTypeMethod() {
+        AddCommand addCommand = new AddCommand(ALICE);
+        assertEquals(addCommand.getCommandType(), CommandType.ADDSTUDENT);
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -200,5 +206,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
