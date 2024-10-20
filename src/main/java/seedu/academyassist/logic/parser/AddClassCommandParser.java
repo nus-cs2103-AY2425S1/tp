@@ -4,7 +4,6 @@ import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.academyassist.logic.commands.AddClassCommand;
