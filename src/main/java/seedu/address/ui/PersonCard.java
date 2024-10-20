@@ -21,7 +21,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Person client;
 
     @FXML
     private HBox cardPane;
@@ -31,18 +31,21 @@ public class PersonCard extends UiPart<Region> {
     private Label name;
     @FXML
     private Label vrn;
-
+    @FXML
+    private Label isServicing;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
-        this.person = person;
+
+        this.client = person;
         id.setText(Integer.toString(displayedIndex));
         name.setText(person.getName().fullName);
-        if (this.person.getCar() != null) {
+        if (this.client.getCar() != null) {
             vrn.setText(person.getCar().getVrn().vrn);
         }
+        isServicing.setVisible(client.isServicing());
     }
 }
