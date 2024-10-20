@@ -12,22 +12,22 @@ Teacher's Pet (TP) is a **desktop app for managing students, tailored for the Na
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. You may download Java 17 through [this link](https://www.oracle.com/sg/java/technologies/downloads/)
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W10-1/tp/releases/tag/v1.3).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to the folder you want to use as the _home folder_ for your app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar teacherspet.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe id/A1234567B nid/E1234567 m/Math y/2 g/group 1` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -35,7 +35,7 @@ Teacher's Pet (TP) is a **desktop app for managing students, tailored for the Na
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -128,6 +128,19 @@ Examples:
   ![result for 'find n/ alex david'](images/findAlexDavidResult.png)
 * `find n/ Alice id/ A1234567E` returns persons whose name contains `Alice` or whose student ID is `A1234567E`.
 
+---
+## [To be added in v1.4] <u>Displaying students in a group :</u> show
+
+#### You can display members in a group easily
+
+#### <span style="color:#4CAF50;">Format: show INDEX</span>
+
+* The INDEX is the group you would like to search for in your current list. Like 1 (for group 1), 2 (for group 2), …​
+* Ensure the INDEX is a positive integer.
+
+Examples:
+* show 1 returns persons with who are in group 1.
+  ![result for 'show 1'](<img width="536" alt="image" src="https://github.com/user-attachments/assets/c0e2646b-2bef-45e5-af21-9232c067f90b">)
 ---
 
 ### Deleting a person : `delete`
