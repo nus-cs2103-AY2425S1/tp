@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_BIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -15,6 +17,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Income;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Priority;
 
@@ -37,10 +40,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_PRIORITY, PREFIX_REMARK, PREFIX_TAG);
+                        PREFIX_PRIORITY, PREFIX_REMARK, PREFIX_TAG, PREFIX_INCOME, PREFIX_DATE_OF_BIRTH);
 
         // Check for filtering by invalid prefixes
-        if (hasPrefixes(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG)
+        if (hasPrefixes(argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_REMARK, PREFIX_TAG, PREFIX_DATE_OF_BIRTH)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -48,6 +51,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         List<String> names = argMultimap.getAllValues(PREFIX_NAME);
         List<String> addresses = argMultimap.getAllValues(PREFIX_ADDRESS);
         List<String> priorities = argMultimap.getAllValues(PREFIX_PRIORITY);
+        List<String> incomes = argMultimap.getAllValues(PREFIX_INCOME);
 
         if (!areValidKeywords(names, Name.VALIDATION_REGEX)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
@@ -61,7 +65,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
         }
 
-        return new FindCommand(names, addresses, priorities);
+        if (!areValidIncomes(incomes)) {
+            throw new ParseException(Income.MESSAGE_CONSTRAINTS + "\n" + FindCommand.MESSAGE_USAGE);
+        }
+
+        return new FindCommand(names, addresses, priorities, incomes);
     }
 
     /**
@@ -98,6 +106,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         for (String priority : priorities) {
             try {
                 ParserUtil.parsePriority(priority);
+            } catch (ParseException pe) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Checks if incomes given are valid non-negative numbers.
+     *
+     * @param incomes List of incomes given by user to filter the address book by.
+     * @return True if all incomes are non-negative floating point values.
+     */
+    private boolean areValidIncomes(List<String> incomes) {
+        for (String income : incomes) {
+            try {
+                ParserUtil.parseIncome(income);
             } catch (ParseException pe) {
                 return false;
             }
