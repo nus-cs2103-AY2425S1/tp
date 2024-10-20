@@ -20,7 +20,7 @@ public class LocationTest {
     }
 
     @Test
-    public void isValidAddress() {
+    public void isValidLocation() {
         // null address
         assertThrows(NullPointerException.class, () -> Location.isValidLocation(null));
 
