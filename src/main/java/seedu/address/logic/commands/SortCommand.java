@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.SortOption.SORT_NAME;
 import static seedu.address.model.Model.COMPARATOR_SORT_BY_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -44,7 +45,7 @@ public class SortCommand extends Command {
         }
 
         switch (sortOption.toString()) {
-        case SortOption.SORT_NAME:
+        case SORT_NAME:
             model.updatePersonListSort(COMPARATOR_SORT_BY_NAME);
             break;
         default:
