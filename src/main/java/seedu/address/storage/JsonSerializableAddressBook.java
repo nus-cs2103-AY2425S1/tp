@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.attendance.AttendanceEvent;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,15 +21,25 @@ import seedu.address.model.person.Person;
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_ATTENDANCE_EVENT = "Attendance events list contains duplicate"
+            + " event(s).";
+
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedAttendanceEvent> attendanceEvents = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
+    public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                       @JsonProperty("attendanceEvents") List<JsonAdaptedAttendanceEvent>
+                                               attendanceEvents) {
         this.persons.addAll(persons);
+        if (attendanceEvents != null) {
+            this.attendanceEvents.addAll(attendanceEvents);
+        }
     }
 
     /**
@@ -38,6 +49,8 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        attendanceEvents.addAll(source.getAttendanceEventList().stream()
+                .map(JsonAdaptedAttendanceEvent::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +66,13 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+        }
+        for (JsonAdaptedAttendanceEvent jsonAdaptedEvent : attendanceEvents) {
+            AttendanceEvent event = jsonAdaptedEvent.toModelType();
+            if (addressBook.hasAttendanceEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ATTENDANCE_EVENT);
+            }
+            addressBook.addAttendanceEvent(event);
         }
         return addressBook;
     }
