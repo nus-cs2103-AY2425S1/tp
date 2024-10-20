@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.DateUtil.DATE_TIME_FORMATTER;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -184,6 +187,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String appointmentDescription} into a {@code String appointmentDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code appointmentDescription} is empty.
+     */
+    public static String parseAppointmentDescription(String appointmentDescription) throws ParseException {
+        requireNonNull(appointmentDescription);
+        String trimmedAppointmentDescription = appointmentDescription.trim();
+        if (trimmedAppointmentDescription.isEmpty()) {
+            throw new ParseException("Appointment description cannot be empty.");
+        }
+        return trimmedAppointmentDescription;
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code localDateTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static LocalDateTime parseLocalDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        try {
+            return LocalDateTime.parse(trimmedDateTime, DATE_TIME_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Invalid date-time format: " + trimmedDateTime, e);
+        }
     }
 
 }
