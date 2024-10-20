@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 
@@ -53,6 +54,9 @@ public class ModuleRoleContainsKeywordsPredicate implements Predicate<Person> {
      * @return a List of string of module-role pairs.
      */
     public List<String> getModuleRolePairs() {
-        return moduleRoleMapKeywords.toModuleRolePairs();
+        return moduleRoleMapKeywords.getData()
+                .stream()
+                .map(ModuleRolePair::toString)
+                .collect(Collectors.toList());
     }
 }

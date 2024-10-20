@@ -47,7 +47,10 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        predicates.forEach(model::updateFilteredPersonList);
+        Predicate<Person> combinedPredicate = predicates.stream()
+                .reduce(Predicate::and)
+                .orElse(t -> false);
+        model.updateFilteredPersonList(combinedPredicate);
         String formattedKeywords = getAllKeywordsFromPredicates(predicates);
 
         return new CommandResult(

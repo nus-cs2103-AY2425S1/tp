@@ -112,15 +112,12 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() throws ParseException {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0, "");
-        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
-        ModuleRoleContainsKeywordsPredicate moduleRolePredicate = prepareModuleRolePredicate(" ");
         List<Predicate<Person>> predicates = new ArrayList<>();
-        predicates.add(namePredicate);
-        predicates.add(moduleRolePredicate);
+        predicates.add(prepareNamePredicate(" "));
+        predicates.add(prepareModuleRolePredicate(" "));
 
         FindCommand command = new FindCommand(predicates);
-        expectedModel.updateFilteredPersonList(namePredicate);
-        expectedModel.updateFilteredPersonList(moduleRolePredicate);
+        expectedModel.updateFilteredPersonList(person -> false);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -153,12 +150,9 @@ public class FindCommandTest {
 
     @Test
     public void toStringMethod() throws ParseException {
-        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(List.of("keyword"));
-        ModuleRoleContainsKeywordsPredicate modulePredicate = new ModuleRoleContainsKeywordsPredicate(
-                ParserUtil.parseModuleRolePairs((List.of("CS2103T"))));
         List<Predicate<Person>> predicates = new ArrayList<>();
-        predicates.add(namePredicate);
-        predicates.add(modulePredicate);
+        predicates.add(new NameContainsKeywordsPredicate(List.of("keyword")));
+        predicates.add(new ModuleRoleContainsKeywordsPredicate(ParserUtil.parseModuleRolePairs(List.of("CS2103T"))));
 
         FindCommand findCommand = new FindCommand(predicates);
         String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicates + "}";
