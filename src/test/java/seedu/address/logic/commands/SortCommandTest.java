@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Comparator;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +41,7 @@ public class SortCommandTest {
         model.addPerson(unsortedPerson2);
         expectedModel.addPerson(unsortedPerson);
         expectedModel.addPerson(unsortedPerson2);
-        expectedModel.sortPersonList((p1, p2) -> p1.getName().toString().compareToIgnoreCase(p2.getName().toString()));
+        expectedModel.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
     }
 
     @Test

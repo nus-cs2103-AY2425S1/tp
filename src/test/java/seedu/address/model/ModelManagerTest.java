@@ -100,8 +100,8 @@ public class ModelManagerTest {
     public void sortPersonList_alphabeticalOrder_sortedCorrectly() {
         ModelManager modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ModelManager expectedModelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        modelManager.sortPersonList(Comparator.comparing(person -> person.getName().toString()));
-        expectedModelManager.sortPersonList(Comparator.comparing(person -> person.getName().toString()));
+        modelManager.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
+        expectedModelManager.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
         assertEquals(expectedModelManager.getFilteredPersonList(), modelManager.getFilteredPersonList());
     }
 
@@ -109,9 +109,10 @@ public class ModelManagerTest {
     public void sortPersonList_reverseAlphabeticalOrder_sortedCorrectly() {
         ModelManager modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ModelManager expectedModelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        modelManager.sortPersonList(Comparator.comparing((Person person) -> person.getName().toString()).reversed());
+        modelManager.sortPersonList(Comparator.comparing((Person person)
+                -> person.getName().toString().toUpperCase()).reversed());
         expectedModelManager.sortPersonList(Comparator.comparing((Person person)
-                -> person.getName().toString()).reversed());
+                -> person.getName().toString().toUpperCase()).reversed());
         assertEquals(expectedModelManager.getFilteredPersonList(), modelManager.getFilteredPersonList());
     }
 

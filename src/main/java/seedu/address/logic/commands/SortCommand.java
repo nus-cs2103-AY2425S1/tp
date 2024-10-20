@@ -18,7 +18,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
 
         // Call the model's sortPersonList method with a comparator that sorts by name
-        model.sortPersonList(Comparator.comparing(person -> person.getName().toString()));
+        model.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
