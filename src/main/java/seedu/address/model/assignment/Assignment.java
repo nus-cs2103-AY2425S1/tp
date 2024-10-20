@@ -2,8 +2,10 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 
 /**
  * Represents a (Project) Assignment in the address book.
@@ -66,8 +68,8 @@ public class Assignment {
             return false;
         }
 
-        boolean isSameProject = projectId.equals(this.projectId);
-        boolean isSamePerson = employeeId.equals(this.employeeId);
+        boolean isSameProject = projectId.equals(this.project.getId());
+        boolean isSamePerson = employeeId.equals(this.person.getEmployeeId());
         return isSamePerson && isSameProject;
     }
 

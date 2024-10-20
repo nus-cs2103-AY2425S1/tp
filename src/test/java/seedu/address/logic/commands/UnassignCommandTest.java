@@ -80,10 +80,10 @@ public class UnassignCommandTest {
 
     @Test
     public void equals() {
-        Assignment alphaAlice = new AssignmentBuilder().withAssignmentId("1").withProjectId(ALPHA.getId().toString())
-                .withEmployeeId(ALICE.getEmployeeId().toString()).build();
-        Assignment betaBenson = new AssignmentBuilder().withAssignmentId("2").withProjectId(BETA.getId().toString())
-                .withEmployeeId(BENSON.getEmployeeId().toString()).build();
+        Assignment alphaAlice = new AssignmentBuilder().withAssignmentId("1").withProject(ALPHA)
+                .withPerson(ALICE).build();
+        Assignment betaBenson = new AssignmentBuilder().withAssignmentId("2").withProject(BETA)
+                .withPerson(BENSON).build();
         UnassignCommand unassignAlphaAliceCommand = new UnassignCommand(alphaAlice.getAssignmentId());
         UnassignCommand unassignBetaBensonCommand = new UnassignCommand(betaBenson.getAssignmentId());
 
@@ -254,7 +254,17 @@ public class UnassignCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Project> getProjectList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -306,8 +316,8 @@ public class UnassignCommandTest {
             requireNonNull(projectId);
             requireNonNull(employeeId);
             return this.assignment != null
-                    && assignment.getProjectId().equals(projectId)
-                    && assignment.getEmployeeId().equals(employeeId);
+                    && assignment.getProject().getId().equals(projectId)
+                    && assignment.getPerson().getEmployeeId().equals(employeeId);
         }
 
         @Override
