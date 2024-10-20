@@ -34,7 +34,6 @@ public class AttendanceSessionTest {
         assertTrue(s.getIsSessionAttended());
     }
 
-
     // utility tests
     @Nested
     @DisplayName("utility tests")

@@ -1,9 +1,7 @@
 package tahub.contacts.model.course;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.testutil.Assert.assertThrows;
 
 import java.util.List;
@@ -13,10 +11,6 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.exceptions.AttendanceOperationException;
-import tahub.contacts.model.courseclass.recitation.Recitation;
-import tahub.contacts.model.courseclass.tutorial.Tutorial;
-import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
-import tahub.contacts.testutil.ScaBuilder;
 
 @DisplayName("Attendance")
 public class AttendanceTest {
@@ -29,16 +23,12 @@ public class AttendanceTest {
             List.of(ABSENT);
     public static final List<AttendanceSession> EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5 =
             List.of(ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED);
-    public static final StudentCourseAssociation SAMPLE_SCA = ScaBuilder.createDefault();
-    public static final StudentCourseAssociation SAMPLE_SCA_2 = ScaBuilder.createSampleSecond();
-    public static final Tutorial SAMPLE_TUTORIAL = new Tutorial("T1", SAMPLE_SCA.getCourse());
-    public static final Recitation SAMPLE_RECITATION = new Recitation("R1", SAMPLE_SCA.getCourse());
 
     // Constructor-only tests
     @Test
     @DisplayName("Returns correct values after constructor takes in no list")
     public void constructor_noList_correctValues() {
-        Attendance a = new Attendance(SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance();
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
         assertEquals(a.getAttendanceList(), EMPTY_ATTENDANCE_LIST);
@@ -47,7 +37,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after constructor takes in empty list")
     public void constructor_emptyList_correctValues() {
-        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
         assertEquals(a.getAttendanceList(), EMPTY_ATTENDANCE_LIST);
@@ -56,7 +46,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after constructor takes in list with one absent session")
     public void constructor_oneAbsenceList_correctValues() {
-        Attendance a = new Attendance(SINGULAR_ABSENT_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(SINGULAR_ABSENT_ATTENDANCE_LIST);
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 1);
         assertEquals(a.getAttendanceList(), SINGULAR_ABSENT_ATTENDANCE_LIST);
@@ -65,7 +55,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after constructor takes in list with one attended session")
     public void constructor_oneAttendedList_correctValues() {
-        Attendance a = new Attendance(SINGULAR_ATTENDED_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(SINGULAR_ATTENDED_ATTENDANCE_LIST);
         assertEquals(a.getAttendanceAttendedCount(), 1);
         assertEquals(a.getAttendanceTotalCount(), 1);
         assertEquals(a.getAttendanceList(), SINGULAR_ATTENDED_ATTENDANCE_LIST);
@@ -75,7 +65,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after constructor takes in sample attendance list")
     public void constructor_exampleList_correctValues() {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         assertEquals(a.getAttendanceAttendedCount(), 3);
         assertEquals(a.getAttendanceTotalCount(), 5);
         assertEquals(a.getAttendanceList(), EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
@@ -86,7 +76,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after absent sessions added")
     public void addAbsences_correctValues() {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.addAbsentLesson();
         a.addAbsentLesson();
         a.addAbsentLesson();
@@ -100,7 +90,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after attended sessions added")
     public void addAttendances_correctValues() {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.addAttendedLesson();
         a.addAttendedLesson();
         a.addAttendedLesson();
@@ -113,7 +103,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after a series of sessions added")
     public void addSessions_correctValues() {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.addAttendedLesson();
         a.addAbsentLesson();
         a.addAbsentLesson();
@@ -133,7 +123,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct empty list after clearing an empty attendance list")
     public void clear_emptyList_emptyList() {
-        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
         a.clear();
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
@@ -143,7 +133,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct empty list after clearing a sample attendance list")
     public void clear_sampleList_emptyList() {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.clear();
         assertEquals(a.getAttendanceAttendedCount(), 0);
         assertEquals(a.getAttendanceTotalCount(), 0);
@@ -153,7 +143,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after removing the last session successively")
     public void removeLastMultiple_nonzeroList_correctValues() throws AttendanceOperationException {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.removeLast(); // remove attended session
         a.removeLast(); // remove absent session
         a.removeLast(); // remove attended session
@@ -165,7 +155,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Returns correct values after removing the last session once")
     public void removeLast_nonzeroList_correctValues() throws AttendanceOperationException {
-        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
         a.removeLast(); // remove attended session
         assertEquals(a.getAttendanceAttendedCount(), 2);
         assertEquals(a.getAttendanceTotalCount(), 4);
@@ -175,7 +165,7 @@ public class AttendanceTest {
     @Test
     @DisplayName("Throws correct exception after removing the last session from an empty list")
     public void removeLast_emptyList_throwsException() {
-        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
         assertThrows(AttendanceOperationException.class, a::removeLast);
     }
 
@@ -189,23 +179,23 @@ public class AttendanceTest {
             @Test
             @DisplayName("same Attendance object")
             public void sameAttendanceObject() {
-                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
                 assertEquals(a1, a1);
             }
 
             @Test
             @DisplayName("same attendance list")
             public void sameAttendanceList() {
-                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+                Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
                 assertEquals(a1, a2);
             }
 
             @Test
             @DisplayName("both empty attendance list")
             public void bothEmptyAttendanceList() {
-                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST);
+                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST);
                 assertEquals(a1, a2);
             }
         }
@@ -216,77 +206,17 @@ public class AttendanceTest {
             @Test
             @DisplayName("different attendance list")
             public void differentAttendanceList() {
-                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(SINGULAR_ATTENDED_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+                Attendance a2 = new Attendance(SINGULAR_ATTENDED_ATTENDANCE_LIST);
                 assertNotEquals(a1, a2);
             }
 
             @Test
             @DisplayName("different type")
             public void differentType() {
-                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
                 String a2 = "different-type";
                 assertNotEquals(a1, a2);
-            }
-        }
-    }
-
-    // isSame tests
-    @Nested
-    @DisplayName("isSameAttendance")
-    class IsSame {
-        @Nested
-        @DisplayName("returns true for")
-        class TrueIsSame {
-            @Test
-            @DisplayName("same Attendance object")
-            public void sameAttendanceObject() {
-                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                assertTrue(a1.isSameAttendance(a1));
-            }
-
-            @Test
-            @DisplayName("same attendance list, SCA and class")
-            public void sameAttendanceList() {
-                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                assertTrue(a1.isSameAttendance(a2));
-            }
-
-            @Test
-            @DisplayName("same SCA and class but different attendance list")
-            public void bothEmptyAttendanceList() {
-                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                assertTrue(a1.isSameAttendance(a2));
-            }
-        }
-
-        @Nested
-        @DisplayName("returns false for")
-        class FalseIsSame {
-            @Test
-            @DisplayName("different class")
-            public void differentAttendanceList() {
-                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_RECITATION);
-                assertFalse(a1.isSameAttendance(a2));
-            }
-
-            @Test
-            @DisplayName("different SCA")
-            public void differentSca() {
-                Attendance a1 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                Attendance a2 = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA_2, SAMPLE_RECITATION);
-                assertFalse(a1.isSameAttendance(a2));
-            }
-
-            @Test
-            @DisplayName("different type")
-            public void differentType() {
-                Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
-                String a2 = "different-type";
-                assertFalse(a1.isSameAttendance(a2));
             }
         }
     }
@@ -298,14 +228,14 @@ public class AttendanceTest {
         @Test
         @DisplayName("shows correct string for empty attendance")
         public void emptyAttendance_correctString() {
-            Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST, SAMPLE_SCA, SAMPLE_TUTORIAL);
+            Attendance a = new Attendance(EMPTY_ATTENDANCE_LIST);
             assertEquals(a.toString(), "[0/0]");
         }
 
         @Test
         @DisplayName("shows correct string for example attendance")
         public void exampleAttendance_correctString() {
-            Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+            Attendance a = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
             assertEquals(a.toString(), "[3/5]");
         }
     }
@@ -314,8 +244,8 @@ public class AttendanceTest {
     @Test
     @DisplayName("same attendance list has same hashcode")
     public void hashCode_sameAttendanceList_sameHashCode() {
-        Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
-        Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5, SAMPLE_SCA, SAMPLE_TUTORIAL);
+        Attendance a1 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
+        Attendance a2 = new Attendance(EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5);
 
         assertEquals(a1.hashCode(), a2.hashCode());
     }
