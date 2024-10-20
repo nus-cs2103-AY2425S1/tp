@@ -14,8 +14,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypiAddressBookAllWithCars;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookAllWithCars;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +40,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditClientCommandTest {
 
-    private Model model = new ModelManager(getTypiAddressBookAllWithCars(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookAllWithCars(), new UserPrefs());
     private Model modelWithoutCar = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test

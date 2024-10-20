@@ -135,4 +135,36 @@ public class PersonTest {
                                                     + ", car=" + aliceWithCar.getCar() + "}";
         assertEquals(expected, aliceWithCar.toString());
     }
+
+    @Test
+    public void checkInOutTest() {
+        // New clients are not automatically Checked in.
+        Person alice = new PersonBuilder(ALICE).build();
+        Person bob = new PersonBuilder(BOB).build();
+        assertFalse(alice.isServicing());
+        assertFalse(bob.isServicing());
+
+        // Clients with no Car cannot be Checked in.
+        alice.setServicing();
+        bob.setServicing();
+        assertFalse(alice.isServicing());
+        assertFalse(bob.isServicing());
+
+        alice = new PersonBuilder(alice).withCar("SJH9514P", "KMHGH4JH3EU073801", "Hyundai", "Kona 1.6T").build();
+        bob = new PersonBuilder(bob).withCar("S6780S", "ABCDE12345ABCDE12", "BMW", "520i").build();
+
+        // Clients with Car can be Checked in/ out indefinitely.
+        for (int i = 0; i < 10; i++) {
+            // Clients with Car whom are Checked out can be Checked in.
+            alice.setServicing();
+            bob.setServicing();
+            assertTrue(alice.isServicing());
+            assertTrue(bob.isServicing());
+            // Clients with Car whom are Checked in can be Checked out.
+            alice.setServicing();
+            bob.setServicing();
+            assertFalse(alice.isServicing());
+            assertFalse(bob.isServicing());
+        }
+    }
 }

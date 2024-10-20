@@ -111,7 +111,7 @@ public class TypicalPersons {
         return ab;
     }
 
-    public static AddressBook getTypiAddressBookAllWithCars() {
+    public static AddressBook getTypicalAddressBookAllWithCars() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersonsAllWithCars()) {
             ab.addPerson(person);
