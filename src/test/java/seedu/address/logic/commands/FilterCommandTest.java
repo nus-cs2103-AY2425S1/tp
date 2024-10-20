@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -18,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 import seedu.address.ui.DisplayType;
 
 /**
@@ -29,19 +32,23 @@ public class FilterCommandTest {
 
     @Test
     public void equals() {
-        SkillsContainsKeywordsPredicate firstPredicate = new SkillsContainsKeywordsPredicate(
-                Collections.singletonList("first"));
-        SkillsContainsKeywordsPredicate secondPredicate = new SkillsContainsKeywordsPredicate(
-                Collections.singletonList("second"));
+        SkillsContainsKeywordsPredicate firstSkillPredicate = new SkillsContainsKeywordsPredicate(
+                Collections.singletonList("firstSkill"));
+        SkillsContainsKeywordsPredicate secondSkillPredicate = new SkillsContainsKeywordsPredicate(
+                Collections.singletonList("secondSkill"));
+        TagsContainsKeywordsPredicate firstTagPredicate = new TagsContainsKeywordsPredicate(
+                Collections.singletonList("firstTag"));
+        TagsContainsKeywordsPredicate secondTagPredicate = new TagsContainsKeywordsPredicate(
+                Collections.singletonList("secondTag"));
 
-        FilterCommand filterFirstCommand = new FilterCommand(firstPredicate);
-        FilterCommand filterSecondCommand = new FilterCommand(secondPredicate);
+        FilterCommand filterFirstCommand = new FilterCommand(firstSkillPredicate, firstTagPredicate);
+        FilterCommand filterSecondCommand = new FilterCommand(secondSkillPredicate, secondTagPredicate);
 
         // same object -> returns true
         assertTrue(filterFirstCommand.equals(filterFirstCommand));
 
         // same values -> returns true
-        FilterCommand filterFirstCommandCopy = new FilterCommand(firstPredicate);
+        FilterCommand filterFirstCommandCopy = new FilterCommand(firstSkillPredicate, firstTagPredicate);
         assertTrue(filterFirstCommand.equals(filterFirstCommandCopy));
 
         // different types -> returns false
@@ -59,37 +66,95 @@ public class FilterCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
                 DisplayType.PERSON_LIST, false, false);
-        SkillsContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate(" ");
+        TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate(" ");
+        FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
+        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                DisplayType.PERSON_LIST, false, false);
+
+        SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate("thievery");
+        TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate("friends");
+
+        FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
+        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_multipleKeywordsMutuallyExclusive_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage,
                 DisplayType.PERSON_LIST, false, false);
-        SkillsContainsKeywordsPredicate predicate = preparePredicate("moneyManagement thievery gambling");
-        FilterCommand command = new FilterCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+
+        SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate("moneyManagement");
+        TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate("owesMoney");
+
+        FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
+        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
         assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
     }
 
     @Test
+    public void execute_onlySkills_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                DisplayType.PERSON_LIST, false, false);
+
+        SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate("thievery");
+        TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate(" ");
+
+        FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
+        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Arrays.asList(BENSON, CARL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_onlyTags_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage,
+                DisplayType.PERSON_LIST, false, false);
+
+        SkillsContainsKeywordsPredicate skillsPredicate = prepareSkillsPredicate(" ");
+        TagsContainsKeywordsPredicate tagsPredicate = prepareTagsPredicate("friends");
+
+        FilterCommand command = new FilterCommand(skillsPredicate, tagsPredicate);
+        expectedModel.updateFilteredPersonList(skillsPredicate.or(tagsPredicate));
+        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        SkillsContainsKeywordsPredicate predicate = new SkillsContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FilterCommand filterCommand = new FilterCommand(predicate);
-        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        SkillsContainsKeywordsPredicate skillsPredicate = new SkillsContainsKeywordsPredicate(Arrays.asList("keyword"));
+        TagsContainsKeywordsPredicate tagsPredicate = new TagsContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FilterCommand filterCommand = new FilterCommand(skillsPredicate, tagsPredicate);
+        String expected = FilterCommand.class.getCanonicalName() + "{skillsPredicate=" + skillsPredicate
+                + ", tagsPredicate=" + tagsPredicate + "}";
         assertEquals(expected, filterCommand.toString());
     }
 
     /**
      * Parses {@code userInput} into a {@code SkillsContainsKeywordsPredicate}.
      */
-    private SkillsContainsKeywordsPredicate preparePredicate(String userInput) {
+    private SkillsContainsKeywordsPredicate prepareSkillsPredicate(String userInput) {
         return new SkillsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code TagsContainsKeywordsPredicate}.
+     */
+    private TagsContainsKeywordsPredicate prepareTagsPredicate(String userInput) {
+        return new TagsContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

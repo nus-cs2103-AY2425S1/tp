@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 
 public class FilterCommandParserTest {
 
@@ -24,11 +25,12 @@ public class FilterCommandParserTest {
     public void parse_validArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend")));
-        assertParseSuccess(parser, "frontend backend", expectedFilterCommand);
+                new FilterCommand(new SkillsContainsKeywordsPredicate(Arrays.asList("frontend", "backend")),
+                        new TagsContainsKeywordsPredicate(Arrays.asList("swe", "pm")));
+        assertParseSuccess(parser, " s/frontend s/backend t/swe t/pm", expectedFilterCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n frontend \n \t backend  \t", expectedFilterCommand);
+        assertParseSuccess(parser, " \n s/frontend  \n \t s/backend  \t t/swe \n \t t/pm \n", expectedFilterCommand);
     }
 
 }

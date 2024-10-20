@@ -23,7 +23,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ],
-    "skills" : [ ]
+    "skills" : [ "thievery" ]
   }, {
     "employeeId": "4",
     "name" : "Daniel Meier",
