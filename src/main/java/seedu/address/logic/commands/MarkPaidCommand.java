@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -77,19 +78,20 @@ public class MarkPaidCommand extends Command {
      */
     private static Person createMarkedPerson(Person personToMark, Set<MonthPaid> monthPaid) {
         assert personToMark != null;
-
-        // TODO: should we use editPersonDescriptor here instead?
+        assert monthPaid != null;
         Name name = personToMark.getName();
         Phone phone = personToMark.getPhone();
         Email email = personToMark.getEmail();
         Address address = personToMark.getAddress();
         Fees fees = personToMark.getFees();
         ClassId classId = personToMark.getClassId();
-        Set<MonthPaid> newMonthsPaid = monthPaid;
+        Set<MonthPaid> existingMonthsPaid = personToMark.getMonthsPaid();
+        Set<MonthPaid> combinedMonthsPaid = new HashSet<>(existingMonthsPaid);
+        combinedMonthsPaid.addAll(monthPaid);
         Set<Tag> tags = personToMark.getTags();
 
         return new Person(name, phone, email, address, fees, classId,
-                newMonthsPaid, tags);
+                combinedMonthsPaid, tags);
     }
 
     @Override
