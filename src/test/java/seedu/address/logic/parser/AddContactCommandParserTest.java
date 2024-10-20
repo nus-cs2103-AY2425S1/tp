@@ -37,7 +37,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.contact.commands.AddContactCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -46,7 +46,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.role.RoleHandler;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandParserTest {
+public class AddContactCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
@@ -58,7 +58,7 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TELEGRAM_DESC_BOB
-                + ROLE_DESC_ATTENDEE, new AddCommand(expectedPerson));
+                + ROLE_DESC_ATTENDEE, new AddContactCommand(expectedPerson));
 
 
         // multiple tags - all accepted
@@ -69,7 +69,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TELEGRAM_DESC_BOB
                         + ROLE_DESC_ATTENDEE,
-                new AddCommand(expectedPersonMultipleTags));
+                new AddContactCommand(expectedPersonMultipleTags));
 
         // multiple roles - all accepted
         Person expectedPersonMultipleRoles = new PersonBuilder(BOB)
@@ -79,7 +79,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TELEGRAM_DESC_BOB
                          + ROLE_DESC_ATTENDEE + ROLE_DESC_VENDOR,
-                new AddCommand(expectedPersonMultipleRoles));
+                new AddContactCommand(expectedPersonMultipleRoles));
 
     }
 
@@ -153,12 +153,12 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(AMY).withTelegramUsername(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+                new AddContactCommand(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -209,6 +209,6 @@ public class AddCommandParserTest {
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                + ADDRESS_DESC_BOB, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddContactCommand.MESSAGE_USAGE));
     }
 }

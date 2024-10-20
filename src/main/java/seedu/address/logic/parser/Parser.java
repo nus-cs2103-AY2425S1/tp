@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.contact.commands.ContactCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.contact.commands.ContactCommand;
 import seedu.address.model.Model;
 
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpCommand extends Command {
+public class HelpContactCommand extends ContactCommand {
 
     public static final String COMMAND_WORD = "help";
 

@@ -50,6 +50,10 @@ public class EventManager implements ReadOnlyEventManager {
         this.eventList.setEvent(target, editedEvent);
     }
 
+    public boolean hasEvent(Event event) {
+        return this.eventList.contains(event);
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
         return eventList.asUnmodifiableObservableList();

@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -139,9 +140,6 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-
-
-
     /**
      * Parses a {@code String role} into a {@code Role}.
      */
@@ -173,5 +171,23 @@ public class ParserUtil {
             roleSet.add(parseRole(role));
         }
         return roleSet;
+    }
+
+    /**
+     * Parses a {@code String event} into an {@code Event}.
+     * Leading and trailing whitespace will be trimmed.
+     *
+     * @param event A valid event string to be parsed.
+     * @return The {@code Event} object created from the given {@code String event}.
+     * @throws ParseException If the given {@code event} string is invalid or doesn't match the constraints.
+     *     The error message will follow the constraints defined by {@code Event#MESSAGE_CONSTRAINTS}.
+     */
+    public static Event parseEvent(String event) throws ParseException {
+        requireNonNull(event);
+        String trimmedEvent = event.trim();
+        if (!Event.isValidEvent(trimmedEvent)) {
+            throw new ParseException(Event.MESSAGE_CONSTRAINTS);
+        }
+        return new Event(trimmedEvent);
     }
 }

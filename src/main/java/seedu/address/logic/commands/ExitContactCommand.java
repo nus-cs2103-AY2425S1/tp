@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
+import seedu.address.logic.commands.contact.commands.ContactCommand;
 import seedu.address.model.Model;
 
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command {
+public class ExitContactCommand extends ContactCommand {
 
     public static final String COMMAND_WORD = "exit";
 
