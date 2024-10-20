@@ -117,7 +117,7 @@ Examples:
 
 ### Unassigning piano pieces from a student: `unassign`
 
-Unassigns piano pieces to a student in the student directory.
+Unassigns piano pieces from a student in the student directory.
 
 Format: `unassign INDEX [pn/PIECE_NAME]...`
 
