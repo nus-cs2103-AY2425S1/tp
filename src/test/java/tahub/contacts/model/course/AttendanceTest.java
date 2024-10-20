@@ -3,6 +3,12 @@ package tahub.contacts.model.course;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static tahub.contacts.testutil.Assert.assertThrows;
+import static tahub.contacts.testutil.AttendanceExamples.ABSENT;
+import static tahub.contacts.testutil.AttendanceExamples.ATTENDED;
+import static tahub.contacts.testutil.AttendanceExamples.EMPTY_ATTENDANCE_LIST;
+import static tahub.contacts.testutil.AttendanceExamples.EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5;
+import static tahub.contacts.testutil.AttendanceExamples.SINGULAR_ABSENT_ATTENDANCE_LIST;
+import static tahub.contacts.testutil.AttendanceExamples.SINGULAR_ATTENDED_ATTENDANCE_LIST;
 
 import java.util.List;
 
@@ -14,15 +20,6 @@ import tahub.contacts.model.course.exceptions.AttendanceOperationException;
 
 @DisplayName("Attendance")
 public class AttendanceTest {
-    public static final AttendanceSession ATTENDED = AttendanceSession.createAttended();
-    public static final AttendanceSession ABSENT = AttendanceSession.createAbsent();
-    public static final List<AttendanceSession> EMPTY_ATTENDANCE_LIST = List.of();
-    public static final List<AttendanceSession> SINGULAR_ATTENDED_ATTENDANCE_LIST =
-            List.of(ATTENDED);
-    public static final List<AttendanceSession> SINGULAR_ABSENT_ATTENDANCE_LIST =
-            List.of(ABSENT);
-    public static final List<AttendanceSession> EXAMPLE_ATTENDANCE_LIST_3_OUT_OF_5 =
-            List.of(ABSENT, ATTENDED, ATTENDED, ABSENT, ATTENDED);
 
     // Constructor-only tests
     @Test
