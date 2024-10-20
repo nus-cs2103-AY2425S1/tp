@@ -97,6 +97,7 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
+        assert editPersonDescriptor != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
@@ -154,6 +155,8 @@ public class EditCommand extends Command {
          * Copy constructor. A defensive copy of {@code studyGroupTags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            assert toCopy != null;
+
             setName(toCopy.name);
             setEmail(toCopy.email);
             setGender(toCopy.gender);
