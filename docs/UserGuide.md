@@ -239,9 +239,7 @@ Examples:
 
 **Q**: How do I transfer my data (in the `addressbook.json` and `appointmentbook.json` files) to another 
 computer?<br>
-**A**: [Install the DocTrack app](#quick-start) in the other computer. When you run it, it creates empty [.
-json](https://www.json.org/json-en.html) files in the `data` folder. Replace these empty files with the `addressbook.json` and 
-`appointmentbook.json` files from your previous computer.
+**A**: [Install the DocTrack app](#quick-start) in the other computer. When you run it, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` folder. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files from your previous computer.
 
 ---
 
