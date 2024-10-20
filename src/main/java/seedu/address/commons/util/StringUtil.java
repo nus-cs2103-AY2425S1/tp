@@ -72,6 +72,7 @@ public class StringUtil {
      *   <br>examples:<pre>
      *       containsNumericWithOptionalHyphen("522322 10-09", "522322") == true
      *       containsNumericWithOptionalHyphen("522322 10-09", "10-09") == true
+     *       containsNumericWithOptionalHyphen("522322 10-09", "5223") == false //not a full word match
      *       containsNumericWithOptionalHyphen("522322 10-09", "10") == false //not a full word match
      *       </pre>
      * @param sentence cannot be null
