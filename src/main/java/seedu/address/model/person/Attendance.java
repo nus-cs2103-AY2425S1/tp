@@ -44,6 +44,9 @@ public class Attendance {
         return attendanceDate.format(VALID_DATE_FORMAT);
     }
 
+    /**
+     * Returns a date in a different format to be displayed in the UI
+     */
     public String toDisplayString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM");
         return attendanceDate.format(formatter);
