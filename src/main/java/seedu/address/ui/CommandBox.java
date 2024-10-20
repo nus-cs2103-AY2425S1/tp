@@ -5,9 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandTextHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.CommandTextHistory;
+
+import java.util.function.Supplier;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -19,28 +21,26 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
-    private final CommandTextHistory commandTextHistory;
-
     @FXML
     private TextField commandTextField;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, Supplier<String> getPreviousCommand,
+                      Supplier<String> getNextCommand) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
-        commandTextHistory = new CommandTextHistory();
         commandTextField.setOnKeyPressed(event -> {
             switch (event.getCode()) {
             case UP:
-                commandTextField.setText(commandTextHistory.getPreviousCommand());
+                commandTextField.setText(getPreviousCommand.get());
                 break;
             case DOWN:
-                commandTextField.setText(commandTextHistory.getNextCommand());
+                commandTextField.setText(getNextCommand.get());
                 break;
             default:
                 break;
@@ -63,8 +63,6 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
-        } finally {
-            commandTextHistory.addCommandToHistory(commandText);
         }
     }
 

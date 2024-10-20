@@ -48,6 +48,9 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        // Add command text to history, whether it is a valid command or not
+        addCommandTextToHistory(commandText);
+
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
@@ -91,5 +94,20 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<ContactRecord> getDisplayedCallHistory() {
         return model.getDisplayedCallHistory();
+    }
+
+    @Override
+    public void addCommandTextToHistory(String commandText) {
+        model.addCommandTextToHistory(commandText);
+    }
+
+    @Override
+    public String getNextCommandTextFromHistory() {
+        return model.getNextCommandTextFromHistory();
+    }
+
+    @Override
+    public String getPreviousCommandTextFromHistory() {
+        return model.getPreviousCommandTextFromHistory();
     }
 }

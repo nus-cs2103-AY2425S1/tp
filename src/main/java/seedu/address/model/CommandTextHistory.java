@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;

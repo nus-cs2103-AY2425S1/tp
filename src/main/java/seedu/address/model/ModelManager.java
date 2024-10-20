@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
 import seedu.address.model.contactrecord.ContactRecord;
 import seedu.address.model.contactrecord.ContactRecordList;
 import seedu.address.model.person.Nric;
@@ -28,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ObservableList<ContactRecord> displayedCallHistory;
+    private final CommandTextHistory commandTextHistory;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         this.displayedCallHistory = FXCollections.observableArrayList();
+        this.commandTextHistory = new CommandTextHistory();
     }
 
     public ModelManager() {
@@ -205,4 +208,20 @@ public class ModelManager implements Model {
                 && displayedCallHistory.equals(otherModelManager.displayedCallHistory);
     }
 
+    //=========== CommandTextHistory =========================================================================
+
+    @Override
+    public void addCommandTextToHistory(String commandText) {
+        commandTextHistory.addCommandToHistory(commandText);
+    }
+
+    @Override
+    public String getPreviousCommandTextFromHistory() {
+        return commandTextHistory.getPreviousCommand();
+    }
+
+    @Override
+    public String getNextCommandTextFromHistory() {
+        return commandTextHistory.getNextCommand();
+    }
 }
