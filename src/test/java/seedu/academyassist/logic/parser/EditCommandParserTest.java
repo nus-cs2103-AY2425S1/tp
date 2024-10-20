@@ -147,7 +147,7 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetNric, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
+        // subjects
         userInput = targetNric + SUBJECT_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withSubjects(VALID_SUBJECT_AMY).build();
         expectedCommand = new EditCommand(targetNric, descriptor);

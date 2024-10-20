@@ -113,12 +113,16 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Ic.MESSAGE_CONSTRAINTS);
         }
         final Ic modelIc = new Ic(ic);
+        if (yearGroup == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    YearGroup.class.getSimpleName()));
+        }
         if (!YearGroup.isValidYearGroup(yearGroup)) {
             throw new IllegalValueException(YearGroup.MESSAGE_CONSTRAINTS);
         }
         final YearGroup modelYearGroup = new YearGroup(yearGroup);
 
-        if (subjects == null) {
+        if (subjects == null || subjects.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
         }
         final List<Subject> personSubjects = new ArrayList<>();

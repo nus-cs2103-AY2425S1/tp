@@ -176,7 +176,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseSubjects_collectionWithInvalidSubjects_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseSubjects(Arrays.asList(VALID_SUBJECT_1, INVALID_SUBJECT)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseSubjects(Arrays.asList(VALID_SUBJECT_1,
+                INVALID_SUBJECT)));
     }
 
     // todo check the below

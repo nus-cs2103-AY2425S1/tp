@@ -1,8 +1,8 @@
 package seedu.academyassist.model.person;
 
-import org.junit.jupiter.api.Test;
-
 import static seedu.academyassist.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class SubjectTest {
     @Test

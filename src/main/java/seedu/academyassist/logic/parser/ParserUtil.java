@@ -103,6 +103,9 @@ public class ParserUtil {
      */
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
         requireNonNull(subjects);
+        if (subjects.isEmpty()) {
+            throw new ParseException("Subjects cannot be empty");
+        }
         final Set<Subject> subjectSet = new HashSet<>();
         for (String subjectName : subjects) {
             subjectSet.add(parseSubject(subjectName.toUpperCase()));

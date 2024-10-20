@@ -78,7 +78,8 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withSubjects(String... subjects) {
-        Set<Subject> subjectSet = Stream.of(subjects).map(Subject::new).collect(Collectors.toSet());
+        Set<Subject> subjectSet = Stream.of(subjects).map(subject -> new Subject(subject.toUpperCase()))
+                .collect(Collectors.toSet());
         descriptor.setSubjects(subjectSet);
         return this;
     }

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 import static seedu.academyassist.testutil.TypicalPersons.ALICE;
 import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
@@ -46,8 +45,7 @@ public class AcademyAssistTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
         AcademyAssistStub newData = new AcademyAssistStub(newPersons);
 
@@ -73,8 +71,7 @@ public class AcademyAssistTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAcademyAssist_returnsTrue() {
         academyAssist.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(academyAssist.hasPerson(editedAlice));
     }
 
