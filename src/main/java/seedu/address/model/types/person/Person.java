@@ -43,6 +43,16 @@ public class Person {
         this.tags.addAll(tags);
     }
 
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Event event) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.event = event;
+    }
+
     public Name getName() {
         return name;
     }
@@ -104,7 +114,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && event.equals(otherPerson.event);
     }
 
     @Override
