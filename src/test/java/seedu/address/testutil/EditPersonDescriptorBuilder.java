@@ -79,21 +79,21 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
-     * to the {@code EditPersonDescriptor} that we are building.
-     */
-    public EditPersonDescriptorBuilder withStudyGroups(String... studyGroups) {
-        Set<StudyGroupTag> studyGroupSet = Stream.of(studyGroups).map(StudyGroupTag::new).collect(Collectors.toSet());
-        descriptor.setStudyGroupTags(studyGroupSet);
-        return this;
-    }
-
-    /**
      * Sets the {@code Detail} of the {@code EditPersonDescriptor} that we are
      * building.
      */
     public EditPersonDescriptorBuilder withDetail(String detail) {
         descriptor.setDetail(new Detail(detail));
+        return this;
+    }
+
+    /**
+     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
+     * to the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStudyGroupTags(String... studyGroups) {
+        Set<StudyGroupTag> studyGroupSet = Stream.of(studyGroups).map(StudyGroupTag::new).collect(Collectors.toSet());
+        descriptor.setStudyGroupTags(studyGroupSet);
         return this;
     }
 

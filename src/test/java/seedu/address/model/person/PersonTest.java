@@ -8,7 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDY_GROUP_TAG_1A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDY_GROUP_TAG_2B;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -34,7 +35,8 @@ public class PersonTest {
         assertFalse(ALICE.isSamePerson(null));
 
         // same email, all other attributes different -> returns true
-        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB).withStudyGroups(VALID_TAG_HUSBAND).build();
+        Person editedBob = new PersonBuilder(BOB).withEmail(VALID_EMAIL_BOB)
+                .withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A).build();
         assertTrue(BOB.isSamePerson(editedBob));
 
         // different email, all other attributes same -> returns false
@@ -82,7 +84,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different study groups -> returns false
-        editedAlice = new PersonBuilder(ALICE).withStudyGroups(VALID_TAG_HUSBAND).build();
+        editedAlice = new PersonBuilder(ALICE).withStudyGroupTags(VALID_STUDY_GROUP_TAG_2B).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 

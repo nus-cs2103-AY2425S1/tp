@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -45,8 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_AGE + "AGE] "
-            + "[" + PREFIX_TAG + "TAG]"
-            + "[" + PREFIX_DETAIL + "DETAIL]...\n"
+            + "[" + PREFIX_DETAIL + "DETAIL]"
+            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -141,7 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Gender gender;
         private Age age;
-        private Set<StudyGroupTag> studyGroups;
+        private Set<StudyGroupTag> studyGroupTags;
         private Detail detail;
 
         public EditPersonDescriptor() {
@@ -156,14 +156,14 @@ public class EditCommand extends Command {
             setGender(toCopy.gender);
             setAge(toCopy.age);
             setDetail(toCopy.detail);
-            setStudyGroupTags(toCopy.studyGroups);
+            setStudyGroupTags(toCopy.studyGroupTags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, age, gender, detail, studyGroups);
+            return CollectionUtil.isAnyNonNull(name, email, age, gender, detail, studyGroupTags);
         }
 
         public void setName(Name name) {
@@ -211,7 +211,7 @@ public class EditCommand extends Command {
          * copy of {@code studyGroups} is used internally.
          */
         public void setStudyGroupTags(Set<StudyGroupTag> studyGroups) {
-            this.studyGroups = (studyGroups != null) ? new HashSet<>(studyGroups) : null;
+            this.studyGroupTags = (studyGroups != null) ? new HashSet<>(studyGroups) : null;
         }
 
         /**
@@ -220,7 +220,9 @@ public class EditCommand extends Command {
          * {@code Optional#empty()} if {@code studyGroups} is null.
          */
         public Optional<Set<StudyGroupTag>> getStudyGroupTags() {
-            return (studyGroups != null) ? Optional.of(Collections.unmodifiableSet(studyGroups)) : Optional.empty();
+            return (studyGroupTags != null)
+                    ? Optional.of(Collections.unmodifiableSet(studyGroupTags))
+                    : Optional.empty();
         }
 
         @Override
@@ -237,7 +239,10 @@ public class EditCommand extends Command {
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(studyGroups, otherEditPersonDescriptor.studyGroups);
+                    && Objects.equals(gender, otherEditPersonDescriptor.gender)
+                    && Objects.equals(age, otherEditPersonDescriptor.age)
+                    && Objects.equals(detail, otherEditPersonDescriptor.detail)
+                    && Objects.equals(studyGroupTags, otherEditPersonDescriptor.studyGroupTags);
         }
 
         @Override
@@ -245,7 +250,10 @@ public class EditCommand extends Command {
             return new ToStringBuilder(this)
                     .add("name", name)
                     .add("email", email)
-                    .add("study groups", studyGroups)
+                    .add("gender", gender)
+                    .add("age", age)
+                    .add("detail", detail)
+                    .add("study groups", studyGroupTags)
                     .toString();
         }
     }

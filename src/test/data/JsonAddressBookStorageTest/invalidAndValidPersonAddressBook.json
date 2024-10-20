@@ -1,11 +1,17 @@
 {
-  "persons": [ {
-    "name": "Valid Person",
-    "email": "hans@example.com",
+  "persons" : [ {
+    "name" : "Valid Person",
+    "email" : "hans@example.com",
     "gender" : "M",
-    "detail" : "detail"
+    "age" : "20",
+    "detail" : "",
+    "study groups" : [ ]
   }, {
-    "name": "Person With Invalid Email Field",
-    "email": "invalid@email!3e"
+    "name" : "Person With Invalid Email Field",
+    "email" : "invalid@email!3e",
+    "gender" : "M",
+    "age" : "20",
+    "detail" : "",
+    "study groups" : [ ]
   } ]
 }

@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 
 import java.util.Set;
 
@@ -37,7 +37,7 @@ public class PersonUtil {
         sb.append(PREFIX_AGE + person.getAge().value + " ");
         sb.append(PREFIX_DETAIL + person.getDetail().value + " ");
         person.getStudyGroupTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.studyGroupName + " "));
+                s -> sb.append(PREFIX_STUDY_GROUP_TAG + s.studyGroupName + " "));
         return sb.toString();
     }
 
@@ -55,9 +55,9 @@ public class PersonUtil {
         if (descriptor.getStudyGroupTags().isPresent()) {
             Set<StudyGroupTag> studyGroups = descriptor.getStudyGroupTags().get();
             if (studyGroups.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_STUDY_GROUP_TAG);
             } else {
-                studyGroups.forEach(s -> sb.append(PREFIX_TAG).append(s.studyGroupName).append(" "));
+                studyGroups.forEach(s -> sb.append(PREFIX_STUDY_GROUP_TAG).append(s.studyGroupName).append(" "));
             }
         }
         return sb.toString();
