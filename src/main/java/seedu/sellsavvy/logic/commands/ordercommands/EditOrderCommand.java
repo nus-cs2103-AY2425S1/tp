@@ -97,8 +97,9 @@ public class EditOrderCommand extends Command {
         Item updatedItem = editOrderDescriptor.getItem().orElse(orderToEdit.getItem());
         Count updatedQuantity = editOrderDescriptor.getQuantity().orElse(orderToEdit.getCount());
         Date updatedDate = editOrderDescriptor.getDate().orElse(orderToEdit.getDate());
+        Status status = orderToEdit.getStatus(); //status cannot be updated
 
-        Order orderToReturn =  new Order(updatedItem, updatedQuantity, updatedDate, Status.PENDING);
+        Order orderToReturn =  new Order(updatedItem, updatedQuantity, updatedDate, status);
         return orderToReturn;
     }
 
