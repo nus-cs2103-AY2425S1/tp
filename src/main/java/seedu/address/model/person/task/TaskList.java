@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.exceptions.TaskNotFoundException;
 import seedu.address.storage.JsonAdaptedTask;
 
@@ -61,6 +62,33 @@ public class TaskList implements Iterable<Task> {
         if (!tasks.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+    }
+
+    /**
+     * Updates the task at the specified {@code index} with the provided {@code updatedTask}.
+     *
+     * @param index The index of the task to update.
+     * @param updatedTask The updated Task object.
+     * @return A new TaskList with the updated task.
+     * @throws IndexOutOfBoundsException if the {@code index} is out of range (index < 0 || index >= size()).
+     */
+    public TaskList updateTask(Index index, Task updatedTask) {
+        requireNonNull(updatedTask);
+
+        if (index.getZeroBased() < 0 || index.getZeroBased() >= tasks.size()) {
+            throw new IndexOutOfBoundsException("Index out of range: " + index.getZeroBased());
+        }
+
+        // Create a copy of the current TaskList
+        TaskList updatedTaskList = this.copy();
+
+        // Replace the task at the given index with the updatedTask
+        updatedTaskList.tasks.set(index.getZeroBased(), updatedTask);
+
+        // Optionally sort by deadline again, if necessary
+        updatedTaskList.sortByDeadline();
+
+        return updatedTaskList;
     }
 
     /**

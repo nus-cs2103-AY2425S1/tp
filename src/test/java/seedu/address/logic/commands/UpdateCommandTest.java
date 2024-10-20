@@ -36,7 +36,6 @@ import seedu.address.testutil.UpdatePersonDescriptorBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for UpdateCommand.
  */
 public class UpdateCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test

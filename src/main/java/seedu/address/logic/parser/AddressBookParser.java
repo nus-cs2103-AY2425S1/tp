@@ -21,6 +21,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UpdateCommand;
+import seedu.address.logic.commands.UpdateTaskCommand;
 import seedu.address.logic.commands.ViewTasksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -115,6 +116,10 @@ public class AddressBookParser {
         case AddTaskCommand.COMMAND_WORD:
             model.getUiState().setState(UiState.State.Details);
             return new AddTaskCommandParser().parse(arguments);
+
+        case UpdateTaskCommand.COMMAND_WORD:
+            model.getUiState().setState(UiState.State.Details);
+            return new UpdateTaskCommandParser().parse(arguments);
 
         case ViewTasksCommand.COMMAND_WORD:
             model.getUiState().setState(UiState.State.Tasks);
