@@ -12,7 +12,6 @@ import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.ExitCommand;
-import tutorease.address.logic.commands.FindCommand;
 import tutorease.address.logic.commands.HelpCommand;
 import tutorease.address.logic.commands.LessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
@@ -58,9 +57,6 @@ public class TutorEaseParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

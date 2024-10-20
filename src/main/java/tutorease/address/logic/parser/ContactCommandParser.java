@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.ListContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
@@ -37,6 +38,8 @@ public class ContactCommandParser implements Parser<Command> {
         case ListContactCommand.SUB_COMMAND_WORD:
             return new ListContactCommand();
         // Future sub-commands like add, edit can be handled here
+        case FindContactCommand.SUB_COMMAND_WORD:
+            return new FindContactCommandParser().parse(subArguments);
         default:
             throw new ParseException("Unknown contact sub-command: " + subCommand);
         }
