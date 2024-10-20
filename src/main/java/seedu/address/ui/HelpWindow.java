@@ -156,8 +156,9 @@ public class HelpWindow extends UiPart<Stage> {
      * @param commandList
      */
     private void populateCommandSummary(ObservableList<Command> commandList) {
-        Person samplePerson = new Person(new Nric("S4260423B"), new Name("John Doe"), new Phone("98765432")
-                , new Email("johnd@example.com"), new Address("John street"), new HashSet<>(), new CallFrequency("7"));
+        Person samplePerson = new Person(new Nric("S4260423B"), new Name("John Doe"), new Phone("98765432"),
+                new Email("johnd@example.com"), new Address("John street"), new HashSet<>(),
+                new CallFrequency("7"));
         commandList.add(new AddCommand(samplePerson));
         commandList.add(new ClearCommand());
         commandList.add(new DeleteCommand(Index.fromOneBased(1)));
