@@ -23,4 +23,8 @@ public class TypicalProperties {
             .withUnitNumber("16-51").withPrice("4500000").withTags("duplex", "garden").build();
     public static final Property PROPERTY_H = new PropertyToBuyBuilder().withHousingType("h").withPostalCode("599977")
             .withUnitNumber("17-61").withPrice("5000000").withTags("luxury", "private pool").build();
+    public static final Property PROPERTY_I = new PropertyToBuyBuilder().withHousingType("h").withPostalCode("588977")
+            .withUnitNumber("17-60").withPrice("6000000").withTags("luxury", "private pool").build();
+    public static final Property PROPERTY_J = new PropertyToBuyBuilder().withHousingType("h").withPostalCode("587977")
+            .withUnitNumber("16-65").withPrice("6500000").withTags("luxury", "private pool").build();
 }

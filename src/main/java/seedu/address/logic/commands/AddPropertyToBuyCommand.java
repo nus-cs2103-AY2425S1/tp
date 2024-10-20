@@ -23,12 +23,12 @@ import seedu.address.model.person.Property;
 public class AddPropertyToBuyCommand extends Command {
     public static final String COMMAND_WORD = "addBuy";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a property to the list of properties to buy"
-            + " for this specific person. "
-            + "Parameters: INDEX (Must be a positive integer)"
-            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE]"
-            + PREFIX_BUYING_PRICE + "[BUYING_PRICE]"
-            + PREFIX_POSTAL_CODE + "[POSTAL_CODE]"
-            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER]"
+            + " for this specific person. \n"
+            + "Parameters: INDEX (Must be a positive integer) "
+            + PREFIX_HOUSING_TYPE + "[HOUSING_TYPE] "
+            + PREFIX_BUYING_PRICE + "[SELLING_PRICE] "
+            + PREFIX_POSTAL_CODE + "[POSTAL_CODE] "
+            + PREFIX_UNIT_NUMBER + "[UNIT_NUMBER] "
             + PREFIX_TAG + "[TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "1 "
@@ -47,14 +47,17 @@ public class AddPropertyToBuyCommand extends Command {
     private final Property propertyToBuyToBeAdded;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     *  Creates an AddPropertyToBuyCommand to add the specified {@code Property}
+     * to the list of properties to buy for the contact at the specified {@code Index}.
+     *
+     * @param personIndex of the person in the filtered person list to edit
      * @param property property to be added to the list of properties to buy
      */
-    public AddPropertyToBuyCommand(Index index, Property property) {
-        requireNonNull(index);
+    public AddPropertyToBuyCommand(Index personIndex, Property property) {
+        requireNonNull(personIndex);
         requireNonNull(property);
 
-        this.index = index;
+        this.index = personIndex;
         this.propertyToBuyToBeAdded = property;
     }
 

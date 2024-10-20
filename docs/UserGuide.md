@@ -202,6 +202,33 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Deleting a property to be sold : `delSell`
+
+Deletes the specified property to be sold under specified person from the address book.
+
+Format: `delSell INDEX_PERSON INDEX_PROPERTY`
+
+* Deletes the property to be sold at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* The index refers to the index number displayed in the selling properties list and person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delSell 2 1` deletes the 1st selling property under 2nd person in the address book.
+
+### Deleting a property to be bought : `delSell`
+
+Deletes the specified property to be bought under specified person from the address book.
+
+Format: `delBuy INDEX_PERSON INDEX_PROPERTY`
+
+* Deletes the property to be bought at the specified `INDEX_PROPERTY` under the person at the specified `INDEX_PERSON`.
+* The index refers to the index number displayed in the buying properties list and person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delBuy 2 1` deletes the 1st buying property under 2nd person in the address book.
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -252,6 +279,10 @@ _Details coming soon ..._
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+3. **After a property is added** it is not instantly reflected on the Ui. It is reflected on the Ui after a delay. To resolve this,can either wait for a bit or scroll the screen up and down or click on the contact you added the property to.
+4. **Bug in edit command**, the edit command overwrites the property list and deletes them when a person is edited/modified.
+5. **Same Property to Sell** can be tagged to various contacts
+6. **delSell and delBuy** only works with the index displayed using the `list` command and not `findn` or `findp` command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -264,6 +295,8 @@ Action     | Format, Examples
 **Add Property** | `addSell INDEX_NUMBER ht/HOUSING TYPE sp/SELLING_PRICE pc/POSTAL_CODE un/UNIT_NUMBER [t/TAG]…​` <br> e.g., `addSell 5 ht/h sp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete Property** | `delSell INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delSell 3 2`
+**Delete Property** | `delBuy INDEX_PERSON INDEX_PROPERTY`<br> e.g., `delBuy 3 2`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Name**   | `findn KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn James Jake`
 **Find Phone Number**   | `findp KEYWORD [MORE_KEYWORDS]`<br> e.g., `findn 98272758 85495438`
