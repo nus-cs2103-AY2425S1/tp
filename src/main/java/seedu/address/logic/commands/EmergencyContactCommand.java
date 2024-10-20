@@ -34,6 +34,9 @@ public class EmergencyContactCommand extends Command {
     public static final String MESSAGE_ADD_EMERGENCY_CONTACT_SUCCESS = "Added emergency contact to Person: %1$s";
     public static final String MESSAGE_EMERGENCY_CONTACT_EXISTS = "Person: %1$s Already has a saved emergency contact";
 
+    public static final String MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS = "Please make sure both name and phone "
+            + "number is filled! Command details:\n" + MESSAGE_USAGE;
+
     private final Index index;
     private final EmergencyContact emergencyContact;
 
@@ -54,8 +57,7 @@ public class EmergencyContactCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         if (emergencyContact.contactNumber.isEmpty() || emergencyContact.contactName.isEmpty()) {
-            throw new CommandException("Please make sure both name and phone number is filled! Command details:\n"
-                    + MESSAGE_USAGE);
+            throw new CommandException(MESSAGE_INVALID_EMERGENCY_CONTACT_PARAMETERS);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() != null
