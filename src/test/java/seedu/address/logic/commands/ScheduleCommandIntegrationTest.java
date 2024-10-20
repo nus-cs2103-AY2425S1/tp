@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.ScheduleCommand.MESSAGE_TIME_CLASH;
 
 import java.time.LocalDateTime;
 
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -44,19 +47,23 @@ public class ScheduleCommandIntegrationTest {
         LocalDateTime startTime = LocalDateTime.of(2024, 10, 9, 9, 0);
         LocalDateTime endTime = LocalDateTime.of(2024, 10, 9, 10, 0);
         String location = "The Terrace";
-        Meeting existingMeeting = new Meeting(validPerson.getName(), startTime, endTime, location);
+
         try {
+            Meeting existingMeeting = new Meeting(validPerson.getName(), startTime, endTime, location);
             model.addMeeting(validPerson, existingMeeting);
+
+            LocalDateTime newStartTime = LocalDateTime.of(2024, 10, 9, 9, 30);
+            LocalDateTime newEndTime = LocalDateTime.of(2024, 10, 9, 10, 30);
+            ScheduleCommand scheduleCommand = new ScheduleCommand(Index.fromZeroBased(0), newStartTime,
+                    newEndTime, "New Location");
+
+            CommandResult commandResult = scheduleCommand.execute(model);
+
+            assertEquals(new CommandResult(MESSAGE_TIME_CLASH).getFeedbackToUser(),
+                    commandResult.getFeedbackToUser());
         } catch (TimeClashException | CommandException e) {
             // This should not happen in the setup phase
             throw new RuntimeException(e);
         }
-
-        LocalDateTime newStartTime = LocalDateTime.of(2024, 10, 9, 9, 30);
-        LocalDateTime newEndTime = LocalDateTime.of(2024, 10, 9, 10, 30);
-        ScheduleCommand scheduleCommand = new ScheduleCommand(Index.fromZeroBased(0), newStartTime,
-                newEndTime, "New Location");
-
-        assertThrows(TimeClashException.class, () -> scheduleCommand.execute(model), "Meeting times overlap");
     }
 }

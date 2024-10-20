@@ -24,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.TimeClashException;
 import seedu.address.testutil.PersonBuilder;
 
 public class ScheduleCommandTest {
@@ -58,16 +59,22 @@ public class ScheduleCommandTest {
         Person validPerson = new PersonBuilder().build();
         LocalDateTime startTime = LocalDateTime.of(2024, 10, 9, 9, 0);
         LocalDateTime endTime = LocalDateTime.of(2024, 10, 9, 10, 0);
-        Meeting existingMeeting = new Meeting(validPerson.getName(), startTime, endTime, "Location A");
 
-        ModelStubWithMeeting modelStub = new ModelStubWithMeeting(validPerson, existingMeeting);
+        try {
+            Meeting existingMeeting = new Meeting(validPerson.getName(), startTime, endTime, "Location A");
 
-        LocalDateTime newStartTime = LocalDateTime.of(2024, 10, 9, 9, 30);
-        LocalDateTime newEndTime = LocalDateTime.of(2024, 10, 9, 10, 30);
-        ScheduleCommand scheduleCommand = new ScheduleCommand(Index.fromZeroBased(0), newStartTime,
-                newEndTime, "Location B");
+            ModelStubWithMeeting modelStub = new ModelStubWithMeeting(validPerson, existingMeeting);
 
-        assertThrows(CommandException.class, "Meeting times overlap", () -> scheduleCommand.execute(modelStub));
+            LocalDateTime newStartTime = LocalDateTime.of(2024, 10, 9, 9, 30);
+            LocalDateTime newEndTime = LocalDateTime.of(2024, 10, 9, 10, 30);
+            ScheduleCommand scheduleCommand = new ScheduleCommand(Index.fromZeroBased(0), newStartTime,
+                    newEndTime, "Location B");
+
+            assertThrows(CommandException.class, "Meeting times overlap", () -> scheduleCommand.execute(modelStub));
+        } catch (TimeClashException | CommandException e) {
+            // This should not happen in the setup phase
+            throw new RuntimeException(e);
+        }
     }
 
 
