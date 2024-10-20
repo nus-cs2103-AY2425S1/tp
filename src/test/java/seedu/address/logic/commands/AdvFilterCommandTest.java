@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY_CLONE;
@@ -24,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 public class AdvFilterCommandTest {
     private Model model;
@@ -81,8 +83,64 @@ public class AdvFilterCommandTest {
 
     @Test
     public void toStringMethod() {
-        AdvFilterCommand AdvFilterCommand = new AdvFilterCommand("priority", "=", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
         String expected = AdvFilterCommand.class.getCanonicalName() + "{tagName=priority, operator==, tagValue=high}";
-        assertEquals(expected, AdvFilterCommand.toString());
+        assertEquals(expected, command.toString());
     }
+
+    @Test
+    public void compareTest() {
+        Tag numericTag = new Tag("priority", "5");
+        Tag stringTag = new Tag("priority", "high");
+        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
+
+        // Test for '='
+        assertTrue(command.compare("=", stringTag, "high"));
+        assertFalse(command.compare("=", stringTag, "low"));
+
+        // Test for '!='
+        assertTrue(command.compare("!=", stringTag, "low"));
+
+        // Test for '>'
+        assertTrue(command.compare(">", numericTag, "4"));
+        assertFalse(command.compare(">", numericTag, "6"));
+
+        // Test for '<'
+        assertTrue(command.compare("<", numericTag, "6"));
+        assertFalse(command.compare("<", numericTag, "4"));
+
+        // Test for '>='
+        assertTrue(command.compare(">=", numericTag, "5"));
+        assertFalse(command.compare(">=", numericTag, "6"));
+
+        // Test for '<='
+        assertTrue(command.compare("<=", numericTag, "5"));
+        assertFalse(command.compare("<=", numericTag, "4"));
+    }
+
+    @Test
+    public void tryParseDoubleTest() {
+        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "high");
+
+        // Valid double
+        assertEquals(5.0, command.tryParseDouble("5"));
+        // assertNull is used because tryParseDouble either returns a Double or null
+        // Invalid double
+        assertNull(command.tryParseDouble("high"));
+
+        // Edge case: Empty string
+        assertNull(command.tryParseDouble(""));
+    }
+
+    @Test
+    public void execute_noContactsFound() {
+        AdvFilterCommand command = new AdvFilterCommand("priority", "=", "nonexistent");
+        CommandResult result = command.execute(model);
+
+        assertEquals(AdvFilterCommand.MESSAGE_NO_CONTACT_FOUND, result.getFeedbackToUser());
+        assertTrue(model.getFilteredPersonList().isEmpty());
+    }
+
+
+
 }
