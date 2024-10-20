@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Email;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.Phone;
 
 /**
  * Represents an abstract command to add a {@link Client} to the address book.
@@ -19,9 +22,20 @@ public abstract class AddClientCommand extends Command {
      * A string describing the expected parameters for adding a client.
      * Includes name, phone number, and email.
      */
-    public static final String CLIENT_PARAMETERS = PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL";
+    public static final String CLIENT_PARAMETERS = String.format(
+            "%sNAME %sPHONE %sEMAIL",
+            PREFIX_NAME,
+            PREFIX_PHONE,
+            PREFIX_EMAIL
+    );
+
+    public static final String CLIENT_RESTRICTIONS = String.format(
+            "Restrictions: %s\n%s\n%s",
+            Name.MESSAGE_CONSTRAINTS,
+            Phone.MESSAGE_CONSTRAINTS,
+            Email.MESSAGE_CONSTRAINTS
+    );
+
 
     /** The client to be added to the address book. */
     protected final Client toAdd;
