@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.PropertyTag;
+import seedu.address.model.tag.PropertyTagType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,9 +27,43 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Remark remark;
+    private final UniqueListingList listings;
 
     /**
      * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email,
+                  Address address, Set<Tag> tags, Remark remark,
+                  UniqueListingList listings) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        // Since listings exist, we will sync the Property Tags with the current listings
+        // We first remove any existing property tags
+        for (Tag tag: tags) {
+            if (PropertyTagType.isValidPropertyTag(tag.tagName)) {
+                this.tags.remove(tag);
+            }
+        }
+
+        // We then add in the current property tags
+        for (Listing listing: listings) {
+            Tag currentTag = new PropertyTag(listing.propertyType.toString().toLowerCase());
+            if (!this.tags.contains(currentTag)) {
+                this.tags.add(currentTag);
+            }
+        }
+
+        this.remark = remark;
+        this.listings = listings;
+    }
+
+    /**
+     * A constructor for creating Person objects without a listing
+     * will create an empty UniqueListingList internally
      */
     public Person(Name name, Phone phone, Email email,
                   Address address, Set<Tag> tags, Remark remark) {
@@ -38,6 +74,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.remark = remark;
+        this.listings = new UniqueListingList();
     }
 
     public Name getName() {
@@ -58,6 +95,10 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
+    }
+
+    public UniqueListingList getListings() {
+        return listings;
     }
 
     /**
@@ -113,6 +154,7 @@ public class Person {
 
     @Override
     public String toString() {
+
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("phone", phone)
@@ -120,6 +162,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("remark", remark)
+                .add("listings", listings)
                 .toString();
     }
 

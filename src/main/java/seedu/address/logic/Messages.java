@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniqueListingList;
 
 /**
  * Container for user visible messages.
@@ -49,6 +50,7 @@ public class Messages {
         }
 
         appendIfNotEmpty(builder, person.getRemark().toString(), "; Remark: ");
+        appendIfListNotEmpty(builder, person.getListings(), "; Listings: ");
 
         return builder.toString().trim();
     }
@@ -57,6 +59,13 @@ public class Messages {
         if (value != null && !value.isEmpty()) {
             builder.append(prefix).append(value);
         }
+    }
+
+    private static <T> void appendIfListNotEmpty(StringBuilder builder, UniqueListingList theList, String prefix) {
+        if (!theList.isEmpty()) {
+            builder.append(prefix).append(theList.toString());
+        }
+
     }
 
 }

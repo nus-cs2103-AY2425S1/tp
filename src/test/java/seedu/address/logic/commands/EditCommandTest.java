@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -39,8 +40,12 @@ public class EditCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         // The issue here is that since a default person does not specify the remark field, it will be left untouched
         // Hence, we need to add the remark field of the "TypicalPersons" (index=0) to show that it is unedited
+        // Edit 19/10/2024: Same goes for tags and listings
 
-        Person editedPerson = new PersonBuilder().withRemark("remark for this person :D").build();
+        Person editedPerson = new PersonBuilder()
+                .withTags("seller") // first tag of alice needs to be present
+                .withRemark(ALICE.getRemark().toString())
+                .withListings(ALICE.getListings()).build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 

@@ -9,6 +9,7 @@ import seedu.address.commons.util.StringUtil;
  */
 public class PropertyTag extends Tag {
 
+    public static final String ALLOWED_PROPERTY_TAGS = "HDB, Condo, Landed";
     private final PropertyTagType propertyTagType;
 
     /**
@@ -19,7 +20,7 @@ public class PropertyTag extends Tag {
     public PropertyTag(String tagName) {
         super(StringUtil.capitaliseFirstLetter(tagName));
         checkArgument(PropertyTagType.isValidPropertyTag(tagName),
-                "Invalid PropertyTag. Allowed: HDB, Condo, Landed");
+                "Invalid PropertyTag. Allowed: " + ALLOWED_PROPERTY_TAGS);
         this.propertyTagType = PropertyTagType.fromString(tagName);
     }
 
