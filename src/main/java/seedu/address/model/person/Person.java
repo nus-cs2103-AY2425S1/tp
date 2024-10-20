@@ -115,6 +115,9 @@ public class Person {
     public boolean hasName(Name name) {
         return this.name.equals(name);
     }
+    public boolean hasNric(Nric nric) {
+        return this.nric.equals(nric);
+    }
     public void addCaregiver(Nric caregiver) {
         caregivers.add(caregiver);
     }
