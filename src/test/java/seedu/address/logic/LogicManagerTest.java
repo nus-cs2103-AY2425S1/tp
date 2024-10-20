@@ -96,6 +96,7 @@ public class LogicManagerTest {
         Model temp = model;
 
         // set up Logic object with personToDisplay set as AMY
+        model.addPerson(AMY);
         model = new ModelManager(model.getAddressBook(), model.getUserPrefs(), AMY);
         setUp();
 

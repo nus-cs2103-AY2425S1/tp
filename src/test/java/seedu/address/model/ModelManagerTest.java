@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -28,6 +27,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(null, modelManager.getPersonToDisplay());
     }
 
     @Test
@@ -96,26 +96,37 @@ public class ModelManagerTest {
 
     @Test
     public void setPersonToDisplay_validPerson_success() {
+        modelManager.addPerson(ALICE);
         modelManager.setPersonToDisplay(ALICE);
 
         // same person -> returns true
-        assertEquals(modelManager,
-                new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE));
+        assertEquals(new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE), modelManager);
 
         // different person -> returns false
-        assertNotEquals(modelManager,
-                new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), BOB));
+        assertNotEquals(new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), BENSON),
+                modelManager);
+    }
+
+    @Test
+    public void setPersonToDisplay_invalidPerson_nothingHappens() {
+        modelManager.addPerson(ALICE);
+        modelManager.setPersonToDisplay(ALICE);
+        modelManager.setPersonToDisplay(BENSON);
+
+        assertEquals(new ModelManager(modelManager.getAddressBook(),
+                modelManager.getUserPrefs(),
+                ALICE), modelManager);
     }
 
     @Test
     public void getPersonToDisplay_personToDisplayEqualToPersonSet_returnsTrue() {
+        modelManager.addPerson(ALICE);
         modelManager = new ModelManager(modelManager.getAddressBook(), modelManager.getUserPrefs(), ALICE);
-
         // same person -> returns true
         assertEquals(ALICE, modelManager.getPersonToDisplay());
 
         // different person -> returns false
-        assertNotEquals(BOB, modelManager.getPersonToDisplay());
+        assertNotEquals(BENSON, modelManager.getPersonToDisplay());
     }
 
     @Test

@@ -48,7 +48,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.personToDisplay = personToDisplay;
+        setPersonToDisplay(personToDisplay);
     }
 
     public ModelManager() {
@@ -143,11 +143,13 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Person To Display =========================================================================
     @Override
     public void setPersonToDisplay(Person personToDisplay) {
         requireNonNull(personToDisplay);
-
-        this.personToDisplay = personToDisplay;
+        if (filteredPersons.contains(personToDisplay)) {
+            this.personToDisplay = personToDisplay;
+        }
     }
 
     @Override
