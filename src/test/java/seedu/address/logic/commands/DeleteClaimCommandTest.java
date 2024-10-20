@@ -45,6 +45,7 @@ class DeleteClaimCommandTest {
         String claimsString = clientToEdit.getInsurancePlansManager().convertClaimsToJson();
         InsurancePlansManager updatedInsurancePlanManager = new InsurancePlansManager(insurancePlanString);
         updatedInsurancePlanManager.addAllClaimsFromJson(claimsString);
+        updatedInsurancePlanManager.deleteClaimFromInsurancePlan(insurancePlan, claim);
 
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
                 clientToEdit.getAddress(), updatedInsurancePlanManager, clientToEdit.getTags());
