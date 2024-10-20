@@ -340,8 +340,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User finds a student.
-2. EduContacts displays the student.
+1. User provides details of the student.
+2. EduContacts displays the student and their details.
 
    Use case ends.
 
@@ -649,6 +649,11 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix: Effort**
 
+_{to work on in the future}_
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Planned Enhancements**
+
+_{to work on in the future}_
+
