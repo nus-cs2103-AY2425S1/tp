@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +21,8 @@ import tahub.contacts.model.person.MatriculationNumber;
 import tahub.contacts.model.person.Name;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.person.Phone;
+
+
 
 class StudentCourseAssociationTest {
     @Test
@@ -139,20 +143,13 @@ class StudentCourseAssociationTest {
 
     @Test
     void testAddGrade() {
-        Person student = new Person(
-                new MatriculationNumber("A1234556I"),
-                new Name("Prof Ian Tsang"),
-                new Phone("12345678"),
-                new Email("iantsang@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course("IS2102", "Financial Management");
+        Person student = createTestPerson("A1234567I", "Prof Ian Tsang");
+        Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T7", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
         sca.addGrade("Midterm", 85.0);
-        assertEquals(85.0, sca.getGrades().getGrade("Midterm"));
+        assertEquals(85.0, sca.getGrade("Midterm"), 0.001);
     }
 
     @Test
@@ -168,28 +165,61 @@ class StudentCourseAssociationTest {
         Course course = new Course("IS2102", "Financial Management");
         Tutorial tutorial = new Tutorial("T4", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+    void testSetAssessmentWeight() {
+        Person student = createTestPerson("A1234567J", "Prof John Doe");
+        Course course = new Course("IS1131", "Financial Management");
+        Tutorial tutorial = new Tutorial("T4", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
         sca.addGrade("Midterm", 85.0);
-        assertEquals("B", sca.getLetterGrade());
+        sca.addGrade("Final", 95.0);
+        sca.setAssessmentWeight("Midterm", 0.4);
+        sca.setAssessmentWeight("Final", 0.6);
+
+        assertEquals(91.0, sca.getOverallScore(), 0.001);
     }
 
     @Test
     void testGetOverallScore() {
-        Person student = new Person(
-                new MatriculationNumber("A1234556K"),
-                new Name("Prof Kelly Tan"),
-                new Phone("12345678"),
-                new Email("kellytan@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course("IS2102", "Financial Management");
+        Person student = createTestPerson("A1234567K", "Prof Kelly Tan");
+        Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T8", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
         sca.addGrade("Midterm", 85.0);
         sca.addGrade("Final", 95.0);
-        assertEquals(90.0, sca.getOverallScore(), 0.001);
+        sca.setAssessmentWeight("Midterm", 0.4);
+        sca.setAssessmentWeight("Final", 0.6);
+
+        assertEquals(91.0, sca.getOverallScore(), 0.001);
+    }
+
+    @Test
+    void testGetAllGrades() {
+        Person student = createTestPerson("A1234567L", "Prof Lim Ah Seng");
+        Course course = new Course("IS1131", "Financial Management");
+        Tutorial tutorial = new Tutorial("T9", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+
+        sca.addGrade("Midterm", 85.0);
+        sca.addGrade("Final", 95.0);
+
+        Map<String, Double> allGrades = sca.getAllGrades();
+        assertEquals(2, allGrades.size());
+        assertTrue(allGrades.containsKey("Midterm"));
+        assertTrue(allGrades.containsKey("Final"));
+        assertEquals(85.0, allGrades.get("Midterm"), 0.001);
+        assertEquals(95.0, allGrades.get("Final"), 0.001);
+    }
+
+    private Person createTestPerson(String matriculationNumber, String name) {
+        return new Person(
+                new MatriculationNumber(matriculationNumber),
+                new Name(name),
+                new Phone("12345678"),
+                new Email(name.toLowerCase().replace(" ", "") + "@example.com"),
+                new Address("Computing 1, 13 Computing Dr, 117417"),
+                new HashSet<>()
+        );
     }
 }
-
