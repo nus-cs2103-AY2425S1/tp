@@ -4,10 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
@@ -17,7 +13,7 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void equals() {
         String firstPredicateKeyword = "first";
-        String secondPredicateKeyword= "second";
+        String secondPredicateKeyword = "second";
 
         NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeyword);
         NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeyword);
@@ -72,7 +68,7 @@ public class NameContainsKeywordsPredicateTest {
 
     @Test
     public void toStringMethod() {
-        String keywords ="keyword1 keyword2";
+        String keywords = "keyword1 keyword2";
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
 
         String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
