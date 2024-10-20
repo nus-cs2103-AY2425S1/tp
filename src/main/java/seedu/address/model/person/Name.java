@@ -38,6 +38,12 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns value of name.
+     */
+    public String getDisplayableName() {
+        return fullName;
+    }
 
     @Override
     public String toString() {

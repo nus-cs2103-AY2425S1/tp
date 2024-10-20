@@ -12,7 +12,7 @@ public class Phone {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+    public static final String VALIDATION_REGEX = "\\d{3,}|^$";
     public final String value;
 
     /**
@@ -21,24 +21,9 @@ public class Phone {
      * @param phone A valid phone number.
      */
     public Phone(String phone) {
-        this(phone, true);
-    }
-
-    /**
-     * Constructs a {@code Phone}.
-     *
-     * @param phone A valid phone number.
-     * @param isDeclared Boolean variable representing if phone number is declared
-     */
-    public Phone(String phone, Boolean isDeclared) {
-        if (isDeclared) {
-            requireNonNull(phone);
-            checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
-            value = phone;
-        } else {
-            requireNonNull(phone);
-            value = "";
-        }
+        requireNonNull(phone);
+        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        value = phone;
     }
 
     /**
@@ -47,6 +32,15 @@ public class Phone {
     public static boolean isValidPhone(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+
+    /**
+     * Returns value if nonempty, otherwise returns "Phone unspecified".
+     */
+    public String getDisplayablePhone() {
+        return value.isEmpty() ? "Phone unspecified" : value;
+    }
+
 
     @Override
     public String toString() {

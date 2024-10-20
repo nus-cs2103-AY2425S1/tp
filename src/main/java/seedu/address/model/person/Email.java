@@ -29,7 +29,7 @@ public class Email {
             + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
-    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    public static final String VALIDATION_REGEX = "(" + LOCAL_PART_REGEX + "@" + DOMAIN_REGEX + ")|^$";
 
     public final String value;
 
@@ -39,24 +39,9 @@ public class Email {
      * @param email A valid email address.
      */
     public Email(String email) {
-        this(email, true);
-    }
-
-    /**
-     * Constructs a {@code Email}.
-     *
-     * @param email A valid email address.
-     * @param isDeclared Boolean variable representing if email address is declared
-     */
-    public Email(String email, Boolean isDeclared) {
-        if (isDeclared) {
-            requireNonNull(email);
-            checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
-            value = email;
-        } else {
-            requireNonNull(email);
-            value = "";
-        }
+        requireNonNull(email);
+        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        value = email;
     }
 
     /**
@@ -64,6 +49,13 @@ public class Email {
      */
     public static boolean isValidEmail(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns value if nonempty, otherwise returns "Email unspecified".
+     */
+    public String getDisplayableEmail() {
+        return value.isEmpty() ? "Email unspecified" : value;
     }
 
     @Override
