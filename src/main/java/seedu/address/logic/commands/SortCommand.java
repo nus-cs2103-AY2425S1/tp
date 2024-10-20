@@ -20,6 +20,10 @@ public class SortCommand extends Command {
         // Call the model's sortPersonList method with a comparator that sorts by name
         model.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
 
+        assert model.getFilteredPersonList().stream()
+                .sorted(Comparator.comparing(person -> person.getName().toString().toUpperCase()))
+                .toList().equals(model.getFilteredPersonList()) : "List should be sorted by name";
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
