@@ -3,10 +3,7 @@ package tahub.contacts.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.nio.file.Path;
-
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,9 +15,6 @@ import tahub.contacts.model.course.UniqueCourseList;
 public class JsonSerializableCourseListTest {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
-
-    @TempDir
-    public Path testFolder;
 
     @Test
     public void toModelType_typicalCourseList_success() throws Exception {
