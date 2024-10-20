@@ -31,7 +31,7 @@ public class MeetUpListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code PersonCard}.
      */
     class MeetUpListViewCell extends ListCell<MeetUp> {
         @Override

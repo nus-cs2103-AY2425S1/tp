@@ -2,8 +2,8 @@ package seedu.address.logic.commands.meetup;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.testutil.MeetUpBuilder;
+import seedu.address.testutil.meetup.MeetUpBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

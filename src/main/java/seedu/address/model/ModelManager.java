@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final MeetUpList meetUpList;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Buyer> filteredBuyers;
     private final FilteredList<MeetUp> filteredMeetUps;
 
     /**
@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.meetUpList = new MeetUpList(meetUpList);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredBuyers = new FilteredList<>(this.addressBook.getBuyerList());
         filteredMeetUps = new FilteredList<>(this.meetUpList.getMeetUpList());
 
     }
@@ -63,7 +63,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && filteredBuyers.equals(otherModelManager.filteredBuyers)
                 && filteredMeetUps.equals(otherModelManager.filteredMeetUps);
     }
 
@@ -124,44 +124,44 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.hasBuyer(buyer);
     }
 
     @Override
-    public void deletePerson(Person target) {
+    public void deletePerson(Buyer target) {
         addressBook.removePerson(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addBuyer(Buyer buyer) {
+        addressBook.addBuyer(buyer);
+        updateFilteredBuyerList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setBuyer(Buyer target, Buyer editedBuyer) {
+        requireAllNonNull(target, editedBuyer);
 
-        addressBook.setPerson(target, editedPerson);
+        addressBook.setBuyer(target, editedBuyer);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Buyer List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Buyer> getFilteredBuyerList() {
+        return filteredBuyers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredBuyers.setPredicate(predicate);
     }
 
     //=========== MeetUp List ================================================================================
@@ -200,7 +200,7 @@ public class ModelManager implements Model {
     //=========== Filtered MeetUp List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override

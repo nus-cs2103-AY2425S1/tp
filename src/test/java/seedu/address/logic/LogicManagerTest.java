@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PERSON_TYPE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalBuyers.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -29,12 +29,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonMeetUpListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.BuyerBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -73,7 +73,7 @@ public class LogicManagerTest {
     public void execute_validCommand_success() throws Exception {
         String viewCommand = ViewCommand.COMMAND_WORD;
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                model.getFilteredPersonList().size());
+                model.getFilteredBuyerList().size());
         assertCommandSuccess(viewCommand, expectedMessage, model);
     }
 
@@ -90,8 +90,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredBuyerList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredBuyerList().remove(0));
     }
 
     /**
@@ -179,9 +179,9 @@ public class LogicManagerTest {
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + PERSON_TYPE_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Buyer expectedBuyer = new BuyerBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addPerson(expectedPerson);
+        expectedModel.addBuyer(expectedBuyer);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }

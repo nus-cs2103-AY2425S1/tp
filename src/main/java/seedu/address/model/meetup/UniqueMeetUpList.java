@@ -13,19 +13,19 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
 import seedu.address.model.meetup.exceptions.DuplicateMeetUpException;
 import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
-import seedu.address.model.person.Person;
+import seedu.address.model.buyer.Buyer;
 
 /**
  * TODO JAVADOC + ENTIRE DOCUMENTATION
  * A list of meet ups that enforces uniqueness between its elements and does not allow nulls.
- * A meet ups is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating
- * of persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A meet ups is considered unique by comparing using {@code Buyer#isSameBuyer(Buyer)}. As such, adding and updating
+ * of persons uses Buyer#isSameBuyer(Buyer) for equality so as to ensure that the buyer being added or updated is
+ * unique in terms of identity in the UniqueBuyerList. However, the removal of a buyer uses Buyer#equals(Object) so
+ * as to ensure that the buyer with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Buyer#isSameBuyer(Buyer)
  */
 public class UniqueMeetUpList implements Iterable<MeetUp> {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
@@ -75,8 +75,8 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent buyer from the list.
+     * The buyer must exist in the list.
      */
     public void remove(MeetUp toRemove) {
         requireNonNull(toRemove);
@@ -126,8 +126,8 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
             return false;
         }
 
-        UniqueMeetUpList otherUniquePersonList = (UniqueMeetUpList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        UniqueMeetUpList otherUniqueBuyerList = (UniqueMeetUpList) other;
+        return internalList.equals(otherUniqueBuyerList.internalList);
     }
 
     @Override

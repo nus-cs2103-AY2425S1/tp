@@ -45,7 +45,7 @@ class JsonAdaptedMeetUp {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code MeetUp} object.
+     * Converts this Jackson-friendly adapted buyer object into the model's {@code MeetUp} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted meet up.
      */

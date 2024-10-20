@@ -48,7 +48,7 @@
 
         <!-- Main container using StackPane to overlay personListPane and meetUpListPane -->
         <StackPane fx:id="listPane" VBox.vgrow="ALWAYS">
-            <!-- Person List Container -->
+            <!-- Buyer List Container -->
             <VBox fx:id="personListPane" styleClass="pane-with-border" minWidth="340" prefWidth="340">
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10" />

@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,8 +26,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.testutil.EditMeetUpDescriptorBuilder;
-import seedu.address.testutil.MeetUpBuilder;
+import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
+import seedu.address.testutil.meetup.MeetUpBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.

@@ -17,7 +17,12 @@ import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.meetup.ViewCommand;
+import seedu.address.logic.parser.buyer.FindCommandParser;
+import seedu.address.logic.parser.buyer.ViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.meetup.AddCommandParser;
+import seedu.address.logic.parser.meetup.DeleteCommandParser;
+import seedu.address.logic.parser.meetup.EditCommandParser;
 
 /**
  * Parses user input.
@@ -54,22 +59,22 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case seedu.address.logic.commands.buyer.AddCommand.COMMAND_WORD:
-            return new AddPersonCommandParser().parse(arguments);
+            return new seedu.address.logic.parser.buyer.AddCommandParser().parse(arguments);
 
         case seedu.address.logic.commands.buyer.EditCommand.COMMAND_WORD:
-            return new EditPersonCommandParser().parse(arguments);
+            return new seedu.address.logic.parser.buyer.EditCommandParser().parse(arguments);
 
         case seedu.address.logic.commands.buyer.DeleteCommand.COMMAND_WORD:
-            return new DeletePersonCommandParser().parse(arguments);
+            return new seedu.address.logic.parser.buyer.DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindPersonCommandParser().parse(arguments);
+            return new FindCommandParser().parse(arguments);
 
         case seedu.address.logic.commands.buyer.ViewCommand.COMMAND_WORD:
-            return new ViewPersonCommandParser().parse(arguments);
+            return new ViewCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -78,13 +83,13 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case AddCommand.COMMAND_WORD:
-            return new AddMeetUpCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
-            return new EditMeetUpCommandParser().parse(arguments);
+            return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            return new DeleteMeetUpCommandParser().parse(arguments);
+            return new DeleteCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();

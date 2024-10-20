@@ -7,7 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonFulfilsPredicate;
+import seedu.address.model.buyer.BuyerFulfilsPredicate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -18,24 +18,24 @@ public class ViewCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Viewing all persons satisfying client type";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose person types match the keyword"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose buyer types match the keyword"
             + "(buyer/seller) and displays them as a list with index numbers.\n"
             + "If there are no keywords specified, all persons are listed.\n"
             + "Parameters: [buyer/seller](optional)\n"
             + "Example: " + COMMAND_WORD + " buyer";
 
-    private final PersonFulfilsPredicate predicate;
+    private final BuyerFulfilsPredicate predicate;
 
-    public ViewCommand(PersonFulfilsPredicate predicate) {
+    public ViewCommand(BuyerFulfilsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredBuyerList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size())
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredBuyerList().size())
         );
     }
 

@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedMeetUp.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMeetUps.FIRST_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.FIRST_MEETUP;
 
 import org.junit.jupiter.api.Test;
 

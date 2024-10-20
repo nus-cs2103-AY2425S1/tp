@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalBuyers.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.BuyerBuilder;
 
 public class AddCommandTest {
 
@@ -37,21 +37,21 @@ public class AddCommandTest {
 
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
+        Buyer validBuyer = new BuyerBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validBuyer).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validBuyer)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validBuyer), modelStub.buyersAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Buyer validBuyer = new BuyerBuilder().build();
+        AddCommand addCommand = new AddCommand(validBuyer);
+        ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
         assertThrows(CommandException.class,
                 AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
@@ -59,8 +59,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Buyer alice = new BuyerBuilder().withName("Alice").build();
+        Buyer bob = new BuyerBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 
@@ -77,7 +77,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different buyer -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -123,7 +123,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addBuyer(Buyer buyer) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -138,27 +138,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasBuyer(Buyer buyer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deletePerson(Buyer target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setBuyer(Buyer target, Buyer editedBuyer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Buyer> getFilteredBuyerList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -216,39 +216,39 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single buyer.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithBuyer extends ModelStub {
+        private final Buyer buyer;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            this.buyer = buyer;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            return this.buyer.isSameBuyer(buyer);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the buyer being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingBuyerAdded extends ModelStub {
+        final ArrayList<Buyer> buyersAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            return buyersAdded.stream().anyMatch(buyer::isSameBuyer);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            buyersAdded.add(buyer);
         }
 
         @Override

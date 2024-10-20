@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import java.util.Collections;
 
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.PersonFulfilsPredicate;
+import seedu.address.model.buyer.BuyerFulfilsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ViewCommand.
@@ -35,26 +35,26 @@ public class ViewCommandTest {
     @Test
     public void execute_zeroKeywords_showsEverything() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        PersonFulfilsPredicate predicate = preparePredicate("");
+        BuyerFulfilsPredicate predicate = preparePredicate("");
         ViewCommand command = new ViewCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredBuyerList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidKeyword_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        PersonFulfilsPredicate predicate = preparePredicate("hello");
+        BuyerFulfilsPredicate predicate = preparePredicate("hello");
         ViewCommand command = new ViewCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        expectedModel.updateFilteredBuyerList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Collections.emptyList(), model.getFilteredBuyerList());
     }
 
     @Test
     public void equals() {
-        PersonFulfilsPredicate firstPredicate = new PersonFulfilsPredicate("");
-        PersonFulfilsPredicate secondPredicate = new PersonFulfilsPredicate("buyer");
+        BuyerFulfilsPredicate firstPredicate = new BuyerFulfilsPredicate("");
+        BuyerFulfilsPredicate secondPredicate = new BuyerFulfilsPredicate("buyer");
 
         ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
         ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
@@ -78,18 +78,18 @@ public class ViewCommandTest {
 
     @Test
     public void toStringMethod() {
-        PersonFulfilsPredicate predicate = new PersonFulfilsPredicate("buyer");
+        BuyerFulfilsPredicate predicate = new BuyerFulfilsPredicate("buyer");
         ViewCommand viewCommand = new ViewCommand(predicate);
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code PersonFulfilsPredicate}.
+     * Parses {@code userInput} into a {@code BuyerFulfilsPredicate}.
      */
-    private PersonFulfilsPredicate preparePredicate(String userInput) {
+    private BuyerFulfilsPredicate preparePredicate(String userInput) {
         String trimmedArgs = userInput.trim();
         String keyword = trimmedArgs.isEmpty() ? "" : trimmedArgs.split("\\s+")[0];
-        return new PersonFulfilsPredicate(keyword);
+        return new BuyerFulfilsPredicate(keyword);
     }
 }

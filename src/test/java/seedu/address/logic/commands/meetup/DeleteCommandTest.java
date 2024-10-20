@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showMeetUpAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.TypicalBuyers.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -90,7 +90,7 @@ public class DeleteCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different buyer -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 

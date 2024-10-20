@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMeetUps.FIRST_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.FIRST_MEETUP;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.MeetUpBuilder;
+import seedu.address.testutil.meetup.MeetUpBuilder;
 
 public class AddCommandTest {
 
@@ -78,7 +78,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addMeetUpACommand.equals(null));
 
-        // different person -> returns false
+        // different buyer -> returns false
         assertFalse(addMeetUpACommand.equals(addMeetUpBCommand));
     }
 
@@ -124,7 +124,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addBuyer(Buyer buyer) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,27 +139,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasBuyer(Buyer buyer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deletePerson(Buyer target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setBuyer(Buyer target, Buyer editedBuyer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Buyer> getFilteredBuyerList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -215,7 +215,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single buyer.
      */
     private class ModelStubWithMeetUp extends ModelStub {
         private final MeetUp meetUp;

@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Buyer}.
  */
 public class MeetUpCard extends UiPart<Region> {
 
@@ -35,7 +35,7 @@ public class MeetUpCard extends UiPart<Region> {
     private Label to;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Buyer} and index to display.
      */
     public MeetUpCard(MeetUp meetUp, int displayedIndex) {
         super(FXML);
