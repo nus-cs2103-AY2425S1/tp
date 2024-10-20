@@ -12,13 +12,13 @@ public class StudyGroupTagTest {
     }
 
     @Test
-    public void constructor_invalidTagName_throwsIllegalArgumentException() {
-        String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new StudyGroupTag(invalidTagName));
+    public void constructor_invalidStudyGroupName_throwsIllegalArgumentException() {
+        String invalidStudyGroupName = "";
+        assertThrows(IllegalArgumentException.class, () -> new StudyGroupTag(invalidStudyGroupName));
     }
 
     @Test
-    public void isValidTagName() {
+    public void isValidStudyGroupName() {
         // null tag name
         assertThrows(NullPointerException.class, () -> StudyGroupTag.isValidStudyGroupName(null));
     }

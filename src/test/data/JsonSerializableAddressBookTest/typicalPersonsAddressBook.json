@@ -1,53 +1,53 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment" : "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
     "email" : "alice@example.com",
     "gender" : "F",
     "age" : "20",
-    "detail": "detail",
-    "tags" : [ "friends" ]
+    "detail" : "To be assigned",
+    "study groups" : [ "1A" ]
   }, {
     "name" : "Benson Meier",
     "email" : "johnd@example.com",
     "gender" : "M",
     "age" : "40",
-    "detail" : "detail",
-    "tags" : [ "owesMoney", "friends" ]
+    "detail" : "Study completed",
+    "study groups" : [ "Control", "1A" ]
   }, {
     "name" : "Carl Kurz",
     "email" : "heinz@example.com",
     "gender" : "M",
     "age" : "30",
-    "detail" : "detail",
-    "tags" : [ ]
+    "detail" : "To be assigned",
+    "study groups" : [ "1A" ]
   }, {
     "name" : "Daniel Meier",
     "email" : "cornelia@example.com",
     "gender" : "M",
     "age" : "50",
-    "detail" : "detail",
-    "tags" : [ "friends" ]
+    "detail" : "To be assigned",
+    "study groups" : [ "1B" ]
   }, {
     "name" : "Elle Meyer",
     "email" : "werner@example.com",
     "gender" : "F",
     "age" : "60",
-    "detail" : "detail",
-    "tags" : [ ]
+    "detail" : "",
+    "study groups" : [ "2A" ]
   }, {
     "name" : "Fiona Kunz",
     "email" : "lydia@example.com",
     "gender" : "F",
     "age" : "35",
-    "detail" : "detail",
-    "tags" : [ ]
+    "detail" : "To follow up",
+    "study groups" : [ ]
   }, {
     "name" : "George Best",
     "email" : "anna@example.com",
     "gender" : "M",
     "age" : "36",
-    "detail" : "detail",
-    "tags" : [ ]
+    "detail" : "",
+    "study groups" : [ ]
   } ]
 }

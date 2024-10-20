@@ -18,9 +18,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@example.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_AGE = "20";
 
@@ -28,7 +26,7 @@ public class PersonBuilder {
     private Email email;
     private Gender gender;
     private Age age;
-    private Set<StudyGroupTag> studyGroups;
+    private Set<StudyGroupTag> studyGroupTags;
     private Detail detail;
 
     /**
@@ -39,7 +37,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         gender = new Gender(DEFAULT_GENDER);
         age = new Age(DEFAULT_AGE);
-        studyGroups = new HashSet<>();
+        studyGroupTags = new HashSet<>();
+        detail = new Detail("");
     }
 
     /**
@@ -50,7 +49,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         gender = personToCopy.getGender();
         age = personToCopy.getAge();
-        studyGroups = new HashSet<>(personToCopy.getStudyGroupTags());
+        studyGroupTags = new HashSet<>(personToCopy.getStudyGroupTags());
         detail = personToCopy.getDetail();
     }
 
@@ -66,8 +65,8 @@ public class PersonBuilder {
      * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
      * to the {@code Person} that we are building.
      */
-    public PersonBuilder withStudyGroups(String... studyGroups) {
-        this.studyGroups = SampleDataUtil.getStudyGroupTagSet(studyGroups);
+    public PersonBuilder withStudyGroupTags(String... studyGroups) {
+        this.studyGroupTags = SampleDataUtil.getStudyGroupTagSet(studyGroups);
         return this;
     }
 
@@ -104,7 +103,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, gender, age, studyGroups, detail);
+        return new Person(name, email, gender, age, studyGroupTags, detail);
     }
 
 }

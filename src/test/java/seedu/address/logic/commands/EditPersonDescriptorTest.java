@@ -7,7 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDY_GROUP_TAG_1A;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,7 +47,7 @@ public class EditPersonDescriptorTest {
         // different age -> returns false
 
         // different study groups -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudyGroups(VALID_TAG_HUSBAND).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 
@@ -56,6 +56,9 @@ public class EditPersonDescriptorTest {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         String expected = EditPersonDescriptor.class.getCanonicalName() + "{name="
                 + editPersonDescriptor.getName().orElse(null) + ", email="
+                + editPersonDescriptor.getName().orElse(null) + ", gender="
+                + editPersonDescriptor.getName().orElse(null) + ", age="
+                + editPersonDescriptor.getName().orElse(null) + ", detail="
                 + editPersonDescriptor.getEmail().orElse(null) + ", study groups="
                 + editPersonDescriptor.getStudyGroupTags().orElse(null) + "}";
         assertEquals(expected, editPersonDescriptor.toString());
