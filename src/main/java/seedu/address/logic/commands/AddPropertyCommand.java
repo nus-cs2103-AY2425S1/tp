@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
@@ -22,7 +24,9 @@ public class AddPropertyCommand extends Command {
             + "Parameters: "
             + PREFIX_POSTALCODE + "POSTALCODE "
             + PREFIX_UNITNUMBER + "UNIT "
-            + PREFIX_TYPE + "TYPE ";
+            + PREFIX_TYPE + "TYPE "
+            + PREFIX_ASK + "ASK "
+            + PREFIX_BID + "BID ";
 
     public static final String MESSAGE_SUCCESS = "New property added: %1$s";
     public static final String MESSAGE_DUPLICATE_PROPERTY = "This property already exists in the address book";

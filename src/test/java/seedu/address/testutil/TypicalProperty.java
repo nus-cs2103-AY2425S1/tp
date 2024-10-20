@@ -12,11 +12,11 @@ import seedu.address.model.property.Property;
  */
 public class TypicalProperty {
     public static final Property ADMIRALTY = new PropertyBuilder().withUnit("02-22").withPostalCode("654321")
-            .withType("CONDO").build();
+            .withType("CONDO").withAsk("50000").withBid("10000").build();
     public static final Property BEDOK = new PropertyBuilder().withUnit("11-12").withPostalCode("321456")
-            .withType("HDB").build();
+            .withType("HDB").withAsk("60000").withBid("20000").build();
     public static final Property CLEMENTI = new PropertyBuilder().withUnit("00-00").withPostalCode("321499")
-            .withType("LANDED").build();
+            .withType("LANDED").withAsk("70000").withBid("30000").build();
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.

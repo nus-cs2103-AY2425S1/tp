@@ -14,6 +14,8 @@ import seedu.address.model.client.Seller;
 import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingDate;
 import seedu.address.model.meeting.MeetingTitle;
+import seedu.address.model.property.Ask;
+import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Type;
@@ -75,13 +77,14 @@ class MessagesTest {
     @Test
     void formatProperty_success() {
         // Arrange
-        Property property = new Property(new PostalCode("123456"), new Unit("12-75"), new Type("CONDO"));
+        Property property = new Property(new PostalCode("123456"), new Unit("12-75"), new Type("CONDO"),
+                new Ask("50000"), new Bid("60000"));
 
         // Act
         String result = Messages.format(property);
 
         // Assert
-        String expected = "PostalCode: 123456; Unit: 12-75; Type: CONDO";
+        String expected = "PostalCode: 123456; Unit: 12-75; Type: CONDO; Ask: 50000; Bid: 60000";
         assertEquals(expected, result);
     }
 
