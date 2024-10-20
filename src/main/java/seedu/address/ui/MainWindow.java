@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private BuyerListPanel buyerListPanel;
     private MeetUpListPanel meetUpListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane buyerListPanelPlaceholder;
 
     @FXML
     private StackPane meetUpListPanelPlaceholder;
@@ -56,7 +56,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private VBox personListPane;
+    private VBox buyerListPane;
 
     @FXML
     private VBox meetUpListPane;
@@ -121,10 +121,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        personListPanel.getRoot().setVisible(true);
-        personListPane.setVisible(true);
+        buyerListPanel = new BuyerListPanel(logic.getFilteredBuyerList());
+        buyerListPanelPlaceholder.getChildren().add(buyerListPanel.getRoot());
+        buyerListPanel.getRoot().setVisible(true);
+        buyerListPane.setVisible(true);
 
         meetUpListPanel = new MeetUpListPanel(logic.getFilteredMeetUpList());
         meetUpListPanelPlaceholder.getChildren().add(meetUpListPanel.getRoot());
@@ -183,23 +183,23 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleAddressBook() {
-        personListPanel.getRoot().setVisible(true);
+        buyerListPanel.getRoot().setVisible(true);
         meetUpListPanel.getRoot().setVisible(false);
         meetUpListPane.setVisible(false);
-        personListPane.setVisible(true);
+        buyerListPane.setVisible(true);
     }
 
     @FXML
     private void handleMeetUpList() {
-        personListPanel.getRoot().setVisible(false);
+        buyerListPanel.getRoot().setVisible(false);
         meetUpListPanel.getRoot().setVisible(true);
         meetUpListPane.setVisible(true);
-        personListPane.setVisible(false);
+        buyerListPane.setVisible(false);
         logger.info(meetUpListPanel.getRoot().toString());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public BuyerListPanel getBuyerListPanel() {
+        return buyerListPanel;
     }
 
     public MeetUpListPanel getMeetUpListPanel() {
