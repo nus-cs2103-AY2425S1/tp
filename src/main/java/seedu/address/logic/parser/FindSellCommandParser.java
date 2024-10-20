@@ -19,6 +19,7 @@ public class FindSellCommandParser implements Parser<FindSellCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindSellCommand parse(String args) throws ParseException {
+        assert args != null;
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(

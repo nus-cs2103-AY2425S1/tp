@@ -23,22 +23,15 @@ public class BuyPropertyContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        // Returns true if any of the keywords match any of the buying properties fields
-        for (String keyword : keywords) {
-            for (Property property : person.getListOfBuyingProperties()) {
-                if (StringUtil.containsNumericWithOptionalHyphen(property.toString(), keyword)
-                    // check if keyword matches housing type
-                    || property.getClass().getSimpleName().toUpperCase().contains(keyword.toUpperCase())) {
-                    return true;
-                }
-                if (property.getTags().stream()
-                        .anyMatch(tag ->
-                                tag.toString().contains(keyword))) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return person.getListOfBuyingProperties().stream().anyMatch(property ->
+            keywords.stream().anyMatch(keyword ->
+                StringUtil.containsNumericWithOptionalHyphen(property.toString(), keyword)
+                // returns true if keyword is housing type
+                || property.getClass().getSimpleName().toUpperCase().contains(keyword.toUpperCase())
+                // returns true if keyword is in any of the property tags
+                || property.getTags().stream().anyMatch(tag -> tag.toString().contains(keyword))
+            )
+        );
     }
 
     @Override
