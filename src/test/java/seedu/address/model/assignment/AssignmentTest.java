@@ -19,7 +19,7 @@ public class AssignmentTest {
         assertTrue(ALICE_ALPHA.isSameAssignment(ALICE_ALPHA));
 
         // null -> returns false
-        assertFalse(ALICE_ALPHA.isSameAssignment(null));
+        assertFalse(ALICE_ALPHA.isSameAssignment((Assignment) null));
 
         // assignmentId differs, all other attributes same -> returns true
         Assignment editedAlice = new AssignmentBuilder(ALICE_ALPHA).withAssignmentId("3").build();

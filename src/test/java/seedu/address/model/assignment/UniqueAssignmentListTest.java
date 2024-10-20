@@ -25,7 +25,7 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void contains_nullAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.contains(null));
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.contains((Assignment) null));
     }
 
     @Test
@@ -101,7 +101,7 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void remove_nullAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.remove(null));
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.remove((Assignment) null));
     }
 
     @Test

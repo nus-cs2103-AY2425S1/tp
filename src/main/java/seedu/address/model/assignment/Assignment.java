@@ -57,6 +57,33 @@ public class Assignment {
     }
 
     /**
+     * Returns true if both {@code ProjectId#equals(ProjectId)} and
+     * {@code EmployeeId#equals(EmployeeId)} returns true.
+     * This defines a weaker notion of equality between two assignments.
+     */
+    public boolean isSameAssignment(ProjectId projectId, EmployeeId employeeId) {
+        if (projectId == null || employeeId == null) {
+            return false;
+        }
+
+        boolean isSameProject = projectId.equals(this.projectId);
+        boolean isSamePerson = employeeId.equals(this.employeeId);
+        return isSamePerson && isSameProject;
+    }
+
+    /**
+     * Returns true if {@code assignmentId#equals(assignmentId)}.
+     * This defines a weaker notion of equality between two assignments.
+     */
+    public boolean isSameAssignment(AssignmentId assignmentId) {
+        if (assignmentId == null) {
+            return false;
+        }
+
+        return this.assignmentId.equals(assignmentId);
+    }
+
+    /**
      * Returns true if both assignments have the same identity and data fields.
      * This defines a stronger notion of equality between two assignments.
      */
@@ -73,7 +100,7 @@ public class Assignment {
 
         Assignment otherAssignment = (Assignment) other;
         return assignmentId.equals(otherAssignment.assignmentId)
-                && projectId.equals(otherAssignment.projectId)
-                && employeeId.equals(otherAssignment.employeeId);
+                && (projectId.equals(otherAssignment.projectId)
+                && employeeId.equals(otherAssignment.employeeId));
     }
 }

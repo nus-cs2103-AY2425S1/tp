@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
@@ -209,6 +211,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an assignment with the same assignment id as {@code assignmentId}
+     * exists in the address book.
+     */
+    public boolean hasAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
+        return assignments.contains(assignmentId);
+    }
+
+    /**
+     * Returns true if an assignment with the same project id and employee id as {@code projectId} and {@code employeeId}
+     * exists in the address book.
+     */
+    public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
+        return assignments.contains(projectId, employeeId);
+    }
+
+    /**
      * Adds an assignment to the address book.
      * The assignment must not already exist in the address book.
      */
@@ -224,6 +245,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         assignments.remove(assignment);
     }
 
+    /**
+     * Removes {@code assignment} from this {@code AddressBook}.
+     * {@code assignment} must exist in the address book.
+     */
+    public void removeAssignment(AssignmentId assignmentId) { assignments.remove(assignmentId); }
+
+    /**
+     * Removes {@code assignment} from this {@code AddressBook}.
+     * {@code assignment} must exist in the address book.
+     */
+    public void removeAssignment(ProjectId ProjectId, EmployeeId EmployeeId) { assignments.remove(ProjectId, EmployeeId); }
     //// util methods
 
     @Override

@@ -1,28 +1,9 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalProjects.ALPHA;
-import static seedu.address.testutil.TypicalProjects.BETA;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import org.junit.jupiter.api.Test;
-
 import javafx.collections.ObservableList;
+import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -33,70 +14,104 @@ import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProjectBuilder;
 
-public class AssignCommandTest {
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalProjects.ALPHA;
+import static seedu.address.testutil.TypicalProjects.BETA;
+
+public class UnassignCommandTest {
 
     @Test
-    public void constructor_nullAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AssignCommand(null));
+    public void constructor_nullAssignmentId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new UnassignCommand(null));
     }
 
     @Test
-    public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingAssignmentAdded modelStub = new ModelStubAcceptingAssignmentAdded();
+    public void constructor_nullProjectIdAndEmployeeId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new UnassignCommand(null, null));
+    }
+
+    @Test
+    public void execute_unassignAssignmentWithAssignmentIdByModel_addSuccessful() throws Exception {
+        UnassignCommandTest.ModelStubAlwaysUnassign modelStub = new UnassignCommandTest.ModelStubAlwaysUnassign();
         Assignment validAssignment = new AssignmentBuilder().build();
 
-        CommandResult commandResult = new AssignCommand(validAssignment).execute(modelStub);
+        CommandResult commandResult = new UnassignCommand(validAssignment.getAssignmentId()).execute(modelStub);
 
-        assertEquals(String.format(AssignCommand.MESSAGE_SUCCESS, Messages.format(validAssignment)),
+        assertEquals(String.format(UnassignCommand.MESSAGE_SUCCESS_ASSIGNMENT_ID, validAssignment.getAssignmentId()),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validAssignment), modelStub.assignmentsAdded);
     }
 
     @Test
-    public void execute_duplicateAssignment_throwsCommandException() {
-        Assignment validAssignment = new AssignmentBuilder().build();
-        AssignCommand assignCommand = new AssignCommand(validAssignment);
-        ModelStub modelStub = new ModelStubWithAssignment(validAssignment);
+    public void execute_unassignAssignmentWithProjectIdAndEmployeeIdByModel_addSuccessful() throws Exception {
+        UnassignCommandTest.ModelStubAlwaysUnassign modelStub = new UnassignCommandTest.ModelStubAlwaysUnassign();
+        Project validProject = new ProjectBuilder().build();
+        Person validPerson = new PersonBuilder().build();
 
+        CommandResult commandResult = new UnassignCommand(validProject.getId(),
+                validPerson.getEmployeeId()).execute(modelStub);
+
+        assertEquals(String.format(UnassignCommand.MESSAGE_SUCCESS, validPerson.getEmployeeId(), validProject.getId()),
+                commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void execute_duplicateUnassignment_throwsCommandException() {
+        Assignment validAssignment = new AssignmentBuilder().build();
+        UnassignCommand unassignCommand = new UnassignCommand(validAssignment.getAssignmentId());
+        UnassignCommandTest.ModelStub modelStub = new UnassignCommandTest.ModelStubWithAssignment(validAssignment);
         assertThrows(CommandException.class,
-                AssignCommand.MESSAGE_DUPLICATE_ASSIGNMENT, () -> assignCommand.execute(modelStub));
+                UnassignCommand.MESSAGE_ASSIGNMENT_NOT_FOUND, () -> {
+                    unassignCommand.execute(modelStub);
+                    unassignCommand.execute(modelStub);
+                });
     }
 
     @Test
     public void equals() {
-        Assignment alphaAlice = new AssignmentBuilder().withProjectId(ALPHA.getId().toString())
+        Assignment alphaAlice = new AssignmentBuilder().withAssignmentId("1").withProjectId(ALPHA.getId().toString())
                 .withEmployeeId(ALICE.getEmployeeId().toString()).build();
-        Assignment betaBenson = new AssignmentBuilder().withProjectId(BETA.getId().toString())
+        Assignment betaBenson = new AssignmentBuilder().withAssignmentId("2").withProjectId(BETA.getId().toString())
                 .withEmployeeId(BENSON.getEmployeeId().toString()).build();
-        AssignCommand addAlphaAliceCommand = new AssignCommand(alphaAlice);
-        AssignCommand addBetaBensonCommand = new AssignCommand(betaBenson);
+        UnassignCommand unassignAlphaAliceCommand = new UnassignCommand(alphaAlice.getAssignmentId());
+        UnassignCommand unassignBetaBensonCommand = new UnassignCommand(betaBenson.getAssignmentId());
 
         // same object -> returns true
-        assertTrue(addAlphaAliceCommand.equals(addAlphaAliceCommand));
+        assertTrue(unassignAlphaAliceCommand.equals(unassignAlphaAliceCommand));
 
         // same values -> returns true
-        AssignCommand addAlphaAliceCommandCopy = new AssignCommand(alphaAlice);
-        assertTrue(addAlphaAliceCommand.equals(addAlphaAliceCommandCopy));
+        UnassignCommand unassignAlphaAliceCommandCopy = new UnassignCommand(alphaAlice.getAssignmentId());
+        assertTrue(unassignAlphaAliceCommand.equals(unassignAlphaAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAlphaAliceCommand.equals(1));
+        assertFalse(unassignAlphaAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAlphaAliceCommand.equals(null));
+        assertFalse(unassignAlphaAliceCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAlphaAliceCommand.equals(addBetaBensonCommand));
+        assertFalse(unassignAlphaAliceCommand.equals(unassignBetaBensonCommand));
     }
 
     @Test
     public void toStringMethod() {
-        AssignCommand assignCommand = new AssignCommand(ALICE_ALPHA);
-        String expected = AssignCommand.class.getCanonicalName() + "{assignmentId="
-                + ALICE_ALPHA.getAssignmentId().toString() + ", projectId=" + ALICE_ALPHA.getProjectId().toString()
-                + ", employeeId=" + ALICE_ALPHA.getEmployeeId().toString() + "}";
+        UnassignCommand unassignCommand = new UnassignCommand(ALICE_ALPHA.getAssignmentId());
+        String expected = UnassignCommand.class.getCanonicalName() + "{assignmentId="
+                + ALICE_ALPHA.getAssignmentId().toString() + ", projectId=null"
+                + ", employeeId=null}";
 
-        assertEquals(expected, assignCommand.toString());
+        assertEquals(expected, unassignCommand.toString());
     }
 
     /**
@@ -272,8 +287,8 @@ public class AssignCommandTest {
     /**
      * A Model stub that contains a single assignment.
      */
-    private class ModelStubWithAssignment extends ModelStub {
-        private final Assignment assignment;
+    private class ModelStubWithAssignment extends UnassignCommandTest.ModelStub {
+        private Assignment assignment;
 
         ModelStubWithAssignment(Assignment assignment) {
             requireNonNull(assignment);
@@ -281,34 +296,62 @@ public class AssignCommandTest {
         }
 
         @Override
-        public boolean hasAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            return this.assignment.isSameAssignment(assignment);
+        public boolean hasAssignment(AssignmentId assignmentId) {
+            requireNonNull(assignmentId);
+            return this.assignment != null && assignment.getAssignmentId().equals(assignmentId);
+        }
+
+        @Override
+        public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+            requireNonNull(projectId);
+            requireNonNull(employeeId);
+            return this.assignment != null
+                    && assignment.getProjectId().equals(projectId)
+                    && assignment.getEmployeeId().equals(employeeId);
+        }
+
+        @Override
+        public void deleteAssignment(AssignmentId assignmentId) {
+            requireNonNull(assignmentId);
+            this.assignment = null;
+        }
+
+        @Override
+        public void deleteAssignment(ProjectId projectId, EmployeeId employeeId) {
+            requireNonNull(projectId);
+            requireNonNull(employeeId);
+            this.assignment = null;
         }
     }
 
     /**
-     * A Model stub that always accept the assignment being added.
+     * A Model stub that always unassign assignment successfully
      */
-    private class ModelStubAcceptingAssignmentAdded extends ModelStub {
+    private class ModelStubAlwaysUnassign extends UnassignCommandTest.ModelStub {
         final ArrayList<Assignment> assignmentsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            return assignmentsAdded.stream().anyMatch(assignment::isSameAssignment);
+        public boolean hasAssignment(AssignmentId assignmentId) {
+            requireNonNull(assignmentId);
+            return true;
         }
 
         @Override
-        public void addAssignment(Assignment assignment) {
-            requireNonNull(assignment);
-            assignmentsAdded.add(assignment);
+        public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+            requireNonNull(projectId);
+            requireNonNull(employeeId);
+            return true;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public void deleteAssignment(AssignmentId assignmentId) {
+            requireNonNull(assignmentId);
+        }
+
+        @Override
+        public void deleteAssignment(ProjectId projectId, EmployeeId employeeId) {
+            requireNonNull(projectId);
+            requireNonNull(employeeId);
         }
     }
-
 }
