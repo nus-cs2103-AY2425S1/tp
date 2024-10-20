@@ -1,5 +1,7 @@
 package tahub.contacts.model.studentcourseassociation;
 
+import java.util.Map;
+
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.courseclass.CourseClass;
 import tahub.contacts.model.courseclass.recitation.Recitation;
@@ -113,22 +115,41 @@ public class StudentCourseAssociation {
     }
 
     /**
-     * Gets the letter grade for this StudentCourseAssociation.
+     * Sets the weight for a specific assessment.
      *
-     * @return the letter grade
+     * @param assessmentName the name of the assessment
+     * @param weight the weight of the assessment in the overall grade calculation
      */
-    public String getLetterGrade() {
-        String name = String.valueOf(this.student.getName());
-        return grades.getLetterGrade(name);
+    public void setAssessmentWeight(String assessmentName, double weight) {
+        grades.setAssessmentWeight(assessmentName, weight);
+    }
+
+    /**
+     * Gets the grade for a specific assessment.
+     *
+     * @param assessmentName the name of the assessment
+     * @return the grade for the assessment as a percentage, or -1.0 if not found
+     */
+    public double getGrade(String assessmentName) {
+        return grades.getGrade(assessmentName);
     }
 
     /**
      * Gets the overall score for this StudentCourseAssociation.
      *
-     * @return the overall score
+     * @return the overall score as a percentage
      */
     public double getOverallScore() {
         return grades.getOverallScore();
+    }
+
+    /**
+     * Retrieves all assessment grades.
+     *
+     * @return a Map containing all assessment names and their corresponding scores
+     */
+    public Map<String, Double> getAllGrades() {
+        return grades.getAllGrades();
     }
 
     /**
