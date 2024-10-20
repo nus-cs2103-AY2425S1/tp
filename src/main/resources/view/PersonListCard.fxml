@@ -16,7 +16,7 @@
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0" GridPane.rowIndex="0">
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
@@ -36,7 +36,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
     </VBox>
-      <VBox alignment="CENTER_LEFT" minHeight="105" spacing="10.0" GridPane.columnIndex="1">
+      <VBox alignment="CENTER_LEFT" minHeight="105" spacing="10.0"  GridPane.columnIndex="0" GridPane.rowIndex="1">
          <padding>
             <Insets bottom="5" left="15" right="5" top="5" />
          </padding>
