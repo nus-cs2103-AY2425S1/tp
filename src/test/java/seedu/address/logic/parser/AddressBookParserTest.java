@@ -6,6 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGDATE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGTITLE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
@@ -13,6 +15,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
@@ -37,6 +41,7 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.DeletePropertyCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -52,6 +57,8 @@ import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.MatchingPrice;
@@ -206,6 +213,16 @@ public class AddressBookParserTest {
         FilterClientCommand command = (FilterClientCommand) parser.parseCommand(FilterClientCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + VALID_NAME_AMY);
         assertEquals(new FilterClientCommand(new Name(VALID_NAME_AMY)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMeeting() throws Exception {
+        DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
+            DeleteMeetingCommand.COMMAND_WORD + " " + PREFIX_MEETING_TITLE
+                    + VALID_MEETINGTITLE_ADMIRALTY + " " + PREFIX_MEETING_DATE + VALID_MEETINGDATE_ADMIRALTY);
+        assertEquals(new DeleteMeetingCommand(
+                new MeetingTitle(VALID_MEETINGTITLE_ADMIRALTY), new MeetingDate(VALID_MEETINGDATE_ADMIRALTY)
+        ), command);
     }
 
     @Test

@@ -9,6 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -22,16 +23,19 @@ public class StorageManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
     private PropertyBookStorage propertyBookStorage;
     private ClientBookStorage clientBookStorage;
+    private MeetingBookStorage meetingBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          PropertyBookStorage propertyBookStorage, ClientBookStorage clientBookStorage) {
+                          PropertyBookStorage propertyBookStorage, ClientBookStorage clientBookStorage,
+                          MeetingBookStorage meetingBookStorage) {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.propertyBookStorage = propertyBookStorage;
         this.clientBookStorage = clientBookStorage;
+        this.meetingBookStorage = meetingBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -135,4 +139,32 @@ public class StorageManager implements Storage {
         clientBookStorage.saveClientBook(clientBook, filePath);
     }
 
+    // ================ MeetingBook methods ==============================
+
+    @Override
+    public Path getMeetingBookFilePath() {
+        return meetingBookStorage.getMeetingBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyMeetingBook> readMeetingBook() throws DataLoadingException {
+        return readMeetingBook(meetingBookStorage.getMeetingBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyMeetingBook> readMeetingBook(Path filePath) throws DataLoadingException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return meetingBookStorage.readMeetingBook(filePath);
+    }
+
+    @Override
+    public void saveMeetingBook(ReadOnlyMeetingBook meetingBook) throws IOException {
+        saveMeetingBook(meetingBook, meetingBookStorage.getMeetingBookFilePath());
+    }
+
+    @Override
+    public void saveMeetingBook(ReadOnlyMeetingBook meetingBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        meetingBookStorage.saveMeetingBook(meetingBook, filePath);
+    }
 }
