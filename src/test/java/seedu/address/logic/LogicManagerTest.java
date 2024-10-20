@@ -14,10 +14,12 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.embed.swing.JFXPanel;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
@@ -50,6 +52,20 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+    }
+
+    /**
+     * TODO: Not sure if this is allowed but somehow need this in order for "default sort event" to work.
+     * Also added javafx-swing in dependencies.
+     *
+     * Problem: The constructor of UniqueEventList creates a timeline that continuously
+     * re-sorts events, especially in the case when an event's status changes to "Completed".
+     * If JavaFX is not initialized, this results in a java.lang.NullPointerException:
+     * Cannot invoke "com.sun.glass.ui.Timer.resume()" because "this.pulseTimer" is null.
+     */
+    @BeforeAll
+    public static void initJfxRuntime() {
+        new JFXPanel(); // This will initialize the JavaFX runtime.
     }
 
     @Test

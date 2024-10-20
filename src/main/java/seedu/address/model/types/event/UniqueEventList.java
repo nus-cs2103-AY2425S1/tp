@@ -37,7 +37,7 @@ public class UniqueEventList implements Iterable<Event> {
      */
     public UniqueEventList() {
         Timeline eventReSortTimeline = DateTimeUtil.createTimeline(this::sortEvents,
-                javafx.util.Duration.seconds(10));
+                javafx.util.Duration.minutes(1));
         eventReSortTimeline.play();
     }
 
