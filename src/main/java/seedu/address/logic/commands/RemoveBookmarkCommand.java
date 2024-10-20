@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.Company;
 
 public class RemoveBookmarkCommand extends Command {
@@ -19,6 +20,8 @@ public class RemoveBookmarkCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 2";
     public static final String MESSAGE_REMOVE_BOOKMARK_SUCCESS = "Removed bookmarked company: %1$s";
+
+    public static final String MESSAGE_REMOVE_BOOKMARK_FAILURE = "Unable to remove, company is not bookmarked.";
 
     private final Index index;
 
@@ -41,9 +44,18 @@ public class RemoveBookmarkCommand extends Command {
         }
 
         Company companyToRemoveBookmark = lastShownList.get(index.getZeroBased());
-        companyToRemoveBookmark.setBookmark(false);
 
-        model.setCompany(companyToRemoveBookmark, companyToRemoveBookmark);
+        // Check if company is even bookmarked in the first place
+        if (!companyToRemoveBookmark.getIsBookmark().getIsBookmarkValue()) {
+            return new CommandResult(generateSuccessMessage(companyToRemoveBookmark));
+        }
+
+        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(), companyToRemoveBookmark.getPhone(),
+                companyToRemoveBookmark.getEmail(), companyToRemoveBookmark.getAddress(),
+                companyToRemoveBookmark.getCareerPageUrl(), companyToRemoveBookmark.getTags(),
+                new Bookmark(false));
+
+        model.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
         return new CommandResult(generateSuccessMessage(companyToRemoveBookmark));
@@ -64,6 +76,9 @@ public class RemoveBookmarkCommand extends Command {
     }
 
     private String generateSuccessMessage(Company companyToBookmark) {
-        return String.format(MESSAGE_REMOVE_BOOKMARK_SUCCESS, Messages.format(companyToBookmark));
+        String message = (companyToBookmark.getIsBookmark().getIsBookmarkValue())
+                ? MESSAGE_REMOVE_BOOKMARK_SUCCESS
+                : MESSAGE_REMOVE_BOOKMARK_FAILURE;
+        return String.format(message, Messages.format(companyToBookmark));
     }
 }

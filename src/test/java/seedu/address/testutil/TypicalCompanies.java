@@ -77,4 +77,6 @@ public class TypicalCompanies {
     public static List<Company> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(GOOGLE, META, GRAB, SHOPEE, APPLE, BYTEDANCE, AMAZON));
     }
+
+
 }

@@ -8,6 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.Company;
 
 /**
@@ -23,6 +24,8 @@ public class BookmarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 2";
 
     public static final String MESSAGE_BOOKMARK_SUCCESS = "Bookmarked company: %1$s";
+
+    public static final String MESSAGE_BOOKMARK_FAILURE = "Company is already bookmarked: %1$s";
 
     private final Index index;
 
@@ -45,9 +48,17 @@ public class BookmarkCommand extends Command {
         }
 
         Company companyToBookmark = lastShownList.get(index.getZeroBased());
-        companyToBookmark.setBookmark(true);
 
-        model.setCompany(companyToBookmark, companyToBookmark);
+        // Check if company is even not bookmarkde in the first place
+        if (companyToBookmark.getIsBookmark().getIsBookmarkValue()) {
+            return new CommandResult(generateSuccessMessage(companyToBookmark));
+        }
+
+        Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
+                companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
+                companyToBookmark.getTags(), new Bookmark(true));
+
+        model.setCompany(companyToBookmark, companyBookmarked);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
         return new CommandResult(generateSuccessMessage(companyToBookmark));
@@ -68,6 +79,9 @@ public class BookmarkCommand extends Command {
     }
 
     private String generateSuccessMessage(Company companyToBookmark) {
-        return String.format(MESSAGE_BOOKMARK_SUCCESS, Messages.format(companyToBookmark));
+        String message = (!companyToBookmark.getIsBookmark().getIsBookmarkValue())
+                ? MESSAGE_BOOKMARK_SUCCESS
+                : MESSAGE_BOOKMARK_FAILURE;
+        return String.format(message, Messages.format(companyToBookmark));
     }
 }
