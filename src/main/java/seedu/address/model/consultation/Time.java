@@ -7,12 +7,12 @@ import java.util.Objects;
 
 /**
  * Represents a Time in the system.
- * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}.
  */
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:MM, "
-            + "where hour is between 00 and 23, and minute between 00 and 59.";
+        + "where hour is between 00 and 23, and minute between 00 and 59 (e.g., 14:30).";
 
     private final String value;
 
@@ -20,6 +20,7 @@ public class Time {
      * Constructs a {@code Time}.
      *
      * @param time A valid time string.
+     * @throws IllegalArgumentException if the given {@code time} is not a valid time.
      */
     public Time(String time) {
         if (!isValidTime(time)) {
@@ -28,19 +29,25 @@ public class Time {
         this.value = time;
     }
 
+    /**
+     * Returns the value of the time as a string.
+     *
+     * @return The string representation of the time.
+     */
     public String getValue() {
         return value;
     }
 
     /**
      * Returns true if a given string is a valid time format (HH:MM) and represents a real time.
+     *
+     * @param test The string to test for validity.
+     * @return True if the string represents a valid time, false otherwise.
      */
     public static boolean isValidTime(String test) {
-        // Define the time format
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         try {
-            // Parse the time and ensure it's valid
             LocalTime.parse(test, timeFormatter);
             return true;
         } catch (DateTimeParseException e) {

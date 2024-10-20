@@ -31,7 +31,19 @@ public class ConsultationTest {
     }
 
     @Test
-    public void getStudents_modifyList_throwsUnsupportedOperationException() {
+    public void getDate_validConsultation_returnsCorrectDate() {
+        Consultation consultation = new Consultation(validDate, validTime, new ArrayList<>());
+        assertEquals(validDate, consultation.getDate());
+    }
+
+    @Test
+    public void getTime_validConsultation_returnsCorrectTime() {
+        Consultation consultation = new Consultation(validDate, validTime, new ArrayList<>());
+        assertEquals(validTime, consultation.getTime());
+    }
+
+    @Test
+    public void getStudents_returnsImmutableList() {
         List<Student> students = new ArrayList<>();
         students.add(student1);
         Consultation consultation = new Consultation(validDate, validTime, students);
@@ -102,6 +114,31 @@ public class ConsultationTest {
         Consultation consultation2 = new Consultation(validDate, validTime, students2);
 
         assertFalse(consultation1.equals(consultation2));
+    }
+
+    @Test
+    public void hashCode_sameConsultation_sameHashCode() {
+        List<Student> students = new ArrayList<>();
+        students.add(student1);
+
+        Consultation consultation1 = new Consultation(validDate, validTime, students);
+        Consultation consultation2 = new Consultation(validDate, validTime, students);
+
+        assertEquals(consultation1.hashCode(), consultation2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentConsultation_differentHashCode() {
+        List<Student> students1 = new ArrayList<>();
+        students1.add(student1);
+
+        List<Student> students2 = new ArrayList<>();
+        students2.add(student2);
+
+        Consultation consultation1 = new Consultation(validDate, validTime, students1);
+        Consultation consultation2 = new Consultation(new Date("2024-10-20"), validTime, students2);
+
+        assertFalse(consultation1.hashCode() == consultation2.hashCode());
     }
 
     @Test

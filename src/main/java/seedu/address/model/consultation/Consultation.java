@@ -13,16 +13,18 @@ import seedu.address.model.student.Student;
  */
 public class Consultation {
 
-    // Identity fields
     private final Date date;
     private final Time time;
-
-    // Data field
     private final List<Student> students;
 
     /**
-     * Every field must be present and not null.
-     * The list of students can be empty but not null.
+     * Constructs a {@code Consultation}.
+     *
+     * @param date The date of the consultation.
+     * @param time The time of the consultation.
+     * @param students A list of students attending the consultation.
+     *                 This list can be empty but must not be null.
+     * @throws NullPointerException if {@code date} or {@code time} is null.
      */
     public Consultation(Date date, Time time, List<Student> students) {
         requireAllNonNull(date, time);
@@ -32,17 +34,29 @@ public class Consultation {
         this.students = students != null ? new ArrayList<>(students) : new ArrayList<>();
     }
 
+    /**
+     * Returns the date of the consultation.
+     *
+     * @return The date of the consultation.
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Returns the time of the consultation.
+     *
+     * @return The time of the consultation.
+     */
     public Time getTime() {
         return time;
     }
 
     /**
-     * Returns an immutable list of students, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns an immutable list of students attending the consultation.
+     *
+     * @return A list of students attending the consultation.
+     * @throws UnsupportedOperationException if an attempt is made to modify the returned list.
      */
     public List<Student> getStudents() {
         return Collections.unmodifiableList(students);
@@ -50,6 +64,8 @@ public class Consultation {
 
     /**
      * Adds a student to the consultation.
+     *
+     * @param student The student to add.
      */
     public void addStudent(Student student) {
         students.add(student);
@@ -57,6 +73,8 @@ public class Consultation {
 
     /**
      * Removes a student from the consultation.
+     *
+     * @param student The student to remove.
      */
     public void removeStudent(Student student) {
         students.remove(student);
@@ -64,6 +82,9 @@ public class Consultation {
 
     /**
      * Returns true if both consultations have the same date, time, and students.
+     *
+     * @param other The other consultation to compare.
+     * @return True if both consultations are the same, false otherwise.
      */
     @Override
     public boolean equals(Object other) {
@@ -93,6 +114,9 @@ public class Consultation {
 
     /**
      * Ensures that none of the arguments passed to the constructor are null, except the student list can be empty.
+     *
+     * @param objects The objects to check for null values.
+     * @throws NullPointerException if any object is null.
      */
     private void requireAllNonNull(Object... objects) {
         for (Object obj : objects) {

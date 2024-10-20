@@ -7,12 +7,12 @@ import java.util.Objects;
 
 /**
  * Represents a Date in the system.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}.
  */
 public class Date {
 
     public static final String MESSAGE_CONSTRAINTS = "Dates should be in the format YYYY-MM-DD, "
-            + "and must be a valid date (e.g. no month 13 or day 32).";
+            + "and must be a valid date (e.g., no month 13 or day 32).";
 
     private final String value;
 
@@ -20,6 +20,7 @@ public class Date {
      * Constructs a {@code Date}.
      *
      * @param date A valid date string.
+     * @throws IllegalArgumentException if the given {@code date} is not a valid date.
      */
     public Date(String date) {
         if (!isValidDate(date)) {
@@ -28,19 +29,25 @@ public class Date {
         this.value = date;
     }
 
+    /**
+     * Returns the value of the date as a string.
+     *
+     * @return The string representation of the date.
+     */
     public String getValue() {
         return value;
     }
 
     /**
      * Returns true if a given string is a valid date format (YYYY-MM-DD) and represents a real date.
+     *
+     * @param test The string to test for validity.
+     * @return True if the string represents a valid date, false otherwise.
      */
     public static boolean isValidDate(String test) {
-        // Define the date format
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
-            // Parse the date and ensure it's valid
             LocalDate.parse(test, dateFormatter);
             return true;
         } catch (DateTimeParseException e) {
