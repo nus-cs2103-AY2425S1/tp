@@ -13,5 +13,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_GROUP = new Prefix("g/");
     public static final Prefix PREFIX_YEAR = new Prefix("y/");
     public static final Prefix PREFIX_COMMENT = new Prefix("c/");
+    public static final Prefix PREFIX_EVENT = new Prefix("e/");
+    public static final Prefix PREFIX_INDEX = new Prefix("i/");
+    public static final Prefix PREFIX_STATUS = new Prefix("s/");
 
 }

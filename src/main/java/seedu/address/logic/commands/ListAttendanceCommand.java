@@ -55,9 +55,10 @@ public class ListAttendanceCommand extends Command {
 
     public static final String COMMAND_WORD = "listattendance";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists students based on attendance.\n"
-            + "Parameters: EVENT_NAME [present/absent]\n"
-            + "Example: " + COMMAND_WORD + " Tutorial4 present";
-
+            + "Parameters: "
+            + "e/EVENT_NAME "
+            + "s/STATUS (present/absent)\n"
+            + "Example: " + COMMAND_WORD + " e/Tutorial 4 s/present";
     public static final String MESSAGE_SUCCESS = "Listed %1$d %2$s students for %3$s";
 
     private final String eventName;

@@ -9,9 +9,10 @@ import seedu.address.model.attendance.AttendanceEvent;
  */
 public class CreateAttendanceEventCommand extends Command {
     public static final String COMMAND_WORD = "createattendance";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new attendance event.\n"
-            + "Parameters: EVENT_NAME\n"
-            + "Example: " + COMMAND_WORD + " Tutorial 4";
+            + "Parameters: e/EVENT_NAME\n"
+            + "Example: " + COMMAND_WORD + " e/Tutorial 4";
 
     public static final String MESSAGE_SUCCESS = "Created attendance event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This attendance event already exists.";

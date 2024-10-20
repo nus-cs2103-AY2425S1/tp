@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+
 import seedu.address.logic.commands.ListAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,18 +19,27 @@ public class ListAttendanceCommandParser implements Parser<ListAttendanceCommand
      */
     @Override
     public ListAttendanceCommand parse(String userInput) throws ParseException {
-        String[] parts = userInput.trim().split("\\s+");
-        if (parts.length != 2) {
-            throw new ParseException("Invalid command format. " + ListAttendanceCommand.MESSAGE_USAGE);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(userInput, PREFIX_EVENT, PREFIX_STATUS);
+
+        if (!argMultimap.getValue(PREFIX_EVENT).isPresent() || !argMultimap.getValue(PREFIX_STATUS).isPresent()
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListAttendanceCommand.MESSAGE_USAGE));
         }
 
-        String eventName = parts[0];
-        String status = parts[1].toLowerCase();
+        String eventName = argMultimap.getValue(PREFIX_EVENT).get().trim();
+
+        if (eventName.isEmpty()) {
+            throw new ParseException("Event name cannot be empty.");
+        }
+
+        String statusString = argMultimap.getValue(PREFIX_STATUS).get().trim().toLowerCase();
 
         boolean isPresent;
-        if (status.equals("present")) {
+        if (statusString.equals("present")) {
             isPresent = true;
-        } else if (status.equals("absent")) {
+        } else if (statusString.equals("absent")) {
             isPresent = false;
         } else {
             throw new ParseException("Status must be 'present' or 'absent'.");
@@ -34,4 +47,25 @@ public class ListAttendanceCommandParser implements Parser<ListAttendanceCommand
 
         return new ListAttendanceCommand(eventName, isPresent);
     }
+    //    @Override
+    //    public ListAttendanceCommand parse(String userInput) throws ParseException {
+    //        String[] parts = userInput.trim().split("\\s+");
+    //        if (parts.length != 2) {
+    //            throw new ParseException("Invalid command format. " + ListAttendanceCommand.MESSAGE_USAGE);
+    //        }
+    //
+    //        String eventName = parts[0];
+    //        String status = parts[1].toLowerCase();
+    //
+    //        boolean isPresent;
+    //        if (status.equals("present")) {
+    //            isPresent = true;
+    //        } else if (status.equals("absent")) {
+    //            isPresent = false;
+    //        } else {
+    //            throw new ParseException("Status must be 'present' or 'absent'.");
+    //        }
+    //
+    //        return new ListAttendanceCommand(eventName, isPresent);
+    //    }
 }
