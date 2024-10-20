@@ -95,8 +95,8 @@ public class EditCommandParserTest {
                 Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, VALID_NAME_AMY + INVALID_NAME_DESC + INVALID_EMAIL_DESC +
-                        VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, VALID_NAME_AMY + INVALID_NAME_DESC + INVALID_EMAIL_DESC
+                        + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
