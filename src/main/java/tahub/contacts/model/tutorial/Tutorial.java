@@ -1,8 +1,14 @@
+<<<<<<<< HEAD:src/main/java/tahub/contacts/model/courseclass/tutorial/Tutorial.java
+package tahub.contacts.model.courseclass.tutorial;
+========
 package tahub.contacts.model.tutorial;
+>>>>>>>> master:src/main/java/tahub/contacts/model/tutorial/Tutorial.java
+
+import tahub.contacts.model.course.Course;
 
 import java.util.Objects;
 
-import tahub.contacts.model.course.Course;
+import java.util.Objects;
 
 /**
  * Represents a Tutorial in the system.
