@@ -6,9 +6,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
-import seedu.address.model.consultation.Consultation;
 
 /**
  * The API of the Model component.

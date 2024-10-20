@@ -6,16 +6,19 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.UniqueConsultationList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameStudent comparison)
+ * Duplicates are not allowed (by .isSameStudent and .isSameConsultation comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
+    private final UniqueConsultationList consultations;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,12 +29,13 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
+        consultations = new UniqueConsultationList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Students in the {@code toBeCopied}
+     * Creates an AddressBook using the data in {@code toBeCopied}.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -49,12 +53,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the consultation list with {@code consultations}.
+     * {@code consultations} must not contain duplicate consultations.
+     */
+    public void setConsultations(List<Consultation> consultations) {
+        this.consultations.setConsultations(consultations);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setStudents(newData.getStudentList());
+        setConsultations(newData.getConsultationList());
     }
 
     //// student-level operations
@@ -71,15 +84,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a student to the address book.
      * The student must not already exist in the address book.
      */
-    public void addStudent(Student p) {
-        students.add(p);
+    public void addStudent(Student student) {
+        students.add(student);
     }
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same
-     * as another existing student in the address book.
+     * The student identity of {@code editedStudent} must not be the same as
+     * another existing student in the address book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -95,12 +108,51 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    //// consultation-level operations
+
+    /**
+     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
+     */
+    public boolean hasConsultation(Consultation consultation) {
+        requireNonNull(consultation);
+        return consultations.contains(consultation);
+    }
+
+    /**
+     * Adds a consultation to the address book.
+     * The consultation must not already exist in the address book.
+     */
+    public void addConsultation(Consultation consultation) {
+        consultations.add(consultation);
+    }
+
+    /**
+     * Replaces the given consultation {@code target} in the list with {@code editedConsultation}.
+     * {@code target} must exist in the address book.
+     * The consultation identity of {@code editedConsultation} must not be the same
+     * as another existing consultation in the address book.
+     */
+    public void setConsultation(Consultation target, Consultation editedConsultation) {
+        requireNonNull(editedConsultation);
+
+        consultations.setConsultation(target, editedConsultation);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeConsultation(Consultation key) {
+        consultations.remove(key);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("students", students)
+                .add("consultations", consultations)
                 .toString();
     }
 
@@ -110,22 +162,27 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public ObservableList<Consultation> getConsultationList() {
+        return consultations.asUnmodifiableObservableList();
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof AddressBook)) {
             return false;
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return students.equals(otherAddressBook.students);
+        return students.equals(otherAddressBook.students)
+                && consultations.equals(otherAddressBook.consultations);
     }
 
     @Override
     public int hashCode() {
-        return students.hashCode();
+        return students.hashCode() ^ consultations.hashCode();
     }
 }

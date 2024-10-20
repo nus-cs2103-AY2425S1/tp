@@ -1,13 +1,15 @@
-package seedu.address.logic.commands.consult;
+package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_CONSULTATION_DISPLAYED_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.*;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Name;
@@ -23,7 +25,7 @@ public class AddToConsultCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the consultation identified "
             + "by the index number used in the displayed consultation list. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "n/NAME [n/NAME]...\n"
+            + "[" + PREFIX_NAME + "NAME]...\n"
             + "Example: " + COMMAND_WORD + " 1 n/David Li n/Roy Balakrishnan";
 
     public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to Consultation: %1$s";
