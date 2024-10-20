@@ -2,12 +2,12 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.
@@ -15,11 +15,14 @@ import java.util.logging.Logger;
 public class ResultDisplay extends UiPart<Region> {
 
     private static final String FXML = "ResultDisplay.fxml";
-    Logger resultLogger = Logger.getLogger(ResultDisplay.class.getName());
+    private final Logger resultLogger = Logger.getLogger(ResultDisplay.class.getName());
 
     @FXML
     private TextArea resultDisplay;
 
+    /**
+     * Creates a {@code ResultDisplay}.
+     */
     public ResultDisplay() {
         super(FXML);
         resultDisplay.textProperty().addListener((obs, oldText, newText) -> {

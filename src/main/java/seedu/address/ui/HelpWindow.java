@@ -13,13 +13,13 @@ import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.text.Text;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -31,7 +31,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String DELETE_COMMAND =
             """
             delete
-            
+
             Format: delete (e or ph) INDEX
 
             Purpose: Deletes the entry of the index in the current \
@@ -43,7 +43,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String DEMOTE_COMMAND =
             """
             demote
-            
+
             Format: demote NAME
 
             Purpose: Change the status of an employee in the list to a \
@@ -54,7 +54,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String EMPLOYEE_COMMAND =
             """
             employee
-            
+
             Format: employee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS \
             d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE
 
@@ -69,7 +69,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String EXIT_COMMAND =
             """
             exit
-            
+
             Format: exit
 
             Purpose: Terminates the program.
@@ -80,7 +80,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String FIND_COMMAND =
             """
             find
-            
+
             Format: find (e or ph or all) KEYWORD(S)
 
             Purpose: Displays a list of entries that contains the keyword(s) \
@@ -91,7 +91,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_COMMAND =
             """
             help
-            
+
             Format: help
 
             Purpose: Displays a window containing all the format of all \
@@ -103,7 +103,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String LIST_COMMAND =
             """
             list
-            
+
             Format: list (e or ph or all)
 
             Purpose: Displays a list of entries with their information in \
@@ -115,7 +115,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String POTENTIAL_COMMAND =
             """
             potential
-            
+
             Format: potential n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS \
             d/DEPARTMENT r/ROLE
 
@@ -130,7 +130,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String PROMOTE_COMMAND =
             """
             promote
-            
+
             Format: promote NAME
 
             Purpose: Change the status of a potential hire in the list \
@@ -269,9 +269,6 @@ public class HelpWindow extends UiPart<Stage> {
             Text commandText = textArrayList.get(i);
             String commandString = ARRAY_OF_COMMAND_STRING[i];
             commandText.setText(commandString);
-//            System.out.println(commandText.getPrefHeight());
-//            commandText.setMinHeight((commandString.chars().filter(num -> num == '\n').count() + 1)
-//                    * commandText.getFont().getSize() * 2 + 80);
 
             // Setting the corresponding MenuItem to scroll to the Text object
             ChangeListener<Number> listener = (obs, oldText, newText) -> {
@@ -360,11 +357,13 @@ public class HelpWindow extends UiPart<Stage> {
     private void highlightText(Text targetText) {
         if (lastHighlighted != null) {
             HBox prevBox = (HBox) lastHighlighted.getParent();
-            prevBox.setBackground(new Background(new BackgroundFill(Color.rgb(255, 152, 36, 0.4), new CornerRadii(15), new Insets(16, 16, 0, 16))));
+            prevBox.setBackground(new Background(new BackgroundFill(
+                    Color.rgb(255, 152, 36, 0.4), new CornerRadii(15), new Insets(16, 16, 0, 16))));
         }
         // type-casted to Vbox as every Text in helpWindow is wrapped by a Vbox as its parent
         HBox vBox = (HBox) targetText.getParent();
-        Background highlight = new Background(new BackgroundFill(Color.rgb(255, 40, 40, 0.2), new CornerRadii(15), new Insets(16, 16, 0, 16)));
+        Background highlight = new Background(new BackgroundFill(
+                Color.rgb(255, 40, 40, 0.2), new CornerRadii(15), new Insets(16, 16, 0, 16)));
         vBox.setBackground(highlight);
         lastHighlighted = targetText;
     }
