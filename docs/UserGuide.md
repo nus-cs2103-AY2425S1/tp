@@ -235,3 +235,4 @@ Action | Format, Examples
 **List** | `list`
 **Mark** | `mark INDEX/NRIC [o/notes]`<br> e.g., `mark 1, mark S2208201I o/Broke wheelchair today`
 **Help** | `help`
+**Exit** | `exit`

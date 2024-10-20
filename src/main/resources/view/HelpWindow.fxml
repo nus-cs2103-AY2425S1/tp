@@ -11,6 +11,8 @@
 <?import javafx.stage.Stage?>
 
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -38,34 +40,8 @@
             </children>
           </HBox>
           <!-- Command Summary Table -->
-          <GridPane hgap="10" vgap="10">
-            <VBox.margin>
-              <Insets left="10" right="10" top="10" bottom="10" />
-            </VBox.margin>
-            <Label text="Action" GridPane.rowIndex="0" GridPane.columnIndex="0" style="-fx-font-weight: bold;" />
-            <Label text="Format, Examples" GridPane.rowIndex="0" GridPane.columnIndex="1" style="-fx-font-weight: bold;" />
-
-            <Label text="Add" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-            <Label text="`add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] ...` e.g., `add i/S2208201I n/James ...`" GridPane.rowIndex="1" GridPane.columnIndex="1" wrapText="true" />
-
-            <Label text="Clear" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-            <Label text="`clear`" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-
-            <Label text="Delete" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-            <Label text="`delete INDEX/NRIC` e.g., `delete 3`, `delete S2208201I`" GridPane.rowIndex="3" GridPane.columnIndex="1" wrapText="true" />
-
-            <Label text="Edit" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-            <Label text="`edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] ...` e.g., `edit 2 n/James Lee e/jameslee@example.com`" GridPane.rowIndex="4" GridPane.columnIndex="1" wrapText="true" />
-
-            <Label text="Find" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-            <Label text="`find KEYWORD` e.g., `find James Jake`" GridPane.rowIndex="5" GridPane.columnIndex="1" wrapText="true" />
-
-            <Label text="List" GridPane.rowIndex="6" GridPane.columnIndex="0" />
-            <Label text="`list`" GridPane.rowIndex="6" GridPane.columnIndex="1" />
-
-            <Label text="Help" GridPane.rowIndex="7" GridPane.columnIndex="0" />
-            <Label text="`help`" GridPane.rowIndex="7" GridPane.columnIndex="1" />
-          </GridPane>
+          <TableView fx:id="commandSummary">
+          </TableView>
         </children>
       </VBox>
     </Scene>
