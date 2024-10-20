@@ -78,7 +78,8 @@ public class StringUtil {
         
         try {
             double value = Double.parseDouble(s);
-            return value > 0 && !s.startsWith("+") && value % 0.5 == 0;
+            return value > 0 && value % 0.5 == 0 && !s.startsWith("+")
+                    && s == s.trim();
         } catch (NumberFormatException nfe) {
             return false;
         }
