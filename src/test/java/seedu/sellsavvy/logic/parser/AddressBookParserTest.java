@@ -122,7 +122,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_editOrder() throws Exception {
         EditOrderCommand command = (EditOrderCommand) parser.parseCommand(
-                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased());
+                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased()); awdqewf
     }
 
     @Test

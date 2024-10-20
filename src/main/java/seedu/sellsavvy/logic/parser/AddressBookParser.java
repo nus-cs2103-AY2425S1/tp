@@ -93,7 +93,7 @@ public class AddressBookParser {
 
         case EditOrderCommand.COMMAND_WORD:
             return new EditOrderCommandParser().parse(arguments);
-            
+
         case MarkOrderCommand.COMMAND_WORD:
             return new MarkOrderCommandParser().parse(arguments);
 
