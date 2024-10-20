@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Teacher's Pet (TP) is a **desktop app for managing students, tailored for the National University of Singapore (NUS) and optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TP enables you to manage your students faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -49,13 +49,10 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g `n/NAME [m/MAJOR]` can be used as `n/John Doe m/Business` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+  e.g. if the command specifies `n/NAME id/NUS_STUDENTID`, `id/NUS_STUDENTID n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -65,7 +62,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -74,37 +71,41 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to Teacher's Pet.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of groups (including 0)
+A person can only belong to one group at a time.
 </div>
 
+* NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")  
+* NUS_NETID here refers to the id that is associated with the student's NUS outlook account ("NUS_NETID@u.nus.edu")
+* Both NUS_STUDENTID and NUS_NETID must be unique (ie. Two students cannot have the same NUS_STUDENTID and/or NUS_NETID)
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe id/A1234567P`
+* `add n/Betsy Crowe m/Computer Science nid/e1111111 id/A9999999L y/1 g/group 1`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in Teachers' Pet.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in Teacher's Pet.
 
-Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR]…​`
+Format: `edit INDEX [n/NAME] [id/STUDENTID] [nid/EMAIL] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing groups.
+*  `edit 1 m/ Science nid/e1234567` Edits the major and NUS NetID of the 1st person to be `Science` and `e1234567` respectively.
+*  `edit 2 n/Betsy Crower g/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing groups.
 
 ### Finding persons by name or student ID: `find`
 
@@ -155,39 +156,48 @@ Examples:
 ---
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Teacher's Pet.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All persons stored in Teacher's Pet will be deleted permanently and this command cannot be undone. If you wish to save a copy of the data, refer to [FAQ](#faq) for more info)
+</div>
 
 Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits Teacher's Pet.
 
 Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Teacher's Pet data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing the data file (Advanced)
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Teacher's Pet data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Teacher's Pet will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
+**Q**: Where is my data saved?<br>
+**A**: The data file for Teacher's Pet is named `addressbook.json` and is saved in `[JAR file location]/data/addressbook.json` by default. (ie, if your `teacherspet.jar` file is in `Documents` then the data file is found in `Documents/data/addressbook.json`)
+
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: 
+1. Install the app on the other computer 
+2. Run the app on the other computer (See [Quick start](#quick-start) above) 
+3. Find the data file on the other computer (See above) and replace the `addressbook.json` file with the `addressbook.json` file from the previous computer
+
+**Q**: How do I keep a copy of my data?<br>
+**A**: Find the `addressbook.json` file and copy it to your desired location/storage device
 
 --------------------------------------------------------------------------------------------------------------------
 
