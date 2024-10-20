@@ -168,4 +168,13 @@ public class ParserUtil {
         }
         return new OwedAmount(trimmedOwedAmount);
     }
+
+    public static double parseAmount(String amount) throws ParseException {
+        String trimmedAmount = amount.trim();
+        double amountDouble = Double.parseDouble(trimmedAmount);
+        if (amountDouble <= 0) {
+            throw new ParseException("Amount has to positive");
+        }
+        return amountDouble;
+    }
 }
