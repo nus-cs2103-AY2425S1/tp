@@ -140,7 +140,7 @@ Examples:
 
 Examples:
 * show 1 returns persons with who are in group 1.
-  ![result for 'show 1'](<img width="536" alt="image" src="https://github.com/user-attachments/assets/c0e2646b-2bef-45e5-af21-9232c067f90b">)
+  ![result for 'show 1'](images/show_feature.png)
 ---
 
 ### Deleting a person : `delete`
