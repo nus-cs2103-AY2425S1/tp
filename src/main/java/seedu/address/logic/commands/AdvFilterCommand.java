@@ -114,7 +114,7 @@ public class AdvFilterCommand extends Command {
                 .toString();
     }
 
-    private boolean compare(String operator, Tag tag, String tagValue) {
+    boolean compare(String operator, Tag tag, String tagValue) {
         return switch (operator) {
         case "=" -> tag.tagValue.equalsIgnoreCase(tagValue);
         case "!=" -> !tag.tagValue.equalsIgnoreCase(tagValue);
@@ -151,12 +151,11 @@ public class AdvFilterCommand extends Command {
         };
     }
 
-    private Double tryParseDouble(String value) {
+    Double tryParseDouble(String value) {
         try {
             double d = Double.parseDouble(value);
             return d;
         } catch (NumberFormatException e) {
-            e.printStackTrace();
             return null;
         }
     }
