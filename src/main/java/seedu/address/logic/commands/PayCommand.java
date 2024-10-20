@@ -25,7 +25,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.Subject;
 
 /**
- * Edits the details of an existing student in the address book.
+ * Updates the amount of tuition fee paid by an existing student in the address book.
  */
 public class PayCommand extends Command {
 
@@ -47,7 +47,7 @@ public class PayCommand extends Command {
 
     /**
      * @param index of the student in the filtered student list to edit
-     * @param hour details to edit the student with
+     * @param hour number of hours the student paid
      */
     public PayCommand(Index index, double hour) {
         requireNonNull(index);
@@ -82,8 +82,8 @@ public class PayCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
-     * edited with {@code editStudentDescriptor}.
+     * Creates and returns a {@code Student} with the paid attribute of {@code studentToEdit}
+     * updated with {@code amountPaid}.
      */
     private static Student createEditedStudent(Student studentToEdit, double amountPaid) {
         assert studentToEdit != null;
@@ -105,7 +105,7 @@ public class PayCommand extends Command {
     }
 
     /**
-     * Updates the paid amount of the student based on the hours worked.
+     * Updates the paid amount of the student based on the hours the student paid.
      */
     private static PaidAmount updatePaidAmount(Student student, double amountPaid) {
         double updatedPaid = student.getPaidAmount().value + amountPaid;

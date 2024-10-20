@@ -68,7 +68,6 @@ public class PayCommandParserTest {
 
     @Test
     public void parse_multipleValidFields_failure() {
-        // Multiple valid hours, only the first one should be considered
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + " h/5 h/10";
         String expectedCommand = Messages.MESSAGE_DUPLICATE_FIELDS + "h/";
