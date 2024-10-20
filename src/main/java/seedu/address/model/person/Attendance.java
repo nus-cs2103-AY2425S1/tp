@@ -28,11 +28,11 @@ public class Attendance {
     }
 
     /**
-     * Returns true if a given string is a valid attendance status (either true or false).
+     * Returns true if a given string is a valid date format.
      */
     public static Boolean isValidAttendance(String test) {
         try {
-            LocalDate.parse(test.trim(), VALID_DATE_FORMAT);
+            LocalDate.parse(test, VALID_DATE_FORMAT);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -41,6 +41,10 @@ public class Attendance {
 
     @Override
     public String toString() {
+        return attendanceDate.format(VALID_DATE_FORMAT);
+    }
+
+    public String toDisplayString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM");
         return attendanceDate.format(formatter);
     }
