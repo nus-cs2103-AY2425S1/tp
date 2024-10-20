@@ -68,12 +68,16 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     private void helpTable(TableView<HelpCommand> table) {
+
+        helpTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         TableColumn<HelpCommand, String> commandColumn = new TableColumn<>("Command");
         commandColumn.setCellValueFactory(new PropertyValueFactory<>("command"));
+        commandColumn.setMaxWidth(200);
+        commandColumn.setMinWidth(100);
 
-        TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Description");
+        TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Usage");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-        descriptionColumn.setMinWidth(511);
 
         table.setEditable(true);
 
@@ -82,7 +86,7 @@ public class HelpWindow extends UiPart<Stage> {
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("Delete", "`delete INDEX` e.g., `delete 3`"),
                         new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
-                        new HelpCommand("Edit Game", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`"),
+                        new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`"),
                         new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`"),
                         new HelpCommand("List", "`list`"),
                         new HelpCommand("Help", "`help`")
