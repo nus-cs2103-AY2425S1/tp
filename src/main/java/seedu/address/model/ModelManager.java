@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Student;
 
 /**
@@ -143,6 +144,13 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents);
+    }
+
+    // ========== Consultation Commands ==========
+
+    @Override
+    public void addConsult(Consultation consult) {
+        addressBook.addConsult(consult);
     }
 
 }
