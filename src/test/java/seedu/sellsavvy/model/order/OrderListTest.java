@@ -3,7 +3,10 @@ package seedu.sellsavvy.model.order;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_COUNT_ATLAS;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_ATLAS;
 import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_DATE_BOTTLE;
+import static seedu.sellsavvy.logic.commands.ordercommands.OrderCommandTestUtil.VALID_ITEM_ATLAS;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
 import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_ORDER;
 import static seedu.sellsavvy.testutil.TypicalOrders.ATLAS;
@@ -49,27 +52,35 @@ public class OrderListTest {
     }
 
     @Test
-    public void setPerson_nullTargetOrder_throwsNullPointerException() {
+    public void setOrder_nullTargetOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.setOrder(null, ATLAS));
     }
 
     @Test
-    public void setPerson_nullEditedOrder_throwsNullPointerException() {
+    public void setOrder_nullEditedOrder_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.setOrder(ATLAS, null));
     }
 
     @Test
-    public void setPerson_targetOrderNotInList_throwsOrderNotFoundException() {
+    public void setOrder_targetOrderNotInList_throwsOrderNotFoundException() {
         assertThrows(OrderNotFoundException.class, () -> orderList.setOrder(ATLAS, ATLAS));
     }
 
     @Test
-    public void setPerson_validEditedOrder_success() {
+    public void setOrder_validEditedOrder_success() {
         orderList.add(ATLAS);
         orderList.setOrder(ATLAS, ATLAS);
         OrderList expectedOrderList = new OrderList();
         expectedOrderList.add(ATLAS);
         assertEquals(expectedOrderList, orderList);
+    }
+
+    @Test
+    public void setOrder_duplicateOrderInList_throwsOrderNotFoundException() {
+        orderList.add(ATLAS);
+        Order orderCopy = new OrderBuilder().withItem(VALID_ITEM_ATLAS)
+                .withCount(VALID_COUNT_ATLAS).withDate(VALID_DATE_ATLAS).build();
+        assertThrows(OrderNotFoundException.class, () -> orderList.setOrder(orderCopy, orderCopy));
     }
 
     @Test
@@ -91,12 +102,12 @@ public class OrderListTest {
     }
 
     @Test
-    public void setPerson_nullOrderList_throwsNullPointerException() {
+    public void setOrders_nullOrderList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.setOrders((OrderList) null));
     }
 
     @Test
-    public void setPerson_validOrderList_success() {
+    public void setOrders_validOrderList_success() {
         orderList.add(ATLAS);
         OrderList expectedOrderList = new OrderList();
         expectedOrderList.add(BOTTLE);
@@ -105,12 +116,12 @@ public class OrderListTest {
     }
 
     @Test
-    public void setPerson_nullList_throwsNullPointerException() {
+    public void setOrders_nullList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> orderList.setOrders((List<Order>) null));
     }
 
     @Test
-    public void setPerson_validList_success() {
+    public void setOrders_validList_success() {
         orderList.add(ATLAS);
         List<Order> orders = Collections.singletonList(BOTTLE);
         orderList.setOrders(orders);

@@ -14,6 +14,7 @@ import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.order.OrderList;
+import seedu.sellsavvy.model.order.Status;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
 import seedu.sellsavvy.model.tag.Tag;
@@ -190,6 +191,7 @@ public class UniquePersonList implements Iterable<Person> {
         Item item = new Item(order.getItem().toString());
         Date date = new Date(order.getDate().toString());
         Count count = new Count(order.getCount().toString());
-        return new Order(item, count, date);
+        Status status = order.getStatus();
+        return new Order(item, count, date, status);
     }
 }
