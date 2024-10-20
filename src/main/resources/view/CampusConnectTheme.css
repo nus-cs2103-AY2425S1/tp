@@ -112,8 +112,8 @@
 }
 
 .menu-bar .label {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 13pt;
+    -fx-font-family: "Segoe UI SemiBold";
     -fx-text-fill: #FF8C00;
     -fx-opacity: 0.9;
     -fx-font-weight: bold;

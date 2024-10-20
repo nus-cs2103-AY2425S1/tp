@@ -53,7 +53,6 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public void resetData(ReadOnlyCampusConnect newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
