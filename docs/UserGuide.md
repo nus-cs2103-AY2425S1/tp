@@ -257,8 +257,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q**: How is my data stored?<br>
+**A**: The data is stored in [.json](https://www.json.org/json-en.html) files, located in the `data` folder. The details of patients are stored in the `addressbook.json` file, while the appointments are stored in the `appointmentbook.json` file.
+Examples:
+
+<img src="images/json/addressbook.png" alt="Address Book JSON" width="300" height="auto">
+<img src="images/json/appointmentBook.png" alt="Appointment Book JSON" width="300" height="auto">
+
+**Q**: How do I transfer my data (in the `addressbook.json` and `appointmentbook.json` files) to another 
+computer?<br>
+**A**: [Install the DocTrack app](#quick-start) in the other computer. When you run it, it creates empty [.json](https://www.json.org/json-en.html) files in the `data` folder. Replace these empty files with the `addressbook.json` and `appointmentbook.json` files from your previous computer.
 
 ---
 
