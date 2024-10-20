@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.logging.Logger;
@@ -170,12 +171,8 @@ public class HelpWindow extends UiPart<Stage> {
         commandList.add(new FindCommand(new NameContainsKeywordsPredicate(new ArrayList<>())));
         commandList.add(new HistoryCommand(Index.fromOneBased(1)));
         commandList.add(new ListCommand());
-        try {
-            commandList.add(new MarkCommand(Index.fromOneBased(1),
-                    new ContactRecord(ParserUtil.parseDate("2020-13-01"), "")));
-        } catch (ParseException e) {
-            logger.warning("HelpWindow parse error: Date format is incorrect.");
-        }
+        commandList.add(new MarkCommand(Index.fromOneBased(1),
+                new ContactRecord(LocalDate.parse("2020-13-01"), "")));
         commandList.add(new HelpCommand());
         commandList.add(new ExitCommand());
     }
