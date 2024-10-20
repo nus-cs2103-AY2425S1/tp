@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.AddCarCommand;
+import seedu.address.logic.commands.AddClientCommand;
 import seedu.address.logic.commands.CheckClientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClientCommand;
@@ -102,8 +102,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addCar() throws Exception {
-        assertTrue(parser.parseCommand(AddCarCommand.COMMAND_WORD + " 2 vrn/SGX1234B " +
-                "vin/KMHGH4JH3EU073801 make/Crazy model/Taxi") instanceof AddCarCommand);
+        assertTrue(parser.parseCommand(AddCarCommand.COMMAND_WORD + " 2 vrn/SGX1234B "
+                + "vin/KMHGH4JH3EU073801 make/Crazy model/Taxi") instanceof AddCarCommand);
     }
 
     @Test
