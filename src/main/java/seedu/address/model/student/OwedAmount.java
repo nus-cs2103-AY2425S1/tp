@@ -28,6 +28,14 @@ public class OwedAmount extends Fee {
         return Fee.isValidFee(test);
     }
 
+    public OwedAmount increaseValue(double value) {
+        return new OwedAmount(Double.toString(super.value + value));
+    }
+
+    public OwedAmount decreaseValue(double value) {
+        return new OwedAmount(Double.toString(super.value - value));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

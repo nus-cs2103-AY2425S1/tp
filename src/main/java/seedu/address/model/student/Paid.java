@@ -29,6 +29,10 @@ public class Paid extends Fee {
         return Fee.isValidFee(test);
     }
 
+    public Paid updateValue(double value) {
+        return new Paid(Double.toString(super.value + value));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
