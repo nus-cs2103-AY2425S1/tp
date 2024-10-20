@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.ExitContactCommand;
+import seedu.address.logic.commands.HelpContactCommand;
 import seedu.address.logic.commands.contact.commands.AddContactCommand;
 import seedu.address.logic.commands.contact.commands.ClearContactCommand;
 import seedu.address.logic.commands.contact.commands.DeleteContactCommand;
 import seedu.address.logic.commands.contact.commands.EditContactCommand;
-import seedu.address.logic.commands.ExitContactCommand;
 import seedu.address.logic.commands.contact.commands.FindContactCommand;
-import seedu.address.logic.commands.HelpContactCommand;
 import seedu.address.logic.commands.contact.commands.ListContactCommand;
 import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;

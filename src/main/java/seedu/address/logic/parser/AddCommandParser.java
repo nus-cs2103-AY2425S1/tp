@@ -51,11 +51,6 @@ public class AddCommandParser implements Parser<AddContactCommand> {
         TelegramUsername telegramUsername = ParserUtil
                 .parseTeleOnAdd(argMultimap.getValue(PREFIX_TELEGRAM).orElse(null)); // null to represent input absent
 
-        //Set <Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
-
-        //Person person = new Person(name, phone, email, address, tagList, telegramUsername,
-        //        roleList.toArray(new Role[0]));
-
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
 
         Person person = new Person(name, phone, email, address, telegramUsername, roleList);

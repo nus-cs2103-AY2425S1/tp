@@ -3,13 +3,14 @@ package seedu.address.logic.commands.event.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
-
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
 
+/**
+ * Adds an event to the address book.
+ */
 public class AddEventCommand extends EventCommand {
     public static final String COMMAND_WORD = "new";
 

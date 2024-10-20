@@ -14,6 +14,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -249,5 +250,33 @@ public class ParserUtilTest {
                 roleHandler.getRole(VALID_ROLE_2)));
 
         assertEquals(expectedRoleSet, actualRoleSet);
+    }
+
+    @Test
+    public void parseEvent_validEventStringWithoutWhitespace_success() throws ParseException {
+        String input = "Birthday Party on 12/12/2024";
+        Event event = ParserUtil.parseEvent(input);
+        assertEquals(new Event(input), event);
+    }
+
+    @Test
+    public void parseEvent_validEventStringWithWhitespace_success() throws ParseException {
+        String input = WHITESPACE + "Birthday Party on 12/12/2024" + WHITESPACE;
+        Event event = ParserUtil.parseEvent(input);
+        assertEquals(new Event("Birthday Party on 12/12/2024"), event);
+    }
+
+    @Test
+    public void parseEvent_emptyString_throwsParseException() {
+        assertThrows(ParseException.class, () -> {
+            ParserUtil.parseEvent("");
+        });
+    }
+
+    @Test
+    public void parseEvent_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> {
+            ParserUtil.parseEvent(null);
+        });
     }
 }

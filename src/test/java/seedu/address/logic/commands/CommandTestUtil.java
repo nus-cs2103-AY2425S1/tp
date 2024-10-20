@@ -92,8 +92,8 @@ public class CommandTestUtil {
      * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
      * - the {@code actualModel} matches {@code expectedModel}
      */
-    public static void assertCommandSuccess(ContactCommand contactCommand, Model actualModel, CommandResult expectedCommandResult,
-                                            Model expectedModel) {
+    public static void assertCommandSuccess(ContactCommand contactCommand, Model actualModel,
+                                            CommandResult expectedCommandResult, Model expectedModel) {
         try {
             CommandResult result = contactCommand.execute(actualModel);
             assertEquals(expectedCommandResult, result);

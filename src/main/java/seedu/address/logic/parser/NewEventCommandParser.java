@@ -6,6 +6,9 @@ import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 
+/**
+ * Parses input arguments and creates a new AddEventCommand object
+ */
 public class NewEventCommandParser implements Parser<AddEventCommand> {
     /**
      * Parses the given {@code String userInput} and returns a {@code NewEventCommand} object
