@@ -4,14 +4,22 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+//import java.util.List;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.attendance.AttendanceEvent;
+//import seedu.address.model.attendance.AttendanceManager;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    //private final AttendanceManager attendanceManager;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        //this.attendanceManager = new AttendanceManager();
     }
 
     public ModelManager() {
@@ -126,6 +136,50 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void addAttendanceEvent(AttendanceEvent event) {
+        addressBook.addAttendanceEvent(event);
+    }
+
+    @Override
+    public boolean hasAttendanceEvent(AttendanceEvent event) {
+        return addressBook.hasAttendanceEvent(event);
+    }
+
+    @Override
+    public Optional<AttendanceEvent> getAttendanceEvent(String eventName) {
+        requireNonNull(eventName);
+        return addressBook.getAttendanceEventList().stream()
+                .filter(event -> event.getEventName().equals(eventName))
+                .findFirst();
+    }
+
+    @Override
+    public void markStudentAttendance(String eventName, StudentId studentId, boolean isPresent) {
+        AttendanceEvent event = getAttendanceEvent(eventName)
+                .orElseThrow(() -> new IllegalArgumentException("Attendance event not found"));
+        event.markAttendance(studentId, isPresent);
+    }
+
+    @Override
+    public ObservableList<AttendanceEvent> getAttendanceEventList() {
+        return addressBook.getAttendanceEventList();
+    }
+
+    @Override
+    public List<Person> getStudentsByAttendance(String eventName, boolean isPresent) {
+        AttendanceEvent event = getAttendanceEvent(eventName)
+                .orElseThrow(() -> new IllegalArgumentException("Attendance event not found"));
+
+        return addressBook.getPersonList().stream()
+                .filter(person -> {
+                    StudentId studentId = person.getStudentId();
+                    boolean attendanceStatus = event.isStudentPresent(studentId);
+                    return attendanceStatus == isPresent;
+                })
+                .collect(Collectors.toList());
     }
 
     @Override

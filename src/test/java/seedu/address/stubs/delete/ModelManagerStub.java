@@ -1,14 +1,21 @@
 package seedu.address.stubs.delete;
 
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.attendance.AttendanceEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentId;
+
 
 /**
  * Represents the stub in-memory model of the address book data.
@@ -129,5 +136,35 @@ public class ModelManagerStub implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
 
+    }
+
+    @Override
+    public void addAttendanceEvent(AttendanceEvent event) {
+        // You can leave this empty or throw an exception, depending on your testing needs
+    }
+
+    @Override
+    public boolean hasAttendanceEvent(AttendanceEvent event) {
+        return false;
+    }
+
+    @Override
+    public Optional<AttendanceEvent> getAttendanceEvent(String eventName) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void markStudentAttendance(String eventName, StudentId studentId, boolean isPresent) {
+        // Empty implementation
+    }
+
+    @Override
+    public ObservableList<AttendanceEvent> getAttendanceEventList() {
+        return FXCollections.observableArrayList();
+    }
+
+    @Override
+    public List<Person> getStudentsByAttendance(String eventName, boolean isPresent) {
+        return Collections.emptyList();
     }
 }
