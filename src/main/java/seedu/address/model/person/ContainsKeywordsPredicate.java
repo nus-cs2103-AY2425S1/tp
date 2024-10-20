@@ -1,18 +1,23 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.model.tag.Tag;
-
-import java.util.List;
-import java.util.function.Predicate;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
+import java.util.function.Predicate;
+
+import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.model.tag.Tag;
+
+/**
+ * Tests that a {@code Person}'s {@code Name, Nric, Role or Tag} matches any of the keywords given.
+ * Each keyword is prepended with their respective prefixes
+ *
+ */
 public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     private final ArgumentMultimap keywords;

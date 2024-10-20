@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
@@ -35,11 +34,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         ArgumentMultimap keywords = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_ROLE, PREFIX_TAG);
         checkKeywords(keywords);
-        String[] nameKeywords = trimmedArgs.split("\\s+");
 
         return new FindCommand(new ContainsKeywordsPredicate(keywords));
     }
 
+    /**
+     * Checks if all the arguments after the respective prefixes are valid
+     * @param keywords
+     * @throws ParseException
+     */
     public void checkKeywords(ArgumentMultimap keywords) throws ParseException {
         List<String> names = keywords.getAllValues(PREFIX_NAME);
         List<String> nrics = keywords.getAllValues(PREFIX_NRIC);

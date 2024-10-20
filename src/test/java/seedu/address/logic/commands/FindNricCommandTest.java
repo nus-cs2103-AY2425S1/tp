@@ -83,7 +83,7 @@ public class FindNricCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code ContainsKeywordsPredicate}.
      */
     private NricContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NricContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));

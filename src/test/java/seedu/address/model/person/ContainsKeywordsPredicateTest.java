@@ -3,6 +3,10 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,23 +14,30 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.testutil.PersonBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class ContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
+        ArgumentMultimap mapForFirstPredicate = new ArgumentMultimap();
+        ArgumentMultimap mapForSecondPredicate = new ArgumentMultimap();
+
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
+        firstPredicateKeywordList.stream().forEach(keyword -> mapForFirstPredicate.put(PREFIX_NAME, keyword));
+        secondPredicateKeywordList.stream().forEach(keyword -> mapForSecondPredicate.put(PREFIX_NAME, keyword));
+
+        ContainsKeywordsPredicate firstPredicate = new ContainsKeywordsPredicate(mapForFirstPredicate);
+        ContainsKeywordsPredicate secondPredicate = new ContainsKeywordsPredicate(mapForSecondPredicate);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        ContainsKeywordsPredicate firstPredicateCopy = new ContainsKeywordsPredicate(mapForFirstPredicate);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,35 +52,55 @@ public class NameContainsKeywordsPredicateTest {
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
+
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        ArgumentMultimap mapForOneKeyword = new ArgumentMultimap();
+        mapForOneKeyword.put(PREFIX_NAME, "Alice");
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForOneKeyword);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        List<String> multipleKeywords = Arrays.asList("Alice", "Bob");
+        ArgumentMultimap mapForMultipleKeywords = new ArgumentMultimap();
+        multipleKeywords.stream().forEach(keyword -> mapForMultipleKeywords.put(PREFIX_NAME, keyword));
+        predicate = new ContainsKeywordsPredicate(mapForMultipleKeywords);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        List<String> oneMatchingKeyword = Arrays.asList("Bob", "Carol");
+        ArgumentMultimap mapForOneMatchingKeyword = new ArgumentMultimap();
+        oneMatchingKeyword.stream().forEach(keyword -> mapForOneMatchingKeyword.put(PREFIX_NAME, keyword));
+        predicate = new ContainsKeywordsPredicate(mapForOneMatchingKeyword);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        List<String> mixedCaseKeywords = Arrays.asList("aLIce", "bOB");
+        ArgumentMultimap mapForMixedCaseKeywords = new ArgumentMultimap();
+        mixedCaseKeywords.stream().forEach(keyword -> mapForMixedCaseKeywords.put(PREFIX_NAME, keyword));
+        predicate = new ContainsKeywordsPredicate(mapForMixedCaseKeywords);
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(new ArgumentMultimap());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        ArgumentMultimap mapForNonMatchingKeyword = new ArgumentMultimap();
+        mapForNonMatchingKeyword.put(PREFIX_NAME, "Carol");
+        predicate = new ContainsKeywordsPredicate(mapForNonMatchingKeyword);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        List<String> notMatchingNameKeywords = Arrays.asList("12345", "alice@email.com", "Main", "Street");
+        ArgumentMultimap mapForNotMatchingNameKeywords = new ArgumentMultimap();
+        mapForNotMatchingNameKeywords.put(PREFIX_PHONE, "12345");
+        mapForNotMatchingNameKeywords.put(PREFIX_EMAIL, "alice@email.com");
+        mapForNotMatchingNameKeywords.put(PREFIX_ADDRESS, "Main");
+        mapForNotMatchingNameKeywords.put(PREFIX_ADDRESS, "Streer");
+        predicate = new ContainsKeywordsPredicate(mapForNotMatchingNameKeywords);
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
@@ -77,9 +108,11 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(keywords);
+        ArgumentMultimap mapForKeywords = new ArgumentMultimap();
+        keywords.stream().forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForKeywords);
 
-        String expected = NameContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = ContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 }
