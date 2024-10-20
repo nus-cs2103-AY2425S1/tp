@@ -32,6 +32,16 @@ public class ExportCommand extends Command {
         this.filePath = filePath;
     }
 
+    /**
+     * Returns Command Type EXPORTSTUDENT
+     *
+     * @return Command Type EXPORTSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.EXPORTSTUDENT;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Student> studentList = model.getFilteredStudentList();

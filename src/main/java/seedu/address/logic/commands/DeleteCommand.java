@@ -35,6 +35,16 @@ public class DeleteCommand extends Command {
         this.targetIndices = targetIndices;
     }
 
+    /**
+     * Returns Command Type DELETESTUDENT
+     *
+     * @return Command Type DELETESTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.DELETESTUDENT;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

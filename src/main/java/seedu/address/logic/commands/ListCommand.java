@@ -14,6 +14,15 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
 
+    /**
+     * Returns Command Type LIST
+     *
+     * @return Command Type LIST
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.LIST;
+    }
 
     @Override
     public CommandResult execute(Model model) {

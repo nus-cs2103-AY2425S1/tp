@@ -66,6 +66,16 @@ public class FindCommand extends Command {
         return student -> predicates.stream().allMatch(p -> p.test(student));
     }
 
+    /**
+     * Returns Command Type FINDSTUDENT
+     *
+     * @return Command Type FINDSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.FINDSTUDENT;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);

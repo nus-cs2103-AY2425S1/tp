@@ -43,6 +43,16 @@ public class AddCommand extends Command {
         toAdd = student;
     }
 
+    /**
+     * Returns Command Type ADDSTUDENT
+     *
+     * @return Command Type ADDSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.ADDSTUDENT;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

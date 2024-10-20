@@ -64,6 +64,15 @@ public class EditCommand extends Command {
         this.editStudentDescriptor = new EditStudentDescriptor(editStudentDescriptor);
     }
 
+    /**
+     * Returns Command Type EDITSTUDENT
+     *
+     * @return Command Type EDITSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.EDITSTUDENT;
+    }
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

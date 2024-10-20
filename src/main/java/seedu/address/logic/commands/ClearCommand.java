@@ -13,6 +13,15 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
+    /**
+     * Returns Command Type CLEAR
+     *
+     * @return Command Type CLEAR
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.CLEAR;
+    }
 
     @Override
     public CommandResult execute(Model model) {
