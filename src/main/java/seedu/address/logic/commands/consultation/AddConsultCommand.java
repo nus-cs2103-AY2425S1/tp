@@ -1,8 +1,7 @@
-package seedu.address.logic.commands.consult;
+package seedu.address.logic.commands.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -10,8 +9,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.consultation.Consultation;
 import seedu.address.model.Model;
+import seedu.address.model.consultation.Consultation;
 
 /**
  * Adds a student to the address book.
@@ -24,11 +23,9 @@ public class AddConsultCommand extends Command {
             + "Parameters: "
             + PREFIX_DATE + "DATE "
             + PREFIX_TIME + "TIME "
-            + "[" + PREFIX_NAME + "COURSE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "2024-10-20 "
-            + PREFIX_TIME + "14:00 "
-            + PREFIX_NAME + "John Doe";
+            + PREFIX_TIME + "14:00 ";
 
     public static final String MESSAGE_SUCCESS = "New consult added: %1$s";
 

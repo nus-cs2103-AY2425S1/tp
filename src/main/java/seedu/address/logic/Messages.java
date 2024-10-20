@@ -54,7 +54,10 @@ public class Messages {
      */
     public static String format(Consultation consult) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("TODO");
+        builder.append("Date: ")
+                .append(consult.getDate().toString())
+                .append("; Time: ")
+                .append(consult.getTime().toString());
         return builder.toString();
     }
 
