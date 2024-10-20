@@ -43,7 +43,7 @@ public class MarkPaidCommandTest {
     public void toStringMethod() {
         MarkPaidCommand command = new MarkPaidCommand(INDEX_FIRST_PERSON, VALID_MONTHSPAID);
         assertEquals(MarkPaidCommand.class.getCanonicalName()
-                        + "{monthsPaid=[" + VALID_MONTHPAID_STRING + "]}",
+                        + "{monthsPaid=[" + VALID_MONTHPAID_STRING + " ]}",
                 command.toString());
     }
     @Test

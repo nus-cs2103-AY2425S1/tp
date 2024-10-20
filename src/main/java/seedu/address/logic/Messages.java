@@ -54,7 +54,7 @@ public class Messages {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
                 .append("; MonthsPaid: ");
-        person.getMonthsPaid().forEach(month -> builder.append(month).append(" "));
+        person.getMonthsPaid().forEach(builder::append);
         return builder.toString();
     }
 
