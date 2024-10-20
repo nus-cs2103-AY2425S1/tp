@@ -17,6 +17,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -89,6 +91,26 @@ public class EditCommand extends Command {
         this.nric = nric;
         this.index = null;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+
+    /**
+     * Provides the action property for use in a {@code TableView}.
+     * This method is needed for binding the action to the table column.
+     *
+     * @return the action as a {@code StringProperty}.
+     */
+    public StringProperty actionProperty() {
+        return new SimpleStringProperty(this, "action", COMMAND_WORD);
+    }
+
+    /**
+     * Provides the format example property for use in a {@code TableView}.
+     * This method is needed for binding the format example to the table column.
+     *
+     * @return the format and example usage as a {@code StringProperty}.
+     */
+    public StringProperty formatExampleProperty() {
+        return new SimpleStringProperty(this, "formatExample", MESSAGE_USAGE);
     }
 
     @Override

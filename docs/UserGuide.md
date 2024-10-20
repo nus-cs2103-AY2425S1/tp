@@ -238,3 +238,4 @@ Action | Format, Examples
 **List** | `list`
 **Mark** | `mark INDEX/NRIC [d/DATE] [o/NOTES]`<br> e.g., `mark 2 d/2021-10-01 o/This person is sad`
 **Help** | `help`
+**Exit** | `exit`

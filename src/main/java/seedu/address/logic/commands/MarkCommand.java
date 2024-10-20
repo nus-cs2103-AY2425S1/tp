@@ -7,6 +7,8 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -60,6 +62,26 @@ public class MarkCommand extends Command {
         this.targetNric = targetNric;
         this.targetIndex = null;
         this.contactRecord = contactRecord;
+    }
+
+    /**
+     * Provides the action property for use in a {@code TableView}.
+     * This method is needed for binding the action to the table column.
+     *
+     * @return the action as a {@code StringProperty}.
+     */
+    public StringProperty actionProperty() {
+        return new SimpleStringProperty(this, "action", COMMAND_WORD);
+    }
+
+    /**
+     * Provides the format example property for use in a {@code TableView}.
+     * This method is needed for binding the format example to the table column.
+     *
+     * @return the format and example usage as a {@code StringProperty}.
+     */
+    public StringProperty formatExampleProperty() {
+        return new SimpleStringProperty(this, "formatExample", MESSAGE_USAGE);
     }
 
     @Override
