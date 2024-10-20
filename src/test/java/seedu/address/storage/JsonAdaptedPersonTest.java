@@ -37,7 +37,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final String VALID_DATEOFLASTVISIT = BENSON.getDateOfLastVisit().toString();
+    private static final String VALID_DATEOFLASTVISIT = BENSON.getDateOfLastVisit().get().toString();
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -167,6 +167,17 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_noDateOfLastVisit_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_TAGS, VALID_EMPTY_FIELD);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail(VALID_EMAIL).withAddress(VALID_ADDRESS).withTags(validTagsInString)
+                .withDateOfLastVisit().build();
+        assertEquals(expectedPerson, person.toModelType());
+    }
+
+    @Test
     public void toModelType_noAddressNoEmail_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMPTY_FIELD,
                 VALID_EMPTY_FIELD, VALID_TAGS, VALID_DATEOFLASTVISIT);
@@ -174,6 +185,39 @@ public class JsonAdaptedPersonTest {
         Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
                 .withEmail().withAddress().withTags(validTagsInString)
                 .withDateOfLastVisit(VALID_DATEOFLASTVISIT).build();
+        assertEquals(expectedPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_noAddressNoDateOfLastVisit_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_EMPTY_FIELD, VALID_TAGS, VALID_EMPTY_FIELD);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail(VALID_EMAIL).withAddress().withTags(validTagsInString)
+                .withDateOfLastVisit().build();
+        assertEquals(expectedPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_noEmailNoDateOfLastVisit_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMPTY_FIELD,
+                VALID_ADDRESS, VALID_TAGS, VALID_EMPTY_FIELD);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail().withAddress(VALID_ADDRESS).withTags(validTagsInString)
+                .withDateOfLastVisit().build();
+        assertEquals(expectedPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_noAddressNoEmailNoDateOfLastVisit_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMPTY_FIELD,
+                VALID_EMPTY_FIELD, VALID_TAGS, VALID_EMPTY_FIELD);
+        String[] validTagsInString = VALID_TAGS.stream().map(tag -> tag.getTagName()).toArray(String[]::new);
+        Person expectedPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+                .withEmail().withAddress().withTags(validTagsInString)
+                .withDateOfLastVisit().build();
         assertEquals(expectedPerson, person.toModelType());
     }
 }

@@ -25,13 +25,13 @@ public class Person {
     private final Optional<Address> address;
     private final Optional<Email> email;
     private final Set<Tag> tags = new HashSet<>();
-    private final DateOfLastVisit dateOfLastVisit;
+    private final Optional<DateOfLastVisit> dateOfLastVisit;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address,
-                  Set<Tag> tags, DateOfLastVisit dateOfLastVisit) {
+                  Set<Tag> tags, Optional<DateOfLastVisit> dateOfLastVisit) {
         requireAllNonNull(name, phone, email, address, tags, dateOfLastVisit);
         this.name = name;
         this.phone = phone;
@@ -71,7 +71,14 @@ public class Person {
         return address;
     }
 
-    public DateOfLastVisit getDateOfLastVisit() {
+    /**
+     * Returns whether the Person has a dateOfLastVisit.
+     */
+    public boolean hasDateOfLastVisit() {
+        return dateOfLastVisit.isPresent();
+    }
+
+    public Optional<DateOfLastVisit> getDateOfLastVisit() {
         return dateOfLastVisit;
     }
 

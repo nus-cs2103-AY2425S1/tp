@@ -8,6 +8,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -72,15 +73,34 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personWithoutEmailOrAddress_addSuccessful() throws Exception {
+    public void execute_personWithoutDateOfLastVisit_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
 
-        Person personWithoutEmailOrAddress = new PersonBuilder(CARL).withEmail().withAddress().build();
-        CommandResult commandResultWithoutEmailOrAddress = new AddCommand(personWithoutEmailOrAddress)
+        Person personWithoutDateOfLastVisit = new PersonBuilder(DANIEL).withDateOfLastVisit().build();
+        CommandResult commandResultWithoutDateOfLastVisit = new AddCommand(personWithoutDateOfLastVisit)
                 .execute(modelStub);
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutEmailOrAddress)),
-                commandResultWithoutEmailOrAddress.getFeedbackToUser());
-        assertEquals(Arrays.asList(personWithoutEmailOrAddress),
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(personWithoutDateOfLastVisit)),
+                commandResultWithoutDateOfLastVisit.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutDateOfLastVisit),
+                modelStub.personsAdded);
+    }
+
+    @Test
+    public void execute_personWithoutEmailOrAddressOrDateOfLastVisit_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+
+        Person personWithoutEmailOrAddressOrDateOfLastVisit = new PersonBuilder(CARL)
+                .withEmail()
+                .withAddress()
+                .withDateOfLastVisit().build();
+        CommandResult commandResultWithoutEmailOrAddressOrDateOfLastVisit =
+                new AddCommand(personWithoutEmailOrAddressOrDateOfLastVisit)
+                .execute(modelStub);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages
+                        .format(personWithoutEmailOrAddressOrDateOfLastVisit)),
+                commandResultWithoutEmailOrAddressOrDateOfLastVisit.getFeedbackToUser());
+        assertEquals(Arrays.asList(personWithoutEmailOrAddressOrDateOfLastVisit),
                 modelStub.personsAdded);
     }
 

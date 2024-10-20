@@ -203,25 +203,28 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDateOfLastVisit_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDateOfLastVisit((String) null));
+    public void parseDateOfLastVisit_null_throwsNullPointerException() throws Exception {
+        assertEquals(Optional.empty(),
+                ParserUtil.parseDateOfLastVisit(Optional.ofNullable((String) null)));
     }
-
     @Test
     public void parseDateOfLastVisit_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDateOfLastVisit(INVALID_DATEOFLASTVISIT));
+        assertThrows(ParseException.class, () ->
+                ParserUtil.parseDateOfLastVisit(Optional.of(INVALID_DATEOFLASTVISIT)));
     }
 
     @Test
     public void parseDateOfLastVisit_validValueWithoutWhitespace_returnsDateOfLastVisit() throws Exception {
         DateOfLastVisit expectedDateOfLastVisit = new DateOfLastVisit(VALID_DATEOFLASTVISIT);
-        assertEquals(expectedDateOfLastVisit, ParserUtil.parseDateOfLastVisit(VALID_DATEOFLASTVISIT));
+        assertEquals(Optional.of(expectedDateOfLastVisit),
+                ParserUtil.parseDateOfLastVisit(Optional.of(VALID_DATEOFLASTVISIT)));
     }
 
     @Test
     public void parseDateOfLastVisit_validValueWithWhitespace_returnsTrimmedDateOfLastVisit() throws Exception {
         String dateOfLastVisitWithWhitespace = WHITESPACE + VALID_DATEOFLASTVISIT + WHITESPACE;
         DateOfLastVisit expectedDateOfLastVisit = new DateOfLastVisit(VALID_DATEOFLASTVISIT);
-        assertEquals(expectedDateOfLastVisit, ParserUtil.parseDateOfLastVisit(dateOfLastVisitWithWhitespace));
+        assertEquals(Optional.of(expectedDateOfLastVisit),
+                ParserUtil.parseDateOfLastVisit(Optional.of(dateOfLastVisitWithWhitespace)));
     }
 }

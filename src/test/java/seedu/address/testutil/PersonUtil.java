@@ -33,6 +33,7 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         String personEmail = person.hasEmail() ? person.getEmail().get().value : "";
         String personAddress = person.hasAddress() ? person.getAddress().get().value : "";
+        String personDateOfLastVisit = person.hasDateOfLastVisit() ? person.getDateOfLastVisit().get().value : "";
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + personEmail + " ");
@@ -40,7 +41,7 @@ public class PersonUtil {
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
-        sb.append(PREFIX_DATEOFLASTVISIT + person.getDateOfLastVisit().value + " ");
+        sb.append(PREFIX_DATEOFLASTVISIT + personDateOfLastVisit + " ");
         return sb.toString();
     }
 
@@ -54,7 +55,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.get().value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.get().value).append(" "));
         descriptor.getDateOfLastVisit().ifPresent(date ->
-                sb.append(PREFIX_DATEOFLASTVISIT).append(date.value).append(" "));
+                sb.append(PREFIX_DATEOFLASTVISIT).append(date.get().value).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

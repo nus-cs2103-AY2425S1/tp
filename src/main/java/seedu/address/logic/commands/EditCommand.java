@@ -45,8 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "[" + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT]...\n"
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_DATEOFLASTVISIT + "DATEOFLASTVISIT] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -103,10 +103,10 @@ public class EditCommand extends Command {
         Optional<Email> updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Optional<Address> updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        DateOfLastVisit dateOfLastVisit = editPersonDescriptor.getDateOfLastVisit()
+        Optional<DateOfLastVisit> updatedDateOfLastVisit = editPersonDescriptor.getDateOfLastVisit()
                 .orElse(personToEdit.getDateOfLastVisit());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, dateOfLastVisit);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedDateOfLastVisit);
     }
 
     @Override
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
         private Optional<Email> email;
         private Optional<Address> address;
         private Set<Tag> tags;
-        private DateOfLastVisit dateOfLastVisit;
+        private Optional<DateOfLastVisit> dateOfLastVisit;
 
         public EditPersonDescriptor() {}
 
@@ -216,11 +216,11 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public void setDateOfLastVisit(DateOfLastVisit dateOfLastVisit) {
+        public void setDateOfLastVisit(Optional<DateOfLastVisit> dateOfLastVisit) {
             this.dateOfLastVisit = dateOfLastVisit;
         }
 
-        public Optional<DateOfLastVisit> getDateOfLastVisit() {
+        public Optional<Optional<DateOfLastVisit>> getDateOfLastVisit() {
             return Optional.ofNullable(dateOfLastVisit);
         }
 

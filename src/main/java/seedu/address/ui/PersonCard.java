@@ -57,6 +57,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        dateOfLastVisit.setText("Date last visited: " + person.getDateOfLastVisit().value);
+        dateOfLastVisit.setText(person.hasDateOfLastVisit()
+                ? "Date last visited: " + person.getDateOfLastVisit().get().value
+                : "");
     }
 }

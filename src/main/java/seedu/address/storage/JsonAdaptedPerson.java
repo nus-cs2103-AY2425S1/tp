@@ -25,7 +25,7 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
-    private static final String EMPTY_ADDRESS_OR_EMAIL_STRING = "";
+    private static final String EMPTY_DATA_FIELD_STRING = "";
 
     private final String name;
     private final String phone;
@@ -57,12 +57,13 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.hasEmail() ? source.getEmail().get().value : EMPTY_ADDRESS_OR_EMAIL_STRING;
-        address = source.hasAddress() ? source.getAddress().get().value : EMPTY_ADDRESS_OR_EMAIL_STRING;
+        email = source.hasEmail() ? source.getEmail().get().value : EMPTY_DATA_FIELD_STRING;
+        address = source.hasAddress() ? source.getAddress().get().value : EMPTY_DATA_FIELD_STRING;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        dateOfLastVisit = source.getDateOfLastVisit().value;
+        dateOfLastVisit = source.hasDateOfLastVisit()
+                ? source.getDateOfLastVisit().get().value : EMPTY_DATA_FIELD_STRING;
     }
 
     /**
@@ -118,14 +119,18 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        Optional<DateOfLastVisit> modelDateOfLastVisit;
         if (dateOfLastVisit == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DateOfLastVisit.class.getSimpleName()));
         }
-        if (!DateOfLastVisit.isValidDateOfLastVisit(dateOfLastVisit)) {
+        if (dateOfLastVisit.isEmpty()) {
+            modelDateOfLastVisit = Optional.empty();
+        } else if (!DateOfLastVisit.isValidDateOfLastVisit(dateOfLastVisit)) {
             throw new IllegalValueException(DateOfLastVisit.MESSAGE_CONSTRAINTS);
+        } else {
+            modelDateOfLastVisit = Optional.of(new DateOfLastVisit(dateOfLastVisit));
         }
-        final DateOfLastVisit modelDateOfLastVisit = new DateOfLastVisit(dateOfLastVisit);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDateOfLastVisit);
     }
