@@ -36,10 +36,10 @@ public class LocationTest {
 
     @Test
     public void equals() {
-        Address address = new Address("Valid Address");
+        Location address = new Location("Valid Address");
 
         // same values -> returns true
-        assertTrue(address.equals(new Address("Valid Address")));
+        assertTrue(address.equals(new Location("Valid Address")));
 
         // same object -> returns true
         assertTrue(address.equals(address));
@@ -51,6 +51,6 @@ public class LocationTest {
         assertFalse(address.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(address.equals(new Address("Other Valid Address")));
+        assertFalse(address.equals(new Location("Other Valid Address")));
     }
 }
