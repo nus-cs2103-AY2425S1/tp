@@ -2,6 +2,10 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * Unmodifiable view of an address book
@@ -13,5 +17,10 @@ public interface ReadOnlyCampusConnect {
      * This list will not contain any duplicate persons.
      */
     ObservableList<Person> getPersonList();
+
+    /**
+     * Returns a list of persons as a list of strings representing their tags.
+     */
+    Set<Tag> getTagsList();
 
 }
