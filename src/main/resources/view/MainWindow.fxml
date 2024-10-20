@@ -41,12 +41,11 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Filter"> <!--call necessary function-->
-            <MenuItem mnemonicParsing="false" text="Filter by Name" />
-            <MenuItem mnemonicParsing="false" text="Filter by Tag" />
+            <MenuItem mnemonicParsing="false" text="Filter by Name" onAction="#handleFilterByName" />
+            <MenuItem mnemonicParsing="false" text="Filter by Tags" onAction="#handleFilterByTags" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Sort"> <!--call necessary function-->
-            <MenuItem mnemonicParsing="false" text="Sort by Name" />
-            <MenuItem mnemonicParsing="false" text="Sort by Tag" />
+          <Menu mnemonicParsing="false" text="Advanced Filter"> <!--call necessary function-->
+            <MenuItem mnemonicParsing="false" text="Filter by Tags" onAction="#handleAdvancedFilterByTags" />
           </Menu>
           <Menu mnemonicParsing="false" text="Export"> <!--call necessary function-->
             <MenuItem mnemonicParsing="false" text="Export to CSV" />

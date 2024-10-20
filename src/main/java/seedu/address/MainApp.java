@@ -40,6 +40,7 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 2, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final DuplicatePhoneTagger duplicatePhoneTagger = new DuplicatePhoneTagger();
 
     protected Ui ui;
     protected Logic logic;
@@ -62,7 +63,7 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         model = initModelManager(storage, userPrefs);
-        new DuplicatePhoneTagger().tagPhoneDuplicates(model);
+        duplicatePhoneTagger.tagPhoneDuplicates(model);
 
         logic = new LogicManager(model, storage);
 
