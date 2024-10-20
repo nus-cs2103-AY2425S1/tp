@@ -25,7 +25,7 @@ public class ThemeController {
      * @param theme
      */
     public static void switchTheme(String theme) {
-        scene.getStylesheets().clear();  // Clear current stylesheets
+        scene.getStylesheets().clear(); // Clear current stylesheets
         switch (theme) {
         case "DARK":
             scene.getStylesheets().add(ThemeController.class

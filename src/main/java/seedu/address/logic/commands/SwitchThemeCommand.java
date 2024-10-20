@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.Model;
 import seedu.address.ui.ThemeController;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Switches the GUI theme

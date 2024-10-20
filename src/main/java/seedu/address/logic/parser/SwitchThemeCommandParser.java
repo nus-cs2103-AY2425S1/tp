@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.SwitchThemeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+/**
+ * Parses input arguments and creates a new SwitchThemeCommand object
+ */
 public class SwitchThemeCommandParser implements Parser<SwitchThemeCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the SwitchThemeCommand
