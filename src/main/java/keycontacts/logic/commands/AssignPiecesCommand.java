@@ -17,7 +17,7 @@ import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Student;
 
 /**
- * Adds a student to the student directory.
+ * Assigns one or more piano pieces to a student
  */
 public class AssignPiecesCommand extends Command {
 

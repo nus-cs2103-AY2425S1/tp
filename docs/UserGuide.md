@@ -110,10 +110,23 @@ Assigns piano pieces to a student in the student directory.
 Format: `assign INDEX pn/PIECE_NAME...`
 
 * Assigns piano pieces to the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-*  Existing values will remain unchanged
+* Existing values will remain unchanged
 
 Examples:
 *  `assign 1 pn/Etude pn/Moonlight Sonata` Adds `Etude` and `Moonlight Sonata` to the 1st student's piano pieces.
+
+### Unassigning piano pieces from a student: `unassign`
+
+Unassigns piano pieces to a student in the student directory.
+
+Format: `unassign INDEX [pn/PIECE_NAME]...`
+
+* Unassigns piano pieces from the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+* All piano pieces provided must be already assigned to the student
+* If no piano pieces are provided, all piano pieces will be unassigned from the student
+
+Examples:
+*  `unassign 1 pn/Etude pn/Moonlight Sonata` Removes `Etude` and `Moonlight Sonata` from the 1st student's piano pieces.
 
 ### Scheduling a regular lesson : `schedule`
 
@@ -239,10 +252,11 @@ _Details coming soon ..._
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Help**   | `help`
-**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
+**Add**    | `add n/NAME p/PHONE_NUMBER a/ADDRESS g/GRADE_LEVEL` <br> e.g., `add n/James Ho p/22224444 a/123, Clementi Rd, 1234665 g/LCM 1`
 **List**   | `list`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee p/81234567`
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [a/ADDRESS] [g/GRADE_LEVEL]`<br> e.g.,`edit 2 n/James Lee p/81234567`
 **Assign** | `assign INDEX pn/PIECE_NAME...`<br> e.g,`assign 1 pn/Moonlight Sonata pn/Canon in D`
+**Unassign** | `unassign INDEX [pn/PIECE_NAME]...`<br> e.g, `unassign 1 pn/Moonlight Sonata pn/Canon in D`
 **Schedule** | `schedule INDEX d/DAY st/START_TIME et/END_TIME`<br> e.g.,`schedule 1 d/Monday st/12:00 et/14:00`
 **Cancel** |  `cancel INDEX dt/DATE st/START_TIME` <br> e.g., `cancel 1 dt/14-10-2024 st/12:00`
 **Makeup** | `makeup INDEX dt/DATE st/START_TIME et/END_TIME`<br> e.g.,`makeup 1 d/25-12-2022 st/12:00 et/14:00`
