@@ -155,8 +155,8 @@ public class PersonFactory {
             Volunteer volunteer = (Volunteer) person;
             return descriptor.getHours().orElse(volunteer.getHours());
         } else {
-            return descriptor.getHours().orElseThrow(() -> new CommandException("Hours must be provided for a new "
-                    + "Volunteer."));
+            return descriptor.getHours().orElseThrow(() -> new CommandException("Missing hours! "
+                    + "For a Volunteer, you must specify hours contributed by the volunteer using the h/ prefix."));
         }
     }
 
@@ -176,8 +176,8 @@ public class PersonFactory {
             Donor donor = (Donor) person;
             return descriptor.getDonatedAmount().orElse(donor.getDonatedAmount());
         } else {
-            return descriptor.getDonatedAmount().orElseThrow(() -> new CommandException("Donated amount must be "
-                    + "provided for a new Donor."));
+            return descriptor.getDonatedAmount().orElseThrow(() -> new CommandException("Missing donated amount! "
+                    + "For a Donor, you must specify a donated amount using the d/ prefix."));
         }
     }
 
@@ -196,8 +196,8 @@ public class PersonFactory {
             Partner partner = (Partner) person;
             return descriptor.getEndDate().orElse(partner.getEndDate());
         } else {
-            return descriptor.getEndDate().orElseThrow(() -> new CommandException("Partnership end date must be "
-                    + "provided for a new Partner."));
+            return descriptor.getEndDate().orElseThrow(() -> new CommandException("Missing partnership end date! "
+                    + "For a Partner, you must specify a partnership end date using the ped/ prefix."));
         }
     }
 
