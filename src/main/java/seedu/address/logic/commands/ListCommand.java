@@ -18,13 +18,14 @@ public abstract class ListCommand extends Command {
      * Usage message to guide users on how to use the 'list' command. It provides examples of listing
      * buyers, sellers, clients, or properties from the database, and clarifies the allowed keys.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all existing properties, sellers, "
-            + "buyers, or clients in the database.\n"
-            + "Parameters: " + "k/KEY\n"
-            + "Restrictions: "
-            + "k/KEY must be one of the following: \"buyers\", \"sellers\", \"clients\", or "
-            + "\"properties\".\n"
-            + "Only these four types of records are stored in the database.";
+    public static final String MESSAGE_USAGE = String.format(
+            "%s: Lists all existing properties, sellers, buyers, or clients in the database.\n"
+                    + "Parameters: k/KEY\nRestrictions: KEY must be one of the following: "
+                    + "\"buyers\", \"sellers\", \"clients\", or \"properties\".\n"
+                    + "Only these four types of records are stored in the database.",
+            COMMAND_WORD
+    );
+
 
     /**
      * Success message template used to confirm that the listing operation has been successfully executed

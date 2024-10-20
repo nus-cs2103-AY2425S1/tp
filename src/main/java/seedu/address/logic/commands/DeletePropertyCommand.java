@@ -19,14 +19,17 @@ public class DeletePropertyCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteproperty";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the property unit identified by its postal code and unit number.\n"
-            + "Parameters: "
-            + PREFIX_POSTALCODE + "POSTAL_CODE "
-            + PREFIX_UNITNUMBER + "UNIT_NUMBER\n"
-            + "Restrictions: " + "c/POSTAL_CODE must follow the Singapore postal code format i.e. be a 6 digit integer "
-            + "(between 000000 to 999999)\n"
-            + "u/UNIT_NUMBER must be in the format (XXX-XXX)";
+    public static final String MESSAGE_USAGE = String.format(
+            "%s: Deletes the property unit identified by its postal code and unit number.\n"
+                    + "Parameters: %sPOSTAL_CODE %sUNIT_NUMBER\n"
+                    + "Restrictions: POSTAL_CODE must follow the Singapore postal code format "
+                    + "i.e. be a 6 digit integer (between 000000 to 999999)\n"
+                    + "UNIT_NUMBER must be in the format (XXX-XXX)",
+            COMMAND_WORD,
+            PREFIX_POSTALCODE,
+            PREFIX_UNITNUMBER
+    );
+
 
     public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Deleted property: %1$s";
 
