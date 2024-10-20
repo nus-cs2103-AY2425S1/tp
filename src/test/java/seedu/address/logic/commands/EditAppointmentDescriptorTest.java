@@ -1,19 +1,18 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB_APPOINTMENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_DATE_TIME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENT_TYPE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEDICINE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SICKNESS_BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditAppointmentCommand.EditAppointmentDescriptor;
 import seedu.address.testutil.EditAppointmentDescriptorBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class EditAppointmentDescriptorTest {
 

@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalPersons.ALICE_P;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;

@@ -80,7 +80,8 @@ public class EditAppointmentCommandTest {
     public void execute_filteredList_success() {
         showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
 
-        Appointment appointmentInFilteredList = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
+        Appointment appointmentInFilteredList = model
+                .getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
         Appointment editedAppointment = new AppointmentBuilder(appointmentInFilteredList)
             .withAppointmentType(VALID_APPOINTMENT_TYPE_BOB).build();
         EditCommand editAppointmentCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT,
@@ -95,7 +96,7 @@ public class EditAppointmentCommandTest {
 
         assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);
     }
-    
+
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of appointment book
@@ -142,9 +143,11 @@ public class EditAppointmentCommandTest {
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditAppointmentDescriptor editAppointmentDescriptor = new EditAppointmentDescriptor();
-        EditAppointmentCommand editAppointmentCommand = new EditAppointmentCommand(index, editAppointmentDescriptor);
-        String expected = EditAppointmentCommand.class.getCanonicalName() + "{index=" + index + ", editAppointmentDescriptor="
-            + editAppointmentDescriptor + "}";
+        EditAppointmentCommand editAppointmentCommand =
+                new EditAppointmentCommand(index, editAppointmentDescriptor);
+        String expected = EditAppointmentCommand.class.getCanonicalName()
+                + "{index=" + index + ", editAppointmentDescriptor="
+                + editAppointmentDescriptor + "}";
         assertEquals(expected, editAppointmentCommand.toString());
     }
 

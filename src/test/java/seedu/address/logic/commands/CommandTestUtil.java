@@ -186,7 +186,8 @@ public class CommandTestUtil {
 
         Appointment appt = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
         final String[] splitName = appt.getAppointmentType().value.split("\\s+");
-        model.updateFilteredAppointmentList(new AppointmentTypeContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
+        model.updateFilteredAppointmentList(
+                new AppointmentTypeContainsKeywordsPredicate(Collections.singletonList(splitName[0])));
 
         assertEquals(1, model.getFilteredAppointmentList().size());
     }
