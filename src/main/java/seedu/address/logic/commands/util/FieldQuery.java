@@ -1,10 +1,20 @@
 package seedu.address.logic.commands.util;
 
 
+/**
+ * Represents a pair of a search field and a keyword for querying.
+ * The field specifies the type of field to search, and the keyword
+ * is the search term provided by the user.
+ */
 public class FieldQuery {
     private SearchField field;
     private String keyword;
 
+    /**
+     * Constructs a FieldQuery class.
+     * @param field SearchField object representing field in search query e.g. name.
+     * @param keyword Query keyword.
+     */
     public FieldQuery(SearchField field, String keyword) {
         this.field = field;
         this.keyword = keyword;
