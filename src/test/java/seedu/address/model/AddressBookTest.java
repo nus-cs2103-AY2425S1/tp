@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.testutil.ConsultationBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
@@ -49,7 +50,7 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withCourses(VALID_COURSE_CS2103T)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents);
+        AddressBookStub newData = new AddressBookStub(newStudents, List.of());
 
         assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
     }
@@ -79,13 +80,41 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasConsult_nullConsult_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasConsult(null));
+    }
+
+    @Test
+    public void hasConsult_consultNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasConsult(new ConsultationBuilder().build()));
+    }
+
+    @Test
+    public void hasConsult_consultInAddressBook_returnsTrue() {
+        Consultation consult = new ConsultationBuilder().build();
+        addressBook.addConsult(consult);
+        assertTrue(addressBook.hasConsult(consult));
+    }
+
+    @Test
+    public void hasConsult_consultWithSameDetailsInAddressBook_returnsTrue() {
+        Consultation consult = new ConsultationBuilder().build();
+        Consultation copy = new ConsultationBuilder(consult).build();
+        addressBook.addConsult(consult);
+        assertTrue(addressBook.hasConsult(copy));
+    }
+
+
+    @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getStudentList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{students=" + addressBook.getStudentList() + "}";
+        String expected = AddressBook.class.getCanonicalName()
+                + "{students=" + addressBook.getStudentList()
+                + ", consults=" + addressBook.getConsultList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -94,9 +123,11 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<Consultation> consults = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students) {
+        AddressBookStub(Collection<Student> students, Collection<Consultation> consults) {
             this.students.setAll(students);
+            this.consults.setAll(consults);
         }
 
         @Override
@@ -104,10 +135,9 @@ public class AddressBookTest {
             return students;
         }
 
-        // Missing method for test:
         @Override
-        public ObservableList<Consultation> getConsultationList() {
-            return FXCollections.observableArrayList(); // return empty list as a stub
+        public ObservableList<Consultation> getConsultList() {
+            return consults;
         }
     }
 

@@ -16,9 +16,9 @@ public interface ReadOnlyAddressBook {
     ObservableList<Student> getStudentList();
 
     /**
-     * Returns an unmodifiable view of the consultations list.
-     * This list will not contain any duplicate consultations.
+     * Returns an unmodifiable view of the consults list.
+     * This list will not contain any duplicate students.
      */
-    ObservableList<Consultation> getConsultationList();
+    ObservableList<Consultation> getConsultList();
 
 }

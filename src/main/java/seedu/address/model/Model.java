@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -94,45 +93,15 @@ public interface Model {
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
 
-    // Consultation-related methods
+    /**
+     * Adds the given consult.
+     * @param consult Consultation to be added.
+     */
+    void addConsult(Consultation consult);
 
     /**
-     * Returns true if a consultation with the same identity exists in the address book.
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
      */
-    boolean hasConsultation(Consultation consultation);
-
-    /**
-     * Deletes the given consultation.
-     * The consultation must exist in the address book.
-     */
-    void deleteConsultation(Consultation target);
-
-    /**
-     * Adds the given consultation.
-     * {@code consultation} must not already exist in the address book.
-     */
-    void addConsultation(Consultation consultation);
-
-    /**
-     * Replaces the given consultation {@code target} with {@code editedConsultation}.
-     * {@code target} must exist in the address book.
-     * The consultation identity of {@code editedConsultation} must not be the same as another existing consultation.
-     */
-    void setConsultation(Consultation target, Consultation editedConsultation);
-
-    /** Returns an unmodifiable view of the filtered consultation list */
-    ObservableList<Consultation> getFilteredConsultationList();
-
-    /**
-     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredConsultationList(Predicate<Consultation> predicate);
-
-    /**
-     * Finds a student by name.
-     * @param name The name of the student to search for.
-     * @return An Optional containing the student if found, or empty if not.
-     */
-    Optional<Student> findStudentByName(Name name);
+    boolean hasConsult(Consultation consult);
 }
