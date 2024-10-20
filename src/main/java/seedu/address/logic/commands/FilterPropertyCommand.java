@@ -9,20 +9,22 @@ import seedu.address.model.property.MatchingPrice;
 import seedu.address.model.property.Type;
 
 /**
- * Filters properties based on their optional {@code PropertyType}.
+ * Filters properties based on their optional {@code PropertyType} and {@code MatchingPrice}.
  */
 public class FilterPropertyCommand extends Command {
     /** The command word to trigger the filtering action. */
     public static final String COMMAND_WORD = "filterproperty";
 
     /**
-     * Usage information for the filterclient command.
-     * Provides a description of the command's purpose and the format for entering client names.
+     * Usage information for the {@code filterproperty} command.
+     * Provides a description of the command's purpose and the format for entering property type.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters the clients based on PropertyType and price. "
-            + "Parameters: PropertyType (must be a string) and/or price (must be an integer) "
-            + PREFIX_TYPE + "[TYPE]\n" + PREFIX_LTE + "[MATCHING_PRICE]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_TYPE + "CONDO" + " " + PREFIX_LTE + "30000000";
+    public static final String MESSAGE_USAGE = String
+            .format("%s: Filters the properties based on PropertyType and MatchingPrice. \n"
+                    + "Parameters: %s[TYPE]%s[MATCHING_PRICE] \n"
+                    + "Restrictions: %s[TYPE] is case insensetive HDB, CONDO, LANDED. \n"
+                    + "%s[MATCHING_PRICE] is a non-negative integer.",
+                    COMMAND_WORD, PREFIX_TYPE, PREFIX_LTE, PREFIX_TYPE, PREFIX_LTE);
 
     public static final String MESSAGE_SUCCESS = "Listed filtered properties";
     public static final String MESSAGE_UNSUCCESS = "Filtered properties failed";
@@ -33,14 +35,16 @@ public class FilterPropertyCommand extends Command {
     private MatchingPrice gteObj;
 
     /**
-     * Constructs a FilterClientCommand to filter the specified {@code Property}.
+     * Constructs a FilterPropertyCommand to filter the specified {@code Property}.
      *
      * @param type The client to filter by.
      * @throws NullPointerException If the provided client is null.
      */
     public FilterPropertyCommand(Type type, MatchingPrice lteObj, MatchingPrice gteObj) {
         this.type = type;
+        /* Creates the upper bound of the MatchingPrice */
         this.lteObj = lteObj;
+        /* Creates the lower bound of the MatchingPrice */
         this.gteObj = gteObj;
     }
 

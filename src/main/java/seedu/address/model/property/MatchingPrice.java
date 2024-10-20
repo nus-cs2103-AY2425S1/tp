@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents matching price of property in the address book.
+ * Represents matching price of property in the property book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class MatchingPrice {
@@ -28,7 +28,7 @@ public class MatchingPrice {
      * Returns the intersection of ask and bid
      */
     public static int getMatchingPrice(Ask ask, Bid bid) {
-        return (Integer.parseInt(ask.toString()) + Integer.parseInt(bid.toString())) / 2;
+        return (ask.toInteger() + bid.toInteger()) / 2;
     }
 
     /**

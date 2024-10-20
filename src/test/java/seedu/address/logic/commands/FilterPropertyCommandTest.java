@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_CONDO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
+import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
@@ -21,7 +22,7 @@ import seedu.address.model.property.Type;
 
 public class FilterPropertyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
-            getTypicalClientBook());
+            getTypicalClientBook(), getTypicalMeetingBook());
 
     @Test
     public void execute_matchingName_filterSuccessful() {
@@ -30,7 +31,7 @@ public class FilterPropertyCommandTest {
         FilterPropertyCommand command = new FilterPropertyCommand(new Type(typePrefix), null, null);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + typePrefix + ".*"));
 
@@ -46,7 +47,7 @@ public class FilterPropertyCommandTest {
         FilterPropertyCommand command = new FilterPropertyCommand(new Type(typePrefix), null, null);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + typePrefix + ".*"));
 
@@ -60,7 +61,7 @@ public class FilterPropertyCommandTest {
                 new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY), null);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + "" + ".*"));
 
@@ -74,7 +75,7 @@ public class FilterPropertyCommandTest {
                 new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + "" + ".*"));
 
@@ -88,7 +89,7 @@ public class FilterPropertyCommandTest {
                 new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY), new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + "" + ".*"));
 
@@ -103,7 +104,7 @@ public class FilterPropertyCommandTest {
                 new MatchingPrice(VALID_MATCHINGPRICE_BEDOK), new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + "" + ".*"));
 
@@ -117,7 +118,7 @@ public class FilterPropertyCommandTest {
                 new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY), new MatchingPrice(VALID_MATCHINGPRICE_BEDOK));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + "" + ".*"));
 
@@ -133,7 +134,7 @@ public class FilterPropertyCommandTest {
                 new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY), new MatchingPrice(VALID_MATCHINGPRICE_BEDOK));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredPropertyList(property ->
                 property.getType().toString().matches("(?i)^" + typePrefix + ".*"));
 
