@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
@@ -68,6 +67,9 @@ public class CommandBox extends UiPart<Region> {
             historyIndex += 1;
             setCommandFieldToHistory();
             break;
+        default:
+            break; // do nothing on default
+            // can even add effects or anything or update statusbar
         }
     }
 
