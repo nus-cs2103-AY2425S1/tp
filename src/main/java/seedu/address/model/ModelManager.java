@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -170,16 +171,10 @@ public class ModelManager implements Model {
 
         ModelManager otherModelManager = (ModelManager) other;
 
-        boolean areOtherFieldsEqual = addressBook.equals(otherModelManager.addressBook)
+        return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
-        if (!areOtherFieldsEqual) {
-            return false;
-        } else if (personToDisplay == null) {
-            return otherModelManager.personToDisplay == null;
-        } else {
-            return personToDisplay.equals(otherModelManager.personToDisplay);
-        }
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && Objects.equals(personToDisplay, otherModelManager.personToDisplay);
     }
 
 }
