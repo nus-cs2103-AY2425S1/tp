@@ -4,14 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.courseclass.recitation.Recitation;
-import tahub.contacts.model.courseclass.tutorial.Tutorial;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Address;
 import tahub.contacts.model.person.Email;
@@ -37,25 +37,7 @@ class StudentCourseAssociationTest {
 
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
-        assertSame(tutorial, sca.getCourseClass());
-    }
-    @Test
-    public void testConstructorWithCourseAndRecitation() {
-        Person student = new Person(
-                new MatriculationNumber("A1234567B"),
-                new Name("Prof Ben Leong"),
-                new Phone("12345678"),
-                new Email("benl@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course("CS2102", "Database Systems");
-        tahub.contacts.model.courseclass.recitation.Recitation recitation = new Recitation("R1", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, recitation);
-
-        assertSame(student, sca.getStudent());
-        assertSame(course, sca.getCourse());
-        assertSame(recitation, sca.getCourseClass());
+        assertSame(tutorial, sca.getTutorial());
     }
     @Test
     public void testEqualsMethod() {
@@ -110,27 +92,14 @@ class StudentCourseAssociationTest {
         Tutorial tutorial = new Tutorial("T5", course);
         StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
-        assertSame(student, sca.getStudent());
-        assertSame(course, sca.getCourse());
-        assertSame(tutorial, sca.getCourseClass());
-    }
-    @Test
-    public void testConstructorWithDifferentCourseAndRecitation() {
-        Person student = new Person(
-                new MatriculationNumber("A1234567F"),
-                new Name("Prof Foo Yee Shoon"),
-                new Phone("12345678"),
-                new Email("foos@example.com"),
-                new Address("Computing 1, 13 Computing Dr, 117417"),
-                new HashSet<>()
-        );
-        Course course = new Course("IS1105", "Strategic Financial Management");
-        tahub.contacts.model.courseclass.recitation.Recitation recitation = new Recitation("R2", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, recitation);
+        Course courseDiff = new Course("IS1108", "Unethical Computing");
+        Tutorial tutorialDiff = new Tutorial("T77", course);
 
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
-        assertSame(recitation, sca.getCourseClass());
+        assertSame(tutorial, sca.getTutorial());
+        assertNotEquals(courseDiff, sca.getCourse());
+        assertNotEquals(tutorialDiff, sca.getTutorial());
     }
     @Test
     public void testEqualsMethodWithDifferentCourses() {
@@ -161,8 +130,8 @@ class StudentCourseAssociationTest {
                 new HashSet<>()
         );
         Course course = new Course("IS1131", "Financial Management");
-        tahub.contacts.model.courseclass.recitation.Recitation recitation = new Recitation("R3", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, recitation);
+        Tutorial tutorial = new Tutorial("T14", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
         Course retrievedCourse = sca.getCourse();
         assertSame(course, retrievedCourse);
@@ -197,8 +166,8 @@ class StudentCourseAssociationTest {
                 new HashSet<>()
         );
         Course course = new Course("IS2102", "Financial Management");
-        tahub.contacts.model.courseclass.recitation.Recitation recitation = new Recitation("R4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, recitation);
+        Tutorial tutorial = new Tutorial("T4", course);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
 
         sca.addGrade("Midterm", 85.0);
         assertEquals("B", sca.getLetterGrade());

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.courseclass.tutorial.Tutorial;
+import tahub.contacts.model.tutorial.Tutorial;
 
 public class JsonAdaptedTutorialTest {
 

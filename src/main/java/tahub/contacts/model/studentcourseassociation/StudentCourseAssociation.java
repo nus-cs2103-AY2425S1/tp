@@ -1,9 +1,7 @@
 package tahub.contacts.model.studentcourseassociation;
 
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.courseclass.CourseClass;
-import tahub.contacts.model.courseclass.recitation.Recitation;
-import tahub.contacts.model.courseclass.tutorial.Tutorial;
+import tahub.contacts.model.tutorial.Tutorial;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 
@@ -19,11 +17,6 @@ public class StudentCourseAssociation {
      * May be null, if this TA is not the student's tutorial TA.
      */
     private Tutorial tutorial = null;
-    /**
-     * Represents a Recitation
-     * May be null, if this TA is not the student's recitation TA.
-     * */
-    private tahub.contacts.model.courseclass.recitation.Recitation recitation = null;
     private GradingSystem grades;
 
     /**
@@ -39,22 +32,6 @@ public class StudentCourseAssociation {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        this.grades = new GradingSystem();
-    }
-
-    /**
-     * Represents an association between a student, course, grading system, and recitation.
-     * The TA will view this object in TAHub.
-     * This constructor is to be used if the TA is this student's Recitation TA.
-     *
-     * @param student the student associated with this association
-     * @param course the course associated with this association
-     * @param recitation the recitation associated with this association
-     */
-    public StudentCourseAssociation(Person student, Course course, Recitation recitation) {
-        this.student = student;
-        this.course = course;
-        this.recitation = recitation;
         this.grades = new GradingSystem();
     }
 
@@ -76,21 +53,8 @@ public class StudentCourseAssociation {
         return course;
     }
 
-
-    /**
-     * Get the CourseClass associated with this StudentCourseAssociation.
-     * If a Tutorial is associated, return the Tutorial; otherwise, return the Recitation.
-     * Note that this association cannot simultaneously have a Tutorial
-     * and a Recitation by design.
-     *
-     * @return the CourseClass associated with this StudentCourseAssociation
-     */
-    public CourseClass getCourseClass() {
-        if (tutorial != null) {
-            return this.tutorial;
-        } else {
-            return this.recitation;
-        }
+    public Tutorial getTutorial() {
+        return tutorial;
     }
 
     /**
@@ -158,10 +122,6 @@ public class StudentCourseAssociation {
             return false;
         }
 
-        if (this.tutorial != null) {
-            return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
-        } else {
-            return this.recitation.equals(otherStudentCourseAssociation.recitation);
-        }
+        return this.tutorial.equals(otherStudentCourseAssociation.tutorial);
     }
 }
