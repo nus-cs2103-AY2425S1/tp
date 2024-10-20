@@ -6,7 +6,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.model.OwnedAppointment;
-import seedu.address.model.appointment.Appointment;
 
 /**
  * Panel containing the list of appointment
