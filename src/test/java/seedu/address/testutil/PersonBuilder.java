@@ -2,9 +2,11 @@ package seedu.address.testutil;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -29,7 +31,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Set<Tag> tags;
-    private Map<Tutorial, Boolean> tutorials;
+    private Map<Tutorial, AttendanceStatus> tutorials;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -40,7 +42,11 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         tags = new HashSet<>();
-        tutorials = new HashMap<>();
+        tutorials = new LinkedHashMap<>();
+        for (int i = 1; i <= 13; i++) {
+            Tutorial tutorial = new Tutorial(String.valueOf(i));
+            tutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
+        }
     }
 
     /**
@@ -92,7 +98,7 @@ public class PersonBuilder {
      * Parses the {@code tutorials} and {@code attendance} into a {@code Map<Tutorial, Boolean>} and set it to the
      * {@code Person} that we are building.
      */
-    public PersonBuilder withTutorials(String[] tutorials, Boolean[] attendance) {
+    public PersonBuilder withTutorials(String[] tutorials, AttendanceStatus[] attendance) {
         this.tutorials = SampleDataUtil.getTutorialMap(tutorials, attendance);
         return this;
     }

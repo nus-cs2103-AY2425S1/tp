@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 
 /**
@@ -65,11 +66,11 @@ public class PersonCard extends UiPart<Region> {
             Label tutorialLabel = new Label(String.valueOf(index));
             tutorialLabel.getStyleClass().add("tutorial-label");
 
-            if (person.hasAttendedTutorial(String.valueOf(index)) == Person.AttendanceStatus.ATTENDED) {
+            if (person.hasAttendedTutorial(String.valueOf(index)) == AttendanceStatus.ATTENDED) {
                 tutorialLabel.getStyleClass().add("tutorial-attended");
             }
 
-            if (person.hasAttendedTutorial(String.valueOf(index)) == Person.AttendanceStatus.ABSENT) {
+            if (person.hasAttendedTutorial(String.valueOf(index)) == AttendanceStatus.ABSENT) {
                 tutorialLabel.getStyleClass().add("tutorial-absent");
             }
 

@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -23,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -103,7 +104,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Map<Tutorial, Boolean> updatedTutorials = personToEdit.getTutorials();
+        Map<Tutorial, AttendanceStatus> updatedTutorials = personToEdit.getTutorials();
 
         return new Person(updatedName, updatedStudentId, updatedPhone, updatedEmail, updatedTags,
                 updatedTutorials);
@@ -143,7 +144,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
-        private Map<Tutorial, Boolean> tutorials;
+        private Map<Tutorial, AttendanceStatus> tutorials;
 
         public EditPersonDescriptor() {}
 
@@ -220,8 +221,8 @@ public class EditCommand extends Command {
          * Sets {@code tutorials} to this object's {@code tutorials}.
          * A defensive copy of {@code tutorials} is used internally.
          */
-        public void setTutorials(Map<Tutorial, Boolean> tutorials) {
-            this.tutorials = (tutorials != null) ? new HashMap<>(tutorials) : null;
+        public void setTutorials(Map<Tutorial, AttendanceStatus> tutorials) {
+            this.tutorials = (tutorials != null) ? new LinkedHashMap<>(tutorials) : null;
         }
 
         @Override

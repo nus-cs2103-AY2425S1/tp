@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -91,8 +92,8 @@ public class EditPersonDescriptorBuilder {
      * tutorials.
      */
     public EditPersonDescriptorBuilder withTutorials(String... tutorials) {
-        Boolean[] attendance = new Boolean[tutorials.length];
-        Arrays.fill(attendance, Boolean.TRUE);
+        AttendanceStatus[] attendance = new AttendanceStatus[tutorials.length];
+        Arrays.fill(attendance, AttendanceStatus.NOT_TAKEN_PLACE);
         return withTutorials(tutorials, attendance);
     }
 
@@ -100,8 +101,8 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tutorials} into a {@code Map<Tutorial, Boolean>} and set it to the
      * {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withTutorials(String[] tutorials, Boolean[] attendance) {
-        Map<Tutorial, Boolean> tutorialMap = new HashMap<>();
+    public EditPersonDescriptorBuilder withTutorials(String[] tutorials, AttendanceStatus[] attendance) {
+        Map<Tutorial, AttendanceStatus> tutorialMap = new HashMap<>();
         for (int i = 0; i < tutorials.length; i++) {
             tutorialMap.put(new Tutorial(tutorials[i]), attendance[i]);
         }

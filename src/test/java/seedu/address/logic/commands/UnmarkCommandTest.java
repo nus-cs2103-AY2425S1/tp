@@ -25,6 +25,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
@@ -88,8 +89,8 @@ public class UnmarkCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         // Check person is edited
-        Map<Tutorial, Boolean> newTutorials = new HashMap<>(personToEdit.getTutorials());
-        newTutorials.put(tutorialToBeAdded, false);
+        Map<Tutorial, AttendanceStatus> newTutorials = new HashMap<>(personToEdit.getTutorials());
+        newTutorials.put(tutorialToBeAdded, AttendanceStatus.ABSENT);
         Person expectedEditedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),

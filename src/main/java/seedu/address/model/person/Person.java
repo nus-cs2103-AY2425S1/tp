@@ -3,8 +3,8 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -17,16 +17,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
-
-    /**
-     * Represents the Attendance Status of a tutorial. Mainly used for GUI generation and testing.
-     */
-    public enum AttendanceStatus {
-        ATTENDED,
-        ABSENT,
-        NOT_TAKEN_PLACE
-    }
-
     // Identity fields
     private final Name name;
     private final StudentId studentId;
@@ -35,13 +25,13 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<Tutorial, Boolean> tutorials = new HashMap<>();
+    private final Map<Tutorial, AttendanceStatus> tutorials = new LinkedHashMap<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, StudentId studentId, Phone phone, Email email, Set<Tag> tags,
-                  Map<Tutorial, Boolean> tutorials) {
+                  Map<Tutorial, AttendanceStatus> tutorials) {
         requireAllNonNull(name, studentId, phone, email, tags, tutorials);
         this.name = name;
         this.studentId = studentId;
@@ -79,7 +69,7 @@ public class Person {
      * Returns an immutable tutorial map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Map<Tutorial, Boolean> getTutorials() {
+    public Map<Tutorial, AttendanceStatus> getTutorials() {
         return Collections.unmodifiableMap(tutorials);
     }
 
@@ -87,13 +77,7 @@ public class Person {
      * Returns true if the person has attended the stated tutorial, false otherwise.
      */
     public AttendanceStatus hasAttendedTutorial(String index) {
-        if (tutorials.containsKey(new Tutorial(index))) {
-            return tutorials.get(new Tutorial(index))
-                    ? AttendanceStatus.ATTENDED
-                    : AttendanceStatus.ABSENT;
-        }
-
-        return AttendanceStatus.NOT_TAKEN_PLACE;
+        return tutorials.get(new Tutorial(index));
     }
 
     /**

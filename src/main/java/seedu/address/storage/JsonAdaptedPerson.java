@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -81,10 +82,17 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final Map<Tutorial, Boolean> personTutorials = new HashMap<>();
-        for (JsonAdaptedTutorial tut : tutorials) {
-            Boolean completed = tut.getCompleted();
-            personTutorials.put(tut.toModelType(), completed);
+        final Map<Tutorial, AttendanceStatus> personTutorials = new LinkedHashMap<>();
+        if (tutorials.isEmpty()) {
+            for (int i = 1; i <= 13; i++) {
+                Tutorial tutorial = new Tutorial(String.valueOf(i));
+                personTutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
+            }
+        } else {
+            for (JsonAdaptedTutorial tut : tutorials) {
+                AttendanceStatus completed = tut.getCompleted();
+                personTutorials.put(tut.toModelType(), completed);
+            }
         }
 
         if (name == null) {
@@ -122,7 +130,7 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Map<Tutorial, Boolean> modelTutorials = new HashMap<>(personTutorials);
+        final Map<Tutorial, AttendanceStatus> modelTutorials = new LinkedHashMap<>(personTutorials);
 
         return new Person(modelName, modelStudentId, modelPhone, modelEmail, modelTags, modelTutorials);
     }

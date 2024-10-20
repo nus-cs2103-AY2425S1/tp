@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -63,14 +64,14 @@ public class SampleDataUtil {
     /**
      * Returns a tutorial set containing the list of strings given and all are defaulted to true.
      */
-    public static Map<Tutorial, Boolean> getTutorialMap(String... strings) {
-        Boolean[] attendance = new Boolean[strings.length];
-        Arrays.fill(attendance, Boolean.TRUE);
+    public static Map<Tutorial, AttendanceStatus> getTutorialMap(String... strings) {
+        AttendanceStatus[] attendance = new AttendanceStatus[strings.length];
+        Arrays.fill(attendance, AttendanceStatus.NOT_TAKEN_PLACE);
         return getTutorialMap(strings, attendance);
     }
 
-    public static Map<Tutorial, Boolean> getTutorialMap(String[] strings, Boolean[] attendance) {
-        Map<Tutorial, Boolean> tutorialMap = new HashMap<>();
+    public static Map<Tutorial, AttendanceStatus> getTutorialMap(String[] strings, AttendanceStatus[] attendance) {
+        Map<Tutorial, AttendanceStatus> tutorialMap = new HashMap<>();
         for (int i = 0; i < strings.length; i++) {
             tutorialMap.put(new Tutorial(strings[i]), attendance[i]);
         }

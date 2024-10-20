@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -13,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -121,11 +121,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidTutorials_throwsIllegalValueException() {
         List<JsonAdaptedTutorial> invalidTutorials = new ArrayList<>(VALID_TUTORIALS);
-        JsonAdaptedTutorial invalidTutorial = new JsonAdaptedTutorial(INVALID_TUTORIAL, true);
-        assertEquals(invalidTutorial.getTutorialNumber(), "a");
-        assertTrue(invalidTutorial.getCompleted());
-
-        invalidTutorials.add(new JsonAdaptedTutorial(INVALID_TUTORIAL, true));
+        invalidTutorials.add(new JsonAdaptedTutorial(INVALID_TUTORIAL, AttendanceStatus.NOT_TAKEN_PLACE));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_STUDENTID, VALID_PHONE, VALID_EMAIL,
                 VALID_TAGS, invalidTutorials);
         assertThrows(IllegalValueException.class, person::toModelType);

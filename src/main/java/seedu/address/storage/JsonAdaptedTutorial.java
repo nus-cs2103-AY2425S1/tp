@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Tutorial;
 
 /**
@@ -12,24 +13,24 @@ import seedu.address.model.person.Tutorial;
 class JsonAdaptedTutorial {
 
     private final String tutorialNumber;
-    private final Boolean completed;
+    private final AttendanceStatus attendanceStatus;
 
     /**
      * Constructs a {@code JsonAdaptedTutorial} with the given {@code tutorial}.
      */
     @JsonCreator
     public JsonAdaptedTutorial(@JsonProperty("tutorialNumber") String tutorialNumber,
-                               @JsonProperty("completed") Boolean completed) {
+                               @JsonProperty("attendanceStatus") AttendanceStatus attendanceStatus) {
         this.tutorialNumber = tutorialNumber;
-        this.completed = completed;
+        this.attendanceStatus = attendanceStatus;
     }
 
     /**
      * Converts a given {@code Tutorial} into this class for Jackson use.
      */
-    public JsonAdaptedTutorial(Tutorial source, Boolean completed) {
+    public JsonAdaptedTutorial(Tutorial source, AttendanceStatus attendanceStatus) {
         this.tutorialNumber = source.tutorial;
-        this.completed = completed;
+        this.attendanceStatus = attendanceStatus;
     }
 
     @JsonProperty("tutorialNumber")
@@ -37,9 +38,9 @@ class JsonAdaptedTutorial {
         return tutorialNumber;
     }
 
-    @JsonProperty("completed")
-    public Boolean getCompleted() {
-        return completed;
+    @JsonProperty("attendanceStatus")
+    public AttendanceStatus getCompleted() {
+        return attendanceStatus;
     }
 
     /**
