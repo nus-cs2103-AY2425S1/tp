@@ -45,8 +45,8 @@ public class Event {
         return liaisons;
     }
     public String getLiaisonsString() {
-        return liaisons.stream().collect(StringBuilder::new,
-                (sb, p) -> sb.append(p.getName().fullName).append(" ").append(p.getPhone().value).append("\n"),
+        return liaisons.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getName().fullName)
+                        .append(" ").append(p.getPhone().value).append("\n"),
                 StringBuilder::append).toString();
     }
 
