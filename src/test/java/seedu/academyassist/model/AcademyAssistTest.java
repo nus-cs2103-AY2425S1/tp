@@ -103,6 +103,11 @@ public class AcademyAssistTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public int getStudentCount() {
+            return 0;
+        }
     }
 
 }

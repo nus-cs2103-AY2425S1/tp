@@ -1,15 +1,13 @@
 package seedu.academyassist.logic.parser;
 
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.academyassist.logic.commands.AddClassCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
-import seedu.academyassist.model.person.Ic;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 
 
@@ -25,14 +23,14 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
      */
     public AddClassCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_IC, PREFIX_SUBJECT);
+                ArgumentTokenizer.tokenize(args, PREFIX_SUBJECT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_IC, PREFIX_SUBJECT) || !argMultimap.getPreamble().isEmpty()) {
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_SUBJECT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IC, PREFIX_SUBJECT); // Only can add one class at a time.
-        Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_IC).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SUBJECT); // Only can add one class at a time.
+        StudentId studentId = ParserUtil.parseStudentId(argMultimap.getPreamble());
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
         // Verify that there is exactly one subject
@@ -42,15 +40,6 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
 
         // Assign the subject to subject variable
         Subject subject = subjects.iterator().next();
-        return new AddClassCommand(ic, subject);
+        return new AddClassCommand(studentId, subject);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.academyassist.commons.core.GuiSettings;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 
 /**
@@ -66,6 +67,11 @@ public interface Model {
     boolean hasPersonWithIc(Ic ic);
 
     /**
+     * Returns true if a person with this {@code student id} exists in the Academy Assist management system.
+     */
+    boolean hasPersonWithStudentId(StudentId studentId);
+
+    /**
      * Returns true if {@code Person} already is taking this {@code subject}
      */
     boolean personDuplicateClass(Subject subject, Person student);
@@ -117,9 +123,23 @@ public interface Model {
     void sortAcademyAssistByClass();
 
     /**
+     * Increment student count by 1.
+     */
+    void incrementStudentCount();
+
+    /**
+     * Returns student count from academy assist management system.
+     */
+    int getStudentCount();
+
+    /**
      * Returns person from academy assist management system with given ic.
      */
     Person getPersonWithIc(Ic ic);
 
+    /**
+     * Returns person from academy assist management system with given {@code student id}.
+     */
+    Person getPersonWithStudentId(StudentId studentId);
 
 }

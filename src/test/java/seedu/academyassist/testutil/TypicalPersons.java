@@ -9,6 +9,8 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
+import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_SUBJECT_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_SUBJECT_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -28,43 +30,43 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withIc(VALID_IC_ALICE).withYearGroup("1").withSubjects("English")
-            .withTags("friends").build();
+            .withPhone("94351253").withIc(VALID_IC_ALICE).withYearGroup("1").withStudentId("10001")
+            .withSubjects("English").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withSubjects("Maths").withEmail("johnd@example.com")
-            .withPhone("98765432").withIc("F1264567X").withYearGroup("1").withTags("owesMoney", "friends")
-            .build();
+            .withPhone("98765432").withIc("F1264567X").withYearGroup("1").withStudentId("10002")
+            .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withIc("F1254567X").withYearGroup("1")
-            .withSubjects("Science").build();
+            .withStudentId("10003").withSubjects("Science").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withIc("F1234569X").withYearGroup("1")
-            .withTags("friends").withSubjects("English").build();
+            .withStudentId("10004").withTags("friends").withSubjects("English").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withIc("F2238567X").withYearGroup("1")
-            .withSubjects("English").build();
+            .withStudentId("10005").withSubjects("English").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withIc("F1334567X").withYearGroup("1")
-            .withSubjects("English").build();
+            .withStudentId("10006").withSubjects("English").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withIc("F1294667X").withYearGroup("1")
-            .withSubjects("Science").build();
+            .withStudentId("10007").withSubjects("Science").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").withIc("F1236667X").withYearGroup("1")
-            .withSubjects("English").build();
+            .withStudentId("10008").withSubjects("English").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withIc("F1888567X").withYearGroup("1")
-            .withSubjects("Science").build();
+            .withStudentId("10009").withSubjects("Science").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withSubjects(VALID_SUBJECT_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withStudentId(VALID_STUDENT_ID_AMY)
+            .withSubjects(VALID_SUBJECT_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withStudentId(VALID_STUDENT_ID_BOB)
+            .withSubjects(VALID_SUBJECT_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -78,6 +80,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        ab.setStudentCount(7);
         return ab;
     }
 

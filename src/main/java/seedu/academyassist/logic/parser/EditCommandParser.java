@@ -17,7 +17,7 @@ import java.util.Set;
 
 import seedu.academyassist.logic.commands.EditCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
-import seedu.academyassist.model.person.Ic;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.tag.Tag;
 
@@ -37,10 +37,10 @@ public class EditCommandParser implements Parser<EditCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_IC, PREFIX_SUBJECT, PREFIX_TAG);
 
-        Ic nric;
+        StudentId studentId;
 
         try {
-            nric = ParserUtil.parseIc(argMultimap.getPreamble());
+            studentId = ParserUtil.parseStudentId(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
@@ -71,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(nric, editPersonDescriptor);
+        return new EditCommand(studentId, editPersonDescriptor);
     }
 
     /**

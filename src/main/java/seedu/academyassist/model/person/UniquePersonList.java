@@ -107,6 +107,14 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if there is a {@code Person} in the list with the given {@code StudentId}.
+     */
+    public boolean hasPersonWithStudentId(StudentId studentId) {
+        requireNonNull(studentId);
+        return internalList.stream().anyMatch(person -> person.getStudentId().equals(studentId));
+    }
+
+    /**
      * Returns the student in the list with the given IC.
      * Throws PersonNotFoundException if no person with the given IC is found.
      */
@@ -114,6 +122,18 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(ic);
         return internalList.stream()
                 .filter(person -> person.getIc().equals(ic))
+                .findFirst()
+                .orElseThrow(PersonNotFoundException::new);
+    }
+
+    /**
+     * Returns the {@code Person} in the list with the given {@code StudentId}.
+     * Throws {@link PersonNotFoundException} if no person with the given {@code StudentId} is found.
+     */
+    public Person getPersonWithStudentId(StudentId studentId) {
+        requireNonNull(studentId);
+        return internalList.stream()
+                .filter(person -> person.getStudentId().equals(studentId))
                 .findFirst()
                 .orElseThrow(PersonNotFoundException::new);
     }
