@@ -62,6 +62,14 @@ public class DuplicatePhoneTagger {
         phoneFrequencies.clear();
     }
 
+    /**
+     * Getter method to retrieve HashMap of phone frequencies
+     * @return a HashMap containing the frequencies of each phone number
+     */
+    public HashMap<Phone, Integer> getPhoneFrequencies() {
+        return phoneFrequencies;
+    }
+
     private void updatePersonsList(Model model, List<Person> persons) {
         for (Person personToUpdate : persons) {
             Phone phone = personToUpdate.getPhone();
