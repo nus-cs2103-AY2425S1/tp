@@ -53,6 +53,10 @@ public class EmergencyContactCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
+        if (emergencyContact.contactNumber.isEmpty() || emergencyContact.contactName.isEmpty()) {
+            throw new CommandException("Please make sure both name and phone number is filled! Command details:\n"
+                    + MESSAGE_USAGE);
+        }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         if (personToEdit.getEmergencyContact() != null
                 && !personToEdit.getEmergencyContact().contactName.isEmpty()
