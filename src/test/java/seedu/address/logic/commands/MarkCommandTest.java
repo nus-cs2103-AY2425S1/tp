@@ -34,12 +34,13 @@ public class MarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToMark = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ContactRecord validRecord = new ContactRecordBuilder().build();
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, validRecord);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+                Messages.format(personToMark),
+                validRecord);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark, validRecord);
@@ -49,7 +50,7 @@ public class MarkCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredPersonList().size() + 1);
         ContactRecord validRecord = new ContactRecordBuilder().build();
 
         MarkCommand markCommand = new MarkCommand(outOfBoundIndex, validRecord);
@@ -61,13 +62,14 @@ public class MarkCommandTest {
     public void execute_validIndexFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToMark = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ContactRecord validRecord = new ContactRecordBuilder().build();
 
         MarkCommand markCommand = new MarkCommand(INDEX_FIRST_PERSON, validRecord);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+                Messages.format(personToMark),
+                validRecord);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark, validRecord);
@@ -166,12 +168,13 @@ public class MarkCommandTest {
 
     @Test
     public void execute_validNric_success() {
-        Person personToMark = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToMark = model.getSortedFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ContactRecord validRecord = new ContactRecordBuilder().build();
         MarkCommand markCommand = new MarkCommand(personToMark.getNric(), validRecord);
 
         String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_PERSON_SUCCESS,
-                Messages.format(personToMark));
+                Messages.format(personToMark),
+                validRecord);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.markAsContacted(personToMark, validRecord);

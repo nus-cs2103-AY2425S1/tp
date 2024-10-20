@@ -1,10 +1,11 @@
 package seedu.address.model.contactrecord;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 import seedu.address.model.person.CallFrequency;
 
@@ -12,9 +13,10 @@ import seedu.address.model.person.CallFrequency;
  * Represents a Person's contacted date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidContactRecord(String)}
  */
-public class ContactRecord {
+public class ContactRecord implements Comparable<ContactRecord> {
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format of YYYY-MM-DD";
+            "Dates should be in the format of " + DATE_FORMAT + " and should not be in the future.";
     public static final String VALIDATION_REGEX = "\\d{4}-\\d{2}-\\d{2}";
     public final LocalDate value;
     private final String notes;
@@ -24,23 +26,26 @@ public class ContactRecord {
      *
      * @param date A valid date and time.
      */
-    public ContactRecord(String date, String notes) {
+    public ContactRecord(LocalDate date, String notes) {
         requireNonNull(date);
         requireNonNull(notes);
-        checkArgument(isValidContactRecord(date), MESSAGE_CONSTRAINTS);
-        value = LocalDate.parse(date);
+        value = date;
         this.notes = notes;
     }
 
     /**
      * Returns true if a given string is a valid record with a valid date.
      */
-    public static boolean isValidContactRecord(String test) {
+    public static boolean isValidContactRecord(String testDate) {
         try {
-            if (!test.matches(VALIDATION_REGEX)) {
+            if (!testDate.matches(VALIDATION_REGEX)) {
                 return false;
             }
-            LocalDate.parse(test);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            LocalDate date = LocalDate.parse(testDate, formatter);
+            if (date.isAfter(LocalDate.now())) {
+                return false;
+            }
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -51,7 +56,7 @@ public class ContactRecord {
      * Returns the current record.
      */
     public static ContactRecord createCurrentRecord(String notes) {
-        return new ContactRecord(LocalDate.now().toString(), notes);
+        return new ContactRecord(LocalDate.now(), notes);
     }
 
     /**
@@ -70,7 +75,7 @@ public class ContactRecord {
 
     @Override
     public String toString() {
-        return "Date: " + value.toString() + " Notes: " + notes;
+        return "Date: " + value.toString() + (!Objects.equals(notes, "") ? " Notes: " + notes : "");
     }
 
     public String getDate() {
@@ -98,7 +103,11 @@ public class ContactRecord {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return Objects.hash(value, notes);
     }
 
+    @Override
+    public int compareTo(ContactRecord other) {
+        return value.compareTo(other.value);
+    }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Represents a List of ContactRecords in the address book.
+ * Guarantees: the list is always sorted, with the latest ContactRecord at the end.
  */
 public class ContactRecordList extends ArrayList<ContactRecord> {
 
@@ -24,6 +25,24 @@ public class ContactRecordList extends ArrayList<ContactRecord> {
 
     public ContactRecordList(ArrayList<ContactRecord> contactRecords) {
         super(contactRecords);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Guarantees that the ContactRecordList is always sorted.
+     */
+    @Override
+    public boolean add(ContactRecord contactRecord) {
+        if (this.size() == 0) {
+            return super.add(contactRecord);
+        }
+        for (int i = 0; i < this.size(); i++) {
+            if (contactRecord.compareTo(this.get(i)) < 0) {
+                super.add(i, contactRecord);
+                return true;
+            }
+        }
+        return super.add(contactRecord);
     }
 
     /**

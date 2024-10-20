@@ -80,7 +80,7 @@ Adds an elderly to ContactMate.
 Format: `add i/NRIC n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/CALL_FREQUENCY [t/TAG]…​`
 
 * The call frequency is in days and has to be a positive number less than or equal to 7.
-* NRIC must be a valid, government issued NRIC.
+* `NRIC` must be a valid, government issued NRIC.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 An elderly can have any number of tags (including 0)
@@ -103,6 +103,7 @@ Edits an existing elderly in ContactMate.
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
 * Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The `NRIC` has to be a valid NRIC.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the elderly will be removed i.e adding of tags is not cumulative.
@@ -140,7 +141,7 @@ Format: `delete INDEX/NRIC`
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The NRIC has to be a valid NRIC
+* The `NRIC` has to be a valid NRIC
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd elderly in ContactMate.
@@ -148,19 +149,21 @@ Examples:
 
 ### Marking an elderly : `mark`
 
-Marks the specified elderly from ContactMate and adds the current date and optional notes to their call history. 
-ContactMate will update the next contact date for the specified elderly in the Main Window.
+Marks the specified elderly from ContactMate as called. 
+As a result, ContactMate will also update the next contact date for the specified elderly in the Main Window.
 
-Format: `mark INDEX/NRIC [o/notes]`
+Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
-* Marks the elderly at the specified `INDEX` or `NRIC`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The NRIC has to be a valid NRIC
+* Marks the person at the specified `INDEX` or `NRIC`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The `NRIC` has to be a valid NRIC.
+* The date must be in the format `YYYY-MM-DD` and must not be a future date.
+* If the parameter `d/DATE` is not provided, the current date will be used.
 
 Examples:
-* `list` followed by `mark 2 o/Feels better today` marks the 2nd elderly in ContactMate and updates his/her call history with the corresponding note "Feels better today".
-* `mark S6878830G` marks the elderly with NRIC S6878830G and updates his/her call history.
+* `mark 1 d/2021-10-01 o/This person is sad`
+* `mark S6878830G d/2021-10-01`
+* `list` followed by `mark 2` Marks the 2nd person in the list with the current date and no notes.
 
 ### Getting call history : `history`
 
@@ -234,5 +237,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **History** | `history INDEX/NRIC`<br> e.g., `history 1, history S2208201I`
 **List** | `list`
-**Mark** | `mark INDEX/NRIC [o/notes]`<br> e.g., `mark 1, mark S2208201I o/Broke wheelchair today`
+**Mark** | `mark INDEX/NRIC [d/DATE] [o/NOTES]`<br> e.g., `mark 2 d/2021-10-01 o/This person is sad`
 **Help** | `help`
+**Exit** | `exit`

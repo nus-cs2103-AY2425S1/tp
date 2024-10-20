@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -48,10 +50,30 @@ public class HistoryCommand extends Command {
         this.targetIndex = null;
     }
 
+    /**
+     * Provides the action property for use in a {@code TableView}.
+     * This method is needed for binding the action to the table column.
+     *
+     * @return the action as a {@code StringProperty}.
+     */
+    public StringProperty actionProperty() {
+        return new SimpleStringProperty(this, "action", COMMAND_WORD);
+    }
+
+    /**
+     * Provides the format example property for use in a {@code TableView}.
+     * This method is needed for binding the format example to the table column.
+     *
+     * @return the format and example usage as a {@code StringProperty}.
+     */
+    public StringProperty formatExampleProperty() {
+        return new SimpleStringProperty(this, "formatExample", MESSAGE_USAGE);
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownList = model.getSortedFilteredPersonList();
         Person personFound;
 
         if (targetIndex != null) {
@@ -67,6 +89,9 @@ public class HistoryCommand extends Command {
         }
 
         ContactRecordList callHistory = model.getCallHistory(personFound);
+        if (callHistory.isEmpty()) {
+            throw new CommandException(Messages.MESSAGE_EMPTY_CALL_HISTORY);
+        }
 
         if (callHistory.isEmpty()) {
             throw new CommandException(Messages.MESSAGE_EMPTY_CALL_HISTORY);

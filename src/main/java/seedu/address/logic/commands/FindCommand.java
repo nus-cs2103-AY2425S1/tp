@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -26,12 +28,32 @@ public class FindCommand extends Command {
         this.predicate = predicate;
     }
 
+    /**
+     * Provides the action property for use in a {@code TableView}.
+     * This method is needed for binding the action to the table column.
+     *
+     * @return the action as a {@code StringProperty}.
+     */
+    public StringProperty actionProperty() {
+        return new SimpleStringProperty(this, "action", COMMAND_WORD);
+    }
+
+    /**
+     * Provides the format example property for use in a {@code TableView}.
+     * This method is needed for binding the format example to the table column.
+     *
+     * @return the format and example usage as a {@code StringProperty}.
+     */
+    public StringProperty formatExampleProperty() {
+        return new SimpleStringProperty(this, "formatExample", MESSAGE_USAGE);
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getSortedFilteredPersonList().size()));
     }
 
     @Override
