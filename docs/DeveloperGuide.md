@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,7 +81,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -102,7 +102,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a student).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -122,12 +122,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -173,11 +173,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -185,7 +185,7 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -234,7 +234,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -373,13 +373,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <br>
 
-**<u>Use case: UC4 - Update Student Information</u>**
+**<u>Use case: UC4 - Edit Student Information</u>**
 
-**Precondition:** The Updated Student exists in Database
+**Precondition:** The Edited Student exists in Database
 
 **MSS:**
 
-1. User requests to update a student's information by providing the index and necessary details (name, contact, courses, email).
+1. User requests to edit a student's information by providing the index and necessary details (name, contact, courses, email).
 2. TAHub validates the inputs.
 3. TAHub updates the student with the provided details.
 4. TAHub displays the updated student's information.
@@ -399,7 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS:**
 
-1. User requests to delete a specific person in the list by index.
+1. User requests to delete a specific student in the list by index.
 2. TAHub verifies the given index.
 3. TAHub deletes the student at the index in the list.
 4. Use case ends.
@@ -415,7 +415,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2.  Should be able to hold up to 1000 students without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The system should be able to scale to accommodate a growing number of users (teachers, TAs, students) without requiring significant reengineering.
 5. The platform should have a clean, intuitive user interface that allows new users to complete basic tasks (like searching for a student) with minimal training.
@@ -450,33 +450,71 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a student
+1. Test case: `add n/TestOne p/11111111 e/test1@example.com c/CS2103T`<br>
+    Expected: Student `TestOne` is added to the list. Details of the added student is shown.
+2. Test case: `add n/TestOne p/11111111`<br>
+   Expected: No student is added. Error details shown.
+3. Test case: `add n/TestOne e/test1@example.com c/CS2103T`<br>
+   Expected: No student is added. Error details shown.
+4. Test case: `add n/Test1 p/11111111 e/test1@example.com c/CS2103T`<br>
+   Expected: No student is added. Error details shown.
 
-1. Deleting a person while all persons are being shown
+### Finding a student (by course)
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+2. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` Exist)<br>
+   Expected: Displays students details with course `CS2103T`.
+3. Test case: `find c/CS2103T` (Assuming Students with course `CS2103T` does not Exist)<br>
+   Expected: No Students Found. Displays 0 students.
+4. Test case: `find c/1234`
+   Expected: No Students Found. Error details shown.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+### Finding a student (by name)
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+2. Test case: `find n/TestOne` (Assuming Student with name `TestOne` Exists)<br>
+   Expected: Displays students details with name `TestOne`.
+3. Test case: `find n/TestOne` (Assuming Students with name `TestOne` does not Exist)<br>
+   Expected: No Students Found. Displays 0 students.
+4. Test case: `find n/Test1`
+   Expected: No Students Found. Error details shown.
 
-1. _{ more test cases …​ }_
+### Editing a student
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+2. Test case: `edit 1 n/TestOne p/11111111`<br>
+   Expected: 1st student is edited. Details of the edited student is shown.
+3. Test case: `edit 2 e/test1@example.com c/CS2103T`<br>
+   Expected: 2nd student is edited. Details of the edited student is shown.
+4. Test case: `edit 2 n/Test 2`<br>
+   Expected: No student is edited. Error details shown.
+5. Other incorrect edit commands to try: `edit`, `edit x`, `...` (where x is larger than the list size)<br>
+   Expected: No student is edited. Error details shown.
+
+### Deleting a student
+1. Prerequisites: List all students using the `list` command. Multiple students in the list.
+
+2. Test case: `delete 1`<br>
+   Expected: 1st student is deleted from the list. Details of the deleted student shown in the status message.
+3. Test case: `delete 0`<br>
+   Expected: No student is deleted. Error details shown in the status message.
+4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   Expected: No student is deleted. Error details shown in the status message.
+
+2. { more test cases …​ }_
 
 ### Saving data
 
@@ -484,4 +522,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_

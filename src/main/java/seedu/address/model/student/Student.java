@@ -9,10 +9,9 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.course.Course;
-import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Student in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Student {
@@ -23,20 +22,16 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<Course> courses = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Course> courses) {
-        requireAllNonNull(name, phone, email, address, tags, courses);
+    public Student(Name name, Phone phone, Email email, Set<Course> courses) {
+        requireAllNonNull(name, phone, email, courses);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
         this.courses.addAll(courses);
     }
 
@@ -52,18 +47,6 @@ public class Student {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
     /**
      * Returns an immutable course set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -73,21 +56,21 @@ public class Student {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
      */
-    public boolean isSamePerson(Student otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSameStudent(Student otherStudent) {
+        if (otherStudent == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherStudent != null
+                && otherStudent.getName().equals(getName());
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both students have the same identity and data fields.
+     * This defines a stronger notion of equality between two students.
      */
     @Override
     public boolean equals(Object other) {
@@ -100,19 +83,17 @@ public class Student {
             return false;
         }
 
-        Student otherPerson = (Student) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && courses.equals(otherPerson.courses);
+        Student otherStudent = (Student) other;
+        return name.equals(otherStudent.name)
+                && phone.equals(otherStudent.phone)
+                && email.equals(otherStudent.email)
+                && courses.equals(otherStudent.courses);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, courses);
+        return Objects.hash(name, phone, email, courses);
     }
 
     @Override
@@ -121,8 +102,6 @@ public class Student {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
                 .add("courses", courses)
                 .toString();
     }

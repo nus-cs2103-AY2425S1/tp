@@ -10,11 +10,11 @@ import javafx.scene.layout.Region;
 import seedu.address.model.student.Student;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Student}.
  */
-public class PersonCard extends UiPart<Region> {
+public class StudentCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "StudentListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Student person;
+    public final Student student;
 
     @FXML
     private HBox cardPane;
@@ -35,29 +35,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
-    @FXML
     private Label email;
-    @FXML
-    private FlowPane tags;
     @FXML
     private FlowPane courses;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      */
-    public PersonCard(Student person, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.student = student;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        person.getCourses().stream()
+        name.setText(student.getName().fullName);
+        phone.setText(student.getPhone().value);
+        email.setText(student.getEmail().value);
+        student.getCourses().stream()
                 .sorted(Comparator.comparing(course -> course.courseCode))
                 .forEach(course -> courses.getChildren().add(new Label(course.courseCode)));
     }

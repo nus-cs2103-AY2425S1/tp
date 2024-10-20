@@ -4,12 +4,15 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
+import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.FindNameCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 
 public class FindCommandParserTest {
 
@@ -17,19 +20,76 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNameCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_validArgs_returnsFindNameCommand() {
+    public void parse_validSingleNameArg_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(List.of("Alice"))
+        );
+
         // no leading and trailing whitespaces
-        FindNameCommand expectedFindCommand =
-                new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+        assertParseSuccess(parser, " n/Alice", expectedFindCommand);
+
+        // multiple whitespaces around keyword
+        assertParseSuccess(parser, " \n n/Alice \n  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validSpacedNameArg_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(
+                new NameContainsKeywordsPredicate(List.of("Alice Tan"))
+        );
+
+        // no leading and trailing whitespaces
+        assertParseSuccess(parser, " n/Alice Tan", expectedFindCommand);
+
+        // multiple whitespaces around keyword
+        assertParseSuccess(parser, " \n n/Alice Tan\n  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validSingleCourseArg_returnsFindCommand() {
+        FindCommand expectedFindCommand = new FindCommand(
+                new IsStudentOfCoursePredicate(List.of("CS2030S"))
+        );
+
+        // no trailing whitespaces
+        assertParseSuccess(parser, " c/CS2030S", expectedFindCommand);
+
+        // lowercase
+        assertParseSuccess(parser, " c/cs2030s", expectedFindCommand);
+
+        // multiple whitespaces around keyword
+        assertParseSuccess(parser, " \n c/cs2030s \n  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validNameArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        List<Predicate<Student>> predicates = List.of(
+                new NameContainsKeywordsPredicate(List.of("Alice")),
+                new NameContainsKeywordsPredicate(List.of("Bob"))
+        );
+        FindCommand expectedFindCommand = new FindCommand(predicates);
         assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t", expectedFindCommand);
     }
 
+    @Test
+    public void parse_validMultipleTypeArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        List<Predicate<Student>> predicates = List.of(
+                new NameContainsKeywordsPredicate(List.of("Alice")),
+                new IsStudentOfCoursePredicate(List.of("CS2030S"))
+        );
+        FindCommand expectedFindCommand = new FindCommand(predicates);
+        assertParseSuccess(parser, " n/Alice c/cs2030s", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " \n n/Alice \n \t c/cs2030s  \t", expectedFindCommand);
+    }
 }
