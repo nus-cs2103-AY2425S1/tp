@@ -11,6 +11,9 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
+import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.Type;
@@ -79,6 +82,20 @@ class MessagesTest {
 
         // Assert
         String expected = "PostalCode: 123456; Unit: 12-75; Type: CONDO";
+        assertEquals(expected, result);
+    }
+
+    // New test for formatting Meeting
+    @Test
+    void formatMeeting_success() {
+        // Arrange
+        Meeting meeting = new Meeting(new MeetingTitle("Project Meeting"), new MeetingDate("01-01-2024"));
+
+        // Act
+        String result = Messages.format(meeting);
+
+        // Assert
+        String expected = "MeetingTitle: Project Meeting; MeetingDate: 01-01-2024";
         assertEquals(expected, result);
     }
 }
