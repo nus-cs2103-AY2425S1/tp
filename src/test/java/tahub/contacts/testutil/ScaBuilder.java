@@ -1,5 +1,7 @@
 package tahub.contacts.testutil;
 
+import static tahub.contacts.testutil.AttendanceExamples.ATTENDANCE_EXAMPLE_1;
+
 import java.util.HashSet;
 
 import tahub.contacts.model.course.Course;
@@ -32,7 +34,7 @@ public class ScaBuilder {
         );
         Course course = new Course("CS1000", "Computer Testing");
         Tutorial tutorial = new Tutorial("T1", course);
-        return new StudentCourseAssociation(student, course, tutorial);
+        return new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
     }
 
     /**
@@ -49,6 +51,6 @@ public class ScaBuilder {
         );
         Course course = new Course("CS1001", "Computer Testing");
         Recitation rec = new Recitation("R1", course);
-        return new StudentCourseAssociation(student, course, rec);
+        return new StudentCourseAssociation(student, course, rec, ATTENDANCE_EXAMPLE_1);
     }
 }
