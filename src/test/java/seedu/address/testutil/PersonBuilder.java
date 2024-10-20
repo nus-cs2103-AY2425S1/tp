@@ -4,6 +4,7 @@ import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Ward;
 
@@ -17,6 +18,7 @@ public class PersonBuilder {
     public static final String DEFAULT_WARD = "A1";
     public static final String DEFAULT_DIAGNOSIS = "Celiac Disease";
     public static final String DEFAULT_MEDICATION = "gluten-free diet";
+    public static final String DEFAULT_NOTES = "prone to falling";
     /*
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -28,6 +30,7 @@ public class PersonBuilder {
     private Ward ward;
     private Diagnosis diagnosis;
     private Medication medication;
+    private Notes notes;
     /*
     private Phone phone;
     private Email email;
@@ -44,6 +47,7 @@ public class PersonBuilder {
         ward = new Ward(DEFAULT_WARD);
         diagnosis = new Diagnosis(DEFAULT_DIAGNOSIS);
         medication = new Medication(DEFAULT_MEDICATION);
+        notes = new Notes(DEFAULT_NOTES);
         /*
         diagnosis = new Diagnosis("temp");
         medication = new Medication("temp");
@@ -63,6 +67,7 @@ public class PersonBuilder {
         ward = personToCopy.getWard();
         diagnosis = personToCopy.getDiagnosis();
         medication = personToCopy.getMedication();
+        notes = personToCopy.getNotes();
         /*
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
@@ -112,6 +117,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Notes} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNotes(String notes) {
+        this.notes = new Notes(notes);
+        return this;
+    }
+
     /*
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
@@ -147,7 +160,7 @@ public class PersonBuilder {
     */
 
     public Person build() {
-        return new Person(name, id, ward, diagnosis, medication);
+        return new Person(name, id, ward, diagnosis, medication, notes);
     }
 
 }

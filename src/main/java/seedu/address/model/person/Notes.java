@@ -6,6 +6,12 @@ import static java.util.Objects.requireNonNull;
  */
 public class Notes {
     public final String notes;
+
+    /**
+     * Constructs a {@code Notes}.
+     *
+     * @param patientNotes valid notes.
+     */
     public Notes(String patientNotes) {
         requireNonNull(patientNotes);
         notes = patientNotes;

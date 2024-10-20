@@ -15,6 +15,7 @@ import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Medication;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Notes;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Ward;
 
@@ -57,6 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Ward ward = ParserUtil.parseWard(argMultimap.getValue(PREFIX_WARD).get());
         Diagnosis diagnosis = ParserUtil.parseDiagnosis(argMultimap.getValue(PREFIX_DIAGNOSIS).get());
         Medication medication = ParserUtil.parseMedication(argMultimap.getValue(PREFIX_MEDICATION).get());
+        Notes notes = new Notes("");
         /*
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -64,7 +66,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
          */
 
-        Person person = new Person(name, id, ward, diagnosis, medication);
+        Person person = new Person(name, id, ward, diagnosis, medication, notes);
 
         return new AddCommand(person);
     }

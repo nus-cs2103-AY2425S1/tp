@@ -31,6 +31,6 @@ public class AddNotesCommandParserTest {
         // no parameters
         assertParseFailure(parser, AddNotesCommand.COMMAND_WORD, expectedMessage);
         // no index
-        assertParseFailure(parser, AddNotesCommand.COMMAND_WORD + " " + nonEmptyNotes,  expectedMessage);
+        assertParseFailure(parser, AddNotesCommand.COMMAND_WORD + " " + nonEmptyNotes, expectedMessage);
     }
 }
