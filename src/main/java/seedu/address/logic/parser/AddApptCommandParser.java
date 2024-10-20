@@ -49,7 +49,7 @@ public class AddApptCommandParser implements Parser<AddApptCommand> {
         }
 
         if (newApptName.length() > 30) {
-            throw new ParseException(Appointment.MESSAGE_TOO_LONG_CONSTRAIN);
+            throw new ParseException(Appointment.MESSAGE_TOO_LONG_CONSTRAINT);
         }
 
         if (!DateUtil.isValidDate(newApptDate)) {

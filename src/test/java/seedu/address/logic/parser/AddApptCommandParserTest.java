@@ -61,7 +61,7 @@ public class AddApptCommandParserTest {
         assertParseFailure(parser, APPOINTMENT_DESC_BOB + INVALID_NRIC_DESC, Nric.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, INVALID_APPOINTMENT_NAME_DESC + NRIC_DESC_AMY, Appointment.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, INVALID_APPOINTMENT_NAME_LENGTH_DESC + NRIC_DESC_AMY,
-                           Appointment.MESSAGE_TOO_LONG_CONSTRAIN);
+                           Appointment.MESSAGE_TOO_LONG_CONSTRAINT);
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_FORMAT_DESC + NRIC_DESC_AMY,
                            Appointment.MESSAGE_CONSTRAINTS_APPT_DATE_WRONG_FORMAT);;
         assertParseFailure(parser, INVALID_APPOINTMENT_DATE_NONEXISTANT_DESC + NRIC_DESC_AMY,
