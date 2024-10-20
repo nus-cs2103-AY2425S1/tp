@@ -21,7 +21,6 @@ public class StorageManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private JsonUniqueCourseListStorage courseListStorage;
-    private JsonUniqueCourseListStorage uniqueCourseListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -83,7 +82,7 @@ public class StorageManager implements Storage {
     //===== course list methods =====
     @Override
     public Path getCourseListFilePath() {
-        return uniqueCourseListStorage.getCourseListFilePath();
+        return courseListStorage.getCourseListFilePath();
     }
 
     @Override
@@ -94,7 +93,7 @@ public class StorageManager implements Storage {
     @Override
     public Optional<UniqueCourseList> readCourseList(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return uniqueCourseListStorage.readCourseList(filePath);
+        return courseListStorage.readCourseList(filePath);
     }
 
     @Override
