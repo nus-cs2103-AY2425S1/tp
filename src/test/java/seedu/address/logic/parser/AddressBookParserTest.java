@@ -23,10 +23,13 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.ConsultationBuilder;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
@@ -41,6 +44,14 @@ public class AddressBookParserTest {
         Student student = new StudentBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
         assertEquals(new AddCommand(student), command);
+    }
+
+    @Test
+    public void parseCommand_addConsult() throws Exception {
+        Consultation consult = new ConsultationBuilder().build();
+        AddConsultCommand command = (AddConsultCommand) parser.parseCommand(
+                AddConsultCommand.COMMAND_WORD + " d/" + consult.getDate() + " t/" + consult.getTime());
+        assertEquals(new AddConsultCommand(consult), command);
     }
 
     @Test

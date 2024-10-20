@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.testutil.ConsultationBuilder;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
@@ -77,6 +78,32 @@ public class AddressBookTest {
                 .build();
         assertTrue(addressBook.hasStudent(editedAlice));
     }
+
+    @Test
+    public void hasConsult_nullConsult_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasConsult(null));
+    }
+
+    @Test
+    public void hasConsult_consultNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasConsult(new ConsultationBuilder().build()));
+    }
+
+    @Test
+    public void hasConsult_consultInAddressBook_returnsTrue() {
+        Consultation consult = new ConsultationBuilder().build();
+        addressBook.addConsult(consult);
+        assertTrue(addressBook.hasConsult(consult));
+    }
+
+    @Test
+    public void hasConsult_consultWithSameDetailsInAddressBook_returnsTrue() {
+        Consultation consult = new ConsultationBuilder().build();
+        Consultation copy = new ConsultationBuilder(consult).build();
+        addressBook.addConsult(consult);
+        assertTrue(addressBook.hasConsult(copy));
+    }
+
 
     @Test
     public void getStudentList_modifyList_throwsUnsupportedOperationException() {
