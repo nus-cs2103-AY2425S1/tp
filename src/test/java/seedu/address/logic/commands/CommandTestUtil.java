@@ -80,8 +80,9 @@ public class CommandTestUtil {
     public static final String VALID_JOBNAME_BARISTA = "Full-time Barista";
     public static final String VALID_COMPANY_BARISTA = "Starbucks, Singapore";
     public static final String VALID_SALARY_BARISTA = "2500";
-    public static final String VALID_REQUIREMENTS_BARISTA = "Hands and feet";
-    public static final String VALID_DESCRIPTION_BARISTA = "At Starbucks, we are looking for someone who brings a lot to the table";
+    public static final String[] VALID_REQUIREMENTS_BARISTA = {"Strong", "Pleasant"};
+    public static final String VALID_DESCRIPTION_BARISTA =
+            "At Starbucks, we are looking for someone who brings a " + "lot to the table";
 
     public static final String JOBNAME_DESC_BARISTA = " " + PREFIX_NAME + VALID_JOBNAME_BARISTA;
     public static final String COMPANY_DESC_BARISTA = " " + PREFIX_COMPANY + VALID_COMPANY_BARISTA;
@@ -93,7 +94,7 @@ public class CommandTestUtil {
     public static final String INVALID_COMPANY_DESC = " " + PREFIX_COMPANY + "!val!d"; // '!' not allowed in name
     public static final String INVALID_SALARY_DESC = " " + PREFIX_SALARY + "$100/day"; // only numbers are allowed
     public static final String INVALID_REQUIREMENTS_DESC = " " + PREFIX_REQUIREMENTS + "!val!d"; // '!' not allowed
-    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; // '!' not allowed in name
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "!val!d"; //'!' not allowed
 
 
     /**

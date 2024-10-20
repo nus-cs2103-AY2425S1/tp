@@ -41,12 +41,12 @@ class UniqueJobListTest {
     @Test
     public void contains_jobWithSameIdentityFieldsInList_returnsTrue() {
         uniqueJobList.add(SWE);
-        Job editedSWE = new JobBuilder(SWE)
+        Job editedSwe = new JobBuilder(SWE)
                 .withSalary(VALID_SALARY_BARISTA)
                 .withRequirements(VALID_REQUIREMENTS_BARISTA)
                 .withDescription(VALID_DESCRIPTION_BARISTA)
                 .build();
-        assertTrue(uniqueJobList.contains(editedSWE));
+        assertTrue(uniqueJobList.contains(editedSwe));
     }
 
     @Test
@@ -103,5 +103,18 @@ class UniqueJobListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniqueJobList.asUnmodifiableObservableList().toString(), uniqueJobList.toString());
+    }
+
+    @Test
+    public void equals() {
+
+        // same object -> returns true
+        assertTrue(uniqueJobList.equals(uniqueJobList));
+
+        // null -> returns false
+        assertFalse(uniqueJobList.equals(null));
+
+        // different type -> returns false
+        assertFalse(uniqueJobList.equals(5));
     }
 }

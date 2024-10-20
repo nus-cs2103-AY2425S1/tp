@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,13 +20,13 @@ public class JobBuilder {
     public static final String DEFAULT_NAME = "Software Engineer";
     public static final String DEFAULT_COMPANY = "NUS";
     public static final String DEFAULT_SALARY = "5000";
-    public static final String[] DEFAULT_REQUIREMENTS = {"Java", "Python", "C++"};
+    public static final String[] DEFAULT_REQUIREMENTS = {"Java", "Python", "C"};
     public static final String DEFAULT_DESCRIPTION = "Develop software solutions";
 
     private Name name;
     private JobCompany company;
     private JobSalary salary;
-    private Set<Tag> requirements;
+    private Set<Tag> requirements = new HashSet<>();
     private JobDescription description;
 
     /**
@@ -35,8 +36,8 @@ public class JobBuilder {
         name = new Name(DEFAULT_NAME);
         company = new JobCompany(DEFAULT_COMPANY);
         salary = new JobSalary(DEFAULT_SALARY);
-        requirements = Arrays.stream(DEFAULT_REQUIREMENTS).map(Tag::new).collect(Collectors.toSet());
         description = new JobDescription(DEFAULT_DESCRIPTION);
+        requirements = Arrays.stream(DEFAULT_REQUIREMENTS).map(Tag::new).collect(Collectors.toSet());
     }
 
     /**
@@ -46,8 +47,8 @@ public class JobBuilder {
         name = jobToCopy.getName();
         company = jobToCopy.getCompany();
         salary = jobToCopy.getSalary();
-        requirements = jobToCopy.getRequirements();
         description = jobToCopy.getDescription();
+        requirements = jobToCopy.getRequirements();
     }
 
     /**

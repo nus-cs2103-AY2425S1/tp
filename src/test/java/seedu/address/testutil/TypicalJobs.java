@@ -21,19 +21,19 @@ public class TypicalJobs {
             .withName("CS2103 Teaching Assistant")
             .withCompany("National University of Singapore")
             .withSalary("2000")
-            .withRequirements("Grade A- and above, Year 3")
             .withDescription("Conduct weekly tutorial")
+            .withRequirements("GradeA", "Year3")
             .build();
 
     public static final Job SWE = new JobBuilder()
             .withName("Software Engineer, Google Pay, Core")
             .withCompany("Google, Singapore")
             .withSalary("3000")
-            .withRequirements("Experience with mobile development, 2 years of experience with software development")
             .withDescription(
                     "As a software engineer, you will work on a specific project critical to Google’s needs with "
                             + "opportunities to switch teams and projects as you and our fast-paced business grow and"
                             + " evolve. ")
+            .withRequirements("Go", "Kubernetes", "Docker", "5YOE")
             .build();
 
     // Manually added - Job's details found in {@code CommandTestUtil}
@@ -41,8 +41,8 @@ public class TypicalJobs {
             .withName(VALID_JOBNAME_BARISTA)
             .withCompany(VALID_COMPANY_BARISTA)
             .withSalary(VALID_SALARY_BARISTA)
-            .withRequirements(VALID_REQUIREMENTS_BARISTA)
             .withDescription(VALID_DESCRIPTION_BARISTA)
+            .withRequirements(VALID_REQUIREMENTS_BARISTA)
             .build();
 
     // prevents instantiation

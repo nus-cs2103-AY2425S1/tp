@@ -35,20 +35,20 @@ public class JobTest {
         assertFalse(SWE.isSameJob(null));
 
         // same name and company, all other attributes different -> returns true
-        Job editedSWE = new JobBuilder(SWE)
+        Job editedSwe = new JobBuilder(SWE)
                 .withSalary(VALID_SALARY_BARISTA)
                 .withRequirements(VALID_REQUIREMENTS_BARISTA)
                 .withDescription(VALID_DESCRIPTION_BARISTA)
                 .build();
-        assertTrue(SWE.isSameJob(editedSWE));
+        assertTrue(SWE.isSameJob(editedSwe));
 
         // different name, all other attributes same -> returns false
-        editedSWE = new JobBuilder(SWE).withName(VALID_JOBNAME_BARISTA).build();
-        assertFalse(SWE.isSameJob(editedSWE));
+        editedSwe = new JobBuilder(SWE).withName(VALID_JOBNAME_BARISTA).build();
+        assertFalse(SWE.isSameJob(editedSwe));
 
         // different company, all other attributes same -> returns false
-        editedSWE = new JobBuilder(SWE).withCompany(VALID_COMPANY_BARISTA).build();
-        assertFalse(SWE.isSameJob(editedSWE));
+        editedSwe = new JobBuilder(SWE).withCompany(VALID_COMPANY_BARISTA).build();
+        assertFalse(SWE.isSameJob(editedSwe));
 
         // name differs in case, all other attributes same -> returns false
         Job editedBarista = new JobBuilder(BARISTA).withName(VALID_JOBNAME_BARISTA.toLowerCase()).build();
@@ -63,8 +63,8 @@ public class JobTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Job copySWE = new JobBuilder(SWE).build();
-        assertTrue(SWE.equals(copySWE));
+        Job copySwe = new JobBuilder(SWE).build();
+        assertTrue(SWE.equals(copySwe));
 
         // same object -> returns true
         assertTrue(SWE.equals(SWE));
@@ -79,32 +79,32 @@ public class JobTest {
         assertFalse(SWE.equals(BARISTA));
 
         // different name -> returns false
-        Job editedSWE = new JobBuilder(SWE).withName(VALID_JOBNAME_BARISTA).build();
-        assertFalse(SWE.equals(editedSWE));
+        Job editedSwe = new JobBuilder(SWE).withName(VALID_JOBNAME_BARISTA).build();
+        assertFalse(SWE.equals(editedSwe));
 
         // different company -> returns false
-        editedSWE = new JobBuilder(SWE).withCompany(VALID_COMPANY_BARISTA).build();
-        assertFalse(SWE.equals(editedSWE));
+        editedSwe = new JobBuilder(SWE).withCompany(VALID_COMPANY_BARISTA).build();
+        assertFalse(SWE.equals(editedSwe));
 
         // different salary -> returns false
-        editedSWE = new JobBuilder(SWE).withSalary(VALID_SALARY_BARISTA).build();
-        assertFalse(SWE.equals(editedSWE));
+        editedSwe = new JobBuilder(SWE).withSalary(VALID_SALARY_BARISTA).build();
+        assertFalse(SWE.equals(editedSwe));
 
         // different requirements -> returns false
-        editedSWE = new JobBuilder(SWE).withRequirements(VALID_REQUIREMENTS_BARISTA).build();
-        assertFalse(SWE.equals(editedSWE));
+        editedSwe = new JobBuilder(SWE).withRequirements(VALID_REQUIREMENTS_BARISTA).build();
+        assertFalse(SWE.equals(editedSwe));
 
         // different description -> returns false
-        editedSWE = new JobBuilder(SWE).withDescription(VALID_DESCRIPTION_BARISTA).build();
-        assertFalse(SWE.equals(editedSWE));
+        editedSwe = new JobBuilder(SWE).withDescription(VALID_DESCRIPTION_BARISTA).build();
+        assertFalse(SWE.equals(editedSwe));
     }
 
     @Test
     public void toStringMethod() {
         String expected =
                 Job.class.getCanonicalName() + "{name=" + SWE.getName() + ", company=" + SWE.getCompany() + ", salary="
-                        + SWE.getSalary() + ", requirements=" + SWE.getRequirements() + ", description="
-                        + SWE.getDescription() + "}";
+                        + SWE.getSalary() + ", description=" + SWE.getDescription() + ", requirements="
+                        + SWE.getRequirements() + "}";
         assertEquals(expected, SWE.toString());
     }
 }
