@@ -132,6 +132,7 @@ public class ModelManager implements Model {
     public ObservableList<OwnedAppointment> getFilteredAppointmentList() {
         return filteredAppts;
     }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
