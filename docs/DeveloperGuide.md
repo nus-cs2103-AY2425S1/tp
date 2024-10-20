@@ -328,7 +328,7 @@ Extensions:
         Use case ends.
     
 
-**Use case: UC2 - Delete Client**
+**Use case: UC2 - Delete Client (Buyer or Seller)**
 
 MSS:
 1. Real estate agent requests to delete a buyer or seller based on their phone number.
@@ -412,6 +412,24 @@ MSS:
 2. ClientGrid will respond with the corresponding list
 
 Use case ends.
+
+**Use case: UC6 - Filter Client**
+
+MSS:
+1. Real estate agent requests to filter the clients by entering a name prefix.
+2. ClientGrid will filter and display the clients whose names start with the provided prefix.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the name prefix provided by the real estate agent.
+
+    * 1a1. ClientGrid detects the error and requests for the correct data
+
+    * 1a2. Real estate agent enters a new name prefix
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
