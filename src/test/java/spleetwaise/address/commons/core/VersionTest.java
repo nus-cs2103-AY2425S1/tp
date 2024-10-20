@@ -129,8 +129,10 @@ public class VersionTest {
         assertTrue(one.equals(another));
     }
 
-    private void verifyVersionParsedCorrectly(String versionString,
-            int major, int minor, int patch, boolean isEarlyAccess) {
+    private void verifyVersionParsedCorrectly(
+            String versionString,
+            int major, int minor, int patch, boolean isEarlyAccess
+    ) {
         assertEquals(new Version(major, minor, patch, isEarlyAccess), Version.fromString(versionString));
     }
 }

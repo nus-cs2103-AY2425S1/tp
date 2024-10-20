@@ -22,6 +22,22 @@ public class TestFxAppSetup {
     private MainWindowHandle mainWindowHandle;
 
     /**
+     * Initializes the primary stage for the TestFX toolkit. It registers the primary stage and hides it to prevent
+     * immediate display.
+     *
+     * @throws AssertionError   if the setup takes too long.
+     * @throws RuntimeException if any other exception occurs during setup.
+     */
+    public static void initialize() {
+        try {
+            FxToolkit.registerPrimaryStage();
+            FxToolkit.hideStage();
+        } catch (TimeoutException e) {
+            throw new AssertionError("Application takes too long to setup.", e);
+        }
+    }
+
+    /**
      * Sets up the TestApp with the provided address book, storage path, and user preferences path.
      *
      * @param addressBook  A supplier providing the initial address book data.
@@ -38,22 +54,6 @@ public class TestFxAppSetup {
             throw new AssertionError("Application takes too long to setup.", e);
         }
         return testApp;
-    }
-
-    /**
-     * Initializes the primary stage for the TestFX toolkit. It registers the primary stage and hides it to prevent
-     * immediate display.
-     *
-     * @throws AssertionError   if the setup takes too long.
-     * @throws RuntimeException if any other exception occurs during setup.
-     */
-    public static void initialize() {
-        try {
-            FxToolkit.registerPrimaryStage();
-            FxToolkit.hideStage();
-        } catch (TimeoutException e) {
-            throw new AssertionError("Application takes too long to setup.", e);
-        }
     }
 
     /**

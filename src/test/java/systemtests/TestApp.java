@@ -63,6 +63,15 @@ public class TestApp extends MainApp {
     }
 
     /**
+     * The main entry point of the application for launching the test app.
+     *
+     * @param args The command-line arguments passed to the application.
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    /**
      * Initializes the configuration with the given configuration file path and sets the user preferences file path for
      * testing purposes.
      *
@@ -139,15 +148,6 @@ public class TestApp extends MainApp {
     @Override
     public void start(Stage primaryStage) {
         ui.start(primaryStage);
-    }
-
-    /**
-     * The main entry point of the application for launching the test app.
-     *
-     * @param args The command-line arguments passed to the application.
-     */
-    public static void main(String[] args) {
-        launch(args);
     }
 
 }

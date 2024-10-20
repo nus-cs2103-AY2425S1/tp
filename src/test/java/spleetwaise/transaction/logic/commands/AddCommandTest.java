@@ -39,10 +39,14 @@ public class AddCommandTest {
         AddCommand cmd = new AddCommand(testTxn);
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
-        String expectedString = String.format("[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23",
-                testTxn.getId());
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, expectedString),
-                cmdRes.getFeedbackToUser());
+        String expectedString = String.format(
+                "[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23",
+                testTxn.getId()
+        );
+        assertEquals(
+                String.format(AddCommand.MESSAGE_SUCCESS, expectedString),
+                cmdRes.getFeedbackToUser()
+        );
         assertTrue(CommonModel.getInstance().hasTransaction(testTxn));
     }
 
