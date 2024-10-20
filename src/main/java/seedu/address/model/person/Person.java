@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -72,6 +73,25 @@ public class Person {
      */
     public Set<Group> getGroups() {
         return Collections.unmodifiableSet(groups);
+    }
+
+    /**
+     * Retrieves the first {@link Group} from the set of groups.
+     *
+     * <p>This method returns the first element of the unmodifiable set of groups
+     * if available. If the set is empty, it returns {@code null}.</p>
+     *
+     * @return the first {@link Group} if it exists, or {@code null} if the set
+     *         of groups is empty.
+     *
+     */
+    public Group getGroup() {
+        Iterator<Group> iterator = getGroups().iterator();
+        if (iterator.hasNext()) {
+            return iterator.next(); // Returns the first element
+        } else {
+            return null;
+        }
     }
 
     /**
