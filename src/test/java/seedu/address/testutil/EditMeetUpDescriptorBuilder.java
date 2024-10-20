@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.logic.commands.meetup.EditMeetUpCommand;
+import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
@@ -12,21 +12,21 @@ import seedu.address.model.meetup.To;
  */
 public class EditMeetUpDescriptorBuilder {
 
-    private EditMeetUpCommand.EditMeetUpDescriptor descriptor;
+    private EditCommand.EditMeetUpDescriptor descriptor;
 
     public EditMeetUpDescriptorBuilder() {
-        descriptor = new EditMeetUpCommand.EditMeetUpDescriptor();
+        descriptor = new EditCommand.EditMeetUpDescriptor();
     }
 
-    public EditMeetUpDescriptorBuilder(EditMeetUpCommand.EditMeetUpDescriptor descriptor) {
-        this.descriptor = new EditMeetUpCommand.EditMeetUpDescriptor(descriptor);
+    public EditMeetUpDescriptorBuilder(EditCommand.EditMeetUpDescriptor descriptor) {
+        this.descriptor = new EditCommand.EditMeetUpDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditMeetUpDescriptor} with fields containing {@code meetIp}'s details
      */
     public EditMeetUpDescriptorBuilder(MeetUp meetUp) {
-        descriptor = new EditMeetUpCommand.EditMeetUpDescriptor();
+        descriptor = new EditCommand.EditMeetUpDescriptor();
         descriptor.setMeetUpName(meetUp.getName());
         descriptor.setMeetUpInfo(meetUp.getInfo());
         descriptor.setMeetUpFrom(meetUp.getFrom());
@@ -65,7 +65,7 @@ public class EditMeetUpDescriptorBuilder {
         return this;
     }
 
-    public EditMeetUpCommand.EditMeetUpDescriptor build() {
+    public EditCommand.EditMeetUpDescriptor build() {
         return descriptor;
     }
 }

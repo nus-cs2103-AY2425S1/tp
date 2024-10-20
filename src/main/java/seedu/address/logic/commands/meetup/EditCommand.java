@@ -28,7 +28,7 @@ import seedu.address.model.meetup.To;
 /**
  * Edits the details of an existing meetup in the address book.
  */
-public class EditMeetUpCommand extends Command {
+public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "editm";
 
@@ -49,12 +49,12 @@ public class EditMeetUpCommand extends Command {
     public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
 
     private final Index targetIndex;
-    private final EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor;
+    private final EditCommand.EditMeetUpDescriptor editMeetUpDescriptor;
 
     /**
-     * Creates an EditMeetUpCommand to edit the specified {@code MeetUp} by its index
+     * Creates an EditCommand to edit the specified {@code MeetUp} by its index
      */
-    public EditMeetUpCommand(Index editIndex, EditMeetUpDescriptor editMeetUpDescriptor) {
+    public EditCommand(Index editIndex, EditMeetUpDescriptor editMeetUpDescriptor) {
         requireNonNull(editIndex);
         requireNonNull(editMeetUpDescriptor);
 
@@ -88,7 +88,7 @@ public class EditMeetUpCommand extends Command {
      * edited with {@code editPersonDescriptor}.
      */
     private static MeetUp createEditedMeetUp(MeetUp meetUpToEdit,
-                                                 EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
+                                                 EditCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
         assert meetUpToEdit != null;
 
         Name updatedName = editMeetUpDescriptor.getMeetUpName().orElse(meetUpToEdit.getName());
@@ -106,13 +106,13 @@ public class EditMeetUpCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditMeetUpCommand)) {
+        if (!(other instanceof EditCommand)) {
             return false;
         }
 
-        EditMeetUpCommand otherEditMeetUpCommand = (EditMeetUpCommand) other;
-        return targetIndex.equals(otherEditMeetUpCommand.targetIndex)
-                && editMeetUpDescriptor.equals(otherEditMeetUpCommand.editMeetUpDescriptor);
+        EditCommand otherEditCommand = (EditCommand) other;
+        return targetIndex.equals(otherEditCommand.targetIndex)
+                && editMeetUpDescriptor.equals(otherEditCommand.editMeetUpDescriptor);
 
     }
 
@@ -125,8 +125,8 @@ public class EditMeetUpCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the meet-up with. Each non-empty field value will replace the
+     * corresponding field value of the meet-up.
      */
     public static class EditMeetUpDescriptor {
         private Name name;
@@ -140,7 +140,7 @@ public class EditMeetUpCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditMeetUpDescriptor(EditMeetUpCommand.EditMeetUpDescriptor toCopy) {
+        public EditMeetUpDescriptor(EditCommand.EditMeetUpDescriptor toCopy) {
             setMeetUpName(toCopy.name);
             setMeetUpInfo(toCopy.info);
             setMeetUpFrom(toCopy.from);
@@ -194,12 +194,12 @@ public class EditMeetUpCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditMeetUpCommand.EditMeetUpDescriptor)) {
+            if (!(other instanceof EditCommand.EditMeetUpDescriptor)) {
                 return false;
             }
 
-            EditMeetUpCommand.EditMeetUpDescriptor otherEditMeetUpDescriptor =
-                    (EditMeetUpCommand.EditMeetUpDescriptor) other;
+            EditCommand.EditMeetUpDescriptor otherEditMeetUpDescriptor =
+                    (EditCommand.EditMeetUpDescriptor) other;
 
             return Objects.equals(name, otherEditMeetUpDescriptor.name)
                     && Objects.equals(info, otherEditMeetUpDescriptor.info)

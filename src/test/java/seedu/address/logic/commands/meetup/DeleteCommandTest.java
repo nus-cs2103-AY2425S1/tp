@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.meetup.DeleteMeetUpCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -23,24 +22,24 @@ import seedu.address.model.meetup.MeetUp;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteMeetUpCommand}.
+ * {@code DeleteCommand}.
  */
-public class DeleteMeetUpCommandTest {
+public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         MeetUp meetUpToDelete = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
-        DeleteMeetUpCommand deleteMeetUpCommand = new DeleteMeetUpCommand(INDEX_FIRST_MEETUP);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MEETUP);
 
-        String expectedMessage = String.format(DeleteMeetUpCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
                 Messages.format(meetUpToDelete));
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getMeetUpList());
         expectedModel.deleteMeetUp(meetUpToDelete);
 
-        assertCommandSuccess(deleteMeetUpCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -48,16 +47,16 @@ public class DeleteMeetUpCommandTest {
         showMeetUpAtIndex(model, INDEX_FIRST_MEETUP);
 
         MeetUp meetUpToDelete = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
-        DeleteMeetUpCommand deleteMeetUpCommand = new DeleteMeetUpCommand(INDEX_FIRST_MEETUP);
+        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MEETUP);
 
-        String expectedMessage = String.format(DeleteMeetUpCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
                 Messages.format(meetUpToDelete));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getMeetUpList());
         expectedModel.deleteMeetUp(meetUpToDelete);
         showNoMeetUp(expectedModel);
 
-        assertCommandSuccess(deleteMeetUpCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -68,21 +67,21 @@ public class DeleteMeetUpCommandTest {
         // ensures that outOfBoundIndex is still in bounds of meetup list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMeetUpList().getMeetUpList().size());
 
-        DeleteMeetUpCommand deleteMeetUpCommand = new DeleteMeetUpCommand(outOfBoundIndex);
+        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteMeetUpCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteMeetUpCommand deleteFirstCommand = new DeleteMeetUpCommand(INDEX_FIRST_MEETUP);
-        DeleteMeetUpCommand deleteSecondCommand = new DeleteMeetUpCommand(INDEX_SECOND_MEETUP);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_MEETUP);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_MEETUP);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteMeetUpCommand deleteFirstCommandCopy = new DeleteMeetUpCommand(INDEX_FIRST_MEETUP);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_MEETUP);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -98,9 +97,9 @@ public class DeleteMeetUpCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteMeetUpCommand deleteMeetUpCommand = new DeleteMeetUpCommand(targetIndex);
-        String expected = DeleteMeetUpCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteMeetUpCommand.toString());
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, deleteCommand.toString());
     }
 
     /**

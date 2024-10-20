@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.meetup.AddMeetUpCommand;
+import seedu.address.logic.commands.meetup.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
@@ -16,22 +16,22 @@ import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
 /**
- * Parses input arguments and creates a new AddMeetUpCommand object
+ * Parses input arguments and creates a new AddCommand object
  */
-public class AddMeetUpCommandParser implements Parser<AddMeetUpCommand> {
+public class AddMeetUpCommandParser implements Parser<AddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddMeetUpCommand
-     * and returns an AddMeetUpCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddMeetUpCommand parse(String args) throws ParseException {
+    public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMeetUpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_INFO, PREFIX_FROM, PREFIX_TO);
@@ -42,7 +42,7 @@ public class AddMeetUpCommandParser implements Parser<AddMeetUpCommand> {
 
         MeetUp meetUp = new MeetUp(name, info, from, to);
 
-        return new AddMeetUpCommand(meetUp);
+        return new AddCommand(meetUp);
     }
 
     /**

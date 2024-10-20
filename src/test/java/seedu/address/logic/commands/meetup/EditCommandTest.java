@@ -19,8 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.meetup.EditMeetUpCommand;
-import seedu.address.logic.commands.meetup.EditMeetUpCommand.EditMeetUpDescriptor;
+import seedu.address.logic.commands.meetup.EditCommand.EditMeetUpDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
@@ -31,9 +30,9 @@ import seedu.address.testutil.EditMeetUpDescriptorBuilder;
 import seedu.address.testutil.MeetUpBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditMeetUpCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
-public class EditMeetUpCommandTest {
+public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalMeetUpList());
 
@@ -41,16 +40,16 @@ public class EditMeetUpCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         MeetUp editedMeetUp = new MeetUpBuilder().build();
         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder(editedMeetUp).build();
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEETUP, descriptor);
 
-        String expectedMessage = String.format(EditMeetUpCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setMeetUp(model.getFilteredMeetUpList().get(0), editedMeetUp);
 
-        assertCommandSuccess(editMeetUpCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -62,30 +61,30 @@ public class EditMeetUpCommandTest {
         MeetUp editedMeetUp = meetUpInList.withInfo(VALID_MEETUP_INFO_PITCH).build();
 
         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(indexLastMeetUp, descriptor);
+        EditCommand editCommand = new EditCommand(indexLastMeetUp, descriptor);
 
-        String expectedMessage = String.format(EditMeetUpCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setMeetUp(lastMeetUp, editedMeetUp);
 
-        assertCommandSuccess(editMeetUpCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP, new EditMeetUpDescriptor());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEETUP, new EditMeetUpDescriptor());
         MeetUp editedMeetUp = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
 
-        String expectedMessage = String.format(EditMeetUpCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
 
-        assertCommandSuccess(editMeetUpCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -94,26 +93,26 @@ public class EditMeetUpCommandTest {
 
         MeetUp meetUpInFilteredList = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
         MeetUp editedMeetUp = new MeetUpBuilder(meetUpInFilteredList).withInfo(VALID_MEETUP_INFO_PITCH).build();
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEETUP,
                 new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build());
 
-        String expectedMessage = String.format(EditMeetUpCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
                 Messages.format(editedMeetUp));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
                 new MeetUpList(model.getMeetUpList()));
         expectedModel.setMeetUp(model.getFilteredMeetUpList().get(0), editedMeetUp);
 
-        assertCommandSuccess(editMeetUpCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateMeetUpUnfilteredList_failure() {
         MeetUp firstMeetUp = model.getFilteredMeetUpList().get(INDEX_FIRST_MEETUP.getZeroBased());
         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder(firstMeetUp).build();
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(INDEX_SECOND_MEETUP, descriptor);
+        EditCommand editCommand = new EditCommand(INDEX_SECOND_MEETUP, descriptor);
 
-        assertCommandFailure(editMeetUpCommand, model, EditMeetUpCommand.MESSAGE_DUPLICATE_MEETUP);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MEETUP);
     }
 
     @Test
@@ -122,19 +121,19 @@ public class EditMeetUpCommandTest {
 
         // edit meetup in filtered list into a duplicate in address book
         MeetUp meetUpInList = model.getMeetUpList().getMeetUpList().get(INDEX_SECOND_MEETUP.getZeroBased());
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP,
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_MEETUP,
                 new EditMeetUpDescriptorBuilder(meetUpInList).build());
 
-        assertCommandFailure(editMeetUpCommand, model, EditMeetUpCommand.MESSAGE_DUPLICATE_MEETUP);
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MEETUP);
     }
 
     @Test
     public void execute_invalidMeetUpIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMeetUpList().size() + 1);
         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(outOfBoundIndex, descriptor);
+        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editMeetUpCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
     }
 
     /**
@@ -148,19 +147,19 @@ public class EditMeetUpCommandTest {
         // ensures that outOfBoundIndex is still in bounds of meetup list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getMeetUpList().getMeetUpList().size());
 
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(outOfBoundIndex,
+        EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build());
 
-        assertCommandFailure(editMeetUpCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final EditMeetUpCommand standardCommand = new EditMeetUpCommand(INDEX_FIRST_MEETUP, DESC_PITCH_MEETUP);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_MEETUP, DESC_PITCH_MEETUP);
 
         // same values -> returns true
         EditMeetUpDescriptor copyDescriptor = new EditMeetUpDescriptor(DESC_PITCH_MEETUP);
-        EditMeetUpCommand commandWithSameValues = new EditMeetUpCommand(INDEX_FIRST_MEETUP, copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_MEETUP, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -173,19 +172,19 @@ public class EditMeetUpCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditMeetUpCommand(INDEX_SECOND_MEETUP, DESC_PITCH_MEETUP)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_MEETUP, DESC_PITCH_MEETUP)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditMeetUpCommand(INDEX_FIRST_MEETUP, DESC_NETWORKING_MEETUP)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_MEETUP, DESC_NETWORKING_MEETUP)));
     }
 
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         EditMeetUpDescriptor editMeetUpDescriptor = new EditMeetUpDescriptor();
-        EditMeetUpCommand editMeetUpCommand = new EditMeetUpCommand(index, editMeetUpDescriptor);
-        String expected = EditMeetUpCommand.class.getCanonicalName() + "{index=" + index + ", editMeetUpDescriptor="
+        EditCommand editCommand = new EditCommand(index, editMeetUpDescriptor);
+        String expected = EditCommand.class.getCanonicalName() + "{index=" + index + ", editMeetUpDescriptor="
                 + editMeetUpDescriptor + "}";
-        assertEquals(expected, editMeetUpCommand.toString());
+        assertEquals(expected, editCommand.toString());
     }
 }

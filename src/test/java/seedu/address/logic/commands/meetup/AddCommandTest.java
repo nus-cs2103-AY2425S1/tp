@@ -19,7 +19,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.meetup.AddMeetUpCommand;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -29,11 +28,11 @@ import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.MeetUpBuilder;
 
-public class AddMeetUpCommandTest {
+public class AddCommandTest {
 
     @Test
     public void constructor_nullMeetUp_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddMeetUpCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
@@ -41,9 +40,9 @@ public class AddMeetUpCommandTest {
         ModelStubAcceptingMeetUpAdded modelStub = new ModelStubAcceptingMeetUpAdded();
         MeetUp validMeetUp = new MeetUpBuilder().build();
 
-        CommandResult commandResult = new AddMeetUpCommand(validMeetUp).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validMeetUp).execute(modelStub);
 
-        assertEquals(String.format(AddMeetUpCommand.MESSAGE_SUCCESS, Messages.format(validMeetUp)),
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validMeetUp)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validMeetUp), modelStub.meetUpsAdded);
     }
@@ -51,26 +50,26 @@ public class AddMeetUpCommandTest {
     @Test
     public void execute_duplicateMeetUp_throwsCommandException() {
         MeetUp validMeetUp = new MeetUpBuilder().build();
-        AddMeetUpCommand addMeetUpCommand = new AddMeetUpCommand(validMeetUp);
+        AddCommand addCommand = new AddCommand(validMeetUp);
 
         ModelStub modelStub = new ModelStubWithMeetUp(validMeetUp);
 
         assertThrows(CommandException.class,
-                AddMeetUpCommand.MESSAGE_DUPLICATE_MEETUP, () -> addMeetUpCommand.execute(modelStub));
+                AddCommand.MESSAGE_DUPLICATE_MEETUP, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         MeetUp meetUpA = new MeetUpBuilder().withName("meetUpA").build();
         MeetUp meetUpB = new MeetUpBuilder().withName("meetUpB").build();
-        AddMeetUpCommand addMeetUpACommand = new AddMeetUpCommand(meetUpA);
-        AddMeetUpCommand addMeetUpBCommand = new AddMeetUpCommand(meetUpB);
+        AddCommand addMeetUpACommand = new AddCommand(meetUpA);
+        AddCommand addMeetUpBCommand = new AddCommand(meetUpB);
 
         // same object -> returns true
         assertTrue(addMeetUpACommand.equals(addMeetUpACommand));
 
         // same values -> returns true
-        AddMeetUpCommand addMeetUpACommandCopy = new AddMeetUpCommand(meetUpA);
+        AddCommand addMeetUpACommandCopy = new AddCommand(meetUpA);
         assertTrue(addMeetUpACommand.equals(addMeetUpACommandCopy));
 
         // different types -> returns false
@@ -85,9 +84,9 @@ public class AddMeetUpCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddMeetUpCommand addMeetUpCommand = new AddMeetUpCommand(FIRST_MEETUP);
-        String expected = AddMeetUpCommand.class.getCanonicalName() + "{toAdd=" + FIRST_MEETUP + "}";
-        assertEquals(expected, addMeetUpCommand.toString());
+        AddCommand addCommand = new AddCommand(FIRST_MEETUP);
+        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + FIRST_MEETUP + "}";
+        assertEquals(expected, addCommand.toString());
     }
 
     /**

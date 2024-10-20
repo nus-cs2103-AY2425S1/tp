@@ -8,19 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.meetup.AddMeetUpCommand;
-import seedu.address.logic.commands.buyer.AddPersonCommand;
+import seedu.address.logic.commands.buyer.FindCommand;
+import seedu.address.logic.commands.meetup.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.meetup.DeleteMeetUpCommand;
-import seedu.address.logic.commands.buyer.DeletePersonCommand;
-import seedu.address.logic.commands.meetup.EditMeetUpCommand;
-import seedu.address.logic.commands.buyer.EditPersonCommand;
+import seedu.address.logic.commands.meetup.DeleteCommand;
+import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.buyer.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.meetup.ViewMeetUpCommand;
-import seedu.address.logic.commands.buyer.ViewPersonCommand;
+import seedu.address.logic.commands.meetup.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -57,22 +53,22 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddPersonCommand.COMMAND_WORD:
+        case seedu.address.logic.commands.buyer.AddCommand.COMMAND_WORD:
             return new AddPersonCommandParser().parse(arguments);
 
-        case EditPersonCommand.COMMAND_WORD:
+        case seedu.address.logic.commands.buyer.EditCommand.COMMAND_WORD:
             return new EditPersonCommandParser().parse(arguments);
 
-        case DeletePersonCommand.COMMAND_WORD:
+        case seedu.address.logic.commands.buyer.DeleteCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindPersonCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD:
             return new FindPersonCommandParser().parse(arguments);
 
-        case ViewPersonCommand.COMMAND_WORD:
+        case seedu.address.logic.commands.buyer.ViewCommand.COMMAND_WORD:
             return new ViewPersonCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
@@ -81,17 +77,17 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case AddMeetUpCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD:
             return new AddMeetUpCommandParser().parse(arguments);
 
-        case EditMeetUpCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD:
             return new EditMeetUpCommandParser().parse(arguments);
 
-        case DeleteMeetUpCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteMeetUpCommandParser().parse(arguments);
 
-        case ViewMeetUpCommand.COMMAND_WORD:
-            return new ViewMeetUpCommand();
+        case ViewCommand.COMMAND_WORD:
+            return new ViewCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

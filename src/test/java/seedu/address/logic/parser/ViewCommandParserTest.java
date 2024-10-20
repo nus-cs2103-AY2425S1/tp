@@ -6,17 +6,17 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.buyer.ViewPersonCommand;
+import seedu.address.logic.commands.buyer.ViewCommand;
 import seedu.address.model.person.PersonFulfilsPredicate;
 
-public class ViewPersonCommandParserTest {
+public class ViewCommandParserTest {
 
     private ViewPersonCommandParser parser = new ViewPersonCommandParser();
 
     @Test
     public void parse_validArgs_returnsViewCommand() {
-        ViewPersonCommand expectedViewCommand1 = new ViewPersonCommand(new PersonFulfilsPredicate("buyer"));
-        ViewPersonCommand expectedViewCommand2 = new ViewPersonCommand(new PersonFulfilsPredicate("seller"));
+        ViewCommand expectedViewCommand1 = new ViewCommand(new PersonFulfilsPredicate("buyer"));
+        ViewCommand expectedViewCommand2 = new ViewCommand(new PersonFulfilsPredicate("seller"));
 
         assertParseSuccess(parser, "buyer", expectedViewCommand1);
         assertParseSuccess(parser, "seller", expectedViewCommand2);
@@ -25,12 +25,12 @@ public class ViewPersonCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "hello",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewPersonCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArg_returnsViewCommand() {
-        ViewPersonCommand expectedViewCommand = new ViewPersonCommand(new PersonFulfilsPredicate(""));
+        ViewCommand expectedViewCommand = new ViewCommand(new PersonFulfilsPredicate(""));
         assertParseSuccess(parser, "", expectedViewCommand);
     }
 }

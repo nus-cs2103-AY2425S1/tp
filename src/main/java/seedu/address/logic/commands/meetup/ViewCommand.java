@@ -13,13 +13,13 @@ import seedu.address.model.Model;
 /**
  * Lists all meetUps in the address book to the user.
  */
-public class ViewMeetUpCommand extends Command {
+public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "viewm";
 
     public static final String MESSAGE_SUCCESS = "Viewing all meet-ups";
 
-    private final Logger logger = LogsCenter.getLogger(ViewMeetUpCommand.class);
+    private final Logger logger = LogsCenter.getLogger(ViewCommand.class);
 
 
     @Override

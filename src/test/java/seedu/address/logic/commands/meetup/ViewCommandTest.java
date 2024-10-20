@@ -8,12 +8,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.meetup.ViewMeetUpCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ViewMeetupCommandTest {
+public class ViewCommandTest {
     private Model model;
     private Model expectedModel;
 
@@ -25,8 +24,8 @@ public class ViewMeetupCommandTest {
 
     @Test
     public void execute_viewMeetUp_success() {
-        CommandResult expectedCommandResult = new CommandResult(ViewMeetUpCommand.MESSAGE_SUCCESS,
+        CommandResult expectedCommandResult = new CommandResult(ViewCommand.MESSAGE_SUCCESS,
                 false, false, true, false);
-        assertCommandSuccess(new ViewMeetUpCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ViewCommand(), model, expectedCommandResult, expectedModel);
     }
 }

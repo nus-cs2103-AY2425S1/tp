@@ -1,20 +1,20 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.buyer.ViewPersonCommand;
+import seedu.address.logic.commands.buyer.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PersonFulfilsPredicate;
 /**
- * Parses input arguments and creates a new ViewPersonCommand object
+ * Parses input arguments and creates a new ViewCommand object
  */
-public class ViewPersonCommandParser implements Parser<ViewPersonCommand> {
+public class ViewPersonCommandParser implements Parser<ViewCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewPersonCommand
-     * and returns an ViewPersonCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewCommand
+     * and returns an ViewCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ViewPersonCommand parse(String args) throws ParseException {
+    public ViewCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         String keyword;
 
@@ -24,11 +24,11 @@ public class ViewPersonCommandParser implements Parser<ViewPersonCommand> {
             keyword = trimmedArgs.split("\\s+")[0];
             if (!keyword.equals("buyer") && !keyword.equals("seller")) {
                 throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ViewPersonCommand.MESSAGE_USAGE)
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE)
                 );
             }
         }
 
-        return new ViewPersonCommand(new PersonFulfilsPredicate(keyword));
+        return new ViewCommand(new PersonFulfilsPredicate(keyword));
     }
 }

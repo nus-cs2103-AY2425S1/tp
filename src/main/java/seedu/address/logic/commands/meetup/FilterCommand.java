@@ -12,7 +12,7 @@ import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
 /**
  * Finds and lists all meetings in address book whose date is the same as the given date.
  */
-public class FilterMeetUpCommand extends Command {
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filterMeetup";
 
@@ -23,7 +23,7 @@ public class FilterMeetUpCommand extends Command {
 
     private final MeetUpContainsKeywordsPredicate predicate;
 
-    public FilterMeetUpCommand(MeetUpContainsKeywordsPredicate predicate) {
+    public FilterCommand(MeetUpContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

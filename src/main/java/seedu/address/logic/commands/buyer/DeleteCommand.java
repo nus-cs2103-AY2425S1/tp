@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.meetup;
+package seedu.address.logic.commands.buyer;
 
 import static java.util.Objects.requireNonNull;
 
@@ -11,40 +11,40 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.person.Person;
 
 /**
- * Deletes a meetup identified using it's displayed index from the meetup list.
+ * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteMeetUpCommand extends Command {
+public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletem";
+    public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes meet-up identified by the index number used in the displayed meet-up list.\n"
+            + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 ";
+            + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_MEETUP_SUCCESS = "Deleted meet-up: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteMeetUpCommand(Index targetIndex) {
+    public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<MeetUp> lastShownList = model.getFilteredMeetUpList();
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        MeetUp meetUpToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteMeetUp(meetUpToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MEETUP_SUCCESS, Messages.format(meetUpToDelete)));
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
     @Override
@@ -54,12 +54,12 @@ public class DeleteMeetUpCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteMeetUpCommand)) {
+        if (!(other instanceof DeleteCommand)) {
             return false;
         }
 
-        DeleteMeetUpCommand otherDeleteMeetUpCommand = (DeleteMeetUpCommand) other;
-        return targetIndex.equals(otherDeleteMeetUpCommand.targetIndex);
+        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
+        return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 
     @Override

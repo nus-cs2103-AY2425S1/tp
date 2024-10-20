@@ -1,5 +1,5 @@
 package seedu.address.logic.commands.meetup;
 
-public class FilterMeetUpCommandTest {
+public class FilterCommandTest {
     //TODO
 }

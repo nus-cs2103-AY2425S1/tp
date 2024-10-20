@@ -17,7 +17,7 @@ import seedu.address.model.meetup.MeetUp;
 /**
  * Adds a meetup to the address book.
  */
-public class AddMeetUpCommand extends Command {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "addm";
 
@@ -39,9 +39,9 @@ public class AddMeetUpCommand extends Command {
     private final MeetUp toAdd;
 
     /**
-     * Creates an AddMeetUpCommand to add the specified {@code MeetUp}
+     * Creates an AddCommand to add the specified {@code MeetUp}
      */
-    public AddMeetUpCommand(MeetUp meetup) {
+    public AddCommand(MeetUp meetup) {
         requireNonNull(meetup);
         toAdd = meetup;
     }
@@ -65,11 +65,11 @@ public class AddMeetUpCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddMeetUpCommand)) {
+        if (!(other instanceof AddCommand)) {
             return false;
         }
 
-        AddMeetUpCommand otherAddMeetupCommand = (AddMeetUpCommand) other;
+        AddCommand otherAddMeetupCommand = (AddCommand) other;
         return toAdd.equals(otherAddMeetupCommand.toAdd);
     }
 

@@ -12,7 +12,7 @@ import seedu.address.model.person.PersonFulfilsPredicate;
 /**
  * Lists all persons in the address book to the user.
  */
-public class ViewPersonCommand extends Command {
+public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
@@ -26,7 +26,7 @@ public class ViewPersonCommand extends Command {
 
     private final PersonFulfilsPredicate predicate;
 
-    public ViewPersonCommand(PersonFulfilsPredicate predicate) {
+    public ViewCommand(PersonFulfilsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -46,11 +46,11 @@ public class ViewPersonCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ViewPersonCommand)) {
+        if (!(other instanceof ViewCommand)) {
             return false;
         }
 
-        ViewPersonCommand e = (ViewPersonCommand) other;
+        ViewCommand e = (ViewCommand) other;
         return predicate.equals(e.predicate);
     }
 
