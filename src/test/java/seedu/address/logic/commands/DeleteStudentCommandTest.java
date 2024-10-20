@@ -31,7 +31,7 @@ public class DeleteStudentCommandTest {
 
     // Ensure CommandException is thrown when student with provided name is not found
     @Test
-    public void execute_StudentNameNotFound_throwsCommandException() {
+    public void execute_studentNameNotFound_throwsCommandException() {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Tan"));
 
@@ -41,7 +41,7 @@ public class DeleteStudentCommandTest {
 
     // Ensure CommandException is thrown when student with valid provided student number is not found
     @Test
-    public void execute_StudentNumberNotFound_throwsCommandException() {
+    public void execute_studentNumberNotFound_throwsCommandException() {
         Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         DeleteStudentCommand command = new DeleteStudentCommand(new Name("John Ng"), new StudentNumber("A1234567Y"));
@@ -110,7 +110,8 @@ public class DeleteStudentCommandTest {
                 new DeleteStudentCommandTest.ModelStubWithStudent(validStudent1, validStudent2,
                         validStudent3, validStudent4);
 
-        DeleteStudentCommand firstCommand = new DeleteStudentCommand(new Name("John Ng"), new StudentNumber("A1234567X"));
+        DeleteStudentCommand firstCommand = new DeleteStudentCommand(new Name("John Ng"),
+                new StudentNumber("A1234567X"));
 
         CommandResult firstResult = firstCommand.execute(modelStub);
 
@@ -118,9 +119,11 @@ public class DeleteStudentCommandTest {
                         + " " + validStudent1.getStudentNumber()),
                 firstResult.getFeedbackToUser());
 
-        assertEquals(FXCollections.observableArrayList(validStudent2, validStudent3, validStudent4), modelStub.getFilteredStudentList());
+        assertEquals(FXCollections.observableArrayList(validStudent2, validStudent3, validStudent4),
+                modelStub.getFilteredStudentList());
 
-        DeleteStudentCommand secondCommand = new DeleteStudentCommand(new Name("John Ng"), new StudentNumber("A9876543Z"));
+        DeleteStudentCommand secondCommand = new DeleteStudentCommand(new Name("John Ng"),
+                new StudentNumber("A9876543Z"));
 
         CommandResult secondResult = secondCommand.execute(modelStub);
 
@@ -128,7 +131,8 @@ public class DeleteStudentCommandTest {
                         + " " + validStudent3.getStudentNumber()),
                 secondResult.getFeedbackToUser());
 
-        assertEquals(FXCollections.observableArrayList(validStudent2, validStudent4), modelStub.getFilteredStudentList());
+        assertEquals(FXCollections.observableArrayList(validStudent2, validStudent4),
+                modelStub.getFilteredStudentList());
     }
 
     private class ModelStub implements Model {
