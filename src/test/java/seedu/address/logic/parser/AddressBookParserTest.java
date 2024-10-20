@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_REMARK;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -24,10 +22,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Remark;
 import seedu.address.model.person.predicates.CombinedPredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -101,14 +97,6 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
-    }
-
-    @Test
-    public void parseCommand_remark() throws Exception {
-        RemarkCommand command = (RemarkCommand) parser.parseCommand(
-                RemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                        + " " + PREFIX_NEW_REMARK + VALID_REMARK_BOB);
-        assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, new Remark(VALID_REMARK_BOB)), command);
     }
 
     @Test
