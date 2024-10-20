@@ -232,10 +232,9 @@ Given below is an example usage scenario and details on how the **Check Client**
 
 </box>
 
-The following sequence diagram shows how a `check-client` operation goes through the `UI` and `Logic` component:
+The following sequence diagram shows how a `check-client` operation goes through the `Logic` component:
 
-//TODO: Add diagram here(?)
-//<puml src="diagrams/CheckClientSequenceDiagram.puml" alt="CheckClientSequenceDiagram" />
+<puml src="diagrams/CheckClientSequenceDiagram.puml" alt="CheckClientSequenceDiagram" />
 
 
 

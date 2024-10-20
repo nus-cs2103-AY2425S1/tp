@@ -15,8 +15,6 @@ if () then ([invalid Client index])
             else ([hasCar])
         :Toggles the state
         of the user's car.;
-        :yap yap yap
-        et cetera;
         endif
 
 endif
