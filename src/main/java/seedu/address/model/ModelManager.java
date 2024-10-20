@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -24,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
-    private final FilteredList<Consultation> filteredConsultations;
+    private final FilteredList<Consultation> filteredConsultations; // New addition for consultations
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        filteredConsultations = new FilteredList<>(this.addressBook.getConsultationList());
+        filteredConsultations = new FilteredList<>(this.addressBook.getConsultList()); // Initialize consultations
     }
 
     public ModelManager() {
@@ -114,39 +115,6 @@ public class ModelManager implements Model {
         addressBook.setStudent(target, editedStudent);
     }
 
-    @Override
-    public Optional<Student> findStudentByName(Name name) {
-        requireNonNull(name);
-
-        // Search for a student by name in the list of students
-        return addressBook.getStudentList().stream()
-                .filter(student -> student.getName().equals(name))
-                .findFirst();
-    }
-
-    @Override
-    public boolean hasConsultation(Consultation consultation) {
-        requireNonNull(consultation);
-        return addressBook.hasConsultation(consultation);
-    }
-
-    @Override
-    public void deleteConsultation(Consultation target) {
-        addressBook.removeConsultation(target);
-    }
-
-    @Override
-    public void addConsultation(Consultation consultation) {
-        addressBook.addConsultation(consultation);
-        updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
-    }
-
-    @Override
-    public void setConsultation(Consultation target, Consultation editedConsultation) {
-        requireAllNonNull(target, editedConsultation);
-        addressBook.setConsultation(target, editedConsultation);
-    }
-
     //=========== Filtered Student List Accessors =============================================================
 
     @Override
@@ -160,17 +128,29 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
-    //=========== Filtered Consultation List Accessors =============================================================
+    //=========== Consultation Methods =============================================================
 
     @Override
     public ObservableList<Consultation> getFilteredConsultationList() {
-        return filteredConsultations;
+        return filteredConsultations; // Return the filtered consultations list
     }
 
     @Override
-    public void updateFilteredConsultationList(Predicate<Consultation> predicate) {
-        requireNonNull(predicate);
-        filteredConsultations.setPredicate(predicate);
+    public Optional<Student> findStudentByName(Name name) {
+        requireNonNull(name);
+        return filteredStudents.stream()
+                .filter(student -> student.getName().equals(name))
+                .findFirst(); // Find and return the student by name
+    }
+
+    @Override
+    public void addConsult(Consultation consult) {
+        addressBook.addConsult(consult);
+    }
+
+    @Override
+    public boolean hasConsult(Consultation consult) {
+        return addressBook.hasConsult(consult);
     }
 
     @Override
@@ -187,19 +167,6 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents)
-                && filteredConsultations.equals(otherModelManager.filteredConsultations);
+                && filteredConsultations.equals(otherModelManager.filteredConsultations); // Include consultation list
     }
-
-    // ========== Consultation Commands ==========
-
-    @Override
-    public void addConsult(Consultation consult) {
-        addressBook.addConsult(consult);
-    }
-
-    @Override
-    public boolean hasConsult(Consultation consult) {
-        return addressBook.hasConsult(consult);
-    }
-
 }

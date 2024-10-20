@@ -9,20 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.consultation.Consultation;
-import seedu.address.model.consultation.UniqueConsultationList;
-import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameStudent and .isSameConsultation comparison)
  * Duplicate students are not allowed (by .isSameStudent comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueStudentList students;
-    private final UniqueConsultationList consultations;
     private final ObservableList<Consultation> consults;
 
     /*
@@ -34,14 +30,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         students = new UniqueStudentList();
-        consultations = new UniqueConsultationList();
         consults = FXCollections.observableArrayList();
     }
 
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the data in {@code toBeCopied}.
      * Creates an AddressBook using the data in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
@@ -57,14 +51,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setStudents(List<Student> students) {
         this.students.setStudents(students);
-    }
-
-    /**
-     * Replaces the contents of the consultation list with {@code consultations}.
-     * {@code consultations} must not contain duplicate consultations.
-     */
-    public void setConsultations(List<Consultation> consultations) {
-        this.consultations.setConsultations(consultations);
     }
 
     /**
@@ -122,8 +108,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.
-     * The student identity of {@code editedStudent} must not be the same as
-     * another existing student in the address book.
+     * The student identity of {@code editedStudent} must not be the same
+     * as another existing student in the address book.
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
@@ -137,44 +123,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
-    }
-
-    //// consultation-level operations
-
-    /**
-     * Returns true if a consultation with the same identity as {@code consultation} exists in the address book.
-     */
-    public boolean hasConsultation(Consultation consultation) {
-        requireNonNull(consultation);
-        return consultations.contains(consultation);
-    }
-
-    /**
-     * Adds a consultation to the address book.
-     * The consultation must not already exist in the address book.
-     */
-    public void addConsultation(Consultation consultation) {
-        consultations.add(consultation);
-    }
-
-    /**
-     * Replaces the given consultation {@code target} in the list with {@code editedConsultation}.
-     * {@code target} must exist in the address book.
-     * The consultation identity of {@code editedConsultation} must not be the same
-     * as another existing consultation in the address book.
-     */
-    public void setConsultation(Consultation target, Consultation editedConsultation) {
-        requireNonNull(editedConsultation);
-
-        consultations.setConsultation(target, editedConsultation);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeConsultation(Consultation key) {
-        consultations.remove(key);
     }
 
     //// util methods
@@ -202,6 +150,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             return true;
         }
 
+        // instanceof handles nulls
         if (!(other instanceof AddressBook)) {
             return false;
         }

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,7 +27,7 @@ public class AddToConsultCommand extends Command {
             + "by the index number used in the displayed consultation list. "
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME]...\n"
-            + "Example: " + COMMAND_WORD + " 1 n/David Li n/Roy Balakrishnan";
+            + "Example: " + COMMAND_WORD + " 1 n/John Doe n/Harry Ng";
 
     public static final String MESSAGE_ADD_TO_CONSULT_SUCCESS = "Added students to Consultation: %1$s";
 
@@ -51,7 +52,8 @@ public class AddToConsultCommand extends Command {
         List<Consultation> lastShownList = model.getFilteredConsultationList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_CONSULTATION_DISPLAYED_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_CONSULTATION_DISPLAYED_INDEX,
+                index.getOneBased()));
         }
 
         Consultation consultationToEdit = lastShownList.get(index.getZeroBased());
@@ -62,7 +64,7 @@ public class AddToConsultCommand extends Command {
             consultationToEdit.addStudent(student);
         }
 
-        return new CommandResult(String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, consultationToEdit));
+        return new CommandResult(String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)));
     }
 
     @Override

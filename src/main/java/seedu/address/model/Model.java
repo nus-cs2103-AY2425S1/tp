@@ -13,11 +13,8 @@ import seedu.address.model.student.Student;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluates to true */
+    /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
-    Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
-
-    // User Preferences-related methods
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -48,8 +45,6 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
-
-    // Address Book (Students) related methods
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -104,4 +99,16 @@ public interface Model {
      * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
      */
     boolean hasConsult(Consultation consult);
+
+    /**
+     * Returns an unmodifiable view of the filtered consultation list.
+     */
+    ObservableList<Consultation> getFilteredConsultationList();
+
+    /**
+     * Finds a student by their name.
+     * @param name The name of the student to search for.
+     * @return An Optional containing the student if found, or empty if not.
+     */
+    Optional<Student> findStudentByName(seedu.address.model.student.Name name);
 }

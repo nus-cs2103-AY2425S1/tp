@@ -1,11 +1,11 @@
-package seedu.address.logic.parser.consultations;
+package seedu.address.logic.parser.consultation;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
@@ -45,16 +45,17 @@ public class AddToConsultCommandParser implements Parser<AddToConsultCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToConsultCommand.MESSAGE_USAGE));
         }
 
-        List<Name> studentNames = argMultimap.getAllValues(PREFIX_NAME)
-            .stream()
-            .map(name -> {
-                try {
-                    return ParserUtil.parseName(name);
-                } catch (ParseException e) {
-                    throw new RuntimeException(e); // Wrap in a RuntimeException
-                }
-            })
-            .collect(Collectors.toList());
+        // Use a regular for-loop to handle exceptions
+        List<Name> studentNames = new ArrayList<>();
+        for (String nameString : argMultimap.getAllValues(PREFIX_NAME)) {
+            Name name;
+            try {
+                name = ParserUtil.parseName(nameString);
+            } catch (ParseException e) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS, e); // Handle ParseException directly
+            }
+            studentNames.add(name);
+        }
 
         return new AddToConsultCommand(index, studentNames);
     }
