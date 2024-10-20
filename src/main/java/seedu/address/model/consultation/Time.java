@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class Time {
 
-    public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:MM, "
+    public static final String MESSAGE_CONSTRAINTS = "Times should be in the format HH:mm, "
         + "where hour is between 00 and 23, and minute between 00 and 59 (e.g., 14:30).";
 
     private final String value;
