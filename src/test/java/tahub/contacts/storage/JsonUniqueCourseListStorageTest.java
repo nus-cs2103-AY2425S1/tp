@@ -1,11 +1,13 @@
 package tahub.contacts.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -78,4 +80,21 @@ public class JsonUniqueCourseListStorageTest {
         assertEquals("CS1010", readCourses.asUnmodifiableObservableList().get(0).courseCode);
         assertEquals("Introduction to CS", readCourses.asUnmodifiableObservableList().get(0).courseName);
     }
+
+
+    private java.util.Optional<UniqueCourseList> readCourseList(String fp) throws Exception {
+        return new JsonUniqueCourseListStorage(Paths.get(fp)).readCourseList(addToTestDataPathIfNotNull(fp));
+    }
+
+    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
+        return prefsFileInTestDataFolder != null
+                ? testFolder.resolve(prefsFileInTestDataFolder)
+                : null;
+    }
+
+    @Test
+    public void readCourseList_missingFile_emptyResult() throws Exception {
+        assertFalse(readCourseList("NonExistentFile.json").isPresent());
+    }
+
 }
