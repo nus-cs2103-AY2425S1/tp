@@ -15,6 +15,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.Ask;
+import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
@@ -170,6 +172,36 @@ public class ParserUtil {
             throw new ParseException(Type.MESSAGE_CONSTRAINTS);
         }
         return new Type(trimmedType);
+    }
+
+    /**
+     * Parses a {@code String ask} into a {@code Ask}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Ask} is invalid.
+     */
+    public static Ask parseAsk(String ask) throws ParseException {
+        requireNonNull(ask);
+        String trimmedAsk = ask.trim();
+        if (!Ask.isValidAsk(trimmedAsk)) {
+            throw new ParseException(Ask.MESSAGE_CONSTRAINTS);
+        }
+        return new Ask(trimmedAsk);
+    }
+
+    /**
+     * Parses a {@code String bid} into a {@code Bid}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Bid} is invalid.
+     */
+    public static Bid parseBid(String bid) throws ParseException {
+        requireNonNull(bid);
+        String trimmedBid = bid.trim();
+        if (!Bid.isValidBid(trimmedBid)) {
+            throw new ParseException(Bid.MESSAGE_CONSTRAINTS);
+        }
+        return new Bid(trimmedBid);
     }
 
 

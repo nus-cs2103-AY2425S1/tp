@@ -14,15 +14,19 @@ public class Property {
     private final PostalCode postalCode;
     private final Unit unit;
     private final Type type;
+    private final Ask ask;
+    private final Bid bid;
 
     /**
      * Every field must be present and not null.
      * If the type is landed, then unit of a landed property will always default to 00-00
      */
-    public Property(PostalCode postalCode, Unit unit, Type type) {
-        requireAllNonNull(postalCode, unit, type);
+    public Property(PostalCode postalCode, Unit unit, Type type, Ask ask, Bid bid) {
+        requireAllNonNull(postalCode, unit, type, ask, bid);
         this.postalCode = postalCode;
         this.type = type;
+        this.ask = ask;
+        this.bid = bid;
         if (this.type.isLandedType()) {
             this.unit = Unit.DEFAULT_LANDED_UNIT;
         } else {
@@ -40,6 +44,14 @@ public class Property {
 
     public Type getType() {
         return type;
+    }
+
+    public Ask getAsk() {
+        return ask;
+    }
+
+    public Bid getBid() {
+        return bid;
     }
 
     /**
@@ -91,12 +103,14 @@ public class Property {
         return otherProperty != null
                 && otherProperty.getPostalCode().equals(getPostalCode())
                 && otherProperty.getUnit().equals(getUnit())
-                && otherProperty.getType().equals(getType());
+                && otherProperty.getType().equals(getType())
+                && otherProperty.getAsk().equals(getAsk())
+                && otherProperty.getBid().equals(getBid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(postalCode, unit);
+        return Objects.hash(postalCode, unit, type, ask, bid);
     }
 
     @Override
@@ -105,6 +119,8 @@ public class Property {
                 .add("postalCode", postalCode)
                 .add("unit", unit)
                 .add("type", type)
+                .add("ask", ask)
+                .add("bid", bid)
                 .toString();
     }
 }
