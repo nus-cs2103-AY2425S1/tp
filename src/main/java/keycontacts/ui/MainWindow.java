@@ -2,13 +2,17 @@ package keycontacts.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
@@ -23,7 +27,7 @@ import keycontacts.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
-    private static final String FXML = "MainWindow.fxml";
+    private static final String FXML = "Notebook.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -34,6 +38,15 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    @FXML
+    private AnchorPane leftPage;
+
+    @FXML
+    private AnchorPane rightPage;
+
+    @FXML
+    private StackPane binder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +79,12 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        rightPage.getParent().getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
+            double newWidth = newValue.doubleValue();
+            leftPage.setPrefWidth((newWidth - binder.getWidth()) / 2);
+            rightPage.setPrefWidth((newWidth - binder.getWidth()) / 2);
+        });
     }
 
     public Stage getPrimaryStage() {
