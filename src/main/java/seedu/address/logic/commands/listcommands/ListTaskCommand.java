@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.GroupName;
 
 /**
- * Adds a group to the address book.
+ * Lists all the tasks in the address book or for a specified group.
  */
 public class ListTaskCommand extends Command {
     public static final String COMMAND_WORD = "list_t";
@@ -35,14 +35,14 @@ public class ListTaskCommand extends Command {
     private final Optional<GroupName> groupNameOptional;
 
     /**
-     * Creates an ListTaskCommand to add the specified {@code Task}
+     * Creates a ListTaskCommand to list all the tasks for a group with {@code groupName}.
      */
     public ListTaskCommand(GroupName groupName) {
         this.groupNameOptional = Optional.<GroupName>of(groupName);
     }
 
     /**
-     * Creates an ListTaskCommand to add the specified {@code Task}
+     * Creates a ListTaskCommand to list all the tasks in the address book.
      */
     public ListTaskCommand() {
         this.groupNameOptional = Optional.empty();

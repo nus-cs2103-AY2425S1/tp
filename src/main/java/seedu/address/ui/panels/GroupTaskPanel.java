@@ -14,7 +14,7 @@ import seedu.address.ui.cards.GroupTaskCard;
 
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks in a group.
  */
 public class GroupTaskPanel extends UiPart<Region> {
     private static final String FXML = "GroupListPanel.fxml";

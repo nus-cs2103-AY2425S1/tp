@@ -48,7 +48,7 @@ public class AddTaskToGroupCommand extends Command {
     private final GroupName toAddInto;
 
     /**
-     * Creates an AddStudentToGroupCommand to add the specified {@code Student} to the specified {@code Group}
+     * Creates an AddStudentToGroupCommand to add the specified {@code Task} to the specified {@code Group}.
      */
     public AddTaskToGroupCommand(TaskName taskName, Deadline deadline, GroupName groupName) {
         requireNonNull(taskName);

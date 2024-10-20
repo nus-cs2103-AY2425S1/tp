@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
 import seedu.address.ui.cards.TaskCard;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";

@@ -33,6 +33,9 @@ public class DeleteGroupCommand extends Command {
 
     private final GroupName targetGroupName;
 
+    /**
+     * Creates a DeleteGroupCommand to remove the specified group with {@code targetGroupName}.
+     */
     public DeleteGroupCommand(GroupName targetGroupName) {
         this.targetGroupName = targetGroupName;
     }

@@ -39,8 +39,8 @@ public class MarkTaskCommand extends Command {
     private final GroupName toMarkFrom;
 
     /**
-     * Creates a MarkTaskCommand to change the status of the specified task on {@code index} from the
-     * specified {@code groupName}.
+     * Creates a MarkTaskCommand to change the status of the task on {@code index} from the
+     * group with {@code groupName}.
      */
     public MarkTaskCommand(Index index, GroupName groupName) {
         requireNonNull(index);

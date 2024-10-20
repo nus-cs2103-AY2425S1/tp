@@ -50,6 +50,9 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Creates an EditCommand to replace the student at {@code index} with the edited details
+     * in {@code editPersonDescriptor}.
+     *
      * @param index                of the student in the filtered student list to edit
      * @param editPersonDescriptor details to edit the student with
      */

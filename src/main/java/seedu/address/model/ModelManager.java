@@ -221,7 +221,7 @@ public class ModelManager implements Model {
 
     @Override
     public Group getGroupByName(GroupName groupName) {
-        return addressBook.getGroupByName(groupName);
+        return addressBook.findGroupByName(groupName);
     }
 
     /**

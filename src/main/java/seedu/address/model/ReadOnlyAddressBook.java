@@ -11,8 +11,8 @@ import seedu.address.model.task.Task;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the persons, groups, and tasks lists.
+     * These lists will not contain any duplicate persons.
      */
     ObservableList<Student> getStudentList();
     ObservableList<Group> getGroupList();

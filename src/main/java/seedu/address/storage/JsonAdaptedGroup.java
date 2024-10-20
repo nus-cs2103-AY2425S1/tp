@@ -27,7 +27,7 @@ class JsonAdaptedGroup {
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedGroup} with the given student details.
+     * Constructs a {@code JsonAdaptedGroup} with the given group details.
      */
     @JsonCreator
     public JsonAdaptedGroup(@JsonProperty("groupname") String groupName,

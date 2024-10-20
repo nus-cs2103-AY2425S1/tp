@@ -24,7 +24,7 @@ class JsonAdaptedTask {
     private final String groupsWithTask;
 
     /**
-     * Constructs a {@code JsonAdaptedGroup} with the given student details.
+     * Constructs a {@code JsonAdaptedTask} with the given task details.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("taskname") String taskName,

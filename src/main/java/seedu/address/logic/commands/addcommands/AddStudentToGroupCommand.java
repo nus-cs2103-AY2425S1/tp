@@ -50,7 +50,7 @@ public class AddStudentToGroupCommand extends Command {
     private final GroupName toAddInto;
 
     /**
-     * Creates an AddStudentToGroupCommand to add the specified {@code Student} to the specified {@code Group}
+     * Creates an AddStudentToGroupCommand to add the specified {@code Student} to the specified {@code Group}.
      */
     public AddStudentToGroupCommand(StudentNumber studentNumber, GroupName groupName) {
         requireNonNull(studentNumber);

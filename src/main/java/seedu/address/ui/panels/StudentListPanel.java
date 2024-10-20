@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
 import seedu.address.ui.cards.PersonCard;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of students.
  */
 public class StudentListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";

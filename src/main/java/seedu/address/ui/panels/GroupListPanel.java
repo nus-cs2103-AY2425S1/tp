@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
 import seedu.address.ui.cards.GroupCard;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of groups.
  */
 public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "GroupListPanel.fxml";

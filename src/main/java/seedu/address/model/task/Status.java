@@ -2,7 +2,7 @@ package seedu.address.model.task;
 
 /**
  * Enum class representing the status of a Task.
- * {@code MISSED}: Task was not completed on time
+ * {@code MISSED}: Task was not completed on time.
  */
 public enum Status {
     PENDING,

@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds a group to the address book.
+ * Lists all the students in the address book.
  */
 public class ListStudentCommand extends Command {
 
@@ -23,12 +23,6 @@ public class ListStudentCommand extends Command {
         + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all students";
-
-    /**
-     * Creates an ListStudentCommand to add the specified {@code Group}
-     */
-    public ListStudentCommand() {
-    }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

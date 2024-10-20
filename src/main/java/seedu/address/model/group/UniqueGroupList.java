@@ -80,6 +80,9 @@ public class UniqueGroupList implements Iterable<Group> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     */
     public void setGroups(UniqueGroupList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -99,7 +102,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Finds the group with matching group name {@code groupName}
+     * Finds the group with matching group name {@code groupName}.
      */
     public Group findGroupByName(GroupName groupName) {
         requireNonNull(groupName);

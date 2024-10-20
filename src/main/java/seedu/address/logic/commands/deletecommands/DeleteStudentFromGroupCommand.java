@@ -18,7 +18,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
 /**
- * Deletes a student from a group
+ * Deletes a student from a group.
  */
 public class DeleteStudentFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "del_s_g";
@@ -39,7 +39,8 @@ public class DeleteStudentFromGroupCommand extends Command {
     private final GroupName targetGroupName;
 
     /**
-     * Creates an DeleteStudentFromGroupCommand to delete the specified student {@code sno} from group {@code groupName}
+     * Creates an DeleteStudentFromGroupCommand to remove the student with {@code sno}
+     * from group with {@code groupName}.
      */
     public DeleteStudentFromGroupCommand(GroupName groupName, StudentNumber sno) {
         this.targetGroupName = groupName;

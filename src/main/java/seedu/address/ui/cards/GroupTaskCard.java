@@ -10,7 +10,7 @@ import seedu.address.ui.UiPart;
 
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * An UI component that displays information of a {@code Task} in a {@code Group}.
  */
 public class GroupTaskCard extends UiPart<Region> {
 

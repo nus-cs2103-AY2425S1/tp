@@ -32,7 +32,7 @@ public class AddGroupCommand extends Command {
     private final Group toAdd;
 
     /**
-     * Creates an AddGroupCommand to add the specified {@code Group}
+     * Creates an AddGroupCommand to add the specified {@code Group}.
      */
     public AddGroupCommand(Group group) {
         requireNonNull(group);

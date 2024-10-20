@@ -42,7 +42,7 @@ public class AddStudentCommand extends Command {
     private final Student toAdd;
 
     /**
-     * Creates an AddStudentCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student}.
      */
     public AddStudentCommand(Student student) {
         requireNonNull(student);

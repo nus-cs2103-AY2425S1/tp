@@ -32,6 +32,9 @@ public class DeleteStudentCommand extends Command {
 
     private final StudentNumber targetStudentNo;
 
+    /**
+     * Creates a DeleteStudentCommand to remove the specified student with {@code sno}.
+     */
     public DeleteStudentCommand(StudentNumber sno) {
         this.targetStudentNo = sno;
     }

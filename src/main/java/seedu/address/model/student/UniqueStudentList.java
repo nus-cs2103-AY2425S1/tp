@@ -80,6 +80,9 @@ public class UniqueStudentList implements Iterable<Student> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     */
     public void setPersons(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
