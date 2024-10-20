@@ -153,7 +153,8 @@ public interface Model {
     boolean hasAssignment(AssignmentId assignmentId);
 
     /**
-     * Returns true if an assignment with the same project id and employee id as {@code projectId} and {@code employeeId}
+     * Returns true if an assignment with the same project id and employee id
+     * as {@code projectId} and {@code employeeId}
      * exists in the address book.
      */
     boolean hasAssignment(ProjectId projectId, EmployeeId employeeId);

@@ -1,17 +1,22 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.UnassignCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.project.ProjectId;
 
-import java.util.stream.Stream;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
-
+/**
+ * Parses input arguments and creates a new UnassignCommand object
+ */
 public class UnassignCommandParser implements Parser<UnassignCommand> {
 
     /**

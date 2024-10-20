@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -7,11 +12,10 @@ import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.project.ProjectId;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
-
-public class UnassignCommand extends Command{
+/**
+ * Unassign person from a project
+ */
+public class UnassignCommand extends Command {
     public static final String COMMAND_WORD = "unassign";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unassigns a person from a project. "

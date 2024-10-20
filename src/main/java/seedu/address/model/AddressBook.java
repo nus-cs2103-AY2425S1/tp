@@ -220,7 +220,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if an assignment with the same project id and employee id as {@code projectId} and {@code employeeId}
+     * Returns true if an assignment with the same project id and employee id
+     * as {@code projectId} and {@code employeeId}
      * exists in the address book.
      */
     public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
