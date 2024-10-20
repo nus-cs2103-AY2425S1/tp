@@ -74,17 +74,32 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a client to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/<name> p/<phone number> e/<email address> addr/<address> b/<birthday >appt/<appointment and time>`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
+- Birthday should be in `yyyy-mm-dd` 
+- Appointment should be in `yyyy-mm-dd HH:mm`
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2000-12-12 appt/2024-12-12 12:00`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/2001-10-10 appt/2024-12-01 09:00`
+
+### Adding a person: `assign`
+
+Assign policies to a client
+
+Format: `assign <Index> pon/<Policy Name> /pos<Policy start date> /poe <Policy end date> /paydate <Insurance due date> /amt <Amount Due>`
+
+- Policy start date and end date refers to the duration of coverage 
+- Policy start date and Policy end date should be in `yyyy-mm-dd`
+- Pay date should be in `yyyy-mm-dd` format
+- Amount Due only can be Big Decimal format
+
+
+Examples:
+* `assign 1 pon/PolicyOne pos/2022-12-12 poe/2023-12-12 paydate/2023-11-01 amt/300.00`
+
 
 ### Listing all persons : `list`
 
