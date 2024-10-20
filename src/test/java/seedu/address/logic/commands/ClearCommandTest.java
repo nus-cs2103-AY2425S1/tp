@@ -6,7 +6,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.AppointmentBook;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
 
@@ -32,7 +36,8 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearAppointmentCommand(), model, ClearAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearAppointmentCommand(), model,
+                ClearAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -41,7 +46,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalAppointmentBook(), new UserPrefs());
         expectedModel.setAppointmentBook(new AppointmentBook());
 
-        assertCommandSuccess(new ClearAppointmentCommand(), model, ClearAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearAppointmentCommand(), model,
+                ClearAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
