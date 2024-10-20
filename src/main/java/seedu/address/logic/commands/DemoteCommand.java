@@ -34,7 +34,7 @@ public class DemoteCommand extends Command {
     private final Index index;
 
     /**
-     * Creates a DemoteCommand to demote the specified {@code Person} to a potential hire
+     * Creates a DemoteCommand to demote the employee at the specified {@code index} in the list to a potential hire
      */
     public DemoteCommand(Index index) {
         requireNonNull(index);
@@ -62,7 +62,11 @@ public class DemoteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(demotedPerson)));
     }
 
+    /**
+     * Creates and returns a {@code Person} with isEmployee equal to false and an empty contract end date
+     */
     private static Person createDemotedPerson(Person personToDemote) {
+        assert personToDemote != null : "Person does not exist, cannot be demoted";
 
         Name name = personToDemote.getName();
         Phone phoneNumber = personToDemote.getPhone();
@@ -97,6 +101,4 @@ public class DemoteCommand extends Command {
                 .add("index", index)
                 .toString();
     }
-
-
 }

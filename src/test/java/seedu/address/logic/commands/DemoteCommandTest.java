@@ -25,7 +25,6 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for DemoteCommand.
  */
 public class DemoteCommandTest {
-
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -44,6 +43,7 @@ public class DemoteCommandTest {
 
         assertCommandSuccess(demoteCommand, model, expectedMessage, expectedModel);
     }
+
     @Test
     public void execute_notAnEmployee_failure() {
         DemoteCommand demoteCommand = new DemoteCommand(INDEX_FIRST_PERSON);
@@ -59,7 +59,7 @@ public class DemoteCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
+     * Demote in a filtered list where index is larger than size of filtered list,
      * but smaller than size of address book
      */
     @Test
@@ -90,6 +90,9 @@ public class DemoteCommandTest {
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new DemoteCommand(INDEX_SECOND_PERSON)));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
     }
 
     @Test
@@ -99,5 +102,4 @@ public class DemoteCommandTest {
         String expected = DemoteCommand.class.getCanonicalName() + "{index=" + index + "}";
         assertEquals(expected, demoteCommand.toString());
     }
-
 }
