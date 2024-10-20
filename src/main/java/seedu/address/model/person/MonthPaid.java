@@ -49,20 +49,21 @@ public class MonthPaid implements Comparable<MonthPaid> {
     @Override
     public int compareTo(MonthPaid other) {
         // Split the value into year and month
-        String[] thisParts = this.value.split("-");
-        String[] otherParts = other.value.split("-");
+        String[] currentMonthYearParts = this.value.split("-");
+        String[] otherMonthYearParts = other.value.split("-");
 
-        int thisYear = Integer.parseInt(thisParts[0]);
-        int otherYear = Integer.parseInt(otherParts[0]);
+        int currentYear = Integer.parseInt(currentMonthYearParts[0]);
+        int otherYear = Integer.parseInt(otherMonthYearParts[0]);
 
         // Compare by year first (descending order)
-        if (thisYear != otherYear) {
-            return Integer.compare(otherYear, thisYear);
+        if (currentYear != otherYear) {
+            return Integer.compare(otherYear, currentYear);
         }
 
         // Compare by month if years are the same (descending order)
-        int thisMonth = Integer.parseInt(thisParts[1]);
-        int otherMonth = Integer.parseInt(otherParts[1]);
-        return Integer.compare(otherMonth, thisMonth);
+        int currentMonth = Integer.parseInt(currentMonthYearParts[1]);
+        int otherMonth = Integer.parseInt(otherMonthYearParts[1]);
+        return Integer.compare(otherMonth, currentMonth);
     }
+
 }
