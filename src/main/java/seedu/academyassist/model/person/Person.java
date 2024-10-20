@@ -27,14 +27,13 @@ public class Person {
     private final Ic ic;
     private final YearGroup yearGroup;
     private final Set<Subject> subjects = new HashSet<>();
-    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Ic ic, YearGroup yearGroup,
-                  Set<Subject> subjects, Set<Tag> tags) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yearGroup, subjects, tags);
+                  Set<Subject> subjects) {
+        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yearGroup, subjects);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,7 +41,6 @@ public class Person {
         this.ic = ic;
         this.yearGroup = yearGroup;
         this.subjects.addAll(subjects);
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -66,20 +64,16 @@ public class Person {
     public YearGroup getYearGroup() {
         return yearGroup;
     }
+    /**
+     * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Returns true if both persons have the same name.
+     * Returns true if both persons have the same IC.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -102,8 +96,7 @@ public class Person {
         updatedSubjects.add(subjectToAdd);
 
         // Return a new Person object with the updated subjects
-        return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, updatedSubjects,
-                this.tags);
+        return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, updatedSubjects);
     }
 
     /**
@@ -129,13 +122,12 @@ public class Person {
                 && ic.equals(otherPerson.ic)
                 && yearGroup.equals(otherPerson.yearGroup)
                 && subjects.equals(otherPerson.subjects)
-                && tags.equals(otherPerson.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, ic, yearGroup, subjects, tags);
+        return Objects.hash(name, phone, email, address, ic, yearGroup, subjects);
     }
 
     @Override
@@ -148,7 +140,6 @@ public class Person {
                 .add("ic", ic)
                 .add("year group", yearGroup)
                 .add("subjects", subjects)
-                .add("tags", tags)
                 .toString();
     }
 

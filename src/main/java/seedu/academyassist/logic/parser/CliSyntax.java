@@ -13,7 +13,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_IC = new Prefix("i/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_YEARGROUP = new Prefix("yg/");
-    public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_SORT_PARAM = new Prefix("s/");
 
 
