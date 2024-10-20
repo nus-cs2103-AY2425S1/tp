@@ -53,4 +53,8 @@ public class Status {
         return value.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return value;
+    }
 }

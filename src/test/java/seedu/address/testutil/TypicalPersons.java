@@ -49,12 +49,10 @@ public class TypicalPersons {
 
     public static final PersonDescriptor ALICE = new PersonBuilder().withName("Alice Pauline")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-        .withPhone("94351253").withStatus("Recovered")
-        .withTags("friends").buildDescriptor();
+        .withPhone("94351253").withStatus("Recovered").withTags("friends").buildDescriptor();
     public static final PersonDescriptor BENSON = new PersonBuilder().withName("Benson Meier")
-        .withAddress("311, Clementi Ave 2, #02-25")
-        .withEmail("johnd@example.com").withPhone("98765432").withStatus("Recovering")
-        .withTags("owesMoney", "friends").buildDescriptor();
+        .withAddress("311, Clementi Ave 2, #02-25").withEmail("johnd@example.com").withPhone("98765432")
+        .withStatus("Recovering").withTags("owesMoney", "friends").buildDescriptor();
     public static final PersonDescriptor CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
         .withEmail("heinz@example.com").withStatus("Critical").withAddress("wall street").buildDescriptor();
     public static final PersonDescriptor DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
