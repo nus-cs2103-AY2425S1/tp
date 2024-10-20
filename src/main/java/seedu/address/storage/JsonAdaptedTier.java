@@ -9,28 +9,33 @@ import seedu.address.model.tier.Tier;
 /**
  * Jackson-friendly version of {@link Tier}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedTier {
 
-    private final String tagName;
+    private final String tierName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code tierName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedTier(String tierName) {
+        this.tierName = tierName;
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Tier} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tier source) {
-        tagName = source.tagName.toString();
+    public JsonAdaptedTier(Tier source) {
+        tierName = source.toDecodeString();
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getTierName() {
+        return tierName;
+    }
+
+    @Override
+    public String toString() {
+        return tierName;
     }
 
     /**
@@ -39,10 +44,9 @@ class JsonAdaptedTag {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Tier toModelType() throws IllegalValueException {
-        if (!Tier.isValidTierName(tagName)) {
+        if (!Tier.isValidTierName(tierName)) {
             throw new IllegalValueException(Tier.MESSAGE_CONSTRAINTS);
         }
-        return new Tier(tagName);
+        return new Tier(tierName);
     }
-
 }

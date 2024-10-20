@@ -12,26 +12,30 @@ public class Tier {
     public static final String MESSAGE_CONSTRAINTS =
             "The Tiers are Gold, Silver, Bronze and Reject. Please use one of them.";
 
-    public final TierEnum tagName;
+    public final TierEnum tierName;
 
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tierName A valid tag name.
      */
-    public Tier(String tagName) {
-        requireNonNull(tagName);
-        if (tagName.isEmpty()) {
-            tagName = TierEnum.NA.toString();
+    public Tier(String tierName) {
+        requireNonNull(tierName);
+        checkArgument(isValidTierName(tierName), MESSAGE_CONSTRAINTS);
+        if (tierName.isEmpty()) {
+            this.tierName = TierEnum.NA;
+        } else {
+            this.tierName = TierEnum.valueOf(tierName.toUpperCase());
         }
-        checkArgument(isValidTierName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = TierEnum.valueOf(tagName.toUpperCase());
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTierName(String test) {
+        if (test.isEmpty()) {
+            return true;
+        }
         for (TierEnum c : TierEnum.values()) {
             if (c.name().equals(test.toUpperCase())) {
                 return true;
@@ -52,19 +56,30 @@ public class Tier {
         }
 
         Tier otherTier = (Tier) other;
-        return tagName.equals(otherTier.tagName);
+        return tierName.equals(otherTier.tierName);
     }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return tierName.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName.toString() + ']';
+        return '[' + tierName.toString() + ']';
+    }
+
+    /**
+     * Format Tier for parsing/decoding. As TierEnum.NA is only for internal use,
+     * if tierName equals TierEnum.NA, an empty string is returned
+     */
+    public String toDecodeString() {
+        if (tierName.equals(TierEnum.NA)) {
+            return "";
+        }
+        return tierName.toString();
     }
 
     /**

@@ -330,7 +330,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to add a user.
 2.  AgentAssist adds a person.
-3.  AgentAssist returns the unique user ID tagged to the new user.
+3.  AgentAssist returns the unique user ID assigned to the new user.
 
     Use case ends.
 
