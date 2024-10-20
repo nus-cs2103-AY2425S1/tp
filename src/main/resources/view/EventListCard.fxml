@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollPane?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
@@ -30,6 +31,10 @@
             <FlowPane fx:id="celebrity" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <Label fx:id="venue" styleClass="cell_small_label" text="\$venue" />
+            <VBox fx:id="liaisonBox" styleClass="liaison-box">
+                <Label fx:id="liaisonLabel" styleClass="underline" text="Liaisons" />
+                <Label fx:id="liaisons" styleClass="cell_small_label" text="\$liaison" />
+            </VBox>
         </VBox>
     </GridPane>
 </HBox>

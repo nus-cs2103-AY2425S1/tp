@@ -37,6 +37,8 @@ public class EventCard extends UiPart<Region> {
     private Label venue;
     @FXML
     private FlowPane celebrity;
+    @FXML
+    private Label liaisons;
 
     /**
      * Creates a {@code EventCard} with the given {@code Event} and index to display.
@@ -49,5 +51,6 @@ public class EventCard extends UiPart<Region> {
         time.setText(event.getTime().getTime());
         venue.setText(event.getVenue().getVenue());
         celebrity.getChildren().add(new Label(event.getCelebrity().getName().fullName));
+        liaisons.setText(event.getLiaisonsString());
     }
 }
