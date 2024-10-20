@@ -1,37 +1,37 @@
 package seedu.address.model.person;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
+public class ContainsSpecificKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public ContainsSpecificKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         if (keywords.stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword))) {
+                StringUtil.containsMultipleWordsIgnoreCase(person.getName().fullName, keyword))) {
             return true; // Returns true if names match
         } else if (keywords.stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword))) {
+                StringUtil.containsMultipleWordsIgnoreCase(person.getAddress().value, keyword))) {
             return true; // Returns true if address match
         } else if (keywords.stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword))) {
+                StringUtil.containsMultipleWordsIgnoreCase(person.getPhone().value, keyword))) {
             return true; // Returns true if phone number matches
         } else if (keywords.stream().anyMatch(keyword ->
-                StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword))) {
+                StringUtil.containsMultipleWordsIgnoreCase(person.getEmail().value, keyword))) {
             return true; // Returns true if email matches
         } else if (keywords.stream().anyMatch(keyword ->
-                person.getTags().stream().anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)))) {
+                person.getTags().stream().anyMatch(tag -> StringUtil.containsMultipleWordsIgnoreCase(tag.tagName, keyword)))) {
             return true; // Returns true if tags match
         } else {
             return false;
@@ -45,12 +45,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof ContainsSpecificKeywordsPredicate)) {
             return false;
         }
 
-        NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        ContainsSpecificKeywordsPredicate otherContainsKeywordsPredicate = (ContainsSpecificKeywordsPredicate) other;
+        return keywords.equals(otherContainsKeywordsPredicate.keywords);
     }
 
     @Override

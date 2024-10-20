@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -36,6 +38,19 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    public static boolean containsMultipleWordsIgnoreCase(String sentence, String inputSentence) {
+        requireNonNull(sentence);
+        requireNonNull(inputSentence);
+
+        String preppedInputSentence = inputSentence.trim();
+        checkArgument(!preppedInputSentence.isEmpty(), "Word parameter cannot be empty");
+
+        String[] preppedSentence = {sentence};
+
+        return Arrays.stream(preppedSentence)
+                .anyMatch(preppedInputSentence::equalsIgnoreCase);
     }
 
     /**
