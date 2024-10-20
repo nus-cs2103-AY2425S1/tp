@@ -301,4 +301,18 @@ public class InsurancePlansManager {
 
         return plans.toString();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof InsurancePlansManager) {
+            InsurancePlansManager p = (InsurancePlansManager) obj;
+            if (!p.insurancePlans.equals(this.insurancePlans)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
+    }
 }

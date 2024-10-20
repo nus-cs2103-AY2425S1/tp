@@ -121,6 +121,7 @@ public class Client {
                 && phone.equals(otherClient.phone)
                 && email.equals(otherClient.email)
                 && address.equals(otherClient.address)
+                && insurancePlansManager.equals(otherClient.insurancePlansManager)
                 && tags.equals(otherClient.tags);
     }
 
