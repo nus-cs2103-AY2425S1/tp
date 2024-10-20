@@ -75,7 +75,7 @@ public class Tier {
      * Format Tier for parsing/decoding. As TierEnum.NA is only for internal use,
      * if tierName equals TierEnum.NA, an empty string is returned
      */
-    public String toDecodeString() {
+    public String toParsableString() {
         if (tierName.equals(TierEnum.NA)) {
             return "";
         }

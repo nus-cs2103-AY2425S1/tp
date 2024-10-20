@@ -65,10 +65,10 @@ public class PersonCard extends UiPart<Region> {
 
     private void createTier() {
         // Create a label for the tier
-        Label tierLabel = new Label(person.getTier().toDecodeString());
+        Label tierLabel = new Label(person.getTier().toParsableString());
 
         // Apply a different style class based on the tier value
-        String tier = person.getTier().toDecodeString().toUpperCase();
+        String tier = person.getTier().toParsableString().toUpperCase();
         switch (tier) {
         case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
         case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
