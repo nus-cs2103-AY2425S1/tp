@@ -53,7 +53,9 @@ public class Person {
 
     }
 
-    public PersonId getId() { return id; }
+    public PersonId getId() {
+        return id;
+    }
 
     public Name getName() {
         return name;

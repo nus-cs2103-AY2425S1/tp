@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import java.util.UUID;
 
+/**
+ * Represents a Person's unique ID in the address book.
+ */
 public class PersonId {
     private final UUID id;
 
