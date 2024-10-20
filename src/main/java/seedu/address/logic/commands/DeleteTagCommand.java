@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Implements command to delete a tag from a person
- * format: deletetag [INDEX] [TAG NAME]
+ * format: deletetag [INDEX] t/[TAG NAME]
  */
 public class DeleteTagCommand extends Command {
     public static final String COMMAND_WORD = "deletetag";
@@ -45,7 +45,7 @@ public class DeleteTagCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NO_TAG);
         }
 
-        personToEdit.removeTag(this.targetTag);
+        model.deletePersonTag(personToEdit, targetTag);
         return new CommandResult(String.format(Messages.MESSAGE_DELETE_TAG_SUCCESS,
                 this.targetTag, personToEdit.getName()));
     }

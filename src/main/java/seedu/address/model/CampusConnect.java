@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -100,6 +101,14 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public void removePersonTag(Person p, Tag t) {
+        persons.deletePersonTag(p, t);
     }
 
     //// util methods

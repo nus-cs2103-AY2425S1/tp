@@ -109,8 +109,11 @@ public class Person {
     /**
      * Remove a tag from a person
      */
-    public void removeTag(Tag t) {
-        this.getTags().remove(t);
+    public Person removeTag(Tag t) {
+        Set<Tag> newTagSet = new HashSet<>();
+        newTagSet.addAll(this.getTags());
+        newTagSet.remove(t);
+        return new Person(this.name, this.phone, this.email, newTagSet);
     }
 
     /**
