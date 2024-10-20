@@ -69,7 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setContacts(newData.getContactList());
-        //setEvents(newData.getEventList());
+        setEvents(newData.getEventList());
     }
 
     //// person-level operations

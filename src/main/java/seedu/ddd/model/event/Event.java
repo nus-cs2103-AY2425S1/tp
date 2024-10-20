@@ -25,6 +25,7 @@ public class Event {
     private final ArrayList<Client> clients;
     private final ArrayList<Vendor> vendors;
     private final Description description;
+    private final EventId eventId;
 
     /**
      * Constructs a {@code Event}.
@@ -32,7 +33,7 @@ public class Event {
      * @param clients A list of client.
      * @param vendors A list of vendors.
      */
-    public Event(ArrayList<Client> clients, ArrayList<Vendor> vendors, Description description) {
+    public Event(ArrayList<Client> clients, ArrayList<Vendor> vendors, Description description, EventId eventId) {
         requireAllNonNull(clients, vendors, description);
         AppUtil.checkArgument(isValidEvent(clients), MESSAGE_CONSTRAINTS);
         this.clients = new ArrayList<>();
@@ -40,6 +41,7 @@ public class Event {
         this.vendors = new ArrayList<>();
         this.vendors.addAll(vendors);
         this.description = description;
+        this.eventId = eventId;
     }
 
     /**
@@ -73,6 +75,13 @@ public class Event {
      */
     public Description getDescription() {
         return this.description;
+    }
+
+    /**
+     * Returns the unique event ID.
+     */
+    public EventId getEventId() {
+        return this.eventId;
     }
 
     /**
@@ -118,7 +127,8 @@ public class Event {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.getClients(), this.getVendors(), this.getDescription());
+        return Objects.hash(this.getClients(), this.getVendors(),
+                this.getDescription(), this.getEventId());
     }
 
     @Override
@@ -127,6 +137,7 @@ public class Event {
                 .add("clients", this.getClients())
                 .add("vendors", this.getVendors())
                 .add("description", this.getDescription())
+                .add("event id", eventId)
                 .toString();
     }
 }

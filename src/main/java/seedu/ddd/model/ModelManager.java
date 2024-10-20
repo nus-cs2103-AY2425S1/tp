@@ -12,6 +12,7 @@ import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.commons.util.CollectionUtil;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.Event;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Contact> filteredContacts;
+    private final FilteredList<Event> filteredEvents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredContacts = new FilteredList<>(this.addressBook.getContactList());
+        filteredEvents = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -95,8 +98,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return addressBook.hasEvent(event);
+    }
+
+    @Override
     public void deleteContact(Contact target) {
         addressBook.removeContact(target);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
     }
 
     @Override
@@ -106,10 +120,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addEvent(Event event) {
+        addressBook.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
     public void setContact(Contact target, Contact editedContact) {
         CollectionUtil.requireAllNonNull(target, editedContact);
 
         addressBook.setContact(target, editedContact);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        CollectionUtil.requireAllNonNull(target, editedEvent);
+        addressBook.setEvent(target, editedEvent);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -127,6 +153,17 @@ public class ModelManager implements Model {
     public void updateFilteredContactList(Predicate<Contact> predicate) {
         requireNonNull(predicate);
         filteredContacts.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return filteredEvents;
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
     }
 
     @Override

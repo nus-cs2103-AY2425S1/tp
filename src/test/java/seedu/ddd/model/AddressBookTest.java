@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.Event;
 import seedu.ddd.testutil.ClientBuilder;
 
 public class AddressBookTest {
@@ -84,7 +85,8 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName()
-                + "{contacts=" + addressBook.getContactList() + "}";
+                + "{contacts=" + addressBook.getContactList() + ","
+                + " events=" + addressBook.getEventList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -102,6 +104,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Contact> getContactList() {
             return contacts;
+        }
+
+        @Override
+        public ObservableList<Event> getEventList() {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

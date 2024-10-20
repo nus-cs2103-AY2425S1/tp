@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,13 +52,11 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.add(toAdd);
     }
 
-    /*
+    /**
      * Replaces the event {@code target} in the list with {@code editedEvent}.
      * {@code target} must exist in the list.
      * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
      */
-    /*
-    This method currently under construction
     public void setEvent(Event target, Event editedEvent) {
         CollectionUtil.requireAllNonNull(target, editedEvent);
 
@@ -72,14 +71,14 @@ public class UniqueEventList implements Iterable<Event> {
 
         // check if the id already exists
         Predicate<Event> duplicateIdPredicate = event ->
-                event.getId().equals(editedEvent.getId()) && !event.equals(target);
+                event.getEventId().equals(editedEvent.getEventId()) && !event.equals(target);
         if (internalList.stream().anyMatch(duplicateIdPredicate)) {
             throw new DuplicateEventException();
         }
 
         internalList.set(index, editedEvent);
     }
-     */
+
 
     /**
      * Removes the equivalent event from the list.
