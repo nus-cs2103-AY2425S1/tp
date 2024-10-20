@@ -39,7 +39,7 @@ public class MarkPaidCommand extends Command {
             + PREFIX_MONTHPAID + "2024-01"
             + PREFIX_MONTHPAID + "2024-02";
 
-    public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Marked Person: %1$s";
+    public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Markedpaid: %1$s";
     private final Index index;
     private final Set<MonthPaid> monthsPaid;
 
@@ -69,7 +69,7 @@ public class MarkPaidCommand extends Command {
 
         model.setPerson(personToMark, markedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_MARKPAID_PERSON_SUCCESS, Messages.format(markedPerson)));
+        return new CommandResult(String.format(MESSAGE_MARKPAID_PERSON_SUCCESS, Messages.markPaidFormat(markedPerson)));
     }
 
     /**
