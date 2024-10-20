@@ -4,9 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
-import seedu.address.model.person.exceptions.DuplicateWeddingException;
-import seedu.address.model.person.exceptions.PersonNotAssignedToWeddingException;
-import seedu.address.model.person.exceptions.WeddingNotFoundException;
+import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
+import seedu.address.model.wedding.exceptions.PersonNotAssignedToWeddingException;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 
 import java.util.Iterator;
 import java.util.List;
