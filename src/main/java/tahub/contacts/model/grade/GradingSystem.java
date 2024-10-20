@@ -60,17 +60,29 @@ public class GradingSystem {
 
         double totalScore = 0.0;
         double totalWeight = 0.0;
+        double remainingWeight = 1.0;
+
+        for (Double weight : assessmentWeights.values()) {
+            totalWeight += weight;
+        }
+
+        if (totalWeight > 1.0) {
+            throw new IllegalStateException("Total weights exceed 1.0");
+        }
+
+        remainingWeight -= totalWeight;
+
+        double defaultWeight = remainingWeight / (assessmentScores.size() - assessmentWeights.size());
 
         for (Map.Entry<String, Double> entry : assessmentScores.entrySet()) {
             String assessmentName = entry.getKey();
             double score = entry.getValue();
-            double weight = assessmentWeights.getOrDefault(assessmentName, 1.0);
+            double weight = assessmentWeights.getOrDefault(assessmentName, defaultWeight);
 
             totalScore += score * weight;
-            totalWeight += weight;
         }
 
-        return totalWeight > 0 ? totalScore / totalWeight : -1.0;
+        return totalScore;
     }
 
     /**
