@@ -161,7 +161,7 @@ Format: `addEcName INDEX en/[ECNAME]`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `addECName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
+* `addEcName 1 en/John Doe` to add the emergency contact's name "John Doe" to the 1st person in the list.
 * `addEcName 2 en/` to delete the emergency contact's name from the 2nd person in the list.
 
 ### Adding an Emergency contact's number : `addEcNumber`
