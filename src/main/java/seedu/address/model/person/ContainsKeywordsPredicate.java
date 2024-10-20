@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.model.tag.Tag;
@@ -44,7 +45,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     private boolean testName(List<String> allValues, Person person) {
         return allValues.stream()
-                .anyMatch(name -> person.hasName(new Name(name)));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
     @Override
