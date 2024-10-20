@@ -27,7 +27,7 @@ import seedu.address.model.person.Person;
 public class CheckClientCommandTest {
 
     private static final CommandResult expectedNoCarToCheckMessage = new CommandResult(
-        CheckClientCommand.MESSAGE_NO_CAR_TO_CHECK);
+            CheckClientCommand.MESSAGE_NO_CAR_TO_CHECK);
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

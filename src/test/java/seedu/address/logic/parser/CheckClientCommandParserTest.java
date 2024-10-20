@@ -30,7 +30,7 @@ public class CheckClientCommandParserTest {
         String[] possibleInvalidUserInput = {"a", " ", "*", "a 1"};
         for (String input : possibleInvalidUserInput) {
             assertParseFailure(parser, input,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckClientCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CheckClientCommand.MESSAGE_USAGE));
         }
     }
 }

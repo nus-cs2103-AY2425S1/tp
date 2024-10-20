@@ -57,6 +57,7 @@ class JsonAdaptedPerson {
             @JsonProperty("vrn") String vrn,
             @JsonProperty("make") String make,
             @JsonProperty("model") String model) {
+
         this.name = name;
         this.phone = phone;
         this.email = email;

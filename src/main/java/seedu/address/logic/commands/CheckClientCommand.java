@@ -20,9 +20,9 @@ public class CheckClientCommand extends Command {
     public static final String COMMAND_WORD = "check-client";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Checks In/ Out a Client identified by the index number used in the displayed Clients list.\n"
-        + "Parameters: INDEX (must be a positive integer)\n"
-        + "Example: " + COMMAND_WORD + " 1";
+            + ": Checks In/ Out a Client identified by the index number used in the displayed Clients list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_CHECK_IN_CLIENT_SUCCESS = "Checked In Client: %1$s";
     public static final String MESSAGE_CHECK_OUT_CLIENT_SUCCESS = "Checked Out Client: %1$s";
@@ -76,7 +76,7 @@ public class CheckClientCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("targetIndex", targetIndex)
-            .toString();
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }

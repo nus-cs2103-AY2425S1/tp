@@ -104,7 +104,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidIsServicing_throwsIllegalValueException() {
+    public void toModelType_invalidIsServicing_setBooleanToFalse() {
         // Corrects the invalid isServicing field to false by default.
         JsonAdaptedPerson personJson = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_IS_SERVICING, VALID_ISSUES, null, null, null, null);
@@ -117,10 +117,10 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullIsServicing_throwsIllegalValueException() {
+    public void toModelType_nullIsServicing_setBooleanToFalse() {
         // Corrects the missing isServicing field to false by default.
         JsonAdaptedPerson personJson = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-            null, VALID_ISSUES, null, null, null, null);
+                null, VALID_ISSUES, null, null, null, null);
         try {
             Person person = personJson.toModelType();
             assertFalse(((Person) person).isServicing());

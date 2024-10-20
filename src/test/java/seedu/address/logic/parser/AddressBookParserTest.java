@@ -59,7 +59,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_checkClient() throws Exception {
         CheckClientCommand command = (CheckClientCommand) parser.parseCommand(
-            CheckClientCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+                CheckClientCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new CheckClientCommand(INDEX_FIRST_PERSON), command);
     }
 
