@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -28,15 +28,16 @@ public class AddCommand extends Command {
             + PREFIX_GENDER + "GENDER "
             + PREFIX_AGE + "AGE "
             + "[" + PREFIX_DETAIL + "DETAIL] "
-            + "[" + PREFIX_TAG + "TAG]..."
+            + "[" + PREFIX_STUDY_GROUP_TAG + "STUDY_GROUP_TAG]..."
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE + "30 "
-            + PREFIX_DETAIL + "Some detail here "
-            + PREFIX_TAG + "friends Group1";
+            + PREFIX_DETAIL + "To be assigned "
+            + PREFIX_STUDY_GROUP_TAG + "Control "
+            + PREFIX_STUDY_GROUP_TAG + "1A";
 
     public static final String MESSAGE_SUCCESS = "Added successfully! Added participant: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";

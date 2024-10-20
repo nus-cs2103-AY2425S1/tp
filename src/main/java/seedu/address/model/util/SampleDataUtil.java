@@ -21,22 +21,22 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("friends"), new Detail("detail")),
+                    new Age("19"), getStudyGroupTagSet("1A"), new Detail("To be assigned")),
 
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("colleagues", "friends"), new Detail("detail")),
+                    new Age("19"), getStudyGroupTagSet("Control", "1A"), new Detail("")),
 
             new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"), new Gender("F"),
-                    new Age("19"), getStudyGroupTagSet("neighbours"), new Detail("detail")),
+                    new Age("19"), getStudyGroupTagSet("Treatment", "1B"), new Detail("")),
 
             new Person(new Name("David Li"), new Email("lidavid@example.com"), new Gender("M"), new Age("19"),
-                    getStudyGroupTagSet("family"), new Detail("detail")),
+                    getStudyGroupTagSet("1B"), new Detail("To be assigned")),
 
             new Person(new Name("Irfan Ibrahim"), new Email("irfan@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("classmates"), new Detail("detail")),
+                    new Age("19"), getStudyGroupTagSet("2A"), new Detail("Follow up on 19 Nov")),
 
             new Person(new Name("Roy Balakrishnan"), new Email("royb@example.com"), new Gender("M"),
-                    new Age("19"), getStudyGroupTagSet("colleagues"), new Detail("detail"))
+                    new Age("19"), getStudyGroupTagSet("2B"), new Detail("Follow up on 19 Nov"))
         };
     }
 

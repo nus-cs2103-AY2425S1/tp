@@ -7,7 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -35,10 +35,10 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_BOB = "M";
     public static final String VALID_AGE_AMY = "20";
     public static final String VALID_AGE_BOB = "30";
-    public static final String VALID_DETAIL_AMY = "detail";
-    public static final String VALID_DETAIL_BOB = "01-01-2024 1234";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_DETAIL_AMY = "To be assigned";
+    public static final String VALID_DETAIL_BOB = "To follow up";
+    public static final String VALID_STUDY_GROUP_TAG_1A = "1A";
+    public static final String VALID_STUDY_GROUP_TAG_2B = "2B";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -50,8 +50,8 @@ public class CommandTestUtil {
     public static final String AGE_DESC_BOB = " " + PREFIX_AGE + VALID_AGE_BOB;
     public static final String DETAIL_DESC_AMY = " " + PREFIX_DETAIL + VALID_DETAIL_AMY;
     public static final String DETAIL_DESC_BOB = " " + PREFIX_DETAIL + VALID_DETAIL_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String STUDY_GROUP_TAG_DESC_1A = " " + PREFIX_STUDY_GROUP_TAG + VALID_STUDY_GROUP_TAG_1A;
+    public static final String STUDY_GROUP_TAG_DESC_2B = " " + PREFIX_STUDY_GROUP_TAG + VALID_STUDY_GROUP_TAG_2B;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -67,10 +67,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withEmail(VALID_EMAIL_AMY).withGender(VALID_GENDER_AMY).withAge(VALID_AGE_AMY)
-                .withStudyGroups(VALID_TAG_FRIEND).withDetail(VALID_DETAIL_AMY).build();
+                .withDetail(VALID_DETAIL_AMY).withStudyGroupTags(VALID_STUDY_GROUP_TAG_2B).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withEmail(VALID_EMAIL_BOB).withGender(VALID_GENDER_BOB).withAge(VALID_AGE_BOB)
-                .withStudyGroups(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withDetail(VALID_DETAIL_BOB).build();
+                .withDetail(VALID_DETAIL_BOB).withStudyGroupTags(VALID_STUDY_GROUP_TAG_1A, VALID_STUDY_GROUP_TAG_2B)
+                .build();
     }
 
     /**

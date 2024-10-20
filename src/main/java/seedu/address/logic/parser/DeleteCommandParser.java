@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
@@ -18,12 +20,23 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            List<Index> indices = Arrays.stream(args.trim().split("\\s+"))
+                    .map(arg -> {
+                        try {
+                            return ParserUtil.parseIndex(arg);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    // remove duplicates
+                    .distinct()
+                    .collect(Collectors.toList());
+            return new DeleteCommand(indices);
+        } catch (RuntimeException e) {
+            if (e.getCause() instanceof ParseException) {
+                throw (ParseException) e.getCause();
+            }
+            throw e;
         }
     }
-
 }

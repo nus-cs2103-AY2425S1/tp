@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DETAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDY_GROUP_TAG;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -35,7 +35,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER,
                 PREFIX_AGE,
-                PREFIX_DETAIL, PREFIX_TAG);
+                PREFIX_DETAIL, PREFIX_STUDY_GROUP_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EMAIL, PREFIX_GENDER, PREFIX_AGE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -49,7 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Age age = ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get());
         Detail detail = argMultimap.getValue(PREFIX_DETAIL).map(ParserUtil::parseDetail).orElse(null);
-        Set<StudyGroupTag> studyGroupList = ParserUtil.parseStudyGroups(argMultimap.getAllValues(PREFIX_TAG));
+        Set<StudyGroupTag> studyGroupList = ParserUtil.parseStudyGroups(argMultimap
+                .getAllValues(PREFIX_STUDY_GROUP_TAG));
 
         Person person = new Person(name, email, gender, age, studyGroupList, detail);
 

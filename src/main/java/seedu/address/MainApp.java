@@ -49,9 +49,6 @@ public class MainApp extends Application {
     protected Config config;
     private boolean isLoadError;
 
-    public boolean getIsLoadError() {
-        return isLoadError;
-    }
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
