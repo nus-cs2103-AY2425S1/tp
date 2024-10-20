@@ -17,7 +17,7 @@ public class MonthPaid implements Comparable<MonthPaid> {
 
     @Override
     public String toString() {
-        return value + " ";
+        return '[' + value + ']';
     }
 
     /**
