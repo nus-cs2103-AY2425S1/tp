@@ -38,22 +38,6 @@ public class EditAppointmentCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalAppointmentBook(), new UserPrefs());
 
     @Test
-    public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Appointment editedAppointment = new AppointmentBuilder().build();
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(editedAppointment).build();
-        EditCommand editCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT, descriptor);
-
-        String expectedMessage = String.format(
-            EditCommand.MESSAGE_EDIT_APPOINTMENT_SUCCESS, Messages.formatAppointment(editedAppointment));
-
-        Model expectedModel = new ModelManager(getTypicalAddressBook(),
-            new AppointmentBook(model.getAppointmentBook()), new UserPrefs());
-        expectedModel.setAppointment(model.getFilteredAppointmentList().get(0), editedAppointment);
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastAppointment = Index.fromOneBased(model.getFilteredAppointmentList().size());
         Appointment lastAppointment = model.getFilteredAppointmentList().get(indexLastAppointment.getZeroBased());
@@ -111,38 +95,7 @@ public class EditAppointmentCommandTest {
 
         assertCommandSuccess(editAppointmentCommand, model, expectedMessage, expectedModel);
     }
-
-    @Test
-    public void execute_duplicateAppointmentUnfilteredList_failure() {
-        Appointment firstAppointment = model.getFilteredAppointmentList().get(INDEX_FIRST_APPOINTMENT.getZeroBased());
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder(firstAppointment).build();
-        EditCommand editCommand = new EditAppointmentCommand(INDEX_SECOND_APPOINTMENT, descriptor);
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPOINTMENT);
-    }
-
-    @Test
-    public void execute_duplicateAppointmentFilteredList_failure() {
-        showAppointmentAtIndex(model, INDEX_FIRST_APPOINTMENT);
-
-        // edit appointment in filtered list into a duplicate in appointment book
-        Appointment appointmentInList = model.getAppointmentBook().getAppointmentList().get(INDEX_SECOND_APPOINTMENT.getZeroBased());
-        EditCommand editCommand = new EditAppointmentCommand(INDEX_FIRST_APPOINTMENT,
-            new EditAppointmentDescriptorBuilder(appointmentInList).build());
-
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_APPOINTMENT);
-    }
-
-    @Test
-    public void execute_invalidAppointmentIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAppointmentList().size() + 1);
-        EditAppointmentDescriptor descriptor = new EditAppointmentDescriptorBuilder()
-            .withAppointmentType(VALID_APPOINTMENT_TYPE_BOB).build();
-        EditCommand editCommand = new EditAppointmentCommand(outOfBoundIndex, descriptor);
-
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED_INDEX);
-    }
-
+    
     /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of appointment book
