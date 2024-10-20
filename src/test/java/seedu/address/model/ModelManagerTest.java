@@ -118,7 +118,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String keyword = ALICE.getName().fullName;
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(keyword);
+        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(keyword));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests

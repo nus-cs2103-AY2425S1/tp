@@ -56,7 +56,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     /**
-     * Returns a string representation of the {@code NameContainsKeywordsPredicate}.
+     * Returns a string representation of thae {@code NameContainsKeywordsPredicate}.
      *
      * @return A string that includes the class name and the keyword.
      */
