@@ -7,6 +7,7 @@ import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
 import seedu.address.model.wedding.exceptions.PersonNotAssignedToWeddingException;
 import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -44,6 +45,21 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         if (!internalList.remove(wedding)) {
             throw new WeddingNotFoundException();
         }
+    }
+
+    /**
+     * Replaces a wedding with a new wedding. Throws an error if the old wedding cannot be found
+     * @param wedding The wedding to replace
+     * @param newWedding The new wedding to replace with
+     */
+    public void setWedding (Wedding wedding, Wedding newWedding) {
+        requireAllNonNull(wedding, newWedding);
+        if(!contains(wedding)) {
+            throw new WeddingNotFoundException();
+        }
+        int index = internalList.indexOf(wedding);
+
+        internalList.set(index, newWedding);
     }
 
     /**
