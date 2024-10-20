@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.testutil.StudentBuilder;
@@ -48,7 +49,7 @@ public class AddressBookTest {
         Student editedAlice = new StudentBuilder(ALICE).withCourses(VALID_COURSE_CS2103T)
                 .build();
         List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newStudents);
+        AddressBookStub newData = new AddressBookStub(newStudents, List.of());
 
         assertThrows(DuplicateStudentException.class, () -> addressBook.resetData(newData));
     }
@@ -84,7 +85,9 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{students=" + addressBook.getStudentList() + "}";
+        String expected = AddressBook.class.getCanonicalName()
+                + "{students=" + addressBook.getStudentList()
+                + ", consults=" + addressBook.getConsultList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
@@ -93,14 +96,21 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
+        private final ObservableList<Consultation> consults = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Student> students) {
+        AddressBookStub(Collection<Student> students, Collection<Consultation> consults) {
             this.students.setAll(students);
+            this.consults.setAll(consults);
         }
 
         @Override
         public ObservableList<Student> getStudentList() {
             return students;
+        }
+
+        @Override
+        public ObservableList<Consultation> getConsultList() {
+            return consults;
         }
     }
 
