@@ -1,12 +1,22 @@
 package seedu.sellsavvy.testutil;
 
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.tag.Tag;
+
+import java.util.Set;
 
 /**
  * A utility class for Order.
@@ -39,5 +49,16 @@ public class OrderUtil {
      */
     public static String getIndexDetails(Index index) {
         return index.getOneBased() + " ";
+    }
+
+    /**
+     * Returns the part of command string for the given {@code EditOrderDescriptor}'s details.
+     */
+    public static String getEditOrderDescriptorDetails(EditOrderDescriptor descriptor) {
+        StringBuilder sb = new StringBuilder();
+        descriptor.getItem().ifPresent(item -> sb.append(PREFIX_ITEM).append(item.fullDescription).append(" "));
+        descriptor.getQuantity().ifPresent(quantity -> sb.append(PREFIX_COUNT).append(quantity.value).append(" "));
+        descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.value).append(" "));
+        return sb.toString();
     }
 }

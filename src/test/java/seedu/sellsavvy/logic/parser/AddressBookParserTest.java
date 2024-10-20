@@ -20,6 +20,7 @@ import seedu.sellsavvy.logic.commands.generalcommands.HelpCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.DeleteOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
+import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
 import seedu.sellsavvy.logic.commands.ordercommands.ListOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.MarkOrderCommand;
 import seedu.sellsavvy.logic.commands.personcommands.AddPersonCommand;
@@ -32,6 +33,7 @@ import seedu.sellsavvy.logic.parser.exceptions.ParseException;
 import seedu.sellsavvy.model.order.Order;
 import seedu.sellsavvy.model.person.NameContainsKeywordsPredicate;
 import seedu.sellsavvy.model.person.Person;
+import seedu.sellsavvy.testutil.EditOrderDescriptorBuilder;
 import seedu.sellsavvy.testutil.EditPersonDescriptorBuilder;
 import seedu.sellsavvy.testutil.OrderBuilder;
 import seedu.sellsavvy.testutil.OrderUtil;
@@ -121,8 +123,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_editOrder() throws Exception {
+        Order order = new OrderBuilder().build();
+        EditOrderDescriptor descriptor = new EditOrderDescriptorBuilder(order).build();
         EditOrderCommand command = (EditOrderCommand) parser.parseCommand(
-                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased()); awdqewf
+                EditOrderCommand.COMMAND_WORD + " " + INDEX_FIRST_ORDER.getOneBased() + " "
+                        + OrderUtil.getEditOrderDescriptorDetails(descriptor));
+        assertEquals(new EditOrderCommand(INDEX_FIRST_ORDER, descriptor), command);
     }
 
     @Test

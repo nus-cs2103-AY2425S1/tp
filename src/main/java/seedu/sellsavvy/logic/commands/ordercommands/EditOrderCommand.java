@@ -22,6 +22,7 @@ import seedu.sellsavvy.model.order.Count;
 import seedu.sellsavvy.model.order.Date;
 import seedu.sellsavvy.model.order.Item;
 import seedu.sellsavvy.model.order.Order;
+import seedu.sellsavvy.model.order.Status;
 
 /**
  * Edits the details of an existing order in the address book.
@@ -97,8 +98,7 @@ public class EditOrderCommand extends Command {
         Count updatedQuantity = editOrderDescriptor.getQuantity().orElse(orderToEdit.getCount());
         Date updatedDate = editOrderDescriptor.getDate().orElse(orderToEdit.getDate());
 
-        Order orderToReturn =  new Order(updatedItem, updatedQuantity, updatedDate);
-        //TODO mark as completed if needed after ky has been merged
+        Order orderToReturn =  new Order(updatedItem, updatedQuantity, updatedDate, Status.PENDING);
         return orderToReturn;
     }
 
