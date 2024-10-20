@@ -2,18 +2,15 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.ParserUtil.parseOptionalValue;
 
-import java.util.Arrays;
+import java.util.List;
 
-import com.sun.jdi.Field;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.util.FieldQuery;
 import seedu.address.logic.commands.util.SearchField;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.*;
 
-import javax.sound.midi.Sequence;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -36,6 +33,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                         PREFIX_REMARK);
 
         if (!argMultimap.getPreamble().isEmpty()) {
+            String str = argMultimap.getPreamble();
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_LOCATION,
@@ -48,13 +46,13 @@ public class FindCommandParser implements Parser<FindCommand> {
         String location = argMultimap.getValue(PREFIX_LOCATION).orElse("");
         String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
 
-        FieldQuery[] queries = new FieldQuery[] {
+        List<FieldQuery> fieldQueryList = List.of(
                 new FieldQuery(SearchField.NAME, name),
                 new FieldQuery(SearchField.PHONE, phone),
                 new FieldQuery(SearchField.EMAIL, email),
                 new FieldQuery(SearchField.LOCATION, location),
-                new FieldQuery(SearchField.REMARK, remark)};
-        return new FindCommand(new PersonSearchPredicate(Arrays.asList(queries)));
+                new FieldQuery(SearchField.REMARK, remark));
+        return new FindCommand(new PersonSearchPredicate(fieldQueryList));
     }
 
 

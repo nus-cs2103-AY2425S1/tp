@@ -17,4 +17,9 @@ public class FieldQuery {
     public String getKeyword() {
         return keyword;
     }
+
+    @Override
+    public String toString() {
+        return field.toString() + ": " + keyword;
+    }
 }

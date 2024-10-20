@@ -37,4 +37,10 @@ public class PersonSearchPredicate implements Predicate<Person> {
             case REMARK -> person.getRemark().value;
         };
     }
+
+    @Override
+    public String toString() {
+        return this.fieldQueries.stream().map(FieldQuery::toString).reduce("",
+                (x,y) -> x + " " + y);
+    }
 }
