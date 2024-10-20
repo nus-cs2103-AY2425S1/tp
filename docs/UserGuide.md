@@ -129,31 +129,33 @@ Examples:
 * `find n/ Alice id/ A1234567E` returns persons whose name contains `Alice` or whose student ID is `A1234567E`.
 
 ---
-## <u>Deleting a person :</u> `delete`
 
-#### You can remove a student from your list easily!
+### Deleting a person : `delete`
 
-#### <span style="color:#4CAF50;">Just type: `delete INDEX`</span>
+Deletes the specified person from the address book.
 
-* The `INDEX` is the position of the person your looking at to delete in your current list. Like 1, 2, 3, …​
-* Ensure the `INDEX` is a **positive integer**. (We wouldn't want any negative or decimal people right?!)
-  ![result for delete example command](images/delete_example.png)
+Format: `delete INDEX`
+![result for delete example command](images/delete_example.png)
 
-#### Examples:
-* If you type `list` followed by `delete 2` it will delete the 2nd student from your current list.
-* Or if you search`find /n Nic` followed by `delete 1`, it will delete the 1st student named Nic!
+* The delete command deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 
-#### Expected Results:
-* Easy-peasy! If you managed to delete the student you should see something similar to this!
+Examples:
+* `list` followed by `delete 2` deletes the 2nd student in the list.
+* `find /n Nic` followed by `delete 1` deletes the 1st person named Nic.
+
+Expected Results:
+* If successful, you will be notified on which student you have deleted.
 ![result for delete success](images/delete_success.png)
 
-#### <span style="color:#D25B7A;">Common Errors:</span>
-* I know it can be hard to learn a new command but don't worry I got you!
-* 9 out of 10 times the error you are facing is due to incorrect `INDEX` being used. 
-* I'll tell you the exact error in the application itself so just keep a look out for it, here is an example!
+Common Errors:
+* It is likely you are facing an error due to incorrect `INDEX` being used.
+* Within the application you will be notified on the exact error and how to rectify it. 
 ![result for delete fail](images/delete_fail.png)
 
 ---
+
 ### Clearing all entries : `clear`
 
 Clears all entries from Teacher's Pet.
@@ -167,6 +169,7 @@ Format: `clear`
 ### Exiting the program : `exit`
 
 Exits Teacher's Pet.
+
 
 Format: `exit`
 
@@ -199,6 +202,11 @@ Furthermore, certain edits can cause Teacher's Pet to behave in unexpected ways 
 **Q**: How do I keep a copy of my data?<br>
 **A**: Find the `addressbook.json` file and copy it to your desired location/storage device
 
+**Q**: What is the maximum size of my student list?<br>
+**A**: The maximum size is 2,147,483,647 students.
+
+**Q**: Does the application require internet connection to run?<br>
+**A**: After installation, the application does not require internet connection. Files are saved locally.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
