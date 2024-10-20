@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.PhoneNumberContainsKeywordPredicate;
 
 /**
- * Parses input arguments and creates a new FindContactCommand object
+ * Parses input arguments and creates a new FindPhoneNumberCommand object
  */
 public class FindPhoneNumberCommandParser implements Parser<FindPhoneNumberCommand> {
 
