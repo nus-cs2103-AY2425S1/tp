@@ -11,6 +11,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -34,7 +35,8 @@ class SampleDataUtilTest {
         assertEquals("alexyeoh@example.com", alex.getEmail().value);
         assertEquals("Blk 30 Geylang Street 29, #06-40", alex.getAddress().value);
         assertFalse(alex.getPayment().hasPaid);
-        assertEquals(alex.getAttendance().attendanceDate, LocalDate.now());
+        assertEquals(alex.getAttendance().attendanceDate,
+                LocalDate.parse("08/10/2024", Attendance.VALID_DATE_FORMAT));
         assertTrue(alex.getTags().contains(new Tag("friends")));
     }
 

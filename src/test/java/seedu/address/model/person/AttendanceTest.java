@@ -22,11 +22,11 @@ public class AttendanceTest {
 
         LocalDate attendanceDate1 = LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT);
         Attendance attendancePresent1 = new Attendance(attendanceDate1);
-        assertEquals("Thu 12 Dec", attendancePresent1.toString());
+        assertEquals("12/12/2024", attendancePresent1.toString());
 
         LocalDate attendanceDate2 = LocalDate.parse("31/12/2024", Attendance.VALID_DATE_FORMAT);
         Attendance attendancePresent2 = new Attendance(attendanceDate2);
-        assertEquals("Tue 31 Dec", attendancePresent2.toString());
+        assertEquals("31/12/2024", attendancePresent2.toString());
     }
 
     @Test
