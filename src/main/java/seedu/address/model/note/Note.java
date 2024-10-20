@@ -1,0 +1,87 @@
+package seedu.address.model.note;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.appointment.Appointment;
+
+/**
+ * Represents a Note in the address book.
+ * Guarantees: immutable;
+ *             appointment is valid as declared in Appointment class;
+ *             note/medication is valid as declared in {@link #isValidString(String)};
+ */
+public class Note {
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
+    public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
+    public final Set<Appointment> previousAppointments = new HashSet<>();
+    public final ArrayList<String> remarks = new ArrayList<>();
+    public final ArrayList<String> medication = new ArrayList<>();
+
+    /**
+     * Adds a new appointment to the previousAppointment hashset. Validation is done
+     * by Appointment class
+     *
+     * @param appointment A valid date
+     */
+    public void addAppointment(String appointment) {
+        Appointment previousAppointment = new Appointment(appointment);
+        this.previousAppointments.add(previousAppointment);
+    }
+
+    /**
+     * Adds new remark to remarks arraylist
+     *
+     * @param remark A valid remark
+     */
+    public void addRemark(String remark) {
+        requireNonNull(remark);
+        checkArgument(isValidString(remark), MESSAGE_CONSTRAINTS);
+        this.remarks.add(remark);
+    }
+
+    /**
+     * Adds new medication to medications arraylist
+     *
+     * @param medication A valid medication
+     */
+    public void addMedication(String medication) {
+        requireNonNull(medication);
+        checkArgument(isValidString(medication), MESSAGE_CONSTRAINTS);
+        this.medication.add(medication);
+    }
+
+    public static boolean isValidString(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if both remarks have the same data fields.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Note)) {
+            return false;
+        }
+
+        Note otherNote = (Note) other;
+        return previousAppointments.equals(otherNote.previousAppointments)
+               && medication.equals(otherNote.medication)
+               && remarks.equals(otherNote.remarks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(previousAppointments, remarks, medication);
+    }
+}
