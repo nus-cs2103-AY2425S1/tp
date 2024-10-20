@@ -21,9 +21,11 @@ import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.UserPrefs;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.util.SampleDataUtil;
 import tahub.contacts.storage.AddressBookStorage;
 import tahub.contacts.storage.JsonAddressBookStorage;
+import tahub.contacts.storage.JsonUniqueCourseListStorage;
 import tahub.contacts.storage.JsonUserPrefsStorage;
 import tahub.contacts.storage.Storage;
 import tahub.contacts.storage.StorageManager;
@@ -58,7 +60,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUniqueCourseListStorage courseListStorage =
+                new JsonUniqueCourseListStorage(userPrefs.getCourseListFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, courseListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -79,7 +83,7 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
         try {
             addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            if (addressBookOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAddressBookFilePath()
                         + " populated with a sample AddressBook.");
             }
@@ -90,7 +94,22 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        Optional<UniqueCourseList> courseListOptional;
+        UniqueCourseList initialCourseList;
+        try {
+            courseListOptional = storage.readCourseList(userPrefs.getCourseListFilePath());
+            if (courseListOptional.isEmpty()) {
+                logger.info("Creating a new course list file " + storage.getCourseListFilePath()
+                        + " populated with a sample CourseList.");
+            }
+            initialCourseList = courseListOptional.orElseGet(SampleDataUtil::getSampleCourseList);
+        } catch (DataLoadingException e) {
+            logger.warning("Course list file at " + storage.getCourseListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty CourseList.");
+            initialCourseList = new UniqueCourseList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialCourseList);
     }
 
     private void initLogging(Config config) {

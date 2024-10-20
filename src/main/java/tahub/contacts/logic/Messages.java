@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import tahub.contacts.logic.parser.Prefix;
+import tahub.contacts.model.course.Course;
 import tahub.contacts.model.person.Person;
 
 /**
@@ -46,6 +47,14 @@ public class Messages {
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Formats the {@code course} for display to the user.
+     */
+    public static String format(Course course) {
+        // Implement the formatting logic for Course objects
+        return course.toString();
     }
 
 }

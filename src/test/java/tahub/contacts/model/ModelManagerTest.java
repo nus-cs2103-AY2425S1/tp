@@ -2,6 +2,7 @@ package tahub.contacts.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static tahub.contacts.testutil.Assert.assertThrows;
@@ -15,6 +16,8 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import tahub.contacts.commons.core.GuiSettings;
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.NameContainsKeywordsPredicate;
 import tahub.contacts.testutil.AddressBookBuilder;
 
@@ -27,6 +30,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new UniqueCourseList(), modelManager.getCourseList());
     }
 
     @Test
@@ -73,6 +77,25 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setCourseListFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCourseListFilePath(null));
+    }
+
+    @Test
+    public void setCourseListFilePath_validPath_setsCourseListFilePath() {
+        Path path = Paths.get("course/list/file/path");
+        modelManager.setCourseListFilePath(path);
+        assertEquals(path, modelManager.getCourseListFilePath());
+    }
+
+    @Test
+    public void getCourseListFilePath_returnsCorrectPath() {
+        Path path = Paths.get("course/list/file/path");
+        modelManager.setCourseListFilePath(path);
+        assertEquals(path, modelManager.getCourseListFilePath());
+    }
+
+    @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPerson(null));
     }
@@ -89,6 +112,48 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasCourse_nullCourse_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasCourse(null));
+    }
+
+    @Test
+    public void hasCourse_courseNotInCourseList_returnsFalse() {
+        Course course = new Course("CS1010", "Introduction to CS");
+        assertFalse(modelManager.hasCourse(course));
+    }
+
+    @Test
+    public void hasCourse_courseInCourseList_returnsTrue() {
+        Course course = new Course("CS1010", "Introduction to CS");
+        modelManager.addCourse(course);
+        assertTrue(modelManager.hasCourse(course));
+    }
+
+    @Test
+    public void deleteCourse_courseInCourseList_deletesCourse() {
+        Course course = new Course("CS1010", "Introduction to CS");
+        modelManager.addCourse(course);
+        modelManager.deleteCourse(course);
+        assertFalse(modelManager.hasCourse(course));
+    }
+
+    @Test
+    public void addCourse_validCourse_addsCourse() {
+        Course course = new Course("CS1010", "Introduction to CS");
+        modelManager.addCourse(course);
+        assertTrue(modelManager.hasCourse(course));
+    }
+
+    @Test
+    public void setCourseList_validCourseList_setsCourseList() {
+        UniqueCourseList courseList = new UniqueCourseList();
+        Course course = new Course("CS1010", "Introduction to CS");
+        courseList.addCourse(course);
+        modelManager.setCourseList(courseList);
+        assertTrue(modelManager.hasCourse(course));
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
@@ -98,28 +163,26 @@ public class ModelManagerTest {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
+        UniqueCourseList courseList = new UniqueCourseList();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
-
-        // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        modelManager = new ModelManager(addressBook, userPrefs, courseList);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, courseList);
+        assertEquals(modelManager, modelManagerCopy);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs, courseList));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs, courseList));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -127,6 +190,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs, courseList));
     }
 }

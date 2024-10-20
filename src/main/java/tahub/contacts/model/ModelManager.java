@@ -11,6 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import tahub.contacts.commons.core.GuiSettings;
 import tahub.contacts.commons.core.LogsCenter;
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 
 /**
@@ -21,23 +23,25 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final UniqueCourseList courseList;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, UniqueCourseList courseList) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.courseList = courseList;
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new UniqueCourseList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -75,6 +79,41 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
+    //=========== Course ==================================================================================
+
+    @Override
+    public Path getCourseListFilePath() {
+        return userPrefs.getCourseListFilePath();
+    }
+
+    @Override
+    public void setCourseListFilePath(Path courseListFilePath) {
+        requireNonNull(courseListFilePath);
+        userPrefs.setCourseListFilePath(courseListFilePath);
+    }
+
+    @Override
+    public boolean hasCourse(Course course) {
+        requireNonNull(course);
+        return courseList.hasCourse(course);
+    }
+
+    @Override
+    public void deleteCourse(Course target) {
+        courseList.remove(target);
+    }
+
+    @Override
+    public void addCourse(Course course) {
+        courseList.addCourse(course);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public UniqueCourseList getCourseList() {
+        return courseList;
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override
@@ -85,6 +124,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
+    }
+
+    @Override
+    public void setCourseList(UniqueCourseList courseList) {
+        this.courseList.setCourses(courseList);
     }
 
     @Override

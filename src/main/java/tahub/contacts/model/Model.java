@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
+import tahub.contacts.model.course.Course;
+import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
 
 /**
@@ -39,10 +41,14 @@ public interface Model {
      */
     Path getAddressBookFilePath();
 
+    Path getCourseListFilePath();
+
     /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    void setCourseListFilePath(Path courseListFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -51,6 +57,10 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    void setCourseList(UniqueCourseList courseList);
+
+    UniqueCourseList getCourseList();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -75,6 +85,10 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    void addCourse(Course course);
+    void deleteCourse(Course course);
+    boolean hasCourse(Course course);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

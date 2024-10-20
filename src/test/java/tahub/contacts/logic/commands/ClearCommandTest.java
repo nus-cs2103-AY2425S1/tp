@@ -9,6 +9,7 @@ import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ModelManager;
 import tahub.contacts.model.UserPrefs;
+import tahub.contacts.model.course.UniqueCourseList;
 
 public class ClearCommandTest {
 
@@ -22,8 +23,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UniqueCourseList());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), model.getCourseList());
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

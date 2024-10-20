@@ -37,6 +37,13 @@ public class UniqueCourseList implements Iterable<Course> {
     }
 
     /**
+     * Returns true if the list contains an equivalent course as the given argument.
+     */
+    public boolean hasCourse(Course toCheck) {
+        return contains(toCheck);
+    }
+
+    /**
      * Adds a course to the list.
      * The course must not already exist in the list.
      */
@@ -46,6 +53,21 @@ public class UniqueCourseList implements Iterable<Course> {
             throw new DuplicateCourseException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a course to the list.
+     * The course must not already exist in the list.
+     */
+    public void addCourse(Course toAdd) {
+        add(toAdd);
+    }
+
+    /**
+     * Returns the course list.
+     */
+    public ObservableList<Course> getCourseList() {
+        return internalList;
     }
 
     /**

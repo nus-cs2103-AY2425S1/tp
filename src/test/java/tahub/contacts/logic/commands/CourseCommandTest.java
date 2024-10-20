@@ -3,11 +3,10 @@ package tahub.contacts.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tahub.contacts.testutil.Assert.assertThrows;
-import static tahub.contacts.testutil.TypicalPersons.ALICE;
 
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -18,72 +17,71 @@ import javafx.collections.ObservableList;
 import tahub.contacts.commons.core.GuiSettings;
 import tahub.contacts.logic.Messages;
 import tahub.contacts.logic.commands.exceptions.CommandException;
-import tahub.contacts.model.AddressBook;
 import tahub.contacts.model.Model;
 import tahub.contacts.model.ReadOnlyAddressBook;
 import tahub.contacts.model.ReadOnlyUserPrefs;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.course.UniqueCourseList;
 import tahub.contacts.model.person.Person;
-import tahub.contacts.testutil.PersonBuilder;
 
-public class AddCommandTest {
+public class CourseCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullCourse_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new CourseCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_courseAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingCourseAdded modelStub = new ModelStubAcceptingCourseAdded();
+        Course validCourse = new Course("CS2103T", "Software Engineering");
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new CourseCommand(validCourse).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(CourseCommand.MESSAGE_SUCCESS, Messages.format(validCourse)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validCourse), modelStub.coursesAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateCourse_throwsCommandException() {
+        Course validCourse = new Course("CS2103T", "Software Engineering");
+        CourseCommand courseCommand = new CourseCommand(validCourse);
+        ModelStub modelStub = new ModelStubWithCourse(validCourse);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class,
+                CourseCommand.MESSAGE_DUPLICATE_PERSON, () -> courseCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Course course1 = new Course("CS2103T", "Software Engineering");
+        Course course2 = new Course("CS2101", "Effective Communication");
+        CourseCommand addCourse1Command = new CourseCommand(course1);
+        CourseCommand addCourse2Command = new CourseCommand(course2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addCourse1Command.equals(addCourse1Command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        CourseCommand addCourse1CommandCopy = new CourseCommand(course1);
+        assertTrue(addCourse1Command.equals(addCourse1CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addCourse1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addCourse1Command.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different course -> returns false
+        assertFalse(addCourse1Command.equals(addCourse2Command));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        CourseCommand command = new CourseCommand(new Course("CS2103T", "Software Engineering"));
+        String expected = "tahub.contacts.logic.commands.CourseCommand{toAdd=[CS2103T: Software Engineering]}";
+        assertEquals(expected, command.toString());
     }
 
     /**
@@ -104,29 +102,28 @@ public class AddCommandTest {
         public GuiSettings getGuiSettings() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void setGuiSettings(GuiSettings guiSettings) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public void setAddressBookFilePath(java.nio.file.Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Path getCourseListFilePath() {
+        public java.nio.file.Path getAddressBookFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setCourseListFilePath(java.nio.file.Path courseListFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setCourseListFilePath(Path courseListFilePath) {
+        public java.nio.file.Path getCourseListFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -197,45 +194,44 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single course.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithCourse extends ModelStub {
+        private final Course course;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithCourse(Course course) {
+            requireNonNull(course);
+            this.course = course;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasCourse(Course course) {
+            requireNonNull(course);
+            return this.course.isConflictCourse(course);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the course being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingCourseAdded extends ModelStub {
+        final ArrayList<Course> coursesAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasCourse(Course course) {
+            requireNonNull(course);
+            return coursesAdded.stream().anyMatch(course::isConflictCourse);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addCourse(Course course) {
+            requireNonNull(course);
+            coursesAdded.add(course);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public UniqueCourseList getCourseList() {
+            return new UniqueCourseList();
         }
     }
-
 }
