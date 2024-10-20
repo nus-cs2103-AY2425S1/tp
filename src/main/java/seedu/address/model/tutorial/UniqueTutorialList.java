@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import seedu.address.model.tutorial.exceptions.DuplicateTutorialException;
 import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
 /**
@@ -77,7 +78,6 @@ public class UniqueTutorialList implements Iterable<Tutorial> {
             throw new TutorialNotFoundException();
         }
     }
-
 
     public void setTutorials(UniqueTutorialList replacement) {
         requireNonNull(replacement);
