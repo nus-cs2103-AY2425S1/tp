@@ -48,18 +48,14 @@ private void setListner() {
         if (enteredText == null || enteredText.isEmpty()) {
             entriesPopup.hide();
         } else {
-            //filter all possible suggestions depends on "Text", case insensitive
             List<String> filteredEntries = entries.stream()
                     .filter(e -> e.toLowerCase().contains(enteredText.toLowerCase()))
                     .collect(Collectors.toList());
-            //some suggestions are found
             if (!filteredEntries.isEmpty()) {
-                //build popup - list of "CustomMenuItem"
                 populatePopup(filteredEntries, enteredText);
-                if (!entriesPopup.isShowing()) { //optional
+                if (!entriesPopup.isShowing()) {
                     entriesPopup.show(AutoSuggestionTextField.this, Side.BOTTOM, 0, 0);
                 }
-                //no suggestions -> hide
             } else {
                 entriesPopup.hide();
             }
@@ -78,8 +74,7 @@ private void setListner() {
  *
  * @param searchResult The set of matching strings.
  */
-private void populatePopup(List<String> searchResult, String searchReauest) {
-    //List of "suggestions"
+private void populatePopup(List<String> searchResult, String searchRequest) {//List of "suggestions"
     List<CustomMenuItem> menuItems = new LinkedList<>();
     //List size - 10 or founded suggestions count
     int maxEntries = 10;
@@ -89,7 +84,7 @@ private void populatePopup(List<String> searchResult, String searchReauest) {
         final String result = searchResult.get(i);
         //label with graphic (text flow) to highlight founded subtext in suggestions
         Label entryLabel = new Label();
-        entryLabel.setGraphic(buildTextFlow(result, searchReauest));
+        entryLabel.setGraphic(buildTextFlow(result, searchRequest));
         entryLabel.setPrefHeight(10);  //don't sure why it's changed with "graphic"
         CustomMenuItem item = new CustomMenuItem(entryLabel, true);
         menuItems.add(item);
@@ -119,7 +114,7 @@ private void populatePopup(List<String> searchResult, String searchReauest) {
         Text textAfter = new Text(text.substring(filterIndex + filter.length()));
         Text textFilter = new Text(text.substring(filterIndex,  filterIndex + filter.length())); //instead of "filter" to keep all "case sensitive"
         textFilter.setFill(Color.ORANGE);
-        textFilter.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
+        //textFilter.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
         return new TextFlow(textBefore, textFilter, textAfter);
     }
 

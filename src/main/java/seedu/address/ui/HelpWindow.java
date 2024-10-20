@@ -2,6 +2,9 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,27 +16,28 @@ import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.model.person.Person;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    private static class HelpCommand {
-        private final String command;
-        private final String description;
+    public static class HelpCommand {
+        private final SimpleStringProperty command;
+        private final SimpleStringProperty description;
 
         public HelpCommand(String command, String description) {
-            this.command = command;
-            this.description = description;
+            this.command = new SimpleStringProperty(command);
+            this.description = new SimpleStringProperty(description);
         }
 
-        public String getHelpCommand() {
-            return command;
+        public String getCommand() {
+            return command.get();
         }
 
         public String getDescription() {
-            return description;
+            return description.get();
         }
     }
 
@@ -59,59 +63,35 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        TableView<HelpCommand> table = new TableView<>();
-
-        TableColumn<HelpCommand, String> commandColumn = new TableColumn<>("HelpCommand");
-        commandColumn.setCellValueFactory(new PropertyValueFactory<>("helpCommand"));
-
-        TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Description");
-        descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
-
-        table.getColumns().add(commandColumn);
-        table.getColumns().add(descriptionColumn);
-
-        // Add data to the table
-        table.getItems().addAll(
-                new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
-                new HelpCommand("Clear", "`clear`"),
-                new HelpCommand("Delete", "`delete INDEX` e.g., `delete 3`"),
-                new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…`"),
-                new HelpCommand("Edit Game", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`"),
-                new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`"),
-                new HelpCommand("List", "`list`"),
-                new HelpCommand("Help", "`help`")
-        );
-
-        helpTable = helpTable();
+        helpTable(helpTable);
         helpMessage.setText(HELP_MESSAGE);
     }
 
-
-    @FXML
-    private TableView<HelpCommand> helpTable() {
-        TableView<HelpCommand> table = new TableView<>();
-
-        TableColumn<HelpCommand, String> commandColumn = new TableColumn<>("HelpCommand");
-        commandColumn.setCellValueFactory(new PropertyValueFactory<>("helpCommand"));
+    private void helpTable(TableView<HelpCommand> table) {
+        TableColumn<HelpCommand, String> commandColumn = new TableColumn<>("Command");
+        commandColumn.setCellValueFactory(new PropertyValueFactory<>("command"));
 
         TableColumn<HelpCommand, String> descriptionColumn = new TableColumn<>("Description");
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionColumn.setMinWidth(511);
 
-        table.getColumns().add(commandColumn);
-        table.getColumns().add(descriptionColumn);
+        table.setEditable(true);
+
+        ObservableList<HelpCommand> data =
+                FXCollections.observableArrayList(new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
+                        new HelpCommand("Clear", "`clear`"),
+                        new HelpCommand("Delete", "`delete INDEX` e.g., `delete 3`"),
+                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
+                        new HelpCommand("Edit Game", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`"),
+                        new HelpCommand("List", "`list`"),
+                        new HelpCommand("Help", "`help`")
+                );
 
         // Add data to the table
-        table.getItems().addAll(
-                new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
-                new HelpCommand("Clear", "`clear`"),
-                new HelpCommand("Delete", "`delete INDEX` e.g., `delete 3`"),
-                new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
-                new HelpCommand("Edit Game", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`"),
-                new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`"),
-                new HelpCommand("List", "`list`"),
-                new HelpCommand("Help", "`help`")
-        );
-        return table;
+        table.setItems(data);
+        table.getColumns().add(commandColumn);
+        table.getColumns().add(descriptionColumn);
     }
 
     /**
