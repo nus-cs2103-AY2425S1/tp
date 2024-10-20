@@ -74,7 +74,7 @@ public class LogicManagerTest {
         String listCommand = ListPersonCommand.COMMAND_WORD + " " + PERSON_ENTITY_STRING;
         assertCommandSuccess(listCommand, ListPersonCommand.MESSAGE_SUCCESS, model);
     }
-    
+
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
