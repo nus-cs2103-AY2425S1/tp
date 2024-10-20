@@ -255,6 +255,13 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] View Command
+
+#### Proposed Implementation
+
+Given below is the sequence diagram on how the `view 1` command is executed:
+<puml src="diagrams/ViewSequenceDiagram.puml" alt="ViewSequenceDiagram" width=300/>
+
 
 --------------------------------------------------------------------------------------------------------------------
 
