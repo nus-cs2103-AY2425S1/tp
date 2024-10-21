@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.academyassist.commons.util.ToStringBuilder;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.UniquePersonList;
 
@@ -18,6 +19,7 @@ import seedu.academyassist.model.person.UniquePersonList;
 public class AcademyAssist implements ReadOnlyAcademyAssist {
 
     private final UniquePersonList persons;
+    private int studentCount;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,6 +30,7 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
      */
     {
         persons = new UniquePersonList();
+        studentCount = 0;
     }
 
     public AcademyAssist() {}
@@ -57,6 +60,7 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        studentCount = newData.getStudentCount();
     }
 
     //// person-level operations
@@ -118,10 +122,24 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     }
 
     /**
+     * Returns True if this {@code AddressBook} contains Person with given {@code Ic}
+     */
+    public boolean hasPersonWithStudentId(StudentId studentId) {
+        return persons.hasPersonWithStudentId(studentId);
+    }
+
+    /**
      * Returns the {@code Person} in this {@code AddressBook} with the given {@code Ic}
      */
     public Person getPersonWithIc(Ic ic) {
         return persons.getPersonWithIc(ic);
+    }
+
+    /**
+     * Returns the {@code Person} in this {@code AddressBook} with the given {@code StudentId}
+     */
+    public Person getPersonWithStudentId(StudentId studentId) {
+        return persons.getPersonWithStudentId(studentId);
     }
 
     /**
@@ -139,6 +157,22 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
         persons.add(person.addSubject(subject));
     }
 
+    //// student count operations
+
+    /**
+     * Set the {@code studentCount} of {@code AcademyAssist} to the provided value.
+     */
+    public void setStudentCount(int studentCount) {
+        this.studentCount = studentCount;
+    }
+
+    /**
+     * Increment {@code studentCount} by 1.
+     */
+    public void incrementStudentCount() {
+        studentCount++;
+    }
+
     //// util methods
 
     @Override
@@ -151,6 +185,11 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public int getStudentCount() {
+        return studentCount;
     }
 
     @Override
@@ -172,7 +211,5 @@ public class AcademyAssist implements ReadOnlyAcademyAssist {
     public int hashCode() {
         return persons.hashCode();
     }
-
-
 
 }

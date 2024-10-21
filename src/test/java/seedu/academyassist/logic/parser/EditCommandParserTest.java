@@ -32,9 +32,9 @@ import seedu.academyassist.logic.commands.EditCommand;
 import seedu.academyassist.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.academyassist.model.person.Address;
 import seedu.academyassist.model.person.Email;
-import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Phone;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -50,7 +50,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NAME_AMY, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "F1264567X", EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, "S10001", EditCommand.MESSAGE_NOT_EDITED);
 
         // no id and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -58,64 +58,55 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidPreamble_failure() {
-        // length exceeds 9
-        assertParseFailure(parser, "F12645678X" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // exceeds 5 digits
+        assertParseFailure(parser, "S100010" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
-        // incorrect NRIC number format
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // incorrect Student ID format
+        assertParseFailure(parser, "S0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "F1264567X some random string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "S10001 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "F1264567X j/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "S10001 j/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "F1264567X" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "F1264567X" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(parser, "F1264567X" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "F1264567X" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, "S10001" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "S10001" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(parser, "S10001" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "S10001" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
 
         // invalid phone followed by valid email
-        assertParseFailure(parser, "F1264567X" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
-
-        //        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
-        //        // parsing it together with a valid tag results in error
-        //        assertParseFailure(parser, "F1264567X" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
-        //                Tag.MESSAGE_CONSTRAINTS);
-        //        assertParseFailure(parser, "F1264567X" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
-        //                Tag.MESSAGE_CONSTRAINTS);
-        //        assertParseFailure(parser, "F1264567X" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
-        //                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "S10001" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "F1264567X" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
+        assertParseFailure(parser, "S10001" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
                         + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Ic targetNric = new Ic("F1264567X");
-        String userInput = targetNric + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY;
+        StudentId targetStudentId = new StudentId("S10001");
+        String userInput = targetStudentId + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetStudentId, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Ic targetNric = new Ic("F1264567X");
-        String userInput = targetNric + PHONE_DESC_BOB + EMAIL_DESC_AMY;
+        StudentId targetStudentId = new StudentId("S10001");
+        String userInput = targetStudentId + PHONE_DESC_BOB + EMAIL_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetStudentId, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -123,34 +114,34 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Ic targetNric = new Ic("F1264567X");
-        String userInput = targetNric + NAME_DESC_AMY;
+        StudentId targetStudentId = new StudentId("S10001");
+        String userInput = targetStudentId + NAME_DESC_AMY;
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetNric, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetStudentId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // phone
-        userInput = targetNric + PHONE_DESC_AMY;
+        userInput = targetStudentId + PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
-        expectedCommand = new EditCommand(targetNric, descriptor);
+        expectedCommand = new EditCommand(targetStudentId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetNric + EMAIL_DESC_AMY;
+        userInput = targetStudentId + EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetNric, descriptor);
+        expectedCommand = new EditCommand(targetStudentId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // address
-        userInput = targetNric + ADDRESS_DESC_AMY;
+        userInput = targetStudentId + ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withAddress(VALID_ADDRESS_AMY).build();
-        expectedCommand = new EditCommand(targetNric, descriptor);
+        expectedCommand = new EditCommand(targetStudentId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // subjects
-        userInput = targetNric + SUBJECT_DESC_AMY;
+        // tags
+        userInput = targetStudentId + SUBJECT_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withSubjects(VALID_SUBJECT_AMY).build();
-        expectedCommand = new EditCommand(targetNric, descriptor);
+        expectedCommand = new EditCommand(targetStudentId, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -160,7 +151,7 @@ public class EditCommandParserTest {
         // AddCommandParserTest#parse_repeatedNonTagValue_failure()
 
         // valid followed by invalid
-        String targetId = "F1264567X";
+        String targetId = "S10001";
         String userInput = targetId + INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));

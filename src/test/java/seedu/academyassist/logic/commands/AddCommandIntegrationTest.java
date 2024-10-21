@@ -1,5 +1,6 @@
 package seedu.academyassist.logic.commands;
 
+import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
 import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
@@ -12,6 +13,7 @@ import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ModelManager;
 import seedu.academyassist.model.UserPrefs;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.SubjectEnum;
 import seedu.academyassist.testutil.PersonBuilder;
 
 /**
@@ -28,7 +30,9 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder("S00008")
+                .withSubjects(SubjectEnum.MATH.getSubjectName(), SubjectEnum.ENGLISH.getSubjectName())
+                .build();
 
         Model expectedModel = new ModelManager(model.getAcademyAssist(), new UserPrefs());
         expectedModel.addPerson(validPerson);
@@ -40,8 +44,7 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAcademyAssist().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(new AddCommand(personInList), model, MESSAGE_DUPLICATE_IC);
     }
 
 }

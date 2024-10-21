@@ -9,6 +9,7 @@ import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.util.SampleDataUtil;
@@ -23,7 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_IC = "S1234567B";
     public static final String DEFAULT_YEARGROUP = "2";
-    public static final Subject DEFAULT_SUBJECT = new Subject("Computing");
+    public static final String DEFAULT_STUDENT_ID = "S00008";
+    public static final String DEFAULT_SUBJECT = "MATH";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
@@ -32,20 +34,29 @@ public class PersonBuilder {
     private Address address;
     private Ic ic;
     private YearGroup yearGroup;
+    private StudentId studentId;
     private Set<Subject> subjects;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
+        this(DEFAULT_STUDENT_ID);
+    }
+
+    /**
+     * Creates a {@code PersonBuilder} with the default details but student id specified.
+     */
+    public PersonBuilder(String studentId) {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         ic = new Ic(DEFAULT_IC);
         yearGroup = new YearGroup(DEFAULT_YEARGROUP);
+        this.studentId = new StudentId(studentId);
         subjects = new HashSet<>();
-        subjects.add(DEFAULT_SUBJECT);
+        subjects.add(new Subject(DEFAULT_SUBJECT));
     }
 
     /**
@@ -58,6 +69,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         ic = personToCopy.getIc();
         yearGroup = personToCopy.getYearGroup();
+        studentId = personToCopy.getStudentId();
         subjects = new HashSet<>(personToCopy.getSubjects());
     }
 
@@ -110,6 +122,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code StudentId} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withStudentId(String studentId) {
+        this.studentId = new StudentId(studentId);
+        return this;
+    }
+
+    /**
      * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withSubjects(String ... subjects) {
@@ -118,7 +138,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, ic, yearGroup, subjects);
+        return new Person(name, phone, email, address, ic, yearGroup, studentId, subjects);
     }
 
 }
