@@ -107,6 +107,12 @@ public class AppointmentManager {
         model.setPerson(person, updatedPerson);
     }
 
+    public void removeAppointment(Appointment appointment, Person person) {
+        Person updatedPerson = new Person(person);
+        updatedPerson.removeAppointment(appointment);
+        model.setPerson(person, updatedPerson);
+    }
+
     private List<Appointment> getSortedAppointments() {
         ObservableList<Person> personList = model.getUnfilteredPersonList();
 

@@ -151,6 +151,11 @@ public class ModelManager implements Model {
         appointmentManager.addAppointment(newAppointment, person);
     }
 
+    @Override
+    public void removeAppointment(Appointment appointment, Person person) {
+        appointmentManager.removeAppointment(appointment, person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

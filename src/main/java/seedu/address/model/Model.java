@@ -98,4 +98,6 @@ public interface Model {
     ObservableList<Person> getUnfilteredPersonList();
 
     void addAppointment(Appointment newAppointment, Person person);
+
+    void removeAppointment(Appointment oldAppointment, Person person);
 }
