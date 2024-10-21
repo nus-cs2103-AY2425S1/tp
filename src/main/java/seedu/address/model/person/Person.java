@@ -1,9 +1,12 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,6 +34,10 @@ public class Person {
     // Dependents
     private final Set<Nric> caregivers = new HashSet<>();
     private final Set<Nric> patients = new HashSet<>();
+
+
+    //Notes
+    private final List<Note> notes = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -172,6 +179,25 @@ public class Person {
      */
     public Set<Nric> getPatients() {
         return Collections.unmodifiableSet(patients);
+    }
+
+    /**
+     * Returns an immutable list of notes, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<Note> getNotes() {
+        return List.copyOf(notes);
+    }
+
+    /**
+     * Adds a note to this person.
+     *
+     * @param note the note to add.
+     */
+    public void addNote(Note note) {
+        requireNonNull(note);
+        notes.add(note);
     }
 
     /**

@@ -11,12 +11,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.DeleteLinkCommand;
 import seedu.address.model.person.Nric;
 
-public class LinkCommandParserTest {
+public class DeleteLinkCommandParserTest {
 
-    private LinkCommandParser parser = new LinkCommandParser();
+    private DeleteLinkCommandParser parser = new DeleteLinkCommandParser();
 
     @Test
     public void parse_validArgs_returnsLinkCommand() {
@@ -26,21 +26,23 @@ public class LinkCommandParserTest {
 
         assertParseSuccess(parser,
                 " " + PREFIX_PATIENT + validPatientNric.value + " " + PREFIX_CAREGIVER + validCaregiverNric.value,
-                new LinkCommand(validPatientNric, validCaregiverNric));
+                new DeleteLinkCommand(validPatientNric, validCaregiverNric));
     }
 
     @Test
     public void parse_missingPatientNric_throwsParseException() {
         // Missing patient NRIC
         String input = " " + PREFIX_CAREGIVER + VALID_NRIC_UNIQUE;
-        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, input,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLinkCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingCaregiverNric_throwsParseException() {
         // Missing caregiver NRIC
         String input = " " + PREFIX_PATIENT + VALID_NRIC_UNIQUE;
-        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, input,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLinkCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -50,22 +52,24 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, input, Nric.MESSAGE_CONSTRAINTS);
 
         // Invalid caregiver NRIC
-        input = " " + PREFIX_PATIENT + "S8484131E" + " " + PREFIX_CAREGIVER + "INVALID_NRIC";
+        input = " " + PREFIX_PATIENT + "S1234567A" + " " + PREFIX_CAREGIVER + "INVALID_NRIC";
         assertParseFailure(parser, input, Nric.MESSAGE_CONSTRAINTS);
     }
 
     @Test
     public void parse_missingPrefixes_throwsParseException() {
         // Missing both prefixes
-        String input = "S8484131E S7654321B";
-        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        String input = "S1234567A S7654321B";
+        assertParseFailure(parser, input,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLinkCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyInput_throwsParseException() {
         // Empty input
         String input = "";
-        assertParseFailure(parser, input, String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, input,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLinkCommand.MESSAGE_USAGE));
     }
 
 }
