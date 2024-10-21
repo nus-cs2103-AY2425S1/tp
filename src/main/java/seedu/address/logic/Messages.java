@@ -45,6 +45,7 @@ public class Messages {
         addAddress(builder, person);
         addTags(builder, person);
         addDateOfLastVisit(builder, person);
+        addRemark(builder, person);
 
         return builder.toString();
     }
@@ -84,6 +85,13 @@ public class Messages {
         }
         sb.append("; Tags: ");
         person.getTags().forEach(sb::append);
+    }
+
+    private static void addRemark(StringBuilder sb, Person person) {
+        if (!person.hasRemark()) {
+            return;
+        }
+        sb.append("; Remark: ").append(person.getRemark().value);
     }
 
 }

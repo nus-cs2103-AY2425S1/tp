@@ -28,6 +28,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,7 +107,10 @@ public class EditCommand extends Command {
         Optional<DateOfLastVisit> updatedDateOfLastVisit = editPersonDescriptor.getDateOfLastVisit()
                 .orElse(personToEdit.getDateOfLastVisit());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedDateOfLastVisit);
+        // remark not edited in edit command; Use remark command to edit remarks
+        Remark remark = personToEdit.getRemark();
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedDateOfLastVisit, remark);
     }
 
     @Override

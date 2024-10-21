@@ -26,19 +26,21 @@ public class Person {
     private final Optional<Email> email;
     private final Set<Tag> tags = new HashSet<>();
     private final Optional<DateOfLastVisit> dateOfLastVisit;
+    private final Remark remark;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Optional<Email> email, Optional<Address> address,
-                  Set<Tag> tags, Optional<DateOfLastVisit> dateOfLastVisit) {
-        requireAllNonNull(name, phone, email, address, tags, dateOfLastVisit);
+                  Set<Tag> tags, Optional<DateOfLastVisit> dateOfLastVisit, Remark remark) {
+        requireAllNonNull(name, phone, email, address, tags, dateOfLastVisit, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
         this.dateOfLastVisit = dateOfLastVisit;
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -91,6 +93,17 @@ public class Person {
     }
 
     /**
+     * Returns whether the Person has a remark.
+     */
+    public boolean hasRemark() {
+        return remark.isPresent();
+    }
+
+    public Remark getRemark() {
+        return remark;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -125,13 +138,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && dateOfLastVisit.equals(otherPerson.dateOfLastVisit);
+                && dateOfLastVisit.equals(otherPerson.dateOfLastVisit)
+                && remark.equals(otherPerson.remark);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, dateOfLastVisit);
+        return Objects.hash(name, phone, email, address, tags, dateOfLastVisit, remark);
     }
 
     @Override
@@ -143,6 +157,7 @@ public class Person {
                 .add("address", address)
                 .add("tags", tags)
                 .add("dateOfLastVisit", dateOfLastVisit)
+                .add("remark", remark)
                 .toString();
     }
 
