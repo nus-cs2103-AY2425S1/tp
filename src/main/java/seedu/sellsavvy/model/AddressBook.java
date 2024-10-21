@@ -94,6 +94,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Creates a copy of all data in this {@code AddressBook}.
+     */
+    public AddressBook createCopy() {
+        AddressBook newAddressBook = new AddressBook();
+        newAddressBook.setPersons(persons.copyPersons().asUnmodifiableObservableList());
+        return newAddressBook;
+    }
+
+    /**
+     * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
+     * Returns null if target is null
+     */
+    public Person findEquivalentPerson(Person target) {
+        return persons.findEquivalentPerson(target);
+    }
+
     //// util methods
 
     @Override
@@ -128,12 +145,4 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.hashCode();
     }
 
-    /**
-     * Creates a copy of all data in this {@code AddressBook}.
-     */
-    public AddressBook createCopy() {
-        AddressBook newAddressBook = new AddressBook();
-        newAddressBook.setPersons(persons.copyPersons().asUnmodifiableObservableList());
-        return newAddressBook;
-    }
 }

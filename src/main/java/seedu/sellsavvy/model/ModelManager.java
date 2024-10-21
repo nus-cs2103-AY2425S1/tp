@@ -119,7 +119,11 @@ public class ModelManager implements Model {
 
     @Override
     public Model createCopy() {
-        return new ModelManager(addressBook.createCopy(), userPrefs);
+        Model modelCopy = new ModelManager(addressBook.createCopy(), userPrefs);
+        AddressBook addressBookCopy = (AddressBook) modelCopy.getAddressBook();
+        Person selectedPersonCopy = addressBookCopy.findEquivalentPerson(this.getSelectedPerson2());
+        modelCopy.updateSelectedPerson(selectedPersonCopy);
+        return modelCopy;
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -142,7 +142,7 @@ public class EditOrderCommandParserTest {
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COUNT));
 
         // invalid followed by valid
-        userInput = targetIndex.getOneBased() + INVALID_COUNT_NEGATIVE + COUNT_DESC_ATLAS ;
+        userInput = targetIndex.getOneBased() + INVALID_COUNT_NEGATIVE + COUNT_DESC_ATLAS;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_COUNT));
 

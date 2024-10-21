@@ -1,22 +1,13 @@
 package seedu.sellsavvy.testutil;
 
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_ITEM;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.sellsavvy.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.sellsavvy.commons.core.index.Index;
 import seedu.sellsavvy.logic.commands.ordercommands.AddOrderCommand;
-import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand;
 import seedu.sellsavvy.logic.commands.ordercommands.EditOrderCommand.EditOrderDescriptor;
 import seedu.sellsavvy.model.order.Order;
-import seedu.sellsavvy.model.tag.Tag;
-
-import java.util.Set;
 
 /**
  * A utility class for Order.

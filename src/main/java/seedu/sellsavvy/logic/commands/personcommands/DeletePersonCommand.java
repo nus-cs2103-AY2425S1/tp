@@ -48,7 +48,7 @@ public class DeletePersonCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
 
-        if(model.isSelectedPerson(personToDelete)) {
+        if (model.isSelectedPerson(personToDelete)) {
             model.updateSelectedPerson(null);
         }
 

@@ -99,7 +99,7 @@ public class EditOrderCommand extends Command {
         Date updatedDate = editOrderDescriptor.getDate().orElse(orderToEdit.getDate());
         Status status = orderToEdit.getStatus(); // status cannot be updated
 
-        Order orderToReturn =  new Order(updatedItem, updatedQuantity, updatedDate, status);
+        Order orderToReturn = new Order(updatedItem, updatedQuantity, updatedDate, status);
         return orderToReturn;
     }
 
