@@ -40,7 +40,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
                             return ParserUtil.parseIndex(s);
                         } catch (Exception e) {
                             // you see nothing :>
-                            throw new RuntimeException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                            throw new RuntimeException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                                     AddScheduleCommand.MESSAGE_USAGE));
                         }
                     }).collect(Collectors.toList());

@@ -18,7 +18,9 @@ import seedu.address.model.schedule.Meeting;
  * Jackson-friendly version of {@link Meeting}.
  */
 public class JsonAdaptedMeeting {
-    public static final String UidRegex = "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}(,\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12})*";
+    public static final String UIDREGEX = "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}"
+            + "-\\p{XDigit}{4}-\\p{XDigit}{12}(,\\p{XDigit}{8}-\\p{XDigit}{4}-"
+            + "\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12})*";
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     public static final String MESSAGE_CONSTRAINTS = "Error Loading the Contact Indexes, not in 1,2,3... format";
@@ -71,7 +73,7 @@ public class JsonAdaptedMeeting {
         if (contactIndexes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "contact indexes"));
         }
-        if (!contactIndexes.matches(UidRegex)) {
+        if (!contactIndexes.matches(UIDREGEX)) {
             throw new IllegalValueException(UID_FORMAT_ERROR);
         }
         final List<UUID> modelContactIndexes = Arrays.stream(contactIndexes.split(","))

@@ -48,7 +48,6 @@ public class Meeting {
     /**
      * Converts the list of contact indexes to a string, with indexes separated by commas.
      *
-     * @param inputContactUids List of contact indexes to be converted.
      * @return A comma-separated string of contact indexes.
      */
     public String convertContactUidsToString() {

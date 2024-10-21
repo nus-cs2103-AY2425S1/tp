@@ -42,7 +42,7 @@ public class AddScheduleCommand extends Command {
      * @param date              The date of the event in LocalDate format.
      * @param time              The time of the event in LocalTime format.
      */
-    public AddScheduleCommand(List<Index> contactIndexes, String name, 
+    public AddScheduleCommand(List<Index> contactIndexes, String name,
             LocalDate date, LocalTime time) {
         this.contactIndexes = contactIndexes;
         this.name = name;
@@ -61,7 +61,7 @@ public class AddScheduleCommand extends Command {
                 throw new CommandException("The contact index provided is invalid.");
             }
         }
-            
+
         // Retrieve the person involved
         List<UUID> contactsList = contactIndexes.stream()
                 .map(index -> lastShownList.get(index.getZeroBased()).getUid())
