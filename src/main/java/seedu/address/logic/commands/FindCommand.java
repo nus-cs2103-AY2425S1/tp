@@ -36,6 +36,13 @@ public class FindCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "John Doe "
             + PREFIX_LOCATION + "serangoon";
 
+    public static final String COMMAND_SUMMARY_ACTION = "Find";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":find KEYWORD [MORE_KEYWORDS]…";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":find James Jake";
+
+
     public static final List<String> INVALID_VARIANTS = Arrays.asList("find", "search", ":search", ":query",
             "query");
 
