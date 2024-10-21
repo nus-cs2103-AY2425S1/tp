@@ -57,12 +57,6 @@ public class EduLogParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case AddLessonCommand.COMMAND_WORD:
-            return new AddLessonCommandParser().parse(arguments);
-
-        case DeleteLessonCommand.COMMAND_WORD:
-            return new DeleteLessonCommandParser().parse(arguments);
-
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -77,6 +71,12 @@ public class EduLogParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case AddLessonCommand.COMMAND_WORD:
+            return new AddLessonCommandParser().parse(arguments);
+
+        case DeleteLessonCommand.COMMAND_WORD:
+            return new DeleteLessonCommandParser().parse(arguments);
 
         case DisplayCalendarCommand.COMMAND_WORD:
             return new DisplayCalendarCommand();
