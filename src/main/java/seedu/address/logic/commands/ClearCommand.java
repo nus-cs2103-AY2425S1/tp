@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+    public static final CommandType COMMAND_TYPE = CommandType.CLEAR;
     public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
 
     /**
@@ -20,7 +21,7 @@ public class ClearCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.CLEAR;
+        return COMMAND_TYPE;
     }
 
     @Override

@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
+    public static final CommandType COMMAND_TYPE = CommandType.LIST;
     public static final String MESSAGE_SUCCESS = "Listed all students";
 
     /**
@@ -21,7 +21,7 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.LIST;
+        return COMMAND_TYPE;
     }
 
     @Override
