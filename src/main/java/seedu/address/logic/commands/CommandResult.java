@@ -22,6 +22,9 @@ public class CommandResult {
     /** The application should display owner list */
     private boolean isOwnerListCommand;
 
+    /** The application should display owner and pet lists */
+    private boolean isCombinedListCommand;
+
     /** The application should exit. */
     private final boolean exit;
 
@@ -34,6 +37,7 @@ public class CommandResult {
         this.exit = exit;
         this.isPetListCommand = false;
         this.isOwnerListCommand = false;
+        this.isCombinedListCommand = false;
     }
 
     /**
@@ -49,13 +53,16 @@ public class CommandResult {
     }
 
     public void setListType(int i) {
-        //insert assertions here
+        //insert assertion here that i is 0, 1 or 2
         if (i == 1) {
             this.isPetListCommand = true;
         } else if (i == 0) {
             this.isOwnerListCommand = true;
+        } else if (i == 2) {
+            this.isCombinedListCommand = true;
         } else {
-            //do nothing
+            // insert assertion, if reached here then fail
+            return; //do nothing, should not ever reach here
         }
     }
 
@@ -65,6 +72,10 @@ public class CommandResult {
 
     public boolean isOwnerListCommand() {
         return this.isOwnerListCommand;
+    }
+
+    public boolean isCombinedListCommand() {
+        return this.isCombinedListCommand;
     }
 
     public boolean isShowHelp() {

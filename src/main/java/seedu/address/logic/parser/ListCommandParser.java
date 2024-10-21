@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.ListBothCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListOwnerCommand;
 import seedu.address.logic.commands.ListPetCommand;
@@ -26,6 +27,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListPetCommand();
         } else if (userInput.equals("owners")) {
             return new ListOwnerCommand();
+        } else if (userInput.equals("both")) {
+            return new ListBothCommand();
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }

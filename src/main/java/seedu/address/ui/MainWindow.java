@@ -176,6 +176,20 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * shows both pet and owner lists
+     */
+    void changeToCombinedList() {
+        petList.setVisible(false);
+        petList.setManaged(false);
+        combinedListPanelPlaceholder.setVisible(true);
+        combinedListPanelPlaceholder.setManaged(true);
+
+        // Show the owner list
+        ownerList.setVisible(false);
+        ownerList.setManaged(false);
+    }
+
+    /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -233,6 +247,8 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult.isPetListCommand()) {
                 System.out.println("pets");
                 changeToPetsOnly();
+            } else if (commandResult.isCombinedListCommand()) {
+                changeToCombinedList();
             }
 
             logger.info("Result: " + commandResult.getFeedbackToUser());

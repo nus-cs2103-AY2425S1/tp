@@ -16,7 +16,8 @@ public abstract class ListCommand extends Command {
             + "relevant fields contain the specified keywords (case-insensitive) and displays them as a list with "
             + "index numbers.\n"
             + "To list owners: list owners\n"
-            + "To find pets: list pets\n";
+            + "To list pets: list pets\n"
+            + "To find both: list both\n";
 
 
     @Override
