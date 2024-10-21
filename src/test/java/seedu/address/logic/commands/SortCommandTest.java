@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,7 +20,7 @@ import seedu.address.model.person.Person;
 public class SortCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = model;
 
     @Test
     public void execute_sortByNameAsc_success() {
@@ -88,6 +89,16 @@ public class SortCommandTest {
         expectedModel.sortPersonList(comparator);
 
         String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "next payment date", "asc");
+        assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_sortByPayDateDesc_success() {
+        SortCommand sortCommand = new SortCommand("paydate/", "desc");
+        Comparator<Person> comparator = Person.getReversedPayDateComparator();
+        expectedModel.sortPersonList(comparator);
+
+        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, "next payment date", "desc");
         assertCommandSuccess(sortCommand, model, expectedMessage, expectedModel);
     }
 
