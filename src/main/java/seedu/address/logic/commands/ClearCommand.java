@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 public abstract class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_USAGE = "clear person OR clear appt";
+    public static final String MESSAGE_USAGE = "clear person or appointment";
 
     @Override
     public CommandResult execute(Model model) {
