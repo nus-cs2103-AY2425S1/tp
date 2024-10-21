@@ -112,6 +112,10 @@ public class Person {
     public boolean hasTag(Tag tag) {
         return this.tags.contains(tag);
     }
+
+    /**
+     * Returns true if {@code Name} of this {@code Person} contains {@code Name} of parameter
+     */
     public boolean hasName(Name name) {
         return this.name.fullName.toUpperCase().contains(name.fullName.toUpperCase());
     }
