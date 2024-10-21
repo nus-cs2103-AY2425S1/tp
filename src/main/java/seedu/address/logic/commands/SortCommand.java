@@ -47,6 +47,8 @@ public class SortCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
         if (!AddressBookParser.getInspect()) {
             return new CommandResult(MESSAGE_FAILURE);
         } else {
