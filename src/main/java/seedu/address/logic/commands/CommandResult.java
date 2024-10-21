@@ -16,6 +16,12 @@ public class CommandResult {
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
+    /** The application should display pet list */
+    private boolean isPetListCommand;
+
+    /** The application should display owner list */
+    private boolean isOwnerListCommand;
+
     /** The application should exit. */
     private final boolean exit;
 
@@ -26,6 +32,8 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.isPetListCommand = false;
+        this.isOwnerListCommand = false;
     }
 
     /**
@@ -38,6 +46,25 @@ public class CommandResult {
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public void setListType(int i) {
+        //insert assertions here
+        if (i == 1) {
+            this.isPetListCommand = true;
+        } else if (i == 0) {
+            this.isOwnerListCommand = true;
+        } else {
+            //do nothing
+        }
+    }
+
+    public boolean isPetListCommand() {
+        return this.isPetListCommand;
+    }
+
+    public boolean isOwnerListCommand() {
+        return this.isOwnerListCommand;
     }
 
     public boolean isShowHelp() {

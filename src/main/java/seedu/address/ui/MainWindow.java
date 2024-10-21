@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -31,7 +32,11 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private CombinedListPanel combinedListPanel;
+
+    private PetListPanel petListPanel;
+
+    private OwnerListPanel ownerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -42,7 +47,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane combinedListPanelPlaceholder;
+
+    @FXML
+    private StackPane petListPanelPlaceholder;
+
+    @FXML
+    private StackPane ownerListPanelPlaceholder;
+
+    @FXML
+    private VBox ownerList;
+
+    @FXML
+    private VBox petList;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -111,8 +128,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredOwnerList(), logic.getFilteredPetList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        combinedListPanel = new CombinedListPanel(logic.getFilteredOwnerList(), logic.getFilteredPetList());
+        combinedListPanelPlaceholder.getChildren().add(combinedListPanel.getRoot());
+
+        petListPanel = new PetListPanel(logic.getFilteredPetList());
+        petListPanelPlaceholder.getChildren().add(petListPanel.getRoot());
+
+        ownerListPanel = new OwnerListPanel(logic.getFilteredOwnerList());
+        ownerListPanelPlaceholder.getChildren().add(ownerListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -122,6 +145,34 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
+     * changes the combined list placeholder to only show the pet list
+     */
+    void changeToPetsOnly() {
+        ownerList.setVisible(false);
+        ownerList.setManaged(false);
+        combinedListPanelPlaceholder.setVisible(false);
+        combinedListPanelPlaceholder.setManaged(false);
+
+        // Show the pet list
+        petList.setVisible(true);
+        petList.setManaged(true);
+    }
+
+    /**
+     * changes the combined list placeholder to only show the owner list
+     */
+    void changeToOwnersOnly() {
+        petList.setVisible(false);
+        petList.setManaged(false);
+        combinedListPanelPlaceholder.setVisible(false);
+        combinedListPanelPlaceholder.setManaged(false);
+
+        // Show the owner list
+        ownerList.setVisible(true);
+        ownerList.setManaged(true);
     }
 
     /**
@@ -158,14 +209,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-            (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public CombinedListPanel getPersonListPanel() {
+        return combinedListPanel;
     }
 
     /**
@@ -176,6 +227,14 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
+            if (commandResult.isOwnerListCommand()) {
+                System.out.println("owners");
+                changeToOwnersOnly();
+            } else if (commandResult.isPetListCommand()) {
+                System.out.println("pets");
+                changeToPetsOnly();
+            }
+
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
