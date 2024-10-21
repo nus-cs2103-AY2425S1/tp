@@ -6,10 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.property.AskingPrice;
 import seedu.address.model.property.LandlordName;
-import seedu.address.model.property.Property;
-import seedu.address.model.property.PropertyType;
 import seedu.address.model.property.Location;
 import seedu.address.model.property.Phone;
+import seedu.address.model.property.Property;
+import seedu.address.model.property.PropertyType;
 /**
  * Jackson-friendly version of {@link Property}.
  */

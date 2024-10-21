@@ -32,7 +32,8 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given buyerList and userPrefs.
      */
-    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList, ReadOnlyPropertyList propertyList) {
+    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList,
+            ReadOnlyPropertyList propertyList) {
         requireAllNonNull(buyerList, userPrefs, meetUpList);
 
         logger.fine("Initializing with buyer list: " + buyerList + " and user prefs " + userPrefs

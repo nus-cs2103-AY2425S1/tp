@@ -81,7 +81,8 @@ public class PropertyList implements ReadOnlyPropertyList {
     /**
      * Replaces the given property {@code target} in the list with {@code editedproperty}.
      * {@code target} must exist in the meet up list.
-     * The property identity of {@code editedproperty} must not be the same as another existing property in the meet up list.
+     * The property identity of {@code editedproperty} must not be the same as another
+     * existing property in the meet up list.
      */
     public void setProperty(Property target, Property editedProperty) {
         requireNonNull(editedProperty);

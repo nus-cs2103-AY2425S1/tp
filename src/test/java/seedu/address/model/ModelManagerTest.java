@@ -129,7 +129,8 @@
 //         BuyerList buyerList = new BuyerListBuilder().withBuyer(ALICE).withBuyer(BENSON).build();
 //         BuyerList differentBuyerList = new BuyerList();
 //         UserPrefs userPrefs = new UserPrefs();
-//         MeetUpList meetUpList = new MeetUpListBuilder().withMeetUp(PITCH_MEETUP).withMeetUp(NETWORKING_MEETUP).build();
+//         MeetUpList meetUpList = new MeetUpListBuilder().withMeetUp(PITCH_MEETUP)
+// .withMeetUp(NETWORKING_MEETUP).build();
 //         MeetUpList differentMeetUpList = new MeetUpList();
 
 //         // same values -> returns true

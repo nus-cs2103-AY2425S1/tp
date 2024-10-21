@@ -28,13 +28,13 @@ public class PropertyListPanel extends UiPart<Region> {
         super(FXML);
         logger.info(propertyList.toString());
         propertyListView.setItems(propertyList);
-        propertyListView.setCellFactory(listView -> new propertyListViewCell());
+        propertyListView.setCellFactory(listView -> new PropertyListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
-    class propertyListViewCell extends ListCell<Property> {
+    class PropertyListViewCell extends ListCell<Property> {
         @Override
         protected void updateItem(Property property, boolean empty) {
             super.updateItem(property, empty);

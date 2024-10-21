@@ -60,7 +60,8 @@
 //         MeetUpBuilder meetUpInList = new MeetUpBuilder(lastMeetUp);
 //         MeetUp editedMeetUp = meetUpInList.withInfo(VALID_MEETUP_INFO_PITCH).build();
 
-//         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
+//         EditMeetUpDescriptor descriptor = new
+// EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
 //         EditCommand editCommand = new EditCommand(indexLastMeetUp, descriptor);
 
 //         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MEETUP_SUCCESS,
@@ -130,8 +131,9 @@
 //     @Test
 //     public void execute_invalidMeetUpIndexUnfilteredList_failure() {
 //         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredMeetUpList().size() + 1);
-//         EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
-//         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+//         EditMeetUpDescriptor descriptor = new
+// EditMeetUpDescriptorBuilder().withInfo(VALID_MEETUP_INFO_PITCH).build();
+//         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);s
 
 //         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX);
 //     }
