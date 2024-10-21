@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -16,11 +17,16 @@ import seedu.address.model.person.Person;
  */
 public class ContactMap {
     private Map<Role, Person> map;
+    private Person husband; // Add husband
+    private Person wife;    // Add wife
 
     /**
-     * Creates an empty ContactList
+     * Creates an empty ContactList and assigns husband and wife.
      */
-    public ContactMap() {
+    public ContactMap(Person husband, Person wife) {
+        requireAllNonNull(husband, wife);
+        this.husband = husband;
+        this.wife = wife;
         this.map = new HashMap<>();
     }
 
@@ -35,7 +41,7 @@ public class ContactMap {
     }
 
     /**
-     * Adds a role and person to the map.
+     * Adds a role and person to the map, preventing husband and wife from taking other roles.
      *
      * @param role role to be added.
      * @param person person with the role.
@@ -43,7 +49,10 @@ public class ContactMap {
     public void addToMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (this.hasRole(role)) {
-            // throw exception
+            throw new IllegalArgumentException("This role is already assigned.");
+        }
+        if (person.equals(husband) || person.equals(wife)) {
+            throw new IllegalArgumentException("This person is a spouse and cannot have another role.");
         }
         map.put(role, person);
     }
@@ -57,7 +66,7 @@ public class ContactMap {
     public void removeFromMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (!this.hasRole(role)) {
-            // throw exception
+            throw new IllegalArgumentException("This role is not assigned.");
         }
         map.remove(role, person);
     }
@@ -96,11 +105,14 @@ public class ContactMap {
         }
 
         ContactMap otherContactMap = (ContactMap) other;
-        return map.equals(otherContactMap.map);
+        return map.equals(otherContactMap.map)
+                && husband.equals(otherContactMap.husband)
+                && wife.equals(otherContactMap.wife);
     }
 
     @Override
     public int hashCode() {
-        return map.hashCode();
+        return Objects.hash(map, husband, wife);
     }
 }
+

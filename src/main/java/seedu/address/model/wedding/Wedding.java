@@ -14,17 +14,18 @@ public class Wedding {
     private Wife wife;
     private Date date;
     private Venue venue;
-    private ContactMap contactList = new ContactMap();
+    private ContactMap contactList;
 
     /**
      * Constructs a {@code Wedding}.
      */
     public Wedding(Husband husband, Wife wife, Date date, Venue venue) {
-        requireAllNonNull(husband, wife);
+        requireAllNonNull(husband, wife, date, venue);
         this.husband = husband;
         this.wife = wife;
         this.date = date;
         this.venue = venue;
+        this.contactList = new ContactMap(husband.getPerson(), wife.getPerson());
     }
 
     public Husband getHusband() {
