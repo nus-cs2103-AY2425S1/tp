@@ -33,7 +33,7 @@ public class AttendCommandParserTest {
         AttendCommand command = parser.parse(userInput);
 
         StudentId expectedStudentId = new StudentId("1001");
-        TutorialClass expectedTutorialClass = new TutorialClass("1001");
+        TutorialClass expectedTutorialClass = TutorialClass.of("1001");
         Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
 
         AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialClass, expectedDate);

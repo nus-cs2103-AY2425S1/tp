@@ -98,7 +98,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_tutorialInModel_returnsTrue() {
-        Tutorial tutorial = new Tutorial(new TutName("Tut"), new TutorialClass("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialClass.of("1000"));
         modelManager.addTutorial(tutorial);
         assertTrue(modelManager.hasTutorial(tutorial));
     }
@@ -110,9 +110,9 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_byTutorialClass_returnsTrue() {
-        Tutorial tutorial = new Tutorial(new TutName("Tut"), new TutorialClass("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialClass.of("1000"));
         modelManager.addTutorial(tutorial);
-        assertTrue(modelManager.hasTutorial(new TutorialClass("1000")));
+        assertTrue(modelManager.hasTutorial(TutorialClass.of("1000")));
     }
 
     @Test

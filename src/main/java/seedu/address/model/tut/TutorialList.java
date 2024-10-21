@@ -63,7 +63,7 @@ public class TutorialList {
      * @return True if list contains he tutorial, false otherwise.
      */
     public boolean hasTutorial(TutorialClass tutorialClass) {
-        Tutorial tutorial = new Tutorial(new TutName("ran"), tutorialClass);
+        Tutorial tutorial = Tutorial.of(new TutName("ran"), tutorialClass);
         return this.tutorials.stream().anyMatch(x -> x.equals(tutorial));
     }
 
@@ -92,10 +92,21 @@ public class TutorialList {
      * @param tutorialClass Target tutorial
      */
     public void assignStudent(Student student, TutorialClass tutorialClass) {
-        Tutorial ran = new Tutorial(new TutName("ran"), tutorialClass);
+        Tutorial ran = Tutorial.of(new TutName("ran"), tutorialClass);
         tutorials.stream()
                 .filter(t -> t.equals(ran))
-                .forEach(t -> t.assignStudent(student));
+                .forEach(t -> t.add(student));
+    }
+
+    /**
+     * Deletes the specified student from all tutorials where the student is present.
+     *
+     * @param student The student to be removed from the tutorials.
+     */
+    public void deleteStudent(Student student) {
+        tutorials.stream()
+                .filter(t -> t.studentInList(student))
+                .forEach(t -> t.deleteStudent(student));
     }
 
     @Override

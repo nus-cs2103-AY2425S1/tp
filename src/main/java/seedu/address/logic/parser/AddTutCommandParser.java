@@ -33,7 +33,7 @@ public class AddTutCommandParser implements Parser<AddTutCommand> {
         TutName tutName = ParserUtil.parseTutName(argMultimap.getValue(PREFIX_TUT_NAME).get());
         TutorialClass id = ParserUtil.parseTutIndex(argMultimap.getValue(PREFIX_TUT_ID).get());
 
-        Tutorial tutorial = new Tutorial(tutName, id);
+        Tutorial tutorial = Tutorial.of(tutName, id);
 
 
         return new AddTutCommand(tutorial);

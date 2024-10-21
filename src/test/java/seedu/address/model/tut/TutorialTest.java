@@ -5,11 +5,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TutUtil.NONE;
 import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TutUtil.TUTORIAL_SAMPLE;
 import static seedu.address.testutil.TutUtil.TUT_DATE;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.AMY;
 
 import java.util.Date;
 
@@ -18,56 +20,57 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
+import seedu.address.model.tut.exceptions.NoTutorialException;
 import seedu.address.testutil.StudentBuilder;
 
 public class TutorialTest {
 
     @Test
     public void constructor_nullName_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tutorial(null, TUTORIAL_CLASS));
-        assertThrows(NullPointerException.class, () -> new Tutorial(new TutName(TUT_NAME), (TutorialClass) null));
-
+        assertThrows(NullPointerException.class, () -> Tutorial.of(null, TUTORIAL_CLASS));
+        assertThrows(NullPointerException.class, () -> Tutorial.of(new TutName(TUT_NAME), (TutorialClass) null));
     }
 
     @Test
     public void constructor_invalidName_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Tutorial(new TutName(""), TUTORIAL_CLASS));
+        assertThrows(IllegalArgumentException.class, () -> Tutorial.of(new TutName(""), TUTORIAL_CLASS));
     }
     @Test
     public void constructor_nullTutorialClass_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Tutorial(new TutName(TUT_NAME), (TutorialClass) null));
+        assertThrows(NullPointerException.class, () -> Tutorial.of(new TutName(TUT_NAME), (TutorialClass) null));
     }
 
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
         String invalidTutName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tutorial(new TutName(""), TUTORIAL_CLASS));
+        assertThrows(IllegalArgumentException.class, () -> Tutorial.of(new TutName(""), TUTORIAL_CLASS));
     }
 
     @Test
     public void successAddStudentToTutorial() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
-        assertEquals(aliceCopy, tutorial.get(ALICE.getName()));
+        assertEquals(aliceCopy, tutorial.getStudents().get(0));
     }
 
     @Test
     public void checkEquals_sameInstance() {
-        Tutorial sameTutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial sameTutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         assertEquals(sameTutorial, sameTutorial);
     }
 
     @Test
     public void checkEquals_differentInstance() {
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
-        Tutorial otherTutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial otherTutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         assertEquals(tutorial, otherTutorial);
     }
 
     @Test
     public void checkEquals_differentObjects() {
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Object notATut = new Object();
         assertNotEquals(tutorial, notATut);
     }
@@ -154,7 +157,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_success() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
         Date date = new Date();
         StudentId aliceId = aliceCopy.getStudentId();
@@ -165,7 +168,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_studentNotInTut_false() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Date date = new Date();
         StudentId aliceId = aliceCopy.getStudentId();
         boolean result = tutorial.setAttendance(date, aliceId);
@@ -175,7 +178,7 @@ public class TutorialTest {
     @Test
     public void setAttendance_nullDate_throwsNullPointerException() {
         Student aliceCopy = new StudentBuilder(ALICE).build();
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
         StudentId aliceId = aliceCopy.getStudentId();
         assertThrows(NullPointerException.class, () -> tutorial.setAttendance(null, aliceId));
@@ -183,8 +186,128 @@ public class TutorialTest {
 
     @Test
     public void setAttendance_nullStudentId_throwsNullPointerException() {
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Date date = new Date();
         assertThrows(NullPointerException.class, () -> tutorial.setAttendance(date, null));
+    }
+
+    @Test
+    public void studentInList_studentNotInListTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        tutorial.add(ALICE);
+        tutorial.deleteStudent(ALICE);
+        assertFalse(tutorial.studentInList(ALICE));
+    }
+
+    @Test
+    public void studentInListTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        tutorial.add(ALICE);
+        assertTrue(tutorial.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudentTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        tutorial.add(ALICE);
+        assertTrue(tutorial.studentInList(ALICE));
+        tutorial.deleteStudent(ALICE);
+        assertFalse(tutorial.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudentFailTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        assertThrows(StudentNotFoundException.class, ()
+                -> tutorial.deleteStudent(ALICE));
+    }
+
+    @Test
+    public void constructor_none_singleton() {
+        Tutorial none = Tutorial.none();
+        Tutorial none1 = Tutorial.none();
+        assertEquals(none, none1);
+    }
+
+    @Test
+    public void addStudent_noneTest() {
+        NONE.add(ALICE);
+        assertTrue(NONE.getStudents().contains(ALICE));
+    }
+
+    @Test
+    public void addStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> NONE.add(null));
+    }
+
+    @Test
+    public void setAttendance_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.setAttendance(new Date(), new StudentId("1000")));
+    }
+
+    @Test
+    public void getTutName_noneTest() {
+        assertThrows(NoTutorialException.class, NONE::getTutName);
+    }
+
+    @Test
+    public void tutorialDateInList_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.tutorialDateInList(TUT_DATE));
+    }
+
+    @Test
+    public void addTutorialDate_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.addTutorialDate(TUT_DATE));
+    }
+
+    @Test
+    public void getTutorialDate_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.getTutorialDate(new Date()));
+    }
+
+    @Test
+    public void isValidTutorialDate_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.isValidTutorialDate(TUT_DATE));
+    }
+
+    @Test
+    public void getTutDates_noneTest() {
+        assertThrows(NoTutorialException.class, NONE::getTutDates);
+    }
+
+    @Test
+    public void getTutorialClass_noneTest() {
+        assertThrows(NoTutorialException.class, NONE::getTutorialClass);
+    }
+
+    @Test
+    public void markAttendance_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.markAttendance(ALICE, TUT_DATE));
+    }
+
+    @Test
+    public void studentInList_noneTest() {
+        NONE.add(ALICE);
+        assertTrue(NONE.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudent_noneTest() {
+        NONE.add(ALICE);
+        assertTrue(NONE.studentInList(ALICE));
+        NONE.deleteStudent(ALICE);
+        assertFalse(NONE.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudent_fail_noneTest() {
+        assertThrows(StudentNotFoundException.class, ()
+                -> NONE.deleteStudent(AMY));
     }
 }

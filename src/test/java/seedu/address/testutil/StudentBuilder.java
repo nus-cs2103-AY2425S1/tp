@@ -30,7 +30,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         presentDates = DEFAULT_PRESENT_DATES;
         studentId = new StudentId(DEFAULT_STUDENT_ID);
-        tutorialClass = new TutorialClass(DEFAULT_TUTORIAL_CLASS);
+        tutorialClass = TutorialClass.of(DEFAULT_TUTORIAL_CLASS);
     }
 
     /**
@@ -75,7 +75,7 @@ public class StudentBuilder {
      * Sets the {@code TutorialClass} of the {@code Student} that we are building.
      */
     public StudentBuilder withTutorialClass(String tutorialClass) {
-        this.tutorialClass = new TutorialClass(tutorialClass);
+        this.tutorialClass = TutorialClass.of(tutorialClass);
         return this;
     }
 }

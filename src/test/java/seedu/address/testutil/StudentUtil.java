@@ -27,7 +27,7 @@ public class StudentUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_STUDENTID + student.getStudentId().value + " ");
-        sb.append(PREFIX_TUTORIALCLASS + student.getTutorialClass().value + " ");
+        sb.append(PREFIX_TUTORIALCLASS + student.getTutorialClass().toString() + " ");
         return sb.toString();
     }
 
@@ -40,7 +40,7 @@ public class StudentUtil {
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_STUDENTID)
                 .append(studentId.value).append(" "));
         descriptor.getTutorialClass().ifPresent(tutorialClass -> sb.append(PREFIX_TUTORIALCLASS)
-                .append(tutorialClass.value).append(" "));
+                .append(tutorialClass.toString()).append(" "));
 
         return sb.toString();
     }

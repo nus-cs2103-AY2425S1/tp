@@ -31,10 +31,8 @@ public class JsonAdaptedTutorialTest {
     @Test
     public void toModelType_validTutDetails_returnsTut() throws Exception {
         // Using TUT_SAMPLE from TutUtil
-        Tutorial tutorial = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(tutorial);
-        System.out.println(tut.toModelType());
-        System.out.println(tutorial);
         assertTrue(tutorial.equals(tut.toModelType()));
     }
 
@@ -42,7 +40,7 @@ public class JsonAdaptedTutorialTest {
     public void toModelType_invalidTutName_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with invalid tutorial name
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                INVALID_TUT_NAME, TUTORIAL_SAMPLE.getTutorialClass().value,
+                INVALID_TUT_NAME, TUTORIAL_SAMPLE.getTutorialClass().toString(),
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
@@ -54,7 +52,7 @@ public class JsonAdaptedTutorialTest {
     public void toModelType_nullTutName_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with null tutorial name
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                null, TUTORIAL_SAMPLE.getTutorialClass().value,
+                null, TUTORIAL_SAMPLE.getTutorialClass().toString(),
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );

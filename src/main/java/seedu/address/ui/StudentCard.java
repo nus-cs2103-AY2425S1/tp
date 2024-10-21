@@ -48,7 +48,7 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         studentId.setText(student.getStudentId().value);
-        tutorialClass.setText(student.getTutorialClass().value);
+        tutorialClass.setText(student.getTutorialClass().toString());
         attendance.setText(student.getPresentDates().toString());
 
         // Listen for changes in the presentDates property

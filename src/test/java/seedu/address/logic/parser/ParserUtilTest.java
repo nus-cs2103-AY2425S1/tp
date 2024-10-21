@@ -76,14 +76,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseTutorialClass_validValueWithoutWhitespace_returnsTutorialClass() throws Exception {
-        TutorialClass expectedTutorialClass = new TutorialClass(VALID_TUTORIAL_CLASS);
+        TutorialClass expectedTutorialClass = TutorialClass.of(VALID_TUTORIAL_CLASS);
         assertEquals(expectedTutorialClass, ParserUtil.parseTutorialClass(VALID_TUTORIAL_CLASS));
     }
 
     @Test
     public void parseTutorialClass_validValueWithWhitespace_returnsTrimmedTutorialClass() throws Exception {
         String tutorialClassWithWhitespace = WHITESPACE + VALID_TUTORIAL_CLASS + WHITESPACE;
-        TutorialClass expectedTutorialClass = new TutorialClass(VALID_TUTORIAL_CLASS);
+        TutorialClass expectedTutorialClass = TutorialClass.of(VALID_TUTORIAL_CLASS);
         assertEquals(expectedTutorialClass, ParserUtil.parseTutorialClass(tutorialClassWithWhitespace));
     }
 

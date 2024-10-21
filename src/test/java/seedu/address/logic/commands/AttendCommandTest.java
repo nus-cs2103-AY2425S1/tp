@@ -38,7 +38,7 @@ public class AttendCommandTest {
 
     @Test
     public void constructor_nullStudentId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AttendCommand(null, new TutorialClass("1001"), new Date()));
+        assertThrows(NullPointerException.class, () -> new AttendCommand(null, TutorialClass.of("1001"), new Date()));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class AttendCommandTest {
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("1001"),
-                new TutorialClass("1001"), null));
+                TutorialClass.of("1001"), null));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class AttendCommandTest {
         // Arrange
         ModelStubAcceptingAttendanceRecorded modelStub = new ModelStubAcceptingAttendanceRecorded();
         StudentId studentId = new StudentId("1001");
-        TutorialClass tutorialClass = new TutorialClass("1001");
+        TutorialClass tutorialClass = TutorialClass.of("1001");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = sdf.parse("2024/02/21");
 
@@ -77,7 +77,7 @@ public class AttendCommandTest {
     public void execute_attendanceRecordingFails_throwsCommandException() {
         ModelStubWithoutTutorialClass modelStub = new ModelStubWithoutTutorialClass();
         StudentId studentId = new StudentId("1001");
-        TutorialClass tutorialClass = new TutorialClass("1001");
+        TutorialClass tutorialClass = TutorialClass.of("1001");
         Date date = new Date();
 
         AttendCommand attendCommand = new AttendCommand(studentId, tutorialClass, date);
@@ -90,8 +90,8 @@ public class AttendCommandTest {
         // Arrange
         StudentId studentId1 = new StudentId("1001");
         StudentId studentId2 = new StudentId("1002");
-        TutorialClass tutorialClass1 = new TutorialClass("1001");
-        TutorialClass tutorialClass2 = new TutorialClass("1002");
+        TutorialClass tutorialClass1 = TutorialClass.of("1001");
+        TutorialClass tutorialClass2 = TutorialClass.of("1002");
         Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
         Date date2 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/22");
 
@@ -114,7 +114,7 @@ public class AttendCommandTest {
     public void toString_test() throws Exception {
         // Arrange
         StudentId studentId = new StudentId("1001");
-        TutorialClass tutorialClass = new TutorialClass("1001");
+        TutorialClass tutorialClass = TutorialClass.of("1001");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = sdf.parse("2024/02/21");
 

@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         studentId = source.getStudentId().value;
-        tutorialClass = source.getTutorialClass().value;
+        tutorialClass = source.getTutorialClass().toString();
         presentDates = new JsonAdaptedPresentDates(source.getPresentDates());
     }
 
@@ -78,7 +78,7 @@ class JsonAdaptedStudent {
         if (!TutorialClass.isValidTutorialClass(tutorialClass)) {
             throw new IllegalValueException(TutorialClass.MESSAGE_CONSTRAINTS);
         }
-        final TutorialClass modelTutorialClass = new TutorialClass(tutorialClass);
+        final TutorialClass modelTutorialClass = TutorialClass.of(tutorialClass);
 
         final PresentDates modelPresentDates;
 

@@ -78,9 +78,9 @@ public class AddCommandTest {
 
     @Test
     public void execute_invalidTutorial_throwsCommandException() {
-        TutorialClass tutorialClass = new TutorialClass("10000");
+        TutorialClass tutorialClass = TutorialClass.of("10000");
         Student validStudent = new Student(new Name("ABC"), new StudentId("1999"),
-                new TutorialClass("100"), null);
+                TutorialClass.of("100"), null);
         AddCommand addCommand = new AddCommand(validStudent, tutorialClass);
         ModelStub modelStub = new ModelStubWithStudent(ALICE);
 

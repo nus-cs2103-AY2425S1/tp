@@ -41,9 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 : new StudentId("1001");
         TutorialClass tutorialClass = argMultimap.getValue(PREFIX_TUTORIALCLASS).isPresent()
                 ? ParserUtil.parseTutorialClass(argMultimap.getValue(PREFIX_TUTORIALCLASS).get())
-                : new TutorialClass("1001");
-        System.out.println(tutorialClass);
-        System.out.println(studentId);
+                : TutorialClass.of("1001");
         Student student = new Student(name, studentId, tutorialClass, null);
         return new AddCommand(student, tutorialClass);
     }
