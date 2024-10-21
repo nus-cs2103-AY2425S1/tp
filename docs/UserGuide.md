@@ -6,7 +6,7 @@
 
 # InternBuddy User Guide
 
-InternBuddy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI[^1]) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InternBuddy can get your contact management tasks done faster than traditional GUI apps.
+InternBuddy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI)[^1] while still having the benefits of a Graphical User Interface (GUI)[^2]. If you can type fast, InternBuddy can get your contact management tasks done faster than traditional GUI apps.
 
 
 <!-- * Table of Contents -->
@@ -14,7 +14,7 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command[^5] summary
 
 | Action       | Format, Examples                                                                                                                                                                  |
 |--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -33,7 +33,7 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook[^3].
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -62,7 +62,7 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters[^6.1] to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -71,7 +71,7 @@ InternBuddy is a **desktop app for managing contacts, optimized for use via a Co
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters[^6.2] can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -128,7 +128,7 @@ Examples:
 *  `edit 1 p/91234567 e/company@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `company@example.com` respectively.
 *  `edit 2 n/Goggle t/` Edits the name of the 2nd company to be `Goggle` and clears all existing tags.
 
-### Adding application record for a company: `apply`
+### Adding application record[^4] for a company: `apply`
 
 Adds an internship application record to an existing company in the address book.
 
@@ -238,17 +238,17 @@ _Details coming soon ..._
 
 
 ## Glossary
-- [^1]: **CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
-- **GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
-- **Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app. 
-- **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
-- **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
-- **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., n/NAME).
-- **Tag**: A label that can be added to a company to classify or organize it (e.g., t/tech, t/software).
-- **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
-- **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
-- **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
-- **APPLIED / OA / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
-- **Backup**: A copy of the data file created to prevent loss of information. The backup can be used to restore the AddressBook in case of accidental data loss.
-- **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
-- **Company**: Refers to an entity in the address book that represents a business or organization to which a user may apply for internships or jobs.
+[^1]: **CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
+[^2]: **GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
+[^3]: **Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app. 
+[^4]: **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
+[^5]: **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
+[^6.1]: [^6.2]: **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., n/NAME).
+[^7]: **Tag**: A label that can be added to a company to classify or organize it (e.g., t/tech, t/software).
+[^8]: **JSON** (JavaScript Object Notation): A lightweight data-interchange format that is easy for humans to read and write and for machines to parse and generate. InternBuddy uses JSON to store its data files.
+[^9]: **Index**: A number used to identify the position of a company or application in a list. InternBuddy commands often require an index to reference a specific company or application.
+[^10]: **Home Folder**: The directory where InternBuddy stores its data and related files on your computer.
+[^11]: **APPLIED / OA / INTERVIEWED / OFFERED / ACCEPTED / REJECTED**: The various statuses that can describe an application’s progress in the hiring process within InternBuddy.
+[^12]: **Backup**: A copy of the data file created to prevent loss of information. The backup can be used to restore the AddressBook in case of accidental data loss.
+[^13]: **JSON File Location**: The file path where InternBuddy stores its data, which can be manually edited or transferred to another computer.
+[^14]: **Company**: Refers to an entity in the address book that represents a business or organization to which a user may apply for internships or jobs.
