@@ -11,23 +11,24 @@ import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
- * Link a caregiver and a patient by their nric and update person model accordingly.
+ * Deletes a link between a patient and a caregiver by their nric and update person model accordingly.
  */
-public class LinkCommand extends Command {
+public class DeleteLinkCommand extends Command {
 
-    public static final String COMMAND_WORD = "link";
+    public static final String COMMAND_WORD = "deletelink";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links a caregiver and a patient by their NRICs.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Deletes the link identified by the NRIC number of the patient and the caregiver.\n"
             + "Parameters: "
             + PREFIX_PATIENT + "PATIENT_NRIC "
             + PREFIX_CAREGIVER + "CAREGIVER_NRIC\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_PATIENT + "S8484131E "
-            + PREFIX_CAREGIVER + "S7654321B";
+            + PREFIX_PATIENT + "S1234567A "
+            + PREFIX_CAREGIVER + "S1234567B";
 
-    public static final String MESSAGE_SUCCESS = "Linked %1$s and %2$s";
+    public static final String MESSAGE_DELETE_LINK_SUCCESS = "Deleted Link between %1$s and %2$s";
 
-    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in the address book";
+    public static final String MESSAGE_NO_LINK = "This link does not exist in CareLink";
 
     public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
 
@@ -35,9 +36,11 @@ public class LinkCommand extends Command {
     private final Nric caregiverNric;
 
     /**
-     * Creates a LinkCommand to link the specified {@code Patient} and {@code Caregiver}
+     * @param patientNric The Nric of the patient
+     * @param caregiverNric The Nric of the caregiver
      */
-    public LinkCommand(Nric patientNric, Nric caregiverNric) {
+
+    public DeleteLinkCommand(Nric patientNric, Nric caregiverNric) {
         this.patientNric = patientNric;
         this.caregiverNric = caregiverNric;
     }
@@ -51,12 +54,13 @@ public class LinkCommand extends Command {
         requireNonNull(patient, PERSON_NOT_FOUND);
         requireNonNull(caregiver, PERSON_NOT_FOUND);
 
-        if (model.hasLink(patient, caregiver)) {
-            throw new CommandException(MESSAGE_DUPLICATE_LINK);
+        if (!model.hasLink(patient, caregiver)) {
+            throw new CommandException(MESSAGE_NO_LINK);
         }
 
-        model.addLink(patient, caregiver);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(patient), Messages.format(caregiver)));
+        model.deleteLink(patient, caregiver);
+        return new CommandResult(
+                String.format(MESSAGE_DELETE_LINK_SUCCESS, Messages.format(patient), Messages.format(caregiver)));
     }
 
     @Override
@@ -65,11 +69,11 @@ public class LinkCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof LinkCommand)) {
+        if (!(other instanceof DeleteLinkCommand)) {
             return false;
         }
 
-        LinkCommand otherLinkCommand = (LinkCommand) other;
+        DeleteLinkCommand otherLinkCommand = (DeleteLinkCommand) other;
         return patientNric.equals(otherLinkCommand.patientNric)
                 && caregiverNric.equals(otherLinkCommand.caregiverNric);
     }

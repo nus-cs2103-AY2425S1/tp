@@ -10,5 +10,6 @@
     "java.format.comments.enabled": false,
     "[java]": {
         "editor.defaultFormatter": "redhat.java"
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "interactive"
 }
