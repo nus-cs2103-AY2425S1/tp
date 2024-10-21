@@ -48,9 +48,9 @@ Person *--> "*" StudyGroupTag
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Name -[hidden]right-> Gender
+Gender -[hidden]right-> Age
+Age -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Person
 @enduml
