@@ -119,13 +119,14 @@ public class Student {
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
+                && tags.equals(otherStudent.tags)
+                && isPresent == otherStudent.isPresent;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, isPresent);
     }
 
     @Override

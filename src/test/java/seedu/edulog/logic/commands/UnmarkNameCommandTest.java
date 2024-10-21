@@ -64,6 +64,7 @@ public class UnmarkNameCommandTest {
 
         Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
         expectedModel.unmarkStudent(studentToUnmark);
+        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
 
         assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }
