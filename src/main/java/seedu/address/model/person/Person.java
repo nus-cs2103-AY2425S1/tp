@@ -34,7 +34,7 @@ public class Person {
      *                       index 1: buyer == 1; seller == 0;
      *                       index 2: business == 1; personal == 0;
      * */
-    private final int[] tagWeights = new int[3]; // Initializes with {0, 0, 0}
+    private final int[] flagWeights = new int[3]; // Initializes with {0, 0, 0}
 
     /**
      * Every field must be present and not null. Used for new person creation
@@ -163,7 +163,7 @@ public class Person {
     public int getWeight(int... tagIndex) {
         int totalWeight = 0;
         for (int index : tagIndex) {
-            totalWeight += tagWeights[index];
+            totalWeight += flagWeights[index];
         }
         return totalWeight;
     }
