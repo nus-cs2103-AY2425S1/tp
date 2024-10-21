@@ -119,11 +119,10 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        // How to check that emergency contacts is present?
-//        if (emergencyContacts == null) {
-//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-//                    EmergencyContact.class.getSimpleName()));
-//        }
+        if (emergencyContacts == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EmergencyContact.class.getSimpleName()));
+        }
 
         final Set<EmergencyContact> modelEmergencyContacts = new HashSet<>(personEmergencyContacts);
         if (doctor == null) {

@@ -2,17 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_RELATIONSHIP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -39,7 +29,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE,
+                        PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT_TO_EDIT,
+                        PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE,
                         PREFIX_EMERGENCY_CONTACT_RELATIONSHIP, PREFIX_DOC_NAME, PREFIX_DOC_PHONE, PREFIX_DOC_EMAIL,
                         PREFIX_TAG);
 
@@ -52,8 +43,17 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_EMERGENCY_CONTACT_TO_EDIT,
                 PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP,
                 PREFIX_DOC_NAME, PREFIX_DOC_PHONE, PREFIX_DOC_EMAIL);
+
+        if (!isEmergencyContactFieldsValid(args, argMultimap)) {
+            throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID);
+        }
+
+        if (!isEmergencyContactFieldsProvided(args, argMultimap)) {
+            throw new ParseException(EditCommand.MESSAGE_EMERGENCY_CONTACT_NOT_EDITED);
+        }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -68,6 +68,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        }
+        if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent()) {
+            editPersonDescriptor.setNameOfEmergencyContactToEdit(
+                    ParserUtil.parseName(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).get()));
         }
         if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent()) {
             editPersonDescriptor.setEmergencyContactName(
@@ -100,6 +104,26 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private Boolean isEmergencyContactFieldsProvided(String args, ArgumentMultimap argMultimap) {
+        if (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent() &&
+        !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent() &&
+        !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent() &&
+        !argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).isPresent()) {
+            return false;
+        }
+        return true;
+    }
+
+    private Boolean isEmergencyContactFieldsValid(String args, ArgumentMultimap argMultimap) {
+        if (!argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_TO_EDIT).isPresent() &&
+                (argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_NAME).isPresent() ||
+                argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).isPresent() ||
+                argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).isPresent())) {
+            return false;
+        }
+        return true;
     }
 
     /**

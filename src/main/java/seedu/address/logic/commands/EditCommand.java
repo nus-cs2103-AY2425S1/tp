@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -64,6 +65,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_EMERGENCY_CONTACT_NOT_EDITED = "At least one emergency contact field to edit "
             + "must be provided.";
+    public static final String MESSAGE_EMERGENCY_CONTACT_FIELDS_INVALID= "At least one emergency contact name to edit "
+            + "must be provided.";
+    public static final String MESSAGE_EMERGENCY_CONTACT_NOT_FOUND= "Emergency contact name not found. "
+            + "Please provide an exact name match.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -92,8 +97,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<EmergencyContact> updatedEmergencyContacts;
-        EmergencyContact updatedEmergencyContact = null;
         if (!editPersonDescriptor.getNameOfEmergencyContactToEdit().isEmpty()) {
+            EmergencyContact updatedEmergencyContact = null;
             try {
                 updatedEmergencyContact = personToEdit.getAndRemoveEmergencyContact(
                         editPersonDescriptor.getNameOfEmergencyContactToEdit()
@@ -102,9 +107,16 @@ public class EditCommand extends Command {
                 throw new EmergencyContactNotFoundException();
             }
             updatedEmergencyContact = createEditedEmergencyContact(updatedEmergencyContact, editPersonDescriptor);
-            personToEdit.getEmergencyContacts().add(updatedEmergencyContact);
+            List<EmergencyContact> updatedPersonEmergencyContacts = new ArrayList<>();
+            Set<EmergencyContact> personEmergencyContacts = personToEdit.getEmergencyContacts();
+            for (EmergencyContact emergencyContact : personEmergencyContacts) {
+                updatedPersonEmergencyContacts.add(emergencyContact);
+            }
+            updatedPersonEmergencyContacts.add(updatedEmergencyContact);
+            updatedEmergencyContacts = new HashSet<>(updatedPersonEmergencyContacts);
+        } else {
+            updatedEmergencyContacts = personToEdit.getEmergencyContacts();
         }
-        updatedEmergencyContacts = personToEdit.getEmergencyContacts();
         Doctor updatedDoctor = createEditedDoctor(personToEdit.getDoctor(), editPersonDescriptor);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -148,7 +160,12 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = null;
+        try {
+            editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        } catch (EmergencyContactNotFoundException e) {
+            throw new CommandException(MESSAGE_EMERGENCY_CONTACT_NOT_FOUND);
+        }
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
