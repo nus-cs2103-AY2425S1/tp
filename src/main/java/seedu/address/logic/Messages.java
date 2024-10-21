@@ -1,11 +1,15 @@
 package seedu.address.logic;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Reminder;
+import seedu.address.model.person.Schedule;
 
 /**
  * Container for user visible messages.
@@ -50,6 +54,52 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
+        return builder.toString();
+    }
+
+    public static String formatReminder(Person person, String reminder) {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append(person.getName())
+                .append(": ")
+                .append(reminder)
+                .append(" before appointment on ")
+                .append(formatAppointment(person));
+
+        return builder.toString();
+    }
+    
+    public static String formatAppointment(Person person) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+
+        String formmattedSchedules = person.getSchedules().stream()
+                .map(schedule -> {
+                    LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
+                    String formattedDate = dateTime.format(outputFormatter);
+                    return String.format("%s \n", formattedDate);
+                })
+                .collect(Collectors.joining(""));
+        return formmattedSchedules;
+    }
+
+    public static String formatAppointment(Schedule schedule) {
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
+
+        LocalDateTime dateTime = LocalDateTime.parse(schedule.getDateTime(), inputFormatter);
+        String formattedDate = dateTime.format(outputFormatter);
+
+        return formattedDate;
+    }
+
+    public static String formatSchedule(Person person, Schedule schedule) {
+        final StringBuilder builder = new StringBuilder();
+
+        builder.append(person.getName())
+                .append(": ")
+                .append(formatAppointment(schedule));
+
         return builder.toString();
     }
 
