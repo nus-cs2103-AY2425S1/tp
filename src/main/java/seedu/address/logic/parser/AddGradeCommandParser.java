@@ -28,6 +28,7 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
      */
     public AddGradeCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCORE, PREFIX_WEIGHTAGE);
 
         if (!arePrefixesPresent(argMultiMap, PREFIX_NAME, PREFIX_SCORE, PREFIX_WEIGHTAGE) || argMultiMap.getPreamble()
