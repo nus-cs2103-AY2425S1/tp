@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
@@ -31,7 +31,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final String payment;
-    private final String attendance;
+    private final List<Participation> participationList;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -40,14 +40,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("payment") String payment, @JsonProperty("attendance") String attendance,
+                             @JsonProperty("payment") String payment,
+                             List<Participation> participationList,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.payment = payment;
-        this.attendance = attendance;
+        this.participationList = participationList;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -62,7 +63,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         payment = source.getPayment().hasPaid.toString();
-        attendance = source.getAttendance().isPresent.toString();
+        participationList = new ArrayList<Participation>();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -119,17 +120,14 @@ class JsonAdaptedPerson {
         }
         final Payment modelPayment = new Payment(Boolean.parseBoolean(payment));
 
-        if (attendance == null) {
+        if (participationList == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Attendance.class.getSimpleName()));
+                    Participation.class.getSimpleName()));
         }
-        if (!Attendance.isValidAttendance(attendance)) {
-            throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
-        }
-        final Attendance modelAttendance = new Attendance(Boolean.parseBoolean(attendance));
+        final List<Participation> modelParticipationList = new ArrayList<Participation>();
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPayment, modelAttendance, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPayment, modelParticipationList, modelTags);
     }
 
 }
