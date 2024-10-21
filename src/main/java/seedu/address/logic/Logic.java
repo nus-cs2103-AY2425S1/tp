@@ -45,7 +45,6 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of clients (containing both buyers and sellers)
      */
     ObservableList<Client> getFilteredClientList();
-
     /**
      * Returns an unmodifiable view of the filtered list of properties
      */

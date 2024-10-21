@@ -20,7 +20,7 @@ import seedu.address.model.property.Unit;
 
 /**
  * Adds a {@code Property} to the address book.
- * Extends {@link AddPropertyCommand} and uses its functionality to add a specific type of property: {@code Property}.
+ * Extends {@link Command} and uses its functionality to add a specific type of property: {@code Property}.
  */
 public class AddPropertyCommand extends Command {
     public static final String COMMAND_WORD = "addproperty";

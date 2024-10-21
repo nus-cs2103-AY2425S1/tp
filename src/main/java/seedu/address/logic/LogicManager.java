@@ -59,6 +59,7 @@ public class LogicManager implements Logic {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveClientBook(model.getClientBook());
             storage.savePropertyBook(model.getPropertyBook());
+            storage.saveMeetingBook(model.getMeetingBook());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -82,8 +83,6 @@ public class LogicManager implements Logic {
     public ObservableList<Client> getFilteredClientList() {
         return model.getFilteredClientList();
     }
-
-
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
         return model.getFilteredPropertyList();
@@ -93,7 +92,6 @@ public class LogicManager implements Logic {
         return model.getFilteredMeetingList();
     }
 
-    @Override
     public ObjectProperty<DisplayMode> getDisplayMode() {
         return model.getDisplayMode();
     }

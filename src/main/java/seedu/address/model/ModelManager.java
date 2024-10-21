@@ -151,6 +151,17 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(clientBookFilePath);
     }
 
+    @Override
+    public Path getMeetingBookFilePath() {
+        return userPrefs.getMeetingBookFilePath();
+    }
+
+    @Override
+    public void setMeetingBookFilePath(Path meetingBookFilePath) {
+        requireNonNull(meetingBookFilePath);
+        userPrefs.setAddressBookFilePath(meetingBookFilePath);
+    }
+
     //=========== AddressBook ================================================================================
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -327,7 +338,10 @@ public class ModelManager implements Model {
     }
 
     //=========== MeetingBook ================================================================================
-
+    @Override
+    public void setMeetingBook(ReadOnlyMeetingBook meetingBook) {
+        this.meetingBook.resetData(meetingBook);
+    }
     @Override
     public ReadOnlyMeetingBook getMeetingBook() {
         return meetingBook;
@@ -344,6 +358,17 @@ public class ModelManager implements Model {
         }
     }
 
+    @Override
+    public boolean hasMeeting(Meeting meeting) {
+        requireNonNull(meeting);
+        return meetingBook.hasMeeting(meeting);
+    }
+
+    @Override
+    public void addMeeting(Meeting meeting) {
+        meetingBook.addMeeting(meeting);
+        updateFilteredMeetingList(PREDICATE_SHOW_ALL_MEETINGS);
+    }
     //=========== Filtered Meeting List Accessors =============================================================
 
     /**
