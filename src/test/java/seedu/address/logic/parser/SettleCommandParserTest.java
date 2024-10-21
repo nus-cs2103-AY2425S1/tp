@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_AMOUNT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_AMOUNT_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.SettleCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 public class SettleCommandParserTest {
 
@@ -69,21 +68,5 @@ public class SettleCommandParserTest {
         String userInput = INDEX_FIRST_STUDENT.getOneBased() + VALID_AMOUNT_DESC + INVALID_AMOUNT_DESC;
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_AMOUNT));
-    }
-
-    // Helper methods for assertions
-
-    private void assertParseFailure(SettleCommandParser parser, String userInput, String expectedMessage) {
-        ParseException thrown = assertThrows(ParseException.class, () -> parser.parse(userInput));
-        assertEquals(expectedMessage, thrown.getMessage());
-    }
-
-    private void assertParseSuccess(SettleCommandParser parser, String userInput, SettleCommand expectedCommand) {
-        try {
-            SettleCommand actualCommand = parser.parse(userInput);
-            assertEquals(expectedCommand, actualCommand);
-        } catch (ParseException e) {
-            throw new AssertionError("Parsing should not fail: " + e.getMessage());
-        }
     }
 }
