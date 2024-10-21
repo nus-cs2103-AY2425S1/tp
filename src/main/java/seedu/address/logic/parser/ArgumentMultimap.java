@@ -90,8 +90,9 @@ public class ArgumentMultimap {
      * @return {@code True} if the prefix is present with exactly one non-empty argument;
      *         {@code False} otherwise.
      */
-    public boolean hasValidSingleString(Prefix prefix) {
-        return argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() == 1
+    public boolean hasSingleValidString(Prefix prefix) {
+        return argMultimap.containsKey(prefix)
+                && argMultimap.get(prefix).size() == 1
                 && !argMultimap.get(prefix).get(0).isEmpty();
     }
 }

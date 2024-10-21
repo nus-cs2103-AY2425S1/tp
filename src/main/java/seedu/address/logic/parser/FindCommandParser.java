@@ -43,19 +43,19 @@ public class FindCommandParser implements Parser<FindCommand> {
         FieldContainsKeywordsPredicate predicate = null;
         String[] keywords;
 
-        if (argMultimap.hasValidSingleString(PREFIX_NAME)) {
+        if (argMultimap.hasSingleValidString(PREFIX_NAME)) {
             keywords = argMultimap.getValue(PREFIX_NAME).get().split("\\s+");
             predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "name");
-        } else if (argMultimap.hasValidSingleString(PREFIX_ID)) {
+        } else if (argMultimap.hasSingleValidString(PREFIX_ID)) {
             keywords = argMultimap.getValue(PREFIX_ID).get().split("\\s+");
             predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "id");
-        } else if (argMultimap.hasValidSingleString(PREFIX_WARD)) {
+        } else if (argMultimap.hasSingleValidString(PREFIX_WARD)) {
             keywords = argMultimap.getValue(PREFIX_WARD).get().split("\\s+");
             predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "ward");
-        } else if (argMultimap.hasValidSingleString(PREFIX_DIAGNOSIS)) {
+        } else if (argMultimap.hasSingleValidString(PREFIX_DIAGNOSIS)) {
             keywords = argMultimap.getValue(PREFIX_DIAGNOSIS).get().split("\\s+");
             predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "diagnosis");
-        } else if (argMultimap.hasValidSingleString(PREFIX_MEDICATION)) {
+        } else if (argMultimap.hasSingleValidString(PREFIX_MEDICATION)) {
             keywords = argMultimap.getValue(PREFIX_MEDICATION).get().split("\\s+");
             predicate = new FieldContainsKeywordsPredicate(Arrays.asList(keywords), "medication");
         } else {
