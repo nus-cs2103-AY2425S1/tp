@@ -22,6 +22,13 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_FILETYPE = "This file type is not supported.";
+
+    /* Enum of supported file types to export */
+    enum FileType {
+        CSV,
+        VCF
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -137,5 +144,23 @@ public class ParserUtil {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
         return new Note(trimmedNote);
+    }
+
+    /**
+     * Parses a {@code String fileType} into a {@code FileType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code note} is invalid.
+     */
+    public static String parseFileType(String fileType) throws ParseException {
+        requireNonNull(fileType);
+        String trimmedFileType = fileType.trim().toUpperCase();
+
+        for (FileType type : FileType.values()) {
+            if (type.name().equals(trimmedFileType)) {
+                return type.name();
+            }
+        }
+        throw new ParseException(MESSAGE_INVALID_FILETYPE);
     }
 }
