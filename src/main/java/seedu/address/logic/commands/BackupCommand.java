@@ -3,17 +3,17 @@ package seedu.address.logic.commands;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.storage.JsonAddressBookStorage;
 
 import java.io.IOException;
-import java.nio.file.CopyOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 import static java.nio.file.Files.copy;
 
-
+/**
+ * Creates a backup of current storage file.
+ */
 public class BackupCommand extends Command {
 
     public static final String COMMAND_WORD = "backup";
@@ -22,14 +22,18 @@ public class BackupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Path backupPath = Paths.get("backup", "addressbook.json");
+        Path backupPath = model.getBackupAddressBookFilePath();
         Path originalPath = model.getAddressBookFilePath();
+        backup(originalPath, backupPath);
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    private void backup(Path originalPath, Path backupPath) throws CommandException {
         try {
             FileUtil.createIfMissing(backupPath);
             copy(originalPath, backupPath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             throw new CommandException(e.getMessage());
         }
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
