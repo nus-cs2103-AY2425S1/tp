@@ -1,0 +1,110 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":BatchDeleteCommandParser" as BatchDeleteCommandParser LOGIC_COLOR
+participant "d:BatchDeleteCommand" as BatchDeleteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "p:PersonContainsTagsPredicate" as PersonContainsTagsPredicate LOGIC_COLOR
+participant ":ParseUtil" as ParseUtil LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("batch-delete t\class4")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("batch-delete t\class4")
+activate AddressBookParser
+
+create BatchDeleteCommandParser
+AddressBookParser -> BatchDeleteCommandParser
+activate BatchDeleteCommandParser
+
+BatchDeleteCommandParser --> AddressBookParser
+deactivate BatchDeleteCommandParser
+
+AddressBookParser -> BatchDeleteCommandParser : parse("t/class4")
+activate BatchDeleteCommandParser
+
+BatchDeleteCommandParser -> ParseUtil : parseTags("t/class4")
+activate ParseUtil
+
+ParseUtil --> BatchDeleteCommandParser : tagList
+deactivate ParseUtil
+
+create PersonContainsTagsPredicate
+BatchDeleteCommandParser -> PersonContainsTagsPredicate : PersonContainsTagsPredicate(tagList)
+activate PersonContainsTagsPredicate
+
+PersonContainsTagsPredicate --> BatchDeleteCommandParser
+deactivate PersonContainsTagsPredicate
+
+create BatchDeleteCommand
+BatchDeleteCommandParser -> BatchDeleteCommand : BatchDeleteCommand(tagList, p)
+activate BatchDeleteCommand
+
+BatchDeleteCommand --> BatchDeleteCommandParser :
+deactivate BatchDeleteCommand
+
+BatchDeleteCommandParser --> AddressBookParser : d
+deactivate BatchDeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+BatchDeleteCommandParser -[hidden]-> AddressBookParser
+destroy BatchDeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> BatchDeleteCommand : execute(m)
+activate BatchDeleteCommand
+
+BatchDeleteCommand -> Model : updateFilteredList(m.PREDICATE_SHOW_ALL_PERSONS)
+activate Model
+
+Model --> BatchDeleteCommand
+deactivate Model
+
+BatchDeleteCommand -> Model : updateFilteredList(p)
+activate Model
+
+Model --> BatchDeleteCommand
+deactivate Model
+
+BatchDeleteCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> BatchDeleteCommand : personList
+deactivate Model
+
+
+loop size of personList
+    BatchDeleteCommand -> Model : deletePerson()
+    activate Model
+
+    Model -[hidden]-> BatchDeleteCommand
+    Model -[hidden]-> BatchDeleteCommand
+    Model --> BatchDeleteCommand
+    deactivate Model
+    BatchDeleteCommand -[hidden]-> Model
+end
+
+
+create CommandResult
+BatchDeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> BatchDeleteCommand
+deactivate CommandResult
+
+BatchDeleteCommand --> LogicManager : r
+deactivate BatchDeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -53,7 +53,6 @@ public class BatchDeleteCommand extends Command {
         model.updateFilteredPersonList(predicate);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-
         StringBuilder feedbackToUser = new StringBuilder();
 
         Person personToDelete;
