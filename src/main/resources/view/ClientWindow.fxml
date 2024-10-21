@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<fx:root resizable="false" title="ClientInfo" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/help_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@HelpWindow.css" />
+            </stylesheets>
+            <VBox>
+                <children>
+                    <Label fx:id="clientName" text="Label">
+                        <VBox.margin>
+                            <Insets right="5.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="clientPhone" text="Label">
+                        <VBox.margin>
+                            <Insets right="5.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="clientEmail" text="Label">
+                        <VBox.margin>
+                            <Insets right="5.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="clientAddress" text="Label">
+                        <VBox.margin>
+                            <Insets right="5.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="clientCondition" text="Label">
+                        <VBox.margin>
+                            <Insets right="5.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label fx:id="clientSchedule" text="Label">
+                        <VBox.margin>
+                            <Insets right="5.0" />
+                        </VBox.margin>
+                    </Label>
+                </children>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>
