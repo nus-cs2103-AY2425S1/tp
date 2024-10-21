@@ -13,6 +13,10 @@
     -ab3-button-text-fill: #d8d8d8;
     -ab3-button-hover: #3a3a3a;
     -ab3-command-type-label: #f70d1a;
+    -ab3-menubar-text: #584747;
+    -ab3-darkerText: #333333;
+    -ab3-background-3: #F0E7E6;
+    -ab3-background-4: #FAFAF5;
 }
 
 .background {
@@ -107,7 +111,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #D2C0BD;
+    -fx-background-color: -ab3-background-2;
 }
 
 .list-cell:empty {
@@ -116,8 +120,8 @@
 }
 
 .list-cell {
-    -fx-background-color: #FAFAF5; /* Keeps the background color white */
-    -fx-border-color: #D2C0BD; /* Light color for the border */
+    -fx-background-color: -ab3-background-4; /* Keeps the background color white */
+    -fx-border-color: -ab3-background-2; /* Light color for the border */
     -fx-border-width: 0 0 4px 0; /* Adds a thin line only at the bottom */
     -fx-label-padding: 10 10 10 10; /* Adds some padding for better spacing */
 }
@@ -125,11 +129,11 @@
 
 
 .list-cell:filled:even {
-    -fx-background-color: #FAFAF5;
+    -fx-background-color: -ab3-background-4;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #FAFAF5;
+    -fx-background-color: -ab3-background-4;
 }
 
 .list-cell:filled:selected {
@@ -172,14 +176,14 @@
 }
 
 .result-display {
-    -fx-background-color: #F0E7E6;
+    -fx-background-color: -ab3-background-3;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #333333; /* Darker text for better visibility */
+    -fx-text-fill: -ab3-darkerText; /* Darker text for better visibility */
 }
 
 .result-display .label {
-    -fx-text-fill: #333333 !important; /* Change to a darker shade for better visibility */
+    -fx-text-fill: -ab3-darkerText !important; /* Change to a darker shade for better visibility */
     -fx-opacity: 1; /* Ensure full opacity */
 }
 
@@ -225,7 +229,7 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #584747;
+    -fx-text-fill: menubar-text;
     -fx-opacity: 0.9;
 }
 
@@ -344,14 +348,14 @@
 }
 
 #commandTextField {
-    -fx-background-color: #FAFAF5;
+    -fx-background-color: -ab3-background-4;
     -fx-background-insets: 0;
     -fx-border-color: -ab3-background -ab3-background -ab3-white -ab3-background;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #333333; /* Change to a darker shade for better visibility */
+    -fx-text-fill: -ab3-darkerText; /* Change to a darker shade for better visibility */
 }
 
 #filterField, #personListPanel, #personWebpage {
