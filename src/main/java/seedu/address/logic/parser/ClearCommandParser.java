@@ -14,8 +14,11 @@ import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new ClearCommand object
+ */
 public class ClearCommandParser implements Parser<ClearCommand> {
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("^\\S+$");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandField>\\S+)");
     private static final Logger logger = LogsCenter.getLogger(ClearCommandParser.class);
 
     /**
