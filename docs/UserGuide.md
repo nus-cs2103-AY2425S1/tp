@@ -8,7 +8,6 @@
 
 InternBuddy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI[^1]) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InternBuddy can get your contact management tasks done faster than traditional GUI apps.
 
-[^1]: CLI refers to a **Command Line Interface**, a text-based interface that allows users to input commands directly. See [Glossary](#glossary).
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -239,7 +238,7 @@ _Details coming soon ..._
 
 
 ## Glossary
-- **CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
+- [^1]: **CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
 - **GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
 - **Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app. 
 - **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
