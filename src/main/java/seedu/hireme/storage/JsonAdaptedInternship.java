@@ -14,6 +14,7 @@ import seedu.hireme.model.internshipapplication.Email;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.Name;
 import seedu.hireme.model.internshipapplication.Role;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Jackson-friendly version of {@link InternshipApplication}.
@@ -27,18 +28,22 @@ class JsonAdaptedInternship {
     private final String role;
     private final String dateString;
 
+    private final String statusString;
+
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given internship application details.
      */
     @JsonCreator
     public JsonAdaptedInternship(@JsonProperty("companyName") String companyName,
                                  @JsonProperty("companyEmail") String companyEmail,
-            @JsonProperty("role") String role, @JsonProperty("date") String date) {
+                                 @JsonProperty("role") String role,
+                                 @JsonProperty("date") String date,
+                                 @JsonProperty("status") String status) {
         this.companyName = companyName;
         this.companyEmail = companyEmail;
         this.role = role;
-        //  this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
         this.dateString = date;
+        this.statusString = status;
     }
 
     /**
@@ -49,6 +54,7 @@ class JsonAdaptedInternship {
         companyEmail = source.getCompany().getEmail().getValue();
         role = source.getRole().getValue();
         dateString = source.getDateOfApplication().getValue().format(DateValidator.FORMATTER);
+        statusString = source.getStatus().getValue();
     }
 
     /**
@@ -95,8 +101,12 @@ class JsonAdaptedInternship {
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.dateString);
+        assert(statusString.equals("PENDING")
+               || statusString.equals("ACCEPTED")
+               || statusString.equals("REJECTED"));
+        Status status = Status.valueOf(statusString);
 
-        return new InternshipApplication(company, date, role);
+        return new InternshipApplication(company, date, role, status);
     }
 
 }

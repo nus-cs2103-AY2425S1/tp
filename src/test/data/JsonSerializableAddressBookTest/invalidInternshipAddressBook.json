@@ -3,6 +3,7 @@
     "companyName" : "Company 1%",
     "companyEmail" : "company1@mail.com",
     "role" : "role 1",
-    "date" : "01/01/24"
+    "date" : "01/01/24",
+    "status" : "PENDING"
   } ]
 }

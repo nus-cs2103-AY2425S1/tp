@@ -6,6 +6,7 @@ import seedu.hireme.model.internshipapplication.Email;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.Name;
 import seedu.hireme.model.internshipapplication.Role;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * A utility class to help with building InternshipApplication objects.
@@ -16,10 +17,12 @@ public class InternshipApplicationBuilder {
     public static final String DEFAULT_EMAIL = "google@gmail.com";
     public static final String DEFAULT_DATE = "01/01/24";
     public static final String DEFAULT_ROLE = "SWE";
+    public static final String DEFAULT_STATUS = "PENDING";
 
     private Company company;
     private Date date;
     private Role role;
+    private Status status;
 
     /**
      * Creates a {@code InternshipApplicationBuilder} with the default details.
@@ -30,6 +33,7 @@ public class InternshipApplicationBuilder {
         company = new Company(email, name);
         date = new Date(DEFAULT_DATE);
         role = new Role(DEFAULT_ROLE);
+        status = Status.valueOf(DEFAULT_STATUS);
     }
 
     /**
