@@ -22,14 +22,15 @@ public class Delivery {
     private final Time time;
     private final Eta eta;
     private Status status;
+    private Archive archive;
 
     /**
      * Every field must be present and not null.
      */
     public Delivery(DeliveryId deliveryId, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta,
-                    Status status) {
-        requireAllNonNull(deliveryId, itemName, address, cost, date, time, eta, status);
-        this.deliveryId = deliveryId;
+                    Status status, Archive archive) {
+        requireAllNonNull(itemName, address, cost, date, time, eta, status);
+            this.deliveryId = deliveryId;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;
@@ -37,14 +38,15 @@ public class Delivery {
         this.time = time;
         this.eta = eta;
         this.status = status;
+        this.archive = archive;
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(ItemName itemName, Address address, Cost cost, Eta eta, Status status) {
+    public Delivery(ItemName itemName, Address address, Cost cost, Eta eta, Status status, Archive archive) {
         this(new DeliveryId(), itemName, address, cost, new Date(LocalDate.now().toString()),
-                new Time(LocalTime.now().toString()), eta, status);
+                new Time(LocalTime.now().toString()), eta, status, archive);
     }
 
     public ItemName getItemName() {
@@ -77,6 +79,10 @@ public class Delivery {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Archive getArchive() {
+        return archive;
     }
 
     /**
