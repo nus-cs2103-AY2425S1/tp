@@ -5,7 +5,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.PayCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
@@ -24,7 +23,7 @@ public class PayCommandParser implements Parser<PayCommand> {
      */
     public PayCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        logger.log(Level.INFO, "Parsing PayCommand with arguments: " + args);
+        logger.info("Parsing PayCommand with arguments: " + args);
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_HOUR);
@@ -35,7 +34,7 @@ public class PayCommandParser implements Parser<PayCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            logger.log(Level.WARNING, "Failed to parse index. Invalid command format.", pe);
+            logger.warning("Failed to parse index. Invalid command format.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE), pe);
         }
 
@@ -44,11 +43,11 @@ public class PayCommandParser implements Parser<PayCommand> {
         if (argMultimap.getValue(PREFIX_HOUR).isPresent()) {
             hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
         } else {
-            logger.log(Level.WARNING, "Failed to parse hours paid. Invalid parameters.");
+            logger.warning("Failed to parse hours paid. Invalid parameters.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
-        logger.log(Level.INFO, "Successfully parsed PayCommand.");
+        logger.info("Successfully parsed PayCommand.");
         return new PayCommand(index, hour);
     }
 
