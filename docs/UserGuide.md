@@ -193,7 +193,7 @@ Format `fc KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `investment` will match `Investment`
 * Only the `client_type` of the person is searched.
 * Persons whose `client_type` contains a substring that matches the provided `KEYWORD` will be returned.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Person with `client_type` that has a prefix matching the keyword will be returned (i.e. `AND` search).
 
  A **valid** `KEYWORD` should:
   * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
@@ -204,7 +204,7 @@ Format `fc KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
 * `fc Invest` returns every contact that has `client_type` beginning with `Invest`
-* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` OR `Healthcare`
+* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` AND `Healthcare`
 
 Result for `fc Investment Plan`:
   ![result for 'fc Investment Plan`](images/FindClientType.png)
