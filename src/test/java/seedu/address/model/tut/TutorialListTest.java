@@ -28,8 +28,8 @@ public class TutorialListTest {
 
     @Test
     public void constructor_constructTutorialListSuccess() {
-        TutorialClass tutorialClass1 = new TutorialClass("1000");
-        TutorialClass tutorialClass2 = new TutorialClass("2000");
+        TutorialClass tutorialClass1 = TutorialClass.of("1000");
+        TutorialClass tutorialClass2 = TutorialClass.of("2000");
         Tutorial tutorial1 = Tutorial.of(new TutName("Tut"), tutorialClass1);
         Tutorial tutorial2 = Tutorial.of(new TutName("Tut1"), tutorialClass2);
         ArrayList<Tutorial> tutorials = new ArrayList<>();

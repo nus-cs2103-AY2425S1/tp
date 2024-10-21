@@ -7,60 +7,106 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents a Tutorial class ID in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidTutorialClass(String)}
+ * Represents an abstract TutorialClass.
+ * A TutorialClass can either be an existing class with a specific class code or a "None" type.
  */
-public class TutorialClass {
+public abstract class TutorialClass {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tutorial class should be numeric and typically represents a class code.";
+                "Tutorial class should be numeric and typically represents a class code.";
     public static final String VALIDATION_REGEX = "0|[1-9]\\d+"; // Numeric, can be extended to specific format
 
-    public final String value;
-
     /**
-     * Constructs a {@code TutorialClass}.
+     * Checks if the provided string is a valid tutorial class.
      *
-     * @param tutorialClass A valid tutorial class code.
-     */
-    @JsonCreator
-    public TutorialClass(@JsonProperty("tutorialClass") String tutorialClass) {
-        requireNonNull(tutorialClass);
-        checkArgument(isValidTutorialClass(tutorialClass), MESSAGE_CONSTRAINTS);
-        this.value = tutorialClass;
-    }
-
-
-
-
-    /**
-     * Returns true if a given string is a valid tutorial class code.
+     * @param test The string to be checked.
+     * @return True if the string is valid; otherwise false.
      */
     public static boolean isValidTutorialClass(String test) {
         return test.matches(VALIDATION_REGEX); // Simple numeric validation
     }
 
-    @Override
-    public String toString() {
-        return value;
+    private static TutorialClass exist(String value) {
+        return new TutorialClass.Exist(value);
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
+    /**
+     * Returns an instance representing no tutorial class.
+     *
+     * @return A None type of TutorialClass.
+     */
+    public static TutorialClass none() {
+        return None.none();
+    }
+
+    /**
+     * Creates an instance of an existing tutorial class.
+     *
+     * @param value The string value representing the class code.
+     * @return A new TutorialClass object.
+     */
+    public static TutorialClass of(String value) {
+        requireNonNull(value);
+        if (value.equals("-1")) {
+            return TutorialClass.none();
+        }
+        return TutorialClass.exist(value);
+    }
+
+    private static final class None extends TutorialClass {
+        private static final None none = new None();
+        private final String value = "-1";
+        public static None none() {
+            return none;
         }
 
-        if (!(other instanceof TutorialClass)) {
+        @Override
+        public String toString() {
+            return value;
+        }
+
+    }
+
+    private static final class Exist extends TutorialClass {
+        private final String value;
+
+        @JsonCreator
+        public Exist(@JsonProperty("tutorialClass") String tutorialClass) {
+            requireNonNull(tutorialClass);
+            checkArgument(isValidTutorialClass(tutorialClass));
+            this.value = tutorialClass;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (other == this) {
+                return true;
+            }
+
+            if (other instanceof Exist) {
+                Exist exist = (Exist) other;
+
+                if (this.value == exist.value) {
+                    return true;
+                }
+
+                if (this.value == null || exist.value == null) {
+                    return false;
+                }
+                return value.equals(exist.value);
+            }
+
             return false;
         }
 
-        TutorialClass otherClass = (TutorialClass) other;
-        return value.equals(otherClass.value);
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
+        @Override
+        public int hashCode() {
+            return value.hashCode();
+        }
     }
 }

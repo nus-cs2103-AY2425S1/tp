@@ -49,7 +49,7 @@ public class JsonAdaptedTutorial {
 
     public JsonAdaptedTutorial(Tutorial source) {
         this.tutName = source.getTutName().tutName;
-        this.tutorialClass = source.getTutorialClass().value;
+        this.tutorialClass = source.getTutorialClass().toString();
         this.students.addAll(source.getStudents().stream()
                 .map(JsonAdaptedStudent::new)
                 .toList());
@@ -76,7 +76,7 @@ public class JsonAdaptedTutorial {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "tutorialClass"));
         }
 
-        final TutorialClass modelTutorialClass = new TutorialClass(tutorialClass);
+        final TutorialClass modelTutorialClass = TutorialClass.of(tutorialClass);
         final TutName modelTutName = new TutName(tutName);
         final List<Student> modelStudents = new ArrayList<>();
         for (JsonAdaptedStudent student : students) {

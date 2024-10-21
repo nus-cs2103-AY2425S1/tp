@@ -85,7 +85,7 @@ public class EditStudentDescriptorBuilder {
      * Sets the {@code TutorialClass} of the {@code EditStudentDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withTutorialClass(String tutorialClass) {
-        descriptor.setTutorialClass(new TutorialClass(tutorialClass));
+        descriptor.setTutorialClass(TutorialClass.of(tutorialClass));
         return this;
     }
 

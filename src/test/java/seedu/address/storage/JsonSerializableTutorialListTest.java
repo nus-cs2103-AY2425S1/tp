@@ -15,7 +15,7 @@ import seedu.address.model.tut.TutorialList;
 public class JsonSerializableTutorialListTest {
 
     private static final String VALID_NAME = "CS1010";
-    private static final TutorialClass VALID_TUTORIAL_CLASS = new TutorialClass("1001");
+    private static final TutorialClass VALID_TUTORIAL_CLASS = TutorialClass.of("1001");
 
     @Test
     public void constructor_fromTutorialList_success() {

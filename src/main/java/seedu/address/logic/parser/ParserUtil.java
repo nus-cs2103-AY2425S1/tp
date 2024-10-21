@@ -99,7 +99,7 @@ public class ParserUtil {
         if (!TutorialClass.isValidTutorialClass(trimmedTutorialClass)) {
             throw new ParseException(TutorialClass.MESSAGE_CONSTRAINTS);
         }
-        return new TutorialClass(trimmedTutorialClass);
+        return TutorialClass.of(trimmedTutorialClass);
     }
 
     /**
@@ -113,7 +113,7 @@ public class ParserUtil {
         requireNonNull(id);
         String trimmedId = id.trim();
         checkArgument(checkUsingIsDigitMethod(trimmedId), Tutorial.MESSAGE_ID_CONSTRAINTS);
-        return new TutorialClass(trimmedId);
+        return TutorialClass.of(trimmedId);
     }
 
     static boolean checkUsingIsDigitMethod(String input) {
