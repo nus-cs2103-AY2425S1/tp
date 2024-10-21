@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -37,15 +39,15 @@ public class OweCommand extends Command {
     public static final String MESSAGE_MISSING_HOUR = "Number of hours owed must be provided.";
     
     private final Index index;
-    private final String newOwedAmount;
+    private final double hourOwed;
     
     /**
      * @param index of the student in the filtered student list to update owedAmount.
-     * @param newOwedAmount new OwedAmount value.
+     * @param hourOwed number of hours the student owes.
      */
-    public OweCommand(Index index, String newOwedAmount) {
+    public OweCommand(Index index, double hourOwed) {
         this.index = index;
-        this.newOwedAmount = newOwedAmount;
+        this.hourOwed = hourOwed;
     }
     
     @Override
@@ -58,7 +60,7 @@ public class OweCommand extends Command {
         }
         
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createUpdatedOwedAmountStudent(studentToEdit, newOwedAmount);
+        Student editedStudent = createEditedStudent(studentToEdit, hourOwed);
         
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
@@ -70,7 +72,7 @@ public class OweCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * updated with {@code newOwedAmount}
      */
-    private static Student createUpdatedOwedAmountStudent(Student studentToEdit, String newOwedAmount) {
+    private static Student createEditedStudent(Student studentToEdit, double hour) {
         assert studentToEdit != null;
         
         Name updatedName = studentToEdit.getName();
@@ -81,12 +83,27 @@ public class OweCommand extends Command {
         Subject updatedSubject = studentToEdit.getSubject();
         Rate updatedRate = studentToEdit.getRate();
         PaidAmount updatedPaidAmount = studentToEdit.getPaidAmount();
-        OwedAmount updatedOwedAmount = studentToEdit.getOwedAmount().addOwedAmount(newOwedAmount);
+        OwedAmount updatedOwedAmount = updateOwedAmount(studentToEdit, hour);
         
         return new Student(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
                 updatedPaidAmount, updatedOwedAmount
         );
+    }
+    
+    /**
+     * Updates the owed amount of the student based on the hours the student owed.
+     */
+    private static OwedAmount updateOwedAmount(Student student, double hour) {
+        double updatedOwedAmount = calculateOwedAmount(student, hour);
+        return new OwedAmount(Double.toString(updatedOwedAmount));
+    }
+    
+    private static double calculateOwedAmount(Student student, double hour) {
+        double owedAmount = student.getRate().value * hour;
+        return BigDecimal.valueOf(owedAmount)
+                .setScale(2, RoundingMode.HALF_UP)
+                .doubleValue();
     }
     
     @Override
@@ -102,15 +119,15 @@ public class OweCommand extends Command {
         
         OweCommand otherOweCommand = (OweCommand) other;
         return index.equals(otherOweCommand.index)
-                && newOwedAmount.equals(otherOweCommand.newOwedAmount);
+                && hourOwed == hourOwed;
     }
     
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("newOwedAmount",
-                        newOwedAmount)
+                .add("hourOwed",
+                        hourOwed)
                 .toString();
     }
 }

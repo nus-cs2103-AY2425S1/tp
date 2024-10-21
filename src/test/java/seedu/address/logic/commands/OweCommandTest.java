@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -31,7 +33,7 @@ public class OweCommandTest {
     @Test
     public void execute_unfilteredList_success() {
         Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_AMY);
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_AMY);
         Student updatedOwedAmountStudent = new StudentBuilder(chosenStudent).withOwedAmount(Double.toString(chosenStudent.getOwedAmount().addOwedAmount(VALID_OWED_AMOUNT_AMY).value)).build();
         
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS,
@@ -49,7 +51,7 @@ public class OweCommandTest {
         
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         Student updatedOwedAmountStudent = new StudentBuilder(studentInFilteredList).withOwedAmount(studentInFilteredList.getOwedAmount().addOwedAmount(VALID_OWED_AMOUNT_BOB).toString()).build();
-        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_BOB);
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_BOB);
         
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, Messages.format(updatedOwedAmountStudent));
         
@@ -61,23 +63,23 @@ public class OweCommandTest {
     
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        OweCommand oweCommand = new OweCommand(INDEX_OUT_OF_BOUNDS, VALID_OWED_AMOUNT_BOB);
+        OweCommand oweCommand = new OweCommand(INDEX_OUT_OF_BOUNDS, VALID_HOUR_BOB);
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     
     @Test
     public void execute_invalidIndexFilteredList_failure() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
-        OweCommand oweCommand = new OweCommand(Index.fromOneBased(2), VALID_OWED_AMOUNT_BOB);
+        OweCommand oweCommand = new OweCommand(Index.fromOneBased(2), VALID_HOUR_BOB);
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     
     @Test
     public void equals() {
-        final OweCommand standardCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_BOB);
+        final OweCommand standardCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_BOB);
         
         // same values -> returns true
-        OweCommand commandWithSameValues = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_BOB);
+        OweCommand commandWithSameValues = new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_BOB);
         assertTrue(standardCommand.equals(commandWithSameValues));
         
         // same object -> returns true
@@ -87,18 +89,17 @@ public class OweCommandTest {
         assertFalse(standardCommand.equals(null));
         
         // different index -> returns false
-        assertFalse(standardCommand.equals(new OweCommand(INDEX_SECOND_STUDENT, VALID_OWED_AMOUNT_BOB)));
+        assertFalse(standardCommand.equals(new OweCommand(INDEX_SECOND_STUDENT, VALID_HOUR_BOB)));
         
         // different owedAmount -> returns false
-        assertFalse(standardCommand.equals(new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_AMY)));
+        assertFalse(standardCommand.equals(new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_AMY)));
     }
     
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
-        OwedAmount updatedOwedAmount = new OwedAmount(VALID_OWED_AMOUNT_AMY);
-        OweCommand oweCommand = new OweCommand(index, VALID_OWED_AMOUNT_AMY);
-        String expected = OweCommand.class.getCanonicalName() + "{index=" + index + ", newOwedAmount=" + updatedOwedAmount + "}";
+        OweCommand oweCommand = new OweCommand(index, VALID_HOUR_AMY);
+        String expected = OweCommand.class.getCanonicalName() + "{index=" + index + ", hourOwed=" + VALID_HOUR_AMY + "}";
         assertEquals(expected, oweCommand.toString());
     }
 }
