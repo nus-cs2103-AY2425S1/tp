@@ -70,23 +70,45 @@ public class ExportCommandTest {
 
     @Test
     public void readAndParseJson() throws IOException {
-        String jsonContent = "{\"persons\":"
-                + "[{\"name\":\"Tan Ah Kow\",\"phone\":\"98765432\"},"
-                + "{\"name\":\"Chua Ah Lian\","
-                + "\"address\":\"Blk 30 Lorong 3 Serangoon Gardens, #07-18\","
-                + "\"tags\":[{\"colleagues\" : null},{\"friends\" : null}]}]}";
+        String jsonContent = "{\n"
+                + "  \"persons\" : [ {\n"
+                + "    \"name\" : \"Alex Yeoh\",\n"
+                + "    \"phone\" : \"87438807\",\n"
+                + "    \"email\" : \"alexyeoh@example.com\",\n"
+                + "    \"address\" : \"Blk 30 Geylang Street 29, #06-40\",\n"
+                + "    \"tags\" : [ \"{\\n  \\\"friends\\\" : null\\n}\" ],\n"
+                + "    \"financialInfo\" : \"Annual life insurance premium: $1,200\",\n"
+                + "    \"socialMediaHandle\" : \"alex_yeoh\"\n"
+                + "  }, {\n"
+                + "    \"name\" : \"Bernice Yu\",\n"
+                + "    \"phone\" : \"99272758\",\n"
+                + "    \"email\" : \"berniceyu@example.com\",\n"
+                + "    \"address\" : \"Blk 30 Lorong 3 Serangoon Gardens, #07-18\",\n"
+                + "    \"tags\" : [ \"{\\n  \\\"colleagues\\\" : null\\n}\", \"{\\n  \\\"friends\\\" : null\\n}\" ],\n"
+                + "    \"financialInfo\" : \"Income category: $60,000 - $80,000\",\n"
+                + "    \"socialMediaHandle\" : \"bernice_yu\"\n"
+                + "  }]\n"
+                + "}";
         Path jsonPath = tempDir.resolve("test.json");
         Files.write(jsonPath, jsonContent.getBytes());
         List<Map<String, String>> result = ExportCommand.readAndParseJson(jsonPath.toString());
 
         assertEquals(2, result.size());
-        assertEquals("Tan Ah Kow", result.get(0).get("name"));
-        assertEquals("98765432", result.get(0).get("phone"));
-        assertEquals("Chua Ah Lian", result.get(1).get("name"));
+        assertEquals("Alex Yeoh", result.get(0).get("name"));
+        assertEquals("87438807", result.get(0).get("phone"));
+        assertEquals("alexyeoh@example.com", result.get(0).get("email"));
+        assertEquals("Blk 30 Geylang Street 29, #06-40", result.get(0).get("address"));
+        assertEquals("friends", result.get(0).get("tags"));
+        assertEquals("Annual life insurance premium: $1,200", result.get(0).get("financialInfo"));
+        assertEquals("alex_yeoh", result.get(0).get("socialMediaHandle"));
+
+        assertEquals("Bernice Yu", result.get(1).get("name"));
+        assertEquals("99272758", result.get(1).get("phone"));
+        assertEquals("berniceyu@example.com", result.get(1).get("email"));
         assertEquals("Blk 30 Lorong 3 Serangoon Gardens, #07-18", result.get(1).get("address"));
-        assertEquals(
-                "{\"colleagues\":null}, {\"friends\":null}",
-                    result.get(1).get("tags"));
+        assertEquals("colleagues, friends", result.get(1).get("tags"));
+        assertEquals("Income category: $60,000 - $80,000", result.get(1).get("financialInfo"));
+        assertEquals("bernice_yu", result.get(1).get("socialMediaHandle"));
     }
 
     @Test
@@ -95,7 +117,7 @@ public class ExportCommandTest {
         jsonData.add(new LinkedHashMap<>(Map.of("name", "Siti", "phone", "65432109")));
         jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar",
                 "email", "kumar@kgoomail.com",
-                "tags", "[{\"colleagues\" : null},{\"friends\" : null}]")));
+                "tags", "[ \"{\\n  \\\"colleagues\\\" : null\\n}\", \"{\\n  \\\"friends\\\" : null\\n}\" ]")));
         Set<String> headers = ExportCommand.extractHeaders(jsonData);
 
         assertEquals(4, headers.size());
