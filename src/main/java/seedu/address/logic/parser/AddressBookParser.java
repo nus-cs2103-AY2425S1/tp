@@ -18,7 +18,7 @@ import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.DeleteStudentFromGroupCommand;
 import seedu.address.logic.commands.DeleteTaskFromGroupCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditGroupCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -95,6 +95,9 @@ public class AddressBookParser {
         case DeleteGroupCommand.COMMAND_WORD_ALIAS:
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
+        case EditGroupCommand.COMMAND_WORD_ALIAS:
+        case EditGroupCommand.COMMAND_WORD:
+            return new EditGroupCommandParser().parse(arguments);
 
         // Task
         case ListTaskCommand.COMMAND_WORD_ALIAS:
@@ -113,9 +116,6 @@ public class AddressBookParser {
         case MarkTaskCommand.COMMAND_WORD:
             return new MarkTaskCommandParser().parse(arguments);
         // Others
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
