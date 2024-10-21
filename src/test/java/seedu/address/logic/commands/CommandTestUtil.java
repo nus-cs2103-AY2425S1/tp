@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -40,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_POLICY_TYPE_HEALTH = "health";
     public static final String VALID_POLICY_TYPE_LIFE = "life";
+    public static final String VALID_CLAIM_STATUS_PENDING = "pending";
+    public static final String VALID_CLAIM_DESC = "stomach surgery";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -61,6 +65,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_POLICY_TYPE_DESC = " " + PREFIX_POLICY_TYPE + "live"; // mispelled of "life"
+    public static final String CLAIM_STATUS_PENDING = " " + PREFIX_CLAIM_STATUS + VALID_CLAIM_STATUS_PENDING;
+    public static final String CLAIM_DESC = " " + PREFIX_CLAIM_DESC + VALID_CLAIM_DESC;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
