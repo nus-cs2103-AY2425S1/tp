@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -39,11 +40,11 @@ public abstract class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_STATUS + "STATUS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " person 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
 
     protected final Index targetIndex;
     protected final EditEntityDescriptor editEntityDescriptor;
@@ -70,7 +71,6 @@ public abstract class EditCommand extends Command {
         Object entityToEdit = lastShownList.get(targetIndex.getZeroBased());
         Object editedEntity = createEditedEntity(model, entityToEdit, editEntityDescriptor);
 
-
         if (isSameEntity(model, editedEntity, entityToEdit) && hasEntity(model, editedEntity)) {
             throw new CommandException(getDuplicateMessage());
         }
@@ -79,41 +79,39 @@ public abstract class EditCommand extends Command {
         return new CommandResult(String.format(getSuccessMessage(), formatEntity(editedEntity)));
     }
 
-    /*
+    /**
      * Checks if entity already exists in list
      */
     protected abstract boolean hasEntity(Model model, Object entity) throws CommandException;
 
-    /*
+    /**
      * Checks if entity to edit is the same as edited entity
      */
     protected abstract boolean isSameEntity(Model model, Object editedEntity, Object entityToEdit)
             throws CommandException;
-
 
     /**
      * Gets the filtered list of entities in the model.
      */
     protected abstract List<?> getFilteredList(Model model);
 
-    /*
+    /**
      * Edits Entity
      */
     protected abstract void editEntity(Model model, Object editedEntity, Object entityToEdit) throws CommandException;
 
-    /*
+    /**
      * Adds the entity to the model.
      */
     protected abstract Object createEditedEntity(Model model, Object entityToEdit,
                                                  EditEntityDescriptor editEntityDescriptor) throws CommandException;
 
-
-    /*
+    /**
      * Returns success message to display upon adding entity.
      */
     protected abstract String getSuccessMessage();
 
-    /*
+    /**
      * Returns duplicate message to display upon adding entity.
      */
     protected abstract String getDuplicateMessage();
@@ -135,11 +133,10 @@ public abstract class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCommand otherEditCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
         return targetIndex.equals(otherEditCommand.targetIndex)
                 && editEntityDescriptor.equals(otherEditCommand.editEntityDescriptor);
     }

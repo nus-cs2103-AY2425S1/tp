@@ -47,7 +47,6 @@ public class AppointmentTest {
         assertEquals(new AppointmentType("Followup"), appointment3.getAppointmentType());
     }
 
-
     @Test
     public void getPerson_multipleAppointments_returnsCorrectPersons() {
         assertEquals(person1, appointment1.getPerson());
@@ -55,14 +54,12 @@ public class AppointmentTest {
         assertEquals(person2, appointment3.getPerson());
     }
 
-
     @Test
     public void execute_testGetSickness_success() {
         assertEquals(new Sickness("Cold"), appointment1.getSickness());
         assertEquals(new Sickness("Cold"), appointment2.getSickness());
         assertEquals(new Sickness("Flu"), appointment3.getSickness());
     }
-
 
     @Test
     public void getAppointmentDateTime_multipleAppointments_returnsCorrectDateTime() {
@@ -104,8 +101,8 @@ public class AppointmentTest {
         String appointment1String = "seedu.address.model.appointment.Appointment"
             + "{appointmentId=0,"
             + " person=seedu.address.model.person.Person{personId=0, name=Alice Pauline, phone=94351253,"
-            + " email=alice@example.com, address=123, Jurong West Ave 6, #08-111, tags=[[friends]]},"
-            + " appointmentType=Checkup, appointmentDateTime=2024-01-01T10:00,"
+            + " email=alice@example.com, address=123, Jurong West Ave 6, #08-111, status=Recovered,"
+            + " tags=[[friends]]}," + " appointmentType=Checkup, appointmentDateTime=2024-01-01T10:00,"
             + " medicine=Aspirin, sickness=Cold}";
 
         assertEquals(appointment1String, appointment1.toString());
