@@ -13,13 +13,17 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the edulog book.
+ * Marks a student as absent identified using it's displayed index from the edulog book.
  */
-public class DeleteIndexCommand extends DeleteCommand {
+public class UnmarkIndexCommand extends UnmarkCommand {
+
+    public static final String COMMAND_WORD = "unmark";
+
+    public static final String MESSAGE_UNMARK_STUDENT_SUCCESS = "Unmarked Student: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteIndexCommand(Index targetIndex) {
+    public UnmarkIndexCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -44,11 +48,11 @@ public class DeleteIndexCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteIndexCommand)) {
+        if (!(other instanceof UnmarkCommand)) {
             return false;
         }
 
-        DeleteIndexCommand otherDeleteCommand = (DeleteIndexCommand) other;
+        UnmarkCommand otherDeleteCommand = (UnmarkCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 

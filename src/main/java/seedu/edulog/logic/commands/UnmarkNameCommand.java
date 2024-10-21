@@ -1,9 +1,7 @@
 package seedu.edulog.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import java.util.List;
-
 import seedu.edulog.commons.util.ToStringBuilder;
 import seedu.edulog.logic.Messages;
 import seedu.edulog.logic.commands.exceptions.CommandException;
@@ -12,13 +10,15 @@ import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the edulog book.
+ * Unmarks a student identified using it's displayed index from the edulog book.
  */
-public class DeleteNameCommand extends DeleteCommand {
+public class UnmarkNameCommand extends UnmarkCommand {
+
+    public static final String MESSAGE_UNMARK_STUDENT_SUCCESS = "Deleted Student: %1$s";
 
     private final Name targetName;
 
-    public DeleteNameCommand(Name targetName) {
+    public UnmarkNameCommand(Name targetName) {
         this.targetName = targetName;
     }
 
@@ -51,11 +51,11 @@ public class DeleteNameCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteNameCommand)) {
+        if (!(other instanceof UnmarkNameCommand)) {
             return false;
         }
 
-        DeleteNameCommand otherDeleteCommand = (DeleteNameCommand) other;
+        UnmarkNameCommand otherDeleteCommand = (UnmarkNameCommand) other;
         return targetName.equals(otherDeleteCommand.targetName);
     }
 
