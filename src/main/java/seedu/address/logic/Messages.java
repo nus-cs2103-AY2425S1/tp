@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d people listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_TELEGRAM = "Cannot find person with telegram handle: %1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

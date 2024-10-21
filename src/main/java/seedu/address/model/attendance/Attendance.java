@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents an Attendance session for a contact in the address book.
  * Guarantees: immutable; session is valid as declared in {@link #isValidDate(String)}

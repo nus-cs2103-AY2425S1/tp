@@ -5,6 +5,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.role.Member;
 
+/**
+ * Tests that a {@code Person}'s {@code Role} includes {@code Member}.
+ */
 public class RoleIsMemberPredicate implements Predicate<Person> {
 
     @Override
@@ -18,7 +21,6 @@ public class RoleIsMemberPredicate implements Predicate<Person> {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof RoleIsMemberPredicate)) {
             return false;
         }
