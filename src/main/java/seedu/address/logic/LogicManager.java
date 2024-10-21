@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.Messages.MESSAGE_COMMAND_CANCELLED;
+
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
@@ -17,8 +19,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
-
-import static seedu.address.logic.Messages.MESSAGE_COMMAND_CANCELLED;
 
 /**
  * The main LogicManager of the app.
