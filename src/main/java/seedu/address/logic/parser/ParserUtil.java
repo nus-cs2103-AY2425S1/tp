@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Grade.MESSAGE_SCORE_CONSTRAINTS;
+import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -192,5 +194,35 @@ public class ParserUtil {
             throw new ParseException(Grade.MESSAGE_TEST_NAME_CONSTRAINTS);
         }
         return trimmedTestName;
+    }
+
+    public static float parseScore(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        try {
+            float res = Float.parseFloat(trimmedValue);
+            if (res < 0 || res > 100) {
+                throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
+            }
+            return res;
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
+        }
+    }
+
+    public static float parseWeightage(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        try {
+            float res = Float.parseFloat(trimmedValue);
+            if (res < 0 || res > 100) {
+                throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+            }
+            return res;
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+        }
     }
 }

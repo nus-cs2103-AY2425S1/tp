@@ -16,12 +16,16 @@ public class Grade {
     public static final String MESSAGE_TEST_NAME_CONSTRAINTS =
             "Test names should be at least 3 characters long and "
                     + "contain only alphanumeric characters, spaces, hyphens (-), or underscores (_).";
+
+    public static final String MESSAGE_SCORE_CONSTRAINTS =
+            "Score should be in the form of a number and is between 0 "
+                    + "and 100 inclusive";
     public static final String MESSAGE_WEIGHTAGE_CONSTRAINTS =
             "Weightage should be a numeric value between 0 (exclusive) and 100 (inclusive).";
 
 
     // Validation regex for test name (allows alphanumeric characters and spaces)
-    private static final String TEST_NAME_VALIDATION_REGEX = "^[A-Za-z0-9 _-]+$";
+    private static final String TEST_NAME_VALIDATION_REGEX = "^[A-Za-z0-9 _-]{3,}$";
 
     private final String testName;
     private final float score;

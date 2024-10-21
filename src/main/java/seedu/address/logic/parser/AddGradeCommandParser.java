@@ -37,24 +37,20 @@ public class AddGradeCommandParser implements Parser<AddGradeCommand> {
 
         argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SCORE, PREFIX_WEIGHTAGE);
 
-        try {
-            // Use ParserUtil to parse index
-            Index index = ParserUtil.parseIndex(argMultiMap.getPreamble());
+        // Use ParserUtil to parse index
+        Index index = ParserUtil.parseIndex(argMultiMap.getPreamble());
 
-            // Parse the exam name
-            String examName = ParserUtil.parseTestName(argMultiMap.getValue(PREFIX_NAME).get());
+        // Parse the exam name
+        String examName = ParserUtil.parseTestName(argMultiMap.getValue(PREFIX_NAME).get());
 
-            // Use ParserUtil to parse score and weightage as floats
-            float examScore = ParserUtil.parseFloat(argMultiMap.getValue(PREFIX_SCORE).get());
-            float examWeightage = ParserUtil.parseFloat(argMultiMap.getValue(PREFIX_WEIGHTAGE).get());
+        // Use ParserUtil to parse score and weightage as floats
+        float examScore = ParserUtil.parseScore(argMultiMap.getValue(PREFIX_SCORE).get());
+        float examWeightage = ParserUtil.parseWeightage(argMultiMap.getValue(PREFIX_WEIGHTAGE).get());
 
-            // Create and return the AddGradeCommand
-            Grade grade = new Grade(examName, examScore, examWeightage);
-            return new AddGradeCommand(index, grade);
+        // Create and return the AddGradeCommand
+        Grade grade = new Grade(examName, examScore, examWeightage);
+        return new AddGradeCommand(index, grade);
 
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGradeCommand.MESSAGE_USAGE), pe);
-        }
     }
 
 
