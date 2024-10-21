@@ -59,7 +59,7 @@ public class FindByNameCommandTest {
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = AbstractFindCommand.MESSAGE_NO_PERSONS_FOUND;
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindByNameCommand command = new FindByNameCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);

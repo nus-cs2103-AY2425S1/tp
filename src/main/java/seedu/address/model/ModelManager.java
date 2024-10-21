@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final CampusConnect campusConnect;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ObservableList<Tag> currentlyDefinedTags;
 
     /**
      * Initializes a ModelManager with the given campusConnect and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.campusConnect = new CampusConnect(campusConnect);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.campusConnect.getPersonList());
+        this.currentlyDefinedTags = this.campusConnect.getTagList();
     }
 
     public ModelManager() {
@@ -132,6 +134,14 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    /**
+     * Returns a list of tags currently defined in CampusConnect
+     */
+    @Override
+    public ObservableList<Tag> getListOfCurrentTags() {
+        return this.currentlyDefinedTags;
     }
 
     @Override

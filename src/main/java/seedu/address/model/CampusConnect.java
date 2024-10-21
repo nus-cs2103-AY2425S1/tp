@@ -54,7 +54,6 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public void resetData(ReadOnlyCampusConnect newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -122,6 +121,11 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return persons.asTagList();
     }
 
     @Override
