@@ -5,7 +5,21 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "sellProperties" : [ {
+      "housingType" : "Bto",
+      "postalCode" : "587977",
+      "unitNumber" : "16-65",
+      "price" : "6500000",
+      "tags" : [ "nice scenery" ]
+    } ],
+    "buyProperties" : [ {
+      "housingType" : "Apartment",
+      "postalCode" : "588977",
+      "unitNumber" : "17-60",
+      "price" : "6000000",
+      "tags" : [ "new", "private lift" ]
+    } ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -13,17 +27,107 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "tags" : [ "owesMoney", "friends" ]
   }, {
+    "name" : "Bill Meier",
+    "phone" : "98765444",
+    "email" : "billm@example.com",
+    "address" : "312, Clementi Ave 2, #02-26",
+    "tags" : [ "owesMoney", "friends" ],
+    "sellProperties" : [ {
+      "housingType" : "Condo",
+      "postalCode" : "544488",
+      "unitNumber" : "12-33",
+      "price" : "2500000",
+      "tags" : [ "spacious" ]
+    }, {
+      "housingType" : "Condo",
+      "postalCode" : "555511",
+      "unitNumber" : "13-31",
+      "price" : "3000000",
+      "tags" : [ "near mrt", "spacious", "5 toilets" ]
+    } ],
+    "buyProperties" : [ {
+      "housingType" : "Hdb",
+      "postalCode" : "522522",
+      "unitNumber" : "10-01",
+      "price" : "1500000",
+      "tags" : [ ]
+    }, {
+      "housingType" : "Bto",
+      "postalCode" : "533255",
+      "unitNumber" : "11-21",
+      "price" : "2000000",
+      "tags" : [ ]
+    } ]
+  }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "tags" : [ ]
   }, {
+    "name" : "Carrine Kurry",
+    "phone" : "95352544",
+    "email" : "carrine@example.com",
+    "address" : "new york avenue",
+    "tags" : [ ],
+    "sellProperties" : [ ],
+    "buyProperties" : [ {
+      "housingType" : "Condo",
+      "postalCode" : "544488",
+      "unitNumber" : "12-33",
+      "price" : "2500000",
+      "tags" : [ "spacious" ]
+    }, {
+      "housingType" : "Condo",
+      "postalCode" : "555511",
+      "unitNumber" : "13-31",
+      "price" : "3000000",
+      "tags" : [ "near mrt", "spacious", "5 toilets" ]
+    } ]
+  }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tags" : [ "friends" ]
+  }, {
+    "name" : "Danielle Meier",
+    "phone" : "87652534",
+    "email" : "danielle@example.com",
+    "address" : "11th street",
+    "tags" : [ "friends" ],
+    "sellProperties" : [ {
+      "housingType" : "Apartment",
+      "postalCode" : "566744",
+      "unitNumber" : "14-21",
+      "price" : "3500000",
+      "tags" : [ "5 bedrooms", "corner unit" ]
+    }, {
+      "housingType" : "OtherProperty",
+      "postalCode" : "577755",
+      "unitNumber" : "15-41",
+      "price" : "4000000",
+      "tags" : [ "penthouse", "sea view" ]
+    }, {
+      "housingType" : "OtherProperty",
+      "postalCode" : "588866",
+      "unitNumber" : "16-51",
+      "price" : "4500000",
+      "tags" : [ "duplex", "garden" ]
+    } ],
+    "buyProperties" : [ {
+      "housingType" : "Hdb",
+      "postalCode" : "599977",
+      "unitNumber" : "17-61",
+      "price" : "5000000",
+      "tags" : [ "luxury", "private pool" ]
+    }, {
+      "housingType" : "Hdb",
+      "postalCode" : "123456",
+      "unitNumber" : "10-01",
+      "price" : "1500000",
+      "tags" : [ ]
+    } ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",

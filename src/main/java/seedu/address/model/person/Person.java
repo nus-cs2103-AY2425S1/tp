@@ -2,13 +2,13 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -29,9 +29,8 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     // Property details
-    private List<Property> sellingProperties = new ArrayList<>();
-    private List<Property> buyingProperties = new ArrayList<>();
-
+    private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
+    private ObservableList<Property> buyingProperties = FXCollections.observableArrayList();
     /**
      * Every field must be present and not null.
      */
@@ -47,8 +46,9 @@ public class Person {
     /**
      * Constructor for when there are properties to be added.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, List<Property> sellingProperties,
-                  List<Property> buyingProperties) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  ObservableList<Property> sellingProperties,
+                  ObservableList<Property> buyingProperties) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -83,11 +83,11 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public List<Property> getListOfSellingProperties() {
+    public ObservableList<Property> getListOfSellingProperties() {
         return sellingProperties;
     }
 
-    public List<Property> getListOfBuyingProperties() {
+    public ObservableList<Property> getListOfBuyingProperties() {
         return buyingProperties;
     }
 

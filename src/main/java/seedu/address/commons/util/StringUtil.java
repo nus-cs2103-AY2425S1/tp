@@ -91,4 +91,30 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code sentence} contains the {@code keyword}.
+     *   Ignores case, but a full word match is required.
+     *   <br>examples:<pre>
+     *       containsNumericWithOptionalHyphen("522322 10-09", "522322") == true
+     *       containsNumericWithOptionalHyphen("522322 10-09", "10-09") == true
+     *       containsNumericWithOptionalHyphen("522322 10-09", "5223") == false //not a full word match
+     *       containsNumericWithOptionalHyphen("522322 10-09", "10") == false //not a full word match
+     *       </pre>
+     * @param sentence cannot be null
+     * @param keyword cannot be null, cannot be empty, must be a single word
+     */
+    public static boolean containsNumericWithOptionalHyphen(String sentence, String keyword) {
+        requireNonNull(sentence);
+        requireNonNull(keyword);
+
+        String preppedWord = keyword.trim();
+        assert !preppedWord.isEmpty() : "Word parameter cannot be empty";
+        assert preppedWord.split("\\s+").length == 1 : "Word parameter should be a single word";
+
+        String[] wordsInPreppedSentence = sentence.split("[^0-9,-]+");
+
+        // Check if preppedWord is in the array of wordsInPreppedSentence
+        return Arrays.stream(wordsInPreppedSentence).anyMatch(word -> word.equals(preppedWord));
+    }
 }

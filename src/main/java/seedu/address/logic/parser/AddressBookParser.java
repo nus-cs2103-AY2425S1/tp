@@ -18,9 +18,11 @@ import seedu.address.logic.commands.DeletePropertyToBuyCommand;
 import seedu.address.logic.commands.DeletePropertyToSellCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindBuyCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPhoneNumberCommand;
 import seedu.address.logic.commands.FindTagContactCommand;
+import seedu.address.logic.commands.FindSellCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -78,6 +80,12 @@ public class AddressBookParser {
 
         case FindTagContactCommand.COMMAND_WORD:
             return new FindTagContactCommandParser().parse(arguments);
+
+        case FindBuyCommand.COMMAND_WORD:
+            return new FindBuyCommandParser().parse(arguments);
+
+        case FindSellCommand.COMMAND_WORD:
+            return new FindSellCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

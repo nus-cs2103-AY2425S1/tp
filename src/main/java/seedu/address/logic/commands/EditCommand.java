@@ -16,6 +16,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
@@ -102,8 +103,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        List<Property> sellingProperties = personToEdit.getListOfSellingProperties();
-        List<Property> buyingProperties = personToEdit.getListOfBuyingProperties();
+        ObservableList<Property> sellingProperties = (ObservableList<Property>)
+                personToEdit.getListOfSellingProperties();
+        ObservableList<Property> buyingProperties = (ObservableList<Property>)
+                personToEdit.getListOfBuyingProperties();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, sellingProperties,
                 buyingProperties);

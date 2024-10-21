@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -28,9 +28,8 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private List<Property> buyingProperties = new ArrayList<>();
-    private List<Property> sellingProperties = new ArrayList<>();
-
+    private ObservableList<Property> buyingProperties = FXCollections.observableArrayList();
+    private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -40,8 +39,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        buyingProperties = new ArrayList<>();
-        sellingProperties = new ArrayList<>();
+        buyingProperties = FXCollections.observableArrayList();;
+        sellingProperties = FXCollections.observableArrayList();;
     }
 
     /**
@@ -53,8 +52,8 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        buyingProperties = new ArrayList<>(personToCopy.getListOfBuyingProperties());
-        sellingProperties = new ArrayList<>(personToCopy.getListOfSellingProperties());
+        buyingProperties = FXCollections.observableArrayList(personToCopy.getListOfBuyingProperties());
+        sellingProperties = FXCollections.observableArrayList(personToCopy.getListOfSellingProperties());
     }
 
     /**
