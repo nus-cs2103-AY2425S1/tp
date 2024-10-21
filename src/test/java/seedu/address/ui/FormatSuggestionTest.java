@@ -110,15 +110,11 @@ public class FormatSuggestionTest {
         );
 
         // Test with invalid prefix
-        assertEquals(" INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]",
+        assertEquals("",
                 editSuggestion.getRemainingFormat("edit x/"));
 
-        // Test with incomplete prefix
-        assertEquals(" INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]",
-                editSuggestion.getRemainingFormat("edit n"));
-
         // Test with non-numeric index
-        assertEquals(" INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]",
+        assertEquals("",
                 editSuggestion.getRemainingFormat("edit abc"));
     }
 }

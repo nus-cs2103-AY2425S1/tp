@@ -31,14 +31,14 @@ public class SuggestionsTest {
     @Test
     public void checkAllCommands_partialAddCommand_returnsSuggestion() {
         String input = "add";
-        String expected = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]";
+        String expected = "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG...]";
         assertEquals(expected, suggestions.checkAllCommands(input));
     }
 
     @Test
     public void checkAllCommands_partialDeleteCommand_returnsSuggestion() {
         String input = "delete";
-        String expected = "delete INDEX";
+        String expected = "delete INDEX/NAME";
         assertEquals(expected, suggestions.checkAllCommands(input));
     }
 
