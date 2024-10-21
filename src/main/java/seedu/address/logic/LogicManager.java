@@ -18,6 +18,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
+import static seedu.address.logic.Messages.MESSAGE_COMMAND_CANCELLED;
+
 /**
  * The main LogicManager of the app.
  */
@@ -26,8 +28,6 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
-
-    public static final String MESSAGE_COMMAND_CANCELLED = "Command has been cancelled.";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.Messages.MESSAGE_COMMAND_CANCELLED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -65,6 +66,12 @@ public class LogicManagerTest {
             throws CommandException, ParseException {
         String deleteCommand = "delete 9";
         assertCommandSuccess(deleteCommand, MESSAGE_DELETE_CONFIRMATION, model);
+    }
+
+    @Test
+    public void execute_cancelDeleteCommand_success() throws CommandException, ParseException {
+        String[] deleteCommand = {"delete 9", "no"};
+        assertDeleteCommandSuccess(MESSAGE_COMMAND_CANCELLED, model, deleteCommand);
     }
 
     @Test
@@ -199,5 +206,24 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Executes the command (which requires a confirmation) and confirms that
+     * - no exceptions are thrown <br>
+     * - the feedback message is equal to {@code expectedMessage} <br>
+     * - the internal model manager state is the same as that in {@code expectedModel} <br>
+     * @see #assertCommandFailure(String, Class, String, Model)
+     */
+    private void assertDeleteCommandSuccess(String expectedMessage, Model expectedModel,
+                                            String... inputCommand) throws CommandException, ParseException {
+        for (int i = 0; i < inputCommand.length; i++) {
+            if (i == inputCommand.length - 1) {
+                CommandResult result = logic.execute(inputCommand[inputCommand.length - 1]);
+                assertEquals(expectedMessage, result.getFeedbackToUser());
+            } else {
+                logic.execute(inputCommand[i]);
+            }
+        }
     }
 }
