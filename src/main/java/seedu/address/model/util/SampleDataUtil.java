@@ -149,7 +149,6 @@ public class SampleDataUtil {
                         getTagSet("investor"),
                         new DateOfCreation(LocalDate.of(2024, 1, 15)),
                         HISTORY_AMY_WEE),
-
             new Person(new Name("Alan Chew"), new Phone("82345671"), new Email("alan.chew@example.com"),
                         new Address("Blk 45 Bedok South Ave 2, #12-34"),
                         new Remark("Viewing resale HDB flats"),
@@ -158,10 +157,10 @@ public class SampleDataUtil {
                         new DateOfCreation(LocalDate.of(2024, 2, 1)),
                         HISTORY_ALAN_CHEW),
             new Person(new Name("Sigma Rizzler"), new Phone("69420"), new Email("skibidi@dop.com"),
-                    new Address("Based Estate"), new Remark("Cool dude"), new Birthday("2000-06-09"),
-                    getTagSet("favourite"),
-                    new DateOfCreation(LocalDate.of(2000, 1, 1)),
-                    HISTORY_SIGMA_RIZZLER)
+                        new Address("Based Estate"), new Remark("Cool dude"), new Birthday("2000-06-09"),
+                        getTagSet("favourite"),
+                        new DateOfCreation(LocalDate.of(2000, 1, 1)),
+                        HISTORY_SIGMA_RIZZLER)
         };
     }
 
