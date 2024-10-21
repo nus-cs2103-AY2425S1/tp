@@ -67,6 +67,10 @@ public class AddToConsultCommand extends Command {
         return new CommandResult(String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)));
     }
 
+    public String getCommandType() {
+        return COMMAND_WORD;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
