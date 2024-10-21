@@ -198,13 +198,14 @@ Examples:
 
 ### Appointment Commands
 
-An **appointment** is defined by several fields: an appointment type, appointment date & time, ID of the patient who is associated with the appointment, sickness, and medicine.  You can interact with appointments in DocTrack using the instructions below:
+- An **appointment** is defined by several fields: an appointment type, appointment date & time, ID of the patient who is associated with the appointment, sickness, and medicine.  
+- You can interact with appointments in DocTrack using the instructions below:
 
 <br>
 
 ##### Adding an appointment: `add appt`
 
-Adds an appointment to the DocTrack system. 
+Adds an appointment to the DocTrack. 
 
 Format: `add appt i/PATIENT_ID d/DATE_TIME ty/APPOINTMENT_TYPE s/SICKNESS m/MEDICINE`
 
@@ -218,7 +219,7 @@ Examples:
 
 ##### Listing all persons : `list appt`
 
-Shows a list of all appointments in the DocTrack system.
+Shows a list of all appointments in DocTrack.
 
 Format: `list appt`
 
@@ -226,9 +227,9 @@ Format: `list appt`
 
 ##### Editing a person : `edit appt`
 
-Edits an existing appointment in the system.
+Edits an existing appointment in DocTrack.
 
-Format: `edit appt INDEX [i/Jo An] [d/2024-12-01 11:30] [ty/Screening] [s/Asthma] [m/Inhaler]`
+Format: `edit appt INDEX [i/PATIENT_ID] [d/DATE_TIME] [ty/APPOINTMENT_TYPE] [s/SICKNESS] [m/MEDICINE]`
 
 - Edits the appointment at the specified `INDEX`.
 - At least one of the optional fields must be provided.
@@ -236,13 +237,13 @@ Format: `edit appt INDEX [i/Jo An] [d/2024-12-01 11:30] [ty/Screening] [s/Asthma
 
 Examples:
 
-- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date & time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
+- `edit appt 3 d/2024-12-05 13:00 m/Budesonide` Edits the date and time and the medicine to be `29/03/2025 10:30` and `Budesonide` respectively.
 
 <br>
 
 ##### Deleting an appointment : `delete appt`
 
-Deletes the specified appointment from the system.
+Deletes the specified appointment from DocTrack.
 
 Format: `delete appt INDEX`
 
@@ -250,7 +251,7 @@ Format: `delete appt INDEX`
 
 Examples:
 
-- `list appt` followed by `delete appt 2` deletes the 2nd appointment in the appointment book.
+- `list appt` followed by `delete appt 2` deletes the 2nd appointment in DocTrack.
 
 <br>
 
