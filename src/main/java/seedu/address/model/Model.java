@@ -20,7 +20,7 @@ public interface Model {
     Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
     Predicate<Client> PREDICATE_SHOW_ALL_BUYERS_ONLY = Client::isBuyer;
     Predicate<Client> PREDICATE_SHOW_ALL_SELLERS_ONLY = Client::isSeller;
-    Predicate<Client> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
+    Predicate<Meeting> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -185,11 +185,35 @@ public interface Model {
      */
     void updateFilteredPropertyList(Predicate<Property> predicate);
 
+    /**
+     * Returns the user prefs' meeting book file path.
+     */
+    Path getMeetingBookFilePath();
+
+    /**
+     * Sets the user prefs' meeting book file path.
+     */
+    void setMeetingBookFilePath(Path meetingBookFilePath);
+
+    /**
+     * Replaces meeting book data with the data in {@code meetingBook}.
+     */
+    void setMeetingBook(ReadOnlyMeetingBook meetingBook);
 
     /**
      * Returns the meeting book.
      */
     ReadOnlyMeetingBook getMeetingBook();
+
+    /**
+     * Returns true if a meeting with the same identity as {@code meeting} exists in the meeting book.
+     */
+    boolean hasMeeting(Meeting meeting);
+    /**
+     * Adds the given meeting.
+     * {@code meeting} must not already exist in the meeting book.
+     */
+    void addMeeting(Meeting meeting);
 
     /**
      * Deletes the given meeting.
