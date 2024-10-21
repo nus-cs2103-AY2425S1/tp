@@ -224,7 +224,7 @@ Format: `clear`
 
 ##### Exiting the program : `exit`
 
-Exits the program after printing a message.
+Exits the program.
 
 Format: `exit`
 
