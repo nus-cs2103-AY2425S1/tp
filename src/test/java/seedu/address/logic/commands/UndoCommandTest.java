@@ -2,10 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javafx.collections.ObservableList;
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -13,9 +16,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.student.Student;
-
-import java.nio.file.Path;
-import java.util.function.Predicate;
 
 public class UndoCommandTest {
     private CommandStack commandStack;
@@ -28,13 +28,14 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_empty_stack() {
+    public void execute_emptyStack() {
+        commandStack.clear();
         assertEquals("There are no commands to undo",
                 new UndoCommand().execute(model).getFeedbackToUser());
     }
 
     @Test
-    public void execute_non_empty_stack_not_undoable_command() {
+    public void execute_nonEmptyStack_notUndoableCommand() {
         Command command = new NotUndoableCommandStub();
         commandStack.push(command);
         assertEquals("The previous command is not undoable",
@@ -42,7 +43,7 @@ public class UndoCommandTest {
     }
 
     @Test
-    public void execute_non_empty_stack_undoable_command() {
+    public void execute_nonEmptyStack_undoableCommand() {
         Command command = new UndoableCommandStub();
         commandStack.push(command);
         assertEquals(UndoCommand.MESSAGE_SUCCESS,
