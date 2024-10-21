@@ -32,7 +32,6 @@ public class PreferredTime {
     public PreferredTime(String preferredTime) {
         requireNonNull(preferredTime);
         checkArgument(isValidPreferredTime(preferredTime), MESSAGE_CONSTRAINTS);
-        this.preferredTime = preferredTime;
 
         Matcher matcher = VALIDATED_PATTERN.matcher(preferredTime); // should always match as checked
         if (!matcher.matches()) {
@@ -41,13 +40,24 @@ public class PreferredTime {
 
         day = new Day(matcher.group(1));
         time = new Time(matcher.group(2));
+        this.preferredTime = day + " " + time;
     }
 
     /**
      * Returns true if a given string is a valid PreferredTime.
      */
     public static boolean isValidPreferredTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+
+        Matcher matcher = VALIDATED_PATTERN.matcher(test); // should always match as checked
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException("Invalid preferred time format: " + test);
+        }
+        String day = matcher.group(1);
+        String time = matcher.group(2);
+        return Day.isValidDay(day) && Time.isValidTime(time);
     }
 
     @Override

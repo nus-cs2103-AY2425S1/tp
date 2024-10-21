@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane games;
+    @FXML
+    private FlowPane preferredTimes;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,6 +66,9 @@ public class PersonCard extends UiPart<Region> {
         person.getGames().values().stream()
                 .sorted(Comparator.comparing(game -> game.gameName))
                 .forEach(game -> games.getChildren().add(gameLabel(game)));
+        person.getPreferredTimes().stream()
+                .sorted(Comparator.comparing(preferredTime -> preferredTime.preferredTime))
+                .forEach(preferredTime -> preferredTimes.getChildren().add(new Label(preferredTime.preferredTime)));
     }
 
     private static Label gameLabel(Game game) {
