@@ -60,6 +60,9 @@
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
   e.g. `(t/TAG)+` can be used as `t/friend`, `t/friend t/family` etc.
 
+* `|` operator signifies `OR` relationship.<br>
+  e.g. `n/NAME | r/MODULECODE` means `n/NAME` or `r/MODULECODE`
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -130,6 +133,8 @@ Examples:
 
 ### Locating persons: `find`
 
+The find command allows you to locate persons by their names, module-role pairs, or a combination of both.
+
 #### By name
 
 Finds persons whose names contain any of the given keywords.
@@ -153,7 +158,7 @@ Examples:
 
 Finds persons whose module-role pairs contain any of the given keywords.
 
-Format: `find (r/MODULECODE[-ROLETYPE])+`
+Format: `find (r/KEYWORD)+`
 
 * Search by module code and optionally specify the role type (separated by a dash). For example, `CS2103T-Prof` will search for the module `CS2103T` with the role `Professor`.
 * The search is case-insensitive. e.g. `cs2103t-student` will match `CS2103T-Student`.
@@ -167,11 +172,10 @@ Examples:
 
 #### By name and module-role
 
-Finds persons whose names and module-role pairs contain any of the given keywords.
+Finds persons whose names and module-role pairs contain any combination of the given keywords.
 
-Format: `find (n/KEYWORD)+ (r/MODULECODE[-ROLETYPE])+`
+Format: `find (n/KEYWORD)+ (r/KEYWORD)+`
 
-* Search by both name and module code (role optional).
 * Person matching at least one name keyword AND one module-role keyword will be returned (i.e. AND search).
 
 Examples:
@@ -241,12 +245,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find (n/KEYWORD)+ (r/KEYWORD)+`<br> e.g., `find n/James n/Jake r/CS1101S r/MA1521`
-**List**   | `list`
-**Help**   | `help`
+Action     | Format, Examples                                                                                                                                                                                            
+-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+**Clear**  | `clear`                                                                                                                                                                                                     
+**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  
+**Find**   | `find (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find n/James n/Jake r/CS1101S r/MA1521`                                                                                                                         
+**List**   | `list`                                                                                                                                                                                                      
+**Help**   | `help`                                                                                                                                                                                                      
