@@ -35,7 +35,8 @@ class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
-    public JsonAdaptedPerson(String name, String phone, String email, String address, List<JsonAdaptedTag> tags, boolean isPinned) {
+    public JsonAdaptedPerson(String name, String phone, String email, String address,
+                             List<JsonAdaptedTag> tags, boolean isPinned) {
         this.name = name;
         this.phone = phone;
         this.email = email;

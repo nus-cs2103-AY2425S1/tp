@@ -93,6 +93,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the isPinned of the {@code Person} that we are building.
+     */
     public PersonBuilder withPinned(boolean isPinned) {
         this.isPinned = isPinned;
         return this;

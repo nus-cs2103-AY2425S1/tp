@@ -19,6 +19,7 @@ public class Student extends Person {
 
     /**
      * Constructs a {@code Student} with the given details.
+     * Students constructed with this constructor will have isPinned set to false by default.
      */
     public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
             Email parentEmail, Grade grade, Set<Tag> tags) {
@@ -29,6 +30,9 @@ public class Student extends Person {
         this.grade = grade;
     }
 
+    /**
+     * Constructs a {@code Student} with the given details.
+     */
     public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
                    Email parentEmail, Grade grade, Set<Tag> tags, boolean isPinned) {
         super(name, phone, email, address, tags, isPinned);

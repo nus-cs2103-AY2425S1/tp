@@ -11,6 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Unpins a person identified using its displayed index.
+ */
 public class UnpinCommand extends Command {
 
     public static final String COMMAND_WORD = "unpin";
