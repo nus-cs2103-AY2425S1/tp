@@ -2,11 +2,11 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 
 public class GradeListTest {
 
@@ -41,10 +41,12 @@ public class GradeListTest {
         gradeList = gradeList.addGrade(thirdGrade);
 
         // same name -> returns true
-        assertEquals(gradeList.getGrade(Index.fromOneBased(1)), firstGrade);
-        assertEquals(gradeList.getGrade(Index.fromOneBased(2)), secondGrade);
-        assertEquals(gradeList.getGrade(Index.fromOneBased(3)), thirdGrade);
+        assertEquals(gradeList.getGrade("Midterm"), firstGrade);
+        assertEquals(gradeList.getGrade("Final"), secondGrade);
+        assertEquals(gradeList.getGrade("Assignment"), thirdGrade);
 
+        // non-existing test name -> returns null
+        assertNull(gradeList.getGrade("Tutorial"));
     }
 
     @Test

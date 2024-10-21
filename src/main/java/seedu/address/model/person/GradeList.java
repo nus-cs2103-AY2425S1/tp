@@ -38,7 +38,7 @@ public class GradeList {
         requireNonNull(grade, "Grade cannot be null");
 
         List<Grade> newGrades = new ArrayList<>(this.grades);
-
+        newGrades.removeIf(existingGrade -> existingGrade.getTestName().equalsIgnoreCase(grade.getTestName()));
         newGrades.add(grade);
 
         return new GradeList(newGrades);
@@ -48,24 +48,30 @@ public class GradeList {
      * Retrieves the grade for a specific test.
      * Returns the {@code Grade} object if found, or null if no grade is recorded for the test.
      *
-     * @param index The name of the test.
+     * @param testName The name of the test.
      * @return The {@code Grade} object for the test, or null if no grade is found.
      */
-    public Grade getGrade(Index index) {
-        requireNonNull(index);
-        return this.grades.get(index.getZeroBased());
+    public Grade getGrade(String testName) {
+        requireNonNull(testName);
+        for (Grade grade : this.grades) {
+            if (grade.getTestName().equalsIgnoreCase(testName)) {
+                return grade;
+            }
+        }
+        return null;
     }
 
     /**
      * Removes the grade for a specific test, if it exists.
      *
-     * @param index The index of the test for which the grade should be removed.
+     * @param testName The name of the test for which the grade should be removed.
+     * @return A new GradeList with the specified grade removed.
      */
-    public GradeList removeGrade(Index index) {
-        requireNonNull(index);
+    public GradeList removeGrade(String testName) {
+        requireNonNull(testName);
         List<Grade> newList = new ArrayList<>(this.grades);
 
-        newList.remove(index.getZeroBased());
+        newList.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
 
         return new GradeList(newList);
     }
@@ -105,10 +111,10 @@ public class GradeList {
             totalScore += g.getScore() * currentWeightage / 100;
         }
 
-        String summary = "Overall score: " + totalScore;
+        String summary = String.format("Overall score: %.2f/100", totalScore);
 
         if (totalWeightage < FULL_WEIGHTAGE) {
-            summary += NOT_ALL_WEIGHTAGE + totalWeightage + "%";
+            summary += String.format(NOT_ALL_WEIGHTAGE + "%.2f%%", totalWeightage * 100);
         }
 
         return summary;

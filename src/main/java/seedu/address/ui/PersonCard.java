@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label grades;
     @FXML
+    private Label overallGrade;
+    @FXML
     private Label attendances;
 
     /**
@@ -59,7 +61,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        grades.setText(formatGrades(person.getGradeList().toString())); // Format and set grades
+        grades.setText(formatGrades(person.getGradeList().toString()));
+        overallGrade.setText(person.getGradeList().getOverallGrade());
         attendances.setText(formatAttendances(person.getAttendanceList().toString())); // Format and set attendances
     }
 

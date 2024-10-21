@@ -41,7 +41,108 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Quick Start (Detailed)
 
+1. Ensure you have Java `17` or above installed in your Computer.
+
+    - **Check if Java is installed:**
+        1. Open your command terminal:
+            - **Windows**: Press `Windows + R`, type `cmd`, and hit Enter.
+            - **Mac**: Press `Command + Space`, type `Terminal`, and hit Enter.
+            - **Linux**: Press `Ctrl + Alt + T`, or search for "Terminal" in your applications menu.
+        2. Once the terminal is open, type the following command and press Enter:
+           ```bash
+           java -version
+           ```
+        3. If your system has Java `17` or above, you should see something like:
+           ```bash
+           java version "17.0.x" 2024-xx-xx LTS
+           ```
+        4. If your Java version is lower than `17`, proceed to the next step to install Java.
+
+    - **Install Java `17` if not installed:**
+        1. Go to [Oracle's Java 17 download page](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html).
+        2. Download and install the appropriate Java Development Kit (JDK) for your operating system by following the instructions provided.
+        3. After installation, repeat the `java -version` command to ensure Java is properly installed.
+
+
+    
+
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+
+    1. Visit the [GitHub releases page](https://github.com/se-edu/addressbook-level3/releases).
+    2. Download the `.jar` file (for example, `addressbook.jar`) from the latest release.
+    3. Save the `.jar` file to the folder where you want to store your AddressBook project.
+
+    
+3. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+
+    1. **Windows**:
+        - Locate the downloaded `.jar` file in your `Downloads` folder.
+        - Right-click on the `.jar` file, select **Copy**.
+        - Navigate to the folder where you want to store the AddressBook, right-click and select **Paste**.
+
+    2. **Mac**:
+        - Open the **Finder** and go to your `Downloads` folder.
+        - Right-click (or `Control + Click`) on the `.jar` file and choose **Copy**.
+        - Go to the folder where you want to keep the file, then right-click and select **Paste**.
+
+    3. **Linux**:
+        - Open your file manager and go to your `Downloads` directory.
+        - Right-click on the `.jar` file, choose **Copy**.
+        - Go to the destination folder, right-click and select **Paste**.
+
+
+4. Open a command terminal, `cd` into the folder where you saved the `.jar` file, and use the following command to run the application.
+
+    1. **Windows**:
+        - Open the folder where you saved the `.jar` file.
+        - To get the full path of the folder:
+            1. Right-click on the folder and select **Properties**.
+            2. In the **General** tab, you will see the **Location** field. Copy the location path.
+            3. Alternatively, you can navigate to the folder, click on the address bar at the top, and copy the full folder path (e.g., `C:\Users\YourName\Documents\AddressBook`).
+        - Open the **Command Prompt**:
+            - Press `Windows + R`, type `cmd`, and press Enter.
+        - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
+          ```bash
+          cd C:\Users\YourName\Documents\AddressBook
+          ```
+        - Run the app with:
+          ```bash
+          java -jar addressbook.jar
+          ```
+
+    2. **Mac/Linux**:
+        - Open the **Terminal** by searching for it or using `Ctrl + Alt + T`.
+        - To get the full path of the folder where the `.jar` file is located:
+            - Open **Finder** or **File Explorer**.
+            - Navigate to the folder where you saved the `.jar` file.
+            - Right-click on the folder and choose **Get Info** (Mac) or **Properties** (Linux) to see the full path, or press `Cmd + Option + C` (Mac) to copy the path.
+        - Use the `cd` command and paste the copied path to change to the directory where the `.jar` file is located. Example:
+          ```bash
+          cd /Users/YourName/Documents/AddressBook
+          ```
+        - Run the app with:
+          ```bash
+          java -jar addressbook.jar
+          ```
+
+   After a few seconds, the GUI similar to the one below should appear:
+   ![Ui](images/Ui.png)
+
+   
+5. Type commands in the command box and press Enter to execute them. Some example commands you can try:
+
+    - `list`: Lists all contacts.
+    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a contact named `John Doe`.
+    - `delete 3`: Deletes the 3rd contact shown in the current list.
+    - `clear`: Deletes all contacts.
+    - `exit`: Exits the app.
+
+
+
+6. Refer to the [Features](#features) section below for details of each command.
+--------------------------------------------------------------------------------------------------------------------
 ## Features
 
 <box type="info" seamless>
@@ -145,6 +246,37 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding or editing a grade: `grade`
+
+Adds or updates a grade for a person in the address book. If a grade with the same test name already exists, it will be overwritten.
+
+Format: `grade INDEX TEST_NAME SCORE WEIGHTAGE`
+
+* Adds or updates a grade for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `TEST_NAME` refers to the name of the test (e.g. Midterm Exam).
+* `SCORE` refers to the score obtained by the person, which must be between 0 and 100.
+* `WEIGHTAGE` refers to the weightage of the test in percentage, which must be greater than 0 and less than or equal to 100.
+* If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
+
+Examples:
+* `grade 1 Midterm 85 20` Adds or updates a grade for the 1st person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
+* `grade 2 FinalExam 92 30` Adds or updates a grade for the 2nd person with a score of 92% for "FinalExam" and 30% weightage.
+* If a test with the same name already exists for that person, the old grade will be replaced.
+
+### Deleting a grade from a person: `deletegrade`
+
+Deletes a grade for a person in the address book.
+
+Format: `deletegrade INDEX TEST_NAME`
+
+* Deletes the grade for the specified `TEST_NAME` for the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `TEST_NAME` refers to the name of the test whose grade you want to delete.
+
+Examples:
+* `deletegrade 1 Midterm` Deletes the grade for the "Midterm" test for the 1st person in the list.
+* `deletegrade 2 FinalExam` Deletes the "FinalExam" grade for the 2nd person.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -194,12 +326,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action           | Format, Examples                                                                                                                                                      |
+|------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**        | `clear`                                                                                                                                                               |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Add Grade**    | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
+| **Delete Grade** | `deleteGrade INDEX TEST_NAME` <br> e.g., `delete grade 1 Midterm`                                                                                                     |
+| **Edit Grade**   | Simply add a new grade with the same test name, and the grade will be updated automatically. <br> e.g., `grade 1 Midterm 90 30`                                       |
+| **List**         | `list`                                                                                                                                                                |
+| **Help**         | `help`                                                                                                                                                                |

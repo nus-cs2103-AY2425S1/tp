@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  * Adds a grade to a person identified by the index in the filtered person list.
  */
 public class AddGradeCommand extends Command {
-    public static final String COMMAND_WORD = "grade";
+    public static final String COMMAND_WORD = "addGrade";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a grade to the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing grades will be updated by the input values.\n"
