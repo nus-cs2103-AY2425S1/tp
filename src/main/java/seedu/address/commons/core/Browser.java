@@ -1,7 +1,5 @@
 package seedu.address.commons.core;
 
-import java.io.IOException;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
@@ -9,5 +7,5 @@ import seedu.address.logic.commands.exceptions.CommandException;
  */
 public interface Browser {
 
-    public void launchUri(String url) throws IOException, CommandException;
+    public void launchUri(String url) throws CommandException;
 }

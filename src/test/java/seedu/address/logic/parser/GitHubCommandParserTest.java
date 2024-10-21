@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -24,13 +23,11 @@ public class GitHubCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsGitHubCommand() {
-        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environment");
         assertParseSuccess(parser, NAME_DESC_BOB, new GitHubCommand(new Name(VALID_NAME_BOB), functionalBrowser));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environment");
         //Name prefix not present
         assertParseFailure(parser, "a",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GitHubCommand.MESSAGE_USAGE));

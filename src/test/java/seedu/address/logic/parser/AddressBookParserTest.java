@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_DESC_ONE;
@@ -18,7 +17,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.awt.GraphicsEnvironment;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -140,8 +138,6 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_githubCommand() throws ParseException {
-        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environment");
-
         NonFunctionalBrowser nonFunctionalBrowser = NonFunctionalBrowser.getDesktop();
         String arguments = NAME_DESC_AMY;
         GitHubCommand command = (GitHubCommand) parser.parseCommand(GitHubCommand.COMMAND_WORD + arguments);

@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.io.IOException;
-
 import seedu.address.commons.core.Browser;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,13 +22,11 @@ public class GitHubCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe ";
     public static final String MISSING_PERSON_EXCEPTION = "The person you specified does not exist"
-            + " in the address book."
+            + " in the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "%1s";
 
     public static final String MESSAGE_SUCCESS = "Launching your browser...";
-
-    private static final String NULL_GITHUB_USERNAME = "Github username specified for %1s is null.";
 
     private static final String GITHUB_URL = "https://github.com/%1s/?tab=repositories";
 
@@ -54,13 +50,10 @@ public class GitHubCommand extends Command {
             throw new CommandException(String.format(MISSING_PERSON_EXCEPTION, toLaunch.toString()));
         }
 
-        try {
-            Github githubAccount = model.getGitHubUsername(toLaunch);
-            String uriLink = String.format(GITHUB_URL, githubAccount.username);
-            this.browser.launchUri(uriLink);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(NULL_GITHUB_USERNAME, toLaunch.toString()));
-        }
+        Github githubAccount = model.getGitHubUsername(toLaunch);
+        String uriLink = String.format(GITHUB_URL, githubAccount.username);
+        this.browser.launchUri(uriLink);
+
 
         return new CommandResult(MESSAGE_SUCCESS);
     }

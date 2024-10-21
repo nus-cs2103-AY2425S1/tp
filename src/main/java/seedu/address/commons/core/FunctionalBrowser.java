@@ -3,6 +3,7 @@ package seedu.address.commons.core;
 import static java.util.Objects.requireNonNull;
 
 import java.awt.Desktop;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,7 +21,26 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
      * Constructs a {@code FunctionalBrowser}.
      */
     private FunctionalBrowser() {
-        this.desktop = Desktop.getDesktop();
+        try {
+            if (!isLinux()) {
+                this.desktop = Desktop.getDesktop();
+            }
+        } catch (HeadlessException e) {
+            this.desktop = null;
+        }
+    }
+
+    /**
+     * Checks if the user is using a Linux OS.
+     */
+    private boolean isLinux() {
+        //@@author incogdino-reused
+        //Reused from https://mkyong.com/java/how-to-detect-os-in-java-systemgetpropertyosname/
+        String os = System.getProperty("os.name").toLowerCase();
+        return (os.indexOf("nix") >= 0
+                || os.indexOf("nux") >= 0
+                || os.indexOf("aix") > 0);
+        //@@author
     }
 
     /**
@@ -51,17 +71,31 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
      *      or the default handler application failed to be launched
      * @throws CommandException Generated URI is invalid.
      */
-    public void launchUri(String url) throws IOException, CommandException {
+    public void launchUri(String url) throws CommandException {
         requireNonNull(url);
         try {
             URI uri = new URI(url);
-            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                this.desktop.browse(uri);
+            if (isLinux()) {
+                //For linux OS
+                if (Runtime.getRuntime().exec(new String[] { "which", "xdg-open" }).getInputStream().read() != -1) {
+                    Runtime.getRuntime().exec(new String[] { "xdg-open", url });
+                } else {
+                    throw new CommandException("The current OS does not support opening external links.");
+                }
             } else {
-                throw new CommandException("The current OS does not support browser extensions");
+                //For non linux OS
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                    this.desktop.browse(uri);
+                } else {
+                    throw new CommandException("The current OS does not support opening external links.");
+                }
             }
-        } catch (URISyntaxException e) {
+        } catch (URISyntaxException uriException) {
             throw new CommandException("The URI specified is invalid.");
+        } catch (SecurityException securityException) {
+            throw new CommandException("Access to open external links is denied by the security manager.");
+        } catch (IOException ioException) {
+            throw new CommandException("Default browser not found or failed to laucnh. Please try again.");
         }
     }
 }
