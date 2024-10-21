@@ -49,11 +49,10 @@ For more information, see this:
    ![Ui](images/Ui.png)
 
 
-6. Type the command in the command box, indicated by `Enter command here...` and press Enter to execute it. 
-
-    e.g. typing **`help`** and pressing Enter will open the help window.<br>
+6. Type the command in the command box, which is indicated by `Enter command here...`. Press `Enter` to execute it. 
+    * E.g. Typing **`help`** and pressing `Enter` will open the help window.<br>
    
-   Some example commands you can try:
+   Some other examples of commands you can try:
    * `list person` : Lists all contacts.
    * `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
    * `delete person 3` : Deletes the 3rd contact shown in the current list.
