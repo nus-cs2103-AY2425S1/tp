@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.model.person.Transaction;
 
-import java.time.LocalDate;
-
 /**
- * Json for {@code Transaction}
+ * Json for {@code Transaction}.
  */
 public class JsonAdaptedTransaction {
     private final String description;
@@ -22,8 +22,7 @@ public class JsonAdaptedTransaction {
      */
     @JsonCreator
     public JsonAdaptedTransaction(@JsonProperty("description") String description, @JsonProperty("amount") int amount,
-                                  @JsonProperty("otherParty") String otherParty, @JsonProperty("date") LocalDate date)
-        {
+                          @JsonProperty("otherParty") String otherParty, @JsonProperty("date") LocalDate date) {
         this.description = description;
         this.amount = amount;
         this.otherParty = otherParty;

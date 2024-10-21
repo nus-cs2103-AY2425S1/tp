@@ -1,10 +1,10 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.Messages;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.logic.Messages;
 
 /**
  * Represents a Person's transaction in the address book.
