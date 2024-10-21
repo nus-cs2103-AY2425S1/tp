@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -209,14 +207,5 @@ public class MainWindow extends UiPart<Stage> {
         if (!personsWithUpcomingBirthdays.isEmpty()) {
             resultDisplay.setFeedbackToUser(personsWithUpcomingBirthdays);
         }
-    }
-
-    private String formatUpcomingBirthdaysMessage(List<Person> persons) {
-        StringBuilder message = new StringBuilder("Upcoming birthdays:\n");
-        for (Person person : persons) {
-            message.append(person.getName()).append(": ")
-                    .append(person.getBirthday().toString()).append("\n"); // Customize based on Birthday format
-        }
-        return message.toString();
     }
 }
