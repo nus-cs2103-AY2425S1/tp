@@ -27,7 +27,7 @@ import tutorease.address.model.UserPrefs;
 import tutorease.address.model.lesson.LessonContainsNamesPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FindLessonCommand}.
  */
 public class FindLessonCommandTest {
     private Model model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
@@ -61,7 +61,7 @@ public class FindLessonCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noLessonsFound_success() {
+    public void execute_zeroKeywords_noLessonsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_NO_LESSONS_FOUND);
         LessonContainsNamesPredicate predicate = preparePredicate("test");
         FindLessonCommand command = new FindLessonCommand(predicate);
@@ -71,7 +71,7 @@ public class FindLessonCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleLessonsFound_success() {
+    public void execute_multipleKeywords_multipleLessonsFound() {
         String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 7);
         LessonContainsNamesPredicate predicate = preparePredicate("Alice Bob");
         FindLessonCommand command = new FindLessonCommand(predicate);
@@ -88,7 +88,7 @@ public class FindLessonCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywordsCaseInsensitive_multipleLessonsFound_success() {
+    public void execute_multipleKeywordsCaseInsensitive_multipleLessonsFound() {
         String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 7);
         LessonContainsNamesPredicate predicate = preparePredicate("aLiCe bOb");
         FindLessonCommand command = new FindLessonCommand(predicate);
@@ -105,7 +105,7 @@ public class FindLessonCommandTest {
     }
 
     @Test
-    public void execute_oneKeyword_multipleOfCorrectLessonsFound_success() {
+    public void execute_oneKeyword_multipleOfCorrectLessonsFound() {
         String expectedMessage = String.format(MESSAGE_LESSONS_LISTED_OVERVIEW, 4);
         LessonContainsNamesPredicate predicate = preparePredicate("Alice");
         FindLessonCommand command = new FindLessonCommand(predicate);
@@ -119,7 +119,7 @@ public class FindLessonCommandTest {
     }
 
     @Test
-    public void execute_incompleteKeyword_noLessonsFound_success() {
+    public void execute_incompleteKeyword_noLessonsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_NO_LESSONS_FOUND);
         LessonContainsNamesPredicate predicate = preparePredicate("Al");
         FindLessonCommand command = new FindLessonCommand(predicate);
