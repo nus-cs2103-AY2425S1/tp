@@ -90,6 +90,9 @@ public class CommandTestUtil {
     public static final String INVALID_MEETUP_TO_DESC = " " + PREFIX_TO + "01/05/2025 1940"; // Not proper format
     public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date
     public static final String INVALID_MEETUP_TO_DESC_TWO = " " + PREFIX_TO + "03/02/2025 2988"; // Not valid date
+    public static final String INVALID_MEETUP_INFO_DESC = " " + PREFIX_INFO
+            + "Meet Up with J**son_+"; // '+', '*', '_' not allowed in info
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
