@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,8 @@ import seedu.address.model.buyer.Buyer;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+            getTypicalPropertyList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +38,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BUYER_SUCCESS,
                 Messages.format(buyerToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        ModelManager expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList(),
+                model.getPropertyList());
         expectedModel.deleteBuyer(buyerToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -60,7 +63,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_BUYER_SUCCESS,
                 Messages.format(buyerToDelete));
 
-        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList(),
+                model.getPropertyList());
         expectedModel.deleteBuyer(buyerToDelete);
         showNoBuyer(expectedModel);
 

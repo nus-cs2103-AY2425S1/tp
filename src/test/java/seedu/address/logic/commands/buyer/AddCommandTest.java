@@ -23,9 +23,11 @@ import seedu.address.model.BuyerList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class AddCommandTest {
@@ -212,6 +214,57 @@ public class AddCommandTest {
         @Override
         public boolean hasMeetUp(MeetUp meetUp) {
             return false;
+        }
+
+
+        @Override
+        public Path getPropertyListFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPropertyListFilePath(Path propertyListFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPropertyList(ReadOnlyPropertyList propertyList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyPropertyList getPropertyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteProperty(Property property) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setProperty(Property property, Property editedProperty) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Property> getFilteredPropertyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPropertyList(Predicate<Property> predicate) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

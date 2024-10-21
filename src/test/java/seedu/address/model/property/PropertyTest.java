@@ -1,7 +1,7 @@
 package seedu.address.model.property;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalProperties.ALICE;
+import static seedu.address.testutil.property.TypicalProperties.ALICE;
 
 import org.junit.jupiter.api.Test;
 
