@@ -12,6 +12,7 @@ import seedu.address.logic.commands.AddClaimCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddInsuranceCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CloseClaimCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClaimCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -93,6 +94,9 @@ public class AddressBookParser {
 
         case DeleteClaimCommand.COMMAND_WORD:
             return new DeleteClaimCommandParser().parse(arguments);
+
+        case CloseClaimCommand.COMMAND_WORD:
+            return new CloseClaimCommandParser().parse(arguments);
 
         case ListClaimsCommand.COMMAND_WORD:
             return new ListClaimsCommandParser().parse(arguments);
