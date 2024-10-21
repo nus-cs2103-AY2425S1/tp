@@ -22,7 +22,7 @@ ClientGrid is an **address book** designed for real estate agents to efficiently
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar clientGrid.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -186,6 +186,35 @@ Examples:
 
   ![result for 'deleteproperty c/124894 u/15-20'](images/deleteproperty.png)
 
+### Filtering clients : `filterclient`
+
+Filters the clients that starts with the prefix provided.
+
+Format: `filterclient n/NAME`
+
+* Filters the client with the specified prefix `NAME`.
+* The `NAME` ignores extra/leading/trailing spaces. Extra/leading/trailing spaces will be trimmed and the name will be converted into an array of words. The `BUYER_NAME` also ignores UPPER/lower case. All names will be converted to lower case and checked against the in-memory database.
+
+Examples:
+* `filterclient n/A` filters the clients that starts with the prefix `A`.
+
+  ![result for 'filterclient n/A'](images/filterclient.png)
+
+### Deleting a meeting : `deletemeeting`
+
+Deletes a specified meeting from the meeting book of ClientGrid.
+
+Format: `deletemeeting t/MEETING_TITLE d/MEETING_DATE`
+
+* Deletes a meeting with the specified `MEETING_TITLE` and `MEETING_DATE`.
+* The `MEETING_TITLE` should only contain alphanumeric characters and spaces, and it should not be blank.
+* The `MEETING_DATE` should be in the format dd-MM-yyyy and must be a valid date.
+
+Examples:
+* `deletemeeting t/Meeting 1 d/01-01-2024` deletes a meeting with meeting title `Meeting 1` and meeting date `01-01-2024`.
+
+  ![result for 'deletemeeting t/Meeting 1 d/01-01-2024'](images/deletemeeting.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -245,4 +274,5 @@ Action     | Format, Examples
 **Delete Seller** | `deleteseller p/PHONE_NUMBER`
 **Add Property** | `addproperty c/POSTAL_CODE u/UNIT_NUMBER`
 **Delete Property** | `deleteproperty c/POSTAL_CODE u/UNIT_NUMBER`
-
+**Filtering Clients** | `filterclient n/NAME`
+**Delete Meeting** | `deletemeeting t/MEETING_TITLE d/MEETING_DATE`

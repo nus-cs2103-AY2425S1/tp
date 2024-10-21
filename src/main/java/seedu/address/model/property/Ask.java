@@ -36,6 +36,10 @@ public class Ask {
         return value;
     }
 
+    public int toInteger() {
+        return Integer.valueOf(value);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
