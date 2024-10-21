@@ -22,6 +22,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewRentalCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.storage.CommandHistory;
 
 /**
  * Parses user input.
@@ -58,39 +59,51 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddClientCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new AddClientCommandParser().parse(arguments);
 
         case AddRentalCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new AddRentalCommandParser().parse(arguments);
 
         case EditClientCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new EditClientCommandParser().parse(arguments);
 
         case EditRentalCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new EditRentalCommandParser().parse(arguments);
 
         case DeleteClientCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new DeleteClientCommandParser().parse(arguments);
 
         case DeleteRentalCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new DeleteRentalCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new ListCommand();
 
         case ViewRentalCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new ViewRentalCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
+            CommandHistory.writeToFile(userInput);
             return new HelpCommand();
 
         default:
