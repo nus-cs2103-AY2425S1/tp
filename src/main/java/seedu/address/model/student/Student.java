@@ -2,10 +2,10 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -32,8 +32,6 @@ public class Student extends Person {
     private static final Set<Tag> DUMMY_TAG = new HashSet<>();
 
     private final List<AttendanceRecord> attendanceRecords = new ArrayList<>();
-
-   // private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
 
 
     // Identity fields
@@ -124,11 +122,7 @@ public class Student extends Person {
     public List<AttendanceRecord> getAttendanceRecord() {
         return attendanceRecords;
     }
-    /*
-    public Attendance getAttendance(LocalDate date) {
-        return attendanceRecords.get(date);
-    }
-     */
+
 
     /**
      * Adds an assignment

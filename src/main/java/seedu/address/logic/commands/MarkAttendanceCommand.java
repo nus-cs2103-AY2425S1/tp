@@ -57,11 +57,11 @@ public class MarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         // Find the student by name
         Student student = model.getStudentByName(name);
-        TutorialGroup tg = student.getTutorialGroup();
-
         if (student == null) {
             throw new CommandException("Student not found: " + name);
         }
+        TutorialGroup tg = student.getTutorialGroup();
+
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
