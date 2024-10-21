@@ -3,6 +3,9 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Represents a Pet's breed in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidBreed(String)}
@@ -31,6 +34,15 @@ public class Breed {
      */
     public static boolean isValidBreed(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Retrieves the initials of the pet's breed as a String.
+     */
+    public String getInitials() {
+        return Arrays.stream(value.split(" "))
+                .map(word -> String.valueOf(word.charAt(0)))
+                .collect(Collectors.joining());
     }
 
     @Override

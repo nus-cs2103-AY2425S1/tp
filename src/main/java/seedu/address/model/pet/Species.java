@@ -33,6 +33,13 @@ public class Species {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Retrieves the initial of the pet's species as a String.
+     */
+    public String getInitial() {
+        return String.valueOf(value.charAt(0));
+    }
+
     @Override
     public String toString() {
         return value;

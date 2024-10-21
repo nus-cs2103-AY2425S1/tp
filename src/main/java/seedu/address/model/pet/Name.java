@@ -3,6 +3,9 @@ package seedu.address.model.pet;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * Represents a Pet's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -31,6 +34,15 @@ public class Name {
      */
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Retrieves the initials of the pet's name as a String.
+     */
+    public String getInitials() {
+        return Arrays.stream(name.split(" "))
+                .map(word -> String.valueOf(word.charAt(0)))
+                .collect(Collectors.joining());
     }
 
     @Override
