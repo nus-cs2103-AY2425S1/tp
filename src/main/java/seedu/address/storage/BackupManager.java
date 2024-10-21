@@ -135,13 +135,6 @@ public class BackupManager {
         }
     }
 
-    /**
-     * Retrieves the last modified time of a given file path.
-     *
-     * @param path The path to the file whose last modified time is to be retrieved.
-     * @return A {@code FileTime} object representing the last modified time of the file.
-     *         If the file's last modified time cannot be retrieved, returns the current system time.
-     */
     protected FileTime getFileCreationTime(Path path) {
         try {
             return Files.getLastModifiedTime(path);
