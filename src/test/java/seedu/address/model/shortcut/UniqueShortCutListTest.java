@@ -33,6 +33,47 @@ public class UniqueShortCutListTest {
         uniqueShortCutList.add(veganShortCut);
         assertTrue(uniqueShortCutList.contains(veganShortCut));
     }
+    @Test
+    void containsAlias_aliasNotInList_returnsFalse() {
+        // Alias not in list
+        Alias aliasToCheck = new Alias("v");
+        assertFalse(uniqueShortCutList.containsAlias(aliasToCheck));
+    }
+
+    @Test
+    void containsAlias_aliasInList_returnsTrue() {
+        // Add shortcut1 to the list
+        uniqueShortCutList.add(veganShortCut);
+
+        // Alias v should now be in the list
+        Alias aliasToCheck = new Alias("v");
+        assertTrue(uniqueShortCutList.containsAlias(aliasToCheck));
+    }
+
+    @Test
+    void containsAlias_differentAlias_returnsFalse() {
+        // Add shortcut1 to the list
+        uniqueShortCutList.add(veganShortCut);
+
+        // Alias vg is not in the list, should return false
+        Alias aliasToCheck = new Alias("vg");
+        assertFalse(uniqueShortCutList.containsAlias(aliasToCheck));
+    }
+
+    @Test
+    void containsAlias_multipleShortcuts_correctAliasCheck() {
+        // Add multiple shortcuts
+        uniqueShortCutList.add(veganShortCut);
+        uniqueShortCutList.add(vegetarianShortCut);
+
+        // Alias v should be in the list
+        Alias aliasToCheckV = new Alias("v");
+        assertTrue(uniqueShortCutList.containsAlias(aliasToCheckV));
+
+        // Alias vg should be in the list
+        Alias aliasToCheckVG = new Alias("vg");
+        assertTrue(uniqueShortCutList.containsAlias(aliasToCheckVG));
+    }
 
     @Test
     public void add_duplicateShortcut_throwsDuplicateShortCutException() {

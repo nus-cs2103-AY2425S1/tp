@@ -34,7 +34,7 @@ public class ShortCut {
         }
 
         ShortCut other = (ShortCut) sc;
-        return this.alias.equals(other.alias);
+        return this.alias.equals(other.alias) && this.fullTagName.equals(other.fullTagName);
     }
 
     @Override

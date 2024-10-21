@@ -26,7 +26,15 @@ public class UniqueShortCutList implements Iterable<ShortCut> {
      */
     public boolean contains(ShortCut toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(shortcut -> shortcut.getAlias().equals(toCheck.getAlias()));
+        return internalList.stream().anyMatch(shortcut -> shortcut.equals(toCheck));
+    }
+
+    /**
+     * Returns true if the list contains a shortcut with the same alias as the given argument.
+     */
+    public boolean containsAlias(Alias aliasToCheck) {
+        requireNonNull(aliasToCheck);
+        return internalList.stream().anyMatch(shortcut -> shortcut.getAlias().equals(aliasToCheck));
     }
 
     /**
@@ -35,7 +43,7 @@ public class UniqueShortCutList implements Iterable<ShortCut> {
      */
     public void add(ShortCut toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
+        if (containsAlias(toAdd.getAlias())) {
             throw new DuplicateShortCutException();
         }
         internalList.add(toAdd);

@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
 
 /**
@@ -98,4 +99,5 @@ public interface Model {
     void removeShortCut(ShortCut shortcut);
     boolean hasShortCut(ShortCut shortCut);
     ObservableList<ShortCut> getShortCutList();
+    boolean hasAlias(Alias alias);
 }

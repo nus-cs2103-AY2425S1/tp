@@ -14,7 +14,7 @@ public class DelShortCutCommand extends Command {
     public static final String COMMAND_WORD = "delShortCut";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a preassigned shortcut.\n"
             + "Usage: delShortCut al/v tn/Vegan";
-    public static final String MESSAGE_SUCCESS = "Shortcut with Alias Deleted: %1$s";
+    public static final String MESSAGE_SUCCESS = "Shortcut Deleted: %1$s";
     public static final String MESSAGE_SHORTCUT_NOT_FOUND = "Shortcut not found";
     private ShortCut toRemove;
     public DelShortCutCommand(ShortCut shortcut) {

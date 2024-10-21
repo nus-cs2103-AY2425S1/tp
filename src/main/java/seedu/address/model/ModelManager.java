@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
+import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
 
 /**
@@ -143,6 +144,10 @@ public class ModelManager implements Model {
     @Override
     public boolean hasShortCut(ShortCut shortcut) {
         return addressBook.hasShortCut(shortcut);
+    }
+    @Override
+    public boolean hasAlias(Alias alias) {
+        return addressBook.hasAlias(alias);
     }
     @Override
     public ObservableList<ShortCut> getShortCutList() {

@@ -11,6 +11,7 @@ import seedu.address.model.order.Order;
 import seedu.address.model.order.UniqueOrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.shortcut.Alias;
 import seedu.address.model.shortcut.ShortCut;
 import seedu.address.model.shortcut.UniqueShortCutList;
 
@@ -133,6 +134,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
     public boolean hasShortCut(ShortCut shortcut) {
         return shortcuts.contains(shortcut);
+    }
+    public boolean hasAlias(Alias alias) {
+        return shortcuts.containsAlias(alias);
     }
     //// util methods
 

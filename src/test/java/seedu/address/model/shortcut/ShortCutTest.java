@@ -46,7 +46,7 @@ public class ShortCutTest {
     }
 
     @Test
-    public void equals_differentTagName_returnsTrue() {
+    public void equals_differentTagName_returnsFalse() {
         Alias alias1 = new Alias("v");
         FullTagName fullTagName1 = new FullTagName("Vegan");
         ShortCut shortCut1 = new ShortCut(alias1, fullTagName1);
@@ -56,7 +56,7 @@ public class ShortCutTest {
         ShortCut shortCut2 = new ShortCut(alias2, fullTagName2);
 
         // Check if objects with different full tag names are not considered equal
-        assertEquals(shortCut1, shortCut2);
+        assertNotEquals(shortCut1, shortCut2);
     }
 
     @Test

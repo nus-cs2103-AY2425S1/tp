@@ -44,7 +44,7 @@ public class AddShortCutCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasShortCut(toAdd)) {
+        if (model.hasAlias(toAdd.getAlias())) {
             throw new CommandException(MESSAGE_DUPLICATE_ORDER);
         }
         model.addShortCut(toAdd);
