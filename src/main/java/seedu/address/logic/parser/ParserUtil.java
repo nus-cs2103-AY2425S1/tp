@@ -38,7 +38,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndexList} into a {@code set<Index>} and returns it.
+     * Parses {@code oneBasedIndexes} into a {@code Set<Index>} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer) or there are duplicates.
      */
