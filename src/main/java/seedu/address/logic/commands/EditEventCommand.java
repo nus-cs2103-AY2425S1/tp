@@ -191,10 +191,6 @@ public class EditEventCommand extends EditCommand {
             return Optional.ofNullable(celebrity);
         }
 
-//        public String getCelebrityName() {
-//            return celebrityName;
-//        }
-
         public void setCelebrityName(String celebrityName) {
             this.celebrityName = celebrityName;
         }

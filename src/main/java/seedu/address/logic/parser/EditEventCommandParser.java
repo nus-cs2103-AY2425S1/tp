@@ -2,12 +2,15 @@ package seedu.address.logic.parser;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEventCommand;
-import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.EditEventCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CELEBRITY;
 
 public class EditEventCommandParser implements Parser<EditEventCommand> {
 
@@ -31,7 +34,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY);
 
-        EditEventCommand.EditEventDescriptor editEventDescriptor = new EditEventCommand.EditEventDescriptor();
+        EditEventDescriptor editEventDescriptor = new EditEventDescriptor();
 
         if (argMultimap.getValue(PREFIX_EVENT_NAME).isPresent()) {
             editEventDescriptor.setEventName(ParserUtil.parseEventName(argMultimap.getValue(PREFIX_EVENT_NAME).get()));
@@ -42,7 +45,7 @@ public class EditEventCommandParser implements Parser<EditEventCommand> {
         if (argMultimap.getValue(PREFIX_EVENT_VENUE).isPresent()) {
             editEventDescriptor.setVenue(ParserUtil.parseVenue(argMultimap.getValue(PREFIX_EVENT_VENUE).get()));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+        if (argMultimap.getValue(PREFIX_EVENT_CELEBRITY).isPresent()) {
             editEventDescriptor.setCelebrityName(argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get());
         }
 
