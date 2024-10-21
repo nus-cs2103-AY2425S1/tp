@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  * Add the appointment details of an existing person in the address book.
  */
 public class AddAppointmentCommand extends Command {
-    public static final String COMMAND_WORD = "appointment";
+    public static final String COMMAND_WORD = "make_appt";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment details of the patient specified "
             + "by the index number used in the displayed patient list.\n"
@@ -32,8 +32,8 @@ public class AddAppointmentCommand extends Command {
             + "\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + " Surgery "
-            + PREFIX_START + " 21-10-2024-10-30 "
-            + PREFIX_END + " 21-10-2024-11-00 ";
+            + PREFIX_START + " dd-MM-yyyy-HH-mm "
+            + PREFIX_END + " dd-MM-yyyy-HH-mm ";
 
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Appointment Added \n\n%1$s";
     private final Index index;
