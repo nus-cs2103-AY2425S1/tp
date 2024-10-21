@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.job.exceptions.DuplicateJobException;
 import seedu.address.model.job.exceptions.JobNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of unique jobs.
@@ -29,6 +32,26 @@ public class UniqueJobList implements Iterable<Job> {
             throw new DuplicateJobException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Replaces the job {@code target} in the list with {@code editedJob}.
+     * {@code target} must exist in the list.
+     * The job identity of {@code editedJob} must not be the same as another existing job in the list.
+     */
+    public void setJob(Job target, Job editedJob) {
+        requireAllNonNull(target, editedJob);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new JobNotFoundException();
+        }
+
+        if (!target.isSameJob(editedJob) && contains(editedJob)) {
+            throw new DuplicateJobException();
+        }
+
+        internalList.set(index, editedJob);
     }
 
     public void setJobs(UniqueJobList replacement) {

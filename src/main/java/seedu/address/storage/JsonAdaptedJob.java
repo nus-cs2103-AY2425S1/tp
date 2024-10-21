@@ -29,6 +29,7 @@ class JsonAdaptedJob {
     private final String salary;
     private final String description;
     private final List<JsonAdaptedTag> requirements = new ArrayList<>();
+    private final List<String> matches = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedJob} with the given job details.
@@ -36,13 +37,17 @@ class JsonAdaptedJob {
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company,
             @JsonProperty("salary") String salary, @JsonProperty("description") String description,
-            @JsonProperty("requirements") List<JsonAdaptedTag> requirements) {
+            @JsonProperty("requirements") List<JsonAdaptedTag> requirements,
+            @JsonProperty("matches") List<String> matches) {
         this.name = name;
         this.company = company;
         this.salary = salary;
         this.description = description;
         if (requirements != null) {
             this.requirements.addAll(requirements);
+        }
+        if (requirements != null) {
+            this.matches.addAll(matches);
         }
     }
 
@@ -57,6 +62,7 @@ class JsonAdaptedJob {
         requirements.addAll(source.getRequirements().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        matches.addAll(source.getMatches().stream().collect(Collectors.toList()));
     }
 
     /**

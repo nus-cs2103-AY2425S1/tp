@@ -17,6 +17,7 @@ public class Job {
     private final JobSalary salary;
     private final JobDescription description;
     private final Set<Tag> requirements = new HashSet<>();
+    private final Set<String> matches = new HashSet<>();
 
     /**
      * TODO: Implement data validation
@@ -30,6 +31,16 @@ public class Job {
         this.salary = salary;
         this.description = description;
         this.requirements.addAll(requirements);
+    }
+
+    public Job(Name name, JobCompany company, JobSalary salary,
+            JobDescription description, Set<Tag> requirements, Set<String> matches) {
+        this.name = name;
+        this.company = company;
+        this.salary = salary;
+        this.description = description;
+        this.requirements.addAll(requirements);
+        this.matches.addAll(matches);
     }
 
     public Name getName() {
@@ -63,6 +74,18 @@ public class Job {
         }
 
         return otherJob != null && otherJob.getName().equals(getName()) && otherJob.getCompany().equals(getCompany());
+    }
+
+    public Set<String> getMatches() {
+        return matches;
+    }
+
+    public boolean hasMatched(String contactName) {
+        return this.matches.contains(contactName);
+    }
+
+    public String getUid() {
+        return company.toString() + "::" + name;
     }
 
     /**

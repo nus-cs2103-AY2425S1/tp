@@ -25,6 +25,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
+    private final String match;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +37,17 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
+        this.match = null;
+    }
+
+    public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills, String match) {
+        requireAllNonNull(name, phone, email, role, skills);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.role = role;
+        this.skills.addAll(skills);
+        this.match = match;
     }
 
     public Name getName() {
@@ -60,6 +72,18 @@ public class Person {
      */
     public Set<Skill> getSkills() {
         return Collections.unmodifiableSet(skills);
+    }
+
+    public String getMatch() {
+        return match;
+    }
+
+    public boolean hasMatched(String jobName) {
+        if(match == null) {
+            return false;
+        }
+
+        return match.equals(jobName);
     }
 
     /**
