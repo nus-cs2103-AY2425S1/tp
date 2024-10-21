@@ -81,6 +81,7 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD + " n/" + keywords.stream().collect(Collectors.joining(" n/")));
         ArgumentMultimap mapForKeywords = new ArgumentMultimap();
         keywords.stream().forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
+        mapForKeywords.put(new Prefix(""), "");
         assertEquals(new FindCommand(new ContainsKeywordsPredicate(mapForKeywords)), command);
     }
 
