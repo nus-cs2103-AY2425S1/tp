@@ -1,6 +1,37 @@
 package seedu.address.logic.parser.meetup;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FROM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FROM_DESC_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.MEETUP_FROM_DESC_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.MEETUP_INFO_DESC_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.MEETUP_NAME_DESC_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.MEETUP_NAME_DESC_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.MEETUP_TO_DESC_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_FROM_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
+
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.meetup.EditCommand;
@@ -8,13 +39,6 @@ import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
 import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
-
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
 
 public class EditCommandParserTest {
 
