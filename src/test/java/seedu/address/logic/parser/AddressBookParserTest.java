@@ -30,6 +30,8 @@ import seedu.address.logic.commands.ListEmployeeCommand;
 import seedu.address.logic.commands.ListPotentialCommand;
 import seedu.address.logic.commands.PotentialCommand;
 import seedu.address.logic.commands.PromoteCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContractEndDate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -154,6 +156,21 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3"));
     }
 
+    @Test
+    public void parseCommand_sort() throws Exception {
+        //sort name command
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortNameCommand.ARGUMENT_WORD) instanceof SortCommand);
+
+        //no parameter
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD));
+
+        //wrong parameter (is not name)
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " 3"));
+
+        //additional text behind parameter should not work
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " name 3"));
+    }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
