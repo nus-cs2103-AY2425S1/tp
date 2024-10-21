@@ -12,10 +12,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Attendance.Attendance;
-import seedu.address.model.Attendance.AttendanceRecord;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentQuery;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -48,6 +48,7 @@ public class Student extends Person {
         super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
         requireAllNonNull(tutorialGroup, studentNumber);
         this.tutorialGroup = tutorialGroup;
+        tutorialGroup.addStudent(this);
         this.studentNumber = studentNumber;
     }
 
@@ -151,5 +152,12 @@ public class Student extends Person {
             }
         }
         return null;
+    }
+
+    /**
+     * Deletes the student from the tutorial group.
+     */
+    public void removeFromTG() {
+        tutorialGroup.deleteStudent(this);
     }
 }

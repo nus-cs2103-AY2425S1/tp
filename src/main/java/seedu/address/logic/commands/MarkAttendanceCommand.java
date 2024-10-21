@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
-import seedu.address.model.Attendance.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 

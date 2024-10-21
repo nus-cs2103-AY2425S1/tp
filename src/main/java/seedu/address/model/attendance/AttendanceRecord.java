@@ -1,6 +1,4 @@
-package seedu.address.model.Attendance;
-
-import seedu.address.model.Attendance.Attendance;
+package seedu.address.model.attendance;
 
 import java.time.LocalDate;
 

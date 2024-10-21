@@ -37,10 +37,18 @@ public class TutorialGroup {
 
     /**
      * Adds a student to the tutorial group.
-     * @param student
+     * @param student student to be added
      */
     public void addStudent(Student student) {
         students.add(student);
+    }
+
+    /**
+     * Removes a student from the tutorial group.
+     * @param student student to be removed
+     */
+    public void deleteStudent(Student student) {
+        students.remove(student);
     }
 
     /**
