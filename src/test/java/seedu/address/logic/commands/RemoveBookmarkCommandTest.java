@@ -27,16 +27,17 @@ public class RemoveBookmarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Company companyToRemoveBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        Company companyToRemoveBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY
+                .getZeroBased());
         RemoveBookmarkCommand removeBookmarkCommand = new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(RemoveBookmarkCommand.MESSAGE_REMOVE_BOOKMARK_SUCCESS,
                 Messages.format(companyToRemoveBookmark));
 
-        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(), companyToRemoveBookmark.getPhone(),
-                companyToRemoveBookmark.getEmail(), companyToRemoveBookmark.getAddress(),
-                companyToRemoveBookmark.getCareerPageUrl(), companyToRemoveBookmark.getTags(),
-                new Bookmark(false));
+        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
+                companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
+                companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
+                companyToRemoveBookmark.getTags(), new Bookmark(false));
         ModelManager expectedModel = new ModelManager(bookmarkedModel.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
@@ -63,16 +64,17 @@ public class RemoveBookmarkCommandTest {
     public void execute_validIndexFilteredList_success() {
         showCompanyAtIndex(bookmarkedModel, INDEX_FIRST_COMPANY);
 
-        Company companyToRemoveBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        Company companyToRemoveBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY
+                .getZeroBased());
         RemoveBookmarkCommand removeBookmarkCommand = new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(RemoveBookmarkCommand.MESSAGE_REMOVE_BOOKMARK_SUCCESS,
                 Messages.format(companyToRemoveBookmark));
 
-        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(), companyToRemoveBookmark.getPhone(),
-                companyToRemoveBookmark.getEmail(), companyToRemoveBookmark.getAddress(),
-                companyToRemoveBookmark.getCareerPageUrl(), companyToRemoveBookmark.getTags(),
-                new Bookmark(false));
+        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
+                companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
+                companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
+                companyToRemoveBookmark.getTags(), new Bookmark(false));
         ModelManager expectedModel = new ModelManager(bookmarkedModel.getAddressBook(), new UserPrefs());
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);

@@ -32,7 +32,7 @@ public class TypicalCompanies {
     public static final Company META = new CompanyBuilder().withName("Meta")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("meta@example.com").withPhone("00000002")
-            .withTags("bigTech", "facebook").withIsBookmark(true).build();
+            .withTags("bigTech", "facebook").build();
     public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
             .withEmail("grab@example.com").withAddress("wall street").build();
     public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")
