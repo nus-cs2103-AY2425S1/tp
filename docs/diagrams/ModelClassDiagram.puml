@@ -38,10 +38,11 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
 Person *--> Name
-Person *--> Phone
+Person *--> Gender
 Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+Person *--> Age
+Person *--> "*" StudyGroupTag
+Person *--> "0..1" Detail
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
