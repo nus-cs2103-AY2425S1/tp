@@ -43,6 +43,7 @@ public class AddTuteeCommandParser implements Parser<AddTuteeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTuteeCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS);
         // Hours is optional for adding a tutee and will be set to 0 if unspecified
         Hours hours;
         if (!arePrefixesPresent(argMultimap, PREFIX_HOURS)) {
@@ -51,7 +52,6 @@ public class AddTuteeCommandParser implements Parser<AddTuteeCommand> {
             hours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
