@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -16,6 +15,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Status;
 import seedu.address.model.task.Task;
@@ -26,37 +26,41 @@ import seedu.address.model.task.TaskName;
  */
 public class EditTaskCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit_t";
-    public static final String COMMAND_WORD_ALIAS = "et";
+    public static final String COMMAND_WORD = "edit_task_grp";
+    public static final String COMMAND_WORD_ALIAS = "etg";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the task. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Edits the details of the task of given group. "
         + "Parameters: "
-        + "INDEX (must be a positive integer) "
+        + PREFIX_GROUP_NAME + " GROUP NAME "
+        + PREFIX_INDEX + "INDEX (must be a positive integer) "
         + "[" + PREFIX_TASK_NAME + "TASK NAME] "
         + "[" + PREFIX_TASK_DEADLINE + "DEADLINE]"
-        + "[" + PREFIX_TASK_STATUS + "STATUS]\n"
-        + "Example: " + COMMAND_WORD + " 1 "
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GROUP_NAME + "team 2"
+        + " 1 "
         + PREFIX_TASK_NAME + "Complete Assignment "
-        + PREFIX_TASK_DEADLINE + "2024-12-12 1800 "
-        + PREFIX_TASK_STATUS + "PENDING\n";
+        + PREFIX_TASK_DEADLINE + "2024-12-12 1800\n";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-    public static final String MESSAGE_TASK_NOT_FOUND = "Task not found.";
-    public static final String MESSAGE_INVALID_STATUS = "Invalid status.";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s in %2s";
     public static final String MESSAGE_DUPLICATE_TASK = "Duplicated task.";
+    public static final String MESSAGE_INVALID_FILED_STATUS = "Task status should not be modified";
 
     private final Index index;
+    private final GroupName groupName;
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
-     * @param index                of the task in the filtered task list to edit
+     * @param groupName of the target group
+     * @param index of the task in the task list belonging to the identified group
      * @param editTaskDescriptor details to edit the task with
      */
-    public EditTaskCommand(Index index, EditTaskDescriptor editTaskDescriptor) {
+    public EditTaskCommand(GroupName groupName, Index index, EditTaskDescriptor editTaskDescriptor) {
+        requireNonNull(groupName);
         requireNonNull(index);
         requireNonNull(editTaskDescriptor);
-
+        this.groupName = groupName;
         this.index = index;
         this.editTaskDescriptor = new EditTaskDescriptor(editTaskDescriptor);
     }
@@ -64,8 +68,8 @@ public class EditTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
-        List<Group> groupList = model.getFilteredGroupList();
+        Group group = model.getGroupByName(groupName);
+        List<Task> lastShownList = group.getTasks().stream().toList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
@@ -77,14 +81,10 @@ public class EditTaskCommand extends Command {
         if (!taskToEdit.isSameTask(editedTask) && model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
-        for (Group group : groupList) {
-            if (group.hasTask(taskToEdit)) {
-                model.setTask(taskToEdit, editedTask, group);
-            }
-        }
+        model.setTask(taskToEdit, editedTask, group);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, Messages.format(editedTask)));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
+            Messages.format(editedTask), Messages.format(group)));
     }
 
     /**
@@ -96,9 +96,9 @@ public class EditTaskCommand extends Command {
 
         TaskName updatedName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
         Deadline updatedDeadline = editTaskDescriptor.getDeadline().orElse(taskToEdit.getDeadline());
-        Status updatedStatus = editTaskDescriptor.getStatus().orElse(taskToEdit.getStatus());
+        Status status = taskToEdit.getStatus();
         int numGroupHasTask = taskToEdit.getGroupsWithTask();
-        return new Task(updatedName, updatedDeadline, updatedStatus, numGroupHasTask);
+        return new Task(updatedName, updatedDeadline, status, numGroupHasTask);
     }
 
     @Override
@@ -114,12 +114,14 @@ public class EditTaskCommand extends Command {
 
         EditTaskCommand otherEditCommand = (EditTaskCommand) other;
         return index.equals(otherEditCommand.index)
+            && groupName.equals(otherEditCommand.groupName)
             && editTaskDescriptor.equals(otherEditCommand.editTaskDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+            .add("groupName", groupName)
             .add("index", index)
             .add("editPersonDescriptor", editTaskDescriptor)
             .toString();
@@ -132,7 +134,6 @@ public class EditTaskCommand extends Command {
     public static class EditTaskDescriptor {
         private TaskName taskName;
         private Deadline deadline;
-        private Status status;
 
         public EditTaskDescriptor() {
         }
@@ -144,14 +145,13 @@ public class EditTaskCommand extends Command {
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setTaskName(toCopy.taskName);
             setDeadline(toCopy.deadline);
-            setStatus(toCopy.status);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(taskName, deadline, status);
+            return CollectionUtil.isAnyNonNull(taskName, deadline);
         }
 
         public void setTaskName(TaskName taskName) {
@@ -167,12 +167,6 @@ public class EditTaskCommand extends Command {
         public Optional<Deadline> getDeadline() {
             return Optional.ofNullable(deadline);
         }
-        public void setStatus(Status status) {
-            this.status = status;
-        }
-        public Optional<Status> getStatus() {
-            return Optional.ofNullable(status);
-        }
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -186,8 +180,7 @@ public class EditTaskCommand extends Command {
 
             EditTaskDescriptor otherEditTaskDescriptor = (EditTaskDescriptor) other;
             return Objects.equals(taskName, otherEditTaskDescriptor.taskName)
-                && Objects.equals(deadline, otherEditTaskDescriptor.deadline)
-                && Objects.equals(status, otherEditTaskDescriptor.status);
+                && Objects.equals(deadline, otherEditTaskDescriptor.deadline);
         }
 
         @Override
@@ -195,7 +188,6 @@ public class EditTaskCommand extends Command {
             return new ToStringBuilder(this)
                 .add("taskName", taskName)
                 .add("deadline", deadline)
-                .add("status", status)
                 .toString();
         }
     }
