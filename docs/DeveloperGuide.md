@@ -239,10 +239,104 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] Consultation Management
+
+The consultation management feature enables TAs to schedule and manage consultation sessions with students. This section describes the implementation details of the consultation system.
+
+#### Architecture
+
+The consultation feature comprises these key components:
+
+* `Consultation`: Core class representing a consultation session
+* `Date`: Represents and validates consultation dates
+* `Time`: Represents and validates consultation times
+* `AddConsultCommand`: Handles adding new consultations
+* `AddConsultCommandParser`: Parses user input for consultation commands
+
+[//]: # (The class diagram below shows the structure of the consultation feature:)
+
+[//]: # (<img src="images/ConsultationClassDiagram.png" width="450" />)
+
+#### Implementation
+
+The consultation management system is implemented through several key mechanisms:
+
+**1. Date and Time Validation**
+
+The system enforces strict validation for consultation scheduling:
+* Dates must be in `YYYY-MM-DD` format and represent valid calendar dates
+* Times must be in 24-hour `HH:mm` format
+* Both use Java's built-in `LocalDate` and `LocalTime` for validation
+
+Example:
+```java
+Date date = new Date("2024-10-20"); // Valid
+Time time = new Time("14:00");      // Valid
+Date invalidDate = new Date("2024-13-45"); // Throws IllegalArgumentException
+```
+
+**2. Consultation Management**
+
+The `Consultation` class manages:
+* Immutable date and time properties
+* Thread-safe student list management
+* Equality based on date, time, and enrolled students
+
+Core operations:
+```java
+// Creating a consultation
+Consultation consult = new Consultation(date, time, students);
+
+// Adding/removing students
+consult.addStudent(student);
+consult.removeStudent(student);
+
+// Getting immutable student list
+List<Student> students = consult.getStudents(); // Returns unmodifiable list
+```
+
+**3. Command Processing**
+
+The `addconsult` command follows this flow:
+
+1. User enters command:
+```
+addconsult d/2024-10-20 t/14:00
+```
+
+2. System processes command:
+```java
+Date date = ParserUtil.parseDate(dateStr);
+Time time = ParserUtil.parseTime(timeStr);
+Consultation consult = new Consultation(date, time, List.of());
+return new AddConsultCommand(consult);
+```
+
+#### Design Considerations
+
+**Aspect 1: Date and Time Representation**
+
+* **Alternative 1 (current choice)**: Separate `Date` and `Time` classes
+    * Pros: Clear separation of concerns, focused validation
+    * Cons: Two objects to manage instead of one
+
+* **Alternative 2**: Combined `DateTime` class
+    * Pros: Unified handling of temporal data
+    * Cons: More complex validation, reduced modularity
+
+**Aspect 2: Student List Management**
+
+* **Alternative 1 (current choice)**: Immutable view with mutable internal list
+    * Pros: Thread-safe external access, flexible internal updates
+    * Cons: Complex implementation
+
+* **Alternative 2**: Fully immutable list
+    * Pros: Simpler thread-safety
+    * Cons: Higher memory usage for modifications
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -409,6 +503,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. The given index is invalid.
   * 2a1. TAHub shows an error message stating that the index is invalid.
   * 2a2. Use case ends.
+
+**<u>Use case: UC6 - Create a Consultation</u>**
+
+**MSS**
+
+1. User enters: `addconsult d/2024-10-20 t/14:00`
+2. System validates date and time
+3. System creates consultation
+4. Success message shown
+
+**Extensions**
+
+* 1a. Invalid date/time format
+    * 1a1. System shows error message
+    * 1a2. Use case ends
+
+* 1b. Date/time already booked
+    * 1b1. System shows conflict error
+    * 1b2. Use case ends
+
+**<u>Use case: UC7 - Add Student to Consultation</u>**
+
+**MSS**
+
+1. TA lists existing consultations
+2. TA selects consultation
+3. TA adds student
+4. System updates consultation
+
+**Extensions**
+
+* 2a. Invalid consultation selection
+    * 2a1. System shows error message
+    * 2a2. Use case resumes from step 1
 
 *{More to be added}*
 
