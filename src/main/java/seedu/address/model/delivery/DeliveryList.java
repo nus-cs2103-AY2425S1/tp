@@ -114,7 +114,7 @@ public class DeliveryList {
     }
 
     public void sortById() {
-        internalList.sort(Comparator.comparing(d -> d.getId().value));
+        internalList.sort(Comparator.comparing(d -> d.getDeliveryId().value));
     }
 
     public void sortByStatus() {
