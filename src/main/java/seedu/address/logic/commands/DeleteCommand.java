@@ -174,9 +174,9 @@ public class DeleteCommand extends Command {
         if (targetIndex != null) {
             if (policyIndex != null) {
                 return getClass().getCanonicalName() + "{targetIndex="
-                        + targetIndex + ", policyIndex=" + policyIndex + "}";
+                        + targetIndex.getOneBased() + ", policyIndex=" + policyIndex.getOneBased() + "}";
             } else {
-                return getClass().getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+                return getClass().getCanonicalName() + "{targetIndex=" + targetIndex.getOneBased() + "}";
             }
         } else {
             return getClass().getCanonicalName() + "{targetName=" + targetName + "}";
