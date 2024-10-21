@@ -117,6 +117,10 @@ public class EduLog implements ReadOnlyEduLog {
         student.unmark();
     }
 
+    public void unmarkAllStudents() {
+        students.forEach(Student::unmark);
+    }
+
     // ------------------ lesson-level operations -----------------------
 
     /**

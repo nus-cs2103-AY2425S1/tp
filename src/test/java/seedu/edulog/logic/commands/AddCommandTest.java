@@ -152,10 +152,12 @@ public class AddCommandTest {
          * @param target the student to be marked as absent.
          */
         @Override
-        public void unmarkStudent(Student target) {
-            throw new AssertionError("This method should not be called.");
-        }
+        public void unmarkStudent(Student target) { throw new AssertionError("This method should not be called."); }
 
+        @Override
+        public void unmarkAllStudents() {
+            throw new AssertionError("This method should not be called");
+        }
         @Override
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");

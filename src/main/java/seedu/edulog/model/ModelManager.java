@@ -116,6 +116,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void unmarkAllStudents() {
+        eduLog.unmarkAllStudents();
+    }
+
+    @Override
     public void addStudent(Student student) {
         eduLog.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

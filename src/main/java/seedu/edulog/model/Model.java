@@ -72,6 +72,11 @@ public interface Model {
     void unmarkStudent(Student target);
 
     /**
+     * Unmark all students
+     */
+    void unmarkAllStudents();
+
+    /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */
