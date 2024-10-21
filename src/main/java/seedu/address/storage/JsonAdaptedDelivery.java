@@ -45,7 +45,7 @@ public class JsonAdaptedDelivery {
                                @JsonProperty("eta") String eta,
                                @JsonProperty("status") String status,
                                @JsonProperty("archive") String archive) {
-            this.deliveryId = deliveryId;
+        this.deliveryId = deliveryId;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;
@@ -140,7 +140,7 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
         }
         final Status modelStatus = new Status(status);
-        
+
         if (archive == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Archive.class.getSimpleName()));
         }

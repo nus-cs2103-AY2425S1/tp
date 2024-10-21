@@ -146,11 +146,7 @@ public class DeliveryBuilder {
      * @return The built Delivery object.
      */
     public Delivery build() {
-<<<<<<< HEAD
-        return new Delivery(deliveryId, itemName, address, cost, date, time, eta, status);
-=======
-        return new Delivery(id, itemName, address, cost, date, time, eta, status, archive);
->>>>>>> master
+        return new Delivery(deliveryId, itemName, address, cost, date, time, eta, status, archive);
     }
 
 }

@@ -30,7 +30,7 @@ public class Delivery {
     public Delivery(DeliveryId deliveryId, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta,
                     Status status, Archive archive) {
         requireAllNonNull(itemName, address, cost, date, time, eta, status);
-            this.deliveryId = deliveryId;
+        this.deliveryId = deliveryId;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;

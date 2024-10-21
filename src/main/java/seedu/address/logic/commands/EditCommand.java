@@ -194,14 +194,8 @@ public class EditCommand extends Command {
     private static Delivery createEditedDelivery(Delivery toEdit, EditDeliveryDescriptor descriptor) {
         assert toEdit != null;
 
-<<<<<<< HEAD
-        //Id id = toEdit.getId();
-=======
-        Id id = toEdit.getId();
-
         Archive archive = toEdit.getArchive();
 
->>>>>>> master
         ItemName itemName = descriptor.getItemName().orElse(toEdit.getItemName());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
