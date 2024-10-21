@@ -247,12 +247,12 @@
       "tasks" : [ {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "wfg",
+        "taskName" : "fevrgb",
         "groupsWithTask" : "1"
       }, {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "fevrgb",
+        "taskName" : "wfg",
         "groupsWithTask" : "1"
       } ],
       "groupName" : "Team 3"
@@ -281,7 +281,7 @@
       "tasks" : [ {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scvg",
+        "taskName" : "fevrgb",
         "groupsWithTask" : "1"
       }, {
         "deadline" : "2024-09-09 1900",
@@ -291,7 +291,7 @@
       }, {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "fevrgb",
+        "taskName" : "scvg",
         "groupsWithTask" : "1"
       } ],
       "groupName" : "Team 3"
@@ -325,12 +325,7 @@
       "tasks" : [ {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scvg",
-        "groupsWithTask" : "1"
-      }, {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "wfg",
+        "taskName" : "scg",
         "groupsWithTask" : "1"
       }, {
         "deadline" : "2024-09-09 1900",
@@ -340,7 +335,12 @@
       }, {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scg",
+        "taskName" : "wfg",
+        "groupsWithTask" : "1"
+      }, {
+        "deadline" : "2024-09-09 1900",
+        "status" : "PENDING",
+        "taskName" : "scvg",
         "groupsWithTask" : "1"
       } ],
       "groupName" : "Team 3"
@@ -379,12 +379,7 @@
       "tasks" : [ {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scvg",
-        "groupsWithTask" : "1"
-      }, {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "wfg",
+        "taskName" : "scg",
         "groupsWithTask" : "1"
       }, {
         "deadline" : "2024-09-09 1900",
@@ -399,7 +394,12 @@
       }, {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scg",
+        "taskName" : "wfg",
+        "groupsWithTask" : "1"
+      }, {
+        "deadline" : "2024-09-09 1900",
+        "status" : "PENDING",
+        "taskName" : "scvg",
         "groupsWithTask" : "1"
       } ],
       "groupName" : "Team 3"
@@ -443,12 +443,7 @@
       "tasks" : [ {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scvg",
-        "groupsWithTask" : "1"
-      }, {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "wfg",
+        "taskName" : "scg",
         "groupsWithTask" : "1"
       }, {
         "deadline" : "2024-09-09 1900",
@@ -463,7 +458,12 @@
       }, {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scg",
+        "taskName" : "wfg",
+        "groupsWithTask" : "1"
+      }, {
+        "deadline" : "2024-09-09 1900",
+        "status" : "PENDING",
+        "taskName" : "scvg",
         "groupsWithTask" : "1"
       } ],
       "groupName" : "Team 3"
@@ -511,12 +511,7 @@
       "tasks" : [ {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scvg",
-        "groupsWithTask" : "1"
-      }, {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "wfg",
+        "taskName" : "scg",
         "groupsWithTask" : "1"
       }, {
         "deadline" : "2024-09-09 1900",
@@ -531,7 +526,12 @@
       }, {
         "deadline" : "2024-09-09 1900",
         "status" : "PENDING",
-        "taskName" : "scg",
+        "taskName" : "wfg",
+        "groupsWithTask" : "1"
+      }, {
+        "deadline" : "2024-09-09 1900",
+        "status" : "PENDING",
+        "taskName" : "scvg",
         "groupsWithTask" : "1"
       } ],
       "groupName" : "Team 3"
@@ -1729,181 +1729,9 @@
       "groupsWithTask" : "1"
     } ]
   }, {
-    "persons" : [ {
-      "name" : "sooyap",
-      "email" : "e0958407@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0252819X",
-      "groupName" : "Team 1"
-    }, {
-      "name" : "qwerfg",
-      "email" : "ed@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0123456X",
-      "groupName" : "Team 2"
-    }, {
-      "name" : "qwsdf",
-      "email" : "er@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0000000X",
-      "groupName" : "Team 2"
-    }, {
-      "name" : "wed",
-      "email" : "e@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0654321X",
-      "groupName" : "Team 2"
-    } ],
-    "groups" : [ {
-      "students" : [ {
-        "name" : "sooyap",
-        "email" : "e0958407@u.nus.edu",
-        "tags" : [ ],
-        "studentNumber" : "A0252819X",
-        "groupName" : "Team 1"
-      } ],
-      "tasks" : [ {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "w",
-        "groupsWithTask" : "1"
-      }, {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "wedf",
-        "groupsWithTask" : "1"
-      } ],
-      "groupName" : "Team 1"
-    }, {
-      "students" : [ {
-        "name" : "qwerfg",
-        "email" : "ed@u.nus.edu",
-        "tags" : [ ],
-        "studentNumber" : "A0123456X",
-        "groupName" : "Team 2"
-      }, {
-        "name" : "qwsdf",
-        "email" : "er@u.nus.edu",
-        "tags" : [ ],
-        "studentNumber" : "A0000000X",
-        "groupName" : "Team 2"
-      }, {
-        "name" : "wed",
-        "email" : "e@u.nus.edu",
-        "tags" : [ ],
-        "studentNumber" : "A0654321X",
-        "groupName" : "Team 2"
-      } ],
-      "tasks" : [ {
-        "deadline" : "2024-09-09 1900",
-        "status" : "COMPLETED",
-        "taskName" : "wef",
-        "groupsWithTask" : "1"
-      } ],
-      "groupName" : "Team 2"
-    }, {
-      "students" : [ ],
-      "tasks" : [ {
-        "deadline" : "2024-09-09 1900",
-        "status" : "COMPLETED",
-        "taskName" : "qwedrf",
-        "groupsWithTask" : "1"
-      } ],
-      "groupName" : "Team 3"
-    } ],
-    "tasks" : [ {
-      "deadline" : "2024-09-09 1900",
-      "status" : "PENDING",
-      "taskName" : "wedf",
-      "groupsWithTask" : "1"
-    }, {
-      "deadline" : "2024-09-09 1900",
-      "status" : "COMPLETED",
-      "taskName" : "qwedrf",
-      "groupsWithTask" : "1"
-    }, {
-      "deadline" : "2024-09-09 1900",
-      "status" : "PENDING",
-      "taskName" : "w",
-      "groupsWithTask" : "1"
-    }, {
-      "deadline" : "2024-09-09 1900",
-      "status" : "COMPLETED",
-      "taskName" : "wef",
-      "groupsWithTask" : "1"
-    } ]
-  }, {
-    "persons" : [ {
-      "name" : "sooyap",
-      "email" : "e0958407@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0252819X",
-      "groupName" : "Team 1"
-    }, {
-      "name" : "qwerfg",
-      "email" : "ed@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0123456X",
-      "groupName" : "!"
-    }, {
-      "name" : "qwsdf",
-      "email" : "er@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0000000X",
-      "groupName" : "!"
-    }, {
-      "name" : "wed",
-      "email" : "e@u.nus.edu",
-      "tags" : [ ],
-      "studentNumber" : "A0654321X",
-      "groupName" : "!"
-    } ],
-    "groups" : [ {
-      "students" : [ {
-        "name" : "sooyap",
-        "email" : "e0958407@u.nus.edu",
-        "tags" : [ ],
-        "studentNumber" : "A0252819X",
-        "groupName" : "Team 1"
-      } ],
-      "tasks" : [ {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "w",
-        "groupsWithTask" : "1"
-      }, {
-        "deadline" : "2024-09-09 1900",
-        "status" : "PENDING",
-        "taskName" : "wedf",
-        "groupsWithTask" : "1"
-      } ],
-      "groupName" : "Team 1"
-    }, {
-      "students" : [ ],
-      "tasks" : [ {
-        "deadline" : "2024-09-09 1900",
-        "status" : "COMPLETED",
-        "taskName" : "qwedrf",
-        "groupsWithTask" : "1"
-      } ],
-      "groupName" : "Team 3"
-    } ],
-    "tasks" : [ {
-      "deadline" : "2024-09-09 1900",
-      "status" : "PENDING",
-      "taskName" : "wedf",
-      "groupsWithTask" : "1"
-    }, {
-      "deadline" : "2024-09-09 1900",
-      "status" : "COMPLETED",
-      "taskName" : "qwedrf",
-      "groupsWithTask" : "1"
-    }, {
-      "deadline" : "2024-09-09 1900",
-      "status" : "PENDING",
-      "taskName" : "w",
-      "groupsWithTask" : "1"
-    } ]
+    "persons" : [ ],
+    "groups" : [ ],
+    "tasks" : [ ]
   } ],
-  "currentVersionIndex" : 38
+  "currentVersionIndex" : 37
 }

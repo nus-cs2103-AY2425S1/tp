@@ -86,6 +86,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTasks(newData.getTaskList());
     }
 
+    /**
+     * Creates a defensive copy of the T_Assistant
+     * @param newData  The data to be copied over.
+     * @return         Returns the new addressbook
+     */
     public AddressBook duplicateCopy(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         AddressBook newAddressBook = new AddressBook();

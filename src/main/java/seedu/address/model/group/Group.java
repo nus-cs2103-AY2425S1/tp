@@ -43,6 +43,10 @@ public class Group {
         this.groupName = groupName;
     }
 
+    /**
+     * Creates a defensive copy of the group
+     * @param otherGroup  The group whose values are to be copied
+     */
     public Group(Group otherGroup) {
         requireNonNull(otherGroup);
         this.groupName = otherGroup.groupName;

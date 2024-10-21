@@ -52,6 +52,10 @@ public class Student {
         this.studentNumber = studentNumber;
     }
 
+    /**
+     * Creates a defensive copy of the student
+     * @param otherStudent  The student whose values are to be copied
+     */
     public Student(Student otherStudent) {
         requireNonNull(otherStudent);
         this.name = otherStudent.name;

@@ -9,14 +9,16 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.State;
-import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
@@ -65,7 +67,7 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         commandResult = command.execute(model);
         this.versionHistory = command.updateVersionHistory(versionHistory, model);
-        ReadOnlyAddressBook tempAddressBook = versionHistory.versions.get(versionHistory.currentVersionIndex);
+        ReadOnlyAddressBook tempAddressBook = versionHistory.getVersions().get(versionHistory.getCurrentVersionIndex());
         ReadOnlyAddressBook currentAddressBook = new AddressBook().duplicateCopy(tempAddressBook);
         model.setAddressBook(currentAddressBook);
         try {

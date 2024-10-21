@@ -10,12 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.VersionHistory;
-import seedu.address.model.group.Group;
-import seedu.address.model.student.Student;
-import seedu.address.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -43,8 +38,9 @@ class JsonSerializableVersionHistory {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableVersionHistory(VersionHistory source) {
-        addressBooks.addAll(source.versions.stream().map(JsonSerializableAddressBook::new).collect(Collectors.toList()));
-        this.currentVersionIndex = source.currentVersionIndex;
+        addressBooks.addAll(
+                source.getVersions().stream().map(JsonSerializableAddressBook::new).collect(Collectors.toList()));
+        this.currentVersionIndex = source.getCurrentVersionIndex();
     }
 
     /**
@@ -54,9 +50,9 @@ class JsonSerializableVersionHistory {
         VersionHistory versionHistory = new VersionHistory();
         for (JsonSerializableAddressBook jsonAddressBook : addressBooks) {
             AddressBook addressBook = jsonAddressBook.toModelType();
-            versionHistory.versions.add(addressBook);
+            versionHistory.getVersions().add(addressBook);
         }
-        versionHistory.currentVersionIndex = currentVersionIndex;
+        versionHistory.setCurrentVersionIndex(currentVersionIndex);
         return versionHistory;
     }
 

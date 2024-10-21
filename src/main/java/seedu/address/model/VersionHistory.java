@@ -1,18 +1,25 @@
 package seedu.address.model;
 
-import seedu.address.model.exceptions.RedoLimitException;
-import seedu.address.model.exceptions.UndoLimitException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.address.model.exceptions.RedoLimitException;
+import seedu.address.model.exceptions.UndoLimitException;
 
 /**
  * Represents the history of addressbooks saved in memory.
  */
 public class VersionHistory {
     private static final int MAXIMUM_INDEX = 99;
-    public List<ReadOnlyAddressBook> versions = new ArrayList<>();
-    public int currentVersionIndex = -1;
+    private List<ReadOnlyAddressBook> versions = new ArrayList<>();
+    private int currentVersionIndex = -1;
+
+    /**
+     * Initializes a new {@code VersionHistory} object with no previously saved history.
+     */
+    public VersionHistory() {
+        versions = new ArrayList<>();
+    }
 
     /**
      * Creates the system's {@code VersionHistory} object.
@@ -23,11 +30,16 @@ public class VersionHistory {
         this.currentVersionIndex = versionHistory.currentVersionIndex;
     }
 
-    /**
-     * Initializes a new {@code VersionHistory} object with no previously saved history.
-     */
-    public VersionHistory() {
-        versions = new ArrayList<>();
+    public List<ReadOnlyAddressBook> getVersions() {
+        return this.versions;
+    }
+
+    public int getCurrentVersionIndex() {
+        return this.currentVersionIndex;
+    }
+
+    public void setCurrentVersionIndex(int versionIndex) {
+        this.currentVersionIndex = versionIndex;
     }
 
     /**

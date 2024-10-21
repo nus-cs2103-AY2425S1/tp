@@ -27,9 +27,9 @@ public interface VersionHistoryStorage {
 
     /**
      * Saves the given {@link seedu.address.model.ReadOnlyUserPrefs} to the storage.
-     * @param VersionHistory cannot be null.
+     * @param versionHistory cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveVersionHistory(VersionHistory VersionHistory) throws IOException;
+    void saveVersionHistory(VersionHistory versionHistory) throws IOException;
 
 }
