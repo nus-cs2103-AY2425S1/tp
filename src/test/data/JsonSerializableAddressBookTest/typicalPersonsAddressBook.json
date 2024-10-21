@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
+  "_comment": "AddressBook save file which contains the same Person and Event values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
@@ -42,5 +42,6 @@
     "email" : "anna@example.com",
     "events": [ "IVP" ],
     "roles" : [ "Committee - Sports - Vice Sports Director - BIZ"]
-  } ]
+  }],
+  "events"
 }

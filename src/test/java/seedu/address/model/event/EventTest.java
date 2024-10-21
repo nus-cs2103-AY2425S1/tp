@@ -56,6 +56,7 @@ public class EventTest {
         assertFalse(event1.hashCode() == event2.hashCode());
     }
 
+    @Test
     public void isValidEvent_eventWithOnlySpaces_returnsFalse() {
         assertFalse(Event.isValidEvent("   "));
     }
