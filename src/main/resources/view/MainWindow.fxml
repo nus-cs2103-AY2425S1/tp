@@ -31,8 +31,9 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Import">
-            <MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#handleImport" text="Import CSV" />
+          <Menu mnemonicParsing="false" text="Data">
+            <MenuItem fx:id="importMenuItem" mnemonicParsing="false" onAction="#handleImport" text="Import" />
+            <MenuItem fx:id="exportMenuItem" mnemonicParsing="false" onAction="#handleExport" text="Export" />
           </Menu>
         </MenuBar>
 

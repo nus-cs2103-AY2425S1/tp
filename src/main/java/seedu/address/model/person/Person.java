@@ -25,6 +25,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+
     /**
      * Every field must be present and not null.
      */
@@ -36,6 +37,8 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
     }
+
+
 
     public Name getName() {
         return name;
@@ -96,6 +99,7 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
+
 
     @Override
     public int hashCode() {

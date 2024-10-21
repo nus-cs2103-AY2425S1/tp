@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -17,6 +18,8 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -29,13 +32,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    private PersonDetailsWindow personDetailsWindow;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private PersonDetailsWindow personDetailsWindow;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private ImportWindow importWindow;
+    private ExportWindow exportWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,9 +70,10 @@ public class MainWindow extends UiPart<Stage> {
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
-
+        personDetailsWindow = new PersonDetailsWindow(logic);
         helpWindow = new HelpWindow();
-        importWindow = new ImportWindow(this);
+        importWindow = new ImportWindow(this.logic);
+        exportWindow = new ExportWindow(this.logic);
     }
 
     public Stage getPrimaryStage() {
@@ -113,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetailsWindow);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -151,8 +156,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+
+
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the import window or focuses on it if it's already opened.
      */
     @FXML
     public void handleImport() {
@@ -160,6 +167,19 @@ public class MainWindow extends UiPart<Stage> {
             importWindow.show();
         } else {
             importWindow.focus();
+        }
+    }
+
+
+    /**
+     * Opens the export window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleExport() {
+        if (!exportWindow.isShowing()) {
+            exportWindow.show();
+        } else {
+            exportWindow.focus();
         }
     }
 
@@ -175,10 +195,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        personDetailsWindow.hide();
         importWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
-        personDetailsWindow.hide();
+
 
     }
 
@@ -208,23 +229,6 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
-            throw e;
-        }
-    }
-
-    /**
-     * Execute wrapper to share with other classes
-     * @param command
-     * @return CommandResult
-     * @throws CommandException
-     * @throws ParseException
-     */
-    public CommandResult execute(String command) throws CommandException, ParseException {
-        try {
-            return executeCommand(command);
-        } catch (CommandException | ParseException e) {
-            logger.info("An error occurred while executing command: " + command);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
