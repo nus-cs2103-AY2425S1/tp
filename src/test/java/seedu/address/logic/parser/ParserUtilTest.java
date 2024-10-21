@@ -24,7 +24,6 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_COMPANY_NAME = "ඞ";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_EMAIL = "example.com";
@@ -32,7 +31,6 @@ public class ParserUtilTest {
     private static final String INVALID_BILLING_DATE = "30";
 
     private static final String VALID_NAME = "Rachel Walker";
-    private static final String VALID_COMPANY_NAME = "Apple";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_EMAIL = "rachel@example.com";

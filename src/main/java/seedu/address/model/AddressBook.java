@@ -3,11 +3,13 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.UniqueCompanyList;
+import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.job.Job;
 import seedu.address.model.job.UniqueJobList;
 import seedu.address.model.person.Person;
@@ -113,9 +115,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.add(p);
     }
 
-    /** Adds a job to the address book. */
+    /**
+     * Adds a job to the address book.
+     * The existence of the company referenced by the job creation is checked here.
+     */
     public void addJob(Job j) {
+        boolean companyExists = StreamSupport
+                .stream(companies.spliterator(), false)
+                .anyMatch(x -> j.getCompany().matchesCompanyName(x.getName()));
+        if (!companyExists) {
+            throw new CompanyNotFoundException();
+        }
         jobs.add(j);
+        // TODO: add reference to job in company, requires company to be edited first.
     }
 
     /**
