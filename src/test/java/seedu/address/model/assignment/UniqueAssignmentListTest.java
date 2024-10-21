@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
 
 public class UniqueAssignmentListTest {
@@ -167,7 +166,8 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void remove_assignmentIdDoesNotExist_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.remove(ALICE_ALPHA.getAssignmentId()));
+        assertThrows(AssignmentNotFoundException.class, () ->
+                uniqueAssignmentList.remove(ALICE_ALPHA.getAssignmentId()));
     }
 
     @Test
@@ -190,8 +190,8 @@ public class UniqueAssignmentListTest {
 
     @Test
     public void remove_assignmentWithProjectIdAndEmployeeIdDoesNotExist_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.remove(ALPHA.getId()
-                , ALICE.getEmployeeId()));
+        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.remove(ALPHA.getId(),
+                ALICE.getEmployeeId()));
     }
 
     @Test

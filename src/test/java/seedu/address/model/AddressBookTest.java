@@ -196,12 +196,14 @@ public class AddressBookTest {
 
     @Test
     public void removeAssignment_assignmentIdNotInAddressBook_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> addressBook.removeAssignment(ALICE_ALPHA.getAssignmentId()));
+        assertThrows(AssignmentNotFoundException.class, () ->
+                addressBook.removeAssignment(ALICE_ALPHA.getAssignmentId()));
     }
 
     @Test
     public void removeAssignment_projectIdAndEmployeeIdNotInAddressBook_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> addressBook.removeAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+        assertThrows(AssignmentNotFoundException.class, () ->
+                addressBook.removeAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
     }
 
     @Test

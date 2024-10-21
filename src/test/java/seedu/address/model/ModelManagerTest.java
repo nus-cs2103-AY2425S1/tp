@@ -204,12 +204,14 @@ public class ModelManagerTest {
 
     @Test
     public void deleteAssignment_assignmentIdNotInAddressBook_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> modelManager.deleteAssignment(ALICE_ALPHA.getAssignmentId()));
+        assertThrows(AssignmentNotFoundException.class, () ->
+                modelManager.deleteAssignment(ALICE_ALPHA.getAssignmentId()));
     }
 
     @Test
     public void deleteAssignment_projectIdAndEmployeeIdNotInAddressBook_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class, () -> modelManager.deleteAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+        assertThrows(AssignmentNotFoundException.class, () ->
+                modelManager.deleteAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
     }
 
     @Test

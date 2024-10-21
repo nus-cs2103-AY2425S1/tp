@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PROJECT;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalProjects.ALPHA;
 
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
