@@ -103,6 +103,18 @@ public class ModelManager implements Model {
         eduLog.removeStudent(target);
     }
 
+    /**
+     * Marks the given student as absent.
+     * The student must exist in the address book.
+     *
+     * @param target the student to mark as absent.
+     */
+    @Override
+    public void unmarkStudent(Student target) {
+        requireNonNull(target);
+        eduLog.unmarkStudent(target);
+    }
+
     @Override
     public void addStudent(Student student) {
         eduLog.addStudent(student);

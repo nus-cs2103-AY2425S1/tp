@@ -12,13 +12,13 @@ import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the edulog book.
+ * Unmarks a student identified using it's displayed index from the edulog book.
  */
-public class DeleteNameCommand extends DeleteCommand {
+public class UnmarkNameCommand extends UnmarkCommand {
 
     private final Name targetName;
 
-    public DeleteNameCommand(Name targetName) {
+    public UnmarkNameCommand(Name targetName) {
         this.targetName = targetName;
     }
 
@@ -39,9 +39,9 @@ public class DeleteNameCommand extends DeleteCommand {
          * Hence, we can directly access the student using studentId.
          */
         int studentId = studentNames.indexOf(targetName);
-        Student studentToDelete = lastShownList.get(studentId);
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
+        Student studentToUnmark = lastShownList.get(studentId);
+        model.unmarkStudent(studentToUnmark);
+        return new CommandResult(String.format(MESSAGE_UNMARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
     }
 
     @Override
@@ -51,12 +51,12 @@ public class DeleteNameCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteNameCommand)) {
+        if (!(other instanceof UnmarkNameCommand)) {
             return false;
         }
 
-        DeleteNameCommand otherDeleteCommand = (DeleteNameCommand) other;
-        return targetName.equals(otherDeleteCommand.targetName);
+        UnmarkNameCommand otherUnmarkCommand = (UnmarkNameCommand) other;
+        return targetName.equals(otherUnmarkCommand.targetName);
     }
 
     @Override

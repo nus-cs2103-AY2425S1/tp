@@ -66,6 +66,12 @@ public interface Model {
     void deleteStudent(Student target);
 
     /**
+     * Marks the given student as absent.
+     * The student must exist in the address book.
+     */
+    void unmarkStudent(Student target);
+
+    /**
      * Adds the given student.
      * {@code student} must not already exist in the address book.
      */

@@ -24,49 +24,49 @@ import seedu.edulog.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
+ * {@code UnmarkCommand}.
  */
-public class DeleteNameCommandTest {
+public class UnmarkNameCommandTest {
 
     private Model model = new ModelManager(getTypicalEduLog(), new UserPrefs());
 
     @Test
     public void execute_validNameUnfilteredList_success() {
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteNameCommand(NAME_FIRST_STUDENT);
+        Student studentToUnmark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        UnmarkCommand unmarkCommand = new UnmarkNameCommand(NAME_FIRST_STUDENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
-                Messages.format(studentToDelete));
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_STUDENT_SUCCESS,
+                Messages.format(studentToUnmark));
 
         ModelManager expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
-        expectedModel.deleteStudent(studentToDelete);
+        expectedModel.unmarkStudent(studentToUnmark);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
         Name invalidName = new Name("Invalid");
-        DeleteCommand deleteCommand = new DeleteNameCommand(invalidName);
+        UnmarkCommand unmarkCommand = new UnmarkNameCommand(invalidName);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+        assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
     }
 
     @Test
     public void execute_validNameFilteredList_success() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteNameCommand(NAME_FIRST_STUDENT);
+        Student studentToUnmark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        UnmarkCommand unmarkCommand = new UnmarkNameCommand(NAME_FIRST_STUDENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
-                Messages.format(studentToDelete));
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_STUDENT_SUCCESS,
+                Messages.format(studentToUnmark));
 
         Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
-        expectedModel.deleteStudent(studentToDelete);
-        showNoStudent(expectedModel);
+        expectedModel.unmarkStudent(studentToUnmark);
+        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -78,47 +78,38 @@ public class DeleteNameCommandTest {
         // ensures that unFilteredStudent is still in bounds of edulog book list
         assertTrue(names.contains(unFilteredStudent));
 
-        DeleteCommand deleteCommand = new DeleteNameCommand(unFilteredStudent);
+        UnmarkCommand unmarkCommand = new UnmarkNameCommand(unFilteredStudent);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
+        assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_NAME);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteNameCommand(NAME_FIRST_STUDENT);
-        DeleteCommand deleteSecondCommand = new DeleteNameCommand(NAME_SECOND_STUDENT);
+        UnmarkCommand unmarkFirstCommand = new UnmarkNameCommand(NAME_FIRST_STUDENT);
+        UnmarkCommand unmarkSecondCommand = new UnmarkNameCommand(NAME_SECOND_STUDENT);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteNameCommand(NAME_FIRST_STUDENT);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        UnmarkCommand unmarkFirstCommandCopy = new UnmarkNameCommand(NAME_FIRST_STUDENT);
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(unmarkFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(unmarkFirstCommand.equals(null));
 
         // different student -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(unmarkFirstCommand.equals(unmarkSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
         Name targetName = new Name("targetName");
-        DeleteNameCommand deleteCommand = new DeleteNameCommand(targetName);
-        String expected = DeleteNameCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
-        assertEquals(expected, deleteCommand.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoStudent(Model model) {
-        model.updateFilteredStudentList(p -> false);
-
-        assertTrue(model.getFilteredStudentList().isEmpty());
+        UnmarkNameCommand unmarkCommand = new UnmarkNameCommand(targetName);
+        String expected = UnmarkNameCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
+        assertEquals(expected, unmarkCommand.toString());
     }
 }

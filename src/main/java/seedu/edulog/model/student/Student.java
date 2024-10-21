@@ -24,9 +24,10 @@ public class Student {
     // Data fields
     private final seedu.edulog.model.student.Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isPresent = false;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null except isPresent.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,6 +36,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isPresent = false;
     }
 
     public Name getName() {
@@ -59,6 +61,29 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Checks if the student is present.
+     *
+     * @return {@code true} if the student is present, {@code false} otherwise
+     */
+    public boolean getIsPresent() {
+        return isPresent;
+    }
+
+    /**
+     * Marks the student as present.
+     */
+    public void mark() {
+        isPresent = true;
+    }
+
+    /**
+     * Marks the student as absent.
+     */
+    public void unmark() {
+        isPresent = false;
     }
 
     /**
@@ -94,13 +119,14 @@ public class Student {
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
                 && address.equals(otherStudent.address)
-                && tags.equals(otherStudent.tags);
+                && tags.equals(otherStudent.tags)
+                && isPresent == otherStudent.isPresent;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, isPresent);
     }
 
     @Override
@@ -111,6 +137,7 @@ public class Student {
                 .add("email", email)
                 .add("edulog", address)
                 .add("tags", tags)
+                .add("isPresent", isPresent)
                 .toString();
     }
 

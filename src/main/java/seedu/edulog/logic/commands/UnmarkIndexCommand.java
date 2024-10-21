@@ -13,13 +13,15 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the edulog book.
+ * Marks a student as absent identified using it's displayed index from the edulog book.
  */
-public class DeleteIndexCommand extends DeleteCommand {
+public class UnmarkIndexCommand extends UnmarkCommand {
+
+    public static final String COMMAND_WORD = "unmark";
 
     private final Index targetIndex;
 
-    public DeleteIndexCommand(Index targetIndex) {
+    public UnmarkIndexCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -32,9 +34,9 @@ public class DeleteIndexCommand extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
+        Student studentToUnmark = lastShownList.get(targetIndex.getZeroBased());
+        model.unmarkStudent(studentToUnmark);
+        return new CommandResult(String.format(MESSAGE_UNMARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
     }
 
     @Override
@@ -44,12 +46,12 @@ public class DeleteIndexCommand extends DeleteCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteIndexCommand)) {
+        if (!(other instanceof UnmarkIndexCommand)) {
             return false;
         }
 
-        DeleteIndexCommand otherDeleteCommand = (DeleteIndexCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        UnmarkIndexCommand otherUnmarkCommand = (UnmarkIndexCommand) other;
+        return targetIndex.equals(otherUnmarkCommand.targetIndex);
     }
 
     @Override
