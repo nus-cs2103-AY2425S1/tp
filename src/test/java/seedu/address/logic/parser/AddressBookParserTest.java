@@ -92,7 +92,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_remark() throws Exception {
+    public void parseCommand_addNotes() throws Exception {
         final Notes notes = new Notes("Some notes.");
         AddNotesCommand command = (AddNotesCommand) parser.parseCommand(AddNotesCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_NOTES + notes.value);
