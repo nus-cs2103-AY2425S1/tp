@@ -188,6 +188,12 @@ Examples:
 
 <br>
 
+##### Clearing all persons : `clear person`
+
+Clears all entries from the address book after a validation check from the user.
+
+Format: `clear person`
+
 ---
 
 ### Appointment Commands
@@ -249,6 +255,13 @@ Examples:
 
 <br>
 
+##### Clearing all appointments : `clear appt`
+
+Clears all entries from the appointment book after a validation check from the user.
+
+Format: `clear appt`
+
+<br>
 
 ### General Commands
 
@@ -263,20 +276,6 @@ Shows a message explaning how to access the help page.
 ![help message](images/helpMessage.png)
 
 Format: `help`
-
-<br>
-
-##### Clearing all Persons : `clear person`
-
-Clears all entries from the address book after a validation check from the user.
-
-Format: `clear person`
-
-##### Clearing all appointments : `clear appt`
-
-Clears all entries from the appointment book after a validation check from the user.
-
-Format: `clear appt`
 
 <br>
 
@@ -334,9 +333,9 @@ computer?<br>
 ## Command summary
 
 | Action     | Format, Examples                                                                                                                                                      |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                               |
+| **Clear**  | `clear person`<br> `clear appt`                                                                     |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
