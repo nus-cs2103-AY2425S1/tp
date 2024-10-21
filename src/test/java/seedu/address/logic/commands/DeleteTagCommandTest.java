@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.FRIEND_TAG;
 import static seedu.address.testutil.TypicalPersons.OWES_MONEY_TAG;
 import static seedu.address.testutil.TypicalPersons.getTypicalCampusConnect;
@@ -44,17 +46,25 @@ public class DeleteTagCommandTest {
     }
 
     @Test
-    public void execute_InvalidIndexPersonList_failure() {
+    public void execute_invalidIndexPersonList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(outOfBoundIndex, new Tag(DEFAULT_TAG));
         assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_PersonHasNoTag_failure() {
+    public void execute_personHasNoTag_throwsCommandException() {
         Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
         DeleteTagCommand deleteTagCommand = new DeleteTagCommand(lastIndex, new Tag(DEFAULT_TAG));
         assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_NO_TAG);
+    }
+
+    @Test
+    public void equals() {
+        DeleteTagCommand deleteTagCommandA = new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(DEFAULT_TAG));
+        DeleteTagCommand deleteTagCommandB = new DeleteTagCommand(INDEX_SECOND_PERSON, new Tag(DEFAULT_TAG));
+
+        assertFalse(deleteTagCommandA.equals(deleteTagCommandB));
     }
 
 }
