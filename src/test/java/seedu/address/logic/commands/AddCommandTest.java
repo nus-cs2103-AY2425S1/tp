@@ -165,6 +165,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Tag> getTagListAsObservableList() {
+            return null;
+        }
+
+        @Override
+        public void updateTagList() {
+
+        }
+
+        @Override
         public boolean addTag(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }

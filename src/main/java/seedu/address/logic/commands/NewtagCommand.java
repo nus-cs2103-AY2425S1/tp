@@ -33,6 +33,8 @@ public class NewtagCommand extends Command {
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }
+        model.updateTagList();
+
         String successMessage = MESSAGE_SUCCESS + " " + tag + "\n";
         String currentTags = "Your tags: " + model.getTagList();
         return new CommandResult(successMessage + currentTags);

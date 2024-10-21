@@ -110,4 +110,16 @@ public interface Model {
      */
     String getTagList();
 
+    /**
+     * Returns the ObservableList of the tag list
+     * managed by this model.
+     *
+     * @return The {@code ObservableList} of the {@code TagList} instance.
+     */
+    ObservableList<Tag> getTagListAsObservableList();
+
+    /**
+     * Updates the tag list in the model.
+     */
+    void updateTagList();
 }
