@@ -59,6 +59,8 @@ public interface AddressBookStorage {
      */
     void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
-
-
+    /**
+     * set the Archive Path
+     * */
+    void setArchivePath(Path path);
 }

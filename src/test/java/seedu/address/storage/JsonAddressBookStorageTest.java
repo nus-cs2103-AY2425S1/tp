@@ -41,6 +41,16 @@ public class JsonAddressBookStorageTest {
     }
 
     @Test
+    public void setArchivePathTest() {
+        Path filePath = testFolder.resolve("TempAddressBook.json");
+        Path archivePath = testFolder.resolve("ArchiveAddressBook.json");
+        AddressBook original = getTypicalAddressBook();
+        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath, archivePath);
+        jsonAddressBookStorage.setArchivePath(TEST_DATA_FOLDER);
+        assertEquals(jsonAddressBookStorage.getArchivedAddressBookFilePath(), TEST_DATA_FOLDER);
+    }
+
+    @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readAddressBook("NonExistentFile.json").isPresent());
     }

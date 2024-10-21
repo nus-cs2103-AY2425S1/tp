@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -72,6 +73,13 @@ public class StorageManagerTest {
     @Test
     public void getArchivedAddressBookFilePath() {
         assertNotNull(storageManager.getArchivedAddressBookFilePath());
+    }
+
+    @Test
+    public void setArchivePath() {
+        Path newPath = Paths.get("mybook.json");
+        storageManager.setArchivePath(newPath);
+        assertEquals(storageManager.getArchivedAddressBookFilePath(), newPath);
     }
 
 }

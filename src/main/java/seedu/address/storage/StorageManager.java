@@ -91,6 +91,11 @@ public class StorageManager implements Storage {
         addressBookStorage.saveArchivedAddressBook(addressBook, archivedPath);
     }
 
+    @Override
+    public void setArchivePath(Path path) {
+        this.addressBookStorage.setArchivePath(path);
+    }
+
     /**
      *  read from the archived file
      * */

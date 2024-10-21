@@ -117,4 +117,9 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), archivePath);
     }
 
+    @Override
+    public void setArchivePath(Path path) {
+        this.archivePath = path;
+    }
+
 }
