@@ -18,6 +18,7 @@ import seedu.address.model.property.UniquePropertyList;
  */
 public class PropertyList implements ReadOnlyPropertyList {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+
     private final UniquePropertyList properties;
 
     /*

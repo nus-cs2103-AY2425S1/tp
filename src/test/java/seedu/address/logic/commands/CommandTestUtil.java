@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FROM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -70,6 +73,15 @@ public class CommandTestUtil {
     public static final String BUYER_TYPE_DESC_AMY = " " + PREFIX_BUYER_TYPE + VALID_BUYER_TYPE_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String MEETUP_NAME_DESC_PITCH = " " + PREFIX_NAME + VALID_MEETUP_NAME_PITCH;
+    public static final String MEETUP_NAME_DESC_NETWORKING = " " + PREFIX_NAME + VALID_MEETUP_NAME_NETWORKING;
+    public static final String MEETUP_INFO_DESC_PITCH = " " + PREFIX_INFO + VALID_MEETUP_INFO_PITCH;
+    public static final String MEETUP_INFO_DESC_NETWORKING = " " + PREFIX_INFO + VALID_MEETUP_INFO_NETWORKING;
+    public static final String MEETUP_FROM_DESC_PITCH = " " + PREFIX_FROM + VALID_MEETUP_FROM_PITCH;
+    public static final String MEETUP_FROM_DESC_NETWORKING = " " + PREFIX_FROM + VALID_MEETUP_FROM_NETWORKING;
+    public static final String MEETUP_TO_DESC_PITCH = " " + PREFIX_TO + VALID_MEETUP_TO_PITCH;
+    public static final String MEETUP_TO_DESC_NETWORKING = " " + PREFIX_TO + VALID_MEETUP_TO_NETWORKING;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -78,6 +90,12 @@ public class CommandTestUtil {
     public static final String INVALID_BUYER_TYPE_DESC = " " + PREFIX_BUYER_TYPE
             + "student"; // only 'buyer' or 'seller'
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_MEETUP_NAME_DESC = " " + PREFIX_NAME // '!', '%' not allowed in names
+            + "Sales Pitch!%";
+    public static final String INVALID_MEETUP_FROM_DESC = " " + PREFIX_FROM + "01/02/2025 1800"; // Not proper format
+    public static final String INVALID_MEETUP_TO_DESC = " " + PREFIX_TO + "01/05/2025 1940"; // Not proper format
+    public static final String INVALID_MEETUP_FROM_DESC_TWO = " " + PREFIX_FROM + "47/02/2025 1800"; // Not valid date
+    public static final String INVALID_MEETUP_TO_DESC_TWO = " " + PREFIX_TO + "03/02/2025 2988"; // Not valid date
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
