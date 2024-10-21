@@ -71,7 +71,7 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 | Index |        Action         |                                                        Format                                                        |                                          examples                                          |
 |:-----:|:---------------------:|:--------------------------------------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------------:|
 |   1   |          Add          |         `add n/NAME p/PHONE_NUMBER e/EMERGENCY_CONTACT a/ADDRESS [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIMING]`         | `add n/James Ho p/22224444 e/99999999 a/123, Clementi Rd, 1234665 l/S1 s/MATH s/CHEMISTRY` |
-|   2   |        Delete         |                                     `event <description> /from <from> /to <to>`                                      |                                        `delete i/2`                                        |
+|   2   |        Delete         |                                                   `delete i/INDEX`                                                   |                                        `delete i/2`                                        |
 |   3   |        Update         | `update NAME [n/NAME] [p/PHONE_NUMBER] [e/EMERGENCY_CONTACT] [a/ADDRESS] [l/LEVEL] [s/SUBJECT]…​ [lt/LESSON_TIMING]` |                         `update Alex Yeoh n/James Lee e/99999999`                          |
 |   4   |         Find          |                        `find n/KEYWORD [MORE_KEYWORDS]` or `find l/LEVEL` or `find s/SUBJECT`                        |                       `find n/Alex` or `find l/S2` or `find s/MATH`                        |
 |   5   |         List          |                                                        `list`                                                        |                                           `list`                                           |
@@ -119,6 +119,7 @@ EduManage is a **desktop app for managing contacts, optimized for use via a Comm
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+***
 
 ### Adding a Student
 
@@ -135,6 +136,8 @@ Adds a student to the address book.
 * `add n/John Doe p/98765432 e/99999999 a/John street, block 123, #01-01`
 * `add n/Betsy Crowe s/MATH e/88888888 a/Newgate Prison p/1234567 l/S1 s/ENGLISH`
 
+***
+
 ### Deleting a Student
 
 Deletes the specified student from the address book.
@@ -148,6 +151,8 @@ Deletes the specified student from the address book.
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+***
 
 ### Updating a Student
 
@@ -164,6 +169,8 @@ Updates the details of an existing student in the address book.
 **Examples:**
 *  `update Alex Yeoh p/91234567 e/99999999` updates the phone number and emergency contact of `Alex Yeoh` to be `91234567` and `99999999` respectively.
 *  `update Alex Yeoh n/Betsy Crower s/` updates the name of `Alex Yeoh` to be `Betsy Crower` and clears all existing subjects.
+
+***
 
 ### Finding Students
 
@@ -186,11 +193,15 @@ Find students by either their name, level or subject.
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+***
+
 ### Listing All Students
 
 Shows a list of all students in the address book.
 
 **Format:** `list`
+
+***
 
 ### Tagging a Student
 
@@ -202,6 +213,8 @@ Allows tagging a student by their level and subject. A student must have a level
 * `tag n/John Doe l/S3 s/ENGLISH`
 * `tag n/Jane Smith s/MATH` only works if `Jane Smith` has a `level` assigned previously
 
+***
+
 ### Recording Notes
 
 Records a note for the specified student.
@@ -212,11 +225,15 @@ Records a note for the specified student.
 * `note n/John Doe nt/Doing well in all subjects`
 * `note n/Jane Smith nt/Struggling with trigonometry`
 
+***
+
 ### Clearing All Contacts
 
 Clears all entries from the address book.
 
 **Format:** `clear`
+
+***
 
 ### Viewing Help
 
@@ -225,6 +242,8 @@ Shows a message explaining how to access the help page.
 ![help message](images/helpMessage.png)
 
 **Format:** `help`
+
+***
 
 ### Adding a Task
 
@@ -238,6 +257,8 @@ Adds a task to the task list of the specified student.
 * `addtask n/John Doe t/Mark CA1 d/2024-10-15`
 * `addtask n/Jane Smith t/Handle MC d/2024-02-13`
 
+***
+
 ### Deleting a task
 
 Deletes a task from the specified student's task list.
@@ -246,6 +267,8 @@ Deletes a task from the specified student's task list.
 
 **Examples:**
 * `deletetask n/John Doe ti/1`
+
+***
 
 ### Updating a Task
 
@@ -261,11 +284,15 @@ Updates the details of an existing task in a student's task list.
 * `updatetask n/John Doe ti/2 t/Mark assignment` updates the 2nd task in John Doe's task list to be `Mark assignment`
 * `updatetask n/Jane Smith ti/1 t/Handle MC d/2024-10-13` updates the 1st task in Jane Smith's task list to be `Handle MC` with a deadline `2024-10-13`
 
+***
+
 ### Viewing all tasks
 
 Views all tasks, organized by student.
 
 **Format:** `viewtasks`
+
+***
 
 ### Viewing a Specific Student
 
@@ -276,15 +303,21 @@ Views a specific student on the right side window.
 **Examples:**
 * `view n/John Doe`
 
+***
+
 ### Exiting EduManage
 
 Exits EduManage.
 
 **Format:** `exit`
 
+***
+
 ### Saving the Data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+***
 
 ### Editing the Data File
 
