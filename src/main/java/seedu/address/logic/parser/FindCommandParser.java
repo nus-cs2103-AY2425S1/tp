@@ -42,7 +42,6 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .filter(keyword -> !isNumeric(keyword) && !isPostalCode(keyword))
                 .collect(Collectors.toList());
 
-        // retrieve postal code keywords S...
         List<String> postalKeywords = Arrays.stream(keywords)
                 .filter(this::isPostalCode)
                 .collect(Collectors.toList());
@@ -82,7 +81,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the string is a postal code, false otherwise.
      */
     private boolean isPostalCode(String str) {
-        // checks that postal code starts with 'S', followed by digits
-        return str.matches("S\\d+");
+        // checks that the postal code is exactly 6 digits
+        return str.matches("\\d{6}");
     }
 }
