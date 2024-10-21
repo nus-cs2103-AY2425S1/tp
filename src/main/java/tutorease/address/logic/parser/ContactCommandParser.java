@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.Command;
 import tutorease.address.logic.commands.DeleteContactCommand;
+import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.ListContactCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 
@@ -15,7 +16,6 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates the appropriate ContactCommand objects.
  */
 public class ContactCommandParser implements Parser<Command> {
-    public static final String COMMAND_WORD = "contact";
     private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)(?<subArguments>.*)");
 
     @Override
@@ -30,12 +30,14 @@ public class ContactCommandParser implements Parser<Command> {
         final String subArguments = matcher.group("subArguments");
 
         switch (subCommand) {
-        case AddContactCommand.SUB_COMMAND_WORD:
+        case AddContactCommand.COMMAND_WORD:
             return new AddContactCommandParser().parse(subArguments);
-        case DeleteContactCommand.SUB_COMMAND_WORD:
+        case DeleteContactCommand.COMMAND_WORD:
             return new DeleteContactCommandParser().parse(subArguments);
-        case ListContactCommand.SUB_COMMAND_WORD:
+        case ListContactCommand.COMMAND_WORD:
             return new ListContactCommand();
+        case FindContactCommand.COMMAND_WORD:
+            return new FindContactCommandParser().parse(subArguments);
         // Future sub-commands like add, edit can be handled here
         default:
             throw new ParseException("Unknown contact sub-command: " + subCommand);
