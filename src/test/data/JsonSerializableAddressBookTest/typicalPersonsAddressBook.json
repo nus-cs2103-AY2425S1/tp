@@ -39,7 +39,7 @@
     "nric": "S1234567E",
     "address" : "michegan ave",
     "remark" : "",
-    "tags" : [ ]
+    "tags" : [ "Diabetic", "G6PD" ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -47,7 +47,7 @@
     "nric": "S1234567F",
     "address" : "little tokyo",
     "remark" : "",
-    "tags" : [ ]
+    "tags" : [ "Diabetic", "G6PD" ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
