@@ -24,6 +24,7 @@ import keycontacts.logic.commands.EditCommand;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.logic.commands.ExitCommand;
 import keycontacts.logic.commands.FindCommand;
+import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
 import keycontacts.logic.commands.HelpCommand;
 import keycontacts.logic.commands.ListCommand;
 import keycontacts.logic.commands.ScheduleCommand;
@@ -31,9 +32,10 @@ import keycontacts.logic.commands.UnassignPiecesCommand;
 import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.lesson.RegularLesson;
 import keycontacts.model.pianopiece.PianoPiece;
-import keycontacts.model.student.NameContainsKeywordsPredicate;
 import keycontacts.model.student.Student;
+import keycontacts.model.student.StudentDescriptorMatchesPredicate;
 import keycontacts.testutil.EditStudentDescriptorBuilder;
+import keycontacts.testutil.FindStudentDescriptorBuilder;
 import keycontacts.testutil.StudentBuilder;
 import keycontacts.testutil.StudentUtil;
 
@@ -78,10 +80,12 @@ public class KeyContactsParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("n/foo", "a/bar", "g/baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("foo")
+                .withAddress("bar").withGradeLevel("baz").build();
+        assertEquals(new FindCommand(new StudentDescriptorMatchesPredicate(descriptor)), command);
     }
 
     @Test
