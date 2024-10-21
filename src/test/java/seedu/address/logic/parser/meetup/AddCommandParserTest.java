@@ -28,20 +28,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.meetup.TypicalMeetUps.PITCH_MEETUP;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.meetup.AddCommand;
-import seedu.address.model.buyer.Budget;
-import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
-import seedu.address.model.buyer.Phone;
 import seedu.address.model.meetup.From;
-import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
 
 import seedu.address.model.meetup.To;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.buyer.BuyerBuilder;
 import seedu.address.testutil.meetup.MeetUpBuilder;
 
 public class AddCommandParserTest {
