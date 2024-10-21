@@ -2,8 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -17,34 +16,33 @@ import seedu.address.model.person.Person;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-    private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID);
+    private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_TUTORIAL);
 
     @Override
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID);
-        if (!argMultimap.getPreamble().isEmpty()) {
+                ArgumentTokenizer.tokenize(args, validPrefixes.toArray(new Prefix[0]));
+
+        if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
+
+        Comparator<Person> sortComparator;
+        Integer order = ParserUtil.parseSortOrder(argMultimap.getPreamble());
+
         if (noPrefixesPresent(argMultimap, validPrefixes)) {
             throw new ParseException(SortCommand.MESSAGE_NOT_SORTED);
         }
-
         if (multiplePrefixesPresent(argMultimap, validPrefixes)) {
             throw new ParseException(SortCommand.MESSAGE_WRONG_NUM_OF_FIELDS);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENT_ID);
 
-        Comparator<Person> sortComparator;
-        Integer order;
-
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            order = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_NAME).get());
             sortComparator = SortCommand.COMPARE_BY_NAME;
         } else if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            order = ParserUtil.parseSortOrder(argMultimap.getValue(PREFIX_STUDENT_ID).get());
             sortComparator = SortCommand.COMPARE_BY_ID;
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));

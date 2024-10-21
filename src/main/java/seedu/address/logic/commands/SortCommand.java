@@ -25,13 +25,13 @@ public class SortCommand extends Command {
             Comparator.comparing(person -> person.getStudentId().toString());
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Sorts contacts according to 1 specified field and order. "
+            + ": Sorts contacts according to 1 specified field and order. \n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "] / "
+            + "ORDER (must be 1 (ascending) or -1 (descending)) "
+            + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_STUDENT_ID + "] \n"
-            + "ORDER (must be 1 (ascending) or -1 (descending)) \n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " 1";
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_NAME;
 
     private final Comparator<Person> sortingOrder;
     private final boolean isAscendingOrder;
