@@ -52,15 +52,7 @@ public class LogicManager implements Logic {
         ReadOnlyAddressBook original = model.getAddressBook();
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
-        try {
-            if (command instanceof ArchiveCommand) {
-                storage.saveArchivedAddressBook(original);
-            }
-        } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-        }
+        archiveIfNeeded(command, storage, model);
 
         commandResult = command.execute(model);
 
@@ -110,5 +102,18 @@ public class LogicManager implements Logic {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void archiveIfNeeded(Command command, Storage storage, Model model) throws CommandException {
+        try {
+            ReadOnlyAddressBook original = model.getAddressBook();
+            if (command instanceof ArchiveCommand) {
+                storage.saveArchivedAddressBook(original, ((ArchiveCommand) command).getArchivePath());
+            }
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
     }
 }

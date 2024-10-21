@@ -6,28 +6,28 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PATH;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.LoadCommand;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new LoadCommand object
  */
-public class LoadCommandParser implements Parser<LoadCommand> {
+public class ArchiveCommandParser implements Parser<ArchiveCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public LoadCommand parse(String args) throws ParseException {
+    public ArchiveCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_PATH);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_PATH)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ArchiveCommand.MESSAGE_USAGE));
         }
-        Path path = ParserUtil.parsePathWithCheck(argMultimap.getValue(PREFIX_PATH).get());
-        return new LoadCommand(path);
+        Path path = ParserUtil.parsePathWithoutCheck(argMultimap.getValue(PREFIX_PATH).get());
+        return new ArchiveCommand(path);
     }
 
     /**

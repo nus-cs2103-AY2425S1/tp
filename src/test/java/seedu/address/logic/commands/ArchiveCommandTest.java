@@ -20,21 +20,19 @@ public class ArchiveCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
-        prefs.setArchivedAddressBookFilePath(archivePath);
         Model model = new ModelManager(new AddressBook(), prefs);
         Model expectedModel = new ModelManager();
-
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(archivePath), model,
+                String.format(ArchiveCommand.MESSAGE_SUCCESS, archivePath), expectedModel);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        prefs.setArchivedAddressBookFilePath(archivePath);
         Model model = new ModelManager(getTypicalAddressBook(), prefs);
         Model expectedModel = new ModelManager(getTypicalAddressBook(), prefs);
         expectedModel.setAddressBook(new AddressBook());
-
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(archivePath), model,
+                String.format(ArchiveCommand.MESSAGE_SUCCESS, archivePath), expectedModel);
     }
 
 }

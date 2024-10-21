@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.parsePathWithCheck;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -196,25 +197,25 @@ public class ParserUtilTest {
         assertEquals(expectedTagSet, actualTagSet);
     }
     @Test
-    public void parsePath_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePath((String) null));
+    public void parsePathWithCheck_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePathWithCheck((String) null));
     }
 
     @Test
-    public void parsePath_invalid_path() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePath(INVALID_PATH_1));
-        assertThrows(ParseException.class, () -> ParserUtil.parsePath(INVALID_PATH_2));
+    public void parsePathWithCheck_invalid_path() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_2));
     }
 
     @Test
-    public void parsePath_valid_path() throws Exception {
+    public void parsePathWithCheck_valid_path() throws Exception {
         Path tempDir = Paths.get("archived");
         if (!Files.exists(tempDir)) {
             tempDir = Files.createDirectory(tempDir);
         }
         Path tempFile = tempDir.resolve("TestingParser.json");
         Files.createFile(tempFile);
-        Files.deleteIfExists(tempFile);
+        assertEquals(tempFile, parsePathWithCheck(VALID_PATH));
         Files.deleteIfExists(tempFile);
     }
 }

@@ -53,8 +53,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_archive() throws Exception {
-        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD) instanceof ArchiveCommand);
-        assertTrue(parser.parseCommand(ArchiveCommand.COMMAND_WORD + " 3") instanceof ArchiveCommand);
+        String archiveCommand = ArchiveCommand.COMMAND_WORD + " pa/mybook.json";
+        assertTrue(parser.parseCommand(archiveCommand) instanceof ArchiveCommand);
     }
 
     @Test

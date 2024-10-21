@@ -141,11 +141,26 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * */
 
-    public static Path parsePath(String path) throws ParseException {
+    public static Path parsePathWithCheck(String path) throws ParseException {
         requireNonNull(path);
         path = path.trim();
         final Path parsedPath = Paths.get("archived", path);
         if (!path.endsWith(".json") || path.contains("/") || !Files.exists(parsedPath)) {
+            throw new ParseException(LoadCommand.MESSAGE_USAGE);
+        }
+        return parsedPath;
+    }
+
+    /**
+     * Parses a {@code String path} into a {@code Path}.
+     * Leading and trailing whitespaces will be trimmed.
+     * */
+
+    public static Path parsePathWithoutCheck(String path) throws ParseException {
+        requireNonNull(path);
+        path = path.trim();
+        final Path parsedPath = Paths.get("archived", path);
+        if (!path.endsWith(".json") || path.contains("/")) {
             throw new ParseException(LoadCommand.MESSAGE_USAGE);
         }
         return parsedPath;

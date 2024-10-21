@@ -49,8 +49,7 @@ public class LogicManagerTest {
     @BeforeEach
     public void setUp() {
         JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"),
-                        temporaryFolder.resolve("addressBookArchive.json"));
+                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
@@ -76,8 +75,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validArchiveCommand_success() throws Exception {
-        String archiveCommand = ArchiveCommand.COMMAND_WORD;
-        assertCommandSuccess(archiveCommand, ArchiveCommand.MESSAGE_SUCCESS, model);
+        String archiveCommand = ArchiveCommand.COMMAND_WORD + " pa/mybook.json";
+        assertCommandSuccess(archiveCommand, String.format(ArchiveCommand.MESSAGE_SUCCESS,
+                Paths.get("archived", "mybook.json")), model);
     }
 
     @Test
@@ -235,7 +235,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Trigger the saveArchivedAddressBook method with an archive command
-        String archiveCommand = ArchiveCommand.COMMAND_WORD;
+        String archiveCommand = ArchiveCommand.COMMAND_WORD + " pa/mybook.json";
         ModelManager expectedModel = new ModelManager();
         assertCommandFailure(archiveCommand, CommandException.class, expectedMessage, expectedModel);
     }

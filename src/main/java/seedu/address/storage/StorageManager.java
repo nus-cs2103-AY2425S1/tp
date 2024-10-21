@@ -54,11 +54,6 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Path getArchivedAddressBookFilePath() {
-        return addressBookStorage.getArchivedAddressBookFilePath();
-    }
-
-    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
@@ -81,26 +76,9 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveArchivedAddressBook(addressBook, addressBookStorage.getArchivedAddressBookFilePath());
-    }
-
-    @Override
     public void saveArchivedAddressBook(ReadOnlyAddressBook addressBook, Path archivedPath) throws IOException {
         logger.fine("Attempting to write to data file: " + archivedPath);
         addressBookStorage.saveArchivedAddressBook(addressBook, archivedPath);
-    }
-
-    @Override
-    public void setArchivePath(Path path) {
-        this.addressBookStorage.setArchivePath(path);
-    }
-
-    /**
-     *  read from the archived file
-     * */
-    public Optional<ReadOnlyAddressBook> readArchivedAddressBook() throws DataLoadingException {
-        return readArchivedAddressBook(addressBookStorage.getArchivedAddressBookFilePath());
     }
 
     /**
