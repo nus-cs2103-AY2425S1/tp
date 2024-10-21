@@ -98,11 +98,10 @@ public class PersonDescriptor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonDescriptor)) {
+        if (!(other instanceof PersonDescriptor otherPerson)) {
             return false;
         }
 
-        PersonDescriptor otherPerson = (PersonDescriptor) other;
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)

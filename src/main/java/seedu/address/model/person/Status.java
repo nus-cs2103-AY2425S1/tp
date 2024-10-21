@@ -40,11 +40,10 @@ public class Status {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Status)) {
+        if (!(other instanceof Status otherStatus)) {
             return false;
         }
 
-        Status otherStatus = (Status) other;
         return value.equals(otherStatus.value);
     }
 

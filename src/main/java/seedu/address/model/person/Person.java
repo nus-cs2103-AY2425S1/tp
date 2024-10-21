@@ -49,6 +49,7 @@ public class Person {
 
     /**
      * Builds a person given a personId and a personDescriptor.
+     *
      * @param personId
      * @param personDescriptor
      */
