@@ -9,14 +9,18 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonMeetingBookStorage;
 import seedu.address.storage.JsonPropertyBookStorage;
 
 /**
@@ -29,20 +33,25 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final PropertyBook propertyBook;
     private final ClientBook clientBook;
+    private final MeetingBook meetingBook;
     private final FilteredList<Person> filteredPersons;
-
+    private final FilteredList<Property> filteredProperties;
     // note that filteredClients may be removed if we decide not to keep the filtering feature
     private final FilteredList<Client> filteredClients;
-    private final FilteredList<Property> filteredProperty;
+    private final FilteredList<Meeting> filteredMeetings;
 
     private Path clientBookFilePath = Paths.get("data" , "clientbook.json");
     private Path propertyBookFilePath = Paths.get("data" , "propertybook.json");
+    private Path meetingBookFilePath = Paths.get("data" , "meetingbook.json");
+
+    private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs,
-                        ReadOnlyPropertyBook propertyBook, ReadOnlyClientBook clientBook) {
+                        ReadOnlyPropertyBook propertyBook, ReadOnlyClientBook clientBook,
+                        ReadOnlyMeetingBook meetingBook) {
         requireAllNonNull(addressBook, userPrefs, propertyBook, clientBook);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs "
@@ -52,13 +61,15 @@ public class ModelManager implements Model {
         this.propertyBook = new PropertyBook(propertyBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.clientBook = new ClientBook(clientBook);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredClients = new FilteredList<>(this.clientBook.getClientList());
-        filteredProperty = new FilteredList<>(this.propertyBook.getPropertyList());
+        this.meetingBook = new MeetingBook(meetingBook);
+        this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.filteredClients = new FilteredList<>(this.clientBook.getClientList());
+        this.filteredProperties = new FilteredList<>(this.propertyBook.getPropertyList());
+        this.filteredMeetings = new FilteredList<>(this.meetingBook.getMeetingList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new PropertyBook(), new ClientBook());
+        this(new AddressBook(), new UserPrefs(), new PropertyBook(), new ClientBook(), new MeetingBook());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -267,19 +278,68 @@ public class ModelManager implements Model {
     }
 
     //=========== Filtered Property List Accessors =============================================================
-
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Property} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
     public ObservableList<Property> getFilteredPropertyList() {
-        return filteredProperty;
+        return filteredProperties;
     }
 
     @Override
     public void updateFilteredPropertyList(Predicate<Property> predicate) {
         requireNonNull(predicate);
-        filteredProperty.setPredicate(predicate);
+        filteredProperties.setPredicate(predicate);
+    }
+
+    //=========== MeetingBook ================================================================================
+
+    @Override
+    public ReadOnlyMeetingBook getMeetingBook() {
+        return meetingBook;
+    }
+
+    @Override
+    public void deleteMeeting(Meeting meeting) {
+        meetingBook.removeMeeting(meeting);
+        try {
+            JsonMeetingBookStorage jsonMeetingBookStorage = new JsonMeetingBookStorage(meetingBookFilePath);
+            jsonMeetingBookStorage.saveMeetingBook(meetingBook);
+        } catch (IOException e) {
+            System.out.println("Error while saving MeetingBook: " + e.getMessage());
+        }
+    }
+
+    //=========== Filtered Meeting List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Meeting} backed by the internal list of
+     * {@code versionedMeetingBook}
+     */
+    @Override
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return filteredMeetings;
+    }
+
+    @Override
+    public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
+        requireNonNull(predicate);
+        filteredMeetings.setPredicate(predicate);
+    }
+
+    //=========== Managing UI  ==================================================================================
+    @Override
+    public BooleanProperty getIsDisplayClientsProperty() {
+        return isDisplayClients;
+    }
+    @Override
+    public void setDisplayClients() {
+        isDisplayClients.set(true);
+    }
+
+    @Override
+    public void setDisplayProperties() {
+        isDisplayClients.set(false);
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -17,6 +18,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,6 +32,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
+import seedu.address.storage.JsonMeetingBookStorage;
 import seedu.address.storage.JsonPropertyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -54,8 +58,10 @@ public class LogicManagerTest {
                 .resolve("userPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+        JsonMeetingBookStorage meetingBookStorage =
+                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
-                clientBookStorage);
+                clientBookStorage, meetingBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -135,9 +141,9 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
+                                      String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -185,8 +191,10 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         JsonPropertyBookStorage propertyBookStorage =
                 new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
+        JsonMeetingBookStorage meetingBookStorage =
+                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
-                clientBookStorage);
+                clientBookStorage, meetingBookStorage);
 
         logic = new LogicManager(model, storage);
 
@@ -196,5 +204,33 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         expectedModel.addClient(expectedPerson);
         assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredClientList().remove(0));
+    }
+
+    @Test
+    public void getFilteredPropertiesList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPropertyList().remove(0));
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+        // Call the method
+        BooleanProperty result = logic.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of BooleanProperty
+        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+    }
+
+    @Test
+    public void getIsDisplayClientsProperty_isObservable() {
+        // Call the method
+        BooleanProperty result = logic.getIsDisplayClientsProperty();
+
+        // Assert that the result is an instance of Observable
+        assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
     }
 }

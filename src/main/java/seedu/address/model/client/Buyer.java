@@ -79,4 +79,9 @@ public class Buyer extends Client {
     public boolean isSeller() {
         return false;
     }
+
+    @Override
+    public String getTypeString() {
+        return ClientTypes.BUYER.getType();
+    }
 }

@@ -4,7 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KEY;
 
+import seedu.address.logic.commands.ListBuyersCommand;
+import seedu.address.logic.commands.ListClientsCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListPropertiesCommand;
+import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -31,26 +35,18 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
 
         // Switch case to handle different key values
-        ListCommand.Key key;
         switch (keyArg.toLowerCase()) {
-        case "buyers":
-            key = ListCommand.Key.BUYERS;
-            break;
-        case "sellers":
-            key = ListCommand.Key.SELLERS;
-            break;
-        case "clients":
-            key = ListCommand.Key.CLIENTS;
-            break;
-        case "properties":
-            key = ListCommand.Key.PROPERTIES;
-            break;
+        case ListClientsCommand.KEY_WORD:
+            return new ListClientsCommand();
+        case ListBuyersCommand.KEY_WORD:
+            return new ListBuyersCommand();
+        case ListSellersCommand.KEY_WORD:
+            return new ListSellersCommand();
+        case ListPropertiesCommand.KEY_WORD:
+            return new ListPropertiesCommand();
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
-
-        // Return the appropriate ListCommand with the parsed key
-        return new ListCommand(key);
     }
 }

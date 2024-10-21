@@ -4,12 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGDATE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGTITLE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_ADMIRALTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
@@ -30,22 +41,30 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMeetingCommand;
 import seedu.address.logic.commands.DeletePropertyCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterClientCommand;
+import seedu.address.logic.commands.FilterPropertyCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
+import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.property.MatchingPrice;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -137,10 +156,22 @@ public class AddressBookParserTest {
         Property property = new PropertyBuilder(ADMIRALTY).build();
         AddPropertyCommand command = (AddPropertyCommand) parser.parseCommand(
                 AddPropertyCommand.COMMAND_WORD + " " + PREFIX_POSTALCODE + ADMIRALTY.getPostalCode() + " "
-                        + PREFIX_UNITNUMBER + ADMIRALTY.getUnit()
+                        + PREFIX_UNITNUMBER + ADMIRALTY.getUnit() + " " + PREFIX_TYPE + ADMIRALTY.getType()
+                        + " " + PREFIX_ASK + ADMIRALTY.getAsk() + " " + PREFIX_BID + ADMIRALTY.getBid()
         );
 
         assertEquals(new AddPropertyCommand(property), command);
+    }
+
+    @Test
+    public void parseCommand_filterProperty() throws Exception {
+        FilterPropertyCommand command = (FilterPropertyCommand) parser.parseCommand(
+                FilterPropertyCommand.COMMAND_WORD + " " + PREFIX_TYPE + VALID_TYPE_HDB
+        );
+
+        assertEquals(new FilterPropertyCommand(new Type(VALID_TYPE_HDB),
+                new MatchingPrice(VALID_MATCHINGPRICE_ADMIRALTY),
+                new MatchingPrice(VALID_MATCHINGPRICE_BEDOK)), command);
     }
 
     @Test
@@ -175,6 +206,23 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers") instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties") instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_filterClient() throws Exception {
+        FilterClientCommand command = (FilterClientCommand) parser.parseCommand(FilterClientCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + VALID_NAME_AMY);
+        assertEquals(new FilterClientCommand(new Name(VALID_NAME_AMY)), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMeeting() throws Exception {
+        DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
+            DeleteMeetingCommand.COMMAND_WORD + " " + PREFIX_MEETING_TITLE
+                    + VALID_MEETINGTITLE_ADMIRALTY + " " + PREFIX_MEETING_DATE + VALID_MEETINGDATE_ADMIRALTY);
+        assertEquals(new DeleteMeetingCommand(
+                new MeetingTitle(VALID_MEETINGTITLE_ADMIRALTY), new MeetingDate(VALID_MEETINGDATE_ADMIRALTY)
+        ), command);
     }
 
     @Test

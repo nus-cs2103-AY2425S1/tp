@@ -3,9 +3,11 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
@@ -16,6 +18,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Client> PREDICATE_SHOW_ALL_CLIENTS = unused -> true;
+    Predicate<Client> PREDICATE_SHOW_ALL_BUYERS_ONLY = Client::isBuyer;
+    Predicate<Client> PREDICATE_SHOW_ALL_SELLERS_ONLY = Client::isSeller;
+    Predicate<Client> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -150,7 +155,7 @@ public interface Model {
     void setPropertyBookFilePath(Path propertyBookFilePath);
 
     /**
-     * Returns the user prefs.
+     * Returns the property book.
      */
     ReadOnlyPropertyBook getPropertyBook();
 
@@ -179,4 +184,30 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPropertyList(Predicate<Property> predicate);
+
+
+    /**
+     * Returns the meeting book.
+     */
+    ReadOnlyMeetingBook getMeetingBook();
+
+    /**
+     * Deletes the given meeting.
+     * {@code meeting} must exist in the meeting book.
+     */
+    void deleteMeeting(Meeting meeting);
+
+
+    /** Returns an unmodifiable view of the filtered meeting list */
+    ObservableList<Meeting> getFilteredMeetingList();
+
+    /**
+     * Updates the filter of the filtered meeting list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredMeetingList(Predicate<Meeting> predicate);
+
+    BooleanProperty getIsDisplayClientsProperty();
+    void setDisplayClients();
+    void setDisplayProperties();
 }

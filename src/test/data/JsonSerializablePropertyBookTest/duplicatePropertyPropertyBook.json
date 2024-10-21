@@ -1,9 +1,15 @@
 {
   "properties": [ {
     "postalCode": "123456",
-    "unit": "88-88"
+    "unit": "88-88",
+    "type": "HDB",
+    "ask": "50000",
+    "bid": "60000"
   }, {
     "postalCode": "123456",
-    "unit": "88-88"
+    "unit": "88-88",
+    "type": "HDB",
+    "ask": "50000",
+    "bid": "60000"
   } ]
 }

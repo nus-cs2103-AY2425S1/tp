@@ -16,7 +16,7 @@ public class PostalCode {
     /**
      * Constructs a {@code PostalCode}.
      *
-     * @param postalCode A valid phone number.
+     * @param postalCode A valid postal code.
      */
     public PostalCode(String postalCode) {
         requireNonNull(postalCode);
@@ -25,7 +25,7 @@ public class PostalCode {
     }
 
     /**
-     * Returns true if a given string is a valid postcal code.
+     * Returns true if a given string is a valid postal code.
      */
     public static boolean isValidPostalCode(String test) {
         return test.matches(VALIDATION_REGEX);

@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
@@ -22,9 +23,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 import seedu.address.testutil.PersonBuilder;
@@ -251,6 +254,48 @@ public class AddCommandTest {
         public void updateFilteredPropertyList(Predicate<Property> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ReadOnlyMeetingBook getMeetingBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        //=========== Filtered Meeting List Accessors =============================================================
+
+        /**
+         * Returns an unmodifiable view of the list of {@code Meeting} backed by the internal list of
+         * {@code versionedMeetingBook}
+         */
+        @Override
+        public ObservableList<Meeting> getFilteredMeetingList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredMeetingList(Predicate<Meeting> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public BooleanProperty getIsDisplayClientsProperty() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayClients() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDisplayProperties() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**

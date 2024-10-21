@@ -1,9 +1,15 @@
 {
   "properties": [ {
     "postalCode": "654321",
-    "unit": "02-22"
+    "unit": "02-22",
+    "type": "CONDO",
+    "ask": "50000",
+    "bid": "10000"
   }, {
     "postalCode": "321456",
-    "unit": "11-12"
+    "unit": "11-12",
+    "type": "HDB",
+    "ask": "60000",
+    "bid": "20000"
   } ]
 }
