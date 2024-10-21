@@ -4,13 +4,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Name;
-import seedu.address.model.student.AttendanceRecord;
 import seedu.address.model.student.Student;
 
 /**
