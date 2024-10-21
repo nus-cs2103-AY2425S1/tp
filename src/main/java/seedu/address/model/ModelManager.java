@@ -7,11 +7,15 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ReadOnlyProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,11 +26,13 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final SimpleObjectProperty<Person> selectedPerson = new SimpleObjectProperty<>();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
@@ -39,6 +45,7 @@ public class ModelManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
+
 
     //=========== UserPrefs ==================================================================================
 
@@ -109,6 +116,43 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Selected Person ===========================================================================
+
+    @Override
+    public ReadOnlyProperty<Person> selectedPersonProperty() {
+        return selectedPerson;
+    }
+
+    @Override
+    public Person getSelectedPerson() {
+        return selectedPerson.getValue();
+    }
+
+    @Override
+    public void setSelectedPerson(Person person) {
+        if (person != null && !filteredPersons.contains(person)) {
+            throw new PersonNotFoundException();
+        }
+        selectedPerson.setValue(person);
+    }
+
+    /**
+     * Ensures {@code selectedPerson} is a valid person in {@code filteredPersons}.
+     */
+    private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {
+        while (change.next()) {
+            if (selectedPerson.getValue() == null) {
+                return;
+            }
+
+            boolean wasSelectedPersonRemoved = change.getRemoved().stream()
+                    .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
+            if (wasSelectedPersonRemoved) {
+                selectedPerson.setValue(change.getFrom() > 0 ? filteredPersons.get(change.getFrom() - 1) : null);
+            }
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================
