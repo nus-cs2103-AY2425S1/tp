@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +12,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameMatchesNamePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -75,11 +77,12 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return personToDelete;
     }
 
     public Person deleteWithKeyword(Model model) throws CommandException {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
+        NameMatchesNamePredicate predicate = new NameMatchesNamePredicate(
                 Arrays.asList(this.targetKeyword));
         model.updateFilteredPersonList(predicate);
         List<Person> filteredList = model.getFilteredPersonList();
@@ -89,6 +92,7 @@ public class DeleteCommand extends Command {
         } else if (filteredList.size() == 1) {
             Person personToDelete = filteredList.get(0);
             model.deletePerson(personToDelete);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             return personToDelete;
         } else {
             return null;
