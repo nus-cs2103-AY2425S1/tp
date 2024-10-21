@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -14,7 +15,7 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class ContactMap {
-    private HashMap<Role, Person> map;
+    private Map<Role, Person> map;
 
     /**
      * Creates an empty ContactList
@@ -67,12 +68,9 @@ public class ContactMap {
      * @param role person of this role.
      * @return person of role.
      */
-    public Person getPersonOfRole(Role role) {
+    public Optional<Person> getPersonOfRole(Role role) {
         requireNonNull(role);
-        if (!this.hasRole(role)) {
-            // throw exception
-        }
-        return map.get(role);
+        return Optional.ofNullable(map.get(role));
     }
 
     @Override

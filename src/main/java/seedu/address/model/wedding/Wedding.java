@@ -14,7 +14,7 @@ public class Wedding {
     private Wife wife;
     private Date date;
     private Venue venue;
-    private ContactMap contactList;
+    private ContactMap contactList = new ContactMap();
 
     /**
      * Constructs a {@code Wedding}.
@@ -85,5 +85,3 @@ public class Wedding {
         return Objects.hash(husband, wife, date, venue, contactList);
     }
 }
-
-

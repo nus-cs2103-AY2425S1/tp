@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
-
-import seedu.address.model.person.Name;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents the Date of a Wedding.
@@ -15,27 +15,36 @@ public class Date {
     public static final String MESSAGE_CONSTRAINTS =
             "Date should be in the following format, "
                     + "YYYY-MM-DD.";
-    public static final String VALIDATION_REGEX = "\\b(\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))\\b";
+
+    // Use built-in formatter to parse and validate the date
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private LocalDate fullDate;
 
     /**
      * Constructs a {@code Date}.
      *
-     * @param date A valid date.
+     * @param date A valid date in the format of "yyyy-MM-dd".
      */
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.fullDate = LocalDate.parse(date);
+        this.fullDate = LocalDate.parse(date, FORMATTER);
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid date according to the format "yyyy-MM-dd".
+     *
      * @param test string to be tested
      * @return whether the string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        try {
+            LocalDate.parse(test, FORMATTER);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     @Override
@@ -49,8 +58,7 @@ public class Date {
             return true;
         }
 
-        // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 
