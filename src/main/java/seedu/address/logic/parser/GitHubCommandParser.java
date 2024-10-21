@@ -29,6 +29,7 @@ public class GitHubCommandParser implements Parser<GitHubCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GitHubCommand.MESSAGE_USAGE));
         }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
