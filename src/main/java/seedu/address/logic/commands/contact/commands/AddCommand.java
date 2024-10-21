@@ -10,15 +10,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a person to the address book.
  */
-public class AddContactCommand extends ContactCommand {
+public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
@@ -49,13 +51,13 @@ public class AddContactCommand extends ContactCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddContactCommand(Person person) {
+    public AddCommand(Person person) {
         requireNonNull(person);
         toAdd = person;
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
@@ -73,11 +75,11 @@ public class AddContactCommand extends ContactCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddContactCommand)) {
+        if (!(other instanceof AddCommand)) {
             return false;
         }
 
-        AddContactCommand otherAddCommand = (AddContactCommand) other;
+        AddCommand otherAddCommand = (AddCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 

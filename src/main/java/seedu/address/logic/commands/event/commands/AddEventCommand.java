@@ -3,15 +3,17 @@ package seedu.address.logic.commands.event.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventManager;
 
 /**
  * Adds an event to the address book.
  */
-public class AddEventCommand extends EventCommand {
+public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "new";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <event name>: Adds an event to the address book. "
@@ -31,7 +33,7 @@ public class AddEventCommand extends EventCommand {
     }
 
     @Override
-    public CommandResult execute(EventManager eventManager) throws CommandException {
+    public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
         requireNonNull(eventManager);
 
         if (eventManager.hasEvent(eventToBeAdded)) {

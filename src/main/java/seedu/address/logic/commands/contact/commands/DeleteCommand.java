@@ -7,15 +7,17 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteContactCommand extends ContactCommand {
+public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -28,12 +30,12 @@ public class DeleteContactCommand extends ContactCommand {
 
     private final Index targetIndex;
 
-    public DeleteContactCommand(Index targetIndex) {
+    public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model, EventManager eventManager) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
@@ -53,11 +55,11 @@ public class DeleteContactCommand extends ContactCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteContactCommand)) {
+        if (!(other instanceof DeleteCommand)) {
             return false;
         }
 
-        DeleteContactCommand otherDeleteCommand = (DeleteContactCommand) other;
+        DeleteCommand otherDeleteCommand = (DeleteCommand) other;
         return targetIndex.equals(otherDeleteCommand.targetIndex);
     }
 

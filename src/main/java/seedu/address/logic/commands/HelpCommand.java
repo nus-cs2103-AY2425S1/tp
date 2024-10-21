@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.contact.commands.ContactCommand;
 import seedu.address.model.Model;
+import seedu.address.model.event.EventManager;
 
 /**
  * Format full help instructions for every command for display.
  */
-public class HelpContactCommand extends ContactCommand {
+public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
@@ -16,7 +16,7 @@ public class HelpContactCommand extends ContactCommand {
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, EventManager eventManager) {
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }

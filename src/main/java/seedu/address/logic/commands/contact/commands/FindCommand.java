@@ -4,15 +4,17 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.event.EventManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindContactCommand extends ContactCommand {
+public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -23,12 +25,12 @@ public class FindContactCommand extends ContactCommand {
 
     private final NameContainsKeywordsPredicate predicate;
 
-    public FindContactCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, EventManager eventManager) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
@@ -42,11 +44,11 @@ public class FindContactCommand extends ContactCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindContactCommand)) {
+        if (!(other instanceof FindCommand)) {
             return false;
         }
 
-        FindContactCommand otherFindCommand = (FindContactCommand) other;
+        FindCommand otherFindCommand = (FindCommand) other;
         return predicate.equals(otherFindCommand.predicate);
     }
 
