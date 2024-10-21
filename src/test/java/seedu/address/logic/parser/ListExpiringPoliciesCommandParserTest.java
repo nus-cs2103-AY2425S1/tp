@@ -25,8 +25,8 @@ public class ListExpiringPoliciesCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsListExpiringPoliciesCommand() throws Exception {
-        // test a valid argument with a number of days (eg. d/60)
-        ListExpiringPoliciesCommand command = parser.parse(" d/60");
+        // test a valid argument with a number of days (eg. 60)
+        ListExpiringPoliciesCommand command = parser.parse(" 60");
         assertTrue(command instanceof ListExpiringPoliciesCommand);
         assertEquals(60, command.getDaysFromExpiry());
     }

@@ -149,19 +149,25 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
                 instanceof ListExpiringPoliciesCommand);
 
-        // test valid usage of the command with days argument (eg. "listExpiringPolicies d/60")
-        assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " d/60")
-                instanceof ListExpiringPoliciesCommand);
+        // test valid usage of the command with days argument (eg. "listExpiringPolicies 60")
+        ListExpiringPoliciesCommand commandWithDays = (ListExpiringPoliciesCommand) parser.parseCommand(
+                ListExpiringPoliciesCommand.COMMAND_WORD + " 60");
+        assertTrue(commandWithDays instanceof ListExpiringPoliciesCommand);
+        assertEquals(60, commandWithDays.getDaysFromExpiry());
 
         // test invalid usage where extra invalid arguments are provided (eg., "listExpiringPolicies extraArgument")
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " extraArgument"));
 
-        // test invalid usage where days argument is not an integer (eg. "listExpiringPolicies d/abc")
+        // test invalid usage where days argument is not an integer (eg. "listExpiringPolicies abc")
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
-                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " d/abc"));
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " abc"));
+        // test invalid usage where days argument is a negative integer (eg. "listExpiringPolicies -5")
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " -5"));
     }
 
 

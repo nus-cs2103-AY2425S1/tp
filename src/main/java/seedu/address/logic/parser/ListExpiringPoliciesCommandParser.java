@@ -18,15 +18,15 @@ public class ListExpiringPoliciesCommandParser implements Parser<ListExpiringPol
      * @throws ParseException if the user input does not conform the expected format
      */
     public ListExpiringPoliciesCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DAYS_FROM_EXPIRY);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args);
 
         int days = 30;
 
-        // check if the 'd/' prefix is provided
-        if (argMultimap.getValue(PREFIX_DAYS_FROM_EXPIRY).isPresent()) {
-            String daysString = argMultimap.getValue(PREFIX_DAYS_FROM_EXPIRY).get();
+        // check if there is a preamble (which is where the days argument should be provided)
+        String preamble = argMultimap.getPreamble();
+        if (!preamble.isEmpty()) {
             try {
-                days = Integer.parseInt(daysString);
+                days = Integer.parseInt(preamble.trim());
             } catch (NumberFormatException e) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListExpiringPoliciesCommand.MESSAGE_USAGE));
@@ -36,12 +36,6 @@ public class ListExpiringPoliciesCommandParser implements Parser<ListExpiringPol
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ListExpiringPoliciesCommand.MESSAGE_USAGE));
             }
-        }
-
-        // check if there are extra arguments (those not recognised by the prefixes)
-        if (!argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ListExpiringPoliciesCommand.MESSAGE_USAGE));
         }
 
         return new ListExpiringPoliciesCommand(days);

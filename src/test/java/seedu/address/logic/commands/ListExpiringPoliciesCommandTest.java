@@ -35,7 +35,7 @@ public class ListExpiringPoliciesCommandTest {
     @Test
     public void execute_noExpiringPolicies_showsNoExpiringPoliciesMessage() {
         ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(30);
-        String expectedMessage = String.format("No policies expiring within the next %d days!", 30);
+        String expectedMessage = String.format("No policies expiring within the next %d day(s)!", 30);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
 

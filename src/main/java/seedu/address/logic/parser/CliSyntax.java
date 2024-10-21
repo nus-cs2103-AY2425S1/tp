@@ -15,6 +15,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_POLICY_PREMIUM_AMOUNT = new Prefix("pa/");
     public static final Prefix PREFIX_POLICY_COVERAGE_AMOUNT = new Prefix("ca/");
     public static final Prefix PREFIX_POLICY_EXPIRY_DATE = new Prefix("ed/");
-    public static final Prefix PREFIX_DAYS_FROM_EXPIRY = new Prefix("d/");
 
 }

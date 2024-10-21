@@ -27,10 +27,10 @@ public class ListExpiringPoliciesCommand extends Command {
             + ": Lists all policies nearing expiry within the specified number of days.\n"
             + "If no number is provided, it defaults to 30 days.\n"
             + "Parameters: [days from expiry] (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " d/60";
+            + "Example: " + COMMAND_WORD + " 60";
 
     private static final String MESSAGE_SUCCESS = "The following policies are expiring within %1$d day(s):\n\n";
-    private static final String MESSAGE_NO_EXPIRING_POLICY = "No policies expiring within the next %1$d days!";
+    private static final String MESSAGE_NO_EXPIRING_POLICY = "No policies expiring within the next %1$d day(s)!";
     private static final String MESSAGE_FAILURE = "Failed to retrieve expiring policies. Please try again.";
     private static final String MESSAGE_POLICY_LISTED_DETAILS = "Insuree name: %1$s   |   Insuree phone: %2$s\n"
             + "Policy Type: %3$s   |   Premium Amount: %4$.2f\nCoverage Amount: %5$.2f   |   Expiry Date: %6$s\n\n";
