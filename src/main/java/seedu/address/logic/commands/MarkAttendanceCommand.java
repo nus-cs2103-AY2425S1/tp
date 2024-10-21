@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -55,7 +56,7 @@ public class MarkAttendanceCommand extends Command {
         Person markedPerson = new Person(
                 personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
                 personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
-                personToMarkAttendance.getPayment(), new Attendance(true),
+                personToMarkAttendance.getPayment(), new Attendance(LocalDate.now()),
                 personToMarkAttendance.getTags());
 
         model.setPerson(personToMarkAttendance, markedPerson);

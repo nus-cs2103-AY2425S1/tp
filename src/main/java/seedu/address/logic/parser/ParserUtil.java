@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
@@ -102,12 +104,23 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed
      */
     public static Payment parsePayment(String payment) throws ParseException {
-        String trimmedPayment = payment.trim().toLowerCase();
+        String trimmedPayment = payment.trim();
         if (!Payment.isValidPayment(trimmedPayment)) {
             throw new ParseException(Payment.MESSAGE_CONSTRAINTS);
         }
-        Boolean b = Boolean.parseBoolean(trimmedPayment);
-        return new Payment(b);
+        return new Payment(trimmedPayment);
+    }
+
+    /**
+     * Parses a {@code String fee} into an {@code Fees}.
+     * Leading and trailing whitespaces will be trimmed, all characters are converted to lower case
+     */
+    public static Fees parseFees(String payment) throws ParseException {
+        String trimmedFees = payment.trim().toLowerCase();
+        if (!Fees.isValidFees(trimmedFees)) {
+            throw new ParseException(Fees.MESSAGE_CONSTRAINTS);
+        }
+        return new Fees(trimmedFees);
     }
 
     /**
@@ -115,12 +128,12 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed
      */
     public static Attendance parseAttendance(String attendance) throws ParseException {
-        String trimmedAttendance = attendance.trim().toLowerCase();
+        String trimmedAttendance = attendance.trim();
         if (!Attendance.isValidAttendance(trimmedAttendance)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
-        boolean b = Boolean.parseBoolean(trimmedAttendance);
-        return new Attendance(b);
+        LocalDate attendanceDate = LocalDate.parse(trimmedAttendance, Attendance.VALID_DATE_FORMAT);
+        return new Attendance(attendanceDate);
     }
 
     /**

@@ -4,15 +4,16 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "payment" : "false",
-    "attendance": "true",
+    "payment" : "200",
+    "attendance": "10/10/2024",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
     "address": "4th street",
-    "payment" : "false",
-    "attendance": false
-  } ]
+    "payment" : "200",
+    "attendance": "11/10/2024"
+  } ],
+  "tutorials" : [ ]
 }

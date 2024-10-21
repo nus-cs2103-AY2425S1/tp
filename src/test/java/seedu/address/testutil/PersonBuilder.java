@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    public static final Boolean DEFAULT_PAYMENT = false;
-    public static final Boolean DEFAULT_ATTENDANCE = false;
+    public static final String DEFAULT_PAYMENT = "200";
+    public static final LocalDate DEFAULT_ATTENDANCE = LocalDate.now();
 
     private Name name;
     private Phone phone;
@@ -103,16 +104,17 @@ public class PersonBuilder {
     /**
      * Sets the {@code Payment} of the {@code Person} that we are building.
      */
-    public PersonBuilder withPayment(Boolean hasPaid) {
-        this.payment = new Payment(hasPaid);
+    public PersonBuilder withPayment(String value) {
+        this.payment = new Payment(value);
         return this;
     }
 
     /**
      * Sets the {@code Attendance} of the {@code Person} that we are building.
      */
-    public PersonBuilder withAttendance(Boolean isPresent) {
-        this.attendance = new Attendance(isPresent);
+    public PersonBuilder withAttendance(String attendance) {
+        LocalDate attendanceDate = LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT);
+        this.attendance = new Attendance(attendanceDate);
         return this;
     }
 

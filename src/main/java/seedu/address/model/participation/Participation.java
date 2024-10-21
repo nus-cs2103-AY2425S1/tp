@@ -1,7 +1,8 @@
-package seedu.address.model;
+package seedu.address.model.participation;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.person.Attendance;
