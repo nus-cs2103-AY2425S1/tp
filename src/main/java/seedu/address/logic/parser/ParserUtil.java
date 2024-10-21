@@ -13,6 +13,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
 /**
@@ -106,6 +107,9 @@ public class ParserUtil {
         String trimmedRole = role.trim();
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedRole.toLowerCase().equals(Member.MEMBER_ROLE.toLowerCase())) {
+            return new Member();
         }
         return new Role(trimmedRole);
     }
