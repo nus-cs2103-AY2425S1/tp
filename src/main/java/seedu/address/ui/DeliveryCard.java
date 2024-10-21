@@ -42,6 +42,8 @@ public class DeliveryCard extends UiPart<Region> {
     private Label eta;
     @FXML
     private Label status;
+    @FXML
+    private Label archive;
 
     /**
      * Creates a {@code DeliveryCard} with the given {@code Delivery} and index to display.
@@ -57,5 +59,8 @@ public class DeliveryCard extends UiPart<Region> {
         time.setText(delivery.getTime().toString());
         eta.setText(delivery.getEta().toString());
         status.setText(delivery.getStatus().toString());
+
+        //Can be removed
+        archive.setText(delivery.getArchive().toString());
     }
 }
