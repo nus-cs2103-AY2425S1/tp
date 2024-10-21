@@ -1,4 +1,3 @@
-// src/main/java/seedu/address/model/event/UniqueEventList.java
 package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
@@ -12,17 +11,28 @@ import javafx.collections.ObservableList;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
+/**
+ * A list of events that enforces uniqueness
+ * between its elements and does not allow nulls.
+ */
 public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
+    /**
+     * Returns true if the list contains an equivalent event as the given argument.
+     */
     public boolean contains(Event toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
     }
 
+    /**
+     * Adds an event to the list.
+     * The event must not already exist in the list.
+     */
     public void add(Event toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
@@ -30,7 +40,10 @@ public class UniqueEventList implements Iterable<Event> {
         }
         internalList.add(toAdd);
     }
-
+    /**
+     * Replaces the contents of this list with {@code events}.
+     * {@code persons} must not contain duplicate events.
+     */
     public void setEvents(List<Event> events) {
         requireAllNonNull(events);
         if (!eventsAreUnique(events)) {
@@ -54,6 +67,10 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.set(index, editedEvent);
     }
 
+    /**
+     * Removes the equivalent event from the list.
+     * The event must exist in the list.
+     */
     public void remove(Event toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {

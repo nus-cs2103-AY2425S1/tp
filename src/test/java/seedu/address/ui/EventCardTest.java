@@ -4,15 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Field;
-import javafx.scene.control.Label;
 
 import org.junit.jupiter.api.Test;
+
+import javafx.scene.control.Label;
 import seedu.address.model.event.Event;
+
 
 public class EventCardTest {
 
     @Test
-    void constructor_validEventAndIndex_initializesFieldsCorrectly() throws NoSuchFieldException, IllegalAccessException {
+    void constructor_validEventAndIndex_initializesFieldsCorrectly() throws NoSuchFieldException,
+            IllegalAccessException {
         Event event = new Event("Meeting");
         EventCard eventCard = new EventCard(event, 1);
 

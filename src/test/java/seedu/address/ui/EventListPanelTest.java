@@ -5,18 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.lang.reflect.Field;
 
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import javafx.scene.Node;
-import org.junit.jupiter.api.Test;
+import javafx.scene.control.ListView;
 import seedu.address.model.event.Event;
+
 
 public class EventListPanelTest {
 
     @Test
     void constructor_validEventList_initializesListViewCorrectly() throws NoSuchFieldException, IllegalAccessException {
-        ObservableList<Event> eventList = FXCollections.observableArrayList(new Event("Meeting"), new Event("Conference"));
+        ObservableList<Event> eventList = FXCollections.observableArrayList(new Event("Meeting"),
+                new Event("Conference"));
         EventListPanel eventListPanel = new EventListPanel(eventList);
 
         Field listViewField = EventListPanel.class.getDeclaredField("eventListView");

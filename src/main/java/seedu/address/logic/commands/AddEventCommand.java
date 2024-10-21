@@ -1,4 +1,3 @@
-// src/main/java/seedu/address/logic/commands/AddEventCommand.java
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -6,9 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.storage.JsonAdaptedEvent;
 
-import java.awt.*;
 
 /**
  * Adds an event to the address book.
