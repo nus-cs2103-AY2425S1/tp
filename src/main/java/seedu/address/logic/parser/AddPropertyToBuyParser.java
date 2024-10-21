@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYING_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSING_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTAL_CODE;
@@ -47,11 +48,16 @@ public class AddPropertyToBuyParser implements Parser<AddPropertyToBuyCommand> {
         }
 
         Index index;
+        String preamble = argMultimap.getPreamble();
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (preamble.isEmpty() || preamble.equals(" ")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddPropertyToBuyCommand.MESSAGE_USAGE));
+        }
+        try {
+            index = ParserUtil.parseIndex(preamble);
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                     AddPropertyToBuyCommand.MESSAGE_USAGE), pe);
         }
 

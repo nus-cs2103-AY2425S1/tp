@@ -11,6 +11,17 @@ import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.HousingType;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.PostalCode;
+import seedu.address.model.person.Price;
+import seedu.address.model.person.UnitNumber;
+import seedu.address.model.tag.Tag;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -55,7 +66,59 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+            highlightErrorLocation(e, commandText);
         }
+    }
+
+    /**
+     * Highlights the error location in the command box.
+     */
+    private void highlightErrorLocation(Exception e, String input) {
+        String commandText = input + " ";
+        String errorMessage = e.getMessage();
+        int errorIndexStart = 0;
+        int errorLength = 0;
+        switch (errorMessage) {
+        case HousingType.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("ht/");
+            break;
+        case Price.MESSAGE_CONSTRAINTS:
+            if (commandText.contains("sp/")) {
+                errorIndexStart = commandText.indexOf("sp/");
+            } else {
+                errorIndexStart = commandText.indexOf("bp/");
+            }
+            break;
+        case PostalCode.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("pc/");
+            break;
+        case UnitNumber.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("un/");
+            break;
+        case Email.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("e/");
+            break;
+        case Name.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("n/");
+            break;
+        case Address.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("a/");
+            break;
+        case Phone.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("p/");
+            break;
+        case Tag.MESSAGE_CONSTRAINTS:
+            errorIndexStart = commandText.indexOf("t/");
+            break;
+        case MESSAGE_INVALID_PERSON_DISPLAYED_INDEX:
+            errorIndexStart = commandText.indexOf(" ") + 1;
+
+            break;
+        default:
+            errorIndexStart = commandText.length();
+        }
+        errorLength = commandText.substring(errorIndexStart).indexOf(" ");
+        commandTextField.selectRange(errorIndexStart, errorIndexStart + errorLength);
     }
 
     /**

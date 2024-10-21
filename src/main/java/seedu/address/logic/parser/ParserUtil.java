@@ -177,7 +177,7 @@ public class ParserUtil {
         requireNonNull(housingType);
         String trimmedHousingType = housingType.trim();
         if (!HousingType.isValidHousingType(trimmedHousingType)) {
-            throw new ParseException("Housing type is not a non-zero unsigned integer.");
+            throw new ParseException(HousingType.MESSAGE_CONSTRAINTS);
         }
         return HousingType.getHousingType(trimmedHousingType);
     }
@@ -192,7 +192,7 @@ public class ParserUtil {
         requireNonNull(sellingPrice);
         String trimmedSellingPrice = sellingPrice.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedSellingPrice)) {
-            throw new ParseException("Selling price is not a non-zero unsigned integer.");
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         return new Price(trimmedSellingPrice);
     }
