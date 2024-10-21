@@ -42,6 +42,7 @@ public class Student {
         this.tags.addAll(tags);
         this.remark = remark;
     }
+
     /**
      * Creates a Student object with an AssignmentList
      */
@@ -54,9 +55,7 @@ public class Student {
         this.assignmentList = assignmentList;
         this.remark = remark;
     }
-
     /**
-     *
      * Copy an existing student object and changing the remark attribute
      */
     public Student(Student studentToCopy, String remark) {
@@ -84,7 +83,6 @@ public class Student {
     public List<Assignment> getAssignmentList() {
         return assignmentList;
     }
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -96,7 +94,6 @@ public class Student {
     public String getRemark() {
         return remark;
     }
-
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
@@ -109,7 +106,6 @@ public class Student {
         return otherStudent != null
                 && otherStudent.getName().equals(getName());
     }
-
     /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
