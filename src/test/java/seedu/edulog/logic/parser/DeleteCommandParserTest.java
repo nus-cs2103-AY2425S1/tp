@@ -4,11 +4,11 @@ import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
-
+import static seedu.edulog.testutil.TypicalNames.NAME_FIRST_STUDENT;
 import org.junit.jupiter.api.Test;
-
 import seedu.edulog.logic.commands.DeleteCommand;
 import seedu.edulog.logic.commands.DeleteIndexCommand;
+import seedu.edulog.logic.commands.DeleteNameCommand;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -26,7 +26,10 @@ public class DeleteCommandParserTest {
         assertParseSuccess(parser, "1", new DeleteIndexCommand(INDEX_FIRST_STUDENT));
     }
 
-    //TODO: test names
+    @Test
+    public void parse_validArgs_returnsUnmarkNameCommand() {
+        assertParseSuccess(parser, NAME_FIRST_STUDENT.fullName, new DeleteNameCommand(NAME_FIRST_STUDENT));
+    }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
