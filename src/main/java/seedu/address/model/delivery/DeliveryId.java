@@ -8,6 +8,9 @@ import java.util.Random;
 public class DeliveryId {
     public final String value;
 
+    public DeliveryId(String value) {
+        this.value = value;
+    }
     public DeliveryId() {
         value = System.currentTimeMillis() + "-" + String.format("%04d", new Random().nextInt(1000));
     }

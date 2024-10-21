@@ -9,7 +9,6 @@ import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.Eta;
-import seedu.address.model.delivery.Id;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
@@ -74,17 +73,18 @@ public class JsonAdaptedDelivery {
      */
     public Delivery toModelType() throws IllegalValueException {
         if (deliveryId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DeliveryId.class.getSimpleName()));
         }
 
-        final DeliveryId modelDeliveryId = new DeliveryId();
+        final DeliveryId modelDeliveryId = new DeliveryId(deliveryId);
 
         if (itemName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ItemName.class.getSimpleName()));
         }
         if (!ItemName.isValidItemName(itemName)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ItemName.MESSAGE_CONSTRAINTS);
         }
         final ItemName modelItemName = new ItemName(itemName);
 
@@ -124,7 +124,7 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Eta.class.getSimpleName()));
         }
         if (!Eta.isValidEta(eta)) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Eta.MESSAGE_CONSTRAINTS);
         }
         final Eta modelEta = new Eta(eta);
 
