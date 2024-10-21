@@ -1,5 +1,7 @@
 package seedu.address.model.id.counter.list;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents the ID counter for both persons and events in the address book.
  * Guarantees: ID counter for persons/events is more than or equal to the number of persons/events in the address book.
@@ -68,5 +70,21 @@ public class IdCounterList {
     public int generateEventId() {
         eventIdCounter++;
         return eventIdCounter;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof IdCounterList)) {
+            return false;
+        }
+
+        IdCounterList otherIdCounterList = (IdCounterList) other;
+        return personIdCounter == otherIdCounterList.personIdCounter
+                && eventIdCounter == otherIdCounterList.eventIdCounter;
     }
 }

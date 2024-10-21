@@ -73,6 +73,14 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code EventId} of the {@code Event} that we are building.
+     */
+    public EventBuilder withEventId(int eventId) {
+        this.eventId = eventId;
+        return this;
+    }
+
     public Event build() {
         return new Event(eventName, eventDescription, eventDuration, eventId);
     }

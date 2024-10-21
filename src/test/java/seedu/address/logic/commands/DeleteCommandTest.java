@@ -178,10 +178,18 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void indexToStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void nameToStringMethod() {
+        Name targetName = new Name("Alice");
+        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
