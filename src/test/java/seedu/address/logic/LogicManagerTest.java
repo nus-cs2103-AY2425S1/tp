@@ -201,17 +201,18 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
         assertEquals(logic.getPersonsWithUpcomingBirthdays(), BIRTHDAY_REMINDER_EMPTY);
 
-        Person editedBenson = new PersonBuilder(BENSON).withBirthday(LocalDate.now()
-                .plusDays(6).minusYears(20).toString()).build();
-        Person editedCarl = new PersonBuilder(CARL).withBirthday(LocalDate.now()
-                .minusDays(0).minusYears(20).toString()).build();
+        LocalDate sixDaysAfterTodaySomeYearsBack = LocalDate.now().plusDays(6).minusYears(20);
+        LocalDate todaySomeYearsBack = LocalDate.now().minusDays(0).minusYears(20);
+        Person editedBenson = new PersonBuilder(BENSON).withBirthday(sixDaysAfterTodaySomeYearsBack.toString())
+                .build();
+        Person editedCarl = new PersonBuilder(CARL).withBirthday(todaySomeYearsBack.toString()).build();
         addressBook = new AddressBookBuilder().withPerson(editedBenson).withPerson(editedCarl).build();
 
         model = new ModelManager(addressBook, userPrefs);
         logic = new LogicManager(model, storage);
 
         assertEquals(logic.getPersonsWithUpcomingBirthdays(), BIRTHDAY_REMINDER_HEADER
-                + "Benson Meier's birthday is on 2024-10-28\n"
-                + "Carl Kurz's birthday is on 2024-10-22");
+                + "Benson Meier's birthday is on " + sixDaysAfterTodaySomeYearsBack.plusYears(20) + "\n"
+                + "Carl Kurz's birthday is on " + todaySomeYearsBack.plusYears(20));
     }
 }
