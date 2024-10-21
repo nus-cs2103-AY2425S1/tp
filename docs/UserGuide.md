@@ -113,7 +113,7 @@ Examples:
 *  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st elderly to be `91234567` and `johndoe@example.com` respectively.
 *  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC S6878830G to be `Betsy Crower` and clears all existing tags.
 
-### Locating elderly by name: `find`
+### Locating elderly by name or nric: `find`
 
 Finds all elderly whose names or nric contain any of the given keywords.
 
