@@ -1,5 +1,10 @@
 package careconnect.ui;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.logging.Logger;
 
 import careconnect.commons.core.GuiSettings;
@@ -156,12 +161,18 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
+public void handleUGLink() {
+        try {
+            URI link = new URI("https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#quick-start");
+            Desktop.getDesktop().browse(link);
+        } catch (URISyntaxException | IOException ex) {
+            resultDisplay.setFeedbackToUser("An error occurred while opening the help page.");
         }
+//        if (!helpWindow.isShowing()) {
+//            helpWindow.show();
+//        } else {
+//            helpWindow.focus();
+//        }
     }
 
     void show() {
@@ -196,7 +207,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                handleUGLink();
             }
 
             if (commandResult.isExit()) {
