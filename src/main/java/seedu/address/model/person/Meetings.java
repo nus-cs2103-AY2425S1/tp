@@ -109,11 +109,15 @@ public class Meetings {
         return meetingList.toString();
     }
 
+    /**
+     * Formats the string output of the meetings list to be displayed in the DetailPanel.
+     * @return String output of meetings list
+     */
     public String toDetailPanelString() {
         StringBuilder meetingList = new StringBuilder();
 
         for (int i = 0; i < internalList.size(); i++) {
-            meetingList.append(i + 1).append(". ").append(getMeeting(i).toString().substring(0,1).toUpperCase())
+            meetingList.append(i + 1).append(". ").append(getMeeting(i).toString().substring(0, 1).toUpperCase())
                     .append(getMeeting(i).toString().substring(1)).append("\n");
         }
 
