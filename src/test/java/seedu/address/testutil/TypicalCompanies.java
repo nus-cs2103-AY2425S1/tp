@@ -64,7 +64,7 @@ public class TypicalCompanies {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical companies.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();

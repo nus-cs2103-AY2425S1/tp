@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.company.Address;
+import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.CareerPageUrl;
 import seedu.address.model.company.Company;
 import seedu.address.model.company.Email;
@@ -23,12 +24,16 @@ public class CompanyBuilder {
     public static final String DEFAULT_URL = "careers.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
+    public static final Bookmark DEFAULT_BOOKMARK = new Bookmark(false);
+
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private CareerPageUrl careerPageUrl;
     private Set<Tag> tags;
+
+    private Bookmark isBookmark;
 
     /**
      * Creates a {@code CompanyBuilder} with the default details.
@@ -40,6 +45,7 @@ public class CompanyBuilder {
         address = new Address(DEFAULT_ADDRESS);
         careerPageUrl = new CareerPageUrl(DEFAULT_URL);
         tags = new HashSet<>();
+        isBookmark = DEFAULT_BOOKMARK;
     }
 
     /**
@@ -52,6 +58,7 @@ public class CompanyBuilder {
         address = companyToCopy.getAddress();
         careerPageUrl = companyToCopy.getCareerPageUrl();
         tags = new HashSet<>(companyToCopy.getTags());
+        isBookmark = companyToCopy.getIsBookmark();
     }
 
     /**
@@ -94,6 +101,7 @@ public class CompanyBuilder {
         this.email = new Email(email);
         return this;
     }
+
     /**
      * Sets the {@code CareerPageUrl} of the {@code Company} that we are building.
      */
@@ -102,8 +110,16 @@ public class CompanyBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code isBookmark} of the {@code Company} that we are building
+     */
+    public CompanyBuilder withIsBookmark(boolean value) {
+        this.isBookmark = new Bookmark(value);
+        return this;
+    }
+
     public Company build() {
-        return new Company(name, phone, email, address, careerPageUrl, tags);
+        return new Company(name, phone, email, address, careerPageUrl, tags, isBookmark);
     }
 
 }
