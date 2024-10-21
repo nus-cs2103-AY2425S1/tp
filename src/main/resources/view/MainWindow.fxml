@@ -19,8 +19,8 @@
     <Scene>
       <stylesheets>
 <!--        The order of stylesheet actually cause which one to be loaded in the end-->
-<!--        <URL value="@LightTheme.css" />-->
-        <URL value="@DarkTheme.css" />
+<!--        <URL value="@DarkTheme.css" />-->
+        <URL value="@LightTheme.css" />
         <URL value="@Extensions.css" />
       </stylesheets>
 

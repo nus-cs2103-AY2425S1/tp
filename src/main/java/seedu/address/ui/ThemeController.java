@@ -3,6 +3,8 @@ package seedu.address.ui;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 /**
  * This class serves as the controller for the GUI Themes
  */
@@ -29,11 +31,11 @@ public class ThemeController {
         switch (theme) {
         case "DARK":
             scene.getStylesheets().add(ThemeController.class
-                    .getResource("/view/DarkTheme.css").toExternalForm());
+                .getResource("/view/DarkTheme.css").toExternalForm());
             break;
         case "LIGHT":
             scene.getStylesheets().add(ThemeController.class
-                    .getResource("/view/LightTheme.css").toExternalForm());
+                .getResource("/view/LightTheme.css").toExternalForm());
             break;
         default:
             System.out.println("Unknown theme: " + theme);
