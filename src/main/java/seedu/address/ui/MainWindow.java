@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager.DisplayMode;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -117,18 +118,27 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // Instantiates the various panels
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+
+        // TODO: Add listPanel for MEETINGS @apollo-tan
 
         // Initialise clientListPanel to display Clients
         listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
 
         // Add listener to modify display appropriately
-        logic.getIsDisplayClientsProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
-            } else {
-                listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+        logic.getDisplayMode().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+                case CLIENTS:
+                    listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
+                    break;
+                case PROPERTIES:
+                    listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+                    break;
+                // TODO: Add case for MEETINGS @apollo-tan
+                default:
+                    throw new RuntimeException("Invalid Display Mode: " + newValue);
             }
         });
 

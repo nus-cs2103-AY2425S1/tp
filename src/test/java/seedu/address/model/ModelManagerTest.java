@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
@@ -282,18 +283,18 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+    public void getDisplayMode_returnsObjectPropertyType() {
         // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
 
-        // Assert that the result is an instance of BooleanProperty
-        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+        // Assert that the result is an instance of ObjectProperty
+        assertTrue(result instanceof ObjectProperty, "Expected result to be an instance of ObjectProperty");
     }
 
     @Test
-    public void getIsDisplayClientsProperty_isObservable() {
+    public void getDisplayMode_isObservable() {
         // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
