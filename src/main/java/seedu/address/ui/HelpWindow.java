@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -123,7 +124,7 @@ public class HelpWindow extends UiPart<Stage> {
     private void initializeCommandSummary() {
         commandSummaryList.addAll(
                 new CommandSummary("Add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX "
-                        + "ap/APPOINTMENT t/TAG\n add n/Evie Sage p/88888888 e/eviesage@example.com "
+                        + "ap/APPOINTMENT t/TAG\ne.g., add n/Evie Sage p/88888888 e/eviesage@example.com "
                         + "a/Hickory Forest b/23 s/Female ap/11/11/2024 1100"),
                 new CommandSummary("Clear", "clear"),
                 new CommandSummary("Delete", "delete INDEX / delete NAME\ne.g., delete 3, delete Alex Yeoh"),
@@ -135,30 +136,37 @@ public class HelpWindow extends UiPart<Stage> {
 
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
-        actionColumn.setResizable(false);
-        formatColumn.setResizable(false);
 
-        // Wrapping text for the format column
-        formatColumn.setCellFactory(tc -> {
-            TableCell<CommandSummary, String> cell = new TableCell<>() {
-                private final Text text = new Text();
+        // Ensure the table fills the available space for both headers and columns
+        commandSummaryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-                @Override
-                protected void updateItem(String item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText(null);
-                        setGraphic(null);
-                    } else {
-                        text.setText(item);
-                        text.wrappingWidthProperty().bind(formatColumn.widthProperty());
-                        setGraphic(text);
-                    }
+        // Set proportional width for columns (affects both headers and columns)
+        actionColumn.setMaxWidth(1f * Integer.MAX_VALUE * 15); // 15% of available width for action column
+        formatColumn.setMaxWidth(1f * Integer.MAX_VALUE * 85); // 85% of available width for format column
+
+        // Make format and examples selectable to copy
+        formatColumn.setCellFactory(tc -> new TableCell<>() {
+            private final TextArea textArea = new TextArea();
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    textArea.setText(item);
+                    textArea.setWrapText(true); // Enable text wrapping
+                    textArea.setEditable(false); // Prevent users from editing text
+                    textArea.setPrefHeight(80); // Adjust height to content
+                    textArea.setStyle("-fx-background-color: transparent; -fx-padding: 5;"); // Transparent background
+                    setGraphic(textArea);
                 }
-            };
-            return cell;
+            }
         });
 
+        // Set items into the table
         commandSummaryTable.setItems(commandSummaryList);
+        commandSummaryTable.setSelectionModel(null);
     }
 }

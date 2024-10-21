@@ -10,8 +10,8 @@
 <?import javafx.stage.Stage?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
-
 <?import javafx.scene.layout.VBox?>
+
 <fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
@@ -33,18 +33,25 @@
               </Label>
               <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
                 <HBox.margin>
-                  <Insets left="5.0" />
+                  <Insets topRightBottomLeft="5.0"/>
                 </HBox.margin>
               </Button>
             </children>
           </HBox>
 
-          <TableView fx:id="commandSummaryTable" prefHeight="400.0" prefWidth="1002.0">
-            <columns>
-              <TableColumn text="Action" fx:id="actionColumn" prefWidth="150.0" editable="false"/>
-              <TableColumn text="Format, Examples" fx:id="formatColumn" prefWidth="850.0" editable="false"/>
-            </columns>
-          </TableView>
+          <HBox alignment="CENTER">
+            <padding>
+              <Insets top="5" right="10" bottom="5" left="10" />
+            </padding>
+            <children>
+              <TableView fx:id="commandSummaryTable" prefHeight="600.0" prefWidth="1050.0">
+                <columns>
+                  <TableColumn text="Action" fx:id="actionColumn" prefWidth="150.0" editable="false"/>
+                  <TableColumn text="Format, Examples" fx:id="formatColumn" prefWidth="850.0" editable="false"/>
+                </columns>
+              </TableView>
+            </children>
+          </HBox>
         </children>
       </VBox>
     </Scene>

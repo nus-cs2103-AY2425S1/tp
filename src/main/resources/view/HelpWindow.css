@@ -1,3 +1,7 @@
+* {
+    -fx-font-family: "Roboto";
+}
+
 #copyButton, #helpMessage {
     -fx-text-fill: white;
 }
