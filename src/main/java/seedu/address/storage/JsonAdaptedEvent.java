@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -13,22 +14,16 @@ public class JsonAdaptedEvent {
 
     private final String eventName;
 
-    /**
-     * Constructs a {@code JsonAdaptedEvent} with the given {@code eventName}.
-     */
     @JsonCreator
-    public JsonAdaptedEvent(String eventName) {
-        this.eventName = eventName;
+    public JsonAdaptedEvent(@JsonProperty("eventName") String eventName) {
+        this.eventName = eventName.trim();
     }
 
-    /**
-     * Converts a given {@code Event} into this class for Jackson use.
-     */
     public JsonAdaptedEvent(Event source) {
-        this.eventName = source.value;
+        eventName = source.toString();
     }
 
-    @JsonValue
+    @JsonProperty("eventName")
     public String getEventName() {
         return eventName;
     }

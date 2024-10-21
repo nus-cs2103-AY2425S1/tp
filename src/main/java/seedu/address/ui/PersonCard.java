@@ -53,8 +53,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
         person.getEvents().stream()
-                .sorted(Comparator.comparing(event -> event.value))
-                .forEach(event -> events.getChildren().add(new Label(event.value)));
+                .sorted(Comparator.comparing(event -> event.getValue()))
+                .forEach(event -> events.getChildren().add(new Label(event.getValue())));
         person.getRoles().stream()
                 .sorted(Comparator.comparing(Role::getRoleName))
                 .forEach(role -> roles.getChildren().add(new Label(role.getRoleName() + ", ")));

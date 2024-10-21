@@ -10,17 +10,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Event {
     public static final String MESSAGE_CONSTRAINTS = "Events can take any values, and it should not be blank";
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    public final String value;
+    public final EventName value;
 
     /**
      * Constructs an {@code Event}
-     * @param event A valid event.
      */
-    public Event(String event) {
-        requireNonNull(event);
-        checkArgument(isValidEvent(event), MESSAGE_CONSTRAINTS);
-        value = event;
+    public Event(String eventName) {
+        requireNonNull(eventName);
+        checkArgument(isValidEvent(eventName), MESSAGE_CONSTRAINTS);
+        this.value = new EventName(eventName);
     }
+
 
     /**
      * returns true if a given string is a valid event.
@@ -31,7 +31,14 @@ public class Event {
 
     @Override
     public String toString() {
-        return value;
+        return value.toString();
+    }
+
+    /**
+     * Returns the value of the event.
+     */
+    public String getValue() {
+        return value.toString();
     }
 
     @Override
