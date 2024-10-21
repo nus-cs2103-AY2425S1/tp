@@ -63,10 +63,6 @@ public class DeleteGradeCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        if (this.testName == null) {
-            throw new CommandException("Test name cannot be null.");
-        }
-
         return new CommandResult(
                 String.format(MESSAGE_DELETE_GRADE_SUCCESS, personToEdit.getName(), this.testName));
     }
