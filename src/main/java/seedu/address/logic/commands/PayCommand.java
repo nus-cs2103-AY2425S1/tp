@@ -103,6 +103,7 @@ public class PayCommand extends Command {
      * Updates the paid amount of the student based on the hours the student paid.
      */
     private static PaidAmount updatePaidAmount(Student student, double amountPaid) {
+        assert student != null && amountPaid > 0;
         double updatedPaid = student.getPaidAmount().value + amountPaid;
         String amount = Double.toString(updatedPaid);
 
