@@ -127,4 +127,27 @@ public class JsonAdaptedStudentCourseAssociationTest {
             assertEquals(VALID_TUTORIAL_ID, sca.getTutorial().getTutorialId());
         });
     }
+
+    @Test
+    void toModelType_nullTutorial_throwsIllegalValueException() {
+        JsonAdaptedPerson validPerson = new JsonAdaptedPerson(VALID_MATRICULATION_NUMBER, VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        JsonAdaptedCourse validCourse = new JsonAdaptedCourse(INVALID_COURSE_CODE, VALID_COURSE_NAME);
+
+        JsonAdaptedStudentCourseAssociation adapter = new JsonAdaptedStudentCourseAssociation(validPerson,
+                validCourse, null);
+        assertThrows(IllegalValueException.class, adapter::toModelType);
+    }
+
+    @Test
+    void toModelType_nullCourseAndTutorial_throwsIllegalValueException() {
+        JsonAdaptedPerson validPerson = new JsonAdaptedPerson(VALID_MATRICULATION_NUMBER, VALID_NAME, VALID_PHONE,
+                VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+        JsonAdaptedCourse invalidCourse = new JsonAdaptedCourse(INVALID_COURSE_CODE, VALID_COURSE_NAME);
+        JsonAdaptedTutorial validTutorial = new JsonAdaptedTutorial(VALID_TUTORIAL_ID, invalidCourse);
+
+        JsonAdaptedStudentCourseAssociation adapter = new JsonAdaptedStudentCourseAssociation(validPerson,
+                invalidCourse, null);
+        assertThrows(IllegalValueException.class, adapter::toModelType);
+    }
 }
