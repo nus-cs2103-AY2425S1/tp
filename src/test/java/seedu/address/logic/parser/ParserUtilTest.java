@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -150,6 +151,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDay_emptyString_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ParserUtil.parseDay(""));
+    }
+
+    @Test
     public void parseDay_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDay("Monday!"));
     }
@@ -166,14 +172,25 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseNameStrings_isEmpty_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ParserUtil.parseNameStrings(List.of()));
+    }
+
+    @Test
+    public void parseNameStrings_containsEmptyString_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ParserUtil.parseNameStrings(List.of("Alice", "")));
+    }
+
+
+    @Test
     public void parseNameStrings_collectionWithInvalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseNameStrings(Set.of("Alice!", "Bob", INVALID_NAME)));
+        assertThrows(ParseException.class, () -> ParserUtil.parseNameStrings(List.of("Alice!", "Bob", INVALID_NAME)));
     }
 
     @Test
     public void parseNameStrings_collectionWithValidValue_returnsNameSet() throws Exception {
         Set<String> expectedNameSet = Set.of("Alice", "Bob");
-        assertEquals(expectedNameSet, ParserUtil.parseNameStrings(Set.of("Alice", "Bob")));
+        assertEquals(expectedNameSet, ParserUtil.parseNameStrings(List.of("Alice", "Bob")));
     }
 
     @Test
@@ -182,9 +199,20 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseDays_isEmpty_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> ParserUtil.parseDays(List.of("")));
+    }
+
+    @Test
+    public void parseDays_containsEmptyString_throwsAssertionError() {
+        assertThrows(AssertionError.class,
+                () -> ParserUtil.parseDays(List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "")));
+    }
+
+    @Test
     public void parseDays_collectionWithInvalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseDays(
-                Set.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAYs", "SATURDAY", "SUNDAY")));
+                List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAYs", "SATURDAY", "SUNDAY")));
     }
 
     @Test
@@ -192,7 +220,7 @@ public class ParserUtilTest {
         Set<Days> expectedDaySet = Set.of(
                 Days.MONDAY, Days.TUESDAY, Days.WEDNESDAY, Days.THURSDAY, Days.FRIDAY, Days.SATURDAY, Days.SUNDAY);
         assertEquals(expectedDaySet, ParserUtil.parseDays(
-                Set.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY")));
+                List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY")));
     }
 
 }

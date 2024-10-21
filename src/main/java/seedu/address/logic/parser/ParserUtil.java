@@ -199,21 +199,23 @@ public class ParserUtil {
      */
     public static Set<String> parseNameStrings(Collection<String> nameStrings) throws ParseException {
         requireNonNull(nameStrings);
-
+        assert !nameStrings.isEmpty();
+        assert !nameStrings.contains("");
 
         HashSet<String> nameSet = new HashSet<>();
-
+        
         for (String nameString : nameStrings) {
-            // Split by whitespace
-            String[] names = nameString.split("\\s+");
-            for (String name : names) {
-                if (!name.isEmpty()) { // Filter out empty names
-                    parseName(name); // Check if name is valid
-                    nameSet.add(name); // Add to set to ensure uniqueness
-                }
-            }
+            addToNameHashSet(nameString, nameSet);
         }
         return nameSet;
+    }
+
+    private static void addToNameHashSet(String nameString, HashSet<String> nameSet) throws ParseException {
+        String[] names = nameString.split("\\s+");
+        for (String name : names) {
+            parseName(name); // Check if name is valid
+            nameSet.add(name); // Add to set to ensure uniqueness
+        }
     }
 
 
@@ -224,22 +226,24 @@ public class ParserUtil {
      */
     public static Set<Days> parseDays(Collection<String> days) throws ParseException {
         requireNonNull(days);
+        assert !days.isEmpty();
+        assert !days.contains("");
 
         HashSet<Days> daySet = new HashSet<>();
 
         for (String dayString : days) {
-            // Split by whitespace
-            String[] dayStrings = dayString.split("\\s+");
-            for (String day : dayStrings) {
-                if (!day.isEmpty()) { // Filter out empty day strings
-                    daySet.add(parseDay(day)); // Convert and add to the set
-                }
-            }
+
+            addToDayHashSet(dayString, daySet);
         }
         return daySet;
     }
 
-
+    private static void addToDayHashSet(String dayString, HashSet<Days> daySet) throws ParseException {
+        String[] dayStrings = dayString.split("\\s+");
+        for (String day : dayStrings) {
+            daySet.add(parseDay(day)); // Convert and add to the set
+        }
+    }
 
 
 }
