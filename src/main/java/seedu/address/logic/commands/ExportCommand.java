@@ -23,6 +23,10 @@ import seedu.address.model.Model;
 /**
  * Exports the address book in a specified format.
  * Currently, BA€ can export the address book as a CSV file.
+ * The process of converting the JSON file to a CSV file is as follows:
+ * 1. Data is read from the JSON file and parsed into a List of Maps (readAndParseJSON).
+ * 2. The headers of the JSON file (e.g. name, phone) are extracted (extractHeaders).
+ * 3. The data and headers are then written to the CSV file (writeCsvFile).
  */
 public class ExportCommand extends Command {
     public static final String MESSAGE_ARGUMENTS = "Export: %1$s";
