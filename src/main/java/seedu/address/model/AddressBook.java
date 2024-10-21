@@ -234,19 +234,9 @@ public class AddressBook implements ReadOnlyAddressBook {
    * Adds a link to the address book.
    * The link must not already exist in the address book.
    */
-  public void addLink(Link l) {
-    links.add(l);
-  }
-
-  /**
-   * Replaces the given link {@code target} in the list with {@code editedLink}.
-   * {@code target} must exist in the address book.
-   * The link identity of {@code editedLink} must not be the same as another
-   * existing link in the address book.
-   */
-  public void setLink(Link target, Link editedLink) {
-    requireNonNull(editedLink);
-    links.setLink(target, editedLink);
+  public void addLink(Link link) {
+    requireNonNull(link);
+    links.add(link);
   }
 
   /**

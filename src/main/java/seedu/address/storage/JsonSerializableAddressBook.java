@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -27,9 +28,12 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PET = "Pets list contains duplicate pet(s).";
 
+    public static final String MESSAGE_DUPLICATE_LINK = "Pets list contains duplicate link(s).";
+
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedOwner> owners = new ArrayList<>();
     private final List<JsonAdaptedPet> pets = new ArrayList<>();
+    private final List<JsonAdaptedLink> links = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given owners and pets.
@@ -81,13 +85,19 @@ class JsonSerializableAddressBook {
             }
             addressBook.addOwner(owner);
         }
-
         for (JsonAdaptedPet jsonAdaptedPet : pets) {
             Pet pet = jsonAdaptedPet.toModelType();
             if (addressBook.hasPet(pet)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
             }
             addressBook.addPet(pet);
+        }
+        for (JsonAdaptedLink jsonAdaptedLink : links) {
+          Link link = jsonAdaptedLink.toModelType(addressBook.getOwnerList(), addressBook.getPetList());
+          if (addressBook.hasLink(link)) {
+              throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
+          }
+          addressBook.addLink(link);
         }
 
         return addressBook;
