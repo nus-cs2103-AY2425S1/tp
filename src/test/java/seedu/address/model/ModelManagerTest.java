@@ -10,6 +10,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_SELLERS_ONLY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.DANIEL;
+import static seedu.address.testutil.TypicalMeetings.MEETING_ADMIRALTY;
 import static seedu.address.testutil.TypicalMeetings.MEETING_BEDOK;
 import static seedu.address.testutil.TypicalMeetings.MEETING_CLEMENTI;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -110,6 +111,18 @@ public class ModelManagerTest {
         assertEquals(path, modelManager.getClientBookFilePath());
     }
 
+    @Test
+    public void setMeetingBookFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setMeetingBookFilePath(null));
+    }
+
+    @Test
+    public void setMeetingBookFilePath_validPath_setsMeetingBookFilePath() {
+        Path path = Paths.get("data/meetingbook.json");
+        modelManager.setMeetingBookFilePath(path);
+        assertEquals(path, modelManager.getMeetingBookFilePath());
+    }
+
     // ==================== AddressBook Related Tests ====================
 
     @Test
@@ -180,6 +193,16 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPropertyList().remove(0));
     }
 
+    @Test
+    public void hasProperty_nullProperty_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasProperty(null));
+    }
+
+    @Test
+    public void hasProperty_propertyNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasProperty(BEDOK));
+    }
+
     // ==================== MeetingBook Related Tests ====================
 
     @Test
@@ -232,6 +255,22 @@ public class ModelManagerTest {
 
         ObservableList<Meeting> expectedList = FXCollections.observableArrayList(MEETING_BEDOK);
         assertEquals(expectedList, modelManager.getFilteredMeetingList());
+    }
+
+    @Test
+    public void hasMeeting_nullMeeting_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasMeeting(null));
+    }
+
+    @Test
+    public void hasMeeting_meetingNotInMeetingBook_returnsFalse() {
+        assertFalse(modelManager.hasMeeting(MEETING_ADMIRALTY));
+    }
+
+    @Test
+    public void hasMeeting_meetingInAddressBook_returnsTrue() {
+        modelManager.addMeeting(MEETING_ADMIRALTY);
+        assertTrue(modelManager.hasMeeting(MEETING_ADMIRALTY));
     }
 
     // ==================== Equality Tests ====================

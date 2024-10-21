@@ -9,7 +9,7 @@ import seedu.address.model.meeting.MeetingTitle;
  */
 public class MeetingBuilder {
 
-    public static final String DEFAULT_MEETINGTITLE = "Client Property Viewing Orchard Road Condo";
+    public static final String DEFAULT_MEETINGTITLE = "Meeting 1";
     public static final String DEFAULT_MEETINGDATE = "31-01-2024";
 
     private MeetingTitle meetingTitle;

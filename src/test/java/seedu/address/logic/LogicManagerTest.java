@@ -29,6 +29,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ModelManager.DisplayMode;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
+import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -180,12 +182,23 @@ public class LogicManagerTest {
             }
         };
 
+        JsonPropertyBookStorage propertyBookStorage = new JsonPropertyBookStorage(prefPath) {
+            @Override
+            public void savePropertyBook(ReadOnlyPropertyBook propertyBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+        JsonMeetingBookStorage meetingBookStorage = new JsonMeetingBookStorage(prefPath) {
+            @Override
+            public void saveMeetingBook(ReadOnlyMeetingBook meetingBook, Path filePath)
+                    throws IOException {
+                throw e;
+            }
+        };
+
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
-        JsonPropertyBookStorage propertyBookStorage =
-                new JsonPropertyBookStorage(temporaryFolder.resolve("propertyBook.json"));
-        JsonMeetingBookStorage meetingBookStorage =
-                new JsonMeetingBookStorage(temporaryFolder.resolve("meetingBook.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, propertyBookStorage,
                 clientBookStorage, meetingBookStorage);
 
