@@ -32,6 +32,7 @@ public class HealthRisk {
      * Returns true if a given string is a valid health condition.
      */
     public static boolean isValidHealthRisk(String test) {
+        requireNonNull(test);
         return Objects.equals(test, Priority.LOW.name())
                 || Objects.equals(test, Priority.MEDIUM.name())
                 || Objects.equals(test, Priority.HIGH.name());

@@ -389,7 +389,6 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
-                    .add("name", name)
                     .add("nric", nric)
                     .add("sex", sex)
                     .add("birthdate", birthdate)

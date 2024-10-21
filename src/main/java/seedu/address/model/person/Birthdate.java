@@ -31,12 +31,9 @@ public class Birthdate {
      * Returns if a given string is a valid nric.
      */
     public static boolean isValidBirthdate(String test) {
-        System.out.println(test);
-        System.out.println(LocalDate.now());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         try {
             LocalDate date = LocalDate.parse(test, formatter);
-            System.out.println(date);
             return !date.isAfter(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;

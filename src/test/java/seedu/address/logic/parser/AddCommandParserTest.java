@@ -30,7 +30,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -90,9 +89,9 @@ public class AddCommandParserTest {
 
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedPersonString + NRIC_DESC_AMY + SEX_DESC_AMY + NAME_DESC_AMY + BIRTHDATE_DESC_AMY
+                validExpectedPersonString + NAME_DESC_AMY + NRIC_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY
                         + validExpectedPersonString,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_SEX, PREFIX_NRIC, PREFIX_BIRTHDATE));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE));
 
         // invalid value followed by valid value
 
@@ -131,13 +130,6 @@ public class AddCommandParserTest {
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_BIRTHDATE));
     }
 
-    @Test
-    public void parse_optionalFieldsMissing_success() {
-        // zero health services
-        Person expectedPerson = new PersonBuilder(AMY).withHealthServices().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + NRIC_DESC_AMY + SEX_DESC_AMY + BIRTHDATE_DESC_AMY,
-                new AddCommand(expectedPerson));
-    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
@@ -187,8 +179,8 @@ public class AddCommandParserTest {
                 + INVALID_HEALTHSERVICE_DESC + HEALTHSERVICE_DESC_VACCINATION, HealthService.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + NRIC_DESC_BOB + SEX_DESC_BOB + INVALID_BIRTHDATE_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC + NRIC_DESC_BOB + SEX_DESC_BOB + INVALID_BIRTHDATE_DESC
+                        + HEALTHSERVICE_DESC_VACCINATION, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + NRIC_DESC_BOB + SEX_DESC_BOB

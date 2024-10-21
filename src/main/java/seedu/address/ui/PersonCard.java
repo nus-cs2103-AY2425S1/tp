@@ -57,6 +57,10 @@ public class PersonCard extends UiPart<Region> {
         person.getHealthServices().stream()
                 .sorted(Comparator.comparing(healthservice -> healthservice.healthServiceName))
                 .forEach(healthservice -> healthServices.getChildren().add(new Label(healthservice.healthServiceName)));
-        appointmentDateTime.setText(person.getAppts().toString());
+        if (person.getAppts().size() == 0) {
+            appointmentDateTime.setText("No appointments currently");
+        } else {
+            appointmentDateTime.setText(person.getApptsString());
+        }
     }
 }

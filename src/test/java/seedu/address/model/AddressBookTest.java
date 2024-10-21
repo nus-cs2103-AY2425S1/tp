@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_BLOOD_TEST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HEALTHSERVICE_VACCINATION;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_ALICE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -47,7 +47,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB)
+        Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_ALICE)
                 .withHealthServices(VALID_HEALTHSERVICE_BLOOD_TEST)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
@@ -75,7 +75,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_BOB)
+        Person editedAlice = new PersonBuilder(ALICE).withNric(VALID_NRIC_ALICE)
                 .withHealthServices(VALID_HEALTHSERVICE_VACCINATION)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));

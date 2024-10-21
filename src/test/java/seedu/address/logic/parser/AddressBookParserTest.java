@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -24,7 +23,6 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -37,7 +35,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().withHealthServices("Blood Test").build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
     }
@@ -58,10 +56,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_invalidDelete() throws Exception {
-        String invalidName = "Invalid Name";
-        assertThrows(ParseException.class, String.format(Messages.MESSAGE_PERSON_NOT_FOUND,
-                new Name(invalidName)), () -> parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
-                + invalidName));
+        String invalidNric = "A0000000Z";
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE), () -> parser.parseCommand(DeleteCommand.COMMAND_WORD + " "
+                + invalidNric));
     }
 
     @Test
@@ -96,7 +94,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_helpKeyword() throws Exception {
         HelpCommand commandAddKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " add");
-        HelpCommand commandAddfKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + "addf");
+        HelpCommand commandAddfKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " addf");
         HelpCommand commandApptKeyword = (HelpCommand) parser.parseCommand(HelpCommand.COMMAND_WORD + " appt");
         HelpCommand commandDeleteKeyword = (HelpCommand) parser.parseCommand(
                 HelpCommand.COMMAND_WORD + " delete");

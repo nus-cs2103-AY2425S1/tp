@@ -30,6 +30,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NRIC_AMY = "T0123456A";
     public static final String VALID_NRIC_BOB = "S0123456B";
+    public static final String VALID_NRIC_ALICE = "S1234567J";
     public static final String VALID_SEX_AMY = "F";
     public static final String VALID_SEX_BOB = "M";
     public static final String VALID_BIRTHDATE_AMY = "2001-05-10";
@@ -56,7 +57,7 @@ public class CommandTestUtil {
     public static final String INVALID_BIRTHDATE_DESC = " " + PREFIX_BIRTHDATE
             + "2001/12/02"; // slashes not allowed for birthdates
     public static final String INVALID_HEALTHSERVICE_DESC = " "
-            + PREFIX_HEALTHSERVICE; // empty strings not allowed for Health Services
+            + PREFIX_HEALTHSERVICE + "*"; // * not allowed for Health Services
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

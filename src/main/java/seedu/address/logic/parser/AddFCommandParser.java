@@ -63,7 +63,10 @@ public class AddFCommandParser implements Parser<AddFCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_NRIC, PREFIX_SEX, PREFIX_BIRTHDATE,
+                PREFIX_ADDRESS, PREFIX_ALLERGY, PREFIX_BLOODTYPE, PREFIX_EMAIL,
+                PREFIX_HEALTHRECORD, PREFIX_HEALTHRISK, PREFIX_NOKNAME, PREFIX_NOKPHONE,
+                PREFIX_NOTE, PREFIX_PHONE);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());

@@ -22,38 +22,38 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withNric("S1234567A")
+            .withNric("S1234567J")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("blood test", "vaccination").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withNric("S1234567B")
+            .withNric("T0101280Z")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withHealthServices("Dental", "General Checkup").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withNric("S1234567C")
+            .withNric("T0481580Z")
             .withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withHealthServices("General Checkup").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withNric("S1234567D")
+            .withNric("T0381280Z")
             .withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
             .withHealthServices("General Checkup").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withNric("S1234567E")
+            .withNric("T0081280F")
             .withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withHealthServices("General Checkup").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withNric("S1234567F")
+            .withNric("T0100280Z")
             .withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withHealthServices("General Checkup").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withNric("S1234567G")
+            .withNric("T0181003Z")
             .withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withHealthServices("General Checkup").build();
@@ -78,7 +78,7 @@ public class TypicalPersons {
 
     public static final Person JAKE = new PersonBuilder().withName("Jake Tio").withPhone("9982131")
             .withEmail("jakers@example.com").withAddress("nus drive")
-            .withHealthServices("BloodTest").build();
+            .withHealthServices("Blood Test").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
