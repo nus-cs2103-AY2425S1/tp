@@ -5,6 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_EMPTY_INPUT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_WITH_SPACES;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -119,12 +120,12 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed
      */
     public static Attendance parseAttendance(String attendance) throws ParseException {
-        String trimmedAttendance = attendance.trim().toLowerCase();
+        String trimmedAttendance = attendance.trim();
         if (!Attendance.isValidAttendance(trimmedAttendance)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
-        boolean b = Boolean.parseBoolean(trimmedAttendance);
-        return new Attendance(b);
+        LocalDate attendanceDate = LocalDate.parse(trimmedAttendance, Attendance.VALID_DATE_FORMAT);
+        return new Attendance(attendanceDate);
     }
 
     /**
