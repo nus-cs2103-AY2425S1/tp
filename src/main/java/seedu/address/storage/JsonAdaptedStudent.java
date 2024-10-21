@@ -131,7 +131,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             if (!Grade.isValidGradeName(grade)) {
                 throw new IllegalValueException(Grade.MESSAGE_CONSTRAINTS);
             }
-            modelGrade = new Grade("0");
+            modelGrade = new Grade(grade);
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
