@@ -57,7 +57,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         if (grades != null) {
-            this.grades = grades;
+            this.grades = new HashMap<>(grades);
         } else {
             this.grades = new HashMap<>();
         }
