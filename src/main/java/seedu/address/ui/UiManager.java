@@ -39,6 +39,14 @@ public class UiManager implements Ui {
         //Set the application icon.
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
+        boolean passwordCorrect = PasswordPromptDialog.display(primaryStage);
+        System.out.println(passwordCorrect);
+        if (!passwordCorrect) {
+            // Exit the application if the password is incorrect
+            Platform.exit();
+            return;
+        }
+
         try {
             mainWindow = new MainWindow(primaryStage, logic);
             mainWindow.show(); //This should be called before creating other UI parts
