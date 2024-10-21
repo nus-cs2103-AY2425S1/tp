@@ -109,19 +109,23 @@ public class ModelManager implements Model {
         userPrefs.setBuyerListFilePath(buyerListFilePath);
     }
 
+    @Override
     public Path getMeetUpListFilePath() {
         return userPrefs.getMeetUpListFilePath();
     }
 
+    @Override
     public void setMeetUpListFilePath(Path meetUpListFilePath) {
         requireNonNull(meetUpListFilePath);
         userPrefs.setMeetUpListFilePath(meetUpListFilePath);
     }
 
+    @Override
     public Path getPropertyListFilePath() {
         return userPrefs.getPropertyListFilePath();
     }
 
+    @Override
     public void setPropertyListFilePath(Path propertyListFilePath) {
         requireNonNull(propertyListFilePath);
         userPrefs.setPropertyListFilePath(propertyListFilePath);
@@ -182,10 +186,12 @@ public class ModelManager implements Model {
 
     //=========== MeetUp List ================================================================================
 
+    @Override
     public void setMeetUpList(ReadOnlyMeetUpList meetUpList) {
         this.meetUpList.resetData(meetUpList);
     }
 
+    @Override
     public ReadOnlyMeetUpList getMeetUpList() {
         return meetUpList;
     }
@@ -195,6 +201,7 @@ public class ModelManager implements Model {
         requireNonNull(meetUp);
         return meetUpList.hasMeetUp(meetUp);
     }
+
     @Override
     public void deleteMeetUp(MeetUp target) {
         meetUpList.removeMeetUp(target);
@@ -264,10 +271,11 @@ public class ModelManager implements Model {
         propertyList.setProperty(target, editedProperty);
     }
 
-    //=========== Filtered Property List Accessors ====================================================================
+    //=========== Filtered Property List Accessors =============================================================
+
     /**
-     * Returns an unmodifiable view of the list of {@code Property} backed by the internal list of
-     * {@code versionedPropertyList}
+     * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
+     * {@code versionedBuyerList}
      */
     @Override
     public ObservableList<Property> getFilteredPropertyList() {

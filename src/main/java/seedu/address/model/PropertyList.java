@@ -3,17 +3,21 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.property.Property;
 import seedu.address.model.property.UniquePropertyList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameBuyer comparison)
+ * Duplicates are not allowed (by .isSameProperty comparison)
  */
 public class PropertyList implements ReadOnlyPropertyList {
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final UniquePropertyList properties;
 
@@ -31,7 +35,7 @@ public class PropertyList implements ReadOnlyPropertyList {
     public PropertyList() {}
 
     /**
-     * Creates an BuyerList using the Buyers in the {@code toBeCopied}
+     * Creates an PropertyList using the properties in the {@code toBeCopied}
      */
     public PropertyList(ReadOnlyPropertyList toBeCopied) {
         this();
@@ -41,11 +45,12 @@ public class PropertyList implements ReadOnlyPropertyList {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the buyer list with {@code buyers}.
-     * {@code buyers} must not contain duplicate buyers.
+     * Replaces the contents of the property list with {@code properties}.
+     * {@code properties} must not contain duplicate properties.
      */
     public void setProperties(List<Property> properties) {
         this.properties.setProperties(properties);
+        logger.info("set meetups to " + this.properties);
     }
 
     /**
@@ -53,14 +58,13 @@ public class PropertyList implements ReadOnlyPropertyList {
      */
     public void resetData(ReadOnlyPropertyList newData) {
         requireNonNull(newData);
-
         setProperties(newData.getPropertyList());
     }
 
-    //// buyer-level operations
+    //// property-level operations
 
     /**
-     * Returns true if a property with the same identity as {@code property} exists in the property list.
+     * Returns true if a property with the same identity as {@code property} exists in the meet up list.
      */
     public boolean hasProperty(Property property) {
         requireNonNull(property);
@@ -68,18 +72,18 @@ public class PropertyList implements ReadOnlyPropertyList {
     }
 
     /**
-     * Adds a property to the property list.
-     * The property must not already exist in the property list.
+     * Adds a property to the meet up list.
+     * The property must not already exist in the meet up list.
      */
-    public void addProperty(Property p) {
-        properties.add(p);
+    public void addProperty(Property m) {
+        properties.add(m);
     }
 
     /**
-     * Replaces the given property {@code target} in the list with {@code editedProperty}.
-     * {@code target} must exist in the property list.
-     * The property identity of {@code editedProperty} must not be the same as another existing property
-     * in the property list.
+     * Replaces the given property {@code target} in the list with {@code editedproperty}.
+     * {@code target} must exist in the meet up list.
+     * The property identity of {@code editedproperty} must not be the same as another
+     * existing property in the meet up list.
      */
     public void setProperty(Property target, Property editedProperty) {
         requireNonNull(editedProperty);
@@ -89,7 +93,7 @@ public class PropertyList implements ReadOnlyPropertyList {
 
     /**
      * Removes {@code key} from this {@code PropertyList}.
-     * {@code key} must exist in the property list.
+     * {@code key} must exist in the meet up list.
      */
     public void removeProperty(Property key) {
         properties.remove(key);
@@ -100,7 +104,7 @@ public class PropertyList implements ReadOnlyPropertyList {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("property", properties)
+                .add("properties", properties)
                 .toString();
     }
 

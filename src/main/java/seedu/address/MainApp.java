@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleBuyerDataUtil;
 import seedu.address.model.util.SampleMeetUpDataUtil;
+import seedu.address.model.util.SamplePropertyDataUtil;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -35,6 +36,8 @@ import seedu.address.storage.buyer.BuyerListStorage;
 import seedu.address.storage.buyer.JsonBuyerListStorage;
 import seedu.address.storage.meetup.JsonMeetUpListStorage;
 import seedu.address.storage.meetup.MeetUpListStorage;
+import seedu.address.storage.property.JsonPropertyListStorage;
+import seedu.address.storage.property.PropertyListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -66,7 +69,8 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         BuyerListStorage buyerListStorage = new JsonBuyerListStorage(userPrefs.getBuyerListFilePath());
         MeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(userPrefs.getMeetUpListFilePath());
-        storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
+        PropertyListStorage propertyListStorage = new JsonPropertyListStorage(userPrefs.getPropertyListFilePath());
+        storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -120,7 +124,20 @@ public class MainApp extends Application {
             initialMeetUpList = new MeetUpList();
         }
 
-        initialPropertyList = new PropertyList();
+        try {
+            propertyListOptional = storage.readPropertyList();
+            if (!propertyListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getPropertyListFilePath()
+                        + " populated with a sample PropertyList.");
+            }
+
+            initialPropertyList = propertyListOptional.orElseGet(SamplePropertyDataUtil::getSamplePropertyList);
+
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getPropertyListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty PropertyList.");
+            initialPropertyList = new PropertyList();
+        }
 
         return new ModelManager(initialData, userPrefs, initialMeetUpList, initialPropertyList);
     }

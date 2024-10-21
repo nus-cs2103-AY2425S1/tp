@@ -1,11 +1,8 @@
-package seedu.address.logic.commands.meetup;
+package seedu.address.logic.commands.property;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEETUPS;
 
-import java.util.logging.Logger;
-
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
@@ -15,17 +12,14 @@ import seedu.address.model.Model;
  */
 public class ViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "viewm";
+    public static final String COMMAND_WORD = "viewp";
 
-    public static final String MESSAGE_SUCCESS = "Viewing all meet-ups";
-
-    private final Logger logger = LogsCenter.getLogger(ViewCommand.class);
-
+    public static final String MESSAGE_SUCCESS = "Viewing all properties";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, false, false, true);
     }
 }

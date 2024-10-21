@@ -140,36 +140,28 @@ public interface Model {
      */
     boolean hasMeetUp(MeetUp meetUp);
 
-    // ============================ Property Model ==========================
+    // ============================ Property Model - To be refactored ==========================
 
     /**
-     * Returns the user pref's property list file path.
+     * Returns the user prefs' property list file path.
      */
-    Path getPropertyListFilePath();
+    Path getPropertyListFilePath(); // Remove after refactoring
 
     /**
      * Sets the user prefs' property list file path.
      */
-    void setPropertyListFilePath(Path propertyListFilePath);
+    void setPropertyListFilePath(Path propertyListFilePath); // Remove after refactoring
 
     /**
-     * Replaces property list data with the data in {@code propertyList}.
+     * Replaces meet up list data with the data in {@code propertyList}.
      */
-    void setPropertyList(ReadOnlyPropertyList propertyList);
+    void setPropertyList(ReadOnlyPropertyList propertyList); // Remove after refactoring
 
     /** Returns the PropertyList */
     ReadOnlyPropertyList getPropertyList();
 
-    /**
-     * Returns true if a property with the same identity as {@code property} exists in the property list.
-     */
-    boolean hasProperty(Property property);
-
-    /**
-     * Deletes the given property.
-     * The property must exist in the property list.
-     */
-    void deleteProperty(Property target);
+    /** Returns an unmodifiable view of the filtered property list */
+    ObservableList<Property> getFilteredPropertyList();
 
     /**
      * Adds the given property.
@@ -178,19 +170,24 @@ public interface Model {
     void addProperty(Property property);
 
     /**
-     * Replaces the given property {@code target} with {@code editedProperty}.
-     * {@code target} must exist in the property list.
-     * The property identity of {@code editedProperty} must not be the same as another existing property
-     * in the property list.
+     * Updates the given schedule's Property in the schedule list.
+     * The schedule must exist in the schedule list.
      */
     void setProperty(Property target, Property editedProperty);
 
-    /** Returns an unmodifiable view of the filtered property list */
-    ObservableList<Property> getFilteredPropertyList();
+    /**
+     * Deletes the given schedule in the schedule list
+     */
+    void deleteProperty(Property target);
 
     /*
      * Updates the filter of the property list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPropertyList(Predicate<Property> predicate);
+
+    /**
+     * Returns true if a Property with the same identity as {@code Property} exists in the Property list.
+     */
+    boolean hasProperty(Property meetUp);
 }

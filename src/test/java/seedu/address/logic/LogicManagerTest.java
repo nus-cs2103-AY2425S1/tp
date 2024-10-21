@@ -32,6 +32,7 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.buyer.JsonBuyerListStorage;
 import seedu.address.storage.meetup.JsonMeetUpListStorage;
+import seedu.address.storage.property.JsonPropertyListStorage;
 import seedu.address.testutil.buyer.BuyerBuilder;
 
 public class LogicManagerTest {
@@ -51,7 +52,10 @@ public class LogicManagerTest {
         JsonMeetUpListStorage meetUpListStorage =
                 new JsonMeetUpListStorage(temporaryFolder.resolve("meetUpList.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
+        JsonPropertyListStorage propertyListStorage =
+                new JsonPropertyListStorage(temporaryFolder.resolve("propertyList.json"));
+        StorageManager storage =
+                new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -169,7 +173,9 @@ public class LogicManagerTest {
 
         JsonMeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(prefPath);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(prefPath);
-        StorageManager storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
+        JsonPropertyListStorage propertyListStorage = new JsonPropertyListStorage(prefPath);
+        StorageManager storage =
+                new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
 
         logic = new LogicManager(model, storage);
 

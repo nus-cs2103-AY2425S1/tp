@@ -28,7 +28,7 @@ public class ViewCommandTest {
     @Test
     public void execute_viewMeetUp_success() {
         CommandResult expectedCommandResult = new CommandResult(ViewCommand.MESSAGE_SUCCESS,
-                false, false, true, false);
+                false, false, true, false, false);
         assertCommandSuccess(new ViewCommand(), model, expectedCommandResult, expectedModel);
     }
 }

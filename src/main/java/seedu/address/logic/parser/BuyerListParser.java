@@ -94,6 +94,9 @@ public class BuyerListParser {
         case seedu.address.logic.commands.meetup.DeleteCommand.COMMAND_WORD:
             return new seedu.address.logic.parser.meetup.DeleteCommandParser().parse(arguments);
 
+        case seedu.address.logic.commands.property.ViewCommand.COMMAND_WORD:
+            return new seedu.address.logic.commands.property.ViewCommand();
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

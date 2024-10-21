@@ -16,8 +16,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 import seedu.address.storage.Storage;
 
 /**
@@ -93,6 +95,21 @@ public class LogicManager implements Logic {
     @Override
     public Path getMeetUpListFilePath() {
         return model.getMeetUpListFilePath();
+    }
+
+    @Override
+    public ReadOnlyPropertyList getPropertyList() {
+        return model.getPropertyList();
+    }
+
+    @Override
+    public ObservableList<Property> getFilteredPropertyList() {
+        return model.getFilteredPropertyList();
+    }
+
+    @Override
+    public Path getPropertyListFilePath() {
+        return model.getPropertyListFilePath();
     }
 
     @Override

@@ -17,6 +17,9 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.buyer.BuyerListPanel;
+import seedu.address.ui.meetup.MeetUpListPanel;
+import seedu.address.ui.property.PropertyListPanel;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BuyerListPanel buyerListPanel;
     private MeetUpListPanel meetUpListPanel;
+    private PropertyListPanel propertyListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -50,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane meetUpListPanelPlaceholder;
 
     @FXML
+    private StackPane propertyListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -60,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private VBox meetUpListPane;
+
+    @FXML
+    private VBox propertyListPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -131,6 +141,11 @@ public class MainWindow extends UiPart<Stage> {
         meetUpListPanel.getRoot().setVisible(false);
         meetUpListPane.setVisible(false);
 
+        propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+        propertyListPanelPlaceholder.getChildren().add(propertyListPanel.getRoot());
+        propertyListPanel.getRoot().setVisible(false);
+        propertyListPane.setVisible(false);
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -185,17 +200,30 @@ public class MainWindow extends UiPart<Stage> {
     private void handleBuyerList() {
         buyerListPanel.getRoot().setVisible(true);
         meetUpListPanel.getRoot().setVisible(false);
+        propertyListPanel.getRoot().setVisible(false);
         meetUpListPane.setVisible(false);
         buyerListPane.setVisible(true);
+        propertyListPane.setVisible(false);
     }
 
     @FXML
     private void handleMeetUpList() {
         buyerListPanel.getRoot().setVisible(false);
         meetUpListPanel.getRoot().setVisible(true);
+        propertyListPanel.getRoot().setVisible(false);
         meetUpListPane.setVisible(true);
         buyerListPane.setVisible(false);
-        logger.info(meetUpListPanel.getRoot().toString());
+        propertyListPane.setVisible(false);
+    }
+
+    @FXML
+    private void handlePropertyList() {
+        buyerListPanel.getRoot().setVisible(false);
+        meetUpListPanel.getRoot().setVisible(false);
+        propertyListPanel.getRoot().setVisible(true);
+        meetUpListPane.setVisible(false);
+        buyerListPane.setVisible(false);
+        propertyListPane.setVisible(true);
     }
 
     public BuyerListPanel getBuyerListPanel() {
@@ -231,6 +259,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowMeetUpList()) {
                 handleMeetUpList();
+            }
+
+            if (commandResult.isShowPropertyList()) {
+                handlePropertyList();
             }
 
             return commandResult;
