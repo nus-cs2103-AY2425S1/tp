@@ -35,6 +35,19 @@ public class Person {
         this.appointment = null;
         this.notes = notes;
     }
+    /**
+     * Overloaded Constructor for Appointment instances
+     */
+    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis, Medication medication,
+                  Notes notes, Appointment appointment) {
+        this.name = name;
+        this.id = id;
+        this.ward = ward;
+        this.diagnosis = diagnosis;
+        this.medication = medication;
+        this.notes = notes;
+        this.appointment = appointment;
+    }
 
     public Id getId() {
         return id;
@@ -59,6 +72,10 @@ public class Person {
 
     public Notes getNotes() {
         return this.notes;
+    }
+
+    public Appointment getAppointment() {
+        return this.appointment;
     }
 
     /*
