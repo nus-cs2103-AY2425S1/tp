@@ -3,9 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.ECNUMBER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ECNUMBER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -22,6 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.STUDENT_CLASS_DESC_AM
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -48,6 +51,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -104,6 +108,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_SEX_DESC, Sex.MESSAGE_CONSTRAINTS); // invalid sex
         assertParseFailure(parser, "1" + INVALID_STUDENT_CLASS_DESC,
                 StudentClass.MESSAGE_CONSTRAINTS); // invalid class
+        assertParseFailure(parser, "1" + INVALID_ECNUMBER_DESC,
+                EcNumber.MESSAGE_CONSTRAINTS); // invalid ecNumber
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
@@ -120,8 +126,8 @@ public class EditCommandParserTest {
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
-                + VALID_PHONE_AMY + VALID_REGISTER_NUMBER_AMY + VALID_SEX_AMY + VALID_STUDENT_CLASS_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+                + VALID_PHONE_AMY + VALID_REGISTER_NUMBER_AMY + VALID_SEX_AMY + VALID_STUDENT_CLASS_AMY
+                + VALID_ECNUMBER_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -129,12 +135,13 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + REGISTER_NUMBER_DESC_AMY + SEX_DESC_AMY
-                + STUDENT_CLASS_DESC_AMY + TAG_DESC_FRIEND;
+                + STUDENT_CLASS_DESC_AMY + ECNUMBER_DESC_AMY + TAG_DESC_FRIEND;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withRegisterNumber(VALID_REGISTER_NUMBER_AMY).withSex(VALID_SEX_AMY)
-                .withStudentClass(VALID_STUDENT_CLASS_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withStudentClass(VALID_STUDENT_CLASS_AMY).withEcNumber(VALID_ECNUMBER_AMY)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -198,6 +205,12 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // ecNumber
+        userInput = targetIndex.getOneBased() + ECNUMBER_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withEcNumber(VALID_ECNUMBER_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
         descriptor = new EditPersonDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
@@ -232,7 +245,7 @@ public class EditCommandParserTest {
         // multiple invalid values
         userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
                 + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_REGISTER_NUMBER_DESC
-                + INVALID_SEX_DESC;
+                + INVALID_SEX_DESC + INVALID_ECNUMBER_DESC;
 
         assertParseFailure(parser, userInput,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS));

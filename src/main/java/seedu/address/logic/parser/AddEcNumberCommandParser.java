@@ -33,7 +33,7 @@ public class AddEcNumberCommandParser implements Parser<AddEcNumberCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultiMap.getPreamble());
-            ecNumber = ParserUtil.parseEmergencyPhone(argMultiMap.getValue(PREFIX_ECNUMBER).get());
+            ecNumber = ParserUtil.parseEcNumber(argMultiMap.getValue(PREFIX_ECNUMBER).get());
         } catch (IllegalValueException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddEcNumberCommand.MESSAGE_USAGE), ive);
