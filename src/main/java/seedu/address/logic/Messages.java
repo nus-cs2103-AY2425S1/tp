@@ -21,7 +21,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_DUPLICATE_INDEXES =
-                "Duplicate indexes found: ";
+                "Duplicate indexes found";
     public static final String MESSAGE_ATTENDEE_NOT_FOUND =
                 "Attendee was not found in the address book";
 
