@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.mockito.Mockito.mock;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
@@ -19,11 +22,13 @@ import seedu.address.testutil.MeetingBuilder;
 
 public class AddMeetingCommandTest {
     private Model model;
+    private Meeting meeting;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
                 getTypicalClientBook(), getTypicalMeetingBook());
+        meeting = mock(Meeting.class); // Mocking a Meeting object
     }
 
     @Test
@@ -44,5 +49,30 @@ public class AddMeetingCommandTest {
         Meeting meetingInList = model.getMeetingBook().getMeetingList().get(0);
         assertCommandFailure(new AddMeetingCommand(meetingInList), model,
                 AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
+    }
+
+    @Test
+    void equals_sameObject_returnsTrue() {
+        AddMeetingCommand addMeetingCommand = new AddMeetingCommand(meeting);
+        assertEquals(addMeetingCommand, addMeetingCommand); // Same object should return true
+    }
+
+    @Test
+    void equals_sameMeeting_returnsTrue() {
+        // Arrange
+        AddMeetingCommand addMeetingCommand1 = new AddMeetingCommand(meeting);
+        AddMeetingCommand addMeetingCommand2 = new AddMeetingCommand(meeting); // Same buyer
+
+        // Act & Assert
+        assertEquals(addMeetingCommand1, addMeetingCommand2); // Different instances, same buyer
+    }
+
+    @Test
+    void equals_differentMeeting_returnsFalse() {
+        Meeting differentMeeting = mock(Meeting.class); // Different Meeting instance
+        AddMeetingCommand addMeetingCommand1 = new AddMeetingCommand(meeting);
+        AddMeetingCommand addMeetingCommand2 = new AddMeetingCommand(differentMeeting); // Different meeting
+
+        assertNotEquals(addMeetingCommand1, addMeetingCommand2);
     }
 }
