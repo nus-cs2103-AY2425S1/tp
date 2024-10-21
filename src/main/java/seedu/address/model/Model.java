@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
@@ -89,7 +90,7 @@ public interface Model {
     /**
      * Adds the given meeting with a person.
      */
-    void addMeeting(Person target, Meeting meeting);
+    void addMeeting(Person target, Meeting meeting) throws CommandException;
 
     /**
      * Deletes a given meeting with a person.
