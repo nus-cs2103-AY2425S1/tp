@@ -72,7 +72,9 @@ public class ExportCommandTest {
     public void readAndParseJson() throws IOException {
         String jsonContent = "{\"persons\":"
                 + "[{\"name\":\"Tan Ah Kow\",\"phone\":\"98765432\"},"
-                + "{\"name\":\"Chua Ah Lian\",\"phone\":\"87654321\"}]}";
+                + "{\"name\":\"Chua Ah Lian\","
+                + "\"address\":\"Blk 30 Lorong 3 Serangoon Gardens, #07-18\","
+                + "\"tags\":[{\"colleagues\" : null},{\"friends\" : null}]}]}";
         Path jsonPath = tempDir.resolve("test.json");
         Files.write(jsonPath, jsonContent.getBytes());
         List<Map<String, String>> result = ExportCommand.readAndParseJson(jsonPath.toString());
@@ -81,18 +83,23 @@ public class ExportCommandTest {
         assertEquals("Tan Ah Kow", result.get(0).get("name"));
         assertEquals("98765432", result.get(0).get("phone"));
         assertEquals("Chua Ah Lian", result.get(1).get("name"));
-        assertEquals("87654321", result.get(1).get("phone"));
+        assertEquals("Blk 30 Lorong 3 Serangoon Gardens, #07-18", result.get(1).get("address"));
+        assertEquals(
+                "{\"colleagues\":null}, {\"friends\":null}",
+                    result.get(1).get("tags"));
     }
 
     @Test
     public void extractHeaders() {
         List<Map<String, String>> jsonData = new ArrayList<>();
         jsonData.add(new LinkedHashMap<>(Map.of("name", "Siti", "phone", "65432109")));
-        jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar", "email", "kumar@kgoomail.com")));
+        jsonData.add(new LinkedHashMap<>(Map.of("name", "Kumar",
+                "email", "kumar@kgoomail.com",
+                "tags", "[{\"colleagues\" : null},{\"friends\" : null}]")));
         Set<String> headers = ExportCommand.extractHeaders(jsonData);
 
-        assertEquals(3, headers.size());
-        assertTrue(headers.containsAll(Arrays.asList("name", "phone", "email")));
+        assertEquals(4, headers.size());
+        assertTrue(headers.containsAll(Arrays.asList("name", "phone", "email", "tags")));
     }
 
     @Test
