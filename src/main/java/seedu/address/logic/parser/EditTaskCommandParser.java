@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_STATUS;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
@@ -58,7 +57,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             throw new ParseException(EditTaskCommand.MESSAGE_INVALID_FILED_STATUS);
         }
         if (!editTaskDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditTaskCommand(groupName, index, editTaskDescriptor);

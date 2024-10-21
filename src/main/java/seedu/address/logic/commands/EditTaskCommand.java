@@ -49,6 +49,7 @@ public class EditTaskCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s in %2s";
     public static final String MESSAGE_DUPLICATE_TASK = "Duplicated task.";
     public static final String MESSAGE_INVALID_FILED_STATUS = "Task status should not be modified";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final GroupName groupName;
