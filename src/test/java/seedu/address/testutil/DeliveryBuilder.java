@@ -5,7 +5,6 @@ import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.Eta;
-import seedu.address.model.delivery.Id;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
