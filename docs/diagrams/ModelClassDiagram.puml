@@ -41,8 +41,8 @@ Person *--> Name
 Person *--> Gender
 Person *--> Email
 Person *--> Age
-Person *--> "*" StudyGroupTag
 Person *--> "0..1" Detail
+Person *--> "*" StudyGroupTag
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
