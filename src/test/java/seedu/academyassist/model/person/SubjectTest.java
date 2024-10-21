@@ -1,5 +1,6 @@
 package seedu.academyassist.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -17,8 +18,8 @@ public class SubjectTest {
     }
 
     @Test
-    public void isValidSubjectName() {
-        // null tag name
-        assertThrows(NullPointerException.class, () -> Subject.isValidSubject(null));
+    public void isValidSubject_null_false() {
+        // null subject name
+        assertFalse(() -> Subject.isValidSubject(null));
     }
 }

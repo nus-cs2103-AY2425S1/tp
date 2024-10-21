@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 import static seedu.academyassist.testutil.TypicalPersons.ALICE;
 
@@ -24,6 +25,7 @@ import seedu.academyassist.model.ReadOnlyAcademyAssist;
 import seedu.academyassist.model.ReadOnlyUserPrefs;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.testutil.PersonBuilder;
 
@@ -37,7 +39,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new PersonBuilder("S00001").build();
 
         CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
 
@@ -52,7 +54,7 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, MESSAGE_DUPLICATE_IC, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -146,6 +148,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPersonWithStudentId(StudentId studentId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean personDuplicateClass(Subject subject, Person student) {
             throw new AssertionError("This method should not be called.");
         }
@@ -186,7 +193,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void incrementStudentCount() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getStudentCount() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public Person getPersonWithIc(Ic ic) {
+            return null;
+        }
+
+        @Override
+        public Person getPersonWithStudentId(StudentId studentId) {
             return null;
         }
     }
@@ -207,6 +229,12 @@ public class AddCommandTest {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
+
+        @Override
+        public boolean hasPersonWithIc(Ic ic) {
+            requireNonNull(ic);
+            return this.person.getIc().equals(ic);
+        }
     }
 
     /**
@@ -214,6 +242,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private int studentCount = 0;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -222,9 +251,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPersonWithIc(Ic ic) {
+            requireNonNull(ic);
+            return this.personsAdded.stream().anyMatch(person -> person.getIc() == ic);
+        }
+
+        @Override
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+            incrementStudentCount();
+        }
+
+        @Override
+        public void incrementStudentCount() {
+            studentCount++;
+        }
+
+        @Override
+        public int getStudentCount() {
+            return studentCount;
         }
 
         @Override

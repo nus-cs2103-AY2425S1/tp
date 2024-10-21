@@ -1,7 +1,7 @@
 package seedu.academyassist.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC;
+import static seedu.academyassist.logic.Messages.MESSAGE_NO_STUDENT_FOUND;
 import static seedu.academyassist.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.academyassist.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -63,8 +63,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete S0000000S";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+        String deleteCommand = "delete S99999";
+        assertCommandException(deleteCommand, MESSAGE_NO_STUDENT_FOUND);
     }
 
     @Test

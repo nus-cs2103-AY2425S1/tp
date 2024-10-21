@@ -1,6 +1,7 @@
 package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
@@ -8,7 +9,7 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -22,10 +23,11 @@ import seedu.academyassist.model.Model;
 import seedu.academyassist.model.person.Address;
 import seedu.academyassist.model.person.Email;
 import seedu.academyassist.model.person.Ic;
-import seedu.academyassist.model.person.IcMatchesPredicate;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
+import seedu.academyassist.model.person.StudentId;
+import seedu.academyassist.model.person.StudentIdMatchesPredicate;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 
@@ -37,9 +39,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the NRIC used in the displayed student list. "
+            + "by the student id. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: NRIC (should follow the format of Singaporean IC and FIN numbers) "
+            + "Parameters: Student ID (S followed by 5-digit number) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -47,27 +49,26 @@ public class EditCommand extends Command {
             + "[" + PREFIX_IC + "IC] "
             + "[" + PREFIX_IC + "YEARGROUP] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]... "
-            + "Example: " + COMMAND_WORD + " S1234567A "
+            + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Student %1$s (%2$s)’s details successfully updated.\n"
             + "Here is the updated information %3$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the system.";
 
-    private final Ic nric;
+    private final StudentId studentId;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param nric of the person in the filtered person list to edit
+     * @param studentId of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Ic nric, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(nric);
+    public EditCommand(StudentId studentId, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(studentId);
         requireNonNull(editPersonDescriptor);
 
-        this.nric = nric;
+        this.studentId = studentId;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -75,22 +76,25 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         FilteredList<Person> filteredPersonList = new FilteredList<>(model.getFilteredPersonList());
-        filteredPersonList.setPredicate(new IcMatchesPredicate(nric));
+        filteredPersonList.setPredicate(new StudentIdMatchesPredicate(studentId));
 
         if (filteredPersonList.isEmpty()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+            throw new CommandException(Messages.MESSAGE_NO_STUDENT_FOUND);
         }
 
         Person personToEdit = filteredPersonList.get(0);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        boolean hasIcModified = !personToEdit.getIc().equals(editedPerson.getIc());
+
+        // If NRIC is edited, check if it causes duplicate (another student having the same IC)
+        if (hasIcModified && model.hasPersonWithIc(editedPerson.getIc())) {
+            throw new CommandException(MESSAGE_DUPLICATE_IC);
         }
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit.getName(), nric,
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, personToEdit.getName(), studentId,
                 Messages.format(editedPerson)));
     }
 
@@ -107,10 +111,11 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Ic updatedIc = editPersonDescriptor.getIc().orElse(personToEdit.getIc());
         YearGroup updatedYearGroup = editPersonDescriptor.getYearGroup().orElse(personToEdit.getYearGroup());
+        StudentId studentId = personToEdit.getStudentId();
         Set<Subject> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIc, updatedYearGroup,
-                updatedSubject);
+                studentId, updatedSubject);
     }
 
     @Override
@@ -125,14 +130,14 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return nric.equals(otherEditCommand.nric)
+        return studentId.equals(otherEditCommand.studentId)
                 && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("NRIC", nric)
+                .add("studentId", studentId)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
@@ -204,6 +209,7 @@ public class EditCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
+
         public void setIc(Ic ic) {
             this.ic = ic;
         }
@@ -211,6 +217,7 @@ public class EditCommand extends Command {
         public Optional<Ic> getIc() {
             return Optional.ofNullable(ic);
         }
+
         public void setYearGroup(YearGroup yearGroup) {
             this.yearGroup = yearGroup;
         }
@@ -224,7 +231,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code subjects} is used internally.
          */
         public void setSubjects(Set<Subject> subjects) {
-            this.subjects = subjects;
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
         /**
@@ -233,7 +240,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
         public Optional<Set<Subject>> getSubjects() {
-            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+            return (subjects != null) ? Optional.of(new HashSet<>(subjects)) : Optional.empty();
         }
 
         @Override

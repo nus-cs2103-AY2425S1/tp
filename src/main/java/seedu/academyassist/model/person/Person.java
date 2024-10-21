@@ -25,20 +25,22 @@ public class Person {
     private final Address address;
     private final Ic ic;
     private final YearGroup yearGroup;
+    private final StudentId studentId;
     private final Set<Subject> subjects = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Ic ic, YearGroup yearGroup,
+    public Person(Name name, Phone phone, Email email, Address address, Ic ic, YearGroup yearGroup, StudentId studentId,
                   Set<Subject> subjects) {
-        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yearGroup, subjects);
+        CollectionUtil.requireAllNonNull(name, phone, email, address, ic, yearGroup, studentId, subjects);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.ic = ic;
         this.yearGroup = yearGroup;
+        this.studentId = studentId;
         this.subjects.addAll(subjects);
     }
 
@@ -63,6 +65,9 @@ public class Person {
     public YearGroup getYearGroup() {
         return yearGroup;
     }
+    public StudentId getStudentId() {
+        return studentId;
+    }
     /**
      * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -72,7 +77,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same IC.
+     * Returns true if both persons have the same student ID.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Person otherPerson) {
@@ -80,7 +85,7 @@ public class Person {
             return true;
         }
         return otherPerson != null
-                && otherPerson.getIc().equals(getIc());
+                && otherPerson.getStudentId().equals(getStudentId());
     }
 
     /**
@@ -95,7 +100,19 @@ public class Person {
         updatedSubjects.add(subjectToAdd);
 
         // Return a new Person object with the updated subjects
-        return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, updatedSubjects);
+        return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, this.studentId,
+                updatedSubjects);
+    }
+
+    /**
+     * Returns a new {@code Person} with student ID assigned.
+     */
+    public Person assignStudentId(int studentCount) {
+        StudentId idToAssign = StudentId.generateNewStudentId(studentCount);
+
+        // Return a new Person object with student ID assigned
+        return new Person(this.name, this.phone, this.email, this.address, this.ic, this.yearGroup, idToAssign,
+                this.subjects);
     }
 
     /**
@@ -120,13 +137,14 @@ public class Person {
                 && address.equals(otherPerson.address)
                 && ic.equals(otherPerson.ic)
                 && yearGroup.equals(otherPerson.yearGroup)
+                && studentId.equals(otherPerson.studentId)
                 && subjects.equals(otherPerson.subjects);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, ic, yearGroup, subjects);
+        return Objects.hash(name, phone, email, address, ic, yearGroup, studentId, subjects);
     }
 
     @Override
@@ -138,6 +156,7 @@ public class Person {
                 .add("address", address)
                 .add("ic", ic)
                 .add("year group", yearGroup)
+                .add("studentId", studentId)
                 .add("subjects", subjects)
                 .toString();
     }

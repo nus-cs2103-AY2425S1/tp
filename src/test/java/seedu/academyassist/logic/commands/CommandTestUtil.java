@@ -19,10 +19,10 @@ import seedu.academyassist.commons.core.index.Index;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.AcademyAssist;
 import seedu.academyassist.model.Model;
-import seedu.academyassist.model.person.Ic;
-import seedu.academyassist.model.person.IcMatchesPredicate;
 import seedu.academyassist.model.person.NameContainsKeywordsPredicate;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.StudentId;
+import seedu.academyassist.model.person.StudentIdMatchesPredicate;
 import seedu.academyassist.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -41,6 +41,9 @@ public class CommandTestUtil {
     public static final String VALID_IC_AMY = "M1234567A";
     public static final String VALID_IC_BOB = "S1234567D";
     public static final String VALID_IC_ALICE = "F2234567X";
+    public static final String VALID_STUDENT_ID_AMY = "S10010";
+    public static final String VALID_STUDENT_ID_BOB = "S10011";
+    public static final String VALID_STUDENT_ID_ALICE = "S10012";
     public static final String VALID_SUBJECT_AMY = "English";
     public static final String VALID_SUBJECT_BOB = "Science";
     public static final String VALID_YEAR_GROUP_AMY = "5";
@@ -141,21 +144,11 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetId} in the
+     * Updates {@code model}'s filtered list to show only the person at the given {@code targetStudentId} in the
      * {@code model}'s academy assist.
      */
-    public static void showPersonWithId(Model model, Ic targetId) {
-        model.updateFilteredPersonList(new IcMatchesPredicate(targetId));
-
-        assertEquals(1, model.getFilteredPersonList().size());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the person with the given {@code targetIc} in the
-     * {@code model}'s academy assist.
-     */
-    public static void showPersonWithIc(Model model, Ic targetIc) {
-        model.updateFilteredPersonList(new IcMatchesPredicate(targetIc));
+    public static void showPersonWithStudentId(Model model, StudentId targetStudentId) {
+        model.updateFilteredPersonList(new StudentIdMatchesPredicate(targetStudentId));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }

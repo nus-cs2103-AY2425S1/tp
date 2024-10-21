@@ -14,4 +14,9 @@ public interface ReadOnlyAcademyAssist {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the student count in the contact book.
+     */
+    int getStudentCount();
+
 }
