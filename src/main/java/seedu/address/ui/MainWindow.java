@@ -5,12 +5,12 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.control.SplitPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -62,6 +62,13 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private ImageView placeholderImage;
 
+    /**
+     * Creates a new MainWindow with the given Stage and Logic.
+     * Initializes the window with default settings and accelerators.
+     *
+     * @param primaryStage The primary stage for this window
+     * @param logic The logic manager that handles command execution
+     */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
         this.primaryStage = primaryStage;
@@ -71,10 +78,18 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
     }
 
+    /**
+     * Returns the primary stage of the application.
+     *
+     * @return The primary stage
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
 
+    /**
+     * Sets up keyboard accelerators for menu items.
+     */
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
@@ -146,6 +161,9 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Makes the main window visible.
+     */
     void show() {
         primaryStage.show();
     }
@@ -163,7 +181,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles the view command to display person details.
+     * Handles the view command by updating the UI to show person details.
+     * If the details panel is not visible, adds it to the split pane.
+     * Updates the person details based on the provided index in the command.
+     *
+     * @param commandText The full command text containing the view command and index
      */
     private void handleViewCommand(String commandText) {
         if (!splitPane.getItems().contains(personDetailsPanelPlaceholder)) {
@@ -217,5 +239,4 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
-
 }

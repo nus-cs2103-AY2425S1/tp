@@ -10,6 +10,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Represents a command to view the details of a person identified by their index in the displayed list.
+ * This command allows users to see detailed information about a specific person in the address book.
+ */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
@@ -23,10 +27,25 @@ public class ViewCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a new ViewCommand to view the person at the specified {@code targetIndex}.
+     *
+     * @param targetIndex The index of the person to view in the filtered person list
+     * @throws NullPointerException if {@code targetIndex} is null
+     */
     public ViewCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
+
+    /**
+     * Executes the view command to show the person at the specified index.
+     *
+     * @param model The model containing the person data
+     * @return A CommandResult containing the viewed person's information
+     * @throws CommandException if the index is invalid or out of bounds
+     * @throws NullPointerException if {@code model} is null
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -42,10 +61,16 @@ public class ViewCommand extends Command {
                 false, false, true, personToView);
     }
 
+    /**
+     * Compares this ViewCommand to another object for equality.
+     *
+     * @param other The object to compare to
+     * @return true if the other object is also a ViewCommand targeting the same index
+     */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ViewCommand // instanceof handles nulls
-                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
+        return other == this
+                || (other instanceof ViewCommand
+                && targetIndex.equals(((ViewCommand) other).targetIndex));
     }
 }
