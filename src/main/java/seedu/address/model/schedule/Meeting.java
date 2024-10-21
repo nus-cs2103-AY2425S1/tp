@@ -118,12 +118,15 @@ public class Meeting {
                 && otherMeeting.getMeetingName().equals(getMeetingName());
     }
 
-	public boolean hasPerson(UUID uid) {
+    /**
+     * @return if the meeting has the person with the given uid
+     */
+    public boolean hasPerson(UUID uid) {
         for (UUID contactUid : contactUids) {
             if (contactUid.equals(uid)) {
                 return true;
             }
         }
         return false;
-	}
+    }
 }

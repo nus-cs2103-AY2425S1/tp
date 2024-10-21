@@ -111,5 +111,5 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-	boolean hasPersonInMeeting(Person personToDelete);
+    boolean hasPersonInMeeting(Person personToDelete);
 }

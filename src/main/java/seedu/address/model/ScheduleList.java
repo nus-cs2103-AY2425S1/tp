@@ -158,14 +158,17 @@ public class ScheduleList implements ReadOnlyScheduleList {
         return meetings.hashCode();
     }
 
-	public boolean hasPersonInMeeting(Person person) {
+    /**
+     * @return if the person is in any meeting in the schedule list
+     */
+    public boolean hasPersonInMeeting(Person person) {
         Iterator<Meeting> iterator = meetings.iterator();
         while (iterator.hasNext()) {
             Meeting meeting = iterator.next();
-                if (meeting.hasPerson(person.getUid())) {
-                    return true;
-                }
+            if (meeting.hasPerson(person.getUid())) {
+                return true;
+            }
         }
         return false;
-	}
+    }
 }
