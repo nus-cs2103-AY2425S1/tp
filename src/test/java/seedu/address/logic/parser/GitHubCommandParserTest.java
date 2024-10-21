@@ -19,7 +19,8 @@ import seedu.address.model.person.Name;
 
 public class GitHubCommandParserTest {
     private GitHubCommandParser parser = new GitHubCommandParser();
-    private FunctionalBrowser functionalBrowser = FunctionalBrowser.getDesktop();
+    private FunctionalBrowser functionalBrowser =
+            GraphicsEnvironment.isHeadless() ? null : FunctionalBrowser.getDesktop();
 
     @Test
     public void parse_validArgs_returnsGitHubCommand() {
