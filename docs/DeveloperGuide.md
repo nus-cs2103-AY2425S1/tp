@@ -362,8 +362,8 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.  
-3. ContactMate updates view to show a list of calls (includes dates and notes) made to a specific elderly.
+2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.
+3. ContactMate updates view to show a list of calls along with their corresponding notes made to a specific elderly. 
 
 	Use case ends.
 

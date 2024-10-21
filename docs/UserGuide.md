@@ -19,15 +19,16 @@ ContactMate is a **desktop app for managing clients at Active Ageing Centres (AA
 1. Copy the file to the folder you want to use as the _home folder_ for ContactMate.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar contactmate.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   1. When you first open the application, the list will be empty. 
+   1. After you add some sample data, the GUI will resemble the picture below. The next time you open ContactMate, the data will still be there for you to see.<br>
+            ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
 
-   * `add i/S4260423B n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ContactMate.
+   * `add i/S5087089H n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 c/7 t/friends t/owesMoney` : Adds a contact named `John Doe` to ContactMate.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -101,7 +102,7 @@ Edits an existing elderly in ContactMate.
 
 Format: `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`
 
-* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the elderly at the specified `INDEX` or `NRIC`. The index refers to the index number shown in the displayed person list.The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -139,7 +140,7 @@ Format: `delete INDEX/NRIC`
 
 * Deletes the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC
 
 Examples:
@@ -150,11 +151,12 @@ Examples:
 
 Marks the specified elderly from ContactMate as called. 
 As a result, ContactMate will also update the next contact date for the specified elderly in the Main Window.
+Besides, you can also mark the specified elderly on the specified date with optional notes.
 
 Format: `mark INDEX/NRIC [d/DATE] [o/NOTES]`
 
 * Marks the person at the specified `INDEX` or `NRIC`.
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed person list. The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The `NRIC` has to be a valid NRIC.
 * The date must be in the format `YYYY-MM-DD` and must not be a future date.
 * If the parameter `d/DATE` is not provided, the current date will be used.
@@ -172,7 +174,7 @@ Format: `history INDEX/NRIC`
 
 * Shows call history of the elderly at the specified `INDEX` or `NRIC`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index must be within the range of list shown and **must be a positive integer** 1, 2, 3, …​
 * The NRIC has to be a valid NRIC
 
 Examples:
