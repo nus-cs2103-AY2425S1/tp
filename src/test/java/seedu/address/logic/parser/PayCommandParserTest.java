@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOUR_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_DESC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_HOUR;
@@ -19,7 +22,8 @@ public class PayCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // No index specified
-        assertParseFailure(parser, "h/1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_HOUR_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
 
         // No hours specified
         assertParseFailure(parser, "1", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
@@ -31,10 +35,12 @@ public class PayCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // Negative index
-        assertParseFailure(parser, "-5 h/5", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "-5" + VALID_HOUR_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
 
         // Zero index
-        assertParseFailure(parser, "0 h/5", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "0" + VALID_HOUR_DESC,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PayCommand.MESSAGE_USAGE));
 
         // Invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string",
@@ -48,19 +54,19 @@ public class PayCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // Invalid hour (not a number)
-        assertParseFailure(parser, "1 h/abc", MESSAGE_INVALID_HOUR);
+        assertParseFailure(parser, "1" + INVALID_HOUR_DESC, MESSAGE_INVALID_HOUR);
 
         // Invalid hour (negative number)
-        assertParseFailure(parser, "1 h/-3", MESSAGE_INVALID_HOUR);
+        assertParseFailure(parser, "1 " + PREFIX_HOUR + "-3", MESSAGE_INVALID_HOUR);
 
         // Invalid hour (zero)
-        assertParseFailure(parser, "1 h/0", MESSAGE_INVALID_HOUR);
+        assertParseFailure(parser, "1 " + PREFIX_HOUR + "0", MESSAGE_INVALID_HOUR);
     }
 
     @Test
     public void parse_validInput_success() {
         Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + " h/" + 1;
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_HOUR + 1;
         PayCommand expectedCommand = new PayCommand(targetIndex, Double.parseDouble("1"));
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -69,8 +75,8 @@ public class PayCommandParserTest {
     @Test
     public void parse_multipleValidFields_failure() {
         Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + " h/5 h/10";
-        String expectedCommand = Messages.MESSAGE_DUPLICATE_FIELDS + "h/";
+        String userInput = targetIndex.getOneBased() + VALID_HOUR_DESC + VALID_HOUR_DESC;
+        String expectedCommand = Messages.MESSAGE_DUPLICATE_FIELDS + PREFIX_HOUR;
 
         assertParseFailure(parser, userInput, expectedCommand);
     }
