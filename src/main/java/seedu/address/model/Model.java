@@ -5,15 +5,15 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Buyer> PREDICATE_SHOW_ALL_BUYERS = unused -> true;
     Predicate<MeetUp> PREDICATE_SHOW_ALL_MEETUPS = unused -> true;
 
     /**
@@ -37,55 +37,55 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' buyer list file path.
      */
-    Path getAddressBookFilePath();
+    Path getBuyerListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' buyer list file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setBuyerListFilePath(Path buyerListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces buyer list data with the data in {@code buyerList}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setBuyerList(ReadOnlyBuyerList buyerList);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the BuyerList */
+    ReadOnlyBuyerList getBuyerList();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a buyer with the same identity as {@code buyer} exists in the buyer list.
      */
-    boolean hasPerson(Person person);
+    boolean hasBuyer(Buyer buyer);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given buyer.
+     * The buyer must exist in the buyer list.
      */
-    void deletePerson(Person target);
+    void deleteBuyer(Buyer target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given buyer.
+     * {@code buyer} must not already exist in the buyer list.
      */
-    void addPerson(Person person);
+    void addBuyer(Buyer buyer);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given buyer {@code target} with {@code editedBuyer}.
+     * {@code target} must exist in the buyer list.
+     * The buyer identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
-    void setPerson(Person target, Person editedPerson);
+    void setBuyer(Buyer target, Buyer editedBuyer);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered buyer list */
+    ObservableList<Buyer> getFilteredBuyerList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered buyer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredBuyerList(Predicate<Buyer> predicate);
 
     // ============================ MeetUp Model - To be refactored ==========================
 
@@ -112,7 +112,7 @@ public interface Model {
 
     /**
      * Adds the given MeetUp.
-     * {@code MeetUp} must not already exist in the address book.
+     * {@code MeetUp} must not already exist in the buyer list.
      */
     void addMeetUp(MeetUp meetUp);
 

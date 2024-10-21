@@ -23,23 +23,23 @@ public class CommandResult {
     private final boolean showMeetUpList;
 
     /** Change view to Address Book */
-    private final boolean showAddressBook;
+    private final boolean showBuyerList;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-            boolean showMeetUpList, boolean showAddressBook) {
+            boolean showMeetUpList, boolean showBuyerList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showMeetUpList = showMeetUpList;
-        this.showAddressBook = showAddressBook;
+        this.showBuyerList = showBuyerList;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * address book to true, and other fields set to their default value.
+     * buyer list to true, and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false, false, true);
@@ -61,8 +61,8 @@ public class CommandResult {
         return showMeetUpList;
     }
 
-    public boolean isShowAddressBook() {
-        return showAddressBook;
+    public boolean isShowBuyerList() {
+        return showBuyerList;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class CommandResult {
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
                 && showMeetUpList == otherCommandResult.showMeetUpList
-                && showAddressBook == otherCommandResult.showAddressBook;
+                && showBuyerList == otherCommandResult.showBuyerList;
     }
 
     @Override

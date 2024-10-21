@@ -10,7 +10,7 @@ import seedu.address.model.meetup.To;
 
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code BuyerList} with sample data.
  */
 public class SampleMeetUpDataUtil {
     public static MeetUp[] getSampleMeetUps() {
