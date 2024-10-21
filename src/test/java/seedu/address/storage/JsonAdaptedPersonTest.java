@@ -25,7 +25,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final List<JsonAdaptedEvent> VALID_EVENTS = BENSON.getEvents().stream()
-            .map(JsonAdaptedEvent::new)
+            .map(event -> new JsonAdaptedEvent(event.getName().toString()))
             .toList();
     private static final List<JsonAdaptedRole> VALID_ROLES = BENSON.getRoles().stream()
             .map(JsonAdaptedRole::new)

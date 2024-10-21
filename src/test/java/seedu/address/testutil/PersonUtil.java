@@ -34,7 +34,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE).append(person.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(person.getEmail().value).append(" ");
         person.getEvents().forEach(
-                e -> sb.append(PREFIX_EVENT).append(e.value).append(" ")
+                e -> sb.append(PREFIX_EVENT).append(e.getName()).append(" ")
         );
         person.getRoles().forEach(
             s -> sb.append(PREFIX_ROLE).append(s.getRoleName()).append(" ")
@@ -56,7 +56,7 @@ public class PersonUtil {
             if (events.isEmpty()) {
                 sb.append(PREFIX_EVENT);
             } else {
-                events.forEach(e -> sb.append(PREFIX_EVENT).append(e.value).append(" "));
+                events.forEach(e -> sb.append(PREFIX_EVENT).append(e.getName()).append(" "));
             }
         }
 

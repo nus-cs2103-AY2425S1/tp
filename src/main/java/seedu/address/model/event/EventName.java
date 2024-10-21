@@ -1,13 +1,18 @@
 package seedu.address.model.event;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
- * Represents an Event's name in the event list.
+ * Represents an {@link Event}'s name in the event list of the address book. Guarantees: immutable;
+ * is valid as declared in {@link #isValidEventName(String)}
  */
 public class EventName {
     public static final String MESSAGE_CONSTRAINTS = "Event names should "
             + "only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String VALIDATION_REGEX = "\\S.*";
 
-    public final String eventName;
+    private final String eventName;
 
     /**
      * Constructs a {@code EventName}.
@@ -15,7 +20,13 @@ public class EventName {
      * @param eventName A valid event name.
      */
     public EventName(String eventName) {
+        requireNonNull(eventName);
+        checkArgument(isValidEventName(eventName), MESSAGE_CONSTRAINTS);
         this.eventName = eventName;
+    }
+
+    public static boolean isValidEventName(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

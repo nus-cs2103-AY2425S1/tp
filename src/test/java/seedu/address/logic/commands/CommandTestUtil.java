@@ -44,16 +44,15 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String EVENT_DESC_AMY = " " + PREFIX_EVENT + VALID_EVENT_AMY;
-    public static final String EVENT_DESC_BOB = " " + PREFIX_EVENT + VALID_EVENT_BOB;
+    public static final String EVENT_NAME_AMY = " " + PREFIX_EVENT + VALID_EVENT_AMY;
+    public static final String EVENT_NAME_BOB = " " + PREFIX_EVENT + VALID_EVENT_BOB;
     public static final String ROLE_DESC_ATHLETE = " " + PREFIX_ROLE + VALID_ROLE_ATHLETE;
-    public static final String ROLE_DESC_SPONSOR = " " + PREFIX_ROLE + VALID_ROLE_SPONSOR;
     public static final String ROLE_DESC_VOLUNTEER = " " + PREFIX_ROLE + VALID_ROLE_VOLUNTEER;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_EVENT_DESC = " " + PREFIX_EVENT + " "; // event name should not be empty
+    public static final String INVALID_EVENT_NAME = " " + PREFIX_EVENT + " "; // event name should not be empty
     public static final String INVALID_ROLE_DESC = " " + PREFIX_ROLE + "hubby*"; // '*' not allowed in roles
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

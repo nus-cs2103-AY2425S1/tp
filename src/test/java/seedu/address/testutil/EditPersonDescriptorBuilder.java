@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -78,7 +79,7 @@ public class EditPersonDescriptorBuilder {
      * that we are building.
      */
     public EditPersonDescriptorBuilder withEvents(String... events) {
-        Set<Event> eventSet = Stream.of(events).map(Event::new).collect(Collectors.toSet());
+        Set<Event> eventSet = Stream.of(events).map(EventName::new).map(Event::new).collect(Collectors.toSet());
         descriptor.setEvents(eventSet);
         return this;
     }

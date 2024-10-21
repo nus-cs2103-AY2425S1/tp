@@ -12,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
+import seedu.address.model.event.EventName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -78,6 +79,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@link String} {@code eventName} into a {@link EventName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code eventName} is invalid.
+     */
+    public static EventName parseEventName(String eventName) {
+        requireNonNull(eventName);
+        String trimmedName = eventName.trim();
+        if (!EventName.isValidEventName(trimmedName)) {
+            throw new ParseException(EventName.MESSAGE_CONSTRAINTS);
+        }
+        return new EventName(trimmedName);
+    }
+
+    /**
      * Parses a {@code String event} into a {@code Event}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -85,11 +101,8 @@ public class ParserUtil {
      */
     public static Event parseEvent(String event) throws ParseException {
         requireNonNull(event);
-        String trimmedEvent = event.trim();
-        if (!Event.isValidEvent(trimmedEvent)) {
-            throw new ParseException(Event.MESSAGE_CONSTRAINTS);
-        }
-        return new Event(trimmedEvent);
+        EventName eventName = parseEventName(event);
+        return new Event(eventName);
     }
 
     /**
