@@ -76,7 +76,6 @@ Entering the `help` command returns the following result on your screen:
 
 ![help message](images/helpMessage.png)
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
