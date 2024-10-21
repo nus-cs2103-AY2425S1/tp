@@ -42,7 +42,7 @@ public class EditTaskCommand extends Command {
         + "[" + PREFIX_TASK_DEADLINE + "DEADLINE]"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_GROUP_NAME + "team 2"
-        + " 1 "
+        + PREFIX_INDEX + "1 "
         + PREFIX_TASK_NAME + "Complete Assignment "
         + PREFIX_TASK_DEADLINE + "2024-12-12 1800\n";
 
