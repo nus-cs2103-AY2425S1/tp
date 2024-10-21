@@ -1,14 +1,21 @@
 package seedu.address.model.wedding;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Represents a main character of a Wedding.
+ */
 public abstract class Partner {
     private Name nameToUse;
     private Person person;
 
+    /**
+     * Constructs a {@code Partner}.
+     *
+     */
     public Partner(String name) {
         requireNonNull(name);
         this.nameToUse = new Name(name);

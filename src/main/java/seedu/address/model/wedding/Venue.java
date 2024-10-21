@@ -3,28 +3,33 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the Venue of a Wedding.
+ */
 public class Venue {
 
     public static final String MESSAGE_CONSTRAINTS = "Venues can take any values, and it should not be blank.";
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    String fullVenue;
+    private String fullVenue;
 
     /**
-     * Constructs an {@code Venue}.
+     * Constructs a {@code Venue}.
      *
      * @param venue A valid venue.
      */
     public Venue(String venue) {
         requireNonNull(venue);
-        checkArgument(isValidAddress(venue), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidVenue(venue), MESSAGE_CONSTRAINTS);
         this.fullVenue = venue;
     }
 
     /**
      * Returns true if a given string is a valid venue.
+     * @param test string to be tested
+     * @return whether the string is a valid venue.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidVenue(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

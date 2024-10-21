@@ -1,10 +1,13 @@
 package seedu.address.model.wedding;
 
-import seedu.address.model.person.Name;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.person.Name;
+
+/**
+ * Represents a Role of a Wedding.
+ */
 public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Role should contain alphabets only.";

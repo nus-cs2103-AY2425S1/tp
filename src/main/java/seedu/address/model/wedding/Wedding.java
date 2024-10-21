@@ -1,11 +1,14 @@
 package seedu.address.model.wedding;
 
-import seedu.address.commons.util.ToStringBuilder;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
 
+/**
+ * Represents a wedding plan.
+ */
 public class Wedding {
     private Husband husband;
     private Wife wife;
@@ -13,6 +16,9 @@ public class Wedding {
     private Venue venue;
     private ContactMap contactList;
 
+    /**
+     * Constructs a {@code Wedding}.
+     */
     public Wedding(Husband husband, Wife wife, Date date, Venue venue) {
         requireAllNonNull(husband, wife);
         this.husband = husband;
@@ -58,20 +64,20 @@ public class Wedding {
 
     @Override
     public boolean equals(Object other) {
-       if (other == this) {
-           return true;
-       }
+        if (other == this) {
+            return true;
+        }
 
-       if (!(other instanceof Wedding)) {
-           return false;
-       }
+        if (!(other instanceof Wedding)) {
+            return false;
+        }
 
-       Wedding otherWedding = (Wedding) other;
-       return husband.equals(otherWedding.husband) &&
-               wife.equals(otherWedding.wife) &&
-               date.equals(otherWedding.date) &&
-               venue.equals(otherWedding.venue) &&
-               contactList.equals(otherWedding.contactList);
+        Wedding otherWedding = (Wedding) other;
+        return husband.equals(otherWedding.husband)
+               && wife.equals(otherWedding.wife)
+               && date.equals(otherWedding.date)
+               && venue.equals(otherWedding.venue)
+               && contactList.equals(otherWedding.contactList);
     }
 
     @Override

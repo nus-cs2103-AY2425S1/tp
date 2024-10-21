@@ -1,14 +1,18 @@
 package seedu.address.model.wedding;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
+/**
+ * Represents a Contact Map of a Wedding.
+ * Guarantees: details are present and not null, field values are validated.
+ */
 public class ContactMap {
     private HashMap<Role, Person> map;
 
@@ -20,13 +24,22 @@ public class ContactMap {
     }
 
     /**
-     * Returns true if the role exist in the ContactList
+     * Returns true if the role is assigned.
+     *
+     * @param role role to check.
+     * @return whether the role is assigned.
      */
     public boolean hasRole(Role role) {
         return map.containsKey(role);
     }
 
-    public void addToList(Role role, Person person) {
+    /**
+     * Adds a role and person to the map.
+     *
+     * @param role role to be added.
+     * @param person person with the role.
+     */
+    public void addToMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (this.hasRole(role)) {
             // throw exception
@@ -34,7 +47,13 @@ public class ContactMap {
         map.put(role, person);
     }
 
-    public void removeFromList(Role role, Person person) {
+    /**
+     * Removes a role and person from the map.
+     *
+     * @param role role to be removed.
+     * @param person person with the role.
+     */
+    public void removeFromMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (!this.hasRole(role)) {
             // throw exception
@@ -42,6 +61,12 @@ public class ContactMap {
         map.remove(role, person);
     }
 
+    /**
+     * Retrieves person of the specified role.
+     *
+     * @param role person of this role.
+     * @return person of role.
+     */
     public Person getPersonOfRole(Role role) {
         requireNonNull(role);
         if (!this.hasRole(role)) {
@@ -52,7 +77,7 @@ public class ContactMap {
 
     @Override
     public String toString() {
-        ToStringBuilder str =  new ToStringBuilder(this);
+        ToStringBuilder str = new ToStringBuilder(this);
         for (Map.Entry<Role, Person> entry : map.entrySet()) {
             Role role = entry.getKey();
             Person person = entry.getValue();
