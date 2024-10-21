@@ -13,11 +13,11 @@ import seedu.edulog.model.Model;
 import seedu.edulog.model.student.Student;
 
 /**
- * Deletes a student identified using it's displayed index from the edulog book.
+ * Marks a student as absent identified using it's displayed index from the edulog book.
  */
 public class UnmarkCommand extends Command {
 
-    public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
+    public static final String MESSAGE_UNMARK_STUDENT_SUCCESS = "Unmarked Student: %1$s";
 
     private final Index targetIndex;
 
