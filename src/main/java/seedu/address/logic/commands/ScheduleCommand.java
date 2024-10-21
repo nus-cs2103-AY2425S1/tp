@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -82,10 +81,10 @@ public class ScheduleCommand extends Command {
         assert scheduleToEdit != null;
 
         String updatedName = scheduleDescriptor.getScheduleName().orElse(scheduleToEdit.scheduleName);
-        String updatedPhone = scheduleDescriptor.getDateString().orElse(scheduleToEdit.dateString);
-        String updatedEmail = scheduleDescriptor.getTimeString().orElse(scheduleToEdit.timeString);
+        String updatedDateString = scheduleDescriptor.getDateString().orElse(scheduleToEdit.dateString);
+        String updatedTimeString = scheduleDescriptor.getTimeString().orElse(scheduleToEdit.timeString);
 
-        return new Schedule(updatedName, updatedPhone, updatedEmail);
+        return new Schedule(updatedName, updatedDateString, updatedTimeString);
     }
 
     private static Person createPersonWithEditedSchedule(

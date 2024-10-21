@@ -37,20 +37,14 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
         if (argMultimap.getValue(PREFIX_SCHEDULE_NAME).isPresent()) {
             scheduleDescriptor.setScheduleName(argMultimap.getValue(PREFIX_SCHEDULE_NAME).get());
-        } else {
-            scheduleDescriptor.setScheduleName("");
         }
 
         if (argMultimap.getValue(PREFIX_SCHEDULE_DATE).isPresent()) {
             scheduleDescriptor.setDateString(argMultimap.getValue(PREFIX_SCHEDULE_DATE).get());
-        } else {
-            scheduleDescriptor.setDateString("");
         }
 
         if (argMultimap.getValue(PREFIX_SCHEDULE_TIME).isPresent()) {
             scheduleDescriptor.setTimeString(argMultimap.getValue(PREFIX_SCHEDULE_TIME).get());
-        } else {
-            scheduleDescriptor.setTimeString("");
         }
 
         return new ScheduleCommand(index, scheduleDescriptor);
