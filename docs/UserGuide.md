@@ -45,47 +45,46 @@ MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appo
 The table below provides a brief explanation of each parameter associated with a patient in MediBase3. It also details
 the constraints of each parameter when used in a command.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:** <br>
-Ensure that all parameters adhere to the constraints mentioned below. 
-Otherwise, the command will not be executed, and an error message will be displayed.
-</div>
+{: .alert .alert-warning}
+> :exclamation: **Caution:** 
+>
+> Ensure that all parameters adhere to the constraints mentioned below. 
+> Otherwise, the command will not be executed, and an error message will be displayed.
 
-Parameter | Definition                                                                                                 | Constraints                                                                                                                                                                                                                                                 | Examples
----- |------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| --------
-`NAME` | Name of the patient                                                                                        | <ul><li>Only alphanumeric characters are allowed.<li>Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of` | <ul><li>:white_check_mark:`John Doe`<li>:x:`$ally`</li></ul>
-`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | <ul><li>Case-insensitive.<li>Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter.<ul>                                                                                                                                    | <ul><li>:white_check_mark:`S1234567A`<li>:white_check_mark:`t1234567b` <li>:x: `1234567A`</ul>
-`DOB` | Date of birth (DOB)  of the patient.                                                                       | <ul><li>Must be in the format `YYYY-MM-DD`. <li>Cannot be a date in the future. <ul>                                                                                                                                                                        | <ul><li>:white_check_mark:`2002-12-12`<li>:x:`2002/11/32`</ul>
-`GENDER` | Gender of the patient.                                                                                    | <ul><li>Case-insensitive. <li>Should only be either `M` (Male) or `F` (Female).                                                                                                                                                                             | <ul><li>:white_check_mark:`m`<li>:white_check_mark:`F`<li>:x:`Male`</ul>
-`EMAIL` | Email address of the patient.                                                                              | Must be in the format `prefix@domain`.                                                                                                                                                                                                                      | <ul><li>:white_check_mark:`techraj@gmail.com`<li>:x:`techraj@gmail`</ul>
-`ADDRESS` | Address of the patient.                                                                                   | Both alphanumeric and special characters are allowed.                                                                                                                                                                                                       | :white_check_mark:`Orchard Road, Block 124, #02-01`
-`PHONE_NUMBER` | Phone number of the patient.                                                                             | <ul><li>Should only contain numbers. <li>Spaces and symbols are not allowed</ul>                                                                                                                                                                            | <ul><li>:white_check_mark:`98765432`<li>:x:`+65 9876 5432`</ul>
+|Parameter | Definition | Constraints | Examples |
+|-|-|-|
+|`NAME` | Name of the patient | - Only alphanumeric characters are allowed.<br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of`| :white_check_mark:`John Doe`<br>:x:`$ally`|
+|`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
+|`DOB` | Date of birth (DOB) of the patient. | - Must be in the format `YYYY-MM-DD`. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
+|`GENDER` | Gender of the patient. | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). | :white_check_mark:`m`<br>:white_check_mark:`F`<br>:x:`Male` |
+|`EMAIL` | Email address of the patient. | Must be in the format `local-part@domain`. | :white_check_mark:`techraj@gmail.com`<br>:x:`techraj@gmail` |
+|`ADDRESS` | Address of the patient. | Both alphanumeric and special characters are allowed. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
+|`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
 
 [Back to Table of Contents](#table-of-contents)
 
-<div markdown="block" class="alert alert-info">
+{: .alert .alert-info}
+> **:information_source: Notes about the command format:**<br>
+>
+> * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+> e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
+> * Items in square brackets are optional.<br>
+>  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
+>
+> * Items with `…`​ after them can be used multiple times.<br>
+>  e.g. `c/CONDITION…​` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
+>
+> * Parameters can be in any order.<br>
+> e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+>
+> * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+> e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+>
+> * The command name and prefixes are case-sensitive.<br>
+> e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
+>
+> * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
-
-* Items with `…`​ after them can be used multiple times.<br>
-  e.g. `[c/CONDITION]…​` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* The command name and prefixes are case-sensitive.<br>
-  e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
 
 ### Viewing help : `help`
 
@@ -103,25 +102,24 @@ Adds a patient and their relevant details to MediBase3.
 
 Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
-<div markdown="block" class="alert alert-info">:information_source: **Note:** <br>
-
-* All fields are compulsory.
-* The NRIC serves as a unique identifier for each patient.
-* A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case. 
-* Refer to the [Parameter Details](#Parameter-Details) section for more information on the constraints of each parameter.
-
-</div>
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> * All fields are compulsory.
+> * The NRIC serves as a unique identifier for each patient.
+> * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case. 
+> * Refer to the [Parameter Details](#Parameter-Details) section for more information on the constraints of each parameter.
 
 Examples:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
 * `add n/Betsy Crowe i/s1234567b g/F e/betsycrowe@example.com a/Bukit Merah, Block 123, #01-01 p/1234567 d/2002-11-10`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:** <br>
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
 
-Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
-</div>
-
-[Back to Table of Contents](#Table-Of-Contents)
+[Back to Table of Contents](#table-of-contents)
 
 ### Listing all persons : `list`
 
@@ -198,14 +196,12 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+> 
+> If your changes to the data file makes its format invalid, MediBase3 will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
+>
+> Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 
 --------------------------------------------------------------------------------------------------------------------
 
