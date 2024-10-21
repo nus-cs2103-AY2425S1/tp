@@ -201,6 +201,20 @@ Examples:
   
   - Deletes the remark of person at index `1`
 
+### Showing property listings of a person : `show`
+
+Shows the full details of the specified person, including their property listings.
+
+Format: `show INDEX`
+
+- Shows the person at the specified `INDEX`
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
+
+Examples: 
+
+- `show 2` shows the name, contact information, tags, and property listings of the second person in the address book.
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
