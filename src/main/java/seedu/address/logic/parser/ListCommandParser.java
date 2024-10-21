@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -40,7 +41,9 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListPersonCommand();
         }
 
-        // TODO: Add ListEventCommand
+        if (commandField.equals(ListEventCommand.COMMAND_FIELD)) {
+            return new ListEventCommand();
+        }
 
         logger.finer("This user input caused a ParseException: view " + args);
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

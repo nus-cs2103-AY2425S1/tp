@@ -26,11 +26,11 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddContactCommandTest {
+public class AddPersonCommandTest {
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddContactCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddPersonCommand(null));
     }
 
     @Test
@@ -38,9 +38,9 @@ public class AddContactCommandTest {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Person validPerson = new PersonBuilder().build();
 
-        CommandResult commandResult = new AddContactCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddContactCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
     }
@@ -48,10 +48,10 @@ public class AddContactCommandTest {
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
-        AddContactCommand addContactCommand = new AddContactCommand(validPerson);
+        AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        assertThrows(CommandException.class, AddContactCommand.MESSAGE_DUPLICATE_PERSON, () -> addContactCommand
+        assertThrows(CommandException.class, AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand
                                                                                                 .execute(modelStub));
     }
 
@@ -59,14 +59,14 @@ public class AddContactCommandTest {
     public void equals() {
         Person alice = new PersonBuilder().withName("Alice").build();
         Person bob = new PersonBuilder().withName("Bob").build();
-        AddContactCommand addAliceCommand = new AddContactCommand(alice);
-        AddContactCommand addBobCommand = new AddContactCommand(bob);
+        AddPersonCommand addAliceCommand = new AddPersonCommand(alice);
+        AddPersonCommand addBobCommand = new AddPersonCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddContactCommand addAliceCommandCopy = new AddContactCommand(alice);
+        AddPersonCommand addAliceCommandCopy = new AddPersonCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -81,9 +81,9 @@ public class AddContactCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddContactCommand addContactCommand = new AddContactCommand(ALICE);
-        String expected = AddContactCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addContactCommand.toString());
+        AddPersonCommand addPersonCommand = new AddPersonCommand(ALICE);
+        String expected = AddPersonCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        assertEquals(expected, addPersonCommand.toString());
     }
 
     /**
@@ -122,6 +122,11 @@ public class AddContactCommandTest {
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person findPerson(String personName) {
             throw new AssertionError("This method should not be called.");
         }
 

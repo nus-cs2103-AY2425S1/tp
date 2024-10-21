@@ -108,6 +108,10 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person findPerson(String personName) {
+        return addressBook.findPerson(personName);
+    }
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 

@@ -107,6 +107,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    public Person findPerson(String personName) {
+        return persons.findPerson(personName);
+    }
+
     //// event-level operations
 
     /**
