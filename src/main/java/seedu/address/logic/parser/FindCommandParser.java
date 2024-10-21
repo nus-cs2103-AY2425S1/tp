@@ -1,15 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIFIC_FIND;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsGeneralKeywordsPredicate;
-import seedu.address.model.person.ContainsSpecificKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -24,16 +22,17 @@ public class FindCommandParser implements Parser<FindCommand> {
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
-        if (trimmedArgs.isEmpty()) {
+        if (trimmedArgs.startsWith(PREFIX_SPECIFIC_FIND.getPrefix()) && !trimmedArgs.isEmpty()) {
+            ArgumentMultimap argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_SPECIFIC_FIND);
+            return ParserUtil.parseSpecificFind(argMultimap.getAllValues(PREFIX_SPECIFIC_FIND));
+        } else if (!trimmedArgs.isEmpty()) {
+            String[] generalKeywords = trimmedArgs.split("\\s+");
+            return new FindCommand(new ContainsGeneralKeywordsPredicate(Arrays.asList(generalKeywords)));
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
-        String[] specificKeywords = { trimmedArgs };
-        String[] generalKeywords  = trimmedArgs.split("\\s+");
-
-        return new FindCommand(new ContainsSpecificKeywordsPredicate(Arrays.asList(specificKeywords)),
-                new ContainsGeneralKeywordsPredicate(Arrays.asList(generalKeywords)));
     }
 
 }

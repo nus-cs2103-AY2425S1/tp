@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +21,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -126,18 +126,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void updateFindCommandFilteredPersonList(Predicate<Person> specificPredicate,
-                                                    Predicate<Person> generalPredicate) {
-        //Step 1: Have a FilteredList filtered using the specificPredicate
-
-        //Step 2: Have a FilteredList filtered using the generalPredicate, removing the individual already found in
-        //step 1 (if any)
-
-        //Step 3: Append both lists together to display
-
     }
 
     @Override

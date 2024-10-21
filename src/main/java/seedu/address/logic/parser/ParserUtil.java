@@ -5,12 +5,15 @@ import static seedu.address.model.tag.PropertyTag.ALLOWED_PROPERTY_TAGS;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.ContainsSpecificKeywordsPredicate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Listing;
 import seedu.address.model.person.Name;
@@ -158,7 +161,6 @@ public class ParserUtil {
      * @throws ParseException if the given {@code remark} is invalid.
      */
     public static Listing parseListing(String propertyTypeStr, String addressStr) throws ParseException {
-
         PropertyTagType propertyTag;
         try {
             propertyTag = PropertyTagType.fromString(propertyTypeStr);
@@ -168,5 +170,16 @@ public class ParserUtil {
         Address address = new Address(addressStr.trim());
 
         return new Listing(propertyTag, address);
+    }
+
+    /**
+     * Parses a {@code List<String> keywords} into a {@code FindCommand}.
+     * @param keywords List of keywords that need to be parsed.
+     * @return FindCommand which filteres address book by individuals matching the specific keyword.
+     * @throws ParseException if the given {@code List<String> keywords} is invalid.
+     */
+    public static FindCommand parseSpecificFind(List<String> keywords) throws ParseException {
+        List<String> specificKeywords = keywords;
+        return new FindCommand(new ContainsSpecificKeywordsPredicate(specificKeywords));
     }
 }
