@@ -48,36 +48,50 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
 
         if (this.targetIndex != null) {
-            List<Person> lastShownList = model.getFilteredPersonList();
-            if (lastShownList.isEmpty()) {
-                throw new CommandException(DELETE_EMPTY_LIST_ERROR_MESSAGE);
-            }
-
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                        lastShownList.size()));
-            }
-
-            Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            model.deletePerson(personToDelete);
+            Person personToDelete = deleteWithIndex(model);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
 
         } else {
-            NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
-                    Arrays.asList(this.targetKeyword));
-            model.updateFilteredPersonList(predicate);
-            List<Person> filteredList = model.getFilteredPersonList();
+            Person personToDelete = deleteWithKeyword(model);
 
-            if (filteredList.isEmpty()) {
-                throw new CommandException(DELETE_EMPTY_LIST_ERROR_MESSAGE);
-            } else if (filteredList.size() == 1) {
-                Person personToDelete = filteredList.get(0);
-                model.deletePerson(personToDelete);
+            if (personToDelete != null) {
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
             } else {
-                return new CommandResult(
-                        String.format(MESSAGE_DUPLICATE_HANDLING));
+                return new CommandResult(String.format(MESSAGE_DUPLICATE_HANDLING));
             }
+        }
+    }
+
+    public Person deleteWithIndex(Model model) throws CommandException {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (lastShownList.isEmpty()) {
+            throw new CommandException(DELETE_EMPTY_LIST_ERROR_MESSAGE);
+        }
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    lastShownList.size()));
+        }
+
+        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deletePerson(personToDelete);
+        return personToDelete;
+    }
+
+    public Person deleteWithKeyword(Model model) throws CommandException {
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(
+                Arrays.asList(this.targetKeyword));
+        model.updateFilteredPersonList(predicate);
+        List<Person> filteredList = model.getFilteredPersonList();
+
+        if (filteredList.isEmpty()) {
+            throw new CommandException(DELETE_EMPTY_LIST_ERROR_MESSAGE);
+        } else if (filteredList.size() == 1) {
+            Person personToDelete = filteredList.get(0);
+            model.deletePerson(personToDelete);
+            return personToDelete;
+        } else {
+            return null;
         }
     }
 
