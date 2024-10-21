@@ -80,7 +80,8 @@ public class DeleteCommand extends Command {
                 .collect(Collectors.joining("\n"));
 
 
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople), CommandType.DELETESTUDENT);
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople),
+                CommandType.DELETESTUDENT);
     }
 
     @Override
