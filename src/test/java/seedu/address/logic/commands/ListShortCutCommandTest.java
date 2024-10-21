@@ -91,13 +91,11 @@ class ListShortCutCommandTest {
     void equals_sameObject_returnsTrue() {
         assertEquals(listShortCutCommand, listShortCutCommand);
     }
-
     @Test
     void equals_differentObject_returnsFalse() {
         ListCommand otherCommand = new ListCommand();
         assertNotEquals(listShortCutCommand, otherCommand);
     }
-
     @Test
     void equals_null_returnsFalse() {
         assertNotEquals(listShortCutCommand, null);

@@ -62,4 +62,10 @@ class AddShortCutCommandTest {
         assertEquals(command1, command2); // Same alias and tag name
         assertNotEquals(command1, command3); // Different alias and tag name
     }
+
+    @Test
+    void toStringMethod() {
+        ShortCut shortCut1 = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
+        assertEquals(shortCut1.toString(), "v : Vegan");
+    }
 }

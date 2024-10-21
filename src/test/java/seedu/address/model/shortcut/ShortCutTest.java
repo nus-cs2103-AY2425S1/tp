@@ -100,4 +100,9 @@ public class ShortCutTest {
         // Check if two objects with different full tag names have different hash codes
         assertNotEquals(shortCut1.hashCode(), shortCut2.hashCode());
     }
+    @Test
+    public void equals_differentObject() {
+        ShortCut shortcut1 = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
+        assertNotEquals(shortcut1, new Alias("v"));
+    }
 }
