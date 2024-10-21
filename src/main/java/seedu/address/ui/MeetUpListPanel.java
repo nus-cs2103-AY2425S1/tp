@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -9,10 +11,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-
-
 
 /**
  * Panel containing the list of buyers.
@@ -54,10 +52,10 @@ public class MeetUpListPanel extends UiPart<Region> {
         LocalDateTime end1 = meetUp1.getTo().getDateTime();
         LocalDateTime start2 = meetUp2.getFrom().getDateTime();
         LocalDateTime end2 = meetUp2.getTo().getDateTime();
-    
+
         // Check if the date ranges overlap
-        return (start1.isBefore(end2) || start1.isEqual(end2)) &&
-               (end1.isAfter(start2) || end1.isEqual(start2));
+        return (start1.isBefore(end2) || start1.isEqual(end2))
+                && (end1.isAfter(start2) || end1.isEqual(start2));
     }
 
     /**
