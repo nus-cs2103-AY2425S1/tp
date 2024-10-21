@@ -65,7 +65,7 @@ public class StringUtil {
             return false;
         }
     }
-    
+
     /**
      * Returns true if {@code s} represents a positive multiple of 0.5
      * e.g. 0.5, 1, 30, ..., <br>
@@ -75,7 +75,7 @@ public class StringUtil {
      */
     public static boolean isPositiveMultipleOfHalfHour(String s) {
         requireNonNull(s);
-        
+
         try {
             double value = Double.parseDouble(s);
             return value > 0 && value % 0.5 == 0 && !s.startsWith("+")

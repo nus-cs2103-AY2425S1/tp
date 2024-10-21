@@ -169,7 +169,7 @@ public class ParserUtil {
         }
         return new OwedAmount(trimmedOwedAmount);
     }
-    
+
     /**
      * Parses a {@code String hoursPaid} into a {@code double}.
      * Leading and trailing whitespaces will be trimmed.

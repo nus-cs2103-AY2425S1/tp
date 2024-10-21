@@ -16,7 +16,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class OweCommandParser implements Parser<OweCommand> {
     private static final Logger logger = Logger.getLogger(OweCommandParser.class.getName());
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the OweCommand
      * and returns an OweCommand object for execution.
@@ -25,32 +25,32 @@ public class OweCommandParser implements Parser<OweCommand> {
     public OweCommand parse(String args) throws ParseException {
         requireNonNull(args);
         logger.log(Level.INFO, "Parsing OweCommand with arguments: " + args);
-        
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HOUR);
         Index index;
         double hour;
-        
+
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             logger.log(Level.WARNING, "Failed to parse index. Invalid command format.", pe);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE), pe);
         }
-        
+
         if (!arePrefixHourPresent(argMultimap)) {
             logger.log(Level.WARNING, "Failed to parse hours owed. Invalid parameters");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE));
         }
-        
+
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HOUR);
-        
+
         hour = ParserUtil.parseHour(argMultimap.getValue(PREFIX_HOUR).get());
-       
+
         logger.log(Level.INFO, "Successfully parsed OweCommand.");
         return new OweCommand(index, hour);
     }
-    
-    private static boolean arePrefixHourPresent (ArgumentMultimap argMultimap) {
+
+    private static boolean arePrefixHourPresent(ArgumentMultimap argMultimap) {
         return argMultimap.getValue(PREFIX_HOUR).isPresent();
     }
 }
