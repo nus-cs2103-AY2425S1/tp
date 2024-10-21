@@ -149,7 +149,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_MEETUP_NAME_DESC + MEETUP_INFO_DESC_PITCH
                 + MEETUP_FROM_DESC_PITCH + MEETUP_TO_DESC_PITCH, Name.MESSAGE_CONSTRAINTS);
 
-        // invalid from
+        // invalid info
         assertParseFailure(parser, MEETUP_NAME_DESC_PITCH + INVALID_MEETUP_INFO_DESC
                 + MEETUP_FROM_DESC_PITCH + MEETUP_TO_DESC_PITCH, Info.MESSAGE_CONSTRAINTS);
 
