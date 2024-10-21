@@ -34,7 +34,7 @@ public class ConcertContactCard extends UiPart<Region> {
     private Label id;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code ConcertContactCard} with the given {@code ConcertContact} and index to display.
      */
     public ConcertContactCard(ConcertContact concertContact, int displayedIndex) {
         super(FXML);
