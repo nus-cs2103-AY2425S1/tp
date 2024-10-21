@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -26,7 +28,7 @@ public class AddScheduleCommand extends Command {
     public static final String MESSAGE_INVALID_TIME = "Time must be in the format HHmm (24-hour).";
     public static final String MESSAGE_DUPLICATE_SCHEDULE = "This schedule conflicts with an existing schedule.";
 
-    private final int contactIndex;
+    private final List<Index> contactIndexes;
     private final String name;
     private final LocalDate date;
     private final LocalTime time;
@@ -35,13 +37,14 @@ public class AddScheduleCommand extends Command {
      * Creates an AddScheduleCommand to add a schedule for a specified person.
      * The schedule includes an event name, date, and time.
      *
-     * @param contactIndex The index of the person in the filtered person list.
-     * @param name         The name or description of the event.
-     * @param date         The date of the event in LocalDate format.
-     * @param time         The time of the event in LocalTime format.
+     * @param contactIndexes    The index of the person in the filtered person list.
+     * @param name              The name or description of the event.
+     * @param date              The date of the event in LocalDate format.
+     * @param time              The time of the event in LocalTime format.
      */
-    public AddScheduleCommand(int contactIndex, String name, LocalDate date, LocalTime time) {
-        this.contactIndex = contactIndex;
+    public AddScheduleCommand(List<Index> contactIndexes, String name, 
+            LocalDate date, LocalTime time) {
+        this.contactIndexes = contactIndexes;
         this.name = name;
         this.date = date;
         this.time = time;
@@ -51,15 +54,21 @@ public class AddScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (contactIndex < 0 || contactIndex >= lastShownList.size()) {
-            throw new CommandException("The contact index provided is invalid.");
+        // check index within range of current observable list
+        for (Index i : contactIndexes) {
+            assert(i.getZeroBased() >= 0);
+            if (i.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException("The contact index provided is invalid.");
+            }
         }
-
+            
         // Retrieve the person involved
-        Person person = lastShownList.get(contactIndex);
+        List<UUID> contactsList = contactIndexes.stream()
+                .map(index -> lastShownList.get(index.getZeroBased()).getUid())
+                .collect(Collectors.toList());
 
         // Create the new meeting
-        Meeting newMeeting = new Meeting(Arrays.asList(contactIndex), name, date, time);
+        Meeting newMeeting = new Meeting(contactsList, name, date, time);
 
         // Check for duplicate schedule or conflict
         if (model.hasMeeting(newMeeting)) {

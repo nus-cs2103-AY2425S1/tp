@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddScheduleCommand;
@@ -31,7 +33,19 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
         }
 
         try {
-            Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT).get());
+            // input index must be one-based
+            List<Index> contactIndexes = argMultimap.getAllValues(PREFIX_CONTACT).stream()
+                    .map(s -> {
+                        try {
+                            return ParserUtil.parseIndex(s);
+                        } catch (Exception e) {
+                            // you see nothing :>
+                            throw new RuntimeException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                                    AddScheduleCommand.MESSAGE_USAGE));
+                        }
+                    }).collect(Collectors.toList());
+
+            // name of the schedule
             String name = argMultimap.getValue(PREFIX_NAME).get().trim();
 
             // Parse and validate the date
@@ -53,7 +67,7 @@ public class AddScheduleCommandParser implements Parser<AddScheduleCommand> {
             }
 
             // Convert contactIndex to its zero-based integer value if needed.
-            return new AddScheduleCommand(contactIndex.getZeroBased(), name, date, time);
+            return new AddScheduleCommand(contactIndexes, name, date, time);
         } catch (Exception e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddScheduleCommand.MESSAGE_USAGE));
         }

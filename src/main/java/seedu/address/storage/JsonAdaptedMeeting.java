@@ -5,22 +5,25 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
 import seedu.address.model.schedule.Meeting;
 
 /**
  * Jackson-friendly version of {@link Meeting}.
  */
 public class JsonAdaptedMeeting {
+    public static final String UidRegex = "\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}(,\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12})*";
+
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
     public static final String MESSAGE_CONSTRAINTS = "Error Loading the Contact Indexes, not in 1,2,3... format";
     public static final String DATE_TIME_FORMAT_ERROR = "Date Time Format Stored is not YYYY-MM-DD";
+    public static final String UID_FORMAT_ERROR = "UID format stored is not valid";
 
     private final String contactIndexes;
     private final String meetingName;
@@ -52,7 +55,7 @@ public class JsonAdaptedMeeting {
      * @param source The meeting object to convert.
      */
     public JsonAdaptedMeeting(Meeting source) {
-        contactIndexes = source.convertContactIndexesToString(source.getContactIndexes());
+        contactIndexes = source.convertContactUidsToString();
         meetingName = source.getMeetingName();
         meetingDate = source.getMeetingDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
         meetingTime = source.getMeetingTime().format(DateTimeFormatter.ISO_LOCAL_TIME);
@@ -68,12 +71,12 @@ public class JsonAdaptedMeeting {
         if (contactIndexes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "contact indexes"));
         }
-        if (!contactIndexes.matches("\\d+(,\\d+)*")) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!contactIndexes.matches(UidRegex)) {
+            throw new IllegalValueException(UID_FORMAT_ERROR);
         }
-        final List<Integer> modelContactIndexes = Arrays.stream(contactIndexes.split(","))
+        final List<UUID> modelContactIndexes = Arrays.stream(contactIndexes.split(","))
                 .map(String::trim)
-                .map(Integer::parseInt)
+                .map(UUID::fromString)
                 .collect(Collectors.toList());
 
         if (meetingName == null) {
