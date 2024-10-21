@@ -152,6 +152,8 @@ public class MainWindow extends UiPart<Stage> {
      * Populates the tag list panel in the GUI with the tags available in alphabetical order.
      */
     private void populateTagsList() {
+        logger.fine("Updating tag list with: " + logic.getListOfCurrentTags());
+
         tagListPanel.updateTagList(logic.getListOfCurrentTags());
     }
 
@@ -195,8 +197,8 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            populateTagsList(); // repopulate the tags list if the command affects it
             logger.info("Result: " + commandResult.getFeedbackToUser());
+            populateTagsList();
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             if (commandResult.isShowHelp()) {
                 handleHelp();
