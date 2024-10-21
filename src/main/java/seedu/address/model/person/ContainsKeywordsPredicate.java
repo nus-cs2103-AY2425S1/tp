@@ -8,9 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +25,7 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
     public ContainsKeywordsPredicate(ArgumentMultimap keywords) {
         this.keywords = keywords;
     }
+
     @Override
     public boolean test(Person person) {
         return (keywords.getValue(PREFIX_ROLE).isPresent() && testRole(keywords.getAllValues(PREFIX_ROLE), person))
@@ -50,26 +51,37 @@ public class ContainsKeywordsPredicate implements Predicate<Person> {
 
     private boolean testName(List<String> allValues, Person person) {
         return allValues.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+                .anyMatch(keyword -> person.hasName(new Name(keyword)));
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
+        if (this == other) {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ContainsKeywordsPredicate)) {
             return false;
         }
 
-        ContainsKeywordsPredicate otherContainsKeywordsPredicate = (ContainsKeywordsPredicate) other;
-        return keywords.equals(otherContainsKeywordsPredicate.keywords);
-    }
+        ContainsKeywordsPredicate otherPredicate = (ContainsKeywordsPredicate) other;
 
+        // Compare the keyword maps for equality.
+        return this.keywords.equals(otherPredicate.keywords);
+    }
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        ToStringBuilder toStringBuilder = new ToStringBuilder(this);
+
+        // Loop through all prefixes in the ArgumentMultimap and add them to the ToStringBuilder
+        for (Prefix prefix : keywords.getPrefixes()) {
+            List<String> values = keywords.getAllValues(prefix);
+            if (!values.isEmpty()) {
+                toStringBuilder.add(prefix.getPrefix(), values);
+            }
+        }
+        return toStringBuilder.toString();
     }
+
+
 }
