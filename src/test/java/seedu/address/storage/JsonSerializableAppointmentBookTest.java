@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -35,8 +36,8 @@ public class JsonSerializableAppointmentBookTest {
             TEST_DATA_FOLDER.resolve("duplicateAppointmentAppointmentBook.json");
     private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
 
-    // todo: fix
-    @Disabled("For next iteration")
+    // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
+//    @Disabled("For next iteration")
     @Test
     void toModelType_typicalAppointmentsFile_success() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(TYPICAL_APPOINTMENTS_FILE,
@@ -54,8 +55,8 @@ public class JsonSerializableAppointmentBookTest {
     }
 
 
-    // todo: fix
-    @Disabled("For next iteration")
+    // todo: Same error as the testcase in JsonAdaptedAppointmentBookTest.java
+//    @Disabled("For next iteration")
     @Test
     void toModelType_duplicateAppointments_throwsIllegalValueException() throws Exception {
         JsonSerializableAppointmentBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_APPOINTMENT_FILE,
@@ -80,7 +81,7 @@ public class JsonSerializableAppointmentBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<PersonDescriptor> persons) {
-            this.persons.setAll(persons.stream().map(p -> new Person(0, p)).toList());
+            this.persons.setAll(persons.stream().map(p -> new Person(getNextPersonId(), p)).toList());
         }
 
         @Override

@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import seedu.address.model.person.PersonDescriptor;
 class JsonAdaptedAppointmentTest {
     private static final String VALID_APPOINTMENT_TYPE = "Consultation";
     private static final String VALID_APPOINTMENT_DATE_TIME = "2024-10-15T10:30:00";
-    private static final int VALID_PERSON_ID = 123;
+    private static final int VALID_PERSON_ID = 1;
     private static final String VALID_SICKNESS = "Flu";
     private static final String VALID_MEDICINE = "Paracetamol";
 
@@ -34,12 +35,10 @@ class JsonAdaptedAppointmentTest {
 
     private final ReadOnlyAddressBook addressBookStub = new AddressBookStub(new ArrayList<>(){});
 
-    // todo: fix
-    @Disabled("For next iteration")
     @Test
     void toModelType_validAppointmentDetails_returnsAppointment() throws Exception {
         JsonAdaptedAppointment appointment = new JsonAdaptedAppointment(1, VALID_APPOINTMENT_TYPE,
-                VALID_APPOINTMENT_DATE_TIME, VALID_PERSON_ID, VALID_SICKNESS, VALID_MEDICINE);
+                VALID_APPOINTMENT_DATE_TIME, 1, VALID_SICKNESS, VALID_MEDICINE);
         Appointment modelAppointment = appointment.toModelType(addressBookStub);
 
         assertEquals(VALID_APPOINTMENT_TYPE, modelAppointment.getAppointmentType().value);
@@ -127,6 +126,7 @@ class JsonAdaptedAppointmentTest {
 
         AddressBookStub(Collection<PersonDescriptor> persons) {
             this.persons.setAll(persons.stream().map(p -> new Person(0, p)).toList());
+            this.persons.add(new Person(1, ALICE));
         }
 
         @Override
@@ -137,8 +137,8 @@ class JsonAdaptedAppointmentTest {
         @Override
         public Optional<Person> findPerson(int personId) {
             return persons.stream()
-                          .filter(person -> person.getPersonId() == personId)
-                          .findFirst();
+                    .filter(person -> person.getPersonId() == personId)
+                    .findFirst();
         }
 
         @Override

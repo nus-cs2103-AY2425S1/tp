@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.PERSON_ENTITY_STRING;
@@ -13,16 +13,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddPersonCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeletePersonCommand;
-import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditPersonCommand.EditPersonDescriptor;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindPersonCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -48,10 +40,10 @@ public class AddressBookParserTest {
             +
             " "
             + ParserUtil.PERSON_ENTITY_STRING) instanceof ClearCommand);
-        /* ToDo: Make this work
-             assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD +
-                " " + ParserUtil.PERSON_ENTITY_STRING + " 3") instanceof ClearCommand);
-                */
+
+        assertThrows(ParseException.class, () -> parser.parseCommand(ClearCommand.COMMAND_WORD + " "
+                + ParserUtil.PERSON_ENTITY_STRING
+                + " 3"));
     }
 
     @Test
@@ -96,7 +88,7 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " "
             + ParserUtil.PERSON_ENTITY_STRING) instanceof ListCommand);
-        // TODO: assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
     }
 
     @Test
