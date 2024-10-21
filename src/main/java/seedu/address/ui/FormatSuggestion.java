@@ -42,21 +42,29 @@ public class FormatSuggestion {
 
             StringBuilder remainingFormat = new StringBuilder();
 
-            // Check if the user has entered a number for INDEX
-            boolean numberEntered = false;
-            for (String typedPart : typedParts) {
-                if (typedPart.matches("\\d+")) {
-                    numberEntered = true;
-                    break;
-                }
+            // check if user type number for INDEX
+            if (formatParts[0].equals("INDEX") && !typedParts[0].matches("\\d+")) {
+                return "";
             }
 
+            // check if user type alphabet for NAME
+            if (formatParts[0].equals("NAME") && !typedParts[0].matches("[a-zA-Z]+")) {
+                return "";
+            }
+
+            // check if user type number or alphabet for INDEX/NAME
+            if (formatParts[0].equals("INDEX/NAME") && !typedParts[0].matches("^[a-zA-Z0-9_.-]*$")) {
+                return "";
+            }
+
+
             for (String formatPart : formatParts) {
-                // Skip INDEX part if a number was entered
-                if (formatPart.contains("INDEX") && numberEntered) {
+                boolean matched = false;
+                if (formatPart.equals("INDEX") || formatPart.equals("NAME") || formatPart.equals("INDEX/NAME")) {
+                    // Skip the INDEX and NAME part if a number has already been entered
                     continue;
                 }
-                boolean matched = false;
+
                 for (String typedPart : typedParts) {
                     if (typedPart.startsWith(getPrefix(formatPart.trim().replace("[", "").replace("]", "")))) {
                         matched = true;

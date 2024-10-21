@@ -18,7 +18,8 @@ public class Suggestions {
     public String checkAllCommands(String enteredText) {
         // Iterate through all defined commands to find matches
         for (Commands command : Commands.values()) {
-            if (enteredText.trim().toLowerCase().startsWith(command.getCommand())) {
+            String firstWord = enteredText.split("\\s+")[0];
+            if (firstWord.equals(command.getCommand())) {
                 // Generate suggestion based on the matching command
                 FormatSuggestion commandSuggestion = new FormatSuggestion(command.getCommand(),
                         command.getExample(), command.getPrefix());
