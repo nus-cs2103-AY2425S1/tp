@@ -27,7 +27,7 @@ public class SettleCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates owed amount and paid amount of the student "
             + "identified by the index number used in the displayed Student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_AMOUNT + "AMOUNT] ";
+            + PREFIX_AMOUNT + "AMOUNT";
 
     public static final String MESSAGE_SETTLE_SUCCESS = "Payment of %.2f has been settled for %s";
     public static final String MESSAGE_INVALID_AMOUNT = "Entered amount is more than amount owed";
