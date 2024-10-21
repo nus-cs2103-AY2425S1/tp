@@ -2,16 +2,28 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_CLARA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_CLARA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_CLARA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_CLARA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_CLARA;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEACON;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_COLLEAGUE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +72,12 @@ public class TypicalPersons {
     public static final Tutor BOB = new TutorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withHours(VALID_HOURS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+    public static final Tutee CLARA = new TuteeBuilder().withName(VALID_NAME_CLARA).withPhone(VALID_PHONE_CLARA)
+            .withEmail(VALID_EMAIL_CLARA).withAddress(VALID_ADDRESS_CLARA).withHours(VALID_HOURS_CLARA)
+            .withTags(VALID_TAG_COLLEAGUE).build();
+    public static final Tutee DEACON = new TuteeBuilder().withName(VALID_NAME_DEACON).withPhone(VALID_PHONE_DEACON)
+            .withEmail(VALID_EMAIL_DEACON).withAddress(VALID_ADDRESS_DEACON).withHours(VALID_HOURS_DEACON)
+            .withTags(VALID_TAG_MENTOR).build();
 
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

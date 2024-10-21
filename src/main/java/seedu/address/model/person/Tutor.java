@@ -89,7 +89,7 @@ public class Tutor extends Person {
      */
     @Override
     public String toString() {
-        return "Tutor: " + super.toString();
+        return super.toString();
     }
 
 }
