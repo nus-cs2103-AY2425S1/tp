@@ -16,13 +16,10 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class AppParameters {
     private static final Logger logger = LogsCenter.getLogger(AppParameters.class);
-
     private Path configPath;
-
     public Path getConfigPath() {
         return configPath;
     }
-
     public void setConfigPath(Path configPath) {
         this.configPath = configPath;
     }
@@ -40,7 +37,6 @@ public class AppParameters {
             configPathParameter = null;
         }
         appParameters.setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
-
         return appParameters;
     }
 
@@ -49,7 +45,6 @@ public class AppParameters {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof AppParameters)) {
             return false;
