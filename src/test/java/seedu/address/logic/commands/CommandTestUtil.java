@@ -37,12 +37,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
 
-    public static final Boolean VALID_PAYMENT_AMY = false;
-    public static final Boolean VALID_PAYMENT_BOB = false;
-    public static final Boolean VALID_ATTENDANCE_AMY = false;
-    public static final Boolean VALID_ATTENDANCE_BOB = true;
+    public static final String VALID_PAYMENT_AMY = "-200";
+    public static final String VALID_PAYMENT_BOB = "200";
+    public static final String VALID_ATTENDANCE_AMY = "12/12/2024";
+    public static final String VALID_ATTENDANCE_BOB = "10/12/2024";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_FEES_PAID = "200";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

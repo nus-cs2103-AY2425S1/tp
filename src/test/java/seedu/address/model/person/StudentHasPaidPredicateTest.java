@@ -39,13 +39,13 @@ public class StudentHasPaidPredicateTest {
     @Test
     public void test_studentHasPaid_returnsTrue() {
         StudentHasPaidPredicate predicate = new StudentHasPaidPredicate(true);
-        assertTrue(predicate.test(new PersonBuilder().withPayment(true).build()));
+        assertTrue(predicate.test(new PersonBuilder().withPayment("0").build()));
     }
 
     @Test
     public void test_studentHasPaid_returnsFalse() {
         StudentHasPaidPredicate predicate = new StudentHasPaidPredicate(false);
-        assertTrue(predicate.test(new PersonBuilder().withPayment(false).build()));
+        assertTrue(predicate.test(new PersonBuilder().withPayment("200").build()));
     }
 
     @Test
@@ -53,9 +53,11 @@ public class StudentHasPaidPredicateTest {
         StudentHasPaidPredicate predicateHasPaid = new StudentHasPaidPredicate(true);
         StudentHasPaidPredicate predicateHasNotPaid = new StudentHasPaidPredicate(false);
 
-        String expectedHasPaid = StudentHasPaidPredicate.class.getCanonicalName() + "{hasPaid=" + true + "}";
+        String expectedHasPaid = StudentHasPaidPredicate.class.getCanonicalName() + "{payment up to date=" + true
+                + "}";
         assertEquals(expectedHasPaid, predicateHasPaid.toString());
-        String expectedHasNotPaid = StudentHasPaidPredicate.class.getCanonicalName() + "{hasPaid=" + false + "}";
+        String expectedHasNotPaid =
+                StudentHasPaidPredicate.class.getCanonicalName() + "{payment up to date=" + false + "}";
         assertEquals(expectedHasNotPaid, predicateHasNotPaid.toString());
     }
 }

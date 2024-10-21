@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Fees;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Person;
 
@@ -19,19 +21,22 @@ public class MarkPaidCommand extends Command {
     public static final String COMMAND_WORD = "markpaid";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that the student has paid fees for the month"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_MARKED_PAID_SUCCESS = "Mark fees paid for Person %1$s";
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that the amounts of fees the student has paid "
+            + "Parameters: \n"
+            + "{INDEX} (must be a positive integer) \n"
+            + PREFIX_PAYMENT + "{AMOUNT} (must be a positive integer) \n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PAYMENT + "200";
+    public static final String MESSAGE_MARKED_PAID_SUCCESS = "Fees updated for Person %1$s";
     private final Index targetIndex;
+    private final Fees fees;
 
     /**
      * Marks whether an existing person has paid their fees for the month
      * @param targetIndex
      */
-    public MarkPaidCommand(Index targetIndex) {
+    public MarkPaidCommand(Index targetIndex, Fees fees) {
         this.targetIndex = targetIndex;
+        this.fees = fees;
     }
 
     @Override
@@ -44,9 +49,10 @@ public class MarkPaidCommand extends Command {
         }
 
         Person personToMarkPayment = lastShownList.get(targetIndex.getZeroBased());
+        Payment updatedPayment = calculatePayment(personToMarkPayment.getPayment(), fees);
         Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
                 personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
-                new Payment(true), personToMarkPayment.getAttendance(), personToMarkPayment.getTags());
+                updatedPayment, personToMarkPayment.getAttendance(), personToMarkPayment.getTags());
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
@@ -73,5 +79,13 @@ public class MarkPaidCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
+    }
+
+    private Payment calculatePayment(Payment currentPayment, Fees paidFees) {
+        int currentBalance = Integer.parseInt(currentPayment.overdueAmount);
+        int amountPaid = Integer.parseInt(paidFees.value);
+
+        Integer finalAmount = currentBalance - amountPaid;
+        return new Payment(finalAmount.toString());
     }
 }

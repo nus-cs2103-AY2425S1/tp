@@ -3,20 +3,24 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+
 /**
  * Tests a {@code Person}'s hasPaid status
  */
 public class StudentHasPaidPredicate implements Predicate<Person> {
-    private final boolean hasPaid;
+    private final boolean paymentUpToDate;
 
-    public StudentHasPaidPredicate(boolean hasPaid) {
-        this.hasPaid = hasPaid;
+    public StudentHasPaidPredicate(boolean paymentUpToDate) {
+        this.paymentUpToDate = paymentUpToDate;
     }
 
-    //TODO Implement test
     @Override
     public boolean test(Person person) {
-        return this.hasPaid == person.getPayment().hasPaid;
+        if (paymentUpToDate) {
+            return Integer.parseInt(person.getPayment().overdueAmount) <= 0;
+        } else {
+            return Integer.parseInt(person.getPayment().overdueAmount) > 0;
+        }
     }
 
     @Override
@@ -31,11 +35,11 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
         }
 
         StudentHasPaidPredicate studentHasPaidPredicate = (StudentHasPaidPredicate) other;
-        return this.hasPaid == studentHasPaidPredicate.hasPaid;
+        return this.paymentUpToDate == studentHasPaidPredicate.paymentUpToDate;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("hasPaid", this.hasPaid).toString();
+        return new ToStringBuilder(this).add("payment up to date", this.paymentUpToDate).toString();
     }
 }
