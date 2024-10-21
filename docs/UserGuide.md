@@ -191,8 +191,8 @@ Find students by either their name, level or subject.
 * `find John` returns `john` and `John Doe`
 * `find l/S3` returns all students tagged with level `S3`
 * `find s/MATH` returns all students tagged with subject `MATH`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
 
@@ -209,6 +209,7 @@ Shows a list of all students in the address book.
 Allows tagging a student by their level and subject. A student must have a level assigned before they can be tagged with a subject.
 
 **Format:** `tag n/NAME [l/level] [s/SUBJECT]…​`
+* To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`
 
 **Examples:**
 * `tag n/John Doe l/S3 s/ENGLISH`
