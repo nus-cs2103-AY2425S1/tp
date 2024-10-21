@@ -62,9 +62,14 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> {
-                    Label label = new Label(tag.tagName);
+                    String name = tag.tagName;
+                    String value = tag.tagValue != null ? " : " + tag.tagValue : "";
+                    Label label = new Label(name + value);
                     if (tag.tagName.equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME)) {
                         label.setId("duplicate");
+                    }
+                    if (tag.tagValue != null) {
+                        label.setId("hasValue");
                     }
                     tags.getChildren().add(label);
                 });

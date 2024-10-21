@@ -4,7 +4,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -18,19 +20,18 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_multipleTags_returnsFilterCommand() {
-        Set<Tag> expectedTags = new HashSet<>();
-        expectedTags.add(new Tag("friend"));
-        expectedTags.add(new Tag("colleague"));
-        FilterCommand expectedFilterCommand = new FilterCommand("Alice", expectedTags);
+        Set<Tag> expectedTags = new HashSet<>(Arrays.asList(new Tag("friend"), new Tag("colleague")));
+        Set<String> expectedNames = new HashSet<>(List.of("Alice"));
+        FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, expectedTags);
         assertParseSuccess(parser, " n/Alice t/friend t/colleague", expectedFilterCommand);
     }
 
     @Test
     public void parse_duplicateTags_returnsFilterCommandWithUniqueTagSet() {
-        Set<Tag> expectedTags = new HashSet<>();
-        expectedTags.add(new Tag("friend"));
-        FilterCommand expectedFilterCommand = new FilterCommand("Alice", expectedTags);
-        assertParseSuccess(parser, " n/Alice t/friend", expectedFilterCommand);
+        Set<Tag> expectedTags = new HashSet<>(List.of(new Tag("friend")));
+        Set<String> expectedNames = new HashSet<>(List.of("Alice"));
+        FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, expectedTags);
+        assertParseSuccess(parser, " n/Alice t/friend t/friend", expectedFilterCommand);
     }
 
     @Test
@@ -46,13 +47,35 @@ public class FilterCommandParserTest {
     }
 
     @Test
-    public void parse_duplicateNamePrefix_throwsParseException() {
-        assertParseFailure(parser, " n/Alice n/Bob",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    public void parse_multipleNames_returnsFilterCommand() {
+        Set<String> expectedNames = new HashSet<>(Arrays.asList("ali", "bo"));
+        FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, new HashSet<>());
+        assertParseSuccess(parser, " n/ali n/bo", expectedFilterCommand);
     }
+
+    @Test
+    public void parse_duplicateNames_returnsFilterCommandWithUniqueNameSet() {
+        Set<String> expectedNames = new HashSet<>(List.of("Alice"));
+        FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, new HashSet<>());
+        assertParseSuccess(parser, " n/Alice n/Alice", expectedFilterCommand);
+    }
+
     @Test
     public void parse_nameWithTrailingSpaces_returnsFilterCommand() {
-        FilterCommand expectedFilterCommand = new FilterCommand("Alice", new HashSet<>());
+        Set<String> expectedNames = new HashSet<>(List.of("Alice"));
+        FilterCommand expectedFilterCommand = new FilterCommand(expectedNames, new HashSet<>());
         assertParseSuccess(parser, " n/Alice  ", expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_emptyInput_throwsParseException() {
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidPrefix_throwsParseException() {
+        assertParseFailure(parser, " x/Alice",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 }

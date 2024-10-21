@@ -23,15 +23,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
-        try {
-            // Verify that there are no duplicates for a single prefix (except for tags which can be repeated)
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE), pe);
-        }
-
-        String name = argMultimap.getValue(PREFIX_NAME).orElse("").trim();
 
         // Extract tags and validate them
         Set<Tag> tags = new HashSet<>();
@@ -44,12 +35,20 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             tags.add(new Tag(tagName)); // Create Tag objects for each tag provided
         }
 
-        if (name.isEmpty() && tags.isEmpty()) {
+        Set<String> names = new HashSet<>();
+        for (String name : argMultimap.getAllValues(PREFIX_NAME)) {
+            if (name.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+            }
+            names.add(name.trim()); // Create Tag objects for each tag provided
+        }
+
+        if (names.isEmpty() && tags.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
         // Return a new FilterCommand with the parsed name and tags
-        return new FilterCommand(name, tags);
+        return new FilterCommand(names, tags);
     }
 }
