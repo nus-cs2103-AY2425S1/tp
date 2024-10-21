@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -118,11 +117,11 @@ public class Person {
     public String generateContactInformation() {
         Field[] fields = Person.class.getDeclaredFields();
         StringBuilder contactInfo = new StringBuilder("");
-        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES") ?
-                field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n" :
-                field.getName().toUpperCase().equals("ATTENDANCE") ?
-                        field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n" :
-                        field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
+        Arrays.stream(fields).forEach(field -> contactInfo.append(field.getName().toUpperCase().equals("ROLES")
+                ? field.getName().toUpperCase() + ": " + this.getString(Role.class) + "\n"
+                : field.getName().toUpperCase().equals("ATTENDANCE")
+                        ? field.getName().toUpperCase() + ": " + this.getString(Attendance.class) + "\n"
+                        : field.getName().toUpperCase() + ": " + this.getString(field.getType()) + "\n"));
         return contactInfo.toString();
     }
 
