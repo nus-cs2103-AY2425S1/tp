@@ -7,15 +7,18 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Comparator;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -91,6 +94,26 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void sortPersonList_alphabeticalOrder_sortedCorrectly() {
+        ModelManager modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ModelManager expectedModelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelManager.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
+        expectedModelManager.sortPersonList(Comparator.comparing(person -> person.getName().toString().toUpperCase()));
+        assertEquals(expectedModelManager.getFilteredPersonList(), modelManager.getFilteredPersonList());
+    }
+
+    @Test
+    public void sortPersonList_reverseAlphabeticalOrder_sortedCorrectly() {
+        ModelManager modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        ModelManager expectedModelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        modelManager.sortPersonList(Comparator.comparing((Person person)
+                -> person.getName().toString().toUpperCase()).reversed());
+        expectedModelManager.sortPersonList(Comparator.comparing((Person person)
+                -> person.getName().toString().toUpperCase()).reversed());
+        assertEquals(expectedModelManager.getFilteredPersonList(), modelManager.getFilteredPersonList());
     }
 
     @Test

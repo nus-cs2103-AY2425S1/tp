@@ -59,6 +59,8 @@ public class EditCommand extends Command {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
+        assert index.getZeroBased() >= 0 : "Index should not be negative";
+
         this.index = index;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
@@ -73,6 +75,8 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        assert personToEdit != null : "Person to edit should not be null";
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -95,6 +99,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        assert updatedName != null : "Updated name should not be null";
+        assert updatedPhone != null : "Updated phone should not be null";
+        assert updatedEmail != null : "Updated email should not be null";
+        assert updatedAddress != null : "Updated address should not be null";
         Set<Tag> updatedTags = personToEdit.getTags();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);

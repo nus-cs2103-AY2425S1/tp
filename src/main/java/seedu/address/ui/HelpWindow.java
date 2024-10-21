@@ -27,8 +27,9 @@ public class HelpWindow extends UiPart<Stage> {
                 7. filter t/TAG1 TAG2 ... : Filters contacts by the specified tag(s).
                 8. find KEYWORD1 KEYWORD2 ... : Finds contacts with any of the given keywords in their name.
                 9. delete INDEX: Deletes the contact in the specified index.
-                10. clear: Clears all contacts (following a confirmation message).
-                11. exit: Exits the program.
+                10. sort: Sorts the contacts in the list by name.
+                11. clear: Clears all contacts (following a confirmation message).
+                12. exit: Exits the program.
             \n
             For more detailed help, refer to the PlanPerfect User Guide:""" + ' ' + USERGUIDE_URL;
 
