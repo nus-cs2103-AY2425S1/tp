@@ -14,11 +14,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -84,7 +86,7 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION = "buy raw materials";
     public static final int VALID_AMOUNT = -100;
     public static final String VALID_OTHER_PARTY = "Company ABC";
-    public static final String VALID_DATE = "15-10-2024";
+    public static final LocalDate VALID_DATE = LocalDate.parse("2024-10-15", Messages.DEFAULT_DATE_PARSER);
 
     public static final String VALID_DESCRIPTION_INPUT = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION;
     public static final String VALID_AMOUNT_INPUT = " " + PREFIX_AMOUNT + VALID_AMOUNT;
