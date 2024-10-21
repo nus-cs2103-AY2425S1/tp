@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ANDY;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ANDY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BETTY;
