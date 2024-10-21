@@ -46,7 +46,7 @@ public class TypicalPersons {
     public static final Tutor BENSON = new TutorBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withHours("2")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withSubjects("english").build();
     public static final Tutor CARL = new TutorBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withHours("3").build();
     public static final Tutee DANIEL = new TuteeBuilder().withName("Daniel Meier").withPhone("87652533")

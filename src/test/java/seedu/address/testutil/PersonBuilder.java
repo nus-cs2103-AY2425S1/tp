@@ -9,6 +9,7 @@ import seedu.address.model.person.Hours;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person; // TODO REMOVE THIS WHOLE CLASS SOON
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Subject;
 import seedu.address.model.person.Tutor;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -23,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_HOURS = "10";
+    public static final String DEFAULT_SUBJECT = "english";
 
     private Name name;
     private Phone phone;
@@ -30,6 +32,7 @@ public class PersonBuilder {
     private Address address;
     private Hours hours;
     private Set<Tag> tags;
+    private Set<Subject> subjects;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +44,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         hours = new Hours(DEFAULT_HOURS);
         tags = new HashSet<>();
+        subjects = new HashSet<>();
     }
 
     /**
@@ -53,6 +57,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         hours = personToCopy.getHours();
         tags = new HashSet<>(personToCopy.getTags());
+        subjects = new HashSet<>(personToCopy.getSubjects());
     }
 
     /**
@@ -104,7 +109,7 @@ public class PersonBuilder {
     }
     // TODO DEAD CODE, REMOVE
     public Person build() {
-        return new Tutor(name, phone, email, address, hours, tags);
+        return new Tutor(name, phone, email, address, hours, tags, subjects);
     }
 
 }
