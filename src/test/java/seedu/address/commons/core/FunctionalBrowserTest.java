@@ -14,6 +14,7 @@ public class FunctionalBrowserTest {
 
     @Test
     public void getDesktop_sameFunctionalBrowserInstance_success() {
+        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environments");
         FunctionalBrowser browser1 = FunctionalBrowser.getDesktop();
         FunctionalBrowser browser2 = FunctionalBrowser.getDesktop();
 
@@ -22,13 +23,14 @@ public class FunctionalBrowserTest {
 
     @Test
     public void launchUri_nullUrl_throwsNullPointerException() {
+        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environments");
         FunctionalBrowser browser = FunctionalBrowser.getDesktop();
         assertThrows(NullPointerException.class, () -> browser.launchUri(null));
     }
 
     @Test
     public void launchUri_invalidUri_throwsUriSyntaxException() {
-        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environment");
+        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environments");
 
         FunctionalBrowser browser = FunctionalBrowser.getDesktop();
         String expectedErrorMessage = "The URI specified is invalid.";
