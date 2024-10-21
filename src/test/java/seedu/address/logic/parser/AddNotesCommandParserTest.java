@@ -9,19 +9,20 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddNotesCommand;
+import seedu.address.model.person.Notes;
 public class AddNotesCommandParserTest {
     private AddNotesCommandParser parser = new AddNotesCommandParser();
-    private final String nonEmptyRemark = "Some remark.";
+    private final String nonEmptyNotes = "Some notes.";
     @Test
     public void parse_indexSpecified_success() {
         // have remark
         Index targetIndex = INDEX_FIRST_PERSON;
-        String userInput = targetIndex.getOneBased() + " " + PREFIX_NOTES + nonEmptyRemark;
-        AddNotesCommand expectedCommand = new AddNotesCommand(INDEX_FIRST_PERSON, nonEmptyRemark);
+        String userInput = targetIndex.getOneBased() + " " + PREFIX_NOTES + nonEmptyNotes;
+        AddNotesCommand expectedCommand = new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(nonEmptyNotes));
         assertParseSuccess(parser, userInput, expectedCommand);
         // no remark
         userInput = targetIndex.getOneBased() + " " + PREFIX_NOTES;
-        expectedCommand = new AddNotesCommand(INDEX_FIRST_PERSON, "");
+        expectedCommand = new AddNotesCommand(INDEX_FIRST_PERSON, new Notes(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
@@ -30,6 +31,6 @@ public class AddNotesCommandParserTest {
         // no parameters
         assertParseFailure(parser, AddNotesCommand.COMMAND_WORD, expectedMessage);
         // no index
-        assertParseFailure(parser, AddNotesCommand.COMMAND_WORD + " " + nonEmptyRemark, expectedMessage);
+        assertParseFailure(parser, AddNotesCommand.COMMAND_WORD + " " + nonEmptyNotes, expectedMessage);
     }
 }

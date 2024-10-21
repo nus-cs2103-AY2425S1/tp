@@ -20,7 +20,7 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withId("P12345").withWard("A1").withDiagnosis("Celiac Disease")
-            .withMedication("gluten-free diet").build();
+            .withMedication("gluten-free diet").withNotes("prone to falling").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withId("P54321").withWard("A2").withDiagnosis("Celiac Disease")
             .withMedication("gluten-free diet").build();
