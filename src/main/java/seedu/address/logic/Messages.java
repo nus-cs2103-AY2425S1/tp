@@ -48,8 +48,10 @@ public class Messages {
                 .append(person.getHours())
                 .append("\n Tags: ");
         person.getTags().forEach(builder::append);
+
         builder.append("\n Subjects: ");
         person.getSubjects().forEach(builder::append);
+
         return builder.toString();
     }
 
