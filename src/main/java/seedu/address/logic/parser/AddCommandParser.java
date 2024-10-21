@@ -52,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<StudyGroupTag> studyGroupList = ParserUtil.parseStudyGroups(argMultimap
                 .getAllValues(PREFIX_STUDY_GROUP_TAG));
 
-        Person person = new Person(name, email, gender, age, studyGroupList, detail);
+        Person person = new Person(name, email, gender, age, detail, studyGroupList);
 
         return new AddCommand(person);
     }
