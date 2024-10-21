@@ -35,7 +35,7 @@ public class Student {
      * Every field except assignmentList must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Set<Tag> tags, String remark) {
-        requireAllNonNull(name, phone, email, tags);
+        requireAllNonNull(name, phone, email, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,7 +46,7 @@ public class Student {
      * Creates a Student object with an AssignmentList
      */
     public Student(Name name, Phone phone, Email email, Set<Tag> tags, List<Assignment> assignmentList, String remark) {
-        requireAllNonNull(name, phone, email, tags);
+        requireAllNonNull(name, phone, email, tags, remark);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,22 +57,11 @@ public class Student {
 
     /**
      *
-     * Copy an existing student object
+     * Copy an existing student object and changing the remark attribute
      */
-    public Student(Student studentToCopy) {
-        requireAllNonNull(studentToCopy.getName(), studentToCopy.getPhone(), studentToCopy.getEmail(),
-                studentToCopy.getTags());
-        this.name = studentToCopy.getName();
-        this.phone = studentToCopy.getPhone();
-        this.email = studentToCopy.getEmail();
-        this.tags.addAll(studentToCopy.getTags());
-        this.assignmentList = studentToCopy.getAssignmentList();
-        this.remark = studentToCopy.getRemark();
-    }
-
     public Student(Student studentToCopy, String remark) {
         requireAllNonNull(studentToCopy.getName(), studentToCopy.getPhone(), studentToCopy.getEmail(),
-                studentToCopy.getTags());
+                studentToCopy.getTags(), remark);
         this.name = studentToCopy.getName();
         this.phone = studentToCopy.getPhone();
         this.email = studentToCopy.getEmail();
@@ -141,7 +130,8 @@ public class Student {
                 && phone.equals(otherStudent.phone)
                 && email.equals(otherStudent.email)
                 && tags.equals(otherStudent.tags)
-                && assignmentList.equals(otherStudent.assignmentList);
+                && assignmentList.equals(otherStudent.assignmentList)
+                && remark.equals(otherStudent.remark);
     }
 
     @Override
