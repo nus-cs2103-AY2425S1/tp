@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPets.BELLA;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,6 +25,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalOwners;
 
 public class AddressBookTest {
 
@@ -79,6 +81,35 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
             .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void hasLink_nullLink_throwsNullPointerException() {
+        Owner owner = TypicalOwners.ALICE;
+        Pet pet = BELLA;
+
+        assertThrows(NullPointerException.class, () -> new Link(owner, null));
+        assertThrows(NullPointerException.class, () -> new Link(null, pet));
+        assertThrows(NullPointerException.class, () -> new Link(null, null));
+    }
+
+    @Test
+    public void hasLink_linkNotInAddressBook_returnsFalse() {
+        Owner owner = TypicalOwners.ALICE;
+        Pet pet = BELLA;
+        Link link = new Link(owner, pet);
+
+        assertFalse(addressBook.hasLink(link));
+    }
+
+    @Test
+    public void hasLink_linkInAddressBook_returnsTrue() {
+        Owner owner = TypicalOwners.ALICE;
+        Pet pet = BELLA;
+        Link link = new Link(owner, pet);
+
+        addressBook.addLink(link);
+        assertTrue(addressBook.hasLink(link));
     }
 
     @Test

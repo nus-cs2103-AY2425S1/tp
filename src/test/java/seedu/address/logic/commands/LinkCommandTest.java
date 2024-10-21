@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_OWNER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_OWNER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PET;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -35,15 +37,18 @@ import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.OwnerBuilder;
 import seedu.address.testutil.PetBuilder;
-import seedu.address.testutil.TypicalIndexes;
 
 public class LinkCommandTest {
 
     @Test
     public void constructor_nullLink_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LinkCommand(TypicalIndexes.INDEX_FIRST_OWNER, null));
+        assertThrows(NullPointerException.class, () -> new LinkCommand(INDEX_FIRST_OWNER, null));
         assertThrows(NullPointerException.class, () -> new LinkCommand(null, new HashSet<Index>()));
         assertThrows(NullPointerException.class, () -> new LinkCommand(null, null));
+
+        // At least one pet index must be provided
+        assertThrows(IllegalArgumentException.class, () -> new LinkCommand(INDEX_FIRST_OWNER,
+            new HashSet<Index>()));
     }
 
     @Test
@@ -60,6 +65,21 @@ public class LinkCommandTest {
         assertEquals(String.format(LinkCommand.MESSAGE_SUCCESS, linkIndexes.size(), Messages.format(validOwner)),
             commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(link), modelStub.linksAdded);
+    }
+
+    @Test
+    public void execute_invalidIndex_throwsCommandException() {
+        Owner validOwner = new OwnerBuilder().build();
+        Pet validPet = new PetBuilder().build();
+        Link link = new Link(validOwner, validPet);
+
+        ModelStub modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX, () ->
+            new LinkCommand(INDEX_THIRD_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))).execute(modelStub));
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX, () ->
+            new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_THIRD_PET))).execute(modelStub));
     }
 
     @Test

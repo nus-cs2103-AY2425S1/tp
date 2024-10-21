@@ -41,6 +41,8 @@ public class LinkCommandParserTest {
         assertParseFailure(parser, "o15 " + PREFIX_TO + "t12", MESSAGE_INVALID_INDEX);
         assertParseFailure(parser, "s15 " + PREFIX_TO + "p12", MESSAGE_INVALID_INDEX);
 
+        assertParseFailure(parser, "o15 " + PREFIX_TO + "o12", String.format(MESSAGE_INVALID_LINK_COMMAND,
+            LinkCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "p15 " + PREFIX_TO + "o12", String.format(MESSAGE_INVALID_LINK_COMMAND,
             LinkCommand.MESSAGE_USAGE));
     }
