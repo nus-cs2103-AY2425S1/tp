@@ -40,6 +40,6 @@ public class LessonContainsNamesPredicate implements Predicate<Lesson> {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("keywords in lessons", keywords).toString();
     }
 }
