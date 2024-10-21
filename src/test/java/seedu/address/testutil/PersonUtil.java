@@ -26,6 +26,10 @@ public class PersonUtil {
         return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
+    public static String getAddShortCommand(Person person) {
+        return AddCommand.SHORT_COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
