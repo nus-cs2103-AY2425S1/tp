@@ -1,12 +1,12 @@
 package seedu.address.model.types.common;
 
-import seedu.address.model.types.person.Person;
-import seedu.address.model.types.event.Event;
-import seedu.address.model.types.event.exceptions.EventNotFoundException;
-import seedu.address.model.types.event.exceptions.DuplicateEventException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import seedu.address.model.types.event.Event;
+import seedu.address.model.types.event.exceptions.DuplicateEventException;
+import seedu.address.model.types.event.exceptions.EventNotFoundException;
+import seedu.address.model.types.person.Person;
 
 /**
  * Manages the relationship between events and persons.
@@ -26,14 +26,15 @@ public class PersonEventManager {
     }
 
     /* ============================== Person Methods ============================== */
+
     /**
      * Adds the person to the specified event.
      * @param event
-     * @return
+     * @param person
      * @throws EventNotFoundException
      */
-    public static void addPersonToEvent(Event event, Person person) throws EventNotFoundException{
-        if (eventPersonMap.containsKey(event) ) {
+    public static void addPersonToEvent(Event event, Person person) throws EventNotFoundException {
+        if (eventPersonMap.containsKey(event)) {
             eventPersonMap.get(event).add(person);
         } else if (!eventPersonMap.containsKey(event)) {
             throw new EventNotFoundException();
@@ -46,7 +47,7 @@ public class PersonEventManager {
      * @param person
      * @throws EventNotFoundException
      */
-    public static void removePersonFromEvent(Event event, Person person) throws EventNotFoundException{
+    public static void removePersonFromEvent(Event event, Person person) throws EventNotFoundException {
         if (eventPersonMap.containsKey(event)) {
             eventPersonMap.get(event).remove(person);
         } else if (!eventPersonMap.containsKey(event)) {
