@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -14,7 +15,9 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddPersonCommand;
+import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearEventsCommand;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -44,8 +47,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        String clearAllCommand = ClearCommand.COMMAND_WORD + " " + ClearAllCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(clearAllCommand) instanceof ClearCommand);
+
+        String clearEventsCommand = ClearCommand.COMMAND_WORD + " " + ClearEventsCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(clearEventsCommand) instanceof ClearCommand);
+
+        try {
+            parser.parseCommand(ClearCommand.COMMAND_WORD + " 3");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
     }
 
     @Test
