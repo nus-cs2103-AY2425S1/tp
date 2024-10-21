@@ -29,6 +29,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_STUDENT_ID_FORMAT = "Invalid Student ID format. It should be 9"
             + " characters with letters at the start and end, and digits in between (e.g., 'A1234567E').";
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
+    public static final String MESSAGE_EVENT_NOT_FOUND = "Attendance event '%1$s' not found.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

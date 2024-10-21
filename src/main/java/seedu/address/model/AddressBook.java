@@ -147,6 +147,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    public void removeAttendanceEvent(AttendanceEvent event) {
+        attendanceEvents.remove(event);
+    }
+
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

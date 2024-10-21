@@ -140,7 +140,7 @@ public class ModelManagerStub implements Model {
 
     @Override
     public void addAttendanceEvent(AttendanceEvent event) {
-        // You can leave this empty or throw an exception, depending on your testing needs
+
     }
 
     @Override
@@ -155,7 +155,7 @@ public class ModelManagerStub implements Model {
 
     @Override
     public void markStudentAttendance(String eventName, StudentId studentId, boolean isPresent) {
-        // Empty implementation
+
     }
 
     @Override
@@ -166,5 +166,10 @@ public class ModelManagerStub implements Model {
     @Override
     public List<Person> getStudentsByAttendance(String eventName, boolean isPresent) {
         return Collections.emptyList();
+    }
+
+    @Override
+    public void deleteAttendanceEvent(AttendanceEvent event) {
+
     }
 }

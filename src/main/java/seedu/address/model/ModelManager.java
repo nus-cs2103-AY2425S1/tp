@@ -4,20 +4,17 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-//import java.util.List;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-//import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.attendance.AttendanceEvent;
-//import seedu.address.model.attendance.AttendanceManager;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
 
@@ -181,6 +178,12 @@ public class ModelManager implements Model {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteAttendanceEvent(AttendanceEvent event) {
+        addressBook.removeAttendanceEvent(event);
+    }
+
 
     @Override
     public boolean equals(Object other) {
