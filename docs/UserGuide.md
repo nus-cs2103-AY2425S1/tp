@@ -70,9 +70,11 @@ BridalBuddy is a **desktop app for managing wedding contacts, optimized for use 
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+**Format:** `help`
 
-Format: `help`
+Entering the `help` command returns the following result on your screen:
+
+![help message](images/helpMessage.png)
 
 
 ### Adding a person: `add`
