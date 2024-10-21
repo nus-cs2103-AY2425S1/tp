@@ -30,6 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final List<JsonAdaptedEmergencyContact> emergencyContacts = new ArrayList<>();
     private final JsonAdaptedEmergencyContact emergencyContact;
     private final JsonAdaptedDoctor doctor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -62,6 +63,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        emergencyContacts
         emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact());
         doctor = new JsonAdaptedDoctor(source.getDoctor());
         tags.addAll(source.getTags().stream()
