@@ -26,7 +26,7 @@ public class RestoreCommand extends Command {
     public static final String MESSAGE_RESTORE_SUCCESS = "ClinicBuddy restored successfully from %s";
     public static final String MESSAGE_RESTORE_FAILURE = "Failed to restore ClinicBuddy from backup.";
 
-    private final Optional<Path> filePath;
+    protected final Optional<Path> filePath;
 
     /**
      * Creates a RestoreCommand to restore from the most recent backup or a specific file path.
@@ -66,4 +66,9 @@ public class RestoreCommand extends Command {
             throw new CommandException(MESSAGE_RESTORE_FAILURE, e);
         }
     }
+
+    public Optional<Path> getFilePath() {
+        return filePath;
+    }
+
 }
