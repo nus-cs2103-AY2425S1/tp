@@ -131,6 +131,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tags", tags)
+                .add("isPinned", String.valueOf(isPinned))
                 .toString();
     }
 
