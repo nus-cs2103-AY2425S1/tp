@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -32,6 +34,7 @@ public class DeleteCommand extends Command {
 
     private static final Stack<Person> deletedPersons = new Stack<>();
     private static final Stack<Policy> deletedPolicies = new Stack<>();
+    private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
 
     private final Index targetIndex;
     private final Name targetName;
@@ -79,6 +82,7 @@ public class DeleteCommand extends Command {
 
         if (targetIndex != null) {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                logger.log(Level.WARNING, "Invalid person index: " + targetIndex.getOneBased());
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -91,6 +95,7 @@ public class DeleteCommand extends Command {
                 Policy policyToDelete = personToDelete.getPolicies().get(policyIndex.getZeroBased());
                 deletedPolicies.push(policyToDelete);
                 personToDelete.removePolicy(policyToDelete);
+                model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_POLICY_SUCCESS, policyIndex
                         .getOneBased(), personToDelete.getName()));
             } else {
@@ -100,6 +105,7 @@ public class DeleteCommand extends Command {
                     return new CommandResult("Deletion cancelled.");
                 }
                 model.deletePerson(personToDelete);
+                model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
             }
         } else {
@@ -108,6 +114,7 @@ public class DeleteCommand extends Command {
                     .collect(Collectors.toList());
 
             if (personsWithName.isEmpty()) {
+                logger.log(Level.WARNING, "No person found with name: " + targetName);
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
             } else if (personsWithName.size() == 1) {
                 personToDelete = personsWithName.get(0);
@@ -117,6 +124,7 @@ public class DeleteCommand extends Command {
                     return new CommandResult("Deletion cancelled.");
                 }
                 model.deletePerson(personToDelete);
+                model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
             } else {
                 // Update the model's filtered list to show only the duplicates
@@ -131,29 +139,7 @@ public class DeleteCommand extends Command {
         }
     }
 
-    /**
-     * Undoes the last delete operation performed by the `DeleteCommand`.
-     * If a policy was deleted, it restores the policy to the person it was removed from.
-     * If a person was deleted, it restores the person to the address book.
-     *
-     * @param model The model to which the undo operation will be applied.
-     * @return A `CommandResult` indicating the result of the undo operation.
-     */
-    public static CommandResult undo(Model model) {
-        if (!deletedPolicies.isEmpty()) {
-            Policy policyToRestore = deletedPolicies.pop();
-            Person personToRestore = deletedPersons.peek();
-            List<Policy> policies = new ArrayList<>(personToRestore.getPolicies());
-            policies.add(policyToRestore);
-            personToRestore.setPolicies(policies);
-            return new CommandResult("Undo successful: Policy restored.");
-        } else if (!deletedPersons.isEmpty()) {
-            Person personToRestore = deletedPersons.pop();
-            model.addPerson(personToRestore);
-            return new CommandResult("Undo successful: " + personToRestore.getName() + " restored.");
-        }
-        return new CommandResult("No deletions to undo.");
-    }
+
 
     @Override
     public boolean equals(Object other) {
