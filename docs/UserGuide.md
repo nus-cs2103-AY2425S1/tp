@@ -113,24 +113,27 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons by name, NRIC, role, or tags: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons based on the specified criteria using the provided prefixes.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+**Format**: `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- The search is case-insensitive. e.g., `n/alex` will match `Alex`.
+- The order of the prefixes and keywords does not matter. e.g., `n/Alex nric/S1234567A` is equivalent to `nric/S1234567A n/Alex`.
+- Partial matches are not supported. e.g., `n/Al` will not match `Alex`.
+- Persons matching any of the provided criteria will be returned (i.e., `OR` search). For example, `n/Alex t/friend` will return persons whose name contains "Alex" or have the tag "friend".
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+### Prefixes:
+- `n/NAME`: Searches by name.
+- `nric/NRIC`: Searches by Singapore National ID.
+- `role/ROLE`: Searches by role (e.g., `role/patient` or `role/caregiver`).
+- `t/TAG`: Searches by tag (e.g., `t/friend`, `t/family`).
 
+### Examples:
+- `find n/John` returns `John`, `John Doe`.
+- `find n/Alex nric/S1234567A` returns persons whose name contains `Alex` or with NRIC `S1234567A`.
+- `find role/patient t/friend` returns all patients or persons with the tag `friend`.
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -192,13 +195,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action          | Format, Examples                                                                                                                                                                                            |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS nric/NRIC role/ROLE [t/TAG]…​` <br> e.g., `add n/John Doe nric/S8484131E p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/backPain role/patient` |
-| **Clear**       | `clear`                                                                                                                                                                                                     |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                         |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                 |
-| **Find**        | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                  |
-| **Find Person** | `findnric KEYWORD [MORE_KEYWORDS]`<br> e.g., `find S1234567D`                                                                                                                                               |
-| **List**        | `list`                                                                                                                                                                                                      |
-| **Help**        | `help`                                                                                                                                                                                                      |
+Action | Format, Examples
+--------|------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear** | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567A`
+**List** | `list`
+**Help** | `help`
