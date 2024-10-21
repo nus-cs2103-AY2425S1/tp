@@ -94,6 +94,10 @@ public class Nric {
         return value;
     }
 
+    public String maskNric() {
+        return "*****" + value.substring(value.length() - 4);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
