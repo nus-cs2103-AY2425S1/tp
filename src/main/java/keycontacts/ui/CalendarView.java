@@ -1,17 +1,16 @@
 package keycontacts.ui;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The calendar view
@@ -51,6 +50,9 @@ public class CalendarView extends UiPart<Region> {
     @FXML
     private HBox sun;
 
+    /**
+     * Default constructor to initialize the {@code CalendarView}
+     */
     public CalendarView() {
         super(FXML);
         addHBoxes();
@@ -114,9 +116,15 @@ public class CalendarView extends UiPart<Region> {
         }
     }
 
+    /**
+     * Updates the calendar view with pre-inputted data
+     * TODO change this method to take some data as input to update the calendar
+     */
     public void update() {
-        createBlock(0, LocalTime.of(1, 0, 0), LocalTime.of(1, 30, 0),
+        createBlock(2, LocalTime.of(1, 0, 0), LocalTime.of(1, 30, 0),
                 Color.BLUE);
+        createBlock(2, LocalTime.of(1, 30, 0), LocalTime.of(5, 45, 0),
+                Color.YELLOW);
         createBlock(0, LocalTime.of(3, 0, 0), LocalTime.of(3, 30, 0),
                 Color.BLUE);
         createBlock(0, LocalTime.of(2, 0, 0), LocalTime.of(2, 30, 0),
@@ -210,6 +218,9 @@ public class CalendarView extends UiPart<Region> {
             return paddingWidth + blockWidth;
         }
 
+        /**
+         * Returns a padding rectangle based on distance to the {@code previousTimeBlock}
+         */
         public Node createPadding(TimeBlock previousTimeBlock) {
             this.paddingWidth = getDistance(previousTimeBlock);
             this.padding = new Rectangle();
@@ -218,6 +229,9 @@ public class CalendarView extends UiPart<Region> {
             return this.padding;
         }
 
+        /**
+         * Returns a block rectangle based on the duration of this {@code TimeBlock} with the provided color
+         */
         public Node createBlock(Color color) {
             this.blockWidth = getDuration();
             this.block = new Rectangle();
