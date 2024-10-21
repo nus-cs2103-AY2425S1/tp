@@ -26,7 +26,6 @@ public class LinkCommandParser implements Parser<LinkCommand> {
   public LinkCommand parse(String args) throws ParseException {
     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TO);
     String ownerStr = argMultimap.getPreamble();
-    System.out.println(ownerStr);
 
     if (
       !argMultimap.getValue(PREFIX_TO).isPresent() ||

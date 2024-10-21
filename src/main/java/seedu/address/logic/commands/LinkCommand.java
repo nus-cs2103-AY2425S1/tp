@@ -60,7 +60,6 @@ public class LinkCommand extends Command{
     List<Owner> ownerList = model.getFilteredOwnerList();
     List<Pet> petList = model.getFilteredPetList();
 
-    System.out.println(ownerList.size() + " " + ownerIndex.getOneBased());
     if (ownerIndex.getZeroBased() >= ownerList.size()) {
       throw new CommandException(
         Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX

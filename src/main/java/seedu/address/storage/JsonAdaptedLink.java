@@ -1,13 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -15,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.link.Link;
-import seedu.address.model.link.Linkable;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.pet.Pet;
 
@@ -29,7 +20,6 @@ class JsonAdaptedLink {
 
     private final String from;
     private final String to;
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedLink} with the given link details.
@@ -57,7 +47,7 @@ class JsonAdaptedLink {
         if (from == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "from"));
         }
-        FilteredList<Owner> filteredOwners = owners.filtered(owner -> owner.getUniqueID() == from);
+        FilteredList<Owner> filteredOwners = owners.filtered(owner -> owner.getUniqueID().equals(from));
         if (filteredOwners.size() == 0) {
             throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORAMT, from));
         }
@@ -65,7 +55,7 @@ class JsonAdaptedLink {
         if (to == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "to"));
         }
-        FilteredList<Pet> filteredPets = pets.filtered(pet -> pet.getUniqueID() == to);
+        FilteredList<Pet> filteredPets = pets.filtered(pet -> pet.getUniqueID().equals(to));
         if (filteredPets.size() == 0) {
             throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORAMT, to));
         }

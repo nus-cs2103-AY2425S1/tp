@@ -41,7 +41,8 @@ class JsonSerializableAddressBook {
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
                                        @JsonProperty("pets") List<JsonAdaptedPet> pets,
-                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners) {
+                                       @JsonProperty("owners") List<JsonAdaptedOwner> owners,
+                                       @JsonProperty("links") List<JsonAdaptedLink> links) {
         if (persons != null) {
             this.persons.addAll(persons);
         }
@@ -50,6 +51,9 @@ class JsonSerializableAddressBook {
         }
         if (owners != null) {
             this.owners.addAll(owners);
+        }
+        if (links != null) {
+            this.links.addAll(links);
         }
     }
 
@@ -62,6 +66,7 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         owners.addAll(source.getOwnerList().stream().map(JsonAdaptedOwner::new).collect(Collectors.toList()));
         pets.addAll(source.getPetList().stream().map(JsonAdaptedPet::new).collect(Collectors.toList()));
+        links.addAll(source.getLinkList().stream().map(JsonAdaptedLink::new).collect(Collectors.toList()));
     }
 
     /**
