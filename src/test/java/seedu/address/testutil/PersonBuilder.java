@@ -68,6 +68,7 @@ public class PersonBuilder {
      * Sets the {@code Role} of the {@code Person} that we are building.
      */
     public PersonBuilder withRole(String role) {
+        role = role.toLowerCase();
         this.role = new Role(role);
         return this;
     }
