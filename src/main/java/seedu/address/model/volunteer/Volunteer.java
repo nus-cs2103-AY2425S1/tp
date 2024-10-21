@@ -36,6 +36,7 @@ public class Volunteer {
      * @param availableDate The date the volunteer is available.
      * @param startTimeAvailability The start time of the volunteer's availability.
      * @param endTimeAvailability The end time of the volunteer's availability.
+     * @param involvedIn The list of events the volunteer has.
      */
     public Volunteer(Name name, Phone phone, Email email, Date availableDate,
                      Time startTimeAvailability, Time endTimeAvailability, List<String> involvedIn) {
@@ -92,6 +93,9 @@ public class Volunteer {
         return endTimeAvailability;
     }
 
+    public ObservableList<String> getInvolvedIn() {
+        return involvedIn;
+    }
     /**
      * Returns true if both volunteers have the same name.
      * This defines a weaker notion of equality between two volunteers.
