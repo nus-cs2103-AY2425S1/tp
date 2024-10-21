@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import org.junit.jupiter.api.Test;
 
