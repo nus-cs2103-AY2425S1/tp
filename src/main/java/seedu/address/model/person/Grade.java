@@ -11,12 +11,12 @@ import java.util.Objects;
  */
 public class Grade {
 
-    private static final String MESSAGE_GRADE_CONSTRAINTS =
+    public static final String MESSAGE_GRADE_CONSTRAINTS =
             "Grades should be numeric values between 0 and 100 (in percentage), including decimals.";
-    private static final String MESSAGE_TEST_NAME_CONSTRAINTS =
+    public static final String MESSAGE_TEST_NAME_CONSTRAINTS =
             "Test names should be at least 3 characters long and "
                     + "contain only alphanumeric characters, spaces, hyphens (-), or underscores (_).";
-    private static final String MESSAGE_WEIGHTAGE_CONSTRAINTS =
+    public static final String MESSAGE_WEIGHTAGE_CONSTRAINTS =
             "Weightage should be a numeric value between 0 (exclusive) and 100 (inclusive).";
 
 
