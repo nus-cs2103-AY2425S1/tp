@@ -11,12 +11,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.NameMatchesNamePredicate;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a person identified from the address book, using index or keyword.
  */
 public class DeleteCommand extends Command {
 
@@ -64,6 +63,13 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * Performs delete command logic when the input is an index.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return the person deleted
+     * @throws CommandException if an invalid index is given
+     */
     public Person deleteWithIndex(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (lastShownList.isEmpty()) {
@@ -81,6 +87,13 @@ public class DeleteCommand extends Command {
         return personToDelete;
     }
 
+    /**
+     * Performs delete command logic when the input is a {@code String}.
+     *
+     * @param model {@code Model} which the command should operate on
+     * @return the person deleted
+     * @throws CommandException if the list filtered using {@code targetKeyword} is empty
+     */
     public Person deleteWithKeyword(Model model) throws CommandException {
         NameMatchesNamePredicate predicate = new NameMatchesNamePredicate(
                 Arrays.asList(this.targetKeyword));
