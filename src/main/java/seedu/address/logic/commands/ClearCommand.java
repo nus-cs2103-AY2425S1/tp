@@ -18,7 +18,7 @@ public class ClearCommand extends Command {
     private static final boolean requiresConfirmation = true;
 
     @Override
-    public CommandResult execute(Model model) {
+    protected CommandResult execute(Model model) {
         requireNonNull(model);
         model.setAddressBook(new AddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
