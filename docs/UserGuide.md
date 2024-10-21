@@ -74,8 +74,6 @@ Shows a message explaining how to access the help page.
 
 Adds a student to the address book.
 
-![Adds a student](images/addStudent.png)
-
 **Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <box type="tip" seamless>
@@ -133,9 +131,6 @@ Examples:
 
 Deletes the specified student from the address book.
 
-![Deletes a student](images/deleteStudent.png)
-
-
 **Format:** `deleteStu INDEX`
 
 * Deletes the student at the specified `INDEX`.
@@ -153,8 +148,6 @@ Easily configure tutorial sessions with simplified commands:
 
 Add a new tutorial session with a specified name and ID.
 
-![Adds tutorial](images/addTutorial.png)
-
 **Command format:** `addTut tn/TUTORIAL_NAME id/TUTORIAL_ID`  
 **Example:** `addTut tn/CS2103T id/1001`
 
@@ -163,8 +156,6 @@ Maintain accurate records of student attendance across various tutorial classes:
 ### Record Attendance
 
 Record a student's attendance in a specific tutorial class, with an optional attendance date (defaults to today if not specified).
-
-![Records attendance](images/recordAttendance.png)
 
 **Command format:** `attend s/STUDENT_ID c/TUTORIAL_CLASS [d/ATTENDANCE_DATE]`
 
@@ -175,15 +166,11 @@ Streamline the handling of assignments from creation to tracking:
 
 Create a new assignment with a defined name, due date, and time.
 
-![Adds an assignment](images/AddAssignment.png)
-
 **Command format:** `addAsg n/ASSIGNMENT_NAME d/DUEDATETIME`
 
 ### List All Current Assignments
 
 Display a list of all assignments.
-
-![Lists all assignments](images/listAssignment.png)
 
 **Command format:** `listAsg`
 
@@ -191,26 +178,19 @@ Display a list of all assignments.
 
 Toggle the completion status of an assignment.
 
-![Mark the completion status of an assignment](images/markAssignment.png)
-
 **Command to mark as completed:** `markAsg <index> n/ASSIGNMENT_NAME`
 
-![Unmark the completion status of an assignment](images/unmarkAssignment.png)
 **Command to unmark as completed:** `unmarkAsg <index> n/ASSIGNMENT_NAME`
 
 ### Check Assignment Completion Statuses
 
 Verify the completion status of specific assignments across all students.
 
-![Check the completion status of an assignment](images/assignmentCompletion.png)
-
 **Command format:** `checkAsg n/ASSIGNMENT_NAME`
 
 ### Delete Assignment
 
 Remove an assignment from the system using its title name.
-
-![Delete an assignment](images/deleteAssignment.png)
 
 **Command format:** `deleteAsg [title name]`
 
