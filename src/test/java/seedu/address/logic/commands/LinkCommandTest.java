@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -41,10 +42,31 @@ public class LinkCommandTest {
     }
 
     @Test
+    public void execute_samePerson() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LinkCommand linkCommand = new LinkCommand(BENSON.getNric(), BENSON.getNric());
+        assertCommandFailure(linkCommand, model, LinkCommand.SAME_PERSON);
+    }
+
+    @Test
     public void execute_nullPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         LinkCommand linkCommand = new LinkCommand(new Nric(VALID_NRIC_UNIQUE), ALICE.getNric());
         assertCommandFailure(linkCommand, model, LinkCommand.PERSON_NOT_FOUND);
+    }
+
+    @Test
+    public void execute_invalidRoleCaregiver() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LinkCommand linkCommand = new LinkCommand(BENSON.getNric(), ALICE.getNric());
+        assertCommandFailure(linkCommand, model, LinkCommand.ROLE_NOT_MATCH);
+    }
+
+    @Test
+    public void execute_invalidRolePatient() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LinkCommand linkCommand = new LinkCommand(ELLE.getNric(), BENSON.getNric());
+        assertCommandFailure(linkCommand, model, LinkCommand.ROLE_NOT_MATCH);
     }
 
     @Test
