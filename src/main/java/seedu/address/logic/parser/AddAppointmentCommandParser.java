@@ -24,17 +24,16 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddAppointmentCommand parse(String args) throws ParseException {
-        String[] indexMultimapSplit = args.split(" ", 2);
+        String[] indexMultimapSplit = args.trim().split(" ", 2);
         // Ensure the input can be split into exactly two parts (index and the rest)
         if (indexMultimapSplit.length < 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(indexMultimapSplit[1], PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END);
+                ArgumentTokenizer.tokenize(" " + indexMultimapSplit[1], PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END);
         if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END)
-                || !argMultimap.getPreamble().isEmpty()
-                || indexMultimapSplit.length < 2) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE));
         }
@@ -56,7 +55,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         if (endDateTime.isBefore(startDateTime)) {
             throw new ParseException("The end time must be after the start time.");
         }
-        Appointment appointment = new Appointment(appointmentDescription, startDateTime, endDateTime, null);
+        Appointment appointment = new Appointment(appointmentDescription, startDateTime, endDateTime);
         return new AddAppointmentCommand(appointment, index);
     }
 
