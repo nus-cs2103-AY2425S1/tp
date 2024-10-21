@@ -152,8 +152,6 @@ public class MainWindow extends UiPart<Stage> {
      * Populates the tag list panel in the GUI with the tags available in alphabetical order.
      */
     private void populateTagsList() {
-        logger.fine("Updating tag list with: " + logic.getListOfCurrentTags());
-
         tagListPanel.updateTagList(logic.getListOfCurrentTags());
     }
 
