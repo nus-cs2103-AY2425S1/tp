@@ -22,9 +22,8 @@ import seedu.address.ui.PersonDetails;
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
-
+    private static Stage currentStage;
     private final Index index;
-    private static Stage currentStage; // Static to ensure only one window at a time
 
     /**
      * Constructs a {@code ViewCommand} with the specified {@code Index}.
