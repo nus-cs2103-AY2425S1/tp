@@ -20,8 +20,14 @@ public class ClientTypeContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         Set<ClientType> personClientTypes = person.getClientTypes();
+
+        // If the client type list is empty, return false -> no client type to match (Invalid Client Type)
+        if (this.keywords.isEmpty()) {
+            return false;
+        }
+
         return keywords.stream()
-                .anyMatch(keyword -> personClientTypes.stream().anyMatch(clientType ->
+                .allMatch(keyword -> personClientTypes.stream().anyMatch(clientType ->
                         clientType.clientTypeName.toLowerCase().startsWith(keyword.toLowerCase()))
                 );
     }
