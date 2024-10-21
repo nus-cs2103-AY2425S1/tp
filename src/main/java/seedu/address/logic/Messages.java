@@ -48,6 +48,9 @@ public class Messages {
         // Append the GradeList (exams and scores)
         builder.append("; Exams: ")
                 .append(person.getGradeList());
+        // Append the AttendanceList (dates and attendance)
+        builder.append("; Attendances: ")
+                .append(person.getAttendanceList());
         return builder.toString();
     }
 

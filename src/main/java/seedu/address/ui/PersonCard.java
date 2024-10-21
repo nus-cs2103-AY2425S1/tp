@@ -44,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     private Label grades;
     @FXML
     private Label overallGrade;
+    @FXML
+    private Label attendances;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,6 +63,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         grades.setText(formatGrades(person.getGradeList().toString()));
         overallGrade.setText(person.getGradeList().getOverallGrade());
+        attendances.setText(formatAttendances(person.getAttendanceList().toString())); // Format and set attendances
     }
 
     /**
@@ -68,5 +71,12 @@ public class PersonCard extends UiPart<Region> {
      */
     private String formatGrades(String gradeList) {
         return "Grades:\n" + gradeList;
+    }
+
+    /**
+     * Formats the attendance list to display properly in the UI.
+     */
+    private String formatAttendances(String attendanceList) {
+        return "Attendances:\n" + (attendanceList.isEmpty() ? "No attendance records" : attendanceList);
     }
 }
