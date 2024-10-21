@@ -31,7 +31,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedEmergencyContact> emergencyContacts = new ArrayList<>();
-    private final JsonAdaptedEmergencyContact emergencyContact;
     private final JsonAdaptedDoctor doctor;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -41,14 +40,14 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("emergency contact") JsonAdaptedEmergencyContact emergencyContact,
+            @JsonProperty("emergency contacts") List<JsonAdaptedEmergencyContact> emergencyContacts,
             @JsonProperty("doctor") JsonAdaptedDoctor doctor,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.emergencyContact = emergencyContact;
+        this.emergencyContacts.addAll(emergencyContacts);
         this.doctor = doctor;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -63,8 +62,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        emergencyContacts
-        emergencyContact = new JsonAdaptedEmergencyContact(source.getEmergencyContact());
+        emergencyContacts.addAll(source.getEmergencyContacts().stream()
+                .map(JsonAdaptedEmergencyContact::new)
+                .collect(Collectors.toList()));
         doctor = new JsonAdaptedDoctor(source.getDoctor());
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -77,6 +77,11 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        final List<EmergencyContact> personEmergencyContacts = new ArrayList<>();
+        for (JsonAdaptedEmergencyContact emergencyContact : emergencyContacts) {
+            personEmergencyContacts.add(emergencyContact.toModelType());
+        }
+
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
@@ -114,18 +119,20 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (emergencyContact == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "EmergencyContact"));
-        }
-        final EmergencyContact modelEmergencyContact = emergencyContact.toModelType();
+        // How to check that emergency contacts is present?
+//        if (emergencyContacts == null) {
+//            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+//                    EmergencyContact.class.getSimpleName()));
+//        }
 
+        final Set<EmergencyContact> modelEmergencyContacts = new HashSet<>(personEmergencyContacts);
         if (doctor == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Doctor"));
         }
         final Doctor modelDoctor = doctor.toModelType();
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmergencyContact, modelDoctor,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelEmergencyContacts, modelDoctor,
                             modelTags);
     }
 
