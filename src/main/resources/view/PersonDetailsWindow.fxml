@@ -2,11 +2,9 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 
 <fx:root title="Detail Information" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17"
          xmlns:fx="http://javafx.com/fxml/1">
@@ -35,14 +33,6 @@
                     <Label text="Address:" GridPane.rowIndex="3" GridPane.columnIndex="0"
                            style="-fx-text-fill: white;"/>
                     <TextField fx:id="addressField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
-                    <!-- Save and Cancel Buttons -->
-                    <HBox spacing="10" alignment="CENTER_RIGHT" GridPane.rowIndex="4" GridPane.columnIndex="1">
-                        <children>
-                            <Button text="Save" onAction="#handleSave"/>
-                            <Button text="Cancel" onAction="#handleCancel"/>
-                        </children>
-                    </HBox>
                 </children>
                 <padding>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0"/>
