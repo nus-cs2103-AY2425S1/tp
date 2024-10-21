@@ -46,7 +46,6 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        category = personToCopy.getCategory();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
@@ -102,7 +101,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, category, phone, email, address, tags);
+        return null;
     }
 
 }

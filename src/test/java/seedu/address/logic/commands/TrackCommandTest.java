@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalContacts.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,9 +24,11 @@ public class TrackCommandTest {
     @Test
     public void execute() {
         TrackCommand command = new TrackCommand(STUDENT_PREDICATE);
+        expectedModel.updateFilteredPersonList(STUDENT_PREDICATE);
+
         assertCommandSuccess(command, model,
                 String.format(MESSAGE_PERSONS_LISTED_OVERVIEW,
-                        model.getFilteredPersonList().size()), expectedModel);
+                        expectedModel.getFilteredPersonList().size()), expectedModel);
     }
 
     @Test

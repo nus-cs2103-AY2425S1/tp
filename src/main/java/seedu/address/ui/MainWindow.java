@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -32,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
     private SplitPane splitPane;
     private ContactDisplay contactDisplay;
+    private ScrollPane scrollableContactDisplay;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -117,10 +119,12 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         contactDisplay = new ContactDisplay();
+        contactDisplay.showHelpDisplay();
+        scrollableContactDisplay = contactDisplay.getScrollPane();
 
         splitPane = new SplitPane();
-        splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay);
-        splitPane.setDividerPositions(0.7);
+        splitPane.getItems().addAll(personListPanel.getRoot(), contactDisplay.getRoot());
+        splitPane.setDividerPositions(0.6);
 
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(splitPane);
@@ -166,6 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             helpWindow.focus();
         }
+        contactDisplay.showHelpDisplay();
     }
 
     void show() {

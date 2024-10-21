@@ -1,0 +1,39 @@
+/* ContactDisplay.css */
+
+#scrollPane {
+    -fx-background-color: #B5D4F5;
+}
+
+.name-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-font-family: 'Garamond';
+}
+
+.category-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Garamond';
+}
+
+.phone-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Garamond';
+}
+
+.email-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Garamond';
+}
+
+.address-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Garamond';
+}
+
+#tags .label {
+    -fx-background-color: #EF7C00;
+    -fx-padding: 5px;
+    -fx-hgap: 5px;
+    -fx-vgap: 5px;
+    -fx-font-family: 'Garamond';
+}

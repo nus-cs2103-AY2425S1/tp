@@ -15,6 +15,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Company;
+import seedu.address.model.person.company.Industry;
+import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,20 +33,29 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String studentID; // Specific to Student
+    private final String industry; // Specific to Company
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("category") String category,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+    public JsonAdaptedPerson(@JsonProperty("name") String name,
+                             @JsonProperty("category") String category,
+                             @JsonProperty("phone") String phone,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("address") String address,
+                             @JsonProperty("studentID") String studentID,
+                             @JsonProperty("industry") String industry,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.category = category;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.studentID = studentID;
+        this.industry = industry;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,13 +66,24 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        category = source.getCategory();
+        category = source instanceof Student ? "Student" : "Company";
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        if (source instanceof Student) {
+            studentID = ((Student) source).getStudentID().value;
+            industry = null; // Not applicable for Student
+        } else if (source instanceof Company) {
+            studentID = null; // Not applicable for Company
+            industry = ((Company) source).getIndustry().value;
+        } else {
+            studentID = null;
+            industry = null;
+        }
     }
 
     /**
@@ -80,8 +104,6 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
-
-        final String modelCategory = category;
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -108,7 +130,30 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelCategory, modelPhone, modelEmail, modelAddress, modelTags);
+
+        if ("Student".equalsIgnoreCase(category)) {
+            if (studentID == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        StudentID.class.getSimpleName()));
+            }
+            if (!StudentID.isValidID(studentID)) {
+                throw new IllegalValueException(StudentID.MESSAGE_CONSTRAINTS);
+            }
+            final StudentID modelStudentID = new StudentID(studentID);
+            return new Student(modelName, modelStudentID, modelPhone, modelEmail, modelAddress, modelTags);
+        } else if ("Company".equalsIgnoreCase(category)) {
+            if (industry == null) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                        Industry.class.getSimpleName()));
+            }
+            if (!Industry.isValidIndustry(industry)) {
+                throw new IllegalValueException(Industry.MESSAGE_CONSTRAINTS);
+            }
+            final Industry modelIndustry = new Industry(industry);
+            return new Company(modelName, modelIndustry, modelPhone, modelEmail, modelAddress, modelTags);
+        }
+
+        throw new IllegalValueException("Unknown category for Person: " + category);
     }
 
 }

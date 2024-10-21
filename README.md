@@ -2,9 +2,9 @@
 
 ![Ui](docs/images/Ui.png)
 
-# UniNet
+# AdmiNUS
 
-UniNet helps international students in NUS manage detail of their contacts. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
+AdmiNUS helps international students in NUS manage detail of their contacts. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
 
 # Features List:
 
@@ -15,7 +15,7 @@ UniNet helps international students in NUS manage detail of their contacts. It i
 
 ## Add contacts
 
-Purpose: Allows the user to add a new contactMV to their list.
+Purpose: Allows the user to add a new contact to their list.
 
 Command format: `add NAME PHONE_NUMBER [EMAIL] [TAG]`
 
@@ -29,7 +29,7 @@ Example commands:
 
 Purpose: Display all saved contacts in a single view.
 
-Command format: `all`
+Command format: `list`
 
 For each parameter:
 

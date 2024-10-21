@@ -19,7 +19,7 @@ public class TrackCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Tracks and lists all persons who are in the category of "
+            + ": Tracks and lists all contacts who are in the category of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: CATEGORY (must be one of the predefined categories (student, company))\n"
             + "Example: " + COMMAND_WORD + " student";

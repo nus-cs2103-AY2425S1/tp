@@ -11,6 +11,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Company;
+import seedu.address.model.person.company.Industry;
+import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,30 +23,30 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Person(new Name("Alex Yeoh"), "student", new Phone("87438807"),
-                new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Person(new Name("Bernice Yu"), "company", new Phone("99272758"),
-                new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Person(new Name("Charlotte Oliveiro"), "student",
-                new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Person(new Name("David Li"), "company", new Phone("91031282"),
-                new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Person(new Name("Irfan Ibrahim"), "student", new Phone("92492021"),
-                new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Person(new Name("Roy Balakrishnan"), "company", new Phone("92624417"),
-                new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Student(new Name("Alex Yeoh"), new StudentID("A1234567B"), new Phone("87438807"),
+                    new Email("alexyeoh@example.com"),
+                    new Address("Blk 30 Geylang Street 29, #06-40"),
+                    getTagSet("year1")),
+            new Company(new Name("Apple"), new Industry("Technology"), new Phone("99272758"),
+                    new Email("contact@apple.com"),
+                    new Address("1 Infinite Loop, Cupertino, CA"),
+                    getTagSet("partner", "technology")),
+            new Student(new Name("Charlotte Oliveiro"), new StudentID("A2345678C"),
+                    new Phone("93210283"), new Email("charlotte@example.com"),
+                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                    getTagSet("paidFee")),
+            new Company(new Name("National University of Singapore"), new Industry("Education"), new Phone("91031282"),
+                    new Email("info@nus.edu.sg"),
+                    new Address("21 Lower Kent Ridge Rd, Singapore"),
+                    getTagSet("education", "research")),
+            new Student(new Name("Irfan Ibrahim"), new StudentID("A3456789D"), new Phone("92492021"),
+                    new Email("irfan@example.com"),
+                    new Address("Blk 47 Tampines Street 20, #17-35"),
+                    getTagSet("year2")),
+            new Company(new Name("Tesla Motors"), new Industry("Automotive"), new Phone("92624417"),
+                    new Email("contact@tesla.com"),
+                    new Address("3500 Deer Creek Road, Palo Alto, CA"),
+                    getTagSet("innovation"))
         };
     }
 
@@ -62,5 +66,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
 }

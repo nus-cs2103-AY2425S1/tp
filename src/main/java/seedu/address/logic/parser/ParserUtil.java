@@ -13,6 +13,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Industry;
+import seedu.address.model.person.student.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -51,15 +53,33 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code String}.
+     * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code category} is invalid.
+     * @throws ParseException if the given {@code name} is invalid.
      */
-    public static String parseCategory(String category) throws ParseException {
-        requireNonNull(category);
-        String trimmedCategory = category.trim();
-        return trimmedCategory;
+    public static StudentID parseStudentID(String studentID) throws ParseException {
+        requireNonNull(studentID);
+        String trimmedID = studentID.trim();
+        if (!StudentID.isValidID(trimmedID)) {
+            throw new ParseException(StudentID.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentID(trimmedID);
+    }
+
+    /**
+     * Parses a {@code String industry} into a {@code Industry}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code industry} is invalid.
+     */
+    public static Industry parseIndustry(String industry) throws ParseException {
+        requireNonNull(industry);
+        String trimmedIndustry = industry.trim();
+        if (!Industry.isValidIndustry(trimmedIndustry)) {
+            throw new ParseException(Industry.MESSAGE_CONSTRAINTS);
+        }
+        return new Industry(trimmedIndustry);
     }
 
     /**
