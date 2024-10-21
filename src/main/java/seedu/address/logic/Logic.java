@@ -36,7 +36,8 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the list of daily meetings across a week */
     ObservableList<Meeting> getWeeklyMeetingList();
-
+    /** Returns an unmodifiable view of the list of daily meetings across a week */
+    ObservableList<Meeting> getCurrentMeetingList();
     /**
      * Returns the user prefs' address book file path.
      */
