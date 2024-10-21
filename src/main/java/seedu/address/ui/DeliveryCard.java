@@ -29,6 +29,8 @@ public class DeliveryCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label deliveryId;
+    @FXML
     private Label itemName;
     @FXML
     private Label address;
@@ -52,6 +54,7 @@ public class DeliveryCard extends UiPart<Region> {
         super(FXML);
         this.delivery = delivery;
         id.setText(displayedIndex + ". ");
+        deliveryId.setText(delivery.getDeliveryId().toString());
         address.setText(delivery.getAddress().toString());
         itemName.setText(delivery.getItemName().toString());
         cost.setText(delivery.getCost().toString());
