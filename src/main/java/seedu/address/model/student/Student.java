@@ -126,6 +126,14 @@ public class Student extends Person {
         return attendanceRecords;
     }
 
+    public String getAttendanceRecordsString() {
+        StringBuilder sb = new StringBuilder();
+        for (AttendanceRecord record : attendanceRecords) {
+            sb.append(record.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 
     /**
      * Adds an assignment
