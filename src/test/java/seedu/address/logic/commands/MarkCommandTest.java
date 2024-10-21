@@ -12,9 +12,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
@@ -58,7 +60,7 @@ public class MarkCommandTest {
     }
 
     /**
-     * Mark a person using index outside the displayed list.
+     * Mark a person that has already been marked.
      */
     @Test
     public void execute_tutorialAlreadyMarked_failure() {
@@ -93,8 +95,8 @@ public class MarkCommandTest {
         List<Person> editedPersonList = new ArrayList<>();
         // Check all persons are edited
         for (Person person : model.getFilteredPersonList()) {
-            Set<Tutorial> newTutorials = new HashSet<>(person.getTutorials());
-            newTutorials.add(tutorialToBeAdded);
+            Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(person.getTutorials());
+            newTutorials.put(tutorialToBeAdded, AttendanceStatus.PRESENT);
             Person expectedEditedPerson = new Person(
                     person.getName(),
                     person.getStudentId(),
@@ -132,8 +134,8 @@ public class MarkCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         // Check person is edited
-        Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        newTutorials.add(tutorialToBeAdded);
+        Map<Tutorial, AttendanceStatus> newTutorials = new HashMap<>(personToEdit.getTutorials());
+        newTutorials.put(tutorialToBeAdded, AttendanceStatus.PRESENT);
         Person expectedEditedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),

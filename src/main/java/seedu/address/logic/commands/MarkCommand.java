@@ -1,14 +1,15 @@
 package seedu.address.logic.commands;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
@@ -31,6 +32,7 @@ public class MarkCommand extends Command {
     public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
     public static final String MESSAGE_MARK_UNNECESSARY =
             "Person: %1$s is already marked as present for Tutorial: %2$s";
+
     private final List<Index> indexList = new ArrayList<>();
     private final Tutorial tutorial;
     private final boolean shouldMarkAll;
@@ -78,11 +80,12 @@ public class MarkCommand extends Command {
      * @param personToEdit person whose attendance will be marked
      */
     private Person generateMarkedPerson(Person personToEdit) throws CommandException {
-        Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        if (!newTutorials.add(tutorial)) {
+        Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
+        if (newTutorials.get(tutorial) == AttendanceStatus.PRESENT) {
             throw new CommandException(
                     String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
         }
+        newTutorials.put(tutorial, AttendanceStatus.PRESENT);
 
         return new Person(
                 personToEdit.getName(),

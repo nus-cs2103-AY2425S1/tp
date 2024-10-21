@@ -7,12 +7,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -47,7 +49,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Set<Tutorial> tutorialList = new HashSet<>();
+        Map<Tutorial, AttendanceStatus> tutorialList = new LinkedHashMap<>();
+        for (int i = 1; i <= Person.MAXIMUM_TUTORIALS; i++) {
+            Tutorial tutorial = new Tutorial(String.valueOf(i));
+            tutorialList.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
+        }
 
         Person person = new Person(name, studentId, phone, email, tagList, tutorialList);
 

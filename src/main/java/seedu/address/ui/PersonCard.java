@@ -61,13 +61,10 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        IntStream.rangeClosed(1, 10).forEach(index -> {
+        IntStream.rangeClosed(1, Person.MAXIMUM_TUTORIALS).forEach(index -> {
             Label tutorialLabel = new Label(String.valueOf(index));
             tutorialLabel.getStyleClass().add("tutorial-label");
-
-            if (person.hasAttendedTutorial(String.valueOf(index))) {
-                tutorialLabel.getStyleClass().add("tutorial-attended");
-            }
+            tutorialLabel.getStyleClass().add(person.getAttendanceCssClass(String.valueOf(index)));
             tutorials.getChildren().add(tutorialLabel);
         });
     }

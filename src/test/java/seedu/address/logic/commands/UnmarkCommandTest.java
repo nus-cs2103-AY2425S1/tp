@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -10,6 +11,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -17,9 +21,11 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
@@ -57,28 +63,50 @@ public class UnmarkCommandTest {
     public void execute_invalidTutorialNumber_failure() {
         UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON,
                 new Tutorial("1"));
-        assertCommandFailure(unmarkCommand, model,
-                String.format(UnmarkCommand.MESSAGE_UNMARK_UNNECESSARY, 1,
-                        Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))));
+        try {
+            unmarkCommand.execute(model);
+            unmarkCommand.execute(model);
+        } catch (CommandException e) {
+            assertCommandFailure(unmarkCommand, model,
+                    String.format(UnmarkCommand.MESSAGE_UNMARK_UNNECESSARY, 1,
+                            Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))));
+        }
     }
 
     @Test
     public void execute_success() {
-        // Setup
-        Tutorial tutorialNumber = new Tutorial("1");
+        Tutorial tutorialToBeAdded = new Tutorial("1");
+
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, tutorialToBeAdded);
+
         try {
-            new MarkCommand(INDEX_FIRST_PERSON, tutorialNumber).execute(model);
+            unmarkCommand.execute(model);
         } catch (CommandException e) {
             throw new RuntimeException(e);
         }
 
-        // Check model is reverted back to original
-        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, tutorialNumber);
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_SUCCESS,
-                tutorialNumber.tutorial, Messages.format(personToEdit));
-        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
+        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        // Check person is edited
+        Map<Tutorial, AttendanceStatus> newTutorials = new HashMap<>(personToEdit.getTutorials());
+        newTutorials.put(tutorialToBeAdded, AttendanceStatus.ABSENT);
+        Person expectedEditedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getStudentId(),
+                personToEdit.getPhone(),
+                personToEdit.getEmail(),
+                personToEdit.getTags(),
+                newTutorials
+        );
+        assertEquals(expectedEditedPerson, editedPerson);
+
+        // Check model is updated with new person attribute
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_SUCCESS, tutorialToBeAdded.tutorial,
+                Messages.format(editedPerson));
+        Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        assertCommandSuccess(unmarkCommand, typicalModel, expectedMessage, expectedModel);
     }
 
     @Test
