@@ -69,7 +69,9 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveBaseName = 'volunsync'
+    archiveVersion = 'v1.3'
+    archiveClassifier = ''
 }
 
 defaultTasks 'clean', 'test'
