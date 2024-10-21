@@ -27,6 +27,9 @@ import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListPersonCommand;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.ViewEventCommand;
+import seedu.address.logic.commands.ViewPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -103,6 +106,28 @@ public class AddressBookParserTest {
         String listPersonCommand = ListCommand.COMMAND_WORD + " " + ListPersonCommand.COMMAND_FIELD;
         assertTrue(parser.parseCommand(listPersonCommand) instanceof ListCommand);
         assertTrue(parser.parseCommand(listPersonCommand + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_viewPerson() throws Exception {
+        String viewPersonCommand = ViewCommand.COMMAND_WORD + " " + ViewPersonCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(viewPersonCommand + " Bob") instanceof ViewCommand);
+        try {
+            parser.parseCommand(viewPersonCommand + " ");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
+    }
+
+    @Test
+    public void parseCommand_viewEvent() throws Exception {
+        String viewEventCommand = ViewCommand.COMMAND_WORD + " " + ViewEventCommand.COMMAND_FIELD;
+        assertTrue(parser.parseCommand(viewEventCommand + " Bob") instanceof ViewCommand);
+        try {
+            parser.parseCommand(viewEventCommand + " ");
+        } catch (Exception e) {
+            assertTrue(e instanceof ParseException);
+        }
     }
 
     @Test
