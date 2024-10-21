@@ -34,7 +34,7 @@ public class SampleDataUtil {
             new Student(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"), new Schedule("Thursday-1600-1800"),
                     new Subject("Physics"), new Rate("400"), new PaidAmount("400"), new OwedAmount("0")),
-            new Student(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
+            new Student(new Name("Alex Tan"), new Phone("92624417"), new Email("alext@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"), new Schedule("Friday-1300-1500"),
                     new Subject("Economics"), new Rate("550.15"), new PaidAmount(), new OwedAmount("0")),
         };
