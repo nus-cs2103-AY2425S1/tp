@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.company.Company;
-import seedu.address.model.company.CompanyName;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
 
 /**
@@ -14,7 +14,7 @@ public class CompanyBuilder {
     public static final String DEFAULT_ADDRESS = "21 Lower Kent Ridge Rd, Singapore 119077";
     public static final String DEFAULT_BILLING_DATE = "5";
     public static final String DEFAULT_PHONE = "65166666";
-    private CompanyName name;
+    private Name name;
     private Address address;
     private BillingDate billingDate;
     private Phone phone;
@@ -23,7 +23,7 @@ public class CompanyBuilder {
      * Constructs a new CompanyBuilder with the default values.
      */
     public CompanyBuilder() {
-        name = new CompanyName(DEFAULT_NAME);
+        name = new Name(DEFAULT_NAME);
         address = new Address(DEFAULT_ADDRESS);
         billingDate = new BillingDate(DEFAULT_BILLING_DATE);
         phone = new Phone(DEFAULT_PHONE);
@@ -36,7 +36,7 @@ public class CompanyBuilder {
      * @return CompanyBuilder object.
      */
     public CompanyBuilder withName(String name) {
-        this.name = new CompanyName(name);
+        this.name = new Name(name);
         return this;
     }
 

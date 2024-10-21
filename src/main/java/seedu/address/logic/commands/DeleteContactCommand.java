@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -27,6 +26,7 @@ public class DeleteContactCommand extends DeleteCommand<Person> {
     protected void deleteEntity(Model model, Person personToDelete) {
         model.deletePerson(personToDelete);
     }
+
     @Override
     protected String getSuccessMessage(Person personToDelete) {
         String name = personToDelete.getName().toString();

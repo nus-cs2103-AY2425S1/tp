@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.job.Job;
+
 
 
 /**
@@ -27,9 +31,9 @@ public class JobCard extends UiPart<Region> {
     @FXML
     private Label salary;
     @FXML
-    private Label requirements;
-    @FXML
     private Label description;
+    @FXML
+    private FlowPane requirements;
 
     /**
      * Creates a {@code JobCode} with the given {@code Job} and index to display.
@@ -38,10 +42,12 @@ public class JobCard extends UiPart<Region> {
         super(FXML);
         this.job = job;
         id.setText(displayedIndex + ". ");
-        name.setText(job.getName().value);
+        name.setText(job.getName().fullName);
         company.setText(job.getCompany().value);
         salary.setText(job.getSalary().toString());
-        requirements.setText(job.getRequirements().value);
         description.setText(job.getDescription().value);
+        job.getRequirements().stream()
+                .sorted(Comparator.comparing(requirement -> requirement.tagName))
+                .forEach(requirement -> requirements.getChildren().add(new Label(requirement.tagName)));
     }
 }

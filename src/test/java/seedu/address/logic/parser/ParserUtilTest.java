@@ -14,26 +14,31 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
+import seedu.address.model.company.BillingDate;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_COMPANY_NAME = "ඞ";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ROLE = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_SKILL = "#friend";
+    private static final String INVALID_BILLING_DATE = "30";
 
     private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_COMPANY_NAME = "Apple";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ROLE = "Software Engineer";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_SKILL_1 = "Python";
     private static final String VALID_SKILL_2 = "C";
+    private static final String VALID_BILLING_DATE = "25";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -59,7 +64,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -190,8 +195,31 @@ public class ParserUtilTest {
     @Test
     public void parseSkills_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Skill> actualTagSet = ParserUtil.parseSkills(Arrays.asList(VALID_SKILL_1, VALID_SKILL_2));
-        Set<Skill> expectedTagSet = new HashSet<Skill>(
-                Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
+        Set<Skill> expectedTagSet =
+                new HashSet<Skill>(Arrays.asList(new Skill(VALID_SKILL_1), new Skill(VALID_SKILL_2)));
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseBillingDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseBillingDate(null));
+    }
+
+    @Test
+    public void parseBillingDate_invalidDate_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseBillingDate(INVALID_BILLING_DATE));
+    }
+
+    @Test
+    public void parseBillingDate_validDateWithoutWhitespace_returnsDate() throws Exception {
+        BillingDate expectedDate = new BillingDate(VALID_BILLING_DATE);
+        assertEquals(expectedDate, ParserUtil.parseBillingDate(VALID_BILLING_DATE));
+    }
+
+    @Test
+    public void parseBillingDate_validDateWithWhitespace_returnsDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_BILLING_DATE + WHITESPACE;
+        BillingDate expectedDate = new BillingDate(VALID_BILLING_DATE);
+        assertEquals(expectedDate, ParserUtil.parseBillingDate(dateWithWhitespace));
     }
 }

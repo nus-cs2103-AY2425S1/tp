@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.common.Address;
+import seedu.address.model.common.Name;
 import seedu.address.model.company.BillingDate;
 import seedu.address.model.company.Company;
-import seedu.address.model.company.CompanyName;
-import seedu.address.model.person.Address;
 import seedu.address.model.person.Phone;
 
 /**
@@ -59,14 +59,12 @@ public class JsonAdaptedCompany {
     public Company toModelType() throws IllegalValueException {
         // instantiating company name
         if (name == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                            CompanyName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!CompanyName.isValidName(name)) {
-            throw new IllegalValueException(CompanyName.MESSAGE_CONSTRAINTS);
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final CompanyName modelName = new CompanyName(name);
+        final Name modelName = new Name(name);
         // instantiating company address
         if (address == null) {
             throw new IllegalValueException(
