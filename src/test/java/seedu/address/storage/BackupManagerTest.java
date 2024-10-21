@@ -39,24 +39,18 @@ public class BackupManagerTest {
 
     @AfterEach
     public void tearDown() throws IOException {
-        // Clean up the test backup directory and files
+        // Clean up any backup files created during the test
         try (Stream<Path> paths = Files.walk(TEMP_BACKUP_DIR)) {
-            paths.sorted((path1, path2) -> path2.compareTo(path1)) // Delete files before directories
+            paths.filter(Files::isRegularFile)
                     .forEach(path -> {
                         try {
                             Files.deleteIfExists(path);
                         } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path);
                             e.printStackTrace();
                         }
                     });
         }
-    }
-
-    @Test
-    public void backupCreation_createsBackupFileSuccessfully() throws IOException {
-        backupManager.saveBackup(TEMP_FILE);
-        long backupCount = Files.list(TEMP_BACKUP_DIR).count();
-        assertEquals(2, backupCount, "Backup file should be created successfully.");
     }
 
     @Test

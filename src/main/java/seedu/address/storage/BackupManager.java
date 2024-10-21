@@ -76,24 +76,36 @@ public class BackupManager {
      * Saves a backup of the provided file to the backup directory.
      */
     public void saveBackup(Path filePath) throws IOException {
-        if (!Files.exists(filePath)) {
-            throw new IOException("The file to back up does not exist: " + filePath);
+        synchronized (backupLock) {
+            long currentTime = System.currentTimeMillis();
+
+            if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
+                logger.info("Backup skipped due to debounce.");
+                return;
+            }
+
+            lastBackupTime = currentTime;
+
+            if (!Files.exists(filePath)) {
+                throw new IOException("The file to back up does not exist: " + filePath);
+            }
+
+            String content = Files.readString(filePath, StandardCharsets.UTF_8);
+
+            // Ensure content ends with a newline
+            if (!content.endsWith(System.lineSeparator())) {
+                content += System.lineSeparator();
+            }
+
+            String timestamp = LocalDateTime.now().format(FORMATTER);
+            String backupFileName = String.format("clinicbuddy-backup-%s.json", timestamp);
+            Path backupPath = backupDirectory.resolve(backupFileName);
+
+            Files.writeString(backupPath, content, StandardCharsets.UTF_8);
+            logger.info("Backup created: " + backupPath);
+
+            cleanOldBackups(MAX_BACKUPS);
         }
-
-        String timestamp = LocalDateTime.now().format(FORMATTER);
-        String backupFileName = String.format("%s%s%s", BACKUP_PREFIX, timestamp, BACKUP_EXTENSION);
-        Path backupPath = backupDirectory.resolve(backupFileName);
-
-        // Ensure consistent new line at the end of the content
-        String content = Files.readString(filePath, StandardCharsets.UTF_8);
-        if (!content.endsWith(System.lineSeparator())) {
-            content += System.lineSeparator();
-        }
-
-        Files.writeString(backupPath, content, StandardCharsets.UTF_8);
-        logger.info("Backup created: " + backupPath);
-
-        cleanOldBackups(MAX_BACKUPS);
     }
 
     /**
@@ -123,25 +135,29 @@ public class BackupManager {
     }
 
     /**
-     * Restores the most recent backup from the backup directory, if available.
+     * Restores the second-most recent backup from the backup directory, if available.
      *
-     * @return An {@code Optional<Path>} containing the path to the most recent backup, if it exists.
+     * @return An {@code Optional<Path>} containing the path to the second-most recent backup, if it exists.
      * @throws IOException If an I/O error occurs while listing files in the backup directory.
      */
     public Optional<Path> restoreMostRecentBackup() throws IOException {
         try (Stream<Path> backups = Files.list(backupDirectory)) {
-            return backups.filter(Files::isRegularFile)
-                    .max(Comparator.comparing(this::getFileCreationTime));
+            List<Path> backupFiles = backups.filter(Files::isRegularFile)
+                    .sorted(Comparator.comparing(this::getFileCreationTime).reversed()) // Newest first
+                    .toList();
+
+            // Return the second-most recent backup if it exists
+            if (backupFiles.size() > 1) {
+                return Optional.of(backupFiles.get(1)); // Return the second-most recent backup
+            } else if (!backupFiles.isEmpty()) {
+                return Optional.of(backupFiles.get(0)); // Return the most recent if there's only one backup
+            } else {
+                return Optional.empty(); // No backups available
+            }
         }
     }
 
-    /**
-     * Retrieves the last modified time of a given file path.
-     *
-     * @param path The path to the file whose last modified time is to be retrieved.
-     * @return A {@code FileTime} object representing the last modified time of the file.
-     *         If the file's last modified time cannot be retrieved, returns the current system time.
-     */
+
     protected FileTime getFileCreationTime(Path path) {
         try {
             return Files.getLastModifiedTime(path);
