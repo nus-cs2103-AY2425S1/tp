@@ -21,6 +21,7 @@ import seedu.address.model.student.Student;
 public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
+    public static final CommandType COMMAND_TYPE = CommandType.DELETESTUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list.\n"
@@ -42,7 +43,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.DELETESTUDENT;
+        return COMMAND_TYPE;
     }
 
     @Override
@@ -79,7 +80,8 @@ public class DeleteCommand extends Command {
                 .collect(Collectors.joining("\n"));
 
 
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople),
+                CommandType.DELETESTUDENT);
     }
 
     @Override

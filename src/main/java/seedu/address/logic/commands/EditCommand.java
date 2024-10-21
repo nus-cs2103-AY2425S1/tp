@@ -31,6 +31,7 @@ import seedu.address.model.student.Student;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final CommandType COMMAND_TYPE = CommandType.EDITSTUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the index number used in the displayed student list. "
@@ -71,7 +72,7 @@ public class EditCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.EDITSTUDENT;
+        return COMMAND_TYPE;
     }
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -91,7 +92,8 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)));
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, Messages.format(editedStudent)),
+                CommandType.EDITSTUDENT);
     }
 
     /**
