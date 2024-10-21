@@ -16,7 +16,6 @@ import tutorease.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and creates the appropriate ContactCommand objects.
  */
 public class ContactCommandParser implements Parser<Command> {
-    public static final String COMMAND_WORD = "contact";
     private static final Pattern CONTACT_COMMAND_FORMAT = Pattern.compile("(?<subCommand>\\S+)(?<subArguments>.*)");
 
     @Override

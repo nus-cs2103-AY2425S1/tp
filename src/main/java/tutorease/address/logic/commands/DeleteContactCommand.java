@@ -14,9 +14,7 @@ import tutorease.address.model.person.Person;
 /**
  * Deletes a contact identified by the index from the address book.
  */
-public class DeleteContactCommand extends Command {
-    public static final String COMMAND_WORD = "contact";
-
+public class DeleteContactCommand extends ContactCommand {
     public static final String SUB_COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = "contact delete: Deletes the contact identified by the index number "

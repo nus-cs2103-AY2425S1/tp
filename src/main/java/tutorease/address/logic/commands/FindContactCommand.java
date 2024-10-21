@@ -10,9 +10,7 @@ import tutorease.address.model.person.NameContainsKeywordsPredicate;
 /**
  * Finds all persons whose name is contained in the keyword.
  */
-public class FindContactCommand extends Command {
-    public static final String COMMAND_WORD = "contact";
-
+public class FindContactCommand extends ContactCommand {
     public static final String SUB_COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + SUB_COMMAND_WORD

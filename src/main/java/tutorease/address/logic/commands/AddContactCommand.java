@@ -18,8 +18,7 @@ import tutorease.address.model.person.Person;
  * Adds a contact to the TutorEase.
  */
 
-public class AddContactCommand extends Command {
-    public static final String COMMAND_WORD = "contact";
+public class AddContactCommand extends ContactCommand {
     public static final String SUB_COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SUB_COMMAND_WORD

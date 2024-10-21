@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import tutorease.address.commons.core.LogsCenter;
 import tutorease.address.logic.commands.ClearCommand;
 import tutorease.address.logic.commands.Command;
+import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.ExitCommand;
 import tutorease.address.logic.commands.HelpCommand;
@@ -49,7 +50,7 @@ public class TutorEaseParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-        case ContactCommandParser.COMMAND_WORD:
+        case ContactCommand.COMMAND_WORD:
             return new ContactCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
