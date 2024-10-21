@@ -47,12 +47,12 @@ public class SearchCommandParserTest {
     @Test
     public void parse_emptyNameArg_throwsParseException() {
         assertParseFailure(parser, " n/ t/ friends",
-                "The prefix cannot be empty. Please input a keyword for the prefix.");
+                "The prefix cannot be empty. Please input a prefix.");
     }
 
     @Test
     public void parse_emptyTagArg_throwsParseException() {
-        assertParseFailure(parser, " n/Alice t/", "The prefix cannot be empty. Please input a keyword for the prefix.");
+        assertParseFailure(parser, " n/Alice t/", "The prefix cannot be empty. Please input a prefix.");
     }
 
     @Test
