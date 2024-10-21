@@ -51,27 +51,6 @@ public class UniqueLinkList implements Iterable<Link> {
     }
 
     /**
-     * Replaces the link {@code target} in the list with {@code editedLink}.
-     * {@code target} must exist in the list.
-     * The link identity of {@code editedLink} must not be the same as another
-     * existing link in the list.
-     */
-    public void setLink(Link target, Link editedLink) {
-        requireAllNonNull(target, editedLink);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new LinkNotFoundException();
-        }
-
-        if (!target.equals(editedLink) && contains(editedLink)) {
-            throw new DuplicateLinkException();
-        }
-
-        internalList.set(index, editedLink);
-    }
-
-    /**
      * Removes the equivalent link from the list.
      * The link must exist in the list.
      */
