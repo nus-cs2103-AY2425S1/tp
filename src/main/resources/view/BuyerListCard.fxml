@@ -26,12 +26,9 @@
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
       </HBox>
-      <GridPane hgap="7" alignment="CENTER_LEFT">
-        <Label fx:id="buyerType" text="$buyerType" GridPane.columnIndex="0" />
-        <FlowPane fx:id="tags" alignment="CENTER_LEFT" GridPane.columnIndex="1" />
-      </GridPane>
+      <FlowPane fx:id="tags" alignment="CENTER_LEFT"/>
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+      <Label fx:id="budget" styleClass="cell_small_label" text="\$budget" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
     </VBox>
   </GridPane>

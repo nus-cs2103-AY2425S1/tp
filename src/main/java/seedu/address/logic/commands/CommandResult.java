@@ -22,7 +22,7 @@ public class CommandResult {
     /** Change view to MeetUpList */
     private final boolean showMeetUpList;
 
-    /** Change view to Address Book */
+    /** Change view to Budget Book */
     private final boolean showBuyerList;
 
     /**

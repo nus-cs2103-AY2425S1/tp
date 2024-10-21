@@ -9,8 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.buyer.Address;
-import seedu.address.model.buyer.BuyerType;
+import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Phone;
 import seedu.address.model.meetup.From;
@@ -70,18 +69,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String address} into an {@code Budget}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static Budget parseBudget(String address) throws ParseException {
         requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        String trimmedBudget = address.trim();
+        if (!Budget.isValidBudget(trimmedBudget)) {
+            throw new ParseException(Budget.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Budget(trimmedBudget);
     }
 
     /**
@@ -97,21 +96,6 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String buyerType} into an {@code BuyerType}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code buyerType} is invalid.
-     */
-    public static BuyerType parseBuyerType(String buyerType) throws ParseException {
-        requireNonNull(buyerType);
-        String trimmedBuyerType = buyerType.trim();
-        if (!BuyerType.isValidType(trimmedBuyerType)) {
-            throw new ParseException(BuyerType.MESSAGE_CONSTRAINTS);
-        }
-        return new BuyerType(trimmedBuyerType);
     }
 
     /**

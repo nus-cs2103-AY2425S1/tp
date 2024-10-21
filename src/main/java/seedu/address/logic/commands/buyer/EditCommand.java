@@ -1,8 +1,7 @@
 package seedu.address.logic.commands.buyer;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER_TYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUDGET;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,9 +23,8 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
@@ -46,8 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_BUYER_TYPE + "TYPE] "
+            + "[" + PREFIX_BUDGET + "BUDGET] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -103,11 +100,10 @@ public class EditCommand extends Command {
         Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
         Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
         Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
-        Address updatedAddress = editBuyerDescriptor.getAddress().orElse(buyerToEdit.getAddress());
-        BuyerType updatedBuyerType = editBuyerDescriptor.getBuyerType().orElse(buyerToEdit.getBuyerType());
+        Budget updatedBudget = editBuyerDescriptor.getBudget().orElse(buyerToEdit.getBudget());
         Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
 
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBuyerType, updatedTags);
+        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedBudget, updatedTags);
     }
 
     @Override
@@ -142,8 +138,7 @@ public class EditCommand extends Command {
         private Name name;
         private Phone phone;
         private Email email;
-        private Address address;
-        private BuyerType buyerType;
+        private Budget budget;
         private Set<Tag> tags;
 
         public EditBuyerDescriptor() {}
@@ -156,8 +151,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setBuyerType(toCopy.buyerType);
+            setBudget(toCopy.budget);
             setTags(toCopy.tags);
         }
 
@@ -165,7 +159,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, buyerType, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, budget, tags);
         }
 
         public void setName(Name name) {
@@ -192,20 +186,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setBudget(Budget budget) {
+            this.budget = budget;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
-        }
-
-        public void setBuyerType(BuyerType buyerType) {
-            this.buyerType = buyerType;
-        }
-
-        public Optional<BuyerType> getBuyerType() {
-            return Optional.ofNullable(buyerType);
+        public Optional<Budget> getBudget() {
+            return Optional.ofNullable(budget);
         }
 
         /**
@@ -240,8 +226,7 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditBuyerDescriptor.name)
                     && Objects.equals(phone, otherEditBuyerDescriptor.phone)
                     && Objects.equals(email, otherEditBuyerDescriptor.email)
-                    && Objects.equals(address, otherEditBuyerDescriptor.address)
-                    && Objects.equals(buyerType, otherEditBuyerDescriptor.buyerType)
+                    && Objects.equals(budget, otherEditBuyerDescriptor.budget)
                     && Objects.equals(tags, otherEditBuyerDescriptor.tags);
         }
 
@@ -251,8 +236,7 @@ public class EditCommand extends Command {
                     .add("name", name)
                     .add("phone", phone)
                     .add("email", email)
-                    .add("address", address)
-                    .add("type", buyerType)
+                    .add("budget", budget)
                     .add("tags", tags)
                     .toString();
         }

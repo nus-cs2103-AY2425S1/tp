@@ -22,20 +22,18 @@ public class Buyer {
     private final Email email;
 
     // Data fields
-    private final Address address;
-    private final BuyerType buyerType;
+    private final Budget budget;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Buyer(Name name, Phone phone, Email email, Address address, BuyerType buyerType, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags, buyerType);
+    public Buyer(Name name, Phone phone, Email email, Budget budget, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, budget, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
-        this.buyerType = buyerType;
+        this.budget = budget;
         this.tags.addAll(tags);
     }
 
@@ -51,12 +49,8 @@ public class Buyer {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public BuyerType getBuyerType() {
-        return buyerType;
+    public Budget getBudget() {
+        return budget;
     }
 
     /**
@@ -99,14 +93,14 @@ public class Buyer {
         return name.equals(otherBuyer.name)
                 && phone.equals(otherBuyer.phone)
                 && email.equals(otherBuyer.email)
-                && address.equals(otherBuyer.address)
+                && budget.equals(otherBuyer.budget)
                 && tags.equals(otherBuyer.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, budget, tags);
     }
 
     @Override
@@ -115,8 +109,7 @@ public class Buyer {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
-                .add("type", buyerType)
+                .add("budget", budget)
                 .add("tags", tags)
                 .toString();
     }

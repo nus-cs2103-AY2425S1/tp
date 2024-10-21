@@ -1,11 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_BUYERS_LISTED_OVERVIEW;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.BUYER_TYPE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.BUDGET_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -72,9 +70,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String viewCommand = ViewCommand.COMMAND_WORD;
-        String expectedMessage = String.format(MESSAGE_BUYERS_LISTED_OVERVIEW,
-                model.getFilteredBuyerList().size());
-        assertCommandSuccess(viewCommand, expectedMessage, model);
+        assertCommandSuccess(viewCommand, ViewCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -179,7 +175,7 @@ public class LogicManagerTest {
 
         // Triggers the saveBuyerList method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + BUYER_TYPE_DESC_AMY;
+                + EMAIL_DESC_AMY + BUDGET_DESC_AMY;
         Buyer expectedBuyer = new BuyerBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addBuyer(expectedBuyer);

@@ -3,9 +3,8 @@ package seedu.address.testutil.buyer;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
@@ -20,14 +19,12 @@ public class BuyerBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_BUYER_TYPE = "buyer";
+    public static final String DEFAULT_BUDGET = "1,000,000";
 
     private Name name;
     private Phone phone;
     private Email email;
-    private Address address;
-    private BuyerType buyerType;
+    private Budget budget;
     private Set<Tag> tags;
 
     /**
@@ -37,8 +34,7 @@ public class BuyerBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
-        buyerType = new BuyerType(DEFAULT_BUYER_TYPE);
+        budget = new Budget(DEFAULT_BUDGET);
         tags = new HashSet<>();
     }
 
@@ -49,8 +45,7 @@ public class BuyerBuilder {
         name = buyerToCopy.getName();
         phone = buyerToCopy.getPhone();
         email = buyerToCopy.getEmail();
-        address = buyerToCopy.getAddress();
-        buyerType = buyerToCopy.getBuyerType();
+        budget = buyerToCopy.getBudget();
         tags = new HashSet<>(buyerToCopy.getTags());
     }
 
@@ -71,10 +66,10 @@ public class BuyerBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Buyer} that we are building.
+     * Sets the {@code Budget} of the {@code Buyer} that we are building.
      */
-    public BuyerBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public BuyerBuilder withBudget(String budget) {
+        this.budget = new Budget(budget);
         return this;
     }
 
@@ -94,16 +89,8 @@ public class BuyerBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code BuyerType} of the {@code Buyer} that we are building.
-     */
-    public BuyerBuilder withBuyerType(String buyerType) {
-        this.buyerType = new BuyerType(buyerType);
-        return this;
-    }
-
     public Buyer build() {
-        return new Buyer(name, phone, email, address, buyerType, tags);
+        return new Buyer(name, phone, email, budget, tags);
     }
 
 }
