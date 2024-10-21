@@ -52,8 +52,10 @@ public class LogicManagerTest {
         JsonMeetUpListStorage meetUpListStorage =
                 new JsonMeetUpListStorage(temporaryFolder.resolve("meetUpList.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        JsonPropertyListStorage propertyListStorage = new JsonPropertyListStorage(temporaryFolder.resolve("propertyList.json"));
-        StorageManager storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
+        JsonPropertyListStorage propertyListStorage =
+                new JsonPropertyListStorage(temporaryFolder.resolve("propertyList.json"));
+        StorageManager storage =
+                new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -172,7 +174,8 @@ public class LogicManagerTest {
         JsonMeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(prefPath);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(prefPath);
         JsonPropertyListStorage propertyListStorage = new JsonPropertyListStorage(prefPath);
-        StorageManager storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
+        StorageManager storage =
+                new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
 
         logic = new LogicManager(model, storage);
 
