@@ -17,7 +17,8 @@ import tutorease.address.model.person.Person;
 public class DeleteContactCommand extends ContactCommand {
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD + ": Deletes the contact identified by the index number "
+    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
+            + ": Deletes the contact identified by the index number "
             + "in the displayed contact list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: contact delete 1";
