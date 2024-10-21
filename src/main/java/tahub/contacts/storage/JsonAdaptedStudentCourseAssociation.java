@@ -9,8 +9,6 @@ import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
 
-
-
 /**
  * Jackson-friendly version of {@link StudentCourseAssociation}.
  */
