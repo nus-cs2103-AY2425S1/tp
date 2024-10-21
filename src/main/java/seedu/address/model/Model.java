@@ -97,6 +97,7 @@ public interface Model {
     ObservableList<Meeting> getWeeklySchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
+    ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate);
 
     /**
      * Returns an unmodifiable view of the filtered person list
@@ -109,4 +110,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    boolean hasPersonInMeeting(Person personToDelete);
 }

@@ -181,6 +181,10 @@ public class ModelManager implements Model {
         return scheduleList.hasMeeting(newMeeting);
     }
 
+    @Override
+    public boolean hasPersonInMeeting(Person person) {
+        return scheduleList.hasPersonInMeeting(person);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -226,6 +230,12 @@ public class ModelManager implements Model {
     public void changeWeeklySchedule(Predicate<Meeting> predicate) {
         requireNonNull(predicate);
         weeklySchedule.setPredicate(predicate);
+    }
+    @Override
+    public ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate) {
+        requireNonNull(predicate);
+        weeklySchedule.setPredicate(predicate);
+        return weeklySchedule;
     }
 
 }

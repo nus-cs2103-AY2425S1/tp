@@ -25,6 +25,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
+    public static final String MESSAGE_PERSON_IN_SCHEDULE = "This person is in a meeting."
+            + " Please remove them from the meeting first.";
+
     private final Index targetIndex;
 
     public DeleteCommand(Index targetIndex) {
@@ -41,6 +44,11 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+
+        if (model.hasPersonInMeeting(personToDelete)) {
+            throw new CommandException(MESSAGE_PERSON_IN_SCHEDULE);
+        }
+
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }

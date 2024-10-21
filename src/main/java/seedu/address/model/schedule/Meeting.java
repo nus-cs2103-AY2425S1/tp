@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 public class Meeting {
 
     // Data Fields
-    private List<Integer> contactIndexes;
+    private List<UUID> contactUids;
     private String meetingName;
     private LocalDate meetingDate;
     private LocalTime meetingTime;
@@ -22,14 +23,14 @@ public class Meeting {
     /**
      * Constructs a {@code Meeting}.
      *
-     * @param contactIndexes A list of indexes representing the contacts involved in the meeting.
+     * @param contactUids A list of indexes representing the contacts involved in the meeting.
      * @param meetingName    Name of the meeting.
      * @param meetingDate    Date of the meeting. Cannot be null.
      * @param meetingTime    Time of the meeting. Cannot be null.
      */
-    public Meeting(List<Integer> contactIndexes, String meetingName, LocalDate meetingDate, LocalTime meetingTime) {
+    public Meeting(List<UUID> contactUids, String meetingName, LocalDate meetingDate, LocalTime meetingTime) {
         requireAllNonNull(meetingDate, meetingTime);
-        this.contactIndexes = contactIndexes;
+        this.contactUids = contactUids;
         this.meetingName = meetingName;
         this.meetingDate = meetingDate;
         this.meetingTime = meetingTime;
@@ -40,19 +41,18 @@ public class Meeting {
      *
      * @return A list of contact indexes.
      */
-    public List<Integer> getContactIndexes() {
-        return contactIndexes;
+    public List<UUID> getContactUids() {
+        return contactUids;
     }
 
     /**
      * Converts the list of contact indexes to a string, with indexes separated by commas.
      *
-     * @param inputContactIndexes List of contact indexes to be converted.
      * @return A comma-separated string of contact indexes.
      */
-    public String convertContactIndexesToString(List<Integer> inputContactIndexes) {
-        return inputContactIndexes.stream()
-                .map(String::valueOf)
+    public String convertContactUidsToString() {
+        return contactUids.stream()
+                .map(uid -> uid.toString())
                 .collect(Collectors.joining(","));
     }
 
@@ -116,5 +116,17 @@ public class Meeting {
                 && otherMeeting.getMeetingDate().equals(getMeetingDate())
                 && otherMeeting.getMeetingTime().equals(getMeetingTime())
                 && otherMeeting.getMeetingName().equals(getMeetingName());
+    }
+
+    /**
+     * @return if the meeting has the person with the given uid
+     */
+    public boolean hasPerson(UUID uid) {
+        for (UUID contactUid : contactUids) {
+            if (contactUid.equals(uid)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
