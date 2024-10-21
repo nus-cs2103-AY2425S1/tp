@@ -24,6 +24,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String scheduleName;
     private final String date;
     private final String time;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -34,12 +35,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("date") String date, @JsonProperty("time") String time,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("scheduleName") String scheduleName, @JsonProperty("date") String date,
+            @JsonProperty("time") String time, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.scheduleName = scheduleName;
         this.date = date;
         this.time = time;
         if (tags != null) {
@@ -55,6 +57,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        scheduleName = source.getSchedule().scheduleName;
         date = source.getSchedule().dateString;
         time = source.getSchedule().timeString;
         tags.addAll(source.getTags().stream()
@@ -105,6 +108,12 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (scheduleName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+        }
+        if (!Schedule.isValidName(scheduleName)) {
+            throw new IllegalValueException(Schedule.SCHEDULE_NAME_CONSTRAINTS);
+        }
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
         }
@@ -118,7 +127,7 @@ class JsonAdaptedPerson {
         if (!Schedule.isValidTime(time)) {
             throw new IllegalValueException(Schedule.TIME_CONSTRAINTS);
         }
-        final Schedule schedule = new Schedule(date, time);
+        final Schedule schedule = new Schedule(scheduleName, date, time);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, schedule, modelTags);

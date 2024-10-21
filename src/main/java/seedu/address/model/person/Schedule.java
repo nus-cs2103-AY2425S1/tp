@@ -10,31 +10,42 @@ import java.util.Objects;
 
 public class Schedule {
 
+    public static final String SCHEDULE_NAME_CONSTRAINTS =
+            "Schedule name field must be strictly alphanumeric.";
     public static final String DATE_CONSTRAINTS =
             "Date field must be given in the format yyyy-MM-dd.";
     public static final String TIME_CONSTRAINTS =
             "Time field must be given in the format HH:mm.";
 
+    public static final String NAME_VALIDATION_REGEX = "\\p{Alnum}+";
+
     public final LocalDate date;
     public final LocalTime time;
+    public final String scheduleName;
     public final String dateString;
     public final String timeString;
 
     public static Schedule ofDefault() {
-        return new Schedule("", "");
+        return new Schedule("","", "");
     }
 
-    public Schedule(String date, String time) {
-        requireAllNonNull(date, time);
+    public Schedule(String scheduleName, String date, String time) {
+        requireAllNonNull(scheduleName, date, time);
 
+        checkArgument(isValidName(scheduleName), SCHEDULE_NAME_CONSTRAINTS);
         checkArgument(isValidDate(date), DATE_CONSTRAINTS);
         checkArgument(isValidTime(time), TIME_CONSTRAINTS);
 
         this.date = (date.isEmpty()) ? LocalDate.MIN : LocalDate.parse(date);
         this.time = (time.isEmpty()) ? LocalTime.MIDNIGHT : LocalTime.parse(time);
 
+        this.scheduleName = (scheduleName.isEmpty()) ? "schedule" : scheduleName;
         this.dateString = date;
         this.timeString = time;
+    }
+
+    public static boolean isValidName(String test) {
+        return test.isEmpty() || test.matches(NAME_VALIDATION_REGEX);
     }
 
     public static boolean isValidDate(String test) {
@@ -66,7 +77,7 @@ public class Schedule {
         if (this.date.equals(LocalDate.MIN)) {
             return "";
         }
-        String scheduleString = this.dateString;
+        String scheduleString = this.scheduleName + ": " + this.dateString;
         if (!this.timeString.isEmpty()) {
             scheduleString += " " + this.timeString;
         }
@@ -84,12 +95,13 @@ public class Schedule {
         }
 
         Schedule otherSchedule = (Schedule) other;
-        return this.date.equals(otherSchedule.date)
+        return this.scheduleName.equals(otherSchedule.scheduleName)
+                && this.date.equals(otherSchedule.date)
                 && this.time.equals(otherSchedule.time);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.date, this.time);
+        return Objects.hash(this.scheduleName, this.date, this.time);
     }
 }
