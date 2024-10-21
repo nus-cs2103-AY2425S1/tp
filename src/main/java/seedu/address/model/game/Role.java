@@ -1,8 +1,5 @@
 package seedu.address.model.game;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Describes the Person's skill level in a Game.
  */

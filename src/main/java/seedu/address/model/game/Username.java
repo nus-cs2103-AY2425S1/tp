@@ -1,8 +1,5 @@
 package seedu.address.model.game;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents a username in a Game.
  */
@@ -24,8 +21,6 @@ public class Username {
      * @param username a valid username.
      */
     public Username(String username) {
-//        requireNonNull(username);
-//        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
         this.username = username;
     }
 

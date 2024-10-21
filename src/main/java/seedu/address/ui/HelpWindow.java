@@ -15,18 +15,23 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.model.person.Person;
+
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
 
+    /**
+     *  helpCommand data type used to populate the table
+     */
     public static class HelpCommand {
         private final SimpleStringProperty command;
         private final SimpleStringProperty description;
 
+        /**
+         * Constructor for helpCommand datat type
+         */
         public HelpCommand(String command, String description) {
             this.command = new SimpleStringProperty(command);
             this.description = new SimpleStringProperty(description);
@@ -56,6 +61,8 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private TableView<HelpCommand> helpTable;
 
+
+
     /**
      * Creates a new HelpWindow.
      *
@@ -65,6 +72,13 @@ public class HelpWindow extends UiPart<Stage> {
         super(FXML, root);
         helpTable(helpTable);
         helpMessage.setText(HELP_MESSAGE);
+    }
+
+    /**
+     * Creates a new HelpWindow.
+     */
+    public HelpWindow() {
+        this(new Stage());
     }
 
     private void helpTable(TableView<HelpCommand> table) {
@@ -82,12 +96,16 @@ public class HelpWindow extends UiPart<Stage> {
         table.setEditable(true);
 
         ObservableList<HelpCommand> data =
-                FXCollections.observableArrayList(new HelpCommand("Add", "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
+                FXCollections.observableArrayList(new HelpCommand("Add",
+                                "`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [g/GAME]… [t/TAG]…`"),
                         new HelpCommand("Clear", "`clear`"),
                         new HelpCommand("Delete", "`delete INDEX` e.g., `delete 3`"),
-                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
-                        new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME] [s/SKILLLEVEL] [r/ROLE]​`"),
-                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., `find James Jake`"),
+                        new HelpCommand("Edit", "`edit INDEX [n/NAME] [p/PHONE_NUMBER] "
+                                + "[e/EMAIL] [a/ADDRESS] [g/Game]… [t/TAG]…​`"),
+                        new HelpCommand("Editgame", "`editgame INDEX g/GAME [u/USERNAME]"
+                                + " [s/SKILLLEVEL] [r/ROLE]​`"),
+                        new HelpCommand("Find", "`find KEYWORD [MORE_KEYWORDS]` e.g., "
+                                + "`find James Jake`"),
                         new HelpCommand("List", "`list`"),
                         new HelpCommand("Help", "`help`")
                 );
@@ -98,12 +116,6 @@ public class HelpWindow extends UiPart<Stage> {
         table.getColumns().add(descriptionColumn);
     }
 
-    /**
-     * Creates a new HelpWindow.
-     */
-    public HelpWindow() {
-        this(new Stage());
-    }
 
     /**
      * Shows the help window.

@@ -1,110 +1,147 @@
 package seedu.address.ui.commandpopup;
 
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.stream.Collectors;
+
+import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.CustomMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import seedu.address.ui.CommandBox;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 /**
  * This class is a TextField which implements an "autocomplete" functionality, based on a supplied list of entries.
- * @author Caleb Brinkman
+ *
+ * @author Matthew Lee
  */
 
 public class AutoSuggestionTextField extends TextField {
-//Local variables
-//entries to autocomplete
-private final SortedSet<String> entries;
-//popup GUI
-private ContextMenu entriesPopup;
+
+    private final SortedSet<String> entries;
+    //popup GUI
+    private ContextMenu entriesPopup;
+
+    private CommandBox commandBox;
 
 
-public AutoSuggestionTextField() {
-    super();
-    this.entries = PopUpCommandsSet.commands();
-    this.entriesPopup = new ContextMenu();
-    setListner();
-}
+    public AutoSuggestionTextField() {
+        super();
+        this.entries = PopUpCommandsSet.commands();
+        this.entriesPopup = new ContextMenuSkin();
+        setListner();
+    }
 
-/**
- * "Suggestion" specific listners
- */
-private void setListner() {
-    //Add "suggestions" by changing text
-    textProperty().addListener((observable, oldValue, newValue) -> {
-        String enteredText = getText();
-        //always hide suggestion if nothing has been entered
-        if (enteredText == null || enteredText.isEmpty()) {
-            entriesPopup.hide();
-        } else {
-            List<String> filteredEntries = entries.stream()
-                    .filter(e -> e.toLowerCase().contains(enteredText.toLowerCase()))
-                    .collect(Collectors.toList());
-            if (!filteredEntries.isEmpty()) {
-                populatePopup(filteredEntries, enteredText);
-                if (!entriesPopup.isShowing()) {
-                    entriesPopup.show(AutoSuggestionTextField.this, Side.BOTTOM, 0, 0);
-                }
-            } else {
+    public void setCommandBox(CommandBox commandBox) {
+        this.commandBox = commandBox;
+    }
+
+    /**
+     * "Suggestion" specific listners
+     */
+    private void setListner() {
+        //Add "suggestions" by changing text
+        this.textProperty().addListener((observable, oldValue, newValue) -> {
+            String enteredText = this.getText();
+            //hide suggestion if nothing has been entered
+            if (enteredText == null || enteredText.isEmpty()) {
                 entriesPopup.hide();
+            } else {
+                //filter all possible suggestions depends on "Text", case insensitive
+                List<String> filteredEntries = popUpFilter(entries, enteredText);
+                if (!filteredEntries.isEmpty()) {
+                    //build popup - list of "CustomMenuItem"
+                    populatePopup(filteredEntries, enteredText);
+                    if (!entriesPopup.isShowing()) {
+                        entriesPopup.show(this, Side.BOTTOM, 0, 0); //position of popup
+                    }
+                    //no suggestions -> hide
+                } else {
+                    entriesPopup.hide();
+                }
             }
-        }
-    });
+        });
 
-    //Hide always by focus-in (optional) and out
-    focusedProperty().addListener((observableValue, oldValue, newValue) -> {
-        entriesPopup.hide();
-    });
-}
+        // Modified listener for handling Enter key when popup is open
+        this.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                commandBox.handleCommandEntered();
+                // Optionally hide the popup only after a command has been processed
+                entriesPopup.hide();
+                event.consume(); // Prevent JavaFX default hiding behavior
+            }
+        });
 
-
-/**
- * Populate the entry set with the given search results. Display is limited to 10 entries, for performance.
- *
- * @param searchResult The set of matching strings.
- */
-private void populatePopup(List<String> searchResult, String searchRequest) {//List of "suggestions"
-    List<CustomMenuItem> menuItems = new LinkedList<>();
-    //List size - 10 or founded suggestions count
-    int maxEntries = 10;
-    int count = Math.min(searchResult.size(), maxEntries);
-    //Build list as set of labels
-    for (int i = 0; i < count; i++) {
-        final String result = searchResult.get(i);
-        //label with graphic (text flow) to highlight founded subtext in suggestions
-        Label entryLabel = new Label();
-        entryLabel.setGraphic(buildTextFlow(result, searchRequest));
-        entryLabel.setPrefHeight(10);  //don't sure why it's changed with "graphic"
-        CustomMenuItem item = new CustomMenuItem(entryLabel, true);
-        menuItems.add(item);
-
-        //if any suggestion is select set it into text and close popup
-        item.setOnAction(actionEvent -> {
-            setText(result);
-            positionCaret(result.length());
+        //Hide always by focus-in (optional) and out
+        this.focusedProperty().addListener((observableValue, oldValue, newValue) -> {
             entriesPopup.hide();
         });
     }
 
-    //"Refresh" context menu
-    entriesPopup.getItems().clear();
-    entriesPopup.getItems().addAll(menuItems);
-}
+    public List<String> popUpFilter(SortedSet<String> set, String filter) {
+        return set.stream()
+                .filter(e -> e.toLowerCase().startsWith(filter.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+
+    /*
+     * Populate the entry set with the given search results. Display is limited to 10 entries, for performance.
+     *
+     * @param filteredList The set of matching strings.
+     */
+    public void populatePopup(List<String> filteredList, String searchRequest) {
+        //List of "suggestions"
+        List<CustomMenuItem> menuItems = new LinkedList<>();
+        for (int i = 0; i < filteredList.size(); i++) {
+            final String result = filteredList.get(i);
+
+            //label with graphic (TextFlow) to highlight matching prefix
+            Label entryLabel = new Label();
+            entryLabel.setGraphic(buildTextFlow(result, searchRequest));
+            entryLabel.setPrefHeight(10);
+            CustomMenuItem item = new CustomMenuItem(entryLabel, true);
+            menuItems.add(item);
+
+            //if a suggestion is selected, put it into the textfield and run the command if it is a no additional
+            //field command
+            item.setOnAction(actionEvent -> {
+                this.setText(result);
+                this.positionCaret(result.length());
+                entriesPopup.hide();
+                if (result.equals("save") || result.equals("load") || result.equals("help")
+                        || result.equals("clear") || result.equals("list")) {
+                    commandBox.handleCommandEntered();
+                }
+            });
+        }
+
+        //"Refresh" context menu
+        entriesPopup.getItems().clear();
+        entriesPopup.getItems().addAll(menuItems);
+    }
+
+    /**
+     * Handles the Enter button pressed event.
+     */
+    @FXML
+    public void handleCommandEntered() {
+        commandBox.handleCommandEntered();
+    }
+
     /**
      * Build TextFlow with selected text. Return "case" dependent.
      *
-     * @param text - string with text
+     * @param text   - string with text
      * @param filter - string to select in text
      * @return - TextFlow
      */
@@ -112,9 +149,8 @@ private void populatePopup(List<String> searchResult, String searchRequest) {//L
         int filterIndex = text.toLowerCase().indexOf(filter.toLowerCase());
         Text textBefore = new Text(text.substring(0, filterIndex));
         Text textAfter = new Text(text.substring(filterIndex + filter.length()));
-        Text textFilter = new Text(text.substring(filterIndex,  filterIndex + filter.length())); //instead of "filter" to keep all "case sensitive"
+        Text textFilter = new Text(text.substring(filterIndex, filterIndex + filter.length()));
         textFilter.setFill(Color.ORANGE);
-        //textFilter.setFont(Font.font("Helvetica", FontWeight.BOLD, 12));
         return new TextFlow(textBefore, textFilter, textAfter);
     }
 
