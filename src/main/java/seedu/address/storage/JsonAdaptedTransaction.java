@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.model.person.Transaction;
 
+import java.time.LocalDate;
+
 /**
  * Json for {@code Transaction}
  */
@@ -12,7 +14,7 @@ public class JsonAdaptedTransaction {
     private final String description;
     private final int amount;
     private final String otherParty;
-    private final String date;
+    private final LocalDate date;
 
     /**
      * Constructs a {@code JsonAdaptedTransaction} with the given {@code description},
@@ -20,7 +22,8 @@ public class JsonAdaptedTransaction {
      */
     @JsonCreator
     public JsonAdaptedTransaction(@JsonProperty("description") String description, @JsonProperty("amount") int amount,
-                                  @JsonProperty("otherParty") String otherParty, @JsonProperty("date") String date) {
+                                  @JsonProperty("otherParty") String otherParty, @JsonProperty("date") LocalDate date)
+        {
         this.description = description;
         this.amount = amount;
         this.otherParty = otherParty;
@@ -53,7 +56,7 @@ public class JsonAdaptedTransaction {
     }
 
     @JsonProperty("date")
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

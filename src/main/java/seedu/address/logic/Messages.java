@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,7 +24,10 @@ public class Messages {
     public static final String MESSAGE_TRANSACTIONS_LISTED_OVERVIEW = "Listed %1$d transactions of %2$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format!\nDate format: yyyy-MM-DD";
 
+    public static final DateTimeFormatter DEFAULT_DATE_PARSER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter DEFAULT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -66,7 +70,7 @@ public class Messages {
                 .append("; Other party: ")
                 .append(transaction.getOtherParty())
                 .append("; Date: ")
-                .append(transaction.getDate());
+                .append(transaction.getDate().format(DEFAULT_DATE_TIME_FORMATTER));
 
         return builder.toString();
     }
