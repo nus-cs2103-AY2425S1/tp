@@ -100,16 +100,20 @@ Examples:
 
 Schedules an appointment for a client in the address book.
 
-Format: `schedule NAME d/DATE_AND_TIME [note/NOTES]`
+Format: `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
 
+* You can schedule multiple appointments using the `d/` prefix for each date and time.
+* If multiple `note/` prefixes are used, each note will correspond to the `d/` in the same order. If there are fewer notes than dates, the remaining dates will not have any notes.
 * The given date must fall on a weekday.
 * The given time must be on the hour between 0900 and 1700.
 * Format for the date and time must be in yyyy-MM-dd HHmm.
 * The field for notes is optional.
+* When scheduling appointments, the existing schedules of the person will be removed i.e adding of schedules is not cumulative.
 
 Examples:
 * `schedule John Doe d/2024-10-14 1200`
 * `schedule Betsy Crowe d/2024-10-14 1300 note/first appointment`
+* `schedule John Doe d/2024-10-14 1200 d/2024-10-15 1300 note/important meeting` The note "important meeting" will be associated with the first date only. The second date will have no note.
 
 ### Setting a reminder: `reminder`
 
@@ -255,7 +259,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete NAME`<br> e.g., `delete John Doe`
-**Schedule** | `schedule NAME d/DATE_AND_TIME [note/NOTES]`
+**Schedule** | `schedule NAME d/DATE_AND_TIME…​ [note/NOTES]…​`
 **Appointment Delete** | `appointment-delete NAME`<br> e.g., `appointment-delete John Doe`
 **Reminder** | `reminder NAME r/REMINDER_TIME`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`

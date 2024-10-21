@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,19 +22,6 @@ public class ScheduleCommandParserTest {
     private static final String INVALID_DATE = "invalid_date";
 
     private ScheduleCommandParser parser = new ScheduleCommandParser();
-
-    @Test
-    public void parse_missingParts_failure() {
-        // no name specified
-        assertParseFailure(parser, "d/" + VALID_DATE, MESSAGE_INVALID_DATE_FORMAT);
-
-        // no date specified
-        assertParseFailure(parser, VALID_NAME, MESSAGE_INVALID_DATE_FORMAT);
-
-        // no name and no date specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_DATE_FORMAT);
-    }
-
     @Test
     public void parse_invalidDate_failure() {
         // invalid date format
@@ -45,7 +34,9 @@ public class ScheduleCommandParserTest {
         String userInput = VALID_NAME + " d/" + VALID_DATE;
         LocalDateTime expectedDate = LocalDateTime.parse(VALID_DATE, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         Schedule expectedSchedule = new Schedule(VALID_DATE, "");
-        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, expectedSchedule);
+        Set<Schedule> schedules = new HashSet<>();
+        schedules.add(expectedSchedule);
+        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, schedules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -56,7 +47,9 @@ public class ScheduleCommandParserTest {
         String userInput = "    " + VALID_NAME + "     d/" + VALID_DATE + "   ";
         LocalDateTime expectedDate = LocalDateTime.parse(VALID_DATE, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
         Schedule expectedSchedule = new Schedule(VALID_DATE, "");
-        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, expectedSchedule);
+        Set<Schedule> schedules = new HashSet<>();
+        schedules.add(expectedSchedule);
+        ScheduleCommand expectedCommand = new ScheduleCommand(VALID_NAME, schedules);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

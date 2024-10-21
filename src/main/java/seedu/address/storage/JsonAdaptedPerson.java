@@ -30,8 +30,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String schedule;
-    private final String note;
+    private final List<JsonAdaptedSchedule> schedules = new ArrayList<>();
     private final String reminderTime;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -41,14 +40,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
              @JsonProperty("email") String email, @JsonProperty("address") String address,
-             @JsonProperty("schedule") String schedule, @JsonProperty("note") String note,
+             @JsonProperty("schedules") List<JsonAdaptedSchedule> schedules,
             @JsonProperty("reminderTime") String reminderTime, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.schedule = schedule;
-        this.note = note;
+        if (schedules != null) {
+            this.schedules.addAll(schedules);
+        }
         this.reminderTime = reminderTime;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -63,8 +63,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        schedule = source.getSchedule().dateTime;
-        note = source.getSchedule().getNotes();
+        schedules.addAll(source.getSchedules().stream()
+                .map(JsonAdaptedSchedule::new)
+                .collect(Collectors.toList()));
         reminderTime = source.getReminder().reminderTime;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -80,6 +81,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+        final List<Schedule> personSchedules = new ArrayList<>();
+        for (JsonAdaptedSchedule schedule : schedules) {
+            personSchedules.add(schedule.toModelType());
         }
 
         if (name == null) {
@@ -114,12 +119,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (schedule == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Schedule.class.getSimpleName()));
-        }
-
-        final Schedule modelSchedule = new Schedule(schedule, note);
+        final Set<Schedule> modelSchedule = new HashSet<>(personSchedules);
 
         if (reminderTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

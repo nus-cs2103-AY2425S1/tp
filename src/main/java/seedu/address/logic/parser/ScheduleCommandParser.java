@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -28,14 +27,20 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
     public ScheduleCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_NOTE);
-        try {
-            String name = argMultimap.getPreamble();
-            String date = argMultimap.getValue(PREFIX_DATE).orElse("");
-            LocalDateTime dateTime = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            String note = argMultimap.getValue(PREFIX_NOTE).orElse("");
-            return new ScheduleCommand(name, new Schedule(date, note.trim()));
-        } catch (DateTimeParseException e) {
-            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
+        String name = argMultimap.getPreamble();
+        Set<Schedule> scheduleList = ParserUtil.parseSchedules(argMultimap.getAllValues(PREFIX_DATE),
+            argMultimap.getAllValues(PREFIX_NOTE));
+        return new ScheduleCommand(name, scheduleList);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

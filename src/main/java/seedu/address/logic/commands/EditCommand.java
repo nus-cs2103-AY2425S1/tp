@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Schedule updatedSchedule = editPersonDescriptor.getSchedule().orElse(personToEdit.getSchedule());
+        Set<Schedule> updatedSchedule = editPersonDescriptor.getSchedules().orElse(personToEdit.getSchedules());
         Reminder updatedReminder = editPersonDescriptor.getReminder().orElse(personToEdit.getReminder());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Schedule schedule;
+        private Set<Schedule> schedules;
         private Reminder reminder;
         private Set<Tag> tags;
 
@@ -157,7 +157,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setSchedule(toCopy.schedule);
+            setSchedules(toCopy.schedules);
             setReminder(toCopy.reminder);
             setTags(toCopy.tags);
         }
@@ -201,12 +201,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setSchedule(Schedule schedule) {
-            this.schedule = schedule;
+        public void setSchedules(Set<Schedule> schedules) {
+            this.schedules = (schedules != null) ? new HashSet<>(schedules) : null;
         }
 
-        public Optional<Schedule> getSchedule() {
-            return Optional.ofNullable(schedule);
+        public Optional<Set<Schedule>> getSchedules() {
+            return (schedules != null) ? Optional.of(Collections.unmodifiableSet(schedules)) : Optional.empty();
         }
 
         public void setReminder(Reminder reminder) {
@@ -250,7 +250,7 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(schedule, otherEditPersonDescriptor.schedule)
+                    && Objects.equals(schedules, otherEditPersonDescriptor.schedules)
                     && Objects.equals(reminder, otherEditPersonDescriptor.reminder)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -262,7 +262,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("schedule", schedule)
+                    .add("schedules", schedules)
                     .add("reminder", reminder)
                     .add("tags", tags)
                     .toString();

@@ -1,5 +1,12 @@
 package seedu.address.model.person;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_FORMAT;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a Person's scheduled appointment in the address book.
@@ -7,7 +14,7 @@ package seedu.address.model.person;
  */
 public class Schedule {
 
-    public final String dateTime;
+    private final String dateTime;
     private final String notes;
 
     /**
@@ -22,11 +29,30 @@ public class Schedule {
     }
 
     /**
+     * Returns the date and time associated with the appointment.
+     * @return a {@code String} representing the date and time.
+     */
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    /**
      * Returns the notes associated with the appointment.
      * @return a {@code String} representing the notes.
      */
     public String getNotes() {
         return notes;
+    }
+
+    /**
+     * Returns true if a given string is a valid date time.
+     */
+    public static void isValidDateTime(String dateTime) throws ParseException {
+        try {
+            LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(MESSAGE_INVALID_DATE_FORMAT);
+        }
     }
 
     @Override

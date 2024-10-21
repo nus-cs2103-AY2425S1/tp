@@ -39,7 +39,6 @@
       </padding>
       <Label text="Appointment details" styleClass="cell_appointment" style="-fx-text-fill: #ffffff;" />
       <Label fx:id="schedule" styleClass="cell_small_label" text="\$schedule" />
-      <Label fx:id="note" styleClass="cell_small_label" text="\$note" />
       <Label fx:id="reminder" styleClass="cell_small_label" text="\$reminder" />
     </VBox>
   </GridPane>

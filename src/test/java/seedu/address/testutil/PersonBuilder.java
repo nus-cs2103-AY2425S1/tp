@@ -29,7 +29,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Schedule schedule;
+    private Set<Schedule> schedules;
     private Reminder reminder;
     private Set<Tag> tags;
 
@@ -41,7 +41,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        schedule = new Schedule(DEFAULT_SCHEDULE, "");
+        schedules = new HashSet<>();
         reminder = new Reminder(DEFAULT_REMINDER);
         tags = new HashSet<>();
     }
@@ -54,7 +54,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
-        schedule = personToCopy.getSchedule();
+        schedules = new HashSet<>(personToCopy.getSchedules());
         reminder = personToCopy.getReminder();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -102,8 +102,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Schedule} of the {@code Person} that we are building.
      */
-    public PersonBuilder withSchedule(String dateTime, String note) {
-        this.schedule = new Schedule(dateTime, note);
+    public PersonBuilder withSchedule(String[] dateTime, String[] note) {
+        this.schedules = SampleDataUtil.getScheduleSet(dateTime, note);
         return this;
     }
 
@@ -116,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, schedule, reminder, tags);
+        return new Person(name, phone, email, address, schedules, reminder, tags);
     }
 
 }

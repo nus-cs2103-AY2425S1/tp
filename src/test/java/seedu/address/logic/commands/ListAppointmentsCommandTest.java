@@ -41,11 +41,11 @@ public class ListAppointmentsCommandTest {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
         Person person1 = new PersonBuilder().withName("Alice")
-                .withSchedule(now.plusDays(1).format(inputFormatter), "").build();
+                .withSchedule(new String[]{now.plusDays(1).format(inputFormatter)}, new String[]{""}).build();
         Person person2 = new PersonBuilder().withName("Bob")
-                .withSchedule(now.plusDays(2).format(inputFormatter), "").build();
+                .withSchedule(new String[]{now.plusDays(2).format(inputFormatter)}, new String[]{""}).build();
         Person person3 = new PersonBuilder().withName("Charlie")
-                .withSchedule(now.minusDays(1).format(inputFormatter), "").build();
+                .withSchedule(new String[]{now.minusDays(1).format(inputFormatter)}, new String[]{""}).build();
         model.addPerson(person1);
         model.addPerson(person2);
         model.addPerson(person3);
@@ -69,9 +69,9 @@ public class ListAppointmentsCommandTest {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
         Person person1 = new PersonBuilder().withName("Alice")
-                .withSchedule(now.plusDays(1).format(inputFormatter), "").build();
+                .withSchedule(new String[]{now.plusDays(1).format(inputFormatter)}, new String[]{""}).build();
         Person person2 = new PersonBuilder().withName("Bob")
-                .withSchedule(now.plusDays(2).format(inputFormatter), "").build();
+                .withSchedule(new String[]{now.plusDays(2).format(inputFormatter)}, new String[]{""}).build();
         model.addPerson(person1);
         model.addPerson(person2);
         expectedModel.addPerson(person1);
@@ -95,11 +95,14 @@ public class ListAppointmentsCommandTest {
 
         // Create persons with appointments at different times
         Person person1 = new PersonBuilder().withName("Alice")
-                .withSchedule(testDate.atTime(testTime).format(inputFormatter), "").build();
+                .withSchedule(new String[]{testDate.atTime(testTime).format(inputFormatter)},
+                        new String[]{""}).build();
         Person person2 = new PersonBuilder().withName("Bob")
-                .withSchedule(testDate.atTime(testTime.plusHours(1)).format(inputFormatter), "").build();
+                .withSchedule(new String[]{testDate.atTime(testTime.plusHours(1)).format(inputFormatter)},
+                        new String[]{""}).build();
         Person person3 = new PersonBuilder().withName("Charlie")
-                .withSchedule(testDate.atTime(testTime.minusHours(1)).format(inputFormatter), "")
+                .withSchedule(new String[]{testDate.atTime(testTime.minusHours(1))
+                        .format(inputFormatter)}, new String[]{""})
                 .build();
 
         model.addPerson(person1);

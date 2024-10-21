@@ -1,8 +1,10 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -20,7 +22,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final Schedule EMPTY_SCHEDULE = new Schedule("", "");
+    public static final Set<Schedule> EMPTY_SCHEDULE = new HashSet<>();
     public static final Reminder EMPTY_REMINDER = new Reminder("");
     public static Person[] getSamplePersons() {
 
@@ -60,6 +62,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a schedule set containing the list of strings given.
+     */
+    public static Set<Schedule> getScheduleSet(String[] dateTime, String[] notes) {
+        return IntStream.range(0, dateTime.length)
+                .mapToObj(i -> new Schedule(dateTime[i], notes[i]))
                 .collect(Collectors.toSet());
     }
 
