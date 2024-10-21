@@ -2,6 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,7 +26,12 @@ public class ExportCommand extends Command {
             + "Parameters: " + "FILETYPE\n"
             + "Example: " + COMMAND_WORD + " f/csv";
 
-    public static final String MESSAGE_SUCCESS = "Contact list exported to a %1$s file";
+    public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
+    public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file";
+
+    private final String csvHeaders = "Name,Phone No, Email, Address, Tags, Notes";
+
+    private final Path expoerCsvPath = Paths.get("exports" , "bizbook.csv");
 
     private final String fileType;
 
@@ -37,7 +49,25 @@ public class ExportCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        ObservableList<Person> list = model.getFilteredPersonList();
+        try {
+            if (!Files.exists(expoerCsvPath.getParent())) {
+                Files.createDirectories(expoerCsvPath.getName(0));
+            }
+            // Create a csv file to save the tasks
+            File dataFile = new File(expoerCsvPath.toString());
+            FileWriter fw = new FileWriter(dataFile);
+
+            fw.write(this.csvHeaders);
+
+            ObservableList<Person> personList = model.getFilteredPersonList();
+            for (Person person : personList) {
+                String personData = person.toCsvString();
+                fw.write(personData + "\n");
+            }
+            fw.close();
+        } catch (IOException io) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileType));
     }
