@@ -15,10 +15,11 @@ public class FindLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all lessons whose students' names "
+    public static final String MESSAGE_USAGE = LessonCommand.COMMAND_WORD + " " + COMMAND_WORD
+            + ": Finds all lessons whose students' names "
             + "match the specified names (case-insensitive) and displays them in the lesson panel. \n "
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: lesson " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + LessonCommand.COMMAND_WORD + " " + COMMAND_WORD + " alice bob charlie";
 
     private final LessonContainsNamesPredicate predicate;
 
