@@ -37,6 +37,10 @@ public class ClearCommandParser implements Parser<ClearCommand> {
             return new ClearAllCommand();
         }
 
+        if (commandField.equals(ClearEventsCommand.COMMAND_FIELD)) {
+            return new ClearEventsCommand();
+        }
+
         logger.finer("This user input caused a ParseException: view " + args);
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
