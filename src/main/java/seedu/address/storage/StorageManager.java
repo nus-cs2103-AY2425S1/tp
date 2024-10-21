@@ -101,14 +101,12 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveMeetUpList(ReadOnlyMeetUpList meetUpList) throws IOException {
-        logger.info("meetup list is " + meetUpList + "and storage is " + meetUpListStorage.getMeetUpListFilePath());
         saveMeetUpList(meetUpList, meetUpListStorage.getMeetUpListFilePath());
     }
 
     @Override
     public void saveMeetUpList(ReadOnlyMeetUpList meetUpList, Path filePath) throws IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        logger.info("meetup list is " + meetUpList + "and storage is " + filePath);
         meetUpListStorage.saveMeetUpList(meetUpList, filePath);
     }
 }
