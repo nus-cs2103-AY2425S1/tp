@@ -1,8 +1,10 @@
 package seedu.address.logic.handler;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +17,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-
-
-
-
 
 public class DuplicatePhoneTaggerTest {
 
@@ -114,6 +112,15 @@ public class DuplicatePhoneTaggerTest {
                         .anyMatch(tag -> tag
                                 .tagName
                                 .equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME))));
+
+        HashMap<Phone, Integer> phoneFrequencies = duplicatePhoneTagger.getPhoneFrequencies();
+        for (Phone phoneNumber : phoneFrequencies.keySet()) {
+            if (phoneNumber.equals(new Phone(TEST_PHONE_TWO))) {
+                assertEquals(2, phoneFrequencies.get(phoneNumber));
+            } else {
+                assertEquals(1, phoneFrequencies.get(phoneNumber));
+            }
+        }
     }
 
     @Test
@@ -130,6 +137,11 @@ public class DuplicatePhoneTaggerTest {
                         .anyMatch(tag -> tag
                                 .tagName
                                 .equals(DuplicatePhoneTagger.DUPLICATE_PHONE_TAG_NAME))));
+
+        HashMap<Phone, Integer> phoneFrequencies = duplicatePhoneTagger.getPhoneFrequencies();
+        for (Phone phoneNumber : phoneFrequencies.keySet()) {
+            assertEquals(1, phoneFrequencies.get(phoneNumber));
+        }
     }
 
 }

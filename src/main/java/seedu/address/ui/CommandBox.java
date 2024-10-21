@@ -82,4 +82,11 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Getter method for command text field
+     */
+    public TextField getCommandTextField() {
+        return commandTextField;
+    }
+
 }
