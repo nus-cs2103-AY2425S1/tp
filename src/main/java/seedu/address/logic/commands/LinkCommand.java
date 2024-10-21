@@ -32,8 +32,8 @@ public class LinkCommand extends Command {
 
     public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
 
-    public static final String ROLE_NOT_MATCH = "Incorrect roles. The patient NRIC must correspond to a patient, and the "
-            + "caregiver NRIC must correspond to a caregiver.";
+    public static final String ROLE_NOT_MATCH = "Incorrect roles. The patient NRIC must correspond to a patient, "
+            + "and the caregiver NRIC must correspond to a caregiver.";
 
     private final Nric patientNric;
     private final Nric caregiverNric;
