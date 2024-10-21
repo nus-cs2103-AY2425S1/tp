@@ -19,14 +19,17 @@ public class TagContactContainsKeywordPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        TagContactContainsKeywordPredicate firstPredicate = new TagContactContainsKeywordPredicate(firstPredicateKeywordList);
-        TagContactContainsKeywordPredicate secondPredicate = new TagContactContainsKeywordPredicate(secondPredicateKeywordList);
+        TagContactContainsKeywordPredicate firstPredicate =
+                new TagContactContainsKeywordPredicate(firstPredicateKeywordList);
+        TagContactContainsKeywordPredicate secondPredicate =
+                new TagContactContainsKeywordPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        NameContainsKeywordsPredicate firstPredicateCopy =
+                new NameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +45,8 @@ public class TagContactContainsKeywordPredicateTest {
     @Test
     public void test_tagContactContainsKeywords_returnsTrue() {
         // One keyword
-        TagContactContainsKeywordPredicate predicate = new TagContactContainsKeywordPredicate(Collections.singletonList("friend"));
+        TagContactContainsKeywordPredicate predicate =
+                new TagContactContainsKeywordPredicate(Collections.singletonList("friend"));
         assertTrue(predicate.test(new PersonBuilder().withTags("friend colleague").build()));
 
         // Multiple keywords
@@ -61,7 +65,8 @@ public class TagContactContainsKeywordPredicateTest {
     @Test
     public void test_tagContactDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        TagContactContainsKeywordPredicate predicate = new TagContactContainsKeywordPredicate(Collections.emptyList());
+        TagContactContainsKeywordPredicate predicate =
+                new TagContactContainsKeywordPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withTags("Alice").build()));
 
         // Non-matching keyword
@@ -69,7 +74,9 @@ public class TagContactContainsKeywordPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withTags("cook", "driver").build()));
 
         // Keywords match phone, name email and address, but does not match tag
-        predicate = new TagContactContainsKeywordPredicate(Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street", "friend"));
+        predicate =
+                new TagContactContainsKeywordPredicate(Arrays.asList(
+                        "Alice", "12345", "alice@email.com", "Main", "Street", "friend"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").withTags("classmate").build()));
     }
