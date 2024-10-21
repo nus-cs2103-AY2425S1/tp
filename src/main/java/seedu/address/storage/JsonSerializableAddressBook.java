@@ -23,15 +23,18 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedOrder> orders = new ArrayList<>();
+    private final List<JsonAdaptedShortCut> shortcuts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-                                       @JsonProperty("orders") List<JsonAdaptedOrder> orders) {
+                                       @JsonProperty("orders") List<JsonAdaptedOrder> orders,
+                                        @JsonProperty("shortcuts") List<JsonAdaptedShortCut> shortcuts) {
         this.persons.addAll(persons);
         this.orders.addAll(orders);
+        this.shortcuts.addAll(shortcuts);
     }
 
     /**
@@ -42,6 +45,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         orders.addAll(source.getOrderList().stream().map(JsonAdaptedOrder::new).collect(Collectors.toList()));
+        shortcuts.addAll(source.getShortCutList().stream().map(JsonAdaptedShortCut::new).collect(Collectors.toList()));
     }
 
     /**
@@ -60,6 +64,9 @@ class JsonSerializableAddressBook {
         }
         for (JsonAdaptedOrder jsonAdaptedOrder: orders) {
             addressBook.addOrder(jsonAdaptedOrder.toModelType());
+        }
+        for (JsonAdaptedShortCut jsonAdaptedShortCut: shortcuts) {
+            addressBook.addShortCut(jsonAdaptedShortCut.toModelType());
         }
         return addressBook;
     }

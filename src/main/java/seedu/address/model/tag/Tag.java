@@ -1,5 +1,9 @@
 package seedu.address.model.tag;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.Model;
+import seedu.address.model.shortcut.ShortCut;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -14,27 +18,25 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*[\\p{Alnum}]?$";
-    private static HashMap<String, String> dietaryRestrictionsMappings = new HashMap<>();
-
+    private static HashMap<String, String> shortCutMap = new HashMap<>();
     private static String allMappings;
 
+
     static {
-        dietaryRestrictionsMappings.put("v", "Vegan");
-        dietaryRestrictionsMappings.put("vg", "Vegetarian");
-        dietaryRestrictionsMappings.put("gf", "Gluten free");
-        dietaryRestrictionsMappings.put("l", "Lactose Intolerant");
-        dietaryRestrictionsMappings.put("na", "Nut Allergy");
-        dietaryRestrictionsMappings.put("sa", "Soy Allergy");
-        dietaryRestrictionsMappings.put("p", "Pescatarian");
-
-        StringBuilder mappingsBuilder = new StringBuilder("Current Dietary Restriction Tags:\n");
-        for (Map.Entry<String, String> entry : dietaryRestrictionsMappings.entrySet()) {
-            mappingsBuilder.append(entry.getKey()).append(" -> ").append(entry.getValue()).append("\n");
+        if (shortCutMap.isEmpty()) {
+            // If the HashMap is empty, set the message to "no shortcuts assigned"
+            allMappings = "no shortcuts assigned";
+        } else {
+            // If there are mappings, format the mappings as a string and assign to allMappings
+            StringBuilder mappingsBuilder = new StringBuilder();
+            shortCutMap.forEach((alias, fullTagName) -> {
+                mappingsBuilder.append("Alias: ").append(alias)
+                        .append(" -> FullTagName: ").append(fullTagName)
+                        .append("\n");
+            });
+            allMappings = mappingsBuilder.toString().trim();  // Remove the trailing newline
         }
-        allMappings = mappingsBuilder.toString();
     }
-
-
     public final String tagName;
     /**
      * Constructs a {@code Tag}.
@@ -44,7 +46,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         //check if tagname exists in dietary_restrictions_map and replace it with that mapped value if exist
-        String fullTagName = dietaryRestrictionsMappings.getOrDefault(tagName, tagName);
+        String fullTagName = shortCutMap.getOrDefault(tagName, tagName);
         checkArgument(isValidTagName(fullTagName), MESSAGE_CONSTRAINTS);
         this.tagName = fullTagName;
     }
@@ -54,6 +56,19 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+    /**
+     * updates the hashmap containing the alias and fulltagname
+     * @param model
+     */
+    public static void updateShortCutMappings(Model model) {
+        ObservableList<ShortCut> shortCutList = model.getShortCutList();
+        HashMap<String, String> mapping = new HashMap<>();
+        for (ShortCut shortCut : shortCutList) {
+            // Put alias as key and fullTagName as value in the HashMap
+            mapping.put(shortCut.getAlias().toString(), shortCut.getFullTagName().toString());
+        }
+        shortCutMap = mapping;
     }
 
     @Override
@@ -97,15 +112,6 @@ public class Tag {
      * @return hashmap of all tags and shortcuts
      */
     public static HashMap<String, String> getDietaryRestrictionsMappings() {
-        return dietaryRestrictionsMappings;
+        return shortCutMap;
     }
-
-    /**
-     * @param key is the shortcut users would want to use for dietary restriction
-     * @param value is the actual value to be displayed
-     */
-    public static void addDietaryRestrictionMapping(String key, String value) {
-        dietaryRestrictionsMappings.put(key, value);
-    }
-
 }
