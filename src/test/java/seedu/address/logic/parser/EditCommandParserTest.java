@@ -109,7 +109,7 @@ public class EditCommandParserTest {
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
                 + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + INVALID_TIER_DESC, Tier.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TIER_DESC, Tier.MESSAGE_CONSTRAINTS); // invalid tier
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -206,7 +206,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // AddCommandParserTest#parse_repeatedNonTierValue_failure()
 
         // valid followed by invalid
         Index targetIndex = INDEX_FIRST_PERSON;
@@ -236,7 +236,7 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetTier_success() {
         Index targetIndex = INDEX_THIRD_PERSON;
         String userInput = targetIndex.getOneBased() + TIER_EMPTY;
 

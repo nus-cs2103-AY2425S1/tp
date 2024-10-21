@@ -8,7 +8,7 @@
       "address": "123, Jurong West Ave 6, #08-111",
       "job": "Engineer",
       "income": "3",
-      "tagged": "GOLD",
+      "assignedTier": "GOLD",
       "remark": "She is stingy"
     },
     {
@@ -18,7 +18,7 @@
       "address": "311, Clementi Ave 2, #02-25",
       "job": "Doctor",
       "income": "40",
-      "tagged": "BRONZE",
+      "assignedTier": "BRONZE",
       "remark": "He is rich"
     },
     {
@@ -28,7 +28,7 @@
       "address": "wall street",
       "job": "Lawyer",
       "income": "40",
-      "tagged": "NA",
+      "assignedTier": "NA",
       "remark": ""
     },
     {
@@ -38,7 +38,7 @@
       "address": "10th street",
       "job": "Artist",
       "income": "30",
-      "tagged": "REJECT",
+      "assignedTier": "REJECT",
       "remark": ""
     },
     {
@@ -48,7 +48,7 @@
       "address": "michegan ave",
       "job": "Nurse",
       "income": "20",
-      "tagged": "NA",
+      "assignedTier": "NA",
       "remark": ""
     },
     {
@@ -58,7 +58,7 @@
       "address": "little tokyo",
       "job": "Chef",
       "income": "45",
-      "tagged": "NA",
+      "assignedTier": "NA",
       "remark": "Rich japanese person"
     },
     {
@@ -68,7 +68,7 @@
       "address": "4th street",
       "job": "Teacher",
       "income": "50",
-      "tagged": "NA",
+      "assignedTier": "NA",
       "remark": ""
     }
   ]

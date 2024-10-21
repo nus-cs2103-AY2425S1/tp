@@ -18,7 +18,7 @@ public class TierStartsWithSubstringPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return StringUtil.startsWithSubstringIgnoreCase(person.getTier().tagName.name(), substring);
+        return StringUtil.startsWithSubstringIgnoreCase(person.getTier().toParsableString(), substring);
     }
 
     @Override

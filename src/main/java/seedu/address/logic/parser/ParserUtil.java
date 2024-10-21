@@ -13,6 +13,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tier.Tier;
+import seedu.address.model.util.IncomeComparisonOperator;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -141,24 +142,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tier parseTier(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (trimmedTag.isEmpty()) {
-            trimmedTag = Tier.TierEnum.NA.toString();
-        }
-        if (!Tier.isValidTierName(trimmedTag)) {
-            throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
-        }
-        return new Tier(trimmedTag);
-    }
-
-    /**
      * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces are trimmed.
      *
@@ -168,10 +151,43 @@ public class ParserUtil {
         requireNonNull(remark);
         String trimmedRemark = remark.trim();
         if (!Remark.isValidRemark(trimmedRemark)) {
-            System.out.println("exception thrown");
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String tier} into a {@code Tier}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tier} is invalid.
+     */
+    public static Tier parseTier(String tier) throws ParseException {
+        requireNonNull(tier);
+        String trimmedTier = tier.trim();
+        if (tier.equals(Tier.TierEnum.NA.toString())) {
+            throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
+        }
+        if (!Tier.isValidTierName(trimmedTier)) {
+            throw new ParseException(Tier.MESSAGE_CONSTRAINTS);
+        }
+        return new Tier(trimmedTier);
+    }
+
+    /**
+     * Parses a {@code String operator} into a {@code IncomeComparisonOperator}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code operator} is invalid.
+     */
+    public static IncomeComparisonOperator parseIncomeComparisonOperator(String operator) throws ParseException {
+        requireNonNull(operator);
+        String trimmedOperator = operator.trim();
+        if (!IncomeComparisonOperator.isValidComparisonOperator(trimmedOperator)) {
+            System.out.println(("HERE"));
+            throw new ParseException(IncomeComparisonOperator.MESSAGE_CONSTRAINTS);
+        }
+        return new IncomeComparisonOperator(trimmedOperator);
     }
 
 }

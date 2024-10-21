@@ -28,7 +28,7 @@ class JsonAdaptedPerson {
     private final String job;
     private final String incomeString;
     private final String remark;
-    private final JsonAdaptedTag tagged;
+    private final JsonAdaptedTier assignedTier;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("job") String job, @JsonProperty("income") String incomeString,
-                             @JsonProperty("tagged") JsonAdaptedTag tagged,
+                             @JsonProperty("assignedTier") JsonAdaptedTier assignedTier,
                              @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
@@ -46,7 +46,7 @@ class JsonAdaptedPerson {
         this.job = job;
         this.incomeString = incomeString;
         this.remark = remark;
-        this.tagged = tagged != null ? tagged : new JsonAdaptedTag("NA");
+        this.assignedTier = assignedTier != null ? assignedTier : new JsonAdaptedTier("");
     }
 
     /**
@@ -61,7 +61,7 @@ class JsonAdaptedPerson {
         incomeString = Integer.toString(source.getIncome().value);
         remark = source.getRemark().value;
         Tier tier = source.getTier();
-        tagged = tier != null ? new JsonAdaptedTag(tier) : new JsonAdaptedTag("NA");
+        assignedTier = tier != null ? new JsonAdaptedTier(tier) : new JsonAdaptedTier("");
     }
 
     /**
@@ -115,10 +115,10 @@ class JsonAdaptedPerson {
         }
         final Income modelIncome = new Income(Integer.parseInt(incomeString));
 
-        if (tagged == null) {
+        if (assignedTier == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tier.class.getSimpleName()));
         }
-        final Tier modelTier = tagged.toModelType();
+        final Tier modelTier = assignedTier.toModelType();
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));

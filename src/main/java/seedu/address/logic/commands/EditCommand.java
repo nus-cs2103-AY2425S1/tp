@@ -49,7 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_JOB + "JOB] "
             + "[" + PREFIX_INCOME + "INCOME] "
-            + "[" + PREFIX_TIER + "TAG]...\n"
+            + "[" + PREFIX_TIER + "TIER]...\n"
             + "[" + PREFIX_NEW_REMARK + "NEW REMARK] "
             + "[" + PREFIX_APPEND_REMARK + "ADD-ON TO EXISTING REMARK] "
             + "Example: " + COMMAND_WORD + " 1 "

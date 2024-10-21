@@ -15,8 +15,8 @@ public class TierTest {
 
     @Test
     public void constructor_invalidTierName_throwsIllegalArgumentException() {
-        String invalidTagName = "yellow";
-        assertThrows(IllegalArgumentException.class, () -> new Tier(invalidTagName));
+        String invalidTierName = "yellow";
+        assertThrows(IllegalArgumentException.class, () -> new Tier(invalidTierName));
     }
 
     @Test
@@ -27,7 +27,7 @@ public class TierTest {
 
     @Test
     public void isValidTierName() {
-        // null tag name
+        // null tier name
         assertThrows(NullPointerException.class, () -> Tier.isValidTierName(null));
 
         // valid tiers -> return true
@@ -36,7 +36,6 @@ public class TierTest {
         assertTrue(Tier.isValidTierName("gOLd")); // Mix of both cases
 
         // invalid tier -> returns false
-        assertFalse(Tier.isValidTierName("")); // Empty String
         assertFalse(Tier.isValidTierName(" ")); // Only contains spaces
         assertFalse(Tier.isValidTierName("invalid")); // Not present in the enum
     }

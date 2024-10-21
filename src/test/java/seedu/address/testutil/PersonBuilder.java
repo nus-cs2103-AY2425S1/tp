@@ -71,10 +71,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tier} into a {@code Set<Tier>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTier(String tag) {
-        this.tier = new Tier(tag);
+    public PersonBuilder withTier(String tier) {
+        this.tier = new Tier(tier);
         return this;
     }
 

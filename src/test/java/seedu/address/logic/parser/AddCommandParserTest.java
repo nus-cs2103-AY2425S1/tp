@@ -74,7 +74,7 @@ public class AddCommandParserTest {
 
 
     @Test
-    public void parse_repeatedNonTagValue_failure() {
+    public void parse_repeatedNonTierValue_failure() {
         String validExpectedPersonString = NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + JOB_DESC_BOB + INCOME_DESC_BOB + TIER_DESC_GOLD;
 
@@ -137,7 +137,7 @@ public class AddCommandParserTest {
     }
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
+        // no tier
         Person expectedPerson = new PersonBuilder(AMY).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + JOB_DESC_AMY + INCOME_DESC_AMY,
@@ -210,7 +210,7 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INCOME_DESC_BOB + INVALID_JOB_DESC + TIER_DESC_GOLD, Job.MESSAGE_CONSTRAINTS);
 
-        // invalid tag
+        // invalid tier
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INCOME_DESC_BOB + JOB_DESC_BOB + INVALID_TIER_DESC + VALID_TIER_GOLD, Tier.MESSAGE_CONSTRAINTS);
 
