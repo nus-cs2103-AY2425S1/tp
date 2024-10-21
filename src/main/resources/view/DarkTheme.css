@@ -1,7 +1,11 @@
+* {
+    -fx-primary-color: derive(#1d1d1d, 20%);
+}
+
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-primary-color;
 }
 
 .list-cell {
@@ -44,11 +48,11 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: -fx-primary-color;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-background-color: -fx-primary-color;
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
 }
@@ -104,7 +108,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-primary-color;
 }
 
 .menu-bar .label {
@@ -193,7 +197,7 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -fx-primary-color;
 }
 
 .scroll-bar .thumb {
