@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -75,6 +78,27 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final String VALID_WEDDING_NAME_ONE = "John Loh & Jean Tan";
+    public static final String VALID_WEDDING_NAME_TWO = "Alice Tan & Bob Lee";
+    public static final String VALID_VENUE_ONE = "Orchard Hotel";
+    public static final String VALID_VENUE_TWO = "Botanic Gardens";
+    public static final String VALID_DATETIME_ONE = "12/11/2024";
+    public static final String VALID_DATETIME_TWO = "25/12/2024";
+
+    public static final String WEDDING_NAME_DESC_ONE = " " + PREFIX_WEDDING_NAME + VALID_WEDDING_NAME_ONE;
+    public static final String WEDDING_NAME_DESC_TWO = " " + PREFIX_WEDDING_NAME + VALID_WEDDING_NAME_TWO;
+    public static final String VENUE_DESC_ONE = " " + PREFIX_VENUE + VALID_VENUE_ONE;
+    public static final String VENUE_DESC_TWO = " " + PREFIX_VENUE + VALID_VENUE_TWO;
+    public static final String DATETIME_DESC_ONE = " " + PREFIX_DATETIME + VALID_DATETIME_ONE;
+    public static final String DATETIME_DESC_TWO = " " + PREFIX_DATETIME + VALID_DATETIME_TWO;
+
+    public static final String INVALID_WEDDING_NAME_DESC = " " + PREFIX_WEDDING_NAME
+            + "John Loh and Jean Tan"; // 'and' not allowed
+    public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE + " "; // empty venue description not allowed
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "42/02/2023"; // invalid date
+
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
