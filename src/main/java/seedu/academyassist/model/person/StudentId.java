@@ -9,9 +9,10 @@ import seedu.academyassist.commons.util.AppUtil;
  */
 public class StudentId {
     public static final String MESSAGE_CONSTRAINTS =
-            "Student ID should only contain numeric characters and must be a 5-digit number between 00001 and 99999";
-    public static final StudentId TEMPORARY_STUDENT_ID = new StudentId("99999");
-    public static final String VALIDATION_REGEX = "^(?!00000)\\d{5}$";
+            "Student ID should only contain alphanumeric characters and must be "
+            + "S followed by 5-digit number between 00001 and 99999";
+    public static final StudentId TEMPORARY_STUDENT_ID = new StudentId("S99999");
+    public static final String VALIDATION_REGEX = "^S(?!00000)\\d{5}$";
     public final String value;
 
     /**
@@ -35,7 +36,7 @@ public class StudentId {
      * Generates and returns a new unassigned student id.
      */
     public static StudentId generateNewStudentId(int studentCount) {
-        return new StudentId(String.format("%05d", studentCount + 10000));
+        return new StudentId(String.format("S%05d", studentCount));
     }
 
     @Override

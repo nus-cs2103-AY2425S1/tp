@@ -8,8 +8,7 @@
       "address": "123, Jurong West Ave 6, #08-111",
       "ic": "F2234567X",
       "year group": "1",
-      "student id": "10001",
-      "tags": ["friends"],
+      "student id": "S10001",
       "subjects": ["English"]
     },
     {
@@ -19,9 +18,8 @@
       "address": "311, Clementi Ave 2, #02-25",
       "ic": "F1264567X",
       "year group": "1",
-      "student id": "10002",
-      "tags": ["owesMoney", "friends"],
-      "subjects": ["Maths"]
+      "student id": "S10002",
+      "subjects": ["Math"]
     },
     {
       "name": "Carl Kurz",
@@ -30,8 +28,7 @@
       "address": "wall street",
       "ic": "F1254567X",
       "year group": "1",
-      "student id": "10003",
-      "tags": [],
+      "student id": "S10003",
       "subjects": ["Science"]
     },
     {
@@ -41,8 +38,7 @@
       "address": "10th street",
       "ic": "F1234569X",
       "year group": "1",
-      "student id": "10004",
-      "tags": ["friends"],
+      "student id": "S10004",
       "subjects": ["English"]
     },
     {
@@ -52,8 +48,7 @@
       "address": "michegan ave",
       "ic": "F2238567X",
       "year group": "1",
-      "student id": "10005",
-      "tags": [],
+      "student id": "S10005",
       "subjects": ["English"]
     },
     {
@@ -63,8 +58,7 @@
       "address": "little tokyo",
       "ic": "F1334567X",
       "year group": "1",
-      "student id": "10006",
-      "tags": [],
+      "student id": "S10006",
       "subjects": ["English"]
     },
     {
@@ -74,8 +68,7 @@
       "address": "4th street",
       "ic": "F1294667X",
       "year group": "1",
-      "student id": "10007",
-      "tags": [],
+      "student id": "S10007",
       "subjects": ["Science"]
     }
   ]

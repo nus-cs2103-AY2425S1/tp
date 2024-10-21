@@ -13,6 +13,7 @@ import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ModelManager;
 import seedu.academyassist.model.UserPrefs;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.SubjectEnum;
 import seedu.academyassist.testutil.PersonBuilder;
 
 /**
@@ -29,7 +30,9 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder("10008").build();
+        Person validPerson = new PersonBuilder("S00008")
+                .withSubjects(SubjectEnum.MATH.getSubjectName(), SubjectEnum.ENGLISH.getSubjectName())
+                .build();
 
         Model expectedModel = new ModelManager(model.getAcademyAssist(), new UserPrefs());
         expectedModel.addPerson(validPerson);

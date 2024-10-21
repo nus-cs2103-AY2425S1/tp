@@ -12,7 +12,6 @@ import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 import seedu.academyassist.model.util.SampleDataUtil;
 
 /**
@@ -25,8 +24,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_IC = "S1234567B";
     public static final String DEFAULT_YEARGROUP = "2";
-    public static final String DEFAULT_STUDENT_ID = "10008";
-    public static final Subject DEFAULT_SUBJECT = new Subject("Computing");
+    public static final String DEFAULT_STUDENT_ID = "S00008";
+    public static final String DEFAULT_SUBJECT = "MATH";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
@@ -37,7 +36,6 @@ public class PersonBuilder {
     private YearGroup yearGroup;
     private StudentId studentId;
     private Set<Subject> subjects;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -58,8 +56,7 @@ public class PersonBuilder {
         yearGroup = new YearGroup(DEFAULT_YEARGROUP);
         this.studentId = new StudentId(studentId);
         subjects = new HashSet<>();
-        subjects.add(DEFAULT_SUBJECT);
-        tags = new HashSet<>();
+        subjects.add(new Subject(DEFAULT_SUBJECT));
     }
 
     /**
@@ -74,7 +71,6 @@ public class PersonBuilder {
         yearGroup = personToCopy.getYearGroup();
         studentId = personToCopy.getStudentId();
         subjects = new HashSet<>(personToCopy.getSubjects());
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -82,14 +78,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -150,7 +138,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, ic, yearGroup, studentId, subjects, tags);
+        return new Person(name, phone, email, address, ic, yearGroup, studentId, subjects);
     }
 
 }

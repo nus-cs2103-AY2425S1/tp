@@ -8,7 +8,6 @@ import static seedu.academyassist.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.academyassist.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academyassist.logic.commands.CommandTestUtil.showPersonWithStudentId;
@@ -38,7 +37,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder("10001").build();
+        Person editedPerson = new PersonBuilder("S10001").build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
         EditCommand editCommand = new EditCommand(STUDENT_ID_FIRST_PERSON, descriptor);
 
@@ -57,11 +56,10 @@ public class EditCommandTest {
         Person secondPerson = model.getPersonWithStudentId(STUDENT_ID_SECOND_PERSON);
 
         PersonBuilder personInList = new PersonBuilder(secondPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(secondPerson.getStudentId(), descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
@@ -133,18 +131,18 @@ public class EditCommandTest {
     @Test
     public void execute_nonExistenceIdUnfilteredList_failure() {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(new StudentId("99999"), descriptor);
+        EditCommand editCommand = new EditCommand(new StudentId("S99999"), descriptor);
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_NO_STUDENT_FOUND);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(new StudentId("10007"), DESC_AMY);
+        final EditCommand standardCommand = new EditCommand(new StudentId("S10007"), DESC_AMY);
 
         // same values -> returns true
         EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(new StudentId("10007"), copyDescriptor);
+        EditCommand commandWithSameValues = new EditCommand(new StudentId("S10007"), copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -157,17 +155,17 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different id -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new StudentId("10003"), DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditCommand(new StudentId("S10003"), DESC_AMY)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(new StudentId("10007"), DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditCommand(new StudentId("S10007"), DESC_BOB)));
     }
 
     @Test
     public void toStringMethod() {
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
         EditCommand editCommand = new EditCommand(STUDENT_ID_FIRST_PERSON, editPersonDescriptor);
-        String expected = EditCommand.class.getCanonicalName() + "{NRIC=" + STUDENT_ID_FIRST_PERSON
+        String expected = EditCommand.class.getCanonicalName() + "{studentId=" + STUDENT_ID_FIRST_PERSON
                 + ", editPersonDescriptor=" + editPersonDescriptor + "}";
         assertEquals(expected, editCommand.toString());
     }

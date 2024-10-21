@@ -15,7 +15,6 @@ import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -31,7 +30,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT,
-                        CliSyntax.PREFIX_YEARGROUP, CliSyntax.PREFIX_TAG);
+                        CliSyntax.PREFIX_YEARGROUP);
 
         if (!ParserUtil.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS,
                 CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_YEARGROUP,
@@ -49,9 +48,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         StudentId studentId = StudentId.TEMPORARY_STUDENT_ID;
         YearGroup yg = ParserUtil.parseYearGroup(argMultimap.getValue(CliSyntax.PREFIX_YEARGROUP).get());
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(CliSyntax.PREFIX_SUBJECT));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, ic, yg, studentId, subjects, tagList);
+        Person person = new Person(name, phone, email, address, ic, yg, studentId, subjects);
 
         return new AddCommand(person);
     }

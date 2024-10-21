@@ -44,7 +44,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_nonExistenceStudentIdUnfilteredList_throwsCommandException() {
-        StudentId nonExistenceStudentId = new StudentId("99999");
+        StudentId nonExistenceStudentId = new StudentId("S99999");
         DeleteCommand deleteCommand = new DeleteCommand(nonExistenceStudentId);
 
         assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_STUDENT_FOUND);
@@ -72,7 +72,7 @@ public class DeleteCommandTest {
     public void execute_invalidStudentIdFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        StudentId nonExistenceStudentId = new StudentId("99999");
+        StudentId nonExistenceStudentId = new StudentId("S99999");
 
         DeleteCommand deleteCommand = new DeleteCommand(nonExistenceStudentId);
 
@@ -103,7 +103,7 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        StudentId targetStudentId = new StudentId("99999");;
+        StudentId targetStudentId = new StudentId("S99999");;
         DeleteCommand deleteCommand = new DeleteCommand(targetStudentId);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetStudentId=" + targetStudentId + "}";
         assertEquals(expected, deleteCommand.toString());

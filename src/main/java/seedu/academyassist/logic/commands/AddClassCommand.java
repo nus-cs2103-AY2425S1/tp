@@ -3,7 +3,6 @@ package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.academyassist.logic.Messages.MESSAGE_NO_STUDENT_FOUND;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
@@ -21,10 +20,9 @@ public class AddClassCommand extends Command {
     public static final String COMMAND_WORD = "addc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a class to the student with this student id. "
-            + "Parameters: Student ID (5-digit number)\n- "
+            + "Parameters: Student ID (S followed by 5-digit number)\n- "
             + PREFIX_SUBJECT + "Subject \n- "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_IC + "12345 "
+            + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_SUBJECT + "Math ";
 
 

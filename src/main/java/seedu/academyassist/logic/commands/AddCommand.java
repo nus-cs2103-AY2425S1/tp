@@ -8,7 +8,6 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
@@ -33,7 +32,6 @@ public class AddCommand extends Command {
             + PREFIX_IC + "IC "
             + PREFIX_YEARGROUP + "YEARGROUP "
             + PREFIX_SUBJECT + "SUBJECT "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -42,9 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_IC + "S1234567A "
             + PREFIX_YEARGROUP + "1 "
             + PREFIX_SUBJECT + "English "
-            + PREFIX_SUBJECT + "Science "
-            + PREFIX_TAG + "ClementiPrimarySchool "
-            + PREFIX_TAG + "EnglishSpeaker";
+            + PREFIX_SUBJECT + "Science ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
 

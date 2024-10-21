@@ -8,7 +8,7 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -41,14 +41,13 @@ public class CommandTestUtil {
     public static final String VALID_IC_AMY = "M1234567A";
     public static final String VALID_IC_BOB = "S1234567D";
     public static final String VALID_IC_ALICE = "F2234567X";
-    public static final String VALID_STUDENT_ID_AMY = "10010";
-    public static final String VALID_STUDENT_ID_BOB = "10011";
-    public static final String VALID_STUDENT_ID_ALICE = "10012";
+    public static final String VALID_STUDENT_ID_AMY = "S10010";
+    public static final String VALID_STUDENT_ID_BOB = "S10011";
+    public static final String VALID_STUDENT_ID_ALICE = "S10012";
     public static final String VALID_SUBJECT_AMY = "English";
     public static final String VALID_SUBJECT_BOB = "Science";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
-
+    public static final String VALID_YEAR_GROUP_AMY = "5";
+    public static final String VALID_YEAR_GROUP_BOB = "3";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -59,10 +58,10 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String IC_DESC_AMY = " " + PREFIX_IC + VALID_IC_AMY;
     public static final String IC_DESC_BOB = " " + PREFIX_IC + VALID_IC_BOB;
+    public static final String YEAR_GROUP_DESC_AMY = " " + PREFIX_YEARGROUP + VALID_YEAR_GROUP_AMY;
+    public static final String YEAR_GROUP_DESC_BOB = " " + PREFIX_YEARGROUP + VALID_YEAR_GROUP_BOB;
     public static final String SUBJECT_DESC_AMY = " " + PREFIX_SUBJECT + VALID_SUBJECT_AMY;
     public static final String SUBJECT_DESC_BOB = " " + PREFIX_SUBJECT + VALID_SUBJECT_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -70,7 +69,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_IC_DESC = " " + PREFIX_IC + "12345678"; // ic should start and end with a letter
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "Science#"; // '#' not allowed in subjects
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_YEAR_GROUP_DESC = " " + PREFIX_YEARGROUP + "20";
+    // year group should be between 1 and 13
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -81,10 +81,10 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .build();
     }
 
     /**

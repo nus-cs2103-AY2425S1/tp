@@ -8,9 +8,7 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,7 +30,6 @@ import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.StudentIdMatchesPredicate;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Edits the details of an existing student in the management system.
@@ -44,7 +41,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
             + "by the student id. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: Student ID (5-digit number) "
+            + "Parameters: Student ID (S followed by 5-digit number) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -52,8 +49,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_IC + "IC] "
             + "[" + PREFIX_IC + "YEARGROUP] "
             + "[" + PREFIX_SUBJECT + "SUBJECT]... "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 12345 "
+            + "Example: " + COMMAND_WORD + " S12345 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -117,10 +113,9 @@ public class EditCommand extends Command {
         YearGroup updatedYearGroup = editPersonDescriptor.getYearGroup().orElse(personToEdit.getYearGroup());
         StudentId studentId = personToEdit.getStudentId();
         Set<Subject> updatedSubject = editPersonDescriptor.getSubjects().orElse(personToEdit.getSubjects());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedIc, updatedYearGroup,
-                studentId, updatedSubject, updatedTags);
+                studentId, updatedSubject);
     }
 
     @Override
@@ -142,7 +137,7 @@ public class EditCommand extends Command {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("NRIC", studentId)
+                .add("studentId", studentId)
                 .add("editPersonDescriptor", editPersonDescriptor)
                 .toString();
     }
@@ -159,7 +154,6 @@ public class EditCommand extends Command {
         private Ic ic;
         private YearGroup yearGroup;
         private Set<Subject> subjects;
-        private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
 
@@ -175,14 +169,13 @@ public class EditCommand extends Command {
             setIc(toCopy.ic);
             setYearGroup(toCopy.yearGroup);
             setSubjects(toCopy.subjects);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, ic, yearGroup, subjects, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, ic, yearGroup, subjects);
         }
 
         public void setName(Name name) {
@@ -233,29 +226,21 @@ public class EditCommand extends Command {
             return Optional.ofNullable(yearGroup);
         }
 
+        /**
+         * Sets {@code subjects} to this object's {@code subjects}.
+         * A defensive copy of {@code subjects} is used internally.
+         */
         public void setSubjects(Set<Subject> subjects) {
-            this.subjects = subjects;
-        }
-
-        public Optional<Set<Subject>> getSubjects() {
-            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable subject set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Subject>> getSubjects() {
+            return (subjects != null) ? Optional.of(new HashSet<>(subjects)) : Optional.empty();
         }
 
         @Override
@@ -276,8 +261,7 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(ic, otherEditPersonDescriptor.ic)
                     && Objects.equals(yearGroup, otherEditPersonDescriptor.yearGroup)
-                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(subjects, otherEditPersonDescriptor.subjects);
         }
 
         @Override
@@ -290,7 +274,6 @@ public class EditCommand extends Command {
                     .add("ic", ic)
                     .add("year group", yearGroup)
                     .add("subjects", subjects)
-                    .add("tags", tags)
                     .toString();
         }
     }
