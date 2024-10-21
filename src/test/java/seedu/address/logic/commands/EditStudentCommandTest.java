@@ -179,4 +179,15 @@ public class EditStudentCommandTest {
                 + ", editStudentDescriptor=" + DESC_HUGH + "}";
         assertEquals(expected, editStudentCommand.toString());
     }
+
+    @Test
+    public void undo_editedStudent() throws Exception {
+        Student editedStudent = new StudentBuilder().build();
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(editedStudent).build();
+        EditStudentCommand editStudentCommand = new EditStudentCommand(INDEX_FIRST_PERSON, descriptor);
+        editStudentCommand.execute(model);
+        editStudentCommand.undo(model);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+    }
 }

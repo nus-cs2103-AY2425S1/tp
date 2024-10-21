@@ -79,6 +79,18 @@ public class AddStudentCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
+    @Test
+    public void undo_validStudent() throws Exception {
+        ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
+        Student validStudent = new StudentBuilder().build();
+        AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);
+        addStudentCommand.execute(modelStub);
+
+        // undo the Add Student Command
+        addStudentCommand.undo(modelStub);
+        assertEquals(Arrays.asList(), modelStub.studentsAdded);
+    }
+
     /**
      * A default model stub that have all of the methods failing.
      */
@@ -153,7 +165,6 @@ public class AddStudentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public Person getPersonByName(Name name) {
             return null;
@@ -193,7 +204,6 @@ public class AddStudentCommandTest {
         public void setStudent(Student target, Student editedStudent) {
             throw new AssertionError("This method should not be called.");
         }
-
 
     }
 
@@ -236,6 +246,11 @@ public class AddStudentCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void deleteStudent(Student student) {
+            studentsAdded.remove(student);
         }
     }
 }

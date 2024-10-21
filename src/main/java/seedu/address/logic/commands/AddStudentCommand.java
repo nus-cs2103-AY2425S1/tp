@@ -61,4 +61,10 @@ public class AddStudentCommand extends Command {
                 || (other instanceof AddStudentCommand
                 && toAdd.equals(((AddStudentCommand) other).toAdd));
     }
+
+    @Override
+    public boolean undo(Model model) {
+        model.deleteStudent(toAdd);
+        return true;
+    }
 }
