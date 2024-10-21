@@ -95,6 +95,14 @@ public class Person {
     }
 
     /**
+     * Returns a string that identify the Person object
+     */
+    public String getIdentifier() {
+        // TODO: This identifier cannot guarantee uniqueness
+        return name.fullName;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */

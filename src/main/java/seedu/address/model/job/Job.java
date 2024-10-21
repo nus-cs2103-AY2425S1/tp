@@ -75,7 +75,10 @@ public class Job {
         return this.matches.contains(contactName);
     }
 
-    public String getUid() {
+    /**
+     * Returns a string that identify the Job object
+     */
+    public String getIdentifier() {
         return company.toString() + "::" + name;
     }
 

@@ -94,8 +94,8 @@ public class MatchCommand extends Command {
         assert jobToMatch != null;
 
         // TODO: Let's assume contact name is used preserve uniqueness for now
-        final String contactIdentifier = contactToMatch.getName().fullName;
-        final String jobIdentifier = jobToMatch.getUid();
+        final String contactIdentifier = contactToMatch.getIdentifier();
+        final String jobIdentifier = jobToMatch.getIdentifier();
 
         boolean hasContactMatchedJob = contactToMatch.hasMatched(jobIdentifier);
         boolean hasJobMatchedContact = jobToMatch.hasMatched(contactIdentifier);
