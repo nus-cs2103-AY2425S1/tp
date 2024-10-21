@@ -24,7 +24,7 @@ You can reach us at the email `AcademyAssist@gmail.com`
 [[github](https://github.com/joannehing)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer 
+* Role: Developer
 
 ### Khoo Yu Yien (Annabelle)
 

@@ -6,7 +6,7 @@
 **AcademyAssist** is a specialized contact management system designed for **small to medium-sized tuition centers** catering to **primary school** students. It streamlines **administrative tasks** and improves organizational efficiency by centralizing student's information.
 
 #### Project Details
-* **AcademyAssist** is a desktop application for managing student information 
+* **AcademyAssist** is a desktop application for managing student information
   * It is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI).
 * **AcademyAssist** is written in **Java**.
 * For the detailed information about the project, see the **[AcademyAssist Product Website](https://ay2425s1-cs2103t-w11-3.github.io/tp/)**.
