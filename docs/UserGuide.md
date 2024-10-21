@@ -74,17 +74,19 @@ Format: `/list`
 
 ### Locating applications by company name: `/f`
 
-Finds applications whose company names start with the given prefix.
+Finds applications whose company names contain the given pattern of characters.
 
-Format: `/f PREFIX`
+Format: `/f PATTERN`
 
-* The search is case-insensitive. e.g. `goo` will match `Google`
-* Only the prefix is searched.
-* Applications matching the prefix will be returned.
+* The search is case-insensitive. e.g. `goo` will match `Google`.
+* The searches are made only for company names.
+* If you search for `oo`, then you will see a list of all the internship applications that you have applied for
+whose companies have `oo` in their names.
 
 Examples:
 * `/f Goo` returns `Google` and `Google 2`
-* `/f Face` returns `Facebook`
+* `/f face` returns `Facebook`
+* `/f oO` returns `Google`, `Google 2`, `Facebook`
 
 ### Deleting an internship application : `/d`
 
@@ -92,17 +94,24 @@ Deletes the specified internship application from HireMe.
 
 Format: `/d INDEX`
 
-* Deletes the application at the specified `INDEX`.
-* The index refers to the index number shown in the displayed internship list.
+* Deletes the internship application at the specified `INDEX`.
+* The index refers to the index number shown in the displayed internship application list.
 * The index **must be a positive integer** 1, 2, 3, …​
+* You cannot delete an internship application whose index number does not exist. If you only have 3 internship 
+applications then the last internship application has an index number of 3. Thus, you are not able to delete the fourth
+internship application as it does not exist.
 
 Examples:
 * `/list` followed by `/d 2` deletes the 2nd application in the list.
 * `/f Google` followed by `/d 1` deletes the 1st application in the results of the `/f` command.
+* `/list` followed by `/d 4` when you only have 3 internship applications returns 
+`The internship application index provided is invalid`
 
 ### Clearing all entries : `/clear`
 
-Clears all entries from HireMe.
+[!WARNING]
+Clears all entries from HireMe. This removes all the internship applications that you have been tracking. You will not
+be able to revert and get back your saved data once this command is executed.
 
 Format: `/clear`
 
