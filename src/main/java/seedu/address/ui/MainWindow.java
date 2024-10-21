@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -35,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ConcertListPanel concertListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private PersonConcertListContainer personConcertListContainer;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,9 +45,11 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private StackPane mainPanelPlaceholder;
+
     private StackPane personListPanelPlaceholder;
 
-    @FXML
+
     private StackPane concertListPanelPlaceholder;
 
     @FXML
@@ -115,10 +119,13 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+//        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         concertListPanel = new ConcertListPanel(logic.getFilteredConcertList());
-        concertListPanelPlaceholder.getChildren().add(concertListPanel.getRoot());
+//        concertListPanelPlaceholder.getChildren().add(concertListPanel.getRoot());
+
+        personConcertListContainer = new PersonConcertListContainer(personListPanel, concertListPanel);
+        mainPanelPlaceholder.getChildren().add(personConcertListContainer.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
