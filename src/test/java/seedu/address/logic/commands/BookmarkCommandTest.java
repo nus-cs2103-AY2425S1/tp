@@ -45,10 +45,10 @@ public class BookmarkCommandTest {
     }
 
     @Test
-    public void execute_existingBookmarkUnfilteredList_throwsCommandException() {
+    public void execute_existingBookmarkUnfilteredList_showsFailure() {
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
 
-        assertCommandFailure(bookmarkCommand, bookmarkedModel, MESSAGE_BOOKMARK_FAILURE);
+        assertCommandSuccess(bookmarkCommand, bookmarkedModel, MESSAGE_BOOKMARK_FAILURE, bookmarkedModel);
     }
 
     @Test
@@ -80,11 +80,11 @@ public class BookmarkCommandTest {
     }
 
     @Test
-    public void execute_existingBookmarkFilteredList_throwsCommandException() {
+    public void execute_existingBookmarkFilteredList_showsFailure() {
         showCompanyAtIndex(bookmarkedModel, INDEX_FIRST_COMPANY);
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
 
-        assertCommandFailure(bookmarkCommand, bookmarkedModel, MESSAGE_BOOKMARK_FAILURE);
+        assertCommandSuccess(bookmarkCommand, bookmarkedModel, MESSAGE_BOOKMARK_FAILURE, bookmarkedModel);
     }
 
     @Test

@@ -51,7 +51,7 @@ public class BookmarkCommand extends Command {
 
         // Check if company is not bookmarked in the first place
         if (companyToBookmark.getIsBookmark().getIsBookmarkValue()) {
-            throw new CommandException(MESSAGE_BOOKMARK_FAILURE);
+            return new CommandResult(MESSAGE_BOOKMARK_FAILURE);
         }
 
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
