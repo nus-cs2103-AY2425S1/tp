@@ -2,10 +2,10 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
@@ -14,6 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentQuery;
+import seedu.address.model.attendance.Attendance;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -33,8 +35,6 @@ public class Student extends Person {
 
     private final List<AttendanceRecord> attendanceRecords = new ArrayList<>();
 
-   // private final Map<LocalDate, Attendance> attendanceRecords = new HashMap<>();
-
 
     // Identity fields
     private final TutorialGroup tutorialGroup;
@@ -48,6 +48,7 @@ public class Student extends Person {
         super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
         requireAllNonNull(tutorialGroup, studentNumber);
         this.tutorialGroup = tutorialGroup;
+        tutorialGroup.addStudent(this);
         this.studentNumber = studentNumber;
     }
 
@@ -124,11 +125,7 @@ public class Student extends Person {
     public List<AttendanceRecord> getAttendanceRecord() {
         return attendanceRecords;
     }
-    /*
-    public Attendance getAttendance(LocalDate date) {
-        return attendanceRecords.get(date);
-    }
-     */
+
 
     /**
      * Adds an assignment
@@ -155,5 +152,12 @@ public class Student extends Person {
             }
         }
         return null;
+    }
+
+    /**
+     * Deletes the student from the tutorial group.
+     */
+    public void removeFromTG() {
+        tutorialGroup.deleteStudent(this);
     }
 }

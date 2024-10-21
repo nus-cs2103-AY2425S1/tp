@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Name;
-import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
 
@@ -18,7 +18,7 @@ import seedu.address.model.student.TutorialGroup;
  * Marks the attendance of a student for a specific date.
  */
 public class MarkAttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "mark";
+    public static final String COMMAND_WORD = "marka";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of a student for a specific date.\n"
@@ -57,11 +57,11 @@ public class MarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         // Find the student by name
         Student student = model.getStudentByName(name);
-        TutorialGroup tg = student.getTutorialGroup();
-
         if (student == null) {
             throw new CommandException("Student not found: " + name);
         }
+        TutorialGroup tg = student.getTutorialGroup();
+
 
         // Mark attendance
         student.markAttendance(date, attendance.value);

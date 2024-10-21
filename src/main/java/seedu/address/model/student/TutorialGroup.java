@@ -1,10 +1,11 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Student's tutorial group in teletutor.
@@ -24,11 +25,30 @@ public class TutorialGroup {
     private final Set<Student> students = new HashSet<>();
 
     /**
+     * Constructs a {@code TutorialGroup}.
+     *
+     * @param tutorialGroup A valid tutorial group.
+     */
+    public TutorialGroup(String tutorialGroup) {
+        requireNonNull(tutorialGroup);
+        checkArgument(isValidTutorialGroup(tutorialGroup), MESSAGE_CONSTRAINTS);
+        this.value = tutorialGroup;
+    }
+
+    /**
      * Adds a student to the tutorial group.
-     * @param student
+     * @param student student to be added
      */
     public void addStudent(Student student) {
         students.add(student);
+    }
+
+    /**
+     * Removes a student from the tutorial group.
+     * @param student student to be removed
+     */
+    public void deleteStudent(Student student) {
+        students.remove(student);
     }
 
     /**
@@ -40,16 +60,6 @@ public class TutorialGroup {
         return students;
     }
 
-    /**
-     * Constructs a {@code TutorialGroup}.
-     *
-     * @param tutorialGroup A valid tutorial group.
-     */
-    public TutorialGroup(String tutorialGroup) {
-        requireNonNull(tutorialGroup);
-        checkArgument(isValidTutorialGroup(tutorialGroup), MESSAGE_CONSTRAINTS);
-        this.value = tutorialGroup;
-    }
 
     /**
      * Returns true if a given string is a valid tutorial group.
