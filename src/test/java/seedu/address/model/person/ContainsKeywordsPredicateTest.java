@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -106,13 +108,46 @@ public class ContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void toStringMethod_withName() {
         List<String> keywords = List.of("keyword1", "keyword2");
         ArgumentMultimap mapForKeywords = new ArgumentMultimap();
         keywords.stream().forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
         ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForKeywords);
 
-        String expected = ContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = ContainsKeywordsPredicate.class.getCanonicalName() + "{n/=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
+
+    @Test
+    public void toStringMethod_withTags() {
+        List<String> names = List.of("Alice", "Bob");
+        List<String> tags = List.of("friend", "family");
+
+        ArgumentMultimap mapForKeywords = new ArgumentMultimap();
+        names.forEach(name -> mapForKeywords.put(PREFIX_NAME, name));
+        tags.forEach(tag -> mapForKeywords.put(PREFIX_TAG, tag));
+
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForKeywords);
+
+        String expected = ContainsKeywordsPredicate.class.getCanonicalName()
+                + "{n/=" + names + ", t/=" + tags + "}";
+
+        assertEquals(expected, predicate.toString());
+    }
+
+    @Test
+    public void toStringMethod_withRole() {
+        List<String> roles = List.of("patient", "caregiver");
+
+        ArgumentMultimap mapForKeywords = new ArgumentMultimap();
+        roles.forEach(role -> mapForKeywords.put(PREFIX_ROLE, role));
+
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForKeywords);
+
+        String expected = ContainsKeywordsPredicate.class.getCanonicalName()
+                + "{role/=" + roles + "}";
+
+        assertEquals(expected, predicate.toString());
+    }
+
 }
