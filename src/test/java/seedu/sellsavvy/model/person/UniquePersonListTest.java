@@ -2,12 +2,17 @@ package seedu.sellsavvy.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
+import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.BOB;
+import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,6 +20,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
 import seedu.sellsavvy.testutil.PersonBuilder;
@@ -166,6 +172,26 @@ public class UniquePersonListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniquePersonList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void findEquivalentPerson_returnNullWhenInputIsNull() {
+        assertNull(uniquePersonList.findEquivalentPerson(null));
+    }
+
+    @Test
+    public void findEquivalentPerson_modelContainsEquivalentPerson() {
+        uniquePersonList.add(ALICE);
+        UniquePersonList copyList = uniquePersonList.copyPersons();
+        Person alice_dup = copyList.findEquivalentPerson(ALICE);
+        assertNotSame(alice_dup, ALICE);
+        assertEquals(alice_dup, ALICE);
+    }
+
+    @Test
+    public void findEquivalentPerson_modelDoesNotContainsEquivalentPerson() {
+        uniquePersonList.add(ALICE);
+        assertThrows(PersonNotFoundException.class, () -> uniquePersonList.findEquivalentPerson(BOB));
     }
 
     @Test
