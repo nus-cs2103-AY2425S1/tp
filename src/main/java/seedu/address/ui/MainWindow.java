@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -16,6 +18,8 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -24,11 +28,16 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String DARK_THEME = "/view/DarkTheme.css";
+    private static final String LIGHT_THEME = "/view/LightTheme.css";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
+
+    private String theme = "light";
+    private Scene scene;
 
     // Independent Ui parts residing in this Ui container
     private ClientListPanel clientListPanel;
@@ -60,12 +69,16 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        // Initialize scene
+        this.scene = primaryStage.getScene(); // Ensure scene is initialized
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
     }
 
     public Stage getPrimaryStage() {
@@ -135,6 +148,13 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+//    public void postInit() {
+//        // Load user preferences to determine the initial theme
+//        ReadOnlyUserPrefs userPrefs = logic.getUserPrefs();
+//        String theme = userPrefs.getTheme();
+//        applyTheme(theme);
+//    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -165,6 +185,50 @@ public class MainWindow extends UiPart<Stage> {
 
     public ClientListPanel getClientListPanel() {
         return clientListPanel;
+    }
+
+    public void applyTheme(String theme) {
+        if ("light".equalsIgnoreCase(theme)) {
+            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME).toExternalForm());
+        } else {
+            scene.getStylesheets().add(getClass().getResource(DARK_THEME).toExternalForm());
+        }
+    }
+
+    @FXML
+    private void handleLightTheme() {
+        if (theme.equals("dark")) {
+            scene.getStylesheets().remove(getClass().getResource(DARK_THEME).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME).toExternalForm());
+            theme = "light"; // Set to light theme
+
+            // Get user prefs, set the theme, and update
+            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs(); // Cast to UserPrefs
+            logic.setUserPrefs(updatedPrefs.setTheme("light")); // Update user prefs
+
+            // Notify the user about the theme change
+            resultDisplay.setFeedbackToUser("Theme changed to " + theme + " mode.");
+        } else {
+            resultDisplay.setFeedbackToUser("Theme is already set to " + theme + " mode.");
+        }
+    }
+
+    @FXML
+    private void handleDarkTheme() {
+        if (theme.equals("light")) {
+            scene.getStylesheets().remove(getClass().getResource(LIGHT_THEME).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(DARK_THEME).toExternalForm());
+            theme = "dark"; // Set to dark theme
+
+            // Get user prefs, set the theme, and update
+            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs(); // Cast to UserPrefs
+            logic.setUserPrefs(updatedPrefs.setTheme("dark")); // Update user prefs
+
+            // Notify the user about the theme change
+            resultDisplay.setFeedbackToUser("Theme changed to " + theme + " mode.");
+        } else {
+            resultDisplay.setFeedbackToUser("Theme is already set to " + theme + " mode.");
+        }
     }
 
     /**

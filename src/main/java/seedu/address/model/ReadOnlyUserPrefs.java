@@ -13,4 +13,7 @@ public interface ReadOnlyUserPrefs {
 
     Path getAddressBookFilePath();
 
+    String getTheme();
+
+//    boolean isDarkTheme();
 }

@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private String theme;
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -26,6 +27,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
+        this.theme = "dark"; // default theme
         resetData(userPrefs);
     }
 
@@ -56,6 +58,21 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    public UserPrefs setTheme(String theme) {
+        this.theme = theme;
+        return this;
+    }
+
+    @Override
+    public String getTheme() {
+        return theme;
+    }
+
+//    @Override
+//    public boolean isDarkTheme() {
+//        return theme.equals("dark");
+//    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -69,7 +86,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath);
+                && addressBookFilePath.equals(otherUserPrefs.addressBookFilePath)
+                && theme.equals(otherUserPrefs.theme);
     }
 
     @Override
@@ -82,6 +100,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nTheme : " + theme);
         return sb.toString();
     }
 

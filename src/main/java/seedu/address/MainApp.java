@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
@@ -28,6 +30,7 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.ui.MainWindow;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -45,6 +48,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
+    protected ReadOnlyUserPrefs userPrefs; // Store user preferences
 
     @Override
     public void init() throws Exception {
@@ -56,7 +60,7 @@ public class MainApp extends Application {
         initLogging(config);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
@@ -171,7 +175,20 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+//        ui.start(primaryStage);
+
+//        // Call post initialization to set up theme after UI is fully initialized
+//        if (ui instanceof MainWindow) {
+//            ((MainWindow) ui).postInit();
+//        }
+
+        // Default to dark theme if no preference is set
+        String theme = userPrefs.getTheme();
+        if (theme == null || theme.isEmpty()) {
+            theme = "dark"; // Default to dark theme
+        }
+
+        ui.start(primaryStage, theme); // Pass the theme to UI
     }
 
     @Override
