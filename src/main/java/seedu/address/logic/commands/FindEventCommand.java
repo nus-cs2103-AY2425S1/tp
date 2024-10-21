@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.event.EventNameContainsKeywordsPredicate;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -33,7 +34,7 @@ public class FindEventCommand extends FindCommand {
         model.updateFilteredEventList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()),
-                false, false, CommandTabChange.EVENT);
+                false, false, CommandTabChange.EVENT, CommandDetailChange.SIMPLIFIED);
     }
 
     @Override

@@ -25,15 +25,10 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="eventName" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <FlowPane fx:id="celebrity" />
-            <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
-            <Label fx:id="venue" styleClass="cell_small_label" text="\$venue" />
-            <VBox fx:id="contactsBox" styleClass="contact-box">
-                <Label fx:id="contactLabel" styleClass="underline" text="Points of Contact" />
-                <Label fx:id="contacts" styleClass="cell_small_label" text="\$contacts" />
-            </VBox>
+            <FlowPane fx:id="tags" />
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
         </VBox>
     </GridPane>
 </HBox>

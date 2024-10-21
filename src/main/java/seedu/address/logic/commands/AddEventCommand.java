@@ -17,6 +17,7 @@ import seedu.address.model.event.Time;
 import seedu.address.model.event.Venue;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -76,7 +77,7 @@ public class AddEventCommand extends AddCommand {
 
         model.addEvent(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.eventFormat(toAdd)), false,
-                false, CommandTabChange.EVENT);
+                false, CommandTabChange.EVENT, CommandDetailChange.NONE);
     }
 
     @Override

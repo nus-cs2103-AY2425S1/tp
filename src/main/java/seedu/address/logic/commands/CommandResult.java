@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -19,17 +20,21 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean exit;
-    /** The application should show people list. */
+    /** Control changes in UI tabs */
     private final CommandTabChange tabChange;
+    /** Control changes in UI card level (simplified or detailed) */
+    private final CommandDetailChange commandDetailChange;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, CommandTabChange tabChange) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, CommandTabChange tabChange,
+                         CommandDetailChange commandDetailChange) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.tabChange = tabChange;
+        this.commandDetailChange = commandDetailChange;
     }
 
     /**
@@ -37,7 +42,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, CommandTabChange.NONE);
+        this(feedbackToUser, false, false, CommandTabChange.NONE, CommandDetailChange.NONE);
     }
 
     public String getFeedbackToUser() {
@@ -54,6 +59,10 @@ public class CommandResult {
 
     public CommandTabChange getTabChange() {
         return tabChange;
+    }
+
+    public CommandDetailChange getCommandDetailChange() {
+        return commandDetailChange;
     }
 
     @Override
