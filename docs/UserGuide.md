@@ -188,7 +188,7 @@ Find students by either their name, level or subject.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Examples:**
-* `find John` returns `john` and `John Doe`
+* `find n/John` returns `john` and `John Doe`
 * `find l/S3` returns all students tagged with level `S3`
 * `find s/MATH` returns all students tagged with subject `MATH`
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
