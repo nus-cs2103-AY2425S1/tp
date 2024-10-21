@@ -33,8 +33,6 @@ public class JsonAdaptedTutorialTest {
         // Using TUT_SAMPLE from TutUtil
         Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(tutorial);
-        System.out.println(tut.toModelType());
-        System.out.println(tutorial);
         assertTrue(tutorial.equals(tut.toModelType()));
     }
 

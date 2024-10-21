@@ -40,6 +40,7 @@ public class TutorialListTest {
         assertTrue(tutorialList.getTutorials().contains(tutorial2));
     }
 
+
     @Test
     public void getTutorialsTest() {
         ArrayList<Tutorial> tutorials = new ArrayList<>();
@@ -77,6 +78,15 @@ public class TutorialListTest {
         TutorialList tutorialList = new TutorialList();
         assertThrows(TutNoFoundException.class, () -> tutorialList.deleteTutorial(TUTORIAL1));
     }
+    @Test
+    public void deleteStudentTest() {
+        TutorialList tutorialList = new TutorialList();
+        TUTORIAL1.add(ALICE);
+        tutorialList.addTutorial(TUTORIAL1);
+        assertTrue(tutorialList.getTutorials().get(0).studentInList(ALICE));
+        tutorialList.deleteStudent(ALICE);
+        assertFalse(tutorialList.getTutorials().get(0).studentInList(ALICE));
+    }
 
     @Test
     public void hasTutorialTest_success() {
@@ -99,7 +109,7 @@ public class TutorialListTest {
         TutorialList tutorialList = new TutorialList();
         tutorialList.addTutorial(TUTORIAL2);
         tutorialList.assignStudent(ALICE, TUTORIAL_CLASS);
-        assertEquals(tutorialList.getTutorials().get(0).get(ALICE.getName()), ALICE);
+        assertTrue(tutorialList.getTutorials().get(0).getStudents().contains(ALICE));
     }
 
     @Test

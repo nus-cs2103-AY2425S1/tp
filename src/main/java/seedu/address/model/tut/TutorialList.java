@@ -95,7 +95,7 @@ public class TutorialList {
         Tutorial ran = Tutorial.of(new TutName("ran"), tutorialClass);
         tutorials.stream()
                 .filter(t -> t.equals(ran))
-                .forEach(t -> t.assignStudent(student));
+                .forEach(t -> t.add(student));
     }
 
     /**

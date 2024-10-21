@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TutUtil.NONE;
 import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
 import static seedu.address.testutil.TutUtil.TUTORIAL_SAMPLE;
 import static seedu.address.testutil.TutUtil.TUT_DATE;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.tut.exceptions.NoTutorialException;
 import seedu.address.testutil.StudentBuilder;
 
 public class TutorialTest {
@@ -48,7 +50,7 @@ public class TutorialTest {
         Student aliceCopy = new StudentBuilder(ALICE).build();
         Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         tutorial.add(aliceCopy);
-        assertEquals(aliceCopy, tutorial.get(ALICE.getName()));
+        assertEquals(aliceCopy, tutorial.getStudents().get(0));
     }
 
     @Test
@@ -185,5 +187,112 @@ public class TutorialTest {
         Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         Date date = new Date();
         assertThrows(NullPointerException.class, () -> tutorial.setAttendance(date, null));
+    }
+
+    @Test
+    public void studentInList_studentNotInListTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        tutorial.add(ALICE);
+        tutorial.deleteStudent(ALICE);
+        assertFalse(tutorial.studentInList(ALICE));
+    }
+
+    @Test
+    public void studentInListTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        tutorial.add(ALICE);
+        assertTrue(tutorial.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudentTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        tutorial.add(ALICE);
+        assertTrue(tutorial.studentInList(ALICE));
+        tutorial.deleteStudent(ALICE);
+        assertFalse(tutorial.studentInList(ALICE));
+    }
+
+    @Test
+    public void constructor_none_singleton() {
+        Tutorial none = Tutorial.none();
+        Tutorial none1 = Tutorial.none();
+        assertEquals(none, none1);
+    }
+
+    @Test
+    public void addStudent_noneTest() {
+        NONE.add(ALICE);
+        assertTrue(NONE.getStudents().contains(ALICE));
+    }
+
+    @Test
+    public void addStudent_nullStudent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> NONE.add(null));
+    }
+
+    @Test
+    public void setAttendance_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.setAttendance(new Date(), new StudentId("1000")));
+    }
+
+    @Test
+    public void getTutName_noneTest() {
+        assertThrows(NoTutorialException.class, NONE::getTutName);
+    }
+
+    @Test
+    public void tutorialDateInList_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.tutorialDateInList(TUT_DATE));
+    }
+
+    @Test
+    public void addTutorialDate_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.addTutorialDate(TUT_DATE));
+    }
+
+    @Test
+    public void getTutorialDate_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.getTutorialDate(new Date()));
+    }
+
+    @Test
+    public void isValidTutorialDate_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.isValidTutorialDate(TUT_DATE));
+    }
+
+    @Test
+    public void getTutDates_noneTest() {
+        assertThrows(NoTutorialException.class, NONE::getTutDates);
+    }
+
+    @Test
+    public void getTutorialClass_noneTest() {
+        assertThrows(NoTutorialException.class, NONE::getTutorialClass);
+    }
+
+    @Test
+    public void markAttendance_noneTest() {
+        assertThrows(NoTutorialException.class, ()
+                -> NONE.markAttendance(ALICE, TUT_DATE));
+    }
+
+    @Test
+    public void studentInList_noneTest() {
+        NONE.add(ALICE);
+        assertTrue(NONE.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudent_noneTest() {
+        NONE.add(ALICE);
+        assertTrue(NONE.studentInList(ALICE));
+        NONE.deleteStudent(ALICE);
+        assertFalse(NONE.studentInList(ALICE));
     }
 }

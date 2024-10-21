@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
@@ -50,14 +49,6 @@ public abstract class Tutorial {
     public abstract boolean setAttendance(Date date, StudentId target);
 
     /**
-     * Assigns a student to the tutorial.
-     *
-     * @param student The student to be assigned.
-     */
-    public abstract void assignStudent(Student student);
-
-
-    /**
      * Returns the name of the tutorial.
      *
      * @return The tutorial name.
@@ -65,15 +56,6 @@ public abstract class Tutorial {
      */
     public abstract TutName getTutName();
 
-
-    /**
-     * Retrieves a student based on their name.
-     *
-     * @param name The name of the student.
-     * @return The student found or null if no student exists with the given name.
-     * @throws NoTutorialException if called on a None instance.
-     */
-    public abstract Student get(Name name);
 
     /**
      * Checks if a tutorial date is present in the list of tutorial dates.
@@ -191,7 +173,8 @@ public abstract class Tutorial {
 
         @Override
         public void add(Student student) {
-            if (student != null && !students.contains(student)) {
+            requireNonNull(student);
+            if (!students.contains(student)) {
                 students.add(student);
             }
         }
@@ -207,18 +190,7 @@ public abstract class Tutorial {
         }
 
         @Override
-        public void assignStudent(Student student) {
-            requireNonNull(student);
-            students.add(student);
-        }
-
-        @Override
         public TutName getTutName() {
-            throw new NoTutorialException();
-        }
-
-        @Override
-        public Student get(Name name) {
             throw new NoTutorialException();
         }
 
@@ -311,23 +283,8 @@ public abstract class Tutorial {
         }
 
         @Override
-        public void assignStudent(Student student) {
-            requireNonNull(student);
-
-            students.add(student);
-        }
-
-        @Override
         public TutName getTutName() {
             return this.tutName;
-        }
-
-        @Override
-        public Student get(Name name) {
-            return students.stream()
-                    .filter(student -> student.getName().equals(name))
-                    .findFirst()
-                    .orElse(null); // Returns null if no student is found
         }
 
         @Override
