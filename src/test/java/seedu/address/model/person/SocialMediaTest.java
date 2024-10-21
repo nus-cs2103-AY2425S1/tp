@@ -58,7 +58,7 @@ public class SocialMediaTest {
     }
 
     @Test
-    public void toString_Success() {
+    public void toString_success() {
         assertEquals("[ig-username]",
                 new SocialMedia("username", SocialMedia.Platform.INSTAGRAM).toString());
         assertEquals("[fb-username]",
