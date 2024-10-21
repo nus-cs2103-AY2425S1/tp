@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -74,10 +75,11 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Attendance} of the {@code EditPersonDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAttendance(Boolean isPresent) {
-        descriptor.setAttendance(new Attendance(isPresent));
+    public EditPersonDescriptorBuilder withAttendance(String attendance) {
+        LocalDate attendanceDate = LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT);
+        descriptor.setAttendance(new Attendance(attendanceDate));
         return this;
     }
 

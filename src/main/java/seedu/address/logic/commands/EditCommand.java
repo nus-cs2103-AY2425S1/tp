@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_PAYMENT + "PAYMENT] "
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE (input true or false)] "
+            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "

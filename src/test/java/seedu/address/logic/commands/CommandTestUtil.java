@@ -39,8 +39,8 @@ public class CommandTestUtil {
 
     public static final String VALID_PAYMENT_AMY = "-200";
     public static final String VALID_PAYMENT_BOB = "200";
-    public static final Boolean VALID_ATTENDANCE_AMY = false;
-    public static final Boolean VALID_ATTENDANCE_BOB = true;
+    public static final String VALID_ATTENDANCE_AMY = "12/12/2024";
+    public static final String VALID_ATTENDANCE_BOB = "10/12/2024";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_FEES_PAID = "200";
@@ -67,7 +67,6 @@ public class CommandTestUtil {
     public static final String INVALID_PAYMENT_DESC = " " + PREFIX_PAYMENT; // empty field not allowed for payment
     public static final String INVALID_ATTENDANCE_DESC = " " + PREFIX_ATTENDANCE + "present"; // only accept true/false
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

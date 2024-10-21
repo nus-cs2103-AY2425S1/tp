@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+
 /**
  * Tests a {@code Person}'s hasPaid status
  */
@@ -13,7 +14,6 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
         this.paymentUpToDate = paymentUpToDate;
     }
 
-    //TODO Implement test
     @Override
     public boolean test(Person person) {
         if (paymentUpToDate) {
