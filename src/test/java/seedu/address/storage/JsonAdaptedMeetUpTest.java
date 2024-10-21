@@ -1,9 +1,9 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedMeetUp.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.meetup.JsonAdaptedMeetUp.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMeetUps.FIRST_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.FIRST_MEETUP;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +12,7 @@ import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
+import seedu.address.storage.meetup.JsonAdaptedMeetUp;
 
 public class JsonAdaptedMeetUpTest {
     private static final String INVALID_NAME = "Z!x!n";

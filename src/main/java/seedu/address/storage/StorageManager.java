@@ -7,27 +7,29 @@ import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.buyer.BuyerListStorage;
+import seedu.address.storage.meetup.MeetUpListStorage;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of BuyerList data in local storage.
  */
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private BuyerListStorage buyerListStorage;
     private UserPrefsStorage userPrefsStorage;
     private MeetUpListStorage meetUpListStorage;
 
     /**
-     * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
+     * Creates a {@code StorageManager} with the given {@code BuyerListStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+    public StorageManager(BuyerListStorage buyerListStorage, UserPrefsStorage userPrefsStorage,
             MeetUpListStorage meetUpListStorage) {
-        this.addressBookStorage = addressBookStorage;
+        this.buyerListStorage = buyerListStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.meetUpListStorage = meetUpListStorage;
     }
@@ -50,33 +52,33 @@ public class StorageManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ BuyerList methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getBuyerListFilePath() {
+        return buyerListStorage.getBuyerListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyBuyerList> readBuyerList() throws DataLoadingException {
+        return readBuyerList(buyerListStorage.getBuyerListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyBuyerList> readBuyerList(Path filePath) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return buyerListStorage.readBuyerList(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveBuyerList(ReadOnlyBuyerList buyerList) throws IOException {
+        saveBuyerList(buyerList, buyerListStorage.getBuyerListFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveBuyerList(ReadOnlyBuyerList buyerList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        buyerListStorage.saveBuyerList(buyerList, filePath);
     }
 
     // ================ MeetUp methods ==============================
@@ -99,14 +101,12 @@ public class StorageManager implements Storage {
 
     @Override
     public void saveMeetUpList(ReadOnlyMeetUpList meetUpList) throws IOException {
-        logger.info("meetup list is " + meetUpList + "and storage is " + meetUpListStorage.getMeetUpListFilePath());
         saveMeetUpList(meetUpList, meetUpListStorage.getMeetUpListFilePath());
     }
 
     @Override
     public void saveMeetUpList(ReadOnlyMeetUpList meetUpList, Path filePath) throws IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        logger.info("meetup list is " + meetUpList + "and storage is " + filePath);
         meetUpListStorage.saveMeetUpList(meetUpList, filePath);
     }
 }

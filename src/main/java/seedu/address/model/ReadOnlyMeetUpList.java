@@ -4,13 +4,13 @@ import javafx.collections.ObservableList;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of a buyer list
  */
 public interface ReadOnlyMeetUpList {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the buyers list.
+     * This list will not contain any duplicate buyers.
      */
     ObservableList<MeetUp> getMeetUpList();
 

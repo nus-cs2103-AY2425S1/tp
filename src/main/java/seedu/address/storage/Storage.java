@@ -5,15 +5,17 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.buyer.BuyerListStorage;
+import seedu.address.storage.meetup.MeetUpListStorage;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, MeetUpListStorage {
+public interface Storage extends BuyerListStorage, UserPrefsStorage, MeetUpListStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
@@ -22,13 +24,13 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, MeetUpLis
     void saveUserPrefs(ReadOnlyUserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getBuyerListFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
+    Optional<ReadOnlyBuyerList> readBuyerList() throws DataLoadingException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveBuyerList(ReadOnlyBuyerList buyerList) throws IOException;
 
     @Override
     Path getMeetUpListFilePath();

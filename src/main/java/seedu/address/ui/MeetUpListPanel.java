@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -11,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of buyers.
  */
 public class MeetUpListPanel extends UiPart<Region> {
     private static final String FXML = "MeetUpListPanel.fxml";
@@ -21,30 +23,62 @@ public class MeetUpListPanel extends UiPart<Region> {
     private ListView<MeetUp> meetUpListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code BuyerListPanel} with the given {@code ObservableList}.
      */
     public MeetUpListPanel(ObservableList<MeetUp> meetUpList) {
         super(FXML);
         logger.info(meetUpList.toString());
+        ArrayList<Boolean> hasOverlap = new ArrayList<Boolean>();
+
+        for (MeetUp meetUp : meetUpList) {
+            boolean foundOverlap = false;
+            for (MeetUp meetUp2 : meetUpList) {
+                if (!meetUp.isSameMeetUp(meetUp2) && doDateRangesOverlap(meetUp, meetUp2)) {
+                    foundOverlap = true;
+                    break;
+                }
+            }
+            hasOverlap.add(foundOverlap);
+        }
         meetUpListView.setItems(meetUpList);
-        meetUpListView.setCellFactory(listView -> new MeetUpListViewCell());
+        meetUpListView.setCellFactory(listView -> new MeetUpListViewCell(hasOverlap));
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Checks for overlaps beteen two meetups
+     */
+    public boolean doDateRangesOverlap(MeetUp meetUp1, MeetUp meetUp2) {
+        LocalDateTime start1 = meetUp1.getFrom().getDateTime();
+        LocalDateTime end1 = meetUp1.getTo().getDateTime();
+        LocalDateTime start2 = meetUp2.getFrom().getDateTime();
+        LocalDateTime end2 = meetUp2.getTo().getDateTime();
+
+        // Check if the date ranges overlap
+        return (start1.isBefore(end2) || start1.isEqual(end2))
+                && (end1.isAfter(start2) || end1.isEqual(start2));
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
     class MeetUpListViewCell extends ListCell<MeetUp> {
+        private final ArrayList<Boolean> overlapList;
+
+        public MeetUpListViewCell(ArrayList<Boolean> overlapList) {
+            this.overlapList = overlapList;
+        }
+
         @Override
         protected void updateItem(MeetUp meetUp, boolean empty) {
             super.updateItem(meetUp, empty);
 
             if (empty || meetUp == null) {
-                logger.info("graphic or text is null");
                 setGraphic(null);
                 setText(null);
             } else {
-                logger.info("making new card");
-                setGraphic(new MeetUpCard(meetUp, getIndex() + 1).getRoot());
+                // logger.info("making new card");
+                int index = getIndex();
+                setGraphic(new MeetUpCard(meetUp, index + 1, overlapList.get(index)).getRoot());
             }
         }
     }

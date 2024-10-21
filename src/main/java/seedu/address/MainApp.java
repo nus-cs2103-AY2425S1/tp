@@ -15,26 +15,27 @@ import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleBuyerDataUtil;
 import seedu.address.model.util.SampleMeetUpDataUtil;
-import seedu.address.model.util.SamplePersonDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonMeetUpListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.MeetUpListStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.buyer.BuyerListStorage;
+import seedu.address.storage.buyer.JsonBuyerListStorage;
+import seedu.address.storage.meetup.JsonMeetUpListStorage;
+import seedu.address.storage.meetup.MeetUpListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
 /**
  * Runs the application.
  */
@@ -52,7 +53,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing BuyerList ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -61,9 +62,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
+        BuyerListStorage buyerListStorage = new JsonBuyerListStorage(userPrefs.getBuyerListFilePath());
         MeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(userPrefs.getMeetUpListFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, meetUpListStorage);
+        storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
 
         model = initModelManager(storage, userPrefs);
 
@@ -73,29 +74,29 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s buyer list and {@code userPrefs}. <br>
+     * The data from the sample buyer list will be used instead if {@code storage}'s buyer list is not found,
+     * or an empty buyer list will be used instead if errors occur when reading {@code storage}'s buyer list.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        logger.info("Using data file : " + storage.getAddressBookFilePath());
+        logger.info("Using data file : " + storage.getBuyerListFilePath());
         logger.info("Using meetUp file : " + storage.getMeetUpListFilePath());
 
-        Optional<ReadOnlyAddressBook> addressBookOptional;
+        Optional<ReadOnlyBuyerList> buyerListOptional;
         Optional<ReadOnlyMeetUpList> meetUpListOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyBuyerList initialData;
         ReadOnlyMeetUpList initialMeetUpList;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getAddressBookFilePath()
-                        + " populated with a sample AddressBook.");
+            buyerListOptional = storage.readBuyerList();
+            if (!buyerListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getBuyerListFilePath()
+                        + " populated with a sample BuyerList.");
             }
-            initialData = addressBookOptional.orElseGet(SamplePersonDataUtil::getSampleAddressBook);
+            initialData = buyerListOptional.orElseGet(SampleBuyerDataUtil::getSampleBuyerList);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getAddressBookFilePath() + " could not be loaded."
-                    + " Will be starting with an empty AddressBook.");
-            initialData = new AddressBook();
+            logger.warning("Data file at " + storage.getBuyerListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty BuyerList.");
+            initialData = new BuyerList();
         }
 
         try {
@@ -194,13 +195,13 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting BuyerList " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping AddressBook ] =============================");
+        logger.info("============================ [ Stopping BuyerList ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

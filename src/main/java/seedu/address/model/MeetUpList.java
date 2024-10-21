@@ -38,7 +38,6 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public MeetUpList(ReadOnlyMeetUpList toBeCopied) {
         this();
-        logger.info("the tobecopied is" + toBeCopied);
         resetData(toBeCopied);
     }
 
@@ -58,7 +57,6 @@ public class MeetUpList implements ReadOnlyMeetUpList {
      */
     public void resetData(ReadOnlyMeetUpList newData) {
         requireNonNull(newData);
-        logger.info("newdata is" + newData.getMeetUpList());
         setMeetUps(newData.getMeetUpList());
     }
 
