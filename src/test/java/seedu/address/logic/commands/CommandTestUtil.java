@@ -6,8 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -23,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.NoteDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -66,6 +69,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String APPOINTMENT_DESC_ONE = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_ONE;
     public static final String APPOINTMENT_DESC_TWO = " " + PREFIX_APPOINTMENT + VALID_APPOINTMENT_TWO;
+    public static final String REMARK_DESC_ONE = " " + PREFIX_REMARK + VALID_REMARK_ONE;
+    public static final String REMARK_DESC_TWO = " " + PREFIX_REMARK + VALID_REMARK_TWO;
+    public static final String MEDICATION_DESC_ONE = " " + PREFIX_MEDICATION + VALID_MEDICATION_ONE;
+    public static final String MEDICATION_DESC_TWO = " " + PREFIX_MEDICATION + VALID_MEDICATION_TWO;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -75,14 +82,18 @@ public class CommandTestUtil {
     // non-alphanumeric characters not allowed for sexes
     public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "Fem@le";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    // '*' not allowed in appointments
+    // '*' not allowed in appointments, medication, remarks
     public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "11/11/2025 0000*";
+    public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "INVALID_MEDICATION";
+    public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "INVALID_MEDICATION";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final NoteCommand.NoteDescriptor EDIT_AMY;
+    public static final NoteCommand.NoteDescriptor EDIT_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -93,6 +104,12 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withAge(VALID_AGE_BOB).withSex(VALID_SEX_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        EDIT_AMY = new NoteDescriptorBuilder().withMedications(VALID_MEDICATION_ONE)
+                .withRemarks(VALID_REMARK_ONE)
+                .withAppointments(VALID_APPOINTMENT_ONE).build();
+        EDIT_BOB = new NoteDescriptorBuilder().withMedications(VALID_MEDICATION_TWO)
+                .withRemarks(VALID_REMARK_TWO)
+                .withAppointments(VALID_APPOINTMENT_TWO).build();
     }
 
     /**

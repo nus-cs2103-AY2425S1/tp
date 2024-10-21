@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAITON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -35,7 +35,7 @@ public class NoteCommand extends Command {
                                                + "Parameters: NAME (must be an exact match) "
                                                + "[" + PREFIX_APPOINTMENT + "PREVIOUS APPOINTMENT] "
                                                + "[" + PREFIX_REMARK + "REMARK] "
-                                               + "[" + PREFIX_MEDICAITON + "MEDICATION]...\n"
+                                               + "[" + PREFIX_MEDICATION + "MEDICATION]...\n"
                                                + "Example: " + COMMAND_WORD + " John Doe "
                                                + PREFIX_APPOINTMENT + "01/01/2025 1200 "
                                                + PREFIX_REMARK + "Allergic to Ibuprofen ";

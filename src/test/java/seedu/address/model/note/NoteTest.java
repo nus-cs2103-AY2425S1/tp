@@ -1,12 +1,36 @@
 package seedu.address.model.note;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.appointment.Appointment;
+
 public class NoteTest {
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Set<Appointment> appointmentSet = new HashSet<>();
+        Set<String> testSet = new HashSet<>();
+        assertThrows(NullPointerException.class, () -> new Note(null, testSet, testSet));
+        assertThrows(NullPointerException.class, () -> new Note(appointmentSet, null, testSet));
+        assertThrows(NullPointerException.class, () -> new Note(appointmentSet, testSet, null));
+    }
+
+    @Test
+    public void constructor_success() {
+        Set<Appointment> appointmentSet = new HashSet<>();
+        Set<String> testSet = new HashSet<>();
+        Note note = new Note(appointmentSet, testSet, testSet);
+        assertNotNull(note);
+    }
+
     @Test
     public void isValidString() {
         // null string
@@ -47,6 +71,24 @@ public class NoteTest {
         testNote = new Note();
         testNote.addAppointment("01/01/2025 0000");
         assertFalse(note.equals(testNote));
+    }
+
+    @Test
+    public void toString_test() {
+        Set<Appointment> appointmentSet = new HashSet<>();
+        appointmentSet.add(new Appointment("01/01/2025 0000"));
+        Set<String> remarksSet = new HashSet<>();
+        remarksSet.add("Test remark");
+        Set<String> medicationSet = new HashSet<>();
+        medicationSet.add("Test medication");
+
+        Note note = new Note(appointmentSet, remarksSet, medicationSet);
+
+        String expectedString = "Previous Appointments: [01/01/2025 0000]\n"
+                                + "Medications: Test medication\n"
+                                + "Remarks: Test remark";
+
+        assertEquals(expectedString, note.toString());
     }
 }
 

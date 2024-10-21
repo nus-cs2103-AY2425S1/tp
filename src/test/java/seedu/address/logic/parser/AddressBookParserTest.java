@@ -22,10 +22,13 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.NoteCommand.NoteDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.NoteDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -61,6 +64,20 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + NAME_FIRST_PERSON + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(NAME_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_note() throws Exception {
+        Person person = new PersonBuilder().build();
+        NoteDescriptor descriptor =
+                new NoteDescriptorBuilder(person)
+                        .withAppointments("01/01/2025 1200")
+                        .withMedications("Medicine")
+                        .withRemarks("Remark").build();
+        NoteCommand command = (NoteCommand) parser.parseCommand(NoteCommand.COMMAND_WORD + " "
+                                                                + NAME_FIRST_PERSON + " "
+                                                                + PersonUtil.getNoteDescriptorDetails(descriptor));
+        assertEquals(new NoteCommand(NAME_FIRST_PERSON, descriptor), command);
     }
 
     @Test

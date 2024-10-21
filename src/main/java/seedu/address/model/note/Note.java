@@ -40,6 +40,10 @@ public class Note {
      * @param medication A set of medications.
      */
     public Note(Set<Appointment> appointments, Set<String> remarks, Set<String> medication) {
+        requireNonNull(appointments);
+        requireNonNull(remarks);
+        requireNonNull(medication);
+
         this.previousAppointments = appointments;
         this.remarks = remarks;
         this.medication = medication;
@@ -79,7 +83,7 @@ public class Note {
     }
 
     public static boolean isValidString(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && !test.isEmpty();
     }
 
     /**
@@ -110,9 +114,10 @@ public class Note {
 
     @Override
     public String toString() {
-        String appointment = "Previous Appointments: " + previousAppointments.toString() + "\n";
-        String medication = "Medications: " + this.medication.toString() + "\n";
-        String remarks = "Remarks: " + this.remarks.toString();
+        String appointment = "Previous Appointments: "
+            + String.join(", ", previousAppointments.stream().map(Appointment::toString).toList()) + "\n";
+        String medication = "Medications: " + String.join(", ", this.medication) + "\n";
+        String remarks = "Remarks: " + String.join(", ", this.remarks);
 
         return appointment + medication + remarks;
     }
