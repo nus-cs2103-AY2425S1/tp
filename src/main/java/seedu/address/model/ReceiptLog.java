@@ -33,7 +33,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
         resetData(toBeCopied);
     }
 
-    private void resetData(ReadOnlyReceiptLog toBeCopied) {
+    public void resetData(ReadOnlyReceiptLog toBeCopied) {
         requireNonNull(toBeCopied);
         setReceipts(toBeCopied.getReceiptList());
     }
