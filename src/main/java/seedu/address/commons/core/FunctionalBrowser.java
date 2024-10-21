@@ -84,7 +84,8 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
                 }
             } else {
                 //For non linux OS
-                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                if (this.desktop != null && Desktop.isDesktopSupported()
+                        && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     this.desktop.browse(uri);
                 } else {
                     throw new CommandException("The current OS does not support opening external links.");

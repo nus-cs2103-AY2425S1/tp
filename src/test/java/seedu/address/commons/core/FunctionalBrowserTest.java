@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
+
 public class FunctionalBrowserTest {
 
     @Test
