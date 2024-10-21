@@ -14,22 +14,22 @@ import seedu.address.model.person.Address;
  */
 public class Delivery {
 
+    private final DeliveryId deliveryId;
     private final ItemName itemName;
     private final Address address;
     private final Cost cost;
     private final Date date;
     private final Time time;
     private final Eta eta;
-    private final Id id;
     private Status status;
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Id id, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta,
+    public Delivery(DeliveryId deliveryId, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta,
                     Status status) {
-        requireAllNonNull(itemName, address, cost, date, time, eta, status);
-        this.id = id;
+        requireAllNonNull(deliveryId, itemName, address, cost, date, time, eta, status);
+        this.deliveryId = deliveryId;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;
@@ -43,7 +43,7 @@ public class Delivery {
      * Every field must be present and not null.
      */
     public Delivery(ItemName itemName, Address address, Cost cost, Eta eta, Status status) {
-        this(new Id(), itemName, address, cost, new Date(LocalDate.now().toString()),
+        this(new DeliveryId(), itemName, address, cost, new Date(LocalDate.now().toString()),
                 new Time(LocalTime.now().toString()), eta, status);
     }
 
@@ -71,8 +71,8 @@ public class Delivery {
         return eta;
     }
 
-    public Id getId() {
-        return id;
+    public DeliveryId getDeliveryId() {
+        return deliveryId;
     }
 
     public Status getStatus() {
@@ -112,13 +112,13 @@ public class Delivery {
                 && date.equals(otherDelivery.date)
                 && time.equals(otherDelivery.time)
                 && eta.equals(otherDelivery.eta)
-                && id.equals(otherDelivery.id);
+                && deliveryId.equals(otherDelivery.deliveryId);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("id", id)
+                .add("deliveryId", deliveryId)
                 .add("itemName", itemName)
                 .add("date", date)
                 .add("time", time)
