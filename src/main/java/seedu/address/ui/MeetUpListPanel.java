@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.meetup.MeetUp;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of buyers.
  */
 public class MeetUpListPanel extends UiPart<Region> {
     private static final String FXML = "MeetUpListPanel.fxml";
@@ -21,7 +21,7 @@ public class MeetUpListPanel extends UiPart<Region> {
     private ListView<MeetUp> meetUpListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code BuyerListPanel} with the given {@code ObservableList}.
      */
     public MeetUpListPanel(ObservableList<MeetUp> meetUpList) {
         super(FXML);
@@ -31,7 +31,7 @@ public class MeetUpListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Buyer} using a {@code BuyerCard}.
      */
     class MeetUpListViewCell extends ListCell<MeetUp> {
         @Override

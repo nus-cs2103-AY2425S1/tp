@@ -17,14 +17,14 @@ import seedu.address.model.meetup.MeetUp;
  * An Immutable MeetUpList that is serializable to JSON format.
  */
 @JsonRootName(value = "meetuplist")
-class JsonSerializableMeetUpList {
+public class JsonSerializableMeetUpList {
 
     public static final String MESSAGE_DUPLICATE_MEETUP = "Meet up list contains duplicate meet up(s).";
 
     private final List<JsonAdaptedMeetUp> meetUps = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableMeetUpList} with the given persons.
+     * Constructs a {@code JsonSerializableMeetUpList} with the given buyers.
      */
     @JsonCreator
     public JsonSerializableMeetUpList(@JsonProperty("meetUps") List<JsonAdaptedMeetUp> meetUps) {
@@ -41,7 +41,7 @@ class JsonSerializableMeetUpList {
     }
 
     /**
-     * Converts this address book into the model's {@code MeetUpList} object.
+     * Converts this buyer list into the model's {@code MeetUpList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

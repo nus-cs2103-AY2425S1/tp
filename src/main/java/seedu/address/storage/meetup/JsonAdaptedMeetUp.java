@@ -13,7 +13,7 @@ import seedu.address.model.meetup.To;
 /**
  * Jackson-friendly version of {@link MeetUp}.
  */
-class JsonAdaptedMeetUp {
+public class JsonAdaptedMeetUp {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Meet up's %s field is missing!";
 
     private final String name;
@@ -45,7 +45,7 @@ class JsonAdaptedMeetUp {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code MeetUp} object.
+     * Converts this Jackson-friendly adapted buyer object into the model's {@code MeetUp} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted meet up.
      */

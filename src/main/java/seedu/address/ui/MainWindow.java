@@ -134,7 +134,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getBuyerListFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -182,7 +182,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @FXML
-    private void handleAddressBook() {
+    private void handleBuyerList() {
         buyerListPanel.getRoot().setVisible(true);
         meetUpListPanel.getRoot().setVisible(false);
         meetUpListPane.setVisible(false);
@@ -225,8 +225,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isShowAddressBook()) {
-                handleAddressBook();
+            if (commandResult.isShowBuyerList()) {
+                handleBuyerList();
             }
 
             if (commandResult.isShowMeetUpList()) {

@@ -32,7 +32,7 @@ public interface BuyerListStorage {
 
     /**
      * Saves the given {@link ReadOnlyBuyerList} to the storage.
-     * @param BuyerList cannot be null.
+     * @param buyerList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
     void saveBuyerList(ReadOnlyBuyerList buyerList) throws IOException;
