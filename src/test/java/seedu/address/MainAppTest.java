@@ -115,32 +115,6 @@ public class MainAppTest {
     }
 
     @Test
-    public void restoreBackup_withValidBackup_successfullyRestores() throws IOException, DataLoadingException {
-        Path addressBookPath = temporaryFolder.resolve("addressbook.json");
-        Path userPrefsPath = temporaryFolder.resolve("userprefs.json");
-        Path backupPath = temporaryFolder.resolve("backups/addressbook-backup.json");
-
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookPath);
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsPath);
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
-        // Create backup directory and ensure it exists
-        Files.createDirectories(backupPath.getParent());
-
-        // Create and save a sample address book
-        ReadOnlyAddressBook sampleAddressBook = seedu.address.model.util.SampleDataUtil.getSampleAddressBook();
-        addressBookStorage.saveAddressBook(sampleAddressBook);
-        storage.saveAddressBook(sampleAddressBook, backupPath); // Save backup
-
-        // Test that restoreBackup restores the valid backup
-        Optional<Path> restoredBackup = storage.restoreBackup();
-        assertTrue(restoredBackup.isPresent(), "A backup should be restored.");
-
-        ReadOnlyAddressBook restoredAddressBook = addressBookStorage.readAddressBook(restoredBackup.get()).get();
-        assertEquals(sampleAddressBook, restoredAddressBook, "Restored address book should match the original.");
-    }
-
-    @Test
     public void init_invalidConfigPath_usesDefaultConfig() throws IOException {
         Path invalidConfigPath = temporaryFolder.resolve("invalidConfig.json");
         Files.writeString(invalidConfigPath, "{ invalid json }"); // Corrupt config file

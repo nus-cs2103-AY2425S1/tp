@@ -20,11 +20,11 @@ public class RestoreCommand extends Command {
     public static final String COMMAND_WORD = "restore";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Restores the AddressBook from the most recent backup or from a specific file path.\n"
+            + ": Restores the ClinicBuddy from the most recent backup or from a specific file path.\n"
             + "Example: " + COMMAND_WORD + " [optional file path]";
 
-    public static final String MESSAGE_RESTORE_SUCCESS = "AddressBook restored successfully from %s";
-    public static final String MESSAGE_RESTORE_FAILURE = "Failed to restore AddressBook from backup.";
+    public static final String MESSAGE_RESTORE_SUCCESS = "ClinicBuddy restored successfully from %s";
+    public static final String MESSAGE_RESTORE_FAILURE = "Failed to restore ClinicBuddy from backup.";
 
     private final Optional<Path> filePath;
 
@@ -41,24 +41,26 @@ public class RestoreCommand extends Command {
 
         try {
             ReadOnlyAddressBook backupData;
+            Path backupPath;
 
             // Retrieve the storage from the model
             Storage storage = model.getStorage();
 
             if (filePath.isPresent()) {
                 // Restore from a specific file path
-                backupData = storage.readAddressBook(filePath.get())
+                backupPath = filePath.get();
+                backupData = storage.readAddressBook(backupPath)
                         .orElseThrow(() -> new DataLoadingException(new Exception("Backup file not found or invalid")));
             } else {
-                // Restore from the most recent backup
-                Path recentBackupPath = storage.restoreBackup().orElseThrow(() ->
-                        new CommandException("No recent backup available."));
-                backupData = storage.readAddressBook(recentBackupPath)
+                // Restore from the second-most recent backup
+                backupPath = storage.restoreBackup().orElseThrow(() ->
+                        new CommandException("No second-most recent backup available."));
+                backupData = storage.readAddressBook(backupPath)
                         .orElseThrow(() -> new DataLoadingException(new Exception("Backup file not found or invalid")));
             }
 
             model.setAddressBook(backupData);
-            return new CommandResult(String.format(MESSAGE_RESTORE_SUCCESS, filePath.orElse(null)));
+            return new CommandResult(String.format(MESSAGE_RESTORE_SUCCESS, backupPath.toString()));
 
         } catch (IOException | DataLoadingException e) {
             throw new CommandException(MESSAGE_RESTORE_FAILURE, e);

@@ -135,17 +135,28 @@ public class BackupManager {
     }
 
     /**
-     * Restores the most recent backup from the backup directory, if available.
+     * Restores the second-most recent backup from the backup directory, if available.
      *
-     * @return An {@code Optional<Path>} containing the path to the most recent backup, if it exists.
+     * @return An {@code Optional<Path>} containing the path to the second-most recent backup, if it exists.
      * @throws IOException If an I/O error occurs while listing files in the backup directory.
      */
     public Optional<Path> restoreMostRecentBackup() throws IOException {
         try (Stream<Path> backups = Files.list(backupDirectory)) {
-            return backups.filter(Files::isRegularFile)
-                    .max(Comparator.comparing(this::getFileCreationTime));
+            List<Path> backupFiles = backups.filter(Files::isRegularFile)
+                    .sorted(Comparator.comparing(this::getFileCreationTime).reversed()) // Newest first
+                    .toList();
+
+            // Return the second-most recent backup if it exists
+            if (backupFiles.size() > 1) {
+                return Optional.of(backupFiles.get(1)); // Return the second-most recent backup
+            } else if (!backupFiles.isEmpty()) {
+                return Optional.of(backupFiles.get(0)); // Return the most recent if there's only one backup
+            } else {
+                return Optional.empty(); // No backups available
+            }
         }
     }
+
 
     protected FileTime getFileCreationTime(Path path) {
         try {
