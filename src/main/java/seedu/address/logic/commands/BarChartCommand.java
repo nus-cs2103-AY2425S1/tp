@@ -24,13 +24,16 @@ public class BarChartCommand extends Command {
         requireNonNull(model);
         Map<String, Integer> distributionOfMonthsPaid = new HashMap<>();
         model.getFilteredPersonList().forEach(person -> {
+            assert person != null : "person should not be null";
             Set<MonthPaid> monthsPaid = person.getMonthsPaid();
+            assert monthsPaid != null : "monthsPaid set should not be null";
             monthsPaid.forEach(monthPaid -> {
+                assert monthPaid != null : "monthPaid should not be null";
                 String month = monthPaid.value;
                 distributionOfMonthsPaid.put(month, distributionOfMonthsPaid.getOrDefault(month, 0) + 1);
             });
         });
-        assert distributionOfMonthsPaid != null : "numOfStudentsInEachClass map should not be null";
+        assert distributionOfMonthsPaid != null : "distributionOfMonthsPaid map should not be null";
         BarChartWindow.setData(distributionOfMonthsPaid);
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
     }
