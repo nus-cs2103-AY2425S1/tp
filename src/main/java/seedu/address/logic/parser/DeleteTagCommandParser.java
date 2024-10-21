@@ -12,6 +12,22 @@ import seedu.address.model.tag.Tag;
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     public static final int MAX_LENGTH = 50;
     public static final String VALIDATION_REGEX = "[\\p{Alnum}'() ]+";
+
+    /**
+     * Checks if a given string (trimmed) is a valid argument
+     * for the DeleteTagCommand class.
+     * @return true if it is valid, and false otherwise.
+     */
+    public boolean isValidArguments(String trimmedArgs) {
+        boolean isEmpty = trimmedArgs.isEmpty();
+        boolean isTooLong = trimmedArgs.length() > MAX_LENGTH;
+        boolean isValidCharacters = trimmedArgs.matches(VALIDATION_REGEX);
+        if (isEmpty || isTooLong || !isValidCharacters) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTagCommand
      * and returns a DeleteTagCommand object for execution.
@@ -20,12 +36,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     public DeleteTagCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim().toLowerCase();
 
-        // Check if the input is empty, exceeds the maximum length,
-        // or contains non-alphanumeric characters other than spaces.
-        boolean isEmpty = trimmedArgs.isEmpty();
-        boolean isTooLong = trimmedArgs.length() > MAX_LENGTH;
-        boolean isValidCharacters = trimmedArgs.matches(VALIDATION_REGEX);
-        if (isEmpty || isTooLong || !isValidCharacters) {
+        if (!isValidArguments(trimmedArgs)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
 
