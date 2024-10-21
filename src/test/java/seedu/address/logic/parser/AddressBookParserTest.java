@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONSULT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.nio.file.Paths;
@@ -26,6 +27,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
+import seedu.address.logic.commands.consultation.DeleteConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
@@ -69,6 +71,15 @@ public class AddressBookParserTest {
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(INDEX_FIRST_STUDENT);
         assertEquals(new DeleteCommand(firstIndexSet), command);
+    }
+
+    @Test
+    public void parseCommand_deleteConsult() throws Exception {
+        DeleteConsultCommand command = (DeleteConsultCommand) parser.parseCommand(
+                DeleteConsultCommand.COMMAND_WORD + " " + INDEX_FIRST_CONSULT.getOneBased());
+        Set<Index> firstIndexSet = new HashSet<>();
+        firstIndexSet.add(INDEX_FIRST_CONSULT);
+        assertEquals(new DeleteConsultCommand(firstIndexSet), command);
     }
 
     @Test
