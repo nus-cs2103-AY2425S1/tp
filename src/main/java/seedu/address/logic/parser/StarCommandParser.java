@@ -8,7 +8,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object.
+ * Parses input arguments and creates a new StarCommand object.
  */
 public class StarCommandParser implements Parser<StarCommand> {
 
