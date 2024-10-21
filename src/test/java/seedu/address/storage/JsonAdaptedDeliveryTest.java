@@ -39,8 +39,9 @@ public class JsonAdaptedDeliveryTest {
 
     @Test
     public void toModelType_nullDeliveryId_throwsIllegalValueException() {
-        JsonAdaptedDelivery delivery = new JsonAdaptedDelivery(null, VALID_ITEM_NAME, VALID_ADDRESS, VALID_COST, VALID_DATE,
-                VALID_TIME, VALID_ETA, VALID_STATUS, VALID_ARCHIVE);
+        JsonAdaptedDelivery delivery =
+                new JsonAdaptedDelivery(null, VALID_ITEM_NAME, VALID_ADDRESS, VALID_COST, VALID_DATE,
+                        VALID_TIME, VALID_ETA, VALID_STATUS, VALID_ARCHIVE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DeliveryId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
