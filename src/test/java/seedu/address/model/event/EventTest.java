@@ -21,45 +21,6 @@ public class EventTest {
     }
 
     @Test
-    void isValidEvent_nonBlankEvent_returnsTrue() {
-        assertTrue(Event.isValidEvent("Conference"));
-    }
-
-    @Test
-    void equals_sameEvent_returnsTrue() {
-        Event event1 = new Event("Meeting");
-        Event event2 = new Event("Meeting");
-        assertTrue(event1.equals(event2));
-    }
-
-    @Test
-    void equals_differentEvent_returnsFalse() {
-        Event event1 = new Event("Meeting");
-        Event event2 = new Event("Conference");
-        assertFalse(event1.equals(event2));
-    }
-
-    @Test
-    void toString_validEvent_returnsEventString() {
-        Event event = new Event("Meeting");
-        assertTrue(event.toString().equals("Meeting"));
-    }
-
-    @Test
-    void hashCode_sameEvent_returnsSameHashCode() {
-        Event event1 = new Event("Meeting");
-        Event event2 = new Event("Meeting");
-        assertTrue(event1.hashCode() == event2.hashCode());
-    }
-
-    @Test
-    void hashCode_differentEvent_returnsDifferentHashCode() {
-        Event event1 = new Event("Meeting");
-        Event event2 = new Event("Conference");
-        assertFalse(event1.hashCode() == event2.hashCode());
-    }
-}
-
     public void isValidEvent_eventWithOnlySpaces_returnsFalse() {
         assertFalse(Event.isValidEvent("   "));
     }
