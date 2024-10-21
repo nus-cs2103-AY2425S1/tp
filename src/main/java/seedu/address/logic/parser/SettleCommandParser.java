@@ -1,17 +1,18 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.SettleCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.SettleCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+
 /**
  * Parses input arguments and creates a new SettleCommand object
  */
-public class SettleCommandParser implements Parser<SettleCommand>{
+public class SettleCommandParser implements Parser<SettleCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SettleCommand

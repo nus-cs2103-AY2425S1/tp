@@ -1,5 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -9,16 +15,11 @@ import seedu.address.model.student.OwedAmount;
 import seedu.address.model.student.PaidAmount;
 import seedu.address.model.student.Student;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 /**
  * Updates owedAmount and paidAmount of a student in the address book by provided amount.
  */
-public class SettleCommand extends Command{
+public class SettleCommand extends Command {
 
     public static final String COMMAND_WORD = "settle";
     public static final String COMMAND_WORD_RANDOM_CASE = "sEttLe";
@@ -70,7 +71,7 @@ public class SettleCommand extends Command{
      * @return A new Student object with updated payment details.
      * @throws CommandException If the amount to settle exceeds the owed amount.
      */
-    public Student createUpdatedStudent(Student studentToUpdate) throws CommandException{
+    public Student createUpdatedStudent(Student studentToUpdate) throws CommandException {
         assert studentToUpdate != null;
 
         PaidAmount updatedPaidAmount = updatePaidAmount(studentToUpdate.getPaidAmount(), amount);
@@ -93,7 +94,7 @@ public class SettleCommand extends Command{
         return paidAmount.updateValue(amountPaid);
     }
 
-    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, double amountPaid) throws CommandException{
+    private static OwedAmount updateOwedAmount(OwedAmount owedAmount, double amountPaid) throws CommandException {
         if (owedAmount.isGreater(amountPaid)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
