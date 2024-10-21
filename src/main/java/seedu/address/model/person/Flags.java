@@ -13,7 +13,7 @@ public class Flags {
     /**
      * Constructor using ungrouped flags.
      * */
-    private Flags(PresetFlags... flags) {
+    Flags(PresetFlags... flags) {
         flagSet.addAll(Arrays.asList(flags));
     }
     /**
@@ -38,14 +38,16 @@ public class Flags {
      * Return the weightage of all matching flags.
      * */
     public int getWeightedFlags(PresetFlags... flags) {
-        int flagListSize = flags.length;
         int totalWeight = 0;
-        for (int i = flagListSize - 1; i >= 0; i--) {
-            int weight = (int) Math.pow(2, i);
-            if (flagSet.contains(flags[i])) {
-                totalWeight += weight;
+        int currentPower = 0; // Tracks consecutive powers for present flags
+
+        for (PresetFlags flag : flags) {
+            if (flagSet.contains(flag)) {
+                totalWeight += (int) Math.pow(2, currentPower);
+                currentPower++; // Only increment power if the flag is present
             }
         }
+
         return totalWeight;
     }
 }
