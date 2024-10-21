@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExportCommand.SUCCESS_MESSAGE;
+import static seedu.address.logic.commands.ExportCommand.parseTags;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -66,6 +67,46 @@ public class ExportCommandTest {
 
         // different export format -> returns false
         assertFalse(standardCommand.equals(new ExportCommand(differentFormat)));
+    }
+
+    @Test
+    public void parseValidTag() {
+        String input = "\"{\n  \"neighbours\" : \"null\"\n}\"";
+        String expectedOutput = "neighbours";
+        String result = parseTags(input);
+        assertEquals(expectedOutput, result);
+    }
+
+    @Test
+    public void parseInvalidTag_NoBraces() {
+        String input = "\"friends\" : null";
+        String expectedOutput = "\"friends\" : null";
+        String result = parseTags(input);
+        assertEquals(expectedOutput, result);
+    }
+
+    @Test
+    public void parseEmptyString() {
+        String input = "";
+        String expectedOutput = "";
+        String result = parseTags(input);
+        assertEquals(expectedOutput, result);
+    }
+
+    @Test
+    public void parseMalformedTag() {
+        String input = "{\"friends\":}";
+        String expectedOutput = "{\"friends\":}";
+        String result = parseTags(input);
+        assertEquals(expectedOutput, result);
+    }
+
+    @Test
+    public void parseNoColonInTag() {
+        String input = "{\"friends\"}";
+        String expectedOutput = "{\"friends\"}";
+        String result = parseTags(input);
+        assertEquals(expectedOutput, result);
     }
 
     @Test
