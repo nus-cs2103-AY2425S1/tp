@@ -28,6 +28,16 @@ public class TagList {
     }
 
     /**
+     * Deletes a tag if it is already present.
+     *
+     * @param tag The tag to delete.
+     * @return true if the tag was deleted, false if it does not exist.
+     */
+    public boolean deleteTag(Tag tag) {
+        return tags.remove(tag);
+    }
+
+    /**
      * Sets the TagList based on a list from Storage.
      *
      * @param tags The tags to add.
@@ -51,6 +61,9 @@ public class TagList {
     }
     @Override
     public String toString() {
+        if (tags.isEmpty()) {
+            return "You have no tags.";
+        }
         return String.join(", ", tags.stream().map(Tag::getTagName).toList());
     }
     @Override
