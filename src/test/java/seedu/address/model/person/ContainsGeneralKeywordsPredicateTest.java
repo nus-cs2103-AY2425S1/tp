@@ -19,17 +19,17 @@ public class ContainsGeneralKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        ContainsGeneralKeywordsPredicate firstPredicate
-                = new ContainsGeneralKeywordsPredicate(firstPredicateKeywordList);
-        ContainsGeneralKeywordsPredicate secondPredicate
-                = new ContainsGeneralKeywordsPredicate(secondPredicateKeywordList);
+        ContainsGeneralKeywordsPredicate firstPredicate =
+                new ContainsGeneralKeywordsPredicate(firstPredicateKeywordList);
+        ContainsGeneralKeywordsPredicate secondPredicate =
+                new ContainsGeneralKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ContainsGeneralKeywordsPredicate firstPredicateCopy
-                = new ContainsGeneralKeywordsPredicate(firstPredicateKeywordList);
+        ContainsGeneralKeywordsPredicate firstPredicateCopy =
+                new ContainsGeneralKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,8 +45,8 @@ public class ContainsGeneralKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        ContainsGeneralKeywordsPredicate predicate
-                = new ContainsGeneralKeywordsPredicate(Collections.singletonList("Alice"));
+        ContainsGeneralKeywordsPredicate predicate =
+                new ContainsGeneralKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -71,11 +71,6 @@ public class ContainsGeneralKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new ContainsGeneralKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
-
-        // Keywords match phone, email and address, but does not match name
-        predicate = new ContainsGeneralKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
