@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -52,7 +53,7 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INCOMPLETE_INDEX);
         }
         String[] indexes = trimmedIndexes.split(",");
-        Set<Index> indexSet = new HashSet<Index>();
+        LinkedHashSet<Index> indexSet = new LinkedHashSet<>();
         for (String index : indexes) {
             if (!StringUtil.isNonZeroUnsignedInteger(index.trim())) {
                 throw new ParseException(MESSAGE_INVALID_INDEX);
