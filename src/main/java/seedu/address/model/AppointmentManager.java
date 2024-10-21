@@ -82,32 +82,31 @@ public class AppointmentManager {
 
     private boolean hasConflict(Appointment newAppointment, List<Appointment> appointments) {
         for (Appointment existingAppointment : appointments) {
-            if (newAppointment.getStartTime().isBefore(existingAppointment.getEndTime()) &&
-                newAppointment.getEndTime().isAfter(existingAppointment.getStartTime())) {
+            if (newAppointment.getStartTime().isBefore(existingAppointment.getEndTime())
+                && newAppointment.getEndTime().isAfter(existingAppointment.getStartTime())) {
                 return true;
             }
         }
         return false;
     }
-    
-/**
- * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
- * If there is a conflict, an IllegalArgumentException is thrown.
- *
- * @param newAppointment The appointment to be added.
- * @param person The person to whom the appointment is added.
- */
+    /**
+     * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
+     * If there is a conflict, an IllegalArgumentException is thrown.
+     *
+     * @param newAppointment The appointment to be added.
+     * @param person The person to whom the appointment is added.
+     */
     public void addAppointment(Appointment newAppointment, Person person) {
         if (hasConflict(newAppointment, appointments)) {
             throw new IllegalArgumentException("Appointment conflicts with an existing one.");
         }
-    
+
         Person updatedPerson = new Person(person);
         updatedPerson.addAppointment(newAppointment);
-    
+
         model.setPerson(person, updatedPerson);
     }
-    
+
     private List<Appointment> getSortedAppointments() {
         ObservableList<Person> personList = model.getUnfilteredPersonList();
 

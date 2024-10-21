@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -196,6 +197,18 @@ public class AddCommandTest {
         public Person getPerson(Nric nric) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Person> getUnfilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAppointment(Appointment newAppointment, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**
