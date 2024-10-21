@@ -1,10 +1,18 @@
 package seedu.address.model.person;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.parser.ArgumentMultimap;
 
 /**
  * Contains all predicates for FindCommand
@@ -15,10 +23,6 @@ public class PredicateContainer {
     private EmailContainsKeywordsPredicate emailContainsKeywordsPredicate;
     private DepartmentContainsKeywordsPredicate departmentContainsKeywordsPredicate;
     private RoleContainsKeywordsPredicate roleContainsKeywordsPredicate;
-
-    public PredicateContainer() {
-
-    }
 
     /**
      * Adds a {@code NameContainsKeywordsPredicate} to the {@code PredicateContainer}.
@@ -181,4 +185,106 @@ public class PredicateContainer {
         return toStringBuilder.toString();
     }
 
+    /**
+     * Extracts out the values from {@code argMultimap} using the prefixes required for FindCommand, and parses them
+     * into their respective {@code Predicate} to be added into a {@code PredicateContainer}
+     * Prefixes required for FindCommand includes "n/", "p/", "e/", "d/", "/r".
+     * @param argMultimap ArgumentMultimap to extract from
+     * @return {@code PredicateContainer} with {@code Predicate} after parsing added.
+     */
+    public static PredicateContainer extractFromArgumentMultimap(ArgumentMultimap argMultimap) {
+        PredicateContainer predicateContainer = new PredicateContainer();
+        predicateContainer.addNameContainsKeywordsPredicateusingArgMultimap(argMultimap);
+        predicateContainer.addPhoneContainsKeywordsPredicateusingArgMultimap(argMultimap);
+        predicateContainer.addEmailContainsKeywordsPredicateusingArgMultimap(argMultimap);
+        predicateContainer.addDepartmentContainsKeywordsPredicateusingArgMultimap(argMultimap);
+        predicateContainer.addRoleContainsKeywordsPredicateusingArgMultimap(argMultimap);
+        return predicateContainer;
+    }
+
+    /**
+     * Adds a {@code NameContainsKeywordsPredicate} to the {@code PredicateContainer}.
+     *
+     * This method sets the internal {@code nameContainsKeywordsPredicate} field by getting the value from the
+     * {@code argumentMultimap } and creating a {@code NameContainsKeywordsPredicate} instance.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to extract value from.
+     */
+    public void addNameContainsKeywordsPredicateusingArgMultimap(ArgumentMultimap argumentMultimap) {
+        if (argumentMultimap.getValue(PREFIX_NAME).isPresent()) {
+            List<String> nameKeywords = Arrays.stream(
+                    argumentMultimap.getAllValues(PREFIX_NAME).get(0).split("\\s+")).toList();
+            NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                    new NameContainsKeywordsPredicate(nameKeywords);
+            addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate);
+        }
+    }
+    /**
+     * Adds a {@code PhoneContainsKeywordsPredicate} to the {@code PredicateContainer}.
+     *
+     * This method sets the internal {@code phoneContainsKeywordsPredicate} field by getting the value from the
+     * {@code argumentMultimap } and creating a {@code PhoneContainsKeywordsPredicate} instance.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to extract value from.
+     */
+    public void addPhoneContainsKeywordsPredicateusingArgMultimap(ArgumentMultimap argumentMultimap) {
+        if (argumentMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            List<String> phoneKeywords = Arrays.stream(
+                    argumentMultimap.getAllValues(PREFIX_PHONE).get(0).split("\\s+")).toList();
+            PhoneContainsKeywordsPredicate phoneContainsKeywordsPredicate =
+                    new PhoneContainsKeywordsPredicate(phoneKeywords);
+            addPhoneContainsKeywordsPredicate(phoneContainsKeywordsPredicate);
+        }
+    }
+    /**
+     * Adds a {@code EmailContainsKeywordsPredicate} to the {@code PredicateContainer}.
+     *
+     * This method sets the internal {@code emailContainsKeywordsPredicate} field by getting the value from the
+     * {@code argumentMultimap } and creating a {@code EmailContainsKeywordsPredicate} instance.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to extract value from.
+     */
+    public void addEmailContainsKeywordsPredicateusingArgMultimap(ArgumentMultimap argumentMultimap) {
+        if (argumentMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            List<String> emailKeywords = Arrays.stream(
+                    argumentMultimap.getAllValues(PREFIX_EMAIL).get(0).split("\\s+")).toList();
+            EmailContainsKeywordsPredicate emailContainsKeywordsPredicate =
+                    new EmailContainsKeywordsPredicate(emailKeywords);
+            addEmailContainsKeywordsPredicate(emailContainsKeywordsPredicate);
+        }
+    }
+    /**
+     * Adds a {@code DepartmentContainsKeywordsPredicate} to the {@code PredicateContainer}.
+     *
+     * This method sets the internal {@code departmentContainsKeywordsPredicate} field by getting the value from the
+     * {@code argumentMultimap } and creating a {@code DepartmentContainsKeywordsPredicate} instance.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to extract value from.
+     */
+    public void addDepartmentContainsKeywordsPredicateusingArgMultimap(ArgumentMultimap argumentMultimap) {
+        if (argumentMultimap.getValue(PREFIX_DEPARTMENT).isPresent()) {
+            List<String> departmentKeywords = Arrays.stream(
+                    argumentMultimap.getAllValues(PREFIX_DEPARTMENT).get(0).split("\\s+")).toList();
+            DepartmentContainsKeywordsPredicate departmentContainsKeywordsPredicate =
+                    new DepartmentContainsKeywordsPredicate(departmentKeywords);
+            addDepartmentContainsKeywordsPredicate(departmentContainsKeywordsPredicate);
+        }
+    }
+    /**
+     * Adds a {@code RoleContainsKeywordsPredicate} to the {@code PredicateContainer}.
+     *
+     * This method sets the internal {@code roleContainsKeywordsPredicate} field by getting the value from the
+     * {@code argumentMultimap } and creating a {@code RoleContainsKeywordsPredicate} instance.
+     *
+     * @param argumentMultimap The {@code ArgumentMultimap} to extract value from.
+     */
+    public void addRoleContainsKeywordsPredicateusingArgMultimap(ArgumentMultimap argumentMultimap) {
+        if (argumentMultimap.getValue(PREFIX_ROLE).isPresent()) {
+            List<String> roleKeywords = Arrays.stream(
+                    argumentMultimap.getAllValues(PREFIX_ROLE).get(0).split("\\s+")).toList();
+            RoleContainsKeywordsPredicate roleContainsKeywordsPredicate =
+                    new RoleContainsKeywordsPredicate(roleKeywords);
+            addRoleContainsKeywordsPredicate(roleContainsKeywordsPredicate);
+        }
+    }
 }

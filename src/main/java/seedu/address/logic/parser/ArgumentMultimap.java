@@ -1,5 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -74,5 +80,16 @@ public class ArgumentMultimap {
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
         }
+    }
+
+    /**
+     * Checks if the {@code argumentMultimap} contains none of the prefixes required for FindCommand.
+     * Prefixes required for FindCommand includes "n/", "p/", "e/", "d/", "/r".
+     * @return True if it contains none of the prefixes, False otherwise.
+     */
+    public boolean hasNoFindCommandPrefix() {
+        return getValue(PREFIX_NAME).isEmpty() && getValue(PREFIX_PHONE).isEmpty()
+                && getValue(PREFIX_EMAIL).isEmpty() && getValue(PREFIX_DEPARTMENT).isEmpty()
+                && getValue(PREFIX_ROLE).isEmpty();
     }
 }

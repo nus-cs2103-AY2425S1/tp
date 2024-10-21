@@ -1,12 +1,17 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.util.ToStringBuilder;
 
 public class PredicateContainerTest {
     @Test
@@ -67,5 +72,80 @@ public class PredicateContainerTest {
         // different PredicateContainer -> returns false
         assertFalse(predicateContainer1.equals(predicateContainer2));
     }
+
+    @Test
+    public void test_getCombinedPredicates_returnTrue() {
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        PhoneContainsKeywordsPredicate phoneContainsKeywordsPredicate =
+                new PhoneContainsKeywordsPredicate(Arrays.asList("94351253", "87654321"));
+        EmailContainsKeywordsPredicate emailContainsKeywordsPredicate =
+                new EmailContainsKeywordsPredicate(Arrays.asList("alice@example.com", "bob@gmail.com"));
+        DepartmentContainsKeywordsPredicate departmentContainsKeywordsPredicate =
+                new DepartmentContainsKeywordsPredicate(Arrays.asList("IT", "SWE"));
+        RoleContainsKeywordsPredicate roleContainsKeywordsPredicate =
+                new RoleContainsKeywordsPredicate(Arrays.asList("Manager", "SWE"));
+        PredicateContainer predicateContainer = new PredicateContainer()
+                .addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate)
+                .addPhoneContainsKeywordsPredicate(phoneContainsKeywordsPredicate)
+                .addEmailContainsKeywordsPredicate(emailContainsKeywordsPredicate)
+                .addDepartmentContainsKeywordsPredicate(departmentContainsKeywordsPredicate)
+                .addRoleContainsKeywordsPredicate(roleContainsKeywordsPredicate);
+        Predicate<Person> predicate = predicateContainer.getCombinedPredicates();
+        assertTrue(predicate.test(ALICE));
+    }
+
+    @Test
+    public void test_getCombinedPredicates_returnFalse() {
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        // changed phone number
+        PhoneContainsKeywordsPredicate phoneContainsKeywordsPredicate =
+                new PhoneContainsKeywordsPredicate(Arrays.asList("12345678", "87654321"));
+        EmailContainsKeywordsPredicate emailContainsKeywordsPredicate =
+                new EmailContainsKeywordsPredicate(Arrays.asList("alice@example.com", "bob@gmail.com"));
+        DepartmentContainsKeywordsPredicate departmentContainsKeywordsPredicate =
+                new DepartmentContainsKeywordsPredicate(Arrays.asList("IT", "BIZ"));
+        RoleContainsKeywordsPredicate roleContainsKeywordsPredicate =
+                new RoleContainsKeywordsPredicate(Arrays.asList("Manager", "SWE"));
+        PredicateContainer predicateContainer = new PredicateContainer()
+                .addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate)
+                .addPhoneContainsKeywordsPredicate(phoneContainsKeywordsPredicate)
+                .addEmailContainsKeywordsPredicate(emailContainsKeywordsPredicate)
+                .addDepartmentContainsKeywordsPredicate(departmentContainsKeywordsPredicate)
+                .addRoleContainsKeywordsPredicate(roleContainsKeywordsPredicate);
+        Predicate<Person> predicate = predicateContainer.getCombinedPredicates();
+        assertFalse(predicate.test(ALICE));
+    }
+
+    @Test
+    public void test_toString() {
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate =
+                new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
+        PhoneContainsKeywordsPredicate phoneContainsKeywordsPredicate =
+                new PhoneContainsKeywordsPredicate(Arrays.asList("94351253", "87654321"));
+        EmailContainsKeywordsPredicate emailContainsKeywordsPredicate =
+                new EmailContainsKeywordsPredicate(Arrays.asList("alice@example.com", "bob@gmail.com"));
+        DepartmentContainsKeywordsPredicate departmentContainsKeywordsPredicate =
+                new DepartmentContainsKeywordsPredicate(Arrays.asList("IT", "SWE"));
+        RoleContainsKeywordsPredicate roleContainsKeywordsPredicate =
+                new RoleContainsKeywordsPredicate(Arrays.asList("Manager", "SWE"));
+        PredicateContainer predicateContainer = new PredicateContainer()
+                .addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate)
+                .addPhoneContainsKeywordsPredicate(phoneContainsKeywordsPredicate)
+                .addEmailContainsKeywordsPredicate(emailContainsKeywordsPredicate)
+                .addDepartmentContainsKeywordsPredicate(departmentContainsKeywordsPredicate)
+                .addRoleContainsKeywordsPredicate(roleContainsKeywordsPredicate);
+        String actual = predicateContainer.toString();
+        ToStringBuilder toStringBuilder = new ToStringBuilder(predicateContainer);
+        toStringBuilder.add("names", nameContainsKeywordsPredicate + "\n")
+                .add("phones", phoneContainsKeywordsPredicate + "\n")
+                .add("emails", emailContainsKeywordsPredicate + "\n")
+                .add("departments", departmentContainsKeywordsPredicate + "\n")
+                .add("roles", roleContainsKeywordsPredicate);
+        String expected = toStringBuilder.toString();
+        assertEquals(expected, actual);
+    }
+
 
 }
