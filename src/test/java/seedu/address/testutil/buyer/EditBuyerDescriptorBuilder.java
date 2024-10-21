@@ -5,9 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.buyer.EditCommand.EditBuyerDescriptor;
-import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
@@ -36,8 +35,7 @@ public class EditBuyerDescriptorBuilder {
         descriptor.setName(buyer.getName());
         descriptor.setPhone(buyer.getPhone());
         descriptor.setEmail(buyer.getEmail());
-        descriptor.setAddress(buyer.getAddress());
-        descriptor.setBuyerType(buyer.getBuyerType());
+        descriptor.setBudget(buyer.getBudget());
         descriptor.setTags(buyer.getTags());
     }
 
@@ -66,18 +64,10 @@ public class EditBuyerDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditBuyerDescriptor} that we are building.
+     * Sets the {@code Budget} of the {@code EditBuyerDescriptor} that we are building.
      */
-    public EditBuyerDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
-        return this;
-    }
-
-    /**
-     * Sets the {@code BuyerType} of the {@code EditBuyerDescriptor} that we are building.
-     */
-    public EditBuyerDescriptorBuilder withBuyerType(String buyerType) {
-        descriptor.setBuyerType(new BuyerType(buyerType));
+    public EditBuyerDescriptorBuilder withBudget(String budget) {
+        descriptor.setBudget(new Budget(budget));
         return this;
     }
 

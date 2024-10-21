@@ -12,17 +12,16 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.buyer.AddCommand;
+import seedu.address.logic.commands.buyer.DeleteCommand;
+import seedu.address.logic.commands.buyer.EditCommand;
 import seedu.address.logic.commands.buyer.FindCommand;
-import seedu.address.logic.commands.meetup.AddCommand;
-import seedu.address.logic.commands.meetup.DeleteCommand;
-import seedu.address.logic.commands.meetup.EditCommand;
-import seedu.address.logic.commands.meetup.ViewCommand;
+import seedu.address.logic.commands.buyer.ViewCommand;
+import seedu.address.logic.parser.buyer.AddCommandParser;
+import seedu.address.logic.parser.buyer.DeleteCommandParser;
+import seedu.address.logic.parser.buyer.EditCommandParser;
 import seedu.address.logic.parser.buyer.FindCommandParser;
-import seedu.address.logic.parser.buyer.ViewCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.meetup.AddCommandParser;
-import seedu.address.logic.parser.meetup.DeleteCommandParser;
-import seedu.address.logic.parser.meetup.EditCommandParser;
 
 /**
  * Parses user input.
@@ -58,23 +57,11 @@ public class BuyerListParser {
 
         switch (commandWord) {
 
-        case seedu.address.logic.commands.buyer.AddCommand.COMMAND_WORD:
-            return new seedu.address.logic.parser.buyer.AddCommandParser().parse(arguments);
-
-        case seedu.address.logic.commands.buyer.EditCommand.COMMAND_WORD:
-            return new seedu.address.logic.parser.buyer.EditCommandParser().parse(arguments);
-
-        case seedu.address.logic.commands.buyer.DeleteCommand.COMMAND_WORD:
-            return new seedu.address.logic.parser.buyer.DeleteCommandParser().parse(arguments);
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case seedu.address.logic.commands.buyer.ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
