@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 
+/**
+ * Clears both persons and events of the address book
+ */
 public class ClearAllCommand extends ClearCommand {
 
     public static final String COMMAND_FIELD = "all";

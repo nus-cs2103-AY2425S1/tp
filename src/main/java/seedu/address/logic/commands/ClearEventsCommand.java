@@ -11,7 +11,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
-
+/**
+ * Clears all events of the address book
+ */
 public class ClearEventsCommand extends ClearCommand {
 
     public static final String COMMAND_FIELD = "events";

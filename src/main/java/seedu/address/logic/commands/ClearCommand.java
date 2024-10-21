@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-
 /**
- * Clears the address book.
+ * Represents a clear command with hidden internal logic and the ability to be executed.
  */
 public abstract class ClearCommand extends Command {
 
