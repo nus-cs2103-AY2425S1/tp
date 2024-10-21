@@ -96,7 +96,7 @@ public class MainApp extends Application {
         }
 
         Optional<ReadOnlyReceiptLog> goodsReceiptList;
-        ReadOnlyReceiptLog initialGoodsData = new ReceiptLog();
+        ReadOnlyReceiptLog initialGoodsData;
         try {
             goodsReceiptList = storage.readGoods();
             if (goodsReceiptList.isEmpty()) {
@@ -104,7 +104,7 @@ public class MainApp extends Application {
                         + " populated with no Goods.");
             }
             // TODO: Add Sample Data for Goods
-            //initialGoodsData = goodsReceiptList.orElseGet()
+            initialGoodsData = goodsReceiptList.orElseGet(ReceiptLog::new);
         } catch (DataLoadingException e) {
             logger.warning("Creating a new data file " + storage.getGoodsFilePath()
                     + " populated with no Goods.");
