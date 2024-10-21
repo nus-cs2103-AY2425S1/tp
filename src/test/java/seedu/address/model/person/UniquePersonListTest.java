@@ -11,11 +11,13 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniquePersonListTest {
@@ -170,5 +172,15 @@ public class UniquePersonListTest {
     @Test
     public void toStringMethod() {
         assertEquals(uniquePersonList.asUnmodifiableObservableList().toString(), uniquePersonList.toString());
+    }
+
+    @Test
+    public void deletePersonTap_list_successfulDeletionOfTag() {
+        Person newAlice = new PersonBuilder(ALICE).withTags("friends", "hello").build();
+        uniquePersonList.add(newAlice);
+        uniquePersonList.deletePersonTag(newAlice, new Tag("hello"));
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 }
