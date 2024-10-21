@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.awt.GraphicsEnvironment;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,8 +28,7 @@ public class FunctionalBrowserTest {
 
     @Test
     public void launchUri_invalidUri_throwsUriSyntaxException() {
-        assumeFalse(System.getProperty("os.name").toLowerCase().contains("ubuntu"),
-                "Test not ran on Ubuntu OS");
+        assumeFalse(GraphicsEnvironment.isHeadless(), "Test not ran on headless environment");
 
         FunctionalBrowser browser = FunctionalBrowser.getDesktop();
         String expectedErrorMessage = "The URI specified is invalid.";
