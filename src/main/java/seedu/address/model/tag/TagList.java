@@ -22,7 +22,11 @@ public class TagList {
      * @return true if the tag was added, false if it already exists.
      */
     public boolean addTag(Tag tag) {
-        return tags.add(tag);
+        if (tags.contains(tag)) {
+            return false;
+        }
+        tags.add(tag);
+        return true;
     }
 
     /**
