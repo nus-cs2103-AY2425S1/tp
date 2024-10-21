@@ -7,20 +7,24 @@
            xmlns:fx="http://javafx.com/fxml"
            fx:id="detailPanel"
            styleClass="pane-with-border">
-    <VBox fx:id="detailPanelVBox">
-        <Label fx:id="name" style="-fx-font-size: 48;" />
-        <Label fx:id="id" />
-        <Label fx:id="phone" />
-        <Label fx:id="address" />
-        <Label fx:id="email" />
-        <Label fx:id="role" />
-        <Label fx:id="major" />
-        <HBox alignment="CENTER_LEFT" >
-            <Label fx:id="tagStart" minWidth="73" />
-            <!-- MUST KEEP minWidth ABOVE TO 73 -->
-            <FlowPane fx:id="tagDetails" />
-        </HBox>
-        <Label fx:id="meetings" wrapText="true"/>
-    </VBox>
+    <ScrollPane vbarPolicy="ALWAYS" hbarPolicy="NEVER" fitToWidth="true">
+        <VBox fx:id="detailPanelVBox">
+            <Label style="-fx-font-size: 6" />
+            <Label fx:id="name" style="-fx-font-size: 48;" />
+            <Label fx:id="id" />
+            <Label fx:id="phone" />
+            <Label fx:id="address" />
+            <Label fx:id="email" />
+            <Label fx:id="role" />
+            <Label fx:id="major" />
+            <HBox alignment="CENTER_LEFT" >
+                <Label fx:id="tagStart" minWidth="73" />
+                <!-- MUST KEEP minWidth ABOVE TO 73 -->
+                <FlowPane fx:id="tagDetails" />
+            </HBox>
+            <Label fx:id="meetings" wrapText="true"/>
+            <Label></Label>
+        </VBox>
+    </ScrollPane>
 
 </StackPane>

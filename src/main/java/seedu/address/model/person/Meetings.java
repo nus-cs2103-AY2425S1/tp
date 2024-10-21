@@ -109,6 +109,23 @@ public class Meetings {
         return meetingList.toString();
     }
 
+    public String toDetailPanelString() {
+        StringBuilder meetingList = new StringBuilder();
+
+        for (int i = 0; i < internalList.size(); i++) {
+            meetingList.append(i + 1).append(". ").append(getMeeting(i).toString().substring(0,1).toUpperCase())
+                    .append(getMeeting(i).toString().substring(1)).append("\n");
+        }
+
+        return meetingList.toString();
+    }
+
+
+    public boolean isEmptyMeetings() {
+        return internalList.isEmpty();
+    }
+
+
     public ObservableList<Meeting> getInternalList() {
         return internalList;
     }

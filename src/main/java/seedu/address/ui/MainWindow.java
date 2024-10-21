@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private DetailPanel detailPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -124,7 +125,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        DetailPanel detailPanel = new DetailPanel();
+        detailPanel = new DetailPanel();
         personListPanel.setSelectionListener((person, index) -> {
             detailPanel.setPerson(person, index);
         });
@@ -178,8 +179,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public void refreshDetailPanel() {
+        detailPanel.updateDetails();
     }
 
     /**
@@ -192,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            refreshDetailPanel();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

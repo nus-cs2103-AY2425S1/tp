@@ -42,9 +42,9 @@
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
           <VBox styleClass="pane-with-border" minWidth="330" prefWidth="400" maxWidth="500" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <StackPane fx:id="detailPanelPlaceholder" VBox.vgrow="ALWAYS" styleClass="detail-panel-placeholder">
+            <StackPane fx:id="detailPanelPlaceholder" VBox.vgrow="SOMETIMES">
               <padding>
-                <Insets right="10" bottom="5" left="10" />
+                <Insets bottom="5" right="10" left="10" />
               </padding>
             </StackPane>
             <StackPane fx:id="resultDisplayPlaceholder" VBox.vgrow="NEVER" minHeight="100" prefHeight="125" maxHeight="125">

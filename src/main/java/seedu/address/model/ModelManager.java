@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
+
 /**
  * Represents the in-memory model of the address book data.
  */
