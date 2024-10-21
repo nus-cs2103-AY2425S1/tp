@@ -112,6 +112,20 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Deletes the reminder of the given person.
+     * The person must exist in the list.
+     */
+    public void deleteReminder(Person target) {
+        requireNonNull(target);
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new PersonNotFoundException();
+        }
+
+        internalList.get(index).removeReminder();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {

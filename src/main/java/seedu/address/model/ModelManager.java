@@ -115,6 +115,12 @@ public class ModelManager implements Model {
         requireNonNull(target);
         addressBook.deleteAppointment(target);
     }
+    
+    @Override
+    public void deleteReminder(Person target) {
+        requireNonNull(target);
+        addressBook.deleteReminder(target);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 

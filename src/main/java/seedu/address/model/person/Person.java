@@ -29,7 +29,7 @@ public class Person {
     // Data fields
     private final Address address;
     private Set<Schedule> schedules;
-    private final Reminder reminder;
+    private Reminder reminder;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -139,6 +139,13 @@ public class Person {
      */
     public void removeAppointment() {
         schedules = new HashSet<>();
+    }
+
+    /**
+     * Removes the reminder of the person by setting the reminder to an empty string.
+     */
+    public void removeReminder() {
+        reminder = new Reminder("");
     }
 
     /**

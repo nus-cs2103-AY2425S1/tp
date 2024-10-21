@@ -102,6 +102,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.deleteAppointment(target);
     }
 
+    /**
+     * Deletes the reminder of the given {@code target}.
+     * The person must exist in the address book.
+     */
+    public void deleteReminder(Person target) {
+        persons.deleteReminder(target);
+    }
+
     //// util methods
 
     @Override

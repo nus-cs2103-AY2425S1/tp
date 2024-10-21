@@ -10,28 +10,27 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Schedule;
 
 /**
- * Deletes an appointment identified using it's displayed name from the address book.
+ * Deletes a reminder identified using it's displayed name from the address book.
  */
-public class DeleteAppointmentCommand extends Command {
+public class DeleteReminderCommand extends Command{
 
-    public static final String COMMAND_WORD = "appointment-delete";
-
+    public static final String COMMAND_WORD = "reminder-delete";
+    
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the specified appointment.\n"
+            + ": Deletes the specified reminder.\n"
             + "Parameters: NAME (must be the name of an existing client)\n"
             + "Example: " + COMMAND_WORD + " John Doe";
 
-    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment for %1$s";
+    public static final String MESSAGE_DELETE_REMINDER_SUCCESS = "Deleted reminder for %1$s";
 
     private Name name;
 
-    public DeleteAppointmentCommand(Name name) {
+    public DeleteReminderCommand(Name name) {
         this.name = name;
     }
-
+    
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -49,11 +48,11 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_NAME_DISPLAYED);
         }
 
-        Schedule appointment = lastShownList.get(index).getSchedules().iterator().next();
-        Person appointmentToDelete = lastShownList.get(index);
-        model.deleteAppointment(appointmentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.formatSchedule(appointmentToDelete, appointment)));
+        String reminder = lastShownList.get(index).getReminder().reminder;
+        Person reminderToDelete = lastShownList.get(index);
+        model.deleteReminder(reminderToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS,
+                Messages.formatReminder(reminderToDelete, reminder)));
     }
 
     @Override
@@ -67,14 +66,14 @@ public class DeleteAppointmentCommand extends Command {
             return false;
         }
 
-        DeleteAppointmentCommand otherDeleteAppointmentCommand = (DeleteAppointmentCommand) other;
-        return name.equals(otherDeleteAppointmentCommand.name);
+        DeleteReminderCommand otherDeleteReminderCommand = (DeleteReminderCommand) other;
+        return name.equals(otherDeleteReminderCommand.name);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toDeleteAppointment", name)
+                .add("toDeleteReminder", name)
                 .toString();
     }
 }

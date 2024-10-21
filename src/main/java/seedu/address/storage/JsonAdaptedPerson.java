@@ -66,7 +66,7 @@ class JsonAdaptedPerson {
         schedules.addAll(source.getSchedules().stream()
                 .map(JsonAdaptedSchedule::new)
                 .collect(Collectors.toList()));
-        reminderTime = source.getReminder().reminderTime;
+        reminderTime = source.getReminder().reminder;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
