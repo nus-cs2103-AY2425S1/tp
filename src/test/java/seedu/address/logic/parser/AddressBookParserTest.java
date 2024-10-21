@@ -161,13 +161,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_owe() throws Exception {
-        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
         assertEquals(new OweCommand(INDEX_FIRST_STUDENT, 1), command);
     }
 
     @Test
     public void parseCommand_oweRandomCase() throws Exception {
-        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD_RANDOM_CASE + " " + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD_RANDOM_CASE + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
         assertEquals(new OweCommand(INDEX_FIRST_STUDENT, 1), command);
     }
 

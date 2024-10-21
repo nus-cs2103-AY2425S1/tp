@@ -139,29 +139,29 @@ public class StringUtilTest {
     public void getDetails_nullGiven_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.getDetails(null));
     }
-    
+
     //---------------- Tests for isPositiveMultipleOfHalfHour --------------------------------------
     @Test
     public void isPositiveMultipleOfHalfHour() {
-        
+
         // EP: empty strings
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour(""));
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour("  "));
-        
+
         // EP: not a number
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour("a"));
-        
+
         // EP: zero
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour("0"));
-        
+
         // EP: signed numbers
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour("-1"));
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour("+1"));
-        
+
         // EP: leading white space
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour(" 1"));
         assertFalse(StringUtil.isPositiveMultipleOfHalfHour("0.5 1.2"));
-        
+
         // EP: valid numbers, should return true
         assertTrue(StringUtil.isPositiveMultipleOfHalfHour("7.5"));
         assertTrue(StringUtil.isPositiveMultipleOfHalfHour("10"));

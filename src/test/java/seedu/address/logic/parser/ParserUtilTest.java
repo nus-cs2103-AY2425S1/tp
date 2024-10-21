@@ -19,7 +19,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_HOUR = "+0.75";
-    
+
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "91234567";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -139,23 +139,23 @@ public class ParserUtilTest {
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
     }
-    
+
     @Test
     public void parseHour_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseHour((String) null));
     }
-    
+
     @Test
     public void parseHour_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseHour(INVALID_HOUR));
     }
-    
+
     @Test
     public void parseHour_validValueWithourWhitespace_returnsHour() throws Exception {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(VALID_HOUR));
     }
-    
+
     @Test
     public void parseHour_validValueWithWhitespace_returnsTrimmedHour() throws Exception {
         String hourWithWhitespace = WHITESPACE + VALID_HOUR + WHITESPACE;
