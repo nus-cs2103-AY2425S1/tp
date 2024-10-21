@@ -61,6 +61,9 @@ public class TagList {
     }
     @Override
     public String toString() {
+        if (tags.isEmpty()) {
+            return "You have no tags.";
+        }
         return String.join(", ", tags.stream().map(Tag::getTagName).toList());
     }
     @Override

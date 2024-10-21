@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -141,12 +142,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean deleteTag(Tag tag) {
-        if (!this.hasTag(tag)) {
-            return false;
+    public boolean deleteTags(List<Tag> tags) {
+        for (Tag tag : tags) {
+            if (!this.hasTag(tag)) {
+                return false;
+            }
+            addressBook.deleteTag(tag);
         }
-
-        addressBook.deleteTag(tag);
         return true;
     }
 

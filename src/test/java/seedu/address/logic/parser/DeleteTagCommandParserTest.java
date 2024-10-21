@@ -5,6 +5,9 @@ import static seedu.address.logic.commands.DeleteTagCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteTagCommand;
@@ -18,13 +21,17 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_validArgs_returnsDeleteTagCommand() {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
-        assertParseSuccess(parser, "bride's friend", new DeleteTagCommand(expectedTag));
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(expectedTag);
+        assertParseSuccess(parser, "bride's friend", new DeleteTagCommand(expectedTags));
     }
 
     @Test
     public void parse_leadingAndTrailingSpaces_returnsDeleteTagCommand() {
         Tag expectedTag = TypicalTags.VALID_TAG_BRIDES_FRIEND;
-        assertParseSuccess(parser, "   bride's friend   ", new DeleteTagCommand(expectedTag));
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(expectedTag);
+        assertParseSuccess(parser, "   bride's friend   ", new DeleteTagCommand(expectedTags));
     }
 
     @Test
@@ -48,6 +55,8 @@ public class DeleteTagCommandParserTest {
     @Test
     public void parse_caseInsensitiveTag_returnsNewtagCommand() {
         Tag expectedTag = new Tag("friend");
-        assertParseSuccess(parser, "  FRIEND  ", new DeleteTagCommand(expectedTag));
+        List<Tag> expectedTags = new ArrayList<>();
+        expectedTags.add(expectedTag);
+        assertParseSuccess(parser, "  FRIEND  ", new DeleteTagCommand(expectedTags));
     }
 }
