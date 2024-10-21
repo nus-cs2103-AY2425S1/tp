@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
@@ -183,8 +184,31 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
+        return addressBook.hasAssignment(assignmentId);
+    }
+
+    @Override
+    public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
+        return addressBook.hasAssignment(projectId, employeeId);
+    }
+
+    @Override
     public void deleteAssignment(Assignment target) {
         addressBook.removeAssignment(target);
+    }
+
+    @Override
+    public void deleteAssignment(AssignmentId targetId) {
+        addressBook.removeAssignment(targetId);
+    }
+
+    @Override
+    public void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId) {
+        addressBook.removeAssignment(targetProjectId, targetEmployeeId);
     }
 
     @Override

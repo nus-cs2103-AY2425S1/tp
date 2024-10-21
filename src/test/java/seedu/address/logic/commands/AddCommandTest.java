@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
@@ -209,6 +210,26 @@ public class AddCommandTest {
 
         @Override
         public boolean hasAssignment(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssignment(AssignmentId assignmentId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(ProjectId projectId, EmployeeId employeeId) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAssignment(AssignmentId target) {
             throw new AssertionError("This method should not be called.");
         }
 
