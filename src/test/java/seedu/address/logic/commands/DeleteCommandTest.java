@@ -187,6 +187,15 @@ public class DeleteCommandTest {
         assertEquals(expected, deleteCommand.toString());
     }
 
+    @Test
+    public void getCommandTypeMethod() {
+        Index targetIndex = Index.fromOneBased(1);
+        Set<Index> targetIndexSet = new HashSet<>();
+        targetIndexSet.add(INDEX_FIRST_STUDENT);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndexSet);
+        assertEquals(deleteCommand.getCommandType(), CommandType.DELETESTUDENT);
+    }
+
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
