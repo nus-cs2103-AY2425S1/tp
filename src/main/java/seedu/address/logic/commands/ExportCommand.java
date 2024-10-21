@@ -2,19 +2,19 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -67,25 +67,35 @@ public class ExportCommand extends Command {
 
     static List<Map<String, String>> readAndParseJson(String filePath) throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
-        String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        Pattern personPattern = Pattern.compile("\\{([^{}]+)}");
-        Matcher personMatcher = personPattern.matcher(jsonString);
+        JsonNode rootNode = objectMapper.readTree(new File(filePath));
+        JsonNode persons = rootNode.get("persons");
 
-        while (personMatcher.find()) {
-            String personString = personMatcher.group(1);
-            Map<String, String> personData = new LinkedHashMap<>();
-            Pattern kvPattern = Pattern.compile("\"(\\w+)\"\\s*:\\s*\"([^\"]*)\"");
-            Matcher kvMatcher = kvPattern.matcher(personString);
-            while (kvMatcher.find()) {
-                String key = kvMatcher.group(1);
-                String value = kvMatcher.group(2);
-                personData.put(key, value);
-            }
+        for (JsonNode person : persons) {
+            Map<String, String> personInfo = new LinkedHashMap<>();
 
-            if (!personData.isEmpty()) {
-                jsonData.add(personData);
-            }
+            person.fields().forEachRemaining(entry -> {
+                String header = entry.getKey(); // e.g. name, email, tags, etc.
+                JsonNode value = entry.getValue(); // e.g. the value associated with the header
+
+                // isTextual checks if a JsonNode represents a basic JSON String value.
+                if (value.isTextual()) {
+                    personInfo.put(header, value.asText());
+                // Note that the tags in AddressBook.json are stored in an array literal.
+                // Therefore, we can't process tags in the same way as we do other variables (e.g. name, phone, etc.)
+                } else if (value.isArray() && header.equals("tags")) {
+                    List<String> tags = new ArrayList<>();
+                    for (JsonNode tag : value) {
+                        tags.add(tag.toString());
+                    }
+                    personInfo.put(header, String.join(", ", tags));
+                } else {
+                    personInfo.put(header, value.toString());
+                }
+            });
+
+            jsonData.add(personInfo);
         }
 
         return jsonData;
