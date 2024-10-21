@@ -1,13 +1,16 @@
 package seedu.address.testutil;
 
+import java.util.List;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
+/**
+ * A utility class generating a typical address book with {@code Person} and {@code Event} objects
+ * to be used in tests.
+ */
 public class TypicalAddressBook {
-
 
     private TypicalAddressBook() {} // prevents instantiation
 
