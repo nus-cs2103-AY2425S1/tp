@@ -97,4 +97,9 @@ public interface Model {
      * @param comparator
      */
     void updateSortedPersonList(Comparator<Person> comparator);
+
+    /**
+     * Utility function for testing.
+     */
+    void setIsSorted(boolean isSorted);
 }

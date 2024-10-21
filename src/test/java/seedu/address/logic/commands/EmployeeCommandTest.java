@@ -164,6 +164,11 @@ public class EmployeeCommandTest {
         public void updateSortedPersonList(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setIsSorted(boolean isSorted) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
