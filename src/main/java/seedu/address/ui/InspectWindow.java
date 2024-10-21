@@ -141,7 +141,7 @@ public class InspectWindow extends UiPart<Stage> {
 
         personInfoBox.getChildren().addAll(nameLabel, phoneLabel, emailLabel, addressLabel, tagsLabel);
 
-        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getDeliveryList());
+        DeliveryListPanel deliveryListPanel = new DeliveryListPanel(InspectWindow.person.getUnmodifiableDeliveryList());
         VBox deliveryListBox = new VBox(deliveryListPanel.getRoot());
 
         personInfoPlaceholder.getChildren().add(personInfoBox);

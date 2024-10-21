@@ -82,8 +82,15 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-        case SortCommand.COMMAND_WORD:
+
+        case SortCommand.COMMAND_WORD_ASCENDING:
+            SortCommandParser.setAscending(true);
             return new SortCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD_DESCENDING:
+            SortCommandParser.setAscending(false);
+            return new SortCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

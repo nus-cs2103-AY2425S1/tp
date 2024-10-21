@@ -66,9 +66,17 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public ObservableList<Delivery> getDeliveryList() {
+    /**
+     * Returns the  {@code DeliveryList} of a {@code Person} as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Delivery> getUnmodifiableDeliveryList() {
         return deliveryList.asUnmodifiableObservableList();
     }
+
+    /**
+     * Returns the  {@code DeliveryList} of a {@code Person}.
+     */
+    public DeliveryList getDeliveryList() { return deliveryList; }
 
     /**
      * Sets the delivery list of this person.

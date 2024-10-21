@@ -1,8 +1,11 @@
 package seedu.address.model.delivery;
 
+import static java.util.Objects.compare;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -82,6 +85,45 @@ public class DeliveryList {
     public ObservableList<Delivery> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
+
+    public void reverseDeliveryList() {
+        Collections.reverse(internalList);
+    }
+
+    public void sortByAddress() {
+        internalList.sort(Comparator.comparing(d -> d.getAddress().value));
+    }
+
+    public void sortByCost() {
+        internalList.sort((d1, d2) -> (int) (d1.getCost().asFloat() - d2.getCost().asFloat()));
+    }
+
+    public void sortByDate() {
+        internalList.sort((d1, d2) -> {
+            int compareValue = d1.getDate().value.compareTo(d2.getDate().value);
+            if (compareValue == 0) {
+                return d1.getTime().value.compareTo(d2.getTime().value);
+            } else {
+                return compareValue;
+            }
+        });
+    }
+
+    public void sortByEta() {
+        internalList.sort(Comparator.comparing(d -> d.getEta().value));
+    }
+
+    public void sortById() {
+        internalList.sort(Comparator.comparing(d -> d.getId().value));
+    }
+
+    public void sortByStatus() {
+        internalList.sort((d1, d2) -> {
+            int compareValue = d1.getStatus().getValue().compareTo(d2.getStatus().getValue());
+            return -compareValue; // Negation will keep delivered items below.
+        });
+    }
+
 
     @Override
     public boolean equals(Object other) {

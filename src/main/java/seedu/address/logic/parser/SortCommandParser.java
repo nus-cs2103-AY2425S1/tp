@@ -9,6 +9,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
 public class SortCommandParser implements Parser<SortCommand> {
+    private static boolean isAscending = false;
 
     public SortCommand parse(String args) throws ParseException {
         if (AddressBookParser.getInspect()) {
@@ -18,16 +19,20 @@ public class SortCommandParser implements Parser<SortCommand> {
             if (!arePrefixesPresent(argMultimap, PREFIX_SORT)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        SortCommand.MESSAGE_USAGE));
+                        (isAscending ? SortCommand.MESSAGE_USAGE_ASCENDING : SortCommand.MESSAGE_USAGE_DESCENDING)));
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT);
 
             String attribute = ParserUtil.parseAttribute(argMultimap.getValue(PREFIX_SORT).get());
-            return new SortCommand(attribute);
+            return new SortCommand(attribute, isAscending);
         } else {
             // Dummy string to trigger MESSAGE_FAILURE error in CommandResult instead of parsing error.
-            return new SortCommand("");
+            return new SortCommand("", isAscending);
         }
+    }
+
+    public static void setAscending(boolean isAscending) {
+        SortCommandParser.isAscending = isAscending;
     }
 
     /**
