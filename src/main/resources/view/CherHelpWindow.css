@@ -1,0 +1,19 @@
+#copyButton, #helpMessage {
+    -fx-text-fill: black; /* Keep text black for light theme */
+}
+
+#copyButton {
+    -fx-background-color: lightgray; /* Light background for copy button */
+}
+
+#copyButton:hover {
+    -fx-background-color: gainsboro; /* Slightly darker shade for hover effect */
+}
+
+#copyButton:armed {
+    -fx-background-color: silver; /* Even darker shade when button is pressed */
+}
+
+#helpMessageContainer {
+    -fx-background-color: derive(#f0f0f0, 20%); /* Lighten the background for help message container */
+}

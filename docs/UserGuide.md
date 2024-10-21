@@ -3,11 +3,10 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Cher is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Cher can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -16,9 +15,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for Cher.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar cher.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -27,7 +26,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to Cher.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -74,27 +73,29 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a person to Cher.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+
+Role can either be student, teacher, parent or staff, case-insensitive. 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe r/student p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe r/teacher t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/head teacher`
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in Cher.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the Cher.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -129,7 +130,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from Cher.
 
 Format: `delete INDEX`
 
@@ -138,12 +139,43 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `list` followed by `delete 2` deletes the 2nd person in the Cher.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+Format: `delete PHONE_NUMBER
+
+* Deletes the person with the specified `PHONE_NUMBER`
+* The phone number **must be present in the list of contacts**
+
+Examples:
+* `list` followed by `delete 98765432` deletes the person with the phone number 98765432 in the address book.
+
+Format: `delete PARTIAL_NAME`
+
+* Deletes the person with name matching the specified `PARTIAL_NAME`
+* The partial name **must match at least oner person's name**
+* If multiple persons matching the partial name are found, a list of the matching persons is displayed
+
+Examples:
+* `list` followed by `delete John` deletes the person with the name John in the address book.
+* If multiple persons have the name John, a list of these persons is displayed to the user
+
+### Deleting in a batch : `batch-delete`
+
+Delete all contacts from cher with contains **all** the specified tags.
+
+Format: `batch-delete t/TAG [t/TAG]...`
+
+
+
+Examples:
+![Batch delete example data](images/ForBatchDeleteExampleData.png)
+* `batch-delete t/friends` will delete both `Alex Yeoh` and `Bernice Yu`.
+* `batch-delete t/friends t/colleagues` will delete only `Bernice Yu`.
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from Cher.
 
 Format: `clear`
 
@@ -155,15 +187,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Data are saved automatically as a JSON file `[JAR file location]/data/cher.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Cher will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the Cher to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -175,7 +207,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Cher home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -190,9 +222,10 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME r/ROLE p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho r/student p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Secondary 1`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Batch-Delete**| `batch-delete t/TAG [t/TAG]...`<br> e.g. `batch-delete t/friends t/colleagues t/owesmoney t/...`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
