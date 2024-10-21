@@ -15,8 +15,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class LoadCommandParser implements Parser<LoadCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the LoadCommand
+     * and returns an LoadCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoadCommand parse(String args) throws ParseException {

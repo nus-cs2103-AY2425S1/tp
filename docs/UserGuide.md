@@ -157,11 +157,15 @@ Example: `archive pa/mybook.json`
 
 The file name must ends with ".json" and must not contain any slash "/".
 
+#### Warning
+
 All the entries in the current address book will be cleared.
 
 ### Load data files `load`
 
 Load the current address book to the specific file name.
+
+This command will only load from a folder named `archived` which is in the same folder as the `jar` file.
 
 The archived file and be found at `load/FILENAME`.
 
@@ -172,7 +176,7 @@ Example: `load pa/mybook.json`
 The file name must ends with ".json", must not contain any slash "/" and must point to an existing address book .json file.
 
 #### Warning
-Avoid loading non-address book .json files as It may result in unexpected behaviours
+Avoid loading non-address book .json files as it may result in unexpected behaviours
 
 All the entries in the current address book will be discard. So archiving current address book before loading is recommended.
 

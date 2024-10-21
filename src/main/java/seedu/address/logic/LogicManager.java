@@ -29,6 +29,7 @@ public class LogicManager implements Logic {
 
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
+    public static final String LOAD_ERROR_FORMAT = "Could not load date due to the following error: %s";
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -93,13 +94,13 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
-    private void updateModelWithStorage(Command command, Storage storage, Model model) {
+    private void updateModelWithStorage(Command command, Storage storage, Model model) throws CommandException {
         try {
             if (command instanceof LoadCommand) {
                 model.setAddressBook(storage.readAddressBook(((LoadCommand) command).getLoadPath()).get());
             }
         } catch (DataLoadingException e) {
-            throw new RuntimeException(e);
+            throw new CommandException(String.format(LOAD_ERROR_FORMAT, e.getMessage()),e);
         }
 
     }

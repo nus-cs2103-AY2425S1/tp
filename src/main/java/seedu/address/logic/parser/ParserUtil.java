@@ -146,7 +146,8 @@ public class ParserUtil {
         requireNonNull(path);
         path = path.trim();
         final Path parsedPath = Paths.get("archived", path);
-        if (!path.endsWith(".json") || path.contains("/") || !Files.exists(parsedPath)) {
+        if (!path.endsWith(".json") || path.contains("/") || !Files.exists(parsedPath)
+                || Files.isRegularFile(parsedPath)) {
             throw new ParseException(LoadCommand.MESSAGE_USAGE);
         }
         return parsedPath;
