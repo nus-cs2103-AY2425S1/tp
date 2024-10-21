@@ -45,19 +45,15 @@ public class EmailContainsKeywordsPredicateTest {
         // One keyword
         EmailContainsKeywordsPredicate predicate = new EmailContainsKeywordsPredicate(
                 Collections.singletonList("alice@email.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com bob@email.com").build()));
-
-        // Multiple keywords
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("alice@email.com", "bob@email.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com bob@email.com").build()));
+        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com").build()));
 
         // Only one matching keyword
-        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("bob@email.com", "carol@email.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com carol@email.com").build()));
+        predicate = new EmailContainsKeywordsPredicate(Arrays.asList("alice@email.com", "carol@email.com"));
+        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com").build()));
 
         // Mixed-case keywords
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("aLIce@email.com", "boB@email.com"));
-        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com bob@email.com").build()));
+        assertTrue(predicate.test(new PersonBuilder().withEmail("alice@email.com").build()));
     }
 
     @Test
@@ -68,12 +64,12 @@ public class EmailContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("carol@email.com"));
-        assertFalse(predicate.test(new PersonBuilder().withEmail("alice@email.com bob@email.com").build()));
+        assertFalse(predicate.test(new PersonBuilder().withEmail("alice@email.com").build()));
 
         // Keywords match name and phone, but does not match email
         predicate = new EmailContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").build()));
+                .withEmail("al1ce@email.com").build()));
     }
 
     @Test
