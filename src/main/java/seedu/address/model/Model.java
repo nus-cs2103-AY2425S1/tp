@@ -89,11 +89,6 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns a list of persons with the manager tag.
-     */
-    List<Person> getManagers();
-
-    /**
      * Retrieves a Person by their name.
      * Returns an Optional containing the Person if found, or an empty Optional if not found.
      */
