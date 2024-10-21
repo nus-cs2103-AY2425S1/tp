@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.FindLessonCommand;
 import tutorease.address.model.lesson.LessonContainsNamesPredicate;
 
