@@ -6,6 +6,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 
+/**
+ * The binder in the middle of the notebook
+ */
 public class Binder extends UiPart<Region> {
 
     private static final double ARC_RADIUS_X = 8.0;
@@ -18,17 +21,28 @@ public class Binder extends UiPart<Region> {
     @FXML
     private VBox loopParent;
 
+    /**
+     * Default constructor
+     * @param initialHeight the initial height of the scene to update binders
+     */
     public Binder(double initialHeight) {
         super(FXML);
         updateArcs(initialHeight);
     }
 
+    /**
+     * Attaches the listener to the scene's height property to update the binders
+     */
     public void addListener() {
         this.getRoot().getScene().heightProperty().addListener((observable, oldValue, newValue) -> {
             updateArcs(newValue.doubleValue());
         });
     }
 
+    /**
+     * Updates the number of arcs acting as the binders based on the height of the scene
+     * @param height the height of the scene
+     */
     private void updateArcs(double height) {
         loopParent.getChildren().clear();
 
@@ -37,6 +51,9 @@ public class Binder extends UiPart<Region> {
         addArcs(numArcs);
     }
 
+    /**
+     * Adds {@code numArcs} arcs to {@code loopParent}
+     */
     private void addArcs(int numArcs) {
         for (int i = 0; i < numArcs; i++) {
             Arc arc = new Arc();

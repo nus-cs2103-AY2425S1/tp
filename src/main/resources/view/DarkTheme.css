@@ -13,6 +13,11 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 8px;
 }
+
+.icon {
+    -fx-translate-y: 2px;
+}
+
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;

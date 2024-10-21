@@ -2,12 +2,15 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
 
         <VBox prefWidth="50.0" HBox.hgrow="NEVER" />
@@ -148,6 +151,51 @@
             <Pane layoutX="10.0" layoutY="330.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
             <Pane layoutX="10.0" layoutY="343.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS" />
         </VBox>
+        <HBox layoutX="10.0" layoutY="10.0">
+            <VBox prefWidth="50.0" styleClass="day-container" HBox.hgrow="NEVER" />
+         <VBox HBox.hgrow="ALWAYS">
+            <children>
+                  <GridPane fx:id="grid" gridLinesVisible="true" VBox.vgrow="ALWAYS">
+                  <rowConstraints>
+                     <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                     <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                     <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                      <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                      <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                      <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                      <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                  </rowConstraints>
+                  <columnConstraints>
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                      <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+               </GridPane>
+            </children>
+         </VBox>
+        </HBox>
 
     </StackPane>
 </VBox>
