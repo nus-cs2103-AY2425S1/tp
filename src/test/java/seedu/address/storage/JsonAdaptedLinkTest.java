@@ -43,7 +43,7 @@ public class JsonAdaptedLinkTest {
     }
 
     @Test
-    public void toModelType_emptyPeets_throwsIllegalValueException() throws Exception {
+    public void toModelType_emptyPets_throwsIllegalValueException() throws Exception {
         Link link = new Link(BENSON, BISON);
         JsonAdaptedLink jsonLink = new JsonAdaptedLink(link);
 

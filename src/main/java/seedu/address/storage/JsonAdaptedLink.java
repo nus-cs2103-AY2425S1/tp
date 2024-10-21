@@ -44,17 +44,11 @@ class JsonAdaptedLink {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Link.
      */
     public Link toModelType(ObservableList<Owner> owners, ObservableList<Pet> pets) throws IllegalValueException {
-        if (from == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "from"));
-        }
         FilteredList<Owner> filteredOwners = owners.filtered(owner -> owner.getUniqueID().equals(from));
         if (filteredOwners.size() == 0) {
             throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORMAT, from));
         }
 
-        if (to == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "to"));
-        }
         FilteredList<Pet> filteredPets = pets.filtered(pet -> pet.getUniqueID().equals(to));
         if (filteredPets.size() == 0) {
             throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORMAT, to));
