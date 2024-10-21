@@ -31,7 +31,7 @@ public class ListingDeleteCommand extends Command {
     public static final String MESSAGE_DELETE_LISTING_SUCCESS = "Deleted property listing from Person: %1$s";
     public static final String HELP_LISTING_DELETE_COMMAND = "Property Listing Delete Command\n"
             + "- Format: listing delete INDEX LISTING_INDEX\n"
-            + "- Example: listing delete 1 1\n";
+            + "- Example: listing delete 1 1";
 
     private final Index personIndex;
     private final Index listingsIndex;

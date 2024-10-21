@@ -22,6 +22,11 @@ public class ShowCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
+    public static final String HELP_SHOW_COMMAND = "Show Command\n"
+            + "- Format: show INDEX\n"
+            + "- Example: show 1\n"
+            + "- Displays detailed information about the person at the specified INDEX in the list.";
+
     private final Index targetIndex;
 
     /**
