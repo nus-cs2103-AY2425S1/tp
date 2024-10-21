@@ -64,6 +64,15 @@ public class Student {
     }
 
     /**
+     * Checks if the student is present.
+     *
+     * @return {@code true} if the student is present, {@code false} otherwise
+     */
+    public boolean getIsPresent() {
+        return isPresent;
+    }
+
+    /**
      * Marks the student as present.
      */
     public void mark() {
@@ -127,6 +136,7 @@ public class Student {
                 .add("email", email)
                 .add("edulog", address)
                 .add("tags", tags)
+                .add("isPresent", isPresent)
                 .toString();
     }
 

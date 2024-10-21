@@ -5,7 +5,9 @@ import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseFailure
 import static seedu.edulog.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.edulog.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalNames.NAME_FIRST_STUDENT;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.edulog.logic.commands.DeleteCommand;
 import seedu.edulog.logic.commands.DeleteIndexCommand;
 import seedu.edulog.logic.commands.DeleteNameCommand;
