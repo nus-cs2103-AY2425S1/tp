@@ -56,7 +56,10 @@ public class FilterCommand extends Command {
      * @param date The date to filter the transaction by.
      */
     public FilterCommand(Person contact, Amount amount, Description description, Date date) {
-        assert contact != null || amount != null || description != null || date != null;
+        if (contact == null && amount == null && description == null && date == null) {
+            throw new NullPointerException();
+        }
+
         this.contact = contact;
         this.amount = amount;
         this.description = description;
