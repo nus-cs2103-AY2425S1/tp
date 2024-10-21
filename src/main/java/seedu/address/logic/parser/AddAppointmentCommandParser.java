@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END;
@@ -24,28 +25,27 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddAppointmentCommand parse(String args) throws ParseException {
-        String[] indexMultimapSplit = args.trim().split(" ", 2);
-        // Ensure the input can be split into exactly two parts (index and the rest)
-        if (indexMultimapSplit.length < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAppointmentCommand.MESSAGE_USAGE));
-        }
+        requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(" " + indexMultimapSplit[1], PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END);
-        if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAppointmentCommand.MESSAGE_USAGE));
-        }
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END);
+                ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END);
 
         Index index;
+
         try {
-            index = ParserUtil.parseIndex(indexMultimapSplit[0]);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddAppointmentCommand.MESSAGE_USAGE), pe);
         }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_APPOINTMENT, PREFIX_START, PREFIX_END)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
+        }
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_APPOINTMENT, PREFIX_START,
+                PREFIX_END);
+
         String appointmentDescription = ParserUtil.parseAppointmentDescription(
                 argMultimap.getValue(PREFIX_APPOINTMENT).get());
         LocalDateTime startDateTime = ParserUtil.parseLocalDateTime(
