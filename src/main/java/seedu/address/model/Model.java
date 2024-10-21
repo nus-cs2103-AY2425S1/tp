@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 
 /**
  * The API of the Model component.
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Buyer> PREDICATE_SHOW_ALL_BUYERS = unused -> true;
     Predicate<MeetUp> PREDICATE_SHOW_ALL_MEETUPS = unused -> true;
+    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -137,4 +139,55 @@ public interface Model {
      * Returns true if a MeetUp with the same identity as {@code MeetUp} exists in the MeetUp list.
      */
     boolean hasMeetUp(MeetUp meetUp);
+
+    // ============================ Property Model - To be refactored ==========================
+
+    /**
+     * Returns the user prefs' property list file path.
+     */
+    Path getPropertyListFilePath(); // Remove after refactoring
+
+    /**
+     * Sets the user prefs' property list file path.
+     */
+    void setPropertyListFilePath(Path propertyListFilePath); // Remove after refactoring
+
+    /**
+     * Replaces meet up list data with the data in {@code propertyList}.
+     */
+    void setPropertyList(ReadOnlyPropertyList propertyList); // Remove after refactoring
+
+    /** Returns the PropertyList */
+    ReadOnlyPropertyList getPropertyList();
+
+    /** Returns an unmodifiable view of the filtered property list */
+    ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Adds the given Property.
+     * {@code MeetUp} must not already exist in the property list.
+     */
+    void addProperty(Property property);
+
+    /**
+     * Updates the given schedule's Property in the schedule list.
+     * The schedule must exist in the schedule list.
+     */
+    void setProperty(Property target, Property editedProperty);
+
+    /**
+     * Deletes the given schedule in the schedule list
+     */
+    void deleteProperty(Property target);
+
+    /*
+     * Updates the filter of the property list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPropertyList(Predicate<Property> predicate);
+
+    /**
+     * Returns true if a Property with the same identity as {@code Property} exists in the Property list.
+     */
+    boolean hasProperty(Property meetUp);
 }

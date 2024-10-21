@@ -10,9 +10,11 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.buyer.BuyerListStorage;
 import seedu.address.storage.meetup.MeetUpListStorage;
+import seedu.address.storage.property.PropertyListStorage;
 
 /**
  * Manages storage of BuyerList data in local storage.
@@ -23,15 +25,17 @@ public class StorageManager implements Storage {
     private BuyerListStorage buyerListStorage;
     private UserPrefsStorage userPrefsStorage;
     private MeetUpListStorage meetUpListStorage;
+    private PropertyListStorage propertyListStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code BuyerListStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(BuyerListStorage buyerListStorage, UserPrefsStorage userPrefsStorage,
-            MeetUpListStorage meetUpListStorage) {
+            MeetUpListStorage meetUpListStorage, PropertyListStorage propertyListStorage) {
         this.buyerListStorage = buyerListStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.meetUpListStorage = meetUpListStorage;
+        this.propertyListStorage = propertyListStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -109,4 +113,33 @@ public class StorageManager implements Storage {
         logger.fine("Attempting to read data from file: " + filePath);
         meetUpListStorage.saveMeetUpList(meetUpList, filePath);
     }
+
+        // ================ Property methods ==============================
+
+        @Override
+        public Path getPropertyListFilePath() {
+            return propertyListStorage.getPropertyListFilePath();
+        }
+    
+        @Override
+        public Optional<ReadOnlyPropertyList> readPropertyList() throws DataLoadingException {
+            return readPropertyList(propertyListStorage.getPropertyListFilePath());
+        }
+    
+        @Override
+        public Optional<ReadOnlyPropertyList> readPropertyList(Path filePath) throws DataLoadingException {
+            logger.fine("Attempting to read data from file: " + filePath);
+            return propertyListStorage.readPropertyList(filePath);
+        }
+    
+        @Override
+        public void savePropertyList(ReadOnlyPropertyList propertyList) throws IOException {
+            savePropertyList(propertyList, propertyListStorage.getPropertyListFilePath());
+        }
+    
+        @Override
+        public void savePropertyList(ReadOnlyPropertyList propertyList, Path filePath) throws IOException {
+            logger.fine("Attempting to read data from file: " + filePath);
+            propertyListStorage.savePropertyList(propertyList, filePath);
+        }
 }

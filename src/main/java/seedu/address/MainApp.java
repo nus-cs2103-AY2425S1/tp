@@ -33,6 +33,8 @@ import seedu.address.storage.buyer.BuyerListStorage;
 import seedu.address.storage.buyer.JsonBuyerListStorage;
 import seedu.address.storage.meetup.JsonMeetUpListStorage;
 import seedu.address.storage.meetup.MeetUpListStorage;
+import seedu.address.storage.property.JsonPropertyListStorage;
+import seedu.address.storage.property.PropertyListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -64,7 +66,8 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         BuyerListStorage buyerListStorage = new JsonBuyerListStorage(userPrefs.getBuyerListFilePath());
         MeetUpListStorage meetUpListStorage = new JsonMeetUpListStorage(userPrefs.getMeetUpListFilePath());
-        storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage);
+        PropertyListStorage propertyListStorage = new JsonPropertyListStorage(userPrefs.getPropertyListFilePath());
+        storage = new StorageManager(buyerListStorage, userPrefsStorage, meetUpListStorage, propertyListStorage);
 
         model = initModelManager(storage, userPrefs);
 
