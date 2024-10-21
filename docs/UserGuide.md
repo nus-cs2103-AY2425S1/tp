@@ -49,8 +49,7 @@ For more information, see this:
    ![Ui](images/Ui.png)
 
 
-6. Type the command in the command box, indicated by `Enter Command Here`
-   and press Enter to execute it. 
+6. Type the command in the command box, indicated by `Enter command here...` and press Enter to execute it. 
 
     e.g. typing **`help`** and pressing Enter will open the help window.<br>
    
