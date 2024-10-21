@@ -24,6 +24,8 @@ public class CommandResult {
 
     private Person person = null;
 
+    private boolean profileSwitched = false;
+
     /**
      * Constructs a {@code CommandResult} that's specifically a 'view' command
      * @param feedbackToUser
@@ -73,6 +75,20 @@ public class CommandResult {
 
     public Person getViewPerson() {
         return this.person;
+    }
+
+    public boolean isProfileSwitched() {
+        return this.profileSwitched;
+    }
+
+    /**
+     * Marks that a profile switch has occurred and returns the updated {@code CommandResult}.
+     *
+     * @return The updated {@code CommandResult} with the profile switch marked.
+     */
+    public CommandResult markProfileSwitched() {
+        this.profileSwitched = true;
+        return this;
     }
 
     @Override

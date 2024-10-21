@@ -2,20 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.SwitchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.profile.Profile;
 import seedu.address.model.role.Role;
 
 /**
@@ -125,12 +123,15 @@ public class ParserUtil {
         return roleSet;
     }
 
-    public static String parseProfileName(String profileName) throws ParseException {
+    /**
+     * Parses {@code String profile} into a {@code Profile}
+     */
+    public static Profile parseProfileName(String profileName) throws ParseException {
         requireNonNull(profileName);
         String trimmedProfileName = profileName.trim();
-        if (!SwitchCommand.isValidProfile(trimmedProfileName)) {
-            throw new ParseException(SwitchCommand.MESSAGE_CONSTRAINT);
+        if (!Profile.isValidProfile(trimmedProfileName)) {
+            throw new ParseException(Profile.MESSAGE_CONSTRAINTS);
         }
-        return trimmedProfileName;
+        return new Profile(trimmedProfileName);
     }
 }
