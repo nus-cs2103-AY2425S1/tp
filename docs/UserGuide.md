@@ -198,7 +198,7 @@ Examples:
 
 ### Unpinning a person : `unpin`
 
-Unpins the specified people to the top of the list in the address book.
+Unpins the specified people in the address book.
 
 Format: `unpin INDEX [MORE_INDICES]`
 
