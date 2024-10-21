@@ -1,7 +1,9 @@
 package seedu.edulog.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import java.util.List;
+
 import seedu.edulog.commons.util.ToStringBuilder;
 import seedu.edulog.logic.Messages;
 import seedu.edulog.logic.commands.exceptions.CommandException;
@@ -13,8 +15,6 @@ import seedu.edulog.model.student.Student;
  * Unmarks a student identified using it's displayed index from the edulog book.
  */
 public class UnmarkNameCommand extends UnmarkCommand {
-
-    public static final String MESSAGE_UNMARK_STUDENT_SUCCESS = "Deleted Student: %1$s";
 
     private final Name targetName;
 
@@ -39,9 +39,9 @@ public class UnmarkNameCommand extends UnmarkCommand {
          * Hence, we can directly access the student using studentId.
          */
         int studentId = studentNames.indexOf(targetName);
-        Student studentToDelete = lastShownList.get(studentId);
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
+        Student studentToUnmark = lastShownList.get(studentId);
+        model.unmarkStudent(studentToUnmark);
+        return new CommandResult(String.format(MESSAGE_UNMARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
     }
 
     @Override
@@ -55,8 +55,8 @@ public class UnmarkNameCommand extends UnmarkCommand {
             return false;
         }
 
-        UnmarkNameCommand otherDeleteCommand = (UnmarkNameCommand) other;
-        return targetName.equals(otherDeleteCommand.targetName);
+        UnmarkNameCommand otherUnmarkCommand = (UnmarkNameCommand) other;
+        return targetName.equals(otherUnmarkCommand.targetName);
     }
 
     @Override

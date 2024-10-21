@@ -19,8 +19,6 @@ public class UnmarkIndexCommand extends UnmarkCommand {
 
     public static final String COMMAND_WORD = "unmark";
 
-    public static final String MESSAGE_UNMARK_STUDENT_SUCCESS = "Unmarked Student: %1$s";
-
     private final Index targetIndex;
 
     public UnmarkIndexCommand(Index targetIndex) {
@@ -36,9 +34,9 @@ public class UnmarkIndexCommand extends UnmarkCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, Messages.format(studentToDelete)));
+        Student studentToUnmark = lastShownList.get(targetIndex.getZeroBased());
+        model.unmarkStudent(studentToUnmark);
+        return new CommandResult(String.format(MESSAGE_UNMARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
     }
 
     @Override
@@ -48,12 +46,12 @@ public class UnmarkIndexCommand extends UnmarkCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UnmarkCommand)) {
+        if (!(other instanceof UnmarkIndexCommand)) {
             return false;
         }
 
-        UnmarkCommand otherDeleteCommand = (UnmarkCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        UnmarkIndexCommand otherUnmarkCommand = (UnmarkIndexCommand) other;
+        return targetIndex.equals(otherUnmarkCommand.targetIndex);
     }
 
     @Override
