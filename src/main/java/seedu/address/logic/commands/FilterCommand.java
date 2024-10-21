@@ -3,6 +3,10 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -28,21 +32,27 @@ public class FilterCommand extends Command {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)
             + "\nListing all contacts instead.";
 
-    private Tag tag;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates a FilterCommand, filtering for the given {@code tag}
      * @param tag Tag to be filtered for in the list of contacts.
      */
-    public FilterCommand(Tag tag) {
-        requireAllNonNull(tag);
-        this.tag = tag;
+    public FilterCommand(Set<Tag> tags) {
+        requireAllNonNull(tags);
+        this.tags.addAll(tags);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.updateFilteredPersonList(person -> person.getTags().contains(this.tag));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, this.tag.getTagName()));
+        model.updateFilteredPersonList(person ->
+                person.getTags().stream().anyMatch(tags::contains)
+        );
+        String filteredTags = tags.stream()
+                .map(Tag::getTagName)
+                .collect(Collectors.joining(", "));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filteredTags));
     }
 
     @Override
@@ -56,6 +66,6 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand e = (FilterCommand) other;
-        return this.tag.equals(e.tag);
+        return this.tags.equals(e.tags);
     }
 }
