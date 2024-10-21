@@ -2,11 +2,10 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import seedu.address.commons.core.index.Index;
 
 /**
  * Represents a list of grades for a student in the address book.
@@ -15,17 +14,17 @@ public class GradeList {
     private static final String NOT_ALL_WEIGHTAGE = "\nDo note not all weightage has been accounted for."
             + "\nPercentage of tests done: ";
     private static final float FULL_WEIGHTAGE = 1.0f;
-    private final List<Grade> grades;
+    private final Map<String, Grade> grades;
 
     /**
      * Constructs an empty {@code GradeList}.
      */
     public GradeList() {
-        this.grades = Collections.unmodifiableList(new ArrayList<>());
+        this.grades = Collections.unmodifiableMap(new HashMap<>());
     }
 
-    public GradeList(List<Grade> grades) {
-        this.grades = Collections.unmodifiableList(grades);
+    public GradeList(Map<String, Grade> grades) {
+        this.grades = Collections.unmodifiableMap(grades);
     }
 
     /**
@@ -37,9 +36,9 @@ public class GradeList {
     public GradeList addGrade(Grade grade) {
         requireNonNull(grade, "Grade cannot be null");
 
-        List<Grade> newGrades = new ArrayList<>(this.grades);
-        newGrades.removeIf(existingGrade -> existingGrade.getTestName().equalsIgnoreCase(grade.getTestName()));
-        newGrades.add(grade);
+        Map<String, Grade> newGrades = new HashMap<>(this.grades);
+
+        newGrades.merge(grade.getTestName(), grade, (oldGrade, newGrade) -> newGrade);
 
         return new GradeList(newGrades);
     }
@@ -53,12 +52,7 @@ public class GradeList {
      */
     public Grade getGrade(String testName) {
         requireNonNull(testName);
-        for (Grade grade : this.grades) {
-            if (grade.getTestName().equalsIgnoreCase(testName)) {
-                return grade;
-            }
-        }
-        return null;
+        return this.grades.get(testName);
     }
 
     /**
@@ -69,9 +63,9 @@ public class GradeList {
      */
     public GradeList removeGrade(String testName) {
         requireNonNull(testName);
-        List<Grade> newList = new ArrayList<>(this.grades);
+        Map<String, Grade> newList = new HashMap<>(this.grades);
 
-        newList.removeIf(grade -> grade.getTestName().equalsIgnoreCase(testName));
+        newList.remove(testName);
 
         return new GradeList(newList);
     }
@@ -81,20 +75,10 @@ public class GradeList {
      *
      * @return A list of {@code Grade} objects representing all the grades in the grade list.
      */
-    public List<Grade> getList() {
-        return new ArrayList<>(this.grades); // Returning a copy to prevent external modification
+    public Map<String, Grade> getMap() {
+        return new HashMap<>(this.grades); // Returning a copy to prevent external modification
     }
 
-
-    /**
-     * Returns true if index passed is out of bounds
-     *
-     * @param index The index in question
-     * @return True if the index is in bounds, false otherwise.
-     */
-    public boolean checkIndexBounds(Index index) {
-        return index.getZeroBased() < getList().size();
-    }
 
     /**
      * Calculates the overall grade summary based on the weightage and scores of all grades.
@@ -105,7 +89,7 @@ public class GradeList {
         float totalScore = 0;
         float totalWeightage = 0;
 
-        for (Grade g : this.grades) {
+        for (Grade g : this.grades.values()) {
             float currentWeightage = g.getWeightage();
             totalWeightage += currentWeightage / 100;
             totalScore += g.getScore() * currentWeightage / 100;
@@ -137,7 +121,7 @@ public class GradeList {
             return "No grades available";
         }
         StringBuilder result = new StringBuilder();
-        for (Grade grade : this.grades) {
+        for (Grade grade : this.grades.values()) {
             result.append(grade.toString()).append("\n");
         }
         return result.toString().trim();
