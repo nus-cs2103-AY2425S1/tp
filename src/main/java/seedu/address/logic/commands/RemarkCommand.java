@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_INDEX;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -59,10 +60,13 @@ public class RemarkCommand extends Command {
         }
 
         Student studentToAddRemark = lastShownList.get(studentIndex.getZeroBased());
-        studentToAddRemark.setRemark(remark);
+        Student updatedStudent = new Student(studentToAddRemark);
+        updatedStudent.setRemark(remark);
 
-        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, studentToAddRemark.getName().fullName));
+        model.setStudent(studentToAddRemark, updatedStudent);
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        return new CommandResult(String.format(MESSAGE_ADD_REMARK_SUCCESS, Messages.format(updatedStudent)),
+                updatedStudent, studentIndex.getZeroBased());
     }
 
     @Override

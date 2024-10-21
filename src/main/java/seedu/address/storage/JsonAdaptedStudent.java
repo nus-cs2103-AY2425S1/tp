@@ -29,6 +29,7 @@ class JsonAdaptedStudent {
     private final String email;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
+    private final String remark;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -47,6 +48,7 @@ class JsonAdaptedStudent {
         if (assignments != null) {
             this.assignments.addAll(assignments);
         }
+        this.remark = "";
     }
 
     /**
@@ -62,6 +64,7 @@ class JsonAdaptedStudent {
         assignments.addAll(source.getAssignmentList().stream()
                 .map(JsonAdaptedAssignment::new)
                 .collect(Collectors.toList()));
+        remark = source.getRemark();
     }
 
     /**
@@ -101,6 +104,7 @@ class JsonAdaptedStudent {
         final Email modelEmail = new Email(email);
         final Set<Tag> modelTags = new HashSet<>(studentTags);
         Student student = new Student(modelName, modelPhone, modelEmail, modelTags);
+        student.setRemark(remark);
 
 
         // Deserialize and associate assignments with the student

@@ -53,6 +53,20 @@ public class Student {
         this.assignmentList = assignmentList;
     }
 
+    /**
+     *
+     * Copy an existing student object
+     */
+    public Student(Student studentToCopy) {
+        requireAllNonNull(studentToCopy.getName(), studentToCopy.getPhone(), studentToCopy.getEmail(),
+                studentToCopy.getTags());
+        this.name = studentToCopy.getName();
+        this.phone = studentToCopy.getPhone();
+        this.email = studentToCopy.getEmail();
+        this.tags.addAll(studentToCopy.getTags());
+        this.assignmentList = studentToCopy.getAssignmentList();
+        this.remark = studentToCopy.getRemark();
+    }
 
     public Name getName() {
         return name;
@@ -75,6 +89,10 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getRemark() {
+        return remark;
     }
 
     /**
@@ -127,6 +145,7 @@ public class Student {
                 .add("email", email)
                 .add("tags", tags)
                 .add("assignments", assignmentList)
+                .add("remark", remark)
                 .toString();
     }
 
