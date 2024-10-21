@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -33,6 +34,13 @@ public class ArgumentMultimap {
         List<String> argValues = getAllValues(prefix);
         argValues.add(argValue);
         argMultimap.put(prefix, argValues);
+    }
+
+    /**
+     * Returns the key set of prefixes in the argMultiMap.
+     */
+    public Set<Prefix> getPrefixes() {
+        return argMultimap.keySet();
     }
 
     /**
@@ -77,7 +85,18 @@ public class ArgumentMultimap {
     }
 
     @Override
-    public String toString() {
-        return this.argMultimap.toString();
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true; // Reference equality.
+        }
+
+        if (!(other instanceof ArgumentMultimap)) {
+            return false; // Different types.
+        }
+
+        ArgumentMultimap otherMap = (ArgumentMultimap) other;
+
+        // Compare argMultimap for equality.
+        return this.argMultimap.equals(otherMap.argMultimap);
     }
 }
