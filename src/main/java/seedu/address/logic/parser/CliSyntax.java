@@ -13,6 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
     public static final Prefix PREFIX_NRIC = new Prefix("i/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("h/"); // no longer '/a'
+    public static final Prefix PREFIX_APPOINTMENT = new Prefix("apt/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

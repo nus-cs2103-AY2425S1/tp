@@ -6,7 +6,8 @@
     "nric": "S1234567Z",
     "phone": "94823424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "appointment" : "01 February 2024 13:30"
   }, {
     "name": "Person With Invalid Phone Field",
     "age" : "32",
@@ -14,6 +15,7 @@
     "nric": "S1234567Z",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "appointment" : "14 March 2024 19:30"
   } ]
 }
