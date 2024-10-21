@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Name;
@@ -34,6 +35,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
+    private final String appointment;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,6 +47,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("nric") String nric,
                              @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("appointment") String appointment,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.age = age;
@@ -53,6 +56,7 @@ class JsonAdaptedPerson {
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.appointment = appointment;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -69,6 +73,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        appointment = source.getAppointment().dateTime;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -141,9 +146,18 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (appointment == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                                            Appointment.class.getSimpleName()));
+        }
+        if (!Appointment.isValidAppointment(appointment)) {
+            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        final Appointment modelAppointment = new Appointment(appointment);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelAge, modelGender, modelNric,
-                modelPhone, modelEmail, modelAddress, modelTags);
+                modelPhone, modelEmail, modelAddress, modelAppointment, modelTags);
     }
 
 }

@@ -8,6 +8,7 @@
     "phone" : "12345678",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "appointment" : "01 January 2024 13:30",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "phone" : "83648172",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "appointment" : "02 February 2024 14:30",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "phone" : "74526283",
     "email" : "heinz@example.com",
     "address" : "wall street",
+    "appointment" : "03 March 2024 15:30",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "phone" : "84517263",
     "email" : "cornelia@example.com",
     "address" : "10th street",
+    "appointment" : "04 April 2024 16:30",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "phone" : "84635473",
     "email" : "werner@example.com",
     "address" : "michegan ave",
+    "appointment" : "05 May 2024 17:30",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "phone" : "84657833",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
+    "appointment" : "06 June 2024 11:30",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "phone" : "39478273",
     "email" : "anna@example.com",
     "address" : "4th street",
+    "appointment" : "07 July 2024 12:30",
     "tags" : [ ]
   } ]
 }

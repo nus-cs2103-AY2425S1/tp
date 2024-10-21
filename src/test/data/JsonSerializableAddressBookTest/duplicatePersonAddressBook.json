@@ -7,6 +7,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
+    "appointment" : "01 February 2024 13:30",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -15,6 +16,7 @@
     "nric": "S1234567Z",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "appointment" : "01 February 2024 13:30"
   } ]
 }

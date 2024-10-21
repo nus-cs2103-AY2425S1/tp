@@ -1,9 +1,13 @@
 package seedu.address.ui;
 
+import static seedu.address.model.person.Appointment.ENGLISH_FORMAT;
+import static seedu.address.model.person.Appointment.TODAY;
+
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -36,6 +40,9 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
+    private Label date;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -55,11 +62,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
+        System.out.println(TODAY.format(ENGLISH_FORMAT));
+        date.setText("Today's Date is " + TODAY.format(ENGLISH_FORMAT));
 
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
-
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 

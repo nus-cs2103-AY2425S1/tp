@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label appointment;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,12 +57,13 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        age.setText(person.getAge().value);
-        gender.setText(person.getGender().value);
-        nric.setText(person.getNric().fullNric);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        age.setText("Age : " + person.getAge().value);
+        gender.setText("Gender : " + person.getGender().value);
+        nric.setText("NRIC : " + person.getNric().fullNric);
+        phone.setText("Phone : " + person.getPhone().value);
+        address.setText("Address : " + person.getAddress().value);
+        email.setText("Email : " + person.getEmail().value);
+        appointment.setText("Appointment : " + person.getAppointment().dateTime);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

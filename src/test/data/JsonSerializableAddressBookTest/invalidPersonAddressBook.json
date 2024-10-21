@@ -6,6 +6,7 @@
     "nric": "S1234567Z",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "appointment" : "01 February 2024 13:30"
   } ]
 }
