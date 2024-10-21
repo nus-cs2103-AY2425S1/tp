@@ -31,7 +31,7 @@ public class Appointment {
      */
     public Appointment(String name, Nric nric, LocalDateTime startTime, LocalDateTime endTime) {
         if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
-            throw new InvalidAppointmentException();
+            throw new InvalidAppointmentException(INVALID_APPOINTMENT_ERROR);
         }
         this.name = name;
         this.nric = nric;
