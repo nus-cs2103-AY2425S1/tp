@@ -1,15 +1,14 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.FileUtil;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import static java.nio.file.Files.copy;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import static java.nio.file.Files.copy;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Creates a backup of current storage file.
