@@ -219,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Heper method to fill the command box with a specified command text.
+     * Helper method to fill the command box with a specified command text.
      *
      * @param commandText The command text to fill the command box.
      */
