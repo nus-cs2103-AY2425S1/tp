@@ -28,7 +28,7 @@ public class TagListPanel extends UiPart<Region> {
      */
     public TagListPanel(ObservableList<Tag> tagList) {
         super(FXML);
-        tagListView.setItems(FXCollections.observableArrayList(tagList.sorted()));
+        tagListView.setItems(FXCollections.observableArrayList(tagList));
         tagListView.setCellFactory(listView -> new TagListViewCell());
     }
 

@@ -74,7 +74,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Tag> getListOfCurrentTags() {
-        return model.getListOfCurrentTags();
+        return model.getListOfCurrentTags().sorted();
     }
 
     @Override
