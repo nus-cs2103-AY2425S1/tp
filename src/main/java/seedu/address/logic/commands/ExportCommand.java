@@ -61,7 +61,7 @@ public class ExportCommand extends Command {
             }
 
             csvWriter.flush();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), filePath));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), filePath), COMMAND_TYPE.EXPORTSTUDENT);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
         }
