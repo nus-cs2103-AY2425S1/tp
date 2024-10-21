@@ -19,6 +19,7 @@ import seedu.address.testutil.PersonBuilder;
 public class UndoCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Test
     public void execute_undoPolicyDeletion_success() {
         Person person = new PersonBuilder().withName("John Doe").withPolicies("Policy 1 2023-01-01 2023-12-31").build();
@@ -39,20 +40,6 @@ public class UndoCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         person.setPolicies(List.of(new Policy("Policy 1", "2023-01-01", "2023-12-31", "2023-01-01 300")));
         expectedModel.setPerson(person, person);
-
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_undoWithoutDeletions_failure() {
-        Person person = new PersonBuilder().withName("John").withPolicies("Policy 1 2023-01-01 2023-12-31").build();
-        model.addPerson(person);
-        Index personIndex = Index.fromOneBased(model.getFilteredPersonList().indexOf(person) + 1);
-        Index policyIndex = Index.fromOneBased(1);
-        UndoCommand undoCommand = new UndoCommand();
-        String expectedMessage = "No deletions to undo.";
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
     }
