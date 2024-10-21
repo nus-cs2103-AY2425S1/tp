@@ -8,8 +8,6 @@
   <img src="../src/main/resources/images/cat2.png" alt="Logo" width="50" height="50" style="vertical-align:middle;"> InternBuddy User Guide
 </h1>
 
-# ![Logo](../src/main/resources/images/cat2.png){: style="vertical-align:middle;width:50px;height:50px;"} InternBuddy User Guide
-
 
 
 InternBuddy is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, InternBuddy can get your contact management tasks done faster than traditional GUI apps.
