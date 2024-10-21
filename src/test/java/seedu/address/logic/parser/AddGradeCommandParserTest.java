@@ -10,7 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddGradeCommand;
 import seedu.address.model.person.Grade;
 
-public class AddGradeCommandParsetTest {
+public class AddGradeCommandParserTest {
     private AddGradeCommandParser parser = new AddGradeCommandParser();
 
     @Test
