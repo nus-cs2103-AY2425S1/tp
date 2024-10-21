@@ -1,15 +1,17 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.LoadCommand;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.LoadCommand;
+
 
 public class LoadCommandParserTest {
     private static final String INPUT_MISSING_PREFIX = "load mybook.json";
@@ -17,13 +19,13 @@ public class LoadCommandParserTest {
     private static final LoadCommandParser PARSER = new LoadCommandParser();
 
     @Test
-    void invalid_Input_throwException() {
+    void invalid_input_throwException() {
         assertParseFailure(PARSER, INPUT_MISSING_PREFIX,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoadCommand.MESSAGE_USAGE));
     }
 
     @Test
-    void valid_Input() throws Exception{
+    void valid_input() throws Exception {
         Path tempDir = Files.createDirectory(Paths.get("archived"));
         Path tempFile = tempDir.resolve("mybook.json");
         Files.createFile(tempFile);

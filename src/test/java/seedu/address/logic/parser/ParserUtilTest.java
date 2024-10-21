@@ -201,13 +201,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePath_Invalid_Path() {
+    public void parsePath_invalid_path() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePath(INVALID_PATH_1));
         assertThrows(ParseException.class, () -> ParserUtil.parsePath(INVALID_PATH_2));
     }
 
     @Test
-    public void parsePath_Valid_Path() throws Exception {
+    public void parsePath_valid_path() throws Exception {
         Path tempDir = Files.createDirectory(Paths.get("archived"));
         Path tempFile = tempDir.resolve("mybook.json");
         Files.createFile(tempFile);
