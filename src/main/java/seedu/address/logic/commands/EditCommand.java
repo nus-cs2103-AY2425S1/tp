@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONTHPAID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -52,6 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_FEES + "FEES] "
             + "[" + PREFIX_CLASSID + "CLASSID] "
+            + "[" + PREFIX_MONTHPAID + "MONTHPAID] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -110,7 +112,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
         ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
-        Set<MonthPaid> updatedMonthPaid = personToEdit.getMonthsPaid();
+        // Set<MonthPaid> updatedMonthPaid = personToEdit.getMonthsPaid();
+        Set<MonthPaid> updatedMonthPaid = editPersonDescriptor.getMonthPaid().orElse(personToEdit.getMonthsPaid());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedFees, updatedClassId,
@@ -151,6 +154,7 @@ public class EditCommand extends Command {
         private Address address;
         private Fees fees;
         private ClassId classId;
+        private Set<MonthPaid> monthPaid;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -166,6 +170,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setFees(toCopy.fees);
             setClassId(toCopy.classId);
+            setMonthPaid(toCopy.monthPaid);
             setTags(toCopy.tags);
         }
 
@@ -173,7 +178,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, fees, classId, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, fees, classId, monthPaid, tags);
         }
 
         public void setName(Name name) {
@@ -224,6 +229,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(classId);
         }
 
+        public void setMonthPaid(Set<MonthPaid> monthsPaid) {
+            this.monthPaid = (monthsPaid != null) ? new HashSet<>(monthsPaid) : null;
+        }
+
+        public Optional<Set<MonthPaid>> getMonthPaid() {
+            return (monthPaid != null) ? Optional.of(Collections.unmodifiableSet(monthPaid)) : Optional.empty();
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -259,11 +272,9 @@ public class EditCommand extends Command {
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(fees, otherEditPersonDescriptor.fees)
                     && Objects.equals(classId, otherEditPersonDescriptor.classId)
+                    && Objects.equals(monthPaid, otherEditPersonDescriptor.monthPaid)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
-
-
-
 
         @Override
         public String toString() {
@@ -274,6 +285,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("fees", fees)
                     .add("classId", classId)
+                    .add("monthPaid", monthPaid)
                     .add("tags", tags)
                     .toString();
         }
