@@ -52,8 +52,9 @@ public class LinkCommand extends Command {
 
         Person patient = model.getPerson(patientNric);
         Person caregiver = model.getPerson(caregiverNric);
-        requireNonNull(patient, PERSON_NOT_FOUND);
-        requireNonNull(caregiver, PERSON_NOT_FOUND);
+        if (patient == null || caregiver == null) {
+            throw new CommandException(PERSON_NOT_FOUND);
+        }
 
         if (!patient.getRoles().contains(Role.PATIENT)
                 || !caregiver.getRoles().contains(Role.CAREGIVER)) {
