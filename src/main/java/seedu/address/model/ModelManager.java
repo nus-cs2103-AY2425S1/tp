@@ -141,6 +141,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean deleteTag(Tag tag) {
+        if (!this.hasTag(tag)) {
+            return false;
+        }
+
+        addressBook.deleteTag(tag);
+        return true;
+    }
+
+    @Override
     public boolean hasTag(Tag tag) {
         return addressBook.hasTag(tag);
     }
