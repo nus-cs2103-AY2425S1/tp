@@ -35,5 +35,21 @@ public class ArchiveCommand extends Command {
         model.setAddressBook(new AddressBook());
         return new CommandResult(String.format(MESSAGE_SUCCESS, archivePath));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ArchiveCommand)) {
+            return false;
+        }
+
+        ArchiveCommand otherLoadCommand = (ArchiveCommand) other;
+        return archivePath.equals(otherLoadCommand.archivePath);
+    }
+
 }
 

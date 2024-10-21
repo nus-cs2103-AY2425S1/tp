@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -33,6 +35,19 @@ public class ArchiveCommandTest {
         expectedModel.setAddressBook(new AddressBook());
         assertCommandSuccess(new ArchiveCommand(archivePath), model,
                 String.format(ArchiveCommand.MESSAGE_SUCCESS, archivePath), expectedModel);
+    }
+
+    @Test
+    public void equal() {
+        Path path1 = Paths.get("mybook.json");
+        Path path2 = Paths.get("yourbook.json");
+        ArchiveCommand command1 = new ArchiveCommand(path1);
+        ArchiveCommand command2 = new ArchiveCommand(path1);
+        ArchiveCommand command3 = new ArchiveCommand(path2);
+        assertTrue(command1.equals(command1));
+        assertTrue(command1.equals(command2));
+        assertFalse(command1.equals(command3));
+        assertFalse(command1.equals(1));
     }
 
 }

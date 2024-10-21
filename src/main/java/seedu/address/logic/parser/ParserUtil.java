@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.commands.LoadCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Gender;
@@ -161,7 +162,7 @@ public class ParserUtil {
         path = path.trim();
         final Path parsedPath = Paths.get("archived", path);
         if (!path.endsWith(".json") || path.contains("/")) {
-            throw new ParseException(LoadCommand.MESSAGE_USAGE);
+            throw new ParseException(ArchiveCommand.MESSAGE_USAGE);
         }
         return parsedPath;
     }

@@ -205,6 +205,7 @@ public class ParserUtilTest {
     public void parsePathWithCheck_invalid_path() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_1));
         assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(INVALID_PATH_2));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithCheck(VALID_PATH));
     }
 
     @Test
@@ -218,4 +219,12 @@ public class ParserUtilTest {
         assertEquals(tempFile, parsePathWithCheck(VALID_PATH));
         Files.deleteIfExists(tempFile);
     }
+
+    @Test
+    public void parsePathWithoutCheck_invalid_path() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithoutCheck(INVALID_PATH_1));
+        assertThrows(ParseException.class, () -> ParserUtil.parsePathWithoutCheck(INVALID_PATH_2));
+    }
+
+
 }
