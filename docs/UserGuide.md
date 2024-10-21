@@ -122,7 +122,7 @@ Format: `tag-add n/NAME t/TAG...`
 * Existing values will be updated together with the input values.
 
 Examples:
-*  `tag-add n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Adds the tags `Adam and Eve 12 June` 
+*  `tag-add n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Adds the tags `Adam and Eve 12 June`
 and `Adam and Steve 16 June` to John Doe.
 *  `tag-add n/Betsy Crower t/Wedding at Park Gala` Adds the tag `Wedding at Park Gala` to Betsy Crower.
 
@@ -135,11 +135,11 @@ Format: `tag-delete n/NAME t/TAG...`
 * Existing values that match input values will be deleted.
 
 Examples:
-*  `tag-delete n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Deletes the tags `Adam and Eve 12 June` 
+*  `tag-delete n/John Doe t/Adam and Eve 12 June t/Adam and Steve 16 June` Deletes the tags `Adam and Eve 12 June`
 and `Adam and Steve 16 June` from John Doe.
 *  `tag-delete n/Betsy Crower t/Wedding at Park Gala` Deletes the tag `Wedding at Park Gala` from Betsy Crower.
 
-### Locating persons by name: `find`
+### Locating Contacts by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -156,6 +156,25 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+### Filtering Contacts by Job: `filter`
+
+Filters persons whose jobs contain any of the given keywords.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `photographer` will match `Photographer`
+* The order of the keywords does not matter. e.g. `Photographer` will match `photographer`
+* Only the job is searched.
+* Only full words will be matched e.g. `photog` will not match `Photographer`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Photographer` will return `Photographer`, `Wedding Photographer`
+* Persons matching all keywords will be returned (i.e. `AND` search).
+  e.g. `Photographer Wedding` will return `Wedding Photographer`
+
+Examples:
+* `filter Photographer` returns `John` and `Ernest` whose jobs are photographers
+* `filter caterer` returns `Adam` whose job is a caterer
 
 ### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
 
