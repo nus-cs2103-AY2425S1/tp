@@ -60,6 +60,16 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns the calendar
+     */
+    Calendar getCalendar();
+
+    /**
+     * Returns true if there is the same appointment as {@code person} in the address book
+     */
+    boolean hasAppointment(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

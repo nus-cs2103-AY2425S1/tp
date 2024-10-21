@@ -65,6 +65,7 @@ public class UpdateCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_SAME_NRID = "Multiple persons with the same NRIC found. Please specify further.";
     public static final String MESSAGE_SAME_NAME = "Multiple persons with the same name found. Please specify further.";
+    public static final String MESSAGE_APPOINTMENT_TAKEN = "There is an existing appointment at that timeslot";
 
     private final Nric nric;
     private final Name name;
@@ -154,6 +155,11 @@ public class UpdateCommand extends Command {
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (!personToEdit.getAppointment().equals(editedPerson.getAppointment())
+                && model.hasAppointment(editedPerson)) {
+            throw new CommandException(MESSAGE_APPOINTMENT_TAKEN);
         }
 
         model.setPerson(personToEdit, editedPerson);

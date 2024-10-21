@@ -6,11 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -20,9 +22,11 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.Calendar;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.person.Appointment;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 import seedu.address.testutil.PersonBuilder;
@@ -56,6 +60,15 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_appointmentTaken_throwsCommandException() {
+        Person validPerson = new PersonBuilder().withAppointment(BOB.getAppointment().dateTime).build();
+        AddCommand addCommand = new AddCommand(validPerson);
+        ModelStub modelStub = new ModelStubWithPerson(BOB);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_APPOINTMENT_TAKEN, () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -144,6 +157,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Calendar getCalendar() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAppointment(Person person) {
+            throw new AssertionError("this method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -178,16 +201,24 @@ public class AddCommandTest {
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
+        private final List<Appointment> calendar;
 
         ModelStubWithPerson(Person person) {
             requireNonNull(person);
             this.person = person;
+            this.calendar = new ArrayList<>();
+            calendar.add(person.getAppointment());
         }
 
         @Override
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public boolean hasAppointment(Person person) {
+            return calendar.contains(person.getAppointment());
         }
     }
 
@@ -196,6 +227,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Appointment> calendar = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -207,6 +239,12 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public boolean hasAppointment(Person person) {
+            requireNonNull(person);
+            return calendar.stream().anyMatch(x -> x.equals(person.getAppointment()));
         }
 
         @Override

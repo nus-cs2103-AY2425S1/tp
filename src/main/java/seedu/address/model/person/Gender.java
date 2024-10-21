@@ -27,14 +27,14 @@ public class Gender {
     public Gender(String gender) {
         requireNonNull(gender);
         checkArgument(isValidGender(gender), MESSAGE_CONSTRAINTS);
-        value = gender;
+        value = gender.toUpperCase();
     }
 
     /**
      * Returns true if a given string is a valid gender.
      */
     public static boolean isValidGender(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
 

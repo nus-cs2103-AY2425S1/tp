@@ -56,7 +56,7 @@ public class Appointment {
      * @return LocalDateTime object corresponding to a specific date and time
      * @throws TimeParseException String given does not match any time format
      */
-    public static LocalDateTime parse(String dateTime) throws TimeParseException {
+    private static LocalDateTime parse(String dateTime) throws TimeParseException {
         for (DateTimeFormatter formatter : FORMATTERS) {
             try {
                 return LocalDateTime.parse(dateTime, formatter);
