@@ -81,6 +81,19 @@ public class BuyerListParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
 
+        // Meet-Up Commands
+        case seedu.address.logic.commands.meetup.ViewCommand.COMMAND_WORD:
+            return new seedu.address.logic.commands.meetup.ViewCommand();
+
+        case seedu.address.logic.commands.meetup.AddCommand.COMMAND_WORD:
+            return new seedu.address.logic.parser.meetup.AddCommandParser().parse(arguments);
+
+        case seedu.address.logic.commands.meetup.EditCommand.COMMAND_WORD:
+            return new seedu.address.logic.parser.meetup.EditCommandParser().parse(arguments);
+
+        case seedu.address.logic.commands.meetup.DeleteCommand.COMMAND_WORD:
+            return new seedu.address.logic.parser.meetup.DeleteCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
