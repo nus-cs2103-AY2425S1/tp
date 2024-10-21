@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,5 +34,14 @@ public class ListBothCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         //showOwnerAtIndex(model, INDEX_FIRST_OWNER); fix later
         assertCommandSuccess(new ListBothCommand(), model, ListBothCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void equals() {
+        ListBothCommand listBothCommand = new ListBothCommand();
+
+        assertEquals(listBothCommand, new ListBothCommand());
+
+        assertEquals(listBothCommand, listBothCommand);
     }
 }

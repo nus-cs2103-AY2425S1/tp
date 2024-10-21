@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -46,4 +47,19 @@ public class ListCommandTest {
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
     */
+
+    @Test
+    public void equals() {
+        ListPetCommand listPetCommand = new ListPetCommand();
+
+        ListOwnerCommand listOwnerCommand = new ListOwnerCommand();
+
+        assertEquals(listOwnerCommand, new ListOwnerCommand());
+
+        assertEquals(listPetCommand, new ListPetCommand());
+
+        assertEquals(listPetCommand, listPetCommand);
+
+        assertEquals(listOwnerCommand, listOwnerCommand);
+    }
 }
