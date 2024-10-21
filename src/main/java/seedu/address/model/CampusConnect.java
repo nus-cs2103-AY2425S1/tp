@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -53,7 +54,6 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public void resetData(ReadOnlyCampusConnect newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
     }
 
@@ -114,6 +114,11 @@ public class CampusConnect implements ReadOnlyCampusConnect {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Tag> getTagList() {
+        return persons.asTagList();
     }
 
     @Override
