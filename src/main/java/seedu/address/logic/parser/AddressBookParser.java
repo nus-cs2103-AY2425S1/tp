@@ -24,6 +24,7 @@ import seedu.address.logic.commands.FindPhoneNumberCommand;
 import seedu.address.logic.commands.FindSellCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -103,6 +104,9 @@ public class AddressBookParser {
 
         case DeletePropertyToSellCommand.COMMAND_WORD:
             return new DeletePropertyToSellCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
