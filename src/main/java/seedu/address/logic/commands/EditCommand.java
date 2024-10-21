@@ -112,7 +112,6 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Fees updatedFees = editPersonDescriptor.getFees().orElse(personToEdit.getFees());
         ClassId updatedClassId = editPersonDescriptor.getClassId().orElse(personToEdit.getClassId());
-        // Set<MonthPaid> updatedMonthPaid = personToEdit.getMonthsPaid();
         Set<MonthPaid> updatedMonthPaid = editPersonDescriptor.getMonthPaid().orElse(personToEdit.getMonthsPaid());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -289,6 +288,8 @@ public class EditCommand extends Command {
                     .add("tags", tags)
                     .toString();
         }
+
+
     }
 }
 
