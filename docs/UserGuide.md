@@ -72,23 +72,23 @@ Format: `help`
 
 ---
 
-### Adding a person: `add`
+### Comment on a student: `add`
 
-Adds a person to Teacher's Pet.
+Comments on a student in Teacher's Pet.
 
-Format: `comment INDEX c/ COMMENT`
+Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Each person can only have one comment, to delete a comment use the same command `comment INDEX c/` but without
-any COMMENT.
+A person can only belong to one group at a time.
 </div>
 
-* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* The COMMENT refers to any input you want to use as a comment. 
+* NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")
+* NUS_NETID here refers to the id that is associated with the student's NUS outlook account ("NUS_NETID@u.nus.edu")
+* Both NUS_STUDENTID and NUS_NETID must be unique (ie. Two students cannot have the same NUS_STUDENTID and/or NUS_NETID)
 
 Examples:
-* `comment 1 c/ Is always late to class.`
-* `comment 1 c/`
+* `add n/John Doe id/A1234567P`
+* `add n/Betsy Crowe m/Computer Science nid/e1111111 id/A9999999L y/1 g/group 1`
 
 ---
 
@@ -154,23 +154,23 @@ Examples:
 
 ---
 
-### Comment on a student: `comment`
+### Adding a person: `comment`
 
-Comments on a student in Teacher's Pet.
+Adds a person to Teacher's Pet.
 
-Format: `add n/NAME id/NUS_STUDENTID [nid/NUS_NETID] [m/MAJOR] [y/YEAR] [g/group GROUP_NUMBER]`
+Format: `comment INDEX c/ COMMENT`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can only belong to one group at a time.
+Each person can only have one comment, to delete a comment use the same command `comment INDEX c/` but without
+any COMMENT.
 </div>
 
-* NUS_STUDENTID here refers to the NUS Matriculation Number of the student (Starts with "A")
-* NUS_NETID here refers to the id that is associated with the student's NUS outlook account ("NUS_NETID@u.nus.edu")
-* Both NUS_STUDENTID and NUS_NETID must be unique (ie. Two students cannot have the same NUS_STUDENTID and/or NUS_NETID)
+* The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* The COMMENT refers to any input you want to use as a comment.
 
 Examples:
-* `add n/John Doe id/A1234567P`
-* `add n/Betsy Crowe m/Computer Science nid/e1111111 id/A9999999L y/1 g/group 1`
+* `comment 1 c/ Is always late to class.`
+* `comment 1 c/`
 
 ---
 
