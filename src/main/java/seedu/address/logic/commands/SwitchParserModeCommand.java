@@ -32,8 +32,11 @@ public class SwitchParserModeCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         try {
             AbcliParser.switchMode(mode);
+            boolean showMeetUpList = this.mode == ParserMode.MEETUP;
+            boolean showBuyerList = this.mode == ParserMode.BUYER;
+            boolean showPropertyList = this.mode == ParserMode.PROPERTY;
             return new CommandResult(SWITCH_SUCCESS_MESSAGE + mode, false,
-                    false, false, false);
+                    false, showMeetUpList, showBuyerList, showPropertyList);
         } catch (ParseException e) {
             throw new CommandException(e.getMessage());
         }

@@ -13,6 +13,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.buyer.BuyerCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.meetup.MeetUpCommandParser;
+import seedu.address.logic.parser.property.PropertyCommandParser;
 
 /**
  * Parses user input.
@@ -21,6 +22,7 @@ public class AbcliParser {
 
     private static final BuyerCommandParser buyerCommandParser = new BuyerCommandParser();
     private static final MeetUpCommandParser meetUpCommandParser = new MeetUpCommandParser();
+    private static final PropertyCommandParser propertyCommandParser = new PropertyCommandParser();
     private static CommandParser currentParser = buyerCommandParser;
 
     /**
@@ -63,6 +65,10 @@ public class AbcliParser {
 
         case MEETUP:
             currentParser = meetUpCommandParser;
+            break;
+
+        case PROPERTY:
+            currentParser = propertyCommandParser;
             break;
 
         default:

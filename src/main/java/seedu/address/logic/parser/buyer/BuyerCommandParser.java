@@ -42,7 +42,7 @@ public class BuyerCommandParser extends CommandParser {
             return new FindCommandParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+            return new ViewCommand();
 
         default:
             return super.parseCommand(commandWord, arguments);

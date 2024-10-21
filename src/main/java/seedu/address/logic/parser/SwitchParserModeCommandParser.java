@@ -30,9 +30,12 @@ public class SwitchParserModeCommandParser implements Parser<SwitchParserModeCom
         case MEETUP_MODE:
             return new SwitchParserModeCommand(ParserMode.MEETUP);
 
+        case PROPERTY_MODE:
+            return new SwitchParserModeCommand(ParserMode.PROPERTY);
+
         default:
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, trimmedArg)
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SwitchParserModeCommand.MESSAGE_USAGE)
             );
         }
     }
