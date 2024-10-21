@@ -36,7 +36,7 @@ public class AddTutorCommand extends Command {
             + PREFIX_HOURS + "6 ";
 
 
-    public static final String MESSAGE_SUCCESS = "New tutor added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New tutor added: \n %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This tutor already exists in the address book";
 
     private final Tutor toAdd;

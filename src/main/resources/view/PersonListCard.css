@@ -1,15 +1,19 @@
-#cardPane {
-    -fx-padding: 10; /* Padding inside each card */
-    -fx-background-radius: 15; /* Rounds the corners */
-    -fx-border-radius: 15; /* Rounds the border corners */
-    -fx-background-color: #004aad; /* Set background color */
-    -fx-border-color: #004aad; /* Light gray border */
-    -fx-border-width: 1; /* Width of the border */
-    -fx-spacing: 10; /* Adds space between elements within the card */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 2); /* Optional shadow effect */
+.label {
     -fx-text-fill: white;
 }
 
-.label {
+.tutor {
+    -fx-background-color: #004aad;
+    -fx-background-radius: 15px;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 2);
+    -fx-text-fill: white;
+}
+
+.tutee {
+    -fx-background-color: #497aba;
+    -fx-background-radius: 15px;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 2);
     -fx-text-fill: white;
 }
