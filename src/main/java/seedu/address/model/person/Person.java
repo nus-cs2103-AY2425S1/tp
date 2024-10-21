@@ -18,19 +18,13 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Address address;
-
-    private final Job job;
 
     // Data fields
-
+    private final Address address;
+    private final Job job;
     private final Income income;
-
     private final Tier tier;
-
     private final Remark remark;
-
-    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -80,10 +74,6 @@ public class Person {
 
     public Remark getRemark() {
         return remark;
-    }
-
-    public Status getStatus() {
-        return status;
     }
 
     /**
@@ -137,7 +127,6 @@ public class Person {
                 .add("income", income)
                 .add("tier", tier)
                 .add("remark", remark)
-                .add("status", status)
                 .toString();
     }
 
