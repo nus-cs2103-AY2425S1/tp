@@ -2,12 +2,9 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.GroupList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.GroupNotFoundException;
-
+/**
+ * Tests that a {@code Person} belongs to a specific {@code Group}.
+ */
 public class GroupContainsKeywordsPredicate implements Predicate<Person> {
     private final Group group;
 

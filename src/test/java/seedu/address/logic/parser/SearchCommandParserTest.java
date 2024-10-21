@@ -25,7 +25,7 @@ public class SearchCommandParserTest {
     public void parse_validNameArgs_returnsSearchCommand() {
         // no leading and trailing whitespaces
         SearchCommand expectedSearchCommand =
-                new SearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
+                new SearchCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), null);
         assertParseSuccess(parser, " n/Alice Bob", expectedSearchCommand);
 
         // multiple whitespaces between keywords
@@ -36,7 +36,8 @@ public class SearchCommandParserTest {
     public void parse_validTagArgs_returnsSearchCommand() {
         // no leading and trailing whitespaces for tags
         SearchCommand expectedSearchCommand =
-                new SearchCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleague")));
+                new SearchCommand(
+                        new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleague")), null);
         assertParseSuccess(parser, " t/friends colleague", expectedSearchCommand);
 
         // multiple whitespaces between keywords for tags

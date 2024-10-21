@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.SearchCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Group;
 import seedu.address.model.person.GroupContainsKeywordsPredicate;
@@ -38,6 +37,13 @@ public class SearchCommand extends Command {
     private final Predicate<Person> predicate;
     private final String groupName;
 
+    /**
+     * Constructs a {@code SearchCommand} to filter the person list using the specified predicate and group name.
+     *
+     * @param predicate The predicate that filters the list of persons based on name and/or tag criteria.
+     * @param groupName The name of the group to further filter the persons.
+     *                  If empty or {@code null}, no group filtering is applied.
+     */
     public SearchCommand(Predicate<Person> predicate, String groupName) {
         this.predicate = predicate;
         this.groupName = groupName;
@@ -51,12 +57,16 @@ public class SearchCommand extends Command {
         Predicate<Person> finalPredicate = predicate;
 
         // If a group name is provided, perform a group lookup and 1bine it with the existing predicate
-        if (!(groupName == null) && !groupName.isEmpty()) {
-            GroupList groupList = model.getAddressBook().getGroupList();  // Fetch the GroupList
+        if (!(groupName == null) && !(groupName.isEmpty())) {
+            // Fetch the GroupList
+            GroupList groupList = model.getAddressBook().getGroupList();
             try {
-                Group group = groupList.get(groupName);  // Retrieve the group by name
+                // Retrieve the group by name
+                Group group = groupList.get(groupName);
                 GroupContainsKeywordsPredicate groupPredicate = new GroupContainsKeywordsPredicate(group);
-                finalPredicate = finalPredicate == null ? groupPredicate : finalPredicate.and(groupPredicate);  // Combine predicates
+
+                // Combine predicates
+                finalPredicate = finalPredicate == null ? groupPredicate : finalPredicate.and(groupPredicate);
             } catch (GroupNotFoundException e) {
                 throw new CommandException("Group not found: " + groupName);
             }
