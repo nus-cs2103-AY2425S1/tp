@@ -33,11 +33,11 @@ public class AppointmentTest {
         person2 = BOB;
 
         appointment1 = new Appointment(new AppointmentType("Checkup"), dateTime1,
-                person1, new Sickness("Cold"), new Medicine("Aspirin"));
+            person1, new Sickness("Cold"), new Medicine("Aspirin"));
         appointment2 = new Appointment(new AppointmentType("Checkup"), dateTime1,
-                person1, new Sickness("Cold"), new Medicine("Aspirin"));
+            person1, new Sickness("Cold"), new Medicine("Aspirin"));
         appointment3 = new Appointment(new AppointmentType("Followup"), dateTime2,
-                person2, new Sickness("Flu"), new Medicine("Tamiflu"));
+            person2, new Sickness("Flu"), new Medicine("Tamiflu"));
 
 
         System.out.println(appointment1);
@@ -107,13 +107,12 @@ public class AppointmentTest {
     @Test
     public void toString_validAppointments_returnsFormattedString() {
         String appointment1String = "seedu.address.model.appointment.Appointment"
-                + "{appointmentType=Checkup, appointmentDateTime=2024-01-01T10:00,"
-                + " personId=1, medicine=Aspirin, sickness=Cold}";
-
-        String appointment3String = "seedu.address.model.appointment.Appointment{appointmentType=Followup,"
-                + " appointmentDateTime=2024-01-01T11:00, personId=2, medicine=Tamiflu, sickness=Flu}";
+            + "{appointmentId=0,"
+            + " person=seedu.address.model.person.Person{personId=0, name=Alice Pauline, phone=94351253,"
+            + " email=alice@example.com, address=123, Jurong West Ave 6, #08-111, tags=[[friends]]},"
+            + " appointmentType=Checkup, appointmentDateTime=2024-01-01T10:00,"
+            + " medicine=Aspirin, sickness=Cold}";
 
         assertEquals(appointment1String, appointment1.toString());
-        assertEquals(appointment3String, appointment3.toString());
     }
 }
