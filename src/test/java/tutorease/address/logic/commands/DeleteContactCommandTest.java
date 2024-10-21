@@ -1,6 +1,8 @@
 package tutorease.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.file.Path;
@@ -30,6 +32,41 @@ class DeleteContactCommandTest {
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeleteContactCommand(null));
+    }
+
+    @Test
+    public void testToString_returnsCorrectString() {
+        Index index = Index.fromZeroBased(0);
+        DeleteContactCommand deleteCommand = new DeleteContactCommand(index);
+
+        // Test toString method
+        assertEquals("DeleteContactCommand{targetIndex=tutorease.address.commons.core."
+                + "index.Index{zeroBasedIndex=0}}", deleteCommand.toString());
+    }
+
+    @Test
+    public void equals() {
+        Index index = Index.fromZeroBased(0);
+        DeleteContactCommand deleteCommand = new DeleteContactCommand(index);
+        // Test the same object
+        assertEquals(deleteCommand, deleteCommand);
+
+        Index index1 = Index.fromZeroBased(1);
+        DeleteContactCommand deleteCommand1 = new DeleteContactCommand(index1);
+        DeleteContactCommand deleteCommand2 = new DeleteContactCommand(index1);
+
+        // Test different objects but same Index
+        assertEquals(deleteCommand1, deleteCommand2);
+
+        Index index2 = Index.fromZeroBased(2);
+        DeleteContactCommand deleteCommand11 = new DeleteContactCommand(index1);
+        DeleteContactCommand deleteCommand22 = new DeleteContactCommand(index2);
+
+        // Test different objects with different Index
+        assertNotEquals(deleteCommand11, deleteCommand22);
+
+        // Test against an object of a different class
+        assertFalse(deleteCommand.equals("some string"));
     }
 
     @Test
@@ -227,4 +264,5 @@ class DeleteContactCommandTest {
             return FXCollections.observableArrayList(); // Return an empty list
         }
     }
+
 }
