@@ -21,7 +21,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyCampusConnect;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.EmptyDataUtil;
 import seedu.address.storage.CampusConnectStorage;
 import seedu.address.storage.JsonCampusConnectStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -80,10 +80,9 @@ public class MainApp extends Application {
         try {
             campusConnectOptional = storage.readCampusConnect();
             if (!campusConnectOptional.isPresent()) {
-                logger.info("Creating a new data file " + storage.getCampusConnectFilePath()
-                        + " populated with a sample CampusConnect.");
+                logger.info("Creating a new data file at: " + storage.getCampusConnectFilePath());
             }
-            initialData = campusConnectOptional.orElseGet(SampleDataUtil::getSampleCampusConnect);
+            initialData = campusConnectOptional.orElseGet(EmptyDataUtil::getSampleCampusConnect);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getCampusConnectFilePath() + " could not be loaded."
                     + " Will be starting with an empty CampusConnect.");

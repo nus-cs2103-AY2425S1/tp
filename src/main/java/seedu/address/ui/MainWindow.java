@@ -25,6 +25,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static final String LIST_EMPTY_MESSAGE = "The contact list is empty! :(";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -122,6 +124,9 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        if (logic.getFilteredPersonList().isEmpty()) {
+            resultDisplay.setFeedbackToUser(LIST_EMPTY_MESSAGE);
+        }
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getCampusConnectFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
