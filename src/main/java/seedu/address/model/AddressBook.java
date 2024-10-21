@@ -6,6 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -137,6 +138,22 @@ public class AddressBook implements ReadOnlyAddressBook {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns the users {@code Github} details, if exists.
+     * Returns the first instance of the person found.
+     *
+     * @param name Name of the user to retrieve.
+     * @return {@code Github} object of the user, else null.
+     */
+    public Github getGitHubUsername(Name name) {
+        for (Person x : persons) {
+            if (x.getName().equalIgnoreCase(name)) {
+                return x.getGithub();
+            }
+        }
+        return null;
     }
 
     @Override
