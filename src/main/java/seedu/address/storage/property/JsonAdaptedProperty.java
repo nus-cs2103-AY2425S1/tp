@@ -23,7 +23,8 @@
 //      * Constructs a {@code JsonAdaptedProperty} with the given meet up details.
 //      */
 //     @JsonCreator
-//     public JsonAdaptedProperty(@JsonProperty("landlordName") String landlordName, @JsonProperty("location") String location,
+//     public JsonAdaptedProperty(@JsonProperty("landlordName") String landlordName,
+//             @JsonProperty("location") String location,
 //             @JsonProperty("askingPrice") String askingPrice, @JsonProperty("phoneNumber") String phoneNumber,
 //             @JsonProperty("propertyType") String propertyType) {
 

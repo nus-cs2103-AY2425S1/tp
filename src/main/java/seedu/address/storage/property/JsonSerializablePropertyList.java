@@ -37,7 +37,8 @@
 //      * @param source future changes to this will not affect the created {@code JsonSerializablePropertyList}.
 //      */
 //     public JsonSerializablePropertyList(ReadOnlyPropertyList source) {
-//         properties.addAll(source.getPropertyList().stream().map(JsonAdaptedProperty::new).collect(Collectors.toList()));
+//         properties.addAll(source.getPropertyList().stream().map(JsonAdaptedProperty::new)
+//              .collect(Collectors.toList()));
 //     }
 
 //     /**
