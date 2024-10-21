@@ -214,11 +214,17 @@ Format: `help`
 
 <br>
 
-##### Clearing all entries : `clear`
+##### Clearing all Persons : `clear person`
 
-Clears all entries from the address book and appointment book after a validation check from the user.
+Clears all entries from the address book after a validation check from the user.
 
-Format: `clear`
+Format: `clear person`
+
+##### Clearing all appointments : `clear appt`
+
+Clears all entries from the appointment book after a validation check from the user.
+
+Format: `clear appt`
 
 <br>
 
