@@ -10,8 +10,6 @@ import tutorease.address.model.person.Person;
  */
 public class Lesson {
     private final Person student;
-
-    private final LocationIndex locationIndex;
     private final StartDateTime startDateTime;
     private final EndDateTime endDateTime;
 
@@ -19,14 +17,12 @@ public class Lesson {
      * Every field must be present and not null.
      *
      * @param student       The student of the lesson.
-     * @param locationIndex The location index of the lesson.
      * @param startDateTime The start date time of the lesson.
      * @param endDateTime   The end date time of the lesson.
      */
-    public Lesson(Person student, LocationIndex locationIndex, StartDateTime startDateTime, EndDateTime endDateTime) {
-        requireAllNonNull(student, locationIndex, startDateTime, endDateTime);
+    public Lesson(Person student, StartDateTime startDateTime, EndDateTime endDateTime) {
+        requireAllNonNull(student, startDateTime, endDateTime);
         this.student = student;
-        this.locationIndex = locationIndex;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
@@ -50,15 +46,6 @@ public class Lesson {
      */
     public Person getStudent() {
         return student;
-    }
-
-    /**
-     * Returns the location index of the lesson.
-     *
-     * @return The location index of the lesson.
-     */
-    public LocationIndex getLocationIndex() {
-        return locationIndex;
     }
 
     /**
@@ -112,11 +99,7 @@ public class Lesson {
      * @return The address of the student of the lesson.
      */
     public String getAddress() {
-        if (this.locationIndex.getValue() == 0) {
-            return student.getAddress().value;
-        } else {
-            return "";
-        }
+        return student.getAddressString();
     }
 
     @Override
@@ -124,8 +107,6 @@ public class Lesson {
         final StringBuilder builder = new StringBuilder();
         builder.append("Student: ")
                 .append(getStudent().getName())
-                .append(" Location: ")
-                .append(getLocationIndex())
                 .append(" Start: ")
                 .append(getStartDateTime())
                 .append(" End: ")
@@ -145,7 +126,6 @@ public class Lesson {
 
         Lesson otherLesson = (Lesson) other;
         return student.equals(otherLesson.student)
-                && locationIndex.equals(otherLesson.locationIndex)
                 && startDateTime.equals(otherLesson.startDateTime)
                 && endDateTime.equals(otherLesson.endDateTime);
     }

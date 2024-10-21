@@ -10,7 +10,6 @@ import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
-import tutorease.address.model.lesson.LocationIndex;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Address;
@@ -155,21 +154,6 @@ public class ParserUtil {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(studentId);
-    }
-
-    /**
-     * Parses a {@code String locationIndex} into a {@code LocationIndex}.
-     *
-     * @param locationIndex The location index to be parsed.
-     * @return The parsed location index.
-     * @throws ParseException If the location index is invalid.
-     */
-    public static LocationIndex parseLocationIndex(String locationIndex) throws ParseException {
-        requireNonNull(locationIndex);
-        if (!LocationIndex.isValidLocationIndex(locationIndex)) {
-            throw new ParseException(LocationIndex.MESSAGE_CONSTRAINTS);
-        }
-        return new LocationIndex(locationIndex);
     }
 
     /**

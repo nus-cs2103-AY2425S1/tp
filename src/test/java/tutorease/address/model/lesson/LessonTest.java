@@ -16,25 +16,24 @@ import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.person.Person;
 
 public class LessonTest {
-    private Person person = getTypicalStudents().get(0);
-    private LocationIndex locationIndex = new LocationIndex(VALID_LOCATION_INDEX);
-    private StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
-    private EndDateTime endDateTime = EndDateTime.createEndDateTime(startDateTime, VALID_DURATION);
-    private StartDateTime startDateTimeOverlap = StartDateTime.createStartDateTime(VALID_START_DATE);
-    private EndDateTime endDateTimeOverlap = EndDateTime.createEndDateTime(startDateTime, "2");
-    private StartDateTime startDateTimeNoOverlap = StartDateTime.createStartDateTime(
+    private final Person person = getTypicalStudents().get(0);
+    private final StartDateTime startDateTime = StartDateTime.createStartDateTime(VALID_START_DATE);
+    private final EndDateTime endDateTime = EndDateTime.createEndDateTime(startDateTime, VALID_DURATION);
+    private final StartDateTime startDateTimeOverlap = StartDateTime.createStartDateTime(VALID_START_DATE);
+    private final EndDateTime endDateTimeOverlap = EndDateTime.createEndDateTime(startDateTime, "2");
+    private final StartDateTime startDateTimeNoOverlap = StartDateTime.createStartDateTime(
             DateTimeUtil.dateTimeToString(startDateTime.getDateTime().plusDays(1)));
 
-    private Lesson lesson = new Lesson(person, locationIndex, startDateTime, endDateTime);
-    private Lesson lessonOverlap = new Lesson(person, locationIndex, startDateTimeOverlap, endDateTimeOverlap);
-    private Lesson lessonNoOverlap = new Lesson(person, locationIndex, startDateTimeNoOverlap, endDateTimeOverlap);
+    private final Lesson lesson = new Lesson(person, startDateTime, endDateTime);
+    private final Lesson lessonOverlap = new Lesson(person, startDateTimeOverlap, endDateTimeOverlap);
+    private final Lesson lessonNoOverlap = new Lesson(person, startDateTimeNoOverlap, endDateTimeOverlap);
 
     public LessonTest() throws ParseException {
     }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null, null));
+        assertThrows(NullPointerException.class, () -> new Lesson(null, null, null));
     }
 
     @Test
@@ -45,7 +44,7 @@ public class LessonTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Lesson lessonCopy = new Lesson(person, locationIndex, startDateTime, endDateTime);
+        Lesson lessonCopy = new Lesson(person, startDateTime, endDateTime);
         assertTrue(lesson.equals(lessonCopy));
 
         // same object -> returns true
@@ -63,10 +62,6 @@ public class LessonTest {
     @Test
     public void getStudent() {
         assertTrue(lesson.getStudent().equals(person));
-    }
-    @Test
-    public void getLocationIndex() {
-        assertTrue(lesson.getLocationIndex().equals(locationIndex));
     }
     @Test
     public void getStartDateTime() {
@@ -96,8 +91,6 @@ public class LessonTest {
     public void toStringTest() {
         assertEquals("Student: "
                 + person.getName().toString()
-                + " Location: "
-                + locationIndex.toString()
                 + " Start: "
                 + startDateTime.toString()
                 + " End: "
