@@ -47,7 +47,9 @@ public class Messages {
                 .append("\n Medication: ")
                 .append(person.getMedication())
                 .append("\n\n Notes: ")
-                .append(person.getNotes().toString().isEmpty() ? "-" : person.getNotes());
+                .append(person.getNotes().toString().isEmpty() ? "-" : person.getNotes())
+                .append("\n\n Appointment: ")
+                .append(person.getAppointment().toString());
         // .append("; Tags: ");
 
         // person.getTags().forEach(builder::append);

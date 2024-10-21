@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     private Label medication;
     @FXML
     private Label notes;
+    @FXML
+    private Label appointment;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -54,6 +56,17 @@ public class PersonCard extends UiPart<Region> {
         diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
         medication.setText("Medication: " + person.getMedication().value);
         notes.setText("Notes: " + (person.getNotes().toString().isEmpty() ? "-" : person.getNotes().value));
+        // This is still a draft version and not finalised. Law of Demeter is broken here.
+        if (person.getAppointment() != null) {
+            String description = person.getAppointment().getDescription();
+            String start = person.getAppointment().getStart().toString();
+            String end = person.getAppointment().getEnd().toString();
+            String appointmentString = description + " | " + start + " to " + end;
+            appointment.setText("Appointment: " + appointmentString);
+        } else {
+            appointment.setText("Appointment: -");
+        }
+
         /*
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
