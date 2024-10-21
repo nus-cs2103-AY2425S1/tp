@@ -2,11 +2,18 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
@@ -27,6 +34,15 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label helpMessage;
 
+    @FXML
+    private TableView<CommandSummary> commandSummaryTable;
+    @FXML
+    private TableColumn<CommandSummary, String> actionColumn;
+    @FXML
+    private TableColumn<CommandSummary, String> formatColumn;
+
+    private ObservableList<CommandSummary> commandSummaryList = FXCollections.observableArrayList();
+
     /**
      * Creates a new HelpWindow.
      *
@@ -35,6 +51,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
+        initializeCommandSummary();
     }
 
     /**
@@ -98,5 +115,50 @@ public class HelpWindow extends UiPart<Stage> {
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
+    }
+
+    /**
+     * Initializes the command summary table and wraps the text in the cells.
+     */
+    private void initializeCommandSummary() {
+        commandSummaryList.addAll(
+                new CommandSummary("Add", "add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX "
+                        + "ap/APPOINTMENT t/TAG\n add n/Evie Sage p/88888888 e/eviesage@example.com "
+                        + "a/Hickory Forest b/23 s/Female ap/11/11/2024 1100"),
+                new CommandSummary("Clear", "clear"),
+                new CommandSummary("Delete", "delete INDEX / delete NAME\ne.g., delete 3, delete Alex Yeoh"),
+                new CommandSummary("Edit", "edit John Doe n/Betsy Crower t/ ap/"),
+                new CommandSummary("Find", "find KEYWORD [MORE_KEYWORDS]\ne.g., find olive 87438"),
+                new CommandSummary("List", "list"),
+                new CommandSummary("Help", "help")
+        );
+
+        actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
+        formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
+        actionColumn.setResizable(false);
+        formatColumn.setResizable(false);
+
+        // Wrapping text for the format column
+        formatColumn.setCellFactory(tc -> {
+            TableCell<CommandSummary, String> cell = new TableCell<>() {
+                private final Text text = new Text();
+
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                        setGraphic(null);
+                    } else {
+                        text.setText(item);
+                        text.wrappingWidthProperty().bind(formatColumn.widthProperty());
+                        setGraphic(text);
+                    }
+                }
+            };
+            return cell;
+        });
+
+        commandSummaryTable.setItems(commandSummaryList);
     }
 }
