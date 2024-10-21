@@ -19,12 +19,15 @@ import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.PropertyList;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleBuyerDataUtil;
 import seedu.address.model.util.SampleMeetUpDataUtil;
+import seedu.address.model.util.SamplePropertyDataUtil;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -87,8 +90,11 @@ public class MainApp extends Application {
 
         Optional<ReadOnlyBuyerList> buyerListOptional;
         Optional<ReadOnlyMeetUpList> meetUpListOptional;
+        Optional<ReadOnlyPropertyList> propertyListOptional;
         ReadOnlyBuyerList initialData;
         ReadOnlyMeetUpList initialMeetUpList;
+        ReadOnlyPropertyList initialPropertyList;
+
         try {
             buyerListOptional = storage.readBuyerList();
             if (!buyerListOptional.isPresent()) {
@@ -110,7 +116,7 @@ public class MainApp extends Application {
             }
 
             initialMeetUpList = meetUpListOptional.orElseGet(SampleMeetUpDataUtil::getSampleMeetUpList);
-            logger.info("initiala list is" + initialMeetUpList);
+            logger.info("initial list is" + initialMeetUpList);
 
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getMeetUpListFilePath() + " could not be loaded."
@@ -118,7 +124,22 @@ public class MainApp extends Application {
             initialMeetUpList = new MeetUpList();
         }
 
-        return new ModelManager(initialData, userPrefs, initialMeetUpList);
+        try {
+            propertyListOptional = storage.readPropertyList();
+            if (!propertyListOptional.isPresent()) {
+                logger.info("Creating a new data file " + storage.getPropertyListFilePath()
+                        + " populated with a sample PropertyList.");
+            }
+
+            initialPropertyList = propertyListOptional.orElseGet(SamplePropertyDataUtil::getSamplePropertyList);
+
+        } catch (DataLoadingException e) {
+            logger.warning("Data file at " + storage.getPropertyListFilePath() + " could not be loaded."
+                    + " Will be starting with an empty PropertyList.");
+            initialPropertyList = new PropertyList();
+        }
+
+        return new ModelManager(initialData, userPrefs, initialMeetUpList, initialPropertyList);
     }
 
     private void initLogging(Config config) {
