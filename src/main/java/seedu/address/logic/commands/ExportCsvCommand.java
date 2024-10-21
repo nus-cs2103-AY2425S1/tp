@@ -21,6 +21,11 @@ public class ExportCsvCommand extends Command {
 
     private final String toFile;
 
+    /**
+     * Creates an ExportCsvCommand.
+     *
+     * @param fileName
+     */
     public ExportCsvCommand(String fileName) {
         requireNonNull(fileName);
         toFile = fileName;
