@@ -5,42 +5,49 @@
     "id": "P12345",
     "ward" : "A1",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   }, {
     "name" : "Benson Meier",
     "id":"P54321",
     "ward" : "A2",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   }, {
     "name" : "Carl Kurz",
     "id": "P73443",
     "ward" : "B3",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   }, {
     "name" : "Daniel Meier",
     "id": "P54786",
     "ward" : "C8",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   }, {
     "name" : "Elle Meyer",
     "id": "P27346",
     "ward" : "I5",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   }, {
     "name" : "Fiona Kunz",
     "id": "P07962",
     "ward" : "A1",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   }, {
     "name" : "George Best",
     "id": "P18277",
     "ward" : "B1",
     "diagnosis" : "Celiac Disease",
-    "medication" : "gluten-free diet"
+    "medication" : "gluten-free diet",
+    "notes" : ""
   } ]
 }

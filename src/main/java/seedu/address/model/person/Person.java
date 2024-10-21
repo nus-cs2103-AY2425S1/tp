@@ -18,6 +18,7 @@ public class Person {
     private final Diagnosis diagnosis;
     private final Medication medication;
     private final Appointment appointment;
+    private final Notes notes;
     /*
     private final Set<Tag> tags = new HashSet<>();
      */
@@ -25,13 +26,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis, Medication medication) {
+    public Person(Name name, Id id, Ward ward, Diagnosis diagnosis, Medication medication, Notes notes) {
         this.name = name;
         this.id = id;
         this.ward = ward;
         this.diagnosis = diagnosis;
         this.medication = medication;
         this.appointment = null;
+        this.notes = notes;
     }
 
     public Id getId() {
@@ -53,6 +55,10 @@ public class Person {
 
     public Medication getMedication() {
         return medication;
+    }
+
+    public Notes getNotes() {
+        return this.notes;
     }
 
     /*
@@ -116,6 +122,7 @@ public class Person {
                 .add("ward", ward)
                 .add("diagnosis", diagnosis)
                 .add("medication", medication)
+                .add("notes", notes)
                 .toString();
     }
 

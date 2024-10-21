@@ -4,12 +4,14 @@
     "id": "P23456",
     "ward" : "A1",
     "diagnosis" : "E. coli infection",
-    "medication" : "Ciprofloxacin (Cipro)"
+    "medication" : "Ciprofloxacin (Cipro)",
+    "notes" : ""
   }, {
     "name": "Alice Pauline",
     "id": "P12345",
     "ward" : "A1",
     "diagnosis" : "E. coli infection",
-    "medication" : "Ciprofloxacin (Cipro)"
+    "medication" : "Ciprofloxacin (Cipro)",
+    "notes" : ""
   } ]
 }

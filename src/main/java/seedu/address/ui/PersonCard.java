@@ -38,6 +38,9 @@ public class PersonCard extends UiPart<Region> {
     private Label diagnosis;
     @FXML
     private Label medication;
+    @FXML
+    private Label notes;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -51,6 +54,7 @@ public class PersonCard extends UiPart<Region> {
         ward.setText("Ward: " + person.getWard().value);
         diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
         medication.setText("Medication: " + person.getMedication().value);
+        notes.setText(person.getNotes().value);
         /*
         id.setText(displayedIndex + ". ");
         phone.setText(person.getPhone().value);
