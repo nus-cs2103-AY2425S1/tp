@@ -1,12 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -18,8 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.*;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
 /**
