@@ -36,6 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private PieChartWindow pieChartWindow;
 
+    private BarChartWindow barChartWindow;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -159,6 +161,15 @@ public class MainWindow extends UiPart<Stage> {
         pieChartWindow.show();
     }
 
+    /**
+     * Opens the bar chart window.
+     */
+    @FXML
+    public void handleBarChart() {
+        barChartWindow = new BarChartWindow();
+        barChartWindow.show();
+    }
+
 
 
 
@@ -205,6 +216,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPieChart()) {
                 handlePieChart();
+            }
+
+            if (commandResult.isShowBarChart()) {
+                handleBarChart();
             }
 
 
