@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.AppointmentBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the appointment book.
  */
-public class ClearPersonCommand extends ClearCommand {
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+public class ClearAppointmentCommand extends ClearCommand {
+    public static final String MESSAGE_SUCCESS = "Appointment has been cleared!";
 
     protected void clearEntity(Model model) {
-        model.setAddressBook(new AddressBook());
+        model.setAppointmentBook(new AppointmentBook());
     }
 
     /*
@@ -22,6 +22,6 @@ public class ClearPersonCommand extends ClearCommand {
 
     @Override
     public boolean equals(Object other) {
-        return other == this || (other instanceof ClearPersonCommand);
+        return other == this || (other instanceof ClearAppointmentCommand);
     }
 }

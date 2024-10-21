@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
+import seedu.address.logic.commands.ClearAppointmentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,7 +27,7 @@ public class ClearCommandParser implements Parser<ClearCommand> {
         case PERSON_ENTITY_STRING:
             return new ClearPersonCommand();
         case APPOINTMENT_ENTITY_STRING:
-            //TODO: Instantiate and return ClearAppointmentCommand
+            return new ClearAppointmentCommand();
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClearCommand.MESSAGE_USAGE));
