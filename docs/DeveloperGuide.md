@@ -216,7 +216,7 @@ The following activity diagram summarizes what happens when a user executes a `v
 The **Check Client** mechanism is facilitated by `CheckClientCommand` extending the `Command` family of classes, as elaborated in the Logic component of MATER. Additionally, it requires the following operations:
 
 * `CheckClientCommandParser#parse()` - Given the argument succeeding the `check-client` command, parses the appropriate index to `CheckClientCommand`.
-* `CheckClientCommand#execute()` - Given the list of Clients, identifies the indexed Client and toggles the "checked (in or out)" status of the Client's car.
+* `CheckClientCommand#execute()` - Given the list of Clients, identifies the indexed Client and toggles the "checked-in" status of the Client's car. A car is either 'checked-in' or 'checked-out'.
 
 Given below is an example usage scenario and details on how the **Check Client** mechanism behaves at each step.
 
@@ -226,17 +226,11 @@ Given below is an example usage scenario and details on how the **Check Client**
 
 **Step 3**: If the Client has a car associated, their car's "checked-in" status is toggled, and the success message indicating the action is displayed. If the Client does not have a car associated, an error message indicating there is **"No Car associated to Client to Check In"** is displayed.
 
-**Step 4**: The user may check-in/out the status of other clients by providing the relevant index of the client they wish to edit the status of.
-
-<box type="info" seamless>
-
-</box>
+**Step 4**: The user may toggle the "checked-in" the status of other clients by providing the relevant index of the client they wish to edit the status of.
 
 The following sequence diagram shows how a `check-client` operation goes through the `Logic` component:
 
 <puml src="diagrams/CheckClientSequenceDiagram.puml" alt="CheckClientSequenceDiagram" />
-
-
 
 The following activity diagram summarizes what happens when a user executes a `check-client` command:
 
@@ -250,7 +244,7 @@ The following activity diagram summarizes what happens when a user executes a `c
     * Pros: Easy to implement and understand. The success message clearly indicates whether a Client’s car has been checked in or out.
     * Cons: Does not allow for more detailed tracking or history of each check-in/out event for a Client's car.
 
-* **Alternative 2:** Records every check-in/out event with a timestamp and additional information about the user who performed the action.
+* **Alternative 2:** Records every check-in/out event with a timestamp.
     * Pros: Provides more detailed tracking and a history of all check-in/out events.
     * Cons: More complex to implement and may require additional UI elements to display the history of actions for each Client.
 
