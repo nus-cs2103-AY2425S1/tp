@@ -7,6 +7,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DateCommandParser" as DateCommandParser LOGIC_COLOR
 participant "d:DateCommand" as DateCommand LOGIC_COLOR
+participant "e:Person" as Person LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -27,7 +28,7 @@ activate DateCommandParser
 DateCommandParser --> AddressBookParser
 deactivate DateCommandParser
 
-AddressBookParser -> DateCommandParser : parse("1")
+AddressBookParser -> DateCommandParser : parse("1 d/31/10/2024")
 activate DateCommandParser
 
 create DateCommand
@@ -49,7 +50,14 @@ deactivate AddressBookParser
 LogicManager -> DateCommand : execute(m)
 activate DateCommand
 
-DateCommand -> Model : deletePerson(1)
+create Person
+DateCommand -> Person
+activate Person
+
+Person --> DateCommand
+deactivate Person
+
+DateCommand -> Model : setPerson(1, e)
 activate Model
 
 Model --> DateCommand
