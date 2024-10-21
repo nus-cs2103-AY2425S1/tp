@@ -27,6 +27,12 @@ import keycontacts.logic.parser.exceptions.ParseException;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    // TODO Abstract out the binder into its own class
+    private static final double ARC_RADIUS_X = 8.0;
+    private static final double ARC_RADIUS_Y = 6.0;
+    private static final double ARC_LENGTH = 260.0;
+    private static final double ARC_START_ANGLE = -40.0;
+
     private static final String FXML = "Notebook.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -66,11 +72,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    private static final double ARC_RADIUS_X = 8.0;
-    private static final double ARC_RADIUS_Y = 6.0;
-    private static final double ARC_LENGTH = 260.0;
-    private static final double ARC_START_ANGLE = -40.0;
-
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -100,13 +101,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateArcs(double height) {
-        // Clear previous arcs
         loopParent.getChildren().clear();
 
-        // Dynamically decide how many arcs to add based on the height (as an example)
-        int numArcs = (int) (height / (ARC_RADIUS_Y * 2 + loopParent.getSpacing())) - 5;  // You can change this logic
+        int numArcs = (int) (height / (ARC_RADIUS_Y * 2 + loopParent.getSpacing())) - 5;
 
-        // Add the arcs dynamically
         addArcs(numArcs);
     }
 
