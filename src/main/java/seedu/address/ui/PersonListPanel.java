@@ -68,11 +68,11 @@ public class PersonListPanel extends UiPart<Region> {
      */
     private void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {
-            case ENTER:
-                openPersonDetailsWindow();
-                break;
-            default:
-                break;
+        case ENTER:
+            openPersonDetailsWindow();
+            break;
+        default:
+            break;
         }
     }
 
