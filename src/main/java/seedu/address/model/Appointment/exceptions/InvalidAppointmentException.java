@@ -1,5 +1,7 @@
 package seedu.address.model.appointment.exceptions;
 
+import seedu.address.model.appointment.Appointment;
+
 /**
  * Signals that an operation is invalid due to the appointment timing being
  * invalid.
@@ -7,7 +9,7 @@ package seedu.address.model.appointment.exceptions;
 public class InvalidAppointmentException extends RuntimeException {
 
     public InvalidAppointmentException() {
-        super("Invalid Appointment: Start time must be before end time");
+        super(Appointment.INVALID_APPOINTMENT_ERROR);
     }
 
 }

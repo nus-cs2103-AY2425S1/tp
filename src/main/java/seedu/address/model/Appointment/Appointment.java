@@ -11,6 +11,8 @@ import seedu.address.model.person.Nric;
  */
 public class Appointment {
 
+    public static final String INVALID_APPOINTMENT_ERROR = "End time cannot be before start time";
+
     private final String name;
     private final Nric nric;
 
