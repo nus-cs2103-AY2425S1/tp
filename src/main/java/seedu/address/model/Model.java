@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -90,4 +92,10 @@ public interface Model {
      * Returns a list of persons with the manager tag.
      */
     List<Person> getManagers();
+
+    /**
+     * Retrieves a Person by their name.
+     * Returns an Optional containing the Person if found, or an empty Optional if not found.
+     */
+    Optional<Person> getPersonByName(Name name);
 }

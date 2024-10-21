@@ -13,7 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import java.util.Optional;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -153,6 +155,13 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public Optional<Person> getPersonByName(Name name) {
+        return getAddressBook().getPersonList().stream()
+                .filter(person -> person.getName().equals(name))
+                .findFirst();
     }
 
 }
