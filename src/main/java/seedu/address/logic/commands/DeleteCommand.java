@@ -29,7 +29,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PERSON_CANCELLED = "Delete action cancelled.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
     public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
-    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to delete %1$s?";
+    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to delete %1$s?\n"
+            + "This action is IRREVERSIBLE.";
     private final Name targetName;
     private final Index targetIndex;
 
