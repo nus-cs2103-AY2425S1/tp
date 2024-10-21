@@ -17,16 +17,11 @@ import seedu.address.model.person.Person;
  */
 public class ContactMap {
     private Map<Role, Person> map;
-    private Person husband; // Add husband
-    private Person wife;    // Add wife
 
     /**
-     * Creates an empty ContactList and assigns husband and wife.
+     * Creates an empty ContactMap.
      */
-    public ContactMap(Person husband, Person wife) {
-        requireAllNonNull(husband, wife);
-        this.husband = husband;
-        this.wife = wife;
+    public ContactMap() {
         this.map = new HashMap<>();
     }
 
@@ -41,18 +36,16 @@ public class ContactMap {
     }
 
     /**
-     * Adds a role and person to the map, preventing husband and wife from taking other roles.
+     * Adds a role and person to the map.
      *
      * @param role role to be added.
      * @param person person with the role.
+     * @throws IllegalArgumentException if the role is already assigned.
      */
     public void addToMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (this.hasRole(role)) {
             throw new IllegalArgumentException("This role is already assigned.");
-        }
-        if (person.equals(husband) || person.equals(wife)) {
-            throw new IllegalArgumentException("This person is a spouse and cannot have another role.");
         }
         map.put(role, person);
     }
@@ -105,14 +98,11 @@ public class ContactMap {
         }
 
         ContactMap otherContactMap = (ContactMap) other;
-        return map.equals(otherContactMap.map)
-                && husband.equals(otherContactMap.husband)
-                && wife.equals(otherContactMap.wife);
+        return map.equals(otherContactMap.map);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(map, husband, wife);
+        return Objects.hash(map);
     }
 }
-
