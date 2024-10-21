@@ -22,7 +22,8 @@ public class DeleteClaimCommandParserTest {
     private final DeleteClaimCommandParser parser = new DeleteClaimCommandParser();
 
     /**
-     * Tests if {@code DeleteClaimCommandParser} correctly parses valid user input and returns a {@code DeleteClaimCommand}.
+     * Tests if {@code DeleteClaimCommandParser} correctly parses valid user input
+     * Returns a {@code DeleteClaimCommand}.
      */
     @Test
     public void parse_validArgs_returnsDeleteClaimCommand() {
@@ -48,27 +49,29 @@ public class DeleteClaimCommandParserTest {
     }
 
     /**
-     * Tests if {@code DeleteClaimCommandParser} throws a {@code ParseException} when the claim ID is missing from user input as this is not covered in {@code ParserUtilTest}
+     * Tests if {@code DeleteClaimCommandParser}
+     * throws a {@code ParseException} when the claim ID is missing from user input
      */
     @Test
     public void parse_emptyClaimId_throwsParseException() {
         // Test empty claim ID
         String userInputEmptyClaimId = INDEX_FOURTH_CLIENT.getOneBased() + " "
                 + PREFIX_INSURANCE_ID + VALID_INSURANCE_ID + " "
-                + PREFIX_CLAIM_ID;  // Claim ID left empty
+                + PREFIX_CLAIM_ID; // Claim ID left empty
 
         assertParseFailure(parser, userInputEmptyClaimId, Claim.INVALID_CLAIM_ID);
     }
 
     /**
-     * Tests if {@code DeleteClaimCommandParser} throws a {@code ParseException} when the insurance ID is missing from user input as this is not covered in {@code ParserUtilTest}
+     * Tests if {@code DeleteClaimCommandParser}
+     * throws a {@code ParseException} when the insurance ID is missing from user input
      */
     @Test
     public void parse_emptyInsuranceId_throwsParseException() {
         // Test empty insurance ID
         String userInputEmptyInsuranceId = INDEX_FOURTH_CLIENT.getOneBased() + " "
                 + PREFIX_INSURANCE_ID + " "
-                + PREFIX_CLAIM_ID + VALID_CLAIM_ID;  // Insurance ID left empty
+                + PREFIX_CLAIM_ID + VALID_CLAIM_ID; // Insurance ID left empty
 
         assertParseFailure(parser, userInputEmptyInsuranceId, ParserUtil.MESSAGE_UNPARSABLE_INSURANCE_ID);
     }
