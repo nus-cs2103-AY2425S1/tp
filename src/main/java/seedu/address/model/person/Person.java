@@ -153,4 +153,4 @@ public class Person {
     public boolean hasEmptyModuleRoleMap() {
         return this.moduleRoleMap.getRoles().isEmpty();
     }
- }
+}
