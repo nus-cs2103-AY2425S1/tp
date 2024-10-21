@@ -61,7 +61,8 @@ public class ApplyCommand extends Command {
         editedApplications.add(toAdd);
 
         Company editedCompany = new Company(companyToEdit.getName(), companyToEdit.getPhone(), companyToEdit.getEmail(),
-                companyToEdit.getAddress(), companyToEdit.getTags(), new Status("APPLIED"), editedApplications);
+                companyToEdit.getAddress(), companyToEdit.getTags(), new Status("APPLIED"),
+                editedApplications, companyToEdit.getIsFavourite());
         model.setCompany(companyToEdit, editedCompany);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

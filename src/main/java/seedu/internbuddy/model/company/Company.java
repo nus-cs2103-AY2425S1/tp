@@ -29,6 +29,23 @@ public class Company {
     private final Status status;
     private final List<Application> applications;
     private final Set<Tag> tags = new HashSet<>();
+    private final Boolean isFavourite;
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Company(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Status status,
+               List<Application> applications, Boolean isFavourite) {
+        requireAllNonNull(name, phone, email, address, tags, status, isFavourite);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.status = status;
+        this.applications = applications;
+        this.isFavourite = isFavourite;
+    }
 
     /**
      * Every field must be present and not null.
@@ -43,6 +60,7 @@ public class Company {
         this.tags.addAll(tags);
         this.status = status;
         this.applications = applications;
+        this.isFavourite = false;
     }
 
     public Name getName() {
@@ -63,6 +81,10 @@ public class Company {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Boolean getIsFavourite() {
+        return isFavourite;
     }
 
     /**
@@ -112,7 +134,8 @@ public class Company {
                 && address.equals(otherCompany.address)
                 && status.equals(otherCompany.status)
                 && tags.equals(otherCompany.tags)
-                && applications.equals(otherCompany.applications);
+                && applications.equals(otherCompany.applications)
+                && isFavourite.equals(otherCompany.isFavourite);
     }
 
     @Override

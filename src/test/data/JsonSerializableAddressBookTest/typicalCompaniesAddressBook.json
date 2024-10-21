@@ -7,7 +7,8 @@
     "address": "1 Apple Park Way, Cupertino, CA",
     "status": "INTERESTED",
     "tags": [],
-    "applications": []
+    "applications": [],
+    "isFavourite": false
   }, {
     "name": "Amazon",
     "phone": "2062661000",
@@ -23,7 +24,8 @@
       "name": "Data Science Intern",
       "description": "Requires: Python",
       "status": "REJECTED"
-    } ]
+    } ],
+    "isFavourite": false
   }, {
     "name": "Facebook",
     "phone": "6505434800",
@@ -31,7 +33,8 @@
     "address": "1 Hacker Way, Menlo Park, CA",
     "status": "INTERESTED",
     "tags": [],
-    "applications": []
+    "applications": [],
+    "isFavourite": false
   }, {
     "name": "Tesla",
     "phone": "6506815000",
@@ -39,7 +42,8 @@
     "address": "3500 Deer Creek Road, Palo Alto, CA",
     "status": "INTERESTED",
     "tags": [],
-    "applications": []
+    "applications": [],
+    "isFavourite": false
   }, {
     "name": "Netflix",
     "phone": "4085403700",
@@ -47,6 +51,7 @@
     "address": "100 Winchester Circle, Los Gatos, CA",
     "status": "INTERESTED",
     "tags": [],
-    "applications": []
+    "applications": [],
+    "isFavourite": false
   } ]
 }
