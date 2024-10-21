@@ -20,9 +20,12 @@ public class AddBuyerCommand extends AddClientCommand {
      * Describes the format and usage of the addbuyer command.
      * Includes the command word and expected parameters inherited from {@link AddClientCommand#CLIENT_PARAMETERS}.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a buyer to the address book. "
-            + "Parameters: "
-            + AddClientCommand.CLIENT_PARAMETERS;
+    public static final String MESSAGE_USAGE = String.format(
+            "%s: Adds a buyer to the address book.\nParameters: %s\n%s",
+            COMMAND_WORD,
+            AddClientCommand.CLIENT_PARAMETERS,
+            AddClientCommand.CLIENT_RESTRICTIONS
+    );
 
     /** Success message for adding a new buyer, with a placeholder for the buyer's details. */
     public static final String MESSAGE_SUCCESS_BUYER = "New buyer added: %1$s";

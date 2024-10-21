@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BEDOK;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
+import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
@@ -33,7 +34,7 @@ import seedu.address.model.property.Unit;
 public class DeletePropertyCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
-            getTypicalClientBook());
+            getTypicalClientBook(), getTypicalMeetingBook());
 
     @Test
     public void execute_validPostalCodeAndUnitNumber_success() {
@@ -51,7 +52,7 @@ public class DeletePropertyCommandTest {
                 Messages.format(propertyToDelete));
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-                getTypicalPropertyBook(), getTypicalClientBook());
+                getTypicalPropertyBook(), getTypicalClientBook(), getTypicalMeetingBook());
 
         assertCommandSuccess(deletePropertyCommand, model, expectedMessage, expectedModel);
     }

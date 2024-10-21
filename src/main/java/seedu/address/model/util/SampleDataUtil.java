@@ -6,20 +6,28 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ClientBook;
+import seedu.address.model.MeetingBook;
 import seedu.address.model.PropertyBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.ReadOnlyMeetingBook;
 import seedu.address.model.ReadOnlyPropertyBook;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Seller;
+import seedu.address.model.meeting.Meeting;
+import seedu.address.model.meeting.MeetingDate;
+import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.property.Ask;
+import seedu.address.model.property.Bid;
 import seedu.address.model.property.PostalCode;
 import seedu.address.model.property.Property;
+import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.model.tag.Tag;
 
@@ -93,8 +101,14 @@ public class SampleDataUtil {
 
     public static Property[] getSampleProperty() {
         return new Property[] {
-            new Property(new PostalCode("123456"), new Unit("11-11")),
-            new Property(new PostalCode("123457"), new Unit("00-00")),
+            new Property(new PostalCode("123456"), new Unit("11-11"), new Type("HDB"),
+                    new Ask("50000"), new Bid("10000")),
+            new Property(new PostalCode("123457"), new Unit("00-00"), new Type("landed"),
+                    new Ask("50000"), new Bid("10000")),
+            new Property(new PostalCode("776688"), new Unit("01-00"), new Type("LANDED"),
+                    new Ask("50000"), new Bid("10000")),
+            new Property(new PostalCode("567333"), new Unit("01-00"), new Type("CONDO"),
+                    new Ask("50000"), new Bid("10000")),
         };
     }
 
@@ -104,5 +118,21 @@ public class SampleDataUtil {
             sampleAb.addProperty(sampleProperty);
         }
         return sampleAb;
+    }
+
+    public static Meeting[] getSampleMeetings() {
+        return new Meeting[] {
+            new Meeting(new MeetingTitle("Meeting 1"), new MeetingDate("01-01-2024")),
+            new Meeting(new MeetingTitle("Meeting 2"), new MeetingDate("02-01-2024")),
+            new Meeting(new MeetingTitle("Meeting 3"), new MeetingDate("03-01-2024")),
+        };
+    }
+
+    public static ReadOnlyMeetingBook getSampleMeetingBook() {
+        MeetingBook sampleMb = new MeetingBook();
+        for (Meeting sampleMeeting : getSampleMeetings()) {
+            sampleMb.addMeeting(sampleMeeting);
+        }
+        return sampleMb;
     }
 }

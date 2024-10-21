@@ -1,0 +1,16 @@
+{
+  "meetings": [
+    {
+      "meetingTitle": "Valid Meeting",
+      "meetingDate": "15-10-2024"
+    },
+    {
+      "meetingTitle": "Invalid Meeting Date",
+      "meetingDate": "06/02/24"
+    },
+    {
+      "meetingTitle": "Invalid Meeting Title &@",
+      "meetingDate": "15-10-2024"
+    }
+  ]
+}

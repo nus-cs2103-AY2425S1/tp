@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
+import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
@@ -22,9 +23,9 @@ public class ListBuyersCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
-                getTypicalClientBook());
+                getTypicalClientBook(), getTypicalMeetingBook());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
     }
 
     @Test

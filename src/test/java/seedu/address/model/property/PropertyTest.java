@@ -4,9 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_BEDOK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BEDOK;
 import static seedu.address.testutil.TypicalProperty.ADMIRALTY;
 import static seedu.address.testutil.TypicalProperty.BEDOK;
+import static seedu.address.testutil.TypicalProperty.CLEMENTI;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,12 @@ public class PropertyTest {
         // null -> returns false
         assertFalse(ADMIRALTY.isSameProperty(null));
 
+        // same object -> returns true
+        assertTrue(CLEMENTI.isSameProperty(CLEMENTI));
+
+        // null -> returns false
+        assertFalse(CLEMENTI.isSameProperty(null));
+
         // same name, all other attributes different -> returns false
         Property editedAdmiralty = new PropertyBuilder(ADMIRALTY).withPostalCode(VALID_POSTALCODE_BEDOK)
                 .withUnit(VALID_UNIT_BEDOK).build();
@@ -34,6 +42,22 @@ public class PropertyTest {
         // different unit -> returns false
         editedAdmiralty = new PropertyBuilder(ADMIRALTY).withUnit(VALID_UNIT_BEDOK).build();
         assertFalse(ADMIRALTY.isSameProperty(editedAdmiralty));
+
+        // different type && same PostalCode -> returns true
+        editedAdmiralty = new PropertyBuilder(ADMIRALTY).withType(VALID_TYPE_HDB).build();
+        assertTrue(ADMIRALTY.isSameProperty(editedAdmiralty));
+
+        // different type && different PostalCode -> returns false
+        editedAdmiralty = new PropertyBuilder(ADMIRALTY).withPostalCode(VALID_POSTALCODE_BEDOK).build();
+        assertFalse(ADMIRALTY.isSameProperty(editedAdmiralty));
+
+        //same type(not landed) && same PostalCode && different unit -> returns false
+        editedAdmiralty = new PropertyBuilder(ADMIRALTY).withUnit(VALID_UNIT_BEDOK).build();
+        assertFalse(ADMIRALTY.isSameProperty(editedAdmiralty));
+
+        //same type && same PostalCode && different unit -> returns false
+        editedAdmiralty = new PropertyBuilder(CLEMENTI).withUnit(VALID_UNIT_BEDOK).build();
+        assertTrue(CLEMENTI.isSameProperty(editedAdmiralty));
     }
 
     @Test
@@ -66,7 +90,8 @@ public class PropertyTest {
     @Test
     public void toStringMethod() {
         String expected = Property.class.getCanonicalName() + "{postalCode=" + ADMIRALTY.getPostalCode()
-                + ", unit=" + ADMIRALTY.getUnit() + "}";
+                + ", unit=" + ADMIRALTY.getUnit() + ", type=" + ADMIRALTY.getType()
+                + ", ask=" + ADMIRALTY.getAsk() + ", bid=" + ADMIRALTY.getBid() + "}";
         assertEquals(expected, ADMIRALTY.toString());
     }
 }

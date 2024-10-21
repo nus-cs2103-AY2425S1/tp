@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
+import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalProperty.getTypicalPropertyBook;
 
@@ -22,7 +23,7 @@ import seedu.address.model.client.Name;
 
 public class FilterClientCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalPropertyBook(),
-            getTypicalClientBook());
+            getTypicalClientBook(), getTypicalMeetingBook());
 
     @Test
     public void execute_matchingName_filterSuccessful() {
@@ -31,7 +32,7 @@ public class FilterClientCommandTest {
         FilterClientCommand command = new FilterClientCommand(new Name(namePrefix));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredClientList(client ->
                 client.getName().toString().matches("(?i)^" + namePrefix + ".*"));
 
@@ -46,7 +47,7 @@ public class FilterClientCommandTest {
         FilterClientCommand command = new FilterClientCommand(new Name(namePrefix));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), model.getPropertyBook(),
-                model.getClientBook());
+                model.getClientBook(), model.getMeetingBook());
         expectedModel.updateFilteredClientList(client ->
                 client.getName().toString().matches("(?i)^" + namePrefix + ".*"));
 
