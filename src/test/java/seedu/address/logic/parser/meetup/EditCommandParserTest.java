@@ -29,7 +29,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
 
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -79,7 +78,6 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_MEETUP_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-//        assertParseFailure(parser, "1" + INVALID_MEETUP_INFO_DESC, Info.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC, From.MESSAGE_CONSTRAINTS); // invalid from
         assertParseFailure(parser, "1" + INVALID_MEETUP_FROM_DESC_TWO, From.MESSAGE_CONSTRAINTS);
         assertParseFailure(parser, "1" + INVALID_MEETUP_TO_DESC, To.MESSAGE_CONSTRAINTS); // invalid to
@@ -89,10 +87,6 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_MEETUP_NAME_DESC
                 + VALID_MEETUP_INFO_PITCH + VALID_MEETUP_FROM_PITCH
                 + VALID_MEETUP_TO_PITCH, Name.MESSAGE_CONSTRAINTS);
-
-//        // multiple invalid values, but only the first invalid value is captured
-//        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-//                Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test
