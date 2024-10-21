@@ -16,4 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_BUYING_PRICE = new Prefix("bp/");
     public static final Prefix PREFIX_POSTAL_CODE = new Prefix("pc/");
     public static final Prefix PREFIX_UNIT_NUMBER = new Prefix("un/");
+    public static final Prefix PREFIX_FIELD = new Prefix("f/");
+    public static final Prefix PREFIX_ORDER = new Prefix("o/");
 }
