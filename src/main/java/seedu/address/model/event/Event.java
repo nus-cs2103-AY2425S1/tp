@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 
 
 /**
@@ -34,10 +33,9 @@ public class Event {
         this.eventName = eventName;
         this.date = date;
 
-        // buffer data to show UI changes, since adding attendees are not yet implemented.
-        attendees.addAll(Set.of(SampleDataUtil.getSamplePersons()));
         this.attendees.addAll(attendees);
     }
+    
 
     public String getEventName() {
         return eventName;

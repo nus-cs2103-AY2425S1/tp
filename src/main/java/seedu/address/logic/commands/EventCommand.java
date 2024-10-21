@@ -1,14 +1,23 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
+
+
 
 /**
  * Adds an Event to the address book.
@@ -29,19 +38,30 @@ public class EventCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
 
-    private final Event toAdd;
+    private final String eventName;
+    private final LocalDate eventDate;
+    private final Set<Index> attendeeIndexes;
 
     /**
      * Creates an EventCommand to add the specified {@code Event}
      */
-    public EventCommand(Event event) {
-        requireNonNull(event);
-        toAdd = event;
+    public EventCommand(String eventName, LocalDate eventDate, Set<Index> attendeeIndexes) {
+        requireAllNonNull(eventName, eventDate, attendeeIndexes);
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.attendeeIndexes = attendeeIndexes;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Set<Person> attendees = new HashSet<>();
+        for (Index index : this.attendeeIndexes) {
+            Person attendee = model.getAddressBook().getPersonList().get(index.getZeroBased());
+            attendees.add(attendee);
+        }
+
+        Event toAdd = new Event(eventName, eventDate, attendees);
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -63,13 +83,17 @@ public class EventCommand extends Command {
         }
 
         EventCommand otherEventCommand = (EventCommand) other;
-        return toAdd.equals(otherEventCommand.toAdd);
+        return eventName.equals(otherEventCommand.eventName)
+                && eventDate.equals(otherEventCommand.eventDate)
+                && attendeeIndexes.equals(otherEventCommand.attendeeIndexes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("eventName", eventName)
+                .add("eventDate", eventDate)
+                .add("attendeeIndexes", attendeeIndexes)
                 .toString();
     }
 }
