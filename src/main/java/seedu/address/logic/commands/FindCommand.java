@@ -25,17 +25,15 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or modules contain "
-            + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds persons by their names, module-role pairs"
+            + "(or both), matching any (combination) of the specified keywords (case-insensitive) "
+            + "and displays them as a list with index numbers.\n"
             + "Parameters: "
-            + PREFIX_NAME + "KEYWORD ["
-            + PREFIX_NAME + "MORE_KEYWORDS]..."
-            + PREFIX_MODULE + "KEYWORD ["
-            + PREFIX_MODULE + "MORE_KEYWORDS]...\n"
+            + "(" + PREFIX_NAME + "KEYWORD | " + PREFIX_MODULE + "KEYWORD)+\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "alice "
             + PREFIX_NAME + "bob "
-            + PREFIX_MODULE + "CS1101S"
+            + PREFIX_MODULE + "CS1101S "
             + PREFIX_MODULE + "CS2030S";
 
     private final List<Predicate<Person>> predicates;
