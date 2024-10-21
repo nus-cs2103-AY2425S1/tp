@@ -2,6 +2,7 @@ package seedu.address.logic.parser.meetup;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_FROM_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_INFO_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETUP_TO_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEETUP_FROM_DESC_NETWORKING;
@@ -33,6 +34,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.meetup.AddCommand;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.meetup.From;
+import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.To;
 import seedu.address.testutil.meetup.MeetUpBuilder;
@@ -84,6 +86,10 @@ public class AddCommandParserTest {
         assertParseFailure(parser, INVALID_MEETUP_NAME_DESC + validExpectedMeetUpString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
+        // invalid info
+        assertParseFailure(parser, INVALID_MEETUP_INFO_DESC + validExpectedMeetUpString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INFO));
+
         // invalid from
         assertParseFailure(parser, INVALID_MEETUP_FROM_DESC + validExpectedMeetUpString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FROM));
@@ -98,11 +104,15 @@ public class AddCommandParserTest {
         assertParseFailure(parser, validExpectedMeetUpString + INVALID_MEETUP_NAME_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
-        // invalid phone
+        // invalid from
         assertParseFailure(parser, validExpectedMeetUpString + INVALID_MEETUP_FROM_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_FROM));
 
-        // invalid budget
+        // invalid info
+        assertParseFailure(parser, validExpectedMeetUpString + INVALID_MEETUP_INFO_DESC,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_INFO));
+
+        // invalid to
         assertParseFailure(parser, validExpectedMeetUpString + INVALID_MEETUP_TO_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_TO));
     }
@@ -138,6 +148,10 @@ public class AddCommandParserTest {
         // invalid name
         assertParseFailure(parser, INVALID_MEETUP_NAME_DESC + MEETUP_INFO_DESC_PITCH
                 + MEETUP_FROM_DESC_PITCH + MEETUP_TO_DESC_PITCH, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid info
+        assertParseFailure(parser, MEETUP_NAME_DESC_PITCH + INVALID_MEETUP_INFO_DESC
+                + MEETUP_FROM_DESC_PITCH + MEETUP_TO_DESC_PITCH, Info.MESSAGE_CONSTRAINTS);
 
         // invalid from
         assertParseFailure(parser, MEETUP_NAME_DESC_PITCH + MEETUP_INFO_DESC_PITCH
