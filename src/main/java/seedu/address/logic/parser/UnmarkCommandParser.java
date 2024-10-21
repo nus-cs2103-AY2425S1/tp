@@ -23,8 +23,13 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
         Index index;
         Tutorial tutorial;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String indexStr = argMultimap.getPreamble();
             tutorial = new Tutorial(argMultimap.getValue(PREFIX_TUTORIAL).orElse(""));
+            if (indexStr.equals(ParserUtil.WILDCARD)) {
+                return new UnmarkCommand(true, tutorial);
+            } else {
+                index = ParserUtil.parseIndex(indexStr);
+            }
         } catch (ParseException ive) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     UnmarkCommand.MESSAGE_USAGE), ive);

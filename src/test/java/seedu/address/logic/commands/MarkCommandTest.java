@@ -71,7 +71,7 @@ public class MarkCommandTest {
             markCommand.execute(model);
         } catch (CommandException e) {
             assertCommandFailure(markCommand, model,
-                    String.format(MarkCommand.MESSAGE_MARK_UNNECESSARY,
+                    String.format(Messages.MESSAGE_MARK_UNNECESSARY,
                             Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
                             new Tutorial("1").tutorial));
         }
@@ -113,7 +113,7 @@ public class MarkCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         String expectedMessage = String.join("\n",
                 model.getFilteredPersonList().stream()
-                        .map(personToEdit -> String.format(MarkCommand.MESSAGE_MARK_SUCCESS,
+                        .map(personToEdit -> String.format(Messages.MESSAGE_MARK_SUCCESS,
                                 Messages.format(personToEdit), tutorialToBeAdded.tutorial)).toArray(String[]::new));
         Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(markCommand, typicalModel, expectedMessage, expectedModel);
@@ -148,7 +148,7 @@ public class MarkCommandTest {
 
         // Check model is updated with new person attribute
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        String expectedMessage = String.format(MarkCommand.MESSAGE_MARK_SUCCESS, Messages.format(editedPerson),
+        String expectedMessage = String.format(Messages.MESSAGE_MARK_SUCCESS, Messages.format(editedPerson),
                 tutorialToBeAdded.tutorial);
         Model typicalModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         assertCommandSuccess(markCommand, typicalModel, expectedMessage, expectedModel);

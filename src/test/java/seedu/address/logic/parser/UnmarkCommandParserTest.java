@@ -45,8 +45,7 @@ public class UnmarkCommandParserTest {
                 expectedMessage);
 
         // missing both
-        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                UnmarkCommand.MESSAGE_USAGE);
+        expectedMessage = Tutorial.MESSAGE_CONSTRAINTS;
         assertParseFailure(parser, "", expectedMessage);
     }
 }

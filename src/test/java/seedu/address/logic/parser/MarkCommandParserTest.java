@@ -65,8 +65,7 @@ public class MarkCommandParserTest {
                 expectedMessage);
 
         // missing both
-        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MarkCommand.MESSAGE_USAGE);
+        expectedMessage = Tutorial.MESSAGE_CONSTRAINTS;
         assertParseFailure(parser, "", expectedMessage);
     }
 }
