@@ -60,8 +60,7 @@ public class RemarkCommand extends Command {
         }
 
         Student studentToAddRemark = lastShownList.get(studentIndex.getZeroBased());
-        Student updatedStudent = new Student(studentToAddRemark);
-        updatedStudent.setRemark(remark);
+        Student updatedStudent = new Student(studentToAddRemark, remark);
 
         model.setStudent(studentToAddRemark, updatedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

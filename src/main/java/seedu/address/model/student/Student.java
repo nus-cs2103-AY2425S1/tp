@@ -27,30 +27,32 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private String remark = "";
+    private final String remark;
     //AssignmentList initially null
     private List<Assignment> assignmentList = new ArrayList<Assignment>();
 
     /**
      * Every field except assignmentList must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, String remark) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
+        this.remark = remark;
     }
     /**
      * Creates a Student object with an AssignmentList
      */
-    public Student(Name name, Phone phone, Email email, Set<Tag> tags, List<Assignment> assignmentList) {
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags, List<Assignment> assignmentList, String remark) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
         this.assignmentList = assignmentList;
+        this.remark = remark;
     }
 
     /**
@@ -66,6 +68,17 @@ public class Student {
         this.tags.addAll(studentToCopy.getTags());
         this.assignmentList = studentToCopy.getAssignmentList();
         this.remark = studentToCopy.getRemark();
+    }
+
+    public Student(Student studentToCopy, String remark) {
+        requireAllNonNull(studentToCopy.getName(), studentToCopy.getPhone(), studentToCopy.getEmail(),
+                studentToCopy.getTags());
+        this.name = studentToCopy.getName();
+        this.phone = studentToCopy.getPhone();
+        this.email = studentToCopy.getEmail();
+        this.tags.addAll(studentToCopy.getTags());
+        this.assignmentList = studentToCopy.getAssignmentList();
+        this.remark = remark;
     }
 
     public Name getName() {
@@ -170,7 +183,7 @@ public class Student {
         Objects.requireNonNull(assignmentToAdd);
         List<Assignment> newAssignmentlist = new ArrayList<Assignment>(assignmentList);
         newAssignmentlist.add(assignmentToAdd);
-        return new Student(this.name, this.phone, this.email, this.tags, newAssignmentlist);
+        return new Student(this.name, this.phone, this.email, this.tags, newAssignmentlist, this.remark);
     }
     /**
      * Deletes the Assignment at {@code index} in the student's assignmentList
@@ -182,7 +195,4 @@ public class Student {
         assignmentList.remove(index - 1);
     }
 
-    public void setRemark(String remarkToAdd) {
-        this.remark = remarkToAdd;
-    }
 }

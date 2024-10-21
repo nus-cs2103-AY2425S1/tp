@@ -38,7 +38,8 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email,
                               @JsonProperty("tags") List<JsonAdaptedTag> tags,
-                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments) {
+                              @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
+                              @JsonProperty("remark") String remark) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,7 +49,7 @@ class JsonAdaptedStudent {
         if (assignments != null) {
             this.assignments.addAll(assignments);
         }
-        this.remark = "";
+        this.remark = remark;
     }
 
     /**
@@ -103,8 +104,7 @@ class JsonAdaptedStudent {
         }
         final Email modelEmail = new Email(email);
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        Student student = new Student(modelName, modelPhone, modelEmail, modelTags);
-        student.setRemark(remark);
+        Student student = new Student(modelName, modelPhone, modelEmail, modelTags, remark);
 
 
         // Deserialize and associate assignments with the student
