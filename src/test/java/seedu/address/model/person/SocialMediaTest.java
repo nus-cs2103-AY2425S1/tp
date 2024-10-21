@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -54,5 +55,15 @@ public class SocialMediaTest {
         // different values -> returns false
         assertFalse(socialMedia.equals(new SocialMedia("user", SocialMedia.Platform.FACEBOOK)));
         assertFalse(socialMedia.equals(new SocialMedia("username", SocialMedia.Platform.CAROUSELL)));
+    }
+
+    @Test
+    public void toString_Success() {
+        assertEquals("[ig-username]",
+                new SocialMedia("username", SocialMedia.Platform.INSTAGRAM).toString());
+        assertEquals("[fb-username]",
+                new SocialMedia("username", SocialMedia.Platform.FACEBOOK).toString());
+        assertEquals("[cs-username]",
+                new SocialMedia("username", SocialMedia.Platform.CAROUSELL).toString());
     }
 }

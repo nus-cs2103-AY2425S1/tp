@@ -38,18 +38,15 @@ public class SocialMediaCommandParser implements Parser<SocialMediaCommand> {
         String handle = " ";
         SocialMedia.Platform platform = null;
         if (argMultimap.getValue(PREFIX_IG).isPresent()) {
-            handle = argMultimap.getValue(PREFIX_IG).orElseThrow(() -> new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE)));
+            handle = argMultimap.getValue(PREFIX_IG).get();
             platform = INSTAGRAM;
         }
         if (argMultimap.getValue(PREFIX_FB).isPresent()) {
-            handle = argMultimap.getValue(PREFIX_FB).orElseThrow(() -> new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE)));
+            handle = argMultimap.getValue(PREFIX_FB).get();
             platform = FACEBOOK;
         }
         if (argMultimap.getValue(PREFIX_CS).isPresent()) {
-            handle = argMultimap.getValue(PREFIX_CS).orElseThrow(() -> new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE)));
+            handle = argMultimap.getValue(PREFIX_CS).get();
             platform = CAROUSELL;
         } else if (!argMultimap.getValue(PREFIX_IG).isPresent() && !argMultimap.getValue(PREFIX_FB).isPresent()
                 && !argMultimap.getValue(PREFIX_CS).isPresent()) {

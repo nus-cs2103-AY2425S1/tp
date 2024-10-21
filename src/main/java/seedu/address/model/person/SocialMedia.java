@@ -60,11 +60,6 @@ public class SocialMedia {
         return handle.equals(otherSocialMedia.handle) && platform.equals(otherSocialMedia.platform);
     }
 
-    @Override
-    public int hashCode() {
-        return handle.hashCode();
-    }
-
     /**
      * Format state as text for viewing.
      */
