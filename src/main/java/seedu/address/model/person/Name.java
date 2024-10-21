@@ -63,5 +63,4 @@ public class Name {
     public int hashCode() {
         return fullName.hashCode();
     }
-
 }
