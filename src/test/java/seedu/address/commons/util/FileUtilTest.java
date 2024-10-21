@@ -36,7 +36,7 @@ public class FileUtilTest {
         // file exist not regular 10
         assertFalse(FileUtil.isFileExists(Path.of("/dev")));
 
-        // create file does not exis 
+        // create file does not exist
         FileUtil.createFile(path);
 
         // file exists and regular 11
