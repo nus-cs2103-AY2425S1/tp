@@ -29,6 +29,7 @@ public class BookmarkListCommandTest {
                 companyToRemoveBookmark.getTags(), new Bookmark(false));
         bookmarkedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
 
+        // Assert that the command is successful
         assertCommandSuccess(new BookmarkListCommand(), bookmarkedModel, BookmarkListCommand.MESSAGE_SUCCESS,
                 bookmarkedModel);
     }

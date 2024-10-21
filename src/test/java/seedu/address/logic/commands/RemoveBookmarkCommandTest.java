@@ -27,6 +27,7 @@ public class RemoveBookmarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        // Set up the company to remove bookmark
         Company companyToRemoveBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY
                 .getZeroBased());
         RemoveBookmarkCommand removeBookmarkCommand = new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
@@ -34,6 +35,7 @@ public class RemoveBookmarkCommandTest {
         String expectedMessage = String.format(RemoveBookmarkCommand.MESSAGE_REMOVE_BOOKMARK_SUCCESS,
                 Messages.format(companyToRemoveBookmark));
 
+        // Create a new company with the original company's isBookmark value set to false
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
                 companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
                 companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
@@ -42,6 +44,7 @@ public class RemoveBookmarkCommandTest {
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
 
+        // Assert that the command is successful
         assertCommandSuccess(removeBookmarkCommand, bookmarkedModel, expectedMessage, expectedModel);
     }
 
@@ -62,8 +65,10 @@ public class RemoveBookmarkCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        // Filter the list
         showCompanyAtIndex(bookmarkedModel, INDEX_FIRST_COMPANY);
 
+        // Set up the company to remove bookmark
         Company companyToRemoveBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY
                 .getZeroBased());
         RemoveBookmarkCommand removeBookmarkCommand = new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
@@ -71,6 +76,7 @@ public class RemoveBookmarkCommandTest {
         String expectedMessage = String.format(RemoveBookmarkCommand.MESSAGE_REMOVE_BOOKMARK_SUCCESS,
                 Messages.format(companyToRemoveBookmark));
 
+        // Create a new company with the original company's isBookmark field set to false
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
                 companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
                 companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
@@ -79,6 +85,7 @@ public class RemoveBookmarkCommandTest {
 
         expectedModel.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
 
+        // Assert that the command works
         assertCommandSuccess(removeBookmarkCommand, bookmarkedModel, expectedMessage, expectedModel);
     }
 

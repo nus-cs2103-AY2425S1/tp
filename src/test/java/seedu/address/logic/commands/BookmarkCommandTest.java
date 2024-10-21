@@ -28,12 +28,14 @@ public class BookmarkCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
+        // Set up the company to bookmark
         Company companyToBookmark = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(BookmarkCommand.MESSAGE_BOOKMARK_SUCCESS,
                 Messages.format(companyToBookmark));
 
+        // Create a new company with the original company's isBookmark field set to true
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
                 companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
                 companyToBookmark.getTags(), new Bookmark(true));
@@ -41,15 +43,19 @@ public class BookmarkCommandTest {
 
         expectedModel.setCompany(companyToBookmark, companyBookmarked);
 
+        // Assert that the command is successful
         assertCommandSuccess(bookmarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_existingBookmarkUnfilteredList_showsFailure() {
+        // Set up the already bookmarked company
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
         Company companyToBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         String expectedMessage = String.format(MESSAGE_BOOKMARK_FAILURE, Messages.format(companyToBookmark));
 
+        // Assert that the command is successful but returns a failure message because
+        // the company is already a bookmarked company
         assertCommandSuccess(bookmarkCommand, bookmarkedModel, expectedMessage, bookmarkedModel);
     }
 
@@ -63,14 +69,17 @@ public class BookmarkCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
+        // Filter the list
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
 
+        // Set up the company to be bookmarked
         Company companyToBookmark = model.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
 
         String expectedMessage = String.format(BookmarkCommand.MESSAGE_BOOKMARK_SUCCESS,
                 Messages.format(companyToBookmark));
 
+        // Create a new company with the original company's isBookmark field set to true
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
                 companyToBookmark.getEmail(), companyToBookmark.getAddress(), companyToBookmark.getCareerPageUrl(),
                 companyToBookmark.getTags(), new Bookmark(true));
@@ -78,6 +87,7 @@ public class BookmarkCommandTest {
 
         expectedModel.setCompany(companyToBookmark, companyBookmarked);
 
+        // Assert that the command is successful
         assertCommandSuccess(bookmarkCommand, model, expectedMessage, expectedModel);
     }
 
