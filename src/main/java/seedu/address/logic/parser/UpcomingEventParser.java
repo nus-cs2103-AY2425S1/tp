@@ -33,8 +33,8 @@ public class UpcomingEventParser implements Parser<Command> {
         }
 
         try {
-            date = new DateTime(args + " 00:00");
-        } catch (IllegalArgumentException e) {
+            date = ParserUtil.parseDateTime(args + " 00:00");
+        } catch (ParseException e) {
             isDate = false;
         }
 
