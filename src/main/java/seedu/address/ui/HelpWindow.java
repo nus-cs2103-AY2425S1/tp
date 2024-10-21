@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.text.Text;
@@ -19,51 +18,8 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
+    public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-w14-2.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
-    public static final String HELP_TEXT = "# BA€ 1.0 Help\n\n"
-            + "Welcome to BA€ 1.0, your powerful ally in optimizing recurring sales. "
-            + "This guide will help you navigate the key features and commands of BA€.\n\n"
-            + "Key Features and Commands\n\n"
-            + "1. Adding a Client\n"
-            + "Add a new client to your database with detailed information.\n\n"
-            + "Format: add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...\n\n"
-            + "Example: add n/Acme Corp p/91234567 e/contact@acme.com a/123 Business Ave, Suite 100,"
-            + "Metropolis t/industry:tech t/size:enterprise fi/Annual contract: €50,000 s/@acmecorp\n\n"
-            + "2. Listing Clients\n"
-            + "View all clients in your database.\n\n"
-            + "Format: list\n\n"
-            + "3. Finding Clients\n"
-            + "Search for clients using keywords.\n\n"
-            + "Format: find KEYWORD [MORE_KEYWORDS]\n\n"
-            + "Example: find Acme Corp\n\n"
-            + "4. Smart Filtering\n"
-            + "Quickly identify client groups based on specific criteria.\n\n"
-            + "Format: filter [CRITERIA]\n\n"
-            + "Example: filter t/contract_value>100000 t/last_contact<30days\n\n"
-            + "5. Editing Client Information\n"
-            + "Update existing client details.\n\n"
-            + "Format: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...\n\n"
-            + "Example: edit 1 p/98765432 e/newemail@acme.com\n\n"
-            + "6. Deleting a Client\n"
-            + "Remove a client from your database.\n\n"
-            + "Format: delete INDEX\n\n"
-            + "Example: delete 1\n\n"
-            + "7. Advanced filtering\n"
-            + "Organize your client list based on custom priority metrics.\n\n"
-            + "Format: advfilter [CRITERIA]\n\n"
-            + "Example: advfilter t/renewal_date <= 90days t/contract_value desc\n\n"
-            + "8. Data Export\n"
-            + "Export your client data for analysis or reporting.\n\n"
-            + "Format: export format/[file format]\n\n"
-            + "Example: export format/csv\n\n"
-            + "9. Clearing All Entries\n"
-            + "Remove all clients from your database.\n\n"
-            + "Format: clear\n\n"
-            + "10. Exiting the Program\n"
-            + "Close the BA€ application.\n\n"
-            + "Format: exit\n\n"
-            + "For more detailed information, please refer to the full user guide.";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -79,9 +35,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     @FXML
     private Label helpMessage;
-
-    @FXML
-    private TextField commandTextField;
 
     /**
      * Creates a new HelpWindow.
@@ -102,9 +55,127 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     private void setHelpText() {
-        Text text = new Text(HELP_TEXT);
-        text.getStyleClass().add("help-text");
-        helpTextFlow.getChildren().add(text);
+        helpTextFlow.getChildren().addAll(
+                createHeader("BA€ 1.0 Help                                                    "),
+                createParagraph(
+                        "Welcome to BA€ 1.0, your powerful ally in optimizing recurring sales.",
+                        "This guide will help you navigate the key features and commands of BA€."
+                ),
+                createHeader("Key Features and Commands"),
+                createFeature(
+                        "Adding a Client: add",
+                        "Add a new client to your database with detailed information.",
+                        "add n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]...",
+                        "add n/Acme Corp p/91234567 e/contact@acme.com a/123 Business Ave, Suite 100, "
+                                + "\n Metropolis t/industry:tech t/size:enterprise "
+                                + "fi/Annual contract: €50,000 s/@acmecorp"
+                ),
+                createFeature(
+                        "Listing Clients: list",
+                        "View all clients in your database.",
+                        "list                                                                                       ",
+                        null
+                ),
+                createFeature(
+                        "Finding Clients: find",
+                        "Search for clients using keywords.",
+                        "find KEYWORD [MORE_KEYWORDS]",
+                        "find Acme Corp"
+                ),
+                createFeature(
+                        "Smart Filtering: filter",
+                        "Quickly identify client groups based on specific criteria.",
+                        "filter [CRITERIA]",
+                        "filter t/contract_value>100000 t/last_contact<30days"
+                ),
+                createFeature(
+                        "Editing Client Information: edit",
+                        "Update existing client details.",
+                        "edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...",
+                        "edit 1 p/98765432 e/newemail@acme.com"
+                ),
+                createFeature(
+                        "Deleting a Client: delete",
+                        "Remove a client from your database.",
+                        "delete INDEX",
+                        "delete 1"
+                ),
+                createFeature(
+                        "Advanced Filtering: advfilter",
+                        "Organize your client list based on custom priority metrics.",
+                        "advfilter [CRITERIA]",
+                        "advfilter t/renewal_date <= 90days t/contract_value desc"
+                ),
+                createFeature(
+                        "Data Export: export",
+                        "Export your client data for analysis or reporting.",
+                        "export format/[file format]",
+                        "export format/csv                                               "
+                ),
+                createFeature(
+                        "Clearing All Entries: clear",
+                        "Remove all clients from your database.",
+                        "clear                                                 ",
+                        null
+                ),
+                createFeature(
+                        "Exiting the Program: exit",
+                        "Close the BA€ application.",
+                        "exit",
+                        null
+                ),
+                createParagraph(
+                        "For more detailed information, please refer to the full user guide."
+                )
+        );
+    }
+
+    private Text createText(String content, String... styleClasses) {
+        Text text = new Text(content);
+        text.getStyleClass().addAll("white-text");
+        text.getStyleClass().addAll(styleClasses);
+        return text;
+    }
+
+    private TextFlow createHeader(String content) {
+        Text header = createText(content + "\n", "header");
+        TextFlow feature = new TextFlow(header);
+        return feature;
+    }
+
+    private TextFlow createParagraph(String line1, String line2) {
+        TextFlow paragraph = new TextFlow(
+                createText(line1 + "\n"),
+                createText(line2)
+        );
+        paragraph.getChildren().add(createText("\n"));
+        return paragraph;
+    }
+
+    private TextFlow createParagraph(String line1) {
+        TextFlow paragraph = new TextFlow(
+                createText(line1 + "\n")
+        );
+        return paragraph;
+    }
+
+    private TextFlow createFeature(String title, String description, String format, String example) {
+        TextFlow feature = new TextFlow(
+                createText(title + "\n", "subheader"),
+                createText(description + "\n"),
+                createText("Format: ", "bold"),
+                createText(format + "\n", "code")
+        );
+
+        if (example != null) {
+            feature.getChildren().addAll(
+                    createText("Example: ", "bold"),
+                    createText(example + "\n", "code")
+            );
+        }
+
+        feature.getChildren().add(createText("\n"));
+        return feature;
     }
 
     /**
@@ -162,5 +233,4 @@ public class HelpWindow extends UiPart<Stage> {
         url.putString(USERGUIDE_URL);
         clipboard.setContent(url);
     }
-
 }
