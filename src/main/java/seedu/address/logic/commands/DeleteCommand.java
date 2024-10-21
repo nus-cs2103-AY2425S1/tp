@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -24,25 +27,49 @@ public class DeleteCommand extends Command {
             + "Parameters: -i INDEX (must be a positive integer)\n"
             + "Example: " + SHORT_COMMAND_WORD + " -i 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted: %1$s";
 
-    private final Index targetIndex;
+    private final ArrayList<Index> targetIndexes;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    /**
+     * Creates a DeleteCommand to delete the person at the specified {@code Index}.
+     */
+    public DeleteCommand(Index targetindex) {
+        this.targetIndexes = new ArrayList<>();
+        targetIndexes.add(targetindex);
     }
 
+    /**
+     * Creates a DeleteCommand to delete the person at the specified {@code Indexes}.
+     */
+    public DeleteCommand(ArrayList<Index> targetIndexes) {
+        this.targetIndexes = targetIndexes;
+    }
+
+    /**
+     * Executes the command and deletes the person from the address book.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return the CommandResult of the command execution
+     * @throws CommandException if an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        Person personToDelete = null;
         List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        //reverse order to prevent index out of bounds
+        targetIndexes.sort(Comparator.comparingInt(Index::getZeroBased).reversed());
+        for (Index targetIndex : targetIndexes) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        } //checks if there is any invalid index
+        for (Index targetIndex : targetIndexes) {
+            personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            model.deletePerson(personToDelete);
         }
-
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
+        assert personToDelete != null;
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
@@ -58,13 +85,16 @@ public class DeleteCommand extends Command {
         }
 
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
-        return targetIndex.equals(otherDeleteCommand.targetIndex);
+        return targetIndexes.equals(otherDeleteCommand.targetIndexes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("targetIndex", targetIndex)
+                .add("targetIndexes",
+                        Arrays.toString(targetIndexes.toArray())
+                                .replace("[", "")
+                                .replace("]", ""))
                 .toString();
     }
 }
