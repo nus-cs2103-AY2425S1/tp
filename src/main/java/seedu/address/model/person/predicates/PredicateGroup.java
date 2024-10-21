@@ -1,10 +1,11 @@
 package seedu.address.model.person.predicates;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -12,28 +13,25 @@ import seedu.address.model.person.Person;
  * Represents the collection of all {@code Predicate<Person>} criteria to test.
  */
 public class PredicateGroup implements Predicate<Person> {
+    private final Logger logger = LogsCenter.getLogger(getClass());
+
     private List<Predicate<Person>> predicates;
 
     public PredicateGroup() {
         this.predicates = new ArrayList<>();
     }
 
-    /**
-     * Constructs a {@code PredicateGroup} using {@code Predicate<Person>}s
-     * provided.
-     */
-    @SafeVarargs
-    public PredicateGroup(Predicate<Person>... predicates) {
-        // The only arguments that will be passed into this constuctor is of type
-        // `Predicate<Person>` so it is safe to accept Variable Arguments.
-        this.predicates = Arrays.asList(predicates);
-    }
-
     public void add(Predicate<Person> predicate) {
         this.predicates.add(predicate);
     }
 
+    /**
+     * Checks if PredicateGroup is initialised with any predicates.
+     *
+     * @return true if at least one predicate exist
+     */
     public boolean isAnyPredicateAdded() {
+        logger.info(String.format("PredicateGroup: Initialised with %d Predicates.", predicates.size()));
         return predicates.size() > 0;
     }
 
