@@ -66,8 +66,11 @@ public class JsonAdaptedWedding {
         for (JsonAdaptedPersonId assignee : assignees) {
             modelAssignees.add(assignee.toModelType());
         }
-
-        return new Wedding(modelName, modelDate, modelAssignees);
+        if (modelAssignees.isEmpty()) {
+            return new Wedding(modelName, modelDate);
+        } else {
+            return new Wedding(modelName, modelDate, modelAssignees);
+        }
     }
 
 }

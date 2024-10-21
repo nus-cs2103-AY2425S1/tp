@@ -72,6 +72,19 @@ public class UniqueWeddingList implements Iterable<Wedding> {
     }
 
     /**
+     * Replaces the contents of this list with {@code weddings}.
+     * {@code weddings} must not contain duplicate weddings.
+     */
+    public void setWeddings(List<Wedding> weddings) {
+        requireAllNonNull(weddings);
+        if (!weddingsAreUnique(weddings)) {
+            throw new DuplicateWeddingException();
+        }
+
+        internalList.setAll(weddings);
+    }
+
+    /**
      * Assigns a Person to a Wedding. Throws an error if the Wedding cannot be found.
      * @param wedding
      * @param assignee
@@ -129,5 +142,19 @@ public class UniqueWeddingList implements Iterable<Wedding> {
 
     public ObservableList<Wedding> asUnmodifiableObservableList() {
         return this.internalUnmodifiableList;
+    }
+
+    /**
+     * Returns true if {@code weddings} contains only unique weddings.
+     */
+    private boolean weddingsAreUnique(List<Wedding> weddings) {
+        for (int i = 0; i < weddings.size() - 1; i++) {
+            for (int j = i + 1; j < weddings.size(); j++) {
+                if (weddings.get(i).isSameWedding(weddings.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
