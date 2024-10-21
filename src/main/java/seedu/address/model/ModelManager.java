@@ -31,6 +31,7 @@ public class ModelManager implements Model {
     private final Storage storage;
     private final BackupManager backupManager; // Add this if not already present
     private final FilteredList<Person> filteredPersons;
+    private final Calendar calendar;
 
     /**
      * Initializes a ModelManager with the given address book, user preferences, and storage.
@@ -54,6 +55,7 @@ public class ModelManager implements Model {
         this.storage = storage;
         this.backupManager = new BackupManager(Paths.get("backups"));
         this.filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.calendar = new Calendar(this.addressBook);
     }
 
     public ModelManager() throws IOException {
@@ -100,6 +102,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        this.calendar.setAppointments(addressBook);
         triggerBackup(); // Trigger backup after setting new data
     }
 
@@ -115,14 +118,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Calendar getCalendar() {
+        return calendar;
+    }
+
+    @Override
+    public boolean hasAppointment(Person person) {
+        return calendar.hasAppointment(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        calendar.deleteAppointment(target);
         triggerBackup(); // Trigger backup after deletion
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        calendar.addAppointment(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         triggerBackup(); // Trigger backup after addition
     }
@@ -131,6 +146,7 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
         addressBook.setPerson(target, editedPerson);
+        calendar.setAppointment(target, editedPerson);
         triggerBackup(); // Trigger backup after editing
     }
 
@@ -220,6 +236,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && calendar.equals(otherModelManager.calendar);
     }
 }

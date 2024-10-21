@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,6 +26,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains unit tests for {@code ModelManager}.
@@ -37,6 +39,7 @@ public class ModelManagerTest {
     private ModelManager modelManager;
     private StorageManager storage;
     private UserPrefs userPrefs;
+    private Calendar calendar;
 
     /**
      * Sets up the test environment with the required storage.
@@ -50,6 +53,7 @@ public class ModelManagerTest {
 
         storage = new StorageManager(addressBookStorage, userPrefsStorage); // Initialize storage
         userPrefs = new UserPrefs(); // Initialize userPrefs
+        calendar = new Calendar(new AddressBook()); // initialize calendar
 
         modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
     }
@@ -78,6 +82,7 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new Calendar(new AddressBook()), modelManager.getCalendar());
     }
 
     @Test
@@ -137,6 +142,13 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasAppointment_appointmentInCalendar_returnsTrue() {
+        modelManager.addPerson(ALICE);
+        assertTrue(modelManager.hasAppointment(new PersonBuilder(BOB).withAppointment(ALICE.getAppointment().dateTime)
+                                                                                .build()));
     }
 
     @Test

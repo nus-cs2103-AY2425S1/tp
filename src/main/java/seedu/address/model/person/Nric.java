@@ -15,7 +15,7 @@ public class Nric {
      * The first character of the NRIC must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "^[STFG]\\d{7}[A-Z]$";
+    public static final String VALIDATION_REGEX = "^[STFGM]\\d{7}[A-Z]$";
 
     public final String fullNric;
 
