@@ -210,6 +210,15 @@ public class Person {
     }
 
     /**
+     * Returns true if the person has the specified appointment.
+     * @param appointment The appointment to be checked.
+     * @return true if the person has the specified appointment.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        return appointments.contains(appointment);
+    }
+
+    /**
      * Removes the specified appointment from the list of appointments if the appointment is present.
      *
      * @param appointment The appointment to be removed.

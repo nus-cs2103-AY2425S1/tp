@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -97,7 +98,12 @@ public interface Model {
 
     ObservableList<Person> getUnfilteredPersonList();
 
-    void addAppointment(Appointment newAppointment, Person person);
+    boolean addAppointment(Appointment newAppointment, Person person);
 
     void removeAppointment(Appointment oldAppointment, Person person);
+
+    List<Appointment> getAllAppointments();
+
+    List<Appointment> getAppointmentsForPerson(Person person);
+ 
 }

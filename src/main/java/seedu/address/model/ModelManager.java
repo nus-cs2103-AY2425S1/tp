@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -146,14 +149,39 @@ public class ModelManager implements Model {
         return addressBook.getPersonList();
     }
 
+
+/**
+ * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
+ * If there is a conflict, an IllegalArgumentException is thrown.
+ *
+ * @param newAppointment The appointment to be added.
+ * @param person The person to whom the appointment is added.
+ */
     @Override
-    public void addAppointment(Appointment newAppointment, Person person) {
-        appointmentManager.addAppointment(newAppointment, person);
+    public boolean addAppointment(Appointment newAppointment, Person person) {
+        return appointmentManager.addAppointment(newAppointment, person);
     }
 
+    /**
+     * Removes an appointment from the person's list of appointments.
+     *
+     * @param appointment The appointment to be removed.
+     * @param person The person from whom the appointment is removed.
+     */
     @Override
     public void removeAppointment(Appointment appointment, Person person) {
         appointmentManager.removeAppointment(appointment, person);
+    }
+
+
+    public List<Appointment> getAllAppointments() {
+        return new ArrayList<>(appointmentManager.getAppointments());
+    }
+
+    public List<Appointment> getAppointmentsForPerson(Person person) {
+        List<Appointment> temp =new ArrayList<>(person.getAppointments());
+        temp.sort(Comparator.comparing(Appointment::getStartTime));
+        return temp;
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -77,6 +77,7 @@ public class AppointmentManager {
     }
 
     public List<Appointment> getAppointments() {
+        appointments.sort(Comparator.comparing(Appointment::getStartTime));
         return appointments;
     }
 
@@ -96,15 +97,17 @@ public class AppointmentManager {
      * @param newAppointment The appointment to be added.
      * @param person The person to whom the appointment is added.
      */
-    public void addAppointment(Appointment newAppointment, Person person) {
+    public boolean addAppointment(Appointment newAppointment, Person person) {
         if (hasConflict(newAppointment, appointments)) {
-            throw new IllegalArgumentException("Appointment conflicts with an existing one.");
+            return false;
         }
 
         Person updatedPerson = new Person(person);
         updatedPerson.addAppointment(newAppointment);
 
         model.setPerson(person, updatedPerson);
+
+        return true;
     }
 
     public void removeAppointment(Appointment appointment, Person person) {
