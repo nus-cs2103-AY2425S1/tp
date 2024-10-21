@@ -303,12 +303,12 @@ public class InsurancePlansManager {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean equals(Object other) {
+        if (this == other) {
             return true;
-        } else if (obj instanceof InsurancePlansManager) {
-            InsurancePlansManager p = (InsurancePlansManager) obj;
-            if (!p.insurancePlans.equals(this.insurancePlans)) {
+        } else if (other instanceof InsurancePlansManager) {
+            InsurancePlansManager otherInsurancePlanManager = (InsurancePlansManager) other;
+            if (!otherInsurancePlanManager.insurancePlans.equals(this.insurancePlans)) {
                 return false;
             }
             return true;
