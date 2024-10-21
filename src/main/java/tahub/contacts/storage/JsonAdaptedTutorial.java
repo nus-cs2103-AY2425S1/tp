@@ -14,7 +14,7 @@ import tahub.contacts.model.tutorial.Tutorial;
 class JsonAdaptedTutorial {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Tutorial's %s field is missing!";
     private final String tutorialId;
-    private final Course course;
+    private final JsonAdaptedCourse course;
 
     /**
      * Constructs a JsonAdaptedTutorial object with the given tutorial ID and course.
@@ -24,7 +24,7 @@ class JsonAdaptedTutorial {
      */
     @JsonCreator
     public JsonAdaptedTutorial(@JsonProperty("tutorialId") String tutorialId,
-                             @JsonProperty("course") Course course) {
+                             @JsonProperty("course") JsonAdaptedCourse course) {
         this.tutorialId = tutorialId;
         this.course = course;
     }
@@ -36,7 +36,7 @@ class JsonAdaptedTutorial {
      */
     public JsonAdaptedTutorial(Tutorial source) {
         tutorialId = source.getTutorialId();
-        course = source.getCourse();
+        course = new JsonAdaptedCourse(source.getCourse());
     }
 
     /**
@@ -57,13 +57,14 @@ class JsonAdaptedTutorial {
         if (course == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
-        if (!Course.isValidCourseCode(course.courseCode)) {
+
+        final Course courseModel = this.course.toModelType();
+        if (!Course.isValidCourseCode(courseModel.courseCode)) {
             throw new IllegalValueException(Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
-        } else if (!Course.isValidCourseName(course.courseName)) {
+        } else if (!Course.isValidCourseName(courseModel.courseName)) {
             throw new IllegalValueException(Course.COURSE_NAME_MESSAGE_CONSTRAINTS);
         }
-        final Course modelCourse = new Course(course.courseCode, course.courseName);
 
-        return new Tutorial(modelTutorialId, modelCourse);
+        return new Tutorial(modelTutorialId, courseModel);
     }
 }
