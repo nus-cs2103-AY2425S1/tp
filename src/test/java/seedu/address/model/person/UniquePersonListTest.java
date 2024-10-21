@@ -177,7 +177,7 @@ public class UniquePersonListTest {
     }
 
     @Test
-    public void sortPersons_ascendingOrder_success() {
+    public void sortPersons_ascendingOrderByName_success() {
         //Sort UniquePeronList in ascending order
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(ALICE);
@@ -187,12 +187,12 @@ public class UniquePersonListTest {
         uniquePersonList.add(BOB);
         uniquePersonList.add(CARL);
         uniquePersonList.add(ALICE);
-        uniquePersonList.sortPersons(ASCENDING);
+        uniquePersonList.sortPersons(ASCENDING, false);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 
     @Test
-    public void sortPersons_descendingOrder_success() {
+    public void sortPersons_descendingOrderByName_success() {
         //Sort UniquePeronList in descending order
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(CARL);
@@ -202,7 +202,37 @@ public class UniquePersonListTest {
         uniquePersonList.add(BOB);
         uniquePersonList.add(CARL);
         uniquePersonList.add(ALICE);
-        uniquePersonList.sortPersons(DESCENDING);
+        uniquePersonList.sortPersons(DESCENDING, false);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void sortPersons_ascendingOrderBySchedule_success() {
+        //Sort UniquePeronList in ascending order
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(ALICE);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(CARL);
+        //Sort in ascending order with "asc" keyword
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.sortPersons(ASCENDING, true);
+        assertEquals(expectedUniquePersonList, uniquePersonList);
+    }
+
+    @Test
+    public void sortPersons_descendingOrderBySchedule_success() {
+        //Sort UniquePeronList in descending order
+        UniquePersonList expectedUniquePersonList = new UniquePersonList();
+        expectedUniquePersonList.add(CARL);
+        expectedUniquePersonList.add(BOB);
+        expectedUniquePersonList.add(ALICE);
+        //Sort in ascending order with "desc" keyword
+        uniquePersonList.add(BOB);
+        uniquePersonList.add(CARL);
+        uniquePersonList.add(ALICE);
+        uniquePersonList.sortPersons(DESCENDING, true);
         assertEquals(expectedUniquePersonList, uniquePersonList);
     }
 

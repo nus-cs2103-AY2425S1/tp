@@ -94,12 +94,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        SortCommand ascCommand = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " " + ASCENDING);
-        assertEquals(new SortCommand(ASCENDING), ascCommand);
-        SortCommand descCommand = (SortCommand) parser.parseCommand(
-                SortCommand.COMMAND_WORD + " " + DESCENDING);
-        assertEquals(new SortCommand(DESCENDING), descCommand);
+        SortCommand ascCommandName = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " n/" + ASCENDING);
+        assertEquals(new SortCommand(ASCENDING, false), ascCommandName);
+        SortCommand descCommandName = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " n/" + DESCENDING);
+        assertEquals(new SortCommand(DESCENDING, false), descCommandName);
+        SortCommand ascCommandSchedule = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " sch/" + ASCENDING);
+        assertEquals(new SortCommand(ASCENDING, false), ascCommandSchedule);
+        SortCommand descCommandSchedule = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " sch/" + DESCENDING);
+        assertEquals(new SortCommand(DESCENDING, false), descCommandSchedule);
     }
 
     @Test

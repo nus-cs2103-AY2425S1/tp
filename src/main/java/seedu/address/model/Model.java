@@ -94,7 +94,7 @@ public interface Model {
     /**
      * Sorts the filter of the filtered person list in alphabetical order
      */
-    void sortFilteredPersonList(String order);
+    void sortFilteredPersonList(String order, Boolean toSortBySchedule);
 
     ObservableList<Person> getPersonList();
 }
