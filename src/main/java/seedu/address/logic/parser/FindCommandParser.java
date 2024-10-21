@@ -33,6 +33,12 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap keywords = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_NRIC, PREFIX_ROLE, PREFIX_TAG);
+        // Needs to be less than 2 because the argument tokenized will always produce
+        // a key-value pair between Prefix("") and the preamble (the values before the first valid prefix)
+        if (keywords.getPrefixes().size() < 2 || !keywords.getPreamble().equals("")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
         checkKeywords(keywords);
 
         return new FindCommand(new ContainsKeywordsPredicate(keywords));
