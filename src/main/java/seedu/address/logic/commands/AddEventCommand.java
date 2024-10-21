@@ -55,7 +55,7 @@ public class AddEventCommand extends Command {
         int newEventId = model.generateNewEventId();
         Event updatedEvent = toAdd.changeId(newEventId);
         model.addEvent(updatedEvent);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedEvent)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedEvent)), true);
     }
 
     @Override
