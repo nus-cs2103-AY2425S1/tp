@@ -115,7 +115,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Role>}.
+     * Parses {@code Collection<String> roles} into a {@code Set<Role>}.
      */
     public static Set<Role> parseRoles(Collection<String> roles) throws ParseException {
         requireNonNull(roles);

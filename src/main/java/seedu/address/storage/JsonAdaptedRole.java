@@ -15,7 +15,7 @@ class JsonAdaptedRole {
     private final String roleName;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code JsonAdaptedTag} with the given {@code roleName}.
      */
     @JsonCreator
     public JsonAdaptedRole(String roleName) {
