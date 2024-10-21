@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Days;
@@ -21,6 +23,8 @@ import seedu.address.model.student.predicates.ScheduleContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
+
+    private static final Logger logger = LogsCenter.getLogger(FindCommandParser.class);
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -67,11 +71,9 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         requireNonNull(names);
 
-        if (names.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
-        }
-        if (names.contains("")) {
+        if (names.isEmpty() || names.contains("")) {
+            logger.finer("Name keywords are empty or contain an empty string: " + names);
+
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
         }
@@ -88,6 +90,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         assert days != null;
 
         if (days.isEmpty() || days.contains("")) {
+            logger.finer("Day keywords are empty or contain an empty string: " + days);
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
         }

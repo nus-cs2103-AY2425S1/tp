@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -27,6 +28,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    private static final Logger logger = Logger.getLogger(ParserUtil.class.getName());
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -50,6 +52,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
+            logger.finer("Name is invalid: " + trimmedName);
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
@@ -113,6 +116,7 @@ public class ParserUtil {
 
         String trimmedDay = day.trim();
         if (!Days.isValidDay(trimmedDay)) {
+            logger.finer("Day is invalid: " + trimmedDay);
             throw new ParseException(Days.MESSAGE_CONSTRAINTS);
         }
         return Days.valueOf(trimmedDay.toUpperCase());
@@ -232,7 +236,6 @@ public class ParserUtil {
         HashSet<Days> daySet = new HashSet<>();
 
         for (String dayString : days) {
-
             addToDayHashSet(dayString, daySet);
         }
         return daySet;
