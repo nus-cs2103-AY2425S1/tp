@@ -92,16 +92,19 @@ public class DeleteTagCommandParserTest {
 
     @Test
     public void parse_multipleValidArgsWithoutSpace_returnsDeleteTagCommand() {
-        assertParseFailure(parser, " t/bride's sidet/groom's side", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/bride's sidet/groom's side",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_multipleArgsOneInvalid_returnsDeleteTagCommand() {
-        assertParseFailure(parser, " t/bride's side t/^@%", String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/bride's side t/^@%",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_multipleArgsOneExceedsMaxLength_returnsDeleteTagCommand() {
-        assertParseFailure(parser, " t/bride's side t/" + "a".repeat(51), String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        assertParseFailure(parser, " t/bride's side t/" + "a".repeat(51),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 }
