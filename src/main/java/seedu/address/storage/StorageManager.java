@@ -87,14 +87,20 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyAppointmentBook> readAppointmentBook() throws DataLoadingException {
-        return readAppointmentBook(appointmentBookStorage.getAppointmentBookFilePath());
+    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            ReadOnlyAddressBook addressBook) throws DataLoadingException {
+        return readAppointmentBook(
+                appointmentBookStorage.getAppointmentBookFilePath(),
+                addressBook
+        );
     }
 
     @Override
-    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(Path filePath) throws DataLoadingException {
+    public Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            Path filePath,
+            ReadOnlyAddressBook addressBook) throws DataLoadingException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return appointmentBookStorage.readAppointmentBook(filePath);
+        return appointmentBookStorage.readAppointmentBook(filePath, addressBook);
     }
 
     @Override

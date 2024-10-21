@@ -1,0 +1,54 @@
+{
+  "_comment": "AppointmentBook save file which contains typical Appointment values as in TypicalAppointments#getTypicalAppointmentBook()",
+  "appointments": [
+    {
+      "appointmentType": "Health Checkup",
+      "appointmentDateTime": "2024-10-15T10:30:00",
+      "personId": 1,
+      "medicine": "Panadol",
+      "sickness": "Flu"
+    },
+    {
+      "appointmentType": "Dental Checkup",
+      "appointmentDateTime": "2024-11-10T14:00:00",
+      "personId": 2,
+      "medicine": "Ibuprofen",
+      "sickness": "Toothache"
+    },
+    {
+      "appointmentType": "Eye Exam",
+      "appointmentDateTime": "2024-12-05T09:00:00",
+      "personId": 3,
+      "medicine": "Eye Drops",
+      "sickness": "Eye Strain"
+    },
+    {
+      "appointmentType": "Physical Therapy",
+      "appointmentDateTime": "2024-10-20T11:15:00",
+      "personId": 4,
+      "medicine": "Paracetamol",
+      "sickness": "Back Pain"
+    },
+    {
+      "appointmentType": "Vaccination",
+      "appointmentDateTime": "2024-11-25T16:00:00",
+      "personId": 5,
+      "medicine": "Vaccine",
+      "sickness": "None"
+    },
+    {
+      "appointmentType": "Routine Checkup",
+      "appointmentDateTime": "2024-12-01T08:30:00",
+      "personId": 6,
+      "medicine": "None",
+      "sickness": "None"
+    },
+    {
+      "appointmentType": "Consultation",
+      "appointmentDateTime": "2024-10-30T15:45:00",
+      "personId": 7,
+      "medicine": "Aspirin",
+      "sickness": "Headache"
+    }
+  ]
+}

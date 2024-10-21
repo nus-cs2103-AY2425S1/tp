@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyAppointmentBook;
 
 /**
@@ -23,12 +24,15 @@ public interface AppointmentBookStorage {
      *
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    Optional<ReadOnlyAppointmentBook> readAppointmentBook() throws DataLoadingException;
+    Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            ReadOnlyAddressBook addressBook) throws DataLoadingException;
 
     /**
      * @see #getAppointmentBookFilePath()
      */
-    Optional<ReadOnlyAppointmentBook> readAppointmentBook(Path filePath) throws DataLoadingException;
+    Optional<ReadOnlyAppointmentBook> readAppointmentBook(
+            Path filePath,
+            ReadOnlyAddressBook addressBook) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyAppointmentBook} to the storage.

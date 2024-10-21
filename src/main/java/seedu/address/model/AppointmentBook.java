@@ -1,13 +1,16 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.appointment.AppointmentDescriptor;
 import seedu.address.model.appointment.UniqueAppointmentList;
+import seedu.address.model.person.Person;
 
 /**
  * Wraps all data at the appointment-book level
@@ -15,6 +18,7 @@ import seedu.address.model.appointment.UniqueAppointmentList;
  */
 public class AppointmentBook implements ReadOnlyAppointmentBook {
 
+    private int nextAppointmentId;
     private final UniqueAppointmentList appointments;
 
     /*
@@ -28,7 +32,9 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
         appointments = new UniqueAppointmentList();
     }
 
-    public AppointmentBook() {}
+    public AppointmentBook() {
+        nextAppointmentId = 0;
+    }
 
     /**
      * Creates an AppointmentBook using the Appointments in the {@code toBeCopied}
@@ -36,6 +42,14 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     public AppointmentBook(ReadOnlyAppointmentBook toBeCopied) {
         this();
         resetData(toBeCopied);
+    }
+
+    public int getNextAppointmentId() {
+        return nextAppointmentId;
+    }
+
+    public void setNextAppointmentId(int appointmentId) {
+        this.nextAppointmentId = appointmentId;
     }
 
     //// list overwrite operations
@@ -54,6 +68,7 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     public void resetData(ReadOnlyAppointmentBook newData) {
         requireNonNull(newData);
 
+        setNextAppointmentId(newData.getNextAppointmentId());
         setAppointments(newData.getAppointmentList());
     }
 
@@ -68,12 +83,32 @@ public class AppointmentBook implements ReadOnlyAppointmentBook {
     }
 
     /**
+     * Returns true if an appointment with the same identity as {@code appointment} exists in the appointment book.
+     */
+    public boolean hasAppointment(AppointmentDescriptor appointmentDescriptor) {
+        requireNonNull(appointmentDescriptor);
+        return appointments.contains(appointmentDescriptor);
+    }
+
+    /**
      * Adds an appointment to the appointment book.
      * The appointment must not already exist in the appointment book.
      */
-    public String addAppointment(Appointment appointment) {
+    public void addAppointment(Appointment appointment) {
         appointments.add(appointment);
-        return appointment.toString();
+        ++nextAppointmentId;
+    }
+
+    /**
+     * Adds an appointment to the appointment book.
+     * The appointment must not already exist in the appointment book.
+     */
+    public Appointment addAppointment(Person person, AppointmentDescriptor appointmentDescriptor) {
+        requireAllNonNull(person, appointmentDescriptor);
+        Appointment appointment = new Appointment(nextAppointmentId, person, appointmentDescriptor);
+        appointments.add(appointment);
+        ++nextAppointmentId;
+        return appointment;
     }
 
     /**
