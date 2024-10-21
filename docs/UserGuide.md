@@ -94,16 +94,26 @@ Examples:
 
 Shows a list of all persons in the address book.
 
-Format: `list [s/SORT_OPTION]`
+Format: `list`
+
+### Sorting the displayed list: `sort`
+
+Sorts the currently visible list of persons by a specified field. 
+
+Format: `sort [s/SORT_OPTION]`
+
+* You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
+* If no sort option is provided, `sort` will restore the list to its original order (i.e. the order in which contacts were added).
+* The sort order remains active until you apply a new sort option.
 
 <box type="tip" seamless>
 
-**Tip:** Optionally, the list can be sorted by specific fields such as contact `name`
+**Tip:** Currently, the supported sort option is `name`. Additional options may be added in future versions. 
 </box>
 
 Examples:
-* `list`
-* `list s/name`
+* `sort`
+* `sort s/name`
 
 ### Editing a person : `edit`
 
