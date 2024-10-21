@@ -33,6 +33,8 @@ public class AppointmentCard extends UiPart<Region> {
     private Label appointmentName;
     @FXML
     private Label personName;
+    @FXML
+    private Label personNric;
 
     /**
      * Creates a {@code AppointmentCard} with the given {@code Appointment} and index to display.
@@ -44,5 +46,6 @@ public class AppointmentCard extends UiPart<Region> {
         timePeriod.setText(appt.appointment().getAppointmentTimePeriod());
         appointmentName.setText(appt.appointment().getAppointmentName());
         personName.setText(appt.owner().getName().fullName);
+        personNric.setText(appt.owner().getNric().value);
     }
 }

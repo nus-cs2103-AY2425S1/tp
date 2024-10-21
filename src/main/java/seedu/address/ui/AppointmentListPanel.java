@@ -28,7 +28,7 @@ public class AppointmentListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code OwnedAppointment} using a {@code AppointmentCard}.
      */
-    class AppointmentListViewCell extends ListCell<OwnedAppointment> {
+    static class AppointmentListViewCell extends ListCell<OwnedAppointment> {
         @Override
         protected void updateItem(OwnedAppointment appointment, boolean empty) {
             super.updateItem(appointment, empty);

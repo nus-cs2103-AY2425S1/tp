@@ -19,6 +19,7 @@
             </HBox>
             <Label fx:id="appointmentName" styleClass="appointment-header" text="\$appointmentName" />
             <Label fx:id="personName" styleClass="appointment-normal" text="\$personName" />
+            <Label fx:id="personNric" styleClass="appointment-normal" text="\$personNric" />
         </VBox>
       <columnConstraints>
          <ColumnConstraints />
