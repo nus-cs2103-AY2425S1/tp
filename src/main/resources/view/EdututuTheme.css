@@ -7,7 +7,12 @@
     -ab3-selected-cell-background: #424d5f;
     -ab3-filled-selected-card-pane: #3e7b91;
     -ab3-label: #010504;
+    -ab3-label-2: #555555;
     -ab3-white: #ffffff;
+    -ab3-button-border: #e2e2e2;
+    -ab3-button-text-fill: #d8d8d8;
+    -ab3-button-hover: #3a3a3a;
+    -ab3-command-type-label: #f70d1a;
 }
 
 .background {
@@ -18,7 +23,7 @@
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: -ab3-label-2;
     -fx-opacity: 0.9;
 }
 
@@ -226,18 +231,18 @@
  */
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e2e2e2;
+    -fx-border-color: -ab3-button-border;
     -fx-border-width: 2;
     -fx-background-radius: 0;
     -fx-background-color: -ab3-background-2;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+    -fx-text-fill: -ab3-button-text-fill;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #3a3a3a;
+    -fx-background-color: -ab3-button-hover;
 }
 
 .button:pressed, .button:default:hover:pressed {
@@ -326,7 +331,7 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    -fx-text-fill: -ab3-command-type-label;
 }
 
 #commandTextField {
