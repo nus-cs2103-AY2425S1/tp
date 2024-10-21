@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.model.person.PersonComparator;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -34,21 +35,26 @@ public class SortCommandParser implements Parser<SortCommand> {
         if (!argMultimap.isOfSizeOne()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-        
+
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            return new SortCommand("name", isAscending(argMultimap.getValue(PREFIX_NAME).get()));
+            return new SortCommand(PersonComparator.NAME,
+                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            return new SortCommand("phone", isAscending(argMultimap.getValue(PREFIX_NAME).get()));
+            return new SortCommand(PersonComparator.PHONE,
+                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            return new SortCommand("email", isAscending(argMultimap.getValue(PREFIX_NAME).get()));
+            return new SortCommand(PersonComparator.EMAIL,
+                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            return new SortCommand("address", isAscending(argMultimap.getValue(PREFIX_NAME).get()));
+            return new SortCommand(PersonComparator.ADDRESS,
+                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
         }
         if (argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
-            return new SortCommand("dateoflastvisit", isAscending(argMultimap.getValue(PREFIX_NAME).get()));
+            return new SortCommand(PersonComparator.DATE_OF_LAST_VISIT,
+                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }

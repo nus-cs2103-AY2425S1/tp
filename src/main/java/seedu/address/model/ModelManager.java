@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonComparator;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -143,6 +144,15 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public void sortFilteredPersonList(String Parameter, boolean isAscending) {
+        if (isAscending) {
+            filteredPersons.sort(PersonComparator.getComparator(Parameter));
+        } else {
+            filteredPersons.sort(PersonComparator.getComparator(Parameter).reversed());
+        }
     }
 
 }

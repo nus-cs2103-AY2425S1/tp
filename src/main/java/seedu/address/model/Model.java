@@ -88,5 +88,5 @@ public interface Model {
     /**
      * Sort the filtered person's list according to {@code Person} parameters
      */
-    void sortFilteredPersonList();
+    void sortFilteredPersonList(String Parameter, boolean isAscending);
 }
