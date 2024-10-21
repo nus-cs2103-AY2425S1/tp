@@ -1,8 +1,9 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class DateTest {
     @Test
