@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Birthday.CUSTOM_BIRTHDAY_FORMAT;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -152,6 +153,20 @@ public class Person {
 
     public Birthday getBirthday() {
         return birthday;
+    }
+
+    /**
+     * Returns if the person's birthday is within a week from today.
+     */
+    public boolean isBirthdayWithinNextWeek() {
+        return birthday.isBirthdayWithinNextWeek();
+    }
+
+    /**
+     * Returns a string with the person's {@code name} and {@code birthday}.
+     */
+    public String formatBirthdayMessage() {
+        return name + CUSTOM_BIRTHDAY_FORMAT + birthday.getDateOfUpcomingBirthday();
     }
 
     /**
