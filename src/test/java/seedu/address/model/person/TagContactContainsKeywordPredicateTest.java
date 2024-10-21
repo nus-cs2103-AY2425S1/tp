@@ -28,8 +28,8 @@ public class TagContactContainsKeywordPredicateTest {
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsPredicate firstPredicateCopy =
-                new NameContainsKeywordsPredicate(firstPredicateKeywordList);
+        TagContactContainsKeywordPredicate firstPredicateCopy =
+                new TagContactContainsKeywordPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false

@@ -60,9 +60,9 @@ public class TypicalPersons {
             .withBuyProperty(PROPERTY_CONDO_WITH_TAG)
             .withBuyProperty(PROPERTY_CONDO_WITH_MULTIPLE_TAGS).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+            .withEmail("cornelia@example.com").withAddress("10th street").withTags("colleague").build();
     public static final Person DANIELLE = new PersonBuilder().withName("Danielle Meier").withPhone("87652534")
-            .withEmail("danielle@example.com").withAddress("11th street").withTags("friends")
+            .withEmail("danielle@example.com").withAddress("11th street").withTags("colleague")
             .withSellProperty(PROPERTY_APARTMENT_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_OTHERPROPERTY_WITH_MULTIPLE_TAGS)
             .withSellProperty(PROPERTY_OTHERPROPERTY)

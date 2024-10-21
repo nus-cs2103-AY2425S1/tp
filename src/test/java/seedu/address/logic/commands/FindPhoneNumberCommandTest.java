@@ -67,7 +67,7 @@ public class FindPhoneNumberCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        PhoneNumberContainsKeywordPredicate predicate = preparePredicate("95352563 9482224 9482427");
+        PhoneNumberContainsKeywordPredicate predicate = preparePredicate("94822 94824 9482442");
         FindPhoneNumberCommand command = new FindPhoneNumberCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
