@@ -128,6 +128,12 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
+    }
 
     //=========== Filtered Person and Event List Accessors ==========================================================
 
@@ -151,6 +157,11 @@ public class ModelManager implements Model {
         return filteredEvents;
     }
 
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
 
     @Override
     public boolean equals(Object other) {
