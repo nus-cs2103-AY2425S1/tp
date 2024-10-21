@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
@@ -24,6 +25,7 @@ public class DeliveryBuilder {
     public static final String DEFAULT_STATUS = "not delivered";
     public static final String DEFAULT_TIME = "00:00:00";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111, S120300";
+    public static final String DEFAULT_ARCHIVE = "false";
 
     private Cost cost;
     private Date date;
@@ -33,6 +35,7 @@ public class DeliveryBuilder {
     private Status status;
     private Time time;
     private Address address;
+    private Archive archive;
 
     /**
      * Creates a {@code DeliveryBuilder} with the default details.
@@ -46,6 +49,7 @@ public class DeliveryBuilder {
         status = new Status(DEFAULT_STATUS);
         time = new Time(DEFAULT_TIME);
         address = new Address(DEFAULT_ADDRESS);
+        archive = new Archive(DEFAULT_ARCHIVE);
     }
 
     /**
@@ -61,6 +65,7 @@ public class DeliveryBuilder {
         status = deliveryToCopy.getStatus();
         time = deliveryToCopy.getTime();
         address = deliveryToCopy.getAddress();
+        archive = deliveryToCopy.getArchive();
     }
 
     /**
@@ -137,12 +142,20 @@ public class DeliveryBuilder {
     }
 
     /**
+     * Sets the {@code Archive} of the {@code Delivery} that we are building.
+     */
+    public DeliveryBuilder withArchive(String archive) {
+        this.archive = new Archive(archive);
+        return this;
+    }
+
+    /**
      * Builds the {@code Delivery} object.
      *
      * @return The built Delivery object.
      */
     public Delivery build() {
-        return new Delivery(id, itemName, address, cost, date, time, eta, status);
+        return new Delivery(id, itemName, address, cost, date, time, eta, status, archive);
     }
 
 }
