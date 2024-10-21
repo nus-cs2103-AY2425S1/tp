@@ -5,9 +5,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIsStarredPredicate;
 

@@ -82,6 +82,7 @@ public class ListCommandTest {
         PersonIsStarredPredicate predicate = new PersonIsStarredPredicate();
         ListCommand listStarredCommand = new ListCommand(predicate);
 
-        assertCommandSuccess(listStarredCommand, noStarredModel, ListCommand.MESSAGE_EMPTY_STARRED_LIST, expectedNoStarredModel);
+        assertCommandSuccess(listStarredCommand, noStarredModel, ListCommand.MESSAGE_EMPTY_STARRED_LIST,
+                expectedNoStarredModel);
     }
 }

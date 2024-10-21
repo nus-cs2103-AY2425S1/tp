@@ -3,9 +3,12 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents whether a contact has been starred (true) or not (false).
+ */
 public class StarredStatus {
-    public static final String MESSAGE_CONSTRAINTS = "Starred status should be true or false, " +
-            "and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Starred status should be true or false, "
+            + "and it should not be blank";
 
     /*
      * StarredStatus should only be true or false.
