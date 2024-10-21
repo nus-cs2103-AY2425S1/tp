@@ -16,7 +16,7 @@ import seedu.address.model.pet.Pet;
 class JsonAdaptedLink {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Link's %s field is missing!";
-    public static final String INVALID_LINK_MESSAGE_FORAMT = "Cannot find owner or pet with the given ID %s";
+    public static final String INVALID_LINK_MESSAGE_FORMAT = "Cannot find owner or pet with the given ID %s";
 
     private final String from;
     private final String to;
@@ -49,7 +49,7 @@ class JsonAdaptedLink {
         }
         FilteredList<Owner> filteredOwners = owners.filtered(owner -> owner.getUniqueID().equals(from));
         if (filteredOwners.size() == 0) {
-            throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORAMT, from));
+            throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORMAT, from));
         }
 
         if (to == null) {
@@ -57,7 +57,7 @@ class JsonAdaptedLink {
         }
         FilteredList<Pet> filteredPets = pets.filtered(pet -> pet.getUniqueID().equals(to));
         if (filteredPets.size() == 0) {
-            throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORAMT, to));
+            throw new IllegalValueException(String.format(INVALID_LINK_MESSAGE_FORMAT, to));
         }
 
         // Indices have been checked and should not have out of bound errors
