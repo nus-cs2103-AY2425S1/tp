@@ -130,7 +130,7 @@ public class CsvImport {
             for (String actualHeader : actualHeaders) {
                 if (!expectedHeaders.remove(actualHeader)) {
                     return false;
-                };
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

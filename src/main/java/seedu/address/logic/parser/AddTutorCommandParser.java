@@ -38,16 +38,22 @@ public class AddTutorCommandParser implements Parser<AddTutorCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
                         PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS, PREFIX_TAG, PREFIX_SUBJECT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTutorCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOURS);
+        // Hours is optional for adding a tutee and will be set to 0 if unspecified
+        Hours hours;
+        if (!arePrefixesPresent(argMultimap, PREFIX_HOURS)) {
+            hours = new Hours("0");
+        } else {
+            hours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
+        }
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Hours hours = ParserUtil.parseHours(argMultimap.getValue(PREFIX_HOURS).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
