@@ -6,7 +6,22 @@ title: User Guide
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 - Table of Contents
-  {:toc}
+* [Quick start](#quick-start)
+* [Features](#features)
+    * [Viewing help : help](#viewing-help--help)
+    * [Adding a person: add](#adding-a-person-add)
+    * [Listing all persons : list](#listing-all-persons--list)
+    * [Editing a person : edit](#editing-a-person--edit)
+    * [Locating persons by name, NRIC, role, or tags: find](#locating-persons-by-name-nric-role-or-tags-find)
+    * [Deleting a person : delete](#deleting-a-person--delete)
+    * [Clearing all entries : clear](#clearing-all-entries--clear)
+    * [Exiting the program : exit](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files [coming in v2.0]](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
+* [Known issues](#known-issues)
+* [Command summary](#command-summary)
 
 ---
 
@@ -29,7 +44,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    - `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   - `delete 3` : Deletes the 3rd contact shown in the current list.
+   - `delete S6483749D` : Deletes the person with NRIC `S6483749D`.
 
    - `clear` : Deletes all contacts.
 
@@ -217,7 +232,7 @@ _Details coming soon ..._
 | **Add**         | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Link**        | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                           |
 | **Clear**       | `clear`                                                                                                                                                               |
-| **Delete**      | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Delete**      | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                                   |
 | **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
 | **Find**        | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567A`
 | **List**        | `list`
