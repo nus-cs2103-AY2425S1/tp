@@ -1,17 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_RELATIONSHIP;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -36,6 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Relationship;
+import seedu.address.model.person.exceptions.EmergencyContactNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,20 +44,26 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "NAME OF EMERGENCY CONTACT TO EDIT "
+            + "At least one of these fields ("
             + "[" + PREFIX_EMERGENCY_CONTACT_NAME + "EMERGENCY CONTACT NAME] "
             + "[" + PREFIX_EMERGENCY_CONTACT_PHONE + "EMERGENCY CONTACT PHONE] "
-            + "[" + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP] "
+            + "[" + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "EMERGENCY CONTACT RELATIONSHIP]) "
             + "[" + PREFIX_DOC_NAME + "DOCTOR NAME]"
             + "[" + PREFIX_DOC_PHONE + "DOCTOR PHONE]"
             + "[" + PREFIX_DOC_EMAIL + "DOCTOR EMAIL]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMERGENCY_CONTACT_TO_EDIT + "John Kennedy"
+            + PREFIX_EMERGENCY_CONTACT_NAME + "John Kentucky";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EMERGENCY_CONTACT_NOT_EDITED = "At least one emergency contact field to edit "
+            + "must be provided.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -94,13 +91,25 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        EmergencyContact updatedEmergencyContact =
-                createEditedEmergencyContact(personToEdit.getEmergencyContact(), editPersonDescriptor);
+        Set<EmergencyContact> updatedEmergencyContacts;
+        EmergencyContact updatedEmergencyContact = null;
+        if (!editPersonDescriptor.getNameOfEmergencyContactToEdit().isEmpty()) {
+            try {
+                updatedEmergencyContact = personToEdit.getAndRemoveEmergencyContact(
+                        editPersonDescriptor.getNameOfEmergencyContactToEdit()
+                        .orElse(personToEdit.getAnyEmergencyContactName()));
+            } catch (EmergencyContactNotFoundException e) {
+                throw new EmergencyContactNotFoundException();
+            }
+            updatedEmergencyContact = createEditedEmergencyContact(updatedEmergencyContact, editPersonDescriptor);
+            personToEdit.getEmergencyContacts().add(updatedEmergencyContact);
+        }
+        updatedEmergencyContacts = personToEdit.getEmergencyContacts();
         Doctor updatedDoctor = createEditedDoctor(personToEdit.getDoctor(), editPersonDescriptor);
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedEmergencyContact, updatedDoctor, updatedTags);
+                updatedEmergencyContacts, updatedDoctor, updatedTags);
     }
 
     private static EmergencyContact createEditedEmergencyContact(EmergencyContact emergencyContactToEdit,
@@ -184,6 +193,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Name nameOfEmergencyContactToEdit;
         private Name emergencyContactName;
         private Phone emergencyContactPhone;
         private Relationship emergencyContactRelationship;
@@ -204,6 +214,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setNameOfEmergencyContactToEdit(toCopy.nameOfEmergencyContactToEdit);
             setEmergencyContactName(toCopy.emergencyContactName);
             setEmergencyContactPhone(toCopy.emergencyContactPhone);
             setEmergencyContactRelationship(toCopy.emergencyContactRelationship);
@@ -281,6 +292,14 @@ public class EditCommand extends Command {
             this.emergencyContactRelationship = emergencyContactRelationship;
         }
 
+        public Optional<Name> getNameOfEmergencyContactToEdit() {
+            return Optional.ofNullable(nameOfEmergencyContactToEdit);
+        }
+
+        public void setNameOfEmergencyContactToEdit(Name nameOfEmergencyContactToEdit) {
+            this.nameOfEmergencyContactToEdit = nameOfEmergencyContactToEdit;
+        }
+
         public Optional<DoctorName> getDoctorName() {
             return Optional.ofNullable(doctorName);
         }
@@ -339,6 +358,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(nameOfEmergencyContactToEdit,
+                            otherEditPersonDescriptor.nameOfEmergencyContactToEdit)
                     && Objects.equals(emergencyContactName, otherEditPersonDescriptor.emergencyContactName)
                     && Objects.equals(emergencyContactPhone, otherEditPersonDescriptor.emergencyContactPhone)
                     && Objects.equals(emergencyContactRelationship,
@@ -356,6 +377,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("name of emergency contact to edit", nameOfEmergencyContactToEdit)
                     .add("emergency contact name", emergencyContactName)
                     .add("emergency contact phone", emergencyContactPhone)
                     .add("emergency contact relationship", emergencyContactRelationship)

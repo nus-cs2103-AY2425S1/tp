@@ -1,13 +1,16 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.exceptions.EmergencyContactNotFoundException;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,7 +27,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final EmergencyContact emergencyContact;
+    private final Set<EmergencyContact> emergencyContacts = new HashSet<>();
     private final Doctor doctor;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -32,13 +35,13 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-            EmergencyContact emergencyContact, Doctor doctor, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, emergencyContact, tags);
+            Set<EmergencyContact> emergencyContacts, Doctor doctor, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, emergencyContacts, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.emergencyContact = emergencyContact;
+        this.emergencyContacts.addAll(emergencyContacts);
         this.doctor = doctor;
         this.tags.addAll(tags);
     }
@@ -59,8 +62,33 @@ public class Person {
         return address;
     }
 
-    public EmergencyContact getEmergencyContact() {
-        return emergencyContact;
+    public Set<EmergencyContact> getEmergencyContacts() {
+        return Collections.unmodifiableSet(emergencyContacts);
+    }
+
+    public Name getAnyEmergencyContactName() {
+        return emergencyContacts.stream()
+                .map(EmergencyContact::getName)
+                .findFirst().orElse(null);
+    }
+
+    public EmergencyContact getAndRemoveEmergencyContact(Name name) throws EmergencyContactNotFoundException {
+        for (EmergencyContact emergencyContact : emergencyContacts) {
+            if (emergencyContact.getName().equals((name))) {
+                emergencyContacts.remove(emergencyContact);
+                return emergencyContact;
+            }
+        }
+        throw new EmergencyContactNotFoundException();
+    }
+
+    public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
+        for (EmergencyContact emergencyContact : emergencyContacts) {
+            if (emergencyContact.equals((emergencyContactToCheck))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Doctor getDoctor() {
@@ -109,7 +137,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && emergencyContact.equals(otherPerson.emergencyContact)
+                && emergencyContacts.equals(otherPerson.emergencyContacts)
                 && doctor.equals(otherPerson.doctor)
                 && tags.equals(otherPerson.tags);
     }
@@ -117,7 +145,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, emergencyContact, doctor, tags);
+        return Objects.hash(name, phone, email, address, emergencyContacts, doctor, tags);
     }
 
     @Override
@@ -127,7 +155,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("emergency contact", emergencyContact)
+                .add("emergency contact", emergencyContacts)
                 .add("doctor", doctor)
                 .add("tags", tags)
                 .toString();

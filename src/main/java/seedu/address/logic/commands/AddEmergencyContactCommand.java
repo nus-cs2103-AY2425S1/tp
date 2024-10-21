@@ -53,7 +53,7 @@ public class AddEmergencyContactCommand extends Command {
             + PREFIX_EMERGENCY_CONTACT_RELATIONSHIP + "Granddaughter";
 
     public static final String MESSAGE_SUCCESS = "Added emergency contact: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person is already an emergency contact.";
+    public static final String MESSAGE_DUPLICATE_EMERGENCY_CONTACT = "This person is already an emergency contact.";
 
     private final Index index;
     private final EmergencyContact emergencyContactToAdd;
@@ -75,38 +75,39 @@ public class AddEmergencyContactCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, EmergencyContact emergencyContactToAdd) {
         assert personToEdit != null;
 
-        return new Person();
-    }
+        Set<EmergencyContact> emergencyContacts = personToEdit.getEmergencyContacts();
+        emergencyContacts.add(emergencyContactToAdd);
 
-    private static EmergencyContact createEditedEmergencyContact(EmergencyContact emergencyContactToEdit,
-                                                                 EditCommand.EditPersonDescriptor editPersonDescriptor) {
-        assert emergencyContactToEdit != null;
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        Doctor doctor = personToEdit.getDoctor();
+        Set<Tag> tags = personToEdit.getTags();
 
-        Name updatedName = editPersonDescriptor.getEmergencyContactName().orElse(emergencyContactToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getEmergencyContactPhone()
-                .orElse(emergencyContactToEdit.getPhone());
-        Relationship updatedRelationship = editPersonDescriptor.getEmergencyContactRelationship()
-                .orElse(emergencyContactToEdit.getRelationship());
-
-        return new EmergencyContact(updatedName, updatedPhone, updatedRelationship);
+        return new Person(name, phone, email, address, emergencyContacts, doctor, tags);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        if (model.hasPerson(emergencyContactToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        Person personToAddEmergencyContactTo = lastShownList.get(index.getZeroBased());
+
+        if (personToAddEmergencyContactTo.hasEmergencyContact(emergencyContactToAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMERGENCY_CONTACT);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(emergencyContactToAdd)));
+        Person editedPerson = createEditedPerson(personToAddEmergencyContactTo, emergencyContactToAdd);
+
+        model.setPerson(personToAddEmergencyContactTo, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(editedPerson)));
     }
 
     @Override
@@ -116,18 +117,18 @@ public class AddEmergencyContactCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddEmergencyContactCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddEmergencyContactCommand otherAddEmergencyContactCommand = (AddEmergencyContactCommand) other;
+        return emergencyContactToAdd.equals(otherAddEmergencyContactCommand.emergencyContactToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toAdd", emergencyContactToAdd)
                 .toString();
     }
 }
