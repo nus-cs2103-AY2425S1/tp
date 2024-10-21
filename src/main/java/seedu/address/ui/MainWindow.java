@@ -210,6 +210,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
             // Student Commands
+            case LISTSTUDENT:
             case ADDSTUDENT:
             case EDITSTUDENT:
             case FINDSTUDENT:
