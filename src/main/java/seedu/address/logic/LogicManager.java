@@ -54,7 +54,7 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         if (this.awaitingConfirmation) {
-            commandResult =  handleConfirmation(commandText);
+            commandResult = handleConfirmation(commandText);
         } else {
             Command command = addressBookParser.parseCommand(commandText);
             commandResult = command.execute(model, this.awaitingConfirmation);
