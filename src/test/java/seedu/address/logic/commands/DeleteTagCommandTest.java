@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.FRIEND_TAG;
@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalCampusConnect;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -19,6 +20,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class DeleteTagCommandTest {
     private static final Model model = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
+    private static final String DEFAULT_TAG = "test";
     private static final String TEST_EMAIL = "test@test";
     private static final String TEST_PHONE = "84209817";
     private static final String TEST_USER = "test user";
@@ -39,6 +41,20 @@ public class DeleteTagCommandTest {
         String expectedMessage = String.format(Messages.MESSAGE_DELETE_TAG_SUCCESS,
                 new Tag(FRIEND_TAG), p.getName());
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_InvalidIndexPersonList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(outOfBoundIndex, new Tag(DEFAULT_TAG));
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_PersonHasNoTag_failure() {
+        Index lastIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        DeleteTagCommand deleteTagCommand = new DeleteTagCommand(lastIndex, new Tag(DEFAULT_TAG));
+        assertCommandFailure(deleteTagCommand, model, Messages.MESSAGE_NO_TAG);
     }
 
 }
