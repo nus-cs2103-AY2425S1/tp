@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 
 /**
  * Represents a Person in the address book.
@@ -16,6 +17,7 @@ public class Person {
     private final Ward ward;
     private final Diagnosis diagnosis;
     private final Medication medication;
+    private final Appointment appointment;
     private final Notes notes;
     /*
     private final Set<Tag> tags = new HashSet<>();
@@ -30,6 +32,7 @@ public class Person {
         this.ward = ward;
         this.diagnosis = diagnosis;
         this.medication = medication;
+        this.appointment = null;
         this.notes = notes;
     }
 
