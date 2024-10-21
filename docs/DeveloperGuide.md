@@ -310,6 +310,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Use case: UC1 - Add Client (Buyer or Seller)**
 
+Guarantees:
+* If property listing is not in the database, it would be removed from property database with no side effects.
+
 MSS:
 1. Real estate agent requests to add a buyer/ seller to ClientGrid and passes in the buyer/ seller's name, phone number and email.
 2. ClientGrid will add the buyer/ seller with the name, phone number, and email specified by the real estate agent.
@@ -326,7 +329,12 @@ Extensions:
     * Steps 1a1-1a2 are repeated until the data entered are correct.
         
         Use case ends.
-    
+
+* 2a. ClientGrid detects that the buyer/ seller already exists in the client book
+
+    * 2a1. ClientGrid informs the real estate agent that the buyer/ seller already exists in the client book and does not add the duplicate buyer/ seller.
+
+      Use case ends.
 
 **Use case: UC2 - Delete Client (Buyer or Seller)**
 
@@ -388,7 +396,7 @@ Use case ends.
 
 Extensions:
 
-* 1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent, .
+* 1a. ClientGrid detects an error in the postal code or unit number format provided by the real estate agent.
 
     * 1a1. ClientGrid requests for the correct data.
 
@@ -431,6 +439,34 @@ Extensions:
 
       Use case ends.
 
+**Use case: UC8 - Delete Meeting**
+
+Guarantees:
+* If meeting was in the meeting book originally, it would be removed from meeting book with no side effects.
+
+MSS:
+1. Real estate agent requests to delete a meeting based on the meeting’s meeting title and meeting date.
+2. ClientGrid will delete the respective meeting and indicate success.
+   Use case ends.
+
+Extensions:
+
+* 1a. ClientGrid detects an error in the meeting title or meeting date format provided by the real estate agent.
+
+    * 1a1. ClientGrid requests for the correct data.
+
+    * 1a2. Real estate agent enters new data.
+
+    * Steps 1a1-1a2 are repeated until the data entered are correct.
+
+    * Use case resumes from step 2.
+
+* 1b. ClientGrid is unable to find a matching meeting entry in the database.
+
+    * 1b1. ClientGrid informs real estate agent that the meeting does not exist in the database.
+
+    * Use case ends.
+
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -440,9 +476,11 @@ Extensions:
 5. Should be able to handle case of corrupted file
 
 ### Glossary
-
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Clients**: Buyers or Sellers of properties the real estate agent is managing
+* **Client Book**: In-memory JSON file containing the clients stored in ClientGrid
+* **Property Book**: In-memory JSON file containing the properties stored in ClientGrid
+* **Meeting Book**: In-memory JSON file containing the meetings stored in ClientGrid
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Corrupted file**: Missing file and invalid data
 --------------------------------------------------------------------------------------------------------------------
