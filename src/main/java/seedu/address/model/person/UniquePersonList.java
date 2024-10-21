@@ -46,6 +46,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the same ID as the given argument.
+     */
+    public boolean containsId(int idToCheck) {
+        return internalList.stream().anyMatch(p -> p.getId() == idToCheck);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

@@ -52,9 +52,10 @@ public class AddEventCommand extends Command {
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-
-        model.addEvent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        int newEventId = model.generateNewEventId();
+        Event updatedEvent = toAdd.changeId(newEventId);
+        model.addEvent(updatedEvent);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedEvent)));
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.event.Event;
+import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -71,7 +72,7 @@ public interface Model {
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the address book and its ID should not be -1.
      */
     void addPerson(Person person);
 
@@ -138,4 +139,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Generates a new unique person ID.
+     */
+    int generateNewPersonId();
+
+    /**
+     * Generates a new unique event ID.
+     */
+    int generateNewEventId();
 }

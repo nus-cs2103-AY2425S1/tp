@@ -23,6 +23,8 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON_ID = "Persons list contains duplicate IDs";
+    public static final String MESSAGE_DUPLICATE_EVENT_ID = "Events list contains duplicate IDs";
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
     private final List<JsonAdaptedEvent> events = new ArrayList<>();
@@ -58,12 +60,25 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+        List<Integer> personIds = new ArrayList<>();
+        List<Integer> eventIds = new ArrayList<>();
+        int largestPersonId = 0;
+        int largestEventId = 0;
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addPerson(person);
+
+            int personId = person.getId();
+            if (personId > largestPersonId) {
+                largestPersonId = personId;
+            }
+            if (personIds.contains(personId)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON_ID);
+            }
+            personIds.add(personId);
         }
         for (JsonAdaptedEvent jsonAdaptedEvent : events) {
             Event event = jsonAdaptedEvent.toModelType();
@@ -71,9 +86,24 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
             addressBook.addEvent(event);
+
+            int eventId = event.getEventId();
+            if (eventId > largestEventId) {
+                largestEventId = eventId;
+            }
+            if (eventIds.contains(eventId)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT_ID);
+            }
+            eventIds.add(eventId);
         }
         IdCounterList idCounterList = this.idCounterList.toModelType();
-        addressBook.addIdCounterList(idCounterList);
+        if (!idCounterList.isValidPersonIdCounter(largestPersonId)) {
+            idCounterList.setPersonIdCounter(largestPersonId);
+        }
+        if (!idCounterList.isValidEventIdCounter(largestEventId)) {
+            idCounterList.setEventIdCounter(largestEventId);
+        }
+        addressBook.setIdCounterList(idCounterList);
 
         return addressBook;
     }

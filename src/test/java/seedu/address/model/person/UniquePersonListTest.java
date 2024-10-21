@@ -92,6 +92,18 @@ public class UniquePersonListTest {
     }
 
     @Test
+    public void containsId_sameId_returnsTrue() {
+        uniquePersonList.add(ALICE);
+        assertTrue(uniquePersonList.containsId(ALICE.getId()));
+    }
+
+    @Test
+    public void containsId_differentId_returnsFalse() {
+        uniquePersonList.add(ALICE);
+        assertFalse(uniquePersonList.containsId(ALICE.getId() + 1));
+    }
+
+    @Test
     public void add_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniquePersonList.add(null));
     }

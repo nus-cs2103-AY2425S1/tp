@@ -32,17 +32,41 @@ public class IdCounterList {
         return eventIdCounter;
     }
 
-    /**
-     * Increment person ID counter by 1.
-     */
-    public void incrementPersonIdCounter() {
-        personIdCounter++;
+    public void setPersonIdCounter(int personIdCounter) {
+        this.personIdCounter = personIdCounter;
+    }
+
+    public void setEventIdCounter(int eventIdCounter) {
+        this.eventIdCounter = eventIdCounter;
     }
 
     /**
-     * Increment event ID counter by 1.
+     * Checks if the person ID counter in this {@code IdCounterList} object is valid.
      */
-    public void incrementEventIdCounter() {
+    public boolean isValidPersonIdCounter(int largestPersonId) {
+        return this.personIdCounter >= largestPersonId;
+    }
+
+    /**
+     * Checks if the event ID counter in this {@code IdCounterList} object is valid.
+     */
+    public boolean isValidEventIdCounter(int largestEventId) {
+        return this.eventIdCounter >= largestEventId;
+    }
+
+    /**
+     * Generates a new unique person ID.
+     */
+    public int generatePersonId() {
+        personIdCounter++;
+        return personIdCounter;
+    }
+
+    /**
+     * Generates a new unique event ID.
+     */
+    public int generateEventId() {
         eventIdCounter++;
+        return eventIdCounter;
     }
 }

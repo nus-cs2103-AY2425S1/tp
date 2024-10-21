@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.id.counter.list.IdCounterList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -72,7 +73,9 @@ public class ImportCommand extends Command {
         List<Person> personList = getPersonList(filePath);
         for (Person person : personList) {
             if (!model.hasPerson(person)) {
-                model.addPerson(person);
+                int updatedPersonId = model.generateNewPersonId();
+                Person updatedIdPerson = person.changeId(updatedPersonId);
+                model.addPerson(updatedIdPerson);
             }
         }
 
@@ -156,7 +159,7 @@ public class ImportCommand extends Command {
             List<String> tagList = arr.length == 5 ? Arrays.asList(arr[4].split(",")) : new ArrayList<>();
             Set<Tag> tags = ParserUtil.parseTags(tagList);
 
-            return new Person(name, phone, email, address, tags);
+            return new Person(name, phone, email, address, tags, -1);
         } catch (ParseException e) {
             throw new CommandException(MESSAGE_INCORRECT_FILE_FORMAT);
         }

@@ -191,6 +191,16 @@ public class AddEventCommandTest {
         public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int generateNewPersonId() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int generateNewEventId() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -208,6 +218,11 @@ public class AddEventCommandTest {
         public boolean hasEvent(Event event) {
             requireNonNull(event);
             return this.event.isSameEvent(event);
+        }
+
+        @Override
+        public int generateNewEventId() {
+            return 1;
         }
     }
 
@@ -232,6 +247,11 @@ public class AddEventCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public int generateNewEventId() {
+            return 1;
         }
     }
 

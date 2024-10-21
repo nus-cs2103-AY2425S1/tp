@@ -3,14 +3,16 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "id": 1
   } ],
   "events": [
     {
       "eventName": "Meeting",
       "eventDescription": "Team meeting",
       "eventFrom": "2024-10-10",
-      "eventTo": "2024-10-11"
+      "eventTo": "2024-10-11",
+      "id": 1
     }
   ],
   "idCounterList" : {

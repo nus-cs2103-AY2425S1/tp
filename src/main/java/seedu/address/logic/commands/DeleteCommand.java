@@ -39,6 +39,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        // Maybe can split this class into DeleteByIndexCommand and DeleteByNameCommand
         requireNonNull(model);
         Person personToDelete;
         if (this.targetIndex == null) {
@@ -89,6 +90,11 @@ public class DeleteCommand extends Command {
 
     @Override
     public String toString() {
+        if (targetIndex == null) {
+            return new ToStringBuilder(this)
+                    .add("targetName", targetName)
+                    .toString();
+        }
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
