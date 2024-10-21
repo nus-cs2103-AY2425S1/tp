@@ -14,19 +14,22 @@ import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 
-import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.*;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ModelManager.DisplayMode;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyClientBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonClientBookStorage;
@@ -220,7 +223,10 @@ public class LogicManagerTest {
         ObjectProperty<DisplayMode> result = logic.getDisplayMode();
 
         // Assert that the result is an instance of ObjectProperty<DisplayMode>
-        assertTrue(result instanceof ObjectProperty<?>, "Expected result to be an instance of ObjectProperty<DisplayMode>");
+        assertTrue(
+                result instanceof ObjectProperty<?>,
+                "Expected result to be an instance of ObjectProperty<DisplayMode>"
+        );
     }
 
     @Test

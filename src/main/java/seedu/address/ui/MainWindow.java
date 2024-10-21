@@ -16,7 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ModelManager.DisplayMode;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -124,24 +123,23 @@ public class MainWindow extends UiPart<Stage> {
         propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
         meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList());
 
-        // TODO: Add listPanel for MEETINGS @apollo-tan
-
         // Initialise clientListPanel to display Clients
         listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
 
         // Add listener to modify display appropriately
         logic.getDisplayMode().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
-                case CLIENTS:
-                    listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
-                    break;
-                case PROPERTIES:
-                    listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
-                    break;
-                case MEETINGS:
-                    listPanelPlaceholder.getChildren().setAll(meetingListPanel.getRoot());
-                default:
-                    throw new RuntimeException("Invalid Display Mode: " + newValue);
+            case CLIENTS:
+                listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
+                break;
+            case PROPERTIES:
+                listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+                break;
+            case MEETINGS:
+                listPanelPlaceholder.getChildren().setAll(meetingListPanel.getRoot());
+                break;
+            default:
+                throw new RuntimeException("Invalid Display Mode: " + newValue);
             }
         });
 

@@ -21,11 +21,10 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import javafx.beans.property.ObjectProperty;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -40,6 +39,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
 import seedu.address.testutil.MeetingBookBuilder;
+
 
 public class ModelManagerTest {
 
@@ -306,8 +306,8 @@ public class ModelManagerTest {
         modelManager.setDisplayClients();
         assertEquals(
                 ModelManager.DisplayMode.CLIENTS, modelManager.getDisplayMode().getValue(),
-                "Expected display mode to be CLIENTS")
-        ;
+                "Expected display mode to be CLIENTS"
+        );
     }
 
     @Test
