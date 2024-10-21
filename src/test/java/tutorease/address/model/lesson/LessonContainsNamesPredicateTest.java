@@ -80,8 +80,8 @@ public class LessonContainsNamesPredicateTest {
         LessonContainsNamesPredicate predicate = new LessonContainsNamesPredicate(keywords);
 
         String expected =
-                LessonContainsNamesPredicate.class.getCanonicalName() + "{keywords in lessons=" + keywords +
-                        "}";
+                LessonContainsNamesPredicate.class.getCanonicalName() + "{keywords in lessons=" + keywords
+                        + "}";
         assertEquals(expected, predicate.toString());
     }
 }
