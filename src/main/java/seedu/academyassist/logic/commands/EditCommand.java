@@ -224,7 +224,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code subjects} is used internally.
          */
         public void setSubjects(Set<Subject> subjects) {
-            this.subjects = subjects;
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
         /**
@@ -233,7 +233,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code subjects} is null.
          */
         public Optional<Set<Subject>> getSubjects() {
-            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+            return (subjects != null) ? Optional.of(new HashSet<>(subjects)) : Optional.empty();
         }
 
         @Override

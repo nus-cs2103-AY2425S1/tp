@@ -59,7 +59,7 @@ public class PersonCard extends UiPart<Region> {
         yearGroup.setStyle("-fx-background-color: #8fd3fe; -fx-text-fill: white");
         tags.getChildren().add(yearGroup);
         person.getSubjects().stream()
-                .sorted(Comparator.comparing(subject -> subject.subject))
-                .forEach(subject -> tags.getChildren().add(new Label(subject.subject)));
+                .sorted(Comparator.comparing(subject -> subject.toString()))
+                .forEach(subject -> tags.getChildren().add(new Label(subject.toString())));
     }
 }

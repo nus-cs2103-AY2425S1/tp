@@ -4,7 +4,6 @@ import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_SUBJECT;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.academyassist.logic.commands.AddClassCommand;
@@ -33,16 +32,13 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_IC, PREFIX_SUBJECT); // Only can add one class at a time.
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(PREFIX_IC).get());
-        Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
-        // Verify that there is exactly one subject
-        if (subjects.size() != 1) {
-            throw new ParseException("Exactly one subject must be provided.");
+        try {
+            Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
+            return new AddClassCommand(ic, subject);
+        } catch (ParseException pe) {
+            throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-
-        // Assign the subject to subject variable
-        Subject subject = subjects.iterator().next();
-        return new AddClassCommand(ic, subject);
     }
 
     /**

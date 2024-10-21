@@ -132,8 +132,16 @@ class JsonAdaptedPerson {
             }
             personSubjects.add(subject.toModelType());
         }
-        final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelSubjects);
+
+        final Set<Subject> modelSubjects = new HashSet<>();
+        for (JsonAdaptedSubject subject : subjects) {
+            modelSubjects.add(subject.toModelType());
+        }
+
+        final Set<Tag> modelTags = new HashSet<>(personTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelSubjects,
+                modelTags);
+
     }
 
 }

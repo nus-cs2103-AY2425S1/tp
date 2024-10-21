@@ -17,7 +17,10 @@
       "address": "311, Clementi Ave 2, #02-25",
       "ic": "F1264567X",
       "year group": "1",
-      "subjects": ["Maths"]
+
+      "tags": ["owesMoney", "friends"],
+      "subjects": ["Math"]
+
     },
     {
       "name": "Carl Kurz",

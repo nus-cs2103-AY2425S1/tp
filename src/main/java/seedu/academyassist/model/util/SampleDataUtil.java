@@ -13,6 +13,7 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
+import seedu.academyassist.model.person.SubjectEnum;
 import seedu.academyassist.model.person.YearGroup;
 
 /**
@@ -55,6 +56,7 @@ public class SampleDataUtil {
      */
     public static Set<Subject> getSubjectSet(String... strings) {
         return Arrays.stream(strings)
+                .filter(SubjectEnum::isValidSubject)
                 .map(Subject::new)
                 .collect(Collectors.toSet());
     }
