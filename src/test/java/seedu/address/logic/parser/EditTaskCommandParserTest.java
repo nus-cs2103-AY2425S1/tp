@@ -29,7 +29,7 @@ public class EditTaskCommandParserTest {
         Index expectedIndex = Index.fromOneBased(1);
         GroupName expectedGroupName = new GroupName(TEAM_FIVE);
         TaskName expectedTaskName = new TaskName("TP");
-        Deadline expectedDeadline = new Deadline(LocalDateTime.of(2025, 12, 31, 23, 59));
+        Deadline expectedDeadline = new Deadline(LocalDateTime.of(2025, 12, 31, 23, 0));
         EditTaskDescriptor descriptor = new EditTaskDescriptor();
         descriptor.setTaskName(expectedTaskName);
         descriptor.setDeadline(expectedDeadline);
