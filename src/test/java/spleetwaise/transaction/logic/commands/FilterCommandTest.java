@@ -85,6 +85,18 @@ public class FilterCommandTest {
     }
 
     @Test
+    public void execute_descriptionDifferentCaseOnly_success() {
+        FilterCommand cmd = new FilterCommand(null, null,
+                new Description(testDescription.toString().toLowerCase()), null);
+        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
+
+        assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
+        assertEquals(1, txnModel.getFilteredTransactionList().size());
+        assertTrue(txnModel.getFilteredTransactionList().contains(TypicalTransactions.SEANOWESME));
+        assertFalse(txnModel.getFilteredTransactionList().contains(TypicalTransactions.BOBOWES));
+    }
+
+    @Test
     public void execute_dateOnly_success() {
         FilterCommand cmd = new FilterCommand(null, null, null, testDate);
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);

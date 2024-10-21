@@ -84,7 +84,9 @@ public class FilterCommand extends Command {
                 return false;
             }
 
-            if (description != null && !txn.getDescription().toString().contains(description.toString())) {
+            if (description != null
+                    && !txn.getDescription().toString().toLowerCase()
+                    .contains(description.toString().toLowerCase())) {
                 return false;
             }
 
