@@ -257,7 +257,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getMeetingBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetingBookFilePath(Path meetingBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setMeetingBook(ReadOnlyMeetingBook meetingBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyMeetingBook getMeetingBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasMeeting(Meeting meeting) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addMeeting(Meeting meeting) {
             throw new AssertionError("This method should not be called.");
         }
 
