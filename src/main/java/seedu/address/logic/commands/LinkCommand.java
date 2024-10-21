@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -47,6 +48,9 @@ public class LinkCommand extends Command {
      */
     public LinkCommand(Index ownerIndex, Set<Index> petIndexes) {
         requireAllNonNull(ownerIndex, petIndexes);
+        if(petIndexes.size() == 0) {
+            throw new IllegalArgumentException("At least one pet index must be provided");
+        }
         this.ownerIndex = ownerIndex;
         this.petIndexes = petIndexes;
     }
@@ -111,14 +115,14 @@ public class LinkCommand extends Command {
 
         LinkCommand otherLinkCommand = (LinkCommand) other;
         return otherLinkCommand.ownerIndex.equals(ownerIndex)
-            && otherLinkCommand.petIndexes.stream().allMatch(petIndexes::contains);
+            && otherLinkCommand.petIndexes.equals(this.petIndexes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-          .add("ownerIndex", ownerIndex)
-          .add("petIndexes", petIndexes)
+          .add("ownerIndex", ownerIndex.getOneBased())
+          .add("petIndexes", Arrays.toString(petIndexes.stream().map(Index::getOneBased).toArray()))
           .toString();
     }
 }

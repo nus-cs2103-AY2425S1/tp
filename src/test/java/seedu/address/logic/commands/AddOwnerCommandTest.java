@@ -22,6 +22,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -137,6 +138,11 @@ public class AddOwnerCommandTest {
         }
 
         @Override
+        public void addLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -162,6 +168,11 @@ public class AddOwnerCommandTest {
         }
 
         @Override
+        public boolean hasLink(Link link) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -173,6 +184,11 @@ public class AddOwnerCommandTest {
 
         @Override
         public void deletePet(Pet target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLink(Link link) {
             throw new AssertionError("This method should not be called.");
         }
 

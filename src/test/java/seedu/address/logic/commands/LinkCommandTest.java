@@ -4,21 +4,28 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_OWNER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -26,65 +33,80 @@ import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.OwnerBuilder;
+import seedu.address.testutil.PetBuilder;
+import seedu.address.testutil.TypicalIndexes;
 
-public class AddCommandTest {
+public class LinkCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+    public void constructor_nullLink_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new LinkCommand(TypicalIndexes.INDEX_FIRST_OWNER, null));
+        assertThrows(NullPointerException.class, () -> new LinkCommand(null, new HashSet<Index>()));
+        assertThrows(NullPointerException.class, () -> new LinkCommand(null, null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_linkAcceptedByModel_addSuccess() throws Exception {
+        Owner validOwner = new OwnerBuilder().build();
+        Pet validPet = new PetBuilder().build();
+        Link link = new Link(validOwner, validPet);
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        ModelStubAcceptingLinkAdded modelStub = new ModelStubAcceptingLinkAdded(validOwner, validPet);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        Set<Index> linkIndexes = new HashSet<>(Arrays.asList(INDEX_FIRST_PET));
+        CommandResult commandResult = new LinkCommand(INDEX_FIRST_OWNER, linkIndexes).execute(modelStub);
+
+        assertEquals(String.format(LinkCommand.MESSAGE_SUCCESS, linkIndexes.size(), Messages.format(validOwner)),
+            commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(link), modelStub.linksAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateLink_throwsCommandException() {
+        Owner validOwner = new OwnerBuilder().build();
+        Pet validPet = new PetBuilder().build();
+        Link link = new Link(validOwner, validPet);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        ModelStub modelStub = new ModelStubWithExistingLink(validOwner,validPet, link);
+
+        assertThrows(CommandException.class,
+            LinkCommand.MESSAGE_DUPLICATE_LINK, () ->
+            new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)))
+            .execute(modelStub)
+        );
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        LinkCommand linkCommandA = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        LinkCommand linkCommandB = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        LinkCommand linkCommandC = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_SECOND_PET)));
+        LinkCommand linkCommandD = new LinkCommand(INDEX_SECOND_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(linkCommandA.equals(linkCommandA));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertTrue(linkCommandA.equals(linkCommandB));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(linkCommandA.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(linkCommandA.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different link targets -> returns false
+        assertFalse(linkCommandA.equals(linkCommandC));
+        assertFalse(linkCommandA.equals(linkCommandD));
+        assertFalse(linkCommandC.equals(linkCommandD));
     }
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        String expected = LinkCommand.class.getCanonicalName() + "{ownerIndex=" + INDEX_FIRST_OWNER.getOneBased() + ", petIndexes=[" + INDEX_FIRST_PET.getOneBased() + "]}";
+        assertEquals(expected, linkCommand.toString());
     }
 
     /**
@@ -238,45 +260,78 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains an existing link for duplicate testing.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithExistingLink extends ModelStub {
+        private final Link link;
+        private final Owner owner;
+        private final Pet pet;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithExistingLink(Owner owner, Pet pet, Link link) {
+            requireAllNonNull(owner, pet, link);
+            this.owner = owner;
+            this.pet = pet;
+            this.link = link;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public ObservableList<Owner> getFilteredOwnerList() {
+            ObservableList<Owner> ownerList = FXCollections.observableArrayList();
+            ownerList.add(owner);
+            return ownerList;
+        }
+
+        @Override
+        public ObservableList<Pet> getFilteredPetList() {
+            ObservableList<Pet> petList = FXCollections.observableArrayList();
+            petList.add(pet);
+            return petList;
+        }
+
+        @Override
+        public boolean hasLink(Link link) {
+            return this.link.equals(link);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the link being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingLinkAdded extends ModelStub {
+        final ArrayList<Link> linksAdded = new ArrayList<>();
+        private final Owner owner;
+        private final Pet pet;
 
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        ModelStubAcceptingLinkAdded(Owner owner, Pet pet) {
+            requireAllNonNull(owner, pet);
+            this.owner = owner;
+            this.pet = pet;
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public ObservableList<Owner> getFilteredOwnerList() {
+            ObservableList<Owner> ownerList = FXCollections.observableArrayList();
+            ownerList.add(owner);
+            return ownerList;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ObservableList<Pet> getFilteredPetList() {
+            ObservableList<Pet> petList = FXCollections.observableArrayList();
+            petList.add(pet);
+            return petList;
+        }
+
+        @Override
+        public boolean hasLink(Link link) {
+            requireNonNull(link);
+            return linksAdded.stream().anyMatch(link::equals);
+        }
+
+        @Override
+        public void addLink(Link link) {
+            requireNonNull(link);
+            linksAdded.add(link);
         }
     }
-
 }
