@@ -1,6 +1,7 @@
 package seedu.address.model.event;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.model.person.Person;
 
@@ -72,6 +73,11 @@ public class Event {
                 && contacts.equals(otherEvent.contacts);
     }
 
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, time, venue, celebrity);
+    }
 
     /**
      * Returns true if both events have the same identity and data fields.
