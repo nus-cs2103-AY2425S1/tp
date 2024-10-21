@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -62,7 +63,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         payment = source.getPayment().hasPaid.toString();
-        attendance = source.getAttendance().isPresent.toString();
+        attendance = source.getAttendance().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -126,7 +127,8 @@ class JsonAdaptedPerson {
         if (!Attendance.isValidAttendance(attendance)) {
             throw new IllegalValueException(Attendance.MESSAGE_CONSTRAINTS);
         }
-        final Attendance modelAttendance = new Attendance(Boolean.parseBoolean(attendance));
+        final Attendance modelAttendance = new Attendance(
+                LocalDate.parse(attendance, Attendance.VALID_DATE_FORMAT));
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelPayment, modelAttendance, modelTags);

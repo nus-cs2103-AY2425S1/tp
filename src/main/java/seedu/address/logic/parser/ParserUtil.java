@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -115,12 +116,12 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed
      */
     public static Attendance parseAttendance(String attendance) throws ParseException {
-        String trimmedAttendance = attendance.trim().toLowerCase();
+        String trimmedAttendance = attendance.trim();
         if (!Attendance.isValidAttendance(trimmedAttendance)) {
             throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
         }
-        boolean b = Boolean.parseBoolean(trimmedAttendance);
-        return new Attendance(b);
+        LocalDate attendanceDate = LocalDate.parse(trimmedAttendance, Attendance.VALID_DATE_FORMAT);
+        return new Attendance(attendanceDate);
     }
 
     /**

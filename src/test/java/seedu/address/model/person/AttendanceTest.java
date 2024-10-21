@@ -6,46 +6,59 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 public class AttendanceTest {
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Attendance(null));
     }
-    @Test
-    public void constructor_validAttendance_success() {
-        // Test constructing Attendance with 'true'
-        Attendance attendancePresent = new Attendance(true);
-        assertTrue(attendancePresent.isPresent);
-        assertEquals("Present", attendancePresent.toString());
 
-        // Test constructing Attendance with 'false'
-        Attendance attendanceAbsent = new Attendance(false);
-        assertFalse(attendanceAbsent.isPresent);
-        assertEquals("Absent", attendanceAbsent.toString());
+    @Test
+    public void constructor_validAttendanceDateFormat_success() {
+
+        LocalDate attendanceDate1 = LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT);
+        Attendance attendancePresent1 = new Attendance(attendanceDate1);
+        assertEquals("12/12/2024", attendancePresent1.toString());
+
+        LocalDate attendanceDate2 = LocalDate.parse("31/12/2024", Attendance.VALID_DATE_FORMAT);
+        Attendance attendancePresent2 = new Attendance(attendanceDate2);
+        assertEquals("31/12/2024", attendancePresent2.toString());
     }
+
     @Test
     void isValidAttendance_validInput_success() {
         // Valid inputs
-        assertTrue(Attendance.isValidAttendance("true"));
-        assertTrue(Attendance.isValidAttendance("false"));
+        assertTrue(Attendance.isValidAttendance("12/12/2024"));
+        assertTrue(Attendance.isValidAttendance("31/12/2024"));
     }
+
     @Test
     void isValidAttendance_invalidInput_failure() {
         // Invalid inputs
-        assertFalse(Attendance.isValidAttendance("present"));
-        assertFalse(Attendance.isValidAttendance("absent"));
+        assertFalse(Attendance.isValidAttendance("32/12/2024")); // invalid day
+        assertFalse(Attendance.isValidAttendance("30/13/2024")); // invalid month
+        assertFalse(Attendance.isValidAttendance("3/12/2024")); // no leading 0 for day
+        assertFalse(Attendance.isValidAttendance("30/3/2024")); // no leading 0 for month
+        assertFalse(Attendance.isValidAttendance("3/13/24")); // wrong format for year
+        assertFalse(Attendance.isValidAttendance("/13/2024")); // missing day
+        assertFalse(Attendance.isValidAttendance("30//2024")); // missing month
+        assertFalse(Attendance.isValidAttendance("30/12/")); // missing year
+        assertFalse(Attendance.isValidAttendance("//2024")); // missing day & month
+        assertFalse(Attendance.isValidAttendance("//")); // missing field
+        assertFalse(Attendance.isValidAttendance("1 Jan")); // non-numerical input
         assertFalse(Attendance.isValidAttendance("")); // empty string
         assertFalse(Attendance.isValidAttendance(" ")); // spaces only
-        assertFalse(Attendance.isValidAttendance("truee")); // additional e behind true
-        assertFalse(Attendance.isValidAttendance("tr ue")); // spaces within letters
     }
+
     @Test
     public void equals() {
-        Attendance attendance1 = new Attendance(true);
-        Attendance attendance2 = new Attendance(true);
-        Attendance attendance3 = new Attendance(false);
+        Attendance attendance1 = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance2 = new Attendance(LocalDate.parse("12/12/2024", Attendance.VALID_DATE_FORMAT));
+        Attendance attendance3 = new Attendance(LocalDate.parse("13/12/2024", Attendance.VALID_DATE_FORMAT));
 
         assertEquals(attendance1, attendance2);
         assertNotEquals(attendance1, attendance3);
