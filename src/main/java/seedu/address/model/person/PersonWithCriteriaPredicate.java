@@ -5,38 +5,36 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
 
-public class PersonWithCriteriaPredicate<T> implements Predicate<Person> {
-    private final T upperRange;
-    private final T lowerRange;
+public class PersonWithCriteriaPredicate implements Predicate<Person> {
+    private final List<Range<?>> ranges;
 
-    public PersonWithCriteriaPredicate(T lowerRange, T upperRange) {
-        this.upperRange = upperRange;
-        this.lowerRange = lowerRange;
+    public PersonWithCriteriaPredicate(List<Range<?>> ranges) {
+        this.ranges = ranges;
 
-        assert upperRange instanceof Integer || upperRange instanceof LocalDate :
-                "Unsupported type: T must be either Integer (for age) or LocalDate (for appointments)";
     }
 
     @Override
     public boolean test(Person person) {
+        return ranges.stream()
+                .anyMatch(range -> isWithinRange(range, person));
 
-        if (upperRange instanceof Integer) {
+    }
+
+    public boolean isWithinRange(Range<?> r, Person person) {
+        if (r.upperRange instanceof Integer) {
             Age strAge = person.getAge();
             int age = Integer.parseInt(strAge.toString());
-            return age >= (Integer) lowerRange && age <= (Integer) upperRange;
-        } else if (upperRange instanceof LocalDate) {
+            return age >= (Integer) r.lowerRange && age <= (Integer) r.upperRange;
+        } else if (r.upperRange instanceof LocalDate) {
             Set<Appointment> appointments = person.getAppointment();
             return appointments.stream()
                     .anyMatch(appointment ->
-                            !appointment.getDate().isAfter((LocalDate) upperRange) &&
-                            !appointment.getDate().isBefore((LocalDate) lowerRange));
+                            !appointment.getDate().isAfter((LocalDate) r.upperRange) &&
+                                    !appointment.getDate().isBefore((LocalDate) r.lowerRange));
         } else {
             throw new IllegalArgumentException("Unsupported type: T must be either Integer or LocalDate");
         }
-
     }
 }
