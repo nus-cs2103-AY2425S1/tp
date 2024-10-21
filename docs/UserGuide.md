@@ -1,6 +1,6 @@
 ---
 layout: page
-title: User Guide
+title: MediBase3 User Guide
 ---
 
 MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appointments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MB3 can get your tasks done faster than traditional GUI apps.
@@ -85,15 +85,6 @@ the constraints of each parameter when used in a command.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
-
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
 ### Managing Patient
 
 #### Adding a patient: `add`
@@ -106,8 +97,8 @@ Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 > :information_source: **Note:**
 > 
 > * All fields are compulsory.
-> * The NRIC serves as a unique identifier for each patient.
 > * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case. 
+> * The new patient will be added to the end of the patient list in the GUI.
 > * Refer to the [Parameter Details](#Parameter-Details) section for more information on the constraints of each parameter.
 
 Examples:
@@ -121,13 +112,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-### Editing a person : `edit`
+#### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
@@ -144,7 +129,43 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+[Back to Table of Contents](#table-of-contents)
+
+#### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+[Back to Table of Contents](#table-of-contents)
+
+### Managing Appointments
+[To be filled up]
+### Managing Medical Conditions
+[To be filled up]
+### Managing Allergies
+[To be filled up]
+### Managing Priority
+[To be filled up]
+### Finding Patients
+
+#### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -162,37 +183,43 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+[Back to Table of Contents](#table-of-contents)
 
-Deletes the specified person from the address book.
+### General Features
 
-Format: `delete INDEX`
+#### Viewing help : `help`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Shows a message explaining how to access the help page.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+![help message](images/helpMessage.png)
 
-### Clearing all entries : `clear`
+Format: `help`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+[Back to Table of Contents](#table-of-contents)
+
+#### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### Saving the data
+[Back to Table of Contents](#table-of-contents)
+
+#### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+[Back to Table of Contents](#table-of-contents)
+
+#### Editing the data file
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -202,6 +229,8 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 > If your changes to the data file makes its format invalid, MediBase3 will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 >
 > Furthermore, certain edits can cause the MediBase3 to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
