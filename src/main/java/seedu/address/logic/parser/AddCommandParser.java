@@ -15,7 +15,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.delivery.*;
+import seedu.address.model.delivery.Archive;
+import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemName;
+import seedu.address.model.delivery.Status;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
