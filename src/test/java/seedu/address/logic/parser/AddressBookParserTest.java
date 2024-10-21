@@ -29,6 +29,8 @@ import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.commands.FindPetCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOwnerCommand;
+import seedu.address.logic.commands.ListPetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
@@ -125,9 +127,17 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_listOwners() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " owners") instanceof ListOwnerCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(ListCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseCommand_listPets() throws Exception {
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " pets") instanceof ListPetCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(ListCommand.COMMAND_WORD));
     }
 
     @Test
