@@ -23,6 +23,12 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+    // Add JVM arguments to open the necessary JavaFX modules for TestFX
+    jvmArgs += [
+        '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+        '--add-opens', 'javafx.base/com.sun.javafx.runtime=ALL-UNNAMED',
+        '--add-opens', 'javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED'
+    ]
 }
 
 task coverage(type: JacocoReport) {
@@ -60,6 +66,9 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
+    testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
+    testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
+    testImplementation 'org.testfx:openjfx-monocle:jdk-11+26'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
