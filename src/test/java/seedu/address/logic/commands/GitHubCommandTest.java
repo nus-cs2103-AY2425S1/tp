@@ -1,8 +1,19 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.GitHubCommand.MISSING_PERSON_EXCEPTION;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import java.nio.file.Path;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.FunctionalBrowser;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,16 +25,6 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.NonFunctionalBrowser;
 import seedu.address.testutil.PersonBuilder;
 
-import java.nio.file.Path;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.GitHubCommand.MISSING_PERSON_EXCEPTION;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
 public class GitHubCommandTest {
     private NonFunctionalBrowser nonFunctionalBrowser = NonFunctionalBrowser.getDesktop();
@@ -62,7 +63,7 @@ public class GitHubCommandTest {
     }
 
     @Test
-    public void  execute_nameAcceptedByModel_browserLaunchSuccessful() throws Exception {
+    public void execute_nameAcceptedByModel_browserLaunchSuccessful() throws Exception {
         Person validPerson = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
 
@@ -74,7 +75,7 @@ public class GitHubCommandTest {
     }
 
     @Test
-    public void  execute_nameNotInModel_throwsCommandException() throws Exception {
+    public void execute_nameNotInModel_throwsCommandException() throws Exception {
         Person validPerson = new PersonBuilder().build();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(validPerson);
         Name invalidName = new Name("invalidChad");

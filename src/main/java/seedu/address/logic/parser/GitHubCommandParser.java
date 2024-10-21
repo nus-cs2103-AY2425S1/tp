@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.Browser;
 import seedu.address.commons.core.FunctionalBrowser;
 import seedu.address.logic.commands.GitHubCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
