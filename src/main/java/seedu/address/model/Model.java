@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
@@ -146,10 +147,35 @@ public interface Model {
     boolean hasAssignment(Assignment assignment);
 
     /**
+     * Returns true if an assignment with the same assignment id as {@code assignmentId}
+     * exists in the address book.
+     */
+    boolean hasAssignment(AssignmentId assignmentId);
+
+    /**
+     * Returns true if an assignment with the same project id and employee id
+     * as {@code projectId} and {@code employeeId}
+     * exists in the address book.
+     */
+    boolean hasAssignment(ProjectId projectId, EmployeeId employeeId);
+
+    /**
      * Deletes the given assignment.
      * The assignment must exist in the address book.
      */
     void deleteAssignment(Assignment target);
+
+    /**
+     * Deletes the given assignment.
+     * The assignment must exist in the address book.
+     */
+    void deleteAssignment(AssignmentId targetId);
+
+    /**
+     * Deletes the given assignment.
+     * The assignment must exist in the address book.
+     */
+    void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId);
 
     /**
      * Adds the given assignment.

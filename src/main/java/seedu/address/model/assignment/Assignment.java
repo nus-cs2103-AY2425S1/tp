@@ -2,8 +2,10 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 
 /**
  * Represents a (Project) Assignment in the address book.
@@ -54,6 +56,33 @@ public class Assignment {
         boolean isSameProject = otherAssignment.getProject().equals(project);
         boolean isSamePerson = otherAssignment.getPerson().equals(person);
         return isSamePerson && isSameProject;
+    }
+
+    /**
+     * Returns true if both {@code ProjectId#equals(ProjectId)} and
+     * {@code EmployeeId#equals(EmployeeId)} returns true.
+     * This defines a weaker notion of equality between two assignments.
+     */
+    public boolean isSameAssignment(ProjectId projectId, EmployeeId employeeId) {
+        if (projectId == null || employeeId == null) {
+            return false;
+        }
+
+        boolean isSameProject = projectId.equals(this.project.getId());
+        boolean isSamePerson = employeeId.equals(this.person.getEmployeeId());
+        return isSamePerson && isSameProject;
+    }
+
+    /**
+     * Returns true if {@code assignmentId#equals(assignmentId)}.
+     * This defines a weaker notion of equality between two assignments.
+     */
+    public boolean isSameAssignment(AssignmentId assignmentId) {
+        if (assignmentId == null) {
+            return false;
+        }
+
+        return this.assignmentId.equals(assignmentId);
     }
 
     /**

@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.address.model.person.EmployeeId;
+import seedu.address.model.project.ProjectId;
 
 /**
  * A list of assignments that enforces uniqueness between its elements and does
@@ -41,6 +43,27 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameAssignment);
     }
+
+    /**
+     * Returns true if the list contains an equivalent assignment as the given
+     * argument.
+     */
+    public boolean contains(AssignmentId toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(assignment -> assignment.getAssignmentId().equals(toCheck));
+    }
+
+    /**
+     * Returns true if the list contains an equivalent assignment as the given
+     * argument.
+     */
+    public boolean contains(ProjectId projectToCheck, EmployeeId employeeToCheck) {
+        requireNonNull(projectToCheck);
+        requireAllNonNull(employeeToCheck);
+        return internalList.stream().anyMatch(assignment ->
+                assignment.isSameAssignment(projectToCheck, employeeToCheck));
+    }
+
 
     /**
      * Adds a assignment to the list.
@@ -77,12 +100,73 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
+     * Return assignment with matching {@code assignmentId}
+     */
+    public Assignment getAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
+        Assignment assignment = internalList.stream()
+                .filter(a -> a.isSameAssignment(assignmentId))
+                .findFirst().orElse(null);
+        if (assignment == null) {
+            throw new AssignmentNotFoundException();
+        }
+        return assignment;
+    }
+
+    /**
+     * Return assignment with matching {@code projectId} and {@code employeeId}
+     */
+    public Assignment getAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireNonNull(employeeId);
+        Assignment assignment = internalList
+                .stream()
+                .filter(a -> a.isSameAssignment(projectId, employeeId))
+                .findFirst().orElse(null);
+        if (assignment == null) {
+            throw new AssignmentNotFoundException();
+        }
+        return assignment;
+    }
+
+    /**
      * Removes the equivalent assignment from the list.
      * The assignment must exist in the list.
      */
     public void remove(Assignment toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
+            throw new AssignmentNotFoundException();
+        }
+    }
+
+    /**
+     * Removes the equivalent assignment from the list.
+     * The assignment must exist in the list.
+     */
+    public void remove(AssignmentId toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList
+                .remove(internalList
+                        .stream()
+                        .filter(assignment -> assignment
+                                .isSameAssignment(toRemove))
+                        .findFirst()
+                        .orElse(null))) {
+            throw new AssignmentNotFoundException();
+        }
+    }
+
+    /**
+     * Removes the equivalent assignment from the list.
+     * The assignment must exist in the list.
+     */
+    public void remove(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
+        if (!internalList.remove(internalList.stream().filter(assignment ->
+                assignment.isSameAssignment(projectId, employeeId))
+                .findFirst().orElse(null))) {
             throw new AssignmentNotFoundException();
         }
     }
