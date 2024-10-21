@@ -57,7 +57,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: \n %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -225,9 +225,12 @@ public class EditCommand extends Command {
         }
 
         public void setSubjects(Set<Subject> subjects) {
-            this.subjects = subjects;
+            this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }
 
+        public Optional<Set<Subject>> getSubjectsOp() {
+            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
+        }
 
 
         /**
@@ -281,9 +284,7 @@ public class EditCommand extends Command {
                     .toString();
         }
 
-        public Optional<Set<Subject>> getSubjectsOp() {
-            return (subjects != null) ? Optional.of(Collections.unmodifiableSet(subjects)) : Optional.empty();
-        }
+
 
 
     }
