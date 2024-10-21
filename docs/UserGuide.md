@@ -289,8 +289,8 @@ Organize your client list based on different criteria for easier management and 
 
 ---
 
-### Deleting a person : `delete`
-
+### Deleting a person or policy: `delete`
+#### Person:
 Deletes the specified client from the application. There is a confirmation message before the deletion is executed. Type `y` to confirm deletion.
 
 Format: `delete INDEX` or `delete NAME`
@@ -305,6 +305,31 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 * `delete Betsy Crowe` deletes the person named `Betsy Crowe` from the list of the address book.
   ![result for 'delete david li'](images/deleteUI.png)
+
+#### Policy:
+
+Deletes the specified policy from the specified person using INDEX of the person and policy.
+
+Format: `delete INDEX po/POLICY_INDEX`
+
+* Deletes the policy at the specified `POLICY_INDEX` of the person at the specified `INDEX`.
+
+Examples:
+* `delete 1 po/1` deletes the 1st policy of the 1st person in the address book.
+
+---
+### Undo a delete command: `undo`
+Undo the last delete command. Works for both person and policy deletion.
+
+Format: `undo` after a successful delete command.
+
+* Undo the last delete person or policy command to restore back the deletion
+* Only the last delete command can be undone.
+
+Examples:
+* `delete 1` followed by `undo` will restore back the deleted person at index 1.
+* `delete 1 po/1` followed by `undo` will restore back the deleted policy at index 1 of the person at index 1.
+* `delete John Doe` followed by undo will restore back John Doe.
 
 ---
 
