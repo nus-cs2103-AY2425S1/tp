@@ -72,11 +72,16 @@ shadowJar {
     archiveFileName = 'ugteach.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 test {
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
     }
+    enableAssertions = true
 }
 
 defaultTasks 'clean', 'test'
