@@ -72,11 +72,15 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![helpwindow.png](images%2Fhelpwindow.png)
+Shows you a help window with useful resources which includes:
+- A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
+- A command summary table below the URL, displaying available commands, their formats, and examples.
+- You can copy the command format or example from the table and paste it into the command box.
+- You can click on the table headers to sort commands in ascending or descending order.
 
 Format: `help`
+
+![helpwindow.png](images%2Fhelpwindow.png)
 
 
 ### Adding a person: `add`

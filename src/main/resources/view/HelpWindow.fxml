@@ -46,7 +46,7 @@
             <children>
               <TableView fx:id="commandSummaryTable" prefHeight="600.0" prefWidth="1050.0">
                 <columns>
-                  <TableColumn text="Action" fx:id="actionColumn" prefWidth="150.0" editable="false"/>
+                  <TableColumn text="Command" fx:id="actionColumn" prefWidth="150.0" editable="false"/>
                   <TableColumn text="Format, Examples" fx:id="formatColumn" prefWidth="850.0" editable="false"/>
                 </columns>
               </TableView>
