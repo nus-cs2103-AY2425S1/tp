@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Comparator<Person> COMPARATOR_NO_SORTING = (c1, c2) -> 0;
+    Comparator<Person> COMPARATOR_NO_SORTING = null;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.

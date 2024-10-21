@@ -138,4 +138,15 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isOneOrNegativeOne(String s) {
+        requireNonNull(s);
+
+        try {
+            int value = Integer.parseInt(s);
+            return (value == 1 || value == -1) && !s.startsWith("+"); // "+1" is successfully parsed by Integer#parseInt(String)
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }

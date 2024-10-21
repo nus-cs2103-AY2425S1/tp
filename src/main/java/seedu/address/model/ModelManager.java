@@ -112,7 +112,6 @@ public class ModelManager implements Model {
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        updateSortedPersonList(COMPARATOR_NO_SORTING);
     }
 
     @Override
@@ -141,7 +140,6 @@ public class ModelManager implements Model {
 
     @Override
     public void updateSortedPersonList(Comparator<Person> comparator) {
-        requireNonNull(comparator);
         sortedPersons.setComparator(comparator);
     }
 
