@@ -102,9 +102,9 @@ Sorts the currently visible list of persons by a specified field.
 
 Format: `sort [s/SORT_OPTION]`
 
-* The sort order will remain active across future searches or filters until a new sort option is applied or the list is sorted again.
-* If no sort option is provided, calling `sort` will restore the list to its original order (i.e., the order in which contacts were added).
-* This command only changes the order of the visible contacts without affecting any filters or searches that are currently applied.
+* You can use `sort` to arrange the contacts in the list you're currently viewing, whether it's the full list or a subset from commands like `search`.
+* If no sort option is provided, `sort` will restore the list to its original order (i.e. the order in which contacts were added).
+* The sort order remains active until you apply a new sort option.
 
 <box type="tip" seamless>
 
