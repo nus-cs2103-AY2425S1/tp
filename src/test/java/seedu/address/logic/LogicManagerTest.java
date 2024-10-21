@@ -78,14 +78,6 @@ public class LogicManagerTest {
         assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
-    //TODO: Update test to reflect new ListCommand @apollo-tan
-
-    //    @Test
-    //    public void execute_validCommand_success() throws Exception {
-    //        String listCommand = ListCommand.COMMAND_WORD;
-    //        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
-    //    }
-
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         assertCommandFailureForExceptionFromStorage(DUMMY_IO_EXCEPTION, String.format(
@@ -215,6 +207,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPropertiesList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPropertyList().remove(0));
+    }
+
+    @Test
+    public void getFilteredMeetingsList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredMeetingList().remove(0));
     }
 
     @Test

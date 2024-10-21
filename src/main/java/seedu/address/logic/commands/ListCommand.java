@@ -43,4 +43,19 @@ public abstract class ListCommand extends Command {
      */
     @Override
     public abstract CommandResult execute(Model model);
+
+    /**
+     * Compares this ListCommand to another object for equality.
+     * Two ListCommand objects are considered equal if they are of the same class at runtime.
+     *
+     * @param other the object to compare with this ListCommand
+     * @return true if the specified object is equal to this ListCommand; false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        return other instanceof ListCommand;
+    }
 }

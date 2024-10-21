@@ -77,9 +77,6 @@ public class ModelManager implements Model {
         PROPERTIES
     }
 
-
-    // TODO: Remove this later
-    // private final BooleanProperty isDisplayClients = new SimpleBooleanProperty(true);
     private final ObjectProperty<DisplayMode> displayMode = new SimpleObjectProperty<>(DisplayMode.CLIENTS);
 
     /**

@@ -33,4 +33,19 @@ public class ListSellersCommand extends ListCommand {
         // Return success message with the appropriate entity type
         return new CommandResult(String.format(ListCommand.MESSAGE_SUCCESS, KEY_WORD));
     }
+
+    /**
+     * Compares this ListSellersCommand to another object for equality.
+     * Two ListSellersCommand objects are considered equal if they are of the same class at runtime.
+     *
+     * @param other the object to compare with this ListSellersCommand
+     * @return true if the specified object is equal to this ListSellersCommand; false otherwise
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        return other instanceof ListSellersCommand;
+    }
 }
