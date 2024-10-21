@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ClientListPanel clientListPanel;
 
     private PropertyListPanel propertyListPanel;
+    private MeetingListPanel meetingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -121,6 +122,7 @@ public class MainWindow extends UiPart<Stage> {
         // Instantiates the various panels
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+        meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList());
 
         // TODO: Add listPanel for MEETINGS @apollo-tan
 
@@ -137,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
                     listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
                     break;
                 case MEETINGS:
-                    System.out.println("In progress... will print Meetings");
+                    listPanelPlaceholder.getChildren().setAll(meetingListPanel.getRoot());
                 default:
                     throw new RuntimeException("Invalid Display Mode: " + newValue);
             }

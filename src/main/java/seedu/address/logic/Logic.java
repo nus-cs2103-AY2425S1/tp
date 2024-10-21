@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager.DisplayMode;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.property.Property;
 
@@ -45,7 +46,15 @@ public interface Logic {
      */
     ObservableList<Client> getFilteredClientList();
 
+    /**
+     * Returns an unmodifiable view of the filtered list of properties
+     */
     ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Returns an unmodifiable view of the filtered list of meetings
+     */
+    ObservableList<Meeting> getFilteredMeetingList();
 
     /**
      * Returns the user prefs' address book file path.
