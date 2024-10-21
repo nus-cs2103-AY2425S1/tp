@@ -49,10 +49,6 @@ public interface Logic {
      * Returns an unmodifiable view of the filtered list of properties
      */
     ObservableList<Property> getFilteredPropertyList();
-    /**
-     * Returns an unmodifiable view of the filtered list of meetings
-     */
-    ObservableList<Meeting> getFilteredMeetingList();
 
     /**
      * Returns an unmodifiable view of the filtered list of meetings
