@@ -19,6 +19,7 @@ import seedu.address.model.consultation.Consultation;
 public class AddConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "addconsult";
+    public static final CommandType COMMAND_TYPE = CommandType.ADDCONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a consultation to TAHub. "
             + "Parameters: "
@@ -47,14 +48,14 @@ public class AddConsultCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.ADDCONSULT;
+        return COMMAND_TYPE;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.addConsult(newConsult);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)), CommandType.ADDCONSULT);
     }
 
     @Override
