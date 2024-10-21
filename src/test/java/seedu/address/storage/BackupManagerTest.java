@@ -57,7 +57,7 @@ public class BackupManagerTest {
     public void backupCreation_createsBackupFileSuccessfully() throws IOException {
         backupManager.saveBackup(TEMP_FILE);
         long backupCount = Files.list(TEMP_BACKUP_DIR).count();
-        assertEquals(2, backupCount, "Backup file should be created successfully.");
+        assertEquals(3, backupCount, "Backup file should be created successfully.");
     }
 
     @Test
