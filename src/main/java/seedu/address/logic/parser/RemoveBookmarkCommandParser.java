@@ -22,7 +22,8 @@ public class RemoveBookmarkCommandParser implements Parser<RemoveBookmarkCommand
             Index index = ParserUtil.parseIndex(args);
             return new RemoveBookmarkCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BookmarkCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RemoveBookmarkCommand.MESSAGE_USAGE), pe);
         }
     }
 }
