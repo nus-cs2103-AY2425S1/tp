@@ -31,11 +31,11 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
+    private ListCommandViewManager listCommandViewManager;
+
     // Independent Ui parts residing in this Ui container
     private CombinedListPanel combinedListPanel;
-
     private PetListPanel petListPanel;
-
     private OwnerListPanel ownerListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -77,11 +77,12 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        // Create the list command view manager
+        this.listCommandViewManager = new ListCommandViewManager(ownerList, petList, combinedListPanelPlaceholder);
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-
         setAccelerators();
-
         helpWindow = new HelpWindow();
     }
 
@@ -148,48 +149,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * changes the combined list placeholder to only show the pet list
-     */
-    void changeToPetsOnly() {
-        ownerList.setVisible(false);
-        ownerList.setManaged(false);
-        combinedListPanelPlaceholder.setVisible(false);
-        combinedListPanelPlaceholder.setManaged(false);
-
-        // Show the pet list
-        petList.setVisible(true);
-        petList.setManaged(true);
-    }
-
-    /**
-     * changes the combined list placeholder to only show the owner list
-     */
-    void changeToOwnersOnly() {
-        petList.setVisible(false);
-        petList.setManaged(false);
-        combinedListPanelPlaceholder.setVisible(false);
-        combinedListPanelPlaceholder.setManaged(false);
-
-        // Show the owner list
-        ownerList.setVisible(true);
-        ownerList.setManaged(true);
-    }
-
-    /**
-     * shows both pet and owner lists
-     */
-    void changeToCombinedList() {
-        petList.setVisible(false);
-        petList.setManaged(false);
-        combinedListPanelPlaceholder.setVisible(true);
-        combinedListPanelPlaceholder.setManaged(true);
-
-        // Show the owner list
-        ownerList.setVisible(false);
-        ownerList.setManaged(false);
-    }
-
-    /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
@@ -229,10 +188,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public CombinedListPanel getPersonListPanel() {
-        return combinedListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -241,7 +196,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            toggleListView(commandResult);
+            listCommandViewManager.toggleListView(commandResult);
 
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -259,18 +214,6 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
-        }
-    }
-
-    public void toggleListView(CommandResult commandResult) {
-        if (commandResult.isOwnerListCommand()) {
-            System.out.println("owners");
-            changeToOwnersOnly();
-        } else if (commandResult.isPetListCommand()) {
-            System.out.println("pets");
-            changeToPetsOnly();
-        } else if (commandResult.isCombinedListCommand()) {
-            changeToCombinedList();
         }
     }
 }
