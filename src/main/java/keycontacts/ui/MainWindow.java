@@ -2,8 +2,6 @@ package keycontacts.ui;
 
 import java.util.logging.Logger;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -13,6 +11,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 import keycontacts.commons.core.GuiSettings;
 import keycontacts.commons.core.LogsCenter;
@@ -49,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane binder;
 
     @FXML
+    private VBox loopParent;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -62,6 +65,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    private static final double ARC_RADIUS_X = 8.0;
+    private static final double ARC_RADIUS_Y = 6.0;
+    private static final double ARC_LENGTH = 260.0;
+    private static final double ARC_START_ANGLE = -40.0;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -80,11 +88,40 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
 
-        rightPage.getParent().getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
+        primaryStage.getScene().widthProperty().addListener((observable, oldValue, newValue) -> {
             double newWidth = newValue.doubleValue();
             leftPage.setPrefWidth((newWidth - binder.getWidth()) / 2);
             rightPage.setPrefWidth((newWidth - binder.getWidth()) / 2);
         });
+
+        primaryStage.getScene().heightProperty().addListener((observable, oldValue, newValue) -> {
+            updateArcs((Double) newValue);
+        });
+    }
+
+    private void updateArcs(double height) {
+        // Clear previous arcs
+        loopParent.getChildren().clear();
+
+        // Dynamically decide how many arcs to add based on the height (as an example)
+        int numArcs = (int) (height / (ARC_RADIUS_Y * 2 + loopParent.getSpacing())) - 5;  // You can change this logic
+
+        // Add the arcs dynamically
+        addArcs(numArcs);
+    }
+
+    private void addArcs(int numArcs) {
+        for (int i = 0; i < numArcs; i++) {
+            Arc arc = new Arc();
+            arc.setRadiusX(ARC_RADIUS_X);
+            arc.setRadiusY(ARC_RADIUS_Y);
+            arc.setLength(ARC_LENGTH);
+            arc.setStartAngle(ARC_START_ANGLE);
+            arc.setFill(Color.TRANSPARENT);
+            arc.setStroke(Color.BLACK);
+
+            loopParent.getChildren().add(arc);
+        }
     }
 
     public Stage getPrimaryStage() {

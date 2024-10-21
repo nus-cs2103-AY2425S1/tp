@@ -15,12 +15,12 @@
 <?import javafx.scene.shape.Arc?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="KeyContacts" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="400" minWidth="600" onCloseRequest="#handleExit" title="KeyContacts" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <scene>
       <Scene>
-           <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <children>
-                  <MenuBar fx:id="menuBar" stylesheets="@DarkTheme.css" VBox.vgrow="NEVER">
+                  <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
                       <Menu mnemonicParsing="false" text="File">
                           <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                       </Menu>
@@ -28,13 +28,13 @@
                           <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
                       </Menu>
                   </MenuBar>
-                 <AnchorPane style="-fx-background-color: brown;" VBox.vgrow="ALWAYS">
+                 <AnchorPane style="-fx-background-color: dimgrey;" VBox.vgrow="ALWAYS">
                     <children>
                        <HBox layoutX="10.0" layoutY="10.0" style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <children>
                              <AnchorPane fx:id="leftPage" HBox.hgrow="ALWAYS">
                               <children>
-                              <VBox style="-fx-border-color: brown; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <VBox style="-fx-border-color: dimgrey; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
                                     <padding>
                                        <Insets bottom="5" left="10" right="10" top="5" />
@@ -62,7 +62,7 @@
                               </padding></AnchorPane>
                              <StackPane fx:id="binder" prefWidth="20.0">
                                 <children>
-                                   <Pane prefHeight="200.0" prefWidth="10.0" style="-fx-border-color: black; -fx-border-width: 0 1 0 1; -fx-background-color: whitesmoke;">
+                                   <Pane prefWidth="10.0" style="-fx-border-color: black; -fx-border-width: 0 1 0 1; -fx-background-color: whitesmoke;">
                                       <StackPane.margin>
                                          <Insets left="5.0" right="5.0" />
                                       </StackPane.margin>
@@ -70,54 +70,19 @@
                                          <DropShadow radius="6.335" spread="0.16" width="6.34" />
                                       </effect>
                                    </Pane>
-                                   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
-                                      <children>
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="586.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" VBox.vgrow="ALWAYS" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="16.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" VBox.vgrow="ALWAYS" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="31.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" VBox.vgrow="ALWAYS" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="46.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="61.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="76.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="91.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="106.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="121.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="136.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="151.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="166.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="181.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="196.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="211.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="226.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="241.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="256.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="271.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="286.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="301.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="316.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="331.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="346.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="361.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="376.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="391.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="406.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="421.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="436.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="451.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="466.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="481.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="496.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="511.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="526.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="541.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="556.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                         <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="571.0" length="260.0" radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE" />
-                                      </children>
+                                   <VBox fx:id="loopParent" alignment="TOP_CENTER" spacing="5.0">
+                                      <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="586.0" length="260.0"
+                                           radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK"
+                                           strokeType="INSIDE" VBox.vgrow="ALWAYS"/>
+                                      <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="16.0" length="260.0" radiusX="8.0"
+                                           radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE"
+                                           VBox.vgrow="ALWAYS"/>
                                    </VBox>
                                 </children>
                              </StackPane>
                              <AnchorPane fx:id="rightPage" HBox.hgrow="ALWAYS">
                               <children>
-                                 <VBox style="-fx-border-color: brown; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 <VBox style="-fx-border-color: dimgrey; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                               </children>
                               <padding>
                                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
