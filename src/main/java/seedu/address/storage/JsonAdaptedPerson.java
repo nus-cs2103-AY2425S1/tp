@@ -10,7 +10,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -101,7 +106,8 @@ class JsonAdaptedPerson {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -109,20 +115,23 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (scheduleName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
         }
         if (!Schedule.isValidName(scheduleName)) {
             throw new IllegalValueException(Schedule.SCHEDULE_NAME_CONSTRAINTS);
         }
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
         }
         if (!Schedule.isValidDate(date)) {
             throw new IllegalValueException(Schedule.DATE_CONSTRAINTS);
         }
 
         if (time == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Schedule.class.getSimpleName()));
         }
         if (!Schedule.isValidTime(time)) {
             throw new IllegalValueException(Schedule.TIME_CONSTRAINTS);

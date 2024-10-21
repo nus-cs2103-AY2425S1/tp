@@ -1,13 +1,18 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
+/**
+ * Represents a Person's schedule in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}, {@link #isValidDate(String)},
+ * {@link #isValidTime(String)}
+ */
 public class Schedule {
 
     public static final String SCHEDULE_NAME_CONSTRAINTS =
@@ -25,10 +30,13 @@ public class Schedule {
     public final String dateString;
     public final String timeString;
 
-    public static Schedule ofDefault() {
-        return new Schedule("","", "");
-    }
-
+    /**
+     * Constructs a {@code Schedule}
+     *
+     * @param scheduleName Name of schedule, if any
+     * @param date Date of Schedule, given in yyyy-MM-dd format
+     * @param time Time of Schedule, given in HH:mm format, if any
+     */
     public Schedule(String scheduleName, String date, String time) {
         requireAllNonNull(scheduleName, date, time);
 
@@ -44,10 +52,16 @@ public class Schedule {
         this.timeString = time;
     }
 
+    /**
+     * Returns true if a given string is a valid schedule name or empty.
+     */
     public static boolean isValidName(String test) {
         return test.isEmpty() || test.matches(NAME_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is a valid schedule date or empty.
+     */
     public static boolean isValidDate(String test) {
         if (test.isEmpty()) {
             return true;
@@ -60,6 +74,9 @@ public class Schedule {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid schedule time or empty.
+     */
     public static boolean isValidTime(String test) {
         if (test.isEmpty()) {
             return true;

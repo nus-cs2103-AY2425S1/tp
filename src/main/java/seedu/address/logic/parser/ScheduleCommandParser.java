@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TIME;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Parses input arguments and creates a new ScheduleCommand object

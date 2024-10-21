@@ -10,7 +10,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,9 +103,10 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code scheduleName}, {@code scheduleDate}, or {@code scheduleTime}
-     * is invalid.
+     *      is invalid.
      */
-    public static Schedule parseSchedule(String scheduleName, String scheduleDate, String scheduleTime) throws ParseException {
+    public static Schedule parseSchedule(String scheduleName, String scheduleDate, String scheduleTime)
+            throws ParseException {
         requireAllNonNull(scheduleName, scheduleDate, scheduleTime);
         String trimmedScheduleName = scheduleName.trim();
         String trimmedScheduleDate = scheduleDate.trim();
@@ -117,7 +122,7 @@ public class ParserUtil {
         if (!Schedule.isValidTime(scheduleTime)) {
             throw new ParseException(Schedule.TIME_CONSTRAINTS);
         }
-        return new Schedule(trimmedScheduleName,trimmedScheduleDate, trimmedScheduleTime);
+        return new Schedule(trimmedScheduleName, trimmedScheduleDate, trimmedScheduleTime);
     }
 
     /**
