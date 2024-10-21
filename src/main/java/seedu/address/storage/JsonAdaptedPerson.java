@@ -38,7 +38,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given person details with notes.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
@@ -70,6 +70,37 @@ class JsonAdaptedPerson {
             this.notes.addAll(notes);
         }
     }
+
+    /**
+     * Constructs a {@code JsonAdaptedPerson} with the given person details but without a note.
+     */
+    @JsonCreator
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles,
+            @JsonProperty("caregivers") List<Nric> caregivers,
+            @JsonProperty("patients") List<Nric> patients) {
+        this.name = name;
+        this.nric = nric;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        if (tags != null) {
+            this.tags.addAll(tags);
+        }
+
+        if (roles != null) {
+            this.roles.addAll(roles);
+        }
+        if (caregivers != null) {
+            this.caregivers.addAll(caregivers);
+        }
+        if (patients != null) {
+            this.patients.addAll(patients);
+        }
+    }
+
 
     /**
      * Converts a given {@code Person} into this class for Jackson use.

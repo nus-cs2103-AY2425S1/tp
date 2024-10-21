@@ -16,6 +16,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nric;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
 public class JsonAdaptedPersonTest {
@@ -25,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_ROLEOLE = "NOT_A_PATIENT"; // Add this
+    private static final String INVALID_ROLEOLE = "NOT_A_PATIENT";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_NRIC = BENSON.getNric().toString();
@@ -42,6 +43,11 @@ public class JsonAdaptedPersonTest {
     private static final List<Nric> VALID_CAREGIVERS = BENSON.getCaregivers().stream().collect(Collectors.toList());
 
     private static final List<Nric> VALID_PATIENTS = BENSON.getPatients().stream().collect(Collectors.toList());
+
+    private static final List<JsonAdaptedNote> VALID_NOTES = BENSON.getNotes().stream()
+        .map(JsonAdaptedNote::new)
+        .collect(Collectors.toList());
+
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -145,5 +151,17 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS, invalidRoles, VALID_CAREGIVERS, VALID_PATIENTS);
         assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+public void toModelType_validPersonDetailsWithNotes_returnsPerson() throws Exception {
+
+    JsonAdaptedPerson jsonPerson = new JsonAdaptedPerson(VALID_NAME, VALID_NRIC, VALID_PHONE, VALID_EMAIL,
+            VALID_ADDRESS, VALID_TAGS, VALID_ROLE, VALID_CAREGIVERS, VALID_PATIENTS, VALID_NOTES);
+
+    Person person = jsonPerson.toModelType();
+
+    assertEquals(person.getNotes(), BENSON.getNotes());
+
     }
 }
