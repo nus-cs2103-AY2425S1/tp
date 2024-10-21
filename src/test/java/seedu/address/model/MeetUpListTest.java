@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_INFO_NETWORKING;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMeetUps.PITCH_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.meetup.TypicalMeetUps.PITCH_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,7 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.exceptions.DuplicateMeetUpException;
-import seedu.address.testutil.MeetUpBuilder;
+import seedu.address.testutil.meetup.MeetUpBuilder;
 
 public class MeetUpListTest {
 
