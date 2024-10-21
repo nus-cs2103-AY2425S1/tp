@@ -39,4 +39,6 @@ public class EventCard extends UiPart<Region> {
         value.setText(event.getValue());
     }
 
+
 }
+
