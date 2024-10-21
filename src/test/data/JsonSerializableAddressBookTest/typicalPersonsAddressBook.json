@@ -56,5 +56,10 @@
     "payment" : "false",
     "attendance": "true",
     "tags" : [ ]
+  } ],
+  "tutorials" : [  {
+    "subject" : "Math"
+  }, {
+    "subject" : "Science"
   } ]
 }
