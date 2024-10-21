@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NRIC_UNIQUE;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -11,12 +12,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 public class DeleteLinkCommandTest {
 
@@ -33,7 +33,7 @@ public class DeleteLinkCommandTest {
     public void execute_nolinktodelete() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         DeleteLinkCommand deleteLinkCommand = new DeleteLinkCommand(ALICE.getNric(), BENSON.getNric());
-        assertThrows(CommandException.class, () -> deleteLinkCommand.execute(model));
+        assertCommandFailure(deleteLinkCommand, model, DeleteLinkCommand.MESSAGE_NO_LINK);
     }
 
     @Test
@@ -54,12 +54,10 @@ public class DeleteLinkCommandTest {
     }
 
     @Test
-    public void execute_personNotExist() {
+    public void execute_nullPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Person validPerson = new PersonBuilder().build();
-        model.deleteLink(validPerson, BENSON);
-        DeleteLinkCommand deleteLinkCommand = new DeleteLinkCommand(ALICE.getNric(), BENSON.getNric());
-        assertThrows(CommandException.class, () -> deleteLinkCommand.execute(model));
+        DeleteLinkCommand linkCommand = new DeleteLinkCommand(new Nric(VALID_NRIC_UNIQUE), ALICE.getNric());
+        assertCommandFailure(linkCommand, model, DeleteLinkCommand.PERSON_NOT_FOUND);
     }
 
     @Test
