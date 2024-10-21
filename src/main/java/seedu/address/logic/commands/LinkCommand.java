@@ -28,7 +28,9 @@ public class LinkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Linked %1$s and %2$s";
 
-    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in CareLink";
+
+    public static final String SAME_PERSON = "Cannot link same people";
 
     public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
 
@@ -49,6 +51,10 @@ public class LinkCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (this.patientNric == this.caregiverNric) {
+            throw new CommandException(SAME_PERSON);
+        }
 
         Person patient = model.getPerson(patientNric);
         Person caregiver = model.getPerson(caregiverNric);

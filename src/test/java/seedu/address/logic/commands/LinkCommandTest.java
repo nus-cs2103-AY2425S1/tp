@@ -41,6 +41,13 @@ public class LinkCommandTest {
     }
 
     @Test
+    public void execute_samePerson() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LinkCommand linkCommand = new LinkCommand(BENSON.getNric(), BENSON.getNric());
+        assertCommandFailure(linkCommand, model, LinkCommand.SAME_PERSON);
+    }
+
+    @Test
     public void execute_nullPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         LinkCommand linkCommand = new LinkCommand(new Nric(VALID_NRIC_UNIQUE), ALICE.getNric());
