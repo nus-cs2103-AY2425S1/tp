@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
 /**
@@ -24,13 +25,13 @@ public class Person {
     private final Income income;
     private final Tier tier;
     private final Remark remark;
-
+    private final Status status;
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Job job, Income income,
-                  Tier tier, Remark remark) {
-        requireAllNonNull(name, phone, email, address, tier, remark);
+                  Tier tier, Remark remark, Status status) {
+        requireAllNonNull(name, phone, email, address, tier, remark, status);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -39,6 +40,7 @@ public class Person {
         this.income = income;
         this.tier = tier;
         this.remark = remark;
+        this.status = status;
     }
 
     public Name getName() {
@@ -61,6 +63,9 @@ public class Person {
     }
     public Income getIncome() {
         return income;
+    }
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -112,7 +117,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, job, tier);
+        return Objects.hash(name, phone, email, address, job, tier, remark, status);
     }
 
     @Override
@@ -126,6 +131,7 @@ public class Person {
                 .add("income", income)
                 .add("tier", tier)
                 .add("remark", remark)
+                .add("status", status)
                 .toString();
     }
 
