@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -111,6 +112,16 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void addMeeting(Person target, Meeting meeting) {
+        target.getMeetings().addMeeting(meeting);
+        addressBook.addMeeting(meeting);
+    }
+
+    public String listMeetings() {
+        return addressBook.listMeetings();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -127,6 +138,8 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+
 
     @Override
     public boolean equals(Object other) {
