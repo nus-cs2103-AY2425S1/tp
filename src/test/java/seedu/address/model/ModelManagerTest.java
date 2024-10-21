@@ -148,6 +148,27 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getPreviousCommandTextFromHistory() {
+        modelManager.addCommandTextToHistory("command1");
+        modelManager.addCommandTextToHistory("command2");
+
+        assertEquals("command2", modelManager.getPreviousCommandTextFromHistory());
+        assertEquals("command1", modelManager.getPreviousCommandTextFromHistory());
+        assertEquals("command1", modelManager.getPreviousCommandTextFromHistory());
+    }
+
+    @Test
+    public void getNextCommandTextFromHistory() {
+        modelManager.addCommandTextToHistory("command1");
+        modelManager.addCommandTextToHistory("command2");
+        assertEquals("", modelManager.getNextCommandTextFromHistory());
+        modelManager.getPreviousCommandTextFromHistory();
+
+        assertEquals("command2", modelManager.getNextCommandTextFromHistory());
+        assertEquals("command2", modelManager.getNextCommandTextFromHistory());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

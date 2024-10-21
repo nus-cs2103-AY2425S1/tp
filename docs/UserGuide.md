@@ -194,6 +194,9 @@ Exits the program.
 
 Format: `exit`
 
+### Navigating the Command History
+You are able to navigate through your command history (both valid and invalid commands) by using the up <kbd>&#8593;</kbd> and down <kbd>&#8595;</kbd> arrow keys.
+
 ### Saving the data
 
 ContactMate data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
