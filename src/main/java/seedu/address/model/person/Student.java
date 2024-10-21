@@ -29,6 +29,15 @@ public class Student extends Person {
         this.grade = grade;
     }
 
+    public Student(Name name, Phone phone, Email email, Address address, Name parentName, Phone parentPhone,
+                   Email parentEmail, Grade grade, Set<Tag> tags, boolean isPinned) {
+        super(name, phone, email, address, tags, isPinned);
+        this.parentName = parentName;
+        this.parentPhone = parentPhone;
+        this.parentEmail = parentEmail;
+        this.grade = grade;
+    }
+
     /**
      * Constructs a {@code Student} with the given {@code Person} as a base.
      */
@@ -76,7 +85,8 @@ public class Student extends Person {
     @Override
     public int hashCode() {
         return Objects.hash(this.getName(), this.getPhone(), this.getEmail(), this.getAddress(),
-                this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getGrade(), this.getTags());
+                this.getParentName(), this.getParentPhone(), this.getParentEmail(), this.getGrade(),
+                this.getTags(), this.getPinned());
     }
 
     @Override

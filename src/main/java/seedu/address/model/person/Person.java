@@ -23,8 +23,8 @@ public class Person {
 
     // Data fields
     private final Address address;
-
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isPinned;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +36,16 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isPinned = false;
+    }
+
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, boolean isPinned) {
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isPinned = isPinned;
     }
 
     public Name getName() {
@@ -61,6 +71,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public boolean getPinned() {
+        return isPinned;
+    }
+
+    public void setPinned(boolean pinned) {
+        isPinned = pinned;
     }
 
     /**
@@ -102,7 +120,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, isPinned);
     }
 
     @Override
