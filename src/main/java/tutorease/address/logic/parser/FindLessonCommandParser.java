@@ -4,7 +4,6 @@ import static tutorease.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
-import tutorease.address.logic.commands.FindContactCommand;
 import tutorease.address.logic.commands.FindLessonCommand;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.LessonContainsNamesPredicate;
