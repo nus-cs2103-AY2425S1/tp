@@ -2,7 +2,6 @@ package tutorease.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import java.nio.file.Path;
@@ -85,7 +84,7 @@ public class StorageManagerTest {
          * {@link JsonLessonScheduleStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonLessonScheduleStorageTest} class.
          */
-        LessonSchedule original = getTypicalLessons();
+        LessonSchedule original = new LessonSchedule();
         storageManager.saveLessonSchedule(original);
         LessonSchedule retrieved = storageManager.readLessonSchedule(getTypicalTutorEase()).get();
         assertEquals(original, retrieved);
