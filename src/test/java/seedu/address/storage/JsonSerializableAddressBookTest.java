@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
