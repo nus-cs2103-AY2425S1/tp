@@ -16,7 +16,7 @@ import seedu.address.model.event.EventManager;
 public class AddEventCommand extends Command {
     public static final String COMMAND_WORD = "new";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " <event name>: Adds an event to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " EVENT NAME: Adds an event to the address book. "
             + "e.g. new sumobot festival";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
