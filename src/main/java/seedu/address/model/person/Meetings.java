@@ -126,10 +126,16 @@ public class Meetings {
     }
 
 
+    /**
+     * @return an {@code ObservableList} object for meetings, such that it is displayable in the UI.
+     */
     public ObservableList<Meeting> getInternalList() {
         return internalList;
     }
 
+    /**
+     * Replaces the contents of the meeting list with {@code meetings}.
+     */
     public void setInternalList(List<Meeting> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement);
