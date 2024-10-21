@@ -10,6 +10,7 @@ import static tuteez.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static tuteez.logic.commands.CommandTestUtil.INVALID_TELEGRAM_DESC;
 import static tuteez.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static tuteez.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -44,6 +45,7 @@ import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
+import tuteez.model.person.TelegramUsername;
 import tuteez.model.tag.Tag;
 import tuteez.testutil.PersonBuilder;
 
@@ -192,6 +194,10 @@ public class AddCommandParserTest {
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+
+        // invalid telegramUsername
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+            + INVALID_TELEGRAM_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, TelegramUsername.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

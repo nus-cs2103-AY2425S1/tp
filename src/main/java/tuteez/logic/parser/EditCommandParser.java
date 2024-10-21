@@ -19,6 +19,7 @@ import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
 import tuteez.logic.parser.exceptions.ParseException;
+import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
@@ -64,8 +65,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
-            editPersonDescriptor.setTelegramUsername(ParserUtil.parseTelegramUsername(
-                    argMultimap.getValue(PREFIX_TELEGRAM).get()));
+            String telegramUsername = argMultimap.getValue(PREFIX_TELEGRAM).get();
+            setEditedTelegramUsername(editPersonDescriptor, telegramUsername);
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
         parseLessonsForEdit(argMultimap.getAllValues(PREFIX_LESSON)).ifPresent(editPersonDescriptor::setLessons);
@@ -75,6 +76,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private void setEditedTelegramUsername(EditPersonDescriptor editPersonDescriptor, String telegramUsername)
+            throws ParseException {
+        if (telegramUsername.isEmpty()) {
+            editPersonDescriptor.setTelegramUsername(TelegramUsername.empty());
+        } else {
+            editPersonDescriptor.setTelegramUsername(ParserUtil.parseTelegramUsername(telegramUsername));
+        }
     }
 
     /**

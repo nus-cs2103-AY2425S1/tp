@@ -136,11 +136,13 @@ public class ParserUtil {
             return TelegramUsername.empty();
         }
         String trimmedUsername = username.trim();
+
         if (!TelegramUsername.isValidTelegramHandle(trimmedUsername)) {
             throw new ParseException(TelegramUsername.MESSAGE_CONSTRAINTS);
         }
         return TelegramUsername.of(trimmedUsername);
     }
+
 
     /**
      * Parses a {@code String lesson} into a {@code Lesson}.
