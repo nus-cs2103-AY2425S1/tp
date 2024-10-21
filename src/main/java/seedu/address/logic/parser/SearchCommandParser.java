@@ -18,6 +18,7 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
  * Parses input arguments and creates a new FindCommand object
  */
 public class SearchCommandParser implements Parser<SearchCommand> {
+    public static final String MESSAGE_EMPTY_SEARCH_PREFIX = "The prefix cannot be empty. Please input a prefix.";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -77,7 +78,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     private void checkForEmptyInput(ArgumentMultimap argMultimap, Prefix prefix, String value)
             throws ParseException {
         if (argMultimap.getValue(prefix).isPresent() && value.trim().isEmpty()) {
-            throw new ParseException("The prefix cannot be empty. Please input a keyword for the prefix.");
+            throw new ParseException(MESSAGE_EMPTY_SEARCH_PREFIX);
         }
     }
 

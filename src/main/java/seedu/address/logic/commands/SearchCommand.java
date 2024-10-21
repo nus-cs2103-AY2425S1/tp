@@ -34,6 +34,8 @@ public class SearchCommand extends Command {
             + "Example 3: " + COMMAND_WORD + " n/ alice t/ friend\n"
             + "Example 4: " + COMMAND_WORD + " t/ friend n/ alice";
 
+    public static final String MESSAGE_NO_FOUND_GROUP = "There is no such group!";
+
     private final Predicate<Person> predicate;
     private final String groupName;
 
@@ -57,7 +59,7 @@ public class SearchCommand extends Command {
         Predicate<Person> finalPredicate = predicate;
 
         // If a group name is provided, perform a group lookup and 1bine it with the existing predicate
-        if (!(groupName == null) && !(groupName.isEmpty())) {
+        if (groupName != null && !groupName.isEmpty()) {
             // Fetch the GroupList
             GroupList groupList = model.getAddressBook().getGroupList();
             try {
@@ -68,7 +70,7 @@ public class SearchCommand extends Command {
                 // Combine predicates
                 finalPredicate = finalPredicate == null ? groupPredicate : finalPredicate.and(groupPredicate);
             } catch (GroupNotFoundException e) {
-                throw new CommandException("Group not found: " + groupName);
+                throw new CommandException(MESSAGE_NO_FOUND_GROUP);
             }
         }
         model.updateFilteredPersonList(finalPredicate);
