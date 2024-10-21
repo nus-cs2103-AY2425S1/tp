@@ -181,6 +181,10 @@ public class ModelManager implements Model {
         return scheduleList.hasMeeting(newMeeting);
     }
 
+    @Override
+    public boolean hasPersonInMeeting(Person person) {
+        return scheduleList.hasPersonInMeeting(person);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
