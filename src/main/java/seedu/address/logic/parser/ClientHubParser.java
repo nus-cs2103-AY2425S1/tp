@@ -60,10 +60,16 @@ public class ClientHubParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddCommand.SHORT_COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case DeleteCommand.SHORT_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -73,6 +79,9 @@ public class ClientHubParser {
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+
+        case ListCommand.SHORT_COMMAND_WORD:
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
