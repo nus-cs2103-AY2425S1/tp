@@ -301,6 +301,37 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void setDisplayClients_setsDisplayModeToClients() {
+        // Set display mode to CLIENTS
+        modelManager.setDisplayClients();
+        assertEquals(
+                ModelManager.DisplayMode.CLIENTS, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be CLIENTS")
+        ;
+    }
+
+    @Test
+    public void setDisplayProperties_setsDisplayModeToProperties() {
+        // Set display mode to PROPERTIES
+        modelManager.setDisplayProperties();
+        assertEquals(
+                ModelManager.DisplayMode.PROPERTIES, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be PROPERTIES"
+        );
+    }
+
+    @Test
+    public void setDisplayMeetings_setsDisplayModeToMeetings() {
+        // Set display mode to MEETINGS
+        modelManager.setDisplayMeetings();
+        assertEquals(
+                ModelManager.DisplayMode.MEETINGS, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be MEETINGS"
+        );
+    }
+
+
+    @Test
     public void testBuyerPredicate() {
         Name nameBuyer = mock(Name.class);
         Phone phoneBuyer = mock(Phone.class);

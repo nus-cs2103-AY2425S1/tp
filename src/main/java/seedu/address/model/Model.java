@@ -212,4 +212,5 @@ public interface Model {
     ObjectProperty<ModelManager.DisplayMode> getDisplayMode();
     void setDisplayClients();
     void setDisplayProperties();
+    void setDisplayMeetings();
 }

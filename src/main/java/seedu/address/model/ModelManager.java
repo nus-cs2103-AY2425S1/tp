@@ -9,9 +9,7 @@ import java.nio.file.Paths;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -382,5 +380,8 @@ public class ModelManager implements Model {
         this.displayMode.set(DisplayMode.PROPERTIES);
     }
 
-    // TODO: Add setDisplayMeetings @apollo-tan
+    @Override
+    public void setDisplayMeetings() {
+        this.displayMode.set(DisplayMode.MEETINGS);
+    }
 }

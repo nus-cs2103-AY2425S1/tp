@@ -285,9 +285,12 @@ public class AddCommandTest {
         public void setDisplayClients() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void setDisplayProperties() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setDisplayMeetings() {
             throw new AssertionError("This method should not be called.");
         }
 
