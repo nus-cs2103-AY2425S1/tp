@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.logic.commands.DeleteTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -16,12 +20,13 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
     /**
      * Checks if a given string (trimmed) is a valid argument
      * for the DeleteTagCommand class.
+     * @param argument the argument to be checked.
      * @return true if it is valid, and false otherwise.
      */
-    public boolean isValidArguments(String trimmedArgs) {
-        boolean isEmpty = trimmedArgs.isEmpty();
-        boolean isTooLong = trimmedArgs.length() > MAX_LENGTH;
-        boolean isValidCharacters = trimmedArgs.matches(VALIDATION_REGEX);
+    public boolean isValidArgument(String argument) {
+        boolean isEmpty = argument.isEmpty();
+        boolean isTooLong = argument.length() > MAX_LENGTH;
+        boolean isValidCharacters = argument.matches(VALIDATION_REGEX);
         if (isEmpty || isTooLong || !isValidCharacters) {
             return false;
         }
@@ -34,13 +39,24 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
      * @throws ParseException if the user input does not conform to the expected format.
      */
     public DeleteTagCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim().toLowerCase();
+        String lowerCaseArguments = args.toLowerCase();
+        ArgumentMultimap tokenisedArguments = ArgumentTokenizer.tokenize(lowerCaseArguments, PREFIX_TAG);
+        List<String> arguments = tokenisedArguments.getAllValues(PREFIX_TAG);
+        List<Tag> tagsToDelete = new ArrayList<>();
 
-        if (!isValidArguments(trimmedArgs)) {
+        if (arguments.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
         }
 
-        Tag tag = new Tag(trimmedArgs);
-        return new DeleteTagCommand(tag);
+        for (String argument : arguments) {
+            if (!isValidArgument(argument)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagCommand.MESSAGE_USAGE));
+            }
+
+            Tag tag = new Tag(argument);
+            tagsToDelete.add(tag);
+        }
+
+        return new DeleteTagCommand(tagsToDelete);
     }
 }
