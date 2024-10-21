@@ -12,7 +12,7 @@ import seedu.address.ui.PiChartWindow;
  * Displays a Pie Chart of the number of students in each class.
  */
 public class PiChartCommand extends Command {
-    public static final String COMMAND_WORD = "pi";
+    public static final String COMMAND_WORD = "Pi";
     public static final String MESSAGE_SUCCESS = "Displayed Pie Chart of number of students in each class";
 
 
