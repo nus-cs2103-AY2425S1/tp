@@ -203,7 +203,7 @@ public class ParserUtil {
         assert !nameStrings.contains("");
 
         HashSet<String> nameSet = new HashSet<>();
-        
+
         for (String nameString : nameStrings) {
             addToNameHashSet(nameString, nameSet);
         }
@@ -244,6 +244,4 @@ public class ParserUtil {
             daySet.add(parseDay(day)); // Convert and add to the set
         }
     }
-
-
 }

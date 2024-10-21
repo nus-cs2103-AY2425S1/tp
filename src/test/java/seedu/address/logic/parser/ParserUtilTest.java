@@ -205,8 +205,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseDays_containsEmptyString_throwsAssertionError() {
-        assertThrows(AssertionError.class,
-                () -> ParserUtil.parseDays(List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "")));
+        assertThrows(AssertionError.class, () ->
+                ParserUtil.parseDays(List.of("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "")));
     }
 
     @Test
