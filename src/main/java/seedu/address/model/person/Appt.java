@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 
 /**
  * Represents a Person's appointment date in the address book.
@@ -11,6 +12,22 @@ import java.time.format.DateTimeFormatter;
  */
 public class Appt {
     public static final String MESSAGE_CONSTRAINTS = null;
+
+    /**
+     * Comparator to compare two appointments by their date and time.
+     * Used for sorting appointments by date and time.
+     * @param appt1
+     * @param appt2
+     * @return int
+     * @see Comparator
+     */
+    public static final Comparator<Appt> DATETIME_COMPARATOR = new Comparator<Appt>() {
+        @Override
+        public int compare(Appt appt1, Appt appt2) {
+            return appt1.getDateTime().compareTo(appt2.getDateTime());
+        }
+    };
+
     private final LocalDateTime dateTime;
 
     /**
