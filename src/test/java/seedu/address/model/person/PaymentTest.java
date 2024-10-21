@@ -7,92 +7,80 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class PaymentTest {
-
-    // Test the constructor with the Boolean parameter (true and false cases)
     @Test
-    public void constructor_booleanParam_success() {
-        Payment paid = new Payment(true);
-        Payment notPaid = new Payment(false);
+    public void constructor_validIntegerString_success() {
+        Payment positivePayment = new Payment("123");
+        Payment negativePayment = new Payment("-123");
+        Payment zeroPayment = new Payment("0");
 
-        assertTrue(paid.hasPaid);
-        assertFalse(notPaid.hasPaid);
+        assertEquals("123", positivePayment.overdueAmount);
+        assertEquals("-123", negativePayment.overdueAmount);
+        assertEquals("0", zeroPayment.overdueAmount);
+    }
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        // Ensure that passing null throws an exception
+        try {
+            new Payment(null);
+        } catch (NullPointerException e) {
+            assertEquals(NullPointerException.class, e.getClass());
+        }
     }
 
-    // Test the default constructor (should default to false)
-    @Test
-    public void constructor_defaultConstructor_success() {
-        Payment defaultPayment = new Payment();
-        assertFalse(defaultPayment.hasPaid); // Default should be false
-    }
-
-    // Test the isValidPayment method with valid inputs
     @Test
     public void isValidPayment_validValues_returnsTrue() {
-        assertTrue(Payment.isValidPayment("true")); // Valid payment status
-        assertTrue(Payment.isValidPayment("false")); // Valid payment status
+        assertTrue(Payment.isValidPayment("123")); // Positive integer
+        assertTrue(Payment.isValidPayment("-123")); // Negative integer
+        assertTrue(Payment.isValidPayment("0")); // Zero
     }
 
-    // Test the isValidPayment method with invalid inputs
     @Test
     public void isValidPayment_invalidValues_returnsFalse() {
-        assertFalse(Payment.isValidPayment("paid")); // Invalid format
-        assertFalse(Payment.isValidPayment("unpaid")); // Invalid format
-        assertFalse(Payment.isValidPayment("123")); // Invalid characters
-        assertFalse(Payment.isValidPayment("")); // Empty string
-        assertFalse(Payment.isValidPayment("null")); // Random string
+        assertFalse(Payment.isValidPayment("abc")); // Non-numeric
+        assertFalse(Payment.isValidPayment("12.34")); // Floating point number
+        assertFalse(Payment.isValidPayment("")); // Empty string// Leading zeros
+        assertTrue(Payment.isValidPayment("-0")); // Negative zero
+        assertFalse(Payment.isValidPayment("$123")); // Contains non-numeric character
     }
 
-    // Test the toString method for both true and false cases
     @Test
     public void toString_correctRepresentation() {
-        Payment paid = new Payment(true);
-        Payment notPaid = new Payment(false);
+        Payment positivePayment = new Payment("123");
+        Payment zeroPayment = new Payment("0");
 
-        assertEquals("Paid", paid.toString());
-        assertEquals("Not Paid", notPaid.toString());
-    }
-
-    // Test the equals method (equality between objects)
-    @Test
-    public void equals_sameObjects_returnsTrue() {
-        Payment paid1 = new Payment(true);
-        Payment paid2 = new Payment(true);
-        Payment notPaid1 = new Payment(false);
-        Payment notPaid2 = new Payment(false);
-
-        // Same values should return true
-        assertTrue(paid1.equals(paid2));
-        assertTrue(notPaid1.equals(notPaid2));
-
-        // Objects should equal themselves
-        assertTrue(paid1.equals(paid1));
+        assertEquals("Payment overdue: $123", positivePayment.toString());
+        assertEquals("Payment overdue: $0", zeroPayment.toString());
     }
 
     @Test
-    public void equals_differentObjects_returnsFalse() {
-        Payment paid = new Payment(true);
-        Payment notPaid = new Payment(false);
+    public void equals_sameValues_returnsTrue() {
+        Payment payment1 = new Payment("123");
+        Payment payment2 = new Payment("123");
 
-        // Different values should return false
-        assertFalse(paid.equals(notPaid));
-
-        // Different types should return false
-        assertFalse(paid.equals(null));
-        assertFalse(paid.equals("Paid"));
+        assertTrue(payment1.equals(payment2));
+        assertTrue(payment1.equals(payment1));
     }
 
-    // Test the hashCode method for consistency with equals
+    @Test
+    public void equals_differentValues_returnsFalse() {
+        Payment payment1 = new Payment("123");
+        Payment payment2 = new Payment("456");
+        Payment payment3 = new Payment("-123");
+
+        assertFalse(payment1.equals(payment2));
+        assertFalse(payment1.equals(payment3));
+        assertFalse(payment1.equals(null));
+        assertFalse(payment1.equals("123"));
+    }
+
     @Test
     public void hashCode_consistencyWithEquals() {
-        Payment paid1 = new Payment(true);
-        Payment paid2 = new Payment(true);
-        Payment notPaid = new Payment(false);
+        Payment payment1 = new Payment("123");
+        Payment payment2 = new Payment("123");
 
-        // Objects with the same value should have the same hashcode
-        assertEquals(paid1.hashCode(), paid2.hashCode());
+        assertEquals(payment1.hashCode(), payment2.hashCode());
 
-        // Objects with different values should have different hashcodes
-        assertFalse(paid1.hashCode() == notPaid.hashCode());
+        Payment payment3 = new Payment("-123");
+        assertFalse(payment1.hashCode() == payment3.hashCode());
     }
 }
-

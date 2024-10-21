@@ -62,7 +62,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        payment = source.getPayment().hasPaid.toString();
+        payment = source.getPayment().overdueAmount;
         attendance = source.getAttendance().toString();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -118,7 +118,7 @@ class JsonAdaptedPerson {
         if (!Payment.isValidPayment(payment)) {
             throw new IllegalValueException(Payment.MESSAGE_CONSTRAINTS);
         }
-        final Payment modelPayment = new Payment(Boolean.parseBoolean(payment));
+        final Payment modelPayment = new Payment(payment);
 
         if (attendance == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
