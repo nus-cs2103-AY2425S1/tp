@@ -79,7 +79,7 @@ public class AddressBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case BookmarkListCommand.COMMAND_WORD:
             return new BookmarkListCommand();
 

@@ -14,7 +14,7 @@ public class BookmarkCommandParserTest {
     private BookmarkCommandParser parser = new BookmarkCommandParser();
 
     @Test
-    public void parse_validArgs_BookmarkCommand() {
+    public void parse_validArgs_bookmarkCommand() {
         assertParseSuccess(parser, "1", new BookmarkCommand(INDEX_FIRST_COMPANY));
     }
 

@@ -46,8 +46,8 @@ public class RemoveBookmarkCommandTest {
     }
 
     @Test
-    public void execute_NonExistentBookmarkUnfilteredList_throwsCommandException() {
-        RemoveBookmarkCommand removeBookmarkCommand= new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
+    public void execute_nonExistentBookmarkUnfilteredList_throwsCommandException() {
+        RemoveBookmarkCommand removeBookmarkCommand = new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
 
         assertCommandSuccess(removeBookmarkCommand, model, MESSAGE_REMOVE_BOOKMARK_FAILURE, model);
     }
@@ -85,7 +85,7 @@ public class RemoveBookmarkCommandTest {
     @Test
     public void execute_nonExistentBookmarkFilteredList_throwsCommandException() {
         showCompanyAtIndex(model, INDEX_FIRST_COMPANY);
-        RemoveBookmarkCommand removeBookmarkCommand= new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
+        RemoveBookmarkCommand removeBookmarkCommand = new RemoveBookmarkCommand(INDEX_FIRST_COMPANY);
 
         assertCommandSuccess(removeBookmarkCommand, model, MESSAGE_REMOVE_BOOKMARK_FAILURE, model);
     }

@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.company.Bookmark;
 import seedu.address.model.company.Company;
 
+/**
+ * Remove bookmark from a company identified by its displayed index from the address book.
+ */
 public class RemoveBookmarkCommand extends Command {
 
     public static final String COMMAND_WORD = "removebm";
@@ -50,10 +53,10 @@ public class RemoveBookmarkCommand extends Command {
             return new CommandResult(MESSAGE_REMOVE_BOOKMARK_FAILURE);
         }
 
-        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(), companyToRemoveBookmark.getPhone(),
-                companyToRemoveBookmark.getEmail(), companyToRemoveBookmark.getAddress(),
-                companyToRemoveBookmark.getCareerPageUrl(), companyToRemoveBookmark.getTags(),
-                new Bookmark(false));
+        Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),
+                companyToRemoveBookmark.getPhone(), companyToRemoveBookmark.getEmail(),
+                companyToRemoveBookmark.getAddress(), companyToRemoveBookmark.getCareerPageUrl(),
+                companyToRemoveBookmark.getTags(), new Bookmark(false));
 
         model.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);

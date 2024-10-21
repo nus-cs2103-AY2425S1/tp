@@ -13,7 +13,7 @@ public class RemoveBookmarkCommandParserTest {
     private RemoveBookmarkCommandParser parser = new RemoveBookmarkCommandParser();
 
     @Test
-    public void parse_validArgs_BookmarkCommand() {
+    public void parse_validArgs_removeBookmarkCommand() {
         assertParseSuccess(parser, "1", new RemoveBookmarkCommand(INDEX_FIRST_COMPANY));
     }
 
