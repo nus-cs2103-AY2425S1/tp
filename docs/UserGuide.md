@@ -216,7 +216,7 @@ Format: `help`
 
 ##### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the address book and appointment book after a validation check from the user.
 
 Format: `clear`
 
@@ -224,7 +224,7 @@ Format: `clear`
 
 ##### Exiting the program : `exit`
 
-Exits the program.
+Exits the program after printing a message.
 
 Format: `exit`
 
