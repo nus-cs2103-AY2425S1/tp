@@ -3,7 +3,6 @@ package seedu.address.model.note;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -20,8 +19,8 @@ public class Note {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
     public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
     public final Set<Appointment> previousAppointments;
-    public final ArrayList<String> remarks;
-    public final ArrayList<String> medication;
+    public final Set<String> remarks;
+    public final Set<String> medication;
 
 
     /**
@@ -29,8 +28,21 @@ public class Note {
      */
     public Note() {
         previousAppointments = new HashSet<>();
-        remarks = new ArrayList<>();
-        medication = new ArrayList<>();
+        remarks = new HashSet<>();
+        medication = new HashSet<>();
+    }
+
+    /**
+     * Constructs a {@code Note} with the specified appointments, remarks, and medication.
+     *
+     * @param appointments A set of previous appointments.
+     * @param remarks A set of remarks.
+     * @param medication A set of medications.
+     */
+    public Note(Set<Appointment> appointments, Set<String> remarks, Set<String> medication) {
+        this.previousAppointments = appointments;
+        this.remarks = remarks;
+        this.medication = medication;
     }
 
     /**
@@ -45,7 +57,7 @@ public class Note {
     }
 
     /**
-     * Adds new remark to remarks arraylist
+     * Adds new remark to remarks hashset
      *
      * @param remark A valid remark
      */
@@ -56,7 +68,7 @@ public class Note {
     }
 
     /**
-     * Adds new medication to medications arraylist
+     * Adds new medication to medications hashset
      *
      * @param medication A valid medication
      */
@@ -94,5 +106,14 @@ public class Note {
     @Override
     public int hashCode() {
         return Objects.hash(previousAppointments, remarks, medication);
+    }
+
+    @Override
+    public String toString() {
+        String appointment = "Previous Appointments: " + previousAppointments.toString() + "\n";
+        String medication = "Medications: " + this.medication.toString() + "\n";
+        String remarks = "Remarks: " + this.remarks.toString();
+
+        return appointment + medication + remarks;
     }
 }
