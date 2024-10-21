@@ -69,11 +69,11 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         if (names.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
         }
         if (names.contains("")) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
         }
 
         return ParserUtil.parseNameStrings(names);
@@ -88,8 +88,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         assert days != null;
 
         if (days.isEmpty() || days.contains("")) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
         }
 
         return ParserUtil.parseDays(days);

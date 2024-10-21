@@ -44,31 +44,31 @@ public class FindCommandParserTest {
     public void parse_emptyNameArgument_throwsParseException() {
         // day argument is present
         assertParseFailure(parser, " n/  d/Saturday",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
         assertParseFailure(parser, " d/Saturday n/ ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
 
         // multiple whitespaces
         assertParseFailure(parser, " n/     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX));
     }
 
     @Test
     public void parse_emptyDayArgumentWithValidNameArgumentInfront_throwsParseException() {
         // name argument is present
         assertParseFailure(parser, " n/Alice BOB d/    ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
 
     }
 
     @Test
     public void parse_emptyDayArgument_throwsParseException() {
         assertParseFailure(parser, " d/ n/Alice",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
 
         // multiple whitespaces
         assertParseFailure(parser, " d/     ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX));
 
     }
 

@@ -20,16 +20,19 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD_RANDOM_CASE = "FiNd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose:\n"
-            + "1. names contain any of the specified KEYWORDS (case-insensitive)\n"
+            + "1. name contain any of the specified KEYWORDS (case-insensitive)\n"
             + "Parameters: [n/KEYWORD [MORE_KEYWORDS]]...\n"
-            + "2. schedules contain any of the specified KEYWORDS (case-insensitive)\n"
-            + "Parameters: [d/KEYWORD [MORE_KEYWORDS]]...\n"
+            + "2. schedule is on any of the specified DAY keywords (case-insensitive)\n"
+            + "Parameters: [d/DAY [MORE_DAYS]]...\n"
             + "and displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie" + " d/monday tuesday";
 
-    public static final String MESSAGE_NO_PARAMETERS = "At least one field to find must be provided.\n" + MESSAGE_USAGE;
-    public static final String MESSAGE_NO_NAME_KEYWORDS = "At least one name keyword to find must be provided.";
-    public static final String MESSAGE_NO_SCHEDULE_KEYWORDS = "At least one schedule keyword to find must be provided.";
+    public static final String MESSAGE_NO_PARAMETERS =
+            "At least one field to find must be provided.\n" + MESSAGE_USAGE;
+    public static final String MESSAGE_NO_NAME_KEYWORDS_AFTER_PREFIX =
+            "At least one name keyword to find must be provided.";
+    public static final String MESSAGE_NO_SCHEDULE_KEYWORDS_AFTER_PREFIX =
+            "At least one day keyword to find must be provided.";
     private final List<AttributeContainsKeywordsPredicate<?>> predicates;
 
     public FindCommand(List<AttributeContainsKeywordsPredicate<?>> predicates) {
