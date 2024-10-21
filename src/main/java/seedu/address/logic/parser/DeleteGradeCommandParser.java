@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteGradeCommand;
@@ -18,14 +20,17 @@ public class DeleteGradeCommandParser implements Parser<DeleteGradeCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public DeleteGradeCommand parse(String args) throws ParseException {
-        String[] splitArgs = args.trim().split("\\s+");
+        requireNonNull(args);
 
-        if (splitArgs.length != 2) {
+        ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+        if (argMultiMap.getValue(PREFIX_NAME).isEmpty() || argMultiMap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGradeCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(splitArgs[0]);
-        String testName = ParserUtil.parseTestName(splitArgs[1]);
+        argMultiMap.verifyNoDuplicatePrefixesFor(PREFIX_NAME);
+
+        Index index = ParserUtil.parseIndex(argMultiMap.getPreamble());
+        String testName = ParserUtil.parseTestName(argMultiMap.getValue(PREFIX_NAME).get());
 
         return new DeleteGradeCommand(index, testName);
     }

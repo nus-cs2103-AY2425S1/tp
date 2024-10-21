@@ -21,8 +21,8 @@ public class DeleteGradeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a grade of the person identified by the "
             + "index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "TEST_NAME\n"
-            + "Example: " + COMMAND_WORD + " 1 Midterm";
+            + "n/TEST_NAME\n"
+            + "Example: " + COMMAND_WORD + " 1 n/Midterm";
 
     public static final String MESSAGE_DELETE_GRADE_SUCCESS = "Deleted grade from %1$s: %2$s";
     public static final String MESSAGE_GRADE_NOT_FOUND = "Grade for test '%1$s' not found.";

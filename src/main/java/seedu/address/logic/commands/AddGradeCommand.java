@@ -23,8 +23,8 @@ public class AddGradeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a grade to the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing grades will be updated by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) EXAM_NAME EXAM_SCORE EXAM_WEIGHTAGE\n"
-            + "Example: " + COMMAND_WORD + " 1 Midterm 85 30";
+            + "Parameters: INDEX (must be a positive integer) n/EXAM_NAME s/EXAM_SCORE w/EXAM_WEIGHTAGE\n"
+            + "Example: " + COMMAND_WORD + " 1 n/Midterm s/85 w/30";
 
     private final Grade toAdd;
     private final Index index;
