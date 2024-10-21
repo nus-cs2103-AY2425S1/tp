@@ -45,6 +45,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_APPOINTMENT_ONE = "01/01/2025 0000";
     public static final String VALID_APPOINTMENT_TWO = "20/08/2027 1200";
+    public static final String VALID_MEDICATION_ONE = "10mg Panadol";
+    public static final String VALID_MEDICATION_TWO = "5mg Ibuprofen";
+    public static final String VALID_REMARK_ONE = "Sick";
+    public static final String VALID_REMARK_TWO = "Lower limb";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

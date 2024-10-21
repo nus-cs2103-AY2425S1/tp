@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -34,6 +35,7 @@ public class PersonBuilder {
     private Sex sex;
     private Set<Appointment> appointments;
     private Set<Tag> tags;
+    private Note note;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -47,6 +49,7 @@ public class PersonBuilder {
         sex = new Sex(DEFAULT_SEX);
         appointments = new HashSet<>();
         tags = new HashSet<>();
+        note = new Note();
     }
 
     /**
@@ -61,6 +64,7 @@ public class PersonBuilder {
         sex = personToCopy.getSex();
         appointments = new HashSet<>(personToCopy.getAppointment());
         tags = new HashSet<>(personToCopy.getTags());
+        note = personToCopy.getNote();
     }
 
     /**
@@ -128,8 +132,29 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Sex} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String appointment, String remark, String medication) {
+        this.note = new Note();
+
+        if (appointment != null) {
+            this.note.addAppointment(appointment);
+        }
+
+        if (remark != null) {
+            this.note.addRemark(remark);
+        }
+
+        if (medication != null) {
+            this.note.addMedication(medication);
+        }
+
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, age, sex, appointments, tags);
+        return new Person(name, phone, email, address, age, sex, appointments, tags, note);
     }
 
 }

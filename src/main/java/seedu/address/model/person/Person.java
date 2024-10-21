@@ -9,6 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,13 +29,14 @@ public class Person {
     private final Sex sex;
     private final Set<Appointment> appointments = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
+    private final Note note;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Age age, Sex sex, Set<Appointment> appointments, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, age, sex, appointments, tags);
+                  Age age, Sex sex, Set<Appointment> appointments, Set<Tag> tags, Note note) {
+        requireAllNonNull(name, phone, email, address, age, sex, appointments, tags, note);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -43,6 +45,7 @@ public class Person {
         this.sex = sex;
         this.appointments.addAll(appointments);
         this.tags.addAll(tags);
+        this.note = note;
     }
 
     public Name getName() {
@@ -67,6 +70,10 @@ public class Person {
 
     public Sex getSex() {
         return sex;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -121,14 +128,14 @@ public class Person {
                 && age.equals(otherPerson.age)
                 && sex.equals(otherPerson.sex)
                 && appointments.equals(otherPerson.appointments)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && note.equals(otherPerson.note);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, address, age, sex, tags, appointments);
-
     }
 
     @Override

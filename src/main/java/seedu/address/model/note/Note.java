@@ -19,9 +19,19 @@ import seedu.address.model.appointment.Appointment;
 public class Note {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
     public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
-    public final Set<Appointment> previousAppointments = new HashSet<>();
-    public final ArrayList<String> remarks = new ArrayList<>();
-    public final ArrayList<String> medication = new ArrayList<>();
+    public final Set<Appointment> previousAppointments;
+    public final ArrayList<String> remarks;
+    public final ArrayList<String> medication;
+
+
+    /**
+     * Constructor for Note class
+     */
+    public Note() {
+        previousAppointments = new HashSet<>();
+        remarks = new ArrayList<>();
+        medication = new ArrayList<>();
+    }
 
     /**
      * Adds a new appointment to the previousAppointment hashset. Validation is done
@@ -75,7 +85,8 @@ public class Note {
         }
 
         Note otherNote = (Note) other;
-        return previousAppointments.equals(otherNote.previousAppointments)
+        return (previousAppointments.stream().sorted().toList())
+                       .equals(otherNote.previousAppointments.stream().sorted().toList())
                && medication.equals(otherNote.medication)
                && remarks.equals(otherNote.remarks);
     }

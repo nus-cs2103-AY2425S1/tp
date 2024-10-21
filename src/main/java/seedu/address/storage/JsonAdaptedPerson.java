@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
@@ -35,6 +36,7 @@ class JsonAdaptedPerson {
     private final String sex;
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final JsonAdaptedNote note;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,7 +46,7 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("age") String age, @JsonProperty("sex") String sex,
             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("note") JsonAdaptedNote note) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,6 +59,7 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.note = note;
     }
 
     /**
@@ -75,6 +78,7 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        note = new JsonAdaptedNote(source.getNote());
     }
 
     /**
@@ -141,11 +145,17 @@ class JsonAdaptedPerson {
         }
         final Sex modelSex = new Sex(sex);
 
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+
+        final Note modelNote = this.note.toModelType();
+
         final Set<Appointment> modelAppointment = new HashSet<>(personAppointments);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelAge, modelSex, modelAppointment, modelTags);
+                modelAge, modelSex, modelAppointment, modelTags, modelNote);
     }
 }
