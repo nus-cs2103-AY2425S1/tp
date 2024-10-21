@@ -136,7 +136,8 @@ public class MainWindow extends UiPart<Stage> {
                 case PROPERTIES:
                     listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
                     break;
-                // TODO: Add case for MEETINGS @apollo-tan
+                case MEETINGS:
+                    System.out.println("In progress... will print Meetings");
                 default:
                     throw new RuntimeException("Invalid Display Mode: " + newValue);
             }

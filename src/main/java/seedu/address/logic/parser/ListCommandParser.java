@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_KEY;
 import seedu.address.logic.commands.ListBuyersCommand;
 import seedu.address.logic.commands.ListClientsCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListMeetingsCommand;
 import seedu.address.logic.commands.ListPropertiesCommand;
 import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -44,6 +45,8 @@ public class ListCommandParser implements Parser<ListCommand> {
             return new ListSellersCommand();
         case ListPropertiesCommand.KEY_WORD:
             return new ListPropertiesCommand();
+        case ListMeetingsCommand.KEY_WORD:
+            return new ListMeetingsCommand();
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
