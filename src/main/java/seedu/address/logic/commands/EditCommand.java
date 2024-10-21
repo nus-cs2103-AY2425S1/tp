@@ -25,6 +25,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
@@ -195,13 +196,16 @@ public class EditCommand extends Command {
         assert toEdit != null;
 
         Id id = toEdit.getId();
+
+        Archive archive = toEdit.getArchive();
+
         ItemName itemName = descriptor.getItemName().orElse(toEdit.getItemName());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
         Eta updatedEta = descriptor.getEta().orElse(toEdit.getEta());
         Status updatedStatus = descriptor.getStatus().orElse(toEdit.getStatus());
 
-        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta, updatedStatus);
+        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta, updatedStatus, archive);
     }
 
     @Override
