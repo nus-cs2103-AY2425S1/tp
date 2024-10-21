@@ -57,6 +57,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
     }
 
+    public AddressBook copy() {
+        return new AddressBook(this);
+    }
+
     //// person-level operations
 
     /**

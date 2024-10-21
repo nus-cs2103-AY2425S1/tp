@@ -54,6 +54,11 @@ public class StorageManager implements Storage {
     }
 
     @Override
+    public void updateAddressBookFilePath(Path filePath) {
+        addressBookStorage.updateAddressBookFilePath(filePath);
+    }
+
+    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }

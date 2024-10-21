@@ -88,6 +88,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReadOnlyAddressBook getFrozenAddressBook() {
+        return addressBook.copy();
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
