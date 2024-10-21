@@ -241,15 +241,7 @@ public class MainWindow extends UiPart<Stage> {
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
-            if (commandResult.isOwnerListCommand()) {
-                System.out.println("owners");
-                changeToOwnersOnly();
-            } else if (commandResult.isPetListCommand()) {
-                System.out.println("pets");
-                changeToPetsOnly();
-            } else if (commandResult.isCombinedListCommand()) {
-                changeToCombinedList();
-            }
+            toggleListView(commandResult);
 
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
@@ -267,6 +259,18 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    public void toggleListView(CommandResult commandResult) {
+        if (commandResult.isOwnerListCommand()) {
+            System.out.println("owners");
+            changeToOwnersOnly();
+        } else if (commandResult.isPetListCommand()) {
+            System.out.println("pets");
+            changeToPetsOnly();
+        } else if (commandResult.isCombinedListCommand()) {
+            changeToCombinedList();
         }
     }
 }
