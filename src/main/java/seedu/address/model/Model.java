@@ -94,8 +94,17 @@ public interface Model {
     void addConsult(Consultation consult);
 
     /**
+     * Deletes the given consultation.
+     * The consultation must exist in TAHub.
+     */
+    void deleteConsult(Consultation consult);
+
+    /**
      * Returns true if a student with the same identity as {@code student} exists in the address book.
      * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
      */
     boolean hasConsult(Consultation consult);
+
+    /** Returns an unmodifiable view of the consult list */
+    ObservableList<Consultation> getConsultList();
 }

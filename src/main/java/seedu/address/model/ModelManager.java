@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
+    private final FilteredList<Consultation> filteredConsults;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
+        filteredConsults = new FilteredList<>(this.addressBook.getConsultList());
     }
 
     public ModelManager() {
@@ -154,8 +156,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteConsult(Consultation consult) {
+        addressBook.removeConsult(consult);
+    }
+
+    @Override
     public boolean hasConsult(Consultation consult) {
         return addressBook.hasConsult(consult);
+    }
+
+    @Override
+    public ObservableList<Consultation> getConsultList() {
+        return filteredConsults;
     }
 
 }

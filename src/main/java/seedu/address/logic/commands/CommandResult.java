@@ -54,7 +54,7 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.commandType = null;
-        this.tabIndex = null;;
+        this.tabIndex = null;
     }
 
     public String getFeedbackToUser() {
@@ -65,7 +65,9 @@ public class CommandResult {
         return commandType;
     }
 
-    public Index getTabIndex() { return tabIndex; }
+    public Index getTabIndex() {
+        return tabIndex;
+    }
 
     @Override
     public boolean equals(Object other) {
