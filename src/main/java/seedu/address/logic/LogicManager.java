@@ -27,11 +27,17 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_PERMISSION_ERROR_FORMAT =
             "Could not save data to file %s due to insufficient permissions to write to the file or the folder.";
 
+    public static final String MESSAGE_COMMAND_CANCELLED = "Command has been cancelled.";
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+
+    // Boolean to determine if user has confirmed they want to delete command
+    private boolean awaitingConfirmation = false;
+    private Command delayedCommand = null;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -46,9 +52,16 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        CommandResult commandResult;
+        if (this.awaitingConfirmation) {
+            return handleConfirmation(commandText);
+        }
+
         Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        CommandResult commandResult = command.execute(model, this.awaitingConfirmation);
+        if (commandResult.isShowConfirmation() && !this.awaitingConfirmation) {
+            this.awaitingConfirmation = true;
+            this.delayedCommand = command;
+        }
 
         try {
             storage.saveAddressBook(model.getAddressBook());
@@ -58,6 +71,25 @@ public class LogicManager implements Logic {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
+        return commandResult;
+    }
+
+    /**
+     * Processes user input for command confirmation.
+     * Executes the delayed command if confirmed, or cancels it and returns a cancellation message.
+     *
+     * @param commandText The user's confirmation input.
+     * @return The result of the command if confirmed, or a cancellation message.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private CommandResult handleConfirmation(String commandText) throws CommandException {
+        CommandResult commandResult;
+        if (addressBookParser.parseConfirmation(commandText)) {
+            commandResult = this.delayedCommand.execute(model, this.awaitingConfirmation);
+        } else {
+            commandResult = new CommandResult(MESSAGE_COMMAND_CANCELLED);
+        }
+        this.awaitingConfirmation = false;
         return commandResult;
     }
 
