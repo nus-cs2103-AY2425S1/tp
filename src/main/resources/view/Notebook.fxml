@@ -63,25 +63,7 @@
                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
                             </padding>
                         </AnchorPane>
-                        <StackPane fx:id="binder" prefWidth="20.0">
-                            <Pane prefWidth="10.0"
-                                  style="-fx-border-color: black; -fx-border-width: 0 1 0 1; -fx-background-color: whitesmoke;">
-                                <StackPane.margin>
-                                    <Insets left="5.0" right="5.0"/>
-                                </StackPane.margin>
-                                <effect>
-                                    <DropShadow radius="6.335" spread="0.16" width="6.34"/>
-                                </effect>
-                            </Pane>
-                            <VBox fx:id="loopParent" alignment="TOP_CENTER" spacing="5.0">
-                                <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="586.0" length="260.0"
-                                     radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK"
-                                     strokeType="INSIDE" VBox.vgrow="ALWAYS"/>
-                                <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="16.0" length="260.0" radiusX="8.0"
-                                     radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE"
-                                     VBox.vgrow="ALWAYS"/>
-                            </VBox>
-                        </StackPane>
+                        <StackPane fx:id="binderPlaceholder" prefWidth="20.0" minWidth="20.0" maxWidth="20.0"/>
                         <AnchorPane fx:id="rightPage" HBox.hgrow="ALWAYS">
                             <VBox styleClass="page-content" AnchorPane.bottomAnchor="0.0"
                                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
