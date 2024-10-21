@@ -26,14 +26,15 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         List<String> userInput = Arrays.asList("Alice", "Bob");
         ArgumentMultimap mapForUserInput = new ArgumentMultimap();
+        mapForUserInput.put(new Prefix(""), "");
         userInput.stream().forEach(input -> mapForUserInput.put(PREFIX_NAME, input));
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new ContainsKeywordsPredicate(mapForUserInput));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t", expectedFindCommand);
     }
 
 }
