@@ -3,8 +3,10 @@ package seedu.address.model.shortcut;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -123,11 +125,10 @@ public class UniqueShortCutList implements Iterable<ShortCut> {
      * Returns true if {@code shortcuts} contains only unique shortcuts.
      */
     private boolean shortcutsAreUnique(List<ShortCut> shortcuts) {
-        for (int i = 0; i < shortcuts.size() - 1; i++) {
-            for (int j = i + 1; j < shortcuts.size(); j++) {
-                if (shortcuts.get(i).getAlias().equals(shortcuts.get(j).getAlias())) {
-                    return false;
-                }
+        Set<Alias> aliasSet = new HashSet<>();
+        for (ShortCut shortcut : shortcuts) {
+            if (!aliasSet.add(shortcut.getAlias())) {
+                return false;
             }
         }
         return true;

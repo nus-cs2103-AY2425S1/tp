@@ -28,19 +28,11 @@ public class ListShortCutCommand extends Command {
      */
     public String formatShortCuts(String shortcuts) {
         shortcuts = shortcuts.replaceAll("[\\[\\]]", "");
-
-        // Split by comma to separate individual shortcuts
         String[] shortcutArray = shortcuts.split(", ");
-
-        // Use a StringBuilder to construct the formatted result
         StringBuilder formattedShortcuts = new StringBuilder();
-
-        // Iterate over the shortcut array and append each to a new line
         for (String shortcut : shortcutArray) {
             formattedShortcuts.append(shortcut).append("\n");
         }
-
-        // Return the final formatted string
         return formattedShortcuts.toString().trim();
     }
 

@@ -24,12 +24,8 @@ class AddShortCutCommandTest {
     void execute_newShortCut_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        // Create a new shortcut
         ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
         expectedModel.addShortCut(shortCut);
-
-        // Assert that the command successfully adds the shortcut
         assertCommandSuccess(new AddShortCutCommand(shortCut), model,
                 String.format(AddShortCutCommand.MESSAGE_SUCCESS, shortCut), expectedModel);
     }
@@ -37,12 +33,8 @@ class AddShortCutCommandTest {
     @Test
     void execute_duplicateShortCut_throwsCommandException() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-        // Add a duplicate shortcut
         ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
         model.addShortCut(shortCut);
-
-        // Assert that trying to add the same shortcut throws a CommandException
         assertThrows(CommandException.class, () -> new AddShortCutCommand(shortCut).execute(model));
     }
 
@@ -55,12 +47,10 @@ class AddShortCutCommandTest {
         AddShortCutCommand command1 = new AddShortCutCommand(shortCut1);
         AddShortCutCommand command2 = new AddShortCutCommand(shortCut2);
         AddShortCutCommand command3 = new AddShortCutCommand(shortCut3);
-
-        // Test equality between the same object and different objects
-        assertEquals(command1, command1); // Same object
+        assertEquals(command1, command1);
         assertNotEquals(command1, null);
-        assertEquals(command1, command2); // Same alias and tag name
-        assertNotEquals(command1, command3); // Different alias and tag name
+        assertEquals(command1, command2);
+        assertNotEquals(command1, command3);
     }
 
     @Test

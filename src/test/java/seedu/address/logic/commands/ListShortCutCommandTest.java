@@ -25,10 +25,7 @@ class ListShortCutCommandTest {
 
     @BeforeEach
     public void setUp() {
-        // Initialize the ListShortCutCommand
         listShortCutCommand = new ListShortCutCommand();
-
-        // Add some sample shortcuts to the model and expected model
         ShortCut shortCut1 = new ShortCut(new Alias("v"), new FullTagName("Vegan"));
         ShortCut shortCut2 = new ShortCut(new Alias("vg"), new FullTagName("Vegetarian"));
 
@@ -40,34 +37,22 @@ class ListShortCutCommandTest {
 
     @Test
     void execute_listShortCut_success() throws CommandException {
-        // Expected formatted shortcuts
         String expectedFormattedShortcuts = "v : Vegan\nvg : Vegetarian";
-
-        // Execute the command and capture the result
+        String expectedFeedbackToUsers = ListShortCutCommand.MESSAGE_SUCCESS + expectedFormattedShortcuts;
         CommandResult result = listShortCutCommand.execute(model);
-
-        // Assert that the message contains the correct shortcuts
-        assertEquals(ListShortCutCommand.MESSAGE_SUCCESS + expectedFormattedShortcuts, result.getFeedbackToUser());
+        assertEquals(expectedFeedbackToUsers, result.getFeedbackToUser());
     }
 
     @Test
     void formatShortCuts_validShortCuts_correctFormatting() {
-        // Use model's shortcut list and convert to string
         String shortcuts = model.getShortCutList().toString();
-
-        // Expected formatted string
         String expectedFormattedShortcuts = "v : Vegan\nvg : Vegetarian";
-
-        // Call the formatShortCuts method
         String formattedResult = listShortCutCommand.formatShortCuts(shortcuts);
-
-        // Check if the formatted result matches the expected result
         assertEquals(expectedFormattedShortcuts, formattedResult);
     }
 
     @Test
     void formatShortCuts_emptyShortCuts_emptyString() {
-        // Test with empty shortcut list
         String shortcuts = "[]";
         String formattedResult = listShortCutCommand.formatShortCuts(shortcuts);
 
@@ -79,12 +64,11 @@ class ListShortCutCommandTest {
     void execute_noShortCuts_success() throws CommandException {
         // Set the model and expectedModel to return an empty shortcut list
         Model emptyModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-        // Execute the command
         CommandResult result = listShortCutCommand.execute(emptyModel);
+        String expectedFeedbackToUser = ListShortCutCommand.MESSAGE_SUCCESS + "";
 
         // Assert that it shows no shortcuts
-        assertEquals(ListShortCutCommand.MESSAGE_SUCCESS + "", result.getFeedbackToUser());
+        assertEquals(expectedFeedbackToUser, result.getFeedbackToUser());
     }
 
     @Test
