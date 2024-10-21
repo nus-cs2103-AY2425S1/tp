@@ -13,7 +13,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.DetailsContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.DetailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.GenderMatchesKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -67,7 +67,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
         if (argMultimap.getValue(PREFIX_DETAIL).isPresent()) {
             String[] detailKeywords = argMultimap.getValue(PREFIX_DETAIL).get().split("\\s+");
-            predicateGroup.add(new DetailsContainsKeywordsPredicate(Arrays.asList(detailKeywords)));
+            predicateGroup.add(new DetailContainsKeywordsPredicate(Arrays.asList(detailKeywords)));
         }
 
         if (!predicateGroup.isAnyPredicateAdded()) {

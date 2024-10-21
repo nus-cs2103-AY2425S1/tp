@@ -20,8 +20,10 @@ public class PredicateGroupTest {
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
-        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
+        NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         PredicateGroup firstPredicateGroup = new PredicateGroup();
         firstPredicateGroup.add(firstPredicate);
@@ -56,7 +58,7 @@ public class PredicateGroupTest {
                 Collections.singletonList("M"));
         AgeContainsKeywordsPredicate agePredicate = new AgeContainsKeywordsPredicate(
                 Arrays.asList("20", "21", "22", "23"));
-        DetailsContainsKeywordsPredicate detailsPredicate = new DetailsContainsKeywordsPredicate(
+        DetailContainsKeywordsPredicate detailsPredicate = new DetailContainsKeywordsPredicate(
                 Arrays.asList("wizard", "looking", "yellow"));
         StudyGroupsContainKeywordsPredicate studyGroupsPredicate = new StudyGroupsContainKeywordsPredicate(
                 Arrays.asList("H1", "G3", "G4"));
@@ -65,7 +67,8 @@ public class PredicateGroupTest {
         Person person = new PersonBuilder().withName("Dorothy Gale").withEmail("dorothy@land.oz")
                 .withGender("F").withAge("18").withDetail("Up the tornado")
                 .withStudyGroupTags("O1", "O2", "O3").build();
-        PredicateGroup predicateGroup = FindUtil.getPredicateGroup(namePredicate, emailPredicate, genderPredicate,
+        PredicateGroup predicateGroup = FindUtil.getPredicateGroup(namePredicate, emailPredicate,
+                genderPredicate,
                 agePredicate, detailsPredicate, studyGroupsPredicate);
 
         assertFalse(predicateGroup.test(person));

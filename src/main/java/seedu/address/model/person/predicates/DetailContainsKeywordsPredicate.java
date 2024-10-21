@@ -11,10 +11,10 @@ import seedu.address.model.person.Person;
  * Tests that a {@code Person}'s {@code Details} matches any of the keywords
  * given.
  */
-public class DetailsContainsKeywordsPredicate implements Predicate<Person> {
+public class DetailContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public DetailsContainsKeywordsPredicate(List<String> keywords) {
+    public DetailContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -31,12 +31,11 @@ public class DetailsContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DetailsContainsKeywordsPredicate)) {
+        if (!(other instanceof DetailContainsKeywordsPredicate)) {
             return false;
         }
 
-        DetailsContainsKeywordsPredicate otherDetailContainsKeywordsPredicate =
-                (DetailsContainsKeywordsPredicate) other;
+        DetailContainsKeywordsPredicate otherDetailContainsKeywordsPredicate = (DetailContainsKeywordsPredicate) other;
         return keywords.equals(otherDetailContainsKeywordsPredicate.keywords);
     }
 

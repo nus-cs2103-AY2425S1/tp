@@ -12,23 +12,23 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-public class DetailsContainsKeywordsPredicateTest {
+public class DetailContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        DetailsContainsKeywordsPredicate firstPredicate = new DetailsContainsKeywordsPredicate(
+        DetailContainsKeywordsPredicate firstPredicate = new DetailContainsKeywordsPredicate(
                 firstPredicateKeywordList);
-        DetailsContainsKeywordsPredicate secondPredicate = new DetailsContainsKeywordsPredicate(
+        DetailContainsKeywordsPredicate secondPredicate = new DetailContainsKeywordsPredicate(
                 secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        DetailsContainsKeywordsPredicate firstPredicateCopy = new DetailsContainsKeywordsPredicate(
+        DetailContainsKeywordsPredicate firstPredicateCopy = new DetailContainsKeywordsPredicate(
                 firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
@@ -45,40 +45,40 @@ public class DetailsContainsKeywordsPredicateTest {
     @Test
     public void test_detailsContainsKeywords_returnsTrue() {
         // One keyword
-        DetailsContainsKeywordsPredicate predicate = new DetailsContainsKeywordsPredicate(
+        DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(
                 Collections.singletonList("details"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Multiple keywords
-        predicate = new DetailsContainsKeywordsPredicate(Arrays.asList("this", "details"));
+        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("this", "details"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Only one matching keyword
-        predicate = new DetailsContainsKeywordsPredicate(Arrays.asList("this", "nonsense"));
+        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("this", "nonsense"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Mixed-case keywords
-        predicate = new DetailsContainsKeywordsPredicate(Arrays.asList("tHiS", "DEtaIlS"));
+        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("tHiS", "DEtaIlS"));
         assertTrue(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
     }
 
     @Test
     public void test_detailsDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        DetailsContainsKeywordsPredicate predicate = new DetailsContainsKeywordsPredicate(Collections.emptyList());
+        DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withDetail("Sample details for this person").build()));
 
         // Non-matching keyword
-        predicate = new DetailsContainsKeywordsPredicate(Arrays.asList("detail"));
+        predicate = new DetailContainsKeywordsPredicate(Arrays.asList("detail"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        DetailsContainsKeywordsPredicate predicate = new DetailsContainsKeywordsPredicate(keywords);
+        DetailContainsKeywordsPredicate predicate = new DetailContainsKeywordsPredicate(keywords);
 
-        String expected = DetailsContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = DetailContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 }

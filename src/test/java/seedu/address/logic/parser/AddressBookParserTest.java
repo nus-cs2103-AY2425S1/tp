@@ -30,7 +30,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AgeContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.DetailsContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.DetailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.predicates.GenderMatchesKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
@@ -91,21 +91,24 @@ public class AddressBookParserTest {
         FindCommand nameCommand = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
                         + FindUtil.getFindCriteria(PREFIX_NAME, generalKeywords));
-        assertEquals(new FindCommand(FindUtil.getPredicateGroup(new NameContainsKeywordsPredicate(generalKeywords))),
+        assertEquals(new FindCommand(
+                FindUtil.getPredicateGroup(new NameContainsKeywordsPredicate(generalKeywords))),
                 nameCommand);
 
         // parse email criteria
         FindCommand emailCommand = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
                         + FindUtil.getFindCriteria(PREFIX_EMAIL, generalKeywords));
-        assertEquals(new FindCommand(FindUtil.getPredicateGroup(new EmailContainsKeywordsPredicate(generalKeywords))),
+        assertEquals(new FindCommand(
+                FindUtil.getPredicateGroup(new EmailContainsKeywordsPredicate(generalKeywords))),
                 emailCommand);
 
         // parse gender criteria
         FindCommand genderCommand = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
                         + FindUtil.getFindCriteria(PREFIX_GENDER, genderKeywords));
-        assertEquals(new FindCommand(FindUtil.getPredicateGroup(new GenderMatchesKeywordsPredicate(genderKeywords))),
+        assertEquals(new FindCommand(
+                FindUtil.getPredicateGroup(new GenderMatchesKeywordsPredicate(genderKeywords))),
                 genderCommand);
 
         // parse age criteria
@@ -116,7 +119,8 @@ public class AddressBookParserTest {
 
         // parse study groups criteria
         FindCommand studyGroupsCommand = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + FindUtil.getFindCriteria(PREFIX_STUDY_GROUP_TAG, generalKeywords));
+                FindCommand.COMMAND_WORD + " "
+                        + FindUtil.getFindCriteria(PREFIX_STUDY_GROUP_TAG, generalKeywords));
         assertEquals(new FindCommand(FindUtil.getPredicateGroup(
                 new StudyGroupsContainKeywordsPredicate(generalKeywords))),
                 studyGroupsCommand);
@@ -126,7 +130,7 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD + " "
                         + FindUtil.getFindCriteria(PREFIX_DETAIL, generalKeywords));
         assertEquals(new FindCommand(FindUtil.getPredicateGroup(
-                new DetailsContainsKeywordsPredicate(generalKeywords))),
+                new DetailContainsKeywordsPredicate(generalKeywords))),
                 detailsCommand);
 
         // parse multiple mixed criteria
@@ -135,7 +139,8 @@ public class AddressBookParserTest {
                         + " " + FindUtil.getFindCriteria(PREFIX_EMAIL, generalKeywords)
                         + " " + FindUtil.getFindCriteria(PREFIX_GENDER, genderKeywords)
                         + " " + FindUtil.getFindCriteria(PREFIX_AGE, ageKeywords)
-                        + " " + FindUtil.getFindCriteria(PREFIX_STUDY_GROUP_TAG, generalKeywords)
+                        + " "
+                        + FindUtil.getFindCriteria(PREFIX_STUDY_GROUP_TAG, generalKeywords)
                         + " " + FindUtil.getFindCriteria(PREFIX_DETAIL, generalKeywords));
         PredicateGroup expectedPredicateGroup = FindUtil.getPredicateGroup(
                 new NameContainsKeywordsPredicate(generalKeywords),
@@ -143,7 +148,7 @@ public class AddressBookParserTest {
                 new GenderMatchesKeywordsPredicate(genderKeywords),
                 new AgeContainsKeywordsPredicate(ageKeywords),
                 new StudyGroupsContainKeywordsPredicate(generalKeywords),
-                new DetailsContainsKeywordsPredicate(generalKeywords));
+                new DetailContainsKeywordsPredicate(generalKeywords));
         assertEquals(new FindCommand(expectedPredicateGroup), mixedCriteriaCommand);
     }
 
@@ -168,6 +173,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 }
