@@ -126,6 +126,6 @@ public class FindAddressCommandTest {
      * Parses {@code userInput} into a {@code AddressContainsKeywordsPredicate}.
      */
     private AddressContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new AddressContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        return new AddressContainsKeywordsPredicate(Arrays.asList(userInput));
     }
 }

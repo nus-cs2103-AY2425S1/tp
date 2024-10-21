@@ -27,10 +27,10 @@ public class PhoneContainsKeywordsPredicate extends TraitContainsKeywordsPredica
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PhoneContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
+        if (!(other instanceof PhoneContainsKeywordsPredicate otherPhoneContainsKeywordsPredicate)) {
             return false;
         }
 
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherPhoneContainsKeywordsPredicate.keywords);
     }
 }

@@ -16,7 +16,7 @@ public class AddressContainsKeywordsPredicate extends TraitContainsKeywordsPredi
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .allMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().value, keyword));
+                .anyMatch(keyword -> StringUtil.containsPartialWordIgnoreCase(person.getAddress().value, keyword));
     }
 
     @Override
@@ -26,10 +26,10 @@ public class AddressContainsKeywordsPredicate extends TraitContainsKeywordsPredi
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressContainsKeywordsPredicate otherNameContainsKeywordsPredicate)) {
+        if (!(other instanceof AddressContainsKeywordsPredicate otherAddressContainsKeywordsPredicate)) {
             return false;
         }
 
-        return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
+        return keywords.equals(otherAddressContainsKeywordsPredicate.keywords);
     }
 }

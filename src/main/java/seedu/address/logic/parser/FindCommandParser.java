@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TAG);
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -83,11 +84,15 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (hasAddressPrefix) {
-            String addressInput = argMultimap.getValue(PREFIX_ADDRESS).get().trim(); // Get the actual address input
-            if (addressInput.isEmpty()) {
-                throw new ParseException("Address cannot be empty!");
+            // Collect all address inputs
+            List<String> addressKeywords = new ArrayList<>();
+            for (String address : argMultimap.getAllValues(PREFIX_ADDRESS)) {
+                String addressInput = address.trim();
+                if (addressInput.isEmpty()) {
+                    throw new ParseException("Address cannot be empty!");
+                }
+                addressKeywords.add(addressInput);
             }
-            List<String> addressKeywords = Arrays.asList(addressInput.split("\\s+"));
             return new FindAddressCommand(new AddressContainsKeywordsPredicate(addressKeywords));
         }
 

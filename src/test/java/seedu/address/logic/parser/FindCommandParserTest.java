@@ -77,12 +77,24 @@ public class FindCommandParserTest {
     public void parse_validFindAddressArgs_returnsFindAddressCommand() {
         // no leading and trailing whitespaces
         FindAddressCommand expectedFindCommand =
-                new FindAddressCommand(new AddressContainsKeywordsPredicate(Arrays.asList("5,", "Clementi",
-                        "Ave", "4,", "#03-945")));
-        assertParseSuccess(parser, "find a/5, Clementi Ave 4, #03-945", expectedFindCommand);
+                new FindAddressCommand(new AddressContainsKeywordsPredicate(Arrays.asList("5 Clementi Ave 4 "
+                        + "#03-945")));
+        assertParseSuccess(parser, "find a/5 Clementi Ave 4 #03-945", expectedFindCommand);
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, "find a/ \n5, Clementi Ave 4, \t #03-945  \t", expectedFindCommand);
+        // multiple whitespaces before and after keywords
+        assertParseSuccess(parser, "find a/ \n5 Clementi Ave 4 #03-945  \t", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_validMultipleFindAddressArgs_returnsFindAddressCommand() {
+        // no leading and trailing whitespaces
+        FindAddressCommand expectedFindCommand =
+                new FindAddressCommand(new AddressContainsKeywordsPredicate(Arrays.asList("5 Clementi Ave 4 "
+                        + "#03-945", "Lorong 1")));
+        assertParseSuccess(parser, "find a/5 Clementi Ave 4 #03-945 a/Lorong 1", expectedFindCommand);
+
+        // multiple whitespaces before and after keywords
+        assertParseSuccess(parser, "find a/ \n5 Clementi Ave 4 #03-945  \t a/ \t Lorong 1", expectedFindCommand);
     }
 
     @Test
@@ -94,12 +106,22 @@ public class FindCommandParserTest {
 
         // Check for correct error message
         assertEquals("Address cannot be empty!", thrown.getMessage());
-
     }
 
     @Test
     public void missingAddressWithTrailingWhiteSpace_throwsParseException() {
         String input = "find a/ \t \n"; // Input with empty name prefix
+        ParseException thrown = assertThrows(ParseException.class, () -> {
+            parser.parse(input);
+        });
+
+        // Check for correct error message
+        assertEquals("Address cannot be empty!", thrown.getMessage());
+    }
+
+    @Test
+    public void missingAddressWithTrailingWhiteSpace2_throwsParseException() {
+        String input = "find a/ Woodlands Avenue 3 a/\t \n"; // Input with empty name prefix
         ParseException thrown = assertThrows(ParseException.class, () -> {
             parser.parse(input);
         });
