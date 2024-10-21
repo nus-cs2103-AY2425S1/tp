@@ -8,7 +8,6 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Address;
@@ -38,15 +37,15 @@ public class OweCommand extends Command {
     public static final String MESSAGE_MISSING_HOUR = "Number of hours owed must be provided.";
     
     private final Index index;
-    private final OwedAmount updatedOwedAmount;
+    private final String newOwedAmount;
     
     /**
      * @param index of the student in the filtered student list to update owedAmount.
-     * @param updatedOwedAmount new OwedAmount.
+     * @param newOwedAmount new OwedAmount value.
      */
-    public OweCommand(Index index, OwedAmount updatedOwedAmount) {
+    public OweCommand(Index index, String newOwedAmount) {
         this.index = index;
-        this.updatedOwedAmount= updatedOwedAmount;
+        this.newOwedAmount = newOwedAmount;
     }
     
     @Override
@@ -59,7 +58,7 @@ public class OweCommand extends Command {
         }
         
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createUpdatedOwedAmountStudent(studentToEdit, updatedOwedAmount);
+        Student editedStudent = createUpdatedOwedAmountStudent(studentToEdit, newOwedAmount);
         
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
@@ -69,9 +68,9 @@ public class OweCommand extends Command {
     
     /**
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
-     * updated with {@code updatedOwedAmount}
+     * updated with {@code newOwedAmount}
      */
-    private static Student createUpdatedOwedAmountStudent(Student studentToEdit, OwedAmount updatedOwedAmount) {
+    private static Student createUpdatedOwedAmountStudent(Student studentToEdit, String newOwedAmount) {
         assert studentToEdit != null;
         
         Name updatedName = studentToEdit.getName();
@@ -82,6 +81,7 @@ public class OweCommand extends Command {
         Subject updatedSubject = studentToEdit.getSubject();
         Rate updatedRate = studentToEdit.getRate();
         PaidAmount updatedPaidAmount = studentToEdit.getPaidAmount();
+        OwedAmount updatedOwedAmount = studentToEdit.getOwedAmount().addOwedAmount(newOwedAmount);
         
         return new Student(
                 updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSchedule, updatedSubject, updatedRate,
@@ -102,15 +102,15 @@ public class OweCommand extends Command {
         
         OweCommand otherOweCommand = (OweCommand) other;
         return index.equals(otherOweCommand.index)
-                && updatedOwedAmount.equals(otherOweCommand.updatedOwedAmount);
+                && newOwedAmount.equals(otherOweCommand.newOwedAmount);
     }
     
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("updatedOwedAmount",
-                        updatedOwedAmount)
+                .add("newOwedAmount",
+                        newOwedAmount)
                 .toString();
     }
 }

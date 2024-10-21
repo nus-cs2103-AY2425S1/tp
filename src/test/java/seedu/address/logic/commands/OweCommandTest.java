@@ -30,9 +30,9 @@ public class OweCommandTest {
     
     @Test
     public void execute_unfilteredList_success() {
-        Student updatedOwedAmountStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        OwedAmount updatedOwedAmount = updatedOwedAmountStudent.getOwedAmount();
-        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, updatedOwedAmount);
+        Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_AMY);
+        Student updatedOwedAmountStudent = new StudentBuilder(chosenStudent).withOwedAmount(Double.toString(chosenStudent.getOwedAmount().addOwedAmount(VALID_OWED_AMOUNT_AMY).value)).build();
         
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS,
                 Messages.format(updatedOwedAmountStudent));
@@ -48,8 +48,8 @@ public class OweCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student updatedOwedAmountStudent = new StudentBuilder(studentInFilteredList).withOwedAmount(VALID_OWED_AMOUNT_BOB).build();
-        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, new OwedAmount(VALID_OWED_AMOUNT_BOB));
+        Student updatedOwedAmountStudent = new StudentBuilder(studentInFilteredList).withOwedAmount(studentInFilteredList.getOwedAmount().addOwedAmount(VALID_OWED_AMOUNT_BOB).toString()).build();
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_BOB);
         
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, Messages.format(updatedOwedAmountStudent));
         
@@ -61,24 +61,23 @@ public class OweCommandTest {
     
     @Test
     public void execute_invalidIndexUnfilteredList_failure() {
-        OweCommand oweCommand = new OweCommand(INDEX_OUT_OF_BOUNDS, new OwedAmount(VALID_OWED_AMOUNT_BOB));
+        OweCommand oweCommand = new OweCommand(INDEX_OUT_OF_BOUNDS, VALID_OWED_AMOUNT_BOB);
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     
     @Test
     public void execute_invalidIndexFilteredList_failure() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
-        OweCommand oweCommand = new OweCommand(Index.fromOneBased(2), new OwedAmount(VALID_OWED_AMOUNT_BOB));
+        OweCommand oweCommand = new OweCommand(Index.fromOneBased(2), VALID_OWED_AMOUNT_BOB);
         assertCommandFailure(oweCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
     
     @Test
     public void equals() {
-        OwedAmount standardOwedAmount = new OwedAmount(VALID_OWED_AMOUNT_BOB);
-        final OweCommand standardCommand = new OweCommand(INDEX_FIRST_STUDENT, standardOwedAmount);
+        final OweCommand standardCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_BOB);
         
         // same values -> returns true
-        OweCommand commandWithSameValues = new OweCommand(INDEX_FIRST_STUDENT, new OwedAmount(VALID_OWED_AMOUNT_BOB));
+        OweCommand commandWithSameValues = new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_BOB);
         assertTrue(standardCommand.equals(commandWithSameValues));
         
         // same object -> returns true
@@ -88,18 +87,18 @@ public class OweCommandTest {
         assertFalse(standardCommand.equals(null));
         
         // different index -> returns false
-        assertFalse(standardCommand.equals(new OweCommand(INDEX_SECOND_STUDENT, standardOwedAmount)));
+        assertFalse(standardCommand.equals(new OweCommand(INDEX_SECOND_STUDENT, VALID_OWED_AMOUNT_BOB)));
         
         // different owedAmount -> returns false
-        assertFalse(standardCommand.equals(new OweCommand(INDEX_FIRST_STUDENT, new OwedAmount(VALID_OWED_AMOUNT_AMY))));
+        assertFalse(standardCommand.equals(new OweCommand(INDEX_FIRST_STUDENT, VALID_OWED_AMOUNT_AMY)));
     }
     
     @Test
     public void toStringMethod() {
         Index index = Index.fromOneBased(1);
         OwedAmount updatedOwedAmount = new OwedAmount(VALID_OWED_AMOUNT_AMY);
-        OweCommand oweCommand = new OweCommand(index, updatedOwedAmount);
-        String expected = OweCommand.class.getCanonicalName() + "{index=" + index + ", updatedOwedAmount=" + updatedOwedAmount + "}";
+        OweCommand oweCommand = new OweCommand(index, VALID_OWED_AMOUNT_AMY);
+        String expected = OweCommand.class.getCanonicalName() + "{index=" + index + ", newOwedAmount=" + updatedOwedAmount + "}";
         assertEquals(expected, oweCommand.toString());
     }
 }
