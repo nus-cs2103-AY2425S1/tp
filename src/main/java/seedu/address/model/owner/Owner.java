@@ -5,12 +5,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.link.Linkable;
 
 /**
  * Represents an Owner in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Owner {
+public class Owner implements Linkable {
 
     // Identity fields
     private final Name name;
@@ -90,6 +91,11 @@ public class Owner {
     }
 
     @Override
+    public String getUniqueID() {
+        return name.fullName;
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
             .add("name", name)
@@ -98,5 +104,4 @@ public class Owner {
             .add("address", address)
             .toString();
     }
-
 }

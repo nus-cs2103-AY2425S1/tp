@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPets.BELLA;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,11 +19,13 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalOwners;
 
 public class AddressBookTest {
 
@@ -81,6 +84,35 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasLink_nullLink_throwsNullPointerException() {
+        Owner owner = TypicalOwners.ALICE;
+        Pet pet = BELLA;
+
+        assertThrows(NullPointerException.class, () -> new Link(owner, null));
+        assertThrows(NullPointerException.class, () -> new Link(null, pet));
+        assertThrows(NullPointerException.class, () -> new Link(null, null));
+    }
+
+    @Test
+    public void hasLink_linkNotInAddressBook_returnsFalse() {
+        Owner owner = TypicalOwners.ALICE;
+        Pet pet = BELLA;
+        Link link = new Link(owner, pet);
+
+        assertFalse(addressBook.hasLink(link));
+    }
+
+    @Test
+    public void hasLink_linkInAddressBook_returnsTrue() {
+        Owner owner = TypicalOwners.ALICE;
+        Pet pet = BELLA;
+        Link link = new Link(owner, pet);
+
+        addressBook.addLink(link);
+        assertTrue(addressBook.hasLink(link));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
@@ -88,17 +120,21 @@ public class AddressBookTest {
     @Test
     public void toStringMethod() {
         String expected = AddressBook.class.getCanonicalName() + "{persons=" + addressBook.getPersonList()
-                + ", owners=" + addressBook.getOwnerList() + ", pets=" + addressBook.getPetList() + "}";
+            + ", owners=" + addressBook.getOwnerList() + ", pets=" + addressBook.getPetList()
+            + ", links=" + addressBook.getLinkList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons list can violate interface
+     * constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Owner> owners = FXCollections.observableArrayList();
         private final ObservableList<Pet> pets = FXCollections.observableArrayList();
+        private final ObservableList<Link> links = FXCollections.observableArrayList();
+
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
@@ -112,9 +148,15 @@ public class AddressBookTest {
         public ObservableList<Owner> getOwnerList() {
             return owners;
         }
+
         @Override
         public ObservableList<Pet> getPetList() {
             return pets;
+        }
+
+        @Override
+        public ObservableList<Link> getLinkList() {
+            return links;
         }
     }
 }

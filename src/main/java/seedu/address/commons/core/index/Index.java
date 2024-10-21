@@ -48,6 +48,11 @@ public class Index {
     }
 
     @Override
+    public int hashCode() {
+        return zeroBasedIndex;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
