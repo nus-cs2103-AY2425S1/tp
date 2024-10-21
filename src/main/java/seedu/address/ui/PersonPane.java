@@ -32,6 +32,10 @@ public class PersonPane extends UiPart<VBox> {
     private FlowPane tags;
     @FXML
     private Label remark;
+    @FXML
+    private Label listings;
+    @FXML
+    private Label tagsLabel;
 
     /**
      * Creates a {@code PersonPane} with the given {@code Person} to display.
@@ -56,21 +60,51 @@ public class PersonPane extends UiPart<VBox> {
      */
     private void displayPersonDetails() {
         if (person != null) {
-            name.setText(person.getName().fullName);
+            name.setText("Name: " + person.getName().fullName);
             tags.getChildren().clear();
-            phone.setText(person.getPhone().value);
-            address.setText(person.getAddress().value);
-            email.setText(person.getEmail().value);
-            person.getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            phone.setText("Phone: " + person.getPhone().value);
+            address.setText("Address: " + person.getAddress().value);
+            email.setText("Email: " + person.getEmail().value);
+
+            // Clear and display tags
+            tags.getChildren().clear();
+            // Solution below adapted from ChatGPT
+            if (!person.getTags().isEmpty()) {
+                tagsLabel.setManaged(true);
+                tagsLabel.setVisible(true);
+                tags.getChildren().clear();
+                person.getTags().stream()
+                        .sorted(Comparator.comparing(tag -> tag.tagName))
+                        .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+            } else {
+                tagsLabel.setManaged(false);
+                tagsLabel.setVisible(false);
+            }
+
+            // Handle remark
             String remarkValue = person.getRemark().value;
             if (remarkValue != null && !remarkValue.trim().isEmpty()) {
-                remark.setText(remarkValue);
+                remark.setText("Remark: " + remarkValue);
                 remark.setManaged(true);
             } else {
                 remark.setManaged(false);
             }
+
+            //@@author tayxuenye-reused
+            // Written by ChatGPT
+            // Clear and display listings
+            if (!person.getListings().isEmpty()) {
+                StringBuilder listingsText = new StringBuilder("Listings:\n");
+                person.getListings().forEach(listing -> listingsText.append(listing.toString()).append("\n"));
+                listings.setText(listingsText.toString());
+                listings.setManaged(true);
+                listings.setVisible(true);
+            } else {
+                listings.setText(""); // Clear the listings text if there are no listings
+                listings.setManaged(false);
+                listings.setVisible(false);
+            }
+            //@@author
         }
     }
 
@@ -85,5 +119,8 @@ public class PersonPane extends UiPart<VBox> {
         tags.getChildren().clear();
         remark.setText("");
         remark.setManaged(false);
+        listings.setText("");
+        listings.setManaged(false);
+        listings.setVisible(false);
     }
 }

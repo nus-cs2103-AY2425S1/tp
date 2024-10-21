@@ -1231,6 +1231,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
     Use case ends.
 
+---
+
+**Use case: Show property listings of specific user**
+
+**MSS**
+
+1. User types command to show property listings of a contact.
+
+2. PROperty displays property listings of contact.
+
+   Use case ends.
+
+**Extensions**
+
+- 1a. User types in invalid index for contact
+
+  - 1a1. PROperty informs user of invalid index/command.
+   
+    Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
