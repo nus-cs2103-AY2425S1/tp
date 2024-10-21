@@ -261,7 +261,8 @@ public abstract class Tutorial {
 
         @Override
         public void add(Student student) {
-            if (student != null && !students.contains(student)) {
+            requireNonNull(student);
+            if (!students.contains(student)) {
                 students.add(student);
             }
         }
