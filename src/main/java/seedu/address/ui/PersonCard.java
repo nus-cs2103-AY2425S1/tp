@@ -2,12 +2,13 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
 
 /**
@@ -40,7 +41,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane emergencyContacts;
+    private StackPane emergencyContactListPanelPlaceholder;
     @FXML
     private Label doctorName;
     @FXML
@@ -61,14 +62,10 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        VBox vbox = new VBox();
-        person.getEmergencyContacts().stream()
-                .sorted(Comparator.comparing(emergencyContact -> emergencyContact.getName().fullName))
-                .forEach(emergencyContact -> vbox.getChildren()
-                        .addAll(new Label(emergencyContact.getName().fullName),
-                                new Label(emergencyContact.getPhone().value),
-                                new Label(emergencyContact.getRelationship().relationship)));
-        emergencyContacts.getChildren().add(vbox);
+        EmergencyContactListPanel emergencyContactListPanel = new EmergencyContactListPanel(
+                FXCollections.observableArrayList(person.getEmergencyContacts()));
+        emergencyContactListPanelPlaceholder.getChildren().add(emergencyContactListPanel.getRoot());
+        emergencyContactListPanelPlaceholder.setPrefHeight(90 * person.getEmergencyContacts().size());
         doctorName.setText(person.getDoctor().getName().getDoctorName());
         doctorPhone.setText(person.getDoctor().getPhone().value);
         doctorEmail.setText(person.getDoctor().getEmail().value);
