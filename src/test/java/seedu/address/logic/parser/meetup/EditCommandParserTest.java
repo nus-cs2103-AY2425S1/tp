@@ -1,17 +1,13 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.meetup;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditMeetUpCommand;
-import seedu.address.logic.commands.EditPersonCommand;
+import seedu.address.logic.commands.meetup.EditCommand;
 import seedu.address.model.meetup.From;
-import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.Name;
-import seedu.address.model.meetup.MeetUp;
 import seedu.address.model.meetup.To;
-import seedu.address.testutil.EditMeetUpDescriptorBuilder;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.meetup.EditMeetUpDescriptorBuilder;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
@@ -20,14 +16,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.*;
 
-public class EditMeetUpCommandParserTest {
+public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditMeetUpCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
-    private EditMeetUpCommandParser parser = new EditMeetUpCommandParser();
+    private EditCommandParser parser = new EditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -35,7 +31,7 @@ public class EditMeetUpCommandParserTest {
         assertParseFailure(parser, VALID_MEETUP_NAME_PITCH, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", EditMeetUpCommand.MESSAGE_MEETUP_NOT_EDITED);
+        assertParseFailure(parser, "1", EditCommand.MESSAGE_MEETUP_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -81,14 +77,14 @@ public class EditMeetUpCommandParserTest {
         String userInput = targetIndex.getOneBased() + MEETUP_NAME_DESC_NETWORKING + MEETUP_INFO_DESC_NETWORKING
                 + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING;
 
-        EditMeetUpCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
+        EditCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
                 .withName(VALID_MEETUP_NAME_NETWORKING)
                 .withInfo(VALID_MEETUP_INFO_NETWORKING)
                 .withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING)
                 .build();
 
-        EditMeetUpCommand expectedCommand = new EditMeetUpCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -98,49 +94,47 @@ public class EditMeetUpCommandParserTest {
         Index targetIndex = INDEX_FIRST_MEETUP;
         String userInput = targetIndex.getOneBased() + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING;
 
-        EditMeetUpCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
+        EditCommand.EditMeetUpDescriptor descriptor = new EditMeetUpDescriptorBuilder()
                 .withFrom(VALID_MEETUP_FROM_NETWORKING)
                 .withTo(VALID_MEETUP_TO_NETWORKING)
                 .build();
 
-        EditMeetUpCommand expectedCommand = new EditMeetUpCommand(targetIndex, descriptor);
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-//    @Test
-//    public void parse_multipleRepeatedFields_failure() {
-//        // More extensive testing of duplicate parameter detections is done in
-//        // AddMeetUpCommandParserTest#parse_repeatedNonTagValue_failure()
-//
-//        // invalid followed by valid
-//        Index targetIndex = INDEX_FIRST_MEETUP;
-//        String userInput = targetIndex.getOneBased() + INVALID_MEETUP_NAME_DESC + PHONE_DESC_BOB;
-//
-//        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-//
-//        // valid followed by invalid
-//        userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + INVALID_PHONE_DESC;
-//
-//        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
-//
-//        // mulltiple valid fields repeated
-//        userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
-//                + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
-//                + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + PERSON_TYPE_DESC_AMY + PERSON_TYPE_DESC_BOB
-//                + TAG_DESC_HUSBAND;
-//
-//        assertParseFailure(parser, userInput,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-//                        PREFIX_PERSON_TYPE));
-//
-//        // multiple invalid values
-//        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-//                + INVALID_PERSON_TYPE_DESC + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-//                + INVALID_PERSON_TYPE_DESC;
-//
-//        assertParseFailure(parser, userInput,
-//                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-//                        PREFIX_PERSON_TYPE));
-//    }
+    @Test
+    public void parse_multipleRepeatedFields_failure() {
+        // More extensive testing of duplicate parameter detections is done in
+        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+
+        // invalid followed by valid
+        Index targetIndex = INDEX_FIRST_MEETUP;
+        String userInput = targetIndex.getOneBased() + INVALID_MEETUP_NAME_DESC + MEETUP_NAME_DESC_PITCH;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // valid followed by invalid
+        userInput = targetIndex.getOneBased() + MEETUP_NAME_DESC_PITCH + INVALID_MEETUP_NAME_DESC;
+
+        assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // multiple valid fields repeated
+        userInput = targetIndex.getOneBased() + MEETUP_NAME_DESC_NETWORKING + MEETUP_INFO_DESC_NETWORKING
+                + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING + MEETUP_NAME_DESC_NETWORKING
+                + MEETUP_INFO_DESC_NETWORKING + MEETUP_FROM_DESC_NETWORKING + MEETUP_TO_DESC_NETWORKING;
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_INFO, PREFIX_TO, PREFIX_FROM));
+
+        // multiple invalid values
+        userInput = targetIndex.getOneBased() + INVALID_MEETUP_NAME_DESC + MEETUP_NAME_DESC_PITCH
+                + INVALID_MEETUP_FROM_DESC + INVALID_MEETUP_TO_DESC + INVALID_MEETUP_NAME_DESC + MEETUP_NAME_DESC_PITCH
+                + INVALID_MEETUP_FROM_DESC + INVALID_MEETUP_TO_DESC;
+
+
+        assertParseFailure(parser, userInput,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_TO, PREFIX_FROM));
+    }
 }
