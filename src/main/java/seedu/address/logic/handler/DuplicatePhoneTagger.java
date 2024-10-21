@@ -26,6 +26,7 @@ public class DuplicatePhoneTagger {
      * @param model that represents the current state of the address book
      */
     public void tagPhoneDuplicates(Model model) {
+        assert model != null : "Model must exist";
         List<Person> persons = model.getFilteredPersonList();
         updateFrequenciesOfPhones(persons);
         updatePersonsList(model, persons);
@@ -62,10 +63,6 @@ public class DuplicatePhoneTagger {
         phoneFrequencies.clear();
     }
 
-    /**
-     * Getter method to retrieve HashMap of phone frequencies
-     * @return a HashMap containing the frequencies of each phone number
-     */
     public HashMap<Phone, Integer> getPhoneFrequencies() {
         return phoneFrequencies;
     }
@@ -80,6 +77,7 @@ public class DuplicatePhoneTagger {
     }
 
     private Person updatePerson(Person person, boolean isPhoneDuplicate) {
+        assert person != null : "Person must exist";
         Name name = person.getName();
         Phone phone = person.getPhone();
         Email email = person.getEmail();
