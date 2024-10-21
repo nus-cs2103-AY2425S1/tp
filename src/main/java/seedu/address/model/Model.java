@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -93,4 +94,8 @@ public interface Model {
     void deleteLink(Person patient, Person caregiver);
 
     Person getPerson(Nric nric);
+
+    ObservableList<Person> getUnfilteredPersonList();
+
+    void addAppointment(Appointment newAppointment, Person person);
 }

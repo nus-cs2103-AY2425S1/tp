@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -23,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final AppointmentManager appointmentManager;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.appointmentManager = AppointmentManager.getInstance(this);
     }
 
     public ModelManager() {
@@ -91,24 +94,27 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
+        appointmentManager.update();
         return addressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
+        appointmentManager.update();
         addressBook.removePerson(target);
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        appointmentManager.update();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
+        appointmentManager.update();
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -130,6 +136,19 @@ public class ModelManager implements Model {
     @Override
     public Person getPerson(Nric nric) {
         return addressBook.getPerson(nric);
+    }
+
+    /**
+     * Returns the list of unfiltered persons
+     */
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    @Override
+    public void addAppointment(Appointment newAppointment, Person person) {
+        appointmentManager.addAppointment(newAppointment, person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
