@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
@@ -8,7 +9,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -95,16 +95,28 @@ public class Person {
     /**
      * Remove grade from gradeList based on index.
      *
-     * @param index The index to remove the grade.
+     * @param testName The name of the test whose grade needs to be removed.
      * @return new immutable Person
      */
-    public Person removeGrade(Index index) {
-        requireAllNonNull(index);
+    public Person removeGrade(String testName) {
+        requireNonNull(testName);
 
-        GradeList newGradelist = this.gradeList.removeGrade(index);
+        GradeList newGradelist = this.gradeList.removeGrade(testName);
 
         return new Person(this.name, this.phone, this.email, this.address, this.tags, newGradelist,
                           this.attendanceList);
+    }
+
+    /**
+     * Retrieves the grade for a specific test from the person's GradeList.
+     * Returns the {@code Grade} object if found, or null if no grade is recorded for the test.
+     *
+     * @param testName The name of the test.
+     * @return The {@code Grade} object for the test, or null if no grade is found.
+     */
+    public Grade getGrade(String testName) {
+        requireNonNull(testName);
+        return this.gradeList.getGrade(testName);
     }
 
     /**
