@@ -98,7 +98,7 @@ public class EditGroupCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditGroupCommand)) {
             return false;
         }
 
