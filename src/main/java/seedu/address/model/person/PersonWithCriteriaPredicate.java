@@ -18,7 +18,7 @@ public class PersonWithCriteriaPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return ranges.stream()
-                .anyMatch(range -> isWithinRange(range, person));
+                .allMatch(range -> isWithinRange(range, person));
 
     }
 
