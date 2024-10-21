@@ -3,6 +3,7 @@ package tutorease.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
+import tutorease.address.logic.Messages;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.model.Model;
 
