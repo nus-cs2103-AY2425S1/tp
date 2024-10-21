@@ -28,7 +28,20 @@ public class ListPetCommand extends ListCommand {
         requireNonNull(model);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
         CommandResult c = new CommandResult(MESSAGE_SUCCESS);
-        c.setListType(1);
+        c.setListType(ListPetCommand.MESSAGE_SUCCESS);
         return c;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListPetCommand)) {
+            return false;
+        }
+        return true;
     }
 }

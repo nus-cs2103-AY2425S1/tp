@@ -35,9 +35,13 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        // insert assertion that the booleans start off as false
+        setListType(feedbackToUser);
+        /*
         this.isPetListCommand = false;
         this.isOwnerListCommand = false;
         this.isCombinedListCommand = false;
+         */
     }
 
     /**
@@ -52,17 +56,16 @@ public class CommandResult {
         return feedbackToUser;
     }
 
-    public void setListType(int i) {
+    public void setListType(String feedbackToUser) {
         //insert assertion here that i is 0, 1 or 2
-        if (i == 1) {
+        if (feedbackToUser.equals(ListPetCommand.MESSAGE_SUCCESS)) {
             this.isPetListCommand = true;
-        } else if (i == 0) {
+        } else if (feedbackToUser.equals(ListOwnerCommand.MESSAGE_SUCCESS)) {
             this.isOwnerListCommand = true;
-        } else if (i == 2) {
+        } else if (feedbackToUser.equals(ListBothCommand.MESSAGE_SUCCESS)) {
             this.isCombinedListCommand = true;
         } else {
-            // insert assertion, if reached here then fail
-            return; //do nothing, should not ever reach here
+            //do nothing because command was not a successful list command
         }
     }
 
@@ -100,7 +103,10 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && isPetListCommand == otherCommandResult.isPetListCommand
+                && isOwnerListCommand == otherCommandResult.isOwnerListCommand
+                && isCombinedListCommand == otherCommandResult.isCombinedListCommand;
     }
 
     @Override

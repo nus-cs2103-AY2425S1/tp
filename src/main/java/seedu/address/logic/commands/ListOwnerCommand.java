@@ -28,7 +28,20 @@ public class ListOwnerCommand extends ListCommand {
         requireNonNull(model);
         model.updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
         CommandResult c = new CommandResult(MESSAGE_SUCCESS);
-        c.setListType(0);
+        c.setListType(ListOwnerCommand.MESSAGE_SUCCESS);
         return c;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListOwnerCommand)) {
+            return false;
+        }
+        return true;
     }
 }

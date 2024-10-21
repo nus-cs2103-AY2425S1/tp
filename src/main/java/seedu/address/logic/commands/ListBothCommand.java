@@ -30,7 +30,20 @@ public class ListBothCommand extends ListCommand {
         model.updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
         model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
         CommandResult c = new CommandResult(MESSAGE_SUCCESS);
-        c.setListType(2);
+        c.setListType(ListBothCommand.MESSAGE_SUCCESS);
         return c;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListBothCommand)) {
+            return false;
+        }
+        return true;
     }
 }
