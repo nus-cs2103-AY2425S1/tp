@@ -23,10 +23,10 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, status, tags);
         this.personDescriptor = new PersonDescriptor(
-                name, phone, email, address, tags
+                name, phone, email, address, status, tags
         );
 
         // Increment the static counter and assign a unique ID to the person
@@ -36,19 +36,20 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, int personId) {
-        requireAllNonNull(name, phone, email, address, tags, personId);
+    public Person(Name name, Phone phone, Email email, Address address, Status status, Set<Tag> tags,
+                  int personId) {
+        requireAllNonNull(name, phone, email, address, status, tags, personId);
         this.personDescriptor = new PersonDescriptor(
-                name, phone, email, address, tags
+                name, phone, email, address, status, tags
         );
 
         // Increment the static counter and assign a unique ID to the person
         this.personId = personId;
     }
 
-
     /**
      * Builds a person given a personId and a personDescriptor.
+     *
      * @param personId
      * @param personDescriptor
      */
@@ -80,6 +81,10 @@ public class Person {
 
     public Address getAddress() {
         return personDescriptor.getAddress();
+    }
+
+    public Status getStatus() {
+        return personDescriptor.getStatus();
     }
 
     /**
@@ -140,6 +145,7 @@ public class Person {
                 .add("phone", getPhone())
                 .add("email", getEmail())
                 .add("address", getAddress())
+                .add("status", getStatus())
                 .add("tags", getTags())
                 .toString();
     }
