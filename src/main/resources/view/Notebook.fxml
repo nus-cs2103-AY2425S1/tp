@@ -15,91 +15,96 @@
 <?import javafx.scene.shape.Arc?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="400" minWidth="600" onCloseRequest="#handleExit" title="KeyContacts" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-   <scene>
-      <Scene>
-           <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-              <children>
-                  <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
-                      <Menu mnemonicParsing="false" text="File">
-                          <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-                      </Menu>
-                      <Menu mnemonicParsing="false" text="Help">
-                          <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                      </Menu>
-                  </MenuBar>
-                 <AnchorPane style="-fx-background-color: dimgrey;" VBox.vgrow="ALWAYS">
-                    <children>
-                       <HBox layoutX="10.0" layoutY="10.0" style="-fx-background-color: whitesmoke;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <children>
-                             <AnchorPane fx:id="leftPage" HBox.hgrow="ALWAYS">
-                              <children>
-                              <VBox style="-fx-border-color: dimgrey; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+<fx:root minHeight="400" minWidth="600" onCloseRequest="#handleExit" title="KeyContacts" type="javafx.stage.Stage"
+         xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0">
+                <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+                    <Menu mnemonicParsing="false" text="File">
+                        <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="Help">
+                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
+                    </Menu>
+                </MenuBar>
+                <AnchorPane style="-fx-background-color: dimgrey;" VBox.vgrow="ALWAYS">
+                    <HBox layoutX="10.0" layoutY="10.0" style="-fx-background-color: whitesmoke;"
+                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                          AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="leftPage" HBox.hgrow="ALWAYS">
+                            <VBox styleClass="page-content" AnchorPane.bottomAnchor="0.0"
+                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border"
+                                           VBox.vgrow="NEVER">
                                     <padding>
-                                       <Insets bottom="5" left="10" right="10" top="5" />
+                                        <Insets bottom="5" left="10" right="10" top="5"/>
                                     </padding>
-                                 </StackPane>
+                                </StackPane>
 
-                                 <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100"
+                                           prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
                                     <padding>
-                                       <Insets bottom="5" left="10" right="10" top="5" />
+                                        <Insets bottom="5" left="10" right="10" top="5"/>
                                     </padding>
-                                 </StackPane>
+                                </StackPane>
 
-                                 <VBox fx:id="studentList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                                <VBox fx:id="studentList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                                     <padding>
-                                       <Insets bottom="10" left="10" right="10" top="10" />
+                                        <Insets bottom="10" left="10" right="10" top="10"/>
                                     </padding>
-                                    <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-                                 </VBox>
+                                    <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                                </VBox>
 
-                                 <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-                              </VBox>
-                              </children>
-                              <padding>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </padding></AnchorPane>
-                             <StackPane fx:id="binder" prefWidth="20.0">
-                                <children>
-                                   <Pane prefWidth="10.0" style="-fx-border-color: black; -fx-border-width: 0 1 0 1; -fx-background-color: whitesmoke;">
-                                      <StackPane.margin>
-                                         <Insets left="5.0" right="5.0" />
-                                      </StackPane.margin>
-                                      <effect>
-                                         <DropShadow radius="6.335" spread="0.16" width="6.34" />
-                                      </effect>
-                                   </Pane>
-                                   <VBox fx:id="loopParent" alignment="TOP_CENTER" spacing="5.0">
-                                      <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="586.0" length="260.0"
-                                           radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK"
-                                           strokeType="INSIDE" VBox.vgrow="ALWAYS"/>
-                                      <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="16.0" length="260.0" radiusX="8.0"
-                                           radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE"
-                                           VBox.vgrow="ALWAYS"/>
-                                   </VBox>
-                                </children>
-                             </StackPane>
-                             <AnchorPane fx:id="rightPage" HBox.hgrow="ALWAYS">
-                              <children>
-                                 <VBox style="-fx-border-color: dimgrey; -fx-border-width: 2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                              </children>
-                              <padding>
-                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                              </padding></AnchorPane>
-                          </children>
-                       </HBox>
-                    </children>
-                  <padding>
-                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                  </padding>
-                 </AnchorPane>
-              </children>
-           </VBox>
-         <stylesheets>
-            <URL value="@DarkTheme.css" />
-            <URL value="@Extensions.css" />
-         </stylesheets>
-      </Scene>
-   </scene>
+                                <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
+                            </VBox>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </AnchorPane>
+                        <StackPane fx:id="binder" prefWidth="20.0">
+                            <Pane prefWidth="10.0"
+                                  style="-fx-border-color: black; -fx-border-width: 0 1 0 1; -fx-background-color: whitesmoke;">
+                                <StackPane.margin>
+                                    <Insets left="5.0" right="5.0"/>
+                                </StackPane.margin>
+                                <effect>
+                                    <DropShadow radius="6.335" spread="0.16" width="6.34"/>
+                                </effect>
+                            </Pane>
+                            <VBox fx:id="loopParent" alignment="TOP_CENTER" spacing="5.0">
+                                <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="586.0" length="260.0"
+                                     radiusX="8.0" radiusY="6.0" startAngle="-40.0" stroke="BLACK"
+                                     strokeType="INSIDE" VBox.vgrow="ALWAYS"/>
+                                <Arc fill="TRANSPARENT" layoutX="20.0" layoutY="16.0" length="260.0" radiusX="8.0"
+                                     radiusY="6.0" startAngle="-40.0" stroke="BLACK" strokeType="INSIDE"
+                                     VBox.vgrow="ALWAYS"/>
+                            </VBox>
+                        </StackPane>
+                        <AnchorPane fx:id="rightPage" HBox.hgrow="ALWAYS">
+                            <VBox styleClass="page-content" AnchorPane.bottomAnchor="0.0"
+                                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <StackPane fx:id="calendarDisplayPlaceholder" prefHeight="350.0" prefWidth="350.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+                                    <padding>
+                                        <Insets bottom="5" left="5" right="5" top="5"/>
+                                    </padding>
+                                </StackPane>
+                            </VBox>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </padding>
+                        </AnchorPane>
+                    </HBox>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                </AnchorPane>
+            </VBox>
+            <stylesheets>
+                <URL value="@DarkTheme.css"/>
+                <URL value="@Extensions.css"/>
+            </stylesheets>
+        </Scene>
+    </scene>
 </fx:root>

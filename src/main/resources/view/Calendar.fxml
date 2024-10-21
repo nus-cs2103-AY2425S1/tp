@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="ALWAYS" styleClass="calendar">
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <VBox prefWidth="50.0" styleClass="day-container">
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="MON"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="TUE"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="WED"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="THU"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="FRI"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="SAT"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+
+                    <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-day" text="SUN"
+                           textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+
+                </AnchorPane>
+
+            </VBox>
+            <Pane styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="210.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="410.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="460.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="490.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="510.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="524.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="535.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="543.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="550.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="556.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="560.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="563.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="567.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="570.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="573.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="575.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="577.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="579.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="580.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="582.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="583.0" layoutY="10.0" styleClass="vertical-space" HBox.hgrow="ALWAYS"/>
+            <Pane layoutX="584.0" layoutY="10.0" style="-fx-border-width: 0;" styleClass="vertical-space"
+                  HBox.hgrow="ALWAYS"/>
+
+        </HBox>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+
+            <Pane prefWidth="200.0" styleClass="horizontal-space-first" VBox.vgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="10.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="210.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="277.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="310.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="330.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS"/>
+            <Pane layoutX="10.0" layoutY="343.0" prefWidth="200.0" styleClass="horizontal-space" VBox.vgrow="ALWAYS"/>
+        </VBox>
+        <HBox prefHeight="100.0" prefWidth="200.0"/>
+
+    </StackPane>
+
+</HBox>

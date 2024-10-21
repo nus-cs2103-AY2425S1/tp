@@ -2,6 +2,12 @@
     -fx-primary-color: derive(#1d1d1d, 20%);
 }
 
+.label-day {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 14px;
+}
+
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
@@ -55,6 +61,36 @@
      -fx-background-color: -fx-primary-color;
      -fx-border-color: derive(#1d1d1d, 10%);
      -fx-border-top-width: 1px;
+}
+
+.calendar {
+    -fx-border-width: 1;
+    -fx-border-color: white
+}
+
+.page-content {
+    -fx-border-color: dimgrey;
+    -fx-border-width: 2;
+}
+
+.horizontal-space {
+    -fx-border-color: white;
+    -fx-border-width: 1 0 0 0;
+}
+
+.vertical-space {
+    -fx-border-color: dimgrey;
+    -fx-border-width: 0 1 0 0;
+}
+
+.horizontal-space-first {
+    -fx-border-color: dimgrey;
+    -fx-border-width: 0;
+}
+
+.day-container {
+    -fx-border-color: white;
+    -fx-border-width: 0 1 0 0;
 }
 
 .status-bar {
