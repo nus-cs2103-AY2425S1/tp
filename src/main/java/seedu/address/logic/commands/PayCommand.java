@@ -40,7 +40,6 @@ public class PayCommand extends Command {
             + PREFIX_HOUR + "3 ";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "%1$s paid $%2$.2f";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "This Student already exists in the address book.";
 
     private final Index index;
     private final double hour;
