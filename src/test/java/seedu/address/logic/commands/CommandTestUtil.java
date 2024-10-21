@@ -118,11 +118,17 @@ public class CommandTestUtil {
 
 
     public static final String INVALID_APPOINTMENT_NAME = " ";
+    public static final String INVALID_APPOINTMENT_NAME_LENGTH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"; // >30 chars
     public static final String INVALID_APPOINTMENT_DATE_FORMAT = "2024/12/25";
     public static final String INVALID_APPOINTMENT_DATE_NONEXISTANT = "2024-15-32";
     public static final String INVALID_APPOINTMENT_TIMEPERIOD_FORMAT = "10:00-12:00";
     public static final String INVALID_APPOINTMENT_TIMEPERIOD_ORDER = "1500-1200";
     public static final String INVALID_APPOINTMENT_NAME_DESC = " " + INVALID_APPOINTMENT_NAME + " " + PREFIX_DATE
+                                                               + VALID_APPOINTMENT_DATE_PHYSIO + " "
+                                                               + PREFIX_TIMEPERIOD
+                                                               + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
+    public static final String INVALID_APPOINTMENT_NAME_LENGTH_DESC = " " + INVALID_APPOINTMENT_NAME_LENGTH + " "
+                                                                      + PREFIX_DATE
                                                                + VALID_APPOINTMENT_DATE_PHYSIO + " "
                                                                + PREFIX_TIMEPERIOD
                                                                + VALID_APPOINTMENT_TIMEPERIOD_PHYSIO;
