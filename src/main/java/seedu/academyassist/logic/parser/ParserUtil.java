@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.academyassist.commons.core.index.Index;
 import seedu.academyassist.commons.util.StringUtil;
@@ -14,6 +15,7 @@ import seedu.academyassist.model.person.Email;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Phone;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 import seedu.academyassist.model.sort.SortParam;
@@ -159,6 +161,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String studentId} into a {@code StudentId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentId} is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedStudentId = studentId.trim();
+        if (!StudentId.isValidStudentId(trimmedStudentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedStudentId);
+    }
+
+    /**
      * Prases {@code String sortParam} into a {@code SortParam}.
      */
     public static SortParam parseSortCommandParam(String sortParam) throws ParseException {
@@ -169,5 +186,13 @@ public class ParserUtil {
         }
 
         return new SortParam(trimmedSortParam);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

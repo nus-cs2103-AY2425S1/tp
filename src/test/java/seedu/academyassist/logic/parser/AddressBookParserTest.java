@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.academyassist.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.academyassist.testutil.Assert.assertThrows;
-import static seedu.academyassist.testutil.TypicalIcs.IC_FIRST_PERSON;
+import static seedu.academyassist.testutil.TypicalStudentIds.STUDENT_ID_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,11 +13,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-//import seedu.address.logic.commands.AddCommand;
 import seedu.academyassist.logic.commands.ClearCommand;
 import seedu.academyassist.logic.commands.DeleteCommand;
-//import seedu.address.logic.commands.EditCommand;
-//import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.academyassist.logic.commands.ExitCommand;
 import seedu.academyassist.logic.commands.FindCommand;
 import seedu.academyassist.logic.commands.HelpCommand;
@@ -49,8 +46,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + IC_FIRST_PERSON);
-        assertEquals(new DeleteCommand(IC_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + STUDENT_ID_FIRST_PERSON);
+        assertEquals(new DeleteCommand(STUDENT_ID_FIRST_PERSON), command);
     }
 
     //    @Test

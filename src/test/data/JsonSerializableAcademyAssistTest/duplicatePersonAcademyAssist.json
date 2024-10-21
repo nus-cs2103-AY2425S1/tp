@@ -6,6 +6,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "ic" : "S1274567A",
     "year group": "1",
+    "student id": "S10001",
     "subjects" : [ "English", "Science" ]
   }, {
     "name" : "John",
@@ -14,6 +15,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "ic" : "S1274567A",
     "year group": "1",
+    "student id": "S10001",
     "subjects" : [ "English", "Science" ]
   } ]
 }

@@ -16,6 +16,7 @@ import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
 
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String ic;
     private final String yearGroup;
+    private final String studentId;
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
 
     /**
@@ -41,6 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("ic") String ic, @JsonProperty("year group") String yearGroup,
+            @JsonProperty("student id") String studentId,
             @JsonProperty("subject") List<JsonAdaptedSubject> subjects) {
         this.name = name;
         this.phone = phone;
@@ -48,6 +51,7 @@ class JsonAdaptedPerson {
         this.address = address;
         this.ic = ic;
         this.yearGroup = yearGroup;
+        this.studentId = studentId;
         if (subjects != null) {
             this.subjects.addAll(subjects);
         }
@@ -63,6 +67,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         ic = source.getIc().value;
         yearGroup = source.getYearGroup().value;
+        studentId = source.getStudentId().value;
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
@@ -122,6 +127,15 @@ class JsonAdaptedPerson {
         }
         final YearGroup modelYearGroup = new YearGroup(yearGroup);
 
+        if (studentId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StudentId.class.getSimpleName()));
+        }
+        if (!StudentId.isValidStudentId(studentId)) {
+            throw new IllegalValueException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        final StudentId modelStudentId = new StudentId(studentId);
+
         if (subjects == null || subjects.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
         }
@@ -138,10 +152,8 @@ class JsonAdaptedPerson {
             modelSubjects.add(subject.toModelType());
         }
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelSubjects,
-                modelTags);
-
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelStudentId,
+                modelSubjects);
     }
 
 }

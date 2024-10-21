@@ -1,6 +1,7 @@
 package seedu.academyassist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.academyassist.logic.Messages.MESSAGE_DUPLICATE_IC;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_IC;
@@ -42,7 +43,6 @@ public class AddCommand extends Command {
             + PREFIX_SUBJECT + "Science ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the system";
 
     private final Person toAdd;
 
@@ -58,12 +58,14 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasPersonWithIc(toAdd.getIc())) {
+            throw new CommandException(MESSAGE_DUPLICATE_IC);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.incrementStudentCount();
+        Person toAddWithId = toAdd.assignStudentId(model.getStudentCount());
+        model.addPerson(toAddWithId);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAddWithId)));
     }
 
     @Override
