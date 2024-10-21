@@ -29,9 +29,9 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
     public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file";
 
-    private final String csvHeaders = "Name,Phone No, Email, Address, Tags, Notes";
+    private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes";
 
-    private final Path expoerCsvPath = Paths.get("exports" , "bizbook.csv");
+    private final Path exportCsvPath = Paths.get("exports" , "bizbook.csv");
 
     private final String fileType;
 
@@ -50,11 +50,11 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try {
-            if (!Files.exists(expoerCsvPath.getParent())) {
-                Files.createDirectories(expoerCsvPath.getName(0));
+            if (!Files.exists(exportCsvPath.getParent())) {
+                Files.createDirectories(exportCsvPath.getName(0));
             }
             // Create a csv file to save the tasks
-            File dataFile = new File(expoerCsvPath.toString());
+            File dataFile = new File(exportCsvPath.toString());
             FileWriter fw = new FileWriter(dataFile);
 
             fw.write(this.csvHeaders);
