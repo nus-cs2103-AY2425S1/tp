@@ -36,7 +36,7 @@ public class AddTuteeCommand extends Command {
             + PREFIX_HOURS + "6 ";
 
 
-    public static final String MESSAGE_SUCCESS = "New tutee added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New tutee added: \n %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This tutee already exists in the address book";
 
     private final Tutee toAdd;
