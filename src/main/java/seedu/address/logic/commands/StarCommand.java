@@ -78,8 +78,8 @@ public class StarCommand extends Command {
             personToStar = lastShownList.get(targetIndex.getZeroBased());
         }
 
-        if (personToStar.getStarredStatus().equals("true")) {
-            throw new CommandException(MESSAGE_ALREADY_STARRED);
+        if (personToStar.getStarredStatus().equals(new StarredStatus("true"))) {
+            throw new CommandException(String.format(MESSAGE_ALREADY_STARRED, personToStar.getName()));
         } else {
             Person editedPerson = createEditedPerson(personToStar);
             model.setPerson(personToStar, editedPerson);
