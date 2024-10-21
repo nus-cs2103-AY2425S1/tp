@@ -21,12 +21,12 @@
 
       <HBox fx:id="helpMessageContainer" alignment="CENTER">
         <children>
-          <Label fx:id="helpMessage" text="Label">
+          <Label fx:id="helpMessage" alignment="TOP_LEFT" text="Label">
             <HBox.margin>
               <Insets right="5.0" />
             </HBox.margin>
           </Label>
-          <Button fx:id="copyButton" alignment="TOP_RIGHT" mnemonicParsing="false" text="Copy URL">
+          <Button fx:id="copyButton" alignment="TOP_RIGHT" mnemonicParsing="false" style="-fx-border-color: black; -fx-border-radius: 13.5; -fx-background-radius: 13.5;" text="Copy URL">
             <HBox.margin>
               <Insets left="5.0" />
             </HBox.margin>
