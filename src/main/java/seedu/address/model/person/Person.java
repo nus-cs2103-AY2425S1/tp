@@ -65,6 +65,21 @@ public class Person {
     public Attendance getAttendance() {
         return attendance;
     }
+    public String getFullName() {
+        return name.fullName;
+    }
+
+    public String getPhoneValue() {
+        return phone.value;
+    }
+
+    public String getEmailValue() {
+        return email.value;
+    }
+
+    public String getAddressValue() {
+        return address.value;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

@@ -44,10 +44,10 @@ public class PredicateFactory {
 
     private static void processFieldPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
             throws ParseException {
-        addFieldPredicate(argMultimap, PREFIX_NAME, person -> person.getName().fullName, predicates, true);
-        addFieldPredicate(argMultimap, PREFIX_PHONE, person -> person.getPhone().value, predicates, false);
-        addFieldPredicate(argMultimap, PREFIX_EMAIL, person -> person.getEmail().value, predicates, false);
-        addFieldPredicate(argMultimap, PREFIX_ADDRESS, person -> person.getAddress().value, predicates, true);
+        addFieldPredicate(argMultimap, PREFIX_NAME, Person::getFullName, predicates, true);
+        addFieldPredicate(argMultimap, PREFIX_PHONE, Person::getPhoneValue, predicates, false);
+        addFieldPredicate(argMultimap, PREFIX_EMAIL, Person::getEmailValue, predicates, false);
+        addFieldPredicate(argMultimap, PREFIX_ADDRESS, Person::getAddressValue, predicates, true);
     }
 
     private static void addFieldPredicate(
@@ -55,16 +55,12 @@ public class PredicateFactory {
             Function<Person, String> fieldExtractor,
             List<Predicate<Person>> predicates, boolean hasMultipleKeywords) throws ParseException {
         if (argMultimap.getValue(prefix).isPresent()) {
-            List<String> values = hasMultipleKeywords
-                    ? argMultimap.getAllValues(prefix)
-                    : List.of(argMultimap.getValue(prefix).get());
-            for (String value : values) {
-                String trimmedValue = hasMultipleKeywords
-                        ? ParserUtil.parseMultipleWordsFromFindCommand(value)
-                        : ParserUtil.parseSingleWordFromFindCommand(value);
-                predicates.add(new FieldContainsKeywordsPredicate<>(Arrays.asList(trimmedValue.split("\\s+")),
-                        fieldExtractor, hasMultipleKeywords));
-            }
+            String value = argMultimap.getValue(prefix).get();
+            String trimmedValue = hasMultipleKeywords
+                    ? ParserUtil.parseMultipleWordsFromFindCommand(value)
+                    : ParserUtil.parseSingleWordFromFindCommand(value);
+            predicates.add(new FieldContainsKeywordsPredicate<>(Arrays.asList(trimmedValue.split("\\s+")),
+                    fieldExtractor, hasMultipleKeywords));
         }
     }
 

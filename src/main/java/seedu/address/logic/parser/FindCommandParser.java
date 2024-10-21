@@ -36,7 +36,8 @@ public class FindCommandParser implements Parser<FindCommand> {
         );
 
         // Ensure there are no duplicated prefixes except for prefix of name, prefix of address and prefix of tags
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PAYMENT, PREFIX_ATTENDANCE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_PAYMENT, PREFIX_ATTENDANCE);
 
         // Check if the user inputs some dummy input after findCommand and before any prefixes
         // Check if there is at least one prefix present
