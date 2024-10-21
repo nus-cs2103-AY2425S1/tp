@@ -21,9 +21,11 @@ public class FilterCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter contacts based on year group or class. " + "\n"
             + "Parameters: "
-            + PREFIX_FILTER_PARAM + "'yearGroup'/'subject' " + "[yearGroup]/[subject] " + "\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_FILTER_PARAM + "yearGroup " + "2";
+            + PREFIX_FILTER_PARAM + "[FILTER TYPE] " + "[FILTER VALUE]" + "\n"
+            + "Examples: " + "\n" + COMMAND_WORD + " "
+            + PREFIX_FILTER_PARAM + "yearGroup " + "yg/2" + "\n"
+            + COMMAND_WORD + " "
+            + PREFIX_FILTER_PARAM + "subject " + "s/Science" + "\n";
 
     public static final String MESSAGE_SUCCESS = "Filtered by: %1$s, %2$s";
 
@@ -60,5 +62,7 @@ public class FilterCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, filterParam.toString(), filterValue.toString()));
+
     }
+
 }
