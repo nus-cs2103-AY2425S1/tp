@@ -20,7 +20,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Meeting;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.MeetingNotFoundException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.person.exceptions.TimeClashException;
 
 /**
  * Edits the details of an existing meeting in the address book.
@@ -101,14 +103,18 @@ public class EditMeetingCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_MEETING);
         }
 
-        // Find out if the meeting is for a new person, if yes add meeting, if no edit meeting
-        if (meetingToEdit.getPersonToMeet().equals(editedMeeting.getPersonToMeet())) {
-            // Same person; edit meeting
-            model.setMeeting(personToEditMeeting, meetingToEdit, editedMeeting);
-        } else {
-            // Different person; delete for old, add for new
-            model.deleteMeeting(personBeingEdited, meetingToEdit);
-            model.addMeeting(personToEditMeeting, editedMeeting);
+        try {
+            // Find out if the meeting is for a new person, if yes add meeting, if no edit meeting
+            if (meetingToEdit.getPersonToMeet().equals(editedMeeting.getPersonToMeet())) {
+                // Same person; edit meeting
+                model.setMeeting(personToEditMeeting, meetingToEdit, editedMeeting);
+            } else {
+                // Different person; delete for old, add for new
+                model.deleteMeeting(personBeingEdited, meetingToEdit);
+                model.addMeeting(personToEditMeeting, editedMeeting);
+            }
+        } catch (MeetingNotFoundException | TimeClashException e) {
+            throw new CommandException(e.getMessage());
         }
 
         // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
