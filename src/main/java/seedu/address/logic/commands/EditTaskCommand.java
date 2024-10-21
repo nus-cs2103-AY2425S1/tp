@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;

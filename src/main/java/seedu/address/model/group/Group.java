@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import com.sun.javafx.tk.Toolkit;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.group.exceptions.ExceedGroupSizeException;
 import seedu.address.model.student.Student;
@@ -90,19 +89,6 @@ public class Group {
     public void setTask(Task target, Task editedTask) {
         deleteTask(target);
         addTask(editedTask);
-    }
-
-    /**
-     * Returns true if the group has the given task
-     * @param task
-     */
-    public boolean hasTask(Task task) {
-        for (Task t : tasks) {
-            if (t.equals(task)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void delete(Student student) {
