@@ -35,7 +35,7 @@ public class AddAppointmentCommand extends Command {
             + PREFIX_START + " dd-MM-yyyy-HH-mm "
             + PREFIX_END + " dd-MM-yyyy-HH-mm ";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Appointment Added \n\n%1$s";
+    public static final String MESSAGE_ADD_APPOINTMENT_SUCCESS = "Added Appointment to Person: %1$s";
     private final Index index;
     private final Appointment appointment;
     /**
@@ -45,9 +45,9 @@ public class AddAppointmentCommand extends Command {
     public AddAppointmentCommand(Appointment appointment, Index index) {
         requireNonNull(index);
         requireNonNull(appointment);
+
         this.index = index;
         this.appointment = appointment;
-
     }
 
     @Override
@@ -59,11 +59,21 @@ public class AddAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getId(),
+                personToEdit.getWard(),
+                personToEdit.getDiagnosis(),
+                personToEdit.getMedication(),
+                personToEdit.getNotes(),
+                appointment
+        );
 
+        // Update the person in the model
+        model.setPerson(personToEdit, editedPerson);
 
-
-
-        return new CommandResult(null);
+        //return new CommandResult(null);
+        return new CommandResult(String.format(MESSAGE_ADD_APPOINTMENT_SUCCESS, editedPerson));
     }
 
     @Override

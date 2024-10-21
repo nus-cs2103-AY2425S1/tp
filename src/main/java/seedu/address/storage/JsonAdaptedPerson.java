@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Diagnosis;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Medication;
@@ -28,6 +29,7 @@ class JsonAdaptedPerson {
     private final String diagnosis;
     private final String medication;
     private final String notes;
+    private final JsonAdaptedAppointment appointment;
     /*
     private final String phone;
     private final String email;
@@ -61,13 +63,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("id") String id,
                              @JsonProperty("ward") String ward, @JsonProperty("diagnosis") String diagnosis,
-                             @JsonProperty("medication") String medication, @JsonProperty("notes") String notes) {
+                             @JsonProperty("medication") String medication, @JsonProperty("notes") String notes,
+                             @JsonProperty("appointment") JsonAdaptedAppointment appointment) {
         this.name = name;
         this.id = id;
         this.ward = ward;
         this.diagnosis = diagnosis;
         this.medication = medication;
         this.notes = notes;
+        this.appointment = appointment;
         /*
         this.diagnosis = diagnosis;
         this.medication = medication;
@@ -88,6 +92,7 @@ class JsonAdaptedPerson {
         diagnosis = source.getDiagnosis().value;
         medication = source.getMedication().value;
         notes = source.getNotes().value;
+        appointment = source.getAppointment() != null ? new JsonAdaptedAppointment(source.getAppointment()) : null;
         /*
         phone = source.getPhone().value;
         email = source.getEmail().value;
@@ -158,6 +163,11 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Notes.class.getSimpleName()));
         }
         final Notes modelNotes = new Notes(notes);
+
+        final Appointment modelAppointment = (appointment != null) ? appointment.toModelType() : null;
+
+
+
         /*
 
         if (email == null) {
@@ -183,7 +193,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
          */
-        return new Person(modelName, modelId, modelWard, modelDiagnosis, modelMedication, modelNotes);
+        return new Person(modelName, modelId, modelWard, modelDiagnosis, modelMedication, modelNotes, modelAppointment);
     }
 
 }
