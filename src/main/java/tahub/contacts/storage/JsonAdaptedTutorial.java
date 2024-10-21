@@ -59,19 +59,18 @@ class JsonAdaptedTutorial {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Tutorial.class.getSimpleName()));
         }
+        final String modelTutorialId = this.tutorialId;
+        if (!Tutorial.isValidTutorialId(modelTutorialId)) {
+            throw new IllegalValueException(String.format(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS,
+                    Tutorial.class.getSimpleName()));
+        }
 
-        final String modelTutorialId = tutorialId;
-
+        // No need to handle exceptions explicitly for course
+        // as JsonAdaptedCourse will handle it.
         if (course == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Course.class.getSimpleName()));
         }
-
         final Course courseModel = this.course.toModelType();
-        if (!Course.isValidCourseCode(courseModel.courseCode)) {
-            throw new IllegalValueException(Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
-        } else if (!Course.isValidCourseName(courseModel.courseName)) {
-            throw new IllegalValueException(Course.COURSE_NAME_MESSAGE_CONSTRAINTS);
-        }
 
         return new Tutorial(modelTutorialId, courseModel);
     }

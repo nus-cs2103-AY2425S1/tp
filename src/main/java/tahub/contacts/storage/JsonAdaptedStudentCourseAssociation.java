@@ -50,6 +50,7 @@ class JsonAdaptedStudentCourseAssociation {
     /**
      * Converts the JsonAdaptedStudentCourseAssociation object into a StudentCourseAssociation object.
      * Validates the student, course, and tutorial fields before creating a new StudentCourseAssociation.
+     * If the student/course/tutorials are invalid, the error is handled in their respective adapted classes.
      *
      * @return a new StudentCourseAssociation object representing the JSON data
      * @throws IllegalValueException if the student, course, or tutorial fields are invalid
@@ -62,9 +63,6 @@ class JsonAdaptedStudentCourseAssociation {
                     JsonAdaptedPerson.class.getSimpleName()));
         }
         final Person studentModel = this.student.toModelType();
-        if (!Person.isValidPerson(studentModel)) {
-            throw new IllegalValueException("The Person JSON object is invalid!");
-        }
 
         // Checks if the course is valid
         if (this.course == null) {
@@ -72,11 +70,6 @@ class JsonAdaptedStudentCourseAssociation {
                     JsonAdaptedCourse.class.getSimpleName()));
         }
         final Course courseModel = this.course.toModelType();
-        if (!Course.isValidCourseCode(courseModel.courseCode)) {
-            throw new IllegalValueException(Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
-        } else if (!Course.isValidCourseName(courseModel.courseName)) {
-            throw new IllegalValueException(Course.COURSE_NAME_MESSAGE_CONSTRAINTS);
-        }
 
         // Checks if the tutorial is valid
         if (this.tutorial == null) {
@@ -84,13 +77,7 @@ class JsonAdaptedStudentCourseAssociation {
                     JsonAdaptedTutorial.class.getSimpleName()));
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
-        if (!Tutorial.isValidTutorialId(tutorialModel.getTutorialId())) {
-            throw new IllegalValueException(Tutorial.TUTORIAL_ID_MESSAGE_CONSTRAINTS);
-        } else if (!Course.isValidCourseCode(tutorialModel.getCourse().courseCode)) {
-            throw new IllegalValueException(Course.COURSE_CODE_MESSAGE_CONSTRAINTS);
-        } else if (!Course.isValidCourseName(tutorialModel.getCourse().courseName)) {
-            throw new IllegalValueException(Course.COURSE_NAME_MESSAGE_CONSTRAINTS);
-        }
+
 
         return new StudentCourseAssociation(studentModel, courseModel, tutorialModel);
     }

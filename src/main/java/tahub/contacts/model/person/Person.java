@@ -82,28 +82,6 @@ public class Person {
     }
 
     /**
-     * Checks if a given Person object is valid.
-     *
-     * @param person The Person object to validate.
-     * @return True if the Person object is valid, false otherwise.
-     */
-    public static boolean isValidPerson(Person person) {
-        String matricNumber = person.getMatricNumber().toString();
-        String name = person.getName().toString();
-        String phone = person.getPhone().toString();
-        String email = person.getEmail().toString();
-        String address = person.getAddress().toString();
-        Set<Tag> tags = person.getTags();
-
-        return MatriculationNumber.isValidMatriculationNumber(matricNumber)
-                && Name.isValidName(name)
-                && Phone.isValidPhone(phone)
-                && Email.isValidEmail(email)
-                && Address.isValidAddress(address)
-                && tags.stream().allMatch(tag -> Tag.isValidTagName(tag.tagName));
-    }
-
-    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
