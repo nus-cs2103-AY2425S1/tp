@@ -100,6 +100,8 @@ public class DeleteClaimCommand extends Command {
         }
 
         DeleteClaimCommand otherDeleteClaimCommand = (DeleteClaimCommand) other;
-        return index.equals(otherDeleteClaimCommand.index) && insuranceId == otherDeleteClaimCommand.insuranceId && claimId.equals(otherDeleteClaimCommand.claimId);
+        return index.equals(otherDeleteClaimCommand.index)
+                && insuranceId == otherDeleteClaimCommand.insuranceId
+                && claimId.equals(otherDeleteClaimCommand.claimId);
     }
 }
