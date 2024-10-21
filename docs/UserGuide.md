@@ -32,7 +32,7 @@ Welcome to AcademyAssist, your ultimate solution for efficient student contact m
 This desktop application is designed to streamline your administrative tasks, allowing you to focus more
 on what truly matters - educating and nurturing young minds.
 
-AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical 
+AcademyAssist combines the power of a **Command Line Interface (CLI) with the user-friendly aspects of a Graphical
 User Interface (GUI).** This hybrid approach ensures that you can manage your student database with
 lightning-fast efficiency while still enjoying the visual benefits of modern software design. Whether you're a
 seasoned administrator or new to digital management systems, AcademyAssist is intuitive enough for beginners yet
@@ -82,7 +82,7 @@ again, type `help` and press Enter.
 be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple 
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple
 lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 
 </div>
