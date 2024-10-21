@@ -85,4 +85,11 @@ public class ArgumentMultimap {
     public boolean isPresent(Prefix prefix) {
         return argMultimap.containsKey(prefix);
     }
+
+    /**
+     * Returns true for argMultiMap size of one;
+     */
+    public boolean isOfSizeOne() {
+        return argMultimap.size() == 1;
+    }
 }
