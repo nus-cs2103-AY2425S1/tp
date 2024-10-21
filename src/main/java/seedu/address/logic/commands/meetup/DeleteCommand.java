@@ -18,7 +18,7 @@ import seedu.address.model.meetup.MeetUp;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletem";
+    public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes meet-up identified by the index number used in the displayed meet-up list.\n"

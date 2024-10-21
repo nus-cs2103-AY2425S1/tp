@@ -19,7 +19,7 @@ import seedu.address.model.meetup.MeetUp;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "addm";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meet-up to the application. "
             + "Parameters: "
