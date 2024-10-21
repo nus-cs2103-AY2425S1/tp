@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.property;
 
 import seedu.address.model.property.AskingPrice;
 import seedu.address.model.property.LandlordName;

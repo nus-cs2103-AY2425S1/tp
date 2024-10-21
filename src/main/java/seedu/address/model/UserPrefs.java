@@ -16,6 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     private GuiSettings guiSettings = new GuiSettings();
     private Path buyerListFilePath = Paths.get("data" , "buyerlist.json");
     private Path meetUpListFilePath = Paths.get("data", "meetuplist.json");
+    private Path propertyListFilePath = Paths.get("data", "propertylist.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,6 +39,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         setGuiSettings(newUserPrefs.getGuiSettings());
         setBuyerListFilePath(newUserPrefs.getBuyerListFilePath());
         setMeetUpListFilePath(newUserPrefs.getMeetUpListFilePath());
+        setPropertyListFilePath(newUserPrefs.getPropertyListFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -65,6 +67,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void setMeetUpListFilePath(Path meetUpListFilePath) {
         requireNonNull(meetUpListFilePath);
         this.meetUpListFilePath = meetUpListFilePath;
+    }
+
+    public Path getPropertyListFilePath() {
+        return propertyListFilePath;
+    }
+
+    public void setPropertyListFilePath(Path propertyListFilePath) {
+        requireNonNull(propertyListFilePath);
+        this.propertyListFilePath = propertyListFilePath;
     }
 
     @Override

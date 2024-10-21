@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MEETUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MEETUP;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,8 @@ import seedu.address.model.meetup.MeetUp;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+            getTypicalPropertyList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -36,7 +38,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
                 Messages.format(meetUpToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        ModelManager expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList(),
+                model.getPropertyList());
         expectedModel.deleteMeetUp(meetUpToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
@@ -52,7 +55,8 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MEETUP_SUCCESS,
                 Messages.format(meetUpToDelete));
 
-        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        Model expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList(),
+                model.getPropertyList());
         expectedModel.deleteMeetUp(meetUpToDelete);
         showNoMeetUp(expectedModel);
 

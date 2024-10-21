@@ -13,6 +13,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 
 /**
  * Represents the in-memory model of the buyer list data.
@@ -22,31 +23,36 @@ public class ModelManager implements Model {
 
     private final BuyerList buyerList;
     private final MeetUpList meetUpList;
+    private final PropertyList propertyList;
     private final UserPrefs userPrefs;
     private final FilteredList<Buyer> filteredBuyers;
     private final FilteredList<MeetUp> filteredMeetUps;
+    private final FilteredList<Property> filteredProperties;
 
     /**
-     * Initializes a ModelManager with the given buyerList and userPrefs.
+     * Initializes a ModelManager with the given buyerList, meetUpList, propertyList and userPrefs.
      */
-    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList) {
-        requireAllNonNull(buyerList, userPrefs, meetUpList);
+    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyMeetUpList meetUpList, ReadOnlyPropertyList propertyList) {
+        requireAllNonNull(buyerList, userPrefs, meetUpList, propertyList);
 
         logger.fine("Initializing with buyer list: " + buyerList + " and user prefs " + userPrefs
-                + "and meet up list " + meetUpList);
+                + " and meet up list " + meetUpList + " and property list " + propertyList);
 
         logger.info("initial meet up list contains " + meetUpList);
 
         this.buyerList = new BuyerList(buyerList);
         this.userPrefs = new UserPrefs(userPrefs);
         this.meetUpList = new MeetUpList(meetUpList);
+        this.propertyList = new PropertyList(propertyList);
         filteredBuyers = new FilteredList<>(this.buyerList.getBuyerList());
         filteredMeetUps = new FilteredList<>(this.meetUpList.getMeetUpList());
+        filteredProperties = new FilteredList<>(this.propertyList.getPropertyList());
 
     }
 
     public ModelManager() {
-        this(new BuyerList(), new UserPrefs(), new MeetUpList());
+        this(new BuyerList(), new UserPrefs(), new MeetUpList(), new PropertyList());
     }
 
     @Override
@@ -64,7 +70,8 @@ public class ModelManager implements Model {
         return buyerList.equals(otherModelManager.buyerList)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBuyers.equals(otherModelManager.filteredBuyers)
-                && filteredMeetUps.equals(otherModelManager.filteredMeetUps);
+                && filteredMeetUps.equals(otherModelManager.filteredMeetUps)
+                && filteredProperties.equals(otherModelManager.filteredProperties);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -109,6 +116,15 @@ public class ModelManager implements Model {
     public void setMeetUpListFilePath(Path meetUpListFilePath) {
         requireNonNull(meetUpListFilePath);
         userPrefs.setMeetUpListFilePath(meetUpListFilePath);
+    }
+
+    public Path getPropertyListFilePath() {
+        return userPrefs.getPropertyListFilePath();
+    }
+
+    public void setPropertyListFilePath(Path propertyListFilePath) {
+        requireNonNull(propertyListFilePath);
+        userPrefs.setPropertyListFilePath(propertyListFilePath);
     }
 
     //=========== BuyerList ================================================================================
@@ -214,4 +230,53 @@ public class ModelManager implements Model {
         filteredMeetUps.setPredicate(predicate);
     }
 
+    //=========== Property List ================================================================================
+    @Override
+    public void setPropertyList(ReadOnlyPropertyList propertyList) {
+        this.propertyList.resetData(propertyList);
+    }
+
+    @Override
+    public ReadOnlyPropertyList getPropertyList() {
+        return propertyList;
+    }
+
+    @Override
+    public boolean hasProperty(Property property) {
+        requireNonNull(property);
+        return propertyList.hasProperty(property);
+    }
+
+    @Override
+    public void deleteProperty(Property property) {
+        propertyList.removeProperty(property);
+    }
+
+    @Override
+    public void addProperty(Property property) {
+        propertyList.addProperty(property);
+        updateFilteredPropertyList(PREDICATE_SHOW_ALL_PROPERTIES);
+    }
+
+    @Override
+    public void setProperty(Property target, Property editedProperty) {
+        requireAllNonNull(target, editedProperty);
+        propertyList.setProperty(target, editedProperty);
+    }
+
+    //=========== Filtered Property List Accessors ====================================================================
+    /**
+     * Returns an unmodifiable view of the list of {@code Property} backed by the internal list of
+     * {@code versionedPropertyList}
+     */
+    @Override
+    public ObservableList<Property> getFilteredPropertyList() {
+        return filteredProperties;
+    }
+
+    @Override
+    public void updateFilteredPropertyList(Predicate<Property> predicate) {
+        requireNonNull(predicate);
+        filteredProperties.setPredicate(predicate);
+    }
 }

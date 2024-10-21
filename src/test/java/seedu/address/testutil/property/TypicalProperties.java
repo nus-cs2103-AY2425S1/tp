@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.property;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASKING_PRICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASKING_PRICE_BOB;
@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.PropertyList;
 import seedu.address.model.property.Property;
 
 /**
@@ -54,12 +55,13 @@ public class TypicalProperties {
 
     private TypicalProperties() {} // prevents instantiation
 
-    // TODO
-    /*
     public static PropertyList getTypicalPropertyList() {
         PropertyList ab = new PropertyList();
+        for (Property property : getTypicalProperties()) {
+            ab.addProperty(property);
+        }
+        return ab;
     }
-    */
 
     public static List<Property> getTypicalProperties() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));

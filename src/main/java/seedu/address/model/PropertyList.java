@@ -62,7 +62,7 @@ public class PropertyList implements ReadOnlyPropertyList {
     /**
      * Returns true if a property with the same identity as {@code property} exists in the property list.
      */
-    public boolean hasBuyer(Property property) {
+    public boolean hasProperty(Property property) {
         requireNonNull(property);
         return properties.contains(property);
     }

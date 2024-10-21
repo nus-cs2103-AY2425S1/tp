@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_BUYERS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import java.util.Collections;
 
@@ -28,8 +29,10 @@ public class ViewCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
-        expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+                getTypicalPropertyList());
+        expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList(),
+                model.getPropertyList());
     }
 
     @Test

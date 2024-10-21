@@ -10,6 +10,7 @@ import static seedu.address.testutil.buyer.TypicalBuyers.ELLE;
 import static seedu.address.testutil.buyer.TypicalBuyers.FIONA;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +26,10 @@ import seedu.address.model.buyer.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
-    private Model expectedModel = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+            getTypicalPropertyList());
+    private Model expectedModel = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+            getTypicalPropertyList());
 
     @Test
     public void equals() {

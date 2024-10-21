@@ -3,6 +3,7 @@ package seedu.address.logic.commands.meetup;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,10 @@ public class ViewCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
-        expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList());
+        model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+                getTypicalPropertyList());
+        expectedModel = new ModelManager(model.getBuyerList(), new UserPrefs(), model.getMeetUpList(),
+                model.getPropertyList());
     }
 
     @Test
