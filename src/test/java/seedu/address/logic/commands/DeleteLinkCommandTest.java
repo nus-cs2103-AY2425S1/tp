@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class DeleteLinkCommandTest {
 
@@ -50,6 +51,37 @@ public class DeleteLinkCommandTest {
         assertTrue(expectedModel.hasLink(newAlice, newBenson));
         expectedModel.deleteLink(newAlice, newBenson);
         assertCommandSuccess(deleteLinkCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_personNotExist() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Person validPerson = new PersonBuilder().build();
+        model.deleteLink(validPerson, BENSON);
+        DeleteLinkCommand deleteLinkCommand = new DeleteLinkCommand(ALICE.getNric(), BENSON.getNric());
+        assertThrows(CommandException.class, () -> deleteLinkCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        DeleteLinkCommand deleteFirstCommand = new DeleteLinkCommand(ALICE.getNric(), BENSON.getNric());
+        DeleteLinkCommand deleteSecondCommand = new DeleteLinkCommand(BENSON.getNric(), ALICE.getNric());
+
+        // same object -> returns true
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+
+        // same values -> returns true
+        DeleteLinkCommand deleteFirstCommandCopy = new DeleteLinkCommand(ALICE.getNric(), BENSON.getNric());
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
 }
