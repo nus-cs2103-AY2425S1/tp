@@ -30,6 +30,12 @@ public class UnmarkCommandParserTest {
     }
 
     @Test
+    public void parse_wildcard_success() {
+        assertParseSuccess(parser, "*" + TUTORIAL_DESC_ONE,
+                new UnmarkCommand(true, new Tutorial(VALID_TUTORIAL_ONE)));
+    }
+
+    @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage;
 
