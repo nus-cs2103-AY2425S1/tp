@@ -127,10 +127,11 @@ public class HelpWindow extends UiPart<Stage> {
                         + "a/Hickory Forest b/23 s/Female ap/11/11/2024 1100"),
                 new CommandSummary("Clear", "clear"),
                 new CommandSummary("Delete", "delete INDEX / delete NAME\ne.g., delete 3, delete Alex Yeoh"),
-                new CommandSummary("Edit", "edit John Doe n/Betsy Crower t/ ap/"),
+                new CommandSummary("Edit", "edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] "
+                        + "[ap/APPOINTMENT] [t/TAG]\ne.g., edit John Doe n/Betsy Crower t/ ap/"),
                 new CommandSummary("Find", "find KEYWORD [MORE_KEYWORDS]\ne.g., find olive 87438"),
-                new CommandSummary("List", "list"),
-                new CommandSummary("Help", "help")
+                new CommandSummary("Help", "help"),
+                new CommandSummary("List", "list")
         );
 
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));

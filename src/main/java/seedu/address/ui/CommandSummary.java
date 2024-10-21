@@ -11,6 +11,8 @@ public class CommandSummary {
      * Creates a command summary to display.
      */
     public CommandSummary(String action, String format) {
+        assert action != null;
+        assert format != null;
         this.action = action;
         this.format = format;
     }
