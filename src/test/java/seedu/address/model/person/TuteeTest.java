@@ -10,8 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DEACON;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_MENTOR;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.CLARA;
-import static seedu.address.testutil.TypicalPersons.DEACON;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -101,7 +100,7 @@ public class TuteeTest {
         String expected = Tutee.class.getCanonicalName()
                 + "{name=" + CLARA.getName() + ", phone=" + CLARA.getPhone()
                 + ", email=" + CLARA.getEmail() + ", address=" + CLARA.getAddress() + ", hours=" + CLARA.getHours()
-                + ", tags=" + CLARA.getTags() + "}";
+                + ", tags=" + CLARA.getTags() + ", subjects=" + ALICE.getSubjects() + "}";
         assertEquals(expected, CLARA.toString());
     }
 }
