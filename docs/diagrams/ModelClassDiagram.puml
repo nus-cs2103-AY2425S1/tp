@@ -14,11 +14,12 @@ Class UserPrefs
 
 Class UniquePersonList
 Class Person
-Class Address
+Class Gender
 Class Email
 Class Name
-Class Phone
-Class Tag
+Class Age
+Class Detail
+Class StudyGroupTag
 
 Class I #FFFFFF
 }
