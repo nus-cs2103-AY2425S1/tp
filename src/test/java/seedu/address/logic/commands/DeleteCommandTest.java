@@ -70,6 +70,39 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_personDisplayedDeleted_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.setPersonToDisplay(personToDelete);
+        StudentId studentIdToDelete = personToDelete.getStudentId();
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_personDisplayedNotDeleted_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDisplay = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        model.setPersonToDisplay(personToDisplay);
+        StudentId studentIdToDelete = personToDelete.getStudentId();
+        DeleteCommand deleteCommand = new DeleteCommand(studentIdToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), personToDisplay);
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person secondPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
