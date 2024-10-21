@@ -71,15 +71,23 @@ public class Birthday {
      * Returns true if the stored date in {@code Birthday} is within a week from today.
      */
     public boolean isBirthdayWithinNextWeek() {
-        LocalDate dayNextWeek = LocalDate.now().plusWeeks(1);
-        LocalDate birthdayInYearOfNextWeek = value.withYear(dayNextWeek.getYear());
-        return birthdayInYearOfNextWeek.isBefore(dayNextWeek) && birthdayInYearOfNextWeek.isAfter(LocalDate.now());
+        LocalDate today = LocalDate.now();
+        LocalDate dateInOneWeek = today.plusWeeks(1);
+        LocalDate upcomingBirthday = getDateOfUpcomingBirthday();
+        return (upcomingBirthday.isEqual(today) || upcomingBirthday.isAfter(today))
+                && upcomingBirthday.isBefore(dateInOneWeek);
     }
 
+    /**
+     * Returns the earliest upcoming day of the birthday.
+     */
     public LocalDate getDateOfUpcomingBirthday() {
         LocalDate birthdayThisYear = value.withYear(LocalDate.now().getYear());
-        return birthdayThisYear.isBefore(LocalDate.now()) ? birthdayThisYear.plusYears(1)
-                : birthdayThisYear;
+        if (birthdayThisYear.isBefore(LocalDate.now())) {
+            return birthdayThisYear.plusYears(1);
+        } else {
+            return birthdayThisYear;
+        }
     }
 
     @Override
