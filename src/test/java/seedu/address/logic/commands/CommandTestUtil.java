@@ -57,46 +57,70 @@ public class CommandTestUtil {
     public static final String VOLUNTEER_NAME_DESC_ALICE = " " + VOLUNTEER_PREFIX_NAME + VALID_VOLUNTEER_NAME_ALICE;
     public static final String VOLUNTEER_PHONE_DESC_ALICE = " " + VOLUNTEER_PREFIX_PHONE + VALID_VOLUNTEER_PHONE_ALICE;
     public static final String VOLUNTEER_EMAIL_DESC_ALICE = " " + VOLUNTEER_PREFIX_EMAIL + VALID_VOLUNTEER_EMAIL_ALICE;
-    public static final String VOLUNTEER_DATE_DESC_ALICE = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE + VALID_VOLUNTEER_DATE_ALICE;
-    public static final String VOLUNTEER_START_TIME_DESC_ALICE = " " + VOLUNTEER_PREFIX_START_TIME + VALID_VOLUNTEER_START_TIME_ALICE;
-    public static final String VOLUNTEER_END_TIME_DESC_ALICE = " " + VOLUNTEER_PREFIX_END_TIME + VALID_VOLUNTEER_END_TIME_ALICE;
+    public static final String VOLUNTEER_DATE_DESC_ALICE = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE
+            + VALID_VOLUNTEER_DATE_ALICE;
+    public static final String VOLUNTEER_START_TIME_DESC_ALICE = " " + VOLUNTEER_PREFIX_START_TIME
+            + VALID_VOLUNTEER_START_TIME_ALICE;
+    public static final String VOLUNTEER_END_TIME_DESC_ALICE = " " + VOLUNTEER_PREFIX_END_TIME
+            + VALID_VOLUNTEER_END_TIME_ALICE;
 
     public static final String VOLUNTEER_NAME_DESC_BOB = " " + VOLUNTEER_PREFIX_NAME + VALID_VOLUNTEER_NAME_BOB;
     public static final String VOLUNTEER_PHONE_DESC_BOB = " " + VOLUNTEER_PREFIX_PHONE + VALID_VOLUNTEER_PHONE_BOB;
     public static final String VOLUNTEER_EMAIL_DESC_BOB = " " + VOLUNTEER_PREFIX_EMAIL + VALID_VOLUNTEER_EMAIL_BOB;
-    public static final String VOLUNTEER_DATE_DESC_BOB = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE + VALID_VOLUNTEER_DATE_BOB;
-    public static final String VOLUNTEER_START_TIME_DESC_BOB = " " + VOLUNTEER_PREFIX_START_TIME + VALID_VOLUNTEER_START_TIME_BOB;
-    public static final String VOLUNTEER_END_TIME_DESC_BOB = " " + VOLUNTEER_PREFIX_END_TIME + VALID_VOLUNTEER_END_TIME_BOB;
+    public static final String VOLUNTEER_DATE_DESC_BOB = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE
+            + VALID_VOLUNTEER_DATE_BOB;
+    public static final String VOLUNTEER_START_TIME_DESC_BOB = " " + VOLUNTEER_PREFIX_START_TIME
+            + VALID_VOLUNTEER_START_TIME_BOB;
+    public static final String VOLUNTEER_END_TIME_DESC_BOB = " " + VOLUNTEER_PREFIX_END_TIME
+            + VALID_VOLUNTEER_END_TIME_BOB;
 
     // CLI descriptor strings for events
     public static final String EVENT_NAME_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_NAME + VALID_EVENT_NAME_BEACH_CLEANUP;
     public static final String EVENT_DATE_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_DATE + VALID_EVENT_DATE_BEACH_CLEANUP;
-    public static final String EVENT_START_TIME_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_START_TIME + VALID_EVENT_START_TIME_BEACH_CLEANUP;
-    public static final String EVENT_END_TIME_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_END_TIME + VALID_EVENT_END_TIME_BEACH_CLEANUP;
-    public static final String EVENT_LOCATION_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_LOCATION + VALID_EVENT_LOCATION_BEACH_CLEANUP;
-    public static final String EVENT_DESCRIPTION_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_DESCRIPTION + VALID_EVENT_DESCRIPTION_BEACH_CLEANUP;
+    public static final String EVENT_START_TIME_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_START_TIME
+            + VALID_EVENT_START_TIME_BEACH_CLEANUP;
+    public static final String EVENT_END_TIME_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_END_TIME
+            + VALID_EVENT_END_TIME_BEACH_CLEANUP;
+    public static final String EVENT_LOCATION_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_LOCATION
+            + VALID_EVENT_LOCATION_BEACH_CLEANUP;
+    public static final String EVENT_DESCRIPTION_DESC_BEACH_CLEANUP = " " + EVENT_PREFIX_DESCRIPTION
+            + VALID_EVENT_DESCRIPTION_BEACH_CLEANUP;
 
     public static final String EVENT_NAME_DESC_CHARITY_RUN = " " + EVENT_PREFIX_NAME + VALID_EVENT_NAME_CHARITY_RUN;
     public static final String EVENT_DATE_DESC_CHARITY_RUN = " " + EVENT_PREFIX_DATE + VALID_EVENT_DATE_CHARITY_RUN;
-    public static final String EVENT_START_TIME_DESC_CHARITY_RUN = " " + EVENT_PREFIX_START_TIME + VALID_EVENT_START_TIME_CHARITY_RUN;
-    public static final String EVENT_END_TIME_DESC_CHARITY_RUN = " " + EVENT_PREFIX_END_TIME + VALID_EVENT_END_TIME_CHARITY_RUN;
-    public static final String EVENT_LOCATION_DESC_CHARITY_RUN = " " + EVENT_PREFIX_LOCATION + VALID_EVENT_LOCATION_CHARITY_RUN;
-    public static final String EVENT_DESCRIPTION_DESC_CHARITY_RUN = " " + EVENT_PREFIX_DESCRIPTION + VALID_EVENT_DESCRIPTION_CHARITY_RUN;
+    public static final String EVENT_START_TIME_DESC_CHARITY_RUN = " " + EVENT_PREFIX_START_TIME
+            + VALID_EVENT_START_TIME_CHARITY_RUN;
+    public static final String EVENT_END_TIME_DESC_CHARITY_RUN = " " + EVENT_PREFIX_END_TIME
+            + VALID_EVENT_END_TIME_CHARITY_RUN;
+    public static final String EVENT_LOCATION_DESC_CHARITY_RUN = " " + EVENT_PREFIX_LOCATION
+            + VALID_EVENT_LOCATION_CHARITY_RUN;
+    public static final String EVENT_DESCRIPTION_DESC_CHARITY_RUN = " " + EVENT_PREFIX_DESCRIPTION
+            + VALID_EVENT_DESCRIPTION_CHARITY_RUN;
 
     // Invalid values
-    public static final String INVALID_VOLUNTEER_NAME_DESC = " " + VOLUNTEER_PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_VOLUNTEER_PHONE_DESC = " " + VOLUNTEER_PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_VOLUNTEER_EMAIL_DESC = " " + VOLUNTEER_PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_VOLUNTEER_DATE_DESC = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE + "32/13/2023"; // Invalid date
-    public static final String INVALID_VOLUNTEER_START_TIME_DESC = " " + VOLUNTEER_PREFIX_START_TIME + "25:00"; // Invalid time
-    public static final String INVALID_VOLUNTEER_END_TIME_DESC = " " + VOLUNTEER_PREFIX_END_TIME + "99:99"; // Invalid time
+    public static final String INVALID_VOLUNTEER_NAME_DESC = " " + VOLUNTEER_PREFIX_NAME
+            + "James&"; // '&' not allowed in names
+    public static final String INVALID_VOLUNTEER_PHONE_DESC = " " + VOLUNTEER_PREFIX_PHONE
+            + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_VOLUNTEER_EMAIL_DESC = " " + VOLUNTEER_PREFIX_EMAIL
+            + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_VOLUNTEER_DATE_DESC = " " + VOLUNTEER_PREFIX_AVAILABLE_DATE
+            + "32/13/2023"; // Invalid date
+    public static final String INVALID_VOLUNTEER_START_TIME_DESC = " " + VOLUNTEER_PREFIX_START_TIME
+            + "25:00"; // Invalid time
+    public static final String INVALID_VOLUNTEER_END_TIME_DESC = " " + VOLUNTEER_PREFIX_END_TIME
+            + "99:99"; // Invalid time
 
-    public static final String INVALID_EVENT_NAME_DESC = " " + EVENT_PREFIX_NAME + "Beach Cleanup@"; // '@' not allowed in event names
-    public static final String INVALID_EVENT_DATE_DESC = " " + EVENT_PREFIX_DATE + "31/02/2023"; // Invalid date
+    public static final String INVALID_EVENT_NAME_DESC = " " + EVENT_PREFIX_NAME
+            + "Beach Cleanup@"; // '@' not allowed in event names
+    public static final String INVALID_EVENT_DATE_DESC = " " + EVENT_PREFIX_DATE
+            + "31/02/2023"; // Invalid date
     public static final String INVALID_EVENT_START_TIME_DESC = " " + EVENT_PREFIX_START_TIME + "30:00"; // Invalid time
     public static final String INVALID_EVENT_END_TIME_DESC = " " + EVENT_PREFIX_END_TIME + "99:99"; // Invalid time
-    public static final String INVALID_EVENT_LOCATION_DESC = " " + EVENT_PREFIX_LOCATION + ""; // Empty location not allowed
-    public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + EVENT_PREFIX_DESCRIPTION + "#Cleanup"; // '#' not allowed in description
+    public static final String INVALID_EVENT_LOCATION_DESC = " " + EVENT_PREFIX_LOCATION
+            + ""; // Empty location not allowed
+    public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + EVENT_PREFIX_DESCRIPTION
+            + "#Cleanup"; // '#' not allowed in description
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
