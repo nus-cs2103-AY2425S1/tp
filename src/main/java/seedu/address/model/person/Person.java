@@ -82,6 +82,34 @@ public class Person {
     }
 
     /**
+     * Converts a {@code Person} object into a csv format.
+     *
+     * @return A csv representation of the {@Code Person} object.
+     */
+    public String toCsvString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(this.name.toString() + ",");
+        sb.append(this.phone.toString() + ",");
+        sb.append(this.email.toString() + ",");
+        sb.append("\"" + this.address.toString() + "\"" + ",");
+
+        String tagsString = this.tags.toString();
+        tagsString = tagsString.replace("[", "");
+        tagsString = tagsString.replace("]", "");
+
+        sb.append("\"" + tagsString + "\",");
+
+        String notesString = this.notes.toString();
+        notesString = notesString.replace("[", "");
+        notesString = notesString.replace("]", "");
+
+        sb.append("\"" + notesString + "\"");
+
+        return sb.toString();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
