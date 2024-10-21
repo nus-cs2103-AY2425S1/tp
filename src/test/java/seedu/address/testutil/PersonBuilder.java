@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.management.relation.Role;
+
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
@@ -112,6 +114,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmptyAddress() {
         this.address = Optional.empty();
+        return this;
+    }
+
+    /**
+     * Sets the {@code ModuleRoleMap} of the {@code Person} that we are building to be empty.
+     */
+    public PersonBuilder withEmptyModuleRoleMap() {
+        HashMap<ModuleCode, RoleType> map = new HashMap<>();
+        this.moduleRoleMap = new ModuleRoleMap(map);
         return this;
     }
 

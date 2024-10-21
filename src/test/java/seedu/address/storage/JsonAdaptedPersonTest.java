@@ -1,9 +1,14 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ANDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_ANDY;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ANDY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 
@@ -33,7 +38,12 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().map(Object :: toString).orElse(null);
     private static final JsonAdaptedModuleRoleMap VALID_EMPTY_MODULE_ROLE_MAP =
-            new JsonAdaptedModuleRoleMap(ALICE.getModuleRoleMap());
+            new JsonAdaptedModuleRoleMap(ANDY.getModuleRoleMap());
+    private static final JsonAdaptedModuleRoleMap VALID_MODULE_ROLE_MAP =
+            new JsonAdaptedModuleRoleMap(BETTY.getModuleRoleMap());
+    private static final List<JsonAdaptedTag> VALID_TAGS_ANDY = ANDY.getTags().stream()
+            .map(JsonAdaptedTag :: new)
+            .collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag :: new)
             .collect(Collectors.toList());
@@ -47,8 +57,15 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_nullAddress_returnsPerson() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME2, VALID_PHONE, VALID_EMAIL, null,
-                VALID_TAGS, VALID_EMPTY_MODULE_ROLE_MAP);
+                VALID_TAGS, VALID_MODULE_ROLE_MAP);
         assertEquals(BETTY, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_emptyModuleRoleMap_returnsPerson() throws Exception {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME_ANDY, VALID_PHONE_ANDY, VALID_EMAIL_ANDY,
+                VALID_ADDRESS_ANDY, VALID_TAGS_ANDY, VALID_EMPTY_MODULE_ROLE_MAP);
+        assertEquals(ANDY, person.toModelType());
     }
 
     @Test
