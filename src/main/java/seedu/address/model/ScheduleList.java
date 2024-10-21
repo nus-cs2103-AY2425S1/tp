@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
 import seedu.address.model.schedule.UniqueMeetingList;
 
@@ -155,4 +157,15 @@ public class ScheduleList implements ReadOnlyScheduleList {
     public int hashCode() {
         return meetings.hashCode();
     }
+
+	public boolean hasPersonInMeeting(Person person) {
+        Iterator<Meeting> iterator = meetings.iterator();
+        while (iterator.hasNext()) {
+            Meeting meeting = iterator.next();
+                if (meeting.hasPerson(person.getUid())) {
+                    return true;
+                }
+        }
+        return false;
+	}
 }
