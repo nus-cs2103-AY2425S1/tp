@@ -120,11 +120,16 @@ public class ModelManager implements Model {
     @Override
     public Model createCopy() {
         Model modelCopy = new ModelManager(addressBook.createCopy(), userPrefs);
-        ReadOnlyAddressBook addressBookCopy = modelCopy.getAddressBook();
-        Person selectedPersonCopy = addressBookCopy.findEquivalentPerson(this.getSelectedPerson2());
+        Person selectedPersonCopy = modelCopy.findEquivalentPerson(getSelectedPerson2());
         modelCopy.updateSelectedPerson(selectedPersonCopy);
         return modelCopy;
     }
+
+    @Override
+    public Person findEquivalentPerson(Person person) {
+        return addressBook.findEquivalentPerson(person);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

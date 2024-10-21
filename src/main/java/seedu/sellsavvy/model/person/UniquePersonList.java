@@ -118,7 +118,7 @@ public class UniquePersonList implements Iterable<Person> {
 
     /**
      * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
-     * Returns null if target is null
+     * Returns null if target is null.
      */
     public Person findEquivalentPerson(Person target) {
         if (target == null) {

@@ -197,6 +197,11 @@ public class AddPersonCommandTest {
         public void setOrder(Order target, Order editedOrder) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Person findEquivalentPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
