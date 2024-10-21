@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventCelebrityMatchesKeywordPredicate;
+import seedu.address.ui.CommandDetailChange;
 import seedu.address.ui.CommandTabChange;
 
 /**
@@ -58,7 +59,7 @@ public class FilterEventCommandTest {
     public void execute_zeroKeywords_noEventFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 0);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false,
-                CommandTabChange.EVENT);
+                CommandTabChange.EVENT, CommandDetailChange.SIMPLIFIED);
         EventCelebrityMatchesKeywordPredicate predicate = preparePredicate(" ");
         FilterEventCommand command = new FilterEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
@@ -70,7 +71,7 @@ public class FilterEventCommandTest {
     public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, false, false,
-                CommandTabChange.EVENT);
+                CommandTabChange.EVENT, CommandDetailChange.SIMPLIFIED);
         EventCelebrityMatchesKeywordPredicate predicate = preparePredicate("Alice Pauline");
         FilterEventCommand command = new FilterEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
