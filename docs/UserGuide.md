@@ -148,7 +148,7 @@ Examples:
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`<br>
   ![result for 'find olive 87438'](images/findOlive.png)
 
-### Locating persons by name or phone number: `filter`
+### Filtering persons by age group or appointment dates: `filter`
 
 Filter persons whose age and/or appointment dates are within the specified range.
 
