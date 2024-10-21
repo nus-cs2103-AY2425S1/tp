@@ -32,8 +32,8 @@ public class DeleteTagCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS + " " + existingTag + "\n"
-                + "Your tags: ";
+        String expectedMessage = DeleteTagCommand.MESSAGE_SUCCESS + "[" + existingTag + "]\n"
+                + "Your tags: You have no tags.";
 
         assertCommandSuccess(deleteTagCommand, model, expectedMessage, expectedModel);
     }
