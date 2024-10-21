@@ -18,6 +18,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -134,6 +135,14 @@ public class ParserUtil {
         }
         LocalDate attendanceDate = LocalDate.parse(trimmedAttendance, Attendance.VALID_DATE_FORMAT);
         return new Attendance(attendanceDate);
+    }
+
+    /**
+     * Parses a {@code String attendance} into an {@code Attendance}.
+     * Leading and trailing whitespaces will be trimmed
+     */
+    public static Tutorial parseTutorial(String tutorial) throws ParseException {
+        throw new ParseException("method not implemented yet");
     }
 
     /**

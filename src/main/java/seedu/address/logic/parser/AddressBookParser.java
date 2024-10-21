@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AssignCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -56,40 +57,43 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+            case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+            case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+            case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+            case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+            case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+            case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+            case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+            case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case MarkPaidCommand.COMMAND_WORD:
+            case MarkPaidCommand.COMMAND_WORD:
             return new MarkPaidCommandParser().parse(arguments);
 
-        case MarkAttendanceCommand.COMMAND_WORD:
+            case MarkAttendanceCommand.COMMAND_WORD:
             return new MarkAttendanceCommandParser().parse(arguments);
 
-        case FilterPaidCommand.COMMAND_WORD:
+            case FilterPaidCommand.COMMAND_WORD:
             return new FilterPaidCommandParser().parse(arguments);
 
-        default:
+            case AssignCommand.COMMAND_WORD:
+                return new AssignCommandParser().parse(arguments);
+
+            default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

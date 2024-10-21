@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
 
 /**
@@ -87,6 +88,7 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //// person-level operations
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -107,10 +109,16 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
+    //// participation-level operations
+
+    @Override
+    public void addParticipation(Participation participation) {
+        addressBook.addParticipation(participation);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
