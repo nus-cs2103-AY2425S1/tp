@@ -50,7 +50,7 @@ public class JsonTutorialStorageTest {
         JsonTutorialStorage jsonTutorialStorage = new JsonTutorialStorage(filePath);
 
         // Step 1: Create a tutorial sample
-        Tutorial tutorialSample = new Tutorial(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorialSample = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
         ArrayList<Tutorial> tutorials = new ArrayList<>();
         tutorials.add(tutorialSample);
         TutorialList originalTutorials = new TutorialList(tutorials);

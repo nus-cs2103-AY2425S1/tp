@@ -110,6 +110,10 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
+        tutorials.deleteStudent(target);
+        for (Assignment assignment: assignmentList.getAssignments()) {
+            setAssignmentStatus(assignment, target, false);
+        }
     }
 
     @Override

@@ -87,7 +87,7 @@ public class JsonAdaptedTutorial {
             modelTutDates.add(tutDate.toModelType());
         }
 
-        Tutorial tutorial = new Tutorial(modelTutName, modelTutorialClass);
+        Tutorial tutorial = Tutorial.of(modelTutName, modelTutorialClass);
         for (Student student : modelStudents) {
             tutorial.add(student);
         }
