@@ -187,7 +187,8 @@ public class PersonDetailsWindow extends UiPart<Stage> {
 
             if (index == -1) {
                 logger.warning("Person not found in the list.");
-                showErrorAlert("Person Not Found", "The person you are editing was not found.", "The person may have been deleted.");
+                showErrorAlert("Person Not Found", "The person you are editing was not found.",
+                        "The person may have been deleted.");
                 return;
             }
 
