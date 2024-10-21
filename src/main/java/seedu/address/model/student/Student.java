@@ -32,6 +32,18 @@ public class Student {
     private List<Assignment> assignmentList = new ArrayList<Assignment>();
 
     /**
+     * Every field except assignmentList must be present and not null. Remark is empty
+     */
+    public Student(Name name, Phone phone, Email email, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.tags.addAll(tags);
+        this.remark = "";
+    }
+
+    /**
      * Every field except assignmentList must be present and not null.
      */
     public Student(Name name, Phone phone, Email email, Set<Tag> tags, String remark) {
