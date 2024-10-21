@@ -23,13 +23,6 @@ checkstyle {
 test {
     useJUnitPlatform()
 
-    // Enhance logging for failed tests
-    testLogging {
-        events "failed"
-        exceptionFormat = "short"
-        showStandardStreams = true
-    }
-
     doFirst {
         exclude "**/**UiTest*"
     }
