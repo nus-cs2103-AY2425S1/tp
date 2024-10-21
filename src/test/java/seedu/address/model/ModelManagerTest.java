@@ -16,6 +16,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -30,6 +31,7 @@ import seedu.address.storage.StorageManager;
  */
 public class ModelManagerTest {
 
+    private static final Path BACKUP_DIR = Paths.get("backups");
     @TempDir
     public Path temporaryFolder;
     private ModelManager modelManager;
@@ -50,6 +52,22 @@ public class ModelManagerTest {
         userPrefs = new UserPrefs(); // Initialize userPrefs
 
         modelManager = new ModelManager(new AddressBook(), new UserPrefs(), storage);
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        // Clean up any backup files created during the test
+        try (Stream<Path> paths = Files.walk(BACKUP_DIR)) {
+            paths.filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path);
+                            e.printStackTrace();
+                        }
+                    });
+        }
     }
 
     /**

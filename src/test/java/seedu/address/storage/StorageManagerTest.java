@@ -9,8 +9,11 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
+import java.util.stream.Stream;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -23,6 +26,7 @@ import seedu.address.model.UserPrefs;
 
 public class StorageManagerTest {
 
+    private static final Path BACKUP_DIR = Paths.get("backups");
     @TempDir
     public Path testFolder;
 
@@ -33,6 +37,22 @@ public class StorageManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("userPrefs.json"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+    }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        // Clean up any backup files created during the test
+        try (Stream<Path> paths = Files.walk(BACKUP_DIR)) {
+            paths.filter(Files::isRegularFile)
+                    .forEach(path -> {
+                        try {
+                            Files.deleteIfExists(path);
+                        } catch (IOException e) {
+                            System.err.println("Failed to delete file: " + path);
+                            e.printStackTrace();
+                        }
+                    });
+        }
     }
 
     private Path getTempFilePath(String fileName) {
