@@ -55,7 +55,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
         if (endDateTime.isBefore(startDateTime)) {
             throw new ParseException("The end time must be after the start time.");
         }
-        Appointment appointment = new Appointment(appointmentDescription, startDateTime, endDateTime, null);
+        Appointment appointment = new Appointment(appointmentDescription, startDateTime, endDateTime);
         return new AddAppointmentCommand(appointment, index);
     }
 

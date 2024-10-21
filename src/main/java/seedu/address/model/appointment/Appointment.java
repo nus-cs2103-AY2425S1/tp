@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
 
 /**
  * Represents an Appointment in the address book.
@@ -17,7 +16,6 @@ public class Appointment {
     public final String description;
     public final LocalDateTime start;
     public final LocalDateTime end;
-    public final Person person;
 
     /**
      * Constructs an {@code Appointment}.
@@ -26,11 +24,22 @@ public class Appointment {
      * @param start the start time in dd-MM-yyyy-HH-mm format.
      * @param end the end time in dd-MM-yyyy-HH-mm format.
      */
-    public Appointment(String description, LocalDateTime start, LocalDateTime end, Person person) {
+    public Appointment(String description, LocalDateTime start, LocalDateTime end) {
         this.description = description;
         this.start = start;
         this.end = end;
-        this.person = person;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public LocalDateTime getStart() {
+        return this.start;
+    }
+
+    public LocalDateTime getEnd() {
+        return this.end;
     }
 
     @Override
