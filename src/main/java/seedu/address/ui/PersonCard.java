@@ -47,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane allergies;
     @FXML
     private FlowPane priority;
     @FXML
@@ -61,6 +61,7 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         nric.setText(person.getNric().value);
@@ -69,22 +70,22 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        Text priorityText = new Text("Priority: ");
-        priorityText.getStyleClass().add("label-text");
-        priority.getChildren().add(priorityText);
+
+        generateFlowPaneBubbles("Priority: ", "label-text", priority);
+        generateFlowPaneBubbles("Medical Conditions: ", "label-text", medCons);
+        generateFlowPaneBubbles("Allergies: ", "label-text", allergies);
+        generateFlowPaneBubbles("Appointments: ", "label-text", appointments);
+
         applyPriorityBackground(priority, person.getPriority().priority);
-        Text medConsText = new Text("Medical Conditions:");
-        medConsText.getStyleClass().add("label-text");
-        medCons.getChildren().add(medConsText);
         addLabelsToFlowPane(person.getMedCons(), medCons);
-        Text allergyText = new Text("Allergies:");
-        allergyText.getStyleClass().add("label-text");
-        tags.getChildren().add(allergyText);
-        addLabelsToFlowPane(person.getAllergies(), tags);
-        Text appointmentText = new Text("Appointments:");
-        appointmentText.getStyleClass().add("label-text");
-        appointments.getChildren().add(appointmentText);
+        addLabelsToFlowPane(person.getAllergies(), allergies);
         addLabelsToFlowPane(person.getAppointments(), appointments);
+    }
+
+    private void generateFlowPaneBubbles(String textName, String className, FlowPane flowPane) {
+        Text text = new Text(textName);
+        text.getStyleClass().add(className);
+        flowPane.getChildren().add(text);
     }
 
     private <T extends Comparable<T>> void addLabelsToFlowPane(Set<T> items, FlowPane flowPane) {

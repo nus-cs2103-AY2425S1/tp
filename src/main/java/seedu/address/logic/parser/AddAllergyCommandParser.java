@@ -36,19 +36,14 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NRIC);
 
-        try {
-            Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
-            Set<Allergy> allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
+        Nric nric = ParserUtil.parseNric(argMultimap.getValue(PREFIX_NRIC).get());
+        Set<Allergy> allergies = ParserUtil.parseAllergies(argMultimap.getAllValues(PREFIX_ALLERGY));
 
-            logger.info("Successfully parsed nric for AddAllergyCommand: " + nric);
-            logger.info("Successfully parsed allergies for AddAllergyCommand: " + allergies);
+        logger.info("Successfully parsed nric for AddAllergyCommand: " + nric);
+        logger.info("Successfully parsed allergies for AddAllergyCommand: " + allergies);
 
-            return new AddAllergyCommand(nric, allergies);
-        } catch (ParseException pe) {
-            logger.warning("Unable to parse the nric or allergies for FindNricCommand: " + args);
-            throw new ParseException(
-                    String.format(AddAllergyCommand.MESSAGE_CONSTRAINT, AddAllergyCommand.MESSAGE_USAGE), pe);
-        }
+        return new AddAllergyCommand(nric, allergies);
+
     }
 
     /**
