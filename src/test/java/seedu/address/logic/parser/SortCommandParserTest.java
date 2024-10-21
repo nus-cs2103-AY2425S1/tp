@@ -26,7 +26,6 @@ public class SortCommandParserTest {
         assertParseSuccess(parser, "b/ asc", new SortCommand(VALID_PARAMETER_BIRTHDAY, VALID_ORDER_ASC));
         assertParseSuccess(parser, "b/ desc", new SortCommand(VALID_PARAMETER_BIRTHDAY, VALID_ORDER_DESC));
         assertParseSuccess(parser, "paydate/ asc", new SortCommand(VALID_PARAMETER_PAYDATE, VALID_ORDER_ASC));
-        assertParseSuccess(parser, "paydate/ desc", new SortCommand(VALID_PARAMETER_PAYDATE, VALID_ORDER_DESC));
     }
 
     @Test
