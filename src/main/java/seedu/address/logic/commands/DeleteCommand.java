@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
@@ -28,10 +30,12 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_NAMES = "Multiple persons found with the name '%1$s'."
             + " Please specify the index to delete:\n%2$s";
 
+    private static final Stack<Person> deletedPersons = new Stack<>();
+    private static final Stack<Policy> deletedPolicies = new Stack<>();
+
     private final Index targetIndex;
     private final Name targetName;
     private final Index policyIndex;
-
     /**
      * Creates a DeleteCommand to delete the person at the specified {@code Index}.
      *
@@ -78,12 +82,14 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            deletedPersons.push(personToDelete);
 
             if (policyIndex != null) {
                 if (policyIndex.getZeroBased() >= personToDelete.getPolicies().size()) {
                     throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
                 }
                 Policy policyToDelete = personToDelete.getPolicies().get(policyIndex.getZeroBased());
+                deletedPolicies.push(policyToDelete);
                 personToDelete.removePolicy(policyToDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_POLICY_SUCCESS, policyIndex
                         .getOneBased(), personToDelete.getName()));
@@ -123,6 +129,30 @@ public class DeleteCommand extends Command {
                 return new CommandResult(message);
             }
         }
+    }
+
+    /**
+     * Undoes the last delete operation performed by the `DeleteCommand`.
+     * If a policy was deleted, it restores the policy to the person it was removed from.
+     * If a person was deleted, it restores the person to the address book.
+     *
+     * @param model The model to which the undo operation will be applied.
+     * @return A `CommandResult` indicating the result of the undo operation.
+     */
+    public static CommandResult undo(Model model) {
+        if (!deletedPolicies.isEmpty()) {
+            Policy policyToRestore = deletedPolicies.pop();
+            Person personToRestore = deletedPersons.peek();
+            List<Policy> policies = new ArrayList<>(personToRestore.getPolicies());
+            policies.add(policyToRestore);
+            personToRestore.setPolicies(policies);
+            return new CommandResult("Undo successful: Policy restored.");
+        } else if (!deletedPersons.isEmpty()) {
+            Person personToRestore = deletedPersons.pop();
+            model.addPerson(personToRestore);
+            return new CommandResult("Undo successful: " + personToRestore.getName() + " restored.");
+        }
+        return new CommandResult("No deletions to undo.");
     }
 
     @Override
