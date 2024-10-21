@@ -157,7 +157,7 @@ Removes an internship record for an existing company in the address book.
 
 Format: `withdraw INDEX APPLICATION_INDEX`
 
-* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`. 
+* Removes the application record numbered `APPLICATION_INDEX` for the company at the specified `INDEX`.
 The index refers to the index number shown in the displayed company list. The index **must be a positive integer** 1, 2, 3, …​
 
 <box type="tip" seamless>
@@ -264,7 +264,7 @@ _Details coming soon ..._
 ## Glossary
 - **CLI** (Command Line Interface): A text-based interface used to interact with the application by typing commands.
 - **GUI** (Graphical User Interface): A visual interface that allows users to interact with the application through graphical elements such as buttons, icons, and windows.
-- **Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app. 
+- **Address Book**: A digital record or collection of companies or contacts managed by the InternBuddy app.
 - **Application Record**: A record associated with a company indicating an internship or job application status, such as "APPLIED," "INTERVIEWED," or "REJECTED."
 - **Command**: A specific instruction typed in the CLI to perform an action within the InternBuddy application.
 - **Parameter**: Information or input that must be provided along with a command. In the guide, parameters are represented in UPPER_CASE (e.g., n/NAME).
