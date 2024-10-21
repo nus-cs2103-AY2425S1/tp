@@ -39,6 +39,14 @@ class JsonAdaptedTutorial {
         course = new JsonAdaptedCourse(source.getCourse());
     }
 
+    public String getTutorialId() {
+        return this.tutorialId;
+    }
+
+    public JsonAdaptedCourse getAdaptedCourse() {
+        return this.course;
+    }
+
     /**
      * Converts a JSON-adapted Tutorial object to a model Tutorial object.
      * Validates the fields of the JSON-adapted Tutorial object before conversion.
