@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalAssignments.BENSON_BETA;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalProjects.ALPHA;
 import static seedu.address.testutil.TypicalProjects.BETA;
 
 import java.util.Arrays;
@@ -17,11 +19,52 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
+import seedu.address.model.project.ProjectId;
 import seedu.address.testutil.AssignmentBuilder;
 
 public class UniqueAssignmentListTest {
 
     private final UniqueAssignmentList uniqueAssignmentList = new UniqueAssignmentList();
+
+    @Test
+    public void getAssignment_nullAssignmentId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.getAssignment((AssignmentId) null));
+    }
+
+    @Test
+    public void getAssignment_assignmentNotInList_throwAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () ->
+                uniqueAssignmentList.getAssignment(ALICE_ALPHA.getAssignmentId()));
+    }
+
+    @Test
+    public void getAssignment_assignmentInList_returnsAssignment() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        assertEquals(ALICE_ALPHA, uniqueAssignmentList.getAssignment(ALICE_ALPHA.getAssignmentId()));
+    }
+
+    ////////////////////////
+    @Test
+    public void getAssignment_nullProjectId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.getAssignment(null, ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void getAssignment_nullEmployeeId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.getAssignment(ALPHA.getId(), null));
+    }
+
+    @Test
+    public void getAssignment_assignmentWithProjectIdAndEmployeeIdNotInList_throwAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () ->
+                uniqueAssignmentList.getAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void getAssignment_assignmentWithProjectIdAndEmployeeIdInList_returnsAssignment() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        assertEquals(ALICE_ALPHA, uniqueAssignmentList.getAssignment(ALPHA.getId(), ALICE.getEmployeeId()));
+    }
 
     @Test
     public void contains_nullAssignment_throwsNullPointerException() {
@@ -113,6 +156,48 @@ public class UniqueAssignmentListTest {
     public void remove_existingAssignment_removesAssignment() {
         uniqueAssignmentList.add(ALICE_ALPHA);
         uniqueAssignmentList.remove(ALICE_ALPHA);
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void remove_nullAssignmentId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.remove((AssignmentId) null));
+    }
+
+    @Test
+    public void remove_assignmentIdDoesNotExist_throwsAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.remove(ALICE_ALPHA.getAssignmentId()));
+    }
+
+    @Test
+    public void remove_existingAssignmentId_removesAssignment() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        uniqueAssignmentList.remove(ALICE_ALPHA.getAssignmentId());
+        UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
+        assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
+    }
+
+    @Test
+    public void remove_nullProjectId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.remove(null, ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void remove_nullEmployeeId_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> uniqueAssignmentList.remove(ALPHA.getId(), null));
+    }
+
+    @Test
+    public void remove_assignmentWithProjectIdAndEmployeeIdDoesNotExist_throwsAssignmentNotFoundException() {
+        assertThrows(AssignmentNotFoundException.class, () -> uniqueAssignmentList.remove(ALPHA.getId()
+                , ALICE.getEmployeeId()));
+    }
+
+    @Test
+    public void remove_existingAssignmentWithProjectIdAndEmployeeId_removesAssignment() {
+        uniqueAssignmentList.add(ALICE_ALPHA);
+        uniqueAssignmentList.remove(ALPHA.getId(), ALICE.getEmployeeId());
         UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
         assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
     }

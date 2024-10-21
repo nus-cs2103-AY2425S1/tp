@@ -190,7 +190,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setProject(Project target, Project editedProject) {
         requireNonNull(editedProject);
-
         projects.setProject(target, editedProject);
     }
 
@@ -243,6 +242,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code assignment} must exist in the address book.
      */
     public void removeAssignment(Assignment assignment) {
+        requireNonNull(assignment);
         assignments.remove(assignment);
     }
 
@@ -251,6 +251,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code assignment} must exist in the address book.
      */
     public void removeAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
         assignments.remove(assignmentId);
     }
 
@@ -259,6 +260,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code assignment} must exist in the address book.
      */
     public void removeAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
         assignments.remove(projectId, employeeId);
     }
     //// util methods

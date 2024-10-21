@@ -76,13 +76,10 @@ public class UnassignCommand extends Command {
         if (assignmentId != null) {
             model.deleteAssignment(assignmentId);
             return new CommandResult(String.format(MESSAGE_SUCCESS_ASSIGNMENT_ID, assignmentId));
-        }
-
-        if (projectId != null && employeeId != null) {
+        }else {
             model.deleteAssignment(projectId, employeeId);
             return new CommandResult(String.format(MESSAGE_SUCCESS, employeeId, projectId));
         }
-        throw new CommandException(MESSAGE_ASSIGNMENT_NOT_FOUND);
     }
 
     @Override

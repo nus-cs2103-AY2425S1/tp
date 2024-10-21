@@ -11,6 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_ALPHA;
 import static seedu.address.logic.commands.CommandTestUtil.PROJECT_ID_DESC_BETA;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_ID_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMPLOYEE_ID_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PROJECT_ID_ALPHA;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
@@ -55,6 +57,18 @@ public class UnassignCommandParserTest {
     }
 
     @Test
+    public void parse_invalidValue_failure() {
+        // invalid projectId
+        assertParseFailure(parser, INVALID_PROJECT_ID_DESC + VALID_EMPLOYEE_ID_AMY,
+               String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignCommand.MESSAGE_USAGE));
+
+        // invalid employeeId
+        assertParseFailure(parser, INVALID_EMPLOYEE_ID_DESC + VALID_PROJECT_ID_ALPHA,
+               String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnassignCommand.MESSAGE_USAGE));
+
+    }
+
+    @Test
     public void parse_repeatedValue_failure() {
         String validExpectedProjectIdAndEmployeeIdString = PROJECT_ID_DESC_BETA
                 + EMPLOYEE_ID_DESC_BOB;
@@ -89,7 +103,7 @@ public class UnassignCommandParserTest {
         assertParseFailure(parser, INVALID_PROJECT_ID_DESC + validExpectedProjectIdAndEmployeeIdString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PROJECT_ID));
 
-        // invalid phone
+        // invalid employeeId
         assertParseFailure(parser, INVALID_EMPLOYEE_ID_DESC + validExpectedProjectIdAndEmployeeIdString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMPLOYEE_ID));
 
@@ -103,7 +117,7 @@ public class UnassignCommandParserTest {
         assertParseFailure(parser, validExpectedProjectIdAndEmployeeIdString + INVALID_PROJECT_ID_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PROJECT_ID));
 
-        // invalid phone
+        // invalid employeeId
         assertParseFailure(parser, validExpectedProjectIdAndEmployeeIdString + INVALID_EMPLOYEE_ID_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_EMPLOYEE_ID));
     }
@@ -131,6 +145,5 @@ public class UnassignCommandParserTest {
         // too much prefix
         assertParseFailure(parser, ASSIGNMENT_ID_DESC_ONE + PROJECT_ID_DESC_ALPHA + EMPLOYEE_ID_DESC_BOB,
                 expectedMessage);
-
     }
 }

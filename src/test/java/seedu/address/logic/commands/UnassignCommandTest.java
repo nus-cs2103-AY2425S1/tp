@@ -82,6 +82,18 @@ public class UnassignCommandTest {
     }
 
     @Test
+    public void execute_projectIdAndEmployeeIdNotFound_throwsCommandException() {
+        Assignment validAssignment = new AssignmentBuilder().build();
+        UnassignCommand unassignCommand = new UnassignCommand(validAssignment.getProject().getId(),
+                validAssignment.getPerson().getEmployeeId());
+        UnassignCommandTest.ModelStub modelStub = new UnassignCommandTest.ModelStubWithNoAssignment();
+        assertThrows(CommandException.class,
+                UnassignCommand.MESSAGE_ASSIGNMENT_NOT_FOUND, () -> {
+                    unassignCommand.execute(modelStub);
+                });
+    }
+
+    @Test
     public void equals() {
         Assignment alphaAlice = new AssignmentBuilder().withAssignmentId("1").withProject(ALPHA)
                 .withPerson(ALICE).build();
@@ -294,6 +306,26 @@ public class UnassignCommandTest {
         @Override
         public void updateFilteredAssignmentList(Predicate<Assignment> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+    }
+    /**
+     * A Model stub that contains a single assignment.
+     */
+    private class ModelStubWithNoAssignment extends UnassignCommandTest.ModelStub {
+        ModelStubWithNoAssignment() {
+        }
+
+        @Override
+        public boolean hasAssignment(AssignmentId assignmentId) {
+            requireNonNull(assignmentId);
+            return false;
+        }
+
+        @Override
+        public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+            requireNonNull(projectId);
+            requireNonNull(employeeId);
+            return false;
         }
     }
 

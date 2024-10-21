@@ -105,10 +105,13 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      */
     public Assignment getAssignment(AssignmentId assignmentId) {
         requireNonNull(assignmentId);
-        return internalList
-                .stream()
+        Assignment assignment = internalList.stream()
                 .filter(a -> a.isSameAssignment(assignmentId))
                 .findFirst().orElse(null);
+        if (assignment == null) {
+            throw new AssignmentNotFoundException();
+        }
+        return assignment;
     }
 
     /**
@@ -117,10 +120,14 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     public Assignment getAssignment(ProjectId projectId, EmployeeId employeeId) {
         requireNonNull(projectId);
         requireNonNull(employeeId);
-        return internalList
+        Assignment assignment = internalList
                 .stream()
                 .filter(a -> a.isSameAssignment(projectId, employeeId))
                 .findFirst().orElse(null);
+        if (assignment == null) {
+            throw new AssignmentNotFoundException();
+        }
+        return assignment;
     }
 
     /**
