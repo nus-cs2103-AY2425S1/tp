@@ -17,7 +17,6 @@ import seedu.address.model.person.role.Role;
  * A utility class to help with building EditPersonDescriptor objects.
  */
 public class EditPersonDescriptorBuilder {
-
     private EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
@@ -29,7 +28,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details
+     * Returns an {@code EditPersonDescriptor} with fields containing {@code person}'s details.
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
@@ -41,7 +40,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@link Name} of the {@link EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));

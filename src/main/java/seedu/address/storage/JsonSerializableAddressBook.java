@@ -30,7 +30,7 @@ class JsonSerializableAddressBook {
 
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         events.addAll(source.getEventList().stream()
-                .map(event -> new JsonAdaptedEvent(event.getName().toString()))
+                .map(JsonAdaptedEvent::new)
                 .toList());
         persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).toList());
     }

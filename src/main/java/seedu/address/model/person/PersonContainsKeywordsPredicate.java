@@ -20,7 +20,7 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> (StringUtil.containsSubstringIgnoreCase(person.getName().fullName, keyword)
+                .anyMatch(keyword -> (StringUtil.containsSubstringIgnoreCase(person.getName().toString(), keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getPhone().value, keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getEmail().value, keyword)
                         || StringUtil.containsSubstringIgnoreCase(person.getEvents().stream().map(Event::toString)
