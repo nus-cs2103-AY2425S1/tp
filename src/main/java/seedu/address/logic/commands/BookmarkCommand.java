@@ -49,9 +49,9 @@ public class BookmarkCommand extends Command {
 
         Company companyToBookmark = lastShownList.get(index.getZeroBased());
 
-        // Check if company is even not bookmarkde in the first place
+        // Check if company is not bookmarked in the first place
         if (companyToBookmark.getIsBookmark().getIsBookmarkValue()) {
-            return new CommandResult(generateSuccessMessage(companyToBookmark));
+            throw new CommandException(MESSAGE_BOOKMARK_FAILURE);
         }
 
         Company companyBookmarked = new Company(companyToBookmark.getName(), companyToBookmark.getPhone(),
@@ -61,7 +61,8 @@ public class BookmarkCommand extends Command {
         model.setCompany(companyToBookmark, companyBookmarked);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
-        return new CommandResult(generateSuccessMessage(companyToBookmark));
+        return new CommandResult(String.format(MESSAGE_BOOKMARK_SUCCESS,
+                Messages.format(companyToBookmark)));
     }
 
     @Override
@@ -76,12 +77,5 @@ public class BookmarkCommand extends Command {
 
         BookmarkCommand e = (BookmarkCommand) other;
         return index.equals(e.index);
-    }
-
-    private String generateSuccessMessage(Company companyToBookmark) {
-        String message = (!companyToBookmark.getIsBookmark().getIsBookmarkValue())
-                ? MESSAGE_BOOKMARK_SUCCESS
-                : MESSAGE_BOOKMARK_FAILURE;
-        return String.format(message, Messages.format(companyToBookmark));
     }
 }

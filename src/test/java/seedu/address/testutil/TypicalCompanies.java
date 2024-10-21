@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.company.Address;
 import seedu.address.model.company.Company;
 
 /**
@@ -31,7 +32,7 @@ public class TypicalCompanies {
     public static final Company META = new CompanyBuilder().withName("Meta")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("meta@example.com").withPhone("00000002")
-            .withTags("bigTech", "facebook").build();
+            .withTags("bigTech", "facebook").withIsBookmark(true).build();
     public static final Company GRAB = new CompanyBuilder().withName("Grab").withPhone("00000003")
             .withEmail("grab@example.com").withAddress("wall street").build();
     public static final Company SHOPEE = new CompanyBuilder().withName("Shopee").withPhone("00000004")
@@ -64,7 +65,7 @@ public class TypicalCompanies {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical companies.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -77,6 +78,4 @@ public class TypicalCompanies {
     public static List<Company> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(GOOGLE, META, GRAB, SHOPEE, APPLE, BYTEDANCE, AMAZON));
     }
-
-
 }

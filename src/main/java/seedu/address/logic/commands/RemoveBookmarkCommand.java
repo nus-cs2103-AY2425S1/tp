@@ -47,7 +47,7 @@ public class RemoveBookmarkCommand extends Command {
 
         // Check if company is even bookmarked in the first place
         if (!companyToRemoveBookmark.getIsBookmark().getIsBookmarkValue()) {
-            return new CommandResult(generateSuccessMessage(companyToRemoveBookmark));
+            throw new CommandException(MESSAGE_REMOVE_BOOKMARK_FAILURE);
         }
 
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(), companyToRemoveBookmark.getPhone(),
@@ -58,7 +58,8 @@ public class RemoveBookmarkCommand extends Command {
         model.setCompany(companyToRemoveBookmark, companyRemovedBookmark);
         model.updateFilteredCompanyList(Model.PREDICATE_SHOW_ALL_COMPANIES);
 
-        return new CommandResult(generateSuccessMessage(companyToRemoveBookmark));
+        return new CommandResult(String.format(MESSAGE_REMOVE_BOOKMARK_SUCCESS,
+                Messages.format(companyToRemoveBookmark)));
     }
 
     @Override
@@ -73,12 +74,5 @@ public class RemoveBookmarkCommand extends Command {
 
         RemoveBookmarkCommand e = (RemoveBookmarkCommand) other;
         return index.equals(e.index);
-    }
-
-    private String generateSuccessMessage(Company companyToBookmark) {
-        String message = (companyToBookmark.getIsBookmark().getIsBookmarkValue())
-                ? MESSAGE_REMOVE_BOOKMARK_SUCCESS
-                : MESSAGE_REMOVE_BOOKMARK_FAILURE;
-        return String.format(message, Messages.format(companyToBookmark));
     }
 }

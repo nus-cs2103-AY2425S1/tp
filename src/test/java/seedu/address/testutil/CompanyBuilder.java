@@ -110,8 +110,11 @@ public class CompanyBuilder {
         return this;
     }
 
-    public CompanyBuilder withIsBookmark() {
-        this.isBookmark = new Bookmark(false);
+    /**
+     * Sets the {@code isBookmark} of the {@code Company} that we are building
+     */
+    public CompanyBuilder withIsBookmark(boolean value) {
+        this.isBookmark = new Bookmark(value);
         return this;
     }
 
