@@ -128,6 +128,12 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Sorting persons by name: `sort`
+
+Sorts list of persons alphabetically by name.
+
+Format: `sort`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from Cher.
