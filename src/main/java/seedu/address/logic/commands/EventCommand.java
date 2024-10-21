@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_ATTENDEE_NOT_FOUND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -29,11 +31,13 @@ public class EventCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the address book.\n"
             + "Parameters: "
             + PREFIX_NAME + "EVENT NAME "
-            + PREFIX_DATE + "DATE (yyyy-mm-dd) \n"
+            + PREFIX_DATE + "DATE (yyyy-mm-dd) "
+            + PREFIX_ATTENDEES + "ATTENDEES BASED ON ADDRESS BOOK INDEXING \n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + "New Year's Party "
-            + PREFIX_DATE + "2025-01-01";
+            + PREFIX_DATE + "2025-01-01 "
+            + PREFIX_ATTENDEES + "1 2 4 5";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";
@@ -56,7 +60,12 @@ public class EventCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Set<Person> attendees = new HashSet<>();
+        int size = model.getAddressBook().getPersonList().size();
         for (Index index : this.attendeeIndexes) {
+            if (index.getZeroBased() >= size) {
+                throw new CommandException(MESSAGE_ATTENDEE_NOT_FOUND);
+            }
+
             Person attendee = model.getAddressBook().getPersonList().get(index.getZeroBased());
             attendees.add(attendee);
         }
