@@ -55,7 +55,11 @@ public class FunctionalBrowser implements seedu.address.commons.core.Browser {
         requireNonNull(url);
         try {
             URI uri = new URI(url);
-            this.desktop.browse(uri);
+            if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+                this.desktop.browse(uri);
+            } else {
+                throw new CommandException("The current OS does not support browser extensions");
+            }
         } catch (URISyntaxException e) {
             throw new CommandException("The URI specified is invalid.");
         }
