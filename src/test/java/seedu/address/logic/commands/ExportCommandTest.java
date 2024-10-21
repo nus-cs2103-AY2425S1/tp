@@ -78,7 +78,7 @@ public class ExportCommandTest {
     }
 
     @Test
-    public void parseInvalidTag_NoBraces() {
+    public void parseInvalidTagNoBraces() {
         String input = "\"friends\" : null";
         String expectedOutput = "\"friends\" : null";
         String result = parseTags(input);
