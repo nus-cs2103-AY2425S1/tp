@@ -43,6 +43,7 @@ public class AddClassCommand extends Command {
      */
     public AddClassCommand(Ic toAddIc, Subject toAddSubject) {
         requireNonNull(toAddIc);
+        requireNonNull(toAddSubject);
         this.toAddIc = toAddIc;
         this.toAddSubject = toAddSubject;
     }

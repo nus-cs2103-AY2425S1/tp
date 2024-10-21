@@ -40,7 +40,6 @@ public class FilterCommand extends Command {
         // Ensure that the filterParam and filterValue are not null using assertions
         assert filterParam != null : "FilterParam should not be null";
         assert filterValue != null : "FilterValue should not be null";
-        assert filterValue != null : "FilterValue should not be null";
 
         // Null-check validation
         requireAllNonNull(filterParam);

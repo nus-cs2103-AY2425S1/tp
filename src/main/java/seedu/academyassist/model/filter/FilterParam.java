@@ -27,10 +27,8 @@ public class FilterParam {
         requireNonNull(filterParamString);
         AppUtil.checkArgument(isValidFilterParam(filterParamString), MESSAGE_CONSTRAINTS);
         if (filterParamString.equals("yearGroup")) {
-            System.out.println("yearGroup");
             this.field = FilterField.YEARGROUP;
         } else if (filterParamString.equals("subject")) {
-            System.out.println("subject");
             this.field = FilterField.SUBJECT;
         }
     }

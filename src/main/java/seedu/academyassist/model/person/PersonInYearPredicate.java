@@ -24,7 +24,7 @@ public class PersonInYearPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof NameContainsKeywordsPredicate)) {
+        if (!(other instanceof PersonInYearPredicate)) {
             return false;
         }
 
