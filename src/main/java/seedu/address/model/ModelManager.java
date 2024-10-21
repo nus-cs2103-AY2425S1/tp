@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonComparator;
 
@@ -147,11 +148,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonList(String Parameter, boolean isAscending) {
+    public void sortFilteredPersonList(String Parameter, boolean isAscending) throws CommandException {
         if (isAscending) {
-            filteredPersons.sort(PersonComparator.getComparator(Parameter));
+            filteredPersons.sort(new PersonComparator().getComparator(Parameter));
         } else {
-            filteredPersons.sort(PersonComparator.getComparator(Parameter).reversed());
+            filteredPersons.sort(new PersonComparator().getComparator(Parameter).reversed());
         }
     }
 

@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class SortCommand extends Command {
@@ -35,7 +36,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.sortFilteredPersonList(sortParameter, isAscendingOrder);
         return new CommandResult(MESSAGE_SUCCESS);
