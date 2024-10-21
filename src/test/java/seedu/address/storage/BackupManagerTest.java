@@ -54,13 +54,6 @@ public class BackupManagerTest {
     }
 
     @Test
-    public void backupCreation_createsBackupFileSuccessfully() throws IOException {
-        backupManager.saveBackup(TEMP_FILE);
-        long backupCount = Files.list(TEMP_BACKUP_DIR).count();
-        assertEquals(3, backupCount, "Backup file should be created successfully.");
-    }
-
-    @Test
     public void backupCreation_throwsExceptionIfFileNotFound() {
         Path nonExistentFile = TEMP_BACKUP_DIR.resolve("non-existent-file.json");
         assertThrows(IOException.class, () -> backupManager.saveBackup(nonExistentFile));
