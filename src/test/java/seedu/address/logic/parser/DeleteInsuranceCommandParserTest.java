@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INSURANCE_ID;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CLIENT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FOURTH_CLIENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,7 +40,8 @@ public class DeleteInsuranceCommandParserTest {
     public void parse_invalidIndex_throwsParseException() {
         // Invalid index input (non-numeric)
         String invalidUserInput = "invalidIndex " + PREFIX_INSURANCE_ID + VALID_INSURANCE_ID;
-        assertParseFailure(parser, invalidUserInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, invalidUserInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -51,7 +52,8 @@ public class DeleteInsuranceCommandParserTest {
     public void parse_missingInsuranceId_throwsParseException() {
         // Missing insurance ID
         String missingInsuranceIdInput = INDEX_FOURTH_CLIENT + " " + PREFIX_INSURANCE_ID;
-        assertParseFailure(parser, missingInsuranceIdInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, missingInsuranceIdInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -62,6 +64,7 @@ public class DeleteInsuranceCommandParserTest {
     public void parse_invalidInsuranceId_throwsParseException() {
         // Invalid insurance ID (non-numeric)
         String invalidInsuranceIdInput = INDEX_FOURTH_CLIENT + " " + PREFIX_INSURANCE_ID + "invalidId";
-        assertParseFailure(parser, invalidInsuranceIdInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, invalidInsuranceIdInput,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteInsuranceCommand.MESSAGE_USAGE));
     }
 }
