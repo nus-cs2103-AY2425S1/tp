@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import tutorease.address.commons.util.StringUtil;
 import tutorease.address.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Lesson}'s student's {@code Name} matches any of the keywords given.
+ */
 public class LessonContainsNamesPredicate implements Predicate<Lesson> {
     private final List<String> keywords;
 
