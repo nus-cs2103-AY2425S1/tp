@@ -150,8 +150,6 @@ public class ExportCommand extends Command {
                 }
                 writer.println(String.join(",", rowData));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
