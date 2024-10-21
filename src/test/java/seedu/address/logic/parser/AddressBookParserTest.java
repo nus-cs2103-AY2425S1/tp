@@ -51,7 +51,12 @@ import seedu.address.logic.commands.FilterClientCommand;
 import seedu.address.logic.commands.FilterPropertyCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBuyersCommand;
+import seedu.address.logic.commands.ListClientsCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListMeetingsCommand;
+import seedu.address.logic.commands.ListPropertiesCommand;
+import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Name;
@@ -199,13 +204,18 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
-    //TODO: Update test to reflect new ListCommand @apollo-tan
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/buyers") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/buyers")
+                instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers")
+                instanceof ListSellersCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties")
+                instanceof ListPropertiesCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients")
+                instanceof ListClientsCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/meetings")
+                instanceof ListMeetingsCommand);
     }
 
     @Test

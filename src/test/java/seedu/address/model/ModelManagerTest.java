@@ -24,7 +24,7 @@ import java.util.function.Predicate;
 import org.junit.jupiter.api.Test;
 
 import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -39,6 +39,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBookBuilder;
 import seedu.address.testutil.MeetingBookBuilder;
+
 
 public class ModelManagerTest {
 
@@ -282,22 +283,53 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getIsDisplayClientsProperty_returnsBooleanPropertyType() {
+    public void getDisplayMode_returnsObjectPropertyType() {
         // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
 
-        // Assert that the result is an instance of BooleanProperty
-        assertTrue(result instanceof BooleanProperty, "Expected result to be an instance of BooleanProperty");
+        // Assert that the result is an instance of ObjectProperty
+        assertTrue(result instanceof ObjectProperty, "Expected result to be an instance of ObjectProperty");
     }
 
     @Test
-    public void getIsDisplayClientsProperty_isObservable() {
+    public void getDisplayMode_isObservable() {
         // Call the method
-        BooleanProperty result = modelManager.getIsDisplayClientsProperty();
+        ObjectProperty<ModelManager.DisplayMode> result = modelManager.getDisplayMode();
 
         // Assert that the result is an instance of Observable
         assertTrue(result instanceof Observable, "Expected result to be an instance of Observable");
     }
+
+    @Test
+    public void setDisplayClients_setsDisplayModeToClients() {
+        // Set display mode to CLIENTS
+        modelManager.setDisplayClients();
+        assertEquals(
+                ModelManager.DisplayMode.CLIENTS, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be CLIENTS"
+        );
+    }
+
+    @Test
+    public void setDisplayProperties_setsDisplayModeToProperties() {
+        // Set display mode to PROPERTIES
+        modelManager.setDisplayProperties();
+        assertEquals(
+                ModelManager.DisplayMode.PROPERTIES, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be PROPERTIES"
+        );
+    }
+
+    @Test
+    public void setDisplayMeetings_setsDisplayModeToMeetings() {
+        // Set display mode to MEETINGS
+        modelManager.setDisplayMeetings();
+        assertEquals(
+                ModelManager.DisplayMode.MEETINGS, modelManager.getDisplayMode().getValue(),
+                "Expected display mode to be MEETINGS"
+        );
+    }
+
 
     @Test
     public void testBuyerPredicate() {

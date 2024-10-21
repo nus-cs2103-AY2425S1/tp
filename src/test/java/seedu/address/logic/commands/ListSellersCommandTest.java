@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.getTypicalClientBook;
 import static seedu.address.testutil.TypicalMeetings.getTypicalMeetingBook;
@@ -47,4 +48,35 @@ public class ListSellersCommandTest {
     public void keywordEqualsSellers() {
         assertEquals("sellers", ListSellersCommand.KEY_WORD);
     }
+
+    @Test
+    void equals_sameCommand_returnsTrue() {
+        // Arrange
+        ListSellersCommand listSellersCommand1 = new ListSellersCommand();
+        ListSellersCommand listSellersCommand2 = new ListSellersCommand(); // Same command
+
+        // Act & Assert
+        assertEquals(listSellersCommand1, listSellersCommand2); // Different instances, same command type
+    }
+
+    @Test
+    void equals_differentCommand_returnsFalse() {
+        // Arrange
+        ListSellersCommand listSellersCommand = new ListSellersCommand();
+        ListClientsCommand listClientsCommand = new ListClientsCommand(); // Different subclass of ListCommand
+
+        // Act & Assert
+        assertNotEquals(listSellersCommand, listClientsCommand); // Commands should not be equal
+    }
+
+    @Test
+    void equals_differentObject_returnsFalse() {
+        // Arrange
+        ListSellersCommand listSellersCommand = new ListSellersCommand();
+        Object differentObject = new Object(); // Completely different object type
+
+        // Act & Assert
+        assertNotEquals(listSellersCommand, differentObject); // Comparing with a different type of object
+    }
+
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
@@ -113,6 +114,16 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    // Valid static keys for commands
+    public static final String VALID_KEY_CLIENTS_DESC = " " + PREFIX_KEY + ListClientsCommand.KEY_WORD;
+    public static final String VALID_KEY_BUYERS_DESC = " " + PREFIX_KEY + ListBuyersCommand.KEY_WORD;
+    public static final String VALID_KEY_SELLERS_DESC = " " + PREFIX_KEY + ListSellersCommand.KEY_WORD;
+    public static final String VALID_KEY_PROPERTIES_DESC = " " + PREFIX_KEY + ListPropertiesCommand.KEY_WORD;
+    public static final String VALID_KEY_MEETINGS_DESC = " " + PREFIX_KEY + ListMeetingsCommand.KEY_WORD;
+    public static final String INVALID_KEY = "someRandomKey";
+    public static final String INVALID_KEY_DESC = " " + PREFIX_KEY + INVALID_KEY;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

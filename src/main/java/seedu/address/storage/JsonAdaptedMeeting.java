@@ -32,7 +32,7 @@ class JsonAdaptedMeeting {
      * Converts a given {@code Meeting} into this class for Jackson use.
      */
     public JsonAdaptedMeeting(Meeting source) {
-        meetingTitle = source.getMeetingTitle().meetingTitle;
+        meetingTitle = source.getMeetingTitle().value;
         meetingDate = source.getMeetingDate().value;
     }
 
