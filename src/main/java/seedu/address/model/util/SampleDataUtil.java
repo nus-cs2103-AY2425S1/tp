@@ -13,6 +13,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,23 +24,28 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), Optional.of(new Email("alexyeoh@example.com")),
                     Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")), getTagSet("friends"),
-                    Optional.of(new DateOfLastVisit("01-01-2024"))),
+                    Optional.of(new DateOfLastVisit("01-01-2024")), new Remark("")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), Optional.of(new Email("berniceyu@example.com")),
                     Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
-                    getTagSet("colleagues", "friends"), Optional.of(new DateOfLastVisit("02-02-2024"))),
+                    getTagSet("colleagues", "friends"), Optional.of(new DateOfLastVisit("02-02-2024")),
+                    new Remark("Lives in HDB and has 3 children")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"),
                     Optional.of(new Email("charlotte@example.com")),
                     Optional.of(new Address("Blk 11 Ang Mo Kio Street 74, #11-04")),
-                    getTagSet("neighbours"), Optional.of(new DateOfLastVisit("03-03-2024"))),
+                    getTagSet("neighbours"), Optional.of(new DateOfLastVisit("03-03-2024")),
+                    new Remark("")),
             new Person(new Name("David Li"), new Phone("91031282"), Optional.of(new Email("lidavid@example.com")),
                 Optional.of(new Address("Blk 436 Serangoon Gardens Street 26, #16-43")),
-                getTagSet("family"), Optional.of(new DateOfLastVisit("04-04-2024"))),
+                getTagSet("family"), Optional.of(new DateOfLastVisit("04-04-2024")),
+                    new Remark("Has no children")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), Optional.of(new Email("irfan@example.com")),
                 Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")),
-                getTagSet("classmates"), Optional.of(new DateOfLastVisit("05-05-2024"))),
+                getTagSet("classmates"), Optional.of(new DateOfLastVisit("05-05-2024")),
+                    new Remark("Has no family")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), Optional.of(new Email("royb@example.com")),
                 Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
-                getTagSet("colleagues"), Optional.of(new DateOfLastVisit("06-06-2024")))
+                getTagSet("colleagues"), Optional.of(new DateOfLastVisit("06-06-2024")),
+                    new Remark(""))
         };
     }
 

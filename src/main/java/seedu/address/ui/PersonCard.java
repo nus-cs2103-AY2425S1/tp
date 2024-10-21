@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label dateOfLastVisit;
+    @FXML
+    private Label remark;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -59,6 +61,9 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         dateOfLastVisit.setText(person.hasDateOfLastVisit()
                 ? "Date last visited: " + person.getDateOfLastVisit().get().value
+                : "");
+        remark.setText(person.hasRemark()
+                ? "Remarks: " + person.getRemark().value
                 : "");
     }
 }
