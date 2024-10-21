@@ -50,7 +50,7 @@ public class DeleteTagCommandParserTest {
     }
 
     @Test
-    public void parse_AtMaxLength_returnsDeleteTagCommand() {
+    public void parse_maxLength_returnsDeleteTagCommand() {
         String maxLengthTagName = "a".repeat(50); // 50 characters
         Tag expectedTag = new Tag(maxLengthTagName);
         List<Tag> expectedTags = new ArrayList<>();
