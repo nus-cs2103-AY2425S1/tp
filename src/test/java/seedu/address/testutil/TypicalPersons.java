@@ -21,9 +21,10 @@ import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Person} and {@code Tutorial} objects to be used in tests.
  */
 public class TypicalPersons {
 
@@ -59,22 +60,32 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withPayment(VALID_PAYMENT_BOB)
             .withAttendance(VALID_ATTENDANCE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
+    public static final Tutorial MATH = new TutorialBuilder().withSubject("Math").build();
+    public static final Tutorial SCIENCE = new TutorialBuilder().withSubject("Science").build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical persons and tutorials.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        for (Tutorial tutorial : getTypicalTutorials()) {
+            ab.addTutorial(tutorial);
+        }
         return ab;
     }
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Tutorial> getTypicalTutorials() {
+        return new ArrayList<>(Arrays.asList(MATH, SCIENCE));
     }
 }

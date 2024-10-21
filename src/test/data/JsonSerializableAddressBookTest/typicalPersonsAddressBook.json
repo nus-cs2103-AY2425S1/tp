@@ -56,5 +56,10 @@
     "payment" : "false",
     "attendance": "14/10/2024",
     "tags" : [ ]
+  } ],
+  "tutorials" : [  {
+    "subject" : "Math"
+  }, {
+    "subject" : "Science"
   } ]
 }
