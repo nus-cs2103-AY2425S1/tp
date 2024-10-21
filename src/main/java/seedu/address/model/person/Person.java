@@ -113,7 +113,7 @@ public class Person {
         return this.tags.contains(tag);
     }
     public boolean hasName(Name name) {
-        return this.name.equals(name);
+        return this.name.fullName.toUpperCase().contains(name.fullName.toUpperCase());
     }
     public boolean hasNric(Nric nric) {
         return this.nric.equals(nric);
