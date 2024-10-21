@@ -132,7 +132,8 @@ public class AddCommandTest {
 
         @Override
         public boolean hasMeeting(Meeting meeting) {
-            throw new AssertionError("This method should not be called."); }
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void setAddressBook(ReadOnlyAddressBook newData) {

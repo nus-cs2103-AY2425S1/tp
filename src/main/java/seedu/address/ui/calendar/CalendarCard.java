@@ -39,7 +39,7 @@ public class CalendarCard extends UiPart<Region> {
         event.setText(meeting.getMeetingName());
         date.setText(meeting.getMeetingDate().toString());
         time.setText(meeting.getMeetingTime().toString());
-        meeting.getContactIndexes()
+        meeting.getContactUids()
             .forEach(contact -> associatedContacts.getChildren().add(
                 new Label(String.valueOf(contact))));
         // Manipulation to contact lambda can be done to get the string out instead of just having the index

@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -29,6 +30,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final List<String> schedules;
+    private final UUID uid;
 
     /**
      * Every field must be present and not null.
@@ -41,8 +43,22 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         schedules = new ArrayList<>();
+        this.uid = UUID.randomUUID();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, UUID uid) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        schedules = new ArrayList<>();
+        this.uid = uid;
+    }
     public Name getName() {
         return name;
     }
@@ -64,6 +80,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public UUID getUid() {
+        return uid;
     }
 
     /**

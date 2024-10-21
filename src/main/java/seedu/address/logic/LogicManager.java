@@ -86,7 +86,7 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Meeting> getCurrentMeetingList() {
         LocalDate today = LocalDate.now();
-        Predicate currentWeekPredicate = new SameWeekAsDatePredicate(today);
+        Predicate<Meeting> currentWeekPredicate = new SameWeekAsDatePredicate(today);
         return model.getCurrentWeeklySchedule(currentWeekPredicate);
     }
 

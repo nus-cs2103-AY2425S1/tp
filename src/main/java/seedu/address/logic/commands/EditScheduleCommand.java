@@ -63,7 +63,7 @@ public class EditScheduleCommand extends Command {
         LocalTime updatedTime = editScheduleDescriptor.getTime().orElse(meetingToEdit.getMeetingTime());
 
         Meeting updatedMeeting = new Meeting(
-                meetingToEdit.getContactIndexes(),
+                meetingToEdit.getContactUids(),
                 updatedName,
                 updatedDate,
                 updatedTime
