@@ -74,7 +74,7 @@ public class AddNotesCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        model.setFocusedPerson(this.index);
+        model.getFocusedPerson().set(editedPerson);
 
         return new CommandResult(String.format(generateSuccessMessage(editedPerson), index.getOneBased()),
                 false, false, true);

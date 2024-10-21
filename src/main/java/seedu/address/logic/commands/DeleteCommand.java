@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        model.setFocusedPerson(null);
+        model.getFocusedPerson().set(null);
         CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 Messages.formatShort(personToDelete)), false, false, true);
         System.out.println(commandResult.getFeedbackToUser());
