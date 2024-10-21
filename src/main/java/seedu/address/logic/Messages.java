@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Reminder;
 import seedu.address.model.person.Schedule;
 
 /**
@@ -57,6 +56,9 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code reminder} for display to the user.
+     */
     public static String formatReminder(Person person, String reminder) {
         final StringBuilder builder = new StringBuilder();
 
@@ -68,7 +70,13 @@ public class Messages {
 
         return builder.toString();
     }
-    
+
+
+    /**
+     * Formats the {@code appointment} for display to the user.
+     *
+     * @param person The {@code person} to be formatted.
+     */
     public static String formatAppointment(Person person) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
@@ -83,6 +91,11 @@ public class Messages {
         return formmattedSchedules;
     }
 
+    /**
+     * Formats the {@code appointment} for display to the user.
+     * 
+     * @param schedule The {@code schedule} to be formatted.
+     */
     public static String formatAppointment(Schedule schedule) {
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a");
@@ -93,6 +106,10 @@ public class Messages {
         return formattedDate;
     }
 
+
+    /**
+     * Formats the {@code schedule} for display to the user.
+     */
     public static String formatSchedule(Person person, Schedule schedule) {
         final StringBuilder builder = new StringBuilder();
 
