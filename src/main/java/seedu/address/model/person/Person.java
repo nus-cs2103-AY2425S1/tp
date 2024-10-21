@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,14 +29,15 @@ public class Person {
     private final Address address;
     private final EcName ecName;
     private final EcNumber ecNumber;
+    private final Set<Exam> exams = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, RegisterNumber registerNumber, Sex sex,
-                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, tags);
+                  StudentClass studentClass, EcName ecName, EcNumber ecNumber, Set<Exam> exams, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams, tags);
 
         this.name = name;
         this.phone = phone;
@@ -46,6 +48,7 @@ public class Person {
         this.studentClass = studentClass;
         this.ecName = ecName;
         this.ecNumber = ecNumber;
+        this.exams.addAll(exams);
         this.tags.addAll(tags);
     }
 
@@ -83,6 +86,10 @@ public class Person {
 
     public EcNumber getEcNumber() {
         return ecNumber;
+    }
+
+    public Set<Exam> getExams() {
+        return exams;
     }
 
     /**
@@ -135,7 +142,8 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecNumber, tags);
+        return Objects.hash(name, phone, email, address, registerNumber, sex, studentClass, ecName, ecNumber, exams,
+                tags);
     }
 
     @Override
@@ -150,6 +158,7 @@ public class Person {
                 .add("class", studentClass)
                 .add("emergency contact name", ecName)
                 .add("emergency contact number", ecNumber)
+                .add("exams", exams)
                 .add("tags", tags)
                 .toString();
     }

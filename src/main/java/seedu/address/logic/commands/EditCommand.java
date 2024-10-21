@@ -24,6 +24,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.exam.Exam;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EcName;
 import seedu.address.model.person.EcNumber;
@@ -117,10 +118,11 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getStudentClass());
         EcName updatedEcName = personToEdit.getEcName();
         EcNumber updatedEcNumber = personToEdit.getEcNumber();
+        Set<Exam> updatedExams = personToEdit.getExams();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
-                updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags);
+                updatedStudentClass, updatedEcName, updatedEcNumber, updatedExams, updatedTags);
     }
 
     @Override
