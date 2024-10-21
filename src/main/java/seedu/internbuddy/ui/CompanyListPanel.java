@@ -25,7 +25,15 @@ public class CompanyListPanel extends UiPart<Region> {
      */
     public CompanyListPanel(ObservableList<Company> companyList) {
         super(FXML);
-        companyListView.setItems(companyList);
+        companyListView.setItems(companyList.sorted((a, b) -> {
+                    if (a.getIsFavourite() && !b.getIsFavourite()) {
+                        return -1;
+                    } else if (!a.getIsFavourite() && b.getIsFavourite()) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }));
         companyListView.setCellFactory(listView -> new CompanyListViewCell());
     }
 
