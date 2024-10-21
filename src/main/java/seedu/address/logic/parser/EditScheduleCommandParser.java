@@ -33,7 +33,6 @@ public class EditScheduleCommandParser implements Parser<EditScheduleCommand> {
         // Parse the person index from the 'c/' prefix
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            Index contactIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_CONTACT).get());
         } catch (ParseException pe) {
             throw new ParseException(String
                     .format(MESSAGE_INVALID_COMMAND_FORMAT, EditScheduleCommand.MESSAGE_USAGE), pe);
