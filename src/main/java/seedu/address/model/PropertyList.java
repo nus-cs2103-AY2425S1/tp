@@ -88,7 +88,7 @@ public class PropertyList implements ReadOnlyPropertyList {
     public void setProperty(Property target, Property editedProperty) {
         requireNonNull(editedProperty);
 
-        properties.setProperty(target, editedProperty);
+        properties.setProperties(target, editedProperty);
     }
 
     /**
