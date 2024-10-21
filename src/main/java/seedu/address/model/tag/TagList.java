@@ -51,7 +51,7 @@ public class TagList {
     }
     @Override
     public String toString() {
-        return String.join(", ", tags.stream().map(Tag::getTagName).toList());
+        return String.join(", ", tags.stream().map(tag -> "[" + tag.getTagName() + "]").toList());
     }
     @Override
     public boolean equals(Object other) {
