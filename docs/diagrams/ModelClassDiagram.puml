@@ -21,6 +21,7 @@ Class Nric
 Class Phone
 Class Tag
 Class ContactRecord
+Class CallFrequency
 
 Class I #FFFFFF
 }
@@ -44,6 +45,7 @@ Person *--> Nric
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> CallFrequency
 Person *--> "*" Tag
 Person *--> "*" ContactRecord
 
