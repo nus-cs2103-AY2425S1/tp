@@ -2,6 +2,7 @@ package seedu.address.model.appointment;
 
 import java.time.LocalDateTime;
 
+import seedu.address.model.appointment.exceptions.InvalidAppointmentException;
 import seedu.address.model.person.Nric;
 
 /**
@@ -27,6 +28,9 @@ public class Appointment {
      * @param endTime the end time of the appointment
      */
     public Appointment(String name, Nric nric, LocalDateTime startTime, LocalDateTime endTime) {
+        if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+            throw new InvalidAppointmentException();
+        }
         this.name = name;
         this.nric = nric;
         this.startTime = startTime;
