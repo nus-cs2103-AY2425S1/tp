@@ -23,8 +23,9 @@ public class BackupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Backup successful at %s";
     public static final String MESSAGE_FAILURE = "Backup failed due to: %s";
-
+    protected static long lastManualBackupTime = 0; // Track last manual backup time
     private static final Logger logger = LogsCenter.getLogger(BackupCommand.class);
+    private static final long MANUAL_BACKUP_INTERVAL_MS = 5000; // 5 seconds debounce for manual backups
 
     /**
      * Constructs a {@code BackupCommand}.
@@ -42,6 +43,15 @@ public class BackupCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        long currentTime = System.currentTimeMillis();
+
+        // Ensure only one manual backup is allowed within the debounce window
+        if (currentTime - lastManualBackupTime < MANUAL_BACKUP_INTERVAL_MS) {
+            return new CommandResult("Manual backup already triggered. Please wait a few seconds.");
+        }
+
+        lastManualBackupTime = currentTime; // Update the last backup time
 
         try {
             // Format the current date and time for the filename

@@ -76,24 +76,36 @@ public class BackupManager {
      * Saves a backup of the provided file to the backup directory.
      */
     public void saveBackup(Path filePath) throws IOException {
-        if (!Files.exists(filePath)) {
-            throw new IOException("The file to back up does not exist: " + filePath);
+        synchronized (backupLock) {
+            long currentTime = System.currentTimeMillis();
+
+            if (currentTime - lastBackupTime < MIN_BACKUP_INTERVAL_MS) {
+                logger.info("Backup skipped due to debounce.");
+                return;
+            }
+
+            lastBackupTime = currentTime;
+
+            if (!Files.exists(filePath)) {
+                throw new IOException("The file to back up does not exist: " + filePath);
+            }
+
+            String content = Files.readString(filePath, StandardCharsets.UTF_8);
+
+            // Ensure content ends with a newline
+            if (!content.endsWith(System.lineSeparator())) {
+                content += System.lineSeparator();
+            }
+
+            String timestamp = LocalDateTime.now().format(FORMATTER);
+            String backupFileName = String.format("clinicbuddy-backup-%s.json", timestamp);
+            Path backupPath = backupDirectory.resolve(backupFileName);
+
+            Files.writeString(backupPath, content, StandardCharsets.UTF_8);
+            logger.info("Backup created: " + backupPath);
+
+            cleanOldBackups(MAX_BACKUPS);
         }
-
-        String timestamp = LocalDateTime.now().format(FORMATTER);
-        String backupFileName = String.format("%s%s%s", BACKUP_PREFIX, timestamp, BACKUP_EXTENSION);
-        Path backupPath = backupDirectory.resolve(backupFileName);
-
-        // Ensure consistent new line at the end of the content
-        String content = Files.readString(filePath, StandardCharsets.UTF_8);
-        if (!content.endsWith(System.lineSeparator())) {
-            content += System.lineSeparator();
-        }
-
-        Files.writeString(backupPath, content, StandardCharsets.UTF_8);
-        logger.info("Backup created: " + backupPath);
-
-        cleanOldBackups(MAX_BACKUPS);
     }
 
     /**
