@@ -40,6 +40,26 @@ public class Appointment {
     }
 
     /**
+     * Constructs an appointment with the given details and completion status.
+     *
+     * @param name the name of the appointment
+     * @param nric the nric of the patient
+     * @param startTime the start time of the appointment
+     * @param endTime the end time of the appointment
+     * @param isCompleted the completion status of the appointment
+     */
+    public Appointment(String name, Nric nric, LocalDateTime startTime, LocalDateTime endTime, boolean isCompleted) {
+        if (startTime.isAfter(endTime) || startTime.equals(endTime)) {
+            throw new InvalidAppointmentException(INVALID_APPOINTMENT_ERROR);
+        }
+        this.name = name;
+        this.nric = nric;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.isCompleted = isCompleted;
+    }
+
+    /**
      * @return the name of the appointment
      */
     public String getName() {
