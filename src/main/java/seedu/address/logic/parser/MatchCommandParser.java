@@ -25,7 +25,7 @@ public class MatchCommandParser implements Parser<MatchCommand> {
         }
 
         String inputContactIndex = splitArgs[MatchCommand.CONTACT_INDEX_POS];
-        String inputJobIndex= splitArgs[MatchCommand.JOB_INDEX_POS];
+        String inputJobIndex = splitArgs[MatchCommand.JOB_INDEX_POS];
 
         Index contactIndex;
         Index jobIndex;

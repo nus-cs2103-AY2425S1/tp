@@ -55,7 +55,7 @@ public class AddJobCommandParser implements Parser<AddJobCommand> {
         JobDescription description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Set<Tag> requirements = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_REQUIREMENTS));
 
-        Job job = new Job(name, company, salary, description, requirements);
+        Job job = new Job(name, company, salary, description, requirements, null);
 
         return new AddJobCommand(job);
     }

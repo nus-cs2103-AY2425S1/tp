@@ -25,15 +25,6 @@ public class Job {
      * Every field has no validation for now.
      */
     public Job(Name name, JobCompany company, JobSalary salary,
-            JobDescription description, Set<Tag> requirements) {
-        this.name = name;
-        this.company = company;
-        this.salary = salary;
-        this.description = description;
-        this.requirements.addAll(requirements);
-    }
-
-    public Job(Name name, JobCompany company, JobSalary salary,
             JobDescription description, Set<Tag> requirements, Set<String> matches) {
         this.name = name;
         this.company = company;

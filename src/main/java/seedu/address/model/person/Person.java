@@ -28,7 +28,7 @@ public class Person {
     private final String match;
 
     /**
-     * Every field must be present and not null.
+     * Every parameter must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills) {
         requireAllNonNull(name, phone, email, role, skills);
@@ -40,6 +40,9 @@ public class Person {
         this.match = null;
     }
 
+    /**
+     * Creates a person with the matching job
+     */
     public Person(Name name, Phone phone, Email email, Role role, Set<Skill> skills, String match) {
         requireAllNonNull(name, phone, email, role, skills);
         this.name = name;
@@ -78,12 +81,17 @@ public class Person {
         return match;
     }
 
-    public boolean hasMatched(String jobName) {
-        if(match == null) {
+    /**
+     * Checks if this person has matched with a job.
+     *
+     * @param jobIdentifier A string that uniquely identify a job
+     */
+    public boolean hasMatched(String jobIdentifier) {
+        if (match == null) {
             return false;
         }
 
-        return match.equals(jobName);
+        return match.equals(jobIdentifier);
     }
 
     /**
@@ -95,8 +103,7 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        return otherPerson != null && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -115,11 +122,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && role.equals(otherPerson.role)
-                && skills.equals(otherPerson.skills);
+        return name.equals(otherPerson.name) && phone.equals(otherPerson.phone) && email.equals(otherPerson.email)
+                && role.equals(otherPerson.role) && skills.equals(otherPerson.skills);
     }
 
     @Override

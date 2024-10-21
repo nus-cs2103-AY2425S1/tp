@@ -1,22 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -42,11 +31,10 @@ public class MatchCommand extends Command {
     public static final int JOB_INDEX_POS = 1;
 
     public static final String COMMAND_WORD = "match";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Match a contact to a job\nParameters: "
-            + "<CONTACT_INDEX> <JOB_INDEX>\nExample: " + COMMAND_WORD + " 2 1";
-
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Match a contact to a job\nParameters: <CONTACT_INDEX> <JOB_INDEX>\nExample: "
+                    + COMMAND_WORD + " 2 1";
     public static final String MESSAGE_MATCH_SUCCESS = "Matched Contact: %1$s with Job: %2$s";
-
     public static final String MESSAGE_HAS_OTHER_MATCHES = "Contact already has another job!";
     public static final String MESSAGE_ALREADY_MATCHED = "Contact already matched with this job!";
 
@@ -63,6 +51,26 @@ public class MatchCommand extends Command {
 
         this.contactIndex = contactIndex;
         this.jobIndex = jobIndex;
+    }
+
+    private static Person matchContactToJob(Person contact, String jobName) {
+        Name name = contact.getName();
+        Phone phone = contact.getPhone();
+        Email email = contact.getEmail();
+        Role role = contact.getRole();
+        Set<Skill> skills = contact.getSkills();
+        return new Person(name, phone, email, role, skills, jobName);
+    }
+
+    private static Job matchJobToContact(Job job, String contactName) {
+        Name name = job.getName();
+        JobCompany company = job.getCompany();
+        JobSalary salary = job.getSalary();
+        JobDescription description = job.getDescription();
+        Set<Tag> requirements = job.getRequirements();
+        Set<String> matches = job.getMatches();
+        matches.add(contactName);
+        return new Job(name, company, salary, description, requirements, matches);
     }
 
     @Override
@@ -118,28 +126,8 @@ public class MatchCommand extends Command {
 
         model.setPerson(contactToMatch, matchedContact);
         model.setJob(jobToMatch, matchedJob);
-        return new CommandResult(String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact),
-                Messages.format(matchedJob)));
-    }
-
-    private static Person matchContactToJob(Person contact, String jobName) {
-        Name name = contact.getName();
-        Phone phone = contact.getPhone();
-        Email email = contact.getEmail();
-        Role role = contact.getRole();
-        Set<Skill> skills = contact.getSkills();
-        return new Person(name, phone, email, role, skills, jobName);
-    }
-
-    private static Job matchJobToContact(Job job, String contactName) {
-        Name name = job.getName();
-        JobCompany company = job.getCompany();
-        JobSalary salary = job.getSalary();
-        JobDescription description = job.getDescription();
-        Set<Tag> requirements = job.getRequirements();
-        Set<String> matches = job.getMatches();
-        matches.add(contactName);
-        return new Job(name, company, salary, description, requirements, matches);
+        return new CommandResult(
+                String.format(MESSAGE_MATCH_SUCCESS, Messages.format(matchedContact), Messages.format(matchedJob)));
     }
 
     @Override
@@ -154,15 +142,11 @@ public class MatchCommand extends Command {
         }
 
         MatchCommand otherEditCommand = (MatchCommand) other;
-        return contactIndex.equals(otherEditCommand.contactIndex)
-                && jobIndex.equals(otherEditCommand.jobIndex);
+        return contactIndex.equals(otherEditCommand.contactIndex) && jobIndex.equals(otherEditCommand.jobIndex);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("contactIndex", contactIndex)
-                .add("jobIndex", jobIndex)
-                .toString();
+        return new ToStringBuilder(this).add("contactIndex", contactIndex).add("jobIndex", jobIndex).toString();
     }
 }
