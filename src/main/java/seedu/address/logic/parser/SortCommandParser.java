@@ -1,16 +1,24 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.stream.Stream;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
 
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Parses input arguments and creates a new SortCommand object
+ */
 public class SortCommandParser implements Parser<SortCommand> {
     private static boolean isAscending = false;
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public SortCommand parse(String args) throws ParseException {
         if (AddressBookParser.getInspect()) {
             ArgumentMultimap argMultimap =
@@ -18,8 +26,8 @@ public class SortCommandParser implements Parser<SortCommand> {
 
             if (!arePrefixesPresent(argMultimap, PREFIX_SORT)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        (isAscending ? SortCommand.MESSAGE_USAGE_ASCENDING : SortCommand.MESSAGE_USAGE_DESCENDING)));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, (isAscending
+                        ? SortCommand.MESSAGE_USAGE_ASCENDING : SortCommand.MESSAGE_USAGE_DESCENDING)));
             }
             argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_SORT);
 

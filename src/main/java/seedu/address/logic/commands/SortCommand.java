@@ -10,6 +10,9 @@ import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.person.Person;
 import seedu.address.ui.InspectWindow;
 
+/**
+ * Sorts deliveries by a specified attribute.
+ */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
@@ -17,7 +20,7 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD_DESCENDING = "dsort";
 
     public static final String MESSAGE_FAILURE = "Sort only works in inspect window!";
-    public static final String MESSAGE_SUCCESS = "Deliveries have been sorted by " ;
+    public static final String MESSAGE_SUCCESS = "Deliveries have been sorted by ";
 
     public static final String MESSAGE_USAGE_ASCENDING = COMMAND_WORD_ASCENDING
             + ": Sorts deliveries by the specified attribute in ascending order. "
@@ -33,6 +36,9 @@ public class SortCommand extends Command {
     private final String attribute;
     private final boolean isAscending;
 
+    /**
+     * Creates a SortCommand to sort deliveries by the specified attribute, in the specified order.
+     */
     public SortCommand(String attribute, boolean isAscending) {
         requireNonNull(attribute);
         this.attribute = attribute;

@@ -30,6 +30,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
+
     /**
      * Every field must be present and not null.
      */
@@ -76,7 +77,9 @@ public class Person {
     /**
      * Returns the  {@code DeliveryList} of a {@code Person}.
      */
-    public DeliveryList getDeliveryList() { return deliveryList; }
+    public DeliveryList getDeliveryList() {
+        return deliveryList;
+    }
 
     /**
      * Sets the delivery list of this person.

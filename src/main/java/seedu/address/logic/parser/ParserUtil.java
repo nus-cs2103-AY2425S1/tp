@@ -202,12 +202,12 @@ public class ParserUtil {
     public static String parseAttribute(String attribute) throws ParseException {
         requireNonNull(attribute);
         String trimmedAttribute = attribute.trim();
-        if (trimmedAttribute.equals("address") ||
-            trimmedAttribute.equals("cost") ||
-            trimmedAttribute.equals("date") ||
-            trimmedAttribute.equals("eta") ||
-            trimmedAttribute.equals("id") ||
-            trimmedAttribute.equals("status")) {
+        if (trimmedAttribute.equals("address")
+            || trimmedAttribute.equals("cost")
+            || trimmedAttribute.equals("date")
+            || trimmedAttribute.equals("eta")
+            || trimmedAttribute.equals("id")
+            || trimmedAttribute.equals("status")) {
             return trimmedAttribute;
         } else {
             throw new ParseException("Current attributes supported are: address, cost, date, eta, id, status");
