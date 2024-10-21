@@ -117,22 +117,22 @@ Examples:
 
 ### Filtering employees persons by skills: `filter`
 
-Finds employees who has at least one skill matching at least one of the keyword arguments.
+Finds employees who has at least one skill or tag matching at least one of the search items.
 
-Format: `filter KEYWORD [MORE_KEYWORDS]`
+Format: `filter [s/SKILL]... [t/TAG]...`
 
-- The search is case-insensitive. e.g `webdev` will match `WebDev`
-- The order of the keywords does not matter. e.g. `frontend backend` will match `{frontend, backend}`
-- Only the skills are searched.
-- Only full words will be matched e.g. `database` will not match `databases`
-- Employees who have at least one skill matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `frontend backend database` will return `{frontend, uiux}`, `{backend, database, api}`
+- The search is case-insensitive. e.g `s/webdev` will match `s/WebDev`.
+- The order of the search items does not matter. e.g. `s/frontend s/backend t/swe t/devops` will also match contacts with `skills={backend, frontend}` or `tags={devops, swe}`.
+- Only the skills and tags are searched.
+- Only full words will be matched e.g. `s/database` will not match `skills={databases}`.
+- Employees who have at least one skill or tag matching at least one search item will be returned (i.e. `OR` search).
+  e.g. `s/frontend t/swe` will return `skills={frontend, uiux}, tags={designer}`, `skills={backend, database, api}, tags={swe, devops}`, and `skills={frontend, backend}, tags={swe}`
 
 Examples:
 
-- `filter frontend` returns `{frontend}` and `{frontend, uiux}`
-- `filter backend database` returns `{backend, api}`, `{database, sql}`<br>
-  ![result for 'find alex david'](images/filterJohnBetsyResult.png)
+- `filter s/frontend` returns `skills={frontend}, tags={designer}` and `skills={frontend, uiux}, tags={designer, pm}`
+- `filter s/frontend t/swe` returns `skills={Frontend, UIUX}, tags={designer}`, `skills={Backend}, tags={swe}`<br>
+  ![result for 'filter s/frontend t/swe'](images/filterAlexCharlotte.png)
 
 ### Locating persons by name: `find`
 
@@ -221,7 +221,7 @@ _Details coming soon ..._
 | **Clear**  | `clear`                                                                                                                                                                                                                  |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                      |
 | **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [s/SKILL]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                   |
-| **Filter** | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter frontend backend`                                                                                                                                                     |
+| **Filter** | `filter [s/SKILL]... [t/TAG]...`<br> e.g., `filter s/frontend t/swe`                                                                                                                                                     |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
 | **List**   | `list`                                                                                                                                                                                                                   |
 | **Help**   | `help`                                                                                                                                                                                                                   |
