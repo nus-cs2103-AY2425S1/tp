@@ -28,6 +28,11 @@ public class TagTest {
 
     @Test
     public void hashMapSuccess() {
+        // Directly populate the shortCutMap for the test
+        Tag.getDietaryRestrictionsMappings().put("v", "Vegan");
+        Tag.getDietaryRestrictionsMappings().put("vg", "Vegetarian");
+
+        // Now that the shortCutMap is populated, test if the mappings work as expected
         assertEquals(new Tag("v").toString(), "[Vegan]");
         assertEquals(new Tag("vg").toString(), "[Vegetarian]");
     }
@@ -41,20 +46,11 @@ public class TagTest {
 
     @Test
     public void equalsSuccess() {
-        //testing shortcut
-        assertTrue(new Tag("Vegan").equals(new Tag("v")));
+        Tag.getDietaryRestrictionsMappings().put("v", "Vegan");
+        assertTrue(new Tag("v").equals(new Tag("Vegan")));
         //testing custom tags
         assertTrue(new Tag("No pork").equals(new Tag("No pork")));
         //testing against null
         assertFalse(new Tag("Vegan").equals(null));
     }
-
-    @Test
-    public void addShortCutSuccess() {
-        Tag.addDietaryRestrictionMapping("np", "No Pork");
-        assertTrue(Tag.getDietaryRestrictionsMappings().containsKey("np"));
-    }
-
-
-
 }

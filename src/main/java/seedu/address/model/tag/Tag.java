@@ -1,14 +1,14 @@
 package seedu.address.model.tag;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.Model;
-import seedu.address.model.shortcut.ShortCut;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashMap;
-import java.util.Map;
+
+import javafx.collections.ObservableList;
+import seedu.address.model.Model;
+import seedu.address.model.shortcut.ShortCut;
+
 
 /**
  * Represents a Tag in the address book.
@@ -34,7 +34,7 @@ public class Tag {
                         .append(" -> FullTagName: ").append(fullTagName)
                         .append("\n");
             });
-            allMappings = mappingsBuilder.toString().trim();  // Remove the trailing newline
+            allMappings = mappingsBuilder.toString().trim();
         }
     }
     public final String tagName;

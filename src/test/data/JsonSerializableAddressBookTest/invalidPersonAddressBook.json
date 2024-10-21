@@ -8,5 +8,6 @@
   } ],
   "orders": [ {
     "name": "test"
-  } ]
+  } ],
+  "shortcuts": []
 }

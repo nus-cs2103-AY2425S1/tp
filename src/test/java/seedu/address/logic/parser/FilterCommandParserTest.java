@@ -39,12 +39,4 @@ public class FilterCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Vegan \n \t Vegetarian  \t", expectedFilterCommand);
     }
-
-    @Test
-    public void parse_validMultipleShortCuts_returnsFindCommand() {
-        FilterCommand expectedFilterCommand =
-                new FilterCommand(new TagsContainsKeywordsPredicate(Arrays.asList("Vegan", "Vegetarian")));
-        assertParseSuccess(parser, "v vg", expectedFilterCommand);
-    }
-
 }

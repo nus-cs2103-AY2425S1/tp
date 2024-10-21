@@ -15,5 +15,6 @@
   } ],
   "orders": [ {
       "name": "cake"
-  } ]
+  } ],
+  "shortcuts": []
 }

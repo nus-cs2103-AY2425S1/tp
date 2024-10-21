@@ -41,4 +41,8 @@ public class ShortCut {
     public int hashCode() {
         return Objects.hash(alias, fullTagName);
     }
+    @Override
+    public String toString() {
+        return alias.toString() + " : " + fullTagName.toString();
+    }
 }

@@ -50,5 +50,6 @@
     "postalCode" : "123456",
     "tags" : [ ]
   } ],
-  "orders": []
+  "orders": [],
+  "shortcuts": []
 }
