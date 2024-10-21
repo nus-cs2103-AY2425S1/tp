@@ -12,8 +12,16 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
+The following table acknowledges numerous 3rd party libraries, API and documentation that were used in the development of TAchy. 
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+| Name                                                                              | Description                                                                                                              |
+|-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
+| [AddressBook-Level 3 (AB-3)](https://se-education.org/addressbook-level3/)        | TAchy is a brownfield project adapted from AB-3, which was created by the [SE-EDU initiative](https://se-education.org). |
+| [Jackson](https://github.com/FasterXML/jackson)                                   | Used for parsing JSON files.                                                                                             |
+| [Gradle](https://gradle.org/)                                                     | Used for build automation                                                                                                |
+| [JavaFX](https://openjfx.io)                                                      | Used in rendering the GUI.                                                                                               |
+| [JUnit5](https://junit.org/junit5/)                                               | Used for testing the codebase.                                                                                           |
+| [Oracle Java Docs](https://docs.oracle.com/en/java/javase/11/docs/api/index.html) | Used for understanding the default Java API                                                                              |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -50,7 +58,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete_student 1`.
 
 <puml src="diagrams/ArchitectureSequenceDiagram.puml" width="574" />
 
