@@ -209,6 +209,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    private void handleCloseCommand() {
+        splitPane.getItems().remove(personDetailsPanelPlaceholder);
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -222,6 +226,8 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandText.trim().toLowerCase().startsWith("view")) {
                 handleViewCommand(commandText);
+            } else if (commandText.trim().toLowerCase().equals("close")) {
+                handleCloseCommand();
             }
 
             if (commandResult.isShowHelp()) {
