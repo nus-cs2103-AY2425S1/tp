@@ -52,6 +52,8 @@ public class ModelManagerTest {
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
         assertEquals(new ClientBook(), new ClientBook(modelManager.getClientBook()));
+        assertEquals(new PropertyBook(), new PropertyBook(modelManager.getPropertyBook()));
+        assertEquals(new MeetingBook(), new MeetingBook(modelManager.getMeetingBook()));
     }
 
     @Test
@@ -64,6 +66,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
         userPrefs.setClientBookFilePath(Paths.get("client/book/file/path"));
+        userPrefs.setPropertyBookFilePath(Paths.get("property/book/file/path"));
+        userPrefs.setMeetingBookFilePath(Paths.get("meeting/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
@@ -72,6 +76,8 @@ public class ModelManagerTest {
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
         userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
         userPrefs.setClientBookFilePath(Paths.get("new/client/book/file/path"));
+        userPrefs.setPropertyBookFilePath(Paths.get("new/property/book/file/path"));
+        userPrefs.setMeetingBookFilePath(Paths.get("new/meeting/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -177,7 +183,7 @@ public class ModelManagerTest {
 
     @Test
     public void setPropertyBookFilePath_validPath_setsAddressBookFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("data/propertybook.json");
         modelManager.setPropertyBookFilePath(path);
         assertEquals(path, modelManager.getPropertyBookFilePath());
     }
