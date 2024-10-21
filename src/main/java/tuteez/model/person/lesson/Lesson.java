@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 
 /**
@@ -116,6 +117,10 @@ public class Lesson {
      * @return {@code true} if the two lessons overlap in time, otherwise {@code false}.
      */
     public static boolean isClashingWithOtherLesson(Lesson firstLs, Lesson secondLs) {
+        if (!firstLs.lessonDay.equals(secondLs.lessonDay)) {
+            return false;
+        }
+
         boolean completelyBefore = firstLs.endTime.isBefore(secondLs.startTime)
                  || firstLs.endTime.equals(secondLs.startTime);
         boolean completelyAfter = firstLs.startTime.isAfter(secondLs.endTime)
@@ -153,6 +158,11 @@ public class Lesson {
 
         Lesson otherLesson = (Lesson) other;
         return otherLesson.startTime.equals(this.startTime) && otherLesson.endTime.equals(this.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lessonDay, startTime, endTime);
     }
 
     /**
