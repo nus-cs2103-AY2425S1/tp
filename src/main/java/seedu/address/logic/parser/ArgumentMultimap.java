@@ -82,4 +82,16 @@ public class ArgumentMultimap {
     public int numberOfUniquePrefixes() {
         return this.argMultimap.size() - 1;
     }
+
+    /**
+     * Checks if the {@code ArgumentMultimap} contains a valid entry for the specified prefix.
+     *
+     * @param prefix the {@code Prefix} we want to check for in the argument map.
+     * @return {@code True} if the prefix is present with exactly one non-empty argument;
+     *         {@code False} otherwise.
+     */
+    public boolean containsValidSinglePrefix(Prefix prefix) {
+        return argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() == 1
+                && !argMultimap.get(prefix).get(0).isEmpty();
+    }
 }
