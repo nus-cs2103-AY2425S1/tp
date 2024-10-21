@@ -110,6 +110,12 @@ public class AppointmentManager {
         return true;
     }
 
+    /**
+     * Removes an appointment from the person's list of appointments.
+     *
+     * @param appointment The appointment to be removed.
+     * @param person The person from whom the appointment is removed.
+     */
     public void removeAppointment(Appointment appointment, Person person) {
         Person updatedPerson = new Person(person);
         updatedPerson.removeAppointment(appointment);

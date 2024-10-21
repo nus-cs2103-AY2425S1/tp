@@ -105,5 +105,4 @@ public interface Model {
     List<Appointment> getAllAppointments();
 
     List<Appointment> getAppointmentsForPerson(Person person);
- 
 }

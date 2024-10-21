@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -204,9 +205,26 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addAppointment(Appointment newAppointment, Person person) {
+        public boolean addAppointment(Appointment newAppointment, Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void removeAppointment(Appointment oldAppointment, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getAllAppointments() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Appointment> getAppointmentsForPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
 
 
     }

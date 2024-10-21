@@ -150,13 +150,13 @@ public class ModelManager implements Model {
     }
 
 
-/**
- * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
- * If there is a conflict, an IllegalArgumentException is thrown.
- *
- * @param newAppointment The appointment to be added.
- * @param person The person to whom the appointment is added.
- */
+    /**
+     * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
+     * If there is a conflict, an IllegalArgumentException is thrown.
+     *
+     * @param newAppointment The appointment to be added.
+     * @param person The person to whom the appointment is added.
+     */
     @Override
     public boolean addAppointment(Appointment newAppointment, Person person) {
         return appointmentManager.addAppointment(newAppointment, person);
@@ -179,7 +179,7 @@ public class ModelManager implements Model {
     }
 
     public List<Appointment> getAppointmentsForPerson(Person person) {
-        List<Appointment> temp =new ArrayList<>(person.getAppointments());
+        List<Appointment> temp = new ArrayList<>(person.getAppointments());
         temp.sort(Comparator.comparing(Appointment::getStartTime));
         return temp;
     }
