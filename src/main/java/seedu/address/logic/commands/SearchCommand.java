@@ -6,8 +6,14 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.SearchCommandParser;
 import seedu.address.model.Model;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.GroupContainsKeywordsPredicate;
+import seedu.address.model.person.GroupList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.GroupNotFoundException;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -30,16 +36,32 @@ public class SearchCommand extends Command {
             + "Example 4: " + COMMAND_WORD + " t/ friend n/ alice";
 
     private final Predicate<Person> predicate;
+    private final String groupName;
 
-    public SearchCommand(Predicate<Person> predicate) {
+    public SearchCommand(Predicate<Person> predicate, String groupName) {
         this.predicate = predicate;
+        this.groupName = groupName;
     }
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        Predicate<Person> finalPredicate = predicate;
+
+        // If a group name is provided, perform a group lookup and 1bine it with the existing predicate
+        if (!(groupName == null) && !groupName.isEmpty()) {
+            GroupList groupList = model.getAddressBook().getGroupList();  // Fetch the GroupList
+            try {
+                Group group = groupList.get(groupName);  // Retrieve the group by name
+                GroupContainsKeywordsPredicate groupPredicate = new GroupContainsKeywordsPredicate(group);
+                finalPredicate = finalPredicate == null ? groupPredicate : finalPredicate.and(groupPredicate);  // Combine predicates
+            } catch (GroupNotFoundException e) {
+                throw new CommandException("Group not found: " + groupName);
+            }
+        }
+        model.updateFilteredPersonList(finalPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getPersonList().size()));
     }
