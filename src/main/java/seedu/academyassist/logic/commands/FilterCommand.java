@@ -64,5 +64,4 @@ public class FilterCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, filterParam.toString(), filterValue.toString()));
 
     }
-
 }
