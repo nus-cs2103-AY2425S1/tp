@@ -14,6 +14,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.UniqueWeddingList;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Wraps all data at the address-book level
@@ -22,6 +24,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueWeddingList weddings;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        weddings = new UniqueWeddingList();
     }
 
     public AddressBook() {}
@@ -100,6 +104,44 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// Wedding level operations
+
+    public void addWedding(Wedding wedding) {
+        weddings.addWedding(wedding);
+    }
+
+    public void removeWedding(Wedding wedding) {
+        weddings.removeWedding(wedding);
+    }
+
+    public void setWedding(Wedding wedding, Wedding editedWedding) {
+        weddings.setWedding(wedding, editedWedding);
+    }
+
+    /**
+     * Assings a Person to a Wedding
+     * @param wedding
+     * @param person
+     */
+    public void assignPerson(Wedding wedding, Person person) {
+        requireNonNull(wedding);
+        requireNonNull(person);
+
+        weddings.assignToWedding(wedding, person);
+    }
+
+    /**
+     * Unassigns a Person from a Wedding
+     * @param wedding
+     * @param person
+     */
+    public void unassignPerson(Wedding wedding, Person person) {
+        requireNonNull(wedding);
+        requireNonNull(person);
+
+        weddings.unassignFromWedding(wedding, person);
+    }
+
     /**
      * Returns a HashMap of the currently used Tags and their occurrences
      * @return
@@ -143,6 +185,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Wedding> getWeddingList() {
+        return weddings.asUnmodifiableObservableList();
     }
 
     @Override
