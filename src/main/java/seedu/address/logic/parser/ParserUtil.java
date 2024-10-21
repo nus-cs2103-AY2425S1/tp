@@ -23,7 +23,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.PersonAttendance;
 import seedu.address.model.person.Phone;
-import seedu.address.model.student.Attendance;
+import seedu.address.model.Attendance.Attendance;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.TutorialGroup;
 import seedu.address.model.tag.Tag;

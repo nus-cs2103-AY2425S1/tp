@@ -12,6 +12,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Attendance.Attendance;
+import seedu.address.model.Attendance.AttendanceRecord;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.person.Address;

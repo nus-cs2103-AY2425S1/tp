@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.student.Attendance;
+import seedu.address.model.Attendance.Attendance;
 
 
 /**
