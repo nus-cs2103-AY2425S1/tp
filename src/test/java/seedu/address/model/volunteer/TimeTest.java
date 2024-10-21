@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.DateTimeException;
-
 import org.junit.jupiter.api.Test;
 
 public class TimeTest {
@@ -22,11 +20,11 @@ public class TimeTest {
 
         // Need to implement new time validation
 
-        // String invalidTime2 = "25:00"; // Invalid case: hour out of range
-        // assertThrows(DateTimeException.class, () -> new Time(invalidTime2));
+        String invalidTime2 = "25:00"; // Invalid case: hour out of range
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime2));
 
-        // String invalidTime3 = "12:60"; // Invalid case: minutes out of range
-        // assertThrows(DateTimeException.class, () -> new Time(invalidTime3));
+        String invalidTime3 = "12:60"; // Invalid case: minutes out of range
+        assertThrows(IllegalArgumentException.class, () -> new Time(invalidTime3));
     }
 
     @Test
