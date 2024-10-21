@@ -95,6 +95,10 @@ public class Person {
         return true;
     }
 
+    public void removePolicy(Policy policy) {
+        policies.remove(policy);
+    }
+
     /**
      * Returns a string representation of all assigned policies.
      *
