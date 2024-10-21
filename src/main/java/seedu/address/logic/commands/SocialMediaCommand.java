@@ -33,6 +33,7 @@ public class SocialMediaCommand extends Command {
 
     public static final String MESSAGE_SOCIAL_MEDIA_SUCCESS = "%1$s 's social media handle added: %2$s";
     public static final String MESSAGE_SOCIAL_MEDIA_EXISTING = "%1$s 's social media handle updated to: %2$s";
+    public static final String MESSAGE_INVALID_HANDLE = "social media handles must be alphanumeric";
 
     private String handle;
     private SocialMedia.Platform platform;
@@ -57,6 +58,10 @@ public class SocialMediaCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (!SocialMedia.isValidHandleName(handle)) {
+            throw new CommandException(MESSAGE_INVALID_HANDLE);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
