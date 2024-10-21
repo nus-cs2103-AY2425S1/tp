@@ -1,126 +1,62 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.testfx.framework.junit5.ApplicationTest;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import javafx.stage.Stage;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
-/**
- * Contains integration tests (interaction with the Model) and unit tests for
- * {@code DeleteCommand}.
- */
-public class DeleteCommandTest extends ApplicationTest {
+public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    @Override
-    public void start(Stage stage) {
-        // This method is required by ApplicationTest but can be left empty
+    @BeforeEach
+    public void setUp() {
+        // No need to mock the confirmation dialog
     }
 
     /*@Test
-    public void equals_sameTargetName_returnsTrue() {
-        Name targetName = new Name("John Doe");
-        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
-        DeleteCommand deleteCommand2 = new DeleteCommand(targetName);
+    public void execute_validPolicyIndex_success() {
+        Person person = new PersonBuilder().withName("John Doe").withPolicies("Policy 1").build();
+        model.addPerson(person);
+        Index personIndex = Index.fromOneBased(model.getFilteredPersonList().indexOf(person) + 1);
+        Index policyIndex = Index.fromOneBased(1);
 
-        assertTrue(deleteCommand1.equals(deleteCommand2));
-    }
+        // Debug information
+        System.out.println("Person: " + person);
+        System.out.println("Policies: " + person.getPolicies());
+        System.out.println("Person Index: " + personIndex);
+        System.out.println("Policy Index: " + policyIndex);
 
-    @Test
-    public void equals_differentTargetName_returnsFalse() {
-        Name targetName1 = new Name("John Doe");
-        Name targetName2 = new Name("Jane Doe");
-        DeleteCommand deleteCommand1 = new DeleteCommand(targetName1);
-        DeleteCommand deleteCommand2 = new DeleteCommand(targetName2);
+        DeleteCommand deleteCommand = new DeleteCommand(personIndex, policyIndex);
 
-        assertFalse(deleteCommand1.equals(deleteCommand2));
-    }
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_POLICY_SUCCESS,
+        policyIndex.getOneBased(), person.getName());
 
-    /*@Test
-    public void equals_nullTargetName_returnsFalse() {
-        Name targetName = new Name("John Doe");
-        DeleteCommand deleteCommand1 = new DeleteCommand(targetName);
-        DeleteCommand deleteCommand2 = new DeleteCommand((Name) null);
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        person.removePolicy(person.getPolicies().get(policyIndex.getZeroBased()));
+        expectedModel.setPerson(person, person);
 
-        assertFalse(deleteCommand1.equals(deleteCommand2));
-    }
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }*/
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+    public void execute_invalidPolicyIndex_throwsCommandException() {
+        Person person = new PersonBuilder().withName("John Doe").withPolicies("Policy 1").build();
+        model.addPerson(person);
+        Index personIndex = Index.fromOneBased(model.getFilteredPersonList().indexOf(person) + 1);
+        Index policyIndex = Index.fromOneBased(2); // Invalid policy index
+        DeleteCommand deleteCommand = new DeleteCommand(personIndex, policyIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_invalidName_throwsCommandException() {
-        DeleteCommand deleteCommand = new DeleteCommand(new Name("Invalid Name"));
-        assertThrows(CommandException.class, () -> deleteCommand.execute(model));
-    }
-
-    @Test
-    public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
-
-        // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
-
-        // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        // Test with index
-        Index targetIndex = Index.fromOneBased(1);
-        DeleteCommand deleteCommandWithIndex = new DeleteCommand(targetIndex);
-        String expectedIndexString = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expectedIndexString, deleteCommandWithIndex.toString());
-
-        // Test with name
-        Name targetName = new Name("John Doe");
-        DeleteCommand deleteCommandWithName = new DeleteCommand(targetName);
-        String expectedNameString = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
-        assertEquals(expectedNameString, deleteCommandWithName.toString());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
     }
 }
