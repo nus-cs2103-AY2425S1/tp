@@ -29,7 +29,7 @@ import seedu.address.model.Model;
  * 3. The data and headers are then written to the CSV file (writeCsvFile).
  */
 public class ExportCommand extends Command {
-    public static final String MESSAGE_ARGUMENTS = "Export: %1$s";
+    public static final int DISTANCE_TO_TAG = 6;
 
     public static final String COMMAND_WORD = "export";
 
@@ -78,7 +78,7 @@ public class ExportCommand extends Command {
         // Check if the string starts with { and ends with }
         if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
             // Remove the outer braces
-            tagString = tagString.substring(6, tagString.length() - 1);
+            tagString = tagString.substring(DISTANCE_TO_TAG, tagString.length() - 1);
 
             // Split by : and take the first part
             String[] parts = tagString.split(":");
@@ -90,7 +90,6 @@ public class ExportCommand extends Command {
                 return trimmed;
             }
         }
-
         // If the format doesn't match, return the original string
         return tagString;
     }
