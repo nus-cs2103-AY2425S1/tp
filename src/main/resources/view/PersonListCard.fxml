@@ -31,7 +31,7 @@
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <FlowPane fx:id="emergencyContacts" />
+      <FlowPane fx:id="emergencyContacts" styleClass="emergency_contact"/>
       <Label fx:id="doctorName" styleClass="doctor" text="\$doctorName" />
       <Label fx:id="doctorPhone" styleClass="doctor" text="\$doctorPhone" />
       <Label fx:id="doctorEmail" styleClass="doctor" text="\$doctorEmail" />

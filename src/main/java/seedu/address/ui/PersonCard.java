@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -60,10 +61,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        VBox vbox = new VBox();
         person.getEmergencyContacts().stream()
                 .sorted(Comparator.comparing(emergencyContact -> emergencyContact.getName().fullName))
-                .forEach(emergencyContact -> emergencyContacts.getChildren()
-                        .add(new Label(emergencyContact.getName().fullName)));
+                .forEach(emergencyContact -> vbox.getChildren()
+                        .addAll(new Label(emergencyContact.getName().fullName),
+                                new Label(emergencyContact.getPhone().value),
+                                new Label(emergencyContact.getRelationship().relationship)));
+        emergencyContacts.getChildren().add(vbox);
         doctorName.setText(person.getDoctor().getName().getDoctorName());
         doctorPhone.setText(person.getDoctor().getPhone().value);
         doctorEmail.setText(person.getDoctor().getEmail().value);

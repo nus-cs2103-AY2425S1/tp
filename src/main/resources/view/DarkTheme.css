@@ -132,12 +132,6 @@
     -fx-text-fill: white;
 }
 
-.emergency_contact {
-    -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
-    -fx-text-fill: #9999ff;
-}
-
 .doctor {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
@@ -347,6 +341,12 @@
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
+}
+
+#emergencyContacts .label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+    -fx-text-fill: #9999ff;
 }
 
 #tags {
