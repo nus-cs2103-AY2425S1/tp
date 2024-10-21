@@ -103,6 +103,11 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public Person findEquivalentPerson(Person target) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
 }

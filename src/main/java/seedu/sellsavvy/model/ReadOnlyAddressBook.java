@@ -14,4 +14,10 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns a {@code Person} in the {@code UniquePersonList} equivalent to target Person given.
+     * Returns null if target is null
+     */
+    Person findEquivalentPerson(Person target);
+
 }

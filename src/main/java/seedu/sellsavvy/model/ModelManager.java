@@ -120,7 +120,7 @@ public class ModelManager implements Model {
     @Override
     public Model createCopy() {
         Model modelCopy = new ModelManager(addressBook.createCopy(), userPrefs);
-        AddressBook addressBookCopy = (AddressBook) modelCopy.getAddressBook();
+        ReadOnlyAddressBook addressBookCopy = modelCopy.getAddressBook();
         Person selectedPersonCopy = addressBookCopy.findEquivalentPerson(this.getSelectedPerson2());
         modelCopy.updateSelectedPerson(selectedPersonCopy);
         return modelCopy;
