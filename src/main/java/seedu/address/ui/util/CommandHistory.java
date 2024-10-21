@@ -3,10 +3,16 @@ package seedu.address.ui.util;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manages the history of commands entered by the user.
+ */
 public class CommandHistory {
     private final List<String> commandHistory;
     private int historyIndex;
 
+    /**
+     * Constructs a {@code CommandHistory} object.
+     */
     public CommandHistory() {
         commandHistory = new ArrayList<>();
         historyIndex = -1; // Start with no commands
