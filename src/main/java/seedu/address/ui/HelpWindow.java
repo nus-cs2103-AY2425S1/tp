@@ -171,7 +171,7 @@ public class HelpWindow extends UiPart<Stage> {
         commandList.add(new ListCommand());
 
         String dateStr = "2020-12-01";
-        assert(ContactRecord.isValidContactRecord(dateStr));
+        assert(ContactRecord.isValidContactRecord(dateStr)) : "mark command example should have a valid date";
         commandList.add(new MarkCommand(Index.fromOneBased(1),
                 new ContactRecord(LocalDate.parse(dateStr), "")));
         commandList.add(new HelpCommand());
