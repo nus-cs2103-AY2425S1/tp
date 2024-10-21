@@ -53,10 +53,10 @@ public class AddTeacherCommandParser implements Parser<AddTeacherCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
+        Set<Subject> subjectList = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
         Set<String> classes = ParserUtil.parseClasses(argMultimap.getValue(PREFIX_CLASSES).get());
 
-        Teacher teacher = new Teacher(name, gender, phone, email, address, tagList, subject, classes);
+        Teacher teacher = new Teacher(name, gender, phone, email, address, tagList, subjectList, classes);
 
         return new AddTeacherCommand(teacher);
     }

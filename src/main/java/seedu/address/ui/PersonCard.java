@@ -38,6 +38,12 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label subjects;
+    @FXML
+    private Label classes;
+    @FXML
+    private Label gender;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -62,9 +68,21 @@ public class PersonCard extends UiPart<Region> {
         // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        gender.setText(person.getGender().value);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        subjects.setText(String.join(", ", person.getSubjects().stream()
+            .map(subject -> subject.subjectName).toArray(String[]::new)));
+        classes.setText(String.join(", ", person.getClasses().stream()
+            .toArray(String[]::new)));
+
+        // Set gender label color based on gender value
+        if ("male".equalsIgnoreCase(person.getGender().value)) {
+            gender.setStyle("-fx-text-fill: blue;");
+        } else if ("female".equalsIgnoreCase(person.getGender().value)) {
+            gender.setStyle("-fx-text-fill: pink;");
+        }
     }
 
 }

@@ -20,21 +20,28 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final Gender gender;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Subject> subjects = new HashSet<>();
+    private final Set<String> classes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
+                  Set<Subject> subjects, Set<String> classes) {
+        requireAllNonNull(name, phone, gender, email, address, tags, subjects, classes);
         this.name = name;
         this.phone = phone;
+        this.gender = gender;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.subjects.addAll(subjects);
+        this.classes.addAll(classes);
     }
 
     public Name getName() {
@@ -51,6 +58,18 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Gender getGender() {
+        return this.gender;
+    }
+
+    public Set<Subject> getSubjects() {
+        return Collections.unmodifiableSet(subjects);
+    }
+
+    public Set<String> getClasses() {
+        return this.classes;
     }
 
     /**
@@ -94,28 +113,34 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+        return getName().equals(otherPerson.getName())
+            && getGender().equals(otherPerson.getGender())
+            && getPhone().equals(otherPerson.getPhone())
+            && getEmail().equals(otherPerson.getEmail())
+            && getAddress().equals(otherPerson.getAddress())
+            && getTags().equals(otherPerson.getTags())
+            && getSubjects().equals(otherPerson.getSubjects())
+            && getClasses().equals(otherPerson.getClasses());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, gender, phone, email, address, tags, subjects, classes);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("tags", tags)
-                .toString();
+            .add("name", getName())
+            .add("gender", getGender())
+            .add("phone", getPhone())
+            .add("email", getEmail())
+            .add("address", getAddress())
+            .add("tags", getTags())
+            .add("subject", getSubjects())
+            .add("classes", getClasses())
+            .toString();
     }
 
     public String getSubjectString() {
@@ -125,4 +150,5 @@ public class Person {
     public String getClassesString() {
         return "";
     }
+
 }

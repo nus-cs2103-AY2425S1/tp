@@ -14,10 +14,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Teacher extends Person {
 
-    private final Gender gender;
-    private final Subject subject;
-    private final Set<String> classes;
-
     /**
      * Constructs a {@code Teacher} with the specified details.
      *
@@ -27,23 +23,14 @@ public class Teacher extends Person {
      * @param email The email address of the teacher. Must not be null.
      * @param address The address of the teacher. Must not be null.
      * @param tags The set of tags associated with the teacher. Must not be null.
-     * @param subject The subject taught by the teacher. Must not be null.
+     * @param subjects The set of subjects taught by the teacher. Must not be null.
      * @param classes The set of classes taught by the teacher. Must not be null.
      * @throws NullPointerException if any of the parameters are null.
      */
     public Teacher(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
-                   Subject subject, Set<String> classes) {
-        super(name, phone, email, address, addTeacherTag(tags));
-        Objects.requireNonNull(gender, "Gender cannot be null");
-        this.gender = gender;
-        Objects.requireNonNull(subject, "Subject cannot be null");
-        this.subject = subject;
-        Objects.requireNonNull(classes, "Classes cannot be null");
-        this.classes = classes;
-    }
-
-    public Gender getGender() {
-        return this.gender;
+                   Set<Subject> subjects, Set<String> classes) {
+        super(name, gender, phone, email, address, tags, subjects, classes);
+        addTeacherTag(tags);
     }
 
     private static Set<Tag> addTeacherTag(Set<Tag> tags) {
@@ -52,22 +39,14 @@ public class Teacher extends Person {
         return modifiedTags;
     }
 
-    public Subject getSubject() {
-        return this.subject;
-    }
-
-    public Set<String> getClasses() {
-        return this.classes;
-    }
-
     @Override
     public String getSubjectString() {
-        return subject.toString();
+        return getSubjects().toString();
     }
 
     @Override
     public String getClassesString() {
-        return String.join(", ", classes);
+        return String.join(", ", getClasses());
     }
 
     /**
@@ -105,7 +84,7 @@ public class Teacher extends Person {
             && getEmail().equals(otherTeacher.getEmail())
             && getAddress().equals(otherTeacher.getAddress())
             && getTags().equals(otherTeacher.getTags())
-            && getSubject().equals(otherTeacher.getSubject())
+            && getSubjects().equals(otherTeacher.getSubjects())
             && getClasses().equals(otherTeacher.getClasses());
     }
 
@@ -113,20 +92,20 @@ public class Teacher extends Person {
     public String toString() {
         return new ToStringBuilder(this)
             .add("name", getName())
-            .add("gender", gender)
+            .add("gender", getGender())
             .add("phone", getPhone())
             .add("email", getEmail())
             .add("address", getAddress())
             .add("tags", getTags())
-            .add("subject", subject)
-            .add("classes", classes)
+            .add("subject", getSubjects())
+            .add("classes", getClasses())
             .toString();
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getName(), getGender(), getPhone(), getEmail(), getAddress(),
-            getTags(), getSubject(), getClasses());
+            getTags(), getSubjects(), getClasses());
     }
 
 }
