@@ -19,7 +19,7 @@ import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -50,13 +50,13 @@ public class AddTeacherCommandParserTest {
     public void parse_allFieldsPresent_success() {
         Teacher expectedTeacher = new TeacherBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withSubject(VALID_SUBJECT_BOB).withTags(VALID_TAG_FRIEND).withClasses(VALID_CLASS_BOB).build();
+            .withSubject(VALID_SUBJECT_BOB).withTags(VALID_TAG_FRIEND).withClasses(VALID_CLASSES_BOB).build();
 
         // multiple tags - all accepted
         Teacher expectedTeacherMultipleTags = new TeacherBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
             .withSubject(VALID_SUBJECT_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-            .withClasses(VALID_CLASS_BOB).build();
+            .withClasses(VALID_CLASSES_BOB).build();
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
             + GENDER_DESC_BOB + SUBJECT_DESC_BOB + TAG_DESC_HUSBAND
@@ -68,7 +68,7 @@ public class AddTeacherCommandParserTest {
         // zero tags
         Teacher expectedTeacher = new TeacherBuilder().withName(VALID_NAME_BOB).withGender(VALID_GENDER_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-            .withSubject(VALID_SUBJECT_BOB).withTags().withClasses(VALID_CLASS_BOB).build();
+            .withSubject(VALID_SUBJECT_BOB).withTags().withClasses(VALID_CLASSES_BOB).build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
             + GENDER_DESC_BOB + SUBJECT_DESC_BOB + CLASS_DESC_BOB, new AddTeacherCommand(expectedTeacher));
     }
@@ -107,7 +107,7 @@ public class AddTeacherCommandParserTest {
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-            + VALID_GENDER_BOB + VALID_SUBJECT_BOB + VALID_CLASS_BOB, expectedMessage);
+            + VALID_GENDER_BOB + VALID_SUBJECT_BOB + VALID_CLASSES_BOB, expectedMessage);
     }
 
     @Test

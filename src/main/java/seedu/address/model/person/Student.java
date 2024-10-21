@@ -12,27 +12,21 @@ import seedu.address.model.tag.Tag;
  */
 public class Student extends Person {
 
-    private final Subject subject; // Subject the student is associated with
-    private final Set<String> classes; // Classes the student attends
-
     /**
      * Every field must be present and not null.
      *
      * @param name     Name of the student
+     * @param gender    Gender of the student
      * @param phone    Phone number of the student
      * @param email    Email of the student
      * @param address  Address of the student
      * @param tags     Tags associated with the student
-     * @param subject  Subject the student is taking
+     * @param subjects  Subject the student is taking
      * @param classes  Set of class names the student is attending
      */
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                   Subject subject, Set<String> classes) {
-        super(name, phone, email, address, addStudentTag(tags));
-        Objects.requireNonNull(subject, "Subject must not be null");
-        Objects.requireNonNull(classes, "Classes must not be null");
-        this.subject = subject;
-        this.classes = classes;
+    public Student(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
+                   Set<Subject> subjects, Set<String> classes) {
+        super(name, gender, phone, email, address, tags, subjects, classes);
     }
 
     private static Set<Tag> addStudentTag(Set<Tag> tags) {
@@ -41,22 +35,14 @@ public class Student extends Person {
         return modifiedTags;
     }
 
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public Set<String> getClasses() {
-        return classes;
-    }
-
     @Override
     public String getSubjectString() {
-        return subject.toString();
+        return getSubjects().toString();
     }
 
     @Override
     public String getClassesString() {
-        return String.join(", ", classes);
+        return String.join(", ", getClasses());
     }
 
     @Override
@@ -71,9 +57,9 @@ public class Student extends Person {
                 .append("; Address: ")
                 .append(getAddress())
                 .append("; Subject: ")
-                .append(getSubject())
+                .append(getSubjects())
                 .append("; Classes: ")
-                .append(String.join(", ", classes));
+                .append(String.join(", ", getClasses()));
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -95,16 +81,18 @@ public class Student extends Person {
 
         Student otherStudent = (Student) other;
         return otherStudent.getName().equals(getName())
+                && otherStudent.getGender().equals(getGender())
                 && otherStudent.getPhone().equals(getPhone())
                 && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getAddress().equals(getAddress())
-                && otherStudent.getSubject().equals(getSubject())
+                && otherStudent.getSubjects().equals(getSubjects())
                 && otherStudent.getClasses().equals(getClasses())
                 && otherStudent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getSubject(), getClasses(), getTags());
+        return Objects.hash(getName(), getGender(), getPhone(), getEmail(), getAddress(),
+            getSubjects(), getClasses(), getTags());
     }
 }
