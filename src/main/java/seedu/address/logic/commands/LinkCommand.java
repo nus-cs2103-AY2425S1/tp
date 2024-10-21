@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 
 /**
  * Link a caregiver and a patient by their nric and update person model accordingly.
@@ -27,9 +28,14 @@ public class LinkCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Linked %1$s and %2$s";
 
-    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_LINK = "This link already exists in CareLink";
+
+    public static final String SAME_PERSON = "Cannot link same people";
 
     public static final String PERSON_NOT_FOUND = "Incorrect NRIC. Person not found";
+
+    public static final String ROLE_NOT_MATCH = "Incorrect roles. The patient NRIC must correspond to a patient, "
+            + "and the caregiver NRIC must correspond to a caregiver.";
 
     private final Nric patientNric;
     private final Nric caregiverNric;
@@ -46,10 +52,19 @@ public class LinkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (this.patientNric == this.caregiverNric) {
+            throw new CommandException(SAME_PERSON);
+        }
+
         Person patient = model.getPerson(patientNric);
         Person caregiver = model.getPerson(caregiverNric);
         if (patient == null || caregiver == null) {
             throw new CommandException(PERSON_NOT_FOUND);
+        }
+
+        if (!patient.getRoles().contains(Role.PATIENT)
+                || !caregiver.getRoles().contains(Role.CAREGIVER)) {
+            throw new CommandException(ROLE_NOT_MATCH);
         }
 
         if (model.hasLink(patient, caregiver)) {

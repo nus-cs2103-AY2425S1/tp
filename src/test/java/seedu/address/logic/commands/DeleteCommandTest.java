@@ -41,6 +41,34 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validPatientlinkdeletion() {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personToDelete = ALICE;
+
+        showPersonWithNric(expectedModel, personToDelete.getNric());
+        expectedModel.addLink(ALICE, BENSON);
+        assertTrue(expectedModel.hasLink(ALICE, BENSON));
+        expectedModel.deletePerson(personToDelete);
+        showNoPerson(expectedModel);
+        assertFalse(expectedModel.hasLink(ALICE, BENSON));
+
+    }
+
+    @Test
+    public void execute_validCaregiverlinkdeletion() {
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Person personToDelete = BENSON;
+
+        showPersonWithNric(expectedModel, personToDelete.getNric());
+        expectedModel.addLink(ALICE, BENSON);
+        assertTrue(expectedModel.hasLink(ALICE, BENSON));
+        expectedModel.deletePerson(personToDelete);
+        showNoPerson(expectedModel);
+        assertFalse(expectedModel.hasLink(ALICE, BENSON));
+
+    }
+
+    @Test
     public void execute_validNricFilteredList_success() {
         Person personToDelete = ALICE;
         showPersonWithNric(model, personToDelete.getNric());
