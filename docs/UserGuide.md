@@ -55,17 +55,13 @@ For more information, see this:
     e.g. typing **`help`** and pressing Enter will open the help window.<br>
    
    Some example commands you can try:
-
-<<<<<<< HEAD
    * `list person` : Lists all contacts.
    * `add person n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
    * `delete person 3` : Deletes the 3rd contact shown in the current list.
    * `clear person` : Deletes all contacts.
    * `exit` : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
-
-8. Refer to the [Command Overview](#command-overview) below for details of each command.
+7. Refer to the [Command Overview](#command-overview) below for details of each command.
 
 ---
 
@@ -263,6 +259,8 @@ Examples:
 
 <img src="images/json/addressbook.png" alt="Address Book JSON" width="300" height="auto">
 <img src="images/json/appointmentBook.png" alt="Appointment Book JSON" width="300" height="auto">
+
+<br><br>
 
 **Q**: How do I transfer my data (in the `addressbook.json` and `appointmentbook.json` files) to another 
 computer?<br>
