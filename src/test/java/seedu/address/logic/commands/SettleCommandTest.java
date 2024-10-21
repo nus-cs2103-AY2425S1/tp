@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -87,6 +89,71 @@ public class SettleCommandTest {
         SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, invalidAmount);
 
         assertCommandFailure(settleCommand, model, SettleCommand.MESSAGE_INVALID_AMOUNT);
+    }
+
+    @Test
+    public void constructor_negativeAmount_throwsAssertionError() {
+        try {
+            new SettleCommand(INDEX_FIRST_STUDENT, -10.0);
+        } catch (AssertionError e) {
+            assertEquals("assertion failed: amount must be positive", e.getMessage());
+        }
+    }
+
+    @Test
+    public void createUpdatedStudent_validAmount_updatesCorrectly() throws Exception {
+        double amountToSettle = 20.0;
+        SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
+
+        Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
+
+        double expectedOwedAmount = studentToUpdate.getOwedAmount().value - amountToSettle;
+        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + amountToSettle;
+
+        assertEquals(expectedOwedAmount, updatedStudent.getOwedAmount().value, 0.001);
+        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmount().value, 0.001);
+    }
+
+    // Invalid case where the amount exceeds the student's owed amount
+    @Test
+    public void createUpdatedStudent_amountExceedsOwed_throwsCommandException() {
+        Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double amountToSettle = studentToUpdate.getOwedAmount().value + 10.0; // more than owed
+
+        SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, amountToSettle);
+
+        assertThrows(CommandException.class, () -> settleCommand.createUpdatedStudent(studentToUpdate));
+    }
+
+    // Case where the amount fully settles the owed amount
+    @Test
+    public void createUpdatedStudent_fullSettlement_updatesOwedToZero() throws Exception {
+        Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double fullSettlementAmount = studentToUpdate.getOwedAmount().value;
+
+        SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, fullSettlementAmount);
+        Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
+
+        assertEquals(0.0, updatedStudent.getOwedAmount().value, 0.001);
+        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + fullSettlementAmount;
+        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmount().value, 0.001);
+    }
+
+    // Case where partial payment is made, ensuring both paid and owed amounts are updated correctly
+    @Test
+    public void createUpdatedStudent_partialSettlement_updatesCorrectly() throws Exception {
+        Student studentToUpdate = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        double partialPayment = studentToUpdate.getOwedAmount().value / 2;
+
+        SettleCommand settleCommand = new SettleCommand(INDEX_FIRST_STUDENT, partialPayment);
+        Student updatedStudent = settleCommand.createUpdatedStudent(studentToUpdate);
+
+        double expectedOwedAmount = studentToUpdate.getOwedAmount().value - partialPayment;
+        double expectedPaidAmount = studentToUpdate.getPaidAmount().value + partialPayment;
+
+        assertEquals(expectedOwedAmount, updatedStudent.getOwedAmount().value, 0.001);
+        assertEquals(expectedPaidAmount, updatedStudent.getPaidAmount().value, 0.001);
     }
 
     @Test

@@ -41,7 +41,7 @@ public class SettleCommand extends Command {
      */
     public SettleCommand(Index index, double amount) {
         requireNonNull(index);
-        assert amount > 0;
+        assert amount > 0 : "assertion failed: amount must be positive";
 
         this.index = index;
         this.amount = amount;
