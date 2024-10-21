@@ -100,7 +100,7 @@ public class LogicManager implements Logic {
                 model.setAddressBook(storage.readAddressBook(((LoadCommand) command).getLoadPath()).get());
             }
         } catch (DataLoadingException e) {
-            throw new CommandException(String.format(LOAD_ERROR_FORMAT, e.getMessage()),e);
+            throw new CommandException(String.format(LOAD_ERROR_FORMAT, e.getMessage()), e);
         }
 
     }
