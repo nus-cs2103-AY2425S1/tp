@@ -101,10 +101,10 @@ public class AddressBookParser {
 
         case UnmarkAssignmentCommand.COMMAND_WORD:
             return new UnmarkAssignmentCommandParser().parse(arguments);
-            
+
         case RemarkCommand.COMMAND_WORD:
             return new RemarkCommandParser().parse(arguments);
-            
+
         case EditAssignmentCommand.COMMAND_WORD:
             return new EditAssignmentCommandParser().parse(arguments);
 
