@@ -76,15 +76,19 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/TAG…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A patient must have one tag (no more no less)
+The tag must be one of the following
+1. High Risk
+2. Medium Risk
+3. Low Risk
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy-Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/ High Risk`
+* `add n/Betsy-Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/Low Risk`
 
 ### Listing all persons : `list`
 

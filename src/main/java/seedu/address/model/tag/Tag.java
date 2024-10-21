@@ -9,9 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-
+    public static final String MESSAGE_CONSTRAINTS = "Tags should be High Risk, Medium Risk or Low Risk";
+    public static final String VALIDATION_REGEX = "High Risk|Medium Risk|Low Risk";
+    public static final String MESSAGE_FIELD_MESSAGE_FORMAT = "Person's Tag field is missing!";
     public final String tagName;
 
     /**
@@ -21,6 +21,7 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
+        tagName = tagName.strip();
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
     }
@@ -37,7 +38,6 @@ public class Tag {
         if (other == this) {
             return true;
         }
-
         // instanceof handles nulls
         if (!(other instanceof Tag)) {
             return false;
@@ -56,7 +56,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
     }
 
 }
