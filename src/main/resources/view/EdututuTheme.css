@@ -119,10 +119,10 @@
 }
 
 .list-cell {
-    -fx-background-color: -ab3-background-3; /* Keeps the background color white */
-    -fx-border-color: -ab3-background; /* Light color for the border */
-    -fx-border-width: 0 0 4px 0; /* Adds a thin line only at the bottom */
-    -fx-label-padding: 10 10 10 10; /* Adds some padding for better spacing */
+    -fx-background-color: -ab3-background-3;
+    -fx-border-color: -ab3-background;
+    -fx-border-width: 0 0 4px 0;
+    -fx-label-padding: 10 10 10 10;
 }
 
 
@@ -178,12 +178,12 @@
     -fx-background-color: -ab3-background-2;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: -ab3-darkerText; /* Darker text for better visibility */
+    -fx-text-fill: -ab3-darkerText;
 }
 
 .result-display .label {
-    -fx-text-fill: -ab3-darkerText !important; /* Change to a darker shade for better visibility */
-    -fx-opacity: 1; /* Ensure full opacity */
+    -fx-text-fill: -ab3-darkerText !important;
+    -fx-opacity: 1;
 }
 
 .status-bar .label {
@@ -354,7 +354,7 @@
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: -ab3-darkerText; /* Change to a darker shade for better visibility */
+    -fx-text-fill: -ab3-darkerText;
 }
 
 #filterField, #personListPanel, #personWebpage {
