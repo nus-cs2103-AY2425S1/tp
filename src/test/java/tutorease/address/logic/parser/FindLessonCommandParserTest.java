@@ -36,6 +36,11 @@ public class FindLessonCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindLessonCommand);
+
+        // allow numeric characters
+        FindLessonCommand expectedFindLessonCommandNumeric =
+                new FindLessonCommand(new LessonContainsNamesPredicate(Arrays.asList("1", "2")));
+        assertParseSuccess(parser, "1 2", expectedFindLessonCommandNumeric);
     }
 
 }
