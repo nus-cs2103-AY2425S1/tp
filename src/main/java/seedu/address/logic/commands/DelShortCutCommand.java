@@ -28,12 +28,12 @@ public class DelShortCutCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddShortCutCommand)) {
+        if (!(other instanceof DelShortCutCommand)) {
             return false;
         }
 
-        DelShortCutCommand otherShortTagCommand = (DelShortCutCommand) other;
-        return toRemove.equals(otherShortTagCommand.toRemove);
+        DelShortCutCommand otherDelShortCutCommand = (DelShortCutCommand) other;
+        return toRemove.equals(otherDelShortCutCommand.toRemove);
     }
 
     @Override

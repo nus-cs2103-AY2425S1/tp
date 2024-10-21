@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FULLTAGNAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddShortCutCommand;
 import seedu.address.logic.commands.DelShortCutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.shortcut.Alias;
@@ -29,7 +28,7 @@ public class DelShortCutCommandParser implements Parser<DelShortCutCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ALIAS, PREFIX_FULLTAGNAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShortCutCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelShortCutCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ALIAS, PREFIX_FULLTAGNAME);
