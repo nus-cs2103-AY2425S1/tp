@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.ExitCommand.HELP_EXIT_COMMAND;
 import static seedu.address.logic.commands.FindCommand.HELP_FIND_COMMAND;
 import static seedu.address.logic.commands.FindTagCommand.HELP_FINDTAG_COMMAND;
 import static seedu.address.logic.commands.ListCommand.HELP_LIST_COMMAND;
+import static seedu.address.logic.commands.ListingAddCommand.HELP_LISTING_ADD_COMMAND;
+import static seedu.address.logic.commands.ListingDeleteCommand.HELP_LISTING_DELETE_COMMAND;
 import static seedu.address.logic.commands.RemarkCommand.HELP_REMARK_COMMAND;
 
 import java.util.logging.Logger;
@@ -45,6 +47,10 @@ public class HelpWindow extends UiPart<Stage> {
             + HELP_REMARK_COMMAND
             + "\n\n"
             + HELP_EXIT_COMMAND
+            + "\n\n"
+            + HELP_LISTING_ADD_COMMAND
+            + "\n\n"
+            + HELP_LISTING_DELETE_COMMAND
             + "\n\n"
             + HELP_MORE_INFORMATION;
 
