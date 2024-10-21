@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -23,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.LessonTime;
 import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
@@ -47,7 +43,8 @@ public class UpdateCommand extends Command {
             + "[" + PREFIX_EMERGENCY_CONTACT + "EMERGENCY_PHONE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_LEVEL + "LEVEL] "
-            + "[" + PREFIX_SUBJECT + "SUBJECT]...\n"
+            + "[" + PREFIX_SUBJECT + "SUBJECT]... "
+            + "[" + PREFIX_LESSON_TIME + "LESSON_TIMING]...\n"
             + "Example: " + COMMAND_WORD + " Cristiano Ronaldo "
             + PREFIX_PHONE + "91234567 ";
 
@@ -110,8 +107,10 @@ public class UpdateCommand extends Command {
         Set<Subject> updatedSubjects = updatePersonDescriptor.getSubjects().orElse(personToUpdate.getSubjects());
         Level updatedLevel = updatePersonDescriptor.getLevel().orElse(personToUpdate.getLevel());
         TaskList updatedTaskList = updatePersonDescriptor.getTaskList().orElse(personToUpdate.getTaskList());
+        Set<LessonTime> updatedLessonTimes = updatePersonDescriptor.getLessonTimes()
+                .orElse(personToUpdate.getLessonTimes());
         return new Person(updatedName, updatedPhone, updatedEmergencyContact,
-                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList);
+                updatedAddress, updatedNote, updatedSubjects, updatedLevel, updatedTaskList, updatedLessonTimes);
     }
 
     @Override
@@ -151,6 +150,7 @@ public class UpdateCommand extends Command {
         private Set<Subject> subjects;
         private Level level;
         private TaskList taskList;
+        private Set<LessonTime> lessonTimes;
 
         public UpdatePersonDescriptor() {}
 
@@ -167,13 +167,15 @@ public class UpdateCommand extends Command {
             setSubjects(toCopy.subjects);
             setLevel(toCopy.level);
             setTaskList(toCopy.taskList);
+            setLessonTimes(toCopy.lessonTimes);
         }
 
         /**
          * Returns true if at least one field is updated.
          */
         public boolean isAnyFieldUpdated() {
-            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, subjects, level, taskList);
+            return CollectionUtil.isAnyNonNull(name, phone, emergencyContact, address, note, subjects,
+                    level, taskList, lessonTimes);
         }
 
         public void setName(Name name) {
@@ -249,6 +251,23 @@ public class UpdateCommand extends Command {
             return Optional.ofNullable(taskList);
         }
 
+        /**
+         * Sets {@code lessonTimes} to this object's {@code lessonTimes}.
+         * A defensive copy of {@code lessonTimes} is used internally.
+         */
+        public void setLessonTimes(Set<LessonTime> lessonTimes) {
+            this.lessonTimes = (lessonTimes != null) ? new HashSet<>(lessonTimes) : null;
+        }
+
+        /**
+         * Returns an unmodifiable lesson time set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code lesson time} is null.
+         */
+        public Optional<Set<LessonTime>> getLessonTimes() {
+            return (lessonTimes != null) ? Optional.of(Collections.unmodifiableSet(lessonTimes)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -268,7 +287,8 @@ public class UpdateCommand extends Command {
                     && Objects.equals(note, otherUpdatePersonDescriptor.note)
                     && Objects.equals(subjects, otherUpdatePersonDescriptor.subjects)
                     && Objects.equals(level, otherUpdatePersonDescriptor.level)
-                    && Objects.equals(taskList, otherUpdatePersonDescriptor.taskList);
+                    && Objects.equals(taskList, otherUpdatePersonDescriptor.taskList)
+                    && Objects.equals(lessonTimes, otherUpdatePersonDescriptor.lessonTimes);
         }
 
         @Override
@@ -282,6 +302,7 @@ public class UpdateCommand extends Command {
                     .add("level", level)
                     .add("subjects", subjects)
                     .add("task list", taskList)
+                    .add("lesson times", lessonTimes)
                     .toString();
         }
     }
