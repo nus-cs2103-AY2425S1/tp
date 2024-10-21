@@ -1,10 +1,13 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.AttendanceList;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -110,6 +113,21 @@ public class PersonBuilder {
         this.gradeList = new GradeList();
         for (Grade grade : grades) {
             this.gradeList = this.gradeList.addGrade(grade);
+        }
+        return this;
+    }
+
+    /**
+     * Sets the {@code AttendanceList} of the {@code Person} that we are building.
+     * This method allows adding a map of dates and attendances to the person's grade list.
+     *
+     * @param attendances A map to be added to the person's {@code GradeList}.
+     * @return The {@code PersonBuilder} object, for method chaining.
+     */
+    public PersonBuilder withAttendances(Map<LocalDateTime, Attendance> attendances) {
+        this.attendanceList = new AttendanceList();
+        for (Map.Entry<LocalDateTime, Attendance> attendance : attendances.entrySet()) {
+            this.attendanceList = this.attendanceList.setAttendance(attendance.getKey(), attendance.getValue());
         }
         return this;
     }
