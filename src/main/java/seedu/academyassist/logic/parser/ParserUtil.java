@@ -16,6 +16,7 @@ import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
+import seedu.academyassist.model.sort.FilterParam;
 import seedu.academyassist.model.sort.SortParam;
 
 /**
@@ -95,7 +96,7 @@ public class ParserUtil {
         if (!Subject.isValidSubject(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(trimmedSubject);
+        return new Subject(trimmedSubject.toUpperCase());
     }
 
     /**
@@ -159,7 +160,7 @@ public class ParserUtil {
     }
 
     /**
-     * Prases {@code String sortParam} into a {@code SortParam}.
+     * Parses {@code String sortParam} into a {@code SortParam}.
      */
     public static SortParam parseSortCommandParam(String sortParam) throws ParseException {
         requireNonNull(sortParam);
@@ -169,5 +170,18 @@ public class ParserUtil {
         }
 
         return new SortParam(trimmedSortParam);
+    }
+
+    /**
+     * Parses {@code String filterParam} into a {@code FilterParam}.
+     */
+    public static FilterParam parseFilterCommandParam(String filterParam) throws ParseException {
+        requireNonNull(filterParam);
+        String trimmedSortParam = filterParam.trim();
+        if (!FilterParam.isValidFilterParam(trimmedSortParam)) {
+            throw new ParseException(FilterParam.MESSAGE_CONSTRAINTS);
+        }
+
+        return new FilterParam(trimmedSortParam);
     }
 }
