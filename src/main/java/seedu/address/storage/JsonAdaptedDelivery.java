@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
@@ -29,6 +30,7 @@ public class JsonAdaptedDelivery {
     private final String time;
     private final String eta;
     private final String status;
+    private final String archive;
 
     /**
      * Constructs a {@code JsonAdaptedDelivery} with the given delivery details.
@@ -41,7 +43,8 @@ public class JsonAdaptedDelivery {
                                @JsonProperty("date") String date,
                                @JsonProperty("time") String time,
                                @JsonProperty("eta") String eta,
-                               @JsonProperty("status") String status) {
+                               @JsonProperty("status") String status,
+                               @JsonProperty("archive") String archive) {
         this.id = id;
         this.itemName = itemName;
         this.address = address;
@@ -50,6 +53,7 @@ public class JsonAdaptedDelivery {
         this.time = time;
         this.eta = eta;
         this.status = status;
+        this.archive = archive;
     }
 
     /**
@@ -64,6 +68,7 @@ public class JsonAdaptedDelivery {
         time = source.getTime().value.toString();
         eta = source.getEta().value.toString();
         status = source.getStatus().getValue();
+        archive = source.getArchive().value;
     }
 
     /**
@@ -137,7 +142,15 @@ public class JsonAdaptedDelivery {
         }
         final Status modelStatus = new Status(status);
 
+        if (archive == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Archive.class.getSimpleName()));
+        }
+        if (!Archive.isValidArchive(archive)) {
+            throw new IllegalValueException(Archive.MESSAGE_CONSTRAINTS);
+        }
+        final Archive modelArchive = new Archive(archive);
+
         return new Delivery(modelId, modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta,
-                modelStatus);
+                modelStatus, modelArchive);
     }
 }
