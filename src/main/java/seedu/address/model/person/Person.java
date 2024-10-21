@@ -147,7 +147,7 @@ public class Person {
                 .add("sex", sex)
                 .add("appointments", appointments)
                 .add("tags", tags)
-                .add("starred", starredStatus)
+                .add("starredStatus", starredStatus)
                 .toString();
     }
 
