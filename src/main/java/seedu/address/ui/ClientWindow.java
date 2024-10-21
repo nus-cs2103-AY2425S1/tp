@@ -1,10 +1,13 @@
 package seedu.address.ui;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -32,6 +35,9 @@ public class ClientWindow extends UiPart<Stage> {
     @FXML
     private Label clientSchedule;
 
+    @FXML
+    private ImageView clientImage;
+
     /**
      * Creates a new ClientWindow.
      *
@@ -39,6 +45,9 @@ public class ClientWindow extends UiPart<Stage> {
      */
     public ClientWindow(Stage root, Person client) {
         super(FXML, root);
+        // Load the image using the class loader
+        Image newImage = new Image(getClass().getResourceAsStream("/images/cryingCat.png"));
+        this.clientImage.setImage(newImage);
         setClient(client);
     }
 

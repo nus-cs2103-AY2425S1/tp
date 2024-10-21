@@ -1,7 +1,11 @@
-#helpMessage {
-    -fx-text-fill: white;
+#clientName, #clientPhone, #clientEmail, #clientAddress, #clientCondition, #clientSchedule {
+    -fx-text-fill: black;
 }
 
-#helpMessageContainer {
-    -fx-background-color: derive(#1d1d1d, 20%);
+#viewClientContainer {
+    -fx-background-color: #D3EDEA;
+}
+
+#clientProfileContainer {
+    -fx-background-color: #009794;
 }
