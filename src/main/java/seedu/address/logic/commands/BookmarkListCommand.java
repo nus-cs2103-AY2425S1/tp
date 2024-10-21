@@ -26,7 +26,7 @@ public class BookmarkListCommand extends Command {
         requireNonNull(model);
 
         model.updateFilteredCompanyList(PREDICATE_BOOKMARKED_COMPANIES);
-        List<?> filteredCompanies = model.getFilteredCompanyList();
+        List<Company> filteredCompanies = model.getFilteredCompanyList();
 
         if (filteredCompanies.isEmpty()) {
             return new CommandResult(MESSAGE_NO_BOOKMARKED_COMPANIES);
