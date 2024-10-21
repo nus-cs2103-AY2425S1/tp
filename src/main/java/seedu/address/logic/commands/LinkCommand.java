@@ -22,104 +22,103 @@ import seedu.address.model.pet.Pet;
  * Links between 2 {@code Linkable} entities. In the current implementation,
  * it only links from {@code Owner} to {@code Pet}.
  */
-public class LinkCommand extends Command{
+public class LinkCommand extends Command {
+    public static final String COMMAND_WORD = "link";
 
-  public static final String COMMAND_WORD = "link";
+    public static final String MESSAGE_USAGE =
+        COMMAND_WORD + ": Links a owner to a pet. "
+        + "Usage: " + COMMAND_WORD + " OWNER_INDEX "
+        + "[" + PREFIX_TO + "PET_INDEX]...\n"
+        + "Example: " + COMMAND_WORD + " o12 "
+        + PREFIX_TO + "p1, "
+        + COMMAND_WORD + " o13 "
+        + PREFIX_TO + "p3 "
+        + PREFIX_TO + "p2";
 
-  public static final String MESSAGE_USAGE =
-    COMMAND_WORD + ": Links a owner to a pet. "
-    + "Usage: " + COMMAND_WORD + " OWNER_INDEX "
-    + "[" + PREFIX_TO + "PET_INDEX]...\n"
-    + "Example: " + COMMAND_WORD + " o12 "
-    + PREFIX_TO + "p1, "
-    + COMMAND_WORD + " o13 "
-    + PREFIX_TO + "p3 "
-    + PREFIX_TO + "p2";
+    public static final String MESSAGE_SUCCESS = "Linked %1$s pet(s) to %2$s";
+    public static final String MESSAGE_DUPLICATE_LINK =
+        "This link already exists in the address book";
 
-  public static final String MESSAGE_SUCCESS = "Linked %1$s pet(s) to %2$s";
-  public static final String MESSAGE_DUPLICATE_LINK =
-    "This link already exists in the address book";
+    private final Index ownerIndex;
+    private final Set<Index> petIndexes;
 
-  private final Index ownerIndex;
-  private final Set<Index> petIndexes;
-
-  /**
-   * Creates a LinkCommand to link the specified {@code Linkable} entities.
-   */
-  public LinkCommand(Index ownerIndex, Set<Index> petIndexes) {
-    requireAllNonNull(ownerIndex, petIndexes);
-    this.ownerIndex = ownerIndex;
-    this.petIndexes = petIndexes;
-  }
-
-  @Override
-  public CommandResult execute(Model model) throws CommandException {
-    requireNonNull(model);
-
-    // Get last shown lists
-    List<Owner> ownerList = model.getFilteredOwnerList();
-    List<Pet> petList = model.getFilteredPetList();
-
-    if (ownerIndex.getZeroBased() >= ownerList.size()) {
-      throw new CommandException(
-        Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX
-      );
+    /**
+     * Creates a LinkCommand to link the specified {@code Linkable} entities.
+     */
+    public LinkCommand(Index ownerIndex, Set<Index> petIndexes) {
+        requireAllNonNull(ownerIndex, petIndexes);
+        this.ownerIndex = ownerIndex;
+        this.petIndexes = petIndexes;
     }
 
-    Owner owner = ownerList.get(ownerIndex.getZeroBased());
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
 
-    // Validate all links first
-    Set<Link> validatedLinks = getValidatedLinks(model, owner, petList);
+        // Get last shown lists
+        List<Owner> ownerList = model.getFilteredOwnerList();
+        List<Pet> petList = model.getFilteredPetList();
 
-    // Add all links
-    validatedLinks.forEach(model::addLink);
+        if (ownerIndex.getZeroBased() >= ownerList.size()) {
+            throw new CommandException(
+              Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX
+            );
+        }
 
-    return new CommandResult(
-      String.format(MESSAGE_SUCCESS, validatedLinks.size(), Messages.format(owner))
-    );
-  }
+        Owner owner = ownerList.get(ownerIndex.getZeroBased());
 
-  private Set<Link> getValidatedLinks(Model model, Owner owner, List<Pet> petList) throws CommandException {
-    Set<Link> links = new HashSet<>();
-    Iterator<Index> petIndexIterator = petIndexes.iterator();
-    while(petIndexIterator.hasNext()){
-      Index petIndex = petIndexIterator.next();
-      if (petIndex.getZeroBased() >= petList.size()) {
-        throw new CommandException(
-          Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX
+        // Validate all links first
+        Set<Link> validatedLinks = getValidatedLinks(model, owner, petList);
+
+        // Add all links
+        validatedLinks.forEach(model::addLink);
+
+        return new CommandResult(
+          String.format(MESSAGE_SUCCESS, validatedLinks.size(), Messages.format(owner))
         );
-      }
-
-      Link link = new Link(owner, petList.get(petIndex.getZeroBased()));
-      if (model.hasLink(link)) {
-        throw new CommandException(MESSAGE_DUPLICATE_LINK);
-      }
-      links.add(link);
-    }
-    return links;
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
     }
 
-    // instanceof handles nulls
-    if (!(other instanceof LinkCommand)) {
-      return false;
+    private Set<Link> getValidatedLinks(Model model, Owner owner, List<Pet> petList) throws CommandException {
+        Set<Link> links = new HashSet<>();
+        Iterator<Index> petIndexIterator = petIndexes.iterator();
+        while (petIndexIterator.hasNext()) {
+            Index petIndex = petIndexIterator.next();
+            if (petIndex.getZeroBased() >= petList.size()) {
+                throw new CommandException(
+                    Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX
+                );
+            }
+
+            Link link = new Link(owner, petList.get(petIndex.getZeroBased()));
+            if (model.hasLink(link)) {
+                throw new CommandException(MESSAGE_DUPLICATE_LINK);
+            }
+            links.add(link);
+        }
+        return links;
     }
 
-    LinkCommand otherLinkCommand = (LinkCommand) other;
-    return otherLinkCommand.ownerIndex.equals(ownerIndex)
-      && otherLinkCommand.petIndexes.stream().allMatch(petIndexes::contains);
-  }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
-  @Override
-  public String toString() {
-    return new ToStringBuilder(this)
-      .add("ownerIndex", ownerIndex)
-      .add("petIndexes", petIndexes)
-      .toString();
-  }
+        // instanceof handles nulls
+        if (!(other instanceof LinkCommand)) {
+            return false;
+        }
+
+        LinkCommand otherLinkCommand = (LinkCommand) other;
+        return otherLinkCommand.ownerIndex.equals(ownerIndex)
+            && otherLinkCommand.petIndexes.stream().allMatch(petIndexes::contains);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+          .add("ownerIndex", ownerIndex)
+          .add("petIndexes", petIndexes)
+          .toString();
+    }
 }

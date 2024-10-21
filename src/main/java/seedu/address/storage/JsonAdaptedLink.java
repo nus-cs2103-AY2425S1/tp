@@ -34,8 +34,8 @@ class JsonAdaptedLink {
      * Converts a given {@code Link} into this class for Jackson use.
      */
     public JsonAdaptedLink(Link source) {
-      this.from = source.getFrom().getUniqueID();
-      this.to = source.getTo().getUniqueID();
+        this.from = source.getFrom().getUniqueID();
+        this.to = source.getTo().getUniqueID();
     }
 
     /**

@@ -91,8 +91,8 @@ public class Owner implements Linkable {
     }
 
     @Override
-    public String getUniqueID(){
-      return name.fullName;
+    public String getUniqueID() {
+        return name.fullName;
     }
 
     @Override

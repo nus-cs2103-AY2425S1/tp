@@ -98,13 +98,12 @@ class JsonSerializableAddressBook {
             addressBook.addPet(pet);
         }
         for (JsonAdaptedLink jsonAdaptedLink : links) {
-          Link link = jsonAdaptedLink.toModelType(addressBook.getOwnerList(), addressBook.getPetList());
-          if (addressBook.hasLink(link)) {
-              throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
-          }
-          addressBook.addLink(link);
+            Link link = jsonAdaptedLink.toModelType(addressBook.getOwnerList(), addressBook.getPetList());
+            if (addressBook.hasLink(link)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PET);
+            }
+            addressBook.addLink(link);
         }
-
         return addressBook;
     }
 

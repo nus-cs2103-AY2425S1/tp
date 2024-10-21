@@ -112,7 +112,7 @@ public class Pet implements Linkable {
 
     @Override
     public String getUniqueID() {
-      //TODO update this to actually unique ID
+        //TODO update this to actually unique ID
         return name + " " + species + " " + breed + " " + sex;
     }
 

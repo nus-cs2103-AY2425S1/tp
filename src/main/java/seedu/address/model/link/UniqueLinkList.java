@@ -26,127 +26,128 @@ import seedu.address.model.link.exceptions.LinkNotFoundException;
  */
 public class UniqueLinkList implements Iterable<Link> {
 
-  private final ObservableList<Link> internalList = FXCollections.observableArrayList();
-  private final ObservableList<Link> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Link> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Link> internalUnmodifiableList =
+        FXCollections.unmodifiableObservableList(internalList);
 
-  /**
-   * Returns true if the list contains an equivalent link as the given argument.
-   */
-  public boolean contains(Link toCheck) {
-    requireNonNull(toCheck);
-    return internalList.stream().anyMatch(toCheck::equals);
-  }
-
-  /**
-   * Adds a Link to the list.
-   * The link must not already exist in the list.
-   */
-  public void add(Link toAdd) {
-    requireNonNull(toAdd);
-    if (contains(toAdd)) {
-      throw new DuplicateLinkException();
-    }
-    internalList.add(toAdd);
-  }
-
-  /**
-   * Replaces the link {@code target} in the list with {@code editedLink}.
-   * {@code target} must exist in the list.
-   * The link identity of {@code editedLink} must not be the same as another
-   * existing link in the list.
-   */
-  public void setLink(Link target, Link editedLink) {
-    requireAllNonNull(target, editedLink);
-
-    int index = internalList.indexOf(target);
-    if (index == -1) {
-      throw new LinkNotFoundException();
+    /**
+     * Returns true if the list contains an equivalent link as the given argument.
+     */
+    public boolean contains(Link toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
     }
 
-    if (!target.equals(editedLink) && contains(editedLink)) {
-      throw new DuplicateLinkException();
-    }
-
-    internalList.set(index, editedLink);
-  }
-
-  /**
-   * Removes the equivalent link from the list.
-   * The link must exist in the list.
-   */
-  public void remove(Link toRemove) {
-    requireNonNull(toRemove);
-    if (!internalList.remove(toRemove)) {
-      throw new LinkNotFoundException();
-    }
-  }
-
-  public void setLinks(UniqueLinkList replacement) {
-    requireNonNull(replacement);
-    internalList.setAll(replacement.internalList);
-  }
-
-  /**
-   * Replaces the contents of this list with {@code links}.
-   * {@code links} must not contain duplicate links.
-   */
-  public void setLinks(List<Link> links) {
-    requireAllNonNull(links);
-    if (!linksAreUnique(links)) {
-      throw new DuplicateLinkException();
-    }
-
-    internalList.setAll(links);
-  }
-
-  /**
-   * Returns the backing list as an unmodifiable {@code ObservableList}.
-   */
-  public ObservableList<Link> asUnmodifiableObservableList() {
-    return internalUnmodifiableList;
-  }
-
-  @Override
-  public Iterator<Link> iterator() {
-    return internalList.iterator();
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other == this) {
-      return true;
-    }
-
-    // instanceof handles nulls
-    if (!(other instanceof UniqueLinkList)) {
-      return false;
-    }
-
-    UniqueLinkList otherUniqueLinkList = (UniqueLinkList) other;
-    return internalList.equals(otherUniqueLinkList.internalList);
-  }
-
-  @Override
-  public int hashCode() {
-    return internalList.hashCode();
-  }
-
-  @Override
-  public String toString() {
-    return internalList.toString();
-  }
-
-  /**
-   * Returns true if {@code links} contains only unique links.
-   */
-  private boolean linksAreUnique(List<Link> links) {
-    for (int i = 0; i < links.size() - 1; i++) {
-      for (int j = i + 1; j < links.size(); j++) {
-        if (links.get(i).equals(links.get(j))) {
-          return false;
+    /**
+     * Adds a Link to the list.
+     * The link must not already exist in the list.
+     */
+    public void add(Link toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateLinkException();
         }
-      }
+        internalList.add(toAdd);
     }
-    return true;
-  }
+
+    /**
+     * Replaces the link {@code target} in the list with {@code editedLink}.
+     * {@code target} must exist in the list.
+     * The link identity of {@code editedLink} must not be the same as another
+     * existing link in the list.
+     */
+    public void setLink(Link target, Link editedLink) {
+        requireAllNonNull(target, editedLink);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new LinkNotFoundException();
+        }
+
+        if (!target.equals(editedLink) && contains(editedLink)) {
+            throw new DuplicateLinkException();
+        }
+
+        internalList.set(index, editedLink);
+    }
+
+    /**
+     * Removes the equivalent link from the list.
+     * The link must exist in the list.
+     */
+    public void remove(Link toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new LinkNotFoundException();
+        }
+    }
+
+    public void setLinks(UniqueLinkList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code links}.
+     * {@code links} must not contain duplicate links.
+     */
+    public void setLinks(List<Link> links) {
+        requireAllNonNull(links);
+        if (!linksAreUnique(links)) {
+            throw new DuplicateLinkException();
+        }
+
+        internalList.setAll(links);
+    }
+
+    /**
+     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Link> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+
+    @Override
+    public Iterator<Link> iterator() {
+        return internalList.iterator();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UniqueLinkList)) {
+            return false;
+        }
+
+        UniqueLinkList otherUniqueLinkList = (UniqueLinkList) other;
+        return internalList.equals(otherUniqueLinkList.internalList);
+    }
+
+    @Override
+    public int hashCode() {
+        return internalList.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return internalList.toString();
+    }
+
+    /**
+     * Returns true if {@code links} contains only unique links.
+     */
+    private boolean linksAreUnique(List<Link> links) {
+        for (int i = 0; i < links.size() - 1; i++) {
+            for (int j = i + 1; j < links.size(); j++) {
+                if (links.get(i).equals(links.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
