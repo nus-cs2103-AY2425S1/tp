@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -51,7 +52,29 @@ public class BackupCommandTest {
         StorageManager expectedStorage = new StorageManager(addressBookExpectedStorage, userPrefsExpectedStorage);
 
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), expectedStorage);
+
+        // Reset the static variable before each test
+        BackupCommand.lastManualBackupTime = 0;
     }
+
+    @AfterEach
+    public void tearDown() throws IOException {
+        // Clean up any backup files created during the test
+        Path backupDir = Path.of("backups");
+        if (Files.exists(backupDir)) {
+            try (Stream<Path> backups = Files.list(backupDir)) {
+                backups.forEach(path -> {
+                    try {
+                        Files.deleteIfExists(path);
+                    } catch (IOException e) {
+                        // Log the error if deletion fails
+                        System.err.println("Failed to delete backup file: " + path);
+                    }
+                });
+            }
+        }
+    }
+
 
     @Test
     public void executeBackupCommand_ioException_throwsCommandException() throws IOException {
@@ -159,20 +182,15 @@ public class BackupCommandTest {
         BackupCommand backupCommand = new BackupCommand();
 
         // Execute the command
-        String timestampPattern = "\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3}";
-        String expectedMessagePattern = String.format(
-                "Backup successful at backups/clinicbuddy-backup-%s.json", timestampPattern
-        );
-
-        // Use regex to match the actual message
         CommandResult result = backupCommand.execute(model);
-        assertTrue(result.getFeedbackToUser().matches(expectedMessagePattern),
-                "Backup message should match the expected pattern.");
+        assertTrue(result.getFeedbackToUser().contains("Backup successful"),
+                "Backup message should contain success indication.");
 
         // Verify that the backup file was created
         try (Stream<Path> backups = Files.list(Path.of("backups"))) {
             boolean backupExists = backups.anyMatch(path ->
-                    path.getFileName().toString().matches("clinicbuddy-backup-" + timestampPattern + "\\.json")
+                    path.getFileName().toString().matches(
+                            "clinicbuddy-backup-\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2}-\\d{3}\\.json")
             );
             assertTrue(backupExists, "Backup file should have been created with the correct format.");
         }

@@ -46,4 +46,5 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      * @throws IOException If there is an error during cleanup.
      */
     void cleanOldBackups(int maxBackups) throws IOException;
+
 }

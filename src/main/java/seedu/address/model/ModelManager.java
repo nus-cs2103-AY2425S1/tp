@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -153,18 +152,28 @@ public class ModelManager implements Model {
 
     @Override
     public void backupData(String filePath) throws IOException {
-        if (storage == null) {
-            throw new IOException("Storage is not initialized!");
-        }
+        synchronized (backupManager) {
+            logger.info("Starting manual backup.");
 
-        // If filePath is null, provide a default backup path
-        if (filePath == null) {
-            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss-SSS"));
-            filePath = String.format("backups/clinicbuddy-backup-%s.json", timestamp);
-        }
+            if (storage == null) {
+                throw new IOException("Storage is not initialized!");
+            }
 
-        logger.info("Manual backup triggered to path: " + filePath);
-        storage.saveAddressBook(getAddressBook(), Paths.get(filePath));
+            // Clean up previous manual backup to ensure only one manual backup exists
+            backupManager.cleanOldBackups(1); // This only affects manual backups
+
+            // Use a fixed filename for manual backups
+            if (filePath == null) {
+                filePath = "backups/clinicbuddy-manual-backup.json"; // Fixed name for manual backup
+            }
+
+            logger.info("Manual backup triggered to path: " + filePath);
+
+            // Save the AddressBook to the manual backup file
+            storage.saveAddressBook(getAddressBook(), Paths.get(filePath));
+
+            logger.info("Manual backup completed.");
+        }
     }
 
     // Automatically trigger backup after operations
