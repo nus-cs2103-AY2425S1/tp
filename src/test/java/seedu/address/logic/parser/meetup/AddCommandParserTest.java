@@ -34,7 +34,6 @@ import seedu.address.logic.commands.meetup.AddCommand;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.MeetUp;
-
 import seedu.address.model.meetup.To;
 import seedu.address.testutil.meetup.MeetUpBuilder;
 
@@ -142,7 +141,7 @@ public class AddCommandParserTest {
 
         // invalid from
         assertParseFailure(parser, MEETUP_NAME_DESC_PITCH + MEETUP_INFO_DESC_PITCH
-                + INVALID_MEETUP_FROM_DESC+ MEETUP_TO_DESC_PITCH, From.MESSAGE_CONSTRAINTS);
+                + INVALID_MEETUP_FROM_DESC + MEETUP_TO_DESC_PITCH, From.MESSAGE_CONSTRAINTS);
 
         // invalid to
         assertParseFailure(parser, MEETUP_NAME_DESC_PITCH + MEETUP_INFO_DESC_PITCH
