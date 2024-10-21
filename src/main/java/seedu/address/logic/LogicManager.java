@@ -52,15 +52,17 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
+        CommandResult commandResult;
         if (this.awaitingConfirmation) {
-            return handleConfirmation(commandText);
-        }
+            commandResult =  handleConfirmation(commandText);
+        } else {
+            Command command = addressBookParser.parseCommand(commandText);
+            commandResult = command.execute(model, this.awaitingConfirmation);
 
-        Command command = addressBookParser.parseCommand(commandText);
-        CommandResult commandResult = command.execute(model, this.awaitingConfirmation);
-        if (commandResult.isShowConfirmation() && !this.awaitingConfirmation) {
-            this.awaitingConfirmation = true;
-            this.delayedCommand = command;
+            if (commandResult.isShowConfirmation() && !this.awaitingConfirmation) {
+                this.awaitingConfirmation = true;
+                this.delayedCommand = command;
+            }
         }
 
         try {
