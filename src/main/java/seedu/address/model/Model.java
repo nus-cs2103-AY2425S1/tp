@@ -97,6 +97,8 @@ public interface Model {
     ObservableList<Meeting> getWeeklySchedule();
 
     void changeWeeklySchedule(Predicate<Meeting> predicate);
+    
+    ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate);
 
     /**
      * Returns an unmodifiable view of the filtered person list

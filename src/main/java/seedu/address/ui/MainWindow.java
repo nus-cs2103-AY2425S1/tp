@@ -119,6 +119,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
+        resultDisplay.setFeedbackToUser("These are your meetings for this week:");
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -127,7 +128,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        weeklySchedulePanel = new WeeklySchedulePanel(logic.getWeeklyMeetingList());
+//        weeklySchedulePanel = new WeeklySchedulePanel(logic.getWeeklyMeetingList());
+        weeklySchedulePanel = new WeeklySchedulePanel(logic.getCurrentMeetingList());
         meetingListPanelPlaceholder.getChildren().add(weeklySchedulePanel.getRoot());
     }
 

@@ -3,7 +3,9 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.time.LocalDate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -17,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Meeting;
+import seedu.address.model.schedule.SameWeekAsDatePredicate;
 import seedu.address.storage.ScheduleStorage;
 import seedu.address.storage.Storage;
 
@@ -79,6 +82,13 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Meeting> getWeeklyMeetingList() {
         return model.getWeeklySchedule();
+    }
+    
+    @Override
+    public ObservableList<Meeting> getCurrentMeetingList() {
+        LocalDate today = LocalDate.now();
+        Predicate currentWeekPredicate = new SameWeekAsDatePredicate(today);
+        return model.getCurrentWeeklySchedule(currentWeekPredicate);
     }
 
     @Override
