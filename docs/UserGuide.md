@@ -74,7 +74,7 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
+![helpwindow.png](images%2Fhelpwindow.png)
 
 Format: `help`
 
@@ -220,5 +220,5 @@ Action     | Format, Examples
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
 **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
-**List**   | `list`
 **Help**   | `help`
+**List**   | `list`
