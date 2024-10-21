@@ -3,11 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
+import seedu.address.commons.core.Browser;
+import seedu.address.commons.core.FunctionalBrowser;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -30,20 +29,22 @@ public class GitHubCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "%1s";
 
-    private static final String MESSAGE_SUCCESS = "Launching your browser...";
+    public static final String MESSAGE_SUCCESS = "Launching your browser...";
 
     private static final String NULL_GITHUB_USERNAME = "Github username specified for %1s is null.";
 
     private static final String GITHUB_URL = "https://github.com/%1s/?tab=repositories";
 
     private Name toLaunch;
+    private Browser browser;
 
     /**
      * Creates an GitHubCommand to launch the specified {@code Name} person's github repository
      */
-    public GitHubCommand(Name person) {
+    public GitHubCommand(Name person, Browser browser) {
         requireNonNull(person);
         toLaunch = person;
+        this.browser = browser;
     }
 
     @Override
@@ -57,11 +58,9 @@ public class GitHubCommand extends Command {
         try {
             Github githubAccount = model.getGitHubUsername(toLaunch);
             String uriLink = String.format(GITHUB_URL, githubAccount.username);
-            Desktop.getDesktop().browse(new URI(uriLink));
+            this.browser.launchUri(uriLink);
         } catch (IOException ioe) {
             throw new CommandException(String.format(NULL_GITHUB_USERNAME, toLaunch.toString()));
-        } catch (URISyntaxException use) {
-            throw new CommandException("");
         }
 
         return new CommandResult(MESSAGE_SUCCESS);

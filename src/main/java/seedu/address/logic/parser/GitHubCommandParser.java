@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Browser;
+import seedu.address.commons.core.FunctionalBrowser;
 import seedu.address.logic.commands.GitHubCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -31,7 +33,7 @@ public class GitHubCommandParser implements Parser<GitHubCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new GitHubCommand(name);
+        return new GitHubCommand(name, FunctionalBrowser.getDesktop());
     }
 
     /**
