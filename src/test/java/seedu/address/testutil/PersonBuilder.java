@@ -26,8 +26,8 @@ public class PersonBuilder {
     private Email email;
     private Gender gender;
     private Age age;
-    private Set<StudyGroupTag> studyGroupTags;
     private Detail detail;
+    private Set<StudyGroupTag> studyGroupTags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -37,8 +37,8 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         gender = new Gender(DEFAULT_GENDER);
         age = new Age(DEFAULT_AGE);
-        studyGroupTags = new HashSet<>();
         detail = new Detail("");
+        studyGroupTags = new HashSet<>();
     }
 
     /**
@@ -58,15 +58,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
-     * to the {@code Person} that we are building.
-     */
-    public PersonBuilder withStudyGroupTags(String... studyGroups) {
-        this.studyGroupTags = SampleDataUtil.getStudyGroupTagSet(studyGroups);
         return this;
     }
 
@@ -102,8 +93,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code studyGroups} into a {@code Set<StudyGroupTag>} and set it
+     * to the {@code Person} that we are building.
+     */
+    public PersonBuilder withStudyGroupTags(String... studyGroups) {
+        this.studyGroupTags = SampleDataUtil.getStudyGroupTagSet(studyGroups);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, email, gender, age, studyGroupTags, detail);
+        return new Person(name, email, gender, age, detail, studyGroupTags);
     }
 
 }

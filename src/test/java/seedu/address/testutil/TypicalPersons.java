@@ -29,12 +29,14 @@ public class TypicalPersons {
             .withEmail("johnd@example.com").withGender("M").withAge("40").withDetail("Study completed")
             .withStudyGroupTags("Control", "1A").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
-            .withGender("M").withAge("30").withDetail("To be assigned").withStudyGroupTags("1A").build();
+            .withGender("M").withAge("30").withDetail("To be assigned").withStudyGroupTags("1A")
+            .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withEmail("cornelia@example.com").withGender("M").withAge("50").withDetail("To be assigned")
             .withStudyGroupTags("1B").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withEmail("werner@example.com").withGender("F").withAge("60").withStudyGroupTags("2A").build();
+            .withEmail("werner@example.com").withGender("F").withAge("60")
+            .withStudyGroupTags("2A").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withEmail("lydia@example.com").withGender("F").withAge("35").withDetail("To follow up").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")

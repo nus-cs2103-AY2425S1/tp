@@ -38,8 +38,9 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
+            + "by the index number used in the displayed person list.\n"
+            + "- Study group tags: Input values will be appended to the existing tag set.\n"
+            + "- Other fields: Input values will overwrite existing values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
@@ -96,16 +97,19 @@ public class EditCommand extends Command {
      */
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
+        assert editPersonDescriptor != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Gender updatedGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
         Age updatedAge = editPersonDescriptor.getAge().orElse(personToEdit.getAge());
-        Set<StudyGroupTag> updatedStudyGroups = editPersonDescriptor.getStudyGroupTags()
-                .orElse(personToEdit.getStudyGroupTags());
         Detail updatedDetail = editPersonDescriptor.getDetail().orElse(personToEdit.getDetail());
 
-        return new Person(updatedName, updatedEmail, updatedGender, updatedAge, updatedStudyGroups, updatedDetail);
+        Set<StudyGroupTag> updatedStudyGroups = new HashSet<>();
+        updatedStudyGroups.addAll(personToEdit.getStudyGroupTags());
+        updatedStudyGroups.addAll(editPersonDescriptor.getStudyGroupTags().orElse(new HashSet<>()));
+
+        return new Person(updatedName, updatedEmail, updatedGender, updatedAge, updatedDetail, updatedStudyGroups);
     }
 
     @Override
@@ -141,16 +145,18 @@ public class EditCommand extends Command {
         private Email email;
         private Gender gender;
         private Age age;
-        private Set<StudyGroupTag> studyGroupTags;
         private Detail detail;
+        private Set<StudyGroupTag> studyGroupTags;
 
         public EditPersonDescriptor() {
         }
 
         /**
-         * Copy constructor. A defensive copy of {@code studyGroups} is used internally.
+         * Copy constructor. A defensive copy of {@code studyGroupTags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+            assert toCopy != null;
+
             setName(toCopy.name);
             setEmail(toCopy.email);
             setGender(toCopy.gender);
@@ -163,7 +169,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, email, studyGroupTags);
+            return CollectionUtil.isAnyNonNull(name, email, age, gender, detail, studyGroupTags);
         }
 
         public void setName(Name name) {
@@ -207,17 +213,17 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code studyGroups} to this object's {@code studyGroups}. A defensive
-         * copy of {@code studyGroups} is used internally.
+         * Sets {@code studyGroupTags} to this object's {@code studyGroupTags}. A defensive
+         * copy of {@code studyGroupTags} is used internally.
          */
-        public void setStudyGroupTags(Set<StudyGroupTag> studyGroups) {
-            this.studyGroupTags = (studyGroups != null) ? new HashSet<>(studyGroups) : null;
+        public void setStudyGroupTags(Set<StudyGroupTag> studyGroupTags) {
+            this.studyGroupTags = (studyGroupTags != null) ? new HashSet<>(studyGroupTags) : null;
         }
 
         /**
          * Returns an unmodifiable tag set, which throws
          * {@code UnsupportedOperationException} if modification is attempted. Returns
-         * {@code Optional#empty()} if {@code studyGroups} is null.
+         * {@code Optional#empty()} if {@code studyGroupTags} is null.
          */
         public Optional<Set<StudyGroupTag>> getStudyGroupTags() {
             return (studyGroupTags != null)
