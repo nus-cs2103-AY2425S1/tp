@@ -74,8 +74,7 @@ public class Birthday {
         LocalDate today = LocalDate.now();
         LocalDate dateInOneWeek = today.plusWeeks(1);
         LocalDate upcomingBirthday = getDateOfUpcomingBirthday();
-        return (upcomingBirthday.isEqual(today) || upcomingBirthday.isAfter(today))
-                && upcomingBirthday.isBefore(dateInOneWeek);
+        return upcomingBirthday.isAfter(today.minusDays(1)) && upcomingBirthday.isBefore(dateInOneWeek);
     }
 
     /**
