@@ -14,14 +14,11 @@ import java.time.format.DateTimeParseException;
 public class Time {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Time should follow the format hh:mm, and it should not be blank";
-    /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "\\d{2}:\\d{2}";
+            "Time should follow the format hh:mm, it must be valid and not blank";
+    public static final String MESSAGE_CHRONOLOGICAL_CONSTRAINTS =
+            "Start time should be before end time";
 
-    public final LocalTime eventTime;
+    public final LocalTime volunteerTime;
 
     /**
      * Constructs a {@code Time}.
@@ -31,20 +28,51 @@ public class Time {
     public Time(String time) throws DateTimeParseException {
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
-        this.eventTime = LocalTime.parse(time);
+        this.volunteerTime = LocalTime.parse(time);
     }
 
     /**
      * Returns true if a given string is a valid time.
      */
     public static boolean isValidTime(String test) {
-        return test.matches(VALIDATION_REGEX);
+        // Handle null time
+        if (test == null) {
+            throw new NullPointerException();
+        }
+
+        // Handle blank time and invalid formats
+        if (test.isBlank() || !test.matches("\\d{2}:\\d{2}")) {
+            return false;
+        }
+
+        // Split the string to validate hours and minutes
+        String[] parts = test.split(":");
+        int hour = Integer.parseInt(parts[0]);
+        int minute = Integer.parseInt(parts[1]);
+
+        // Check valid range for hours and minutes
+        if (hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+            return false;
+        }
+
+        // If all checks pass, it's valid
+        return true;
+    }
+
+
+    /**
+     * Returns true if this time is before the other time.
+     * @param other The other time to compare with.
+     * @return True if this time is before the other time.
+     */
+    public boolean isBefore(Time other) {
+        return volunteerTime.isBefore(other.volunteerTime);
     }
 
 
     @Override
     public String toString() {
-        return eventTime.toString();
+        return volunteerTime.toString();
     }
 
     @Override
@@ -59,14 +87,12 @@ public class Time {
         }
 
         Time otherTime = (Time) other;
-        return eventTime.equals(otherTime.eventTime);
+        return volunteerTime.equals(otherTime.volunteerTime);
     }
 
     @Override
     public int hashCode() {
-        return eventTime.hashCode();
+        return volunteerTime.hashCode();
     }
-
-
 
 }

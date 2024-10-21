@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
+import seedu.address.logic.commands.volunteercommands.VolunteerNewCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -25,15 +25,15 @@ import seedu.address.model.volunteer.Time;
 import seedu.address.model.volunteer.Volunteer;
 
 /**
- * Parses input arguments and creates a new VolunteerAddCommand object.
+ * Parses input arguments and creates a new VolunteerNewCommand object.
  */
-public class VolunteerAddCommandParser implements Parser<VolunteerAddCommand> {
+public class VolunteerNewCommandParser implements Parser<VolunteerNewCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the VolunteerAddCommand
-     * and returns a VolunteerAddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the VolunteerNewCommand
+     * and returns a VolunteerNewCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format.
      */
-    public VolunteerAddCommand parse(String args) throws ParseException {
+    public VolunteerNewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, VOLUNTEER_PREFIX_NAME, VOLUNTEER_PREFIX_PHONE,
                         VOLUNTEER_PREFIX_EMAIL, VOLUNTEER_PREFIX_AVAILABLE_DATE,
@@ -44,7 +44,7 @@ public class VolunteerAddCommandParser implements Parser<VolunteerAddCommand> {
                 VOLUNTEER_PREFIX_EMAIL, VOLUNTEER_PREFIX_AVAILABLE_DATE,
                 VOLUNTEER_PREFIX_START_TIME, VOLUNTEER_PREFIX_END_TIME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VolunteerAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, VolunteerNewCommand.MESSAGE_USAGE));
         }
 
         // Ensure no duplicate prefixes are provided
@@ -60,7 +60,7 @@ public class VolunteerAddCommandParser implements Parser<VolunteerAddCommand> {
         Time endTime = VolunteerParserUtil.parseTime(argMultimap.getValue(VOLUNTEER_PREFIX_END_TIME).get());
 
         Volunteer volunteer = new Volunteer(name, phone, email, availableDate, startTime, endTime);
-        return new VolunteerAddCommand(volunteer);
+        return new VolunteerNewCommand(volunteer);
     }
 
     /**

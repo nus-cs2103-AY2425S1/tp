@@ -19,7 +19,7 @@ import seedu.address.model.volunteer.Volunteer;
 /**
  * Adds a volunteer to the system.
  */
-public class VolunteerAddCommand extends Command {
+public class VolunteerNewCommand extends Command {
     public static final String COMMAND_WORD = "new";
     private static final String MESSAGE_DUPLICATE_VOLUNTEER = "This volunteer already exists!";
     private static final String MESSAGE_SUCCESS = "Volunteer added successfully!";
@@ -42,11 +42,11 @@ public class VolunteerAddCommand extends Command {
     private final Volunteer toAdd;
 
     /**
-     * Constructs a {@code VolunteerAddCommand} that adds the specified {@code Volunteer} to the system.
+     * Constructs a {@code VolunteerNewCommand} that adds the specified {@code Volunteer} to the system.
      *
      * @param volunteer The volunteer to be added. Must not be null.
      */
-    public VolunteerAddCommand(Volunteer volunteer) {
+    public VolunteerNewCommand(Volunteer volunteer) {
         requireNonNull(volunteer);
         this.toAdd = volunteer;
     }
