@@ -126,12 +126,12 @@ Format 3: `find n/KEYWORD [MORE_KEYWORDS] c/KEYWORD [MORE_KEYWORDS]`
 * The priority of the search will be class ID then followed by name.
 
 Examples:
-* `find n/John` returns `john`, `John Doe` and `johnny`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find c/1` returns `John Doe`, `John`, `Johnny` and `Johnmy`<br>
-  ![result for 'find c/1'](images/findC1Result.png)
-* 
+* `find n/Jo` returns `john`, `John Doe`, `johnny` and `Johnmy`<br>
+  ![result for 'find n/Jo'](images/findJoResult.png)
+* `find c/2` returns `Jack Doe`, `Jammie Doe`<br>
+  ![result for 'find c/1'](images/findC2Result.png)
+* `find n/Jack c/2` returns `Jack Doe`<br>
+  ![result for 'find n/Jack c/2'](images/findJack2.png)
 
 ### Deleting a person : `delete`
 
