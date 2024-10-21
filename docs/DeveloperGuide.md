@@ -161,21 +161,26 @@ This section describes some noteworthy details on how certain features are imple
 
 The View Client mechanism is facilitated by `ViewClientWindow`. It extends `UiPart<Stage>`. Additionally, it requires the following operations:
 
-* `ViewClientCommandPasrse#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
+* `ViewClientCommandPasrser#parse()` given the arguments succeeding the `view-client` command, parse the appropriate index to ViewClientCommand.
 * `ViewClientCommand#execute()` given the list of Clients, identify the indexed Client which would be displayed on the ViewClientWindow.
 
 Given below is an example usage scenario and how the View Client mechanism behaves at each step.
 
-Step 1. The user launches the application, all clients will be listed by default.
-        OR The user calls a List/ Find command.
+Step 1. The user launches the application, all clients will be listed by default. **OR** The user calls a List/ Find command.
 
 Step 2. The user executes `view-client 1` command to view the first person in the Client list.
+
+<box type="info" seamless>
+
+**Note:** Changes to Client details (via `edit-client`, `add-car`, `delete-car` etc.) while the `MATER - View Client` Window is open will not be immediately reflected (see `Correct as of` for the timestamp). `view-client` must be called again to reflect these changes.
+
+</box>
 
 Step 3. Before closing the existing `MATER - View Client` Window, the user executes `view-client 2` command to view the second person in the Client list.
 
 <box type="info" seamless>
 
-**Note:** Only one `MATER - View Client` Window to be displayed at all times. Calling `view-client` will display the latest request. Concurrent edits to Client details will not be updated on the `MATER - View Client` Window, `view-client` must be called again to reflect the changes.
+**Note:** Only one `MATER - View Client` Window is to be displayed at all times. Calling `view-client` again while the window is open will refresh the window for the latest request.
 
 </box>
 
