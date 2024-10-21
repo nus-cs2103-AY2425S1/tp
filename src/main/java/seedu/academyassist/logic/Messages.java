@@ -14,7 +14,7 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NRIC = "No student found with the provided NRIC";
+    public static final String MESSAGE_NO_STUDENT_FOUND = "No student found with the provided student ID";
 
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d student listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
@@ -22,6 +22,9 @@ public class Messages {
     public static final String MESSAGE_STUDENTS_FOUND_MATCHES = "%1$d student(s) found that matches the keywords.";
     public static final String MESSAGE_INVALID_NAME_FORMAT = "The name entered is invalid. "
             + "\nPlease make sure the name is between 1-100 characters and only contains alphabets and spaces.";
+    public static final String MESSAGE_DUPLICATE_IC = "Another student with the same NRIC already exists "
+            + "in the system.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -40,6 +43,8 @@ public class Messages {
     public static String format(Person person) {
         final StringBuilder builder = new StringBuilder();
         builder.append(person.getName())
+                .append("; Student ID: ")
+                .append(person.getStudentId())
                 .append("; Phone: ")
                 .append(person.getPhone())
                 .append("; Email: ")
@@ -52,8 +57,6 @@ public class Messages {
                 .append(person.getYearGroup())
                 .append("; Subjects: ");
         person.getSubjects().forEach(s -> builder.append(s + " "));
-        builder.append("; Tags: ");
-        person.getTags().forEach(builder::append);
         return builder.toString();
     }
 

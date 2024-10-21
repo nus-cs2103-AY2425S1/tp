@@ -1,12 +1,15 @@
 package seedu.academyassist.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC;
+import static seedu.academyassist.logic.Messages.MESSAGE_NO_STUDENT_FOUND;
 import static seedu.academyassist.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.academyassist.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.academyassist.logic.commands.CommandTestUtil.IC_DESC_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.academyassist.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.academyassist.logic.commands.CommandTestUtil.SUBJECT_DESC_AMY;
+import static seedu.academyassist.logic.commands.CommandTestUtil.YEAR_GROUP_DESC_AMY;
 import static seedu.academyassist.testutil.Assert.assertThrows;
 import static seedu.academyassist.testutil.TypicalPersons.AMY;
 
@@ -60,8 +63,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete S0000000S";
-        assertCommandException(deleteCommand, MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+        String deleteCommand = "delete S99999";
+        assertCommandException(deleteCommand, MESSAGE_NO_STUDENT_FOUND);
     }
 
     @Test
@@ -165,9 +168,9 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAcademyAssist method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + IC_DESC_AMY + SUBJECT_DESC_AMY + YEAR_GROUP_DESC_AMY;
+        Person expectedPerson = new PersonBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);

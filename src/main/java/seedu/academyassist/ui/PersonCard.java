@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label ic;
     @FXML
+    private Label studentId;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -55,11 +57,12 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         ic.setText(person.getIc().value);
+        studentId.setText(person.getStudentId().value);
         Label yearGroup = new Label("Year: " + person.getYearGroup().value);
         yearGroup.setStyle("-fx-background-color: #8fd3fe; -fx-text-fill: white");
         tags.getChildren().add(yearGroup);
         person.getSubjects().stream()
-                .sorted(Comparator.comparing(subject -> subject.subject))
-                .forEach(subject -> tags.getChildren().add(new Label(subject.subject)));
+                .sorted(Comparator.comparing(subject -> subject.toString()))
+                .forEach(subject -> tags.getChildren().add(new Label(subject.toString())));
     }
 }

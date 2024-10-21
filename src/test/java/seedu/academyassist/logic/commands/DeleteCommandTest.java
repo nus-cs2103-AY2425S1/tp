@@ -6,9 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.academyassist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academyassist.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.academyassist.testutil.TypicalIcs.IC_FIRST_PERSON;
 import static seedu.academyassist.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.academyassist.testutil.TypicalPersons.getTypicalAcademyAssist;
+import static seedu.academyassist.testutil.TypicalStudentIds.STUDENT_ID_FIRST_PERSON;
+import static seedu.academyassist.testutil.TypicalStudentIds.STUDENT_ID_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -16,9 +17,8 @@ import seedu.academyassist.logic.Messages;
 import seedu.academyassist.model.Model;
 import seedu.academyassist.model.ModelManager;
 import seedu.academyassist.model.UserPrefs;
-import seedu.academyassist.model.person.Ic;
-import seedu.academyassist.model.person.IcMatchesPredicate;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.StudentId;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -29,14 +29,12 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalAcademyAssist(), new UserPrefs());
 
     @Test
-    public void execute_validIcUnfilteredList_success() {
-        model.updateFilteredPersonList(new IcMatchesPredicate(IC_FIRST_PERSON));
-        Person personToDelete = model.getFilteredPersonList().get(0);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        DeleteCommand deleteCommand = new DeleteCommand(IC_FIRST_PERSON);
+    public void execute_validStudentIdUnfilteredList_success() {
+        Person personToDelete = model.getPersonWithStudentId(STUDENT_ID_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(STUDENT_ID_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getIc());
+                personToDelete.getName(), personToDelete.getStudentId());
 
         ModelManager expectedModel = new ModelManager(model.getAcademyAssist(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -45,25 +43,23 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_nonExistenceIcUnfilteredList_throwsCommandException() {
-        Ic nonExistenceIc = new Ic("S0000000G");
-        DeleteCommand deleteCommand = new DeleteCommand(nonExistenceIc);
+    public void execute_nonExistenceStudentIdUnfilteredList_throwsCommandException() {
+        StudentId nonExistenceStudentId = new StudentId("S99999");
+        DeleteCommand deleteCommand = new DeleteCommand(nonExistenceStudentId);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_STUDENT_FOUND);
     }
 
     @Test
-    public void execute_validIcFilteredList_success() {
+    public void execute_validStudentIdFilteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Ic firstPersonIc = new Ic("F2234567X");
-        model.updateFilteredPersonList(new IcMatchesPredicate(firstPersonIc));
-        Person personToDelete = model.getFilteredPersonList().get(0);
+        Person personToDelete = model.getPersonWithStudentId(STUDENT_ID_FIRST_PERSON);
 
-        DeleteCommand deleteCommand = new DeleteCommand(firstPersonIc);
+        DeleteCommand deleteCommand = new DeleteCommand(STUDENT_ID_FIRST_PERSON);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
-                personToDelete.getName(), personToDelete.getIc());
+                personToDelete.getName(), personToDelete.getStudentId());
 
         Model expectedModel = new ModelManager(model.getAcademyAssist(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
@@ -73,30 +69,26 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIcFilteredList_throwsCommandException() {
+    public void execute_invalidStudentIdFilteredList_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Ic nonExistenceIc = new Ic("S0000000G");
+        StudentId nonExistenceStudentId = new StudentId("S99999");
 
-        DeleteCommand deleteCommand = new DeleteCommand(nonExistenceIc);
+        DeleteCommand deleteCommand = new DeleteCommand(nonExistenceStudentId);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NRIC);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_NO_STUDENT_FOUND);
     }
 
     @Test
     public void equals() {
-        Ic firstPersonIc = new Ic("S0000001S");
-        Ic secondPersonIc = new Ic("S0000002S");
-
-
-        DeleteCommand deleteFirstCommand = new DeleteCommand(firstPersonIc);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(secondPersonIc);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(STUDENT_ID_FIRST_PERSON);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(STUDENT_ID_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(firstPersonIc);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(STUDENT_ID_FIRST_PERSON);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
@@ -111,9 +103,9 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Ic targetIc = new Ic("F2234567X");;
-        DeleteCommand deleteCommand = new DeleteCommand(targetIc);
-        String expected = DeleteCommand.class.getCanonicalName() + "{targetIc=" + targetIc + "}";
+        StudentId targetStudentId = new StudentId("S99999");;
+        DeleteCommand deleteCommand = new DeleteCommand(targetStudentId);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetStudentId=" + targetStudentId + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 

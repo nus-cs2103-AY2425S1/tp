@@ -13,6 +13,7 @@ import seedu.academyassist.commons.core.LogsCenter;
 import seedu.academyassist.commons.util.CollectionUtil;
 import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Person;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 
 /**
@@ -102,9 +103,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPersonWithStudentId(StudentId studentId) {
+        requireNonNull(studentId);
+        return academyAssist.hasPersonWithStudentId(studentId);
+    }
+
+    @Override
     public Person getPersonWithIc(Ic ic) {
         return academyAssist.getPersonWithIc(ic);
-    };
+    }
+
+    @Override
+    public Person getPersonWithStudentId(StudentId studentId) {
+        return academyAssist.getPersonWithStudentId(studentId);
+    }
 
     @Override
     public boolean personDuplicateClass(Subject subject, Person student) {
@@ -142,6 +154,16 @@ public class ModelManager implements Model {
     @Override
     public void sortAcademyAssistByClass() {
         academyAssist.sortPersonsByClass();
+    }
+
+    @Override
+    public void incrementStudentCount() {
+        academyAssist.incrementStudentCount();
+    }
+
+    @Override
+    public int getStudentCount() {
+        return academyAssist.getStudentCount();
     }
 
     //=========== Filtered Person List Accessors =============================================================

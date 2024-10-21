@@ -3,7 +3,6 @@ package seedu.academyassist.logic.parser;
 import static seedu.academyassist.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.academyassist.logic.commands.AddCommand;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
@@ -13,9 +12,9 @@ import seedu.academyassist.model.person.Ic;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
+import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -31,10 +30,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
                         CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT,
-                        CliSyntax.PREFIX_YEARGROUP, CliSyntax.PREFIX_TAG);
+                        CliSyntax.PREFIX_YEARGROUP);
 
-        if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_PHONE,
-                CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_YEARGROUP,
+        if (!ParserUtil.arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS,
+                CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_IC, CliSyntax.PREFIX_SUBJECT, CliSyntax.PREFIX_YEARGROUP,
                 CliSyntax.PREFIX_EMAIL) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -46,21 +45,13 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(CliSyntax.PREFIX_ADDRESS).get());
         Ic ic = ParserUtil.parseIc(argMultimap.getValue(CliSyntax.PREFIX_IC).get());
+        StudentId studentId = StudentId.TEMPORARY_STUDENT_ID;
         YearGroup yg = ParserUtil.parseYearGroup(argMultimap.getValue(CliSyntax.PREFIX_YEARGROUP).get());
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(CliSyntax.PREFIX_SUBJECT));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, ic, yg, subjects, tagList);
+        Person person = new Person(name, phone, email, address, ic, yg, studentId, subjects);
 
         return new AddCommand(person);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
 }
