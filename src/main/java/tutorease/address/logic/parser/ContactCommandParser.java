@@ -30,15 +30,15 @@ public class ContactCommandParser implements Parser<Command> {
         final String subArguments = matcher.group("subArguments");
 
         switch (subCommand) {
-        case AddContactCommand.SUB_COMMAND_WORD:
+        case AddContactCommand.COMMAND_WORD:
             return new AddContactCommandParser().parse(subArguments);
-        case DeleteContactCommand.SUB_COMMAND_WORD:
+        case DeleteContactCommand.COMMAND_WORD:
             return new DeleteContactCommandParser().parse(subArguments);
-        case ListContactCommand.SUB_COMMAND_WORD:
+        case ListContactCommand.COMMAND_WORD:
             return new ListContactCommand();
-        // Future sub-commands like add, edit can be handled here
-        case FindContactCommand.SUB_COMMAND_WORD:
+        case FindContactCommand.COMMAND_WORD:
             return new FindContactCommandParser().parse(subArguments);
+        // Future sub-commands like add, edit can be handled here
         default:
             throw new ParseException("Unknown contact sub-command: " + subCommand);
         }

@@ -19,9 +19,9 @@ import tutorease.address.model.person.Person;
  */
 
 public class AddContactCommand extends ContactCommand {
-    public static final String SUB_COMMAND_WORD = "add";
+    public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + SUB_COMMAND_WORD
+    public static final String MESSAGE_USAGE = ContactCommand.COMMAND_WORD + " " + COMMAND_WORD
             + ": Adds a person to TutorEase. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -30,7 +30,7 @@ public class AddContactCommand extends ContactCommand {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_ROLE + "ROLE "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " " + SUB_COMMAND_WORD + " "
+            + "Example: " + ContactCommand.COMMAND_WORD + " " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

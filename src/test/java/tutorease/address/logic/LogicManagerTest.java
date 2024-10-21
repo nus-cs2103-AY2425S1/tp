@@ -21,6 +21,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.CommandResult;
+import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.exceptions.CommandException;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.Model;
@@ -159,7 +160,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveTutorEase method by executing an add command
-        String addContactCommand = AddContactCommand.COMMAND_WORD + " " + AddContactCommand.SUB_COMMAND_WORD
+        String addContactCommand = ContactCommand.COMMAND_WORD + " " + AddContactCommand.COMMAND_WORD
                 + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + ROLE_DESC_AMY;
         Person expectedPerson = new StudentBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();

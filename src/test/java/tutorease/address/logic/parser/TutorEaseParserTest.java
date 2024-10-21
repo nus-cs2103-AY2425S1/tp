@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import tutorease.address.logic.commands.AddContactCommand;
 import tutorease.address.logic.commands.AddLessonCommand;
 import tutorease.address.logic.commands.ClearCommand;
+import tutorease.address.logic.commands.ContactCommand;
 import tutorease.address.logic.commands.EditCommand;
 import tutorease.address.logic.commands.EditCommand.EditPersonDescriptor;
 import tutorease.address.logic.commands.ExitCommand;
@@ -96,7 +97,7 @@ public class TutorEaseParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindContactCommand command = (FindContactCommand) parser.parseCommand(
-                FindContactCommand.COMMAND_WORD + " " + FindContactCommand.SUB_COMMAND_WORD
+                ContactCommand.COMMAND_WORD + " " + FindContactCommand.COMMAND_WORD
                         + " " + String.join(" ", keywords));
         assertEquals(new FindContactCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
