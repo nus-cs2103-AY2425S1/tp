@@ -18,13 +18,17 @@ public class Bookmark {
         this.isBookmark = value;
     }
 
+    public Bookmark() {
+        this.isBookmark = false;
+    }
+
     public boolean getIsBookmarkValue() {
         return this.isBookmark;
     }
 
     @Override
     public String toString() {
-        return isBookmark ? "Bookmark:true" : "Bookmark:false";
+        return isBookmark ? "true" : "false";
     }
 
     @Override

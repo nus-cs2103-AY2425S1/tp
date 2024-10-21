@@ -50,7 +50,8 @@ public class RemoveBookmarkCommand extends Command {
 
         // Check if company is even bookmarked in the first place
         if (!companyToRemoveBookmark.getIsBookmark().getIsBookmarkValue()) {
-            return new CommandResult(MESSAGE_REMOVE_BOOKMARK_FAILURE);
+            return new CommandResult(String.format(MESSAGE_REMOVE_BOOKMARK_FAILURE,
+                    Messages.format(companyToRemoveBookmark)));
         }
 
         Company companyRemovedBookmark = new Company(companyToRemoveBookmark.getName(),

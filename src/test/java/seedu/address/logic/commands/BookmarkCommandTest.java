@@ -47,8 +47,10 @@ public class BookmarkCommandTest {
     @Test
     public void execute_existingBookmarkUnfilteredList_showsFailure() {
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
+        Company companyToBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        String expectedMessage = String.format(MESSAGE_BOOKMARK_FAILURE, Messages.format(companyToBookmark));
 
-        assertCommandSuccess(bookmarkCommand, bookmarkedModel, MESSAGE_BOOKMARK_FAILURE, bookmarkedModel);
+        assertCommandSuccess(bookmarkCommand, bookmarkedModel, expectedMessage, bookmarkedModel);
     }
 
     @Test
@@ -84,7 +86,10 @@ public class BookmarkCommandTest {
         showCompanyAtIndex(bookmarkedModel, INDEX_FIRST_COMPANY);
         BookmarkCommand bookmarkCommand = new BookmarkCommand(INDEX_FIRST_COMPANY);
 
-        assertCommandSuccess(bookmarkCommand, bookmarkedModel, MESSAGE_BOOKMARK_FAILURE, bookmarkedModel);
+        Company companyToBookmark = bookmarkedModel.getFilteredCompanyList().get(INDEX_FIRST_COMPANY.getZeroBased());
+        String expectedMessage = String.format(MESSAGE_BOOKMARK_FAILURE, Messages.format(companyToBookmark));
+
+        assertCommandSuccess(bookmarkCommand, bookmarkedModel, expectedMessage, bookmarkedModel);
     }
 
     @Test
