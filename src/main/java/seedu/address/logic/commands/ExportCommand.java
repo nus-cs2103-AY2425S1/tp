@@ -65,6 +65,36 @@ public class ExportCommand extends Command {
         return new CommandResult(SUCCESS_MESSAGE);
     }
 
+    /**
+     * Parses a single tag from its JSON representation to its CSV representation.
+     * e.g. {\n \"friends\" : null\n} -> friends
+     * @param tagString
+     * @return a single parsed tag
+     */
+    static String parseTags(String tagString) {
+        // Remove leading and trailing whitespace
+        tagString = tagString.trim();
+
+        // Check if the string starts with { and ends with }
+        if (tagString.startsWith("\"{") && tagString.endsWith("}\"")) {
+            // Remove the outer braces
+            tagString = tagString.substring(6, tagString.length() - 1);
+
+            // Split by : and take the first part
+            String[] parts = tagString.split(":");
+            if (parts.length > 0) {
+                // Trim and remove quotes from the tag name
+                String trimmed = parts[0].trim()
+                        .replaceAll("\"", "")
+                        .replaceAll("\\\\", "");
+                return trimmed;
+            }
+        }
+
+        // If the format doesn't match, return the original string
+        return tagString;
+    }
+
     static List<Map<String, String>> readAndParseJson(String filePath) throws IOException {
         List<Map<String, String>> jsonData = new ArrayList<>();
         ObjectMapper objectMapper = new ObjectMapper();
@@ -87,7 +117,7 @@ public class ExportCommand extends Command {
                 } else if (value.isArray() && header.equals("tags")) {
                     List<String> tags = new ArrayList<>();
                     for (JsonNode tag : value) {
-                        tags.add(tag.toString());
+                        tags.add(parseTags(tag.toString()));
                     }
                     personInfo.put(header, String.join(", ", tags));
                 } else {
@@ -121,6 +151,8 @@ public class ExportCommand extends Command {
                 }
                 writer.println(String.join(",", rowData));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
