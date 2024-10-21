@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalMeetUps.NETWORKING_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.PITCH_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.THIRD_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.meetup.TypicalMeetUps.NETWORKING_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.PITCH_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.THIRD_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.io.TempDir;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.storage.meetup.JsonMeetUpListStorage;
 
 public class JsonMeetUpListStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonMeetUpListStorageTest");
@@ -51,12 +52,12 @@ public class JsonMeetUpListStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidMeetUpList_throwDataLoadingException() {
+    public void readBuyerList_invalidMeetUpList_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readMeetUpList("invalidMeetUpList.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidMeetUpList_throwDataLoadingException() {
+    public void readBuyerList_invalidAndValidMeetUpList_throwDataLoadingException() {
         assertThrows(DataLoadingException.class, () -> readMeetUpList("invalidAndValidMeetUpList.json"));
     }
 
@@ -92,7 +93,7 @@ public class JsonMeetUpListStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code buyerList} at the specified {@code filePath}.
      */
     private void saveMeetUpList(ReadOnlyMeetUpList meetUpList, String filePath) {
         try {

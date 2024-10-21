@@ -9,14 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.BuyerType;
+import seedu.address.model.buyer.Email;
+import seedu.address.model.buyer.Phone;
 import seedu.address.model.meetup.From;
 import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.Name;
 import seedu.address.model.meetup.To;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.PersonType;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,13 +45,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static seedu.address.model.person.Name parseName(String name) throws ParseException {
+    public static seedu.address.model.buyer.Name parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!seedu.address.model.person.Name.isValidName(trimmedName)) {
-            throw new ParseException(seedu.address.model.person.Name.MESSAGE_CONSTRAINTS);
+        if (!seedu.address.model.buyer.Name.isValidName(trimmedName)) {
+            throw new ParseException(seedu.address.model.buyer.Name.MESSAGE_CONSTRAINTS);
         }
-        return new seedu.address.model.person.Name(trimmedName);
+        return new seedu.address.model.buyer.Name(trimmedName);
     }
 
     /**
@@ -100,18 +100,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String personType} into an {@code PersonType}.
+     * Parses a {@code String buyerType} into an {@code BuyerType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code personType} is invalid.
+     * @throws ParseException if the given {@code buyerType} is invalid.
      */
-    public static PersonType parsePersonType(String personType) throws ParseException {
-        requireNonNull(personType);
-        String trimmedPersonType = personType.trim();
-        if (!PersonType.isValidType(trimmedPersonType)) {
-            throw new ParseException(PersonType.MESSAGE_CONSTRAINTS);
+    public static BuyerType parseBuyerType(String buyerType) throws ParseException {
+        requireNonNull(buyerType);
+        String trimmedBuyerType = buyerType.trim();
+        if (!BuyerType.isValidType(trimmedBuyerType)) {
+            throw new ParseException(BuyerType.MESSAGE_CONSTRAINTS);
         }
-        return new PersonType(trimmedPersonType);
+        return new BuyerType(trimmedBuyerType);
     }
 
     /**

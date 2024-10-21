@@ -10,12 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_NET
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_NAME_PITCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_NETWORKING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETUP_TO_PITCH;
-import static seedu.address.testutil.TypicalMeetUps.NETWORKING_MEETUP;
-import static seedu.address.testutil.TypicalMeetUps.PITCH_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.NETWORKING_MEETUP;
+import static seedu.address.testutil.meetup.TypicalMeetUps.PITCH_MEETUP;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.testutil.MeetUpBuilder;
+import seedu.address.testutil.meetup.MeetUpBuilder;
 
 public class MeetUpTest {
 
@@ -60,7 +60,7 @@ public class MeetUpTest {
         // different type -> returns false
         assertFalse(PITCH_MEETUP.equals(5));
 
-        // different person -> returns false
+        // different buyer -> returns false
         assertFalse(PITCH_MEETUP.equals(NETWORKING_MEETUP));
 
         // different name -> returns false
