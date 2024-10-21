@@ -2,29 +2,22 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.person.SocialMedia.Platform.CAROUSELL;
 import static seedu.address.model.person.SocialMedia.Platform.FACEBOOK;
 import static seedu.address.model.person.SocialMedia.Platform.INSTAGRAM;
 import static seedu.address.model.person.SocialMedia.isValidHandleName;
-import static seedu.address.model.tag.Tag.MESSAGE_CONSTRAINTS;
-import static seedu.address.model.tag.Tag.isValidTagName;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.SocialMediaCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.SocialMedia;
 
+/**
+ * Parses input arguments and creates a new SocialMediaCommand object.
+ */
 public class SocialMediaCommandParser implements Parser<SocialMediaCommand> {
 
     @Override
@@ -59,7 +52,7 @@ public class SocialMediaCommandParser implements Parser<SocialMediaCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE)));
             platform = CAROUSELL;
         } else if (!argMultimap.getValue(PREFIX_IG).isPresent() && !argMultimap.getValue(PREFIX_FB).isPresent()
-                && !argMultimap.getValue(PREFIX_CS).isPresent()){
+                && !argMultimap.getValue(PREFIX_CS).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SocialMediaCommand.MESSAGE_USAGE));
         }
         if (!isValidHandleName(handle)) {

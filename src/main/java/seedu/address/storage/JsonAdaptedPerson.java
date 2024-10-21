@@ -112,15 +112,15 @@ class JsonAdaptedPerson {
         }
         final SocialMedia modelSocialMedia;
         if (socialMedia.startsWith("[ig-")) {
-            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1), SocialMedia.Platform.INSTAGRAM);
-        }
-        else if (socialMedia.startsWith("[fb-")) {
-            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1), SocialMedia.Platform.FACEBOOK);
-        }
-        else if (socialMedia.startsWith("[cs-")) {
-            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1), SocialMedia.Platform.CAROUSELL);
-        }
-        else {
+            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                    SocialMedia.Platform.INSTAGRAM);
+        } else if (socialMedia.startsWith("[fb-")) {
+            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                    SocialMedia.Platform.FACEBOOK);
+        } else if (socialMedia.startsWith("[cs-")) {
+            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                    SocialMedia.Platform.CAROUSELL);
+        } else {
             modelSocialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);

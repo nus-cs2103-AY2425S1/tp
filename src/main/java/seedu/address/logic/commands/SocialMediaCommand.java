@@ -1,25 +1,23 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
-import static seedu.address.model.Model.PREDICATE_DO_NOT_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.SocialMedia;
 
+/**
+ * Adds a social media handle to a contact.
+ */
 public class SocialMediaCommand extends Command {
 
     public static final String COMMAND_WORD = "socialMedia";
@@ -33,13 +31,19 @@ public class SocialMediaCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_IG + "myInstaUsername";
 
-    public static final String MESSAGE_SOCIAL_MEDIA_SUCCESS = "Social media handle added: %1$s";
-    public static final String MESSAGE_SOCIAL_MEDIA_EXISTING = "Contact already has an existing handle";
+    public static final String MESSAGE_SOCIAL_MEDIA_SUCCESS = "%1$s 's social media handle added: %2$s";
+    public static final String MESSAGE_SOCIAL_MEDIA_EXISTING = "%1$s 's social media handle updated to: %2$s";
 
     private String handle;
     private SocialMedia.Platform platform;
     private Index index;
 
+    /**
+     * Creates a SocialMediaCommand to assign a handle to the person at the specified index.
+     * @param handle
+     * @param platform
+     * @param index
+     */
     public SocialMediaCommand(String handle, SocialMedia.Platform platform, Index index) {
         this.handle = handle;
         this.platform = platform;
@@ -56,10 +60,6 @@ public class SocialMediaCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        if (personToEdit.hasSocialMedia()) {
-            throw new CommandException(MESSAGE_SOCIAL_MEDIA_EXISTING);
-        }
-
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags());
@@ -68,7 +68,13 @@ public class SocialMediaCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(MESSAGE_SOCIAL_MEDIA_SUCCESS, Messages.format(personToEdit)));
+        if (personToEdit.hasSocialMedia()) {
+            return new CommandResult(String.format(MESSAGE_SOCIAL_MEDIA_EXISTING, personToEdit.getName(),
+                    socialMediaToAdd));
+        } else {
+            return new CommandResult(String.format(MESSAGE_SOCIAL_MEDIA_SUCCESS, personToEdit.getName(),
+                    socialMediaToAdd));
+        }
     }
 
     @Override
