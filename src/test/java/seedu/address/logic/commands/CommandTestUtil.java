@@ -33,6 +33,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_COURSE_CS2103T = "CS2103T";
     public static final String VALID_COURSE_CS2101 = "CS2101";
+    public static final String VALID_COURSE_CS2030 = "CS2030";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
