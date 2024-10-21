@@ -1,7 +1,5 @@
 package seedu.address.model.id.counter.list;
 
-import seedu.address.model.person.Person;
-
 /**
  * Represents the ID counter for both persons and events in the address book.
  * Guarantees: ID counter for persons/events is more than or equal to the number of persons/events in the address book.
