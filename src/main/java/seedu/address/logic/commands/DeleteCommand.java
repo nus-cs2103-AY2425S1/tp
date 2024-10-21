@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Confirmation;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -25,9 +26,10 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_PERSON_CANCELLED = "Delete action cancelled.";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
     public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
-
+    public static final String MESSAGE_CONFIRMATION = "Are you sure you want to delete %1$s?";
     private final Name targetName;
     private final Index targetIndex;
 
@@ -51,9 +53,26 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        Person personToDelete = findPersonToDelete(lastShownList);
 
-        Person personToDelete;
+        // Show confirmation dialog
+        if (confirmDeletion(personToDelete)) {
+            model.deletePerson(personToDelete);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
+        } else {
+            return new CommandResult(MESSAGE_DELETE_PERSON_CANCELLED);
+        }
+    }
 
+
+    /**
+     * Finds the person to delete based on the provided name or index.
+     *
+     * @param lastShownList The list of persons currently shown.
+     * @return The person to delete.
+     * @throws CommandException if the person cannot be found.
+     */
+    private Person findPersonToDelete(List<Person> lastShownList) throws CommandException {
         if (targetName != null) {
             Optional<Person> personOptional = lastShownList.stream()
                     .filter(person -> person.getName().equals(targetName))
@@ -62,16 +81,27 @@ public class DeleteCommand extends Command {
             if (personOptional.isEmpty()) {
                 throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
             }
-            personToDelete = personOptional.get();
+            return personOptional.get();
         } else {
             if (targetIndex.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(MESSAGE_INVALID_INDEX);
             }
-            personToDelete = lastShownList.get(targetIndex.getZeroBased());
+            return lastShownList.get(targetIndex.getZeroBased());
         }
+    }
 
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
+    /**
+     * Shows a confirmation dialog to the user and returns whether the deletion was confirmed.
+     *
+     * @param personToDelete The person to be deleted.
+     * @return true if the deletion is confirmed; false otherwise.
+     */
+    private boolean confirmDeletion(Person personToDelete) {
+        Confirmation confirmation = Confirmation.getInstance();
+        return confirmation.showAlertDialogAndWait(
+                "Confirm Delete",
+                String.format(MESSAGE_CONFIRMATION, personToDelete.getName())
+        );
     }
 
     @Override
