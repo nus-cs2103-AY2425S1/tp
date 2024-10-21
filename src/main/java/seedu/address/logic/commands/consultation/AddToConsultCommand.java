@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
@@ -67,8 +68,14 @@ public class AddToConsultCommand extends Command {
         return new CommandResult(String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)));
     }
 
-    public String getCommandType() {
-        return COMMAND_WORD;
+    /**
+     * Returns Command Type ADDSTUDENT
+     *
+     * @return Command Type ADDSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.ADDTOCONSULT;
     }
 
     @Override

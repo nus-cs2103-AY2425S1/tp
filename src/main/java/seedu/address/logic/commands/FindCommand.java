@@ -14,7 +14,8 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Finds and lists all students in address book whose name contains any of the argument keywords.
+ * Finds and lists all students in address book whose name contains any of the
+ * argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
@@ -64,6 +65,16 @@ public class FindCommand extends Command {
      */
     private Predicate<Student> combinePredicates(List<? extends Predicate<? super Student>> predicates) {
         return student -> predicates.stream().allMatch(p -> p.test(student));
+    }
+
+    /**
+     * Returns Command Type FINDSTUDENT
+     *
+     * @return Command Type FINDSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.FINDSTUDENT;
     }
 
     @Override
