@@ -27,13 +27,14 @@ public class Person {
     private final ProjectStatus projectStatus;
     private final PaymentStatus paymentStatus;
     private final ClientStatus clientStatus;
+    private final Deadline deadline;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, ProjectStatus projectStatus,
-                  PaymentStatus paymentStatus, ClientStatus clientStatus) {
-        requireAllNonNull(name, phone, email, address, tags);
+                  PaymentStatus paymentStatus, ClientStatus clientStatus, Deadline deadline) {
+        requireAllNonNull(name, phone, email, address, tags, deadline);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -45,6 +46,7 @@ public class Person {
                 ? paymentStatus : new PaymentStatus("unpaid");
         this.clientStatus = (clientStatus != null)
                 ? clientStatus : new ClientStatus("active"); //default
+        this.deadline = deadline;
     }
 
     public Name getName() {
@@ -78,9 +80,15 @@ public class Person {
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
+
     public ClientStatus getClientStatus() {
         return clientStatus;
     }
+
+    public Deadline getDeadline() {
+        return deadline;
+    }
+
 
     /**
      * Returns true if both persons have the same name, email and phone.
@@ -120,13 +128,14 @@ public class Person {
                 && tags.equals(otherPerson.tags)
                 && projectStatus.equals(otherPerson.projectStatus)
                 && paymentStatus.equals(otherPerson.paymentStatus)
-                && clientStatus.equals(otherPerson.clientStatus);
+                && clientStatus.equals(otherPerson.clientStatus)
+                && deadline.equals(otherPerson.deadline);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus);
+        return Objects.hash(name, phone, email, address, tags, projectStatus, paymentStatus, clientStatus, deadline);
     }
 
     @Override
@@ -140,6 +149,7 @@ public class Person {
                 .add("projectStatus", projectStatus)
                 .add("paymentStatus", paymentStatus)
                 .add("clientStatus", clientStatus)
+                .add("deadline", deadline)
                 .toString();
     }
 }

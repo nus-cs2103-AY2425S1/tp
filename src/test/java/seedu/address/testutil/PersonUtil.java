@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
@@ -9,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
@@ -20,6 +22,8 @@ import seedu.address.model.tag.Tag;
  * A utility class for Person.
  */
 public class PersonUtil {
+
+    public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     /**
      * Returns an add command string for adding the {@code person}.
@@ -43,6 +47,8 @@ public class PersonUtil {
         sb.append(PREFIX_PROJECT_STATUS + person.getProjectStatus().toString() + " ");
         sb.append(PREFIX_PAYMENT_STATUS + person.getPaymentStatus().toString() + " ");
         sb.append(PREFIX_CLIENT_STATUS + person.getClientStatus().toString() + " ");
+        sb.append(PREFIX_DEADLINE
+                + person.getDeadline().value.format(INPUT_FORMATTER));
         return sb.toString();
     }
 
@@ -61,6 +67,8 @@ public class PersonUtil {
                 sb.append(PREFIX_PAYMENT_STATUS).append(paymentStatus).append(" "));
         descriptor.getClientStatus().ifPresent(clientStatus ->
                 sb.append(PREFIX_CLIENT_STATUS).append(clientStatus).append(" "));
+        descriptor.getDeadline().ifPresent(deadline -> sb.append(PREFIX_DEADLINE)
+                .append(deadline.value.format(PersonUtil.INPUT_FORMATTER)).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

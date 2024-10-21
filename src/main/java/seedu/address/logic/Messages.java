@@ -49,7 +49,9 @@ public class Messages {
                 .append("; Payment status: ")
                 .append(person.getPaymentStatus())
                 .append("; Client status: ")
-                .append(person.getClientStatus());
+                .append(person.getClientStatus())
+                .append("; Deadline: ")
+                .append(person.getDeadline());
         person.getTags().forEach(builder::append);
         return builder.toString();
     }

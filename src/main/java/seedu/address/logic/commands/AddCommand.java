@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLIENT_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
@@ -32,7 +33,8 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_PROJECT_STATUS + "PROJECT_STATUS] "
             + "[" + PREFIX_PAYMENT_STATUS + "PAYMENT_STATUS] "
-            + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS]\n"
+            + "[" + PREFIX_CLIENT_STATUS + "CLIENT_STATUS]"
+            + "[" + PREFIX_DEADLINE + "DEADLINE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -42,7 +44,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "owesMoney "
             + PREFIX_PROJECT_STATUS + "in progress "
             + PREFIX_PAYMENT_STATUS + "unpaid "
-            + PREFIX_CLIENT_STATUS + "active";
+            + PREFIX_CLIENT_STATUS + "active"
+            + PREFIX_DEADLINE + "20-10-2024";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
