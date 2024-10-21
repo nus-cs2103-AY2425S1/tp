@@ -11,6 +11,7 @@ import static seedu.address.testutil.TutUtil.TUTORIAL_SAMPLE;
 import static seedu.address.testutil.TutUtil.TUT_DATE;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.AMY;
 
 import java.util.Date;
 
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tut.exceptions.NoTutorialException;
 import seedu.address.testutil.StudentBuilder;
 
@@ -214,6 +216,13 @@ public class TutorialTest {
     }
 
     @Test
+    public void deleteStudentFailTest() {
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        assertThrows(StudentNotFoundException.class, ()
+                -> tutorial.deleteStudent(ALICE));
+    }
+
+    @Test
     public void constructor_none_singleton() {
         Tutorial none = Tutorial.none();
         Tutorial none1 = Tutorial.none();
@@ -294,5 +303,11 @@ public class TutorialTest {
         assertTrue(NONE.studentInList(ALICE));
         NONE.deleteStudent(ALICE);
         assertFalse(NONE.studentInList(ALICE));
+    }
+
+    @Test
+    public void deleteStudent_fail_noneTest() {
+        assertThrows(StudentNotFoundException.class, ()
+                -> NONE.deleteStudent(AMY));
     }
 }

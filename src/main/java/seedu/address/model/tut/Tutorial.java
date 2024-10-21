@@ -10,6 +10,7 @@ import java.util.List;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tut.exceptions.NoTutorialException;
 import seedu.address.model.tut.exceptions.TutDateNotFoundException;
 
@@ -236,6 +237,9 @@ public abstract class Tutorial {
 
         @Override
         public void deleteStudent(Student student) {
+            if (!students.contains(student)) {
+                throw new StudentNotFoundException();
+            }
             students.remove(student);
         }
 
@@ -337,6 +341,9 @@ public abstract class Tutorial {
 
         @Override
         public void deleteStudent(Student student) {
+            if (!students.contains(student)) {
+                throw new StudentNotFoundException();
+            }
             students.remove(student);
         }
 
