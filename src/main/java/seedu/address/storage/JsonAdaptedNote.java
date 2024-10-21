@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Note;
 
@@ -38,8 +39,11 @@ class JsonAdaptedNote {
      */
     public Note toModelType() throws IllegalValueException {
         if (content == null) {
-            throw new IllegalValueException(String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT, "Note content"));
+            throw new IllegalValueException(
+                    String.format(JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT, "Note content"));
         }
         return new Note(content);
     }
+
+
 }

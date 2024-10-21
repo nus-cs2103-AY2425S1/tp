@@ -161,7 +161,7 @@ class JsonAdaptedPerson {
         for (JsonAdaptedNote note : notes) {
             person.addNote(note.toModelType());
         }
-        return person;    
+        return person;
     }
 
 }

@@ -189,7 +189,7 @@ public class Person {
     public List<Note> getNotes() {
         return List.copyOf(notes);
     }
-    
+
     /**
      * Adds a note to this person.
      *
@@ -199,7 +199,7 @@ public class Person {
         requireNonNull(note);
         notes.add(note);
     }
-    
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -211,7 +211,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getNric().equals(getNric());
-    }   
+    }
 
     /**
      * Returns true if both persons have the same identity and data fields.
