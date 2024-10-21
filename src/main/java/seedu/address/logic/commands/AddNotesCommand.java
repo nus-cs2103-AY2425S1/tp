@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class AddNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "addNotes";
+    public static final String COMMAND_WORD = "add_notes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the patient notes of the patient identified "
             + "by the index number used in the last patient listing. "
@@ -71,7 +71,7 @@ public class AddNotesCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !notes.notes.isEmpty() ? MESSAGE_ADD_NOTES_SUCCESS : MESSAGE_DELETE_NOTES_SUCCESS;
+        String message = !notes.value.isEmpty() ? MESSAGE_ADD_NOTES_SUCCESS : MESSAGE_DELETE_NOTES_SUCCESS;
         return String.format(message, Messages.format(personToEdit));
     }
 

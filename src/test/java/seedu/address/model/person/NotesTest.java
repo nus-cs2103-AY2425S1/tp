@@ -10,7 +10,7 @@ public class NotesTest {
         // same object -> returns true
         assertTrue(notes.equals(notes));
         // same values -> returns true
-        Notes notesCopy = new Notes(notes.notes);
+        Notes notesCopy = new Notes(notes.value);
         assertTrue(notes.equals(notesCopy));
         // different types -> returns false
         assertFalse(notes.equals(1));

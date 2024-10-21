@@ -87,7 +87,7 @@ class JsonAdaptedPerson {
         ward = source.getWard().value;
         diagnosis = source.getDiagnosis().value;
         medication = source.getMedication().value;
-        notes = source.getNotes().notes;
+        notes = source.getNotes().value;
         /*
         phone = source.getPhone().value;
         email = source.getEmail().value;
