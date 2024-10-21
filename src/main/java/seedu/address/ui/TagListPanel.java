@@ -37,8 +37,7 @@ public class TagListPanel extends UiPart<Region> {
      */
     public void updateTagList(ObservableList<Tag> tagList) {
         ObservableList<Tag> sortedTags = FXCollections
-                .observableArrayList(tagList)
-                .sorted(Comparator.comparing(Tag::toString));
+                .observableArrayList(tagList);
         tagListView.setItems(sortedTags);
     }
 
