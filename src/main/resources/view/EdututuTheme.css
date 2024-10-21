@@ -1,6 +1,6 @@
 * {
-    -ab3-background: #383838;
-    -ab3-background-2: #1d1d1d;
+    -ab3-background: #D2C0BD;
+    -ab3-background-2: #D2C0BD;
     -ab3-border: #4d4d4d;
     -ab3-even-cell-background: #3c3e3f;
     -ab3-odd-cell-background: #515658;
@@ -107,21 +107,29 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(-ab3-background-2, 20%);
+    -fx-background-color: #D2C0BD;
+}
+
+.list-cell:empty {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
 }
 
 .list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-background-color: #FAFAF5; /* Keeps the background color white */
+    -fx-border-color: #D2C0BD; /* Light color for the border */
+    -fx-border-width: 0 0 4px 0; /* Adds a thin line only at the bottom */
+    -fx-label-padding: 10 10 10 10; /* Adds some padding for better spacing */
 }
 
+
+
 .list-cell:filled:even {
-    -fx-background-color: -ab3-even-cell-background;
+    -fx-background-color: #FAFAF5;
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: -ab3-odd-cell-background;
+    -fx-background-color: #FAFAF5;
 }
 
 .list-cell:filled:selected {
@@ -134,7 +142,7 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
 }
 
 .cell_big_label {
@@ -164,14 +172,15 @@
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: #F0E7E6;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #333333; /* Darker text for better visibility */
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: #333333 !important; /* Change to a darker shade for better visibility */
+    -fx-opacity: 1; /* Ensure full opacity */
 }
 
 .status-bar .label {
@@ -216,7 +225,7 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: #584747;
     -fx-opacity: 0.9;
 }
 
@@ -335,14 +344,14 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent -ab3-background transparent -ab3-background;
+    -fx-background-color: #FAFAF5;
     -fx-background-insets: 0;
     -fx-border-color: -ab3-background -ab3-background -ab3-white -ab3-background;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: #333333; /* Change to a darker shade for better visibility */
 }
 
 #filterField, #personListPanel, #personWebpage {
