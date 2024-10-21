@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
@@ -37,6 +38,16 @@ public class AddConsultCommand extends Command {
     public AddConsultCommand(Consultation newConsult) {
         requireNonNull(newConsult);
         this.newConsult = newConsult;
+    }
+
+    /**
+     * Returns Command Type ADDCONSULT
+     *
+     * @return Command Type ADDCONSULT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return CommandType.ADDCONSULT;
     }
 
     @Override

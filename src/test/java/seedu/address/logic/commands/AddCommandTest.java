@@ -79,6 +79,12 @@ public class AddCommandTest {
         assertEquals(expected, addCommand.toString());
     }
 
+    @Test
+    public void getCommandTypeMethod() {
+        AddCommand addCommand = new AddCommand(ALICE);
+        assertEquals(addCommand.getCommandType(), CommandType.ADDSTUDENT);
+    }
+
     /**
      * A Model stub that contains a single student.
      */
@@ -120,5 +126,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
