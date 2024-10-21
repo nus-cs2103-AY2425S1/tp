@@ -15,9 +15,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<Consultation> PREDICATE_SHOW_ALL_CONSULTATIONS = unused -> true;
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -91,25 +88,14 @@ public interface Model {
     void updateFilteredStudentList(Predicate<Student> predicate);
 
     /**
-     * Returns true if a student with the same identity as {@code student} exists in the address book.
-     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
-     */
-    boolean hasConsult(Consultation consult);
-
-    /**
      * Adds the given consult.
      * @param consult Consultation to be added.
      */
     void addConsult(Consultation consult);
 
-    /** Returns an unmodifiable view of the filtered consultation list */
-    ObservableList<Consultation> getFilteredConsultationList();
-
     /**
-     * Updates the filter of the filtered consultation list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Returns true if a student with the same identity as {@code student} exists in the address book.
+     * Returns true if a consultation with the same details as {@code consult} exists in TAHub.
      */
-    void updateFilteredConsultationList(Predicate<Consultation> predicate);
-
-
+    boolean hasConsult(Consultation consult);
 }
