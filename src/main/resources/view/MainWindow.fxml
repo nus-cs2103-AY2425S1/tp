@@ -32,6 +32,10 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Show CC">
+            <MenuItem fx:id="toggleConcertContactViewItem" mnemonicParsing="false"
+                      onAction="#handleToggleConcertContactView" text="Show CC" />
+          </Menu>
         </MenuBar>
 
         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
@@ -47,20 +51,29 @@
         </StackPane>
 
         <StackPane fx:id="mainPanelPlaceholder" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-<!--          <HBox fx:id="personConcertListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">-->
-<!--            <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--              <padding>-->
-<!--                <Insets bottom="10" left="10" right="10" top="10" />-->
-<!--              </padding>-->
-<!--              <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />-->
-<!--            </VBox>-->
-<!--            <VBox fx:id="concertList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">-->
-<!--              <padding>-->
-<!--                <Insets bottom="10" left="10" right="10" top="10" />-->
-<!--              </padding>-->
-<!--              <StackPane fx:id="concertListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />-->
-<!--            </VBox>-->
-<!--          </HBox>-->
+          <HBox fx:id="personConcertListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+            <VBox fx:id="personList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+              <StackPane fx:id="personListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+            </VBox>
+            <VBox fx:id="concertList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+              <StackPane fx:id="concertListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </HBox>
+
+          <StackPane fx:id="concertContactListContainer" minWidth="680" prefWidth="680" styleClass="pane-with-border" VBox.vgrow="ALWAYS" visible="false">
+            <VBox fx:id="concertContactList" minWidth="340" prefWidth="340" styleClass="pane-with-border" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+              </padding>
+              <StackPane fx:id="concertContactListPanelPlaceholder" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+            </VBox>
+          </StackPane>
         </StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
