@@ -227,7 +227,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         weeklySchedule.setPredicate(predicate);
     }
-    
     @Override
     public ObservableList<Meeting> getCurrentWeeklySchedule(Predicate<Meeting> predicate) {
         requireNonNull(predicate);

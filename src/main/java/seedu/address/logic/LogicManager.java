@@ -3,9 +3,9 @@ package seedu.address.logic;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.time.LocalDate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -83,7 +83,6 @@ public class LogicManager implements Logic {
     public ObservableList<Meeting> getWeeklyMeetingList() {
         return model.getWeeklySchedule();
     }
-    
     @Override
     public ObservableList<Meeting> getCurrentMeetingList() {
         LocalDate today = LocalDate.now();
