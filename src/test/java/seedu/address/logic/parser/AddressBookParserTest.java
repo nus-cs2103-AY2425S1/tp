@@ -36,6 +36,7 @@ import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -132,5 +133,11 @@ public class AddressBookParserTest {
         String arguments = NAME_DESC_AMY + ASSIGNMENT_DESC_ONE + SCORE_DESC;
         AddGradeCommand command = (AddGradeCommand) parser.parseCommand(AddGradeCommand.COMMAND_WORD + arguments);
         assertEquals(command, new AddGradeCommand(VALID_NAME_AMY, VALID_SCORE, VALID_ASSIGNMENT_ONE));
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + " n/Amy");
+        assertEquals(command, new ViewCommand(new Name("Amy")));
     }
 }

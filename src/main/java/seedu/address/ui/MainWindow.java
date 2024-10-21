@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane viewWindowPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +125,7 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
     }
 
     /**
@@ -163,6 +168,23 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Shows the detail of the person.
+     */
+    @FXML
+    private void handleView(Person person) {
+        ViewWindow viewWindow = new ViewWindow(person);
+        viewWindowPlaceholder.getChildren().clear();
+        viewWindowPlaceholder.getChildren().add(viewWindow.getRoot());
+        viewWindowPlaceholder.setManaged(true);
+    }
+
+    @FXML
+    private void closeView() {
+        viewWindowPlaceholder.getChildren().clear();
+        viewWindowPlaceholder.setManaged(false);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +206,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isView()) {
+                handleView(commandResult.getPerson());
+            }
+
+            if (!commandResult.isView()) {
+                closeView();
             }
 
             return commandResult;
