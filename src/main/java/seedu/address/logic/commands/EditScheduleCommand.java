@@ -70,7 +70,7 @@ public class EditScheduleCommand extends Command {
         );
 
         // Check for conflicting schedules
-        if (model.hasMeeting(updatedMeeting) && !updatedMeeting.isSameMeeting(meetingToEdit)) {
+        if (model.hasMeeting(updatedMeeting) && updatedMeeting.isSameMeeting(meetingToEdit)) {
             throw new CommandException(MESSAGE_DUPLICATE_SCHEDULE);
         }
 
