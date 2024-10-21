@@ -59,12 +59,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the wedding list with {@code weddings}.
+     * {@code weddings} must not contain duplicate weddings.
+     */
+    public void setWeddings(List<Wedding> weddings) {
+        this.weddings.setWeddings(weddings);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setWeddings(newData.getWeddingList());
+
     }
 
     //// person-level operations
@@ -105,6 +115,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     //// Wedding level operations
+    /**
+     * Returns true if a wedding with the same identity as {@code wedding} exists in the address book.
+     */
+    public boolean hasWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddings.contains(wedding);
+    }
 
     public void addWedding(Wedding wedding) {
         weddings.addWedding(wedding);
