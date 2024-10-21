@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.status.Status;
 import seedu.address.model.tier.Tier;
 
 /**
@@ -17,17 +18,19 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-
-    // Data fields
     private final Address address;
 
     private final Job job;
+
+    // Data fields
 
     private final Income income;
 
     private final Tier tier;
 
     private final Remark remark;
+
+    private final Status status;
 
     /**
      * Every field must be present and not null.
@@ -79,6 +82,10 @@ public class Person {
         return remark;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -110,11 +117,7 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && job.equals(otherPerson.job);
+        return isSamePerson(otherPerson);
     }
 
     @Override
@@ -134,6 +137,7 @@ public class Person {
                 .add("income", income)
                 .add("tier", tier)
                 .add("remark", remark)
+                .add("status", status)
                 .toString();
     }
 
