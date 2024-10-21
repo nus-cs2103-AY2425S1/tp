@@ -51,11 +51,11 @@ public class TagContactContainsKeywordPredicateTest {
 
         // Multiple keywords
         predicate = new TagContactContainsKeywordPredicate(Arrays.asList("friend", "colleague"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friend",  "colleague").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTags("friend", "colleague").build()));
 
         // Only one matching keyword
         predicate = new TagContactContainsKeywordPredicate(Arrays.asList("friend", "classmate"));
-        assertTrue(predicate.test(new PersonBuilder().withTags("friend",  "colleague").build()));
+        assertTrue(predicate.test(new PersonBuilder().withTags("friend", "colleague").build()));
 
         // Mixed-case keywords
         predicate = new TagContactContainsKeywordPredicate(Arrays.asList("fRiEnD"));
