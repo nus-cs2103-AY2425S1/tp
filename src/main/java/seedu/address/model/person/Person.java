@@ -29,6 +29,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     private final List<Transaction> transactions;
+    private int balance;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +43,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.transactions = new ArrayList<>();
+        this.balance = 0;
     }
     /**
      * Every field must be present and not null.
@@ -56,6 +58,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.transactions = transactions;
+        this.balance = transactions.stream().map(Transaction::getAmount).reduce(0, Integer::sum);
     }
 
     public Name getName() {
@@ -88,6 +91,19 @@ public class Person {
 
     public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    /**
+     * Updates balance of a person. Used when a transaction is deleted.
+     *
+     * @param amount the amount the balance is supposed to change by.
+     */
+    public void updateBalance(int amount) {
+        balance += amount;
     }
 
     /**

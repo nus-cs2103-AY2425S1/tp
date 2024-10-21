@@ -49,6 +49,7 @@ public class DeleteTransactionCommand extends Command {
 
         Transaction transactionToRemove = transactions.get(index.getZeroBased());
         transactions.remove(index.getZeroBased());
+        selected.updateBalance(transactionToRemove.getAmount() * -1);
         model.updateTransactionList(transactions);
 
         return new CommandResult(String.format(MESSAGE_DELETE_TRANSACTION_SUCCESS, Messages.format(transactionToRemove),
