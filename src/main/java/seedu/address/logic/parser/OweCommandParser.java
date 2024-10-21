@@ -37,8 +37,8 @@ public class OweCommandParser implements Parser<OweCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE), pe);
         }
         
-        if (!arePrefixHourPresent(argMultimap) || !argMultimap.getPreamble().isEmpty()) {
-            logger.log(Level.WARNING, "Failed to parse hours paid. Invalid parameters");
+        if (!arePrefixHourPresent(argMultimap)) {
+            logger.log(Level.WARNING, "Failed to parse hours owed. Invalid parameters");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OweCommand.MESSAGE_USAGE));
         }
         

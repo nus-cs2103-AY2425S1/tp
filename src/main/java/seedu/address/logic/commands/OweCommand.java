@@ -31,7 +31,7 @@ public class OweCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Updates the amount the student owes "
             + "by the index number used in the displayed Student list.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_HOUR + "HOUR OWED\n"
+            + PREFIX_HOUR + "HOUR OWED (must be a positive multiple of 0.5)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_HOUR + "2 ";
     

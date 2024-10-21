@@ -39,8 +39,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final double VALID_HOUR_AMY = 2.5;
-    public static final double VALID_HOUR_BOB = 3;
+    public static final String VALID_HOUR_AMY = "4.5";
+    public static final String VALID_HOUR_BOB = "3";
     public static final String VALID_SCHEDULE_AMY = "Sunday-1800-1900";
     public static final String VALID_SCHEDULE_BOB = "Monday-1800-1900";
     public static final String VALID_SUBJECT_AMY = "Mathematics";
@@ -51,7 +51,7 @@ public class CommandTestUtil {
     public static final String VALID_PAID_AMOUNT_BOB = "0.0";
     public static final String VALID_OWED_AMOUNT_AMY = "500.00";
     public static final String VALID_OWED_AMOUNT_BOB = "300.25";
-    public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + "4.5";
+    public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + VALID_HOUR_AMY;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
