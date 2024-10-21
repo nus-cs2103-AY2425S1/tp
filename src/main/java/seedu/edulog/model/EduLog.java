@@ -107,7 +107,17 @@ public class EduLog implements ReadOnlyEduLog {
         students.remove(key);
     }
 
-    //// lesson-level operations
+    /**
+     * Marks given student as absent.
+     *
+     * @param student the student to mark as absent.
+     */
+    public void unmarkStudent(Student student) {
+        requireNonNull(student);
+        student.unmark();
+    }
+
+    // ------------------ lesson-level operations -----------------------
 
     /**
      * Returns true if a lesson with the same identity as {@code lesson} exists in the edulog book.

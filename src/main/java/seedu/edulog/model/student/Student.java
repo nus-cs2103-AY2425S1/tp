@@ -24,9 +24,10 @@ public class Student {
     // Data fields
     private final seedu.edulog.model.student.Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private boolean isPresent = false;
 
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null except isPresent.
      */
     public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,6 +36,7 @@ public class Student {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isPresent = false;
     }
 
     public Name getName() {
@@ -59,6 +61,20 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Marks the student as present.
+     */
+    public void mark() {
+        isPresent = true;
+    }
+
+    /**
+     * Marks the student as absent.
+     */
+    public void unmark() {
+        isPresent = false;
     }
 
     /**
