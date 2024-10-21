@@ -3,7 +3,6 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
 
-
 <?import java.net.URL?>
 <?import javafx.scene.layout.HBox?>
 <HBox xmlns="http://javafx.com/javafx/17"

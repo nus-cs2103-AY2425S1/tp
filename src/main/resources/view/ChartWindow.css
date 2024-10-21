@@ -1,0 +1,9 @@
+.bar-chart {
+    -fx-background-color: white;  /* Background color of chart */
+    -fx-border-color: transparent;
+    -fx-background-radius: 5;
+}
+
+.chart-bar {
+    -fx-bar-fill: #aacae6;
+}

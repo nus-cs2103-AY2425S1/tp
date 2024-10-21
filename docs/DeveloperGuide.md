@@ -315,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | supervisor | redo a previously undone command                               | reapply actions if undone by mistake                                     |
 | `* * *`  | supervisor | view the history of commands from most recent to least recent  | track the actions performed and verify changes                           |
 | `* *`    | supervisor | view the total number of tutors and tutees in graphs or charts | identify any inefficient allocation of resources and adjust accordingly  |
-| `* *`    | supervisor | filter the tutors by subjects tutored                          | locate a tutor easily for matching purposes                              |
+| `* *`    | supervisor | filter persons by subject                                      | locate a tutor and tutee easily for matching purposes                    |
 | `*`      | supervisor | add the available timeslots of tutors                          | allow tutoring sessions to be arranged                                   |
 | `*`      | supervisor | update the available timeslots of tutors                       | ensure tutors can conduct tutoring sessions as scheduled                 |
 | `*`      | supervisor | view the availability of tutors                                | schedule tutoring sessions that matches their availability               |
