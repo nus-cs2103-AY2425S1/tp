@@ -1,12 +1,11 @@
 package tahub.contacts.model.tutorial;
 
+import static tahub.contacts.commons.util.AppUtil.checkArgument;
+import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 import tahub.contacts.model.course.Course;
-
-import static java.util.Objects.requireNonNull;
-import static tahub.contacts.commons.util.AppUtil.checkArgument;
-import static tahub.contacts.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Tutorial in the system.
