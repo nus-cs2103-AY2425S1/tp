@@ -158,7 +158,7 @@ The `Storage` component,
   * data is saved as `JsonSerializableAddressBook` which consists of `JsonAdaptedPerson` and `JsonAdaptedTag` which embodies the actual data of the individual patient and their data
 * Appointment data:
   * data is saved in `JsonAppointmnetBookStorage` which inherits from interface `AppointmentBookStorage`.
-  * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of the individual patient and their data
+  * data is saved as `JsonSerializableAppointmentBook` which consists of `JsonAdaptedAppointment` which embodies the actual data of appointments and appointment details
 * User Preference data:
     * data is saved in `UserPrefsStorage` interface and saves as `JsonUserPrefsStorage`
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
