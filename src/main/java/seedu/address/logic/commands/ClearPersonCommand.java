@@ -19,4 +19,9 @@ public class ClearPersonCommand extends ClearCommand {
     protected String getSuccessMessage() {
         return MESSAGE_SUCCESS;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this || (other instanceof ClearPersonCommand);
+    }
 }
