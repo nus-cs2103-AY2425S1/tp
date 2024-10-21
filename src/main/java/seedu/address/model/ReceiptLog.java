@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -33,6 +32,9 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
         resetData(toBeCopied);
     }
 
+    /**
+     * Resets data
+     */
     public void resetData(ReadOnlyReceiptLog toBeCopied) {
         requireNonNull(toBeCopied);
         setReceipts(toBeCopied.getReceiptList());
