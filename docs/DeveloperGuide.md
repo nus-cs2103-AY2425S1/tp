@@ -164,7 +164,50 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+
+### Introduction
+This section of the developer Guide covers how the features are implemented and executed.
+
+### Features Overview
+Listed below are the implemented features, and a brief description of what they do. 
+* **Adding a new Assignment**: Adds a new Assignment for a particular student
+* **Grading an existing Assignment**: Grades an existing assignment belonging to an existing student
+* **Deleting an existing Assignment**: Deletes an existing assignment belonging to an existing student
+* **Viewing a student's details**: Displays students details along with the assignments associated with the student
+
+## Adding a new Assignment
+This `add_assignment` command is a feature that  allows the user to create a new assignment, based on the student's index. The assignment must have an alphanumeric `Name`, and a valid `Max Score`.
+
+#### Design Considerations:
+Previously, AB3 had a single command word for the `add` commands. As TAchy is a brownfield project, additional objects are now allowed to be instantiated via the `add` commmand.
+In particular, TAchy has 2 features that "add" items to the app. Firstly, there is an `add_student` feature, and also an `add_assignment` feature.
+
+**Aspect: How to distinguish between the different 'add' commands:**
+* Alternative 1 (current choice): Distinguish command word, and thus allow only 1 type of object to be created at a time.
+  * Pros: Easy to implement, and less prone to Users making errors in command format
+  * Cons: User will only be able to add either students or assignments, one at a time
+
+* Alternative 2: Allow multiple objects to be created concurrently.
+  * Pros: Allows adept users to create new objects in the app more quickly
+  * Cons: Difficult to implement, and users are prone to making more mistakes in supplying the valid parameters used.
+
+    
+
+#### Implementation
+* LogicManager executes the command "add_assignment".
+* LogicManager parses the command via AddressBookParser.
+* AddressBookParser creates and delegates parsing to AddAssignmentCommandParser.
+* AddAssignmentCommandParser creates an AddAssignmentCommand object.
+* AddAssignmentCommand is returned to AddAssignmentCommandParser and back to AddressBookParser.
+* LogicManager then executes AddAssignmentCommand, which interacts with the Model.
+* AddAssignmentCommand creates a CommandResult object.
+* CommandResult is returned to AddAssignmentCommand, which returns the result to LogicManager.
+* The sequence concludes with the return to the caller from LogicManager.
+* This describes the flow of command execution, parsing, and interaction with the model.
+
+#### Example invocation sequence for AddAssignmentCommand
+<puml src="diagrams/AddAssignmentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `add_assignment` Command" />
+
 
 ### \[Proposed\] Undo/redo feature
 
