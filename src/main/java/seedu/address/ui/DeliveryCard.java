@@ -29,6 +29,8 @@ public class DeliveryCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label deliveryId;
+    @FXML
     private Label itemName;
     @FXML
     private Label address;
@@ -42,6 +44,8 @@ public class DeliveryCard extends UiPart<Region> {
     private Label eta;
     @FXML
     private Label status;
+    @FXML
+    private Label archive;
 
     /**
      * Creates a {@code DeliveryCard} with the given {@code Delivery} and index to display.
@@ -50,6 +54,7 @@ public class DeliveryCard extends UiPart<Region> {
         super(FXML);
         this.delivery = delivery;
         id.setText(displayedIndex + ". ");
+        deliveryId.setText(delivery.getDeliveryId().toString());
         address.setText(delivery.getAddress().toString());
         itemName.setText(delivery.getItemName().toString());
         cost.setText(delivery.getCost().toString());
@@ -57,5 +62,8 @@ public class DeliveryCard extends UiPart<Region> {
         time.setText(delivery.getTime().toString());
         eta.setText(delivery.getEta().toString());
         status.setText(delivery.getStatus().toString());
+
+        //Can be removed
+        archive.setText(delivery.getArchive().toString());
     }
 }

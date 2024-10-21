@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.Eta;
-import seedu.address.model.delivery.Id;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
 import seedu.address.model.delivery.Time;
@@ -21,7 +22,7 @@ public class JsonAdaptedDelivery {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Delivery's %s field is missing!";
 
-    private final String id;
+    private final String deliveryId;
     private final String itemName;
     private final String address;
     private final String cost;
@@ -29,20 +30,22 @@ public class JsonAdaptedDelivery {
     private final String time;
     private final String eta;
     private final String status;
+    private final String archive;
 
     /**
      * Constructs a {@code JsonAdaptedDelivery} with the given delivery details.
      */
     @JsonCreator
-    public JsonAdaptedDelivery(@JsonProperty("id") String id,
+    public JsonAdaptedDelivery(@JsonProperty("deliveryId") String deliveryId,
                                @JsonProperty("itemName") String itemName,
                                @JsonProperty("address") String address,
                                @JsonProperty("cost") String cost,
                                @JsonProperty("date") String date,
                                @JsonProperty("time") String time,
                                @JsonProperty("eta") String eta,
-                               @JsonProperty("status") String status) {
-        this.id = id;
+                               @JsonProperty("status") String status,
+                               @JsonProperty("archive") String archive) {
+        this.deliveryId = deliveryId;
         this.itemName = itemName;
         this.address = address;
         this.cost = cost;
@@ -50,13 +53,14 @@ public class JsonAdaptedDelivery {
         this.time = time;
         this.eta = eta;
         this.status = status;
+        this.archive = archive;
     }
 
     /**
      * Converts a given {@code Delivery} into this class for Jackson use.
      */
     public JsonAdaptedDelivery(Delivery source) {
-        id = String.valueOf(source.getId().value);
+        deliveryId = String.valueOf(source.getDeliveryId().value);
         itemName = source.getItemName().value;
         address = source.getAddress().value;
         cost = source.getCost().value;
@@ -64,6 +68,7 @@ public class JsonAdaptedDelivery {
         time = source.getTime().value.toString();
         eta = source.getEta().value.toString();
         status = source.getStatus().getValue();
+        archive = source.getArchive().value;
     }
 
     /**
@@ -72,20 +77,19 @@ public class JsonAdaptedDelivery {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Delivery toModelType() throws IllegalValueException {
-        if (id == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Id.class.getSimpleName()));
+        if (deliveryId == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DeliveryId.class.getSimpleName()));
         }
-        if (!Id.isValidId(id)) {
-            throw new IllegalValueException(Id.MESSAGE_CONSTRAINTS);
-        }
-        final Id modelId = new Id(id);
+
+        final DeliveryId modelDeliveryId = new DeliveryId(deliveryId);
 
         if (itemName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ItemName.class.getSimpleName()));
         }
         if (!ItemName.isValidItemName(itemName)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(ItemName.MESSAGE_CONSTRAINTS);
         }
         final ItemName modelItemName = new ItemName(itemName);
 
@@ -125,7 +129,7 @@ public class JsonAdaptedDelivery {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Eta.class.getSimpleName()));
         }
         if (!Eta.isValidEta(eta)) {
-            throw new IllegalValueException(Time.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Eta.MESSAGE_CONSTRAINTS);
         }
         final Eta modelEta = new Eta(eta);
 
@@ -137,7 +141,15 @@ public class JsonAdaptedDelivery {
         }
         final Status modelStatus = new Status(status);
 
-        return new Delivery(modelId, modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta,
-                modelStatus);
+        if (archive == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Archive.class.getSimpleName()));
+        }
+        if (!Archive.isValidArchive(archive)) {
+            throw new IllegalValueException(Archive.MESSAGE_CONSTRAINTS);
+        }
+        final Archive modelArchive = new Archive(archive);
+
+        return new Delivery(modelDeliveryId, modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta,
+                modelStatus, modelArchive);
     }
 }

@@ -25,6 +25,7 @@
                     </minWidth>
                 </Label>
             </HBox>
+            <Label fx:id="deliveryId" styleClass="cell_small_label" text="deliveryId" />
             <Label fx:id="address" styleClass="cell_small_label" text="address" />
             <Label fx:id="itemName" styleClass="cell_small_label" text="itemName" />
             <Label fx:id="cost" styleClass="cell_small_label" text="cost" />
@@ -32,6 +33,9 @@
             <Label fx:id="time" styleClass="cell_small_label" text="time" />
             <Label fx:id="eta" styleClass="cell_small_label" text="eta" />
             <Label fx:id="status" styleClass="cell_small_label" text="status" />
+
+            <!--Can be removed-->
+            <Label fx:id="archive" styleClass="cell_small_label" text="status" />
         </VBox>
     </GridPane>
 </HBox>

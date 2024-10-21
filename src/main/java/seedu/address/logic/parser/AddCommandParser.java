@@ -15,6 +15,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.Eta;
@@ -83,7 +84,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).orElse("$0"));
             ItemName itemName = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_NAME).orElse("MissingName"));
             Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).orElse("not delivered"));
-            Delivery delivery = new Delivery(itemName, address, cost, eta, status);
+            Delivery delivery = new Delivery(itemName, address, cost, eta, status, new Archive(false));
             return new AddCommand(delivery);
         }
     }
