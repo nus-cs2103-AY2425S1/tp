@@ -40,6 +40,8 @@ public class CommandTestUtil {
     public static final int VALID_MAX_SCORE_PHYSICS = 60;
     public static final int VALID_SCORE_PHYSICS = 45;
     public static final int VALID_SCORE = 0;
+    public static final String INVALID_INDEX = "q";
+    public static final String INVALID_SCORE = "abc";
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;

@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAssignmentCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.AssignmentName;
 
@@ -35,14 +34,18 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
                 PREFIX_ASSIGNMENT_MAX_SCORE);
 
         Index studentIndex;
+        AssignmentName assignmentName;
+        int maxScore;
+
         try {
             studentIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_STUDENT_INDEX).get());
+            assignmentName = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT_NAME).get());
+            maxScore = ParserUtil.parseMaxScore(argMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAssignmentCommand.MESSAGE_USAGE), pe);
         }
-        AssignmentName assignmentName = ParserUtil.parseAssignmentName(argMultimap.getValue(PREFIX_ASSIGNMENT_NAME)
-                .get());
-        int maxScore = ParserUtil.parseMaxScore(argMultimap.getValue(PREFIX_ASSIGNMENT_MAX_SCORE).get());
+
         AddAssignmentCommand.AssignmentDescriptor assignmentDescriptor =
                 new AddAssignmentCommand.AssignmentDescriptor(maxScore, assignmentName);
         return new AddAssignmentCommand(studentIndex, assignmentDescriptor);
