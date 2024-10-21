@@ -192,4 +192,22 @@ public class ParserUtil {
         }
         return new Status(trimmedStatus);
     }
+
+    /**
+     * Parses a {@code String} delivery attribute to ensure it is a valid delivery attribute.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String} delivery attribute is invalid.
+     */
+    public static String parseAttribute(String attribute) throws ParseException {
+        requireNonNull(attribute);
+        String trimmedAttribute = attribute.trim();
+        if (trimmedAttribute.equals("cost") ||
+            trimmedAttribute.equals("date") ||
+            trimmedAttribute.equals("eta")) {
+            return trimmedAttribute;
+        } else {
+            throw new ParseException("Current attributes supported are: cost, date, eta");
+        }
+    }
 }
