@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.task.TaskList;
 
 /**
  * Represents a Person in the address book.
@@ -24,19 +25,25 @@ public class Person {
     private final Address address;
     private final Note note;
     private final Set<Subject> subjects = new HashSet<>();
+    private final Level level;
+    private final TaskList taskList;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, EmergencyContact emergencyContact,
-                  Address address, Note note, Set<Subject> subjects) {
+                  Address address, Note note, Set<Subject> subjects, Level level, TaskList tasklist) {
         requireAllNonNull(name, phone, address, subjects);
         this.name = name;
         this.phone = phone;
         this.emergencyContact = emergencyContact;
         this.address = address;
-        this.note = note;
-        this.subjects.addAll(subjects);
+        this.note = (note != null) ? note : new Note("");
+        if (!subjects.isEmpty()) {
+            this.subjects.addAll(subjects);
+        }
+        this.level = level;
+        this.taskList = tasklist.copy();
     }
 
     public Name getName() {
@@ -54,15 +61,25 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
     public Note getNote() {
         return note;
     }
+
     /**
      * Returns an immutable subject set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
     /**
@@ -99,13 +116,15 @@ public class Person {
                 && emergencyContact.equals(otherPerson.emergencyContact)
                 && address.equals(otherPerson.address)
                 && note.equals(otherPerson.note)
-                && subjects.equals(otherPerson.subjects);
+                && level.equals(otherPerson.level)
+                && subjects.equals(otherPerson.subjects)
+                && taskList.equals(otherPerson.taskList);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, emergencyContact, address, note, subjects);
+        return Objects.hash(name, phone, emergencyContact, address, note, subjects, level, taskList);
     }
 
     @Override
@@ -117,6 +136,8 @@ public class Person {
                 .add("address", address)
                 .add("note", note)
                 .add("subjects", subjects)
+                .add("level", level)
+                .add("task list", taskList)
                 .toString();
     }
 

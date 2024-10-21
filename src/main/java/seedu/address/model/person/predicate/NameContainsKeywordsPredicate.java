@@ -1,19 +1,16 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicate;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
-
+public class NameContainsKeywordsPredicate extends ContainsKeywordsPredicate {
     public NameContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        super(keywords);
     }
 
     @Override
@@ -35,10 +32,5 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
         NameContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (NameContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
     }
 }

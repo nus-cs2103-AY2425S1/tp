@@ -10,6 +10,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_ENGLISH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
+import static seedu.address.testutil.TypicalTasks.GRADING_TASK;
+import static seedu.address.testutil.TypicalTasks.MARKING_TASK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,22 +28,25 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withPhone("94351253").withEmergencyContact("94351253").withNote("Needs Jesus rn")
-            .withSubjects("PHYSICS").build();
+            .withSubjects("PHYSICS").withLevel("S3").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withNote("Needs Jesus rn")
             .withAddress("311, Clementi Ave 2, #02-25").withEmergencyContact("94351253")
             .withPhone("98765432")
-            .withSubjects("CHEMISTRY", "MATH").build();
+            .withSubjects("CHEMISTRY", "MATH").withLevel("P2").withTaskList(
+                    MARKING_TASK, GRADING_TASK
+            ).build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withNote("Needs Jesus rn").withAddress("wall street").withEmergencyContact("94351253").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmergencyContact("94351253").withAddress("10th street")
-            .withSubjects("MATH").withNote("Needs Jesus rn").build();
+            .withSubjects("MATH").withNote("Needs Jesus rn").withLevel("JC1").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withNote("Needs Jesus rn").withEmergencyContact("94351253").withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withNote("y am i in cs").withEmergencyContact("94351253").withAddress("4th street").build();
+            .withNote("y am i in cs").withEmergencyContact("94351253")
+            .withAddress("4th street").withLevel("S5").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -69,6 +74,17 @@ public class TypicalPersons {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {code AddressBook} with all the typical persons as new objects each time
+     */
+    public static AddressBook getUniqueTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersons()) {
+            ab.addPerson(new PersonBuilder(person).build());
         }
         return ab;
     }

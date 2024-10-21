@@ -11,10 +11,14 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.Level;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Subject;
+import seedu.address.model.person.task.Task;
+import seedu.address.model.person.task.TaskDeadline;
+import seedu.address.model.person.task.TaskDescription;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -44,7 +48,7 @@ public class ParserUtil {
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
-        String trimmedName = name.trim();
+        String trimmedName = String.join(" ", name.trim().split("\\s+"));
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
@@ -99,12 +103,11 @@ public class ParserUtil {
     /**
      * Parses a {@code String note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code note} is invalid.
      */
-    public static Note parseNote(String note) throws ParseException {
+    public static Note parseNote(String note) {
         requireNonNull(note);
         String trimmedNote = note.trim();
+
         return new Note(trimmedNote);
     }
 
@@ -124,6 +127,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String level} into a {@code Level}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code level} is invalid.
+     */
+    public static Level parseLevel(String level) throws ParseException {
+        requireNonNull(level);
+        String trimmedLevel = level.trim();
+        if (!Level.isValidLevelName(trimmedLevel)) {
+            throw new ParseException(Level.MESSAGE_CONSTRAINTS);
+        }
+        return new Level(trimmedLevel);
+    }
+
+    /**
      * Parses {@code Collection<String> subjects} into a {@code Set<Subject>}.
      */
     public static Set<Subject> parseSubjects(Collection<String> subjects) throws ParseException {
@@ -133,5 +151,44 @@ public class ParserUtil {
             subjectSet.add(parseSubject(subjectName));
         }
         return subjectSet;
+    }
+
+    /**
+     * Parses a {@code String desc} into an {@code TaskDescription}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
+     */
+    public static TaskDescription parseTaskDescription(String desc) throws ParseException {
+        requireNonNull(desc);
+        String trimmedTDesc = desc.trim();
+        if (!TaskDescription.isValidTaskDescription(trimmedTDesc)) {
+            throw new ParseException(TaskDescription.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDescription(trimmedTDesc);
+    }
+
+    /**
+     * Parses a {@code String deadline} into an {@code TaskDeadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code deadline} is invalid.
+     */
+    public static TaskDeadline parseTaskDeadline(String deadline) throws ParseException {
+        requireNonNull(deadline);
+        String trimmedTDeadline = deadline.trim();
+        if (!TaskDeadline.isValidTaskDeadline(trimmedTDeadline)) {
+            throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDeadline(trimmedTDeadline);
+    }
+
+    /**
+     * Parses a {@code String desc} and {@code String deadline} into a {@code Task}.
+     */
+    public static Task parseTask(String desc, String deadline) throws ParseException {
+        requireNonNull(desc);
+        requireNonNull(deadline);
+        return new Task(parseTaskDescription(desc), parseTaskDeadline(deadline));
     }
 }

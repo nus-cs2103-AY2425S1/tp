@@ -12,10 +12,12 @@ import java.util.Arrays;
  */
 public class Level {
     enum Levels {
+        NONE,
         K1, K2,
         P1, P2, P3, P4, P5, P6,
         S1, S2, S3, S4, S5,
         JC1, JC2,
+
 
     }
 
@@ -38,8 +40,9 @@ public class Level {
     /**
      * Returns true if a given string is a valid level name.
      */
-    public static boolean isValidLevelName(String test) {
-        return inEnum(test, Levels.class);
+    public static boolean isValidLevelName(String level) {
+        requireNonNull(level);
+        return inEnum(level, Levels.class);
     }
 
     @Override
@@ -53,8 +56,8 @@ public class Level {
             return false;
         }
 
-        Level otherTag = (Level) other;
-        return levelName.equals(otherTag.levelName);
+        Level otherLevel = (Level) other;
+        return levelName.equals(otherLevel.levelName);
     }
 
     @Override
@@ -66,7 +69,7 @@ public class Level {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + levelName + ']';
+        return levelName;
     }
 
 }

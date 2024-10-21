@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiState;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private UiState uiState;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        uiState = new UiState();
     }
 
     public ModelManager() {
@@ -99,16 +103,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getPersonByName(Name name) {
+        requireNonNull(name);
+        return addressBook.getPersonList().stream()
+                .filter(person -> person.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        addressBook.setPerson(target, editedPerson);
+    public void setPerson(Person target, Person updatedPerson) {
+        requireAllNonNull(target, updatedPerson);
+        addressBook.setPerson(target, updatedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -143,6 +155,11 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public UiState getUiState() {
+        return uiState;
     }
 
 }

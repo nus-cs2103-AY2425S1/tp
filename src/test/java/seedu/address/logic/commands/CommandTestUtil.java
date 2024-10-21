@@ -4,10 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -18,9 +22,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.person.predicate.NameContainsKeywordsPredicate;
+import seedu.address.model.person.task.Task;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.UpdatePersonDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -37,6 +43,19 @@ public class CommandTestUtil {
     public static final String VALID_EMERGENCY_CONTACT_BOB = "33333333";
     public static final String VALID_SUBJECT_MATH = "MATH";
     public static final String VALID_SUBJECT_ENGLISH = "ENGLISH";
+    public static final String VALID_LEVEL_K2 = "K2";
+    public static final String VALID_LEVEL_P3 = "P3";
+    public static final String VALID_LEVEL_S4 = "S4";
+    public static final String LEVEL_DESC_K2 = " " + PREFIX_LEVEL + VALID_LEVEL_K2;
+    public static final String LEVEL_DESC_P3 = " " + PREFIX_LEVEL + VALID_LEVEL_P3;
+    public static final String LEVEL_DESC_S4 = " " + PREFIX_LEVEL + VALID_LEVEL_S4;
+    public static final String VALID_NOTE_AMY = "Likes asking questions.";
+    public static final String VALID_NOTE_BOB = "Always sleeping";
+    public static final String VALID_TASK_DESCRIPTION_AMY = "Mark homework";
+    public static final String VALID_TASK_DESCRIPTION_PROJECT = "Do project";
+    public static final String VALID_TASK_DEADLINE = "2024-10-15";
+    public static final String VALID_TASK_DEADLINE_AMY = "2024-01-01";
+    public static final String VALID_TASK_INDEX = "1";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -52,6 +71,13 @@ public class CommandTestUtil {
     public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + "";
     public static final String SUBJECT_DESC_ENGLISH = " " + PREFIX_SUBJECT + VALID_SUBJECT_ENGLISH;
     public static final String SUBJECT_DESC_MATH = " " + PREFIX_SUBJECT + VALID_SUBJECT_MATH;
+    public static final String TASK_DESCRIPTION_DESC_AMY = " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_AMY;
+    public static final String TASK_DESCRIPTION_DESC_BOB =
+            " " + PREFIX_TASK_DESCRIPTION + VALID_TASK_DESCRIPTION_PROJECT;
+    public static final String TASK_DEADLINE_DESC_AMY = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE_AMY;
+    public static final String TASK_DEADLINE_DESC_BOB = " " + PREFIX_TASK_DEADLINE + VALID_TASK_DEADLINE;
+    public static final String TASK_INDEX_DESC = " " + PREFIX_TASK_INDEX + VALID_TASK_INDEX;
+
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -59,18 +85,23 @@ public class CommandTestUtil {
             " " + PREFIX_EMERGENCY_CONTACT + "911b"; // "b" not allowed in phones
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "MATH*"; // '*' not allowed in subjects
+    public static final String INVALID_LEVEL_DESC = " " + PREFIX_LEVEL + "P7";
+    public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + "   "; // blank task description
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE + "2024-14-23"; // invalid month
+    public static final String INVALID_TASK_INDEX = " " + PREFIX_TASK_INDEX + "1!";
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final UpdateCommand.UpdatePersonDescriptor DESC_AMY;
+    public static final UpdateCommand.UpdatePersonDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        DESC_AMY = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmergencyContact(VALID_EMERGENCY_CONTACT_AMY)
                 .withAddress(VALID_ADDRESS_AMY).withNote("").withSubjects(VALID_SUBJECT_ENGLISH).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+        DESC_BOB = new UpdatePersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmergencyContact(VALID_EMERGENCY_CONTACT_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withSubjects(VALID_SUBJECT_MATH, VALID_SUBJECT_ENGLISH).build();
     }
@@ -99,6 +130,18 @@ public class CommandTestUtil {
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Simulates adding a task to a person without executing the command,
+     * confirms that the {@code actualModel} matches the {@code expectedModel} after the task addition.
+     */
+    public static void assertAddTaskCommandSuccess(Model actualModel, Model expectedModel,
+                                                   Person originalPerson, Task addedTask) {
+        Person updatedPerson = new PersonBuilder(originalPerson).build();
+        updatedPerson.getTaskList().add(addedTask);
+        expectedModel.setPerson(originalPerson, updatedPerson);
+        assertEquals(expectedModel, actualModel);
     }
 
     /**

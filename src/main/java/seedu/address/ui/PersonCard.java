@@ -42,21 +42,27 @@ public class PersonCard extends UiPart<Region> {
     private Label note;
     @FXML
     private FlowPane subjects;
+    @FXML
+    private Label level;
+    @FXML
+    private Label tasks;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        emergencyContact.setText(person.getEmergencyContact().value);
-        address.setText(person.getAddress().value);
-        note.setText(person.getNote().value);
+        phone.setText("Phone number: " + person.getPhone().value);
+        emergencyContact.setText("Emergency Contact: " + person.getEmergencyContact().value);
+        address.setText("Address: " + person.getAddress().value);
+        note.setText("Note: " + person.getNote().value);
         person.getSubjects().stream()
                 .sorted(Comparator.comparing(subject -> subject.subjectName))
-                .forEach(subject -> subjects.getChildren().add(new Label(subject.subjectName)));
+                .forEach(subject -> subjects.getChildren()
+                        .add(new Label(person.getLevel().levelName + " " + subject.subjectName)));
+        tasks.setText("Tasks: " + person.getTaskList().size());
     }
 }

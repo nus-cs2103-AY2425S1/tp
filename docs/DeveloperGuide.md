@@ -287,7 +287,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                                                            | So that I can…​                                                                                  |         
+| Priority | As a …​         | I want to …​                                                                            | So that I can…​                                                                                  |
 |----------|-----------------|-----------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------|
 | `* * *`  | tuition teacher | add a student                                                                           |                                                                                                  |
 | `* * *`  | tuition teacher | delete a student                                                                        | ensure that my address book remains clutter free                                                 |
@@ -300,9 +300,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tuition teacher | add tasks for each student                                                              | keep track of outstanding tasks that need to be done for that student (e.g. marking assignments) |
 | `* *`    | tuition teacher | view tasks for a specific student                                                       | have an overview of outstanding tasks that need to be done for that student                      |
 | `* *`    | tuition teacher | delete tasks for a specific student                                                     | ensure only outstanding tasks are displayed                                                      |
-| `* *`    | tuition teacher | set reminders for follow-ups, assessments or feedback sessions with individual students | remember not miss important checkpoints in their learning journey                                | 
+| `* *`    | tuition teacher | set reminders for follow-ups, assessments or feedback sessions with individual students | remember not miss important checkpoints in their learning journey                                |
 | `* *`    | tuition teacher | receive notifications when a student's performance drops below a certain threshold      | proactively address any learning challenges they might be facing                                 |
-| `*`      | tuition teacher | be able to see a picture of them                                                        | easily remember and identify them                                                                | 
+| `*`      | tuition teacher | be able to see a picture of them                                                        | easily remember and identify them                                                                |
 
 
 ### Use cases
@@ -466,10 +466,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  Should be meant for a single user, not a multi-user product.
 6.  Data should be stored locally in a human editable text file.
 7.  Should have easy-to-read and detailed User and Developer Guides.
-8.  Should have PDF-friendly User and Developer Guides. 
-9.  Should work without an installer. 
-10. Should be packaged into a single JAR file. 
-11. Should not depend on the developer's own remote server. 
+8.  Should have PDF-friendly User and Developer Guides.
+9.  Should work without an installer.
+10. Should be packaged into a single JAR file.
+11. Should not depend on the developer's own remote server.
 12. GUI should work well for standard screen resolutions 1920x1080 and higher and for screen scales 100% and 125%.
 
 
