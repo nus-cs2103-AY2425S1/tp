@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.SortCommand.MESSAGE_SORT_SUCCESS;
-import static seedu.address.model.Model.COMPARATOR_SORT_BY_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -22,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.comparators.NameComparator;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for SortCommand.
@@ -30,11 +30,13 @@ public class SortCommandTest {
 
     private Model model;
     private Model expectedModel;
+    private NameComparator nameComparator;
 
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        nameComparator = new NameComparator();
     }
 
     @Test
@@ -53,11 +55,11 @@ public class SortCommandTest {
 
         // Prepare the expected sorted list
         List<Person> expectedSortedList = new ArrayList<>(model.getAddressBook().getPersonList());
-        expectedSortedList.sort(COMPARATOR_SORT_BY_NAME);
+        expectedSortedList.sort(nameComparator);
 
         // Update expectedModel to match the sorted state
         expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        expectedModel.updatePersonListSort(COMPARATOR_SORT_BY_NAME);
+        expectedModel.updatePersonListSort(nameComparator);
 
         assertCommandSuccess(sortCommand, model,
                 String.format(MESSAGE_SORT_SUCCESS, sortOption), expectedModel);

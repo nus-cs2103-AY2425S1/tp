@@ -18,10 +18,6 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
-    /** {@code Comparator} that sorts the list by name in alphabetical order */
-    Comparator<Person> COMPARATOR_SORT_BY_NAME = Comparator.comparing(person ->
-            person.getName().toString().toLowerCase());
-
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
