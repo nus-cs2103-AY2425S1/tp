@@ -25,6 +25,11 @@ public class DeleteCommand extends Command {
             + "Example: " + SHORT_COMMAND_WORD + " -i 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String COMMAND_SUMMARY_ACTION = "Delete";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":remove -i INDEX\n:rm -i INDEX";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":remove -i 3\n:rm -i 3";
 
     private final Index targetIndex;
 

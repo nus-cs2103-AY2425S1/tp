@@ -14,7 +14,11 @@ public class ListCommand extends Command {
     public static final String SHORT_COMMAND_WORD = ":ls";
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
-
+    public static final String COMMAND_SUMMARY_ACTION = "List";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":list\n:ls";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":list\n:ls";
 
     @Override
     public CommandResult execute(Model model) {

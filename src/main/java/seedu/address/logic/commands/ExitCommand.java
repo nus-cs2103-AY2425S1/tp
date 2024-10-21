@@ -10,6 +10,13 @@ public class ExitCommand extends Command {
     public static final String COMMAND_WORD = ":exit";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested ...";
+    public static final String COMMAND_SUMMARY_ACTION = "Exit";
+    public static final String COMMAND_SUMMARY_FORMAT =
+            ":exit";
+    public static final String COMMAND_SUMMARY_EXAMPLES =
+            ":exit";
+
+
 
     @Override
     public CommandResult execute(Model model) {
