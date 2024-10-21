@@ -72,15 +72,17 @@ public class PersonCard extends UiPart<Region> {
     private void setPriorityLabel(String priorityValue) {
         priority.setText(priorityValue);
 
+        String currentStyle = priority.getStyle();
+
         switch (priorityValue.toLowerCase()) {
         case "high":
-            priority.setStyle("-fx-background-color: " + HIGH_PRIORITY_COLOR + ";");
+            priority.setStyle(currentStyle + "-fx-background-color: " + HIGH_PRIORITY_COLOR + ";");
             break;
         case "medium":
-            priority.setStyle("-fx-background-color: " + MEDIUM_PRIORITY_COLOR + ";");
+            priority.setStyle(currentStyle + "-fx-background-color: " + MEDIUM_PRIORITY_COLOR + ";");
             break;
         case "low":
-            priority.setStyle("-fx-background-color: " + LOW_PRIORITY_COLOR + ";");
+            priority.setStyle(currentStyle + "-fx-background-color: " + LOW_PRIORITY_COLOR + ";");
             break;
         default:
             // Keep default styling if priority is not recognized
