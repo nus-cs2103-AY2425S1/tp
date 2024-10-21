@@ -3,14 +3,24 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
+import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Sex;
 import seedu.address.model.person.StarredStatus;
+import seedu.address.model.tag.Tag;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 public class StarCommand extends Command {
     public static final String COMMAND_WORD = "star";
@@ -22,30 +32,27 @@ public class StarCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_STAR_PERSON_SUCCESS = "Starred Person: %1$s";
-    public static final String MESSAGE_UNSTAR_PERSON_SUCCESS = "Unstarred Person: %1$s";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person's name provided is invalid";
     public static final String MESSAGE_INVALID_INDEX = "The person index provided is invalid";
+    public static final String MESSAGE_ALREADY_STARRED = "%1$s has already been starred as favourite";
 
     private final Name targetName;
     private final Index targetIndex;
-    private final StarredStatus toStar;
 
     /**
-     * @param targetName of the person to be starred or unstarred in the list
+     * @param targetName of the person to be starred in the list
      */
-    public StarCommand(Name targetName, StarredStatus toStar) {
+    public StarCommand(Name targetName) {
         this.targetName = targetName;
         this.targetIndex = null;
-        this.toStar = toStar;
     }
 
     /**
-     * @param targetIndex of the index of the person to be starred or unstarred in the list
+     * @param targetIndex of the index of the person to be starred in the list
      */
-    public StarCommand(Index targetIndex, StarredStatus toStar) {
+    public StarCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
-        this.toStar = toStar;
     }
 
     @Override
@@ -71,13 +78,36 @@ public class StarCommand extends Command {
             personToStar = lastShownList.get(targetIndex.getZeroBased());
         }
 
-        model.deletePerson(personToStar);
+        if (personToStar.getStarredStatus().equals("true")) {
+            throw new CommandException(MESSAGE_ALREADY_STARRED);
+        } else {
+            Person editedPerson = createEditedPerson(personToStar);
+            model.setPerson(personToStar, editedPerson);
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        }
 
-        String result = toStar.value.equals("true")
-                ? String.format(MESSAGE_STAR_PERSON_SUCCESS, personToStar.getName())
-                : String.format(MESSAGE_UNSTAR_PERSON_SUCCESS, personToStar.getName());
+        return new CommandResult(String.format(MESSAGE_STAR_PERSON_SUCCESS, personToStar.getName()));
+    }
 
-        return new CommandResult(result);
+    /**
+     * Creates and returns a {@code Person} with the same details but starredStatus as true.
+     * edited with {@code editPersonDescriptor}.
+     */
+    private static Person createEditedPerson(Person personToEdit) {
+        assert personToEdit != null;
+
+        Name name = personToEdit.getName();
+        Phone phone = personToEdit.getPhone();
+        Email email = personToEdit.getEmail();
+        Address address = personToEdit.getAddress();
+        Age age = personToEdit.getAge();
+        Sex sex = personToEdit.getSex();
+        Set<Appointment> appointment = new HashSet<>(personToEdit.getAppointment());
+        Set<Tag> tags = new HashSet<>(personToEdit.getTags());
+        StarredStatus starredStatus = new StarredStatus("true");
+
+        return new Person(name, phone, email, address,
+                age, sex, appointment, tags, starredStatus);
     }
 
     @Override
@@ -94,16 +124,15 @@ public class StarCommand extends Command {
 
 
         return (targetName != null && targetName.equals(otherStarCommand.targetName))
-                || (targetIndex != null && targetIndex.equals(otherStarCommand.targetIndex))
-                && toStar.equals(otherStarCommand.toStar);
+                || (targetIndex != null && targetIndex.equals(otherStarCommand.targetIndex));
     }
 
     @Override
     public String toString() {
         if (targetName != null) {
-            return String.format("StarCommand[targetName=%s, toStar=%s]", targetName, toStar);
+            return String.format("StarCommand[targetName=%s]", targetName);
         } else {
-            return String.format("StarCommand[targetIndex=%d, toStar=%s]", targetIndex.getOneBased(), toStar);
+            return String.format("StarCommand[targetIndex=%d]", targetIndex.getOneBased());
         }
     }
 }
