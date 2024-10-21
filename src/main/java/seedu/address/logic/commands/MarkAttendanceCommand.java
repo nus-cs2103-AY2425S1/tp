@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Attendance;
 import seedu.address.model.student.Student;
-
+import seedu.address.model.student.TutorialGroup;
 
 
 /**
@@ -32,7 +32,7 @@ public class MarkAttendanceCommand extends Command {
             + PREFIX_DATE + "2019-10-09 "
             + PREFIX_PRESENT + " present";
 
-    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s is %2$s on %3$s";
+    public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s from Tutorial Group: %2$s is %3$s on %4$s";
 
     private final Name name;
     private final LocalDate date;
@@ -57,6 +57,7 @@ public class MarkAttendanceCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         // Find the student by name
         Student student = model.getStudentByName(name);
+        TutorialGroup tg = student.getTutorialGroup();
 
         if (student == null) {
             throw new CommandException("Student not found: " + name);
@@ -64,6 +65,6 @@ public class MarkAttendanceCommand extends Command {
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, attendance.value, date));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, tg, attendance.value, date));
     }
 }

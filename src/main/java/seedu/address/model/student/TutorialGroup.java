@@ -1,5 +1,8 @@
 package seedu.address.model.student;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -17,6 +20,25 @@ public class TutorialGroup {
     public static final String VALIDATION_REGEX = "[A-Za-z][0-9]{2}";
 
     public final String value;
+
+    private final Set<Student> students = new HashSet<>();
+
+    /**
+     * Adds a student to the tutorial group.
+     * @param student
+     */
+    public void addStudent(Student student) {
+        students.add(student);
+    }
+
+    /**
+     * gets the students in the tutorial group.
+     * @return students
+     */
+
+    public Set<Student> getStudents() {
+        return students;
+    }
 
     /**
      * Constructs a {@code TutorialGroup}.
