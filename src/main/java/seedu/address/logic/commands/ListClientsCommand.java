@@ -35,9 +35,6 @@ public class ListClientsCommand extends ListCommand {
      */
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
         return other instanceof ListClientsCommand;
     }
 }
