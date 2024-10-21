@@ -1,11 +1,10 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.EnabledOnOs;
-import org.junit.jupiter.api.condition.OS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -25,9 +24,11 @@ public class FunctionalBrowserTest {
         assertThrows(NullPointerException.class, () -> browser.launchUri(null));
     }
 
-    @EnabledOnOs({OS.LINUX, OS.MAC, OS.WINDOWS})
     @Test
     public void launchUri_invalidUri_throwsUriSyntaxException() {
+        assumeFalse(System.getProperty("os.name").toLowerCase().contains("ubuntu"),
+                "Test not ran on Ubuntu OS");
+
         FunctionalBrowser browser = FunctionalBrowser.getDesktop();
         String expectedErrorMessage = "The URI specified is invalid.";
 
