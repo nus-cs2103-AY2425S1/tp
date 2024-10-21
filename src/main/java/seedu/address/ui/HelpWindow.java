@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,30 +14,26 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.person.Person;
 
 /**
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    private TableView table = new TableView();
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f12-4.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the command cheatsheet: "
         + "\nFor detailed help, refer to the user guide at: " + USERGUIDE_URL;
@@ -46,23 +42,24 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String FXML = "HelpWindow.fxml";
     final ObservableList<String[]> data = FXCollections.observableArrayList(
             new String[]{AddCommand.COMMAND_SUMMARY_ACTION, AddCommand.COMMAND_SUMMARY_FORMAT,
-                    AddCommand.COMMAND_SUMMARY_EXAMPLES},
+                         AddCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{ClearCommand.COMMAND_SUMMARY_ACTION, ClearCommand.COMMAND_SUMMARY_FORMAT,
-                    ClearCommand.COMMAND_SUMMARY_EXAMPLES},
+                         ClearCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{DeleteCommand.COMMAND_SUMMARY_ACTION, DeleteCommand.COMMAND_SUMMARY_FORMAT,
-                    DeleteCommand.COMMAND_SUMMARY_EXAMPLES},
+                         DeleteCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{EditCommand.COMMAND_SUMMARY_ACTION, EditCommand.COMMAND_SUMMARY_FORMAT,
-                    EditCommand.COMMAND_SUMMARY_EXAMPLES},
+                         EditCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{FindCommand.COMMAND_SUMMARY_ACTION, FindCommand.COMMAND_SUMMARY_FORMAT,
-                    FindCommand.COMMAND_SUMMARY_EXAMPLES},
+                         FindCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{ListCommand.COMMAND_SUMMARY_ACTION, ListCommand.COMMAND_SUMMARY_FORMAT,
-                    ListCommand.COMMAND_SUMMARY_EXAMPLES},
+                         ListCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{HelpCommand.COMMAND_SUMMARY_ACTION, HelpCommand.COMMAND_SUMMARY_FORMAT,
-                    HelpCommand.COMMAND_SUMMARY_EXAMPLES},
+                         HelpCommand.COMMAND_SUMMARY_EXAMPLES},
             new String[]{ExitCommand.COMMAND_SUMMARY_ACTION, ExitCommand.COMMAND_SUMMARY_FORMAT,
-                    ExitCommand.COMMAND_SUMMARY_EXAMPLES}
+                         ExitCommand.COMMAND_SUMMARY_EXAMPLES}
     );
 
+    private TableView table = new TableView();
     @FXML
     private Button copyButton;
 
@@ -148,8 +145,8 @@ public class HelpWindow extends UiPart<Stage> {
         });
 
         // Add the hyperlink to the VBox
-        vbox.getChildren().add(userGuideLink);
-        ((Group) scene.getRoot()).getChildren().addAll(vbox);
+        vbox.getChildren().add(userGuideLink); (
+        (Group) scene.getRoot()).getChildren().addAll(vbox);
 
         this.getRoot().setScene(scene);
         getRoot().show();
