@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,12 +18,14 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteLinkCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNricCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -87,6 +90,23 @@ public class AddressBookParserTest {
         FindNricCommand command = (FindNricCommand) parser.parseCommand(
                 FindNricCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindNricCommand(new NricContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_link() throws Exception {
+        Nric nric1 = AMY.getNric();
+        Nric nric2 = BOB.getNric();
+        LinkCommand command = (LinkCommand) parser.parseCommand(PersonUtil.getLinkCommand(nric1, nric2));
+        assertEquals(new LinkCommand(nric1, nric2), command);
+    }
+
+    @Test
+    public void parseCommand_deleteLink() throws Exception {
+        Nric nric1 = AMY.getNric();
+        Nric nric2 = BOB.getNric();
+        DeleteLinkCommand command = (DeleteLinkCommand) parser.parseCommand(
+            PersonUtil.getDeleteLinkCommand(nric1, nric2));
+        assertEquals(new DeleteLinkCommand(nric1, nric2), command);
     }
 
     @Test
