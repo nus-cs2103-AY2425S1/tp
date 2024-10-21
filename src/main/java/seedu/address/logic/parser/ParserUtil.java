@@ -154,7 +154,7 @@ public class ParserUtil {
         if (!Subject.isValidSubject(subject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(subject);
+        return new Subject(subject.toLowerCase());
     }
 
     /**

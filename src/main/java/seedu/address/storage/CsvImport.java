@@ -4,10 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.opencsv.CSVReader;
 import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.bean.HeaderColumnNameMappingStrategy;
+import com.opencsv.bean.MappingStrategy;
+import com.opencsv.exceptions.CsvChainedException;
+import com.opencsv.exceptions.CsvFieldAssignmentException;
 import com.opencsv.exceptions.CsvValidationException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -20,13 +25,14 @@ import seedu.address.model.Model;
  * JsonAdaptedPerson objects, which can then be added to a Model.
  */
 public class CsvImport {
-    private static final String INCORRECT_HEADERS = "Your file is missing or has extra headers. "
+    public static final String INCORRECT_HEADERS = "Your file is missing or has extra headers. "
             + "Please use the following headers: name,phone,email,address,hours,tags,role ";
-    private static final String INCORRECT_ROWS = "Some rows have an incorrect number of entries. "
+    public static final String INCORRECT_ROWS = "Some rows have an incorrect number of entries "
+            + "or have an incorrect formatting. "
             + "The expected number of entries is %d. The rows that failed are: %s";
-    private static final int HEADER_COUNT = 7;
+    public static final int HEADER_COUNT = 7;
     private final String importFilePath;
-    private final ArrayList<Integer> failed;
+    private final ArrayList<Integer> duplicates;
 
     /**
      * Constructs a CsvImport instance with the specified file path.
@@ -35,7 +41,7 @@ public class CsvImport {
      */
     public CsvImport(String importFilePath) {
         this.importFilePath = importFilePath;
-        this.failed = new ArrayList<>();
+        this.duplicates = new ArrayList<>();
     }
 
     /**
@@ -60,33 +66,38 @@ public class CsvImport {
         if (!validateHeaders(headerReader)) {
             throw new ImproperFormatException(INCORRECT_HEADERS);
         } else if (!validateCsv(rowReader)) {
-            throw new ImproperFormatException(String.format(INCORRECT_ROWS, HEADER_COUNT, failed));
+            throw new ImproperFormatException(String.format(INCORRECT_ROWS, HEADER_COUNT, duplicates));
         }
+
+        MappingStrategy<JsonAdaptedPerson> map = createMappingStrategy();
+        map.setType(JsonAdaptedPerson.class);
         List<JsonAdaptedPerson> personList = new CsvToBeanBuilder<JsonAdaptedPerson>(reader)
-                .withType(JsonAdaptedPerson.class).build().parse();
+                .withMappingStrategy(map)
+                .build()
+                .parse();
 
         int success = 0;
         for (JsonAdaptedPerson p : personList) {
             try {
                 if (model.hasPerson(p.toModelType())) {
-                    failed.add(personList.indexOf(p));
+                    duplicates.add(personList.indexOf(p) + 1);
                 } else {
                     model.addPerson(p.toModelType());
                     success++;
                 }
             } catch (IllegalValueException e) {
-                failed.add(personList.indexOf(p));
+                duplicates.add(personList.indexOf(p) + 1);
             }
         }
         return success;
     }
 
-    public ArrayList<Integer> getFailed() {
-        return failed;
+    public ArrayList<Integer> getDuplicates() {
+        return duplicates;
     }
 
     public boolean hasFailures() {
-        return !failed.isEmpty();
+        return !duplicates.isEmpty();
     }
 
     private boolean validateHeaders(FileReader reader) {
@@ -107,6 +118,7 @@ public class CsvImport {
                 return false;
             }
 
+            actualHeaders.replaceAll(String::trim);
             // Check for missing headers
             for (String expectedHeader : expectedHeaders) {
                 if (!actualHeaders.contains(expectedHeader)) {
@@ -116,9 +128,9 @@ public class CsvImport {
 
             // Check for extra headers
             for (String actualHeader : actualHeaders) {
-                if (!expectedHeaders.contains(actualHeader)) {
+                if (!expectedHeaders.remove(actualHeader)) {
                     return false;
-                }
+                };
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -135,7 +147,7 @@ public class CsvImport {
             String[] row = csvReader.readNext();
             while (row != null) {
                 if (row.length != HEADER_COUNT) {
-                    failed.add(lineCount);
+                    duplicates.add(lineCount);
                 }
                 lineCount++;
                 row = csvReader.readNext();
@@ -143,6 +155,17 @@ public class CsvImport {
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
-        return failed.isEmpty();
+        return duplicates.isEmpty();
+    }
+
+    private MappingStrategy<JsonAdaptedPerson> createMappingStrategy() {
+        return new HeaderColumnNameMappingStrategy<>() {
+            @Override
+            public JsonAdaptedPerson populateNewBean(String[] line) throws CsvFieldAssignmentException,
+                    CsvChainedException {
+                Arrays.setAll(line, index -> line[index].trim());
+                return super.populateNewBean(line);
+            }
+        };
     }
 }
