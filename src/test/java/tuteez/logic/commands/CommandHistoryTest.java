@@ -4,9 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.lang.reflect.Field;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 public class CommandHistoryTest {
     private CommandHistory commandHistory;
 
@@ -56,4 +57,33 @@ public class CommandHistoryTest {
         assertEquals("command2", commandHistory.getNextCommand());
         assertEquals("", commandHistory.getNextCommand()); // No more next commands
     }
+
+    @Test
+    public void getNextCommand_invalidCurrentIndex_throwsAssertionError() throws Exception {
+        commandHistory.add("command1");
+        commandHistory.add("command2");
+
+        // Use reflection to set currentIndex to an invalid value (e.g., larger than history.size())
+        Field field = CommandHistory.class.getDeclaredField("currentIndex");
+        field.setAccessible(true);
+        field.set(commandHistory, 999); // Invalid index
+
+        // Expect an AssertionError when calling getNextCommand()
+        assertThrows(AssertionError.class, () -> commandHistory.getNextCommand());
+    }
+
+    @Test
+    public void getPreviousCommand_invalidCurrentIndex_throwsAssertionError() throws Exception {
+        commandHistory.add("command1");
+        commandHistory.add("command2");
+
+        // Use reflection to set currentIndex to an invalid value (e.g., negative beyond -1)
+        Field field = CommandHistory.class.getDeclaredField("currentIndex");
+        field.setAccessible(true);
+        field.set(commandHistory, -999); // Invalid index
+
+        // Expect an AssertionError when calling getPreviousCommand()
+        assertThrows(AssertionError.class, () -> commandHistory.getPreviousCommand());
+    }
+
 }

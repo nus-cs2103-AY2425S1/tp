@@ -43,7 +43,7 @@ public class CommandHistory {
     }
 
     /**
-     * Returns the next command in history, or null if no next command exists.
+     * Returns the next command in history, or an empty string if no next command exists.
      */
     public String getNextCommand() {
         assert currentIndex >= -1 && currentIndex <= history.size();
