@@ -2,7 +2,6 @@ package tutorease.address.logic.commands;
 
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static tutorease.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static tutorease.address.testutil.TypicalLessons.getTypicalLessons;
 import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import tutorease.address.commons.core.index.Index;
 import tutorease.address.logic.parser.exceptions.ParseException;
+import tutorease.address.model.LessonSchedule;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.UserPrefs;
@@ -33,7 +33,7 @@ public class DeleteLessonCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), getTypicalLessons());
+        model = new ModelManager(getTypicalTutorEase(), new UserPrefs(), new LessonSchedule());
         validPerson = model.getTutorEase().getPersonList().get(0);
     }
 
