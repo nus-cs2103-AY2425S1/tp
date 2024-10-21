@@ -1,6 +1,11 @@
 package seedu.address.model.wedding;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import seedu.address.model.person.Person;
+
 
 /**
  * Represents a Wedding in the system.
@@ -16,8 +21,13 @@ public class Wedding {
      * so that " " (a blank string) is not a valid input.
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}'][\\p{Alnum} ']*";
-    private WeddingName weddingName;
+    private final WeddingName weddingName;
     private int peopleCount;
+    private Person partner1;
+    private Person partner2;
+    private ArrayList<Person> guestList;
+    private String location;
+    private Date date;
 
     /**
      * Constructs a {@code Wedding} with the specified {@code weddingName}
@@ -75,11 +85,10 @@ public class Wedding {
             return true;
         }
 
-        if (!(obj instanceof Wedding)) {
+        if (!(obj instanceof Wedding otherWedding)) {
             return true;
         }
 
-        Wedding otherWedding = (Wedding) obj;
         return weddingName.equals(otherWedding.weddingName);
     }
 
