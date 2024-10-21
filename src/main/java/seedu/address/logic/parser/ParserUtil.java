@@ -283,5 +283,4 @@ public class ParserUtil {
         }
         return eventSet;
     }
-
 }

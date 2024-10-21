@@ -102,7 +102,11 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (eventList.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Event.class.getSimpleName()));
+        }
         final Set<Event> modelEvents = new HashSet<>(eventList);
+
         final Set<Role> modelRoles = new HashSet<>(personRoles);
 
         return new Person(modelName, modelPhone, modelEmail, modelEvents, modelRoles);

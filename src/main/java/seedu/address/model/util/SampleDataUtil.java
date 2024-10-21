@@ -22,22 +22,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 getEventSet("IFG"),
-                getRoleSet("friends")),
+                getRoleSet("Athlete - COM - Volleyball Women, Tennis")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 getEventSet("IFG"),
-                getRoleSet("colleagues", "friends")),
+                getRoleSet("Volunteer - Photographer", "Committee - Publicity - Project Director")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 getEventSet("SUNIG"),
-                getRoleSet("neighbours")),
+                getRoleSet("Sponsor - OATSIDE")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 getEventSet("AUG"),
-                getRoleSet("family")),
+                getRoleSet("Athlete - FASS - Swimming Men")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 getEventSet("IVP"),
-                getRoleSet("classmates")),
+                getRoleSet("Audience")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 getEventSet("IFG"),
-                getRoleSet("colleagues"))
+                getRoleSet("Committee - Sports - Vice Sports Director - BIZ")),
         };
     }
 

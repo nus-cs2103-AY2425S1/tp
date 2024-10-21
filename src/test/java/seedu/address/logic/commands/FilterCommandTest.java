@@ -76,4 +76,35 @@ public class FilterCommandTest {
     private RoleContainsKeywordsPredicate preparePredicate(String userInput) {
         return new RoleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
+    @Test
+    public void execute_singleKeyword_singlePersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        RoleContainsKeywordsPredicate predicate = preparePredicate("Volunteer");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(BENSON), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_nonMatchingKeyword_noPersonFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        RoleContainsKeywordsPredicate predicate = preparePredicate("NonExistentRole");
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_caseInsensitiveKeywords_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        RoleContainsKeywordsPredicate predicate = new RoleContainsKeywordsPredicate(
+                List.of("athlete", "volunteer", "sponsor"));
+        FilterCommand command = new FilterCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
 }
