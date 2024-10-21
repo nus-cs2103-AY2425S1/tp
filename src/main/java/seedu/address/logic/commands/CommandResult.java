@@ -22,19 +22,23 @@ public class CommandResult {
     /** Change view to MeetUpList */
     private final boolean showMeetUpList;
 
-    /** Change view to Address Book */
+    /** Change view to Budget Book */
     private final boolean showBuyerList;
+
+    /** Change view to Property List */
+    private final boolean showPropertyList;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-            boolean showMeetUpList, boolean showBuyerList) {
+            boolean showMeetUpList, boolean showBuyerList, boolean showPropertyList) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showMeetUpList = showMeetUpList;
         this.showBuyerList = showBuyerList;
+        this.showPropertyList = showPropertyList;
     }
 
     /**
@@ -42,7 +46,7 @@ public class CommandResult {
      * buyer list to true, and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, true);
+        this(feedbackToUser, false, false, false, true, false);
     }
 
     public String getFeedbackToUser() {
@@ -63,6 +67,10 @@ public class CommandResult {
 
     public boolean isShowBuyerList() {
         return showBuyerList;
+    }
+
+    public boolean isShowPropertyList() {
+        return showPropertyList;
     }
 
     @Override

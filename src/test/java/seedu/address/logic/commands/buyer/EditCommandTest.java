@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_BUYER;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_BUYER;
 import static seedu.address.testutil.buyer.TypicalBuyers.getTypicalBuyerList;
 import static seedu.address.testutil.meetup.TypicalMeetUps.getTypicalMeetUpList;
+import static seedu.address.testutil.property.TypicalProperties.getTypicalPropertyList;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +27,7 @@ import seedu.address.model.BuyerList;
 import seedu.address.model.MeetUpList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.PropertyList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.testutil.buyer.BuyerBuilder;
@@ -36,7 +38,8 @@ import seedu.address.testutil.buyer.EditBuyerDescriptorBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList());
+    private Model model = new ModelManager(getTypicalBuyerList(), new UserPrefs(), getTypicalMeetUpList(),
+            getTypicalPropertyList());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -48,7 +51,7 @@ public class EditCommandTest {
                 Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
-                new MeetUpList(model.getMeetUpList()));
+                new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -71,7 +74,7 @@ public class EditCommandTest {
                 Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
-                new MeetUpList(model.getMeetUpList()));
+                new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
         expectedModel.setBuyer(lastBuyer, editedBuyer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -86,7 +89,7 @@ public class EditCommandTest {
                 Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
-                new MeetUpList(model.getMeetUpList()));
+                new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -104,7 +107,7 @@ public class EditCommandTest {
                 Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new BuyerList(model.getBuyerList()), new UserPrefs(),
-                new MeetUpList(model.getMeetUpList()));
+                new MeetUpList(model.getMeetUpList()), new PropertyList(model.getPropertyList()));
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

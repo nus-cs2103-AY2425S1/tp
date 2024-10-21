@@ -4,50 +4,43 @@
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "buyerType": "buyer",
+    "budget": "1,000,000",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "buyerType": "buyer",
+    "budget": "300,000",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
-    "address" : "wall street",
-    "buyerType": "seller",
+    "budget": "1",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "buyerType": "buyer",
+    "budget": "200",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "buyerType": "seller",
+    "budget": "1,000",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "buyerType": "buyer",
+    "budget": "10,000",
     "tags" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
-    "address" : "4th street",
-    "buyerType": "buyer",
+    "budget": "100",
     "tags" : [ ]
   } ]
 }

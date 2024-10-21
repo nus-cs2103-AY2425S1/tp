@@ -6,9 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.BuyerList;
 import seedu.address.model.ReadOnlyBuyerList;
-import seedu.address.model.buyer.Address;
+import seedu.address.model.buyer.Budget;
 import seedu.address.model.buyer.Buyer;
-import seedu.address.model.buyer.BuyerType;
 import seedu.address.model.buyer.Email;
 import seedu.address.model.buyer.Name;
 import seedu.address.model.buyer.Phone;
@@ -21,28 +20,22 @@ public class SampleBuyerDataUtil {
     public static Buyer[] getSampleBuyers() {
         return new Buyer[] {
             new Buyer(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                new BuyerType("buyer"),
+                new Budget("50,000"),
                 getTagSet("friends")),
             new Buyer(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                new BuyerType("seller"),
+                new Budget("10000"),
                 getTagSet("colleagues", "friends")),
             new Buyer(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                new BuyerType("buyer"),
+                new Budget("35,000"),
                 getTagSet("neighbours")),
             new Buyer(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                new BuyerType("buyer"),
+                new Budget("6000000"),
                 getTagSet("family")),
             new Buyer(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                new BuyerType("seller"),
+                new Budget("800000"),
                 getTagSet("classmates")),
             new Buyer(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                new BuyerType("buyer"),
+                new Budget("9123994"),
                 getTagSet("colleagues"))
         };
     }

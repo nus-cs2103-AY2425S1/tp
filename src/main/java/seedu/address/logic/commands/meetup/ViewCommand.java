@@ -26,6 +26,6 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }

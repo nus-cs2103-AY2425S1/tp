@@ -9,8 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyBuyerList;
 import seedu.address.model.ReadOnlyMeetUpList;
+import seedu.address.model.ReadOnlyPropertyList;
 import seedu.address.model.buyer.Buyer;
 import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.property.Property;
 
 /**
  * API of the Logic component
@@ -54,6 +56,21 @@ public interface Logic {
      * Returns the user prefs' meet up list file path.
      */
     Path getMeetUpListFilePath();
+
+    /**
+     * Returns the MeetUpList.
+     *
+     * @see seedu.address.model.Model#getMeetUpList()
+     */
+    ReadOnlyPropertyList getPropertyList();
+
+    /** Returns an unmodifiable view of the filtered list of meet ups */
+    ObservableList<Property> getFilteredPropertyList();
+
+    /**
+     * Returns the user prefs' meet up list file path.
+     */
+    Path getPropertyListFilePath();
 
     /**
      * Returns the user prefs' GUI settings.
