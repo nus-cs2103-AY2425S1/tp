@@ -49,7 +49,7 @@ public class Messages {
                 .append("\n\n Notes: ")
                 .append(person.getNotes().toString().isEmpty() ? "-" : person.getNotes())
                 .append("\n\n Appointment: ")
-                .append(person.getAppointment().toString());
+                .append(person.getAppointment() == null ? "-" : person.getAppointment().toString());
         // .append("; Tags: ");
 
         // person.getTags().forEach(builder::append);
