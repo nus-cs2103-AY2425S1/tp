@@ -29,41 +29,41 @@ public class UnmarkIndexCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteIndexCommand(INDEX_FIRST_STUDENT);
+        Student studentToUnmark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        UnmarkCommand unmarkCommand = new UnmarkIndexCommand(INDEX_FIRST_STUDENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
-                Messages.format(studentToDelete));
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_STUDENT_SUCCESS,
+                Messages.format(studentToUnmark));
 
         ModelManager expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
-        expectedModel.deleteStudent(studentToDelete);
+        expectedModel.unmarkStudent(studentToUnmark);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteIndexCommand(outOfBoundIndex);
+        UnmarkCommand unmarkCommand = new UnmarkIndexCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
-        Student studentToDelete = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteIndexCommand(INDEX_FIRST_STUDENT);
+        Student studentToUnmark = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        UnmarkCommand unmarkCommand = new UnmarkIndexCommand(INDEX_FIRST_STUDENT);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_STUDENT_SUCCESS,
-                Messages.format(studentToDelete));
+        String expectedMessage = String.format(UnmarkCommand.MESSAGE_UNMARK_STUDENT_SUCCESS,
+                Messages.format(studentToUnmark));
 
         Model expectedModel = new ModelManager(model.getEduLog(), new UserPrefs());
-        expectedModel.deleteStudent(studentToDelete);
-        showNoStudent(expectedModel);
+        expectedModel.unmarkStudent(studentToUnmark);
+        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(unmarkCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -74,39 +74,39 @@ public class UnmarkIndexCommandTest {
         // ensures that outOfBoundIndex is still in bounds of edulog book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getEduLog().getStudentList().size());
 
-        DeleteCommand deleteCommand = new DeleteIndexCommand(outOfBoundIndex);
+        UnmarkCommand unmarkCommand = new UnmarkIndexCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(unmarkCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteIndexCommand(INDEX_FIRST_STUDENT);
-        DeleteCommand deleteSecondCommand = new DeleteIndexCommand(INDEX_SECOND_STUDENT);
+        UnmarkCommand unmarkFirstCommand = new UnmarkIndexCommand(INDEX_FIRST_STUDENT);
+        UnmarkCommand unmarkSecondCommand = new UnmarkIndexCommand(INDEX_SECOND_STUDENT);
 
         // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteIndexCommand(INDEX_FIRST_STUDENT);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+        UnmarkCommand unmarkFirstCommandCopy = new UnmarkIndexCommand(INDEX_FIRST_STUDENT);
+        assertTrue(unmarkFirstCommand.equals(unmarkFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
+        assertFalse(unmarkFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
+        assertFalse(unmarkFirstCommand.equals(null));
 
         // different student -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+        assertFalse(unmarkFirstCommand.equals(unmarkSecondCommand));
     }
 
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        DeleteIndexCommand deleteCommand = new DeleteIndexCommand(targetIndex);
-        String expected = DeleteIndexCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
-        assertEquals(expected, deleteCommand.toString());
+        UnmarkIndexCommand unmarkCommand = new UnmarkIndexCommand(targetIndex);
+        String expected = UnmarkIndexCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, unmarkCommand.toString());
     }
 
     /**
