@@ -33,6 +33,9 @@ public class DeadlineTest {
         assertFalse(Deadline.isValidDeadline("32-01-2020")); // invalid day
         assertFalse(Deadline.isValidDeadline("15-13-2020")); // invalid month
         assertFalse(Deadline.isValidDeadline("15-12-20")); // invalid year (too short)
+        assertFalse(Deadline.isValidDeadline("15- 12 -20")); // spaces in between
+        assertFalse(Deadline.isValidDeadline("10 -12-20")); // spaces in between
+        assertFalse(Deadline.isValidDeadline("10-12 -20")); // spaces in between
 
         // valid deadlines
         assertTrue(Deadline.isValidDeadline("01-01-2020")); // valid format, start of the year
