@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
-import java.awt.*;
-import java.net.URL;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -12,6 +11,10 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
+/**
+ *  The client window provides detailed information about the clients, such as name, phone, email, address, conditions
+ *  and schedule
+ */
 public class ClientWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(ClientWindow.class);

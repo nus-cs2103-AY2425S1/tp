@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-
 import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -10,7 +9,7 @@ import seedu.address.model.person.Name;
 /**
  * Parses input arguments and creates a new ViewClientCommand object
  */
-public class ViewClientCommandParser implements Parser<ViewClientCommand>{
+public class ViewClientCommandParser implements Parser<ViewClientCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand

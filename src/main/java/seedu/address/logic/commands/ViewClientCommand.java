@@ -8,6 +8,10 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
+/**
+ *  View a client details, such as name, phone, email, address, condition and schedule in a separate popup window,
+ *  given that the client with the input name exists
+ */
 public class ViewClientCommand extends Command {
 
     public static final String COMMAND_WORD = "view";

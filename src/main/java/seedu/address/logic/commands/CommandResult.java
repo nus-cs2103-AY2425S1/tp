@@ -47,7 +47,9 @@ public class CommandResult {
     public boolean isShowHelp() {
         return showHelp;
     }
-    public boolean isShowClient() {return showClient; }
+    public boolean isShowClient() {
+        return showClient;
+    }
 
     public boolean isExit() {
         return exit;
