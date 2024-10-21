@@ -57,7 +57,7 @@ public class SocialMedia {
         }
 
         SocialMedia otherSocialMedia = (SocialMedia) other;
-        return handle.equals(otherSocialMedia.handle);
+        return handle.equals(otherSocialMedia.handle) && platform.equals(otherSocialMedia.platform);
     }
 
     @Override

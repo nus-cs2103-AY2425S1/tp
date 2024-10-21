@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -53,6 +55,14 @@ public class SocialMediaCommandTest {
         String expectedMessage = SocialMediaCommand.MESSAGE_INVALID_HANDLE;
 
         assertCommandFailure(socialMediaCommand, model, expectedMessage);
+
+        String handle1 = "username";
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        SocialMediaCommand socialMediaCommand1 = new SocialMediaCommand(handle1, SocialMedia.Platform.INSTAGRAM,
+                outOfBoundIndex);
+
+        String expectedMessage1 = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        assertCommandFailure(socialMediaCommand1, model, expectedMessage1);
     }
 
     @Test
