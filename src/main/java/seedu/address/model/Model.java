@@ -16,7 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Buyer> PREDICATE_SHOW_ALL_BUYERS = unused -> true;
     Predicate<MeetUp> PREDICATE_SHOW_ALL_MEETUPS = unused -> true;
-    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTIES = unused -> true;>
+    Predicate<Property> PREDICATE_SHOW_ALL_PROPERTIES = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
