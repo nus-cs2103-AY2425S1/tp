@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,8 +16,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Fees;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -193,4 +197,64 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parsePayment_validInput_success() throws ParseException {
+        Payment expectedPayment = new Payment("123");
+        assertEquals(expectedPayment, ParserUtil.parsePayment(" 123 "));
+
+        Payment expectedNegativePayment = new Payment("-123");
+        assertEquals(expectedNegativePayment, ParserUtil.parsePayment("-123"));
+
+        Payment expectedZeroPayment = new Payment("0");
+        assertEquals(expectedZeroPayment, ParserUtil.parsePayment(" 0 "));
+    }
+
+    @Test
+    public void parsePayment_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePayment("abc")); // Non-numeric string
+        assertThrows(ParseException.class, () -> ParserUtil.parsePayment("12.34")); // Floating point
+        assertThrows(ParseException.class, () -> ParserUtil.parsePayment("")); // Empty string
+        assertThrows(ParseException.class, () -> ParserUtil.parsePayment("$123")); // Non-numeric character
+    }
+
+    @Test
+    public void parseFees_validInput_success() throws ParseException {
+        Fees expectedFees = new Fees("123");
+        assertEquals(expectedFees, ParserUtil.parseFees(" 123 "));
+
+        Fees zeroleadingexpectedFees = new Fees("00123");
+        assertEquals(zeroleadingexpectedFees, ParserUtil.parseFees(" 00123 "));
+
+        Fees zeroFees = new Fees("0");
+        assertEquals(zeroFees, ParserUtil.parseFees(" 0 "));
+    }
+
+    // Test parseFees method with invalid inputs (should throw ParseException)
+    @Test
+    public void parseFees_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseFees("abc")); // Non-numeric string
+        assertThrows(ParseException.class, () -> ParserUtil.parseFees("-543")); // Negative number
+        assertThrows(ParseException.class, () -> ParserUtil.parseFees("12.34")); // Floating point
+        assertThrows(ParseException.class, () -> ParserUtil.parseFees("")); // Empty string
+        assertThrows(ParseException.class, () -> ParserUtil.parseFees("$123")); // Non-numeric character
+    }
+
+    // Test parseAttendance method with valid inputs
+    @Test
+    public void parseAttendance_validInput_success() throws ParseException {
+        Attendance expectedTrueAttendance = new Attendance(
+                LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        assertEquals(expectedTrueAttendance, ParserUtil.parseAttendance("10/10/2024")); // Valid true
+    }
+
+    // Test parseAttendance method with invalid inputs (should throw ParseException)
+    @Test
+    public void parseAttendance_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("abc")); // Non-boolean string
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("yes")); // Non-boolean string
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("")); // Empty string
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttendance("123")); // Non-boolean numeric
+    }
 }
+

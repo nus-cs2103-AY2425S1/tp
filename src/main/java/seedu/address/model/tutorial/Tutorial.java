@@ -1,10 +1,12 @@
 package seedu.address.model.tutorial;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.participation.Participation;
 
 /**
  * Represents a Tutorial class for the students
@@ -12,18 +14,24 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Tutorial {
 
-    private String subject;
+    private final String subject;
+    private final List<Participation> participationList;
 
     /**
      * Every field must be present and not null.
      */
-    public Tutorial(String subject) {
-        requireNonNull(subject);
+    public Tutorial(String subject, List<Participation> participationList) {
+        requireAllNonNull(subject, participationList);
         this.subject = subject;
+        this.participationList = participationList;
     }
 
     public String getSubject() {
         return subject;
+    }
+
+    public List<Participation> getParticipationList() {
+        return participationList;
     }
 
     /**
@@ -36,6 +44,7 @@ public class Tutorial {
         }
         return otherTutorial != null && otherTutorial.getSubject().equals(getSubject());
     }
+
 
     /**
      * Returns true if both tutorials have the same data fields.

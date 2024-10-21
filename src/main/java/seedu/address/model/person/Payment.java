@@ -8,26 +8,19 @@ import static java.util.Objects.requireNonNull;
  */
 public class Payment {
 
-    public static final String MESSAGE_CONSTRAINTS = "Payment must be either paid (true) or not paid (false).";
-    public static final String VALIDATION_REGEX = "^(true|false)$";
-    public final Boolean hasPaid;
+    public static final String MESSAGE_CONSTRAINTS = "Payment (marked by 'pay/') should be an negative, zero, or "
+            + "positive integer \n'$' is not required \n Leading zero are allowed but not recommended";
+    public static final String VALIDATION_REGEX = "^-?[0-9]\\d*|0$\n";
+    public final String overdueAmount;
 
     /**
      * Constructs an {@code Payment}.
      *
-     * @param hasPaid Boolean for payment status
+     * @param overdueAmount Boolean for payment status
      */
-    public Payment(Boolean hasPaid) {
-        requireNonNull(hasPaid);
-        this.hasPaid = hasPaid;
-    }
-
-    /**
-     * Constructs an {@code Payment}.
-     * Set to false as default
-     */
-    public Payment() {
-        this.hasPaid = false;
+    public Payment(String overdueAmount) {
+        requireNonNull(overdueAmount);
+        this.overdueAmount = overdueAmount;
     }
 
     /**
@@ -39,7 +32,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return hasPaid ? "Paid" : "Not Paid";
+        return "Payment overdue: $" + overdueAmount;
     }
 
     @Override
@@ -54,12 +47,12 @@ public class Payment {
         }
 
         Payment otherPayment = (Payment) other;
-        return hasPaid.equals(otherPayment.hasPaid);
+        return overdueAmount.equals(otherPayment.overdueAmount);
     }
 
     @Override
     public int hashCode() {
-        return hasPaid.hashCode();
+        return overdueAmount.hashCode();
     }
 
 }
