@@ -22,7 +22,7 @@ public class Note {
     /**
      * Returns the content of this Note.
      */
-    public String getConent() {
+    public String getContent() {
         return content;
     }
 

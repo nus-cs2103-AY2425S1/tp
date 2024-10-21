@@ -24,7 +24,7 @@ class JsonAdaptedNote {
      * Converts a given {@code Note} into this class for Jackson use.
      */
     public JsonAdaptedNote(Note source) {
-        content = source.getConent();
+        content = source.getContent();
     }
 
     @JsonValue

@@ -1,7 +1,9 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -88,5 +91,16 @@ public class SampleDataUtil {
         }
 
         return roleSet; // Return the set containing Role enums
+    }
+
+    public static List<Note> getSampleNotes(String... notes) {
+
+        List<Note> notesList = new ArrayList<>();
+
+        for (String e: notes) {
+            notesList.add(new Note(e));
+        }
+
+        return notesList;
     }
 }
