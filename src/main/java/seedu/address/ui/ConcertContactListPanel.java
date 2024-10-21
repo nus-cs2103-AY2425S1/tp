@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.concert.Concert;
 import seedu.address.model.concert.ConcertContact;
 
 /**
@@ -31,7 +30,8 @@ public class ConcertContactListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code ConcertContact} using a {@code ConcertContactCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code ConcertContact} using a
+     * {@code ConcertContactCard}.
      */
     class ConcertContactListViewCell extends ListCell<ConcertContact> {
         @Override
