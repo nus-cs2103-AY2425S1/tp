@@ -133,14 +133,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Person> getManagers() {
-        return addressBook.getPersonList().stream()
-                .filter(person -> person.getTags().stream()
-                        .anyMatch(tag -> tag.tagName.equalsIgnoreCase("manager")))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
