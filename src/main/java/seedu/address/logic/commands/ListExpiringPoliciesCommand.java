@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyExpiryDatePredicate;
-import seedu.address.model.policy.PolicySet;
 
 /**
  * Lists all policies in the address book that are nearing expiry within the user-specified number of days.
@@ -62,9 +62,10 @@ public class ListExpiringPoliciesCommand extends Command {
             boolean hasExpiringPolicies = false;
 
             for (Person person : persons) {
-                PolicySet policySet = person.getPolicySet();
+                Set<Policy> policies = person.getPolicies();
 
-                for (Policy policy : policySet) {
+                // Filter the policies based on expiry date predicate
+                for (Policy policy : policies) {
                     if (predicate.test(policy)) {
                         hasExpiringPolicies = true;
 

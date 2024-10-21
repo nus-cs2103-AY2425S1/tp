@@ -68,9 +68,6 @@ public class Person {
     public Set<Policy> getPolicies() {
         return Collections.unmodifiableSet(policies);
     }
-    public PolicySet getPolicySet() {
-        return this.policies;
-    }
 
     /**
      * Returns true if both persons have the same name.
