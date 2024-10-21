@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_DURATION;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_LOCATION_INDEX;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 import static tutorease.address.testutil.Assert.assertThrows;
 import static tutorease.address.testutil.TypicalStudents.getTypicalStudents;

@@ -2,7 +2,6 @@ package tutorease.address.testutil;
 
 import static java.util.Objects.requireNonNull;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_END_DATE;
-import static tutorease.address.logic.commands.CommandTestUtil.VALID_LOCATION_INDEX;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_START_DATE;
 
 import tutorease.address.logic.parser.exceptions.ParseException;
