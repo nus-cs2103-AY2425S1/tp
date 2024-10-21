@@ -90,7 +90,9 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveBaseName = "spleetwaise"
+    archiveVersion = "1.4"
+    archiveClassifier = null
 }
 
 defaultTasks 'clean', 'nonGuiTests', 'coverage'
