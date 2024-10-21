@@ -88,4 +88,5 @@ public interface Model {
     public void sortPersonsAsc();
 
     public void sortPersonsDesc();
+    public void sortPersonsFavourite();
 }

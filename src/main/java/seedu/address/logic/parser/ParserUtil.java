@@ -41,6 +41,31 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed. If the input string is empty, returns -1.
+     * @throws ParseException if the specified index is invalid (not a non-zero unsigned integer).
+     */
+    public static int parseIndexAllowEmpty(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+
+        // Return -1 if the input is empty after trimming
+        if (trimmedIndex.isEmpty()) {
+            return -1;
+        }
+
+        // Check if the trimmed string is a valid non-zero unsigned integer
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+
+        // Convert the string to an integer and return it
+        return Index.fromOneBased(Integer.parseInt(trimmedIndex)).getOneBased();
+    }
+
+
+
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *

@@ -107,6 +107,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void sortPersonsDesc() {
         persons.setDesc(); // Call the setDesc method from UniquePersonList
     }
+    public void sortPersonsFavourite() {
+        persons.setFavouriteFirst();
+    }
     /**
      * Sorts the persons in the address book by the sum of tag weights.
      */
