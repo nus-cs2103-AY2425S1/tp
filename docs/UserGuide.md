@@ -151,7 +151,7 @@ Deletes the specified student from the address book.
 
 **Examples:**
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ***
 
@@ -188,11 +188,11 @@ Find students by either their name, level or subject.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 **Examples:**
-* `find John` returns `john` and `John Doe`
+* `find n/John` returns `john` and `John Doe`
 * `find l/S3` returns all students tagged with level `S3`
 * `find s/MATH` returns all students tagged with subject `MATH`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find n/alex david'](images/findAlexDavidResult.png)
 
 ***
 
@@ -209,6 +209,7 @@ Shows a list of all students in the address book.
 Allows tagging a student by their level and subject. A student must have a level assigned before they can be tagged with a subject.
 
 **Format:** `tag n/NAME [l/level] [s/SUBJECT]…​`
+* To tag multiple subjects, use the format `s/FIRST_SUBJECT s/SECOND_SUBJECT ...`
 
 **Examples:**
 * `tag n/John Doe l/S3 s/ENGLISH`
