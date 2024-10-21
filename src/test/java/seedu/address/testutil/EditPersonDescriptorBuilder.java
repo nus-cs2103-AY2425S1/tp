@@ -36,7 +36,11 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
+        descriptor.setId(person.getId());
         descriptor.setName(person.getName());
+        descriptor.setDiagnosis(person.getDiagnosis());
+        descriptor.setWard(person.getWard());
+        descriptor.setMedication(person.getMedication());
     }
 
     /**
