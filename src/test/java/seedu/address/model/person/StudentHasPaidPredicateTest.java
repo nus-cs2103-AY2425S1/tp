@@ -39,13 +39,13 @@ public class StudentHasPaidPredicateTest {
     @Test
     public void test_studentHasPaid_returnsTrue() {
         StudentHasPaidPredicate predicate = new StudentHasPaidPredicate(true);
-        assertTrue(predicate.test(new PersonBuilder().withPayment("200").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPayment("0").build()));
     }
 
     @Test
     public void test_studentHasPaid_returnsFalse() {
         StudentHasPaidPredicate predicate = new StudentHasPaidPredicate(false);
-        assertTrue(predicate.test(new PersonBuilder().withPayment("-200").build()));
+        assertTrue(predicate.test(new PersonBuilder().withPayment("200").build()));
     }
 
     @Test

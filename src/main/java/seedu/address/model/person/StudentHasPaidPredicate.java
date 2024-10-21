@@ -17,9 +17,9 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         if (paymentUpToDate) {
-            return Integer.parseInt(person.getPayment().balance) >= 0;
+            return Integer.parseInt(person.getPayment().overdueAmount) <= 0;
         } else {
-            return Integer.parseInt(person.getPayment().balance) < 0;
+            return Integer.parseInt(person.getPayment().overdueAmount) > 0;
         }
     }
 

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class MarkPaidCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks that the amounts of fees the student has paid "
             + "Parameters: \n"
-            + "INDEX (must be a positive integer) \n"
-            + "AMOUNT (must be a positive integer) \n"
-            + "Example: " + COMMAND_WORD + " 1" + "200";
+            + "{INDEX} (must be a positive integer) \n"
+            + PREFIX_PAYMENT + "{AMOUNT} (must be a positive integer) \n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_PAYMENT + "200";
     public static final String MESSAGE_MARKED_PAID_SUCCESS = "Fees updated for Person %1$s";
     private final Index targetIndex;
     private final Fees fees;
@@ -81,10 +82,10 @@ public class MarkPaidCommand extends Command {
     }
 
     private Payment calculatePayment(Payment currentPayment, Fees paidFees) {
-        int currentBalance = Integer.parseInt(currentPayment.balance);
+        int currentBalance = Integer.parseInt(currentPayment.overdueAmount);
         int amountPaid = Integer.parseInt(paidFees.value);
 
-        Integer finalAmount = currentBalance + amountPaid;
+        Integer finalAmount = currentBalance - amountPaid;
         return new Payment(finalAmount.toString());
     }
 }

@@ -11,16 +11,16 @@ public class Payment {
     public static final String MESSAGE_CONSTRAINTS = "Payment (marked by 'pay/') should be an negative, zero, or "
             + "positive integer \n'$' is not required \n Leading zero are allowed but not recommended";
     public static final String VALIDATION_REGEX = "^-?[0-9]\\d*|0$\n";
-    public final String balance;
+    public final String overdueAmount;
 
     /**
      * Constructs an {@code Payment}.
      *
-     * @param balance Boolean for payment status
+     * @param overdueAmount Boolean for payment status
      */
-    public Payment(String balance) {
-        requireNonNull(balance);
-        this.balance = balance;
+    public Payment(String overdueAmount) {
+        requireNonNull(overdueAmount);
+        this.overdueAmount = overdueAmount;
     }
 
     /**
@@ -32,7 +32,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Balance: " + balance;
+        return "Payment overdue: $" + overdueAmount;
     }
 
     @Override
@@ -47,12 +47,12 @@ public class Payment {
         }
 
         Payment otherPayment = (Payment) other;
-        return balance.equals(otherPayment.balance);
+        return overdueAmount.equals(otherPayment.overdueAmount);
     }
 
     @Override
     public int hashCode() {
-        return balance.hashCode();
+        return overdueAmount.hashCode();
     }
 
 }

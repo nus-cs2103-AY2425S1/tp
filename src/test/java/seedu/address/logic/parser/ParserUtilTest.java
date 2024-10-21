@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -242,11 +243,9 @@ public class ParserUtilTest {
     // Test parseAttendance method with valid inputs
     @Test
     public void parseAttendance_validInput_success() throws ParseException {
-        Attendance expectedTrueAttendance = new Attendance(true);
-        assertEquals(expectedTrueAttendance, ParserUtil.parseAttendance(" true ")); // Valid true
-
-        Attendance expectedFalseAttendance = new Attendance(false);
-        assertEquals(expectedFalseAttendance, ParserUtil.parseAttendance("false")); // Valid false
+        Attendance expectedTrueAttendance = new Attendance(
+                LocalDate.parse("10/10/2024", Attendance.VALID_DATE_FORMAT));
+        assertEquals(expectedTrueAttendance, ParserUtil.parseAttendance("10/10/2024")); // Valid true
     }
 
     // Test parseAttendance method with invalid inputs (should throw ParseException)

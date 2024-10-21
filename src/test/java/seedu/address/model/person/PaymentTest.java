@@ -13,9 +13,9 @@ public class PaymentTest {
         Payment negativePayment = new Payment("-123");
         Payment zeroPayment = new Payment("0");
 
-        assertEquals("123", positivePayment.balance);
-        assertEquals("-123", negativePayment.balance);
-        assertEquals("0", zeroPayment.balance);
+        assertEquals("123", positivePayment.overdueAmount);
+        assertEquals("-123", negativePayment.overdueAmount);
+        assertEquals("0", zeroPayment.overdueAmount);
     }
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -46,12 +46,10 @@ public class PaymentTest {
     @Test
     public void toString_correctRepresentation() {
         Payment positivePayment = new Payment("123");
-        Payment negativePayment = new Payment("-123");
         Payment zeroPayment = new Payment("0");
 
-        assertEquals("Balance: 123", positivePayment.toString());
-        assertEquals("Balance: -123", negativePayment.toString());
-        assertEquals("Balance: 0", zeroPayment.toString());
+        assertEquals("Payment overdue: $123", positivePayment.toString());
+        assertEquals("Payment overdue: $0", zeroPayment.toString());
     }
 
     @Test
