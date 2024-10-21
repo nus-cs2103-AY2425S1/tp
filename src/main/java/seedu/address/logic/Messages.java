@@ -19,6 +19,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_PERSON_NOT_FOUND = "The person with the name %1$s was not found";
+    public static final String MESSAGE_INVALID_PERSON_NRIC = "The person with the NRIC %1$s does not exist in the "
+            + "system.";
 
 
     /**
