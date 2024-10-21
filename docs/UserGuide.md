@@ -19,16 +19,7 @@ Let’s begin and get you up to speed with AgentAssist!
 # Table of Contents
 
 1. [Introduction](#1-introduction)
-   <details>
-   <summary>Subsections</summary>
-
-   1.1 [What is AgentAssist?](#11-what-is-agentassist)  
-   1.2 [Why use AgentAssist?](#12-why-use-agentassist)
-
-   </details>
-
 2. [Important Prerequisites](#2-important-prerequisites)
-
 3. [Getting Started](#3-getting-started)
    <details>
    <summary>Subsections</summary>
@@ -87,11 +78,23 @@ AgentAssist is the **definitive desktop tool for credit card sales agents**. Mer
 
 Maximize your productivity, minimize your response time, and amplify your sales performance. With AgentAssist, you're not just keeping up with the competitive world of credit card sales — _you're setting the pace_.
 
-## 1.2 Why use AgentAssist?
-
 --------------------------------------------------------------------------------------------------------------------
 
 # 2. Important Prerequisites
+
+Before you start using AgentAssist, there are a few prerequisites to ensure you get the most out of the application:
+
+### Familiarity with Keyboard Navigation
+AgentAssist is designed to enhance speed and efficiency, with a strong focus on **keyboard-based navigation**. While the application includes a Graphical User Interface (GUI), its full potential is unlocked when you use **keyboard commands**. Therefore, it is important to:
+
+- Be comfortable navigating applications using the keyboard.
+- Familiarize yourself with basic `Command Line Interface (CLI)` commands if you haven't already. This will make it easier to use AgentAssist’s command system effectively.
+- Know common keyboard shortcuts (e.g., `Enter`, `Arrow keys`, etc.).
+
+### Basic Understanding of Data Fields
+AgentAssist allows you to manage client data like names, phone numbers, emails, and job information. A basic understanding of these data fields will make it easier to add, edit, and filter client information.
+
+🎉 **By meeting these prerequisites, you'll be ready to make the most of AgentAssist’s fast, keyboard-driven interface and powerful data management features.** 🎉
 
 # 3. Getting Started
 Welcome to AgentAssist. Here’s how to get up and running quickly and easily.
@@ -154,6 +157,8 @@ Move the .jar file you downloaded into this folder.
    - A window similar to the below image should appear in a few seconds. You will see a graphical user interface with sample contact information already added.<br><br>
    ![Ui](images/Ui.png)
 
+4. 🎉 **Congratulations! AgentAssist is now up and running!** 🎉  
+   You're all set to start using AgentAssist to manage your contacts, track your sales, and boost your productivity! 
 
 ## 3.2 Graphical User Interface (GUI) Layout
 
