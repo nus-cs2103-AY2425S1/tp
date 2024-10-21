@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Grade.MESSAGE_SCORE_CONSTRAINTS;
+import static seedu.address.model.person.Grade.MESSAGE_WEIGHTAGE_CONSTRAINTS;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -32,6 +34,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -193,4 +196,45 @@ public class ParserUtil {
         return trimmedTestName;
     }
 
+    /**
+     * Parses {@code String value} into a valid score  float
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if value is invalid or out of bounds
+     */
+    public static float parseScore(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        try {
+            float res = Float.parseFloat(trimmedValue);
+            if (res < 0 || res > 100) {
+                throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
+            }
+            return res;
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_SCORE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses {@code String value} into a valid weightage float
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if value is invalid or out of bounds
+     */
+    public static float parseWeightage(String value) throws ParseException {
+        requireNonNull(value);
+        String trimmedValue = value.trim();
+
+        try {
+            float res = Float.parseFloat(trimmedValue);
+            if (res <= 0 || res > 100) {
+                throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+            }
+            return res;
+        } catch (NumberFormatException e) {
+            throw new ParseException(MESSAGE_WEIGHTAGE_CONSTRAINTS);
+        }
+    }
 }
