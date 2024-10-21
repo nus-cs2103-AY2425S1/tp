@@ -28,16 +28,16 @@ public class ContainsGeneralKeywordsPredicate implements Predicate<Person> {
      * @return True if individual posesses a field exactly matching the keyword, false otherwise
      */
     private boolean testPerson(Person person, String keyword) {
-        if (StringUtil.containsMultipleWordsIgnoreCase(person.getName().fullName, keyword)) {
+        if (StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)) {
             return true; // Returns true if names match
-        } else if (StringUtil.containsMultipleWordsIgnoreCase(person.getAddress().value, keyword)) {
+        } else if (StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword)) {
             return true; // Returns true if address match
-        } else if (StringUtil.containsMultipleWordsIgnoreCase(person.getPhone().value, keyword)) {
+        } else if (StringUtil.containsWordIgnoreCase(person.getPhone().value, keyword)) {
             return true; // Returns true if phone number matches
-        } else if (StringUtil.containsMultipleWordsIgnoreCase(person.getEmail().value, keyword)) {
+        } else if (StringUtil.containsWordIgnoreCase(person.getEmail().value, keyword)) {
             return true; // Returns true if email matches
         } else if (person.getTags().stream().anyMatch(tag ->
-                StringUtil.containsMultipleWordsIgnoreCase(tag.tagName, keyword))) {
+                StringUtil.containsWordIgnoreCase(tag.tagName, keyword))) {
             return true; // Returns true if tags match
         } else {
             return false;
