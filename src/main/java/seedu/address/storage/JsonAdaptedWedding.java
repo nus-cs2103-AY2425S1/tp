@@ -11,6 +11,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.Wedding;
 
+/**
+ * Jackson-friendly version of {@link Wedding}.
+ */
 public class JsonAdaptedWedding {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Wedding's %s field is missing!";
     public static final String NAME_FIELD = "Name";
