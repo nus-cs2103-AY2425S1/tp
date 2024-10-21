@@ -27,6 +27,7 @@ public class Student {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private String remark = "";
     //AssignmentList initially null
     private List<Assignment> assignmentList = new ArrayList<Assignment>();
 
@@ -160,5 +161,9 @@ public class Student {
             throw new AssignmentIndexOutOfRangeException();
         }
         assignmentList.remove(index - 1);
+    }
+
+    public void setRemark(String remarkToAdd) {
+        this.remark = remarkToAdd;
     }
 }
