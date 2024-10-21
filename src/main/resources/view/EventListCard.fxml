@@ -30,9 +30,9 @@
             <FlowPane fx:id="celebrity" />
             <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
             <Label fx:id="venue" styleClass="cell_small_label" text="\$venue" />
-            <VBox fx:id="liaisonBox" styleClass="liaison-box">
-                <Label fx:id="liaisonLabel" styleClass="underline" text="Liaisons" />
-                <Label fx:id="liaisons" styleClass="cell_small_label" text="\$liaison" />
+            <VBox fx:id="contactsBox" styleClass="contact-box">
+                <Label fx:id="contactLabel" styleClass="underline" text="Points of Contact" />
+                <Label fx:id="contacts" styleClass="cell_small_label" text="\$contacts" />
             </VBox>
         </VBox>
     </GridPane>

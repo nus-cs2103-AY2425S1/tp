@@ -13,7 +13,7 @@ public class Event {
     private final Time time;
     private final Venue venue;
     private final Person celebrity;
-    private final List<Person> liaisons;
+    private final List<Person> contacts;
 
     /**
      * Every field must be present and not null.
@@ -23,7 +23,7 @@ public class Event {
         this.time = time;
         this.venue = venue;
         this.celebrity = person;
-        this.liaisons = List.of(person, person); // To be changed
+        this.contacts = List.of(person, person, person, person, person); // To be changed
     }
 
     public EventName getName() {
@@ -41,18 +41,16 @@ public class Event {
     public Person getCelebrity() {
         return celebrity;
     }
-    public List<Person> getLiaisons() {
-        return liaisons;
-    }
-    public String getLiaisonsString() {
-        return liaisons.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getName().fullName)
+
+    public String getContactsString() {
+        return contacts.stream().collect(StringBuilder::new, (sb, p) -> sb.append(p.getName().fullName)
                         .append(" ").append(p.getPhone().value).append("\n"),
                 StringBuilder::append).toString();
     }
 
     @Override
     public String toString() {
-        return name + " " + time + " " + venue + " " + celebrity + " " + liaisons;
+        return name + " " + time + " " + venue + " " + celebrity + " " + contacts;
     }
 
     @Override
@@ -71,7 +69,7 @@ public class Event {
                 && time.equals(otherEvent.time)
                 && venue.equals(otherEvent.venue)
                 && celebrity.equals(otherEvent.celebrity)
-                && liaisons.equals(otherEvent.liaisons);
+                && contacts.equals(otherEvent.contacts);
     }
 
 
