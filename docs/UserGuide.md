@@ -6,7 +6,7 @@
 
 # Knotty Planner 💍🎀
 
-Knotty Planner is a **desktop app for wedding planners, optimised for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planners can make organising weddings a walk in the park!
+Knotty Planner is a **desktop app for wedding planners, optimised for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -23,7 +23,7 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/gui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -65,9 +65,9 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to use the commands with detailed descriptions.
+Shows a message with a link to the user guide, explaning how to use the commands with detailed descriptions.
 
-![help message](images/helpMessage.png)
+![help message](images/helpmsg.png)
 
 Format: `help`
 
@@ -77,6 +77,8 @@ Format: `help`
 Adds a person to the contact list.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
+
+![add message](images/addMsg.png)
 
 <box type="tip" seamless>
 
@@ -94,11 +96,15 @@ Shows a list of all persons in the contact list.
 
 Format: `list`
 
+![list message](images/listMsg.png)
+
 ### Editing A Contact : `edit`
 
 Edits an existing person in the address book.
 
 Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
+
+![edit message](images/editMsg.png)
 
 * Edits the person at with the specified `NAME`.
 * At least one of the optional fields must be provided.
@@ -113,10 +119,13 @@ Examples:
 
 ### Tagging A Contact : `tag-add` / `tag-delete`
 
-## Adding Tag(s) to A Contact
+### Adding Tag(s) to A Contact
 Add tag(s) to an existing person in the address book.
 
 Format: `tag-add n/NAME t/TAG...`
+
+![tag-add message](images/tagadd1.png)
+![tag-add message](images/tagaddMsg.png)
 
 * Tags the person at with the specified `NAME`.
 * Existing values will be updated together with the input values.
@@ -126,10 +135,13 @@ Examples:
 and `Adam and Steve 16 June` to John Doe.
 *  `tag-add n/Betsy Crower t/Wedding at Park Gala` Adds the tag `Wedding at Park Gala` to Betsy Crower.
 
-## Deleting Tag(s) from A Contact
+### Deleting Tag(s) from A Contact
 Delete tag(s) from an existing person in the address book.
 
 Format: `tag-delete n/NAME t/TAG...`
+
+![tag-delete message](images/tagdeleteMsg.png)
+![tag-delete message](images/tagdeleteMsg1.png)
 
 * Deletes tag(s) from the person at with the specified `NAME`.
 * Existing values that match input values will be deleted.
@@ -145,6 +157,8 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+![find message](images/findMsg.png)
+
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
@@ -155,13 +169,14 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting A Contact : `delete` followed by `delete-y` or `delete-n`
 
 Deletes the specified person from the address book, with confirmation prompt.
 
 Format: `delete INDEX` followed by `delete-y` or `delete-n`
+
+![delete message](images/deleteMsg.png)
 
 * Deletes the person with the specified `NAME` from the address book.
 * The contact's details are shown for confirmation.
@@ -176,6 +191,8 @@ Examples:
 
 Clears all entries from the address book.
 
+![clear message](images/clearMsg.png)
+
 Format: `clear`
 
 ### Exiting the program : `exit`
@@ -186,17 +203,17 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Knotty Planner data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Knotty Planner data are saved automatically as a JSON file `[JAR file location]/data/knottyplanner.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -208,7 +225,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous KnottyPlanner home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,12 +240,12 @@ _Details coming soon ..._
 
 Action            | Format, Examples
 ------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/Wedding 1`
+**Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 j/Photographer t/June and James 16 June`
 **Clear**         | `clear`
 **Delete**        | `delete n/NAME` followed by `delete-y` or `delete-n`<br> e.g., `delete n/John Doe` followed by `delete-y`
 **Edit**          | `edit n/NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit n/John n/James Lee e/jameslee@example.com`
-**Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/wedding at Tanglin`
-**Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/wedding at Tanglin`
+**Adding Tags**   | `tag-add n/NAME t/TAG...` <br> e.g., `tag-add n/John Doe t/June and James 16 June`
+**Deleting Tags** | `tag-delete n/NAME t/TAG...` <br> e.g., `tag-delete n/John Doe t/June and James 16 June`
 **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**          | `list`
 **Help**          | `help`
