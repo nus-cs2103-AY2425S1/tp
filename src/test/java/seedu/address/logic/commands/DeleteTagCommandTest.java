@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -23,6 +24,7 @@ import seedu.address.testutil.PersonBuilder;
 public class DeleteTagCommandTest {
     private static final Model model = new ModelManager(getTypicalCampusConnect(), new UserPrefs());
     private static final String DEFAULT_TAG = "test";
+    private static final String DEFAULT_TAG_SECOND = "test2";
     private static final String TEST_EMAIL = "test@test";
     private static final String TEST_PHONE = "84209817";
     private static final String TEST_USER = "test user";
@@ -63,8 +65,13 @@ public class DeleteTagCommandTest {
     public void equals() {
         DeleteTagCommand deleteTagCommandA = new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(DEFAULT_TAG));
         DeleteTagCommand deleteTagCommandB = new DeleteTagCommand(INDEX_SECOND_PERSON, new Tag(DEFAULT_TAG));
+        DeleteTagCommand deleteTagCommandC = new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(DEFAULT_TAG_SECOND));
+        DeleteTagCommand deleteTagCommandD = new DeleteTagCommand(INDEX_FIRST_PERSON, new Tag(DEFAULT_TAG));
 
+        assertTrue(deleteTagCommandA.equals(deleteTagCommandD));
+        assertTrue(deleteTagCommandA.equals(deleteTagCommandA));
         assertFalse(deleteTagCommandA.equals(deleteTagCommandB));
+        assertFalse(deleteTagCommandA.equals(deleteTagCommandC));
     }
 
 }
