@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -19,11 +20,17 @@
     <Label text="Address:" style="-fx-font-weight: bold;" GridPane.rowIndex="2" GridPane.columnIndex="0" />
     <Label text="Phone:" style="-fx-font-weight: bold;" GridPane.rowIndex="3" GridPane.columnIndex="0" />
     <Label text="Email:" style="-fx-font-weight: bold;" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+    <Label text="Tags:" style="-fx-font-weight: bold;" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+    <Label text="Caregivers:" style="-fx-font-weight: bold;" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+    <Label text="Patients:" style="-fx-font-weight: bold;" GridPane.rowIndex="7" GridPane.columnIndex="0" />
 
     <Label fx:id="id" text="/$id" GridPane.rowIndex="0" GridPane.columnIndex="1" />
     <Label fx:id="nric" text="/$nric" GridPane.rowIndex="1" GridPane.columnIndex="1" />
     <Label fx:id="address" text="/$address" GridPane.rowIndex="2" GridPane.columnIndex="1" />
     <Label fx:id="phone" text="\$phone" GridPane.rowIndex="3" GridPane.columnIndex="1" />
     <Label fx:id="email" text="\$email" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+    <FlowPane fx:id="tags" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+    <FlowPane fx:id="caregivers" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+    <FlowPane fx:id="patients" GridPane.rowIndex="7" GridPane.columnIndex="1" />
   </GridPane>
 </VBox>

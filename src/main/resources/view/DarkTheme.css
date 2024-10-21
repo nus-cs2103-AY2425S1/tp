@@ -350,3 +350,31 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#caregivers {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#caregivers .label {
+    -fx-text-fill: white;
+    -fx-background-color: #ecb500;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+#patients {
+    -fx-hgap: 7;
+    -fx-vgap: 3;
+}
+
+#patients .label {
+    -fx-text-fill: white;
+    -fx-background-color: #ecb500;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}

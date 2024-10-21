@@ -38,8 +38,13 @@ public class FindPersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label nric;
-//    @FXML
-//    private FlowPane tags;
+    @FXML
+    private FlowPane tags;
+    @FXML
+    private FlowPane caregivers;
+    @FXML
+    private FlowPane patients;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,8 +58,14 @@ public class FindPersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         nric.setText(person.getNric().value);
-//        person.getTags().stream()
-//                .sorted(Comparator.comparing(tag -> tag.tagName))
-//                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getCaregivers().stream()
+                .sorted(Comparator.comparing(caregiver -> caregiver.toString()))
+                .forEach(caregiver -> caregivers.getChildren().add(new Label(caregiver.toString())));
+        person.getPatients().stream()
+                .sorted(Comparator.comparing(patient -> patient.toString()))
+                .forEach(patient -> patients.getChildren().add(new Label(patient.toString())));
     }
 }
