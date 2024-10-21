@@ -128,7 +128,11 @@ public class Meetings {
     public void setMeeting(Meeting target, Meeting editedMeeting) {
         requireAllNonNull(target, editedMeeting);
 
-        if (isClash(editedMeeting)) {
+        boolean isClash = internalList.stream()
+                .filter(meeting -> !meeting.equals(target))
+                .anyMatch(editedMeeting::isOverlap);
+
+        if (isClash) {
             throw new TimeClashException();
         }
 
