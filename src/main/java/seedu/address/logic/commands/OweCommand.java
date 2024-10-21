@@ -95,7 +95,7 @@ public class OweCommand extends Command {
      * Updates the owed amount of the student based on the hours the student owed.
      */
     private static OwedAmount updateOwedAmount(Student student, double hour) {
-        double updatedOwedAmount = calculateOwedAmount(student, hour);
+        double updatedOwedAmount = student.getOwedAmount().value + calculateOwedAmount(student, hour);
         return new OwedAmount(Double.toString(updatedOwedAmount));
     }
     
@@ -119,7 +119,7 @@ public class OweCommand extends Command {
         
         OweCommand otherOweCommand = (OweCommand) other;
         return index.equals(otherOweCommand.index)
-                && hourOwed == hourOwed;
+                && hourOwed == otherOweCommand.hourOwed;
     }
     
     @Override

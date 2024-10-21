@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOUR_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OWED_AMOUNT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -34,7 +32,7 @@ public class OweCommandTest {
     public void execute_unfilteredList_success() {
         Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_AMY);
-        Student updatedOwedAmountStudent = new StudentBuilder(chosenStudent).withOwedAmount(Double.toString(chosenStudent.getOwedAmount().addOwedAmount(VALID_OWED_AMOUNT_AMY).value)).build();
+        Student updatedOwedAmountStudent = createExpectedStudent(chosenStudent, VALID_HOUR_AMY);
         
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS,
                 Messages.format(updatedOwedAmountStudent));
@@ -50,7 +48,7 @@ public class OweCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
         
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student updatedOwedAmountStudent = new StudentBuilder(studentInFilteredList).withOwedAmount(studentInFilteredList.getOwedAmount().addOwedAmount(VALID_OWED_AMOUNT_BOB).toString()).build();
+        Student updatedOwedAmountStudent = createExpectedStudent(studentInFilteredList, VALID_HOUR_BOB);
         OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, VALID_HOUR_BOB);
         
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, Messages.format(updatedOwedAmountStudent));
@@ -101,5 +99,14 @@ public class OweCommandTest {
         OweCommand oweCommand = new OweCommand(index, VALID_HOUR_AMY);
         String expected = OweCommand.class.getCanonicalName() + "{index=" + index + ", hourOwed=" + VALID_HOUR_AMY + "}";
         assertEquals(expected, oweCommand.toString());
+    }
+    
+    /**
+     * Helper method to create a Student with an addition of number of hours owed.
+     */
+    private static Student createExpectedStudent(Student student, double hourOwed) {
+        double additionOwedAmount = student.getRate().value * hourOwed;
+        double updatedOwedAmount = student.getOwedAmount().value + additionOwedAmount;
+        return new StudentBuilder(student).withOwedAmount(Double.toString(updatedOwedAmount)).build();
     }
 }

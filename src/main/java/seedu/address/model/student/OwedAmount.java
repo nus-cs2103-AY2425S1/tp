@@ -27,17 +27,6 @@ public class OwedAmount extends Fee {
     public static boolean isValidOwedAmount(String test) {
         return Fee.isValidFee(test);
     }
-    
-    /**
-     * Returns a new OwedAmount after the value of {@code newOwedAmount}
-     * has been added to.
-     * @param newOwedAmount An owedAmount with an addition owedAmount value.
-     */
-    public OwedAmount addOwedAmount(String newOwedAmount) {
-        assert isValidOwedAmount(newOwedAmount);
-        double updatedOwedAmountValue = this.value + Double.parseDouble(newOwedAmount);
-        return new OwedAmount(Double.toString(updatedOwedAmountValue));
-    }
 
     @Override
     public boolean equals(Object other) {
