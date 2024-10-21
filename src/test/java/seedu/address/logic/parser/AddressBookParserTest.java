@@ -29,7 +29,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEmployeeCommand;
 import seedu.address.logic.commands.ListPotentialCommand;
 import seedu.address.logic.commands.PotentialCommand;
+import seedu.address.logic.commands.PromoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ContractEndDate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -113,6 +115,16 @@ public class AddressBookParserTest {
         DemoteCommand demoteCommand = (DemoteCommand) parser.parseCommand(
                 DemoteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DemoteCommand(INDEX_FIRST_PERSON), demoteCommand);
+    }
+
+    @Test
+    public void parseCommand_promote() throws Exception {
+        String stringDate = PersonBuilder.DEFAULT_CONTRACT_END_DATE;
+        ContractEndDate contractEndDate = ContractEndDate.of(stringDate);
+        PromoteCommand promoteCommand = (PromoteCommand) parser.parseCommand(
+                PromoteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PersonBuilder.DEFAULT_CONTRACT_END_DATE);
+        assertEquals(new PromoteCommand(INDEX_FIRST_PERSON, contractEndDate), promoteCommand);
     }
 
     @Test

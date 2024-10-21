@@ -10,10 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DemoteCommand;
 
-
-
 public class DemoteCommandParserTest {
-
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, DemoteCommand.MESSAGE_USAGE);
 
@@ -42,5 +39,4 @@ public class DemoteCommandParserTest {
         // invalid arguments being parsed as index
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
     }
-
 }
