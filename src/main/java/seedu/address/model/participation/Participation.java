@@ -15,16 +15,15 @@ import seedu.address.model.tutorial.Tutorial;
 public class Participation {
     private Person student;
     private Tutorial tutorial;
-    private List<Attendance> attendanceList;
+    private List<Attendance> attendanceList = new ArrayList<>();
 
     /**
      * Every field must be present and not null
      */
-    public Participation(Person student, Tutorial tutorial, List<Attendance> attendanceList) {
+    public Participation(Person student, Tutorial tutorial) {
         requireAllNonNull(student, tutorial, attendanceList);
         this.student = student;
         this.tutorial = tutorial;
-        this.attendanceList = attendanceList;
     }
 
     public Person getStudent() {
@@ -37,5 +36,17 @@ public class Participation {
 
     public List<Attendance> getAttendanceList() {
         return attendanceList;
+    }
+
+    /**
+     * Returns true if both participation are of the same subject.
+     * This defines a weaker notion of equality between two tutorials.
+     */
+    public boolean isSameParticipation(Participation otherParticipation) {
+        if (otherParticipation == this) {
+            return true;
+        }
+        return otherParticipation != null && otherParticipation.getTutorial().equals(getTutorial())
+                                        && otherParticipation.getStudent().equals(getStudent());
     }
 }

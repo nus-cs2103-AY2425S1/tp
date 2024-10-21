@@ -2,6 +2,7 @@ package seedu.address.model.tutorial;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,15 +16,14 @@ import seedu.address.model.participation.Participation;
 public class Tutorial {
 
     private final String subject;
-    private final List<Participation> participationList;
+    private final List<Participation> participationList = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Tutorial(String subject, List<Participation> participationList) {
-        requireAllNonNull(subject, participationList);
+    public Tutorial(String subject) {
+        requireAllNonNull(subject);
         this.subject = subject;
-        this.participationList = participationList;
     }
 
     public String getSubject() {
@@ -32,6 +32,25 @@ public class Tutorial {
 
     public List<Participation> getParticipationList() {
         return participationList;
+    }
+
+    /**
+     * Checks if the tutorial already contains a participation
+     * @param participation the participation object to check
+     * @return true if it already contains the participation. false otherwise
+     */
+    public boolean hasParticipation(Participation participation) {
+        return participationList.stream()
+                .anyMatch(currentParticipation -> currentParticipation.equals(participation));
+
+    }
+
+    /**
+     * Adds a participation object to the participation list in tutorial
+     * @param participation object to be added
+     */
+    public void addParticipation(Participation participation) {
+        participationList.add(participation);
     }
 
     /**

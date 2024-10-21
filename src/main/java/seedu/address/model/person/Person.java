@@ -73,6 +73,14 @@ public class Person {
     }
 
     /**
+     * Adds a participation object to the participation list
+     * @param participation object to be added
+     */
+    public void addParticipation(Participation participation) {
+        participationList.add(participation);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
