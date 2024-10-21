@@ -60,15 +60,6 @@ public class CommandResult {
         return exit;
     }
 
-    /**
-     * Gets the value of clearDetailsPanel.
-     *
-     * @return true if the details panel should be cleared; false otherwise.
-     */
-    public boolean isUpdatePanel() {
-        return this.updatePanel;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
