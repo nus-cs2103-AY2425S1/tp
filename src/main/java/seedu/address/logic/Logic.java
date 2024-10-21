@@ -2,12 +2,13 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ModelManager.DisplayMode;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.meeting.Meeting;
@@ -45,9 +46,14 @@ public interface Logic {
      */
     ObservableList<Client> getFilteredClientList();
     /**
-     * Returns an unmodifiable view of the filtered list of property
+     * Returns an unmodifiable view of the filtered list of properties
      */
     ObservableList<Property> getFilteredPropertyList();
+    /**
+     * Returns an unmodifiable view of the filtered list of meetings
+     */
+    ObservableList<Meeting> getFilteredMeetingList();
+
     /**
      * Returns an unmodifiable view of the filtered list of meetings
      */
@@ -68,5 +74,5 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    BooleanProperty getIsDisplayClientsProperty();
+    ObjectProperty<DisplayMode> getDisplayMode();
 }

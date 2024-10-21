@@ -3,7 +3,7 @@ package seedu.address.model;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
@@ -231,7 +231,9 @@ public interface Model {
      */
     void updateFilteredMeetingList(Predicate<Meeting> predicate);
 
-    BooleanProperty getIsDisplayClientsProperty();
+    // Managing UI
+    ObjectProperty<ModelManager.DisplayMode> getDisplayMode();
     void setDisplayClients();
     void setDisplayProperties();
+    void setDisplayMeetings();
 }

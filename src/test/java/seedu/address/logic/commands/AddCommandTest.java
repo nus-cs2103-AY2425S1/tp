@@ -14,13 +14,14 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyClientBook;
 import seedu.address.model.ReadOnlyMeetingBook;
@@ -282,7 +283,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public BooleanProperty getIsDisplayClientsProperty() {
+        public ObjectProperty<ModelManager.DisplayMode> getDisplayMode() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -290,9 +291,12 @@ public class AddCommandTest {
         public void setDisplayClients() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void setDisplayProperties() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void setDisplayMeetings() {
             throw new AssertionError("This method should not be called.");
         }
 

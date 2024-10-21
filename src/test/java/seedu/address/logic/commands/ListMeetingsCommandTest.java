@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ListPropertiesCommandTest {
+public class ListMeetingsCommandTest {
     private Model model;
     private Model expectedModel;
 
@@ -29,54 +29,54 @@ public class ListPropertiesCommandTest {
     }
 
     @Test
-    public void listPropertiesCommandGeneration() {
-        Command command = new ListPropertiesCommand();
+    public void listMeetingsCommandGeneration() {
+        Command command = new ListMeetingsCommand();
 
-        // Check if command is an instance of ListPropertiesCommand
-        assertTrue(command instanceof ListPropertiesCommand,
-                "Command should be an instance of ListPropertiesCommand");
+        // Check if command is an instance of ListMeetingsCommand
+        assertTrue(command instanceof ListMeetingsCommand,
+                "Command should be an instance of ListMeetingsCommand");
     }
 
     @Test
-    public void testExecuteProperties() throws CommandException {
-        Command command = new ListPropertiesCommand();
+    public void testExecuteMeetings() throws CommandException {
+        Command command = new ListMeetingsCommand();
         CommandResult result = command.execute(this.model);
-        assertEquals(result.getFeedbackToUser(), "Listed all properties");
+        assertEquals(result.getFeedbackToUser(), "Listed all meetings");
     }
 
     @Test
-    public void keywordPropertiesBuyers() {
-        assertEquals("properties", ListPropertiesCommand.KEY_WORD);
+    public void keywordMeetingsBuyers() {
+        assertEquals("meetings", ListMeetingsCommand.KEY_WORD);
     }
 
     @Test
     void equals_sameCommand_returnsTrue() {
         // Arrange
-        ListPropertiesCommand listPropertiesCommand1 = new ListPropertiesCommand();
-        ListPropertiesCommand listPropertiesCommand2 = new ListPropertiesCommand(); // Same command
+        ListMeetingsCommand listMeetingsCommand1 = new ListMeetingsCommand();
+        ListMeetingsCommand listMeetingsCommand2 = new ListMeetingsCommand(); // Same command
 
         // Act & Assert
-        assertEquals(listPropertiesCommand1, listPropertiesCommand2); // Different instances, same command type
+        assertEquals(listMeetingsCommand1, listMeetingsCommand2); // Different instances, same command type
     }
 
     @Test
     void equals_differentCommand_returnsFalse() {
         // Arrange
-        ListPropertiesCommand listPropertiesCommand = new ListPropertiesCommand();
-        ListSellersCommand listSellersCommand = new ListSellersCommand(); // Different subclass of ListCommand
+        ListMeetingsCommand listMeetingsCommand = new ListMeetingsCommand();
+        ListPropertiesCommand listPropertiesCommand = new ListPropertiesCommand(); // Different subclass of ListCommand
 
         // Act & Assert
-        assertNotEquals(listPropertiesCommand, listSellersCommand); // Commands should not be equal
+        assertNotEquals(listMeetingsCommand, listPropertiesCommand); // Commands should not be equal
     }
 
     @Test
     void equals_differentObject_returnsFalse() {
         // Arrange
-        ListPropertiesCommand listPropertiesCommand = new ListPropertiesCommand();
+        ListMeetingsCommand listMeetingsCommand = new ListMeetingsCommand();
         Object differentObject = new Object(); // Completely different object type
 
         // Act & Assert
-        assertNotEquals(listPropertiesCommand, differentObject); // Comparing with a different type of object
+        assertNotEquals(listMeetingsCommand, differentObject); // Comparing with a different type of object
     }
 
 }

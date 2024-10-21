@@ -5,7 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
-import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager.DisplayMode;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.meeting.Meeting;
@@ -88,7 +89,11 @@ public class LogicManager implements Logic {
     public ObservableList<Property> getFilteredPropertyList() {
         return model.getFilteredPropertyList();
     }
-
+    @Override
+    public ObservableList<Meeting> getFilteredMeetingList() {
+        return model.getFilteredMeetingList();
+    }
+ 
     @Override
     public ObservableList<Meeting> getFilteredMeetingList() {
         return model.getFilteredMeetingList();
@@ -97,6 +102,9 @@ public class LogicManager implements Logic {
     @Override
     public BooleanProperty getIsDisplayClientsProperty() {
         return model.getIsDisplayClientsProperty();
+
+    public ObjectProperty<DisplayMode> getDisplayMode() {
+        return model.getDisplayMode();
     }
 
     @Override

@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private ClientListPanel clientListPanel;
 
     private PropertyListPanel propertyListPanel;
+    private MeetingListPanel meetingListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -117,18 +118,28 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        // Instantiates the various panels
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         propertyListPanel = new PropertyListPanel(logic.getFilteredPropertyList());
+        meetingListPanel = new MeetingListPanel(logic.getFilteredMeetingList());
 
         // Initialise clientListPanel to display Clients
         listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
 
         // Add listener to modify display appropriately
-        logic.getIsDisplayClientsProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
+        logic.getDisplayMode().addListener((observable, oldValue, newValue) -> {
+            switch (newValue) {
+            case CLIENTS:
                 listPanelPlaceholder.getChildren().setAll(clientListPanel.getRoot());
-            } else {
+                break;
+            case PROPERTIES:
                 listPanelPlaceholder.getChildren().setAll(propertyListPanel.getRoot());
+                break;
+            case MEETINGS:
+                listPanelPlaceholder.getChildren().setAll(meetingListPanel.getRoot());
+                break;
+            default:
+                throw new RuntimeException("Invalid Display Mode: " + newValue);
             }
         });
 

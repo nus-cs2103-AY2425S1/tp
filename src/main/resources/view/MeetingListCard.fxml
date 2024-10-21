@@ -8,29 +8,26 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="propertyCardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="meetingCardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
         <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
             <padding>
-                <Insets top="5" right="5" bottom="5" left="15"/>
+                <Insets top="5" right="5" bottom="5" left="15" />
             </padding>
             <HBox spacing="0.5" alignment="CENTER_LEFT">
                 <Label fx:id="id" styleClass="cell_big_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE"/>
+                        <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="postalCode" styleClass="cell_big_label"/>
+                <Label fx:id="meetingTitle" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="typeLabel" text="[property]" styleClass="cell_small_label"/>
-            <Label fx:id="unit" styleClass="cell_small_label"/>
-            <Label fx:id="type" styleClass="cell_small_label"/>
-            <Label fx:id="bid" styleClass="cell_small_label"/>
-            <Label fx:id="ask" styleClass="cell_small_label"/>
+            <Label fx:id="typeLabel" text="[meeting]" styleClass="cell_small_label" />
+            <Label fx:id="meetingDate" styleClass="cell_small_label" />
         </VBox>
     </GridPane>
 </HBox>
