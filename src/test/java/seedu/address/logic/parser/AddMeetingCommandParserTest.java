@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETING_DATE_
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEETING_TITLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_DATE_DESC_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.MEETING_TITLE_DESC_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
@@ -25,9 +26,8 @@ public class AddMeetingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Meeting expectedMeeting = new MeetingBuilder().withMeetingTitle("Admiralty HDB Client Viewing")
-                .withMeetingDate("31-10-2024").build();
-
+        Meeting expectedMeeting = new MeetingBuilder().withMeetingTitle(VALID_MEETING_TITLE_ADMIRALTY)
+                .withMeetingDate(VALID_MEETING_DATE_ADMIRALTY).build();
         // whitespace only preamble
         assertParseSuccess(parser, MEETING_TITLE_DESC_ADMIRALTY + MEETING_DATE_DESC_ADMIRALTY,
                 new AddMeetingCommand(expectedMeeting));
@@ -71,7 +71,7 @@ public class AddMeetingCommandParserTest {
                 MeetingTitle.MESSAGE_CONSTRAINTS);
 
         // invalid meeting date
-        assertParseFailure(parser, VALID_MEETING_TITLE_ADMIRALTY + INVALID_MEETING_DATE_DESC,
+        assertParseFailure(parser, MEETING_TITLE_DESC_ADMIRALTY + INVALID_MEETING_DATE_DESC,
                 MeetingDate.MESSAGE_CONSTRAINTS);
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_MEETING_TITLE_DESC + INVALID_MEETING_DATE_DESC,

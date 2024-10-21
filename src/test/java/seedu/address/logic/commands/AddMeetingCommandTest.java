@@ -41,8 +41,8 @@ public class AddMeetingCommandTest {
 
     @Test
     public void execute_duplicateMeeting_throwsCommandException() {
-        Meeting MeetingInList = model.getMeetingBook().getMeetingList().get(0);
-        assertCommandFailure(new AddMeetingCommand(MeetingInList), model,
+        Meeting meetingInList = model.getMeetingBook().getMeetingList().get(0);
+        assertCommandFailure(new AddMeetingCommand(meetingInList), model,
                 AddMeetingCommand.MESSAGE_DUPLICATE_MEETING);
     }
 }

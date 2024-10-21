@@ -58,12 +58,12 @@ public class AddMeetingCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddMeetingCommand)) {
             return false;
         }
 
-        AddMeetingCommand otherAddCommand = (AddMeetingCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        AddMeetingCommand otherAddMeetingCommand = (AddMeetingCommand) other;
+        return toAdd.equals(otherAddMeetingCommand.toAdd);
     }
 
     @Override
