@@ -9,8 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Tutorial {
     public static final String MESSAGE_CONSTRAINTS =
-            "Tutorial number should be non-negative integer.";
-    public static final String VALIDATION_REGEX = "^[1-9]\\d*$";
+            "Tutorial number should be between 1 to 12 only.";
+    public static final String VALIDATION_REGEX = "([1-9]|1[0-2])";
 
     public final String tutorial;
 

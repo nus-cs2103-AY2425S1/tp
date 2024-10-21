@@ -3,14 +3,34 @@ layout: page
 title: User Guide
 ---
 
-ConTActs is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ConTActs can get your contact management tasks done faster than traditional GUI apps.
+ConTActs is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, ConTActs can get your contact management tasks done faster than traditional GUI apps.
 
-- Table of Contents
-  {:toc}
+  - [Command Summary](#command-summary)
+  - [Installation Guide](#installation-guide)
+  - [Features](#features)
+  - [FAQ](#faq)
+  - [Known Issues](#known-issues)
+
+## Command summary
+Click on each command to jump to their subsection.
+
+| Action                                         | Format, Examples                                                                                                                                 |
+|------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| **[Help](#viewing-help--help)**                | `help`                                                                                                                                           |
+| **[Add](#adding-a-person-add)**                | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
+| **[List](#listing-all-persons--list)**         | `list`                                                                                                                                           |
+| **[Edit](#editing-a-person--edit)**            | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
+| **[Mark](#marking-person-as-attended-mark)**   | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
+| **[Unmark](#marking-person-as-absent-unmark)** | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
+| **[Find](#locating-persons-by-name-find)**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
+| **[Delete](#deleting-a-person--delete)**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
+| **[Clear](#clearing-all-entries--clear)**      | `clear`                                                                                                                                          |
+| **[Exit](#exiting-the-program--exit)**         | `exit`                                                                                                                                           |
 
 ---
 
-## Quick start
+## Installation Guide
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
@@ -214,18 +234,4 @@ _Details coming soon ..._
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 ---
-
-## Command summary
-
-| Action     | Format, Examples                                                                                                                                 |
-| ---------- |--------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/STUDENT_ID p/PHONE e/EMAIL [t/TAG]…​` <br> e.g., `add n/James Ho i/E0000001 p/22224444 e/jamesho@example.com t/friend t/colleague` |
-| **List**   | `list`                                                                                                                                           |
-| **Edit**   | `edit INDEX [n/NAME] [i/STUDENT_ID] [p/PHONE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
-| **Mark**   | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
-| **Unmark** | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
-| **Clear**  | `clear`                                                                                                                                          |
-| **Exit**   | `exit`                                                                                                                                           |
-| **Help**   | `help`                                                                                                                                           |
+[Back to Top](#command-summary)
