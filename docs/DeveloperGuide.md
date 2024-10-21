@@ -363,7 +363,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.  
-3. ContactMate updates view to show a list of calls made to a specific elderly 
+3. ContactMate updates view to show a list of calls (includes dates and notes) made to a specific elderly.
 
 	Use case ends.
 
@@ -385,9 +385,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
-3. ContactMate prompts the Staff for confirmation before deletion.  
-4. Staff confirms the deletion.  
-5. ContactMate deletes the elderly and confirms the successful deletion for Staff.
+3. ContactMate deletes the elderly and confirms the successful deletion for Staff.
 
     Use case ends.
 
@@ -396,10 +394,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case ends.  
 * 2a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
 	* 2a1. ContactMate shows an error message.  
-	* Use case resumes from step 2\.  
-* 3a. Staff cancels the deletion.  
-	* 3a1. ContactMate shows a cancellation message.  
-	* Use case ends.
+	* Use case resumes from step 2\.
 
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
@@ -428,7 +423,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 ### Non-Functional Requirements
 
-1. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. A user with above-average typing speed (> 40 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 2. The product should be a single-user system.
 3. The product should not rely on a remote server.
 4. It should accommodate up to 250 elderly without noticeable performance slowdowns during typical usage.
