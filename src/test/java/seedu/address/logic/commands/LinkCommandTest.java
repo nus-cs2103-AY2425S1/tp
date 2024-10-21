@@ -48,6 +48,13 @@ public class LinkCommandTest {
     }
 
     @Test
+    public void execute_invalidRole() {
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        LinkCommand linkCommand = new LinkCommand(BENSON.getNric(), ALICE.getNric());
+        assertCommandFailure(linkCommand, model, LinkCommand.ROLE_NOT_MATCH);
+    }
+
+    @Test
     public void execute_successfulinkCommand() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         LinkCommand linkCommand = new LinkCommand(ALICE.getNric(), BENSON.getNric());
