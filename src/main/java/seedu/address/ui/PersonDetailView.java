@@ -46,6 +46,7 @@ public class PersonDetailView extends UiPart<Region> implements DetailView<Perso
     @Override
     public void update(Person person) {
         requireNonNull(person);
+        getRoot().setVisible(true);
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);

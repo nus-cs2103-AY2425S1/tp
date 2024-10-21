@@ -19,7 +19,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -138,8 +137,10 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personDetailView = new PersonDetailView();
+        personDetailView.getRoot().setVisible(false);
+        personDetailViewPlaceholder.getChildren().add(personDetailView.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::handleSelectedPerson);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetailView);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         eventDetailView = new EventDetailView();
@@ -160,24 +161,12 @@ public class MainWindow extends UiPart<Stage> {
         // Displays the first person in the list if exists onto the PersonDetailView
         if (!logic.getFilteredPersonList().isEmpty()) {
             personDetailView.update(logic.getFilteredPersonList().get(0));
-            personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
         }
 
         // Displays the first event in the list if exists onto the EventDetailView
         if (!logic.getFilteredEventList().isEmpty()) {
             eventDetailView.update(logic.getFilteredEventList().get(0));
         }
-    }
-
-    /**
-     * Sets the person details view to the person selected from the list.
-     * This is a callback handler called from {@code PersonCard} when a given card is clicked by the user.
-     *
-     * @param person The selected person to display in the detail view.
-     */
-    private void handleSelectedPerson(Person person) {
-        personDetailView.update(person);
-        personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
     }
 
     /**
