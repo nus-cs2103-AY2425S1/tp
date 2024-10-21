@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -49,6 +50,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane personPanePlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +125,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        PersonPane personPane = new PersonPane();
+        personPanePlaceholder.getChildren().add(personPane.getRoot());
     }
 
     /**
@@ -177,6 +184,18 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            //@@author tayxuenye-reused
+            //Written by ChatGPT
+            if (commandResult.getPersonToShow() != null) {
+                Person personToShow = commandResult.getPersonToShow();
+                // Create a new PersonPane with the selected person
+                PersonPane personPane = new PersonPane(personToShow);
+                personPanePlaceholder.getChildren().clear(); // Clear existing content
+                // Add the new PersonPane to the placeholder
+                personPanePlaceholder.getChildren().add(personPane.getRoot());
+            }
+            //@@author
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

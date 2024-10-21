@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents the result of a command execution.
@@ -19,6 +20,8 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    private Person personToShow;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -26,6 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.personToShow = null;
     }
 
     /**
@@ -35,6 +39,17 @@ public class CommandResult {
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
     }
+
+    //@@author tayxuenye-reused
+    //Written by ChatGPT
+    /**
+     * Constructs a {@code CommandResult} with a person to display in the UI.
+     */
+    public CommandResult(String feedbackToUser, Person personToShow) {
+        this(feedbackToUser, false, false);
+        this.personToShow = requireNonNull(personToShow);
+    }
+    //@@author
 
     public String getFeedbackToUser() {
         return feedbackToUser;
@@ -46,6 +61,10 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
+    }
+
+    public Person getPersonToShow() {
+        return personToShow;
     }
 
     @Override
@@ -76,6 +95,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("personToShow", personToShow)
                 .toString();
     }
 
