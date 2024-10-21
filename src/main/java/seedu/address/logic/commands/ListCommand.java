@@ -25,6 +25,7 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
     public static final String MESSAGE_EMPTY_LIST = "The list is currently empty.";
+    public static final String MESSAGE_EMPTY_STARRED_LIST = "No contacts starred";
     public static final String MESSAGE_STARRED_LIST = "Starred contacts listed";
     public final PersonIsStarredPredicate predicate;
 
@@ -54,6 +55,10 @@ public class ListCommand extends Command {
             }
         } else {
             model.updateFilteredPersonList(predicate);
+            List<Person> lastShownList = model.getFilteredPersonList();
+            if (lastShownList.isEmpty()) {
+                return new CommandResult(MESSAGE_EMPTY_STARRED_LIST);
+            }
             return new CommandResult(MESSAGE_STARRED_LIST);
         }
 

@@ -109,6 +109,15 @@ Format: `list`
 
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
 
+### Listing starred persons : `list *`
+
+Shows a list of all starred persons in the address book.
+
+Format: `list *`
+
+* No other parameters should be supplied aside from `*`.
+* You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
+
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
@@ -163,6 +172,40 @@ Examples:
 * `list` followed by `delete Alex Yeoh` deletes the person with name `Alex Yeoh` in the address book.
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Starring a person : `star`
+
+Stars the specified person from the address book into favourites.
+
+Format: `star INDEX` / `star NAME`
+
+* Stars the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `star Alex Yeoh` stars the person with name `Alex Yeoh` in the address book.
+* `list` followed by `star 2` stars the 2nd person in the address book.
+* `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
+
+### Unstarring a person : `unstar`
+
+Unstars the specified person from the address book removing them from favourites.
+
+Format: `unstar INDEX` / `unstar NAME`
+
+* Unstars the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
+* `list` followed by `unstar 2` unstars the 2nd person in the address book.
+* `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 

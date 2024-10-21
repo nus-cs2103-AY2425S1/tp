@@ -17,7 +17,7 @@
     "age" : "37",
     "sex" : "Male",
     "tags" : [ "owesMoney", "friends" ],
-    "starredStatus" : "false"
+    "starredStatus" : "true"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
