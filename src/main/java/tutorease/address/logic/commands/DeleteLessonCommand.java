@@ -8,7 +8,7 @@ import tutorease.address.model.Model;
 import tutorease.address.model.lesson.Lesson;
 
 /**
- * Adds a lesson to the lesson list.
+ * Deletes a lesson from the lesson list.
  */
 public class DeleteLessonCommand extends LessonCommand {
 

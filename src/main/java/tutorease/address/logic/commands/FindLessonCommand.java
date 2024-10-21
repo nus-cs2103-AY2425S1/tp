@@ -11,7 +11,7 @@ import tutorease.address.model.lesson.LessonContainsNamesPredicate;
  * Finds and lists all lessons in address book whose student's name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
  */
-public class FindLessonCommand extends Command {
+public class FindLessonCommand extends LessonCommand {
 
     public static final String COMMAND_WORD = "find";
 
