@@ -2,7 +2,9 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -63,8 +66,8 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        tutorials.addAll(source.getTutorials().stream()
-                .map(JsonAdaptedTutorial::new)
+        tutorials.addAll(source.getTutorials().entrySet().stream()
+                .map(entry -> new JsonAdaptedTutorial(entry.getKey().tutorial, entry.getValue()))
                 .collect(Collectors.toList()));
     }
 
@@ -79,9 +82,17 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<Tutorial> personTutorials = new ArrayList<>();
-        for (JsonAdaptedTutorial tut : tutorials) {
-            personTutorials.add(tut.toModelType());
+        final Map<Tutorial, AttendanceStatus> personTutorials = new LinkedHashMap<>();
+        if (tutorials.isEmpty()) {
+            for (int i = 1; i <= Person.MAXIMUM_TUTORIALS; i++) {
+                Tutorial tutorial = new Tutorial(String.valueOf(i));
+                personTutorials.put(tutorial, AttendanceStatus.NOT_TAKEN_PLACE);
+            }
+        } else {
+            for (JsonAdaptedTutorial tut : tutorials) {
+                AttendanceStatus completed = tut.getCompleted();
+                personTutorials.put(tut.toModelType(), completed);
+            }
         }
 
         if (name == null) {
@@ -117,10 +128,9 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Set<Tutorial> modelTutorials = new HashSet<>(personTutorials);
+        final Map<Tutorial, AttendanceStatus> modelTutorials = new LinkedHashMap<>(personTutorials);
 
         return new Person(modelName, modelStudentId, modelPhone, modelEmail, modelTags, modelTutorials);
     }

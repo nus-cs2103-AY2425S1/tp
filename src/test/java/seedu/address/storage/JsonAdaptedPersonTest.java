@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -32,8 +33,8 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedTutorial> VALID_TUTORIALS = BENSON.getTutorials().stream()
-            .map(JsonAdaptedTutorial::new)
+    private static final List<JsonAdaptedTutorial> VALID_TUTORIALS = BENSON.getTutorials().entrySet().stream()
+            .map(entry -> new JsonAdaptedTutorial(entry.getKey().tutorial, entry.getValue()))
             .collect(Collectors.toList());
 
     @Test
@@ -120,7 +121,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidTutorials_throwsIllegalValueException() {
         List<JsonAdaptedTutorial> invalidTutorials = new ArrayList<>(VALID_TUTORIALS);
-        invalidTutorials.add(new JsonAdaptedTutorial(INVALID_TUTORIAL));
+        invalidTutorials.add(new JsonAdaptedTutorial(INVALID_TUTORIAL, AttendanceStatus.NOT_TAKEN_PLACE));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_STUDENTID, VALID_PHONE, VALID_EMAIL,
                 VALID_TAGS, invalidTutorials);
         assertThrows(IllegalValueException.class, person::toModelType);

@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +18,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Each student can only attend up to 12 tutorials.
+    public static final int MAXIMUM_TUTORIALS = 12;
+
     // Identity fields
     private final Name name;
     private final StudentId studentId;
@@ -24,20 +29,20 @@ public class Person {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Tutorial> tutorials = new HashSet<>();
+    private final Map<Tutorial, AttendanceStatus> tutorials = new LinkedHashMap<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, StudentId studentId, Phone phone, Email email, Set<Tag> tags,
-                  Set<Tutorial> tutorials) {
+                  Map<Tutorial, AttendanceStatus> tutorials) {
         requireAllNonNull(name, studentId, phone, email, tags, tutorials);
         this.name = name;
         this.studentId = studentId;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
-        this.tutorials.addAll(tutorials);
+        this.tutorials.putAll(tutorials);
     }
 
     public Name getName() {
@@ -65,18 +70,24 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tutorial set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable tutorial map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tutorial> getTutorials() {
-        return Collections.unmodifiableSet(tutorials);
+    public Map<Tutorial, AttendanceStatus> getTutorials() {
+        return Collections.unmodifiableMap(tutorials);
     }
 
     /**
-     * Returns true if the person has attended the stated tutorial.
+     * Returns the relevant CSS class based on the status of the tutorial.
      */
-    public boolean hasAttendedTutorial(String index) {
-        return tutorials.contains(new Tutorial(index));
+    public String getAttendanceCssClass(String index) {
+        if (tutorials.get(new Tutorial(index)) == AttendanceStatus.NOT_TAKEN_PLACE) {
+            return "tutorial-not-taken-place";
+        } else if (tutorials.get(new Tutorial(index)) == AttendanceStatus.PRESENT) {
+            return "tutorial-present";
+        } else {
+            return "tutorial-absent";
+        }
     }
 
     /**
