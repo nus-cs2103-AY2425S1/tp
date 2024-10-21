@@ -4,6 +4,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Objects;
@@ -87,6 +88,14 @@ public class Schedule {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    public LocalDateTime getDateTime() {
+        if (this.date.equals(LocalDate.MIN)) {
+            return null;
+        }
+
+        return LocalDateTime.of(this.date, this.time);
     }
 
     @Override
