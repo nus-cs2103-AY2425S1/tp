@@ -1,18 +1,15 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CountCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.TypicalPersons;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.TypicalPersons;
 
 public class CountCommandTest {
 
@@ -22,7 +19,8 @@ public class CountCommandTest {
         Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
         CountCommand command = new CountCommand(Optional.empty(), Optional.empty());
-        String expectedMessage = String.format(CountCommand.MESSAGE_COUNT_PERSONS, model.getFilteredPersonList().size());
+        String expectedMessage = String.format(CountCommand.MESSAGE_COUNT_PERSONS,
+                model.getFilteredPersonList().size());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -37,7 +35,8 @@ public class CountCommandTest {
 
         expectedModel.updateFilteredPersonList(person ->
                 person.getName().fullName.toLowerCase().startsWith(namePrefix.get().toLowerCase()));
-        String expectedMessage = String.format(CountCommand.MESSAGE_COUNT_PERSONS, expectedModel.getFilteredPersonList().size());
+        String expectedMessage = String.format(CountCommand.MESSAGE_COUNT_PERSONS,
+                expectedModel.getFilteredPersonList().size());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -52,7 +51,8 @@ public class CountCommandTest {
 
         expectedModel.updateFilteredPersonList(person ->
                 person.getTags().stream().anyMatch(t -> t.tagName.equalsIgnoreCase(tag.get())));
-        String expectedMessage = String.format(CountCommand.MESSAGE_COUNT_PERSONS, expectedModel.getFilteredPersonList().size());
+        String expectedMessage = String.format(CountCommand.MESSAGE_COUNT_PERSONS,
+                expectedModel.getFilteredPersonList().size());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
