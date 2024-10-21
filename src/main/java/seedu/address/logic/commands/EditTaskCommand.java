@@ -86,6 +86,12 @@ public class EditTaskCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
         model.setTask(taskToEdit, editedTask, group);
+        model.decreaseGroupWithTask(taskToEdit);
+        if (!model.hasTask(editedTask)) {
+            model.addTask(editedTask);
+        } else {
+            model.increaseGroupWithTask(editedTask);
+        }
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS,
             Messages.format(editedTask), Messages.format(group)));
