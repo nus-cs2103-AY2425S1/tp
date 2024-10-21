@@ -18,6 +18,23 @@ public class Event {
     private final int eventId;
 
     /**
+     * Constructs an {@code Event}. ID is initialised to -1.
+     *
+     * @param eventName A valid event name.
+     * @param eventDescription A valid event description.
+     * @param eventDuration A valid event duration with a start and end date.
+     */
+    public Event(EventName eventName, EventDescription eventDescription, EventDuration eventDuration) {
+        requireNonNull(eventName);
+        requireNonNull(eventDescription);
+        requireNonNull(eventDuration);
+        this.eventName = eventName;
+        this.eventDescription = eventDescription;
+        this.eventDuration = eventDuration;
+        this.eventId = -1;
+    }
+
+    /**
      * Constructs an {@code Event}.
      *
      * @param eventName A valid event name.

@@ -158,7 +158,7 @@ public class ImportCommand extends Command {
             List<String> tagList = arr.length == 5 ? Arrays.asList(arr[4].split(",")) : new ArrayList<>();
             Set<Tag> tags = ParserUtil.parseTags(tagList);
 
-            return new Person(name, phone, email, address, tags, -1);
+            return new Person(name, phone, email, address, tags);
         } catch (ParseException e) {
             throw new CommandException(MESSAGE_INCORRECT_FILE_FORMAT);
         }

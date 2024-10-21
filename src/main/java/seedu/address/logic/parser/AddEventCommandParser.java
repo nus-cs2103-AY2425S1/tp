@@ -45,7 +45,7 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
                 argMultiMap.getValue(PREFIX_EVENT_START_DATE).get(),
                 argMultiMap.getValue(PREFIX_EVENT_END_DATE).get());
 
-        Event event = new Event(eventName, eventDescription, eventDuration, -1);
+        Event event = new Event(eventName, eventDescription, eventDuration);
 
         return new AddEventCommand(event);
     }
