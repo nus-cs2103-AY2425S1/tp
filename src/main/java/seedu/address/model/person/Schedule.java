@@ -33,8 +33,8 @@ public class Schedule {
         this.date = (date.isEmpty()) ? LocalDate.MIN : LocalDate.parse(date);
         this.time = (time.isEmpty()) ? LocalTime.MIDNIGHT : LocalTime.parse(time);
 
-        this.dateString = (date.isEmpty()) ? LocalDate.MIN.toString() : date;
-        this.timeString = (time.isEmpty()) ? LocalTime.MIDNIGHT.toString() : time;
+        this.dateString = date;
+        this.timeString = time;
     }
 
     public static boolean isValidDate(String test) {
@@ -63,7 +63,14 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return this.date.toString() + " " + this.time.toString();
+        if (this.date.equals(LocalDate.MIN)) {
+            return "";
+        }
+        String scheduleString = this.dateString;
+        if (!this.timeString.isEmpty()) {
+            scheduleString += " " + this.timeString;
+        }
+        return scheduleString;
     }
 
     @Override
