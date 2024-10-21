@@ -127,7 +127,7 @@ public class FilterCommandTest {
         assertNotEquals(cmd1, cmd4);
         assertNotEquals(cmd2, cmd3);
         assertNotEquals(cmd2, cmd4);
-        assertNotEquals(cmd3, cmd4);;
+        assertNotEquals(cmd3, cmd4);
     }
 
     @Test
