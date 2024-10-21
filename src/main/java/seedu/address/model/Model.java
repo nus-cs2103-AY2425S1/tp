@@ -164,8 +164,8 @@ public interface Model {
     ObservableList<Property> getFilteredPropertyList();
 
     /**
-     * Adds the given Property.
-     * {@code MeetUp} must not already exist in the property list.
+     * Adds the given property.
+     * {@code property} must not already exist in the property list.
      */
     void addProperty(Property property);
 

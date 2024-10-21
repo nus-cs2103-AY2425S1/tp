@@ -46,8 +46,8 @@ public class Messages {
                 .append(buyer.getPhone())
                 .append("; Email: ")
                 .append(buyer.getEmail())
-                .append("; Address: ")
-                .append(buyer.getAddress())
+                .append("; Budget: ")
+                .append(buyer.getBudget())
                 .append("; Tags: ");
         buyer.getTags().forEach(builder::append);
         return builder.toString();

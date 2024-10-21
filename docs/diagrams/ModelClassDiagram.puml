@@ -14,7 +14,7 @@ Class UserPrefs
 
 Class UniqueBuyerList
 Class Buyer
-Class Address
+Class Budget
 Class Email
 Class Name
 Class Phone
@@ -40,15 +40,15 @@ UniqueBuyerList --> "~* all" Buyer
 Buyer *--> Name
 Buyer *--> Phone
 Buyer *--> Email
-Buyer *--> Address
+Buyer *--> Budget
 Buyer *--> "*" Tag
 
 Buyer -[hidden]up--> I
 UniqueBuyerList -[hidden]right-> I
 
 Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+Phone -[hidden]right-> Budget
+Budget -[hidden]right-> Email
 
 ModelManager --> "~* filtered" Buyer
 @enduml

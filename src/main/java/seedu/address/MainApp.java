@@ -87,6 +87,7 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getBuyerListFilePath());
         logger.info("Using meetUp file : " + storage.getMeetUpListFilePath());
+        logger.info("Using property file : " + storage.getUserPrefsFilePath());
 
         Optional<ReadOnlyBuyerList> buyerListOptional;
         Optional<ReadOnlyMeetUpList> meetUpListOptional;
@@ -94,7 +95,6 @@ public class MainApp extends Application {
         ReadOnlyBuyerList initialData;
         ReadOnlyMeetUpList initialMeetUpList;
         ReadOnlyPropertyList initialPropertyList;
-
         try {
             buyerListOptional = storage.readBuyerList();
             if (!buyerListOptional.isPresent()) {

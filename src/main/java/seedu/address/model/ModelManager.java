@@ -30,14 +30,14 @@ public class ModelManager implements Model {
     private final FilteredList<Property> filteredProperties;
 
     /**
-     * Initializes a ModelManager with the given buyerList and userPrefs.
+     * Initializes a ModelManager with the given buyerList, meetUpList, propertyList and userPrefs.
      */
-    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs, ReadOnlyMeetUpList meetUpList,
-            ReadOnlyPropertyList propertyList) {
-        requireAllNonNull(buyerList, userPrefs, meetUpList);
+    public ModelManager(ReadOnlyBuyerList buyerList, ReadOnlyUserPrefs userPrefs,
+                        ReadOnlyMeetUpList meetUpList, ReadOnlyPropertyList propertyList) {
+        requireAllNonNull(buyerList, userPrefs, meetUpList, propertyList);
 
         logger.fine("Initializing with buyer list: " + buyerList + " and user prefs " + userPrefs
-                + "and meet up list " + meetUpList);
+                + " and meet up list " + meetUpList + " and property list " + propertyList);
 
         logger.info("initial meet up list contains " + meetUpList);
 
@@ -70,7 +70,8 @@ public class ModelManager implements Model {
         return buyerList.equals(otherModelManager.buyerList)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBuyers.equals(otherModelManager.filteredBuyers)
-                && filteredMeetUps.equals(otherModelManager.filteredMeetUps);
+                && filteredMeetUps.equals(otherModelManager.filteredMeetUps)
+                && filteredProperties.equals(otherModelManager.filteredProperties);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -237,7 +238,6 @@ public class ModelManager implements Model {
     }
 
     //=========== Property List ================================================================================
-
     @Override
     public void setPropertyList(ReadOnlyPropertyList propertyList) {
         this.propertyList.resetData(propertyList);
@@ -255,8 +255,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteProperty(Property target) {
-        propertyList.removeProperty(target);
+    public void deleteProperty(Property property) {
+        propertyList.removeProperty(property);
     }
 
     @Override
@@ -268,7 +268,6 @@ public class ModelManager implements Model {
     @Override
     public void setProperty(Property target, Property editedProperty) {
         requireAllNonNull(target, editedProperty);
-
         propertyList.setProperty(target, editedProperty);
     }
 
@@ -284,9 +283,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredPropertyList(Predicate <Property> predicate) {
+    public void updateFilteredPropertyList(Predicate<Property> predicate) {
         requireNonNull(predicate);
         filteredProperties.setPredicate(predicate);
     }
-
 }

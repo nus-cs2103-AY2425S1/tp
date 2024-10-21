@@ -16,7 +16,7 @@ import seedu.address.model.buyer.Buyer;
 /**
  * An Immutable BuyerList that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "buyerlist")
 public class JsonSerializableBuyerList {
 
     public static final String MESSAGE_DUPLICATE_BUYER = "Buyers list contains duplicate buyer(s).";

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_BUDGET_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -48,8 +48,8 @@ public class EditBuyerDescriptorTest {
         editedAmy = new EditBuyerDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = new EditBuyerDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        // different budget -> returns false
+        editedAmy = new EditBuyerDescriptorBuilder(DESC_AMY).withBudget(VALID_BUDGET_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -63,9 +63,8 @@ public class EditBuyerDescriptorTest {
         String expected = EditBuyerDescriptor.class.getCanonicalName() + "{name="
                 + editBuyerDescriptor.getName().orElse(null) + ", phone="
                 + editBuyerDescriptor.getPhone().orElse(null) + ", email="
-                + editBuyerDescriptor.getEmail().orElse(null) + ", address="
-                + editBuyerDescriptor.getAddress().orElse(null) + ", type="
-                + editBuyerDescriptor.getBuyerType().orElse(null) + ", tags="
+                + editBuyerDescriptor.getEmail().orElse(null) + ", budget="
+                + editBuyerDescriptor.getBudget().orElse(null) + ", tags="
                 + editBuyerDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editBuyerDescriptor.toString());
     }
