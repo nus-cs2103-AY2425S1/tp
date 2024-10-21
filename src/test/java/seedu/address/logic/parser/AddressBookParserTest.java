@@ -36,7 +36,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddPersonCommand(person));
         assertEquals(new AddPersonCommand(person), command);
     }
 
@@ -83,7 +83,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
+    public void parseCommand_view() throws Exception {
         assertTrue(parser.parseCommand(ViewPersonCommand.COMMAND_WORD) instanceof ViewPersonCommand);
         assertTrue(parser.parseCommand(ViewPersonCommand.COMMAND_WORD + " buyer") instanceof ViewPersonCommand);
     }

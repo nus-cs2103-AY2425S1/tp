@@ -17,11 +17,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.meetup.From;
+import seedu.address.model.meetup.Info;
 import seedu.address.model.meetup.MeetUp;
-import seedu.address.model.meetup.MeetUpFrom;
-import seedu.address.model.meetup.MeetUpInfo;
-import seedu.address.model.meetup.MeetUpName;
-import seedu.address.model.meetup.MeetUpTo;
+import seedu.address.model.meetup.Name;
+import seedu.address.model.meetup.To;
 
 /**
  * Edits the details of an existing meetup in the address book.
@@ -30,11 +30,11 @@ public class EditMeetUpCommand extends Command {
 
     public static final String COMMAND_WORD = "editm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meetup in the address book. "
-            + "Existing meetup will be overwritten by the input meetup.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meet-up in the address book. "
+            + "Existing meet-up will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_INFO + "MEETUP INFO] "
+            + "[" + PREFIX_INFO + "INFO] "
             + "[" + PREFIX_FROM + "YYYY-MM-DD HH:mm] "
             + "[" + PREFIX_TO + "YYYY-MM-DD HH:mm]\n"
             + "Example: " + COMMAND_WORD + " 2 "
@@ -42,8 +42,9 @@ public class EditMeetUpCommand extends Command {
             + PREFIX_FROM + "2024-02-03 12:00 "
             + PREFIX_TO + "2024-02-03 14:00 ";
 
-    public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited Meetup: %1$s";
+    public static final String MESSAGE_EDIT_MEETUP_SUCCESS = "Edited meet-up: %1$s";
     public static final String MESSAGE_MEETUP_NOT_EDITED = "Please check for missing fields or invalid format.";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the meet-up list.";
 
     private final Index targetIndex;
     private final EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor;
@@ -71,6 +72,10 @@ public class EditMeetUpCommand extends Command {
         MeetUp meetUpToEdit = lastShownList.get(targetIndex.getZeroBased());
         MeetUp editedMeetUp = createEditedMeetUp(meetUpToEdit, editMeetUpDescriptor);
 
+        if (!meetUpToEdit.isSameMeetUp(editedMeetUp) && model.hasMeetUp(editedMeetUp)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEETUP);
+        }
+
         model.setMeetUp(meetUpToEdit, editedMeetUp);
         model.updateFilteredMeetUpList(PREDICATE_SHOW_ALL_MEETUPS);
         return new CommandResult(String.format(MESSAGE_EDIT_MEETUP_SUCCESS, Messages.format(editedMeetUp)));
@@ -84,10 +89,10 @@ public class EditMeetUpCommand extends Command {
                                                  EditMeetUpCommand.EditMeetUpDescriptor editMeetUpDescriptor) {
         assert meetUpToEdit != null;
 
-        MeetUpName updatedName = editMeetUpDescriptor.getMeetUpName().orElse(meetUpToEdit.getName());
-        MeetUpInfo updatedInfo = editMeetUpDescriptor.getMeetUpInfo().orElse(meetUpToEdit.getInfo());
-        MeetUpFrom updatedFromTime = editMeetUpDescriptor.getMeetUpFrom().orElse(meetUpToEdit.getFrom());
-        MeetUpTo updatedToTime = editMeetUpDescriptor.getMeetUpTo().orElse(meetUpToEdit.getTo());
+        Name updatedName = editMeetUpDescriptor.getMeetUpName().orElse(meetUpToEdit.getName());
+        Info updatedInfo = editMeetUpDescriptor.getMeetUpInfo().orElse(meetUpToEdit.getInfo());
+        From updatedFromTime = editMeetUpDescriptor.getMeetUpFrom().orElse(meetUpToEdit.getFrom());
+        To updatedToTime = editMeetUpDescriptor.getMeetUpTo().orElse(meetUpToEdit.getTo());
 
         return new MeetUp(updatedName, updatedInfo, updatedFromTime, updatedToTime);
     }
@@ -122,10 +127,10 @@ public class EditMeetUpCommand extends Command {
      * corresponding field value of the person.
      */
     public static class EditMeetUpDescriptor {
-        private MeetUpName name;
-        private MeetUpInfo info;
-        private MeetUpFrom from;
-        private MeetUpTo to;
+        private Name name;
+        private Info info;
+        private From from;
+        private To to;
 
         public EditMeetUpDescriptor() {}
 
@@ -148,35 +153,35 @@ public class EditMeetUpCommand extends Command {
         }
 
         // This method should not be used yet.
-        public void setMeetUpName(MeetUpName name) {
+        public void setMeetUpName(Name name) {
             this.name = name;
         }
 
-        public Optional<MeetUpName> getMeetUpName() {
+        public Optional<Name> getMeetUpName() {
             return Optional.ofNullable(name);
         }
 
-        public void setMeetUpInfo(MeetUpInfo info) {
+        public void setMeetUpInfo(Info info) {
             this.info = info;
         }
 
-        public Optional<MeetUpInfo> getMeetUpInfo() {
+        public Optional<Info> getMeetUpInfo() {
             return Optional.ofNullable(info);
         }
 
-        public void setMeetUpFrom(MeetUpFrom from) {
+        public void setMeetUpFrom(From from) {
             this.from = from;
         }
 
-        public Optional<MeetUpFrom> getMeetUpFrom() {
+        public Optional<From> getMeetUpFrom() {
             return Optional.ofNullable(from);
         }
 
-        public void setMeetUpTo(MeetUpTo to) {
+        public void setMeetUpTo(To to) {
             this.to = to;
         }
 
-        public Optional<MeetUpTo> getMeetUpTo() {
+        public Optional<To> getMeetUpTo() {
             return Optional.ofNullable(to);
         }
 

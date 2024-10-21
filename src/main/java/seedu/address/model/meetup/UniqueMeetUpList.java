@@ -11,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
+import seedu.address.model.meetup.exceptions.DuplicateMeetUpException;
+import seedu.address.model.meetup.exceptions.MeetUpNotFoundException;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,7 +22,7 @@ import seedu.address.model.person.Person;
  * of persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Person#isSamePerson(Person)
@@ -33,48 +35,43 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent MeetUp as the given argument.
      */
     public boolean contains(MeetUp toCheck) {
-        // TODO
-        return true;
-        // requireNonNull(toCheck);
-        // return internalList.stream().anyMatch(toCheck::isSamePerson);
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameMeetUp);
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a MeetUp to the list.
+     * The MeetUp must not already exist in the list.
      */
     public void add(MeetUp toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            // TODO
-            // throw new DuplicatePersonException();
+            throw new DuplicateMeetUpException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the meetUp {@code target} in the list with {@code editedMeetUp}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The meetUp identity of {@code editedMeetUp} must not be the same as another existing meetUp in the list.
      */
-    public void setMeetUp(MeetUp target, MeetUp editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setMeetUp(MeetUp target, MeetUp editedMeetUp) {
+        requireAllNonNull(target, editedMeetUp);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            // TODO
-            return;
-            // throw new PersonNotFoundException();
+            throw new MeetUpNotFoundException();
         }
 
-        // if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-        //     throw new DuplicatePersonException();
-        // }
+        if (!target.isSameMeetUp(editedMeetUp) && contains(editedMeetUp)) {
+            throw new DuplicateMeetUpException();
+        }
 
-        internalList.set(index, editedPerson);
+        internalList.set(index, editedMeetUp);
     }
 
     /**
@@ -84,9 +81,7 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     public void remove(MeetUp toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            // TODO
-            //throw new PersonNotFoundException();
-            return;
+            throw new MeetUpNotFoundException();
         }
     }
 
@@ -101,9 +96,9 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      */
     public void setMeetUps(List<MeetUp> meetUps) {
         requireAllNonNull(meetUps);
-        // if (!meetUpsAreUnique(meetUps)) {
-        //     throw new DuplicatePersonException();
-        // }
+        if (!meetUpsAreUnique(meetUps)) {
+            throw new DuplicateMeetUpException();
+        }
 
         internalList.setAll(meetUps);
     }
@@ -112,7 +107,6 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<MeetUp> asUnmodifiableObservableList() {
-        logger.info("the unmodifible list is here" + internalUnmodifiableList);
         return internalUnmodifiableList;
     }
 
@@ -147,18 +141,16 @@ public class UniqueMeetUpList implements Iterable<MeetUp> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code meetUps} contains only unique meetUps.
      */
-    private boolean personsAreUnique(List<MeetUp> meetUps) {
-        // TODO
-        // for (int i = 0; i < meetUps.size() - 1; i++) {
-        //     for (int j = i + 1; j < meetUps.size(); j++) {
-        //         if (meetUps.get(i).isSamePerson(meetUps.get(j))) {
-        //             return false;
-        //         }
-        //     }
-        // }
-        // return true;
+    private boolean meetUpsAreUnique(List<MeetUp> meetUps) {
+        for (int i = 0; i < meetUps.size() - 1; i++) {
+            for (int j = i + 1; j < meetUps.size(); j++) {
+                if (meetUps.get(i).isSameMeetUp(meetUps.get(j))) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 }

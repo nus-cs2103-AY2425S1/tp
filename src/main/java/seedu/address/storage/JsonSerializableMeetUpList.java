@@ -49,11 +49,9 @@ class JsonSerializableMeetUpList {
         MeetUpList meetUpList = new MeetUpList();
         for (JsonAdaptedMeetUp jsonAdaptedMeetUp : meetUps) {
             MeetUp meetUp = jsonAdaptedMeetUp.toModelType();
-
-            // TODO
-            // if (meetUpList.hasMeetUp(meetUp)) {
-            //     throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
-            // }
+            if (meetUpList.hasMeetUp(meetUp)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_MEETUP);
+            }
             meetUpList.addMeetUp(meetUp);
         }
         return meetUpList;

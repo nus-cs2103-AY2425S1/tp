@@ -19,13 +19,11 @@ public class DeleteMeetUpCommand extends Command {
     public static final String COMMAND_WORD = "deletem";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the details of the meetup in the address book. "
-            + "Existing meetup will be deleted from the address book.\n"
+            + ": Deletes meet-up identified by the index number used in the displayed meet-up list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_DELETE_MEETUP_SUCCESS = "Deleted Meetup: %1$s";
-    public static final String MESSAGE_MEETUP_NOT_DELETED = "Please check for missing fields or invalid format.";
+    public static final String MESSAGE_DELETE_MEETUP_SUCCESS = "Deleted meet-up: %1$s";
 
     private final Index targetIndex;
 

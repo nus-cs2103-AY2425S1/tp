@@ -18,8 +18,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.meetup.MeetUp;
+import seedu.address.model.meetup.MeetUpContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditMeetUpDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -39,6 +42,14 @@ public class CommandTestUtil {
     public static final String VALID_PERSON_TYPE_BOB = "buyer";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_MEETUP_NAME_PITCH = "Sales Pitch";
+    public static final String VALID_MEETUP_NAME_NETWORKING = "Networking Session";
+    public static final String VALID_MEETUP_INFO_PITCH = "Pitching property at Bukit Timah.";
+    public static final String VALID_MEETUP_INFO_NETWORKING = "Networking with real estate agents.";
+    public static final String VALID_MEETUP_FROM_PITCH = "2024-09-11 12:00";
+    public static final String VALID_MEETUP_FROM_NETWORKING = "2024-10-12 17:30";
+    public static final String VALID_MEETUP_TO_PITCH = "2024-09-11 12:59";
+    public static final String VALID_MEETUP_TO_NETWORKING = "2024-10-12 19:45";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -57,6 +68,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_PERSON_TYPE_DESC = " " + PREFIX_PERSON_TYPE
+            + "student"; // only 'buyer' or 'seller'
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -64,6 +77,8 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_PITCH_MEETUP;
+    public static final EditMeetUpCommand.EditMeetUpDescriptor DESC_NETWORKING_MEETUP;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -72,6 +87,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_PITCH_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_PITCH)
+                .withInfo(VALID_MEETUP_INFO_PITCH).withFrom(VALID_MEETUP_FROM_PITCH)
+                .withTo(VALID_MEETUP_TO_PITCH).build();
+        DESC_NETWORKING_MEETUP = new EditMeetUpDescriptorBuilder().withName(VALID_MEETUP_NAME_NETWORKING)
+                .withInfo(VALID_MEETUP_INFO_NETWORKING).withFrom(VALID_MEETUP_FROM_NETWORKING)
+                .withTo(VALID_MEETUP_TO_NETWORKING).build();
     }
 
     /**
@@ -128,6 +149,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+    /**
+     * Updates {@code model}'s filtered list to show only the meetup at the given {@code targetIndex} in the
+     * {@code model}'s meetup list.
+     */
+    public static void showMeetUpAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredMeetUpList().size());
+
+        MeetUp meetUp = model.getFilteredMeetUpList().get(targetIndex.getZeroBased());
+        final String[] splitName = meetUp.getName().meetUpFullName.split("\\s+");
+        model.updateFilteredMeetUpList(new MeetUpContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredMeetUpList().size());
     }
 
 }

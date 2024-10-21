@@ -19,10 +19,10 @@ public class AddMeetUpCommand extends Command {
 
     public static final String COMMAND_WORD = "addm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meetup to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a meet-up to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_INFO + "MEETUP INFO "
+            + PREFIX_INFO + "INFO "
             + PREFIX_FROM + "YYYY-MM-DD HH:mm "
             + PREFIX_TO + "YYYY-MM-DD HH:mm \n"
             + "Example: " + COMMAND_WORD + " "
@@ -31,7 +31,8 @@ public class AddMeetUpCommand extends Command {
             + PREFIX_FROM + "2024-02-03 14:00 "
             + PREFIX_TO + "2024-02-03 15:30 ";
 
-    public static final String MESSAGE_SUCCESS = "New Meetup added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New meet-up added: %1$s";
+    public static final String MESSAGE_DUPLICATE_MEETUP = "This meet-up already exists in the address book";
 
     private final MeetUp toAdd;
 
@@ -46,6 +47,12 @@ public class AddMeetUpCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.hasMeetUp(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_MEETUP);
+        }
+
+        model.addMeetUp(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -56,7 +63,7 @@ public class AddMeetUpCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddPersonCommand)) {
+        if (!(other instanceof AddMeetUpCommand)) {
             return false;
         }
 
