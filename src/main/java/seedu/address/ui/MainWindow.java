@@ -216,6 +216,16 @@ public class MainWindow extends UiPart<Stage> {
         propertyListPane.setVisible(false);
     }
 
+    @FXML
+    private void handlePropertyList() {
+        buyerListPanel.getRoot().setVisible(false);
+        meetUpListPanel.getRoot().setVisible(false);
+        propertyListPanel.getRoot().setVisible(true);
+        meetUpListPane.setVisible(false);
+        buyerListPane.setVisible(false);
+        propertyListPane.setVisible(true);
+    }
+
     public BuyerListPanel getBuyerListPanel() {
         return buyerListPanel;
     }
@@ -249,6 +259,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowMeetUpList()) {
                 handleMeetUpList();
+            }
+
+            if (commandResult.isShowPropertyList()) {
+                handlePropertyList();
             }
 
             return commandResult;

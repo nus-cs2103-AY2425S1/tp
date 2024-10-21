@@ -31,7 +31,7 @@ public class PropertyCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label location;
+    private Label locationA;
     @FXML
     private Label askingPrice;
     @FXML
@@ -46,7 +46,7 @@ public class PropertyCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(property.getName().toString());
         phone.setText(property.getPhone().toString());
-        location.setText(property.getLocation().toString());
+        locationA.setText(property.getLocation().toString());
         askingPrice.setText(property.getAskingPrice().toString());
         propertyType.setText(property.getPropertyType().toString());
     }

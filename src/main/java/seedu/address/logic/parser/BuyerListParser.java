@@ -94,6 +94,9 @@ public class BuyerListParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommand();
 
+        case seedu.address.logic.commands.property.ViewCommand.COMMAND_WORD:
+            return new seedu.address.logic.commands.property.ViewCommand();
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
