@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -82,6 +81,39 @@ public class SortCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, getExactParameter(parameter), order));
     }
 
+    /**
+     * Returns the exact parameter name.
+     */
+    private String getExactParameter(String prefix) {
+        switch (prefix) {
+        case "n/":
+            return "name";
+        case "appt/":
+            return "appointment date";
+        case "b/":
+            return "birthday";
+        case "paydate/":
+            return "next payment date";
+        default:
+            return prefix;
+        }
+    }
+
+    /**
+     * Returns true if the parameter is a valid parameter.
+     */
+    public static boolean isValidParameter(String parameter) {
+        return parameter.equals("n/") || parameter.equals("appt/") || parameter.equals("b/")
+                || parameter.equals("paydate/");
+    }
+
+    /**
+     * Returns true if the order is a valid order.
+     */
+    public static boolean isValidOrder(String order) {
+        return order.equals("asc") || order.equals("desc");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -96,21 +128,6 @@ public class SortCommand extends Command {
         SortCommand otherSortCommand = (SortCommand) other;
         return parameter.equals(otherSortCommand.parameter)
                 && order.equals(otherSortCommand.order);
-    }
-
-    private String getExactParameter(String prefix) {
-        switch (prefix) {
-        case "n/":
-            return "name";
-        case "appt/":
-            return "appointment date";
-        case "b/":
-            return "birthday";
-        case "paydate/":
-            return "next payment date";
-        default:
-            return prefix;
-        }
     }
 
     @Override
