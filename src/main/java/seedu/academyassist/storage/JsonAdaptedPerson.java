@@ -18,7 +18,6 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -34,7 +33,6 @@ class JsonAdaptedPerson {
     private final String ic;
     private final String yearGroup;
     private final List<JsonAdaptedSubject> subjects = new ArrayList<>();
-    private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -43,8 +41,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("ic") String ic, @JsonProperty("year group") String yearGroup,
-            @JsonProperty("subject") List<JsonAdaptedSubject> subjects,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("subject") List<JsonAdaptedSubject> subjects) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,9 +50,6 @@ class JsonAdaptedPerson {
         this.yearGroup = yearGroup;
         if (subjects != null) {
             this.subjects.addAll(subjects);
-        }
-        if (tags != null) {
-            this.tags.addAll(tags);
         }
     }
 
@@ -72,9 +66,6 @@ class JsonAdaptedPerson {
         subjects.addAll(source.getSubjects().stream()
                 .map(JsonAdaptedSubject::new)
                 .collect(Collectors.toList()));
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
     }
 
     /**
@@ -83,11 +74,6 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -127,12 +113,16 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Ic.MESSAGE_CONSTRAINTS);
         }
         final Ic modelIc = new Ic(ic);
+        if (yearGroup == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    YearGroup.class.getSimpleName()));
+        }
         if (!YearGroup.isValidYearGroup(yearGroup)) {
             throw new IllegalValueException(YearGroup.MESSAGE_CONSTRAINTS);
         }
         final YearGroup modelYearGroup = new YearGroup(yearGroup);
 
-        if (subjects == null) {
+        if (subjects == null || subjects.isEmpty()) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Subject.class.getSimpleName()));
         }
         final List<Subject> personSubjects = new ArrayList<>();
@@ -143,10 +133,7 @@ class JsonAdaptedPerson {
             personSubjects.add(subject.toModelType());
         }
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelSubjects,
-                modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIc, modelYearGroup, modelSubjects);
     }
 
 }

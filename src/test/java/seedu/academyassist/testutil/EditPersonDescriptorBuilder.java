@@ -10,7 +10,7 @@ import seedu.academyassist.model.person.Email;
 import seedu.academyassist.model.person.Name;
 import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
-import seedu.academyassist.model.tag.Tag;
+import seedu.academyassist.model.person.Subject;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -39,7 +39,6 @@ public class EditPersonDescriptorBuilder {
         descriptor.setIc(person.getIc());
         descriptor.setYearGroup(person.getYearGroup());
         descriptor.setSubjects(person.getSubjects());
-        descriptor.setTags(person.getTags());
     }
 
     /**
@@ -75,12 +74,13 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code subjects} into a {@code Set<Subject>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditPersonDescriptorBuilder withSubjects(String... subjects) {
+        Set<Subject> subjectSet = Stream.of(subjects).map(subject -> new Subject(subject.toUpperCase()))
+                .collect(Collectors.toSet());
+        descriptor.setSubjects(subjectSet);
         return this;
     }
 

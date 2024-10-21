@@ -11,7 +11,6 @@ import seedu.academyassist.model.person.Person;
 import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.tag.Tag;
 import seedu.academyassist.model.util.SampleDataUtil;
 
 /**
@@ -34,7 +33,6 @@ public class PersonBuilder {
     private Ic ic;
     private YearGroup yearGroup;
     private Set<Subject> subjects;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -48,7 +46,6 @@ public class PersonBuilder {
         yearGroup = new YearGroup(DEFAULT_YEARGROUP);
         subjects = new HashSet<>();
         subjects.add(DEFAULT_SUBJECT);
-        tags = new HashSet<>();
     }
 
     /**
@@ -62,7 +59,6 @@ public class PersonBuilder {
         ic = personToCopy.getIc();
         yearGroup = personToCopy.getYearGroup();
         subjects = new HashSet<>(personToCopy.getSubjects());
-        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -70,14 +66,6 @@ public class PersonBuilder {
      */
     public PersonBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
-     */
-    public PersonBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -130,7 +118,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, ic, yearGroup, subjects, tags);
+        return new Person(name, phone, email, address, ic, yearGroup, subjects);
     }
 
 }
