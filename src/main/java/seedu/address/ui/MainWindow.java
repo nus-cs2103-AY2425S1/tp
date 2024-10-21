@@ -123,8 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         contactDetailsPanel = new ContactDetails(logic.getFocusedPerson());
         contactDetailsPanelPlaceholder.getChildren().add(contactDetailsPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanel.setContactDetailsPanel(contactDetailsPanel);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFocusedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
