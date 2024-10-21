@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
@@ -20,11 +21,12 @@ public class FilterPropertyCommand extends Command {
      * Provides a description of the command's purpose and the format for entering property type.
      */
     public static final String MESSAGE_USAGE = String
-            .format("%s: Filters the properties based on PropertyType and MatchingPrice. \n"
-                    + "Parameters: %s[TYPE] %s[MATCHING_PRICE] \n"
-                    + "Restrictions: %s[TYPE] is case insensetive HDB, CONDO, LANDED, "
-                    + "%s[MATCHING_PRICE] is a non-negative integer.",
-                    COMMAND_WORD, PREFIX_TYPE, PREFIX_LTE, PREFIX_TYPE, PREFIX_LTE);
+            .format("%s: Filters the properties based on PropertyType and MatchingPrice.\n"
+                    + "Parameters: [%sTYPE] [%sMATCHINGPRICE] [%sMATCHINGPRICE]\n"
+                    + "Restrictions:\n"
+                    + "\t%s\n\t%s\n\tAt least one optional parameter is specified in command",
+                    COMMAND_WORD, PREFIX_TYPE, PREFIX_LTE, PREFIX_GTE,
+                    Type.MESSAGE_CONSTRAINTS, MatchingPrice.MESSAGE_CONSTRAINTS);
 
     public static final String MESSAGE_SUCCESS = "Listed filtered properties";
     public static final String MESSAGE_UNSUCCESS = "Filtered properties failed";
