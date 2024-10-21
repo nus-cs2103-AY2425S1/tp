@@ -6,13 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_NAME_BOB;
 import static seedu.sellsavvy.logic.commands.personcommands.PersonCommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.sellsavvy.testutil.Assert.assertThrows;
-import static seedu.sellsavvy.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.sellsavvy.testutil.TypicalPersons.ALICE;
 import static seedu.sellsavvy.testutil.TypicalPersons.BOB;
-import static seedu.sellsavvy.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +17,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.sellsavvy.model.AddressBook;
 import seedu.sellsavvy.model.person.exceptions.DuplicatePersonException;
 import seedu.sellsavvy.model.person.exceptions.PersonNotFoundException;
 import seedu.sellsavvy.testutil.PersonBuilder;
@@ -183,9 +179,9 @@ public class UniquePersonListTest {
     public void findEquivalentPerson_modelContainsEquivalentPerson() {
         uniquePersonList.add(ALICE);
         UniquePersonList copyList = uniquePersonList.copyPersons();
-        Person alice_dup = copyList.findEquivalentPerson(ALICE);
-        assertNotSame(alice_dup, ALICE);
-        assertEquals(alice_dup, ALICE);
+        Person aliceDup = copyList.findEquivalentPerson(ALICE);
+        assertNotSame(aliceDup, ALICE);
+        assertEquals(aliceDup, ALICE);
     }
 
     @Test

@@ -135,7 +135,7 @@ public class ModelManagerTest {
         Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person selectedPersonCopy = modelCopy.findEquivalentPerson(selectedPerson);
         assertNotSame(selectedPersonCopy, selectedPerson);
-        assertEquals(selectedPersonCopy,selectedPerson);
+        assertEquals(selectedPersonCopy, selectedPerson);
     }
 
     @Test

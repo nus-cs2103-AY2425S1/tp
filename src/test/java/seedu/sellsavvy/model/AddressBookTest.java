@@ -106,7 +106,7 @@ public class AddressBookTest {
         Person selectedPerson = addressBook1.getPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person selectedPersonCopy = addressBook2.findEquivalentPerson(selectedPerson);
         assertNotSame(selectedPersonCopy, selectedPerson);
-        assertEquals(selectedPersonCopy,selectedPerson);
+        assertEquals(selectedPersonCopy, selectedPerson);
     }
 
     @Test
