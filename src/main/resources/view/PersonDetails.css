@@ -1,0 +1,52 @@
+/* Style for the VBox that contains all the labels */
+VBox {
+    -fx-spacing: 10; /* Add space between labels */
+    -fx-padding: 20; /* Add padding around the VBox */
+    -fx-background-color: #2C3531; /* Dark green background */
+    -fx-border-color: #116466; /* Teal border */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* Generic label styling */
+Label {
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 12pt;
+    -fx-text-fill: #D9B08C; /* Beige text color */
+}
+
+/* Specific styling for the name label */
+#nameLabel {
+    -fx-font-size: 14pt; /* Larger text for the name */
+    -fx-text-fill: #FFCB9A; /* Use a lighter beige for emphasis */
+}
+
+/* Specific styling for the phone label */
+#phoneLabel {
+    -fx-font-size: 14pt; /* Slightly larger text */
+    -fx-text-fill: #D9B08C; /* Beige text */
+}
+
+/* Specific styling for the email label */
+#emailLabel {
+    -fx-font-size: 14pt; /* Slightly larger text */
+    -fx-text-fill: #D9B08C; /* Beige text */
+}
+
+/* Specific styling for the address label */
+#addressLabel {
+    -fx-font-size: 14pt; /* Slightly larger text */
+    -fx-text-fill: #D9B08C; /* Beige text */
+}
+
+/* Add hover effects to labels */
+Label:hover {
+    -fx-text-fill: #D1E8E2; /* Lighter teal color on hover */
+    -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+/* Add a drop shadow effect to the VBox */
+VBox {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 10, 0, 2, 2);
+}
