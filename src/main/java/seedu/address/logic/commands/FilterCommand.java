@@ -46,7 +46,7 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         model.updateFilteredPersonList(person ->
-                person.getTags().stream().anyMatch(tags::contains)
+                person.getTags().equals(tags)
         );
         String filteredTags = tags.stream()
                 .map(Tag::getTagName)
