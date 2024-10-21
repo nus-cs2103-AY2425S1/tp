@@ -21,6 +21,7 @@ public class PieChartCommand extends Command {
         requireNonNull(model);
         Map<String, Integer> numOfStudentsInEachClass = new HashMap<>();
         model.getFilteredPersonList().forEach(person -> {
+            assert person.getClassId() != null;
             String classId = person.getClassId().value;
             numOfStudentsInEachClass.put(classId, numOfStudentsInEachClass.getOrDefault(classId, 0) + 1);
         });
