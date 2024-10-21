@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DOC_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_CONTACT_PHONE;
@@ -16,6 +19,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.DoctorName;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
@@ -30,7 +35,8 @@ import seedu.address.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if none of the prefixes contains empty {@code Optional} values
+     * in the given
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
@@ -40,13 +46,14 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                       PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT_NAME,
-                       PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_ADDRESS, PREFIX_EMERGENCY_CONTACT_NAME,
+                PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP, PREFIX_DOC_NAME,
+                PREFIX_DOC_PHONE, PREFIX_DOC_EMAIL, PREFIX_TAG);
 
         // Compulsory fields
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
@@ -56,7 +63,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP);
+                PREFIX_EMERGENCY_CONTACT_NAME, PREFIX_EMERGENCY_CONTACT_PHONE, PREFIX_EMERGENCY_CONTACT_RELATIONSHIP,
+                PREFIX_DOC_NAME);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
@@ -65,11 +73,15 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone ecPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_PHONE).get());
         Relationship ecRelationship = ParserUtil.parseRelationship(
                 argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).get());
+        DoctorName doctorName = ParserUtil.parseDoctorName(argMultimap.getValue(PREFIX_DOC_NAME).get());
+        Phone doctorPhone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_DOC_PHONE).get());
+        Email doctorEmail = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_DOC_EMAIL).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         EmergencyContact emergencyContact = new EmergencyContact(ecName, ecPhone, ecRelationship);
+        Doctor doctor = new Doctor(doctorName, doctorPhone, doctorEmail);
 
-        Person person = new Person(name, phone, email, address, emergencyContact, tagList);
+        Person person = new Person(name, phone, email, address, emergencyContact, doctor, tagList);
 
         return new AddCommand(person);
     }

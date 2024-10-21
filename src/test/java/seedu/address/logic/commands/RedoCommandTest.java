@@ -17,7 +17,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalPersons;
 
-class UndoCommandTest {
+class RedoCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -29,17 +29,17 @@ class UndoCommandTest {
     }
 
     @Test
-    public void execute_noUndoAvailable_throwsCommandException() {
+    public void execute_noRedoAvailable_throwsCommandException() {
         model = new ModelManager(new AddressBook(), new UserPrefs());
-        UndoCommand undoCommand = new UndoCommand();
+        RedoCommand redoCommand = new RedoCommand();
 
-        // Verify that the exception is thrown when there are no undoable states
-        CommandException exception = assertThrows(CommandException.class, () -> undoCommand.execute(model));
-        assertEquals(UndoCommand.MESSAGE_FAILURE, exception.getMessage());
+        // Verify that the exception is thrown when there are no redoable states
+        CommandException exception = assertThrows(CommandException.class, () -> redoCommand.execute(model));
+        assertEquals(RedoCommand.MESSAGE_FAILURE, exception.getMessage());
     }
 
     @Test
-    public void execute_undoAvailable_success() throws Exception {
+    public void execute_redoAvailable_success() throws Exception {
         Person uniquePerson = new PersonBuilder().withName("Unique Person").build();
 
         model.addPerson(uniquePerson);
@@ -48,15 +48,18 @@ class UndoCommandTest {
         expectedModel.addPerson(uniquePerson);
         expectedModel.saveAddressBook();
 
-        CommandResult result = new UndoCommand().execute(model);
+        model.undoAddressBook();
         expectedModel.undoAddressBook();
 
-        assertEquals(UndoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
+        CommandResult result = new RedoCommand().execute(model);
+        expectedModel.redoAddressBook();
+
+        assertEquals(RedoCommand.MESSAGE_SUCCESS, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
 
     @Test
-    public void execute_multipleUndo_success() throws Exception {
+    public void execute_multipleRedo_success() throws Exception {
         Person person1 = new PersonBuilder().withName("Alice").build();
         Person person2 = new PersonBuilder().withName("Bob").build();
 
@@ -68,16 +71,21 @@ class UndoCommandTest {
         expectedModel.addPerson(person2);
         expectedModel.saveAddressBook();
 
-        assertTrue(model.canUndoAddressBook());
-
-        CommandResult result1 = new UndoCommand().execute(model);
+        model.undoAddressBook();
         expectedModel.undoAddressBook();
-        assertEquals(UndoCommand.MESSAGE_SUCCESS, result1.getFeedbackToUser());
+        model.undoAddressBook();
+        expectedModel.undoAddressBook();
+
+        assertTrue(model.canRedoAddressBook());
+
+        CommandResult result1 = new RedoCommand().execute(model);
+        expectedModel.redoAddressBook();
+        assertEquals(RedoCommand.MESSAGE_SUCCESS, result1.getFeedbackToUser());
         assertEquals(expectedModel, model);
 
-        CommandResult result2 = new UndoCommand().execute(model);
-        expectedModel.undoAddressBook();
-        assertEquals(UndoCommand.MESSAGE_SUCCESS, result2.getFeedbackToUser());
+        CommandResult result2 = new RedoCommand().execute(model);
+        expectedModel.redoAddressBook();
+        assertEquals(RedoCommand.MESSAGE_SUCCESS, result2.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
 
