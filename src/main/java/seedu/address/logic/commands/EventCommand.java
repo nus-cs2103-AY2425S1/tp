@@ -22,6 +22,7 @@ public class EventCommand extends Command {
             + PREFIX_NAME + "EVENT NAME "
             + PREFIX_DATE + "DATE (yyyy-mm-dd) \n"
             + "Example: "
+            + COMMAND_WORD + " "
             + PREFIX_NAME + "New Year's Party "
             + PREFIX_DATE + "2025-01-01";
 

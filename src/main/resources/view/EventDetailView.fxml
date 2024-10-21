@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ScrollPane?>
+
+
+<?import javafx.scene.control.Separator?>
+
+
+<?import javafx.geometry.Insets?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            styleClass="detail-box"
+            VBox.vgrow="ALWAYS">
+
+    <ScrollPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+                AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" style="-fx-background-color: transparent;" fitToHeight="true" fitToWidth="true">
+
+        <VBox id="eventDetailView" fx:id="eventDetailView" styleClass="detail-view"
+              xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
+
+            <!-- Event Title -->
+            <Label fx:id="title" styleClass="detail-header" text="\$title" />
+
+            <!-- Event Info Section -->
+            <VBox spacing="15">
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <HBox spacing="15" prefWidth="150" alignment="CENTER_LEFT">
+                        <ImageView>
+                            <image>
+                                <Image url="@/images/calendar.png" />
+                            </image>
+                        </ImageView>
+                        <Text styleClass="detail-contents"> Date </Text>
+                    </HBox>
+                    <Label fx:id="date" styleClass="detail-contents" text="\$date"/>
+                </HBox>
+
+                <!-- Attendees Section -->
+                <VBox spacing="20">
+                    <Label text="Attendees" styleClass="detail-subheader" />
+                    <VBox spacing="10">
+                        <Label text="Name" styleClass="detail-contents" />
+                        <Separator />
+                    </VBox>
+                    <VBox fx:id="attendees" styleClass="attendee-list" />
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</AnchorPane>

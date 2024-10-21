@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private EventListPanel eventListPanel;
+    private EventDetailView eventDetailView;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PersonDetailView personDetailView;
@@ -73,6 +74,8 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+    @FXML
+    private VBox eventDetailViewPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -139,8 +142,11 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), this::handleSelectedPerson);
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventDetailView = new EventDetailView();
+        eventDetailViewPlaceholder.getChildren().clear();
+        eventListPanel = new EventListPanel(logic.getFilteredEventList(), eventDetailView);
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        eventDetailViewPlaceholder.getChildren().add(eventDetailView.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -155,6 +161,11 @@ public class MainWindow extends UiPart<Stage> {
         if (!logic.getFilteredPersonList().isEmpty()) {
             personDetailView.update(logic.getFilteredPersonList().get(0));
             personDetailViewPlaceholder.getChildren().setAll(personDetailView.getRoot());
+        }
+
+        // Displays the first event in the list if exists onto the EventDetailView
+        if (!logic.getFilteredEventList().isEmpty()) {
+            eventDetailView.update(logic.getFilteredEventList().get(0));
         }
     }
 
