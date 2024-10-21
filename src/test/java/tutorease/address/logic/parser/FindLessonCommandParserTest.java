@@ -22,6 +22,12 @@ public class FindLessonCommandParserTest {
     }
 
     @Test
+    public void parse_null_throwsParseException() {
+        assertParseFailure(parser, null, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                FindLessonCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validArgs_returnsFindLessonCommand() {
         // no leading and trailing whitespaces
         FindLessonCommand expectedFindLessonCommand =
