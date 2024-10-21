@@ -40,14 +40,10 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                     .distinct()
                     .toArray();
             int uniqueSize = uniqueIntArr.length;
-            String[] newArr = new String[uniqueSize];
             Index[] uniqueIndex = new Index[uniqueSize];
 
             for (int i = 0; i < uniqueSize; i++) {
-                newArr[i] = String.valueOf(uniqueIntArr[i]);
-            }
-            for (int i = 0; i < uniqueSize; i++) {
-                uniqueIndex[i] = ParserUtil.parseIndex(newArr[i]);
+                uniqueIndex[i] = ParserUtil.parseIndex(String.valueOf(uniqueIntArr[i]));
             }
             return new DeleteCommand(uniqueIndex);
         } catch (ParseException pe) {
