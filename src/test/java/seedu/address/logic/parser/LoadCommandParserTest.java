@@ -15,7 +15,7 @@ import seedu.address.logic.commands.LoadCommand;
 
 public class LoadCommandParserTest {
     private static final String INPUT_MISSING_PREFIX = "load mybook.json";
-    private static final String VALID_INPUT = "load pa/mybook.json";
+    private static final String VALID_INPUT = "load pa/TestValidInput.json";
     private static final LoadCommandParser PARSER = new LoadCommandParser();
 
     @Test
@@ -26,11 +26,13 @@ public class LoadCommandParserTest {
 
     @Test
     void valid_input() throws Exception {
-        Path tempDir = Files.createDirectory(Paths.get("archived"));
-        Path tempFile = tempDir.resolve("mybook.json");
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestValidInput.json");
         Files.createFile(tempFile);
         assertParseSuccess(PARSER, VALID_INPUT, new LoadCommand(tempFile));
         Files.deleteIfExists(tempFile);
-        Files.deleteIfExists(tempDir);
     }
 }

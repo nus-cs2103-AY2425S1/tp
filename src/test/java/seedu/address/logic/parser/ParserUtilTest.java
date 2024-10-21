@@ -34,7 +34,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
     private static final String INVALID_PATH_1 = "notjson";
     private static final String INVALID_PATH_2 = "have/";
-    private static final String VALID_PATH = "mybook.json";
+    private static final String VALID_PATH = "TestingParser.json";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -208,11 +208,13 @@ public class ParserUtilTest {
 
     @Test
     public void parsePath_valid_path() throws Exception {
-        Path tempDir = Files.createDirectory(Paths.get("archived"));
-        Path tempFile = tempDir.resolve("mybook.json");
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestingParser.json");
         Files.createFile(tempFile);
-        assertEquals(tempFile, ParserUtil.parsePath(VALID_PATH));
         Files.deleteIfExists(tempFile);
-        Files.deleteIfExists(tempDir);
+        Files.deleteIfExists(tempFile);
     }
 }

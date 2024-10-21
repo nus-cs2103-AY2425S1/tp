@@ -19,7 +19,8 @@ public class LoadCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        assertCommandSuccess(new LoadCommand(Paths.get("my.json")), model, LoadCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new LoadCommand(Paths.get("my.json")), model,
+                String.format(LoadCommand.MESSAGE_SUCCESS, Paths.get("my.json")), expectedModel);
     }
     @Test
     public void otherUtilityTest() {

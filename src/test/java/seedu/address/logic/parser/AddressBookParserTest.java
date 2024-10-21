@@ -101,12 +101,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_load() throws Exception {
-        Path tempDir = Files.createDirectory(Paths.get("archived"));
-        Path tempFile = tempDir.resolve("mybook.json");
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestLoading.json");
         Files.createFile(tempFile);
-        assertTrue(parser.parseCommand(LoadCommand.COMMAND_WORD + " pa/mybook.json") instanceof LoadCommand);
+        assertTrue(parser.parseCommand(LoadCommand.COMMAND_WORD
+                + " pa/TestLoading.json") instanceof LoadCommand);
         Files.deleteIfExists(tempFile);
-        Files.deleteIfExists(tempDir);
     }
 
     @Test

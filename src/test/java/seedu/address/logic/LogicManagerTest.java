@@ -12,7 +12,9 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -105,6 +107,21 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void execute_loadCommand() throws Exception {
+
+        String input = "load pa/TestingLogicManager.json";
+        Path tempDir = Paths.get("archived");
+        if (!Files.exists(tempDir)) {
+            tempDir = Files.createDirectory(tempDir);
+        }
+        Path tempFile = tempDir.resolve("TestingLogicManager.json");
+        Path typical = Paths.get("src/test/data/JsonSerializableAddressBookTest/typicalPersonsAddressBook.json");
+        Files.copy(typical, tempFile);
+        logic.execute(input);
+        Files.deleteIfExists(tempFile);
     }
 
     /**
@@ -222,7 +239,6 @@ public class LogicManagerTest {
         ModelManager expectedModel = new ModelManager();
         assertCommandFailure(archiveCommand, CommandException.class, expectedMessage, expectedModel);
     }
-
 
 
 }
