@@ -12,6 +12,9 @@ import seedu.address.model.person.Person;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Adds an exam to all current persons in the address book.
+ */
 public class AddExamCommand extends Command {
 
     public static final String COMMAND_WORD = "addExam";

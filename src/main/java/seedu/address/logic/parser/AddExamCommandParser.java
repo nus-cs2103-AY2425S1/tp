@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXAM;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddExamCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exam.Exam;
@@ -27,14 +26,7 @@ public class AddExamCommandParser implements Parser<AddExamCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE));
         }
 
-        Exam exam;
-
-        try {
-            exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
-        } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExamCommand.MESSAGE_USAGE), ive);
-        }
-
+        Exam exam = ParserUtil.parseExam(argMultimap.getValue(PREFIX_EXAM).get());
         return new AddExamCommand(exam);
     }
 }

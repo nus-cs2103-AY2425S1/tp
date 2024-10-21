@@ -192,6 +192,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String examScore} into a {@code String examScore}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code examScore} is invalid.
+     */
+    public static String parseExamScore(String examScore) throws ParseException {
+        requireNonNull(examScore);
+        String trimmedExamScore = examScore.trim();
+        if (!Exam.isValidExamScore(trimmedExamScore)) {
+            throw new ParseException(Exam.SCORE_MESSAGE_CONSTRAINTS);
+        }
+        return trimmedExamScore;
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
