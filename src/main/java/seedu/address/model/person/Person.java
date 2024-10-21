@@ -146,4 +146,11 @@ public class Person {
     public boolean hasAddress() {
         return this.address.isPresent();
     }
-}
+
+    /**
+     * Returns true if this person has an emtpy {@code ModuleRoleMap}.
+     */
+    public boolean hasEmptyModuleRoleMap() {
+        return this.moduleRoleMap.getRoles().isEmpty();
+    }
+ }
