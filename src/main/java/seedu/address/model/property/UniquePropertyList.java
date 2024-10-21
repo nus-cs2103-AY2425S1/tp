@@ -53,7 +53,7 @@ public class UniquePropertyList implements Iterable<Property> {
      * {@code target} must exist in the list.
      * The property identity of {@code editedProperty} must not be the same as another existing property in the list.
      */
-    public void setProperty(Property target, Property editedProperty) {
+    public void setProperties(Property target, Property editedProperty) {
         requireAllNonNull(target, editedProperty);
 
         int index = internalList.indexOf(target);
@@ -66,17 +66,6 @@ public class UniquePropertyList implements Iterable<Property> {
         }
 
         internalList.set(index, editedProperty);
-    }
-
-    /**
-     * Removes the equivalent property from the list.
-     * The property must exist in the list.
-     */
-    public void remove(Property toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PropertyNotFoundException();
-        }
     }
 
     public void setProperties(UniquePropertyList replacement) {
@@ -95,6 +84,17 @@ public class UniquePropertyList implements Iterable<Property> {
         }
 
         internalList.setAll(properties);
+    }
+
+    /**
+     * Removes the equivalent property from the list.
+     * The property must exist in the list.
+     */
+    public void remove(Property toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new PropertyNotFoundException();
+        }
     }
 
     /**
