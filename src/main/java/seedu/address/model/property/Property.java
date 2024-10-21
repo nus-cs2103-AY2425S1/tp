@@ -55,8 +55,8 @@ public class Property {
     }
 
     /**
-     * Returns true if both properties have the same landlord name and phone and location.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both properties have the same landlord name and location and property type.
+     * This defines a weaker notion of equality between two properties.
      */
     public boolean isSameProperty(Property otherProperty) {
         if (otherProperty == this) {
@@ -65,13 +65,13 @@ public class Property {
 
         return otherProperty != null
                 && otherProperty.getName().equals(getName())
-                && otherProperty.getPhone().equals(getPhone())
-                && otherProperty.getLocation().equals(getLocation());
+                && otherProperty.getLocation().equals(getLocation())
+                && otherProperty.getPropertyType().equals(getPropertyType());
     }
 
     /**
      * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * This defines a stronger notion of equality between two properties.
      */
     @Override
     public boolean equals(Object other) {
