@@ -32,15 +32,16 @@ public class LinkCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-      assertParseFailure(parser, "1 " + PREFIX_TO + "p02", MESSAGE_INVALID_INDEX);
-      assertParseFailure(parser, "o15a " + PREFIX_TO + "p12a", MESSAGE_INVALID_INDEX);
-      assertParseFailure(parser, "o15a " + PREFIX_TO + "p12 " + PREFIX_TO + "p15a", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 " + PREFIX_TO + "p02", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "o15a " + PREFIX_TO + "p12a", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "o15a " + PREFIX_TO + "p12 " + PREFIX_TO + "p15a", MESSAGE_INVALID_INDEX);
 
-      // Current implementation of index disallowed non owner and non pet indexes
-      assertParseFailure(parser, "1 2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
-      assertParseFailure(parser, "o15 " + PREFIX_TO + "t12", MESSAGE_INVALID_INDEX);
-      assertParseFailure(parser, "s15 " + PREFIX_TO + "p12", MESSAGE_INVALID_INDEX);
+        // Current implementation of index disallowed non owner and non pet indexes
+        assertParseFailure(parser, "1 2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "o15 " + PREFIX_TO + "t12", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "s15 " + PREFIX_TO + "p12", MESSAGE_INVALID_INDEX);
 
-      assertParseFailure(parser, "p15 " + PREFIX_TO + "o12", String.format(MESSAGE_INVALID_LINK_COMMAND, LinkCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "p15 " + PREFIX_TO + "o12", String.format(MESSAGE_INVALID_LINK_COMMAND,
+            LinkCommand.MESSAGE_USAGE));
     }
 }

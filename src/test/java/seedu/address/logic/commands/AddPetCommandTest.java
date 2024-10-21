@@ -164,7 +164,7 @@ public class AddPetCommandTest {
 
         @Override
         public boolean hasLink(Link link) {
-          throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -184,7 +184,7 @@ public class AddPetCommandTest {
 
         @Override
         public void deleteLink(Link link) {
-          throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -199,7 +199,7 @@ public class AddPetCommandTest {
 
         @Override
         public void addLink(Link link) {
-          throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

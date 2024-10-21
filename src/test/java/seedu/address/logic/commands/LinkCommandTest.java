@@ -68,7 +68,7 @@ public class LinkCommandTest {
         Pet validPet = new PetBuilder().build();
         Link link = new Link(validOwner, validPet);
 
-        ModelStub modelStub = new ModelStubWithExistingLink(validOwner,validPet, link);
+        ModelStub modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
 
         assertThrows(CommandException.class,
             LinkCommand.MESSAGE_DUPLICATE_LINK, () ->
@@ -105,7 +105,8 @@ public class LinkCommandTest {
     @Test
     public void toStringMethod() {
         LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
-        String expected = LinkCommand.class.getCanonicalName() + "{ownerIndex=" + INDEX_FIRST_OWNER.getOneBased() + ", petIndexes=[" + INDEX_FIRST_PET.getOneBased() + "]}";
+        String expected = LinkCommand.class.getCanonicalName() + "{ownerIndex=" + INDEX_FIRST_OWNER.getOneBased()
+            + ", petIndexes=[" + INDEX_FIRST_PET.getOneBased() + "]}";
         assertEquals(expected, linkCommand.toString());
     }
 

@@ -48,7 +48,7 @@ public class LinkCommand extends Command {
      */
     public LinkCommand(Index ownerIndex, Set<Index> petIndexes) {
         requireAllNonNull(ownerIndex, petIndexes);
-        if(petIndexes.size() == 0) {
+        if (petIndexes.size() == 0) {
             throw new IllegalArgumentException("At least one pet index must be provided");
         }
         this.ownerIndex = ownerIndex;

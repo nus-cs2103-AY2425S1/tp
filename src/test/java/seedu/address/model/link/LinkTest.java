@@ -31,7 +31,8 @@ public class LinkTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Link.class.getCanonicalName() + "{from=" + ALICE.getUniqueID() + ", to=" + BOB.getUniqueID() + "}";
+        String expected = Link.class.getCanonicalName() + "{from=" + ALICE.getUniqueID() + ", to="
+            + BOB.getUniqueID() + "}";
         assertEquals(expected, new Link(ALICE, BOB).toString());
     }
 }
