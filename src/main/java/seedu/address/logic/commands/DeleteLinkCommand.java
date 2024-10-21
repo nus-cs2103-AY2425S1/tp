@@ -10,6 +10,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
+/**
+ * Deletes a link between a patient and a caregiver by their nric and update person model accordingly.
+ */
 public class DeleteLinkCommand extends Command {
 
     public static final String COMMAND_WORD = "deletelink";
@@ -31,6 +34,11 @@ public class DeleteLinkCommand extends Command {
 
     private final Nric patientNric;
     private final Nric caregiverNric;
+
+    /**
+     * @param patientNric The Nric of the patient
+     * @param caregiverNric The Nric of the caregiver
+     */
 
     public DeleteLinkCommand(Nric patientNric, Nric caregiverNric) {
         this.patientNric = patientNric;
