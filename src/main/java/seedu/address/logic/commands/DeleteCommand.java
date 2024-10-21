@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -22,8 +22,11 @@ public class DeleteCommand extends Command {
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
+
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_POLICY_SUCCESS = "Deleted Policy %1$d from %2$s";
+    public static final String MESSAGE_DUPLICATE_NAMES = "Multiple persons found with the name '%1$s'."
+            + " Please specify the index to delete:\n%2$s";
 
     private final Index targetIndex;
     private final Name targetName;
@@ -94,22 +97,31 @@ public class DeleteCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
             }
         } else {
-            Optional<Person> personOptional = lastShownList.stream()
+            List<Person> personsWithName = lastShownList.stream()
                     .filter(person -> person.getName().equals(targetName))
-                    .findFirst();
-            if (personOptional.isEmpty()) {
+                    .collect(Collectors.toList());
+
+            if (personsWithName.isEmpty()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+            } else if (personsWithName.size() == 1) {
+                personToDelete = personsWithName.get(0);
+                boolean isConfirmed = MainWindow.showConfirmationDialog("Are you sure you want to delete "
+                        + personToDelete.getName() + "?");
+                if (!isConfirmed) {
+                    return new CommandResult("Deletion cancelled.");
+                }
+                model.deletePerson(personToDelete);
+                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+            } else {
+                // Update the model's filtered list to show only the duplicates
+                model.updateFilteredPersonList(person -> person.getName().equals(targetName));
+                StringBuilder duplicatesList = new StringBuilder();
+                for (int i = 0; i < personsWithName.size(); i++) {
+                    duplicatesList.append(i + 1).append(". ").append(personsWithName.get(i).getName()).append("\n");
+                }
+                String message = String.format(MESSAGE_DUPLICATE_NAMES, targetName, duplicatesList.toString());
+                return new CommandResult(message);
             }
-            personToDelete = personOptional.get();
-
-            boolean isConfirmed = MainWindow.showConfirmationDialog("Are you sure you want to delete "
-                    + personToDelete.getName() + "?");
-            if (!isConfirmed) {
-                return new CommandResult("Deletion cancelled.");
-            }
-
-            model.deletePerson(personToDelete);
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         }
     }
 
