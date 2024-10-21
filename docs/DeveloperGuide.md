@@ -12,7 +12,7 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-The following table acknowledges numerous 3rd party libraries, API and documentation that were used in the development of TAchy. 
+The following table acknowledges numerous 3rd party libraries, API and documentation that were used in the development of TAchy.
 
 | Name                                                                              | Description                                                                                                              |
 |-----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|
@@ -169,7 +169,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 This section of the developer Guide covers how the features are implemented and executed.
 
 ### Features Overview
-Listed below are the implemented features, and a brief description of what they do. 
+Listed below are the implemented features, and a brief description of what they do.
 * **Adding a new Assignment**: Adds a new Assignment for a particular student
 * **Grading an existing Assignment**: Grades an existing assignment belonging to an existing student
 * **Deleting an existing Assignment**: Deletes an existing assignment belonging to an existing student
@@ -191,7 +191,6 @@ In particular, TAchy has 2 features that "add" items to the app. Firstly, there 
   * Pros: Allows adept users to create new objects in the app more quickly
   * Cons: Difficult to implement, and users are prone to making more mistakes in supplying the valid parameters used.
 
-    
 
 #### Implementation
 * LogicManager executes the command "add_assignment".
