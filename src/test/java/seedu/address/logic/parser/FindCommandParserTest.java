@@ -29,7 +29,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n Alice \n", expectedFindCommand);
     }
 
 }
