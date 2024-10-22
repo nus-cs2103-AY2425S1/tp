@@ -138,8 +138,8 @@ Format:
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/alex david'](images/findAlexDavidResult.png)
+* `find n/bernice n/charlotte` returns `Bernice Yu`, `Charlotte Oliveiro`<br>
+  ![result for 'find n/bernice n/charlotte'](images/findBerniceCharlotteResult.png)
 
 Disallowed examples:
 * `find n/John p/82345670` will not succeed as intended, as the command only searches on single fields. "`p/82345670`" will be treated as a keyword string.
@@ -157,6 +157,23 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Deleting a person's tag : `deletetag`
+
+Deletes the specified person's tag.
+
+Format: `deletetag INDEX t/KEYWORD`
+
+* Deletes the tag with the specified name `KEYWORD` of the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* Only one tag can be deleted at a time.
+
+Examples:
+* `deletetag 1 t/friend` deletes the friend tag of the first person in the list.
+
+Disallowed examples:
+* `deletetag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
 
 ### Clearing all entries : `clear`
 
@@ -217,5 +234,6 @@ Action     | Format, Examples
 **Find by email**   | `find e/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find e/bigman123@email.com bobbyrick@example.com`
 **Find by phone number**   | `find p/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find p/91234657 85432789`
 **Find by tag**   | `find t/KEYWORD [MORE_KEYWORDS]`<br> e.g., `find t/friend roommate`
+**Delete tag** | `deletetag INDEX t/KEYWORD` <br> e.g. `deletetag 1 t/friend`
 **List**   | `list`
 **Help**   | `help`
