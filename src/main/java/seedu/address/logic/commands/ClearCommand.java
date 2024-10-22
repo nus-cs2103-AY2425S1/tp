@@ -18,8 +18,7 @@ public class ClearCommand extends Command {
     public static final String MESSAGE_CLEAR_CANCELLED = "Clear action cancelled.";
     private Boolean isConfirmed;
 
-    public ClearCommand() {
-    }
+    public ClearCommand() {}
 
     /**
      * This constructor should only be used for testing purposes to skip confirmation window.
@@ -32,21 +31,27 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        // Show confirmation dialog
         if (isConfirmed != null) {
-            if (isConfirmed) {
-                model.setAddressBook(new AddressBook());
-                return new CommandResult(String.format(MESSAGE_SUCCESS));
-            } else {
-                return new CommandResult(String.format(MESSAGE_CLEAR_CANCELLED));
-            }
+            return processClearAction(model, isConfirmed);
         }
-        if (confirmClear()) {
+
+        return processClearAction(model, confirmClear());
+    }
+
+    /**
+     * Processes the clear action based on confirmation.
+     *
+     * @param model The current model.
+     * @param confirmed The confirmation status.
+     * @return CommandResult based on the confirmation.
+     */
+    private CommandResult processClearAction(Model model, boolean confirmed) {
+        requireNonNull(model);
+        if (confirmed) {
             model.setAddressBook(new AddressBook());
             return new CommandResult(String.format(MESSAGE_SUCCESS));
-        } else {
-            return new CommandResult(String.format(MESSAGE_CLEAR_CANCELLED));
         }
+        return new CommandResult(String.format(MESSAGE_CLEAR_CANCELLED));
     }
 
     /**
@@ -57,8 +62,6 @@ public class ClearCommand extends Command {
     private boolean confirmClear() {
         ConfirmationWindow confirmationWindow = ConfirmationWindow.getInstance();
         return confirmationWindow.showAlertDialogAndWait(
-                "Confirm Clear",
-                String.format(MESSAGE_CONFIRMATION)
-        );
+                "Confirm Clear", MESSAGE_CONFIRMATION);
     }
 }

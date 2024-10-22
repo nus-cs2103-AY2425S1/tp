@@ -80,22 +80,28 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         Person personToDelete = findPersonToDelete(lastShownList);
 
-        // Show confirmation dialog
         if (isConfirmed != null) {
-            if (isConfirmed) {
-                model.deletePerson(personToDelete);
-                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
-            } else {
-                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_CANCELLED));
-            }
+            return processDeleteAction(model, personToDelete, isConfirmed);
         }
 
-        if (confirmDeletion(personToDelete)) {
+        return processDeleteAction(model, personToDelete, confirmDeletion(personToDelete));
+    }
+
+    /**
+     * Processes the deletion action based on confirmation.
+     *
+     * @param model The current model.
+     * @param personToDelete The person to delete.
+     * @param confirmed The confirmation status.
+     * @return CommandResult based on the confirmation.
+     */
+    private CommandResult processDeleteAction(Model model, Person personToDelete, boolean confirmed) {
+        requireNonNull(model);
+        if (confirmed) {
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
-        } else {
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_CANCELLED));
         }
+        return new CommandResult(MESSAGE_DELETE_PERSON_CANCELLED);
     }
 
 
@@ -108,20 +114,42 @@ public class DeleteCommand extends Command {
      */
     private Person findPersonToDelete(List<Person> lastShownList) throws CommandException {
         if (targetName != null) {
-            Optional<Person> personOptional = lastShownList.stream()
-                    .filter(person -> person.getName().equals(targetName))
-                    .findFirst();
-
-            if (personOptional.isEmpty()) {
-                throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
-            }
-            return personOptional.get();
+            return findPersonByName(lastShownList);
         } else {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(MESSAGE_INVALID_INDEX);
-            }
-            return lastShownList.get(targetIndex.getZeroBased());
+            return findPersonByIndex(lastShownList);
         }
+    }
+
+    /**
+     * Finds a person by name.
+     *
+     * @param lastShownList The list of persons currently shown.
+     * @return The person found.
+     * @throws CommandException if the person is not found.
+     */
+    private Person findPersonByName(List<Person> lastShownList) throws CommandException {
+        Optional<Person> personOptional = lastShownList.stream()
+                .filter(person -> person.getName().equals(targetName))
+                .findFirst();
+
+        if (personOptional.isEmpty()) {
+            throw new CommandException(MESSAGE_PERSON_NOT_FOUND);
+        }
+        return personOptional.get();
+    }
+
+    /**
+     * Finds a person by index.
+     *
+     * @param lastShownList The list of persons currently shown.
+     * @return The person found.
+     * @throws CommandException if the index is invalid.
+     */
+    private Person findPersonByIndex(List<Person> lastShownList) throws CommandException {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX);
+        }
+        return lastShownList.get(targetIndex.getZeroBased());
     }
 
     /**
