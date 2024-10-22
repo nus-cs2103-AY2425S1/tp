@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.testutil.TypicalPersons;
+
 public class CommandResultTest {
     @Test
     public void equals() {
@@ -33,6 +35,7 @@ public class CommandResultTest {
 
         // different exit value -> returns false
         assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+
     }
 
     @Test
@@ -59,5 +62,30 @@ public class CommandResultTest {
                 + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
                 + ", exit=" + commandResult.isExit() + "}";
         assertEquals(expected, commandResult.toString());
+    }
+
+    @Test
+    public void equalsHandleNUll() {
+        CommandResult test = new CommandResult("feedback", null);
+        assertEquals(test, new CommandResult("feedback", null));
+        assertNotEquals(new CommandResult("feedback", TypicalPersons.ALICE), test);
+    }
+
+    @Test
+    public void isViewTestFalse() {
+        CommandResult test = new CommandResult("feedback", true, false);
+        assertFalse(test.isView());
+    }
+
+    @Test
+    public void isViewTestTrue() {
+        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE);
+        assertTrue(test.isView());
+    }
+
+    @Test
+    public void getPersonTest() {
+        CommandResult test = new CommandResult("feedback", TypicalPersons.ALICE);
+        assertEquals(TypicalPersons.ALICE, test.getPerson());
     }
 }

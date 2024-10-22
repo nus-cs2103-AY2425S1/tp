@@ -16,7 +16,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Refer [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html) for the specific version.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-2/tp/releases).
 
@@ -170,6 +170,19 @@ Examples:
 * `list` followed by `delete n/Betsy` deletes the person with the name `Betsy`.
 * `find Betsy` followed by `delete Alex` will not delete the person named `Alex`.
 * `delete n/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
+
+### Launching GitHub repository : `github`
+
+Launches GitHub repository of the specified person on the browser from the address book.
+
+Format: `github n/NAME`
+
+* Launches the GitHub repository of the specified person.
+* Person specified needs to have a GitHub username assigned in the Address Book.
+* The name refers to the full name of the person shown in the Address Book.
+
+Examples:
+* `github n/Betsy` launches the GitHub repository of the person named `Betsy`, using the GitHub username assigned to `Betsy`.
 
 ### Clearing all entries : `clear`
 
