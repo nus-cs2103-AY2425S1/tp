@@ -110,7 +110,8 @@ public class EditCommand extends Command {
         // remark not edited in edit command; Use remark command to edit remarks
         Remark remark = personToEdit.getRemark();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedDateOfLastVisit, remark);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, updatedDateOfLastVisit, remark);
     }
 
     @Override

@@ -36,6 +36,7 @@ public class JsonSerializableAddressBookTest {
         JsonSerializableAddressBook dataFromFile = JsonUtil
                 .readJsonFile(INVALID_PERSON_FILE, JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
+        System.out.println(addressBookFromFile.getPersonList());
         Person validPerson = TypicalPersons.ALICE;
         assertEquals(1, addressBookFromFile.getPersonList().size());
         assertEquals(validPerson, addressBookFromFile.getPersonList().get(0));

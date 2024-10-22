@@ -143,7 +143,8 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDateOfLastVisit, modelRemark);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress,
+                modelTags, modelDateOfLastVisit, modelRemark);
     }
 
 }
