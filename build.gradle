@@ -71,7 +71,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'nottyPlanners.jar'
+    archiveFileName = 'KnottyPlanners.jar'
 }
 
 defaultTasks 'clean', 'test'
