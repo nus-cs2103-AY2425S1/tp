@@ -17,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.exceptions.ClaimException;
 import seedu.address.model.client.exceptions.InsurancePlanException;
 import seedu.address.model.client.insurance.InsurancePlan;
 import seedu.address.model.client.insurance.InsurancePlansManager;
@@ -26,8 +25,14 @@ class DeleteInsuranceCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    /**
+     * Executes the DeleteInsuranceCommand on a valid client and valid insurance plan index.
+     * This tests the successful case of deleting an existing insurance plan from a client.
+     *
+     * @throws InsurancePlanException if the insurance plan deletion fails due to internal errors.
+     */
     @Test
-    public void execute_validIndexUnfilteredList_success() throws InsurancePlanException, ClaimException {
+    public void execute_validIndexUnfilteredList_success() throws InsurancePlanException {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
@@ -49,26 +54,30 @@ class DeleteInsuranceCommandTest {
         assertCommandSuccess(deleteInsuranceCommand, model, expectedMessage, expectedModel);
     }
 
+    /**
+     * Tests the execution of {@code DeleteInsuranceCommand} with an invalid client index.
+     * This test verifies that when the specified client index is out of bounds,
+     * the command throws a {@code CommandException}.
+     */
     @Test
     public void execute_invalidClientIndex_throwsCommandException() {
-        // Create a DeleteInsuranceCommand with an invalid index
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
         DeleteInsuranceCommand deleteInsuranceCommand = new DeleteInsuranceCommand(outOfBoundsIndex, 0);
 
-        // Expect CommandException due to invalid index
         assertThrows(CommandException.class, () -> deleteInsuranceCommand.execute(model));
     }
 
+    /**
+     * Tests the execution of {@code DeleteInsuranceCommand} with an invalid insurance ID.
+     * This test verifies that when the specified insurance plan does not exist,
+     * the command throws a {@code CommandException}.
+     */
     @Test
-    public void execute_invalidInsurancePlan_throwsCommandException() {
-        // Retrieve a valid client
-        Client clientToEdit = model.getFilteredClientList().get(INDEX_THIRD_CLIENT.getZeroBased());
+    public void execute_invalidInsuranceId_throwsCommandException() {
+        int invalidInsurancePlanId = -1;
+        DeleteInsuranceCommand deleteInsuranceCommand = new DeleteInsuranceCommand(
+                INDEX_THIRD_CLIENT, invalidInsurancePlanId);
 
-        // Create a DeleteInsuranceCommand with an invalid insurance plan ID
-        int invalidInsurancePlanId = -1;  // Invalid plan ID
-        DeleteInsuranceCommand deleteInsuranceCommand = new DeleteInsuranceCommand(INDEX_THIRD_CLIENT, invalidInsurancePlanId);
-
-        // Expect CommandException due to invalid insurance plan
         assertThrows(CommandException.class, () -> deleteInsuranceCommand.execute(model));
     }
 
