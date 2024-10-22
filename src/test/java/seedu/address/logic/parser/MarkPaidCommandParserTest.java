@@ -20,20 +20,19 @@ public class MarkPaidCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkPaidCommand.MESSAGE_USAGE);
 
     private static final String VALID_MONTHPAID1 = "2024-01";
-    private static final String VALID_MONTHPAID1_WITH_PREFIX = PREFIX_MONTHPAID + VALID_MONTHPAID1;
     private static final String VALID_MONTHPAID2 = "2024-02";
-    private static final String VALID_MONTHPAID2_WITH_PREFIX = PREFIX_MONTHPAID + VALID_MONTHPAID2;
-    private static final String INVALID_MONTHPAID1 = "24-01";
-    private static final String INVALID_MONTHPAID1_WITH_PREFIX = PREFIX_MONTHPAID + INVALID_MONTHPAID1;
-    private static final String INVALID_MONTHPAID2 = "2024-13";
-    private static final String INVALID_MONTHPAID2_WITH_PREFIX = PREFIX_MONTHPAID + INVALID_MONTHPAID1;
+    private static final String INVALID_MONTHPAID_YY = "24-01";
+    private static final String INVALID_MONTHPAID_MM_RANGE_UPPER = "2024-13";
+    private static final String INVALID_MONTHPAID_MM_RANGE_LOWER = "2024-00";
+    private static final String INVALID_MONTHPAID_YYYY_RANGE_UPPER = "2201-12";
+    private static final String INVALID_MONTHPAID_YYYY_RANGE_LOWER = "1899-12";
 
     private MarkPaidCommandParser parser = new MarkPaidCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
         // no index specified
-        assertParseFailure(parser, VALID_MONTHPAID1_WITH_PREFIX, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, withPrefix(VALID_MONTHPAID1), MESSAGE_INVALID_FORMAT);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -50,10 +49,10 @@ public class MarkPaidCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5 " + VALID_MONTHPAID1_WITH_PREFIX, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5 " + withPrefix(VALID_MONTHPAID1), MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0 " + VALID_MONTHPAID1_WITH_PREFIX, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0 " + withPrefix(VALID_MONTHPAID2), MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -64,7 +63,7 @@ public class MarkPaidCommandParserTest {
     @Test
     public void parse_oneField_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = String.valueOf(targetIndex.getOneBased()) + " " + VALID_MONTHPAID1_WITH_PREFIX;
+        String userInput = String.valueOf(targetIndex.getOneBased()) + " " + withPrefix(VALID_MONTHPAID1);
         // empty field
         MarkPaidCommand expectedCommand = new MarkPaidCommand(targetIndex, Set.of(new MonthPaid(VALID_MONTHPAID1)));
 
@@ -74,8 +73,8 @@ public class MarkPaidCommandParserTest {
     @Test
     public void parse_twoFields_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = String.valueOf(targetIndex.getOneBased()) + " " + VALID_MONTHPAID1_WITH_PREFIX
-                + " " + VALID_MONTHPAID2_WITH_PREFIX;
+        String userInput = String.valueOf(targetIndex.getOneBased()) + " " + withPrefix(VALID_MONTHPAID1)
+                + " " + withPrefix(VALID_MONTHPAID2);
         // empty field
         MarkPaidCommand expectedCommand = new MarkPaidCommand(
                 targetIndex, Set.of(new MonthPaid(VALID_MONTHPAID1), new MonthPaid(VALID_MONTHPAID2)));
@@ -85,15 +84,28 @@ public class MarkPaidCommandParserTest {
     @Test
     public void parse_oneInvalidField_failure() {
         // 1 invalid field of type YY-MM
-        assertParseFailure(parser, "1 " + INVALID_MONTHPAID1_WITH_PREFIX, MonthPaid.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + withPrefix(INVALID_MONTHPAID_YY), MonthPaid.MESSAGE_CONSTRAINTS);
 
-        // 1 invalid field of type YYYY-MM where MM is more than 12
-        assertParseFailure(parser, "1 " + INVALID_MONTHPAID2_WITH_PREFIX, MonthPaid.MESSAGE_CONSTRAINTS);
+        // MM is more than 12 and mm is 0
+        assertParseFailure(parser, "1 "
+                + withPrefix(INVALID_MONTHPAID_MM_RANGE_UPPER), MonthPaid.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 "
+                + withPrefix(INVALID_MONTHPAID_MM_RANGE_LOWER), MonthPaid.MESSAGE_CONSTRAINTS);
+
+        // YYYY-MM where YYYY is less than 1900 and more than 2100
+        assertParseFailure(parser, "1 "
+                + withPrefix(INVALID_MONTHPAID_YYYY_RANGE_UPPER), MonthPaid.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 "
+                + withPrefix(INVALID_MONTHPAID_YYYY_RANGE_LOWER), MonthPaid.MESSAGE_CONSTRAINTS);
 
         // 1 invalid field, 1 valid field
         assertParseFailure(parser, "1 "
-                + INVALID_MONTHPAID1_WITH_PREFIX
-                + " " + VALID_MONTHPAID2_WITH_PREFIX, MonthPaid.MESSAGE_CONSTRAINTS);
+                + withPrefix(INVALID_MONTHPAID_MM_RANGE_LOWER)
+                + " " + withPrefix(VALID_MONTHPAID2), MonthPaid.MESSAGE_CONSTRAINTS);
+    }
+
+    private String withPrefix(String monthPaidString) {
+        return PREFIX_MONTHPAID + monthPaidString;
     }
 
 }
