@@ -339,9 +339,8 @@ _{Explain here how the data archiving feature will be implemented}_
 **Target user profile**:
 
 * Freelance pre-university home tutors
-* Has a need to manage a significant number of students, their contacts and relevant information
-* Prefer desktop apps over other types
-* Can type fast
+* Manages a significant number of students
+* Prefers desktop applications
 * Prefers typing to mouse interactions
 * Is reasonably comfortable using CLI apps
 
