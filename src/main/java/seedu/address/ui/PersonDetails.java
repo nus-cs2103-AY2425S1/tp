@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 import seedu.address.model.person.Person;
 
 /**
@@ -9,6 +10,12 @@ import seedu.address.model.person.Person;
  * all features for the person object, and displays the details line by line.
  */
 public class PersonDetails {
+    @FXML
+    public Label birthdayLabel;
+    @FXML
+    public Label historyLabel;
+    @FXML
+    public Label remarkLabel;
     @FXML
     private Label nameLabel;
 
@@ -21,6 +28,9 @@ public class PersonDetails {
     @FXML
     private Label addressLabel;
 
+
+
+
     /**
      * Sets the details of the specified {@code Person} in the respective UI labels.
      *
@@ -32,6 +42,8 @@ public class PersonDetails {
         phoneLabel.setText(person.getPhone().value);
         emailLabel.setText(person.getEmail().value);
         addressLabel.setText(person.getAddress().value);
+        birthdayLabel.setText(person.getBirthday().value.toString());
+        historyLabel.setText(person.getDateOfCreation().toString());
+
     }
 }
-

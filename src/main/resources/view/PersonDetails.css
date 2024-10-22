@@ -40,10 +40,25 @@ Label {
     -fx-text-fill: #D9B08C; /* Beige text */
 }
 
+#remarkLabel {
+    -fx-font-size: 14pt; /* Slightly larger text */
+    -fx-text-fill: #D9B08C; /* Beige text */
+}
+
+#historyLabel {
+    -fx-font-size: 14pt; /* Slightly larger text */
+    -fx-text-fill: #D9B08C; /* Beige text */
+}
 /* Add hover effects to labels */
 Label:hover {
     -fx-text-fill: #D1E8E2; /* Lighter teal color on hover */
     -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+Separator {
+   -fx-border-width: 0px;
+   -fx-border-color: #D9B08C;
+   -fx-background-fill: #D9B08C;
 }
 
 /* Add a drop shadow effect to the VBox */

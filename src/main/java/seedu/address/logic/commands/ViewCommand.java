@@ -8,10 +8,12 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.NoWindowException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.ui.PersonDetails;
@@ -22,6 +24,7 @@ import seedu.address.ui.PersonDetails;
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
+    public static final String NO_WINDOWS_OPEN = "No view windows are currently open.";
     private static Stage currentStage;
     private final Index index;
 
@@ -66,7 +69,7 @@ public class ViewCommand extends Command {
             PersonDetails controller = fxmlLoader.getController();
             controller.setPersonDetails(personToShow);
 
-            // Create a new stage (window) for the new window
+            // Create a new stage (window) for the popup
             Stage newStage = new Stage();
             newStage.setTitle("Person Details");
 
@@ -74,10 +77,14 @@ public class ViewCommand extends Command {
             Scene scene = new Scene(root);
             newStage.setScene(scene);
 
+            // Make it non-modal (won't block focus)
+            newStage.initModality(Modality.NONE);
+            newStage.setAlwaysOnTop(false);
+
             // Keep track of the current stage (for closing later)
             currentStage = newStage;
 
-            // Show the new window (non-modal, separate from the main window)
+            // Show the new window without stealing focus
             newStage.show();
 
         } catch (IOException e) {
@@ -90,8 +97,11 @@ public class ViewCommand extends Command {
     /**
      * Manually close the current window if it's still open.
      */
-    public void closeCurrentWindow() {
-        if (currentStage != null && currentStage.isShowing()) {
+    public static void closeCurrentWindow() {
+        if(currentStage == null) {
+            throw new NoWindowException(NO_WINDOWS_OPEN);
+        }
+        if (currentStage.isShowing()) {
             currentStage.close();
         }
     }

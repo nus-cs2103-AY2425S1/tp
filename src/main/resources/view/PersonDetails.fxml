@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="seedu.address.ui.PersonDetails" stylesheets="@PersonDetails.css">
+<VBox prefHeight="600.0" prefWidth="463.0" stylesheets="@PersonDetails.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.ui.PersonDetails">
 <children>
-    <Label text="Name:" />
+    <Label alignment="TOP_LEFT" text="Name:" />
     <Label fx:id="nameLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
+      <Label text="Birthday" />
+      <Label fx:id="birthdayLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
 
     <Label text="Phone:" />
     <Label fx:id="phoneLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
 
     <Label text="Email:" />
     <Label fx:id="emailLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
 
     <Label text="Address:" />
     <Label fx:id="addressLabel" />
+      <Separator prefHeight="1.0" prefWidth="336.0" />
+    <Label text="Remarks:" />
+    <Label fx:id="remarkLabel" prefHeight="67.0" prefWidth="419.0" />
+    <Label text="History:" />
+    <Label fx:id="historyLabel" prefHeight="67.0" prefWidth="419.0" />
 </children>
 </VBox>
