@@ -72,7 +72,7 @@ public class AttendanceWindow {
     /**
      * Collect all unique attendance dates from all students.
      */
-    private Set<LocalDate> getAllAttendanceDates(Model model) {
+    public Set<LocalDate> getAllAttendanceDates(Model model) {
         Set<LocalDate> allDates = new TreeSet<>(); // TreeSet to ensure sorted order
         for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
             for (AttendanceRecord record : student.getAttendanceRecord()) {
