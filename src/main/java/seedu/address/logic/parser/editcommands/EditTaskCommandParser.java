@@ -1,16 +1,17 @@
 package seedu.address.logic.parser.editcommands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_STATUS;
+import static seedu.address.logic.parser.CliSyntax.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -34,6 +35,13 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     @Override
     public EditTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        List<Prefix> allowedPrefix = new ArrayList<Prefix>(Arrays.asList(PREFIX_TASK_NAME,
+            PREFIX_TASK_DEADLINE, PREFIX_INDEX, PREFIX_TASK_STATUS));
+        List<Prefix> invalidPrefixes = ALL_PREFIX;
+        invalidPrefixes.removeAll(allowedPrefix);
+        if (!containsInvalidPrefix(args, invalidPrefixes)) {
+            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditGroupCommand.MESSAGE_USAGE);
+        }
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_GROUP_NAME, PREFIX_TASK_NAME,
                 PREFIX_TASK_DEADLINE, PREFIX_TASK_STATUS);
@@ -70,5 +78,13 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes)  {
+        for (Prefix prefix : invalidPreFixes) {
+            if (arg.contains(prefix.getPrefix())) {
+                return false;
+            }
+        }
+        return true;
     }
 }
