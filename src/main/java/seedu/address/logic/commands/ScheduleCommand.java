@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -28,6 +31,8 @@ import seedu.address.model.tag.Tag;
  * Overwrites the details of an existing person's schedule in the address book.
  */
 public class ScheduleCommand extends Command {
+
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     public static final String COMMAND_WORD = "schedule";
 
@@ -80,6 +85,7 @@ public class ScheduleCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         if (editedSchedule.equals(scheduleToEdit)) {
+            logger.fine(MESSAGE_SCHEDULE_UNCHANGED);
             throw new CommandException(MESSAGE_SCHEDULE_UNCHANGED);
         }
 
