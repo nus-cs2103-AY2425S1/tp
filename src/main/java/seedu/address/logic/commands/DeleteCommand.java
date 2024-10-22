@@ -81,7 +81,7 @@ public class DeleteCommand extends Command {
 
 
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, formattedDeletedPeople),
-                CommandType.DELETESTUDENT);
+                COMMAND_TYPE);
     }
 
     @Override
