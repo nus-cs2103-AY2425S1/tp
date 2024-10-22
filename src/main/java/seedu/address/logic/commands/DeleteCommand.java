@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
             + "This action is IRREVERSIBLE.";
     private final Name targetName;
     private final Index targetIndex;
+    private Boolean isConfirmed;
 
     /**
      * @param targetName of the person to be deleted in the list
@@ -51,6 +52,28 @@ public class DeleteCommand extends Command {
         this.targetName = null;
     }
 
+    /**
+     * This constructor should only be used for testing purposes to skip confirmation window.
+     * @param targetName of the person to be deleted in the list
+     * @param isConfirmed skips confirmation window and provides the result for confirm deletion.
+     */
+    public DeleteCommand(Name targetName, boolean isConfirmed) {
+        this.targetName = targetName;
+        this.isConfirmed = isConfirmed;
+        this.targetIndex = null;
+    }
+
+    /**
+     * This constructor should only be used for testing purposes to skip confirmation window.
+     * @param targetIndex of the index of the person to be deleted in the list
+     * @param isConfirmed skips confirmation window and provides the result for confirm deletion.
+     */
+    public DeleteCommand(Index targetIndex, boolean isConfirmed) {
+        this.targetIndex = targetIndex;
+        this.isConfirmed = isConfirmed;
+        this.targetName = null;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -58,11 +81,20 @@ public class DeleteCommand extends Command {
         Person personToDelete = findPersonToDelete(lastShownList);
 
         // Show confirmation dialog
+        if (isConfirmed != null) {
+            if (isConfirmed) {
+                model.deletePerson(personToDelete);
+                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
+            } else {
+                return new CommandResult(String.format(MESSAGE_DELETE_PERSON_CANCELLED));
+            }
+        }
+
         if (confirmDeletion(personToDelete)) {
             model.deletePerson(personToDelete);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete.getName()));
         } else {
-            return new CommandResult(MESSAGE_DELETE_PERSON_CANCELLED);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_CANCELLED));
         }
     }
 
