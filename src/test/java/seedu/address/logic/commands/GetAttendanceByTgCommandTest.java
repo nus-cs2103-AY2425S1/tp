@@ -97,7 +97,7 @@ class GetAttendanceByTgCommandTest {
     public void toStringMethod() {
         TutorialGroup tg = new TutorialGroup("A01");
         GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(tg);
-        String expectedString = tg.toString();
+        String expectedString = GetAttendanceByTgCommand.class.getCanonicalName() + "{tutorialGroup=" + tg + "}";
         assertEquals(expectedString, command.toString());
     }
 

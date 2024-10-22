@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
@@ -75,7 +76,8 @@ public class GetAttendanceByTgCommand extends Command {
 
     @Override
     public String toString() {
-        return tutorialGroup.toString();
+        return new ToStringBuilder(this)
+                .add("tutorialGroup", tutorialGroup).toString();
     }
 
     public void setAttendanceWindow(AttendanceWindow window) {

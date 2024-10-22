@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -75,6 +76,45 @@ class GetAttendanceCommandTest {
                 command.execute(model));
     }
 
+    @Test
+    public void equalsMethod() {
+        Name name1 = new Name("John Doe");
+        Name name2 = new Name("Jane Doe");
+        LocalDate date1 = LocalDate.parse("2023-10-09");
+        LocalDate date2 = LocalDate.parse("2023-10-10");
 
+        GetAttendanceCommand command1 = new GetAttendanceCommand(name1, date1);
+        GetAttendanceCommand command2 = new GetAttendanceCommand(name1, date1);
+        GetAttendanceCommand command3 = new GetAttendanceCommand(name2, date1);
+        GetAttendanceCommand command4 = new GetAttendanceCommand(name1, date2);
+
+        // Same object
+        assertEquals(command1, command1);
+
+        // Different objects, same values
+        assertEquals(command1, command2);
+
+        // Different names
+        assertNotEquals(command1, command3);
+
+        // Different dates
+        assertNotEquals(command1, command4);
+
+        // Different types
+        assertNotEquals(command1, new Object());
+
+        // Null
+        assertNotEquals(command1, null);
+    }
+
+    @Test
+    public void toStringMethod() {
+        Name name = new Name("John Doe");
+        LocalDate date = LocalDate.parse("2023-10-09");
+        GetAttendanceCommand command = new GetAttendanceCommand(name, date);
+        String expectedString = GetAttendanceCommand.class.getCanonicalName()
+                + "{name=" + name + ", date=" + date + "}";
+        assertEquals(expectedString, command.toString());
+    }
 
 }
