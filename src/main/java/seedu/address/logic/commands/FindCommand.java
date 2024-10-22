@@ -18,6 +18,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons based on the specified criteria "
             + "and displays them as a list with index numbers. Search is case-insensitive.\n"
             + "Parameters: [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...\n"
+            + "At least one parameter must be provided. You do not need to include all parameters.\n"
             + "Example: " + COMMAND_WORD + " n/Alex nric/S6283947C role/patient t/friend";
 
     private final ContainsKeywordsPredicate predicate;
