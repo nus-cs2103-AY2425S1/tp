@@ -228,10 +228,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + VALID_STUDENT_CLASS_BOB, expectedMessage);
 
-        // missing ecName prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + REGISTER_NUMBER_DESC_BOB + SEX_DESC_BOB + VALID_STUDENT_CLASS_BOB, expectedMessage);
-
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
                 + VALID_REGISTER_NUMBER_BOB + VALID_SEX_BOB + VALID_STUDENT_CLASS_BOB, expectedMessage);
