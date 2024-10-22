@@ -82,4 +82,11 @@ public class AddAssignmentCommand extends Command {
         return otherCommand.assignment.equals(this.assignment)
                 && otherCommand.name.equals(this.name);
     }
+
+    @Override
+    public boolean undo(Model model) {
+        Student student = model.getStudentByName(name);
+        student.deleteLastAssignment();
+        return true;
+    }
 }

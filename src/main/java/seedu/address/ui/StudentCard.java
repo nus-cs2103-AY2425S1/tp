@@ -61,17 +61,11 @@ public class StudentCard extends UiPart<Region> {
         // Updates the flow pane when the list of assignments changes
         student.getAssignments().addListener((ListChangeListener<Assignment>) change -> {
             while (change.next()) {
-                if (change.wasAdded()) {
-                    change.getAddedSubList().forEach(
-                            assignment -> assignments.getChildren().add(
-                                    new Label(assignment.getAssignmentName().toString())));
-                }
-                if (change.wasRemoved()) {
-                    assignments.getChildren().clear();
-                    student.getAssignments().forEach(
-                            assignment -> assignments.getChildren().add(
-                                    new Label(assignment.getAssignmentName().toString())));
-                }
+                assignments.getChildren().clear();
+                student.getAssignments().forEach(
+                        assignment -> assignments.getChildren().add(
+                                new Label(assignment.getAssignmentName().toString())));
+
             }
         });
     }

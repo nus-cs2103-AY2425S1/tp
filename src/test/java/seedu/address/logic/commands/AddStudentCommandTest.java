@@ -80,7 +80,7 @@ public class AddStudentCommandTest {
     }
 
     @Test
-    public void undo_validStudent() throws Exception {
+    public void undo_validStudent() throws CommandException {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
         AddStudentCommand addStudentCommand = new AddStudentCommand(validStudent);

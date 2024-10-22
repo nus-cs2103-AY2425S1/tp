@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.Deadline;
@@ -30,6 +32,13 @@ public class StudentBuilder {
     public static final String DEFAULT_SUBMISSION_STATUS = "Y";
     public static final String DEFAULT_GRADING_STATUS = "Y";
     public static final String DEFAULT_GRADE = "95";
+    public static final Assignment DEFAULT_ASSIGNMENT = new Assignment(
+            new AssignmentName(DEFAULT_ASSIGNMENT_NAME),
+            new Deadline(DEFAULT_DEADLINE),
+            new Status(DEFAULT_SUBMISSION_STATUS),
+            new Status(DEFAULT_GRADING_STATUS),
+            new Grade(DEFAULT_GRADE)
+    );
 
 
     private Name name;
@@ -37,7 +46,7 @@ public class StudentBuilder {
     private TutorialGroup tutorialGroup;
     private StudentNumber studentNumber;
 
-    private List<Assignment> assignments;
+    private ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -47,15 +56,7 @@ public class StudentBuilder {
         phone = new Phone(DEFAULT_CONTACT_NUMBER);
         tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
         studentNumber = new StudentNumber(DEFAULT_STUDENT_NUMBER);
-        assignments = new ArrayList<>();
-        Assignment assignment = new Assignment(
-                new AssignmentName(DEFAULT_ASSIGNMENT_NAME),
-                new Deadline(DEFAULT_DEADLINE),
-                new Status(DEFAULT_SUBMISSION_STATUS),
-                new Status(DEFAULT_GRADING_STATUS),
-                new Grade(DEFAULT_GRADE)
-        );
-        assignments.add(assignment);
+        assignments.add(DEFAULT_ASSIGNMENT);
     }
 
     /**
@@ -118,6 +119,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, tutorialGroup, studentNumber);
+        return new Student(name, phone, tutorialGroup, studentNumber, assignments);
     }
 }
