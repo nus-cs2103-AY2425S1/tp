@@ -158,12 +158,19 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Filter property feature
+### \[Proposed\] Add Buyer Feature
 
 #### Proposed Implementation
-The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
+The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
 The sequence diagram is shown as such:
-<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
+<puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
+
+### \[Proposed\] Add Seller Feature
+
+#### Proposed Implementation
+The addseller command takes in the name, phone number, and email address of the seller and adds the seller to the client book based.
+The sequence diagram is shown as such:
+<puml src="diagrams/AddSellerSequenceDiagram.puml" alt="AddSeller" />
 
 ### \[Proposed\] Delete Buyer Feature
 
@@ -178,6 +185,13 @@ The sequence diagram is shown as such:
 The deleteseller command takes in the phone number of the seller and deletes the seller from the client book based on the phone number.
 The sequence diagram is shown as such:
 <puml src="diagrams/DeleteSellerSequenceDiagram.puml" alt="DeleteSeller" />
+
+### \[Proposed\] Filter property feature
+
+#### Proposed Implementation
+The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
+The sequence diagram is shown as such:
+<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
 
 ### \[Proposed\] Undo/redo feature
 
