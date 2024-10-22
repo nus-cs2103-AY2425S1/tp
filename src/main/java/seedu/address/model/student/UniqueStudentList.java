@@ -142,4 +142,8 @@ public class UniqueStudentList implements Iterable<Student> {
         }
         return true;
     }
+
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
 }

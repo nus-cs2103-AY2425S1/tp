@@ -3,14 +3,17 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -35,7 +38,7 @@ public class Student extends Person {
     // Identity fields
     private final TutorialGroup tutorialGroup;
     private final StudentNumber studentNumber;
-    private final ArrayList<Assignment> assignments = new ArrayList<>();
+    private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
     /**
      * Every field must be present and not null.
@@ -53,6 +56,10 @@ public class Student extends Person {
 
     public StudentNumber getStudentNumber() {
         return studentNumber;
+    }
+
+    public ObservableList<Assignment> getAssignments() {
+        return assignments;
     }
 
     /**
@@ -110,6 +117,8 @@ public class Student extends Person {
         attendanceRecords.put(date, attendance);
     }
 
+    //getters
+
     public PersonAttendance getAttendance(LocalDate date) {
         return attendanceRecords.get(date);
     }
@@ -122,5 +131,22 @@ public class Student extends Person {
     public void addAssignment(Assignment assignment) {
         requireAllNonNull(assignment);
         assignments.add(assignment);
+    }
+
+    /**
+     * Deletes the first assignment matching the given assignment query.
+     *
+     * @param assignmentQuery A valid assignment query.
+     * @return the deleted assignment
+     */
+    public Assignment deleteAssignment(AssignmentQuery assignmentQuery) throws CommandException {
+        requireAllNonNull(assignmentQuery);
+        for (Assignment assignment : assignments) {
+            if (assignmentQuery.match(assignment)) {
+                assignments.remove(assignment);
+                return assignment;
+            }
+        }
+        return null;
     }
 }

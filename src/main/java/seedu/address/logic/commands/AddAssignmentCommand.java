@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,14 +27,14 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
             + PREFIX_DEADLINE + "DEADLINE "
-            + PREFIX_STATUS + "SUBMISSION STATUS "
-            + PREFIX_STATUS + "GRADING STATUS "
-            + PREFIX_GRADE + "GRADE "
+            + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL)"
+            + PREFIX_STATUS + "GRADING STATUS (OPTIONAL)"
+            + PREFIX_GRADE + "GRADE (OPTIONAL)"
             + "\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Jane Doe "
             + PREFIX_ASSIGNMENT + "Math Quiz "
-            + PREFIX_DEADLINE + "9/10/2024 "
+            + PREFIX_DEADLINE + "2024-10-09 "
             + PREFIX_STATUS + "N "
             + PREFIX_STATUS + "N "
             + PREFIX_GRADE + "NULL ";
@@ -47,7 +49,7 @@ public class AddAssignmentCommand extends Command {
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
      */
     public AddAssignmentCommand(Name name, Assignment assignment) {
-        requireNonNull(assignment);
+        requireAllNonNull(name, assignment);
         this.assignment = assignment;
         this.name = name;
     }
@@ -62,6 +64,7 @@ public class AddAssignmentCommand extends Command {
         }
 
         student.addAssignment(assignment);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
     }
 

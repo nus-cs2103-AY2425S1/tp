@@ -3,9 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -19,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -61,6 +66,41 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    // ----------------- Assignment related fields --------------------------------------------
+    public static final String VALID_ASSIGNMENT_MATH = "Math Assignment";
+    public static final String VALID_ASSIGNMENT_SCIENCE = "Science Project";
+
+    // Valid deadline inputs
+    public static final String VALID_DEADLINE_2024_10_20 = "2024-10-20";
+    public static final String VALID_DEADLINE_2023_12_25 = "2023-12-25";
+
+    // Valid status inputs
+    public static final String VALID_STATUS_Y = "Y";
+    public static final String VALID_STATUS_N = "N";
+
+    // Valid grade inputs
+    public static final String VALID_GRADE_80 = "80";
+    public static final String VALID_GRADE_95 = "95";
+
+    // Invalid inputs for testing
+    public static final String INVALID_ASSIGNMENT_DESC = " " + PREFIX_ASSIGNMENT + "!!!Science";
+    public static final String INVALID_STATUS_DESC = " " + PREFIX_STATUS + "done";
+    public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "120";
+    public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "20th October";
+
+    public static final String STATUS_DESC_Y = " " + PREFIX_STATUS + VALID_STATUS_Y;
+    public static final String STATUS_DESC_N = " " + PREFIX_STATUS + VALID_STATUS_N;
+
+    public static final String ASSIGNMENT_DESC_MATH = " " + PREFIX_ASSIGNMENT + VALID_ASSIGNMENT_MATH;
+    public static final String ASSIGNMENT_DESC_SCIENCE = " " + PREFIX_ASSIGNMENT + VALID_ASSIGNMENT_SCIENCE;
+
+    public static final String DEADLINE_DESC_2024_10_20 = " " + PREFIX_DEADLINE + VALID_DEADLINE_2024_10_20;
+    public static final String DEADLINE_DESC_2023_12_25 = " " + PREFIX_DEADLINE + VALID_DEADLINE_2023_12_25;
+
+    public static final String GRADE_DESC_80 = " " + PREFIX_GRADE + VALID_GRADE_80;
+    public static final String GRADE_DESC_95 = " " + PREFIX_GRADE + VALID_GRADE_95;
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -131,6 +171,19 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the student at the with the given {@code name} in the
+     * {@code model}'s address book.
+     */
+    public static void showStudentAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
+
+        Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
+        model.updateFilteredStudentList(s -> s.getName().equals(student.getName()));
+
+        assertEquals(1, model.getFilteredStudentList().size());
     }
 
 }

@@ -7,13 +7,33 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_NAME_A;
+import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
+import static seedu.address.testutil.TypicalAssignments.SCIENCE_ASSIGNMENT_GRADED;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentName;
+import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.testutil.StudentBuilder;
 public class StudentTest {
+
+    private Student student;
+
+    @BeforeEach
+    void setUp() {
+        student = new StudentBuilder(HUGH).build();
+
+        // Adding assignments to the student
+        student.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
+        student.addAssignment(SCIENCE_ASSIGNMENT_GRADED);
+    }
 
     @Test
     public void isSameStudent() {
@@ -77,4 +97,30 @@ public class StudentTest {
                 + ", studentNumber=" + HUGH.getStudentNumber() + "}";
         assertEquals(expected, HUGH.toString());
     }
+
+    @Test
+    void deleteAssignment_validAssignment_success() throws CommandException {
+        AssignmentQuery query = new AssignmentQuery(ASSIGNMENT_NAME_A, null, null, null, null);
+        assertEquals(MATH_ASSIGNMENT_SUBMITTED, student.deleteAssignment(query));
+    }
+
+    @Test
+    void deleteAssignment_nonExistentAssignment_returnsNull() throws CommandException {
+        // Create an assignment query that does not match any existing assignment
+        AssignmentQuery query = new AssignmentQuery(new AssignmentName("Nonexistent Assignment"),
+                null, null, null, null);
+
+        // Execute delete
+        Assignment deletedAssignment = student.deleteAssignment(query);
+
+        // Verify that the method returns null when the assignment does not exist
+        assertEquals(null, deletedAssignment);
+    }
+
+    @Test
+    void deleteAssignment_nullQuery_throwsException() {
+        // Verify that passing a null query throws an exception
+        assertThrows(NullPointerException.class, () -> student.deleteAssignment(null));
+    }
+
 }

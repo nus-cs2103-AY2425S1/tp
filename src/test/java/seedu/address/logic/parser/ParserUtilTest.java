@@ -242,7 +242,7 @@ public class ParserUtilTest {
     @Test
     public void parseStatuses_validStatuses_success() throws Exception {
         List<String> statuses = Arrays.asList("Y", "N", "y", "n");
-        List<Status> parsedStatuses = ParserUtil.parseStatuses(statuses);
+        List<Status> parsedStatuses = ParserUtil.parseStatuses(statuses, 4);
 
         assertEquals(4, parsedStatuses.size());
         assertEquals(Status.State.Y, parsedStatuses.get(0).status);
@@ -254,7 +254,7 @@ public class ParserUtilTest {
     @Test
     public void parseStatuses_invalidStatuses_throwsParseException() {
         List<String> statuses = Arrays.asList("Y", "maybe");
-        assertThrows(ParseException.class, () -> ParserUtil.parseStatuses(statuses));
+        assertThrows(ParseException.class, () -> ParserUtil.parseStatuses(statuses, 2));
     }
 
     @Test
