@@ -1,12 +1,16 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventManager;
+import seedu.address.model.event.ReadOnlyEventManager;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -60,7 +64,49 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
+    /**
+     * Returns a sample list of {@code Event} objects.
+     */
+    public static Event[] getSampleEvents() {
+        Person[] samplePersons = getSamplePersons(); // Reuse sample persons for the event participants
 
+        return new Event[] {
+            new Event("Tech Conference 2024",
+                    getPersonSet(samplePersons[0], samplePersons[1]),
+                    getPersonSet(samplePersons[2]),
+                    getPersonSet(samplePersons[3]),
+                    getPersonSet(samplePersons[4])
+            ),
+            new Event("Art Exhibition 2024",
+                    getPersonSet(samplePersons[1]),
+                    getPersonSet(samplePersons[0], samplePersons[2]),
+                    getPersonSet(samplePersons[3]),
+                    getPersonSet(samplePersons[4], samplePersons[5])
+            )
+        };
+    }
+
+    /**
+     * Helper method that returns a set of persons.
+     */
+    public static Set<Person> getPersonSet(Person... persons) {
+        Set<Person> personSet = new HashSet<>();
+        for (Person person : persons) {
+            personSet.add(person);
+        }
+        return personSet;
+    }
+
+    /**
+     * Returns a sample {@code EventManager} populated with sample events.
+     */
+    public static ReadOnlyEventManager getSampleEventManager() {
+        EventManager sampleEventManager = new EventManager();
+        for (Event sampleEvent : getSampleEvents()) {
+            sampleEventManager.addEvent(sampleEvent);
+        }
+        return sampleEventManager;
+    }
 
     /**
      * Returns a role set containing the list of strings given.
