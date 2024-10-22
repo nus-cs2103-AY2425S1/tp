@@ -56,7 +56,7 @@ public class Messages {
                 .append("; Payment: ")
                 .append(person.getPayment())
                 .append("; Attendance: ")
-                .append(person.getAttendance())
+                .append(person.getParticipation())
                 .append("; Tags: ");
         person.getTags().forEach(builder::append);
         return builder.toString();
