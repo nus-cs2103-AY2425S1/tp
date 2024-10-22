@@ -178,19 +178,34 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addWedding(Wedding wedding) {}
+        public void addWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void removeWedding(Wedding wedding) {}
+        public boolean hasWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void setWedding(Wedding wedding, Wedding newWedding){}
+        public void removeWedding(Wedding wedding) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void assignPerson(Wedding wedding, Person person){}
+        public void setWedding(Wedding wedding, Wedding newWedding) {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
-        public void unassignPerson(Wedding wedding, Person person) {}
+        public void assignPerson(Wedding wedding, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void unassignPerson(Wedding wedding, Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
