@@ -7,6 +7,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -23,6 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATEOFLASTVISIT = "01-01-2024";
+    public static final String DEFAULT_EMERGENCY_CONTACT = "97978293";
 
     private Name name;
     private Phone phone;
@@ -30,6 +32,7 @@ public class PersonBuilder {
     private Optional<Address> address;
     private Set<Tag> tags;
     private Optional<DateOfLastVisit> dateOfLastVisit;
+    private Optional<EmergencyContact> emergencyContact;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -41,6 +44,7 @@ public class PersonBuilder {
         address = Optional.of(new Address(DEFAULT_ADDRESS));
         tags = new HashSet<>();
         dateOfLastVisit = Optional.of(new DateOfLastVisit(DEFAULT_DATEOFLASTVISIT));
+        emergencyContact = Optional.of(new EmergencyContact(DEFAULT_EMERGENCY_CONTACT));
     }
 
     /**
@@ -53,6 +57,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         dateOfLastVisit = personToCopy.getDateOfLastVisit();
+        emergencyContact = personToCopy.getEmergencyContact();
     }
 
     /**
@@ -66,7 +71,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -127,8 +132,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmergencyContact(String emergencyContact) {
+        this.emergencyContact = Optional.of(new EmergencyContact(emergencyContact));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building to {@code Optional.empty}.
+     */
+    public PersonBuilder withEmergencyContact() {
+        this.emergencyContact = Optional.empty();
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, dateOfLastVisit);
+        return new Person(name, phone, email, address, tags, dateOfLastVisit, emergencyContact);
     }
 
 }
