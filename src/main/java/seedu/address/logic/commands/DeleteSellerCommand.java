@@ -34,7 +34,7 @@ public class DeleteSellerCommand extends DeleteClientCommand {
     /**
      * Constructs a {@code DeleteSellerCommand} with the specified phone number.
      *
-     * @param phoneNumber The phone number of the seler to delete.
+     * @param phoneNumber The phone number of the seller to delete.
      */
     public DeleteSellerCommand(Phone phoneNumber) {
         super(phoneNumber);
