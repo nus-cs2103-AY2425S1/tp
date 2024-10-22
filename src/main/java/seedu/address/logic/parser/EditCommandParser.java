@@ -106,9 +106,6 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setHealthRecord(ParserUtil.parseHealthRecord(
                     argMultimap.getValue(PREFIX_HEALTHRECORD).get()));
         }
-        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            editPersonDescriptor.setAppts(ParserUtil.parseAppts(argMultimap.getAllValues(PREFIX_HEALTHRECORD)));
-        }
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
