@@ -109,14 +109,12 @@ public class UniquePersonList implements Iterable<Person> {
         Comparator<Person> comparator;
         if (toSortBySchedule) {
             comparator = Comparator.comparing((Person person) -> {
-                        Schedule schedule = person.getSchedule();
-                        // Assign priority
-                        return (schedule.date == null && schedule.time == null) ? 1 : 0;
-                    })
-                    .thenComparing((Person person) -> person.getSchedule().date,
-                            Comparator.nullsLast(Comparator.naturalOrder()))
-                    .thenComparing((Person person) -> person.getSchedule().time,
-                            Comparator.nullsLast(Comparator.naturalOrder()));
+                Schedule schedule = person.getSchedule();
+                return (schedule.date == null && schedule.time == null) ? 1 : 0;
+            }).thenComparing((Person person) -> person.getSchedule().date,
+                    Comparator.nullsLast(Comparator.naturalOrder()))
+            .thenComparing((Person person) -> person.getSchedule().time,
+                    Comparator.nullsLast(Comparator.naturalOrder()));
 
         } else {
             comparator = Comparator.comparing(person -> person.getName().fullName);
