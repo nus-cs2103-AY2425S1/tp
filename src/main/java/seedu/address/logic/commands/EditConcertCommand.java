@@ -38,8 +38,8 @@ public class EditConcertCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS" + "] "
             + "[" + PREFIX_DATE + "DATE" + "]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_NAME + "Coachella"
-            + PREFIX_ADDRESS + "1 Stadium drive"
+            + PREFIX_NAME + "Coachella "
+            + PREFIX_ADDRESS + "1 Stadium drive "
             + PREFIX_DATE + "2024-10-11 2200";
 
     public static final String MESSAGE_EDIT_CONCERT_SUCCESS = "Edited Concert: %1$s";
@@ -50,7 +50,7 @@ public class EditConcertCommand extends Command {
     private final EditConcertDescriptor editConcertDescriptor;
 
     /**
-     * @param index of the conert to edit.
+     * @param index of the concert to edit.
      * @param editConcertDescriptor details to edit the concert with.
      */
     public EditConcertCommand(Index index, EditConcertDescriptor editConcertDescriptor) {
@@ -90,7 +90,7 @@ public class EditConcertCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Cocnert} with the details of {@code concertToEdit}
+     * Creates and returns a {@code Concert} with the details of {@code concertToEdit}
      * edited with the {@code editConcertDescriptor}
      * @param concertToEdit
      * @param editConcertDescriptor
@@ -131,7 +131,7 @@ public class EditConcertCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the concert with. Each non-empty field value will repalce the
+     * Stores the details to edit the concert with. Each non-empty field value will replace the
      * corresponding field value of the concert.
      */
     public static class EditConcertDescriptor {
