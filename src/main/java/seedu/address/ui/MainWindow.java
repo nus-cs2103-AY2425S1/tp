@@ -170,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Handles the view for 'findnric' command by displaying a comprehensive result.
      */
-    private void handleFindNric() {
+    private void handleFindPerson() {
         personListPanelPlaceholder.setVisible(false);
         personListPanelPlaceholder.setManaged(false);
         FindPersonPanel findPersonPanel = new FindPersonPanel(logic.getFilteredPersonList());
@@ -208,8 +208,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandText.contains("findnric")) {
-                handleFindNric();
+            if (commandResult.isFindPerson()) {
+                handleFindPerson();
             } else {
                 resetToOriginal();
             }

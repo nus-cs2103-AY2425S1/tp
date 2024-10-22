@@ -6,33 +6,39 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="10" alignment="TOP_LEFT" fx:id="FindPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox spacing="10" alignment="TOP_LEFT" fx:id="FindPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@FindPersonCardStyle.css">
   <padding>
     <Insets top="20" right="20" bottom="20" left="20" />
   </padding>
 
-  <Label fx:id="name" text="/$first" style="-fx-font-size: 30px; -fx-font-weight: bold;" />
+  <!-- Header label -->
+  <Label fx:id="name" text="/$first" styleClass="header-label" />
 
+  <GridPane hgap="20" vgap="10" styleClass="grid-pane">
+    <!-- Static labels for each row -->
+    <Label text="Index:" styleClass="field-label" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+    <Label text="NRIC:" styleClass="field-label" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+    <Label text="Role:" styleClass="field-label" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+    <Label text="Address:" styleClass="field-label" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+    <Label text="Phone:" styleClass="field-label" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+    <Label text="Email:" styleClass="field-label" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+    <Label text="Tags:" styleClass="field-label" GridPane.rowIndex="6" GridPane.columnIndex="0" />
+    <Label text="Caregivers:" styleClass="field-label" GridPane.rowIndex="7" GridPane.columnIndex="0" />
+    <Label text="Patients:" styleClass="field-label" GridPane.rowIndex="8" GridPane.columnIndex="0" />
+    <Label text="Appointments:" styleClass="field-label" GridPane.rowIndex="9" GridPane.columnIndex="0" />
+    <Label text="Notes:" styleClass="field-label" GridPane.rowIndex="10" GridPane.columnIndex="0" />
 
-  <GridPane hgap="20" vgap="10">
-    <Label text="Index:" style="-fx-font-weight: bold;" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-    <Label text="NRIC:" style="-fx-font-weight: bold;" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-    <Label text="Role:" style="-fx-font-weight: bold;" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-    <Label text="Address:" style="-fx-font-weight: bold;" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-    <Label text="Phone:" style="-fx-font-weight: bold;" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-    <Label text="Email:" style="-fx-font-weight: bold;" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-    <Label text="Tags:" style="-fx-font-weight: bold;" GridPane.rowIndex="6" GridPane.columnIndex="0" />
-    <Label text="Caregivers:" style="-fx-font-weight: bold;" GridPane.rowIndex="7" GridPane.columnIndex="0" />
-    <Label text="Patients:" style="-fx-font-weight: bold;" GridPane.rowIndex="8" GridPane.columnIndex="0" />
-
-    <Label fx:id="id" text="/$id" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-    <Label fx:id="nric" text="/$nric" GridPane.rowIndex="1" GridPane.columnIndex="1" />
-    <FlowPane fx:id="roles" GridPane.rowIndex="8" GridPane.columnIndex="1" />
-    <Label fx:id="address" text="/$address" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-    <Label fx:id="phone" text="\$phone" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-    <Label fx:id="email" text="\$email" GridPane.rowIndex="5" GridPane.columnIndex="1" />
-    <FlowPane fx:id="tags" GridPane.rowIndex="6" GridPane.columnIndex="1" />
-    <FlowPane fx:id="caregivers" GridPane.rowIndex="7" GridPane.columnIndex="1" />
-    <FlowPane fx:id="patients" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+    <!-- Dynamic labels for values -->
+    <Label fx:id="id" text="\$id" styleClass="value-label" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+    <Label fx:id="nric" text="\$nric" styleClass="value-label" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+    <FlowPane fx:id="roles" styleClass="roles-pane" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+    <Label fx:id="address" text="\$address" styleClass="value-label" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+    <Label fx:id="phone" text="\$phone" styleClass="value-label" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+    <Label fx:id="email" text="\$email" styleClass="value-label" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+    <FlowPane fx:id="tags" styleClass="tags-pane" GridPane.rowIndex="6" GridPane.columnIndex="1" />
+    <FlowPane fx:id="caregivers" styleClass="caregivers-pane" GridPane.rowIndex="7" GridPane.columnIndex="1" />
+    <FlowPane fx:id="patients" styleClass="patients-pane" GridPane.rowIndex="8" GridPane.columnIndex="1" />
+    <VBox fx:id="appointments" styleClass="appointments-pane" GridPane.rowIndex="9" GridPane.columnIndex="1" />
+    <VBox fx:id="notes" styleClass="notes-pane" GridPane.rowIndex="10" GridPane.columnIndex="1" />
   </GridPane>
 </VBox>

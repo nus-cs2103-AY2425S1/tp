@@ -5,6 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import seedu.address.model.person.Person;
 
 import java.util.Comparator;
@@ -46,6 +49,10 @@ public class FindPersonCard extends UiPart<Region> {
     private FlowPane caregivers;
     @FXML
     private FlowPane patients;
+    @FXML
+    private VBox appointments;
+    @FXML
+    private VBox notes;
 
 
     /**
@@ -70,5 +77,21 @@ public class FindPersonCard extends UiPart<Region> {
         person.getRoles().stream()
                 .sorted(Comparator.comparing(role -> role.name()))
                 .forEach(role -> roles.getChildren().add(new Label(role.name())));
+        person.getNotes().stream()
+                .forEach(note -> {
+                    Label noteLabel = new Label("- " + note.getContent());
+                    noteLabel.setWrapText(true);
+                    noteLabel.setMaxWidth(500);
+                    noteLabel.getStyleClass().add("noteLabel");
+                    notes.getChildren().add(noteLabel);
+                });
+        person.getAppointments().stream()
+                .forEach(appointment -> {
+                    Label appointmentLabel = new Label( appointment.getName() + " From: " +
+                            appointment.getStartTime() + " To: " + appointment.getEndTime());
+                    appointmentLabel.getStyleClass().add("appointmentLabel");
+                    appointments.getChildren().add(appointmentLabel);
+                });
+
     }
 }
