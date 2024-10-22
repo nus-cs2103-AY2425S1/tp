@@ -13,7 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.Undoable;
+import seedu.address.logic.commands.ConcreteCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final Stack<Undoable> undoStack;
+    private final Stack<ConcreteCommand> undoStack;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -159,7 +159,7 @@ public class ModelManager implements Model {
     //=========== Undo/Redo ================================================================================
 
     @Override
-    public void pushUndoableCommand(Undoable command) {
+    public void pushConcreteCommand(ConcreteCommand command) {
         undoStack.push(command);
     }
 
@@ -168,7 +168,7 @@ public class ModelManager implements Model {
         if (undoStack.isEmpty()) {
             return null;
         }
-        Undoable command = undoStack.pop();
+        ConcreteCommand command = undoStack.pop();
         return command.undo(this);
     }
 }

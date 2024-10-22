@@ -177,7 +177,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void pushUndoableCommand(Undoable command) {
+        public void pushConcreteCommand(ConcreteCommand command) {
             throw new AssertionError("This method should not be called.");
         }
 

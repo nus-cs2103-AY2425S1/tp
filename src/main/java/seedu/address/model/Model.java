@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.Undoable;
+import seedu.address.logic.commands.ConcreteCommand;
 import seedu.address.model.person.Person;
 
 /**
@@ -93,12 +93,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Pushes an undoable command to the undo stack.
+     * Pushes a concrete command to the undo stack.
      */
-    void pushUndoableCommand(Undoable command);
+    void pushConcreteCommand(ConcreteCommand command);
 
     /**
-     * Undoes the previous undoable command.
+     * Undoes the most recent concrete command.
      */
     CommandResult undo();
 }

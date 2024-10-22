@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using its displayed index from the address book.
  */
-public class DeleteCommand extends Command implements Undoable {
+public class DeleteCommand extends ConcreteCommand {
 
     public static final String COMMAND_WORD = "delete";
 
