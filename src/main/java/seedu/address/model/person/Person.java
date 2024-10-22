@@ -31,6 +31,8 @@ public class Person {
     // Property details
     private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
     private ObservableList<Property> buyingProperties = FXCollections.observableArrayList();
+
+
     /**
      * Every field must be present and not null.
      */
