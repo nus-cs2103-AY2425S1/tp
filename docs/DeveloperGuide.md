@@ -645,4 +645,63 @@ testers are expected to do more *exploratory* testing.
    7. Other incorrect find commands to try: `find aLL john`, `find pH john`, `find a`, `...`<br>
             Expected: Similar to previous points. If the format is incorrect, the command is recognised but the action is invalid and a specific status message is shown.
 
+### Demoting an employee
 
+1. Demoting an employee while all employees are being shown
+    
+   Prerequisites: List all employees using the `list e` command. Employees are in the list.
+   
+    1. Test case: `demote 1`<br>
+      Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
+
+    2. Test case: `demote 0`<br> 
+     Expected: Invalid index found. No employees demoted. Error details shown in the status message.
+
+    3. Test case: `Demote 1`<br>
+     Excepted: Unrecognised command. Error is due to capitalization of `Demote` instead of `demote`. Capitalisation matters.
+
+    4. Test case: `demote`<br>
+     Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+    5. Other incorrect demote commands to try: `demote x`, `demote 1 2` (where x is larger than the list size)<br>
+       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+
+2. Demoting a person while no employees are being shown (due to having 0 entries or only potential hire entries)
+
+    1. Test case: `demote 1`<br>
+     Expected: No employees are demoted. Error details shown in the status message
+
+### Promoting a potential hire
+
+1. Promoting a potential hire while all potential hires are being shown
+
+   Prerequisites: List all potential hire using the `list ph` command. Potential hires are in the list.
+
+    1. Test case: `promote 1 2024-12-20`<br>
+       Expected: First person in the list is promoted to an employee. Details of the promoted potential hire is shown in the status message.
+
+    2. Test case: `promote 0 2024-12-20`<br>
+       Expected: Invalid index found. No potential hire promoted. Error details shown in the status message.
+
+    3. Test case: `Promote 1 2024-12-20`<br>
+       Excepted: Unrecognised command. Error is due to capitalization of `Promote` instead of `promote`. Capitalisation matters.
+
+    4. Test case: `promote 1`<br>
+       Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+    5. Test case: `promote`<br>
+      Expected: There are missing parameters. A guide on how to use the command will be shown in the status message.
+
+    6. Test case: `promote 0 20-12-2024`<br>
+      Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
+
+    7. Test case: `promote 0 2024-20-12`<br>
+      Expected: Invalid date format. No potential hire promoted. Error details shown in the status message.
+
+    8. Other incorrect demote commands to try: `promote x 2024-12-20`, `promote 1 2` (where x is larger than the list size)<br>
+       Expected: Similar to previous points. If the syntax is incorrect, the command is not recognised. Otherwise, the command is recognised but the action is invalid and a specific status message is shown.
+
+2. Promoting a person while no potential hires are being shown (due to having 0 entries or only employee entries)
+
+    1. Test case: `promote 1 2024-12-20`<br>
+       Expected: No potential hires are promoted. Error details shown in the status message
