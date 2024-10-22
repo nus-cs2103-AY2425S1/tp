@@ -13,7 +13,7 @@ import seedu.edulog.model.student.Name;
 import seedu.edulog.model.student.Student;
 
 /**
- * Marks a student identified using it's displayed index from the edulog book.
+ * Marks a student identified using its displayed name from the edulog book.
  */
 public class MarkNameCommand extends UnmarkCommand {
 
@@ -40,9 +40,9 @@ public class MarkNameCommand extends UnmarkCommand {
          * Hence, we can directly access the student using studentId.
          */
         int studentId = studentNames.indexOf(targetName);
-        Student studentToUnmark = lastShownList.get(studentId);
-        model.unmarkStudent(studentToUnmark);
-        return new CommandResult(String.format(MESSAGE_MARK_STUDENT_SUCCESS, Messages.format(studentToUnmark)));
+        Student studentToMark = lastShownList.get(studentId);
+        model.markStudent(studentToMark);
+        return new CommandResult(String.format(MESSAGE_MARK_STUDENT_SUCCESS, Messages.format(studentToMark)));
     }
 
     @Override
