@@ -135,7 +135,6 @@ public class PersonBuilder {
         this.notes = SampleDataUtil.getSampleNotes(note);
         return this;
     }
-       
     /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      * A variable number of arguments can be provided.
@@ -147,6 +146,11 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Returns a {@code Person} object created from the various fields previously set.
+     *
+     * @return a {@code Person} object created from the various fields previously set.
+     */
     public Person build() {
         Person temp = new Person(name, nric, phone, email, address, tags, roles);
         for (Note note: notes) {
