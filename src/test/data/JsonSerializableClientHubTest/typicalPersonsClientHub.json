@@ -49,5 +49,12 @@
     "address" : "4th street",
     "clientTypes" : [ ],
     "description" : "Likes to eat a lot"
-  } ]
+  }, {
+    "name" : "Alice Potter",
+    "phone" : "9992442",
+    "email" : "APotter@example.com",
+    "address" : "china",
+    "clientTypes" : [ ],
+    "description" : "Likes to eat a lot"
+  }]
 }

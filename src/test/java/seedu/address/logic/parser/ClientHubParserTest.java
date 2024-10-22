@@ -28,12 +28,14 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneBeginsWithKeywordPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalPersons;
 
 public class ClientHubParserTest {
 
@@ -62,15 +64,19 @@ public class ClientHubParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + TypicalPersons.ALICE.getName().fullName);
+        assertEquals(new DeleteCommand(new
+                NameContainsKeywordsDeletePredicate(
+                        Arrays.asList(TypicalPersons.ALICE.getName().fullName.split("\\s+")))), command);
     }
 
     @Test
     public void parseShortCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.SHORT_COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.SHORT_COMMAND_WORD + " " + TypicalPersons.ALICE.getName().fullName);
+        assertEquals(new DeleteCommand(new
+                NameContainsKeywordsDeletePredicate(
+                Arrays.asList(TypicalPersons.ALICE.getName().fullName.split("\\s+")))), command);
     }
 
     @Test

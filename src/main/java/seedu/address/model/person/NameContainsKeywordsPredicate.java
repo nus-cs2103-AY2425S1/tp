@@ -27,6 +27,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
                                     .anyMatch(part -> part.toLowerCase().startsWith(keyword.toLowerCase())));
         }
     }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
