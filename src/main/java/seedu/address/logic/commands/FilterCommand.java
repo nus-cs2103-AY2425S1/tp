@@ -46,8 +46,8 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         model.updateFilteredPersonList(person ->
-                tags.size() <= person.getTags().size() &&
-                        person.getTags().containsAll(tags)
+                tags.size() <= person.getTags().size()
+                        && person.getTags().containsAll(tags)
         );
         String filteredTags = tags.stream()
                 .map(Tag::getTagName)
