@@ -65,6 +65,15 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
+    /**
+     * Adds the user interface elements for the public addresses of the given person.
+     *
+     * This method iterates through the public address entries of the person. For each non-empty entry,
+     * it creates a label displaying the network name followed by each public address indented by two spaces.
+     * The labels are then added to the `publicAddress` Pane.
+     *
+     * @param person The person whose public addresses to display.
+     */
     public void addPublicAddressUI(Person person) {
         person.getPublicAddresses().entrySet().stream()
                 .filter(entry -> !entry.getValue().isEmpty())
