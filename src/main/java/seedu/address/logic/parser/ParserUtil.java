@@ -2,12 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddAppointmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -170,4 +175,25 @@ public class ParserUtil {
         }
         return roleSet;
     }
+
+    public static LocalDate parseDate(String input) throws ParseException {
+        String trimmedInput = input.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            return LocalDate.parse(trimmedInput, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(AddAppointmentCommand.MESSAGE_INVALID_DATE);
+        }
+    }
+
+    public static LocalTime parseTime(String input) throws ParseException {
+        String trimmedInput = input.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        try {
+            return LocalTime.parse(trimmedInput, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(AddAppointmentCommand.MESSAGE_INVALID_TIME);
+        }
+    }
+
 }
