@@ -46,6 +46,8 @@ public class TagCommandParser implements Parser<TagCommand> {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * If {@code tags} is an empty string, it will be parsed into a
+     * {@code Set<Tag>} containing zero tags.
      */
     private Optional<Set<Tag>> parseTagsForAdd(Collection<String> tags) throws ParseException {
         assert tags != null;
@@ -53,7 +55,13 @@ public class TagCommandParser implements Parser<TagCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+
+        for (String tag : tags) {
+            if (tag.trim().isEmpty()) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        }
+
+        return Optional.of(ParserUtil.parseTags(tags));
     }
 }
