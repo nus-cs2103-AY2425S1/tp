@@ -164,6 +164,7 @@ Format: `pay INDEX hr/HOURS_PAID`
 
 Example: 
 * `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
+    ![payResult.png](images/payResult.png)
 
 <box type="important" header="#### Constraints">
 
