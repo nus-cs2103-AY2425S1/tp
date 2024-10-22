@@ -25,8 +25,8 @@ public class WithdrawCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Withdraws the application identified by the index number used in the displayed application list.\n"
             + "Parameters: " + PREFIX_COMPANY_INDEX + "COMPANY_INDEX(must be a positive integer) "
-            + PREFIX_APP_INDEX +  "APPLICATION_INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1 1";
+            + PREFIX_APP_INDEX + "APPLICATION_INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " c/1 app/1";
 
     public static final String MESSAGE_WITHDRAW_APPLICATION_SUCCESS = "Withdrawn application: %1$s";
 
