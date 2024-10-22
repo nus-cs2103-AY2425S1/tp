@@ -28,6 +28,10 @@
             </HBox>
             <Label fx:id="typeLabel" text="[meeting]" styleClass="cell_small_label" />
             <Label fx:id="meetingDate" styleClass="cell_small_label" />
+            <Label fx:id="buyer" styleClass="cell_small_label" />
+            <Label fx:id="seller" styleClass="cell_small_label" />
+            <Label fx:id="type" styleClass="cell_small_label" />
+            <Label fx:id="postalCode" styleClass="cell_small_label" />
         </VBox>
     </GridPane>
 </HBox>

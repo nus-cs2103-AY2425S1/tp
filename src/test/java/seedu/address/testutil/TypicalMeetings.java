@@ -14,20 +14,40 @@ public class TypicalMeetings {
 
     public static final Meeting MEETING_ADMIRALTY = new MeetingBuilder()
             .withMeetingTitle("Admiralty HDB Client Viewing")
-            .withMeetingDate("31-10-2024").build();
+            .withMeetingDate("31-10-2024")
+            .withBuyer("Amy Bee")
+            .withSeller("Bob Choo")
+            .withType("CONDO")
+            .withPostalCode("654321")
+            .build();
 
     public static final Meeting MEETING_BEDOK = new MeetingBuilder()
             .withMeetingTitle("Bedok Villa Finalizing Purchase Agreement")
-            .withMeetingDate("11-06-2024").build();
+            .withMeetingDate("11-06-2024")
+            .withBuyer("grace")
+            .withSeller("vanessa")
+            .withType("hdb")
+            .withPostalCode("123456")
+            .build();
 
     // Manually added
     public static final Meeting MEETING_CLEMENTI = new MeetingBuilder()
             .withMeetingTitle("Clementi Apartment Lease Agreement Discussion")
-            .withMeetingDate("01-01-2025").build();
+            .withMeetingDate("01-01-2025")
+            .withBuyer("bobby")
+            .withSeller("alice")
+            .withType("hdb")
+            .withPostalCode("654321")
+            .build();
 
     public static final Meeting MEETING_DOVER = new MeetingBuilder()
             .withMeetingTitle("Dover condo client viewing")
-            .withMeetingDate("02-01-2025").build();
+            .withMeetingDate("02-01-2025")
+            .withBuyer("bobby")
+            .withSeller("alice")
+            .withType("hdb")
+            .withPostalCode("890123")
+            .build();
     private TypicalMeetings() {} // prevents instantiation
     /**
      * Returns an {@code MeetingBook} with all the typical persons.

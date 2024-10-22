@@ -2,7 +2,11 @@
   "meetings": [
     {
       "meetingTitle": "Invalid Meeting Date",
-      "meetingDate": "06/02/24"
+      "meetingDate": "06/02/24",
+      "buyer": "bob",
+      "seller": "amy",
+      "type": "hdb",
+      "postalCode": "654321"
     }
   ]
 }

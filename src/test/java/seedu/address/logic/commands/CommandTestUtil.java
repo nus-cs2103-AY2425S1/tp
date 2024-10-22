@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KEY;
@@ -14,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSTALCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNITNUMBER;
@@ -108,6 +110,10 @@ public class CommandTestUtil {
             + VALID_MEETING_TITLE_ADMIRALTY;
     public static final String MEETING_DATE_DESC_ADMIRALTY = " " + PREFIX_MEETING_DATE
             + VALID_MEETING_DATE_ADMIRALTY;
+    public static final String MEETING_BUYER = " " + PREFIX_BUYER + VALID_NAME_AMY;
+    public static final String MEETING_SELLER = " " + PREFIX_SELLER + VALID_NAME_BOB;
+    public static final String TYPE = " " + PREFIX_TYPE + VALID_TYPE_CONDO;
+    public static final String POSTALCODE = " " + PREFIX_POSTALCODE + VALID_POSTALCODE_ADMIRALTY;
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

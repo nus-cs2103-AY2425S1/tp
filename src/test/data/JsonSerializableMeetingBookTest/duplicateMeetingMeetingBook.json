@@ -2,11 +2,19 @@
   "meetings": [
     {
       "meetingTitle": "Admiralty HDB Client Viewing",
-      "meetingDate": "31-10-2024"
+      "meetingDate": "31-10-2024",
+      "buyer": "bob",
+      "seller": "amy",
+      "type": "hdb",
+      "postalCode": "654321"
     },
     {
       "meetingTitle": "Admiralty HDB Client Viewing",
-      "meetingDate": "31-10-2024"
+      "meetingDate": "31-10-2024",
+      "buyer": "bob",
+      "seller": "amy",
+      "type": "hdb",
+      "postalCode": "654321"
     }
   ]
 }
