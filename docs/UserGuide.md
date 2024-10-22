@@ -13,27 +13,26 @@ MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appo
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
-
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` 
+   command to run the application.asd
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+    {: .alert .alert-secondary}
+    > A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
+    > 
+    > ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
+   open the help window.
 
-   * `list` : Lists all contacts.
-
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
+    {: .alert .alert-secondary}
+   > Some example commands you can try:
+   > * `list` : Lists all contacts.
+   > * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` tothe Address Book.
+   > * `delete 3` : Deletes the 3rd contact shown in the current list.
+   > * `clear` : Deletes all contacts.
+   > * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -64,23 +63,23 @@ the constraints of each parameter when used in a command.
 [Back to Table of Contents](#table-of-contents)
 
 {: .alert .alert-info}
-> **:information_source: Notes about the command format:**<br>
+> **:information_source: Notes about the command format:**
 >
-> * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+> * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 > e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
-> * Items in square brackets are optional.<br>
+> * Items in square brackets are optional.
 >  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
 >
-> * Items with `…`​ after them can be used multiple times.<br>
->  e.g. `c/CONDITION…​` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
+> * Items with `…` after them can be used multiple times.
+>  e.g. `c/CONDITION…` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
 >
-> * Parameters can be in any order.<br>
+> * Parameters can be in any order.
 > e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 >
-> * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+> * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 > e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
-> * The command name and prefixes are case-sensitive.<br>
+> * The command name and prefixes are case-sensitive.
 > e.g. `add` is not the same as `Add`, `c/` is not the same as `C/`.
 >
 > * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -180,7 +179,9 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Back to Table of Contents](#table-of-contents)
@@ -236,25 +237,25 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 ## FAQ
 
-### **Q**: How do I transfer my data to another Computer?<br>
- - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.<br>
+#### **Q**: How do I transfer my data to another Computer?
+ - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.
 
-### **Q**: How do we open the command terminal?<br>
- - **A**: Windows - Press `Win + R`, type `cmd` and press `Enter`.<br>
- - **A**: Mac - Press `Cmd + Space`, type `terminal` and press `Enter`.<br>
- - **A**: Linux - Press `Ctrl + Alt + T` to open the command terminal.<br>
+#### **Q**: How do we open the command terminal?
+ - **A**: Windows - Press `Win + R`, type `cmd` and press `Enter`.
+ - **A**: Mac - Press `Cmd + Space`, type `terminal` and press `Enter`.
+ - **A**: Linux - Press `Ctrl + Alt + T` to open the command terminal.
 
-### **Q**: How to install Java 17<br>
- - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).<br>
+#### **Q**: How to install Java 17
+ - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
 
-### **Q**: How to know if you have Java 17<br>
- - **A**: Open your command terminal and enter `java --version`. The first line should display `java` followed by the `version number`.<br>
+#### **Q**: How to know if you have Java 17
+ - **A**: Open your command terminal and enter `java --version`. The first line should display `java` followed by the `version number`.
 
-### **Q**: Is there a limit to the number of patients/appointments we can add?<br>
- - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.<br>
+#### **Q**: Is there a limit to the number of patients/appointments we can add?
+ - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.
 
-### **Q**: Do you support non-English inputs?<br>
- - **A**: We do not support non-English inputs, but we are working on it!<br>
+#### **Q**: Do you support non-English inputs?
+ - **A**: We do not support non-English inputs, but we are working on it!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -267,12 +268,12 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+| Action     | Format                                                                | Examples                                                                                                       |
+|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
+| **Clear**  | `clear`                                                               |                                                                                                                |
+| **Delete** | `delete INDEX`                                                        | `delete 3`                                                                                                     |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` | `edit 2 n/James Lee e/jameslee@example.com`                                                                    |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
+| **List**   | `list`                                                                |                                                                                                                |
+| **Help**   | `help`                                                                |                                                                                                                |
