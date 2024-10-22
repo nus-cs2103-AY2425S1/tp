@@ -37,14 +37,16 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        /*
         for (Person person : filteredPersons) {
-            if (person instanceof Doctor) {
+            if (person.getRole().equals("doctor")) {
                 Doctor.addDoctors((Doctor) person);
             }
-            if (person instanceof Patient) {
-                Patient.addPatient((Patient) person);
+            if (person.getRole().equals("patient")) {
+                Patient.addPatient(person);
             }
         }
+        */
     }
 
     public ModelManager() {
@@ -142,7 +144,8 @@ public class ModelManager implements Model {
     public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
         Patient patient = null;
         for (Person person : allPersons) {
-            if (person.getId().equals(id)) {
+            if (person.getId().getIdValue() == id.getIdValue()) {
+                System.out.println(person.getName());
                 patient = (Patient) person;
                 break;
             }
@@ -154,7 +157,7 @@ public class ModelManager implements Model {
     public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
         Doctor doctor = null;
         for (Person person : allPersons) {
-            if (person.getId().equals(id)) {
+            if (person.getId().getIdValue() == id.getIdValue()) {
                 doctor = (Doctor) person;
                 break;
             }

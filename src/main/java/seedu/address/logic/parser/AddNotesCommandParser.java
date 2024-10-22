@@ -36,6 +36,7 @@ public class AddNotesCommandParser implements Parser<AddNotesCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ID, PREFIX_REMARK);
         try {
             patientId = ParserUtil.parsePatientId(argMultimap.getAllValues(PREFIX_ID).get(0));
+            System.out.println(patientId.getIdValue());
         } catch (InvalidIdException e) {
             throw new ParseException(MESSAGE_INVALID_ID, e);
         }

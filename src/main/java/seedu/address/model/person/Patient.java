@@ -66,7 +66,6 @@ public class Patient extends Person {
      */
     public static Patient getPatientWithId(String id) {
         ArrayList<Patient> allPatients = getPatients();
-        System.out.println(allPatients);
         for (Patient patient : allPatients) {
             if (String.valueOf(patient.getId().getIdValue()).equals(id)) {
                 return patient;

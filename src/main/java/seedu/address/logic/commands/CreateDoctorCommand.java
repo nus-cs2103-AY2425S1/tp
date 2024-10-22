@@ -53,6 +53,7 @@ public class CreateDoctorCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        Doctor.addDoctors(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getId().getIdValue(), Messages.format(toAdd)));
     }
 
