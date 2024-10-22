@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-// import java.util.ArrayList;
-// import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.volunteer.Date;
@@ -10,10 +7,7 @@ import seedu.address.model.volunteer.Email;
 import seedu.address.model.volunteer.Name;
 import seedu.address.model.volunteer.Phone;
 import seedu.address.model.volunteer.Time;
-// import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
-// import seedu.address.model.volunteer.VolunteerInvolvedInEventPredicate;
-// import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A test utility class to help with building Volunteer objects.
