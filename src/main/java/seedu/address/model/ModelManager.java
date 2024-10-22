@@ -130,7 +130,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);  // Filter the list based on the predicate
+        filteredPersons.setPredicate(predicate); // Filter the list based on the predicate
     }
 
     /**

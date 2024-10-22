@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -61,7 +61,7 @@ public class SortCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
 
         // Ensure the persons are sorted by name
-        assertTrue(model.getFilteredPersonList().get(0).equals(ALICE));  // ALICE should be first alphabetically
+        assertTrue(model.getFilteredPersonList().get(0).equals(ALICE)); // ALICE should be first alphabetically
         assertTrue(model.getFilteredPersonList().get(1).equals(BENSON)); // BENSON should be second alphabetically
         assertTrue(model.getFilteredPersonList().get(6).equals(GEORGE)); // GEORGE should be last alphabetically
     }
@@ -79,7 +79,7 @@ public class SortCommandTest {
 
         // Ensure the persons are sorted by deadline
         assertTrue(model.getFilteredPersonList().get(0).equals(GEORGE)); // GEORGE has the earliest deadline
-        assertTrue(model.getFilteredPersonList().get(1).equals(FIONA));  // FIONA should be second
+        assertTrue(model.getFilteredPersonList().get(1).equals(FIONA)); // FIONA should be second
         assertTrue(model.getFilteredPersonList().get(6).equals(DANIEL)); // DANIEL should be last
     }
 

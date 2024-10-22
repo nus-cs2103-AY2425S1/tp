@@ -56,23 +56,23 @@ public class SortCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortByKeyword));
     }
 
-        @Override
-        public boolean equals(Object other) {
-            if (other == this) {
-                return true;
-            }
-
-            if (!(other instanceof SortCommand)) {
-                return false;
-            }
-
-            SortCommand otherCommand = (SortCommand) other;
-            return sortByKeyword.equals(otherCommand.sortByKeyword);
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
         }
 
-        @Override
-        public int hashCode() {
-            return sortByKeyword.hashCode();
+        if (!(other instanceof SortCommand)) {
+            return false;
         }
+
+        SortCommand otherCommand = (SortCommand) other;
+        return sortByKeyword.equals(otherCommand.sortByKeyword);
+    }
+
+    @Override
+    public int hashCode() {
+        return sortByKeyword.hashCode();
+    }
 }
 
