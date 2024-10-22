@@ -2,16 +2,18 @@ package spleetwaise.address.logic.commands;
 
 import static spleetwaise.address.commons.util.CollectionUtil.requireAllNonNull;
 import static spleetwaise.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static spleetwaise.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static spleetwaise.address.model.AddressBookModel.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
-import spleetwaise.address.model.Model;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
+import spleetwaise.commons.logic.commands.Command;
+import spleetwaise.commons.logic.commands.CommandResult;
+import spleetwaise.commons.logic.commands.exceptions.CommandException;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Changes the remark of an existing person in the address book.
@@ -42,7 +44,9 @@ public class RemarkCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute() throws CommandException {
+        CommonModel model = CommonModel.getInstance();
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {

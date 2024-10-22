@@ -23,6 +23,25 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+
+    systemProperty 'testfx.setup.timeout', '60000'
+}
+
+task guiTests(type: Test) {
+    useJUnitPlatform()
+    include 'systemtests/**'
+}
+
+task nonGuiTests(type: Test) {
+    useJUnitPlatform()
+    include 'spleetwaise/address/**'
+    include 'spleetwaise/common/**'
+    include 'spleetwaise/transaction/**'
+}
+
+guiTests.mustRunAfter nonGuiTests
+task allTests {
+    dependsOn nonGuiTests, guiTests
 }
 
 task coverage(type: JacocoReport) {
@@ -63,10 +82,17 @@ dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    testImplementation "org.testfx:testfx-core:4.0.18"
+    testImplementation "org.testfx:testfx-junit5:4.0.18"
+    testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.1'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveBaseName = "spleetwaise"
+    archiveVersion = "1.4"
+    archiveClassifier = null
 }
 
-defaultTasks 'clean', 'test'
+defaultTasks 'clean', 'nonGuiTests', 'coverage'

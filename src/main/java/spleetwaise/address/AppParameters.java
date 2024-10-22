@@ -2,6 +2,7 @@ package spleetwaise.address;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -19,20 +20,12 @@ public class AppParameters {
 
     private Path configPath;
 
-    public Path getConfigPath() {
-        return configPath;
-    }
-
-    public void setConfigPath(Path configPath) {
-        this.configPath = configPath;
-    }
-
     /**
      * Parses the application command-line parameters.
      */
     public static AppParameters parse(Application.Parameters parameters) {
         AppParameters appParameters = new AppParameters();
-        Map<String, String> namedParameters = parameters.getNamed();
+        Map<String, String> namedParameters = parameters != null ? parameters.getNamed() : new HashMap<>();
 
         String configPathParameter = namedParameters.get("config");
         if (configPathParameter != null && !FileUtil.isValidPath(configPathParameter)) {
@@ -42,6 +35,14 @@ public class AppParameters {
         appParameters.setConfigPath(configPathParameter != null ? Paths.get(configPathParameter) : null);
 
         return appParameters;
+    }
+
+    public Path getConfigPath() {
+        return configPath;
+    }
+
+    public void setConfigPath(Path configPath) {
+        this.configPath = configPath;
     }
 
     @Override

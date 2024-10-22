@@ -8,11 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import spleetwaise.address.logic.commands.CommandResult;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.Assert;
 import spleetwaise.address.testutil.TypicalPersons;
-import spleetwaise.transaction.logic.commands.exceptions.CommandException;
+import spleetwaise.commons.logic.commands.CommandResult;
+import spleetwaise.commons.logic.commands.exceptions.CommandException;
+import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.ModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
@@ -34,26 +35,28 @@ public class AddCommandTest {
 
     @Test
     public void execute_validPerson_success() {
-        ModelManager modelManager = new ModelManager();
-
+        CommonModel.initialise(null, new ModelManager());
         AddCommand cmd = new AddCommand(testTxn);
-        CommandResult cmdRes = assertDoesNotThrow(() -> cmd.execute(modelManager));
+        CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
-        String expectedString = String.format("[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23",
-                testTxn.getId());
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, expectedString),
-                cmdRes.getFeedbackToUser());
-        assertTrue(modelManager.hasTransaction(testTxn));
+        String expectedString = String.format(
+                "[%s] Alice Pauline(94351253): description on 01/01/2024 for $1.23",
+                testTxn.getId()
+        );
+        assertEquals(
+                String.format(AddCommand.MESSAGE_SUCCESS, expectedString),
+                cmdRes.getFeedbackToUser()
+        );
+        assertTrue(CommonModel.getInstance().hasTransaction(testTxn));
     }
 
     @Test
     public void execute_duplicatePerson_exceptionThrown() {
-        ModelManager modelManager = new ModelManager();
-        modelManager.addTransaction(testTxn);
+        CommonModel.initialise(null, new ModelManager());
+        CommonModel.getInstance().addTransaction(testTxn);
 
         AddCommand cmd = new AddCommand(testTxn);
-        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TXN, () ->
-                cmd.execute(modelManager));
+        Assert.assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_TXN, cmd::execute);
     }
 
     @Test

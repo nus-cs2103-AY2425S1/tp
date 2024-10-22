@@ -11,11 +11,10 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 /**
- * Configures and manages loggers and handlers, including their logging level
- * Named {@link Logger}s can be obtained from this class<br>
- * These loggers have been configured to output messages to the console and a {@code .log} file by default,
- *   at the {@code INFO} level. A new {@code .log} file with a new numbering will be created after the log
- *   file reaches 5MB big, up to a maximum of 5 files.<br>
+ * Configures and manages loggers and handlers, including their logging level Named {@link Logger}s can be obtained from
+ * this class<br> These loggers have been configured to output messages to the console and a {@code .log} file by
+ * default, at the {@code INFO} level. A new {@code .log} file with a new numbering will be created after the log file
+ * reaches 5MB big, up to a maximum of 5 files.<br>
  */
 public class LogsCenter {
     private static final int MAX_FILE_COUNT = 5;
@@ -43,9 +42,9 @@ public class LogsCenter {
     }
 
     /**
-     * Creates a logger with the given name prefixed by the {@code baseLogger}'s name so that the created logger
-     * becomes a descendant of the {@code baseLogger}. Furthermore, the returned logger will have the same log handlers
-     * as the {@code baseLogger}.
+     * Creates a logger with the given name prefixed by the {@code baseLogger}'s name so that the created logger becomes
+     * a descendant of the {@code baseLogger}. Furthermore, the returned logger will have the same log handlers as the
+     * {@code baseLogger}.
      */
     public static Logger getLogger(String name) {
         // Java organizes loggers into a hierarchy based on their names (using '.' as a separator, similar to how Java
@@ -75,8 +74,8 @@ public class LogsCenter {
     }
 
     /**
-     * Creates a logger named 'ab3', containing a {@code ConsoleHandler} and a {@code FileHandler}.
-     * Sets it as the {@code baseLogger}, to be used as the parent logger of all other loggers.
+     * Creates a logger named 'ab3', containing a {@code ConsoleHandler} and a {@code FileHandler}. Sets it as the
+     * {@code baseLogger}, to be used as the parent logger of all other loggers.
      */
     private static void setBaseLogger() {
         baseLogger = Logger.getLogger("ab3");

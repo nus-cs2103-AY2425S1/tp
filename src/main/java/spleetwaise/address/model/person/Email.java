@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import spleetwaise.address.commons.util.AppUtil;
 
 /**
- * Represents a Person's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Represents a Person's email in the address book. Guarantees: immutable; is valid as declared in
+ * {@link #isValidEmail(String)}
  */
 public class Email {
 

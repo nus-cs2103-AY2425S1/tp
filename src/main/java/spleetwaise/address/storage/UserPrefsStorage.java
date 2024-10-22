@@ -19,8 +19,7 @@ public interface UserPrefsStorage {
     Path getUserPrefsFilePath();
 
     /**
-     * Returns UserPrefs data from storage.
-     * Returns {@code Optional.empty()} if storage file is not found.
+     * Returns UserPrefs data from storage. Returns {@code Optional.empty()} if storage file is not found.
      *
      * @throws DataLoadingException if the loading of data from preference file failed.
      */
@@ -28,6 +27,7 @@ public interface UserPrefsStorage {
 
     /**
      * Saves the given {@link ReadOnlyUserPrefs} to the storage.
+     *
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */

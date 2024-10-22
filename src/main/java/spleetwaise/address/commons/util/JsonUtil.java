@@ -49,15 +49,16 @@ public class JsonUtil {
     }
 
     /**
-     * Returns the JSON object from the given file or {@code Optional.empty()} object if the file is not found.
-     * If any values are missing from the file, default values will be used, as long as the file is a valid JSON file.
+     * Returns the JSON object from the given file or {@code Optional.empty()} object if the file is not found. If any
+     * values are missing from the file, default values will be used, as long as the file is a valid JSON file.
      *
-     * @param filePath cannot be null.
+     * @param filePath                   cannot be null.
      * @param classOfObjectToDeserialize JSON file has to correspond to the structure in the class given here.
      * @throws DataLoadingException if loading of the JSON file failed.
      */
     public static <T> Optional<T> readJsonFile(
-            Path filePath, Class<T> classOfObjectToDeserialize) throws DataLoadingException {
+            Path filePath, Class<T> classOfObjectToDeserialize
+    ) throws DataLoadingException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -78,8 +79,9 @@ public class JsonUtil {
     }
 
     /**
-     * Saves the Json object to the specified file.
-     * Overwrites existing file if it exists, creates a new file if it doesn't.
+     * Saves the Json object to the specified file. Overwrites existing file if it exists, creates a new file if it
+     * doesn't.
+     *
      * @param jsonFile cannot be null
      * @param filePath cannot be null
      * @throws IOException if there was an error during writing to the file
@@ -94,6 +96,7 @@ public class JsonUtil {
 
     /**
      * Converts a given string representation of a JSON data to instance of a class
+     *
      * @param <T> The generic type to create an instance of
      * @return The instance of T with the specified values in the JSON string
      */
@@ -103,8 +106,9 @@ public class JsonUtil {
 
     /**
      * Converts a given instance of a class into its JSON data string representation
+     *
      * @param instance The T object to be converted into the JSON string
-     * @param <T> The generic type to create an instance of
+     * @param <T>      The generic type to create an instance of
      * @return JSON data representation of the given class instance, in string
      */
     public static <T> String toJsonString(T instance) throws JsonProcessingException {
@@ -129,7 +133,6 @@ public class JsonUtil {
          * Gets the logging level that matches loggingLevelString
          * <p>
          * Returns null if there are no matches
-         *
          */
         private Level getLoggingLevel(String loggingLevelString) {
             return Level.parse(loggingLevelString);

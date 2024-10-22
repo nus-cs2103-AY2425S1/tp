@@ -8,8 +8,8 @@ import java.math.RoundingMode;
 import spleetwaise.address.commons.util.AppUtil;
 
 /**
- * Represents a Transaction's amount in the transaction book.
- * Guarantees: immutable; is valid or declared in {@link #isValidAmount(String)}
+ * Represents a Transaction's amount in the transaction book. Guarantees: immutable; is valid or declared in
+ * {@link #isValidAmount(String)}
  */
 public class Amount {
 

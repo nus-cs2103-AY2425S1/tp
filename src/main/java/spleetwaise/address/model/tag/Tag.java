@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import spleetwaise.address.commons.util.AppUtil;
 
 /**
- * Represents a Tag in the address book.
- * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
+ * Represents a Tag in the address book. Guarantees: immutable; name is valid as declared in
+ * {@link #isValidTagName(String)}
  */
 public class Tag {
 

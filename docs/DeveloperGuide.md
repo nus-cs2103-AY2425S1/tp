@@ -286,6 +286,16 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Local GUI testing
+
+The available gradle tasks are: guiTests, nonGuiTests, allTests.
+- guiTests: all tests under `systemtests` package
+- nonGuiTests: all tests under `spleetwaise.address`, `spleetwaise.common`, `spleetwaise.transaction` packages
+- allTests: guiTests and nonGuiTests, nonGuiTests will be run before guiTests
+
+As an example, you can run `gradle nonGuiTests` in the gradle terminal for all tests excluding GUI related tests.
+You can navigate the gradle terminal by clicking on elephant icon _(Gradle)_ > terminal icon _(Execute Gradle tasks)_.
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown

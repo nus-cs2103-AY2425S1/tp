@@ -3,7 +3,7 @@ package spleetwaise.transaction.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import spleetwaise.address.logic.parser.exceptions.ParseException;
-import spleetwaise.transaction.logic.commands.Command;
+import spleetwaise.commons.logic.commands.Command;
 
 
 /**
@@ -12,11 +12,13 @@ import spleetwaise.transaction.logic.commands.Command;
 public class CommandParserTestUtil {
 
     /**
-     * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
-     * equals to {@code expectedCommand}.
+     * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created equals to
+     * {@code expectedCommand}.
      */
-    public static void assertParseSuccess(Parser<? extends Command> parser, String userInput,
-                                          Command expectedCommand) {
+    public static void assertParseSuccess(
+            Parser<? extends Command> parser, String userInput,
+            Command expectedCommand
+    ) {
         try {
             Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);
@@ -26,8 +28,8 @@ public class CommandParserTestUtil {
     }
 
     /**
-     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
-     * equals to {@code expectedMessage}.
+     * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message equals to
+     * {@code expectedMessage}.
      */
     public static void assertParseFailure(Parser<? extends Command> parser, String userInput, String expectedMessage) {
         try {

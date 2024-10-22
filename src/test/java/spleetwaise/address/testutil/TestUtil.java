@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import spleetwaise.address.commons.core.index.Index;
-import spleetwaise.address.model.Model;
+import spleetwaise.address.model.AddressBookModel;
 import spleetwaise.address.model.person.Person;
 
 /**
@@ -20,8 +20,8 @@ public class TestUtil {
     private static final Path SANDBOX_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
     /**
-     * Appends {@code fileName} to the sandbox folder path and returns the resulting path.
-     * Creates the sandbox folder if it doesn't exist.
+     * Appends {@code fileName} to the sandbox folder path and returns the resulting path. Creates the sandbox folder if
+     * it doesn't exist.
      */
     public static Path getFilePathInSandboxFolder(String fileName) {
         try {
@@ -35,21 +35,21 @@ public class TestUtil {
     /**
      * Returns the middle index of the person in the {@code model}'s person list.
      */
-    public static Index getMidIndex(Model model) {
+    public static Index getMidIndex(AddressBookModel model) {
         return Index.fromOneBased(model.getFilteredPersonList().size() / 2);
     }
 
     /**
      * Returns the last index of the person in the {@code model}'s person list.
      */
-    public static Index getLastIndex(Model model) {
+    public static Index getLastIndex(AddressBookModel model) {
         return Index.fromOneBased(model.getFilteredPersonList().size());
     }
 
     /**
      * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Person getPerson(Model model, Index index) {
+    public static Person getPerson(AddressBookModel model, Index index) {
         return model.getFilteredPersonList().get(index.getZeroBased());
     }
 }

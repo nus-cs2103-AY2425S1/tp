@@ -8,14 +8,9 @@ import spleetwaise.transaction.model.transaction.Transaction;
 /**
  * The API of the transaction component.
  */
-public interface Model {
+public interface TransactionBookModel {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Transaction> PREDICATE_SHOW_ALL_TXNS = unused -> true;
-
-    /**
-     * Replaces address book data with the data in {@code replacementBook}.
-     */
-    void setTransactionBook(ReadOnlyTransactionBook replacementBook);
 
     /**
      * Returns the transaction book.
@@ -23,8 +18,12 @@ public interface Model {
     ReadOnlyTransactionBook getTransactionBook();
 
     /**
-     * Adds the given transaction.
-     * {@code transaction} must not already exist in the address book.
+     * Replaces address book data with the data in {@code replacementBook}.
+     */
+    void setTransactionBook(ReadOnlyTransactionBook replacementBook);
+
+    /**
+     * Adds the given transaction. {@code transaction} must not already exist in the address book.
      */
     void addTransaction(Transaction transaction);
 
@@ -39,8 +38,8 @@ public interface Model {
     ObservableList<Transaction> getFilteredTransactionList();
 
     /**
-     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}.
-     * Set to null to clear existing filters.
+     * Updates the filter of the filtered transaction list to filter by the given {@code predicate}. Set to null to
+     * clear existing filters.
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
 }
