@@ -16,6 +16,7 @@ public class Messages {
             + "Only the following will be accepted as the first word of the command:\n"
             + "add, edit, delete, find, list, help, clear, exit";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
+    public static final String MESSAGE_NAME_FIELD_MISSING = "Invalid command format! MISSING 'n/' \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
