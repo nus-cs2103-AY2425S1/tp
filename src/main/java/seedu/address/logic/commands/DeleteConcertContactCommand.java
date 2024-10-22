@@ -62,8 +62,7 @@ public class DeleteConcertContactCommand extends Command {
 
         model.deleteConcertContact(personToDelete, concertToEdit);
         return new CommandResult(String.format(MESSAGE_DELETE_CONCERT_CONTACT_SUCCESS,
-                Messages.format(personToDelete), Messages.format(concertToEdit)),
-                false, false, true);
+                Messages.format(personToDelete), Messages.format(concertToEdit)));
     }
 
     @Override
