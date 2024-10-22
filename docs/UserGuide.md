@@ -259,9 +259,8 @@ Format: `grade INDEX TEST_NAME SCORE WEIGHTAGE`
 * If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
 Examples:
-* `grade 1 Midterm 85 20` Adds or updates a grade for the 1st person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
-* `grade 2 FinalExam 92 30` Adds or updates a grade for the 2nd person with a score of 92% for "FinalExam" and 30% weightage.
-* If a test with the same name already exists for that person, the old grade will be replaced.
+* `grade 2 Midterm 85 20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
+* `find Betsy` followed by `grade 1 FinalExam 92 30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
 ### Deleting a grade from a person: `deletegrade`
 
@@ -274,8 +273,8 @@ Format: `deletegrade INDEX TEST_NAME`
 * `TEST_NAME` refers to the name of the test whose grade you want to delete.
 
 Examples:
-* `deletegrade 1 Midterm` Deletes the grade for the "Midterm" test for the 1st person in the list.
-* `deletegrade 2 FinalExam` Deletes the "FinalExam" grade for the 2nd person.
+* `deletegrade 2 Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
+* `find Betsy` followed by `deletegrade 1 FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
 
 ### Marking attendance: `mark`
 
@@ -289,7 +288,8 @@ Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
 * If the attendance record for `DATE_TIME` already exists, it will be updated with the new `ATTENDANCE`.
 
 Examples:
-* `mark 1 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 1st person in the list.
+* `mark 2 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+* `find Betsy` followed by `mark 1 d/31/01/2024 10:00 m/Absent` Sets the attendance to 'Absent' on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 ### Unmarking attendance: `unmark`
 
@@ -301,7 +301,8 @@ Format: `unmark INDEX d/DATETIME`
 * `DATE_TIME` refers to the date and time of attendance that you want to delete. It must be written in the format `dd/MM/yyyy HH:mm`.
 
 Examples:
-* `unmark 1 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the list.
+* `unmark 2 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 2nd person in the list.
+* `find Betsy` followed by `unmark 1 d/31/01/2024 10:00` deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
