@@ -50,7 +50,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the help window. If the window is minimized, restore it.
      * @throws IllegalStateException
      *     <ul>
      *         <li>
@@ -69,8 +69,12 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+        if (stage.isIconified()) {
+            stage.setIconified(false); // Restore if minimized
+        }
+        stage.show();
+        stage.centerOnScreen();
     }
 
     /**
