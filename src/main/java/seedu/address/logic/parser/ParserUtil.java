@@ -131,4 +131,18 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static int parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        try {
+            int numericGrade = Integer.parseInt(trimmedGrade);
+            if (!Module.isValidGrade(numericGrade)) {
+                throw new ParseException(Module.GRADE_CONSTRAINTS);
+            }
+            return numericGrade;
+        } catch (NumberFormatException e) {
+            throw new ParseException(Module.GRADE_CONSTRAINTS);
+        }
+    }
 }
