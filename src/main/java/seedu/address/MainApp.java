@@ -45,12 +45,9 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
-
     public MainApp() {
-        // empty constructor
+        //empty constructor
     }
-
-
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing EZSTATES ]===========================");
