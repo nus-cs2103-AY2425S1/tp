@@ -32,7 +32,7 @@ public class AssignContactToWeddingCommand extends Command {
             + PREFIX_ASSIGN_CONTACT + "1 2 3";
 
     public static final String MESSAGE_ASSIGN_TO_WEDDING_SUCCESS =
-            "Assigned the following persons to %1$s's wedding: %2$s";
+            "Assigned the following people to %1$s's wedding: %2$s";
 
     private final Index targetWeddingIndex;
     private final Set<Index> assignedPersonIndexList;

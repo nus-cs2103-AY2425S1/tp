@@ -61,7 +61,6 @@ public class AssignContactToWeddingCommandTest {
     @Test
     public void execute_assignToNonexistentWedding_throwsCommandException() {
         Set<Index> contactIndices = Set.of(INDEX_FIRST_PERSON);
-        // Try to assign to a wedding that doesn't exist (index 3)
         AssignContactToWeddingCommand assignCommand =
                 new AssignContactToWeddingCommand(Index.fromOneBased(3), contactIndices);
 
@@ -71,14 +70,14 @@ public class AssignContactToWeddingCommandTest {
 
     @Test
     public void execute_assignAlreadyAssignedContact_throwsCommandException() throws CommandException {
-        // First, assign the contact
+
         Set<Index> contactIndices = Set.of(INDEX_FIRST_PERSON);
         AssignContactToWeddingCommand assignCommand =
                 new AssignContactToWeddingCommand(Index.fromOneBased(1), contactIndices);
         assignCommand.execute(model);
 
-        // Try assigning the same contact again
         assertThrows(CommandException.class,
-                "Alice has already been assigned to this wedding.", () -> assignCommand.execute(model));
+                "Alice has already been assigned to this wedding.",
+                () -> assignCommand.execute(model));
     }
 }
