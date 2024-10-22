@@ -18,12 +18,12 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FieldContainsKeywordsPredicate;
+import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.StudentAttendedTutorialPredicate;
-import seedu.address.model.person.StudentHasPaidPredicate;
-import seedu.address.model.person.SubjectContainsKeywordsPredicate;
-import seedu.address.model.person.TagContainsKeywordPredicate;
+import seedu.address.model.predicate.StudentAttendedTutorialPredicate;
+import seedu.address.model.predicate.StudentHasPaidPredicate;
+import seedu.address.model.predicate.SubjectContainsKeywordsPredicate;
+import seedu.address.model.predicate.TagContainsKeywordPredicate;
 
 /**
  * A factory class for creating a list of predicates to filter Person objects based on

@@ -1,9 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.predicate;
 
 import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Tests a {@code Person}'s hasAttended status

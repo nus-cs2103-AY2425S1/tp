@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.predicate;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_WITH_SPACES;
 
