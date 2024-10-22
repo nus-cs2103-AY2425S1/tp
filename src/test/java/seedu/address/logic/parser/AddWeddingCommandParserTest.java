@@ -7,9 +7,6 @@ import static seedu.address.logic.commands.AddWeddingCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddWeddingCommand;
@@ -30,12 +27,8 @@ public class AddWeddingCommandParserTest {
 
         Wedding resultWedding = resultCommand.getWedding();
 
-        LocalDate resultDate = LocalDate.parse(resultWedding.getDate());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String formattedResultDate = resultDate.format(formatter);
-
-        assertEquals(expectedWedding.getName(), resultWedding.getName());
-        assertEquals(expectedWedding.getDate(), formattedResultDate);
+        assertEquals(expectedWedding.getWeddingName(), resultWedding.getWeddingName());
+        assertEquals(expectedWedding.getWeddingDate(), resultWedding.getWeddingDate());
     }
 
     @Test
