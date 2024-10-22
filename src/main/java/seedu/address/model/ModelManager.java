@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.listing.Listing;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -24,6 +25,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
+    private final FilteredList<Listing> filteredListings;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -35,6 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredListings = new FilteredList<>(this.addressBook.getListingList());
     }
 
     public ModelManager() {
@@ -112,6 +116,31 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public boolean hasListing(Listing listing) {
+        requireNonNull(listing);
+        return addressBook.hasListing(listing);
+    }
+
+    @Override
+    public void deleteListing(Listing target) {
+        addressBook.removeListing(target);
+    }
+
+    @Override
+    public void addListing(Listing listing) {
+        addressBook.addListing(listing);
+        updateFilteredListingList(PREDICATE_SHOW_ALL_LISTINGS);
+    }
+
+    @Override
+    public void setListing(Listing target, Listing editedListing) {
+        requireAllNonNull(target, editedListing);
+
+        addressBook.setListing(target, editedListing);
+    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -142,6 +171,36 @@ public class ModelManager implements Model {
                     .orElse(null);
     }
 
+    //=========== Filtered Listing List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Listing> getFilteredListingList() {
+        return filteredListings;
+    }
+
+    @Override
+    public void updateFilteredListingList(Predicate<Listing> predicate) {
+        requireNonNull(predicate);
+        filteredListings.setPredicate(predicate);
+    }
+
+    /**
+     * Returns the listing with the same name as {@code name} exists in the address book.
+     */
+    /*@Override
+    public Person getListingByName(Name name) {
+        requireNonNull(name);
+        return this.getFilteredPersonList()
+                .stream()
+                .filter(person -> person.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }*/
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -156,7 +215,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                &&filteredListings.equals(otherModelManager.filteredListings);
     }
 
 }
