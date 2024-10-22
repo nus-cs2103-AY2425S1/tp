@@ -43,7 +43,7 @@ public class AttendanceCard extends UiPart<Region> {
         if (currentWeekAttendance == null) {
             attendance.setText("Not attended");
         } else {
-            attendance.setText("Attended on: " + currentWeekAttendance.toDisplayString());
+            attendance.setText(currentWeekAttendance.toDisplayString());
         }
     }
 
