@@ -32,7 +32,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         try {
             Nric patientNric = ParserUtil.parseNric(args);
             logger.info("Successfully parsed the NRIC for DeleteCommand: " + patientNric);
-            return new DeleteCommand(new NricMatchesPredicate(patientNric));
+            NricMatchesPredicate predicate = new NricMatchesPredicate(patientNric);
+            return new DeleteCommand(predicate);
         } catch (ParseException pe) {
             logger.warning("Unable to parse the NRIC for DeleteCommand: " + args);
             throw new ParseException(pe.getMessage());
