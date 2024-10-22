@@ -13,6 +13,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
+import seedu.address.model.person.Tutorial;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -122,6 +123,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String tutorial} into a {@code Tutorial}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tutorial} is invalid.
+     */
+    public static Tutorial parseTutorial(String tutorial) throws ParseException {
+        requireNonNull(tutorial);
+        String trimmedTutorial = tutorial.trim();
+        if (!Tutorial.isValidTutorial(trimmedTutorial)) {
+            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
+        return new Tutorial(trimmedTutorial);
     }
 
     /**

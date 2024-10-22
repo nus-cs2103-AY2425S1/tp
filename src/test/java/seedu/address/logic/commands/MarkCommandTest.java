@@ -11,8 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +25,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutorial;
 
@@ -56,7 +57,7 @@ public class MarkCommandTest {
     }
 
     /**
-     * Mark a person using index outside the displayed list.
+     * Mark a person that has already been marked.
      */
     @Test
     public void execute_tutorialAlreadyMarked_failure() {
@@ -88,8 +89,8 @@ public class MarkCommandTest {
         Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         // Check person is edited
-        Set<Tutorial> newTutorials = new HashSet<>(personToEdit.getTutorials());
-        newTutorials.add(tutorialToBeAdded);
+        Map<Tutorial, AttendanceStatus> newTutorials = new HashMap<>(personToEdit.getTutorials());
+        newTutorials.put(tutorialToBeAdded, AttendanceStatus.PRESENT);
         Person expectedEditedPerson = new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),

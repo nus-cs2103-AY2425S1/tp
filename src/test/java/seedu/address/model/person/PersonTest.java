@@ -93,17 +93,23 @@ public class PersonTest {
     }
 
     @Test
-    public void correctlyChecksAttendance() {
+    public void correctlyReturnsCssClass() {
         Person alice = new PersonBuilder(ALICE).build();
 
-        // Alice currently has no tutorials attended, should return false.
-        assertFalse(alice.hasAttendedTutorial("0"));
+        // Alice currently has no tutorials attended, should return NOT_TAKEN_PLACE
+        assertEquals("tutorial-not-taken-place", alice.getAttendanceCssClass("1"));
 
-        // Set Alice to have attended tutorial 1, 3, 7.
-        alice = new PersonBuilder(ALICE).withTutorials("1", "3", "7").build();
-        assertTrue(alice.hasAttendedTutorial("1"));
-        assertTrue(alice.hasAttendedTutorial("3"));
-        assertFalse(alice.hasAttendedTutorial("2")); // Did not attend tutorial 2
+        // Set Alice to have attended tutorial 1, 3.
+        alice = new PersonBuilder(ALICE).withTutorials(new String[] {"1", "3"},
+                new AttendanceStatus[] {AttendanceStatus.PRESENT, AttendanceStatus.PRESENT}).build();
+        assertEquals("tutorial-present", alice.getAttendanceCssClass("1"));
+        assertEquals("tutorial-present", alice.getAttendanceCssClass("3"));
+
+        // Set Alice to have not attended tutorial 2 and 4.
+        alice = new PersonBuilder(ALICE).withTutorials(new String[] {"2", "4"},
+                new AttendanceStatus[] {AttendanceStatus.ABSENT, AttendanceStatus.ABSENT}).build();
+        assertEquals("tutorial-absent", alice.getAttendanceCssClass("2"));
+        assertEquals("tutorial-absent", alice.getAttendanceCssClass("4"));
     }
 
     @Test

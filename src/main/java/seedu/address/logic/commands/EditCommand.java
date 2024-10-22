@@ -10,7 +10,9 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -21,6 +23,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.AttendanceStatus;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -52,6 +55,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_FIELDS_CHANGED = "Edited fields are identical to old fields.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -80,6 +84,10 @@ public class EditCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
+        if (personToEdit.equals(editedPerson)) {
+            throw new CommandException(MESSAGE_NO_FIELDS_CHANGED);
+        }
+
         if (model.hasEditedPerson(personToEdit, editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
@@ -101,7 +109,7 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        Set<Tutorial> updatedTutorials = personToEdit.getTutorials(); // Cannot mark attendance using EditCommand
+        Map<Tutorial, AttendanceStatus> updatedTutorials = personToEdit.getTutorials();
 
         return new Person(updatedName, updatedStudentId, updatedPhone, updatedEmail, updatedTags,
                 updatedTutorials);
@@ -141,7 +149,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Set<Tag> tags;
-        private Set<Tutorial> tutorials;
+        private Map<Tutorial, AttendanceStatus> tutorials;
 
         public EditPersonDescriptor() {}
 
@@ -218,8 +226,8 @@ public class EditCommand extends Command {
          * Sets {@code tutorials} to this object's {@code tutorials}.
          * A defensive copy of {@code tutorials} is used internally.
          */
-        public void setTutorials(Set<Tutorial> tutorials) {
-            this.tutorials = (tutorials != null) ? new HashSet<>(tutorials) : null;
+        public void setTutorials(Map<Tutorial, AttendanceStatus> tutorials) {
+            this.tutorials = (tutorials != null) ? new LinkedHashMap<>(tutorials) : null;
         }
 
         @Override

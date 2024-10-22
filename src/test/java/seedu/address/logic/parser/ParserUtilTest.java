@@ -18,6 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Tutorial;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_SORT_ORDER = "2";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TUTORIAL = "0";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -34,6 +36,8 @@ public class ParserUtilTest {
     private static final String VALID_SORT_ORDER_MINUS_1 = "-1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_TUTORIAL_1 = "1";
+    private static final String VALID_TUTORIAL_2 = "2";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -193,5 +197,28 @@ public class ParserUtilTest {
     public void parseSortOrder_validValueWithWhitespace_returnsTrimmedInteger() throws Exception {
         String sortOrderWithWhitespace = WHITESPACE + VALID_SORT_ORDER_1 + WHITESPACE;
         assertEquals(1, ParserUtil.parseSortOrder(sortOrderWithWhitespace));
+    }
+
+    @Test
+    public void parseTutorial_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTutorial(null));
+    }
+
+    @Test
+    public void parseTutorial_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTutorial(INVALID_TUTORIAL));
+    }
+
+    @Test
+    public void parseTutorial_validValueWithoutWhitespace_returnsTutorial() throws Exception {
+        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
+        assertEquals(expectedTutorial, ParserUtil.parseTutorial(VALID_TUTORIAL_1));
+    }
+
+    @Test
+    public void parseTutorial_validValueWithWhitespace_returnsTrimmedTutorial() throws Exception {
+        String tutWithWhitespace = WHITESPACE + VALID_TUTORIAL_1 + WHITESPACE;
+        Tutorial expectedTutorial = new Tutorial(VALID_TUTORIAL_1);
+        assertEquals(expectedTutorial, ParserUtil.parseTutorial(tutWithWhitespace));
     }
 }
