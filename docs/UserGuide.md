@@ -277,6 +277,32 @@ Examples:
 * `deletegrade 1 Midterm` Deletes the grade for the "Midterm" test for the 1st person in the list.
 * `deletegrade 2 FinalExam` Deletes the "FinalExam" grade for the 2nd person.
 
+### Marking attendance: `mark`
+
+Marks the attendance record for the specified date for a person in the address book. If the attendance record for that date already exists, it will be overwritten.
+
+Format: `mark INDEX d/DATE_TIME m/ATTENDANCE`
+
+* Adds or updates attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE_TIME` refers to the date and time of attendance that you want to add or edit. It must be written in the format `dd/MM/yyyy HH:mm`.
+* `ATTENDANCE` refers to the attendance status, which must be either `Attended` or `Absent`. They are case-sensitive.
+* If the attendance record for `DATE_TIME` already exists, it will be updated with the new `ATTENDANCE`.
+
+Examples:
+* `mark 1 d/31/01/2024 10:00 m/Attended` Sets the attendance to 'Attended' on the 10 AM of January 31st, 2024 for the 1st person in the list.
+
+### Unmarking attendance: `unmark`
+
+Deletes the attendance record for the specified date for a person in the address book. All the remaining attendance records for that person will be retained.
+
+Format: `unmark INDEX d/DATETIME`
+
+* Deletes attendance for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* `DATE_TIME` refers to the date and time of attendance that you want to delete. It must be written in the format `dd/MM/yyyy HH:mm`.
+
+Examples:
+* `unmark 1 d/31/01/2024 10:00` Deletes the attendance on the 10 AM of January 31st, 2024 for the 1st person in the list.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -326,14 +352,16 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                      |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**            | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**          | `clear`                                                                                                                                                               |
-| **Delete**         | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
-| **Add/Edit Grade** | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
-| **Delete Grade**   | `deleteGrade INDEX TEST_NAME` <br> e.g., `deleteGrade 1 Midterm`                                                                                                      |
-| **List**           | `list`                                                                                                                                                                |
-| **Help**           | `help`                                                                                                                                                                |
+| Action                | Format, Examples                                                                                                                                                      |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**               | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**             | `clear`                                                                                                                                                               |
+| **Delete**            | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   |
+| **Edit**              | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            |
+| **Add/Edit Grade**    | `grade INDEX TEST_NAME SCORE WEIGHTAGE` <br> e.g., `grade 1 Midterm 85 30`                                                                                            |
+| **Delete Grade**      | `deleteGrade INDEX TEST_NAME` <br> e.g., `deleteGrade 1 Midterm`                                                                                                      |
+| **Mark Attendance**   | `mark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `mark 1 d/31/01/2024 10:00 m/Attended`                                                                               |
+| **Unmark Attendance** | `unmark INDEX d/DATE_TIME m/ATTENDANCE` <br> e.g., `unmark 1 d/31/01/2024 10:00`                                                                                      |
+| **List**              | `list`                                                                                                                                                                |
+| **Help**              | `help`                                                                                                                                                                |
