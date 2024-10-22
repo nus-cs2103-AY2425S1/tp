@@ -22,21 +22,24 @@ public class AssignContactToWeddingCommandParserTest {
     @Test
     public void parse_invalidWeddingIndex_failure() {
         String userInput = "abc c/1 2";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignContactToWeddingCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AssignContactToWeddingCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_noContactPrefix_failure() {
         String userInput = "1 ";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignContactToWeddingCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                AssignContactToWeddingCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
     @Test
     public void parse_duplicateContactPrefix_failure() {
         String userInput = "1 c/1 c/2";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, "Please only include one prefix c/ !");
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                "Please only include one prefix c/ !");
         assertParseFailure(parser, userInput, expectedMessage);
     }
 }

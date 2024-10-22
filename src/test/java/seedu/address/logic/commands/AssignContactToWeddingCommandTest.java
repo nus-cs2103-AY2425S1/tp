@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -13,16 +13,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.logic.Messages;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Address;
 
 
 public class AssignContactToWeddingCommandTest {
@@ -36,9 +36,11 @@ public class AssignContactToWeddingCommandTest {
         model.addWedding(WEDDING_TWO);
 
         // Add some test persons to the model
-        Person person1 = new Person(new PersonId(), new Name("Alice"), new Phone("123456"), new Email("alice@example.com"),
+        Person person1 = new Person(new PersonId(), new Name("Alice"), new Phone("123456"),
+                new Email("alice@example.com"),
                 new Address("123 Wonderland"), Set.of());
-        Person person2 = new Person(new PersonId(), new Name("Bob"), new Phone("234567"), new Email("bob@example.com"),
+        Person person2 = new Person(new PersonId(), new Name("Bob"), new Phone("234567"),
+                new Email("bob@example.com"),
                 new Address("456 Wonderland"), Set.of());
         model.addPerson(person1);
         model.addPerson(person2);
@@ -47,7 +49,8 @@ public class AssignContactToWeddingCommandTest {
     @Test
     public void execute_assignContactsToWedding_success() throws Exception {
         Set<Index> contactIndices = Set.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
-        AssignContactToWeddingCommand assignCommand = new AssignContactToWeddingCommand(Index.fromOneBased(1), contactIndices);
+        AssignContactToWeddingCommand assignCommand =
+                new AssignContactToWeddingCommand(Index.fromOneBased(1), contactIndices);
 
         CommandResult commandResult = assignCommand.execute(model);
 
@@ -59,7 +62,8 @@ public class AssignContactToWeddingCommandTest {
     public void execute_assignToNonexistentWedding_throwsCommandException() {
         Set<Index> contactIndices = Set.of(INDEX_FIRST_PERSON);
         // Try to assign to a wedding that doesn't exist (index 3)
-        AssignContactToWeddingCommand assignCommand = new AssignContactToWeddingCommand(Index.fromOneBased(3), contactIndices);
+        AssignContactToWeddingCommand assignCommand =
+                new AssignContactToWeddingCommand(Index.fromOneBased(3), contactIndices);
 
         assertThrows(CommandException.class, Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX, () ->
                 assignCommand.execute(model));
@@ -69,11 +73,12 @@ public class AssignContactToWeddingCommandTest {
     public void execute_assignAlreadyAssignedContact_throwsCommandException() throws CommandException {
         // First, assign the contact
         Set<Index> contactIndices = Set.of(INDEX_FIRST_PERSON);
-        AssignContactToWeddingCommand assignCommand = new AssignContactToWeddingCommand(Index.fromOneBased(1), contactIndices);
+        AssignContactToWeddingCommand assignCommand =
+                new AssignContactToWeddingCommand(Index.fromOneBased(1), contactIndices);
         assignCommand.execute(model);
 
         // Try assigning the same contact again
-        assertThrows(CommandException.class, "Alice has already been assigned to this wedding.", () ->
-                assignCommand.execute(model));
+        assertThrows(CommandException.class, "Alice has already been assigned to this wedding.",
+                () -> assignCommand.execute(model));
     }
 }
