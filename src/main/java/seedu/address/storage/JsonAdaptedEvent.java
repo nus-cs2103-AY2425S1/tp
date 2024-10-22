@@ -22,6 +22,10 @@ public class JsonAdaptedEvent {
         eventName = source.toString();
     }
 
+    public JsonAdaptedEvent() {
+        this.eventName = null;
+    }
+
     @JsonProperty("eventName")
     public String getEventName() {
         return eventName;

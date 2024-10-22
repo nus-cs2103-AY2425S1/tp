@@ -30,6 +30,10 @@ class JsonAdaptedRole {
         roleName = source.getRoleName();
     }
 
+    public JsonAdaptedRole() {
+        this.roleName = null;
+    }
+
     @JsonValue
     public String getRoleName() {
         return roleName;
