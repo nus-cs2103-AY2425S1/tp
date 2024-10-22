@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.model.Model;
 
 /**
@@ -14,13 +15,13 @@ public class ArchiveCommand extends Command {
     public static final String COMMAND_WORD = "archive";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archives the address book.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " " + "1st Quarter 2021";
     public static final String MESSAGE_SUCCESS = "Address book has been archived successfully!";
     public static final String MESSAGE_FAILURE = "Address book failed to be archived. Please try again later.";
 
-    private final String filename;
+    private final Filename filename;
 
-    public ArchiveCommand(String filename) {
+    public ArchiveCommand(Filename filename) {
         this.filename = filename;
     }
 

@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
-import static java.util.Objects.requireNonNull;
-
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.logic.commands.ArchiveCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -17,8 +16,7 @@ public class ArchiveCommandParser implements Parser<ArchiveCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ArchiveCommand parse(String args) throws ParseException {
-        requireNonNull(args);
-        String filename = args.trim();
+        Filename filename = ParserUtil.parseFilename(args);
         return new ArchiveCommand(filename);
     }
 }

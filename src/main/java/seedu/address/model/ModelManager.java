@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.filename.Filename;
 import seedu.address.model.person.Person;
 
 /**
@@ -97,14 +98,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void archiveAddressBook(String filename) throws IOException {
+    public void archiveAddressBook(Filename filename) throws IOException {
         Path source = this.getAddressBookFilePath();
         assert source != null : "Address book file path is null";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String timestamp = LocalDateTime.now().format(formatter);
         String archiveFilename = source.getFileName().toString().replace(".json", "") + "-"
-                + timestamp + "-" + filename + ".json";
+                + timestamp + (filename.toString().isEmpty() ? "" : "-" + filename) + ".json";
         Path destination = Paths.get(source.getParent().toString(), "archive", archiveFilename);
 
         Files.createDirectories(destination.getParent());
@@ -141,6 +142,7 @@ public class ModelManager implements Model {
     }
 
     // ============ Undo and Redo Methods ================================================================
+
     /**
      * Commits the current state of the address book to history.
      */
