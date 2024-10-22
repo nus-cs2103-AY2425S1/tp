@@ -68,6 +68,7 @@ public class TypicalPersons {
             .withNric("S1234567E")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
+            .withTags("Diabetic", "G6PD")
             .withAppointment("10-11-2024 05:31")
             .build();
     public static final Person FIONA = new PersonBuilder()
@@ -76,6 +77,7 @@ public class TypicalPersons {
             .withNric("S1234567F")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
+            .withTags("Diabetic", "G6PD")
             .withAppointment("08-11-2024 13:22")
             .build();
     public static final Person GEORGE = new PersonBuilder()
