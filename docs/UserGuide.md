@@ -134,9 +134,9 @@ Format: `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
   e.g. `-n Hans -p 98765432` will not return `Hans` if his phone number is not `98765432`.
 
 Examples:
-* `find -l Serangoon` returns `Bernice Yu` with location `Serangoon Gardens` and `David Li` with location `Serangoon Gardens`
-* `find -n david -l serangoon` returns `David Li` with location `Serangoon Gardens`
-  ![result for 'find -n david -l serangoon'](images/findDavidSerangoonResult.png)
+* `:find -l Serangoon` returns `Bernice Yu` with location `Serangoon Gardens` and `David Li` with location `Serangoon Gardens`
+* `:find -n david -l serangoon` returns `David Li` with location `Serangoon Gardens`
+  ![result for ':find -n david -l serangoon'](images/findDavidSerangoonResult.png)
 
 ### Deleting a person : `:rm`
 
@@ -150,7 +150,7 @@ Format: `:rm -i INDEX` or `:remove -i INDEX`
 
 Examples:
 * `:list` followed by `:rm -i 2` deletes the 2nd person in the address book.
-* `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `find` command.
+* `:find Betsy` followed by `:rm -i 1` deletes the 1st person in the results of the `:find` command.
 
 ### Clearing all entries : `:clear`
 
