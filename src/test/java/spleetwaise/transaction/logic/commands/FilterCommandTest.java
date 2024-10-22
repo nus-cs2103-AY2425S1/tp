@@ -17,8 +17,8 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -88,7 +88,8 @@ public class FilterCommandTest {
     @Test
     public void execute_descriptionDifferentCaseOnly_success() {
         FilterCommand cmd = new FilterCommand(null, null,
-                new Description(testDescription.toString().toLowerCase()), null);
+                new Description(testDescription.toString().toLowerCase()), null
+        );
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
         assertEquals(FilterCommand.MESSAGE_SUCCESS, cmdRes.getFeedbackToUser());
@@ -160,9 +161,11 @@ public class FilterCommandTest {
     @Test
     public void toString_success() {
         FilterCommand cmd = new FilterCommand(null, null, testDescription, null);
-        assertEquals("spleetwaise.transaction.logic.commands.FilterCommand{contact=null, amount=null, "
-                + "description=Sean owes me a lot for a landed property in Sentosa, date=null}",
-                cmd.toString());
+        assertEquals(
+                "spleetwaise.transaction.logic.commands.FilterCommand{contact=null, amount=null, "
+                        + "description=Sean owes me a lot for a landed property in Sentosa, date=null}",
+                cmd.toString()
+        );
     }
 }
 

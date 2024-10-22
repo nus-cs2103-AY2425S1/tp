@@ -26,7 +26,8 @@ import spleetwaise.commons.model.CommonModel;
  */
 public class EditCommandTest {
 
-    private final AddressBookModel model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private final AddressBookModel model = new AddressBookModelManager(
+            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
     @BeforeEach
     void setUp() {
@@ -41,7 +42,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -65,7 +67,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -78,7 +81,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -97,7 +101,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         CommandTestUtil.assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

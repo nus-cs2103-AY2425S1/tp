@@ -12,7 +12,6 @@ import static spleetwaise.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static spleetwaise.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static spleetwaise.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +51,8 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -69,7 +69,8 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
@@ -88,7 +89,8 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
-        AddressBookModel expectedModel = new AddressBookModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);

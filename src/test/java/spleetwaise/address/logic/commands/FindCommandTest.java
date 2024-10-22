@@ -23,8 +23,10 @@ import spleetwaise.commons.model.CommonModel;
  */
 public class FindCommandTest {
 
-    private AddressBookModel model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
-    private AddressBookModel expectedModel = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private AddressBookModel model = new AddressBookModelManager(
+            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private AddressBookModel expectedModel = new AddressBookModelManager(
+            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
 
     @BeforeEach
     void setUp() {
