@@ -45,13 +45,23 @@ public class Date {
      * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        // First, ensure the string matches the expected date format using the regex
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
+        // Now try to parse the date, catching any parsing errors
+        try {
+            LocalDate.parse(test); // This will throw an exception if the date is invalid
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
 
     @Override
     public String toString() {
-        return date.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public String toParsableString() {
