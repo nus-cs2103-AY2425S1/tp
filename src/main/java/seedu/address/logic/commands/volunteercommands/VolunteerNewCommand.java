@@ -4,10 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.AddressBookParser.VOLUNTEER_COMMAND_INDICATOR;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_AVAILABLE_DATE;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.VOLUNTEER_PREFIX_START_TIME;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
@@ -29,15 +27,11 @@ public class VolunteerNewCommand extends Command {
             + VOLUNTEER_PREFIX_PHONE + "PHONE "
             + VOLUNTEER_PREFIX_EMAIL + "EMAIL "
             + VOLUNTEER_PREFIX_AVAILABLE_DATE + "AVAILABLE_DATE "
-            + VOLUNTEER_PREFIX_START_TIME + "START_TIME "
-            + VOLUNTEER_PREFIX_END_TIME + "END_TIME "
             + "Example: " + VOLUNTEER_COMMAND_INDICATOR + " " + COMMAND_WORD + " "
             + VOLUNTEER_PREFIX_NAME + "John Doe "
             + VOLUNTEER_PREFIX_PHONE + "98765432 "
             + VOLUNTEER_PREFIX_EMAIL + "johndoe@example.com "
-            + VOLUNTEER_PREFIX_AVAILABLE_DATE + "2020-10-10 "
-            + VOLUNTEER_PREFIX_START_TIME + "11:00 "
-            + VOLUNTEER_PREFIX_END_TIME + "12:00 ";
+            + VOLUNTEER_PREFIX_AVAILABLE_DATE + "2020-10-10 ";
     // Example: /v new n/John Doe p/98765432 em/johndoe@example.com d/2024-10-15 s/09:00 e/17:00
     private final Volunteer toAdd;
 
