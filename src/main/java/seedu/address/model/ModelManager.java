@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -112,6 +113,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasLink(Link link) {
+        requireNonNull(link);
+        return addressBook.hasLink(link);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -124,6 +131,11 @@ public class ModelManager implements Model {
     @Override
     public void deletePet(Pet target) {
         addressBook.removePet(target);
+    }
+
+    @Override
+    public void deleteLink(Link link) {
+        addressBook.removeLink(link);
     }
 
     @Override
@@ -142,6 +154,11 @@ public class ModelManager implements Model {
     public void addPet(Pet pet) {
         addressBook.addPet(pet);
         updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
+    }
+
+    @Override
+    public void addLink(Link link) {
+        addressBook.addLink(link);
     }
 
     @Override
