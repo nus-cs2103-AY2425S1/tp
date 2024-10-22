@@ -100,7 +100,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         int index = internalList.indexOf(wedding);
 
         WeddingName weddingName = wedding.getWeddingName();
-        String date = wedding.getWeddingDate();
+        WeddingDate date = wedding.getWeddingDate();
         List<PersonId> assignees = wedding.getAssignees();
         assignees.add(assignee.getId());
 
@@ -124,7 +124,7 @@ public class UniqueWeddingList implements Iterable<Wedding> {
         int index = internalList.indexOf(wedding);
 
         WeddingName weddingName = wedding.getWeddingName();
-        String date = wedding.getWeddingDate();
+        WeddingDate date = wedding.getWeddingDate();
         List<PersonId> assignees = wedding.getAssignees();
         if (!assignees.contains(assignee.getId())) {
             throw new PersonNotAssignedToWeddingException();
