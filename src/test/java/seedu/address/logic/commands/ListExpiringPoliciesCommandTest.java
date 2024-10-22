@@ -2,12 +2,12 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +26,6 @@ import seedu.address.model.policy.PremiumAmount;
 
 public class ListExpiringPoliciesCommandTest {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private Model model;
 
     @BeforeEach
@@ -41,45 +40,44 @@ public class ListExpiringPoliciesCommandTest {
         String expectedMessage = String.format("No policies expiring within the next %d day(s)!", 30);
         assertCommandSuccess(command, model, expectedMessage, model);
     }
+    @Test
+    public void execute_expiringPoliciesFound_showsExpiringPolicies() {
+        Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
+                new UserPrefs());
 
-    // @Test
-    // public void execute_expiringPoliciesFound_showsExpiringPolicies() {
-    //     Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
-    //             new UserPrefs());
+        // dynamically calculate the expected expiry date (25 days from now)
+        LocalDate expiringDate = LocalDate.now().plusDays(25);
+        String formattedExpiryDate = expiringDate.format(MM_DD_YYYY_FORMATTER);
 
-    //     // dynamically calculate the expected expiry date (25 days from now)
-    //     LocalDate expiringDate = LocalDate.now().plusDays(25);
-    //     String formattedExpiryDate = expiringDate.format(DATE_FORMATTER);
+        ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(30);
+        String expectedMessage = String.format(
+                "The following policies are expiring within %d day(s):\n\n", 30)
+                + "Insuree name: Alice Pauline   |   "
+                + "Insuree phone: 94351253\nPolicy Type: Health   |   "
+                + "Premium Amount: 250.00\nCoverage Amount: 15000.00   |   Expiry Date: "
+                + formattedExpiryDate + "\n\n";
 
-    //     ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(30);
-    //     String expectedMessage = String.format(
-    //             "The following policies are expiring within %d day(s):\n\n", 30)
-    //             + "Insuree name: Alice Pauline   |   "
-    //             + "Insuree phone: 94351253\nPolicy Type: Health   |   "
-    //             + "Premium Amount: 250.00\nCoverage Amount: 15000.00   |   Expiry Date: "
-    //             + formattedExpiryDate + "\n\n";
+        assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
+    }
 
-    //     assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
-    // }
+    @Test
+    public void execute_customDaysSpecified_showsExpiringPolicies() {
+        Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
+                new UserPrefs());
 
-    // @Test
-    // public void execute_customDaysSpecified_showsExpiringPolicies() {
-    //     Model modelWithExpiringPolicies = new ModelManager(getTypicalAddressBookWithExpiringPolicies(),
-    //             new UserPrefs());
+        LocalDate expiringDate = LocalDate.now().plusDays(25);
+        String formattedExpiryDate = expiringDate.format(MM_DD_YYYY_FORMATTER);
 
-    //     LocalDate expiringDate = LocalDate.now().plusDays(25);
-    //     String formattedExpiryDate = expiringDate.format(DATE_FORMATTER);
+        // Command with 60 days time frame
+        ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(60);
+        String expectedMessage = String.format(
+                "The following policies are expiring within %d day(s):\n\n", 60)
+                + "Insuree name: Alice Pauline   |   Insuree phone: 94351253\n"
+                + "Policy Type: Health   |   Premium Amount: 250.00\n"
+                + "Coverage Amount: 15000.00   |   Expiry Date: " + formattedExpiryDate + "\n\n";
 
-    //     // Command with 60 days time frame
-    //     ListExpiringPoliciesCommand command = new ListExpiringPoliciesCommand(60);
-    //     String expectedMessage = String.format(
-    //             "The following policies are expiring within %d day(s):\n\n", 60)
-    //             + "Insuree name: Alice Pauline   |   Insuree phone: 94351253\n"
-    //             + "Policy Type: Health   |   Premium Amount: 250.00\n"
-    //             + "Coverage Amount: 15000.00   |   Expiry Date: " + formattedExpiryDate + "\n\n";
-
-    //     assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
-    // }
+        assertCommandSuccess(command, modelWithExpiringPolicies, expectedMessage, modelWithExpiringPolicies);
+    }
 
     @Test
     public void equals() {
