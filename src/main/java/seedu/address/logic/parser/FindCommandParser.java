@@ -62,10 +62,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             return new FindCommand(namePredicate);
         } else if (!phoneKeywords.isEmpty()) {
             return new FindCommand(phonePredicate);
-        } else if (!postalKeywords.isEmpty()) {
-            return new FindCommand(postalPredicate);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            return new FindCommand(postalPredicate);
         }
     }
 
