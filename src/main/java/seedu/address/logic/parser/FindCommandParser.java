@@ -43,20 +43,21 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_DEADLINE);
+                PREFIX_ADDRESS, PREFIX_DEADLINE, PREFIX_PROJECT_STATUS,
+                PREFIX_PAYMENT_STATUS, PREFIX_CLIENT_STATUS, PREFIX_DEADLINE);
 
-        // May not need orElse, just check using Optional.empty()
-        String name = argMultimap.getValue(PREFIX_NAME).orElse("");
-        String phone = argMultimap.getValue(PREFIX_PHONE).orElse("");
-        String email = argMultimap.getValue(PREFIX_EMAIL).orElse("");
-        String address = argMultimap.getValue(PREFIX_ADDRESS).orElse("");
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).orElse("__No_Name__"));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).orElse("__No_Phone__"));
+        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).orElse("__No_Email__"));
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).orElse("__No_Address__"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        String projectStatus = argMultimap.getValue(PREFIX_PROJECT_STATUS).orElse("");
-        String paymentStatus = argMultimap.getValue(PREFIX_PAYMENT_STATUS).orElse("");
-        String clientStatus = argMultimap.getValue(PREFIX_CLIENT_STATUS).orElse("");
-        String deadline = argMultimap.getValue(PREFIX_DEADLINE).orElse("");
-        return new FindCommand(new ArgumentPredicate(name, phone, email, address, tagList, projectStatus, paymentStatus,
-                clientStatus, deadline));
+        ProjectStatus projectStatus = ParserUtil.parseProjectStatus(argMultimap.getValue(PREFIX_PROJECT_STATUS).orElse("__No_Project_Status__"));
+        PaymentStatus paymentStatus = ParserUtil.parsePaymentStatus(argMultimap.getValue(PREFIX_PAYMENT_STATUS).orElse("__No_Payment_Status__"));
+        ClientStatus clientStatus = ParserUtil.parseClientStatus(argMultimap.getValue(PREFIX_CLIENT_STATUS).orElse("__No_Client_Status__"));
+        Deadline deadline = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).orElse("__No_Deadline__"));
+
+        Person person = new Person(name, phone, email, address, tagList, projectStatus, paymentStatus, clientStatus, deadline);
+        return new FindCommand(new ArgumentPredicate(person));
     }
 
     /**
