@@ -64,7 +64,7 @@ class JsonSerializableAddressBook {
             addressBook.addStudent(student);
         }
         for (JsonAdaptedConsultation jsonAdaptedConsultation : consults) {
-            Consultation consult = jsonAdaptedConsultation.toModelType();
+            Consultation consult = jsonAdaptedConsultation.toModelType(addressBook);
             addressBook.addConsult(consult);
         }
         return addressBook;

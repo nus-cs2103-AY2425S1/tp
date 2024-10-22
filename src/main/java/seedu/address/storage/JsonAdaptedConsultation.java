@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.consultation.Date;
 import seedu.address.model.consultation.Time;
@@ -18,6 +19,7 @@ import seedu.address.model.student.Student;
 class JsonAdaptedConsultation {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Consultation's %s field is missing!";
+    public static final String STUDENT_NOT_FOUND_MESSAGE = "Student %s does not exist in TAHub!";
     private final String date;
     private final String time;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -49,9 +51,10 @@ class JsonAdaptedConsultation {
     /**
      * Converts this Jackson-friendly adapted consultation object into the model's {@code Consultation} object.
      *
+     * @param addressBook AddressBook instance to verify that the student(s) exist in.
      * @throws IllegalValueException if there were any data constraints violated in the adapted consultation.
      */
-    public Consultation toModelType() throws IllegalValueException {
+    public Consultation toModelType(AddressBook addressBook) throws IllegalValueException {
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
@@ -72,7 +75,12 @@ class JsonAdaptedConsultation {
         final List<Student> modelStudents = new ArrayList<>();
 
         for (JsonAdaptedStudent student : students) {
-            modelStudents.add(student.toModelType());
+            Student modelStudent = student.toModelType();
+            // check to ensure student data matches an existing student
+            if (!addressBook.hasStudent(modelStudent)) {
+                throw new IllegalValueException(String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent));
+            }
+            modelStudents.add(modelStudent);
         }
 
         return new Consultation(modelDate, modelTime, modelStudents);
