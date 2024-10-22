@@ -37,4 +37,8 @@ public class SortCommand extends Command {
         }
         return new CommandResult(MESSAGE_SUCCESS + comparator.getSortDescription());
     }
+
+    public StudentComparator getComparator() {
+        return comparator;
+    }
 }

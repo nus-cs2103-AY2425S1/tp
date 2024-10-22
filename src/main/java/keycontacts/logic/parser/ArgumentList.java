@@ -30,8 +30,20 @@ public class ArgumentList {
         return argumentList.get(index).getValue();
     }
 
+    public List<String> getValues() {
+        List<String> values = new ArrayList<>();
+        for (ArgumentToken argument : argumentList) {
+            values.add(argument.getValue());
+        }
+        return values;
+    }
+
     public int size() {
         return argumentList.size();
+    }
+
+    public boolean isEmpty() {
+        return argumentList.isEmpty();
     }
 
     /**
