@@ -1,58 +1,89 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
-public class RestoreCommandTest {
+public class BackupCommandTest {
 
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "BackupCommandTest");
+
+    private static final Path BACKUP_FILE_PRESENT = TEST_DATA_FOLDER.resolve("backup");
+
+    private static final Path BACKUP_ADDRESSBOOK_PRESENT = BACKUP_FILE_PRESENT.resolve("backupAddressBook.json");
+
+    private static final Path MISSING_BACKUP_FILE = TEST_DATA_FOLDER.resolve("backupMissing");
+
+    private static final Path MISSING_BACKUP_ADDRESSBOOK = MISSING_BACKUP_FILE.resolve("backupMissingAddressBook.json");
+
+    private static final Path TYPICAL_ADDRESSBOOK = TEST_DATA_FOLDER.resolve("typicalAddressBook.json");
+
+    private void deleteIfPresent(Path file) {
+        try {
+            Files.deleteIfExists(file);
+        } catch (IOException e) {
+            fail();
+        }
+    }
+
+    private void checkIfIdentical(Path file1, Path file2) {
+        try {
+            assertEquals(Files.mismatch(file1, file2), -1);
+        } catch (IOException e) {
+            fail();
+        }
+    }
     @Test
-    public void execute_personHasBeenDeleted_restoreSuccessful() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        ModelStubWithDeletedPerson modelStub = new ModelStubWithDeletedPerson(validPerson);
-        CommandResult commandResult = new RestoreCommand().execute(modelStub);
+    public void execute_backupFilePresent_success() {
+        Path orignalAddressBook = TYPICAL_ADDRESSBOOK;
+        Path backupAddressBook = BACKUP_ADDRESSBOOK_PRESENT;
+        Model model = new ModelStub(orignalAddressBook, backupAddressBook);
+        String expectedMessage = BackupCommand.MESSAGE_SUCCESS;
+        BackupCommand backupCommand = new BackupCommand();
 
-        assertEquals(String.format(RestoreCommand.MESSAGE_RESTORE_PERSON_SUCCESS, Messages.format(validPerson)),
-                commandResult.getFeedbackToUser());
-        assertEquals(validPerson, modelStub.addedPerson);
+        assertCommandSuccess(backupCommand, model, expectedMessage, model);
+        checkIfIdentical(orignalAddressBook, backupAddressBook);;
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        ModelStubWithDeletedPerson modelStub = new ModelStubWithDeletedPerson(validPerson);
-        modelStub.addPerson(validPerson);
-        RestoreCommand restoreCommand = new RestoreCommand();
+    public void execute_backupFileEmptyAddressBook_success() {
+        Path orignalAddressBook = TYPICAL_ADDRESSBOOK;
+        Path backupAddressBook = MISSING_BACKUP_ADDRESSBOOK;
+        deleteIfPresent(backupAddressBook);
+        deleteIfPresent(MISSING_BACKUP_FILE);
+        Model model = new ModelStub(orignalAddressBook, backupAddressBook);
+        String expectedMessage = BackupCommand.MESSAGE_SUCCESS;
+        BackupCommand backupCommand = new BackupCommand();
 
-        assertThrows(CommandException.class, RestoreCommand.MESSAGE_DUPLICATE_PERSON, () ->
-                restoreCommand.execute(modelStub));
+        assertCommandSuccess(backupCommand, model, expectedMessage, model);
+        checkIfIdentical(orignalAddressBook, backupAddressBook);;
     }
-
-    @Test
-    public void execute_noDeletedPersonToRestore_throwsCommandException() {
-        ModelStubWithoutDeletedPerson modelStub = new ModelStubWithoutDeletedPerson();
-        RestoreCommand restoreCommand = new RestoreCommand();
-        assertThrows(CommandException.class, RestoreCommand.MESSAGE_NOTHING_TO_RESTORE, () ->
-                restoreCommand.execute(modelStub));
-    }
-
 
     private class ModelStub implements Model {
+
+        private Path addressBookFilePath;
+
+        private Path backupAddressBookFilePath;
+
+        ModelStub(Path addressBookFilePath, Path backupAddressBookFilePath) {
+            this.addressBookFilePath = addressBookFilePath;
+            this.backupAddressBookFilePath = backupAddressBookFilePath;
+        }
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -75,7 +106,7 @@ public class RestoreCommandTest {
 
         @Override
         public Path getAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            return addressBookFilePath;
         }
 
         @Override
@@ -85,7 +116,7 @@ public class RestoreCommandTest {
 
         @Override
         public Path getBackupAddressBookFilePath() {
-            throw new AssertionError("This method should not be called.");
+            return backupAddressBookFilePath;
         }
 
         @Override
@@ -97,7 +128,6 @@ public class RestoreCommandTest {
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void savePersonToDelete(Person person) {
             throw new AssertionError("This method should not be called.");
@@ -107,12 +137,10 @@ public class RestoreCommandTest {
         public boolean checkRestorable() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public void makeNotRestorable() {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public Person getLastDeletedPerson() {
             throw new AssertionError("This method should not be called.");
@@ -162,82 +190,7 @@ public class RestoreCommandTest {
         public ObservableList<Person> getPersonList() {
             throw new AssertionError("This method should not be called.");
         }
-    }
 
-    private class ModelStubWithDeletedPerson extends ModelStub {
-        private final Person deletedPerson;
-        private boolean restorable = true;
-        private Person addedPerson;
-
-        ModelStubWithDeletedPerson(Person deletedPerson) {
-            requireNonNull(deletedPerson);
-            this.deletedPerson = deletedPerson;
-        }
-
-        @Override
-        public boolean checkRestorable() {
-            return restorable;
-        }
-
-        @Override
-        public void makeNotRestorable() {
-            restorable = false;
-        }
-
-        @Override
-        public Person getLastDeletedPerson() {
-            return deletedPerson;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return person.isSamePerson(addedPerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            addedPerson = person;
-        }
-    }
-
-    private class ModelStubWithoutDeletedPerson extends ModelStub {
-        private Person deletedPerson;
-        private boolean restorable = false;
-        private Person addedPerson;
-
-        ModelStubWithoutDeletedPerson() {
-        }
-
-        @Override
-        public boolean checkRestorable() {
-            return restorable;
-        }
-
-        @Override
-        public void makeNotRestorable() {
-            restorable = false;
-        }
-
-        @Override
-        public Person getLastDeletedPerson() {
-            return deletedPerson;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return person.isSamePerson(addedPerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            addedPerson = person;
-        }
 
     }
 }
-
-
