@@ -28,7 +28,7 @@ public class StudentUtil {
     public static String getStudentDetails(Student student) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME).append(student.getName().fullName).append(" ");
-        sb.append(PREFIX_STUDENTID).append(student.getStudentID().value).append(" ");
+        sb.append(PREFIX_STUDENTID).append(student.getStudentId().value).append(" ");
         sb.append(PREFIX_PHONE).append(student.getPhone().value).append(" ");
         sb.append(PREFIX_EMAIL).append(student.getEmail().value).append(" ");
         sb.append(PREFIX_ADDRESS).append(student.getAddress().value).append(" ");

@@ -14,7 +14,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         return new Person[] {
-            new Student(new Name("Alex Yeoh"), new StudentID("A1234567B"), new Phone("87438807"),
+            new Student(new Name("Alex Yeoh"), new StudentId("A1234567B"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
                     getTagSet("year1")),
@@ -31,7 +31,7 @@ public class SampleDataUtil {
                     new Email("contact@apple.com"),
                     new Address("1 Infinite Loop, Cupertino, CA"),
                     getTagSet("partner", "technology")),
-            new Student(new Name("Charlotte Oliveiro"), new StudentID("A2345678C"),
+            new Student(new Name("Charlotte Oliveiro"), new StudentId("A2345678C"),
                     new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                     getTagSet("paidFee")),
@@ -39,7 +39,7 @@ public class SampleDataUtil {
                     new Email("info@nus.edu.sg"),
                     new Address("21 Lower Kent Ridge Rd, Singapore"),
                     getTagSet("education", "research")),
-            new Student(new Name("Irfan Ibrahim"), new StudentID("A3456789D"), new Phone("92492021"),
+            new Student(new Name("Irfan Ibrahim"), new StudentId("A3456789D"), new Phone("92492021"),
                     new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
                     getTagSet("year2")),

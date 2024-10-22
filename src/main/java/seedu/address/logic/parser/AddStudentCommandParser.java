@@ -18,7 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,14 +47,13 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID,
                 PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        StudentID studentID = ParserUtil.parseStudentID(argMultimap.getValue(PREFIX_STUDENTID).get());
+        StudentId studentID = ParserUtil.parseStudentID(argMultimap.getValue(PREFIX_STUDENTID).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Student student = new Student(name, studentID, phone, email, address, tagList);
-        System.out.println(studentID);
 
         return new AddStudentCommand(student);
     }

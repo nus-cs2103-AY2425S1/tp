@@ -11,7 +11,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
 import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,7 +28,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private StudentID studentID;
+    private StudentId studentID;
     private Industry industry;
     private Phone phone;
     private Email email;
@@ -41,7 +41,7 @@ public class PersonBuilder {
      */
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        studentID = new StudentID(DEFAULT_STUDENTID);
+        studentID = new StudentId(DEFAULT_STUDENTID);
         industry = new Industry(DEFAULT_INDUSTRY);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
@@ -61,7 +61,7 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
 
         if (personToCopy instanceof Student) {
-            studentID = ((Student) personToCopy).getStudentID();
+            studentID = ((Student) personToCopy).getStudentId();
             category = "student";
         } else if (personToCopy instanceof Company) {
             industry = ((Company) personToCopy).getIndustry();
@@ -91,7 +91,7 @@ public class PersonBuilder {
      * Sets the {@code StudentID} of the {@code Student} that we are building.
      */
     public PersonBuilder withStudentID(String studentID) {
-        this.studentID = new StudentID(studentID);
+        this.studentID = new StudentId(studentID);
         return this;
     }
 

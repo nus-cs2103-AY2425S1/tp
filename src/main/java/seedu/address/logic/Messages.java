@@ -42,7 +42,7 @@ public class Messages {
 
         if (person instanceof Student) {
             Student student = (Student) person;
-            builder.append("; Student ID: ").append(student.getStudentID());
+            builder.append("; Student ID: ").append(student.getStudentId());
         } else if (person instanceof Company) {
             Company company = (Company) person;
             builder.append("; Industry: ").append(company.getIndustry());

@@ -9,7 +9,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.company.Industry;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -55,7 +55,7 @@ public abstract class Person {
     }
 
     public abstract String getCategoryDisplayName();
-    public abstract StudentID getStudentID();
+    public abstract StudentId getStudentId();
     public abstract Industry getIndustry();
 
     /**

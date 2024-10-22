@@ -8,7 +8,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.student.Student;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,7 +24,7 @@ public class StudentBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private StudentID studentID;
+    private StudentId studentID;
     private Phone phone;
     private Email email;
     private Address address;
@@ -35,7 +35,7 @@ public class StudentBuilder {
      */
     public StudentBuilder() {
         name = new Name(DEFAULT_NAME);
-        studentID = new StudentID(DEFAULT_STUDENTID);
+        studentID = new StudentId(DEFAULT_STUDENTID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -47,7 +47,7 @@ public class StudentBuilder {
      */
     public StudentBuilder(Student studentToCopy) {
         name = studentToCopy.getName();
-        studentID = studentToCopy.getStudentID();
+        studentID = studentToCopy.getStudentId();
         phone = studentToCopy.getPhone();
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
@@ -66,7 +66,7 @@ public class StudentBuilder {
      * Sets the {@code StudentID} of the {@code Student} that we are building.
      */
     public StudentBuilder withStudentID(String studentID) {
-        this.studentID = new StudentID(studentID);
+        this.studentID = new StudentId(studentID);
         return this;
     }
 

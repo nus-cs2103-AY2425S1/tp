@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidID(String)}
  */
-public class StudentID {
+public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Student ID should be of the format \"A0123456X\"";
@@ -18,12 +18,12 @@ public class StudentID {
     /**
      * Constructs a {@code StudentID}.
      *
-     * @param studentID A valid student ID.
+     * @param studentId A valid student ID.
      */
-    public StudentID(String studentID) {
-        requireNonNull(studentID);
-        checkArgument(isValidID(studentID), MESSAGE_CONSTRAINTS);
-        value = studentID;
+    public StudentId(String studentId) {
+        requireNonNull(studentId);
+        checkArgument(isValidID(studentId), MESSAGE_CONSTRAINTS);
+        value = studentId;
     }
 
     /**
@@ -45,12 +45,12 @@ public class StudentID {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentID)) {
+        if (!(other instanceof StudentId)) {
             return false;
         }
 
-        StudentID otherStudentID = (StudentID) other;
-        return value.equals(otherStudentID.value);
+        StudentId otherStudentId = (StudentId) other;
+        return value.equals(otherStudentId.value);
     }
 
     @Override

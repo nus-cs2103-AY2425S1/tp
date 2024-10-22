@@ -11,7 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Industry;
-import seedu.address.model.person.student.StudentID;
+import seedu.address.model.person.student.StudentId;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,7 +35,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Person person) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(person.getName());
-        descriptor.setStudentID(person.getStudentID());
+        descriptor.setStudentID(person.getStudentId());
         descriptor.setIndustry(person.getIndustry());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
@@ -55,7 +55,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code StudentID} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withStudentID(String studentID) {
-        descriptor.setStudentID(new StudentID(studentID));
+        descriptor.setStudentID(new StudentId(studentID));
         return this;
     }
 
