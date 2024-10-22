@@ -25,9 +25,11 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
+import seedu.address.model.person.NameComparator;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneBeginsWithKeywordPredicate;
@@ -136,6 +138,14 @@ public class ClientHubParserTest {
         FindClientTypeCommand command = (FindClientTypeCommand) parser.parseCommand(
                 FindClientTypeCommand.COMMAND_WORD + " " + keyword);
         assertEquals(new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(List.of(keyword))), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        String criteria = "n/";
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + criteria);
+        assertEquals(new SortCommand(new NameComparator()), command);
     }
 
     @Test

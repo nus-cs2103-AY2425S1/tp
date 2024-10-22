@@ -3,7 +3,6 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -15,6 +14,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.NameComparator;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.ClientHubBuilder;
 
@@ -89,13 +89,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    public void getDisplayPersons_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getDisplayPersons().remove(0));
     }
 
     @Test
     public void equals() {
-        ClientHub clientHub = new ClientHubBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        ClientHub clientHub = new ClientHubBuilder().withPerson(BENSON).withPerson(ALICE).build();
         ClientHub differentClientHub = new ClientHub();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -121,8 +121,17 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(clientHub, userPrefs)));
 
+        // reset filteredList -> returns true
+        modelManager.updateUnfilteredList();
+        assertTrue(modelManager.equals(new ModelManager(clientHub, userPrefs)));
+
+        // different sortedList -> returns false
+        modelManager.updateSortedPersonList(new NameComparator());
+        assertFalse(modelManager.equals(new ModelManager(clientHub, userPrefs)));
+
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateUnfilteredList();
+        assertTrue(modelManager.equals(new ModelManager(clientHub, userPrefs)));
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
