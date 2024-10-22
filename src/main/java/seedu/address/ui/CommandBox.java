@@ -86,6 +86,9 @@ public class CommandBox extends UiPart<Region> {
         addKeyReleasedEventForCommandTextField();
     }
 
+    /**
+     * Adds an event filter to the commandTextField (TextField) to handle key pressed events.
+     */
     private void addKeyPressedEventForCommandTextField() {
         commandTextField.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.TAB) {
@@ -102,6 +105,9 @@ public class CommandBox extends UiPart<Region> {
         });
     }
 
+    /**
+     * Adds an event filter to the commandTextField (TextField) to handle key released events.
+     */
     private void addKeyReleasedEventForCommandTextField() {
         commandTextField.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
             if (!isAllowedKey(event.getCode())) {
@@ -118,6 +124,12 @@ public class CommandBox extends UiPart<Region> {
         });
     }
 
+    /**
+     * Returns the (list of) parameters associated with the specified command.
+     *
+     * @param command The command String for which to return the associated parameters.
+     * @return An ObserableList of parameters associated to the specified command.
+     */
     private ObservableList<String> getParameters(String command) {
         switch (command) {
         case "cadd":
@@ -137,6 +149,11 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Checks if the lastInput starts withs a prefix of any known prefixes.
+     *
+     * @return True if lastInput starts with any known prefixes; false otherwise.
+     */
     private boolean isLastInputPrefix() {
         HashSet<String> allPrefixes = new HashSet<>(Arrays.asList(PREFIX_EMAIL.getPrefix(), PREFIX_NAME.getPrefix(),
                 PREFIX_PHONE.getPrefix(), PREFIX_KEYWORD.getPrefix(), PREFIX_CLIENT_INDEX.getPrefix(),
@@ -153,6 +170,13 @@ public class CommandBox extends UiPart<Region> {
         return false;
     }
 
+    /**
+     * Returns a list of matches (String) based on the specified input and parameters.
+     *
+     * @param input The input String use for finding matches.
+     * @param parameters The list of parameters use for finding matches (if needed).
+     * @return An ObservableList list of matches (String) based on the specified input and parameters.
+     */
     private ObservableList<String> getMatches(String input, ObservableList<String> parameters) {
         ObservableList<String> matches = FXCollections.observableArrayList();
 
@@ -179,6 +203,14 @@ public class CommandBox extends UiPart<Region> {
         return matches;
     }
 
+    /**
+     * Processes the list of matches (String) using parameters and words.
+     * Then update words to reflect the matches (if any).
+     *
+     * @param words The list of words to be updated with the matches.
+     * @param parameters The list of parameters use to check the existence of prefix.
+     * @param matches The list of matches (String) use to update words.
+     */
     private void processMatches(ArrayList<String> words, ObservableList<String> parameters,
                                              ObservableList<String> matches) {
         boolean isParameter = false;
@@ -207,6 +239,11 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Returns the last word from commandTextField.
+     *
+     * @return The last word from commandTextField, or an empty String if commandTextField ends with space or invalid.
+     */
     private String getLastInput() {
         String input = commandTextField.getText();
 
@@ -220,6 +257,9 @@ public class CommandBox extends UiPart<Region> {
         return lastWord;
     }
 
+    /**
+     * Performs autocompletion for the commandTextField based on the value of commandTextField.
+     */
     private void autocomplete() {
         String input = commandTextField.getText();
         ArrayList<String> words = new ArrayList<>(List.of(input.trim().split("\\s+")));
@@ -250,11 +290,22 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Checks if the given key code is alphanumeric or an allowed symbol.
+     *
+     * @param code The key to be checked against.
+     * @return True if the key is allowed; false otherwise.
+     */
     private boolean isAllowedKey(KeyCode code) {
-        // Check if the key is alphanumeric or an allowed symbol
         return code.isLetterKey() || code.isDigitKey() || isAllowedSymbolKey(code);
     }
 
+    /**
+     * Checks if the given key code is an allowed symbol key.
+     *
+     * @param code The key to be checked against.
+     * @return True if the key is allowed; false otherwise.
+     */
     private boolean isAllowedSymbolKey(KeyCode code) {
         switch (code) {
         case ENTER, BACK_SPACE, MINUS, EQUALS, SEMICOLON, COMMA, PERIOD, SLASH, BACK_SLASH, QUOTE:
