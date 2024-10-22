@@ -117,6 +117,16 @@ public class EduLog implements ReadOnlyEduLog {
         student.unmark();
     }
 
+    /**
+     * Marks given student as present.
+     *
+     * @param student the student to mark as present.
+     */
+    public void markStudent(Student student) {
+        requireNonNull(student);
+        student.mark();
+    }
+
     public void unmarkAllStudents() {
         students.forEach(Student::unmark);
     }
