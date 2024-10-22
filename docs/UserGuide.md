@@ -166,7 +166,7 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Populating with dummy data
+### Populating with dummy data : `seed`
 
 Adds dummy data to the address book.
 
