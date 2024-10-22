@@ -25,4 +25,10 @@ public class OptionalUtilTest {
         Optional<?> optionalWithNullValue = Optional.ofNullable(null);
         assertEquals("", OptionalUtil.optionalToString(optionalWithNullValue));
     }
+
+    @Test
+    public void optionalToString_optionalWithNonStringValue_returnsValueString() {
+        Optional<Integer> optionalWithValue = Optional.of(123);
+        assertEquals("123", OptionalUtil.optionalToString(optionalWithValue));
+    }
 }

@@ -101,12 +101,10 @@ public class AppointmentDescriptor {
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this)
+        return new ToStringBuilder(this)
                 .add("appointment type", appointmentType)
                 .add("appointment datetime", appointmentDateTime)
                 .add("sickness", OptionalUtil.optionalToString(sickness))
-                .add("medicine", OptionalUtil.optionalToString(medicine));
-
-        return builder.toString();
+                .add("medicine", OptionalUtil.optionalToString(medicine)).toString();
     }
 }
