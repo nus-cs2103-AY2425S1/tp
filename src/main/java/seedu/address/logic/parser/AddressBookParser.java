@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddPropertyToBuyCommand;
 import seedu.address.logic.commands.AddPropertyToSellCommand;
+import seedu.address.logic.commands.BoughtPropertyCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -104,8 +105,13 @@ public class AddressBookParser {
 
         case DeletePropertyToSellCommand.COMMAND_WORD:
             return new DeletePropertyToSellCommandParser().parse(arguments);
+
         case SortIndividualCommand.COMMAND_WORD:
             return new SortIndividualCommandParser().parse(arguments);
+
+        case BoughtPropertyCommand.COMMAND_WORD:
+            return new BoughtPropertyCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

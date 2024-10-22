@@ -13,8 +13,8 @@ import static java.util.Objects.requireNonNull;
 public class AddressBookStatistics {
 
     private int totalPersons;
-    private UniqueBuyingPropertyList buyingPropertyList;
-    private UniqueSellingPropertyList sellingPropertyList;
+    private UniqueBuyingPropertyList uniqueBuyingPropertyList;
+    private UniqueSellingPropertyList uniqueSellingPropertyList;
 
 
     private int totalPropertiesBought;
@@ -29,12 +29,8 @@ public class AddressBookStatistics {
         this.totalPropertiesSold = 0;
         this.totalSalesRevenue = 0;
         this.totalPurchaseExpense = 0;
-        this.sellingPropertyList = new UniqueSellingPropertyList();
-        this.buyingPropertyList = new UniqueBuyingPropertyList();
-    }
-
-    public void incrementTotalPersonCount() {
-        this.totalPersons += 1;
+        this.uniqueSellingPropertyList = new UniqueSellingPropertyList();
+        this.uniqueBuyingPropertyList = new UniqueBuyingPropertyList();
     }
 
     public void processPersonData(Person person) {
@@ -42,8 +38,8 @@ public class AddressBookStatistics {
         ObservableList<Property> listoOfSellingProperties = person.getListOfSellingProperties();
         ObservableList<Property> listoOfBuyingProperties = person.getListOfBuyingProperties();
         this.totalPersons += 1;
-        this.sellingPropertyList.addUniqueSellingProperties(listoOfSellingProperties);
-        this.buyingPropertyList.addUniqueBuyingProperties(listoOfBuyingProperties);
+        this.uniqueSellingPropertyList.addUniqueSellingProperties(listoOfSellingProperties);
+        this.uniqueBuyingPropertyList.addUniqueBuyingProperties(listoOfBuyingProperties);
         this.totalPropertiesSold += person.getNumberOfPropertiesSold(); //TODO Testing
         this.totalPropertiesBought += person.getNumberOfPropertiesBought(); //TODO Testing
         this.totalSalesRevenue += person.getSalesRevenue(); //TODO Test once SoldCommand is implemented

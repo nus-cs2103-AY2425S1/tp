@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,7 +108,7 @@ public class Person {
      * Returns the total sales revenue for this person who has sold properties.
      */
     public int getSalesRevenue() {
-        return this.getListOfPropertiesSold().stream().mapToInt(property -> property.getPrice().getPrice()).sum();
+        return this.getListOfPropertiesSold().stream().mapToInt(property -> property.getActualPrice().getPrice()).sum();
     }
 
     /**
@@ -150,6 +147,7 @@ public class Person {
 
     /**
      * Returns true if property is in the list of properties to buy.
+     *
      * @param property Property to check
      * @return boolean
      */
@@ -159,6 +157,7 @@ public class Person {
 
     /**
      * Adds a property to the list of properties to buy.
+     *
      * @param property Property to add
      */
     public void addBuyProperty(Property property) {
@@ -167,6 +166,7 @@ public class Person {
 
     /**
      * Returns true if property is in the list of properties to sell.
+     *
      * @param property Property to check
      * @return boolean
      */
@@ -176,6 +176,7 @@ public class Person {
 
     /**
      * Adds a property to the list of properties to sell.
+     *
      * @param property Property to add
      */
     public void addSellProperty(Property property) {
@@ -184,6 +185,7 @@ public class Person {
 
     /**
      * Deletes a property from the list of properties to sell.
+     *
      * @param index One based Index of property to delete based on user's view.
      */
     public void deleteSellProperty(Index index) {
@@ -192,11 +194,57 @@ public class Person {
 
     /**
      * Deletes a property from the list of properties to buy.
+     *
      * @param index One based Index of property to delete based on user's view.
      */
     public void deleteBuyProperty(Index index) {
         buyingProperties.remove(index.getZeroBased());
     }
+
+    /**
+     * Records a {@code Property} as purchased and removes it from the list of properties to buy.
+     *
+     * @param index One based Index of property to record and delete.
+     */
+    public Property boughtProperty(Index index, Optional<Price> actualPrice) {
+        Property propertyToBeUpdated = buyingProperties.get(index.getZeroBased());
+        propertyToBeUpdated.setActualPrice(actualPrice);
+        propertiesBought.add(propertyToBeUpdated);
+        buyingProperties.remove(propertyToBeUpdated);
+        return propertyToBeUpdated;
+    }
+
+    /**
+     * Records a {@code Property} as sold and removes it from the list of properties to sell.
+     *
+     * @param index One based Index of property to record and delete.
+     */
+    public void soldProperty(Index index) {
+        Property propertyToBeUpdated = sellingProperties.get(index.getZeroBased());
+        propertiesSold.add(propertyToBeUpdated);
+        sellingProperties.remove(propertyToBeUpdated);
+    }
+
+    /**
+     * Returns True if the propertyIndex {@code Index} is within the range of the list of selling properties.
+     *
+     * @param propertyIndex One based index of the property in the property list as seen by the user.
+     */
+    public boolean isValidSellingPropertyIndex(Index propertyIndex) {
+        int index = propertyIndex.getZeroBased();
+        return (index >= 0 && index < sellingProperties.size());
+    }
+
+    /**
+     * Returns True if the propertyIndex {@code Index} is within the range of the list of selling properties.
+     *
+     * @param propertyIndex One based index of the property in the property list as seen by the user.
+     */
+    public boolean isValidBuyingPropertyIndex(Index propertyIndex) {
+        int index = propertyIndex.getZeroBased();
+        return (index >= 0 && index < buyingProperties.size());
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

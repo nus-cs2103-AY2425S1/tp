@@ -87,7 +87,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * The person must not already exist in the address book.
      */
     public void addPerson(Person p) {
-        statistics.incrementTotalPersonCount();
         statistics.processPersonData(p);
         persons.add(p);
     }

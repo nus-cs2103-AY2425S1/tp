@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -210,6 +211,19 @@ public class ParserUtil {
             throw new ParseException(Price.MESSAGE_CONSTRAINTS);
         }
         return new Price(trimmedBuyingPrice);
+    }
+
+    /**
+     * Parses a {@code String actualPrice} into a {@code ActualPrice}.
+     *
+     * @throws ParseException if the given {@code actualPrice} is invalid.
+     */
+    public static Optional<Price> parseActualPrice(String price) throws ParseException {
+        if (price == null) {
+            return Optional.of(new Price("0"));
+        } else {
+            return Optional.of(new Price(price));
+        }
     }
 
     /**

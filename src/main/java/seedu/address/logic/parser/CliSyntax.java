@@ -18,4 +18,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_UNIT_NUMBER = new Prefix("un/");
     public static final Prefix PREFIX_FIELD = new Prefix("f/");
     public static final Prefix PREFIX_ORDER = new Prefix("o/");
+    public static final Prefix PREFIX_ACTUAL_PRICE = new Prefix("ap/");
 }

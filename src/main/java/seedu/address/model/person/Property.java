@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ public abstract class Property {
     private final PostalCode postalCode;
     private final UnitNumber unitNumber;
     private final Price price;
+    private Price actualPrice;
     private final Set<Tag> tags;
 
     /**
@@ -63,6 +65,15 @@ public abstract class Property {
     }
 
     /**
+     * Returns the actual price associated with this property
+     *
+     * @return the {@code actualPrice} of this property
+     */
+    public Price getActualPrice() {
+        return actualPrice;
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
@@ -82,6 +93,18 @@ public abstract class Property {
                 && this.getClass().equals(otherProperty.getClass())
                 && otherProperty.getPostalCode().equals(getPostalCode())
                 && otherProperty.getUnitNumber().equals(getUnitNumber());
+    }
+
+    /**
+     * Sets the actual price {@code Price} if the user specifies an actual price.
+     * Else set actual price {@code Price} with the original price.
+     *
+     * @param newPrice Price {@code Price} that the user specifies as the actual price.
+     */
+    public void setActualPrice(Optional<Price> newPrice) {
+        newPrice.ifPresentOrElse(
+                price -> this.actualPrice = price,
+                () -> this.actualPrice = new Price(this.price.value));
     }
 
     @Override
@@ -110,8 +133,8 @@ public abstract class Property {
         String formattedTags = tags.stream()
                 .map(Tag::toString) // Convert each Tag object to its String representation
                 .collect(Collectors.joining(", ")); // Join with a comma and space
-        return "Postal Code: " + postalCode + "; " + " Unit Number: " + unitNumber + "; " + " Price: " + price
-                + "; Tags: " + formattedTags;
+        return "Postal Code: " + postalCode + "; " + " Unit Number: " + unitNumber + "; " + " Price: " + price + "; "
+                + " Actual Price: " + actualPrice + "; Tags: " + formattedTags;
     }
     /*public String toString() {
         return "[" + postalCode + "]" + " Unit Number: " + unitNumber;
