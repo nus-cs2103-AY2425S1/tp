@@ -143,7 +143,7 @@ public class ModelManager implements Model {
      */
     private void ensureSelectedPersonIsValid(ListChangeListener.Change<? extends Person> change) {
         while (change.next()) {
-            if (selectedPerson.getValue() == null) {
+            if (this.getSelectedPerson() == null) {
                 return;
             }
 
