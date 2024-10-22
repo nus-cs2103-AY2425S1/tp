@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,6 +25,7 @@ public class Birthdate {
      */
     public Birthdate(String birthdate) {
         requireNonNull(birthdate);
+        checkArgument(isValidBirthdate(birthdate), MESSAGE_CONSTRAINTS);
         value = birthdate;
     }
 
