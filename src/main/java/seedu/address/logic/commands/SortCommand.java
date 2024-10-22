@@ -21,7 +21,7 @@ public class SortCommand extends Command {
         requireNonNull(model);
 
         model.sortFilteredPersons();
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS); // Reset the filter to show all, which will now be sorted.
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
