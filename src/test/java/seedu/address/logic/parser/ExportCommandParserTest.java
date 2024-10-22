@@ -84,4 +84,42 @@ public class ExportCommandParserTest {
         ExportCommand expectedHyphenCommand = new ExportCommand(filenameWithHyphen, false, dataDir);
         assertEquals(expectedHyphenCommand, parser.parse(filenameWithHyphen));
     }
+
+    @Test
+    public void parse_emptyFilename_throwsParseException() {
+        // When force flag is present but filename is empty
+        assertThrows(ParseException.class,
+                ExportCommandParser.MESSAGE_INVALID_FILENAME, () -> parser.parse("test.file"));
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExportCommand.MESSAGE_USAGE), () -> parser.parse("-f "));
+
+        // When force flag is present but only spaces after it
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExportCommand.MESSAGE_USAGE), () -> parser.parse("-f      "));
+    }
+
+    @Test
+    public void parse_forceWithoutFilename_throwsParseException() {
+        // Just "-f" without filename
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExportCommand.MESSAGE_USAGE), () -> parser.parse("-f"));
+
+        // "-f" with only spaces after it
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExportCommand.MESSAGE_USAGE), () -> parser.parse("-f    "));
+
+        // Multiple spaces before "-f"
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExportCommand.MESSAGE_USAGE), () -> parser.parse("    -f"));
+
+        // Multiple spaces before and after "-f"
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ExportCommand.MESSAGE_USAGE), () -> parser.parse("    -f    "));
+    }
 }
