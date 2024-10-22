@@ -34,9 +34,9 @@ public class DelAllergyCommandParser implements Parser<DelAllergyCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NRIC, PREFIX_ALLERGY);
 
-        // Check if NRIC is provided
+        // Check if NRIC and allergy is provided
         if (!argMultimap.arePrefixesPresent(PREFIX_NRIC, PREFIX_ALLERGY) || !argMultimap.getPreamble().isEmpty()) {
-            logger.warning("NRIC not provided in DelAllergyCommand arguments.");
+            logger.warning("NRIC and allergy not provided in DelAllergyCommand arguments.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DelAllergyCommand.MESSAGE_USAGE));
         }
 
