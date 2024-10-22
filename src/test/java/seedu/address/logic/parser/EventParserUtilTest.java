@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Date;
+import seedu.address.model.event.Description;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
@@ -169,12 +170,14 @@ public class EventParserUtilTest {
 
     @Test
     public void parseDescription_validValueWithoutWhitespace_returnsDescription() throws Exception {
-        assertEquals(VALID_DESCRIPTION, EventParserUtil.parseDescription(VALID_DESCRIPTION));
+        Description validDescription = new Description(VALID_DESCRIPTION);
+        assertEquals(validDescription, EventParserUtil.parseDescription(VALID_DESCRIPTION));
     }
 
     @Test
     public void parseDescription_validValueWithWhitespace_returnsTrimmedDescription() throws Exception {
         String descriptionWithWhitespace = WHITESPACE + VALID_DESCRIPTION + WHITESPACE;
-        assertEquals(VALID_DESCRIPTION, EventParserUtil.parseDescription(descriptionWithWhitespace));
+        Description validDescription = new Description(VALID_DESCRIPTION);
+        assertEquals(validDescription, EventParserUtil.parseDescription(descriptionWithWhitespace));
     }
 }
