@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +24,6 @@ import seedu.address.testutil.PersonBuilder;
  * Contains integration tests (interaction with the Model) for {@code SearchPolicyCommand}.
  */
 public class SearchPolicyCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new seedu.address.model.UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new seedu.address.model.UserPrefs());
 
     @Test
     public void equals() throws CommandException {
@@ -63,11 +60,26 @@ public class SearchPolicyCommandTest {
 
     @Test
     public void execute_noPersonWithPolicy_noPersonFound() {
-        String policyName = "LifeInsurance";
-        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
+        Model model = new ModelManager();
+
+        // Create policy object
+        Policy lifeInsurance = new Policy("life insurance", "2024-10-10",
+                "2030-10-10", "2024-11-10 100.00");
+
+        String nonExistentPolicyName = "non-existent insurance";
+        String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, nonExistentPolicyName);
+
+        // create a person with health insurance policy
+        Person alice = new PersonBuilder().withName("Alice").build();
+        alice.setPolicies(new ArrayList<>(Arrays.asList(lifeInsurance)));
+
+        model.addPerson(alice);
+
 
         try {
-            SearchPolicyCommand command = new SearchPolicyCommand(policyName);
+            SearchPolicyCommand command = new SearchPolicyCommand(nonExistentPolicyName);
+            Model expectedModel = new ModelManager();
+            expectedModel.addPerson(alice);
             expectedModel.updateFilteredPersonList(person -> false);
 
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
