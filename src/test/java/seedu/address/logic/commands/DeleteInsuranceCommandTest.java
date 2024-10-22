@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
@@ -68,6 +70,38 @@ class DeleteInsuranceCommandTest {
 
         // Expect CommandException due to invalid insurance plan
         assertThrows(CommandException.class, () -> deleteInsuranceCommand.execute(model));
+    }
+
+    @Test
+    public void equals() {
+        Index indexFirst = Index.fromZeroBased(0);
+        Index indexSecond = Index.fromZeroBased(1);
+
+        int insuranceIdFirst = 0;
+        int insuranceIdSecond = 1;
+
+        DeleteInsuranceCommand deleteFirstCommand = new DeleteInsuranceCommand(indexFirst, insuranceIdFirst);
+        DeleteInsuranceCommand deleteFirstCommandCopy = new DeleteInsuranceCommand(indexFirst, insuranceIdFirst);
+        DeleteInsuranceCommand deleteSecondCommand = new DeleteInsuranceCommand(indexSecond, insuranceIdSecond);
+
+        // same object -> returns true
+        assertEquals(deleteFirstCommand, deleteFirstCommand);
+
+        // same values -> returns true
+        assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
+
+        // different index -> returns false
+        assertNotEquals(deleteFirstCommand, deleteSecondCommand);
+
+        // different insurance ID -> returns false
+        DeleteInsuranceCommand deleteDifferentIDCommand = new DeleteInsuranceCommand(indexFirst, insuranceIdSecond);
+        assertNotEquals(deleteFirstCommand, deleteDifferentIDCommand);
+
+        // null -> returns false
+        assertNotEquals(deleteFirstCommand, null);
+
+        // different type -> returns false
+        assertNotEquals(deleteFirstCommand, 1);
     }
 }
 
