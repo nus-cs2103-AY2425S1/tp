@@ -59,23 +59,15 @@ public class DeleteReminderCommand extends Command{
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof DeleteAppointmentCommand)) {
-            return false;
-        }
-
-        DeleteReminderCommand otherDeleteReminderCommand = (DeleteReminderCommand) other;
-        return name.equals(otherDeleteReminderCommand.name);
+        return other == this // short circuit if same object
+                || (other instanceof DeleteReminderCommand // instanceof handles nulls
+                && name.equals(((DeleteReminderCommand) other).name)); // state check
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toDeleteReminder", name)
+                .add("toDeleteReminderFor", name)
                 .toString();
     }
 }
