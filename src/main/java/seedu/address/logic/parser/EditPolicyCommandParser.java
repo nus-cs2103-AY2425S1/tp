@@ -4,8 +4,6 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
 
-import java.time.LocalDate;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditPolicyCommand;
@@ -45,10 +43,10 @@ public class EditPolicyCommandParser implements Parser<EditPolicyCommand> {
         EditPolicyDescriptor editPolicyDescriptor = new EditPolicyDescriptor(policyType);
 
         if (argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).isPresent()) {
-            editPolicyDescriptor.setPremiumAmount(ParserUtil.parsePolicyAmount(argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).get()));
+            editPolicyDescriptor.setPremiumAmount(ParserUtil.parsePremiumAmount(argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).isPresent()) {
-            editPolicyDescriptor.setCoverageAmount(ParserUtil.parsePolicyAmount(argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).get()));
+            editPolicyDescriptor.setCoverageAmount(ParserUtil.parseCoverageAmount(argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).isPresent()) {
             editPolicyDescriptor.setExpiryDate(ParserUtil.parseExpiryDate(argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).get()));
