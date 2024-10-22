@@ -37,7 +37,8 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
             + "Example: " + COMMAND_WORD + " " + PREFIX_TELEGRAM + "alexYeoh "
             + PREFIX_TELEGRAM + "berniceYu " + PREFIX_DATE + "2024-10-21";
 
-    public static final String MESSAGE_UNMARK_PERSON_SUCCESS = "Unmark %1$d people's attendance on %2$s.";
+    public static final String MESSAGE_UNMARK_PERSON_SUCCESS =
+            "Successfully unmark the attendance on %1$s for these people: %2$s";
 
     private final List<Telegram> telegrams;
     private final Attendance attendance;
@@ -62,15 +63,16 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        List<Person> peopleToMarkAttendance = findByTelegram(telegrams, lastShownList);
-        if (peopleToMarkAttendance.isEmpty()) {
+        List<Person> peopleToUnmarkAttendance = findByTelegram(telegrams, lastShownList);
+        List<String> peopleNames = peopleToUnmarkAttendance.stream().map(p -> p.getName().toString()).toList();
+        if (peopleToUnmarkAttendance.isEmpty()) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_TELEGRAM, telegrams));
         }
 
-        unmarkAttendance(model, peopleToMarkAttendance, this.attendance);
+        unmarkAttendance(model, peopleToUnmarkAttendance, this.attendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(
-                MESSAGE_UNMARK_PERSON_SUCCESS, peopleToMarkAttendance.size(), attendance));
+                MESSAGE_UNMARK_PERSON_SUCCESS, attendance, peopleNames));
     }
 
     @Override
