@@ -37,6 +37,6 @@ public class LessonCard extends UiPart<Region> {
         endDateTime.setText(lesson.getEndDateTimeString());
         student.setText(lesson.getStudentName());
         address.setText(lesson.getAddress());
-        fee.setText(lesson.getFee());
+        fee.setText(lesson.getAmountPerHour());
     }
 }
