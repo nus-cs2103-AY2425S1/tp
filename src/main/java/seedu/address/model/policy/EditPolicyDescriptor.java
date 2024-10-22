@@ -1,3 +1,5 @@
+package seedu.address.model.policy;
+
 import java.util.Optional;
 import seedu.address.model.policy.PremiumAmount;
 import seedu.address.model.policy.CoverageAmount;
