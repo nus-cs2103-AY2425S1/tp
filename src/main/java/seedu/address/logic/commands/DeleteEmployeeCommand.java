@@ -18,11 +18,6 @@ public class DeleteEmployeeCommand extends DeleteCommand {
 
     public static final String COMMAND_TYPE = "e";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the employee identified by the index number used in the employee list.\n"
-            + "Parameters: e INDEX\n"
-            + "Employee Example: " + COMMAND_WORD + " e 1";
-
     /**
      * @param targetIndex of the person in the displayed list to delete.
      */
