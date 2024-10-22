@@ -246,11 +246,11 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding or editing a grade: `grade`
+### Adding or editing a grade: `addGrade`
 
 Adds or updates a grade for a person in the address book. If a grade with the same test name already exists, it will be overwritten.
 
-Format: `grade INDEX TEST_NAME SCORE WEIGHTAGE`
+Format: `addGrade INDEX n/TEST_NAME s/SCORE w/WEIGHTAGE`
 
 * Adds or updates a grade for the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `TEST_NAME` refers to the name of the test (e.g. Midterm Exam).
@@ -259,22 +259,22 @@ Format: `grade INDEX TEST_NAME SCORE WEIGHTAGE`
 * If a grade with the same `TEST_NAME` exists, it will be updated with the new `SCORE` and `WEIGHTAGE`.
 
 Examples:
-* `grade 2 Midterm 85 20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
-* `find Betsy` followed by `grade 1 FinalExam 92 30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
+* `grade 2 n/Midterm s/85 w/20` Adds or updates a grade for the 2nd person in the list with a score of 85% for a test named "Midterm" with a 20% weightage.
+* `find Betsy` followed by `grade 1 n/FinalExam s/92 w/30` Adds or updates a grade for the 1st person in the results of the `find` command with a score of 92% for "FinalExam" and 30% weightage.
 
 ### Deleting a grade from a person: `deleteGrade`
 
 Deletes a grade for a person in the address book.
 
-Format: `deleteGrade INDEX TEST_NAME`
+Format: `deleteGrade INDEX n/TEST_NAME`
 
 * Deletes the grade for the specified `TEST_NAME` for the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `TEST_NAME` refers to the name of the test whose grade you want to delete.
 
 Examples:
-* `deleteGrade 2 Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
-* `find Betsy` followed by `deleteGrade 1 FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
+* `deleteGrade 2 n/Midterm` Deletes the grade for the "Midterm" test for the 2nd person in the list.
+* `find Betsy` followed by `deleteGrade 1 n/FinalExam` Deletes the "FinalExam" grade for the 1st person in the results of the `find` command.
 
 ### Marking attendance: `mark`
 
