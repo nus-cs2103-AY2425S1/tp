@@ -19,7 +19,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 
 /**
- * Edits the details of an existing student in the address book.
+ * Edits the details of an existing group in the address book.
  */
 public class EditGroupCommand extends Command {
 
@@ -79,8 +79,8 @@ public class EditGroupCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Group} with the details of {@code groupToEdit}
+     * edited with {@code editGroupDescriptor}.
      */
     private static Group createEditedGroup(Group groupToEdit, EditGroupDescriptor editGroupDescriptor) {
         assert groupToEdit != null;
@@ -116,8 +116,8 @@ public class EditGroupCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the student with. Each non-empty field value will replace the
-     * corresponding field value of the student.
+     * Stores the details to edit the group with. Each non-empty field value will replace the
+     * corresponding field value of the group.
      */
     public static class EditGroupDescriptor {
         private GroupName groupName;
@@ -131,13 +131,6 @@ public class EditGroupCommand extends Command {
          */
         public EditGroupDescriptor(EditGroupDescriptor toCopy) {
             setGroupName(toCopy.groupName);
-        }
-
-        /**
-         * Returns true if at least one field is edited.
-         */
-        public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(groupName);
         }
 
         public void setGroupName(GroupName name) {

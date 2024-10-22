@@ -11,13 +11,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditGroupCommand object
  */
 public class EditGroupCommandParser implements Parser<EditGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditGroupCommand
+     * and returns an EditGroupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditGroupCommand parse(String args) throws ParseException {
