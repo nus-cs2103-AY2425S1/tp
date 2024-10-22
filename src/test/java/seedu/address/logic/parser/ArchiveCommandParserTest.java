@@ -14,12 +14,12 @@ public class ArchiveCommandParserTest {
     private ArchiveCommandParser parser = new ArchiveCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsArchiveCommand() {
         assertParseSuccess(parser, "1", new ArchiveCommand(INDEX_FIRST_LIST));
     }
 
     @Test
-    public void parse_validMultipleArgs_returnsDeleteCommand() {
+    public void parse_validMultipleArgs_returnsArchiveCommand() {
         assertParseSuccess(parser, "1 2", new ArchiveCommand(INDEX_FIRST_LIST));
     }
 
