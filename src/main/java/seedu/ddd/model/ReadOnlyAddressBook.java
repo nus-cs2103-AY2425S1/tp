@@ -2,7 +2,7 @@ package seedu.ddd.model;
 
 import javafx.collections.ObservableList;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * Unmodifiable view of an address book

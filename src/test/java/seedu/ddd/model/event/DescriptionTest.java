@@ -7,6 +7,8 @@ import static seedu.ddd.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.ddd.model.event.common.Description;
+
 public class DescriptionTest {
 
     @Test

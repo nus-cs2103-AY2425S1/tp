@@ -12,7 +12,7 @@ import seedu.ddd.model.contact.common.Contact;
 
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all contacts in the address book to the user.
  */
 public class ListCommand extends Command {
 
@@ -24,7 +24,6 @@ public class ListCommand extends Command {
             + ": Lists all clients in the addressbook.\n"
             + "Example: " + COMMAND_WORD + " " + FLAG_CLIENT
             + " n/Jane , lists all clients with name Jane in the addressbook.";
-
 
 
     private final Predicate<Contact> predicate;

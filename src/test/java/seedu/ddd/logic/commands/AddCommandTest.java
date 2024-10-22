@@ -23,7 +23,7 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 import seedu.ddd.testutil.ClientBuilder;
 import seedu.ddd.testutil.VendorBuilder;
 

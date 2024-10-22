@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.ddd.commons.core.GuiSettings;
 import seedu.ddd.model.contact.common.Contact;
-import seedu.ddd.model.event.Event;
+import seedu.ddd.model.event.common.Event;
 
 /**
  * The API of the Model component.

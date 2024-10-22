@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.vendor.Vendor;
+import seedu.ddd.model.event.common.Description;
+import seedu.ddd.model.event.common.Event;
+import seedu.ddd.model.event.common.EventId;
 
 public class EventTest {
     public static final EventId DUMMY_EVENTID = new EventId(0);
