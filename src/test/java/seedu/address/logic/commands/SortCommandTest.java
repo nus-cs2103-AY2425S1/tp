@@ -68,7 +68,8 @@ public class SortCommandTest {
     @Test
     public void execute_unfilteredList_success() {
         PersonComparator comparator = comparatorManager.getComparator(SortField.NAME, SortOrder.DESC);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder());
+        String expectedMessage =
+                String.format(SortCommand.MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder());
         SortCommand command = new SortCommand(comparator);
 
         expectedModel.updateSortedPersonList(comparator);
@@ -80,7 +81,8 @@ public class SortCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         PersonComparator comparator = comparatorManager.getComparator(SortField.GITHUB, SortOrder.ASC);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder());
+        String expectedMessage =
+                String.format(SortCommand.MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder());
         SortCommand command = new SortCommand(comparator);
 
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
@@ -101,7 +103,8 @@ public class SortCommandTest {
                 new PredefinedAssignmentsData());
 
         PersonComparator comparator = comparatorManager.getComparator(SortField.GITHUB, SortOrder.ASC);
-        String expectedMessage = String.format(SortCommand.MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder());
+        String expectedMessage =
+                String.format(SortCommand.MESSAGE_SUCCESS, comparator.getSortField(), comparator.getSortOrder());
         SortCommand command = new SortCommand(comparator);
 
         expectedModel.updateSortedPersonList(comparator);

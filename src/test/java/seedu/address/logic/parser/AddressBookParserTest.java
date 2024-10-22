@@ -113,7 +113,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sort() throws Exception {
-        PersonComparator comparator =  new ComparatorManager().getComparator(SortField.NAME, SortOrder.ASC);
+        PersonComparator comparator = new ComparatorManager().getComparator(SortField.NAME, SortOrder.ASC);
         SortCommand command = (SortCommand) parser.parseCommand(
                 SortCommand.COMMAND_WORD + " " + VALID_FIELD_NAME + ORDER_DESC_ASC);
         assertEquals(new SortCommand(comparator), command);

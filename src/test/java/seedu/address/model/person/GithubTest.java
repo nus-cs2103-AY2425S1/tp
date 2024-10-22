@@ -73,7 +73,7 @@ public class GithubTest {
         Github otherGithub = new Github("Bob");
 
         // null input
-        assertThrows(NullPointerException.class,() -> github.compareTo(null));
+        assertThrows(NullPointerException.class, () -> github.compareTo(null));
 
         // valid input
         assertTrue(github.compareTo(otherGithub) < 0);

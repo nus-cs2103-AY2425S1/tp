@@ -28,7 +28,8 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, " ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -63,15 +64,18 @@ public class SortCommandParserTest {
     @Test
     public void parse_validValues_success() {
         // success for name + asc
-        SortCommand expectedFirstCommand = new SortCommand(comparatorManager.getComparator(SortField.NAME, SortOrder.ASC));
+        SortCommand expectedFirstCommand =
+                new SortCommand(comparatorManager.getComparator(SortField.NAME, SortOrder.ASC));
         assertParseSuccess(parser, VALID_FIELD_NAME + ORDER_DESC_ASC, expectedFirstCommand);
 
         // success for github + desc
-        SortCommand expectedSecondCommand = new SortCommand(comparatorManager.getComparator(SortField.GITHUB, SortOrder.DESC));
+        SortCommand expectedSecondCommand =
+                new SortCommand(comparatorManager.getComparator(SortField.GITHUB, SortOrder.DESC));
         assertParseSuccess(parser, VALID_FIELD_GITHUB + ORDER_DESC_DESC, expectedSecondCommand);
 
         // success for telegram + asc
-        SortCommand expectedThirdCommand = new SortCommand(comparatorManager.getComparator(SortField.TELEGRAM, SortOrder.ASC));
+        SortCommand expectedThirdCommand =
+                new SortCommand(comparatorManager.getComparator(SortField.TELEGRAM, SortOrder.ASC));
         assertParseSuccess(parser, VALID_FIELD_TELEGRAM + ORDER_DESC_ASC, expectedThirdCommand);
     }
 }

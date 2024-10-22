@@ -65,7 +65,7 @@ public class NameTest {
         Name otherName = new Name("Bob");
 
         // null input
-        assertThrows(NullPointerException.class,() -> name.compareTo(null));
+        assertThrows(NullPointerException.class, () -> name.compareTo(null));
 
         // valid input
         assertTrue(name.compareTo(otherName) < 0);

@@ -66,7 +66,7 @@ public class TelegramTest {
         Telegram otherTelegram = new Telegram("@Bob");
 
         // null input
-        assertThrows(NullPointerException.class,() -> telegram.compareTo(null));
+        assertThrows(NullPointerException.class, () -> telegram.compareTo(null));
 
         // valid input
         assertTrue(telegram.compareTo(otherTelegram) < 0);
