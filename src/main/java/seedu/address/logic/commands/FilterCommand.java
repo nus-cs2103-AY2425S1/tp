@@ -24,7 +24,7 @@ public class FilterCommand extends Command {
             + "If there is no contact with the given tag, "
             + "an empty list of contacts will be displayed.\n"
             + "Ensure that tag only contains alphanumeric characters. \n"
-            + "Parameters: TAG\n"
+            + "Parameters: t/TAG (one or more)\n"
             + "Example: " + COMMAND_WORD + " t/supplier";
 
     public static final String MESSAGE_SUCCESS = "Filtered for tag: %s";
@@ -36,7 +36,7 @@ public class FilterCommand extends Command {
 
     /**
      * Creates a FilterCommand, filtering for the given {@code tag}
-     * @param tag Tag to be filtered for in the list of contacts.
+     * @param tags Set of tags to be filtered for in the list of contacts.
      */
     public FilterCommand(Set<Tag> tags) {
         requireAllNonNull(tags);
@@ -46,7 +46,8 @@ public class FilterCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         model.updateFilteredPersonList(person ->
-                person.getTags().equals(tags)
+                tags.size() <= person.getTags().size() &&
+                        person.getTags().containsAll(tags)
         );
         String filteredTags = tags.stream()
                 .map(Tag::getTagName)
