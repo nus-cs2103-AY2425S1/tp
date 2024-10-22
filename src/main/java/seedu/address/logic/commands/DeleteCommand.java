@@ -6,11 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Confirmation;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.ui.ConfirmationWindow;
+
 
 /**
  * Deletes a person identified using their name or index from the address book.
@@ -98,8 +99,8 @@ public class DeleteCommand extends Command {
      * @return true if the deletion is confirmed; false otherwise.
      */
     private boolean confirmDeletion(Person personToDelete) {
-        Confirmation confirmation = Confirmation.getInstance();
-        return confirmation.showAlertDialogAndWait(
+        ConfirmationWindow confirmationWindow = ConfirmationWindow.getInstance();
+        return confirmationWindow.showAlertDialogAndWait(
                 "Confirm Delete",
                 String.format(MESSAGE_CONFIRMATION, personToDelete.getName())
         );

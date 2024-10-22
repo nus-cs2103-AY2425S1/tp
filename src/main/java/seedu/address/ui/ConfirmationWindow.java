@@ -1,4 +1,4 @@
-package seedu.address.logic;
+package seedu.address.ui;
 
 import java.util.Optional;
 
@@ -6,12 +6,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 /**
- * Confirmation to execute commands.
+ * Confirmation Window Ui to obtain users' confirmation.
  */
-public class Confirmation {
+public class ConfirmationWindow {
     // Singleton instance
-    private static Confirmation theConfirmation = null;
-    private Confirmation() {
+    private static ConfirmationWindow theConfirmationWindow = null;
+    private ConfirmationWindow() {
     }
 
     /**
@@ -19,11 +19,11 @@ public class Confirmation {
      *
      * @return the single instance of Confirmation
      */
-    public static Confirmation getInstance() {
-        if (theConfirmation == null) {
-            theConfirmation = new Confirmation();
+    public static ConfirmationWindow getInstance() {
+        if (theConfirmationWindow == null) {
+            theConfirmationWindow = new ConfirmationWindow();
         }
-        return theConfirmation;
+        return theConfirmationWindow;
     }
 
     /**

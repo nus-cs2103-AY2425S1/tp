@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.Confirmation;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.ui.ConfirmationWindow;
 
 /**
  * Clears the address book.
@@ -36,8 +36,8 @@ public class ClearCommand extends Command {
      * @return true if the clearance is confirmed; false otherwise.
      */
     private boolean confirmClear() {
-        Confirmation confirmation = Confirmation.getInstance();
-        return confirmation.showAlertDialogAndWait(
+        ConfirmationWindow confirmationWindow = ConfirmationWindow.getInstance();
+        return confirmationWindow.showAlertDialogAndWait(
                 "Confirm Clear",
                 String.format(MESSAGE_CONFIRMATION)
         );
