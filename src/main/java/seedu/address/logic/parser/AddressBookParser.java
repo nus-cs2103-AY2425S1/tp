@@ -98,9 +98,6 @@ public class AddressBookParser {
 
         case DeleteTagCommand.COMMAND_WORD:
             return new DeleteTagCommandParser().parse(arguments);
-        
-        case UntagCommand.COMMAND_WORD:
-            return new UntagCommandParser().parse(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
@@ -113,6 +110,9 @@ public class AddressBookParser {
 
         case TagListCommand.COMMAND_WORD:
             return new TagListCommand();
+
+        case UntagCommand.COMMAND_WORD:
+            return new UntagCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
