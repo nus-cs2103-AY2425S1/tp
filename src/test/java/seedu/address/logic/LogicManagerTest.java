@@ -38,8 +38,6 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.StudentBuilder;
 
-
-
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
     private static final IOException DUMMY_AD_EXCEPTION = new AccessDeniedException("dummy access denied exception");
@@ -92,6 +90,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredStudentList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void getFilteredConsultationList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredConsultationList().remove(0));
     }
 
     /**
@@ -182,6 +185,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_exportCommand_success() throws Exception {
+        // Create data directory path in temporary folder
+        Path dataDir = temporaryFolder.resolve("data");
+
         // Add a sample student to the model
         Student sampleStudent = new StudentBuilder().withName("John Doe")
                 .withPhone("12345678")
@@ -189,19 +195,23 @@ public class LogicManagerTest {
                 .withCourses("CS2103T").build();
         model.addStudent(sampleStudent);
 
-        String exportCommand = ExportCommand.COMMAND_WORD + " " + temporaryFolder.resolve("export.csv").toString();
-        assertCommandSuccess(exportCommand, String.format(
-                ExportCommand.MESSAGE_SUCCESS,
-                1,
-                temporaryFolder.resolve("export.csv")),
-                model);
+        String filename = "export";
+        // Create the command with the temporary directory
+        ExportCommand exportCommand = new ExportCommand(filename, false, dataDir);
+
+        // Execute the command directly
+        CommandResult result = exportCommand.execute(model);
+
+        // Verify the result message
+        Path expectedPath = dataDir.resolve(filename + ".csv");
+        assertEquals(String.format(ExportCommand.MESSAGE_SUCCESS, 1, expectedPath),
+                result.getFeedbackToUser());
 
         // Verify that the file was created
-        Path exportPath = temporaryFolder.resolve("export.csv");
-        assertTrue(Files.exists(exportPath));
+        assertTrue(Files.exists(expectedPath));
 
         // Verify the content of the exported file
-        List<String> lines = Files.readAllLines(exportPath);
+        List<String> lines = Files.readAllLines(expectedPath);
         assertEquals(2, lines.size()); // Header + 1 student
         assertEquals("Name,Phone,Email,Courses", lines.get(0)); // Verify the header
 
@@ -209,7 +219,9 @@ public class LogicManagerTest {
                 sampleStudent.getName(),
                 sampleStudent.getPhone(),
                 sampleStudent.getEmail(),
-                sampleStudent.getCourses().stream().map(Course::toString).collect(Collectors.joining(";")));
+                sampleStudent.getCourses().stream()
+                        .map(Course::toString)
+                        .collect(Collectors.joining(";")));
         assertEquals(expectedLine, lines.get(1));
     }
 }

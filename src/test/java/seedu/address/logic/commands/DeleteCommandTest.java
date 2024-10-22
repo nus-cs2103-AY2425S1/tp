@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -185,6 +185,15 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(targetIndexSet);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndices=" + targetIndexSet + "}";
         assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void getCommandTypeMethod() {
+        Index targetIndex = Index.fromOneBased(1);
+        Set<Index> targetIndexSet = new HashSet<>();
+        targetIndexSet.add(INDEX_FIRST_STUDENT);
+        DeleteCommand deleteCommand = new DeleteCommand(targetIndexSet);
+        assertEquals(deleteCommand.getCommandType(), CommandType.DELETESTUDENT);
     }
 
     /**

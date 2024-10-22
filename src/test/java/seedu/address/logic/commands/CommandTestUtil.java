@@ -33,6 +33,11 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_COURSE_CS2103T = "CS2103T";
     public static final String VALID_COURSE_CS2101 = "CS2101";
+    public static final String VALID_COURSE_CS2030 = "CS2030";
+    public static final String VALID_COURSE_LOWERCASE_CS2030 = "cs2030";
+
+    public static final String SPACED_PREFIX_NAME = " " + PREFIX_NAME;
+    public static final String SPACED_PREFIX_COURSE = " " + PREFIX_COURSE;
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -42,6 +47,7 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String COURSE_DESC_CS2103T = " " + PREFIX_COURSE + VALID_COURSE_CS2103T;
     public static final String COURSE_DESC_CS2101 = " " + PREFIX_COURSE + VALID_COURSE_CS2101;
+    public static final String COURSE_DESC_CS2030 = " " + PREFIX_COURSE + VALID_COURSE_CS2030;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -85,7 +91,7 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, command.getCommandType());
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

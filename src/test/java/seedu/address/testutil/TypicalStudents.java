@@ -56,18 +56,18 @@ public class TypicalStudents {
 
     private TypicalStudents() {} // prevents instantiation
 
+    public static List<Student> getTypicalStudents() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
     /**
-     * Returns an {@code AddressBook} with all the typical students.
+     * Returns an {@code AddressBook} with typical students only.
      */
-    public static AddressBook getTypicalAddressBook() {
+    public static AddressBook getTypicalStudentOnlyAddressBook() {
         AddressBook ab = new AddressBook();
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);
         }
         return ab;
-    }
-
-    public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
