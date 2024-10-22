@@ -96,7 +96,7 @@ public class SearchCommandParserTest {
     }
 
     @Test
-    public void parse_validPolicyPrefix_withExtraSpaces_success() throws Exception {
+    public void parse_validPolicyPrefixWithExtraSpaces_success() throws Exception {
         String policyName = "   Health Insurance   ";
         Command command = parser.parse("p/" + policyName);
         assertEquals(new SearchPolicyCommand(policyName.trim()), command,
