@@ -183,7 +183,7 @@ Format: `github n/NAME`
 Examples:
 * `github n/Betsy` launches the GitHub repository of the person named `Betsy`, using the GitHub username assigned to `Betsy`.
 
-### Viewing a contact details : `view`
+### Viewing a contact's full details : `view`
 
 Opens a window at the side with the full details of the specified person from the address book.
 
