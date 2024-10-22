@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private ConsultationListPanel consultationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane consultationListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -120,6 +124,9 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
+        consultationListPanel = new ConsultationListPanel(logic.getFilteredConsultationList());
+        consultationListPanelPlaceholder.getChildren().add(consultationListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -179,6 +186,10 @@ public class MainWindow extends UiPart<Stage> {
         return studentListPanel;
     }
 
+    public ConsultationListPanel getConsultationListPanel() {
+        return consultationListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -199,6 +210,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
             // Student Commands
+            case LISTSTUDENT:
             case ADDSTUDENT:
             case EDITSTUDENT:
             case FINDSTUDENT:

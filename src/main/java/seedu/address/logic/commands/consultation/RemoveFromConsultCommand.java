@@ -28,7 +28,8 @@ public class RemoveFromConsultCommand extends Command {
             + "NAME...\n"
             + "Example: " + COMMAND_WORD + " 1 n/Alex Yeoh n/Harry Ng";
 
-    public static final String MESSAGE_REMOVE_FROM_CONSULT_SUCCESS = "Removed students from Consultation: %1$s";
+    public static final String MESSAGE_REMOVE_FROM_CONSULT_SUCCESS =
+        "Removed students from Consultation: Date: %s; Time: %s";
     public static final String MESSAGE_STUDENT_NOT_FOUND = "Student(s) not found in the consultation.";
 
     private final Index consultIndex;
@@ -78,9 +79,10 @@ public class RemoveFromConsultCommand extends Command {
             consultationToEdit.removeStudent(studentToRemove);
         }
 
-        return new CommandResult(
-            String.format(MESSAGE_REMOVE_FROM_CONSULT_SUCCESS, consultationToEdit),
-            COMMAND_TYPE);
+        String successMessage = String.format(MESSAGE_REMOVE_FROM_CONSULT_SUCCESS,
+            consultationToEdit.getDate().getValue(), consultationToEdit.getTime().getValue());
+
+        return new CommandResult(successMessage, COMMAND_TYPE);
     }
 
     @Override
