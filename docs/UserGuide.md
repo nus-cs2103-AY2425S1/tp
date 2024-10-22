@@ -89,13 +89,13 @@ Adds a student to the address book.
 <box type="important" header="#### Constraints">
 
 1. **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
-2. **DAY_OF_THE_WEEK** includes Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+2. **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
 3. **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
 4. **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
 5. **FEE**, <b>PAID</b> and <b>OWED</b> must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`
 6. **SUBJECT** should only be:
-`economics` / `literature` / `music` / `biology` / `chemistry` / `science` / `english` / `chinese` / `malay`/ `tamil` / `math` / `history` / `geography` / `physics` / `GP`
+`economics`  `literature`  `music`  `biology`  `chemistry`  `science`  `english`  `chinese`  `malay` `tamil`  `math`  `history`  `geography`  `physics`  `GP`
 
 </box>
 
