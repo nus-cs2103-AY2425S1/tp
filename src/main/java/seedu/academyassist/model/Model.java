@@ -124,6 +124,12 @@ public interface Model {
     void sortAcademyAssistByClass();
 
     /**
+     * Sorts the academy assist management system managed by model, based on numerical order of studentIds of
+     * persons inside it.
+     */
+    void sortAcademyAssistById();
+
+    /**
      * Increment student count by 1.
      */
     void incrementStudentCount();

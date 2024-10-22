@@ -14,9 +14,9 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts students based on name/class. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts students based on name/class/studentId. "
             + "Parameters: "
-            + PREFIX_SORT_PARAM + "'name' or 'class'\n"
+            + PREFIX_SORT_PARAM + "'name' or 'class' or 'studentId'\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_SORT_PARAM + "name";
 
@@ -26,7 +26,7 @@ public class SortCommand extends Command {
 
     /**
      * Creates a SortCommand
-     * @param sortParam SortParam.NAME or SortParam.CLASS
+     * @param sortParam SortParam.NAME or SortParam.CLASS or SortParam.ID
      */
     public SortCommand(SortParam sortParam) {
         CollectionUtil.requireAllNonNull(sortParam);
@@ -40,6 +40,8 @@ public class SortCommand extends Command {
             model.sortAcademyAssistByName();
         } else if (sortParam.toString().equals("class")) {
             model.sortAcademyAssistByClass();
+        } else if (sortParam.toString().equals("studentId")) {
+            model.sortAcademyAssistById();
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortParam.toString()));
