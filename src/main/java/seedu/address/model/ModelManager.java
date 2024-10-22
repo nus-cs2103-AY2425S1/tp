@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person personToDisplay;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,20 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+    }
+
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs and personToDisplay.
+     */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Person personToDisplay) {
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        setPersonToDisplay(personToDisplay);
     }
 
     public ModelManager() {
@@ -80,6 +96,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        setPersonToDisplay(null);
     }
 
     @Override
@@ -96,11 +113,16 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        if (target.isSamePerson(personToDisplay)) {
+            setPersonToDisplay(null);
+        }
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+
+        setPersonToDisplay(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -109,6 +131,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        setPersonToDisplay(editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -128,6 +151,20 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Person To Display =========================================================================
+
+    @Override
+    public void setPersonToDisplay(Person personToDisplay) {
+        if (personToDisplay == null || addressBook.hasPerson(personToDisplay)) {
+            this.personToDisplay = personToDisplay;
+        }
+    }
+
+    @Override
+    public Person getPersonToDisplay() {
+        return personToDisplay;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -140,9 +177,11 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
+
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredPersons.equals(otherModelManager.filteredPersons)
+                && Objects.equals(personToDisplay, otherModelManager.personToDisplay);
     }
 
 }
