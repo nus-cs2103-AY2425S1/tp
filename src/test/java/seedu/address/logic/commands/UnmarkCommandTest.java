@@ -61,15 +61,15 @@ public class UnmarkCommandTest {
      */
     @Test
     public void execute_invalidTutorialNumber_failure() {
-        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON,
-                new Tutorial("1"));
+        UnmarkCommand unmarkCommand = new UnmarkCommand(INDEX_FIRST_PERSON, new Tutorial("1"));
         try {
             unmarkCommand.execute(model);
             unmarkCommand.execute(model);
         } catch (CommandException e) {
             assertCommandFailure(unmarkCommand, model,
-                    String.format(UnmarkCommand.MESSAGE_UNMARK_UNNECESSARY, 1,
-                            Messages.format(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))));
+                    String.format(UnmarkCommand.MESSAGE_UNMARK_UNNECESSARY,
+                         model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName(),
+                            "1"));
         }
     }
 

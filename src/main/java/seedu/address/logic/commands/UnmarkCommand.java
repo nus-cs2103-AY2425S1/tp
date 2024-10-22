@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -20,27 +22,42 @@ public class UnmarkCommand extends Command {
     public static final String COMMAND_WORD = "unmark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks absence for the contact "
-            + "by the index number used in the last person listing and for the tutorial number inputted. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "tut/TUTORIAL\n"
+            + "by the index number used in the last person listing and for the tutorial number inputted. \n"
+            + "Parameters: \n"
+            + "INDEX (must be a positive integer) \n"
+            + "tut/TUTORIAL in the format of \n"
+            + "1) A positive number between 1-12 \n"
+            + "2) A list of numbers eg. [1,3,5] \n"
+            + "3) A range of two numbers eg. 3-6 \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "tut/1";
+            + "tut/1-5";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
-    public static final String MESSAGE_UNMARK_SUCCESS = "Marked absent from Tutorial %s for Person: %s";
-    public static final String MESSAGE_UNMARK_UNNECESSARY = "Person: %2$s is already marked absent from Tutorial %1$s";
+    public static final String MESSAGE_UNMARK_SUCCESS = "Marked absent from Tutorial(s): %s for Person: %s";
+    public static final String MESSAGE_UNMARK_UNNECESSARY =
+            "Person: %1$s is already marked absent from Tutorial(s): %2$s";
 
     private final Index index;
-    private final Tutorial tutorial;
+    private final List<Tutorial> tutorials;
 
     /**
      * @param index of the person in the display list
-     * @param tutorial number to remove attendance for
+     * @param tutorial single tutorial to remove attendance for
      */
     public UnmarkCommand(Index index, Tutorial tutorial) {
         this.index = index;
-        this.tutorial = tutorial;
+        this.tutorials = List.of(tutorial);
+    }
+
+    /**
+     * Constructor for unmarking multiple tutorials.
+     * @param index of the person in the display list
+     * @param tutorials list of tutorials to unmark attendance for
+     */
+    public UnmarkCommand(Index index, List<Tutorial> tutorials) {
+        this.index = index;
+        this.tutorials = tutorials.stream().distinct().collect(Collectors.toList());
     }
 
     @Override
@@ -53,12 +70,27 @@ public class UnmarkCommand extends Command {
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
-        if (newTutorials.get(tutorial) == AttendanceStatus.ABSENT) {
-            throw new CommandException(
-                    String.format(MESSAGE_UNMARK_UNNECESSARY, tutorial.tutorial, Messages.format(personToEdit)));
+        List<String> unnecessaryUnmarkTutorials = new ArrayList<>();
+        List<String> unmarkedTutorials = new ArrayList<>();
+
+        for (Tutorial tutorial : tutorials) {
+            if (newTutorials.get(tutorial) == AttendanceStatus.ABSENT) {
+                unnecessaryUnmarkTutorials.add(tutorial.tutorial);
+                continue;
+            }
+
+            newTutorials.put(tutorial, AttendanceStatus.ABSENT);
+            unmarkedTutorials.add(tutorial.tutorial);
         }
 
-        newTutorials.put(tutorial, AttendanceStatus.ABSENT);
+        String formattedUnnecessaryTutorials = String.join(", ", unnecessaryUnmarkTutorials);
+
+        if (unmarkedTutorials.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_UNMARK_UNNECESSARY,
+                    personToEdit.getName(), formattedUnnecessaryTutorials));
+        }
+
+        String formattedTutorials = String.join(", ", unmarkedTutorials);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -72,15 +104,15 @@ public class UnmarkCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedPerson, formattedTutorials));
     }
 
     /**
      * Generates a command execution success message for removing attendance
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_UNMARK_SUCCESS, tutorial.tutorial, Messages.format(personToEdit));
+    private String generateSuccessMessage(Person personToEdit, String unmarkedTutorials) {
+        return String.format(MESSAGE_UNMARK_SUCCESS, unmarkedTutorials, Messages.format(personToEdit));
     }
 
     @Override
@@ -98,6 +130,6 @@ public class UnmarkCommand extends Command {
         // state check
         UnmarkCommand e = (UnmarkCommand) other;
         return index.equals(e.index)
-                && tutorial.equals(e.tutorial);
+                && tutorials.equals(e.tutorials);
     }
 }

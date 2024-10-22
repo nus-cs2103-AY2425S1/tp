@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -20,28 +22,42 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks attendance for the contact "
-            + "by the index number used in the last person listing and for the tutorial number inputted. "
-            + "Parameters: INDEX (must be a positive integer) "
-            + "tut/TUTORIAL\n"
+            + "by the index number used in the last person listing and for the tutorial number inputted. \n"
+            + "Parameters: \n"
+            + "INDEX (must be a positive integer) \n"
+            + "tut/TUTORIAL in the format of \n"
+            + "1) A positive number between 1-12 \n"
+            + "2) A list of numbers eg. [1,3,5] \n"
+            + "3) A range of two numbers eg. 3-6 \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "tut/1";
+            + "tut/1-5";
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
 
-    public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
+    public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial(s): %2$s for Person: %1$s";
     public static final String MESSAGE_MARK_UNNECESSARY =
-            "Person: %1$s is already marked as present for Tutorial: %2$s";
+            "Person: %1$s is already marked as present for Tutorial(s): %2$s";
 
     private final Index index;
-    private final Tutorial tutorial;
+    private final List<Tutorial> tutorials;
 
     /**
      * @param index of the person in the display list
-     * @param tutorial number to mark attendance for
+     * @param tutorial single tutorial to mark attendance for
      */
     public MarkCommand(Index index, Tutorial tutorial) {
         this.index = index;
-        this.tutorial = tutorial;
+        this.tutorials = List.of(tutorial);
+    }
+
+    /**
+     * Constructor for marking multiple tutorials.
+     * @param index of the person in the display list
+     * @param tutorials list of tutorials to mark attendance for
+     */
+    public MarkCommand(Index index, List<Tutorial> tutorials) {
+        this.index = index;
+        this.tutorials = tutorials.stream().distinct().collect(Collectors.toList());
     }
 
     @Override
@@ -54,12 +70,28 @@ public class MarkCommand extends Command {
 
         Person personToEdit = currDisplayedList.get(index.getZeroBased());
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
-        if (newTutorials.get(tutorial) == AttendanceStatus.PRESENT) {
-            throw new CommandException(
-                    String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
+        List<String> unnecessaryMarkTutorials = new ArrayList<>();
+        List<String> markedTutorials = new ArrayList<>();
+
+        // Handle marking for list of tutorials
+        for (Tutorial tutorial : tutorials) {
+            if (newTutorials.get(tutorial) == AttendanceStatus.PRESENT) {
+                unnecessaryMarkTutorials.add(tutorial.tutorial);
+                continue;
+            }
+
+            newTutorials.put(tutorial, AttendanceStatus.PRESENT);
+            markedTutorials.add(tutorial.tutorial);
         }
 
-        newTutorials.put(tutorial, AttendanceStatus.PRESENT);
+        String formattedUnnecessaryTutorials = String.join(", ", unnecessaryMarkTutorials);
+
+        if (markedTutorials.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_MARK_UNNECESSARY,
+                    personToEdit.getName(), formattedUnnecessaryTutorials));
+        }
+
+        String formattedTutorials = String.join(", ", markedTutorials);
 
         Person editedPerson = new Person(
                 personToEdit.getName(),
@@ -72,7 +104,7 @@ public class MarkCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+        return new CommandResult(generateSuccessMessage(editedPerson, formattedTutorials));
     }
 
     /**
@@ -80,8 +112,8 @@ public class MarkCommand extends Command {
      * the remark is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_MARK_SUCCESS, Messages.format(personToEdit), tutorial.tutorial);
+    private String generateSuccessMessage(Person personToEdit, String markedTutorials) {
+        return String.format(MESSAGE_MARK_SUCCESS, Messages.format(personToEdit), markedTutorials);
     }
 
     @Override
@@ -99,6 +131,6 @@ public class MarkCommand extends Command {
         // state check
         MarkCommand e = (MarkCommand) other;
         return index.equals(e.index)
-                && tutorial.equals(e.tutorial);
+                && tutorials.equals(e.tutorials);
     }
 }
