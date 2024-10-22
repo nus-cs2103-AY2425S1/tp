@@ -20,10 +20,6 @@ public class TypicalEvents {
     public static final Event WUG = new EventBuilder().withName("WUG").build();
     public static final Event WUC = new EventBuilder().withName("WUC").build();
 
-    // Manually added - Event's details found in {@code CommandTestUtil}
-    public static final Event SEA = new EventBuilder().withName("SEA").build();
-    public static final Event ASIAD = new EventBuilder().withName("ASIAD").build();
-
     private TypicalEvents() {} // prevents instantiation
 
     public static List<Event> getTypicalEvents() {

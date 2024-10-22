@@ -8,6 +8,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.AUG;
 import static seedu.address.testutil.TypicalEvents.IFG;
+import static seedu.address.testutil.TypicalEvents.WUC;
 import static seedu.address.testutil.TypicalEvents.WUG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -91,6 +92,22 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasEvent_nullEvent_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.hasEvent(null));
+    }
+
+    @Test
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasEvent(WUC));
+    }
+
+    @Test
+    public void hasEvent_eventInAddressBook_returnsTrue() {
+        modelManager.addEvent(WUC);
+        assertTrue(modelManager.hasEvent(WUC));
     }
 
     @Test

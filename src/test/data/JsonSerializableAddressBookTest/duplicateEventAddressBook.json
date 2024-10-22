@@ -1,0 +1,22 @@
+{
+  "persons": [ {
+    "name": "Alice Pauline",
+    "phone": "94351253",
+    "email": "alice@example.com",
+    "personEvents": [{
+      "name": "IFG"
+    }],
+    "roles": [ "friends" ]
+  } ],
+  "events": [ {
+    "name": "IFG"
+  }, {
+    "name": "IFG"
+  }, {
+    "name": "AUG"
+  }, {
+    "name": "SUNIG"
+  }, {
+    "name": "IVP"
+  } ]
+}

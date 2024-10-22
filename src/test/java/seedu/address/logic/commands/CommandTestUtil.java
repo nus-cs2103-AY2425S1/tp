@@ -17,6 +17,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonContainsKeywordsPredicate;
 import seedu.address.testutil.EditEventDescriptorBuilder;
@@ -39,6 +41,9 @@ public class CommandTestUtil {
     public static final String VALID_ROLE_SPONSOR = "Sponsor - OATSIDE";
     public static final String VALID_ROLE_VOLUNTEER = "Volunteer - Photographer";
 
+    public static final String VALID_EVENT_NAME_SEA = "SEA";
+    public static final String VALID_EVENT_NAME_ASIAD = "ASIAD";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -49,6 +54,9 @@ public class CommandTestUtil {
     public static final String EVENT_NAME_BOB = " " + PREFIX_EVENT + VALID_EVENT_BOB;
     public static final String ROLE_DESC_ATHLETE = " " + PREFIX_ROLE + VALID_ROLE_ATHLETE;
     public static final String ROLE_DESC_VOLUNTEER = " " + PREFIX_ROLE + VALID_ROLE_VOLUNTEER;
+
+    public static final String EVENT_NAME_DESC_SEA = " " + PREFIX_NAME + VALID_EVENT_NAME_SEA;
+    public static final String EVENT_NAME_DESC_ASIAD = " " + PREFIX_NAME + VALID_EVENT_NAME_ASIAD;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -62,8 +70,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
-    public static final EditEventCommand.EditEventDescriptor DESC_IFG;
-    public static final EditEventCommand.EditEventDescriptor DESC_AUG;
+    public static final EditEventCommand.EditEventDescriptor DESC_SEA;
+    public static final EditEventCommand.EditEventDescriptor DESC_ASIAD;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -75,8 +83,8 @@ public class CommandTestUtil {
                 .withEvents(VALID_EVENT_BOB)
                 .withRoles(VALID_ROLE_ATHLETE, VALID_ROLE_VOLUNTEER).build();
 
-        DESC_IFG = new EditEventDescriptorBuilder().withName("IFG").build();
-        DESC_AUG = new EditEventDescriptorBuilder().withName("AUG").build();
+        DESC_SEA = new EditEventDescriptorBuilder().withName(VALID_EVENT_NAME_SEA).build();
+        DESC_ASIAD = new EditEventDescriptorBuilder().withName(VALID_EVENT_NAME_ASIAD).build();
     }
 
     /**
@@ -135,4 +143,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showEventAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
+
+        Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
+        final String[] splitName = event.getName().toString().split("\\s+");
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredEventList().size());
+    }
 }

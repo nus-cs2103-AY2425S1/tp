@@ -19,7 +19,7 @@ public class EditEventDescriptorBuilder {
     }
 
     /**
-     * Returns an {@link EditEventDescriptor} with fields containing {@link Event}'s details.
+     * Returns an {@code EditEventDescriptor} with fields containing {@link Event}'s details.
      */
     public EditEventDescriptorBuilder(Event event) {
         descriptor = new EditEventDescriptor();
@@ -27,7 +27,7 @@ public class EditEventDescriptorBuilder {
     }
 
     /**
-     * Sets the {@link EventName} of the {@link EditEventDescriptor} that we are building.
+     * Sets the {@link EventName} of the {@code EditEventDescriptor} that we are building.
      */
     public EditEventDescriptorBuilder withName(String name) {
         descriptor.setName(new EventName(name));

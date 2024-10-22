@@ -107,4 +107,13 @@ public class FilterCommandTest {
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
+
+    @Test
+    public void toStringMethod() {
+        RoleContainsKeywordsPredicate predicate =
+                new RoleContainsKeywordsPredicate(List.of("Athlete", "Volunteer", "Sponsor"));
+        FilterCommand command = new FilterCommand(predicate);
+        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, command.toString());
+    }
 }

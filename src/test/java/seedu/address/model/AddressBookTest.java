@@ -109,5 +109,4 @@ public class AddressBookTest {
             return FXCollections.observableArrayList();
         }
     }
-
 }
