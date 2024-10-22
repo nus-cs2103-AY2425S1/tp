@@ -61,12 +61,7 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         telegram.setText("@" + person.getTelegram().value);
         email.setText(person.getEmail().value);
-        boolean isMember = true; //to remove
-        if (isMember) { //to change when Member role added
-            attendance.setVisible(true);
-        } else {
-            attendance.setVisible(false);
-        }
+        attendance.setVisible(person.isMember());
         attendanceDisplay = this.hasAttendedToday(person)
                 ? new SimpleStringProperty(" " + String.valueOf((char) 9745))
                 : new SimpleStringProperty(" " + String.valueOf((char) 9744));

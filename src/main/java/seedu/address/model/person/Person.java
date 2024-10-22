@@ -11,6 +11,7 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.attendance.Attendance;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
 /**
@@ -68,6 +69,15 @@ public class Person {
     }
 
     /**
+     * Check is Person is a member
+     * @return true is Person has a role "member"
+     */
+    public boolean isMember() {
+        Set<Role> roles = this.getRoles();
+        return roles.contains(new Role(Member.MEMBER_ROLE));
+    }
+
+    /**
      * Returns an immutable attendance set, which throws {@code UnsupportedOperationException}
      * if modification is attempted
      * @return the attendance set encapsulated by Person
@@ -97,8 +107,7 @@ public class Person {
                 r.append(" " + role + " |");
             }
             return r.toString();
-            // code for this method is currently not very elegant...
-        } else if (c.equals(Attendance.class)) {
+        } else if (this.isMember() && c.equals(Attendance.class)) {
             StringBuilder a = new StringBuilder("| ");
             Set<Attendance> sessions = this.getAttendance();
             for (Attendance sesh : sessions) {
