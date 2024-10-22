@@ -14,7 +14,7 @@ Clientell is a **desktop app for managing clients, optimized for use via a Comma
   - [Client Management](#client-management)
   - [Transaction Management](#transaction-management)
   - [General Commands](#general-commands)
-- [Data Management](#data-management)
+  - [Data Management](#data-management)
 - [FAQ](#faq)
 - [Known Issues](#known-issues)
 - [Command Summary](#command-summary)
