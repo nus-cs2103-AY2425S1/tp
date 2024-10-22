@@ -211,7 +211,7 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Locating patients by NRIC: `findNric`
+#### Locating patient by NRIC: `findNric`
 
 Finds patients whose names contain the given NRIC.
 
