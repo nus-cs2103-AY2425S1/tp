@@ -16,7 +16,7 @@ import static seedu.address.testutil.TypicalStudents.GEORGE;
 import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_BE_TWO_MATCH;
 import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_ELLE_ONE_MATCH;
 import static seedu.address.testutil.TypicalStudents.KEYWORD_MATCHING_MEIER_TWO_MATCH;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalStudents.getTypicalStudentOnlyAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,8 +36,8 @@ import seedu.address.model.student.Student;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalStudentOnlyAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalStudentOnlyAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
