@@ -29,7 +29,7 @@ public class NameTest {
         assertFalse(Name.isValidName(" ")); // spaces only
         assertFalse(Name.isValidName("^")); // only non-alphanumeric characters
         assertFalse(Name.isValidName("peter*")); // contains non-alphanumeric characters
-        assertTrue(Name.isValidName("12345")); // only numbers
+        assertFalse(Name.isValidName("12345")); // only numbers
 
         // valid name
         assertTrue(Name.isValidName("peter jack")); // alphabets only
