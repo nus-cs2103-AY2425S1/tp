@@ -22,7 +22,8 @@ public class FindCommand extends Command {
             + "Example 2: " + COMMAND_WORD + " j/swe2024\n"
             + "Example 3: " + COMMAND_WORD + " t/tp\n"
             + "Example 4: " + COMMAND_WORD + " n/alice p/12341234\n"
-            + "Example 5: " + COMMAND_WORD + " n/alice e/alice@email.com\n";
+            + "Example 5: " + COMMAND_WORD + " n/alice e/alice@email.com\n"
+            + "Example 6: " + COMMAND_WORD + " t/tp j/swe2024\n";
 
     private final Predicate<Person> predicate;
 
