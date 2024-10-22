@@ -35,7 +35,6 @@ public class Event {
 
         this.attendees.addAll(attendees);
     }
-    
 
     public String getEventName() {
         return eventName;
@@ -50,7 +49,7 @@ public class Event {
     }
 
     /**
-     * Returns true if both events have the same name and date.
+     * Returns true if both events have the same name, date and attendees.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -59,7 +58,8 @@ public class Event {
 
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
-                && otherEvent.getDate().equals(getDate());
+                && otherEvent.getDate().equals(getDate())
+                && otherEvent.getAttendees().equals(getAttendees());
     }
 
     @Override
