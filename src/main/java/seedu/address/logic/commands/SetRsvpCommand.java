@@ -17,8 +17,7 @@ public class SetRsvpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets the RSVP status of a guest. "
             + "Parameters: INDEX (must be a positive integer) "
-            + "STATUS (1 - Coming, 2 - Not Coming, 3 - Pending)\n"
-            + "Example: " + COMMAND_WORD + " 1 1";
+            + "STATUS (1 - Coming, 2 - Not Coming, 3 - Pending)\n";
 
     public static final String MESSAGE_SET_SUCCESS = "RSVP status updated for guest: ";
     public static final String MESSAGE_INVALID_INDEX = "ERROR: Please enter a valid index (from 1 to ";

@@ -9,7 +9,7 @@ package seedu.address.model.person;
 public enum RsvpStatus {
     PENDING("Pending"),
     COMING("Coming"),
-    NOT_COMING("Not Coming");;
+    NOT_COMING("Not Coming");
 
     private final String status;
 
