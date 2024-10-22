@@ -42,5 +42,7 @@ public class AutocompleterTest {
         list.add("add");
         list.add("adda");
         assertEquals("add", autocompleter.autocompleteWithLexicalPriority("ad", list));
+        list.add("abs");
+        assertEquals("abs", autocompleter.autocompleteWithLexicalPriority("a", list));
     }
 }
