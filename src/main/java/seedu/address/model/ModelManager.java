@@ -150,7 +150,7 @@ public class ModelManager implements Model {
             boolean wasSelectedPersonRemoved = change.getRemoved().stream()
                     .anyMatch(removedPerson -> selectedPerson.getValue().isSamePerson(removedPerson));
             if (wasSelectedPersonRemoved) {
-                selectedPerson.setValue(change.getFrom() > 0 ? filteredPersons.get(change.getFrom() - 1) : null);
+                this.setSelectedPerson(change.getFrom() > 0 ? filteredPersons.get(change.getFrom() - 1) : null);
             }
         }
     }
