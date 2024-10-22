@@ -1,7 +1,6 @@
 package seedu.academyassist.logic.commands;
 
 import seedu.academyassist.model.Model;
-import seedu.academyassist.model.person.Subject;
 
 /**
  * Shows the number of students taking each subject.
