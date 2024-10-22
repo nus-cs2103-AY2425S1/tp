@@ -15,7 +15,7 @@ import seedu.address.logic.commands.personcommands.AddPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditPersonCommand;
 import seedu.address.logic.commands.personcommands.ExitCommand;
-import seedu.address.logic.commands.personcommands.FindCommand;
+import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.commands.personcommands.ListCommand;
 import seedu.address.logic.commands.personcommands.SearchPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -51,13 +51,16 @@ public class AddressBookParser {
         final String modelTypeShortHand = matcher.group("modelType");
         final ModelType modelType = ModelType.fromShorthand(modelTypeShortHand);
         final String arguments = (modelType == ModelType.NEITHER)
-                ? " " + modelTypeShortHand : " " + matcher.group("arguments");
+                ? (modelTypeShortHand == null ? " " : " " + modelTypeShortHand)
+                : (matcher.group("arguments") == null ? " " : " " + matcher.group("arguments"));
+        // todo simplify this spaghetti
         // todo Not sure why spaces need to be added but it doesn't work without them
 
         // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
+        System.out.println("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
         switch (commandWord) {
 
@@ -73,7 +76,7 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindPersonCommand.COMMAND_WORD:
             return new FindCommandParser().parse(modelType, arguments);
 
         case ListCommand.COMMAND_WORD:
