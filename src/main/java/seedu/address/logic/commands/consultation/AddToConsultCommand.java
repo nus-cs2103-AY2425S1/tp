@@ -23,6 +23,7 @@ import seedu.address.model.student.Student;
 public class AddToConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "addtoconsult";
+    public static final CommandType COMMAND_TYPE = CommandType.ADDTOCONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds students to the consultation identified "
             + "by the index number used in the displayed consultation list. "
@@ -65,7 +66,9 @@ public class AddToConsultCommand extends Command {
             consultationToEdit.addStudent(student);
         }
 
-        return new CommandResult(String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)));
+        return new CommandResult(
+            String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)),
+            COMMAND_TYPE);
     }
 
     /**
@@ -75,7 +78,7 @@ public class AddToConsultCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.ADDTOCONSULT;
+        return COMMAND_TYPE;
     }
 
     @Override
