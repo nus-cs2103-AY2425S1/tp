@@ -165,26 +165,12 @@ The addbuyer command takes in the name, phone number, and email address of the b
 The sequence diagram is shown as such:
 <puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
 
-### \[Proposed\] Add Seller Feature
-
-#### Proposed Implementation
-The addseller command takes in the name, phone number, and email address of the seller and adds the seller to the client book based.
-The sequence diagram is shown as such:
-<puml src="diagrams/AddSellerSequenceDiagram.puml" alt="AddSeller" />
-
 ### \[Proposed\] Delete Buyer Feature
 
 #### Proposed Implementation
 The deletebuyer command takes in the phone number of the buyer and deletes the buyer from the client book based on the phone number.
 The sequence diagram is shown as such:
 <puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="DeleteBuyer" />
-
-### \[Proposed\] Delete Seller Feature
-
-#### Proposed Implementation
-The deleteseller command takes in the phone number of the seller and deletes the seller from the client book based on the phone number.
-The sequence diagram is shown as such:
-<puml src="diagrams/DeleteSellerSequenceDiagram.puml" alt="DeleteSeller" />
 
 ### \[Proposed\] Filter property feature
 
