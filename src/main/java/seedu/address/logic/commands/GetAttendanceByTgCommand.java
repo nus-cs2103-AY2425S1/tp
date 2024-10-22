@@ -28,6 +28,8 @@ public class GetAttendanceByTgCommand extends Command {
     public static final String MESSAGE_NO_STUDENTS = "No students found in tutorial group %1$s.";
 
     private final TutorialGroup tutorialGroup;
+    private AttendanceWindow window;
+
 
     /**
      * Creates a GetAttendanceByTGCommand to retrieve attendance records of students in the specified tutorial group.
@@ -36,6 +38,7 @@ public class GetAttendanceByTgCommand extends Command {
      */
     public GetAttendanceByTgCommand(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
+        window = new AttendanceWindow(tutorialGroup);
     }
 
     @Override
@@ -54,7 +57,6 @@ public class GetAttendanceByTgCommand extends Command {
             attendanceRecords.append(student.getAttendanceRecordsString()).append("\n");
         }
 
-        AttendanceWindow window = new AttendanceWindow(tutorialGroup);
         window.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
@@ -74,5 +76,9 @@ public class GetAttendanceByTgCommand extends Command {
     @Override
     public String toString() {
         return tutorialGroup.toString();
+    }
+
+    public void setAttendanceWindow(AttendanceWindow window) {
+        this.window = window;
     }
 }

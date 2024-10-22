@@ -96,4 +96,8 @@ public class AttendanceWindow {
         }
         return rows;
     }
+
+    public TutorialGroup getTutorialGroup() {
+        return tutorialGroup;
+    }
 }
