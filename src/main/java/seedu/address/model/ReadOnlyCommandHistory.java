@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
 import java.util.Deque;
 
 /**
@@ -8,5 +7,4 @@ import java.util.Deque;
  */
 public interface ReadOnlyCommandHistory {
     Deque<String> getCommandStack();
-    Path getAddressBookFilePath();
 }

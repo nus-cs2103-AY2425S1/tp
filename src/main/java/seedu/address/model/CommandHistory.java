@@ -3,8 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.isDequeEqual;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -16,7 +14,6 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class CommandHistory implements ReadOnlyCommandHistory {
     private Deque<String> commandStack = new LinkedList<>();
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
 
     /**
      * Creates a {@code CommandHistory} with default values.
@@ -37,7 +34,6 @@ public class CommandHistory implements ReadOnlyCommandHistory {
     public void resetData(ReadOnlyCommandHistory newCommandHistory) {
         requireNonNull(newCommandHistory);
         setCommandStack(newCommandHistory.getCommandStack());
-        setAddressBookFilePath(newCommandHistory.getAddressBookFilePath());
     }
 
     /**
@@ -53,16 +49,6 @@ public class CommandHistory implements ReadOnlyCommandHistory {
         requireNonNull(commandStack);
         this.commandStack = commandStack;
     }
-
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
-    }
-
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        this.addressBookFilePath = addressBookFilePath;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -75,20 +61,18 @@ public class CommandHistory implements ReadOnlyCommandHistory {
         }
 
         CommandHistory otherCommandHistory = (CommandHistory) other;
-        return addressBookFilePath.equals(otherCommandHistory.addressBookFilePath)
-                && isDequeEqual(commandStack, otherCommandHistory.getCommandStack());
+        return isDequeEqual(commandStack, otherCommandHistory.getCommandStack());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(commandStack, addressBookFilePath);
+        return Objects.hash(commandStack);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("commandStack", commandStack)
-                .add("addressBookFilePath", addressBookFilePath)
                 .toString();
     }
 
