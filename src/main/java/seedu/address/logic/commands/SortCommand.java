@@ -14,8 +14,7 @@ import seedu.address.ui.InspectWindow;
  * Sorts deliveries by a specified attribute.
  */
 public class SortCommand extends Command {
-
-    public static final String COMMAND_WORD = "sort";
+    
     public static final String COMMAND_WORD_ASCENDING = "asort";
     public static final String COMMAND_WORD_DESCENDING = "dsort";
 
