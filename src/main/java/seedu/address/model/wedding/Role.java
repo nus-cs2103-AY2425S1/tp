@@ -44,7 +44,7 @@ public class Role {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Role)) {
             return false;
         }
 

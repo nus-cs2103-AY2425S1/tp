@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Person;
 
 /**
  * Represents a wedding plan.
@@ -51,6 +52,32 @@ public class Wedding {
     public void setVenue(Venue venue) {
         this.venue = venue;
     }
+
+    /**
+     * Returns true if the given person is a spouse in this wedding.
+     *
+     * @param person The person to check.
+     * @return True if the person is either the husband or wife, false otherwise.
+     */
+    public boolean isSpouse(Person person) {
+        return person.equals(husband.getPerson()) || person.equals(wife.getPerson());
+    }
+
+    /**
+     * Adds a role and person to the ContactMap for this wedding.
+     * Validates that the person being added is not a spouse (husband or wife).
+     *
+     * @param role The role to be added.
+     * @param person The person who will have the role.
+     * @throws IllegalArgumentException If the person is a spouse or if the role is already assigned.
+     */
+    public void addRoleToMap(Role role, Person person) {
+        if (isSpouse(person)) {
+            throw new IllegalArgumentException("This person is a spouse and cannot have another role.");
+        }
+        contactList.addToMap(role, person);
+    }
+
 
     public String getWeddingName() {
         return husband + " & " + wife;
