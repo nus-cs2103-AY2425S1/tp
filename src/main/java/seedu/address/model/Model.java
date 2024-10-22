@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -100,6 +101,11 @@ public interface Model {
      * The lesson identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
      */
     void setLesson(Lesson target, Lesson editedLesson);
+
+    /**
+     * Returns a list of associated people (Tutors or Tutees) for the given person.
+     */
+    List<Person> getAssociatedPeople(Person person);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

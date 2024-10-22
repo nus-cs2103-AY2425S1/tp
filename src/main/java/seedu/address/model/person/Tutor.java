@@ -20,6 +20,7 @@ public class Tutor extends Person {
      * @param address The residential address of the Tutor.
      * @param hours The hours the Tutor has taught.
      * @param tags A set of tags associated with the Tutor.
+     * @param subjects A set of subjects taught by the Tutor.
      */
     public Tutor(Name name, Phone phone, Email email, Address address, Hours hours, Set<Tag> tags,
                  Set<Subject> subjects) {

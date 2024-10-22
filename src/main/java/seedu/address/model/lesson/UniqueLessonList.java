@@ -5,23 +5,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.lesson.exceptions.DuplicateLessonException;
 import seedu.address.model.lesson.exceptions.LessonNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Tutee;
+import seedu.address.model.person.Tutor;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
- *
+ * A list of lessons that enforces uniqueness between its elements and does not allow nulls.
  * Supports a minimal set of list operations.
- *
- * @see Person#isSamePerson(Person)
  */
 public class UniqueLessonList implements Iterable<Lesson> {
 
@@ -96,6 +93,29 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
 
         internalList.setAll(lessons);
+    }
+
+    /**
+     * Returns a list of associated people (Tutors or Tutees) for the given person.
+     * If the given person is a Tutor, it returns all associated Tutees.
+     * If the given person is a Tutee, it returns all associated Tutors.
+     *
+     * @param person The person for whom the associated people are to be retrieved.
+     *               Must be non-null and either a Tutor or Tutee.
+     * @return A list of associated persons.
+     * @throws PersonNotFoundException If the given person is neither a Tutor nor a Tutee.
+     */
+    public List<Person> getAssociatedPeople(Person person) {
+        requireAllNonNull(person);
+        if (person instanceof Tutor) {
+            return internalList.stream().filter(item -> item.getTutor().equals(person))
+                    .map(Lesson::getTutee).collect(Collectors.toList());
+        } else if (person instanceof Tutee){
+            return internalList.stream().filter(item -> item.getTutee().equals(person))
+                    .map(Lesson::getTutor).collect(Collectors.toList());
+        } else {
+            throw new PersonNotFoundException();
+        }
     }
 
     /**

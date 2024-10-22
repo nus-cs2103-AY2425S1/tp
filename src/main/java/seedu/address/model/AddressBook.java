@@ -191,6 +191,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.asUnmodifiableObservableList();
     }
 
+    public List<Person> getAssociatedPeople(Person person) {
+        return lessons.getAssociatedPeople(person);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

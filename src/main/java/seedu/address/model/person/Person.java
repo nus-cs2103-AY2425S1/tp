@@ -25,8 +25,7 @@ public abstract class Person {
     private final Address address;
     private final Hours hours;
     private final Set<Tag> tags = new HashSet<>();
-
-    private Set<Subject> subjects = new HashSet<>();
+    private final Set<Subject> subjects = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -70,7 +69,6 @@ public abstract class Person {
     public String getRole() {
         return "Person";
     }
-
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -143,7 +141,6 @@ public abstract class Person {
     public Set<Subject> getSubjects() {
         return Collections.unmodifiableSet(subjects);
     }
-
 
     /**
      * Checks if this person has a subject with the specified name.
