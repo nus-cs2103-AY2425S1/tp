@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.participation.Participation;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component for displaying information related to attendance.
  */
 public class AttendanceContainer extends UiPart<Region> {
 

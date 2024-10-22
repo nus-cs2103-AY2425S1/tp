@@ -1,24 +1,16 @@
 package seedu.address.ui;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.IsoFields;
-import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Attendance;
-import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Attendance}.
  */
 public class AttendanceCard extends UiPart<Region> {
 
