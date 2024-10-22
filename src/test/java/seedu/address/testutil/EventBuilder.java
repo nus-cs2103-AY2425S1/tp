@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.List;
+
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Time;
@@ -19,6 +21,7 @@ public class EventBuilder {
     private Time time;
     private Venue venue;
     private Person celebrity;
+    private List<Person> contacts;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -28,6 +31,7 @@ public class EventBuilder {
         time = new Time(DEFAULT_TIME);
         venue = new Venue(DEFAULT_VENUE);
         celebrity = new PersonBuilder().build();
+        contacts = TypicalPersons.getTypicalPersons();
     }
 
     /**
@@ -38,6 +42,7 @@ public class EventBuilder {
         time = eventToCopy.getTime();
         venue = eventToCopy.getVenue();
         celebrity = eventToCopy.getCelebrity();
+        contacts = eventToCopy.getContacts();
     }
 
     /**
@@ -73,8 +78,16 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Contacts} of the {@code Event} that we are building.
+     */
+    public EventBuilder withContacts(List<Person> contacts) {
+        this.contacts = contacts;
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, time, venue, celebrity);
+        return new Event(name, time, venue, celebrity, contacts);
     }
 
 }
