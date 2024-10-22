@@ -1,6 +1,7 @@
 package seedu.address.model.healthservice;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Health Service in the address book.
@@ -20,6 +21,7 @@ public class HealthService {
      */
     public HealthService(String healthServiceName) {
         requireNonNull(healthServiceName);
+        checkArgument(isValidHealthserviceName(healthServiceName), MESSAGE_CONSTRAINTS);
         this.healthServiceName = healthServiceName;
     }
 

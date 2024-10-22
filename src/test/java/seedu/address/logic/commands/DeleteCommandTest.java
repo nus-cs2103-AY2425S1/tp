@@ -41,7 +41,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidNameUnfilteredList_throwsCommandException() {
-        Nric invalidNric = new Nric("S12345678A");
+        Nric invalidNric = new Nric("S1234567A");
         DeleteCommand deleteCommand = new DeleteCommand(invalidNric);
 
         assertCommandFailure(deleteCommand, model, String.format(Messages.MESSAGE_PERSON_NOT_FOUND, invalidNric));
