@@ -9,7 +9,7 @@ import seedu.address.model.person.PersonId;
  * Represents a wedding event and tracks the date and people related to the event, immutable
  */
 public class Wedding {
-    private final String name;
+    private final WeddingName name;
     private final String date;
     private final List<PersonId> assignees; //Stores a list of UserIDs
 
@@ -18,7 +18,7 @@ public class Wedding {
      * @param name
      * @param date
      */
-    public Wedding(String name, String date) {
+    public Wedding(WeddingName name, String date) {
         this.name = name;
         this.date = date;
         this.assignees = new ArrayList<>();
@@ -30,17 +30,17 @@ public class Wedding {
      * @param date
      * @param assignees
      */
-    public Wedding(String name, String date, List<PersonId> assignees) {
+    public Wedding(WeddingName name, String date, List<PersonId> assignees) {
         this.name = name;
         this.date = date;
         this.assignees = assignees;
     }
 
-    public String getName() {
+    public WeddingName getWeddingName() {
         return this.name;
     }
 
-    public String getDate() {
+    public String getWeddingDate() {
         return this.date;
     }
 
