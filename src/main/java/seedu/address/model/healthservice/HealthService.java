@@ -53,10 +53,12 @@ public class HealthService {
     public static boolean isValidHealthserviceName(String test) {
         requireNonNull(test);
         test = test.strip().toUpperCase();
-        return test.equals(HealthScreeningServices.VACCINATION.toString())
-                || test.equals(HealthScreeningServices.BLOOD_TEST.toString())
-                || test.equals(HealthScreeningServices.CONSULT.toString())
-                || test.equals(HealthScreeningServices.CANCER_SCREENING.toString());
+        for (HealthScreeningServices service : HealthScreeningServices.values()) {
+            if (test.equals(service.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
