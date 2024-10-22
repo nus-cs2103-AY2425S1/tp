@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +12,6 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.policy.Policy;
-import seedu.address.model.policy.PolicySet;
 
 /**
  * Wraps all data at the address-book level
@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Policy> getPolicyList() {
         List<Policy> allPolicies = new ArrayList<>();
         for (Person person : persons) {
-            PolicySet pset = person.getPolicySet();
+            Set<Policy> pset = person.getPolicies();
             allPolicies.addAll(pset);
         }
         return FXCollections.unmodifiableObservableList(FXCollections.observableList(allPolicies));

@@ -323,4 +323,9 @@ public class PolicySet implements Set<Policy> {
         PolicySet otherPolicySet = (PolicySet) other;
         return Arrays.equals(policies, otherPolicySet.policies);
     }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(policies);
+    }
 }

@@ -145,16 +145,31 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listExpiringPolicies() throws Exception {
-        // This will be changed in future iterations when args are introduced to the command
-        // Test valid usage of the command without arguments
+        // test valid usage of the command with no arguments (should default to 30 days)
         assertTrue(parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD)
                 instanceof ListExpiringPoliciesCommand);
 
-        // Test invalid usage where extra arguments are provided
+        // test valid usage of the command with days argument (eg. "listExpiringPolicies 60")
+        ListExpiringPoliciesCommand commandWithDays = (ListExpiringPoliciesCommand) parser.parseCommand(
+                ListExpiringPoliciesCommand.COMMAND_WORD + " 60");
+        assertTrue(commandWithDays instanceof ListExpiringPoliciesCommand);
+        assertEquals(60, commandWithDays.getDaysFromExpiry());
+
+        // test invalid usage where extra invalid arguments are provided (eg., "listExpiringPolicies extraArgument")
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " extraArgument"));
+
+        // test invalid usage where days argument is not an integer (eg. "listExpiringPolicies abc")
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " abc"));
+        // test invalid usage where days argument is a negative integer (eg. "listExpiringPolicies -5")
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListExpiringPoliciesCommand.MESSAGE_USAGE), () ->
+                        parser.parseCommand(ListExpiringPoliciesCommand.COMMAND_WORD + " -5"));
     }
+
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {

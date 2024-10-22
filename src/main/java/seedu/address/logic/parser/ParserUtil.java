@@ -14,7 +14,10 @@ import java.util.Set;
 import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimStatus;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -164,7 +167,9 @@ public class ParserUtil {
 
         final Set<PolicyType> policyTypes = new HashSet<>();
         for (String policy : policies) {
-            policyTypes.add(parsePolicyType(policy));
+            if (!policyTypes.add(parsePolicyType(policy))) {
+                throw new ParseException(AddPolicyCommand.MESSAGE_DUPLICATES);
+            }
         }
         return Collections.unmodifiableSet(policyTypes);
     }
@@ -210,6 +215,24 @@ public class ParserUtil {
             return LocalDate.parse(trimmedExpiryDate, MM_DD_YYYY_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
+        }
+    }
+    /**
+     * Parses a {@code String} into a {@code ClaimStatus}.
+     * This method trims the input string and attempts to convert it into a valid {@code ClaimStatus}
+     * using the {@code ClaimStatus.fromString()} method. If the string is not a valid claim status,
+     * a {@code ParseException} is thrown with an appropriate error message.
+     * @param claimStatus The string to parse into a {@code ClaimStatus}.
+     * @return The corresponding {@code ClaimStatus} after parsing.
+     * @throws ParseException if the string does not represent a valid {@code ClaimStatus}.
+     */
+    public static ClaimStatus parseClaimStatus(String claimStatus) throws ParseException {
+        requireNonNull(claimStatus);
+        String trimmedClaimStatus = claimStatus.trim();
+        try {
+            return ClaimStatus.fromString(trimmedClaimStatus);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(Claim.CLAIM_STATUS_MESSAGE_CONSTRAINTS);
         }
     }
 }
