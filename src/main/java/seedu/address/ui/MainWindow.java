@@ -16,6 +16,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewPersonPanel viewPersonPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane viewPersonPanelPlaceholder;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +126,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        hideDetails();
     }
 
     /**
@@ -168,6 +175,32 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Shows the panel containing details of the specified person
+     */
+    public void showDetails(Person person) {
+        viewPersonPanelPlaceholder.getChildren().clear();
+        viewPersonPanelPlaceholder.getChildren().add(new ViewPersonPanel(person).getRoot());
+        viewPersonPanelPlaceholder.setVisible(true);
+    }
+
+    /**
+     * Hides the panel containing details of the specified person
+     */
+    public void hideDetails() {
+        viewPersonPanelPlaceholder.getChildren().clear();
+        // Apply a more visible border with rounded corners and a subtle shadow effect
+        viewPersonPanelPlaceholder.setStyle(
+                "-fx-border-color: #5A5A5A;"
+                        + "-fx-border-width: 3;"
+                        + "-fx-border-radius: 12;"
+                        + "-fx-background-radius: 12;"
+                        + "-fx-padding: 15;"
+                        + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0.1, 0, 3);"
+        );
+    }
+
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -184,6 +217,13 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isView()) {
+                Person person = commandResult.showPerson();
+                showDetails(person);
+            } else {
+                hideDetails();
             }
 
             return commandResult;
