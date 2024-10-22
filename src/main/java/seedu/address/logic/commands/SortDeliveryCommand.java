@@ -2,7 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELIVERY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ASCENDING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_BY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -18,7 +19,8 @@ public class SortDeliveryCommand extends SortCommand {
             + ": Sorts all deliveries by any of the prefix and "
             + "displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
-            + PREFIX_SORT_ASCENDING + "SORT ORDER ('a' for ascending and 'd' for descending)";
+            + PREFIX_SORT_ORDER + "SORT ORDER ('a' for ascending and 'd' for descending)"
+            + PREFIX_SORT_BY + "SORT BY ('s' for status, 'd' for datetime, 'c' for cost)";
 
     private final DeliverySortComparator comparator;
 

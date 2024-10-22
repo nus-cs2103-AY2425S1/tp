@@ -1,23 +1,25 @@
 package seedu.address.model.delivery;
 
+import java.time.LocalDateTime;
+
 import seedu.address.logic.parser.SortOrder;
 
 /**
  * Represents a comparator for deliveries that sort based on cost.
  */
-public class DeliverySortCostComparator extends DeliverySortComparator {
-    public DeliverySortCostComparator(SortOrder sortOrder) {
+public class DeliverySortDateTimeComparator extends DeliverySortComparator {
+    public DeliverySortDateTimeComparator(SortOrder sortOrder) {
         super(sortOrder);
     }
 
     @Override
     public int compare(Delivery delivery1, Delivery delivery2) {
-        float delivery1Cost = Float.parseFloat(delivery1.getDeliveryCost().value);
-        float delivery2Cost = Float.parseFloat(delivery2.getDeliveryCost().value);
+        LocalDateTime delivery1DateTime = delivery1.getDeliveryDate().time;
+        LocalDateTime delivery2DateTime = delivery2.getDeliveryDate().time;
         if (super.getIsSortByAscending()) {
-            return Float.compare(delivery2Cost, delivery1Cost);
+            return delivery2DateTime.compareTo(delivery1DateTime);
         } else {
-            return Float.compare(delivery1Cost, delivery2Cost);
+            return delivery1DateTime.compareTo(delivery2DateTime);
         }
     }
 
@@ -28,7 +30,7 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeliverySortCostComparator)) {
+        if (!(other instanceof DeliverySortDateTimeComparator)) {
             return false;
         }
 

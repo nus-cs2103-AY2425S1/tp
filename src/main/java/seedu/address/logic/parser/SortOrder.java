@@ -29,7 +29,10 @@ public class SortOrder {
         }
     }
 
-    public boolean getSortOrder() {
+    /**
+     * Returns true if sort order is ascending else false
+     */
+    public boolean getIsSortByAscending() {
         return isSortByAscending;
     }
 
@@ -42,7 +45,7 @@ public class SortOrder {
 
     @Override
     public String toString() {
-        return "" + getSortOrder();
+        return getIsSortByAscending() ? "ascending" : "descending";
     }
 
     @Override

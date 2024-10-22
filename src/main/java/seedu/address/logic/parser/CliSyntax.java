@@ -18,5 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUPPLIER_INDEX = new Prefix("s/");
     public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
     public static final Prefix PREFIX_COST = new Prefix("c/");
-    public static final Prefix PREFIX_SORT_ASCENDING = new Prefix("so/");
+    public static final Prefix PREFIX_SORT_ORDER = new Prefix("so/");
+    public static final Prefix PREFIX_SORT_BY = new Prefix("sb/");
 }

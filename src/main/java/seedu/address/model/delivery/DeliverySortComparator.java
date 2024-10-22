@@ -9,22 +9,43 @@ import seedu.address.logic.parser.SortOrder;
  * Comparators for Delivery class
  */
 public abstract class DeliverySortComparator implements Comparator<Delivery> {
-    private final boolean isSortByAscending;
+    private final SortOrder sortOrder;
 
     public DeliverySortComparator(SortOrder sortOrder) {
-        this.isSortByAscending = sortOrder.getSortOrder();
+        this.sortOrder = sortOrder;
+    }
+
+    public SortOrder getSortOrder() {
+        return this.sortOrder;
     }
 
     public boolean getIsSortByAscending() {
-        return this.isSortByAscending;
+        return this.sortOrder.getIsSortByAscending();
     }
 
     public String toSortOrderString() {
-        return isSortByAscending ? "ascending" : "descending";
+        return this.sortOrder.toString();
     }
+
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("isSortByAscending", isSortByAscending).toString();
+        return new ToStringBuilder(this)
+                .add("isSortByAscending", this.sortOrder.toString()).toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof DeliverySortComparator)) {
+            return false;
+        }
+
+        DeliverySortComparator otherDeliverySortComparator = (DeliverySortComparator) other;
+        return this.getSortOrder().equals(otherDeliverySortComparator.getSortOrder());
     }
 }
