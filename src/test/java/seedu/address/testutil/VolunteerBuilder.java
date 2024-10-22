@@ -116,4 +116,13 @@ public class VolunteerBuilder {
     public Volunteer build() {
         return new Volunteer(name, phone, email, availableDate, startTimeAvailability, endTimeAvailability, involvedIn);
     }
+
+    /**
+     * Sets the {@code involvedIn} list of the {@code Volunteer} that we are building.
+     * This method allows adding one or more event names that the volunteer is involved in.
+     */
+    public VolunteerBuilder withEvents(String... events) {
+        this.involvedIn.setAll(events);
+        return this;
+    }
 }
