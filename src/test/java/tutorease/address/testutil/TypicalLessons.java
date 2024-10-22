@@ -27,49 +27,42 @@ public class TypicalLessons {
         try {
             MATH_LESSON = new LessonBuilder()
                     .withName(ALICE)
-                    .withLocationIndex("1")
                     .withStartDateTime("20-10-2024 10:00")
                     .withEndDateTime("20-10-2024 10:00")
                     .build();
 
             SCIENCE_LESSON = new LessonBuilder()
                     .withName(ALICE)
-                    .withLocationIndex("2")
                     .withStartDateTime("20-10-2024 12:00")
                     .withEndDateTime("20-10-2024 13:00")
                     .build();
 
             ENGLISH_LESSON = new LessonBuilder()
                     .withName(BOB)
-                    .withLocationIndex("1")
                     .withStartDateTime("21-10-2024 09:00")
                     .withEndDateTime("21-10-2024 09:00")
                     .build();
 
             HISTORY_LESSON = new LessonBuilder()
                     .withName(ALICE)
-                    .withLocationIndex("2")
                     .withStartDateTime("21-10-2024 11:00")
                     .withEndDateTime("21-10-2024 12:00")
                     .build();
 
             GEOGRAPHY_LESSON = new LessonBuilder()
                     .withName(ALICE)
-                    .withLocationIndex("1")
                     .withStartDateTime("15-10-2024 10:00")
                     .withEndDateTime("15-10-2024 11:00")
                     .build();
 
             ART_LESSON = new LessonBuilder()
                     .withName(BOB)
-                    .withLocationIndex("2")
                     .withStartDateTime("22-10-2024 16:00")
                     .withEndDateTime("22-10-2024 17:00")
                     .build();
 
             MUSIC_LESSON = new LessonBuilder()
                     .withName(BOB)
-                    .withLocationIndex("1")
                     .withStartDateTime("23-10-2024 15:00")
                     .withEndDateTime("23-10-2024 16:00")
                     .build();
