@@ -2,6 +2,8 @@ package seedu.address.model.wedding;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 
 import java.util.List;
 
@@ -20,8 +22,8 @@ public class WeddingTest {
     public void setUp() {
         ids = new PersonId[]{new PersonId()};
         assignees = List.of(ids);
-        wedding = new Wedding(new WeddingName("Name"), "Date", assignees);
-        otherWedding = new Wedding(new WeddingName("Other"), "Date");
+        wedding = new Wedding(new WeddingName("Name"), WEDDING_ONE.getWeddingDate(), assignees);
+        otherWedding = new Wedding(new WeddingName("Other"), WEDDING_TWO.getWeddingDate());
     }
     @Test
     public void isSameWedding_sameObject_true() {
@@ -50,19 +52,19 @@ public class WeddingTest {
         assertFalse(wedding.equals(5));
 
         //different object, same name, date and assignees
-        Wedding equalWedding = new Wedding(new WeddingName("Name"), "Date", assignees);
+        Wedding equalWedding = new Wedding(new WeddingName("Name"), WEDDING_ONE.getWeddingDate(), assignees);
         assertTrue(wedding.equals(equalWedding));
 
         //different object, different name, same date and assignees
-        Wedding diffName = new Wedding(new WeddingName("Diff"), "Date", assignees);
+        Wedding diffName = new Wedding(new WeddingName("Diff"), WEDDING_ONE.getWeddingDate(), assignees);
         assertFalse(wedding.equals(diffName));
 
         //different object, same name, different date, same assignees
-        Wedding diffDate = new Wedding(new WeddingName("Name"), "diffDate", assignees);
+        Wedding diffDate = new Wedding(new WeddingName("Name"), WEDDING_TWO.getWeddingDate(), assignees);
         assertFalse(wedding.equals(diffDate));
 
         //different object, same name, same date, different assignees
-        Wedding diffAssignees = new Wedding(new WeddingName("Name"), "Date");
+        Wedding diffAssignees = new Wedding(new WeddingName("Name"), WEDDING_ONE.getWeddingDate());
         assertFalse(wedding.equals(diffAssignees));
     }
 }
