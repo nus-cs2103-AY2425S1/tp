@@ -2,9 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
 
@@ -75,11 +74,11 @@ public class SortCommandTest {
         for (int i = 1; i < persons.size(); i++) {
             Person previous = persons.get(i - 1);
             Person current = persons.get(i);
-            if (previous.getEarliestAppointmentDate() != null &&
-                    current.getEarliestAppointmentDate() != null) {
+            if (previous.getEarliestAppointmentDate() != null
+                    && current.getEarliestAppointmentDate() != null) {
                 assert previous.getEarliestAppointmentDate()
-                        .compareTo(current.getEarliestAppointmentDate()) <= 0 :
-                        "List is not sorted by appointment date!";
+                        .compareTo(current.getEarliestAppointmentDate()) <= 0
+                        : "List is not sorted by appointment date!";
             }
         }
     }
@@ -89,8 +88,8 @@ public class SortCommandTest {
      */
     private void assertUnchangedList(List<Person> personsAfterSort) {
         List<Person> personsBeforeSort = model.getFilteredPersonList();
-        assert personsBeforeSort.equals(personsAfterSort) :
-                "List should remain unchanged after sorting without appointment dates!";
+        assert personsBeforeSort.equals(personsAfterSort)
+                : "List should remain unchanged after sorting without appointment dates!";
     }
 
 }
