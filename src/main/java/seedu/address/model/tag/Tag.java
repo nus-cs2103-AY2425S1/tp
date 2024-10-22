@@ -20,11 +20,9 @@ public class Tag {
     public static final String VALIDATION_REGEX = "^[\\p{Alnum}][\\p{Alnum} ]*[\\p{Alnum}]?$";
     private static HashMap<String, String> shortCutMap = new HashMap<>();
     private static String allMappings;
-
-
+    public final String tagName;
     static {
         if (shortCutMap.isEmpty()) {
-            // If the HashMap is empty, set the message to "no shortcuts assigned"
             allMappings = "no shortcuts assigned";
         } else {
             // If there are mappings, format the mappings as a string and assign to allMappings
@@ -37,7 +35,6 @@ public class Tag {
             allMappings = mappingsBuilder.toString().trim();
         }
     }
-    public final String tagName;
     /**
      * Constructs a {@code Tag}.
      *
@@ -45,7 +42,7 @@ public class Tag {
      */
     public Tag(String tagName) {
         requireNonNull(tagName);
-        //check if tagname exists in dietary_restrictions_map and replace it with that mapped value if exist
+        //check if tagname exists in shortCutMap and replace it with that mapped value if exist
         String fullTagName = shortCutMap.getOrDefault(tagName, tagName);
         checkArgument(isValidTagName(fullTagName), MESSAGE_CONSTRAINTS);
         this.tagName = fullTagName;
@@ -58,7 +55,7 @@ public class Tag {
         return test.matches(VALIDATION_REGEX);
     }
     /**
-     * updates the hashmap containing the alias and fulltagname
+     * Updates the hashmap containing the alias and fullTagName
      * @param model
      */
     public static void updateShortCutMappings(Model model) {

@@ -93,8 +93,6 @@ public class AddressBookTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
-
-    // New Test for ShortCut
     @Test
     public void hasShortCut_shortcutNotInAddressBook_returnsFalse() {
         ShortCut shortCut = new ShortCut(new Alias("v"), new FullTagName("Vegan"));

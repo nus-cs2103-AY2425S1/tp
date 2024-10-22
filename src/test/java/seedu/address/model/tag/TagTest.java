@@ -22,17 +22,13 @@ public class TagTest {
 
     @Test
     public void isValidTagName() {
-        // null tag name
         assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
     }
 
     @Test
     public void hashMapSuccess() {
-        // Directly populate the shortCutMap for the test
         Tag.getDietaryRestrictionsMappings().put("v", "Vegan");
         Tag.getDietaryRestrictionsMappings().put("vg", "Vegetarian");
-
-        // Now that the shortCutMap is populated, test if the mappings work as expected
         assertEquals(new Tag("v").toString(), "[Vegan]");
         assertEquals(new Tag("vg").toString(), "[Vegetarian]");
     }

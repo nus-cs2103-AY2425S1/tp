@@ -48,7 +48,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    // list overwrite operations
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setShortcuts(newData.getShortCutList());
     }
 
-    //// person-level operations
+    // person-level operations
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -125,7 +125,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasOrder(Order order) {
         return orders.contains(order);
     }
-    ///// shortcuts methods
+    // shortcuts methods
     public void addShortCut(ShortCut shortcut) {
         shortcuts.add(shortcut);
     }
@@ -138,7 +138,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasAlias(Alias alias) {
         return shortcuts.containsAlias(alias);
     }
-    //// util methods
+    // util methods
 
     @Override
     public String toString() {
