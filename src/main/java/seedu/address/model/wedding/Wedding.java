@@ -2,7 +2,6 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
@@ -28,7 +27,7 @@ public class Wedding {
     private Person partner2;
     private ArrayList<Person> guestList;
     private Address address;
-    private Date date;
+    private String date;
 
     /**
      * Constructs a {@code Wedding} with the specified {@code weddingName}
