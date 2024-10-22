@@ -1,6 +1,8 @@
 package seedu.internbuddy.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +24,8 @@ public class WithdrawCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Withdraws the application identified by the index number used in the displayed application list.\n"
-            + "Parameters: COMPANYINDEX (must be a positive integer) "
-            + "APPLICATIONINDEX (must be a positive integer)\n"
+            + "Parameters: " + PREFIX_COMPANY_INDEX + "COMPANY_INDEX(must be a positive integer) "
+            + PREFIX_APP_INDEX +  "APPLICATION_INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 1";
 
     public static final String MESSAGE_WITHDRAW_APPLICATION_SUCCESS = "Withdrawn application: %1$s";

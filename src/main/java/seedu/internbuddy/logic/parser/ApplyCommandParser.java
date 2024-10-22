@@ -1,7 +1,7 @@
 package seedu.internbuddy.logic.parser;
 
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APPSTATUS;
+import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -27,7 +27,7 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
      */
     public ApplyCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_APPSTATUS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_APP_STATUS);
 
         Index index;
 
@@ -44,7 +44,7 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESCRIPTION);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        AppStatus appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APPSTATUS)
+        AppStatus appStatus = ParserUtil.parseAppStatus(argMultimap.getValue(PREFIX_APP_STATUS)
                 .orElse("APPLIED"));
 
         Application application = new Application(name, description, appStatus);
