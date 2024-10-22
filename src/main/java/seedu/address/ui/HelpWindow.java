@@ -53,7 +53,7 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow(Stage root) {
         super(FXML, root);
         root.setTitle("Help");
-        root.getScene().getStylesheets().add("view/HelpWindow.css");
+        root.getScene().getStylesheets().add("view/css/HelpWindow.css");
         Label titleLabel = new Label("Command Summary");
         titleLabel.getStyleClass().add("help-title");
         mainContainer.getChildren().add(0, titleLabel);

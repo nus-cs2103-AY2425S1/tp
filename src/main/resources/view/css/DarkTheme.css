@@ -314,23 +314,48 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #F70D1A;
+    -fx-text-fill: #1C1C1C;
+}
+
+#commandTextContainer {
+    -fx-background-color: #1C1C1C;
+    -fx-border-color: transparent;
+    -fx-border-width: 1px;
+
+    -fx-padding: 10 15 10 15;
+
+    -fx-pref-height: 50px;
+    -fx-min-height: 50px;
+    -fx-max-height: 50px;
+}
+
+#commandTextIcon {
+    -fx-icon-size: 15;
+    -fx-icon-color: white;
 }
 
 #commandTextArea {
-    -fx-background-color: transparent #383838 transparent #383838;
-    -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
-    -fx-border-insets: 0;
-    -fx-border-width: 1;
-    -fx-control-inner-background: #383838;
-    -fx-font-family: "Segoe UI Light";
+    -fx-background-color: #1C1C1C;
+    -fx-control-inner-background: #1C1C1C;
+    -fx-faint-focus-color: #1C1C1C;
+
+    -fx-font-family: "Jetbrains Mono";
     -fx-font-size: 13pt;
+    -fx-prompt-text-fill: #656565;
     -fx-text-fill: white;
-    -fx-pref-height: 40px;
+
+    -fx-pref-height: 35px;
+    -fx-max-height: 35px;
+    -fx-min-height: 35px;
+    -fx-padding: 0 0 0 -5px;
+}
+
+#commandTextArea .content {
+    -fx-background-radius: 0;
+}
+
+#commandTextArea:focused {
     -fx-prompt-text-fill: grey;
-    -fx-min-height: 40px;
-    -fx-max-height: 200px;
 }
 
 #filterField, #personListPanel, #personWebpage {

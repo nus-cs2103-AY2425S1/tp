@@ -3,7 +3,10 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import org.kordamp.ikonli.javafx.FontIcon;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,6 +25,10 @@ public class CommandBox extends UiPart<Region> {
 
     @FXML
     private TextArea commandTextArea;
+    @FXML
+    private FontIcon commandTextIcon;
+    @FXML
+    private HBox commandTextContainer;
 
     /**
      * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
@@ -33,6 +40,17 @@ public class CommandBox extends UiPart<Region> {
         commandTextArea.textProperty().addListener((unused1, unused2, unused3) -> {
             setStyleToDefault();
         });
+
+        commandTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                // Set colours when TextArea is focused
+                commandTextIcon.setIconColor(Color.WHITE);
+            } else {
+                // Set colours when TextArea loses focus
+                commandTextIcon.setIconColor(Color.GREY);
+            }
+        });
+
         initaliseEventHandler();
     }
 

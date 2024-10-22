@@ -5,10 +5,19 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
 
+<?import javafx.scene.layout.HBox?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets>
-    <URL value="@DarkTheme.css" />
+    <URL value="@css/DarkTheme.css" />
   </stylesheets>
-  <TextArea fx:id="commandTextArea" promptText="Enter command here..." wrapText="true" maxHeight="200"/>
+
+  <HBox fx:id="commandTextContainer" alignment="CENTER_LEFT" spacing="5" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17">
+    <FontIcon fx:id="commandTextIcon" iconLiteral="fas-terminal" iconSize="16" />
+    <TextArea fx:id="commandTextArea" promptText="Enter command here..." wrapText="true" maxHeight="200" HBox.hgrow="ALWAYS"/>
+  </HBox>
+
 </StackPane>
 
