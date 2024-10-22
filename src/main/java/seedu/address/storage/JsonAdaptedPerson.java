@@ -84,15 +84,15 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (!Phone.isValidPhone(phone)) {
+        if (phone != null && !Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
 
-        final Optional<Phone> modelPhone = phone == null || phone.isEmpty()
+        final Optional<Phone> modelPhone = (phone == null || phone.isEmpty())
                 ? Optional.empty()
                 : Optional.of(new Phone(phone));
 
-        if (!Email.isValidEmail(email)) {
+        if (email != null && !Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
 
