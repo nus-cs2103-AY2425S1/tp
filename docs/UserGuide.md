@@ -164,11 +164,28 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+**Confirmation Requirement:**
+
+A confirmation window will appear before deleting a person, asking you to confirm the deletion. 
+You must select “OK” to proceed with the deletion. If you select “Cancel,” the action will be aborted, 
+and the person will not be deleted.
+
+![deleteConfirmation.png](images%2FdeleteConfirmation.png)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+**Confirmation Requirement:**
+
+A confirmation window will appear before clearing all contacts in MediContact, 
+asking you to confirm if you are sure you want to proceed. 
+You must select “OK” to clear the address book. If you select “Cancel,” 
+the action will be aborted, and the address book will remain unchanged.
+
+![clearConfirmation.png](images%2FclearConfirmation.png)
 
 ### Exiting the program : `exit`
 
