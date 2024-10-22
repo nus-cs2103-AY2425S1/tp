@@ -92,8 +92,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_paid() throws Exception {
-        assertTrue(parser.parseCommand("paid 1") instanceof PaidCommand);
-        assertTrue(parser.parseCommand("paid 2") instanceof PaidCommand);
+        assertTrue(parser.parseCommand("paid 1 f/ 3") instanceof PaidCommand);
+        assertTrue(parser.parseCommand("paid 2 f/ 12") instanceof PaidCommand);
     }
 
     @Test
