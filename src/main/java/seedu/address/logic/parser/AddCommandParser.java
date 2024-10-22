@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import java.util.Set;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.contact.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -50,11 +50,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         TelegramUsername telegramUsername = ParserUtil
                 .parseTeleOnAdd(argMultimap.getValue(PREFIX_TELEGRAM).orElse(null)); // null to represent input absent
-
-        //Set <Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
-
-        //Person person = new Person(name, phone, email, address, tagList, telegramUsername,
-        //        roleList.toArray(new Role[0]));
 
         Set<Role> roleList = ParserUtil.parseRoles(argMultimap.getAllValues(PREFIX_ROLE));
 

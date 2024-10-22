@@ -50,6 +50,17 @@ public class EventManager implements ReadOnlyEventManager {
         this.eventList.setEvent(target, editedEvent);
     }
 
+    /**
+     * Checks if the {@code EventManager} contains the specified {@code Event}.
+     *
+     * @param event The {@code Event} to check.
+     * @return {@code true} if the event is present in the {@code eventList}, {@code false} otherwise.
+     * @throws NullPointerException if the {@code event} is null.
+     */
+    public boolean hasEvent(Event event) {
+        return this.eventList.contains(event);
+    }
+
     @Override
     public ObservableList<Event> getEventList() {
         return eventList.asUnmodifiableObservableList();

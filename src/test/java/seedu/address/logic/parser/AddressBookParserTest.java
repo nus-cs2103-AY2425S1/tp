@@ -13,16 +13,19 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.contact.commands.AddCommand;
+import seedu.address.logic.commands.contact.commands.ClearCommand;
+import seedu.address.logic.commands.contact.commands.DeleteCommand;
+import seedu.address.logic.commands.contact.commands.EditCommand;
+import seedu.address.logic.commands.contact.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.contact.commands.FindCommand;
+import seedu.address.logic.commands.contact.commands.ListCommand;
+import seedu.address.logic.commands.event.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -90,8 +93,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test
@@ -102,5 +105,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_testCommand() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("editer /p 12345678"));
+    }
+
+    @Test
+    public void parseCommand_addEvent() throws ParseException {
+        Command expected = new AddEventCommand(new Event("sumo bot festival"));
+        assertEquals(expected, new AddressBookParser()
+                .parseCommand(AddEventCommand.COMMAND_WORD + " sumo bot festival"));
     }
 }

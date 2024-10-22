@@ -16,6 +16,7 @@ public class EventManagerTest {
     private EventManager eventManager;
     private Event event1;
     private Event event2;
+    private Event event3;
 
     @BeforeEach
     public void setUp() {
@@ -71,6 +72,20 @@ public class EventManagerTest {
     public void getEventList_initialEmptyList() {
         ObservableList<Event> eventList = eventManager.getEventList();
         assertTrue(eventList.isEmpty());
+    }
+
+    @Test
+    public void hasEvent_newEvent_returnsFalse() {
+        event3 = new Event("event3");
+        eventManager.addEvent(event3);
+        assertFalse(this.eventManager.hasEvent(new Event("event4")));
+    }
+
+    @Test
+    public void hasEvent_existingEvent_returnsTrue() {
+        event3 = new Event("event3");
+        eventManager.addEvent(event3);
+        assertTrue(this.eventManager.hasEvent(new Event("event3")));
     }
 }
 

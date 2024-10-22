@@ -19,6 +19,7 @@ import seedu.address.model.role.exceptions.InvalidRoleException;
  * Represents an Event in the address book.
  */
 public class Event {
+    public static final String MESSAGE_CONSTRAINTS = "Event name should not be blank";
     private final String name;
     private final Set<Person> attendees;
     private final Set<Person> vendors;
@@ -140,7 +141,12 @@ public class Event {
         }
     }
 
-
+    /**
+     * Returns true if a given string is a valid event.
+     */
+    public static boolean isValidEvent(String event) {
+        return !event.isEmpty();
+    }
 
     /**
      * Removes a person from the event with the specified role.

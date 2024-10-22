@@ -1,10 +1,13 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.contact.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.event.EventManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
@@ -27,7 +30,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model, EventManager eventManager) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(

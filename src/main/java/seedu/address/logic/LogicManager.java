@@ -15,6 +15,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.event.EventManager;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
 
@@ -33,13 +34,16 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final AddressBookParser addressBookParser;
 
+    private final EventManager eventManager;
+
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
-    public LogicManager(Model model, Storage storage) {
+    public LogicManager(Model model, Storage storage, EventManager eventManager) {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        this.eventManager = eventManager;
     }
 
     @Override
@@ -47,8 +51,8 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        Command contactCommand = addressBookParser.parseCommand(commandText);
+        commandResult = contactCommand.execute(model, eventManager);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

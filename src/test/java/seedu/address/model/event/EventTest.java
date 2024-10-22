@@ -1,7 +1,9 @@
 package seedu.address.model.event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -210,4 +212,13 @@ public class EventTest {
         assertThrows(IllegalArgumentException.class, () -> event.removePerson(person, "invalidRole"));
     }
 
+    @Test
+    public void isValidEvent_validInput_true() {
+        assertTrue(Event.isValidEvent("birthday party"));
+    }
+
+    @Test
+    public void isValidEvent_invalidInput_false() {
+        assertFalse(Event.isValidEvent(""));
+    }
 }
