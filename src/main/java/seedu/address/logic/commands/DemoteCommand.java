@@ -27,12 +27,12 @@ public class DemoteCommand extends Command {
 
     public static final String MESSAGE_PURPOSE = "Converts an employee to a potential hire.";
 
-    public static final String MESSAGE_PARAMETER = "INDEX (must be a positive integer)";
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " INDEX";
 
-    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + "1";
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " 1";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
-            + "\nParameters: " + MESSAGE_PARAMETER
+            + "\nFormat: " + MESSAGE_FORMAT
             + "\nExample: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "Employee demoted: %1$s";
