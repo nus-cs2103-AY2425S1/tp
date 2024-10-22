@@ -30,7 +30,7 @@ import seedu.address.model.meetup.To;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "editm";
+    public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the meet-up identified "
             + "by the index number used in the displayed meet-up list. "

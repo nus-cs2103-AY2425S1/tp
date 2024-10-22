@@ -20,6 +20,7 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_MEETUP_DISPLAYED_INDEX = "The meetup index provided is invalid";
+    public static final String MESSAGE_INVALID_PARSER_MODE = "The parser mode provided is invalid";
 
     // MeetUp Strings
     public static final String MESSAGE_MEETUPS_LISTED_OVERVIEW = "%1$d buyers listed!";
