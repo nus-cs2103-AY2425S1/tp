@@ -7,11 +7,10 @@ import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.CARLDUH;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getAdditionalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,21 +20,21 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameMatchesNamePredicate;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class ViewCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getAdditionalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getAdditionalAddressBook(), new UserPrefs());
 
     @Test
     public void equals() {
-        NameMatchesNamePredicate firstPredicate =
-                new NameMatchesNamePredicate(Collections.singletonList("first"));
-        NameMatchesNamePredicate secondPredicate =
-                new NameMatchesNamePredicate(Collections.singletonList("second"));
+        NameMatchesKeywordPredicate firstPredicate =
+                new NameMatchesKeywordPredicate(Collections.singletonList("first"));
+        NameMatchesKeywordPredicate secondPredicate =
+                new NameMatchesKeywordPredicate(Collections.singletonList("second"));
 
         ViewCommand viewFirstCommand = new ViewCommand(firstPredicate);
         ViewCommand viewSecondCommand = new ViewCommand(secondPredicate);
@@ -60,7 +59,7 @@ public class ViewCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameMatchesNamePredicate predicate = preparePredicate(" ");
+        NameMatchesKeywordPredicate predicate = preparePredicate(" ");
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -68,19 +67,9 @@ public class ViewCommandTest {
     }
 
     @Test
-    public void execute_multipleWordsInKeyword_exactNameMatched() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameMatchesNamePredicate predicate = preparePredicate("Kurz Elle Kunz");
-        ViewCommand command = new ViewCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
-    }
-
-    @Test
     public void execute_singleWordInKeyword_partialNameMatched() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
-        NameMatchesNamePredicate predicate = preparePredicate(KEYWORD_MATCHING_MEIER);
+        NameMatchesKeywordPredicate predicate = preparePredicate(KEYWORD_MATCHING_MEIER);
         ViewCommand command = new ViewCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -88,8 +77,25 @@ public class ViewCommandTest {
     }
 
     @Test
+    public void execute_multipleWordsInKeyword_nameMatched() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        NameMatchesKeywordPredicate predicate = preparePredicate("Carl Kurz");
+        ViewCommand command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL, CARLDUH), model.getFilteredPersonList());
+
+        expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        predicate = preparePredicate("Carl Duh Kurz");
+        command = new ViewCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARLDUH), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        NameMatchesNamePredicate predicate = new NameMatchesNamePredicate(Arrays.asList("keyword"));
+        NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(Arrays.asList("keyword"));
         ViewCommand viewCommand = new ViewCommand(predicate);
         String expected = ViewCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
         assertEquals(expected, viewCommand.toString());
@@ -98,7 +104,7 @@ public class ViewCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameMatchesNamePredicate preparePredicate(String userInput) {
-        return new NameMatchesNamePredicate(Arrays.asList(userInput.split("\\s+")));
+    private NameMatchesKeywordPredicate preparePredicate(String userInput) {
+        return new NameMatchesKeywordPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

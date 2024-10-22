@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ViewCommand;
-import seedu.address.model.person.NameMatchesNamePredicate;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 
 public class ViewCommandParserTest {
 
@@ -24,7 +24,7 @@ public class ViewCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         ViewCommand expectedFindCommand =
-                new ViewCommand(new NameMatchesNamePredicate(Arrays.asList("Alice Bob")));
+                new ViewCommand(new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob")));
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
 
         assertParseSuccess(parser, " \n Alice Bob  \t", expectedFindCommand);
