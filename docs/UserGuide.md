@@ -80,7 +80,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ d/DATE_OF_LAST_VISIT`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]`
 
 <box type="tip" seamless>
 
@@ -89,13 +89,14 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ d/DATE_OF
 </box>
 <box type="tip" seamless>
 
-**Tip:** The only required fields for a person are a name, a phone number, and a date of last visit, so you can create a contact with just those 3 fields. Providing an email, address, or tags is optional.
+**Tip:** The only required fields for a person are a name and a phone number, so you can create a contact with just those 2 fields. Providing an email, address, date of last visit, emergency contact or tags is optional.
 
 </box>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 d/02-01-2024`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/12345678 t/criminal d/03-28-2024`
+* `add p/12345678 n/Jane Smith d/01-01-2024 ec/98765432`
 * `add p/12345678 n/Jane Smith d/01-01-2024`
 
 ### Listing all persons : `list`
@@ -108,7 +109,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -217,7 +218,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ d/DATE_OF_LAST_VISIT` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
+**Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT] [ec/EMERGENCY_CONTACT]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague d/07-23-2024`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [d/DATE_OF_LAST_VISIT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
