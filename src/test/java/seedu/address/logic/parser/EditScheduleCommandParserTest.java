@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +34,21 @@ public class EditScheduleCommandParserTest {
         descriptor.setDate(LocalDate.parse("01-10-2024", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         descriptor.setTime(LocalTime.parse("1400", DateTimeFormatter.ofPattern("HHmm")));
         descriptor.setContactIndex(1);
+
+        EditScheduleCommand expectedCommand = new EditScheduleCommand(Index.fromOneBased(1), descriptor);
+
+        EditScheduleCommand actualCommand = parser.parse(userInput);
+        assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parse_partialFieldsPresent_success() throws Exception {
+        // Partial fields provided
+        String userInput = "1 " + PREFIX_NAME + "Meeting " + PREFIX_DATE + "01-10-2024";
+
+        EditScheduleDescriptor descriptor = new EditScheduleDescriptor();
+        descriptor.setName(new Name("Meeting"));
+        descriptor.setDate(LocalDate.parse("01-10-2024", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         EditScheduleCommand expectedCommand = new EditScheduleCommand(Index.fromOneBased(1), descriptor);
 
@@ -82,6 +96,6 @@ public class EditScheduleCommandParserTest {
         // No fields are provided to edit
         String userInput = "1";
 
-        assertThrows(NoSuchElementException.class, () -> parser.parse(userInput));
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 }
