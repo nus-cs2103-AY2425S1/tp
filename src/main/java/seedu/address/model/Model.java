@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -108,4 +109,9 @@ public interface Model {
     float maxScore(String assignment);
     String getAssignmentName(String name);
     boolean hasName(Name name);
+
+    /**
+     * Returns {@code Github} detials of the specified {@name}
+     */
+    Github getGitHubUsername(Name name);
 }
