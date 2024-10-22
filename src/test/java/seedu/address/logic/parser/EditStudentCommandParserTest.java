@@ -88,8 +88,8 @@ public class EditStudentCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
-        String userInput = STUDENT_NUMBER_DESC_AMY + " " + PREFIX_TAG + "";
+    public void parse_resetToEmptyTag_success() {
+        String userInput = STUDENT_NUMBER_DESC_AMY + " " + PREFIX_TAG;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
         EditStudentCommand expectedCommand = new EditStudentCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
