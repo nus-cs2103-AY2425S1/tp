@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 import keycontacts.logic.Messages;
 import keycontacts.logic.parser.exceptions.ParseException;
 
+/**
+ * Represents a list of argument tokens, which includes the prefix and value of
+ * each argument.
+ */
 public class ArgumentList {
     private final List<ArgumentToken> argumentList;
 
@@ -30,11 +34,21 @@ public class ArgumentList {
         return argumentList.size();
     }
 
+    /**
+     * Returns true if any of the prefixes are present in the argument list.
+     * @param prefixes
+     * @return
+     */
     public boolean anyPrefixesPresent(Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> argumentList.stream()
                 .anyMatch(argument -> argument.getPrefix().equals(prefix)));
     }
 
+    /**
+     * Verifies that there are no duplicate prefixes in the argument list.
+     * @param prefixes
+     * @throws ParseException
+     */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
         List<Prefix> duplicatedPrefixes = new ArrayList<>();
         for (Prefix prefix : prefixes) {
@@ -46,7 +60,8 @@ public class ArgumentList {
             }
         }
         if (!duplicatedPrefixes.isEmpty()) {
-            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes.toArray(Prefix[]::new)));
+            throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(
+                    duplicatedPrefixes.toArray(Prefix[]::new)));
         }
     }
 

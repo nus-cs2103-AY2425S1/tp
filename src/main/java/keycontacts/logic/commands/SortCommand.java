@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import keycontacts.model.Model;
 import keycontacts.model.student.StudentComparator;
 
+/**
+ * Sorts all students in the student directory by the specified field in specified order.
+ */
 public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 

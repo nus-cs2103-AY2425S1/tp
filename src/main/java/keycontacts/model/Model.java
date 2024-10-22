@@ -92,7 +92,6 @@ public interface Model {
 
     /**
      * Updates the sorted student list to sort by the given {@code comparator}.
-     * 
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateStudentList(Comparator<Student> comparator);

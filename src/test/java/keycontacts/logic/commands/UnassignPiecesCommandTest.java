@@ -92,7 +92,7 @@ public class UnassignPiecesCommandTest {
     public void execute_studentNoPianoPiece_throwsCommandException() {
         UnassignPiecesCommand command = new UnassignPiecesCommand(INDEX_FIRST_STUDENT, validPianoPieces);
         Student student = model.getStudentList().get(0);
-                model.setStudent(model.getStudentList().get(0),
+        model.setStudent(model.getStudentList().get(0),
                 student.withRemovedPianoPieces(student.getPianoPieces()));
         assertCommandFailure(command, model, UnassignPiecesCommand.MESSAGE_NO_PIANO_PIECE_FOUND);
     }

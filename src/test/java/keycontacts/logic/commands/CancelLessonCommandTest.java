@@ -55,7 +55,7 @@ public class CancelLessonCommandTest {
 
     @Test
     public void execute_indexOutOfBounds_failure() {
-            Index outOfBoundsIndex = Index.fromOneBased(model.getStudentList().size() + 1);
+        Index outOfBoundsIndex = Index.fromOneBased(model.getStudentList().size() + 1);
         CancelLessonCommand command = new CancelLessonCommand(outOfBoundsIndex, new Date(VALID_DATE),
                 new Time(VALID_START_TIME));
 

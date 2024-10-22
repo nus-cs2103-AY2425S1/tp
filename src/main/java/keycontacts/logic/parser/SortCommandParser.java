@@ -11,6 +11,9 @@ import keycontacts.logic.parser.exceptions.ParseException;
 import keycontacts.model.student.StudentComparator;
 import keycontacts.model.student.StudentComparator.SortOrder;
 
+/**
+ * Parses input arguments and creates a new SortCommand object.
+ */
 public class SortCommandParser implements Parser<SortCommand> {
 
     @Override

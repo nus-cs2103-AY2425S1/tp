@@ -23,7 +23,7 @@ public class ModelManager implements Model {
 
     private final StudentDirectory studentDirectory;
     private final UserPrefs userPrefs;
-    ObservableList<Student> studentList;
+    private final ObservableList<Student> studentList;
     private final FilteredList<Student> filteredStudents;
     private final SortedList<Student> sortedStudents;
 

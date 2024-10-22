@@ -28,6 +28,13 @@ public class ArgumentTokenizer {
         return extractArguments(argsString, positions);
     }
 
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentList} object that maps prefixes to their
+     * respective argument values. Only the given prefixes will be recognized in the arguments string.
+     * @param argsString
+     * @param prefixes
+     * @return
+     */
     public static ArgumentList tokenizeToList(String argsString, Prefix... prefixes) {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArgumentsToList(argsString, positions);
@@ -123,7 +130,7 @@ public class ArgumentTokenizer {
      * @return
      */
     private static ArgumentList extractArgumentsToList(String argsString, List<PrefixPosition> prefixPositions) {
-        
+
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
 

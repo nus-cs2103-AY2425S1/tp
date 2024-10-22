@@ -14,14 +14,21 @@ public class StudentComparator implements Comparator<Student> {
     private final List<Comparator<Student>> comparators;
     private final List<String> comparatorMessages;
 
+    /**
+     * Constructs a {@code StudentComparator} with an empty list of comparators
+     */
     public StudentComparator() {
         comparators = new ArrayList<>();
         comparatorMessages = new ArrayList<>();
     }
 
+    /**
+     * Adds a comparator to the list of comparators
+     * @param comparator
+     */
     public void addComparator(StudentComparatorByField comparator) {
-        comparators.add(comparator.comparator);
-        comparatorMessages.add(comparator.message);
+        comparators.add(comparator.getComparator());
+        comparatorMessages.add(comparator.getMessage());
     }
 
     public String getSortDescription() {
@@ -70,12 +77,21 @@ public class StudentComparator implements Comparator<Student> {
                 "Grade Level (descending)");
     }
 
+    /**
+     * Represents the sort order of a comparator
+     * Can be either ascending (ASC) or descending (DESC)
+     */
     public static class SortOrder {
+
+        private static final String ASCENDING = "ASC";
+        private static final String DESCENDING = "DESC";
+
         private final String sortOrder;
 
-        private final String ASCENDING = "ASC";
-        private final String DESCENDING = "DESC";
-
+        /**
+         * Constructs a {@code SortOrder} with the specified sort order
+         * @param sortOrder
+         */
         public SortOrder(String sortOrder) {
             if (!sortOrder.equals(ASCENDING) && !sortOrder.equals(DESCENDING)) {
                 throw new IllegalArgumentException("Invalid sort order");
@@ -84,11 +100,11 @@ public class StudentComparator implements Comparator<Student> {
         }
 
         public boolean isAscending() {
-            return sortOrder.equals("ASC");
+            return sortOrder.equals(ASCENDING);
         }
 
         public boolean isDescending() {
-            return sortOrder.equals("DESC");
+            return sortOrder.equals(DESCENDING);
         }
     }
 }
