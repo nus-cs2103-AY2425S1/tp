@@ -45,9 +45,10 @@ public class BirthdayTest {
     void getValue() {
         Birthday birthday = new Birthday("1990-05-20");
         LocalDate date = LocalDate.parse("1990-05-20");
+        String dateString = date.toString();
 
         //Same date -> returns true
-        assertTrue(date.equals(birthday.getValue()));
+        assertTrue(dateString.equals(birthday.getValue()));
         assertTrue(date.equals(birthday.value));
     }
 

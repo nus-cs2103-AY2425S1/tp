@@ -61,10 +61,10 @@ public class Birthday {
     }
 
     /**
-     * Returns the value stored in the Birthday object.
+     * Returns the value stored in the Birthday object as a string.
      */
-    public LocalDate getValue() {
-        return value;
+    public String getValue() {
+        return value.toString();
     }
 
     /**
