@@ -41,7 +41,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label notes;
     @FXML
-    private Label appointment;
+    private Label appointmentDescription;
+    @FXML
+    private Label appointmentStart;
+    @FXML
+    private Label appointmentEnd;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -53,18 +57,26 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().value);
         patientId.setText("ID: " + person.getId().value);
         ward.setText("Ward: " + person.getWard().value);
+        /*
         diagnosis.setText("Diagnosis: " + person.getDiagnosis().value);
         medication.setText("Medication: " + person.getMedication().value);
         notes.setText("Notes: " + (person.getNotes().toString().isEmpty() ? "-" : person.getNotes().value));
-        // This is still a draft version and not finalised. Law of Demeter is broken here.
+        */
+        // Law of Demeter is not maintained, however the purpose simply retrieves information through getters,
+        // and there may be zero risk of modifications.
         if (person.getAppointment() != null) {
-            String description = person.getAppointment().getDescription();
-            String start = person.getAppointment().getStart().toString();
-            String end = person.getAppointment().getEnd().toString();
-            String appointmentString = description + " | " + start + " to " + end;
-            appointment.setText("Appointment: " + appointmentString);
+            appointmentDescription.setText(person.getAppointment().getDescription());
+            appointmentStart.setText(person.getAppointment().getStart().toString());
+            appointmentEnd.setText(person.getAppointment().getEnd().toString());
         } else {
-            appointment.setText("Appointment: -");
+            // Use of ChatGPT to see how to hide unwanted label
+            // Prompt: How to remove label if appointment is null
+            appointmentDescription.setText(""); // Clear the text
+            appointmentDescription.setVisible(false); // Hide the label
+            appointmentStart.setText("");
+            appointmentStart.setVisible(false);
+            appointmentEnd.setText("");
+            appointmentEnd.setVisible(false);
         }
 
         /*
