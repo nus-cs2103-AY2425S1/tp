@@ -32,8 +32,6 @@ import seedu.address.model.tag.Tag;
  */
 public class ScheduleCommand extends Command {
 
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
-
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -51,6 +49,8 @@ public class ScheduleCommand extends Command {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
     public static final String MESSAGE_SCHEDULE_UNCHANGED =
             "There was no change done to the existing schedule, if any.";
+
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     private final Index index;
     private final ScheduleCommand.ScheduleDescriptor scheduleDescriptor;
