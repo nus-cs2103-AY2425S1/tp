@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's payment status in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPaymentStatus(String)} (String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPaymentStatus(String)}
  */
 public class PaymentStatus {
 
@@ -20,6 +20,7 @@ public class PaymentStatus {
     private static final String PAID_NUMERIC = "0";
 
     public final boolean isPaid;
+    private boolean isEmpty = false;
 
     /**
      * Constructs a {@code PaymentStatus}.
@@ -30,6 +31,7 @@ public class PaymentStatus {
         requireNonNull(status);
         if (status.equals(NO_PAYMENT_STATUS)) {
             isPaid = parseStatus("");
+            isEmpty = true;
         } else {
             checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
             isPaid = parseStatus(status);
@@ -61,6 +63,9 @@ public class PaymentStatus {
 
     @Override
     public String toString() {
+        if (isEmpty) {
+            return "";
+        }
         return isPaid ? PAID : UNPAID;
     }
 

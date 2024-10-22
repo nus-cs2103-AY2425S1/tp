@@ -16,6 +16,7 @@ public class ProjectStatus {
     private static final String COMPLETE = "completed";
 
     public final boolean isComplete;
+    private boolean isEmpty = false;
 
     /**
      * Constructs a {@code ProjectStatus}.
@@ -26,6 +27,7 @@ public class ProjectStatus {
         requireNonNull(status);
         if (status.equals(NO_PROJECT_STATUS)) {
             isComplete = parseStatus("");
+            isEmpty = true;
         } else {
             checkArgument(isValidProjectStatus(status), MESSAGE_CONSTRAINTS);
             isComplete = parseStatus(status);
@@ -50,6 +52,9 @@ public class ProjectStatus {
 
     @Override
     public String toString() {
+        if (isEmpty) {
+            return "";
+        }
         return isComplete ? COMPLETE : IN_PROGRESS;
     }
 
