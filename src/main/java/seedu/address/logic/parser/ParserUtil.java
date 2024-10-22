@@ -17,6 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -127,6 +128,15 @@ public class ParserUtil {
         return tagSet;
     }
 
+    public static WeddingName parseWeddingName(String weddingName) throws ParseException {
+        requireNonNull(weddingName);
+        String trimmedName = weddingName.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new WeddingName(trimmedName);
+    }
+
     /**
      * Parses a {@code String date} into a {@code LocalDate}.
      * Leading and trailing whitespaces will be trimmed.
@@ -134,7 +144,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static LocalDate parseDate(String date) throws ParseException {
+    public static LocalDate parseWeddingDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
