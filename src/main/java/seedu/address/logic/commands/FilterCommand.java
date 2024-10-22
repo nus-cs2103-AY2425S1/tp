@@ -1,21 +1,24 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.PersonWithCriteriaPredicate;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
-
-public class FilterCommand extends Command{
+/**
+ * Filters and lists all persons in address book appointment dates and age are within the specified range.
+ */
+public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons whose appointment dates "
             + "or age group are within the specified range. \n"
             + "Parameters: "
-            + PREFIX_AGE +  "AGE RANGE "
+            + PREFIX_AGE + "AGE RANGE "
             + PREFIX_APPOINTMENT + "APPOINTMENT \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_AGE + " 70-79 "
