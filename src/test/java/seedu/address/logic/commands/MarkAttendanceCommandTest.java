@@ -26,7 +26,7 @@ import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
- * {@code MarkAttendanceCommand}.
+ * {@code MarkAttendanceByStudentCommand}.
  */
 public class MarkAttendanceCommandTest {
 
@@ -37,9 +37,9 @@ public class MarkAttendanceCommandTest {
         Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMarkAttendance)
                 .withAttendance(LocalDate.now().format(Attendance.VALID_DATE_FORMAT)).build();
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_SECOND_PERSON);
+        MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON);
 
-        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
+        String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 Messages.format(markedPerson));
 
         ModelManager expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -50,7 +50,7 @@ public class MarkAttendanceCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(outOfBoundIndex);
+        MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(outOfBoundIndex);
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -62,9 +62,9 @@ public class MarkAttendanceCommandTest {
         Person personToMarkAttendance = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person markedPerson = new PersonBuilder(personToMarkAttendance)
                 .withAttendance(LocalDate.now().format(Attendance.VALID_DATE_FORMAT)).build();
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
+        MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(MarkAttendanceCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
+        String expectedMessage = String.format(MarkAttendanceByStudentCommand.MESSAGE_MARK_ATTENDANCE_SUCCESS,
                 Messages.format(markedPerson));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -81,21 +81,21 @@ public class MarkAttendanceCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(outOfBoundIndex);
+        MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(outOfBoundIndex);
 
         assertCommandFailure(markAttendanceCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        MarkAttendanceCommand markAttendanceFirstCommand = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
-        MarkAttendanceCommand markAttendanceSecondCommand = new MarkAttendanceCommand(INDEX_SECOND_PERSON);
+        MarkAttendanceByStudentCommand markAttendanceFirstCommand = new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON);
+        MarkAttendanceByStudentCommand markAttendanceSecondCommand = new MarkAttendanceByStudentCommand(INDEX_SECOND_PERSON);
 
         // same object -> returns true
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommand));
 
         // same values -> returns true
-        MarkAttendanceCommand markAttendanceFirstCommandCopy = new MarkAttendanceCommand(INDEX_FIRST_PERSON);
+        MarkAttendanceByStudentCommand markAttendanceFirstCommandCopy = new MarkAttendanceByStudentCommand(INDEX_FIRST_PERSON);
         assertTrue(markAttendanceFirstCommand.equals(markAttendanceFirstCommandCopy));
 
         // different types -> returns false
@@ -111,8 +111,8 @@ public class MarkAttendanceCommandTest {
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
-        MarkAttendanceCommand markAttendanceCommand = new MarkAttendanceCommand(targetIndex);
-        String expected = MarkAttendanceCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        MarkAttendanceByStudentCommand markAttendanceCommand = new MarkAttendanceByStudentCommand(targetIndex);
+        String expected = MarkAttendanceByStudentCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, markAttendanceCommand.toString());
     }
 }
