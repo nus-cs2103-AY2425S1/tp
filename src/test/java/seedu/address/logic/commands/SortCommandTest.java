@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -92,10 +93,4 @@ public class SortCommandTest {
                 "List should remain unchanged after sorting without appointment dates!";
     }
 
-    // Utility method to display a person at a given index (to create a filtered list)
-    private void showPersonAtIndex(Model model, seedu.address.commons.core.index.Index index) {
-        assert index.getZeroBased() < model.getFilteredPersonList().size() : "Index out of bounds!";
-        Person person = model.getFilteredPersonList().get(index.getZeroBased());
-        model.updateFilteredPersonList(p -> p.isSamePerson(person));
-    }
 }
