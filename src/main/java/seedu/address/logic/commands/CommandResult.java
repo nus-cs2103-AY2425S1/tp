@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -18,6 +20,9 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The application should show a confirmation button */
+    private final boolean showConfirmation;
+
     private final boolean showPerson;
     private final Person viewedPerson;
 
@@ -25,12 +30,13 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit,
-                         boolean showPerson, Person viewedPerson) {
-        this.feedbackToUser = feedbackToUser;
+                         boolean showPerson, Person viewedPerson, boolean showConfirmation) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
         this.showPerson = showPerson;
         this.viewedPerson = viewedPerson;
+        this.showConfirmation = showConfirmation;
     }
 
     /**
@@ -38,7 +44,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null);
+        this(feedbackToUser, false, false, false, null, false);
     }
 
     public String getFeedbackToUser() {
@@ -59,6 +65,10 @@ public class CommandResult {
 
     public Person getViewedPerson() {
         return viewedPerson;
+    }
+
+    public boolean isShowConfirmation() {
+        return showConfirmation;
     }
 
     @Override
