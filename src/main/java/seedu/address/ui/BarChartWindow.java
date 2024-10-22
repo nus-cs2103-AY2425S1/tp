@@ -67,6 +67,13 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
+     * Closes the Bar Chart window.
+     */
+    public void close() {
+        getRoot().close();
+    }
+
+    /**
      * Hides the Bar Chart window.
      */
     public void hide() {

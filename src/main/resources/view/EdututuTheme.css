@@ -5,8 +5,8 @@
     -ab3-border: #4d4d4d;
     -ab3-even-cell-background: #3c3e3f;
     -ab3-odd-cell-background: #515658;
-    -ab3-selected-cell-background: #424d5f;
-    -ab3-filled-selected-card-pane: #3e7b91;
+    -ab3-selected-cell-background: #FFFFE0;
+    -ab3-filled-selected-card-pane: #98FB98;
     -ab3-label: #010504;
     -ab3-label-2: #555555;
     -ab3-white: #ffffff;
@@ -223,7 +223,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(-ab3-background, 20%);
+    -fx-background-color: -ab3-background;
 }
 
 .menu-bar .label {
@@ -312,11 +312,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(-ab3-background, 20%);
+    -fx-background-color: -ab3-background;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(-ab3-background, 50%);
+    -fx-background-color: derive(-ab3-background, 90%);
     -fx-background-insets: 3;
 }
 
@@ -378,10 +378,16 @@
 }
 
 #tags .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-background-color: -ab3-filled-selected-card-pane;
-    -fx-padding: 1 3 1 3;
-    -fx-border-radius: 2;
-    -fx-background-radius: 2;
-    -fx-font-size: 11;
+    -fx-padding: 3 5 3 5;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+    -fx-font-size: 14;
 }
+
+#saveLocationStatus {
+    -fx-text-fill: black;
+}
+
+

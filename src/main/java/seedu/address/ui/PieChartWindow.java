@@ -76,6 +76,13 @@ public class PieChartWindow extends UiPart<Stage> {
     }
 
     /**
+     * Closes the PiChart window.
+     */
+    public void close() {
+        getRoot().close();
+    }
+
+    /**
      * Focuses on the PiChart window.
      */
     public void focus() {
