@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -147,6 +149,19 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPhoneNumberList() {
         return filteredPersons;
+    }
+
+    @Override
+    public void pinPerson(Person target) {
+        requireNonNull(target);
+        List<Person> updatedList = new ArrayList<>(filteredPersons);
+        if(updatedList.contains(target)) {
+            updatedList.remove(target);
+        }
+        updatedList.add(0, target);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addressBook.setPersons(updatedList);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
