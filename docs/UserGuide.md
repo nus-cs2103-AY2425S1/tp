@@ -197,7 +197,7 @@ Examples:
 
 ### Finding lessons : `lesson find`
 
-Finds lessons whose student's name contain any of the given keywords.
+Find lessons with students whose names contain any of the specified keywords.
 
 Format: `lesson find KEYWORD [MORE_KEYWORDS]`
 
@@ -205,7 +205,8 @@ Format: `lesson find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Lessons whose persons matching at least one keyword will be returned (i.e. `OR` search).
+* Lessons with students whose names match at least one of the specified keywords will be returned (i.e., 
+  an OR search)
   e.g. `Hans Bo` will return lessons with `Hans Gruber` if any and `Bo Yang` if any 
 
 Examples:
