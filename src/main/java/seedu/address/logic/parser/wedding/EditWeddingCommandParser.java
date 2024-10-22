@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_WEDDING_PERSON_2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -20,7 +19,7 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditWeddingCommand object
  */
 public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
     private final Prefix[] weddingPrefixes = new Prefix[] {
@@ -32,8 +31,8 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
     };
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditWeddingCommand
+     * and returns an EditWeddingCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditWeddingCommand parse(String args) throws ParseException {
@@ -45,7 +44,8 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditWeddingCommand.MESSAGE_USAGE), pe);
         }
         argMultimap.verifyNoDuplicatePrefixesFor(weddingPrefixes);
 
@@ -76,7 +76,7 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
         }
         //if no edits, throw error
         if (!editWeddingDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditWeddingCommand.MESSAGE_NOT_EDITED);
         }
         return new EditWeddingCommand(index, editWeddingDescriptor);
     }

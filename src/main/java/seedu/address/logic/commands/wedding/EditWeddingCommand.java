@@ -125,7 +125,7 @@ public class EditWeddingCommand extends Command {
      */
     public static class EditWeddingDescriptor {
         private WeddingName weddingName;
-        private int peopleCount;
+        private int peopleCount = -1; //if -1, means no change
         private Person partner1;
         private Person partner2;
         private ArrayList<Person> guestList;
@@ -147,7 +147,8 @@ public class EditWeddingCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(weddingName, peopleCount, partner1, partner2, address, date);
+            return CollectionUtil.isAnyNonNull(weddingName, partner1, partner2, address, date)
+                    || this.peopleCount != -1;
         }
 
         public void setWeddingName(WeddingName weddingName) {

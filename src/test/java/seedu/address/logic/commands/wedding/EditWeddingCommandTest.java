@@ -155,6 +155,44 @@ public class EditWeddingCommandTest {
     }
 
     @Test
+    public void execute_addressOnlySpecifiedUnfilteredList_success() {
+        Wedding lastWedding = model.getFilteredWeddingList().get(INDEX_SECOND.getZeroBased());
+
+        WeddingBuilder weddingInList = new WeddingBuilder(lastWedding);
+        Wedding editedWedding = weddingInList.withAddress(VALID_ADDRESS_BOB).build();
+
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptorBuilder().withAddress(VALID_ADDRESS_BOB).build();
+        EditWeddingCommand editCommand = new EditWeddingCommand(INDEX_SECOND, descriptor);
+
+        String expectedMessage = String.format(
+                EditWeddingCommand.MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setWedding(lastWedding, editedWedding);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_nameOnlySpecifiedUnfilteredList_success() {
+        Wedding lastWedding = model.getFilteredWeddingList().get(INDEX_FIRST.getZeroBased());
+
+        WeddingBuilder weddingInList = new WeddingBuilder(lastWedding);
+        Wedding editedWedding = weddingInList.withName(VALID_WEDDING_CLIVE).build();
+
+        EditWeddingDescriptor descriptor = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_CLIVE).build();
+        EditWeddingCommand editCommand = new EditWeddingCommand(INDEX_FIRST, descriptor);
+
+        String expectedMessage = String.format(
+                EditWeddingCommand.MESSAGE_EDIT_WEDDING_SUCCESS, Messages.format(editedWedding));
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setWedding(lastWedding, editedWedding);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void equals() {
         final EditWeddingCommand standardCommand = new EditWeddingCommand(INDEX_FIRST, DESC_WEDDING_AMY);
 
@@ -180,6 +218,28 @@ public class EditWeddingCommandTest {
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditWeddingCommand(INDEX_FIRST, DESC_WEDDING_BOB)));
+    }
+
+    @Test
+    public void editWeddingDescriptor_equals() {
+        EditWeddingDescriptor descriptorA = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_BOB).build();
+        EditWeddingDescriptor descriptorB = new EditWeddingDescriptorBuilder().withName(VALID_WEDDING_CLIVE).build();
+        EditWeddingDescriptor descriptorCopy = new EditWeddingDescriptor(descriptorA);
+
+        // same values -> returns true
+        assertTrue(descriptorA.equals(descriptorCopy));
+
+        // same object -> returns true
+        assertTrue(descriptorA.equals(descriptorA));
+
+        // null -> returns false
+        assertFalse(descriptorA.equals(null));
+
+        // different types -> returns false
+        assertFalse(descriptorA.equals(5));
+
+        // different descriptor -> returns false
+        assertFalse(descriptorA.equals(descriptorB));
     }
 
     @Test

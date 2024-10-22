@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.wedding;
 
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEDDING_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
-import seedu.address.logic.parser.wedding.DeleteWeddingCommandParser;
 import seedu.address.model.wedding.WeddingName;
 
 public class DeleteWeddingCommandParserTest {
