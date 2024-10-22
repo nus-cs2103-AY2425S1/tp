@@ -1,15 +1,16 @@
 package seedu.address.model.person;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.testutil.PersonBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.PersonBuilder;
 
 public class NameContainsKeywordsDeletePredicateTest {
 
@@ -18,14 +19,17 @@ public class NameContainsKeywordsDeletePredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameContainsKeywordsDeletePredicate firstPredicate = new NameContainsKeywordsDeletePredicate(firstPredicateKeywordList);
-        NameContainsKeywordsDeletePredicate secondPredicate = new NameContainsKeywordsDeletePredicate(secondPredicateKeywordList);
+        NameContainsKeywordsDeletePredicate firstPredicate = new
+                NameContainsKeywordsDeletePredicate(firstPredicateKeywordList);
+        NameContainsKeywordsDeletePredicate secondPredicate = new
+                NameContainsKeywordsDeletePredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsKeywordsDeletePredicate firstPredicateCopy = new NameContainsKeywordsDeletePredicate(firstPredicateKeywordList);
+        NameContainsKeywordsDeletePredicate firstPredicateCopy = new
+                NameContainsKeywordsDeletePredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -41,7 +45,8 @@ public class NameContainsKeywordsDeletePredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(Collections.singletonList("Alice"));
+        NameContainsKeywordsDeletePredicate predicate = new
+                NameContainsKeywordsDeletePredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
@@ -64,7 +69,8 @@ public class NameContainsKeywordsDeletePredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(Collections.emptyList());
+        NameContainsKeywordsDeletePredicate predicate = new
+                NameContainsKeywordsDeletePredicate(Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
@@ -72,7 +78,8 @@ public class NameContainsKeywordsDeletePredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsDeletePredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        predicate = new NameContainsKeywordsDeletePredicate(
+                Arrays.asList("12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
@@ -80,7 +87,8 @@ public class NameContainsKeywordsDeletePredicateTest {
     @Test
     public void test_isExact_returnsTrue() {
         // One keyword
-        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(Collections.singletonList("Alice"));
+        NameContainsKeywordsDeletePredicate predicate = new
+                NameContainsKeywordsDeletePredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.isExact(new PersonBuilder().withName("Alice").build()));
 
         // Multiple keywords
@@ -97,7 +105,8 @@ public class NameContainsKeywordsDeletePredicateTest {
     @Test
     public void test_isExact_returnsFalse() {
         // Zero keywords
-        NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(Collections.emptyList());
+        NameContainsKeywordsDeletePredicate predicate = new
+                NameContainsKeywordsDeletePredicate(Collections.emptyList());
         assertFalse(predicate.isExact(new PersonBuilder().withName("Alice").build()));
 
         // Non-matching keyword
@@ -117,7 +126,8 @@ public class NameContainsKeywordsDeletePredicateTest {
         List<String> keywords = List.of("keyword1", "keyword2");
         NameContainsKeywordsDeletePredicate predicate = new NameContainsKeywordsDeletePredicate(keywords);
 
-        String expected = NameContainsKeywordsDeletePredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = NameContainsKeywordsDeletePredicate.class.getCanonicalName()
+                + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 
