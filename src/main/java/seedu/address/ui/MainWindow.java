@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewWindow viewWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        viewWindow = null;
     }
 
     public Stage getPrimaryStage() {
@@ -152,6 +154,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the view window to display patient details.
+     */
+    @FXML
+    public void handleView(String feedback) {
+        if (viewWindow != null && viewWindow.isShowing()) {
+            viewWindow.hide();
+        }
+
+        this.viewWindow = new ViewWindow(feedback, logic.getFilteredPersonList().get(0));
+        viewWindow.show();
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -159,6 +174,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+
+        if (viewWindow != null && viewWindow.isShowing()) {
+            viewWindow.hide();
+        }
+
         helpWindow.hide();
         primaryStage.hide();
     }
@@ -180,6 +200,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowView()) {
+                handleView(commandResult.getFeedbackToUser());
             }
 
             if (commandResult.isExit()) {

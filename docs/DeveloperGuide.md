@@ -260,37 +260,140 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Administrative assistants for palliative care facilities
+* needs to manage a significant number of patient details
+* can type fast and prefers CLI to GUI
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: efficient text-based navigation and access to patient data, allowing quick retrieval and logging
+of patient information
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​              | I want to …​                                                         | So that I can…​                                                                           |
+|----------|----------------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
+| `* * *`  | new user             | view a help page with a list of available commands                   | refer to instructions to understand how to use the app                                    |
+| `* * *`  | user                 | add the contact information of a patient                             | keep track of the patient base of the clinic                                              |
+| `* * *`  | user                 | delete a patient                                                     | remove their data from the patient list after they leave the facility                     |
+| `* * *`  | user                 | display a list of patients and their information                     |                                                                                           |
+| `* * *`  | user                 | search for a patient's information using a command/keyword           | access a patient's details quickly without delay                                          |
+| `* * *`  | user                 | add an appointment of a patient                                      | view the appointment activity of a patient                                                |
+| `* *`    | user                 | edit the information of a patient                                    | update a patient's condition and contact details if there are changes                     |
+| `* *`    | user                 | add notes to a patient                                               | be reminded of important updates, observations or instructions related to their care      |
+| `* *`    | user                 | export a patient's information as a file (eg. PDF, CSV)              | store or share the information externally, especially for offline access                  |
+| `* *`    | user                 | log the patient's treatment progress over time                       | understand how a patient is responding to his/her respective treatment meth               |
+| `* *`    | user                 | edit the appointment of a patient                                    | reschedule an appointment for a patient easily                                            |
+| `* *`    | user                 | view appointments in the form of a schedule                          | easily see all appointments on a specific day                                             |
+| `* *`    | user                 | tag patients                                                         | categorise my patients based on keywords/conditions                                       |
+| `* *`    | user                 | search for a patient's information even if keyword matches partially | find patients quicker without having to type full details (eg. full name)                 |
+| `* *`    | user                 | sort list of patients                                                | view patient's details based on specified criteria                                        |
+| `* *`    | user                 | filter patients based on medical condition                           | view patients based on certain conditions or severity                                     |
+| `* *`    | user                 | see a popup alert on the day of a patient's appointment              | remind myself and prepare for a patient's appointment if needed                           |
+| `*`      | CLI experienced user | have access to command completion features                           | complete tasks faster without typing commands fully                                       |
+| `*`      | CLI experienced user | customize command shortcuts                                          | access these commands quickly and more comfortably                                        |
+| `*`      | user                 | import contact details from external sources                         | quickly populate the list without manually adding each patient                            |
+| `*`      | user                 | archive patient information                                          | have a back up record of their information, even after they are no longer in the facility |
+| `*`      | user                 | log when certain changes are made with a timestamp                   | revise my patient history with a reference to a time or date                              |
+| `*`      | user                 | set recurring appointment details for patients                       | avoid repetitive tasks                                                                    |
 
-*{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+### **Use case: Add a person**
 
-**Use case: Delete a person**
+**MSS**
+
+1.  User requests to add a new person.
+2.  The system prompts the user to enter the person's details (name, phone number, email, address).
+3.  User provides the required details.
+4.  The system adds the person to the database.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The user does not provide all required details.
+
+    * 2a1. The system shows an error message indicating missing fields.
+
+      Use case resumes at step 2.
+
+* 3a. User enters invalid information.
+
+    * 3a1. The system shows an error message indicating invalid input.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Edit a person's information**
+
+**MSS**
+
+1.  User requests to list persons.
+2.  The system displays a list of persons.
+3.  User requests to edit a specific person's information.
+4.  The system prompts the user to enter updated information.
+5.  User provides the updated details.
+6.  The system updates the person's information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. The system shows an error message.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Add appointment information**
+
+**MSS**
+
+1.  User requests to add an appointment for a specific person.
+2.  The system prompts the user to enter appointment details (date, time, description).
+3.  User provides the appointment details.
+4.  The system adds the appointment information.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. User provides invalid appointment details (e.g., invalid date/time format).
+
+    * 2a1. The system shows an error message indicating invalid input.
+
+      Use case resumes at step 2.
+
+---
+
+### **Use case: Display a list of patients and information**
+
+**MSS**
+
+1.  User requests to display a list of patients.
+2.  The system displays a list of patients with relevant information (name, contact details, appointments).
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+---
+
+### **Use case: Delete a person**
 
 **MSS**
 
@@ -313,20 +416,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed. The app should hence not depend on any third-party software that is not available on all mainstream OS.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4. Data should be stored in a local file in a format that is easy to read and edit manually.
+5. The app should be able to recover from common errors (e.g. invalid user input) gracefully, without crashing.
+6. The app should avoid very high usage of system resources (CPU, memory) to ensure it can run efficiently even on systems with limited hardware capacity.
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Patient ID**: A unique identifier for a patient in a medical system
+* **Medical record**: A collection of data about a patient’s health history
+* **Description**: A textual summary associated with a appointment or medical record
 
 --------------------------------------------------------------------------------------------------------------------
 

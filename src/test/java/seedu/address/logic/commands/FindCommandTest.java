@@ -19,6 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,37 +30,46 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
+        NameContainsKeywordsPredicate firstNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
+        NameContainsKeywordsPredicate secondNamePredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        TagContainsKeywordsPredicate firstTagPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("diabetic"));
+        TagContainsKeywordsPredicate secondTagPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("allergy"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand findFirstNameCommand = new FindCommand(firstNamePredicate);
+        FindCommand findSecondNameCommand = new FindCommand(secondNamePredicate);
+        FindCommand findFirstTagCommand = new FindCommand(firstTagPredicate);
+        FindCommand findSecondTagCommand = new FindCommand(secondTagPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(findFirstNameCommand.equals(findFirstNameCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        FindCommand findFirstNameCommandCopy = new FindCommand(firstNamePredicate);
+        assertTrue(findFirstNameCommand.equals(findFirstNameCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(findFirstNameCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(findFirstNameCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(findFirstNameCommand.equals(findSecondNameCommand));
+
+        // different predicate type -> returns false
+        assertFalse(findFirstNameCommand.equals(findFirstTagCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate(" ");
+        FindCommand command = new FindCommand(namePredicate);
+        expectedModel.updateFilteredPersonList(namePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -67,25 +77,42 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Kurz Elle Kunz");
+        FindCommand command = new FindCommand(namePredicate);
+        expectedModel.updateFilteredPersonList(namePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 
     @Test
+    public void execute_tagSearch_personsWithTagsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
+        TagContainsKeywordsPredicate tagPredicate = prepareTagPredicate("Diabetic G6PD");
+        FindCommand command = new FindCommand(tagPredicate);
+        expectedModel.updateFilteredPersonList(tagPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ELLE, FIONA), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
+        FindCommand findCommand = new FindCommand(namePredicate);
+        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + namePredicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
+    private NameContainsKeywordsPredicate prepareNamePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
+     */
+    private TagContainsKeywordsPredicate prepareTagPredicate(String userInput) {
+        return new TagContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
