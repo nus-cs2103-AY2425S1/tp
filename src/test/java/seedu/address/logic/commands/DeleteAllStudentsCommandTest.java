@@ -21,7 +21,7 @@ import seedu.address.testutil.StudentBuilder;
 
 public class DeleteAllStudentsCommandTest {
     @Test
-    public void execute_deleteSingleStudent_Success() throws Exception {
+    public void execute_deleteSingleStudent_success() throws Exception {
         Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A0123456L").build();
 
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
@@ -32,13 +32,14 @@ public class DeleteAllStudentsCommandTest {
     }
 
     @Test
-    public void execute_deleteMultipleStudents_Success() throws Exception {
+    public void execute_deleteMultipleStudents_success() throws Exception {
         Student validStudent1 = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
-        Student validStudent2 = new StudentBuilder().withName("Marianne Tan Zhi Wei").withStudentNumber("A0123456Y").build();
+        Student validStudent2 = new StudentBuilder().withName("May Ng Zi Wei").withStudentNumber("A0123456Y").build();
         Student validStudent3 = new StudentBuilder().withName("Lynn Han").withStudentNumber("A9876543Z").build();
         Student validStudent4 = new StudentBuilder().withName("Richard").withStudentNumber("A1111111B").build();
 
-        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent1, validStudent2, validStudent3, validStudent4);
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent1, validStudent2,
+                validStudent3, validStudent4);
 
         CommandResult commandResult = new DeleteAllStudentsCommand().execute(modelStub);
 
