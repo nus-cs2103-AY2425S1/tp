@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static tahub.contacts.testutil.AttendanceExamples.ATTENDANCE_EXAMPLE_1;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -37,7 +38,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("CS2100", "Computer Organisation");
         Tutorial tutorial = new Tutorial("T1", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         assertSame(student, sca.getStudent());
         assertSame(course, sca.getCourse());
@@ -56,13 +57,14 @@ class StudentCourseAssociationTest {
         Course course = new Course("CS3230", "Design and Analysis of Algorithms");
         Tutorial tutorial = new Tutorial("T2", course);
 
-        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial);
-        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         assertEquals(sca1, sca2);
 
         Tutorial differentTutorial = new Tutorial("T3", course);
-        StudentCourseAssociation sca3 = new StudentCourseAssociation(student, course, differentTutorial);
+        StudentCourseAssociation sca3 = new StudentCourseAssociation(
+                student, course, differentTutorial, ATTENDANCE_EXAMPLE_1);
         assertFalse(sca1.equals(sca3));
     }
     @Test
@@ -77,7 +79,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("CS2103T", "Software Engineering");
         Tutorial tutorial = new Tutorial("T4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         GradingSystem grades = sca.getGrades();
         assertNotNull(grades);
@@ -94,7 +96,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("IS1103", "Computing and Society");
         Tutorial tutorial = new Tutorial("T5", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         Course courseDiff = new Course("IS1108", "Unethical Computing");
         Tutorial tutorialDiff = new Tutorial("T77", course);
@@ -119,8 +121,8 @@ class StudentCourseAssociationTest {
         Course course2 = new Course("IS1122", "Digital Transformation");
         Tutorial tutorial = new Tutorial("T6", course1);
 
-        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial);
-        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial);
+        StudentCourseAssociation sca1 = new StudentCourseAssociation(student, course1, tutorial, ATTENDANCE_EXAMPLE_1);
+        StudentCourseAssociation sca2 = new StudentCourseAssociation(student, course2, tutorial, ATTENDANCE_EXAMPLE_1);
         assertFalse(sca1.equals(sca2));
     }
     @Test
@@ -135,7 +137,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T14", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         Course retrievedCourse = sca.getCourse();
         assertSame(course, retrievedCourse);
@@ -153,7 +155,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T7", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         sca.addGrade("Midterm", 85.0);
         assertEquals(85.0, sca.getGrade("Midterm"), 0.001);
@@ -171,7 +173,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("IS2102", "Financial Management");
         Tutorial tutorial = new Tutorial("T4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
     }
 
     @Test
@@ -186,7 +188,7 @@ class StudentCourseAssociationTest {
         );
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T4", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         sca.addGrade("Midterm", 85.0);
         sca.addGrade("Final", 95.0);
@@ -201,7 +203,7 @@ class StudentCourseAssociationTest {
         Person student = createTestPerson("A1234567K", "Prof Kelly Tan");
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T8", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         sca.addGrade("Midterm", 85.0);
         sca.addGrade("Final", 95.0);
@@ -216,7 +218,7 @@ class StudentCourseAssociationTest {
         Person student = createTestPerson("A1234567L", "Prof Lim Ah Seng");
         Course course = new Course("IS1131", "Financial Management");
         Tutorial tutorial = new Tutorial("T9", course);
-        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial);
+        StudentCourseAssociation sca = new StudentCourseAssociation(student, course, tutorial, ATTENDANCE_EXAMPLE_1);
 
         sca.addGrade("Midterm", 85.0);
         sca.addGrade("Final", 95.0);

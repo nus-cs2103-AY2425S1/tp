@@ -2,6 +2,7 @@ package tahub.contacts.model.studentcourseassociation;
 
 import java.util.Map;
 
+import tahub.contacts.model.course.Attendance;
 import tahub.contacts.model.course.Course;
 import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
@@ -20,21 +21,24 @@ public class StudentCourseAssociation {
      */
     private Tutorial tutorial = null;
     private GradingSystem grades;
+    private final Attendance attendance;
 
     /**
-     * Represents an association between a student, course, grading system, and tutorial.
+     * Represents an association between a student, course, grading system, tutorial, and attendance.
      * The TA will view this object in TAHub.
      * This constructor is to be used if the TA is this student's Tutorial TA.
      *
      * @param student the student associated with this association
      * @param course the course associated with this association
      * @param tutorial the tutorial associated with this association
+     * @param attendance the attendance associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial) {
+    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial, Attendance attendance) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
         this.grades = new GradingSystem();
+        this.attendance = attendance;
     }
 
     /**
@@ -58,6 +62,8 @@ public class StudentCourseAssociation {
     public Tutorial getTutorial() {
         return tutorial;
     }
+
+    //=========== Grade ==================================================================================
 
     /**
      * Retrieves the grading system associated with this StudentCourseAssociation.
@@ -106,6 +112,19 @@ public class StudentCourseAssociation {
     public double getOverallScore() {
         return grades.getOverallScore();
     }
+
+    //=========== Attendance ==================================================================================
+
+    /**
+     * Retrieves the {@link Attendance} instance associated with this StudentCourseAssociation.
+     *
+     * @return the {@link Attendance} instance.
+     */
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    //=========== Utility ==================================================================================
 
     /**
      * Retrieves all assessment grades.
