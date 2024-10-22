@@ -286,5 +286,5 @@ the data of your previous AddressBook home folder.
  **Add Lesson**     | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
  **List Lessons**   | `lesson list`                                                                                                                                                         
  **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`
- **Find Lessons** | `lesson find KEYWORD [MORE_KEYWORDS]` <br> e.g., `lesson find John Alice`
+ **Find Lessons**   | `lesson find KEYWORD [MORE_KEYWORDS]` <br> e.g., `lesson find John Alice`
  **Help**           | `help`                                                                                                                                                                
