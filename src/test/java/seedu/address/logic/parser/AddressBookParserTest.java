@@ -93,8 +93,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_searchPublicAddress() throws Exception {
         final String publicAddress = "Some public address.";
-        SearchPublicAddressCommand command = (SearchPublicAddressCommand) parser.parseCommand(SearchPublicAddressCommand.COMMAND_WORD + " "
-                  + PREFIX_PUBLIC_ADDRESS + publicAddress);
+        SearchPublicAddressCommand command = (SearchPublicAddressCommand) parser.parseCommand(
+                SearchPublicAddressCommand.COMMAND_WORD + " "
+                        + PREFIX_PUBLIC_ADDRESS + publicAddress);
         assertEquals(new SearchPublicAddressCommand(publicAddress), command);
     }
 
