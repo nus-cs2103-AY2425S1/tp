@@ -92,13 +92,15 @@ class MessagesTest {
     @Test
     void formatMeeting_success() {
         // Arrange
-        Meeting meeting = new Meeting(new MeetingTitle("Project Meeting"), new MeetingDate("01-01-2024"));
+        Meeting meeting = new Meeting(new MeetingTitle("Project Meeting"), new MeetingDate("01-01-2024"),
+                new Name("bob"), new Name("Alice"), new Type("hdb"), new PostalCode("123456"));
 
         // Act
         String result = Messages.format(meeting);
 
         // Assert
-        String expected = "MeetingTitle: Project Meeting; MeetingDate: 01-01-2024";
+        String expected = "MeetingTitle: Project Meeting; MeetingDate: 01-01-2024; Buyer: bob; Seller: Alice; "
+                + "Type: HDB; PostalCode: 123456";
         assertEquals(expected, result);
     }
 }
