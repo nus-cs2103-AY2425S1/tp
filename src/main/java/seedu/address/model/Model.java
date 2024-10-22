@@ -25,6 +25,16 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     /**
+     * Replaces command history data with the data in {@code commandHistory}.
+     */
+    void setCommandHistory(ReadOnlyCommandHistory commandHistory);
+
+    /**
+     * Returns the command history.
+     */
+    ReadOnlyCommandHistory getCommandHistory();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();

@@ -21,23 +21,41 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
+    private final CommandHistory commandHistory;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs, and commandHistory.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, ReadOnlyCommandHistory commandHistory) {
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
+                + " and command history " + commandHistory);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.commandHistory = new CommandHistory(commandHistory);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new CommandHistory());
+    }
+
+
+    //=========== CommandHistory =============================================================================
+
+    @Override
+    public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
+        requireNonNull(commandHistory);
+        this.commandHistory.resetData(commandHistory);
+    }
+
+    @Override
+    public ReadOnlyCommandHistory getCommandHistory() {
+        return commandHistory;
     }
 
     //=========== UserPrefs ==================================================================================

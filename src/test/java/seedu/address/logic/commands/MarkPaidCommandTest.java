@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.model.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,8 +27,8 @@ public class MarkPaidCommandTest {
     private static final String VALID_MONTHPAID_STRING = "2024-01";
     @Test
     public void execute_markPaidPerson_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new CommandHistory());
         Index index = INDEX_FIRST_PERSON;
         MarkPaidCommand command = new MarkPaidCommand(index, VALID_MONTHSPAID);
         Person modifiedPerson = createMarkedPerson(
