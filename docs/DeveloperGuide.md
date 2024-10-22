@@ -383,6 +383,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | teaching assistant | mark students' attendance in my tutorial                                  | leverage my fast typing to quickly take attendance                       |
 | `* * *`  | teaching assistant | assign participation marks to each student                                | keep track of student participation easily to assign a grade later       |
 | `* * *`  | teaching assistant | export student data as a CSV                                              | easily share information with professors or use in other applications    |
+| `* * *`  | teaching assistant | schedule consultation sessions                                            | set aside dedicated time slots to meet with students                     |
+| `* * *`  | teaching assistant | add students to consultation slots                                        | keep track of which students are attending each consultation             |
+| `* * *`  | teaching assistant | view all my upcoming consultations                                        | prepare for and manage my consultation schedule                          |
 | `* *`    | teaching assistant | assign tasks and deadlines to students                                    | track their responsibilities and ensure they stay on schedule            |
 | `* *`    | teaching assistant | set reminders for important tasks or deadlines                            | stay notified of upcoming responsibilities and avoid missing them        |
 | `* *`    | teaching assistant | view a calendar showing all upcoming student deadlines and my TA duties   | manage my time effectively and avoid scheduling conflicts                |
@@ -395,12 +398,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | teaching assistant | merge duplicate student entries                                           | maintain a clean and accurate database                                   |
 | `* *`    | teaching assistant | backup my student database to a local file                                | ensure data safety and practice file management                          |
 | `* *`    | teaching assistant | use a command to import student data from a CSV file                      | quickly populate my database at the start of a semester                  |
+| `* *`    | teaching assistant | get alerts for consultation timing conflicts                              | avoid double booking consultation slots                                  |
+| `* *`    | teaching assistant | see the history of consultations with each student                        | track how often I meet with specific students                            |
+| `* *`    | teaching assistant | add notes to consultation sessions                                        | record what was discussed and any follow-up actions needed               |
 | `*`      | teaching assistant | add notes to a student's profile                                          | keep track of special considerations for each student                    |
 | `*`      | teaching assistant | assign a profile picture to each student                                  | have a visual aid to recognise who is who in my tutorial                 |
 | `*`      | teaching assistant | toggle between light and dark mode                                        | select my preferred viewing mode                                         |
 | `*`      | teaching assistant | redesign the TAHub GUI layout                                             | select my preferred visual layout                                        |
 | `*`      | teaching assistant | press up and down to navigate command history                             | quickly reuse recently used commands                                     |
 | `*`      | teaching assistant | generate a statistical summary of class performance                       | quickly assess overall class trends in scores/attendance etc.            |
+| `*`      | teaching assistant | export my consultation schedule to my calendar                            | integrate consultation timings with my other appointments                |
+| `*`      | teaching assistant | set recurring consultation slots                                          | establish regular consultation hours without manual scheduling           |
 
 *{More to be added}*
 
@@ -509,7 +517,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters: `addconsult d/2024-10-20 t/14:00`
-2. System validates date and time
+2. System validates date and time are
+   - In valid format
+   - Not in the past
+   - Not already booked
 3. System creates consultation
 4. Success message shown
 
@@ -528,15 +539,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. TA lists existing consultations
+   - If no future consultations exist, system shows an appropriate message
 2. TA selects consultation
 3. TA adds student
 4. System updates consultation
 
 **Extensions**
 
+* 1a. No existing consultations
+    * 1a1. System shows message that no future consultations are available
+    * 1a2. Use case ends
+
 * 2a. Invalid consultation selection
     * 2a1. System shows error message
     * 2a2. Use case resumes from step 1
+
+* 3a. Student does not exist in system
+    * 3a1. System shows error message that student cannot be found
+    * 3a2. Use case resumes from step 3
+
+* 3b. Student already in consultation
+    * 3b1. System shows error message that student is already registered
+    * 3b2. Use case resumes from step 3
 
 *{More to be added}*
 
