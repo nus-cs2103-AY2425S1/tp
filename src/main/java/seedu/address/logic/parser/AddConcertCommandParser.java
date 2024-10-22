@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
-import java.util.stream.Stream;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.AddConcertCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.AddConcertCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.Address;
 import seedu.address.model.commons.Name;
@@ -23,8 +24,7 @@ public class AddConcertCommandParser implements Parser<AddConcertCommand> {
      * AddConcertCommand and returns an AddConcertCommand object for execution.
      *
      * @param args A string representation of user arguments
-     * @throws ParseException if the user input does not conform the expected
-     * format
+     * @throws ParseException if the user input does not conform the expected format
      */
     public AddConcertCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS,
