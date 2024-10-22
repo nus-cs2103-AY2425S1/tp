@@ -6,10 +6,14 @@ import java.util.function.Predicate;
  * Tests that a {@code Person}'s {@code isRsvp} is true.
  */
 public class RsvpedPredicate implements Predicate<Person> {
+    private final RsvpStatus statusToCheck;
 
-    @Override
-    public RsvpStatus test(Person person) {
-        return person.getRsvp();
+    public RsvpedPredicate(RsvpStatus statusToCheck) {
+        this.statusToCheck = statusToCheck;
     }
 
+    @Override
+    public boolean test(Person person) {
+        return person.getRsvp() == statusToCheck;
+    }
 }
