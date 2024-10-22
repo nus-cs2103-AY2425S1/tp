@@ -12,8 +12,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
  * Filters the address book for persons who have the corresponding tag
  */
 public class FilterTagCommand extends FilterCommand {
-    private final TagContainsKeywordsPredicate predicate;
     public static final String MESSAGE_TAG_DOESNT_EXIST = "This tag does not exist!";
+    private final TagContainsKeywordsPredicate predicate;
 
     /**
      * Creates a FilterTagCommand that checks if the user has a tag that matches the predicate
