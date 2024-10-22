@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 
+/**
+ * Deletes all students, clearing the list of students.
+ */
 public class DeleteAllStudentsCommand extends Command {
     public static final String COMMAND_WORD = "deleteallstudents";
 
