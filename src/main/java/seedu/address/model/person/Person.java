@@ -15,8 +15,9 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public abstract class Person {
-
+    private static int index = 0;
     // Identity fields
+    protected final int id;
     private final Name name;
     private final Phone phone;
     private final Email email;
@@ -40,6 +41,7 @@ public abstract class Person {
         this.hours = hours;
         this.tags.addAll(tags);
         this.subjects.addAll(subjects);
+        this.id = ++index;
     }
 
     public abstract boolean isTutor();
@@ -78,6 +80,10 @@ public abstract class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public int getId() {
+        return id;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -88,7 +94,8 @@ public abstract class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getName().equals(getName())
+                && otherPerson.getId() == getId();
     }
 
     /**

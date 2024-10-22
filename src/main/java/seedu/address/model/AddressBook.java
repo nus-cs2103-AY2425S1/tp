@@ -195,6 +195,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lessons.getAssociatedPeople(person);
     }
 
+    public Person getPersonById(int personId) {
+        return persons.get(personId);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
