@@ -20,18 +20,13 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
                 PREFIX_TUTORIAL);
 
-        Index index;
-        Tutorial tutorial;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            tutorial = new Tutorial(argMultimap.getValue(PREFIX_TUTORIAL).orElse(""));
-        } catch (ParseException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    UnmarkCommand.MESSAGE_USAGE), ive);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(e.getMessage());
+        if (!argMultimap.arePrefixesPresent(PREFIX_TUTORIAL)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkCommand.MESSAGE_USAGE));
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_TUTORIAL);
+        Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        Tutorial tutorial = ParserUtil.parseTutorial(argMultimap.getValue(PREFIX_TUTORIAL).get());
 
         return new UnmarkCommand(index, tutorial);
     }
