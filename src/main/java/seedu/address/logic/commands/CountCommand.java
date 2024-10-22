@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -98,6 +99,13 @@ public class CountCommand extends Command {
         }
         CountCommand otherCommand = (CountCommand) other;
         return namePrefix.equals(otherCommand.namePrefix) && tag.equals(otherCommand.tag);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("tag", tag)
+                .toString();
     }
 }
 
