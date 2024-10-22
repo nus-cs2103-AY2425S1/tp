@@ -112,7 +112,7 @@ public class ModelManager implements Model {
     @Override
     public void markStudent(Student target) {
         requireNonNull(target);
-        eduLog.unmarkStudent(target);
+        eduLog.markStudent(target);
     }
 
     /**

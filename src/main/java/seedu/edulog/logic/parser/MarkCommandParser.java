@@ -1,6 +1,7 @@
 package seedu.edulog.logic.parser;
 
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.edulog.commons.core.index.Index;
 import seedu.edulog.commons.util.NumericUtil;
 import seedu.edulog.logic.commands.MarkCommand;
