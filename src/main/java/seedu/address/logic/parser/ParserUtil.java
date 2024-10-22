@@ -46,10 +46,10 @@ public class ParserUtil {
         requireNonNull(sortOrder);
 
         String trimmedOrder = sortOrder.trim();
-        if (!StringUtil.isOneOrNegativeOne(trimmedOrder)) {
-            throw new ParseException(MESSAGE_INVALID_SORT_ORDER);
+        if (trimmedOrder.equals("1") || trimmedOrder.equals("-1")) {
+            return Integer.parseInt(trimmedOrder);
         }
-        return Integer.parseInt(trimmedOrder);
+        throw new ParseException(MESSAGE_INVALID_SORT_ORDER);
     }
 
     /**

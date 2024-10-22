@@ -138,22 +138,4 @@ public class StringUtil {
             return false;
         }
     }
-
-    /**
-     * Returns true if {@code s} represents the integer 1 or -1, without a leading '+' sign.
-     * e.g., "1", "-1"
-     * Returns false for any other non-null input
-     *
-     * @throws NullPointerException if {@code s} is null.
-     */
-    public static boolean isOneOrNegativeOne(String s) {
-        requireNonNull(s);
-
-        try {
-            int value = Integer.parseInt(s);
-            return (value == 1 || value == -1) && !s.startsWith("+");
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-    }
 }
