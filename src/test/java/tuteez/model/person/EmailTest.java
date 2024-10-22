@@ -1,5 +1,6 @@
 package tuteez.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static tuteez.testutil.Assert.assertThrows;
@@ -10,7 +11,7 @@ public class EmailTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Email(null));
+        assertEquals(new Email(null).value, null);
     }
 
     @Test
@@ -22,7 +23,7 @@ public class EmailTest {
     @Test
     public void isValidEmail() {
         // null email
-        assertThrows(NullPointerException.class, () -> Email.isValidEmail(null));
+        assertTrue(Email.isValidEmail(null));
 
         // blank email
         assertFalse(Email.isValidEmail("")); // empty string
@@ -69,6 +70,8 @@ public class EmailTest {
     @Test
     public void equals() {
         Email email = new Email("valid@email");
+        Email emptyEmail = new Email(null);
+        Email emptyEmail2 = new Email(null);
 
         // same values -> returns true
         assertTrue(email.equals(new Email("valid@email")));
@@ -84,5 +87,29 @@ public class EmailTest {
 
         // different values -> returns false
         assertFalse(email.equals(new Email("other.valid@email")));
+
+        // empty email -> equals email with null value
+        assertTrue(emptyEmail.equals(new Email(null)));
+
+        assertTrue(emptyEmail.equals(emptyEmail2));
     }
+
+    @Test
+    public void toString_validEmail_returnsEmailString() {
+        Email email = new Email("valid@email");
+        assertEquals(email.toString(), "valid@email");
+    }
+
+    @Test
+    public void toString_emptyEmail_returnsEmptyString() {
+        Email emptyEmail = new Email(null);
+        assertEquals(emptyEmail.toString(), "");
+    }
+
+    @Test
+    public void hashCode_emptyEmail_returnsZero() {
+        Email emptyEmail = new Email(null);
+        assertEquals(emptyEmail.hashCode(), 0);
+    }
+
 }

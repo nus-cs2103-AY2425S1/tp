@@ -126,9 +126,6 @@ class JsonAdaptedPerson {
     }
 
     private Email getModelEmail(String email) throws IllegalValueException {
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
@@ -136,9 +133,6 @@ class JsonAdaptedPerson {
     }
 
     private Address getModelAddress(String address) throws IllegalValueException {
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
-        }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }

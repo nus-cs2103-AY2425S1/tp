@@ -18,6 +18,7 @@ import tuteez.model.person.Address;
 import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
+import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
 
@@ -26,6 +27,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TELEGRAM = "J@ckson";
     private static final String INVALID_TAG = "#friend";
 
     private static final String INVALID_LESSON = "someday 0900-1100";
@@ -34,6 +36,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_TELEGRAM = "rachel_walker";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -110,8 +113,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseAddress_null_returnsEmptyAddress() throws ParseException {
+        assertEquals(new Address(null), ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -133,8 +136,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseEmail_null_returnsEmptyEmail() throws ParseException {
+        assertEquals(new Email(null), ParserUtil.parseEmail(null));
     }
 
     @Test
@@ -153,6 +156,27 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseTelegram_null_returnsEmptyTelegramUsername() throws ParseException {
+        assertEquals(TelegramUsername.empty(), ParserUtil.parseTelegramUsername(null));
+    }
+
+    @Test
+    public void parseTelegram_emptyString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegramUsername(""));
+    }
+
+    @Test
+    public void parseTelegram_invalidUsername_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTelegramUsername(INVALID_TELEGRAM));
+    }
+
+    @Test
+    public void parseTelegram_validUsername_returnsTelegramUsername() throws Exception {
+        TelegramUsername expectedTelegramUsername = TelegramUsername.of(VALID_TELEGRAM);
+        assertEquals(expectedTelegramUsername, ParserUtil.parseTelegramUsername(VALID_TELEGRAM));
     }
 
     @Test
