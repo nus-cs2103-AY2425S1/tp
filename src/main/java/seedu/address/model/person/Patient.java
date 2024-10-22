@@ -20,14 +20,15 @@ public class Patient extends Person {
      * Every field must be present and not null.
      *
      * @param name The name of the patient.
+     * @param role The role of the patient.
      * @param phone The phone number of the patient.
      * @param email The email address of the patient.
      * @param address The residential address of the patient.
      * @param remark Additional remarks about the patient.
      * @param tags Tags associated with the patient (e.g., chronic conditions).
      */
-    public Patient(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, remark, tags);
+    public Patient(Name name, String role, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        super(name, role, phone, email, address, remark, tags);
         Patient.patients.add(this); // Add this patient to the static list of all patients
     }
 

@@ -14,15 +14,16 @@ public class Doctor extends Person {
     /**
      * Every field must be present and not null.
      *
-     * @param name
-     * @param phone
-     * @param email
-     * @param address
-     * @param remark
-     * @param tags
+     * @param name name of the doctor
+     * @param role The role of the doctor
+     * @param phone The phone number of the doctor
+     * @param email The email address of the doctor
+     * @param address name of the doctor
+     * @param remark name of the doctor
+     * @param tags name of the doctor
      */
-    public Doctor(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, remark, tags);
+    public Doctor(Name name, String role, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+        super(name, role, phone, email, address, remark, tags);
         Doctor.doctors.add(this);
     }
 

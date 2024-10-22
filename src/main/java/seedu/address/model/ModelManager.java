@@ -154,7 +154,7 @@ public class ModelManager implements Model {
     public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
         Doctor doctor = null;
         for (Person person : allPersons) {
-            if (Doctor.class.isAssignableFrom(person.getId().getRole())) {
+            if (person.getId().equals(id)) {
                 doctor = (Doctor) person;
                 break;
             }
