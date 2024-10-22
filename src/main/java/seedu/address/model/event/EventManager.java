@@ -5,8 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
 
 /**
  * Wraps all {@code Event} and abstracts away
@@ -95,5 +93,19 @@ public class EventManager implements ReadOnlyEventManager {
         requireNonNull(newData);
 
         setEvents(newData.getEventList());
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EventManager)) {
+            return false;
+        }
+
+        EventManager otherEventManager = (EventManager) other;
+        return eventList.equals(otherEventManager.eventList);
     }
 }

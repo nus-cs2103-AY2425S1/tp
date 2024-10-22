@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "telegramUsername" : "alice",
-
+    "uniqueid": "dcd85b56-c7a7-45b5-b40e-b9dd0711af9a",
     "roles" : ["attendee"]
 
   }, {
@@ -14,8 +14,8 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-
     "telegramUsername" : "benson",
+    "uniqueid": "cdd2e0fd-628d-4f02-aaae-68c91442d878",
     "roles" : ["sponsor"]
 
   }, {
@@ -23,8 +23,8 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-
     "telegramUsername" : "carlkurz",
+    "uniqueid": "43c93603-0f82-497f-bd8c-d8386ba6afe2",
     "roles" : ["sponsor"]
 
   }, {
@@ -32,8 +32,8 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-
     "telegramUsername" : "daniel",
+    "uniqueid": "2f4ff54d-4b85-430f-91da-aac2df8dae38",
     "roles" : ["vendor"]
 
   }, {
@@ -41,8 +41,8 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-
     "telegramUsername" : "ellemeyer",
+    "uniqueid": "f9b7ddbd-f119-4fff-a515-dc2d21680486",
     "roles" : ["volunteer"]
 
   }, {
@@ -50,8 +50,8 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-
     "telegramUsername" : "fiona",
+    "uniqueid": "cfda6ed9-cd4b-44bc-9cd3-17ee85f6af5c",
     "roles" : ["attendee"]
 
   }, {
@@ -59,9 +59,8 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-
     "telegramUsername" : "george",
+    "uniqueid": "ab2605cd-c764-4d76-a38a-39575ecce1b0",
     "roles" : ["attendee"]
-
   } ]
 }

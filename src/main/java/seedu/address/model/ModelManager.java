@@ -135,6 +135,11 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+    //=========== Event Manager ==============================================================================
+    @Override
+    public ReadOnlyEventManager getEventManager() {
+        return eventManager;
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -166,6 +171,7 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
+                && eventManager.equals(otherModelManager.eventManager)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
 
