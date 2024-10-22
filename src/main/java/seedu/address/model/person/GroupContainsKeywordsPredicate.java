@@ -19,8 +19,19 @@ public class GroupContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GroupContainsKeywordsPredicate // instanceof handles nulls
-                && group.equals(((GroupContainsKeywordsPredicate) other).group)); // Compare based on Group object
+        // Check if the object is the same instance
+        if (other == this) {
+            return true;
+        }
+
+        // Check if the other object is an instance of GroupContainsKeywordsPredicate
+        if (!(other instanceof GroupContainsKeywordsPredicate)) {
+            return false;
+        }
+
+        // Cast the other object and compare the group fields
+        GroupContainsKeywordsPredicate otherPredicate = (GroupContainsKeywordsPredicate) other;
+        return group.equals(otherPredicate.group);
     }
+
 }
