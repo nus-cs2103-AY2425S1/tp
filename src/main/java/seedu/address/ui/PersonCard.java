@@ -44,6 +44,8 @@ public class PersonCard extends UiPart<Region> {
     private Label hasPaid;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label frequency;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -61,5 +63,6 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        frequency.setText("Policy duration: " + person.getFrequency().toString() + " Months");
     }
 }
