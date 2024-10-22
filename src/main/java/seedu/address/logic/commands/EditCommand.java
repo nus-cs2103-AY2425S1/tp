@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -54,6 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
             + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
+            + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -115,7 +117,7 @@ public class EditCommand extends Command {
         Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
         StudentClass updatedStudentClass = editPersonDescriptor.getStudentClass()
                 .orElse(personToEdit.getStudentClass());
-        EcName updatedEcName = personToEdit.getEcName();
+        EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
         EcNumber updatedEcNumber = personToEdit.getEcNumber();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
@@ -159,6 +161,7 @@ public class EditCommand extends Command {
         private RegisterNumber registerNumber;
         private Sex sex;
         private StudentClass studentClass;
+        private EcName ecName;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -175,6 +178,7 @@ public class EditCommand extends Command {
             setRegisterNumber(toCopy.registerNumber);
             setSex(toCopy.sex);
             setStudentClass(toCopy.studentClass);
+            setEcName(toCopy.ecName);
             setTags(toCopy.tags);
         }
 
@@ -182,7 +186,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass,
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName,
                     tags);
         }
 
@@ -242,6 +246,15 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentClass);
         }
 
+        public void setEcName(EcName ecName) {
+            this.ecName = ecName;
+        }
+
+        public Optional<EcName> getEcName() {
+            return Optional.ofNullable(ecName);
+        }
+
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -278,6 +291,7 @@ public class EditCommand extends Command {
                     && Objects.equals(registerNumber, otherEditPersonDescriptor.registerNumber)
                     && Objects.equals(sex, otherEditPersonDescriptor.sex)
                     && Objects.equals(studentClass, otherEditPersonDescriptor.studentClass)
+                    && Objects.equals(ecName, otherEditPersonDescriptor.ecName)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -291,6 +305,7 @@ public class EditCommand extends Command {
                     .add("register number", registerNumber)
                     .add("sex", sex)
                     .add("class", studentClass)
+                    .add("emergency contact name", ecName)
                     .add("tags", tags)
                     .toString();
         }
