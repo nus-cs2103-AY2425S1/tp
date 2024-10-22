@@ -52,15 +52,11 @@ public class AddAppointmentCommand extends Command{
     private final LocalDateTime startDateTime;
     private final LocalDateTime endDateTime;
 
-    public AddAppointmentCommand(Nric patientNric, LocalDate date, LocalTime startTime, LocalTime endTime) throws CommandException{
+    public AddAppointmentCommand(Nric patientNric, LocalDate date, LocalTime startTime, LocalTime endTime){
         requireAllNonNull(patientNric, date, startTime, endTime);
         this.patientNric = patientNric;
         this.startDateTime = LocalDateTime.of(date, startTime);
         this.endDateTime = LocalDateTime.of(date, endTime);
-
-        if (!startDateTime.isBefore(endDateTime) || startTime.equals(endTime)) {
-            throw new CommandException(MESSAGE_INVALID_START_END_TIME);
-        }
     }
 
 
@@ -69,7 +65,11 @@ public class AddAppointmentCommand extends Command{
 
 
     @Override
-    public CommandResult execute(Model model) throws CommandException{
+    public CommandResult execute(Model model) throws CommandException {
+
+        if (!startDateTime.isBefore(endDateTime)) {
+            throw new CommandException(MESSAGE_INVALID_START_END_TIME);
+        }
 
 
 
@@ -91,6 +91,7 @@ public class AddAppointmentCommand extends Command{
 
 
     }
+
 
 
 
