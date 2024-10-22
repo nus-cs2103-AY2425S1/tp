@@ -35,18 +35,6 @@
     "email" : "johndoe@example.com",
     "availableDate" : "2020-10-10",
     "involvedIn" : [ ]
-  }, {
-    "name" : "John Do",
-    "phone" : "98765432",
-    "email" : "johndoe@example.com",
-    "availableDate" : "2020-10-10",
-    "involvedIn" : [ ]
-  }, {
-    "name" : "John Doasde",
-    "phone" : "98765432",
-    "email" : "johndoe@example.com",
-    "availableDate" : "2020-10-10",
-    "involvedIn" : [ ]
   } ],
   "events" : [ {
     "eventName" : "Beach Cleanup",
