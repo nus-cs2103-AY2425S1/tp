@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandResult.SwitchView;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -43,7 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane listPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -112,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
 
@@ -127,19 +129,38 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the person list panel.
+     * Switches the view shown to the user.
+     * @param switchView The view that should be shown.
      */
-    public void showPersonList() {
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+    public void switchView(SwitchView switchView) {
+        switch (switchView) {
+        case PERSON:
+            changeToPersonView();
+            break;
+        case TASK:
+            changeToTaskView();
+            break;
+        default:
+            throw new UnsupportedOperationException("Invalid view selected.");
+        }
+    }
+
+    /**
+     * Changes the list panel to show the {@code Person} list.
+     */
+    public void changeToPersonView() {
+        personListPanel.updatePersonList(logic.getFilteredPersonList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(personListPanel.getRoot());
     }
 
     /**
      * Shows the task list panel.
      */
-    public void showTaskList() {
-        personListPanelPlaceholder.getChildren().clear();
-        personListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+    public void changeToTaskView() {
+        taskListPanel.updatePersonList(logic.getFilteredTaskList());
+        listPanelPlaceholder.getChildren().clear();
+        listPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
 
     /**
@@ -205,11 +226,8 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            // Switch panels based on the command result
-            if (commandResult.isShowPersonList()) {
-                showPersonList();
-            } else if (commandResult.isShowTaskList()) {
-                showTaskList();
+            if (commandResult.isSwitchView()) {
+                switchView(commandResult.getView());
             }
 
             return commandResult;

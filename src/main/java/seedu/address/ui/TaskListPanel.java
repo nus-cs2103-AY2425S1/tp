@@ -30,6 +30,13 @@ public class TaskListPanel extends UiPart<Region> {
     }
 
     /**
+     * Updates the {@code TaskListView} with an updated list of tasks.
+     */
+    public void updatePersonList(ObservableList<Task> taskList) {
+        taskListView.setItems(taskList);
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */
     class TaskListViewCell extends ListCell<Task> {

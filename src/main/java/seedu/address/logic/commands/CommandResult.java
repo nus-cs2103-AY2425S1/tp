@@ -19,21 +19,26 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The person list should be shown. */
-    private final boolean showPersonList;
+    /**
+     * Enum to indicate which view to switch to.
+     */
+    public enum SwitchView {
+        PERSON,
+        WEDDING,
+        TASK,
+        NONE
+    }
 
-    /** The task list should be shown. */
-    private final boolean showTaskList;
+    private final SwitchView switchView;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showPersonList, boolean showTaskList) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, SwitchView switchView) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showPersonList = showPersonList;
-        this.showTaskList = showTaskList;
+        this.switchView = switchView;
     }
 
     /**
@@ -41,7 +46,21 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false,false);
+        this(feedbackToUser, false, false, SwitchView.NONE);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with feedback and view to switch to, with default help and exit values.
+     */
+    public CommandResult(String feedbackToUser, SwitchView view) {
+        this(feedbackToUser, false, false, view);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with specified feedback, help, and exit status but with no view switch.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, showHelp, exit, SwitchView.NONE);
     }
 
     public String getFeedbackToUser() {
@@ -52,12 +71,15 @@ public class CommandResult {
         return showHelp;
     }
 
-    public boolean isShowPersonList() {
-        return showPersonList;
+    /**
+     * Checks if the command requires switching views.
+     */
+    public boolean isSwitchView() {
+        return switchView != SwitchView.NONE;
     }
 
-    public boolean isShowTaskList() {
-        return showTaskList;
+    public SwitchView getView() {
+        return switchView;
     }
     public boolean isExit() {
         return exit;
@@ -78,13 +100,12 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit
-                && showPersonList == otherCommandResult.showPersonList
-                && showTaskList == otherCommandResult.showTaskList;
+                && switchView == otherCommandResult.switchView;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, showPersonList, showTaskList);
+        return Objects.hash(feedbackToUser, showHelp, exit, switchView);
     }
 
     @Override
@@ -93,8 +114,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("showPersonList", showPersonList)
-                .add("showTaskList", showTaskList)
+                .add("switchView", switchView)
                 .toString();
     }
 
