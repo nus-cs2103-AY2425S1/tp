@@ -43,11 +43,31 @@ public class JsonAdaptedConsultationTest {
     }
 
     @Test
+    public void toModelType_nullDate_throwsIllegalValueException() {
+        JsonAdaptedConsultation consult = new JsonAdaptedConsultation(
+                null, VALID_TIME, VALID_STUDENTS
+        );
+        String expectedMessage = String.format(JsonAdaptedConsultation.MISSING_FIELD_MESSAGE_FORMAT,
+                Date.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, () -> consult.toModelType(testAddressBook));
+    }
+
+    @Test
     public void toModelType_invalidTime_throwsIllegalValueException() {
         JsonAdaptedConsultation consult = new JsonAdaptedConsultation(
                 VALID_DATE, INVALID_TIME, VALID_STUDENTS
         );
         String expectedMessage = Time.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, () -> consult.toModelType(testAddressBook));
+    }
+
+    @Test
+    public void toModelType_nullTime_throwsIllegalValueException() {
+        JsonAdaptedConsultation consult = new JsonAdaptedConsultation(
+                VALID_DATE, null, VALID_STUDENTS
+        );
+        String expectedMessage = String.format(JsonAdaptedConsultation.MISSING_FIELD_MESSAGE_FORMAT,
+                Time.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> consult.toModelType(testAddressBook));
     }
 
