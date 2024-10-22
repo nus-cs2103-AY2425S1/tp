@@ -68,9 +68,13 @@ public class EditWeddingCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
-
-
         Wedding weddingToEdit = lastShownList.get(index.getZeroBased());
+        editWeddingDescriptor.getPartner1Index().ifPresent(
+                index -> editWeddingDescriptor.setPartner1(model.getFilteredPersonList().get(index.getZeroBased()))
+        );
+        editWeddingDescriptor.getPartner2Index().ifPresent(
+                index -> editWeddingDescriptor.setPartner2(model.getFilteredPersonList().get(index.getZeroBased()))
+        );
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
 
         if (!weddingToEdit.isSameWedding(editedWedding) && model.hasWedding(editedWedding)) {
@@ -126,6 +130,8 @@ public class EditWeddingCommand extends Command {
     public static class EditWeddingDescriptor {
         private WeddingName weddingName;
         private int peopleCount = -1; //if -1, means no change
+        private Index partner1Index;
+        private Index partner2Index;
         private Person partner1;
         private Person partner2;
         private ArrayList<Person> guestList;
@@ -136,18 +142,19 @@ public class EditWeddingCommand extends Command {
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditWeddingDescriptor(EditWeddingDescriptor toCopy) {
             setWeddingName(toCopy.weddingName);
             setAddress(toCopy.address);
+            setDate(toCopy.date);
+            //Partners not copied because only Model has access to them. Will be copied in #execute
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(weddingName, partner1, partner2, address, date)
+            return CollectionUtil.isAnyNonNull(weddingName, partner1Index, partner2Index, address, date)
                     || this.peopleCount != -1;
         }
 
@@ -181,6 +188,22 @@ public class EditWeddingCommand extends Command {
 
         public void setPartner2(Person partner2) {
             this.partner2 = partner2;
+        }
+
+        public Optional<Index> getPartner1Index() {
+            return Optional.ofNullable(partner1Index);
+        }
+
+        public void setPartner1Index(Index partner1Index) {
+            this.partner1Index = partner1Index;
+        }
+
+        public Optional<Index> getPartner2Index() {
+            return Optional.ofNullable(partner2Index);
+        }
+
+        public void setPartner2Index(Index partner2Index) {
+            this.partner2Index = partner2Index;
         }
 
         public void setAddress(Address address) {

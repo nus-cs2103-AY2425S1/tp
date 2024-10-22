@@ -24,7 +24,7 @@ import seedu.address.model.wedding.WeddingName;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_MISSING_INDEX = "Index is missing.";
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -37,32 +37,6 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-
-    /**
-     * Parses a string containing two one-based indexes and returns them as an array of {@code Index}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the specified indexes are invalid (not non-zero unsigned integers).
-     */
-    public static Index[] parseTwoIndexes(String twoBasedIndexes) throws ParseException {
-        String trimmedIndexes = twoBasedIndexes.trim();
-        String[] splitIndexes = trimmedIndexes.split("\\s+"); // Split by whitespace
-
-        if (splitIndexes.length != 2) {
-            throw new ParseException(MESSAGE_MISSING_INDEX);
-        }
-
-        if (!StringUtil.isNonZeroUnsignedInteger(splitIndexes[0])
-                || !StringUtil.isNonZeroUnsignedInteger(splitIndexes[1])) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-
-        Index firstIndex = Index.fromOneBased(Integer.parseInt(splitIndexes[0]));
-        Index secondIndex = Index.fromOneBased(Integer.parseInt(splitIndexes[1]));
-
-        return new Index[] { firstIndex, secondIndex };
-    }
-
 
     /**
      * Parses a {@code String name} into a {@code Name}.

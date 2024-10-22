@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT_WEDDING_PERSON_2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand;
 import seedu.address.logic.commands.wedding.EditWeddingCommand.EditWeddingDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -60,11 +61,21 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
         }
         //Changes partner1 of wedding
         if (argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_1).isPresent()) {
-            //TODO
+            try {
+                editWeddingDescriptor.setPartner1Index(ParserUtil.parseIndex(requireNonNull(
+                        argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_1).orElse(null))));
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            }
         }
         //Changes partner2 of wedding
         if (argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_2).isPresent()) {
-            //TODO
+            try {
+                editWeddingDescriptor.setPartner2Index(ParserUtil.parseIndex(requireNonNull(
+                        argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_1).orElse(null))));
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            }
         }
         //Changes location/address of wedding
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
