@@ -1,0 +1,18 @@
+.background {
+    -fx-background-color: derive(#dafaff, 20%);
+}
+
+.subject-stats-box {
+    -fx-spacing: 15;
+    -fx-alignment: center-left;
+}
+
+.subject-stat-label {
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #124264;
+    -fx-padding: 8;
+    -fx-background-color: white;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 3);
+}

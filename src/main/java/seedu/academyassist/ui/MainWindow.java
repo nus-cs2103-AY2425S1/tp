@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private TrackSubjectWindow trackSubjectWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        trackSubjectWindow = new TrackSubjectWindow(logic.getModel());
     }
 
     public Stage getPrimaryStage() {
@@ -163,6 +165,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Opens the subject tracker window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleTrackSubject() {
+        if (!trackSubjectWindow.isShowing()) {
+            trackSubjectWindow.show();
+        } else {
+            trackSubjectWindow.focus();
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +198,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowSubjectTracker()) {
+                handleTrackSubject();
             }
 
             return commandResult;
