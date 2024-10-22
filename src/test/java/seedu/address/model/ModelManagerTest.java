@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.PredefinedAssignmentsData;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -132,5 +134,18 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, predefinedAssignmentsData)));
+    }
+
+    @Test
+    public void getGitHubUsername_personExists_success() {
+        modelManager.addPerson(ALICE);
+        Github validGithub = ALICE.getGithub();
+        assertEquals(validGithub, modelManager.getGitHubUsername(ALICE.getName()));
+    }
+
+    @Test
+    public void getGitHubUsername_personDoesNotExist_nullReturned() {
+        modelManager.addPerson(ALICE);
+        assertEquals(null, modelManager.getGitHubUsername(BOB.getName()));
     }
 }

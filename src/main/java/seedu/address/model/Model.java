@@ -1,11 +1,13 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Github;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -102,6 +104,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filtered person list to be sorted by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedPersonList(Comparator<Person> comparator);
+
+    /**
      * Returns true if an assignment with the name is present.
      */
     boolean hasAssignment(String name);
@@ -110,5 +118,11 @@ public interface Model {
     String getAssignmentName(String name);
     boolean hasName(Name name);
 
+    //=========== Marking people present =============================================================
     void markPersonPresent(Name name, int week);
+
+    /**
+     * Returns {@code Github} detials of the specified {@name}
+     */
+    Github getGitHubUsername(Name name);
 }

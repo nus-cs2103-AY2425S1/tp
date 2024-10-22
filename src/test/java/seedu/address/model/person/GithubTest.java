@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -64,5 +65,21 @@ public class GithubTest {
 
         // different values -> returns false
         assertFalse(github.equals(new Github("Other-Valid-Username")));
+    }
+
+    @Test
+    public void compareTo() {
+        Github github = new Github("Alice");
+        Github otherGithub = new Github("Bob");
+
+        // null input
+        assertThrows(NullPointerException.class, () -> github.compareTo(null));
+
+        // valid input
+        assertTrue(github.compareTo(otherGithub) < 0);
+        assertTrue(otherGithub.compareTo(github) > 0);
+
+        // same input
+        assertEquals(0, github.compareTo(github));
     }
 }

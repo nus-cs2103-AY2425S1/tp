@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -170,6 +171,33 @@ public class Person {
 
     public Set<Integer> getWeeksPresent() {
         return this.weeksPresent;
+    }
+
+    /**
+     * Compares the {@code name} of this object against another Person object.
+     * Comparison is done based on String::compareTo method.
+     */
+    public int compareName(Person anotherPerson) {
+        requireNonNull(anotherPerson);
+        return this.name.compareTo(anotherPerson.name);
+    }
+
+    /**
+     * Compares the {@code github} of this object against another Person object.
+     * Comparison is done based on String::compareTo method.
+     */
+    public int compareGithub(Person anotherPerson) {
+        requireNonNull(anotherPerson);
+        return this.github.compareTo(anotherPerson.github);
+    }
+
+    /**
+     * Compares the {@code telegram} of this object against another Person object.
+     * Comparison is done based on String::compareTo method.
+     */
+    public int compareTelegram(Person anotherPerson) {
+        requireNonNull(anotherPerson);
+        return this.telegram.compareTo(anotherPerson.telegram);
     }
 
     /**

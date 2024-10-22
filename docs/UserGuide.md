@@ -16,7 +16,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.
+1. Ensure you have Java `17` or above installed in your Computer. Refer [here](https://nus-cs2103-ay2425s1.github.io/website/admin/programmingLanguages.html) for the specific version.
 
 1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T11-2/tp/releases).
 
@@ -72,6 +72,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
+* The link brings users to this user guide.
 
 Format: `help`
 
@@ -170,6 +171,33 @@ Examples:
 * `find Betsy` followed by `delete Alex` will not delete the person named `Alex`.
 * `delete n/Betsy` deletes the person named `Betsy` if it is shown on the filtered list.
 
+### Launching GitHub repository : `github`
+
+Launches GitHub repository of the specified person on the browser from the address book.
+
+Format: `github n/NAME`
+
+* Launches the GitHub repository of the specified person.
+* Person specified needs to have a GitHub username assigned in the Address Book.
+* The name refers to the full name of the person shown in the Address Book.
+
+Examples:
+* `github n/Betsy` launches the GitHub repository of the person named `Betsy`, using the GitHub username assigned to `Betsy`.
+
+### Viewing a contact's full details : `view`
+
+Opens a window at the side with the full details of the specified person from the address book.
+
+Format: `view [n/NAME]`
+
+* View the full details of the selected contact.
+* The name refers to the full name of the person shown in the displayed person list.
+* Calling `view` without any name parameter closes any windows previously opened by `view`.
+
+Examples:
+* `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
+* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`. 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -219,13 +247,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool`
-**Clear**  | `clear`
-**Delete** | `delete n/NAME`<br> e.g., `delete n/James`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`
-**List**   | `list`
-**Help**   | `help`
+| Action     | Format, Examples                                                                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
+| **Clear**  | `clear`                                                                                                                                                                                                                                 |
+| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
+| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
+| **List**   | `list`                                                                                                                                                                                                                                  |
+| **Help**   | `help`                                                                                                                                                                                                                                  |
+| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
+| **GitHub** | `github n/NAME`                                                                                                                                                                                                                         |
