@@ -26,7 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ECPHONE = "Q@+4567";
     private static final String INVALID_ECRS = "M0th@r";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_DOCTOR_NAME = "J0hn Doe";
+    private static final String INVALID_DOCTOR_NAME = "J@hn Doe";
     private static final String INVALID_DOCTOR_PHONE = "+123456";
     private static final String INVALID_DOCTOR_EMAIL = "johndoe.com";
 
@@ -197,8 +197,6 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidDoctorName_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_EMERGENCY_CONTACTS,
@@ -209,8 +207,6 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidDoctorPhone_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_EMERGENCY_CONTACTS,
@@ -221,8 +217,6 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_invalidDoctorEmail_throwsIllegalValueException() {
-        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_EMERGENCY_CONTACTS,

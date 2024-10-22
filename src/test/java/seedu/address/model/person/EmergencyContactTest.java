@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class EmergencyContactTest {
     private static final EmergencyContact ALICE_EMERGENCY_CONTACT = ALICE.getFirstEmergencyContact();
-    private static final EmergencyContact BOB_EMERGENCY_CONTACT = ALICE.getFirstEmergencyContact();
+    private static final EmergencyContact BOB_EMERGENCY_CONTACT = BOB.getFirstEmergencyContact();
     @Test
     public void isSamePerson() {
         // same object -> returns true

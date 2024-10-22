@@ -32,7 +32,7 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         if (oneBasedIndex.equals(NO_EMERGENCY_CONTACT_INDEX)) {
-            return new Index.EmptyEmergencyContactIndex();
+            return Index.NO_EMERGENCY_CONTACT_INDEX;
         }
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {

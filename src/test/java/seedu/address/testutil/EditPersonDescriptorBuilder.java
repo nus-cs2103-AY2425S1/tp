@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,7 +41,10 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setIndexOfEmergencyContactToEdit(new Index.EmptyEmergencyContactIndex());
+        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
+        descriptor.setEmergencyContactName(person.getFirstEmergencyContact().getName());
+        descriptor.setEmergencyContactPhone(person.getFirstEmergencyContact().getPhone());
+        descriptor.setEmergencyContactRelationship(person.getFirstEmergencyContact().getRelationship());
         descriptor.setDoctorName(person.getDoctor().getName());
         descriptor.setDoctorPhone(person.getDoctor().getPhone());
         descriptor.setDoctorEmail(person.getDoctor().getEmail());
@@ -82,6 +87,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code EmergencyContact Name} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmergencyContactName(String name) {
+        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
         descriptor.setEmergencyContactName(new Name(name));
         return this;
     }
@@ -90,6 +96,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code EmergencyContact Phone} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmergencyContactPhone(String phone) {
+        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
         descriptor.setEmergencyContactPhone(new Phone(phone));
         return this;
     }
@@ -98,6 +105,7 @@ public class EditPersonDescriptorBuilder {
      * Sets the {@code EmergencyContact relationship} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withEmergencyContactRelationship(String relationship) {
+        descriptor.setIndexOfEmergencyContactToEdit(INDEX_FIRST_PERSON);
         descriptor.setEmergencyContactRelationship(new Relationship(relationship));
         return this;
     }

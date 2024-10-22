@@ -124,8 +124,8 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     EmergencyContact.class.getSimpleName()));
         }
-
         final Set<EmergencyContact> modelEmergencyContacts = new LinkedHashSet<>(personEmergencyContacts);
+
         if (doctor == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Doctor"));
         }

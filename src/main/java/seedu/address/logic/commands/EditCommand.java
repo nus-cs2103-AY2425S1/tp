@@ -259,7 +259,9 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setIndexOfEmergencyContactToEdit(toCopy.indexOfEmergencyContactToEdit);
-            setIndexOfEmergencyContactToEdit(new Index.EmptyEmergencyContactIndex());
+            setEmergencyContactName(toCopy.emergencyContactName);
+            setEmergencyContactPhone(toCopy.emergencyContactPhone);
+            setEmergencyContactRelationship(toCopy.emergencyContactRelationship);
             setDoctorName(toCopy.doctorName);
             setDoctorPhone(toCopy.doctorPhone);
             setDoctorEmail(toCopy.doctorEmail);

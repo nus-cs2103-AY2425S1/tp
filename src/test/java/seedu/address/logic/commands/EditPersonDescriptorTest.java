@@ -64,7 +64,8 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getName().orElse(null) + ", phone="
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
-                + editPersonDescriptor.getAddress().orElse(null) + ", emergency contact name="
+                + editPersonDescriptor.getAddress().orElse(null) + ", index of emergency contact to edit="
+                + editPersonDescriptor.getIndexOfEmergencyContactToEdit().orElse(null) + ", emergency contact name="
                 + editPersonDescriptor.getEmergencyContactName().orElse(null) + ", emergency contact phone="
                 + editPersonDescriptor.getEmergencyContactPhone().orElse(null)
                 + ", emergency contact relationship="

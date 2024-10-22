@@ -3,6 +3,17 @@
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
-    "address": "4th street"
+    "address": "4th street",
+    "emergencyContacts" : [ {
+      "ecName" : "Kevin Goh",
+      "ecPhone" : "98764123",
+      "ecRelationship" : "Husband"
+    }],
+    "doctor": {
+      "doctorName": "Tan Wei Ming",
+      "doctorPhone": "82345678",
+      "doctorEmail": "tanweiming@gmail.com"
+    },
+    "tags": [ "friends" ]
   } ]
 }

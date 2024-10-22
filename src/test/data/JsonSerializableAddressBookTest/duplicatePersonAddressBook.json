@@ -4,11 +4,11 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Kevin Goh",
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
-    },
+    }],
     "doctor": {
       "doctorName": "Tan Wei Ming",
       "doctorPhone": "82345678",
@@ -19,11 +19,11 @@
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "emergencyContact" : {
+    "emergencyContacts" : [{
       "ecName" : "Kevin Goh",
       "ecPhone" : "98764123",
       "ecRelationship" : "Husband"
-    },
+    }],
     "doctor": {
       "doctorName": "Tan Wei Ming",
       "doctorPhone": "82345678",

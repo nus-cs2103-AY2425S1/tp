@@ -164,7 +164,7 @@ public class Person {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("emergency contact", emergencyContacts)
+                .add("emergency contacts", emergencyContacts)
                 .add("doctor", doctor)
                 .add("tags", tags)
                 .toString();
