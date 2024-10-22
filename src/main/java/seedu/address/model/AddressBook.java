@@ -118,7 +118,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given listing {@code target} in the list with {@code editedListing}.
      * {@code target} must exist in the address book.
-     * The listing identity of {@code editedListing} must not be the same as another existing listing in the address book.
+     * The listing identity of {@code editedListing} must not be the same
+     * as another existing listing in the address book.
      */
     public void setListing(Listing target, Listing editedListing) {
         requireNonNull(editedListing);

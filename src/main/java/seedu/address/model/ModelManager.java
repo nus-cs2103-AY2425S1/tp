@@ -115,25 +115,49 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    /**
+     * Returns true if the address book contains the given listing.
+     *
+     * @param listing The listing to check.
+     * @return true if the listing exists in the address book.
+     */
     public boolean hasListing(Listing listing) {
         requireNonNull(listing);
         return addressBook.hasListing(listing);
     }
 
+    /**
+     * Deletes the specified listing from the address book.
+     *
+     * @param target The listing to be deleted.
+     */
     public void deleteListing(Listing target) {
+        requireNonNull(target);
         addressBook.removeListing(target);
     }
 
+    /**
+     * Adds a listing to the address book and updates the filtered listing list to show all listings.
+     *
+     * @param listing The listing to add.
+     */
     public void addListing(Listing listing) {
+        requireNonNull(listing);
         addressBook.addListing(listing);
         updateFilteredListingList(PREDICATE_SHOW_ALL_LISTINGS);
     }
 
+    /**
+     * Replaces the target listing with the edited listing in the address book.
+     *
+     * @param target The listing to replace.
+     * @param editedListing The new listing that will replace the target listing.
+     */
     public void setListing(Listing target, Listing editedListing) {
         requireAllNonNull(target, editedListing);
-
         addressBook.setListing(target, editedListing);
     }
+
 
     //=========== Filtered Person List Accessors =============================================================
 
