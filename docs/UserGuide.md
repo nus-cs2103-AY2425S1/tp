@@ -189,7 +189,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Locating patients by NRIC: `findMedCon`
+#### Locating patients by medical condition: `findMedCon`
 
 Finds patients whose medical condition contain the given keywords.
 
