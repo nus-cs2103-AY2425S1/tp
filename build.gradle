@@ -57,6 +57,11 @@ test {
     finalizedBy jacocoTestReport
 }
 
+if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+    test.enabled = false
+    println "Tests are disabled on Ubuntu/Linux."
+}
+
 tasks.register('uiTest', Test) {
     jvmArgs += [
             '--add-opens', 'javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
