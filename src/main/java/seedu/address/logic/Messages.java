@@ -78,8 +78,6 @@ public class Messages {
     public static String format(Pet pet) {
         final StringBuilder builder = new StringBuilder();
         builder.append(pet.getName().name)
-            .append("; Unique ID: ")
-            .append(pet.getUid())
             .append("; Species: ")
             .append(pet.getSpecies().value)
             .append("; Breed: ")

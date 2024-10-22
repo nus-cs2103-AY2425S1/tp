@@ -17,6 +17,7 @@ import seedu.address.model.tag.Tag;
 public class Pet {
 
     // Identity fields
+    private static int uid_counter = 0;
     private final String uid;
     private final Name name;
     private final Species species;
@@ -32,7 +33,7 @@ public class Pet {
      */
     public Pet(Name name, Species species, Breed breed, Age age, Sex sex, Set<Tag> modelTags) {
         requireAllNonNull(name, species, breed, age, sex);
-        this.uid = name.getInitials() + species.getInitial() + breed.getInitials() + age.toString() + sex.getInitial();
+        this.uid = name.name + uid_counter++;
         this.name = name;
         this.species = species;
         this.breed = breed;

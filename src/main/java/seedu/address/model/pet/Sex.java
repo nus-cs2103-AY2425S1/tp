@@ -33,13 +33,6 @@ public class Sex {
         return test.matches(VALIDATION_REGEX);
     }
 
-    /**
-     * Retrieves the pet's sex as a one-character String.
-     */
-    public String getInitial() {
-        return value;
-    }
-
     @Override
     public String toString() {
         if (value.equalsIgnoreCase("f")) {
