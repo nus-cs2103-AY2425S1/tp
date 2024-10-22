@@ -63,7 +63,7 @@ public class PersonCard extends UiPart<Region> {
         projectStatus.setText("Project status: " + person.getProjectStatus().toString());
         paymentStatus.setText("Payment status: " + person.getPaymentStatus().toString());
         clientStatus.setText("Client Status: " + person.getClientStatus().toString());
-        deadline.setText("Deadline: " + person.getDeadline().toString());
+        deadline.setText("Deadline: " + person.checkAndGetDeadline());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
