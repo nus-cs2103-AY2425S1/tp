@@ -65,20 +65,16 @@ public class PersonCard extends UiPart<Region> {
 
     private void createTier() {
         // Create a label for the tier
-        Label tierLabel = new Label(person.getTier().toParsableString());
+        Label tierLabel = new Label(person.getTier().toParsableString().toUpperCase());
 
-        // Apply a different style class based on the tier value
-        String tier = person.getTier().toParsableString().toUpperCase();
-        switch (tier) {
-        case "GOLD" -> tierLabel.getStyleClass().add("gold-tier");
-        case "SILVER" -> tierLabel.getStyleClass().add("silver-tier");
-        case "BRONZE" -> tierLabel.getStyleClass().add("bronze-tier");
-        case "REJECT" -> tierLabel.getStyleClass().add("reject-tier");
-        default -> tierLabel = null;
-        }
-        if (tierLabel != null) {
-            // Add the label to the FlowPane
-            assignedTier.getChildren().add(tierLabel);
-        }
+        // Apply the existing style classes
+        tierLabel.getStyleClass().add("label");
+
+        // Add the tier-specific style class
+        String tier = person.getTier().toParsableString().toLowerCase();
+        tierLabel.getStyleClass().add(tier + "-tier");
+
+        // Add the label to the FlowPane
+        assignedTier.getChildren().add(tierLabel);
     }
 }
