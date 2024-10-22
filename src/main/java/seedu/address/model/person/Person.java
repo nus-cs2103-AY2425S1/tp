@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -25,6 +28,9 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Property details
+    private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
+    private ObservableList<Property> buyingProperties = FXCollections.observableArrayList();
     /**
      * Every field must be present and not null.
      */
@@ -35,6 +41,22 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor for when there are properties to be added.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  ObservableList<Property> sellingProperties,
+                  ObservableList<Property> buyingProperties) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.sellingProperties = sellingProperties;
+        this.buyingProperties = buyingProperties;
     }
 
     public Name getName() {
@@ -61,6 +83,14 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public ObservableList<Property> getListOfSellingProperties() {
+        return sellingProperties;
+    }
+
+    public ObservableList<Property> getListOfBuyingProperties() {
+        return buyingProperties;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -74,6 +104,55 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Returns true if property is in the list of properties to buy.
+     * @param property Property to check
+     * @return boolean
+     */
+    public boolean containsBuyProperty(Property property) {
+        return buyingProperties.contains(property);
+    }
+
+    /**
+     * Adds a property to the list of properties to buy.
+     * @param property Property to add
+     */
+    public void addBuyProperty(Property property) {
+        buyingProperties.add(property);
+    }
+
+    /**
+     * Returns true if property is in the list of properties to sell.
+     * @param property Property to check
+     * @return boolean
+     */
+    public boolean containsSellProperty(Property property) {
+        return sellingProperties.contains(property);
+    }
+
+    /**
+     * Adds a property to the list of properties to sell.
+     * @param property Property to add
+     */
+    public void addSellProperty(Property property) {
+        sellingProperties.add(property);
+    }
+
+    /**
+     * Deletes a property from the list of properties to sell.
+     * @param index One based Index of property to delete based on user's view.
+     */
+    public void deleteSellProperty(Index index) {
+        sellingProperties.remove(index.getZeroBased());
+    }
+
+    /**
+     * Deletes a property from the list of properties to buy.
+     * @param index One based Index of property to delete based on user's view.
+     */
+    public void deleteBuyProperty(Index index) {
+        buyingProperties.remove(index.getZeroBased());
+    }
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.

@@ -9,12 +9,15 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Property;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,20 +32,30 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedProperty> sellProperties = new ArrayList<>();
+    private final List<JsonAdaptedProperty> buyProperties = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("sellProperties") List<JsonAdaptedProperty> sellProperties,
+                             @JsonProperty("buyProperties") List<JsonAdaptedProperty> buyProperties) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tags != null) {
             this.tags.addAll(tags);
+        }
+        if (sellProperties != null) {
+            this.sellProperties.addAll(sellProperties);
+        }
+        if (buyProperties != null) {
+            this.buyProperties.addAll(buyProperties);
         }
     }
 
@@ -57,6 +70,12 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        sellProperties.addAll(source.getListOfSellingProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
+        buyProperties.addAll(source.getListOfBuyingProperties().stream()
+                .map(JsonAdaptedProperty::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -68,6 +87,16 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Property> personSellProperties = new ArrayList<>();
+        for (JsonAdaptedProperty property : sellProperties) {
+            personSellProperties.add(property.toModelType());
+        }
+
+        final List<Property> personBuyProperties = new ArrayList<>();
+        for (JsonAdaptedProperty property : buyProperties) {
+            personBuyProperties.add(property.toModelType());
         }
 
         if (name == null) {
@@ -103,7 +132,15 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final ObservableList<Property> modelSellProperties = FXCollections.observableArrayList(personSellProperties);
+        //final List<Property> modelSellProperties = new ArrayList<>(personSellProperties);
+
+        //final ObservableList<Property> modelBuyProperties = new ArrayList<>(personBuyProperties);
+        final ObservableList<Property> modelBuyProperties = FXCollections.observableArrayList(personBuyProperties);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                modelSellProperties, modelBuyProperties);
     }
 
 }

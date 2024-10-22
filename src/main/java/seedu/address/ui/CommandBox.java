@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -15,6 +19,9 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final Logger logger = Logger.getLogger(CommandBox.class.getName());
+    private static final ArrayList<String> commandHistory = new ArrayList<>();
+    private static int historyIndex = 0;
 
     private final CommandExecutor commandExecutor;
 
@@ -43,10 +50,50 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
+            commandHistory.add(commandText);
+            historyIndex = commandHistory.size();
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Handles the key pressed event to get Command History.
+     */
+    @FXML
+    public void handleOnKeyPressed() {
+        commandTextField.setOnKeyPressed(event -> {
+            switch (event.getCode()) {
+            case UP:
+                if (commandHistory.isEmpty() || historyIndex <= 0) {
+                    break;
+                }
+                assert !commandHistory.isEmpty() : "commandHistory should not be empty here";
+                assert historyIndex > 0 : "historyIndex should be positive here before decrementing";
+                historyIndex--;
+                commandTextField.setText(commandHistory.get(historyIndex));
+                break;
+            case DOWN:
+                if (commandHistory.isEmpty() || historyIndex >= commandHistory.size() || historyIndex < 0) {
+                    break;
+                }
+                historyIndex++;
+                assert !commandHistory.isEmpty() : "commandHistory should not be empty here";
+                assert historyIndex >= 0 : "historyIndex should not be negative here";
+                assert historyIndex <= commandHistory.size()
+                        : "historyIndex should not exceed the size of commandHistory";
+                if (historyIndex == commandHistory.size()) {
+                    commandTextField.setText("");
+                } else {
+                    commandTextField.setText(commandHistory.get(historyIndex));
+                }
+                break;
+            default:
+                break;
+            }
+            logger.log(Level.FINE, "Key pressed: " + event.getCode());
+        });
     }
 
     /**
