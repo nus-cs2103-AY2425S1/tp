@@ -17,7 +17,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 

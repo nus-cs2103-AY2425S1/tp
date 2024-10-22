@@ -1,4 +1,4 @@
-package seedu.address.model.goodsReceipt;
+package seedu.address.model.goodsreceipt;
 
 import java.util.function.Predicate;
 

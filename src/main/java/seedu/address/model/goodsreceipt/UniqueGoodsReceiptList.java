@@ -1,4 +1,4 @@
-package seedu.address.model.goodsReceipt;
+package seedu.address.model.goodsreceipt;
 
 
 import static java.util.Objects.requireNonNull;
@@ -9,8 +9,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.goodsReceipt.exceptions.DuplicateReceiptException;
-import seedu.address.model.goodsReceipt.exceptions.ReceiptNotFoundException;
+import seedu.address.model.goodsreceipt.exceptions.DuplicateReceiptException;
+import seedu.address.model.goodsreceipt.exceptions.ReceiptNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 
@@ -35,8 +35,8 @@ public class UniqueGoodsReceiptList implements Iterable<GoodsReceipt> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a goodsReceipt to the list.
+     * The goodsReceipt must not already exist in the list.
      */
     public void add(GoodsReceipt toAdd) {
         requireNonNull(toAdd);

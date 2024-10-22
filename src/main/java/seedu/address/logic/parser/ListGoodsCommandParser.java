@@ -10,10 +10,10 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ListGoodsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsReceipt.CategoryPredicate;
-import seedu.address.model.goodsReceipt.GoodsNamePredicate;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
-import seedu.address.model.goodsReceipt.SupplierNamePredicate;
+import seedu.address.model.goodsreceipt.CategoryPredicate;
+import seedu.address.model.goodsreceipt.GoodsNamePredicate;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.SupplierNamePredicate;
 import seedu.address.model.person.Name;
 
 /**

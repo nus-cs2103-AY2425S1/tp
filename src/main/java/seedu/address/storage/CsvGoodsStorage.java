@@ -13,7 +13,7 @@ import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReceiptLog;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 /**
  * A class to access Goods data stored as a csv file on the hard disk.
@@ -42,9 +42,9 @@ public class CsvGoodsStorage implements GoodsStorage {
     public Optional<ReadOnlyReceiptLog> readGoods(Path filePath) throws DataLoadingException {
         requireNonNull(filePath);
 
-        ReceiptLog r = new ReceiptLog();
-        r.setReceipts(CsvUtil.readCsvFile(filePath, GoodsReceipt.class).get());
-        return Optional.of(r);
+        ReceiptLog receiptLog = new ReceiptLog();
+        receiptLog.setReceipts(CsvUtil.readCsvFile(filePath, GoodsReceipt.class).get());
+        return Optional.of(receiptLog);
     }
 
     @Override

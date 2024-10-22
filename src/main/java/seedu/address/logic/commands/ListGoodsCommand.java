@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 /**
  * Lists all goods that match the given conditions to the user.

@@ -26,7 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyReceiptLog;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.ReceiptLog;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 

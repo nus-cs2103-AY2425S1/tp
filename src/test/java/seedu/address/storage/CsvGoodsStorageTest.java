@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-
-
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
@@ -12,8 +10,6 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-
-import seedu.address.commons.exceptions.DataLoadingException;
 
 public class CsvGoodsStorageTest {
 
@@ -50,8 +46,9 @@ public class CsvGoodsStorageTest {
     }
 
     @Test
-    public void readGoods_missingFile_emptyList() throws IOException, DataLoadingException, NoSuchElementException {
-        assertThrows(NoSuchElementException.class, () -> csvGoodsStorage.readGoods(Paths.get("NonExistentFile.csv")));
+    public void readGoods_missingFile_exceptionThrown() throws NoSuchElementException {
+        assertThrows(NoSuchElementException.class, ()
+                -> csvGoodsStorage.readGoods(Paths.get("NonExistentFile.csv")));
     }
 
     @Test

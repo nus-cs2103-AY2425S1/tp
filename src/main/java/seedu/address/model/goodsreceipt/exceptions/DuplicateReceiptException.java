@@ -1,4 +1,4 @@
-package seedu.address.model.goodsReceipt.exceptions;
+package seedu.address.model.goodsreceipt.exceptions;
 
 /**
  * Signals that the operation will result in duplicate goodsReceipts

@@ -4,12 +4,11 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
-import seedu.address.model.goodsReceipt.UniqueGoodsReceiptList;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.UniqueGoodsReceiptList;
 
 /**
  * Wraps all data at the address-book level
@@ -63,7 +62,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
 
 
     /**
-     * deletes a receipt to the receipt log.
+     * Deletes a receipt in the receipt log.
      */
     public void deleteReceipt(GoodsReceipt remove) {
         receipts.remove(remove);
@@ -82,7 +81,7 @@ public class ReceiptLog implements ReadOnlyReceiptLog {
     public List<GoodsReceipt> findReceipts(Predicate<GoodsReceipt> predicate) {
         return StreamSupport
                 .stream(receipts.spliterator(), false)
-                .filter(predicate).collect(Collectors.toList());
+                .filter(predicate).toList();
     }
 
 }
