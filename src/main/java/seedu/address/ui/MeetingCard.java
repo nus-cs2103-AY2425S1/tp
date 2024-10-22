@@ -25,6 +25,18 @@ public class MeetingCard extends UiPart<Region> {
     @FXML
     private Label meetingDate;
 
+    @FXML
+    private Label buyer;
+
+    @FXML
+    private Label seller;
+
+    @FXML
+    private Label type;
+
+    @FXML
+    private Label postalCode;
+
     /**
      * Creates a {@code MeetingCard} with the given {@code Meeting} and index to display.
      */
@@ -32,8 +44,12 @@ public class MeetingCard extends UiPart<Region> {
         super(FXML);
         this.meeting = meeting;
         id.setText(displayedIndex + ". ");
-        meetingTitle.setText(meeting.getMeetingTitle().value);
-        meetingDate.setText(meeting.getMeetingTitle().value);
+        meetingTitle.setText("Title: " + meeting.getMeetingTitle().value);
+        meetingDate.setText("Date: " + meeting.getMeetingDate().value);
+        buyer.setText("Buyer: " + meeting.getBuyer().toString());
+        seller.setText("Seller: " + meeting.getSeller().toString());
+        type.setText("Type: " + meeting.getType().value);
+        postalCode.setText("PostalCode: " + meeting.getPostalCode().value);
     }
 
     public HBox getMeetingCardPane() {
