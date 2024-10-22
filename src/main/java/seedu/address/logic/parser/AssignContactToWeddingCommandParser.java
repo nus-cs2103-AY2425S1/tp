@@ -13,6 +13,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGN_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+/**
+ * This AssignContactToWeddingCommandParser parses user inputs starting with "assignw" where the first index is interpreted as the wedding index
+ * and subsequent indexes after the 'c/' prefix are interpreted as the person index's to assign to the wedding
+ */
 public class AssignContactToWeddingCommandParser implements Parser<AssignContactToWeddingCommand> {
 
     @Override
@@ -20,7 +24,7 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
         requireNonNull(args);
         ArgumentMultimap multimap = ArgumentTokenizer.tokenize(args, PREFIX_ASSIGN_CONTACT);
 
-        //Reformatting error message for duplicate tags
+        //Reformatting error message for duplicate c/ instances
         try {
             multimap.verifyNoDuplicatePrefixesFor(PREFIX_ASSIGN_CONTACT);
         } catch (ParseException pe) {
@@ -28,13 +32,23 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
                     "Please only include one prefix c/ !"));
         }
 
-        // If t/ prefix is missing
+        // If c/ prefix is missing
         if (multimap.getValue(PREFIX_ASSIGN_CONTACT).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignContactToWeddingCommand.MESSAGE_USAGE));
         }
 
-        Index index = ParserUtil.parseIndex(multimap.getPreamble());
+        Index weddingIndex;
+        try {
+            weddingIndex = ParserUtil.parseIndex(multimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AssignContactToWeddingCommand.MESSAGE_USAGE));
+        }
+
         String personIndexs = multimap.getValue(PREFIX_ASSIGN_CONTACT).orElse("");
+
+        if (personIndexs.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "No contacts specified!"));
+        }
 
         Set<Index> personIndexSet;
         try {
@@ -44,15 +58,12 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
                     .collect(Collectors.toSet()); // Collect into a Set of Index objects
 
         } catch (IllegalArgumentException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, e.getMessage()));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "You can only reference contacts through their index."));
         }
 
-        // If t/ prefix is followed by empty string
-        if (personIndexSet.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "No contacts specified!"));
-        }
 
-        return new AssignContactToWeddingCommand(index, personIndexSet);
+
+        return new AssignContactToWeddingCommand(weddingIndex, personIndexSet);
     }
 
 }

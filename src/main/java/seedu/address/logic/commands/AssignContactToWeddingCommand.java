@@ -16,16 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This AssignContactToWeddingCommand class assigns contacts in the addressbook into the wedding at the specified index.
+ */
 
 public class AssignContactToWeddingCommand extends Command {
 
-    public static final String ASSIGN_COMMAND = "assign";
+    public static final String COMMAND_WORD = "assignw";
 
-    public static final String MESSAGE_USAGE = ASSIGN_COMMAND + ": Assigns contacts to a specific wedding "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns contacts to a specific wedding "
             + "where the wedding and contacts are identified by their index number. \n"
             + "Parameters: assign WeddingIndex (must be a positive integer) "
             + PREFIX_ASSIGN_CONTACT + "(specify at least 1 person index to assign)... \n"
-            + "Example: " + ASSIGN_COMMAND + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGN_CONTACT + "1 2 3";
 
     public static final String MESSAGE_ASSIGN_TO_WEDDING_SUCCESS = "Assigned the following persons to %1$s's wedding: %2$s";
@@ -33,12 +36,23 @@ public class AssignContactToWeddingCommand extends Command {
     private final Index targetWeddingIndex;
     private final Set<Index> assignedPersonIndexList;
 
+    /**
+     * This constructor initialises the target wedding index and the assigned person index list based on the parser.
+     * @param targetWeddingIndex
+     * @param assignedPersonIndexList
+     */
     public AssignContactToWeddingCommand(Index targetWeddingIndex, Set<Index> assignedPersonIndexList) {
         this.targetWeddingIndex = targetWeddingIndex;
         this.assignedPersonIndexList = assignedPersonIndexList;
     }
 
 
+    /**
+     * This method assigns new contacts to specified weddings, throwing errors whenever necessary.
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult
+     * @throws CommandException
+     */
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -49,6 +63,7 @@ public class AssignContactToWeddingCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_WEDDING_DISPLAYED_INDEX);
         }
 
+
         Wedding weddingToModify = lastShownWeddingList.get(targetWeddingIndex.getZeroBased());
 
         // get a list of all the Persons that the user is trying to assign to the wedding
@@ -57,15 +72,19 @@ public class AssignContactToWeddingCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         for (Index i : assignedPersonIndexList) {
-            Person personToAdd = lastShownList.get(i.getZeroBased());
-            newContactsAssignedToWedding.add(personToAdd);
+            if (i.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            } else {
+                Person personToAdd = lastShownList.get(i.getZeroBased());
+                newContactsAssignedToWedding.add(personToAdd);
+            }
         }
 
         List<PersonId> existingPersonsInWedding = weddingToModify.getAssignees();
 
         for (Person person : newContactsAssignedToWedding) {
             if (existingPersonsInWedding.contains(person.getId())) {
-                throw new CommandException("Person " + person.getName().toString() + " has already been assigned to this wedding.");
+                throw new CommandException(person.getName().toString() + " has already been assigned to this wedding.");
             } else {
                 existingPersonsInWedding.add(person.getId());
             }
@@ -75,9 +94,9 @@ public class AssignContactToWeddingCommand extends Command {
 
         model.setWedding(weddingToModify, newWedding);
 
-        // Extract names of assigned persons and join them into a single string
         String assignedPersonNames = newContactsAssignedToWedding.stream()
                 .map(person -> person.getName().toString())
+                .sorted()
                 .reduce((name1, name2) -> name1 + ", " + name2)
                 .orElse("No persons added");
 

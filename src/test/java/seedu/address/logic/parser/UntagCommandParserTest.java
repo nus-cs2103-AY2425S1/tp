@@ -65,7 +65,7 @@ public class UntagCommandParserTest {
     @Test
     public void parse_invalidTagCharacters_failure() {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + " t/friends *colleagues";
-        String expectedMessage = "Error: Tags can only contain alphabetic characters.";
+        String expectedMessage = "Error: Tags names should be alphanumeric.";
         assertParseFailure(parser, userInput, expectedMessage);
     }
 

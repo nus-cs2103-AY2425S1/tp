@@ -59,8 +59,8 @@ public class UntagCommandParser implements Parser<UntagCommand> {
 
         String[] tagsArray = untagString.split("\\s+");
         for (String tag : tagsArray) {
-            if (!isValidTagString(tag)) {
-                throw new ParseException("Error: Tags can only contain alphabetic characters.");
+            if (!Tag.isValidTagName(tag)) {
+                throw new ParseException("Error: Tags names should be alphanumeric.");
             }
         }
 
@@ -73,14 +73,6 @@ public class UntagCommandParser implements Parser<UntagCommand> {
         return new UntagCommand(index, tagsToRemove);
     }
 
-    /**
-     * Checks if the given tag string is valid (contains only alphabetic characters).
-     *
-     * @param tagString the string to check
-     * @return true if valid, false otherwise
-     */
-    private boolean isValidTagString(String tagString) {
-        return VALID_TAG_PATTERN.matcher(tagString).matches();
-    }
+
 
 }
