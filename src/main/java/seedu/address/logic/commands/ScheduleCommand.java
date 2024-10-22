@@ -79,7 +79,7 @@ public class ScheduleCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        if (!editedSchedule.equals(scheduleToEdit)) {
+        if (editedSchedule.equals(scheduleToEdit)) {
             throw new CommandException(MESSAGE_SCHEDULE_UNCHANGED);
         }
 
@@ -113,7 +113,9 @@ public class ScheduleCommand extends Command {
         Schedule editedSchedule = new Schedule(updatedName, updatedDateString, updatedTimeString);
 
         // if all fields of the command is empty, refers to a clear schedule command
-        if (editedSchedule.equals(scheduleToEdit)) {
+        if (!(scheduleDescriptor.getDateString().isPresent()
+                || scheduleDescriptor.getScheduleName().isPresent()
+                || scheduleDescriptor.getTimeString().isPresent())) {
             editedSchedule = new Schedule("", "", "");
         }
 
