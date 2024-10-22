@@ -157,7 +157,7 @@ public class ClientHubParserTest {
                 SortCommand.COMMAND_WORD + " " + criteria);
         assertEquals(new SortCommand(new NameComparator()), command);
     }
-  
+
     @Test
     public void parseCommand_viewCommand() throws Exception {
         String keyword = "Alice";
