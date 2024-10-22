@@ -13,14 +13,15 @@ import seedu.address.model.person.Person;
 import seedu.address.ui.ContactDisplay;
 
 /**
- * Edits the details of an existing person in the address book.
+ * Diplays the details of an existing person in the address book.
  */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays the details of the contact identified "
-            + "by the index number used in the displayed contact list. ";
+            + "by the index number used in the displayed contact list. "
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed Person: %1$s";
 
@@ -49,7 +50,8 @@ public class ViewCommand extends Command {
         Person personToView = lastShownList.get(index.getZeroBased());
         contactDisplay.updateContactDetails(personToView);
 
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, Messages.format(personToView)),
+        personToView);
     }
 
     @Override
