@@ -85,6 +85,10 @@ public class Delivery {
         return archive;
     }
 
+    public boolean isArchived() {
+        return archive.isArchived();
+    }
+
     /**
      * Returns true if both deliveries are equal.
      */
