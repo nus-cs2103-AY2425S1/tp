@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Objects;
-
 import seedu.address.model.CampusConnect;
 import seedu.address.model.Model;
 
