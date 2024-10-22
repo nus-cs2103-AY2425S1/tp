@@ -135,4 +135,20 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Adds a command text to the command history.
+     * @param commandText The command text to be added to the history.
+     */
+    void addCommandTextToHistory(String commandText);
+
+    /**
+     * Returns the previous command text from the command history.
+     */
+    String getPreviousCommandTextFromHistory();
+
+    /**
+     * Returns the next command text from the command history.
+     */
+    String getNextCommandTextFromHistory();
 }

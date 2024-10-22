@@ -34,7 +34,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.CallFrequency;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameNricContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -166,12 +166,12 @@ public class HelpWindow extends UiPart<Stage> {
         commandList.add(new DeleteCommand(Index.fromOneBased(1)));
         commandList.add(new EditCommand(Index.fromOneBased(1),
                 new EditCommand.EditPersonDescriptor()));
-        commandList.add(new FindCommand(new NameContainsKeywordsPredicate(new ArrayList<>())));
+        commandList.add(new FindCommand(new NameNricContainsKeywordsPredicate(new ArrayList<>())));
         commandList.add(new HistoryCommand(Index.fromOneBased(1)));
         commandList.add(new ListCommand());
 
         String dateStr = "2020-12-01";
-        assert(ContactRecord.isValidContactRecord(dateStr));
+        assert(ContactRecord.isValidContactRecord(dateStr)) : "mark command example should have a valid date";
         commandList.add(new MarkCommand(Index.fromOneBased(1),
                 new ContactRecord(LocalDate.parse(dateStr), "")));
         commandList.add(new HelpCommand());

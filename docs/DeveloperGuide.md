@@ -80,7 +80,7 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands and to navigate the command history.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
@@ -102,7 +102,8 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When a command is executed, it will communicate with `Model` to add the command to the command history.
+1. The command will also communicate with `Model` to perform other operations (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -125,6 +126,7 @@ The `Model` component,
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+* stores a `CommandTextHistory` object that represents the history of commands entered by the user.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -358,7 +360,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 **MSS:**
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
-2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.  
+2. Staff inputs INDEX or NRIC of elderly they want to know the call history of.
 3. ContactMate updates view to show a list of calls along with their corresponding notes made to a specific elderly. 
 
 	Use case ends.
@@ -381,9 +383,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 1. Staff <u>lists elderly contacts by priority (UC02)</u>.  
 2. Staff inputs the NRIC or INDEX of elderly they want to delete.  
-3. ContactMate prompts the Staff for confirmation before deletion.  
-4. Staff confirms the deletion.  
-5. ContactMate deletes the elderly and confirms the successful deletion for Staff.
+3. ContactMate deletes the elderly and confirms the successful deletion for Staff.
 
     Use case ends.
 
@@ -392,10 +392,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
     * Use case ends.  
 * 2a. ContactMate detects an invalid INDEX or invalid NRIC or incorrect command syntax.  
 	* 2a1. ContactMate shows an error message.  
-	* Use case resumes from step 2\.  
-* 3a. Staff cancels the deletion.  
-	* 3a1. ContactMate shows a cancellation message.  
-	* Use case ends.
+	* Use case resumes from step 2\.
 
 **System: ContactMate**  
 **Use case: UC05 \- Add new elderly who have joined the Befriending Program, with appropriate details and fields**  
@@ -424,7 +421,7 @@ Priorities: High (must have) - `****`, Medium (nice to have) - `***`, Low (unlik
 
 ### Non-Functional Requirements
 
-1. A user with above-average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. A user with above-average typing speed (> 40 WPM) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 2. The product should be a single-user system.
 3. The product should not rely on a remote server.
 4. It should accommodate up to 250 elderly without noticeable performance slowdowns during typical usage.

@@ -56,4 +56,20 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Adds the command text to the history.
+     * @param commandText The command text as entered by the user.
+     */
+    void addCommandTextToHistory(String commandText);
+
+    /**
+     * Returns the next command text from the history.
+     */
+    String getNextCommandTextFromHistory();
+
+    /**
+     * Returns the previous command text from the history.
+     */
+    String getPreviousCommandTextFromHistory();
 }

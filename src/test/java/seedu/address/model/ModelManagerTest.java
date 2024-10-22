@@ -18,7 +18,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameNricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -148,6 +148,27 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getPreviousCommandTextFromHistory() {
+        modelManager.addCommandTextToHistory("command1");
+        modelManager.addCommandTextToHistory("command2");
+
+        assertEquals("command2", modelManager.getPreviousCommandTextFromHistory());
+        assertEquals("command1", modelManager.getPreviousCommandTextFromHistory());
+        assertEquals("command1", modelManager.getPreviousCommandTextFromHistory());
+    }
+
+    @Test
+    public void getNextCommandTextFromHistory() {
+        modelManager.addCommandTextToHistory("command1");
+        modelManager.addCommandTextToHistory("command2");
+        assertEquals("", modelManager.getNextCommandTextFromHistory());
+        modelManager.getPreviousCommandTextFromHistory();
+
+        assertEquals("command2", modelManager.getNextCommandTextFromHistory());
+        assertEquals("command2", modelManager.getNextCommandTextFromHistory());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
@@ -172,7 +193,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredPersonList(new NameNricContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
