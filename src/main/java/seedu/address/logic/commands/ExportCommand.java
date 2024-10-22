@@ -18,6 +18,7 @@ import seedu.address.model.student.Student;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
+    public static final CommandType COMMAND_TYPE = CommandType.EXPORTSTUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the current list of students to a CSV file. "
             + "Parameters: FILEPATH "
@@ -30,6 +31,16 @@ public class ExportCommand extends Command {
 
     public ExportCommand(Path filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * Returns Command Type EXPORTSTUDENT
+     *
+     * @return Command Type EXPORTSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
     }
 
     @Override
@@ -50,7 +61,8 @@ public class ExportCommand extends Command {
             }
 
             csvWriter.flush();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), filePath));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, studentList.size(), filePath),
+                    COMMAND_TYPE);
         } catch (IOException e) {
             throw new CommandException(String.format(MESSAGE_FAILURE, e.getMessage()));
         }

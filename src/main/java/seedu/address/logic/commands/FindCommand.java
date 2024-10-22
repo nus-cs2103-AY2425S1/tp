@@ -14,12 +14,14 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 
 /**
- * Finds and lists all students in address book whose name contains any of the argument keywords.
+ * Finds and lists all students in address book whose name contains any of the
+ * argument keywords.
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final CommandType COMMAND_TYPE = CommandType.FINDSTUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all students whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -66,12 +68,23 @@ public class FindCommand extends Command {
         return student -> predicates.stream().allMatch(p -> p.test(student));
     }
 
+    /**
+     * Returns Command Type FINDSTUDENT
+     *
+     * @return Command Type FINDSTUDENT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(combinedPredicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()));
+                String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()),
+                COMMAND_TYPE);
     }
 
     @Override

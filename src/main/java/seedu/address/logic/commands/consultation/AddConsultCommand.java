@@ -8,6 +8,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.consultation.Consultation;
@@ -18,6 +19,7 @@ import seedu.address.model.consultation.Consultation;
 public class AddConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "addconsult";
+    public static final CommandType COMMAND_TYPE = CommandType.ADDCONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a consultation to TAHub. "
             + "Parameters: "
@@ -39,11 +41,22 @@ public class AddConsultCommand extends Command {
         this.newConsult = newConsult;
     }
 
+    /**
+     * Returns Command Type ADDCONSULT
+     *
+     * @return Command Type ADDCONSULT
+     */
+    @Override
+    public CommandType getCommandType() {
+        return COMMAND_TYPE;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.addConsult(newConsult);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)),
+                COMMAND_TYPE);
     }
 
     @Override

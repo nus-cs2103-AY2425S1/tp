@@ -217,4 +217,12 @@ public class FindCommandTest {
     private IsStudentOfCoursePredicate prepareCoursePredicate(String userInput) {
         return new IsStudentOfCoursePredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
+    @Test
+    public void getCommandTypeMethod() {
+        NameContainsKeywordsPredicate firstPredicate =
+                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
+        FindCommand findCommand = new FindCommand(firstPredicate);
+        assertEquals(findCommand.getCommandType(), CommandType.FINDSTUDENT);
+    }
 }

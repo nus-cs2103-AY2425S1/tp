@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONSULT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.nio.file.Paths;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -26,9 +28,16 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
+import seedu.address.logic.commands.consultation.AddToConsultCommand;
+import seedu.address.logic.commands.consultation.DeleteConsultCommand;
+import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.Date;
+import seedu.address.model.consultation.Time;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.ConsultationBuilder;
@@ -57,6 +66,60 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void addConsult_sortsByDate() {
+        AddressBook addressBook = new AddressBook();
+
+        // Create consultations with different dates
+        Consultation consult1 = new Consultation(new Date("2024-10-20"), new Time("14:00"), List.of());
+        Consultation consult2 = new Consultation(new Date("2024-09-15"), new Time("10:00"), List.of());
+        Consultation consult3 = new Consultation(new Date("2024-11-05"), new Time("16:00"), List.of());
+
+        // Add consultations to the address book
+        addressBook.addConsult(consult1);
+        addressBook.addConsult(consult2);
+        addressBook.addConsult(consult3);
+
+        // Ensure consultations are sorted by date
+        ObservableList<Consultation> consultations = addressBook.getConsultList();
+        assertEquals(consult2, consultations.get(0)); // Oldest date first
+        assertEquals(consult1, consultations.get(1));
+        assertEquals(consult3, consultations.get(2)); // Newest date last
+    }
+
+    @Test
+    public void parseCommand_addToConsult() throws Exception {
+        // Construct the input arguments for the AddToConsultCommand
+        Index index = Index.fromOneBased(1);
+        String name1 = "John Doe";
+        String name2 = "Harry Ng";
+
+        String input = String.format("%s %d n/%s n/%s", AddToConsultCommand.COMMAND_WORD,
+                index.getOneBased(), name1, name2);
+
+        AddToConsultCommand command = (AddToConsultCommand) parser.parseCommand(input);
+
+        // Construct the expected command
+        List<Name> expectedNames = List.of(new Name(name1), new Name(name2));
+        AddToConsultCommand expectedCommand = new AddToConsultCommand(index, expectedNames);
+
+        // Assert that the parsed command is equal to the expected command
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_removeFromConsult() throws Exception {
+        Index index = Index.fromOneBased(1);
+        String input = " " + index.getOneBased() + " n/Alex Yeoh n/Harry Ng";
+
+        RemoveFromConsultCommand command = (RemoveFromConsultCommand) parser.parseCommand(
+                RemoveFromConsultCommand.COMMAND_WORD + input);
+
+        List<Name> expectedNames = List.of(new Name("Alex Yeoh"), new Name("Harry Ng"));
+
+        assertEquals(new RemoveFromConsultCommand(index, expectedNames), command);
+    }
+
+    @Test
     public void parseCommand_clear() throws Exception {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
@@ -69,6 +132,15 @@ public class AddressBookParserTest {
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(INDEX_FIRST_STUDENT);
         assertEquals(new DeleteCommand(firstIndexSet), command);
+    }
+
+    @Test
+    public void parseCommand_deleteConsult() throws Exception {
+        DeleteConsultCommand command = (DeleteConsultCommand) parser.parseCommand(
+                DeleteConsultCommand.COMMAND_WORD + " " + INDEX_FIRST_CONSULT.getOneBased());
+        Set<Index> firstIndexSet = new HashSet<>();
+        firstIndexSet.add(INDEX_FIRST_CONSULT);
+        assertEquals(new DeleteConsultCommand(firstIndexSet), command);
     }
 
     @Test
