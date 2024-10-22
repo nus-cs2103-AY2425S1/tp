@@ -49,6 +49,7 @@
     -fx-font-family: "Segoe UI Semibold";
 }
 
+
 .tab-pane {
     -fx-padding: 0 0 0 1;
 }
@@ -136,7 +137,7 @@
 }
 
 .list-cell:filled:selected {
-    -fx-background-color: -ab3-selected-cell-background;
+    -fx-background-color: lightyellow;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -355,6 +356,11 @@
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
     -fx-text-fill: -ab3-darkerText;
+}
+
+#commandTextField:focused {
+    -fx-background-color: derive(-ab3-background, 40%);
+    -fx-border-color: -ab3-button-border;
 }
 
 #filterField, #personListPanel, #personWebpage {
