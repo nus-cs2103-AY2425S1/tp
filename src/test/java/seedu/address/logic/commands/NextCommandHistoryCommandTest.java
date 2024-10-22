@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,6 +39,21 @@ public class NextCommandHistoryCommandTest {
         NextCommandHistoryCommand nextCommandHistoryCommand = new NextCommandHistoryCommand();
         CommandResult commandResult = nextCommandHistoryCommand.execute(modelStub);
         assertEquals("", commandResult.getFeedbackToUser());
+    }
+
+    @Test
+    public void equals() {
+        NextCommandHistoryCommand command = new NextCommandHistoryCommand();
+        assertTrue(command.equals(command));
+
+        NextCommandHistoryCommand commandCopy = new NextCommandHistoryCommand();
+        assertTrue(command.equals(commandCopy));
+
+        assertFalse(command.equals(1));
+        assertFalse(command.equals(null));
+
+        NextCommandHistoryCommand commandDifferent = new NextCommandHistoryCommand();
+        assertTrue(command.equals(commandDifferent));
     }
 
     private class ModelStub implements Model {
