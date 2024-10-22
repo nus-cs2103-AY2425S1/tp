@@ -285,13 +285,13 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 ## Command summary
 
-| Action     | Format                                                                | Examples                                                                                                       |
-|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| Action     | Format                                                                | Examples                                                                                                      |
+|------------|-----------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **Clear**  | `clear`                                                               |                                                                                                                |
-| **Delete** | `delete NRIC`                                                         | `delete S1234567A``                                                                                            |
+| **Clear**  | `clear`                                                               |                                                                                                               |
+| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                            |
 | **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                            |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
-| **List**   | `list`                                                                |                                                                                                                |
-| **Help**   | `help`                                                                |                                                                                                                |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                             |
+| **List**   | `list`                                                                |                                                                                                               |
+| **Help**   | `help`                                                                |                                                                                                               |
 
