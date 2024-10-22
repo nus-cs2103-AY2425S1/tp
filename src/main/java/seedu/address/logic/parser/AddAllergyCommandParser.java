@@ -24,7 +24,7 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
      * Parses the given arguments string and creates an {@link AddAllergyCommand} object.
      *
      * @param args the arguments string containing user input.
-     * @return An {@link AddAllergyCommand} object containing the parsed NRIC and set of allergies.
+     * @return An {@Code AddAllergyCommand} object containing the parsed NRIC and set of allergies.
      * @throws ParseException if the user input does not conform to the expected format or
      *         if the NRIC is not provided.
      */

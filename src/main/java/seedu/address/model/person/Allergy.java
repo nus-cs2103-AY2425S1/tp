@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
+import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
 
 /**
  * Represents an Allergy in the address book.
@@ -10,6 +11,8 @@ import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENG
  */
 public class Allergy implements Comparable<Allergy> {
 
+    public static final String MESSAGE_CONSTRAINTS = "Allergy names should be alphanumeric and not "
+            + "exceed 30 characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+(\\s\\p{Alnum}+)*";
 
     public final String allergyName;
@@ -21,7 +24,8 @@ public class Allergy implements Comparable<Allergy> {
      */
     public Allergy(String allergyName) {
         requireNonNull(allergyName);
-        checkArgument(isValidAllergyName(allergyName), "Allergy" + MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
+        checkArgument(!allergyName.isEmpty(), MESSAGE_EMPTY_FIELD);
+        checkArgument(isValidAllergyName(allergyName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
         this.allergyName = allergyName;
     }
 
