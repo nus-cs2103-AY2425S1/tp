@@ -99,10 +99,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a consultation to TAHub.
+     * Adds a consultation to the address book and sorts the list by date.
      */
-    public void addConsult(Consultation c) {
-        consults.add(c);
+    public void addConsult(Consultation consult) {
+        consults.add(consult);
+        consults.sort((c1, c2) -> c1.getDate().compareTo(c2.getDate())); // Sort consultations by date
     }
 
     /**

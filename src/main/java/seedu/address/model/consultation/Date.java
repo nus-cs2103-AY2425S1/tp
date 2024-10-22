@@ -55,6 +55,19 @@ public class Date {
         }
     }
 
+    /**
+     * Compares this date with another date for ordering.
+     * Returns a negative integer, zero, or a positive integer as this date is before, equal to,
+     * or after the specified date.
+     *
+     * @param otherDate The date to be compared.
+     * @return A negative integer, zero, or a positive integer as this date is less than, equal to,
+     *         or greater than the specified date.
+     */
+    public int compareTo(Date otherDate) {
+        return this.value.compareTo(otherDate.value); // Compare LocalDate objects
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

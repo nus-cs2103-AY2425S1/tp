@@ -32,8 +32,10 @@ public class RemoveFromConsultCommandTest {
         CommandResult result = command.execute(modelStub);
 
         Consultation consultation = modelStub.getFilteredConsultationList().get(0);
-        String expectedMessage = String.format(RemoveFromConsultCommand
-            .MESSAGE_REMOVE_FROM_CONSULT_SUCCESS, consultation);
+        // Use consultation's date and time to format the success message
+        String expectedMessage = String.format(RemoveFromConsultCommand.MESSAGE_REMOVE_FROM_CONSULT_SUCCESS,
+            consultation.getDate().getValue(), consultation.getTime().getValue());
+
         assertEquals(expectedMessage, result.getFeedbackToUser());
     }
 

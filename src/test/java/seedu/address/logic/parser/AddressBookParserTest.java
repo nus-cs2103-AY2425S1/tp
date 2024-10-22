@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -31,7 +32,10 @@ import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.consultation.Date;
+import seedu.address.model.consultation.Time;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
@@ -59,6 +63,27 @@ public class AddressBookParserTest {
         AddConsultCommand command = (AddConsultCommand) parser.parseCommand(
                 AddConsultCommand.COMMAND_WORD + " d/" + consult.getDate() + " t/" + consult.getTime());
         assertEquals(new AddConsultCommand(consult), command);
+    }
+
+    @Test
+    public void addConsult_sortsByDate() {
+        AddressBook addressBook = new AddressBook();
+
+        // Create consultations with different dates
+        Consultation consult1 = new Consultation(new Date("2024-10-20"), new Time("14:00"), List.of());
+        Consultation consult2 = new Consultation(new Date("2024-09-15"), new Time("10:00"), List.of());
+        Consultation consult3 = new Consultation(new Date("2024-11-05"), new Time("16:00"), List.of());
+
+        // Add consultations to the address book
+        addressBook.addConsult(consult1);
+        addressBook.addConsult(consult2);
+        addressBook.addConsult(consult3);
+
+        // Ensure consultations are sorted by date
+        ObservableList<Consultation> consultations = addressBook.getConsultList();
+        assertEquals(consult2, consultations.get(0)); // Oldest date first
+        assertEquals(consult1, consultations.get(1));
+        assertEquals(consult3, consultations.get(2)); // Newest date last
     }
 
     @Test
