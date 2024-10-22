@@ -155,7 +155,8 @@ public class EditCommand extends Command {
         Allergy updatedAllergy = editPersonDescriptor.getAllergy().orElse(personToEdit.getAllergy());
         BloodType updatedBloodType = editPersonDescriptor.getBloodType().orElse(personToEdit.getBloodType());
         HealthRisk updatedHealthRisk = editPersonDescriptor.getHealthRisk().orElse(personToEdit.getHealthRisk());
-        HealthRecord updatedHealthRecord = editPersonDescriptor.getHealthRecord().orElse(personToEdit.getHealthRecord());
+        HealthRecord updatedHealthRecord = editPersonDescriptor.getHealthRecord().
+                orElse(personToEdit.getHealthRecord());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Name updatedNokName = editPersonDescriptor.getNokName().orElse(personToEdit.getNokName());
         Phone updatedNokPhone = editPersonDescriptor.getNokPhone().orElse(personToEdit.getNokPhone());

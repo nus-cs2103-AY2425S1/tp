@@ -31,7 +31,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.healthservice.HealthService;
 import seedu.address.model.person.Appt;
 import seedu.address.model.person.Nric;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
