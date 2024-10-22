@@ -29,7 +29,7 @@ import javafx.stage.Stage;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
+    private static final String UG_URL = "https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#quick-start";
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -160,7 +160,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleUgLink() {
         try {
-            URI link = new URI("https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#quick-start");
+            URI link = new URI(UG_URL);
             Desktop.getDesktop().browse(link);
         } catch (URISyntaxException | IOException ex) {
             resultDisplay.setFeedbackToUser("An error occurred while opening the help page.");
