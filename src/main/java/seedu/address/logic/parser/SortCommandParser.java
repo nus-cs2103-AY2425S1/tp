@@ -2,7 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.Comparator;
 import java.util.List;
@@ -16,7 +17,7 @@ import seedu.address.model.person.Person;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-    private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_TUTORIAL);
+    private List<Prefix> validPrefixes = List.of(PREFIX_NAME, PREFIX_STUDENT_ID);
 
     @Override
     public SortCommand parse(String args) throws ParseException {
