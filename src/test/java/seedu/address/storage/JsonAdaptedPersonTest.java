@@ -217,13 +217,13 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson_carl() throws Exception {
+    public void toModelType_validPersonDetails_returnsPersonCarl() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(CARL);
         assertEquals(CARL, person.toModelType());
     }
 
     @Test
-    public void toModelType_validPersonDetails_returnsPerson_daniel() throws Exception {
+    public void toModelType_validPersonDetails_returnsPersonDaniel() throws Exception {
         JsonAdaptedPerson person = new JsonAdaptedPerson(DANIEL);
         assertEquals(DANIEL, person.toModelType());
     }
