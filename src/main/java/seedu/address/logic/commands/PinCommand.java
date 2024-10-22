@@ -62,4 +62,19 @@ public class PinCommand extends Command {
                     String.join("\n", resultMessages)));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PinCommand)) {
+            return false;
+        }
+
+        PinCommand otherPinCommand = (PinCommand) other;
+        return targetIndices.equals(otherPinCommand.targetIndices);
+    }
 }

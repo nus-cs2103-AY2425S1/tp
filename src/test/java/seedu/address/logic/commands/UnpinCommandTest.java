@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -40,5 +41,27 @@ public class UnpinCommandTest {
         UnpinCommand unpinCommand = new UnpinCommand(List.of(outOfBoundIndex));
 
         assertCommandFailure(unpinCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        UnpinCommand unpinFirstCommand = new UnpinCommand(List.of(INDEX_FIRST_PERSON));
+        UnpinCommand unpinSecondCommand = new UnpinCommand(List.of(INDEX_SECOND_PERSON));
+
+        // same object -> returns true
+        assertTrue(unpinFirstCommand.equals(unpinFirstCommand));
+
+        // same values -> returns true
+        UnpinCommand unpinFirstCommandCopy = new UnpinCommand(List.of(INDEX_FIRST_PERSON));
+        assertTrue(unpinFirstCommand.equals(unpinFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(unpinFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(unpinFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(unpinFirstCommand.equals(unpinSecondCommand));
     }
 }

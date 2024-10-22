@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -76,5 +77,27 @@ public class PinCommandTest {
         PinCommand pinCommand = new PinCommand(List.of(outOfBoundIndex));
 
         assertCommandFailure(pinCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        PinCommand pinFirstCommand = new PinCommand(List.of(INDEX_FIRST_PERSON));
+        PinCommand pinSecondCommand = new PinCommand(List.of(INDEX_SECOND_PERSON));
+
+        // same object -> returns true
+        assertTrue(pinFirstCommand.equals(pinFirstCommand));
+
+        // same values -> returns true
+        PinCommand pinFirstCommandCopy = new PinCommand(List.of(INDEX_FIRST_PERSON));
+        assertTrue(pinFirstCommand.equals(pinFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(pinFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(pinFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(pinFirstCommand.equals(pinSecondCommand));
     }
 }

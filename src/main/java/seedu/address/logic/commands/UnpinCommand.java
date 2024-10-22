@@ -61,4 +61,19 @@ public class UnpinCommand extends Command {
                     String.join("\n", resultMessages)));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof UnpinCommand)) {
+            return false;
+        }
+
+        UnpinCommand otherUnpinCommand = (UnpinCommand) other;
+        return targetIndices.equals(otherUnpinCommand.targetIndices);
+    }
 }
