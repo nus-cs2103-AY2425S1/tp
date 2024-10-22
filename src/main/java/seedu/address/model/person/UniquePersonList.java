@@ -3,11 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -153,5 +157,19 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    public ArrayList<Person> indexSetToPersonSet(Set<Index> personsIndex, Model model) {
+
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        ArrayList<Person> resultingPersonList = new ArrayList<>();
+
+        for (Index i : personsIndex) {
+            Person personToAdd;
+
+        }
+
+        return null;
     }
 }
