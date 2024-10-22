@@ -148,7 +148,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     SocialMedia.class.getSimpleName()));
         }
-        if (!SocialMedia.isValidHandleName(socialMedia)) {
+        if (!SocialMedia.isValidHandleName(socialMedia) && !socialMedia.equals(" ")) {
             throw new IllegalValueException(SocialMedia.MESSAGE_CONSTRAINTS);
         }
         final SocialMedia modelSocialMedia;
