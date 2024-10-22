@@ -57,7 +57,7 @@ public class SchemeCommand extends Command {
         ArrayList<Scheme> schemes = schemeRetrieval.getSchemes();
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < schemes.size(); i++) {
-            result.append((i + 1)).append(schemes.get(i).getSchemeName()).append("\n");
+            result.append((i + 1 + ". ")).append(schemes.get(i).getSchemeName()).append("\n");
         }
         if (result.toString().equals("")) {
             result = new StringBuilder("No schemes available for this family.");

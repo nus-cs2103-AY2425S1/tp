@@ -11,7 +11,5 @@ public abstract class Scheme {
 
     public abstract boolean isEligible(double income, int familySize, int incomePerCapita);
 
-    public String getSchemeName() {
-        return schemeName;
-    }
+    public abstract String getSchemeName();
 }

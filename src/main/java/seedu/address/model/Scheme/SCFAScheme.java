@@ -11,6 +11,7 @@ public class SCFAScheme extends Scheme {
     private final static int familySizeThreshold = 4;
     private final static int incomePerCapitaThreshold = 1125;
 
+    @Override
     public boolean isEligible(double income, int familySize, int incomePerCapita) {
         requireNonNull(income);
         requireNonNull(familySize);
@@ -18,6 +19,11 @@ public class SCFAScheme extends Scheme {
 
         return (income < incomeThreshold && familySize <= familySizeThreshold) ||
                 (incomePerCapita < incomePerCapitaThreshold && familySize > familySizeThreshold);
+    }
+
+    @Override
+    public String getSchemeName() {
+        return schemeName;
     }
 
 }

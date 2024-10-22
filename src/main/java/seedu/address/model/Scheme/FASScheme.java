@@ -11,11 +11,17 @@ public class FASScheme extends Scheme {
 
     public final static int incomePerCapitaThreshold = 750;
 
+    @Override
     public boolean isEligible(double income, int familySize, int incomePerCapita) {
         requireNonNull(income);
         requireNonNull(familySize);
         requireNonNull(incomePerCapita);
 
         return (income < incomeThreshold) || (incomePerCapita < incomePerCapitaThreshold);
+    }
+
+    @Override
+    public String getSchemeName() {
+        return schemeName;
     }
 }
