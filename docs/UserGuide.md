@@ -184,6 +184,20 @@ Format: `github n/NAME`
 Examples:
 * `github n/Betsy` launches the GitHub repository of the person named `Betsy`, using the GitHub username assigned to `Betsy`.
 
+### Viewing a contact's full details : `view`
+
+Opens a window at the side with the full details of the specified person from the address book.
+
+Format: `view [n/NAME]`
+
+* View the full details of the selected contact.
+* The name refers to the full name of the person shown in the displayed person list.
+* Calling `view` without any name parameter closes any windows previously opened by `view`.
+
+Examples:
+* `view n/JohnDoe` opens a window at the side showing the full details of the person named `JohnDoe`.
+* Calling `view n/JohnDoe` followed by `view` closes the window showing the full contact details of `JohnDoe`. 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -233,14 +247,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool`
-**Clear**  | `clear`
-**Delete** | `delete n/NAME`<br> e.g., `delete n/James`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`
-**List**   | `list`
-**Help**   | `help`
-**GitHub**   | `github n/NAME`
+| Action     | Format, Examples                                                                                                                                                                                                                        |
+|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS telegram/TELEGRAM [t/TAG]…​ github/GITHUB` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 telegram/@James t/friend t/colleague github/james-cool` |
+| **Clear**  | `clear`                                                                                                                                                                                                                                 |
+| **Delete** | `delete n/NAME`<br> e.g., `delete n/James`                                                                                                                                                                                              |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [telegram/TELEGRAM] [t/TAG]…​ [github/GITHUB]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                                              |
+| **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`                                                                                                                                                                   |
+| **List**   | `list`                                                                                                                                                                                                                                  |
+| **Help**   | `help`                                                                                                                                                                                                                                  |
+| **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
+| **GitHub** | `github n/NAME`                                                                                                                                                                                                                         |
