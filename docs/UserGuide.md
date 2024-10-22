@@ -154,9 +154,9 @@ Examples:<br>`settle 1 amount/500.00`
 
 <box type="important" header="#### Constraints">
 
-    1. The index refers to the index number shown in the displayed student list.
-    2. The index **must be a positive integer** 1, 2, 3, …​
-    3. Amount must be a positive value and must not be more than owed amount.
+1. The index refers to the index number shown in the displayed student list.
+2. The index **must be a positive integer** 1, 2, 3, …​
+3. Amount must be a positive value and must not be more than owed amount.
 
 </box>
 
