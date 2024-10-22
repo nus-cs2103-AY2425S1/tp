@@ -4,35 +4,35 @@
 
 
 .background {
-    -fx-background-color: derive(#f8e8e8, -20%); /* Light pastel pink */
+    -fx-background-color: derive(#f8e8e8, -20%);
     background-color: #f8e8e8;
 }
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #4b4b4b; /* Soft dark gray */
+    -fx-text-fill: #4b4b4b;
     -fx-opacity: 1;
 }
 
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #4b4b4b; /* Soft dark gray */
+    -fx-text-fill: #4b4b4b;
     -fx-opacity: 1;
 }
 
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #575757; /* Softer dark gray */
+    -fx-text-fill: #575757;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-background-color: #f7e9e9; /* Light pastel pink */
+    -fx-background-color: #f7e9e9;
 }
 
 .tab-pane {
@@ -46,22 +46,22 @@
 }
 
 .table-view {
-    -fx-base: #f6f0f0; /* Soft pastel base */
-    -fx-control-inner-background: #faf4f4; /* Softer white */
-    -fx-background-color: #faf4f4; /* Softer white */
-    -fx-table-cell-border-color: #e1e1e1; /* Light pastel border */
+    -fx-base: #f6f0f0;
+    -fx-control-inner-background: #faf4f4;
+    -fx-background-color: #faf4f4;
+    -fx-table-cell-border-color: #e1e1e1;
     -fx-table-header-border-color: #e1e1e1;
     -fx-padding: 5;
 }
 
 .table-view .column-header-background {
-    -fx-background-color: #f4eeee; /* Light pastel background for header */
+    -fx-background-color: #f4eeee;
 }
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
     -fx-border-width: 0 0 1 0;
-    -fx-background-color: #f4eeee; /* Light pastel background */
+    -fx-background-color: #f4eeee;
     -fx-border-color:
         transparent
         transparent
@@ -73,13 +73,13 @@
 .table-view .column-header .label {
     -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #606060; /* Soft gray */
+    -fx-text-fill: #606060;
     -fx-alignment: center-left;
     -fx-opacity: 1;
 }
 
 .table-view:focused .table-row-cell:filled:focused:selected {
-    -fx-background-color: #c3e7ef; /* Light pastel blue for selection */
+    -fx-background-color: #c3e7ef;
 }
 
 .split-pane:horizontal .split-pane-divider {
@@ -96,7 +96,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: #faf4f4; /* Soft white */
+    -fx-background-color: #faf4f4;
 }
 
 .list-cell {
@@ -123,19 +123,19 @@
 }
 
 .list-cell .label {
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .stack-pane {
@@ -156,26 +156,19 @@
     -fx-background-color: transparent;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .result-display .label {
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
     -fx-padding: 4px;
     -fx-pref-height: 30px;
 }
-/*
-.status-bar-with-border {
-    -fx-background-color: derive(#f4f0f0, -30%);
-    -fx-border-color: derive(#e1e1e1, 25%);
-    -fx-border-width: 1px;
-}
-*/
 
 /* File path display area at bottom */
 .status-bar-with-border {
@@ -184,7 +177,7 @@
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .grid-pane {
@@ -202,7 +195,7 @@
 }
 
 .context-menu .label {
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .menu-bar {
@@ -212,50 +205,64 @@
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
     -fx-opacity: 1;
 }
 
 .menu .left-container {
-    -fx-background-color: #faf4f4; /* Soft white */
+    -fx-background-color: #faf4f4;
+}
+
+.menu:hover {
+    -fx-background-color: #e0f6fb;
+}
+
+.menu-bar .menu-item:focused,
+.menu-bar .menu-item:hovered,
+.menu-bar .menu-item:showing {
+    -fx-background-color: #e0f6fb;
+}
+
+.menu:showing {
+    -fx-background-color: #e0f6fb;
 }
 
 .button {
     -fx-padding: 5 22 5 22;
-    -fx-border-color: #e1e1e1; /* Light pastel gray border */
+    -fx-border-color: #e1e1e1;
     -fx-border-width: 2;
     -fx-background-radius: 0;
-    -fx-background-color: #faf4f4; /* Soft white background */
+    -fx-background-color: #faf4f4;
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
-    -fx-text-fill: #4b4b4b; /* Softer dark gray text */
+    -fx-text-fill: #4b4b4b;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
 .button:hover {
-    -fx-background-color: #e8e0e0; /* Light pastel hover */
+    -fx-background-color: #e8e0e0;
 }
 
 .button:pressed, .button:default:hover:pressed {
-    -fx-background-color: #d8d0d0; /* Slightly darker on press */
-    -fx-text-fill: #4b4b4b; /* Softer dark gray text */
+    -fx-background-color: #d8d0d0;
+    -fx-text-fill: #4b4b4b;
 }
 
 .button:focused {
-    -fx-border-color: #9babc9; /* Pastel blue border on focus */
+    -fx-border-color: #9babc9;
     -fx-border-width: 1;
     -fx-border-style: solid;
 }
 
 .button:disabled, .button:default:disabled {
     -fx-opacity: 0.4;
-    -fx-background-color: #ececec; /* Lighter pastel disabled background */
-    -fx-text-fill: #a0a0a0; /* Gray text */
+    -fx-background-color: #ececec;
+    -fx-text-fill: #a0a0a0;
 }
 
 .button:default {
     -fx-background-color: -fx-focus-color;
-    -fx-text-fill: #606060; /* Soft gray text */
+    -fx-text-fill: #606060;
 }
 
 .button:default:hover {
@@ -263,17 +270,17 @@
 }
 
 .dialog-pane {
-    -fx-background-color: #faf4f4; /* Soft white background */
+    -fx-background-color: #faf4f4;
 }
 
 .dialog-pane > *.button-bar > *.container {
-    -fx-background-color: #faf4f4; /* Soft white button bar background */
+    -fx-background-color: #faf4f4;
 }
 
 .dialog-pane > *.label.content {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #4b4b4b; /* Soft dark gray text */
+    -fx-text-fill: #4b4b4b;
 }
 
 .dialog-pane:header *.header-panel {
@@ -283,7 +290,7 @@
 .dialog-pane:header *.header-panel *.label {
     -fx-font-size: 18px;
     -fx-font-style: italic;
-    -fx-fill: #4b4b4b; /* Soft dark gray */
+    -fx-fill: #4b4b4b;
 }
 
 .scroll-bar {
@@ -311,26 +318,26 @@
 
 #commandTypeLabel {
     -fx-font-size: 11px;
-    -fx-text-fill: #f49393; /* Pastel red for visibility */
+    -fx-text-fill: #f49393;
 }
 
 #commandTextField {
     -fx-background-color: #ece9f7 #f7e0e0 transparent #f7e0e0;
     -fx-background-insets: 0;
-    -fx-border-color: #f7e0e0 #f7e0e0 #7a7575 #f7e0e0; /* Border with pastel bottom */
+    -fx-border-color: #f7e0e0 #f7e0e0 #7a7575 #f7e0e0;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: #7a7575; /* Softer gray text */
+    -fx-text-fill: #7a7575;
 }
 
 #filterField, #personListPanel, #personWebpage {
-    -fx-effect: innershadow(gaussian, white, 10, 0, 0, 0); /* Light shadow */
+    -fx-effect: innershadow(gaussian, white, 10, 0, 0, 0);
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #f7e0e0, transparent, #F9F7E0; /* Lighter pastel background */
+    -fx-background-color: transparent, #f7e0e0, transparent, #f9f7e0;
     -fx-background-radius: 0;
 }
 
@@ -340,8 +347,8 @@
 }
 
 #tags .label {
-    -fx-text-fill: #4b4b4b; /* Soft dark gray text */
-    -fx-background-color: #c3d7ff; /* Pastel blue for tags */
+    -fx-text-fill: #4b4b4b;
+    -fx-background-color: #dbeff3;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
