@@ -18,7 +18,7 @@
         <Label fx:id="id" styleClass="cell_big_label" text="ID:" textFill="#FFD700" style="-fx-font-weight: bold; -fx-font-size: 35px;" />
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" textFill="#FFD700" style="-fx-font-weight: bold; -fx-font-size: 35px;" />
       </HBox>
-      <Line stroke="#FFD700" strokeWidth="2" endX="250"/>
+      <Line fx:id="underline" stroke="#FFD700" strokeWidth="2" endX="250"/>
       <HBox spacing="5">
         <Label styleClass="cell_small_label" text="Phone number:" textFill="#FFD700" style="-fx-font-weight: bold;" />
         <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" textFill="#C2C4C6" />

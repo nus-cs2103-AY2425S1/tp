@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
@@ -15,9 +17,8 @@ import seedu.address.model.person.Person;
  * An UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
-
     private static final String FXML = "PersonListCard.fxml";
-
+    private static final String NO_APPOINTMENT = "Date: , From: , To: ";
     public final Person person;
 
     @FXML
@@ -40,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     private Label property;
     @FXML
     private Label appointment;
+    @FXML
+    private Line underline;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -58,11 +61,16 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
-        appointment.setText(person.getAppointment().toString());
+        if (Objects.equals(person.getAppointment().toString(), NO_APPOINTMENT)) {
+            appointment.setText("");
+        } else {
+            appointment.setText(person.getAppointment().toString());
+        }
         property.setText(person.getProperty().toString());
 
         // Clear existing tags if necessary (in case of reuse)
         tags.getChildren().clear();
+
 
         if (person.getTags().isEmpty()) {
             tags.setVisible(false); // Hide tags section if no tags
