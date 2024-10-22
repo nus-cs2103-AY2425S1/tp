@@ -11,15 +11,15 @@ import seedu.address.model.Model;
 import seedu.address.model.delivery.DeliverySortComparator;
 
 /**
- * Sorts and lists all deliveries in address book by the specified prefix.
+ * Sorts and lists all deliveries in address book by the field.
  */
 public class SortDeliveryCommand extends SortCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_DELIVERY
-            + ": Sorts all deliveries by any of the prefix and "
+            + ": Sorts all deliveries by cost, date time or status and "
             + "displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_DELIVERY + " "
-            + PREFIX_SORT_ORDER + "SORT ORDER ('a' for ascending and 'd' for descending)"
+            + PREFIX_SORT_ORDER + "SORT ORDER ('a' for ascending and 'd' for descending) "
             + PREFIX_SORT_BY + "SORT BY ('s' for status, 'd' for datetime, 'c' for cost)";
 
     private final DeliverySortComparator comparator;

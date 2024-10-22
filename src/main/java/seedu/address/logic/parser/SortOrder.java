@@ -21,7 +21,6 @@ public class SortOrder {
 
     /**
      * Creates a SortOrder object with the corresponding sorting order.
-     * sortOrder is checked before calling this constructor.
      * @param sortOrder Represents ascending with 'a' and descending with 'd'.
      */
     public SortOrder(String sortOrder) {

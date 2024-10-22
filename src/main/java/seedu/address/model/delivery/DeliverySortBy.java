@@ -8,7 +8,7 @@ import java.util.Objects;
 import seedu.address.logic.parser.SortOrder;
 
 /**
- * Represents the sorting order of a sort command.
+ * Represents the field to sort by in a sort delivery command.
  */
 public class DeliverySortBy {
     /**
@@ -23,7 +23,7 @@ public class DeliverySortBy {
             + "'q' for quantity, and it should not be blank";
 
     /**
-     * Sort order must be 'a' or 'd'.
+     * Field to sort by must be 'c', 'd' or 's'.
      */
     public static final String VALIDATION_REGEX = "^[cds]$";
 
@@ -31,7 +31,6 @@ public class DeliverySortBy {
 
     /**
      * Creates a DeliverySortBy object with the corresponding field to sort by.
-     * sortBy is checked before calling this constructor.
      * @param sortBy Represents status with 's', dateTime with 'd', and cost with 'c'.
      */
     public DeliverySortBy(String sortBy) {
@@ -52,6 +51,9 @@ public class DeliverySortBy {
         }
     }
 
+    /**
+     * Returns the corresponding comparator of {@code sortBy} which compares by the {@code sortOrder}.
+     */
     public static DeliverySortComparator getDeliverySortComparator(SortOrder sortOrder, DeliverySortBy deliverySortBy) {
         switch (deliverySortBy.getSortBy()) {
         case C:
@@ -70,12 +72,15 @@ public class DeliverySortBy {
     }
 
     /**
-     * Returns true if a given string is a valid sort order
+     * Returns true if a given string is a valid field to sort by.
      */
     public static boolean isValidSortBy(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the corresponding field that is being sorted by.
+     */
     @Override
     public String toString() {
         switch (sortBy) {

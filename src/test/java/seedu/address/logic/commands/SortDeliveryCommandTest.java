@@ -51,7 +51,7 @@ public class SortDeliveryCommandTest {
         // null -> returns false
         assertFalse(sortFirstDeliveryCommand.equals(null));
 
-        // different person -> returns false
+        // different command -> returns false
         assertFalse(sortFirstDeliveryCommand.equals(sortSecondDeliveryCommand));
     }
 
