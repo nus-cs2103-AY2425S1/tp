@@ -4,18 +4,24 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-AddressBook *-right-> "1" UniquecompanyList
+AddressBook *-right-> "1" UniqueCompanyList
 AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniquecompanyList
-UniqueTagList -[hidden]down- UniquecompanyList
+UniqueTagList -[hidden]down- UniqueCompanyList
 
 UniqueTagList -right-> "*" Tag
-UniquecompanyList -right-> company
+UniqueCompanyList -right-> Company
 
-company -up-> "*" Tag
+Company -up-> "*" Tag
 
-company *--> Name
-company *--> Phone
-company *--> Email
-company *--> Address
+Company *--> "*" Application
+Company *--> Name
+Company *--> Phone
+Company *--> Email
+Company *--> Address
+
+Application *--> Name
+Application *--> Description
+Application *--> AppStatus
+
+Application -[hidden]right- Name
 @enduml
