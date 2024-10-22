@@ -49,6 +49,8 @@ public abstract class Tutorial {
      */
     public abstract boolean setAttendance(Date date, StudentId target);
 
+    public abstract boolean setAbsent(Date date, StudentId target);
+
     /**
      * Returns the name of the tutorial.
      *
@@ -108,16 +110,6 @@ public abstract class Tutorial {
      * @throws NoTutorialException if called on a None instance.
      */
     public abstract TutorialId getTutorialId();
-
-    /**
-     * Marks attendance for a specific student on a given tutorial date.
-     *
-     * @param student The student to mark attendance for.
-     * @param tutDate The tutorial date.
-     * @throws TutDateNotFoundException if the tutorial date is not found.
-     * @throws NoTutorialException if called on a None instance.
-     */
-    public abstract void markAttendance(Student student, TutDate tutDate);
 
     /**
      * Checks if a student is in the list of students.
@@ -195,6 +187,11 @@ public abstract class Tutorial {
         }
 
         @Override
+        public boolean setAbsent(Date date, StudentId target) {
+            throw new NoTutorialException();
+        }
+
+        @Override
         public TutName getTutName() {
             return new TutName("empty");
         }
@@ -228,11 +225,6 @@ public abstract class Tutorial {
         @Override
         public TutorialId getTutorialId() {
             return tutorialId;
-        }
-
-        @Override
-        public void markAttendance(Student student, TutDate tutorialDate) throws TutDateNotFoundException {
-            throw new NoTutorialException();
         }
 
         @Override
@@ -293,6 +285,27 @@ public abstract class Tutorial {
         }
 
         @Override
+        public boolean setAbsent(Date date, StudentId target) {
+            requireNonNull(date);
+            requireNonNull(target);
+            if (!tutDates.containsKey(date)) {
+                throw new TutDateNotFoundException();
+            }
+            TutDate tutDate = tutDates.get(date);
+            return students.stream()
+                    .filter(s -> s.getStudentId().equals(target))
+                    .findFirst()
+                    .map(student -> {
+                        student.setAbsent(tutDate);
+                        tutDate.remove(target);
+                        if (tutDate.isEmptyStudent()) {
+                            tutDates.remove(date, tutDate);
+                        }
+                        return true;
+                    }).orElse(false);
+        }
+
+        @Override
         public TutName getTutName() {
             return this.tutName;
         }
@@ -326,18 +339,6 @@ public abstract class Tutorial {
         @Override
         public TutorialId getTutorialId() {
             return tutorialId;
-        }
-
-        @Override
-        public void markAttendance(Student student, TutDate tutorialDate) throws TutDateNotFoundException {
-            if (!isValidTutorialDate(tutorialDate)) {
-                throw new TutDateNotFoundException();
-            }
-            if (!studentInList(student)) {
-                add(student);
-            }
-            addTutorialDate(tutorialDate);
-            tutorialDate.add(student.getStudentId());
         }
 
         @Override

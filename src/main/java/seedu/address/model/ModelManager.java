@@ -166,6 +166,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean setStudentAbsent(StudentId target, TutorialId tut, Date date) {
+        return tutorials.getTutorials().stream()
+                .filter(s -> s.getTutorialId().equals(tut))
+                .findFirst()
+                .map(tutorial -> tutorial.setAbsent(date, target))
+                .orElse(false);
+    }
+
+    @Override
     public void deleteTutorial(Tutorial tutorial) {
         requireNonNull(tutorial);
         tutorials.getTutorials()
