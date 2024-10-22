@@ -4,6 +4,10 @@ import static seedu.address.storage.JsonAdaptedDelivery.MISSING_FIELD_MESSAGE_FO
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalDeliveries.APPLES;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,7 +22,7 @@ import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 
 public class JsonAdaptedDeliveryTest {
-    private static final String INVALID_ITEM_NAME = "$%@";
+    private static final List<JsonAdaptedItem> INVALID_ITEM_NAME = Arrays.asList(new JsonAdaptedItem("$%"));
     private static final String INVALID_ADDRESS = "123";
     private static final String INVALID_COST = "thirty";
     private static final String INVALID_DATE = "tomorrow";
@@ -28,7 +32,9 @@ public class JsonAdaptedDeliveryTest {
     private static final String INVALID_ARCHIVE = "yes";
 
     private static final String VALID_DELIVERY_ID = APPLES.getDeliveryId().value;
-    private static final String VALID_ITEM_NAME = APPLES.getItemName().value;
+    private static final List<JsonAdaptedItem> VALID_ITEM_NAME = APPLES.getItems().stream()
+            .map(JsonAdaptedItem::new)
+            .collect(Collectors.toList());
     private static final String VALID_ADDRESS = APPLES.getAddress().value;
     private static final String VALID_COST = APPLES.getCost().value;
     private static final String VALID_DATE = String.valueOf(APPLES.getDate().value);
@@ -56,11 +62,11 @@ public class JsonAdaptedDeliveryTest {
     }
 
     @Test
-    public void toModelType_nullItemName_throwsIllegalValueException() {
+    public void toModelType_emptyItems_throwsIllegalValueException() {
         JsonAdaptedDelivery delivery =
                 new JsonAdaptedDelivery(VALID_DELIVERY_ID, null, VALID_ADDRESS, VALID_COST, VALID_DATE,
                         VALID_TIME, VALID_ETA, VALID_STATUS, VALID_ARCHIVE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ItemName.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "items");
         assertThrows(IllegalValueException.class, expectedMessage, delivery::toModelType);
     }
 

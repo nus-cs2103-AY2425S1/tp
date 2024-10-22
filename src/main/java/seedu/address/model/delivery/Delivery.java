@@ -4,6 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Address;
@@ -15,7 +18,7 @@ import seedu.address.model.person.Address;
 public class Delivery {
 
     private final DeliveryId deliveryId;
-    private final ItemName itemName;
+    private final Set<ItemName> items = new HashSet<>();
     private final Address address;
     private final Cost cost;
     private final Date date;
@@ -27,11 +30,10 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(DeliveryId deliveryId, ItemName itemName, Address address, Cost cost, Date date, Time time, Eta eta,
-                    Status status, Archive archive) {
-        requireAllNonNull(deliveryId, itemName, address, cost, date, time, eta, status);
+    public Delivery(DeliveryId deliveryId, Set<ItemName> items, Address address, Cost cost, Date date, Time time,
+                    Eta eta, Status status, Archive archive) {
+        requireAllNonNull(deliveryId, address, cost, date, time, eta, status, archive, items);
         this.deliveryId = deliveryId;
-        this.itemName = itemName;
         this.address = address;
         this.cost = cost;
         this.date = date;
@@ -39,18 +41,15 @@ public class Delivery {
         this.eta = eta;
         this.status = status;
         this.archive = archive;
+        this.items.addAll(items);
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Delivery(ItemName itemName, Address address, Cost cost, Eta eta, Status status, Archive archive) {
-        this(new DeliveryId(), itemName, address, cost, new Date(LocalDate.now().toString()),
+    public Delivery(Set<ItemName> items, Address address, Cost cost, Eta eta, Status status, Archive archive) {
+        this(new DeliveryId(), items, address, cost, new Date(LocalDate.now().toString()),
                 new Time(LocalTime.now().toString()), eta, status, archive);
-    }
-
-    public ItemName getItemName() {
-        return itemName;
     }
 
     public Address getAddress() {
@@ -86,6 +85,14 @@ public class Delivery {
     }
 
     /**
+     * Returns an immutable item set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<ItemName> getItems() {
+        return Collections.unmodifiableSet(items);
+    }
+
+    /**
      * Returns true if both deliveries are equal.
      */
     public boolean isSameDelivery(Delivery otherDelivery) {
@@ -112,26 +119,28 @@ public class Delivery {
         }
 
         Delivery otherDelivery = (Delivery) other;
-        return itemName.equals(otherDelivery.itemName)
-                && address.equals(otherDelivery.address)
+        return address.equals(otherDelivery.address)
                 && cost.equals(otherDelivery.cost)
                 && date.equals(otherDelivery.date)
                 && time.equals(otherDelivery.time)
                 && eta.equals(otherDelivery.eta)
-                && deliveryId.equals(otherDelivery.deliveryId);
+                && deliveryId.equals(otherDelivery.deliveryId)
+                && archive.equals(otherDelivery.archive)
+                && items.equals(otherDelivery.items);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("deliveryId", deliveryId)
-                .add("itemName", itemName)
+                .add("items", items)
                 .add("date", date)
                 .add("time", time)
                 .add("eta", eta)
                 .add("address", address)
                 .add("cost", cost)
                 .add("status", status)
+                .add("archive", archive)
                 .toString();
     }
 
