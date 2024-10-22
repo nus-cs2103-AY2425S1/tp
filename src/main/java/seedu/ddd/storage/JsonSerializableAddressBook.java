@@ -64,7 +64,7 @@ class JsonSerializableAddressBook {
             }
             addressBook.addContact(contact);
         }
-        addressBook.setNextId(nextId);
+        AddressBook.setNextId(nextId);
         return addressBook;
     }
 }
