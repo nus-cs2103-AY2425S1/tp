@@ -46,13 +46,8 @@ public class AddPropertyToSellParser implements Parser<AddPropertyToSellCommand>
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            /*throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddPropertyToSellCommand.MESSAGE_USAGE), pe);*/
             throw new ParseException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-
-        // Removed this condition, not sure what it means :/
-        // || !argMultimap.getPreamble().isEmpty()
         if (!arePrefixesPresent(argMultimap, PREFIX_HOUSING_TYPE, PREFIX_SELLING_PRICE,
                 PREFIX_POSTAL_CODE, PREFIX_UNIT_NUMBER)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

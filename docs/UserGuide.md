@@ -41,6 +41,8 @@ It has the benefits of a Graphical User Interface (GUI). If you can type fast, N
 
    * `addBuy 1 ht/c bp/1650000 pc/567510 un/10-65 t/Extremely spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1.
 
+   * `addBuy 1 ht/c bp/1750000 pc/567510 un/10-65 t/Extremely spacious t/Near MRT` : Adds a property of type `Condo` to the Address Book for the contact at index 1. 
+
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
    * `clear` : Deletes all contacts.
@@ -114,7 +116,7 @@ Examples:
 * `addBuy 1 ht/c bp/1650000 pc/189651 un/5-10`
 * `addBuy 5 ht/h bp/735000 pc/138600 un/30-05 t/Extremely spacious/Near MRT`
 
-### Adding a property to buy: `addSell`
+### Adding a property to sell: `addSell`
 
 Adds a property which has to be sold to the address book. The property is associated to a contact in the Address Book.
 
