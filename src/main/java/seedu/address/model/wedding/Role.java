@@ -3,8 +3,6 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.model.person.Name;
-
 /**
  * Represents a Role of a Wedding.
  */
@@ -44,7 +42,7 @@ public class Role {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Name)) {
+        if (!(other instanceof Role)) {
             return false;
         }
 

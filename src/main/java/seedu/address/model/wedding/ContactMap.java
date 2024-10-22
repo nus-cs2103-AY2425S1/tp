@@ -5,6 +5,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -14,10 +16,10 @@ import seedu.address.model.person.Person;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class ContactMap {
-    private HashMap<Role, Person> map;
+    private Map<Role, Person> map;
 
     /**
-     * Creates an empty ContactList
+     * Creates an empty ContactMap.
      */
     public ContactMap() {
         this.map = new HashMap<>();
@@ -38,11 +40,12 @@ public class ContactMap {
      *
      * @param role role to be added.
      * @param person person with the role.
+     * @throws IllegalArgumentException if the role is already assigned.
      */
     public void addToMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (this.hasRole(role)) {
-            // throw exception
+            throw new IllegalArgumentException("This role is already assigned.");
         }
         map.put(role, person);
     }
@@ -56,7 +59,7 @@ public class ContactMap {
     public void removeFromMap(Role role, Person person) {
         requireAllNonNull(role, person);
         if (!this.hasRole(role)) {
-            // throw exception
+            throw new IllegalArgumentException("This role is not assigned.");
         }
         map.remove(role, person);
     }
@@ -67,12 +70,9 @@ public class ContactMap {
      * @param role person of this role.
      * @return person of role.
      */
-    public Person getPersonOfRole(Role role) {
+    public Optional<Person> getPersonOfRole(Role role) {
         requireNonNull(role);
-        if (!this.hasRole(role)) {
-            // throw exception
-        }
-        return map.get(role);
+        return Optional.ofNullable(map.get(role));
     }
 
     @Override
@@ -103,6 +103,6 @@ public class ContactMap {
 
     @Override
     public int hashCode() {
-        return map.hashCode();
+        return Objects.hash(map);
     }
 }
