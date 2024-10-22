@@ -29,6 +29,13 @@ public class DeliveryList {
     }
 
     /**
+     * Returns the number of delivery in the list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
+    /**
      * Adds a delivery to the list.
      */
     public void add(Delivery toAdd) {

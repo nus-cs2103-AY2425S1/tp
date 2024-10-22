@@ -71,6 +71,13 @@ public class Person {
     }
 
     /**
+     * Returns the number of delivery in the deliveryList
+     */
+    public int getDeliveryListSize() {
+        return deliveryList.size();
+    }
+
+    /**
      * Sets the delivery list of this person.
      * <p>
      * Mainly used when loading a person's information from storage.

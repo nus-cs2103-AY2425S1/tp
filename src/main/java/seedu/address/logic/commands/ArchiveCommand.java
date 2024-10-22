@@ -1,0 +1,198 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.model.Model;
+import seedu.address.model.delivery.Archive;
+import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.Eta;
+import seedu.address.model.delivery.ItemName;
+import seedu.address.model.delivery.Status;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Person;
+import seedu.address.model.util.DeliveryAction;
+import seedu.address.ui.InspectWindow;
+
+
+/**
+ * Archive a delivery identified using it's displayed index from the address book.
+ */
+
+public class ArchiveCommand extends Command {
+
+    public static final String COMMAND_WORD = "archive";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Archives the delivery identified by the index number used in the displayed delivery list.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
+
+    public static final String MESSAGE_ARCHIVED_DELIVERY_SUCCESS = "Archived Delivery for %1$s: %2$s";
+
+    private final List<Index> indexList;
+
+    public ArchiveCommand(List<Index> indexList) {
+        this.indexList = indexList;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        // Sort the indexList in descending order
+        indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
+
+        if (!AddressBookParser.getInspect()) {
+            return handleDeliveryArchive(model);
+        } else {
+            throw new CommandException("Cannot archive contact!");
+        }
+    }
+
+    /**
+     * Handles the deletion of deliveries from the inspected person's delivery list based on the indexList.
+     *
+     * @param model The model containing the inspected person.
+     * @return A CommandResult containing a success message with details of the deleted deliveries.
+     * @throws CommandException if any index in the indexList is out of bounds or if duplicates are found.
+     */
+    private CommandResult handleDeliveryArchive(Model model) throws CommandException {
+        requireNonNull(model);
+        Person inspectedPerson = InspectWindow.getInspectedPerson();
+        List<Delivery> deliveryList = inspectedPerson.getDeliveryList();
+        validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
+
+        List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
+
+        return new CommandResult(String.format(
+                MESSAGE_ARCHIVED_DELIVERY_SUCCESS,
+                inspectedPerson.getName(),
+                Messages.formatDeliveryList(reverseList(deliveryToArchiveList))),
+                DeliveryAction.ARCHIVE);
+    }
+
+    /**
+     * Validates the indexes in the indexList to ensure none are out of bounds or duplicates.
+     *
+     * @param listSize The size of the list from which items are to be deleted.
+     * @param indexList The list of indexes to be validated.
+     * @throws CommandException if any index is out of bounds or if duplicates are found.
+     */
+    private void validateIndexes(int listSize, List<Index> indexList) throws CommandException {
+        boolean duplicate = hasDuplicates(indexList);
+        for (Index targetIndex : indexList) {
+            if (targetIndex.getZeroBased() >= listSize || duplicate) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
+        }
+    }
+
+    /**
+     * Archive deliveries from the inspected person's delivery list based on the provided indexList.
+     *
+     * @param inspectedPerson The person whose deliveries are to be archived.
+     * @param deliveryList The list of deliveries to archive from.
+     * @return A list of deliveries that were archived.
+     */
+    private List<Delivery> archiveDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
+        List<Delivery> deliveryToArchiveList = new ArrayList<>();
+        for (Index targetIndex : indexList) {
+            Delivery deliveryToArchive = deliveryList.get(targetIndex.getZeroBased());
+            Delivery archivedDelivery = createArchivedDelivery(deliveryToArchive);
+            inspectedPerson.setDelivery(deliveryToArchive, archivedDelivery);
+        }
+        return deliveryToArchiveList;
+    }
+
+    /**
+     * Creates and returns a {@code Delivery} with the details of {@code toEdit}
+     * edited with {@code descriptor}.
+     */
+    private static Delivery createArchivedDelivery(Delivery toArchive) {
+        assert toArchive != null;
+
+        ItemName itemName = toArchive.getItemName();
+        Address updatedAddress = toArchive.getAddress();
+        Cost updatedCost = toArchive.getCost();
+        Eta updatedEta = toArchive.getEta();
+        Status updatedStatus = toArchive.getStatus();
+
+        Archive archive = new Archive(true);
+
+        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta, updatedStatus, archive);
+    }
+
+    /**
+     * Reverses the order of the provided list.
+     *
+     * @param <T> The type of the elements in the list.
+     * @param list The list to be reversed.
+     * @return A reversed copy of the provided list.
+     */
+    private <T> List<T> reverseList(List<T> list) {
+        List<T> reversedList = new ArrayList<>(list);
+        Collections.reverse(reversedList);
+        return reversedList;
+    }
+
+    /**
+     * Checks if a list of indexes has any duplicates.
+     *
+     * @param indexList the list of indexes to check
+     * @return true if the list has duplicates, false otherwise
+     */
+    private boolean hasDuplicates(List<Index> indexList) {
+        Set<Integer> uniqueIndices = new HashSet<>();
+        for (Index index : indexList) {
+            if (!uniqueIndices.add(index.getZeroBased())) {
+                return true; // duplicate found
+            }
+        }
+        return false; // no duplicates found
+    }
+
+    /**
+     * Check if the list to be archived are exactly equal
+     *
+     * @param other
+     * @return
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ArchiveCommand)) {
+            return false;
+        }
+
+        ArchiveCommand otherArchiveCommand = (ArchiveCommand) other;
+        boolean output = true;
+        for (int i = 0; i < indexList.size(); i++) {
+            Index targetIndex = indexList.get(i);
+            Index otherIndex = otherArchiveCommand.indexList.get(i);
+            output = output && targetIndex.equals(otherIndex);
+        }
+        return output;
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", indexList != null ? indexList.toString() : "[]")
+                .toString();
+    }
+}
