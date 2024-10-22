@@ -12,7 +12,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
-
+# Table of Contents
+1. [Quick start](#quick-start)
+2. [Features](#features)
+   1. [Viewing help : `help`](#viewing-help--help)
+   2. [Adding a company: `add`](#adding-a-company-add)
+   3. [Listing all companies : `list`](#listing-all-companies--list)
+   4. [Editing a company : `edit`](#editing-a-company--edit)
+   5. [Locating companies by name: `find`](#locating-companies-by-name-find)
+   6. [Deleting a company : `delete`](#deleting-a-company--delete)
+   7. [Clearing all entries : `clear`](#clearing-all-entries--clear)
+   8. [Exiting the program : `exit`](#exiting-the-program--exit)
+3. [FAQ](#faq)
+4. [Command Summary](#command-summary)
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -28,13 +40,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all companies.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.google-career-url.com` : Adds a company named `Google` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `clear` : Deletes all companies.
 
    * `exit` : Exits the app.
 
@@ -49,13 +61,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Google`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/Google t/bigTech` or as `n/Google`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/bigTech`, `t/bigTech t/BigCompany` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
@@ -87,8 +99,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 </box>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Google p/98765432 e/google@example.com a/John street, block 123, #01-01 cp/www.goole-career-url.com`
+* `add n/Meta t/bigTech e/meta@example.com a/Newgate Prison p/1234567 t/criminal cp/www.meta-career-url.com`
 
 ### Listing all companies : `list`
 
@@ -110,8 +122,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd company to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/grab@example.com` Edits the phone number and email address of the 1st company to be `91234567` and `grab@example.com` respectively.
+*  `edit 2 n/Grab t/` Edits the name of the 2nd company to be `Grab` and clears all existing tags.
 
 ### Locating companies by name: `find`
 
