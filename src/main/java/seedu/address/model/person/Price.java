@@ -41,4 +41,8 @@ public class Price {
     public int hashCode() {
         return value.hashCode();
     }
+
+    public int compareTo(Price price) {
+        return Integer.parseInt(this.value) - Integer.parseInt(price.value);
+    }
 }
