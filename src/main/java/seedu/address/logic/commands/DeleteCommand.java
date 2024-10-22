@@ -5,10 +5,13 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -30,6 +33,7 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted People:\n%s";
     private final Index[] targetIndexes;
     private ArrayList<Person> personsToDelete = new ArrayList<>();
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
 
     /**
@@ -61,7 +65,10 @@ public class DeleteCommand extends Command {
             }
             personsToDelete.add(lastShownList.get(targetIndexes[i].getZeroBased()));
         }
-
+        logger.info("----------------[PEOPLE TO BE DELETED]["
+                + Arrays.stream(targetIndexes)
+                .map(index -> String.valueOf(index.getOneBased())) // Convert to String
+                .collect(Collectors.joining(", ")) + "]");
         s = personsToDelete.stream()
                 .peek(person -> model.deletePerson(person))
                 .map(person -> Messages.format(person))

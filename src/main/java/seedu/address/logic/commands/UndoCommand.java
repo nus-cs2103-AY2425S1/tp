@@ -3,8 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,6 +31,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_DELETE = "%s have been added back to SocialBook";
     public static final String MESSAGE_UNDO_CLEAR = "Here is the list before clearing";
     private final ArrayList<Command> pastCommands;
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     /**
      * Loads the past commands into constructor.
@@ -47,6 +51,7 @@ public class UndoCommand extends Command {
         }
         Command latestCommand = pastCommands.get(pastCommands.size() - 1);
         String latestCommandWord = latestCommand.getCommandWord();
+        logger.info("----------------[COMMAND UNDONE][" + latestCommandWord + "]");
         String resultMessage = "";
 
         switch (latestCommandWord) {
