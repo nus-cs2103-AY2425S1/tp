@@ -18,13 +18,12 @@ public abstract class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
     public static final String COMMAND_WORD_ALT = "rmk";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " | " + COMMAND_WORD_ALT
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " (short form: " + COMMAND_WORD_ALT + ")"
             + ": Adds or deletes a remark for the student identified by the index number in the displayed student list."
-            + "\nParameters: INDEX -a REMARK | INDEX -d REMARK_INDEX\n"
-            + "Example to add remark: " + COMMAND_WORD + " 1 -a This is a new remark | "
-            + COMMAND_WORD_ALT + " 1 -a This is a new remark\n"
-            + "Example to delete remark: " + COMMAND_WORD + " 1 -d 2 | "
-            + COMMAND_WORD_ALT + " 1 -d 2";
+            + "\nParameters: INDEX (must be a positive integer) -a REMARK or "
+            + "-d REMARK_INDEX (must be a positive integer)\n"
+            + "Example to add remark: " + COMMAND_WORD + " 1 -a This is a new remark\n"
+            + "Example to delete remark: " + COMMAND_WORD + " 1 -d 2";
 
     protected final Index personIndex;
 
