@@ -19,7 +19,8 @@ import seedu.address.model.student.Student;
 class JsonAdaptedConsultation {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Consultation's %s field is missing!";
-    public static final String STUDENT_NOT_FOUND_MESSAGE = "Student %s does not exist in TAHub!";
+    public static final String STUDENT_NOT_FOUND_MESSAGE =
+            "Student %s does not exist in TAHub, or details do not match!";
     private final String date;
     private final String time;
     private final List<JsonAdaptedStudent> students = new ArrayList<>();
@@ -78,7 +79,8 @@ class JsonAdaptedConsultation {
             Student modelStudent = student.toModelType();
             // check to ensure student data matches an existing student
             if (!addressBook.hasStudent(modelStudent)) {
-                throw new IllegalValueException(String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent));
+                throw new IllegalValueException(
+                        String.format(STUDENT_NOT_FOUND_MESSAGE, modelStudent.getName().fullName));
             }
             modelStudents.add(modelStudent);
         }
