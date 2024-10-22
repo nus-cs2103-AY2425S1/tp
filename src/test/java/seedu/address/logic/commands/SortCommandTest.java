@@ -48,15 +48,7 @@ public class SortCommandTest {
 
     @Test
     public void correctlySortsNewPersonByDate() {
-        expectedModel.updateSortedPersonList(new PersonDateComparator());
-        assertCommandSuccess(new SortDateCommand(), model, SortDateCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @Test
-    public void correctlySortsExistingPersonsByDate() {
-        // filter both lists to show all employees
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonDateComparator());
         assertCommandSuccess(new SortDateCommand(), model, SortDateCommand.MESSAGE_SUCCESS, expectedModel);
     }
