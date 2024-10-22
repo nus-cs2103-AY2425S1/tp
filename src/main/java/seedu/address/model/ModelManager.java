@@ -105,6 +105,15 @@ public class ModelManager implements Model {
     public void deletePerson(Person target) {
         appointmentManager.update();
         addressBook.removePerson(target);
+        // want to check for roles and remove the links between this person, and
+        // the patients/ caregiver based on the role
+        for (Nric patientnric : target.getPatients()) {
+            addressBook.deleteLink(addressBook.getPerson(patientnric), target);
+        }
+        for (Nric caregivernric : target.getCaregivers()) {
+            addressBook.deleteLink(target, addressBook.getPerson(caregivernric));
+        }
+
     }
 
     @Override

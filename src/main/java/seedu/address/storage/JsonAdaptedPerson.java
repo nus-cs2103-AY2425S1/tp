@@ -37,9 +37,10 @@ class JsonAdaptedPerson {
     private final List<Nric> caregivers = new ArrayList<>();
     private final List<Nric> patients = new ArrayList<>();
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedPerson} with the given person details with notes.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("nric") String nric,
@@ -48,7 +49,8 @@ class JsonAdaptedPerson {
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("roles") List<JsonAdaptedRole> roles,
             @JsonProperty("caregivers") List<Nric> caregivers,
             @JsonProperty("patients") List<Nric> patients,
-            @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments) {
+            @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
+            @JsonProperty("notes") List<JsonAdaptedNote> notes) {
         this.name = name;
         this.nric = nric;
         this.phone = phone;
@@ -70,6 +72,9 @@ class JsonAdaptedPerson {
         if (appointments != null) {
             this.appointments.addAll(appointments);
         }
+        if (notes != null) {
+            this.notes.addAll(notes);
+        }
     }
 
     /**
@@ -89,6 +94,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedAppointment::new)
                 .collect(Collectors.toList());
         appointments.addAll(adaptedAppointments);
+        notes.addAll(source.getNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
     }
 
     /**
@@ -169,6 +175,9 @@ class JsonAdaptedPerson {
                 modelCaregivers, modelPatients);
         for (Appointment appointment : appointmentList) {
             person.addAppointment(appointment);
+        }
+        for (JsonAdaptedNote note : notes) {
+            person.addNote(note.toModelType());
         }
         return person;
     }

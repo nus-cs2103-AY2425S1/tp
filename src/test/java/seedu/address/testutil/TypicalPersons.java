@@ -34,8 +34,9 @@ public class TypicalPersons {
             .withNric("S6283947C")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends")
+            .withTags("backPain")
             .withRole("PATIENT")
+            .withNote("came for backpain")
             .build();
 
     public static final Appointment BENSON_APPOINTMENT = new Appointment(
@@ -46,8 +47,9 @@ public class TypicalPersons {
             .withNric("S7012345B")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withTags("owesMoney", "friends")
+            .withTags("shortOfTime", "nurseBefore")
             .withRole("PATIENT", "CAREGIVER")
+            .withNote("came for arthritis")
             .withAppointments(BENSON_APPOINTMENT)
             .build();
 
