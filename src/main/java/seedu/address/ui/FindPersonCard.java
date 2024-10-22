@@ -1,16 +1,15 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import seedu.address.model.person.Person;
 
-import java.util.Comparator;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -86,10 +85,18 @@ public class FindPersonCard extends UiPart<Region> {
                     notes.getChildren().add(noteLabel);
                 });
         person.getAppointments().stream()
+                .sorted(Comparator.comparing(appointment -> appointment.getStartTime()))
                 .forEach(appointment -> {
-                    Label appointmentLabel = new Label( appointment.getName() + " From: " +
-                            appointment.getStartTime() + " To: " + appointment.getEndTime());
+                    String status = appointment.isCompleted() ? "Completed" : "Scheduled";
+                    Label appointmentLabel = new Label(" From: " + appointment.getStartTime()
+                            + "    To: " + appointment.getEndTime()
+                            + "    Status: " + status);
                     appointmentLabel.getStyleClass().add("appointmentLabel");
+                    if (!appointment.isCompleted()) {
+                        appointmentLabel.setStyle("-fx-text-fill: red;");
+                    } else {
+                        appointmentLabel.setStyle("-fx-text-fill: green;");
+                    }
                     appointments.getChildren().add(appointmentLabel);
                 });
 
