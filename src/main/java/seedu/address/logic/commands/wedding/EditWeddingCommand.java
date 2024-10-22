@@ -32,7 +32,7 @@ import seedu.address.model.wedding.WeddingName;
  */
 public class EditWeddingCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit-wedding";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the wedding identified "
             + "by the index number used in the displayed wedding list. "
