@@ -184,7 +184,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 >
 > Examples:
 > * `find John` returns `john` and `John Doe`
-> * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+> * `find alex david` returns `Alex Yeoh`, `David Li`
 >  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Back to Table of Contents](#table-of-contents)
@@ -207,7 +207,7 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
 >
 > Examples:
-> * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`<br>
+> * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -226,7 +226,7 @@ Format: `find NRIC`
 > * Patients NRIC follows the NRIC constraint mentioned in the [Parameter Details](#Parameter-Details) section.
 >
 > Examples:
-> * `findNric S1234567A` returns `Alex Yeoh`<br>
+> * `findNric S1234567A` returns `Alex Yeoh`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -290,25 +290,25 @@ MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/
 
 ## FAQ
 
-### **Q**: How do I transfer my data to another Computer?<br>
+### **Q**: How do I transfer my data to another Computer?
  - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.<br>
 
-### **Q**: How do we open the command terminal?<br>
- - **A**: Windows - Press `Win + R`, type `cmd` and press `Enter`.<br>
- - **A**: Mac - Press `Cmd + Space`, type `terminal` and press `Enter`.<br>
- - **A**: Linux - Press `Ctrl + Alt + T` to open the command terminal.<br>
+### **Q**: How do we open the command terminal?
+ - **A**: Windows - Press `Win + R`, type `cmd` and press `Enter`.
+ - **A**: Mac - Press `Cmd + Space`, type `terminal` and press `Enter`.
+ - **A**: Linux - Press `Ctrl + Alt + T` to open the command terminal.
 
-### **Q**: How to install Java 17<br>
- - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).<br>
+### **Q**: How to install Java 17
+ - **A**: Download the Java 17 [here](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html). Then follow the [installation guide](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html).
 
-### **Q**: How to know if you have Java 17<br>
- - **A**: Open your command terminal and enter `java --version`. The first line should display `java` followed by the `version number`.<br>
+### **Q**: How to know if you have Java 17
+ - **A**: Open your command terminal and enter `java --version`. The first line should display `java` followed by the `version number`.
 
-### **Q**: Is there a limit to the number of patients/appointments we can add?<br>
- - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.<br>
+### **Q**: Is there a limit to the number of patients/appointments we can add?
+ - **A**: As of right now, We do not have a limit to the number of patients/appointments but is dependent on the hardware specification.
 
-### **Q**: Do you support non-English inputs?<br>
- - **A**: We do not support non-English inputs, but we are working on it!<br>
+### **Q**: Do you support non-English inputs?
+ - **A**: We do not support non-English inputs, but we are working on it!
 
 --------------------------------------------------------------------------------------------------------------------
 
