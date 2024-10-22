@@ -105,7 +105,7 @@ public class DeleteCommand extends Command {
         boolean duplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
             if (targetIndex.getZeroBased() >= listSize || duplicate) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
             }
         }
     }

@@ -101,7 +101,7 @@ public class UnarchiveCommand extends Command {
         boolean hasDuplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
             if (targetIndex.getZeroBased() >= listSize || hasDuplicate) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
             }
         }
     }
