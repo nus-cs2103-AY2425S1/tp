@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALLERGY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -37,8 +38,10 @@ public class DelAllergyCommand extends Command {
     private final Set<Allergy> allergies;
 
     /**
-     * @param nric of the patient to unassign the allergies from.
-     * @param allergies set of allergies to be removed.
+     * Creates a {@code DelAllergyCommand} to unassign the specified allergies from a patient.
+     *
+     * @param nric The NRIC of the patient to unassign the allergies from.
+     * @param allergies The set of allergies to be removed.
      */
     public DelAllergyCommand(Nric nric, Set<Allergy> allergies) {
         requireAllNonNull(nric, allergies);
@@ -50,7 +53,7 @@ public class DelAllergyCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
-                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
 
         if (person.getNric().equals(this.nric)) {
             Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());

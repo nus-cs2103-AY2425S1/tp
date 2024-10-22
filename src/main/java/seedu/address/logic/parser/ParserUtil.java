@@ -197,6 +197,7 @@ public class ParserUtil {
      * @throws ParseException If the allergy string is invalid.
      */
     public static Allergy parseAllergy(String allergyStr) throws ParseException {
+        requireNonNull(allergyStr);
         if (allergyStr.isEmpty()) {
             throw new ParseException("Allergy " + MESSAGE_EMPTY_FIELD);
         } else if (allergyStr.length() > 30) {
@@ -249,6 +250,7 @@ public class ParserUtil {
      * @throws ParseException If the medical condition string is invalid.
      */
     public static MedCon parseMedCon(String medConStr) throws ParseException {
+        requireNonNull(medConStr);
         if (medConStr.isEmpty()) {
             throw new ParseException("Medical condition " + MESSAGE_EMPTY_FIELD);
         } else if (medConStr.length() > 30) {

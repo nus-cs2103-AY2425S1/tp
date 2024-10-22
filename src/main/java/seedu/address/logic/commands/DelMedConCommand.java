@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -39,8 +40,10 @@ public class DelMedConCommand extends Command {
     private final Set<MedCon> medCons;
 
     /**
-     * @param nric of the patient to unassign the medical conditions from.
-     * @param medCons set of medical conditions to be removed.
+     * Creates a {@code DelMedConCommand} to unassign the specified medical conditions from a patient.
+     *
+     * @param nric The NRIC of the patient to unassign the medical conditions from.
+     * @param medCons The set of medical conditions to be removed.
      */
     public DelMedConCommand(Nric nric, Set<MedCon> medCons) {
         requireAllNonNull(nric, medCons);
@@ -52,7 +55,7 @@ public class DelMedConCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
-                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
 
         if (person.getNric().equals(this.nric)) {
             Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());

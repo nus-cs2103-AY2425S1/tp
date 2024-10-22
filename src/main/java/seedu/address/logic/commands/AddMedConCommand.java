@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.Messages.MESSAGE_PERSON_NRIC_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDCON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
@@ -52,7 +53,7 @@ public class AddMedConCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
-                .orElseThrow(() -> new CommandException(PATIENT_DOES_NOT_EXIST));
+                .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
         if (person.getNric().equals(this.nric)) {
             Set<MedCon> updatedMedConSet = new HashSet<>(person.getMedCons());
             // check for duplicates
