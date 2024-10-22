@@ -148,11 +148,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonList(String Parameter, boolean isAscending) throws CommandException {
+    public void sortFilteredPersonList(String parameter, boolean isAscending) throws CommandException {
         if (isAscending) {
-            addressBook.sort(new PersonComparator().getComparator(Parameter));
+            addressBook.sort(new PersonComparator().getComparator(parameter));
         } else {
-            addressBook.sort(new PersonComparator().getComparator(Parameter).reversed());
+            addressBook.sort(new PersonComparator().getComparator(parameter).reversed());
         }
     }
 

@@ -1,8 +1,9 @@
 package seedu.address.model.person;
 
+import java.util.Comparator;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 
-import java.util.Comparator;
 
 /**
  * Returns an appropriate comparator based on the person criteria being sorted by.
@@ -21,11 +22,11 @@ public class PersonComparator {
      * Returns an appropriate comparator in ascending order for comparing persons
      * according to the specified person parameter.
      *
-     * @param Parameter
+     * @param parameter
      * @return Comparator
      */
-    public Comparator<Person> getComparator(String Parameter) throws CommandException {
-        switch (Parameter) {
+    public Comparator<Person> getComparator(String parameter) throws CommandException {
+        switch (parameter) {
 
         case NAME:
             return new PersonNameComparator();

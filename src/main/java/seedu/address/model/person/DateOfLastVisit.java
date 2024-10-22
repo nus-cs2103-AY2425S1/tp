@@ -26,8 +26,9 @@ public class DateOfLastVisit implements Comparable<DateOfLastVisit> {
     // Days 01-31 for other months
     // -------------------
 
-    private final String[] dayMonthYear;
     public final String value;
+
+    private final String[] dayMonthYear;
 
     /**
      * Constructs a {@code DateOfLastVisit}.
@@ -38,7 +39,7 @@ public class DateOfLastVisit implements Comparable<DateOfLastVisit> {
         requireNonNull(date);
         checkArgument(isValidDateOfLastVisit(date), MESSAGE_CONSTRAINTS);
         value = date;
-        String[] init = {date.substring(0,2), date.substring(3,5), date.substring(6)};
+        String[] init = {date.substring(0, 2), date.substring(3, 5), date.substring(6)};
         this.dayMonthYear = init;
     }
 
