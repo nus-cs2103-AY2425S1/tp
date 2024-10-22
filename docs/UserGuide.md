@@ -275,4 +275,5 @@ Action     | Format, Examples
 **Add Transaction** | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE` <br> e.g., `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
 **Delete Transaction** | `delelet INDEX` <br> e..g., `deletet 1`
 **List Transactions** | `listt INDEX`<br> e.g., `listt 2`
+**Find Transactions** | `findt INDEX KEYWORD [MORE_KEYWORDS]`<br> e.g., `findt 1 materials invest`
 **Help**   | `help`
