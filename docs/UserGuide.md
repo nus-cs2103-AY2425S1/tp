@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+AB3-My-Guest is a **desktop app for managing wedding guests, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -29,11 +29,11 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all guests.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe c/98765432` : Adds a guest named `John Doe` to the guest list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * `delete 3` : Deletes the 3rd guest shown in the current list.
 
    * `clear` : Deletes all contacts.
 
@@ -104,9 +104,27 @@ Creates a new tag.
 
 Format: `newtag TAG_NAME`
 * Tag name cannot be more than 50 characters long.
+* Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
+* Tag name cannot be empty, or consist of only whitespaces.
+* Tag names are case-insensitive.
 
 Examples:
 * `newtag Bride's Side`
+
+### Deleting a defined tag: `deletetag`
+
+Deletes an existing tag.
+
+Format: `deletetag t/TAG_NAME1 t/TAG_NAME2...`
+* Each tag name cannot be more than 50 characters long.
+* Tag name can only contain alphanumeric characters, apostrophes, parenthesis and whitespaces.
+* Tag name cannot be empty, or consist of only whitespaces.
+* Tag names are case-insensitive.
+* User cannot delete a tag that has not been added via `newtag` before.
+* Any number of tag arguments is accepted, as long as all of them have been defined before.
+
+Examples:
+* `deletetag t/Bride's Side`
 
 ### Tagging a person: `tag`
 
