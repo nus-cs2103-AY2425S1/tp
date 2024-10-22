@@ -201,16 +201,32 @@
     -fx-border-width: 3px;
 }
 
-.tag {
-    -fx-background-color: #FFD700;
-    -fx-text-fill: #1d1d1d;
+.bookmark {
+    -fx-background-color: #B76E79;
+    -fx-background-radius: 0 0 10px 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75), 10, 0.5, 0, 5);
+    -fx-font-weight: bold;
     -fx-padding: 5 10;
-    -fx-background-radius: 10;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);
-    -fx-font-size: 14pt;
+    -fx-shape: "M 100 0 L 20 0 L 0 7.5 L 20 15 L 100 15 Z";
 }
 
 .cell_big_label {
     -fx-font-size: 18pt;
     -fx-text-fill: #FFD700;
+}
+
+.chat-button {
+    -fx-padding: 10;
+    -fx-background-color: #1d1d1d;
+    -fx-text-fill: #FFD700;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-transition: background-color 0.3s, transform 0.3s;
+}
+
+.chat-button:hover {
+    -fx-background-color: #1d1d1d;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }

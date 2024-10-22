@@ -4,11 +4,20 @@
 <?import javafx.scene.layout.*?>
 
 <GridPane style="-fx-background-color: #1C1C1C; -fx-padding: 10;" styleClass="status-bar" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
-  </columnConstraints>
-  <Label fx:id="saveLocationStatus" textFill="#1d1d1d" />
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" />
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+
+    <Label fx:id="saveLocationStatus" textFill="#1d1d1d" />
+
+    <HBox alignment="CENTER_RIGHT" spacing="10" GridPane.columnIndex="1">
+        <Button fx:id="chatButton" text="Chat with us!"
+                styleClass="chat-button"
+                onAction="#handleChatButtonAction" />
+    </HBox>
+
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
 </GridPane>
