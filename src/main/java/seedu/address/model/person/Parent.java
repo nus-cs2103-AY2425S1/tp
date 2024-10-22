@@ -6,11 +6,20 @@ import java.util.Set;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Represents a parent in the address book
+ */
 public class Parent extends Person {
     private Student child = null;
 
-    public Parent(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Parent(Name name, Phone phone, Email email, Address address, Student child, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        this.child = child;
+    }
+
+    public Parent(Person person, Student child) {
+        super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
+        this.child = child;
     }
 
     public void setChild(Student child) {
