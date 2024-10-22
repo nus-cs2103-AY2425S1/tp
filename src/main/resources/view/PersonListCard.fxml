@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -36,6 +37,7 @@
       <padding>
         <Insets top="10" right="8" bottom="5" left="15" />
       </padding>
+      <Label text="Appointment details" styleClass="cell_appointment" style="-fx-text-fill: #ffffff;" />
       <Label fx:id="schedule" styleClass="cell_small_label" text="\$schedule" />
       <Label fx:id="reminder" styleClass="cell_small_label" text="\$reminder" />
     </VBox>
