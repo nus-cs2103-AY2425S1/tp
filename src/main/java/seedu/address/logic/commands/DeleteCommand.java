@@ -25,7 +25,7 @@ public class DeleteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) or KEYWORD (the name of contact)\n"
             + "Example: " + COMMAND_WORD + " 1" + "or " + COMMAND_WORD + " alex";
 
-    public static final String DELETE_EMPTY_LIST_ERROR_MESSAGE = "There is nothing to delete";
+    public static final String DELETE_EMPTY_LIST_ERROR_MESSAGE = "There is nothing to delete.";
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DUPLICATE_HANDLING =
             "Please specify the index of the contact you want to delete.\n"

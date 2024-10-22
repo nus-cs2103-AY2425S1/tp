@@ -8,7 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
+import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +23,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -82,6 +89,59 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validKeyword_success() {
+        // unique name
+        NameMatchesKeywordPredicate predicate = preparePredicate("Alice");
+
+        int indexToDelete = model.getFilteredPersonList().indexOf(ALICE);
+        Person personToDelete = model.getFilteredPersonList().get(indexToDelete);
+
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+
+
+        // non-unique name
+        predicate = preparePredicate(KEYWORD_MATCHING_MEIER);
+
+        deleteCommand = new DeleteCommand(null, predicate);
+
+        expectedMessage = String.format(DeleteCommand.MESSAGE_DUPLICATE_HANDLING,
+                Messages.format(personToDelete));
+
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.updateFilteredPersonList(predicate);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+
+        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+
+
+
+
+
+
+
+    }
+
+    @Test
+    public void execute_invalidKeyword_throwsCommandException() {
+        NameMatchesKeywordPredicate predicate = preparePredicate("Alex");
+        DeleteCommand deleteCommand = new DeleteCommand(null, predicate);
+
+        Model actualModel = model;
+        showNoPerson(actualModel);
+
+        assertCommandFailure(deleteCommand, actualModel, String.format(DeleteCommand.DELETE_EMPTY_LIST_ERROR_MESSAGE));
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON, null);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON, null);
@@ -118,5 +178,12 @@ public class DeleteCommandTest {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     */
+    private NameMatchesKeywordPredicate preparePredicate(String userInput) {
+        return new NameMatchesKeywordPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
