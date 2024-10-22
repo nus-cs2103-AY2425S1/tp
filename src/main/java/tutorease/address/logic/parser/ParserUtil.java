@@ -10,6 +10,7 @@ import tutorease.address.commons.core.index.Index;
 import tutorease.address.commons.util.StringUtil;
 import tutorease.address.logic.parser.exceptions.ParseException;
 import tutorease.address.model.lesson.EndDateTime;
+import tutorease.address.model.lesson.Fee;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.lesson.StudentId;
 import tutorease.address.model.person.Address;
@@ -154,6 +155,21 @@ public class ParserUtil {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
         return new StudentId(studentId);
+    }
+    /**
+     * Parses a {@code String fee} into a {@code Fee}.
+     *
+     * @param fee The fee to be parsed.
+     * @return The parsed fee.
+     * @throws ParseException If the fee is invalid.
+     */
+    public static Fee parseFee(String fee) throws ParseException {
+        requireNonNull(fee);
+        String trimmedFee = fee.trim();
+        if (!Fee.isValidFee(trimmedFee)) {
+            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
+        }
+        return new Fee(trimmedFee);
     }
 
     /**
