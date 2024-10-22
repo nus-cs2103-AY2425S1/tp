@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
-import seedu.address.logic.commands.personcommands.FindCommand;
+import seedu.address.logic.commands.personcommands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.EventNameContainsKeywordsPredicate;
 import seedu.address.model.types.common.NameContainsKeywordsPredicate;
@@ -29,16 +29,16 @@ public class FindCommandParser implements Parser<Command> {
         }
     }
 
-    private FindCommand parseForPerson(String args) throws ParseException {
+    private FindPersonCommand parseForPerson(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindPersonCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
     private FindEventCommand parseForEvent(String args) throws ParseException {
