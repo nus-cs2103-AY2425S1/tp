@@ -105,6 +105,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      * @param current The current TextField.
      */
     private void moveFocusToNext(TextField current) {
+        assert current != null : "Current TextField must not be null";
         if (current == nameField) {
             phoneField.requestFocus();
         } else if (current == phoneField) {
@@ -139,6 +140,7 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      * @param person The person whose details are to be displayed and edited.
      */
     public void show(Person person) {
+        assert person != null : "Person must not be null";
         logger.fine("Showing detailed page about this person.");
         this.person = person;
         populateFields(person);
@@ -160,6 +162,10 @@ public class PersonDetailsWindow extends UiPart<Stage> {
      * @param person The person whose details are to be displayed.
      */
     private void populateFields(Person person) {
+        assert person.getName() != null : "Person name must not be null";
+        assert person.getPhone() != null : "Person phone must not be null";
+        assert person.getEmail() != null : "Person email must not be null";
+        assert person.getAddress() != null : "Person address must not be null";
         nameField.setText(person.getName().fullName);
         phoneField.setText(person.getPhone().value);
         emailField.setText(person.getEmail().value);
