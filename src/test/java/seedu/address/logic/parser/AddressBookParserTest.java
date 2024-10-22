@@ -34,6 +34,7 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListOwnerCommand;
 import seedu.address.logic.commands.ListPetCommand;
+import seedu.address.logic.commands.UnlinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.owner.OwnerNameContainsKeywordsPredicate;
@@ -70,6 +71,14 @@ public class AddressBookParserTest {
             LinkCommand.COMMAND_WORD + " o" + INDEX_FIRST_OWNER.getOneBased() + " " + PREFIX_TO + "p"
             + INDEX_FIRST_PET.getOneBased());
         assertEquals(new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))), command);
+    }
+
+    @Test
+    public void parseCommand_unlink() throws Exception {
+        UnlinkCommand command = (UnlinkCommand) parser.parseCommand(
+                UnlinkCommand.COMMAND_WORD + " o" + INDEX_FIRST_OWNER.getOneBased() + " " + PREFIX_TO + "p"
+                        + INDEX_FIRST_PET.getOneBased());
+        assertEquals(new UnlinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))), command);
     }
 
     @Test
