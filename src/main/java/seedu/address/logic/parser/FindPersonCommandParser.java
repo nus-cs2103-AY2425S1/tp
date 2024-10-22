@@ -27,12 +27,6 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindPersonCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
-        }
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE);
 
         if ((argMultimap.getValue(PREFIX_NAME).isEmpty() && argMultimap.getValue(PREFIX_ROLE).isEmpty())
