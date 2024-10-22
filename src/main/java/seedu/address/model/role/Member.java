@@ -4,8 +4,8 @@ package seedu.address.model.role;
  * Member represents a special Role in address book.
  * Guarantees: immutable; name is always "Member".
  */
-public class Member extends Role{
-    public static String MEMBER_ROLE = "Member";
+public class Member extends Role {
+    public static final String MEMBER_ROLE = "Member";
     public Member() {
         super(MEMBER_ROLE);
     }

@@ -9,7 +9,7 @@ import seedu.address.model.person.RoleIsMemberPredicate;
 /**
  * List all members of cca (people with member role) in address book
  */
-public class ListAttendanceCommand extends Command{
+public class ListAttendanceCommand extends Command {
     public static final String COMMAND_WORD = "attendance";
     public static final String COMMAND_ALIAS = "atd";
 

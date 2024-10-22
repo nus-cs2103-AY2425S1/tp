@@ -83,7 +83,8 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
         }
 
         MarkAttendanceCommand otherMarkAttendanceCommand = (MarkAttendanceCommand) other;
-        return this.telegrams.equals(otherMarkAttendanceCommand.telegrams) & this.attendance.equals(otherMarkAttendanceCommand.attendance);
+        return this.telegrams.equals(otherMarkAttendanceCommand.telegrams)
+                & this.attendance.equals(otherMarkAttendanceCommand.attendance);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class MarkAttendanceCommand extends AttendanceMarkingCommand {
         Set<Attendance> newAttendanceList = new HashSet<>(person.getAttendance());
         newAttendanceList.add(attendance);
         Name name = person.getName();
-        Phone phone =person.getPhone();
+        Phone phone = person.getPhone();
         Email email = person.getEmail();
         Telegram telegram = person.getTelegram();
         Set<Role> roles = person.getRoles();

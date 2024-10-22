@@ -19,7 +19,7 @@ import seedu.address.model.person.Telegram;
  */
 public class AttendanceMarkingCommandParser implements Parser<AttendanceMarkingCommand> {
     private String markType;
-    public  AttendanceMarkingCommandParser(String markType) {
+    public AttendanceMarkingCommandParser(String markType) {
         this.markType = markType;
     }
 
@@ -35,9 +35,11 @@ public class AttendanceMarkingCommandParser implements Parser<AttendanceMarkingC
         if (!arePrefixesPresent(argumentMultimap, PREFIX_TELEGRAM, PREFIX_DATE)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             if (markType.equals(MarkAttendanceCommand.COMMAND_WORD)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT, UnmarkAttendanceCommand.MESSAGE_USAGE));
             }
         }
         List<String> telegramKeywords = argumentMultimap.getAllValues(PREFIX_TELEGRAM);
@@ -47,7 +49,8 @@ public class AttendanceMarkingCommandParser implements Parser<AttendanceMarkingC
         boolean hasEmptyInput = telegramKeywords.stream().anyMatch(str -> str.trim().isEmpty());
 
         if (hasEmptyInput) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(
+                    MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
         List<Telegram> telegrams = telegramKeywords.stream().map(String::trim).map(Telegram::new).toList();

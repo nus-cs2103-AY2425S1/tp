@@ -69,7 +69,8 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
 
         unmarkAttendance(model, peopleToMarkAttendance, this.attendance);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_UNMARK_PERSON_SUCCESS, peopleToMarkAttendance.size(), attendance));
+        return new CommandResult(String.format(
+                MESSAGE_UNMARK_PERSON_SUCCESS, peopleToMarkAttendance.size(), attendance));
     }
 
     @Override
@@ -83,7 +84,8 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
         }
 
         UnmarkAttendanceCommand otherMarkAttendanceCommand = (UnmarkAttendanceCommand) other;
-        return this.telegrams.equals(otherMarkAttendanceCommand.telegrams) & this.attendance.equals(otherMarkAttendanceCommand.attendance);
+        return this.telegrams.equals(otherMarkAttendanceCommand.telegrams)
+                & this.attendance.equals(otherMarkAttendanceCommand.attendance);
     }
 
     @Override
@@ -103,7 +105,7 @@ public class UnmarkAttendanceCommand extends AttendanceMarkingCommand {
         Set<Attendance> newAttendanceList = new HashSet<>(person.getAttendance());
         newAttendanceList.remove(attendance);
         Name name = person.getName();
-        Phone phone =person.getPhone();
+        Phone phone = person.getPhone();
         Email email = person.getEmail();
         Telegram telegram = person.getTelegram();
         Set<Role> roles = person.getRoles();
