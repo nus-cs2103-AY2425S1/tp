@@ -81,7 +81,9 @@ public class Person implements Comparable<Person> {
     public TelegramUsername getTelegramUsername() {
         return telegramUsername;
     }
-
+    public UUID getUniqueId() {
+        return uniqueId;
+    }
 
     /**
      * Returns an immutable role set, which throws {@code UnsupportedOperationException}
