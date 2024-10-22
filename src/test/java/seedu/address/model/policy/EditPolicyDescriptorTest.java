@@ -20,7 +20,7 @@ public class EditPolicyDescriptorTest {
 
     @BeforeEach
     public void setUp() {
-        policyType = new PolicyType("health");
+        policyType = PolicyType.HEALTH;
         premiumAmount = new PremiumAmount("1000");
         coverageAmount = new CoverageAmount("5000");
         expiryDate = new ExpiryDate("2025-12-31");
@@ -105,7 +105,7 @@ public class EditPolicyDescriptorTest {
     @Test
     public void equals_differentPolicyType_returnsFalse() {
         // Descriptors with different policy types should not be equal.
-        EditPolicyDescriptor differentType = new EditPolicyDescriptor(new PolicyType("life"));
+        EditPolicyDescriptor differentType = new EditPolicyDescriptor(PolicyType.LIFE);
         assertFalse(descriptor.equals(differentType));
     }
 
