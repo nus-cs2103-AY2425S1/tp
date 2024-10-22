@@ -131,7 +131,7 @@ Format: `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/
 * Edits the person with the specified `NAME`. The name refers to the full name shown in the displayed person list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags/appointments, the existing tags/appointments of the person will be added i.e adding of tags is cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 * You can remove all the person’s appointments by typing `ap/` without
@@ -160,6 +160,26 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 * `find olive 87438` returns `87438807`, `Charlotte Oliveiro`<br>
   ![result for 'find olive 87438'](images/findOlive.png)
+
+### Editing a person's notes : `note`
+
+Edits an existing person's note in the address book, which contains `PREVIOUS APPOINTMENTS`, `MEDICATIONS`, `REMARKS`.
+
+Format: `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…​`
+
+* Edits the person's note with the specified `NAME`. The name refers to the full name shown in the displayed person list.
+* At least one of the fields must be provided.
+* When editing fields, the existing fields of the person will be added i.e adding of medications is cumulative.
+* You can remove all the person’s appointments by typing `ap/` without
+  specifying any appointments after it.
+* You can remove all the person’s medications by typing `m/` without
+    specifying any medications after it.
+* You can remove all the person’s remarks by typing `r/` without
+    specifying any remarks after it.
+
+Examples:
+*  `note John Doe ap/01/01/2025 1200 r/Allergic to XXX` Adds `01/01/2025 1200` and `Allergic to XXX` to John Doe's past appointments and remarks respectively.
+*  `note John Doe ap/ m/` Clears all existing  appointments and medications from John Doe's notes.
 
 ### Deleting a person : `delete`
 
@@ -273,10 +293,11 @@ Action     | Format, Examples
 **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/AGE s/SEX [ap/APPOINTMENTS]… [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 b/24 s/Male ap/01/01/2025 1200 t/friend t/colleague` 
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
-**Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
+**Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com` 
 **Export** | `export` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
+**Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`
 **Help**   | `help`
 **List**   | `list` <br/>`list *` (to list starred contacts) 
-**Star** | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
+**Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
 **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 
