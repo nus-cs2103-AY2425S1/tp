@@ -57,7 +57,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         gender = source.getGender().gender;
         modules.addAll(source.getModules().stream()
-                .map(JsonAdaptedModule::new)
+                .map(module -> new JsonAdaptedModule(module.getModule(), module.getGrade()))
                 .collect(Collectors.toList()));
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

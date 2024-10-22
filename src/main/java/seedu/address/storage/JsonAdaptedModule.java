@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -12,13 +13,15 @@ import seedu.address.model.person.Module;
 class JsonAdaptedModule {
 
     private final String module;
+    private int grade;
 
     /**
      * Constructs a {@code JsonAdaptedModule} with the given {@code module}.
      */
     @JsonCreator
-    public JsonAdaptedModule(String module) {
+    public JsonAdaptedModule(@JsonProperty("module") String module, @JsonProperty("grade") int grade) {
         this.module = module;
+        this.grade = grade;
     }
 
     /**
@@ -26,13 +29,14 @@ class JsonAdaptedModule {
      */
     public JsonAdaptedModule(Module source) {
         module = source.module;
+        grade = source.getGrade();
     }
-
-    @JsonValue
     public String getModule() {
         return module;
     }
-
+    public int getGrade() {
+        return grade;
+    }
     /**
      * Converts this Jackson-friendly adapted module object into the model's {@code Module} object.
      *
@@ -42,7 +46,11 @@ class JsonAdaptedModule {
         if (!Module.isValidModule(module)) {
             throw new IllegalValueException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Module(module);
+        if (!Module.isValidGrade(grade)) {
+            throw new IllegalValueException(Module.GRADE_CONSTRAINTS);
+        }
+        Module moduleObject = new Module(module);
+        moduleObject.assignGrade(grade);
+        return moduleObject;
     }
-
 }
