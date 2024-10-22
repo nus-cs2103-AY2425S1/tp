@@ -56,6 +56,10 @@ public class Github {
         return username.hashCode();
     }
 
+    /**
+     * Compares the {@code username} of this Telegram object against another Telegram object.
+     * Comparison is done using String::CompareTo method.
+     */
     public int compareTo(Github otherGithub) {
         requireNonNull(otherGithub);
         return this.username.compareTo(otherGithub.username);

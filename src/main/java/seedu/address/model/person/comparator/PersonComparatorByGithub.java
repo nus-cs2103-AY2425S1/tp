@@ -2,8 +2,10 @@ package seedu.address.model.person.comparator;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
 
+/**
+ * Compare the {@code Github} of two {@code Person} based on the given sortOrder.
+ */
 public class PersonComparatorByGithub implements PersonComparator {
     private SortOrder sortOrder;
 

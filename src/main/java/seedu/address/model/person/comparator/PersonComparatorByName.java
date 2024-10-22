@@ -3,6 +3,9 @@ package seedu.address.model.person.comparator;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
+/**
+ * Compare the {@code Name} of two {@code Person} based on the given sortOrder.
+ */
 public class PersonComparatorByName implements PersonComparator {
     private SortOrder sortOrder;
 

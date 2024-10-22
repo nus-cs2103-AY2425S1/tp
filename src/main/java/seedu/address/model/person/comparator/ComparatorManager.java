@@ -1,5 +1,8 @@
 package seedu.address.model.person.comparator;
 
+/**
+ * Given the specified sortField and sortOrder, creates and returns the corresponding comparator required.
+ */
 public class ComparatorManager {
 
     public PersonComparator getComparator(SortField sortField, SortOrder sortOrder) {

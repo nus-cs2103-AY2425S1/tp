@@ -3,7 +3,10 @@ package seedu.address.model.person.comparator;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
-public class PersonComparatorByTelegram implements PersonComparator{
+/**
+ * Compare the {@code Telegram} of two {@code Person} based on the given sortOrder.
+ */
+public class PersonComparatorByTelegram implements PersonComparator {
     private SortOrder sortOrder;
 
     PersonComparatorByTelegram(SortOrder sortOrder) {

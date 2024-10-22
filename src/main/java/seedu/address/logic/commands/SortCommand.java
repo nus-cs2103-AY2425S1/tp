@@ -3,12 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTORDER;
 
-import java.util.Comparator;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.comparator.PersonComparator;
 
 /**
@@ -43,7 +40,7 @@ public class SortCommand extends Command {
         }
 
         // instaceof handles nulls
-        if(!(other instanceof SortCommand)) {
+        if (!(other instanceof SortCommand)) {
             return false;
         }
 
