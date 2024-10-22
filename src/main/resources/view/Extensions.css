@@ -4,12 +4,12 @@
 
 .list-cell:empty {
     /* Empty cells will not have alternating colors */
-    -fx-background-color: #031926; /* Matches the dark background theme */
+    -fx-background-color: #141a21; /* Matches the dark background theme */
 }
 
 .tag-selector {
     -fx-border-width: 1;
-    -fx-border-color: #77ACA2; /* Teal color to match the theme */
+    -fx-border-color: #141a21; /* Teal color to match the theme */
     -fx-border-radius: 3;
     -fx-background-radius: 3;
     -fx-background-color: transparent; /* Transparent background to blend with dark theme */
