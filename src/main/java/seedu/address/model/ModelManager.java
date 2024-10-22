@@ -128,12 +128,36 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
-    //=========== Consultation Methods =============================================================
+    //=========== Filtered Consultation List Accessors =============================================================
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Consultation} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Consultation> getFilteredConsultationList() {
-        return filteredConsultations; // Return the filtered consultations list
+        return filteredConsultations;
     }
+
+    @Override
+    public void updateFilteredConsultationList(Predicate<Consultation> predicate) {
+        requireNonNull(predicate);
+        filteredConsultations.setPredicate(predicate);
+    }
+
+    // ========== Consultation Commands ==========
+
+    @Override
+    public void addConsult(Consultation consult) {
+        addressBook.addConsult(consult);
+        updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
+    }
+
+    @Override
+    public boolean hasConsult(Consultation consult) {
+        return addressBook.hasConsult(consult);
+    }
+    //=========== Consultation Methods =============================================================
 
     @Override
     public Optional<Student> findStudentByName(Name name) {
@@ -144,18 +168,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addConsult(Consultation consult) {
-        addressBook.addConsult(consult);
-    }
-
-    @Override
     public void deleteConsult(Consultation consult) {
         addressBook.removeConsult(consult);
-    }
-
-    @Override
-    public boolean hasConsult(Consultation consult) {
-        return addressBook.hasConsult(consult);
     }
 
     @Override
@@ -174,4 +188,5 @@ public class ModelManager implements Model {
                 && filteredStudents.equals(otherModelManager.filteredStudents)
                 && filteredConsultations.equals(otherModelManager.filteredConsultations);
     }
+
 }
