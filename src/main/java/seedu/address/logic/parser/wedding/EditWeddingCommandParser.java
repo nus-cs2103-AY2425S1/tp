@@ -72,7 +72,7 @@ public class EditWeddingCommandParser implements Parser<EditWeddingCommand> {
         if (argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_2).isPresent()) {
             try {
                 editWeddingDescriptor.setPartner2Index(ParserUtil.parseIndex(requireNonNull(
-                        argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_1).orElse(null))));
+                        argMultimap.getValue(PREFIX_EDIT_WEDDING_PERSON_2).orElse(null))));
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
             }

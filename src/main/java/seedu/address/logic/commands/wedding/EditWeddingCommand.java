@@ -75,6 +75,8 @@ public class EditWeddingCommand extends Command {
         editWeddingDescriptor.getPartner2Index().ifPresent(
                 index -> editWeddingDescriptor.setPartner2(model.getFilteredPersonList().get(index.getZeroBased()))
         );
+        editWeddingDescriptor.setPeopleCount(weddingToEdit.getPeopleCount());
+        editWeddingDescriptor.setGuestList(weddingToEdit.getGuestList());
         Wedding editedWedding = createEditedWedding(weddingToEdit, editWeddingDescriptor);
 
         if (!weddingToEdit.isSameWedding(editedWedding) && model.hasWedding(editedWedding)) {
@@ -94,9 +96,14 @@ public class EditWeddingCommand extends Command {
         assert weddingToEdit != null;
 
         WeddingName updatedWeddingName = editWeddingDescriptor.getWeddingName().orElse(weddingToEdit.getWeddingName());
+        int peopleCount = editWeddingDescriptor.getPeopleCount().orElse(0);
+        Person partner1 = editWeddingDescriptor.getPartner1().orElse(weddingToEdit.getPartner1());
+        Person partner2 = editWeddingDescriptor.getPartner2().orElse(weddingToEdit.getPartner2());
+        ArrayList<Person> guestlist = editWeddingDescriptor.getGuestList().orElse(weddingToEdit.getGuestList());
         Address updatedAddress = editWeddingDescriptor.getAddress().orElse(weddingToEdit.getAddress());
+        String date = editWeddingDescriptor.getDate().orElse(weddingToEdit.getDate());
 
-        return new Wedding(updatedWeddingName); //, updatedAddress);
+        return new Wedding(updatedWeddingName, peopleCount, partner1, partner2, guestlist, updatedAddress, date);
     }
 
     @Override
@@ -145,9 +152,10 @@ public class EditWeddingCommand extends Command {
          */
         public EditWeddingDescriptor(EditWeddingDescriptor toCopy) {
             setWeddingName(toCopy.weddingName);
+            setPartner1Index(toCopy.partner1Index);
+            setPartner2Index(toCopy.partner2Index);
             setAddress(toCopy.address);
             setDate(toCopy.date);
-            //Partners not copied because only Model has access to them. Will be copied in #execute
         }
 
         /**
@@ -204,6 +212,14 @@ public class EditWeddingCommand extends Command {
 
         public void setPartner2Index(Index partner2Index) {
             this.partner2Index = partner2Index;
+        }
+
+        public Optional<ArrayList<Person>> getGuestList() {
+            return Optional.ofNullable(guestList);
+        }
+
+        public void setGuestList(ArrayList<Person> guestList) {
+            this.guestList = guestList;
         }
 
         public void setAddress(Address address) {
