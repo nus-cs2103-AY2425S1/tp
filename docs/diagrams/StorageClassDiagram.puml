@@ -19,7 +19,6 @@ Class "<<interface>>\nClientBookStorage" as ClientBookStorage
 Class JsonClientBookStorage
 Class JsonSerializableClientBook
 Class JsonAdaptedClient
-Class JsonAdaptedTag
 }
 
 package "MeetingBook Storage" #F4F6F6{
