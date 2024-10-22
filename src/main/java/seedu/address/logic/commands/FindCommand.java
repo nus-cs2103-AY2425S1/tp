@@ -83,7 +83,7 @@ public class FindCommand extends Command {
         model.updateFilteredStudentList(combinedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, model.getFilteredStudentList().size()),
-                CommandType.FINDSTUDENT);
+                COMMAND_TYPE);
     }
 
     @Override
