@@ -22,11 +22,16 @@ class JsonAdaptedClient extends JsonAdaptedContact {
      * Constructs a {@code JsonAdaptedClient} with the given client's details.
      */
     @JsonCreator
-    public JsonAdaptedClient(@JsonProperty("id") int id, @JsonProperty("name") String name,
-        @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-        @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-        @JsonProperty("date") String date) {
-        super(id, name, phone, email, address, tags);
+    public JsonAdaptedClient(
+        @JsonProperty("name") String name,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("email") String email,
+        @JsonProperty("address") String address,
+        @JsonProperty("date") String date,
+        @JsonProperty("tags") List<JsonAdaptedTag> tags,
+        @JsonProperty("id") int id
+    ) {
+        super(name, phone, email, address, tags, id);
         this.date = date;
     }
 
@@ -37,9 +42,13 @@ class JsonAdaptedClient extends JsonAdaptedContact {
         super(source);
         this.date = source.getDate().toString();
     }
+
     @Override
     public Client createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
             throws IllegalValueException {
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
         if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }

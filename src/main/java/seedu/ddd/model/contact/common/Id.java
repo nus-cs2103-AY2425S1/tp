@@ -1,6 +1,7 @@
 package seedu.ddd.model.contact.common;
 
 import seedu.ddd.commons.util.AppUtil;
+import seedu.ddd.commons.util.StringUtil;
 
 /**
  * Represents a Contact's ID in the address book.
@@ -15,7 +16,7 @@ public class Id {
     /**
      * Constructs a {@code Id}.
      *
-     * @param id A valid id.
+     * @param id A valid int id.
      */
     public Id(int id) {
         AppUtil.checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
@@ -23,10 +24,27 @@ public class Id {
     }
 
     /**
+     * Constructs a {@code Id}.
+     *
+     * @param id A valid string id.
+     */
+    public Id(String id) {
+        AppUtil.checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
+        this.id = Integer.parseInt(id);
+    }
+
+    /**
      * Returns true if a given integer is a valid id.
      */
     public static boolean isValidId(int test) {
         return test >= 0;
+    }
+
+    /**
+     * Returns true if a given string can be a valid id.
+     */
+    public static boolean isValidId(String test) {
+        return StringUtil.isUnsignedInteger(test);
     }
 
 

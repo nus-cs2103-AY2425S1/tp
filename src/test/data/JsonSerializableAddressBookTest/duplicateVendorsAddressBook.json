@@ -1,0 +1,22 @@
+{
+  "contacts" : [ {
+    "type" : "vendor",
+    "name" : "abc",
+    "phone" : "12345678",
+    "email" : "contact@abccatering.com",
+    "address" : "Blk 123 Bukit Merah St 7",
+    "tags" : [ "vegetarian", "budget" ],
+    "service" : "abc",
+    "id" : 0
+  }, {
+    "type" : "vendor",
+    "name" : "abc",
+    "phone" : "12345678",
+    "email" : "contact@abccatering.com",
+    "address" : "Blk 123 Bukit Merah St 7",
+    "tags" : [ "vegetarian", "budget" ],
+    "service" : "abc",
+    "id" : 1
+  } ],
+  "nextId" : 2
+}

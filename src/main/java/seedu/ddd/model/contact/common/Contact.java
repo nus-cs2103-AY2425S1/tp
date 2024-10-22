@@ -98,8 +98,7 @@ public abstract class Contact {
                 && phone.equals(otherContact.phone)
                 && email.equals(otherContact.email)
                 && address.equals(otherContact.address)
-                && tags.equals(otherContact.tags)
-                && id.equals(otherContact.id);
+                && tags.equals(otherContact.tags);
     }
 
     @Override

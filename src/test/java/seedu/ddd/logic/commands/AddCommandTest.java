@@ -23,7 +23,9 @@ import seedu.ddd.model.Model;
 import seedu.ddd.model.ReadOnlyAddressBook;
 import seedu.ddd.model.ReadOnlyUserPrefs;
 import seedu.ddd.model.contact.common.Contact;
+import seedu.ddd.model.event.Event;
 import seedu.ddd.testutil.ClientBuilder;
+import seedu.ddd.testutil.VendorBuilder;
 
 public class AddCommandTest {
 
@@ -33,7 +35,7 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_contactAcceptedByModel_addSuccessful() throws Exception {
+    public void execute_clientAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
         Contact validClient = new ClientBuilder().build();
 
@@ -45,10 +47,31 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_duplicateContact_throwsCommandException() {
-        Contact validContact = new ClientBuilder().build();
-        AddCommand addCommand = new AddCommand(validContact);
-        ModelStub modelStub = new ModelStubWithContact(validContact);
+    public void execute_vendorAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Contact validVendor = new VendorBuilder().build();
+
+        CommandResult commandResult = new AddCommand(validVendor).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validVendor)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validVendor), modelStub.contactsAdded);
+    }
+
+    @Test
+    public void execute_duplicateClient_throwsCommandException() {
+        Contact validClient = new ClientBuilder().build();
+        AddCommand addCommand = new AddCommand(validClient);
+        ModelStub modelStub = new ModelStubWithContact(validClient);
+
+        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateVendor_throwsCommandException() {
+        Contact validVendor = new VendorBuilder().build();
+        AddCommand addCommand = new AddCommand(validVendor);
+        ModelStub modelStub = new ModelStubWithContact(validVendor);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_CONTACT, () -> addCommand.execute(modelStub));
     }
@@ -134,7 +157,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addEvent(Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasContact(Contact person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,7 +177,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteEvent(Event target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setContact(Contact target, Contact editedContact) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEvent(Event target, Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -154,7 +197,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Event> getFilteredEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredContactList(Predicate<Contact> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }

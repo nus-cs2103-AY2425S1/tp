@@ -1,87 +1,82 @@
 package seedu.ddd.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import seedu.ddd.logic.commands.EditCommand.EditContactDescriptor;
+import seedu.ddd.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.ddd.model.contact.client.Client;
-import seedu.ddd.model.contact.common.Address;
-import seedu.ddd.model.contact.common.Email;
-import seedu.ddd.model.contact.common.Name;
-import seedu.ddd.model.contact.common.Phone;
-import seedu.ddd.model.tag.Tag;
+import seedu.ddd.model.contact.client.Date;
 
 /**
- * A utility class to help with building EditContactDescriptor objects.
+ * A utility class to help with building EditClientDescriptor objects.
  */
-public class EditClientDescriptorBuilder {
+public class EditClientDescriptorBuilder extends EditContactDescriptorBuilder {
 
-    private EditContactDescriptor descriptor;
-
+    /**
+     * Sets the descriptor to an {@code EditClientDescritor}.
+     */
     public EditClientDescriptorBuilder() {
-        descriptor = new EditContactDescriptor();
+        super();
+        descriptor = new EditClientDescriptor();
     }
 
-    public EditClientDescriptorBuilder(EditContactDescriptor descriptor) {
-        this.descriptor = new EditContactDescriptor(descriptor);
-    }
-
-    /**
-     * Returns an {@code EditContactDescriptor} with fields containing {@code person}'s details
-     */
-    public EditClientDescriptorBuilder(Client contact) {
-        descriptor = new EditContactDescriptor();
-        descriptor.setName(contact.getName());
-        descriptor.setPhone(contact.getPhone());
-        descriptor.setEmail(contact.getEmail());
-        descriptor.setAddress(contact.getAddress());
-        descriptor.setTags(contact.getTags());
+    public EditClientDescriptorBuilder(EditClientDescriptor descriptor) {
+        this.descriptor = new EditClientDescriptor(descriptor);
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditContactDescriptor} that we are building.
+     * Returns an {@code EditClientDescriptor} with fields containing {@code client}'s details
      */
+    public EditClientDescriptorBuilder(Client client) {
+        EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
+        editClientDescriptor.setName(client.getName());
+        editClientDescriptor.setPhone(client.getPhone());
+        editClientDescriptor.setEmail(client.getEmail());
+        editClientDescriptor.setAddress(client.getAddress());
+        editClientDescriptor.setDate(client.getDate());
+        editClientDescriptor.setTags(client.getTags());
+        descriptor = editClientDescriptor;
+    }
+
+    @Override
     public EditClientDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
-        return this;
+        return (EditClientDescriptorBuilder) super.withName(name);
     }
 
-    /**
-     * Sets the {@code Phone} of the {@code EditContactDescriptor} that we are building.
-     */
+    @Override
     public EditClientDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
-        return this;
+        return (EditClientDescriptorBuilder) super.withPhone(phone);
     }
 
-    /**
-     * Sets the {@code Email} of the {@code EditContactDescriptor} that we are building.
-     */
+    @Override
     public EditClientDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
-        return this;
+        return (EditClientDescriptorBuilder) super.withEmail(email);
     }
 
-    /**
-     * Sets the {@code Address} of the {@code EditContactDescriptor} that we are building.
-     */
+    @Override
     public EditClientDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
-        return this;
+        return (EditClientDescriptorBuilder) super.withAddress(address);
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditContactDescriptor}
-     * that we are building.
+     * Sets the {@code Date} of the {@code EditClientDescriptor} that we are building.
      */
-    public EditClientDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditClientDescriptorBuilder withDate(String date) {
+        EditClientDescriptor editClientDescriptor = (EditClientDescriptor) descriptor;
+        editClientDescriptor.setDate(new Date(date));
         return this;
     }
 
-    public EditContactDescriptor build() {
-        return descriptor;
+    @Override
+    public EditClientDescriptorBuilder withTags(String... tags) {
+        return (EditClientDescriptorBuilder) super.withTags(tags);
     }
+
+    @Override
+    public EditClientDescriptorBuilder withId(String id) {
+        return (EditClientDescriptorBuilder) super.withId(id);
+    }
+
+    @Override
+    public EditClientDescriptor build() {
+        return (EditClientDescriptor) super.build();
+    }
+
 }

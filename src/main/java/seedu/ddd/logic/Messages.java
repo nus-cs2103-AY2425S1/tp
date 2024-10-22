@@ -16,16 +16,20 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_CONTACT_TYPE = "Invalid contact type! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
-    // TODO: determine if "contact" should also be added here
+    public static final String MESSAGE_INVALID_CONTACT_TYPE = "Invalid contact type! Use -c or -v to specify adding "
+            + "of client or vendor contact.";
+    public static final String MESSAGE_MULTIPLE_CONTACT_TYPES = "Multiple contact types specified. Use -c OR -v to "
+            + "specify adding of client OR vendor contact.";
+    public static final String MESSAGE_INVALID_CONTACT_ID = "Invalid contact ID! \n%1$s";
+    public static final String MESSAGE_INVALID_CONTACT_DISPLAYED_INDEX = "The contact index provided is invalid";
     public static final String MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX = "The client index provided is invalid";
     public static final String MESSAGE_INVALID_VENDOR_DISPLAYED_INDEX = "The vendor index provided is invalid";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_CONTACTS_LISTED_OVERVIEW = "%1$d contacts listed!";
     public static final String MESSAGE_CLIENTS_LISTED_OVERVIEW = "%1$d clients listed!";
     public static final String MESSAGE_VENDORS_LISTED_OVERVIEW = "%1$d vendors listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_EXCLUSIVE_FIELDS = "Only 1 of the following arguments can be specified";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
@@ -40,7 +44,19 @@ public class Messages {
     }
 
     /**
-     * TODO: add docs
+     * Returns an error message indicating the exclusive prefixes.
+     */
+    public static String getErrorMessageForExclusivePrefixes(Prefix... exclusivePrefixes) {
+        assert exclusivePrefixes.length > 0;
+
+        Set<String> exclusiveFields =
+                Stream.of(exclusivePrefixes).map(Prefix::toString).collect(Collectors.toSet());
+
+        return MESSAGE_EXCLUSIVE_FIELDS + String.join(" ", exclusiveFields);
+    }
+
+    /**
+     * Formats the {@code contact} for display to the user.
      */
     public static String format(Contact contact) {
         return contact instanceof Client
@@ -61,9 +77,11 @@ public class Messages {
                 .append("; Address: ")
                 .append(client.getAddress())
                 .append("; Date: ")
-                //.append(client.getDate())
+                .append(client.getDate())
                 .append("; Tags: ");
         client.getTags().forEach(builder::append);
+        builder.append("; ID: ")
+                .append(client.getId());
         return builder.toString();
     }
 
@@ -83,6 +101,8 @@ public class Messages {
                 .append(vendor.getService())
                 .append("; Tags: ");
         vendor.getTags().forEach(builder::append);
+        builder.append("; ID: ")
+                .append(vendor.getId());
         return builder.toString();
     }
 }

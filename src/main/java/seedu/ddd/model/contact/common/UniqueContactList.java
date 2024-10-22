@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,6 +64,13 @@ public class UniqueContactList implements Iterable<Contact> {
         }
 
         if (!target.isSameContact(editedContact) && contains(editedContact)) {
+            throw new DuplicateContactException();
+        }
+
+        // check if the id already exists
+        Predicate<Contact> duplicateIdPredicate = contact ->
+                contact.getId().equals(editedContact.getId()) && !contact.equals(target);
+        if (internalList.stream().anyMatch(duplicateIdPredicate)) {
             throw new DuplicateContactException();
         }
 

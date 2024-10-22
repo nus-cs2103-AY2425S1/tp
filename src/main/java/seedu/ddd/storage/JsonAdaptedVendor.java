@@ -23,13 +23,19 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
      * Constructs a {@code JsonAdaptedVendor} with the given vendor's details.
      */
     @JsonCreator
-    public JsonAdaptedVendor(@JsonProperty("id") int id, @JsonProperty("name") String name,
-        @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-        @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-        @JsonProperty("service") String service) {
-        super(id, name, phone, email, address, tags);
+    public JsonAdaptedVendor(
+        @JsonProperty("name") String name,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("email") String email,
+        @JsonProperty("address") String address,
+        @JsonProperty("service") String service,
+        @JsonProperty("tags") List<JsonAdaptedTag> tags,
+        @JsonProperty("id") int id
+    ) {
+        super(name, phone, email, address, tags, id);
         this.service = service;
     }
+
     /**
      * Converts a given {@code Vendor} into this class for Jackson use.
      */
@@ -37,9 +43,13 @@ class JsonAdaptedVendor extends JsonAdaptedContact {
         super(source);
         this.service = source.getService().toString();
     }
+
     @Override
     public Vendor createContact(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Id id)
             throws IllegalValueException {
+        if (service == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Service.class.getSimpleName()));
+        }
         if (!Service.isValidService(service)) {
             throw new IllegalValueException(Service.MESSAGE_CONSTRAINTS);
         }

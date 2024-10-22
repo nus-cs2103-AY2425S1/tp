@@ -3,10 +3,10 @@ package seedu.ddd.model.contact.client;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 import seedu.ddd.commons.util.AppUtil;
-import seedu.ddd.model.contact.vendor.Service;
 
 /**
  * Represents a Client's Date in the address book.
@@ -14,9 +14,20 @@ import seedu.ddd.model.contact.vendor.Service;
  */
 public class Date {
     public static final String MESSAGE_CONSTRAINTS =
-            "Dates should be in the format YYYY-MM-DD.";
-    public final String date;
+            "Dates should be in the format of either of the following:\n"
+                    + "1. yyyy-MM-dd\n"
+                    + "2. MM/dd/yyyy\n"
+                    + "3. d MMM yyyy";
+    public static final DateTimeFormatter VALID_DATE_FORMAT1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public static final DateTimeFormatter VALID_DATE_FORMAT2 = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    public static final DateTimeFormatter VALID_DATE_FORMAT3 = DateTimeFormatter.ofPattern("d MMM yyyy");
+    private static final DateTimeFormatter[] formatters = new DateTimeFormatter[] {
+        VALID_DATE_FORMAT1,
+        VALID_DATE_FORMAT2,
+        VALID_DATE_FORMAT3
+    };
 
+    public final LocalDate date;
     /**
      * Constructs a {@code Date}.
      *
@@ -25,7 +36,7 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         AppUtil.checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = date;
+        this.date = parseDate(date);
     }
 
     /**
@@ -33,18 +44,38 @@ public class Date {
      */
     // TODO: fix date occurrences in storage data before return false for errors.
     public static boolean isValidDate(String test) {
-        try {
-            LocalDate.parse(test); // Attempt to parse the date string
-            return true;
-        } catch (DateTimeParseException e) {
-            return true;
+        for (DateTimeFormatter formatter : formatters) {
+            try {
+                LocalDate.parse(test, formatter);
+                return true;
+            } catch (DateTimeParseException e) {
+                //Ignore and try the next one
+            }
         }
+        return false;
+    }
+
+    /**
+     * Parses the date string using available formatters.
+     *
+     * @param date The date string to parse.
+     * @return The parsed LocalDate.
+     */
+    public static LocalDate parseDate(String date) {
+        for (DateTimeFormatter formatter : formatters) {
+            try {
+                return LocalDate.parse(date, formatter);
+            } catch (DateTimeParseException e) {
+                // Ignore and try next formatter
+            }
+        }
+        throw new DateTimeParseException("Date could not be parsed", date, 0);
     }
 
 
     @Override
     public String toString() {
-        return date;
+        return date.toString();
     }
 
     @Override
@@ -54,7 +85,7 @@ public class Date {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Service)) {
+        if (!(other instanceof Date)) {
             return false;
         }
 

@@ -1,13 +1,10 @@
 package seedu.ddd.ui;
 
-import java.util.logging.Logger;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.ddd.commons.core.LogsCenter;
 import seedu.ddd.model.contact.client.Client;
 import seedu.ddd.model.contact.common.Contact;
 import seedu.ddd.model.contact.vendor.Vendor;
@@ -16,8 +13,8 @@ import seedu.ddd.model.contact.vendor.Vendor;
  * Panel containing the list of contacts.
  */
 public class ContactListPanel extends UiPart<Region> {
+
     private static final String FXML = "ContactListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(ContactListPanel.class);
 
     @FXML
     private ListView<Contact> contactListView;
