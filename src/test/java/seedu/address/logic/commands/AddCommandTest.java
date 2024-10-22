@@ -152,6 +152,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isPersonLinkedToEvent(Person person, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void linkPersonToEvent(Person person, Event event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,6 +189,11 @@ public class AddCommandTest {
         @Override
         public void setEvent(Event target, Event editedEvent) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Event getEventByName(Event event) {
+            return null;
         }
 
         @Override

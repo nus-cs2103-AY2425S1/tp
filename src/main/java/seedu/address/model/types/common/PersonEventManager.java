@@ -28,17 +28,23 @@ public class PersonEventManager {
     /* ============================== Person Methods ============================== */
 
     /**
+     * Returns true if the person is linked to the specified event.
+     * @param person
+     * @param event
+     * @return
+     */
+    public static boolean isPersonLinkedToEvent(Person person, Event event) {
+        return eventPersonMap.get(event).contains(person);
+    }
+
+    /**
      * Adds the person to the specified event.
      * @param event
      * @param person
      * @throws EventNotFoundException
      */
-    public static void addPersonToEvent(Event event, Person person) throws EventNotFoundException {
-        if (eventPersonMap.containsKey(event)) {
-            eventPersonMap.get(event).add(person);
-        } else if (!eventPersonMap.containsKey(event)) {
-            throw new EventNotFoundException();
-        }
+    public static void addPersonToEvent(Person person, Event event) {
+        eventPersonMap.get(event).add(person);
     }
 
     /**
@@ -47,12 +53,8 @@ public class PersonEventManager {
      * @param person
      * @throws EventNotFoundException
      */
-    public static void removePersonFromEvent(Event event, Person person) throws EventNotFoundException {
-        if (eventPersonMap.containsKey(event)) {
-            eventPersonMap.get(event).remove(person);
-        } else if (!eventPersonMap.containsKey(event)) {
-            throw new EventNotFoundException();
-        }
+    public static void removePersonFromEvent(Person person, Event event) {
+        eventPersonMap.get(event).remove(person);
     }
 
     /**
@@ -82,16 +84,21 @@ public class PersonEventManager {
     /* ============================== Event Methods ============================== */
 
     /**
+     * Returns true if the event is in the eventPersonMap.
+     * @param event
+     * @return
+     */
+    public static boolean hasEvent(Event event) {
+        return eventPersonMap.containsKey(event);
+    }
+
+    /**
      * Adds the event to the eventPersonMap.
      * @param event
      * @throws DuplicateEventException
      */
-    public static void addEvent(Event event) throws DuplicateEventException {
-        if (!eventPersonMap.containsKey(event)) {
-            eventPersonMap.put(event, new ArrayList<>());
-        } else if (eventPersonMap.containsKey(event)) {
-            throw new DuplicateEventException();
-        }
+    public static void addEvent(Event event) {
+        eventPersonMap.put(event, new ArrayList<>());
     }
 
     /**
@@ -99,12 +106,8 @@ public class PersonEventManager {
      * @param event
      * @throws EventNotFoundException
      */
-    public static void removeEvent(Event event) throws EventNotFoundException {
-        if (eventPersonMap.containsKey(event)) {
-            eventPersonMap.remove(event);
-        } else if (!eventPersonMap.containsKey(event)) {
-            throw new EventNotFoundException();
-        }
+    public static void removeEvent(Event event) {
+        eventPersonMap.remove(event);
     }
 
     /**
@@ -113,10 +116,15 @@ public class PersonEventManager {
      * @param editedEvent
      */
     public static void setEvent(Event target, Event editedEvent) {
-        if (eventPersonMap.containsKey(target)) {
-            ArrayList<Person> persons = eventPersonMap.get(target);
-            eventPersonMap.remove(target);
-            eventPersonMap.put(editedEvent, persons);
-        }
+        ArrayList<Person> persons = eventPersonMap.get(target);
+        eventPersonMap.remove(target);
+        eventPersonMap.put(editedEvent, persons);
+    }
+
+    public static Event getEventByName(Event target) {
+        return eventPersonMap.keySet().stream()
+                .filter(event -> event.isSameEvent(target))
+                .findFirst()
+                .orElse(null);
     }
 }

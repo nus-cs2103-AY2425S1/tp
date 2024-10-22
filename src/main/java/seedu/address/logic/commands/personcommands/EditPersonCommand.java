@@ -3,7 +3,6 @@ package seedu.address.logic.commands.personcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -29,7 +28,6 @@ import seedu.address.model.types.common.Address;
 import seedu.address.model.types.common.Email;
 import seedu.address.model.types.common.Name;
 import seedu.address.model.types.common.Phone;
-import seedu.address.model.types.event.Event;
 import seedu.address.model.types.person.Person;
 
 /**
@@ -51,8 +49,7 @@ public class EditPersonCommand extends EditCommand {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
-            + PREFIX_TAG + "friends"
-            + PREFIX_EVENT + "beach party";
+            + PREFIX_TAG + "friends";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -144,7 +141,6 @@ public class EditPersonCommand extends EditCommand {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private Event event;
 
         public EditPersonDescriptor() {}
 
@@ -158,14 +154,13 @@ public class EditPersonCommand extends EditCommand {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setEvent(toCopy.event);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, event);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -217,22 +212,6 @@ public class EditPersonCommand extends EditCommand {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        /**
-         * Sets {@code event} to this object's {@code event}.
-         */
-        public void setEvent(Event event) {
-            this.event = event;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Event> getEvent() {
-            return Optional.ofNullable(event);
-        }
-
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -249,8 +228,7 @@ public class EditPersonCommand extends EditCommand {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
-                    && Objects.equals(event, otherEditPersonDescriptor.event);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
@@ -261,7 +239,6 @@ public class EditPersonCommand extends EditCommand {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
-                    .add("event", event)
                     .toString();
         }
     }
