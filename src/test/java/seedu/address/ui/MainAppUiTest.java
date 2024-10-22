@@ -23,8 +23,8 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.UserPrefsStorage;
 import seedu.address.commons.exceptions.DataLoadingException;
+import seedu.address.storage.UserPrefsStorage;
 
 @ExtendWith(ApplicationExtension.class)
 public class MainAppUiTest {
