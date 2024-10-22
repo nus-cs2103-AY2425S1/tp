@@ -25,6 +25,9 @@ public class MarkPaidCommandParserTest {
     private static final String VALID_MONTHPAID2_WITH_PREFIX = PREFIX_MONTHPAID + VALID_MONTHPAID2;
     private static final String INVALID_MONTHPAID1 = "24-01";
     private static final String INVALID_MONTHPAID1_WITH_PREFIX = PREFIX_MONTHPAID + INVALID_MONTHPAID1;
+    private static final String INVALID_MONTHPAID2 = "2024-13";
+    private static final String INVALID_MONTHPAID2_WITH_PREFIX = PREFIX_MONTHPAID + INVALID_MONTHPAID1;
+
     private MarkPaidCommandParser parser = new MarkPaidCommandParser();
 
     @Test
@@ -81,12 +84,16 @@ public class MarkPaidCommandParserTest {
     }
     @Test
     public void parse_oneInvalidField_failure() {
-        // 1 invalid field
+        // 1 invalid field of type YY-MM
         assertParseFailure(parser, "1 " + INVALID_MONTHPAID1_WITH_PREFIX, MonthPaid.MESSAGE_CONSTRAINTS);
+
+        // 1 invalid field of type YYYY-MM where MM is more than 12
+        assertParseFailure(parser, "1 " + INVALID_MONTHPAID2_WITH_PREFIX, MonthPaid.MESSAGE_CONSTRAINTS);
 
         // 1 invalid field, 1 valid field
         assertParseFailure(parser, "1 "
                 + INVALID_MONTHPAID1_WITH_PREFIX
                 + " " + VALID_MONTHPAID2_WITH_PREFIX, MonthPaid.MESSAGE_CONSTRAINTS);
     }
+
 }

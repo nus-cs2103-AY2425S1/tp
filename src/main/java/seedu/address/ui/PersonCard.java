@@ -64,7 +64,7 @@ public class PersonCard extends UiPart<Region> {
         fees.setText(String.valueOf(person.getFees().value));
         classId.setText(String.valueOf(person.getClassId().value));
         monthsPaid.setText(person.getMonthsPaid().stream()
-                .map(monthPaid -> monthPaid.value)
+                .map(monthPaid -> monthPaid.monthPaidValue)
                 .reduce((curr, next) -> curr + " " + next)
                 .orElse("(empty)"));
         person.getTags().stream()
