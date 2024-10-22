@@ -26,7 +26,7 @@ public class JsonAdaptedLessonTest {
 
     private final Lesson validLesson = new LessonBuilder().withName(tutorEase.getPersonList().get(0)).build();
     private final String validStudent = validLesson.getStudent().getName().fullName;
-    private final String validFee = validLesson.getAmount();
+    private final String validFee = validLesson.getFeeString();
     private final String validStartDateTime = validLesson.getStartDateTimeString();
     private final String validEndDateTime = validLesson.getEndDateTimeString();
 
@@ -40,8 +40,9 @@ public class JsonAdaptedLessonTest {
     }
 
     @Test
-    public void toModelType_invalidStudent_throwsIllegalValueException() throws ParseException {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(INVALID_STUDENT, validFee, validStartDateTime, validEndDateTime);
+    public void toModelType_invalidStudent_throwsIllegalValueException() {
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(INVALID_STUDENT, validFee,
+                validStartDateTime, validEndDateTime);
         String expectedMessage = StudentId.INVALID_MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
@@ -69,14 +70,16 @@ public class JsonAdaptedLessonTest {
     }
     @Test
     public void toModelType_invalidStartDateTime_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validFee, INVALID_START_DATE_TIME, validEndDateTime);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validFee, INVALID_START_DATE_TIME,
+                validEndDateTime);
         String expectedMessage = StartDateTime.START_DATE_MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }
 
     @Test
     public void toModelType_nullStartDateTime_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validFee, null, validEndDateTime);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validFee, null,
+                validEndDateTime);
         String expectedMessage = String.format(JsonAdaptedLesson.MISSING_FIELD_MESSAGE_FORMAT,
                 StartDateTime.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
@@ -84,7 +87,8 @@ public class JsonAdaptedLessonTest {
 
     @Test
     public void toModelType_invalidEndDateTime_throwsIllegalValueException() {
-        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validFee, validStartDateTime, INVALID_END_DATE_TIME);
+        JsonAdaptedLesson lesson = new JsonAdaptedLesson(validStudent, validFee, validStartDateTime,
+                INVALID_END_DATE_TIME);
         String expectedMessage = EndDateTime.END_DATE_MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> lesson.toModelType(tutorEase));
     }

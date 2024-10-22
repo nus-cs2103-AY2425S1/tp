@@ -117,8 +117,8 @@ public class Lesson {
      *
      * @return The fee per hour string of the lesson.
      */
-    public String getAmount() {
-        return fee.toString();
+    public String getFeeString() {
+        return fee.getValueString();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class Lesson {
         builder.append("Student: ")
                 .append(getStudent().getName())
                 .append(" Fee: ")
-                .append(getAmount())
+                .append(fee.toString())
                 .append(" Start: ")
                 .append(getStartDateTime())
                 .append(" End: ")

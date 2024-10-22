@@ -17,7 +17,6 @@ import static tutorease.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPA
 import static tutorease.address.logic.commands.CommandTestUtil.START_DATE_TIME_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.STUDENT_ID_DESC;
 import static tutorease.address.logic.commands.CommandTestUtil.VALID_STUDENT_ID;
-import static tutorease.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static tutorease.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 

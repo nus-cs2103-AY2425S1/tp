@@ -24,10 +24,10 @@ public class FeeTest {
     public void constructor_validFee() throws ParseException {
         String value = "1";
         Fee fee = new Fee(value);
-        assertEquals(value, fee.toString());
+        assertEquals(value, fee.getValueString());
         value = "0";
         fee = new Fee(value);
-        assertEquals(value, fee.toString());
+        assertEquals(value, fee.getValueString());
     }
     @Test
     public void isValidFee() {
@@ -44,7 +44,7 @@ public class FeeTest {
     public void toStringTest() throws ParseException {
         String value = "1";
         Fee fee = new Fee(value);
-        assertEquals(value, fee.toString());
+        assertEquals("$" + value, fee.toString());
     }
     @Test
     public void equals() throws ParseException {

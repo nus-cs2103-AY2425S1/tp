@@ -45,7 +45,7 @@ public class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         student = source.getStudentName();
-        fee = source.getAmount();
+        fee = source.getFeeString();
         startDateTime = dateTimeToString(source.getStartDateTime().getDateTime());
         endDateTime = dateTimeToString(source.getEndDateTime().getDateTime());
     }

@@ -37,9 +37,17 @@ public class Fee {
             return false;
         }
     }
+    /**
+     * Returns the value string of the fee.
+     *
+     * @return The value string of the fee.
+     */
+    public String getValueString() {
+        return String.valueOf(value);
+    }
     @Override
     public String toString() {
-        return String.valueOf(value);
+        return "$" + value;
     }
     @Override
     public boolean equals(Object other) {
