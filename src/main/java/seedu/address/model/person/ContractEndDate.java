@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
  * Represents a Person's Contract End Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public abstract class ContractEndDate {
+public abstract class ContractEndDate implements Comparable<ContractEndDate> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Contract End Date should only contain numeric characters and dashes in the format 'YYYY-MM-DD', and it"
@@ -63,6 +63,15 @@ public abstract class ContractEndDate {
         public String toString() {
             return "";
         }
+
+        @Override
+        public int compareTo(ContractEndDate t) {
+            if (t instanceof EmptyContractEndDate) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
     }
 
     static class FilledContractEndDate extends ContractEndDate {
@@ -109,6 +118,16 @@ public abstract class ContractEndDate {
         @Override
         public int hashCode() {
             return contractEndDate.hashCode();
+        }
+
+        @Override
+        public int compareTo(ContractEndDate t) {
+            if (t instanceof EmptyContractEndDate) {
+                return -1;
+            } else {
+                int comparisonResult = contractEndDate.compareTo(((FilledContractEndDate) t).contractEndDate);
+                return Integer.signum(comparisonResult);
+            }
         }
     }
 }

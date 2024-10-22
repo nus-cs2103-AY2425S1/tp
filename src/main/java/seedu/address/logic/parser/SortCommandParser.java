@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortDateCommand;
 import seedu.address.logic.commands.SortNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,6 +25,8 @@ public class SortCommandParser implements Parser<SortCommand> {
         args = args.trim();
         if (args.equals(SortNameCommand.ARGUMENT_WORD)) {
             return new SortNameCommand();
+        } else if (args.equals(SortDateCommand.ARGUMENT_WORD)) {
+            return new SortDateCommand();
         } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));

@@ -71,4 +71,31 @@ public class ContractEndDateTest {
         // same empty values -> return true
         assertTrue(emptyContractEndDate.equals(ContractEndDate.empty()));
     }
+
+    @Test
+    public void compareTo() {
+        ContractEndDate contractEndDate = ContractEndDate.of("2020-02-28");
+        ContractEndDate earlyContractEndDate = ContractEndDate.of("2000-01-01");
+        ContractEndDate lateContractEndDate = ContractEndDate.of("2021-01-01");
+        ContractEndDate emptyContractEndDate = ContractEndDate.empty();
+
+        // same values -> returns 0
+        assertEquals(0, contractEndDate.compareTo(ContractEndDate.of("2020-02-28")));
+
+        // comapre to earlier value -> returns 1
+        System.out.println(contractEndDate.compareTo(earlyContractEndDate) + "\n\n\n\n");
+        assertEquals(1, contractEndDate.compareTo(earlyContractEndDate));
+
+        // compare to later value -> returns -1
+        assertEquals(-1, contractEndDate.compareTo(lateContractEndDate));
+
+        // filled compare to empty -> returns -1
+        assertEquals(-1, contractEndDate.compareTo(emptyContractEndDate));
+
+        // empty compared to filled -> returns 1
+        assertEquals(1, emptyContractEndDate.compareTo(contractEndDate));
+
+        // same empty values -> return 0
+        assertEquals(0, emptyContractEndDate.compareTo(ContractEndDate.empty()));
+    }
 }

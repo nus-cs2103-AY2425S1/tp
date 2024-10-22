@@ -10,6 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonDateComparator;
 import seedu.address.model.person.PersonNameComparator;
 import seedu.address.testutil.PersonBuilder;
 
@@ -25,23 +26,38 @@ public class SortCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Person person = new PersonBuilder().withName("Aaa").build();
+        Person person = new PersonBuilder().withName("Aaa").withContractEndDate("2000-01-01").build();
         model.addPerson(person);
         expectedModel.addPerson(person);
-        expectedModel.updateSortedPersonList(new PersonNameComparator());
     }
 
     @Test
-    public void correctlySortsNewPerson() {
+    public void correctlySortsNewPersonByName() {
+        expectedModel.updateSortedPersonList(new PersonNameComparator());
         assertCommandSuccess(new SortNameCommand(), model, SortNameCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void correctlySortsExistingPersons() {
+    public void correctlySortsExistingPersonsByName() {
         // filter both lists to show all employees
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonNameComparator());
         assertCommandSuccess(new SortNameCommand(), model, SortNameCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void correctlySortsNewPersonByDate() {
+        expectedModel.updateSortedPersonList(new PersonDateComparator());
+        assertCommandSuccess(new SortDateCommand(), model, SortDateCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void correctlySortsExistingPersonsByDate() {
+        // filter both lists to show all employees
+        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
+        expectedModel.updateSortedPersonList(new PersonDateComparator());
+        assertCommandSuccess(new SortDateCommand(), model, SortDateCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
