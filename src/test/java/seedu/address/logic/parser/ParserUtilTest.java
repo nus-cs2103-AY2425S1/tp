@@ -232,6 +232,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseAttribute_knownAttributeWithGibberishBehind_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttribute(VALID_ATTRIBUTE_1 + WHITESPACE + "gamer" + WHITESPACE));
+    }
+
+    @Test
     public void parseAttribute_addressAttributeWithoutWhitespace_returnsTrimmedAttribute() throws Exception {
         String expectedAttribute = "address";
         assertEquals(expectedAttribute, ParserUtil.parseAttribute(VALID_ATTRIBUTE_1));

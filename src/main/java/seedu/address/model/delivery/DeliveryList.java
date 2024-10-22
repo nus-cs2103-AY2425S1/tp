@@ -105,7 +105,7 @@ public class DeliveryList {
      * Sorts the backing list using the {@code Cost} attribute of each delivery, in ascending order.
      */
     public void sortByCost() {
-        internalList.sort((d1, d2) -> (int) (d1.getCost().asFloat() - d2.getCost().asFloat()));
+        internalList.sort((d1, d2) -> Float.compare(d1.getCost().asFloat(), d2.getCost().asFloat()));
     }
 
     /**

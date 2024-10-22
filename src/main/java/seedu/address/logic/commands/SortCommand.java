@@ -31,7 +31,8 @@ public class SortCommand extends Command {
             + "Parameters: "
             + PREFIX_SORT + " DELIVERY_ATTRIBUTE (e.g. address, cost, date, eta, id, status)";
 
-    public static final String MESSAGE_UNKNOWN_ATTRIBUTE = "The delivery attribute specified is unknown!";
+    public static final String MESSAGE_UNKNOWN_ATTRIBUTE = "The delivery attribute specified is unknown! "
+            + "Current attributes supported are: address, cost, date, eta, id, status";
 
     private final String attribute;
     private final boolean isAscending;

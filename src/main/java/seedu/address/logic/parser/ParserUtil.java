@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Eta;
@@ -201,7 +202,7 @@ public class ParserUtil {
      */
     public static String parseAttribute(String attribute) throws ParseException {
         requireNonNull(attribute);
-        String trimmedAttribute = attribute.trim();
+        String trimmedAttribute = attribute.trim().toLowerCase(); // Make input case-insensitive.
         if (trimmedAttribute.equals("address")
             || trimmedAttribute.equals("cost")
             || trimmedAttribute.equals("date")
@@ -210,7 +211,7 @@ public class ParserUtil {
             || trimmedAttribute.equals("status")) {
             return trimmedAttribute;
         } else {
-            throw new ParseException("Current attributes supported are: address, cost, date, eta, id, status");
+            throw new ParseException(SortCommand.MESSAGE_UNKNOWN_ATTRIBUTE);
         }
     }
 }
