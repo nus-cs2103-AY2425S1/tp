@@ -44,6 +44,8 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_CLEAR_SCHEDULE_SUCCESS = "Cleared scheduled for %s";
     public static final String MESSAGE_FAILURE =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
+    public static final String MESSAGE_SCHEDULE_UNCHANGED =
+            "There was no change done to the existing schedule, if any.";
 
     private final Index index;
     private final ScheduleCommand.ScheduleDescriptor scheduleDescriptor;
@@ -76,6 +78,10 @@ public class ScheduleCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        if (!editedSchedule.equals(scheduleToEdit)) {
+            throw new CommandException(MESSAGE_SCHEDULE_UNCHANGED);
+        }
 
         if (editedSchedule.toString().isEmpty()) {
             return new CommandResult(String.format(
