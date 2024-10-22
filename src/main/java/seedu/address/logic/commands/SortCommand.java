@@ -15,8 +15,8 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Sorted.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the presented list "
-            + "in descending or ascending order according to the "
-            + " the name or date of last visit.\n"
+            + "in descending or ascending order according to "
+            + "name or date of last visit.\n"
             + "Parameters: Parameter prefix/Order\n"
             + "Example: " + COMMAND_WORD + " n/ascending\n"
             + "If order is not specified (ex. n/) ascending order assumed.";

@@ -13,7 +13,6 @@ import seedu.address.model.person.PersonComparator;
  * Parses input arguments and creates a new SortCommand Object.
  */
 public class SortCommandParser implements Parser<SortCommand> {
-
     /**
      * Checks if the given {@code String} of arguments is empty
      * and executes ListCommand object.
@@ -25,6 +24,11 @@ public class SortCommandParser implements Parser<SortCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATEOFLASTVISIT);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATEOFLASTVISIT);
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() &&
+                argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             return new SortCommand(PersonComparator.NAME,
