@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.io.File;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,9 +22,15 @@ public class ExportCommandTest {
 
 
     @Test
-    public void validImportCommandExecution_success() throws CommandException {
-        ExportCommand command = new ExportCommand(
-            "C:\\Users\\User\\Documents\\tp\\src\\test\\data\\testExport.csv");
+    public void validExportCommandExecution_success() throws CommandException {
+        // Get the project root directory path
+        String projectDir = System.getProperty("user.dir");
+        String filePath = projectDir + "/src/test/data/testExport.csv";
+
+        // Convert to system-appropriate path separators
+        filePath = filePath.replace("/", File.separator);
+
+        ExportCommand command = new ExportCommand(filePath);
         CommandResult commandResult = command.execute(model);
         assertEquals("Exported " + getTypicalAddressBook().getPersonList().size()
             + " persons to CSV.", commandResult.getFeedbackToUser());
