@@ -138,10 +138,12 @@ View the contact of a specified person from the address book.
 Format: `view KEYWORD`
 
 * This command is case-insensitive. e.g `alex tan` will match `Alex Tan`
-* The keyword can be either the full name (consisting multiple words) or partial name (consisting of only one word).
-* Viewing the full name will match the exact name given e.g. `Alex Tan` will only give `Alex Tan`
-* Viewing partial name will find all contacts that has names containing the keyword e.g. `Alex` will give `Alex Tan` and `Alex Yeo`
+* The keyword can be either the full name or partial name (consisting of only one word).
 * Only the name can be used for viewing
+
+Examples:
+* `view John` returns `john` and `John Doe`
+* `view Alex Yeo` return `Alex Yeo` and `Alex Yeo Jun Jie`
 
 ### Deleting a person : `delete`
 
