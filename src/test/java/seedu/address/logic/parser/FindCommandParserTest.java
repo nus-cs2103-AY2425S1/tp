@@ -69,12 +69,12 @@ public class FindCommandParserTest {
                 "You have entered an invalid Nric!\n"
                         + Nric.MESSAGE_CONSTRAINTS);
     }
-   @Test
-   public void parse_argsWithInvalidName_throwsParseException() {
-       // Names should only have alphanumeric characters and spaces
-       assertParseFailure(parser, " n/bob /",
-               "You have entered an invalid name!\n"
-                       + Name.MESSAGE_CONSTRAINTS);
-   }
+    @Test
+    public void parse_argsWithInvalidName_throwsParseException() {
+        // Names should only have alphanumeric characters and spaces
+        assertParseFailure(parser, " n/bob /",
+                "You have entered an invalid name!\n"
+                        + Name.MESSAGE_CONSTRAINTS);
+    }
 
 }
