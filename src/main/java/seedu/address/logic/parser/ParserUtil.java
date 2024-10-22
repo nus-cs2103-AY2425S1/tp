@@ -9,10 +9,12 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendance.Attendance;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
+import seedu.address.model.role.Member;
 import seedu.address.model.role.Role;
 
 /**
@@ -96,6 +98,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String dateString} into an {@code Attendance}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static Attendance parseAttendance(String dateString) throws ParseException {
+        requireNonNull(dateString);
+        String trimmedDateString = dateString.trim();
+        if (!Attendance.isValidDate(trimmedDateString)) {
+            throw new ParseException(Attendance.MESSAGE_CONSTRAINTS);
+        }
+        return new Attendance(trimmedDateString);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Role}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -106,6 +123,9 @@ public class ParserUtil {
         String trimmedRole = role.trim();
         if (!Role.isValidRoleName(trimmedRole)) {
             throw new ParseException(Role.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedRole.toLowerCase().equals(Member.MEMBER_ROLE.toLowerCase())) {
+            return new Member();
         }
         return new Role(trimmedRole);
     }
