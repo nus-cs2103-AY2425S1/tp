@@ -69,10 +69,6 @@ public class DeleteLessonCommand extends LessonCommand {
         return targetIndex.equals(otherDeleteLessonCommand.targetIndex);
     }
 
-    public String indexString() {
-        return targetIndex.toString();
-    }
-
     @Override
     public String toString() {
         return String.format(DELETE_COMMAND_STRING_FORMAT, targetIndex.getZeroBased());
