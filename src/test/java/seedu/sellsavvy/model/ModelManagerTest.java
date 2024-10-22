@@ -180,7 +180,7 @@ public class ModelManagerTest {
     public void setOrder() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs()).createCopy();
 
-        // Assertion error thrown when there is not selectedPerson
+        // Assertion error thrown when there is no selectedPerson
         assertThrows(AssertionError.class, () -> model.setOrder(ABACUS, BOTTLE));
 
         Person selectedPerson = model.findEquivalentPerson(GEORGE);
@@ -233,7 +233,7 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
 
-        //different selectedPerson -> returns false
+        // different selectedPerson -> returns false
         modelManager.updateSelectedPerson(ALICE);
         assertFalse(modelManager.equals(modelManagerCopy));
         assertFalse(modelManagerCopy.equals(modelManager));
