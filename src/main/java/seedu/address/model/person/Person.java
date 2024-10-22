@@ -110,6 +110,16 @@ public class Person {
     }
 
     /**
+     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * {@code targetIndex} must be a valid index in the deliveryList.
+     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     */
+    public void archiveDelivery(Index targetIndex, Delivery archivedDelivery) {
+        deleteDelivery(targetIndex);
+        addDelivery(archivedDelivery);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
