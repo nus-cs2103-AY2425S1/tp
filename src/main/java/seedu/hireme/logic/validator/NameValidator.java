@@ -11,10 +11,10 @@ public class NameValidator extends Validator<String> {
     private NameValidator() {}
 
     /**
-     * Returns an instance of {@code EmailValidator}.
-     * Ensures only one instance of {@code EmailValidator} is created.
+     * Returns an instance of {@code NameValidator}.
+     * Ensures only one instance of {@code NameValidator} is created.
      *
-     * @return the instance of {@code EmailValidator}.
+     * @return the instance of {@code NameValidator}.
      */
     public static NameValidator of() {
         if (instance == null) {

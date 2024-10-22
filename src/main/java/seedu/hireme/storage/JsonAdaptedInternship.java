@@ -8,12 +8,14 @@ import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.logic.validator.EmailValidator;
 import seedu.hireme.logic.validator.NameValidator;
 import seedu.hireme.logic.validator.RoleValidator;
+import seedu.hireme.logic.validator.StatusValidator;
 import seedu.hireme.model.internshipapplication.Company;
 import seedu.hireme.model.internshipapplication.Date;
 import seedu.hireme.model.internshipapplication.Email;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
 import seedu.hireme.model.internshipapplication.Name;
 import seedu.hireme.model.internshipapplication.Role;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Jackson-friendly version of {@link InternshipApplication}.
@@ -21,11 +23,14 @@ import seedu.hireme.model.internshipapplication.Role;
 class JsonAdaptedInternship {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Internship application's %s field is missing!";
+    public static final String MISSING_STATUS_FIELD_MESSAGE = "Status field in the Json file is missing!";
 
     private final String companyName;
     private final String companyEmail;
     private final String role;
     private final String dateString;
+
+    private final String statusString;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given internship application details.
@@ -33,12 +38,14 @@ class JsonAdaptedInternship {
     @JsonCreator
     public JsonAdaptedInternship(@JsonProperty("companyName") String companyName,
                                  @JsonProperty("companyEmail") String companyEmail,
-            @JsonProperty("role") String role, @JsonProperty("date") String date) {
+                                 @JsonProperty("role") String role,
+                                 @JsonProperty("date") String date,
+                                 @JsonProperty("status") String status) {
         this.companyName = companyName;
         this.companyEmail = companyEmail;
         this.role = role;
-        //  this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yy"));
         this.dateString = date;
+        this.statusString = status;
     }
 
     /**
@@ -49,6 +56,7 @@ class JsonAdaptedInternship {
         companyEmail = source.getCompany().getEmail().getValue();
         role = source.getRole().getValue();
         dateString = source.getDateOfApplication().getValue().format(DateValidator.FORMATTER);
+        statusString = source.getStatus().getValue();
     }
 
     /**
@@ -90,13 +98,23 @@ class JsonAdaptedInternship {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
 
+        if (statusString == null) {
+            throw new IllegalValueException(MISSING_STATUS_FIELD_MESSAGE);
+        }
+
+        if (!StatusValidator.of().validate(statusString)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+
+
         Name name = new Name(companyName);
         Email email = new Email(companyEmail);
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.dateString);
+        Status status = Status.valueOf(statusString);
 
-        return new InternshipApplication(company, date, role);
+        return new InternshipApplication(company, date, role, status);
     }
 
 }
