@@ -4,12 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.DRALICE;
-import static seedu.address.testutil.TypicalPersons.DRBENSON;
-import static seedu.address.testutil.TypicalPersons.DRELLE;
-import static seedu.address.testutil.TypicalPersons.PATIENTALICE;
-import static seedu.address.testutil.TypicalPersons.PATIENTBENSON;
-import static seedu.address.testutil.TypicalPersons.PATIENTCARL;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.ELLE;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,13 +15,13 @@ import org.junit.jupiter.api.Test;
 public class AppointmentTest {
 
     private Appointment appointment;
-    private Doctor doctor;
-    private Patient patient;
+    private Person doctor;
+    private Person patient;
 
     @BeforeEach
     public void setUp() {
-        patient = PATIENTALICE;
-        doctor = DRBENSON;
+        patient = ALICE;
+        doctor = BENSON;
 
         // Create an Appointment object
         appointment = new Appointment(patient.getId(), doctor.getId(), "Monthly check-up");
@@ -57,8 +55,8 @@ public class AppointmentTest {
 
     @Test
     public void equals() {
-        Patient patientCopy = PATIENTALICE;
-        Doctor doctorCopy = DRBENSON;
+        Person patientCopy = ALICE;
+        Person doctorCopy = BENSON;
         Appointment appointmentCopy = new Appointment(patientCopy.getId(), doctorCopy.getId(),
                 "Monthly check-up");
         assertEquals(appointment, appointmentCopy);
@@ -67,8 +65,8 @@ public class AppointmentTest {
         assertEquals(appointment.getPatientId(), appointmentCopy.getPatientId());
         assertEquals(appointment.getRemarks(), appointmentCopy.getRemarks());
 
-        Patient newPatient = PATIENTCARL;
-        Doctor newDoctor = DRELLE;
+        Person newPatient = CARL;
+        Person newDoctor = ELLE;
         Appointment newAppointment = new Appointment(newPatient.getId(), newDoctor.getId(),
                 "Monthly check-up");
         assertFalse(appointment.equals(newAppointment));
@@ -79,8 +77,8 @@ public class AppointmentTest {
         assertFalse(appointment.equals(newAppointmentRemark));
         assertFalse(newAppointmentRemark.equals(appointment));
 
-        Patient evilPatient = PATIENTBENSON;
-        Doctor evilDoctor = DRALICE;
+        Person evilPatient = BENSON;
+        Person evilDoctor = ALICE;
         Appointment newEvilAppointment = new Appointment(evilPatient.getId(), evilDoctor.getId(),
                 "Monthly check-up");
         assertFalse(appointment.equals(newEvilAppointment));
@@ -101,8 +99,8 @@ public class AppointmentTest {
 
     @Test
     public void hashCode_hashesCorrectly() {
-        Patient patientCopy = PATIENTALICE;
-        Doctor doctorCopy = DRBENSON;
+        Person patientCopy = ALICE;
+        Person doctorCopy = BENSON;
         Appointment appointmentCopy = new Appointment(patientCopy.getId(), doctorCopy.getId(),
                 "Monthly check-up");
 

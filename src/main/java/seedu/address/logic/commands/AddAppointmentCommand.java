@@ -10,9 +10,7 @@ import java.time.LocalDateTime;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -61,8 +59,8 @@ public class AddAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Patient patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
-        Doctor doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
+        Person patientToAddAppointment = model.getFilteredPatientById(allPersons, patientId);
+        Person doctorToAddAppointment = model.getFilteredDoctorById(allPersons, doctorId);
         boolean isPatientFree = patientToAddAppointment.addAppointment(appointmentTime, patientToAddAppointment.getId(),
                 doctorToAddAppointment.getId(), remarks);
 

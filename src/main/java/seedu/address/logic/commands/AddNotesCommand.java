@@ -53,7 +53,7 @@ public class AddNotesCommand extends Command {
 
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Patient patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
+        Person patientToAddNotes = model.getFilteredPatientById(allPersons, patientId);
         patientToAddNotes.addNotes(additionalNotes);
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

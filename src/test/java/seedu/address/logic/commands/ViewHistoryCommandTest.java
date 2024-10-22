@@ -19,9 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Id;
-import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -180,12 +178,12 @@ public class ViewHistoryCommandTest {
         }
 
         @Override
-        public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
             return null;
         }
 
         @Override
-        public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
             return null;
         }
 
@@ -197,10 +195,10 @@ public class ViewHistoryCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithAppointment extends ViewHistoryCommandTest.ModelStub {
-        private final Patient patient;
-        private final Doctor doctor;
+        private final Person patient;
+        private final Person doctor;
 
-        ModelStubWithAppointment(Patient patient, Doctor doctor) {
+        ModelStubWithAppointment(Person patient, Person doctor) {
             requireNonNull(patient);
             requireNonNull(doctor);
             this.patient = patient;
@@ -219,12 +217,12 @@ public class ViewHistoryCommandTest {
         }
 
         @Override
-        public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
             return patient.getId().equals(id) ? patient : null;
         }
 
         @Override
-        public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
             return doctor.getId().equals(id) ? doctor : null;
         }
     }
@@ -250,7 +248,7 @@ public class ViewHistoryCommandTest {
         }
 
         @Override
-        public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
             // Search for a patient with the specified ID
             for (Person person : allPersons) {
                 if (person.getId().equals(id) && person instanceof Patient) {
@@ -261,11 +259,11 @@ public class ViewHistoryCommandTest {
         }
 
         @Override
-        public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        public Person getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
             // Search for a doctor with the specified ID
             for (Person person : allPersons) {
-                if (person.getId().equals(id) && person instanceof Doctor) {
-                    return (Doctor) person;
+                if (person.getId().equals(id) && person instanceof Person) {
+                    return person;
                 }
             }
             return null;

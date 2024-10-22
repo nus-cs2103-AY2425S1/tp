@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.CreateDoctorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -51,7 +51,7 @@ public class CreateDoctorCommandParser implements Parser<CreateDoctorCommand> {
         Remark remark = new Remark("");
         Set<Tag> tagList = new HashSet<>();
 
-        Doctor doctor = new Doctor(name, role, phone, email, address, remark, tagList);
+        Person doctor = new Person(name, role, phone, email, address, remark, tagList);
 
 
         return new CreateDoctorCommand(doctor);

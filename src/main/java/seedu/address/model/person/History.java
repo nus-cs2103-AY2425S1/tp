@@ -118,7 +118,7 @@ public class History {
      */
     public static boolean deleteAppointment(LocalDateTime date, Id patientId, Id doctorId) {
         Appointment appointment = appointmentDatabase.get(date);
-        Patient patient = Patient.getPatientWithId(patientId);
+        Person patient = Person.getPersonWithId(patientId);
         History history = patient.getHistory();
         if (appointment == null || history.checkDuplicateAppointments(date)) {
             return false;
@@ -345,7 +345,7 @@ public class History {
      * @param patientId The ID of the patient that is removed.
      */
     public static void deletePatientsAppointments(Id patientId) {
-        Patient patient = Patient.getPatientWithId(patientId);
+        Person patient = Person.getPatientWithId(patientId);
         for (LocalDateTime date : patient.getHistory().appointments) {
             Appointment appointment = appointmentDatabase.get(date);
             if (appointment.getPatientId().equals(patientId)) {

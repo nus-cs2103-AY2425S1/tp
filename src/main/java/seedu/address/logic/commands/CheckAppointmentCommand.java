@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Doctor;
 import seedu.address.model.person.Id;
 import seedu.address.model.person.Person;
 
@@ -49,7 +48,7 @@ public class CheckAppointmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> allPersons = model.getFilteredPersonList();
-        Doctor doctorToCheckAppointment = model.getFilteredDoctorById(allPersons, doctorId);
+        Person doctorToCheckAppointment = model.getFilteredDoctorById(allPersons, doctorId);
         if (doctorToCheckAppointment == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

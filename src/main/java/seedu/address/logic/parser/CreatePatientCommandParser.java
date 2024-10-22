@@ -16,6 +16,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Patient;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
@@ -49,7 +50,7 @@ public class CreatePatientCommandParser implements Parser<CreatePatientCommand> 
         Remark remark = new Remark("");
         Set<Tag> tagList = new HashSet<>();
 
-        Patient patient = new Patient(name, role, phone, email, address, remark, tagList);
+        Person patient = new Person(name, role, phone, email, address, remark, tagList);
 
 
         return new CreatePatientCommand(patient);

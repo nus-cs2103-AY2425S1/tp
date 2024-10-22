@@ -42,7 +42,7 @@ public class Person implements Appointmentable {
         this.address = address;
         this.remark = remark;
         this.tags.addAll(tags);
-        this.id = new Id(this.getClass());
+        this.id = new Id(role);
         this.history = new History();
     }
 
@@ -227,6 +227,8 @@ public class Person implements Appointmentable {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" ID: ")
+                .append(getId())
+                .append(" Role: ")
                 .append(getRole())
                 .append(" Phone: ")
                 .append(getPhone())

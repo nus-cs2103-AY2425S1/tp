@@ -41,7 +41,7 @@ public class DeletePatientCommand extends Command {
 
         ObservableList<Person> allPersons = model.getFilteredPersonList();
 
-        Patient patientToDelete = model.getFilteredPatientById(allPersons, patientId);
+        Person patientToDelete = model.getFilteredPatientById(allPersons, patientId);
         model.deletePerson(patientToDelete);
         History.deletePatientsAppointments(patientId);
 
