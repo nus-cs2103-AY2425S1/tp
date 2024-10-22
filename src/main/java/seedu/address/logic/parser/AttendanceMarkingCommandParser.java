@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -53,7 +54,12 @@ public class AttendanceMarkingCommandParser implements Parser<AttendanceMarkingC
                     MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceCommand.MESSAGE_USAGE));
         }
 
-        List<Telegram> telegrams = telegramKeywords.stream().map(String::trim).map(Telegram::new).toList();
+
+        List<Telegram> telegrams = new ArrayList<>();
+        for (String telegramStr : telegramKeywords) {
+            String trimmedTelegram = telegramStr.trim();
+            telegrams.add(ParserUtil.parseTelegram(trimmedTelegram));
+        }
 
         if (markType.equals(MarkAttendanceCommand.COMMAND_WORD)) {
             return new MarkAttendanceCommand(telegrams, attendance);
