@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,18 +16,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationExtension;
-import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.commons.exceptions.DataLoadingException;
-
 
 @ExtendWith(ApplicationExtension.class)
 public class MainAppUiTest {
