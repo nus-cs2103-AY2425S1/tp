@@ -108,6 +108,18 @@ public class ImportCommand extends Command {
             throw new CommandException("Error reading from the CSV file: " + e.getMessage());
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ImportCommand)) {
+            return false;
+        }
+        ImportCommand other = (ImportCommand) obj;
+        return this.csvFilePath.equals(other.csvFilePath);
+    }
 }
 
 

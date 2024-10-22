@@ -40,8 +40,6 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException("CSV file path cannot be empty.");
         }
 
-        // Specify the JSON file path (you can adjust this logic as needed)
-        String jsonFilePath = csvFilePath.substring(0, csvFilePath.lastIndexOf('.')) + ".json";
 
         return new ImportCommand(csvFilePath);
     }
