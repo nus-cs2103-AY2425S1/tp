@@ -119,6 +119,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getBackupAddressBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setBackupAddressBookFilePath(Path backupAddressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -179,6 +189,13 @@ public class AddCommandTest {
         public void sortFilteredPersonList(String order) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public ObservableList<Person> getPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**

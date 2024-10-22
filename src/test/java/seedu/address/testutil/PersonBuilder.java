@@ -8,6 +8,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,12 +22,18 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_SCHEDULE_NAME = "";
+    public static final String DEFAULT_SCHEDULE_DATE = "";
+    public static final String DEFAULT_SCHEDULE_TIME = "";
+    public static final String DEFAULT_SOCIALMEDIA = " ";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Schedule schedule;
     private Set<Tag> tags;
+    private SocialMedia socialMedia;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -35,7 +43,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        schedule = new Schedule(DEFAULT_SCHEDULE_NAME, DEFAULT_SCHEDULE_DATE, DEFAULT_SCHEDULE_TIME);
         tags = new HashSet<>();
+        socialMedia = new SocialMedia(DEFAULT_SOCIALMEDIA, SocialMedia.Platform.UNNAMED);
     }
 
     /**
@@ -46,7 +56,9 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        schedule = personToCopy.getSchedule();
         tags = new HashSet<>(personToCopy.getTags());
+        socialMedia = personToCopy.getSocialMedia();
     }
 
     /**
@@ -89,8 +101,56 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    /**
+     * Sets the {@code scheduleName} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withScheduleName(String scheduleName) {
+        this.schedule = new Schedule(scheduleName, this.schedule.dateString, this.schedule.timeString);
+        return this;
     }
 
+    /**
+     * Sets the {@code scheduleDate} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withScheduleDate(String scheduleDate) {
+        this.schedule = new Schedule(this.schedule.scheduleName, scheduleDate, this.schedule.timeString);
+        return this;
+    }
+
+    /**
+     * Sets the {@code scheduleTime} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withScheduleTime(String scheduleTime) {
+        this.schedule = new Schedule(this.schedule.scheduleName, this.schedule.dateString, scheduleTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code SocialMedia} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSocialMedia(String socialMedia) {
+        if (socialMedia.startsWith("[ig-")) {
+            this.socialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                    SocialMedia.Platform.INSTAGRAM);
+            return this;
+        } else if (socialMedia.startsWith("[fb-")) {
+            this.socialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                    SocialMedia.Platform.FACEBOOK);
+            return this;
+        } else {
+            this.socialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                    SocialMedia.Platform.CAROUSELL);
+            return this;
+        }
+    }
+
+    /**
+     * builds a new person.
+     * @return Person
+     */
+    public Person build() {
+        Person p = new Person(name, phone, email, address, schedule, tags);
+        p.setSocialMedia(socialMedia);
+        return p;
+    }
 }

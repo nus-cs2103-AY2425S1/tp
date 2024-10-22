@@ -109,6 +109,22 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Renaming a Tag : `renameTag`
+
+Renames an existing tag in the address book.
+
+Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
+
+* Renames the tags called `OLDTAG` to `NEWTAG`.
+* Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
+* If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
+
+Examples:
+*  `renameTag ot/manager nt/boss` Renames the tag `colleagues` to be `boss`.
+![result for 'rename tag1'](images/renameTagResult1.png)
+*  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
+![result for 'rename tag2'](images/renameTagResult2.png)
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -153,10 +169,40 @@ Format: `delete INDEX`
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-
+0000
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Restoring a deleted person : `restore`
+
+Restores the person deleted from the address book by the 'delete' command.
+
+format: `restore`
+
+* Restores the last person deleted from the address book by the 'delete' command.
+* Only works if person has been deleted by the 'delete' command within the session.
+* Does not work if same person has been added to the address book after deletion using add command.
+
+Examples:
+* `restore` will restore the most recently deleted person, in this case, the 2nd person Bernice Yu.
+  ![result for 'restore'](images/restoreResult1.png)
+
+### Sort persons by name: `sort`
+
+Sorts and displays the list of persons by name in either ascending or descending alphabetical order
+
+Format: `sort [ORDER]`
+
+* `[ORDER]` can be either "asc" / "ascending" or "desc" / "descending" (case-insensitive)
+* If no order is provided, persons will be sorted in ascending order by default
+
+Examples:
+* `sort` will sort by persons names alphabetically in ascending order
+* `sort ascending` will sort by persons names alphabetically in ascending order
+  ![result for 'sort and sort ascending'](images/sortResult.png)
+* `sort descending` will sort by persons names alphabetically in descending order
+  ![result for 'sort descending'](images/sortDescendingResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -214,3 +260,8 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Restore** | `restore`
+**Sort** | `sort [ORDER]`<br> e.g., `sort asc`
+**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss`
+**Filter** | `filter [t/TAG]`<br> e.g., `filter t/friends`
+

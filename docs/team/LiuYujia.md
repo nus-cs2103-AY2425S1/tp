@@ -9,26 +9,26 @@ AddressBook - Level 3 is a desktop address book application used for teaching So
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
 * **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
 
-* **Code contributed**: 
+* **Code contributed**:
 
 * **Project management**:
-    
+
 
 * **Enhancements to existing features**:
-   
+
 
 * **Documentation**:
     * User Guide:
-       
+
     * Developer Guide:
-        
+
 
 * **Community**:
-    
+
 
 * **Tools**:
 
