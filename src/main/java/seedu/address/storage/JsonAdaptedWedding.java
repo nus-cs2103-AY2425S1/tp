@@ -19,8 +19,8 @@ class JsonAdaptedWedding {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Wedding's %s field is missing!";
 
-    private final JsonAdaptedPartner bride;
-    private final JsonAdaptedPartner groom;
+    private final JsonAdaptedPerson bride;
+    private final JsonAdaptedPerson groom;
     private final String venue;
     private final String date;
     private final JsonAdaptedContactMap contactMap;
@@ -62,12 +62,12 @@ class JsonAdaptedWedding {
         if (bride == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Bride"));
         }
-        final Wife modelBride = new Wife(bride.getPreferredName(), bride.toModelType());
+        final Wife modelBride = new Wife(bride.toModelType().getName().toString(), bride.toModelType());
 
         if (groom == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Groom"));
         }
-        final Husband modelGroom = new Husband(groom.getPreferredName(), groom.toModelType());
+        final Husband modelGroom = new Husband(groom.toModelType().getName().toString(), groom.toModelType());
 
         if (venue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));

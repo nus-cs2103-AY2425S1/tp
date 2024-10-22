@@ -21,8 +21,12 @@ public class JsonAdaptedPartner extends JsonAdaptedPerson {
     }
 
     public JsonAdaptedPartner(Partner source) {
-        super(source.getPerson());
-        this.preferredName = source.getNameToUse().fullName;
+        super(source.getPerson().getName().fullName, source.getPerson().getPhone().value,
+                source.getPerson().getEmail().value, source.getPerson().getAddress().value,
+                source.getPerson().getTags().stream()
+                        .map(JsonAdaptedTag::new)
+                        .collect(java.util.stream.Collectors.toList()));
+        this.preferredName = source.getNameToUse().toString();
     }
 
     public String getPreferredName() {

@@ -44,9 +44,10 @@ public class WeddingCard extends UiPart<Region> {
     public WeddingCard(Wedding wedding, int displayedIndex) {
         super(FXML);
         this.wedding = wedding;
-        id.setText(displayedIndex + "");
+        id.setText(displayedIndex + ".");
         weddingName.setText(wedding.getWeddingName());
         date.setText(wedding.getDate().toString());
         venue.setText(wedding.getVenue().toString());
+
     }
 }

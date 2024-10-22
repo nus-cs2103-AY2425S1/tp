@@ -80,7 +80,7 @@ public class Wedding {
 
 
     public String getWeddingName() {
-        return husband + " & " + wife;
+        return husband.getNameToUse() + " & " + wife.getNameToUse();
     }
     public ContactMap getContactList() {
         return contactList;
