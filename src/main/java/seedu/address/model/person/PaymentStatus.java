@@ -77,7 +77,7 @@ public class PaymentStatus {
         }
 
         PaymentStatus otherStatus = (PaymentStatus) other;
-        return value.equals(otherStatus);
+        return value.equals(otherStatus.value);
     }
 
     @Override
