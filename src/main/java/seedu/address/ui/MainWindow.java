@@ -157,6 +157,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handlePieChart() {
+        if (pieChartWindow != null) {
+            pieChartWindow.close();
+        }
         pieChartWindow = new PieChartWindow();
         pieChartWindow.show();
     }
@@ -166,6 +169,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleBarChart() {
+        if (barChartWindow != null) {
+            barChartWindow.close();
+        }
         barChartWindow = new BarChartWindow();
         barChartWindow.show();
     }
