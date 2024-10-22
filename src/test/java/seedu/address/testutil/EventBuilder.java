@@ -17,7 +17,7 @@ public class EventBuilder {
     public static final String DEFAULT_NAME = "Event A";
     public static final LocalDate DEFAULT_DATE = LocalDate.of(2023, 10, 1);
     public static final Set<Person> DEFAULT_ATTENDEES = SampleDataUtil.getSampleAttendees();
-    public static final Set<Index> DEFAULT_INDEXES = new HashSet<>();
+    public static final Set<Index> DEFAULT_INDEXES = SampleDataUtil.getSampleIndexes();
 
     private String name;
     private LocalDate date;

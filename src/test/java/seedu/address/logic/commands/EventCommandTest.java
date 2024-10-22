@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventBook;
@@ -42,7 +41,7 @@ public class EventCommandTest {
     @Test
     public void execute_eventAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
-        Event validEvent = new EventBuilder().buildWithNoAttendees();
+        Event validEvent = new EventBuilder().build();
         CommandResult commandResult =
                 new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_INDEXES).execute(modelStub);
 
@@ -52,8 +51,22 @@ public class EventCommandTest {
     }
 
     @Test
-    public void execute_duplicateEvent_throwsCommandException() {
+    public void execute_eventNoAttendeesAcceptedByModel_addSuccessful() throws Exception {
+        // tests when the user does not enter -a prefix
+        Set<Index> emptyIndexes = new HashSet<>();
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
         Event validEvent = new EventBuilder().buildWithNoAttendees();
+        CommandResult commandResult =
+                new EventCommand(DEFAULT_NAME, DEFAULT_DATE, emptyIndexes).execute(modelStub);
+
+        assertEquals(String.format(EventCommand.MESSAGE_SUCCESS, Messages.formatEvent(validEvent)),
+                commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validEvent), modelStub.eventsAdded);
+    }
+
+    @Test
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event validEvent = new EventBuilder().build();
         EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_DATE, DEFAULT_INDEXES);
         ModelStubWithEvent modelStub = new ModelStubWithEvent(validEvent);
 
@@ -120,7 +133,7 @@ public class EventCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return SampleDataUtil.getSampleAddressBook();
         }
 
         @Override

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,7 +24,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final int ADDRESSBOOK_SIZE = 6; // size of number of Persons
+    public static final int ADDRESSBOOK_SIZE = 6; // number of Persons in sample address book
 
     public static final Person PERSON_ALEX =
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -57,6 +58,14 @@ public class SampleDataUtil {
         Set<Person> attendees = new HashSet<>();
         attendees.addAll(Arrays.asList(getSamplePersons()));
         return attendees;
+    }
+
+    public static Set<Index> getSampleIndexes() {
+        Set<Index> indexes = new HashSet<>();
+        for (int i = 0; i < ADDRESSBOOK_SIZE; i++) {
+            indexes.add(Index.fromZeroBased(i));
+        }
+        return indexes;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
