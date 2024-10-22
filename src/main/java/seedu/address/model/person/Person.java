@@ -135,10 +135,15 @@ public class Person {
     }
 
     /**
-     * Removes the appointment of the person by setting the schedule to an empty string.
+     * Removes the appointment of the given {@code appointment}.
      */
-    public void removeAppointment() {
-        schedules = new HashSet<>();
+    public void removeAppointment(Schedule appointment) {
+        for (Schedule schedule : schedules) {
+            if (schedule.equals(appointment)) {
+                schedules.remove(appointment);
+                break;
+            }
+        }
     }
 
     /**

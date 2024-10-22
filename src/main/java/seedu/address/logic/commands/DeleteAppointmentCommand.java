@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -21,15 +22,17 @@ public class DeleteAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified appointment.\n"
-            + "Parameters: NAME (must be the name of an existing client)\n"
-            + "Example: " + COMMAND_WORD + " John Doe";
+            + "Parameters: NAME d/DATE\n"
+            + "Example: " + COMMAND_WORD + " John Doe d/2024-10-01";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment for %1$s";
 
     private Name name;
+    private Schedule appointment;
 
-    public DeleteAppointmentCommand(Name name) {
+    public DeleteAppointmentCommand(Name name, Schedule appointment) {
         this.name = name;
+        this.appointment = appointment;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class DeleteAppointmentCommand extends Command {
 
         int index = -1;
         for (int i = 0; i < lastShownList.size(); i++) {
-            if (lastShownList.get(i).getName().toString().equals(name.toString())) {
+            if (lastShownList.get(i).getName().equals(name)) {
                 index = i;
                 break;
             }
@@ -49,18 +52,31 @@ public class DeleteAppointmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_NAME_DISPLAYED);
         }
 
-        Schedule appointment = lastShownList.get(index).getSchedules().iterator().next();
-        Person appointmentToDelete = lastShownList.get(index);
-        model.deleteAppointment(appointmentToDelete);
+        Person personWithAppointmentToDelete = lastShownList.get(index);
+        
+        Schedule appointmentToDelete = new Schedule("","");
+        for (Schedule schedule : personWithAppointmentToDelete.getSchedules()) {
+            if (schedule.equals(appointment)) {
+                appointmentToDelete = appointment;
+                break;
+            }
+        }
+
+        if (appointmentToDelete.getDateTime() == "") {
+            throw new CommandException(Messages.MESSAGE_INVALID_APPOINTMENT_DISPLAYED);
+        }
+
+        model.deleteAppointment(personWithAppointmentToDelete, appointment);
 
         // if the person has no scheduled appointments and a reminder set, delete the reminder  
         if (lastShownList.get(index).getSchedules().isEmpty()
-                && appointmentToDelete.getReminder() != null) {
-            model.deleteReminder(appointmentToDelete);
+                && personWithAppointmentToDelete.getReminder() != null) {
+            model.deleteReminder(personWithAppointmentToDelete);
         }
 
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
-                Messages.formatSchedule(appointmentToDelete, appointment)));
+                Messages.formatSchedule(personWithAppointmentToDelete, appointment)));
     }
 
     @Override
@@ -75,7 +91,7 @@ public class DeleteAppointmentCommand extends Command {
         }
 
         DeleteAppointmentCommand otherDeleteAppointmentCommand = (DeleteAppointmentCommand) other;
-        return name.equals(otherDeleteAppointmentCommand.name);
+        return appointment.equals(otherDeleteAppointmentCommand.appointment);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
@@ -51,6 +52,7 @@ public class DeleteReminderCommand extends Command{
         String reminder = lastShownList.get(index).getReminder().reminder;
         Person reminderToDelete = lastShownList.get(index);
         model.deleteReminder(reminderToDelete);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_REMINDER_SUCCESS,
                 Messages.formatReminder(reminderToDelete, reminder)));
     }
