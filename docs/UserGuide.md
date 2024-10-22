@@ -4,9 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# Clientell User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Clientell is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Clientell can get your contact management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -174,6 +174,21 @@ Examples:
 * `list` followed by `listt 1` lists transactions for the 1st person in the address book.
 * `find Betsy` followed by `listt 1` lists the transactions for the 1st person in the results of the `find` command.
 
+
+### Deleting Transactions for a specified person: `deletet`
+
+Format: `deletet INDEX`
+
+* Deletes the transactions at the specified `INDEX`.
+* The index refers to the index number of the transaction.
+* This command is intended to be used in conjunction with listt
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listt 1` followed by `deletet 1` loads the transaction list for the first person, then deletes the first transaction.
+* `findt 1 flowers` followed by `deletet 1` loads the list of transactions containing 'flowers' for the first person, then deletes the first transaction
+in the results of the `findt` command.
+
 ### Finding transactions by description: `findt`
 
 Finds transactions of a given person whose descriptions contain any of the given keywords.
@@ -199,6 +214,7 @@ Examples:
 * `findt 1 materials invest` returns `Invest` and `Buy raw materials`.
 ![result for 'findt 1 materials invest'](images/findt.png)
 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -223,7 +239,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore,    certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -257,5 +273,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake Microsoft`
 **List**   | `list`
 **Add Transaction** | `addt INDEX d/DESCRIPTION amt/AMOUNT o/OTHER_PARTY dt/DATE` <br> e.g., `addt 1 d/buy raw materials amt/-100 o/Company ABC dt/16-10-2024` 
+**Delete Transaction** | `delelet INDEX` <br> e..g., `deletet 1`
 **List Transactions** | `listt INDEX`<br> e.g., `listt 2`
 **Help**   | `help`
