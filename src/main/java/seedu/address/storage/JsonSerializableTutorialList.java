@@ -46,8 +46,10 @@ class JsonSerializableTutorialList {
     public TutorialList toModelType() throws IllegalValueException {
         TutorialList tutorialList = new TutorialList();
         for (JsonAdaptedTutorial jsonAdaptedTut : tutorials) {
-            Tutorial tutorial = jsonAdaptedTut.toModelType();
-            tutorialList.addTutorial(tutorial);
+            if (!jsonAdaptedTut.toModelType().equals(Tutorial.none())) {
+                Tutorial tutorial = jsonAdaptedTut.toModelType();
+                tutorialList.addTutorial(tutorial);
+            }
         }
         return tutorialList;
     }

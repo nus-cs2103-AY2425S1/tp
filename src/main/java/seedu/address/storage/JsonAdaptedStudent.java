@@ -30,7 +30,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name,
                               @JsonProperty("attendance") JsonAdaptedPresentDates presentDates,
                               @JsonProperty("studentId") String studentId,
-                              @JsonProperty("tutorialClass") String tutorialId) {
+                              @JsonProperty("tutorialId") String tutorialId) {
         this.name = name;
         this.studentId = studentId;
         this.tutorialId = tutorialId;

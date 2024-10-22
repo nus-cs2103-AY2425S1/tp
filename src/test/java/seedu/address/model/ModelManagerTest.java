@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
@@ -123,8 +125,46 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void assignTutorial_fail() {
+    public void assignTutorialTest_fail() {
         assertThrows(TutNoFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_ID));
+    }
+
+    @Test
+    public void deleteTutorialTest_fail() {
+        assertThrows(NullPointerException.class, () -> modelManager.deleteTutorial(null));
+    }
+
+    @Test
+    public void deleteTutorialTest_success() {
+        AddressBook addressBook = new AddressBook();
+        TutorialList tutorialList = new TutorialList();
+        modelManager = new ModelManager(addressBook, new UserPrefs(), new AssignmentList(), tutorialList);
+
+        Tutorial tutorial = Tutorial.of(new TutName("CS2103"), TutorialId.of("1000"));
+        tutorial.add(ALICE);
+        tutorial.add(BENSON);
+
+        modelManager.addTutorial(tutorial);
+
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BENSON);
+
+        assertTrue(modelManager.hasTutorial(tutorial));
+
+        modelManager.deleteTutorial(tutorial);
+
+        assertFalse(modelManager.hasTutorial(tutorial));
+
+        TutorialId noneTutorialClass = TutorialId.none();
+        Student updatedStudent1 = modelManager.getAddressBook().getStudentList().stream()
+                .filter(s -> s.isSameStudent(ALICE))
+                .findFirst().orElse(null);
+        Student updatedStudent2 = modelManager.getAddressBook().getStudentList().stream()
+                .filter(s -> s.isSameStudent(BENSON))
+                .findFirst().orElse(null);
+
+        assertEquals(updatedStudent1.getTutorialId(), noneTutorialClass);
+        assertEquals(updatedStudent2.getTutorialId(), noneTutorialClass);
     }
 
     @Test
@@ -138,25 +178,25 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
         ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs,
-                assignmentList, tutorialList)));
+        assertNotEquals(modelManager, new ModelManager(differentAddressBook, userPrefs,
+                assignmentList, tutorialList));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, assignmentList, tutorialList)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, userPrefs, assignmentList, tutorialList));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
@@ -164,7 +204,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs,
-                assignmentList, tutorialList)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, differentUserPrefs,
+                assignmentList, tutorialList));
     }
 }

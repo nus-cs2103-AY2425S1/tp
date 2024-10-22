@@ -21,6 +21,7 @@ public class TutorialList {
      */
     public TutorialList() {
         this.tutorials = new ArrayList<>();
+        tutorials.add(Tutorial.none());
     }
 
     /**
@@ -31,6 +32,9 @@ public class TutorialList {
     public TutorialList(ArrayList<Tutorial> tutorials) {
         requireNonNull(tutorials);
         this.tutorials = tutorials;
+        if (!tutorials.contains(Tutorial.none())) {
+            tutorials.add(Tutorial.none());
+        }
     }
 
     /**
