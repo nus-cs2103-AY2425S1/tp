@@ -402,7 +402,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   - 1a1. System informs Actor that they have no contacts that match.
 
     Use case ends.
-    
+
 **Use case: UC6 - Add notes to a person contact**
 
 **MSS**

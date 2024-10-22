@@ -123,8 +123,7 @@ public class MainWindow extends UiPart<Stage> {
         contactDetailsPanel = new ContactDetails(logic.getFocusedPerson());
         contactDetailsPanelPlaceholder.getChildren().add(contactDetailsPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanel.setContactDetailsPanel(contactDetailsPanel);
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getFocusedPerson());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -150,13 +149,6 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
-    }
-
-    /**
-     * Updates the contact details panel for the seleted contact.
-     */
-    public void handlePanelUpdate() {
-        contactDetailsPanel.setPerson(logic.getFocusedPerson());
     }
 
     /**
@@ -197,10 +189,6 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
-            if (commandResult.isUpdatePanel()) {
-                handlePanelUpdate();
-            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
