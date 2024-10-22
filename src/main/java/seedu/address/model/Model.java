@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -93,6 +94,14 @@ public interface Model {
      * @return true if the tag was successfully added, false if the tag already exists.
      */
     boolean addTag(Tag tag);
+
+    /**
+     * Deletes a tag from the tag list.
+     *
+     * @param tags The tag to be deleted.
+     * @return true if the tag was successfully deleted, false if the tag does not exist.
+     */
+    boolean deleteTags(List<Tag> tags);
 
     /**
      * Checks if a tag exists in the tag list.
