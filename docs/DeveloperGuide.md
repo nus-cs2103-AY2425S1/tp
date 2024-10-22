@@ -165,6 +165,20 @@ The filterproperty command gets the matching price between the ask and bid and i
 The sequence diagram is shown as such:
 <puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
 
+### \[Proposed\] Delete Buyer Feature
+
+#### Proposed Implementation
+The deletebuyer command takes in the phone number of the buyer and deletes the buyer from the client book based on the phone number.
+The sequence diagram is shown as such:
+<puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="DeleteBuyer" />
+
+### \[Proposed\] Delete Seller Feature
+
+#### Proposed Implementation
+The deleteseller command takes in the phone number of the seller and deletes the seller from the client book based on the phone number.
+The sequence diagram is shown as such:
+<puml src="diagrams/DeleteSellerSequenceDiagram.puml" alt="DeleteSeller" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
