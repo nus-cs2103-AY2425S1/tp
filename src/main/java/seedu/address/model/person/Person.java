@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.doctor.Speciality;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Gender;
@@ -28,6 +29,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Appointment> appointments = new HashSet<>();
 
     // Doctor-specific data fields
     private final Speciality speciality;
@@ -139,6 +141,32 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable appointment set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getAppointments() {
+        return Collections.unmodifiableSet(appointments);
+    }
+
+    /**
+     * Add an appointment to the set of appointments.
+     * @param appointment The appointment to add.
+     * @return Whether the set did not already contain the appointment.
+     */
+    public boolean addAppointment(Appointment appointment) {
+        return appointments.add(appointment);
+    }
+
+    /**
+     * Remove an appointment from the set of appointments.
+     * @param appointment The appointment to remove.
+     * @return Whether the appointment was removed.
+     */
+    public boolean removeAppointment(Appointment appointment) {
+        return appointments.remove(appointment);
     }
 
     /**

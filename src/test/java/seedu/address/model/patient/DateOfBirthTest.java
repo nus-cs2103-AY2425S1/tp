@@ -15,12 +15,12 @@ public class DateOfBirthTest {
 
     @Test
     public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidGender = "A";
-        assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidGender));
+        String invalidDateOfBirth = "A";
+        assertThrows(IllegalArgumentException.class, () -> new DateOfBirth(invalidDateOfBirth));
     }
 
     @Test
-    public void isValidGender() {
+    public void isValidDateOfBirth() {
         // null date
         assertThrows(NullPointerException.class, () -> DateOfBirth.isValidDate(null));
 
