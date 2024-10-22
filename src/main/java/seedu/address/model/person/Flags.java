@@ -6,7 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Represent a set of preset labels to each person. Immutable.
+ * Represent a set of preset labels to each person. Flags enables grouping of persons by multiple criteria in descending
+ * significance.
+ * Guarantee: Immutable.
  * */
 public class Flags {
     private Set<PresetFlags> flagSet = new HashSet<>();
