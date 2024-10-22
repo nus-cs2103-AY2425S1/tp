@@ -119,7 +119,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_invalidDeleteCommandVariant_throwsParseException() {
-        String parseExceptionMessage = DeleteCommand.generateInvalidVariantMessage(DeleteCommand.INVALID_VARIANTS.get(0),
+        String parseExceptionMessage = DeleteCommand.generateInvalidVariantMessage(
+                DeleteCommand.INVALID_VARIANTS.get(0),
                 DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD);
         assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(DeleteCommand.INVALID_VARIANTS.get(0)));

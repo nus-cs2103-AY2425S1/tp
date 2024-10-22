@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import java.util.Arrays;
 import java.util.List;
+
+import seedu.address.model.Model;
+
 
 /**
  * Terminates the program.
