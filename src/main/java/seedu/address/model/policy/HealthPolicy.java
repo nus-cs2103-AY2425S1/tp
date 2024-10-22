@@ -7,35 +7,34 @@ import java.time.Period;
  * A Policy of type Health.
  */
 public class HealthPolicy extends Policy {
-    private static final double DEFAULT_PREMIUM_AMOUNT = 200;
-    private static final double DEFAULT_COVERAGE_AMOUNT = 20000;
+    private static final PremiumAmount DEFAULT_PREMIUM_AMOUNT = new PremiumAmount(200.00);
+    private static final CoverageAmount DEFAULT_COVERAGE_AMOUNT = new CoverageAmount(20000.00);
     private static final Period DEFAULT_EXPIRY_DATE_PERIOD = Period.ofYears(10);
 
     /**
      * Constructor for a new HealthPolicy initialized with defaults.
      */
     public HealthPolicy() {
-        super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT, LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD));
+        super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT,
+                new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)));
     }
 
     /**
      * Constructor for a new HealthPolicy with selected fields initialized.
-     * Use a negative number (i.e., -1) for premiumAmount and coverageAmount to initialize
-     * the default values for these fields.
-     * Use null for expiryDate to initialize the default expiryDate.
+     * Use null for fields to initialize them with the default values.
      *
      * @param premiumAmount the price of the policy, paid per month.
-     *                      Use a negative number to initialize this policy with the default premiumAmount.
+     *                      Use null to initialize this policy with the default premiumAmount.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
-     *                       Use a negative number to initialize this policy with the default coverageAmount.
+     *                       Use null to initialize this policy with the default coverageAmount.
      * @param expiryDate the date of Policy's expiry.
      *                   Use null to initialize this policy with the default expiryDate.
      */
-    public HealthPolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
+    public HealthPolicy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
         super(
-                premiumAmount < 0 ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
-                coverageAmount < 0 ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
-                expiryDate == null ? LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD) : expiryDate);
+                premiumAmount == null ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
+                coverageAmount == null ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
+                expiryDate == null ? new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)) : expiryDate);
     }
 
     @Override

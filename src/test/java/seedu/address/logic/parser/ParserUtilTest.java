@@ -1,13 +1,12 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,7 +19,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -255,44 +257,96 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePolicyAmount_validValueWithoutWhitespace_returnsDouble() throws ParseException {
+    public void parsePremiumAmount_validValueWithoutWhitespace_returnsPremiumAmount() throws ParseException {
         String amount = "200.0";
-        double expected = Double.parseDouble(amount);
-        double actual = ParserUtil.parsePolicyAmount(amount);
+        PremiumAmount expected = new PremiumAmount(amount);
+        PremiumAmount actual = ParserUtil.parsePremiumAmount(amount);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parsePolicyAmount_validValueWithWhitespace_returnsDouble() throws ParseException {
+    public void parsePremiumAmount_validValueWithWhitespace_returnsPremiumAmount() throws ParseException {
         String amount = "200.0";
-        double expected = Double.parseDouble(amount);
-        double actual = ParserUtil.parsePolicyAmount(WHITESPACE + amount + WHITESPACE);
+        PremiumAmount expected = new PremiumAmount(amount);
+        PremiumAmount actual = ParserUtil.parsePremiumAmount(WHITESPACE + amount + WHITESPACE);
 
         assertEquals(expected, actual);
     }
 
     @Test
-    public void parsePolicyAmount_null_throwsNullPointerException() throws ParseException {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePolicyAmount(null));
+    public void parsePremiumAmount_null_throwsNullPointerException() throws ParseException {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePremiumAmount(null));
     }
 
     @Test
-    public void parsePolicyAmount_emptyString_returnNegative() throws ParseException {
-        double amount = ParserUtil.parsePolicyAmount("");
-        assertTrue(amount < 0);
+    public void parsePremiumAmount_emptyString_returnsNull() throws ParseException {
+        assertNull(ParserUtil.parsePremiumAmount(""));
     }
 
     @Test
-    public void parsePolicyAmount_negativeValue_throwsParseException() throws ParseException {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePolicyAmount("-1"));
+    public void parsePremiumAmount_negativeValue_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePremiumAmount("-1"));
+    }
+
+    @Test
+    public void parsePremiumAmount_moreThanTwoDecimalPlaces_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePremiumAmount("1.555"));
+    }
+
+    @Test
+    public void parsePremiumAmount_nonNumerals_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePremiumAmount("foo"));
+    }
+
+    @Test
+    public void parseCoverageAmount_validValueWithoutWhitespace_returnsCoverageAmount() throws ParseException {
+        String amount = "200.0";
+        CoverageAmount expected = new CoverageAmount(amount);
+        CoverageAmount actual = ParserUtil.parseCoverageAmount(amount);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseCoverageAmount_validValueWithWhitespace_returnsCoverageAmount() throws ParseException {
+        String amount = "200.0";
+        CoverageAmount expected = new CoverageAmount(amount);
+        CoverageAmount actual = ParserUtil.parseCoverageAmount(WHITESPACE + amount + WHITESPACE);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseCoverageAmount_null_throwsNullPointerException() throws ParseException {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCoverageAmount(null));
+    }
+
+    @Test
+    public void parseCoverageAmount_emptyString_returnsNull() throws ParseException {
+        assertNull(ParserUtil.parseCoverageAmount(""));
+    }
+
+    @Test
+    public void parseCoverageAmount_negativeValue_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCoverageAmount("-1"));
+    }
+
+    @Test
+    public void parseCoverageAmount_moreThanTwoDecimalPlaces_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCoverageAmount("1.555"));
+    }
+
+    @Test
+    public void parseCoverageAmount_nonNumerals_throwsParseException() throws ParseException {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCoverageAmount("foo"));
     }
 
     @Test
     public void parseExpiryDate_validValueWithWhitespace_returnExpiryDate() throws ParseException {
         String expiryDate = "12/23/2024";
-        LocalDate expected = LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER);
-        LocalDate actual = ParserUtil.parseExpiryDate(expiryDate);
+        ExpiryDate expected = new ExpiryDate(expiryDate);
+        ExpiryDate actual = ParserUtil.parseExpiryDate(expiryDate);
 
         assertEquals(expected, actual);
     }
@@ -300,8 +354,8 @@ public class ParserUtilTest {
     @Test
     public void parseExpiryDate_validValueWithoutWhitespace_returnExpiryDate() throws ParseException {
         String expiryDate = "12/23/2024";
-        LocalDate expected = LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER);
-        LocalDate actual = ParserUtil.parseExpiryDate(WHITESPACE + expiryDate + WHITESPACE);
+        ExpiryDate expected = new ExpiryDate(expiryDate);
+        ExpiryDate actual = ParserUtil.parseExpiryDate(WHITESPACE + expiryDate + WHITESPACE);
 
         assertEquals(expected, actual);
     }

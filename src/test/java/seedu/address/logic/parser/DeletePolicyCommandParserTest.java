@@ -14,7 +14,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeletePolicyCommand;
-import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
 
 public class DeletePolicyCommandParserTest {
@@ -56,6 +55,6 @@ public class DeletePolicyCommandParserTest {
 
         // invalid policy type
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-                Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+                PolicyType.MESSAGE_CONSTRAINTS);
     }
 }

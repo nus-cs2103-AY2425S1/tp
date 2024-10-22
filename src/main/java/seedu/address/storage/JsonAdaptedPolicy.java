@@ -1,19 +1,18 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 
 class JsonAdaptedPolicy {
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Policy's %s field is missing!";
+
     private final String policyType;
     private final double premiumAmount;
     private final double coverageAmount;
@@ -38,9 +37,9 @@ class JsonAdaptedPolicy {
      */
     public JsonAdaptedPolicy(Policy source) {
         this.policyType = source.getType().name().toLowerCase();
-        this.premiumAmount = source.getPremiumAmount();
-        this.coverageAmount = source.getCoverageAmount();
-        this.expiryDate = source.getExpiryDate().format(MM_DD_YYYY_FORMATTER);
+        this.premiumAmount = source.getPremiumAmount().value;
+        this.coverageAmount = source.getCoverageAmount().value;
+        this.expiryDate = source.getExpiryDate().toString();
     }
 
     /**
@@ -49,25 +48,35 @@ class JsonAdaptedPolicy {
      * @throws IllegalArgumentException if there were any data constraints violated.
      */
     public Policy toModelType() throws IllegalValueException {
-        final LocalDate expiryDate;
-        try {
-            expiryDate = LocalDate.parse(this.expiryDate, MM_DD_YYYY_FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new IllegalValueException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
+        if (policyType == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    PolicyType.class.getSimpleName()));
         }
-
-        final PolicyType modelPolicyType;
-        try {
-            modelPolicyType = PolicyType.valueOf(policyType.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new IllegalValueException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+        if (!PolicyType.isValidPolicyType(policyType)) {
+            throw new IllegalValueException(PolicyType.MESSAGE_CONSTRAINTS);
         }
+        final PolicyType modelPolicyType = PolicyType.fromString(policyType);
 
-        if (premiumAmount < 0 || coverageAmount < 0) {
-            throw new IllegalValueException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
+        if (!PremiumAmount.isValidPremiumAmount(premiumAmount)) {
+            throw new IllegalValueException(PremiumAmount.MESSAGE_CONSTRAINTS);
         }
+        final PremiumAmount modelPremiumAmount = new PremiumAmount(premiumAmount);
 
-        return Policy.makePolicy(modelPolicyType, premiumAmount, coverageAmount, expiryDate);
+        if (!CoverageAmount.isValidCoverageAmount(coverageAmount)) {
+            throw new IllegalValueException(CoverageAmount.MESSAGE_CONSTRAINTS);
+        }
+        final CoverageAmount modelCoverageAmount = new CoverageAmount(coverageAmount);
+
+        if (expiryDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ExpiryDate.class.getSimpleName()));
+        }
+        if (!ExpiryDate.isValidExpiryDate(expiryDate)) {
+            throw new IllegalValueException(ExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+        final ExpiryDate modelExpiryDate = new ExpiryDate(expiryDate);
+
+        return Policy.makePolicy(modelPolicyType, modelPremiumAmount, modelCoverageAmount, modelExpiryDate);
     }
 
 }

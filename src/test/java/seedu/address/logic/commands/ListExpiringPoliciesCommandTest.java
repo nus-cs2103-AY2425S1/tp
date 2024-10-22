@@ -17,9 +17,12 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
+import seedu.address.model.policy.PremiumAmount;
 
 public class ListExpiringPoliciesCommandTest {
 
@@ -108,8 +111,8 @@ public class ListExpiringPoliciesCommandTest {
         PolicySet policies = new PolicySet(); // Avoid mutating original policies
 
         // add new policy that expires within 30 days
-        Policy expiringPolicy = new HealthPolicy(250.00, 15000.00, LocalDate.now()
-                .plusDays(25));
+        Policy expiringPolicy = new HealthPolicy(new PremiumAmount(250.00),
+                new CoverageAmount(15000.00), new ExpiryDate(LocalDate.now().plusDays(25)));
         policies.add(expiringPolicy);
 
         // create a new person with the updated policy set to avoid modifying the original state

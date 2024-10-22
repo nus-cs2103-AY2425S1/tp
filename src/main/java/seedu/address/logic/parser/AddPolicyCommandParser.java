@@ -6,14 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_PREMIUM_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
-import java.time.LocalDate;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 
 /**
  * Parses input arguments and creates a new AddPolicyCommand object.
@@ -49,11 +50,11 @@ public class AddPolicyCommandParser implements Parser<AddPolicyCommand> {
         assert argMultimap.getValue(PREFIX_POLICY_TYPE).isPresent() : "Expected value for 'pt/' but none found.";
         PolicyType policyType = ParserUtil.parsePolicyType(
                 argMultimap.getValue(PREFIX_POLICY_TYPE).get());
-        double premiumAmount = ParserUtil.parsePolicyAmount(
+        PremiumAmount premiumAmount = ParserUtil.parsePremiumAmount(
                 argMultimap.getValue(PREFIX_POLICY_PREMIUM_AMOUNT).orElse(""));
-        double coverageAmount = ParserUtil.parsePolicyAmount(
+        CoverageAmount coverageAmount = ParserUtil.parseCoverageAmount(
                 argMultimap.getValue(PREFIX_POLICY_COVERAGE_AMOUNT).orElse(""));
-        LocalDate expiryDate = ParserUtil.parseExpiryDate(
+        ExpiryDate expiryDate = ParserUtil.parseExpiryDate(
                 argMultimap.getValue(PREFIX_POLICY_EXPIRY_DATE).orElse(""));
 
         Policy policy = Policy.makePolicy(policyType, premiumAmount, coverageAmount, expiryDate);

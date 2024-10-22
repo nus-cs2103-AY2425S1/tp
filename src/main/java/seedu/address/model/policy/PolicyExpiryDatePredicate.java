@@ -24,7 +24,7 @@ public class PolicyExpiryDatePredicate implements Predicate<Policy> {
 
     @Override
     public boolean test(Policy policy) {
-        LocalDate expiryDate = policy.getExpiryDate();
+        ExpiryDate expiryDate = policy.getExpiryDate();
 
         // returns true if the expiry date is between the current date and the next 'daysFromExpiry' days
         return (expiryDate.isAfter(currentDate) || expiryDate.isEqual(currentDate))
