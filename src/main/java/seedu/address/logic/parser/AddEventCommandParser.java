@@ -2,10 +2,14 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CELEBRITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CONTACTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddEventCommand;
@@ -30,10 +34,11 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
     @Override
     public AddEventCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput,
-                PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY);
+                PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE, PREFIX_EVENT_CELEBRITY,
+                PREFIX_EVENT_CONTACTS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_EVENT_NAME, PREFIX_EVENT_TIME, PREFIX_EVENT_VENUE,
-                PREFIX_EVENT_CELEBRITY) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_EVENT_CELEBRITY, PREFIX_EVENT_CONTACTS) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
@@ -43,8 +48,11 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_EVENT_TIME).get());
         Venue venue = ParserUtil.parseVenue((argMultimap.getValue(PREFIX_EVENT_VENUE)).get());
         String celebrity = argMultimap.getValue(PREFIX_EVENT_CELEBRITY).get();
+        List<String> contacts = Arrays.stream(argMultimap.getValue(PREFIX_EVENT_CONTACTS).get().split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());;
 
-        return new AddEventCommand(name, time, venue, celebrity);
+        return new AddEventCommand(name, time, venue, celebrity, contacts);
 
     }
 
