@@ -10,7 +10,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.util.SampleDataUtil;
 
 
 /**
@@ -34,8 +33,6 @@ public class Event {
         this.eventName = eventName;
         this.date = date;
 
-        // buffer data to show UI changes, since adding attendees are not yet implemented.
-        attendees.addAll(Set.of(SampleDataUtil.getSamplePersons()));
         this.attendees.addAll(attendees);
     }
 
@@ -51,8 +48,11 @@ public class Event {
         return Collections.unmodifiableSet(attendees);
     }
 
+    // TODO: Implement Location for Event, then update equality to check for
+    //       name, date, and location
+
     /**
-     * Returns true if both events have the same name and date.
+     * Returns true if both events have the same name, date and attendees.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -61,7 +61,8 @@ public class Event {
 
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
-                && otherEvent.getDate().equals(getDate());
+                && otherEvent.getDate().equals(getDate())
+                && otherEvent.getAttendees().equals(getAttendees());
     }
 
     @Override
