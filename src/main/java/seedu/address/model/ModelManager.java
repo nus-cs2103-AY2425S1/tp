@@ -15,10 +15,7 @@ import seedu.address.model.order.CustomerOrder;
 import seedu.address.model.order.OrderList;
 import seedu.address.model.order.SupplyOrder;
 import seedu.address.model.person.Person;
-import seedu.address.model.product.Ingredient;
-import seedu.address.model.product.IngredientCatalogue;
-import seedu.address.model.product.Pastry;
-import seedu.address.model.product.PastryCatalogue;
+import seedu.address.model.product.*;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,6 +29,7 @@ public class ModelManager implements Model {
     private final PastryCatalogue pastryCatalogue = new PastryCatalogue();
     private final IngredientCatalogue ingredientCatalogue = new IngredientCatalogue();
     private final OrderList orderList = new OrderList();
+    private final Inventory inventory = new Inventory(ingredientCatalogue);
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -155,6 +153,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Inventory getInventory() {
+        return inventory;
     }
 
     //=========== Filtered Person List Accessors =============================================================

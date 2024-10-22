@@ -78,6 +78,16 @@ public class Inventory {
         }
     }
 
+    public String getFormattedStockLevels() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Integer, Integer> entry : stockLevels.entrySet()) {
+            Ingredient ingredient = ingredientCatalogue.getIngredientById(entry.getKey());
+            sb.append(String.format("ID: %d | %s: %d units%n",
+                    ingredient.getProductId(), ingredient.getName(), entry.getValue()));
+        }
+        return sb.toString();
+    }
+
     public int getStockLevel(int ingredientId) {
         return stockLevels.getOrDefault(ingredientId, 0);
     }
