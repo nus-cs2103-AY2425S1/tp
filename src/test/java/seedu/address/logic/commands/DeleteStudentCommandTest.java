@@ -23,10 +23,22 @@ import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.StudentBuilder;
 
 public class DeleteStudentCommandTest {
-    // Ensure NullPointerException is thrown when no student number is provided
+    // Ensure NullPointerException is thrown when no input is provided at all
     @Test
-    public void constructor_nullStudentNumber_throwsNullPointerException() {
+    public void constructor_nullInput_throwsNullPointerException() {
+        Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         assertThrows(NullPointerException.class, () -> new DeleteStudentCommand(null));
+    }
+
+    // Ensure IllegalArgumentException is thrown when blank values are provided where there should be non-blank input
+    @Test
+    public void constructor_blankInput_throwsIllegalArgumentException() {
+        Student validStudent = new StudentBuilder().withName("John Ng").withStudentNumber("A1234567X").build();
+        ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
+        assertThrows(IllegalArgumentException.class, () -> new DeleteStudentCommand(new Name("")));
+        assertThrows(IllegalArgumentException.class, () -> new DeleteStudentCommand(new Name("John Ng"),
+                new StudentNumber("")));
     }
 
     // Ensure CommandException is thrown when student with provided name is not found
