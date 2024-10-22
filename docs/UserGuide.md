@@ -165,23 +165,68 @@ Format: `list`
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Locating persons by name: `find`
+#### Locating patients by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds patients whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+{: .alert .alert-info} 
+> **:information_source: **Note:**
+> 
+> * The search is case-insensitive. e.g `hans` will match `Hans`
+> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * Only the name is searched.
+> * Only full words will be matched e.g. `Han` will not match `Hans`
+> * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+> * Returns an empty patient list panel if no matching patients with the given keywords are found.
+>
+> Examples:
+> * `find John` returns `john` and `John Doe`
+> * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+>  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+[Back to Table of Contents](#table-of-contents)
+
+#### Locating patients by NRIC: `findMedCon`
+
+Finds patients whose medical condition contain the given keywords.
+
+Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
+
+{: .alert .alert-info}
+> **:information_source: **Note:**
+>
+> * The search is case-insensitive. e.g `diabetes` will match `Diabetes`
+> * The order of the keywords does not matter. e.g. `diabetes arthritis` will match `arthritis` and `diabetes` 
+> * Only the medical condition is searched.
+> * Only full medical condition will be matched e.g. `diabetes` will not match `diabete`
+> * Patients matching at least one keyword will be returned (i.e. `OR` search).
+>    e.g. `diabetes` will return `Alex Yeoh`, `David Li`
+> * Returns an empty patient list panel if no matching patients with the given keywords are found.
+>
+> Examples:
+> * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`<br>
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Locating patients by NRIC: `findNric`
+
+Finds patients whose names contain the given NRIC.
+
+Format: `find NRIC`
+
+{: .alert .alert-info}
+> **:information_source: **Note:**
+> * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
+> * Only the NRIC is searched.
+> * Only full NRIC will be matched e.g. `S1234567a` will not match `T12345`
+> * Returns an empty patient list panel if no matching patients with the given `NRIC` are found.
+> * Patients NRIC follows the NRIC constraint mentioned in the [Parameter Details](#Parameter-Details) section.
+>
+> Examples:
+> * `findNric S1234567A` returns `Alex Yeoh`<br>
 
 [Back to Table of Contents](#table-of-contents)
 
