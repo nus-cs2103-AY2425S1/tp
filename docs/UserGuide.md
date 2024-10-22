@@ -133,14 +133,14 @@ Result for `find alex david`:
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `fn KEYWORD [MORE_KEYWORDS]`
+Format: `fn KEYWORD`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Prefix of words will be matched e.g. `Ha B` will match `Hans Bo`
+* Persons matching all keyword prefix will be returned (i.e. `AND` search).
+  e.g. `Hans Bo` will return `Hans Bo` but not `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `fn John` returns `john` and `John Doe`
@@ -193,7 +193,7 @@ Format `fc KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `investment` will match `Investment`
 * Only the `client_type` of the person is searched.
 * Persons whose `client_type` contains a substring that matches the provided `KEYWORD` will be returned.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Person with `client_type` that has a prefix matching the keyword will be returned (i.e. `AND` search).
 
  A **valid** `KEYWORD` should:
   * Only be alphanumeric. Special Characters are not valid. (eg. Investment #1 is invalid)
@@ -204,7 +204,7 @@ Format `fc KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `fc Investment` returns every contact that has a `client_type` beginning with `Investment`
 * `fc Invest` returns every contact that has `client_type` beginning with `Invest`
-* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` OR `Healthcare`
+* `fc Investment Healthcare` returns every contact that has `client_type` beginning with `Investment` AND `Healthcare`
 
 Result for `fc Investment Plan`:
   ![result for 'fc Investment Plan`](images/FindClientType.png)
