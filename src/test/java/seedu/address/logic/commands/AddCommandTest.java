@@ -168,6 +168,11 @@ public class AddCommandTest {
         public void setSortPreference(String sortPreference) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public void applySavedSortPreference() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**
