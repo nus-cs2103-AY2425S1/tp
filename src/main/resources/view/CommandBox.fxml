@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
 
@@ -11,7 +10,7 @@
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets>
-    <URL value="@css/DarkTheme.css" />
+    <URL value="@css/CommandBox.css" />
   </stylesheets>
 
   <HBox fx:id="commandTextContainer" alignment="CENTER_LEFT" spacing="5" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx/17">
