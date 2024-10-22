@@ -8,10 +8,12 @@ import static seedu.address.testutil.TypicalPersons.ALICE_P;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.OptionalUtil;
 import seedu.address.model.person.Person;
 
 
@@ -33,11 +35,11 @@ public class AppointmentTest {
         person2 = BOB;
 
         appointment1 = new Appointment(new AppointmentType("Checkup"), dateTime1,
-            person1, new Sickness("Cold"), new Medicine("Aspirin"));
+            person1, Optional.of(new Sickness("Cold")), Optional.of(new Medicine("Aspirin")));
         appointment2 = new Appointment(new AppointmentType("Checkup"), dateTime1,
-            person1, new Sickness("Cold"), new Medicine("Aspirin"));
+            person1, Optional.of(new Sickness("Cold")), Optional.of(new Medicine("Aspirin")));
         appointment3 = new Appointment(new AppointmentType("Followup"), dateTime2,
-            person2, new Sickness("Flu"), new Medicine("Tamiflu"));
+            person2, Optional.of(new Sickness("Flu")), Optional.of(new Medicine("Tamiflu")));
 
         System.out.println(appointment1);
         System.out.println(appointment1);
@@ -60,9 +62,9 @@ public class AppointmentTest {
 
     @Test
     public void execute_testGetSickness_success() {
-        assertEquals(new Sickness("Cold"), appointment1.getSickness());
-        assertEquals(new Sickness("Cold"), appointment2.getSickness());
-        assertEquals(new Sickness("Flu"), appointment3.getSickness());
+        assertEquals(new Sickness("Cold"), appointment1.getSickness().get());
+        assertEquals(new Sickness("Cold"), appointment2.getSickness().get());
+        assertEquals(new Sickness("Flu"), appointment3.getSickness().get());
     }
 
     @Test
@@ -74,9 +76,9 @@ public class AppointmentTest {
 
     @Test
     public void getMedicine_multipleAppointments_returnsCorrectMedicine() {
-        assertEquals(new Medicine("Aspirin"), appointment1.getMedicine());
-        assertEquals(new Medicine("Aspirin"), appointment2.getMedicine());
-        assertEquals(new Medicine("Tamiflu"), appointment3.getMedicine());
+        assertEquals(new Medicine("Aspirin"), appointment1.getMedicine().get());
+        assertEquals(new Medicine("Aspirin"), appointment2.getMedicine().get());
+        assertEquals(new Medicine("Tamiflu"), appointment3.getMedicine().get());
     }
 
     @Test

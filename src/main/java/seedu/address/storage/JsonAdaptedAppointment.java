@@ -58,8 +58,8 @@ public class JsonAdaptedAppointment {
         appointmentType = source.getAppointmentType().value;
         appointmentDateTime = source.getAppointmentDateTime().toString();
         personId = source.getPerson().getPersonId();
-        sickness = source.getSickness().value;
-        medicine = source.getMedicine().value;
+        sickness = source.getSickness().map(sickness -> sickness.value).orElse("");
+        medicine = source.getMedicine().map(sickness -> sickness.value).orElse("");
     }
 
     /**
@@ -107,23 +107,23 @@ public class JsonAdaptedAppointment {
         }
         Person modelPerson = modelPersonOptional.get();
 
+        Optional<Sickness> modelSickness;
         if (sickness == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Sickness.class.getSimpleName()));
-        }
-        if (!Sickness.isValidSickness(sickness)) {
+            modelSickness = Optional.empty();
+        } else if (!Sickness.isValidSickness(sickness)) {
             throw new IllegalValueException(Sickness.MESSAGE_CONSTRAINTS);
+        } else {
+            modelSickness = Optional.of(new Sickness(sickness));
         }
-        final Sickness modelSickness = new Sickness(sickness);
 
+        Optional<Medicine> modelMedicine;
         if (medicine == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Medicine.class.getSimpleName()));
+            modelMedicine = Optional.empty();
+        } else if (!Medicine.isValidMedicine(medicine)) {
+            throw new IllegalValueException(Medicine.MESSAGE_CONSTRAINTS);
+        } else {
+            modelMedicine = Optional.of(new Medicine(medicine));
         }
-        if (!Medicine.isValidMedicine(medicine)) {
-            throw new IllegalValueException(Sickness.MESSAGE_CONSTRAINTS);
-        }
-        final Medicine modelMedicine = new Medicine(medicine);
 
         return new Appointment(modelAppointmentType, modelAppointmentDateTime, modelPerson,
                 modelSickness, modelMedicine, appointmentId);

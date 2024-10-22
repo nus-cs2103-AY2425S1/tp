@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +28,9 @@ public class UniqueAppointmentListTest {
     void setUp() {
         uniqueAppointmentList = new UniqueAppointmentList();
         appointment1 = new Appointment(new AppointmentType("Checkup"), LocalDateTime.of(2024, 1, 1, 10, 0),
-                ALICE_P, new Sickness("Cold"), new Medicine("Aspirin"));
+                ALICE_P, Optional.of(new Sickness("Cold")), Optional.of(new Medicine("Aspirin")));
         appointment2 = new Appointment(new AppointmentType("Followup"), LocalDateTime.of(2024, 1, 2, 11, 0),
-                BOB, new Sickness("Flu"), new Medicine("Tamiflu"));
+                BOB, Optional.of(new Sickness("Flu")), Optional.of(new Medicine("Tamiflu")));
     }
 
     @Test
@@ -51,7 +52,7 @@ public class UniqueAppointmentListTest {
         uniqueAppointmentList.add(appointment1);
         Appointment editedAppointment = new Appointment(new AppointmentType("Followup"),
                 LocalDateTime.of(2024, 1, 1, 10, 0), ALICE_P,
-                new Sickness("Fever"), new Medicine("Paracetamol"));
+                Optional.of(new Sickness("Fever")), Optional.of(new Medicine("Paracetamol")));
         uniqueAppointmentList.setAppointment(appointment1, editedAppointment);
         assertTrue(uniqueAppointmentList.contains(editedAppointment));
         assertFalse(uniqueAppointmentList.contains(appointment1));
