@@ -106,6 +106,9 @@ public class UnpaidCommand extends Command {
         private Boolean hasPaid;
         private Frequency frequency;
 
+        /**
+         * Constructor for UnpaidPersonDescriptor.
+         */
         public UnpaidPersonDescriptor() {
             setHasNotPaid();
             setFrequencyToZero();
