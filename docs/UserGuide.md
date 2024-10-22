@@ -104,26 +104,62 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* Note that you cannot edit `schedule` information using the `edit` command. Please use the `schedule` command instead.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+### Scheduling Contacts: `schedule`
+
+Adds a schedule to contact in the address book.
+Schedule names can be renamed based on your requirements. 
+
+Format: `schedule INDEX [sn/ALTERNATE_NAME] [sd/SCHEDULE_DATE] [st/SCHEDULE_TIME]`
+
+* A schedule will only be valid if it has a `SCHEDULE_DATE`. `ALTERNATE_NAME` and `SCHEDULE_TIME` will not be displayed unless a schedule has a `SCHEDULE_DATE`.
+* `INDEX` refers to the number shown in the displayed person list, and is 1-based.
+* If all the optional parameters are omitted and the contact has an existing schedule, the existing schedule will be removed.
+* If the provided contact does not have an existing schedule, the `schedule` command must be provided with at least `SCHEDULE_DATE` to attach a schedule to the contact.
+* If the provided contact has an existing schedule, the provided parameters will overwrite the existing schedule's parameters and keep the omitted parameters unchanged.
+* `ALTERNATE_NAME` must strictly be alphanumerical.
+* `SCHEDULE_DATE` must be in the format `yyyy-MM-dd`.
+* `SCHEDULE_TIME` must be in the format `HH:mm`.
+
+Examples:
+* `schedule 1 sn/appointment sd/2024-10-22 st/16:00`: schedules an appointment on 2024-10-22 at 16:00 for the contact at index 1 <br>
+![result for making schedule](images/makeSchedule.png)
+* `schedule 1`: clears the schedule for the contact at index 1, if any. <br>
+![result for clearing schedule](images/clearSchedule.png)
+
 ### Renaming a Tag : `renameTag`
 
 Renames an existing tag in the address book.
 
-Format: `renameTag [ot/OLDTAG] [nt/NEWTAG]`
+Format: `renameTag INDEX ot/OLDTAG nt/NEWTAG`
 
 * Renames the tags called `OLDTAG` to `NEWTAG`.
 * Contacts with the tag `OLDTAG` will now have `NEWTAG`, with `OLDTAG` removed
 * If `OLDTAG` is not an existing tag, `[OLDTAG] tag is not found` will be returned.
 
+### Adding Social Media : `socialMedia`
+
+Adds or updates the social media handle to an existing person.
+
+Format: `socialMedia [ig/USERNAME] [fb/USERNAME] [cs/USERNAME]`
+
+* Contacts will have their social media handle displayed as `[ig-igusername]` or `[fb-fbusername]` or `[cs-csusername]`.
+* `ig`,`fb`, and `cs` is used to represent Instagram, Facebook, and Carousell handles respectively.
+* If the contact already has an existing social media handle, their handle will be updated.
+* Hence, we can only add one social media handle to each contact.
+
 Examples:
-*  `renameTag ot/manager nt/boss` Renames the tag `colleagues` to be `boss`.
-![result for 'rename tag1'](images/renameTagResult1.png)
-*  `renameTag ot/friends nt/enemies` Edits the tag `friends` to be `enemies`.
-![result for 'rename tag2'](images/renameTagResult2.png)
+*  `socialMedia 3 ig/charlotteo` Adds the handle `[ig-charlotteo]` to the third contact Charlotte.
+![result for 'rename tag1'](images/socialMediaResult1.png)
+*  `socialMedia 1 cs/alexsells` Updates the first contact Alex's social media to `[cs-alexsells]`.
+![result for 'rename tag2'](images/socialMediaResult2.png)
+*  `socialMedia 2 fb/berniceyu` Updates the second contact Bernice's social media to `[fb-berniceyu]`.
+![result for 'social media 3'](images/socialMediaResult3.png)
 
 ### Locating persons by name: `find`
 
@@ -262,6 +298,7 @@ Action | Format, Examples
 **Help** | `help`
 **Restore** | `restore`
 **Sort** | `sort [ORDER]`<br> e.g., `sort asc`
-**Rename Tag** | `renameTag [ot/OLDTAG] [nt/NEWTAG]`<br> e.g., `renameTag ot/manager nt/boss`
+**Rename Tag** | `renameTag ot/OLDTAG nt/NEWTAG`<br> e.g., `renameTag ot/manager nt/boss`
 **Filter** | `filter [t/TAG]`<br> e.g., `filter t/friends`
+**Social Media** | `socialMedia INDEX [ig/USERNAME]`<br> e.g., `socialMedia 1 ig/myUsername` 
 

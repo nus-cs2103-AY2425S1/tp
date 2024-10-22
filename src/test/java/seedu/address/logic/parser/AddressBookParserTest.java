@@ -14,7 +14,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -100,7 +102,9 @@ public class AddressBookParserTest {
     public void parseCommand_filter() throws Exception {
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + PREFIX_TAG + "friends");
-        assertEquals(new FilterCommand(new Tag("friends")), command);
+        Set<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(new Tag("friends"));
+        assertEquals(new FilterCommand(expectedTags), command);
     }
 
     @Test

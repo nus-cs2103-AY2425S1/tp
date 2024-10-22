@@ -149,15 +149,26 @@ class JsonAdaptedPerson {
                     SocialMedia.class.getSimpleName()));
         }
         final SocialMedia modelSocialMedia;
-        if (socialMedia.startsWith("[ig-")) {
-            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
-                    SocialMedia.Platform.INSTAGRAM);
-        } else if (socialMedia.startsWith("[fb-")) {
-            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
-                    SocialMedia.Platform.FACEBOOK);
-        } else if (socialMedia.startsWith("[cs-")) {
-            modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
-                    SocialMedia.Platform.CAROUSELL);
+        if (!socialMedia.equals(" ")) {
+            if (socialMedia.startsWith("[ig-")) {
+                if (!SocialMedia.isValidHandleName(socialMedia.substring(4, socialMedia.length() - 1))) {
+                    throw new IllegalValueException(SocialMedia.MESSAGE_CONSTRAINTS);
+                }
+                modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                        SocialMedia.Platform.INSTAGRAM);
+            } else if (socialMedia.startsWith("[fb-")) {
+                if (!SocialMedia.isValidHandleName(socialMedia.substring(4, socialMedia.length() - 1))) {
+                    throw new IllegalValueException(SocialMedia.MESSAGE_CONSTRAINTS);
+                }
+                modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                        SocialMedia.Platform.FACEBOOK);
+            } else {
+                if (!SocialMedia.isValidHandleName(socialMedia.substring(4, socialMedia.length() - 1))) {
+                    throw new IllegalValueException(SocialMedia.MESSAGE_CONSTRAINTS);
+                }
+                modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
+                        SocialMedia.Platform.CAROUSELL);
+            }
         } else {
             modelSocialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
         }

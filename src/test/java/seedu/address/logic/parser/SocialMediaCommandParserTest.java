@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SOCIALMEDIA;
+import static seedu.address.logic.commands.CommandTestUtil.SOCIALMEDIA_CS;
+import static seedu.address.logic.commands.CommandTestUtil.SOCIALMEDIA_FB;
 import static seedu.address.logic.commands.CommandTestUtil.SOCIALMEDIA_IG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -18,12 +20,26 @@ public class SocialMediaCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = "1" + SOCIALMEDIA_IG;
+        String userInputIg = "1" + SOCIALMEDIA_IG;
 
-        SocialMediaCommand expectedCommand = new SocialMediaCommand("username", SocialMedia.Platform.INSTAGRAM,
+        SocialMediaCommand expectedCommandIg = new SocialMediaCommand("username", SocialMedia.Platform.INSTAGRAM,
                 INDEX_FIRST_PERSON);
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, userInputIg, expectedCommandIg);
+
+        String userInputFb = "1" + SOCIALMEDIA_FB;
+
+        SocialMediaCommand expectedCommandFb = new SocialMediaCommand("username", SocialMedia.Platform.FACEBOOK,
+                INDEX_FIRST_PERSON);
+
+        assertParseSuccess(parser, userInputFb, expectedCommandFb);
+
+        String userInputCs = "1" + SOCIALMEDIA_CS;
+
+        SocialMediaCommand expectedCommandCs = new SocialMediaCommand("username", SocialMedia.Platform.CAROUSELL,
+                INDEX_FIRST_PERSON);
+
+        assertParseSuccess(parser, userInputCs, expectedCommandCs);
     }
 
     @Test

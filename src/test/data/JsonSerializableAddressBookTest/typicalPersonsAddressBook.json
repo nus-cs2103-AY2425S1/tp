@@ -19,7 +19,7 @@
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
     "time" : "",
-    "socialmedia" : " "
+    "socialmedia" : "[ig-username]"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -29,7 +29,7 @@
     "scheduleName" : "appointment",
     "date" : "2024-10-21",
     "time" : "16:00",
-    "socialmedia" : " "
+    "socialmedia" : "[fb-carl]"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -39,7 +39,7 @@
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
     "time" : "00:00",
-    "socialmedia" : " "
+    "socialmedia" : "[cs-danielm]"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
