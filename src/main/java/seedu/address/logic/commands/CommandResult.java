@@ -47,16 +47,6 @@ public class CommandResult {
         this.tabIndex = null;
     }
 
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value.
-     */
-    public CommandResult(String feedbackToUser) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.commandType = null;
-        this.tabIndex = null;;
-    }
-
     public String getFeedbackToUser() {
         return feedbackToUser;
     }

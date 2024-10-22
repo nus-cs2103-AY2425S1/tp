@@ -5,12 +5,12 @@ package seedu.address.logic.commands;
  */
 public enum CommandType {
     // Command Type for General Use
-    LIST,
     CLEAR,
     HELP,
     EXIT,
 
     // Command Type for Students
+    LISTSTUDENT,
     ADDSTUDENT,
     EDITSTUDENT,
     FINDSTUDENT,

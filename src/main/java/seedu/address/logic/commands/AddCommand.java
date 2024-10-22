@@ -18,6 +18,7 @@ import seedu.address.model.student.Student;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    public static final CommandType COMMAND_TYPE = CommandType.ADDSTUDENT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
             + "Parameters: "
@@ -50,7 +51,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.ADDSTUDENT;
+        return COMMAND_TYPE;
     }
 
     @Override
@@ -62,7 +63,8 @@ public class AddCommand extends Command {
         }
 
         model.addStudent(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
+                COMMAND_TYPE);
     }
 
     @Override

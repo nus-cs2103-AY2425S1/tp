@@ -8,6 +8,7 @@ import seedu.address.model.Model;
 public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
+    public static final CommandType COMMAND_TYPE = CommandType.HELP;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
@@ -21,11 +22,11 @@ public class HelpCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.HELP;
+        return COMMAND_TYPE;
     }
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, CommandType.HELP);
+        return new CommandResult(SHOWING_HELP_MESSAGE, COMMAND_TYPE);
     }
 }
