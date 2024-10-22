@@ -1,13 +1,18 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Birthday;
+import seedu.address.model.person.DateOfCreation;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.History;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +25,17 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-
+    public static final String DEFAULT_REMARK = "";
+    public static final DateOfCreation DEFAULT_DATE_OF_CREATION = new DateOfCreation(LocalDate.now());
+    public static final String DEFAULT_BIRTHDAY = "2001-01-01";
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private Remark remark;
+    private DateOfCreation dateOfCreation;
+    private History history;
+    private Birthday birthday;
     private Set<Tag> tags;
 
     /**
@@ -35,6 +46,10 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        remark = Remark.EMPTY_REMARK;
+        dateOfCreation = DEFAULT_DATE_OF_CREATION;
+        history = new History(dateOfCreation.getDateOfCreation());
+        birthday = new Birthday(DEFAULT_BIRTHDAY);
         tags = new HashSet<>();
     }
 
@@ -46,6 +61,10 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        remark = personToCopy.getRemark();
+        dateOfCreation = personToCopy.getDateOfCreation();
+        history = personToCopy.getHistory();
+        birthday = personToCopy.getBirthday();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -88,9 +107,43 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code Remark} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withRemark(String remark) {
+        this.remark = new Remark(remark);
+        return this;
+    }
+    /**
+     * Sets the {@code DateOfCreation} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withDateOfCreation(String dateOfCreation) {
+        this.dateOfCreation = new DateOfCreation(LocalDate.parse(dateOfCreation));
+        this.history = new History(LocalDate.parse(dateOfCreation));
+        return this;
+    }
+
+    /**
+     * Adds an activity on a specific date to the {@code History} of the {@code Person}.
+     */
+    public PersonBuilder withHistory(LocalDate date, String activity) {
+        if (this.history == null) {
+            this.history = new History(dateOfCreation.getDateOfCreation());
+        }
+        this.history.addActivity(date, activity);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Birthday} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withBirthday(String birthday) {
+        this.birthday = new Birthday(birthday);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, remark, birthday, tags, dateOfCreation, history);
     }
 
 }
