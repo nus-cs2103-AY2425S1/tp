@@ -19,17 +19,13 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** Indicates weather the contact details panel needs to be updated. */
-    private final boolean updatePanel;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean updatePanel) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.updatePanel = updatePanel;
     }
 
     /**
@@ -37,15 +33,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * and other fields set to their default value excep updatePanel.
-     */
-    public CommandResult(String feedbackToUser, boolean updatePanel) {
-        this(feedbackToUser, false, false, updatePanel);
+        this(feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -58,15 +46,6 @@ public class CommandResult {
 
     public boolean isExit() {
         return exit;
-    }
-
-    /**
-     * Gets the value of clearDetailsPanel.
-     *
-     * @return true if the details panel should be cleared; false otherwise.
-     */
-    public boolean isUpdatePanel() {
-        return this.updatePanel;
     }
 
     @Override
@@ -83,13 +62,12 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit
-                && updatePanel == otherCommandResult.updatePanel;
+                && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, updatePanel);
+        return Objects.hash(feedbackToUser, showHelp, exit);
     }
 
     @Override
@@ -98,8 +76,6 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
-                .add("updatePanel", updatePanel)
                 .toString();
     }
-
 }

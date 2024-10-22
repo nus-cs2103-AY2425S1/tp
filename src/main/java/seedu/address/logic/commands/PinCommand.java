@@ -44,7 +44,7 @@ public class PinCommand extends Command {
         try {
             model.addPinnedPersonList(personToPin);
             CommandResult commandResult = new CommandResult(String.format(MESSAGE_PIN_PERSON_SUCCESS,
-                    Messages.formatShort(personToPin)), false, false, false);
+                    Messages.formatShort(personToPin)), false, false);
             return commandResult;
         } catch (DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
