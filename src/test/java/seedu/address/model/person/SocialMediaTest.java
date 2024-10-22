@@ -65,5 +65,7 @@ public class SocialMediaTest {
                 new SocialMedia("username", SocialMedia.Platform.FACEBOOK).toString());
         assertEquals("[cs-username]",
                 new SocialMedia("username", SocialMedia.Platform.CAROUSELL).toString());
+        assertEquals(" ",
+                new SocialMedia(" ", SocialMedia.Platform.UNNAMED).toString());
     }
 }

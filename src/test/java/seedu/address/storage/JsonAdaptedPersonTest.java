@@ -27,6 +27,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_SCHEDULE_DATE = "2021-14";
     private static final String INVALID_SCHEDULE_TIME = "12000";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_HANDLE = "usernam$";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -173,6 +174,22 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                         VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, invalidTags, VALID_SOCIALMEDIA);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidSocialMedia_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, VALID_TAGS, INVALID_HANDLE);
+        assertThrows(IllegalValueException.class, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullSocialMedia_throwsIllegalValueException() {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_SCHEDULE_NAME, VALID_SCHEDULE_DATE, VALID_SCHEDULE_TIME, VALID_TAGS, null);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 

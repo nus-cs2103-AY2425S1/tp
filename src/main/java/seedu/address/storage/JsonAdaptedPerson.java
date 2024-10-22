@@ -148,6 +148,9 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     SocialMedia.class.getSimpleName()));
         }
+        if (!SocialMedia.isValidHandleName(socialMedia)) {
+            throw new IllegalValueException(SocialMedia.MESSAGE_CONSTRAINTS);
+        }
         final SocialMedia modelSocialMedia;
         if (socialMedia.startsWith("[ig-")) {
             modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
