@@ -4,29 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 public class EducationPolicyTest {
     private final EducationPolicy education = new EducationPolicy();
-    private final double defaultPremiumAmount = education.getPremiumAmount();
-    private final double defaultCoverageAmount = education.getCoverageAmount();
-    private final LocalDate defaultExpiryDate = education.getExpiryDate();
+    private final PremiumAmount defaultPremiumAmount = education.getPremiumAmount();
+    private final CoverageAmount defaultCoverageAmount = education.getCoverageAmount();
+    private final ExpiryDate defaultExpiryDate = education.getExpiryDate();
 
     @Test
-    public void constructor_negativeAmounts_useDefaultValues() {
-        // negative premiumAmount
-        EducationPolicy negativePremiumAmount = new EducationPolicy(-1, defaultCoverageAmount, defaultExpiryDate);
-        assertEquals(defaultPremiumAmount, negativePremiumAmount.getPremiumAmount());
+    public void constructor_nullValues_useDefaultValues() {
+        // null premiumAmount
+        EducationPolicy nullPremiumAmount = new EducationPolicy(null, defaultCoverageAmount, defaultExpiryDate);
+        assertEquals(defaultPremiumAmount, nullPremiumAmount.getPremiumAmount());
 
-        // negative coverageAmount
-        EducationPolicy negativeCoverageAmount = new EducationPolicy(defaultPremiumAmount, -1, defaultExpiryDate);
-        assertEquals(defaultCoverageAmount, negativeCoverageAmount.getCoverageAmount());
-    }
+        // null coverageAmount
+        EducationPolicy nullCoverageAmount = new EducationPolicy(defaultPremiumAmount, null, defaultExpiryDate);
+        assertEquals(defaultCoverageAmount, nullCoverageAmount.getCoverageAmount());
 
-    @Test
-    public void constructor_nullExpiryDate_useDefaultValue() {
+        // null expiryDate
         EducationPolicy nullExpiryDate = new EducationPolicy(defaultPremiumAmount, defaultCoverageAmount, null);
         assertEquals(defaultExpiryDate, nullExpiryDate.getExpiryDate());
     }

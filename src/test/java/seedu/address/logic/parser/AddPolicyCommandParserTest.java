@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_POLICY_TYPE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.POLICY_TYPE_DESC_LIFE;
@@ -13,15 +12,16 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddPolicyCommand;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 
 public class AddPolicyCommandParserTest {
     private final AddPolicyCommandParser parser = new AddPolicyCommandParser();
@@ -43,8 +43,8 @@ public class AddPolicyCommandParserTest {
         String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
                 + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount + " "
                 + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
-        Policy expectedPolicy = new LifePolicy(-1.0, Double.parseDouble(coverageAmount),
-                LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER));
+        Policy expectedPolicy = new LifePolicy(null, new CoverageAmount(coverageAmount),
+                new ExpiryDate(expiryDate));
         AddPolicyCommand expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -52,8 +52,8 @@ public class AddPolicyCommandParserTest {
         userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
                 + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
                 + PREFIX_POLICY_EXPIRY_DATE + expiryDate;
-        expectedPolicy = new LifePolicy(Double.parseDouble(premiumAmount), -1.0,
-                LocalDate.parse(expiryDate, MM_DD_YYYY_FORMATTER));
+        expectedPolicy = new LifePolicy(new PremiumAmount(premiumAmount), null,
+                new ExpiryDate(expiryDate));
         expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -61,7 +61,7 @@ public class AddPolicyCommandParserTest {
         userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
                 + PREFIX_POLICY_PREMIUM_AMOUNT + premiumAmount + " "
                 + PREFIX_POLICY_COVERAGE_AMOUNT + coverageAmount;
-        expectedPolicy = new LifePolicy(Double.parseDouble(premiumAmount), Double.parseDouble(coverageAmount),
+        expectedPolicy = new LifePolicy(new PremiumAmount(premiumAmount), new CoverageAmount(coverageAmount),
                 null);
         expectedCommand = new AddPolicyCommand(INDEX_FIRST_PERSON, expectedPolicy);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -90,19 +90,35 @@ public class AddPolicyCommandParserTest {
 
         // Invalid policy type
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-                Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+                PolicyType.MESSAGE_CONSTRAINTS);
+
+        // non numeric premium amount
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_PREMIUM_AMOUNT + "foo", PremiumAmount.MESSAGE_CONSTRAINTS);
 
         // Negative premium amount
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
-                + PREFIX_POLICY_PREMIUM_AMOUNT + "-1", Policy.AMOUNT_MESSAGE_CONSTRAINTS);
+                + PREFIX_POLICY_PREMIUM_AMOUNT + "-1", PremiumAmount.MESSAGE_CONSTRAINTS);
+
+        // More than 2 decimal places premium amount
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_PREMIUM_AMOUNT + "1.555", PremiumAmount.MESSAGE_CONSTRAINTS);
+
+        // non numeric coverage amount
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_COVERAGE_AMOUNT + "foo", CoverageAmount.MESSAGE_CONSTRAINTS);
 
         // Negative coverage amount
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
-                + PREFIX_POLICY_COVERAGE_AMOUNT + "-1", Policy.AMOUNT_MESSAGE_CONSTRAINTS);
+                + PREFIX_POLICY_COVERAGE_AMOUNT + "-1", CoverageAmount.MESSAGE_CONSTRAINTS);
+
+        // More than 2 decimal places coverage amount
+        assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
+                + PREFIX_POLICY_COVERAGE_AMOUNT + "1.555", CoverageAmount.MESSAGE_CONSTRAINTS);
 
         // Invalid expiry date
         assertParseFailure(parser, INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE + " "
-                + PREFIX_POLICY_EXPIRY_DATE + "99/99/9999", DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
+                + PREFIX_POLICY_EXPIRY_DATE + "99/99/9999", ExpiryDate.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -117,7 +133,7 @@ public class AddPolicyCommandParserTest {
     public void parse_validIndexAndInvalidPolicyType_failure() {
         // Valid index but invalid policy type
         assertParseFailure(parser, INDEX_SECOND_PERSON.getOneBased() + INVALID_POLICY_TYPE_DESC,
-                Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+                PolicyType.MESSAGE_CONSTRAINTS);
     }
 
     @Test

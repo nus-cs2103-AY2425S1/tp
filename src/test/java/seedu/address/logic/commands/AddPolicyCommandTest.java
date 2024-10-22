@@ -36,7 +36,7 @@ public class AddPolicyCommandTest {
         // Person at index has no health policies
         AddPolicyCommand command = new AddPolicyCommand(INDEX_FIRST_PERSON, health);
 
-        String expectedMessage = String.format(AddPolicyCommand.POLICY_ADD_PERSON_SUCCESS,
+        String expectedMessage = String.format(AddPolicyCommand.MESSAGE_SUCCESS,
                 health.toString());
 
         assertCommandSuccess(command, model, expectedMessage, model);

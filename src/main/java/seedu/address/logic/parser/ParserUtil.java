@@ -1,17 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.dateformatter.DateFormatter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddPolicyCommand;
@@ -22,8 +18,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.policy.Policy;
+import seedu.address.model.policy.CoverageAmount;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -145,7 +143,7 @@ public class ParserUtil {
         try {
             return PolicyType.fromString(trimmedPolicy);
         } catch (IllegalArgumentException e) {
-            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+            throw new ParseException(PolicyType.MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -162,7 +160,7 @@ public class ParserUtil {
     public static Set<PolicyType> parsePolicyTypes(List<String> policies) throws ParseException {
         requireNonNull(policies);
         if (policies.isEmpty()) {
-            throw new ParseException(Policy.POLICY_TYPE_MESSAGE_CONSTRAINTS);
+            throw new ParseException(PolicyType.MESSAGE_CONSTRAINTS);
         }
 
         final Set<PolicyType> policyTypes = new HashSet<>();
@@ -175,46 +173,62 @@ public class ParserUtil {
     }
 
     /**
-     * Parse a {@code String amount} into a {@code double}.
+     * Parse a {@code String premiumAmount} into a {@code PremiumAmount}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code amount} is invalid.
+     * @throws ParseException if the given {@code premiumAmount} is invalid.
      */
-    public static double parsePolicyAmount(String amount) throws ParseException {
-        requireNonNull(amount);
-        if (amount == "") {
-            return -1.0;
+    public static PremiumAmount parsePremiumAmount(String premiumAmount) throws ParseException {
+        requireNonNull(premiumAmount);
+        if (premiumAmount == "") {
+            return null;
         }
 
-        String trimmedAmount = amount.trim();
+        String trimmed = premiumAmount.trim();
         try {
-            double parsedDouble = Double.parseDouble(trimmedAmount);
-            if (parsedDouble < 0) {
-                throw new ParseException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
-            }
-            return parsedDouble;
-        } catch (NumberFormatException e) {
-            throw new ParseException(Policy.AMOUNT_MESSAGE_CONSTRAINTS);
+            return new PremiumAmount(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(PremiumAmount.MESSAGE_CONSTRAINTS);
         }
     }
 
     /**
-     * Parse a {@code String expiryDate} into a {@code LocalDate}.
+     * Parse a {@code String coverageAmount} into a {@code CoverageAmount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code coverageAmount} is invalid.
+     */
+    public static CoverageAmount parseCoverageAmount(String coverageAmount) throws ParseException {
+        requireNonNull(coverageAmount);
+        if (coverageAmount == "") {
+            return null;
+        }
+
+        String trimmed = coverageAmount.trim();
+        try {
+            return new CoverageAmount(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(CoverageAmount.MESSAGE_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parse a {@code String expiryDate} into an {@code ExpiryDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code expiryDate} is invalid.
      */
-    public static LocalDate parseExpiryDate(String expiryDate) throws ParseException {
+    public static ExpiryDate parseExpiryDate(String expiryDate) throws ParseException {
         requireNonNull(expiryDate);
         if (expiryDate == "") {
             return null;
         }
 
-        String trimmedExpiryDate = expiryDate.trim();
+        String trimmed = expiryDate.trim();
         try {
-            return LocalDate.parse(trimmedExpiryDate, MM_DD_YYYY_FORMATTER);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(DateFormatter.MM_DD_YYYY_MESSAGE_CONSTRAINTS);
+            return new ExpiryDate(trimmed);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(ExpiryDate.MESSAGE_CONSTRAINTS);
         }
     }
     /**

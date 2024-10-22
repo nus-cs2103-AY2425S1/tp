@@ -35,9 +35,10 @@ public class AddPolicyCommand extends Command {
             + "[" + PREFIX_POLICY_EXPIRY_DATE + "EXPIRY_DATE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_POLICY_TYPE + "life "
+            + PREFIX_POLICY_PREMIUM_AMOUNT + "400.00 "
             + PREFIX_POLICY_COVERAGE_AMOUNT + "4000.00 "
             + PREFIX_POLICY_EXPIRY_DATE + "12/23/2024";
-    public static final String POLICY_ADD_PERSON_SUCCESS = "Added Policy:\n\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Added Policy:\n\n%1$s";
 
     private final Index index;
     private final Policy policy;
@@ -77,7 +78,7 @@ public class AddPolicyCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(String.format(POLICY_ADD_PERSON_SUCCESS, policy.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, policy.toString()));
     }
 
     @Override
