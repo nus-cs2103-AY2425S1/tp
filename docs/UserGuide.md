@@ -5,7 +5,7 @@ title: User Guide
 
 HRConnect is a desktop app for **managing human resources in relation to projects** within a company.
 
-It is optimized for use via typing while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HRConnect can get your HR management tasks done faster than traditional GUI apps.
+It is optimized for use via typing while still having the benefits of a [Graphical User Interface](#graphical-user-interface) (GUI). If you can type fast, HRConnect can get your HR management tasks done faster than traditional GUI apps.
 
 ---
 
@@ -30,7 +30,7 @@ The user guide contains formatting to highlight important info. The standards us
 
 Start here if you are new to HRConnect.
 
-1. Ensure you have **Java 17 or above** installed in your computer.
+1. Ensure you have **[Java](#java) 17 or above** installed in your computer.
 
 2. Download the latest .jar file from \[here\](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
 
@@ -445,3 +445,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                               |
 | **List**   | `list`                                                                                                                                                                                                                   |
 | **Help**   | `help`                                                                                                                                                                                                                   |
+
+---
+
+## Glossary
+
+List of certain technical terms / uncommon words used in this user guide.
+
+### Graphical User Interface
+- A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
+
+### Java
+- The programming language HRConnect is based on. 
+- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.  
+
+[Return to Top](#table-of-contents)
