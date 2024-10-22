@@ -233,12 +233,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseAttribute_knownAttributeWithGibberishBehind_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAttribute(VALID_ATTRIBUTE_1 + WHITESPACE + "gamer" + WHITESPACE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttribute(VALID_ATTRIBUTE_1
+                + WHITESPACE + "gamer" + WHITESPACE));
     }
 
     @Test
     public void parseAttribute_knownAttributeWithGibberishBehindAndWhiteSpaceInFront_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAttribute(WHITESPACE + VALID_ATTRIBUTE_1 + WHITESPACE + "gamer" + WHITESPACE));
+        assertThrows(ParseException.class, () -> ParserUtil.parseAttribute(WHITESPACE + VALID_ATTRIBUTE_1
+                + WHITESPACE + "gamer" + WHITESPACE));
     }
 
     @Test
