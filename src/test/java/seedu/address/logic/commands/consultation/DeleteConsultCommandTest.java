@@ -33,7 +33,7 @@ public class DeleteConsultCommandTest {
     @Test
     public void execute_validIndex_success() {
         Index firstIndex = Index.fromOneBased(1);
-        Consultation consultToDelete = model.getConsultList().get(firstIndex.getZeroBased());
+        Consultation consultToDelete = model.getFilteredConsultationList().get(firstIndex.getZeroBased());
         Set<Index> firstIndexSet = new HashSet<>();
         firstIndexSet.add(firstIndex);
         DeleteConsultCommand deleteConsultCommand = new DeleteConsultCommand(firstIndexSet);
@@ -52,8 +52,8 @@ public class DeleteConsultCommandTest {
         ArrayList<Consultation> consultsToDelete = new ArrayList<>();
         Index firstIndex = Index.fromOneBased(1);
         Index thirdIndex = Index.fromOneBased(3);
-        consultsToDelete.add(model.getConsultList().get(firstIndex.getZeroBased()));
-        consultsToDelete.add(model.getConsultList().get(thirdIndex.getZeroBased()));
+        consultsToDelete.add(model.getFilteredConsultationList().get(firstIndex.getZeroBased()));
+        consultsToDelete.add(model.getFilteredConsultationList().get(thirdIndex.getZeroBased()));
 
 
         Set<Index> indexSet = new HashSet<>();
@@ -75,8 +75,8 @@ public class DeleteConsultCommandTest {
 
     @Test
     public void execute_allInvalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getConsultList().size() + 1);
-        Index outOfBoundIndex2 = Index.fromOneBased(model.getConsultList().size() + 2);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredConsultationList().size() + 1);
+        Index outOfBoundIndex2 = Index.fromOneBased(model.getFilteredConsultationList().size() + 2);
         Set<Index> outOfBoundIndexSet = new HashSet<>();
         outOfBoundIndexSet.add(outOfBoundIndex);
         outOfBoundIndexSet.add(outOfBoundIndex2);
@@ -91,8 +91,8 @@ public class DeleteConsultCommandTest {
 
     @Test
     public void execute_someInvalidIndex_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getConsultList().size() + 1);
-        Index outOfBoundIndex2 = Index.fromOneBased(model.getConsultList().size() + 2);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredConsultationList().size() + 1);
+        Index outOfBoundIndex2 = Index.fromOneBased(model.getFilteredConsultationList().size() + 2);
 
         Set<Index> outOfBoundIndexSet = new HashSet<>();
         outOfBoundIndexSet.add(outOfBoundIndex);
@@ -109,7 +109,7 @@ public class DeleteConsultCommandTest {
 
     @Test
     public void execute_oneOfOneInvalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getConsultList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredConsultationList().size() + 1);
         Set<Index> outOfBoundIndexSet = new HashSet<>();
         outOfBoundIndexSet.add(outOfBoundIndex);
         outOfBoundIndexSet.add(Index.fromOneBased(1));
