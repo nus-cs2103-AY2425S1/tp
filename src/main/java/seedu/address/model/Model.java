@@ -71,7 +71,7 @@ public interface Model {
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the address book and its ID should not be -1.
      */
     void addPerson(Person person);
 
@@ -138,4 +138,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Generates a new unique person ID.
+     */
+    int generateNewPersonId();
+
+    /**
+     * Generates a new unique event ID.
+     */
+    int generateNewEventId();
 }

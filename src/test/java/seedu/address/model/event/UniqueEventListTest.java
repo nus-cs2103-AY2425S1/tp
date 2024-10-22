@@ -44,6 +44,18 @@ public class UniqueEventListTest {
     }
 
     @Test
+    public void containsId_eventWithSameIdAsGivenArgument_returnsTrue() {
+        uniqueEventList.add(MEETING);
+        assertTrue(uniqueEventList.containsId(MEETING.getEventId()));
+    }
+
+    @Test
+    public void containsId_eventWithDifferentIdAsGivenArgument_returnsFalse() {
+        uniqueEventList.add(MEETING);
+        assertFalse(uniqueEventList.containsId(MEETING.getEventId() + 1));
+    }
+
+    @Test
     public void add_nullEvent_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueEventList.add(null));
     }

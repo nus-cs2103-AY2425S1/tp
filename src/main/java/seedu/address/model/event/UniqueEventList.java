@@ -37,6 +37,13 @@ public class UniqueEventList implements Iterable<Event> {
     }
 
     /**
+     * Returns true if the list contains an event with the same ID as the given argument.
+     */
+    public boolean containsId(int idToCheck) {
+        return internalList.stream().anyMatch(event -> event.getEventId() == idToCheck);
+    }
+
+    /**
      * Adds an event to the list.
      * The event must not already exist in the list.
      */

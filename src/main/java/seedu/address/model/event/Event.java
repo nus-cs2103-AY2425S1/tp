@@ -12,12 +12,13 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class Event {
 
-    public final EventName eventName;
-    public final EventDescription eventDescription;
-    public final EventDuration eventDuration;
+    private final EventName eventName;
+    private final EventDescription eventDescription;
+    private final EventDuration eventDuration;
+    private final int eventId;
 
     /**
-     * Constructs an {@code Event}.
+     * Constructs an {@code Event}. ID is initialised to -1.
      *
      * @param eventName A valid event name.
      * @param eventDescription A valid event description.
@@ -30,6 +31,24 @@ public class Event {
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.eventDuration = eventDuration;
+        this.eventId = -1;
+    }
+
+    /**
+     * Constructs an {@code Event}.
+     *
+     * @param eventName A valid event name.
+     * @param eventDescription A valid event description.
+     * @param eventDuration A valid event duration with a start and end date.
+     */
+    public Event(EventName eventName, EventDescription eventDescription, EventDuration eventDuration, int eventId) {
+        requireNonNull(eventName);
+        requireNonNull(eventDescription);
+        requireNonNull(eventDuration);
+        this.eventName = eventName;
+        this.eventDescription = eventDescription;
+        this.eventDuration = eventDuration;
+        this.eventId = eventId;
     }
 
     @Override
@@ -80,6 +99,17 @@ public class Event {
 
     public LocalDate getEventEndDate() {
         return eventDuration.getEndDate();
+    }
+
+    public int getEventId() {
+        return eventId;
+    }
+
+    /**
+     * Returns a new {@code Event} object that has the same attributes except the ID.
+     */
+    public Event changeId(int newId) {
+        return new Event(eventName, eventDescription, eventDuration, newId);
     }
 
     /**

@@ -72,7 +72,9 @@ public class ImportCommand extends Command {
         List<Person> personList = getPersonList(filePath);
         for (Person person : personList) {
             if (!model.hasPerson(person)) {
-                model.addPerson(person);
+                int updatedPersonId = model.generateNewPersonId();
+                Person updatedIdPerson = person.changeId(updatedPersonId);
+                model.addPerson(updatedIdPerson);
             }
         }
 

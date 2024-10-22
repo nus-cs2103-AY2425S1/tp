@@ -34,7 +34,6 @@ class JsonAdaptedIdCounterList {
      * Converts this Jackson-friendly adapted ID counter list object into the model's {@code IdCounterList} object.
      */
     public IdCounterList toModelType() {
-        // Thinking whether to check for id counter >= no of persons/events here
         return new IdCounterList(personIdCounter, eventIdCounter);
     }
 

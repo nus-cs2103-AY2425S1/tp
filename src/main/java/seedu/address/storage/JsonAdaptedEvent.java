@@ -23,6 +23,7 @@ public class JsonAdaptedEvent {
     private final String eventDescription;
     private final String eventFrom;
     private final String eventTo;
+    private final int eventId;
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details
@@ -31,11 +32,13 @@ public class JsonAdaptedEvent {
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
                             @JsonProperty("eventDescription") String eventDescription,
                             @JsonProperty("eventFrom") String eventFrom,
-                            @JsonProperty("eventTo") String eventTo) {
+                            @JsonProperty("eventTo") String eventTo,
+                            @JsonProperty("id") int eventId) {
         this.eventName = eventName;
         this.eventDescription = eventDescription;
         this.eventFrom = eventFrom;
         this.eventTo = eventTo;
+        this.eventId = eventId;
     }
 
     /**
@@ -46,6 +49,7 @@ public class JsonAdaptedEvent {
         eventDescription = event.getEventDescription().toString();
         eventFrom = event.getEventStartDate().toString();
         eventTo = event.getEventEndDate().toString();
+        eventId = event.getEventId();
     }
 
     /**
@@ -78,7 +82,7 @@ public class JsonAdaptedEvent {
         }
         final EventDuration modelEventDuration = getEventDuration();
 
-        return new Event(modelEventName, modelEventDescription, modelEventDuration);
+        return new Event(modelEventName, modelEventDescription, modelEventDuration, eventId);
     }
 
     private EventDuration getEventDuration() throws IllegalValueException {

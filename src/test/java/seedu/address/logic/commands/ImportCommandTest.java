@@ -122,6 +122,8 @@ public class ImportCommandTest {
 
     @AfterEach
     public void tearDown() throws IOException {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         // Clean up the files after each test
         if (Files.exists(validFilePath)) {
             Files.delete(validFilePath);
@@ -176,7 +178,8 @@ public class ImportCommandTest {
         Tag tag = new Tag("friends");
         Set<Tag> tagSet = new HashSet<>();
         tagSet.add(tag);
-        Person person = new Person(name, phone, email, address, tagSet);
+        int newPersonId = expectedModel.generateNewPersonId();
+        Person person = new Person(name, phone, email, address, tagSet, newPersonId);
         expectedModel.addPerson(person);
         // Ensure success of import
         assertCommandSuccess(importCommand, model,
@@ -203,7 +206,8 @@ public class ImportCommandTest {
         Tag tag1 = new Tag("family");
         Set<Tag> tagSet1 = new HashSet<>();
         tagSet1.add(tag1);
-        Person person1 = new Person(name1, phone1, email1, address1, tagSet1);
+        int person1Id = expectedModel.generateNewPersonId();
+        Person person1 = new Person(name1, phone1, email1, address1, tagSet1, person1Id);
 
         Name name2 = new Name("John Smith");
         Phone phone2 = new Phone("87654321");
@@ -212,7 +216,8 @@ public class ImportCommandTest {
         Tag tag2 = new Tag("coworkers");
         Set<Tag> tagSet2 = new HashSet<>();
         tagSet2.add(tag2);
-        Person person2 = new Person(name2, phone2, email2, address2, tagSet2);
+        int person2Id = expectedModel.generateNewPersonId();
+        Person person2 = new Person(name2, phone2, email2, address2, tagSet2, person2Id);
 
         expectedModel.addPerson(person1);
         expectedModel.addPerson(person2);

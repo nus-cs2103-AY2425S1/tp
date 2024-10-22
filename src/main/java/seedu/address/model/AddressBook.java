@@ -21,7 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueEventList events;
-    private IdCounterList idCounterList;
+    private final IdCounterList idCounterList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -65,6 +65,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the ID counter list with {@code idCounterList}.
+     * {@code idCounterList} should contain the largest unique person/event ID that currently exists.
+     */
+    public void setIdCounterList(IdCounterList idCounterList) {
+        this.idCounterList.setPersonIdCounter(idCounterList.getPersonIdCounter());
+        this.idCounterList.setEventIdCounter(idCounterList.getEventIdCounter());
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
@@ -72,6 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setEvents(newData.getEventList());
+        setIdCounterList(newData.getIdCounterList());
     }
 
     //// person-level operations
@@ -94,9 +104,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * The person must not already exist in the address book and must have a unique ID.
      */
     public void addPerson(Person p) {
+        assert p.getId() != -1 : "Person added should not have an ID of -1";
         persons.add(p);
     }
 
@@ -107,6 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
+        assert editedPerson.getId() != -1 : "Edited person should not have an ID of -1.";
 
         persons.setPerson(target, editedPerson);
     }
@@ -131,21 +143,35 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds an event to the address book.
-     * The event must not already exist in the address book.
+     * The event must not already exist in the address book and must have a unique ID.
      */
     public void addEvent(Event event) {
+        assert event.getEventId() != -1 : "Event added should not have an ID of -1.";
         events.add(event);
     }
 
     //// ID counter-level operations
 
     /**
-     * Adds the ID counter list to the address book.
-     * The ID counters for persons/events should be more than or equal to
-     * the number of persons/events in the address book.
+     * Generates a new unique person ID.
      */
-    public void addIdCounterList(IdCounterList idCounterList) {
-        this.idCounterList = idCounterList;
+    public int generateNewPersonId() {
+        int newPersonId = idCounterList.generatePersonId();
+        while (persons.containsId(newPersonId)) {
+            newPersonId = idCounterList.generatePersonId();
+        }
+        return newPersonId;
+    }
+
+    /**
+     * Generates a new unique event ID.
+     */
+    public int generateNewEventId() {
+        int newEventId = idCounterList.generateEventId();
+        while (events.containsId(newEventId)) {
+            newEventId = idCounterList.generateEventId();
+        }
+        return newEventId;
     }
 
     //// util methods
@@ -169,7 +195,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public IdCounterList getIdCounterList() {
-        return idCounterList;
+        return new IdCounterList(idCounterList.getPersonIdCounter(), idCounterList.getEventIdCounter());
     }
 
     @Override

@@ -105,6 +105,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addPerson(Person person) {
+        assert person.getId() != -1 : "Person ID should not be -1 when adding the person to the address book.";
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
@@ -112,6 +113,7 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
+        assert editedPerson.getId() != -1 : "Person ID should not be -1 when editing the person in the address book.";
 
         addressBook.setPerson(target, editedPerson);
     }
@@ -141,8 +143,19 @@ public class ModelManager implements Model {
 
     @Override
     public void addEvent(Event event) {
+        assert event.getEventId() != -1 : "Event ID should not be -1 when adding the event to the address book.";
         addressBook.addEvent(event);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    }
+
+    @Override
+    public int generateNewPersonId() {
+        return addressBook.generateNewPersonId();
+    }
+
+    @Override
+    public int generateNewEventId() {
+        return addressBook.generateNewEventId();
     }
 
     //=========== Filtered Person List Accessors =============================================================

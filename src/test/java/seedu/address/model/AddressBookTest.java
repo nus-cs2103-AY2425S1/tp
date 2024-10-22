@@ -6,7 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalEvents.MEETING;
+import static seedu.address.testutil.TypicalEvents.WORKSHOP;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -136,6 +139,24 @@ public class AddressBookTest {
         String upperCasedNameString = nameString.toUpperCase();
         Name upperCasedName = new Name(upperCasedNameString);
         assertEquals(addressBook.findPersonsWithName(upperCasedName), resultList);
+    }
+
+    @Test
+    public void generateNewPersonId_success() {
+        Person aliceWithId = ALICE.changeId(1);
+        Person amyWithId = AMY.changeId(2);
+        addressBook.addPerson(aliceWithId);
+        addressBook.addPerson(amyWithId);
+        assertEquals(addressBook.generateNewPersonId(), 3);
+    }
+
+    @Test
+    public void generateNewEventId_success() {
+        Event meetingWithId = MEETING.changeId(1);
+        Event workshopWithId = WORKSHOP.changeId(2);
+        addressBook.addEvent(meetingWithId);
+        addressBook.addEvent(workshopWithId);
+        assertEquals(addressBook.generateNewEventId(), 3);
     }
 
     @Test

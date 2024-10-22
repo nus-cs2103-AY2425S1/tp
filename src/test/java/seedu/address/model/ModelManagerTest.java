@@ -17,10 +17,13 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -90,6 +93,28 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void addPerson_personWithInvalidId_throwsAssertionError() {
+        boolean assertionsEnabled = false;
+        assert assertionsEnabled = true;
+
+        ModelManager modelManager = new ModelManager();
+        Person invalidPerson = new PersonBuilder().withId(-1).build();
+        assertThrows(AssertionError.class, () -> modelManager.addPerson(invalidPerson));
+    }
+
+    @Test
+    public void setPerson_personWithInvalidId_throwsAssertionError() {
+        boolean assertionsEnabled = false;
+        assert assertionsEnabled = true;
+
+        ModelManager modelManager = new ModelManager();
+        Person validPerson = new PersonBuilder().withId(1).build();
+        Person invalidPerson = new PersonBuilder().withId(-1).build();
+        modelManager.addPerson(validPerson);
+        assertThrows(AssertionError.class, () -> modelManager.setPerson(validPerson, invalidPerson));
     }
 
     @Test
@@ -177,5 +202,15 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+    }
+
+    @Test
+    public void addEvent_eventWithInvalidId_throwsAssertionError() {
+        boolean assertionsEnabled = false;
+        assert assertionsEnabled = true;
+
+        ModelManager modelManager = new ModelManager();
+        Event invalidEvent = new EventBuilder().withEventId(-1).build();
+        assertThrows(AssertionError.class, () -> modelManager.addEvent(invalidEvent));
     }
 }

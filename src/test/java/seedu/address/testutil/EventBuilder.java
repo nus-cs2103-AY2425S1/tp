@@ -21,6 +21,7 @@ public class EventBuilder {
     private EventDuration eventDuration;
     private LocalDate eventStartDate;
     private LocalDate eventEndDate;
+    private int eventId;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -31,6 +32,7 @@ public class EventBuilder {
         eventStartDate = LocalDate.parse(DEFAULT_EVENT_START_DATE);
         eventEndDate = LocalDate.parse(DEFAULT_EVENT_END_DATE);
         eventDuration = new EventDuration(eventStartDate, eventEndDate);
+        eventId = 0;
     }
 
     /**
@@ -42,6 +44,7 @@ public class EventBuilder {
         eventStartDate = eventToCopy.getEventStartDate();
         eventEndDate = eventToCopy.getEventEndDate();
         eventDuration = new EventDuration(eventStartDate, eventEndDate);
+        eventId = eventToCopy.getEventId();
     }
 
     /**
@@ -70,7 +73,15 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code EventId} of the {@code Event} that we are building.
+     */
+    public EventBuilder withEventId(int eventId) {
+        this.eventId = eventId;
+        return this;
+    }
+
     public Event build() {
-        return new Event(eventName, eventDescription, eventDuration);
+        return new Event(eventName, eventDescription, eventDuration, eventId);
     }
 }

@@ -60,7 +60,7 @@
     }
   ],
   "idCounterList" : {
-    "personIdCounter" : 7,
-    "eventIdCounter" : 1
+    "personIdCounter" : -1,
+    "eventIdCounter" : -1
   }
 }

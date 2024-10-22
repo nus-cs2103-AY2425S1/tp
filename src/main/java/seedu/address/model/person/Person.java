@@ -20,12 +20,14 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
+    private final int id;
 
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Constructor for the {@code Person} Class. ID is initialised to -1.
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
@@ -35,6 +37,21 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.id = -1;
+    }
+
+    /**
+     * Constructor for the {@code Person} Class. ID is initialised to the given ID.
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, int id) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.id = id;
     }
 
     public Name getName() {
@@ -53,12 +70,23 @@ public class Person {
         return address;
     }
 
+    public int getId() {
+        return id;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns a new {@code Person} object that has the same attributes except the ID.
+     */
+    public Person changeId(int newId) {
+        return new Person(name, phone, email, address, tags, newId);
     }
 
     /**
@@ -100,7 +128,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, id);
     }
 
     @Override
@@ -119,7 +147,7 @@ public class Person {
      * Each field is enclosed in double quotes and separated by commas.
      *
      * @return A string representing the object in CSV format, where fields include:
-     *         name, phone, email, address, and tags.
+     *         name, phone, email, address, tags and ID.
      */
     public String toCsvFormat() {
         StringBuilder tagsInCsvFormat = new StringBuilder();
