@@ -31,8 +31,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.StudentId;
 import seedu.address.model.person.Tag;
 
-import javax.swing.text.html.Option;
-
 /**
  * Edits the details of an existing person in the address book.
  */
@@ -343,8 +341,6 @@ public class EditCommand extends Command {
         public boolean hasModuleChanges() {
             return oldModule != null && newModule != null;
         }
-
-
 
         @Override
         public String toString() {
