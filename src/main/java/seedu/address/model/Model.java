@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * The API of the Model component.
@@ -78,11 +79,19 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    boolean hasParticipation(Participation participation);
+
     /**
      * Adds the given participation.
      * {@code participation} must not already exist in the address book.
      */
     public void addParticipation(Participation participation);
+
+    /**
+     * Deletes the given participation.
+     * The participation must exist in the address book.
+     */
+    void deleteParticipation(Participation target);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -92,4 +101,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the filtered Tutorial list */
+    ObservableList<Tutorial> getFilteredTutorialList();
+
+    /**
+     * Updates the filter of the filtered tutorial list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTutorialList(Predicate<Tutorial> predicate);
 }

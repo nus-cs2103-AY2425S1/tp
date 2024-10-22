@@ -15,6 +15,10 @@ import seedu.address.model.participation.Participation;
  */
 public class Tutorial {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Subjects should only contain alphanumeric characters only.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
+
     private final String subject;
     private final List<Participation> participationList = new ArrayList<>();
 
@@ -24,6 +28,10 @@ public class Tutorial {
     public Tutorial(String subject) {
         requireAllNonNull(subject, participationList);
         this.subject = subject;
+    }
+
+    public static boolean isValidTutorial(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     public String getSubject() {
@@ -51,6 +59,14 @@ public class Tutorial {
      */
     public void addParticipation(Participation participation) {
         participationList.add(participation);
+    }
+
+    /**
+     * Removes a participation object from the participation list
+     * @param participation object to be removed
+     */
+    public void removeParticipation(Participation participation) {
+        participationList.remove(participation);
     }
 
     /**

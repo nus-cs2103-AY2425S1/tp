@@ -9,9 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.participation.exceptions.ParticipationNotFoundException;
-import seedu.address.model.tutorial.Tutorial;
 import seedu.address.model.tutorial.exceptions.DuplicateTutorialException;
-import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
 
 /**
  * A list of participation that enforces uniqueness between its elements and does not allow nulls.
@@ -27,6 +25,8 @@ import seedu.address.model.tutorial.exceptions.TutorialNotFoundException;
  * @see seedu.address.model.participation.Participation#isSameParticipation(Participation)
  */
 public class UniqueParticipationList implements Iterable<Participation> {
+
+    public static final String MESSAGE_PARTICIPATION_NOT_FOUND = "No such participation exists in EduVault now";
 
     private final ObservableList<Participation> internalList = FXCollections.observableArrayList();
     private final ObservableList<Participation> internalUnmodifiableList =
@@ -63,7 +63,7 @@ public class UniqueParticipationList implements Iterable<Participation> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ParticipationNotFoundException();
+            throw new ParticipationNotFoundException(MESSAGE_PARTICIPATION_NOT_FOUND);
         }
 
         if (!target.isSameParticipation(editedParticipation) && contains(editedParticipation)) {
@@ -71,17 +71,6 @@ public class UniqueParticipationList implements Iterable<Participation> {
         }
 
         internalList.set(index, editedParticipation);
-    }
-
-    /**
-     * Removes the equivalent participation from the list.
-     * The participation must exist in the list.
-     */
-    public void remove(Participation toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new ParticipationNotFoundException();
-        }
     }
 
     public void setParticipation(UniqueParticipationList replacement) {
@@ -100,6 +89,17 @@ public class UniqueParticipationList implements Iterable<Participation> {
         }
 
         internalList.setAll(participation);
+    }
+
+    /**
+     * Removes the equivalent participation from the list.
+     * The participation must exist in the list.
+     */
+    public void remove(Participation toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new ParticipationNotFoundException(MESSAGE_PARTICIPATION_NOT_FOUND);
+        }
     }
 
     /**

@@ -141,8 +141,13 @@ public class ParserUtil {
      * Parses a {@code String attendance} into an {@code Attendance}.
      * Leading and trailing whitespaces will be trimmed
      */
-    public static Tutorial parseTutorial(String tutorial) throws ParseException {
-        throw new ParseException("method not implemented yet");
+    public static Tutorial parseTutorial(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Tutorial.isValidTutorial(trimmedSubject)) {
+            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
+        return new Tutorial(trimmedSubject);
     }
 
     /**
