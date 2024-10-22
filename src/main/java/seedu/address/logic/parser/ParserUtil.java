@@ -209,7 +209,7 @@ public class ParserUtil {
         int size;
 
         try {
-            size = Integer.parseInt(familySize);
+            size = Integer.parseInt(familySize.trim());
         } catch (NumberFormatException e) {
             throw new ParseException(FamilySize.MESSAGE_CONSTRAINTS);
         }

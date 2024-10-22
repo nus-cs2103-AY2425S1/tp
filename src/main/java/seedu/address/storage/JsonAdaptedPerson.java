@@ -175,7 +175,7 @@ class JsonAdaptedPerson {
 
         final FamilySize modelFamilySize;
         if (familySize == null) {
-            modelFamilySize = new FamilySize(0);
+            modelFamilySize = new FamilySize(1);
         } else if (FamilySize.isValidFamilySize(familySize)) {
             modelFamilySize = new FamilySize(familySize);
         } else {

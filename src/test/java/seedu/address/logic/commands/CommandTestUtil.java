@@ -46,7 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_DATE_OF_BIRTH_BOB = "1 Jan 2000";
     public static final double VALID_INCOME_AMY = 1500.32;
     public static final double VALID_INCOME_BOB = 1300;
-    public static final int VALID_FAMILY_SIZE_AMY = 0;
+    public static final int VALID_FAMILY_SIZE_AMY = 1;
     public static final int VALID_FAMILY_SIZE_BOB = 9;
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";

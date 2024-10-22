@@ -9,15 +9,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
 public class FamilySizeTest {
 
-    private static int INVALID_FAMILY_SIZE = -1;
+    private static final int INVALID_FAMILY_SIZE = -1;
 
-    private static int VALID_FAMILY_SIZE_ZERO = 0;
+    private static final int INVALID_FAMILY_SIZE_ZERO = 0;
 
-    private static int VALID_FAMILY_SIZE = 3;
+    private static final int VALID_FAMILY_SIZE = 1;
 
     @Test
     public void constructor_invalidFamilySize_throwsIllegalArgumentException() {
@@ -25,8 +23,8 @@ public class FamilySizeTest {
     }
 
     @Test
-    public void constructor_zeroFamilySize_shouldSucceed() {
-        assertDoesNotThrow(() -> new FamilySize(VALID_FAMILY_SIZE_ZERO));
+    public void constructor_zeroFamilySize_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> new FamilySize(INVALID_FAMILY_SIZE_ZERO));
     }
 
     @Test
@@ -40,8 +38,8 @@ public class FamilySizeTest {
     }
 
     @Test
-    public void isValidFamilySize_zeroFamilySize_returnsTrue() {
-        assertTrue(FamilySize.isValidFamilySize(VALID_FAMILY_SIZE_ZERO));
+    public void isValidFamilySize_zeroFamilySize_returnsFalse() {
+        assertFalse(FamilySize.isValidFamilySize(INVALID_FAMILY_SIZE_ZERO));
     }
 
     @Test
@@ -51,8 +49,8 @@ public class FamilySizeTest {
 
     @Test
     public void equals() {
-        assertEquals(new FamilySize(VALID_FAMILY_SIZE_ZERO), new FamilySize(VALID_FAMILY_SIZE_ZERO));
-        assertNotEquals(new FamilySize(VALID_FAMILY_SIZE), new FamilySize(VALID_FAMILY_SIZE_ZERO));
+        assertEquals(new FamilySize(VALID_FAMILY_SIZE), new FamilySize(VALID_FAMILY_SIZE));
+        assertNotEquals(new FamilySize(VALID_FAMILY_SIZE), new FamilySize(VALID_FAMILY_SIZE + 1));
         assertNotEquals(new FamilySize(VALID_FAMILY_SIZE), null);
 
     }

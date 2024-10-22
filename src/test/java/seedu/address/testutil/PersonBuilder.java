@@ -32,7 +32,7 @@ public class PersonBuilder {
     public static final String DEFAULT_REMARK = "";
     public static final double DEFAULT_INCOME = 0;
     public static final String DEFAULT_DATE_OF_BIRTH = "1 Jan 2000";
-    public static final int DEFAULT_FAMILY_SIZE = 0;
+    public static final int DEFAULT_FAMILY_SIZE = 1;
 
     private Name name;
     private Phone phone;

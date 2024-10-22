@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class FamilySize {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Family size should be a non-negative integer";
+            "Family size should be a positive integer";
 
     private final int value;
 
@@ -24,13 +24,13 @@ public class FamilySize {
     }
 
     /**
-     * Returns true if a given integer is a valid family size.
+     * Returns true if a given integer is a valid family size, i.e. is positive.
      *
      * @param test An integer to be tested
      * @return {@code true} if the integer is valid, otherwise false
      */
     public static boolean isValidFamilySize(int test) {
-        return test >= 0;
+        return test > 0;
     }
 
     /**

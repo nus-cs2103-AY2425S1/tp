@@ -61,7 +61,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATE_OF_BIRTH).get());
         Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).orElse("0"));
-        FamilySize familySize = ParserUtil.parseFamilySize(argMultimap.getValue(PREFIX_FAMILY_SIZE).orElse("0"));
+        FamilySize familySize = ParserUtil.parseFamilySize(argMultimap.getValue(PREFIX_FAMILY_SIZE).orElse("1"));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Person person = new Person(name, phone, email, address, priority, remark, dateOfBirth, income, familySize,
