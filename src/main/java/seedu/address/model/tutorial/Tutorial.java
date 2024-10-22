@@ -15,6 +15,9 @@ import seedu.address.model.participation.Participation;
  */
 public class Tutorial {
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Subjects should only contain alphanumeric characters only.";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z0-9]+$";
     private final String subject;
     private final List<Participation> participationList = new ArrayList<>();
 
@@ -42,9 +45,11 @@ public class Tutorial {
         if (otherTutorial == this) {
             return true;
         }
-        return otherTutorial != null && otherTutorial.getSubject().equals(getSubject());
+        return otherTutorial != null && otherTutorial.getSubject().equalsIgnoreCase(getSubject());
     }
-
+    public static boolean isValidTutorial(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
 
     /**
      * Returns true if both tutorials have the same data fields.
