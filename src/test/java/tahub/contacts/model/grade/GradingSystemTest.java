@@ -1,6 +1,7 @@
 package tahub.contacts.model.grade;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
@@ -8,8 +9,11 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Unit tests for {@link GradingSystem}.
+ * Tests the functionality of grade management, weight distribution, and score calculations.
+ */
 class GradingSystemTest {
-
     private GradingSystem gradingSystem;
 
     @BeforeEach
@@ -17,6 +21,9 @@ class GradingSystemTest {
         gradingSystem = new GradingSystem();
     }
 
+    /**
+     * Tests adding and retrieving a grade.
+     */
     @Test
     void testAddAndGetGrade() {
         gradingSystem.addGrade("Midterm", 85.0);
@@ -24,6 +31,9 @@ class GradingSystemTest {
         assertEquals(-1.0, gradingSystem.getGrade("Final"), 0.001);
     }
 
+    /**
+     * Tests calculation of overall score with weighted grades.
+     */
     @Test
     void testGetOverallScore() {
         gradingSystem.addGrade("Midterm", 85.0);
@@ -33,6 +43,9 @@ class GradingSystemTest {
         assertEquals(91.0, gradingSystem.getOverallScore(), 0.001);
     }
 
+    /**
+     * Tests retrieving all grades.
+     */
     @Test
     void testGetAllGrades() {
         gradingSystem.addGrade("Midterm", 85.0);
@@ -45,11 +58,17 @@ class GradingSystemTest {
         assertEquals(95.0, allGrades.get("Final"), 0.001);
     }
 
+    /**
+     * Tests behavior when no grades are recorded.
+     */
     @Test
     void testNoGradesRecorded() {
         assertEquals(-1.0, gradingSystem.getOverallScore(), 0.001);
     }
 
+    /**
+     * Tests calculations with all grades having explicit weights.
+     */
     @Test
     void testWeightedGrades() {
         gradingSystem.addGrade("Assignment1", 90.0);
@@ -63,14 +82,19 @@ class GradingSystemTest {
         assertEquals(85.0, gradingSystem.getOverallScore(), 0.001);
     }
 
+    /**
+     * Tests grade calculations with unweighted assessments.
+     */
     @Test
     void testUnweightedGrades() {
         gradingSystem.addGrade("Quiz1", 80.0);
         gradingSystem.addGrade("Quiz2", 90.0);
-
         assertEquals(85.0, gradingSystem.getOverallScore(), 0.001);
     }
 
+    /**
+     * Tests calculations with partially weighted assessments.
+     */
     @Test
     void testPartialWeights() {
         gradingSystem.addGrade("Midterm", 80.0);
@@ -79,7 +103,23 @@ class GradingSystemTest {
 
         gradingSystem.setAssessmentWeight("Midterm", 0.3);
         gradingSystem.setAssessmentWeight("Final", 0.5);
+        // Project gets remaining 0.2 weight
 
-        assertEquals(86.0, gradingSystem.getOverallScore(), 0.001);
+        double expectedScore = (80.0 * 0.3) + (90.0 * 0.5) + (85.0 * 0.2);
+        assertEquals(expectedScore, gradingSystem.getOverallScore(), 0.001);
+    }
+
+    /**
+     * Tests that an exception is thrown when weights exceed 1.0.
+     */
+    @Test
+    void testExcessiveWeights() {
+        gradingSystem.addGrade("Assignment1", 90.0);
+        gradingSystem.addGrade("Assignment2", 80.0);
+
+        gradingSystem.setAssessmentWeight("Assignment1", 0.6);
+        gradingSystem.setAssessmentWeight("Assignment2", 0.6);
+
+        assertThrows(IllegalStateException.class, () -> gradingSystem.getOverallScore());
     }
 }

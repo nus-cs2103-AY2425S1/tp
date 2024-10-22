@@ -99,7 +99,7 @@ public class JsonAdaptedStudentCourseAssociationTest {
         JsonAdaptedTutorial validTutorial = new JsonAdaptedTutorial(VALID_TUTORIAL_ID, validCourse);
 
         StudentCourseAssociation sca = new StudentCourseAssociation(validPerson.toModelType(),
-                validCourse.toModelType(), validTutorial.toModelType());
+                validCourse.toModelType(), validTutorial.toModelType(), null);
         JsonAdaptedStudentCourseAssociation adaptedSca = new JsonAdaptedStudentCourseAssociation(sca);
         assertEquals(sca, adaptedSca.toModelType());
     }

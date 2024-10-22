@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Course;
+import tahub.contacts.model.grade.Grade;
+import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
@@ -18,7 +20,7 @@ class JsonAdaptedStudentCourseAssociation {
     private final JsonAdaptedPerson student;
     private final JsonAdaptedCourse course;
     private final JsonAdaptedTutorial tutorial;
-    // private final GradingSystem grades;
+    //private final JsonSerializableGradingSystem grades;
 
     /**
      * Constructs a {@code JsonAdaptedStudentCourseAssociation} with the given {@code StudentClassAssociation}.
@@ -31,7 +33,7 @@ class JsonAdaptedStudentCourseAssociation {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
-        // this.grades = new GradingSystem();
+        //this.grades = grades;
     }
 
 
@@ -42,7 +44,7 @@ class JsonAdaptedStudentCourseAssociation {
         this.student = new JsonAdaptedPerson(source.getStudent());
         this.course = new JsonAdaptedCourse(source.getCourse());
         this.tutorial = new JsonAdaptedTutorial(source.getTutorial());
-        // this.grades = new GradingSystem();
+        //this.grades = new JsonSerializableGradingSystem(source.getGrades());
     }
 
     /**
@@ -76,7 +78,6 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
-
-        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel);
+        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,null);
     }
 }
