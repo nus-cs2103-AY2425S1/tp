@@ -126,17 +126,40 @@ public class DeliveryList {
     }
 
     /**
+     * Checks if the archive status of two deliveries are the same.
+     */
+    public boolean isSameArchiveStatus(Delivery d1, Delivery d2) {
+        boolean d1Archive = d1.isArchived();
+        boolean d2Archive = d2.isArchived();
+        return (d1Archive && d2Archive) || (!d1Archive && !d2Archive);
+    }
+
+    /**
      * Sorts the backing list using the {@code Address} attribute of each delivery, in ascending order.
      */
     public void sortByAddress() {
-        internalList.sort(Comparator.comparing(d -> d.getAddress().value));
+        internalList.sort((d1, d2) -> {
+            if (isSameArchiveStatus(d1, d2)) {
+                // If both archived or both not archived, compare address as normal.
+                return d1.getAddress().value.compareTo(d2.getAddress().value);
+            } else {
+                //  Not archived (i.e. false) will always come first.
+                return d1.getArchive().value.compareTo(d2.getArchive().value);
+            }
+        });
     }
 
     /**
      * Sorts the backing list using the {@code Cost} attribute of each delivery, in ascending order.
      */
     public void sortByCost() {
-        internalList.sort((d1, d2) -> Float.compare(d1.getCost().asFloat(), d2.getCost().asFloat()));
+        internalList.sort((d1, d2) -> {
+            if (isSameArchiveStatus(d1, d2)) {
+                return Float.compare(d1.getCost().asFloat(), d2.getCost().asFloat());
+            } else {
+                return d1.getArchive().value.compareTo(d2.getArchive().value);
+            }
+        });
     }
 
     /**
@@ -147,11 +170,15 @@ public class DeliveryList {
      */
     public void sortByDate() {
         internalList.sort((d1, d2) -> {
-            int compareValue = d1.getDate().value.compareTo(d2.getDate().value);
-            if (compareValue == 0) {
-                return d1.getTime().value.compareTo(d2.getTime().value);
+            if (isSameArchiveStatus(d1, d2)) {
+                int dateCompare = d1.getDate().value.compareTo(d2.getDate().value);
+                if (dateCompare == 0) {
+                    return d1.getTime().value.compareTo(d2.getTime().value);
+                } else {
+                    return dateCompare;
+                }
             } else {
-                return compareValue;
+                return d1.getArchive().value.compareTo(d2.getArchive().value);
             }
         });
     }
@@ -160,14 +187,26 @@ public class DeliveryList {
      * Sorts the backing list using the {@code Eta} attribute of each delivery, in ascending order.
      */
     public void sortByEta() {
-        internalList.sort(Comparator.comparing(d -> d.getEta().value));
+        internalList.sort((d1, d2) -> {
+            if (isSameArchiveStatus(d1, d2)) {
+                return d1.getEta().value.compareTo(d2.getEta().value);
+            } else {
+                return d1.getArchive().value.compareTo(d2.getArchive().value);
+            }
+        });
     }
 
     /**
      * Sorts the backing list using the {@code Id} attribute of each delivery, in ascending order.
      */
     public void sortById() {
-        internalList.sort(Comparator.comparing(d -> d.getDeliveryId().value));
+        internalList.sort((d1, d2) -> {
+            if (isSameArchiveStatus(d1, d2)) {
+                return d1.getDeliveryId().value.compareTo(d2.getDeliveryId().value);
+            } else {
+                return d1.getArchive().value.compareTo(d2.getArchive().value);
+            }
+        });
     }
 
     /**
@@ -175,8 +214,12 @@ public class DeliveryList {
      */
     public void sortByStatus() {
         internalList.sort((d1, d2) -> {
-            int compareValue = d1.getStatus().getValue().compareTo(d2.getStatus().getValue());
-            return -compareValue; // Negation will keep delivered items below.
+            if (isSameArchiveStatus(d1, d2)) {
+                int statusCompare = d1.getStatus().getValue().compareTo(d2.getStatus().getValue());
+                return -statusCompare; // Negation will keep delivered items below.
+            } else {
+                return d1.getArchive().value.compareTo(d2.getArchive().value);
+            }
         });
     }
 
