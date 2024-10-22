@@ -102,4 +102,8 @@ public class LessonTest {
                 + " End: "
                 + endDateTime, lesson.toString());
     }
+    @Test
+    public void compareTo() {
+        assertTrue(lesson.compareTo(lesson) == 0);
+    }
 }

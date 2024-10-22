@@ -19,7 +19,7 @@ public class LessonBuilder {
     public static final String STUDENT = "Amy Bee";
 
     private Person student;
-    private final Fee fee;
+    private Fee fee;
     private StartDateTime startDateTime;
     private EndDateTime endDateTime;
     /**
@@ -61,5 +61,14 @@ public class LessonBuilder {
      */
     public Lesson build() {
         return new Lesson(student, fee, startDateTime, endDateTime);
+    }
+
+    /**
+     * Sets the fee of the {@code Lesson} that we are building.
+     */
+    public LessonBuilder withFee(String fee) throws ParseException {
+        requireNonNull(fee);
+        this.fee = new Fee(fee);
+        return this;
     }
 }

@@ -34,6 +34,7 @@ public class AddLessonCommand extends LessonCommand {
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_OVERLAP_LESSON = "This lesson overlaps with another lesson";
+    public static final String TO_STRING_FORMAT = "AddLessonCommand[studentId=%s, fee=%s, startDateTime=%s, endDateTime=%s]";
 
     private final StudentId studentId;
     private final Fee fee;
@@ -84,12 +85,13 @@ public class AddLessonCommand extends LessonCommand {
 
         AddLessonCommand otherAddLessonCommand = (AddLessonCommand) other;
         return studentId.equals(otherAddLessonCommand.studentId)
+                && fee.equals(otherAddLessonCommand.fee)
                 && startDateTime.equals(otherAddLessonCommand.startDateTime)
                 && endDateTime.equals(otherAddLessonCommand.endDateTime);
     }
     @Override
     public String toString() {
-        return String.format("AddLessonCommand[studentId=%s, fee=%s, startDateTime=%s, endDateTime=%s]",
+        return String.format(TO_STRING_FORMAT,
                 studentId, fee, startDateTime, endDateTime);
     }
 }

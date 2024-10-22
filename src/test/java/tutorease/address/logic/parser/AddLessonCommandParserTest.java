@@ -45,6 +45,23 @@ public class AddLessonCommandParserTest {
                         + START_DATE_TIME_DESC + DURATION_DESC,
                 expectedCommand);
     }
+    @Test
+    public void parse_missingFields_failure() {
+        String expectedMessage = String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                AddLessonCommand.MESSAGE_USAGE);
+        // missing studentId
+        assertParseFailure(parser, FEE_DESC + START_DATE_TIME_DESC + DURATION_DESC,
+                expectedMessage);
+        // missing fee
+        assertParseFailure(parser, STUDENT_ID_DESC + START_DATE_TIME_DESC + DURATION_DESC,
+                expectedMessage);
+        // missing startDateTime
+        assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + DURATION_DESC,
+                expectedMessage);
+        // missing duration
+        assertParseFailure(parser, STUDENT_ID_DESC + FEE_DESC + START_DATE_TIME_DESC,
+                expectedMessage);
+    }
 
     @Test
     public void parse_repeatedNonTagValue_failure() {
