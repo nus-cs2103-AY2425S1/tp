@@ -43,6 +43,7 @@ public class SocialMediaCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(person, editedPerson);
         assertCommandSuccess(socialMediaCommand, model, expectedMessage, expectedModel);
+
     }
 
     @Test

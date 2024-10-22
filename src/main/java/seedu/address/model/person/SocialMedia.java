@@ -72,10 +72,8 @@ public class SocialMedia {
             return "[fb-" + handle + ']';
         case CAROUSELL:
             return "[cs-" + handle + ']';
-        case UNNAMED:
-            return handle;
         default:
-            return "error";
+            return handle;
         }
 
     }
