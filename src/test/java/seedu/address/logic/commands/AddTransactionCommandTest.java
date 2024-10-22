@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -22,6 +23,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Transaction;
+import seedu.address.model.person.TransactionDateComparator;
 
 public class AddTransactionCommandTest {
 
@@ -37,8 +39,10 @@ public class AddTransactionCommandTest {
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
 
-        List<Transaction> transactions = personToEdit.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(transactionToAdd);
+        transactions.sort(new TransactionDateComparator());
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
 
@@ -60,8 +64,10 @@ public class AddTransactionCommandTest {
                 "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
 
-        List<Transaction> transactions = personToEdit.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(transactionToAdd);
+        transactions.sort(new TransactionDateComparator());
+
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getCompany(), personToEdit.getPhone(),
                 personToEdit.getEmail(), personToEdit.getAddress(), personToEdit.getTags(), transactions);
 
@@ -73,7 +79,6 @@ public class AddTransactionCommandTest {
 
         assertCommandSuccess(addTransactionCommand, model, expectedMessage, expectedModel);
     }
-
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
