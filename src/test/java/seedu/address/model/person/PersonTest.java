@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOURS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_MATH;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT_SCIENCE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -96,9 +97,9 @@ public class PersonTest {
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different subjects -> returns false
-        editedAlice = new PersonBuilder(ALICE).withSubject(VALID_SUBJECT_MATH).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different subjects -> everything else same (should be user error and should be the same person)
+        editedAlice = new PersonBuilder(ALICE).withSubject(VALID_SUBJECT_SCIENCE).build();
+        assertFalse(editedAlice.equals(ALICE));
 
 
     }
