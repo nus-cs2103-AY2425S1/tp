@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,13 +14,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
+import seedu.address.model.attendance.AttendanceRecord;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
-import seedu.address.model.attendance.AttendanceRecord;
 
-import java.time.LocalDate;
-import java.util.*;
 
+/**
+ * Represents a window that displays the attendance of students in a tutorial group.
+ */
 public class AttendanceWindow {
 
     private final TutorialGroup tutorialGroup;
@@ -25,6 +30,10 @@ public class AttendanceWindow {
         this.tutorialGroup = tutorialGroup;
     }
 
+    /**
+     * Displays the attendance window.
+     * @param model The model containing the data to display.
+     */
     public void show(Model model) {
         Stage stage = new Stage();
         stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
@@ -32,7 +41,8 @@ public class AttendanceWindow {
         TableView<AttendanceRow> table = new TableView<>();
 
         TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
-        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        studentNameColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getStudentName()));
         table.getColumns().add(studentNameColumn);
 
         Set<LocalDate> attendanceDates = getAllAttendanceDates(model);

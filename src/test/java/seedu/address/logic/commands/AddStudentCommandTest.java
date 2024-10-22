@@ -197,7 +197,7 @@ public class AddStudentCommandTest {
         }
         @Override
         public List<Student> getStudentsByTutorialGroup(TutorialGroup tutorialGroup) {
-           throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
 

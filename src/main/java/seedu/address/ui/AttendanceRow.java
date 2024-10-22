@@ -6,10 +6,17 @@ import java.util.Map;
 
 import seedu.address.model.student.Student;
 
+/**
+ * Represents a row in the attendance table.
+ */
 public class AttendanceRow {
     private final String studentName;
     private final Map<LocalDate, String> attendanceByDate;
 
+    /**
+     * Creates an AttendanceRow object for the specified student.
+     * @param student
+     */
     public AttendanceRow(Student student) {
         this.studentName = student.getName().fullName;
         this.attendanceByDate = new HashMap<>();

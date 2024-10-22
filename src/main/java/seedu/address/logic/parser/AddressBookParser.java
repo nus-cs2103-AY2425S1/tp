@@ -19,8 +19,8 @@ import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetAttendanceByTgCommand;
 import seedu.address.logic.commands.GetAttendanceCommand;
-import seedu.address.logic.commands.GetAttendanceByTGCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
@@ -107,8 +107,8 @@ public class AddressBookParser {
         case GetAttendanceCommand.COMMAND_WORD:
             return new GetAttendanceCommandParser().parse(arguments);
 
-        case GetAttendanceByTGCommand.COMMAND_WORD:
-            return new GetAttendanceByTGCommandParser().parse(arguments);
+        case GetAttendanceByTgCommand.COMMAND_WORD:
+            return new GetAttendanceByTgCommandParser().parse(arguments);
 
 
 

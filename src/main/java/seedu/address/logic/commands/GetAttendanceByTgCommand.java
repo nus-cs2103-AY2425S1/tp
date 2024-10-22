@@ -13,7 +13,7 @@ import seedu.address.ui.AttendanceWindow;
 /**
  * Retrieves the attendance of all students in a specific tutorial group.
  */
-public class GetAttendanceByTGCommand extends Command {
+public class GetAttendanceByTgCommand extends Command {
     public static final String COMMAND_WORD = "getatg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -34,7 +34,7 @@ public class GetAttendanceByTGCommand extends Command {
      *
      * @param tutorialGroup The tutorial group for which to retrieve attendance records.
      */
-    public GetAttendanceByTGCommand(TutorialGroup tutorialGroup) {
+    public GetAttendanceByTgCommand(TutorialGroup tutorialGroup) {
         this.tutorialGroup = tutorialGroup;
     }
 

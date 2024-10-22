@@ -2,28 +2,28 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
-import seedu.address.logic.commands.GetAttendanceByTGCommand;
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.GetAttendanceByTgCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.TutorialGroup;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new GetAttendanceByTGCommand object
  */
-public class GetAttendanceByTGCommandParser implements Parser<GetAttendanceByTGCommand> {
+public class GetAttendanceByTgCommandParser implements Parser<GetAttendanceByTgCommand> {
 
     @Override
-    public GetAttendanceByTGCommand parse(String args) throws ParseException {
+    public GetAttendanceByTgCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TUTORIAL_GROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TUTORIAL_GROUP) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(GetAttendanceByTGCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(GetAttendanceByTgCommand.MESSAGE_USAGE));
         }
 
         TutorialGroup tutorialGroup = ParserUtil.parseTutorialGroup(argMultimap.getValue(PREFIX_TUTORIAL_GROUP).get());
 
-        return new GetAttendanceByTGCommand(tutorialGroup);
+        return new GetAttendanceByTgCommand(tutorialGroup);
     }
 
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
