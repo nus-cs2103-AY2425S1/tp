@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -32,6 +33,7 @@ class JsonAdaptedPerson {
     private final String birthday;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String hasPaid;
+    private final String frequency;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,7 +42,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("birthday") String birthday, @JsonProperty("tags") List<JsonAdaptedTag> tags,
-            @JsonProperty("hasPaid") String hasPaid) {
+            @JsonProperty("hasPaid") String hasPaid, @JsonProperty("frequency") String frequency) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +52,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.hasPaid = hasPaid;
+        this.frequency = frequency;
     }
 
     /**
@@ -65,6 +68,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         hasPaid = source.getHasPaid().toString();
+        frequency = source.getFrequency().value;
     }
 
     /**
@@ -127,7 +131,17 @@ class JsonAdaptedPerson {
 
         Boolean modelHasPaid = hasPaid.equals("true");
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday, modelTags, modelHasPaid);
+        if (frequency == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Frequency.class.getSimpleName()));
+        }
+        if (!Frequency.isValidFrequency(frequency)) {
+            throw new IllegalValueException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        final Frequency modelFrequency = new Frequency(frequency);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelBirthday,
+                modelTags, modelHasPaid, modelFrequency);
     }
 
 }
