@@ -1,22 +1,35 @@
 package seedu.address.storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collections;
 
+/**
+ * Storage to store the past commands.
+ */
 public class CommandHistoryStorage {
     private static final Path commandHistoryFilePath = Paths.get("data", "commandHistory.txt");
-    private int currentLineNumber;
     private static ArrayList<String> lines = new ArrayList<>();
 
+    private int currentLineNumber;
+
+    /**
+     * Creates a {@code CommandHistoryStorage} and initializing the text file with the line number.
+     */
     public CommandHistoryStorage() {
         //Initialize currentLineNumber to last line
         this.currentLineNumber = countLinesInFile();
         initHistory();
     }
 
+    /**
+     * Updates the current line number.
+     */
     public void updateCommandHistoryLines() {
         this.currentLineNumber = countLinesInFile();
         initHistory();
@@ -28,7 +41,8 @@ public class CommandHistoryStorage {
      * @param text the content to write into the file
      */
     public static void writeToFile(String text) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(String.valueOf(commandHistoryFilePath), true))) {
+        try (BufferedWriter bw =
+                     new BufferedWriter(new FileWriter(String.valueOf(commandHistoryFilePath), true))) {
             bw.write(text);
             bw.newLine();
             System.out.println("Successfully written to the file.");
@@ -42,7 +56,8 @@ public class CommandHistoryStorage {
      */
     public static void clearFile() {
         try {
-            FileWriter writer = new FileWriter(String.valueOf(commandHistoryFilePath), false); // 'false' to overwrite the file
+            FileWriter writer =
+                    new FileWriter(String.valueOf(commandHistoryFilePath), false); // 'false' to overwrite the file
             writer.write(""); // write an empty string to clear the file
             writer.close();
             System.out.println("File cleared successfully.");
@@ -74,6 +89,7 @@ public class CommandHistoryStorage {
 
     /**
      * Get zero-based index for arraylist retrieval.
+     *
      * @param currentLineNumber current number parsed by system.
      * @return currentLineNumber in zero-based index for the arraylist.
      */
@@ -107,6 +123,7 @@ public class CommandHistoryStorage {
 
     /**
      * Get zero-based index for arraylist retrieval.
+     *
      * @param currentLineNumber current number parsed by system.
      * @return currentLineNumber in zero-based index for the arraylist.
      */
@@ -133,7 +150,6 @@ public class CommandHistoryStorage {
         } catch (IOException e) {
             System.out.println("Error counting lines in the file: " + e.getMessage());
         }
-//        System.out.println("TOTAL LINES: " + lineCount);
         return lineCount;
     }
 
@@ -152,9 +168,6 @@ public class CommandHistoryStorage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        for (int i = 0; i < lines.size();i++) {
-//            System.out.println(lines.get(i));
-//        }
     }
 
 

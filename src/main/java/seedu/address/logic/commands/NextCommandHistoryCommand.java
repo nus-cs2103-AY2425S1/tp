@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
+/**
+ * Navigate to the next command. Detected via down-arrow key.
+ */
 public class NextCommandHistoryCommand extends Command {
     public static final String COMMAND_WORD = "downCommand";
 

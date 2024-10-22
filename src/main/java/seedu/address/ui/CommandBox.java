@@ -18,9 +18,9 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final String UP_COMMAND = "upCommand";
+    private static final String DOWN_COMMAND = "downCommand";
     private final CommandExecutor commandExecutor;
-    private final String UP_COMMAND = "upCommand";
-    private final String DOWN_COMMAND = "downCommand";
     @FXML
     private TextField commandTextField;
 
@@ -49,7 +49,6 @@ public class CommandBox extends UiPart<Region> {
 
         try {
             commandExecutor.execute(commandText);
-//            commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
