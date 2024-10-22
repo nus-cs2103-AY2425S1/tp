@@ -15,8 +15,10 @@ public class Module {
 
     private static final int MIN_GRADE = 0;
     private static final int MAX_GRADE = 100;
+    private static final int UNGRADED = 0;
     public final String module;
     private int grade;
+    private boolean isGraded;
     /**
      * Constructs an {@code Module}.
      *
@@ -26,7 +28,8 @@ public class Module {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
         this.module = module;
-        this.grade = -1;
+        this.grade = UNGRADED;
+        this.isGraded = false;
     }
 
     /**
@@ -36,8 +39,14 @@ public class Module {
     public void assignGrade(int grade) {
         checkArgument(isValidGrade(grade), GRADE_CONSTRAINTS);
         this.grade = grade;
+        this.isGraded = true;
     }
-
+    /**
+     * Returns true if the module is graded.
+     */
+    public boolean isGraded() {
+        return isGraded;
+    }
     /**
      * Returns true if a given integer is a valid grade.
      * @param grade an integer.
@@ -49,6 +58,9 @@ public class Module {
     public int getGrade() {
         return grade;
     }
+    public String getModule() {
+        return module;
+    }
     /**
      * Returns true if a given string is a valid module.
      */
@@ -58,7 +70,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return '[' + module + " | Grade: " + (grade == -1 ? "Ungraded" : grade) + ']';
+        return '[' + module + " | Grade: " + (grade == 0 ? "Ungraded" : grade) + ']';
     }
 
     @Override
