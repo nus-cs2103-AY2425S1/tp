@@ -30,7 +30,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListExpiringPoliciesCommand;
-import seedu.address.logic.commands.UpdatePolicyCommand;
+import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CompositePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -125,11 +125,11 @@ public class AddressBookParserTest {
     public void parseCommand_updatePolicy() throws Exception {
         // This is hardcoded for now.
         // Will change in future commits.
-        UpdatePolicyCommand command = (UpdatePolicyCommand) parser.parseCommand(
-                UpdatePolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        EditPolicyCommand command = (EditPolicyCommand) parser.parseCommand(
+                EditPolicyCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + " " + PREFIX_POLICY_TYPE + "life");
         PolicySet policies = new PolicySet();
-        assertEquals(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), command);
+        assertEquals(new EditPolicyCommand(INDEX_FIRST_PERSON, policies), command);
     }
     @Test
     public void parseCommand_deletePolicy() throws Exception {

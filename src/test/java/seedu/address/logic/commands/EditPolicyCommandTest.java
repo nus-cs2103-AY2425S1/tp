@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.UpdatePolicyCommand.MESSAGE_ARGUMENTS;
+import static seedu.address.logic.commands.EditPolicyCommand.MESSAGE_ARGUMENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -18,7 +18,7 @@ import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
 import seedu.address.model.policy.PolicySet;
 
-public class UpdatePolicyCommandTest {
+public class EditPolicyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final LifePolicy life = new LifePolicy();
     private final HealthPolicy health = new HealthPolicy();
@@ -26,8 +26,8 @@ public class UpdatePolicyCommandTest {
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
         final PolicySet policies = new PolicySet();
-        assertThrows(NullPointerException.class, () -> new UpdatePolicyCommand(null, policies));
-        assertThrows(NullPointerException.class, () -> new UpdatePolicyCommand(INDEX_FIRST_PERSON, null));
+        assertThrows(NullPointerException.class, () -> new EditPolicyCommand(null, policies));
+        assertThrows(NullPointerException.class, () -> new EditPolicyCommand(INDEX_FIRST_PERSON, null));
     }
 
     @Test
@@ -35,7 +35,7 @@ public class UpdatePolicyCommandTest {
         final PolicySet policies = new PolicySet();
         policies.add(health);
 
-        assertCommandFailure(new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies), model,
+        assertCommandFailure(new EditPolicyCommand(INDEX_FIRST_PERSON, policies), model,
                 String.format(MESSAGE_ARGUMENTS, INDEX_FIRST_PERSON.getOneBased(), policies));
     }
 
@@ -46,10 +46,10 @@ public class UpdatePolicyCommandTest {
         final PolicySet healthPolicies = new PolicySet();
         healthPolicies.add(health);
 
-        final UpdatePolicyCommand standardCommand = new UpdatePolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
-        final UpdatePolicyCommand commandWithSameValues = new UpdatePolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
-        final UpdatePolicyCommand differentIndexCommand = new UpdatePolicyCommand(INDEX_SECOND_PERSON, lifePolicies);
-        final UpdatePolicyCommand differentPoliciesCommand = new UpdatePolicyCommand(INDEX_FIRST_PERSON,
+        final EditPolicyCommand standardCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
+        final EditPolicyCommand commandWithSameValues = new EditPolicyCommand(INDEX_FIRST_PERSON, lifePolicies);
+        final EditPolicyCommand differentIndexCommand = new EditPolicyCommand(INDEX_SECOND_PERSON, lifePolicies);
+        final EditPolicyCommand differentPoliciesCommand = new EditPolicyCommand(INDEX_FIRST_PERSON,
                 healthPolicies);
         // same values -> returns true
         assertTrue(standardCommand.equals(commandWithSameValues));

@@ -10,13 +10,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.UpdatePolicyCommand;
+import seedu.address.logic.commands.EditPolicyCommand;
 import seedu.address.model.policy.LifePolicy;
 // import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 
-public class UpdatePolicyCommandParserTest {
-    private final UpdatePolicyCommandParser parser = new UpdatePolicyCommandParser();
+public class EditPolicyCommandParserTest {
+    private final EditPolicyCommandParser parser = new EditPolicyCommandParser();
     private final LifePolicy life = new LifePolicy();
 
     // TODO: Change these testcases when the logic for UpdatePolicyCommandParser is created
@@ -24,14 +24,14 @@ public class UpdatePolicyCommandParserTest {
     public void parse_allFieldsPresent_success() {
         final PolicySet policies = new PolicySet();
         String userInput = INDEX_FIRST_PERSON.getOneBased() + POLICY_TYPE_DESC_LIFE;
-        UpdatePolicyCommand expectedCommand = new UpdatePolicyCommand(INDEX_FIRST_PERSON, policies);
+        EditPolicyCommand expectedCommand = new EditPolicyCommand(INDEX_FIRST_PERSON, policies);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpdatePolicyCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPolicyCommand.MESSAGE_USAGE);
 
         // no parameters
         assertParseFailure(parser, "", expectedMessage);
