@@ -19,13 +19,6 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
-    public static final String COMMAND_SUMMARY_ACTION = "Find";
-    public static final String COMMAND_SUMMARY_FORMAT =
-            ":find KEYWORD [MORE_KEYWORDS]…";
-    public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":find James Jake";
-
-
 
     private final NameContainsKeywordsPredicate predicate;
 

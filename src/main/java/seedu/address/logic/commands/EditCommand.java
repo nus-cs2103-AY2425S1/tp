@@ -55,13 +55,6 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String COMMAND_SUMMARY_ACTION = "Edit";
-    public static final String COMMAND_SUMMARY_FORMAT =
-            ":edit INDEX -n NAME -p PHONE_NUMBER -e EMAIL -l LOCATION -t TAG -r REMARK…\n"
-            + ":ed INDEX -n NAME...";
-    public static final String COMMAND_SUMMARY_EXAMPLES =
-            ":edit 2 -n James Lee -e jameslee@example.com\n"
-            + ":ed 2 -n Joshua...";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
