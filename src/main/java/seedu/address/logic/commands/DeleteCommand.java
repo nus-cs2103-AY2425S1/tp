@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
@@ -29,7 +30,11 @@ public class DeleteCommand extends ConcreteCommand {
     private final Index targetIndex;
     private Person personToDelete;
 
+    /**
+     * Creates a DeleteCommand to delete the person at the specified {@code Index}.
+     */
     public DeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -67,7 +72,7 @@ public class DeleteCommand extends ConcreteCommand {
     @Override
     public CommandResult undo(Model model) {
         assert isExecuted : "This command has not been executed";
-        requireNonNull(model);
+        requireAllNonNull(model, personToDelete);
         model.addPerson(personToDelete);
         isExecuted = false;
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete)));

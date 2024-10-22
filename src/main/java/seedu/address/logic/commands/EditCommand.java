@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
@@ -109,7 +110,7 @@ public class EditCommand extends ConcreteCommand {
     @Override
     public CommandResult undo(Model model) {
         assert isExecuted : "This command has not been executed";
-        requireNonNull(model);
+        requireAllNonNull(model, personToEdit, editedPerson);
 
         model.setPerson(editedPerson, personToEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
