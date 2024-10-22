@@ -25,6 +25,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
@@ -136,6 +137,14 @@ public class ClientHubParserTest {
         FindClientTypeCommand command = (FindClientTypeCommand) parser.parseCommand(
                 FindClientTypeCommand.COMMAND_WORD + " " + keyword);
         assertEquals(new FindClientTypeCommand(new ClientTypeContainsKeywordsPredicate(List.of(keyword))), command);
+    }
+
+    @Test
+    public void parseCommand_viewCommand() throws Exception {
+        String keyword = "Alice";
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new ViewCommand(new NameContainsKeywordsPredicate(List.of(keyword))), command);
     }
 
     @Test
