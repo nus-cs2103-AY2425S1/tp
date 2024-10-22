@@ -4,29 +4,26 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
+import seedu.address.model.student.Student;
+
 public class AttendanceRow {
-    private LocalDate date;
-    private Map<String, String> studentAttendance;
+    private final String studentName;
+    private final Map<LocalDate, String> attendanceByDate;
 
-    public AttendanceRow(LocalDate date) {
-        this.date = date;
-        this.studentAttendance = new HashMap<>();
+    public AttendanceRow(Student student) {
+        this.studentName = student.getName().fullName;
+        this.attendanceByDate = new HashMap<>();
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void addAttendance(String studentName, String attendance) {
-        studentAttendance.put(studentName, attendance);
+    public void addAttendance(LocalDate date, String attendance) {
+        attendanceByDate.put(date, attendance);
     }
 
-    public String getAttendance(String studentName) {
-        return studentAttendance.getOrDefault(studentName, "[ ]");
+    public String getAttendanceForDate(LocalDate date) {
+        return attendanceByDate.getOrDefault(date, "Absent"); // Default to "Absent" if no attendance record
     }
-
-    public String getAttendanceForStudent(String studentName) {
-        return studentAttendance.getOrDefault(studentName, "[ ]");
-    }
-
 }

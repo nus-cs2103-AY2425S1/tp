@@ -1,4 +1,5 @@
 package seedu.address.ui;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.model.Model;
@@ -29,77 +29,59 @@ public class AttendanceWindow {
         Stage stage = new Stage();
         stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
 
-        // Create the table view
         TableView<AttendanceRow> table = new TableView<>();
 
-        // Create columns
-        TableColumn<AttendanceRow, LocalDate> dateColumn = new TableColumn<>("Date");
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        table.getColumns().add(dateColumn);
+        TableColumn<AttendanceRow, String> studentNameColumn = new TableColumn<>("Student");
+        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        table.getColumns().add(studentNameColumn);
 
-        for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
-            TableColumn<AttendanceRow, String> studentColumn = new TableColumn<>(student.getName().fullName);
+        Set<LocalDate> attendanceDates = getAllAttendanceDates(model);
+        for (LocalDate date : attendanceDates) {
+            TableColumn<AttendanceRow, String> dateColumn = new TableColumn<>(date.toString());
 
-            // Custom cell value factory for each student
-            studentColumn.setCellValueFactory(cellData -> {
+            dateColumn.setCellValueFactory(cellData -> {
                 AttendanceRow row = cellData.getValue();
-                return new SimpleStringProperty(row.getAttendanceForStudent(student.getName().fullName));
+                return new SimpleStringProperty(row.getAttendanceForDate(date));
             });
 
-            table.getColumns().add(studentColumn);
+            table.getColumns().add(dateColumn);
         }
 
-        ObservableList<AttendanceRow> data = getAttendanceRows(model);
+        ObservableList<AttendanceRow> data = getStudentAttendanceRows(model);
         table.setItems(data);
-
 
         VBox vbox = new VBox(table);
         vbox.setAlignment(Pos.CENTER);
         Scene scene = new Scene(vbox);
-
-
         stage.setScene(scene);
         stage.show();
     }
 
     /**
-     * Creates rows for the attendance table.
+     * Collect all unique attendance dates from all students.
      */
-    private ObservableList<AttendanceRow> getAttendanceRows(Model model) {
+    private Set<LocalDate> getAllAttendanceDates(Model model) {
+        Set<LocalDate> allDates = new TreeSet<>(); // TreeSet to ensure sorted order
+        for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
+            for (AttendanceRecord record : student.getAttendanceRecord()) {
+                allDates.add(record.getDate());
+            }
+        }
+        return allDates;
+    }
+
+    /**
+     * Creates rows for the student attendance table.
+     */
+    private ObservableList<AttendanceRow> getStudentAttendanceRows(Model model) {
         ObservableList<AttendanceRow> rows = FXCollections.observableArrayList();
-        // Assuming we collect all attendance records for each student in this tutorial group
-        for (AttendanceRecord record : collectAllAttendanceRecords(model)) {
-            AttendanceRow row = new AttendanceRow(record.getDate());
-            for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
-                row.addAttendance(student.getName().fullName, getAttendanceForStudentOnDate(student, record.getDate()));
-                //System.out.println(row.getDate());
+        for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
+            AttendanceRow row = new AttendanceRow(student);
+            for (AttendanceRecord record : student.getAttendanceRecord()) {
+                row.addAttendance(record.getDate(), record.getAttendance().toString());
             }
             rows.add(row);
         }
         return rows;
-    }
-
-    /**
-     * Utility method to get attendance for a student on a given date.
-     */
-    private String getAttendanceForStudentOnDate(Student student, LocalDate date) {
-        for (AttendanceRecord record : student.getAttendanceRecord()) {
-            if (record.getDate().equals(date)) {
-                return record.getAttendance().toString(); // "Present" or "Absent"
-            }
-        }
-        return "Absent"; // Default to absent if no record is found
-    }
-
-    /**
-     * Collect all attendance records from all students to build the list of rows.
-     */
-    private List<AttendanceRecord> collectAllAttendanceRecords(Model model) {
-        // Flatten attendance records across all students in the tutorial group
-        Set<AttendanceRecord> allRecords = new TreeSet<>(Comparator.comparing(AttendanceRecord::getDate));
-        for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
-            allRecords.addAll(student.getAttendanceRecord());
-        }
-        return new ArrayList<>(allRecords);
     }
 }
