@@ -60,7 +60,7 @@ public class ExportCommand extends Command {
                 exportToCsv(model);
             }
         } catch (IOException io) {
-            throw new CommandException(MESSAGE_FAILURE);
+            throw new CommandException(String.format(MESSAGE_FAILURE, fileType));
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileType));
@@ -72,13 +72,15 @@ public class ExportCommand extends Command {
      * write into the csv file.
      *
      * @throws IOException if an error occurs when creating the csv file.
+     * @throws CommandException if an error occurs during command execution..
      */
-    private void exportToCsv(Model model) throws IOException {
+    private void exportToCsv(Model model) throws CommandException, IOException {
         if (!Files.exists(exportCsvPath.getParent())) {
             Files.createDirectories(exportCsvPath.getName(0));
         }
         // Create a csv file to save the tasks
         File dataFile = new File(exportCsvPath.toString());
+
         FileWriter fw = new FileWriter(dataFile);
 
         fw.write(this.csvHeaders);
