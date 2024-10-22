@@ -41,6 +41,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
     @FXML
+    private Label socialmedia;
+    @FXML
     private FlowPane schedule;
 
     /**
@@ -60,5 +62,6 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.getTagName()))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
+        socialmedia.setText(person.getSocialMedia().toString());
     }
 }

@@ -7,6 +7,7 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SortCommand.ASCENDING;
 import static seedu.address.logic.commands.SortCommand.DESCENDING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_IG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEWTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLDTAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
@@ -15,12 +16,15 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -31,13 +35,16 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RenameTagCommand;
+import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ScheduleCommand.ScheduleDescriptor;
+import seedu.address.logic.commands.SocialMediaCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Schedule;
+import seedu.address.model.person.SocialMedia;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -97,7 +104,9 @@ public class AddressBookParserTest {
     public void parseCommand_filter() throws Exception {
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + PREFIX_TAG + "friends");
-        assertEquals(new FilterCommand(new Tag("friends")), command);
+        Set<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(new Tag("friends"));
+        assertEquals(new FilterCommand(expectedTags), command);
     }
 
     @Test
@@ -154,6 +163,25 @@ public class AddressBookParserTest {
                 RenameTagCommand.COMMAND_WORD + " " + PREFIX_OLDTAG + "friends" + " " + PREFIX_NEWTAG
                         + "enemies");
         assertEquals(new RenameTagCommand("friends", "enemies"), command);
+    }
+
+    @Test
+    public void parseCommand_restore() throws Exception {
+        assertTrue(parser.parseCommand(RestoreCommand.COMMAND_WORD) instanceof RestoreCommand);
+        assertTrue(parser.parseCommand(RestoreCommand.COMMAND_WORD + " 3") instanceof RestoreCommand);
+    }
+    @Test
+    public void parseCommand_backup() throws Exception {
+        assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD) instanceof BackupCommand);
+        assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD + " 3") instanceof BackupCommand);
+    }
+
+    @Test
+    public void parseCommand_socialMedia() throws Exception {
+        SocialMediaCommand command = (SocialMediaCommand) parser.parseCommand(
+                SocialMediaCommand.COMMAND_WORD + " 1 " + PREFIX_IG + "username");
+        assertEquals(new SocialMediaCommand("username", SocialMedia.Platform.INSTAGRAM, INDEX_FIRST_PERSON),
+                command);
     }
 }
 

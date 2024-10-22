@@ -41,14 +41,23 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' backup address book file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setAddressBookFilePath(Path backupAddressBookFilePath);
+
+    Path getBackupAddressBookFilePath();
+
+    /**
+     * Sets the user prefs' backup address book file path.
+     */
+    void setBackupAddressBookFilePath(Path backupAddressBookFilePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
+
+
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();

@@ -25,6 +25,7 @@ public class Person {
     private final Address address;
     private final Schedule schedule;
     private final Set<Tag> tags = new HashSet<>();
+    private SocialMedia socialMedia;
 
     /**
      * Every field must be present and not null.
@@ -44,6 +45,7 @@ public class Person {
         this.address = address;
         this.schedule = schedule;
         this.tags.addAll(tags);
+        this.socialMedia = new SocialMedia(" ", SocialMedia.Platform.UNNAMED);
     }
 
     public Name getName() {
@@ -72,6 +74,18 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public void setSocialMedia(SocialMedia socialMedia) {
+        this.socialMedia = socialMedia;
+    }
+
+    public SocialMedia getSocialMedia() {
+        return socialMedia;
+    }
+
+    public boolean hasSocialMedia() {
+        return !socialMedia.getPlatform().equals(SocialMedia.Platform.UNNAMED);
     }
 
     /**
@@ -107,6 +121,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
+                && tags.equals(otherPerson.tags)
+                && socialMedia.equals(otherPerson.socialMedia)
                 && schedule.equals(otherPerson.schedule)
                 && tags.equals(otherPerson.tags);
     }
@@ -114,7 +130,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, schedule, tags);
+        return Objects.hash(name, phone, email, address, schedule, tags, socialMedia);
     }
 
     @Override
@@ -126,6 +142,7 @@ public class Person {
                 .add("address", address)
                 .add("schedule", schedule)
                 .add("tags", tags)
+                .add("socialmedia", socialMedia)
                 .toString();
     }
 
