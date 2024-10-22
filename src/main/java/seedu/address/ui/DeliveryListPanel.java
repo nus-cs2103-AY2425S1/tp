@@ -40,7 +40,8 @@ public class DeliveryListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new DeliveryCard(delivery, getIndex() + 1).getRoot());
+                DeliveryCard deliveryCard = new DeliveryCard(delivery, getIndex() + 1);
+                setGraphic(deliveryCard.getRoot());
             }
         }
     }

@@ -41,7 +41,7 @@ public class Archive {
      * Returns true if a given string is a valid archive.
      */
     public boolean isArchived() {
-        return this.value == "true";
+        return this.value.equals("true");
     }
 
 
