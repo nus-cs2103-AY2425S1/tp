@@ -14,12 +14,11 @@ import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A student is considered unique by comparing using {@code Student#isSamePerson(Student)}. As such, adding and
- * updating of
- * persons uses Student#isSamePerson(Student) for equality so as to ensure that the student being added or updated is
- * unique in terms of identity in the UniqueStudentList. However, the removal of a student uses Student#equals
- * (Object) so as to ensure that the student with exactly the same fields will be removed.
+ * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A task is considered unique by comparing using {@code Task#isSameTask(Task)}. As such, adding and
+ * updating of tasks uses Task#isSameTask(Task) for equality so as to ensure that the task being added or updated is
+ * unique in terms of identity in the UniqueTaskList. However, the removal of a task uses Task#equals
+ * (Object) so as to ensure that the task with exactly the same fields will be removed.
  * <p>
  * Supports a minimal set of list operations.
  *
@@ -32,7 +31,7 @@ public class UniqueTaskList implements Iterable<Task> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent student as the given argument.
+     * Returns true if the list contains an equivalent task as the given argument.
      */
     public boolean contains(Task toCheck) {
         requireNonNull(toCheck);
@@ -40,8 +39,8 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a student to the list.
-     * The student must not already exist in the list.
+     * Adds a task to the list.
+     * The task must not already exist in the list.
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
@@ -51,9 +50,9 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Replaces the student {@code target} in the list with {@code editedStudent}.
+     * Replaces the task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the list.
-     * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
+     * The task identity of {@code editedTask} must not be the same as another existing student in the list.
      */
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -71,8 +70,8 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Removes the equivalent student from the list.
-     * The student must exist in the list.
+     * Removes the equivalent task from the list.
+     * The task must exist in the list.
      */
     public void remove(Task toRemove) {
         requireNonNull(toRemove);
@@ -81,14 +80,17 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     */
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code students}.
-     * {@code students} must not contain duplicate students.
+     * Replaces the contents of this list with {@code tasks}.
+     * {@code tasks} must not contain duplicate students.
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
@@ -137,7 +139,7 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns true if {@code students} contains only unique students.
+     * Returns true if {@code tasks} contains only unique tasks.
      */
     private boolean tasksAreUnique(List<Task> tasks) {
         for (int i = 0; i < tasks.size() - 1; i++) {

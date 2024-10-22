@@ -221,15 +221,6 @@ public class ModelManager implements Model {
 
     @Override
     public Group getGroupByName(GroupName groupName) {
-        return addressBook.getGroupByName(groupName);
-    }
-
-    /**
-     * Returns the group with the same group name as {@code groupName} exists in the address book
-     */
-    @Override
-    public Group findGroup(GroupName groupName) {
-        requireNonNull(groupName);
         return addressBook.findGroupByName(groupName);
     }
 
