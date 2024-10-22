@@ -96,7 +96,8 @@ public class DeleteLessonCommandTest {
     public void toString_correctFormat() {
         DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(Index.fromOneBased(1));
         // Verify that the toString method returns the correct format
-        assertEquals("DeleteLessonCommand[targetIndex=tutorease.address.commons.core.index.Index{zeroBasedIndex=0}]", deleteLessonCommand.toString());
+        assertEquals("DeleteLessonCommand[targetIndex=tutorease.address.commons.core."
+                + "index.Index{zeroBasedIndex=0}]", deleteLessonCommand.toString());
     }
 
     @Test
