@@ -6,8 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.EditGroupCommand;
-import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
+import seedu.address.logic.commands.editcommands.EditGroupCommand;
+import seedu.address.logic.commands.editcommands.EditGroupCommand.EditGroupDescriptor;
+import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
 
@@ -31,7 +32,7 @@ public class EditGroupCommandParserTest {
             String.format(EditGroupCommand.MESSAGE_INVALID_COMMAND_FORMAT, 3));
     }
     @Test
-    public void parse_notEdited_failure() {
+    public void parse_noFieldEdited_failure() {
         String userInput = " " + PREFIX_GROUP_NAME + "OriginalGroup";
         assertThrows(ParseException.class, () -> parser.parse(userInput), EditGroupCommand.MESSAGE_NOT_EDITED);
     }
