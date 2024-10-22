@@ -55,9 +55,11 @@ public class CampusConnect implements ReadOnlyCampusConnect {
      */
     public ReadOnlyCampusConnect recoverPreviousState() {
         if (!prev.isEmpty()) {
-            return prev.pop();
+            ReadOnlyCampusConnect out = prev.pop();
+            assert out != null;
+            return out;
         } else {
-            return this;
+            return new CampusConnect(this);
         }
     }
 
