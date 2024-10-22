@@ -242,3 +242,4 @@ Action     | Format, Examples
 **Filter** | `filter t/[TAG] t/[MORE_TAG]…​`<br> e.g., `filter t/friends t/family`
 **List**   | `list`
 **Help**   | `help`
+**GitHub**   | `github n/NAME`
