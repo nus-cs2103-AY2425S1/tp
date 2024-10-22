@@ -10,6 +10,7 @@ import tutorease.address.model.person.Person;
  */
 public class Lesson {
     private final Person student;
+    private final Fee fee;
     private final StartDateTime startDateTime;
     private final EndDateTime endDateTime;
 
@@ -17,12 +18,14 @@ public class Lesson {
      * Every field must be present and not null.
      *
      * @param student       The student of the lesson.
+     * @param fee           The fee of the lesson.
      * @param startDateTime The start date time of the lesson.
      * @param endDateTime   The end date time of the lesson.
      */
-    public Lesson(Person student, StartDateTime startDateTime, EndDateTime endDateTime) {
-        requireAllNonNull(student, startDateTime, endDateTime);
+    public Lesson(Person student, Fee fee, StartDateTime startDateTime, EndDateTime endDateTime) {
+        requireAllNonNull(student, fee, startDateTime, endDateTime);
         this.student = student;
+        this.fee = fee;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
@@ -101,12 +104,30 @@ public class Lesson {
     public String getAddress() {
         return student.getAddressString();
     }
+    /**
+     * Returns the fee of the lesson.
+     *
+     * @return The fee of the lesson.
+     */
+    public Fee getFee() {
+        return fee;
+    }
+    /**
+     * Returns the fee per hour of the lesson.
+     *
+     * @return The fee per hour string of the lesson.
+     */
+    public String getAmount() {
+        return fee.toString();
+    }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Student: ")
                 .append(getStudent().getName())
+                .append(" Fee: ")
+                .append(getAmount())
                 .append(" Start: ")
                 .append(getStartDateTime())
                 .append(" End: ")
@@ -126,6 +147,7 @@ public class Lesson {
 
         Lesson otherLesson = (Lesson) other;
         return student.equals(otherLesson.student)
+                && fee.equals(otherLesson.fee)
                 && startDateTime.equals(otherLesson.startDateTime)
                 && endDateTime.equals(otherLesson.endDateTime);
     }
