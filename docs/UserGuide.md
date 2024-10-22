@@ -60,6 +60,9 @@
 * Items in **round** brackets and with `+` after them can be used one or more times.<br>
   e.g. `(t/TAG)+` can be used as `t/friend`, `t/friend t/family` etc.
 
+* `|` operator signifies `OR` relationship.<br>
+  e.g. `n/NAME | r/MODULECODE` means `n/NAME` or `r/MODULECODE`
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -82,12 +85,11 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+`
 * `MODULECODE` refers to a module code of a NUS module (e.g. CS1101S, MA1521)
 * `ROLETYPE` refers to one of the following: `student`, `ta`, `tutor`, `prof`, `professor`.
 * The `r/MODULECODE[-ROLETYPE]` parameter means that the person has the role for this module (e.g. `r/CS1101S-student` means that the person is a student of CS1101S).
 * In `r/MODULECODE[-ROLETYPE]`, `[-ROLETYPE]` is optional. In such cases, this means that the person is a student of that module (e.g `r/MA1521` means that the person is a student of MA1521).
-* The `r/MODULECODE[-ROLETYPE]` is optional. In such cases, this means that the person does not hold any roles in any modules.
 * If the same module is added multiple times, then it is assumed to be an error in user input, because a person should not have multiple roles (student, tutor, professor) at the same time (e.g. `r/CS1101S-student r/CS1101S-prof` is not allowed).
 
 <box type="tip" seamless>
@@ -129,7 +131,11 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
+
+The find command allows you to locate persons by their names, module-role pairs, or a combination of both.
+
+#### By name
 
 Finds persons whose names contain any of the given keywords.
 
@@ -146,7 +152,35 @@ Format: `find (n/KEYWORD)+`
 Examples:
 * `find n/John` returns `john` and `John Doe`
 * `find n/alex n/david li` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find n/alex n/david'](images/findAlexDavidResult.png)
+
+#### By module-role
+
+Finds persons whose module-role pairs contain any of the given keywords.
+
+Format: `find (r/KEYWORD)+`
+
+* Search by module code and optionally specify the role type (separated by a dash). For example, `CS2103T-Prof` will search for the module `CS2103T` with the role `Professor`.
+* The search is case-insensitive. e.g. `cs2103t-student` will match `CS2103T-Student`.
+* If the role type is not specified, role `STUDENT` will be assumed. For example, `find r/CS2103T` will return all students taking `CS2103T`.
+* Persons matching at least one module-role keyword will be returned (i.e. OR search).
+
+Examples:
+* `find r/CS2103T` returns all students taking the module `CS2103T`
+* `find r/CS2103T-Prof r/CS1101S` returns all persons with the role Prof in CS2103T or Student in CS1101S 
+  ![result for 'find r/cs2103t-prof r/cs1101s'](images/findModuleRoleExample.png)
+
+#### By name and module-role
+
+Finds persons whose names and module-role pairs contain any combination of the given keywords.
+
+Format: `find (n/KEYWORD)+ (r/KEYWORD)+`
+
+* Person matching at least one name keyword AND one module-role keyword will be returned (i.e. AND search).
+
+Examples:
+* `find n/John n/Ben r/cs1101s r/ma1522` return all persons whose name are either John or ben, taking either CS1101S or MA1522
+  ![result for 'find n/John n/Ben r/cs1101s r/ma1522'](images/findNameAndModuleExample.png)
 
 ### Deleting a person or multiple persons: `delete`
 
@@ -211,12 +245,12 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL [r/MODULECODE[-ROLETYPE]]+ [a/ADDRESS] [t/TAG]+` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find (n/KEYWORD)+`<br> e.g., `find n/James n/Jake`
-**List**   | `list`
-**Help**   | `help`
+Action     | Format, Examples                                                                                                                                                                                            
+-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL (r/MODULECODE[-ROLETYPE])+ [a/ADDRESS] [t/TAG]+` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com r/CS1101S a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+**Clear**  | `clear`                                                                                                                                                                                                     
+**Delete** | `delete (INDEX)+`<br> e.g., `delete 3` or `delete 1 3 5`                                                                                                                                                    
+**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]+`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                                  
+**Find**   | `find (n/KEYWORD \| r/KEYWORD)+`<br> e.g., `find n/James n/Jake r/CS1101S r/MA1521`                                                                                                                         
+**List**   | `list`                                                                                                                                                                                                      
+**Help**   | `help`                                                                                                                                                                                                      
