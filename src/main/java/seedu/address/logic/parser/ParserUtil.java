@@ -191,7 +191,7 @@ public class ParserUtil {
         requireNonNull(status);
         String trimmedStatus = status.trim();
         if (!PersonAttendance.isValidAttendance(trimmedStatus)) {
-            throw new ParseException("Invalid attendance status. It must be either 'present' or 'absent'.");
+            throw new ParseException(PersonAttendance.MESSAGE_CONSTRAINTS);
         }
         return new Attendance(trimmedStatus);
     }

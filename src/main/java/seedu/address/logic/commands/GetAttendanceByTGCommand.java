@@ -8,6 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TutorialGroup;
+import seedu.address.ui.AttendanceWindow;
 
 /**
  * Retrieves the attendance of all students in a specific tutorial group.
@@ -39,6 +40,7 @@ public class GetAttendanceByTGCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+
         List<Student> students = model.getStudentsByTutorialGroup(tutorialGroup);
 
         if (students.isEmpty()) {
@@ -52,6 +54,8 @@ public class GetAttendanceByTGCommand extends Command {
             attendanceRecords.append(student.getAttendanceRecordsString()).append("\n");
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, tutorialGroup, attendanceRecords.toString()));
+        AttendanceWindow window = new AttendanceWindow(tutorialGroup);
+        window.show(model);
+        return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
 }
