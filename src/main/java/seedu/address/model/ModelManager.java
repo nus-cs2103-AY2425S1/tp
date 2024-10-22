@@ -123,7 +123,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         campusConnect.setPerson(target, editedPerson);
         refreshTagList();
     }
@@ -175,6 +174,17 @@ public class ModelManager implements Model {
     public int hashCode() {
         // Hash based on essential components of the model manager
         return campusConnect.hashCode() + userPrefs.hashCode() + filteredPersons.hashCode();
+    }
+
+    @Override
+    public void undoCampusConnect() {
+        ReadOnlyCampusConnect newCampusConnect = campusConnect.recoverPreviousState();
+        this.setCampusConnect(newCampusConnect);
+    }
+
+    @Override
+    public void saveCurrentCampusConnect() {
+        campusConnect.saveCurrentState();
     }
 }
 
