@@ -7,6 +7,9 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
@@ -19,6 +22,9 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
+
+    public static final List<String> INVALID_VARIANTS = Arrays.asList("find", "search", ":search", ":query",
+            "query");
 
     private final NameContainsKeywordsPredicate predicate;
 

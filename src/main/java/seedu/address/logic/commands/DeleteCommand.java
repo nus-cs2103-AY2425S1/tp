@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -25,6 +26,9 @@ public class DeleteCommand extends Command {
             + "Example: " + SHORT_COMMAND_WORD + " -i 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+
+    public static final List<String> INVALID_VARIANTS = Arrays.asList("del", "delete", "rm", ":del",
+            "remove", ":remove");
 
     private final Index targetIndex;
 
