@@ -26,7 +26,7 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@link EventName} of the {@code Event} that we are building.
+     * Sets the {@link EventName} of the {@link Event} that we are building.
      */
     public EventBuilder withName(String name) {
         this.name = new EventName(name);

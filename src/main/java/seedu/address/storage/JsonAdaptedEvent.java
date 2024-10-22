@@ -24,6 +24,15 @@ public class JsonAdaptedEvent {
         name = source.getName().toString();
     }
 
+    public JsonAdaptedEvent() {
+        this.name = null;
+    }
+
+    @JsonProperty("name")
+    public String getEventName() {
+        return name;
+    }
+
     /**
      * Converts this Jackson-friendly adapted event object into the model's {@code Event} object.
      *
