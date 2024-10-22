@@ -29,6 +29,13 @@ public class Appointment {
     }
 
     /**
+     * Returns the appointment date as a LocalDateTime.
+     */
+    public LocalDateTime getDate() {
+        return appointment;
+    }
+
+    /**
      * Returns true if a given string is a valid appointment name.
      */
     public static boolean isValidAppointment(String test) {
