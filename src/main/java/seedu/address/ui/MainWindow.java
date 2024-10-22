@@ -226,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowPerson()) {
                 handleViewCommand(commandText);
-            } else if (commandText.trim().toLowerCase().equals("close")) {
+            } else {
                 handleCloseCommand();
             }
 
