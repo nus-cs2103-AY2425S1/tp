@@ -26,7 +26,7 @@ public class Student extends Person {
      */
     public Student(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags,
                    Set<Subject> subjects, Set<String> classes) {
-        super(name, gender, phone, email, address, tags, subjects, classes);
+        super(name, gender, phone, email, address, addStudentTag(tags), subjects, classes);
     }
 
     private static Set<Tag> addStudentTag(Set<Tag> tags) {
