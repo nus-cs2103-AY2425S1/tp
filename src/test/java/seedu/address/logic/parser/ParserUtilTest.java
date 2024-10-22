@@ -15,9 +15,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
+import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -25,12 +30,22 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_REGISTER_NUMBER = "41";
+    private static final String INVALID_SEX = "H";
+    private static final String INVALID_STUDENT_CLASS = "A1";
+    private static final String INVALID_EMERGENCY_CONTACT_NAME = "--";
+    private static final String INVALID_EMERGENCY_PHONE = "1234";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_REGISTER_NUMBER = "1";
+    private static final String VALID_SEX = "F";
+    private static final String VALID_STUDENT_CLASS = "1A";
+    private static final String VALID_EMERGENCY_CONTACT_NAME = "Joe Walker";
+    private static final String VALID_EMERGENCY_PHONE = "91234567";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -146,6 +161,122 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseRegisterNumber_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseRegisterNumber((String) null));
+    }
+
+    @Test
+    public void parseRegisterNumber_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseRegisterNumber(INVALID_REGISTER_NUMBER));
+    }
+
+    @Test
+    public void parseRegisterNumber_validValueWithoutWhitespace_returnsRegisterNumber() throws Exception {
+        RegisterNumber expectedRegisterNumber = new RegisterNumber(VALID_REGISTER_NUMBER);
+        assertEquals(expectedRegisterNumber, ParserUtil.parseRegisterNumber(VALID_REGISTER_NUMBER));
+    }
+
+    @Test
+    public void parseRegisterNumber_validValueWithWhitespace_returnsTrimmedRegisterNumber() throws Exception {
+        String registerNumberWithWhitespace = WHITESPACE + VALID_REGISTER_NUMBER + WHITESPACE;
+        RegisterNumber expectedRegisterNumber = new RegisterNumber(VALID_REGISTER_NUMBER);
+        assertEquals(expectedRegisterNumber, ParserUtil.parseRegisterNumber(registerNumberWithWhitespace));
+    }
+
+    @Test
+    public void parseSex_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSex((String) null));
+    }
+
+    @Test
+    public void parseSex_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSex(INVALID_SEX));
+    }
+
+    @Test
+    public void parseSex_validValueWithoutWhitespace_returnsSex() throws Exception {
+        Sex expectedSex = new Sex(VALID_SEX);
+        assertEquals(expectedSex, ParserUtil.parseSex(VALID_SEX));
+    }
+
+    @Test
+    public void parseSex_validValueWithWhitespace_returnsTrimmedSex() throws Exception {
+        String sexWithWhitespace = WHITESPACE + VALID_SEX + WHITESPACE;
+        Sex expectedSex = new Sex(VALID_SEX);
+        assertEquals(expectedSex, ParserUtil.parseSex(sexWithWhitespace));
+    }
+
+    @Test
+    public void parseStudentClass_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseStudentClass((String) null));
+    }
+
+    @Test
+    public void parseStudentClass_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseStudentClass(INVALID_STUDENT_CLASS));
+    }
+
+    @Test
+    public void parseStudentClass_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
+        StudentClass expectedStudentClass = new StudentClass(VALID_STUDENT_CLASS);
+        assertEquals(expectedStudentClass, ParserUtil.parseStudentClass(VALID_STUDENT_CLASS));
+    }
+
+    @Test
+    public void parseStudentClass_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
+        String studentClassWithWhitespace = WHITESPACE + VALID_STUDENT_CLASS + WHITESPACE;
+        StudentClass expectedStudentClass = new StudentClass(VALID_STUDENT_CLASS);
+        assertEquals(expectedStudentClass, ParserUtil.parseStudentClass(studentClassWithWhitespace));
+    }
+
+    @Test
+    public void parseEmergencyContactName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmergencyContactName((String) null));
+    }
+
+    @Test
+    public void parseEmergencyContactName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyContactName(INVALID_EMERGENCY_CONTACT_NAME));
+    }
+
+    @Test
+    public void parseEmergencyContactName_validValueWithoutWhitespace_returnsEcName() throws Exception {
+        EcName expectedEcName = new EcName(VALID_EMERGENCY_CONTACT_NAME);
+        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(VALID_EMERGENCY_CONTACT_NAME));
+    }
+
+    @Test
+    public void parseEmergencyContactName_validValueWithWhitespace_returnsTrimmedEcName() throws Exception {
+        String ecNameWithWhitespace = WHITESPACE + VALID_EMERGENCY_CONTACT_NAME + WHITESPACE;
+        EcName expectedEcName = new EcName(VALID_EMERGENCY_CONTACT_NAME);
+        assertEquals(expectedEcName, ParserUtil.parseEmergencyContactName(ecNameWithWhitespace));
+    }
+
+    @Test
+    public void parseEcNumber_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEcNumber((String) null));
+    }
+
+    @Test
+    public void parseEcNumber_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_PHONE));
+    }
+
+    @Test
+    public void parseEcNumber_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
+        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_PHONE));
+    }
+
+    @Test
+    public void parseEcNumber_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
+        String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_PHONE + WHITESPACE;
+        EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
+        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(ecNumberWithWhitespace));
+
     }
 
     @Test

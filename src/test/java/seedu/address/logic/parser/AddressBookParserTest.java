@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -14,6 +16,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEcNameCommand;
+import seedu.address.logic.commands.AddEcNumberCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -23,6 +27,8 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -89,6 +95,38 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addEcName() throws Exception {
+
+        final String ecName = "Jane Doe";
+
+        AddEcNameCommand expected = new AddEcNameCommand(
+                INDEX_FIRST_PERSON, new EcName(ecName));
+
+        AddEcNameCommand command = (AddEcNameCommand) parser.parseCommand(
+                AddEcNameCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_ECNAME + ecName);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
+    public void parseCommand_addEcNumber() throws Exception {
+
+        final String ecNumber = "91234567";
+
+        AddEcNumberCommand expected = new AddEcNumberCommand(
+                INDEX_FIRST_PERSON, new EcNumber(ecNumber));
+
+        AddEcNumberCommand command = (AddEcNumberCommand) parser.parseCommand(
+                AddEcNumberCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PREFIX_ECNUMBER + ecNumber);
+
+        assertEquals(expected, command);
+    }
+
+    @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
             -> parser.parseCommand(""));
@@ -96,6 +134,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("unknownCommand"));
     }
 }

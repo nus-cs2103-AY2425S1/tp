@@ -6,10 +6,15 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
+import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +41,11 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
+        descriptor.setRegisterNumber(person.getRegisterNumber());
+        descriptor.setSex(person.getSex());
+        descriptor.setStudentClass(person.getStudentClass());
+        descriptor.setEcName(person.getEcName());
+        descriptor.setEcNumber(person.getEcNumber());
         descriptor.setTags(person.getTags());
     }
 
@@ -68,6 +78,46 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code RegisterNumber} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withRegisterNumber(String registerNumber) {
+        descriptor.setRegisterNumber(new RegisterNumber(registerNumber));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Sex} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withSex(String sex) {
+        descriptor.setSex(new Sex(sex));
+        return this;
+    }
+
+    /**
+     * Sets the {@code StudentClass} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withStudentClass(String studentClass) {
+        descriptor.setStudentClass(new StudentClass(studentClass));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EcName} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEcName(String ecName) {
+        descriptor.setEcName(new EcName(ecName));
+        return this;
+    }
+
+    /**
+     * Sets the {@code EcNumber} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withEcNumber(String ecNumber) {
+        descriptor.setEcNumber(new EcNumber(ecNumber));
         return this;
     }
 

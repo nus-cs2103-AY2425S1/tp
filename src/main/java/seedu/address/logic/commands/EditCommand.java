@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -22,10 +27,15 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EcName;
+import seedu.address.model.person.EcNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RegisterNumber;
+import seedu.address.model.person.Sex;
+import seedu.address.model.person.StudentClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,6 +53,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
+            + "[" + PREFIX_SEX + "SEX] "
+            + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
+            + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
+            + "[" + PREFIX_ECNUMBER + "EMERGENCY CONTACT NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -99,9 +114,17 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        RegisterNumber updatedRegisterNumber = editPersonDescriptor.getRegisterNumber().orElse(personToEdit
+                .getRegisterNumber());
+        Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
+        StudentClass updatedStudentClass = editPersonDescriptor.getStudentClass()
+                .orElse(personToEdit.getStudentClass());
+        EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
+        EcNumber updatedEcNumber = editPersonDescriptor.getEcNumber().orElse(personToEdit.getEcNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRegisterNumber, updatedSex,
+                updatedStudentClass, updatedEcName, updatedEcNumber, updatedTags);
     }
 
     @Override
@@ -137,6 +160,11 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private RegisterNumber registerNumber;
+        private Sex sex;
+        private StudentClass studentClass;
+        private EcName ecName;
+        private EcNumber ecNumber;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -150,6 +178,11 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setRegisterNumber(toCopy.registerNumber);
+            setSex(toCopy.sex);
+            setStudentClass(toCopy.studentClass);
+            setEcName(toCopy.ecName);
+            setEcNumber(toCopy.ecNumber);
             setTags(toCopy.tags);
         }
 
@@ -157,7 +190,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName,
+                    ecNumber, tags);
         }
 
         public void setName(Name name) {
@@ -190,6 +224,47 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setRegisterNumber(RegisterNumber registerNumber) {
+            this.registerNumber = registerNumber;
+        }
+
+        public Optional<RegisterNumber> getRegisterNumber() {
+            return Optional.ofNullable(registerNumber);
+        }
+
+        public void setSex(Sex sex) {
+            this.sex = sex;
+        }
+
+        public Optional<Sex> getSex() {
+            return Optional.ofNullable(sex);
+        }
+
+        public void setStudentClass(StudentClass studentClass) {
+            this.studentClass = studentClass;
+        }
+
+        public Optional<StudentClass> getStudentClass() {
+            return Optional.ofNullable(studentClass);
+        }
+
+        public void setEcName(EcName ecName) {
+            this.ecName = ecName;
+        }
+
+        public Optional<EcName> getEcName() {
+            return Optional.ofNullable(ecName);
+        }
+
+
+        public void setEcNumber(EcNumber ecNumber) {
+            this.ecNumber = ecNumber;
+        }
+
+        public Optional<EcNumber> getEcNumber() {
+            return Optional.ofNullable(ecNumber);
         }
 
         /**
@@ -225,6 +300,11 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(registerNumber, otherEditPersonDescriptor.registerNumber)
+                    && Objects.equals(sex, otherEditPersonDescriptor.sex)
+                    && Objects.equals(studentClass, otherEditPersonDescriptor.studentClass)
+                    && Objects.equals(ecName, otherEditPersonDescriptor.ecName)
+                    && Objects.equals(ecNumber, otherEditPersonDescriptor.ecNumber)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -235,6 +315,11 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("register number", registerNumber)
+                    .add("sex", sex)
+                    .add("class", studentClass)
+                    .add("emergency contact name", ecName)
+                    .add("emergency contact number", ecNumber)
                     .add("tags", tags)
                     .toString();
         }
