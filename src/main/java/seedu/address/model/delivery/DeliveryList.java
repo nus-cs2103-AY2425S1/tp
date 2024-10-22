@@ -44,6 +44,31 @@ public class DeliveryList {
     }
 
     /**
+     * Adds a delivery to the index of the list.
+     */
+    public void add(Index targetIndex, Delivery toAdd) {
+        requireNonNull(toAdd);
+        requireNonNull(targetIndex);
+        int index = targetIndex.getZeroBased();
+        internalList.add(index, toAdd);
+    }
+
+    /**
+     * Get the index of the first archived delivery in the list.
+     */
+    public Index getFirstArchivedIndex() {
+        for (int i = 0; i < size(); i++) {
+            Delivery delivery = internalList.get(i);
+            if (delivery.isArchived()) {
+                Index firstArchivedIndex = Index.fromZeroBased(i);
+                return firstArchivedIndex;
+            }
+        }
+        return Index.fromZeroBased(size());
+    }
+
+
+    /**
      * Replaces the delivery {@code target} in the list with {@code editedDelivery}.
      * {@code target} must exist in the list.
      */
