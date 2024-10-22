@@ -172,4 +172,5 @@ public interface Model {
      */
     void assignStudent(Student student, TutorialId tutorialId);
 
+    String listTutorials();
 }

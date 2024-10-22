@@ -241,6 +241,11 @@ public class AttendCommandTest {
         }
 
         @Override
+        public String listTutorials() {
+            return null;
+        }
+
+        @Override
         public void addAssignment(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }

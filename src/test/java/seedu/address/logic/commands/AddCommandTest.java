@@ -270,6 +270,11 @@ public class AddCommandTest {
 
         }
 
+        @Override
+        public String listTutorials() {
+            return null;
+        }
+
     }
 
     /**

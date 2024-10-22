@@ -244,6 +244,11 @@ public class AddTutorialCommandTest {
         public void assignStudent(Student student, TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String listTutorials() {
+            return null;
+        }
     }
 
     /**

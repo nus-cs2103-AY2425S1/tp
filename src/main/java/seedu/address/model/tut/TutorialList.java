@@ -120,4 +120,14 @@ public class TutorialList {
         TutorialList otherList = (TutorialList) other;
         return this.tutorials.equals(otherList.tutorials);
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tutorials.size(); i++) {
+            sb.append(i + 1).append(". ").append(tutorials.get(i).toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 }

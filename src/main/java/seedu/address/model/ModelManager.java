@@ -178,6 +178,11 @@ public class ModelManager implements Model {
         tutorials.assignStudent(student, tutorialId);
     }
 
+    @Override
+    public String listTutorials() {
+        return getTutorialList().toString();
+    }
+
     //=========== Assignment ================================================================================
 
     @Override

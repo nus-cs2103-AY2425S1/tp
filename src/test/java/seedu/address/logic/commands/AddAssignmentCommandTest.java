@@ -232,6 +232,11 @@ public class AddAssignmentCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public String listTutorials() {
+            return null;
+        }
+
     }
 
     /**
