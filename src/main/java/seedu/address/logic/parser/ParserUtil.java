@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Birthday;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -136,5 +137,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses {@Code int frequency} into a {@code Frequency}.
+     *
+     * @throws ParseException if the given {@code frequency} is invalid.
+     */
+    public static Frequency parseFrequency(String frequency) throws ParseException {
+        requireNonNull(frequency);
+        String trimmedFrequency = frequency.trim();
+        if (!Frequency.isValidFrequency(trimmedFrequency)) {
+            throw new ParseException(Frequency.MESSAGE_CONSTRAINTS);
+        }
+        return new Frequency(trimmedFrequency);
     }
 }
