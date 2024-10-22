@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.core.index.Index;
@@ -14,20 +15,32 @@ import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.TransactionBookModel;
 import spleetwaise.transaction.model.TransactionBookModelManager;
+import spleetwaise.transaction.model.transaction.Amount;
+import spleetwaise.transaction.model.transaction.Date;
+import spleetwaise.transaction.model.transaction.Description;
+import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
 
-    private AddressBookModel addressBookModel = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private AddressBookModel addressBookModel = new AddressBookModelManager(
+            TypicalPersons.getTypicalAddressBook(), new UserPrefs());
     private TransactionBookModel transactionBookModel = new TransactionBookModelManager();
+
+    @BeforeEach
+    void setup() {
+        CommonModel.initialise(addressBookModel, transactionBookModel);
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = addressBookModel.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = addressBookModel.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
@@ -35,7 +48,8 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete)
         );
 
-        AddressBookModelManager expectedModel = new AddressBookModelManager(addressBookModel.getAddressBook(), new UserPrefs());
+        AddressBookModelManager expectedModel = new AddressBookModelManager(
+                addressBookModel.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
         CommandTestUtil.assertCommandSuccess(deleteCommand, addressBookModel, expectedMessage, expectedModel);
@@ -46,14 +60,23 @@ public class DeleteCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(addressBookModel.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(
+                deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
         CommandTestUtil.showPersonAtIndex(addressBookModel, TypicalIndexes.INDEX_FIRST_PERSON);
 
-        Person personToDelete = addressBookModel.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = addressBookModel.getFilteredPersonList()
+                .get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+
+        // Add some txn for this person
+        transactionBookModel.addTransaction(new Transaction(personToDelete, new Amount("10.00"),
+                new Description("foo"), new Date(
+                "01012024")
+        ));
+
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
@@ -61,11 +84,20 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete)
         );
 
-        AddressBookModel expectedModel = new AddressBookModelManager(addressBookModel.getAddressBook(), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(
+                addressBookModel.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
+        TransactionBookModel expectedTbModel = new TransactionBookModelManager(
+                transactionBookModel.getTransactionBook());
+        expectedTbModel.deleteTransactionsOfPersonId(personToDelete.getId());
+
         CommandTestUtil.assertCommandSuccess(deleteCommand, addressBookModel, expectedMessage, expectedModel);
+
+        // TODO: support this in CommandTestUtil
+        // Check for expected transaction model
+        assertEquals(transactionBookModel, expectedTbModel);
     }
 
     @Test
@@ -78,7 +110,8 @@ public class DeleteCommandTest {
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(
+                deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
