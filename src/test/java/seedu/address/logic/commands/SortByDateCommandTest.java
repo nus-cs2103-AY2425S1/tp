@@ -24,7 +24,7 @@ import seedu.address.model.person.DateDistantToRecentComparator;
 import seedu.address.model.person.DateRecentToDistantComparator;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SortByPriorityCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SortByDateCommand}.
  */
 public class SortByDateCommandTest {
 

@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.Comparator;
 
 /**
- * Comparator to sort persons from high priority to low priority
+ * Comparator to sort persons from recent date to distant date
  */
 public class DateRecentToDistantComparator implements Comparator<Person> {
 
