@@ -1,5 +1,9 @@
 package careconnect.ui;
 
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 import careconnect.commons.core.GuiSettings;
@@ -19,25 +23,22 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
-
+    private static final String UG_URL = "https://ay2425s1-cs2103t-w13-2.github.io/tp/UserGuide.html#quick-start";
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-
-    private Stage primaryStage;
-    private Logic logic;
-
+    private final PersonDetailFallback personDetailFallback = new PersonDetailFallback();
+    private final Stage primaryStage;
+    private final Logic logic;
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
-    private final PersonDetailFallback personDetailFallback = new PersonDetailFallback();
-    private final HelpWindow helpWindow = new HelpWindow();
-
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -82,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -153,14 +155,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Opens the help page on web using default browser.
      */
     @FXML
-    public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
+    public void handleUgLink() {
+        try {
+            URI link = new URI(UG_URL);
+            Desktop.getDesktop().browse(link);
+        } catch (URISyntaxException | IOException ex) {
+            resultDisplay.setFeedbackToUser("An error occurred while opening the help page.");
         }
     }
 
@@ -176,7 +179,6 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
         primaryStage.hide();
     }
 
@@ -196,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                handleUgLink();
             }
 
             if (commandResult.isExit()) {
@@ -236,6 +238,7 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
     /**
      * Checks if given string is valid syntax
      *
