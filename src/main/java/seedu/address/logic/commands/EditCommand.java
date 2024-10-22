@@ -73,6 +73,7 @@ public class EditCommand extends Command {
     public CommandType getCommandType() {
         return CommandType.EDITSTUDENT;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
