@@ -34,20 +34,20 @@ public class MarkAttendanceCommandTest {
         ModelStubWithStudent modelStub = new ModelStubWithStudent(validStudent);
         modelStub.addStudent(validStudent);
 
-        Attendance attendance = new Attendance("present");
+        Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
         MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
 
         CommandResult result = command.execute(modelStub);
 
         assertEquals(String.format(MarkAttendanceCommand.MESSAGE_SUCCESS, validStudent.getName(),
-                        validStudent.getTutorialGroup(), attendance.value, date), result.getFeedbackToUser());
+                        validStudent.getTutorialGroup(), attendance, date), result.getFeedbackToUser());
     }
 
     @Test
     public void execute_studentNotFound_throwsCommandException() {
         ModelStubWithNoStudent modelStub = new ModelStubWithNoStudent();
-        Attendance attendance = new Attendance("present");
+        Attendance attendance = new Attendance("p");
         LocalDate date = LocalDate.of(2023, 10, 9);
         MarkAttendanceCommand command = new MarkAttendanceCommand(new Name("John"), date, attendance);
 

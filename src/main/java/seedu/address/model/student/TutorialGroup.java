@@ -3,8 +3,6 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.HashSet;
-import java.util.Set;
 
 
 /**
@@ -22,7 +20,6 @@ public class TutorialGroup {
 
     public final String value;
 
-    private final Set<Student> students = new HashSet<>();
 
     /**
      * Constructs a {@code TutorialGroup}.
@@ -35,30 +32,6 @@ public class TutorialGroup {
         this.value = tutorialGroup;
     }
 
-    /**
-     * Adds a student to the tutorial group.
-     * @param student student to be added
-     */
-    public void addStudent(Student student) {
-        students.add(student);
-    }
-
-    /**
-     * Removes a student from the tutorial group.
-     * @param student student to be removed
-     */
-    public void deleteStudent(Student student) {
-        students.remove(student);
-    }
-
-    /**
-     * gets the students in the tutorial group.
-     * @return students
-     */
-
-    public Set<Student> getStudents() {
-        return students;
-    }
 
 
     /**

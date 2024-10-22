@@ -46,7 +46,6 @@ public class Student extends Person {
         super(name, phone, DUMMY_EMAIL, DUMMY_ADDRESS, DUMMY_TAG);
         requireAllNonNull(tutorialGroup, studentNumber);
         this.tutorialGroup = tutorialGroup;
-        tutorialGroup.addStudent(this);
         this.studentNumber = studentNumber;
     }
 
@@ -163,10 +162,4 @@ public class Student extends Person {
         return null;
     }
 
-    /**
-     * Deletes the student from the tutorial group.
-     */
-    public void removeFromTG() {
-        tutorialGroup.deleteStudent(this);
-    }
 }
