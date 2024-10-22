@@ -27,4 +27,9 @@ public class PaidCommandParserTest {
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaidCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_missingFrequency_throwsParseException() {
+        assertParseFailure(parser, "1", PaidCommand.MESSAGE_NO_FREQUENCY);
+    }
 }
