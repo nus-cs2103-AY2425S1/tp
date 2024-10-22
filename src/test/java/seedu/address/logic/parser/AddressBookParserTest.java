@@ -23,6 +23,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -30,6 +31,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Date;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonHasFeaturePredicate;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -101,6 +104,16 @@ public class AddressBookParserTest {
         assertEquals(new DateCommand(INDEX_FIRST_PERSON, date), command);
     }
 
+    @Test
+    public void parseCommand_filterByTag() throws Exception {
+        //tag only
+        FilterCommand command = (FilterCommand) parser.parseCommand(
+              FilterCommand.COMMAND_WORD + " " + "t/ High Risk"
+        );
+        assertEquals(new FilterCommand(new PersonHasFeaturePredicate(new Tag("High Risk"), null)),
+              command);
+
+    }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
