@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTime {
 
-    public static final String MESSAGE_CONSTRAINTS = "DateTime should be in the format YYYY-MM-DD HH:mm "
+    public static final String MESSAGE_CONSTRAINTS = "DateTime should be in the format YYYY-MM-DD HH:MM "
         + "(24-hour format) and must be valid.";
     /*
      * The date must follow the format YYYY-MM-DD (ISO standard date format), and the time must follow

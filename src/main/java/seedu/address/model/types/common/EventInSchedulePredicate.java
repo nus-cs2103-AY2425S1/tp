@@ -9,35 +9,35 @@ import seedu.address.model.types.event.Event;
 /**
  * Tests that a {@code Event}'s {@code StartDate} between a start and end date.
  */
-public class EventUpcomingPredicate implements Predicate<Event> {
+public class EventInSchedulePredicate implements Predicate<Event> {
     private final LocalDateTime startDate;
     private final LocalDateTime endDate;
 
     /**
-     * Constructs an EventUpcomingPredicate with a positive or negative number of days
+     * Constructs an EventInSchedulePredicate with a positive or negative number of days
      * This constructor is used to create a filter for the past N or next N days of events
      * @param range the number of days in the future/past.
      */
-    public EventUpcomingPredicate(Integer range) {
+    public EventInSchedulePredicate(Integer range) {
         if (range >= 0) {
             startDate = DateTimeUtil.getCurrentDateTime();
-            endDate = DateTimeUtil.getCurrentDateTime().withHour(23).withMinute(59).withSecond(59).withNano(999999999)
+            endDate = DateTimeUtil.getCurrentDateTime().withHour(23).withMinute(59).withSecond(59)
                     .plusDays(range);
         } else {
-            startDate = DateTimeUtil.getCurrentDateTime().withHour(0).withMinute(0).withSecond(0).withNano(0)
+            startDate = DateTimeUtil.getCurrentDateTime().withHour(0).withMinute(0).withSecond(0)
                     .minusDays(-range);
             endDate = DateTimeUtil.getCurrentDateTime();
         }
     }
 
     /**
-     * Constructs an UpcomingEventCommand with a specific date
+     * Constructs an EventInSchedulePredicate with a specific date
      * This constructor is used to create a filter for events that happen on that date
      * @param date the specific date.
      */
-    public EventUpcomingPredicate(DateTime date) {
-        startDate = date.toLocalDateTime().withHour(0).withMinute(0).withSecond(0).withNano(0);
-        endDate = date.toLocalDateTime().withHour(23).withMinute(59).withSecond(59).withNano(999999999);
+    public EventInSchedulePredicate(DateTime date) {
+        startDate = date.toLocalDateTime().withHour(0).withMinute(0).withSecond(0);
+        endDate = date.toLocalDateTime().withHour(23).withMinute(59).withSecond(59);
     }
 
     @Override
@@ -53,13 +53,13 @@ public class EventUpcomingPredicate implements Predicate<Event> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EventNameContainsKeywordsPredicate)) {
+        if (!(other instanceof EventInSchedulePredicate)) {
             return false;
         }
 
-        EventUpcomingPredicate otherEventUpcomingPredicate = (EventUpcomingPredicate) other;
-        return startDate.equals(otherEventUpcomingPredicate.startDate)
-                && endDate.equals(otherEventUpcomingPredicate.endDate);
+        EventInSchedulePredicate otherEventInSchedulePredicate = (EventInSchedulePredicate) other;
+        return startDate.equals(otherEventInSchedulePredicate.startDate)
+                && endDate.equals(otherEventInSchedulePredicate.endDate);
     }
 
     @Override

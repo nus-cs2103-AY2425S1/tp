@@ -8,17 +8,17 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.types.common.DateTime;
-import seedu.address.model.types.common.EventUpcomingPredicate;
+import seedu.address.model.types.common.EventInSchedulePredicate;
 
 /**
- * Filters events in address book based on input
+ * Filters events in schedule based on input
  * If the input is positive integer N, shows all events in next N days
  * If the input is negative integer N, shows all events in past N days
  * If the input is a date YYYY-MM-DD, shows all events on that date
  */
-public class UpcomingEventCommand extends Command {
+public class ScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = "upcoming";
+    public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Input an integer to find all events that happen in "
             + "the next/past N days or input a date to find events on that date\n"
@@ -38,21 +38,21 @@ public class UpcomingEventCommand extends Command {
     private DateTime specificDate;
 
     /**
-     * Constructs an UpcomingEventCommand with a positive or negative number of days
+     * Constructs an ScheduleCommand with a positive or negative number of days
      * This constructor is used when you want to specify a date for which events before/after that are displayed
      * @param numOfDays the number of days in the future/past.
      */
-    public UpcomingEventCommand(int numOfDays) {
+    public ScheduleCommand(int numOfDays) {
         this.commandType = CommandType.NUM_OF_DAYS;
         this.numOfDays = numOfDays;
     }
 
     /**
-     * Constructs an UpcomingEventCommand with a specific date
+     * Constructs an ScheduleCommand with a specific date
      * This constructor is used when you want to specify a date for which events before/after that are displayed
      * @param specificDate the number of days in the future/past.
      */
-    public UpcomingEventCommand(DateTime specificDate) {
+    public ScheduleCommand(DateTime specificDate) {
         this.commandType = CommandType.SPECIFIC_DATE;
         this.specificDate = specificDate;
     }
@@ -61,9 +61,9 @@ public class UpcomingEventCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         if (commandType == CommandType.NUM_OF_DAYS) {
-            model.updateFilteredEventList(new EventUpcomingPredicate(numOfDays));
+            model.updateFilteredEventList(new EventInSchedulePredicate(numOfDays));
         } else {
-            model.updateFilteredEventList(new EventUpcomingPredicate(specificDate));
+            model.updateFilteredEventList(new EventInSchedulePredicate(specificDate));
         }
 
         return new CommandResult(
@@ -77,20 +77,20 @@ public class UpcomingEventCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof UpcomingEventCommand)) {
+        if (!(other instanceof ScheduleCommand)) {
             return false;
         }
 
-        UpcomingEventCommand otherUpcomingEventCommand = (UpcomingEventCommand) other;
+        ScheduleCommand otherScheduleCommand = (ScheduleCommand) other;
 
-        if (otherUpcomingEventCommand.commandType != commandType) {
+        if (otherScheduleCommand.commandType != commandType) {
             return false;
         }
 
         if (commandType == CommandType.NUM_OF_DAYS) {
-            return otherUpcomingEventCommand.numOfDays.equals(numOfDays);
+            return otherScheduleCommand.numOfDays.equals(numOfDays);
         } else {
-            return otherUpcomingEventCommand.specificDate.equals(specificDate);
+            return otherScheduleCommand.specificDate.equals(specificDate);
         }
 
     }

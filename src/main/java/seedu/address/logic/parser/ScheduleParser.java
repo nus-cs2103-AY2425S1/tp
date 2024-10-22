@@ -3,20 +3,20 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.eventcommands.UpcomingEventCommand;
+import seedu.address.logic.commands.eventcommands.ScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.types.common.DateTime;
 
 /**
- * Parses input arguments and creates a new UpcomingEventCommand object
+ * Parses input arguments and creates a new ScheduleCommand object
  */
-public class UpcomingEventParser implements Parser<Command> {
+public class ScheduleParser implements Parser<Command> {
 
     private static final DateTime DEFAULT_DATE = new DateTime("1970-01-01 00:00");
 
     /**
-     * Parses the given {@code String} of arguments in the context of the UpcomingEventCommand
-     * and returns a UpcomingEventCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
+     * and returns a ScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parse(ModelType modelType, String args) throws ParseException {
@@ -40,13 +40,13 @@ public class UpcomingEventParser implements Parser<Command> {
 
         if (!isInt && !isDate) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UpcomingEventCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
         }
 
         if (isInt) {
-            return new UpcomingEventCommand(range);
+            return new ScheduleCommand(range);
         } else {
-            return new UpcomingEventCommand(date);
+            return new ScheduleCommand(date);
         }
     }
 }

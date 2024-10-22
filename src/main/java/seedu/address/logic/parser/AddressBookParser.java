@@ -11,7 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.eventcommands.UpcomingEventCommand;
+import seedu.address.logic.commands.eventcommands.ScheduleCommand;
 import seedu.address.logic.commands.personcommands.AddPersonCommand;
 import seedu.address.logic.commands.personcommands.DeletePersonCommand;
 import seedu.address.logic.commands.personcommands.EditCommand;
@@ -91,8 +91,8 @@ public class AddressBookParser {
         case SearchCommand.COMMAND_WORD:
             return new SearchCommandParser().parse(modelType, arguments);
 
-        case UpcomingEventCommand.COMMAND_WORD:
-            return new UpcomingEventParser().parse(modelType, arguments);
+        case ScheduleCommand.COMMAND_WORD:
+            return new ScheduleParser().parse(modelType, arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
