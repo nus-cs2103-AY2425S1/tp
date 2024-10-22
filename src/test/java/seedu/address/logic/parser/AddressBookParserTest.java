@@ -23,6 +23,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListTutorialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
@@ -102,4 +103,13 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+    @Test
+    public void parseCommand_listTutorial() throws Exception {
+        // Test parsing the "listTut" command without arguments
+        assertTrue(parser.parseCommand(ListTutorialCommand.COMMAND_WORD) instanceof ListTutorialCommand);
+
+        // Test parsing the "listTut" command with extra arguments (it should still parse as ListTutorialCommand)
+        assertTrue(parser.parseCommand(ListTutorialCommand.COMMAND_WORD + " 3") instanceof ListTutorialCommand);
+    }
+
 }
