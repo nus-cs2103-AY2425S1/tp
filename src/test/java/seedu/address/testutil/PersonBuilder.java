@@ -17,6 +17,7 @@ import seedu.address.model.tier.Tier;
  */
 public class PersonBuilder {
 
+    // defaults shown here belong to mandatory fields, and are hence not present in CommandCommons
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
@@ -73,10 +74,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tier} into a {@code Set<Tier>} and set it to the {@code Person} that we are building.
+     * Sets the {@code Phone} of the {@code Person} that we are building.
      */
-    public PersonBuilder withTier(String tier) {
-        this.tier = new Tier(tier);
+    public PersonBuilder withPhone(String phone) {
+        this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEmail(String email) {
+        this.email = new Email(email);
         return this;
     }
 
@@ -96,7 +105,6 @@ public class PersonBuilder {
         return this;
     }
 
-
     /**
      * Sets the {@code Income} of the {@code Person} that we are building.
      */
@@ -104,21 +112,11 @@ public class PersonBuilder {
         this.income = new Income(income);
         return this;
     }
-
-
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Parses the {@code tier} into a {@code Set<Tier>} and set it to the {@code Person} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public PersonBuilder withTier(String tier) {
+        this.tier = new Tier(tier);
         return this;
     }
 
@@ -127,6 +125,11 @@ public class PersonBuilder {
      */
     public PersonBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
+        return this;
+    }
+
+    public PersonBuilder withStatus(String status) {
+        this.status = new Status(status);
         return this;
     }
 
