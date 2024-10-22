@@ -179,6 +179,29 @@ The following activity diagram shows how the user should use some of our transac
 
 <puml src="diagrams/ListTransactionsActivityDiagram.puml" width="550" />
 
+### Find Transactions `findt INDEX KEYWORD [KEYWORDS]`
+
+#### Implementation
+
+The find transactions command allows for users to find transactions for the specified person whose descriptions match one of the keywords. 
+
+When the command is used, `Model#updateTransactionList()` is called to update the transaction list to the transactions of the specified person. 
+`Model#updateFilteredPersonList()` is called to update the person list to just contain that specified person. 
+
+It also implements the following operations:
+
+* `Model#updateTransactionListPredicate(Predicate<Transaction>)` — Updates the transaction list to contain transactions that match any of the keywords.
+
+The following sequence diagram shows an example execution of command `findt 1 ...`, where `...` represents any number of keywords.
+
+<puml src="diagrams/FindTransactionsDiagram.puml" width="600" />
+
+#### Side Effects
+
+Same as `listt`, `findt` also changes the person list to preserve the setting that the only person in the person list is the specified person whose transactions are currently shown.
+
+As a result, operations on the transactions (e.g. `deletet` and `summary`) can be performed on the transactions list, without specifying the person index, regardless of the transaction list being generated from `listt` or `findt`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -309,20 +332,20 @@ Priorities: High (must have) - `***`, Medium (nice to have) - `**`, Low (unlikel
 
 | Priority | As a … | I want to … | So that I can… |
 |----------|--------|-------------|----------------|
-| `***` | financial consultant | add a new client (add) | track and store client details |
-| `***` | financial consultant with fast turnaround on clients | delete a client (delete) | remove contacts I no longer need |
-| `***` | financial consultant with many clients | view a list of all clients (list) | quickly glance all clients' broad information |
-| `***` | financial consultant with many clients | search for a client by name (find) | quickly find their information |
-| `***` | financial consultant | add transactions to a client's record (addt) | keep track of financial activities for each client |
-| `***` | financial consultant with clients having complex transaction histories | view a list of transactions for a specific client (listt) | assess their financial history at a glance |
-| `***` | financial consultant | delete a transaction from a client's record (deletet) | correct errors or remove outdated information |
-| `**` | financial consultant prone to making typos | use fuzzy search | find clients even when I'm not sure of the exact spelling |
-| `**` | financial consultant with clients having complex transaction histories | calculate the balance for a client | quickly assess their overall financial standing |
-| `**` | financial consultant with clients from various industries | tag clients based on industry or other characteristics | easily group and categorise my client base |
-| `**` | financial consultant with volatile clients | edit an existing client's details | update their information when needed |
-| `**` | financial consultant managing clients with interrelated businesses | use nested tags | simulate relationships between clients more accurately |
-| `**` | financial consultant dealing with many transactions | search transactions by description (findt) | quickly locate specific financial activities |
-| `*` | financial consultant with a growing client base | import and export client data | easily transfer information between systems or share with colleagues |
+| `***`    | financial consultant | add a new client (add) | track and store client details |
+| `***`    | financial consultant with fast turnaround on clients | delete a client (delete) | remove contacts I no longer need |
+| `***`    | financial consultant with many clients | view a list of all clients (list) | quickly glance all clients' broad information |
+| `***`    | financial consultant with many clients | search for a client by name (find) | quickly find their information |
+| `***`    | financial consultant | add transactions to a client's record (addt) | keep track of financial activities for each client |
+| `***`    | financial consultant with clients having complex transaction histories | view a list of transactions for a specific client (listt) | assess their financial history at a glance |
+| `***`    | financial consultant | delete a transaction from a client's record (deletet) | correct errors or remove outdated information |
+| `***`    | financial consultant dealing with many transactions | search transactions by description (findt) | quickly locate specific financial activities |
+| `**`     | financial consultant prone to making typos | use fuzzy search | find clients even when I'm not sure of the exact spelling |
+| `**`     | financial consultant with clients having complex transaction histories | calculate the balance for a client | quickly assess their overall financial standing |
+| `**`     | financial consultant with clients from various industries | tag clients based on industry or other characteristics | easily group and categorise my client base |
+| `**`     | financial consultant with volatile clients | edit an existing client's details | update their information when needed |
+| `**`     | financial consultant managing clients with interrelated businesses | use nested tags | simulate relationships between clients more accurately |
+| `*`      | financial consultant with a growing client base | import and export client data | easily transfer information between systems or share with colleagues |
 
 ### Use cases
 
