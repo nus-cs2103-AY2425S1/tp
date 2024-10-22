@@ -4,21 +4,30 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalOwners.ALICE;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_OWNER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_OWNER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PET;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_OWNER;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PET;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -27,65 +36,98 @@ import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
 import seedu.address.testutil.OwnerBuilder;
+import seedu.address.testutil.PetBuilder;
 
-public class AddOwnerCommandTest {
+public class LinkCommandTest {
 
     @Test
-    public void constructor_nullOwner_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddOwnerCommand(null));
+    public void constructor_nullLink_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new LinkCommand(INDEX_FIRST_OWNER, null));
+        assertThrows(NullPointerException.class, () -> new LinkCommand(null, new HashSet<Index>()));
+        assertThrows(NullPointerException.class, () -> new LinkCommand(null, null));
+
+        // At least one pet index must be provided
+        assertThrows(IllegalArgumentException.class, () -> new LinkCommand(INDEX_FIRST_OWNER,
+            new HashSet<Index>()));
     }
 
     @Test
-    public void execute_ownerAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingOwnerAdded modelStub = new ModelStubAcceptingOwnerAdded();
+    public void execute_linkAcceptedByModel_addSuccess() throws Exception {
         Owner validOwner = new OwnerBuilder().build();
+        Pet validPet = new PetBuilder().build();
+        Link link = new Link(validOwner, validPet);
 
-        CommandResult commandResult = new AddOwnerCommand(validOwner).execute(modelStub);
+        ModelStubAcceptingLinkAdded modelStub = new ModelStubAcceptingLinkAdded(validOwner, validPet);
 
-        assertEquals(String.format(AddOwnerCommand.MESSAGE_SUCCESS, Messages.format(validOwner)),
+        Set<Index> linkIndexes = new HashSet<>(Arrays.asList(INDEX_FIRST_PET));
+        CommandResult commandResult = new LinkCommand(INDEX_FIRST_OWNER, linkIndexes).execute(modelStub);
+
+        assertEquals(String.format(LinkCommand.MESSAGE_SUCCESS, linkIndexes.size(), Messages.format(validOwner)),
             commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validOwner), modelStub.ownersAdded);
+        assertEquals(Arrays.asList(link), modelStub.linksAdded);
     }
 
     @Test
-    public void execute_duplicateOwner_throwsCommandException() {
+    public void execute_invalidIndex_throwsCommandException() {
         Owner validOwner = new OwnerBuilder().build();
-        AddOwnerCommand addOwnerCommand = new AddOwnerCommand(validOwner);
-        ModelStub modelStub = new ModelStubWithOwner(validOwner);
+        Pet validPet = new PetBuilder().build();
+        Link link = new Link(validOwner, validPet);
+
+        ModelStub modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_OWNER_DISPLAYED_INDEX, () ->
+            new LinkCommand(INDEX_THIRD_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET))).execute(modelStub));
+
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_PET_DISPLAYED_INDEX, () ->
+            new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_THIRD_PET))).execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateLink_throwsCommandException() {
+        Owner validOwner = new OwnerBuilder().build();
+        Pet validPet = new PetBuilder().build();
+        Link link = new Link(validOwner, validPet);
+
+        ModelStub modelStub = new ModelStubWithExistingLink(validOwner, validPet, link);
 
         assertThrows(CommandException.class,
-            AddOwnerCommand.MESSAGE_DUPLICATE_OWNER, () -> addOwnerCommand.execute(modelStub));
+            LinkCommand.MESSAGE_DUPLICATE_LINK, () ->
+            new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)))
+            .execute(modelStub)
+        );
     }
 
     @Test
     public void equals() {
-        Owner alice = new OwnerBuilder().withName("Alice").build();
-        Owner bob = new OwnerBuilder().withName("Bob").build();
-        AddOwnerCommand addAliceCommand = new AddOwnerCommand(alice);
-        AddOwnerCommand addBobCommand = new AddOwnerCommand(bob);
+        LinkCommand linkCommandA = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        LinkCommand linkCommandB = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        LinkCommand linkCommandC = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_SECOND_PET)));
+        LinkCommand linkCommandD = new LinkCommand(INDEX_SECOND_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(linkCommandA.equals(linkCommandA));
 
         // same values -> returns true
-        AddOwnerCommand addAliceCommandCopy = new AddOwnerCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertTrue(linkCommandA.equals(linkCommandB));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(linkCommandA.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(linkCommandA.equals(null));
 
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        // different link targets -> returns false
+        assertFalse(linkCommandA.equals(linkCommandC));
+        assertFalse(linkCommandA.equals(linkCommandD));
+        assertFalse(linkCommandC.equals(linkCommandD));
     }
 
     @Test
     public void toStringMethod() {
-        AddOwnerCommand addCommand = new AddOwnerCommand(ALICE);
-        String expected = AddOwnerCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addCommand.toString());
+        LinkCommand linkCommand = new LinkCommand(INDEX_FIRST_OWNER, new HashSet<>(Arrays.asList(INDEX_FIRST_PET)));
+        String expected = LinkCommand.class.getCanonicalName() + "{ownerIndex=" + INDEX_FIRST_OWNER.getOneBased()
+            + ", petIndexes=[" + INDEX_FIRST_PET.getOneBased() + "]}";
+        assertEquals(expected, linkCommand.toString());
     }
 
     /**
@@ -239,45 +281,78 @@ public class AddOwnerCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains an existing link for duplicate testing.
      */
-    private class ModelStubWithOwner extends ModelStub {
+    private class ModelStubWithExistingLink extends ModelStub {
+        private final Link link;
         private final Owner owner;
+        private final Pet pet;
 
-        ModelStubWithOwner(Owner owner) {
-            requireNonNull(owner);
+        ModelStubWithExistingLink(Owner owner, Pet pet, Link link) {
+            requireAllNonNull(owner, pet, link);
             this.owner = owner;
+            this.pet = pet;
+            this.link = link;
         }
 
         @Override
-        public boolean hasOwner(Owner owner) {
-            requireNonNull(owner);
-            return this.owner.isSameOwner(owner);
+        public ObservableList<Owner> getFilteredOwnerList() {
+            ObservableList<Owner> ownerList = FXCollections.observableArrayList();
+            ownerList.add(owner);
+            return ownerList;
+        }
+
+        @Override
+        public ObservableList<Pet> getFilteredPetList() {
+            ObservableList<Pet> petList = FXCollections.observableArrayList();
+            petList.add(pet);
+            return petList;
+        }
+
+        @Override
+        public boolean hasLink(Link link) {
+            return this.link.equals(link);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the link being added.
      */
-    private class ModelStubAcceptingOwnerAdded extends ModelStub {
-        final ArrayList<Owner> ownersAdded = new ArrayList<>();
+    private class ModelStubAcceptingLinkAdded extends ModelStub {
+        final ArrayList<Link> linksAdded = new ArrayList<>();
+        private final Owner owner;
+        private final Pet pet;
 
-        @Override
-        public boolean hasOwner(Owner owner) {
-            requireNonNull(owner);
-            return ownersAdded.stream().anyMatch(owner::isSameOwner);
+        ModelStubAcceptingLinkAdded(Owner owner, Pet pet) {
+            requireAllNonNull(owner, pet);
+            this.owner = owner;
+            this.pet = pet;
         }
 
         @Override
-        public void addOwner(Owner owner) {
-            requireNonNull(owner);
-            ownersAdded.add(owner);
+        public ObservableList<Owner> getFilteredOwnerList() {
+            ObservableList<Owner> ownerList = FXCollections.observableArrayList();
+            ownerList.add(owner);
+            return ownerList;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ObservableList<Pet> getFilteredPetList() {
+            ObservableList<Pet> petList = FXCollections.observableArrayList();
+            petList.add(pet);
+            return petList;
+        }
+
+        @Override
+        public boolean hasLink(Link link) {
+            requireNonNull(link);
+            return linksAdded.stream().anyMatch(link::equals);
+        }
+
+        @Override
+        public void addLink(Link link) {
+            requireNonNull(link);
+            linksAdded.add(link);
         }
     }
-
 }

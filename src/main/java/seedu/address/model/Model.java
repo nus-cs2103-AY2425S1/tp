@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.link.Link;
 import seedu.address.model.owner.Owner;
 import seedu.address.model.person.Person;
 import seedu.address.model.pet.Pet;
@@ -73,6 +74,11 @@ public interface Model {
      */
     boolean hasPet(Pet pet);
 
+    /***
+     * Returns true if a pet with the same identity as {@code pet} exists in the address book.
+     */
+    boolean hasLink(Link pet);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -92,6 +98,12 @@ public interface Model {
     void deletePet(Pet target);
 
     /**
+     * Deletes the given link.
+     * The link must exist in the address book.
+     */
+    void deleteLink(Link target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -108,6 +120,12 @@ public interface Model {
      * {@code pet} must not already exist in the address book.
      */
     void addPet(Pet pet);
+
+    /**
+     * Adds the given link.
+     * {@code link} must not already exist in the address book.
+     */
+    void addLink(Link link);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

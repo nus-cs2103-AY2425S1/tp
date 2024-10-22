@@ -8,13 +8,14 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.link.Linkable;
 import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Pet in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Pet {
+public class Pet implements Linkable {
 
     // Identity fields
     private final Name name;
@@ -107,6 +108,12 @@ public class Pet {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, species, breed, age, sex);
+    }
+
+    @Override
+    public String getUniqueID() {
+        //TODO update this to actually unique ID
+        return name + " " + species + " " + breed + " " + sex;
     }
 
     @Override

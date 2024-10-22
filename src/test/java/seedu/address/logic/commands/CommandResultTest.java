@@ -36,6 +36,24 @@ public class CommandResultTest {
     }
 
     @Test
+    public void compareLists() {
+
+        CommandResult commandResult = new CommandResult("feedback");
+
+        assertTrue(commandResult.equals(new CommandResult("feedback")));
+
+        commandResult.setListType(ListPetCommand.MESSAGE_SUCCESS);
+
+        assertFalse(commandResult.equals(new CommandResult("feedback")));
+
+        assertTrue(commandResult.isPetListCommand() == true);
+
+        assertEquals(commandResult.isOwnerListCommand(), false);
+
+        assertEquals(commandResult.isCombinedListCommand(), false);
+    }
+
+    @Test
     public void hashcode() {
         CommandResult commandResult = new CommandResult("feedback");
 

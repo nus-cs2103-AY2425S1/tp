@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 import seedu.address.commons.core.Pair;
 import seedu.address.commons.core.index.Index;
@@ -27,9 +26,6 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-
-    // Pattern to match strings of the form "p" followed by an integer with up to 3 digits.
-    private static final Pattern PX_PATTERN = Pattern.compile("^p\\d{1,3}$");
 
     /**
      * Checks if a given string is of the form "px", where "x" is an integer of up to 3 digits.
@@ -55,7 +51,7 @@ public class ParserUtil {
         if (!isValidInput(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        Pair res = new Pair(Index.fromOneBased(Integer.parseInt(Character.toString(trimmedIndex.charAt(1)))),
+        Pair res = new Pair(Index.fromOneBased(Integer.parseInt(trimmedIndex.substring(1))),
                 Character.toString(trimmedIndex.charAt(0)));
         return res;
         //return Index.fromOneBased(Integer.parseInt(trimmedIndex));
