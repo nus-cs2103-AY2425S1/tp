@@ -291,7 +291,7 @@ Examples:
 - `addproject pid/E0276 pn/Project Alpha`
 - `addproject pid/WW2036 pn/Website UI Overhaul`
 
-Expected output:  
+Expected output:
 - System message noting success and id \+ name of project added
 
 [Return to Top](#table-of-contents)
@@ -302,7 +302,7 @@ Shows a list of **all stored projects**.
 
 Format: `listproject`
 
-Expected output:  
+Expected output:
 - System message noting success
 - All projects shown in the displayed project list
 
@@ -325,7 +325,7 @@ Examples:
 - `findproject project`
 - `findproject Alpha Beta`
 
-Expected output:  
+Expected output:
 - System message noting success
 - Projects matching criteria above  shown in the displayed project list
 
@@ -346,7 +346,7 @@ Examples:
 - `listproject` followed by `deleteproject 2` deletes the **2nd project shown**.
 - `findproject Alpha` followed by `deleteproject 1` deletes the **1st project in the results** of the `findproject` command.
 
-Expected output:  
+Expected output:
 
 - System message noting success
 - Deleted project vanishes from displayed project list
@@ -355,12 +355,12 @@ Expected output:
 
 ### Clear all project entries : `clearproject`
 
-**Clears all project entries** from HRConnect.  
+**Clears all project entries** from HRConnect.<br>
 <span style="color:red">This will delete all project records AND their assignments\!</span>
 
-Format: `clearproject`  
+Format: `clearproject`
 
-Expected output:  
+Expected output:
 - System message noting success
 - Displayed project list becomes empty
 
@@ -400,7 +400,7 @@ Expected output:
 
 ### Delete Assignment: `unassign`
 
-**Deletes an assignment** between a Person and a Project.   
+**Deletes an assignment** between a Person and a Project.<br>
 This does not delete the Person nor the Project.
 
 Format: `unassign aid/ASSIGNMENT_ID`
@@ -509,7 +509,7 @@ List of certain technical terms / uncommon words used in this user guide.
 - A digital interface in which a user interacts with graphical components such as icons, buttons, and menus. Example: Windows 11, most websites
 
 ### Java
-- The programming language HRConnect is based on. 
-- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.  
+- The programming language HRConnect is based on.
+- It has to be downloaded from [here](https://www.oracle.com/sg/java/technologies/downloads/#java17-windows) and installed before attempting to run HRConnect.
 
 [Return to Top](#table-of-contents)
