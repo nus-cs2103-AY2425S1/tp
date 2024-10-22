@@ -45,7 +45,6 @@ class JsonAdaptedPerson {
         if (skills != null) {
             this.skills.addAll(skills);
         }
-        // TODO: no load capability yet
         this.match = null;
     }
 

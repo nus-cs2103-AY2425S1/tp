@@ -26,7 +26,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
-    private final Optional<String> match = Optional.empty();
+    private final Optional<String> match;
 
     /**
      * Every parameter must be present and not null.
@@ -38,6 +38,7 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
+        this.match = Optional.empty();
     }
 
     /**
@@ -50,7 +51,7 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match.map(s -> match);
+        this.match = Optional.of(match);
     }
 
     public Name getName() {
