@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "studentId" : "1001",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "studentId" : "1002",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +22,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "studentId" : "1003",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +30,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "studentId" : "1004",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -38,7 +38,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "studentId" : "1005",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -46,7 +46,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "studentId" : "1006",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -54,7 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "studentId" : "1007",
-    "tutorialClass" : "1001",
+    "tutorialId" : "1001",
     "tags" : [ ]
   } ]
 }

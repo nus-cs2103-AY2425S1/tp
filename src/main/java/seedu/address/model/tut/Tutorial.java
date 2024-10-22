@@ -157,6 +157,9 @@ public abstract class Tutorial {
     public static Tutorial of(TutName tutName, TutorialId tutorialId) {
         requireNonNull(tutName);
         requireNonNull(tutorialId);
+        if (tutorialId.equals(TutorialId.none())) {
+            return Tutorial.none();
+        }
         return Tutorial.exist(tutName, tutorialId);
     }
 
@@ -167,6 +170,7 @@ public abstract class Tutorial {
         private static final None none = new None();
 
         private final List<Student> students = new ArrayList<>();
+        private final TutorialId tutorialId = TutorialId.none();
 
         public static None none() {
             return none;
@@ -192,7 +196,7 @@ public abstract class Tutorial {
 
         @Override
         public TutName getTutName() {
-            throw new NoTutorialException();
+            return new TutName("empty");
         }
 
         @Override
@@ -207,7 +211,7 @@ public abstract class Tutorial {
 
         @Override
         public TutDate getTutorialDate(Date date) {
-            throw new NoTutorialException();
+            return new TutDate(new Date());
         }
 
         @Override
@@ -217,12 +221,13 @@ public abstract class Tutorial {
 
         @Override
         public List<TutDate> getTutDates() {
-            throw new NoTutorialException();
+            List<TutDate> tutDates = new ArrayList<>();
+            return tutDates;
         }
 
         @Override
         public TutorialId getTutorialId() {
-            throw new NoTutorialException();
+            return tutorialId;
         }
 
         @Override

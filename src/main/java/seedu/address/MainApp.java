@@ -95,7 +95,6 @@ public class MainApp extends Application {
                         + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(AddressBook::new);
-
             assignmentListOptional = storage.readAssignments();
             if (assignmentListOptional.isEmpty()) {
                 logger.info("Creating a new data file " + storage.getAssignmentFilePath()
@@ -115,6 +114,14 @@ public class MainApp extends Application {
             initialData = new AddressBook();
             assignmentData = new AssignmentList();
             tutorialData = new TutorialList();
+        }
+
+        try {
+            storage.saveAddressBook(initialData);
+            storage.saveAssignments(assignmentData);
+            storage.saveTutorials(tutorialData);
+        } catch (IOException e) {
+            logger.warning("Data couldn't be saved!");
         }
 
         return new ModelManager(initialData, userPrefs, assignmentData, tutorialData);

@@ -71,7 +71,7 @@ public abstract class TutorialId {
         private final String value;
 
         @JsonCreator
-        public Exist(@JsonProperty("tutorialClass") String tutorialClass) {
+        public Exist(@JsonProperty("tutorialId") String tutorialClass) {
             requireNonNull(tutorialClass);
             checkArgument(isValidTutorialClass(tutorialClass));
             this.value = tutorialClass;
