@@ -19,8 +19,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/natlv)]
 [[portfolio](team/natlv.md)]
 
-* Role: 
-* Responsibilities: 
+* Role:
+* Responsibilities:
 
 ### Jerrell Lee
 
@@ -39,7 +39,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](http://github.com/edsel-tan)] [[portfolio](team/edsel-tan.md)]
 
 * Role: Senior Finance Manager
-* Responsibilities: 
+* Responsibilities:
 
 ### Ansel Chong
 
@@ -51,7 +51,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role:
 * Responsibilities:
 
-### Hugh 
+### Hugh
 
 <img src="images/gnoossk.png" width="200px">
 

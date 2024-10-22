@@ -1,0 +1,25 @@
+{
+  "_comment": "AddressBook save file which contains the same Student values as in TypicalStudents#getTypicalAddressBook()",
+  "students" : [ {
+    "name" : "Hugh Jackman",
+    "phone" : "33333333",
+    "email" : "dummy@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G03",
+    "studentNumber" : "A1234567A"
+  }, {
+    "name" : "Puff Daddy",
+    "phone" : "44444444",
+    "email" : "dummy@example.com",
+    "address" : "dummy address",
+    "tutorialGroup" : "G04",
+    "studentNumber" : "A7654321A"
+  }, {
+      "name" : "Alice Smith",
+      "phone" : "81234567",
+      "email" : "dummy@example.com",
+      "address" : "dummy address",
+      "tutorialGroup" : "B11",
+      "studentNumber" : "A0123456M"
+    } ]
+}
