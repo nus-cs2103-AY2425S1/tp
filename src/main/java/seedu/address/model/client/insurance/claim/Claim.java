@@ -14,7 +14,7 @@ public class Claim {
     public static final String INVALID_CLAIM_AMOUNT = "Claim Amount must be a positive integer";
 
     private final String claimId;
-    private final boolean isOpen;
+    private boolean isOpen;
     private final int claimAmount;
 
     /**
@@ -91,6 +91,13 @@ public class Claim {
      */
     public int getClaimAmount() {
         return this.claimAmount;
+    }
+
+    /**
+     * Marks the claim as "closed" by setting this.isOpen to false.
+     */
+    public void close() {
+        this.isOpen = false;
     }
 
     /**

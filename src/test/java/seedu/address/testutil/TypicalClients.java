@@ -35,6 +35,7 @@ public class TypicalClients {
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com")
             .withInsurancePlansManager("Basic Insurance Plan")
+            .withClaims("Basic Insurance Plan|A1001|true|10000")
             .withAddress("wall street").build();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();

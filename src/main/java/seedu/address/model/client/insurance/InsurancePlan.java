@@ -79,8 +79,18 @@ public abstract class InsurancePlan {
      */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof InsurancePlan) // instanceof handles nulls
-                && insurancePlanId == ((InsurancePlan) other).getInsurancePlanId(); // check plan id
+        if (other == this) {
+            return true;
+        } else if (other instanceof InsurancePlan) {
+            InsurancePlan otherInsurancePlan = (InsurancePlan) other;
+            if (otherInsurancePlan.insurancePlanId != this.insurancePlanId) {
+                return false;
+            }
+            if (!otherInsurancePlan.claims.equals(this.claims)) {
+                return false;
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -20,35 +20,34 @@ import seedu.address.model.client.insurance.InsurancePlansManager;
 import seedu.address.model.client.insurance.claim.Claim;
 
 /**
- * Removes a claim from an existing client with existing Insurance Plan in the address book.
+ * Marks a claim tagged to a Client's insurance plan as "closed"
  */
-public class DeleteClaimCommand extends Command {
-    public static final String COMMAND_WORD = "deleteClaim";
+public class CloseClaimCommand extends Command {
+    public static final String COMMAND_WORD = "closeClaim";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes a claim from the insurance plan of the client identified "
-            + "by their client id. \n"
+            + ": Marks a claim tagged to an insurance plan of a client as [closed] \n"
             + "Parameters: INDEX (must be a positive integer) "
             + " INSURANCE_PLAN_ID (must be a valid ID), "
-            + " Claim_ID (must be a valid ID) \n"
+            + " ClAIM_ID (must be a valid ID) \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_INSURANCE_ID + " 0 "
             + PREFIX_CLAIM_ID + " B1234";
 
-    public static final String MESSAGE_DELETE_CLAIM_SUCCESS =
-            "Claim deleted from Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s";
+    public static final String MESSAGE_CLOSE_CLAIM_SUCCESS =
+            "Claim from Client: %1$s, under Insurance plan %2$s, with Claim ID: %3$s marked as closed";
 
     public final Index index;
     private final int insuranceId;
     private final String claimId;
 
     /**
-     * Constructs a DeleteClaimCommand object with the values passed in by the user.
+     * Constructs a CloseClaimCommand object with the values passed in by the user.
      *
-     * @param index       of the client in the filtered client list to add the claim to.
-     * @param insuranceId of insurance plan the claim is to be added to.
+     * @param index       of the client in the filtered client list whose claim to be marked as closed.
+     * @param insuranceId of insurance plan that contains the claim is to be marked as closed.
      * @param claimId     the claimID received when a claim is created through official channels.
      */
-    public DeleteClaimCommand(Index index, int insuranceId, final String claimId) {
+    public CloseClaimCommand(Index index, int insuranceId, final String claimId) {
         requireAllNonNull(index, insuranceId, claimId);
 
         this.index = index;
@@ -65,26 +64,26 @@ public class DeleteClaimCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 
-        Client clientToEdit = lastShownList.get(index.getZeroBased());
+        Client clientToCloseClaim = lastShownList.get(index.getZeroBased());
 
         try {
 
-            InsurancePlansManager clientToEditInsurancePlansManager = clientToEdit.getInsurancePlansManager();
+            InsurancePlansManager clientToEditInsurancePlansManager = clientToCloseClaim.getInsurancePlansManager();
             InsurancePlan planToBeUsed = clientToEditInsurancePlansManager.getInsurancePlan(insuranceId);
 
-            Claim claimToBeDeleted = planToBeUsed.getClaim(claimId);
-            clientToEditInsurancePlansManager.deleteClaimFromInsurancePlan(planToBeUsed, claimToBeDeleted);
+            Claim claimToBeMarkedAsClosed = planToBeUsed.getClaim(claimId);
+            claimToBeMarkedAsClosed.close();
 
-            Client clientWithDeletedClaim = lastShownList.get(index.getZeroBased());
-            model.setClient(clientToEdit, clientWithDeletedClaim);
+            Client clientWithClosedClaim = lastShownList.get(index.getZeroBased());
+            model.setClient(clientToCloseClaim, clientWithClosedClaim);
             model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-            return new CommandResult(String.format(MESSAGE_DELETE_CLAIM_SUCCESS, clientToEdit.getName().toString(),
+            return new CommandResult(String.format(MESSAGE_CLOSE_CLAIM_SUCCESS, clientToCloseClaim.getName().toString(),
                     planToBeUsed, claimId));
         } catch (ClaimException e) {
-            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), claimId, Messages.format(clientToCloseClaim)));
         } catch (InsurancePlanException e) {
-            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToEdit)));
+            throw new CommandException(String.format(e.getMessage(), insuranceId, Messages.format(clientToCloseClaim)));
         }
     }
 }
