@@ -19,7 +19,7 @@ public class AppointmentTest {
     public void appointmentAddTest() {
         Person testPerson = new PersonBuilder().build();
         LocalDateTime startTime = LocalDateTime.now();
-        LocalDateTime endTime = LocalDateTime.now();
+        LocalDateTime endTime = LocalDateTime.now().plusHours(1);
         Appointment testAppointment = new Appointment("test", testPerson.getNric(), startTime, endTime);
         testPerson.addAppointment(testAppointment);
 
