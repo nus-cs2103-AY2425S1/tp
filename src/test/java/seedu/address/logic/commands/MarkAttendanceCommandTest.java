@@ -164,6 +164,11 @@ public class MarkAttendanceCommandTest {
         }
 
         @Override
+        public void deleteAllStudents() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Student> getFilteredStudentList() {
             throw new AssertionError("This method should not be called.");
         }
