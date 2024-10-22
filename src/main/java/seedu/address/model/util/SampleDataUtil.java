@@ -47,11 +47,11 @@ public class SampleDataUtil {
     public static Event[] getSampleEvents() {
         return new Event[] {
             new Event(new EventName("CS2103T Tutorial"), new Time("2021-10-01 14:00"),
-                new Venue("Hall"), getSamplePersons()[0]),
+                new Venue("Hall"), getSamplePersons()[0], Arrays.asList(getSamplePersons())),
             new Event(new EventName("CS2103T Lecture"), new Time("2021-10-02 14:00"),
-                new Venue("LT1"), getSamplePersons()[1]),
+                new Venue("LT1"), getSamplePersons()[1], Arrays.asList(getSamplePersons())),
             new Event(new EventName("CS2103T Lab"), new Time("2021-10-03 14:00"),
-                new Venue("COM1-02-01"), getSamplePersons()[2]),
+                new Venue("COM1-02-01"), getSamplePersons()[2], Arrays.asList(getSamplePersons())),
         };
     }
 

@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,18 +25,21 @@ class JsonAdaptedEvent {
     private final String time;
     private final String venue;
     private final JsonAdaptedPerson celebrity;
+    private final List<JsonAdaptedPerson> contacts = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedEvent} with the given event details.
      */
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("name") String name, @JsonProperty("time") String time,
-                             @JsonProperty("venue") String venue,
-                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity) {
+                            @JsonProperty("venue") String venue,
+                            @JsonProperty("celebrity") JsonAdaptedPerson celebrity,
+                            @JsonProperty("contacts") List<JsonAdaptedPerson> contacts) {
         this.name = name;
         this.time = time;
         this.venue = venue;
         this.celebrity = celebrity;
+        this.contacts.addAll(contacts);
     }
 
     /**
@@ -43,6 +50,9 @@ class JsonAdaptedEvent {
         time = source.getTime().getTime();
         venue = source.getVenue().getVenue();
         celebrity = new JsonAdaptedPerson(source.getCelebrity());
+        contacts.addAll(source.getContacts().stream()
+                .map(JsonAdaptedPerson::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -51,6 +61,11 @@ class JsonAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event.
      */
     public Event toModelType() throws IllegalValueException {
+        final List<Person> eventContacts = new ArrayList<>();
+        for (JsonAdaptedPerson contact : contacts) {
+            eventContacts.add(contact.toModelType());
+        }
+
         if (name == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName())
@@ -73,7 +88,7 @@ class JsonAdaptedEvent {
         }
         final Person eventCelebrity = celebrity.toModelType();
 
-        return new Event(eventName, eventTime, eventVenue, eventCelebrity);
+        return new Event(eventName, eventTime, eventVenue, eventCelebrity, eventContacts);
     }
 
 }
