@@ -15,15 +15,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -154,7 +155,8 @@ public class CommandTestUtil {
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
         final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        HashSet<String> nameSet = new HashSet<>(Collections.singletonList(splitName[0]));
+        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(nameSet));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }

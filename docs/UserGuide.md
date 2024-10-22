@@ -124,23 +124,45 @@ Shows the total amount of tuition fee you have received from the students and th
 
 Format: `income`
 
-### Locating students by name: `find`
+### Finding students' information: `find`
 
-Finds students whose names contain any of the given keywords.
+Finds students whose names contain any of the given keywords or whose tuition day contains any of the given days.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Format: `find [n/KEYWORD [MORE_KEYWORDS]] [d/DAY [MORE_DAYS]]`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/alex` returns `Alex Yeoh` and `Alex Tan`
+* `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan`<br>
+  ![result for `find n/yeoh d/Friday`](images/findResult.png)
+
+<box type="important" header="#### Constraints">
+<markdown>
+* <b>DAY</b> must be one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+* <b>KEYWORD</b> must be only alphanumeric characters.
+* At least one of the optional fields must be provided.
+</markdown>
+</box>
+
+<box type="tip" header="#### Tips:">
+<markdown>
+* The search is case-insensitive. e.g. `alex` will match `Alex`
+* Only full words will be matched e.g. `alex` will not match `Alexander`
+* The order of the parameters does not matter. 
+<br/>e.g. `find d/Friday n/yeoh` will return the same result as `find n/yeoh d/Friday`
+* The search finds all the students whose 
+    1. names matches at least one of the keywords **OR** 
+    2. the tuition day matches the days.
+
+  e.g. `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan` because:
+
+* `Alex Yeoh` matches keyword `yeoh`
+* `Alex Tan` has a tuition on `Friday`.
+</markdown>
+</box>
+
+
+
+
 
 ### Deleting a student : `delete`
 
@@ -154,7 +176,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Receiving payment from a student : `pay`
 
@@ -167,9 +189,9 @@ Example:
     ![payResult.png](images/payResult.png)
 
 <box type="important" header="#### Constraints">
-
-    Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-
+<markdown>
+Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+</markdown>
 </box>
 
 ### Clearing all entries : `clear`
