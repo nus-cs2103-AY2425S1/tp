@@ -22,7 +22,7 @@ import seedu.address.model.predicate.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.predicate.StudentAttendedTutorialPredicate;
 import seedu.address.model.predicate.StudentHasPaidPredicate;
-import seedu.address.model.predicate.SubjectContainsKeywordsPredicate;
+import seedu.address.model.predicate.SubjectMatchesKeywordsPredicate;
 import seedu.address.model.predicate.TagContainsKeywordPredicate;
 
 /**
@@ -103,7 +103,7 @@ public class PredicateFactory {
         if (!argMultimap.getAllValues(PREFIX_SUBJECT).isEmpty()) {
             for (String eachSubjectWords : argMultimap.getAllValues(PREFIX_SUBJECT)) {
                 String trimmedSubject = ParserUtil.parseMultipleWordsFromFindCommand(eachSubjectWords);
-                predicates.add(new SubjectContainsKeywordsPredicate(trimmedSubject));
+                predicates.add(new SubjectMatchesKeywordsPredicate(trimmedSubject));
             }
         }
     }

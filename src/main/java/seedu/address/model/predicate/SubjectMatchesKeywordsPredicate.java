@@ -6,10 +6,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
-public class SubjectContainsKeywordsPredicate implements Predicate<Person> {
+public class SubjectMatchesKeywordsPredicate implements Predicate<Person> {
     private final String keyword;
 
-    public SubjectContainsKeywordsPredicate(String keyword) {
+    public SubjectMatchesKeywordsPredicate(String keyword) {
         this.keyword = keyword;
     }
 
@@ -26,11 +26,11 @@ public class SubjectContainsKeywordsPredicate implements Predicate<Person> {
             return true;
         }
 
-        if (!(other instanceof SubjectContainsKeywordsPredicate)) {
+        if (!(other instanceof SubjectMatchesKeywordsPredicate)) {
             return false;
         }
 
-        SubjectContainsKeywordsPredicate otherPredicate = (SubjectContainsKeywordsPredicate) other;
+        SubjectMatchesKeywordsPredicate otherPredicate = (SubjectMatchesKeywordsPredicate) other;
         return this.keyword.equals(otherPredicate.keyword);
     }
 
