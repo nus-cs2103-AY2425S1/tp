@@ -26,29 +26,29 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validSortByNameAscending_success() {
-        String userInput = generateSortNameInput(1);
-        SortCommand expectedCommand = SortCommand.sortByName(1);
+        String userInput = generateSortNameInput(SortCommand.ASCENDING);
+        SortCommand expectedCommand = SortCommand.sortByName(SortCommand.ASCENDING);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_validSortByNameDescending_success() {
-        String userInput = generateSortNameInput(-1);
-        SortCommand expectedCommand = SortCommand.sortByName(-1);
+        String userInput = generateSortNameInput(SortCommand.DESCENDING);
+        SortCommand expectedCommand = SortCommand.sortByName(SortCommand.DESCENDING);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_validSortByStudentIdAscending_success() {
-        String userInput = generateSortIdInput(1);
-        SortCommand expectedCommand = SortCommand.sortByStudentId(1);
+        String userInput = generateSortIdInput(SortCommand.ASCENDING);
+        SortCommand expectedCommand = SortCommand.sortByStudentId(SortCommand.ASCENDING);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_validSortByStudentIdDescending_success() {
-        String userInput = generateSortIdInput(-1);
-        SortCommand expectedCommand = SortCommand.sortByStudentId(-1);
+        String userInput = generateSortIdInput(SortCommand.DESCENDING);
+        SortCommand expectedCommand = SortCommand.sortByStudentId(SortCommand.DESCENDING);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -59,7 +59,7 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_multiplePrefixesProvided_failure() {
-        String userInput = generateSortNameInput(1) + " " + PREFIX_STUDENT_ID;
+        String userInput = generateSortNameInput(SortCommand.ASCENDING) + " " + PREFIX_STUDENT_ID;
         assertParseFailure(parser, userInput, MESSAGE_WRONG_NUM_OF_FIELDS);
     }
 

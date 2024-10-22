@@ -18,6 +18,8 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_WRONG_NUM_OF_FIELDS = "Exactly 1 field should be provided for sorting.";
     public static final String MESSAGE_NOT_SORTED = "The field to sort by must be provided.";
+    public static final Integer ASCENDING = 1;
+    public static final Integer DESCENDING = -1;
 
     public static final Comparator<Person> COMPARE_BY_NAME =
             Comparator.comparing(person -> person.getName().toString());
@@ -56,7 +58,7 @@ public class SortCommand extends Command {
      */
     public static SortCommand sortByName(Integer order) {
         requireNonNull(order);
-        boolean isAscendingOrder = (order == 1);
+        boolean isAscendingOrder = (order.equals(ASCENDING));
         return new SortCommand(COMPARE_BY_NAME, isAscendingOrder);
     }
 
@@ -67,7 +69,7 @@ public class SortCommand extends Command {
      */
     public static SortCommand sortByStudentId(Integer order) {
         requireNonNull(order);
-        boolean isAscendingOrder = (order == 1);
+        boolean isAscendingOrder = (order.equals(ASCENDING));
         return new SortCommand(COMPARE_BY_ID, isAscendingOrder);
     }
 
@@ -83,6 +85,8 @@ public class SortCommand extends Command {
         } else if (this.sortingComparator == COMPARE_BY_ID) {
             return "Sorted by Student Id in " + order + " order.";
         } else {
+            // This line should never be reached if the logic is correct.
+            assert false : "Unknown comparator used.";
             return "";
         }
     }
