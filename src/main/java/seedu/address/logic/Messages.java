@@ -31,6 +31,7 @@ public class Messages {
     public static final String MESSAGE_NO_STUDENTS_FOUND = "No students found matching the criteria.";
     public static final String MESSAGE_EVENT_NOT_FOUND = "Attendance event '%1$s' not found.";
 
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
