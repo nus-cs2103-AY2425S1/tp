@@ -53,10 +53,7 @@ public class PasswordManager {
         try {
             File file = new File(PASSWORD_FILE);
             // Create a new file if it doesn't exist
-            if (file.createNewFile()) {
-                // Optionally log that a new file was created
-                System.out.println("Created new password file: " + PASSWORD_FILE);
-            }
+            file.createNewFile();
 
             // Write the hashed password to the file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
