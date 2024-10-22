@@ -28,11 +28,11 @@ VolunSync is a **desktop app for keeping track of volunteers and volunteering ev
    * `reset` : Lists all volunteers and events in the VolunSync database.
 
    * `/v new n/ John Doe p/ 91234567 em/ john@gmail.com d/ 2024-02-02 s/ 00:10 e/ 23:59` : Creates a new record for a volunteer named `John Doe` to the VolunSync database.
-   
+
    * `/v del 3` : Deletes the third volunteer on the list of volunteers.
 
    * `/e new n/ Coding Exam s/ 19:00 e/ 21:00 d/ 2024-12-12 l/ LT 28` : Creates a new record for an event named `Coding Exam` to the VolunSync database.
-   
+
    * `/e del 3` : Deletes the third event from the list of events.
 
    * `reset` : Displays all volunteers and events in the database.
@@ -97,7 +97,7 @@ Shows a list of all volunteers and events in the database.
 
 Format: `reset`
 
-Examples: 
+Examples:
 * `view e/ 1` followed by `reset` causes the volunteer and event lists to display all volunteers and events respectively.
 
 ### Locating volunteers by name : `/v find`
@@ -139,7 +139,7 @@ Format: `/v del VOLUNTEER_INDEX`
 * The index **must be a non-negative integer** 1, 2, 3, …​
 
 <div markdown="span" class="alert alert-primary">:bulb: **Note:**
-Deleting a volunteer removes the volunteer from the list of participants of all events which the volunteer 
+Deleting a volunteer removes the volunteer from the list of participants of all events which the volunteer
 is involved in.
 </div>
 
@@ -152,7 +152,7 @@ Deletes the specified event from the database.
 
 Format: `/e del EVENT_INDEX`
 
-* Deletes the event with the specified `EVENT_INDEX`. 
+* Deletes the event with the specified `EVENT_INDEX`.
 * The index refers to the number before the event's name in the displayed event list.
 * The index **must be a non-negative integer** 1, 2, 3, …​
 
