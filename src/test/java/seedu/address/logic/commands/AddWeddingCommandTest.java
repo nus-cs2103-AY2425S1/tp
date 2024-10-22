@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 public class AddWeddingCommandTest {
 
@@ -29,7 +30,7 @@ public class AddWeddingCommandTest {
 
         CommandResult commandResult = addWeddingCommand.execute(model);
 
-        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, validWedding.getName()),
+        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, validWedding.getWeddingName()),
                 commandResult.getFeedbackToUser());
     }
 
@@ -46,8 +47,8 @@ public class AddWeddingCommandTest {
 
     @Test
     public void equals() {
-        Wedding wedding1 = new Wedding("Wedding1", "12/12/2024");
-        Wedding wedding2 = new Wedding("Wedding2", "13/12/2024");
+        Wedding wedding1 = new Wedding(new WeddingName("Wedding1"), "12/12/2024");
+        Wedding wedding2 = new Wedding(new WeddingName("Wedding2"), "13/12/2024");
 
         AddWeddingCommand addWeddingCommand1 = new AddWeddingCommand(wedding1);
         AddWeddingCommand addWeddingCommand2 = new AddWeddingCommand(wedding2);

@@ -5,14 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * A utility class containing a list of {@code Wedding} objects to be used in tests.
  */
 public class TypicalWeddings {
 
-    public static final Wedding WEDDING_ONE = new Wedding("John and Jane Wedding", "12/12/2024");
-    public static final Wedding WEDDING_TWO = new Wedding("Mike and Anna Wedding", "13/01/2025");
+    public static final Wedding WEDDING_ONE = new Wedding(new WeddingName("John and Jane Wedding"), "12/12/2024");
+    public static final Wedding WEDDING_TWO = new Wedding(new WeddingName("Mike and Anna Wedding"), "13/01/2025");
 
     private TypicalWeddings() {}
 

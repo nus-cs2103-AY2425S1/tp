@@ -30,12 +30,12 @@ public class AddWeddingCommandParserTest {
 
         Wedding resultWedding = resultCommand.getWedding();
 
-        LocalDate resultDate = LocalDate.parse(resultWedding.getDate());
+        LocalDate resultDate = LocalDate.parse(resultWedding.getWeddingDate());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedResultDate = resultDate.format(formatter);
 
-        assertEquals(expectedWedding.getName(), resultWedding.getName());
-        assertEquals(expectedWedding.getDate(), formattedResultDate);
+        assertEquals(expectedWedding.getWeddingName(), resultWedding.getWeddingName());
+        assertEquals(expectedWedding.getWeddingDate(), formattedResultDate);
     }
 
     @Test
