@@ -62,7 +62,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
     public static final String MESSAGE_DUPLICATE_MODULE = "New module already exists in the person's module list.";
-
+    public static final String MESSAGE_MODULE_NOT_FOUND = "Old module not found in the person's module list.";
     private final StudentId studentId;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -120,7 +120,6 @@ public class EditCommand extends Command {
             Module newModule = editPersonDescriptor.newModule;
 
             boolean isModuleRenamed = false;
-
             if (updatedModules.stream().anyMatch(m -> m.value.equals(newModule.value))) {
                 throw new CommandException(EditCommand.MESSAGE_DUPLICATE_MODULE);
             }
@@ -138,7 +137,7 @@ public class EditCommand extends Command {
             }
 
             if (!isModuleRenamed) {
-                throw new CommandException("Old module not found in the person's module list.");
+                throw new CommandException(MESSAGE_MODULE_NOT_FOUND);
             }
         }
 

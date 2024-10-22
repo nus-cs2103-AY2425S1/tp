@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -19,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -38,6 +40,20 @@ public class EditCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    @Test
+    public void execute_editModuleOldModuleNotFound_throwsCommandException() {
+        Person originalPerson = TypicalPersons.BENSON;
+        Module oldModule = new Module("CS1111");
+        Module newModule = new Module("CS1231S");
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.setModuleChanges(oldModule, newModule);
+
+        EditCommand editCommand = new EditCommand(originalPerson.getStudentId(), descriptor);
+
+        String expectedMessage = EditCommand.MESSAGE_MODULE_NOT_FOUND;
+        assertThrows(CommandException.class, () -> editCommand.execute(model), expectedMessage);
+    }
     @Test
     public void execute_editModuleWithoutGrade_success() throws Exception {
         Person originalPerson = TypicalPersons.BENSON;
