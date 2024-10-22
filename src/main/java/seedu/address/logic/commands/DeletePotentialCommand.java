@@ -18,11 +18,6 @@ public class DeletePotentialCommand extends DeleteCommand {
 
     public static final String COMMAND_TYPE = "ph";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the potential hire (ph) identified by the index number used in the potential hire list.\n"
-            + "Parameters: ph INDEX\n"
-            + "Example: " + COMMAND_WORD + " ph 2";
-
     /**
      * @param targetIndex of the person in the displayed list to delete.
      */
