@@ -13,6 +13,7 @@ import keycontacts.commons.util.ToStringBuilder;
  * {@link keycontacts.model.lesson.Day#isValidDay(String)}.
  */
 public class RegularLesson extends Lesson {
+    public static final String MESSAGE_NO_REGULAR_LESSON = "No regular lesson scheduled";
 
     private final Day lessonDay;
 

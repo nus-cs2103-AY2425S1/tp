@@ -3,19 +3,18 @@ package keycontacts.model.student;
 import static java.util.Objects.requireNonNull;
 import static keycontacts.commons.util.AppUtil.checkArgument;
 
-import keycontacts.model.pianopiece.PianoPiece;
-
 /**
  * Represents a Student's group in the student directory.
  * Guarantees: immutable; is valid as declared in {@link #isValidGroupName(String)}
  */
 public class Group {
+    public static final String NO_GROUP_STRING = "";
     public static final String MESSAGE_CONSTRAINTS = "Group name should not be empty";
     /*
-     * The first character of the group name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Group name is either an empty string (representing no group), or
+     * the first character of the group name must not be a whitespace,
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "^$|^[^\\s].*";
 
     public final String groupName;
 
@@ -31,10 +30,34 @@ public class Group {
     }
 
     /**
-     * Returns true if a given string is a valid piano piece name.
+     * Returns true if a given string is a valid group name.
      */
     public static boolean isValidGroupName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Checks if two groups are the same groups. Handles case where the group name is {@link #NO_GROUP_STRING}.
+     */
+    public boolean isSameGroup(Group otherGroup) {
+        // same instance
+        if (otherGroup == this) {
+            return true;
+        }
+
+        // this group is a NO_GROUP -> i.e. this student is not in any group
+        if (isNoGroup()) {
+            return false;
+        }
+
+        return otherGroup.groupName.equals(groupName);
+    }
+
+    /**
+     * Returns true if the group represents a NoGroup, false otherwise
+     */
+    public boolean isNoGroup() {
+        return groupName.equals(NO_GROUP_STRING);
     }
 
     @Override
@@ -44,7 +67,7 @@ public class Group {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PianoPiece)) {
+        if (!(other instanceof Group)) {
             return false;
         }
 

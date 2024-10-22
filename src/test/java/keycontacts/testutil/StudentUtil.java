@@ -4,6 +4,7 @@ import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_DAY;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_START_TIME;
@@ -47,6 +48,7 @@ public class StudentUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getGradeLevel().ifPresent(gradeLevel -> sb.append(PREFIX_GRADE_LEVEL).append(gradeLevel.value)
             .append(" "));
+        descriptor.getGroup().ifPresent(group -> sb.append(PREFIX_GROUP).append(group.groupName).append(" "));
         return sb.toString();
     }
 

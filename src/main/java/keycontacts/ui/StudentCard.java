@@ -52,6 +52,8 @@ public class StudentCard extends UiPart<Region> {
     private Label pianoPieces;
     @FXML
     private Label makeupLessons;
+    @FXML
+    private Label group;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to
@@ -65,13 +67,14 @@ public class StudentCard extends UiPart<Region> {
         phone.setText(student.getPhone().value);
         address.setText(student.getAddress().value);
         gradeLevel.setText(student.getGradeLevel().value);
+        group.setText(student.getGroup().groupName);
         regularLesson.setText(student.getRegularLessonDisplay());
         pianoPieces.setText(student.getPianoPieces().stream()
                 .sorted(Comparator.comparing(pianoPiece -> pianoPiece.pianoPieceName))
                 .map(pianoPiece -> pianoPiece.pianoPieceName)
                 .collect(Collectors.joining(", ")));
         cancelledLessons.setText(formatCancelledLessons(student));
-        makeupLessons.setText(formatMakeupLessons(student));
+        makeupLessons.setText(formatMakeupLessons(student));;
     }
 
     /**

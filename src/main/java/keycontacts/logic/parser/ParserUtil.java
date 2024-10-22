@@ -15,6 +15,7 @@ import keycontacts.model.lesson.Time;
 import keycontacts.model.pianopiece.PianoPiece;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 
@@ -167,5 +168,17 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses {@code String group} into a {@code Group}
+     */
+    public static Group parseGroup(String group) throws ParseException {
+        requireNonNull(group);
+        String trimmedGroup = group.trim();
+        if (!Group.isValidGroupName(trimmedGroup)) {
+            throw new ParseException(Group.MESSAGE_CONSTRAINTS);
+        }
+        return new Group(trimmedGroup);
     }
 }

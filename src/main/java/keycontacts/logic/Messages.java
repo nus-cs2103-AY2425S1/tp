@@ -44,6 +44,9 @@ public class Messages {
                 .append(student.getAddress())
                 .append("; Grade Level: ")
                 .append(student.getGradeLevel());
+        if (!student.getGroup().isNoGroup()) {
+            builder.append("; Group: ").append(student.getGroup());
+        }
         return builder.toString();
     }
 

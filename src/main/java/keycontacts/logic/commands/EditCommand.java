@@ -19,6 +19,7 @@ import keycontacts.logic.commands.exceptions.CommandException;
 import keycontacts.model.Model;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -115,6 +116,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Address address;
         private GradeLevel gradeLevel;
+        private Group group;
 
         public EditStudentDescriptor() {}
 
@@ -126,13 +128,14 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setAddress(toCopy.address);
             setGradeLevel(toCopy.gradeLevel);
+            setGroup(toCopy.group);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, address, gradeLevel);
+            return CollectionUtil.isAnyNonNull(name, phone, address, gradeLevel, group);
         }
 
         public void setName(Name name) {
@@ -167,6 +170,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(gradeLevel);
         }
 
+        public void setGroup(Group group) {
+            this.group = group;
+        }
+
+        public Optional<Group> getGroup() {
+            return Optional.ofNullable(group);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -182,7 +193,8 @@ public class EditCommand extends Command {
             return Objects.equals(name, otherEditPersonDescriptor.name)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(gradeLevel, otherEditPersonDescriptor.gradeLevel);
+                    && Objects.equals(gradeLevel, otherEditPersonDescriptor.gradeLevel)
+                    && Objects.equals(group, otherEditPersonDescriptor.group);
         }
 
         @Override
@@ -192,6 +204,7 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("address", address)
                     .add("gradeLevel", gradeLevel)
+                    .add("group", group)
                     .toString();
         }
     }

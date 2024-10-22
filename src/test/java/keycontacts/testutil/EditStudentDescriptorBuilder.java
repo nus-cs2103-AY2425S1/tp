@@ -3,6 +3,7 @@ package keycontacts.testutil;
 import keycontacts.logic.commands.EditCommand.EditStudentDescriptor;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -31,6 +32,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setPhone(student.getPhone());
         descriptor.setAddress(student.getAddress());
         descriptor.setGradeLevel(student.getGradeLevel());
+        descriptor.setGroup(student.getGroup());
     }
 
     /**
@@ -62,6 +64,14 @@ public class EditStudentDescriptorBuilder {
      */
     public EditStudentDescriptorBuilder withGradeLevel(String gradeLevel) {
         descriptor.setGradeLevel(new GradeLevel(gradeLevel));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Group} of the {@code EditStudentDescriptor} that we are building.
+     */
+    public EditStudentDescriptorBuilder withGroup(String group) {
+        descriptor.setGroup(new Group(group));
         return this;
     }
 
