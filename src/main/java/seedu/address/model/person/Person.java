@@ -86,7 +86,7 @@ public class Person {
      */
     public int getDeliveryListSize() {
         return deliveryList.size();
-        }
+    }
 
     /**
      * Sets the delivery list of this person.
