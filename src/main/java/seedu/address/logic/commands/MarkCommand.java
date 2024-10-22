@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,12 +27,6 @@ public class MarkCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + "tut/1";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Tutorial: %2$s";
-
-    public static final String MESSAGE_MARK_SUCCESS = "Marked present in Tutorial: %2$s for Person: %1$s";
-    public static final String MESSAGE_MARK_UNNECESSARY =
-            "Person: %1$s is already marked as present for Tutorial: %2$s";
-
     private final Index index;
     private final Tutorial tutorial;
 
@@ -44,24 +39,19 @@ public class MarkCommand extends Command {
         this.tutorial = tutorial;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        List<Person> currDisplayedList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= currDisplayedList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        Person personToEdit = currDisplayedList.get(index.getZeroBased());
+    /**
+     * @param personToEdit person whose attendance will be marked
+     * @param tutorial tutorial to mark attendance for
+     */
+    private Person generateMarkedPerson(Person personToEdit, Tutorial tutorial) throws CommandException {
         Map<Tutorial, AttendanceStatus> newTutorials = new LinkedHashMap<>(personToEdit.getTutorials());
         if (newTutorials.get(tutorial) == AttendanceStatus.PRESENT) {
             throw new CommandException(
-                    String.format(MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
+                    String.format(Messages.MESSAGE_MARK_UNNECESSARY, Messages.format(personToEdit), tutorial.tutorial));
         }
-
         newTutorials.put(tutorial, AttendanceStatus.PRESENT);
 
-        Person editedPerson = new Person(
+        return new Person(
                 personToEdit.getName(),
                 personToEdit.getStudentId(),
                 personToEdit.getPhone(),
@@ -69,10 +59,20 @@ public class MarkCommand extends Command {
                 personToEdit.getTags(),
                 newTutorials
         );
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+    }
 
-        return new CommandResult(generateSuccessMessage(editedPerson));
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        List<Person> currDisplayedList = model.getFilteredPersonList();
+        List<Person> personToEditList = CommandUtil.filterPersonsByIndex(currDisplayedList, index);
+        List<Person> editedPersonList = new ArrayList<>();
+        for (Person personToEdit : personToEditList) {
+            Person editedPerson = this.generateMarkedPerson(personToEdit, this.tutorial);
+            editedPersonList.add(editedPerson);
+            model.setPerson(personToEdit, editedPerson);
+        }
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPersonList));
     }
 
     /**
@@ -80,8 +80,11 @@ public class MarkCommand extends Command {
      * the remark is added to or removed from
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_MARK_SUCCESS, Messages.format(personToEdit), tutorial.tutorial);
+    private String generateSuccessMessage(List<Person> personListToEdit) {
+        return String.join("\n", personListToEdit.stream()
+                .map(personToEdit -> String.format(Messages.MESSAGE_MARK_SUCCESS,
+                        Messages.format(personToEdit), tutorial.tutorial))
+                .toArray(String[]::new));
     }
 
     @Override
