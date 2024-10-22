@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+<<<<<<< Updated upstream
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -22,6 +23,9 @@ import seedu.address.logic.commands.ListTagsCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
+=======
+import seedu.address.logic.commands.*;
+>>>>>>> Stashed changes
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -90,6 +94,10 @@ public class AddressBookParser {
             return new HelpCommand();
         case SortCommand.COMMAND_WORD:
             return new SortCommand();
+        case AddWeddingCommand.COMMAND_WORD:
+            return new AddWeddingCommandParser().parse(arguments);
+        case AssignContactToWeddingCommand.COMMAND_WORD:
+            return new AssignContactToWeddingCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
