@@ -130,8 +130,10 @@ public class StringUtilTest {
         assertFalse(StringUtil.containsMultipleWordsIgnoreCase("    ", "123"));
 
         // Matches a partial word only
-        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
-        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+        // Sentence word bigger than query word
+        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "bb"));
+        // Query word bigger than sentence word
+        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "bbbb"));
 
         // Matches sentence, different upper/lower case letters
         assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "aaa bbb ccc"));

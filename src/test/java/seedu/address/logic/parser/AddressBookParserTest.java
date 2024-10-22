@@ -81,7 +81,7 @@ public class AddressBookParserTest {
         //Find command using specific predicate
         List<String> specificKeywords = Arrays.asList("foo bar baz");
         FindCommand specificCommand = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " "  + FindCommand.SPECIFIC_FIND_PREFIX
+                FindCommand.COMMAND_WORD + " " + FindCommand.SPECIFIC_FIND_PREFIX
                         + specificKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new ContainsSpecificKeywordsPredicate(specificKeywords)), specificCommand);
     }
