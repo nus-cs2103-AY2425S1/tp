@@ -31,14 +31,20 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RenameTagCommand;
 import seedu.address.logic.commands.RestoreCommand;
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.ScheduleCommand.ScheduleDescriptor;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.ScheduleBuilder;
+import seedu.address.testutil.ScheduleDescriptorBuilder;
+import seedu.address.testutil.ScheduleUtil;
 
 public class AddressBookParserTest {
 
@@ -92,6 +98,15 @@ public class AddressBookParserTest {
         FilterCommand command = (FilterCommand) parser.parseCommand(
                 FilterCommand.COMMAND_WORD + " " + PREFIX_TAG + "friends");
         assertEquals(new FilterCommand(new Tag("friends")), command);
+    }
+
+    @Test
+    public void parseCommand_schedule() throws Exception {
+        Schedule schedule = new ScheduleBuilder().build();
+        ScheduleDescriptor descriptor = new ScheduleDescriptorBuilder(schedule).build();
+        ScheduleCommand command = (ScheduleCommand) parser.parseCommand(ScheduleCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ScheduleUtil.getScheduleDescriptorDetails(descriptor));
+        assertEquals(new ScheduleCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
