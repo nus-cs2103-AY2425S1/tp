@@ -27,33 +27,25 @@ public class EditCommandParser implements Parser<EditCommand<?>> {
         requireNonNull(args);
 
         String trimmedArgs = args.trim();
-        String[] splitArgs = trimmedArgs.split("\\s+");
-
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
+
+        String entityType = trimmedArgs.substring(0, 1);
+        String arguments = trimmedArgs.substring(1);
+
+        String[] splitArgs = arguments.split("\\s+");
+
+
         if (splitArgs.length < 2) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        String entityType = splitArgs[0]; // OWNER or PET
-        // Combine strings from index 1 to the end
-        StringBuilder combinedString = new StringBuilder();
-        for (int i = 1; i < splitArgs.length; i++) {
-            combinedString.append(splitArgs[i]);
-            if (i < splitArgs.length - 1) {
-                combinedString.append(" "); // Add a space between words
-            }
-        }
-
-        // Convert StringBuilder to String
-        String newArgs = combinedString.toString();
 
         switch (entityType.toLowerCase()) {
-        case "owner":
-            return parseOwnerEdit(newArgs);
+        case "o":
+            return parseOwnerEdit(trimmedArgs.substring(1));
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }

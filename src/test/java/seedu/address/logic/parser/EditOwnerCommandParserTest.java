@@ -44,7 +44,7 @@ public class EditOwnerCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditOwnerCommand.MESSAGE_USAGE);
-    private static final String MESSAGE_ENTITY = "owner" + " ";
+    private static final String MESSAGE_ENTITY = "o";
 
     private EditCommandParser parser = new EditCommandParser();
 

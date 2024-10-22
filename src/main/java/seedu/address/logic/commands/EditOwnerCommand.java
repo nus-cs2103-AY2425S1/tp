@@ -22,7 +22,7 @@ import seedu.address.model.owner.Phone;
  * Edits the details of an existing owner in the address book.
  */
 public class EditOwnerCommand extends EditCommand<Owner> {
-    public static final String COMMAND_WORD = "edit owner";
+    public static final String COMMAND_WORD = "edit o";
 
     public static final String MESSAGE_EDIT_OWNER_SUCCESS = "Edited Owner: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
