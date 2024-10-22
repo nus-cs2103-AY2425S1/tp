@@ -28,7 +28,7 @@
         <StackPane style="-fx-background-color: #D2C0BD;">
           <HBox>
             <Label text="EduTuTu 🎓" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: black; -fx-padding: 10px;" />
-            <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS" style="-fx-alignment: center-right;">
+            <MenuBar fx:id="menuBar" HBox.hgrow="ALWAYS" style="-fx-alignment: center-right; -fx-padding: 10px;">
               <Menu mnemonicParsing="false" text="File">
                 <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
               </Menu>
