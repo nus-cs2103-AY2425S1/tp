@@ -13,15 +13,15 @@ import seedu.address.model.tag.Tag;
 
 public class PersonHasTagPredicateTest {
     private PersonHasFeaturePredicate highTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
     private PersonHasFeaturePredicate lowTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_LOW_RISK), null, null, null);
 
     private PersonHasFeaturePredicate mediumTagOnlyPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null);
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_MEDIUM_RISK), null, null, null);
 
     private PersonHasFeaturePredicate phoneAndTagPredicate =
-          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value));
+          new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value), null, null);
 
     @Test
     public void equals() {
@@ -31,7 +31,7 @@ public class PersonHasTagPredicateTest {
 
         // same values -> returns true
         PersonHasFeaturePredicate firstPredicateCopy =
-              new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null);
+              new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), null, null, null);
         assertTrue(highTagOnlyPredicate.equals(firstPredicateCopy));
 
         //same values for tag and phone
@@ -54,7 +54,8 @@ public class PersonHasTagPredicateTest {
 
 
         PersonHasFeaturePredicate phoneAndTagPredicate =
-              new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK), new Phone(ALICE.getPhone().value));
+              new PersonHasFeaturePredicate(new Tag(VALID_TAG_HIGH_RISK),
+                      new Phone(ALICE.getPhone().value), null, null);
         assertTrue(highTagOnlyPredicate.test(ALICE));
 
 
