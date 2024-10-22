@@ -102,7 +102,7 @@ within the tuition centre will be allowed. Subjects are case-insensitive (i.e. s
 as the same).
 
 Examples:
-* `add n/John Doe p/81003999 e/johndoe@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
+* `add n/Sam Tan p/81003999 e/samtan@gmail.com a/9 Smith Street i/T3848559A yg/3 s/Science`
 
 ![Add Success Message](/images/add.png)
 
