@@ -4,6 +4,11 @@ h2, h3, h4, h5, h6 {
   color: #e46c0a;
 }
 
+h2 {
+    border-top: 2px #6c757d solid;
+    padding-top: 1em;
+}
+
 // Bootstrap style alerts
 .alert {
   position: relative;
