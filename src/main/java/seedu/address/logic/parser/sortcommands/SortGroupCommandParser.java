@@ -7,12 +7,12 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new SortStudentCommand object.
+ * Parses input arguments and creates a new SortGroupCommand object.
  */
 public class SortGroupCommandParser implements Parser<SortGroupCommand> {
 
     /**
-     * Parses the given {@code String} of arguments and returns an SortStudentCommand object for execution.
+     * Parses the given {@code String} of arguments and returns a SortGroupCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format.
      */
