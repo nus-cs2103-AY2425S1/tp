@@ -73,16 +73,12 @@ public class AddClaimCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Policy> policySet = personToEdit.getPolicies();
 
-        System.out.println("Person at index: " + personToEdit.getName());
-        System.out.println("Policies: " + policySet);
-
         // find the policy based on the policyType
         Policy policy = policySet.stream()
                 .filter(p -> p.getType().equals(policyType))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_POLICY_NOT_FOUND));
 
-        System.out.println("Policy found: " + policy.getType());
         ClaimSet claimSet = policy.getClaimSet();
         if (!claimSet.add(claim)) {
             throw new CommandException(MESSAGE_CLAIM_EXISTS);
