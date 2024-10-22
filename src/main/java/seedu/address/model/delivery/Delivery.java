@@ -49,7 +49,15 @@ public class Delivery {
     /**
      * Every field must be present and not null.
      */
-    public Delivery(Set<ItemName> items, Address address, Cost cost, Eta eta, Status status, Set<Tag> tags, Archive archive) {
+    public Delivery(
+        Set<ItemName> items,
+        Address address,
+        Cost cost,
+        Eta eta,
+        Status status,
+        Set<Tag> tags,
+        Archive archive
+    ) {
         this(new DeliveryId(), items, address, cost, new Date(LocalDate.now().toString()),
                 new Time(LocalTime.now().toString()), eta, status, tags, archive);
     }
