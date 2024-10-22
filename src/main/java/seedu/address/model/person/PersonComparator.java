@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddCommandParser;
 
 import java.util.Comparator;
 
@@ -15,7 +13,7 @@ public class PersonComparator {
     public static final String EMAIL = "email";
     public static final String ADDRESS = "address";
     public static final String DATE_OF_LAST_VISIT = "dateoflastvisit";
-    public static final String LARGE_UNICODE = "ض";
+    public static final String LATEST_VALID_DATE = "31-12-9999";
     private static final String SORT_EXCEPTION = "The specified parameter is invalid.";
 
     public PersonComparator() {
@@ -54,7 +52,12 @@ public class PersonComparator {
 
 }
 
+/**
+ * Represents a comparator for comparing persons full name (case-insensitive)
+ * in ascending order.
+ */
 class PersonNameComparator implements Comparator<Person> {
+    @Override
     public int compare(Person p1, Person p2) {
         return p1.getName().fullName.toLowerCase().compareTo(p2.getName().fullName.toLowerCase());
     }
@@ -68,21 +71,27 @@ class PersonPhoneComparator implements Comparator<Person> {
 
 class PersonAddressComparator implements Comparator<Person> {
     public int compare(Person p1, Person p2) {
-        return p1.getAddress().orElse(new Address(PersonComparator.LARGE_UNICODE)).value
-                .compareTo(p2.getAddress().orElse(new Address(PersonComparator.LARGE_UNICODE)).value);
+        return p1.getAddress().orElse(new Address(PersonComparator.LATEST_VALID_DATE)).value
+                .compareTo(p2.getAddress().orElse(new Address(PersonComparator.LATEST_VALID_DATE)).value);
     }
 }
 
 class PersonEmailComparator implements Comparator<Person> {
     public int compare(Person p1, Person p2) {
-        return p1.getEmail().orElse(new Email(PersonComparator.LARGE_UNICODE)).value
-                .compareTo(p2.getEmail().orElse(new Email(PersonComparator.LARGE_UNICODE)).value);
+        return p1.getEmail().orElse(new Email(PersonComparator.LATEST_VALID_DATE)).value
+                .compareTo(p2.getEmail().orElse(new Email(PersonComparator.LATEST_VALID_DATE)).value);
     }
 }
 
+/**
+ * Represents a class for comparing persons by DateOfLastVisit.
+ * Where the person has no date of last visit they will be in the back
+ * of the list given ascending order.
+ */
 class PersonDateOfLastVisitComparator implements Comparator<Person> {
+    @Override
     public int compare(Person p1, Person p2) {
-        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LARGE_UNICODE)).value
-                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LARGE_UNICODE)).value);
+        return p1.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)).value
+                .compareTo(p2.getDateOfLastVisit().orElse(new DateOfLastVisit(PersonComparator.LATEST_VALID_DATE)).value);
     }
 }
