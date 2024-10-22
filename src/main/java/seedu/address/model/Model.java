@@ -95,4 +95,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Undo the previous actions of users
+     */
+    void undoCampusConnect();
+
+    /**
+     * Save current state of model before execution.
+     */
+    void saveCurrentCampusConnect();
 }
