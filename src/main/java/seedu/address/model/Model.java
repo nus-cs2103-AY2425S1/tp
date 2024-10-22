@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -105,6 +106,15 @@ public interface Model {
      */
     boolean hasConsult(Consultation consult);
 
-    /** Returns an unmodifiable view of the consult list */
-    ObservableList<Consultation> getConsultList();
+    /**
+     * Returns an unmodifiable view of the filtered consultation list.
+     */
+    ObservableList<Consultation> getFilteredConsultationList();
+
+    /**
+     * Finds a student by their name.
+     * @param name The name of the student to search for.
+     * @return An Optional containing the student if found, or empty if not.
+     */
+    Optional<Student> findStudentByName(seedu.address.model.student.Name name);
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -23,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
-    private final FilteredList<Consultation> filteredConsults;
+    private final FilteredList<Consultation> filteredConsultations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,7 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
-        filteredConsults = new FilteredList<>(this.addressBook.getConsultList());
+        filteredConsultations = new FilteredList<>(this.addressBook.getConsultList());
     }
 
     public ModelManager() {
@@ -110,16 +112,11 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         addressBook.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Student List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
@@ -131,24 +128,20 @@ public class ModelManager implements Model {
         filteredStudents.setPredicate(predicate);
     }
 
+    //=========== Consultation Methods =============================================================
+
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
-            return false;
-        }
-
-        ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
-                && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+    public ObservableList<Consultation> getFilteredConsultationList() {
+        return filteredConsultations; // Return the filtered consultations list
     }
 
-    // ========== Consultation Commands ==========
+    @Override
+    public Optional<Student> findStudentByName(Name name) {
+        requireNonNull(name);
+        return filteredStudents.stream()
+                .filter(student -> student.getName().equals(name))
+                .findFirst(); // Find and return the student by name
+    }
 
     @Override
     public void addConsult(Consultation consult) {
@@ -166,8 +159,19 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Consultation> getConsultList() {
-        return filteredConsults;
-    }
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
 
+        if (!(other instanceof ModelManager)) {
+            return false;
+        }
+
+        ModelManager otherModelManager = (ModelManager) other;
+        return addressBook.equals(otherModelManager.addressBook)
+                && userPrefs.equals(otherModelManager.userPrefs)
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredConsultations.equals(otherModelManager.filteredConsultations);
+    }
 }
