@@ -39,6 +39,7 @@ public class AddressTest {
     public void equals() {
         Address address = new Address("Valid Address");
         Address emptyAddress = new Address(null);
+        Address emptyAddress2 = new Address(null);
 
         // same values -> returns true
         assertTrue(address.equals(new Address("Valid Address")));
@@ -57,6 +58,8 @@ public class AddressTest {
 
         // empty address -> equals address with null value
         assertTrue(emptyAddress.equals(new Address(null)));
+
+        assertTrue(emptyAddress.equals(emptyAddress2));
     }
 
     @Test
