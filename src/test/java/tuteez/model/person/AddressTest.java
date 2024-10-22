@@ -22,6 +22,8 @@ public class AddressTest {
 
     @Test
     public void isValidAddress() {
+        // null address
+        assertTrue(Address.isValidAddress(null));
 
         // invalid addresses
         assertFalse(Address.isValidAddress("")); // empty string
@@ -55,5 +57,23 @@ public class AddressTest {
 
         // empty address -> equals address with null value
         assertTrue(emptyAddress.equals(new Address(null)));
+    }
+
+    @Test
+    public void toString_validAddress_returnsAddressString() {
+        Address address = new Address("Valid Address");
+        assertEquals(address.toString(), "Valid Address");
+    }
+
+    @Test
+    public void toString_emptyAddress_returnsEmptyString() {
+        Address emptyAddress = new Address(null);
+        assertEquals(emptyAddress.toString(), "");
+    }
+
+    @Test
+    public void hashCode_emptyAddress_returnsZero() {
+        Address emptyAddress = new Address(null);
+        assertEquals(emptyAddress.hashCode(), 0);
     }
 }

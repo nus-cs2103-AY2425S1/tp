@@ -22,6 +22,8 @@ public class EmailTest {
 
     @Test
     public void isValidEmail() {
+        // null email
+        assertTrue(Email.isValidEmail(null));
 
         // blank email
         assertFalse(Email.isValidEmail("")); // empty string
@@ -88,4 +90,23 @@ public class EmailTest {
         // empty email -> equals email with null value
         assertTrue(emptyEmail.equals(new Email(null)));
     }
+
+    @Test
+    public void toString_validEmail_returnsEmailString() {
+        Email email = new Email("valid@email");
+        assertEquals(email.toString(), "valid@email");
+    }
+
+    @Test
+    public void toString_emptyEmail_returnsEmptyString() {
+        Email emptyEmail = new Email(null);
+        assertEquals(emptyEmail.toString(), "");
+    }
+
+    @Test
+    public void hashCode_emptyEmail_returnsZero() {
+        Email emptyEmail = new Email(null);
+        assertEquals(emptyEmail.hashCode(), 0);
+    }
+
 }
