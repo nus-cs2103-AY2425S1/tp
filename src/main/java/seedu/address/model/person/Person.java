@@ -90,6 +90,9 @@ public class Person {
         }
     }
 
+    public AttendanceStatus getAttendanceStatus(Tutorial tutorial) {
+        return tutorials.get(tutorial);
+    }
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
