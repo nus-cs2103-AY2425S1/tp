@@ -24,6 +24,10 @@ import seedu.address.commons.core.LogsCenter;
 public class Main {
     private static Logger logger = LogsCenter.getLogger(Main.class);
 
+    public static void setLogger(Logger logger) {
+        Main.logger = logger;
+    }
+
     public static void main(String[] args) {
 
         // As per https://github.com/openjdk/jfx/blob/master/doc-files/release-notes-16.md

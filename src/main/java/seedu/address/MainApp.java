@@ -45,15 +45,8 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
-
-    private final Path customStoragePath;
-
-    public MainApp(Path customStoragePath) {
-        this.customStoragePath = customStoragePath;
-    }
-
     public MainApp() {
-        this(null);
+        //empty constructor
     }
     @Override
     public void init() throws Exception {
@@ -66,9 +59,6 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        if (customStoragePath != null) {
-            userPrefs.setAddressBookFilePath(customStoragePath);
-        }
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
