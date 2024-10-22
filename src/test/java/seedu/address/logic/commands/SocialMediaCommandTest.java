@@ -46,24 +46,6 @@ public class SocialMediaCommandTest {
 
     }
 
-    /*
-    @Test
-    public void execute_existingSocialMedia_success() {
-        Model model1 = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Person person = model1.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        person.setSocialMedia(new SocialMedia("alice", SocialMedia.Platform.FACEBOOK));
-        Person editedPerson = new PersonBuilder(person).withSocialMedia("[ig-aliceey]").build();
-
-        SocialMediaCommand socialMediaCommand = new SocialMediaCommand("aliceey", SocialMedia.Platform.INSTAGRAM,
-                INDEX_FIRST_PERSON);
-        String expectedMessage = String.format(SocialMediaCommand.MESSAGE_SOCIAL_MEDIA_EXISTING, person.getName(),
-                "[ig-aliceey]");
-        Model expectedModel = new ModelManager(new AddressBook(model1.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(person, editedPerson);
-        assertCommandSuccess(socialMediaCommand, model1, expectedMessage, expectedModel);
-
-    }*/
-
     @Test
     public void execute_socialMedia_failure() {
         String handle = "my$$$username";
