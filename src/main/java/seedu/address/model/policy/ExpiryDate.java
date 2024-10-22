@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Policy's expiry date.
- * Guarantees: immutable; is valild as declared in {@link #isValidExpiryDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidExpiryDate(String)}
  */
 public class ExpiryDate {
     public static final String MESSAGE_CONSTRAINTS = "Expiry date should be of the format " + MM_DD_YYYY_PATTERN + ".";
