@@ -30,4 +30,9 @@ public class NameComparator implements Comparator<Person> {
 
         return true;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getName();
+    }
 }
