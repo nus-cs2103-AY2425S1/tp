@@ -102,10 +102,18 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_invalidAddCommandVariant_throwsParseException() {
+        String parseExceptionMessage = AddCommand.generateInvalidVariantMessage(AddCommand.INVALID_VARIANTS.get(0),
+                AddCommand.SHORT_COMMAND_WORD, AddCommand.LONG_COMMAND_WORD);
+        assertThrows(ParseException.class, parseExceptionMessage, () ->
+                parser.parseCommand(AddCommand.INVALID_VARIANTS.get(0)));
+    }
+
+    @Test
     public void parseCommand_invalidEditCommandVariant_throwsParseException() {
         String parseExceptionMessage = EditCommand.generateInvalidVariantMessage(EditCommand.INVALID_VARIANTS.get(0),
                 EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD);
-        assertThrows(ParseException.class, parseExceptionMessage,() ->
+        assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(EditCommand.INVALID_VARIANTS.get(0)));
     }
 
@@ -113,7 +121,7 @@ public class AddressBookParserTest {
     public void parseCommand_invalidDeleteCommandVariant_throwsParseException() {
         String parseExceptionMessage = DeleteCommand.generateInvalidVariantMessage(DeleteCommand.INVALID_VARIANTS.get(0),
                 DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD);
-        assertThrows(ParseException.class, parseExceptionMessage,() ->
+        assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(DeleteCommand.INVALID_VARIANTS.get(0)));
     }
 
@@ -121,7 +129,7 @@ public class AddressBookParserTest {
     public void parseCommand_invalidListCommandVariant_throwsParseException() {
         String parseExceptionMessage = ListCommand.generateInvalidVariantMessage(ListCommand.INVALID_VARIANTS.get(0),
                 ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD);
-        assertThrows(ParseException.class, parseExceptionMessage,() ->
+        assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(ListCommand.INVALID_VARIANTS.get(0)));
     }
 
@@ -129,7 +137,7 @@ public class AddressBookParserTest {
     public void parseCommand_invalidExitCommandVariant_throwsParseException() {
         String parseExceptionMessage = ExitCommand.generateInvalidVariantMessage(ExitCommand.INVALID_VARIANTS.get(0),
                 ExitCommand.COMMAND_WORD);
-        assertThrows(ParseException.class, parseExceptionMessage,() ->
+        assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(ExitCommand.INVALID_VARIANTS.get(0)));
     }
 
@@ -137,7 +145,7 @@ public class AddressBookParserTest {
     public void parseCommand_invalidHelpCommandVariant_throwsParseException() {
         String parseExceptionMessage = HelpCommand.generateInvalidVariantMessage(HelpCommand.INVALID_VARIANTS.get(0),
                 HelpCommand.COMMAND_WORD);
-        assertThrows(ParseException.class, parseExceptionMessage,() ->
+        assertThrows(ParseException.class, parseExceptionMessage, () ->
                 parser.parseCommand(HelpCommand.INVALID_VARIANTS.get(0)));
     }
 
