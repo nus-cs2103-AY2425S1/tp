@@ -144,7 +144,7 @@
 }
 
 #emergencyContactListView .list-cell .label {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .cell_big_label {

@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -40,7 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
@@ -76,7 +77,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Relationship ecRelationship = ParserUtil.parseRelationship(
                 argMultimap.getValue(PREFIX_EMERGENCY_CONTACT_RELATIONSHIP).get());
         EmergencyContact emergencyContact = new EmergencyContact(ecName, ecPhone, ecRelationship);
-        Set<EmergencyContact> emergencyContacts = new HashSet<>();
+        Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>();
         emergencyContacts.add(emergencyContact);
 
         DoctorName doctorName = ParserUtil.parseDoctorName(argMultimap.getValue(PREFIX_DOC_NAME).get());

@@ -5,10 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.exceptions.EmergencyContactNotFoundException;
 import seedu.address.model.tag.Tag;
@@ -27,7 +29,7 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Set<EmergencyContact> emergencyContacts = new HashSet<>();
+    private final Set<EmergencyContact> emergencyContacts = new LinkedHashSet<>();
     private final Doctor doctor;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -66,18 +68,14 @@ public class Person {
         return Collections.unmodifiableSet(emergencyContacts);
     }
 
-    public Name getAnyEmergencyContactName() {
-        return emergencyContacts.stream()
-                .map(EmergencyContact::getName)
-                .findFirst().orElse(null);
-    }
-
-    public EmergencyContact getAndRemoveEmergencyContact(Name name) throws EmergencyContactNotFoundException {
+    public EmergencyContact getAndRemoveEmergencyContact(Index index) throws EmergencyContactNotFoundException {
+        int i = index.getZeroBased();
         for (EmergencyContact emergencyContact : emergencyContacts) {
-            if (emergencyContact.getName().equals((name))) {
+            if (i == 0) {
                 emergencyContacts.remove(emergencyContact);
                 return emergencyContact;
             }
+            i = i - 1;
         }
         throw new EmergencyContactNotFoundException();
     }

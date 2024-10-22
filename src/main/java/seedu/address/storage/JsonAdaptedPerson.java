@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -124,7 +125,7 @@ class JsonAdaptedPerson {
                     EmergencyContact.class.getSimpleName()));
         }
 
-        final Set<EmergencyContact> modelEmergencyContacts = new HashSet<>(personEmergencyContacts);
+        final Set<EmergencyContact> modelEmergencyContacts = new LinkedHashSet<>(personEmergencyContacts);
         if (doctor == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Doctor"));
         }
