@@ -26,6 +26,6 @@ public class ListConsultsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredConsultationList(PREDICATE_SHOW_ALL_CONSULTATIONS);
-        return new CommandResult(MESSAGE_SUCCESS, COMMAND_TYPE);  // Indicate that the consultations tab should be displayed
+        return new CommandResult(MESSAGE_SUCCESS, COMMAND_TYPE);
     }
 }
