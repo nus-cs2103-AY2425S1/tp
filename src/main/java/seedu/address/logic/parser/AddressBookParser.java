@@ -61,60 +61,60 @@ public class AddressBookParser {
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
         switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            case AddCommand.COMMAND_WORD:
+                return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case FindNameCommand.COMMAND_WORD:
-            return new FindNameCommandParser().parse(arguments);
+            case FindNameCommand.COMMAND_WORD:
+                return new FindNameCommandParser().parse(arguments);
 
-        case FindPhoneNumberCommand.COMMAND_WORD:
-            return new FindPhoneNumberCommandParser().parse(arguments);
+            case FindPhoneNumberCommand.COMMAND_WORD:
+                return new FindPhoneNumberCommandParser().parse(arguments);
 
-        case FindTagContactCommand.COMMAND_WORD:
-            return new FindTagContactCommandParser().parse(arguments);
+            case FindTagContactCommand.COMMAND_WORD:
+                return new FindTagContactCommandParser().parse(arguments);
 
-        case FindBuyCommand.COMMAND_WORD:
-            return new FindBuyCommandParser().parse(arguments);
+            case FindBuyCommand.COMMAND_WORD:
+                return new FindBuyCommandParser().parse(arguments);
 
-        case FindSellCommand.COMMAND_WORD:
-            return new FindSellCommandParser().parse(arguments);
+            case FindSellCommand.COMMAND_WORD:
+                return new FindSellCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        case AddPropertyToSellCommand.COMMAND_WORD:
-            return new AddPropertyToSellParser().parse(arguments);
+            case AddPropertyToSellCommand.COMMAND_WORD:
+                return new AddPropertyToSellParser().parse(arguments);
 
-        case AddPropertyToBuyCommand.COMMAND_WORD:
-            return new AddPropertyToBuyParser().parse(arguments);
+            case AddPropertyToBuyCommand.COMMAND_WORD:
+                return new AddPropertyToBuyParser().parse(arguments);
 
-        case DeletePropertyToBuyCommand.COMMAND_WORD:
-            return new DeletePropertyToBuyCommandParser().parse(arguments);
+            case DeletePropertyToBuyCommand.COMMAND_WORD:
+                return new DeletePropertyToBuyCommandParser().parse(arguments);
 
-        case DeletePropertyToSellCommand.COMMAND_WORD:
-            return new DeletePropertyToSellCommandParser().parse(arguments);
+            case DeletePropertyToSellCommand.COMMAND_WORD:
+                return new DeletePropertyToSellCommandParser().parse(arguments);
 
-        case PinContactCommand.COMMAND_WORD:
-            return new PinContactCommandParser().parse(arguments);
+            case PinContactCommand.COMMAND_WORD:
+                return new PinContactCommandParser().parse(arguments);
 
-        default:
-            logger.finer("This user input caused a ParseException: " + userInput);
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                logger.finer("This user input caused a ParseException: " + userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
