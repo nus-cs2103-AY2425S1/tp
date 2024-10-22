@@ -12,6 +12,8 @@ import static spleetwaise.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static spleetwaise.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static spleetwaise.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.core.index.Index;
@@ -24,6 +26,7 @@ import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Remark;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.commons.IdUtil;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for RemarkCommand.
@@ -33,6 +36,11 @@ public class RemarkCommandTest {
     private static final String REMARK_STUB = "Some remark";
 
     private final AddressBookModel model = new AddressBookModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    public void setUp() {
+        CommonModel.initialise(model, null);
+    }
 
     @Test
     public void execute_addRemarkUnfilteredList_success() {

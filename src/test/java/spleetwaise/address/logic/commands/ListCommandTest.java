@@ -8,6 +8,7 @@ import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -21,6 +22,7 @@ public class ListCommandTest {
     public void setUp() {
         model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
         expectedModel = new AddressBookModelManager(model.getAddressBook(), new UserPrefs());
+        CommonModel.initialise(model, null);
     }
 
     @Test

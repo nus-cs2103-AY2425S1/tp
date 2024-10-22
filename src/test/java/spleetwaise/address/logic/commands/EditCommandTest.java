@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.commons.core.index.Index;
@@ -18,6 +19,7 @@ import spleetwaise.address.testutil.EditPersonDescriptorBuilder;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -25,6 +27,11 @@ import spleetwaise.address.testutil.TypicalPersons;
 public class EditCommandTest {
 
     private final AddressBookModel model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    void setUp() {
+        CommonModel.initialise(model, null);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

@@ -10,6 +10,7 @@ import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.PersonBuilder;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.commons.model.CommonModel;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -21,6 +22,7 @@ public class AddCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+        CommonModel.initialise(model, null);
     }
 
     @Test
