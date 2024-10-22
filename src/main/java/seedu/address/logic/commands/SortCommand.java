@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -14,7 +11,8 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Sorted.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the presented list "
-            + "by the specified person parameter (in descending or ascending order).\n"
+            + "in descending or ascending order according to the "
+            + " the name or date of last visit.\n"
             + "Parameters: Parameter prefix/Order\n"
             + "Example: " + COMMAND_WORD + " n/ascending\n"
             + "If order is not specified (ex. n/) ascending order assumed.";

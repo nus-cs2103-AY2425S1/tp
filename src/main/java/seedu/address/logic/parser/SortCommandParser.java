@@ -26,37 +26,19 @@ public class SortCommandParser implements Parser<SortCommand> {
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_DATEOFLASTVISIT);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATEOFLASTVISIT);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_DATEOFLASTVISIT);
-
-//        if (!argMultimap.isOfSizeOne()) {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-//        }
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATEOFLASTVISIT);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             return new SortCommand(PersonComparator.NAME,
                     isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            return new SortCommand(PersonComparator.PHONE,
-                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            return new SortCommand(PersonComparator.EMAIL,
-                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            return new SortCommand(PersonComparator.ADDRESS,
-                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
-        }
-        if (argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
+        } else if (argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
             return new SortCommand(PersonComparator.DATE_OF_LAST_VISIT,
                     isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     private final boolean isAscending(String s) throws ParseException {
