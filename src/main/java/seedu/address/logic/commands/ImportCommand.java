@@ -1,48 +1,46 @@
 package seedu.address.logic.commands;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 import seedu.address.model.tag.Tag;
 
 /**
- * Imports person data from a CSV file and writes it to a JSON file.
+ * Import command to load data from specified CSV file location.
  */
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports person data from a CSV file and writes to a JSON file.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports person data from a CSV file.\n"
         + "Parameters: FILE_PATH\n"
         + "Example: " + COMMAND_WORD + " data/persons.csv";
 
     private final String csvFilePath;
-    private final String jsonFilePath = "data/addressbook.json";
 
     public ImportCommand(String csvFilePath) {
         this.csvFilePath = csvFilePath;
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
             String line;
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            // Create the root object node that will contain the persons array
-            ObjectNode rootNode = objectMapper.createObjectNode();
-            ArrayNode personsNode = objectMapper.createArrayNode();
+            List<Person> newPersons = new ArrayList<>();
 
             // Skip header line
             br.readLine();
@@ -53,61 +51,61 @@ public class ImportCommand extends Command {
                     throw new CommandException("Invalid CSV format.");
                 }
 
-                // Create JSON node for each person
-                ObjectNode personNode = objectMapper.createObjectNode();
-                String name = fields[0].trim().replaceAll("\"", "");
-                String phone = fields[1].trim().replaceAll("\"", "");
-                String email = fields[2].trim().replaceAll("\"", "");
-                String address = fields[3].trim().replaceAll("\"", "");
-                String tele = fields[4].trim().replaceAll("\"", "");
-                personNode.put("name", name);
-                personNode.put("phone", phone);
-                personNode.put("email", email);
-                personNode.put("address", address);
-                personNode.put("telegram", tele);
+                try {
+                    // Create person fields
+                    Name name = new Name(fields[0].trim().replaceAll("\"", ""));
+                    Phone phone = new Phone(fields[1].trim().replaceAll("\"", ""));
+                    Email email = new Email(fields[2].trim().replaceAll("\"", ""));
+                    Address address = new Address(fields[3].trim().replaceAll("\"", ""));
+                    Telegram telegram = new Telegram(fields[4].trim().replaceAll("\"", ""));
+                    Github github = new Github(fields[6].trim().replaceAll("\"", ""));
 
-                Set<Tag> tags = new HashSet<>();
-
-                if (!fields[5].trim().isEmpty() && !fields[5].equals("\"\"")) {
-                    String[] tagArray = fields[5].trim().split(",");
-                    for (String tag : tagArray) {
-                        tag = tag.trim();  // Trim whitespace
-                        if (!tag.isEmpty()) {  // Ensure we only process non-empty tags
-                            tags.add(new Tag(tag));
+                    // Process tags
+                    Set<Tag> tags = new HashSet<>();
+                    if (!fields[5].trim().isEmpty() && !fields[5].equals("\"\"")) {
+                        String[] tagArray = fields[5].trim().split(",");
+                        for (String tag : tagArray) {
+                            tag = tag.trim();
+                            if (!tag.isEmpty()) {
+                                tags.add(new Tag(tag));
+                            }
                         }
                     }
+
+                    // Process assignment name
+                    String assignmentNameStr = fields[7].trim().replaceAll("\"", "");
+                    Assignment assignment;
+                    if (assignmentNameStr.equals("N/A") || assignmentNameStr.isEmpty()) {
+                        Person person = new Person(name, phone, email, address, telegram, tags, github);
+                        newPersons.add(person);
+                        continue;
+                    }
+
+                    // Process assignment score
+                    String assignmentScoreStr = fields[8].trim().replaceAll("\"", "");
+
+                    float assignmentScore = Float.parseFloat(assignmentScoreStr);
+
+                    assignment = new Assignment(assignmentNameStr, assignmentScore);
+
+                    // Create new person
+                    Person person = new Person(name, phone, email, address, telegram, tags, github,
+                        assignment);
+                    newPersons.add(person);
+
+                } catch (IllegalArgumentException e) {
+                    // Skip invalid entries but continue processing
+                    throw new CommandException(e.getMessage());
                 }
-
-                personNode.set("tags", objectMapper.valueToTree(tags));
-
-                personNode.put("github", fields[6].trim().replaceAll("\"", ""));
-
-                String assignmentName = fields[7].trim().replaceAll("\"", "");
-                if (assignmentName.equals("N/A") || assignmentName.isEmpty()) {
-                    personNode.put("assignmentName", (String) null); // Set to null if "N/A" or empty
-                } else {
-                    personNode.put("assignmentName", assignmentName);
-                }
-
-                String assignmentScore = fields[8].trim().replaceAll("\"", "");  // Remove any double quotes
-                if (assignmentScore.isEmpty()) {
-                    personNode.put("assignmentScore", (Double) null); // Set to null if empty
-                } else {
-                    personNode.put("assignmentScore", Double.parseDouble(assignmentScore)); // Convert to Double
-                }
-
-                personsNode.add(personNode);
             }
 
-            // Add the persons array to the root node
-            rootNode.set("persons", personsNode);
+            // Replace all persons in the model with the new ones
+            model.replaceAllPersons(newPersons);
 
-            // Write to JSON file
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new FileWriter(jsonFilePath), rootNode);
+            return new CommandResult(String.format("Successfully imported %d persons.", newPersons.size()));
 
-            return new CommandResult("Imported data from CSV and saved to JSON.");
         } catch (IOException e) {
-            throw new CommandException("Error reading from the CSV file or writing to JSON file: " + e.getMessage());
+            throw new CommandException("Error reading from the CSV file: " + e.getMessage());
         }
     }
 }

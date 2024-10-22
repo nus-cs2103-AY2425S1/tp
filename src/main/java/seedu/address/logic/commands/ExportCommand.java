@@ -42,7 +42,8 @@ public class ExportCommand extends Command {
             // Write each person data
             for (Person person : persons) {
                 // Extracting assignment details
-                String assignmentName = person.getAssignment() != null ? person.getAssignment().getAssignmentName() : "N/A";
+                String assignmentName = person.getAssignment() != null
+                    ? person.getAssignment().getAssignmentName() : "N/A";
                 double grade = person.getAssignment() != null ? person.getAssignment().getScore() : 0;
 
                 String[] record = {
@@ -54,7 +55,7 @@ public class ExportCommand extends Command {
                     String.join(",", person.getTags().stream().map(Tag::toString).toArray(String[]::new)),
                     person.getGithub().toString(),
                     assignmentName,
-                    grade == 0 ?"" : String.valueOf(grade)// Convert grade to String
+                    grade == 0 ? "" : String.valueOf(grade)// Convert grade to String
                 };
                 writer.writeNext(record);
             }
