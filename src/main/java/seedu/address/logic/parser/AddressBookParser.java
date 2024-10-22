@@ -28,6 +28,9 @@ import seedu.address.logic.commands.findcommands.FindCommand;
 import seedu.address.logic.commands.listcommands.ListGroupCommand;
 import seedu.address.logic.commands.listcommands.ListStudentCommand;
 import seedu.address.logic.commands.listcommands.ListTaskCommand;
+import seedu.address.logic.commands.sortcommands.SortStudentCommand;
+import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
+import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.addcommands.AddGroupCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentCommandParser;
 import seedu.address.logic.parser.addcommands.AddStudentToGroupCommandParser;
@@ -39,12 +42,11 @@ import seedu.address.logic.parser.deletecommands.DeleteTaskFromGroupCommandParse
 import seedu.address.logic.parser.editcommands.EditGroupCommandParser;
 import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
-import seedu.address.logic.commands.versionhistorycommands.RedoCommand;
-import seedu.address.logic.commands.versionhistorycommands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.listcommands.ListGroupCommandParser;
 import seedu.address.logic.parser.listcommands.ListStudentCommandParser;
 import seedu.address.logic.parser.listcommands.ListTaskCommandParser;
+import seedu.address.logic.parser.sortcommands.SortStudentCommandParser;
 
 /**
  * Parses user input.
@@ -143,13 +145,15 @@ public class AddressBookParser {
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
 
+        case SortStudentCommand.COMMAND_WORD_ALIAS:
+        case SortStudentCommand.COMMAND_WORD:
+            return new SortStudentCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommandParser().parse(arguments);
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommandParser().parse(arguments);
-
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
