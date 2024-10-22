@@ -63,4 +63,8 @@ public class Telegram {
         return value.hashCode();
     }
 
+    public int compareTo(Telegram otherTelegram) {
+        requireNonNull(otherTelegram);
+        return this.value.compareTo(otherTelegram.value);
+    }
 }

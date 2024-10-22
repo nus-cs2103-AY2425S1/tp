@@ -71,6 +71,11 @@ public class Name {
         }
         return false;
     }
+
+    public int compareTo(Name otherName) {
+        requireNonNull(otherName);
+        return this.fullName.compareTo(otherName.fullName);
+    }
     @Override
     public int hashCode() {
         return fullName.hashCode();

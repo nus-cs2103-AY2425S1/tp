@@ -56,4 +56,8 @@ public class Github {
         return username.hashCode();
     }
 
+    public int compareTo(Github otherGithub) {
+        requireNonNull(otherGithub);
+        return this.username.compareTo(otherGithub.username);
+    }
 }

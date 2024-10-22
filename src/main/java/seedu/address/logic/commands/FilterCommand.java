@@ -20,7 +20,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter the list to show all contacts whose tag "
             + "contain any of the specified keywords (case-insensitive) and displays them as a list with index "
             + "numbers.\n"
-            + "Parameters: " + PREFIX_TAG + "TAG" + "[" + PREFIX_TAG + "MORE_TAG]... "
+            + "Parameters: " + PREFIX_TAG + "TAG" + "[" + PREFIX_TAG + "MORE_TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "student "
             + PREFIX_TAG + "T02";

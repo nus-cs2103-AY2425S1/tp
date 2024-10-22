@@ -111,4 +111,52 @@ public class PersonTest {
 
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void compareName() {
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        Person secondPerson = new PersonBuilder(BOB).build();
+
+        // null input
+        assertThrows(NullPointerException.class, () -> firstPerson.compareName(null));
+
+        // valid input
+        assertTrue(firstPerson.compareName(secondPerson) < 0);
+        assertTrue(secondPerson.compareName(firstPerson) > 0);
+
+        // same value
+        assertEquals(0, firstPerson.compareName(firstPerson));
+    }
+
+    @Test
+    public void compareGithub() {
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        Person secondPerson = new PersonBuilder(BOB).build();
+
+        // null input
+        assertThrows(NullPointerException.class, () -> firstPerson.compareGithub(null));
+
+        // valid input
+        assertTrue(firstPerson.compareGithub(secondPerson) < 0);
+        assertTrue(secondPerson.compareGithub(firstPerson) > 0);
+
+        // same value
+        assertEquals(0, firstPerson.compareGithub(firstPerson));
+    }
+
+    @Test
+    public void compareTelegram() {
+        Person firstPerson = new PersonBuilder(ALICE).build();
+        Person secondPerson = new PersonBuilder(BOB).build();
+
+        // null input
+        assertThrows(NullPointerException.class, () -> firstPerson.compareTelegram(null));
+
+        // valid input
+        assertTrue(firstPerson.compareTelegram(secondPerson) < 0);
+        assertTrue(secondPerson.compareTelegram(firstPerson) > 0);
+
+        // same value
+        assertEquals(0, firstPerson.compareTelegram(firstPerson));
+    }
 }
