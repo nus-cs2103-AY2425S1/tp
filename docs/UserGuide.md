@@ -191,6 +191,24 @@ Examples:
 * `deleteOrder 1` deletes the order with index 1 from the selected person.
 * `listOrder 1` followed by `deleteOrder 2` selects the 1st person in the address book and deletes the 2nd order under the 1st person.
 
+### Editing an order : `editOrder`
+
+Edits an order under the person whose orders are displayed.
+
+Format: `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]`
+
+* A person's order list must be selected using `listOrder` before editing an order from that person.
+* Edits the order at the specified `ORDER_INDEX`. The order index refers to the index number shown in the displayed order list.
+* The order index and quantity **must be a positive integer** 1, 2, 3, …​
+* Date must follow the following format: `DD-MM-YYYY`
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `editOrder 1 i/Light bulb d/21-11-2025` Edits the item and delivery date of the 1st order to be `Light bulb` and `21-11-2025` respectively.
+*  `editOrder 2 c/22` Edits the quantity of the 2nd order to be `22`.
+*  `listOrder 1` followed by `editOrder 3 i/Wallet` selects the 1st person in the address book and edits the item of the 2nd order under the 1st person to be `Wallet`.
+
 ### Mark an order as completed : `markOrder`
 
 Marks an order under the person whose orders are displayed as completed.
@@ -264,7 +282,8 @@ Action                | Format, Examples
 **Find person(s)**              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List all persons**            | `list`
 **Add an order**                | `addOrder INDEX i/ITEM d/DATE [c/QUANTITY]` <br> e.g., `addOrder 2 i/Lamp d/20-11-2024 c/3`
-**List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
 **Delete an order**             | `deleteOrder ORDER_INDEX`<br> e.g., `deleteOrder 2`
+**Edit an order**               | `edit ORDER_INDEX [i/ITEM] [d/DATE] [c/QUANTITY]` <br> `editOrder 1 i/Light bulb d/21-11-2025`
+**List all orders**             | `listOrder INDEX`<br> e.g., `listOrder 3`
 **Mark an order as completed**  | `markOrder ORDER_INDEX`<br> e.g., `markOrder 2`
 **Help**                        | `help`
