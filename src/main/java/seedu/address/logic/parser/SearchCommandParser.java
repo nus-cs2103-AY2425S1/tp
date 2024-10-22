@@ -23,8 +23,10 @@ public class SearchCommandParser implements Parser<SearchCommand> {
     public SearchCommand parse(ModelType modelType, String args) throws ParseException {
         if (modelType == ModelType.PERSON) {
             return parseForPerson(args);
-        } else {
+        } else if (modelType == ModelType.EVENT) {
             return parseForEvent(args);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
         }
     }
 
