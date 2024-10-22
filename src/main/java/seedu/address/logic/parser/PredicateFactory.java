@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDate;
@@ -100,8 +100,8 @@ public class PredicateFactory {
 
     private static void processSubjectPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
             throws ParseException {
-        if (!argMultimap.getAllValues(PREFIX_SUBJECT).isEmpty()) {
-            for (String eachSubjectWords : argMultimap.getAllValues(PREFIX_SUBJECT)) {
+        if (!argMultimap.getAllValues(PREFIX_TUTORIAL).isEmpty()) {
+            for (String eachSubjectWords : argMultimap.getAllValues(PREFIX_TUTORIAL)) {
                 String trimmedSubject = ParserUtil.parseMultipleWordsFromFindCommand(eachSubjectWords);
                 predicates.add(new SubjectMatchesKeywordsPredicate(trimmedSubject));
             }
