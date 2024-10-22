@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_TAG_NOT_FOUND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.index.Index;
@@ -13,8 +14,6 @@ import seedu.address.model.tag.Tag;
  * Parse the delete tag command.
  */
 public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
-    private static final String MESSAGE_TAG_NOT_FOUND = "There is no tag presented in the command!";
-
     /**
      * Parses the given string of arguments in the context of Delete tag command.
      * and returns DeleteTagCommand object for execution.
