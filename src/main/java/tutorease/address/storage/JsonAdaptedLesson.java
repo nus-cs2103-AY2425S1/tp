@@ -12,7 +12,6 @@ import tutorease.address.commons.exceptions.IllegalValueException;
 import tutorease.address.model.ReadOnlyTutorEase;
 import tutorease.address.model.lesson.EndDateTime;
 import tutorease.address.model.lesson.Lesson;
-import tutorease.address.model.lesson.LocationIndex;
 import tutorease.address.model.lesson.StartDateTime;
 import tutorease.address.model.person.Person;
 
@@ -22,7 +21,6 @@ import tutorease.address.model.person.Person;
 public class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
     private final String student;
-    private final String locationIndex;
     private final String startDateTime;
     private final String endDateTime;
 
@@ -31,11 +29,9 @@ public class JsonAdaptedLesson {
      */
     @JsonCreator
     public JsonAdaptedLesson(@JsonProperty("student") String student,
-                             @JsonProperty("locationIndex") String locationIndex,
                              @JsonProperty("startDateTime") String startDateTime,
                              @JsonProperty("endDateTime") String endDateTime) {
         this.student = student;
-        this.locationIndex = locationIndex;
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
@@ -45,7 +41,6 @@ public class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         student = source.getStudent().getName().fullName;
-        locationIndex = source.getLocationIndex().toString();
         startDateTime = dateTimeToString(source.getStartDateTime().getDateTime());
         endDateTime = dateTimeToString(source.getEndDateTime().getDateTime());
     }
@@ -64,15 +59,6 @@ public class JsonAdaptedLesson {
             throw new IllegalValueException(INVALID_MESSAGE_CONSTRAINTS);
         }
         final Person studentPerson = addressBook.getPerson(student);
-
-        if (locationIndex == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocationIndex.class.getSimpleName()));
-        }
-        if (!LocationIndex.isValidLocationIndex(locationIndex)) {
-            throw new IllegalValueException(LocationIndex.MESSAGE_CONSTRAINTS);
-        }
-        final LocationIndex locationIndex = new LocationIndex(this.locationIndex);
 
         if (startDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -94,6 +80,6 @@ public class JsonAdaptedLesson {
         if (startDateTime.isAfter(endDateTime)) {
             throw new IllegalValueException(START_IS_AFTER_END);
         }
-        return new Lesson(studentPerson, locationIndex, startDateTime, endDateTime);
+        return new Lesson(studentPerson, startDateTime, endDateTime);
     }
 }
