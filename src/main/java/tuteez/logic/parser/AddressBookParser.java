@@ -62,6 +62,7 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD_ALT:
             return new DeleteCommandParser().parse(arguments);
 
         case DisplayCommand.COMMAND_WORD:
@@ -83,6 +84,7 @@ public class AddressBookParser {
             return new HelpCommand();
 
         case RemarkCommand.COMMAND_WORD:
+        case RemarkCommand.COMMAND_WORD_ALT:
             return new RemarkCommandParser().parse(arguments);
 
         default:
