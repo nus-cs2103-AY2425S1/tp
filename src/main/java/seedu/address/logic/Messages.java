@@ -21,6 +21,8 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_PARAMETER_FOUND = "Please enter a name for me to search";
+    public static final String MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK =
+            "This person is not in address book, please use Full Name";
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

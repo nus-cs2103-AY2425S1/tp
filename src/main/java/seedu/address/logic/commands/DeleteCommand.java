@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,16 +26,29 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    private Index targetIndex;
+    private final Name targetName;
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        this.targetName = null;
+    }
+
+    public DeleteCommand(Name name) {
+        this.targetIndex = null;
+        this.targetName = name;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex == null) {
+            setTargetIndex(lastShownList);
+        }
+
+        assert(targetIndex != null);
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -45,10 +59,25 @@ public class DeleteCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
+    private void setTargetIndex(List<Person> lastShownList) throws CommandException {
+        int temp = lastShownList.stream()
+                .filter(person -> person.getName().equalsIgnoreCase(targetName))
+                .map(lastShownList::indexOf)
+                .reduce(-1, (x, y) -> y);
+        if (temp == -1) {
+            throw new CommandException(Messages.MESSAGE_PERSON_NOT_IN_ADDRESS_BOOK);
+        }
+        this.targetIndex = Index.fromZeroBased(temp);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
+        }
+
+        if (targetIndex == null) {
+            return false;
         }
 
         // instanceof handles nulls
