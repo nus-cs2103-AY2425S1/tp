@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.editcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -14,7 +14,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -31,39 +30,45 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing student in the address book.
  */
-public class EditCommand extends Command {
+public class EditStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit_s";
+    public static final String COMMAND_WORD_ALIAS = "es";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-        + "by the index number used in the displayed student list. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
+        + ": Edits the student identified by the student number used.\n"
+        + "Fields including group and student number should not be modified."
+        + "Parameters: "
+        + PREFIX_STUDENT_NUMBER + "STUDENT_NUMBER"
         + "[" + PREFIX_STUDENT_NAME + "NAME] "
         + "[" + PREFIX_EMAIL + "EMAIL] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+        + "[" + PREFIX_TAG + "TAG]... \n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_STUDENT_NUMBER + "A0123456P"
+        + PREFIX_STUDENT_NAME + "John Doe "
+        + PREFIX_EMAIL + "johnd@u.nus.edu "
+        + PREFIX_TAG + "good at UI ";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book.";
+    public static final String MESSAGE_STUDENT_NOT_FOUND = "The given student number is not found in the address book.";
+    public static final String MESSAGE_INVALID_FIELD_GROUP_NAME =
+        "Group assignment should not be changed via edit student function.";
 
-    private final Index index;
+    private final StudentNumber studentNumber;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * Creates an EditCommand to replace the student at {@code index} with the edited details
-     * in {@code editPersonDescriptor}.
-     *
-     * @param index                of the student in the filtered student list to edit
+     * @param studentNumber              of the student in the filtered student list to edit
      * @param editPersonDescriptor details to edit the student with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
+    public EditStudentCommand(StudentNumber studentNumber, EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(studentNumber);
         requireNonNull(editPersonDescriptor);
 
-        this.index = index;
+        this.studentNumber = studentNumber;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
@@ -72,17 +77,23 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(MESSAGE_INVALID_DISPLAYED_INDEX);
+        Student studentToEdit = null;
+        boolean hasFoundTargetStudent = false;
+        for (Student student : lastShownList) {
+            if (student.getStudentNumber().equals(studentNumber)) {
+                studentToEdit = student;
+                hasFoundTargetStudent = true;
+                break;
+            }
         }
-
-        Student studentToEdit = lastShownList.get(index.getZeroBased());
+        if (!hasFoundTargetStudent) {
+            throw new CommandException(MESSAGE_STUDENT_NOT_FOUND);
+        }
         Student editedStudent = createEditedPerson(studentToEdit, editPersonDescriptor);
 
         if (!studentToEdit.isSamePerson(editedStudent) && model.hasPerson(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
         model.setPerson(studentToEdit, editedStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent)));
@@ -98,12 +109,8 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(studentToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(studentToEdit.getTags());
-        StudentNumber updatedStudentNumber = editPersonDescriptor.getStudentNumber()
-                .orElse(studentToEdit.getStudentNumber());
-        System.out.println(updatedName);
-        System.out.println(updatedEmail);
-        System.out.println(updatedStudentNumber);
-        return new Student(updatedName, updatedEmail, updatedTags, updatedStudentNumber);
+        StudentNumber studentNumber = studentToEdit.getStudentNumber();
+        return new Student(updatedName, updatedEmail, updatedTags, studentNumber);
     }
 
     @Override
@@ -113,19 +120,19 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditStudentCommand)) {
             return false;
         }
 
-        EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-            && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        EditStudentCommand otherEditStudentCommand = (EditStudentCommand) other;
+        return studentNumber.equals(otherEditStudentCommand.studentNumber)
+            && editPersonDescriptor.equals(otherEditStudentCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-            .add("index", index)
+            .add("studentNumber", studentNumber)
             .add("editPersonDescriptor", editPersonDescriptor)
             .toString();
     }

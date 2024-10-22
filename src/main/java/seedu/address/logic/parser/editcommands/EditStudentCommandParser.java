@@ -1,8 +1,8 @@
 package seedu.address.logic.parser.editcommands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -12,40 +12,40 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+<<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/editcommands/EditCommandParser.java
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.editcommands.EditCommand;
 import seedu.address.logic.commands.editcommands.EditCommand.EditPersonDescriptor;
+========
+import seedu.address.logic.commands.editcommands.EditStudentCommand;
+import seedu.address.logic.commands.editcommands.EditStudentCommand.EditPersonDescriptor;
+>>>>>>>> upstream/master:src/main/java/seedu/address/logic/parser/editcommands/EditStudentCommandParser.java
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.StudentNumber;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditStudentCommandParser implements Parser<EditStudentCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditStudentCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_EMAIL, PREFIX_TAG, PREFIX_STUDENT_NUMBER);
-
-        Index index;
-
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
-        }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NAME, PREFIX_EMAIL, PREFIX_STUDENT_NUMBER);
+            ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NUMBER, PREFIX_STUDENT_NAME, PREFIX_EMAIL,
+                PREFIX_TAG, PREFIX_GROUP_NAME);
+        StudentNumber studentNumber = ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get());
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_STUDENT_NAME, PREFIX_EMAIL,
+            PREFIX_STUDENT_NUMBER, PREFIX_GROUP_NAME);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -55,21 +55,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_STUDENT_NUMBER).isPresent()) {
-            editPersonDescriptor.setStudentNumber(
-                    ParserUtil.parseStudentNumber(argMultimap.getValue(PREFIX_STUDENT_NUMBER).get()));
+        if (argMultimap.getValue(PREFIX_GROUP_NAME).isPresent()) {
+            throw new ParseException(EditStudentCommand.MESSAGE_INVALID_FIELD_GROUP_NAME);
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-        if (argMultimap.getValue(PREFIX_STUDENT_NUMBER).isPresent()) {
-            editPersonDescriptor.setStudentNumber(ParserUtil.parseStudentNumber(argMultimap
-                    .getValue(PREFIX_STUDENT_NUMBER).get()));
-        }
-
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditStudentCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditStudentCommand(studentNumber, editPersonDescriptor);
     }
 
     /**

@@ -10,8 +10,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
-//import seedu.address.logic.commands.editcommands.EditCommand;
-//import seedu.address.logic.commands.editcommands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
