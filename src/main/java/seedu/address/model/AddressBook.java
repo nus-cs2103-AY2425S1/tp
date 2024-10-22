@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import javafx.collections.ObservableList;
@@ -185,10 +186,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeCompany(Company key) {
         companies.remove(key);
-        for (Job j : jobs) {
-            if (j.getCompany().matchesCompanyName(key.getName())) {
-                jobs.remove(j);
-            }
+        Stream<Job> jobsToRemove = StreamSupport
+                .stream(jobs.spliterator(), false)
+                .filter(x -> x.getCompany().matchesCompanyName(key.getName()));
+        // DO NOT CONVERT BELOW TO STREAM, IT BREAKS THE JOB DELETION!!!
+        for (Job j : jobsToRemove.toList()) {
+            jobs.remove(j);
         }
     }
 
