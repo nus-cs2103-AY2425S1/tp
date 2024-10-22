@@ -21,17 +21,21 @@ public class Person {
     // Data fields
     private final Address address;
     private final Tag tag;
+    private final Date date;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Tag tag) {
+
+    public Person(Name name, Phone phone, Email email, Address address, Tag tag, Date date) {
         requireAllNonNull(name, phone, email, address, tag);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
+        this.date = date;
     }
 
     public Name getName() {
@@ -48,6 +52,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
     /**
@@ -108,6 +116,7 @@ public class Person {
                 .add("email", email)
                 .add("address", address)
                 .add("tag", tag)
+                .add("date", date)
                 .toString();
     }
 

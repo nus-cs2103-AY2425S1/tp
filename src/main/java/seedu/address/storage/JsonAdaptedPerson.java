@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -23,6 +24,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final JsonAdaptedTag tag;
+    private final String date;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -30,12 +32,13 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") JsonAdaptedTag tag) {
+            @JsonProperty("tags") JsonAdaptedTag tag, @JsonProperty("date") String date) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tag = tag;
+        this.date = date;
     }
 
     /**
@@ -47,6 +50,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         tag = new JsonAdaptedTag(source.getTag());
+        date = source.getDate().value;
     }
 
     /**
@@ -91,9 +95,14 @@ class JsonAdaptedPerson {
         }
         personTag = tag.toModelType();
         final Address modelAddress = new Address(address);
-
         final Tag finalPersonTag = personTag;
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag);
+
+        if (date == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
+        }
+        final Date modelDate = new Date(date);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, finalPersonTag, modelDate);
     }
 
 }
