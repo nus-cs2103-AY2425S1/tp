@@ -9,6 +9,8 @@ import tuteez.commons.util.ToStringBuilder;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
 import tuteez.model.person.UniquePersonList;
+import tuteez.model.person.lesson.Lesson;
+import tuteez.model.person.lesson.LessonManager;
 
 /**
  * Wraps all data at the address-book level
@@ -17,6 +19,7 @@ import tuteez.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final LessonManager lessonManager;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        lessonManager = new LessonManager();
     }
 
     public AddressBook() {}
@@ -49,12 +53,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+    public void setLessons(LessonManager dataLessonManager) {
+        this.lessonManager.setLessonsFromStorage(dataLessonManager);
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
+        setLessons(newData.getLessonManager());
         setPersons(newData.getPersonList());
     }
 
@@ -71,8 +80,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
+     * The person's lessons are also added (clashing lesson are checked earlier)
      */
     public void addPerson(Person p) {
+        p.getLessons().forEach(lessonManager::addLesson);
         persons.add(p);
     }
 
@@ -83,6 +94,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
+        target.getLessons().forEach(lessonManager::deleteLesson);
+        editedPerson.getLessons().forEach(lessonManager::addLesson);
 
         persons.setPerson(target, editedPerson);
     }
@@ -92,6 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        key.getLessons().forEach(lessonManager::deleteLesson);
         persons.remove(key);
     }
 
@@ -115,6 +129,10 @@ public class AddressBook implements ReadOnlyAddressBook {
                 .orElse(null);
     }
 
+    public boolean isClashingWithExistingLesson(Lesson lesson) {
+        return lessonManager.isClashingWithExistingLesson(lesson);
+    }
+
     //// util methods
 
     @Override
@@ -127,6 +145,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public LessonManager getLessonManager() {
+        return lessonManager;
     }
 
     @Override

@@ -12,7 +12,6 @@ import tuteez.commons.exceptions.IllegalValueException;
 import tuteez.model.AddressBook;
 import tuteez.model.ReadOnlyAddressBook;
 import tuteez.model.person.Person;
-import tuteez.model.person.lesson.Lesson;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -53,7 +52,6 @@ class JsonSerializableAddressBook {
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            Lesson.addAllLesson(person.getLessons());
             addressBook.addPerson(person);
         }
         return addressBook;

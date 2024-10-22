@@ -24,7 +24,7 @@ public class JsonAdaptedLesson {
      * Converts a given {@code Lesson} into this class for Jackson use.
      */
     public JsonAdaptedLesson(Lesson source) {
-        dayAndTime = source.dayAndTime;
+        dayAndTime = source.getDayAndTime();
     }
 
     @JsonValue
