@@ -12,7 +12,7 @@ import seedu.address.ui.BarChartWindow;
 
 
 /**
- * Displays a Pie Chart of the number of students in each class.
+ * Displays a Bar Chart of the number of students in each class.
  */
 public class BarChartCommand extends Command {
     public static final String COMMAND_WORD = "bar";

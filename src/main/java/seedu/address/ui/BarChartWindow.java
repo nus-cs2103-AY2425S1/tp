@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * The Pie Chart window. Displays a Bar Chart of the number of students in each class.
+ * The Bar Chart window. Displays a Bar Chart of the number of students in each class.
  */
 public class BarChartWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(BarChartWindow.class);
@@ -21,16 +21,16 @@ public class BarChartWindow extends UiPart<Stage> {
     private BarChart barChart;
 
     /**
-     * Creates a new PiChartWindow.
+     * Creates a new BarChartWindow.
      *
-     * @param root Stage to use as the root of the PiChartWindow.
+     * @param root Stage to use as the root of the PBarhartWindow.
      */
     public BarChartWindow(Stage root) {
         super(FXML, root);
     }
 
     /**
-     * Creates a new PiChartWindow.
+     * Creates a new BarChartWindow.
      */
     public BarChartWindow() {
         this(new Stage());
@@ -51,7 +51,7 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the PiChart window.
+     * Shows the Bar Chart window.
      */
     public void show() {
         logger.fine("Showing Pi Chart window.");
@@ -60,21 +60,21 @@ public class BarChartWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the PiChart window is currently being shown.
+     * Returns true if the Bar Chart window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the PiChart window.
+     * Hides the Bar Chart window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the PiChart window.
+     * Focuses on the Bar Chart window.
      */
     public void focus() {
         getRoot().requestFocus();
