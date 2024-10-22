@@ -1,29 +1,33 @@
 package seedu.address.model.wedding;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.Person;
 import seedu.address.model.wedding.exceptions.DuplicateWeddingException;
 import seedu.address.model.wedding.exceptions.PersonNotAssignedToWeddingException;
 import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class UniqueWeddingListTest {
     private final UniqueWeddingList weddings = new UniqueWeddingList();
-    Wedding w1 = new Wedding("w1", "date");
-    Wedding w2 = new Wedding("w2", "date");
+    private Wedding w1;
+    private Wedding w2;
 
-    Person alice = ALICE;
+    private Person alice = ALICE;
 
     @BeforeEach
     public void setUp() {
+        w1 = new Wedding("w1", "date");
+        w2 = new Wedding("w2", "date");
         weddings.addWedding(w1);
     }
 

@@ -1,20 +1,28 @@
 package seedu.address.model.wedding;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.PersonId;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class WeddingTest {
-    PersonId[] ids = {new PersonId()};
-    List<PersonId> assignees = List.of(ids);
-    Wedding wedding = new Wedding("Name", "Date", assignees);
-    Wedding otherWedding = new Wedding("Other", "Date");
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
+import seedu.address.model.person.PersonId;
+
+public class WeddingTest {
+    private PersonId[] ids;
+    private List<PersonId> assignees;
+    private Wedding wedding;
+    private Wedding otherWedding;
+
+    @BeforeEach
+    public void setUp() {
+        ids = new PersonId[]{new PersonId()};
+        assignees = List.of(ids);
+        wedding = new Wedding("Name", "Date", assignees);
+        otherWedding = new Wedding("Other", "Date");
+    }
     @Test
     public void isSameWedding_sameObject_true() {
         boolean result = wedding.isSameWedding(wedding);
