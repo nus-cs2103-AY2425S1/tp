@@ -17,6 +17,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -34,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ViewPersonWindow viewPersonWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -65,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        // Initialise windows
         helpWindow = new HelpWindow();
     }
 
@@ -163,6 +166,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleView() {
+        viewPersonWindow = new ViewPersonWindow(logic.getFilteredPersonList());
+        if (!viewPersonWindow.isViewShowing()) {
+            viewPersonWindow.show();
+        } else {
+            viewPersonWindow.focus();
+        }
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -180,6 +193,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowView()) {
+                handleView();
             }
 
             if (commandResult.isExit()) {
