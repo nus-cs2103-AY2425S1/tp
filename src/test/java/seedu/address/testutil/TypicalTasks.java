@@ -15,7 +15,7 @@ public class TypicalTasks {
     public static final Task BUY_MEDICATION = new TaskBuilder().withDescription("Buy medication")
             .withPatient(TypicalPersons.ALICE).build();
     public static final Task VISIT_DOCTOR = new TaskBuilder().withDescription("Visit doctor")
-            .withPatient(TypicalPersons.BENSON).build();
+            .withPatient(TypicalPersons.ALICE).build();
     public static final Task FILL_PRESCRIPTION = new TaskBuilder().withDescription("Fill prescription")
             .withPatient(TypicalPersons.CARL).build();
     public static final Task CALL_FAMILY = new TaskBuilder().withDescription("Call family")

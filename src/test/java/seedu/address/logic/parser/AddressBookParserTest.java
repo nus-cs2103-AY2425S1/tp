@@ -25,6 +25,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EmergencyContactCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindTaskCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
@@ -143,6 +144,31 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
                                 PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
+    }
+
+    @Test
+    public void parseCommand_findTask() throws Exception {
+        Index index = INDEX_FIRST_PERSON;
+
+        FindTaskCommand expectedCommand = new FindTaskCommand(index);
+
+        FindTaskCommand command = (FindTaskCommand) parser.parseCommand(
+                FindTaskCommand.COMMAND_WORD + " " + index.getOneBased());
+        assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommandFindTaskInvalidFormatThrowsParseException() {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTaskCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(FindTaskCommand.COMMAND_WORD + " abc"));
+    }
+
+    @Test
+    public void parseCommandFindTaskMissingIndexThrowsParseException() {
+        assertThrows(ParseException.class,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTaskCommand.MESSAGE_USAGE), ()
+                        -> parser.parseCommand(FindTaskCommand.COMMAND_WORD + " "));
     }
 
 }
