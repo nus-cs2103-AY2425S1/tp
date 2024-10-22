@@ -37,20 +37,24 @@ public class TypicalVolunteers {
 
     public static final Volunteer CHARLIE = new VolunteerBuilder().withName("Charlie Lee")
             .withPhone("92345678").withEmail("charlielee@example.com")
-            .withAvailableDate("2023-07-22").withStartTimeAvailability("08:00").withEndTimeAvailability("15:00").build();
+            .withAvailableDate("2023-07-22").withStartTimeAvailability("08:00").withEndTimeAvailability("15:00")
+            .build();
 
     public static final Volunteer DAVE = new VolunteerBuilder().withName("Dave Lim")
             .withPhone("93456789").withEmail("davelim@example.com")
-            .withAvailableDate("2023-08-12").withStartTimeAvailability("12:00").withEndTimeAvailability("17:00").build();
+            .withAvailableDate("2023-08-12").withStartTimeAvailability("12:00").withEndTimeAvailability("17:00")
+            .build();
 
     // Manually added
     public static final Volunteer EVE = new VolunteerBuilder().withName("Eve Tan")
             .withPhone("91234512").withEmail("evetan@example.com")
-            .withAvailableDate("2023-09-14").withStartTimeAvailability("11:00").withEndTimeAvailability("16:00").build();
+            .withAvailableDate("2023-09-14").withStartTimeAvailability("11:00").withEndTimeAvailability("16:00")
+            .build();
 
     public static final Volunteer FAYE = new VolunteerBuilder().withName("Faye Koh")
             .withPhone("93451245").withEmail("fayekoh@example.com")
-            .withAvailableDate("2023-10-22").withStartTimeAvailability("09:00").withEndTimeAvailability("14:00").build();
+            .withAvailableDate("2023-10-22").withStartTimeAvailability("09:00").withEndTimeAvailability("14:00")
+            .build();
 
     // Keyword for testing search
     public static final String KEYWORD_MATCHING_VOLUNTEER = "Charlie"; // A keyword that matches CHARLIE
