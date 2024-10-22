@@ -27,6 +27,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
 import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -189,6 +190,20 @@ public class AddressBookParserTest {
         PayCommand command = (PayCommand) parser.parseCommand(PayCommand.COMMAND_WORD_RANDOM_CASE + " "
                 + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
         assertEquals(new PayCommand(INDEX_FIRST_STUDENT, 1), command);
+    }
+
+    @Test
+    public void parseCommand_owe() throws Exception {
+        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        assertEquals(new OweCommand(INDEX_FIRST_STUDENT, 1), command);
+    }
+
+    @Test
+    public void parseCommand_oweRandomCase() throws Exception {
+        OweCommand command = (OweCommand) parser.parseCommand(OweCommand.COMMAND_WORD_RANDOM_CASE + " "
+                + INDEX_FIRST_STUDENT.getOneBased() + " " + PREFIX_HOUR + "1");
+        assertEquals(new OweCommand(INDEX_FIRST_STUDENT, 1), command);
     }
 
     @Test

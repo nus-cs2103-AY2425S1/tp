@@ -173,6 +173,26 @@ Examples:
 
 
 
+### Recording unpaid tuition fee of a student: `owe`
+
+Updates the amount of tuition fee owed by a specified student after a lesson.
+
+Format: `owe INDEX hr/HOURS_OWED`
+
+Example: 
+* `owe 1 hr/1.5` updates the tuition fee owed by the 2nd student in the list.
+![oweResult.png](images/oweResult.png)
+
+<box type="important" header="##### Constraints">
+    Hours owed by a student must be a positive multiple of 0.5.
+</box>
+
+<box type="tip" header="##### Tips">
+
+In case you accidentally make a mistake using the <md>`owe`</md> command, you can use the [`edit` command](#editing-a-student--edit) to fix the OWE_AMOUNT as your preference.
+
+</box>
+
 ### Settle payments from students: `settle`
 
 Updates the amount of tuition fee paid by the student and the amount of tuition fee owed by the student.
@@ -280,5 +300,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
+**Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
 **Help**   | `help`
 **Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
