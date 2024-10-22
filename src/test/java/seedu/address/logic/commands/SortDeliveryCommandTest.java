@@ -3,15 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.address.logic.Messages.MESSAGE_DELIVERY_SORTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalDeliveries.APPLE;
+import static seedu.address.testutil.TypicalDeliveries.BREAD;
+import static seedu.address.testutil.TypicalDeliveries.CAN;
+import static seedu.address.testutil.TypicalDeliveries.getTypicalAddressBook;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +20,11 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.delivery.DeliverySortComparator;
 import seedu.address.model.delivery.DeliverySortCostComparator;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.delivery.DeliverySortDateTimeComparator;
+import seedu.address.model.delivery.DeliverySortStatusComparator;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SortDeliveryCommand}.
  */
 public class SortDeliveryCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -55,40 +55,42 @@ public class SortDeliveryCommandTest {
         assertFalse(sortFirstDeliveryCommand.equals(sortSecondDeliveryCommand));
     }
 
-
-
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+    public void execute_ascendingCost_sortedByAscendingCost() {
+        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 3, "cost", "ascending");
+        DeliverySortCostComparator comparator = new DeliverySortCostComparator(new SortOrder("a"));
+        SortDeliveryCommand command = new SortDeliveryCommand(comparator);
+        expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(BREAD, CAN, APPLE), model.getSortedDeliveryList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
+    public void execute_descendingDateTime_sortedByDescendingDateTime() {
+        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 3, "date time", "descending");
+        DeliverySortDateTimeComparator comparator = new DeliverySortDateTimeComparator(new SortOrder("d"));
+        SortDeliveryCommand command = new SortDeliveryCommand(comparator);
+        expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertEquals(Arrays.asList(APPLE, BREAD, CAN), model.getSortedDeliveryList());
+    }
+
+    @Test
+    public void execute_ascendingStatus_sortedByAscendingStatus() {
+        String expectedMessage = String.format(MESSAGE_DELIVERY_SORTED_OVERVIEW, 3,
+                "status, followed by date time", "ascending");
+        DeliverySortStatusComparator comparator = new DeliverySortStatusComparator(new SortOrder("a"));
+        SortDeliveryCommand command = new SortDeliveryCommand(comparator);
+        expectedModel.updateSortedDeliveryList(comparator);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CAN, BREAD, APPLE), model.getSortedDeliveryList());
     }
 
     @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
-     */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+        DeliverySortCostComparator comparator = new DeliverySortCostComparator(new SortOrder("a"));
+        SortDeliveryCommand sortDeliveryCommand = new SortDeliveryCommand(comparator);
+        String expected = SortDeliveryCommand.class.getCanonicalName() + "{comparator=" + comparator + "}";
+        assertEquals(expected, sortDeliveryCommand.toString());
     }
 }
