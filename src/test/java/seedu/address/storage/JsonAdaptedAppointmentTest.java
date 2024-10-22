@@ -45,8 +45,8 @@ class JsonAdaptedAppointmentTest {
         assertEquals(VALID_APPOINTMENT_TYPE, modelAppointment.getAppointmentType().value);
         assertEquals(LocalDateTime.parse(VALID_APPOINTMENT_DATE_TIME), modelAppointment.getAppointmentDateTime());
         assertEquals(VALID_PERSON_ID, modelAppointment.getPerson().getPersonId());
-        assertEquals(VALID_SICKNESS, modelAppointment.getSickness().get().value);
-        assertEquals(VALID_MEDICINE, modelAppointment.getMedicine().get().value);
+        assertEquals(VALID_SICKNESS, modelAppointment.getSickness().value);
+        assertEquals(VALID_MEDICINE, modelAppointment.getMedicine().value);
     }
 
     @Test

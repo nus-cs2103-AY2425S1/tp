@@ -26,13 +26,13 @@ public class AppointmentDescriptor {
     public AppointmentDescriptor(
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
-            Optional<Sickness> sickness,
-            Optional<Medicine> medicine) {
+            Sickness sickness,
+            Medicine medicine) {
         requireAllNonNull(appointmentType, appointmentDateTime);
         this.appointmentType = appointmentType;
         this.appointmentDateTime = appointmentDateTime;
-        this.sickness = sickness;
-        this.medicine = medicine;
+        this.sickness = Optional.ofNullable(sickness);
+        this.medicine = Optional.ofNullable(medicine);
     }
 
     public AppointmentType getAppointmentType() {
@@ -43,12 +43,12 @@ public class AppointmentDescriptor {
         return this.appointmentDateTime;
     }
 
-    public Optional<Sickness> getSickness() {
-        return this.sickness;
+    public Sickness getSickness() {
+        return this.sickness.orElse(null);
     }
 
-    public Optional<Medicine> getMedicine() {
-        return this.medicine;
+    public Medicine getMedicine() {
+        return this.medicine.orElse(null);
     }
 
     /**
@@ -87,10 +87,10 @@ public class AppointmentDescriptor {
             return false;
         }
 
-        return appointmentType.equals(otherAppointment.getAppointmentType())
-                && appointmentDateTime.equals(otherAppointment.getAppointmentDateTime())
-                && sickness.equals(otherAppointment.getSickness())
-                && medicine.equals(otherAppointment.getMedicine());
+        return appointmentType.equals(otherAppointment.appointmentType)
+                && appointmentDateTime.equals(otherAppointment.appointmentDateTime)
+                && sickness.equals(otherAppointment.sickness)
+                && medicine.equals(otherAppointment.medicine);
     }
 
     @Override

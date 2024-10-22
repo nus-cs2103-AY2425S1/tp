@@ -4,9 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Optional;
 
-import seedu.address.commons.util.OptionalUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -30,8 +28,8 @@ public class Appointment {
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
             Person person,
-            Optional<Sickness> sickness,
-            Optional<Medicine> medicine) {
+            Sickness sickness,
+            Medicine medicine) {
 
         requireAllNonNull(appointmentType, appointmentDateTime, person, sickness, medicine);
         this.appointmentDescriptor = new AppointmentDescriptor(
@@ -52,8 +50,8 @@ public class Appointment {
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
             Person person,
-            Optional<Sickness> sickness,
-            Optional<Medicine> medicine,
+            Sickness sickness,
+            Medicine medicine,
             int appointmentId) {
         this.appointmentDescriptor = new AppointmentDescriptor(
                 appointmentType,
@@ -92,7 +90,7 @@ public class Appointment {
         return appointmentDescriptor.getAppointmentType();
     }
 
-    public Optional<Sickness> getSickness() {
+    public Sickness getSickness() {
         return appointmentDescriptor.getSickness();
     }
 
@@ -100,7 +98,7 @@ public class Appointment {
         return appointmentDescriptor.getAppointmentDateTime();
     }
 
-    public Optional<Medicine> getMedicine() {
+    public Medicine getMedicine() {
         return appointmentDescriptor.getMedicine();
     }
 
@@ -145,8 +143,8 @@ public class Appointment {
                 .add("person", person)
                 .add("appointmentType", getAppointmentType())
                 .add("appointmentDateTime", getAppointmentDateTime())
-                .add("medicine", OptionalUtil.optionalToString(getMedicine()))
-                .add("sickness", OptionalUtil.optionalToString(getSickness()))
+                .add("medicine", getMedicine())
+                .add("sickness", getSickness())
                 .toString();
     }
 }

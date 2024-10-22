@@ -16,7 +16,6 @@ import static seedu.address.logic.parser.ParserUtil.APPOINTMENT_ENTITY_STRING;
 import static seedu.address.logic.parser.ParserUtil.PERSON_ENTITY_STRING;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -92,8 +91,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                     ? ParserUtil.parseMedicine(argMultimap.getValue(PREFIX_MEDICINE).get())
                     : null;
             AppointmentDescriptor appointmentDescriptor = new AppointmentDescriptor(
-                    appointmentType, appointmentDateTime, Optional.ofNullable(sickness),
-                    Optional.ofNullable(medicine));
+                    appointmentType, appointmentDateTime, sickness, medicine);
 
             return new AddAppointmentCommand(appointmentDescriptor, personId);
         default:

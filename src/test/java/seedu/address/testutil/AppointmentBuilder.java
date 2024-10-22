@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalPersons.ALICE_P;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.AppointmentType;
@@ -26,8 +25,8 @@ public class AppointmentBuilder {
     private AppointmentType appointmentType;
     private LocalDateTime appointmentDateTime;
     private Person person;
-    private Optional<Medicine> medicine;
-    private Optional<Sickness> sickness;
+    private Medicine medicine;
+    private Sickness sickness;
 
     /**
      * Creates a {@code AppointmentBuilder} with the default details.
@@ -36,8 +35,8 @@ public class AppointmentBuilder {
         appointmentType = new AppointmentType(DEFAULT_APPOINTMENT_TYPE);
         appointmentDateTime = DEFAULT_APPOINTMENT_DATE_TIME;
         person = DEFAULT_PERSON;
-        medicine = Optional.of(new Medicine(DEFAULT_MEDICINE));
-        sickness = Optional.of(new Sickness(DEFAULT_SICKNESS));
+        medicine = new Medicine(DEFAULT_MEDICINE);
+        sickness = new Sickness(DEFAULT_SICKNESS);
     }
 
     /**
@@ -71,7 +70,7 @@ public class AppointmentBuilder {
      * Sets the {@code Medicine} of the {@code Appointment} that we are building.
      */
     public AppointmentBuilder withMedicine(String medicine) {
-        this.medicine = Optional.of(new Medicine(medicine));
+        this.medicine = new Medicine(medicine);
         return this;
     }
 
@@ -87,7 +86,7 @@ public class AppointmentBuilder {
      * Sets the {@code Sickness} of the {@code Appointment} that we are building.
      */
     public AppointmentBuilder withSickness(String sickness) {
-        this.sickness = Optional.of(new Sickness(sickness));
+        this.sickness = new Sickness(sickness);
         return this;
     }
 

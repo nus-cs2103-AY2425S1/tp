@@ -58,8 +58,8 @@ public class JsonAdaptedAppointment {
         appointmentType = source.getAppointmentType().value;
         appointmentDateTime = source.getAppointmentDateTime().toString();
         personId = source.getPerson().getPersonId();
-        sickness = source.getSickness().map(sickness -> sickness.value).orElse("");
-        medicine = source.getMedicine().map(sickness -> sickness.value).orElse("");
+        sickness = String.valueOf(source.getSickness());
+        medicine = String.valueOf(source.getMedicine());
     }
 
     /**
@@ -99,6 +99,9 @@ public class JsonAdaptedAppointment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
         }
+        if (personId <= 0) {
+            throw new IllegalValueException(String.format(INTEGER_CHECK_MESSAGE_FORMAT));
+        }
         final int modelPersonId = personId;
 
         final Optional<Person> modelPersonOptional = addressBook.findPerson(modelPersonId);
@@ -107,23 +110,15 @@ public class JsonAdaptedAppointment {
         }
         Person modelPerson = modelPersonOptional.get();
 
-        Optional<Sickness> modelSickness;
-        if (sickness == null) {
-            modelSickness = Optional.empty();
-        } else if (!Sickness.isValidSickness(sickness)) {
+        if (!Sickness.isValidSickness(sickness)) {
             throw new IllegalValueException(Sickness.MESSAGE_CONSTRAINTS);
-        } else {
-            modelSickness = Optional.of(new Sickness(sickness));
         }
+        final Sickness modelSickness = new Sickness(sickness);
 
-        Optional<Medicine> modelMedicine;
-        if (medicine == null) {
-            modelMedicine = Optional.empty();
-        } else if (!Medicine.isValidMedicine(medicine)) {
+        if (!Medicine.isValidMedicine(medicine)) {
             throw new IllegalValueException(Medicine.MESSAGE_CONSTRAINTS);
-        } else {
-            modelMedicine = Optional.of(new Medicine(medicine));
         }
+        final Medicine modelMedicine = new Medicine(medicine);
 
         return new Appointment(modelAppointmentType, modelAppointmentDateTime, modelPerson,
                 modelSickness, modelMedicine, appointmentId);

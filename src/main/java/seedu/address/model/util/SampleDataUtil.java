@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -61,23 +60,18 @@ public class SampleDataUtil {
     public static AppointmentDescriptor[] getSampleAppointments() {
         return new AppointmentDescriptor[]{
             new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
-                    10, 20, 9, 30), Optional.of(new Sickness("Flu")),
-                    Optional.of(new Medicine("Antiviral"))),
+                    10, 20, 9, 30), new Sickness("Flu"), new Medicine("Antiviral")),
             new AppointmentDescriptor(new AppointmentType("Follow-up"), LocalDateTime.of(2024,
-                    10, 22, 14, 0), Optional.of(new Sickness("Diabetes")),
-                    Optional.of(new Medicine("Insulin"))),
+                    10, 22, 14, 0), new Sickness("Diabetes"), new Medicine("Insulin")),
             new AppointmentDescriptor(new AppointmentType("Emergency"), LocalDateTime.of(2024,
-                    10, 23, 18, 45), Optional.of(new Sickness("Asthma")),
-                    Optional.of(new Medicine("Inhaler"))),
+                    10, 23, 18, 45), new Sickness("Asthma"), new Medicine("Inhaler")),
             new AppointmentDescriptor(new AppointmentType("Check-up"), LocalDateTime.of(2024,
-                    10, 25, 11, 15), Optional.of(new Sickness("Hypertension")),
-                    Optional.of(new Medicine("Beta-blocker"))),
+                    10, 25, 11, 15), new Sickness("Hypertension"),
+                    new Medicine("Beta-blocker")),
             new AppointmentDescriptor(new AppointmentType("Consultation"), LocalDateTime.of(2024,
-                    10, 28, 16, 30), Optional.of(new Sickness("Migraine")),
-                    Optional.of(new Medicine("Pain reliever"))),
+                    10, 28, 16, 30), new Sickness("Migraine"), new Medicine("Pain reliever")),
             new AppointmentDescriptor(new AppointmentType("Vaccination"), LocalDateTime.of(2024,
-                    11, 1, 10, 0), Optional.of(new Sickness("Preventative Care")),
-                    Optional.of(new Medicine("Vaccine")))
+                    11, 1, 10, 0), new Sickness("Preventative Care"), new Medicine("Vaccine"))
         };
     }
 

@@ -292,7 +292,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Note:**
 For `Appointment`, the fields `Sickness` and `Medicine` are optional. Hence, if `Sickness` or `Medicine` 
-is not specified, it would be represented as an empty string, `""`, in the `appointmentbook.json` file.
+is not specified, it would be represented as `"null"`, in the `appointmentbook.json` file.
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
