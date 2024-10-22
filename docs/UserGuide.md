@@ -24,6 +24,7 @@ Click on each command to jump to their subsection.
 | **[Mark](#marking-person-as-attended-mark)**   | `mark INDEX tut/TUTORIAL`<br> e.g., `mark 2 tut/1`                                                                                               |
 | **[Unmark](#marking-person-as-absent-unmark)** | `unmark INDEX tut/TUTORIAL`<br> e.g., `unmark 2 tut/1`                                                                                           |
 | **[Find](#locating-persons-by-name-find)**     | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                       |
+| **[Sort](#locating-persons-by-name-find)**     | `sort ORDER [n/][i/]`<br> e.g., `sort -1 i/`                                                                                                     |
 | **[Delete](#deleting-a-person--delete)**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                              |
 | **[Clear](#clearing-all-entries--clear)**      | `clear`                                                                                                                                          |
 | **[Exit](#exiting-the-program--exit)**         | `exit`                                                                                                                                           |
