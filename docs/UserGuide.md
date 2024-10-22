@@ -163,10 +163,12 @@ Updates the amount of tuition fee paid by the specified student after a lesson.
 Format: `pay INDEX hr/HOURS_PAID`
 
 Example: 
-* `pay 1 hr/3` updates the tuition amount paid by the 1st student in the address book.
+* `pay 1 hr/2.5` updates the tuition amount paid by the 1st student in the address book.
 
 <box type="important" header="#### Constraints">
-    Hours paid field should be a positive real number, i.e. greater than 0
+
+    Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+
 </box>
 
 ### Clearing all entries : `clear`
@@ -226,6 +228,6 @@ Action     | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Pay**   | `pay INDEX hr/HOURS_PAID`
+**Pay**   | `pay INDEX hr/HOURS_PAID`<br> e.g., `pay 1 hr/2.5`
 **List**   | `list`
 **Help**   | `help`
