@@ -1,0 +1,16 @@
+* {
+    -bar-colour-1: #3498db;
+    -bar-colour-2: #e74c3c;
+}
+
+.default-color0.chart-bar {
+    -fx-bar-fill: -bar-colour-1;
+}
+
+.default-color1.chart-bar {
+    -fx-bar-fill: -bar-colour-2;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: transparent;
+}
