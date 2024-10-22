@@ -94,8 +94,7 @@ public class LogicManagerTest {
                 .withAppointment("", "", "") // Empty appointment details
                 .withProperty("") // Empty property
                 .withTags() // No tags
-                .buildSeller()
-                ;
+                .buildSeller();
 
         // Construct the expected message based on the actual format produced by the application
         String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: "
