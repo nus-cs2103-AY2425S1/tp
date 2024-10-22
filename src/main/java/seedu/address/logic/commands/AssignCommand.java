@@ -77,6 +77,14 @@ public class AssignCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
         }
 
+        // Check if the event is already in the volunteer's list
+        if (v.getEvents().contains(e.getName().toString())) {
+            throw new CommandException(MESSAGE_DUPLICATE_ASSIGN);
+        }
+
+        e.assignVolunteer(v.getName().toString());
+        v.addEvent(e.getName().toString());
+
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }

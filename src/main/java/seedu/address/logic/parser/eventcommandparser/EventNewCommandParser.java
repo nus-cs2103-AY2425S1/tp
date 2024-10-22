@@ -23,6 +23,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.event.Time;
+import seedu.address.model.event.exceptions.ChronologicalOrderException;
 
 /**
  * Parses input arguments and creates a new {@code EventAddCommand} object.
@@ -56,18 +57,22 @@ public class EventNewCommandParser implements Parser<EventNewCommand> {
         Time startTime = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_START_TIME).get());
         Time endTime = EventParserUtil.parseTime(argMultimap.getValue(EVENT_PREFIX_END_TIME).get());
 
-
         Event event;
-        if (arePrefixesPresent(argMultimap, EVENT_PREFIX_DESCRIPTION)) {
-            Description description = EventParserUtil.parseDescription(
-                    argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get()
-            );
-            event = new Event(eventName, location, date, startTime, endTime, description);
-        } else {
-            event = new Event(eventName, location, date, startTime, endTime);
-        }
 
-        return new EventNewCommand(event);
+        try {
+            if (arePrefixesPresent(argMultimap, EVENT_PREFIX_DESCRIPTION)) {
+                Description description = EventParserUtil.parseDescription(
+                        argMultimap.getValue(EVENT_PREFIX_DESCRIPTION).get()
+                );
+                event = new Event(eventName, location, date, startTime, endTime, description);
+            } else {
+                event = new Event(eventName, location, date, startTime, endTime);
+            }
+
+            return new EventNewCommand(event);
+        } catch (ChronologicalOrderException e) {
+            throw new ParseException(e.getMessage());
+        }
     }
 
     /**
