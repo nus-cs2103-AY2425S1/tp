@@ -14,6 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SPECIES = new Prefix("s/");
     public static final Prefix PREFIX_BREED = new Prefix("b/");
     public static final Prefix PREFIX_AGE = new Prefix("a/");
-    public static final Prefix PREFIX_SEX = new Prefix("sex/");
+    public static final Prefix PREFIX_SEX = new Prefix("x/");
     public static final Prefix PREFIX_TO = new Prefix("t/");
 }
