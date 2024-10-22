@@ -22,7 +22,7 @@ public class AddEcNumberCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an emergency contact number to the student "
             + "identified by the index.\n"
-            + "Parameters: [INDEX] en/[EMERGENCY_NUMBER]\n"
+            + "Parameters: [INDEX] ep/[EMERGENCY_NUMBER]\n"
             + "Example: " + COMMAND_WORD + " 1 ep/91234567";
 
     public static final String MESSAGE_ADD_ECNUMBER_SUCCESS = "Added emergency contact number for Person: %1$s\n";

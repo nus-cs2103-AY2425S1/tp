@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -60,6 +62,9 @@ public class PersonUtil {
         descriptor.getSex().ifPresent(sex -> sb.append(PREFIX_SEX).append(sex.value).append(" "));
         descriptor.getStudentClass().ifPresent(studentClass -> sb.append(PREFIX_STUDENT_CLASS)
                 .append(studentClass.value).append(" "));
+        descriptor.getEcName().ifPresent(ecName -> sb.append(PREFIX_ECNAME).append(ecName.value).append(" "));
+        descriptor.getEcNumber().ifPresent(ecNumber -> sb.append(PREFIX_ECNUMBER).append(ecNumber.value)
+                .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
