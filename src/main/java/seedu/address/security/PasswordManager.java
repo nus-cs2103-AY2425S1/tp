@@ -84,23 +84,20 @@ public class PasswordManager {
             return false; // No password set
         }
 
-        // Split the stored hash into salt and hash parts
         String[] parts = storedPasswordHash.split(":");
         if (parts.length != 2) {
             throw new IllegalStateException("Stored password format is incorrect.");
         }
 
-        // Extract salt and hash from the stored password
         String storedSaltString = parts[0];
         String storedHashString = parts[1];
 
-        // Decode the Base64-encoded salt
         byte[] salt = Base64.getDecoder().decode(storedSaltString);
+        String hashedInputPasswordWithSalt = hashPassword(inputPassword, salt);
 
-        // Hash the input password using the extracted salt
-        String hashedInputPassword = hashPassword(inputPassword, salt);
+        String[] hashedInputParts = hashedInputPasswordWithSalt.split(":");
+        String hashedInputPassword = hashedInputParts[1];
 
-        // Compare the hashes
         return hashedInputPassword.equals(storedHashString);
     }
 
