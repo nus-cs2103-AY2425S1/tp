@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -40,7 +39,6 @@ public class EditGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the address book.";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Exactly 2 group names (original and updated)"
         + "are required, but %d were provided.";
-    public static final String MESSAGE_GROUP_NOT_FOUND = "The target group is not found in the address book.";
 
     private final GroupName groupName;
     private final EditGroupDescriptor editGroupDescriptor;
@@ -61,7 +59,7 @@ public class EditGroupCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (!model.containsGroupName(groupName)) {
-            throw new CommandException(MESSAGE_GROUP_NOT_FOUND);
+            throw new CommandException(Messages.MESSAGE_GROUP_NAME_NOT_FOUND);
         }
         Group groupToEdit = model.getGroupByName(groupName);
         Group editedGroup = createEditedGroup(groupToEdit, editGroupDescriptor);
