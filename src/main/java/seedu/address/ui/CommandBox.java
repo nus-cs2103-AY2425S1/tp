@@ -6,6 +6,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import org.kordamp.ikonli.javafx.FontIcon;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,11 +44,9 @@ public class CommandBox extends UiPart<Region> {
 
         commandTextArea.focusedProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal) {
-                // Set colours when TextArea is focused
-                commandTextIcon.setIconColor(Color.WHITE);
+                setStyleToFocused();
             } else {
-                // Set colours when TextArea loses focus
-                commandTextIcon.setIconColor(Color.GREY);
+                setStyleToUnfocused();
             }
         });
 
@@ -78,6 +77,23 @@ public class CommandBox extends UiPart<Region> {
      */
     private void setStyleToDefault() {
         commandTextArea.getStyleClass().remove(ERROR_STYLE_CLASS);
+        commandTextArea.setStyle("-fx-text-fill: white;");
+        commandTextIcon.setIconColor(Color.WHITE);
+    }
+
+    /** Sets the command box style to indicate the command box is focused. */
+    private void setStyleToFocused() {
+        commandTextIcon.setIconColor(Color.WHITE);
+        if (commandTextArea.getStyleClass().contains(ERROR_STYLE_CLASS)) {
+            return;
+        }
+        commandTextArea.setStyle("-fx-text-fill: white;");
+    }
+
+    /** Sets the command box style to indicate the command box is not focused. */
+    private void setStyleToUnfocused() {
+        commandTextArea.setStyle("-fx-text-fill: grey;");
+        commandTextIcon.setIconColor(Color.GREY);
     }
 
     /**
