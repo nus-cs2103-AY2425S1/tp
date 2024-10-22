@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddClientProfile;
+import seedu.address.logic.commands.AddBuyerProfile;
+import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClientProfileCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -25,8 +26,10 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Seller;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -36,10 +39,17 @@ public class AddressBookParserTest {
     private final AddressBookParser parser = new AddressBookParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddClientProfile command = (AddClientProfile) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddClientProfile(person), command);
+    public void parseCommand_addBuyer() throws Exception {
+        Buyer buyer = new PersonBuilder().buildBuyer();
+        AddBuyerProfile command = (AddBuyerProfile) parser.parseCommand(PersonUtil.getAddCommand(buyer));
+        assertEquals(new AddBuyerProfile(buyer), command);
+    }
+
+    @Test
+    public void parseCommand_addSeller() throws Exception {
+        Seller seller = (Seller) new PersonBuilder().buildSeller();
+        AddSellerProfile command = (AddSellerProfile) parser.parseCommand(PersonUtil.getAddCommand(seller));
+        assertEquals(new AddSellerProfile(seller), command);
     }
 
     @Test
@@ -57,7 +67,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().buildBuyer();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));

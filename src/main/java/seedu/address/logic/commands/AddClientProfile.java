@@ -1,60 +1,49 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Abstract class for adding clients (buyers or sellers) to the address book.
  */
-public class AddClientProfile extends Command {
+public abstract class AddClientProfile extends Command {
 
-    public static final String COMMAND_WORD = "add";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney "
-            + PREFIX_EMAIL + "johnd@example.com";
-
-    public static final String MESSAGE_SUCCESS = "%1$s has been added to your contact list!";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";
-
-    private final Person personToAdd;
+    protected final Person toAdd;
 
     /**
-     * Creates an AddClientProfile to add the specified {@code Person}
+     * Adds a client profile.
      */
-    public AddClientProfile(Person person) {
-        requireNonNull(person);
-        personToAdd = person;
+    public AddClientProfile(Person toAdd) {
+        requireNonNull(toAdd);
+        this.toAdd = toAdd;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(personToAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(getDuplicatePersonMessage());
         }
 
-        model.addPerson(personToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, personToAdd.getName()));
+        model.addPerson(toAdd);
+        return new CommandResult(String.format(getSuccessMessage(), Messages.format(toAdd)));
     }
+
+    /**
+     * Gets the specific success message for adding the client (either buyer or seller).
+     */
+    protected abstract String getSuccessMessage();
+
+    /**
+     * Gets the specific duplicate person message for buyers or sellers.
+     */
+    protected abstract String getDuplicatePersonMessage();
 
     @Override
     public boolean equals(Object other) {
@@ -63,18 +52,17 @@ public class AddClientProfile extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddClientProfile)) {
+        if (!(other instanceof AddClientProfile otherAddCommand)) {
             return false;
         }
 
-        AddClientProfile otherAddCommand = (AddClientProfile) other;
-        return personToAdd.equals(otherAddCommand.personToAdd);
+        return toAdd.equals(otherAddCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", personToAdd)
+                .add("toAdd", toAdd)
                 .toString();
     }
 }

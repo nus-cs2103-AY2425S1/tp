@@ -14,11 +14,13 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,6 +38,7 @@ class JsonAdaptedPerson {
     private final String from;
     private final String to;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String role;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -45,7 +48,7 @@ class JsonAdaptedPerson {
              @JsonProperty("date") String date, @JsonProperty("email") String email,
                              @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("from") String from, @JsonProperty("to") String to,
-                            @JsonProperty("property") String property) {
+                            @JsonProperty("property") String property, @JsonProperty("role") String role) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +56,7 @@ class JsonAdaptedPerson {
         this.from = from;
         this.to = to;
         this.property = property;
+        this.role = role;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -69,6 +73,7 @@ class JsonAdaptedPerson {
         date = source.getAppointment().getDate().value;
         from = source.getAppointment().getFrom().value;
         to = source.getAppointment().getTo().value;
+        role = source instanceof Buyer ? "buyer" : "seller";
         tags.addAll(source.getTags().stream()
                   .map(JsonAdaptedTag::new)
                    .collect(Collectors.toList()));
@@ -130,7 +135,10 @@ class JsonAdaptedPerson {
         final Property modelProperty = new Property(property);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelTags, modelAppointment, modelProperty);
+        if (role.equals("buyer")) {
+            return new Buyer(modelName, modelPhone, modelEmail, modelTags, modelAppointment, modelProperty);
+        } else {
+            return new Seller(modelName, modelPhone, modelEmail, modelTags, modelAppointment, modelProperty);
+        }
     }
-
 }

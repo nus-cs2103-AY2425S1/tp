@@ -55,8 +55,8 @@ public class AppointmentCommandTest {
     @Test
     public void execute_invalidIndex_throwsCommandException() {
         // Arrange
-        ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().build());
-        Index invalidIndex = Index.fromZeroBased(1); // Invalid index
+        ModelStubWithPerson modelStub = new ModelStubWithPerson(new PersonBuilder().buildBuyer());
+        Index invalidIndex = Index.fromZeroBased(1);
 
         AppointmentCommand command = new AppointmentCommand(invalidIndex, validAppointment);
 
@@ -68,7 +68,7 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_addAppointmentSuccess() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").build();
+        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
         AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
@@ -77,7 +77,8 @@ public class AppointmentCommandTest {
         CommandResult result = command.execute(modelStub);
 
         // Assert
-        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO).build();
+        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
+                .buildBuyer();
         assertEquals(String.format(AppointmentCommand.MESSAGE_ADD_APPOINTMENT_SUCCESS, Messages.format(editedPerson)),
                 result.getFeedbackToUser());
     }
@@ -85,7 +86,7 @@ public class AppointmentCommandTest {
     @Test
     public void execute_validIndex_updatesPersonWithAppointment() throws Exception {
         // Arrange
-        Person personToEdit = new PersonBuilder().withName("Alice").build();
+        Person personToEdit = new PersonBuilder().withName("Alice").buildBuyer();
         ModelStubWithPerson modelStub = new ModelStubWithPerson(personToEdit);
 
         AppointmentCommand command = new AppointmentCommand(INDEX_FIRST_PERSON, validAppointment);
@@ -94,7 +95,8 @@ public class AppointmentCommandTest {
         command.execute(modelStub);
 
         // Assert
-        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO).build();
+        Person editedPerson = new PersonBuilder(personToEdit).withAppointment(VALID_DATE, VALID_FROM, VALID_TO)
+                .buildBuyer();
         assertEquals(editedPerson.getAppointment(), validAppointment);
     }
 

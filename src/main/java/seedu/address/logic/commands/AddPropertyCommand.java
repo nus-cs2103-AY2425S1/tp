@@ -11,8 +11,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 
 /**
  * Adds a property to an existing person in the address book.
@@ -61,8 +63,16 @@ public class AddPropertyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(),
-                personToEdit.getEmail(), personToEdit.getTags(), personToEdit.getAppointment(), property);
+        Person editedPerson;
+        if (personToEdit instanceof Buyer) {
+            editedPerson = new Buyer(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getProperty()
+            );
+        } else {
+            editedPerson = new Seller(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                    personToEdit.getTags(), personToEdit.getAppointment(), personToEdit.getProperty()
+            );
+        }
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(generateSuccessMessage(editedPerson));

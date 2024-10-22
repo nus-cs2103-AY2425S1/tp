@@ -40,8 +40,11 @@ public class JsonSerializableAddressBookTest {
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
+        // Load the test data from the JSON file that contains duplicate persons
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
                 JsonSerializableAddressBook.class).get();
+
+        // Ensure the test correctly throws IllegalValueException due to duplicate persons in the data
         assertThrows(IllegalValueException.class, JsonSerializableAddressBook.MESSAGE_DUPLICATE_PERSON,
                 dataFromFile::toModelType);
     }
