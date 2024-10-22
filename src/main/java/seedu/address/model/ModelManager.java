@@ -149,11 +149,13 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasPersonsOfType(Class<? extends Person> personType) {
+        requireNonNull(personType);
         return filteredPersons.stream().anyMatch(personType::isInstance);
     }
 
     @Override
     public boolean hasOnlyPersonsOfType(Class<? extends Person> personType) {
+        requireNonNull(personType);
         return filteredPersons.stream().allMatch(personType::isInstance);
     }
 
@@ -176,6 +178,7 @@ public class ModelManager implements Model {
     //=========== Sorted Person List Accessors =============================================================
     @Override
     public void updatePersonListSort(Comparator<Person> comparator) {
+        requireNonNull(comparator);
         sortedPersons.setComparator(comparator);
     }
 
