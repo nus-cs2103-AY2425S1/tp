@@ -32,13 +32,13 @@ public class SortCommandTest {
     }
 
     @Test
-    public void correctlySortsNewPersonByName() {
+    public void execute_listIsNotFiltered_sortsByName() {
         expectedModel.updateSortedPersonList(new PersonNameComparator());
         assertCommandSuccess(new SortNameCommand(), model, SortNameCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void correctlySortsExistingPersonsByName() {
+    public void execute_listIsFiltered_showsOnlyEmployees() {
         // filter both lists to show all employees
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
@@ -47,7 +47,7 @@ public class SortCommandTest {
     }
 
     @Test
-    public void correctlySortsNewPersonByDate() {
+    public void execute_listIsNotFiltered_sortsByDate() {
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_EMPLOYEES);
         expectedModel.updateSortedPersonList(new PersonDateComparator());
         assertCommandSuccess(new SortDateCommand(), model, SortDateCommand.MESSAGE_SUCCESS, expectedModel);
