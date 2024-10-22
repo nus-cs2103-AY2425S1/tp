@@ -34,8 +34,8 @@ public class SetRsvpCommandTest {
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), RsvpStatus.COMING, personToUpdate.getTags());
 
-        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS +
-                updatedPerson.getName().fullName + " (" + RsvpStatus.COMING + ")");
+        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS
+                + updatedPerson.getName().fullName + " (" + RsvpStatus.COMING + ")");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToUpdate, updatedPerson);
@@ -54,8 +54,8 @@ public class SetRsvpCommandTest {
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), RsvpStatus.NOT_COMING, personToUpdate.getTags());
 
-        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS +
-                updatedPerson.getName().fullName + " (" + RsvpStatus.NOT_COMING + ")");
+        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS
+                + updatedPerson.getName().fullName + " (" + RsvpStatus.NOT_COMING + ")");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToUpdate, updatedPerson);
@@ -74,8 +74,8 @@ public class SetRsvpCommandTest {
         Person updatedPerson = new Person(personToUpdate.getName(), personToUpdate.getPhone(),
                 personToUpdate.getEmail(), RsvpStatus.PENDING, personToUpdate.getTags());
 
-        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS +
-                updatedPerson.getName().fullName + " (" + RsvpStatus.PENDING + ")");
+        String expectedMessage = String.format(SetRsvpCommand.MESSAGE_SET_SUCCESS
+                + updatedPerson.getName().fullName + " (" + RsvpStatus.PENDING + ")");
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(personToUpdate, updatedPerson);
