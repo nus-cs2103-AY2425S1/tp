@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.exceptions.DuplicateAssignException;
+import seedu.address.model.exceptions.NotAssignedException;
 import seedu.address.model.volunteer.UniqueVolunteerList;
 import seedu.address.model.volunteer.Volunteer;
 
@@ -154,6 +156,52 @@ public class AddressBook implements ReadOnlyAddressBook {
         volunteers.removeEvent(key.getName().toString());
         events.remove(key);
     }
+
+    /**
+     * Assigns a volunteer to an event.
+     * @param v Volunteer to be assigned.
+     * @param e Event to be assigned to.
+     * @throws DuplicateAssignException if the volunteer is already assigned to the event.
+     */
+    public void assignVolunteerToEvent(Volunteer v, Event e) throws DuplicateAssignException {
+        // Store the names to avoid duplication
+        String volunteerName = v.getName().fullName;
+        String eventName = e.getName().toString();
+        // Check if the volunteer is already assigned to the event
+        if (e.getVolunteers().contains(volunteerName)) {
+            throw new DuplicateAssignException();
+        }
+        // Check if the event is already in the volunteer's list
+        if (v.getEvents().contains(eventName)) {
+            throw new DuplicateAssignException();
+        }
+        // Add the event and volunteer association
+        v.addEvent(eventName);
+        e.assignVolunteer(volunteerName);
+    }
+
+    /**
+     * Unassigns a volunteer from an event.
+     * @param v Volunteer to be unassigned.
+     * @param e Event to be unassigned from.
+     * @throws NotAssignedException if the volunteer is not assigned to the event.
+     */
+    public void unassignVolunteerFromEvent(Volunteer v, Event e) throws NotAssignedException {
+        // Store the names to avoid duplication
+        String volunteerName = v.getName().toString();
+        String eventName = e.getName().toString();
+        // Check if the volunteer is not assigned to the event
+        if (!e.getVolunteers().contains(volunteerName)) {
+            throw new NotAssignedException();
+        }
+        if (!v.getEvents().contains(eventName)) {
+            throw new NotAssignedException();
+        }
+        // Remove the volunteer and event association
+        v.removeEvent(eventName);
+        e.unassignVolunteer(volunteerName);
+    }
+
     //// util methods
     @Override
     public String toString() {

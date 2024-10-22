@@ -92,10 +92,10 @@ public class Volunteer {
     public Time getEndTimeAvailability() {
         return endTimeAvailability;
     }
-
     public ObservableList<String> getInvolvedIn() {
         return involvedIn;
     }
+
     /**
      * Returns true if both volunteers have the same name.
      * This defines a weaker notion of equality between two volunteers.
@@ -143,14 +143,6 @@ public class Volunteer {
         involvedIn.add(newEvent);
     }
 
-    /**
-     * Removes the specified event from the list of events the volunteer is involved in.
-     *
-     * @param unassignedEvent The name of the event to be unassigned.
-     */
-    public void unassignEvent(String unassignedEvent) {
-        involvedIn.remove(unassignedEvent);
-    }
     /**
      * Removes an event from the volunteer's list of events.
      *
