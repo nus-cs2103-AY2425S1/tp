@@ -13,6 +13,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.participation.Participation;
+import seedu.address.model.person.Attendance;
 import seedu.address.model.person.Person;
 
 /**
@@ -31,15 +32,17 @@ public class MarkAttendanceCommand extends Command {
     public static final String MESSAGE_MARK_ATTENDANCE_SUCCESS = "Marked attendance of person: %1$s";
 
     private final Index targetIndex;
-    private final Attendance attendance;
+    private final String tutorial;
+    private final String attendance;
 
     /**
      * @param targetIndex Index of the person in the filtered person list to mark
      * @param attendance Attendance of the person specified by index
      */
-    public MarkAttendanceCommand(Index targetIndex, Attendance attendance) {
+    public MarkAttendanceCommand(Index targetIndex, String tutorial, String attendance) {
         requireAllNonNull(targetIndex, attendance);
         this.targetIndex = targetIndex;
+        this.tutorial = tutorial;
         this.attendance = attendance;
     }
 
