@@ -56,8 +56,8 @@ public class ViewCommandTest {
     @Test
     public void execute_singleKeyword_noPersonFound() {
         CommandResult expectedCommandResult = new CommandResult(
-                String.format(MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW
-                        + "\nPlease specify the name further to view.", 0),
+                String.format(
+                        MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW + "\nPlease specify the name further to view.", 0),
                 false, false, false);
         NameContainsKeywordsPredicate predicate = preparePredicate("A");
         ViewCommand command = new ViewCommand(predicate);
