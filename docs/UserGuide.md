@@ -6,7 +6,7 @@
 
 # Knotty Planner 💍🎀 
 
-Knotty Planner is a **desktop app for wedding planners, optimised for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
+Knotty Planner is a **desktop app for wedding planners, optimised for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
 
 <!-- * Table of Contents -->
 ## Table of Contents
@@ -24,7 +24,7 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 1. Ensure you have Java `17` or above installed in your Computer.
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-W13-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Knotty Planner.
 
@@ -72,13 +72,12 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 ### Viewing help : `help`
 
-Shows a message with a link to the user guide, explaining how to use the commands with detailed descriptions.
+If you require additional assistance, the `help` command shows a message with a link to the user guide,
+explaining how to use the commands with detailed descriptions.
 
 Format: `help`
 
 ![help message](images/helpmsg.png)
-
-
 
 
 ### Adding a person: `add`
@@ -117,7 +116,7 @@ Format: `add-wedding w/NAME & NAME v/VENUE d/DATETIME`
 ![add wedding message](images/addWeddingMsg.png)
 
 Examples:
-* `add w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/11/11/2024`
+* `add-wedding w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/11/11/2024`
 
 <box type="tip" seamless>
 
@@ -138,7 +137,7 @@ Format: `edit n/NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [j/JOB] [t/TAG]`
 
 ![edit message](images/editMsg.png)
 
-* Edits the person at with the specified `NAME`.
+* Edits the person with the specified `NAME`.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -195,7 +194,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword will be returned.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -232,7 +231,7 @@ Format: `delete INDEX` followed by `delete-y` or `delete-n`
 * Deletes the person with the specified `NAME` from the address book.
 * The contact's details are shown for confirmation.
 * The contact is deleted if `delete-y` is entered.
-* The contact is not deleted if `delete-n` is entered, cancelling the delete operation.
+* The contact is not deleted if `delete-n` is entered, cancelling the delete operation and nothing will occur.
 
 Examples:
 * `delete n/John Doe` followed by `delete-y` deletes the person named `John Doe` from the address book.
@@ -254,17 +253,18 @@ Format: `exit`
 
 ### Saving the data
 
-Knotty Planner data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Knotty Planner data will be saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-Knotty Planner data are saved automatically as a JSON file `[JAR file location]/data/knottyplanner.json`. Advanced users are welcome to update data directly by editing that data file.
+* Knotty Planner data are saved automatically as a JSON file `[JAR file location]/data/knottyplanner.json`.
+* Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
-**Caution:**
-If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+**<span style="color: red;">Caution:</span>**
+* If your changes to the data file makes its format invalid, Knotty Planner will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+* Furthermore, certain edits can cause the Knotty Planner to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -283,7 +283,7 @@ _Details coming soon ..._
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+2. **If you minimise the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimised, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
 --------------------------------------------------------------------------------------------------------------------
 
