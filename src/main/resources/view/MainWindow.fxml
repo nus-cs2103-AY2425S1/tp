@@ -10,7 +10,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
@@ -47,22 +46,19 @@
           </padding>
         </StackPane>
 
-        <!-- New HBox to hold both SupplierListPanel and ProductListPanel -->
-        <HBox VBox.vgrow="ALWAYS" spacing="10">
-          <VBox fx:id="supplierList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="supplierListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
-
-          <VBox fx:id="productList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
-        </HBox>
+        <VBox fx:id="supplierList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
+          <StackPane fx:id="supplierListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        </VBox>
+        <!-- Product List Panel - Initially hidden -->
+        <VBox fx:id="productList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" visible="false" managed="false">
+          <padding>
+            <Insets top="10" right="10" bottom="10" left="10" />
+          </padding>
+          <StackPane fx:id="productListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        </VBox>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
