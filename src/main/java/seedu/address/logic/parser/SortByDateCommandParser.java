@@ -19,10 +19,10 @@ public class SortByDateCommandParser implements Parser<SortByDateCommand> {
         String args = userInput.trim().toLowerCase();
 
         return switch (args) {
-            case "recent" -> new SortByDateCommand(new DateRecentToDistantComparator());
-            case "distant" -> new SortByDateCommand(new DateDistantToRecentComparator());
-            default -> throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortByDateCommand.MESSAGE_USAGE));
+        case "recent" -> new SortByDateCommand(new DateRecentToDistantComparator());
+        case "distant" -> new SortByDateCommand(new DateDistantToRecentComparator());
+        default -> throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortByDateCommand.MESSAGE_USAGE));
         };
     }
 }
