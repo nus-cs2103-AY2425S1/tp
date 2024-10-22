@@ -42,4 +42,9 @@ public interface TransactionBookModel {
      * clear existing filters.
      */
     void updateFilteredTransactionList(Predicate<Transaction> predicate);
+
+    /**
+     * Deletes transactions of a person with the given id. Used for when a person is deleted.
+     */
+    void deleteTransactionsOfPersonId(String personId);
 }

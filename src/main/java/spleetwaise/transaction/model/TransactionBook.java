@@ -101,6 +101,16 @@ public class TransactionBook implements ReadOnlyTransactionBook {
         return transactionList.remove(key);
     }
 
+    /**
+     * Removes all txns involving person with {@code personId}.
+     */
+    public void deleteTransactionsOfPersonId(String personId) {
+        requireNonNull(personId);
+        List<Transaction> txnList = transactionList.stream().filter((t) -> !t.isByPersonId(personId)).toList();
+        transactionList.clear();
+        transactionList.addAll(txnList);
+    }
+
     @Override
     public ObservableList<Transaction> getTransactionList() {
         return transactionUnmodifiableList;

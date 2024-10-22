@@ -112,6 +112,7 @@ public class CommonModel implements Model {
     public void deletePerson(Person target) {
         requireNonNull(addressBookModel, "AddressBook model cannot be null");
         addressBookModel.deletePerson(target);
+        deleteTransactionsOfPersonId(target.getId());
     }
 
     @Override
@@ -179,5 +180,11 @@ public class CommonModel implements Model {
     public void updateFilteredTransactionList(Predicate<Transaction> predicate) {
         requireNonNull(transactionBookModel, "TransactionBook model cannot be null");
         transactionBookModel.updateFilteredTransactionList(predicate);
+    }
+
+    @Override
+    public void deleteTransactionsOfPersonId(String personId) {
+        requireNonNull(personId);
+        transactionBookModel.deleteTransactionsOfPersonId(personId);
     }
 }

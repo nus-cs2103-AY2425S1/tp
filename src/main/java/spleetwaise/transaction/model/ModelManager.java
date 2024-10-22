@@ -82,6 +82,12 @@ public class ModelManager implements TransactionBookModel {
     }
 
     @Override
+    public void deleteTransactionsOfPersonId(String personId) {
+        requireNonNull(personId);
+        transactionBook.deleteTransactionsOfPersonId(personId);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
