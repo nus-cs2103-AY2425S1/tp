@@ -11,6 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Doctor;
+import seedu.address.model.person.Id;
+import seedu.address.model.person.Patient;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,6 +37,16 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        /*
+        for (Person person : filteredPersons) {
+            if (person.getRole().equals("doctor")) {
+                Doctor.addDoctors((Doctor) person);
+            }
+            if (person.getRole().equals("patient")) {
+                Patient.addPatient(person);
+            }
+        }
+        */
     }
 
     public ModelManager() {
@@ -120,6 +133,36 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    @Override
+    public ObservableList<Person> getFilteredPersonById(Id id) {
+        return filteredPersons.filtered(person -> person.getId().getIdValue() == id.getIdValue());
+    }
+
+    @Override
+    public Patient getFilteredPatientById(ObservableList<Person> allPersons, Id id) {
+        Patient patient = null;
+        for (Person person : allPersons) {
+            if (person.getId().getIdValue() == id.getIdValue()) {
+                System.out.println(person.getName());
+                patient = (Patient) person;
+                break;
+            }
+        }
+        return patient;
+    }
+
+    @Override
+    public Doctor getFilteredDoctorById(ObservableList<Person> allPersons, Id id) {
+        Doctor doctor = null;
+        for (Person person : allPersons) {
+            if (person.getId().getIdValue() == id.getIdValue()) {
+                doctor = (Doctor) person;
+                break;
+            }
+        }
+        return doctor;
     }
 
     @Override
