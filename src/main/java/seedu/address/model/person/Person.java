@@ -80,6 +80,10 @@ public class Person {
         throw new EmergencyContactNotFoundException();
     }
 
+    public Boolean hasOnlyOneEmergencyContact() {
+        return emergencyContacts.size() == 1;
+    }
+
     public Boolean hasEmergencyContact(EmergencyContact emergencyContactToCheck) {
         for (EmergencyContact emergencyContact : emergencyContacts) {
             if (emergencyContact.equals((emergencyContactToCheck))) {

@@ -25,14 +25,6 @@ public class Index {
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
-    public int getZeroBased() {
-        return zeroBasedIndex;
-    }
-
-    public int getOneBased() {
-        return zeroBasedIndex + 1;
-    }
-
     /**
      * Creates a new {@code Index} using a zero-based index.
      */
@@ -45,6 +37,14 @@ public class Index {
      */
     public static Index fromOneBased(int oneBasedIndex) {
         return new Index(oneBasedIndex - 1);
+    }
+
+    public int getZeroBased() {
+        return zeroBasedIndex;
+    }
+
+    public int getOneBased() {
+        return zeroBasedIndex + 1;
     }
 
     @Override
@@ -65,5 +65,11 @@ public class Index {
     @Override
     public String toString() {
         return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
+    }
+
+    public static class EmptyEmergencyContactIndex extends Index {
+        public EmptyEmergencyContactIndex() {
+            super(Integer.MAX_VALUE);
+        }
     }
 }

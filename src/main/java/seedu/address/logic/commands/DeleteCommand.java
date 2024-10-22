@@ -8,7 +8,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,15 +22,32 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) [EMERGENCY CONTACT INDEX (must be a positive integer)]\n"
+            + "Example: " + COMMAND_WORD + " 1 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final Index targetIndex;
+    public static final String MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS = "Deleted Emergency Contact: %1$s";
 
-    public DeleteCommand(Index targetIndex) {
+    private final Index targetIndex;
+    private final Index emergencyContactIndex;
+
+    public DeleteCommand(Index targetIndex, Index emergencyContactIndex) {
         this.targetIndex = targetIndex;
+        this.emergencyContactIndex = emergencyContactIndex;
+    }
+
+    private CommandResult executeDeleteEmergencyContact(Index emergencyContactIndex,
+                                                        Person personToDelete,
+                                                        Model model) throws CommandException {
+        if (personToDelete.hasOnlyOneEmergencyContact()) {
+            throw new CommandException(Messages.MESSAGE_LAST_EMERGENCY_CONTACT_INDEX);
+        }
+        EmergencyContact deletedEmergencyContact =
+                personToDelete.getAndRemoveEmergencyContact(emergencyContactIndex);
+        model.setPerson(personToDelete, personToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_EMERGENCY_CONTACT_SUCCESS,
+                Messages.formatEmergencyContact(deletedEmergencyContact)));
     }
 
     @Override
@@ -41,6 +60,9 @@ public class DeleteCommand extends Command {
         }
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
+        if (!(emergencyContactIndex instanceof  Index.EmptyEmergencyContactIndex)) {
+            return executeDeleteEmergencyContact(emergencyContactIndex, personToDelete, model);
+        }
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
