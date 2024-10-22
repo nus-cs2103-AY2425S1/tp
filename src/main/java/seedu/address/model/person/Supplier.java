@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.order.OrderList;
 import seedu.address.model.order.SupplyOrder;
+import seedu.address.model.product.Ingredients;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -15,47 +15,34 @@ import seedu.address.model.tag.Tag;
  */
 public class Supplier extends Person {
 
-    private final String companyName;
-    private final List<String> ingredients;
-    private final String supplyFrequency;
-    private final int minimumOrderQuantity;
-    private final List<String> paymentTerms;  // Multiple payment options
-    private final List<SupplyOrder> openSupplyOrders;
+    private final List<SupplyOrder> openSupplyOrders; // stores a list of open/unfulfilled supply orders
+    private final Ingredients ingredientsSupplied; // list of ingredients supplied by the supplier
 
     /**
      * Every field must be present and not null.
      */
     public Supplier(Name name, Phone phone, Email email, Address address,
-                    DietaryPreference preference, Remark remark, Set<Tag> tags,
-                    String companyName, List<String> ingredients, String supplyFrequency, int minimumOrderQuantity,
-                    List<String> paymentTerms) {
+                    DietaryPreference preference, Ingredients ingredientsSupplied,
+                    Remark remark, Set<Tag> tags) {
         super(name, phone, email, address, preference, remark, tags);
-        this.companyName = companyName;
-        this.ingredients = ingredients;
-        this.supplyFrequency = supplyFrequency;
-        this.minimumOrderQuantity = minimumOrderQuantity;
-        this.paymentTerms = paymentTerms;
+        this.ingredientsSupplied = ingredientsSupplied;
         this.openSupplyOrders = new ArrayList<>();
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public List<SupplyOrder> getOpenSupplyOrders() {
+        return openSupplyOrders;
     }
 
-    public List<String> getIngredients() {
-        return ingredients;
+    public void addSupplyOrder(SupplyOrder supplyOrder) {
+        openSupplyOrders.add(supplyOrder);
     }
 
-    public String getSupplyFrequency() {
-        return supplyFrequency;
+    public void removeSupplyOrder(SupplyOrder supplyOrder) {
+        openSupplyOrders.remove(supplyOrder);
     }
 
-    public int getMinimumOrderQuantity() {
-        return minimumOrderQuantity;
-    }
-
-    public List<String> getPaymentTerms() {
-        return paymentTerms;
+    public Ingredients getIngredientsSupplied() {
+        return ingredientsSupplied;
     }
 
     @Override
@@ -70,31 +57,19 @@ public class Supplier extends Person {
 
         Supplier otherSupplier = (Supplier) other;
         return super.equals(otherSupplier)
-                && otherSupplier.getCompanyName().equals(getCompanyName())
-                && otherSupplier.getIngredients().equals(getIngredients())
-                && otherSupplier.getSupplyFrequency().equals(getSupplyFrequency())
-                && otherSupplier.getMinimumOrderQuantity() == getMinimumOrderQuantity()
-                && otherSupplier.getPaymentTerms().equals(getPaymentTerms());
+                && otherSupplier.getIngredientsSupplied().equals(getIngredientsSupplied());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), companyName, ingredients, supplyFrequency, minimumOrderQuantity, paymentTerms);
+        return Objects.hash(super.hashCode(), ingredientsSupplied);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder(super.toString());
-        builder.append(" Company: ")
-                .append(getCompanyName())
-                .append(" Ingredients: ")
-                .append(getIngredients())
-                .append(" Supply Frequency: ")
-                .append(getSupplyFrequency())
-                .append(" Minimum Order Quantity: ")
-                .append(getMinimumOrderQuantity())
-                .append(" Payment Terms: ")
-                .append(getPaymentTerms());
+        builder.append(" Ingredients Supplied: ")
+                .append(String.join(", ", getIngredientsSupplied().getIngredientNames()));
         return builder.toString();
     }
 }
