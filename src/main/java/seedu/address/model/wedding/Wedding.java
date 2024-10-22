@@ -40,6 +40,22 @@ public class Wedding {
     }
 
     /**
+     * Constructs a {@code Wedding} with the specified {@code weddingName}
+     * @param weddingName A valid {@code WeddingName}
+     */
+    public Wedding(WeddingName weddingName, int peopleCount, Person partner1, Person partner2,
+                   ArrayList<Person> guestList, Address address, String date) {
+        requireNonNull(weddingName);
+        this.weddingName = weddingName;
+        this.peopleCount = peopleCount;
+        this.partner1 = partner1;
+        this.partner2 = partner2;
+        this.guestList = guestList;
+        this.address = address;
+        this.date = date;
+    }
+
+    /**
      * Returns true if a given string is a valid wedding name.
      */
     public static boolean isValidWeddingName(String checkName) {
@@ -55,11 +71,51 @@ public class Wedding {
     }
 
     /**
+     * Returns people count associated with wedding
+     * @return peopleCount ({@code int}) of the wedding
+     */
+    public int getPeopleCount() {
+        return this.peopleCount;
+    }
+
+    /**
+     * Returns partner1 associated with wedding
+     * @return A {@code Person} object of the partner1 of the wedding
+     */
+    public Person getPartner1() {
+        return this.partner1;
+    }
+
+    /**
+     * Returns partner2 associated with wedding
+     * @return A {@code Person} object of the partner2 of the wedding
+     */
+    public Person getPartner2() {
+        return this.partner2;
+    }
+
+    /**
+     * Returns guest list associated with wedding
+     * @return An {@code ArrayList<Person>} object of the guest list of the wedding
+     */
+    public ArrayList<Person> getGuestList() {
+        return this.guestList;
+    }
+
+    /**
      * Returns wedding address associated with wedding
      * @return A {@code Address} object of the address of the wedding
      */
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns date associated with wedding
+     * @return A {@code String} object of the date of the wedding
+     */
+    public String getDate() {
+        return this.date;
     }
 
     /**
