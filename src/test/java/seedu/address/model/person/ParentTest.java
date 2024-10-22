@@ -96,6 +96,15 @@ public class ParentTest {
     }
 
     @Test
+    public void toMessageString() {
+        StringBuilder tags = new StringBuilder();
+        ALICE.getTags().forEach(tags::append);
+        String expected = ALICE.getName() + "; Phone: " + ALICE.getPhone() + "; Email: " + ALICE.getEmail()
+                + "; Address: " + ALICE.getAddress() + "; Child: " + ALICE.getChild() + "; Tags: " + tags;
+        assertEquals(expected, ALICE.toMessageString());
+    }
+
+    @Test
     public void toStringMethod() {
         String expected = Parent.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress()
