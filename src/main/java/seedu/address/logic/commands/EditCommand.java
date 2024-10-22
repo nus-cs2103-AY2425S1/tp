@@ -107,9 +107,13 @@ public class EditCommand extends Command {
                 personToEdit.getListOfSellingProperties();
         ObservableList<Property> buyingProperties = (ObservableList<Property>)
                 personToEdit.getListOfBuyingProperties();
+        ObservableList<Property> propertiesSold = (ObservableList<Property>)
+                personToEdit.getListOfPropertiesSold();
+        ObservableList<Property> propertiesBought = (ObservableList<Property>)
+                personToEdit.getListOfPropertiesBought();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, sellingProperties,
-                buyingProperties);
+                buyingProperties, propertiesSold, propertiesBought);
     }
 
     @Override
@@ -146,8 +150,6 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private List<Property> sellingProperties = new ArrayList<>();
-        private List<Property> buyingProperties = new ArrayList<>();
 
         public EditPersonDescriptor() {}
 

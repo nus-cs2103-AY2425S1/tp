@@ -31,6 +31,8 @@ public class Person {
     // Property details
     private ObservableList<Property> sellingProperties = FXCollections.observableArrayList();
     private ObservableList<Property> buyingProperties = FXCollections.observableArrayList();
+    private ObservableList<Property> propertiesSold = FXCollections.observableArrayList();
+    private ObservableList<Property> propertiesBought = FXCollections.observableArrayList();
 
 
     /**
@@ -50,7 +52,9 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   ObservableList<Property> sellingProperties,
-                  ObservableList<Property> buyingProperties) {
+                  ObservableList<Property> buyingProperties,
+                  ObservableList<Property> propertiesSold,
+                  ObservableList<Property> propertiesBought) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -59,6 +63,8 @@ public class Person {
         this.tags.addAll(tags);
         this.sellingProperties = sellingProperties;
         this.buyingProperties = buyingProperties;
+        this.propertiesSold = propertiesSold;
+        this.propertiesBought = propertiesBought;
     }
 
     public Name getName() {
@@ -88,10 +94,19 @@ public class Person {
     public ObservableList<Property> getListOfSellingProperties() {
         return sellingProperties;
     }
+    public ObservableList<Property> getListOfPropertiesSold() {
+        return propertiesSold;
+    }
+
 
     public ObservableList<Property> getListOfBuyingProperties() {
         return buyingProperties;
     }
+
+    public ObservableList<Property> getListOfPropertiesBought() {
+        return propertiesBought;
+    }
+
 
     /**
      * Returns true if both persons have the same name.

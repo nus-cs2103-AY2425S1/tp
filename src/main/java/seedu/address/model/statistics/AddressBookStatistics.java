@@ -29,8 +29,8 @@ public class AddressBookStatistics {
         this.totalPropertiesSold = 0;
         this.totalSales = 0;
         this.totalExpenses = 0;
-        this.buyingPropertyList = new UniqueBuyingPropertyList();
         this.sellingPropertyList = new UniqueSellingPropertyList();
+        this.buyingPropertyList = new UniqueBuyingPropertyList();
     }
 
     public void incrementTotalPersonCount() {
