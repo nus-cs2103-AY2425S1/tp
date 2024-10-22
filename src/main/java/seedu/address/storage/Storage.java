@@ -16,11 +16,15 @@ import seedu.address.model.UserPrefs;
  */
 public interface Storage extends AddressBookStorage, UserPrefsStorage, CommandHistoryStorage {
     @Override
+    Path getCommandHistoryFilePath();
+    @Override
     Optional<CommandHistory> readCommandHistory() throws DataLoadingException;
 
     @Override
     void saveCommandHistory(ReadOnlyCommandHistory commandHistory) throws IOException;
 
+    @Override
+    Path getUserPrefsFilePath();
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataLoadingException;
 

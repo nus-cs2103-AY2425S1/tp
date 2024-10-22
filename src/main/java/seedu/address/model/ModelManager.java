@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
@@ -56,6 +57,11 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyCommandHistory getCommandHistory() {
         return commandHistory;
+    }
+
+    @Override
+    public void addCommand(String commandString) {
+        commandHistory.addCommand(commandString);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -161,7 +167,17 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
+                && commandHistory.equals(otherModelManager.commandHistory)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
     }
-
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("logger", logger)
+                .add("addressBook", addressBook)
+                .add("userPrefs", userPrefs)
+                .add("commandHistory", commandHistory)
+                .add("filteredPersons", filteredPersons)
+                .toString();
+    }
 }

@@ -25,6 +25,11 @@ public interface Model {
     ReadOnlyUserPrefs getUserPrefs();
 
     /**
+     * Adds an executed command string in {@code commandHistory}
+     */
+    void addCommand(String commandString);
+
+    /**
      * Replaces command history data with the data in {@code commandHistory}.
      */
     void setCommandHistory(ReadOnlyCommandHistory commandHistory);

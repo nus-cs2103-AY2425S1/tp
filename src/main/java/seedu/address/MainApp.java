@@ -176,7 +176,12 @@ public class MainApp extends Application {
         return initializedPrefs;
     }
 
-    protected CommandHistory initCommandHistory(CommandHistoryStorage commandHistoryStorage) {
+    /**
+     * Returns a {@code CommandHistory} using the file at {@code storage}'s command history file path,
+     * or a new {@code CommandHistory} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected CommandHistory initCommandHistory(CommandHistoryStorage storage) {
         Path commandHistoryFilePath = storage.getCommandHistoryFilePath();
         logger.info("Using command history file : " + commandHistoryFilePath);
         CommandHistory initializedCommandHistory;
@@ -187,7 +192,7 @@ public class MainApp extends Application {
             }
             initializedCommandHistory = historyOptional.orElse(new CommandHistory());
         } catch (DataLoadingException e) {
-            logger.warning("Preference file at " + commandHistoryFilePath + " could not be loaded. "
+            logger.warning("Command history file at " + commandHistoryFilePath + " could not be loaded. "
                     + "Using default (blank) command history.");
             initializedCommandHistory = new CommandHistory();
         }

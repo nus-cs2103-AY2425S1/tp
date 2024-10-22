@@ -100,6 +100,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addCommand(String commandString) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setCommandHistory(ReadOnlyCommandHistory commandHistory) {
             throw new AssertionError("This method should not be called.");
         }
