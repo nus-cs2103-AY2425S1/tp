@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.SaveSortPreferenceCommand;
 
 public class SaveSortPreferenceCommandParserTest {
@@ -17,7 +18,7 @@ public class SaveSortPreferenceCommandParserTest {
     }
 
     @Test
-    public void parse_high_with_space_returnsCommand() {
+    public void parse_highInvalid_returnsCommand() {
         assertParseSuccess(parser, " high ", new SaveSortPreferenceCommand("high"));
     }
 
@@ -27,7 +28,7 @@ public class SaveSortPreferenceCommandParserTest {
     }
 
     @Test
-    public void parse_low_with_space_returnsCommand() {
+    public void parse_lowInvalid_returnsCommand() {
         assertParseSuccess(parser, " low ", new SaveSortPreferenceCommand("low"));
     }
 
