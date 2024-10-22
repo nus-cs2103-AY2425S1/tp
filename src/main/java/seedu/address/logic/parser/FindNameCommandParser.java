@@ -29,5 +29,4 @@ public class FindNameCommandParser implements Parser<FindNameCommand> {
 
         return new FindNameCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
-
 }

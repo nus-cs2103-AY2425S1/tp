@@ -109,22 +109,24 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing client types.
 
-### Locating persons by name: `find`
+### Locating persons by key information: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons by name, phone number, address or client type.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* `find n/KEYWORD` will search for persons by name.
+* `find p/KEYWORD` will search for persons by phone number.
+* `find a/KEYWORD` will search for persons by address.
+* `find c/KEYWORD` will search for persons by client type.
+
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex yeo` returns `Alex Yeoh`
+* `find p/8433` returns `8433 4567`
+* `find a/Blk 47` returns `Blk 47 Tampines Street 20`
+* `find c/Investment` returns `Investment Plan`
 
 Result for `find alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -144,7 +146,8 @@ Format: `fn KEYWORD`
 
 Examples:
 * `fn John` returns `john` and `John Doe`
-* `fn alex david` returns `Alex Yeoh`, `David Li`<br>
+* `fn Ale Yeo` returns `Alex Yeoh`
+* `fn Yeoh Alex` returns `Alex Yeoh`
 
 Result for `fn alex david`:
   ![result for 'find alex david'](images/findAlexDavidResult.png)

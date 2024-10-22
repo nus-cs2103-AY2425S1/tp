@@ -9,14 +9,15 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindNameCommand extends Command {
 
     public static final String COMMAND_WORD = "fn";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain all of "
+            + "the prefix of the specified keywords (case-insensitive) and displays them as a list with index "
+            + "numbers.\n"
             + "Parameters: KEYWORDS...\n"
             + "Example: " + COMMAND_WORD + "alice";
 
