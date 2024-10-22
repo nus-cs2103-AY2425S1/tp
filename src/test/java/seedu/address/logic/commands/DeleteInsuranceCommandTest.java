@@ -41,7 +41,8 @@ class DeleteInsuranceCommandTest {
 
         DeleteInsuranceCommand deleteInsuranceCommand = new DeleteInsuranceCommand(INDEX_THIRD_CLIENT, 0);
 
-        InsurancePlansManager updatedInsurancePlansManager = new InsurancePlansManager(insurancePlansManager.toString());
+        InsurancePlansManager updatedInsurancePlansManager = new InsurancePlansManager(
+                insurancePlansManager.toString());
         updatedInsurancePlansManager.deletePlan(insurancePlan);
 
         Client updatedClient = new Client(clientToEdit.getName(), clientToEdit.getPhone(), clientToEdit.getEmail(),
@@ -103,8 +104,8 @@ class DeleteInsuranceCommandTest {
         assertNotEquals(deleteFirstCommand, deleteSecondCommand);
 
         // different insurance ID -> returns false
-        DeleteInsuranceCommand deleteDifferentIDCommand = new DeleteInsuranceCommand(indexFirst, insuranceIdSecond);
-        assertNotEquals(deleteFirstCommand, deleteDifferentIDCommand);
+        DeleteInsuranceCommand deleteDifferentIdCommand = new DeleteInsuranceCommand(indexFirst, insuranceIdSecond);
+        assertNotEquals(deleteFirstCommand, deleteDifferentIdCommand);
 
         // null -> returns false
         assertNotEquals(deleteFirstCommand, null);
