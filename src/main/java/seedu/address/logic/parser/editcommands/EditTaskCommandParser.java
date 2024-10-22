@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditTaskCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -45,7 +44,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         List<Prefix> invalidPrefixes = ALL_PREFIX;
         invalidPrefixes.removeAll(allowedPrefix);
         if (!containsInvalidPrefix(args, invalidPrefixes)) {
-            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditGroupCommand.MESSAGE_USAGE);
+            throw new ParseException(MESSAGE_ILLEGAL_PREFIX_USED + "\n" + EditTaskCommand.MESSAGE_USAGE);
         }
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_INDEX, PREFIX_GROUP_NAME, PREFIX_TASK_NAME,

@@ -36,17 +36,18 @@ public class EditTaskCommand extends Command {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
-        + ": Edits the details of the task of given group. "
+        + ": Edits the details of the task of given group.\n"
+        + "Field like task status should not be modified through this function."
         + "Parameters: "
         + PREFIX_GROUP_NAME + " GROUP NAME "
         + PREFIX_INDEX + "INDEX (must be a positive integer) "
         + "[" + PREFIX_TASK_NAME + "TASK NAME] "
-        + "[" + PREFIX_TASK_DEADLINE + "DEADLINE]"
+        + "[" + PREFIX_TASK_DEADLINE + "DEADLINE]\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GROUP_NAME + "team 2"
+        + PREFIX_GROUP_NAME + "team 2 "
         + PREFIX_INDEX + "1 "
         + PREFIX_TASK_NAME + "Complete Assignment "
-        + PREFIX_TASK_DEADLINE + "2024-12-12 1800\n";
+        + PREFIX_TASK_DEADLINE + "2024-12-12 1800";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s in %2s";
     public static final String MESSAGE_DUPLICATE_TASK = "Duplicated task.";

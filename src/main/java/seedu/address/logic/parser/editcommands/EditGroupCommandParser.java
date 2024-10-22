@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -45,7 +44,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
             || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditGroupCommand.MESSAGE_USAGE));
         }
 
         List<String> groupNames = argMultimap.getAllValues(PREFIX_GROUP_NAME);
