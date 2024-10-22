@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -20,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueOrderList orders;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -136,6 +138,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return orders.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns a list of persons matching the given postal code.
+     */
+    public List<Person> getPersonsByPostalCode(String postalCode) {
+        requireNonNull(postalCode);
+        return persons.asUnmodifiableObservableList().stream()
+                .filter(person -> person.getPostalCode().toString().equals(postalCode))
+                .collect(Collectors.toList());
+    }
     @Override
     public boolean equals(Object other) {
         if (other == this) {

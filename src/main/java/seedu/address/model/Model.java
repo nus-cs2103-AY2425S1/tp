@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -93,4 +94,6 @@ public interface Model {
     boolean hasOrder(Order order);
 
     ObservableList<Order> getOrderList();
+    List<Person> getPeopleByPostalCode(String postalCode);
+
 }
