@@ -289,4 +289,6 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
 **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`
 **Help**   | `help`
-**List**   | `list`
+**List**   | `list` <br/>`list *` (to list starred contacts) 
+**Star** | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
+**Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 
