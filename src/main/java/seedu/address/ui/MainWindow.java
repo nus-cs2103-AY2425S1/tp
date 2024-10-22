@@ -36,7 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private Stage primaryStage;
     private Logic logic;
 
-    private String theme = "light";
+    //private String theme = "light";
+    private String theme;
     private Scene scene;
 
     // Independent Ui parts residing in this Ui container
@@ -71,6 +72,12 @@ public class MainWindow extends UiPart<Stage> {
 
         // Initialize scene
         this.scene = primaryStage.getScene(); // Ensure scene is initialized
+
+        // Load user preferences to determine the initial theme
+        ReadOnlyUserPrefs userPrefs = logic.getUserPrefs();
+        this.theme = userPrefs.getTheme();  // Load saved theme from user preferences
+
+        applyTheme();  // Apply the initial theme
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -187,7 +194,8 @@ public class MainWindow extends UiPart<Stage> {
         return clientListPanel;
     }
 
-    public void applyTheme(String theme) {
+    public void applyTheme() {
+        scene.getStylesheets().clear();  // Clear any previously applied styles
         if ("light".equalsIgnoreCase(theme)) {
             scene.getStylesheets().add(getClass().getResource(LIGHT_THEME).toExternalForm());
         } else {

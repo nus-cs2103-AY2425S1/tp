@@ -38,6 +38,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setTheme(newUserPrefs.getTheme());
     }
 
     public GuiSettings getGuiSettings() {
@@ -65,13 +66,8 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public String getTheme() {
-        return theme;
+        return theme == null ? "dark" : theme;  // Default to "dark" if null
     }
-
-//    @Override
-//    public boolean isDarkTheme() {
-//        return theme.equals("dark");
-//    }
 
     @Override
     public boolean equals(Object other) {
