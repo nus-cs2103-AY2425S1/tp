@@ -15,8 +15,23 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddAssignmentCommand;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteAssignmentCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditStudentCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GetAttendanceByTgCommand;
+import seedu.address.logic.commands.GetAttendanceCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -135,7 +150,8 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, GetAttendanceCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(GetAttendanceCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
-                GetAttendanceCommand.COMMAND_WORD + " n/John Doe d/2019-01-01") instanceof GetAttendanceCommand);
+                GetAttendanceCommand.COMMAND_WORD + " n/John Doe d/2019-01-01")
+                instanceof GetAttendanceCommand);
     }
 
     @Test
@@ -153,7 +169,8 @@ public class AddressBookParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE), () ->
                         parser.parseCommand(AddAssignmentCommand.COMMAND_WORD));
         assertTrue(parser.parseCommand(
-                AddAssignmentCommand.COMMAND_WORD + " n/John a/Homework 1 d/2024-12-12") instanceof AddAssignmentCommand);
+                AddAssignmentCommand.COMMAND_WORD + " n/John a/Homework 1 d/2024-12-12")
+                instanceof AddAssignmentCommand);
     }
 
     @Test
