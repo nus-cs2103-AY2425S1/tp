@@ -173,6 +173,16 @@ public class AddCommandTest {
         public void insertPerson(Person p, int ind) {
             throw new AssertionError("This method should not be called");
         }
+
+        @Override
+        public void undoCampusConnect() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void saveCurrentCampusConnect() {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

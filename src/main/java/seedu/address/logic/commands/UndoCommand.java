@@ -2,22 +2,19 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.CampusConnect;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Recovers the previous version of CampusConnect.
  */
-public class ClearCommand extends Command {
-
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Campus Connect has been cleared!";
-
+public class UndoCommand extends Command {
+    public static final String COMMAND_WORD = "undo";
+    public static final String MESSAGE_SUCCESS = "Campus Connect has recovered!";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.setCampusConnect(new CampusConnect());
+        model.undoCampusConnect();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -27,7 +24,7 @@ public class ClearCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof ClearCommand)) {
+        if (!(other instanceof UndoCommand)) {
             return false;
         }
 

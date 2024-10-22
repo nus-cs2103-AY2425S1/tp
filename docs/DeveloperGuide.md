@@ -317,12 +317,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | user                    | undo my last action                                             | prevent the accidental deletion of all my contacts                            |
 | `*`      | user                    | bookmark my contacts                                            | easily access important of frequently used contacts                           |
 
-
-
-
-
-
-
 *{More to be added}*
 
 ### Use cases
