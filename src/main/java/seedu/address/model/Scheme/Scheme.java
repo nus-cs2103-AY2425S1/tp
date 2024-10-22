@@ -1,15 +1,17 @@
-package seedu.address.model.Scheme;
+package seedu.address.model.scheme;
 
-import java.util.Optional;
-import seedu.address.model.person.Person;
-
+/**
+ * Represents a financial scheme in the address book.
+ */
 public abstract class Scheme {
-    public final static String schemeName = null;
-    public final static int incomeThreshold = 0;
-    public final static int familySizeThreshold = 0;
-    public final static int incomePerCapitaThreshold = 0;
 
+    /**
+     * Returns true if the person is eligible for the scheme.
+     */
     public abstract boolean isEligible(double income, int familySize, int incomePerCapita);
 
+    /**
+     * Returns the name of the scheme.
+     */
     public abstract String getSchemeName();
 }

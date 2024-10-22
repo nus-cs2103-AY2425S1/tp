@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.Scheme.Scheme;
-import seedu.address.model.Scheme.SchemeRetrieval;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.scheme.Scheme;
+import seedu.address.model.scheme.SchemeRetrieval;
 
 /**
  * Displays the scheme available to family identified using the displayed index from the address book.
@@ -21,11 +21,10 @@ public class SchemeCommand extends Command {
     public static final String COMMAND_WORD = "scheme";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the scheme available to the family identified by the index number used in the displayed family list.\n"
+            + ": Displays the scheme available to the family identified by the "
+            + "index number used in the displayed family list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-
-    public static final String MESSAGE_SCHEME_QUERY_SUCCESS = "Scheme displayed:\n%s";
 
     private final Index targetIndex;
 

@@ -9,7 +9,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -60,8 +59,8 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String HELP_COMMAND = HelpCommand.MESSAGE_USAGE + "\n";
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEDULE_COMMAND, SCHEME_COMMAND, HELP_COMMAND,
-            EXIT_COMMAND};
+        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEDULE_COMMAND, SCHEME_COMMAND,
+        HELP_COMMAND, EXIT_COMMAND};
 
     @FXML
     private Button copyButton;
