@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearAllCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ClearEventsCommand;
+import seedu.address.logic.commands.ClearEventCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -40,8 +40,8 @@ public class ClearCommandParser implements Parser<ClearCommand> {
             return new ClearAllCommand();
         }
 
-        if (commandField.equals(ClearEventsCommand.COMMAND_FIELD)) {
-            return new ClearEventsCommand();
+        if (commandField.equals(ClearEventCommand.COMMAND_FIELD)) {
+            return new ClearEventCommand();
         }
 
         logger.finer("This user input caused a ParseException: view " + args);

@@ -14,9 +14,9 @@ import seedu.address.model.person.Person;
 /**
  * Clears all events of the address book
  */
-public class ClearEventsCommand extends ClearCommand {
+public class ClearEventCommand extends ClearCommand {
 
-    public static final String COMMAND_FIELD = "events";
+    public static final String COMMAND_FIELD = "event";
     public static final String MESSAGE_SUCCESS = "All events has been cleared!";
 
     @Override

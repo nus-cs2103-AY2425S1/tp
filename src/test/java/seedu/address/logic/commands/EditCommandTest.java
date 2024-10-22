@@ -165,7 +165,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearAllCommand()));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearEventsCommand()));
+        assertFalse(standardCommand.equals(new ClearEventCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_PERSON, DESC_AMY)));

@@ -10,14 +10,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ClearEventsCommandTest {
+public class ClearEventCommandTest {
 
     @Test
     public void execute_eventsEmptyAddressBook_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearEventsCommand(), model, ClearEventsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearEventCommand(), model, ClearEventCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -26,7 +26,7 @@ public class ClearEventsCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
 
-        assertCommandSuccess(new ClearEventsCommand(), model, ClearEventsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearEventCommand(), model, ClearEventCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }
