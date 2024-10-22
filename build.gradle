@@ -28,13 +28,13 @@ test {
     enableAssertions = true
 }
 
-tasks.register('guiTests', Test) {
+task guiTests(type: Test) {
     useJUnitPlatform()
     include 'systemtests/**'
     enableAssertions = true
 }
 
-tasks.register('nonGuiTests', Test) {
+task nonGuiTests(type: Test) {
     useJUnitPlatform()
     include 'spleetwaise/address/**'
     include 'spleetwaise/common/**'
@@ -43,11 +43,11 @@ tasks.register('nonGuiTests', Test) {
 }
 
 guiTests.mustRunAfter nonGuiTests
-tasks.register('allTests') {
+task allTests {
     dependsOn nonGuiTests, guiTests
 }
 
-tasks.register('coverage', JacocoReport) {
+task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
