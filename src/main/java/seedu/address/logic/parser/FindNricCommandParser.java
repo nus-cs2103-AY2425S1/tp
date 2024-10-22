@@ -22,14 +22,19 @@ public class FindNricCommandParser implements Parser<FindNricCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindNricCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            logger.warning("Received empty NRIC for FindNricCommand");
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNricCommand.MESSAGE_USAGE));
+        }
         try {
             Nric patientNric = ParserUtil.parseNric(args);
             logger.info("Successfully parsed the NRIC for FindNricCommand: " + patientNric);
             return new FindNricCommand(new NricMatchesPredicate(patientNric));
         } catch (ParseException pe) {
             logger.warning("Unable to parse the NRIC for FindNricCommand: " + args);
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindNricCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(pe.getMessage());
         }
     }
 }
