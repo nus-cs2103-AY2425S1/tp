@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
@@ -39,7 +36,6 @@ public class StudentBuilder {
             new Status(DEFAULT_GRADING_STATUS),
             new Grade(DEFAULT_GRADE)
     );
-
 
     private Name name;
     private Phone phone;

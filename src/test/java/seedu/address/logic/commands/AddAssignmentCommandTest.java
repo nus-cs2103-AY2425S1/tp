@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
@@ -10,7 +9,6 @@ import static seedu.address.testutil.TypicalStudents.HUGH;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -37,6 +35,7 @@ public class AddAssignmentCommandTest {
                 String.format(AddAssignmentCommand.MESSAGE_SUCCESS,
                         MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), HUGH.getName()),
                 expectedModel);
+        HUGH.deleteLastAssignment(); // This added assignment changed the state of HUGH, so we need to revert it
     }
 
     @Test
@@ -54,6 +53,7 @@ public class AddAssignmentCommandTest {
                 expectedModel);
 
         assertTrue(addAssignmentCommand.undo(model));
-        assertTrue(hughCopy.getAssignments().size() == 1);
+        System.out.println(HUGH.getAssignments());
+        assertTrue(HUGH.getAssignments().size() == 1);
     }
 }

@@ -45,38 +45,35 @@ public class DeleteAssignmentCommandTest {
     @Test
     public void undo_after_execute() {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        HUGH.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
         Student hughCopy = new StudentBuilder(HUGH).build();
-        hughCopy.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
-        hughCopy.addAssignment(SCIENCE_ASSIGNMENT_GRADED);
         expectedModel.addStudent(hughCopy);
 
-        model.addStudent(hughCopy);
-        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(hughCopy.getName(),
+        model.addStudent(HUGH);
+        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(HUGH.getName(),
                 new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
                         null, null));
         assertCommandSuccess(deleteAssignmentCommand, model,
                 String.format(DeleteAssignmentCommand.MESSAGE_SUCCESS,
-                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), hughCopy.getName()),
+                        MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), HUGH.getName()),
                 expectedModel);
 
         assertTrue(deleteAssignmentCommand.undo(model));
-        assertTrue(hughCopy.getAssignments().size() == 2);
-        assertTrue(hughCopy.getAssignments().get(0).equals(MATH_ASSIGNMENT_SUBMITTED));
+        assertTrue(HUGH.getAssignments().size() == 2);
+        assertTrue(HUGH.getAssignments().get(1).equals(MATH_ASSIGNMENT_SUBMITTED));
     }
 
     @Test
     public void undo_before_execute() {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Student hughCopy = new StudentBuilder(HUGH).build();
         hughCopy.addAssignment(MATH_ASSIGNMENT_SUBMITTED);
         hughCopy.addAssignment(SCIENCE_ASSIGNMENT_GRADED);
-        expectedModel.addStudent(hughCopy);
 
         model.addStudent(hughCopy);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(hughCopy.getName(),
                 new AssignmentQuery(MATH_ASSIGNMENT_SUBMITTED.getAssignmentName(), null, null,
                         null, null));
         assertFalse(deleteAssignmentCommand.undo(model));
-        assertTrue(hughCopy.getAssignments().size() == 2); // No change to the assignments list
+        assertTrue(hughCopy.getAssignments().size() == 3); // No change to the assignments list
     }
 }

@@ -42,8 +42,8 @@ public class DeleteAssignmentCommand extends Command {
 
     public final AssignmentQuery assignmentQuery;
     public final Name name;
-    public int index;
-    public Assignment assignment;
+    private int index;
+    private Assignment assignment;
 
     /**
      * Creates an DeleteAssignmentCommand to add the specified {@code Assignment}

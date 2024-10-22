@@ -8,9 +8,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_DIDDY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_GROUP_DIDDY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalAssignments.*;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_NAME_A;
+import static seedu.address.testutil.TypicalAssignments.ENGLISH_ASSIGNMENT_NOT_SUBMITTED;
+import static seedu.address.testutil.TypicalAssignments.MATH_ASSIGNMENT_SUBMITTED;
+import static seedu.address.testutil.TypicalAssignments.SCIENCE_ASSIGNMENT_GRADED;
 import static seedu.address.testutil.TypicalStudents.DIDDY;
 import static seedu.address.testutil.TypicalStudents.HUGH;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,8 +26,6 @@ import seedu.address.model.assignment.AssignmentName;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.person.PersonAttendance;
 import seedu.address.testutil.StudentBuilder;
-
-import java.time.LocalDate;
 
 public class StudentTest {
 
@@ -160,7 +163,8 @@ public class StudentTest {
 
     @Test
     void getAssignmentIndex_nonExistentAssignment_returnsMinusOne() {
-        AssignmentQuery query = new AssignmentQuery(new AssignmentName("Nonexistent Assignment"), null, null, null, null);
+        AssignmentQuery query = new AssignmentQuery(new AssignmentName("Nonexistent Assignment"),
+                null, null, null, null);
         int index = student.getAssignmentIndex(query);
         assertEquals(-1, index);
     }
