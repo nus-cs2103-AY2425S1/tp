@@ -39,21 +39,21 @@ public class GradYearTest {
         String validGradYear = "2027";
         String otherGradYear = "2028";
 
-        RoomNumber roomNumber = new RoomNumber(validGradYear);
+        GradYear gradYear = new GradYear(validGradYear);
 
         // same values -> returns true
-        assertTrue(roomNumber.equals(new RoomNumber(validGradYear)));
+        assertTrue(gradYear.equals(new GradYear(validGradYear)));
 
         // same object -> returns true
-        assertTrue(roomNumber.equals(roomNumber));
+        assertTrue(gradYear.equals(gradYear));
 
         // null -> returns false
-        assertFalse(roomNumber.equals(null));
+        assertFalse(gradYear.equals(null));
 
         // different types -> returns false
-        assertFalse(roomNumber.equals(5.0f));
+        assertFalse(gradYear.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(roomNumber.equals(new RoomNumber(otherGradYear)));
+        assertFalse(gradYear.equals(new GradYear(otherGradYear)));
     }
 }

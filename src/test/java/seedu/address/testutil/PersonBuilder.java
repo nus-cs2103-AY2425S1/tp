@@ -130,7 +130,15 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code GradYear} of the {@code GradYear} that we are building to null.
+     * Sets the {@code EmergencyContact} of the {@code Person} that we are building to null.
+     */
+    public PersonBuilder withNoEmergencyContact() {
+        this.emergencyContact = null;
+        return this;
+    }
+
+    /**
+     * Sets the {@code GradYear} of the {@code Person} that we are building to null.
      */
     public PersonBuilder withGradYear(String gradYear) {
         this.gradYear = new GradYear(gradYear);
@@ -138,10 +146,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code EmergencyContact} of the {@code Person} that we are building to null.
+     * Sets the {@code GradYear} of the {@code Person} that we are building to null.
      */
-    public PersonBuilder withNoEmergencyContact() {
-        this.emergencyContact = null;
+    public PersonBuilder withNoGradYear() {
+        this.gradYear = null;
         return this;
     }
 

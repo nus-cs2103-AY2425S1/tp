@@ -8,6 +8,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "emergency name": null,
     "emergency phone": null,
+    "graduation year": "2020",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -17,6 +18,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "emergency name": "Aiken",
     "emergency phone": "98765431",
+    "graduation year": "2030",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -26,6 +28,7 @@
     "address" : "wall street",
     "emergency name": null,
     "emergency phone": null,
+    "graduation year": null,
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -35,6 +38,7 @@
     "address" : "10th street",
     "emergency name": null,
     "emergency phone": null,
+    "graduation year": null,
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -44,6 +48,7 @@
     "address" : "michegan ave",
     "emergency name": null,
     "emergency phone": null,
+    "graduation year": null,
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -53,6 +58,7 @@
     "address" : "little tokyo",
     "emergency name": null,
     "emergency phone": null,
+    "graduation year": null,
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -62,6 +68,7 @@
     "address" : "4th street",
     "emergency name": null,
     "emergency phone": null,
+    "graduation year": null,
     "tags" : [ ]
   } ]
 }

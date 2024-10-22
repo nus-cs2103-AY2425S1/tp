@@ -173,7 +173,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROOM_NUMBER, VALID_ADDRESS,
                         VALID_EMERGENCY_NAME, VALID_EMERGENCY_PHONE, INVALID_GRAD_YEAR, VALID_TAGS);
-        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+        String expectedMessage = GradYear.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -182,7 +182,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ROOM_NUMBER, VALID_ADDRESS,
                         VALID_EMERGENCY_NAME, VALID_EMERGENCY_PHONE, null, VALID_TAGS);
-        assertFalse(person.toModelType().getEmergencyContactPhone().isPresent());
+        assertFalse(person.toModelType().getGradYear().isPresent());
     }
 
     @Test

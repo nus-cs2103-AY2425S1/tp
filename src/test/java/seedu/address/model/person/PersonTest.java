@@ -93,7 +93,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different grad year -> returns false
-        editedAlice = new PersonBuilder(ALICE).withRoomNumber(VALID_GRAD_YEAR_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withGradYear(VALID_GRAD_YEAR_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

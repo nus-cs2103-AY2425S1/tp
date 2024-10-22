@@ -144,11 +144,11 @@ class JsonAdaptedPerson {
 
     private GradYear parseGradYear(String gradYear) throws IllegalValueException {
         // room number is optional
-        boolean hasRoomNumber = gradYear != null;
-        if (hasRoomNumber && !RoomNumber.isValidRoomNumber(gradYear)) {
-            throw new IllegalValueException(RoomNumber.MESSAGE_CONSTRAINTS);
+        boolean hasGradYear = gradYear != null;
+        if (hasGradYear && !GradYear.isValidGradYear(gradYear)) {
+            throw new IllegalValueException(GradYear.MESSAGE_CONSTRAINTS);
         }
-        return hasRoomNumber ? new GradYear(gradYear) : null;
+        return hasGradYear ? new GradYear(gradYear) : null;
     }
 
     private Set<Tag> parseTags(List<JsonAdaptedTag> tags) throws IllegalValueException {
