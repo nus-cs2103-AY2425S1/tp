@@ -21,8 +21,8 @@ public class RoomNumberTest {
 
     @Test
     public void isValidRoomNumber() {
-        // null address
-        assertThrows(NullPointerException.class, () -> Address.isValidAddress(null));
+        // null room number
+        assertThrows(NullPointerException.class, () -> RoomNumber.isValidRoomNumber(null));
 
         // invalid addresses
         assertFalse(RoomNumber.isValidRoomNumber("#01-0123")); // additional special character #
@@ -34,7 +34,7 @@ public class RoomNumberTest {
         assertFalse(RoomNumber.isValidRoomNumber("#01-01234")); // incorrect digits for room
 
         // valid addresses
-        assertTrue(Address.isValidAddress("05-5053"));
+        assertTrue(RoomNumber.isValidRoomNumber("05-5053"));
     }
 
     @Test

@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmergencyContact;
+import seedu.address.model.person.GradYear;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -25,6 +26,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ROOM_NUMBER = "01-0123";
     public static final String DEFAULT_EMERGENCY_NAME = "Bob Bee";
     public static final String DEFAULT_EMERGENCY_PHONE = "98765432";
+    public static final String DEFAULT_GRAD_YEAR = "2027";
 
     private Name name;
     private Phone phone;
@@ -32,6 +34,7 @@ public class PersonBuilder {
     private Address address;
     private RoomNumber roomNumber;
     private EmergencyContact emergencyContact;
+    private GradYear gradYear;
     private Set<Tag> tags;
 
     /**
@@ -44,6 +47,7 @@ public class PersonBuilder {
         roomNumber = new RoomNumber(DEFAULT_ROOM_NUMBER);
         address = new Address(DEFAULT_ADDRESS);
         emergencyContact = null;
+        gradYear = null;
         tags = new HashSet<>();
     }
 
@@ -57,6 +61,7 @@ public class PersonBuilder {
         roomNumber = personToCopy.getRoomNumber().orElse(null);
         address = personToCopy.getAddress();
         emergencyContact = personToCopy.getEmergencyContact().orElse(null);
+        gradYear = personToCopy.getGradYear().orElse(null);
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -125,6 +130,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code GradYear} of the {@code GradYear} that we are building to null.
+     */
+    public PersonBuilder withGradYear(String gradYear) {
+        this.gradYear = new GradYear(gradYear);
+        return this;
+    }
+
+    /**
      * Sets the {@code EmergencyContact} of the {@code Person} that we are building to null.
      */
     public PersonBuilder withNoEmergencyContact() {
@@ -136,6 +149,6 @@ public class PersonBuilder {
      * Builds a person using AB3 constructor.
      */
     public Person build() {
-        return new Person(name, phone, email, roomNumber, address, emergencyContact, tags);
+        return new Person(name, phone, email, roomNumber, address, emergencyContact, gradYear, tags);
     }
 }

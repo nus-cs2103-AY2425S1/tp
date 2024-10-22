@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMERGENCY_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRAD_YEAR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROOM_NUMBER;
@@ -25,13 +26,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.EmergencyContact;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.RoomNumber;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -48,10 +43,11 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ROOM_NUMBER + "ROOMNUMBER] "
+            + "[" + PREFIX_ROOM_NUMBER + "ROOM NUMBER] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_EMERGENCY_NAME + "EMERGENCY_NAME] "
             + "[" + PREFIX_EMERGENCY_PHONE + "EMERGENCY_PHONE] "
+            + "[" + PREFIX_GRAD_YEAR + "GRADUATION YEAR] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -119,7 +115,6 @@ public class EditCommand extends Command {
                 .orElse(personToEdit.getEmergencyContactName().orElse(null));
         Phone updatedEmergencyPhone = editPersonDescriptor.getEmergencyPhone()
                 .orElse(personToEdit.getEmergencyContactPhone().orElse(null));
-
         EmergencyContact updatedEmergencyContact;
         if (updatedEmergencyName == null && updatedEmergencyPhone == null) {
             // emergency contact does not exist
@@ -128,10 +123,12 @@ public class EditCommand extends Command {
             updatedEmergencyContact = new EmergencyContact(updatedEmergencyName, updatedEmergencyPhone);
         }
 
+        GradYear updatedGradYear = editPersonDescriptor.getGradYear()
+                .orElse(personToEdit.getGradYear().orElse(null));
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedRoomNumber,
-                updatedAddress, updatedEmergencyContact, updatedTags);
+                updatedAddress, updatedEmergencyContact, updatedGradYear, updatedTags);
     }
 
     @Override
@@ -170,6 +167,7 @@ public class EditCommand extends Command {
         private Address address;
         private Name emergencyName;
         private Phone emergencyPhone;
+        private GradYear gradYear;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -186,6 +184,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setEmergencyName(toCopy.emergencyName);
             setEmergencyPhone(toCopy.emergencyPhone);
+            setGradYear(toCopy.gradYear);
             setTags(toCopy.tags);
         }
         /**
@@ -252,6 +251,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(emergencyPhone);
         }
 
+        public void setGradYear(GradYear gradYear) {
+            this.gradYear = gradYear;
+        }
+
+        public Optional<GradYear> getGradYear() {
+            return Optional.ofNullable(gradYear);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -299,6 +306,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("emergency name", emergencyName)
                     .add("emergency phone", emergencyPhone)
+                    .add("graduation year", gradYear)
                     .add("tags", tags)
                     .toString();
         }

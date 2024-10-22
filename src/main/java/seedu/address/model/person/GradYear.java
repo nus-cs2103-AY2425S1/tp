@@ -10,13 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class GradYear {
 
     public static final String MESSAGE_CONSTRAINTS = "A string no longer than length 4 in the form of “YYYY” "
-            + "Y are integers representing the year of graduation. Eg \"2027\"";
+            + "Y are integers representing the year of graduation. "
+            + "The first digit is 2. Eg \"2027\"";
 
 
     /*
      * 4 integers representing the year
+     * first integer is 2.
      */
-    public static final String VALIDATION_REGEX = "\\d{4}";
+    public static final String VALIDATION_REGEX = "2\\d{3}";
 
     public final String value;
 
