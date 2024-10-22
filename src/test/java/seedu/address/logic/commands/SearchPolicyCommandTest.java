@@ -3,19 +3,20 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Policy;
+import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code SearchPolicyCommand}.
@@ -75,18 +76,32 @@ public class SearchPolicyCommandTest {
 
     @Test
     public void execute_oneMatch_personFound() {
-        String policyName = "AutoInsurance";
+        Model model = new ModelManager();
+
+        // Create policy object
+        Policy healthInsurance = new Policy("health insurance", "2024-10-10",
+                "2030-10-10", "2024-11-10 100.00");
+
+        // create a person with health insurance policy
+        Person alice = new PersonBuilder().withName("Alice").build();
+        alice.setPolicies(List.of(healthInsurance));
+        model.addPerson(alice);
+
+        String policyName = "health insurance";
         String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
 
         try {
             SearchPolicyCommand command = new SearchPolicyCommand(policyName);
+            Model expectedModel = new ModelManager();
+            expectedModel.addPerson(alice);
             expectedModel.updateFilteredPersonList(person ->
                     person.getPolicies().stream()
-                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "").equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
+                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "").
+                                    equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
             );
 
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            assertEquals(Collections.singletonList(BOB), model.getFilteredPersonList());
+            assertEquals(Collections.singletonList(alice), model.getFilteredPersonList());
         } catch (CommandException e) {
             fail("Execution of command should not fail.");
         }
@@ -94,19 +109,39 @@ public class SearchPolicyCommandTest {
 
     @Test
     public void execute_multipleMatches_multiplePersonsFound() {
-        String policyName = "HealthInsurance"; // Assume AMY and FIONA have this policy
+
+        Model model = new ModelManager();
+
+        // Create policy object
+        Policy healthInsurance = new Policy("health insurance", "2024-10-10",
+                "2030-10-10", "2024-11-10 100.00");
+
+        // create a person with health insurance policy
+        Person alice = new PersonBuilder().withName("Alice").build();
+        alice.setPolicies(List.of(healthInsurance));
+        model.addPerson(alice);
+
+        // create another person with the same insurance policy
+        Person bob = new PersonBuilder().withName("Bob").build();
+        bob.setPolicies(List.of(healthInsurance));
+        model.addPerson(bob);
+
+        String policyName = "HealthInsurance";
         String expectedMessage = String.format(SearchPolicyCommand.MESSAGE_SUCCESS, policyName);
 
         try {
             SearchPolicyCommand command = new SearchPolicyCommand(policyName);
-            // Update expectedModel to filter AMY and FIONA
+            Model expectedModel = new ModelManager();
+            expectedModel.addPerson(alice);
+            expectedModel.addPerson(bob);
             expectedModel.updateFilteredPersonList(person ->
                     person.getPolicies().stream()
-                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "").equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
+                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "").
+                                    equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
             );
 
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            assertEquals(Arrays.asList(AMY, FIONA), model.getFilteredPersonList());
+            assertEquals(Arrays.asList(alice, bob), model.getFilteredPersonList());
         } catch (CommandException e) {
             fail("Execution of command should not fail.");
         }
