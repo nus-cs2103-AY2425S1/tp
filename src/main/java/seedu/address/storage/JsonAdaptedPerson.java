@@ -149,7 +149,6 @@ class JsonAdaptedPerson {
                     SocialMedia.class.getSimpleName()));
         }
         final SocialMedia modelSocialMedia;
-        
         if (socialMedia.startsWith("[ig-")) {
             modelSocialMedia = new SocialMedia(socialMedia.substring(4, socialMedia.length() - 1),
                     SocialMedia.Platform.INSTAGRAM);
