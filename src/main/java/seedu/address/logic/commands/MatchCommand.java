@@ -100,20 +100,11 @@ public class MatchCommand extends Command {
         boolean hasContactMatchedJob = contactToMatch.hasMatched(jobIdentifier);
         boolean hasJobMatchedContact = jobToMatch.hasMatched(contactIdentifier);
 
-        System.out.println(contactToMatch.getMatch());
-        System.out.println(jobToMatch.getMatches());
-
-        System.out.println(contactIdentifier);
-        System.out.println(jobIdentifier);
-
-        System.out.println(hasJobMatchedContact);
-        System.out.println(hasJobMatchedContact);
-
         if (hasContactMatchedJob && hasJobMatchedContact) {
             throw new CommandException(MESSAGE_ALREADY_MATCHED);
         }
 
-        if (contactToMatch.getMatch() != null) {
+        if (contactToMatch.isMatchPresent()) {
             throw new CommandException(MESSAGE_HAS_OTHER_MATCHES);
         }
 

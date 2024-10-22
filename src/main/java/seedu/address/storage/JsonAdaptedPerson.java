@@ -3,7 +3,6 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,7 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String role;
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
-    private final Optional<String> match;
+    private final String match;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +46,7 @@ class JsonAdaptedPerson {
             this.skills.addAll(skills);
         }
         // TODO: no load capability yet
-        this.match = Optional.empty();
+        this.match = null;
     }
 
     /**

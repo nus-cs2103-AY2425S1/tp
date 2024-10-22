@@ -77,12 +77,19 @@ public class Person {
         return Collections.unmodifiableSet(skills);
     }
 
-    public Optional<String> getMatch() {
-        return match;
+    public String getMatch() {
+        return match.orElse(null);
     }
 
     /**
-     * Checks if this person has matched with a job.
+     * Returns true if this person has any job matches, returns false otherwise
+     */
+    public boolean isMatchPresent() {
+        return match.isPresent();
+    }
+
+    /**
+     * Checks if this person has matched with the specified job.
      *
      * @param jobIdentifier A string that uniquely identify a job
      */
