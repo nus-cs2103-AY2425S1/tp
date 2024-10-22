@@ -77,7 +77,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName = 'addressbook.jar'
+    archiveFileName = 'medconnect.jar'
 }
 
 defaultTasks 'clean', 'test'
