@@ -114,22 +114,24 @@ Examples:
 *  `edit 1 i/S8340008J p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st elderly to be `91234567` and `johndoe@example.com` respectively.
 *  `edit S6878830G n/Betsy Crower t/` Edits the name of the elderly with NRIC S6878830G to be `Betsy Crower` and clears all existing tags.
 
-### Locating elderly by name: `find`
+### Locating elderly by name or nric: `find`
 
-Finds all elderly whose names contain any of the given keywords.
+Finds all elderly whose names or nric contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only the name and nric is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans` and `S1803` will not match `S1803269D`
 * All elderly matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find alex david` returns `Alex Yeoh`, `David Li`
+* `find S7083906G` returns `Alex Yeoh`
+* `find S7083906G david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting an elderly : `delete`
@@ -238,7 +240,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX/NRIC`<br> e.g., `delete 3`, `delete S2208201I`
 **Edit** | `edit INDEX/NRIC [i/NRIC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [c/CALL_FREQUENCY] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake S1803269D`
 **History** | `history INDEX/NRIC`<br> e.g., `history 1, history S2208201I`
 **List** | `list`
 **Mark** | `mark INDEX/NRIC [d/DATE] [o/NOTES]`<br> e.g., `mark 2 d/2021-10-01 o/This person is sad`
