@@ -47,8 +47,8 @@ public class PolicySet implements Set<Policy> {
      * @throws ClassCastException if {@code obj} is not of class {@code PolicyType}.
      */
     private static void requireClassPolicyType(Object obj) {
-        if (!(obj instanceof Policy)) {
-            throw new ClassCastException("Expected a Policy instance but received "
+        if (!(obj instanceof PolicyType)) {
+            throw new ClassCastException("Expected a PolicyType instance but received "
                     + (obj == null ? "null" : obj.getClass().getName()) + ".");
         }
     }
@@ -204,8 +204,8 @@ public class PolicySet implements Set<Policy> {
         requireNonNull(obj);
         requireClassPolicyType(obj);
 
-        Policy policy = (Policy) obj;
-        int index = hash(policy.getType());
+        PolicyType policyType = (PolicyType) obj;
+        int index = hash(policyType);
         if (policies[index] == null) {
             return false;
         }

@@ -87,7 +87,7 @@ public class AddClaimCommand extends Command {
         // create new policy set with the updated policy (to preserve immutability)
         PolicySet updatedPolicySet = new PolicySet();
         updatedPolicySet.addAll(new HashSet<>(policySet));
-        updatedPolicySet.remove(policy);
+        updatedPolicySet.remove(policy.getType());
         updatedPolicySet.add(policy);
 
         // create a new person with the updated policy set
