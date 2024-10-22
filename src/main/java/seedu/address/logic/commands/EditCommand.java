@@ -55,7 +55,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
             + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
-            + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME]"
+            + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "

@@ -41,7 +41,6 @@ public class PersonUtil {
         sb.append(PREFIX_REGISTER_NUMBER + person.getRegisterNumber().value + " ");
         sb.append(PREFIX_SEX + person.getSex().value + " ");
         sb.append(PREFIX_STUDENT_CLASS + person.getStudentClass().value + " ");
-        sb.append(PREFIX_ECNAME + person.getEcName().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
