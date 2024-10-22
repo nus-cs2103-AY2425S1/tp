@@ -38,7 +38,7 @@ public class OweCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_HOUR + "2 ";
 
-    public static final String MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS = "%1$s owed another %2$.2f";
+    public static final String MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS = "%1$s owed another $%2$.2f";
 
     private final Index index;
     private final double hourOwed;
