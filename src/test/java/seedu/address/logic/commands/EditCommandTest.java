@@ -23,6 +23,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.StudentId;
@@ -69,6 +70,39 @@ public class EditCommandTest {
 
         assertTrue(expectedPerson.getModules().stream().anyMatch(m -> m.value.equals("CS1231S")));
         assertFalse(expectedPerson.getModules().stream().anyMatch(m -> m.value.equals("GEC1044")));
+    }
+
+    @Test
+    public void execute_editModuleWithGrade_success() throws Exception {
+        Person originalPerson = TypicalPersons.ALICE;
+        Module oldModule = new Module("MA1100");
+        oldModule.setGrade(new Grade("A"));
+        Module newModule = new Module("CS1010");
+
+        Person expectedPerson = new PersonBuilder()
+                .withStudentId("22223333")
+                .withName("Alice Pauline")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withEmail("alice@example.com")
+                .withPhone("94351253")
+                .withCourse("Math")
+                .withTag("Student")
+                .addGradedModule("CS1010", "A")
+                .addUngradedModule("MA2202")
+                .build();
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().build();
+        descriptor.setModuleChanges(oldModule, newModule);
+
+        EditCommand editCommand = new EditCommand(originalPerson.getStudentId(), descriptor);
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(originalPerson, expectedPerson);
+
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS,
+                Messages.format(expectedPerson));
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
 

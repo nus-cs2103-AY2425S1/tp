@@ -61,6 +61,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_MODULE = "New module already exists in the person's module list.";
 
     private final StudentId studentId;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -120,16 +121,13 @@ public class EditCommand extends Command {
 
             boolean isModuleRenamed = false;
 
-            for (int i = 0; i < updatedModules.size(); i++) {
-                if (updatedModules.get(i).value.equals(newModule.value)) {
-                    throw new CommandException("New module already exists in the person's module list.");
-                }
+            if (updatedModules.stream().anyMatch(m -> m.value.equals(newModule.value))) {
+                throw new CommandException(EditCommand.MESSAGE_DUPLICATE_MODULE);
             }
 
             for (int i = 0; i < updatedModules.size(); i++) {
                 if (updatedModules.get(i).value.equals(oldModule.value)) {
                     Module updatedModule = new Module(newModule.value);
-                    System.out.println("Grade: " + updatedModules.get(i).getGrade());
                     if (updatedModules.get(i).hasGrade()) {
                         updatedModule.setGrade(updatedModules.get(i).getGrade());
                     }

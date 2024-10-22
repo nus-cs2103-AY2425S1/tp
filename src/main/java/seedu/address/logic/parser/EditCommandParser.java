@@ -51,10 +51,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             if (modules.length != 2) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-            Module oldModule = new Module(modules[0]);
-            Module newModule = new Module(modules[1]);
-
-            editPersonDescriptor.setModuleChanges(oldModule, newModule);
+            editPersonDescriptor.setModuleChanges(new Module(modules[0]), new Module(modules[1]));
         } else {
             if (argMultimap.getValue(PREFIX_STUDENTID).isPresent()) {
                 editPersonDescriptor.setStudentId(ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID)
