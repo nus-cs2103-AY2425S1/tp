@@ -223,7 +223,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(-ab3-background, 20%);
+    -fx-background-color: -ab3-background;
 }
 
 .menu-bar .label {
@@ -385,3 +385,4 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
