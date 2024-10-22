@@ -70,7 +70,7 @@
     "address" : "10th street"
   }, {
     "name" : "Elle Meyer",
-    "healthServices" : [ "Vaccination", "Mammogram" ],
+    "healthServices" : [ "Vaccination", "Cancer Screening" ],
     "allergy" : "",
     "bloodType" : "",
     "healthRisk" : "",
@@ -87,7 +87,7 @@
     "address" : "michegan ave"
   }, {
     "name" : "Fiona Kunz",
-    "healthServices" : [ "canceer screening" ],
+    "healthServices" : [ "cancer screening" ],
     "allergy" : "",
     "bloodType" : "",
     "healthRisk" : "",
