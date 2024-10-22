@@ -16,6 +16,8 @@ public class HelpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
+        assert !isExecuted : "This command has already been executed";
+        isExecuted = true;
         return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
     }
 }

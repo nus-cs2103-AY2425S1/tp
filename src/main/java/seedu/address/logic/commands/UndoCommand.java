@@ -16,8 +16,10 @@ public class UndoCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert !isExecuted : "This command has already been executed";
         requireNonNull(model);
         //model.undo();
+        isExecuted = true;
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
