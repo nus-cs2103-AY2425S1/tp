@@ -35,6 +35,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
+                .filter(keyword -> keyword.length() != 6)
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)
@@ -48,7 +49,6 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Person> namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
         Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
         Predicate<Person> postalPredicate = new PostalContainsKeywordsPredicate(postalKeywords);
-
 
         if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) {
             return new FindCommand(namePredicate.or(phonePredicate).or(postalPredicate));
@@ -68,13 +68,14 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Utility method to check if a string is numeric (i.e., contains only digits).
+     * Utility method to check if a string is numeric (i.e., contains only phone digits and not 6 digits long).
      * @param str The string to check.
      * @return True if the string is numeric, false otherwise.
      */
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
+
     /**
      * Utility method to check if a string is a postal code (i.e., starts with 'S' and is followed by 6 digits).
      * @param str The string to check.

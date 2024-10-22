@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -19,14 +18,17 @@ public class PostalContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("123456");
         List<String> secondPredicateKeywordList = Arrays.asList("123456", "654321");
 
-        PostalContainsKeywordsPredicate firstPredicate = new PostalContainsKeywordsPredicate(firstPredicateKeywordList);
-        PostalContainsKeywordsPredicate secondPredicate = new PostalContainsKeywordsPredicate(secondPredicateKeywordList);
+        PostalContainsKeywordsPredicate firstPredicate =
+                new PostalContainsKeywordsPredicate(firstPredicateKeywordList);
+        PostalContainsKeywordsPredicate secondPredicate =
+                new PostalContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        PostalContainsKeywordsPredicate firstPredicateCopy = new PostalContainsKeywordsPredicate(firstPredicateKeywordList);
+        PostalContainsKeywordsPredicate firstPredicateCopy =
+                new PostalContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +44,8 @@ public class PostalContainsKeywordsPredicateTest {
     @Test
     public void test_postalContainsKeywords_returnsTrue() {
         // One matching 6-digit postal code
-        PostalContainsKeywordsPredicate predicate = new PostalContainsKeywordsPredicate(Collections.singletonList("123456"));
+        PostalContainsKeywordsPredicate predicate =
+                new PostalContainsKeywordsPredicate(Collections.singletonList("123456"));
         assertTrue(predicate.test(new PersonBuilder().withPostalCode("123456").build()));
 
         // Multiple matching keywords

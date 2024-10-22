@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.TestTemplate;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
@@ -39,11 +38,13 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "12345 67890", expectedFindCommand);
         assertParseSuccess(parser, " \n 12345 \n \t 67890  \t", expectedFindCommand);
     }
+
     @Test
     public void parse_validPostal_returnsFindCommand() {
         FindCommand expectedFindCommand =
                 new FindCommand(new PostalContainsKeywordsPredicate(Arrays.asList("123000", "123456")));
         assertParseSuccess(parser, "123000 123456", expectedFindCommand);
+        assertParseSuccess(parser, " \n 123000 \n \t 123456  \t", expectedFindCommand);
     }
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
@@ -54,23 +55,4 @@ public class FindCommandParserTest {
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
         assertTrue(predicate.equals(predicate));
     }
-
-    /*
-    @Test
-    public void parse_validPostalArgs_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new PostalContainsKeywordsPredicate(Arrays.asList("123456", "654321")));
-
-        assertParseSuccess(parser, "123456 654321", expectedFindCommand);
-        assertParseSuccess(parser, " \n 123456 \n \t 654321  \t", expectedFindCommand);
-    }
-    @Test
-    public void parse_validNameAndPostalArgs_returnsFindCommand() {
-        FindCommand expectedFindCommand =
-                new FindCommand(new PostalContainsKeywordsPredicate(Arrays.asList("Alice", "654321")));
-
-        assertParseSuccess(parser, "Alice 654321", expectedFindCommand);
-        assertParseSuccess(parser, " \n Alice \n \t 654321  \t", expectedFindCommand);
-    }
-    */
 }

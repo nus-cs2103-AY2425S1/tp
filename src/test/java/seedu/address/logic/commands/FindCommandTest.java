@@ -150,6 +150,7 @@ public class FindCommandTest {
 
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
+                .filter(keyword -> keyword.length() != 6)
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)
@@ -178,7 +179,6 @@ public class FindCommandTest {
     private boolean isNumeric(String str) {
         return str.matches("\\d+");
     }
-
     private boolean isPostalCode(String str) {
         // checks that the postal code is exactly 6 digits
         return str.matches("\\d{6}");

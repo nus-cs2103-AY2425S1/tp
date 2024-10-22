@@ -23,7 +23,7 @@ public class FindCommand extends Command {
             + "displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " alice bob 123456 \n"
-            + "Note: find by postal code must be with a 6 digit postal code";
+            + "Note: any 6 digit number will be identified as a postal code only";
 
     private final Predicate<Person> predicate;
 
@@ -53,9 +53,6 @@ public class FindCommand extends Command {
         return predicate.equals(otherFindCommand.predicate);
     }
 
-    public Predicate<Person> getPredicate() {
-        return predicate;
-    }
     @Override
     public String toString() {
         return new ToStringBuilder(this)
