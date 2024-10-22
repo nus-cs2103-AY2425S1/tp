@@ -98,7 +98,12 @@ public class InsurancePlansManager {
      * @param plan The insurance plan to remove.
      */
     public void deletePlan(InsurancePlan plan) {
-        insurancePlans.remove(plan);
+        for (InsurancePlan p : insurancePlans) {
+            if (p.getInsurancePlanId() == plan.getInsurancePlanId()) {
+                insurancePlans.remove(p);
+                return;
+            }
+        }
     }
 
     /**
@@ -109,7 +114,7 @@ public class InsurancePlansManager {
      */
     public void checkIfPlanOwned(InsurancePlan plan) throws InsurancePlanException {
         for (InsurancePlan p : insurancePlans) {
-            if (p.equals(plan)) {
+            if (p.getInsurancePlanId() == plan.getInsurancePlanId()) {
                 return;
             }
         }
@@ -127,7 +132,7 @@ public class InsurancePlansManager {
             return;
         }
         for (InsurancePlan p : insurancePlans) {
-            if (p.equals(plan)) {
+            if (p.getInsurancePlanId() == plan.getInsurancePlanId()) {
                 throw new InsurancePlanException(DUPLICATE_PLAN_DETECTED_MESSAGE);
             }
         }
