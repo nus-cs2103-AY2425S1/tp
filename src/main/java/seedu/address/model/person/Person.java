@@ -89,6 +89,19 @@ public class Person {
         return deadline;
     }
 
+    /**
+     * Returns a string representation of the project deadline.
+     * If the deadline has passed and the project is not completed,
+     * then the [OVERDUE] flag is added
+     */
+    public String checkAndGetDeadline() {
+        if (deadline.isOverdue() && !projectStatus.isComplete) {
+            return deadline.toString() + " [OVERDUE]";
+        } else {
+            return deadline.toString();
+        }
+    }
+
 
     /**
      * Returns true if both persons have the same name, email and phone.

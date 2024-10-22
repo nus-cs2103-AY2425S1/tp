@@ -46,6 +46,13 @@ public class Deadline {
         }
     }
 
+    /**
+     * Returns true if the deadline has passed
+     */
+    public boolean isOverdue() {
+        return value.isBefore(LocalDate.now());
+    }
+
     @Override
     public String toString() {
         return value.format(OUTPUT_FORMATTER);
