@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -33,9 +31,8 @@ public class AddGradeCommandTest {
 
     @Test
     public void addGrade_exceedsWeightage_throwsCommandException() throws CommandException {
-        // Prepare grades that will cause the total weightage to exceed 100%
         Grade firstGrade = new Grade("Midterm", 86.4F, 50.0F); // 50% weightage
-        Grade secondGrade = new Grade("Final", 86.4F, 50.0F);  // 50% weightage
+        Grade secondGrade = new Grade("Final", 86.4F, 50.0F); // 50% weightage
         Grade thirdGrade = new Grade("Extra Assignment", 1.0F, 10.0F); // Exceeds 100%
 
         Person person = new PersonBuilder(ALICE).build();
@@ -43,12 +40,12 @@ public class AddGradeCommandTest {
 
         // Add first grade
         AddGradeCommand addFirstGradeCommand = new AddGradeCommand(Index.fromZeroBased(0), firstGrade);
-        model.addPerson(person); // Ensure the person is added to the model
-        addFirstGradeCommand.execute(model); // This should be fine
+        model.addPerson(person);
+        addFirstGradeCommand.execute(model);
 
-
+        // Add second grade
         AddGradeCommand addSecondGradeCommand = new AddGradeCommand(Index.fromZeroBased(0), secondGrade);
-        addSecondGradeCommand.execute(model); // This should also be fine
+        addSecondGradeCommand.execute(model);
 
         // Add third grade, which will cause the weightage to exceed 100%
         AddGradeCommand addThirdGradeCommand = new AddGradeCommand(Index.fromZeroBased(0), thirdGrade);
