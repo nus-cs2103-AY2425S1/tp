@@ -121,8 +121,8 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `:find [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-t TAG]…​`
 
-* The search is case-insensitive.
-
+* The search is case-insensitive. 
+    
     e.g `hans` will match `Hans`
 * Persons with a certain name, phone number, email, address and remark can be searched through flags.
 
