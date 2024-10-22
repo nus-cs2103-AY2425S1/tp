@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -50,7 +51,7 @@ public class DeleteAssignmentCommand extends Command {
 
     public final AssignmentQuery assignmentQuery;
     public final Name name;
-    public final StudentNumber studentNumber;
+    public final Optional<StudentNumber> studentNumber;
 
     /**
      * Creates an DeleteAssignmentCommand to add the specified {@code Assignment}
@@ -58,7 +59,7 @@ public class DeleteAssignmentCommand extends Command {
     public DeleteAssignmentCommand(Name name, AssignmentQuery assignmentQuery) {
         this.name = name;
         this.assignmentQuery = assignmentQuery;
-        this.studentNumber = null;
+        this.studentNumber = Optional.empty();
     }
 
     /**
@@ -67,7 +68,7 @@ public class DeleteAssignmentCommand extends Command {
     public DeleteAssignmentCommand(Name name, AssignmentQuery assignmentQuery, StudentNumber studentNumber) {
         this.name = name;
         this.assignmentQuery = assignmentQuery;
-        this.studentNumber = studentNumber;
+        this.studentNumber = Optional.of(studentNumber);
     }
 
     @Override
@@ -75,9 +76,9 @@ public class DeleteAssignmentCommand extends Command {
         requireNonNull(model);
         List<Student> studentList = model.getAllStudentByName(name);
 
-        if (this.studentNumber != null) {
+        if (this.studentNumber.isPresent()) {
             List<Student> filteredStudentList =
-                    studentList.stream().filter(s -> s.getStudentNumber().equals(studentNumber)).toList();
+                    studentList.stream().filter(s -> s.getStudentNumber().equals(studentNumber.get())).toList();
             if (filteredStudentList.isEmpty()) {
                 throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
             }
@@ -114,6 +115,7 @@ public class DeleteAssignmentCommand extends Command {
 
         DeleteAssignmentCommand otherCommand = (DeleteAssignmentCommand) other;
         return otherCommand.name.equals(this.name)
-                && otherCommand.assignmentQuery.equals(this.assignmentQuery);
+                && otherCommand.assignmentQuery.equals(this.assignmentQuery)
+                && this.studentNumber.equals(otherCommand.studentNumber);
     }
 }
