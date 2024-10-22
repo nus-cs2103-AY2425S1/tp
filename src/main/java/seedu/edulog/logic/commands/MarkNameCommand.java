@@ -15,7 +15,7 @@ import seedu.edulog.model.student.Student;
 /**
  * Marks a student identified using its displayed name from the edulog book.
  */
-public class MarkNameCommand extends UnmarkCommand {
+public class MarkNameCommand extends MarkCommand {
 
     private final Name targetName;
 

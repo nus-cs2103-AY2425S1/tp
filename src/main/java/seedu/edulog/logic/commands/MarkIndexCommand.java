@@ -15,7 +15,7 @@ import seedu.edulog.model.student.Student;
 /**
  * Marks a student as present identified using its displayed index from the edulog book.
  */
-public class MarkIndexCommand extends UnmarkCommand {
+public class MarkIndexCommand extends MarkCommand {
 
     private final Index targetIndex;
 
