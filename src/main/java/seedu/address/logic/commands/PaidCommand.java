@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -138,7 +137,7 @@ public class PaidCommand extends Command {
         public Optional<Frequency> getFrequency() {
             return Optional.ofNullable(frequency);
         }
-        
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
