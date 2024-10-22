@@ -112,7 +112,6 @@ public class CommonModel implements Model {
     public void deletePerson(Person target) {
         requireNonNull(addressBookModel, "AddressBook model cannot be null");
         addressBookModel.deletePerson(target);
-        deleteTransactionsOfPersonId(target.getId());
     }
 
     @Override
