@@ -24,7 +24,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "scheduleName" : "appointment",
-    "date" : "2024-10-21",
+    "date" : "2024-10-22",
     "time" : "16:00",
     "tags" : [ ]
   }, {
@@ -34,7 +34,7 @@
     "address" : "10th street",
     "scheduleName" : "schedule",
     "date" : "2024-10-21",
-    "time" : "00:00",
+    "time" : "10:00",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -61,7 +61,7 @@
     "address" : "4th street",
     "scheduleName" : "",
     "date" : "",
-    "time" : "",
+    "time" : "16:00",
     "tags" : [ ]
   } ]
 }

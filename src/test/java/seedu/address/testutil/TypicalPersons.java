@@ -35,11 +35,11 @@ public class TypicalPersons {
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withScheduleName("appointment").withScheduleDate("2024-10-21").withScheduleTime("16:00")
+            .withScheduleName("appointment").withScheduleDate("2024-10-22").withScheduleTime("16:00")
             .build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
-            .withScheduleName("schedule").withScheduleDate("2024-10-21").withScheduleTime("00:00")
+            .withScheduleName("schedule").withScheduleDate("2024-10-21").withScheduleTime("10:00")
             .build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
@@ -51,7 +51,7 @@ public class TypicalPersons {
             .build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withScheduleName("").withScheduleDate("").withScheduleTime("")
+            .withScheduleName("").withScheduleDate("").withScheduleTime("16:00")
             .build();
 
     // Manually added

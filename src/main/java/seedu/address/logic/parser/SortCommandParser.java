@@ -37,7 +37,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCHEDULE);
         if (!onePrefixPresent(argMultimap, PREFIX_NAME, PREFIX_SCHEDULE)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MULTIPLE_PREFIX_ERROR));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
         try {
             if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
@@ -53,10 +53,10 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
     }
     private static boolean onePrefixPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        long count = Stream.of(prefixes)
-                .filter(prefix -> argumentMultimap.getValue(prefix).isPresent())
-                .count();
-        return count == 1;
+        boolean isSinglePrefixName = argumentMultimap.getAllValues(PREFIX_NAME).size() == 1;
+        boolean isSinglePrefixSchedule = argumentMultimap.getAllValues(PREFIX_SCHEDULE).size() == 1;
+        //XOR to ensure only there is only one prefix provided
+        return isSinglePrefixName ^ isSinglePrefixSchedule;
     }
 
     private String formatArgument(String args) throws ParseException{

@@ -15,7 +15,7 @@ import seedu.address.model.Model;
  */
 public class SortCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort {n/[ORDER] sch/[ORDER]";
+    public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts list in ascending or descending alphabetical order\n"
             + "If order is not provided, it will sort in ascending order by default.\n"
@@ -24,8 +24,6 @@ public class SortCommand extends Command {
             + PREFIX_NAME + "[ORDER] "
             + PREFIX_SCHEDULE + "[ORDER] "
             + "Example: " + COMMAND_WORD + PREFIX_NAME + " asc/desc/ascending/descending (case insensitive)";
-    public static final String MULTIPLE_PREFIX_ERROR = COMMAND_WORD
-            + "This command only accepts ONE prefix which is either" + PREFIX_NAME + "or" + PREFIX_SCHEDULE;
 
     public static final String MESSAGE_SUCCESS = "Successfully sorted";
     public static final String ASCENDING = "asc";
@@ -52,8 +50,7 @@ public class SortCommand extends Command {
         if (!(other instanceof SortCommand)) {
             return false;
         }
-
         SortCommand otherSortCommand = (SortCommand) other;
-        return order.equals(otherSortCommand.order) & (toSortBySchedule == otherSortCommand.toSortBySchedule);
+        return order.equals(otherSortCommand.order) && (toSortBySchedule == otherSortCommand.toSortBySchedule);
     }
 }
