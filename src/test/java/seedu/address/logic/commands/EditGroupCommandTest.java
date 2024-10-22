@@ -10,7 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditGroupCommand.EditGroupDescriptor;
+import seedu.address.logic.commands.editcommands.EditGroupCommand;
+import seedu.address.logic.commands.editcommands.EditGroupCommand.EditGroupDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -63,7 +64,7 @@ public class EditGroupCommandTest {
 
         EditGroupCommand editGroupCommand = new EditGroupCommand(new GroupName("Nonexistent Group"), descriptor);
 
-        assertCommandFailure(editGroupCommand, model, EditGroupCommand.MESSAGE_GROUP_NOT_FOUND);
+        assertCommandFailure(editGroupCommand, model, Messages.MESSAGE_GROUP_NAME_NOT_FOUND);
     }
     @Test
     public void equals() {
