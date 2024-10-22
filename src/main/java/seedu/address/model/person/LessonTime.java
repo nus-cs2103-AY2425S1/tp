@@ -14,7 +14,7 @@ import java.util.Arrays;
  * Guarantees: immutable; value is valid as declared in {@link #isValidLessonTime(String)}
  */
 public class LessonTime {
-    enum Days  {
+    enum Days {
         MON, TUE, WED, THU, FRI, SAT, SUN
     }
 
@@ -77,6 +77,9 @@ public class LessonTime {
         return valid;
     }
 
+    /**
+     * Returns true if this lesson time overlaps with other lesson time.
+     */
     public boolean canMerge(LessonTime other) {
         return this.equals(other)
                 || lessonDay.equals(other.getLessonDay())
