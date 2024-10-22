@@ -28,6 +28,11 @@
         </Label>
         <Label fx:id="name" styleClass="cell_big_label" text="\$first" />
       </HBox>
+      <Label fx:id="partner1" styleClass="cell_small_label" text="Partner 1: TBC"/>
+      <Label fx:id="partner2" styleClass="cell_small_label" text="Partner 2: TBC"/>
+      <Label fx:id="address" styleClass="cell_small_label" text="Address: TBC"/>
+      <Label fx:id="date" styleClass="cell_small_label" text="Date: TBC"/>
+
     </VBox>
       <rowConstraints>
          <RowConstraints />
