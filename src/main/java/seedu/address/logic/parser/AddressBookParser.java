@@ -94,7 +94,31 @@ public class AddressBookParser {
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            if (AddCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        AddCommand.SHORT_COMMAND_WORD, AddCommand.LONG_COMMAND_WORD));
+            } else if (DeleteCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        DeleteCommand.SHORT_COMMAND_WORD, DeleteCommand.LONG_COMMAND_WORD));
+            } else if (EditCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        EditCommand.SHORT_COMMAND_WORD, EditCommand.LONG_COMMAND_WORD));
+            } else if (ExitCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        ExitCommand.COMMAND_WORD));
+            } else if (FindCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        FindCommand.COMMAND_WORD));
+            } else if (HelpCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        HelpCommand.COMMAND_WORD));
+            } else if (ListCommand.INVALID_VARIANTS.contains(commandWord)) {
+                throw new ParseException(Command.generateInvalidVariantMessage(commandWord,
+                        ListCommand.SHORT_COMMAND_WORD, ListCommand.LONG_COMMAND_WORD));
+            } else {
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
         }
     }
 

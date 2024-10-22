@@ -17,4 +17,14 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    public static String generateInvalidVariantMessage(String invalidCommand, String commandWord) {
+        return invalidCommand + " is an invalid command. Perhaps you meant " + commandWord + " ?";
+    }
+
+    public static String generateInvalidVariantMessage(String invalidCommand, String shortCommandWord,
+                                                       String longCommandWord) {
+        return invalidCommand + " is an invalid command. Perhaps you meant " + shortCommandWord + " or "
+                + longCommandWord + " ?";
+    }
+
 }
