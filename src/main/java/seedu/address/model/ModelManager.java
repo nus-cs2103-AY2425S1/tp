@@ -129,14 +129,23 @@ public class ModelManager implements Model {
 
     @Override
     public void commitAddressBook() {
+        logger.info("Committing address book state");
+        assert addressBook != null : "Address book cannot be null";
+        assert filteredPersons.getPredicate() != null : "Predicate cannot be null";
+
         addressBook.commit(addressBook, filteredPersons.getPredicate());
     }
 
     @Override
     public void undoAddressBook() throws CommandException {
+        logger.info("Attempting to undo address book state");
+
         ReadOnlyAddressBook prevAddressBook = addressBook.undo();
+        assert prevAddressBook != null : "Address book cannot be null";
         setAddressBook(prevAddressBook);
         filteredPersons.setPredicate(addressBook.getCurrentPredicate());
+
+        logger.info("Undo successful");
     }
 
     @Override

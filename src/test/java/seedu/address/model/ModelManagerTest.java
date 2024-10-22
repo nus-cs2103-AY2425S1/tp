@@ -109,8 +109,6 @@ public class ModelManagerTest {
 
     @Test
     public void undoAddressBook_withPreviousState_success() throws CommandException {
-        modelManager.commitAddressBook();
-
         modelManager.addPerson(TypicalPersons.ALICE);
         modelManager.commitAddressBook();
 

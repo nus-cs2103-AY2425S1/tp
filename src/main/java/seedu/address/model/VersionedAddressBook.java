@@ -41,6 +41,9 @@ public class VersionedAddressBook extends AddressBook {
      * @param newState New state of AddressBook after executing a command.
      */
     public void commit(ReadOnlyAddressBook newState, Predicate<? super Person> newPredicate) {
+        assert newState != null : "New state cannot be null";
+        assert newPredicate != null : "Predicate cannot be null";
+
         removeStatesAfterCurrentPointer();
 
         addressBookStateList.add(new AddressBook(newState));
@@ -62,6 +65,7 @@ public class VersionedAddressBook extends AddressBook {
      * @throws CommandException If there is no previous state to undo to.
      */
     public ReadOnlyAddressBook undo() throws CommandException {
+        assert !addressBookStateList.isEmpty() : "State list should not be empty when undoing";
         if (currentStatePointer <= 0) {
             throw new CommandException(MESSAGE_UNDO_FAIL);
         }
