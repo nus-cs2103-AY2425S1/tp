@@ -21,4 +21,5 @@ Person *--> "1" Address
 Person *--> "1" Note
 Person *--> "1" Level
 Person *--> "*" Subjects
+Person *--> "*" LessonTime
 @enduml
