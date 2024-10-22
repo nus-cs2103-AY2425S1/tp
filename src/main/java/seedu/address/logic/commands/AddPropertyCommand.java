@@ -30,8 +30,8 @@ public class AddPropertyCommand extends Command {
             + PREFIX_PROPERTY + "[property]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PROPERTY + "37B Clementi Rd.";
-    public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Added %1$s to Person: %2$s";
-    public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Removed property from Person: %1$s";
+    public static final String MESSAGE_ADD_PROPERTY_SUCCESS = "Assigned %1$s to %2$s";
+    public static final String MESSAGE_DELETE_PROPERTY_SUCCESS = "Removed assigned property for %1$s";
 
     private final Index index;
     private final Property property;

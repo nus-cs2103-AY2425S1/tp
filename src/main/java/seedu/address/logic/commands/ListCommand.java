@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_SUCCESS = "These are your clients!";
+    public static final String MESSAGE_SUCCESS = "Here are your clients!";
     public static final String MESSAGE_NO_CLIENT_IN_LIST = "You currently have no clients in the list.";
     @Override
     public CommandResult execute(Model model) throws CommandException {

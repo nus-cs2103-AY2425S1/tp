@@ -58,7 +58,13 @@ public class DeleteAppointmentCommand extends Command {
 
         Person personToDeleteAppointment = model.getPersonByName(targetName);
         if (!lastShownList.contains(personToDeleteAppointment)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
+
+            if (closestMatch != null) {
+                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            }
         }
 
         Person personWithoutAppointment;
