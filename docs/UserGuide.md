@@ -188,21 +188,35 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Locating persons by name: <code>find</code></strong></summary>
 
-  >Finds the employee/potential hire whose names contain any of the given keywords.
+  >Finds all employees and/or potential hires whose names contain any of the specified keywords.
   >
-  >Format: `find (all or e or ph) KEYWORD [MORE_KEYWORDS]`
+  >Format: `find PARAMETER KEYWORD [MORE_KEYWORDS]`
+  > 
+  >Parameter: `e` for employees, `ph` for potential hires, `all` for both employees and potential hires
+  > 
+  >Keywords: `n/[NAMES]` `p/[PHONE NUMBERS]` `e/[EMAILS]` `d/[DEPARTMENTS]` `r/[ROLES]`
   >
-  >* The search is case-insensitive. e.g `hans` will match `Hans`
-  >* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-  >* Only the name is searched.
-  >* Only full words will be matched e.g. `Han` will not match `Hans`
-  >* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  >  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  >* Only name, phone number, email, department and role can be searched.
+  >* Allows for searching of multiple fields. e.g. `find all n/alice p/12345678 e/alice@example.com` returns persons
+  >  with name `alice`, with phone number `123445678` and with email `alice@example.com`.
+  >* The search is case-insensitive. e.g. `find all n/hans` will match `find all n/Hans`.
+  >* The order of the keywords does not matter. e.g. `find all e/alice@example.com bob@example.com` will match
+  >  `find all e/bob@example.com alice@example.com`.
+  >* Only full words will be matched. e.g. `find e n/Han` will not match `find e n/Hans`.
+  >* Persons matching at least one keyword for all fields specified will be returned.
+  >  e.g. `find e n/Hans Bo p/12345678 87654321` will return employees with name either `Hans` or `Bo`, 
+  > and with phone number either `12345678` or `87654321`.
   >
   >Examples:
-  >* `find all John` returns people `john` and `John Doe`
-  >* `find e John` returns employees `john` and `John Doe`
-  >* `find ph alex david` returns potential hires `Alex Yeoh`, `David Li`<br>
+  >* `find all n/John p/12345678` returns people with `John` in their name, and with phone number `12345678`
+  >* `find e p/12345678 e/john@example.com alice@example.com` returns employees with phone number `12345678` and with
+  >   email either `john@example.com` or `alice@example.com`
+  >* `find ph d/IT r/SWE Manager` returns potential hires with department `IT`, and role either `SWE` or `Manager`
+  >
+  >Common Mistakes:
+  >* `find a n/John`: Invalid parameter
+  >* `find all a/John`: Invalid keyword prefix
+  >* `find all n/John n/John`: Duplicate keyword prefix
   >  ![result for 'find alex david'](images/findAlexDavidResult.png)
 </details>
 
