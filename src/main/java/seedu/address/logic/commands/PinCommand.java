@@ -49,7 +49,7 @@ public class PinCommand extends Command {
 
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToPin) {
-            person.setPinned(true);
+            model.pinPerson(person);
             resultMessages.add(Messages.format(person));
         }
 

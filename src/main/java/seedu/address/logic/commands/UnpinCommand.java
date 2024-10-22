@@ -48,7 +48,7 @@ public class UnpinCommand extends Command {
 
         List<String> resultMessages = new ArrayList<>();
         for (Person person : peopleToUnpin) {
-            person.setPinned(false);
+            model.unpinPerson(person);
             resultMessages.add(Messages.format(person));
         }
 

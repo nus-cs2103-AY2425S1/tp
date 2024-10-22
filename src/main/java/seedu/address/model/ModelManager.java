@@ -112,6 +112,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void pinPerson(Person person) {
+        person.setPinned(true);
+    }
+
+    @Override
+    public void unpinPerson(Person person) {
+        person.setPinned(false);
+    }
+
+    @Override
     public void sortByPin() {
         addressBook.sortByPin();
     }
