@@ -17,10 +17,13 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.model.Model;
 import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
+import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
+import seedu.address.model.delivery.DeliveryId;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
+import seedu.address.model.delivery.Time;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.DeliveryAction;
@@ -56,7 +59,7 @@ public class ArchiveCommand extends Command {
         // Sort the indexList in descending order
         indexList.sort(Comparator.comparing(Index::getZeroBased).reversed());
 
-        if (!AddressBookParser.getInspect()) {
+        if (AddressBookParser.getInspect()) {
             return handleDeliveryArchive(model);
         } else {
             throw new CommandException(MESSAGE_INVALID_WINDOW);
@@ -126,14 +129,17 @@ public class ArchiveCommand extends Command {
         assert toArchive != null;
 
         ItemName itemName = toArchive.getItemName();
-        Address updatedAddress = toArchive.getAddress();
-        Cost updatedCost = toArchive.getCost();
-        Eta updatedEta = toArchive.getEta();
-        Status updatedStatus = toArchive.getStatus();
+        DeliveryId deliveryId = toArchive.getDeliveryId();
+        Address address = toArchive.getAddress();
+        Cost cost = toArchive.getCost();
+        Date date = toArchive.getDate();
+        Time time = toArchive.getTime();
+        Eta eta = toArchive.getEta();
+        Status status = toArchive.getStatus();
 
-        Archive archive = new Archive(true);
+        Archive updatedArchive = new Archive(true);
 
-        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta, updatedStatus, archive);
+        return new Delivery(deliveryId, itemName, address, cost, date, time, eta, status, updatedArchive);
     }
 
     /**
