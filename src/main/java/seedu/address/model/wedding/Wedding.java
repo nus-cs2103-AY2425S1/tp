@@ -96,6 +96,7 @@ public class Wedding {
 
     /**
      * Returns guest list associated with wedding
+     *
      * @return An {@code ArrayList<Person>} object of the guest list of the wedding
      */
     public ArrayList<Person> getGuestList() {

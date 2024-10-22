@@ -8,6 +8,7 @@ import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
 
+
 /**
  * A utility class to help with building Person objects.
  */
