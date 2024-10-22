@@ -127,7 +127,6 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new CompanyNotFoundException();
         }
         jobs.add(j);
-        // TODO: add reference to job in company, requires company to be edited first.
     }
 
     /**
@@ -180,11 +179,17 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes a company from this address book.
+     * Also removes all jobs tagged to the company.
      *
      * @param key Company to be removed.
      */
     public void removeCompany(Company key) {
         companies.remove(key);
+        for (Job j : jobs) {
+            if (j.getCompany().matchesCompanyName(key.getName())) {
+                jobs.remove(j);
+            }
+        }
     }
 
     //// util methods

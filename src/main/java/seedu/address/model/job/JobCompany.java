@@ -18,6 +18,7 @@ public class JobCompany extends Name {
 
     /**
      * Returns true if a given company exists.
+     * Not used in constructor but used in ParserUtil to construct a JobCompany.
      */
     public static boolean isValidCompany(String test) {
         return Name.isValidName(test);

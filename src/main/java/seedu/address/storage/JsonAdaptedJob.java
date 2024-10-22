@@ -51,7 +51,7 @@ class JsonAdaptedJob {
      */
     public JsonAdaptedJob(Job source) {
         name = source.getName().fullName;
-        company = source.getCompany().value;
+        company = source.getCompany().fullName;
         salary = String.valueOf(source.getSalary().value);
         description = source.getDescription().value;
         requirements.addAll(source.getRequirements().stream()

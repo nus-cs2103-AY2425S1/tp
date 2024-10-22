@@ -18,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Context;
 import seedu.address.model.ModelManager;
+import seedu.address.model.company.exceptions.CompanyNotFoundException;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -224,7 +225,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             return commandResult;
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | CompanyNotFoundException e) {
             logger.info("An error occurred while executing command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
