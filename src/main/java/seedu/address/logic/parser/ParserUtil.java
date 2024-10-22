@@ -111,15 +111,15 @@ public class ParserUtil {
         String trimmedScheduleName = scheduleName.trim();
         String trimmedScheduleDate = scheduleDate.trim();
         String trimmedScheduleTime = scheduleTime.trim();
-        if (!Schedule.isValidName(scheduleName)) {
+        if (!Schedule.isValidName(trimmedScheduleName)) {
             throw new ParseException(Schedule.SCHEDULE_NAME_CONSTRAINTS);
         }
 
-        if (!Schedule.isValidDate(scheduleDate)) {
+        if (!Schedule.isValidDate(trimmedScheduleDate)) {
             throw new ParseException(Schedule.DATE_CONSTRAINTS);
         }
 
-        if (!Schedule.isValidTime(scheduleTime)) {
+        if (!Schedule.isValidTime(trimmedScheduleTime)) {
             throw new ParseException(Schedule.TIME_CONSTRAINTS);
         }
         return new Schedule(trimmedScheduleName, trimmedScheduleDate, trimmedScheduleTime);
