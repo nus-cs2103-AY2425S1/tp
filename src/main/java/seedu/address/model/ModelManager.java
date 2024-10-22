@@ -14,6 +14,8 @@ import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PriorityHighToLowComparator;
+import seedu.address.model.person.PriorityLowToHighComparator;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -39,6 +41,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         filteredPersons = new FilteredList<>(sortedPersons);
+
+        applySavedSortPreference();
     }
 
     public ModelManager() {
@@ -56,6 +60,28 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyUserPrefs getUserPrefs() {
         return userPrefs;
+    }
+
+    @Override
+    public void setSortPreference(String sortPreference) {
+        requireNonNull(userPrefs);
+        userPrefs.setSortPreference(sortPreference);
+    }
+
+    @Override
+    public void applySavedSortPreference() {
+        String sortPreference = userPrefs.getSortPreference();
+
+        switch(sortPreference) {
+        case "high":
+            updateSortedPersonList(new PriorityHighToLowComparator());
+            break;
+        case "low":
+            updateSortedPersonList(new PriorityLowToHighComparator());
+            break;
+        default:
+            break;
+        }
     }
 
     @Override
