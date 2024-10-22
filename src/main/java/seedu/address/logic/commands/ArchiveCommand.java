@@ -98,9 +98,9 @@ public class ArchiveCommand extends Command {
      * @throws CommandException if any index is out of bounds or if duplicates are found.
      */
     private void validateIndexes(int listSize, List<Index> indexList) throws CommandException {
-        boolean duplicate = hasDuplicates(indexList);
+        boolean hasDuplicate = hasDuplicates(indexList);
         for (Index targetIndex : indexList) {
-            if (targetIndex.getZeroBased() >= listSize || duplicate) {
+            if (targetIndex.getZeroBased() >= listSize || hasDuplicate) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
         }
