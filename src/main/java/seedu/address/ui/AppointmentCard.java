@@ -53,7 +53,7 @@ public class AppointmentCard extends UiPart<Region> {
         dateTime.setText(appointment.getAppointmentDateTime().toString());
         //TODO: don't talk to strangers
         personName.setText(appointment.getPerson().getName().fullName);
-        sickness.setText(appointment.getSickness().value);
-        medicine.setText(appointment.getMedicine().value);
+        sickness.setText(appointment.getSickness().map(sickness -> sickness.value).orElse(""));
+        medicine.setText(appointment.getMedicine().map(medicine -> medicine.value).orElse(""));
     }
 }

@@ -4,7 +4,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
+import seedu.address.commons.util.OptionalUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -28,8 +30,8 @@ public class Appointment {
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
             Person person,
-            Sickness sickness,
-            Medicine medicine) {
+            Optional<Sickness> sickness,
+            Optional<Medicine> medicine) {
 
         requireAllNonNull(appointmentType, appointmentDateTime, person, sickness, medicine);
         this.appointmentDescriptor = new AppointmentDescriptor(
@@ -50,8 +52,8 @@ public class Appointment {
             AppointmentType appointmentType,
             LocalDateTime appointmentDateTime,
             Person person,
-            Sickness sickness,
-            Medicine medicine,
+            Optional<Sickness> sickness,
+            Optional<Medicine> medicine,
             int appointmentId) {
         this.appointmentDescriptor = new AppointmentDescriptor(
                 appointmentType,
@@ -90,7 +92,7 @@ public class Appointment {
         return appointmentDescriptor.getAppointmentType();
     }
 
-    public Sickness getSickness() {
+    public Optional<Sickness> getSickness() {
         return appointmentDescriptor.getSickness();
     }
 
@@ -98,7 +100,7 @@ public class Appointment {
         return appointmentDescriptor.getAppointmentDateTime();
     }
 
-    public Medicine getMedicine() {
+    public Optional<Medicine> getMedicine() {
         return appointmentDescriptor.getMedicine();
     }
 
@@ -143,9 +145,8 @@ public class Appointment {
                 .add("person", person)
                 .add("appointmentType", getAppointmentType())
                 .add("appointmentDateTime", getAppointmentDateTime())
-                .add("medicine", getMedicine())
-                .add("sickness", getSickness())
+                .add("medicine", OptionalUtil.optionalToString(getMedicine()))
+                .add("sickness", OptionalUtil.optionalToString(getSickness()))
                 .toString();
     }
-
 }
