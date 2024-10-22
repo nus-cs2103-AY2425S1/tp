@@ -65,7 +65,9 @@ public class CommandResult {
         return commandType;
     }
 
-    public Index getTabIndex() { return tabIndex; }
+    public Index getTabIndex() {
+        return tabIndex;
+    }
 
     @Override
     public boolean equals(Object other) {
