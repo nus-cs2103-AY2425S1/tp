@@ -48,15 +48,15 @@ public class NameMatchesKeywordPredicateTest {
         predicate = new NameMatchesKeywordPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withName("Bob Alice").build()));
 
-        // Name with multiple words, exact name keyword
-        predicate = new NameMatchesKeywordPredicate(Arrays.asList("Alice Bob"));
+        // Name with multiple words
+        predicate = new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        predicate = new NameMatchesKeywordPredicate(Arrays.asList("Alice Bob Carol"));
+        predicate = new NameMatchesKeywordPredicate(Arrays.asList("Alice", "Bob"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob Carol").build()));
 
         // Mixed-case keywords
-        predicate = new NameMatchesKeywordPredicate(Arrays.asList("aLIce bOB"));
+        predicate = new NameMatchesKeywordPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
     }
 
@@ -70,13 +70,9 @@ public class NameMatchesKeywordPredicateTest {
         predicate = new NameMatchesKeywordPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Non-exact name keyword
-        predicate = new NameMatchesKeywordPredicate(Arrays.asList("Alice Bob"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob Carol").build()));
-
         // Keywords match phone, email and address, but does not match name
-        predicate = new NameMatchesKeywordPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345678")
+        predicate = new NameMatchesKeywordPredicate(Arrays.asList("9179", "alice@email.com", "Main", "Street"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("92839179")
                 .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
