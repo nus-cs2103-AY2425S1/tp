@@ -3,7 +3,6 @@ package hallpointer.address.ui;
 import java.util.Comparator;
 
 import hallpointer.address.model.member.Member;
-import hallpointer.address.model.session.Session;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -57,7 +56,8 @@ public class MemberCard extends UiPart<Region> {
         member.getSessions().stream()
                 .sorted(Comparator.comparing(session -> session.getDate().fullDate))
                 .forEach(session -> {
-                    Label sessionLabel = new Label(session.getSessionName().toString() + " " + session.getDate().toString());
+                    Label sessionLabel = new Label(
+                        session.getSessionName().toString() + " " + session.getDate().toString());
 
                     // Create a Tooltip to show points on hover
                     Tooltip sessionTooltip = new Tooltip("Points: " + session.getPoints().toString());
