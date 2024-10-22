@@ -16,11 +16,9 @@ import seedu.address.logic.commands.eventcommands.EventNewCommand;
 import seedu.address.logic.commands.eventcommands.EventViewCommand;
 import seedu.address.logic.commands.eventcommands.FindEventCommand;
 import seedu.address.logic.commands.volunteercommands.FindVolunteerCommand;
-import seedu.address.logic.commands.volunteercommands.VolunteerAddCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerDeleteCommand;
 import seedu.address.logic.commands.volunteercommands.VolunteerViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.volunteer.Volunteer;
 
 public class AddressBookParserTest {
 
