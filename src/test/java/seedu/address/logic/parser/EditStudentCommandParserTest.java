@@ -22,8 +22,9 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditStudentCommand;
-import seedu.address.logic.commands.EditStudentCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.editcommands.EditStudentCommand;
+import seedu.address.logic.commands.editcommands.EditStudentCommand.EditPersonDescriptor;
+import seedu.address.logic.parser.editcommands.EditStudentCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.testutil.EditPersonDescriptorBuilder;

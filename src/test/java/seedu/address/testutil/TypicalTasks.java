@@ -9,13 +9,13 @@ import seedu.address.model.task.Task;
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
 public class TypicalTasks {
-    private static final Task TASK_COMPLETED = new TaskBuilder()
+    public static final Task TASK_COMPLETED = new TaskBuilder()
         .withTaskName("Finish iP")
         .withDeadline(LocalDateTime.of(2024, 9, 15, 23, 59))
         .withStatus(Status.COMPLETED)
         .build();
 
-    private static final Task TASK_PENDING = new TaskBuilder()
+    public static final Task TASK_PENDING = new TaskBuilder()
         .withTaskName("Finish tP v1.3")
         .withDeadline(LocalDateTime.of(2024, 9, 17, 23, 59))
         .withStatus(Status.PENDING)

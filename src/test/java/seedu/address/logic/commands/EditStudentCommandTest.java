@@ -12,7 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditStudentCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.editcommands.EditStudentCommand;
+import seedu.address.logic.commands.editcommands.EditStudentCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

@@ -4,30 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.STUDENT_NUMBER_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENT_NUMBER_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteStudentCommand;
-import seedu.address.logic.commands.EditStudentCommand;
-import seedu.address.logic.commands.EditStudentCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.addcommands.AddStudentCommand;
+import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.StudentNumber;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -53,19 +41,6 @@ public class AddressBookParserTest {
         DeleteStudentCommand command = (DeleteStudentCommand) parser.parseCommand(
             DeleteStudentCommand.COMMAND_WORD + " sno/" + ALICE.getStudentNumber().toString());
         assertEquals(new DeleteStudentCommand(ALICE.getStudentNumber()), command);
-    }
-
-    @Test
-    public void parseCommand_editStudent() throws Exception {
-        String userInput = STUDENT_NUMBER_DESC_AMY + NAME_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND;
-
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
-            .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND).build();
-        EditStudentCommand expectedCommand = new EditStudentCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY),
-            descriptor);
-        EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
-            + userInput);
-        assertEquals(new EditStudentCommand(new StudentNumber(VALID_STUDENT_NUMBER_AMY), descriptor), command);
     }
 
     @Test
