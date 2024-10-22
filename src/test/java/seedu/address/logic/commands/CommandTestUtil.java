@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.commons.NameContainsKeywordsPredicate;
 import seedu.address.model.concert.Concert;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditConcertDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -44,11 +45,14 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_COACHELLA = "Coachella";
     public static final String VALID_NAME_GLASTONBURY = "Glastonbury";
+    public static final String VALID_NAME_ADELE = "Adele";
     public static final String VALID_ADDRESS_COACHELLA =
             "81800 51st Ave, Indio, Southern California, United States";
     public static final String VALID_ADDRESS_GLASTONBURY = "1 Stadium Dr, Singapore 397629";
+    public static final String VALID_ADDRESS_ADELE = "1 Stadium Dr, Singapore 397629";
     public static final String VALID_DATE_COACHELLA = "2024-04-12 0000";
     public static final String VALID_DATE_GLASTONBURY = "2024-10-10 2200";
+    public static final String VALID_DATE_ADELE = "2024-12-12 1900";
 
     public static final String NAME_DESC_COACHELLA = " " + PREFIX_NAME + VALID_NAME_COACHELLA;
     public static final String ADDRESS_DESC_COACHELLA = " " + PREFIX_ADDRESS + VALID_ADDRESS_COACHELLA;
@@ -80,6 +84,8 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditConcertCommand.EditConcertDescriptor DESC_COACHELLA;
+    public static final EditConcertCommand.EditConcertDescriptor DESC_GLASTONBURY;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(
@@ -88,6 +94,12 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(
                 VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(
                         VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_COACHELLA = new EditConcertDescriptorBuilder().withName(VALID_NAME_COACHELLA)
+                .withAddress(VALID_ADDRESS_COACHELLA)
+                .withDate(VALID_DATE_COACHELLA).build();
+        DESC_GLASTONBURY = new EditConcertDescriptorBuilder().withName(VALID_NAME_GLASTONBURY)
+                .withAddress(VALID_ADDRESS_GLASTONBURY)
+                .withDate(VALID_DATE_GLASTONBURY).build();
     }
 
     /**
