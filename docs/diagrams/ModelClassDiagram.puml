@@ -5,22 +5,44 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    Class UniquePersonList
 
-Class I #FFFFFF
+    Class Person {
+        - Name name
+        - Phone phone
+        - Email email
+        - Address address
+        - Set<Tag> tags
+    }
+
+    Class Doctor {
+        - Specialty specialty
+        + Doctor(Name, Phone, Email, Address, Specialty, Set<Tag>)
+    }
+
+    Class Patient {
+            - Gender gender
+            - DateOfBirth dateofbirth
+            + Doctor(Name, Phone, Email, Address, Specialty, Set<Tag>)
+    }
+
+    Class Address
+    Class Email
+    Class Name
+    Class Phone
+    Class Tag
+    Class Specialty
+    Class DateOfBirth
+    Class Gender
+
+    Class I #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
@@ -42,6 +64,12 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> DateOfBirth
+Person *--> Specialty
+Person *--> Gender
+
+Doctor .right.|> Person
+Doctor *--> "1" Specialty
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
