@@ -17,7 +17,7 @@ import spleetwaise.address.logic.Logic;
 import spleetwaise.address.logic.LogicManager;
 import spleetwaise.address.model.AddressBook;
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.ReadOnlyUserPrefs;
 import spleetwaise.address.model.UserPrefs;
@@ -34,6 +34,7 @@ import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
 import spleetwaise.transaction.storage.TransactionBookStorage;
 
@@ -84,7 +85,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br> The
+     * Returns a {@code AddressBookModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br> The
      * data from the sample address book will be used instead if {@code storage}'s address book is not found, or an
      * empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
@@ -106,7 +107,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new AddressBookModelManager(initialData, userPrefs);
     }
 
     private TransactionBookModel initTransactionModelManager(Storage storage, AddressBookModel addressBookModel) {
@@ -126,7 +127,7 @@ public class MainApp extends Application {
                     + " Will be starting with an empty TransactionBook.");
             initialData = new TransactionBook();
         }
-        return new spleetwaise.transaction.model.ModelManager(initialData);
+        return new TransactionBookModelManager(initialData);
     }
 
     private void initLogging(Config config) {

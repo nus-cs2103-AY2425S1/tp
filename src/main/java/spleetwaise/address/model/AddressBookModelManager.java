@@ -17,18 +17,18 @@ import spleetwaise.address.model.person.Person;
 /**
  * Represents the in-memory model of the address book data.
  */
-public class ModelManager implements AddressBookModel {
+public class AddressBookModelManager implements AddressBookModel {
 
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(AddressBookModelManager.class);
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a AddressBookModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public AddressBookModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine(
@@ -39,7 +39,7 @@ public class ModelManager implements AddressBookModel {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
-    public ModelManager() {
+    public AddressBookModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
 
@@ -144,11 +144,11 @@ public class ModelManager implements AddressBookModel {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ModelManager)) {
+        if (!(other instanceof AddressBookModelManager)) {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
+        AddressBookModelManager otherModelManager = (AddressBookModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);

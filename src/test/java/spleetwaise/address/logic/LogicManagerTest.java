@@ -16,6 +16,7 @@ import spleetwaise.address.logic.commands.CommandTestUtil;
 import spleetwaise.address.logic.commands.ListCommand;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.AddressBookModel;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
@@ -32,6 +33,7 @@ import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.model.ReadOnlyTransactionBook;
 import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.storage.JsonTransactionBookStorage;
 
 public class LogicManagerTest {
@@ -41,8 +43,8 @@ public class LogicManagerTest {
 
     @TempDir
     public Path temporaryFolder;
-    private AddressBookModel addressBookModel = new spleetwaise.address.model.ModelManager();
-    private TransactionBookModel transactionModel = new spleetwaise.transaction.model.ModelManager();
+    private AddressBookModel addressBookModel = new AddressBookModelManager();
+    private TransactionBookModel transactionModel = new TransactionBookModelManager();
     private Logic logic;
 
     @BeforeEach
@@ -186,9 +188,9 @@ public class LogicManagerTest {
             String expectedMessage
     ) {
         AddressBookModel expectedAddressBookModel =
-                new spleetwaise.address.model.ModelManager(addressBookModel.getAddressBook(), new UserPrefs());
+                new AddressBookModelManager(addressBookModel.getAddressBook(), new UserPrefs());
 
-        TransactionBookModel expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
+        TransactionBookModel expectedTransactionModel = new TransactionBookModelManager();
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedAddressBookModel,
                 expectedTransactionModel
         );
@@ -252,10 +254,10 @@ public class LogicManagerTest {
         IdUtil.setDeterminate(true);
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withId(IdUtil.getId()).withTags().build();
 
-        AddressBookModel expectedAddressBookModel = new spleetwaise.address.model.ModelManager();
+        AddressBookModel expectedAddressBookModel = new AddressBookModelManager();
         expectedAddressBookModel.addPerson(expectedPerson);
 
-        TransactionBookModel expectedTransactionModel = new spleetwaise.transaction.model.ModelManager();
+        TransactionBookModel expectedTransactionModel = new TransactionBookModelManager();
 
 
         assertCommandFailure(abAddCommand, CommandException.class, expectedMessage, expectedAddressBookModel,

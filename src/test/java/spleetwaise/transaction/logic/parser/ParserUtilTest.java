@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.model.person.Phone;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -84,7 +84,7 @@ public class ParserUtilTest {
 
     @Test
     public void getPersonFromPhone_personNotFound_exceptionThrown() {
-        AddressBookModel abModel = new ModelManager();
+        AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
 
         assertThrows(ParseException.class, () -> ParserUtil.getPersonFromPhone(TEST_PHONE));
@@ -92,7 +92,7 @@ public class ParserUtilTest {
 
     @Test
     public void getPersonFromPhone_personFound_success() {
-        AddressBookModel abModel = new ModelManager();
+        AddressBookModel abModel = new AddressBookModelManager();
         CommonModel.initialise(abModel, null);
         abModel.addPerson(TypicalPersons.ALICE);
 

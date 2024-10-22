@@ -9,22 +9,25 @@ import org.junit.jupiter.api.Test;
 import spleetwaise.address.commons.core.index.Index;
 import spleetwaise.address.logic.Messages;
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
+import spleetwaise.transaction.model.TransactionBookModel;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for {@code DeleteCommand}.
  */
 public class DeleteCommandTest {
 
-    private AddressBookModel model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private AddressBookModel addressBookModel = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+    private TransactionBookModel transactionBookModel = new TransactionBookModelManager();
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = addressBookModel.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
@@ -32,25 +35,25 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete)
         );
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        AddressBookModelManager expectedModel = new AddressBookModelManager(addressBookModel.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deleteCommand, addressBookModel, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(addressBookModel.getFilteredPersonList().size() + 1);
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(addressBookModel, TypicalIndexes.INDEX_FIRST_PERSON);
 
-        Person personToDelete = model.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
+        Person personToDelete = addressBookModel.getFilteredPersonList().get(TypicalIndexes.INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(TypicalIndexes.INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(
@@ -58,24 +61,24 @@ public class DeleteCommandTest {
                 Messages.format(personToDelete)
         );
 
-        AddressBookModel expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        AddressBookModel expectedModel = new AddressBookModelManager(addressBookModel.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(deleteCommand, addressBookModel, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        CommandTestUtil.showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
+        CommandTestUtil.showPersonAtIndex(addressBookModel, TypicalIndexes.INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = TypicalIndexes.INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < addressBookModel.getAddressBook().getPersonList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
-        CommandTestUtil.assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        CommandTestUtil.assertCommandFailure(deleteCommand, addressBookModel, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

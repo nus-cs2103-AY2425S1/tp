@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import spleetwaise.address.model.AddressBookModel;
-import spleetwaise.address.model.ModelManager;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.address.model.UserPrefs;
 import spleetwaise.address.testutil.TypicalIndexes;
 import spleetwaise.address.testutil.TypicalPersons;
@@ -19,8 +19,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        model = new AddressBookModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new AddressBookModelManager(model.getAddressBook(), new UserPrefs());
     }
 
     @Test

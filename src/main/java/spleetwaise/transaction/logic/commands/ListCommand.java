@@ -1,6 +1,6 @@
 package spleetwaise.transaction.logic.commands;
 
-import static spleetwaise.transaction.model.ModelManager.PREDICATE_SHOW_ALL_TXNS;
+import static spleetwaise.transaction.model.TransactionBookModelManager.PREDICATE_SHOW_ALL_TXNS;
 
 import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.commons.logic.commands.CommandResult;

@@ -8,22 +8,23 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import spleetwaise.address.commons.core.LogsCenter;
+import spleetwaise.address.model.AddressBookModelManager;
 import spleetwaise.transaction.model.transaction.Transaction;
 
 /**
  * Represents the in-memory model of the transaction data.
  */
-public class ModelManager implements TransactionBookModel {
+public class TransactionBookModelManager implements TransactionBookModel {
 
-    private static final Logger logger = LogsCenter.getLogger(spleetwaise.address.model.ModelManager.class);
+    private static final Logger logger = LogsCenter.getLogger(AddressBookModelManager.class);
 
     private final TransactionBook transactionBook;
     private final FilteredList<Transaction> filteredTransactions;
 
     /**
-     * Initializes a ModelManager with the given transactionBook.
+     * Initializes a AddressBookModelManager with the given transactionBook.
      */
-    public ModelManager(TransactionBook transactionBook) {
+    public TransactionBookModelManager(TransactionBook transactionBook) {
         requireNonNull(transactionBook);
 
         logger.fine("Initializing Transaction Model...");
@@ -33,9 +34,9 @@ public class ModelManager implements TransactionBookModel {
     }
 
     /**
-     * Initializes a ModelManager with the readonly transactionBook.
+     * Initializes a AddressBookModelManager with the readonly transactionBook.
      */
-    public ModelManager(ReadOnlyTransactionBook transactionBook) {
+    public TransactionBookModelManager(ReadOnlyTransactionBook transactionBook) {
         requireNonNull(transactionBook);
 
         logger.fine("Initializing Transaction Model...");
@@ -44,7 +45,7 @@ public class ModelManager implements TransactionBookModel {
         filteredTransactions = new FilteredList<>(this.transactionBook.getTransactionList());
     }
 
-    public ModelManager() {
+    public TransactionBookModelManager() {
         this(new TransactionBook());
     }
 
@@ -98,7 +99,7 @@ public class ModelManager implements TransactionBookModel {
             return false;
         }
 
-        ModelManager otherModelManager = (ModelManager) other;
+        TransactionBookModelManager otherModelManager = (TransactionBookModelManager) other;
         return transactionBook.equals(otherModelManager.transactionBook)
                 && filteredTransactions.equals(otherModelManager.filteredTransactions);
     }

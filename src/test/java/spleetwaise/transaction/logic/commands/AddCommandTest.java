@@ -14,7 +14,7 @@ import spleetwaise.address.testutil.TypicalPersons;
 import spleetwaise.commons.logic.commands.CommandResult;
 import spleetwaise.commons.logic.commands.exceptions.CommandException;
 import spleetwaise.commons.model.CommonModel;
-import spleetwaise.transaction.model.ModelManager;
+import spleetwaise.transaction.model.TransactionBookModelManager;
 import spleetwaise.transaction.model.transaction.Amount;
 import spleetwaise.transaction.model.transaction.Date;
 import spleetwaise.transaction.model.transaction.Description;
@@ -35,7 +35,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_validPerson_success() {
-        CommonModel.initialise(null, new ModelManager());
+        CommonModel.initialise(null, new TransactionBookModelManager());
         AddCommand cmd = new AddCommand(testTxn);
         CommandResult cmdRes = assertDoesNotThrow(cmd::execute);
 
@@ -52,7 +52,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_exceptionThrown() {
-        CommonModel.initialise(null, new ModelManager());
+        CommonModel.initialise(null, new TransactionBookModelManager());
         CommonModel.getInstance().addTransaction(testTxn);
 
         AddCommand cmd = new AddCommand(testTxn);
