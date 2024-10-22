@@ -2,10 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 import seedu.address.ui.DisplayType;
 
 /**
@@ -16,20 +20,31 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons has all the skills as "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Finds all persons that has any of the skills or tags as "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " frontend backend database";
+            + "Parameters: [t/TAG]... [s/SKILL]...\n"
+            + "Example: " + COMMAND_WORD + " t/swe s/frontend s/backend";
 
-    private final SkillsContainsKeywordsPredicate predicate;
+    private final SkillsContainsKeywordsPredicate skillsPredicate;
+    private final TagsContainsKeywordsPredicate tagsPredicate;
 
-    public FilterCommand(SkillsContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+    /**
+     * Takes in a {@code SkillsContainsKeywordsPredicate} and {@code TagsContainsKeywordsPredicate}.
+     * Tthe logical OR of the two predicates will be used to filter {@code Person} objects in the addressbook.
+     */
+    public FilterCommand(SkillsContainsKeywordsPredicate skillsPredicate,
+            TagsContainsKeywordsPredicate tagsPredicate) {
+        this.skillsPredicate = skillsPredicate;
+        this.tagsPredicate = tagsPredicate;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
+        // Logical OR of the two predicates
+        Predicate<Person> predicate = skillsPredicate.or(tagsPredicate);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
@@ -48,13 +63,15 @@ public class FilterCommand extends Command {
         }
 
         FilterCommand otherFilterCommand = (FilterCommand) other;
-        return predicate.equals(otherFilterCommand.predicate);
+        return skillsPredicate.equals(otherFilterCommand.skillsPredicate)
+                && tagsPredicate.equals(otherFilterCommand.tagsPredicate);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicate", predicate)
+                .add("skillsPredicate", skillsPredicate)
+                .add("tagsPredicate", tagsPredicate)
                 .toString();
     }
 }

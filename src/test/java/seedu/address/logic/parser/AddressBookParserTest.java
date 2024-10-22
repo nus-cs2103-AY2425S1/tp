@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssignments.ALICE_ALPHA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -39,6 +41,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 import seedu.address.model.skill.SkillsContainsKeywordsPredicate;
+import seedu.address.model.tag.TagsContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -95,9 +98,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_filter() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> skillsKeywords = keywords.subList(0, 1);
+        List<String> tagsKeywords = keywords.subList(1, 3);
+
         FilterCommand command = (FilterCommand) parser.parseCommand(
-                FilterCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FilterCommand(new SkillsContainsKeywordsPredicate(keywords)), command);
+                FilterCommand.COMMAND_WORD + " "
+                + skillsKeywords.stream().collect(Collectors.joining(
+                        " " + PREFIX_SKILL.getPrefix(), PREFIX_SKILL.getPrefix(), " "))
+                + tagsKeywords.stream().collect(Collectors.joining(
+                        " " + PREFIX_TAG.getPrefix(), PREFIX_TAG.getPrefix(), " ")));
+
+        assertEquals(new FilterCommand(new SkillsContainsKeywordsPredicate(skillsKeywords),
+                new TagsContainsKeywordsPredicate(tagsKeywords)), command);
     }
 
     @Test

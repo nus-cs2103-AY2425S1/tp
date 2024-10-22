@@ -1,4 +1,4 @@
-package seedu.address.model.skill;
+package seedu.address.model.tag;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,21 +10,21 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
 /**
- * Tests that a {@code Person}'s {@code Skills} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Tags} matches any of the keywords given.
  */
-public class SkillsContainsKeywordsPredicate implements Predicate<Person> {
+public class TagsContainsKeywordsPredicate implements Predicate<Person> {
     private final Set<String> keywords;
 
-    public SkillsContainsKeywordsPredicate(List<String> keywords) {
+    public TagsContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = new HashSet<String>(keywords);
     }
 
     @Override
     public boolean test(Person person) {
-        // Skill matches any of the keywords given
+        // Tag matches any of the keywords given
         return keywords.stream()
-                .anyMatch(keyword -> person.getSkills().stream()
-                .anyMatch(skill -> StringUtil.containsWordIgnoreCase(skill.skill, keyword)));
+                .anyMatch(keyword -> person.getTags().stream()
+                .anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 
     @Override
@@ -34,13 +34,13 @@ public class SkillsContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof SkillsContainsKeywordsPredicate)) {
+        if (!(other instanceof TagsContainsKeywordsPredicate)) {
             return false;
         }
 
-        SkillsContainsKeywordsPredicate otherSkillsContainsKeywordsPredicate =
-                (SkillsContainsKeywordsPredicate) other;
-        return keywords.equals(otherSkillsContainsKeywordsPredicate.keywords);
+        TagsContainsKeywordsPredicate otherTagsContainsKeywordsPredicate =
+                (TagsContainsKeywordsPredicate) other;
+        return keywords.equals(otherTagsContainsKeywordsPredicate.keywords);
     }
 
     @Override
