@@ -12,17 +12,14 @@ import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AttendCommand;
+import seedu.address.logic.commands.UnattendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.StudentId;
 import seedu.address.model.student.TutorialId;
 
-/**
- * Contains unit tests for {@code AttendCommandParser}.
- */
-public class AttendCommandParserTest {
+public class UnattendCommandParserTest {
 
-    private final AttendCommandParser parser = new AttendCommandParser();
+    private final UnattendCommandParser parser = new UnattendCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
@@ -30,13 +27,13 @@ public class AttendCommandParserTest {
                 + PREFIX_TUTORIALID + "1001 "
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
-        AttendCommand command = parser.parse(userInput);
+        UnattendCommand command = parser.parse(userInput);
 
         StudentId expectedStudentId = new StudentId("1001");
         TutorialId expectedTutorialId = TutorialId.of("1001");
         Date expectedDate = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
 
-        AttendCommand expectedCommand = new AttendCommand(expectedStudentId, expectedTutorialId, expectedDate);
+        UnattendCommand expectedCommand = new UnattendCommand(expectedStudentId, expectedTutorialId, expectedDate);
 
         assertEquals(expectedCommand, command);
     }
@@ -47,7 +44,7 @@ public class AttendCommandParserTest {
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AttendCommand.MESSAGE_USAGE), () -> parser.parse(userInput));
+                UnattendCommand.MESSAGE_USAGE), () -> parser.parse(userInput));
     }
 
     @Test
@@ -56,7 +53,7 @@ public class AttendCommandParserTest {
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AttendCommand.MESSAGE_USAGE), () -> parser.parse(userInput));
+                UnattendCommand.MESSAGE_USAGE), () -> parser.parse(userInput));
     }
 
     @Test
@@ -95,6 +92,6 @@ public class AttendCommandParserTest {
                 + PREFIX_ATTENDANCEDATE + "2024/02/21";
 
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                AttendCommand.MESSAGE_USAGE), () -> parser.parse(userInput));
+                UnattendCommand.MESSAGE_USAGE), () -> parser.parse(userInput));
     }
 }

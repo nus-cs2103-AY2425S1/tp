@@ -1,6 +1,7 @@
 package seedu.address.model.student;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +14,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.student.exceptions.StudentNotInTutDateException;
 import seedu.address.model.tut.TutDate;
 
 public class PresentDatesTest {
@@ -179,5 +181,34 @@ public class PresentDatesTest {
     public void setAttendance_nullDate_throwsNullPointerException() {
         PresentDates presentDates = new PresentDates(new HashSet<>());
         assertThrows(NullPointerException.class, () -> presentDates.setAttendance(null));
+    }
+
+    @Test
+    public void setAbsent_datePresent_removesDate() {
+        PresentDates presentDates = new PresentDates(new HashSet<>());
+        TutDate tutDate = new TutDate(new Date());
+        presentDates.add(tutDate);
+        assertTrue(presentDates.getList().contains(tutDate));
+
+        presentDates.setAbsent(tutDate);
+
+        assertFalse(presentDates.getList().contains(tutDate));
+    }
+
+    @Test
+    public void setAbsent_dateNotPresent_throwsException() {
+        PresentDates presentDates = new PresentDates(new HashSet<>());
+        TutDate tutDate = new TutDate(new Date());
+        assertThrows(StudentNotInTutDateException.class, () -> {
+            presentDates.setAbsent(tutDate);
+        });
+    }
+
+    @Test
+    public void setAbsent_nullDate_throwsNullPointerException() {
+        PresentDates presentDates = new PresentDates(new HashSet<>());
+        assertThrows(NullPointerException.class, () -> {
+            presentDates.setAbsent(null);
+        });
     }
 }

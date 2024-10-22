@@ -9,11 +9,16 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
+import static seedu.address.testutil.TypicalStudents.BOB;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL3;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
@@ -167,6 +172,88 @@ public class ModelManagerTest {
         assertEquals(updatedStudent2.getTutorialId(), noneTutorialClass);
     }
 
+    @Test
+    public void setStudentAttendance_validInputs_returnsTrue() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(BOB);
+        modelManager.addTutorial(TUTORIAL1);
+
+        modelManager.assignStudent(BOB, TUTORIAL1.getTutorialId());
+
+        boolean result = modelManager.setStudentAttendance(BOB.getStudentId(), TUTORIAL1.getTutorialId(), date);
+        assertTrue(result);
+    }
+
+    @Test
+    public void setStudentAttendance_studentNotInTutorial_returnFalse() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BOB);
+        modelManager.addTutorial(TUTORIAL3);
+
+        modelManager.assignStudent(ALICE, TUTORIAL3.getTutorialId());
+
+        boolean result = modelManager.setStudentAttendance(BOB.getStudentId(), TUTORIAL3.getTutorialId(), date);
+        assertFalse(result);
+    }
+
+    @Test
+    public void setStudentAbsent_validInputs_returnsTrue() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(ALICE);
+        modelManager.addTutorial(TUTORIAL1);
+
+        modelManager.assignStudent(ALICE, TUTORIAL1.getTutorialId());
+
+        modelManager.setStudentAttendance(ALICE.getStudentId(),
+                TUTORIAL1.getTutorialId(), date);
+
+        boolean result = modelManager.setStudentAbsent(ALICE.getStudentId(),
+                TUTORIAL1.getTutorialId(), date);
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void setStudentAbsent_studentNotInTutorial_returnFalse() {
+        ModelManager modelManager = new ModelManager(new AddressBook(), new UserPrefs(),
+                new AssignmentList(), new TutorialList());
+
+        Date date = getTodayDateWithoutTime();
+
+        modelManager.addStudent(ALICE);
+        modelManager.addStudent(BOB);
+        modelManager.addTutorial(TUTORIAL1);
+
+        modelManager.assignStudent(ALICE, TUTORIAL1.getTutorialId());
+
+        modelManager.setStudentAttendance(ALICE.getStudentId(),
+                TUTORIAL1.getTutorialId(), date);
+
+        boolean result = modelManager.setStudentAbsent(BOB.getStudentId(), TUTORIAL1.getTutorialId(), date);
+        assertFalse(result);
+    }
+
+    private static Date getTodayDateWithoutTime() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withStudent(ALICE).withStudent(BENSON).build();
