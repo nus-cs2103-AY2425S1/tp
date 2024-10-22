@@ -52,7 +52,13 @@ public class DeletePropertyCommand extends Command {
 
         Person personToDeleteProperty = model.getPersonByName(targetName);
         if (!lastShownList.contains(personToDeleteProperty)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
+
+            if (closestMatch != null) {
+                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            }
         }
 
         Person personWithoutProperty = new Person(personToDeleteProperty.getName(),

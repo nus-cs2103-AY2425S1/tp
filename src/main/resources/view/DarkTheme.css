@@ -200,3 +200,17 @@
     -fx-border-radius: 12px;
     -fx-border-width: 3px;
 }
+
+.tag {
+    -fx-background-color: #FFD700;
+    -fx-text-fill: #1d1d1d;
+    -fx-padding: 5 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 1);
+    -fx-font-size: 14pt;
+}
+
+.cell_big_label {
+    -fx-font-size: 18pt;
+    -fx-text-fill: #FFD700;
+}
