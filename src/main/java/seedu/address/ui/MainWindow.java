@@ -31,8 +31,8 @@ public class MainWindow extends UiPart<Stage> {
     private static final String LIGHT_THEME = "light";
     private static final String DARK_THEME_PATH = "/view/DarkTheme.css";
     private static final String LIGHT_THEME_PATH = "/view/LightTheme.css";
-    public static final String THEME_CHANGE_MESSAGE = "Theme changed to %1$s mode.";
-    public static final String THEME_ALREADY_SET_MESSAGE = "Theme is already set to %1$s mode.";
+    private static final String THEME_CHANGE_MESSAGE = "Theme changed to %1$s mode.";
+    private static final String THEME_ALREADY_SET_MESSAGE = "Theme is already set to %1$s mode.";
 
 
     private final Logger logger = LogsCenter.getLogger(getClass());
