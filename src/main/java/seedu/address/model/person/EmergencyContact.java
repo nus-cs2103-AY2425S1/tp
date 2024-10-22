@@ -9,7 +9,7 @@ public class EmergencyContact {
 
     public static final String VALIDATION_REGEX = Phone.VALIDATION_REGEX;
 
-    public final Phone emergencyContact;
+    public final Phone value;
 
     /**
      * Constructs a {@code EmergencyContact}.
@@ -17,7 +17,7 @@ public class EmergencyContact {
      * @param emergencyContact A valid emergency contact.
      */
     public EmergencyContact(String emergencyContact) {
-        this.emergencyContact = new Phone(emergencyContact);
+        this.value = new Phone(emergencyContact);
     }
 
     /**
@@ -29,7 +29,7 @@ public class EmergencyContact {
 
     @Override
     public String toString() {
-        return emergencyContact.toString();
+        return value.toString();
     }
 
     @Override
@@ -43,7 +43,7 @@ public class EmergencyContact {
         }
 
         EmergencyContact otherEmergencyContact = (EmergencyContact) other;
-        return emergencyContact.equals(otherEmergencyContact.emergencyContact);
+        return value.equals(otherEmergencyContact.value);
     }
 
 }

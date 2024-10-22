@@ -14,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.DateOfLastVisit;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EmergencyContact;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -33,6 +34,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String dateOfLastVisit;
+    private final String emergencyContact;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -40,7 +42,9 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("dateOfLastVisit") String dateOfLastVisit) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("dateOfLastVisit") String dateOfLastVisit,
+            @JsonProperty("emergencyContact") String emergencyContact) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,6 +53,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.dateOfLastVisit = dateOfLastVisit;
+        this.emergencyContact = emergencyContact;
     }
 
     /**
@@ -59,11 +64,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.hasEmail() ? source.getEmail().get().value : EMPTY_DATA_FIELD_STRING;
         address = source.hasAddress() ? source.getAddress().get().value : EMPTY_DATA_FIELD_STRING;
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
-        dateOfLastVisit = source.hasDateOfLastVisit()
-                ? source.getDateOfLastVisit().get().value : EMPTY_DATA_FIELD_STRING;
+        tags.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        dateOfLastVisit = source.hasDateOfLastVisit() ? source.getDateOfLastVisit().get().value
+                : EMPTY_DATA_FIELD_STRING;
+        emergencyContact = source.hasEmergencyContact() ? source.getEmergencyContact().get().value.toString()
+                : EMPTY_DATA_FIELD_STRING;
     }
 
     /**
@@ -78,7 +83,8 @@ class JsonAdaptedPerson {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -86,7 +92,8 @@ class JsonAdaptedPerson {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -95,7 +102,8 @@ class JsonAdaptedPerson {
 
         final Optional<Email> modelEmail;
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (email.isEmpty()) {
             modelEmail = Optional.empty();
@@ -107,7 +115,8 @@ class JsonAdaptedPerson {
 
         Optional<Address> modelAddress;
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (address.isEmpty()) {
             modelAddress = Optional.empty();
@@ -121,8 +130,8 @@ class JsonAdaptedPerson {
 
         Optional<DateOfLastVisit> modelDateOfLastVisit;
         if (dateOfLastVisit == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    DateOfLastVisit.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, DateOfLastVisit.class.getSimpleName()));
         }
         if (dateOfLastVisit.isEmpty()) {
             modelDateOfLastVisit = Optional.empty();
@@ -132,7 +141,20 @@ class JsonAdaptedPerson {
             modelDateOfLastVisit = Optional.of(new DateOfLastVisit(dateOfLastVisit));
         }
 
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDateOfLastVisit);
+        Optional<EmergencyContact> modelEmergencyContact;
+        if (emergencyContact == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, EmergencyContact.class.getSimpleName()));
+        } else if (emergencyContact.isEmpty()) {
+            modelEmergencyContact = Optional.empty();
+        } else if (!EmergencyContact.isValidEmergencyContact(emergencyContact)) {
+            throw new IllegalValueException(EmergencyContact.MESSAGE_CONSTRAINTS);
+        } else {
+            modelEmergencyContact = Optional.of(new EmergencyContact(emergencyContact));
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelDateOfLastVisit,
+                modelEmergencyContact);
     }
 
 }
