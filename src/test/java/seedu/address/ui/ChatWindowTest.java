@@ -12,9 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * Tests for the ChatWindow class.
- */
 public class ChatWindowTest extends ApplicationTest {
     private ChatWindow chatWindow;
 
@@ -34,20 +31,26 @@ public class ChatWindowTest extends ApplicationTest {
 
     @Test
     public void testGetResponseGreetings() {
-        assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello"));
-        assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi"));
-        assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey"));
+        interact(() -> {
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello"));
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi"));
+            assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey"));
+        });
     }
 
     @Test
     public void testGetResponseHelp() {
-        assertEquals("Sure! What do you need help with?", chatWindow.getResponse("help"));
+        interact(() -> {
+            assertEquals("Sure! What do you need help with?", chatWindow.getResponse("help"));
+        });
     }
 
     @Test
     public void testGetResponseGoodbye() {
-        assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("goodbye"));
-        assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("bye"));
+        interact(() -> {
+            assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("goodbye"));
+            assertEquals("Goodbye! Have a great day!", chatWindow.getResponse("bye"));
+        });
     }
 
     @Test
@@ -55,13 +58,18 @@ public class ChatWindowTest extends ApplicationTest {
         String expected = "Love is not about possession; it's about appreciation of \n"
                 + "the journey we share together, hand in hand through \n"
                 + "the beautiful chaos of life.";
-        assertEquals(expected, chatWindow.getResponse("love"));
+        interact(() -> {
+            assertEquals(expected, chatWindow.getResponse("love"));
+        });
     }
 
     @Test
     public void testGetResponseInvalidMessage() {
         String expected = "I'm sorry, I didn't understand that. Can you please \n"
                 + "rephrase?";
-        assertEquals(expected, chatWindow.getResponse("random input"));
+        interact(() -> {
+            assertEquals(expected, chatWindow.getResponse("random input"));
+        });
     }
 }
+
