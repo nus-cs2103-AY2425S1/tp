@@ -31,7 +31,7 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" text="CareConnect User Guide on Web"
                       mnemonicParsing="false"
-                      onAction="#handleUGLink"/>
+                      onAction="#handleUgLink"/>
           </Menu>
         </MenuBar>
 
