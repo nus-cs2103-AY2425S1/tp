@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.util.Comparator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ScheduleCommand.
@@ -35,28 +37,7 @@ public class ScheduleCommandTest {
 
         // Update the expected model to reflect the filtered and sorted list after executing the command
         expectedModel.updateFilteredPersonList(person -> person.getAppointment() != null);
-        expectedModel.updateSortedPersonList(new Comparator<Person>() {
-            @Override
-            public int compare(Person p1, Person p2) {
-                // Handle null appointments and null values
-                if (p1.getAppointment() == null && p2.getAppointment() == null) {
-                    return 0;
-                } else if (p1.getAppointment() == null) {
-                    return 1;
-                } else if (p2.getAppointment() == null) {
-                    return -1;
-                } else if (p1.getAppointment().value == null && p2.getAppointment().value == null) {
-                    return 0;
-                } else if (p1.getAppointment().value == null) {
-                    return 1;
-                } else if (p2.getAppointment().value == null) {
-                    return -1;
-                } else {
-                    // Compare appointment times
-                    return p1.getAppointment().value.compareTo(p2.getAppointment().value);
-                }
-            }
-        });
+        expectedModel.updateSortedPersonList(new ScheduleCommand.ComparatorAppointment());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
@@ -71,29 +52,76 @@ public class ScheduleCommandTest {
 
         // Regardless of the current filter, ScheduleCommand should display all persons with appointments
         expectedModel.updateFilteredPersonList(person -> person.getAppointment() != null);
-        expectedModel.updateSortedPersonList(new Comparator<Person>() {
-            @Override
-            public int compare(Person p1, Person p2) {
-                // Handle null appointments and null values
-                if (p1.getAppointment() == null && p2.getAppointment() == null) {
-                    return 0;
-                } else if (p1.getAppointment() == null) {
-                    return 1;
-                } else if (p2.getAppointment() == null) {
-                    return -1;
-                } else if (p1.getAppointment().value == null && p2.getAppointment().value == null) {
-                    return 0;
-                } else if (p1.getAppointment().value == null) {
-                    return 1;
-                } else if (p2.getAppointment().value == null) {
-                    return -1;
-                } else {
-                    // Compare appointment times
-                    return p1.getAppointment().value.compareTo(p2.getAppointment().value);
-                }
-            }
-        });
+        expectedModel.updateSortedPersonList(new ScheduleCommand.ComparatorAppointment());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    // Unit tests for ComparatorAppointment
+
+    @Test
+    public void compare_bothAppointmentsNull_returnsZero() {
+        ScheduleCommand.ComparatorAppointment comparator = new ScheduleCommand.ComparatorAppointment();
+
+        Person p1 = new PersonBuilder(ALICE).withAppointment(null).build();
+        Person p2 = new PersonBuilder(ALICE).withAppointment(null).build();
+
+        int result = comparator.compare(p1, p2);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void compare_firstAppointmentNull_returnsPositive() {
+        ScheduleCommand.ComparatorAppointment comparator = new ScheduleCommand.ComparatorAppointment();
+
+        Person p1 = new PersonBuilder(ALICE).withAppointment(null).build();
+        Person p2 = new PersonBuilder(ALICE).withAppointment("12-12-2023 15:00").build();
+
+        int result = comparator.compare(p1, p2);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void compare_secondAppointmentNull_returnsNegative() {
+        ScheduleCommand.ComparatorAppointment comparator = new ScheduleCommand.ComparatorAppointment();
+
+        Person p1 = new PersonBuilder(ALICE).withAppointment("12-12-2023 15:00").build();
+        Person p2 = new PersonBuilder(ALICE).withAppointment(null).build();
+
+        int result = comparator.compare(p1, p2);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void compare_p1BeforeP2_returnsNegative() {
+        ScheduleCommand.ComparatorAppointment comparator = new ScheduleCommand.ComparatorAppointment();
+
+        Person p1 = new PersonBuilder(ALICE).withAppointment("11-12-2023 15:00").build();
+        Person p2 = new PersonBuilder(ALICE).withAppointment("12-12-2023 15:00").build();
+
+        int result = comparator.compare(p1, p2);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void compare_p1AfterP2_returnsPositive() {
+        ScheduleCommand.ComparatorAppointment comparator = new ScheduleCommand.ComparatorAppointment();
+
+        Person p1 = new PersonBuilder(ALICE).withAppointment("13-12-2023 15:00").build();
+        Person p2 = new PersonBuilder(ALICE).withAppointment("12-12-2023 15:00").build();
+
+        int result = comparator.compare(p1, p2);
+        assertEquals(0, result);
+    }
+
+    @Test
+    public void compare_sameAppointments_returnsZero() {
+        ScheduleCommand.ComparatorAppointment comparator = new ScheduleCommand.ComparatorAppointment();
+
+        Person p1 = new PersonBuilder(ALICE).withAppointment("12-12-2023 15:00").build();
+        Person p2 = new PersonBuilder(ALICE).withAppointment("12-12-2023 15:00").build();
+
+        int result = comparator.compare(p1, p2);
+        assertEquals(0, result);
     }
 }

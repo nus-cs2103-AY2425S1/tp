@@ -39,7 +39,7 @@ public class ScheduleCommand extends Command {
     /**
      * Compares two {@code Person}'s appointments for ordering.
      */
-    private static class ComparatorAppointment implements Comparator<Person> {
+    static class ComparatorAppointment implements Comparator<Person> {
 
         @Override
         public int compare(Person p1, Person p2) {
