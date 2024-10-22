@@ -7,6 +7,11 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
+
+/**
+ * Finds and creates a view popup of the specified client whose name contains any of the argument keywords.
+ * Keyword matching is case in-sensitive.
+ */
 public class ViewCommand extends Command {
 
     public static final String COMMAND_WORD = "view";

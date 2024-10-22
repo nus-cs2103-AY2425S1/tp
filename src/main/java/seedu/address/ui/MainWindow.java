@@ -17,7 +17,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import javax.swing.text.View;
 
 /**
  * The Main Window. Provides the basic application layout containing

@@ -10,10 +10,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
-public class ViewPersonWindow extends UiPart<Stage>{
+/**
+ * Controller for a view person page
+ */
+public class ViewPersonWindow extends UiPart<Stage> {
 
 
-    public static final Logger logger = LogsCenter.getLogger(ViewPersonWindow.class);
+    public static final Logger LOGGER = LogsCenter.getLogger(ViewPersonWindow.class);
     public static final String FXML = "ViewPersonWindow.fxml";
 
     public final ObservableList<Person> person;
@@ -32,6 +35,11 @@ public class ViewPersonWindow extends UiPart<Stage>{
     @FXML
     private FlowPane clientTypes;
 
+    /**
+     * Creates a new ViewPersonWindow.
+     *
+     * @param person ObservableList of persons to view
+     */
     public ViewPersonWindow(ObservableList<Person> person) {
         super(FXML, new Stage());
         this.person = person;
@@ -51,8 +59,11 @@ public class ViewPersonWindow extends UiPart<Stage>{
                 });
     }
 
+    /**
+     * Shows the ViewPersonWindow.
+     */
     public void show() {
-        logger.fine("Viewing client details.");
+        LOGGER.fine("Viewing client details.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
