@@ -208,7 +208,7 @@ In particular, TAchy has 2 features that "add" items to the app. Firstly, there 
 <puml src="diagrams/AddAssignmentSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `add_assignment` Command" />
 
 ## Viewing a student's details
-This `view_student` command is a feature that allows the user to expand and view all of a student's details in the details panel, based on the student's index. 
+This `view_student` command is a feature that allows the user to expand and view all of a student's details in the details panel, based on the student's index.
 Additional details such as a student's assignments and remarks, that are not visible in the list panel, will now also be visible in the details panel.
 
 #### Design Considerations:
