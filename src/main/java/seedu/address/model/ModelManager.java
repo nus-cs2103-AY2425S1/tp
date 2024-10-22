@@ -20,7 +20,6 @@ import seedu.address.model.person.Person;
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static Context context = Context.CONTACT;
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
@@ -45,10 +44,6 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
-    }
-
-    public static Context getContext() {
-        return context;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -125,7 +120,6 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
-        context = Context.CONTACT;
     }
 
     /**
@@ -136,20 +130,17 @@ public class ModelManager implements Model {
     @Override
     public void deleteCompany(Company target) {
         addressBook.removeCompany(target);
-        context = Context.COMPANY;
     }
 
     @Override
     public void deleteJob(Job target) {
         addressBook.removeJob(target);
-        context = Context.JOB;
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        context = Context.CONTACT;
     }
 
     /**
@@ -161,14 +152,12 @@ public class ModelManager implements Model {
     public void addCompany(Company company) {
         addressBook.addCompany(company);
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
-        context = Context.COMPANY;
     }
 
     @Override
     public void addJob(Job job) {
         addressBook.addJob(job);
         updateFilteredJobList(PREDICATE_SHOW_ALL_JOBS);
-        context = Context.JOB;
     }
 
     @Override
@@ -176,7 +165,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
-        context = Context.CONTACT;
     }
 
     /**
@@ -190,7 +178,6 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedCompany);
 
         addressBook.setCompany(target, editedCompany);
-        context = Context.COMPANY;
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -223,14 +210,12 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-        context = Context.CONTACT;
     }
 
     @Override
     public void updateFilteredJobList(Predicate<Job> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
-        context = Context.JOB;
     }
 
     /**
@@ -242,7 +227,6 @@ public class ModelManager implements Model {
     public void updateFilteredCompanyList(Predicate<Company> predicate) {
         requireNonNull(predicate);
         filteredCompanies.setPredicate(predicate);
-        context = Context.COMPANY;
     }
 
     @Override
