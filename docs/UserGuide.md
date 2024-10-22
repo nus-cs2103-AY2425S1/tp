@@ -95,7 +95,8 @@ Adds a student to the address book.
 5. **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
       <i>Example: </i> `12.00`, `0.0` or `7`
 6. **SUBJECT** should only be:
-`Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  `English`  `Chinese`  `Malay` `Tamil`  `Math`  `History`  `Geography`  `Physics`  `GP`
+`Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
+`English`  `Chinese`  `Malay` `Tamil`  `Math`  `History`  `Geography`  `Physics`  `GP`
 
 </box>
 
