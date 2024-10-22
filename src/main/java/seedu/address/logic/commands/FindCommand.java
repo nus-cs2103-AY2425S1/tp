@@ -20,7 +20,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = ":find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose specified fields contain "
+    public static final String MESSAGE_USAGE = "\"" + COMMAND_WORD + "\"" + ": Finds all persons whose specified fields contain "
             + "the keywords in the given parameters (case-insensitive).\n"
             + "Parameters are optional but there must be at least one.\n"
             + "Parameters: "
