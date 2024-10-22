@@ -12,7 +12,9 @@ import static seedu.edulog.testutil.TypicalNames.NAME_FIRST_STUDENT;
 import static seedu.edulog.testutil.TypicalNames.NAME_SECOND_STUDENT;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.edulog.logic.Messages;
 import seedu.edulog.model.Model;
 import seedu.edulog.model.ModelManager;
