@@ -42,6 +42,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private FlowPane modules;
+    @FXML
+    private FlowPane grades;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -58,7 +60,12 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getModules().stream()
                 .sorted(Comparator.comparing(module -> module.module))
-                .forEach(module -> modules.getChildren().add(new Label(module.module)));
+                .forEach(module -> {
+                    Label moduleLabel = new Label(module.module);
+                    modules.getChildren().add(moduleLabel);
+                    Label gradeLabel = new Label("(" + module.getGrade() + ")");
+                    grades.getChildren().add(gradeLabel);
+                });
         gender.textFillProperty().bind(
                 Bindings.when(gender.textProperty().isEqualTo("♂"))
                         .then(Color.LIGHTBLUE)
