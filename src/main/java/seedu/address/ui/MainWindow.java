@@ -220,7 +220,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandText.trim().toLowerCase().startsWith("view")) {
+            if (commandResult.isShowPerson()) {
                 handleViewCommand(commandText);
             }
 
