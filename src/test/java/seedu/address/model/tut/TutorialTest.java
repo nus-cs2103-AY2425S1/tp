@@ -13,6 +13,7 @@ import static seedu.address.testutil.TutUtil.TUT_NAME;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.AMY;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.junit.jupiter.api.Test;
@@ -248,7 +249,7 @@ public class TutorialTest {
 
     @Test
     public void getTutName_noneTest() {
-        assertThrows(NoTutorialException.class, NONE::getTutName);
+        assertEquals(NONE.getTutName(), new TutName("empty"));
     }
 
     @Test
@@ -265,8 +266,7 @@ public class TutorialTest {
 
     @Test
     public void getTutorialDate_noneTest() {
-        assertThrows(NoTutorialException.class, ()
-                -> NONE.getTutorialDate(new Date()));
+        assertEquals(NONE.getTutorialDate(new Date()), new TutDate(new Date()));
     }
 
     @Test
@@ -277,12 +277,12 @@ public class TutorialTest {
 
     @Test
     public void getTutDates_noneTest() {
-        assertThrows(NoTutorialException.class, NONE::getTutDates);
+        assertEquals(NONE.getTutDates(), new ArrayList<>());
     }
 
     @Test
     public void getTutorialClass_noneTest() {
-        assertThrows(NoTutorialException.class, NONE::getTutorialClass);
+        assertEquals(NONE.getTutorialClass(), TutorialClass.none());
     }
 
     @Test

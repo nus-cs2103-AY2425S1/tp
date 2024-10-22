@@ -83,9 +83,15 @@ public class TutorialListTest {
         TutorialList tutorialList = new TutorialList();
         TUTORIAL1.add(ALICE);
         tutorialList.addTutorial(TUTORIAL1);
-        assertTrue(tutorialList.getTutorials().get(0).studentInList(ALICE));
+        assertTrue(tutorialList.getTutorials()
+                .stream()
+                .filter(t -> t.equals(TUTORIAL1))
+                .anyMatch(s -> s.studentInList(ALICE)));
         tutorialList.deleteStudent(ALICE);
-        assertFalse(tutorialList.getTutorials().get(0).studentInList(ALICE));
+        assertFalse(tutorialList.getTutorials()
+                .stream()
+                .filter(t -> t.equals(TUTORIAL1))
+                .anyMatch(s -> s.studentInList(ALICE)));
     }
 
     @Test
@@ -109,7 +115,9 @@ public class TutorialListTest {
         TutorialList tutorialList = new TutorialList();
         tutorialList.addTutorial(TUTORIAL2);
         tutorialList.assignStudent(ALICE, TUTORIAL_CLASS);
-        assertTrue(tutorialList.getTutorials().get(0).getStudents().contains(ALICE));
+        assertTrue(tutorialList.getTutorials().stream()
+                .filter(t -> t.equals(TUTORIAL2))
+                .anyMatch(s -> s.studentInList(ALICE)));
     }
 
     @Test

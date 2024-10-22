@@ -167,6 +167,7 @@ public abstract class Tutorial {
         private static final None none = new None();
 
         private final List<Student> students = new ArrayList<>();
+        private final TutorialClass tutorialClass = TutorialClass.of("-1");
 
         public static None none() {
             return none;
@@ -192,7 +193,7 @@ public abstract class Tutorial {
 
         @Override
         public TutName getTutName() {
-            throw new NoTutorialException();
+            return new TutName("empty");
         }
 
         @Override
@@ -207,7 +208,7 @@ public abstract class Tutorial {
 
         @Override
         public TutDate getTutorialDate(Date date) {
-            throw new NoTutorialException();
+            return new TutDate(new Date());
         }
 
         @Override
@@ -217,12 +218,13 @@ public abstract class Tutorial {
 
         @Override
         public List<TutDate> getTutDates() {
-            throw new NoTutorialException();
+            List<TutDate> tutDates = new ArrayList<>();
+            return tutDates;
         }
 
         @Override
         public TutorialClass getTutorialClass() {
-            throw new NoTutorialException();
+            return tutorialClass;
         }
 
         @Override

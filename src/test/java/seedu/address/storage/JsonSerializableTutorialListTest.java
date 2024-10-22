@@ -23,7 +23,7 @@ public class JsonSerializableTutorialListTest {
         tutorialList.addTutorial(Tutorial.of(new TutName(VALID_NAME), VALID_TUTORIAL_CLASS));
 
         JsonSerializableTutorialList jsonList = new JsonSerializableTutorialList(tutorialList);
-        assertEquals(1, jsonList.getTutorials().size());
+        assertEquals(2, jsonList.getTutorials().size());
     }
 
     @Test
@@ -36,7 +36,7 @@ public class JsonSerializableTutorialListTest {
     public void constructor_fromEmptyTutorialList_success() {
         TutorialList emptyList = new TutorialList();
         JsonSerializableTutorialList jsonList = new JsonSerializableTutorialList(emptyList);
-
-        assertEquals(0, jsonList.getTutorials().size());
+        //Empty tutorial class will always exist
+        assertEquals(1, jsonList.getTutorials().size());
     }
 }
