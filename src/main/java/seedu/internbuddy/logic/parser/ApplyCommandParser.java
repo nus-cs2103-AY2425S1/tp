@@ -5,8 +5,6 @@ import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_STATUS;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.util.stream.Stream;
-
 import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.logic.commands.ApplyCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
@@ -37,7 +35,7 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ApplyCommand.MESSAGE_USAGE), pe);
         }
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_NAME, PREFIX_DESCRIPTION)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ApplyCommand.MESSAGE_USAGE));
         }
 
@@ -51,13 +49,4 @@ public class ApplyCommandParser implements Parser<ApplyCommand> {
 
         return new ApplyCommand(index, application);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

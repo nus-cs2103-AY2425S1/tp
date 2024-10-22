@@ -4,8 +4,6 @@ import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
 
-import java.util.stream.Stream;
-
 import seedu.internbuddy.commons.core.index.Index;
 import seedu.internbuddy.logic.commands.WithdrawCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
@@ -25,7 +23,7 @@ public class WithdrawCommandParser implements Parser<WithdrawCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX)) {
+        if (!argMultimap.arePrefixesPresent(PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX)) {
             System.out.println("hi");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WithdrawCommand.MESSAGE_USAGE));
         }
@@ -41,13 +39,5 @@ public class WithdrawCommandParser implements Parser<WithdrawCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, WithdrawCommand.MESSAGE_USAGE), pe);
         }
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
