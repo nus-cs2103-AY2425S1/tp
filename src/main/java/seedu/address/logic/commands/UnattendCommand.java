@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCEDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.Date;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 
 /**
  * Marks a student as absent for a particular date and tutorial class.
@@ -22,17 +22,17 @@ public class UnattendCommand extends Command {
             + "tutorial class. "
             + "Parameters: "
             + PREFIX_STUDENTID + "STUDENT_ID "
-            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS "
+            + PREFIX_TUTORIALID + "TUTORIAL_CLASS "
             + "[" + PREFIX_ATTENDANCEDATE + "ATTENDANCE DATE] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENTID + "1001 "
-            + PREFIX_TUTORIALCLASS + "1001 "
+            + PREFIX_TUTORIALID + "1001 "
             + PREFIX_ATTENDANCEDATE + "2024/02/21";
     public static final String MESSAGE_SUCCESS = "Marked as absent";
     public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";
 
     private final StudentId studentId;
-    private final TutorialClass tutorialClass;
+    private final TutorialId tutorialClass;
     private final Date tutDate;
 
     /**
@@ -42,7 +42,7 @@ public class UnattendCommand extends Command {
      * @param tutorialClass The tutorial class the student is enrolled in.
      * @param tutDate The date on which the student is marked absent.
      */
-    public UnattendCommand(StudentId studentId, TutorialClass tutorialClass, Date tutDate) {
+    public UnattendCommand(StudentId studentId, TutorialId tutorialClass, Date tutDate) {
         requireNonNull(studentId);
         requireNonNull(tutorialClass);
         requireNonNull(tutDate);
