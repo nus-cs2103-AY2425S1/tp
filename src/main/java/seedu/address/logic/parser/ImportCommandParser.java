@@ -1,19 +1,24 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ImportCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-
-import java.util.Arrays;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.logic.commands.ImportCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+
+/**
+ * Placeholder
+ */
 public class ImportCommandParser implements Parser<ImportCommand> {
 
     public static final String OVERRIDE_FLAG = "--override";
 
+    /**
+     * Placeholder
+     * @param args
+     * @return
+     * @throws ParseException
+     */
+    @Override
     public ImportCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {

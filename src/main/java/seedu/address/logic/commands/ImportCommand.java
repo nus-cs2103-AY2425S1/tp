@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
 
+/**
+ * Placeholder for the import command until we decide to go through with it.
+ */
 public class ImportCommand extends Command {
     public static final String COMMAND_WORD = ":import";
     public static final String MESSAGE_SUCCESS = "Address book has been imported!";
