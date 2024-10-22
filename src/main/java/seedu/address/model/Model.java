@@ -85,7 +85,7 @@ public interface Model {
     /**
      * Sets the {@code person} in the contact to be focused on in the addressbook.
      *
-     * @param index The index of the {@code Person} in the contact list.
+     * @param index The index of the {@code person} in the contact list.
      */
     void setFocusedPerson(Index index);
 
@@ -98,4 +98,21 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of the pinned person list */
+    ObservableList<Person> getPinnedPersonList();
+
+    /**
+     * Adds the {@code person} in the pinned contact list.
+     *
+     * @param index The index of the {@code person} in the contact list.
+     */
+    void addPinnedPersonList(Index index);
+
+    /**
+     * Remove the {@code person} in the pinned contact list.
+     *
+     * @param index The index of the {@code person} in the contact list.
+     */
+    void removePinnedPersonList(Index index);
 }

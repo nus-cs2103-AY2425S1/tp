@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ObservableList<Person> pinnedPersons;
     private Person focusedPerson;
 
     /**
@@ -36,6 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        pinnedPersons = new FilteredList<>(null);
         this.focusedPerson = null;
     }
 
@@ -143,6 +145,29 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Pinned Person List Accessors ===============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of pinned {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getPinnedPersonList() {
+        return pinnedPersons;
+    }
+
+    @Override
+    public void addPinnedPersonList(Index index) {
+        requireNonNull(index);
+        this.pinnedPersons.add(this.filteredPersons.get(index.getZeroBased()));
+    }
+
+    @Override
+    public void removePinnedPersonList(Index index) {
+        requireNonNull(index);
+        this.pinnedPersons.remove(index.getZeroBased());
     }
 
     @Override
