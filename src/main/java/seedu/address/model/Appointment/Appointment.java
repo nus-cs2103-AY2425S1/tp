@@ -114,4 +114,19 @@ public class Appointment {
         return sb.toString();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Appointment)) {
+            return false;
+        }
+        Appointment otherAppointment = (Appointment) other;
+        return otherAppointment.getName().equals(getName())
+                && otherAppointment.getNric().equals(getNric())
+                && otherAppointment.getStartTime().equals(getStartTime())
+                && otherAppointment.getEndTime().equals(getEndTime());
+    }
+
 }
