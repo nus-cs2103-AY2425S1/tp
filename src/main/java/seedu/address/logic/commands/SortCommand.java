@@ -2,13 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
 
-import java.util.Comparator;
-import java.util.List;
 
 /**
  * Sorts the persons in the address book by their appointment dates.

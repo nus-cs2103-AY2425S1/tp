@@ -118,6 +118,9 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
+    /**
+     * Sorts the list of persons on the basis of appointment dates
+     */
     public void sortByAppointment() {
         internalList.sort(Comparator.comparing(Person::getEarliestAppointmentDate, Comparator.nullsLast(Comparator.naturalOrder())));
 
