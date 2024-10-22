@@ -1,14 +1,17 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Attendance;
@@ -18,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Payment;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -161,5 +165,93 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Tutorial parseTutorial(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if (!Tutorial.isValidTutorial(trimmedSubject)) {
+            throw new ParseException(Tutorial.MESSAGE_CONSTRAINTS);
+        }
+        return new Tutorial(trimmedSubject);
+    }
+
+    /**
+     * Parses a string with multiple words from the find command, and check that it is not an empty string.
+     *
+     * @param searchString The search string.
+     * @return The trimmed search string.
+     * @throws ParseException If the search string is empty.
+     */
+    public static String parseMultipleWordsFromFindCommand(String searchString) throws ParseException {
+        requireNonNull(searchString);
+        String trimmedArgs = searchString.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_EMPTY_INPUT, FindCommand.MESSAGE_USAGE));
+        }
+        return trimmedArgs;
+    }
+
+    /**
+     * Parses a single word from the find command, and checks that it does not contain spaces.
+     *
+     * @param searchString The search string.
+     * @return The trimmed search string.
+     * @throws ParseException if the search string contains spaces.
+     */
+    public static String parseSingleWordFromFindCommand(String searchString) throws ParseException {
+        String trimmedArgs = parseMultipleWordsFromFindCommand(searchString);
+        if (trimmedArgs.contains(" ")) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_WITH_SPACES, FindCommand.MESSAGE_USAGE));
+        }
+        return trimmedArgs;
+    }
+
+    public static LocalDate[] parseAttendanceDate(String searchString) throws ParseException {
+        String trimmedString = parseMultipleWordsFromFindCommand(searchString);
+        String[] attendanceDates = validateAndSplitDateString(trimmedString);
+
+        LocalDate startDate = parseDate(attendanceDates[0]);
+        LocalDate endDate = parseDate(attendanceDates[1]);
+
+        if (startDate.isAfter(endDate)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE_RANGE, FindCommand.MESSAGE_USAGE));
+        }
+
+        return new LocalDate[]{startDate, endDate};
+    }
+
+    public static String[] validateAndSplitDateString(String dateInput) throws ParseException {
+        String[] dateParts = dateInput.split(":");
+        if (dateParts.length != 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        return dateParts;
+    }
+
+    public static LocalDate parseDate(String dateString) throws ParseException {
+        try {
+            return LocalDate.parse(parseSingleWordFromFindCommand(dateString), Attendance.VALID_DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE, FindCommand.MESSAGE_USAGE));
+        }
+    }
+
+    /**
+     * Parses a boolean value.
+     *
+     * @param booleanString The boolean string.
+     * @return The parsed boolean value.
+     * @throws ParseException if the search string is not a valid boolean.
+     */
+    public static boolean parseBoolean(String booleanString) throws ParseException {
+        String trimmedArgs = parseSingleWordFromFindCommand(booleanString);
+        if (!StringUtil.isBooleanValue(trimmedArgs)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        return Boolean.parseBoolean(trimmedArgs);
     }
 }
