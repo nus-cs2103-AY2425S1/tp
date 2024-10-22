@@ -25,6 +25,9 @@ public enum Status {
      */
     REJECTED("REJECTED");
 
+    public static final String MESSAGE_CONSTRAINTS =
+            "Status can only take these values: PENDING, ACCEPTED, REJECTED";
+
     private final String value;
 
     /**

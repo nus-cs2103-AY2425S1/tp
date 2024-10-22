@@ -8,6 +8,7 @@ import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.logic.validator.EmailValidator;
 import seedu.hireme.logic.validator.NameValidator;
 import seedu.hireme.logic.validator.RoleValidator;
+import seedu.hireme.logic.validator.StatusValidator;
 import seedu.hireme.model.internshipapplication.Company;
 import seedu.hireme.model.internshipapplication.Date;
 import seedu.hireme.model.internshipapplication.Email;
@@ -22,6 +23,7 @@ import seedu.hireme.model.internshipapplication.Status;
 class JsonAdaptedInternship {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Internship application's %s field is missing!";
+    public static final String MISSING_STATUS_FIELD_MESSAGE = "Status field in the Json file is missing!";
 
     private final String companyName;
     private final String companyEmail;
@@ -96,14 +98,20 @@ class JsonAdaptedInternship {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
 
+        if (statusString == null) {
+            throw new IllegalValueException(MISSING_STATUS_FIELD_MESSAGE);
+        }
+
+        if (!StatusValidator.of().validate(statusString)) {
+            throw new IllegalValueException(Status.MESSAGE_CONSTRAINTS);
+        }
+
+
         Name name = new Name(companyName);
         Email email = new Email(companyEmail);
         Company company = new Company(email, name);
         Role role = new Role(this.role);
         Date date = new Date(this.dateString);
-        assert(statusString.equals("PENDING")
-               || statusString.equals("ACCEPTED")
-               || statusString.equals("REJECTED"));
         Status status = Status.valueOf(statusString);
 
         return new InternshipApplication(company, date, role, status);
