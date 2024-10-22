@@ -17,7 +17,7 @@ public class EditConcertDescriptorBuilder {
     }
 
     public EditConcertDescriptorBuilder(EditConcertDescriptor descriptor) {
-        this.descriptor = descriptor;
+        this.descriptor = new EditConcertDescriptor(descriptor);
     }
 
     /**

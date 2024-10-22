@@ -193,9 +193,9 @@ public class EditConcertCommand extends Command {
             }
 
             EditConcertDescriptor otherEditConcertDescriptor = (EditConcertDescriptor) other;
-            return Objects.equals(name, otherEditConcertDescriptor.name) && Objects.equals(address,
-                    otherEditConcertDescriptor.address) && Objects.equals(date,
-                    otherEditConcertDescriptor.date);
+            return Objects.equals(name, otherEditConcertDescriptor.name)
+                    && Objects.equals(address, otherEditConcertDescriptor.address)
+                    && Objects.equals(date, otherEditConcertDescriptor.date);
         }
 
         @Override
