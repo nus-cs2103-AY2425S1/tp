@@ -45,7 +45,6 @@ import tuteez.commons.core.index.Index;
 import tuteez.logic.Messages;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
-import tuteez.model.person.Address;
 import tuteez.model.person.Email;
 import tuteez.model.person.Name;
 import tuteez.model.person.Phone;
