@@ -15,6 +15,7 @@ import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.commands.NoteCommand.NoteDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Name;
 
 /**
@@ -91,6 +92,10 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             return Optional.empty();
         }
 
+        if (medications.size() != 1 && medications.contains("")) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+
         Collection<String> medicationSet = medications.size() == 1 && medications.contains("")
                 ? Collections.emptySet()
                 : medications;
@@ -109,6 +114,10 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         if (remarks.isEmpty()) {
             return Optional.empty();
+        }
+
+        if (remarks.size() != 1 && remarks.contains("")) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
 
         Collection<String> remarkSet = remarks.size() == 1 && remarks.contains("")

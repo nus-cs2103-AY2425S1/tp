@@ -105,16 +105,21 @@ public class Person {
         return starredStatus;
     }
 
+    /**
+     * Handles due appointments by checking if any appointments are before today's date at midnight.
+     * If an appointment is due, it removes it from the person's appointments
+     * and adds it to the note's previous appointments.
+     */
     public void handleDueAppointments() {
         LocalDateTime todayMidnight = LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT);
-        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
         Set<Appointment> appointmentsToRemove = new HashSet<>();
         List<Appointment> modifiableAppointments = new ArrayList<>(appointments);
         for (Appointment appointment : modifiableAppointments) {
             if (appointment.appointment.isBefore(todayMidnight)) {
                 appointmentsToRemove.add(appointment);
-                note.addAppointment(appointment.appointment.format(FORMATTER));
+                note.addAppointment(appointment.appointment.format(formatter));
             }
         }
         modifiableAppointments.removeAll(appointmentsToRemove);
