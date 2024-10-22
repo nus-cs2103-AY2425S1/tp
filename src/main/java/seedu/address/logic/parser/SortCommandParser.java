@@ -35,7 +35,7 @@ public class SortCommandParser implements Parser<SortCommand> {
                     isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
         } else if (argMultimap.getValue(PREFIX_DATEOFLASTVISIT).isPresent()) {
             return new SortCommand(PersonComparator.DATE_OF_LAST_VISIT,
-                    isAscending(argMultimap.getValue(PREFIX_NAME).get().toLowerCase()));
+                    isAscending(argMultimap.getValue(PREFIX_DATEOFLASTVISIT).get().toLowerCase()));
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
