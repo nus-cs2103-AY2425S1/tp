@@ -87,6 +87,11 @@ public interface Model {
     void addWedding(Wedding wedding);
 
     /**
+     * Returns true if a wedding with the same identity as {@code wedding} exists in the address book.
+     */
+    boolean hasWedding(Wedding wedding);
+
+    /**
      * Removes a Wedding specified by name.
      * The Wedding must already exist in the AddressBook.
      * @param wedding the Wedding to remove
