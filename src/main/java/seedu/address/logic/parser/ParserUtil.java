@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +17,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.wedding.WeddingDate;
+import seedu.address.model.wedding.WeddingName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -21,6 +26,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_DATE = "Date is not in the correct format. "
+            + "Please use the format DD/MM/YYYY.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -120,5 +127,37 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String weddingName} into a {@code WeddingName}.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if given weddingName is invalid
+     */
+    public static WeddingName parseWeddingName(String weddingName) throws ParseException {
+        requireNonNull(weddingName);
+        String trimmedName = weddingName.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new WeddingName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     * The expected format is "dd/MM/yyyy".
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static WeddingDate parseWeddingDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            return new WeddingDate(LocalDate.parse(trimmedDate, formatter));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(WeddingDate.MESSAGE_CONSTRAINTS);
+        }
     }
 }

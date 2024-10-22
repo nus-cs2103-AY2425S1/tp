@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,6 +25,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -85,6 +87,49 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void hasWedding_weddingNotFound_returnsFalse() {
+        assertFalse(addressBook.hasWedding(WEDDING_ONE));
+    }
+    @Test
+    public void hasWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasWedding(null));
+    }
+
+    @Test
+    public void addWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.addWedding(null));
+    }
+
+    @Test
+    public void addWedding_validWedding_hasNewWedding() {
+        Wedding w1 = new Wedding(WEDDING_ONE.getWeddingName(), WEDDING_ONE.getWeddingDate());
+        addressBook.addWedding(w1);
+        assertTrue(addressBook.hasWedding(w1));
+    }
+
+    @Test
+    public void removeWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.removeWedding(null));
+    }
+
+    @Test
+    public void removeWedding_weddingDoesNotExist_throwsWeddingNotFoundException() {
+        Wedding w1 = new Wedding(WEDDING_ONE.getWeddingName(), WEDDING_ONE.getWeddingDate());
+        assertThrows(WeddingNotFoundException.class, () -> addressBook.removeWedding(w1));
+    }
+
+    @Test
+    public void setWedding_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.setWedding(null, null));
+    }
+
+    @Test
+    public void setWedding_weddingDoesNotExist_throwsWeddingDoesNotExistException() {
+        Wedding w1 = new Wedding(WEDDING_ONE.getWeddingName(), WEDDING_ONE.getWeddingDate());
+        assertThrows(WeddingNotFoundException.class, () -> addressBook.setWedding(w1, w1));
     }
 
     @Test
