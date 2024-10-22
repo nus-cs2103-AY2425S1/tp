@@ -7,35 +7,34 @@ import java.time.Period;
  * A Policy of type Life.
  */
 public class LifePolicy extends Policy {
-    private static final double DEFAULT_PREMIUM_AMOUNT = 100;
-    private static final double DEFAULT_COVERAGE_AMOUNT = 10000;
+    private static final PremiumAmount DEFAULT_PREMIUM_AMOUNT = new PremiumAmount(100.00);
+    private static final CoverageAmount DEFAULT_COVERAGE_AMOUNT = new CoverageAmount(10000.00);
     private static final Period DEFAULT_EXPIRY_DATE_PERIOD = Period.ofYears(20);
 
     /**
      * Constructor for a new LifePolicy initialized with defaults.
      */
     public LifePolicy() {
-        super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT, LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD));
+        super(DEFAULT_PREMIUM_AMOUNT, DEFAULT_COVERAGE_AMOUNT,
+                new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)));
     }
 
     /**
      * Constructor for a new LifePolicy with selected fields initialized.
-     * Use a negative number (i.e., -1) for premiumAmount and coverageAmount to initialize
-     * the default values for these fields.
-     * Use null for expiryDate to initialize the default expiryDate.
+     * Use null for fields to initialize them with the default values.
      *
      * @param premiumAmount the price of the policy, paid per month.
-     *                      Use a negative number to initialize this policy with the default premiumAmount.
+     *                      Use null to initialize this policy with the default premiumAmount.
      * @param coverageAmount the maximum amount that can be claimed under this policy.
-     *                       Use a negative number to initialize this policy with the default coverageAmount.
+     *                       Use null to initialize this policy with the default coverageAmount.
      * @param expiryDate the date of Policy's expiry.
      *                   Use null to initialize this policy with the default expiryDate.
      */
-    public LifePolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
+    public LifePolicy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
         super(
-                premiumAmount < 0 ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
-                coverageAmount < 0 ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
-                expiryDate == null ? LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD) : expiryDate);
+                premiumAmount == null ? DEFAULT_PREMIUM_AMOUNT : premiumAmount,
+                coverageAmount == null ? DEFAULT_COVERAGE_AMOUNT : coverageAmount,
+                expiryDate == null ? new ExpiryDate(LocalDate.now().plus(DEFAULT_EXPIRY_DATE_PERIOD)) : expiryDate);
     }
 
     @Override

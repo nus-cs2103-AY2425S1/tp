@@ -4,36 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
-
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 public class PolicyTest {
-    @Test
-    public void constructor_negativeAmounts_throwsIllegalArgumentException() {
-        final LocalDate expiryDate = LocalDate.now();
-
-        // Constructor using premiumAmount, coverageAmount and expiryDate only
-        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(-1, 0, expiryDate));
-        assertThrows(IllegalArgumentException.class, () -> new ConcretePolicy(0, -1, expiryDate));
-    }
+    private final PremiumAmount premiumAmount = new PremiumAmount(200.0);
+    private final CoverageAmount coverageAmount = new CoverageAmount(20000.0);
+    private final ExpiryDate expiryDate = new ExpiryDate("12/23/2024");
 
     @Test
     public void constructor_nullInputs_throwsNullPointerException() {
-
-        // Constructor using premiumAmount, coverageAmount and expiryDate only
-        assertThrows(NullPointerException.class, () -> new ConcretePolicy(0, 0, null));
-
+        assertThrows(NullPointerException.class, () -> new ConcretePolicy(null, coverageAmount, expiryDate));
+        assertThrows(NullPointerException.class, () -> new ConcretePolicy(premiumAmount, null, expiryDate));
+        assertThrows(NullPointerException.class, () -> new ConcretePolicy(premiumAmount, coverageAmount, null));
     }
 
     @Test
     public void makePolicy_returnCorrectPolicy() {
-        final double premiumAmount = 400.0;
-        final double coverageAmount = 4000.0;
-        final LocalDate expiryDate = LocalDate.now();
-
         // return LifePolicy
         Policy expected = new LifePolicy(premiumAmount, coverageAmount, expiryDate);
         Policy actual = Policy.makePolicy(PolicyType.LIFE, premiumAmount, coverageAmount, expiryDate);
@@ -51,10 +38,13 @@ public class PolicyTest {
     }
 
     @Test
+    public void makePolicy_nullPolicyType_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> Policy.makePolicy(
+                null, premiumAmount, coverageAmount, expiryDate));
+    }
+
+    @Test
     public void getters_returnCorrectValues() {
-        final double premiumAmount = 100;
-        final double coverageAmount = 200;
-        final LocalDate expiryDate = LocalDate.now();
         final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
 
         assertEquals(premiumAmount, policy.getPremiumAmount());
@@ -64,10 +54,7 @@ public class PolicyTest {
 
     @Test
     public void setters_setCorrectValues() {
-        final double premiumAmount = 100;
-        final double coverageAmount = 200;
-        final LocalDate expiryDate = LocalDate.now();
-        final Policy policy = new ConcretePolicy(0, 0, expiryDate);
+        final Policy policy = new ConcretePolicy(new PremiumAmount(0), new CoverageAmount(0), expiryDate);
 
         policy.setPremiumAmount(premiumAmount);
         assertEquals(premiumAmount, policy.getPremiumAmount());
@@ -78,18 +65,15 @@ public class PolicyTest {
     }
 
     @Test
-    public void setters_invalidInputs_throwsExceptions() {
-        final Policy policy = new ConcretePolicy(0, 0, LocalDate.now());
-        assertThrows(IllegalArgumentException.class, () -> policy.setPremiumAmount(-1)); // negative premiumAmount
-        assertThrows(IllegalArgumentException.class, () -> policy.setCoverageAmount(-1)); // negative coverageAmount;
-        assertThrows(NullPointerException.class, () -> policy.setExpiryDate(null)); // null expiryDate;
+    public void setters_nullInputs_throwsNullPointerException() {
+        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
+        assertThrows(NullPointerException.class, () -> policy.setPremiumAmount(null));
+        assertThrows(NullPointerException.class, () -> policy.setCoverageAmount(null));
+        assertThrows(NullPointerException.class, () -> policy.setExpiryDate(null));
     }
 
     @Test
     public void equalsMethod() {
-        final double premiumAmount = 100;
-        final double coverageAmount = 200;
-        final LocalDate expiryDate = LocalDate.now();
         final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
 
         // same object -> returns true
@@ -102,17 +86,21 @@ public class PolicyTest {
         assertFalse(policy.equals(5));
 
         // policies with different premiumAmount -> returns false
-        final Policy policyWithDifferentPremiumAmount = new ConcretePolicy(0, coverageAmount, expiryDate);
+        final PremiumAmount differentPremiumAmount = new PremiumAmount(0);
+        final Policy policyWithDifferentPremiumAmount = new ConcretePolicy(
+                differentPremiumAmount, coverageAmount, expiryDate);
         assertFalse(policy.equals(policyWithDifferentPremiumAmount));
 
         // policies with different coverageAmount -> returns false
-        final Policy policyWithDifferentCoverageAmount = new ConcretePolicy(premiumAmount, 0, expiryDate);
+        final CoverageAmount differentCoverageAmount = new CoverageAmount(0);
+        final Policy policyWithDifferentCoverageAmount = new ConcretePolicy(
+                premiumAmount, differentCoverageAmount, expiryDate);
         assertFalse(policy.equals(policyWithDifferentCoverageAmount));
 
         // policies with different expiryDate -> returns false
-        final LocalDate differentExpiryDate = LocalDate.of(2000, 10, 10);
-        final Policy policyWithDifferentExpiry = new ConcretePolicy(premiumAmount, coverageAmount,
-                differentExpiryDate);
+        final ExpiryDate differentExpiryDate = new ExpiryDate("12/12/1000");
+        final Policy policyWithDifferentExpiry = new ConcretePolicy(
+                premiumAmount, coverageAmount, differentExpiryDate);
         assertFalse(policy.equals(policyWithDifferentExpiry));
 
         // policies with same values -> returns true
@@ -121,28 +109,12 @@ public class PolicyTest {
     }
 
     @Test
-    public void isExpiredMethod() {
-        final LocalDate today = LocalDate.now();
-        final LocalDate yesterday = today.minusDays(1);
-        final LocalDate tomorrow = today.plusDays(1);
-
-        final Policy policy = new ConcretePolicy(0, 0, today);
-        assertTrue(policy.isExpired());
-
-        policy.setExpiryDate(yesterday);
-        assertTrue(policy.isExpired());
-
-        policy.setExpiryDate(tomorrow);
-        assertFalse(policy.isExpired());
-    }
-
-    @Test
     public void toStringMethod() {
-        final Policy policy = new ConcretePolicy(0, 0, LocalDate.now());
-        final String expected = String.format("Premium amount: $%.2f | Coverage amount: $%.2f "
+        final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
+        final String expected = String.format("Premium amount: $%s | Coverage amount: $%s "
                 + "| Expiry date: %s",
-                policy.getPremiumAmount(), policy.getCoverageAmount(),
-                policy.getExpiryDate().format(MM_DD_YYYY_FORMATTER));
+                policy.getPremiumAmount().toString(), policy.getCoverageAmount().toString(),
+                policy.getExpiryDate().toString());
         assertEquals(expected, policy.toString());
     }
 
@@ -150,7 +122,7 @@ public class PolicyTest {
      * A simple concrete Policy class for unit testing an abstract Policy class.
      */
     private class ConcretePolicy extends Policy {
-        public ConcretePolicy(double premiumAmount, double coverageAmount, LocalDate expiryDate) {
+        public ConcretePolicy(PremiumAmount premiumAmount, CoverageAmount coverageAmount, ExpiryDate expiryDate) {
             super(premiumAmount, coverageAmount, expiryDate);
         }
 

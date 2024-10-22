@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.commons.core.dateformatter.DateFormatter.MM_DD_YYYY_FORMATTER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -12,26 +11,30 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EducationPolicy;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.HealthPolicy;
 import seedu.address.model.policy.LifePolicy;
+import seedu.address.model.policy.PremiumAmount;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalPersons {
-    public static final LocalDate DEFAULT_EXPIRY_DATE = LocalDate.parse("12/23/2024", MM_DD_YYYY_FORMATTER);
-    public static final LifePolicy DEFAULT_LIFE_POLICY = new LifePolicy(200.0, 2000.0, DEFAULT_EXPIRY_DATE);
-    public static final HealthPolicy DEFAULT_HEALTH_POLICY = new HealthPolicy(300.0, 3000.0, DEFAULT_EXPIRY_DATE);
-    public static final EducationPolicy DEFAULT_EDUCATION_POLICY =
-                new EducationPolicy(400.0, 4000.0, DEFAULT_EXPIRY_DATE);
+    public static final ExpiryDate DEFAULT_EXPIRY_DATE = new ExpiryDate("12/23/2024");
+    public static final LifePolicy DEFAULT_LIFE_POLICY = new LifePolicy(new PremiumAmount(400.0),
+            new CoverageAmount(4000.0), DEFAULT_EXPIRY_DATE);
+    public static final HealthPolicy DEFAULT_HEALTH_POLICY = new HealthPolicy(new PremiumAmount(300.0),
+            new CoverageAmount(3000.0), DEFAULT_EXPIRY_DATE);
+    public static final EducationPolicy DEFAULT_EDUCATION_POLICY = new EducationPolicy(new PremiumAmount(200.0),
+            new CoverageAmount(2000.0), DEFAULT_EXPIRY_DATE);
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
