@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class MonthPaid implements Comparable<MonthPaid> {
     public static final String MESSAGE_CONSTRAINTS = "MonthPaid should take a string with the pattern"
-            + " YYYY-MM, where one or of such patterns can be included if separated by a space.";
+            + " YYYY-MM, where MM should be between 01 and 12.";
     public static final String SPLIT_VALIDATION_REGEX = "^[0-9]{4}-(0[1-9]|1[0-2])$";
     public final String monthPaidValue;
 
