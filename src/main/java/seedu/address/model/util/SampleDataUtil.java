@@ -13,7 +13,10 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagName;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Event;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.Todo;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 
@@ -75,13 +78,30 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a task set containing the list of tasks given.
+     * Returns a task set containing the list of tasks given as strings.
+     * Strings should follow a format like: "todo: Buy cake", "deadline: Submit report by Monday", "event: Meeting"
      */
     public static Set<Task> getTaskSet(String... strings) {
         return Arrays.stream(strings)
-                .map(Task::new)
+                .map(SampleDataUtil::parseTaskFromString)
                 .collect(Collectors.toSet());
     }
+
+    /**
+     * Parses a string to return a specific Task instance (e.g., Todo, Deadline, or Event).
+     */
+    private static Task parseTaskFromString(String taskString) {
+        if (taskString.startsWith("todo:")) {
+            return new Todo(taskString.substring(5).trim());
+        } else if (taskString.startsWith("deadline:")) {
+            return new Deadline(taskString.substring(9).trim(), "2022-12-22");
+        } else if (taskString.startsWith("event:")) {
+            return new Event(taskString.substring(6).trim(), "2022-12-22", "2022-12-23");
+        } else {
+            throw new IllegalArgumentException("Unknown task type in string: " + taskString);
+        }
+    }
+
 
 
     /**

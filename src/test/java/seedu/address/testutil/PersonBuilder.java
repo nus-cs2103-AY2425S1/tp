@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.wedding.Wedding;
 
@@ -32,6 +33,8 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Set<Wedding> weddings;
 
+    private Set<Task> tasks;
+
     /**
      * Creates a {@code PersonBuilder} with the default details.
      */
@@ -42,6 +45,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         weddings = new HashSet<>();
+        tasks = new HashSet<>();
     }
 
     /**
@@ -54,6 +58,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         weddings = new HashSet<>(personToCopy.getWeddings());
+        tasks = new HashSet<>(personToCopy.getTasks());
     }
 
     /**
@@ -104,8 +109,18 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Task} objects to the {@code Person} that we are building.
+     * You can either modify this method to accept specific tasks like Todo, Deadline, or Event
+     * or adapt the SampleDataUtil to properly convert them.
+     */
+    public PersonBuilder withTasks(String ... tasks) {
+        this.tasks = SampleDataUtil.getTaskSet(tasks);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, weddings);
+        return new Person(name, phone, email, address, tags, weddings, tasks);
     }
 
 }

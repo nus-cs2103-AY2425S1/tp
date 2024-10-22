@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * The Deadline class represents a task with a deadline.
@@ -9,7 +10,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private LocalDate by;
+
 
     /**
      * Constructs a Deadline task with the specified description and deadline date.
@@ -19,8 +22,20 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.by = LocalDate.parse(by, formatter);
+        this.by = LocalDate.parse(by, FORMATTER);
+    }
+
+    /**
+     * Constructs a Deadline task with the specified description, deadline date and isDone status.
+     *
+     * @param description The description of the task.
+     * @param by          The deadline date in the format "yyyy-MM-dd".
+     * @param isDone      The completion status of the event.
+     */
+    public Deadline(String description, String by, boolean isDone) {
+        super(description);
+        this.by = LocalDate.parse(by, FORMATTER);
+        this.isDone = isDone;
     }
 
     public LocalDate getBy() {
@@ -46,6 +61,11 @@ public class Deadline extends Task {
         return description.equals(otherDeadline.description)
                 && isDone == otherDeadline.isDone
                 && by.equals(otherDeadline.by);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone, by);
     }
 
     /**

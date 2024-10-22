@@ -18,7 +18,12 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "tags" : [ ]
+    "tags" : [ ],
+    "tasks": [{
+      "type" : "todo",
+      "description" : "Buy cake",
+      "isDone" : false
+    }]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -45,5 +50,15 @@
     "tags" : [ ]
   } ],
   "tags": ["florist"],
-  "weddings": ["Wedding 2", "Carla's Wedding"]
+  "weddings": ["Wedding 2", "Carla's Wedding"],
+  "tasks": [{
+    "type" : "todo",
+    "description" : "Buy groceries",
+    "isDone" : false
+  }, {
+    "type" : "deadline",
+    "description" : "Submit report",
+    "isDone" : false,
+    "by" : "2024-12-31"
+  } ]
 }

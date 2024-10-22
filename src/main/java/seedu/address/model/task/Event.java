@@ -2,15 +2,17 @@ package seedu.address.model.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * The Event class represents a task that spans over a period of time.
  * It extends the Task class and adds LocalDate fields to store the start and end dates of the event.
  */
 public class Event extends Task {
-
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private LocalDate from;
     private LocalDate to;
+
 
     /**
      * Constructs an Event task with the specified description, start date, and end date.
@@ -21,9 +23,23 @@ public class Event extends Task {
      */
     public Event(String description, String from, String to) {
         super(description);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.from = LocalDate.parse(from, formatter);
-        this.to = LocalDate.parse(to, formatter);
+        this.from = LocalDate.parse(from, FORMATTER);
+        this.to = LocalDate.parse(to, FORMATTER);
+    }
+
+    /**
+     * Constructs an Event task with the specified description, start date, and end date.
+     *
+     * @param description The description of the event.
+     * @param from        The start date of the event in the format "yyyy-MM-dd".
+     * @param to          The end date of the event in the format "yyyy-MM-dd".
+     * @param isDone      The completion status of the event.
+     */
+    public Event(String description, String from, String to, boolean isDone) {
+        super(description);
+        this.from = LocalDate.parse(from, FORMATTER);
+        this.to = LocalDate.parse(to, FORMATTER);
+        this.isDone = isDone;
     }
 
     public LocalDate getFrom() {
@@ -55,6 +71,11 @@ public class Event extends Task {
                 && isDone == otherEvent.isDone
                 && from.equals(otherEvent.from)
                 && to.equals(equals(otherEvent.to));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone, from, to);
     }
 
     /**

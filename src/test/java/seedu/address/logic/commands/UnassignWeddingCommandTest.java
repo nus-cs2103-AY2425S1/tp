@@ -45,7 +45,8 @@ public class UnassignWeddingCommandTest {
                 personToEdit.getEmail(),
                 personToEdit.getAddress(),
                 personToEdit.getTags(),
-                updatedWeddings);
+                updatedWeddings,
+                personToEdit.getTasks());
         expectedModel.setPerson(personToEdit, editedPerson);
 
         CommandTestUtil.assertCommandSuccess(unassignWeddingCommand, model, expectedMessage, expectedModel);

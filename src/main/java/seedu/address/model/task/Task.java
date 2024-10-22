@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Objects;
+
 /**
  * The Task class represents a general task with a description and a completion status.
  * It serves as the base class for more specific types of tasks such as Todo, Deadline, and Event.
@@ -138,6 +140,11 @@ public class Task {
      */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone);
     }
 }
 

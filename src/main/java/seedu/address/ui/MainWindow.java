@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;

@@ -88,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the task list with {@code tasks}.
      * {@code tasks} must not contain duplicate tasks.
      */
-    public void setTasks (List<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
 

@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.Objects;
+
 /**
  * The Todo class represents a simple task with no specific date attached.
  * It extends the Task class and does not add any additional fields.
@@ -14,6 +16,16 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Constructs a Todo task with the specified description and isDone status.
+     *
+     * @param description The description of the todo task.
+     * @param isDone      The completion status of the event.
+     */
+    public Todo(String description, boolean isDone) {
+        super(description);
+        this.isDone = isDone;
+    }
 
     /**
      * Returns true if both Todo tasks have the same data fields.
@@ -33,6 +45,11 @@ public class Todo extends Task {
         Todo otherTodo = (Todo) other;
         return description.equals(otherTodo.description)
                 && isDone == otherTodo.isDone;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(description, isDone);
     }
 
     /**

@@ -7,5 +7,6 @@
     "tags": [ "friends" ]
   }],
   "tags": ["florist", "chef"],
-  "weddings": ["Wedding July 2026", "Wedding 1", "Wedding July 2026", "Paula's Wedding"]
+  "weddings": ["Wedding July 2026", "Wedding 1", "Wedding July 2026", "Paula's Wedding"],
+  "tasks": []
 }

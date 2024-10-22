@@ -31,7 +31,7 @@ public class CreateTaskCommandParser implements Parser<CreateTaskCommand> {
         }
 
         List<String> taskDescriptions = argMultimap.getAllValues(PREFIX_TASK);
-        if (taskDescriptions.isEmpty()|| taskDescriptions.stream().anyMatch(String::isBlank)) {
+        if (taskDescriptions.isEmpty() || taskDescriptions.stream().anyMatch(String::isBlank)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateTaskCommand.MESSAGE_USAGE));
         }
 

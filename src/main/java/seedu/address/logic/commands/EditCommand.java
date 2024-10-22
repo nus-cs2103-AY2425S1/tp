@@ -107,7 +107,8 @@ public class EditCommand extends Command {
         Set<Wedding> updatedWeddings = editPersonDescriptor.getWeddings().orElse(personToEdit.getWeddings());
         Set<Task> updatedTasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedWeddings, updatedTasks);
+        return new Person(updatedName, updatedPhone, updatedEmail,
+                updatedAddress, updatedTags, updatedWeddings, updatedTasks);
     }
 
     @Override
