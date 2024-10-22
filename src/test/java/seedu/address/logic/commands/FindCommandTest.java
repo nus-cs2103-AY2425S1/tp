@@ -150,7 +150,6 @@ public class FindCommandTest {
 
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
-                .filter(keyword -> keyword.length() != 6)
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)

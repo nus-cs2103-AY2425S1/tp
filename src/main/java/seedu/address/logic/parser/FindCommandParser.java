@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
@@ -35,7 +36,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
-                .filter(keyword -> keyword.length() != 6)
                 .collect(Collectors.toList());
 
         List<String> nameKeywords = Arrays.stream(keywords)
@@ -50,20 +50,30 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
         Predicate<Person> postalPredicate = new PostalContainsKeywordsPredicate(postalKeywords);
 
-        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) {
-            return new FindCommand(namePredicate.or(phonePredicate).or(postalPredicate));
-        } else if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
-            return new FindCommand(namePredicate.or(phonePredicate));
-        } else if (!nameKeywords.isEmpty() && !postalKeywords.isEmpty()) {
-            return new FindCommand(namePredicate.or(postalPredicate));
-        } else if (!phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) {
-            return new FindCommand(phonePredicate.or(postalPredicate));
-        } else if (!nameKeywords.isEmpty()) {
-            return new FindCommand(namePredicate);
-        } else if (!phoneKeywords.isEmpty()) {
-            return new FindCommand(phonePredicate);
+        List<Predicate<Person>> predicates = new ArrayList<>();
+
+        if (!nameKeywords.isEmpty()) {
+            predicates.add(namePredicate);
+        }
+        if (!phoneKeywords.isEmpty()) {
+            predicates.add(phonePredicate);
+        }
+        if (!postalKeywords.isEmpty()) {
+            predicates.add(postalPredicate);
+        }
+
+        if (!predicates.isEmpty()) {
+            Predicate<Person> combinedPredicate;
+            if (predicates.size() == 1) {
+                combinedPredicate = predicates.get(0);
+            } else {
+                combinedPredicate = predicates.stream()
+                        .reduce(x -> false, Predicate::or);
+            }
+            return new FindCommand(combinedPredicate);
         } else {
-            return new FindCommand(postalPredicate);
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 
@@ -73,7 +83,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the string is numeric, false otherwise.
      */
     private boolean isNumeric(String str) {
-        return str != null && str.matches("\\d+") && str.length() != 6;
+        return str.matches("\\d+") && str.length() != 6;
     }
 
     /**
