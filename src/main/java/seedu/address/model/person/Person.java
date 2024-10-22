@@ -82,6 +82,13 @@ public class Person {
     }
 
     /**
+     * Returns the number of delivery in the deliveryList
+     */
+    public int getDeliveryListSize() {
+        return deliveryList.size();
+    }
+
+    /**
      * Sets the delivery list of this person.
      * <p>
      * Mainly used when loading a person's information from storage.
@@ -98,6 +105,13 @@ public class Person {
     }
 
     /**
+     * Adds the delivery into the delivery list of this person at the specified index.
+     */
+    public void addDelivery(Index targetIndex, Delivery delivery) {
+        deliveryList.add(targetIndex, delivery);
+    }
+
+    /**
      * Remove the delivery from the delivery list of this person.
      */
     public void deleteDelivery(Index deliveryIndex) {
@@ -111,6 +125,25 @@ public class Person {
      */
     public void setDelivery(Delivery target, Delivery editedDelivery) {
         deliveryList.setDelivery(target, editedDelivery);
+    }
+
+    /**
+     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * {@code targetIndex} must be a valid index in the deliveryList.
+     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     */
+    public void archiveDelivery(Index targetIndex, Delivery archivedDelivery) {
+        deleteDelivery(targetIndex);
+        addDelivery(archivedDelivery);
+    }
+
+    /**
+     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * {@code targetIndex} must be a valid index in the deliveryList.
+     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     */
+    public Index getFirstArchivedIndex() {
+        return deliveryList.getFirstArchivedIndex();
     }
 
     /**

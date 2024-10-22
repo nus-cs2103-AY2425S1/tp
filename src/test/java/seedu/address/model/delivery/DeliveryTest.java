@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
 public class DeliveryTest {
     @Test
     public void toStringMethod() {
-        String expected = Delivery.class.getCanonicalName() + "{deliveryId=" + APPLES.getDeliveryId() + ", itemName="
-                + APPLES.getItemName() + ", date=" + APPLES.getDate() + ", time=" + APPLES.getTime() + ", eta="
+        String expected = Delivery.class.getCanonicalName() + "{deliveryId=" + APPLES.getDeliveryId() + ", items="
+                + APPLES.getItems() + ", date=" + APPLES.getDate() + ", time=" + APPLES.getTime() + ", eta="
                 + APPLES.getEta() + ", address=" + APPLES.getAddress() + ", cost=" + APPLES.getCost() + ", status="
-                + APPLES.getStatus() + "}";
+                + APPLES.getStatus() + ", archive=" + APPLES.getArchive() + "}";
         assertEquals(expected, APPLES.toString());
     }
 }

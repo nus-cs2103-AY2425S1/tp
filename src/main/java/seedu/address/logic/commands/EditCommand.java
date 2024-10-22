@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -65,13 +66,13 @@ public class EditCommand extends Command {
            + "by the index number used in the displayed delivery list. "
            + "Existing values will be overwritten by the input values.\n"
            + "Parameters: INDEX (must be a positive integer) "
-           + "[" + PREFIX_NAME + "ITEM NAME] "
+           + "[" + PREFIX_ITEMS + "ITEM NAME] "
            + "[" + PREFIX_ADDRESS + "ADDRESS] "
            + "[" + PREFIX_COST + "COST] "
            + "[" + PREFIX_ETA + "ETA] "
            + "[" + PREFIX_STATUS + "STATUS]\n"
            + "Example: " + COMMAND_WORD + " 1 "
-           + PREFIX_NAME + "TV "
+           + PREFIX_ITEMS + "TV "
            + PREFIX_ADDRESS + "Clementi Ave 3, Blk 462, S120311 "
            + PREFIX_COST + "$300"
            + PREFIX_STATUS + "not delivered ";
@@ -158,8 +159,10 @@ public class EditCommand extends Command {
         Person inspectedPerson = InspectWindow.getInspectedPerson();
 
         //Currently no filtered list for delivery
+
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        if (index.getZeroBased() >= deliveryList.size()) {
+        if (index.getZeroBased() >= deliveryList.size()
+                || index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 
@@ -196,13 +199,13 @@ public class EditCommand extends Command {
 
         Archive archive = toEdit.getArchive();
 
-        ItemName itemName = descriptor.getItemName().orElse(toEdit.getItemName());
+        Set<ItemName> updatedItems = descriptor.getItems().orElse(toEdit.getItems());
         Address updatedAddress = descriptor.getAddress().orElse(toEdit.getAddress());
         Cost updatedCost = descriptor.getCost().orElse(toEdit.getCost());
         Eta updatedEta = descriptor.getEta().orElse(toEdit.getEta());
         Status updatedStatus = descriptor.getStatus().orElse(toEdit.getStatus());
 
-        return new Delivery(itemName, updatedAddress, updatedCost, updatedEta, updatedStatus, archive);
+        return new Delivery(updatedItems, updatedAddress, updatedCost, updatedEta, updatedStatus, archive);
     }
 
     @Override
@@ -346,7 +349,7 @@ public class EditCommand extends Command {
      */
     public static class EditDeliveryDescriptor {
 
-        private ItemName itemName;
+        private Set<ItemName> items;
         private Address address;
         private Cost cost;
         private Date date;
@@ -360,7 +363,7 @@ public class EditCommand extends Command {
          * Copy constructor.
          */
         public EditDeliveryDescriptor(EditDeliveryDescriptor toCopy) {
-            setItemName(toCopy.itemName);
+            setItems(toCopy.items);
             setAddress(toCopy.address);
             setCost(toCopy.cost);
             setDate(toCopy.date);
@@ -373,15 +376,15 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(address, cost, date, time, eta);
+            return CollectionUtil.isAnyNonNull(items, address, cost, date, time, eta);
         }
 
-        public void setItemName(ItemName itemName) {
-            this.itemName = itemName;
+        public void setItems(Set<ItemName> items) {
+            this.items = (items != null) ? new HashSet<>(items) : new HashSet<>();
         }
 
-        public Optional<ItemName> getItemName() {
-            return Optional.ofNullable(itemName);
+        public Optional<Set<ItemName>> getItems() {
+            return (items != null) ? Optional.of(Collections.unmodifiableSet(items)) : Optional.empty();
         }
 
         public void setAddress(Address address) {
@@ -444,23 +447,25 @@ public class EditCommand extends Command {
 
             EditDeliveryDescriptor otherEditDeliveryDescriptor = (EditDeliveryDescriptor) other;
             return Objects.equals(address, otherEditDeliveryDescriptor.address)
-                       && Objects.equals(cost, otherEditDeliveryDescriptor.cost)
-                       && Objects.equals(date, otherEditDeliveryDescriptor.date)
-                       && Objects.equals(time, otherEditDeliveryDescriptor.time)
-                       && Objects.equals(eta, otherEditDeliveryDescriptor.eta)
-                       && Objects.equals(status, otherEditDeliveryDescriptor.status);
+                    && Objects.equals(cost, otherEditDeliveryDescriptor.cost)
+                    && Objects.equals(date, otherEditDeliveryDescriptor.date)
+                    && Objects.equals(time, otherEditDeliveryDescriptor.time)
+                    && Objects.equals(eta, otherEditDeliveryDescriptor.eta)
+                    && Objects.equals(status, otherEditDeliveryDescriptor.status)
+                    && Objects.equals(items, otherEditDeliveryDescriptor.items);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                       .add("address", address)
-                       .add("cost", cost)
-                       .add("date", date)
-                       .add("time", time)
-                       .add("eta", eta)
-                       .add("status", status)
-                       .toString();
+                    .add("items", items)
+                    .add("address", address)
+                    .add("cost", cost)
+                    .add("date", date)
+                    .add("time", time)
+                    .add("eta", eta)
+                    .add("status", status)
+                    .toString();
         }
     }
 }

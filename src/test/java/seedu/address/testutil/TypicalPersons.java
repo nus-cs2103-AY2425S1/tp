@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
@@ -37,10 +38,12 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25, S120300")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
-            .withDelivery(new Delivery(new ItemName("Monitor"), new Address("311, Clementi Ave 2, #02-25, S120300"),
-                    new Cost("$100"), new Eta("2020-02-02"), new Status("not delivered"), new Archive("false")))
-            .withDelivery(new Delivery(new ItemName("Monkey"), new Address("369, WHERE Ave 2, #01-01, S987654"),
-                    new Cost("$20"), new Eta("1990-04-04"), new Status("not delivered"), new Archive("false")))
+            .withDelivery(new Delivery(new HashSet<>(Arrays.asList(new ItemName("Monitor"))),
+                    new Address("311, Clementi Ave 2, #02-25, S120300"), new Cost("$100"), new Eta("2020-02-02"),
+                    new Status("not delivered"), new Archive("false")))
+            .withDelivery(new Delivery(new HashSet<>(Arrays.asList(new ItemName("Mouse"))),
+                    new Address("369, WHERE Ave 2, #01-01, S987654"), new Cost("$20"), new Eta("1990-04-04"),
+                    new Status("not delivered"), new Archive("false")))
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street, S120300").build();

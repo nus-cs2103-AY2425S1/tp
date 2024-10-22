@@ -180,6 +180,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> items} into a {@code Set<ItemName>}.
+     */
+    public static Set<ItemName> parseItems(Collection<String> items) throws ParseException {
+        requireNonNull(items);
+        final Set<ItemName> itemSet = new HashSet<>();
+        for (String itemName : items) {
+            itemSet.add(parseItemName(itemName));
+        }
+        return itemSet;
+    }
+
+    /**
      * Parses a {@code String status} into an {@code Status.java}.
      * Leading and trailing whitespaces will be trimmed.
      *

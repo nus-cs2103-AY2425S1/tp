@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -13,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -47,13 +49,14 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE_DELIVERY = COMMAND_WORD + ": Adds a delivery to the inspected person. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_ITEMS + "ITEM... "
             + PREFIX_ETA + "ETA "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COST + "COST "
             + PREFIX_STATUS + "STATUS\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Monitor "
+            + PREFIX_ITEMS + "Monitor "
+            + PREFIX_ITEMS + "Mouse "
             + PREFIX_ETA + "2020-02-02 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
             + PREFIX_COST + "$100 "
@@ -116,7 +119,8 @@ public class AddCommand extends Command {
             // but we can get the inspected person with this method. And if we have the inspected person here,
             // we can directly add delivery to their delivery list.
             Person inspectedPerson = InspectWindow.getInspectedPerson();
-            inspectedPerson.addDelivery(this.deliveryToAdd);
+            Index targetIndex = inspectedPerson.getFirstArchivedIndex();
+            inspectedPerson.addDelivery(targetIndex, this.deliveryToAdd);
             return new CommandResult(MESSAGE_SUCCESS_DELIVERY + inspectedPerson.getName(), DeliveryAction.ADD);
         }
     }

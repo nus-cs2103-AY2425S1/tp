@@ -38,10 +38,9 @@ public class ItemName {
         return test.matches(VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
-        return "Item: " + value;
+        return value;
     }
 
     @Override

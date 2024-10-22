@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,19 +14,19 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.person.Address;
 
 public class DeliveryListTest {
-    private static final Delivery VALID_DELIVERY_1 = new Delivery(new ItemName("Monitor"),
+    private static final Delivery VALID_DELIVERY_1 = new Delivery(new HashSet<>(Arrays.asList(new ItemName("Monitor"))),
             new Address("311, Clementi Ave 2, #02-25, S120300"), new Cost("$1000"),
             new Eta("2020-02-02"), new Status("not delivered"), new Archive("true"));
 
-    private static final Delivery VALID_DELIVERY_2 = new Delivery(new ItemName("Apples"),
+    private static final Delivery VALID_DELIVERY_2 = new Delivery(new HashSet<>(Arrays.asList(new ItemName("Apples"))),
             new Address("311, Clementi Ave 2, #01-25, S120300"), new Cost("$300"),
             new Eta("1990-04-04"), new Status("delivered"), new Archive("false"));
 
-    private static final Delivery VALID_DELIVERY_3 = new Delivery(new ItemName("Bananas"),
+    private static final Delivery VALID_DELIVERY_3 = new Delivery(new HashSet<>(Arrays.asList(new ItemName("bananas"))),
             new Address("Zimbabwe Ave 2, #02-25, S120300"), new Cost("$600"),
             new Eta("2025-01-01"), new Status("not delivered"), new Archive("false"));
 
-    private static final Delivery VALID_DELIVERY_4 = new Delivery(new ItemName("Carrots"),
+    private static final Delivery VALID_DELIVERY_4 = new Delivery(new HashSet<>(Arrays.asList(new ItemName("carrots"))),
             new Address("NUS Ave 2, #01-01, S987654"), new Cost("$20"),
             new Eta("1970-04-04"), new Status("delivered"), new Archive("true"));
 

@@ -37,6 +37,13 @@ public class Archive {
         return test.equals("true") || test.equals("false");
     }
 
+    /**
+     * Returns true if a given string is a valid archive.
+     */
+    public boolean isArchived() {
+        return this.value.equals("true");
+    }
+
 
     @Override
     public String toString() {
