@@ -23,7 +23,13 @@ import seedu.address.model.appointment.Appointment;
 import seedu.address.model.appointment.Date;
 import seedu.address.model.appointment.From;
 import seedu.address.model.appointment.To;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Buyer;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 import seedu.address.model.tag.Tag;
 
 public class PersonCardUiTest extends ApplicationTest {
@@ -66,9 +72,9 @@ public class PersonCardUiTest extends ApplicationTest {
 
         // Check if the displayed ID, name, phone, email, and other labels are correct
         assertEquals("1. ", personCard.getId().getText());
-        assertEquals("John Doe", personCard.getName().getText());
+        assertEquals("John Buyer", personCard.getName().getText());
         assertEquals("91234567", personCard.getPhone().getText());
-        assertEquals("johndoe@example.com", personCard.getEmail().getText());
+        assertEquals("buyer@example.com", personCard.getEmail().getText());
         assertEquals("Date: 2023-01-01, From: 10:00, To: 11:00", personCard.getAppointment().getText());
         assertEquals("NUS", personCard.getProperty().getText());
 
@@ -112,9 +118,7 @@ public class PersonCardUiTest extends ApplicationTest {
         assertEquals("10. ", personCardIndex10.getId().getText());
     }
 
-    /**
-     * Helper method to create a sample Person object for testing.
-     */
+
     /**
      * Helper method to create a sample Buyer object for testing.
      */

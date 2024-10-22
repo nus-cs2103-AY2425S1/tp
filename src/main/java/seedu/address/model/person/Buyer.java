@@ -1,9 +1,9 @@
 package seedu.address.model.person;
 
+import java.util.Set;
+
 import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
-
-import java.util.Set;
 
 /**
  * Represents a Buyer in the address book.
@@ -22,11 +22,16 @@ public class Buyer extends Person {
      * @param property The property associated with the buyer.
      */
     public Buyer(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
-        super(name, phone, email, tags, Role.BUYER, appointment, property); // Specify role as BUYER
+        super(name, phone, email, tags, appointment, property);
+    }
+
+    @Override
+    public String getRole() {
+        return "buyer";
     }
 
     @Override
     public String toString() {
-        return super.toString(); // Include all properties from Person
+        return super.toString();
     }
 }

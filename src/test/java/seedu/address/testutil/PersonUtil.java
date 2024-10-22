@@ -10,7 +10,6 @@ import seedu.address.logic.commands.AddSellerProfile;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Buyer;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Seller;
 
 /**
  * A utility class for Person.

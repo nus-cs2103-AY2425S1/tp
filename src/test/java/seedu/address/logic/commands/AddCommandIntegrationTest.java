@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -61,9 +62,23 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateSeller_throwsCommandException() {
-        Seller sellerInList = (Seller) model.getAddressBook().getPersonList().get(1); // Assuming 1 is a seller
-        assertCommandFailure(new AddSellerProfile(sellerInList), model,
-                AddSellerProfile.MESSAGE_DUPLICATE_PERSON);
+        Seller sellerInList = null;
+
+        // Find the first seller in the list
+        for (Person person : model.getAddressBook().getPersonList()) {
+            if (person instanceof Seller) {
+                sellerInList = (Seller) person;
+                break; // Exit the loop once we find a seller
+            }
+        }
+
+        // Ensure that a seller was found
+        if (sellerInList != null) {
+            assertCommandFailure(new AddSellerProfile(sellerInList), model,
+                    AddSellerProfile.MESSAGE_DUPLICATE_PERSON);
+        } else {
+            fail("No seller found in the list to perform the duplicate test.");
+        }
     }
 
 }

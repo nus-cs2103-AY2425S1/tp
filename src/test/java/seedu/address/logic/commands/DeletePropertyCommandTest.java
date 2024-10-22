@@ -20,7 +20,11 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Buyer;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Property;
+import seedu.address.model.person.Seller;
 
 
 public class DeletePropertyCommandTest {

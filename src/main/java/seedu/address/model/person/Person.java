@@ -25,8 +25,6 @@ public abstract class Person {
     private final Phone phone;
     private final Email email;
 
-    private final Role role;
-
     // Data fields
     private final Property property;
     private final Appointment appointment;
@@ -35,8 +33,7 @@ public abstract class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Role role, Appointment appointment, Property property) {
-        this.role = role;
+    public Person(Name name, Phone phone, Email email, Set<Tag> tags, Appointment appointment, Property property) {
         requireAllNonNull(name, phone, appointment, property);
         this.name = name;
         this.phone = phone;
@@ -54,9 +51,8 @@ public abstract class Person {
      *
      * @param name The {@code Name} of the person. Must not be {@code null}.
      */
-    public Person(Name name, Role role) {
+    public Person(Name name) {
         this.name = name;
-        this.role = role;
         this.phone = null;
         this.email = null;
         this.property = new Property("");
@@ -70,8 +66,6 @@ public abstract class Person {
     public Phone getPhone() {
         return phone;
     }
-
-    public Role getRole() {return role; }
 
     public Email getEmail() {
         return email;
@@ -137,10 +131,11 @@ public abstract class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("role", role)
                 .add("tags", tags)
                 .add("appointment", appointment)
                 .add("property", property)
                 .toString();
     }
+
+    public abstract String getRole();
 }
