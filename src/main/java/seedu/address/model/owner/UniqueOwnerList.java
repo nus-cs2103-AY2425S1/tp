@@ -3,6 +3,7 @@ package seedu.address.model.owner;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +96,14 @@ public class UniqueOwnerList implements Iterable<Owner> {
         }
 
         internalList.setAll(owners);
+    }
+
+    /**
+     * sorts the list of owners by
+     */
+    public void sort() {
+        internalList.sort(Comparator
+                .comparing((Owner owner) -> owner.getName().fullName.toLowerCase())); //
     }
 
     /**

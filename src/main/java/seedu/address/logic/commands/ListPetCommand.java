@@ -10,9 +10,6 @@ import seedu.address.model.Model;
  */
 public class ListPetCommand extends ListCommand {
 
-    /** The command word used to trigger the list pet action. */
-    public static final String COMMAND_WORD = "list";
-
     /** The message displayed when the list of pets is successfully shown. */
     public static final String MESSAGE_SUCCESS = "Listed all pets";
 

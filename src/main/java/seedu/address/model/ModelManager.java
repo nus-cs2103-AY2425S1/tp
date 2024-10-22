@@ -134,6 +134,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortPets() {
+        addressBook.sortPets();
+    }
+
+    @Override
+    public void sortOwners() {
+        addressBook.sortOwners();
+    }
+
+    @Override
     public void deleteLink(Link link) {
         addressBook.removeLink(link);
     }
