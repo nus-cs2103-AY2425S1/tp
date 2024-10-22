@@ -100,6 +100,9 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
+        if (!Email.isWithinCharLimit(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_EMAIL_LENGTH);
+        }
         return new Email(trimmedEmail);
     }
 
