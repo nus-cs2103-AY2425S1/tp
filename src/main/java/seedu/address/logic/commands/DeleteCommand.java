@@ -41,11 +41,11 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
 
         }
-        if (model.getFilteredPersonList().size() > 1) {
+        if (model.getDisplayPersons().size() > 1) {
             model.updateFilteredPersonList(predicate);
             throw new CommandException(Messages.MESSAGE_VAGUE_DELETE);
         }
-        Person personToDelete = model.getFilteredPersonList().get(0);
+        Person personToDelete = model.getDisplayPersons().get(0);
         model.deletePerson(personToDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));

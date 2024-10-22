@@ -98,7 +98,7 @@ public class DeleteCommandTest {
 
         assertThrows(CommandException.class, expectedMessage, () -> deleteCommand.execute(model));
         assertEquals(expectedClientHub, model.getClientHub());
-        assertEquals(expectedFilteredList, model.getFilteredPersonList());
+        assertEquals(expectedFilteredList, model.getDisplayPersons());
     }
 
 

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICEY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
@@ -39,14 +40,15 @@ public class SortCommandTest {
 
     @Test
     public void test_execute() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 8);
 
         NameComparator comparator = new NameComparator();
         SortCommand command = new SortCommand(comparator);
         expectedModel.updateSortedPersonList(comparator);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getDisplayPersons());
+        assertEquals(Arrays.asList(ALICE, ALICEY, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE),
+                model.getDisplayPersons());
     }
 
 

@@ -71,7 +71,7 @@ public class FindPhoneCommandTest {
         FindPhoneCommand command = new FindPhoneCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE, GEORGE, FIONA), model.getDisplayPersons());
+        assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getDisplayPersons());
     }
 
     @Test

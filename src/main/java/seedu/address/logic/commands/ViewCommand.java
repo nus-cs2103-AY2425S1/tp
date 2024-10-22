@@ -39,24 +39,24 @@ public class ViewCommand extends Command {
         model.updateFilteredPersonList(predicate);
 
         // Check if there is anyone in the filtered list
-        if (model.getFilteredPersonList().isEmpty()) {
+        if (model.getDisplayPersons().isEmpty()) {
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW,
-                            model.getFilteredPersonList().size())
+                            model.getDisplayPersons().size())
                             + "\nPlease specify the name further to view."
             );
         }
 
         // Check if there are duplicates
-        if (model.getFilteredPersonList().size() > 1) {
+        if (model.getDisplayPersons().size() > 1) {
             return new CommandResult(
                     String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
-                            model.getFilteredPersonList().size())
+                            model.getDisplayPersons().size())
                             + "\nDuplicates found. Please specify the name further."
             );
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW, model.getFilteredPersonList().size()),
+                String.format(Messages.MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW, model.getDisplayPersons().size()),
                 false, true, false);
     }
 
