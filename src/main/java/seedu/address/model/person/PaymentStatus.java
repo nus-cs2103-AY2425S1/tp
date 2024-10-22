@@ -11,7 +11,7 @@ public class PaymentStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Payment Status should be 'paid', 'unpaid', 'p, 'u', '0' (for paid), '1' (for unpaid) (case insensitive)";
-
+    public static final String NO_PAYMENT_STATUS = "__No_Payment_Status__";
     private static final String UNPAID = "unpaid";
     private static final String PAID = "paid";
     private static final String U_SHORT = "u";
@@ -28,8 +28,12 @@ public class PaymentStatus {
      */
     public PaymentStatus(String status) {
         requireNonNull(status);
-        checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
-        isPaid = parseStatus(status);
+        if (status.equals(NO_PAYMENT_STATUS)) {
+            isPaid = parseStatus("");
+        } else {
+            checkArgument(isValidPaymentStatus(status), MESSAGE_CONSTRAINTS);
+            isPaid = parseStatus(status);
+        }
     }
 
     /**
