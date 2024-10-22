@@ -2,22 +2,23 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_OWNERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PETS;
 
 import seedu.address.model.Model;
 
 /**
- * Lists all owners in the application to the user.
+ * Lists all owners and pets in the application to the user.
  */
-public class ListOwnerCommand extends ListCommand {
+public class ListBothCommand extends ListCommand {
 
     /** The command word used to trigger the list owner action. */
     public static final String COMMAND_WORD = "list";
 
     /** The message displayed when the list of owners is successfully shown. */
-    public static final String MESSAGE_SUCCESS = "Listed all owners";
+    public static final String MESSAGE_SUCCESS = "Listed all owners and pets";
 
     /**
-     * Executes the list owner command, updating the filtered list in the model
+     * Executes the list both command, updating the filtered list in the model
      * to show all owners.
      *
      * @param model The {@code Model} which contains the application data.
@@ -27,8 +28,9 @@ public class ListOwnerCommand extends ListCommand {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
+        model.updateFilteredPetList(PREDICATE_SHOW_ALL_PETS);
         CommandResult c = new CommandResult(MESSAGE_SUCCESS);
-        c.setListType(ListOwnerCommand.MESSAGE_SUCCESS);
+        c.setListType(ListBothCommand.MESSAGE_SUCCESS);
         return c;
     }
 
@@ -39,7 +41,7 @@ public class ListOwnerCommand extends ListCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ListOwnerCommand)) {
+        if (!(other instanceof ListBothCommand)) {
             return false;
         }
         return true;

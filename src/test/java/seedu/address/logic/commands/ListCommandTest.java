@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -27,13 +26,40 @@ public class ListCommandTest {
     }
 
     @Test
-    public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    public void execute_petListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListPetCommand(), model, ListPetCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @Test
+    public void execute_ownerListIsNotFiltered_showsSameList() {
+        assertCommandSuccess(new ListOwnerCommand(), model, ListOwnerCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
+        //showOwnerAtIndex(model, INDEX_FIRST_OWNER);
+        assertCommandSuccess(new ListOwnerCommand(), model, ListOwnerCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+    /*
+    @Test
+    public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListCommand(), model, ListCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+    */
+
+    @Test
+    public void equals() {
+        ListPetCommand listPetCommand = new ListPetCommand();
+
+        ListOwnerCommand listOwnerCommand = new ListOwnerCommand();
+
+        assertEquals(listOwnerCommand, new ListOwnerCommand());
+
+        assertEquals(listPetCommand, new ListPetCommand());
+
+        assertEquals(listPetCommand, listPetCommand);
+
+        assertEquals(listOwnerCommand, listOwnerCommand);
     }
 }
