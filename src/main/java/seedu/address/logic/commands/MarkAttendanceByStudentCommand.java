@@ -5,7 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -27,9 +26,10 @@ public class MarkAttendanceByStudentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of the student identified "
             + "by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE] "
-            + "Example: " + COMMAND_WORD + "20/10/2024";
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_ATTENDANCE + "20/10/2024";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS = "Marked attendance of student: %1$s";
     public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
@@ -42,6 +42,7 @@ public class MarkAttendanceByStudentCommand extends Command {
     /**
      * @param targetIndex Index of the person in the filtered person list to mark
      * @param attendance Attendance of the person specified by index
+     * @param tutorial Tutorial the student attended
      */
     public MarkAttendanceByStudentCommand(Index targetIndex, Attendance attendance, String tutorial) {
         requireAllNonNull(targetIndex, attendance);
@@ -103,6 +104,14 @@ public class MarkAttendanceByStudentCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Returns the participation of the given tutorial from a list of participation.
+     *
+     * @param participationList The list of participation for the student at specified index
+     * @param tutorial Tutorial of the student to mark attendance for
+     * @return {@code Participation} of the student if the student is enrolled in the tutorial; <br>
+     *         {@code null} if the student is not enrolled in the tutorial
+     */
     private Participation getParticipationOfTutorial(List<Participation> participationList, String tutorial) {
         for (Participation participation : participationList) {
             if (participation.isParticipationOfTutorial(tutorial)) {
