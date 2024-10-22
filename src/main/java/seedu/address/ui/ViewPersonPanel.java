@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
 
 /**
  * A panel displaying details of a person stated in a "View" Command
@@ -42,9 +45,16 @@ public class ViewPersonPanel extends UiPart<Region> {
     public void setPersonDetails(Person person) {
         name.setText(person.getName().fullName);
         job.setText("Job : " + person.getJob().jobName);
-        status.setText("Status : " + person.getStatus());
         phone.setText("Phone Number : " + person.getPhone().value);
         email.setText("Email Address : " + person.getEmail().value);
         address.setText("Address : " + person.getAddress().value);
+        Set<Tag> tags = person.getTags();
+        if (tags.contains(Person.DEFAULT_TAG_PENDING)) {
+            status.setText("Status : " + Person.DEFAULT_TAG_PENDING.tagName);
+        } else if (tags.contains(Person.TAG_HIRED)) {
+            status.setText("Status : " + Person.TAG_HIRED.tagName);
+        } else {
+            status.setText("Status : " + Person.TAG_REJECTED.tagName);
+        }
     }
 }
