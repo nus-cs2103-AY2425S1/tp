@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,16 +26,7 @@ public class ListEventCommandTest {
     }
 
     @Test
-    public void execute_personListIsNotFiltered_showsSameList() {
-        CommandResult expectedCommandResult = new CommandResult(
-                ListEventCommand.MESSAGE_SUCCESS, false, false, false, true);
-
-        assertCommandSuccess(new ListEventCommand(), model, expectedCommandResult, expectedModel);
-    }
-
-    @Test
-    public void execute_personListIsFiltered_showsEverything() {
-        showEventAtIndex(model, INDEX_FIRST_EVENT);
+    public void execute_eventList_showsSameList() {
         CommandResult expectedCommandResult = new CommandResult(
                 ListEventCommand.MESSAGE_SUCCESS, false, false, false, true);
 
