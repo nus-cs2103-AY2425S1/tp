@@ -22,13 +22,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindNricCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.Nric;
-import seedu.address.model.person.NricContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -83,14 +81,6 @@ public class AddressBookParserTest {
         keywords.stream().forEach(keyword -> mapForKeywords.put(PREFIX_NAME, keyword));
         mapForKeywords.put(new Prefix(""), "");
         assertEquals(new FindCommand(new ContainsKeywordsPredicate(mapForKeywords)), command);
-    }
-
-    @Test
-    public void parseCommand_findnric() throws Exception {
-        List<String> keywords = Arrays.asList("S7193475F", "S6382947A", "S6482983A");
-        FindNricCommand command = (FindNricCommand) parser.parseCommand(
-                FindNricCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindNricCommand(new NricContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
