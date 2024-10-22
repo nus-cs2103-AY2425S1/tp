@@ -10,7 +10,11 @@ public abstract class Command {
 
     public final CommandResult execute(Model model) throws CommandException {
         CommandResult result = executeCommand(model);
-        model.commitAddressBook();
+
+        if (requiresCommit()) {
+            model.commitAddressBook();
+        }
+
         return result;
     }
 
@@ -21,6 +25,9 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult executeCommand(Model model) throws CommandException;
+    protected abstract CommandResult executeCommand(Model model) throws CommandException;
 
+    protected boolean requiresCommit() {
+        return true;
+    }
 }

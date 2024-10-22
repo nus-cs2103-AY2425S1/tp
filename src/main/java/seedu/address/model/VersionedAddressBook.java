@@ -36,15 +36,10 @@ public class VersionedAddressBook extends AddressBook {
             addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
         }
 
-        addressBookStateList.add(newState);
+        addressBookStateList.add(new AddressBook(newState));
         currentStatePointer++;
     }
 
-    /**
-     * Reverts pointer to previous state and returns the state
-     * @return TODO: FILL LATER
-     * @throws CommandException TODO: FILL LATER
-     */
     public ReadOnlyAddressBook undo() throws CommandException {
         if (currentStatePointer > 0) {
             currentStatePointer--;
@@ -54,11 +49,6 @@ public class VersionedAddressBook extends AddressBook {
         }
     }
 
-    /**
-     * TODO: fill later
-     * @return e
-     * @throws CommandException e
-     */
     public ReadOnlyAddressBook redo() throws CommandException {
         if (currentStatePointer < addressBookStateList.size() - 1) {
             currentStatePointer++;
