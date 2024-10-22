@@ -46,11 +46,15 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
 
-    public MainApp() {
-        // empty constructor
+    private final Path customStoragePath;
+
+    public MainApp(Path customStoragePath) {
+        this.customStoragePath = customStoragePath;
     }
 
-
+    public MainApp() {
+        this(null);
+    }
     @Override
     public void init() throws Exception {
         logger.info("=============================[ Initializing EZSTATES ]===========================");
@@ -62,6 +66,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        if (customStoragePath != null) {
+            userPrefs.setAddressBookFilePath(customStoragePath);
+        }
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
