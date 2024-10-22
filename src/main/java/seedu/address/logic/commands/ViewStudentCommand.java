@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.function.Predicate;
 
@@ -70,5 +71,11 @@ public class ViewStudentCommand extends Command {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .toString();
+    }
+
+    @Override
+    public boolean undo(Model model) {
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        return true;
     }
 }
