@@ -105,8 +105,8 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && ((this.event == null && otherPerson.event == null) ||
-                event.equals(otherPerson.event));
+                && ((this.event == null && otherPerson.event == null)
+                || event.equals(otherPerson.event));
     }
 
     @Override
