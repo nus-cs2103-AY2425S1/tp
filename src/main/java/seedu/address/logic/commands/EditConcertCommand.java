@@ -24,7 +24,7 @@ import seedu.address.model.concert.ConcertContact;
 import seedu.address.model.concert.ConcertDate;
 
 /**
- *
+ * Edits the details of an existing concert.
  */
 public class EditConcertCommand extends Command {
 
