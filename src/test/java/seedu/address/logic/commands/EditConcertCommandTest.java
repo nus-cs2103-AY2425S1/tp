@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_COACHELLA;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_GLASTONBURY;
@@ -133,6 +134,15 @@ public class EditConcertCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    @Test
+    public void constructor_null_failure() {
+        assertThrows(NullPointerException.class, ()
+                -> new EditConcertCommand(INDEX_FIRST_CONCERT, (EditConcertDescriptor) null));
+        assertThrows(NullPointerException.class, ()
+                -> new EditConcertCommand((Index) null, DESC_COACHELLA));
+        assertThrows(NullPointerException.class, ()
+                -> new EditConcertCommand((Index) null, (EditConcertDescriptor) null));
+    }
 
     @Test
     public void execute_duplicateConcertUnfilteredList_failure() {
