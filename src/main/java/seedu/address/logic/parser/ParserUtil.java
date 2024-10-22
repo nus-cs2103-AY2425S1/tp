@@ -22,6 +22,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_SORT_ORDER = "Sort order is not 1 or -1, or invalid field provided.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -34,6 +35,22 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String sortOrder} into an {@code Integer} (1 or -1).
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortOrder} is not "1" or "-1".
+     */
+    public static Integer parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+
+        String trimmedOrder = sortOrder.trim();
+        if (trimmedOrder.equals("1") || trimmedOrder.equals("-1")) {
+            return Integer.parseInt(trimmedOrder);
+        }
+        throw new ParseException(MESSAGE_INVALID_SORT_ORDER);
     }
 
     /**
