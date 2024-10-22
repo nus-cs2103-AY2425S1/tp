@@ -654,7 +654,7 @@ testers are expected to do more *exploratory* testing.
     1. Test case: `demote 1`<br>
       Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
 
-    2. Test case: `demote 0`<br> 
+    2. Test case: `demote 0`<br>
      Expected: Invalid index found. No employees demoted. Error details shown in the status message.
 
     3. Test case: `Demote 1`<br>
@@ -714,7 +714,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `sort name`<br>
       Expected: All contacts in StaffSync are sorted by name in ascending order.
-      
+
    2. Test case: `sort date`<br>
       Expected: Potential hires are filtered out. Employees are sorted by contract end date in ascending order.
 
@@ -723,7 +723,7 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `sort 1`<br>
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
-   
+
    5. Test case: `sort name 1`
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
 
@@ -742,9 +742,9 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `sort 1`<br>
       Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
-   
+
    5. Test case: `sort name 1`
-      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message. 
+      Expected: Invalid parameter. A guide on how to use the command will be shown in the status message.
 
 ## **Appendix: Additional uml diagrams for other cases**
 
