@@ -22,15 +22,17 @@ import seedu.ddd.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Contact[] getSampleContacts() {
-        return new Contact[] {
-            new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"), new Address("A"),
+    private static Contact[] sampleContacts = new Contact[] {
+        new Client(new Name("A"), new Phone("12345678"), new Email("a@a.com"), new Address("A"),
                 new Date("01 Jan 2000"),
                 getTagSet("another"), new Id(0)),
-            new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"), new Address("B"),
+        new Vendor(new Name("B"), new Phone("12345678"), new Email("b@b.com"), new Address("B"),
                 new Service("Catering"),
                 getTagSet("test"), new Id(1)),
-        };
+    };
+    private static final int sampleNextId = sampleContacts.length;
+    public static Contact[] getSampleContacts() {
+        return sampleContacts;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -38,6 +40,7 @@ public class SampleDataUtil {
         for (Contact sampleContact : getSampleContacts()) {
             sampleAb.addContact(sampleContact);
         }
+        AddressBook.setNextId(sampleNextId);
         return sampleAb;
     }
 

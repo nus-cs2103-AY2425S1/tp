@@ -1,0 +1,84 @@
+.contact-pane {
+    /* -fx-background-color: transparent; */
+    -fx-background-color: #f2f2f2;
+    -fx-background-radius: 8;
+    -fx-border-color: #333333;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-padding: 16 20 16 20;
+}
+
+.list-cell:filled:selected > .contact-pane {
+    -fx-background-color: #ffffff;
+}
+
+.contact-title {
+    -fx-padding: 0 0 8 0;
+}
+
+.contact-title > * {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 20pt;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111111;
+}
+
+.contact-pane-divider {
+    -fx-background-ccolor: #111111;
+    -fx-padding: 0 0 4 0;
+}
+
+.contact-pane-divider > .line {
+    -fx-background-color: #111111;
+    -fx-pref-height: 0.5;
+    -fx-border-color: null;
+}
+
+.client-id {
+    -fx-background-color: #b0f2bb;
+    -fx-background-insets: 0 12 0 12;
+    -fx-background-radius: 8;
+    -fx-border-insets: 0 12 0 12;
+    -fx-border-radius: 8;
+    -fx-font-size: 12pt;
+    -fx-padding: 4 24 4 24;
+    -fx-text-fill: #111111;
+}
+
+.vendor-id {
+    -fx-background-color: #88adf3;
+    -fx-background-insets: 0 12 0 12;
+    -fx-background-radius: 8;
+    -fx-border-insets: 0 12 0 12;
+    -fx-border-radius: 8;
+    -fx-font-size: 12pt;
+    -fx-padding: 4 24 4 24;
+    -fx-text-fill: #111111;
+}
+
+.contact-details-container {
+    -fx-padding: 0 8 0 0;
+}
+
+.contact-details {
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12pt;
+    -fx-padding: 4 4 4 4;
+    -fx-text-fill: #111111;
+}
+
+.contact-tags {
+    -fx-padding: 8 0 0 0;
+}
+
+.contact-tags > .label {
+    -fx-background-color: #fff3b8;
+    -fx-background-insets: 4;
+    -fx-background-radius: 8;
+    -fx-border-insets: 4;
+    -fx-border-radius: 8;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 12pt;
+    -fx-padding: 8 16 8 16;
+    -fx-text-fill: #111111;
+}
