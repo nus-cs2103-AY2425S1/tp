@@ -5,7 +5,7 @@ title: User Guide
 ![Banner](images/AgentAssistBanner.png) 
 # Welcome to the AgentAssist User Guide!
 
-The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. his guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
+The **AgentAssist User Guide** is here to help you unlock the full potential of **AgentAssist** and take your credit card sales to the next level. This guide offers clear, step-by-step instructions and practical examples to help you get the most out of the application.
 
 In this guide, you'll learn how to:
 * **Set Up AgentAssist**
@@ -67,7 +67,7 @@ AgentAssist is the **definitive desktop tool for credit card sales agents**. Mer
 **Overview of Key Features:**
 * **Contact Management**: 
   * Manage your client details easily. Add, edit, and delete contacts to keep all your client information in one accessible place.
-* **Keyboard-only Navigation**: 
+* **Keyboard-centric Navigation**: 
   * Navigate through the application entirely via keyboard shortcuts, improving workflow efficiency.
 * **Multi-Level Filtering**: 
   * Filter your data by multiple criteria to find exactly who you’re looking for.
@@ -87,7 +87,6 @@ Before you start using AgentAssist, there are a few prerequisites to ensure you 
 ### Familiarity with Keyboard Navigation
 AgentAssist is designed to enhance speed and efficiency, with a strong focus on **keyboard-based navigation**. While the application includes a Graphical User Interface (GUI), its full potential is unlocked when you use **keyboard commands**. Therefore, it is important to:
 
-- Be comfortable navigating applications using the keyboard.
 - Familiarize yourself with basic `Command Line Interface (CLI)` commands if you haven't already. This will make it easier to use AgentAssist’s command system effectively.
 - Know common keyboard shortcuts (e.g., `Enter`, `Arrow keys`, etc.).
 
@@ -176,11 +175,11 @@ Each command in AgentAssist consists of three key components: the **command**, *
 
 Let's take a look at the structure in more detail:
 
-| **Components**  | **Description**                                                                                                                                               | **Example**                    |
-|:----------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|
-| **Command**     | The action you want AgentAssist to perform.                                                                                                                   | `add`                          |
-| **Flag(s)**     | Modifiers that specify what kind of data is being handled. <br/><br/>Flag(s) are typically 1-2 letters followed by a backslash.                               | `n/`, `p/`, `r/`, `rn/`        |
-| **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> The user guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
+| **Components**  | **Description**                                                                                                                                           | **Example**                    |
+|:----------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------|
+| **Command**     | The action you want AgentAssist to perform.                                                                                                               | `add`                          |
+| **Flag(s)**     | Modifiers that specify what kind of data is being handled. <br/><br/>Flag(s) are typically 1-2 letters followed by a backslash.                           | `n/`, `p/`, `r/`, `rn/`        |
+| **Argument(s)** | The values or inputs the command uses, such as client data or specific details. <br><br> This guide may represent it as a placeholder using `<ARGUMENT>`. | `John Doe`, `john@example.com` |
 
 Here's an example that uses multiple flags and arguments:
 ```
@@ -241,16 +240,16 @@ Refer to the table below for more details.
 
 | **Flag** | **Expected Argument** | **Description**                                | **Requirements**                                                                                | **Case Sensitivity**  |
 |----------|-----------------------|------------------------------------------------|-------------------------------------------------------------------------------------------------|-----------------------|
-| `n/`     | `<NAME>`              | The client's full name                         | Letters, numbers, and spaces only                                                               | ❌                     |
+| `n/`     | `<NAME>`              | The client's full name                         | Any combination of letters, numbers, and spaces (no symbols).                                   | ❌                     |
 | `p/`     | `<PHONE>`             | The client's phone number                      | Valid Singapore phone number:<br/> • 8-digit number<br/> • Starts with 8 or 9                   | ❌                     |
 | `e/`     | `<EMAIL>`             | The client's email address                     | Valid email format (`username@domain.com`)                                                      | ❌                     |
-| `a/`     | `<ADDRESS>`           | The client's physical address                  | No specific restrictions                                                                        | ❌                     |
-| `j/`     | `<JOBNAME>`           | The client's job title or profession           | No specific restrictions                                                                        | ❌                     |
+| `a/`     | `<ADDRESS>`           | The client's physical address                  | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
+| `j/`     | `<JOBNAME>`           | The client's job title or profession           | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
 | `i/`     | `<INCOME>`            | The client's annual income                     | Positive number or zero <br/> • Cannot include commas and decimal points<br/> • Must be numeric | ❌                     |
-| `t/`     | `<TIER>`              | The client's assigned tier level               | Predefined tiers:<br/> • Gold, Silver, Bronze, Reject                                           | ✔️                    |
-| `r/`     | `<REMARK>`            | General remarks about the client               | No specific restrictions                                                                        | ❌                     |
-| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark      | No specific restrictions                                                                        | ❌                     |
-| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark | No specific restrictions                                                                        | ❌                     |    
+| `t/`     | `<TIER>`              | The client's assigned tier level               | Must be one of the predefined tiers:<br/> • Gold, Silver, Bronze, Reject                        | ✔️                    |
+| `r/`     | `<REMARK>`            | General remarks about the client               | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
+| `ra/`    | `<REMARK TO APPEND>`  | Append information to the existing remark      | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |
+| `rn/`    | `<NEW REMARK>`        | Replaces the existing remark with a new remark | Any combination of letters, numbers, spaces, and symbols.                                       | ❌                     |    
 
 > 💡 **Pro Tip:**
 > 
@@ -276,7 +275,7 @@ Some initial commands to try:
 * `delete 3`: Removes the third client from your list. Ensure you have the correct index to avoid deleting the wrong client. 
 
 **Searching for a Client**
-* `filter n/Jane`: Finds all client named Jane in your database. It’s a powerful tool for quickly locating clients or filtering for a specific type of client.
+* `filter n/Jane`: Finds all clients named Jane in your database. It’s a powerful tool for quickly locating clients or filtering for a specific type of client.
 
 **Getting Help**
 * `help`: Opens a help dialog that provides a summary of all available commands and their usage. 
@@ -359,7 +358,7 @@ For detailed explanations of each flag and acceptable arguments, refer to Sectio
 
 > **Note on Duplicates:**
 >
-> AgentAssist will prevent duplicate entries if a client with the **same name, email, job, and income** is already saved.  
+> AgentAssist will prevent duplicate entries if a client with the **same name, email and phone number** is already saved.  
 > When this happens, you will see the following message:
 >
 > ```
@@ -704,7 +703,7 @@ Each credit card tier is visually distinguished in the UI: Gold is marked with a
 | **Delete Existing Client** | `delete <INDEX>`                                                                                                             | `delete 69`                                                                                               |
 | **Edit Existing Client**   | `edit <INDEX> n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> i/<INCOME> [t/<TIER>] [rn/<NEW REMARK>] [ra/<APPEND REMARK>]` | `edit 69 n/ GORDON MOORE p/ 77337733 e/ gmoore_new@ntu.sg a/ COM3 j/ doctor i/ 1000000000 ra/ added info` |
 | **List All Clients**       | `list`                                                                                                                       | `list`                                                                                                    |
-| **Filter Client List**     | `filter n/<NAME> p/<PHONE> e/<EMAIL> a/<ADDRESS> j/<JOB> r/<REMARK> t/<TIER> i/<INCOME>`                                     | `filter n/ GORDON MOORE j/ doctor t/ gold`                                                                |
+| **Filter Client List**     | `filter [n/<NAME>] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [j/<JOB>] [r/<REMARK>] [t/<TIER>] [i/<INCOME>]`                     | `filter n/ GORDON MOORE j/ doctor t/ gold`                                                                |
 | **View Client Details**    | `view`                                                                                                                       | `view`                                                                                                    |
 | **Close Client Details**   | `close`                                                                                                                      | `close`                                                                                                   |
 | **View Help**              | `help`                                                                                                                       | `help`                                                                                                    |
