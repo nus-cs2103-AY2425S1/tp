@@ -8,6 +8,7 @@ package seedu.address.logic.commands;
  * The actual logic for checking duplicates and deleting the entity to the
  * model must be implemented by the subclasses.</p>
  */
-public abstract class DeleteCommand extends Command{
-
+public abstract class DeleteCommand extends Command {
+    public static final String MESSAGE_USAGE = "Use \"delete p\" or \"delete e\" to"
+            + " specify person or event to be deleted";
 }
