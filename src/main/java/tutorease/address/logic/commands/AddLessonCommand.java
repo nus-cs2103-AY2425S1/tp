@@ -34,7 +34,8 @@ public class AddLessonCommand extends LessonCommand {
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_OVERLAP_LESSON = "This lesson overlaps with another lesson";
-    public static final String TO_STRING_FORMAT = "AddLessonCommand[studentId=%s, fee=%s, startDateTime=%s, endDateTime=%s]";
+    public static final String TO_STRING_FORMAT = "AddLessonCommand[studentId=%s,"
+            + " fee=%s, startDateTime=%s, endDateTime=%s]";
 
     private final StudentId studentId;
     private final Fee fee;
