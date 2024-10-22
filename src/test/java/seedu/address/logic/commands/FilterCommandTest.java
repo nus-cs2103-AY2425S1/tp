@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -106,5 +106,14 @@ public class FilterCommandTest {
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(List.of(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void toStringMethod() {
+        RoleContainsKeywordsPredicate predicate =
+                new RoleContainsKeywordsPredicate(List.of("Athlete", "Volunteer", "Sponsor"));
+        FilterCommand command = new FilterCommand(predicate);
+        String expected = FilterCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, command.toString());
     }
 }
