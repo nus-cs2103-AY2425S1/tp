@@ -4,33 +4,36 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.policy.CoverageAmount;
 import seedu.address.model.policy.EditPolicyDescriptor;
+import seedu.address.model.policy.ExpiryDate;
 import seedu.address.model.policy.Policy;
 import seedu.address.model.policy.PolicySet;
 import seedu.address.model.policy.PolicyType;
+import seedu.address.model.policy.PremiumAmount;
 
 /**
  * Updates an existing policy for a client in Prudy.
  */
 public class EditPolicyCommand extends Command {
-    public static final String COMMAND_WORD = "update-policy";
+    public static final String COMMAND_WORD = "edit-policy";
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Policy updated to:\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field needs to be updated";
-    public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type not found.";
+    public static final String MESSAGE_POLICY_NOT_FOUND = "Policy of specified type does not exist for client.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates the specified policy for the person identified "
             + "by the index number used in the last person listing. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "pt/[POLICY_TYPE]\n"
-            + "Example: " + COMMAND_WORD + " 1 pt/health";
-
+            + "pt/[POLICY_TYPE] pa/[PREMIUM_AMOUNT] ca/[COVERAGE_AMOUNT] ed/[EXPIRY_DATE]\n"
+            + "Example: " + COMMAND_WORD + " 1 pt/health pa/1500 ca/10000.50 ed/14/09/2024 " +
+            " (The last 3 fields are optional but one of them needs to be updated at all times)\n ";
+    public static final String MESSAGE_SUCCESS = "Updated Policy:\n\n%1$s";
     private final Index index;
     private final EditPolicyDescriptor editPolicyDescriptor;
 
@@ -67,7 +70,7 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(MESSAGE_POLICY_NOT_FOUND);
         }
 
-        personPolicies.remove(policyToRemove);
+        personPolicies.remove(policyToRemove.getType());
         Policy editedPolicy = createEditedPolicy(policyToRemove, editPolicyDescriptor);
         personPolicies.add(editedPolicy);
 
@@ -75,7 +78,8 @@ public class EditPolicyCommand extends Command {
                 personToEdit.getAddress(), personToEdit.getTags(), personPolicies);
 
         model.setPerson(personToEdit, editedPerson);
-        return new CommandResult(String.format("Edited policy of type %s for %s", policyTypeToEdit, personToEdit.getName()));
+        return new CommandResult(String.format("Updated policy\n\n%s policy for %s has been changed to:\n" +
+                "%s ", policyTypeToEdit, personToEdit.getName(), editedPolicy));
 
     }
 
