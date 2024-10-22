@@ -30,7 +30,7 @@ public class AppointmentContainsDatePredicate implements Predicate<Person> {
         LocalDate startDate = person.getAppointment().getStart().toLocalDate();
         LocalDate endDate = person.getAppointment().getEnd().toLocalDate();
 
-        return startDate.isEqual(this.date) || endDate.isEqual((this.date));
+        return !this.date.isBefore(startDate) && !this.date.isAfter(endDate);
     }
 
     @Override

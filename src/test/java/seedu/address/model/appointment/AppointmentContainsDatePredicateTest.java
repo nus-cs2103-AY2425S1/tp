@@ -72,6 +72,15 @@ public class AppointmentContainsDatePredicateTest {
                 .build();
         assertTrue(predicate.test(p));
 
+        // date is within the start and end date
+        predicate = new AppointmentContainsDatePredicate(LocalDate.parse("24-10-2024", DATE_FORMATTER));
+        p = new PersonBuilder()
+                .withAppointment("Hospitalization",
+                        LocalDateTime.parse("23-10-2024-12-00", DATE_TIME_FORMATTER),
+                        LocalDateTime.parse("27-10-2024-12-00", DATE_TIME_FORMATTER))
+                .build();
+        assertTrue(predicate.test(p));
+
         // null is given as the date
         predicate = new AppointmentContainsDatePredicate(null);
         p = new PersonBuilder()
