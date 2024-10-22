@@ -1,20 +1,24 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ScheduleCommand;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.ScheduleDescriptorBuilder;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_TIME_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.testutil.ScheduleDescriptorBuilder;
+
 
 public class ScheduleCommandParserTest {
 
