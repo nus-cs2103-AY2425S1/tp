@@ -77,11 +77,6 @@ public class UniqueLessonList implements Iterable<Lesson> {
         }
     }
 
-//    public void setPersons(seedu.address.model.person.UniquePersonList replacement) {
-//        requireNonNull(replacement);
-//        internalList.setAll(replacement.internalList);
-//    }
-
     /**
      * Replaces the contents of this list with {@code lessons}.
      * {@code lessons} must not contain duplicate lessons.
@@ -110,7 +105,7 @@ public class UniqueLessonList implements Iterable<Lesson> {
         if (person instanceof Tutor) {
             return internalList.stream().filter(item -> item.getTutor().equals(person))
                     .map(Lesson::getTutee).collect(Collectors.toList());
-        } else if (person instanceof Tutee){
+        } else if (person instanceof Tutee) {
             return internalList.stream().filter(item -> item.getTutee().equals(person))
                     .map(Lesson::getTutor).collect(Collectors.toList());
         } else {
@@ -141,7 +136,8 @@ public class UniqueLessonList implements Iterable<Lesson> {
             return false;
         }
 
-        seedu.address.model.lesson.UniqueLessonList otherUniqueLessonList = (seedu.address.model.lesson.UniqueLessonList) other;
+        seedu.address.model.lesson.UniqueLessonList otherUniqueLessonList =
+                (seedu.address.model.lesson.UniqueLessonList) other;
         return internalList.equals(otherUniqueLessonList.internalList);
     }
 

@@ -16,6 +16,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Tutee;
 import seedu.address.model.person.Tutor;
 
+/**
+ * Adds a Lesson to the address book.
+ */
 public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "addLesson";
@@ -36,6 +39,10 @@ public class AddLessonCommand extends Command {
 
     private final Index tuteeIndex;
 
+    /**
+     * @param tutorIndex Index of the tutor
+     * @param tuteeIndex Index of the tutee
+     */
     public AddLessonCommand(Index tutorIndex, Index tuteeIndex) {
         this.tutorIndex = tutorIndex;
         this.tuteeIndex = tuteeIndex;
