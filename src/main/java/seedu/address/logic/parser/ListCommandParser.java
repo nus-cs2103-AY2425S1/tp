@@ -23,7 +23,6 @@ public class ListCommandParser implements Parser<ListCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
         }
         args = args.trim();
-        args = args.split(" ", 2)[0];
         if (args.equals(ListCommand.ARGUMENT_WORD)) {
             return new ListCommand();
         } else if (args.equals(ListEmployeeCommand.ARGUMENT_WORD)) {

@@ -28,7 +28,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <br>
 
-# Installation and Quick Start 
+# Installation and Quick Start
 
 1. Ensure you have [Java `17`](https://www.oracle.com/java/technologies/downloads/#java17) installed in your Computer. Higher versions may work but we do not officially support it.
 
@@ -68,19 +68,19 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <box type="info" seamless>
 
 >**Notes about the command format:**<br>
-> 
+>
 >* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 >  e.g. in `employee n/NAME`, `NAME` is a parameter which can be used as `employee n/John Doe`.
 >
 >* Items in square brackets are optional.
 >  e.g. `edit INDEX [n/NAME] [e/EMAIL]` can be used as `edit 1 n/John Doe e/johndoe@gmail.com` or `edit 1 n/John Doe`.
-> 
+>
 >* Parameters can be in any order.<br>
 >  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 >
 >* Parameters and commands are case-sensitive
 >  e.g. the command `Help` and `edit 1 N/John Doe` will return an error
-> 
+>
 >* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit` and `clear`) will be ignored.<br>
 >  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
@@ -103,7 +103,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding an employee: <code>employee</code></strong></summary>
-  
+
   >Adds an employee to StaffSync.
   >
   >Format: `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE`
@@ -121,7 +121,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Adding a potential hire: <code>potential</code></strong></summary>
-  
+
   >Adds a potential hire to StaffSync.
   >
   >Format: `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE`
@@ -138,7 +138,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Clearing all entries: <code>clear</code></strong></summary>
-  
+
   >Clears all entries from StaffSync.
   >
   >Format: `clear`
@@ -147,7 +147,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Deleting a person: <code>delete</code></strong></summary>
-  
+
   >Deletes the specified person from StaffSync.
   >
   >Format: `delete ph INDEX` or `delete e INDEX` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
@@ -165,7 +165,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">[WIP] Editing a person: <code>edit</code></strong></summary>
-  
+
   >Edits an existing person in the StaffSync.
   >
   >Format: `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
@@ -182,7 +182,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Exiting the program: <code>exit</code></strong></summary>
-  
+
   >Exits the program.
   >
   >Format: `exit`
@@ -191,7 +191,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Locating persons by name: <code>find</code></strong></summary>
-  
+
   >Finds the employee/potential hire whose names contain any of the given keywords.
   >
   >Format: `find (all or e or ph) KEYWORD [MORE_KEYWORDS]`
@@ -213,7 +213,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 <br>
 <details>
   <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Listing all persons: <code>list</code></strong></summary>
-  
+
   >Shows a list of all persons in StaffSync.
   >
   >Format: `list all` or `list ph` or `list e` *(Note the `ph` or `e` parameter. `ph` refers to potential hires and `e` refers to employees)*
@@ -229,13 +229,13 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 Action     | Format                                                                                        | Examples
 -----------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------
 **Help**   | `help`                                                                                        |
-**Clear**  | `clear`                                                                                       | 
+**Clear**  | `clear`                                                                                       |
 **Delete** | `delete e INDEX` <br> `delete ph INDEX`                                                       | `delete e 3`<br> `delete ph 1`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`                                  | `edit 2 n/James Lee e/jameslee@example.com`
 **Employee**| `employee n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE ced/CONTRACT_END_DATE​` | `employee n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics ced/2021-01-01`
-**Exit**   | `exit`                                                                                        | 
+**Exit**   | `exit`                                                                                        |
 **Find**   | `find all [KEYWORDS]` <br> `find e [KEYWORDS]` <br> `find ph [KEYWORDS]`                      | `find all Jake` <br> `find e Jake` <br> `find ph Jake`
-**List**   | `list all` <br> `list e` <br> `list ph`                                                                                    | 
+**List**   | `list all` <br> `list e` <br> `list ph`                                                       |
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 
 --------------------------------------------------------------------------------------------------------------------
@@ -289,6 +289,6 @@ Furthermore, certain edits can cause the StaffSync to behave in unexpected ways 
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-3. **If you try to stretch the Help Window horizontally**, you will not be able to change the width of the Help Window as it is fixed at a certain width 
+3. **If you try to stretch the Help Window horizontally**, you will not be able to change the width of the Help Window as it is fixed at a certain width
 
 --------------------------------------------------------------------------------------------------------------------

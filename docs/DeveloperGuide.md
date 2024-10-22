@@ -275,7 +275,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of employees and potential hires 
+* has a need to manage a significant number of employees and potential hires
 * has a need to match potential hires with available job openings
 * has a need to find details about an employee or potential hire quickly
 * has a need to search for employees or potential hires with relevant details
@@ -285,7 +285,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: 
+**Value proposition**:
 * manage a significant number of employees and potential hires faster than a typical mouse/_GUI_ driven app
 * find details about an employee or potential hire faster than a spreadsheet
 * matches potential hires with available job openings faster than a spreadsheet
@@ -486,7 +486,7 @@ testers are expected to do more *exploratory* testing.
 
    8. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SW-E ced/2024-10-09`<br>
       Expected: No employee added, error details shown in the status message
-   
+
    9. Test case: `employee n/John Doe p/98765a432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 d/IT r/SWE ced/01-09-2023`<br>
       Expected: No employee added, error details shown in the status message
 
@@ -623,19 +623,19 @@ testers are expected to do more *exploratory* testing.
 
 ### Finding a person
 
-1. Finding a person 
+1. Finding a person
    1. Test case: `find all john`<br>
       Expected: Number of people listed found shown in the status message. Displays the list of people found.
 
    2. Test case: `find ph john`<br>
             Expected: Number of potential hires listed found shown in the status message. Displays the list of potential hires found.
-   
+
    3. Test case: `find e john`<br>
             Expected: Number of employees listed shown in the status message. Displays the list of employees found.
 
    4. Test case: `Find all john`, `Find e john`, `Find ph john`<br>
             Expected: Unknown command. Error is due to capitalisation of `Find`. Capitalisation of command matters.
-   
+
    5. Test case: `find all`, `find e`, `find ph`<br>
       Expected: Incorrect command format. Status message shows the correct usage of Find command.
 

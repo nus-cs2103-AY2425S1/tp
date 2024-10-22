@@ -12,7 +12,8 @@ import seedu.address.model.person.Person;
  */
 public class PersonCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXMLEmployee = "PersonListCardEmployee.fxml";
+    private static final String FXMLPotential = "PersonListCardPotential.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -49,7 +50,7 @@ public class PersonCard extends UiPart<Region> {
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
     public PersonCard(Person person, int displayedIndex) {
-        super(FXML);
+        super(person.isEmployee() ? FXMLEmployee : FXMLPotential);
         this.person = person;
         id.setText(displayedIndex + ". ");
         if (person.isEmployee()) {

@@ -17,7 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DeletePotentialCommand;
+import seedu.address.logic.commands.DeleteEmployeeCommand;
+import seedu.address.logic.commands.DemoteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.EmployeeCommand;
@@ -30,6 +31,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEmployeeCommand;
 import seedu.address.logic.commands.ListPotentialCommand;
 import seedu.address.logic.commands.PotentialCommand;
+import seedu.address.logic.commands.PromoteCommand;
+import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContractEndDate;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
@@ -67,8 +71,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " ph " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeletePotentialCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " "
+                        + DeleteEmployeeCommand.COMMAND_TYPE + " "
+                        + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteEmployeeCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
@@ -136,6 +142,23 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_demote() throws Exception {
+        DemoteCommand demoteCommand = (DemoteCommand) parser.parseCommand(
+                DemoteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DemoteCommand(INDEX_FIRST_PERSON), demoteCommand);
+    }
+
+    @Test
+    public void parseCommand_promote() throws Exception {
+        String stringDate = PersonBuilder.DEFAULT_CONTRACT_END_DATE;
+        ContractEndDate contractEndDate = ContractEndDate.of(stringDate);
+        PromoteCommand promoteCommand = (PromoteCommand) parser.parseCommand(
+                PromoteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+                + " " + PersonBuilder.DEFAULT_CONTRACT_END_DATE);
+        assertEquals(new PromoteCommand(INDEX_FIRST_PERSON, contractEndDate), promoteCommand);
+    }
+
+    @Test
     public void parseCommand_list() throws Exception {
         //list command
         assertTrue(parser.parseCommand(
@@ -155,11 +178,26 @@ public class AddressBookParserTest {
         //wrong parameter (is not e or ph)
         assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " 3"));
 
-        //additional text behind parameter
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " e 3") instanceof ListEmployeeCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3") instanceof ListPotentialCommand);
+        //additional text behind parameter should not work
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " e 3"));
+        assertThrows(ParseException.class, () -> parser.parseCommand(ListCommand.COMMAND_WORD + " ph 3"));
     }
 
+    @Test
+    public void parseCommand_sort() throws Exception {
+        //sort name command
+        assertTrue(parser.parseCommand(
+            SortCommand.COMMAND_WORD + " " + SortNameCommand.ARGUMENT_WORD) instanceof SortCommand);
+
+        //no parameter
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD));
+
+        //wrong parameter (is not name)
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " 3"));
+
+        //additional text behind parameter should not work
+        assertThrows(ParseException.class, () -> parser.parseCommand(SortCommand.COMMAND_WORD + " name 3"));
+    }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()

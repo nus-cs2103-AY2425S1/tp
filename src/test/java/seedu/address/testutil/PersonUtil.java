@@ -70,6 +70,13 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getDepartment().ifPresent(
+                department -> sb.append(PREFIX_DEPARTMENT).append(department.value).append(" ")
+        );
+        descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.value).append(" "));
+        descriptor.getContractEndDate().ifPresent(
+                contractEndDate -> sb.append(PREFIX_CONTRACT_END_DATE).append(contractEndDate.getValue()).append(" ")
+        );
         return sb.toString();
     }
 }
