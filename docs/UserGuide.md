@@ -4,11 +4,18 @@
   pageNav: 3
 ---
 
-# Knotty Planner 💍🎀
+# Knotty Planner 💍🎀 
 
 Knotty Planner is a **desktop app for wedding planners, optimised for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a wedding planner who can type fast, Knotty Planner can make organising weddings a walk in the park!
 
 <!-- * Table of Contents -->
+## Table of Contents
+- [Quick Start](#quick-start)              
+- [Features](#features)         
+- [FAQ](#FAQ)
+- [Known issues](#Known-issues)
+- [Command summary](#Command-summary)  
+
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
@@ -19,9 +26,9 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your Knotty Planner.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar KnottyPlanner.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/gui.png)
 
@@ -36,7 +43,7 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
    * `clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `exit` : Exits Knotty Planner.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -65,11 +72,13 @@ Knotty Planner is a **desktop app for wedding planners, optimised for use via a 
 
 ### Viewing help : `help`
 
-Shows a message with a link to the user guide, explaning how to use the commands with detailed descriptions.
+Shows a message with a link to the user guide, explaining how to use the commands with detailed descriptions.
+
+Format: `help`
 
 ![help message](images/helpmsg.png)
 
-Format: `help`
+
 
 
 ### Adding a person: `add`
@@ -84,6 +93,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS j/JOB [t/TAG]`
 
 **Tip:** Fields can be added in any order. The order of the fields does not matter.
 **Tip:** A person can have any number of tags (including 0)
+
 </box>
 
 Examples:
@@ -97,6 +107,28 @@ Shows a list of all persons in the contact list.
 Format: `list`
 
 ![list message](images/listMsg.png)
+
+### Adding a wedding: `add-wedding`
+
+Adds a person to the contact list.
+
+Format: `add-wedding w/NAME & NAME v/VENUE d/DATETIME`
+
+![add wedding message](images/addWeddingMsg.png)
+
+Examples:
+* `add w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/11/11/2024`
+
+<box type="tip" seamless>
+
+**Tip:** Fields can be added in any order. The order of the fields does not matter.
+**Tip:** Datetime must be a valid date in the format of dd/MM/yyyy
+
+</box>
+
+Examples:
+* `add-wedding w/John Loh & Jean Tan v/Orchard Hotel d/15/10/2022`
+* `add-wedding w/Jonus Ho & Izzat Syazani v/Pasir Ris Hotel d/02/11/2022`
 
 ### Editing A Contact : `edit`
 
@@ -127,7 +159,7 @@ Format: `tag-add n/NAME t/TAG...`
 ![tag-add message](images/tagadd1.png)
 ![tag-add message](images/tagaddMsg.png)
 
-* Tags the person at with the specified `NAME`.
+* Tags the person with the specified `NAME`.
 * Existing values will be updated together with the input values.
 
 Examples:
@@ -143,7 +175,7 @@ Format: `tag-delete n/NAME t/TAG...`
 ![tag-delete message](images/tagdeleteMsg.png)
 ![tag-delete message](images/tagdeleteMsg1.png)
 
-* Deletes tag(s) from the person at with the specified `NAME`.
+* Deletes tag(s) from the person with the specified `NAME`.
 * Existing values that match input values will be deleted.
 
 Examples:
@@ -210,9 +242,9 @@ Examples:
 
 Clears all entries from the address book.
 
-![clear message](images/clearMsg.png)
-
 Format: `clear`
+
+![clear message](images/clearMsg.png)
 
 ### Exiting the program : `exit`
 
