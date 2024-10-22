@@ -155,4 +155,32 @@ public class ExportCommandTest {
         assertEquals(2, lines.size()); // Header + 1 student
         assertEquals("Name,Phone,Email,Courses", lines.get(0));
     }
+
+    @Test
+    public void execute_directoryCreationFails_throwsCommandException() throws IOException {
+        // Create a read-only parent directory
+        Path readOnlyDir = temporaryFolder.resolve("readonly");
+        Files.createDirectory(readOnlyDir);
+        readOnlyDir.toFile().setReadOnly();
+
+        // Try to create a subdirectory in the read-only directory
+        Path invalidDir = readOnlyDir.resolve("data");
+
+        ExportCommand exportCommand = new ExportCommand("test", false, invalidDir);
+        Model model = new ModelManager();
+
+        String expectedErrorMsg = "Could not create directory";
+        String actualErrorMsg = "";
+
+        try {
+            exportCommand.execute(model);
+        } catch (Exception e) {
+            actualErrorMsg = e.getMessage();
+        } finally {
+            // Clean up: Reset directory permissions so it can be deleted
+            readOnlyDir.toFile().setWritable(true);
+        }
+
+        assertTrue(actualErrorMsg.contains(expectedErrorMsg));
+    }
 }
