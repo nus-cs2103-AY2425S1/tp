@@ -112,7 +112,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "shellfish*"; // '*' not allowed in allergies
+    // '*' not allowed in allergies
+    public static final String INVALID_ALLERGY_DESC = " " + PREFIX_ALLERGY + "shellfish*";
     // Only "NONE", "LOW", "MEDIUM" or "HIGH" is allowed for Priority
     public static final String INVALID_PRIORITY_DESC = " " + PREFIX_PRIORITY + "invalidPriority";
 

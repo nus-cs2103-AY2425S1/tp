@@ -6,7 +6,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.application.Application;
-import javafx.sallergye.Sallergye;
+import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
@@ -169,9 +169,9 @@ public class MainApp extends Application {
     }
 
     @Override
-    public void start(Sallergye primarySallergye) {
+    public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primarySallergye);
+        ui.start(primaryStage);
     }
 
     @Override

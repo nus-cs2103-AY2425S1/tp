@@ -9,7 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.sallergye.Sallergye;
+import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -21,13 +21,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
  */
-public class MainWindow extends UiPart<Sallergye> {
+public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Sallergye primarySallergye;
+    private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
@@ -55,13 +55,13 @@ public class MainWindow extends UiPart<Sallergye> {
     private StackPane statusbarPlaceholder;
 
     /**
-     * Creates a {@code MainWindow} with the given {@code Sallergye} and {@code Logic}.
+     * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Sallergye primarySallergye, Logic logic) {
-        super(FXML, primarySallergye);
+    public MainWindow(Stage primaryStage, Logic logic) {
+        super(FXML, primaryStage);
 
         // Set dependencies
-        this.primarySallergye = primarySallergye;
+        this.primaryStage = primaryStage;
         this.logic = logic;
 
         // Configure the UI
@@ -72,8 +72,8 @@ public class MainWindow extends UiPart<Sallergye> {
         helpWindow = new HelpWindow();
     }
 
-    public Sallergye getPrimarySallergye() {
-        return primarySallergye;
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     private void setAccelerators() {
@@ -134,11 +134,11 @@ public class MainWindow extends UiPart<Sallergye> {
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primarySallergye.setHeight(guiSettings.getWindowHeight());
-        primarySallergye.setWidth(guiSettings.getWindowWidth());
+        primaryStage.setHeight(guiSettings.getWindowHeight());
+        primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
-            primarySallergye.setX(guiSettings.getWindowCoordinates().getX());
-            primarySallergye.setY(guiSettings.getWindowCoordinates().getY());
+            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
     }
 
@@ -155,7 +155,7 @@ public class MainWindow extends UiPart<Sallergye> {
     }
 
     void show() {
-        primarySallergye.show();
+        primaryStage.show();
     }
 
     /**
@@ -163,11 +163,11 @@ public class MainWindow extends UiPart<Sallergye> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primarySallergye.getWidth(), primarySallergye.getHeight(),
-                (int) primarySallergye.getX(), (int) primarySallergye.getY());
+        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
+                (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        primarySallergye.hide();
+        primaryStage.hide();
     }
 
     public PersonListPanel getPersonListPanel() {
