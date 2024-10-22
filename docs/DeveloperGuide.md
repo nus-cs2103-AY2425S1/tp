@@ -91,6 +91,9 @@ e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All
 inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
 visible GUI.
 
+The UI for the Single page person view is a standalone UI window that is called through the functionalities of the
+application itself.
+
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
 the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
@@ -125,12 +128,12 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates
    a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which
    is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take
    several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -718,163 +721,7 @@ To allow users to sort their contact list in alphabetical order (A-Z or Z-A) bas
 
 ---
 
-### 4. **Feature: Single Page View for Full Contact Details**
-
-**Purpose:**
-To provide a detailed view of a single contact’s information on a dedicated page, allowing users to view and review all
-details associated with that contact.
-
-#### **Command Format:**
-
-`view <ContactID>`
-
-**Example Commands:**
-
-- `view 123`
-- `view 4567`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `view` command with a valid ContactID.
-2. The system retrieves and displays the full details of the contact on a dedicated page.
-3. The user views all available information on the contact.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-- Case-insensitive.
-- Leading/trailing spaces are ignored.
-- Format: Must be a positive integer.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If contact does not exist: `Error: Contact not found. Please check the ContactID and try again.`
-
-**Rationale:**
-
-- Ensures that the contact is correctly identified and retrieved using a unique numeric ID, minimizing errors.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: The contact’s profile page is displayed.
-- GUI Change: The contact’s detailed information is shown on a dedicated page.
-
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- Contact Not Found: `Error: Contact not found. Please check the ContactID and try again.`
-- Empty ContactID: `Error: No ContactID provided. Please specify a valid ContactID to view details.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `view abc`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **Non-existent Contact:**
-  Example: `view 9999` (assuming 9999 does not exist)
-  `Error: Contact not found. Please check the ContactID and try again.`
-
-- **Missing ContactID:**
-  Example: `view`
-  `Error: No ContactID provided. Please specify a valid ContactID to view details.`
-
-### 5. **Feature: Support for Multiple Phone Numbers and Email Addresses for Each Contact**
-
-**Purpose:**
-To allow users to associate multiple phone numbers and email addresses with a single contact, accommodating various
-communication methods and preferences.
-
-#### **Command Format:**
-
-When creating a new contact, separate multiple values under the same field with a comma.
-
-`add /name <Full Name> /phone <Phone Numbers> [/address <Physical Address>] [/birthday <Birthday>] [/email <Email Addresses>] [/instagram <IG Handle>]`
-
-**Example Commands:**
-
-- `add /name John Smith /phone +123456789, +987654321 /email john.smith@email.com, john.work@email.com /address 123 Main Street`
-- `add /name Emily Davis /phone (555) 123-4567 /address 987 Elm St, Apt 5B /birthday 1985-07-22 /email emily.davis@email.com`
-- `add /name Emily Davis /phone (555) 123-4567 /birthday 1985-07-22`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `add` command, specifying multiple phone numbers and/or email addresses.
-2. The system validates each phone number and email for format correctness.
-3. The contact is added with all provided phone numbers and email addresses.
-4. A success message is displayed confirming that the contact was added.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **Phone Numbers:**
-
-**Acceptable Values:**
-
-- Must be in valid phone number formats as described (e.g., `+123456789`, `(555) 123-4567`).
-- Multiple phone numbers are separated by commas.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid phone number format.`
-
-**Rationale:**
-
-- Multiple phone numbers allow flexibility in how contacts are stored, accounting for different personal, work, or
-  alternate numbers.
-
-#### **Email Addresses:**
-
-**Acceptable Values:**
-
-- Must be in a valid email format (e.g., `name@domain.tld`).
-- Multiple email addresses are separated by commas.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid email address format.`
-
-**Rationale:**
-
-- This feature allows users to store multiple emails, which is common for contacts with separate personal and work
-  emails.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Contact successfully added: John Smith`
-- GUI Change: The contact details are displayed in the contact list, including all phone numbers and emails.
-
-#### **Failure:**
-
-- Invalid phone number format: `Error: Invalid phone number format.`
-- Invalid email format: `Error: Invalid email address format.`
-- Multiple errors: `Error: Invalid phone number and email address. Please check the format and try again.`
-
----
-
-### 6. **Feature: Undo Contact Deletion**
+### 4. **Feature: Undo Contact Deletion**
 
 **Purpose:**
 To allow users to recover a contact that was recently deleted, providing a grace period during which deletions can be
@@ -950,154 +797,7 @@ reversed.
 
 ---
 
-### 7. **Feature: Duplicate Contact Detection and Error Notification**
-
-**Purpose:**
-To identify and notify users when they attempt to add a contact that already exists in the contact list, preventing
-duplicate entries.
-
-#### **Command Format:**
-
-`add <ContactDetails>`
-
-**Example Commands:**
-
-- `add /name John Smith /phone +123456789 /email john.smith@email.com`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `add` command with contact details that match an existing contact in the contact list.
-2. The system detects the duplicate based on the name, phone number, or email address.
-3. The system displays a duplicate error message, and the contact is not added.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **Contact Details:**
-
-**Acceptable Values:**
-
-- Must include one or more of the following fields: name, phone number, email address, or physical address.
-- Only considered a duplicate if all provided fields match an existing contact.
-
-**Error Message:**
-
-- If a duplicate is
-  detected: `Error: A contact with this name, phone number, and email address already exists. Please provide unique details.`
-
-**Rationale:**
-
-- This ensures that the contact list remains clean and free of redundant entries.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Contact successfully added.`
-- GUI Change: The new contact appears in the contact list.
-
-#### **Failure:**
-
-- Duplicate
-  Detected: `Error: A contact with this name, phone number, or email address already exists. Please provide unique details.`
-
----
-
-### **Error Scenarios:**
-
-- **Duplicate Contact Detected:**
-  Example:
-  ```
-  add /name John Smith /phone +123456789 /email john.smith@email.com
-  Error: A contact with this name, phone number, or email address already exists. Please provide unique details.
-  ```
-
-### 8. **Feature: "Favorite" Functionality to Prioritize Certain Contacts**
-
-**Purpose:**
-To allow users to mark certain contacts as "favorites" for easy access and prioritization, enhancing the management and
-retrieval of important or frequently contacted individuals.
-
-#### **Command Format:**
-
-`favorite <ContactID>`
-
-**Example Commands:**
-
-- `favorite 123`
-- `favorite 4567`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `favorite` command with a valid ContactID.
-2. The system marks the contact as a favorite.
-3. A success message is displayed confirming that the contact has been added to the favorites list.
-4. The contact is highlighted or moved to a "Favorites" section in the contact list.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-- Case-insensitive.
-- Leading/trailing spaces are ignored.
-- Format: Must be a positive integer.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If contact not found: `Error: Contact not found. Please check the ContactID and try again.`
-- If contact is already marked as a favorite: `Error: Contact is already marked as a favorite.`
-
-**Rationale:**
-
-- Ensures the correct identification of the contact to be marked as a favorite and prevents duplication.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Contact <ContactID> has been marked as a favorite.`
-- GUI Change: The contact is highlighted or moved to the "Favorites" section for easy access.
-
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- Contact Not Found: `Error: Contact not found. Please check the ContactID and try again.`
-- Already a Favorite: `Error: Contact is already marked as a favorite.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `favorite abc`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **Contact Not Found:**
-  Example: `favorite 9999` (assuming 9999 does not exist)
-  `Error: Contact not found. Please check the ContactID and try again.`
-
-- **Already a Favorite:**
-  Example: `favorite 123` (if contact 123 is already marked as a favorite)
-  `Error: Contact is already marked as a favorite.`
-
----
-
-### 9. **Feature: Interaction History Log for Each Contact**
+### 5. **Feature: Interaction History Log for Each Contact**
 
 **Purpose:**
 To maintain a log of interactions (such as calls, messages, meetings) with each contact, allowing users to track and
@@ -1204,169 +904,7 @@ review their communication history.
 
 ---
 
-### 10. **Feature: Reminder Notifications for Contact’s Birthday**
-
-**Purpose:**
-To store each contact's birthday and receive reminder notifications, enabling proactive engagement with clients on their
-special occasions.
-
-#### **Command Format:**
-
-`birthday <ContactID> /date <Birthday>`
-
-**Example Commands:**
-
-- `birthday 123 /date 09-25`
-- `birthday 4567 /date 12-10`
-- `birthday 4567 /date 2001-12-10`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `birthday` command with a valid ContactID and birthday date.
-2. The system stores the birthday and links it to a reminder system.
-3. A success message is displayed confirming that the birthday has been logged for the contact.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-- Case-insensitive.
-- Leading/trailing spaces are ignored.
-- Format: Must be a positive integer.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If contact not found: `Error: Contact not found. Please check the ContactID and try again.`
-
-**Rationale:**
-
-- Ensures the correct contact is updated with the correct birthday format, preventing errors.
-
-#### **Birthday Date:**
-
-**Acceptable Values:**
-
-- Must follow the format `yyyy-mm-dd` or `mm-dd` (for cases where the year is not required).
-
-**Error Message:**
-
-- If missing: `Error: Birthday date is required. Please provide one in the format yyyy-mm-dd or mm-dd.`
-- If in incorrect
-  format: `Error: Command format is incorrect. Please look at the User Guide for the appropriate format.`
-
-**Rationale:**
-
-- Supports flexible input while ensuring the date format is consistent for reminders.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Birthday logged for contact <ContactID>: <Birthday>`
-- GUI Change: The birthday is added to the contact’s details and linked to the reminder system.
-
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- Invalid Birthday Format: `Error: Invalid birthday format. Please provide a date in the format MM-DD.`
-- Contact Not Found: `Error: Contact not found. Please check the ContactID and try again.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `birthday abc /date 2000-09-15`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **Contact Not Found:**
-  Example: `birthday 9999 /date 2000-09-16`
-  `Error: Contact not found. Please check the ContactID and try again.`
-
-- **Missing Birthday Date:**
-  Example: `birthday 123`
-  `Error: Birthday date is required. Please provide one in the format yyyy-mm-dd or mm-dd.`
-
-- **Incorrect Birthday Format:**
-  Example: `birthday 123 /date 2012.31.12`
-  `Error: Command format is incorrect. Please look at the User Guide for the appropriate format.`
-
----
-
-### 11. **Feature: Confirmation Prompt Before Deleting All Contacts**
-
-**Purpose:**
-To display a confirmation prompt ("Are you sure?") before allowing the user to delete all contacts, preventing
-accidental deletion of the entire address book.
-
-#### **Command Format:**
-
-`deleteAllContacts`
-
-**Example Commands:**
-
-- `deleteAllContacts`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `deleteAllContacts` command.
-2. The system prompts the user with a confirmation message: "Are you sure you want to delete all contacts? This action
-   cannot be undone. Confirm Y/N."
-3. The user confirms the deletion by entering `Y`.
-4. The system deletes all contacts and displays a success message.
-
-   Use case ends.
-
----
-
-### **User Interactions:**
-
-#### **Confirmation Prompt:**
-
-- **Text:** Are you sure you want to delete all contacts? This action cannot be undone. Confirm Y/N.
-
-- **Expected Responses:**
-    - `Y (Yes)` – Proceeds with deletion.
-    - `N (No)` – Cancels the action.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `All contacts have been deleted from the address book.`
-- GUI Change: The contact list is cleared.
-
-#### **Canceled:**
-
-- Message: `Deletion canceled. No contacts have been deleted.`
-
-#### **Failure:**
-
-- Invalid response: `Error: Please respond with Y (Yes) or N (No).`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid Response:**
-  Example: User enters `maybe` instead of `Y` or `N`
-  `Error: Please respond with Y (Yes) or N (No).`
-
----
-
-### 12. **Feature: Create Tags for Contact Categorization**
+### 6. **Feature: Create Tags for Contact Categorization**
 
 **Purpose:**
 To allow users to create custom tags for contacts, categorizing them based on certain characteristics, such as "high net
@@ -1434,144 +972,7 @@ worth," "first-time buyer," etc., for better organization and personalization of
 
 ---
 
-### 13. **Feature: Toggle Tag for Contact**
-
-**Purpose:**
-To allow users to add or remove tags from contacts, categorizing them under certain predefined categories (e.g., "high
-net worth") or removing those tags as needed.
-
-#### **Command Format:**
-
-`t <ContactID> <TagName>`
-
-**Example Commands:**
-
-- `t 42 hnw`
-- `t 123 ftb`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `t` command with a ContactID and tag name.
-2. The system checks whether the contact already has the tag.
-3. If the tag exists, it is removed. If the tag does not exist, it is added to the contact.
-4. A message is displayed confirming whether the tag was added or removed.
-
-   Use case ends.
-
----
-
-### **Parameters:**
-
-#### **ContactID:**
-
-**Acceptable Values:**
-
-- Must be a numeric identifier (integer) assigned to the contact.
-
-**Error Message:**
-
-- If invalid: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- If the contact does not exist: `Error: Contact not found. Please check the ContactID and try again.`
-
-**Rationale:**
-
-- Ensures accurate identification of the contact to which the tag will be added or removed.
-
-#### **Tag Name:**
-
-**Acceptable Values:**
-
-- Must be a valid, existing tag in the system.
-
-**Error Message:**
-
-- If missing: `Error: Tag name is required. Please provide one from the pre-existing list.`
-
-**Rationale:**
-
-- Ensures that only valid tags are used to categorize contacts.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `Tag <TagName> added for contact <ContactID>.`
-  Or: `Tag <TagName> removed from contact <ContactID>.`
-- GUI Change: The contact's tag list is updated accordingly.
-
-#### **Failure:**
-
-- Invalid ContactID: `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-- Contact Not Found: `Error: Contact not found. Please check the ContactID and try again.`
-- Missing Tag: `Error: Tag name is required. Please provide one from the pre-existing list.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid ContactID:**
-  Example: `t abc hnw`
-  `Error: Invalid ContactID. Please provide a valid numeric identifier.`
-
-- **Contact Not Found:**
-  Example: `t 9999 hnw` (assuming 9999 does not exist)
-  `Error: Contact not found. Please check the ContactID and try again.`
-
-- **Missing Tag:**
-  Example: `t 42`
-  `Error: Tag name is required. Please provide one from the pre-existing list.`
-
----
-
-### 14. **Feature: List All Tags**
-
-**Purpose:**
-To allow users to view all pre-existing tags that can be applied to contacts.
-
-#### **Command Format:**
-
-`lt`
-
-**Example Commands:**
-
-- `lt`
-
-### **Main Success Scenario (MSS):**
-
-1. The user issues the `lt` command.
-2. The system displays a list of all available tags.
-
-   Use case ends.
-
----
-
-### **Outputs:**
-
-#### **Success:**
-
-- Message: `The following tags are in your list:`
-  `hnw`
-  `ftb`
-  `mi`
-- If no tags exist: `There are no tags in your list at the moment.`
-
-#### **Failure:**
-
-- Invalid Command: `Error: Invalid Command entered. Please provide a valid command.`
-
----
-
-### **Error Scenarios:**
-
-- **Invalid Command:**
-  Example: `Lt` (incorrect capitalization)
-  `Error: Invalid Command entered. Please provide a valid command.`
-
----
-
-### 15. **Feature: Find Function**
+### 7. **Feature: Find Function**
 
 **Purpose:**
 To enable users to search for clients by matching on specific fields (e.g., name, address, tag), allowing for efficient
@@ -1644,7 +1045,7 @@ retrieval of client information based on various criteria.
 
 ---
 
-### 16. **Feature: Add or Edit Remarks for a Contact**
+### 8. **Feature: Add or Edit Remarks for a Contact**
 
 **Purpose:**
 To allow users to add or update a remark for a contact, providing additional notes or information that may not be captured in other fields (e.g., preferences, additional details).
@@ -1780,14 +1181,14 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
+    2. Test case: `delete 1`<br>
        Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
        Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
+    3. Test case: `delete 0`<br>
        Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
