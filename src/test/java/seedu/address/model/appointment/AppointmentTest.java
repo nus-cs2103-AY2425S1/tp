@@ -23,6 +23,21 @@ public class AppointmentTest {
     );
 
     @Test
+    public void deleteAppointmentById() {
+        // Create new appointment
+        Appointment appointment = new Appointment(
+            ALICE, DANIEL, new DateOfBirth("12-02-2024"), new Time("0900")
+        );
+
+        // Deleting an existing appointment returns true
+        Integer id = appointment.getId();
+        assertTrue(Appointment.deleteAppointmentById(id));
+
+        // Deleting a non-existent appointment returns false
+        assertFalse(Appointment.deleteAppointmentById(id));
+    }
+
+    @Test
     public void isSameAppointment() {
         // same object -> returns true
         assertTrue(APPOINTMENT_A.isSameAppointment(APPOINTMENT_A));
@@ -51,8 +66,9 @@ public class AppointmentTest {
 
     @Test
     public void toStringMethod() {
-        String expected = Appointment.class.getCanonicalName() + "{id=" + APPOINTMENT_A.getId() + ", doctor=" + ALICE
-                + ", patient=" + CARL + ", date=" + APPOINTMENT_A.getDate() + ", time=" + APPOINTMENT_A.getTime()
+        String expected = Appointment.class.getCanonicalName() + "{id=" + APPOINTMENT_A.getId()
+                + ", doctor=" + APPOINTMENT_A.getDoctor() + ", patient=" + APPOINTMENT_A.getPatient()
+                + ", date=" + APPOINTMENT_A.getDate() + ", time=" + APPOINTMENT_A.getTime()
                 + "}";
         assertEquals(expected, APPOINTMENT_A.toString());
     }
