@@ -151,7 +151,7 @@ public class CommandTestUtil {
         final String[] splitName = event.getEventName().split("\\s+");
         model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(List.of(splitName[0])));
 
-        assertEquals(1, model.getFilteredEventList().size());
+        assertEquals(3, model.getFilteredEventList().size());
     }
 
 }

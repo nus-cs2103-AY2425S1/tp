@@ -232,6 +232,16 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowPersons()) {
+                // Switch to the person tab at index 0
+                tabs.getSelectionModel().select(0);
+            }
+
+            if (commandResult.isShowEvents()) {
+                // Switch to the event tab at index 1
+                tabs.getSelectionModel().select(1);
+            }
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("An error occurred while executing command: " + commandText);

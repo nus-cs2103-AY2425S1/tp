@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventBook;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListPersonCommandTest {
+public class ListEventCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -30,17 +30,17 @@ public class ListPersonCommandTest {
     @Test
     public void execute_personListIsNotFiltered_showsSameList() {
         CommandResult expectedCommandResult = new CommandResult(
-                ListPersonCommand.MESSAGE_SUCCESS, false, false, true, false);
+                ListEventCommand.MESSAGE_SUCCESS, false, false, false, true);
 
-        assertCommandSuccess(new ListPersonCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ListEventCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
     public void execute_personListIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showEventAtIndex(model, INDEX_FIRST_EVENT);
         CommandResult expectedCommandResult = new CommandResult(
-                ListPersonCommand.MESSAGE_SUCCESS, false, false, true, false);
+                ListEventCommand.MESSAGE_SUCCESS, false, false, false, true);
 
-        assertCommandSuccess(new ListPersonCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ListEventCommand(), model, expectedCommandResult, expectedModel);
     }
 }
