@@ -112,7 +112,7 @@ public class NoteCommand extends Command {
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getAge(), personToEdit.getSex(), personToEdit.getAppointment(),
-                personToEdit.getTags(), updatedNote);
+                personToEdit.getTags(), updatedNote, personToEdit.getStarredStatus());
     }
 
     @Override

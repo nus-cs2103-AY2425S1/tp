@@ -157,7 +157,7 @@ public class PersonBuilder {
         return this;
     }
 
-
+    /**
      * Sets the {@code StarredStatus} of the {@code Person} that we are building.
      */
     public PersonBuilder withStarredStatus(String starredStatus) {
@@ -167,7 +167,6 @@ public class PersonBuilder {
 
     public Person build() {
         return new Person(name, phone, email, address, age, sex, appointments, tags, note, starredStatus);
-
     }
 
 }

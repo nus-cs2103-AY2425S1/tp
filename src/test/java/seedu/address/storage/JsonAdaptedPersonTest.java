@@ -168,7 +168,8 @@ public class JsonAdaptedPersonTest {
         invalidAppointments.add(new JsonAdaptedAppointment(INVALID_APPOINTMENT));
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
-                        VALID_ADDRESS, VALID_AGE, VALID_SEX, invalidAppointments, VALID_TAGS, VALID_NOTE, VALID_STARRED_STATUS);
+                        VALID_ADDRESS, VALID_AGE, VALID_SEX, invalidAppointments,
+                        VALID_TAGS, VALID_NOTE, VALID_STARRED_STATUS);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
@@ -186,7 +187,8 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidNote_throwsIllegalValueException() {
         JsonAdaptedPerson person1 =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_AGE, VALID_SEX, VALID_APPOINTMENT, VALID_TAGS, INVALID_NOTE_APPOINTMENT, VALID_STARRED_STATUS);
+                        VALID_AGE, VALID_SEX, VALID_APPOINTMENT, VALID_TAGS,
+                        INVALID_NOTE_APPOINTMENT, VALID_STARRED_STATUS);
         assertThrows(IllegalValueException.class, person1::toModelType);
 
         JsonAdaptedPerson person2 =
@@ -207,8 +209,8 @@ public class JsonAdaptedPersonTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
-  
-    @Test 
+
+    @Test
     public void toModelType_invalidStarredStatus_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
