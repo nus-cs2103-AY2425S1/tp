@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -32,29 +31,29 @@ public class AddClientProfile extends Command {
             + PREFIX_TAG + "owesMoney "
             + PREFIX_EMAIL + "johnd@example.com";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "%1$s has been added to your contact list!";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book!";
 
-    private final Person toAdd;
+    private final Person personToAdd;
 
     /**
      * Creates an AddClientProfile to add the specified {@code Person}
      */
     public AddClientProfile(Person person) {
         requireNonNull(person);
-        toAdd = person;
+        personToAdd = person;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(personToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        model.addPerson(personToAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, personToAdd.getName()));
     }
 
     @Override
@@ -69,13 +68,13 @@ public class AddClientProfile extends Command {
         }
 
         AddClientProfile otherAddCommand = (AddClientProfile) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return personToAdd.equals(otherAddCommand.personToAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toAdd", personToAdd)
                 .toString();
     }
 }

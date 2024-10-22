@@ -38,7 +38,13 @@ public class DeleteClientProfileCommand extends Command {
 
         Person personToDelete = model.getPersonByName(targetName);
         if (!lastShownList.contains(personToDelete)) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            String closestMatch = findClosestMatch(targetName.toString(), lastShownList);
+
+            if (closestMatch != null) {
+                throw new CommandException(String.format(Messages.MESSAGE_SUGGESTION, closestMatch));
+            } else {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_INPUT);
+            }
         }
 
         model.deletePerson(personToDelete);
