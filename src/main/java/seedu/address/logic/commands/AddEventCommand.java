@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CELEBRITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_CONTACTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_VENUE;
+
+import java.util.List;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -34,11 +37,13 @@ public class AddEventCommand extends AddCommand {
             + PREFIX_EVENT_TIME + "TIME "
             + PREFIX_EVENT_VENUE + "VENUE "
             + PREFIX_EVENT_CELEBRITY + "CELEBRITY "
+            + PREFIX_EVENT_CONTACTS + "CONTACTS...\n"
             + "Example: " + COMMAND_WORD + " " + COMMAND_FIELD + " "
             + PREFIX_EVENT_NAME + "Oscars "
             + PREFIX_EVENT_TIME + "Sep 22 2024 1800 to 2200 "
             + PREFIX_EVENT_VENUE + "Hollywood "
-            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney ";
+            + PREFIX_EVENT_CELEBRITY + "Sydney Sweeney "
+            + PREFIX_EVENT_CONTACTS + "Alex Yeoh, Bernice Yu";
 
     public static final String MESSAGE_SUCCESS = "New Event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event  already exists in the address book";
@@ -46,30 +51,34 @@ public class AddEventCommand extends AddCommand {
     private final Time time;
     private final Venue venue;
     private final String personName;
+    private final List<String> contactNames;
 
     /**
      * Creates an AddEventCommand to add the specified {@code Event}
      */
-    public AddEventCommand(EventName eventName, Time time, Venue venue, String personName) {
+    public AddEventCommand(EventName eventName, Time time, Venue venue, String personName, List<String> contactNames) {
         requireAllNonNull(eventName, time, venue, personName);
         this.eventName = eventName;
         this.time = time;
         this.venue = venue;
         this.personName = personName;
+        this.contactNames = contactNames;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         Person celebrity;
+        List<Person> contacts;
 
         try {
             celebrity = model.findPerson(this.personName);
+            contacts = contactNames.stream().map(model::findPerson).toList();
         } catch (PersonNotFoundException e) {
-            throw new CommandException(Messages.MESSAGE_MISSING_PERSON);
+            throw new CommandException(String.format(Messages.MESSAGE_MISSING_PERSON, e.personName));
         }
 
-        Event toAdd = new Event(this.eventName, this.time, this.venue, celebrity);
+        Event toAdd = new Event(this.eventName, this.time, this.venue, celebrity, contacts);
 
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -95,7 +104,8 @@ public class AddEventCommand extends AddCommand {
         return eventName.equals(otherAddEventCommand.eventName)
                 && time.equals(otherAddEventCommand.time)
                 && venue.equals(otherAddEventCommand.venue)
-                && personName.equals(otherAddEventCommand.personName);
+                && personName.equals(otherAddEventCommand.personName)
+                && contactNames.equals(otherAddEventCommand.contactNames);
     }
 
     @Override
@@ -105,6 +115,7 @@ public class AddEventCommand extends AddCommand {
                 .add("time", time)
                 .add("venue", venue)
                 .add("Celebrity", personName)
+                .add("Contacts", contactNames)
                 .toString();
     }
 }
