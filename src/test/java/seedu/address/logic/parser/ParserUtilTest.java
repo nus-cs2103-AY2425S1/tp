@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_SORT_ORDER;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -23,11 +24,14 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_SORT_ORDER = "2";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_SORT_ORDER_1 = "1";
+    private static final String VALID_SORT_ORDER_MINUS_1 = "-1";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -166,5 +170,28 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(null));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_SORT_ORDER, () ->
+                ParserUtil.parseSortOrder(INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithoutWhitespace_returnsInteger() throws Exception {
+        assertEquals(1, ParserUtil.parseSortOrder(VALID_SORT_ORDER_1));
+        assertEquals(-1, ParserUtil.parseSortOrder(VALID_SORT_ORDER_MINUS_1));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_returnsTrimmedInteger() throws Exception {
+        String sortOrderWithWhitespace = WHITESPACE + VALID_SORT_ORDER_1 + WHITESPACE;
+        assertEquals(1, ParserUtil.parseSortOrder(sortOrderWithWhitespace));
     }
 }

@@ -33,28 +33,42 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME;
 
-    private final Comparator<Person> sortingOrder;
+    private final Comparator<Person> sortingComparator;
     private final boolean isAscendingOrder;
 
     /**
-     * Creates a SortCommand with the specified comparator and order.
-     * Reverses the comparator if the order is -1 (descending).
+     * Constructs a {@code SortCommand} with the given comparator and order.
      *
-     * @param personComparator The comparator to sort persons by.
-     * @param order The sorting order, 1 for ascending, -1 for descending.
-     * @throws NullPointerException if {@code personComparator} or {@code order} is null.
+     * @param personComparator Comparator to sort persons.
+     * @param isAscendingOrder {@code true} for ascending, {@code false} for descending.
+     * @throws NullPointerException if {@code personComparator} is null.
      */
-    public SortCommand(Comparator<Person> personComparator, Integer order) {
+    private SortCommand(Comparator<Person> personComparator, boolean isAscendingOrder) {
         requireNonNull(personComparator);
-        requireNonNull(order);
+        this.sortingComparator = personComparator;
+        this.isAscendingOrder = isAscendingOrder;
+    }
 
-        if (order == -1) {
-            this.sortingOrder = personComparator.reversed();
-            this.isAscendingOrder = false;
-        } else {
-            this.sortingOrder = personComparator;
-            this.isAscendingOrder = true;
-        }
+    /**
+     * Returns a {@code SortCommand} to sort by name.
+     *
+     * @param order 1 for ascending, -1 for descending.
+     */
+    public static SortCommand sortByName(Integer order) {
+        requireNonNull(order);
+        boolean isAscendingOrder = (order == 1);
+        return new SortCommand(COMPARE_BY_NAME, isAscendingOrder);
+    }
+
+    /**
+     * Returns a {@code SortCommand} to sort by student ID.
+     *
+     * @param order 1 for ascending, -1 for descending.
+     */
+    public static SortCommand sortByStudentId(Integer order) {
+        requireNonNull(order);
+        boolean isAscendingOrder = (order == 1);
+        return new SortCommand(COMPARE_BY_ID, isAscendingOrder);
     }
 
     /**
@@ -64,22 +78,47 @@ public class SortCommand extends Command {
      */
     public String getMessageSuccess() {
         String order = isAscendingOrder ? "Ascending" : "Descending";
-        Comparator<Person> personComparator = isAscendingOrder ? this.sortingOrder : this.sortingOrder.reversed();
-        if (personComparator.equals(COMPARE_BY_NAME)) {
+        if (this.sortingComparator == COMPARE_BY_NAME) {
             return "Sorted by Name in " + order + " order.";
-        } else if (personComparator.equals(COMPARE_BY_ID)) {
+        } else if (this.sortingComparator == COMPARE_BY_ID) {
             return "Sorted by Student Id in " + order + " order.";
         } else {
             return "";
         }
     }
 
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.updateSortedPersonList(sortingOrder);
+        Comparator<Person> personComparator =
+                isAscendingOrder ? this.sortingComparator : this.sortingComparator.reversed();
+        model.updateSortedPersonList(personComparator);
         return new CommandResult(getMessageSuccess());
+    }
+
+    @Override
+    public String toString() {
+        String field = sortingComparator == COMPARE_BY_NAME ? "Name" : "Student ID";
+        String order = isAscendingOrder ? "Ascending" : "Descending";
+        return String.format("SortCommand[field=%s, order=%s]", field, order);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortCommand)) {
+            return false;
+        }
+
+        // state check
+        SortCommand e = (SortCommand) other;
+        return this.sortingComparator == e.sortingComparator
+                && this.isAscendingOrder == e.isAscendingOrder;
     }
 }

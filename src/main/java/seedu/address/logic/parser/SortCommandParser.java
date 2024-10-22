@@ -5,12 +5,10 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
-import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 
 /**
  * Parses input arguments and creates a new SortCommand object
@@ -29,7 +27,6 @@ public class SortCommandParser implements Parser<SortCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        Comparator<Person> sortComparator;
         Integer order = ParserUtil.parseSortOrder(argMultimap.getPreamble());
 
         if (noPrefixesPresent(argMultimap, validPrefixes)) {
@@ -41,14 +38,13 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENT_ID);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            sortComparator = SortCommand.COMPARE_BY_NAME;
-        } else if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            sortComparator = SortCommand.COMPARE_BY_ID;
-        } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        if (argMultimap.getValue(PREFIX_NAME).map(String::isEmpty).orElse(false)) {
+            return SortCommand.sortByName(order);
+        } else if (argMultimap.getValue(PREFIX_STUDENT_ID).map(String::isEmpty).orElse(false)) {
+            return SortCommand.sortByStudentId(order);
         }
-        return new SortCommand(sortComparator, order);
+
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
     }
 
     public static boolean multiplePrefixesPresent(ArgumentMultimap argMultimap, List<Prefix> prefixes) {
