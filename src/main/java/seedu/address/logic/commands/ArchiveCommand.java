@@ -116,6 +116,9 @@ public class ArchiveCommand extends Command {
         for (Index targetIndex : indexList) {
             Delivery deliveryToArchive = deliveryList.get(targetIndex.getZeroBased());
             Delivery archivedDelivery = createArchivedDelivery(deliveryToArchive);
+            if (!deliveryToArchive.isArchived()) {
+                continue;
+            }
             inspectedPerson.archiveDelivery(targetIndex, archivedDelivery);
             deliveryToArchiveList.add(archivedDelivery);
         }
