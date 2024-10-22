@@ -22,9 +22,6 @@ import seedu.edulog.model.tag.Tag;
 
 public class ParserUtilTest {
 
-    private static final String VALID_NUMBER = "1";
-    private static final String INVALID_NUMBER = "John";
-
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -39,17 +36,6 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "neighbour";
 
     private static final String WHITESPACE = " \t\r\n";
-
-
-    @Test
-    public void testIsNumericValid() {
-        assertEquals(ParserUtil.isNumeric(VALID_NUMBER), true);
-    }
-
-    @Test
-    public void testIsNumericInValid() {
-        assertEquals(ParserUtil.isNumeric(INVALID_NUMBER), false);
-    }
 
     @Test
     public void parseIndex_invalidInput_throwsParseException() {

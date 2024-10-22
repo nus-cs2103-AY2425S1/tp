@@ -3,6 +3,8 @@ package seedu.edulog.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.AppUtil.checkArgument;
 
+import seedu.edulog.commons.util.NumericUtil;
+
 /**
  * Represents a Student's name in the edulog book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
@@ -10,7 +12,8 @@ import static seedu.edulog.commons.util.AppUtil.checkArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, it should not be blank, "
+            + "and it should not be completely numeric.";
 
     /*
      * The first character of the edulog must not be a whitespace,
@@ -35,7 +38,7 @@ public class Name {
      * Returns true if a given string is a valid name.
      */
     public static boolean isValidName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && !NumericUtil.isNumeric(test);
     }
 
 

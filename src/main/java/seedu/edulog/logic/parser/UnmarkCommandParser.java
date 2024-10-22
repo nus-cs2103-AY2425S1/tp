@@ -3,6 +3,7 @@ package seedu.edulog.logic.parser;
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.edulog.commons.core.index.Index;
+import seedu.edulog.commons.util.NumericUtil;
 import seedu.edulog.logic.commands.UnmarkCommand;
 import seedu.edulog.logic.commands.UnmarkIndexCommand;
 import seedu.edulog.logic.commands.UnmarkNameCommand;
@@ -21,7 +22,7 @@ public class UnmarkCommandParser implements Parser<UnmarkCommand> {
      */
     public UnmarkCommand parse(String args) throws ParseException {
         try {
-            if (ParserUtil.isNumeric(args)) {
+            if (NumericUtil.isNumeric(args)) {
                 Index index = ParserUtil.parseIndex(args);
                 return new UnmarkIndexCommand(index);
             } else {
