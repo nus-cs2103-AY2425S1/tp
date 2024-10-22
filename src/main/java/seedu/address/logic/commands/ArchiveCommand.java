@@ -42,6 +42,9 @@ public class ArchiveCommand extends Command {
 
     public static final String MESSAGE_ARCHIVED_DELIVERY_SUCCESS = "Archived Delivery for %1$s: %2$s";
 
+    public static final String MESSAGE_INVALID_WINDOW = "Cannot archive contact. "
+            + "Navigate to inspection window to archive deliveries";
+
     private final List<Index> indexList;
 
     public ArchiveCommand(List<Index> indexList) {
@@ -56,7 +59,7 @@ public class ArchiveCommand extends Command {
         if (!AddressBookParser.getInspect()) {
             return handleDeliveryArchive(model);
         } else {
-            throw new CommandException("Cannot archive contact!");
+            throw new CommandException(MESSAGE_INVALID_WINDOW);
         }
     }
 
