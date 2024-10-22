@@ -16,8 +16,6 @@ public class ExportCommand extends Command {
 
     public static final String MESSAGE_EXPORT_ACKNOWLEDGEMENT = "Exporting addressbook.json under "
             + "file path data/addressbook.json in whichever folder addressbook.jar is in";
-
-    public static final String MESSAGE_EXPORT_FAIL = "Export failed!";
     private static final String ADDRESSBOOK_FILE_PATH = "data/addressbook.json";
 
     @Override
@@ -38,8 +36,7 @@ public class ExportCommand extends Command {
                 file.createNewFile();
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            return new CommandResult(MESSAGE_EXPORT_FAIL);
+            throw new RuntimeException(e);
         }
 
         return new CommandResult(MESSAGE_EXPORT_ACKNOWLEDGEMENT);

@@ -35,28 +35,4 @@ public class ExportCommandTest {
 
         Files.delete(ADDRESSBOOK_FILE_PATH); // clean up
     }
-
-    @Test
-    public void execute_export_fail() throws IOException {
-        ExportCommand exportCommand = new ExportCommand();
-
-        Path dirPath = Paths.get("data");
-        File dir = dirPath.toFile();
-
-        if (!dir.exists()) {
-            Files.createDirectories(dirPath);
-        }
-
-        dir.setWritable(false); // make the directory read-only
-
-        try {
-            CommandResult result = exportCommand.execute(model);
-            assertEquals(ExportCommand.MESSAGE_EXPORT_FAIL, result.getFeedbackToUser());
-        } finally {
-            // clean up after the test
-            dir.setWritable(true);
-            Files.deleteIfExists(ADDRESSBOOK_FILE_PATH);
-            Files.deleteIfExists(dirPath);
-        }
-    }
 }
