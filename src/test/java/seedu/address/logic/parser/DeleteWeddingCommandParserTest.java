@@ -12,7 +12,7 @@ import static seedu.address.testutil.TypicalWeddings.AMY_WEDDING;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.DeleteWeddingCommand;
+import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
 import seedu.address.model.wedding.WeddingName;
 
 public class DeleteWeddingCommandParserTest {

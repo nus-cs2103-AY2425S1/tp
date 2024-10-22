@@ -5,8 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.stream.Stream;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CreateWeddingCommand;
+import seedu.address.logic.commands.wedding.CreateWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
 
@@ -22,16 +21,9 @@ public class CreateWeddingCommandParser implements Parser<CreateWeddingCommand> 
     public CreateWeddingCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_WEDDING);
-        Index[] partnerIndexes;
-        try {
-            partnerIndexes = ParserUtil.parseTwoIndexes(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateWeddingCommand.MESSAGE_USAGE),
-                    pe);
-        }
+
         if (!arePrefixesPresent(argMultimap, PREFIX_WEDDING)
-                || partnerIndexes.length != 2) {
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateWeddingCommand.MESSAGE_USAGE));
         }
 

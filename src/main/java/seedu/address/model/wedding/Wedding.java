@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Date;
 
+import seedu.address.model.person.Address;
 import seedu.address.model.person.Person;
 
 
@@ -26,7 +27,7 @@ public class Wedding {
     private Person partner1;
     private Person partner2;
     private ArrayList<Person> guestList;
-    private String location;
+    private Address address;
     private Date date;
 
     /**
@@ -52,6 +53,14 @@ public class Wedding {
      */
     public WeddingName getWeddingName() {
         return this.weddingName;
+    }
+
+    /**
+     * Returns wedding address associated with wedding
+     * @return A {@code Address} object of the address of the wedding
+     */
+    public Address getAddress() {
+        return address;
     }
 
     /**

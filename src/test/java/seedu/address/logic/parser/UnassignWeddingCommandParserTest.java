@@ -10,7 +10,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.UnassignWeddingCommand;
+import seedu.address.logic.commands.wedding.UnassignWeddingCommand;
 import seedu.address.model.wedding.Wedding;
 import seedu.address.model.wedding.WeddingName;
 

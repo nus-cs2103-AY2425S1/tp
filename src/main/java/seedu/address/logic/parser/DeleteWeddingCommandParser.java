@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEDDING;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.DeleteWeddingCommand;
+import seedu.address.logic.commands.wedding.DeleteWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
 
