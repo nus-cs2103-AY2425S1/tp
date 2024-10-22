@@ -28,7 +28,6 @@ public class UnlinkCommandParser implements Parser<UnlinkCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TO);
         String ownerStr = argMultimap.getPreamble();
 
-        // Validate that the necessary owner and pet information is provided
         if (
                 !argMultimap.getValue(PREFIX_TO).isPresent()
                         || argMultimap.getPreamble().isEmpty()
@@ -38,7 +37,6 @@ public class UnlinkCommandParser implements Parser<UnlinkCommand> {
             );
         }
 
-        // Parse the owner index
         Pair ownerPair = ParserUtil.parseIndexAndType(ownerStr);
         if (!ownerPair.second().equals("o")) {
             throw new ParseException(
@@ -46,7 +44,6 @@ public class UnlinkCommandParser implements Parser<UnlinkCommand> {
             );
         }
 
-        // Parse all the pet indexes
         Set<Index> petIndexSet = new HashSet<>();
         List<String> petArgs = argMultimap.getAllValues(PREFIX_TO);
         for (String petArg : petArgs) {
@@ -59,7 +56,6 @@ public class UnlinkCommandParser implements Parser<UnlinkCommand> {
             petIndexSet.add((Index) petPair.first());
         }
 
-        // Return the UnlinkCommand with the parsed owner index and pet indexes
         return new UnlinkCommand(ownerPair.first(), petIndexSet);
     }
 }
