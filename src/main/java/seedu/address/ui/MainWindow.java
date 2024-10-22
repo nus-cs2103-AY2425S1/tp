@@ -26,9 +26,11 @@ import seedu.address.model.UserPrefs;
  */
 public class MainWindow extends UiPart<Stage> {
 
+    public static final String DARK_THEME = "dark";
+    public static final String LIGHT_THEME = "light";
+
     private static final String FXML = "MainWindow.fxml";
-    private static final String DARK_THEME = "dark";
-    private static final String LIGHT_THEME = "light";
+
     private static final String DARK_THEME_PATH = "/view/DarkTheme.css";
     private static final String LIGHT_THEME_PATH = "/view/LightTheme.css";
     private static final String THEME_CHANGE_MESSAGE = "Theme changed to %1$s mode.";

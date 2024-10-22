@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.ui.MainWindow.DARK_THEME;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +16,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private String theme = "dark";
+    private String theme = DARK_THEME; //
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -71,14 +72,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     /**
      * Retrieves the current theme preference of the user.
-     * If the theme is not set (null), it defaults to "dark".
      *
      * @return The current theme preference as a String ("light" or "dark").
-     *         Defaults to "dark" if no theme has been set.
      */
     @Override
     public String getTheme() {
-        return theme == null ? "dark" : theme;
+        return theme;
     }
 
     @Override
