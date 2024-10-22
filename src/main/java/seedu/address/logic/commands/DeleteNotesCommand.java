@@ -20,15 +20,15 @@ import seedu.address.model.person.Person;
  */
 public class DeleteNotesCommand extends Command {
 
-    public static final String COMMAND_WORD = "addnotes";
+    public static final String COMMAND_WORD = "deletenotes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Delete the note of the person identified "
             + "by the index number used in the last person listing and the index of the note.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "n/ [INDEX]\n"
+            + "i/ [NOTE_INDEX]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "n/ 1";
+            + "i/ 1";
 
     public static final String MESSAGE_DELETE_NOTES_SUCCESS = "Deleted note of Person: %1$s";
 
@@ -54,17 +54,17 @@ public class DeleteNotesCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getOneBased());
+        Person personToEdit = lastShownList.get(index.getZeroBased());
 
         List<Note> notesToEdit = new ArrayList<>(personToEdit.getNotes());
 
         // if there are no notes with this index
-        if (noteIndex.getOneBased() >= notesToEdit.size()) {
+        if (noteIndex.getOneBased() > notesToEdit.size()) {
             throw new CommandException(Note.NO_EXISTING_NOTE);
         }
 
         // remove the specified note
-        Note noteToRemove = notesToEdit.get(noteIndex.getOneBased());
+        Note noteToRemove = notesToEdit.get(noteIndex.getZeroBased());
         notesToEdit.remove(noteToRemove);
 
         Set<Note> updatedNotes = new LinkedHashSet<>(notesToEdit);
