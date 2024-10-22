@@ -63,12 +63,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             String email = argMultimap.getValue(PREFIX_EMAIL).get();
             setEditedEmail(editPersonDescriptor, email);
-//            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             String address = argMultimap.getValue(PREFIX_ADDRESS).get();
             setEditedAddress(editPersonDescriptor, address);
-//            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
             String telegramUsername = argMultimap.getValue(PREFIX_TELEGRAM).get();
