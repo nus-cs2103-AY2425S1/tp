@@ -1,12 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.model.person.Grade.MESSAGE_TEST_NAME_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteGradeCommand;
 
 public class DeleteGradeCommandParserTest {
@@ -14,13 +17,13 @@ public class DeleteGradeCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        DeleteGradeCommand command = new DeleteGradeCommand(Index.fromOneBased(15), Index.fromOneBased(17));
+        DeleteGradeCommand command = new DeleteGradeCommand(Index.fromOneBased(15), "Midterm");
 
         // Trailing whitespaces
-        assertParseSuccess(parser, "15 17 ", command);
+        assertParseSuccess(parser, "15 n/Midterm ", command);
 
         // Leading whitespaces
-        assertParseSuccess(parser, " 15 17", command);
+        assertParseSuccess(parser, " 15 n/Midterm", command);
     }
 
     @Test
@@ -30,11 +33,15 @@ public class DeleteGradeCommandParserTest {
         // Less arguments
         assertParseFailure(parser, "15", errorMessage);
 
-        // Wrong arguments structure
-        assertParseFailure(parser, "Alice 17", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "15 Midterm", ParserUtil.MESSAGE_INVALID_INDEX);
+        // Wrong arguments structure (Invalid index)
+        assertParseFailure(parser, "Alice n/Midterm", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // Missing test name
+        assertParseFailure(parser, "15 ", errorMessage);
+        assertParseFailure(parser, "15 n/", MESSAGE_TEST_NAME_CONSTRAINTS);
 
         // Too many arguments
-        assertParseFailure(parser, "15 16 17", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "15 Midterm 17", errorMessage);
+        assertParseFailure(parser, "15 n/Midterm n/17", Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
     }
 }

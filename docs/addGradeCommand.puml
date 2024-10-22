@@ -1,0 +1,44 @@
+@startuml
+actor User
+participant "MainWindow" as MW
+participant "LogicManager" as LM
+participant "AddressBookParser" as ABP
+participant "g:AddGradeCommand" as OAGC
+participant "ResultDisplay" as RD
+participant "cr:CommandResult" as CR
+participant ":Model" as M
+
+
+User -> MW: executeCommand("grade ...")
+activate MW
+MW -> LM: execute("grade ...")
+activate LM
+LM -> ABP: parseCommand("grade ...")
+activate ABP
+ABP -> OAGC
+activate OAGC
+OAGC --> ABP
+deactivate OAGC
+ABP --> LM: g
+deactivate ABP
+LM -> OAGC: execute()
+activate OAGC
+OAGC -> M: setPerson()
+activate M
+M --> OAGC
+deactivate M
+OAGC -> CR
+activate CR
+CR --> OAGC: cr
+deactivate CR
+OAGC --> LM: cr
+deactivate OAGC
+LM --> MW: cr
+deactivate LM
+MW -> RD: setFeedbackToUser(CR)
+activate RD
+RD --> MW: display feedback to user
+deactivate RD
+MW --> User: return CommandResult
+deactivate MW
+@enduml

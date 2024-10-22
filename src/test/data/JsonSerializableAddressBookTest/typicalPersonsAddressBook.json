@@ -1,97 +1,154 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
-    "name" : "Alice Pauline",
-    "phone" : "94351253",
-    "email" : "alice@example.com",
-    "address" : "123, Jurong West Ave 6, #08-111",
-    "tags" : [ "friends" ],
-    "grades" : []
-  }, {
-    "name" : "Benson Meier",
-    "phone" : "98765432",
-    "email" : "johnd@example.com",
-    "address" : "311, Clementi Ave 2, #02-25",
-    "tags" : [ "owesMoney", "friends" ],
-    "grades" : []
-  }, {
-    "name" : "Carl Kurz",
-    "phone" : "95352563",
-    "email" : "heinz@example.com",
-    "address" : "wall street",
-    "tags" : [ ],
-    "grades" : []
-  }, {
-    "name" : "Daniel Meier",
-    "phone" : "87652533",
-    "email" : "cornelia@example.com",
-    "address" : "10th street",
-    "tags" : [ "friends" ],
-    "grades" : [
-      {
-        "testName": "Math Test",
-        "score": 85,
-        "weightage": 20
-      },
-      {
-        "testName": "Science Exam",
-        "score": 90,
-        "weightage": 30
+  "persons": [
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "tags": [
+        "friends"
+      ],
+      "grades": {},
+      "attendances": {}
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "tags": [
+        "owesMoney",
+        "friends"
+      ],
+      "grades": {},
+      "attendances": {}
+    },
+    {
+      "name": "Carl Kurz",
+      "phone": "95352563",
+      "email": "heinz@example.com",
+      "address": "wall street",
+      "tags": [],
+      "grades": {},
+      "attendances": {
+        "2024-01-01T12:00": {
+          "hasAttended": true
+        },
+        "2024-01-08T12:00": {
+          "hasAttended": false
+        }
       }
-    ]
-  }, {
-    "name" : "Elle Meyer",
-    "phone" : "9482224",
-    "email" : "werner@example.com",
-    "address" : "michegan ave",
-    "tags" : [ ],
-    "grades" : [
-      {
-        "testName": "Math Test",
-        "score": 85,
-        "weightage": 20
+    },
+    {
+      "name": "Daniel Meier",
+      "phone": "87652533",
+      "email": "cornelia@example.com",
+      "address": "10th street",
+      "tags": [
+        "friends"
+      ],
+      "grades": {
+        "Math Test": {
+          "testName": "Math Test",
+          "score": 85,
+          "weightage": 20
+        },
+        "ScienceExam": {
+          "testName": "Science Exam",
+          "score": 90,
+          "weightage": 30
+        }
       },
-      {
-        "testName": "Science Exam",
-        "score": 90,
-        "weightage": 30
+      "attendances": {
+        "2024-01-01T12:00": {
+          "hasAttended": true
+        },
+        "2024-01-08T12:00": {
+          "hasAttended": false
+        }
       }
-    ]
-  }, {
-    "name" : "Fiona Kunz",
-    "phone" : "9482427",
-    "email" : "lydia@example.com",
-    "address" : "little tokyo",
-    "tags" : [ ],
-    "grades" : [
-      {
-        "testName": "Math Test",
-        "score": 85,
-        "weightage": 20
+    },
+    {
+      "name": "Elle Meyer",
+      "phone": "9482224",
+      "email": "werner@example.com",
+      "address": "michegan ave",
+      "tags": [],
+      "grades": {
+        "Math Test": {
+          "testName": "Math Test",
+          "score": 85,
+          "weightage": 20
+        },
+        "ScienceExam": {
+          "testName": "Science Exam",
+          "score": 90,
+          "weightage": 30
+        }
       },
-      {
-        "testName": "Science Exam",
-        "score": 90,
-        "weightage": 30
+      "attendances": {
+        "2024-01-01T12:00": {
+          "hasAttended": true
+        },
+        "2024-01-08T12:00": {
+          "hasAttended": false
+        }
       }
-    ]
-  }, {
-    "name" : "George Best",
-    "phone" : "9482442",
-    "email" : "anna@example.com",
-    "address" : "4th street",
-    "tags" : [ ],
-    "grades" : [
-      {
-        "testName": "English Test",
-        "score": 78,
-        "weightage": 25
+    },
+    {
+      "name": "Fiona Kunz",
+      "phone": "9482427",
+      "email": "lydia@example.com",
+      "address": "little tokyo",
+      "tags": [],
+      "grades": {
+        "Math Test": {
+          "testName": "Math Test",
+          "score": 85,
+          "weightage": 20
+        },
+        "ScienceExam": {
+          "testName": "Science Exam",
+          "score": 90,
+          "weightage": 30
+        }
       },
-      {
-        "testName": "History Exam",
-        "score": 92,
-        "weightage": 25
+      "attendances": {
+        "2024-02-14T10:00": {
+          "hasAttended": false
+        },
+        "2024-02-21T10:00": {
+          "hasAttended": true
+        }
       }
-    ]
-  } ]
+    },
+    {
+      "name": "George Best",
+      "phone": "9482442",
+      "email": "anna@example.com",
+      "address": "4th street",
+      "tags": [],
+      "grades": {
+        "English Test": {
+          "testName": "English Test",
+          "score": 78,
+          "weightage": 25
+        },
+        "ScienceExam": {
+          "testName": "History Exam",
+          "score": 92,
+          "weightage": 25
+        }
+      },
+      "attendances": {
+        "2024-02-14T10:00": {
+          "hasAttended": false
+        },
+        "2024-02-21T10:00": {
+          "hasAttended": true
+        }
+      }
+    }
+  ]
 }
