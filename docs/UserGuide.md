@@ -72,6 +72,7 @@ konTActs is a **desktop app for managing contacts, optimized for use via a Comma
 Shows a message explaning how to access the help page.
 
 ![help message](images/helpMessage.png)
+* The link brings users to this user guide.
 
 Format: `help`
 
