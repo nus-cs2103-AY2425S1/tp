@@ -162,7 +162,9 @@ public interface Model {
     /**
      * Returns true if a student with the specified studentId exists.
      */
-    public boolean hasStudentWithId(StudentId studentId);
+    boolean hasStudentWithId(StudentId studentId);
+
+    boolean setStudentAbsent(StudentId studentId, TutorialClass tutorialClass)
 
     /**
      * Assign student to specified tutorial.
