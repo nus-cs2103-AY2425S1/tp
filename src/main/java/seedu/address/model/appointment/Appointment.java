@@ -1,6 +1,8 @@
 package seedu.address.model.appointment;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.appointment.exceptions.InvalidAppointmentException;
 import seedu.address.model.person.Nric;
@@ -127,6 +129,27 @@ public class Appointment {
                 && otherAppointment.getNric().equals(getNric())
                 && otherAppointment.getStartTime().equals(getStartTime())
                 && otherAppointment.getEndTime().equals(getEndTime());
+    }
+
+    public String getAppointmentDetails() {
+        StringBuilder sb = new StringBuilder();
+
+        // Formatter for the full date format like "22 October 2024"
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+
+        String formattedStartDate = startTime.toLocalDate().format(dateFormatter);
+        LocalTime startTimeOfDay = startTime.toLocalTime();
+        String formattedEndDate = endTime.toLocalDate().format(dateFormatter);
+        LocalTime endTimeOfDay = endTime.toLocalTime();
+
+        sb.append("From: " + formattedStartDate + " " + startTimeOfDay + "HRS ");
+        sb.append("To: " + formattedEndDate + " " + endTimeOfDay + "HRS ");
+
+        // Status logic
+        String status = isCompleted ? "Completed" : "Not Completed";
+        sb.append("Status: " + status);
+
+        return sb.toString();
     }
 
 }
