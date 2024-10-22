@@ -122,7 +122,9 @@ public class DeliveryList {
      * Used when sorting the list by a specified attribute, in descending order.
      */
     public void reverseDeliveryList() {
-        Collections.reverse(internalList);
+        int index = getFirstArchivedIndex().getZeroBased();
+        Collections.reverse(internalList.subList(0, index));
+        Collections.reverse(internalList.subList(index, internalList.size()));
     }
 
     /**

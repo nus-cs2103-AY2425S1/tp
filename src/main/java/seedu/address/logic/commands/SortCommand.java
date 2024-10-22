@@ -80,6 +80,7 @@ public class SortCommand extends Command {
             if (!isAscending) {
                 deliveryList.reverseDeliveryList();
             }
+
             return new CommandResult(MESSAGE_SUCCESS + (this.isAscending ? "ascending " : "descending ")
                     + this.attribute);
         }
