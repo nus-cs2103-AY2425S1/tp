@@ -10,6 +10,7 @@ import java.util.Set;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ObjectPropertyBase;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.ModelManager;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,7 +100,7 @@ public class Person {
 
             @Override
             public String getName() {
-                return "Person";
+                return "";
             }
         };
         property.set(person);
