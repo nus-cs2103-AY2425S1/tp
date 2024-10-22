@@ -22,6 +22,13 @@ public abstract class Partner {
         this.person = null;
     }
 
+    public Partner(String name, Person person) {
+        requireNonNull(name);
+        requireNonNull(person);
+        this.nameToUse = new Name(name);
+        this.person = person;
+    }
+
     public Name getNameToUse() {
         return nameToUse;
     }

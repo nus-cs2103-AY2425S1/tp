@@ -19,8 +19,8 @@ class JsonAdaptedWedding {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Wedding's %s field is missing!";
 
-    private final JsonAdaptedPerson bride;
-    private final JsonAdaptedPerson groom;
+    private final JsonAdaptedPartner bride;
+    private final JsonAdaptedPartner groom;
     private final String venue;
     private final String date;
     private final JsonAdaptedContactMap contactMap;
@@ -46,8 +46,8 @@ class JsonAdaptedWedding {
      * Converts a given {@code Wedding} into this class for Jackson use.
      */
     public JsonAdaptedWedding(Wedding source) {
-        bride = new JsonAdaptedPerson(source.getWife().getPerson());
-        groom = new JsonAdaptedPerson(source.getHusband().getPerson());
+        bride = new JsonAdaptedPartner(source.getWife());
+        groom = new JsonAdaptedPartner(source.getHusband());
         venue = source.getVenue().toString();
         date = source.getDate().toString();
         contactMap = new JsonAdaptedContactMap(source.getContactList());
@@ -62,12 +62,12 @@ class JsonAdaptedWedding {
         if (bride == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Bride"));
         }
-        final Wife modelBride = new Wife(bride.toModelType().getName().toString());
+        final Wife modelBride = new Wife(bride.getPreferredName(), bride.toModelType());
 
         if (groom == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Groom"));
         }
-        final Husband modelGroom = new Husband(groom.toModelType().getName().toString());
+        final Husband modelGroom = new Husband(groom.getPreferredName(), groom.toModelType());
 
         if (venue == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName()));
