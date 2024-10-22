@@ -14,12 +14,15 @@ import tahub.contacts.model.grade.GradingSystem;
 
 /**
  * Unit tests for {@link JsonSerializableGradingSystem}.
- * These tests ensure that the JsonSerializableGradingSystem class correctly serializes and deserializes GradingSystem objects.
+ * These tests ensure that the JsonSerializableGradingSystem class correctly serializes and deserializes
+ * GradingSystem objects.
  */
 public class JsonSerializableGradingSystemTest {
 
-    private static final JsonAdaptedGrade VALID_GRADE = new JsonAdaptedGrade("Midterm", 85.0, 0.4);
-    private static final JsonAdaptedGrade VALID_GRADE_2 = new JsonAdaptedGrade("Final", 90.0, 0.6);
+    private static final JsonAdaptedGrade VALID_GRADE = new JsonAdaptedGrade("Midterm",
+                                                                             85.0, 0.4);
+    private static final JsonAdaptedGrade VALID_GRADE_2 = new JsonAdaptedGrade("Final",
+                                                                               90.0, 0.6);
 
     /**
      * Tests if a valid GradingSystem can be correctly converted to a model type and back.
@@ -58,11 +61,11 @@ public class JsonSerializableGradingSystemTest {
     public void toModelType_duplicateGrades_replacesOldGrade() throws Exception {
         List<JsonAdaptedGrade> grades = new ArrayList<>();
         grades.add(VALID_GRADE);
-        grades.add(new JsonAdaptedGrade("Midterm", 90.0, 0.5)); // Duplicate assessment name with different values
+        grades.add(new JsonAdaptedGrade("Midterm", 90.0, 0.5));
         JsonSerializableGradingSystem gradingSystem = new JsonSerializableGradingSystem(grades);
 
         GradingSystem modelGradingSystem = gradingSystem.toModelType();
-        assertEquals(90.0, modelGradingSystem.getGrade("Midterm")); // Should use the last added grade
+        assertEquals(90.0, modelGradingSystem.getGrade("Midterm"));
         assertEquals(0.5, modelGradingSystem.getAllWeights().get("Midterm"));
     }
 
