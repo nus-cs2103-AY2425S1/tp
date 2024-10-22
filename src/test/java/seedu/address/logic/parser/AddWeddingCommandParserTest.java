@@ -23,61 +23,45 @@ public class AddWeddingCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws Exception {
-        // typical wedding input with name and date
         String userInput = " " + PREFIX_NAME + "John and Jane Wedding " + PREFIX_DATE + "12/12/2024";
         Wedding expectedWedding = TypicalWeddings.WEDDING_ONE;
 
         AddWeddingCommand resultCommand = parser.parse(userInput);
 
-        // Get the result wedding object
         Wedding resultWedding = resultCommand.getWedding();
 
-        // Manually convert the date of the result wedding from yyyy-MM-dd to dd/MM/yyyy
         LocalDate resultDate = LocalDate.parse(resultWedding.getDate());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedResultDate = resultDate.format(formatter);
 
-        // Compare the content of the Wedding objects inside the AddWeddingCommand
         assertEquals(expectedWedding.getName(), resultWedding.getName());
         assertEquals(expectedWedding.getDate(), formattedResultDate);
     }
 
     @Test
     public void parse_missingName_failure() {
-        // Missing name
         String userInput = " " + PREFIX_DATE + "12/12/2024";
-
-        // Test that the parser throws a ParseException with the correct message
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_missingDate_failure() {
-        // Missing date
         String userInput = " " + PREFIX_NAME + "John and Jane Wedding";
-
-        // Test that the parser throws a ParseException with the correct message
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidDateFormat_failure() {
-        // Invalid date format
         String userInput = " " + PREFIX_NAME + "John and Jane Wedding " + PREFIX_DATE + "12-12-2024";
-
-        // Test that the parser throws a ParseException due to the wrong date format
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
 
     @Test
     public void parse_extraArguments_failure() {
-        // Input with extra arguments (invalid preamble)
         String userInput = "extra " + PREFIX_NAME + "John and Jane Wedding " + PREFIX_DATE + "12/12/2024";
-
-        // Test that the parser throws a ParseException due to the extra preamble
         assertThrows(ParseException.class, () -> parser.parse(userInput),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
     }
