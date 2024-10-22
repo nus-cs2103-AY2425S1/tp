@@ -87,7 +87,7 @@ public class Tutee extends Person {
      */
     @Override
     public String toString() {
-        return "Tutee: " + super.toString();
+        return super.toString();
     }
 
 }

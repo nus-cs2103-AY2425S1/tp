@@ -15,6 +15,8 @@ VolunTier is a **desktop app for managing contacts, optimized for use via a  Lin
 
 ## Quick start
 
+### Installation of application
+
 1. Ensure you have Java `17` or above installed in your Computer.
 
 1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
@@ -40,9 +42,33 @@ VolunTier is a **desktop app for managing contacts, optimized for use via a  Lin
 
 1. Refer to the [Features](#features) below for details of each command.
 
+### CLI tutorial
+
+This tutorial introduces you to the basics of using the Command Line Interface (CLI) on Unix-based systems (Linux/macOS) and Windows. By the end, you’ll be comfortable navigating the file system, managing files, and running basic commands through the terminal.
+
+#### 1. **What is the CLI?**
+The CLI is a text-based interface where users interact with the operating system by typing commands. It allows for:
+- **Efficient operations** compared to GUI
+- **Advanced automation** with scripts and batch commands
+
+#### 2. **Opening the Terminal**
+
+#### On macOS:
+```shell
+Cmd + Space
+```
+
+#### On Windows:
+Search for command prompt or powershell in the start menu.
+
+#### On Linux:
+```shell
+Ctrl + Alt + T
+```
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+#### Features
 
 <box type="info" seamless>
 

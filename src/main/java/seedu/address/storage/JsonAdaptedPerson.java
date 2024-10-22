@@ -167,9 +167,9 @@ public class JsonAdaptedPerson {
         List<JsonAdaptedTag> tags = this.getTags();
         String role = this.getRole();
 
-        final List<Tag> tuteeTags = new ArrayList<>();
+        final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
-            tuteeTags.add(tag.toModelType());
+            personTags.add(tag.toModelType());
         }
 
         final List<Subject> personSubjects = new ArrayList<>();
@@ -217,13 +217,10 @@ public class JsonAdaptedPerson {
         }
         final Hours modelHours = new Hours(hours);
 
-        //final Set<Tag> modelTags = new HashSet<>(personTags);
         final Set<Subject> modelSubjects = new HashSet<>(personSubjects);
 
-        //return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
+        final Set<Tag> modelTags = new HashSet<>(personTags);
 
-
-        final Set<Tag> modelTags = new HashSet<>(tuteeTags);
         if (Objects.equals(role, "Tutor")) {
             return new Tutor(modelName, modelPhone, modelEmail, modelAddress, modelHours, modelTags, modelSubjects);
         } else {

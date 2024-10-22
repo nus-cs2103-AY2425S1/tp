@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_SUCCESS = "Here is the details of the person you wanted to see: %1$s";
+    public static final String MESSAGE_SUCCESS = "Here is the details of the person you wanted to see: \n %1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the person identified by the index number "
             + "used in the displayed person list.\n"
@@ -32,10 +32,17 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(model);
         if (targetIndex.getZeroBased() >= model.getFilteredPersonList().size()) {
-            throw new CommandException("The person index provided is invalid");
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person personToView = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToView)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ViewCommand) other).targetIndex)); // state check
     }
 }
 

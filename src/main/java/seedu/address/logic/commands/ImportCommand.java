@@ -23,8 +23,8 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_FILEPATH + "~/data/test.txt";
 
-    public static final String MESSAGE_SUCCESS = "%d persons added";
-    public static final String MESSAGE_FAILED = "Rows that could not be added: %s";
+    public static final String MESSAGE_SUCCESS = "%d persons added.";
+    public static final String MESSAGE_FAILED = "Rows with duplicates: %s.";
 
     private final String importFilePath;
     public ImportCommand(String importFilePath) {
@@ -43,15 +43,16 @@ public class ImportCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
-        ArrayList<Integer> personsFailed = importer.getFailed();
-        model.commitAddressBook();
+        ArrayList<Integer> personsFailed = importer.getDuplicates();
         if (!importer.hasFailures()) {
+            model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_SUCCESS, personsAdded));
         } else if (personsAdded == 0) {
             return new CommandResult(String.format(MESSAGE_FAILED, personsFailed));
         } else {
+            model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_SUCCESS, personsAdded)
-                    + String.format(MESSAGE_FAILED, personsFailed));
+                    + " " + String.format(MESSAGE_FAILED, personsFailed));
         }
     }
 
