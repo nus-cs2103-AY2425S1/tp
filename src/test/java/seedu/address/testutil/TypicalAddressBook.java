@@ -49,7 +49,7 @@ public abstract class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with all the typical concerts only.
+     * Returns an {@code AddressBook} with all the typical concertContacts only.
      */
     public static AddressBook getTypicalAddressBookConcertContacts() {
         AddressBook ab = new AddressBook();
