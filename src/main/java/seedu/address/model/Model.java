@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -82,6 +83,13 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Returns the person in the address book with the given name.
+     * @param name The Name to search for
+     * @return An Optional containing the matched person if that person is found, otherwise an empty Optional
+     */
+    Optional<Person> getPerson(Name name);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
@@ -101,4 +109,6 @@ public interface Model {
     float maxScore(String assignment);
     String getAssignmentName(String name);
     boolean hasName(Name name);
+
+    void markPersonPresent(Name name, int week);
 }

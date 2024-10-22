@@ -46,6 +46,8 @@ public class PersonCard extends UiPart<Region> {
     private Label telegram;
     @FXML
     private Label github;
+    @FXML
+    private FlowPane weekLabel;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -73,6 +75,10 @@ public class PersonCard extends UiPart<Region> {
         } else {
             github.setText("GitHub username unspecified");
         }
+
+        person.getWeeksPresent().stream()
+                .sorted(Comparator.comparing(Integer::intValue))
+                .forEach(weekNumber -> weekLabel.getChildren().add(new Label(weekNumber.toString())));
 
     }
 

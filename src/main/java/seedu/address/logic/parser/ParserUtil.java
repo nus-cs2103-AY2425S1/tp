@@ -171,4 +171,27 @@ public class ParserUtil {
         }
         return new Github(trimmedUsername);
     }
+
+    /**
+     * Parses a {@code String week} into an {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code week} is invalid.
+     */
+    public static int parseWeek(String week) throws ParseException {
+        requireNonNull(week);
+        String trimmedWeek = week.trim();
+
+        // Ensure it's a non-negative integer.
+        try {
+            int parsedWeek = Integer.parseInt(trimmedWeek);
+            if (parsedWeek < 0) {
+                throw new ParseException("Week number must be a non-negative integer.");
+            }
+            return parsedWeek;
+        } catch (NumberFormatException e) {
+            throw new ParseException("Invalid week number. It must be a non-negative integer.");
+        }
+    }
+
 }

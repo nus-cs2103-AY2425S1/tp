@@ -19,6 +19,12 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME = "The person name provided is invalid";
+    public static final String MESSAGE_MARK_SUCCESS = "%1$s is marked present for week %2$d";
+    public static final String MESSAGE_INVALID_WEEK = "Invalid week number.";
+    public static final String MESSAGE_MARK_ALREADY_SUCCESS = "Attendance is already marked for this student!";
+    public static final String MESSAGE_UNMARK_ALREADY_SUCCESS = "Attendance is already unmarked for this student";
+    public static final String MESSAGE_UNMARK_SUCCESS = "%1$s is marked as absent for week %2$d";
+
 
     /**
      * Returns an error message indicating the duplicate prefixes.

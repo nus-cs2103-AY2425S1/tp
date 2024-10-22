@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -118,6 +119,17 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public Optional<Person> getPerson(Name name) {
+        for (Person person : addressBook.getPersonList()) {
+            if (person.getName().equals(name)) {
+                return Optional.of(person); // Return the person if found
+            }
+        }
+
+        // Return an empty Optional if the person is not found
+        return Optional.empty();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -169,4 +181,18 @@ public class ModelManager implements Model {
     public boolean hasName(Name name) {
         return addressBook.hasName(name);
     }
+
+    //=========== Marking people present =============================================================
+    @Override
+    public void markPersonPresent(Name name, int week) {
+        for (Person person : filteredPersons) {
+            if (person.getName().fullName.equals(name.fullName)) {
+                person.markWeekPresent(week);
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("Person not found: " + name);
+    }
+
 }
