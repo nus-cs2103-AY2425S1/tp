@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExportCommand.MESSAGE_SUCCESS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_VCF;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +31,8 @@ public class ExportCommandTest {
     @Test
     public void toCsvStringMethod() {
         ExportCommand exportCommand = new ExportCommand(FILE_TYPE_CSV);
-        String expected = "Alice Pauline,94351253,alice@example.com,\"123, Jurong West Ave 6, #08-111\"" +
-            ",\"friends\",\"High profile client, Likes dumplings\"";
+        String expected = "Alice Pauline,94351253,alice@example.com,\"123, Jurong West Ave 6, #08-111\""
+            + ",\"friends\",\"High profile client, Likes dumplings\"";
         assertEquals(expected, exportCommand.toCsvString(ALICE));
     }
 
