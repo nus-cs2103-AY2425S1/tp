@@ -43,7 +43,7 @@ public class JsonAdaptedRemarkList {
         List<Remark> modelRemarks = new ArrayList<>();
         for (String remark : remarks) {
             if (remark == null || remark.trim().isEmpty()) {
-                throw new IllegalValueException("Remark text cannot be empty");
+                throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
             }
             modelRemarks.add(new Remark(remark));
         }
