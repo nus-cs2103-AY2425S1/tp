@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "User Guide"
-    pageNav: 3
+  title: "User Guide"
+  pageNav: 3
 ---
 
 # TutorEase User Guide
@@ -153,17 +153,17 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh`, `David Li.`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `contact delete`
@@ -194,6 +194,29 @@ Format: `lesson delete INDEX`
 Examples:
 
 * `lesson delete 2` deletes the 2nd lesson in the lessons schedule.
+
+### Finding lessons : `lesson find`
+
+Find lessons with students whose names contain any of the specified keywords.
+
+Format: `lesson find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Lessons with students whose names match at least one of the specified keywords will be returned (i.e., 
+  an OR search).
+  e.g. `Hans Bo` will return lessons with `Hans Gruber` if any and `Bo Yang` if any. 
+
+Examples:
+
+* View all lessons using `lesson list` command.<br>
+  !['result before using lesson find'](images/beforeFindLesson.png)
+* `lesson find John` returns `John Doe`'s lessons.<br>
+  ![result for 'lesson find John'](images/findLessonJohnResult.png)
+* `lesson find John Alice` returns lessons with `John Doe` if any and `Alice Tan` if any.<br>
+  ![result for 'lesson find John Alice'](images/findLessonJohnAliceResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -263,5 +286,6 @@ the data of your previous AddressBook home folder.
  **List Contacts**  | `contact list`                                                                                                                                                                
  **Add Lesson**     | `lesson add  sid/STUDENTID d/STARTDATE li/LOCATIONINDEX h/DURATION` <br> e.g., `lesson add sid/1 d/15-10-2024 23:47 li/1 h/1`                                         
  **List Lessons**   | `lesson list`                                                                                                                                                         
- **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`                                                                                                                    
+ **Delete Lessons** | `lesson delete INDEX` <br> e.g., `lesson delete 1`
+ **Find Lessons**   | `lesson find KEYWORD [MORE_KEYWORDS]` <br> e.g., `lesson find John Alice`
  **Help**           | `help`                                                                                                                                                                
