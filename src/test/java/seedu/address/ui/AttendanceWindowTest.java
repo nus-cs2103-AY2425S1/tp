@@ -6,9 +6,9 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.student.Student;
