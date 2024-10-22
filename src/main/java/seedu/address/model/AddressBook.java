@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
@@ -16,7 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    private final ObservableList<OwnedAppointment> appointments = FXCollections.observableArrayList();
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -53,8 +54,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
         setPersons(newData.getPersonList());
+        updateAppointmentList();
     }
 
     //// person-level operations
@@ -82,8 +83,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
+        updateAppointmentList();
     }
 
     /**
@@ -92,8 +93,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+        updateAppointmentList();
     }
 
+    //// appointment-level operations
+    /**
+     * Updates and refreshes the appointment list in the {@code AddressBook}.
+     */
+    public void updateAppointmentList() {
+        appointments.clear();
+        for (Person person : persons) {
+            appointments.addAll(person.getAppointments()
+                                      .stream()
+                                      .map(appt -> new OwnedAppointment(appt, person))
+                                      .toList());
+        }
+    }
     //// util methods
 
     @Override
@@ -126,5 +141,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    public ObservableList<OwnedAppointment> getOwnedAppointmentList() {
+        return appointments;
     }
 }
