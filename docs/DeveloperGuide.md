@@ -158,12 +158,12 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Filter property feature
+### \[Proposed\] Add Buyer Feature
 
 #### Proposed Implementation
-The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
+The addbuyer command takes in the name, phone number, and email address of the buyer and adds the buyer to the client book.
 The sequence diagram is shown as such:
-<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
+<puml src="diagrams/AddBuyerSequenceDiagram.puml" alt="AddBuyer" />
 
 ### \[Proposed\] Delete Buyer Feature
 
@@ -172,12 +172,12 @@ The deletebuyer command takes in the phone number of the buyer and deletes the b
 The sequence diagram is shown as such:
 <puml src="diagrams/DeleteBuyerSequenceDiagram.puml" alt="DeleteBuyer" />
 
-### \[Proposed\] Delete Seller Feature
+### \[Proposed\] Filter property feature
 
 #### Proposed Implementation
-The deleteseller command takes in the phone number of the seller and deletes the seller from the client book based on the phone number.
+The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
 The sequence diagram is shown as such:
-<puml src="diagrams/DeleteSellerSequenceDiagram.puml" alt="DeleteSeller" />
+<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
 
 ### \[Proposed\] Undo/redo feature
 
