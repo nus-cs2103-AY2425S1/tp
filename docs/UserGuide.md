@@ -7,39 +7,64 @@
 
 # InvenTrack User Guide
 
-InvenTrack is a desktop app for managing convenience store inventory, optimized for use via a Line Interface (CLI) while still offering the benefits of a Graphical User Interface (GUI).
+InvenTrack is a simple desktop app designed to help you manage the products and suppliers for your convenience store. The app is fast and easy to use, especially if you’re comfortable typing.
 
-This project is designed for convenience store inventory managers, allowing users to:
+With InvenTrack, you can:
 
-- Add products and suppliers to the inventory
-- Assign products to supplier
-- Update and Track stock levels of products
+- Add products and suppliers to your inventory system.
+- Easily keep track of which suppliers provide which products.
+- Monitor stock levels and get alerts when a product is running low.
 
 InvenTrack simulates an ongoing software project for a desktop application dedicated to managing suppliers, product, and stock details within a convenience store setting. It is developed using object-oriented programming (OOP) principles, providing a robust and maintainable code base. The application also includes comprehensive user and developer documentation for ease of use and understanding.
-
 
 <!-- * Table of Contents -->
 <page-nav-print />
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Getting Started
+### Step 1: Install Java
+Before you can use InvenTrack, ensure you have Java `17` or above installed in your Computer.
+- To check if Java is installed:
+  1. Open a command terminal (Command Prompt on Windows, Terminal on macOS/Linux).
+  2. Type the following command and press Enter:
+    ```
+    java -version
+    ```
+     If Java is installed, you should see the version number. If Java is not installed, download it from the [official website](https://www.oracle.com/java/technologies/downloads/#java17?er=221886).
 
-1. Ensure you have Java `17` or above installed in your Computer.
+### Step 2: Download InvenTrack
+1. Get the latest version of InvenTrack by downloading the `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Move the .jar file into the folder where you want to store your InvenTrack data (this will be your "home folder").
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+### Step 3: Navigate to the Folder
+To run InvenTrack, you need to open your command terminal and navigate to the folder where you saved the .jar file:
+1. Open a terminal (Command Prompt on Windows or Terminal on macOS/Linux).
+2. Use the `cd` command to change to the folder containing the `.jar` file. For example:
+   - On **Windows:**
+     ```
+     cd Desktop\InvenTrack
+     ```
+   - On **macOS/Linux:**
+     ```
+     cd ~/Desktop/InvenTrack
+     ```
+   Verify that your terminal is now pointing to the correct directory. The terminal prompt should show the folder name `(e.g. InvenTrack)`
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
-
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+### Step 4: Run the Application
+To launch the application:
+1. In the terminal, type the following command and press Enter:
+    ```
+    java -jar addressbook.jar
+    ```
+2. After a few seconds, the InvenTrack application should open. A window similar to the one below should appear (note that some sample data may be pre-loaded in the app):
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
+### Step 5: Start Using InvenTrack
+You can now start using the application by typing commands into the command box. For example:
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a supplier named `John Doe` to the InvenTrack.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -47,7 +72,7 @@ InvenTrack simulates an ongoing software project for a desktop application dedic
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -126,6 +151,65 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st supplier to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd supplier to be `Betsy Crower` and clears all existing tags.
 
+### Deleting a supplier : `delete`
+Deletes the specified supplier from the address book.
+
+Format: `delete INDEX`
+
+* Deletes the supplier at the specified `INDEX`.
+* The index refers to the index number shown in the displayed supplier list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd supplier in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st supplier in the results of the `find` command.
+
+### Adding a product : `ADD_PRODUCT`
+
+Add a product.
+
+Format: `ADD_PRODUCT n/NAME [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
+
+### Assigning a product to supplier: `ASSIGN`
+The **Assign** feature allows you to connect products with their current supplier. This makes it easier to track which supplier is responsible for each product in your store.
+
+Format: `ASSIGN pr/PRODUCT_NAME su/SUPPLIER_NAME`
+
+Example Commands:
+- `ASSIGN Tissue Paper Jacob Smith` assigns product named `Tissue paper` to supplier named `Jacob Smith`
+
+> **Important**:  
+> The product and supplier must already exist in the system before you can assign them.  
+> Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
+
+> **Note:**
+> If product has already been assigned to supplier, the system will notify you.
+
+### Un-assigning a product to supplier: `ASSIGN`
+Allows the user to remove or "unassign" products from their current supplier, useful if the store manager decides to stop sourcing a particular product from a supplier or switch to a new one.
+
+Format: `UNASSIGN pr/PRODUCT_NAME su/SUPPLIER_NAME`
+
+Example Commands:
+- `UNASSIGN Tissue Paper Jacob Smith` Unassigns product named `Tissue paper` to supplier named `Jacob Smith`
+
+> **Important**:  
+> The product and supplier must already exist in the system before you can assign them.  
+> Make sure the product was created using the `NEW_PRODUCT` command and the supplier was created using the `NEW_SUPPLIER` command.
+
+> **Note:**
+> If product was not assigned to supplier, the system will notify you.
+
+### Setting threshold for a product: `threshold`
+
+Updates the minimum stock level for a product.
+
+Format: `threshold pr/PRODUCT_NAME stk/STOCK_LEVEL`
+
+Examples:
+* `threshold pr/sweater stk/1000`
+* `threshold apr/chocolates stk/2623900`
+
 ### Locating suppliers and products by name: `view`
 
 Finds suppliers or products whose names contain any of the given keywords.
@@ -144,30 +228,6 @@ Examples:
 * `VIEW_SUPPLIER Smith`
 * `VIEW_PRODUCT Chocolate`
 
-### Deleting a supplier : `delete`
-Deletes the specified supplier from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the supplier at the specified `INDEX`.
-* The index refers to the index number shown in the displayed supplier list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd supplier in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st supplier in the results of the `find` command.
-
-### Setting threshold for a product: `threshold`
-
-Updates the minimum stock level for a product.
-
-Format: `threshold pr/PRODUCT_NAME stk/STOCK_LEVEL`
-
-Examples:
-* `threshold pr/sweater stk/1000`
-* `threshold apr/chocolates stk/2623900`
-
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -179,12 +239,6 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
-
-### Adding a product : `ADD_PRODUCT`
-
-Add a product.
-
-Format: `ADD_PRODUCT [n/NAME] [st/STOCK_LEVEL] [su/SUPPLIER_NAME] [t/TAG]…`
 
 ### Saving the data
 
