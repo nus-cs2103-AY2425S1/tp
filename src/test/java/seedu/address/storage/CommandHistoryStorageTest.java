@@ -19,7 +19,7 @@ public class CommandHistoryStorageTest {
     @BeforeEach
     void setUp() throws IOException {
         Files.createDirectories(TEST_DATA_FOLDER);
-        testFilePath = TEST_DATA_FOLDER.resolve("commandHistory.txt");
+        testFilePath = TEST_DATA_FOLDER.resolve("commandHistoryTest.txt");
         commandHistoryStorage = new CommandHistoryStorage();
         commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
     }
@@ -86,6 +86,18 @@ public class CommandHistoryStorageTest {
         nextCommand = commandHistoryStorage.getNextCommand();
         assertEquals("cdelete 1", nextCommand);
         clearFile();
+    }
+
+    @Test
+    void testGetNextCommand_empty() {
+        String nextCommand = commandHistoryStorage.getNextCommand();
+        assertEquals("", nextCommand);
+    }
+
+    @Test
+    void testGetPrevCommand_empty() {
+        String prevCommand = commandHistoryStorage.getPreviousCommand();
+        assertEquals("", prevCommand);
     }
 
     @Test

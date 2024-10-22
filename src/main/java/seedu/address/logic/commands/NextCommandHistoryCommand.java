@@ -21,4 +21,19 @@ public class NextCommandHistoryCommand extends Command {
         String nextCommand = model.getNextCommand();
         return new CommandResult(nextCommand);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        NextCommandHistoryCommand that = (NextCommandHistoryCommand) o;
+
+        return true;
+    }
 }

@@ -1,15 +1,11 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -18,80 +14,44 @@ import org.junit.jupiter.api.Test;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.rentalinformation.RentalInformation;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.storage.CommandHistoryStorage;
 
-public class AddClientCommandTest {
-
-    @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddClientCommand(null));
-    }
+public class PreviousCommandHistoryCommandTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CommandHistoryTest");
+    private static final Path testFilePath =
+            TEST_DATA_FOLDER.resolve("commandHistoryTest.txt");;
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Client validClient = new PersonBuilder().build();
+    public void execute_previousCommandInHistory_success() throws CommandException, IOException {
+        CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
+        commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
+        System.out.println("PATH IS: " + testFilePath);
+        CommandHistoryStorage.writeToFile("MOCK TEST 1");
+        ModelStub modelStub = new ModelStub();
 
-        CommandResult commandResult = new AddClientCommand(validClient).execute(modelStub);
-
-        assertEquals(String.format(AddClientCommand.MESSAGE_SUCCESS, Messages.format(validClient)),
-                commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validClient), modelStub.personsAdded);
+        PreviousCommandHistoryCommand previousCommandHistoryCommand = new PreviousCommandHistoryCommand();
+        CommandResult commandResult = previousCommandHistoryCommand.execute(modelStub);
+        assertEquals("MOCK TEST 1", commandResult.getFeedbackToUser());
     }
 
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Client validClient = new PersonBuilder().build();
-        AddClientCommand addClientCommand = new AddClientCommand(validClient);
-        ModelStub modelStub = new ModelStubWithPerson(validClient);
-
-        assertThrows(CommandException.class,
-                AddClientCommand.MESSAGE_DUPLICATE_PERSON, () -> addClientCommand.execute(modelStub));
-    }
-
-    @Test
-    public void equals() {
-        Client alice = new PersonBuilder().withName("Alice").build();
-        Client bob = new PersonBuilder().withName("Bob").build();
-        AddClientCommand addAliceCommand = new AddClientCommand(alice);
-        AddClientCommand addBobCommand = new AddClientCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddClientCommand addAliceCommandCopy = new AddClientCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different client -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void toStringMethod() {
-        AddClientCommand addClientCommand = new AddClientCommand(ALICE);
-        String expected = AddClientCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
-        assertEquals(expected, addClientCommand.toString());
-    }
-
-    /**
-     * A default model stub that have all of the methods failing.
-     */
     private class ModelStub implements Model {
+        private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "CommandHistoryTest");
+        private static Path testFilePath;
+        private CommandHistoryStorage commandHistoryStorage;
+
+        public ModelStub() throws IOException {
+            Files.createDirectories(TEST_DATA_FOLDER);
+            testFilePath = TEST_DATA_FOLDER.resolve("commandHistoryTest.txt");
+            commandHistoryStorage = new CommandHistoryStorage();
+            commandHistoryStorage.setCommandHistoryFilePath(testFilePath);
+        }
+
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -190,56 +150,13 @@ public class AddClientCommandTest {
         public void setLastViewedClient(Client client) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public String getPreviousCommand() {
-            return null;
+            return commandHistoryStorage.getPreviousCommand();
         }
         @Override
         public String getNextCommand() {
-            return null;
-        }
-    }
-
-    /**
-     * A Model stub that contains a single client.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Client client;
-
-        ModelStubWithPerson(Client client) {
-            requireNonNull(client);
-            this.client = client;
-        }
-
-        @Override
-        public boolean hasPerson(Client client) {
-            requireNonNull(client);
-            return this.client.isSamePerson(client);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the client being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Client> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Client client) {
-            requireNonNull(client);
-            return personsAdded.stream().anyMatch(client::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Client client) {
-            requireNonNull(client);
-            personsAdded.add(client);
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return commandHistoryStorage.getNextCommand();
         }
     }
 
