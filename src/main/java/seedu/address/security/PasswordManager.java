@@ -6,15 +6,11 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.attribute.PosixFilePermission;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
-import java.util.HashSet;
-import java.util.Set;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
@@ -56,14 +52,13 @@ public class PasswordManager {
     public static void savePassword(String password) {
         try {
             File file = new File(PASSWORD_FILE);
+            // Create a new file if it doesn't exist
             if (file.createNewFile()) {
-                // Set file permissions to read/write for the owner only
-                Set<PosixFilePermission> perms = new HashSet<>();
-                perms.add(PosixFilePermission.OWNER_READ);
-                perms.add(PosixFilePermission.OWNER_WRITE);
-                Files.setPosixFilePermissions(file.toPath(), perms);
+                // Optionally log that a new file was created
+                System.out.println("Created new password file: " + PASSWORD_FILE);
             }
 
+            // Write the hashed password to the file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 writer.write(hashPassword(password, generateSalt()));
             }
@@ -71,6 +66,7 @@ public class PasswordManager {
             e.printStackTrace();
         }
     }
+
 
     /**
      * Verifies if the provided password matches the stored hashed password.
