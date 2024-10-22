@@ -69,9 +69,9 @@ public class AddToConsultCommand extends Command {
     }
 
     /**
-     * Returns Command Type ADDSTUDENT
+     * Returns Command Type ADDTOCONSULT
      *
-     * @return Command Type ADDSTUDENT
+     * @return Command Type ADDTOCONSULT
      */
     @Override
     public CommandType getCommandType() {
