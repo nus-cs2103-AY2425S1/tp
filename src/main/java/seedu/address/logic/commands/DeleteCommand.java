@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
         model.deletePerson(personToDelete);
         model.getFocusedPerson().set(null);
         CommandResult commandResult = new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-                Messages.formatShort(personToDelete)), false, false, true);
+                Messages.formatShort(personToDelete)), false, false);
         System.out.println(commandResult.getFeedbackToUser());
         return commandResult;
     }

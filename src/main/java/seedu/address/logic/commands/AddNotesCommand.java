@@ -77,7 +77,7 @@ public class AddNotesCommand extends Command {
         model.getFocusedPerson().set(editedPerson);
 
         return new CommandResult(String.format(generateSuccessMessage(editedPerson), index.getOneBased()),
-                false, false, true);
+                false, false);
     }
 
     /**
