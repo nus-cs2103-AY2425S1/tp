@@ -69,8 +69,14 @@ tasks.register('uiTest', Test) {
 }
 
 jacocoTestReport {
-    dependsOn test, uiTest
-
+    dependsOn test
+    
+    def disallowedOS = ['ubuntu', 'nux']
+    def os = System.getProperty("os.name").toLowerCase()
+    def isAllowed = disallowedOS.every { !os.contains(it) }
+    if (isAllowed) {
+        dependsOn uiTest
+    }
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
