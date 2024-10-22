@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.Undoable;
 import seedu.address.model.person.Person;
 
 /**
@@ -89,4 +91,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Pushes an undoable command to the undo stack.
+     */
+    void pushUndoableCommand(Undoable command);
+
+    /**
+     * Undoes the previous undoable command.
+     */
+    CommandResult undo();
 }

@@ -175,6 +175,16 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void pushUndoableCommand(Undoable command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public CommandResult undo() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

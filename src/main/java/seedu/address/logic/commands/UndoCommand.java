@@ -11,15 +11,20 @@ import seedu.address.model.Model;
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
-    public static final String MESSAGE_SUCCESS = "Undo successful: ";
+    public static final String MESSAGE_SUCCESS = "Undo successful - ";
     public static final String MESSAGE_NO_COMMANDS = "No commands to undo";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         assert !isExecuted : "This command has already been executed";
         requireNonNull(model);
-        //model.undo();
+        CommandResult undoResult = model.undo();
+
+        if (undoResult == null) {
+            throw new CommandException(MESSAGE_NO_COMMANDS);
+        }
+
         isExecuted = true;
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + undoResult.getFeedbackToUser());
     }
 }
