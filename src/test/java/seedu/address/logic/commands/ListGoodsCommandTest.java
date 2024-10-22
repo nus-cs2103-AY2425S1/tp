@@ -14,8 +14,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsReceipt.CategoryPredicate;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.CategoryPredicate;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 /**
  * Contains integration tests for {@code ListGoodsCommand}

@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import seedu.address.model.goods.Goods;
 import seedu.address.model.goods.GoodsCategories;
 import seedu.address.model.goods.GoodsName;
-import seedu.address.model.goodsReceipt.Date;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.Date;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Name;
 
 /**
