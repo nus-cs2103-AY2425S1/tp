@@ -148,7 +148,7 @@ public class Person {
     }
 
     /**
-     * Returns true if this person has an emtpy {@code ModuleRoleMap}.
+     * Returns true if this person has an empty {@code ModuleRoleMap}.
      */
     public boolean hasEmptyModuleRoleMap() {
         return this.moduleRoleMap.getRoles().isEmpty();

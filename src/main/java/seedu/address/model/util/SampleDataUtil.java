@@ -26,7 +26,7 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 Optional.of(new Address("Blk 30 Geylang Street 29, #06-40")),
-                getTagSet("friends"), getMap("CS1231S", RoleType.STUDENT)),
+                getTagSet("friends"), getMap("CS2040S", RoleType.PROFESSOR)),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 Optional.of(new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18")),
                 getTagSet("colleagues", "friends"), getEmptyMap()),
@@ -38,7 +38,7 @@ public class SampleDataUtil {
                 getTagSet("family"), getEmptyMap()),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 Optional.of(new Address("Blk 47 Tampines Street 20, #17-35")),
-                getTagSet("classmates"), getMap("CS1522", RoleType.TUTOR)),
+                getTagSet("classmates"), getMap("MA1522", RoleType.TUTOR)),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 Optional.of(new Address("Blk 45 Aljunied Street 85, #11-31")),
                 getTagSet("colleagues"), getMultipleRolesMap())
@@ -79,7 +79,7 @@ public class SampleDataUtil {
         HashMap<ModuleCode, RoleType> hashMap = new HashMap<>();
         hashMap.put(new ModuleCode("CS2103T"), RoleType.STUDENT);
         hashMap.put(new ModuleCode("CS1101S"), RoleType.TUTOR);
-        hashMap.put(new ModuleCode("CS1521"), RoleType.STUDENT);
+        hashMap.put(new ModuleCode("MA1521"), RoleType.STUDENT);
         ModuleRoleMap map = new ModuleRoleMap(hashMap);
         return map;
     }
