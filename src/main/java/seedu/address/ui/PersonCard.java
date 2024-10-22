@@ -55,13 +55,23 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.hasAddress() ? person.getAddress().get().value : "");
-        email.setText(person.hasEmail() ? person.getEmail().get().value : "");
+        if (person.hasAddress()) {
+            address.setText(person.getAddress().get().value);
+        } else {
+            address.setText("");
+            address.setManaged(false);
+        }
+        if (person.hasEmail()) {
+            email.setText(person.getEmail().get().value);
+        } else {
+            email.setText("");
+            email.setManaged(false);
+        }
         person.getTags().stream().sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        dateOfLastVisit.setText(person.hasDateOfLastVisit()
-                ? "Date last visited: " + person.getDateOfLastVisit().get().value
-                : "");
+        dateOfLastVisit.setText(
+                person.hasDateOfLastVisit() ? "Date last visited: " + person.getDateOfLastVisit().get().value
+                        : "");
         emergencyContact.setText(person.hasEmergencyContact()
                 ? "Emergency Contact: " + person.getEmergencyContact().get().value
                 : "");
