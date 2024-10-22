@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -94,7 +93,6 @@ public class ContactDetails extends UiPart<Region> {
 
                 int[] index = {1};
                 person.getNotes().stream()
-                        .sorted(Comparator.comparing(note -> note.getNote()))
                         .forEach(note -> {
                             Label label = new Label(index[0] + ". " + note.getNote());
                             label.setId("notes-label");
