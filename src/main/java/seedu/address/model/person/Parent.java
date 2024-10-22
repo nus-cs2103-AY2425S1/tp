@@ -12,11 +12,17 @@ import seedu.address.model.tag.Tag;
 public class Parent extends Person {
     private Student child = null;
 
+    /**
+     * Constructs a {@code Parent} with the given details.
+     */
     public Parent(Name name, Phone phone, Email email, Address address, Student child, Set<Tag> tags) {
         super(name, phone, email, address, tags);
         this.child = child;
     }
 
+    /**
+     * Constructs a {@code Parent} with the given {@code Person} as a base.
+     */
     public Parent(Person person, Student child) {
         super(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(), person.getTags());
         this.child = child;
