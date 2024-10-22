@@ -36,6 +36,7 @@ MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appo
 
 1. Refer to the [Features](#features) below for details of each command.
 
+[Back to Table of Contents](#table-of-contents)
 ## Features
 
 ### Parameter Details

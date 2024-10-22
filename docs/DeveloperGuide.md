@@ -2,31 +2,28 @@
 layout: page
 title: Developer Guide
 ---
+
+## Table of Contents
+
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Design**
 
 {: .alert .alert-primary}
-
-
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
-
+[Back to Table of Contents](#table-of-contents)
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
@@ -67,6 +64,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+[Back to Table of Contents](#table-of-contents)
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
@@ -84,6 +82,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
+[Back to Table of Contents](#table-of-contents)
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -116,6 +115,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+[Back to Table of Contents](#table-of-contents)
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -134,9 +134,7 @@ The `Model` component,
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
-
-
-
+[Back to Table of Contents](#table-of-contents)
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -148,18 +146,19 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
+[Back to Table of Contents](#table-of-contents)
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
 ### \[Proposed\] Undo/redo feature
 
+[Back to Table of Contents](#table-of-contents)
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
@@ -231,6 +230,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+[Back to Table of Contents](#table-of-contents)
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -246,13 +246,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+[Back to Table of Contents](#table-of-contents)
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -261,8 +261,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## **Appendix: Requirements**
 
 ### Product scope
@@ -279,25 +278,27 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: manage patients and appointments faster than a typical mouse/GUI driven app
 
 
+[Back to Table of Contents](#table-of-contents)
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​               | I want to …​ | So that I can…​         |
-|----------|-----------------------| - |-------------------------|
-| `* * *`  | time-sensitive doctor |have relevant contacts ready at fingertips | no time is wasted tending to a patient's urgent needs |
-| `* * *`  | organised doctor      | able to add new contacts | keep track of my patients' details |
-| `* * *`  | busy doctor           | search for a patient by name | quickly access their records |
-| `* * *`  | doctor                | schedule an appointment with a patient | manage their daily workload effectively |
-| `* * *`  | doctor                | delete outdated or incorrect records | keep the database clean and organised |
-| `* *`    | doctor                | view all my appointments  | know the appointments I have on a certain day |
-| `* *`    | meticulous doctor     | assign a specific condition to a patient | locate a person easily  |
-| `*`      | focused doctor        | want to search patients by medical condition | focus on those with similar treatment plans |
-| `*`      | doctor                | assign a priority level to a patient | manage urgent cases effectively |
-| `*`      | doctor                | update the contact information of a patient | maintain accurate records |
-| `*`      | busy doctor           | view all my urgent cases | attend to those with urgent needs first |
-| `*`      | doctor           | see a patient’s allergy information | avoid prescribing harmful medications |
+| Priority | As a …​               | I want to …​                                 | So that I can…​                                       |
+|----------|-----------------------|----------------------------------------------|-------------------------------------------------------|
+| `* * *`  | time-sensitive doctor | have relevant contacts ready at fingertips   | no time is wasted tending to a patient's urgent needs |
+| `* * *`  | organised doctor      | able to add new contacts                     | keep track of my patients' details                    |
+| `* * *`  | busy doctor           | search for a patient by name                 | quickly access their records                          |
+| `* * *`  | doctor                | schedule an appointment with a patient       | manage their daily workload effectively               |
+| `* * *`  | doctor                | delete outdated or incorrect records         | keep the database clean and organised                 |
+| `* *`    | doctor                | view all my appointments                     | know the appointments I have on a certain day         |
+| `* *`    | meticulous doctor     | assign a specific condition to a patient     | locate a person easily                                |
+| `*`      | focused doctor        | want to search patients by medical condition | focus on those with similar treatment plans           |
+| `*`      | doctor                | assign a priority level to a patient         | manage urgent cases effectively                       |
+| `*`      | doctor                | update the contact information of a patient  | maintain accurate records                             |
+| `*`      | busy doctor           | view all my urgent cases                     | attend to those with urgent needs first               |
+| `*`      | doctor                | see a patient’s allergy information          | avoid prescribing harmful medications                 |
 
+[Back to Table of Contents](#table-of-contents)
 ### Use cases
 
 (For all use cases below, the **System** is the `Medibase 3` and the **Actor** is the `user`, unless specified otherwise)
@@ -497,6 +498,7 @@ Use case ends.
 Use case ends.
 
 
+[Back to Table of Contents](#table-of-contents)
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
@@ -507,6 +509,7 @@ Use case ends.
 6. Data stored locally should be encrypted and only accessible via the app with correct authentication.
 
 
+[Back to Table of Contents](#table-of-contents)
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
@@ -533,18 +536,17 @@ Use case ends.
 
 * **Search by Condition**: A feature that allows users to filter and display patients based on specific medical conditions.
 
---------------------------------------------------------------------------------------------------------------------
 
+[Back to Table of Contents](#table-of-contents)
 ## **Appendix: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
 {: .alert .alert-info}
-:information_source: **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
+> :information_source: **Note:** These instructions only provide a starting point for testers to work on;
+> testers are expected to do more *exploratory* testing.
 
-
-
+[Back to Table of Contents](#table-of-contents)
 ### Launch and shutdown
 
 1. Initial launch
@@ -562,6 +564,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+[Back to Table of Contents](#table-of-contents)
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -579,6 +582,7 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+[Back to Table of Contents](#table-of-contents)
 ### Saving data
 
 1. Dealing with missing/corrupted data files
@@ -586,3 +590,6 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+   
+
+[Back to Table of Contents](#table-of-contents)

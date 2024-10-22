@@ -3,10 +3,10 @@ layout: page
 title: DevOps guide
 ---
 
+## Table of Contents
+
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Build automation
 
@@ -14,7 +14,6 @@ This project uses Gradle for **build automation and dependency management**. **Y
 
 
 Given below are how to use Gradle for some important project tasks.
-
 
 * **`clean`**: Deletes the files created during the previous build tasks (e.g. files in the `build` folder).<br>
   e.g. `./gradlew clean`
@@ -32,8 +31,8 @@ Given below are how to use Gradle for some important project tasks.
   * `./gradlew test` — Runs all tests
   * `./gradlew clean test` — Cleans the project and runs tests
 
---------------------------------------------------------------------------------------------------------------------
 
+[Back to Table of Contents](#table-of-contents)
 ## Continuous integration (CI)
 
 This project uses GitHub Actions for CI. The project comes with the necessary GitHub Actions configurations files (in the `.github/workflows` folder). No further setting up required.
@@ -46,6 +45,7 @@ However, because Codecov is known to run into intermittent problems (e.g., repor
 
 To enable Codecov for forks of this project, follow the steps given in [this se-edu guide](https://se-education.org/guides/tutorials/codecov.html).
 
+[Back to Table of Contents](#table-of-contents)
 ### Repository-wide checks
 
 In addition to running Gradle checks, CI includes some repository-wide checks. Unlike the Gradle checks which only cover files used in the build process, these repository-wide checks cover all files in the repository. They check for repository rules which are hard to enforce on development machines such as line ending requirements.
@@ -67,8 +67,7 @@ Any warnings or errors will be printed out to the console.
 
 * Check scripts must exit with a non-zero exit code if any errors occur.
 
---------------------------------------------------------------------------------------------------------------------
-
+[Back to Table of Contents](#table-of-contents)
 ## Making a release
 
 Here are the steps to create a new release.
@@ -77,3 +76,5 @@ Here are the steps to create a new release.
 1. Generate a fat JAR file using Gradle (i.e., `gradlew shadowJar`).
 1. Tag the repo with the version number. e.g. `v0.1`
 1. [Create a new release using GitHub](https://help.github.com/articles/creating-releases/). Upload the JAR file you created.
+
+[Back to Table of Contents](#table-of-contents)

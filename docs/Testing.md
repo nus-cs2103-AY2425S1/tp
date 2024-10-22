@@ -3,10 +3,10 @@ layout: page
 title: Testing guide
 ---
 
+## Table of Contents
+
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Running tests
 
@@ -23,9 +23,6 @@ There are two ways to run tests.
 :link: **Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
 
 [Back to Table of Contents](#table-of-contents)
-
---------------------------------------------------------------------------------------------------------------------
-
 ## Types of tests
 
 This project has three types of tests:

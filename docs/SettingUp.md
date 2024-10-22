@@ -3,18 +3,17 @@ layout: page
 title: Setting up and getting started
 ---
 
+## Table of Contents
+
 * Table of Contents
 {:toc}
-
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Setting up the project in your computer
 
 {: .alert .alert-warning}
-:exclamation: **Caution:**
-
-Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
+> :exclamation: **Caution:**
+> 
+> Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
 
 
 First, **fork** this repo, and **clone** the fork into your computer.
@@ -27,7 +26,7 @@ If you plan to use Intellij IDEA (highly recommended):
    1. Run the `seedu.address.Main` and try a few commands.
    1. [Run the tests](Testing.md) to ensure they all pass.
 
---------------------------------------------------------------------------------------------------------------------
+[Back to Table of Contents](#table-of-contents)
 
 ## Before writing code
 
@@ -36,9 +35,9 @@ If you plan to use Intellij IDEA (highly recommended):
    If using IDEA, follow the guide [_[se-edu/guides] IDEA: Configuring the code style_](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up IDEA's coding style to match ours.
 
    {: .alert .alert-primary}
-:bulb: **Tip:**
-
-   Optionally, you can follow the guide [_[se-edu/guides] Using Checkstyle_](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems _as_ you write code.
+   > :bulb: **Tip:**
+   > 
+   >    Optionally, you can follow the guide [_[se-edu/guides] Using Checkstyle_](https://se-education.org/guides/tutorials/checkstyle.html) to find how to use the CheckStyle within IDEA e.g., to report problems _as_ you write code.
    
 
 1. **Set up CI**
@@ -55,3 +54,5 @@ If you plan to use Intellij IDEA (highly recommended):
    * [Tracing code](tutorials/TracingCode.md)
    * [Adding a new command](tutorials/AddRemark.md)
    * [Removing fields](tutorials/RemovingFields.md)
+     
+[Back to Table of Contents](#table-of-contents)

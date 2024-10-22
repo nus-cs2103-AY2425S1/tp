@@ -5,11 +5,9 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](https://www.comp.nus.edu.sg).
 
-You can reach us at the email `e1121292@u.nus.edu`
+You can reach us at the email <e1121292@u.nus.edu>
 
 ## Project team
-
-
 
 ### Presley Chew
 
@@ -65,4 +63,4 @@ You can reach us at the email `e1121292@u.nus.edu`
 
 * Role: Developer
 * Responsibilities: Anything and Everything
-
+* About me: I am a Year 2 Computer Science and Linguistics student, somehow still alive.
