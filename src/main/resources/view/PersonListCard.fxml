@@ -31,8 +31,8 @@
       <FlowPane fx:id="lessons" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
       <Label fx:id="telegram" styleClass="cell_small_label" text="\$telegram" managed="${telegram.visible}" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" managed ="${address.visible}" />
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" managed ="${email.visible}" />
       <VBox fx:id="remarks" spacing="5">
       </VBox>
     </VBox>

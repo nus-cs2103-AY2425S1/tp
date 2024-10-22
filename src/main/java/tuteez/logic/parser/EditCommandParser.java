@@ -19,6 +19,8 @@ import tuteez.commons.core.index.Index;
 import tuteez.logic.commands.EditCommand;
 import tuteez.logic.commands.EditCommand.EditPersonDescriptor;
 import tuteez.logic.parser.exceptions.ParseException;
+import tuteez.model.person.Address;
+import tuteez.model.person.Email;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
 import tuteez.model.tag.Tag;
@@ -59,10 +61,14 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            String email = argMultimap.getValue(PREFIX_EMAIL).get();
+            setEditedEmail(editPersonDescriptor, email);
+//            editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            String address = argMultimap.getValue(PREFIX_ADDRESS).get();
+            setEditedAddress(editPersonDescriptor, address);
+//            editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_TELEGRAM).isPresent()) {
             String telegramUsername = argMultimap.getValue(PREFIX_TELEGRAM).get();
@@ -76,6 +82,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
+    }
+
+    private void setEditedEmail(EditPersonDescriptor editPersonDescriptor, String email) throws ParseException {
+        if (email.isEmpty()) {
+            editPersonDescriptor.setEmail(new Email(null));
+        } else {
+            editPersonDescriptor.setEmail(ParserUtil.parseEmail(email));
+        }
+    }
+
+    private void setEditedAddress(EditPersonDescriptor editPersonDescriptor, String address) throws ParseException {
+        if (address.isEmpty()) {
+            editPersonDescriptor.setAddress(new Address(null));
+        } else {
+            editPersonDescriptor.setAddress(ParserUtil.parseAddress(address));
+        }
     }
 
     private void setEditedTelegramUsername(EditPersonDescriptor editPersonDescriptor, String telegramUsername)

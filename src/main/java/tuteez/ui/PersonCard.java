@@ -12,7 +12,7 @@ import tuteez.model.person.Person;
 import tuteez.model.person.TelegramUsername;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * A UI component that displays information of a {@code Person}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -59,8 +59,8 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         setTelegramUsernameText(person);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        setAddressText(person);
+        setEmailText(person);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -70,6 +70,24 @@ public class PersonCard extends UiPart<Region> {
 
         person.getLessons().stream()
                 .forEach(lesson -> lessons.getChildren().add(new Label(lesson.dayAndTime)));
+    }
+
+    private void setAddressText(Person person) {
+        if (person.getAddress().value != null) {
+            address.setText(person.getAddress().value);
+            address.setVisible(true);
+        } else {
+            address.setVisible(false);
+        }
+    }
+
+    private void setEmailText(Person person) {
+        if (person.getEmail().value != null) {
+            email.setText(person.getEmail().value);
+            email.setVisible(true);
+        } else {
+            email.setVisible(false);
+        }
     }
 
     private void setTelegramUsernameText(Person person) {

@@ -5,7 +5,6 @@ import static tuteez.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static tuteez.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static tuteez.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static tuteez.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_LESSON_DESC;
 import static tuteez.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -63,6 +62,10 @@ public class EditCommandParserTest {
 
     private static final String TELEGRAM_EMPTY = " " + PREFIX_TELEGRAM;
 
+    private static final String EMAIL_EMPTY = " " + PREFIX_EMAIL;
+
+    private static final String ADDRESS_EMPTY = " " + PREFIX_ADDRESS;
+
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
 
@@ -100,7 +103,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
         // invalid telegram below
         assertParseFailure(parser, "1" + INVALID_TELEGRAM_DESC, TelegramUsername.MESSAGE_CONSTRAINTS);
@@ -214,7 +217,7 @@ public class EditCommandParserTest {
 
         assertParseFailure(parser, userInput, Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE));
 
-        // mulltiple valid fields repeated
+        // multiple valid fields repeated
         userInput = targetIndex.getOneBased() + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY
                 + TAG_DESC_FRIEND + PHONE_DESC_AMY + ADDRESS_DESC_AMY + EMAIL_DESC_AMY + TAG_DESC_FRIEND
                 + PHONE_DESC_BOB + ADDRESS_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_HUSBAND + LESSON_DESC_MON
@@ -225,13 +228,12 @@ public class EditCommandParserTest {
                         PREFIX_TELEGRAM));
 
         // multiple invalid values
-        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC
-                + INVALID_PHONE_DESC + INVALID_ADDRESS_DESC + INVALID_EMAIL_DESC + INVALID_LESSON_DESC
+        userInput = targetIndex.getOneBased() + INVALID_PHONE_DESC + INVALID_EMAIL_DESC
+                + INVALID_PHONE_DESC + INVALID_EMAIL_DESC + INVALID_LESSON_DESC
                 + INVALID_TELEGRAM_DESC + INVALID_TELEGRAM_DESC;
 
         assertParseFailure(parser, userInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_TELEGRAM));
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_PHONE, PREFIX_EMAIL, PREFIX_TELEGRAM));
     }
 
     @Test
@@ -262,6 +264,28 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + TELEGRAM_EMPTY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTelegram(null).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_deleteEmail_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + EMAIL_EMPTY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withEmail(null).build();
+        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_deleteAddress_success() {
+        Index targetIndex = INDEX_THIRD_PERSON;
+        String userInput = targetIndex.getOneBased() + ADDRESS_EMPTY;
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAddress(null).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

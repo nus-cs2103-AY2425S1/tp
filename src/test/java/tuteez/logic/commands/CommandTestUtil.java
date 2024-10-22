@@ -59,7 +59,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James*"; // '*' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    // empty string not allowed for addresses, only while adding, but not editing.
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS;
     public static final String INVALID_TELEGRAM_DESC = " " + PREFIX_TELEGRAM + "amybee!"; // '!' not allowed in username
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_LESSON_DESC = " " + PREFIX_LESSON + "monday 10:1100";

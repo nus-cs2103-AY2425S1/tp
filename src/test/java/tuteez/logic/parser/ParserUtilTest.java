@@ -113,8 +113,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+    public void parseAddress_null_returnsEmptyAddress() throws ParseException {
+        assertEquals(new Address(null), ParserUtil.parseAddress(null));
     }
 
     @Test
@@ -136,8 +136,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseEmail_null_returnsEmptyEmail() throws ParseException {
+        assertEquals(new Email(null), ParserUtil.parseEmail(null));
     }
 
     @Test

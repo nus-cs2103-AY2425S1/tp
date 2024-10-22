@@ -9,7 +9,8 @@ import static tuteez.commons.util.AppUtil.checkArgument;
  */
 public class Address {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank"
+            + ", unless when editing.";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -25,8 +26,11 @@ public class Address {
      * @param address A valid address.
      */
     public Address(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        // address argument can be null to make it optional
+        if (address != null) {
+            requireNonNull(address);
+            checkArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        }
         value = address;
     }
 
@@ -34,11 +38,17 @@ public class Address {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
+        if (test == null) {
+            return true;
+        }
         return test.matches(VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
+        if (value == null) {
+            return "";
+        }
         return value;
     }
 
@@ -54,12 +64,15 @@ public class Address {
         }
 
         Address otherAddress = (Address) other;
+        if (value == null) {
+            return otherAddress.value == null;
+        }
         return value.equals(otherAddress.value);
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return value == null ? 0 : value.hashCode();
     }
 
 }
