@@ -85,7 +85,7 @@ public class AttendanceWindow {
     /**
      * Creates rows for the student attendance table.
      */
-    private ObservableList<AttendanceRow> getStudentAttendanceRows(Model model) {
+    public ObservableList<AttendanceRow> getStudentAttendanceRows(Model model) {
         ObservableList<AttendanceRow> rows = FXCollections.observableArrayList();
         for (Student student : model.getStudentsByTutorialGroup(tutorialGroup)) {
             AttendanceRow row = new AttendanceRow(student);
