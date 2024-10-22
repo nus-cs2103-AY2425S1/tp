@@ -158,6 +158,27 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### List Transactions `listt INDEX`
+
+#### Implementation
+
+The list transactions command allows for users to view all transactions for the specified person. Notably, when the command is used, `Model#updateFilteredPersonList()` is called to update the person list to just contain that specified person. It also implements the following operations:
+
+* `Model#setIsViewTransactions(boolean)` — Displays the person list in the GUI when false, and displays the transactions list in the GUI when true.
+* `Model#updateTransactionList(ObservableList<Transaction>)` — Updates the transaction list to contain transactions for the specified person.
+
+The following sequence diagram shows an example execution of command `listt 1`.
+
+<puml src="diagrams/ListTransactionsDiagram.puml" width="550" />
+
+#### Side Effects
+
+As a result of `listt INDEX` changing the person list, operations on the transactions (e.g. `deletet` and `summary`) can now be performed on the transactions list, without specifying the person index.
+
+The following activity diagram shows how the user should use some of our transaction-related commands.
+
+<puml src="diagrams/ListTransactionsActivityDiagram.puml" width="550" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

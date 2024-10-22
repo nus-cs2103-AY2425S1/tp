@@ -1,0 +1,58 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "t:ListTransactionCommand" as ListTransactionCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+[-> LogicManager : execute(listt 1)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(listt 1))
+activate AddressBookParser
+
+create ListTransactionCommand
+AddressBookParser -> ListTransactionCommand
+activate ListTransactionCommand
+
+ListTransactionCommand --> AddressBookParser
+deactivate ListTransactionCommand
+
+AddressBookParser --> LogicManager : t
+deactivate AddressBookParser
+
+LogicManager -> ListTransactionCommand : execute()
+activate ListTransactionCommand
+
+ListTransactionCommand -> Model : updateFilteredPersonList()
+activate Model
+
+Model --> ListTransactionCommand
+deactivate Model
+
+ListTransactionCommand -> Model : setViewTransactions(true)
+activate Model
+
+Model --> ListTransactionCommand
+deactivate Model
+
+ListTransactionCommand -> Model : updateTransactionList()
+activate Model
+
+Model --> ListTransactionCommand
+deactivate Model
+
+ListTransactionCommand --> LogicManager : result
+deactivate ListTransactionCommand
+ListTransactionCommand -[hidden]-> LogicManager : result
+destroy ListTransactionCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
