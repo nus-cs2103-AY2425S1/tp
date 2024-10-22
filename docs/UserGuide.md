@@ -153,17 +153,17 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find John` returns `john` and `John Doe`.
+* `find alex david` returns `Alex Yeoh`, `David Li.`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `contact delete`
@@ -201,21 +201,21 @@ Find lessons with students whose names contain any of the specified keywords.
 
 Format: `lesson find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Lessons with students whose names match at least one of the specified keywords will be returned (i.e., 
-  an OR search)
-  e.g. `Hans Bo` will return lessons with `Hans Gruber` if any and `Bo Yang` if any 
+  an OR search).
+  e.g. `Hans Bo` will return lessons with `Hans Gruber` if any and `Bo Yang` if any. 
 
 Examples:
 
-* View all lessons using `lesson list` command<br>
+* View all lessons using `lesson list` command.<br>
   !['result before using lesson find'](images/beforeFindLesson.png)
-* `lesson find John` returns `John Doe`'s lessons<br>
+* `lesson find John` returns `John Doe`'s lessons.<br>
   ![result for 'lesson find John'](images/findLessonJohnResult.png)
-* `lesson find John Alice` returns lessons with `John Doe` if any and `Alice Tan` if any<br>
+* `lesson find John Alice` returns lessons with `John Doe` if any and `Alice Tan` if any.<br>
   ![result for 'lesson find John Alice'](images/findLessonJohnAliceResult.png)
 
 ### Clearing all entries : `clear`
