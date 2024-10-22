@@ -177,7 +177,7 @@ public class MainAppTest {
     }
     @Test
     public void testInitPrefsWithNonExistentFile() {
-        Path nonExistentPrefsFile = Paths.get("data", "nonExistentPrefs.json");
+        Path nonExistentPrefsFile = getTempFilePath("nonExistentPrefs.json");
 
         assertDoesNotThrow(() -> Files.deleteIfExists(nonExistentPrefsFile));
 
