@@ -3,18 +3,18 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGN_CONTACT;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.person.Person;
-
 import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.Wedding;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 /**
  * This AssignContactToWeddingCommand class assigns contacts in the addressbook into the wedding at the specified index.
@@ -31,7 +31,8 @@ public class AssignContactToWeddingCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSIGN_CONTACT + "1 2 3";
 
-    public static final String MESSAGE_ASSIGN_TO_WEDDING_SUCCESS = "Assigned the following persons to %1$s's wedding: %2$s";
+    public static final String MESSAGE_ASSIGN_TO_WEDDING_SUCCESS =
+            "Assigned the following persons to %1$s's wedding: %2$s";
 
     private final Index targetWeddingIndex;
     private final Set<Index> assignedPersonIndexList;
@@ -90,7 +91,8 @@ public class AssignContactToWeddingCommand extends Command {
             }
         }
 
-        Wedding newWedding = new Wedding(weddingToModify.getWeddingName(), weddingToModify.getWeddingDate(), existingPersonsInWedding);
+        Wedding newWedding = new Wedding(weddingToModify.getWeddingName(),
+                weddingToModify.getWeddingDate(), existingPersonsInWedding);
 
         model.setWedding(weddingToModify, newWedding);
 
@@ -100,7 +102,8 @@ public class AssignContactToWeddingCommand extends Command {
                 .reduce((name1, name2) -> name1 + ", " + name2)
                 .orElse("No persons added");
 
-        return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS, weddingToModify.getWeddingName().toString(), assignedPersonNames));
+        return new CommandResult(String.format(MESSAGE_ASSIGN_TO_WEDDING_SUCCESS,
+                weddingToModify.getWeddingName().toString(), assignedPersonNames));
 
     }
 }

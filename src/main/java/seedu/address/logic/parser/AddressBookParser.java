@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddWeddingCommand;
+import seedu.address.logic.commands.AssignContactToWeddingCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -24,9 +25,6 @@ import seedu.address.logic.commands.ListTagsCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
-
-import seedu.address.logic.commands.*;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
