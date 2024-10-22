@@ -40,7 +40,8 @@ public class ScheduleCommand extends Command {
             + "Parameters: INDEX, SCHEDULE_NAME, DATE, TIME"
             + "Example: " + COMMAND_WORD + " 1 sn/appointment sd/2024-10-21 st/16:00";
 
-    public static final String MESSAGE_SUCCESS = "Scheduled an event for %s: %s";
+    public static final String MESSAGE_MAKE_SCHEDULE_SUCCESS = "Scheduled an event for %s: %s";
+    public static final String MESSAGE_CLEAR_SCHEDULE_SUCCESS = "Cleared scheduled for %s";
     public static final String MESSAGE_FAILURE =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE);
 
@@ -75,10 +76,18 @@ public class ScheduleCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(
-                MESSAGE_SUCCESS,
-                editedPerson.getName().toString(), editedSchedule.toString()
-        ));
+
+        if (editedSchedule.toString().isEmpty()) {
+            return new CommandResult(String.format(
+                    MESSAGE_CLEAR_SCHEDULE_SUCCESS,
+                    editedPerson.getName().toString()
+            ));
+        } else {
+            return new CommandResult(String.format(
+                    MESSAGE_MAKE_SCHEDULE_SUCCESS,
+                    editedPerson.getName().toString(), editedSchedule.toString()
+            ));
+        }
     }
 
     /**
@@ -95,7 +104,14 @@ public class ScheduleCommand extends Command {
         String updatedDateString = scheduleDescriptor.getDateString().orElse(scheduleToEdit.dateString);
         String updatedTimeString = scheduleDescriptor.getTimeString().orElse(scheduleToEdit.timeString);
 
-        return new Schedule(updatedName, updatedDateString, updatedTimeString);
+        Schedule editedSchedule = new Schedule(updatedName, updatedDateString, updatedTimeString);
+
+        // if all fields of the command is empty, refers to a clear schedule command
+        if (editedSchedule.equals(scheduleToEdit)) {
+            editedSchedule = new Schedule("", "", "");
+        }
+
+        return editedSchedule;
     }
 
     private static Person createPersonWithEditedSchedule(
