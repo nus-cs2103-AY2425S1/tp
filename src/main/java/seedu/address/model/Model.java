@@ -118,18 +118,15 @@ public interface Model {
      * The student identity of {@code editedStudent} must not be the same as another
      * existing student in the address book.
      */
-
     void setStudent(Student target, Student editedStudent);
 
     /** Returns an unmodifiable view of the filtered student list */
-
     ObservableList<Student> getFilteredStudentList();
 
     /**
      * Updates the filter of the filtered student list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-
     void updateFilteredStudentList(Predicate<Student> predicate);
 
 

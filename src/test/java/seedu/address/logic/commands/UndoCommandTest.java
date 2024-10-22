@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.nio.file.Path;
 import java.util.function.Predicate;
@@ -48,6 +49,20 @@ public class UndoCommandTest {
         commandStack.push(command);
         assertEquals(UndoCommand.MESSAGE_SUCCESS,
                 new UndoCommand().execute(model).getFeedbackToUser());
+    }
+
+    @Test
+    public void equals() {
+        UndoCommand undoCommand = new UndoCommand();
+
+        // same object -> returns true
+        assertEquals(undoCommand, undoCommand);
+
+        // different object -> returns false
+        assertFalse(undoCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(undoCommand.equals(null));
     }
 
     /**
