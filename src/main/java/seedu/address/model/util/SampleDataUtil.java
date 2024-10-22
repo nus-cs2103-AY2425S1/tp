@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.AddressBook;
 import seedu.address.model.EventBook;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -22,21 +23,49 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
+
+    public static final int ADDRESSBOOK_SIZE = 6; // number of Persons in sample address book
+
+    public static final Person PERSON_ALEX =
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                    new Relationship("Father")),
+                    new Relationship("Father"));
+    public static final Person PERSON_BERNICE =
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                    new Relationship("Mother")),
+                    new Relationship("Mother"));
+    public static final Person PERSON_CHARLOTTE =
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Relationship("Niece")),
+                    new Relationship("Niece"));
+    public static final Person PERSON_DAVID =
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Relationship("Grandfather")),
-            new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                    new Relationship("Uncle")),
+                    new Relationship("Grandfather"));
+    public static final Person PERSON_IRFAN =
+                    new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
+                    new Relationship("Uncle"));
+    public static final Person PERSON_ROY =
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                    new Relationship("Cousin"))
-        };
+                    new Relationship("Cousin"));
+
+    public static Person[] getSamplePersons() {
+        return new Person[] { PERSON_ALEX,
+                              PERSON_BERNICE,
+                              PERSON_CHARLOTTE,
+                              PERSON_DAVID,
+                              PERSON_IRFAN,
+                              PERSON_ROY };
+    }
+
+    public static Set<Person> getSampleAttendees() {
+        Set<Person> attendees = new HashSet<>();
+        attendees.addAll(Arrays.asList(getSamplePersons()));
+        return attendees;
+    }
+
+    public static Set<Index> getSampleIndexes() {
+        Set<Index> indexes = new HashSet<>();
+        for (int i = 0; i < ADDRESSBOOK_SIZE; i++) {
+            indexes.add(Index.fromZeroBased(i));
+        }
+        return indexes;
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
