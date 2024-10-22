@@ -22,7 +22,7 @@ class JsonAdaptedStatus {
     }
 
     /**
-     * Converts a given {@code Tier} into this class for Jackson use.
+     * Converts a given {@code Status} into this class for Jackson use.
      */
     public JsonAdaptedStatus(Status source) {
         status = source.toParsableString();
@@ -39,7 +39,7 @@ class JsonAdaptedStatus {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tier object into the model's {@code Status} object.
+     * Converts this Jackson-friendly adapted status object into the model's {@code Status} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted Status.
      */

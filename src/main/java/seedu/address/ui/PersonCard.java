@@ -40,8 +40,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane assignedStatus;
-    @FXML
     private FlowPane assignedStatusAndTier;
     @FXML
     private VBox cardFields;
