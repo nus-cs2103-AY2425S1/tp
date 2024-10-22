@@ -128,19 +128,8 @@ public class Person {
     }
 
     /**
-     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
+     * Add the given delivery {@code unarchivedDelivery} to the list at {@code targetIndex}.
      * {@code targetIndex} must be a valid index in the deliveryList.
-     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
-     */
-    public void archiveDelivery(Index targetIndex, Delivery archivedDelivery) {
-        deleteDelivery(targetIndex);
-        addDelivery(archivedDelivery);
-    }
-
-    /**
-     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
-     * {@code targetIndex} must be a valid index in the deliveryList.
-     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
      */
     public void unarchiveDelivery(Index targetIndex, Delivery unarchivedDelivery) {
         deleteDelivery(targetIndex);
@@ -148,9 +137,7 @@ public class Person {
     }
 
     /**
-     * Replaces the given delivery {@code target} in the list with {@code editedDelivery}.
-     * {@code targetIndex} must be a valid index in the deliveryList.
-     * The identity of {@code editedDelivery} must not be the same as another existing delivery in the list.
+     * Returns the index of the first archived delivery in the list.
      */
     public Index getFirstArchivedIndex() {
         return deliveryList.getFirstArchivedIndex();
