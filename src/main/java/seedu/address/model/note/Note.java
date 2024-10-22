@@ -19,8 +19,8 @@ import seedu.address.model.appointment.Appointment;
 public class Note {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
     public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
-    public static final String MESSAGE_CONSTRAINTS_APPOINTMENT = "Previous appointment should not be after today. " +
-        "If you want to add a future appointment, please use the edit command";
+    public static final String MESSAGE_CONSTRAINTS_APPOINTMENT = "Previous appointment should not be after today. "
+        + "If you want to add a future appointment, please use the edit command";
     public final Set<Appointment> previousAppointments;
     public final Set<String> remarks;
     public final Set<String> medications;
