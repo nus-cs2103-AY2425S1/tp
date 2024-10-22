@@ -39,6 +39,8 @@ public class FindPersonCard extends UiPart<Region> {
     @FXML
     private Label nric;
     @FXML
+    private FlowPane roles;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane caregivers;
@@ -62,10 +64,11 @@ public class FindPersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         person.getCaregivers().stream()
-                .sorted(Comparator.comparing(caregiver -> caregiver.toString()))
                 .forEach(caregiver -> caregivers.getChildren().add(new Label(caregiver.toString())));
         person.getPatients().stream()
-                .sorted(Comparator.comparing(patient -> patient.toString()))
                 .forEach(patient -> patients.getChildren().add(new Label(patient.toString())));
+        person.getRoles().stream()
+                .sorted(Comparator.comparing(role -> role.name()))
+                .forEach(role -> roles.getChildren().add(new Label(role.name())));
     }
 }
