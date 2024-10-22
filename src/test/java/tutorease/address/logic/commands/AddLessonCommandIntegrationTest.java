@@ -45,7 +45,7 @@ public class AddLessonCommandIntegrationTest {
                 .build();
         expectedModel.addLesson(validLesson);
 
-        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getStartDateTime(),
+        assertCommandSuccess(new AddLessonCommand(studentId, validLesson.getFee(), validLesson.getStartDateTime(),
                         validLesson.getEndDateTime()), model,
                 String.format(AddLessonCommand.MESSAGE_SUCCESS, validLesson),
                 expectedModel);
@@ -59,7 +59,7 @@ public class AddLessonCommandIntegrationTest {
                 .withEndDateTime(endDateTime)
                 .build();
         model.addLesson(overlap);
-        assertCommandFailure(new AddLessonCommand(studentId, sdt, edt), model,
+        assertCommandFailure(new AddLessonCommand(studentId, overlap.getFee(), sdt, edt), model,
                 AddLessonCommand.MESSAGE_OVERLAP_LESSON);
     }
 }
