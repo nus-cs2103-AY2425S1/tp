@@ -17,12 +17,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
      * @throws ParseException if the user input does not conform to the expected format
      */
     public FindTaskCommand parse(String args) throws ParseException {
-
-        assert args != null : "Input arguments cannot be null";
-
         String trimmedArgs = args.trim();
-
-        assert !trimmedArgs.isEmpty() : "Input arguments cannot be empty after trimming";
 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(

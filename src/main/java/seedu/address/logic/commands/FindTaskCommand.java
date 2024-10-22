@@ -24,8 +24,12 @@ public class FindTaskCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Constructs a FindTaskCommand with the specified target index.
+     *
+     * @param targetIndex The index of the person whose tasks are to be found.
+     */
     public FindTaskCommand(Index targetIndex) {
-        assert targetIndex != null : "Target index cannot be null";
         this.targetIndex = targetIndex;
     }
 
