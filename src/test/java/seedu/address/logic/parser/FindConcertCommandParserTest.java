@@ -41,6 +41,13 @@ public class FindConcertCommandParserTest {
     }
 
     @Test
+    public void parse_inputWithPreamble_throwsParseException() {
+        assertParseFailure(parser,
+                generateUserInput("preamble " + PREFIX_NAME + " \n Alice \n \t Bob  \t"),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindConcertCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidNameArgs_throwsParseException() {
         // empty name field
         assertParseFailure(parser,

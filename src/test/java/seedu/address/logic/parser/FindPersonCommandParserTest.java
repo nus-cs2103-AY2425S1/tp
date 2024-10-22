@@ -33,6 +33,13 @@ public class FindPersonCommandParserTest {
     }
 
     @Test
+    public void parse_inputWithPreamble_throwsParseException() {
+        assertParseFailure(parser,
+                generateUserInput("preamble " + PREFIX_NAME + " \n Alice \n \t Bob  \t"),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_validNameArgs_returnsFindPersonCommand() {
         // no leading and trailing whitespaces
         String userInput1 = generateUserInput(PREFIX_NAME + "Alice Bob");
