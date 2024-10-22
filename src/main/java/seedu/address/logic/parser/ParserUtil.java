@@ -235,6 +235,13 @@ public class ParserUtil {
     }
 
     /**
+     * Returns true if any of the specified {@code Prefix}es are present in the {@code ArgumentMultimap}.
+     */
+    public static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
      * Parses a {@code String moduleRoleOperations} into an {@code EditModuleRoleOperation}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -257,11 +264,5 @@ public class ParserUtil {
         default:
             throw new RuntimeException();
         }
-      
-    /**
-     * Returns true if any of the specified {@code Prefix}es are present in the {@code ArgumentMultimap}.
-     */
-    public static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
