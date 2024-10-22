@@ -32,8 +32,6 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_DUPLICATE_NAMES = "Multiple persons found with the name '%1$s'."
             + " Please specify the index to delete:\n%2$s";
 
-    private static final Stack<Person> deletedPersons = new Stack<>();
-    private static final Stack<Policy> deletedPolicies = new Stack<>();
     private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
 
     private final Index targetIndex;
@@ -86,15 +84,14 @@ public class DeleteCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             personToDelete = lastShownList.get(targetIndex.getZeroBased());
-            deletedPersons.push(personToDelete);
 
             if (policyIndex != null) {
                 if (policyIndex.getZeroBased() >= personToDelete.getPolicies().size()) {
                     throw new CommandException(Messages.MESSAGE_INVALID_POLICY_DISPLAYED_INDEX);
                 }
                 Policy policyToDelete = personToDelete.getPolicies().get(policyIndex.getZeroBased());
-                deletedPolicies.push(policyToDelete);
                 personToDelete.removePolicy(policyToDelete);
+                model.setPerson(personToDelete, personToDelete);
                 model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_POLICY_SUCCESS, policyIndex
                         .getOneBased(), personToDelete.getName()));
