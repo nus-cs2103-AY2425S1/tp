@@ -72,6 +72,8 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
 Refer to the [Features](#features) below for details of each command.
 
+[Return to Top](#table-of-contents)
+
 ---
 
 ## Features
@@ -106,6 +108,8 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
+[Return to Top](#table-of-contents)
+
 ### Adding a person: `add`
 
 Adds a person to the address book.
@@ -122,11 +126,15 @@ Examples:
 - `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 - `add id/2 n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal s/lockpicking`
 
+[Return to Top](#table-of-contents)
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+[Return to Top](#table-of-contents)
 
 ### Editing a person : `edit`
 
@@ -150,6 +158,8 @@ Examples:
 - `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 - `edit 2 n/Betsy Crower t/` Edits the projectName of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+[Return to Top](#table-of-contents)
+
 ### Filtering employees persons by skills: `filter`
 
 Finds employees who has at least one skill or tag matching at least one of the search items.
@@ -168,6 +178,8 @@ Examples:
 - `filter s/frontend` returns `skills={frontend}, tags={designer}` and `skills={frontend, uiux}, tags={designer, pm}`
 - `filter s/frontend t/swe` returns `skills={Frontend, UIUX}, tags={designer}`, `skills={Backend}, tags={swe}`<br>
   ![result for 'filter s/frontend t/swe'](images/filterAlexCharlotte.png)
+
+[Return to Top](#table-of-contents)
 
 ### Locating persons by name: `find`
 
@@ -188,6 +200,8 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+[Return to Top](#table-of-contents)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -203,11 +217,95 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+[Return to Top](#table-of-contents)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+[Return to Top](#table-of-contents)
+
+### Adding a project : `addproject`
+
+**Adds a new project** to HRConnect.
+
+Format: `addproject pid/PROJECT_ID pn/PROJECT_NAME`
+
+Examples:
+
+* `addproject pid/E0276 pn/Project Alpha`
+* `addproject pid/WW2036 pn/Website UI Overhaul`
+
+Expected output:  
+System message noting success and id \+ name of project added
+
+[Return to Top](#table-of-contents)
+
+### Listing all projects : `listproject`
+
+Shows a list of **all stored projects**.
+
+Format: `listproject`
+
+Expected output:  
+System message noting success, all projects shown in the displayed project list
+
+[Return to Top](#table-of-contents)
+
+### Finding projects by name : `findproject`
+
+Finds projects whose **names contain any of the given keywords**.
+
+Format: `findproject KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `Project` will match `project`
+* The order of the keywords does not matter. e.g `Project Alpha` will match `Alpha Project`
+* Only the project name is searched.
+* Only full words will be matched e.g. `Proj` does not match `Project`
+* Any project matching at least one keyword will be returned. e.g. `Project` will return `Project Alpha` and `Project Beta`, etc
+
+Examples:
+
+* `findproject project`
+* `findproject Alpha Beta`
+
+Expected output:  
+System message noting success, projects matching criteria above  shown in the displayed project list
+
+[Return to Top](#table-of-contents)
+
+### Deleting a project : `deleteproject`
+
+**Deletes the specified project <span style="color:red">and all its assignments</span>** from HRConnect.
+
+Format: `deleteproject INDEX`
+
+* Deletes the project at the specified `INDEX`
+* The index refers to the **index number shown in the displayed project list.**
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+
+* `listproject` followed by `deleteproject 2` deletes the **2nd project shown**.
+* `findproject Alpha` followed by `deleteproject 1` deletes the **1st project in the results** of the `findproject` command.
+
+Expected output:  
+System message noting success, deleted project vanishes from displayed project list
+
+[Return to Top](#table-of-contents)
+
+### Clear all project entries: `clearproject`
+
+**Clears all project entries** from HRConnect.  
+<span style="color:red">This will delete all project records AND their assignments\!</span>
+
+Format: `clearproject`  
+Expected output:  
+System message noting success, displayed project list becomes empty
+
+[Return to Top](#table-of-contents)
 
 ### Exiting the program : `exit`
 
@@ -215,9 +313,13 @@ Exits the program.
 
 Format: `exit`
 
+[Return to Top](#table-of-contents)
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+[Return to Top](#table-of-contents)
 
 ### Editing the data file
 
@@ -228,9 +330,7 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+[Return to Top](#table-of-contents)
 
 ---
 
