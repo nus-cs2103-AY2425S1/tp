@@ -264,7 +264,7 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 >
 ><box type="warning" seamless>
 >
->**Common Mistakes:** 
+>**Common Mistakes:**
 >* `promote 2 12-20-2025` - the contract end date is in the wrong date format
 >* `promote 2 2025-20-12` - the day and the month of the contract end date is swapped
 >* `list e` followed by `promote 2 2025-12-20` - cannot promote an employee

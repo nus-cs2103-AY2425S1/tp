@@ -648,9 +648,9 @@ testers are expected to do more *exploratory* testing.
 ### Demoting an employee
 
 1. Demoting an employee while all employees are being shown
-    
+
    Prerequisites: List all employees using the `list e` command. Employees are in the list.
-   
+
     1. Test case: `demote 1`<br>
       Expected: First person in the list is demoted to a potential hire. Details of the demoted employee is shown in the status message.
 
