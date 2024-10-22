@@ -10,7 +10,7 @@ import tahub.contacts.model.tutorial.Tutorial;
 
 
 /**
- * Represents an association between a student, course, grading system, and tutorial/recitation.
+ * Represents an association between a student, course, grading system, and tutorial
  */
 public class StudentCourseAssociation {
     private Person student;
@@ -19,7 +19,7 @@ public class StudentCourseAssociation {
      * Represents a Tutorial associated with a Course.
      * May be null, if this TA is not the student's tutorial TA.
      */
-    private Tutorial tutorial = null;
+    private Tutorial tutorial;
     private GradingSystem grades;
     private final Attendance attendance;
 
