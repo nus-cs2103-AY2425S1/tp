@@ -32,7 +32,7 @@ public class AddNotesCommand extends Command {
             + PREFIX_REMARK + "Much better than previous appointment.";
 
     public static final String MESSAGE_ADD_NOTES_SUCCESS = "Successfully "
-            + "added notes: '%s' to Patient %d.";
+            + "added notes: %s to patient of ID: %d.";
     private final Id patientId;
     private final String additionalNotes;
 
@@ -58,7 +58,8 @@ public class AddNotesCommand extends Command {
 
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(MESSAGE_ADD_NOTES_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_ADD_NOTES_SUCCESS, additionalNotes, patientId.getIdValue()
+        ));
     }
 
 
