@@ -43,7 +43,6 @@ public class AddressBookParserTest {
         assertEquals(new DeleteStudentCommand(ALICE.getStudentNumber()), command);
     }
 
-
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
