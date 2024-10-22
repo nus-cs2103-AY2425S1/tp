@@ -15,8 +15,9 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditTaskCommand;
-import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
+import seedu.address.logic.commands.editcommands.EditTaskCommand;
+import seedu.address.logic.commands.editcommands.EditTaskCommand.EditTaskDescriptor;
+import seedu.address.logic.parser.editcommands.EditTaskCommandParser;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.TaskName;

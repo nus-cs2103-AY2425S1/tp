@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.addcommands.AddStudentCommand;
+import seedu.address.logic.commands.editcommands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -54,7 +54,7 @@ public class PersonUtil {
             }
         }
         descriptor.getStudentNumber().ifPresent(studentNumber -> sb.append(PREFIX_STUDENT_NUMBER)
-                .append(studentNumber.value));
+            .append(studentNumber.value));
         return sb.toString();
     }
 }

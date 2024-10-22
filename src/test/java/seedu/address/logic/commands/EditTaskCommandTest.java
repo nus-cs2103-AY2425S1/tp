@@ -15,7 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
+import seedu.address.logic.commands.editcommands.EditTaskCommand;
+import seedu.address.logic.commands.editcommands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -60,7 +61,7 @@ public class EditTaskCommandTest {
     @Test
     public void execute_invalidTaskIndex_throwsCommandException() {
         EditTaskCommand command = new EditTaskCommand(new GroupName(TEAM_FIVE), INVALID_INDEX_TASK, editTaskDescriptor);
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, ()->command.execute(model));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DISPLAYED_INDEX, ()->command.execute(model));
     }
 
     @Test
