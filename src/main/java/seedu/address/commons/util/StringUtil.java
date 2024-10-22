@@ -77,6 +77,19 @@ public class StringUtil {
         return wordFromPerson.toLowerCase(Locale.ROOT).contains(wordToCheck.toLowerCase(Locale.ROOT));
     }
 
+    public static boolean areStringsMatchIgnoreCase(String firstString, String secondString) {
+        requireNonNull(firstString);
+        requireNonNull(secondString);
+
+        String preppedFirstString = firstString.trim();
+        checkArgument(!preppedFirstString.isEmpty(), "First string parameter cannot be empty");
+
+        String preppedSecondString = secondString.trim();
+        checkArgument(!preppedSecondString.isEmpty(), "Second string parameter cannot be empty");
+
+        return preppedFirstString.equalsIgnoreCase(preppedSecondString);
+    }
+
     /**
      * Returns a detailed message of the t, including the stack trace.
      */

@@ -34,8 +34,8 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
             return false;
         }
 
-        StudentHasPaidPredicate studentHasPaidPredicate = (StudentHasPaidPredicate) other;
-        return this.paymentUpToDate == studentHasPaidPredicate.paymentUpToDate;
+        StudentHasPaidPredicate otherStudentHasPaidPredicate = (StudentHasPaidPredicate) other;
+        return this.paymentUpToDate == otherStudentHasPaidPredicate.paymentUpToDate;
     }
 
     @Override

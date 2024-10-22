@@ -34,6 +34,9 @@ public class Participation {
     public Tutorial getTutorial() {
         return tutorial;
     }
+    public String getTutorialSubject() {
+        return this.tutorial.getSubject();
+    }
 
     public List<Attendance> getAttendanceList() {
         return attendanceList;

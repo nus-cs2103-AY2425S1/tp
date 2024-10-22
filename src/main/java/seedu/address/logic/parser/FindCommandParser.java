@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TAG
+                PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TAG, PREFIX_SUBJECT
         );
 
         // Ensure there are no duplicated prefixes except for prefix of name, prefix of address and prefix of tags
@@ -43,7 +44,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         // Check if there is at least one prefix present
         if (!argMultimap.getPreamble().isEmpty()
                 || !areAnyPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
-                    PREFIX_EMAIL, PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TAG)) {
+                    PREFIX_EMAIL, PREFIX_PAYMENT, PREFIX_ATTENDANCE, PREFIX_TAG, PREFIX_SUBJECT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 

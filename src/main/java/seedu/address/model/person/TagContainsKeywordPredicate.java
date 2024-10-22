@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -11,11 +10,11 @@ import seedu.address.model.tag.Tag;
 /**
  * Tests that a {@code Person}'s {@code Tag}s contain any of the specified keywords.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Person> {
-    private final List<String> keywords;
+public class TagContainsKeywordPredicate implements Predicate<Person> {
+    private final String keyword;
 
-    public TagContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+    public TagContainsKeywordPredicate(String keyword) {
+        this.keyword = keyword;
     }
 
     @Override
@@ -23,9 +22,8 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         Set<Tag> personTags = person.getTags(); // Get the person's tags
 
         // Check if any keyword matches any tag's name (case-insensitive)
-        return this.keywords.stream()
-                .anyMatch(keyword -> personTags.stream()
-                        .anyMatch(tag -> StringUtil.isWordInSentenceIgnoreCase(tag.tagName, keyword)));
+        return personTags.stream()
+                        .anyMatch(tag -> StringUtil.isWordInSentenceIgnoreCase(tag.tagName, keyword));
     }
 
     @Override
@@ -34,17 +32,17 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
             return true;
         }
 
-        if (!(other instanceof TagContainsKeywordsPredicate)) {
+        if (!(other instanceof TagContainsKeywordPredicate)) {
             return false;
         }
 
-        TagContainsKeywordsPredicate otherPredicate = (TagContainsKeywordsPredicate) other;
-        return keywords.equals(otherPredicate.keywords);
+        TagContainsKeywordPredicate otherPredicate = (TagContainsKeywordPredicate) other;
+        return this.keyword.equals(otherPredicate.keyword);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("keywords", keywords).toString();
+        return new ToStringBuilder(this).add("keyword", keyword).toString();
     }
 }
 

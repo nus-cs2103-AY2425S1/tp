@@ -1,12 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,8 +20,10 @@ import java.util.function.Predicate;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FieldContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.StudentAttendedTutorialPredicate;
 import seedu.address.model.person.StudentHasPaidPredicate;
-import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.SubjectContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordPredicate;
 
 /**
  * A factory class for creating a list of predicates to filter Person objects based on
@@ -38,7 +43,9 @@ public class PredicateFactory {
         List<Predicate<Person>> predicates = new ArrayList<>();
         processFieldPredicates(argMultimap, predicates);
         processPaymentPredicate(argMultimap, predicates);
-        processTagPredicates(argMultimap, predicates);
+        processTagPredicate(argMultimap, predicates);
+        processSubjectPredicate(argMultimap, predicates);
+        processAttendancePredicate(argMultimap, predicates);
         return Collections.unmodifiableList(predicates);
     }
 
@@ -72,12 +79,31 @@ public class PredicateFactory {
         }
     }
 
-    private static void processTagPredicates(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+    private static void processAttendancePredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_ATTENDANCE).isPresent()) {
+            LocalDate[] datesArray = ParserUtil.parseAttendanceDate(argMultimap.getValue(PREFIX_ATTENDANCE).get());
+            predicates.add(new StudentAttendedTutorialPredicate(datesArray[0], datesArray[1]));
+        }
+
+    }
+
+    private static void processTagPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
             throws ParseException {
         if (!argMultimap.getAllValues(PREFIX_TAG).isEmpty()) {
-            for (String eachtagKeyword : argMultimap.getAllValues(PREFIX_TAG)) {
-                String trimmedTag = ParserUtil.parseMultipleWordsFromFindCommand(eachtagKeyword);
-                predicates.add(new TagContainsKeywordsPredicate(Arrays.asList(trimmedTag.split("\\s+"))));
+            for (String eachTagKeyword : argMultimap.getAllValues(PREFIX_TAG)) {
+                String trimmedTag = ParserUtil.parseSingleWordFromFindCommand(eachTagKeyword);
+                predicates.add(new TagContainsKeywordPredicate(trimmedTag));
+            }
+        }
+    }
+
+    private static void processSubjectPredicate(ArgumentMultimap argMultimap, List<Predicate<Person>> predicates)
+            throws ParseException {
+        if (!argMultimap.getAllValues(PREFIX_SUBJECT).isEmpty()) {
+            for (String eachSubjectWords : argMultimap.getAllValues(PREFIX_SUBJECT)) {
+                String trimmedSubject = ParserUtil.parseMultipleWordsFromFindCommand(eachSubjectWords);
+                predicates.add(new SubjectContainsKeywordsPredicate(trimmedSubject));
             }
         }
     }

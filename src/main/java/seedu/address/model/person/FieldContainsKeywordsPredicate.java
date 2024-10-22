@@ -71,7 +71,8 @@ public class FieldContainsKeywordsPredicate<T> implements Predicate<T> {
         FieldContainsKeywordsPredicate<?> otherFieldContainsKeywordPredicate =
                 (FieldContainsKeywordsPredicate<?>) other;
         return this.keywords.equals(otherFieldContainsKeywordPredicate.keywords)
-                && fieldExtractor.equals(((FieldContainsKeywordsPredicate<?>) other).fieldExtractor);
+                && this.fieldExtractor.equals(otherFieldContainsKeywordPredicate.fieldExtractor)
+                && this.isMultipleKeywords == otherFieldContainsKeywordPredicate.isMultipleKeywords;
     }
 
     @Override

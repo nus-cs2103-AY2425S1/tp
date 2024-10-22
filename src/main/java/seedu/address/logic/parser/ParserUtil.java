@@ -3,9 +3,13 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_EMPTY_INPUT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DATE_RANGE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_NUMBER_OF_INPUTS;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_WITH_SPACES;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -198,6 +202,36 @@ public class ParserUtil {
                     String.format(MESSAGE_INVALID_WITH_SPACES, FindCommand.MESSAGE_USAGE));
         }
         return trimmedArgs;
+    }
+
+    public static LocalDate[] parseAttendanceDate(String searchString) throws ParseException {
+        String trimmedString = parseMultipleWordsFromFindCommand(searchString);
+        String[] attendanceDates = validateAndSplitDateString(trimmedString);
+
+        LocalDate startDate = parseDate(attendanceDates[0]);
+        LocalDate endDate = parseDate(attendanceDates[1]);
+
+        if (startDate.isAfter(endDate)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE_RANGE, FindCommand.MESSAGE_USAGE));
+        }
+
+        return new LocalDate[]{startDate, endDate};
+    }
+
+    public static String[] validateAndSplitDateString(String dateInput) throws ParseException {
+        String[] dateParts = dateInput.split(":");
+        if (dateParts.length != 2) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        return dateParts;
+    }
+
+    public static LocalDate parseDate(String dateString) throws ParseException {
+        try {
+            return LocalDate.parse(parseSingleWordFromFindCommand(dateString), Attendance.VALID_DATE_FORMAT);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_DATE, FindCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
