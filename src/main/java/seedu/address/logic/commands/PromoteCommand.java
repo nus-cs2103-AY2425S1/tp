@@ -25,9 +25,15 @@ public class PromoteCommand extends Command {
 
     public static final String COMMAND_WORD = "promote";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Converts a potential hire to an employee. "
-            + "Parameters: INDEX (must be a positive integer) CONTRACT_END_DATE (yyyy-MM-dd)"
-            + "\nExample: " + COMMAND_WORD + " 1 2024-01-29";
+    public static final String MESSAGE_PURPOSE = "Converts a potential hire to an employee.";
+
+    public static final String MESSAGE_FORMAT = COMMAND_WORD + " INDEX CONTRACT_END_DATE";
+
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " 1 2024-01-29";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
+            + "\nFormat: " + MESSAGE_FORMAT
+            + "\nExample: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "Potential hire promoted: %1$s";
     public static final String MESSAGE_NOT_A_POTENTIAL_HIRE =
