@@ -158,6 +158,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### \[Proposed\] Filter property feature
+
+#### Proposed Implementation
+The filterproperty command gets the matching price between the ask and bid and is implemented as a static variable.
+The sequence diagram is shown as such:
+<puml src="diagrams/FilterPropertySequenceDiagram.puml" alt="FilterProperty" />
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
