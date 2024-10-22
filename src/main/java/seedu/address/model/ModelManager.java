@@ -147,6 +147,16 @@ public class ModelManager implements Model {
         return sortedPersons;
     }
 
+    @Override
+    public boolean hasPersonsOfType(Class<? extends Person> personType) {
+        return filteredPersons.stream().anyMatch(personType::isInstance);
+    }
+
+    @Override
+    public boolean hasOnlyPersonsOfType(Class<? extends Person> personType) {
+        return filteredPersons.stream().allMatch(personType::isInstance);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     @Override

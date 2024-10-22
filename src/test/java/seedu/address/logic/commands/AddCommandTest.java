@@ -185,6 +185,15 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean hasPersonsOfType(Class<? extends Person> personType) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasOnlyPersonsOfType(Class<? extends Person> personType) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
