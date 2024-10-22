@@ -46,4 +46,35 @@ deactivate CampusConnectParser
 
 LogicManager -> DeleteTagCommand : execute(m)
 activate DeleteTagCommand
+
+DeleteTagCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> DeleteTagCommand : lastShownList
+deactivate Model
+
+DeleteTagCommand -> Model : get(index)
+activate Model
+
+Model --> DeleteTagCommand : person
+deactivate Model
+
+DeleteTagCommand -> Model : deletePersonTag(person, tag)
+activate Model
+
+Model --> DeleteTagCommand
+deactivate Model
+
+create CommandResult
+DeleteTagCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteTagCommand : r
+deactivate CommandResult
+
+DeleteTagCommand --> LogicManager
+deactivate DeleteTagCommand
+
+[<-- LogicManager
+deactivate LogicManager
 @enduml
