@@ -2,8 +2,10 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -15,9 +17,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_ROLE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_ANDY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BETTY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -38,6 +42,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.ANDY;
 import static seedu.address.testutil.TypicalPersons.BETTY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -154,6 +159,15 @@ public class AddCommandParserTest {
         Person expectedPerson = new PersonBuilder(BETTY).withTags("friend").buildEmptyAddressPerson();
         assertParseSuccess(parser, NAME_DESC_BETTY + PHONE_DESC_BETTY + EMAIL_DESC_BETTY
                 + TAG_DESC_FRIEND + MODULE_ROLE_DESC, new AddCommand(expectedPerson));
+    }
+
+    @Test
+    public void parse_moduleRoleFieldMissing_success() {
+        // zero tags
+        Person expectedPerson = new PersonBuilder(ANDY).withTags("friend")
+                .withEmptyModuleRoleMap().build();
+        assertParseSuccess(parser, NAME_DESC_ANDY + PHONE_DESC_ANDY + EMAIL_DESC_ANDY + ADDRESS_DESC_ANDY
+                + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
     }
 
     @Test

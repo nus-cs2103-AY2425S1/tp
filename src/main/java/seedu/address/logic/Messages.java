@@ -57,10 +57,13 @@ public class Messages {
             person.getTags().forEach(builder :: append);
         }
 
-        builder.append("; Roles: ");
-        String moduleRoleMapData = person.getModuleRoleMap().getData().stream()
-            .map(Object::toString).collect(Collectors.joining(", "));
-        builder.append(moduleRoleMapData);
+        // Only display Roles: if there are > 0 roles
+        if (!person.hasEmptyModuleRoleMap()) {
+            builder.append("; Roles: ");
+            String moduleRoleMapData = person.getModuleRoleMap().getData().stream()
+                    .map(Object::toString).collect(Collectors.joining(", "));
+            builder.append(moduleRoleMapData);
+        }
 
         return builder.toString();
     }
