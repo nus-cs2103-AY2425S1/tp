@@ -3,18 +3,17 @@ package seedu.address.logic.commands.exceptions;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.List;
+import java.util.Optional;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
-
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Grades a student in the address book.
@@ -30,9 +29,6 @@ public class GradeCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MODULE + "MA2103 "
             + PREFIX_GRADE + "80";
-
-
-
     public static final String MESSAGE_GRADE_SUCCESS = "Graded Module: %1$s for %2$s";
     public static final String MESSAGE_INVALID_GRADE = "The grade provided is invalid.";
     public static final String MESSAGE_INVALID_MODULE = "The module specified is not found.";
