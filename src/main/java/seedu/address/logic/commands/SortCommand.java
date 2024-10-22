@@ -15,8 +15,11 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based on the specified field.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the current list based on the specified field"
+            + "and order.\n"
             + "Parameters: " + "FIELD " + PREFIX_SORTORDER + "ORDER\n"
+            + "Acceptable value for FIELD: github, name, telegram\n"
+            + "Acceptable value for ORDER: asc, desc\n"
             + "Example: " + COMMAND_WORD + " name " + PREFIX_SORTORDER + "asc";
 
     public static final String MESSAGE_SUCCESS = "List sorted based on %1$s in %2$s order";

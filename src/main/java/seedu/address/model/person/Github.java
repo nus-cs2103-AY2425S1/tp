@@ -62,6 +62,6 @@ public class Github {
      */
     public int compareTo(Github otherGithub) {
         requireNonNull(otherGithub);
-        return this.username.compareTo(otherGithub.username);
+        return this.username.toLowerCase().compareTo(otherGithub.username.toLowerCase());
     }
 }

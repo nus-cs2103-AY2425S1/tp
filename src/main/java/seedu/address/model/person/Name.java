@@ -78,7 +78,7 @@ public class Name {
      */
     public int compareTo(Name otherName) {
         requireNonNull(otherName);
-        return this.fullName.compareTo(otherName.fullName);
+        return this.fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
     }
     @Override
     public int hashCode() {

@@ -69,6 +69,6 @@ public class Telegram {
      */
     public int compareTo(Telegram otherTelegram) {
         requireNonNull(otherTelegram);
-        return this.value.compareTo(otherTelegram.value);
+        return this.value.toLowerCase().compareTo(otherTelegram.value.toLowerCase());
     }
 }
