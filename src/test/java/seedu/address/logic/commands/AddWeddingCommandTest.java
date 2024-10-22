@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalWeddings.WEDDING_ONE;
+import static seedu.address.testutil.TypicalWeddings.WEDDING_TWO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class AddWeddingCommandTest {
 
         CommandResult commandResult = addWeddingCommand.execute(model);
 
-        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, validWedding.getName()),
+        assertEquals(String.format(AddWeddingCommand.MESSAGE_SUCCESS, validWedding.getWeddingName()),
                 commandResult.getFeedbackToUser());
     }
 
@@ -46,17 +47,15 @@ public class AddWeddingCommandTest {
 
     @Test
     public void equals() {
-        Wedding wedding1 = new Wedding("Wedding1", "12/12/2024");
-        Wedding wedding2 = new Wedding("Wedding2", "13/12/2024");
 
-        AddWeddingCommand addWeddingCommand1 = new AddWeddingCommand(wedding1);
-        AddWeddingCommand addWeddingCommand2 = new AddWeddingCommand(wedding2);
+        AddWeddingCommand addWeddingCommand1 = new AddWeddingCommand(WEDDING_ONE);
+        AddWeddingCommand addWeddingCommand2 = new AddWeddingCommand(WEDDING_TWO);
 
         // Same object -> returns true
         assertTrue(addWeddingCommand1.equals(addWeddingCommand1));
 
         // Same values -> returns true
-        AddWeddingCommand addWeddingCommand1Copy = new AddWeddingCommand(wedding1);
+        AddWeddingCommand addWeddingCommand1Copy = new AddWeddingCommand(WEDDING_ONE);
         assertTrue(addWeddingCommand1.equals(addWeddingCommand1Copy));
 
         // Different types -> returns false

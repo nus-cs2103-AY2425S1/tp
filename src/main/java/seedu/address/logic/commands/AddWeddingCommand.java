@@ -43,7 +43,7 @@ public class AddWeddingCommand extends Command {
         }
 
         model.addWedding(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getWeddingName()));
     }
 
     public Wedding getWedding() {
