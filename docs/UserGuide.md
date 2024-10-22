@@ -5,6 +5,8 @@ title: MediBase3 User Guide
 
 MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appointments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MB3 can get your tasks done faster than traditional GUI apps.
 
+## Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -53,13 +55,13 @@ the constraints of each parameter when used in a command.
 
 |Parameter | Definition | Constraints | Examples |
 |-|-|-|
-|`NAME` | Name of the patient | - Only alphanumeric characters are allowed.<br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of`| :white_check_mark:`John Doe`<br>:x:`$ally`|
-|`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
-|`DOB` | Date of birth (DOB) of the patient. | - Must be in the format `YYYY-MM-DD`. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
+|`NAME` | Name of the patient | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of`| :white_check_mark:`John Doe`<br>:x:`$ally`|
+|`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
+|`DOB` | Date of birth (DOB) of the patient. | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
 |`GENDER` | Gender of the patient. | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). | :white_check_mark:`m`<br>:white_check_mark:`F`<br>:x:`Male` |
-|`EMAIL` | Email address of the patient. | Must be in the format `local-part@domain`. | :white_check_mark:`techraj@gmail.com`<br>:x:`techraj@gmail` |
-|`ADDRESS` | Address of the patient. | Both alphanumeric and special characters are allowed. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
-|`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
+|`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`techraj@gmail.com`<br>:x:`techraj@gmail` |
+|`ADDRESS` | Address of the patient. | - Any value is allowed. <br> - Should not be blank. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
+|`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -68,13 +70,14 @@ the constraints of each parameter when used in a command.
 >
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 > e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
+> 
 > * Items in square brackets are optional.<br>
 >  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
 >
 > * Items with `…`​ after them can be used multiple times.<br>
 >  e.g. `c/CONDITION…​` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
 >
-> * Parameters can be in any order.<br>
+> * Parameters can be in any order for some commands.<br>
 > e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 >
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -96,10 +99,10 @@ Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
-> * All fields are compulsory.
+> * All fields are compulsory and must be non-empty.
 > * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case. 
 > * The new patient will be added to the end of the patient list in the GUI.
-> * Refer to the [Parameter Details](#Parameter-Details) section for more information on the constraints of each parameter.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints of each parameter.
 
 Examples:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
@@ -109,6 +112,24 @@ Examples:
 > :bulb: **Tip:**
 > 
 > Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Deleting a patient : `delete`
+
+Deletes the specified patient and their details from MediBase3.
+
+Format: `delete NRIC`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+> * Deletes the patient with the specified `NRIC`.
+> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. E.g. `S1234567A` and not `S123`. 
+> * You can only delete one patient at a time.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
+
+Examples:
+* `delete S1234567A` will delete the patient with the NRIC `S1234567A`.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -131,21 +152,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-[Back to Table of Contents](#table-of-contents)
 
 ### Managing Appointments
 [To be filled up]
