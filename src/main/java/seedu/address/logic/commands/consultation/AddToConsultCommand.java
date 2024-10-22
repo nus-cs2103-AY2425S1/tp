@@ -65,7 +65,9 @@ public class AddToConsultCommand extends Command {
             consultationToEdit.addStudent(student);
         }
 
-        return new CommandResult(String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)));
+        return new CommandResult(
+            String.format(MESSAGE_ADD_TO_CONSULT_SUCCESS, Messages.format(consultationToEdit)),
+            CommandType.ADDTOCONSULT);
     }
 
     /**

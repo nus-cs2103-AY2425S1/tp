@@ -20,5 +20,6 @@ public enum CommandType {
     // Command Type for Consultations TODO
     ADDCONSULT,
     DELETECONSULT,
+    REMOVEFROMCONSULT,
     ADDTOCONSULT
 }
