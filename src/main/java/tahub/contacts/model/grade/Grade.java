@@ -49,12 +49,16 @@ public class Grade {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Grade grade = (Grade) o;
-        return Double.compare(grade.scorePercentage, scorePercentage) == 0 &&
-                Double.compare(grade.weight, weight) == 0 &&
-                Objects.equals(assessmentName, grade.assessmentName);
+        return Double.compare(grade.scorePercentage, scorePercentage) == 0
+                && Double.compare(grade.weight, weight) == 0
+                && Objects.equals(assessmentName, grade.assessmentName);
     }
 
     @Override

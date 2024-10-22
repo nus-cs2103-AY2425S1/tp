@@ -5,8 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tahub.contacts.commons.exceptions.IllegalValueException;
 import tahub.contacts.model.course.Course;
-import tahub.contacts.model.grade.Grade;
-import tahub.contacts.model.grade.GradingSystem;
 import tahub.contacts.model.person.Person;
 import tahub.contacts.model.studentcourseassociation.StudentCourseAssociation;
 import tahub.contacts.model.tutorial.Tutorial;
@@ -78,6 +76,6 @@ class JsonAdaptedStudentCourseAssociation {
         }
         final Tutorial tutorialModel = this.tutorial.toModelType();
 
-        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel,null);
+        return new StudentCourseAssociation(studentModel, courseModel, tutorialModel, null);
     }
 }
