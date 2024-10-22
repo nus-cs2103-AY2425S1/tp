@@ -39,6 +39,6 @@ public interface EventManagerStorage {
     /**
      * @see #saveEventManager(ReadOnlyEventManager)
      */
-    void saveEventManager(ReadOnlyEventManager eventManager, Path filePath);
+    void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) throws IOException;
 
 }
