@@ -17,7 +17,8 @@ information such as their treatment, contact information, visit records and futu
 2. <b>Update</b> patient records
 3. <b>Delete</b> patient records
 4. <b>Search</b> patient by ID or name
-5. <b>Backup<b> patient records
+5. <b>Backup</b> patient records
+6. <b>Restore</b> backup file
 
 ---
 
