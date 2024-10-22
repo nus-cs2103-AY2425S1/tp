@@ -18,6 +18,7 @@ import seedu.address.logic.commands.FilterContactTypeCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ModCommand;
 import seedu.address.logic.commands.TeleHandleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -84,6 +85,9 @@ public class AddressBookParser {
 
         case FilterContactTypeCommand.COMMAND_WORD:
             return new FilterContactTypeCommandParser().parse(arguments);
+
+        case ModCommand.COMMAND_WORD:
+            return new ModCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
