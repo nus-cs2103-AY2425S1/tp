@@ -17,6 +17,7 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
     private final Company company;
     private final Date dateOfApplication;
     private final Role role;
+    private final Status status;
 
     /**
      * Constructs an {@code InternshipApplication} with the specified company, date of application, and role.
@@ -34,6 +35,27 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
         this.company = company;
         this.dateOfApplication = dateOfApplication;
         this.role = role;
+        this.status = Status.PENDING;
+    }
+
+    /**
+     * Constructs an {@code InternshipApplication} with the specified company, date of application, and role.
+     * All fields must be present and not null.
+     *
+     * @param company The company offering the internship.
+     * @param dateOfApplication The date of application for the internship.
+     * @param role The role applied for in the internship.
+     * @param status The current status of the internship application.
+     * @throws NullPointerException if any of the provided arguments are null.
+     */
+    public InternshipApplication(Company company, Date dateOfApplication, Role role, Status status) {
+        requireNonNull(company);
+        requireNonNull(dateOfApplication);
+        requireNonNull(role);
+        this.company = company;
+        this.dateOfApplication = dateOfApplication;
+        this.role = role;
+        this.status = status;
     }
 
     /**
@@ -79,6 +101,15 @@ public class InternshipApplication implements HireMeComparable<InternshipApplica
      */
     public Role getRole() {
         return role;
+    }
+
+    /**
+     * Returns the status ofthe internship.
+     *
+     * @return The status enum.
+     */
+    public Status getStatus() {
+        return status;
     }
 
     /**
