@@ -71,13 +71,13 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         if (person.getAppointment().isToday()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;");
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;"); // Green
         } else if (person.getAppointment().hasPassed()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;");
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;"); // Red
         } else if (person.getAppointment().hasNotPassed()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;");
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;"); // Yellow
         } else {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: white;");
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: white;"); // White
         }
     }
 }
