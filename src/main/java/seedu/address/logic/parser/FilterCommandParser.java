@@ -29,10 +29,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
-        try {
-            return new FilterCommand(tagList);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
+
+        return new FilterCommand(tagList);
     }
 }

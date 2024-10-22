@@ -47,5 +47,8 @@ public class FilterCommandParserTest {
             assertParseFailure(parser, " t/" + invalidTag,
                     Tag.MESSAGE_CONSTRAINTS);
         }
+        assertParseFailure(parser, " n/ t/friend",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
+
 }
