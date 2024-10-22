@@ -11,7 +11,7 @@ import seedu.address.model.person.Name;
 public class Role {
 
     public static final String MESSAGE_CONSTRAINTS = "Role should contain alphabets only.";
-    public static final String VALIDATION_REGEX = "^[A-Za-z]+$\n";
+    public static final String VALIDATION_REGEX = "^(?!\\s*$)[A-Za-z\\s\\'-]+$";
     private String fullRole;
 
     /**
