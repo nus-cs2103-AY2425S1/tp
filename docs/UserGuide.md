@@ -1,7 +1,7 @@
 ---
   layout: default.md
-    title: "User Guide"
-    pageNav: 3
+  title: "User Guide"
+  pageNav: 3
 ---
 
 # TutorEase User Guide
