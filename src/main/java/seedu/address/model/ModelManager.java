@@ -149,6 +149,20 @@ public class ModelManager implements Model {
         addressBook.sortPersonsDesc(); // Call the sortPersonsDesc method from AddressBook
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
     }
+    /**
+     * Sorts the persons in the address book by putting the favourite tagged persons in front.
+     */
+    public void sortPersonsFavourite() {
+        addressBook.sortPersonsFavourite(); // Call the sortPersonsFavourite method from AddressBook
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
+    }
+    //    /**
+    //     * Sorts the persons in the address book by priority which is the sum of weight of all desired tags.
+    //     */
+    //    public void sortPersonByTagArrayIndices(int... tagIndex) {
+    //        addressBook.sortPersonByTagArrayIndex(tagIndex); // Call the sortPersonsDesc method from AddressBook
+    //        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS); // Refresh the filtered list after sorting
+    //    }
 
     //=========== Filtered Birthday Person List Accessors ====================================================
 

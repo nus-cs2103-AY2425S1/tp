@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.tag.Tag.FAVOURITE_TAG;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -42,6 +43,16 @@ public class UniquePersonList implements Iterable<Person> {
     public void setDesc() {
         // Assuming Person has a getName() method
         internalList.sort(Comparator.comparing(Person::getFullName).reversed());
+    }
+
+    public void setFavouriteFirst() {
+        internalList.sort(Comparator.comparing((Person p) -> p.getTags().contains(FAVOURITE_TAG) ? 0 : 1));
+    }
+    /**
+     * Sorts the list in ascending order of total tag weights.
+     */
+    public void setGrouping(int... tagIndex) {
+        internalList.sort(Comparator.comparing(person -> person.getWeight(tagIndex)));
     }
 
     /**

@@ -93,4 +93,6 @@ public interface Model {
      * Returns a list of persons whose birthdays are within the next week.
      */
     String getPersonsWithUpcomingBirthdays();
+
+    public void sortPersonsFavourite();
 }
