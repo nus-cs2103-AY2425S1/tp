@@ -91,12 +91,15 @@ public class ContactDetails extends UiPart<Region> {
                 Label notesHeader = new Label("Notes");
                 notesHeader.setId("notes-header");
                 notesList.getChildren().add(notesHeader);
+
+                int[] index = {1};
                 person.getNotes().stream()
                         .sorted(Comparator.comparing(note -> note.getNote()))
                         .forEach(note -> {
-                            Label label = new Label("• " + note.getNote());
+                            Label label = new Label(index[0] + ". " + note.getNote());
                             label.setId("notes-label");
                             notesList.getChildren().add(label);
+                            index[0]++;
                         });
             }
         }
