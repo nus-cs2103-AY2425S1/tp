@@ -32,7 +32,7 @@ public class EmployeeCommand extends Command {
             + PREFIX_ROLE + "ROLE "
             + PREFIX_CONTRACT_END_DATE + "CONTRACT_END_DATE ";
 
-    public static final String MESSAGE_EXAMPLE =  COMMAND_WORD + " "
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

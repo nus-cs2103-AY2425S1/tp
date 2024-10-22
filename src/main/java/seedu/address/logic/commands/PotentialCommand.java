@@ -30,7 +30,7 @@ public class PotentialCommand extends Command {
             + PREFIX_DEPARTMENT + "DEPARTMENT "
             + PREFIX_ROLE + "ROLE ";
 
-    public static final String MESSAGE_EXAMPLE =  COMMAND_WORD + " "
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_CONTRACT_END_DATE + "CONTRACT_END_DATE] ";
 
-    public static final String MESSAGE_EXAMPLE =  COMMAND_WORD + " 1 "
+    public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
