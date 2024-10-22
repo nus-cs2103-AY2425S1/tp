@@ -7,7 +7,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.OptionalUtil;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**

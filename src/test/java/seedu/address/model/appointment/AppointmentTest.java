@@ -13,7 +13,6 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.util.OptionalUtil;
 import seedu.address.model.person.Person;
 
 
