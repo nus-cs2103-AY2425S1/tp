@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -91,13 +92,12 @@ public class ContactDetails extends UiPart<Region> {
                 notesHeader.setId("notes-header");
                 notesList.getChildren().add(notesHeader);
 
-                int[] index = {1};
+                AtomicInteger index = new AtomicInteger(1);
                 person.getNotes().stream()
                         .forEach(note -> {
-                            Label label = new Label(index[0] + ". " + note.getNote());
+                            Label label = new Label(index.getAndIncrement() + ". " + note.getNote());
                             label.setId("notes-label");
                             notesList.getChildren().add(label);
-                            index[0]++;
                         });
             }
         }
