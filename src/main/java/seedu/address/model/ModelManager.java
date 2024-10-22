@@ -87,6 +87,7 @@ public class ModelManager implements Model {
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
         internalList.setAll(addressBook.getPersonList());
+        filteredPersons.setPredicate(internalList::contains);
     }
 
     @Override
@@ -128,19 +129,21 @@ public class ModelManager implements Model {
 
     @Override
     public void commitAddressBook() {
-        addressBook.commit(addressBook);
+        addressBook.commit(addressBook, filteredPersons.getPredicate());
     }
 
     @Override
     public void undoAddressBook() throws CommandException {
         ReadOnlyAddressBook prevAddressBook = addressBook.undo();
         setAddressBook(prevAddressBook);
+        filteredPersons.setPredicate(addressBook.getCurrentPredicate());
     }
 
     @Override
     public void redoAddressBook() throws CommandException {
         ReadOnlyAddressBook nextAddressBook = addressBook.redo();
         setAddressBook(nextAddressBook);
+        filteredPersons.setPredicate(addressBook.getCurrentPredicate());
     }
 
     //=========== Filtered Person List Accessors =============================================================
