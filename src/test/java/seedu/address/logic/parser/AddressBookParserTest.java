@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListIncompleteCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
 import seedu.address.logic.commands.PriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -151,6 +152,12 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 PriorityCommand.MESSAGE_USAGE), () -> parser.parseCommand(
                                 PriorityCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()));
+    }
+
+    @Test
+    public void parseCommand_listIncomplete() throws Exception {
+        assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD) instanceof ListIncompleteCommand);
+        assertTrue(parser.parseCommand(ListIncompleteCommand.COMMAND_WORD + " 3") instanceof ListIncompleteCommand);
     }
 
 }
