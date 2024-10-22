@@ -4,11 +4,14 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.UnpinCommand;
 
 /**
@@ -25,6 +28,12 @@ public class UnpinCommandParserTest {
     @Test
     public void parse_validArgs_returnsUnpinCommand() {
         assertParseSuccess(parser, "1", new UnpinCommand(List.of(INDEX_FIRST_PERSON)));
+    }
+
+    @Test
+    public void parse_multipleValidArgs_returnsUnpinCommand() {
+        assertParseSuccess(parser, "1 2 3",
+                new UnpinCommand(List.of(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON)));
     }
 
     @Test
