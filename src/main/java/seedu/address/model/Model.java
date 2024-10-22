@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.AttributeContainsKeywordsPredicate;
 
 /**
  * The API of the Model component.
@@ -100,4 +101,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredStudentList(Predicate<Student> predicate);
+
+    /**
+     * Updates the filter of the filtered student list to filter by the given {@code List} of {@code predicate}.
+     * @throws NullPointerException if {@code List} is null.
+     */
+    void updateFilteredStudentList(List<AttributeContainsKeywordsPredicate<?>> predicate);
 }

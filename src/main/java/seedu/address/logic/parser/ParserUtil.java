@@ -2,10 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Logger;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Address;
+import seedu.address.model.student.Days;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.OwedAmount;
@@ -21,7 +27,9 @@ import seedu.address.model.student.Subject;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_HOUR = "Number of hours should be a positive multiple of 0.5";
 
+    private static final Logger logger = Logger.getLogger(ParserUtil.class.getName());
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -45,10 +53,12 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
+            logger.finer("Name is invalid: " + trimmedName);
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -95,6 +105,23 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String day} into a {@code Days}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static Days parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        assert !day.isEmpty();
+
+        String trimmedDay = day.trim();
+        if (!Days.isValidDay(trimmedDay)) {
+            logger.finer("Day is invalid: " + trimmedDay);
+            throw new ParseException(Days.MESSAGE_CONSTRAINTS);
+        }
+        return Days.valueOf(trimmedDay.toUpperCase());
+    }
     /**
      * Parses a {@code String schedule} into an {@code Schedule}.
      * Leading and trailing whitespaces will be trimmed.
@@ -182,5 +209,72 @@ public class ParserUtil {
             throw new ParseException("Amount has to positive");
         }
         return amountDouble;
+    }
+
+    /**
+     * Parses a {@code String hoursPaid} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the {@code hoursPaid} is invalid.
+     */
+    public static double parseHour(String hour) throws ParseException {
+        requireNonNull(hour);
+        String trimmedHour = hour.trim();
+        if (!StringUtil.isPositiveMultipleOfHalfHour(trimmedHour)) {
+            throw new ParseException(MESSAGE_INVALID_HOUR);
+        }
+        return Double.parseDouble(trimmedHour);
+    }
+
+    /**
+     * Parses a {@code Collection<String> nameStrings} into a {@code Set<String>}.
+     * Duplicate names will be ignored.
+     *
+     * @throws ParseException if the {@code names} are invalid.
+     */
+    public static Set<String> parseNameStrings(Collection<String> nameStrings) throws ParseException {
+        requireNonNull(nameStrings);
+        assert !nameStrings.isEmpty();
+        assert !nameStrings.contains("");
+
+        HashSet<String> nameSet = new HashSet<>();
+
+        for (String nameString : nameStrings) {
+            addToNameHashSet(nameString, nameSet);
+        }
+        return nameSet;
+    }
+
+    /**
+     * Parses a {@code Collection<String> days} into a {@code Set<Days>}.
+     *
+     * @throws ParseException if the {@code days} are invalid.
+     */
+    public static Set<Days> parseDays(Collection<String> days) throws ParseException {
+        requireNonNull(days);
+        assert !days.isEmpty();
+        assert !days.contains("");
+
+        HashSet<Days> daySet = new HashSet<>();
+
+        for (String dayString : days) {
+            addToDayHashSet(dayString, daySet);
+        }
+        return daySet;
+    }
+
+    private static void addToNameHashSet(String nameString, HashSet<String> nameSet) throws ParseException {
+        String[] names = nameString.split("\\s+");
+        for (String name : names) {
+            parseName(name); // Check if name is valid
+            nameSet.add(name); // Add to set to ensure uniqueness
+        }
+    }
+
+    private static void addToDayHashSet(String dayString, HashSet<Days> daySet) throws ParseException {
+        String[] dayStrings = dayString.split("\\s+");
+        for (String day : dayStrings) {
+            daySet.add(parseDay(day)); // Convert and add to the set
+        }
     }
 }

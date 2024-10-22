@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
@@ -15,15 +16,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -50,6 +52,7 @@ public class CommandTestUtil {
     public static final String VALID_OWED_AMOUNT_AMY = "500.00";
     public static final String VALID_OWED_AMOUNT_BOB = "300.25";
     public static final String VALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "5.00";
+    public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + "4.5";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -80,6 +83,7 @@ public class CommandTestUtil {
     public static final String INVALID_PAID_AMOUNT_DESC = " " + PREFIX_PAID_AMOUNT + " ";
     public static final String INVALID_OWED_AMOUNT_DESC = " " + PREFIX_OWED_AMOUNT + "19.000";
     public static final String INVALID_AMOUNT_DESC = " " + PREFIX_AMOUNT + "-60.00";
+    public static final String INVALID_HOUR_DESC = " " + PREFIX_HOUR + "abc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -154,7 +158,8 @@ public class CommandTestUtil {
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
         final String[] splitName = student.getName().fullName.split("\\s+");
-        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        HashSet<String> nameSet = new HashSet<>(Collections.singletonList(splitName[0]));
+        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(nameSet));
 
         assertEquals(1, model.getFilteredStudentList().size());
     }

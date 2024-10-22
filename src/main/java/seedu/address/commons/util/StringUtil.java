@@ -65,4 +65,23 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a positive multiple of 0.5
+     * e.g. 0.5, 1, 30, ..., <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isPositiveMultipleOfHalfHour(String s) {
+        requireNonNull(s);
+
+        try {
+            double value = Double.parseDouble(s);
+            return value > 0 && value % 0.5 == 0 && !s.startsWith("+")
+                    && s == s.trim();
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+    }
 }
