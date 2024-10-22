@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import java.net.URL?>
+
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label id="personTitle" text="Contact Info" />
     <Label fx:id="personInfo" text="{info}"/>
