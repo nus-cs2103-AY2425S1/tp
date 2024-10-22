@@ -135,12 +135,15 @@ Examples:
 * `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan`<br>
   ![result for `find n/yeoh d/Friday`](images/findResult.png)
 
-<box type="note" seamless>**Constraints:**
-1. <b>DAY</b> must be one of <md> `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
-2. <b>KEYWORD</b> must be only alphanumeric characters.
+<box type="important" header="#### Constraints">
+<markdown>
+* <b>DAY</b> must be one of `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`.
+* <b>KEYWORD</b> must be only alphanumeric characters.
+* At least one of the optional fields must be provided.
+</markdown>
 </box>
 
-<box type="tip" seamless>**Tips:**
+<box type="tip" header="#### Tips:">
 <markdown>
 * The search is case-insensitive. e.g. `alex` will match `Alex`
 * Only full words will be matched e.g. `alex` will not match `Alexander`
@@ -149,10 +152,11 @@ Examples:
 * The search finds all the students whose 
     1. names matches at least one of the keywords **OR** 
     2. the tuition day matches the days.
-  
+
   e.g. `find n/yeoh d/Friday` returns `Alex Yeoh`, `Alex Tan` because:
-    * `Alex Yeoh` matches keyword `yeoh`
-    * `Alex Tan` has a tuition on Wednesday.
+
+* `Alex Yeoh` matches keyword `yeoh`
+* `Alex Tan` has a tuition on `Friday`.
 </markdown>
 </box>
 
@@ -172,7 +176,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Receiving payment from a student : `pay`
 
@@ -185,9 +189,9 @@ Example:
     ![payResult.png](images/payResult.png)
 
 <box type="important" header="#### Constraints">
-
-    Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
-
+<markdown>
+Hours paid field should be a positive multiple of 0.5, i.e. 0.5, 1.0, 1.5, etc
+</markdown>
 </box>
 
 ### Clearing all entries : `clear`
