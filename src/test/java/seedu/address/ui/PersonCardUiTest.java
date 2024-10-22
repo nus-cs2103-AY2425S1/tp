@@ -75,7 +75,7 @@ public class PersonCardUiTest extends ApplicationTest {
         assertEquals("John Buyer", personCard.getName().getText());
         assertEquals("91234567", personCard.getPhone().getText());
         assertEquals("buyer@example.com", personCard.getEmail().getText());
-        assertEquals("Date: 2023-01-01, From: 10:00, To: 11:00", personCard.getAppointment().getText());
+        assertEquals("Date: 2023-01-01 (From: 10:00 To: 11:00)", personCard.getAppointment().getText());
         assertEquals("NUS", personCard.getProperty().getText());
 
         // Check if the tags are correctly displayed
