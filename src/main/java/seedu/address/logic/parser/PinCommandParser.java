@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses input arguments and create a new PinCommand object
  */
 public class PinCommandParser implements Parser<PinCommand> {
-    
+
     /**
      * Parses the given {@code String} of arguments int he context of the PinCommand
      * and return a PinCommand object for execution.

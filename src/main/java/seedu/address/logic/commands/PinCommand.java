@@ -15,7 +15,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 /**
  * Pins a person in address book to a pinned list.
  */
-public class PinCommand extends Command{
+public class PinCommand extends Command {
     public static final String COMMAND_WORD = "pin";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Pins the person identified by the index number.\n"
@@ -49,7 +49,6 @@ public class PinCommand extends Command{
         } catch (DuplicatePersonException e) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-        
     }
 
     @Override

@@ -112,7 +112,7 @@ public interface Model {
     /**
      * Remove the {@code person} in the pinned contact list.
      *
-     * @param index The {@code person} in the contact list to be unpinned.
+     * @param person The {@code person} in the contact list to be unpinned.
      */
     void removePinnedPersonList(Person person);
 }

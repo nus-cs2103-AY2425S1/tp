@@ -27,7 +27,7 @@ public class DeleteCommandParserTest {
     }
 
     @Test
-    public void parse_outOfBound_throwsParseException() {
+    public void parse_outOfBound_returnsDeleteCommand() {
         // handling of out of bound person is done by delete command,
         // as 1000 is still considered a positive integer.
         assertParseSuccess(parser, "1000", new DeleteCommand(INDEX_OUTOFBOUND_PERSON));
