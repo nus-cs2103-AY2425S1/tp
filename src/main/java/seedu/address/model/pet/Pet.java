@@ -16,6 +16,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Pet implements Linkable {
+    private static final String ID_PREFIX = "p";
 
     // Identity fields
     private final Name name;
@@ -113,7 +114,7 @@ public class Pet implements Linkable {
     @Override
     public String getUniqueID() {
         //TODO update this to actually unique ID
-        return name + " " + species + " " + breed + " " + sex;
+        return ID_PREFIX + name + " " + species + " " + breed + " " + sex;
     }
 
     @Override

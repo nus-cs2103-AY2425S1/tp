@@ -247,6 +247,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         links.remove(key);
     }
 
+    /**
+     * Remove {@code Link} that involve the specific ID
+     * taken from {@code Linkable}
+     */
+    public void deleteLinksWithId(String id) {
+        links.deleteLinksWithId(id);
+    }
+
     // util methods
 
     @Override
