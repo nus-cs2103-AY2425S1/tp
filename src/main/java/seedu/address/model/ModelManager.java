@@ -132,7 +132,8 @@ public class ModelManager implements Model {
 
     @Override
     public void setSelectedPerson(Person person) {
-        if (person != null && !filteredPersons.contains(person)) {
+        requireNonNull(person);
+        if (!filteredPersons.contains(person)) {
             throw new PersonNotFoundException();
         }
         selectedPerson.setValue(person);
