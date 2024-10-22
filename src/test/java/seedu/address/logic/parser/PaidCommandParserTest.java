@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.PaidCommand;
+import seedu.address.model.person.Frequency;
 
 
 public class PaidCommandParserTest {
@@ -17,8 +18,9 @@ public class PaidCommandParserTest {
     public void parse_validArgs_returnsPaidCommand() {
         PaidCommand.PaidPersonDescriptor paidPersonDescriptor = new PaidCommand.PaidPersonDescriptor();
         paidPersonDescriptor.setHasPaid();
+        paidPersonDescriptor.setFrequency(new Frequency("3"));
 
-        assertParseSuccess(parser, "1", new PaidCommand(INDEX_FIRST_PERSON, paidPersonDescriptor));
+        assertParseSuccess(parser, "1 f/ 3", new PaidCommand(INDEX_FIRST_PERSON, paidPersonDescriptor));
     }
 
     @Test
