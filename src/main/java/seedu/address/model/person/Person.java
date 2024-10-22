@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -25,7 +26,7 @@ public class Person {
     // Data fields
     private final Role role;
     private final Set<Skill> skills = new HashSet<>();
-    private final String match;
+    private final Optional<String> match = Optional.empty();
 
     /**
      * Every parameter must be present and not null.
@@ -37,7 +38,6 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match = null;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Person {
         this.email = email;
         this.role = role;
         this.skills.addAll(skills);
-        this.match = match;
+        this.match.map(s -> match);
     }
 
     public Name getName() {
@@ -77,7 +77,7 @@ public class Person {
         return Collections.unmodifiableSet(skills);
     }
 
-    public String getMatch() {
+    public Optional<String> getMatch() {
         return match;
     }
 
@@ -87,11 +87,7 @@ public class Person {
      * @param jobIdentifier A string that uniquely identify a job
      */
     public boolean hasMatched(String jobIdentifier) {
-        if (match == null) {
-            return false;
-        }
-
-        return match.equals(jobIdentifier);
+        return match.map(s -> s.equals(jobIdentifier)).orElse(false);
     }
 
     /**
