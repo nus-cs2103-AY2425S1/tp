@@ -29,6 +29,7 @@ class JsonAdaptedPerson {
     private final String email;
     private final String role;
     private final List<JsonAdaptedSkill> skills = new ArrayList<>();
+    private final String match;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -44,6 +45,7 @@ class JsonAdaptedPerson {
         if (skills != null) {
             this.skills.addAll(skills);
         }
+        this.match = null;
     }
 
     /**
@@ -57,6 +59,7 @@ class JsonAdaptedPerson {
         skills.addAll(source.getSkills().stream()
                 .map(JsonAdaptedSkill::new)
                 .collect(Collectors.toList()));
+        match = source.getMatch();
     }
 
     /**

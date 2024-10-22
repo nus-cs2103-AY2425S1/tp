@@ -60,6 +60,6 @@ public class JobBuilder {
      * @return Job object.
      */
     public Job build() {
-        return new Job(jobName, jobCompany, jobSalary, new JobDescription(""), new HashSet<>());
+        return new Job(jobName, jobCompany, jobSalary, new JobDescription(""), new HashSet<>(), new HashSet<>());
     }
 }
