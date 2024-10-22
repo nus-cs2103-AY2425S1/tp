@@ -24,13 +24,14 @@ public class FindCommandParserTest {
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
         FindStudentDescriptor descriptor = new FindStudentDescriptorBuilder().withName("Alice").withAddress("Bob")
+                .withPhone("88197184")
                 .build();
         FindCommand expectedFindCommand = new FindCommand(new StudentDescriptorMatchesPredicate(descriptor));
 
-        assertParseSuccess(parser, " n/Alice a/Bob", expectedFindCommand);
+        assertParseSuccess(parser, " n/Alice a/Bob p/88197184", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t a/Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t a/Bob  \t p/88197184", expectedFindCommand);
     }
 
     @Test
