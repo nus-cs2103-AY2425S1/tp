@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
@@ -57,7 +57,7 @@
                         </effect>
                         <Image url="@../images/audio-playlist-icon.png" />
                     </ImageView>
-                    <Label fx:id="pianoPieces" styleClass="cell_small_label" text="\$pianoPieces" />
+                    <Label fx:id="pianoPieces" styleClass="cell_small_label" text="\$pianoPieces" wrapText="true" />
                 </HBox>
                 <HBox layoutX="25.0" layoutY="100.0" spacing="4.5">
                     <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" styleClass="icon">
@@ -104,6 +104,11 @@
                </children>
             </HBox>
             </VBox>
+         <VBox fx:id="groupChipHolder" alignment="TOP_RIGHT" layoutX="10.0" layoutY="10.0" nodeOrientation="RIGHT_TO_LEFT" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="15.0" top="5.0" />
+            </padding>
+         </VBox>
         </AnchorPane>
         <rowConstraints>
             <RowConstraints />

@@ -2,15 +2,17 @@
     -fx-primary-color: derive(#1d1d1d, 20%);
 }
 
+.label {
+    -fx-font-family: "Segoe UI Semibold";
+}
+
 .label-day {
     -fx-text-fill: white;
-    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 14px;
 }
 
 .label-hour {
     -fx-text-fill: white;
-    -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 8px;
 }
 
@@ -296,4 +298,10 @@
 #resultDisplay .content {
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
+}
+
+.group-chip {
+    -fx-background-color: darkblue;
+    -fx-background-radius: 20;
+    -fx-padding: 2 5 2 5;
 }

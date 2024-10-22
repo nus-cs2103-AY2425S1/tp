@@ -122,13 +122,13 @@ public class CalendarView extends UiPart<Region> {
      */
     public void update() {
         createBlock(2, LocalTime.of(1, 0, 0), LocalTime.of(3, 0, 0),
-                Color.BLUE);
+                Color.DARKBLUE);
         createBlock(2, LocalTime.of(6, 0, 0), LocalTime.of(8, 0, 0),
-                Color.YELLOW);
+                Color.DARKRED);
         createBlock(0, LocalTime.of(3, 45, 0), LocalTime.of(5, 45, 0),
-                Color.BLUE);
+                Color.SLATEBLUE);
         createBlock(0, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
-                Color.RED);
+                Color.SLATEGRAY);
     }
 
     class TimeBlock {
