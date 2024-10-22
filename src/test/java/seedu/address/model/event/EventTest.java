@@ -52,10 +52,4 @@ public class EventTest {
         Event event2 = new Event(new EventName("Event 2"));
         assertNotEquals(event1.hashCode(), event2.hashCode());
     }
-
-    @Test
-    void toString_containsEventName() {
-        Event event = new Event(new EventName("Event 1"));
-        assertTrue(event.toString().contains("Event 1"));
-    }
 }

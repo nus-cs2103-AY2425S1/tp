@@ -52,6 +52,12 @@ public class UniqueEventList implements Iterable<Event> {
         internalList.setAll(events);
     }
 
+    public void setEvents(UniqueEventList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+
+    }
+
     public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
