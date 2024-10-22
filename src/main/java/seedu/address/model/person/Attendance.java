@@ -52,7 +52,7 @@ public class Attendance {
      */
     public String toDisplayString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E dd MMM");
-        return "Attended on: " + attendanceDate.format(formatter);
+        return "Attended on " + attendanceDate.format(formatter);
     }
 
     @Override

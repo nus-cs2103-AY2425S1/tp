@@ -41,9 +41,9 @@ public class AttendanceCard extends UiPart<Region> {
         Attendance currentWeekAttendance = getCurrentWeekAttendance();
 
         if (currentWeekAttendance == null) {
-            attendance.setText("Not attended");
+            attendance.setText(": not attended");
         } else {
-            attendance.setText(currentWeekAttendance.toDisplayString());
+            attendance.setText(": " + currentWeekAttendance.toDisplayString());
         }
     }
 

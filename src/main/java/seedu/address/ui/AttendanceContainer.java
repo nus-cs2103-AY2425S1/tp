@@ -6,15 +6,11 @@ import java.time.temporal.IsoFields;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.participation.Participation;
-import seedu.address.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -25,6 +21,8 @@ public class AttendanceContainer extends UiPart<Region> {
 
     public final List<Participation> participationList;
 
+    @FXML
+    private Label tutorial;
     @FXML
     private Label week;
     @FXML
@@ -38,6 +36,7 @@ public class AttendanceContainer extends UiPart<Region> {
 
         setDisplayDate();
         setAttendanceList();
+        setTutorial();
     }
 
     private void setDisplayDate() {
@@ -54,5 +53,21 @@ public class AttendanceContainer extends UiPart<Region> {
         participationList.forEach(participation -> attendanceList.getChildren()
                 .add(new AttendanceCard(participation.getTutorial().getSubject(),
                         participation.getAttendanceList()).getRoot()));
+    }
+
+    private void setTutorial() {
+        StringBuilder tutorials = new StringBuilder();
+        for (int i = 0; i < participationList.size(); i++) {
+            tutorials.append(participationList.get(i).getTutorial().getSubject());
+            if (i != participationList.size() - 1) {
+                tutorials.append(" | ");
+            }
+        }
+
+        if (tutorials.isEmpty()) {
+            tutorial.setText("Not enrolled in any tutorial");
+        } else {
+            tutorial.setText(tutorials.toString());
+        }
     }
 }
