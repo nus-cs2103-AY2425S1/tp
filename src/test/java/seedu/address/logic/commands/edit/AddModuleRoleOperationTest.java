@@ -28,9 +28,9 @@ public class AddModuleRoleOperationTest {
         // same object -> returns true
         assertEquals(addModuleRoleOperation, addModuleRoleOperation);
         // null -> returns false
-        assertNotEquals(null, addModuleRoleOperation);
+        assertNotEquals(addModuleRoleOperation, null);
         // different types -> returns false
-        assertNotEquals(0, addModuleRoleOperation);
+        assertNotEquals(addModuleRoleOperation, 0);
         // different values -> returns false
         AddModuleRoleOperation differentAddModuleRoleOperation = new AddModuleRoleOperation(DEFAULT_MODULE_ROLE_MAP_2);
         assertNotEquals(addModuleRoleOperation, differentAddModuleRoleOperation);
@@ -80,5 +80,15 @@ public class AddModuleRoleOperationTest {
         ModuleRoleMap expectedMap = DEFAULT_MODULE_ROLE_MAP;
 
         assertEquals(expectedMap, new AddModuleRoleOperation(mapToAdd).execute(initialMap));
+    }
+
+    @Test
+    public void toString_validModuleRoleMap_returnsCorrectString() {
+        ModuleRoleMap moduleRoleMap = new ModuleRoleMap(
+                new ModuleCode[]{new ModuleCode("CS1101S")}, new RoleType[]{RoleType.STUDENT});
+        AddModuleRoleOperation addModuleRoleOperation = new AddModuleRoleOperation(moduleRoleMap);
+
+        String expectedString = "+ Student of: CS1101S\n";
+        assertEquals(expectedString, addModuleRoleOperation.toString());
     }
 }
