@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,10 +25,10 @@ public class FilterCommand extends Command {
             + "If there is no contact with the given tag, "
             + "an empty list of contacts will be displayed.\n"
             + "Ensure that tag only contains alphanumeric characters. \n"
-            + "Parameters: t/TAG (one or more)\n"
+            + "Parameters: " + PREFIX_TAG + "TAG...\n"
             + "Example: " + COMMAND_WORD + " t/supplier";
 
-    public static final String MESSAGE_SUCCESS = "Filtered for tag: %s";
+    public static final String MESSAGE_SUCCESS = "Filtered for tag(s): %s";
     public static final String MESSAGE_FAILURE =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE)
             + "\nListing all contacts instead.";
