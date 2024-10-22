@@ -61,6 +61,6 @@ public class MemberCard extends UiPart<Region> {
 
         member.getSessions().stream()
                 .sorted(Comparator.comparing(session -> session.getSessionName().toString()))
-                .forEach(session -> sessions.getChildren().add(new Label(session.getSessionName().toString())));
+                .forEach(session -> sessions.getChildren().add(new Label(session.getSessionName().toString() + " " + session.getDate().toString())));
     }
 }
