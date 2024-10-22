@@ -17,7 +17,7 @@ public class SubjectMatchesKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         return person.getParticipation().stream()
                 .anyMatch(eachParticipation ->
-                        StringUtil.areStringsMatchIgnoreCase(eachParticipation.getTutorialSubject(), this.keyword));
+                        StringUtil.areMatchingStringsIgnoreCase(eachParticipation.getTutorialSubject(), this.keyword));
     }
 
     @Override

@@ -19,10 +19,10 @@ public class StringUtil {
      *  <br>examples:<pre>
      *       isWordInSentenceIgnoreCase("ABc def", "abc") == true
      *       isWordInSentenceIgnoreCase("ABc def", "DEF") == true
-     *       isWordInSentenceIgnoreCase("ABc def", "AB") == true //not a full word match
-     *       isWordInSentenceIgnoreCase("ABc def", "AB") == true //not a full word match
      *       isWordInSentenceIgnoreCase("ABc def", "AB") == true
-     *       isWordInSentenceIgnoreCase("ABc def", "AB") == true
+     *       isWordInSentenceIgnoreCase("ABc def", "ABcd") == false //not a full word match
+     *       isWordInSentenceIgnoreCase("ABc def", "d") == true
+     *       isWordInSentenceIgnoreCase("ABc def", "df") == false
      *     </pre>
      *
      * @param sentence The sentence to search within. Must not be null.
@@ -34,15 +34,15 @@ public class StringUtil {
         requireNonNull(sentence);
         requireNonNull(word);
 
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String trimmedWord = word.trim();
+        checkArgument(!trimmedWord.isEmpty(), "Word parameter cannot be empty");
+        checkArgument(trimmedWord.split("\\s+").length == 1, "Word parameter should be a single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
+        String trimmedSentence = sentence.trim();
+        String[] wordsInTrimmedSentence = trimmedSentence.split("\\s+");
 
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(eachWord -> eachWord.toLowerCase(Locale.ROOT).contains(preppedWord.toLowerCase(Locale.ROOT)));
+        return Arrays.stream(wordsInTrimmedSentence)
+                .anyMatch(eachWord -> eachWord.toLowerCase(Locale.ROOT).contains(trimmedWord.toLowerCase(Locale.ROOT)));
     }
 
     /**
@@ -63,31 +63,31 @@ public class StringUtil {
         requireNonNull(wordFromPerson);
         requireNonNull(wordToCheck);
 
-        String preppedWordToCheck = wordToCheck.trim();
-        checkArgument(!preppedWordToCheck.isEmpty(), "Word parameter cannot be empty");
+        String trimmedWordToCheck = wordToCheck.trim();
+        checkArgument(!trimmedWordToCheck.isEmpty(), "Word parameter cannot be empty");
         checkArgument(
-                preppedWordToCheck.split("\\s+").length == 1,
+                trimmedWordToCheck.split("\\s+").length == 1,
                 "wordToCheck parameter should be a single word");
 
-        String preppedWordFromPerson = wordFromPerson.trim();
+        String trimmedWordFromPerson = wordFromPerson.trim();
         checkArgument(
-                preppedWordFromPerson.split("\\s+").length == 1,
+                trimmedWordFromPerson.split("\\s+").length == 1,
                 "wordFromPerson parameter should be a single word");
 
         return wordFromPerson.toLowerCase(Locale.ROOT).contains(wordToCheck.toLowerCase(Locale.ROOT));
     }
 
-    public static boolean areStringsMatchIgnoreCase(String firstString, String secondString) {
+    public static boolean areMatchingStringsIgnoreCase(String firstString, String secondString) {
         requireNonNull(firstString);
         requireNonNull(secondString);
 
-        String preppedFirstString = firstString.trim();
-        checkArgument(!preppedFirstString.isEmpty(), "First string parameter cannot be empty");
+        String trimmedFirstString = firstString.trim();
+        checkArgument(!trimmedFirstString.isEmpty(), "First string parameter cannot be empty");
 
-        String preppedSecondString = secondString.trim();
-        checkArgument(!preppedSecondString.isEmpty(), "Second string parameter cannot be empty");
+        String trimmedSecondString = secondString.trim();
+        checkArgument(!trimmedSecondString.isEmpty(), "Second string parameter cannot be empty");
 
-        return preppedFirstString.equalsIgnoreCase(preppedSecondString);
+        return trimmedFirstString.equalsIgnoreCase(trimmedSecondString);
     }
 
     /**
