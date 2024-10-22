@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -96,7 +97,6 @@ public class ContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
         // Keywords match phone, email and address, but does not match name
-        List<String> notMatchingNameKeywords = Arrays.asList("12345", "alice@email.com", "Main", "Street");
         ArgumentMultimap mapForNotMatchingNameKeywords = new ArgumentMultimap();
         mapForNotMatchingNameKeywords.put(PREFIX_PHONE, "12345");
         mapForNotMatchingNameKeywords.put(PREFIX_EMAIL, "alice@email.com");
@@ -149,5 +149,36 @@ public class ContainsKeywordsPredicateTest {
 
         assertEquals(expected, predicate.toString());
     }
+
+    @Test
+    public void test_personWithNoMatchingTags_returnsFalse() {
+        ArgumentMultimap mapForNoMatchingTags = new ArgumentMultimap();
+        mapForNoMatchingTags.put(PREFIX_TAG, "friend");
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForNoMatchingTags);
+        assertFalse(predicate.test(new PersonBuilder().withTags("enemy", "foe").build()));
+    }
+    @Test
+    public void test_personWithNoMatchingNric_returnsFalse() {
+        ArgumentMultimap mapForNoMatchingTags = new ArgumentMultimap();
+        mapForNoMatchingTags.put(PREFIX_NRIC, "s1234567d");
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForNoMatchingTags);
+        assertFalse(predicate.test(new PersonBuilder().withNric("S6283947C").build()));
+    }
+    @Test
+    public void test_personWithNoMatchingRole_returnsFalse() {
+        ArgumentMultimap mapForNoMatchingTags = new ArgumentMultimap();
+        mapForNoMatchingTags.put(PREFIX_ROLE, "patient");
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForNoMatchingTags);
+        assertFalse(predicate.test(new PersonBuilder().withRole("caregiver").build()));
+    }
+
+    @Test
+    public void test_personWithNoMatchingName_returnsFalse() {
+        ArgumentMultimap mapForNoMatchingTags = new ArgumentMultimap();
+        mapForNoMatchingTags.put(PREFIX_NAME, "test");
+        ContainsKeywordsPredicate predicate = new ContainsKeywordsPredicate(mapForNoMatchingTags);
+        assertFalse(predicate.test(new PersonBuilder().withName("John").build()));
+    }
+
 
 }
