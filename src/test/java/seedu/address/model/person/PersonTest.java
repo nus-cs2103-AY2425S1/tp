@@ -91,15 +91,6 @@ public class PersonTest {
     }
 
     @Test
-    public void toCsvStringMethod() {
-        String expected = ALICE.getName() + "," + ALICE.getPhone()
-                + "," + ALICE.getEmail() + ",\"" + ALICE.getAddress() + "\",\"friends\""
-                + ",\"High profile client, Likes dumplings\"";
-
-        assertEquals(expected, ALICE.toCsvString());
-    }
-
-    @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
                 + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags()

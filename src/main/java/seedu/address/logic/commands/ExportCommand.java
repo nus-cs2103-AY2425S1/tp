@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringJoiner;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -29,7 +32,7 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
     public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file";
 
-    private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes";
+    private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes\n";
 
     private final Path exportCsvPath = Paths.get("exports" , "bizbook.csv");
 
@@ -61,7 +64,7 @@ public class ExportCommand extends Command {
 
             ObservableList<Person> personList = model.getFilteredPersonList();
             for (Person person : personList) {
-                String personData = person.toCsvString();
+                String personData = this.toCsvString(person);
                 fw.write(personData + "\n");
             }
             fw.close();
@@ -70,6 +73,40 @@ public class ExportCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileType));
+    }
+
+    /**
+     * Converts a {@code Person} object into a csv format.
+     *
+     * @param person to be encoded into a csv format.
+     * @return A csv representation of the {@Code Person} object.
+     */
+    public String toCsvString(Person person) {
+        StringJoiner sj = new StringJoiner(",");
+
+        sj.add(person.getName().fullName);
+        sj.add(person.getPhone().value);
+        sj.add(person.getEmail().value);
+
+
+        String address = "\"" + person.getAddress().value + "\"";
+        sj.add(address);
+
+        List<String> tags = new ArrayList<>();
+        List<String> notes = new ArrayList<>();
+
+        tags.addAll(person.getTags().stream()
+            .map((tag) -> tag.toString())
+            .toList());
+
+        notes.addAll(person.getNotes().stream()
+            .map((note) -> note.toString())
+            .toList());
+
+        sj.add("\"" + tags.toString().replaceAll("[\\[\\]]", "") + "\"");
+        sj.add("\"" + notes.toString().replaceAll("[\\[\\]]", "") + "\"");
+
+        return sj.toString();
     }
 
     @Override
