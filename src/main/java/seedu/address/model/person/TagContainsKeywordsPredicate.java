@@ -25,6 +25,10 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
         return false;
     }
 
+    public Tag getTag() {
+        return this.tag;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

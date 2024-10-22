@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_FILTER_CRITERIA;
 
 import seedu.address.logic.commands.FilterCommand;
@@ -9,7 +10,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses the user's input and create a FilterCommand object
+ * Parses the user's input and return a FilterCommand object for execution
+ * @throws ParseException if the user input does not conform the expected format
  */
 public class FilterCommandParser implements Parser<FilterCommand> {
 
@@ -18,7 +20,12 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @throws ParseException if the user enters an invalid prefix
      */
     public FilterCommand parse(String args) throws ParseException {
-        String[] parsedArgs = args.trim().split("/", 2);
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        String[] parsedArgs = trimmedArgs.trim().split("/", 2);
         switch (parsedArgs[0]) {
         case "t":
             return new FilterTagCommand(new TagContainsKeywordsPredicate(new Tag(parsedArgs[1].trim())));
