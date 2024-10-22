@@ -15,8 +15,8 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String CSS_THEME = "-fx-font-family: \"Segoe UI\";\n" +
-            "    -fx-font-size: 13px;";
+    private static final String CSS_THEME = "-fx-font-family: \"Segoe UI\";\n"
+            + "    -fx-font-size: 13px;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -71,14 +71,13 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         if (person.getAppointment().isToday()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;");   // Green
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;");
         } else if (person.getAppointment().hasPassed()) {
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;");   // Dark Red
-        } else if (person.getAppointment().hasNotPassed()){
-            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;");   // Yellow
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;");
+        } else if (person.getAppointment().hasNotPassed()) {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;");
         } else {
-            appointment.setStyle(CSS_THEME + "-fx-text-fill: white;");    // Normal White
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: white;");
         }
-
     }
 }
