@@ -33,7 +33,6 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        System.out.println(this.addressBook.getPersonList().get(0));
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 

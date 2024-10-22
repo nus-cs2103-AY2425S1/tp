@@ -86,8 +86,12 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return specificPredicate.equals(otherFindCommand.specificPredicate)
-                && generalPredicate.equals(otherFindCommand.generalPredicate);
+
+        if (specificPredicate != null) {
+            return specificPredicate.equals(otherFindCommand.specificPredicate);
+        } else {
+            return generalPredicate.equals(otherFindCommand.generalPredicate);
+        }
     }
 
     @Override

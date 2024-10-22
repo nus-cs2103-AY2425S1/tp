@@ -78,7 +78,8 @@ public class FindCommandTest {
     public void toStringMethod() {
         ContainsGeneralKeywordsPredicate predicate = new ContainsGeneralKeywordsPredicate(Arrays.asList("keyword"));
         FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        String expected = FindCommand.class.getCanonicalName() + "{specific predicate=null, general predicate="
+                + predicate + "}";
         assertEquals(expected, findCommand.toString());
     }
 
