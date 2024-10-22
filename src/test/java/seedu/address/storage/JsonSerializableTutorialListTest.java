@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +73,27 @@ public class JsonSerializableTutorialListTest {
         TutorialList resultTutorialList = jsonTutorialList.toModelType();
 
         assertEquals(1, resultTutorialList.getTutorials().size());
+    }
+
+    @Test
+    public void toModelType_withNoneTutorial_skipped() throws IllegalValueException {
+        List<Tutorial> tutorials = new ArrayList<>();
+        Tutorial validTutorial = TUTORIAL1;
+        Tutorial noneTutorial = Tutorial.none();
+
+        tutorials.add(validTutorial);
+        tutorials.add(noneTutorial);
+
+        List<JsonAdaptedTutorial> jsonAdaptedTutorials = new ArrayList<>();
+        for (Tutorial tutorial : tutorials) {
+            jsonAdaptedTutorials.add(new JsonAdaptedTutorial(tutorial));
+        }
+
+        JsonSerializableTutorialList jsonTutorialList = new JsonSerializableTutorialList(jsonAdaptedTutorials);
+        TutorialList modelTutorialList = jsonTutorialList.toModelType();
+
+        assertEquals(2, modelTutorialList.getTutorials().size());
+        assertEquals(Tutorial.none(), modelTutorialList.getTutorials().get(0));
     }
 
     @Test
