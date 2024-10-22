@@ -60,7 +60,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * Returns true if at least one of the prefixes contains values in the given
      * {@code ArgumentMultimap}.
      */
     private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
