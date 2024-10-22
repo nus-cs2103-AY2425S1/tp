@@ -34,9 +34,9 @@ tasks done faster than traditional GUI apps.
 
    * `:rm -i 3` : Deletes the 3rd contact shown in the current list.
 
-   * `clear` : Deletes all contacts.
+   * `:clear` : Deletes all contacts.
 
-   * `exit` : Exits the app.
+   * `:exit` : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
 
