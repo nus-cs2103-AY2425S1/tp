@@ -35,23 +35,24 @@ public class MarkPaidCommand extends Command {
             + "Existing months paid of that person will be overwritten by input to this command.\n"
             + "Parameters: INDEX (must be a positive integer)" + "MONTHSPAID... (yyyy-mm format)\n"
             + "Example 1: " + COMMAND_WORD + " 1 " + PREFIX_MONTHPAID + "2024-01\n"
-            + "Example 2: " + COMMAND_WORD + " 1 "
+            + "Example 2: " + COMMAND_WORD + " all "
             + PREFIX_MONTHPAID + "2024-01"
             + PREFIX_MONTHPAID + "2024-02";
 
     public static final String MESSAGE_MARKPAID_PERSON_SUCCESS = "Marked person as paid: %1$s";
-    private final Index index;
-    private final Set<MonthPaid> monthsPaid;
+    public static final String MESSAGE_MARKPAID_ALL_SUCCESS = "Marked all displayed persons as paid for: %1$s";
 
+    private final MarkPaidTarget target;
+    private final Set<MonthPaid> monthsPaid;
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param target of the person in the filtered person list to edit
      * @param monthsPaid the month to mark the person as paid
      */
-    public MarkPaidCommand(Index index, Set<MonthPaid> monthsPaid) {
-        requireNonNull(index);
+    public MarkPaidCommand(MarkPaidTarget target, Set<MonthPaid> monthsPaid) {
+        requireNonNull(target);
         requireNonNull(monthsPaid);
 
-        this.index = index;
+        this.target = target;
         this.monthsPaid = monthsPaid;
     }
 
@@ -59,7 +60,16 @@ public class MarkPaidCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        if (target.markAll()) {
+            for (Person person : lastShownList) {
+                Person markedPerson = createMarkedPerson(person, monthsPaid);
+                model.setPerson(person, markedPerson);
+            }
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(String.format(MESSAGE_MARKPAID_ALL_SUCCESS, monthsPaid));
+        }
 
+        Index index = target.getIndex();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -105,13 +115,14 @@ public class MarkPaidCommand extends Command {
             return false;
         }
         MarkPaidCommand otherMarkPaidCommand = (MarkPaidCommand) other;
-        return index.equals(otherMarkPaidCommand.index)
+        return target.equals(otherMarkPaidCommand.target)
                 && monthsPaid.equals(otherMarkPaidCommand.monthsPaid);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("target", target)
                 .add("monthsPaid", monthsPaid)
                 .toString();
     }

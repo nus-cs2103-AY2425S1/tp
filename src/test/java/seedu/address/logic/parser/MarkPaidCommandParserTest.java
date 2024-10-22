@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkPaidCommand;
+import seedu.address.logic.commands.MarkPaidTarget;
 import seedu.address.model.person.MonthPaid;
 
 public class MarkPaidCommandParserTest {
@@ -40,8 +41,7 @@ public class MarkPaidCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased());
         // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(targetIndex, Collections.emptySet());
-
+        MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidTarget.of(targetIndex), Collections.emptySet());
         assertParseSuccess(parser, userInput, expectedCommand);
     }
     @Test
@@ -63,7 +63,8 @@ public class MarkPaidCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = String.valueOf(targetIndex.getOneBased()) + " " + VALID_MONTHPAID1_WITH_PREFIX;
         // empty field
-        MarkPaidCommand expectedCommand = new MarkPaidCommand(targetIndex, Set.of(new MonthPaid(VALID_MONTHPAID1)));
+        MarkPaidCommand expectedCommand = new MarkPaidCommand(MarkPaidTarget.of(targetIndex),
+                Set.of(new MonthPaid(VALID_MONTHPAID1)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -75,7 +76,8 @@ public class MarkPaidCommandParserTest {
                 + " " + VALID_MONTHPAID2_WITH_PREFIX;
         // empty field
         MarkPaidCommand expectedCommand = new MarkPaidCommand(
-                targetIndex, Set.of(new MonthPaid(VALID_MONTHPAID1), new MonthPaid(VALID_MONTHPAID2)));
+                MarkPaidTarget.of(targetIndex), Set.of(new MonthPaid(VALID_MONTHPAID1),
+                    new MonthPaid(VALID_MONTHPAID2)));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
