@@ -72,11 +72,15 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows you a help window with useful resources which includes:
+- A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
+- A command summary table below the URL, displaying available commands, their formats, and examples.
+- You can copy the command format or example from the table and paste it into the command box.
+- You can click on the table headers to sort commands in ascending or descending order.
 
 Format: `help`
+
+![helpwindow.png](images%2Fhelpwindow.png)
 
 
 ### Adding a person: `add`
@@ -108,6 +112,15 @@ Shows a list of all persons in the address book.
 Format: `list`
 
 * You will be informed when the list is empty: `The list is currently empty.` or when it is not empty: `Listed all persons`.
+
+### Listing starred persons : `list *`
+
+Shows a list of all starred persons in the address book.
+
+Format: `list *`
+
+* No other parameters should be supplied aside from `*`.
+* You will be informed when the list is empty: `No contacts starred` or when it is not empty: `Starred contacts listed`.
 
 ### Editing a person : `edit`
 
@@ -163,6 +176,40 @@ Examples:
 * `list` followed by `delete Alex Yeoh` deletes the person with name `Alex Yeoh` in the address book.
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+### Starring a person : `star`
+
+Stars the specified person from the address book into favourites.
+
+Format: `star INDEX` / `star NAME`
+
+* Stars the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `star Alex Yeoh` stars the person with name `Alex Yeoh` in the address book.
+* `list` followed by `star 2` stars the 2nd person in the address book.
+* `find Betsy` followed by `star 1` stars the 1st person in the results of the `find` command.
+
+### Unstarring a person : `unstar`
+
+Unstars the specified person from the address book removing them from favourites.
+
+Format: `unstar INDEX` / `unstar NAME`
+
+* Unstars the person at the specified `INDEX` or with the specified `NAME`.
+* The name refers to the full name as shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+
+* `unstar Alex Yeoh` unstars the person with name `Alex Yeoh` in the address book.
+* `list` followed by `unstar 2` unstars the 2nd person in the address book.
+* `find Betsy` followed by `unstar 1` unstars the 1st person in the results of the `find` command.
 
 ### Clearing all entries : `clear`
 
@@ -220,5 +267,5 @@ Action     | Format, Examples
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
 **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
-**List**   | `list`
 **Help**   | `help`
+**List**   | `list`

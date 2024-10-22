@@ -19,6 +19,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
+import seedu.address.model.person.StarredStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,6 +38,8 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedAppointment> appointments = new ArrayList<>();
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final JsonAdaptedNote note;
+    private final String starredStatus;
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -46,7 +49,8 @@ class JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("age") String age, @JsonProperty("sex") String sex,
             @JsonProperty("appointments") List<JsonAdaptedAppointment> appointments,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("note") JsonAdaptedNote note) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("note") JsonAdaptedNote note, 
+            @JsonProperty("starred") String starredStatus) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,6 +64,7 @@ class JsonAdaptedPerson {
             this.tags.addAll(tags);
         }
         this.note = note;
+        this.starredStatus = starredStatus;
     }
 
     /**
@@ -79,6 +84,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         note = new JsonAdaptedNote(source.getNote());
+        starredStatus = source.getStarredStatus().value;
     }
 
     /**
@@ -155,7 +161,16 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        if (starredStatus == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StarredStatus.class.getSimpleName()));
+        }
+        if (!StarredStatus.isValidStarredStatus(starredStatus)) {
+            throw new IllegalValueException(StarredStatus.MESSAGE_CONSTRAINTS);
+        }
+        final StarredStatus modelStarredStatus = new StarredStatus(starredStatus);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress,
-                modelAge, modelSex, modelAppointment, modelTags, modelNote);
+                modelAge, modelSex, modelAppointment, modelTags, modelNote, modelStarredStatus);
     }
 }

@@ -11,7 +11,8 @@
       "medication": ["med1", "med2"],
       "appointments": ["01/01/2025 0000"],
       "remark": ["remark1", "remark2"]
-    }
+    },
+    "starredStatus" : "false"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -23,6 +24,7 @@
       "medication": ["med1", "med2"],
       "appointments": ["01/01/2025 0000"],
       "remark": ["remark1", "remark2"]
-    }
+    },
+    "starredStatus" : "false"
   } ]
 }

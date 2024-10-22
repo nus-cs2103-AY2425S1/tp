@@ -30,13 +30,14 @@ public class Person {
     private final Set<Appointment> appointments = new HashSet<>();
     private final Set<Tag> tags = new HashSet<>();
     private final Note note;
+    private final StarredStatus starredStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Age age, Sex sex, Set<Appointment> appointments, Set<Tag> tags, Note note) {
-        requireAllNonNull(name, phone, email, address, age, sex, appointments, tags, note);
+                  Age age, Sex sex, Set<Appointment> appointments, Set<Tag> tags, Note note, StarredStatus starredStatus) {
+        requireAllNonNull(name, phone, email, address, age, sex, appointments, tags, note, starredStatus);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -46,6 +47,7 @@ public class Person {
         this.appointments.addAll(appointments);
         this.tags.addAll(tags);
         this.note = note;
+        this.starredStatus = starredStatus;
     }
 
     public Name getName() {
@@ -91,6 +93,9 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+    public StarredStatus getStarredStatus() {
+        return starredStatus;
+    }
 
     /**
      * Returns true if both persons have the same name.
@@ -135,7 +140,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, age, sex, tags, appointments);
+        return Objects.hash(name, phone, email, address, age, sex, tags, appointments, starredStatus);
     }
 
     @Override
@@ -149,6 +154,7 @@ public class Person {
                 .add("sex", sex)
                 .add("appointments", appointments)
                 .add("tags", tags)
+                .add("starredStatus", starredStatus)
                 .toString();
     }
 

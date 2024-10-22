@@ -12,7 +12,8 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "false"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -25,7 +26,8 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "true"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -38,7 +40,8 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "false"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -51,7 +54,8 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "false"
   }, {
     "name" : "Elle Meyer",
     "phone" : "94822245",
@@ -64,7 +68,8 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "false"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "94824275",
@@ -77,7 +82,8 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "false"
   }, {
     "name" : "George Best",
     "phone" : "94824425",
@@ -90,6 +96,7 @@
       "medication": [ ],
       "appointments": [ ],
       "remark": [ ]
-    }
+    },
+    "starredStatus" : "false"
   } ]
 }

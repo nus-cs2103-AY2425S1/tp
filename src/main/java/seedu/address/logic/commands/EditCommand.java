@@ -128,7 +128,7 @@ public class EditCommand extends Command {
         }
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                          updatedAge, updatedSex, updatedAppointment, updatedTags, personToEdit.getNote());
+                          updatedAge, updatedSex, updatedAppointment, updatedTags, personToEdit.getNote(), personToEdit.getStarredStatus());
     }
 
     @Override
