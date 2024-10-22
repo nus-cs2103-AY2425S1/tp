@@ -112,9 +112,10 @@ Edits an existing student in the address book.
 
 **Examples:**
 
-`edit 1 p/87438808 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
+`edit 1 p/87438808 e/alexyeoh100@example.com` Edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
 
 `edit 2 paid/1200.00 owed/0` Edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+![editResult.png](images/editResult.png)
 
 <box type="important" header="##### Constraints">
 
