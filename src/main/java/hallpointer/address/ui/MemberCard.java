@@ -60,7 +60,7 @@ public class MemberCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
         member.getSessions().stream()
-                .sorted(Comparator.comparing(session -> session.getSessionName().toString()))
+                .sorted(Comparator.comparing(session -> session.getDate().fullDate))
                 .forEach(session -> sessions.getChildren().add(new Label(session.getSessionName().toString() + " " + session.getDate().toString())));
     }
 }
