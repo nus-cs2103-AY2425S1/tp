@@ -150,10 +150,16 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        // If the Help Window is not showing, show it
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
-            helpWindow.focus();
+            // If the Help Window is minimized, restore it
+            Stage helpStage = helpWindow.getRoot();
+            if (helpStage.isIconified()) {
+                helpStage.setIconified(false); // Restore the minimized Help Window
+            }
+            helpWindow.focus(); // Focus on the Help Window
         }
     }
 
