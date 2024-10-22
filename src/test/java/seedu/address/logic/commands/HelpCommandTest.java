@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandCommons.EMPTY_PERSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 
@@ -14,7 +15,8 @@ public class HelpCommandTest {
 
     @Test
     public void execute_help_success() {
-        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE, true, false, false, null, false);
+        CommandResult expectedCommandResult = new CommandResult(SHOWING_HELP_MESSAGE,
+                true, false, false, EMPTY_PERSON, false);
         assertCommandSuccess(new HelpCommand(), model, expectedCommandResult, expectedModel);
     }
 }
