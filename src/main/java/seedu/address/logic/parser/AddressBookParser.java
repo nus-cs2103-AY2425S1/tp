@@ -84,7 +84,7 @@ public class AddressBookParser {
             return new MarkPaidCommandParser().parse(arguments);
 
         case MarkAttendanceByStudentCommand.COMMAND_WORD:
-            return new MarkAttendanceCommandParser().parse(arguments);
+            return new MarkAttendanceByStudentCommandParser().parse(arguments);
 
         case FilterPaidCommand.COMMAND_WORD:
             return new FilterPaidCommandParser().parse(arguments);

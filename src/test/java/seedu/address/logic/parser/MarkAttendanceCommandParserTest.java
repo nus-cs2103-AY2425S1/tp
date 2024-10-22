@@ -11,7 +11,7 @@ import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 
 public class MarkAttendanceCommandParserTest {
 
-    private MarkAttendanceCommandParser parser = new MarkAttendanceCommandParser();
+    private MarkAttendanceByStudentCommandParser parser = new MarkAttendanceByStudentCommandParser();
 
     @Test
     public void parse_validArgs_returnsMarkAttendanceCommand() {

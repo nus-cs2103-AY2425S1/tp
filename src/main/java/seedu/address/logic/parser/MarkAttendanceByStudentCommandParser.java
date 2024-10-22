@@ -6,11 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Attendance;
 
 /**
  * Parses input arguments and creates a new MarkAttendanceByStudentCommand object
  */
-public class MarkAttendanceCommandParser implements Parser<MarkAttendanceByStudentCommand> {
+public class MarkAttendanceByStudentCommandParser implements Parser<MarkAttendanceByStudentCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkAttendanceByStudentCommand
@@ -36,9 +37,9 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceByStude
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
 
-        ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
+        Attendance attendance = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
 
-        return new MarkAttendanceByStudentCommand(index);
+        return new MarkAttendanceByStudentCommand(index, attendance, "Math");
     }
 
 }
