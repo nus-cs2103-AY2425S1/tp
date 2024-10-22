@@ -27,8 +27,8 @@ import tahub.contacts.model.tutorial.Tutorial;
 
 class StudentCourseAssociationTest {
 
-    //=========== Constructor without GradingSystem and Attendance =============================================================
-    private final Person TEST_PERSON_1 = new Person(
+    //=========== Constructor without GradingSystem and Attendance ====================================================
+    private static final Person TEST_PERSON_1 = new Person(
                 new MatriculationNumber("A1234567A"),
                 new Name("Prof Zee"),
                 new Phone("12345678"),
@@ -37,22 +37,22 @@ class StudentCourseAssociationTest {
                 new HashSet<>()
                         );
 
-    private final Course TEST_COURSE_1 = new Course(
+    private static final Course TEST_COURSE_1 = new Course(
             "GA2030",
             "Computer Gaming II"
     );
 
-    private final Course TEST_COURSE_2 = new Course(
+    private static final Course TEST_COURSE_2 = new Course(
             "GA3230",
             "Design and Analysis of Games"
     );
 
-    private final Tutorial TEST_TUTORIAL_1 = new Tutorial(
+    private static final Tutorial TEST_TUTORIAL_1 = new Tutorial(
             "T16",
             TEST_COURSE_1
     );
 
-    private final Tutorial TEST_TUTORIAL_2 = new Tutorial(
+    private static final Tutorial TEST_TUTORIAL_2 = new Tutorial(
             "T17",
             TEST_COURSE_1
     );
@@ -89,7 +89,7 @@ class StudentCourseAssociationTest {
         assertNotEquals(sca1, sca2);
     }
 
-    //=========== Constructor with GradingSystem and Attendance ========================================================================
+    //=========== Constructor with GradingSystem and Attendance =======================================================
     @Test
     public void testConstructorWithAllFields() {
         Person student = new Person(
