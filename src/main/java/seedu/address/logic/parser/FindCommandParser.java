@@ -67,13 +67,11 @@ public class FindCommandParser implements Parser<FindCommand> {
             if (predicates.size() == 1) {
                 combinedPredicate = predicates.get(0);
             } else {
-                combinedPredicate = predicates.stream()
-                        .reduce(x -> false, Predicate::or);
+                combinedPredicate = predicates.stream().reduce(x -> false, Predicate::or);
             }
             return new FindCommand(combinedPredicate);
         } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 

@@ -11,6 +11,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordsPredicate;
 import seedu.address.model.person.PostalContainsKeywordsPredicate;
@@ -46,7 +47,6 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "123000 123456", expectedFindCommand);
         assertParseSuccess(parser, " \n 123000 \n \t 123456  \t", expectedFindCommand);
     }
-
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
@@ -55,5 +55,9 @@ public class FindCommandParserTest {
     public void equals_sameObject_returnsTrue() {
         PhoneContainsKeywordsPredicate predicate = new PhoneContainsKeywordsPredicate(Arrays.asList("12345"));
         assertTrue(predicate.equals(predicate));
+    }
+    @Test
+    public void parse_emptyInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(""));
     }
 }

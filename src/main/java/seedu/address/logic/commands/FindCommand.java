@@ -35,7 +35,6 @@ public class FindCommand extends Command {
      */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = requireNonNull(predicate);
-        System.out.println(this.predicate);
     }
 
     @Override
