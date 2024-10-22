@@ -57,7 +57,6 @@ public class EditPersonCommandParserTest {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPersonCommand.MESSAGE_USAGE);
 
     private EditPersonCommandParser parser = new EditPersonCommandParser();
-    //need to add Role values to test cases here and check for bugs with related role field
 
     @Test
     public void parse_missingParts_failure() {
