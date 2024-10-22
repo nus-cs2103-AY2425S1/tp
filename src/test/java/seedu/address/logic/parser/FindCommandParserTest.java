@@ -58,6 +58,6 @@ public class FindCommandParserTest {
     }
     @Test
     public void parse_emptyInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(""));
+        assertThrows(ParseException.class, () -> parser.parse(" "));
     }
 }

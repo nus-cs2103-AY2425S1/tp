@@ -53,8 +53,4 @@ public class PhoneContainsKeywordsPredicate implements Predicate<Person> {
         PhoneContainsKeywordsPredicate otherPhoneContainsKeywordsPredicate = (PhoneContainsKeywordsPredicate) other;
         return keywords.equals(otherPhoneContainsKeywordsPredicate.keywords);
     }
-    @Override
-    public int hashCode() {
-        return keywords.hashCode();
-    }
 }
