@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_GROUP_NAME_NOT_FOUND;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
@@ -33,14 +35,13 @@ public class MarkTaskCommand extends Command {
         + PREFIX_INDEX + "2";
 
     public static final String MESSAGE_SUCCESS = "Changed the status of task: %1$s to %2$s";
-    public static final String GROUP_NOT_FOUND = "Group not found";
 
     private final Index index;
     private final GroupName toMarkFrom;
 
     /**
-     * Creates a MarkTaskCommand to change the status of the specified task on {@code index} from the
-     * specified {@code groupName}.
+     * Creates a MarkTaskCommand to change the status of the task on {@code index} from the
+     * group with {@code groupName}.
      */
     public MarkTaskCommand(Index index, GroupName groupName) {
         requireNonNull(index);
@@ -54,14 +55,14 @@ public class MarkTaskCommand extends Command {
         requireNonNull(model);
 
         if (!model.containsGroupName(toMarkFrom)) {
-            throw new CommandException(GROUP_NOT_FOUND);
+            throw new CommandException(MESSAGE_GROUP_NAME_NOT_FOUND);
         }
 
         Group group = model.getGroupByName(toMarkFrom);
         List<Task> lastShownList = group.getTasks().stream().toList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_DISPLAYED_INDEX);
         }
         Task taskToMark = lastShownList.get(index.getZeroBased());
         Status changedStatus = taskToMark.getStatus().equals(Status.PENDING) ? Status.COMPLETED : Status.PENDING;

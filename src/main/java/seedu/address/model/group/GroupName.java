@@ -21,7 +21,7 @@ public class GroupName {
     public final String fullName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code GroupName}.
      *
      * @param name A valid name.
      */
@@ -37,7 +37,6 @@ public class GroupName {
     public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {

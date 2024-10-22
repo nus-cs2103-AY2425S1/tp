@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -101,7 +102,6 @@ public class EditCommandTest {
     public void execute_duplicatePersonUnfilteredList_failure() {
         Student firstStudent = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()); //0
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstStudent).build();
-        System.out.println(descriptor);
         EditCommand editCommand = new EditCommand(INDEX_SECOND_PERSON, descriptor); //1
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -125,7 +125,7 @@ public class EditCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, MESSAGE_INVALID_DISPLAYED_INDEX);
     }
 
     /**
@@ -142,7 +142,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, MESSAGE_INVALID_DISPLAYED_INDEX);
     }
 
     @Test
