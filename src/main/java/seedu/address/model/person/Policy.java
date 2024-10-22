@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 
 /**
  * Represents an insurance policy in the address book.
@@ -79,6 +80,14 @@ public class Policy {
 
     public String getPolicyName() {
         return policyName;
+    }
+
+    public LocalDate getPolicyPaymentDueDate() {
+        return payment.getPaymentDueDate();
+    }
+
+    public static Comparator<Policy> getPolicyPaymentDueDateComparator() {
+        return Comparator.comparing(policy -> policy.getPolicyPaymentDueDate());
     }
 
     @Override
