@@ -164,7 +164,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws DuplicateAssignException if the volunteer is already assigned to the event.
      */
     public void assignVolunteerToEvent(Volunteer v, Event e) throws DuplicateAssignException {
-    // Store the names to avoid duplication
+        // Store the names to avoid duplication
         String volunteerName = v.getName().fullName;
         String eventName = e.getName().toString();
     
