@@ -269,4 +269,30 @@ public class ParserUtilTest {
         LessonTime expectedLessonTime = new LessonTime(VALID_LESSON_TIME);
         assertEquals(expectedLessonTime, ParserUtil.parseLessonTime(lessonTimeWithWhitespace));
     }
+
+    @Test
+    public void parseLessonTimes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseLessonTimes(null));
+    }
+
+    @Test
+    public void parseLessonTimes_collectionWithInvalidLessonTimes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseLessonTimes(
+                Arrays.asList(VALID_LESSON_TIME, INVALID_LESSON_TIME)));
+    }
+
+    @Test
+    public void parseLessonTimes_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseLessonTimes(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseLessonTimes_collectionWithValidLessonTimes_returnsLessonTimeSet() throws Exception {
+        Set<LessonTime> actualLessonTimeSet = ParserUtil.parseLessonTimes(
+                Arrays.asList(VALID_LESSON_TIME, "MON-13:00-15:00"));
+        Set<LessonTime> expectedLessonTimeSet = new HashSet<LessonTime>(
+                Arrays.asList(new LessonTime(VALID_LESSON_TIME), new LessonTime("MON-13:00-15:00")));
+
+        assertEquals(expectedLessonTimeSet, actualLessonTimeSet);
+    }
 }

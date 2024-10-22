@@ -91,7 +91,7 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_DESC = " " + PREFIX_TASK_DESCRIPTION + "   "; // blank task description
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_TASK_DEADLINE + "2024-14-23"; // invalid month
     public static final String INVALID_TASK_INDEX = " " + PREFIX_TASK_INDEX + "1!";
-    public static final String INVALID_LESSON_TIME = "every thurs";
+    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "every thurs";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
