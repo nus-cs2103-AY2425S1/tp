@@ -14,7 +14,7 @@ public class HealthService {
             + "provided by the clinic" + '\n'
             + "Blood Test, Cancer Screening, Vaccination, Consult";
 
-    private enum PossibleServices {
+    private enum HealthScreeningServices {
         BLOOD_TEST("BLOOD TEST"),
         CANCER_SCREENING("CANCER SCREENING"),
         VACCINATION("VACCINATION"),
@@ -22,7 +22,7 @@ public class HealthService {
 
         private final String service;
 
-        PossibleServices(String service) {
+        HealthScreeningServices(String service) {
             this.service = service;
         }
 
@@ -53,10 +53,10 @@ public class HealthService {
     public static boolean isValidHealthserviceName(String test) {
         requireNonNull(test);
         test = test.strip().toUpperCase();
-        return test.equals(PossibleServices.VACCINATION.toString())
-                || test.equals(PossibleServices.BLOOD_TEST.toString())
-                || test.equals(PossibleServices.CONSULT.toString())
-                || test.equals(PossibleServices.CANCER_SCREENING.toString());
+        return test.equals(HealthScreeningServices.VACCINATION.toString())
+                || test.equals(HealthScreeningServices.BLOOD_TEST.toString())
+                || test.equals(HealthScreeningServices.CONSULT.toString())
+                || test.equals(HealthScreeningServices.CANCER_SCREENING.toString());
     }
 
     @Override
