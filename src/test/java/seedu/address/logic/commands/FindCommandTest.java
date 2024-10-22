@@ -6,19 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.ContainsGeneralKeywordsPredicate;
+import seedu.address.model.person.ContainsSpecificKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,63 +32,138 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-                new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        //Test for find command with general predicate
+        ContainsGeneralKeywordsPredicate firstGeneralPredicate =
+                new ContainsGeneralKeywordsPredicate(Collections.singletonList("first"));
+        ContainsGeneralKeywordsPredicate secondGeneralPredicate =
+                new ContainsGeneralKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        FindCommand generalFindFirstCommand = new FindCommand(firstGeneralPredicate);
+        FindCommand generalFindSecondCommand = new FindCommand(secondGeneralPredicate);
 
         // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        assertTrue(generalFindFirstCommand.equals(generalFindFirstCommand));
 
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
-        assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+        FindCommand generalFindFirstCommandCopy = new FindCommand(firstGeneralPredicate);
+        assertTrue(generalFindFirstCommand.equals(generalFindFirstCommandCopy));
 
         // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
+        assertFalse(generalFindFirstCommand.equals(1));
 
         // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
+        assertFalse(generalFindFirstCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(findFirstCommand.equals(findSecondCommand));
+        assertFalse(generalFindFirstCommand.equals(generalFindSecondCommand));
+
+        //Test for find command with specific predicate
+        ContainsSpecificKeywordsPredicate firstSpecificPredicate =
+                new ContainsSpecificKeywordsPredicate(Collections.singletonList("first"));
+        ContainsSpecificKeywordsPredicate secondSpecificPredicate =
+                new ContainsSpecificKeywordsPredicate(Collections.singletonList("second"));
+
+        FindCommand specificFindFirstCommand = new FindCommand(firstSpecificPredicate);
+        FindCommand specificFindSecondCommand = new FindCommand(secondSpecificPredicate);
+
+        // same object -> returns true
+        assertTrue(specificFindFirstCommand.equals(specificFindFirstCommand));
+
+        // same values -> returns true
+        FindCommand specificFindFirstCommandCopy = new FindCommand(firstSpecificPredicate);
+        assertTrue(specificFindFirstCommand.equals(specificFindFirstCommandCopy));
+
+        // different types -> returns false
+        assertFalse(specificFindFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(specificFindFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(specificFindFirstCommand.equals(specificFindSecondCommand));
+
+        //Test for comparing find command with general and specific predicate
+        assertFalse(specificFindFirstCommand.equals(generalFindFirstCommand));
     }
 
     @Test
-    public void execute_zeroKeywords_noPersonFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    public void executeZeroKeywordsNoPersonFound() {
+        String generalExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        ContainsGeneralKeywordsPredicate generalPredicate = prepareGeneralPredicate(" ");
+        FindCommand generalKeywordsFindcommand = new FindCommand(generalPredicate);
+        expectedModel.updateFilteredPersonList(generalPredicate);
+        assertCommandSuccess(generalKeywordsFindcommand, model, generalExpectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
     @Test
-    public void execute_multipleKeywords_multiplePersonsFound() {
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    public void executeGeneralPredicateMultipleKeywordsMultiplePersonsFound() {
+        String generalPredicateExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        ContainsGeneralKeywordsPredicate generalPredicate = prepareGeneralPredicate("Kurz Elle Kunz");
+        FindCommand generalCommand = new FindCommand(generalPredicate);
+        expectedModel.updateFilteredPersonList(generalPredicate);
+        assertCommandSuccess(generalCommand, model, generalPredicateExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
     }
 
     @Test
+    public void executeSpecificPredicateSingleKeywordSinglePersonFound() {
+        String specificPredicateExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        ContainsSpecificKeywordsPredicate specificPredicate = prepareSpecificPredicate("Carl Kurz");
+        FindCommand specificCommand = new FindCommand(specificPredicate);
+        expectedModel.updateFilteredPersonList(specificPredicate);
+        assertCommandSuccess(specificCommand, model, specificPredicateExpectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CARL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void executeSpecificPredicateMultipleKeywordSinglePersonFound() {
+        String specificPredicateExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
+        String[] input = { "Daniel Meier", "10th street"};
+        ContainsSpecificKeywordsPredicate specificPredicate = prepareSpecificPredicate(Arrays.stream(input).toList());
+        FindCommand specificCommand = new FindCommand(specificPredicate);
+        expectedModel.updateFilteredPersonList(specificPredicate);
+        assertCommandSuccess(specificCommand, model, specificPredicateExpectedMessage, expectedModel);
+        assertEquals(Arrays.asList(DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
     public void toStringMethod() {
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Arrays.asList("keyword"));
-        FindCommand findCommand = new FindCommand(predicate);
-        String expected = FindCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
-        assertEquals(expected, findCommand.toString());
+        ContainsGeneralKeywordsPredicate generalPredicate =
+                new ContainsGeneralKeywordsPredicate(Arrays.asList("keyword"));
+        FindCommand findCommandWithGeneralPredicate = new FindCommand(generalPredicate);
+        String generalPredicateExpected =
+                FindCommand.class.getCanonicalName() + "{specific predicate=null, general predicate="
+                + generalPredicate + "}";
+        assertEquals(generalPredicateExpected, findCommandWithGeneralPredicate.toString());
+
+        ContainsSpecificKeywordsPredicate specificPredicate =
+                new ContainsSpecificKeywordsPredicate(Arrays.asList("keyword"));
+        FindCommand findCommandWithSpecificPredicate = new FindCommand(specificPredicate);
+        String specificPredicateExpected =
+                FindCommand.class.getCanonicalName() + "{specific predicate=" + specificPredicate
+                        + ", general predicate=null}";
+        assertEquals(specificPredicateExpected, findCommandWithSpecificPredicate.toString());
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code ContainsGeneralKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private ContainsGeneralKeywordsPredicate prepareGeneralPredicate(String userInput) {
+        return new ContainsGeneralKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code ContainsSpecificKeywordsPredicate}.
+     */
+    private ContainsSpecificKeywordsPredicate prepareSpecificPredicate(String userInput) {
+        return new ContainsSpecificKeywordsPredicate(Arrays.asList(userInput));
+    }
+
+    /**
+     * Parses {@code userInput} into a {@code ContainsSpecificKeywordsPredicate}.
+     */
+    private ContainsSpecificKeywordsPredicate prepareSpecificPredicate(List<String> userInput) {
+        return new ContainsSpecificKeywordsPredicate(userInput);
     }
 }

@@ -83,11 +83,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/looking for HDB`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Flatbush Avenue, block 81, #02-02 p/1234567 t/Condominium`
 
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
 
 ### Editing a person : `edit`
 
@@ -108,24 +110,32 @@ Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* By default, the find command conduct a general search for the individual. Hence, 
+the order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* A person's name, phone nunmber, address, email and tag can be searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* If a more specific search is required, utilise the `s/`.
+  * Format: `find s/KEYWORD [s/MORE_KEYWORDS]`
+  * Only individuals who match the keyword(s) one-to-one will be returned. e.g. `find s/Hans Bo` will not match `Bo Hans`. `find s/Hans Bo` will only match `Hans Bo`.
+  * Especially useful if there are multiple people with the same name in PROperty address book and you require a more specific search.
 
 Examples:
 
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find John` returns `John` and `John Doe`.
+* `find s/John` returns only `John`.
+* `find alex david` returns `Alex Yeoh`, `David Li`.
+* `find s/Alex Yeoh s/23 Smith Street` returns `Alex Yeoh` who has `23 Smith Street` as his address.
+
 
 ### Locating persons by tag: `findtag`
 
@@ -142,6 +152,7 @@ Examples:
 - `findtag HDB` returns persons tagged with `HDB`.
 - `findtag HDB colleague` returns persons tagged with either `HDB` or `colleague`.
 
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -157,17 +168,20 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
+
 ### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
+
 
 ### Quick reference help: `help`
 
@@ -176,6 +190,7 @@ Shows commands in a help menu for quick reference during use of PROperty.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
 
 ### Managing Remarks : `remark`
 
@@ -201,6 +216,7 @@ Examples:
   
   - Deletes the remark of person at index `1`
 
+
 ### Showing property listings of a person : `show`
 
 Shows the full details of the specified person, including their property listings.
@@ -215,9 +231,11 @@ Examples:
 
 - `show 2` shows the name, contact information, tags, and property listings of the second person in the address book.
 
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 ### Editing the data file
 
@@ -227,6 +245,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
+
 
 ### Archiving data files `[coming in v2.0]`
 
@@ -250,14 +269,14 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                  |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                           |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                        |
-| **Findtag**| `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                    |
-| **List**   | `list`                                                                                                                                                                            |
-| **Help**   | `help`                                                                                                                                                                            |
-| **Remark** | `remark INDEX r/[REMARKS]`                                                                                                                                                        |
+| Action      | Format, Examples                                                                                                                                                                  |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**     | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG] [r/REMARKS]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Clear**   | `clear`                                                                                                                                                                           |
+| **Delete**  | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                               |
+| **Edit**    | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG] [r/REMARKS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
+| **Find**    | `find KEYWORD [MORE_KEYWORDS]`<br/>`find s/KEYWORD [s/MORE_KEYWORDS]`<br> e.g., `find James Jake`, `find s/James Jake s/23 Philip Street`                                         |
+| **Findtag** | `findtag TAG [MORE_TAGS]`<br> e.g., `findtag friend colleague`                                                                                                                    |
+| **List**    | `list`                                                                                                                                                                            |
+| **Help**    | `help`                                                                                                                                                                            |
+| **Remark**  | `remark INDEX r/[REMARKS]`                                                                                                                                                        |
