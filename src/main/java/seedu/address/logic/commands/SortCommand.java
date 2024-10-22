@@ -60,6 +60,7 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        model.clearPersonSort();
 
         if (sortOption == null) {
             return executeDefaultSort(model);
@@ -84,7 +85,6 @@ public class SortCommand extends Command {
      * @return A CommandResult indicating that the list has been sorted in the default order.
      */
     private static CommandResult executeDefaultSort(Model model) {
-        model.clearPersonSort();
         return new CommandResult(MESSAGE_DEFAULT_SUCCESS);
     }
 
