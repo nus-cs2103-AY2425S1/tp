@@ -11,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,9 +36,12 @@ public class Person {
     private final Set<Nric> caregivers = new HashSet<>();
     private final Set<Nric> patients = new HashSet<>();
 
+    private final Set<Appointment> appointments = new HashSet<>();
 
-    //Notes
+
     private final List<Note> notes = new ArrayList<>();
+
+
 
     /**
      * Every field must be present and not null.
@@ -211,6 +215,42 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getNric().equals(getNric());
+    }
+
+    /**
+     * Returns an immutable set of appointments, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Appointment> getAppointments() {
+        return Collections.unmodifiableSet(appointments);
+    }
+
+    /**
+     * Adds an appointment to the list of appointments.
+     *
+     * @param appointment The appointment to be added.
+     */
+    public void addAppointment(Appointment appointment) {
+        appointments.add(appointment);
+    }
+
+    /**
+     * Returns true if the person has the specified appointment.
+     * @param appointment The appointment to be checked.
+     * @return true if the person has the specified appointment.
+     */
+    public boolean hasAppointment(Appointment appointment) {
+        return appointments.contains(appointment);
+    }
+
+    /**
+     * Removes the specified appointment from the list of appointments if the appointment is present.
+     *
+     * @param appointment The appointment to be removed.
+     */
+    public void removeAppointment(Appointment appointment) {
+        appointments.remove(appointment);
     }
 
     /**
