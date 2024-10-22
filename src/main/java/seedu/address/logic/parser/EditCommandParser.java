@@ -3,9 +3,12 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -16,6 +19,7 @@ import java.util.Set;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
@@ -32,7 +36,8 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_AGE, PREFIX_SEX, PREFIX_APPOINTMENT, PREFIX_TAG);
 
         Name name;
 
@@ -42,7 +47,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_AGE, PREFIX_SEX);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -58,7 +64,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_AGE).isPresent()) {
+            editPersonDescriptor.setAge(ParserUtil.parseAge(argMultimap.getValue(PREFIX_AGE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_SEX).isPresent()) {
+            editPersonDescriptor.setSex(ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get()));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        parseAppointmentsForEdit(argMultimap.getAllValues(PREFIX_APPOINTMENT))
+                .ifPresent(editPersonDescriptor::setAppointments);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -82,4 +97,23 @@ public class EditCommandParser implements Parser<EditCommand> {
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
+    /**
+     * Parses {@code Collection<String> appointments} into a {@code Set<Appointment>} if {@code appointment} is
+     * non-empty
+     * If {@code Appointments} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Appointment>} containing zero tags.
+     */
+    private Optional<Set<Appointment>> parseAppointmentsForEdit(Collection<String> appointments) throws ParseException {
+        assert appointments != null;
+
+        if (appointments.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Collection<String> appointmentSet = appointments.size() == 1 && appointments.contains("")
+                ? Collections.emptySet()
+                : appointments;
+
+        return Optional.of(ParserUtil.parseAppointments(appointmentSet));
+    }
 }

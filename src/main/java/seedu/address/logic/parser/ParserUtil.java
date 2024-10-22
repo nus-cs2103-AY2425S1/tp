@@ -9,10 +9,14 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.note.Note;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Age;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Sex;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,7 +56,7 @@ public class ParserUtil {
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
-     * Leading and trailing whitespaces will be trimmed.
+     * All whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
@@ -96,6 +100,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String age} into a {@code Age}.
+     * All whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.replaceAll("\\s+", "");
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new ParseException(Age.MESSAGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
+    /**
+     * Parses a {@code String sex} into a {@code Sex}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sex} is invalid.
+     */
+    public static Sex parseSex(String sex) throws ParseException {
+        requireNonNull(sex);
+        String trimmedSex = sex.trim();
+        if (!Sex.isValidSex(trimmedSex)) {
+            throw new ParseException(Sex.MESSAGE_CONSTRAINTS);
+        }
+        return new Sex(trimmedSex);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -120,5 +154,86 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String appointment} into a {@code Appointment}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Appointment} is invalid.
+     */
+    public static Appointment parseAppointment(String appointment) throws ParseException {
+        requireNonNull(appointment);
+        String trimmedAppointment = appointment.trim();
+        if (!Appointment.isValidAppointment(trimmedAppointment)) {
+            throw new ParseException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        return new Appointment(trimmedAppointment);
+    }
+
+    /**
+     * Parses {@code Collection<String> Appointments} into a {@code Set<Appointment> with only one appointment}.
+     */
+    public static Set<Appointment> parseAppointments(Collection<String> appointments) throws ParseException {
+        requireNonNull(appointments);
+        final Set<Appointment> appointmentSet = new HashSet<>();
+        for (String appointmentDates : appointments) {
+            appointmentSet.add(parseAppointment(appointmentDates));
+        }
+        return appointmentSet;
+    }
+
+    /**
+     * Parses a {@code String medications} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Medication} is invalid.
+     */
+    public static String parseMedication(String medication) throws ParseException {
+        requireNonNull(medication);
+        String trimmedMedication = medication.trim();
+        if (!Note.isValidString(trimmedMedication)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedMedication;
+    }
+
+    /**
+     * Parses {@code Collection<String> Medications} into a {@code Set<String>}.
+     */
+    public static Set<String> parseMedications(Collection<String> medications) throws ParseException {
+        requireNonNull(medications);
+        final Set<String> medicationSet = new HashSet<>();
+        for (String medication : medications) {
+            medicationSet.add(parseMedication(medication));
+        }
+        return medicationSet;
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Remark} is invalid.
+     */
+    public static String parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (!Note.isValidString(trimmedRemark)) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedRemark;
+    }
+
+    /**
+     * Parses {@code Collection<String> Remarks} into a {@code Set<String>}.
+     */
+    public static Set<String> parseRemarks(Collection<String> remarks) throws ParseException {
+        requireNonNull(remarks);
+        final Set<String> remarkSet = new HashSet<>();
+        for (String remark : remarks) {
+            remarkSet.add(parseRemark(remark));
+        }
+        return remarkSet;
     }
 }
