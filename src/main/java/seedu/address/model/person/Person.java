@@ -36,11 +36,9 @@ public class Person {
     private final Set<Nric> caregivers = new HashSet<>();
     private final Set<Nric> patients = new HashSet<>();
 
-    // Appointments
     private final Set<Appointment> appointments = new HashSet<>();
 
 
-    //Notes
     private final List<Note> notes = new ArrayList<>();
 
 
