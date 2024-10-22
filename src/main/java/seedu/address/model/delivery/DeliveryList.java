@@ -47,8 +47,7 @@ public class DeliveryList {
      * Adds a delivery to the index of the list.
      */
     public void add(Index targetIndex, Delivery toAdd) {
-        requireNonNull(toAdd);
-        requireNonNull(targetIndex);
+        requireAllNonNull(toAdd, targetIndex);
         int index = targetIndex.getZeroBased();
         internalList.add(index, toAdd);
     }

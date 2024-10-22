@@ -80,11 +80,12 @@ public class ArchiveCommand extends Command {
         validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
 
         List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
+        Collections.reverse(deliveryToArchiveList);
 
         return new CommandResult(String.format(
                 MESSAGE_ARCHIVED_DELIVERY_SUCCESS,
                 inspectedPerson.getName(),
-                Messages.formatDeliveryList(reverseList(deliveryToArchiveList))),
+                Messages.formatDeliveryList(deliveryToArchiveList)),
                 DeliveryAction.ARCHIVE);
     }
 
@@ -146,18 +147,6 @@ public class ArchiveCommand extends Command {
     }
 
     /**
-     * Reverses the order of the provided list.
-     *
-     * @param list The deliveryList to be reversed.
-     * @return A reversed copy of the provided list.
-     */
-    private List<Delivery> reverseList(List<Delivery> list) {
-        List<Delivery> reversedList = new ArrayList<>(list);
-        Collections.reverse(reversedList);
-        return reversedList;
-    }
-
-    /**
      * Checks if a list of indexes has any duplicates.
      *
      * @param indexList the list of indexes to check
@@ -191,13 +180,13 @@ public class ArchiveCommand extends Command {
         }
 
         ArchiveCommand otherArchiveCommand = (ArchiveCommand) other;
-        boolean output = true;
+        boolean isEqual = true;
         for (int i = 0; i < indexList.size(); i++) {
             Index targetIndex = indexList.get(i);
             Index otherIndex = otherArchiveCommand.indexList.get(i);
-            output = output && targetIndex.equals(otherIndex);
+            isEqual = isEqual && targetIndex.equals(otherIndex);
         }
-        return output;
+        return isEqual;
     }
 
     @Override
