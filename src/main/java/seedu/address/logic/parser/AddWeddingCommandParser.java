@@ -4,12 +4,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddWeddingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingDate;
 import seedu.address.model.wedding.WeddingName;
 
 /**
@@ -31,9 +31,9 @@ public class AddWeddingCommandParser implements Parser<AddWeddingCommand> {
         }
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DATE);
         WeddingName name = ParserUtil.parseWeddingName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
-        LocalDate date = ParserUtil.parseWeddingDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get());
+        WeddingDate date = ParserUtil.parseWeddingDate(argMultimap.getValue(CliSyntax.PREFIX_DATE).get());
 
-        Wedding wedding = new Wedding(name, date.toString());
+        Wedding wedding = new Wedding(name, date);
         return new AddWeddingCommand(wedding);
     }
 
