@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,7 +22,7 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
@@ -35,7 +36,7 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.addressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.internalList = FXCollections.observableArrayList(this.addressBook.getPersonList());
         this.filteredPersons = new FilteredList<>(internalList);
@@ -123,6 +124,23 @@ public class ModelManager implements Model {
         requireNonNull(persons);
         internalList.setAll(persons);
         filteredPersons.setPredicate(filteredPersons.getPredicate());
+    }
+
+    @Override
+    public void commitAddressBook() {
+        addressBook.commit(addressBook);
+    }
+
+    @Override
+    public void undoAddressBook() throws CommandException {
+        ReadOnlyAddressBook prevAddressBook = addressBook.undo();
+        setAddressBook(prevAddressBook);
+    }
+
+    @Override
+    public void redoAddressBook() throws CommandException {
+        ReadOnlyAddressBook nextAddressBook = addressBook.redo();
+        setAddressBook(nextAddressBook);
     }
 
     //=========== Filtered Person List Accessors =============================================================
