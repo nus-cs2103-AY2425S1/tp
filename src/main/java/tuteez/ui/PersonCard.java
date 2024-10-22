@@ -69,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(remark -> remarks.getChildren().add(new Label(remark.toString())));
 
         person.getLessons().stream()
-                .forEach(lesson -> lessons.getChildren().add(new Label(lesson.dayTimeString())));
+                .forEach(lesson -> lessons.getChildren().add(new Label(lesson.getDayAndTime())));
     }
 
     private void setTelegramUsernameText(Person person) {

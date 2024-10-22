@@ -42,7 +42,7 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         person.getLessons().stream().forEach(
-                s -> sb.append(PREFIX_LESSON + s.dayTimeString() + " ")
+                s -> sb.append(PREFIX_LESSON + s.getDayAndTime() + " ")
         );
         return sb.toString();
     }
@@ -71,7 +71,7 @@ public class PersonUtil {
             if (lessons.isEmpty()) {
                 sb.append(PREFIX_LESSON);
             } else {
-                lessons.forEach(s -> sb.append(PREFIX_LESSON).append(s.dayTimeString()).append(" "));
+                lessons.forEach(s -> sb.append(PREFIX_LESSON).append(s.getDayAndTime()).append(" "));
             }
         }
         return sb.toString();

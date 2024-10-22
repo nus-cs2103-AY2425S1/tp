@@ -176,7 +176,7 @@ public class Lesson {
     /**
      * @return A string with only day and time
      */
-    public String dayTimeString() {
+    public String getDayAndTime() {
         return this.toString().replace("[", "").replace("]", "");
     }
 
