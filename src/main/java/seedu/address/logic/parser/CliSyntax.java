@@ -14,5 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ETA = new Prefix("e/");
     public static final Prefix PREFIX_COST = new Prefix("c/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
+    public static final Prefix PREFIX_ITEMS = new Prefix("i/");
     public static final Prefix PREFIX_SORT = new Prefix("by/");
 }

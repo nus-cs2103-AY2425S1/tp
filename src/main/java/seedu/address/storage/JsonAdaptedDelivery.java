@@ -1,5 +1,11 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -23,7 +29,7 @@ public class JsonAdaptedDelivery {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Delivery's %s field is missing!";
 
     private final String deliveryId;
-    private final String itemName;
+    private final List<JsonAdaptedItem> items = new ArrayList<>();
     private final String address;
     private final String cost;
     private final String date;
@@ -37,7 +43,7 @@ public class JsonAdaptedDelivery {
      */
     @JsonCreator
     public JsonAdaptedDelivery(@JsonProperty("deliveryId") String deliveryId,
-                               @JsonProperty("itemName") String itemName,
+                               @JsonProperty("itemName") List<JsonAdaptedItem> items,
                                @JsonProperty("address") String address,
                                @JsonProperty("cost") String cost,
                                @JsonProperty("date") String date,
@@ -46,7 +52,9 @@ public class JsonAdaptedDelivery {
                                @JsonProperty("status") String status,
                                @JsonProperty("archive") String archive) {
         this.deliveryId = deliveryId;
-        this.itemName = itemName;
+        if (items != null) {
+            this.items.addAll(items);
+        }
         this.address = address;
         this.cost = cost;
         this.date = date;
@@ -61,7 +69,9 @@ public class JsonAdaptedDelivery {
      */
     public JsonAdaptedDelivery(Delivery source) {
         deliveryId = String.valueOf(source.getDeliveryId().value);
-        itemName = source.getItemName().value;
+        items.addAll(source.getItems().stream()
+                .map(JsonAdaptedItem::new)
+                .collect(Collectors.toList()));
         address = source.getAddress().value;
         cost = source.getCost().value;
         date = source.getDate().value.toString();
@@ -82,16 +92,17 @@ public class JsonAdaptedDelivery {
                     DeliveryId.class.getSimpleName()));
         }
 
+        final List<ItemName> deliveryItems = new ArrayList<>();
+        for (JsonAdaptedItem item : items) {
+            deliveryItems.add(item.toModelType());
+        }
+
         final DeliveryId modelDeliveryId = new DeliveryId(deliveryId);
 
-        if (itemName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ItemName.class.getSimpleName()));
+        if (items.isEmpty()) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "items"));
         }
-        if (!ItemName.isValidItemName(itemName)) {
-            throw new IllegalValueException(ItemName.MESSAGE_CONSTRAINTS);
-        }
-        final ItemName modelItemName = new ItemName(itemName);
+        final Set<ItemName> modelItems = new HashSet<>(deliveryItems);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -149,7 +160,7 @@ public class JsonAdaptedDelivery {
         }
         final Archive modelArchive = new Archive(archive);
 
-        return new Delivery(modelDeliveryId, modelItemName, modelAddress, modelCost, modelDate, modelTime, modelEta,
+        return new Delivery(modelDeliveryId, modelItems, modelAddress, modelCost, modelDate, modelTime, modelEta,
                 modelStatus, modelArchive);
     }
 }
