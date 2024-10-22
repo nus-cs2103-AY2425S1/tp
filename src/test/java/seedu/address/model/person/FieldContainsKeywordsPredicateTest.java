@@ -64,7 +64,7 @@ public class FieldContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_fieldDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         FieldContainsKeywordsPredicate predicate =
                 new FieldContainsKeywordsPredicate(Collections.emptyList(), "name");
