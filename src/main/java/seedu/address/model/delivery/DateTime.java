@@ -52,6 +52,16 @@ public class DateTime {
         }
     }
 
+    /**
+     * Checks if instance of DateTime has LocalDateTime value that is earlier than input deliveryDateTime.
+     *
+     * @param deliveryDateTime Input deliveryDateTime to compare against.
+     * @return True if instance of DateTime is earlier thant input.
+     */
+    public boolean isEarlierThan(DateTime deliveryDateTime) {
+        return this.time.isBefore(deliveryDateTime.time);
+    }
+
     @Override
     public String toString() {
         return time.format(FORMATTER_TIME);
