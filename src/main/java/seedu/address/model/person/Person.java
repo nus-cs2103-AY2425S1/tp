@@ -92,8 +92,12 @@ public abstract class Person {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName());
+        if (otherPerson == null) {
+            return false;
+        }
+
+        // Case-insensitive name comparison
+        return otherPerson.getName().fullName.equalsIgnoreCase(this.getName().fullName);
     }
 
     /**
