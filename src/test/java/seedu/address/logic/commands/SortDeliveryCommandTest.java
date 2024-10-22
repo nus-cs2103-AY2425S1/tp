@@ -72,7 +72,7 @@ public class SortDeliveryCommandTest {
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(APPLE, BREAD, CAN), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(CAN, BREAD, APPLE), model.getSortedDeliveryList());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class SortDeliveryCommandTest {
         SortDeliveryCommand command = new SortDeliveryCommand(comparator);
         expectedModel.updateSortedDeliveryList(comparator);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CAN, BREAD, APPLE), model.getSortedDeliveryList());
+        assertEquals(Arrays.asList(APPLE, CAN, BREAD), model.getSortedDeliveryList());
     }
 
     @Test

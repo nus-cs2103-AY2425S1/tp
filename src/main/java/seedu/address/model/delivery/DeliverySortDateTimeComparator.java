@@ -17,9 +17,9 @@ public class DeliverySortDateTimeComparator extends DeliverySortComparator {
         LocalDateTime delivery1DateTime = delivery1.getDeliveryDate().time;
         LocalDateTime delivery2DateTime = delivery2.getDeliveryDate().time;
         if (super.getIsSortByAscending()) {
-            return delivery2DateTime.compareTo(delivery1DateTime);
-        } else {
             return delivery1DateTime.compareTo(delivery2DateTime);
+        } else {
+            return delivery2DateTime.compareTo(delivery1DateTime);
         }
     }
 

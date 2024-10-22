@@ -1,5 +1,8 @@
 package seedu.address.model.delivery;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 import seedu.address.logic.parser.SortOrder;
@@ -32,6 +35,8 @@ public class DeliverySortBy {
      * @param sortBy Represents status with 's', dateTime with 'd', and cost with 'c'.
      */
     public DeliverySortBy(String sortBy) {
+        requireNonNull(sortBy);
+        checkArgument(isValidSortBy(sortBy), MESSAGE_CONSTRAINTS);
         switch (SortBy.valueOf(sortBy.toUpperCase())) {
         case C:
             this.sortBy = SortBy.C;
@@ -43,7 +48,7 @@ public class DeliverySortBy {
             this.sortBy = SortBy.S;
             break;
         default:
-            this.sortBy = SortBy.S;
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
 

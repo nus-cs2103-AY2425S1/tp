@@ -17,7 +17,7 @@ public class TypicalDeliveries {
     public static final Delivery BREAD = new DeliveryBuilder().withProduct("sunshineBread")
             .withSender(TypicalPersons.BENSON)
             .withDeliveryTime("12-10-2024 17:30")
-            .withStatus(Status.PENDING)
+            .withStatus(Status.DELIVERED)
             .withCost("150")
             .withQuantity("100 units")
             .build();

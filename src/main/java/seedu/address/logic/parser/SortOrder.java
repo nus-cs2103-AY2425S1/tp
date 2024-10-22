@@ -1,5 +1,8 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.util.Objects;
 
 /**
@@ -22,11 +25,9 @@ public class SortOrder {
      * @param sortOrder Represents ascending with 'a' and descending with 'd'.
      */
     public SortOrder(String sortOrder) {
-        if (sortOrder.equals("a")) {
-            this.isSortByAscending = true;
-        } else {
-            this.isSortByAscending = false;
-        }
+        requireNonNull(sortOrder);
+        checkArgument(isValidSortOrder(sortOrder), MESSAGE_CONSTRAINTS);
+        this.isSortByAscending = sortOrder.equals("a");
     }
 
     /**
