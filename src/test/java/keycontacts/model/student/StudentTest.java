@@ -4,6 +4,7 @@ import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_DAY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_END_TIME;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PIANO_PIECE_BEETHOVEN;
@@ -94,6 +95,10 @@ public class StudentTest {
 
         // different grade level -> returns false
         editedAlice = new StudentBuilder(ALICE).withGradeLevel(VALID_GRADE_LEVEL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different group -> return false
+        editedAlice = new StudentBuilder(ALICE).withGroup(VALID_GROUP_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different piano pieces -> returns false

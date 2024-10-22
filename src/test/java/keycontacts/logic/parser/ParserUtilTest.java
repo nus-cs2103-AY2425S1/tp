@@ -14,6 +14,7 @@ import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.Day;
 import keycontacts.model.lesson.Time;
 import keycontacts.model.student.Address;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 
@@ -27,6 +28,7 @@ public class ParserUtilTest {
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
+    private static final String VALID_GROUP = "Group";
     private static final String VALID_DAY = "Monday";
     private static final String VALID_TIME = "12:00";
 
@@ -122,6 +124,24 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseGroup_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseGroup((String) null));
+    }
+
+    @Test
+    public void parseGroup_validValueWithoutWhitespace_returnsGroup() throws Exception {
+        Group expectedGroup = new Group(VALID_GROUP);
+        assertEquals(expectedGroup, ParserUtil.parseGroup(VALID_GROUP));
+    }
+
+    @Test
+    public void parseGroup_validValueWithWhitespace_returnsTrimmedGroup() throws Exception {
+        String groupWithWhitespace = WHITESPACE + VALID_GROUP + WHITESPACE;
+        Group expectedGroup = new Group(VALID_GROUP);
+        assertEquals(expectedGroup, ParserUtil.parseGroup(groupWithWhitespace));
+    }
+
+    @Test
     public void parseDay_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDay((String) null));
     }
@@ -174,8 +194,8 @@ public class ParserUtilTest {
     public void parseDate_validDateWithSpaces_success() throws ParseException {
         assertEquals(new Date(VALID_DATE), ParserUtil.parseDate(WHITESPACE + VALID_DATE + WHITESPACE));
     }
-    public void parseDate_invalidDate_failure() throws ParseException {
+    @Test
+    public void parseDate_invalidDate_failure() {
         assertThrows(ParseException.class, Date.MESSAGE_CONSTRAINTS, () -> ParserUtil.parseDate(INVALID_DATE));
     }
-
 }
