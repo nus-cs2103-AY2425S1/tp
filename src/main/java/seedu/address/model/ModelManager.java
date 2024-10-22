@@ -150,21 +150,10 @@ public class ModelManager implements Model {
         return addressBook.getSessionLog(personIndex);
     }
 
-    /**
-     * Updates logs list to show logs identified by the given {@code identityNumber}.
-     *
-     * @param identityNumber
-     */
-    public void updateFilteredLogListById(IdentityNumber identityNumber) {
-        requireNonNull(identityNumber);
 
-        // Get the person with matching identity number
-        updateFilteredPersonListById(identityNumber);
-        Person targetPerson = filteredPersons.get(0);
+    //========== Util Methods ================================================================================
 
-        // Convert Set<Log> to an ObservableList<Log>
-        ObservableList<Log> loglist = FXCollections.observableArrayList(targetPerson.getLogs());
-    }
+
 
     @Override
     public boolean equals(Object other) {

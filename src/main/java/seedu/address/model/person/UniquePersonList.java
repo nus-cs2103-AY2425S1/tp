@@ -106,6 +106,9 @@ public class UniquePersonList implements Iterable<Person> {
         return internalUnmodifiableList;
     }
 
+    /**
+     * Returns the session log list of a person.
+     */
     public ObservableList<Log> asUnmodifiableSessionLog(int personIndex) {
         Set<Log> sessionLogs = internalUnmodifiableList.get(personIndex).getLogs();
         ObservableList<Log> observableSessionLogs = FXCollections.observableArrayList(sessionLogs);
