@@ -40,7 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        this.appointmentManager = AppointmentManager.getInstance(this);
+        this.appointmentManager = new AppointmentManager(this);
     }
 
     public ModelManager() {
@@ -126,8 +126,8 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        appointmentManager.update();
         addressBook.setPerson(target, editedPerson);
+        appointmentManager.update();
     }
 
     @Override
@@ -156,6 +156,10 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getUnfilteredPersonList() {
         return addressBook.getPersonList();
+    }
+
+    public AppointmentManager getAppointmentManager() {
+        return appointmentManager;
     }
 
 

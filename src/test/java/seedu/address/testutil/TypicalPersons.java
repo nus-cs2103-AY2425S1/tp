@@ -41,7 +41,7 @@ public class TypicalPersons {
 
     public static final Appointment BENSON_APPOINTMENT = new Appointment(
             "Benson Meier", new Nric("S7012345B"),
-            LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+            LocalDateTime.of(2024, 10, 22, 12, 0), LocalDateTime.of(2024, 10, 22, 12, 0).plusHours(1));
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withNric("S7012345B")

@@ -16,8 +16,8 @@ public class JsonAdaptedAppointmentTest {
 
     private static final String VALID_NAME = "Appointment Test";
     private static final String VALID_NRIC = VALID_NRIC_BOB.toString();
-    private static final String VALID_START_TIME = LocalDateTime.now().toString();
-    private static final String VALID_END_TIME = LocalDateTime.now().plusHours(1).toString();
+    private static final String VALID_START_TIME = LocalDateTime.of(2024, 10, 22, 12, 0).toString();
+    private static final String VALID_END_TIME = LocalDateTime.of(2024, 10, 22, 12, 0).plusHours(1).toString();
     private static final boolean VALID_IS_COMPLETED = false;
 
     private static final String INVALID_NRIC = "INVALID_NRIC";
