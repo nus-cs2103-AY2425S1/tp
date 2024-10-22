@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -32,6 +33,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private Set<Role> roles;
+    private Set<Appointment> appointments;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -44,6 +46,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         roles = SampleDataUtil.getRoleSet(DEFAULT_ROLE);
+        appointments = new HashSet<>();
     }
 
     /**
@@ -57,6 +60,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         roles = new HashSet<>(personToCopy.getRoles());
+        appointments = new HashSet<>(personToCopy.getAppointments());
     }
 
     /**
@@ -112,6 +116,17 @@ public class PersonBuilder {
      */
     public PersonBuilder withRole(String... role) {
         this.roles = SampleDataUtil.getRoleSet(role);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code Person} that we are building.
+     * A variable number of arguments can be provided.
+     */
+    public PersonBuilder withAppointments(Appointment... appointments) {
+        for (Appointment appointment : appointments) {
+            this.appointments.add(appointment);
+        }
         return this;
     }
 

@@ -15,11 +15,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
 /**
@@ -35,12 +38,17 @@ public class TypicalPersons {
             .withRole("PATIENT")
             .build();
 
+    public static final Appointment BENSON_APPOINTMENT = new Appointment(
+            "Benson Meier", new Nric("S7012345B"),
+            LocalDateTime.now(), LocalDateTime.now().plusHours(1));
+
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withNric("S7012345B")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
             .withRole("PATIENT", "CAREGIVER")
+            .withAppointments(BENSON_APPOINTMENT)
             .build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
