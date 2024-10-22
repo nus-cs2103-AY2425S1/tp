@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_START_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -75,6 +78,30 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final String VALID_DATE_APPOINTMENT = "22/10/2025"; // Example date in DD/MM/YYYY format
+    public static final String VALID_START_TIME_APPOINTMENT = "10:00"; // Example start time in HH:mm format
+
+    public static final String INVALID_DATE_APPOINTMENT = "2025/10/10"; // Invalid date format in YYYY/MM/DD format
+    public static final String VALID_END_TIME_APPOINTMENT = "11:00"; // Example end time in HH:mm format
+
+    public static final String INVALID_END_TIME_APPOINTMENT = "1100";
+
+    public static final String INVALID_START_TIME_APPOINTMENT = "1000";
+
+    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START_TIME + INVALID_START_TIME_APPOINTMENT;
+    public static final String INVALID_END_TIME_DESC = " " + PREFIX_END_TIME + INVALID_END_TIME_APPOINTMENT;
+
+    public static final String VALID_DATE_DESC_APPOINTMENT = " " + PREFIX_DATE + VALID_DATE_APPOINTMENT;
+    public static final String VALID_START_TIME_DESC_APPOINTMENT = " " + PREFIX_START_TIME
+        + VALID_START_TIME_APPOINTMENT;
+    public static final String VALID_END_TIME_DESC_APPOINTMENT = " " + PREFIX_END_TIME + VALID_END_TIME_APPOINTMENT;
+
+    public static final String INVALID_DATE_DESC_APPOINTMENT = " " + PREFIX_DATE
+        + INVALID_DATE_APPOINTMENT; // Invalid date format in YYYY/MM/DD format
+
+
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withNric(VALID_NRIC_AMY)
