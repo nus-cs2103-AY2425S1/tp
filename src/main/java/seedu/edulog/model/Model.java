@@ -66,6 +66,12 @@ public interface Model {
     void deleteStudent(Student target);
 
     /**
+     * Marks the given student as present.
+     * The student must exist in the address book.
+     */
+    void markStudent(Student target);
+
+    /**
      * Marks the given student as absent.
      * The student must exist in the address book.
      */
