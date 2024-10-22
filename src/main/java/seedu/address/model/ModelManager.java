@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.appointment.Appointment;
 import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 
@@ -23,6 +27,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final AppointmentManager appointmentManager;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.appointmentManager = new AppointmentManager(this);
     }
 
     public ModelManager() {
@@ -91,25 +97,37 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
+        appointmentManager.update();
         return addressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
+        appointmentManager.update();
         addressBook.removePerson(target);
+        // want to check for roles and remove the links between this person, and
+        // the patients/ caregiver based on the role
+        for (Nric patientnric : target.getPatients()) {
+            addressBook.deleteLink(addressBook.getPerson(patientnric), target);
+        }
+        for (Nric caregivernric : target.getCaregivers()) {
+            addressBook.deleteLink(target, addressBook.getPerson(caregivernric));
+        }
+
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        appointmentManager.update();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+        appointmentManager.update();
     }
 
     @Override
@@ -130,6 +148,53 @@ public class ModelManager implements Model {
     @Override
     public Person getPerson(Nric nric) {
         return addressBook.getPerson(nric);
+    }
+
+    /**
+     * Returns the list of unfiltered persons
+     */
+    @Override
+    public ObservableList<Person> getUnfilteredPersonList() {
+        return addressBook.getPersonList();
+    }
+
+    public AppointmentManager getAppointmentManager() {
+        return appointmentManager;
+    }
+
+
+    /**
+     * Adds a new appointment to the person's list of appointments if there are no conflicts with existing appointments.
+     * If there is a conflict, an IllegalArgumentException is thrown.
+     *
+     * @param newAppointment The appointment to be added.
+     * @param person The person to whom the appointment is added.
+     */
+    @Override
+    public boolean addAppointment(Appointment newAppointment, Person person) {
+        return appointmentManager.addAppointment(newAppointment, person);
+    }
+
+    /**
+     * Removes an appointment from the person's list of appointments.
+     *
+     * @param appointment The appointment to be removed.
+     * @param person The person from whom the appointment is removed.
+     */
+    @Override
+    public void removeAppointment(Appointment appointment, Person person) {
+        appointmentManager.removeAppointment(appointment, person);
+    }
+
+
+    public List<Appointment> getAllAppointments() {
+        return new ArrayList<>(appointmentManager.getAppointments());
+    }
+
+    public List<Appointment> getAppointmentsForPerson(Person person) {
+        List<Appointment> temp = new ArrayList<>(person.getAppointments());
+        temp.sort(Comparator.comparing(Appointment::getStartTime));
+        return temp;
     }
 
     //=========== Filtered Person List Accessors =============================================================
