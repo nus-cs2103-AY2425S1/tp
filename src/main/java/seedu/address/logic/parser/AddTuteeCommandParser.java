@@ -52,7 +52,6 @@ public class AddTuteeCommandParser implements Parser<AddTuteeCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Subject> subjects = ParserUtil.parseSubjects(argMultimap.getAllValues(PREFIX_SUBJECT));
 
-        //Person person = new Person(name, phone, email, address, hours, tagList, subjects);
         Tutee tutee = new Tutee(name, phone, email, address, hours, tagList, subjects);
 
         return new AddTuteeCommand(tutee);

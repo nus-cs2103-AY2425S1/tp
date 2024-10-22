@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -52,4 +53,15 @@ public class Messages {
         return builder.toString();
     }
 
+    /**
+     * Formats the {@code lesson} for display to the user.
+     */
+    public static String format(Lesson lesson) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("\n Tutor: ")
+                .append(lesson.getTutorName())
+                .append("\n Tutee: ")
+                .append(lesson.getTuteeName());
+        return builder.toString();
+    }
 }

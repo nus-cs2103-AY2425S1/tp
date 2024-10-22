@@ -157,5 +157,4 @@ public abstract class Person {
                 .anyMatch(s -> s.subject.equalsIgnoreCase(subject));
     }
 
-
 }
