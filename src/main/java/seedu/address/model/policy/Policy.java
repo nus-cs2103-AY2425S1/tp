@@ -5,6 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.claim.Claim;
+import seedu.address.model.claim.ClaimSet;
+
+
 /**
  * An abstract class to capture all type of policies.
  */
@@ -12,6 +16,8 @@ public abstract class Policy {
     private PremiumAmount premiumAmount;
     private CoverageAmount coverageAmount;
     private ExpiryDate expiryDate;
+    private ClaimSet claimSet;
+
 
     /**
      * Constructor for a new Policy without an insuree specified.
@@ -26,6 +32,7 @@ public abstract class Policy {
         this.premiumAmount = premiumAmount;
         this.coverageAmount = coverageAmount;
         this.expiryDate = expiryDate;
+        this.claimSet = new ClaimSet();
     }
 
     /**
@@ -81,6 +88,15 @@ public abstract class Policy {
     }
 
     /**
+     * Get the set of claims associated with this policy.
+     *
+     * @return The {@code ClaimSet} associated with this policy.
+     */
+    public ClaimSet getClaimSet() {
+        return claimSet;
+    }
+
+    /**
      * Change this policy's premium amount to the specified {@code premiumAmount}, which cannot be null.
      *
      * @param premiumAmount the new price of the policy, paid per month.
@@ -113,10 +129,28 @@ public abstract class Policy {
         this.expiryDate = expiryDate;
     }
 
+    /**
+     * Add a claim to this policy's claim set.
+     *
+     * @param claim The claim to add.
+     */
+    public void addClaim(Claim claim) {
+        claimSet.add(claim);
+    }
+
+    /**
+     * Remove a claim from this policy's claim set.
+     *
+     * @param claim The claim to remove.
+     */
+    public void removeClaim(Claim claim) {
+        claimSet.remove(claim);
+    }
+
     @Override
     public String toString() {
-        return String.format("Premium amount: $%s | Coverage amount: $%s | Expiry date: %s",
-                premiumAmount, coverageAmount, expiryDate);
+        return String.format("Premium amount: $%s | Coverage amount: $%s | Expiry date: %s | Claims: %s",
+                premiumAmount, coverageAmount, expiryDate, claimSet);
     }
 
     @Override
@@ -133,12 +167,13 @@ public abstract class Policy {
         Policy p = (Policy) other;
         return premiumAmount.equals(p.premiumAmount)
                 && coverageAmount.equals(p.coverageAmount)
-                && expiryDate.equals(p.expiryDate);
+                && expiryDate.equals(p.expiryDate)
+                && claimSet.equals(p.claimSet);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(premiumAmount, coverageAmount, expiryDate);
+        return Objects.hash(premiumAmount, coverageAmount, expiryDate, claimSet);
     }
 }

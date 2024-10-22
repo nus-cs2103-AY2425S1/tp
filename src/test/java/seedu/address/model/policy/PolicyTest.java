@@ -112,9 +112,9 @@ public class PolicyTest {
     public void toStringMethod() {
         final Policy policy = new ConcretePolicy(premiumAmount, coverageAmount, expiryDate);
         final String expected = String.format("Premium amount: $%s | Coverage amount: $%s "
-                + "| Expiry date: %s",
+                + "| Expiry date: %s | Claims: %s",
                 policy.getPremiumAmount().toString(), policy.getCoverageAmount().toString(),
-                policy.getExpiryDate().toString());
+                policy.getExpiryDate().toString(), policy.getClaimSet().toString());
         assertEquals(expected, policy.toString());
     }
 
