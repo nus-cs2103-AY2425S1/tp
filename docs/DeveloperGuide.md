@@ -294,6 +294,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | new user         | see usage instructions                                                      | know how to use the app                                                |
 | `* *`    | user             | edit contact                                                                | update contact with new information                                    |
 | `* *`    | user             | sort contact by name                                                        | see whose contact I have saved                                         |
+| `* *`    | user             | pin a specific contact                                                      | view them on a separate list                                           |
 | `* *`    | user             | archive contact                                                             | hide less frequently used contacts without deleting them               |
 | `* *`    | user             | be alerted when a contact already exist                                     | avoid accidentally creating a duplicate                                |
 | `* *`    | user             | hide private contact details                                                | minimize chance of someone else seeing them by accident                |
