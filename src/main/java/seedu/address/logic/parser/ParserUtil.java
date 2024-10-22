@@ -154,7 +154,19 @@ public class ParserUtil {
         if (!Subject.isValidSubject(subject)) {
             throw new ParseException(Subject.MESSAGE_CONSTRAINTS);
         }
-        return new Subject(subject.toLowerCase());
+        return new Subject(capitalizeFirstLetter(trimmedSubject.toLowerCase()));
+    }
+
+    /**
+     * Capitalizes the first letter of the input string.
+     * @param input The string to be formatted.
+     * @return The string with the first letter capitalized and the rest in lowercase.
+     */
+    private static String capitalizeFirstLetter(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+        return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
 
     /**

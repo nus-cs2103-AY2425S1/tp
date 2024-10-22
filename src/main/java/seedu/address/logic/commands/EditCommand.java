@@ -224,6 +224,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(hours);
         }
 
+        //subjects that are the same will only be stored once with HashSet
         public void setSubjects(Set<Subject> subjects) {
             this.subjects = (subjects != null) ? new HashSet<>(subjects) : null;
         }

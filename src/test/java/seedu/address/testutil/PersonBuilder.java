@@ -100,6 +100,10 @@ public class PersonBuilder {
         return this;
     }
 
+    public PersonBuilder withSubject(String... subject) {
+        this.subjects = SampleDataUtil.getSubjectSet(subject);
+        return this;
+    }
     /**
      * Sets the {@code Hours} of the {@code Person} that we are building.
      */
