@@ -99,7 +99,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             Set<MonthPaid> monthPaidSet = ParserUtil.parseMonthsPaid(monthsPaid);
             return Optional.of(monthPaidSet);
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Invalid month entered for months paid.");
+            throw new ParseException(MonthPaid.MESSAGE_CONSTRAINTS);
         }
     }
 
