@@ -29,6 +29,6 @@ public class AttendanceRecord {
 
     @Override
     public String toString() {
-        return date + " [" + (attendance.value.equals("present") ? "x" : " ") + "]";
+        return date + " [" + (attendance.value.equals("p") ? "x" : " ") + "]";
     }
 }
