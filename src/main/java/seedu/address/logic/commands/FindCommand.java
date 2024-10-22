@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.ContainsGeneralKeywordsPredicate;
 import seedu.address.model.person.ContainsSpecificKeywordsPredicate;
-
-import java.util.List;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -48,7 +48,7 @@ public class FindCommand extends Command {
     private final ContainsGeneralKeywordsPredicate generalPredicate;
 
     /**
-     * Overloaded constructor for FindCommand
+     * Overloaded constructor for FindCommand.
      * @param specificPredicate If a specific find command is called,
      *                         a predicate which returns true only when all the keywords match, is loaded.
      */
@@ -59,7 +59,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Overloaded constructor for FindCommand
+     * Overloaded constructor for FindCommand.
      * @param generalPredicate If a general find command is called,
      *                         a predicate which returns true when at least one of the keywords match, is loaded.
      */
@@ -69,6 +69,11 @@ public class FindCommand extends Command {
         this.specificPredicate = null;
     }
 
+    /**
+     * Method to verify if all keywords used in a specific find are valid.
+     * @param specificKeywords List of keywords.
+     * @return True if all keywords are valid, false otherwise.
+     */
     public static boolean isValidSpecificFind(List<String> specificKeywords) {
         boolean result = true;
         for (int i = 0; i < specificKeywords.size(); i++) {
