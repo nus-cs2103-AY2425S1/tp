@@ -15,7 +15,6 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    public static final String EXPANDED_STYLE_CLASS = "expanded-person";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
