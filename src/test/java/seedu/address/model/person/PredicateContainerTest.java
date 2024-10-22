@@ -82,6 +82,10 @@ public class PredicateContainerTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Standard PredicateContainer to use for tests. Returns true when used to test with ALICE.
+     * @return Standard PredicateContainer to use for tests.
+     */
     public PredicateContainer getPredicateContainer1() {
         NameContainsKeywordsPredicate namePredicate1 =
                 new NameContainsKeywordsPredicate(Arrays.asList("alice", "bob"));
@@ -101,7 +105,10 @@ public class PredicateContainerTest {
                 .addRoleContainsKeywordsPredicate(rolePredicate1);
         return predicateContainer1;
     }
-
+    /**
+     * PredicateContainer to use for tests. Different Predicates compared to predicateContainer1.
+     * @return PredicateContainer to use for tests.
+     */
     public PredicateContainer getPredicateContainer2() {
         NameContainsKeywordsPredicate namePredicate2 =
                 new NameContainsKeywordsPredicate(Collections.singletonList("bob"));
