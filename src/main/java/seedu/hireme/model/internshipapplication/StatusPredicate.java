@@ -1,20 +1,19 @@
 package seedu.hireme.model.internshipapplication;
 
-import seedu.hireme.commons.util.StringUtil;
-import seedu.hireme.commons.util.ToStringBuilder;
-
-import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.hireme.commons.util.ToStringBuilder;
+
+
 /**
- * Tests whether a {@code Company}'s {@code Name} contains any of the specified statusToFilterBy.
+ * Tests whether a {@code InternshipApplication}'s {@code Status} has the specified statusToFilterBy.
  */
 public class StatusPredicate implements Predicate<InternshipApplication> {
 
     private final String statusToFilterBy;
 
     /**
-     * Constructs a {@code NameContainsKeywordsPredicate} with the given list of statusToFilterBy.
+     * Constructs a {@code StatusPredicate} with the string of statusToFilterBy.
      *
      * @param statusToFilterBy A string that specifies the status to filter internship applications.
      */
@@ -23,8 +22,7 @@ public class StatusPredicate implements Predicate<InternshipApplication> {
     }
 
     /**
-     * Tests whether the status of the {@code InternshipApplication} in the given {@code InternshipApplication}
-     * contains the specified statusToFilterBy
+     * Tests whether the status of the {@code InternshipApplication} has the specified statusToFilterBy
      *
      * @param internshipApplication The internship application to be tested.
      * @return True if statusToFilterBy matches the internship application status, false otherwise.

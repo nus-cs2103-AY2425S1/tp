@@ -1,7 +1,5 @@
 package seedu.hireme.logic.validator;
 
-import java.util.Objects;
-
 import seedu.hireme.model.internshipapplication.Status;
 
 /**
