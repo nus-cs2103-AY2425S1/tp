@@ -130,6 +130,8 @@ public class HelpWindow extends UiPart<Stage> {
                 new CommandSummary("Edit", "edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] "
                         + "[ap/APPOINTMENT] [t/TAG]\ne.g., edit John Doe n/Betsy Crower t/ ap/"),
                 new CommandSummary("Find", "find KEYWORD [MORE_KEYWORDS]\ne.g., find olive 87438"),
+                new CommandSummary("Note", "note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]\n"
+                        + "e.g., note John Doe m/10mg Ibuprofen"),
                 new CommandSummary("Help", "help"),
                 new CommandSummary("List", "list")
         );
