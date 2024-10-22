@@ -2,8 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_LENGTH;
-import static seedu.address.logic.Messages.MESSAGE_EMPTY_FIELD;
+import static seedu.address.logic.Messages.MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH;
 
 /**
  * Represents a patient's medical condition in the address book.
@@ -21,8 +20,7 @@ public class MedCon implements Comparable<MedCon> {
      */
     public MedCon(String medConName) {
         requireNonNull(medConName);
-        checkArgument(!medConName.isEmpty(), MESSAGE_EMPTY_FIELD);
-        checkArgument(isValidMedConName(medConName), MESSAGE_CONSTRAINTS_LENGTH);
+        checkArgument(isValidMedConName(medConName), MESSAGE_CONSTRAINTS_ALPHANUMERIC_LENGTH);
         this.medConName = medConName;
     }
 
