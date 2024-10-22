@@ -105,14 +105,14 @@ public interface Model {
     /**
      * Adds the {@code person} in the pinned contact list.
      *
-     * @param index The index of the {@code person} in the contact list.
+     * @param person The {@code person} in the contact list to be pinned.
      */
-    void addPinnedPersonList(Index index);
+    void addPinnedPersonList(Person person);
 
     /**
      * Remove the {@code person} in the pinned contact list.
      *
-     * @param index The index of the {@code person} in the contact list.
+     * @param index The {@code person} in the contact list to be unpinned.
      */
-    void removePinnedPersonList(Index index);
+    void removePinnedPersonList(Person person);
 }

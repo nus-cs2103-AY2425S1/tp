@@ -13,6 +13,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<Person> pinnedPersons;
+    private final UniquePersonList pinnedPersons;
     private Person focusedPerson;
 
     /**
@@ -37,7 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        pinnedPersons = new FilteredList<>(null);
+        pinnedPersons = new UniquePersonList();
         this.focusedPerson = null;
     }
 
@@ -155,19 +157,19 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getPinnedPersonList() {
-        return pinnedPersons;
+        return pinnedPersons.asUnmodifiableObservableList();
     }
 
     @Override
-    public void addPinnedPersonList(Index index) {
-        requireNonNull(index);
-        this.pinnedPersons.add(this.filteredPersons.get(index.getZeroBased()));
+    public void addPinnedPersonList(Person person) throws DuplicatePersonException {
+        requireNonNull(person);
+        this.pinnedPersons.add(person);
     }
 
     @Override
-    public void removePinnedPersonList(Index index) {
-        requireNonNull(index);
-        this.pinnedPersons.remove(index.getZeroBased());
+    public void removePinnedPersonList(Person person) {
+        requireNonNull(person);
+        this.pinnedPersons.remove(person);
     }
 
     @Override
