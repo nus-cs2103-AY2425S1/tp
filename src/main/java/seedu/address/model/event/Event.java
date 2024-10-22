@@ -104,7 +104,7 @@ public class Event {
      *
      * @param newVolunteer The volunteer to add.
      */
-    public void addParticipant(String newVolunteer) {
+    public void assignVolunteer(String newVolunteer) {
         volunteers.add(newVolunteer);
     }
 
@@ -116,13 +116,15 @@ public class Event {
     public void unassignVolunteer(String unassignedVolunteer) {
         volunteers.remove(unassignedVolunteer);
     }
+
     /**
-     * Removes a volunteer from the event's list of participants.
+     * Returns true if the event has the specified volunteer.
      *
-     * @param volunteerToRemove The volunteer to remove.
+     * @param volunteerName The name of the volunteer to check for.
+     * @return True if the volunteer is in the event's list of participants.
      */
-    public void removeParticipant(String volunteerToRemove) {
-        volunteers.remove(volunteerToRemove);
+    public boolean hasVolunteer(String volunteerName) {
+        return this.volunteers.contains(volunteerName);
     }
 
     /**
@@ -178,9 +180,5 @@ public class Event {
                 .add("endTime", endTime)
                 .add("description", description)
                 .toString();
-    }
-
-    public boolean hasParticipant(String volunteerName) {
-        return this.volunteers.contains(volunteerName);
     }
 }
