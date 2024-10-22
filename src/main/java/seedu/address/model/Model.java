@@ -66,7 +66,7 @@ public interface Model {
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Returns the AddressBook
+     * Returns the AddressBook as a {@code ReadOnlyAddressBook}.
      */
     ReadOnlyAddressBook getAddressBook();
 
@@ -94,12 +94,6 @@ public interface Model {
      * be the same as another existing student in the address book.
      */
     void setPerson(Student target, Student editedStudent);
-
-    /**
-     * Replaces the given task {@code target} with {@code editedTask} in {@code group}.
-     * {@code target} must exist in the address book.
-     */
-    void setTask(Task target, Task editedTask, Group group);
 
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
@@ -140,9 +134,15 @@ public interface Model {
     boolean hasTaskInGroup(Task task, Group group);
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the model
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
      */
     boolean hasTask(Task task);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask} in {@code group}.
+     * {@code target} must exist in the address book.
+     */
+    void setTask(Task target, Task editedTask, Group group);
 
     /**
      * Returns a {@code Student} with the student number {@code studentNumber}.
@@ -157,17 +157,17 @@ public interface Model {
     Group getGroupByName(GroupName groupName);
 
     /**
-     * Returns an unmodifiable view of the filtered student list
+     * Returns an unmodifiable view of the filtered student list.
      */
     ObservableList<Student> getFilteredPersonList();
 
     /**
-     * Returns an unmodifiable view of the filtered student list
+     * Returns an unmodifiable view of the filtered group list.
      */
     ObservableList<Group> getFilteredGroupList();
 
     /**
-     * Returns an unmodifiable view of the filtered student list
+     * Returns an unmodifiable view of the filtered task list.
      */
     ObservableList<Task> getFilteredTaskList();
 
@@ -178,8 +178,18 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Student> predicate);
 
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredGroupList(Predicate<Group> predicate);
 
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     void setStateStudents();
@@ -192,32 +202,49 @@ public interface Model {
 
     State getState();
 
-    Group findGroup(GroupName groupName);
-
+    /**
+     * Returns true if group with {@code groupName} exists in the address book.
+     */
     boolean containsGroupName(GroupName groupName);
 
+    /**
+     * Deletes {@code student} from {@code group}.
+     */
     void deleteStudentFromGroup(Group group, Student student);
 
     /**
-     * Deletes specified group.
+     * Deletes {@code groupToBeDeleted} from the address book.
+     * The students in {@code groupToBeDeleted} will be removed from that group.
      */
     void deleteGroup(Group groupToBeDeleted);
 
     /**
-     * Adds a {@code Task} to {@code Group} specified.
-     *
-     * @param task  to be added.
-     * @param group that task is to be added to.
+     * Adds {@code task} to {@code group}.
      */
     void addTaskToGroup(Task task, Group group);
 
+    /**
+     * Adds {@code task} to the address book.
+     */
     void addTask(Task task);
 
+    /**
+     * Deletes {@code task} from {@group}.
+     */
     void deleteTaskFromGroup(Task task, Group group);
 
+    /**
+     * Deletes {@code task} from the address book.
+     */
     void deleteTask(Task task);
 
+    /**
+     * Increments the number of groups with {@code task} by 1.
+     */
     void increaseGroupWithTask(Task task);
 
+    /**
+     * Decrements the number of groups with {@code task} by 1.
+     */
     void decreaseGroupWithTask(Task task);
 }
