@@ -21,7 +21,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindClientTypeCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -30,12 +30,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
 import seedu.address.model.person.NameComparator;
+import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.ClientTypeContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PhoneBeginsWithKeywordPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.TypicalPersons;
 
 public class ClientHubParserTest {
 
@@ -64,15 +70,19 @@ public class ClientHubParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + TypicalPersons.ALICE.getName().fullName);
+        assertEquals(new DeleteCommand(new
+                NameContainsKeywordsDeletePredicate(
+                        Arrays.asList(TypicalPersons.ALICE.getName().fullName.split("\\s+")))), command);
     }
 
     @Test
     public void parseShortCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.SHORT_COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.SHORT_COMMAND_WORD + " " + TypicalPersons.ALICE.getName().fullName);
+        assertEquals(new DeleteCommand(new
+                NameContainsKeywordsDeletePredicate(
+                Arrays.asList(TypicalPersons.ALICE.getName().fullName.split("\\s+")))), command);
     }
 
     @Test
@@ -93,9 +103,9 @@ public class ClientHubParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindNameCommand command = (FindNameCommand) parser.parseCommand(
+                FindNameCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
@@ -146,6 +156,14 @@ public class ClientHubParserTest {
         SortCommand command = (SortCommand) parser.parseCommand(
                 SortCommand.COMMAND_WORD + " " + criteria);
         assertEquals(new SortCommand(new NameComparator()), command);
+    }
+  
+    @Test
+    public void parseCommand_viewCommand() throws Exception {
+        String keyword = "Alice";
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + " " + keyword);
+        assertEquals(new ViewCommand(new NameContainsKeywordsPredicate(List.of(keyword))), command);
     }
 
     @Test

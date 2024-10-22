@@ -18,6 +18,9 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_NOT_FOUND = "The person cannot be found in the clientHub";
+    public static final String MESSAGE_VAGUE_DELETE = "Please be more specific in the name";
+    public static final String MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW = "%1$d person found for viewing!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

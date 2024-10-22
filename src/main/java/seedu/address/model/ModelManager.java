@@ -34,7 +34,7 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyClientHub clientHub, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(clientHub, userPrefs);
 
-        logger.fine("Initializing with address book: " + clientHub + " and user prefs " + userPrefs);
+        logger.fine("Initializing with clienthub: " + clientHub + " and user prefs " + userPrefs);
 
         this.clientHub = new ClientHub(clientHub);
         this.userPrefs = new UserPrefs(userPrefs);
