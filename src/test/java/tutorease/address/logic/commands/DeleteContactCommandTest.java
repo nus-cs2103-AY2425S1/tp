@@ -59,11 +59,11 @@ class DeleteContactCommandTest {
         assertEquals(deleteCommand1, deleteCommand2);
 
         Index index2 = Index.fromZeroBased(2);
-        DeleteContactCommand deleteCommand11 = new DeleteContactCommand(index1);
-        DeleteContactCommand deleteCommand22 = new DeleteContactCommand(index2);
+        DeleteContactCommand deleteCommandWithIndex1 = new DeleteContactCommand(index1);
+        DeleteContactCommand deleteCommandWithIndex2 = new DeleteContactCommand(index2);
 
         // Test different objects with different Index
-        assertNotEquals(deleteCommand11, deleteCommand22);
+        assertNotEquals(deleteCommandWithIndex1, deleteCommandWithIndex2);
 
         // Test against an object of a different class
         assertFalse(deleteCommand.equals("some string"));
