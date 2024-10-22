@@ -34,7 +34,7 @@ public class AddTransactionCommand extends Command {
             + PREFIX_DESCRIPTION + "buy raw materials "
             + PREFIX_AMOUNT + "-100 "
             + PREFIX_OTHER_PARTY + "Company XYZ "
-            + PREFIX_DATE + "10-10-2024";
+            + PREFIX_DATE + "2024-10-10";
 
     public static final String MESSAGE_ADD_TRANSACTION_SUCCESS = "Added new transaction %1$s\nto %2$s";
 

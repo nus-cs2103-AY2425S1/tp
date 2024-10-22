@@ -9,11 +9,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -32,7 +34,7 @@ public class AddTransactionCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
 
         List<Transaction> transactions = personToEdit.getTransactions();
@@ -55,7 +57,7 @@ public class AddTransactionCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         AddTransactionCommand addTransactionCommand = new AddTransactionCommand(INDEX_FIRST_PERSON, transactionToAdd);
 
         List<Transaction> transactions = personToEdit.getTransactions();
@@ -79,7 +81,7 @@ public class AddTransactionCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
 
@@ -95,7 +97,7 @@ public class AddTransactionCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
 
         Transaction transactionToAdd = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
 
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
@@ -110,9 +112,9 @@ public class AddTransactionCommandTest {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Transaction t1 = new Transaction("buy raw materials", -100,
-                "Company ABC", "15/10/2024");
+                "Company ABC", LocalDate.parse("2024-10-15", DateTimeUtil.DEFAULT_DATE_PARSER));
         Transaction t2 = new Transaction("sell raw materials", 200,
-                "Company XYZ", "16/10/2024");
+                "Company XYZ", LocalDate.parse("2024-10-16", DateTimeUtil.DEFAULT_DATE_PARSER));
 
         AddTransactionCommand addT1Command = new AddTransactionCommand(INDEX_FIRST_PERSON, t1);
         AddTransactionCommand addT2Command = new AddTransactionCommand(INDEX_FIRST_PERSON, t2);

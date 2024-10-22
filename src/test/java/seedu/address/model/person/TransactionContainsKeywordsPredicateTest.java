@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.util.DateTimeUtil;
 
 public class TransactionContainsKeywordsPredicateTest {
     @Test
@@ -45,22 +48,26 @@ public class TransactionContainsKeywordsPredicateTest {
         TransactionContainsKeywordsPredicate predicate =
                 new TransactionContainsKeywordsPredicate(Collections.singletonList("invest"));
         assertTrue(predicate.test(new Transaction(
-                "invest", 1000, "ABC Company", "2024-11-11")));
+                "invest", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
 
         // Multiple keywords
         predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("materials", "raw"));
         assertTrue(predicate.test(new Transaction(
-                "raw materials", 1000, "ABC Company", "2024-11-11")));
+                "raw materials", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
 
         // Only one matching keyword
         predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("materials", "raw"));
         assertTrue(predicate.test(new Transaction(
-                "new materials", 1000, "ABC Company", "2024-11-11")));
+                "new materials", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
 
         // Mixed-case keywords
         predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("mAtErIalS", "RaW"));
         assertTrue(predicate.test(new Transaction(
-                "raw materials", 1000, "ABC Company", "2024-11-11")));
+                "raw materials", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
     }
 
     @Test
@@ -69,17 +76,20 @@ public class TransactionContainsKeywordsPredicateTest {
         TransactionContainsKeywordsPredicate predicate =
                 new TransactionContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new Transaction(
-                "raw materials", 1000, "ABC Company", "2024-11-11")));
+                "raw materials", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
 
         // Non-matching keyword
         predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("invest"));
         assertFalse(predicate.test(new Transaction(
-                "raw materials", 1000, "ABC Company", "2024-11-11")));
+                "raw materials", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
 
         // Keywords match amount, other party and date, but does not match description
         predicate = new TransactionContainsKeywordsPredicate(Arrays.asList("1000", "ABC", "Company", "2024-11-11"));
         assertFalse(predicate.test(new Transaction(
-                "raw materials", 1000, "ABC Company", "2024-11-11")));
+                "raw materials", 1000, "ABC Company",
+                LocalDate.parse("2024-11-11", DateTimeUtil.DEFAULT_DATE_PARSER))));
     }
 
     @Test

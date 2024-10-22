@@ -2,6 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+
+import seedu.address.logic.Messages;
+
 /**
  * Represents a Person's transaction in the address book.
  */
@@ -10,12 +14,12 @@ public class Transaction {
     private final String description;
     private final int amount;
     private final String otherParty;
-    private final String date;
+    private final LocalDate date;
 
     /**
      * Every field must be present and not null.
      */
-    public Transaction(String description, int amount, String otherParty, String date) {
+    public Transaction(String description, int amount, String otherParty, LocalDate date) {
         requireAllNonNull(description, amount, otherParty, date);
         this.description = description;
         this.amount = amount;
@@ -33,7 +37,7 @@ public class Transaction {
     public String getOtherParty() {
         return otherParty;
     }
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
@@ -57,6 +61,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("%s; Amount: %d; Other Party: %s; Date: %s", description, amount, otherParty, date);
+        return Messages.format(this);
     }
 }
