@@ -12,7 +12,7 @@ title: AcademyAssist User Guide
 
 3. [Features](#features)
    * [Adding a student](#adding-a-student--add)
-   * [Deleting a student](#deleting-a-student--del)
+   * [Deleting a student](#deleting-a-student--delete)
    * [Editing a student](#editing-a-student--edit)
    * [Viewing all student](#viewing-all-students--view)
    * [Finding a student](#finding-a-student--find)
