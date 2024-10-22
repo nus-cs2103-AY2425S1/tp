@@ -1,6 +1,20 @@
+.root {
+    -color-bg: #fafafc;
+    -color-bg-dark: #966fd6;
+    -color-even-cell: #c5abc9;
+    -color-odd-cell: #E5E9F0;
+    -color-selected-cell: #C3B1E1;
+    -color-empty-cell: #3B4252;
+    -color-dark: #232730;
+    -color-display-light: #b7becb;
+    -color-prompt-text: #3B4252;
+    -color-tag: #457b7a;
+}
+
+
 .background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
+    -fx-background-color: -color-bg;
+    background-color: -color-bg; /* Used in the default.html file */
 }
 
 .label {
@@ -18,15 +32,24 @@
 }
 
 .label-header {
-    -fx-font-size: 32pt;
+    -fx-font-size: 24pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-font-weight: bold;
+}
+
+.label-subtitle {
+    -fx-font-size: 16pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: black;
     -fx-opacity: 1;
 }
 
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-prompt-text-fill: -color-prompt-text;
 }
 
 .tab-pane {
@@ -84,73 +107,76 @@
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -color-bg;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -color-bg;
 }
+
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-graphic-text-gap : 0;
+    -fx-background-color: -color-bg;
+    -fx-background-radius: 8;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
-}
 
 .list-cell:filled:selected {
-    -fx-background-color: #424d5f;
+    -fx-background-color: -color-selected-cell;
+    -fx-background-radius: 8;
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
+    -fx-background-color: transparent;
 }
 
 .list-cell .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: -color-text-dark;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: -color-text-dark;
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -color-bg;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: -color-bg;
+     -fx-border-color: -color-dark;
      -fx-border-top-width: 1px;
 }
 
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: -color-bg-dark;
 }
 
 .result-display {
-    -fx-background-color: transparent;
+    -fx-background-color: -color-display-light;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
+    -fx-border-color: -color-dark;
+    -fx-border-width: 1;
+    -fx-border-radius: 6;
 }
 
 .result-display .label {
@@ -175,9 +201,11 @@
 }
 
 .grid-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-border-color: -color-dark;
     -fx-border-width: 1px;
+    -fx-border-radius: 8;
 }
 
 .grid-pane .stack-pane {
@@ -193,7 +221,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -color-bg-dark;
 }
 
 .menu-bar .label {
@@ -309,7 +337,6 @@
 
 #cardPane {
     -fx-background-color: transparent;
-    -fx-border-width: 0;
 }
 
 #commandTypeLabel {
@@ -318,14 +345,16 @@
 }
 
 #commandTextField {
-    -fx-background-color: transparent #383838 transparent #383838;
+    -fx-background-color: -color-display-light;
+    -fx-background-radius: 6;
     -fx-background-insets: 0;
-    -fx-border-color: #383838 #383838 #ffffff #383838;
+    -fx-border-color: -color-dark;
     -fx-border-insets: 0;
     -fx-border-width: 1;
+    -fx-border-radius: 6;
     -fx-font-family: "Segoe UI Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -333,8 +362,8 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
-    -fx-background-radius: 0;
+    -fx-background-color: -color-display-light;
+
 }
 
 #tags {
@@ -344,9 +373,23 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #3e7b91;
+    -fx-background-color: -color-tag;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.tag-label {
+    -fx-background-color: #3e7b91;
+    -fx-text-fill: white;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.tags-title-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
 }

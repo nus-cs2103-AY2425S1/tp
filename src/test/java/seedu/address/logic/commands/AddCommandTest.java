@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -165,7 +166,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Tag> getTagListAsObservableList() {
+            return null;
+        }
+
+        @Override
+        public void updateTagList() {
+
+        }
+
+        @Override
         public boolean addTag(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean deleteTags(List<Tag> tag) {
             throw new AssertionError("This method should not be called.");
         }
 

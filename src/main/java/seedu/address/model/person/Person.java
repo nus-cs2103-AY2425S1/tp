@@ -16,15 +16,20 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Strings for UI
+    private static final String NOT_YET_RSVPED_STATUS = "Pending RSVP";
+    private static final String RSVPED_STATUS = "RSVPed";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
     private final Email email;
 
     // Data fields
-
     private final boolean isRsvp;
     private final Set<Tag> tags = new HashSet<>();
+
+
 
     /**
      * Every field must be present and not null.
@@ -73,6 +78,18 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns the string to display the RSVP status on the UI.
+     *
+     */
+    public String getRsvpStatusCard() {
+        if (isRsvp) {
+            return RSVPED_STATUS;
+        } else {
+            return NOT_YET_RSVPED_STATUS;
+        }
     }
 
     /**
