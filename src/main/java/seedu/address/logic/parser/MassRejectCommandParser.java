@@ -44,7 +44,7 @@ public class MassRejectCommandParser implements Parser<MassRejectCommand> {
             // Tag mass reject
             String tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()).tagCode;
             return new MassRejectCommand(new TagPredicate(Arrays.asList(tag)));
-        }  else {
+        } else {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MassRejectCommand.MESSAGE_USAGE));
         }

@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code JobCode} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code JobCode} matches keywords given.
  */
 public class JobCodePredicate implements Predicate<Person> {
     private final String jobCode;

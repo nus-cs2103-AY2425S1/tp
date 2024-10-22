@@ -3,12 +3,18 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code JobCode} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code JobCode} and {@code Tag} match keywords given jobCode and tag.
  */
 public class JobCodeTagPredicate implements Predicate<Person> {
     private final String jobCode;
     private final String tag;
 
+    /**
+     * Constructs a {@code JobCodeTagPredicate}.
+     *
+     * @param jobCode The jobCode to match.
+     * @param tag The tag to match.
+     */
     public JobCodeTagPredicate(String jobCode, String tag) {
         this.jobCode = jobCode;
         this.tag = tag;
