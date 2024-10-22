@@ -233,4 +233,4 @@ Action     | Format, Examples
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
-**Settle** | `settle INDEX amount/AMOUNT`
+**Settle** | `settle INDEX amount/AMOUNT`<br> e.g., `settle 1 amount/500.00`
