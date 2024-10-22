@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -55,8 +56,9 @@ public class EditPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        PolicySet personPolicies = new PolicySet();
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        PolicySet personPolicies = personToEdit.getPolicySet();
+        personPolicies.addAll(personToEdit.getPolicies());
 
         PolicyType policyTypeToEdit = editPolicyDescriptor.getPolicyType();
         Policy policyToRemove = findPolicyByType(personPolicies, policyTypeToEdit);
