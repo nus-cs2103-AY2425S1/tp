@@ -105,7 +105,7 @@ public class UniquePersonList implements Iterable<Person> {
         if (!internalList.remove(toArchive)) {
             throw new PersonNotFoundException();
         }
-        //archivedPersonList.addArchivedPerson(toArchive);              //Uncomment for future iteration
+        // archivedPersonList.addArchivedPerson(toArchive);              // Uncomment for future iteration
     }
 
     /**
