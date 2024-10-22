@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedPerson.EMPTY_FIELD_FORMAT;
 import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -15,7 +16,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.PersonBuilder;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -107,4 +110,47 @@ public class JsonAdaptedPersonTest {
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
+    @Test
+    public void toModelType_emptyEmail() throws Exception {
+        List<JsonAdaptedTag> validTags = new ArrayList<>();
+        validTags.add(new JsonAdaptedTag("friend"));
+        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+            .withEmptyEmail().withAddress(VALID_ADDRESS).withTags("friend").build();
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+            VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, VALID_ADDRESS, validTags);
+        assertEquals(testPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_emptyAddress() throws Exception {
+        List<JsonAdaptedTag> validTags = new ArrayList<>();
+        validTags.add(new JsonAdaptedTag("friend"));
+        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+            .withEmail(VALID_EMAIL).withEmptyAddress().withTags("friend").build();
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+            VALID_NAME, VALID_PHONE, VALID_EMAIL, EMPTY_FIELD_FORMAT, validTags);
+        assertEquals(testPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_emptyEmail_emptyAddress() throws Exception {
+        List<JsonAdaptedTag> validTags = new ArrayList<>();
+        validTags.add(new JsonAdaptedTag("friend"));
+        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+            .withEmptyEmail().withEmptyAddress().withTags("friend").build();
+
+        JsonAdaptedPerson person = new JsonAdaptedPerson(
+            VALID_NAME, VALID_PHONE, EMPTY_FIELD_FORMAT, EMPTY_FIELD_FORMAT, validTags);
+        assertEquals(testPerson, person.toModelType());
+    }
+
+    @Test
+    public void toModelType_emptyFields_returnsPerson() throws Exception {
+        Person testPerson = new PersonBuilder().withName(VALID_NAME).withPhone(VALID_PHONE)
+            .withEmptyEmail().withEmptyAddress().withTags("friend").build();
+        JsonAdaptedPerson person = new JsonAdaptedPerson(testPerson);
+        assertEquals(testPerson, person.toModelType());
+    }
 }

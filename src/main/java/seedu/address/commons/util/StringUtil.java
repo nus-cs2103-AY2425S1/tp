@@ -62,4 +62,43 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Calculates the minimum number of single-character edits (insertions, deletions, or substitutions)
+     * needed for the string {@code b} to become a substring of the string {@code a}.
+     *
+     * @param a The string in which we want to find the substring.
+     * @param b The string that we want to transform into a substring of {@code a}.
+     * @return The minimum number of single-character edits needed for {@code b} to become a substring of {@code a}.
+     */
+    public static int getLevenshteinDistanceSubstring(String a, String b) {
+        int[][] dp = new int[a.length() + 1][b.length() + 1];
+
+        // Initialize the dp array
+        for (int i = 0; i <= a.length(); i++) {
+            for (int j = 0; j <= b.length(); j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = 0;
+                } else {
+                    dp[i][j] = Math.min(
+                        dp[i - 1][j - 1] + (a.charAt(i - 1) == b.charAt(j - 1) ? 0 : 1), // Substitution
+                        Math.min(
+                            dp[i - 1][j] + 1, // Deletion
+                            dp[i][j - 1] + 1 // Insertion
+                        )
+                    );
+                }
+            }
+        }
+
+        // Find the minimum value in the last row of the dp array
+        int minDistance = Integer.MAX_VALUE;
+        for (int i = 0; i <= a.length(); i++) {
+            minDistance = Math.min(minDistance, dp[i][b.length()]);
+        }
+
+        return minDistance;
+    }
 }
