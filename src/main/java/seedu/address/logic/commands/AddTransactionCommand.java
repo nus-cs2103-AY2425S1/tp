@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OTHER_PARTY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -63,7 +64,7 @@ public class AddTransactionCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        List<Transaction> transactions = personToEdit.getTransactions();
+        List<Transaction> transactions = new ArrayList<>(personToEdit.getTransactions());
         transactions.add(toAdd);
         transactions.sort(new TransactionDateComparator());
 
