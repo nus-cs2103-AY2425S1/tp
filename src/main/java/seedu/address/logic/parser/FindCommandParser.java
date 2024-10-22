@@ -50,6 +50,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
         Predicate<Person> postalPredicate = new PostalContainsKeywordsPredicate(postalKeywords);
 
+        System.out.println(namePredicate.getClass());
+        System.out.println(phonePredicate.getClass());
+        System.out.println(postalPredicate.getClass());
+
         if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) {
             return new FindCommand(namePredicate.or(phonePredicate).or(postalPredicate));
         } else if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
@@ -73,7 +77,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return True if the string is numeric, false otherwise.
      */
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+        return str != null && str.matches("\\d+") && str.length() != 6;
     }
 
     /**

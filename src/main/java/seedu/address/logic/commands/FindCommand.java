@@ -27,8 +27,15 @@ public class FindCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Constructs a FindCommand with the specified predicate.
+     *
+     * @param predicate The predicate used to filter persons in the address book.
+     * @throws NullPointerException if the predicate is null.
+     */
     public FindCommand(Predicate<Person> predicate) {
         this.predicate = requireNonNull(predicate);
+        System.out.println(this.predicate);
     }
 
     @Override
@@ -50,6 +57,9 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
+        System.out.println("predicate class : " + predicate.getClass());
+        System.out.println("other class : " + otherFindCommand.getClass());
+
         return predicate.equals(otherFindCommand.predicate);
     }
 

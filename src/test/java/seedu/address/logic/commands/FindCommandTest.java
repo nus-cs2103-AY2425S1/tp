@@ -177,7 +177,7 @@ public class FindCommandTest {
     }
 
     private boolean isNumeric(String str) {
-        return str.matches("\\d+");
+        return str.matches("\\d+") && str.length() != 6;
     }
     private boolean isPostalCode(String str) {
         // checks that the postal code is exactly 6 digits

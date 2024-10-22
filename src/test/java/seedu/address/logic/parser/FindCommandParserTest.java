@@ -46,6 +46,7 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "123000 123456", expectedFindCommand);
         assertParseSuccess(parser, " \n 123000 \n \t 123456  \t", expectedFindCommand);
     }
+
     @Test
     public void parse_nullArgs_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
