@@ -8,6 +8,12 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
 
+    public final CommandResult execute(Model model) throws CommandException {
+        CommandResult result = executeCommand(model);
+        model.commitAddressBook();
+        return result;
+    }
+
     /**
      * Executes the command and returns the result message.
      *
@@ -15,6 +21,6 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model) throws CommandException;
+    public abstract CommandResult executeCommand(Model model) throws CommandException;
 
 }

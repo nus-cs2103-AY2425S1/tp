@@ -30,7 +30,7 @@ public class SortCommandTest {
         sortedList.sort(comparator);
         expectedModel.setFilteredPersonList(sortedList);
 
-        CommandResult result = sortCommand.execute(model);
+        CommandResult result = sortCommand.executeCommand(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }
@@ -46,7 +46,7 @@ public class SortCommandTest {
         sortedList.sort(comparator);
         expectedModel.setFilteredPersonList(sortedList);
 
-        CommandResult result = sortCommand.execute(model);
+        CommandResult result = sortCommand.executeCommand(model);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }
