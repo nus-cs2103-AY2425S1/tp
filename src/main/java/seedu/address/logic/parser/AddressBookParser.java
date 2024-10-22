@@ -107,12 +107,12 @@ public class AddressBookParser {
 
         case EditStudentCommand.COMMAND_WORD:
             return new EditStudentCommandParser().parse(arguments);
-
-        case GetAttendanceCommand.COMMAND_WORD:
-            return new GetAttendanceCommandParser().parse(arguments);
             
         case GetAttendanceByTgCommand.COMMAND_WORD:
             return new GetAttendanceByTgCommandParser().parse(arguments);
+
+        case GetAttendanceCommand.COMMAND_WORD:
+            return new GetAttendanceCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
