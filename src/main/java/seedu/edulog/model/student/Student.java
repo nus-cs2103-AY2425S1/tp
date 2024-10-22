@@ -73,13 +73,6 @@ public class Student {
     }
 
     /**
-     * Marks the student as present.
-     */
-    public void mark() {
-        isPresent = true;
-    }
-
-    /**
      * Marks the student as absent.
      */
     public void unmark() {

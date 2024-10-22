@@ -65,7 +65,7 @@ EduLog Level 3 is a **desktop app for managing contacts, optimized for use via a
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -140,6 +140,27 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the edulog.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+
+### Unmarking a student's attendance: `unmark'
+
+Denotes an existing student as absent. The student may either be identified by index number
+in the edulog (starting from 1) or name (this is both case-sensitive and space-sensitive within the name provided).
+
+Format: `unmark <INDEX - must be a positive integer>` OR `unmark <STUDENT NAME>`
+
+Examples:
+* `unmark 3`
+* `unmark Alex Yeoh`
+
+### Unmarking all students' attendance: `unmarkall'
+
+Denotes all existing students as absent.
+
+Format: `unmarkall`
+
+Examples:
+* `unmarkall`
+* `unmarkall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
 
 ### Clearing all entries : `clear`
 
