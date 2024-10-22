@@ -8,6 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.wedding.UniqueWeddingList;
+import seedu.address.model.wedding.Wedding;
 
 /**
  * Wraps all data at the address-book level
@@ -16,6 +18,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueWeddingList weddings;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,6 +30,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        weddings = new UniqueWeddingList();
     }
 
     public AddressBook() {}
@@ -56,6 +61,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
     }
+
+    public void setWeddings(List<Wedding> weddings) {this.weddings.setWeddings(weddings); }
 
     //// person-level operations
 
@@ -110,6 +117,44 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+
+
+
+    //// wedding-level operations
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addWedding(Wedding w) {
+        weddings.add(w);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    public void setWeddings(Wedding target, Wedding editedWedding) {
+        requireNonNull(editedWedding);
+
+        weddings.setWeddings(target, editedWedding);
+    }
+
+    public boolean hasWedding(Wedding wedding) {
+        requireNonNull(wedding);
+        return weddings.contains(wedding);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeWedding(Wedding key) {
+        weddings.remove(key);
+    }
+
+
+
     //// util methods
 
     @Override
@@ -123,6 +168,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<Wedding> getWeddingList() {
+        return weddings.asUnmodifiableObservableList();
+    }
+
 
     @Override
     public boolean equals(Object other) {

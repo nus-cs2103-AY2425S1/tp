@@ -19,12 +19,13 @@ public class Wedding {
     /**
      * Constructs a {@code Wedding}.
      */
-    public Wedding(Husband husband, Wife wife, Date date, Venue venue) {
+    public Wedding(Husband husband, Wife wife, Date date, Venue venue, ContactMap contactList) {
         requireAllNonNull(husband, wife);
         this.husband = husband;
         this.wife = wife;
         this.date = date;
         this.venue = venue;
+        this.contactList = contactList;
     }
 
     public Husband getHusband() {
@@ -51,6 +52,13 @@ public class Wedding {
         this.venue = venue;
     }
 
+    public String getWeddingName() {
+        return husband + " & " + wife;
+    }
+    public ContactMap getContactList() {
+        return contactList;
+    }
+
     @Override
     public String toString() {
         return new ToStringBuilder(this)
@@ -60,6 +68,18 @@ public class Wedding {
                 .add("venue", venue)
                 .add("contactList", contactList)
                 .toString();
+    }
+
+    public boolean isSameWedding(Wedding otherWedding) {
+        if (otherWedding == this) {
+            return true;
+        }
+
+        return otherWedding != null
+               && otherWedding.getHusband().equals(getHusband())
+               && otherWedding.getWife().equals(getWife())
+               && otherWedding.getDate().equals(getDate())
+               && otherWedding.getVenue().equals(getVenue());
     }
 
     @Override
