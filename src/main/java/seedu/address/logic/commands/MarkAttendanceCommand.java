@@ -18,7 +18,7 @@ import seedu.address.model.student.TutorialGroup;
  * Marks the attendance of a student for a specific date.
  */
 public class MarkAttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "marka";
+    public static final String COMMAND_WORD = "markat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the attendance of a student for a specific date.\n"
