@@ -1,14 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
-import java.util.List;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsDeletePredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -26,9 +25,9 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final NameContainsKeywordsDeletePredicate predicate;
 
-    public DeleteCommand(NameContainsKeywordsPredicate predicate) {
+    public DeleteCommand(NameContainsKeywordsDeletePredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -37,6 +36,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         if (model.getFilteredPersonList().isEmpty()) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(Messages.MESSAGE_PERSON_NOT_FOUND);
         }
         if (model.getFilteredPersonList().size() > 1) {
@@ -45,6 +45,7 @@ public class DeleteCommand extends Command {
         }
         Person personToDelete = model.getFilteredPersonList().get(0);
         model.deletePerson(personToDelete);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

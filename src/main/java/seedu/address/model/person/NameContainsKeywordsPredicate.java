@@ -20,20 +20,12 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
     public boolean test(Person person) {
         if (keywords.isEmpty()) {
             return false;
-        } else if (keywords.get(keywords.size() - 1).contains("/")) {
-            return isExact(person);
         } else {
             return keywords.stream()
                     .allMatch(keyword ->
                             Arrays.stream(person.getName().fullName.split("\\s+"))
                                     .anyMatch(part -> part.toLowerCase().startsWith(keyword.toLowerCase())));
         }
-    }
-
-    public boolean isExact(Person person) {
-        String fullname = String.join("", keywords).toLowerCase().split("/")[0].trim();
-        String personName = person.getName().fullName.trim().toLowerCase().replace(" ", "");
-        return fullname.equals(personName);
     }
 
     @Override
