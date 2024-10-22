@@ -8,6 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.person.ContainsGeneralKeywordsPredicate;
 import seedu.address.model.person.ContainsSpecificKeywordsPredicate;
 
+import java.util.List;
+
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case-insensitive.
@@ -17,11 +19,17 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String SPECIFIC_FIND_PREFIX = "s/";
 
+    /*
+     * The first character of a specific find must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "For more specific searches, use the \"s/\" prefix. When doing so, keywords need to be an exact match.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie\n"
-            + "For more specific searches, use the \"s/\" prefix\n"
             + "Example: " + COMMAND_WORD + " " + SPECIFIC_FIND_PREFIX + "John Doe "
             + SPECIFIC_FIND_PREFIX + "23 Abrams Street";
     public static final String HELP_FIND_COMMAND = "Find Command\n"
@@ -59,6 +67,16 @@ public class FindCommand extends Command {
         requireNonNull(generalPredicate);
         this.generalPredicate = generalPredicate;
         this.specificPredicate = null;
+    }
+
+    public static boolean isValidSpecificFind(List<String> specificKeywords) {
+        boolean result = true;
+        for (int i = 0; i < specificKeywords.size(); i++) {
+            if (specificKeywords.get(i).matches(VALIDATION_REGEX)) {
+                result = false;
+            }
+        }
+        return result;
     }
 
     @Override

@@ -123,6 +123,25 @@ public class StringUtilTest {
         assertTrue(StringUtil.containsWordIgnoreCase("AAA bBb ccc  bbb", "bbB"));
     }
 
+    @Test
+    public void containsMultipleWordsIgnoreCase_validInputs_correctResults() {
+        // Empty sentence
+        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("", "abc")); // Boundary case
+        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("    ", "123"));
+
+        // Matches a partial word only
+        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "bb")); // Sentence word bigger than query word
+        assertFalse(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "bbbb")); // Query word bigger than sentence word
+
+        // Matches sentence, different upper/lower case letters
+        assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "aaa bbb ccc"));
+        assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "AAA BBB CCC"));
+        assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "AAA bbb ccc"));
+        assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "aaa BBB ccc"));
+        assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "aaa bbb CCC"));
+        assertTrue(StringUtil.containsMultipleWordsIgnoreCase("aaa bbb ccc", "aAa bbB ccC"));
+    }
+
     //---------------- Tests for getDetails --------------------------------------
 
     /*

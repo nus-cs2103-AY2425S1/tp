@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.tag.PropertyTag.ALLOWED_PROPERTY_TAGS;
 
 import java.util.Collection;
@@ -179,7 +180,14 @@ public class ParserUtil {
      * @throws ParseException if the given {@code List<String> keywords} is invalid.
      */
     public static FindCommand parseSpecificFind(List<String> keywords) throws ParseException {
+        requireNonNull(keywords);
         List<String> specificKeywords = keywords;
+
+        if (!FindCommand.isValidSpecificFind(keywords)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
         return new FindCommand(new ContainsSpecificKeywordsPredicate(specificKeywords));
     }
 }

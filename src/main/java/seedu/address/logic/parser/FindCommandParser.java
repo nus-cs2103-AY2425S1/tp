@@ -25,6 +25,12 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (trimmedArgs.startsWith(PREFIX_SPECIFIC_FIND.getPrefix()) && !trimmedArgs.isEmpty()) {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_SPECIFIC_FIND);
+
+            if (!argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+
             return ParserUtil.parseSpecificFind(argMultimap.getAllValues(PREFIX_SPECIFIC_FIND));
         } else if (!trimmedArgs.isEmpty()) {
             String[] generalKeywords = trimmedArgs.split("\\s+");
