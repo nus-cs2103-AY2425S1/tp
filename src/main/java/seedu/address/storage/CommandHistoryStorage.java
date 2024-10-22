@@ -16,15 +16,14 @@ public class CommandHistoryStorage {
     private static Path commandHistoryFilePath = Paths.get("data", "commandHistory.txt");
     private static ArrayList<String> lines = new ArrayList<>();
     private int currentLineNumber;
-    private int previousTotalLines = 0;
+    private int previousTotalLines;
     /**
      * Creates a {@code CommandHistoryStorage} and initializing the text file with the line number.
      */
     public CommandHistoryStorage() {
-        //Initialize currentLineNumber to last line
+        clearFile();
         this.currentLineNumber = countLinesInFile();
         this.previousTotalLines = currentLineNumber;
-        initHistory();
     }
 
     /**
@@ -116,7 +115,7 @@ public class CommandHistoryStorage {
             return "";
         }
 
-        if (currentLineNumber > lastLineNumber) {
+        if (currentLineNumber > lines.size()) {
             assert (false);
         }
 
