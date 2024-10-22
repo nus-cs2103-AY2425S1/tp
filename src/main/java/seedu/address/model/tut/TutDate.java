@@ -64,6 +64,10 @@ public class TutDate {
         return students.isEmpty();
     }
 
+    public boolean isInTutDate(StudentId studentId) {
+        return students.contains(studentId);
+    }
+
     /**
      * Returns the date of this tutorial.
      *

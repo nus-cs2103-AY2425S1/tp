@@ -351,6 +351,14 @@ public abstract class Tutorial {
             if (!students.contains(student)) {
                 throw new StudentNotFoundException();
             }
+            for (TutDate tutDate : tutDates.values()) {
+                if (tutDate.isInTutDate(student.getStudentId())) {
+                    tutDate.remove(student.getStudentId());
+                    if (tutDate.isEmptyStudent()) {
+                        tutDates.remove(tutDate.getDate(), tutDate);
+                    }
+                }
+            }
             students.remove(student);
         }
 

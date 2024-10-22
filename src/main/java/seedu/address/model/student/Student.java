@@ -100,11 +100,10 @@ public class Student {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Student)) {
+        if (!(other instanceof Student otherStudent)) {
             return false;
         }
 
-        Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
                 && studentId.equals(otherStudent.studentId)
                 && tutorialId.equals(otherStudent.tutorialId);
