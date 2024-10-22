@@ -20,14 +20,17 @@ public class RentalInformationContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        RentalInformationContainsKeywordsPredicate firstPredicate = new RentalInformationContainsKeywordsPredicate(firstPredicateKeywordList);
-        RentalInformationContainsKeywordsPredicate secondPredicate = new RentalInformationContainsKeywordsPredicate(secondPredicateKeywordList);
+        RentalInformationContainsKeywordsPredicate firstPredicate = new RentalInformationContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        RentalInformationContainsKeywordsPredicate secondPredicate = new RentalInformationContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        RentalInformationContainsKeywordsPredicate firstPredicateCopy = new RentalInformationContainsKeywordsPredicate(firstPredicateKeywordList);
+        RentalInformationContainsKeywordsPredicate firstPredicateCopy = new RentalInformationContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -69,16 +72,19 @@ public class RentalInformationContainsKeywordsPredicateTest {
                 "Carol");
 
         // One keyword
-        RentalInformationContainsKeywordsPredicate predicate = new RentalInformationContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        RentalInformationContainsKeywordsPredicate predicate = new RentalInformationContainsKeywordsPredicate(
+                Collections.singletonList("Alice"));
         assertTrue(predicate.test(new PersonBuilder().withRentalInformation(rentalInformation1).build()));
 
         // Multiple keywords
-        predicate = new RentalInformationContainsKeywordsPredicate(Arrays.asList("Alice", "01/11/2024", "3000"));
+        predicate = new RentalInformationContainsKeywordsPredicate(
+                Arrays.asList("Alice", "01/11/2024", "3000"));
         assertTrue(predicate.test(new PersonBuilder().withRentalInformation(rentalInformation1).build()));
 
         // Multiple RentalInformation
         predicate = new RentalInformationContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withRentalInformation(rentalInformation1, rentalInformation2).build()));
+        assertTrue(predicate.test(new PersonBuilder().withRentalInformation(
+                rentalInformation1, rentalInformation2).build()));
 
         // Mixed-case keywords
         predicate = new RentalInformationContainsKeywordsPredicate(Arrays.asList("cARol", "AddReSS3"));
@@ -114,7 +120,8 @@ public class RentalInformationContainsKeywordsPredicateTest {
                 "Carol");
 
         // Zero keywords
-        RentalInformationContainsKeywordsPredicate predicate = new RentalInformationContainsKeywordsPredicate(Collections.emptyList());
+        RentalInformationContainsKeywordsPredicate predicate = new RentalInformationContainsKeywordsPredicate(
+                Collections.emptyList());
         assertFalse(predicate.test(new PersonBuilder().withRentalInformation(rentalInformation1).build()));
 
         // Non-matching keyword
@@ -122,7 +129,8 @@ public class RentalInformationContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new PersonBuilder().withRentalInformation(rentalInformation1).build()));
 
         // Keywords match name, phone and email, but does not match RentalInformation
-        predicate = new RentalInformationContainsKeywordsPredicate(Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
+        predicate = new RentalInformationContainsKeywordsPredicate(
+                Arrays.asList("Alice", "12345", "alice@email.com", "Main", "Street"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
                 .withEmail("alice@email.com").withRentalInformation(rentalInformation3).build()));
     }
@@ -130,9 +138,11 @@ public class RentalInformationContainsKeywordsPredicateTest {
     @Test
     public void toStringMethod() {
         List<String> keywords = List.of("keyword1", "keyword2");
-        RentalInformationContainsKeywordsPredicate predicate = new RentalInformationContainsKeywordsPredicate(keywords);
+        RentalInformationContainsKeywordsPredicate predicate = new RentalInformationContainsKeywordsPredicate(
+                keywords);
 
-        String expected = RentalInformationContainsKeywordsPredicate.class.getCanonicalName() + "{keywords=" + keywords + "}";
+        String expected = RentalInformationContainsKeywordsPredicate.class.getCanonicalName()
+                + "{keywords=" + keywords + "}";
         assertEquals(expected, predicate.toString());
     }
 }
