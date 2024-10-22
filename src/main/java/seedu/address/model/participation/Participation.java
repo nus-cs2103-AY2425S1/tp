@@ -50,4 +50,8 @@ public class Participation {
     public String toString() {
         return String.format("Attends: %s", tutorial.toString());
     }
+
+    public boolean isParticipationOfTutorial(String tutorial) {
+        return this.tutorial.getSubject().equals(tutorial);
+    }
 }
