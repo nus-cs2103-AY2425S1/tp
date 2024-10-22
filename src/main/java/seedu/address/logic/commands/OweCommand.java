@@ -38,8 +38,7 @@ public class OweCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_HOUR + "2 ";
 
-    public static final String MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS = "Updated Student owedAmount: %1$s";
-    public static final String MESSAGE_MISSING_HOUR = "Number of hours owed must be provided.";
+    public static final String MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS = "%1$s owed another %2$.2f";
 
     private final Index index;
     private final double hourOwed;
@@ -64,11 +63,13 @@ public class OweCommand extends Command {
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
         Student editedStudent = createEditedStudent(studentToEdit, hourOwed);
+        double amountOwed = calculateOwed(studentToEdit, hourOwed);
+        String name = editedStudent.getName().toString();
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(String.format(MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, Messages.format(editedStudent)));
+        return new CommandResult(String.format(MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, name, amountOwed));
     }
 
     /**
@@ -99,11 +100,11 @@ public class OweCommand extends Command {
      */
     private static OwedAmount updateOwedAmount(Student student, double hour) {
         assert student != null && hour % 0.5 == 0;
-        double updatedOwedAmount = student.getOwedAmount().value + calculateOwedAmount(student, hour);
+        double updatedOwedAmount = student.getOwedAmount().value + calculateOwed(student, hour);
         return new OwedAmount(Double.toString(updatedOwedAmount));
     }
 
-    private static double calculateOwedAmount(Student student, double hour) {
+    private static double calculateOwed(Student student, double hour) {
         double owedAmount = student.getRate().value * hour;
         return BigDecimal.valueOf(owedAmount)
                 .setScale(2, RoundingMode.HALF_UP)

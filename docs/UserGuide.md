@@ -149,7 +149,7 @@ Updates the amount of tuition fee owed by a specified student after a lesson.
 Format: `owe INDEX hr/HOURS_OWED`
 
 Example: 
-* `owe 2 hr/1.5` updates the tuition fee owed by the 2nd student in the list.
+* `owe 1 hr/1.5` updates the tuition fee owed by the 2nd student in the list.
 
 <box type="important" heade="#### Constraints">
     Hours owed by a student must be a positive multiple of 0.5.
@@ -227,5 +227,5 @@ Action     | Format, Examples
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
-**Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 2 hr/1.5`
+**Owe**    | `owe INDEX hr/HOUR_OWED`<br> e.g., `owe 1 hr/1.5`
 **Help**   | `help`

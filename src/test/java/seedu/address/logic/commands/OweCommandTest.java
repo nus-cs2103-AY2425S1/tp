@@ -32,9 +32,11 @@ public class OweCommandTest {
         Student chosenStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, Double.parseDouble(VALID_HOUR_AMY));
         Student updatedOwedAmountStudent = createExpectedStudent(chosenStudent, Double.parseDouble(VALID_HOUR_AMY));
+        String expectedName = updatedOwedAmountStudent.getName().toString();
+        double additionOwedAmount = calculateAdditionOwedAmount(chosenStudent, Double.parseDouble(VALID_HOUR_AMY));
 
         String expectedMessage = String.format(OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS,
-                Messages.format(updatedOwedAmountStudent));
+                expectedName, additionOwedAmount);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedOwedAmountStudent);
@@ -47,12 +49,15 @@ public class OweCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, Double.parseDouble(VALID_HOUR_BOB));
         Student updatedOwedAmountStudent = createExpectedStudent(
                 studentInFilteredList, Double.parseDouble(VALID_HOUR_BOB));
-        OweCommand oweCommand = new OweCommand(INDEX_FIRST_STUDENT, Double.parseDouble(VALID_HOUR_BOB));
+        String expectedName = updatedOwedAmountStudent.getName().toString();
+        double additionOwedAmount = calculateAdditionOwedAmount(
+                studentInFilteredList, Double.parseDouble(VALID_HOUR_BOB));
 
         String expectedMessage = String.format(
-                OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, Messages.format(updatedOwedAmountStudent));
+                OweCommand.MESSAGE_UPDATE_OWED_AMOUNT_SUCCESS, expectedName, additionOwedAmount);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), updatedOwedAmountStudent);
@@ -106,9 +111,16 @@ public class OweCommandTest {
     /**
      * Helper method to create a Student with an addition of number of hours owed.
      */
-    private static Student createExpectedStudent(Student student, double hourOwed) {
-        double additionOwedAmount = student.getRate().value * hourOwed;
+    private Student createExpectedStudent(Student student, double hourOwed) {
+        double additionOwedAmount = calculateAdditionOwedAmount(student, hourOwed);
         double updatedOwedAmount = student.getOwedAmount().value + additionOwedAmount;
         return new StudentBuilder(student).withOwedAmount(Double.toString(updatedOwedAmount)).build();
+    }
+
+    /**
+     * Calculates addition owedAmount used to generate expected messages and expected students
+     */
+    private double calculateAdditionOwedAmount(Student student, double hourOwed) {
+        return student.getRate().value * hourOwed;
     }
 }
