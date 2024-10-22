@@ -177,7 +177,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         // Add the event and volunteer association
         v.addEvent(eventName);
-        e.addParticipant(volunteerName);
+        e.assignVolunteer(volunteerName);
     }
 
     /**
@@ -199,7 +199,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
         // Remove the volunteer and event association
         v.removeEvent(eventName);
-        e.removeParticipant(volunteerName);
+        e.unassignVolunteer(volunteerName);
     }
 
     //// util methods
