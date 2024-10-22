@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.tutorial.Tutorial;
 
 /**
  * The API of the Model component.
@@ -13,6 +14,8 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Tutorial> PREDICATE_SHOW_ALL_TUTORIALS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -57,6 +60,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasTutorial(Tutorial tutorial);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -70,6 +75,8 @@ public interface Model {
      */
     void addPerson(Person person);
 
+    void addTutorial(Tutorial tutorial);
+
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -80,9 +87,14 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered tutorial list */
+    ObservableList<Tutorial> getFilteredTutorialList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void updateFilteredTutorialList(Predicate<Tutorial> predicate);
 }
