@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OWED_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
@@ -49,6 +50,7 @@ public class CommandTestUtil {
     public static final String VALID_PAID_AMOUNT_BOB = "0.0";
     public static final String VALID_OWED_AMOUNT_AMY = "500.00";
     public static final String VALID_OWED_AMOUNT_BOB = "300.25";
+    public static final String VALID_HOUR_DESC = " " + PREFIX_HOUR + "4.5";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -78,6 +80,7 @@ public class CommandTestUtil {
     public static final String INVALID_RATE_DESC = " " + PREFIX_RATE + "12.398";
     public static final String INVALID_PAID_AMOUNT_DESC = " " + PREFIX_PAID_AMOUNT + " ";
     public static final String INVALID_OWED_AMOUNT_DESC = " " + PREFIX_OWED_AMOUNT + "19.000";
+    public static final String INVALID_HOUR_DESC = " " + PREFIX_HOUR + "abc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

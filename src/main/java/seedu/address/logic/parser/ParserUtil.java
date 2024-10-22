@@ -27,6 +27,7 @@ import seedu.address.model.student.Subject;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_HOUR = "Number of hours should be a positive multiple of 0.5";
 
     private static final Logger logger = Logger.getLogger(ParserUtil.class.getName());
     /**
@@ -196,6 +197,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String hoursPaid} into a {@code double}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the {@code hoursPaid} is invalid.
+     */
+    public static double parseHour(String hour) throws ParseException {
+        requireNonNull(hour);
+        String trimmedHour = hour.trim();
+        if (!StringUtil.isPositiveMultipleOfHalfHour(trimmedHour)) {
+            throw new ParseException(MESSAGE_INVALID_HOUR);
+        }
+        return Double.parseDouble(trimmedHour);
+    }
+
+    /**
      * Parses a {@code Collection<String> nameStrings} into a {@code Set<String>}.
      * Duplicate names will be ignored.
      *
@@ -214,15 +230,6 @@ public class ParserUtil {
         return nameSet;
     }
 
-    private static void addToNameHashSet(String nameString, HashSet<String> nameSet) throws ParseException {
-        String[] names = nameString.split("\\s+");
-        for (String name : names) {
-            parseName(name); // Check if name is valid
-            nameSet.add(name); // Add to set to ensure uniqueness
-        }
-    }
-
-
     /**
      * Parses a {@code Collection<String> days} into a {@code Set<Days>}.
      *
@@ -239,6 +246,14 @@ public class ParserUtil {
             addToDayHashSet(dayString, daySet);
         }
         return daySet;
+    }
+
+    private static void addToNameHashSet(String nameString, HashSet<String> nameSet) throws ParseException {
+        String[] names = nameString.split("\\s+");
+        for (String name : names) {
+            parseName(name); // Check if name is valid
+            nameSet.add(name); // Add to set to ensure uniqueness
+        }
     }
 
     private static void addToDayHashSet(String dayString, HashSet<Days> daySet) throws ParseException {
