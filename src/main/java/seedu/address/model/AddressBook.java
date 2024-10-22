@@ -114,6 +114,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         return true;
     }
 
+    /**
+     * Deletes {@code key} from this {@code AddressBook}.
+     * @param t The tag to be deleted.
+     */
+    public boolean deleteTag(Tag t) {
+        tags.deleteTag(t);
+        return true;
+    }
+
     public boolean hasTag(Tag t) {
         return tags.contains(t);
     }
@@ -138,7 +147,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Tag> getTagList() {
-        return tags.asUnmodifiableObservableList();
+        return tags.asObservableList();
     }
 
     @Override

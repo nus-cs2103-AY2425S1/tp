@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
 
 
@@ -54,7 +55,18 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label tagLabel = new Label(tag.tagName);
+                    tagLabel.getStyleClass().add("tag-label");
+
+                    Color color = TagColourManager.getColourForTag(tag.tagName);
+                    tagLabel.setStyle(String.format("-fx-background-color: #%02x%02x%02x;",
+                            (int) (color.getRed() * 255),
+                            (int) (color.getGreen() * 255),
+                            (int) (color.getBlue() * 255)));
+
+                    tags.getChildren().add(tagLabel);
+                });
         isRsvp.setText(person.getRsvpStatusCard());
         isRsvp.backgroundProperty().addListener((observable, oldValue, newValue) -> {
             if (!person.getRsvp()) {

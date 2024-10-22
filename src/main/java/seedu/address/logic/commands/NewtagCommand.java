@@ -11,8 +11,8 @@ import seedu.address.model.tag.Tag;
  */
 public class NewtagCommand extends Command {
     public static final String COMMAND_WORD = "newtag";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tag.\n"
-            + "Parameters: TAG_NAME (MAX 50 alphanumeric characters)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a new tag (case insensitive).\n"
+            + "Parameters: TAG_NAME (MAX 50 alphanumeric characters, spaces, parenthesis and apostrophes)\n"
             + "Example: " + COMMAND_WORD + " Bride's Friend";
     public static final String MESSAGE_SUCCESS = "New tag added: ";
     public static final String MESSAGE_DUPLICATE = "This tag already exists.\n";
@@ -33,6 +33,8 @@ public class NewtagCommand extends Command {
         if (!isSuccessful) {
             throw new CommandException(MESSAGE_DUPLICATE);
         }
+        model.updateTagList();
+
         String successMessage = MESSAGE_SUCCESS + " " + tag + "\n";
         String currentTags = "Your tags: " + model.getTagList();
         return new CommandResult(successMessage + currentTags);
