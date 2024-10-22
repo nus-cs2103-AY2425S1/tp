@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 /**
- * Represents a clear command with hidden internal logic and the ability to be executed.
+ * Clears either all Events or the whole address book
  */
 public abstract class ClearCommand extends Command {
 
