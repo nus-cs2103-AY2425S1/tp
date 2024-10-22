@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_BIRTHDAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_PAYMENT_DATE;
 
 import java.util.Comparator;
 
@@ -18,12 +22,13 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the contact list by the specified parameter in the specified order.\n"
-            + "Parameters: PARAMETER (name, insurance_type, address, renewal_date) ORDER (asc, desc)\n"
-            + "Example: " + COMMAND_WORD + " name asc";
+            + "Parameters: PARAMETER (" + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + " or "
+            + PREFIX_NEXT_PAYMENT_DATE + ") " + "ORDER (asc, desc)\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + " asc";
 
     public static final String MESSAGE_SUCCESS = "Contacts have been sorted by %1$s in %2$s order.";
     public static final String MESSAGE_INVALID_PARAMETER = "Invalid parameter. Use one of the following: "
-            + "name, " + "insurance type, address, or renewal_date.";
+        + PREFIX_NAME + ", " + PREFIX_APPOINTMENT + ", " + PREFIX_BIRTHDAY + ", or " + PREFIX_NEXT_PAYMENT_DATE + ".";
     public static final String MESSAGE_INVALID_ORDER = "Invalid order. Use `asc` for ascending or "
             + "`desc` for descending.";
 
@@ -46,17 +51,24 @@ public class SortCommand extends Command {
 
         Comparator<Person> comparator;
         switch (parameter) {
-        case "name":
+        case "n/":
             comparator = Person.getNameComparator();
             break;
-        case "appointment_date":
+        case "appt/":
             comparator = Person.getAppointmentDateComparator();
             break;
-        case "birthday":
+        case "b/":
             comparator = Person.getBirthdayComparator();
+            break;
+        case "paydate/":
+            comparator = Person.getPayDateComparator();
             break;
         default:
             throw new CommandException(MESSAGE_INVALID_PARAMETER);
+        }
+
+        if (parameter.equals("paydate/") && order.equals("desc")) {
+            comparator = Person.getReversedPayDateComparator();
         }
 
         if (order.equals("desc")) {
@@ -66,7 +78,40 @@ public class SortCommand extends Command {
         }
 
         model.sortPersonList(comparator);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, parameter, order));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, getExactParameter(parameter), order));
+    }
+
+    /**
+     * Returns the exact parameter name.
+     */
+    private String getExactParameter(String prefix) {
+        switch (prefix) {
+        case "n/":
+            return "name";
+        case "appt/":
+            return "appointment date";
+        case "b/":
+            return "birthday";
+        case "paydate/":
+            return "next payment date";
+        default:
+            return prefix;
+        }
+    }
+
+    /**
+     * Returns true if the parameter is a valid parameter.
+     */
+    public static boolean isValidParameter(String parameter) {
+        return parameter.equals("n/") || parameter.equals("appt/") || parameter.equals("b/")
+                || parameter.equals("paydate/");
+    }
+
+    /**
+     * Returns true if the order is a valid order.
+     */
+    public static boolean isValidOrder(String order) {
+        return order.equals("asc") || order.equals("desc");
     }
 
     @Override

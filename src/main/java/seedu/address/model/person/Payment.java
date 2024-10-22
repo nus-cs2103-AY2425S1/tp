@@ -62,9 +62,13 @@ public class Payment {
         }
     }
 
+    public LocalDate getPaymentDueDate() {
+        return paymentDueDate;
+    }
+
     @Override
     public String toString() {
-        return value;
+        return String.format("$%.2f due on %s", amount, paymentDueDate);
     }
 
     @Override

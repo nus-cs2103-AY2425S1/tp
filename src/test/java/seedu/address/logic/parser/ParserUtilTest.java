@@ -278,17 +278,36 @@ public class ParserUtilTest {
     public void parsePolicies_invalidIndex_throwsParseException() throws ParseException {
         String policyArgumentWithInvalidIndex = "c " + PREFIX_POLICY_NAME + VALID_POLICY_NAME + " "
                 + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
-                + PREFIX_POLICY_END_DATE + VALID_DATE_2;
+                + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+                + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+                + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+
         Collection<String> policies = List.of(policyArgumentWithInvalidIndex, EDIT_POLICY_LIFE_1);
+
+        assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(policies));
+    }
+
+    @Test
+    public void parsePolicies_invalidDuplicateIndex_throwsParseException() throws ParseException {
+        String policyArgumentWithDuplicateIndex = "1 " + PREFIX_POLICY_NAME + VALID_POLICY_NAME + " "
+                + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
+                + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+                + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+                + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+
+        Collection<String> policies = List.of(EDIT_POLICY_LIFE_1, policyArgumentWithDuplicateIndex);
 
         assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(policies));
     }
     @Test
     public void parsePolicies_invalidArgumentWithNoName_throwsParseException() throws ParseException {
-        String policyArgumentWithInvalidIndex = "1 "
+        String policyArgumentWithNoName = "2 "
                 + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
-                + PREFIX_POLICY_END_DATE + VALID_DATE_2;
-        Collection<String> policies = List.of(policyArgumentWithInvalidIndex, EDIT_POLICY_LIFE_1);
+                + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+                + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+                + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
+
+        Collection<String> policies = List.of(policyArgumentWithNoName, EDIT_POLICY_LIFE_1);
 
         assertThrows(ParseException.class, () -> ParserUtil.parsePolicies(policies));
     }

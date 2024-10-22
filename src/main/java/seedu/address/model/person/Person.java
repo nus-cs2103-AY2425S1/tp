@@ -73,17 +73,33 @@ public class Person {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+
+    /**
      * Assigns a policy to the list of policies.
      *
      * @param policy the policy to be assigned
      * @return true if the policy was successfully added, false if the policy already exists
      */
     public boolean assignPolicy(Policy policy) {
-        if (policies.contains(policy)) {
-            return false;
+        for (Policy p : policies) {
+            if (p.isSamePolicy(policy)) {
+                return false;
+            }
         }
         policies.add(policy);
         return true;
+
+    }
+
+    public void removePolicy(Policy policy) {
+        policies.remove(policy);
     }
 
     /**
@@ -93,8 +109,11 @@ public class Person {
      */
     public String getPoliciesString() {
         StringBuilder sb = new StringBuilder();
+        int count = 1;
         for (Policy policy : policies) {
+            sb.append(String.format("%s.", count));
             sb.append(policy.toString()).append("\n");
+            count++;
         }
         return sb.toString();
     }
@@ -123,11 +142,42 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
+     * Returns a comparator that compares persons by next payment date in chronological order.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public static Comparator<Person> getPayDateComparator() {
+        return (person1, person2) -> {
+            boolean person1HasPolicies = person1.getPolicies().size() > 0;
+            boolean person2HasPolicies = person2.getPolicies().size() > 0;
+
+            if (!person1HasPolicies && !person2HasPolicies) {
+                return 0;
+            } else if (!person1HasPolicies) {
+                return 1;
+            } else if (!person2HasPolicies) {
+                return -1;
+            } else {
+                return person1.getPolicies().get(0).getPolicyPaymentDueDate()
+                        .compareTo(person2.getPolicies().get(0).getPolicyPaymentDueDate());
+            }
+        };
+    }
+
+    public static Comparator<Person> getReversedPayDateComparator() {
+        return (person1, person2) -> {
+            boolean person1HasPolicies = person1.getReversedPolicies().size() > 0;
+            boolean person2HasPolicies = person2.getReversedPolicies().size() > 0;
+
+            if (!person1HasPolicies && !person2HasPolicies) {
+                return 0;
+            } else if (!person1HasPolicies) {
+                return -1;
+            } else if (!person2HasPolicies) {
+                return 1;
+            } else {
+                return person1.getReversedPolicies().get(0).getPolicyPaymentDueDate()
+                        .compareTo(person2.getReversedPolicies().get(0).getPolicyPaymentDueDate());
+            }
+        };
     }
 
     /**
@@ -135,6 +185,12 @@ public class Person {
      * if modification is attempted.
      */
     public List<Policy> getPolicies() {
+        policies.sort(Policy.getPolicyPaymentDueDateComparator());
+        return Collections.unmodifiableList(policies);
+    }
+
+    public List<Policy> getReversedPolicies() {
+        policies.sort(Policy.getPolicyPaymentDueDateComparator().reversed());
         return Collections.unmodifiableList(policies);
     }
 
