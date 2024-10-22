@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGN_CONTACT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * This AssignContactToWeddingCommandParser parses user inputs starting with "assignw" where the first index is interpreted as the wedding index
@@ -55,12 +54,11 @@ public class AssignContactToWeddingCommandParser implements Parser<AssignContact
             personIndexSet = Arrays.stream(personIndexs.split("\\s+"))
                     .map(Integer::parseInt)
                     .map(i -> Index.fromOneBased(i))
-                    .collect(Collectors.toSet()); // Collect into a Set of Index objects
+                    .collect(Collectors.toSet());
 
         } catch (IllegalArgumentException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, "You can only reference contacts through their index."));
         }
-
 
 
         return new AssignContactToWeddingCommand(weddingIndex, personIndexSet);
