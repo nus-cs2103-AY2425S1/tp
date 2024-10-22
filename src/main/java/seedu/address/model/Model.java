@@ -6,7 +6,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Policy;
 
 /**
  * The API of the Model component.
@@ -92,7 +94,7 @@ public interface Model {
     void sortPersonList(Comparator<Person> comparator);
 
     void commitAddressBook();
-    void undoAddressBook();
+    void undoAddressBook() throws CommandException;
     void redoAddressBook();
     boolean canUndoAddressBook();
     boolean canRedoAddressBook();

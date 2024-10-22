@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -24,8 +22,9 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "And also deletes the policy identified by the index number used in the displayed policy list.\n"
+            + "Parameters: INDEX (must be a positive integer) + <Optional> po/policyIndex\n"
+            + "Example: " + COMMAND_WORD + " 1 or " + COMMAND_WORD + " 1 po/1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_POLICY_SUCCESS = "Deleted Policy %1$d from %2$s";
@@ -91,8 +90,6 @@ public class DeleteCommand extends Command {
                 }
                 Policy policyToDelete = personToDelete.getPolicies().get(policyIndex.getZeroBased());
                 personToDelete.removePolicy(policyToDelete);
-                model.setPerson(personToDelete, personToDelete);
-                model.commitAddressBook();
                 return new CommandResult(String.format(MESSAGE_DELETE_POLICY_SUCCESS, policyIndex
                         .getOneBased(), personToDelete.getName()));
             } else {

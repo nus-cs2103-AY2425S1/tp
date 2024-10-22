@@ -43,6 +43,7 @@ public class AssignPolicyCommand extends Command {
 
     private final Index index;
     private final Policy policy;
+    private Person personBeforeEdit;
 
     /**
      * Creates an AssignPolicyCommand to assign the specified {@code policy} to a person
@@ -81,5 +82,6 @@ public class AssignPolicyCommand extends Command {
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(personToEdit)));
     }
+
 }
 
