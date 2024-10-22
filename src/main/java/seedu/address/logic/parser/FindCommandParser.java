@@ -33,7 +33,6 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
 
-        // Separate keywords into phone and name
         List<String> phoneKeywords = Arrays.stream(keywords)
                 .filter(this::isNumeric)
                 .collect(Collectors.toList());
@@ -50,20 +49,23 @@ public class FindCommandParser implements Parser<FindCommand> {
         Predicate<Person> phonePredicate = new PhoneContainsKeywordsPredicate(phoneKeywords);
         Predicate<Person> postalPredicate = new PostalContainsKeywordsPredicate(postalKeywords);
 
-        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) { // all 3 searches
+
+        if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) {
             return new FindCommand(namePredicate.or(phonePredicate).or(postalPredicate));
-        } else if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) { // find by name and number only
+        } else if (!nameKeywords.isEmpty() && !phoneKeywords.isEmpty()) {
             return new FindCommand(namePredicate.or(phonePredicate));
-        } else if (!nameKeywords.isEmpty() && !postalKeywords.isEmpty()) { // find by name and postal only
+        } else if (!nameKeywords.isEmpty() && !postalKeywords.isEmpty()) {
             return new FindCommand(namePredicate.or(postalPredicate));
-        } else if (!phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) { // find by phone and postal only
+        } else if (!phoneKeywords.isEmpty() && !postalKeywords.isEmpty()) {
             return new FindCommand(phonePredicate.or(postalPredicate));
-        } else if (!nameKeywords.isEmpty()) { // search by name only
+        } else if (!nameKeywords.isEmpty()) {
             return new FindCommand(namePredicate);
-        } else if (!phoneKeywords.isEmpty()) { // search by phone only
+        } else if (!phoneKeywords.isEmpty()) {
             return new FindCommand(phonePredicate);
-        } else { // search by postal only
+        } else if (!postalKeywords.isEmpty()) {
             return new FindCommand(postalPredicate);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 

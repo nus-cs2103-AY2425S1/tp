@@ -26,13 +26,13 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111 S888123").withEmail("alice@example.com")
-            .withPhone("94351253").withPostalCode("123456")
+            .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
+            .withPhone("94351253").withPostalCode("123000")
             .withTags("Vegan").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25 S812300")
+            .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withPostalCode("123456")
+            .withPostalCode("123000")
             .withTags("Vegetarian", "Gluten Free").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street #12-345").withTags("Vegan")
