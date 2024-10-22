@@ -32,7 +32,7 @@ public class AppointmentTest {
     public void appointmentRemoveTest() {
         Person testPerson = new PersonBuilder().build();
         LocalDateTime startTime = LocalDateTime.now();
-        LocalDateTime endTime = LocalDateTime.now();
+        LocalDateTime endTime = LocalDateTime.now().plusHours(1);
         Appointment testAppointment = new Appointment("test", testPerson.getNric(), startTime, endTime);
         testPerson.addAppointment(testAppointment);
         testPerson.removeAppointment(testAppointment);
