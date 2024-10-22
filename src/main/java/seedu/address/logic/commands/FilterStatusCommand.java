@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.StatusContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose application status contains any of the argument keywords.
@@ -17,12 +17,14 @@ public class FilterStatusCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all persons whose application status contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " rejected";
+            + "Parameters: [Applied / Screening / Interview Scheduled "
+            + "/ Interviewed / Offer / Onboarding / Hired / Rejected]\n"
+            + "Example 1: " + COMMAND_WORD + " Rejected\n"
+            + "Example 2: " + COMMAND_WORD + " Onboarding\n";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final StatusContainsKeywordsPredicate predicate;
 
-    public FilterStatusCommand(NameContainsKeywordsPredicate predicate) {
+    public FilterStatusCommand(StatusContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
