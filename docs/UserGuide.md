@@ -152,6 +152,16 @@ Examples:
 * `unmark 3`
 * `unmark Alex Yeoh`
 
+### Unmarking all students' attendance: `unmarkall'
+
+Denotes all existing students as absent.
+
+Format: `unmarkall`
+
+Examples:
+* `unmarkall`
+* `unmarkall ofoeofn4334f30f04a3dr34r` (all subsequent inputs are ignored)
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the edulog.
