@@ -77,7 +77,6 @@ public class CommandResult {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof CommandResult)) {
             return false;
         }
@@ -85,12 +84,15 @@ public class CommandResult {
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && exit == otherCommandResult.exit
+                && showConfirmation == otherCommandResult.showConfirmation
+                && showPerson == otherCommandResult.showPerson
+                && Objects.equals(viewedPerson, otherCommandResult.viewedPerson);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showConfirmation, showPerson, viewedPerson);
     }
 
     @Override

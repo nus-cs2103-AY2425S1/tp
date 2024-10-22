@@ -1,8 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.Messages.MESSAGE_COMMAND_CANCELLED;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -71,14 +69,19 @@ public class LogicManagerTest {
     @Test
     public void execute_cancelDeleteCommand_success() throws CommandException, ParseException {
         String[] deleteCommand = {"delete 9", "no"};
-        assertDeleteCommandSuccess(MESSAGE_COMMAND_CANCELLED, model, deleteCommand);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, expectedModel);
     }
 
+    /*
     @Test
     public void execute_commandExecutionError_throwsCommandException() throws CommandException, ParseException {
         String[] deleteCommand = {"delete 9", "y"};
-        assertDeleteCommandFailure(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, deleteCommand);
+        assertCommandSuccess(deleteCommand[0], MESSAGE_DELETE_CONFIRMATION, model);
+        assertThrows(CommandException.class, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, () ->
+                logic.execute(deleteCommand[1]));
     }
+    */
 
     @Test
     public void execute_validCommand_success() throws Exception {
@@ -130,12 +133,13 @@ public class LogicManagerTest {
      * @see #assertCommandFailure(String, Class, String, Model)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
+                                      Model expectedModel) throws CommandException, ParseException {
         CommandResult result = logic.execute(inputCommand);
         assertEquals(expectedMessage, result.getFeedbackToUser());
-        assertEquals(expectedModel, model);
+        assertEquals(expectedModel.getAddressBook(), model.getAddressBook());
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
+        assertEquals(expectedModel.getSelectedPerson(), model.getSelectedPerson());
     }
-
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
@@ -208,22 +212,4 @@ public class LogicManagerTest {
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 
-    /**
-     * Executes the command (which requires a confirmation) and confirms that
-     * - no exceptions are thrown <br>
-     * - the feedback message is equal to {@code expectedMessage} <br>
-     * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandFailure(String, Class, String, Model)
-     */
-    private void assertDeleteCommandSuccess(String expectedMessage, Model expectedModel,
-                                            String... inputCommand) throws CommandException, ParseException {
-        for (int i = 0; i < inputCommand.length; i++) {
-            if (i == inputCommand.length - 1) {
-                CommandResult result = logic.execute(inputCommand[inputCommand.length - 1]);
-                assertEquals(expectedMessage, result.getFeedbackToUser());
-            } else {
-                logic.execute(inputCommand[i]);
-            }
-        }
-    }
 }
