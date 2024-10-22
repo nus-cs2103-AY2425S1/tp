@@ -16,6 +16,7 @@ import seedu.academyassist.logic.Logic;
 import seedu.academyassist.logic.commands.CommandResult;
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
+import seedu.academyassist.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -163,6 +164,16 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Open the detail window of the person or focuses on it if it's already opened.
+     * @param person
+     */
+    @FXML
+    private void handleDetailWindow(Person person) {
+        PersonDetailWindow detailWindow = new PersonDetailWindow();
+        detailWindow.show(person);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -184,6 +195,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isShowDetailWindow()) {
+                handleDetailWindow(commandResult.getPersonToShow());
             }
 
             return commandResult;

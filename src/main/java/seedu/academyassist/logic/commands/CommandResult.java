@@ -23,6 +23,9 @@ public class CommandResult {
     /** The specific student detail should be shown to the user. */
     private final boolean showDetailWindow;
 
+    /** The specific student to display his or her detail */
+    private final Person personToShow;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -34,11 +37,23 @@ public class CommandResult {
     }
 
     /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showDetailWindow,
+                         Person personToShow) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.showDetailWindow = showDetailWindow;
+        this.personToShow = personToShow;
+    }
+
+    /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, null);
     }
 
     public String getFeedbackToUser() {
@@ -55,6 +70,10 @@ public class CommandResult {
 
     public boolean isShowDetailWindow() {
         return showDetailWindow;
+    }
+
+    public Person getPersonToShow() {
+        return personToShow;
     }
 
     @Override
@@ -76,7 +95,7 @@ public class CommandResult {
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, showDetailWindow);
     }
 
     @Override
@@ -85,6 +104,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("exit", exit)
+                .add("showDetailWindow", showDetailWindow)
                 .toString();
     }
 
