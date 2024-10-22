@@ -44,6 +44,18 @@ public class NoteTest {
     }
 
     @Test
+    public void isValidAppointment() {
+        // null string
+        assertThrows(NullPointerException.class, () -> Note.isValidAppointment(null));
+
+        // valid string
+        assertTrue(() -> Note.isValidAppointment(new Appointment("12/12/2023 1200")));
+
+        // invalid string
+        assertFalse(() -> Note.isValidAppointment(new Appointment("31/12/2099 0000")));
+    }
+
+    @Test
     public void equals() {
         Note note = new Note();
 
@@ -69,7 +81,7 @@ public class NoteTest {
         assertFalse(note.equals(testNote));
 
         testNote = new Note();
-        testNote.addAppointment("01/01/2025 0000");
+        testNote.addAppointment("01/01/2023 0000");
         assertFalse(note.equals(testNote));
     }
 

@@ -46,7 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_SEX_BOB = "Male";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_APPOINTMENT_ONE = "01/01/2025 0000";
+    public static final String VALID_APPOINTMENT_ONE = "01/01/2023 0000";
     public static final String VALID_APPOINTMENT_TWO = "20/08/2027 1200";
     public static final String VALID_MEDICATION_ONE = "10mg Panadol";
     public static final String VALID_MEDICATION_TWO = "5mg Ibuprofen";
@@ -83,7 +83,7 @@ public class CommandTestUtil {
     public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "Fem@le";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // '*' not allowed in appointments, medications, remarks
-    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "11/11/2025 0000*";
+    public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "11/11/2023 0000*";
     public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "INVALID_MEDICATION";
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "INVALID_MEDICATION";
 

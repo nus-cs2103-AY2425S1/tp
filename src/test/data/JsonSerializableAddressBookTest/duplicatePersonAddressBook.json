@@ -9,7 +9,7 @@
     "tags": [ "friends" ],
     "note": {
       "medication": ["med1", "med2"],
-      "appointments": ["01/01/2025 0000"],
+      "appointments": ["01/01/2023 0000"],
       "remark": ["remark1", "remark2"]
     },
     "starredStatus" : "false"
@@ -22,7 +22,7 @@
     "sex" : "Female",
     "note": {
       "medication": ["med1", "med2"],
-      "appointments": ["01/01/2025 0000"],
+      "appointments": ["01/01/2023 0000"],
       "remark": ["remark1", "remark2"]
     },
     "starredStatus" : "false"

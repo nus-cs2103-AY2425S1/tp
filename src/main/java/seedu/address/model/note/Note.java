@@ -3,6 +3,7 @@ package seedu.address.model.note;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,6 +19,8 @@ import seedu.address.model.appointment.Appointment;
 public class Note {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
     public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
+    public static final String MESSAGE_CONSTRAINTS_APPOINTMENT = "Previous appointment should not be after today. " +
+        "If you want to add a future appointment, please use the edit command";
     public final Set<Appointment> previousAppointments;
     public final Set<String> remarks;
     public final Set<String> medications;
@@ -57,6 +60,7 @@ public class Note {
      */
     public void addAppointment(String appointment) {
         Appointment previousAppointment = new Appointment(appointment);
+        checkArgument(isValidAppointment(previousAppointment), MESSAGE_CONSTRAINTS_APPOINTMENT);
         this.previousAppointments.add(previousAppointment);
     }
 
@@ -84,6 +88,10 @@ public class Note {
 
     public static boolean isValidString(String test) {
         return test.matches(VALIDATION_REGEX) && !test.isEmpty();
+    }
+
+    public static boolean isValidAppointment(Appointment appointment) {
+        return appointment.appointment.isBefore(LocalDateTime.now());
     }
 
     /**

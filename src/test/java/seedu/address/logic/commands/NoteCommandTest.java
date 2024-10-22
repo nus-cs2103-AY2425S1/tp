@@ -59,7 +59,7 @@ public class NoteCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Person originalPerson = model.getFilteredPersonList().get(0);
         Person editedPerson = new PersonBuilder(originalPerson)
-                .withNote("01/01/2025 1200", null, null)
+                .withNote("01/01/2023 1200", null, null)
                 .build();
 
         NoteDescriptor descriptor = new NoteDescriptorBuilder(editedPerson).build();
