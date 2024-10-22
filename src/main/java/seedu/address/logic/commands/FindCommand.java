@@ -19,8 +19,8 @@ public class FindCommand extends Command {
     public static final String ARGUMENT_WORD = "all";
 
     public static final String COMMAND_WORD = "find";
-    public static final String MESSAGE_PURPOSE = "Finds all employees and/or potential hires whose names " +
-            "contain any of the specified keywords (case-insensitive) and displays them as a list with";
+    public static final String MESSAGE_PURPOSE = "Finds all employees and/or potential hires whose names "
+            + "contain any of the specified keywords (case-insensitive) and displays them as a list with";
     public static final String MESSAGE_FORMAT = COMMAND_WORD + " (" + FindEmployeeCommand.ARGUMENT_WORD
         + "/" + FindPotentialCommand.ARGUMENT_WORD + "/" + FindCommand.ARGUMENT_WORD + ") KEYWORD [MORE_KEYWORDS]";
     public static final String MESSAGE_EXAMPLE = COMMAND_WORD + " " + ARGUMENT_WORD + "n/alice bob e/alice@gmail.com";
