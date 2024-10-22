@@ -99,15 +99,6 @@
     -fx-padding: 0 0 0 0;
 }
 
-.student-card {
-    -fx-background-color: #349beb; /* Blue background for students */
-    -fx-text-fill: white; /* Ensure text is readable on the blue background */
-}
-
-.teacher-card {
-    -fx-background-color: #269e2e; /* Green background for teachers */
-    -fx-text-fill: white; /* Ensure text is readable on the green background */
-}
 
 .list-cell:filled:even {
     -fx-background-color: #3c3e3f;
@@ -132,13 +123,13 @@
 
 .cell_big_label {
     -fx-font-family: "Segoe UI Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 17px;
     -fx-text-fill: #010504;
 }
 
 .cell_small_label {
     -fx-font-family: "Segoe UI";
-    -fx-font-size: 13px;
+    -fx-font-size: 15px;
     -fx-text-fill: #010504;
 }
 

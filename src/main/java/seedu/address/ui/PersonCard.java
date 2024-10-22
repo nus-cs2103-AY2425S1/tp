@@ -52,7 +52,6 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
 
-        // Check the tags for "student" or "teacher"
         if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("student"))) {
             cardPane.setStyle("-fx-background-color: #5a83a3;"); // Inline style for student
         } else if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("teacher"))) {
@@ -65,21 +64,19 @@ public class PersonCard extends UiPart<Region> {
         // Set other UI components
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        gender.setText(person.getGender().value);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        subjects.setText(String.join(", ", person.getSubjects().stream()
-            .map(subject -> subject.subjectName).toArray(String[]::new)));
-        classes.setText(String.join(", ", person.getClasses().stream()
-            .toArray(String[]::new)));
+        String formattedGender = person.getGender().value == "male" ? "Male" : "Female";
+        gender.setText("👫 " + formattedGender);
+        phone.setText("📱 " + person.getPhone().value);
+        address.setText("📍 " + person.getAddress().value);
+        email.setText("📨 " + person.getEmail().value);
+        String formattedSubjects = String.join(" • ", person.getSubjects().stream()
+                .map(subject -> subject.subjectName)
+                .toArray(String[]::new));
+        subjects.setText("📚 " + formattedSubjects);
+        String formattedClasses = String.join(" • ", person.getClasses().stream()
+                .toArray(String[]::new));
+        classes.setText("🏫 " + formattedClasses);
 
-        // Set gender label color based on gender value
-        if ("male".equalsIgnoreCase(person.getGender().value)) {
-            gender.setStyle("-fx-text-fill: blue;");
-        } else if ("female".equalsIgnoreCase(person.getGender().value)) {
-            gender.setStyle("-fx-text-fill: pink;");
-        }
     }
 
 }

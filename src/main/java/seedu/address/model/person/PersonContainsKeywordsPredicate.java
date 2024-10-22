@@ -89,6 +89,8 @@ public class PersonContainsKeywordsPredicate implements Predicate<Person> {
             return true;
         }
 
+        assert person != null : "Person object cannot be null";
+
         boolean hasMatchingName = namePredicate.test(person);
         boolean hasMatchingPhone = phonePredicate.test(person);
         boolean hasMatchingEmail = emailPredicate.test(person);
