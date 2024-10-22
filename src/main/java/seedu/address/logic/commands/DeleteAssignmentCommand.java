@@ -6,6 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NUMBER;
+
+import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -13,6 +16,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.AssignmentQuery;
 import seedu.address.model.person.Name;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentNumber;
 
 
 /**
@@ -26,6 +30,7 @@ public class DeleteAssignmentCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "STUDENT_NAME "
             + PREFIX_ASSIGNMENT + "ASSIGNMENT "
+            + PREFIX_STUDENT_NUMBER + "STUDENT NUMBER (OPTIONAL)"
             + PREFIX_DEADLINE + "DEADLINE (OPTIONAL)"
             + PREFIX_STATUS + "SUBMISSION STATUS (OPTIONAL)"
             + PREFIX_STATUS + "GRADING STATUS (OPTIONAL)"
@@ -39,9 +44,13 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_NO_STUDENT_FOUND = "No such student found!";
     public static final String MESSAGE_NO_ASSIGNMENT_FOUND = "No such assignment found!";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "There is more than 1 student of the same name \n"
+            + "Their student numbers are as follows: %1$s \n"
+            + MESSAGE_USAGE;
 
     public final AssignmentQuery assignmentQuery;
     public final Name name;
+    public final StudentNumber studentNumber;
 
     /**
      * Creates an DeleteAssignmentCommand to add the specified {@code Assignment}
@@ -49,19 +58,44 @@ public class DeleteAssignmentCommand extends Command {
     public DeleteAssignmentCommand(Name name, AssignmentQuery assignmentQuery) {
         this.name = name;
         this.assignmentQuery = assignmentQuery;
+        this.studentNumber = null;
+    }
+
+    /**
+     * Creates an DeleteAssignmentCommand to add the specified {@code Assignment}
+     */
+    public DeleteAssignmentCommand(Name name, AssignmentQuery assignmentQuery, StudentNumber studentNumber) {
+        this.name = name;
+        this.assignmentQuery = assignmentQuery;
+        this.studentNumber = studentNumber;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Student student = model.getStudentByName(name);
+        List<Student> studentList = model.getAllStudentByName(name);
 
-        if (student == null) {
+        if (this.studentNumber != null) {
+            List<Student> filteredStudentList =
+                    studentList.stream().filter(s -> s.getStudentNumber().equals(studentNumber)).toList();
+            if (filteredStudentList.isEmpty()) {
+                throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
+            }
+            Student student = filteredStudentList.get(0);
+            Assignment assignment = student.deleteAssignment(assignmentQuery);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, assignment.getAssignmentName(), student.getName()));
+        }
+
+        if (studentList.isEmpty()) {
             throw new CommandException(MESSAGE_NO_STUDENT_FOUND);
         }
 
-        Assignment assignment = student.deleteAssignment(assignmentQuery);
+        if (studentList.size() > 1) {
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
+        }
 
+        Student student = studentList.get(0);
+        Assignment assignment = student.deleteAssignment(assignmentQuery);
         if (assignment == null) {
             throw new CommandException(MESSAGE_NO_ASSIGNMENT_FOUND);
         }
