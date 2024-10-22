@@ -5,9 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_DESC;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLAIM_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POLICY_TYPE;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
@@ -73,12 +73,16 @@ public class AddClaimCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Set<Policy> policySet = personToEdit.getPolicies();
 
+        System.out.println("Person at index: " + personToEdit.getName());
+        System.out.println("Policies: " + policySet);
+
         // find the policy based on the policyType
         Policy policy = policySet.stream()
                 .filter(p -> p.getType().equals(policyType))
                 .findFirst()
                 .orElseThrow(() -> new CommandException(MESSAGE_POLICY_NOT_FOUND));
 
+        System.out.println("Policy found: " + policy.getType());
         ClaimSet claimSet = policy.getClaimSet();
         if (!claimSet.add(claim)) {
             throw new CommandException(MESSAGE_CLAIM_EXISTS);
@@ -86,7 +90,7 @@ public class AddClaimCommand extends Command {
 
         // create new policy set with the updated policy (to preserve immutability)
         PolicySet updatedPolicySet = new PolicySet();
-        updatedPolicySet.addAll(policySet.stream().collect(Collectors.toSet()));
+        updatedPolicySet.addAll(new HashSet<>(policySet));
         updatedPolicySet.remove(policy);
         updatedPolicySet.add(policy);
 

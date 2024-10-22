@@ -40,10 +40,15 @@ public class ClaimSet implements Set<Claim> {
      */
     @Override
     public boolean add(Claim claim) {
-        int index = hash(claim.getClaimDescription());
-        if (claims[index] != null) {
-            return false;
+        // First, check if the claim already exists
+        for (Claim existingClaim : claims) {
+            if (existingClaim != null && existingClaim.equals(claim)) {
+                return false; // Claim already exists
+            }
         }
+
+        // If the claim doesn't exist, find the correct index and add it
+        int index = hash(claim.getClaimDescription());
         claims[index] = claim;
         return true;
     }
