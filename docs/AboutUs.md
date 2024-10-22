@@ -11,7 +11,7 @@ You can reach us at the email <e1121292@u.nus.edu>
 
 ### Presley Chew
 
-![](images/presleychew.png)
+![](images/presleychew.png){:width="280"}
 
 [[github](https://github.com/PresleyChew)]
 [[portfolio](team/presleychew.md)]
@@ -23,7 +23,7 @@ You can reach us at the email <e1121292@u.nus.edu>
 
 ### Yap Yong Zhuo
 
-![](images/yong-zhuo.png)
+![](images/yong-zhuo.png){:width="280"}
 
 [[github](http://github.com/yong-zhuo)]
 [[portfolio](team/yong-zhuo.md)]
@@ -34,7 +34,7 @@ You can reach us at the email <e1121292@u.nus.edu>
 
 ### Sivakumar Karthikraj
 
-![](images/techraj.png)
+![](images/techraj.png){:width="280"}
 
 [[github](http://github.com/TechRaj)]
 [[portfolio](team/techraj.md)]
@@ -45,7 +45,7 @@ You can reach us at the email <e1121292@u.nus.edu>
 
 ### Ho Wei Nian
 
-![](images/hweinian.png)
+![](images/hweinian.png){:width="280"}
 
 [[github](http://github.com/hweinian)]
 [[portfolio](team/hweinian.md)]
@@ -56,7 +56,7 @@ You can reach us at the email <e1121292@u.nus.edu>
 
 ###  Yukna
 
-![](images/yadobler.png)
+![](images/yadobler.png){:width="280"}
 
 [[github](http://github.com/yadobler)]
 [[portfolio](team/yadobler.md)]
