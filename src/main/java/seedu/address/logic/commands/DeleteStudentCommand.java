@@ -17,7 +17,7 @@ import seedu.address.model.student.StudentNumber;
  * Deletes a student from the system based on the student number provided.
  */
 public class DeleteStudentCommand extends Command {
-    public static final String COMMAND_WORD = "deletestu";
+    public static final String COMMAND_WORD = "deletes";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the student name used in the displayed student list.\n"
