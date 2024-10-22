@@ -39,6 +39,7 @@ import seedu.address.model.tag.Tag;
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD_ALIAS = "e";
 
     // TODO: usage message includes the 2 fields, but edit command does not support the 3 fields right now
     // (except for monthspaid)
