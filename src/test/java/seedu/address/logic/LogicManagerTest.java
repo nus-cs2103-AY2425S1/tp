@@ -17,8 +17,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.addcommands.AddStudentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -28,6 +28,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Student;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.JsonVersionHistoryStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
 
@@ -46,8 +47,9 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
             new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        JsonVersionHistoryStorage versionHistoryStorage = new JsonVersionHistoryStorage((temporaryFolder.resolve("versionhistory.json")));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        logic = new LogicManager(model, storage);
+        logic = new LogicManager(model, storage, versionHistoryStorage);
     }
 
     @Test
@@ -157,8 +159,8 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
             new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
-        logic = new LogicManager(model, storage);
+        JsonVersionHistoryStorage versionHistoryStorage = new JsonVersionHistoryStorage((temporaryFolder.resolve("versionhistory.json")));
+        logic = new LogicManager(model, storage, versionHistoryStorage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddStudentCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + STUDENT_NUMBER_DESC_AMY;

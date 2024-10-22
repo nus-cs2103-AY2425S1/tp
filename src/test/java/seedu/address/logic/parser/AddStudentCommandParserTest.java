@@ -29,7 +29,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.AddStudentCommand;
+import seedu.address.logic.commands.addcommands.AddStudentCommand;
+import seedu.address.logic.parser.addcommands.AddStudentCommandParser;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;

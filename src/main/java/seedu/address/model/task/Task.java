@@ -16,6 +16,7 @@ public class Task {
     private int groupsWithTask = 1;
 
     /**
+     * Creates a Task with {@code name} and {@code deadline}.
      * Every field must be present and not null.
      */
     public Task(TaskName name, Deadline deadline) {
@@ -25,6 +26,7 @@ public class Task {
     }
 
     /**
+     * Creates a Task with {@code name}, {@code deadline}, {@code status}, {@code groupsWithTask}.
      * Every field must be present and not null.
      */
     public Task(TaskName name, Deadline deadline, Status status, int groupsWithTask) {
@@ -32,6 +34,17 @@ public class Task {
         this.deadline = deadline;
         this.status = status;
         this.groupsWithTask = groupsWithTask;
+    }
+
+    /**
+     * Creates a defensive copy of the task
+     * @param otherTask  The task whose values are to be copied
+     */
+    public Task(Task otherTask) {
+        this.name = otherTask.name;
+        this.deadline = otherTask.getDeadline();
+        this.status = otherTask.getStatus();
+        this.groupsWithTask = otherTask.getGroupsWithTask();
     }
 
     public TaskName getTaskName() {
@@ -64,10 +77,16 @@ public class Task {
             && otherTask.getDeadline().equals(getDeadline());
     }
 
+    /**
+     * Increases the number of groups with {@code Task} by 1.
+     */
     public void increaseGroupWithTask() {
         this.groupsWithTask++;
     }
 
+    /**
+     * Decreases the number of groups with {@code Task} by 1.
+     */
     public void decreaseGroupWithTask() {
         this.groupsWithTask--;
     }

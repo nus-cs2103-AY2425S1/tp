@@ -12,7 +12,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.parser.DeleteStudentCommandParser;
+import seedu.address.logic.commands.deletecommands.DeleteStudentCommand;
+import seedu.address.logic.parser.deletecommands.DeleteStudentCommandParser;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;

@@ -16,8 +16,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the address-book level.
+ * Duplicates are not allowed (by .isSamePerson, .isSameGroup, and .isSameTask comparison).
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -42,7 +42,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons, Groups, and Tasks in the {@code toBeCopied}.
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -61,7 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the student list with {@code groups}.
-     * {@code groups} must not contain duplicate students.
+     * {@code groups} must not contain duplicate groups.
      */
     public void setGroups(List<Group> groups) {
         this.groups.setGroups(groups);
@@ -86,6 +86,29 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTasks(newData.getTaskList());
     }
 
+    /**
+     * Creates a defensive copy of the T_Assistant
+     * @param newData  The data to be copied over.
+     * @return         Returns the new addressbook
+     */
+    public AddressBook duplicateCopy(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        AddressBook newAddressBook = new AddressBook();
+        for (Student student: newData.getStudentList()) {
+            Student newStudent = new Student(student);
+            newAddressBook.students.add(newStudent);
+        }
+        for (Group group: newData.getGroupList()) {
+            Group newGroup = new Group(group);
+            newAddressBook.groups.add(newGroup);
+        }
+        for (Task task: newData.getTaskList()) {
+            Task newTask = new Task(task);
+            newAddressBook.tasks.add(newTask);
+        }
+        return newAddressBook;
+    }
+
     //// student-level operations
 
     /**
@@ -102,6 +125,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addStudent(Student p) {
         students.add(p);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeStudent(Student key) {
+        students.remove(key);
     }
 
     /**
@@ -127,16 +158,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the group
-     * with the same identity as {@code group}.
-     */
-    public boolean hasTaskInGroup(Task task, Group group) {
-        requireNonNull(task);
-        requireNonNull(group);
-        return group.getTasks().contains(task);
-    }
-
-    /**
      * Adds {@code student} to {@code group}.
      * {@code student} and {@code group} must exist in the address book.
      */
@@ -148,69 +169,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds {@code task} to {@code group}.
-     * {@code group} must exist in the address book.
+     * Deletes the student {@code student} from the given group {@code group}.
      */
-    public void addTaskToGroup(Task task, Group group) {
-        group.addTask(task);
-    }
-
-    /**
-     * Adds {@code task} to {@code addressbook}.
-     */
-    public void addTask(Task task) {
-        tasks.add(task);
-    }
-
-    /**
-     * Increases the number of groups with the particular task by 1.
-     * @param task  The task in question.
-     */
-    public void incrementTask(Task task) {
-        tasks.forEach(x -> {
-            if (x.isSameTask(x)) {
-                x.increaseGroupWithTask();
-            }
-        });
-    }
-
-    /**
-     * Decreases the number of groups with the particular task by 1.
-     * @param task  The task in question.
-     */
-    public void decrementTask(Task task) {
-        tasks.forEach(x -> {
-            if (x.isSameTask(x)) {
-                x.decreaseGroupWithTask();
-            }
-        });
-
-        Task toDelete = null;
-        for (Task t: tasks) {
-            if (t.getGroupsWithTask() == 0) {
-                toDelete = t;
-            }
-        }
-        if (toDelete != null) {
-            tasks.remove(toDelete);
-        }
+    public void deleteStudentFromGroup(Group group, Student student) {
+        requireNonNull(group);
+        requireNonNull(student);
+        group.delete(student);
+        students.setPerson(student, student.removeGroup());
     }
 
     public Student getStudentByNumber(StudentNumber studentNumber) {
         return students.getStudentByNumber(studentNumber);
     }
 
-    public Group getGroupByName(GroupName groupName) {
-        return groups.getGroupByName(groupName);
-    }
-
-    /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
-     */
-    public void removeStudent(Student key) {
-        students.remove(key);
-    }
+    //// group-level operations
 
     /**
      * Returns true if a group with the same identity as {@code group} exists in the address book.
@@ -256,34 +228,90 @@ public class AddressBook implements ReadOnlyAddressBook {
         return groups.findGroupByName(groupName);
     }
 
+    //// task-level operations
+
     /**
-     * Deletes the student {@code student} from the given group {@code group}
+     * Returns true if a task with the same identity as {@code task} exists in the group
+     * with the same identity as {@code group}.
      */
-    public void deleteStudentFromGroup(Group group, Student student) {
+    public boolean hasTaskInGroup(Task task, Group group) {
+        requireNonNull(task);
         requireNonNull(group);
-        requireNonNull(student);
-        group.delete(student);
-        students.setPerson(student, student.removeGroup());
+        return group.getTasks().contains(task);
     }
 
     /**
-     * Checks if the specified task currently exists.
-     * @param task  The task in particular.
-     * @return      Returns true if a task with the same identity as {@code task} exists in the address book.
+     * Adds {@code task} to {@code group}.
+     * {@code group} must exist in the address book.
+     */
+    public void addTaskToGroup(Task task, Group group) {
+        group.addTask(task);
+    }
+
+    /**
+     * Adds {@code task} to {@code AddressBook}.
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /**
+     * Increases the number of groups with {@code task} by 1.
+     */
+    public void incrementTask(Task task) {
+        tasks.forEach(x -> {
+            if (x.isSameTask(task)) {
+                x.increaseGroupWithTask();
+            }
+        });
+    }
+
+    /**
+     * Decreases the number of groups with {@code task} by 1.
+     */
+    public void decrementTask(Task task) {
+        tasks.forEach(x -> {
+            if (x.isSameTask(task)) {
+                x.decreaseGroupWithTask();
+            }
+        });
+
+        Task toDelete = null;
+        for (Task t: tasks) {
+            if (t.getGroupsWithTask() == 0) {
+                toDelete = t;
+            }
+        }
+        if (toDelete != null) {
+            tasks.remove(toDelete);
+        }
+    }
+
+    /**
+     * Returns true if the {@code task} currently exists in the address book.
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return tasks.contains(task);
     }
 
+    /**
+     * Deletes the {@code task} from the address book.
+     */
     public void deleteTask(Task task) {
         tasks.remove(task);
     }
 
+    /**
+     * Deletes {@code task} from {@code group}.
+     */
     public void deleteTaskFromGroup(Task task, Group group) {
         group.deleteTask(task);
     }
 
+    /**
+     * Replaces the task {@code target} in {@code group} with {@code editedTask}.
+     */
     public void setTask(Task target, Task editedTask, Group group) {
         requireNonNull(target);
         requireNonNull(editedTask);
