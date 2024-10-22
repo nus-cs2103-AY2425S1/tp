@@ -55,6 +55,10 @@ public abstract class Person {
         return address;
     }
 
+    public String getAddressString() {
+        return address.toString();
+    }
+
     public abstract Role getRole();
 
     /**

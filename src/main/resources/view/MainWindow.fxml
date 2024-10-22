@@ -32,8 +32,8 @@
                         <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
                     </Menu>
                 </MenuBar>
-                <HBox>
-                    <VBox>
+                <HBox VBox.vgrow="ALWAYS">
+                    <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
                             <padding>
                                 <Insets bottom="5" left="10" right="10" top="5"/>
@@ -55,7 +55,8 @@
                             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                         </VBox>
                     </VBox>
-                    <VBox minWidth="250" prefWidth="250" styleClass="pane-with-border">
+                    <VBox minWidth="250" maxWidth="250" prefWidth="250" styleClass="pane-with-border"
+                          VBox.vgrow="ALWAYS">
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10"/>
                         </padding>
