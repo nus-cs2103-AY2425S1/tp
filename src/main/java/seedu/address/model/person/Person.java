@@ -30,6 +30,7 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final DeliveryList deliveryList = new DeliveryList();
+
     /**
      * Every field must be present and not null.
      */
@@ -66,8 +67,18 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public ObservableList<Delivery> getDeliveryList() {
+    /**
+     * Returns the  {@code DeliveryList} of a {@code Person} as an unmodifiable {@code ObservableList}.
+     */
+    public ObservableList<Delivery> getUnmodifiableDeliveryList() {
         return deliveryList.asUnmodifiableObservableList();
+    }
+
+    /**
+     * Returns the  {@code DeliveryList} of a {@code Person}.
+     */
+    public DeliveryList getDeliveryList() {
+        return deliveryList;
     }
 
     /**
@@ -75,7 +86,7 @@ public class Person {
      */
     public int getDeliveryListSize() {
         return deliveryList.size();
-    }
+        }
 
     /**
      * Sets the delivery list of this person.

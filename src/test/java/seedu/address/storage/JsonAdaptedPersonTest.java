@@ -31,7 +31,7 @@ public class JsonAdaptedPersonTest {
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
-    private static final List<JsonAdaptedDelivery> VALID_DELIVERIES = BENSON.getDeliveryList().stream()
+    private static final List<JsonAdaptedDelivery> VALID_DELIVERIES = BENSON.getUnmodifiableDeliveryList().stream()
             .map(JsonAdaptedDelivery::new)
             .collect(Collectors.toList());
 

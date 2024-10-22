@@ -20,6 +20,7 @@ import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
 import seedu.address.model.delivery.Delivery;
 import seedu.address.model.delivery.DeliveryId;
+import seedu.address.model.delivery.DeliveryList;
 import seedu.address.model.delivery.Eta;
 import seedu.address.model.delivery.ItemName;
 import seedu.address.model.delivery.Status;
@@ -76,7 +77,7 @@ public class ArchiveCommand extends Command {
     private CommandResult handleDeliveryArchive(Model model) throws CommandException {
         requireNonNull(model);
         Person inspectedPerson = InspectWindow.getInspectedPerson();
-        List<Delivery> deliveryList = inspectedPerson.getDeliveryList();
+        DeliveryList deliveryList = inspectedPerson.getDeliveryList();
         validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
 
         List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
@@ -112,10 +113,10 @@ public class ArchiveCommand extends Command {
      * @param deliveryList The list of deliveries to archive from.
      * @return A list of deliveries that were archived.
      */
-    private List<Delivery> archiveDeliveries(Person inspectedPerson, List<Delivery> deliveryList) {
+    private List<Delivery> archiveDeliveries(Person inspectedPerson, DeliveryList deliveryList) {
         List<Delivery> deliveryToArchiveList = new ArrayList<>();
         for (Index targetIndex : indexList) {
-            Delivery deliveryToArchive = deliveryList.get(targetIndex.getZeroBased());
+            Delivery deliveryToArchive = deliveryList.asUnmodifiableObservableList().get(targetIndex.getZeroBased());
             Delivery archivedDelivery = createArchivedDelivery(deliveryToArchive);
             if (!deliveryToArchive.isArchived()) {
                 inspectedPerson.archiveDelivery(targetIndex, archivedDelivery);
