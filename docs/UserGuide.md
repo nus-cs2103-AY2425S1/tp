@@ -258,4 +258,4 @@ _Details coming soon ..._
 | **List**   | `list`                                                                                                                                                                                                                                  |
 | **Help**   | `help`                                                                                                                                                                                                                                  |
 | **View**   | `view [n/NAME]` <br> e.g., `view n/JohnDoe`                                                                                                                                                                                             |
-
+| **GitHub** | `github n/NAME`                                                                                                                                                                                                                         |
