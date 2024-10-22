@@ -60,7 +60,6 @@ public class AddressBookParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
-        System.out.println("Command word: " + commandWord + "; Model Type: " + modelType + "; Arguments: " + arguments);
 
         switch (commandWord) {
 
