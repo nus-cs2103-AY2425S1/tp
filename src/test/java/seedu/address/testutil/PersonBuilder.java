@@ -129,6 +129,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withNote(String ... note) {
+        this.notes = SampleDataUtil.getSampleNotes(note);
+        return this;
+    }
+       
+    /**
      * Sets the {@code Appointment} of the {@code Person} that we are building.
      * A variable number of arguments can be provided.
      */
