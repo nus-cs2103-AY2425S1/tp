@@ -131,9 +131,9 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit NRIC [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- Edits the person with the specified `NRIC`. The `NRIC` must be a valid Singapore National Identification Card Number.
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
 - When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -142,8 +142,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 Examples:
 
-- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+- `edit S1234567D p/91234567 e/johndoe@example.com` Edits the phone number and email address of the person with `S1234567D` to be `91234567` and `johndoe@example.com` respectively.
+- `edit S6483749D n/Betsy Crower t/` Edits the person with NRIC `S6483749D` to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name, NRIC, role, or tags: `find`
 
@@ -152,7 +152,7 @@ Finds persons based on the specified criteria using the provided prefixes.
 **Format**: `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`
 
 - The search is case-insensitive. e.g., `n/alex` will match `Alex`.
-- The order of the prefixes and keywords does not matter. e.g., `n/Alex nric/S1234567A` is equivalent to `nric/S1234567A n/Alex`.
+- The order of the prefixes and keywords does not matter. e.g., `n/Alex nric/S1234567D` is equivalent to `nric/S1234567D n/Alex`.
 - Partial matches are not supported. e.g., `n/Al` will not match `Alex`.
 - Persons matching any of the provided criteria will be returned (i.e., `OR` search). For example, `n/Alex t/friend` will return persons whose name contains "Alex" or have the tag "friend".
 
@@ -164,7 +164,7 @@ Finds persons based on the specified criteria using the provided prefixes.
 
 ### Examples:
 - `find n/John` returns `John`, `John Doe`.
-- `find n/Alex nric/S1234567A` returns persons whose name contains `Alex` or with NRIC `S1234567A`.
+- `find n/Alex nric/S1234567D` returns persons whose name contains `Alex` or with NRIC `S1234567D`.
 - `find role/patient t/friend` returns all patients or persons with the tag `friend`.
 ### Deleting a person : `delete`
 
@@ -173,7 +173,7 @@ Deletes the specified person from the address book.
 Format: `delete NRIC`
 
 * Deletes the person with the specified `NRIC`.
-* The NRIC **must be valid** (eg. S1234567D)​
+* The NRIC **must be a valid Singapore National ID** (eg. S1234567D)​
 
 Examples:
 * `find n/David` returns `David LI` with NRIC `S6483749D`
@@ -233,7 +233,7 @@ _Details coming soon ..._
 | **Link**        | `link patient/PATIENT_NRIC caregiver/CAREGIVER_NRIC` <br> e.g. `link patient/S6283947C caregiver/S7012345B`                                                           |
 | **Clear**       | `clear`                                                                                                                                                               |
 | **Delete**      | `delete NRIC`<br> e.g., `delete S6483749D`                                                                                                                                   |
-| **Edit**        | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           |
-| **Find**        | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567A`
+| **Edit**        | `edit NRIC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` <br> e.g.,`edit S1234567D n/James Lee e/jameslee@example.com`                                           |
+| **Find**        | `find [n/NAME] [nric/NRIC] [role/ROLE] [t/TAG]...`<br> e.g., `find n/Alex nric/S1234567D`
 | **List**        | `list`
 | **Help**        | `help`
