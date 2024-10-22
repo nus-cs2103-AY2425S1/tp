@@ -15,7 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
-    private String theme;
+    private String theme = "dark";
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -27,7 +27,6 @@ public class UserPrefs implements ReadOnlyUserPrefs {
      */
     public UserPrefs(ReadOnlyUserPrefs userPrefs) {
         this();
-        this.theme = "dark"; // default theme
         resetData(userPrefs);
     }
 
