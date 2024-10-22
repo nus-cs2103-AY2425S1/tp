@@ -19,12 +19,12 @@ public class Event {
     /**
      * Every field must be present and not null.
      */
-    public Event(EventName name, Time time, Venue venue, Person person) {
+    public Event(EventName name, Time time, Venue venue, Person person, List<Person> contacts) {
         this.name = name;
         this.time = time;
         this.venue = venue;
         this.celebrity = person;
-        this.contacts = List.of(person, person, person, person, person); // To be changed
+        this.contacts = contacts;
     }
 
     public EventName getName() {
@@ -41,6 +41,10 @@ public class Event {
 
     public Person getCelebrity() {
         return celebrity;
+    }
+
+    public List<Person> getContacts() {
+        return contacts;
     }
 
     public String getContactsString() {
@@ -76,7 +80,7 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, venue, celebrity);
+        return Objects.hash(name, time, venue, celebrity, contacts);
     }
 
     /**
