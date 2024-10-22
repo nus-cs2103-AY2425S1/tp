@@ -33,12 +33,12 @@ public class StudentCourseAssociation {
      * @param tutorial the tutorial associated with this association
      * @param attendance the attendance associated with this association
      */
-    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial, Attendance attendance) {
+    public StudentCourseAssociation(Person student, Course course, Tutorial tutorial) {
         this.student = student;
         this.course = course;
         this.tutorial = tutorial;
         this.grades = new GradingSystem();
-        this.attendance = attendance;
+        this.attendance = new Attendance();
     }
 
     /**
