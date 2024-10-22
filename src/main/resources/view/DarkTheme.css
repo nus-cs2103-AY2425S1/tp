@@ -350,3 +350,17 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.tag-label {
+    -fx-background-color: #3e7b91;
+    -fx-text-fill: white;
+    -fx-padding: 5;
+    -fx-background-radius: 5;
+    -fx-border-radius: 5;
+}
+
+.tags-title-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+}
