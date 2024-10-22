@@ -65,6 +65,15 @@ public class SampleDataUtil {
     }
 
     /**
+     * Returns a exam set containing the list of strings given.
+     */
+    public static Set<Exam> getExamSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Exam::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
      * Returns a tag set containing the list of strings given.
      */
     public static Set<Tag> getTagSet(String... strings) {

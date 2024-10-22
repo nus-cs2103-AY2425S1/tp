@@ -2,16 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REGISTER_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_CLASS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -49,6 +40,11 @@ public class CommandTestUtil {
     public static final String VALID_ECNAME_BOB = "Sally";
     public static final String VALID_ECNUMBER_AMY = "91234567";
     public static final String VALID_ECNUMBER_BOB = "98765432";
+    public static final String VALID_EXAM_MIDTERM = "Midterm";
+    public static final String VALID_EXAM_FINAL = "Final";
+    public static final String VALID_EXAM_PRACTICAL = "Practical";
+    public static final String VALID_EXAM_SCORE_AMY = "70";
+    public static final String VALID_EXAM_SCORE_BOB = "65";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -70,6 +66,8 @@ public class CommandTestUtil {
     public static final String ECNAME_DESC_BOB = " " + PREFIX_ECNAME + VALID_ECNAME_BOB;
     public static final String ECNUMBER_DESC_AMY = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_AMY;
     public static final String ECNUMBER_DESC_BOB = " " + PREFIX_ECNUMBER + VALID_ECNUMBER_BOB;
+    public static final String EXAM_DESC_MIDTERM = " " + PREFIX_EXAM + VALID_EXAM_MIDTERM;
+    public static final String EXAM_SCORE_DESC_AMY = " " + PREFIX_EXAM_SCORE + VALID_EXAM_SCORE_AMY;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -84,6 +82,7 @@ public class CommandTestUtil {
             + "A1"; // wrong format used for student class
     public static final String INVALID_ECNAME_DESC = " " + PREFIX_ECNAME + "John%"; // "%" not allowed in ecname
     public static final String INVALID_ECNUMBER_DESC = " " + PREFIX_ECNUMBER + "1234"; // 4 digit number
+    public static final String INVALID_EXAM_DESC = " " + PREFIX_EXAM + "Midterm%"; // only alphanumeric characters
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

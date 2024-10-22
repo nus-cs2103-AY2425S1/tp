@@ -64,7 +64,7 @@ public class AddExamCommand extends Command {
         }
         if (!update) {
             // No updates, exam is a duplicate
-            return new CommandResult(MESSAGE_DUPLICATE_EXAM);
+            throw new CommandException(MESSAGE_DUPLICATE_EXAM);
         } else if (!skip) {
             // No skips, exam is a new exam
             return new CommandResult(String.format(MESSAGE_ADDEXAM_SUCCESS, exam));
