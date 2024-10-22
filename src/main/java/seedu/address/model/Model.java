@@ -132,6 +132,6 @@ public interface Model {
 
     void updateFilteredStudentList(Predicate<Student> predicate);
 
-
+    void deleteAllStudents();
 
 }
