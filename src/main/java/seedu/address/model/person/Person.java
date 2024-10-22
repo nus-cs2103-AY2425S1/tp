@@ -115,7 +115,8 @@ public class Person {
             return true;
         }
 
-        return otherPerson != null && otherPerson.getName().equals(getName());
+        return otherPerson != null
+                && otherPerson.getName().equals(getName());
     }
 
     /**
@@ -134,8 +135,12 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name) && phone.equals(otherPerson.phone) && email.equals(otherPerson.email)
-                && role.equals(otherPerson.role) && skills.equals(otherPerson.skills);
+        return name.equals(otherPerson.name)
+                && phone.equals(otherPerson.phone)
+                && email.equals(otherPerson.email)
+                && role.equals(otherPerson.role)
+                && skills.equals(otherPerson.skills)
+                && match.equals(otherPerson.match);
     }
 
     @Override

@@ -37,17 +37,13 @@ class JsonAdaptedJob {
     @JsonCreator
     public JsonAdaptedJob(@JsonProperty("name") String name, @JsonProperty("company") String company,
             @JsonProperty("salary") String salary, @JsonProperty("description") String description,
-            @JsonProperty("requirements") List<JsonAdaptedTag> requirements,
-            @JsonProperty("matches") List<String> matches) {
+            @JsonProperty("requirements") List<JsonAdaptedTag> requirements) {
         this.name = name;
         this.company = company;
         this.salary = salary;
         this.description = description;
         if (requirements != null) {
             this.requirements.addAll(requirements);
-        }
-        if (requirements != null) {
-            this.matches.addAll(matches);
         }
     }
 
