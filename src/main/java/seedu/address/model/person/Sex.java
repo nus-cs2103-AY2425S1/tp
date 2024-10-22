@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's Sex in the address book.
@@ -22,6 +23,7 @@ public class Sex {
      */
     public Sex(String sex) {
         requireNonNull(sex);
+        checkArgument(isValidSex(sex), MESSAGE_CONSTRAINTS);
         value = sex;
     }
 

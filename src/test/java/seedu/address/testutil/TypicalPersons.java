@@ -31,54 +31,54 @@ public class TypicalPersons {
             .withNric("T0101280Z")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
-            .withHealthServices("Dental", "General Checkup").build();
+            .withHealthServices("consult", "cancer screening").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withNric("T0481580Z")
             .withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("blood test").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withNric("T0381280Z")
             .withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("vaccination").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withNric("T0081280F")
             .withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("cancer screening").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
             .withNric("T0100280Z")
             .withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("vaccination").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
             .withNric("T0181003Z")
             .withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("blood test").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withNric("S1234567H")
             .withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("consult").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave")
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("vaccination").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withNric(VALID_NRIC_AMY)
             .withSex(VALID_SEX_AMY).withBirthdate(VALID_BIRTHDATE_AMY)
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("vaccination").build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withNric(VALID_NRIC_BOB)
             .withSex(VALID_SEX_BOB).withBirthdate(VALID_BIRTHDATE_BOB)
-            .withHealthServices("General Checkup").build();
+            .withHealthServices("vaccination").build();
 
     public static final Person JAKE = new PersonBuilder().withName("Jake Tio").withPhone("9982131")
             .withEmail("jakers@example.com").withAddress("nus drive")
-            .withHealthServices("Blood Test").build();
+            .withHealthServices("vaccination").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

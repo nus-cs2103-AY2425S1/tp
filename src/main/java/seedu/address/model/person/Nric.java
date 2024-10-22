@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
@@ -25,6 +26,7 @@ public class Nric {
      */
     public Nric(String nric) {
         requireNonNull(nric);
+        checkArgument(isValidNric(nric), MESSAGE_CONSTRAINTS);
         value = nric;
     }
 
