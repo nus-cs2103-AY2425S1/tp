@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDANCE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ECNUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -68,6 +70,14 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withStudentClass(VALID_STUDENT_CLASS_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
+        // different ecName -> return false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEcName(VALID_ECNAME_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different ecNumber -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withEcNumber(VALID_ECNUMBER_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
         // different tags -> returns false
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(DESC_AMY.equals(editedAmy));
@@ -87,9 +97,12 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getAddress().orElse(null) + ", register number="
                 + editPersonDescriptor.getRegisterNumber().orElse(null) + ", sex="
                 + editPersonDescriptor.getSex().orElse(null) + ", class="
-                + editPersonDescriptor.getStudentClass().orElse(null) + ", tags="
+                + editPersonDescriptor.getStudentClass().orElse(null) + ", emergency contact name="
+                + editPersonDescriptor.getEcName().orElse(null) + ", emergency contact number="
+                + editPersonDescriptor.getEcNumber().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + ", attendances="
                 + editPersonDescriptor.getAttendances().orElse(null) + "}";
+
         assertEquals(expected, editPersonDescriptor.toString());
     }
 }

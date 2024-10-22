@@ -165,14 +165,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String emergencyPhone} into a {@code EmergencyPhone}.
+     * Parses a {@code String ecNumber} into a {@code EcNumber}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code emergencyPhone} is invalid.
+     * @throws ParseException if the given {@code EcNumber} is invalid.
      */
-    public static EcNumber parseEmergencyPhone(String emergencyPhone) throws ParseException {
-        requireNonNull(emergencyPhone);
-        String trimmedEmergencyPhone = emergencyPhone.trim();
+    public static EcNumber parseEcNumber(String ecNumber) throws ParseException {
+        requireNonNull(ecNumber);
+        String trimmedEmergencyPhone = ecNumber.trim();
         if (!EcNumber.isValidEcNumber(trimmedEmergencyPhone)) {
             throw new ParseException(EcNumber.MESSAGE_CONSTRAINTS);
         }

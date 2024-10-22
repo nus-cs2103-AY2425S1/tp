@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ECNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -58,6 +60,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_REGISTER_NUMBER + "REGISTER NUMBER] "
             + "[" + PREFIX_SEX + "SEX] "
             + "[" + PREFIX_STUDENT_CLASS + "CLASS] "
+            + "[" + PREFIX_ECNAME + "EMERGENCY CONTACT NAME] "
+            + "[" + PREFIX_ECNUMBER + "EMERGENCY CONTACT NUMBER] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -119,8 +123,8 @@ public class EditCommand extends Command {
         Sex updatedSex = editPersonDescriptor.getSex().orElse(personToEdit.getSex());
         StudentClass updatedStudentClass = editPersonDescriptor.getStudentClass()
                 .orElse(personToEdit.getStudentClass());
-        EcName updatedEcName = personToEdit.getEcName();
-        EcNumber updatedEcNumber = personToEdit.getEcNumber();
+        EcName updatedEcName = editPersonDescriptor.getEcName().orElse(personToEdit.getEcName());
+        EcNumber updatedEcNumber = editPersonDescriptor.getEcNumber().orElse(personToEdit.getEcNumber());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         HashMap<AbsentDate, AbsentReason> updatedAttendances = editPersonDescriptor.getAttendances().
                 orElse(personToEdit.getAttendances());
@@ -165,6 +169,8 @@ public class EditCommand extends Command {
         private RegisterNumber registerNumber;
         private Sex sex;
         private StudentClass studentClass;
+        private EcName ecName;
+        private EcNumber ecNumber;
         private Set<Tag> tags;
         private HashMap<AbsentDate, AbsentReason> attendances;
 
@@ -182,6 +188,8 @@ public class EditCommand extends Command {
             setRegisterNumber(toCopy.registerNumber);
             setSex(toCopy.sex);
             setStudentClass(toCopy.studentClass);
+            setEcName(toCopy.ecName);
+            setEcNumber(toCopy.ecNumber);
             setTags(toCopy.tags);
             setAttendance(toCopy.attendances);
         }
@@ -190,8 +198,8 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass,
-                    tags, attendances);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, registerNumber, sex, studentClass, ecName,
+                    ecNumber, tags, attendances);
         }
 
         public void setName(Name name) {
@@ -250,6 +258,23 @@ public class EditCommand extends Command {
             return Optional.ofNullable(studentClass);
         }
 
+        public void setEcName(EcName ecName) {
+            this.ecName = ecName;
+        }
+
+        public Optional<EcName> getEcName() {
+            return Optional.ofNullable(ecName);
+        }
+
+
+        public void setEcNumber(EcNumber ecNumber) {
+            this.ecNumber = ecNumber;
+        }
+
+        public Optional<EcNumber> getEcNumber() {
+            return Optional.ofNullable(ecNumber);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -304,6 +329,8 @@ public class EditCommand extends Command {
                     && Objects.equals(registerNumber, otherEditPersonDescriptor.registerNumber)
                     && Objects.equals(sex, otherEditPersonDescriptor.sex)
                     && Objects.equals(studentClass, otherEditPersonDescriptor.studentClass)
+                    && Objects.equals(ecName, otherEditPersonDescriptor.ecName)
+                    && Objects.equals(ecNumber, otherEditPersonDescriptor.ecNumber)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags)
                     && Objects.equals(attendances, otherEditPersonDescriptor.attendances);
         }
@@ -318,6 +345,8 @@ public class EditCommand extends Command {
                     .add("register number", registerNumber)
                     .add("sex", sex)
                     .add("class", studentClass)
+                    .add("emergency contact name", ecName)
+                    .add("emergency contact number", ecNumber)
                     .add("tags", tags)
                     .add("attendances", attendances)
                     .toString();

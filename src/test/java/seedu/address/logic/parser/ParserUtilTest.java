@@ -265,26 +265,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmergencyPhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEmergencyPhone((String) null));
+    public void parseEcNumber_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEcNumber((String) null));
     }
 
     @Test
-    public void parseEmergencyPhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEmergencyPhone(INVALID_EMERGENCY_PHONE));
+    public void parseEcNumber_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseEcNumber(INVALID_EMERGENCY_PHONE));
     }
 
     @Test
-    public void parseEmergencyPhone_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
+    public void parseEcNumber_validValueWithoutWhitespace_returnsStudentClass() throws Exception {
         EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
-        assertEquals(expectedEcNumber, ParserUtil.parseEmergencyPhone(VALID_EMERGENCY_PHONE));
+        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(VALID_EMERGENCY_PHONE));
     }
 
     @Test
-    public void parseEmergencyPhone_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
-        String emergencyPhoneWithWhitespace = WHITESPACE + VALID_EMERGENCY_PHONE + WHITESPACE;
+    public void parseEcNumber_validValueWithWhitespace_returnsTrimmedStudentClass() throws Exception {
+        String ecNumberWithWhitespace = WHITESPACE + VALID_EMERGENCY_PHONE + WHITESPACE;
         EcNumber expectedEcNumber = new EcNumber(VALID_EMERGENCY_PHONE);
-        assertEquals(expectedEcNumber, ParserUtil.parseEmergencyPhone(emergencyPhoneWithWhitespace));
+        assertEquals(expectedEcNumber, ParserUtil.parseEcNumber(ecNumberWithWhitespace));
 
     }
 
