@@ -26,10 +26,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
 
-    // FilteredLogs should be final? Note that it is not initalised,
-    // may cause run time error. TODO: Improve on stability
-    private FilteredList<Log> filteredLogs;
-
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -129,24 +125,10 @@ public class ModelManager implements Model {
         return filteredPersons;
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Log} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Log> getFilteredLogList() {
-        return filteredLogs;
-    }
-
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-    @Override
-    public void updateFilteredLogList(Predicate<Log> predicate) {
-        requireNonNull(predicate);
-        filteredLogs.setPredicate(predicate);
     }
 
     /**
@@ -159,6 +141,13 @@ public class ModelManager implements Model {
         requireNonNull(identityNumber);
         Predicate<Person> predicate = person -> person.getIdentityNumber().equals(identityNumber);
         updateFilteredPersonList(predicate);
+    }
+
+    //=========== Session Log ================================================================================
+
+    @Override
+    public ObservableList<Log> getSessionLog(int personIndex) {
+        return addressBook.getSessionLog(personIndex);
     }
 
     /**
@@ -175,9 +164,6 @@ public class ModelManager implements Model {
 
         // Convert Set<Log> to an ObservableList<Log>
         ObservableList<Log> loglist = FXCollections.observableArrayList(targetPerson.getLogs());
-
-        // Update the FilteredLogs to the logs of the targetPerson
-        filteredLogs = new FilteredList<>(loglist);
     }
 
     @Override
