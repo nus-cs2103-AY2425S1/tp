@@ -175,6 +175,14 @@ Examples:
 Disallowed examples:
 * `deletetag 2 t/classmate t/neighbour` will not succeed as it tries to delete 2 tags at once.
 
+### Undo a command : `undo`
+
+Undoes the previous command and reverts CampusConnect.
+
+Format: `undo`
+
+* Reverts the state of CampusConnect to the one before the most recent command, if any.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
