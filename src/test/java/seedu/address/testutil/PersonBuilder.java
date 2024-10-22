@@ -162,10 +162,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code FamilySize} of the {@code Person} that we are building.
+     * Sets the {@code familySize} of the {@code Person} that we are building.
      */
-    public PersonBuilder withFamilySize(FamilySize familySize) {
-        this.familySize = familySize;
+    public PersonBuilder withFamilySize(int familySize) {
+        this.familySize = new FamilySize(familySize);
         return this;
     }
 
