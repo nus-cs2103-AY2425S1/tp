@@ -7,7 +7,6 @@ import static seedu.edulog.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.edulog.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NUMERIC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC_SYMBOL;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -97,8 +96,12 @@ public class AddCommandParserTest {
         // invalid value followed by valid value
 
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + validExpectedStudentString,
+        assertParseFailure(parser, INVALID_NAME_DESC_SYMBOL + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
+
+        // invalid name
+        assertParseFailure(parser, INVALID_NAME_DESC_NUMERIC + validExpectedStudentString,
+            Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email
         assertParseFailure(parser, INVALID_EMAIL_DESC + validExpectedStudentString,
@@ -115,7 +118,7 @@ public class AddCommandParserTest {
         // valid value followed by invalid value
 
         // invalid name
-        assertParseFailure(parser, validExpectedStudentString + INVALID_NAME_DESC,
+        assertParseFailure(parser, validExpectedStudentString + INVALID_NAME_DESC_SYMBOL,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME));
 
         // invalid email

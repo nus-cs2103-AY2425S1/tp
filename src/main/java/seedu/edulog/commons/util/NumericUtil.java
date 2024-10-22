@@ -1,5 +1,8 @@
 package seedu.edulog.commons.util;
 
+/**
+ * Helper functions for handling numbers.
+ */
 public class NumericUtil {
     /**
      * Regular Expression to check if the given string contains only numbers.

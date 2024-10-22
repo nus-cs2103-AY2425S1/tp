@@ -7,7 +7,8 @@ import static seedu.edulog.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.edulog.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NUMERIC;
+import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC_SYMBOL;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -83,7 +84,8 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC_SYMBOL, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC_NUMERIC, Name.MESSAGE_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid edulog
@@ -99,8 +101,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY + VALID_PHONE_AMY,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC_SYMBOL + INVALID_EMAIL_DESC + VALID_ADDRESS_AMY
+                + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
     }
 
     @Test

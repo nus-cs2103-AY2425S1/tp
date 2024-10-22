@@ -2,6 +2,7 @@ package seedu.edulog.model.student;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edulog.commons.util.AppUtil.checkArgument;
+
 import seedu.edulog.commons.util.NumericUtil;
 
 /**

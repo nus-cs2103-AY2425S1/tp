@@ -120,18 +120,6 @@ public class ModelManager implements Model {
         eduLog.unmarkAllStudents();
     }
 
-    /**
-     * Marks the given student as present.
-     * The student must exist in the address book.
-     *
-     * @param target the student to mark as present.
-     */
-    @Override
-    public void markStudent(Student target) {
-        requireNonNull(target);
-        eduLog.markStudent(target);
-    }
-
     @Override
     public void addStudent(Student student) {
         eduLog.addStudent(student);
