@@ -9,7 +9,11 @@ public class BtcAddress extends PublicAddress {
     public static final String MESSAGE_CONSTRAINTS =
             "Public Addresses can take any values, and it should not be blank"; // TODO: Update constraints
 
-
+    /**
+     * Constructs a {@code BtcAddress}.
+     * @param publicAddress A valid public address.
+     * @param label A label for the public address.
+     */
     public BtcAddress(String publicAddress, String label) {
         super(publicAddress, label);
 

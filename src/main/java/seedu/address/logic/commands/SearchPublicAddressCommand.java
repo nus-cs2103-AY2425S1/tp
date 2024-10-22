@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -27,11 +26,10 @@ public class SearchPublicAddressCommand extends Command {
     private final String publicAddress;
 
     /**
-
      * @param publicAddress of the person to be updated to
      */
-    public SearchPublicAddressCommand( String publicAddress) {
-        requireAllNonNull( publicAddress);
+    public SearchPublicAddressCommand(String publicAddress) {
+        requireAllNonNull(publicAddress);
 
 
         this.publicAddress = publicAddress;

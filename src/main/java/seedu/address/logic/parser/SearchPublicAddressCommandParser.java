@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PUBLIC_ADDRESS;
+
 import seedu.address.logic.commands.SearchPublicAddressCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 /**
@@ -16,7 +18,12 @@ public class SearchPublicAddressCommandParser implements Parser<SearchPublicAddr
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PUBLIC_ADDRESS);
 
-        String remark = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).orElse("");
-        return new SearchPublicAddressCommand( remark);
+        if (argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SearchPublicAddressCommand.MESSAGE_USAGE));
+        }
+        String publicAddress = argMultimap.getValue(PREFIX_PUBLIC_ADDRESS).orElse("qq");
+
+        return new SearchPublicAddressCommand(publicAddress);
     }
 }
