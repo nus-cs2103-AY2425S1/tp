@@ -18,9 +18,6 @@ public interface Model {
     Predicate<Concert> PREDICATE_SHOW_ALL_CONCERTS = unused -> true;
     Predicate<ConcertContact> PREDICATE_SHOW_ALL_CONCERT_CONTACTS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to false */
-    Predicate<Person> PREDICATE_SHOW_NO_PERSONS = unused -> false;
-    Predicate<Concert> PREDICATE_SHOW_NO_CONCERTS = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
