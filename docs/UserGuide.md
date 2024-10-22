@@ -3,10 +3,22 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+HRConnect is a desktop app for **managing human resources in relation to projects** within a company.
 
-- Table of Contents
-  {:toc}
+It is optimized for use via typing while still having the benefits of a Graphical User Interface (GUI). If you can type fast, HRConnect can get your HR management tasks done faster than traditional GUI apps.
+
+---
+
+## Note: User Guide Formatting
+
+The user guide contains formatting to highlight important info. The standards used are as follows:
+
+* `code typeface`: Commands or command formats
+* **Bold:** Essential information
+* **Underline \+ Bold**: Keywords
+* <span style="color:red">RED COLOR</span>: Caution, take note
+* *Italics*: Technical terms available in glossary
+* Hyperlink: Links to another section of the user guide, or a relevant page.
 
 ---
 
