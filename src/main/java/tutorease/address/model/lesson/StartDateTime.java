@@ -21,6 +21,7 @@ public class StartDateTime extends DateTime {
 
     /**
      * Creates a StartDateTime object from a given string.
+     *
      * @param dateTime The string representing the start date and time.
      * @return A StartDateTime object.
      * @throws ParseException If the string is not a valid start date and time.
@@ -31,6 +32,4 @@ public class StartDateTime extends DateTime {
         checkArgument(isValidDateTime(dateTime), START_DATE_MESSAGE_CONSTRAINTS);
         return new StartDateTime(parseDateTime(dateTime));
     }
-
-
 }

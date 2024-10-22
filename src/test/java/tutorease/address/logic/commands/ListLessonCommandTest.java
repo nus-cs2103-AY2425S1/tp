@@ -44,8 +44,8 @@ public class ListLessonCommandTest {
 
     @Test
     public void execute_emptyFilteredList() {
-        model.updateFilteredLessonList(lesson -> lesson.getLocationIndex().equals("3")); // No lessons match
-        expectedModel.updateFilteredLessonList(lesson -> lesson.getLocationIndex().equals("3"));
+        model.updateFilteredLessonList(lesson -> lesson.getAddress().equals("3")); // No lessons match
+        expectedModel.updateFilteredLessonList(lesson -> lesson.getAddress().equals("3"));
 
         assertCommandSuccess(new ListLessonCommand(), model, ListLessonCommand.MESSAGE_NO_LESSONS_FOUND, expectedModel);
     }
