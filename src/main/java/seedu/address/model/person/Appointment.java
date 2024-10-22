@@ -86,27 +86,37 @@ public class Appointment {
     }
 
     /**
-     * Returns true if a given date is a today.
+     * Returns true if appointment is today.
      */
-    public static boolean isToday(String test) {
-        return LocalDateTime.parse(test, ENGLISH_FORMAT)
+    public boolean isToday() {
+        if (dateTime.equals("-")) {
+            return false;
+        }
+
+        return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
                 .toLocalDate().isEqual(TODAY);
     }
 
     /**
-     * Returns true if a given date has passed.
+     * Returns true if appointment has passed.
      */
-    public static boolean hasPassed(String test) {
-        return LocalDateTime.parse(test, ENGLISH_FORMAT)
-                .toLocalDate().isAfter(TODAY);
+    public boolean hasPassed() {
+        if (dateTime.equals("-")) {
+            return false;
+        }
+        return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
+                .toLocalDate().isBefore(TODAY);
     }
 
     /**
-     * Returns true if a given date in the future.
+     * Returns true if appointment is in the future.
      */
-    public static boolean hasNotPassed(String test) {
-        return LocalDateTime.parse(test, ENGLISH_FORMAT)
-                .toLocalDate().isBefore(TODAY);
+    public boolean hasNotPassed() {
+        if (dateTime.equals("-")) {
+            return false;
+        }
+        return LocalDateTime.parse(dateTime, ENGLISH_FORMAT_WITH_TIME)
+                .toLocalDate().isAfter(TODAY);
     }
 
     @Override

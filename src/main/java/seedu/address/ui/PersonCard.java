@@ -15,6 +15,8 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    private static final String CSS_THEME = "-fx-font-family: \"Segoe UI\";\n" +
+            "    -fx-font-size: 13px;";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -67,5 +69,16 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+
+        if (person.getAppointment().isToday()) {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #86ff1c;");   // Green
+        } else if (person.getAppointment().hasPassed()) {
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #ff0500;");   // Dark Red
+        } else if (person.getAppointment().hasNotPassed()){
+            appointment.setStyle(CSS_THEME + " -fx-text-fill: #f0c44a;");   // Yellow
+        } else {
+            appointment.setStyle(CSS_THEME + "-fx-text-fill: white;");    // Normal White
+        }
+
     }
 }
