@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -110,16 +112,11 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         addressBook.setStudent(target, editedStudent);
     }
 
     //=========== Filtered Student List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Student} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Student> getFilteredStudentList() {
         return filteredStudents;
@@ -160,6 +157,20 @@ public class ModelManager implements Model {
     public boolean hasConsult(Consultation consult) {
         return addressBook.hasConsult(consult);
     }
+    //=========== Consultation Methods =============================================================
+
+    @Override
+    public Optional<Student> findStudentByName(Name name) {
+        requireNonNull(name);
+        return filteredStudents.stream()
+                .filter(student -> student.getName().equals(name))
+                .findFirst(); // Find and return the student by name
+    }
+
+    @Override
+    public void deleteConsult(Consultation consult) {
+        addressBook.removeConsult(consult);
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -167,7 +178,6 @@ public class ModelManager implements Model {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ModelManager)) {
             return false;
         }
@@ -175,6 +185,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredStudents.equals(otherModelManager.filteredStudents);
+                && filteredStudents.equals(otherModelManager.filteredStudents)
+                && filteredConsultations.equals(otherModelManager.filteredConsultations);
     }
+
 }

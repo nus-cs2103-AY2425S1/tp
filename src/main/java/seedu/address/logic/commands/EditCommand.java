@@ -74,6 +74,7 @@ public class EditCommand extends Command {
     public CommandType getCommandType() {
         return COMMAND_TYPE;
     }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

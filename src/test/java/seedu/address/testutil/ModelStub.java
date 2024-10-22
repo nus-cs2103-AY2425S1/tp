@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,12 +10,14 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.consultation.Consultation;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
- * A default model stub that have all the methods failing.
+ * A default model stub that has all of the methods failing.
  */
 public class ModelStub implements Model {
+
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
@@ -101,7 +104,22 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteConsult(Consultation consult) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasConsult(Consultation consult) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<Consultation> getFilteredConsultationList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Optional<Student> findStudentByName(Name name) {
         throw new AssertionError("This method should not be called.");
     }
 }

@@ -125,6 +125,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         students.remove(key);
     }
 
+    /**
+     * Removes {@code consult} from this {@code AddressBook}.
+     * {@code consult} must exist in TAHub.
+     *
+     * @param consult The consult to be removed.
+     */
+    public void removeConsult(Consultation consult) {
+        consults.remove(consult);
+    }
+
     //// util methods
 
     @Override
