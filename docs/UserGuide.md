@@ -5,10 +5,10 @@ title: MediBase3 User Guide
 
 MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appointments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MB3 can get your tasks done faster than traditional GUI apps.
 
+## Table of Contents
+
 * Table of Contents
 {:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -35,8 +35,6 @@ MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appo
    > * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -233,8 +231,6 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 [Back to Table of Contents](#table-of-contents)
 
---------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 #### **Q**: How do I transfer my data to another Computer?
@@ -257,14 +253,10 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 #### **Q**: Do you support non-English inputs?
  - **A**: We do not support non-English inputs, but we are working on it!
 
---------------------------------------------------------------------------------------------------------------------
-
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 

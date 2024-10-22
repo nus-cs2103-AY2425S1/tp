@@ -22,6 +22,7 @@ There are two ways to run tests.
 {: .alert .alert-secondary}
 :link: **Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
 
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -35,3 +36,5 @@ This project has three types of tests:
    e.g. `seedu.address.storage.StorageManagerTest`
 1. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
    e.g. `seedu.address.logic.LogicManagerTest`
+   
+[Back to Table of Contents](#table-of-contents)
