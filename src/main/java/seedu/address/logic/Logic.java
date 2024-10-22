@@ -38,6 +38,11 @@ public interface Logic {
     ObservableList<Delivery> getFilteredDeliveryList();
 
     /**
+     * Returns an unmodifiable view of the modified list of deliveries
+     */
+    ObservableList<Delivery> getModifiedDeliveryList();
+
+    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();

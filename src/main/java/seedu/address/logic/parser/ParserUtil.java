@@ -245,4 +245,19 @@ public class ParserUtil {
         }
         return new Cost(trimmedCost);
     }
+
+    /**
+     * Parses a {@code String sortOrder } into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code isSortByAscending} is invalid.
+     */
+    public static SortOrder parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!(SortOrder.isValidSortOrder(trimmedSortOrder))) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortOrder);
+    }
 }

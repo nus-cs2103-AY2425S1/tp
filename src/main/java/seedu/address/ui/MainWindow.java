@@ -117,7 +117,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        deliveryListPanel = new DeliveryListPanel(logic.getFilteredDeliveryList());
+        deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
         deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -184,6 +184,9 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            deliveryListPanel = new DeliveryListPanel(logic.getModifiedDeliveryList());
+            deliveryListPanelPlaceholder.getChildren().add(deliveryListPanel.getRoot());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

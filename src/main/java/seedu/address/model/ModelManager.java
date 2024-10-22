@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.delivery.Delivery;
@@ -24,6 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Delivery> filteredDeliveries;
+    private final SortedList<Delivery> sortedDeliveries;
+    private boolean isViewingFilteredList = true;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +41,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredDeliveries = new FilteredList<>(this.addressBook.getDeliveryList());
-
+        sortedDeliveries = new SortedList<>(this.addressBook.getDeliveryList());
     }
 
     public ModelManager() {
@@ -142,6 +146,11 @@ public class ModelManager implements Model {
         addressBook.setDelivery(target, updatedDelivery);
     }
 
+    @Override
+    public ObservableList<Delivery> getModifiedDeliveryList() {
+        return isViewingFilteredList ? getFilteredDeliveryList() : getSortedDeliveryList();
+    }
+
     //=========== Filtered Delivery List Accessors =============================================================
     @Override
     public ObservableList<Delivery> getFilteredDeliveryList() {
@@ -151,7 +160,21 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredDeliveryList(Predicate<Delivery> predicate) {
         requireNonNull(predicate);
+        isViewingFilteredList = true;
         filteredDeliveries.setPredicate(predicate);
+    }
+
+    //=========== Sorted Delivery List Accessors ===============================================================
+    @Override
+    public ObservableList<Delivery> getSortedDeliveryList() {
+        return sortedDeliveries;
+    }
+
+    @Override
+    public void updateSortedDeliveryList(Comparator<Delivery> comparator) {
+        requireNonNull(comparator);
+        isViewingFilteredList = false;
+        sortedDeliveries.setComparator(comparator);
     }
 
     //=========== Filtered Person List Accessors =============================================================
