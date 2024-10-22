@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 import seedu.academyassist.commons.core.index.Index;
 import seedu.academyassist.commons.util.StringUtil;
 import seedu.academyassist.logic.parser.exceptions.ParseException;
+import seedu.academyassist.model.filter.FilterParam;
 import seedu.academyassist.model.person.Address;
 import seedu.academyassist.model.person.Email;
 import seedu.academyassist.model.person.Ic;
@@ -18,7 +19,6 @@ import seedu.academyassist.model.person.Phone;
 import seedu.academyassist.model.person.StudentId;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.sort.FilterParam;
 import seedu.academyassist.model.sort.SortParam;
 
 /**
@@ -201,7 +201,7 @@ public class ParserUtil {
 
         return new FilterParam(trimmedSortParam);
     }
-      
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.

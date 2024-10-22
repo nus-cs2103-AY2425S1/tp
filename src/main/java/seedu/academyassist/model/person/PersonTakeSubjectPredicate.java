@@ -4,6 +4,9 @@ import java.util.function.Predicate;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Person}'s {@code Subjects} contain the given subject.
+ */
 public class PersonTakeSubjectPredicate implements Predicate<Person> {
     private final Subject keySubject;
 

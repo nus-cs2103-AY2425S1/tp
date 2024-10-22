@@ -1,10 +1,12 @@
 package seedu.academyassist.model.person;
 
-import java.time.Year;
 import java.util.function.Predicate;
 
 import seedu.academyassist.commons.util.ToStringBuilder;
 
+/**
+ * Tests that a {@code Person}'s {@code YearGroup} matches the given year group.
+ */
 public class PersonInYearPredicate implements Predicate<Person> {
     private final YearGroup keyYearGroup;
 

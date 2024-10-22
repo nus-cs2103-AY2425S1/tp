@@ -1,11 +1,11 @@
-package seedu.academyassist.model.sort;
+package seedu.academyassist.model.filter;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.academyassist.commons.util.AppUtil;
 
 /**
- * Represents a parameter for Sort command
+ * Represents a parameter for Filter command
  */
 public class FilterParam {
 
