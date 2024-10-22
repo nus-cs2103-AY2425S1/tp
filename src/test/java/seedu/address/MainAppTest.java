@@ -2,28 +2,16 @@ package seedu.address;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertTrue;
-//import static seedu.address.testutil.TypicalStudents.ALICE;
-//import static seedu.address.testutil.TypicalStudents.BOB;
-//import static seedu.address.testutil.TypicalTutorials.getTypicalTutorialList;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-//import java.util.Optional;
 import java.util.logging.Logger;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import javafx.application.Platform;
-//import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
-//import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -46,32 +34,16 @@ public class MainAppTest {
     private Storage storage;
     private Model model;
 
-
-    @BeforeAll
-    public static void initJavaFX() {
-        Platform.startup(() -> {
-        });
-    }
-
     @BeforeEach
     public void setUp() {
         // Initialize MainApp manually
         mainApp = new MainApp();
         LogsCenter.init(new Config()); // Initialize logging
 
-        Path addressBookFilePath = getTempFilePath("addressBook.json");
-        Path userPrefsFilePath = getTempFilePath("userPrefs.json");
-        Path assignmentFilePath = getTempFilePath("assignment.json");
-        Path tutorialFilePath = getTempFilePath("tutorials.json");
-
-        try {
-            Files.deleteIfExists(addressBookFilePath);
-            Files.deleteIfExists(userPrefsFilePath);
-            Files.deleteIfExists(assignmentFilePath);
-            Files.deleteIfExists(tutorialFilePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Path addressBookFilePath = Paths.get("data", "addressBook.json");
+        Path userPrefsFilePath = Paths.get("data", "userPrefs.json");
+        Path assignmentFilePath = Paths.get("data", "assignment.json");
+        Path tutorialFilePath = Paths.get("data", "tutorials.json");
 
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
@@ -87,11 +59,6 @@ public class MainAppTest {
 
         model = new ModelManager(addressBook, userPrefs, assignmentList, tutorialList);
     }
-
-    private Path getTempFilePath(String fileName) {
-        return testFolder.resolve(fileName);
-    }
-
 
     @Test
     public void testInitLogging() {
@@ -303,8 +270,8 @@ public class MainAppTest {
     //    }
 
     //TODO: Fails with ubuntu OS
-    @AfterAll
-    public static void cleanupJavaFX() {
-        Platform.exit();
-    }
+    //    @AfterAll
+    //    public static void cleanupJavaFX() {
+    //        Platform.exit();
+    //    }
 }
