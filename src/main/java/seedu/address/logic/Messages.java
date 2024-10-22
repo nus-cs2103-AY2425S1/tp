@@ -1,10 +1,10 @@
 package seedu.address.logic;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Transaction;
@@ -25,9 +25,6 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_DATE_FORMAT = "Invalid date format!\nDate format: yyyy-MM-DD";
-
-    public static final DateTimeFormatter DEFAULT_DATE_PARSER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    public static final DateTimeFormatter DEFAULT_DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
@@ -70,7 +67,7 @@ public class Messages {
                 .append("; Other party: ")
                 .append(transaction.getOtherParty())
                 .append("; Date: ")
-                .append(transaction.getDate().format(DEFAULT_DATE_FORMATTER));
+                .append(transaction.getDate().format(DateTimeUtil.DEFAULT_DATE_FORMATTER));
 
         return builder.toString();
     }

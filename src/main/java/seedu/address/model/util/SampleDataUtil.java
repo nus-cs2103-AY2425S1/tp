@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.logic.Messages;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
@@ -25,13 +25,13 @@ public class SampleDataUtil {
     public static Person[] getSamplePersons() {
         Transaction transaction1 = new Transaction(
                 "Buy raw materials", -100, "ABC Company",
-                LocalDate.parse("2023-10-10", Messages.DEFAULT_DATE_PARSER));
+                LocalDate.parse("2023-10-10", DateTimeUtil.DEFAULT_DATE_PARSER));
         Transaction transaction2 = new Transaction(
                 "Invest", -1000, "Rich Company",
-                LocalDate.parse("2024-03-29", Messages.DEFAULT_DATE_PARSER));
+                LocalDate.parse("2024-03-29", DateTimeUtil.DEFAULT_DATE_PARSER));
         Transaction transaction3 = new Transaction(
                 "Sell product", 200, "ABC Company",
-                LocalDate.parse("2023-11-11", Messages.DEFAULT_DATE_PARSER));
+                LocalDate.parse("2023-11-11", DateTimeUtil.DEFAULT_DATE_PARSER));
         Person[] people = new Person[]{
             new Person(new Name("Alex Yeoh"),
                         new Company("Tech Innovations Pte Ltd"),
