@@ -12,6 +12,9 @@ import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
+import seedu.address.model.project.ProjectName;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
@@ -28,7 +31,7 @@ public class SampleDataUtil {
             new Person(new EmployeeId("1"),
                 new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends"), getSkillSet("UI/UX")),
+                getTagSet("colleagues", "friends"), getSkillSet("UI")),
             new Person(new EmployeeId("2"),
                 new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
@@ -40,7 +43,7 @@ public class SampleDataUtil {
             new Person(new EmployeeId("4"),
                 new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates"), getSkillSet("Product Management")),
+                getTagSet("classmates"), getSkillSet("Management")),
             new Person(new EmployeeId("5"),
                 new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
@@ -48,10 +51,20 @@ public class SampleDataUtil {
         };
     }
 
+    public static Project[] getSampleProjects() {
+        return new Project[] {
+            new Project(new ProjectName("Project Alpha"), new ProjectId("1")),
+            new Project(new ProjectName("Project Beta"), new ProjectId("2")),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Project sampleProject : getSampleProjects()) {
+            sampleAb.addProject(sampleProject);
         }
         return sampleAb;
     }

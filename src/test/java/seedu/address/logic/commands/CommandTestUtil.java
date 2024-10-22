@@ -3,10 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSIGNMENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYEE_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROJECT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -19,8 +22,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectNameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -63,6 +69,32 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_PROJECT_NAME_ALPHA = "Project Alpha";
+    public static final String VALID_PROJECT_NAME_BETA = "Project Beta";
+    public static final String VALID_PROJECT_ID_ALPHA = "A0276123J";
+    public static final String VALID_PROJECT_ID_BETA = "A0276123K";
+
+    public static final String PROJECT_NAME_DESC_ALPHA = " " + PREFIX_PROJECT_NAME + VALID_PROJECT_NAME_ALPHA;
+    public static final String PROJECT_NAME_DESC_BETA = " " + PREFIX_PROJECT_NAME + VALID_PROJECT_NAME_BETA;
+    public static final String PROJECT_ID_DESC_ALPHA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_ALPHA;
+    public static final String PROJECT_ID_DESC_BETA = " " + PREFIX_PROJECT_ID + VALID_PROJECT_ID_BETA;
+
+    public static final String INVALID_PROJECT_NAME_DESC = " " + PREFIX_PROJECT_NAME + "James&";
+    // '&' not allowed in names
+    public static final String INVALID_PROJECT_ID_DESC = " " + PREFIX_PROJECT_ID + "James&";
+    // '&' not allowed in project id
+
+    public static final String VALID_ASSIGNMENT_ID_ONE = "1";
+    public static final String VALID_ASSIGNMENT_ID_TWO = "2";
+
+    public static final String ASSIGNMENT_ID_DESC_ONE = " " + PREFIX_ASSIGNMENT_ID + VALID_ASSIGNMENT_ID_ONE;
+    public static final String ASSIGNMENT_ID_DESC_TWO = " " + PREFIX_ASSIGNMENT_ID + VALID_ASSIGNMENT_ID_TWO;
+
+    public static final String INVALID_ASSIGNMENT_ID_DESC = " " + PREFIX_ASSIGNMENT_ID + "123B";
+    // 'B' not allowed in assignmentIds
+    public static final String INVALID_EMPLOYEE_ID_DESC = " " + PREFIX_EMPLOYEE_ID + "123B";
+    // 'B' not allowed in employeeIds
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -121,6 +153,7 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -135,4 +168,31 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the project at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showProjectAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredProjectList().size());
+
+        Project project = model.getFilteredProjectList().get(targetIndex.getZeroBased());
+        final String[] splitName = project.getName().fullName.split("\\s+");
+        model.updateFilteredProjectList(new ProjectNameContainsKeywordsPredicate(Arrays.asList(splitName[1])));
+        // we pick splitName[1] as [0] is just "Project", which is contained in all example project names
+
+        assertEquals(1, model.getFilteredProjectList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the assignment at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showAssignmentAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAssignmentList().size());
+
+        Assignment assignment = model.getFilteredAssignmentList().get(targetIndex.getZeroBased());
+        model.updateFilteredAssignmentList(a -> a.equals(assignment));
+
+        assertEquals(1, model.getFilteredAssignmentList().size());
+    }
 }

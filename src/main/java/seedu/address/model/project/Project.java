@@ -13,24 +13,24 @@ import seedu.address.commons.util.ToStringBuilder;
 public class Project {
 
     // Identity fields
-    private final Name name;
-    private final Id id;
+    private final ProjectName projectName;
+    private final ProjectId projectId;
 
     /**
      * Every field must be present and not null.
      */
-    public Project(Name name, Id id) {
-        requireAllNonNull(name, id);
-        this.name = name;
-        this.id = id;
+    public Project(ProjectName projectName, ProjectId projectId) {
+        requireAllNonNull(projectName, projectId);
+        this.projectName = projectName;
+        this.projectId = projectId;
     }
 
-    public Name getName() {
-        return name;
+    public ProjectName getName() {
+        return projectName;
     }
 
-    public Id getId() {
-        return id;
+    public ProjectId getId() {
+        return projectId;
     }
 
     /**
@@ -62,21 +62,21 @@ public class Project {
         }
 
         Project otherProject = (Project) other;
-        return name.equals(otherProject.name)
-                && id.equals(otherProject.id);
+        return projectName.equals(otherProject.projectName)
+                && projectId.equals(otherProject.projectId);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, id);
+        return Objects.hash(projectName, projectId);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("id", id)
+                .add("name", projectName)
+                .add("id", projectId)
                 .toString();
     }
 

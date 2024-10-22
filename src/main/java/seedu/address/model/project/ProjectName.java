@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Project's ID in the address book.
+ * Represents a Project's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-public class Id {
+public class ProjectName {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Project names should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -18,30 +18,30 @@ public class Id {
      */
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullId;
+    public final String fullName;
 
     /**
-     * Constructs a {@code Id}.
+     * Constructs a {@code Name}.
      *
-     * @param id A valid Id.
+     * @param name A valid name.
      */
-    public Id(String id) {
-        requireNonNull(id);
-        checkArgument(isValidId(id), MESSAGE_CONSTRAINTS);
-        fullId = id;
+    public ProjectName(String name) {
+        requireNonNull(name);
+        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        fullName = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidId(String test) {
+    public static boolean isValidName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return fullId;
+        return fullName;
     }
 
     @Override
@@ -51,17 +51,17 @@ public class Id {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Id)) {
+        if (!(other instanceof ProjectName)) {
             return false;
         }
 
-        Id otherId = (Id) other;
-        return fullId.equals(otherId.fullId);
+        ProjectName otherProjectName = (ProjectName) other;
+        return fullName.equals(otherProjectName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return fullId.hashCode();
+        return fullName.hashCode();
     }
 
 }

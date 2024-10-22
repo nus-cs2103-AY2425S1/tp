@@ -25,15 +25,25 @@ import seedu.address.model.project.exceptions.ProjectNotFoundException;
 public class UniqueProjectList implements Iterable<Project> {
 
     private final ObservableList<Project> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Project> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private final ObservableList<Project> internalUnmodifiableList = FXCollections
+            .unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent project as the given argument.
+     * Returns true if the list contains an equivalent project as the given
+     * argument.
      */
     public boolean contains(Project toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameProject);
+    }
+
+    /**
+     * Returns true if the list contains a {@code Project} with the given
+     * {@code ProjectId}.
+     */
+    public boolean containsId(ProjectId toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().map(a -> a.getId()).anyMatch(toCheck::equals);
     }
 
     /**

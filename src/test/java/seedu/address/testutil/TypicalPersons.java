@@ -36,7 +36,8 @@ public class TypicalPersons {
             .withSkills("gambling", "thievery").build();
     public static final Person CARL = new PersonBuilder().withEmployeeId("3")
                 .withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withAddress("wall street").build();
+            .withEmail("heinz@example.com").withAddress("wall street")
+            .withSkills("thievery").build();
     public static final Person DANIEL = new PersonBuilder().withEmployeeId("4")
                 .withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();

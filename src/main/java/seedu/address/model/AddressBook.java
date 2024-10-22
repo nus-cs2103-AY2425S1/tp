@@ -1,16 +1,20 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
 import seedu.address.model.assignment.UniqueAssignmentList;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 import seedu.address.model.project.UniqueProjectList;
 
 /**
@@ -45,6 +49,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this();
         setPersons(toBeCopied.getPersonList());
         setProjects(toBeCopied.getProjectList());
+        setAssignments(toBeCopied.getAssignmentList());
+        resetPersonData(toBeCopied);
+        resetProjectData(toBeCopied);
         resetData(toBeCopied);
     }
 
@@ -59,7 +66,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code projects}.
+     * Replaces the contents of the project list with {@code projects}.
      * {@code projects} must not contain duplicate projects.
      */
     public void setProjects(List<Project> projects) {
@@ -67,12 +74,39 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Replaces the contents of the assignment list with {@code assignments}.
+     * {@code assignments} must not contain duplicate assignments.
+     */
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments.setAssignments(assignments);
+    }
+
+    /**
+     * Resets all data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
+        resetPersonData(newData);
+        resetProjectData(newData);
+    }
+
+    /**
+     * Resets the existing persons data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetPersonData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
         setPersons(newData.getPersonList());
+    }
+
+    /**
+     * Resets the existing projects data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetProjectData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+
+        setProjects(newData.getProjectList());
     }
 
     //// person-level operations
@@ -83,6 +117,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return persons.contains(person);
+    }
+
+    /**
+     * Returns true if a person with the same {@code employeeId} exists in
+     * the address book.
+     */
+    public boolean hasEmployeeId(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        return persons.containsId(employeeId);
     }
 
     /**
@@ -112,7 +155,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
     //// project-level operations
 
     /**
@@ -121,6 +163,15 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasProject(Project project) {
         requireNonNull(project);
         return projects.contains(project);
+    }
+
+    /**
+     * Returns true if a project with the same {@code projectId} exists in
+     * the address book.
+     */
+    public boolean hasProjectId(ProjectId projectId) {
+        requireNonNull(projectId);
+        return projects.containsId(projectId);
     }
 
     /**
@@ -139,7 +190,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setProject(Project target, Project editedProject) {
         requireNonNull(editedProject);
-
         projects.setProject(target, editedProject);
     }
 
@@ -160,6 +210,26 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if an assignment with the same assignment id as {@code assignmentId}
+     * exists in the address book.
+     */
+    public boolean hasAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
+        return assignments.contains(assignmentId);
+    }
+
+    /**
+     * Returns true if an assignment with the same project id and employee id
+     * as {@code projectId} and {@code employeeId}
+     * exists in the address book.
+     */
+    public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
+        return assignments.contains(projectId, employeeId);
+    }
+
+    /**
      * Adds an assignment to the address book.
      * The assignment must not already exist in the address book.
      */
@@ -172,9 +242,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code assignment} must exist in the address book.
      */
     public void removeAssignment(Assignment assignment) {
+        requireNonNull(assignment);
         assignments.remove(assignment);
     }
 
+    /**
+     * Removes {@code assignment} from this {@code AddressBook}.
+     * {@code assignment} must exist in the address book.
+     */
+    public void removeAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
+        assignments.remove(assignmentId);
+    }
+
+    /**
+     * Removes {@code assignment} from this {@code AddressBook}.
+     * {@code assignment} must exist in the address book.
+     */
+    public void removeAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
+        assignments.remove(projectId, employeeId);
+    }
     //// util methods
 
     @Override
@@ -193,6 +282,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Project> getProjectList() {
         return projects.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Assignment> getAssignmentList() {
+        return assignments.asUnmodifiableObservableList();
     }
 
     @Override

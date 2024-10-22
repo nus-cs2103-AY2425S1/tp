@@ -12,8 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.AssignmentId;
+import seedu.address.model.person.EmployeeId;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.ProjectId;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,6 +28,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Project> filteredProjects;
+    private final FilteredList<Assignment> filteredAssignments;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,7 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredProjects = new FilteredList<>(this.addressBook.getProjectList());
-
+        filteredAssignments = new FilteredList<>(this.addressBook.getAssignmentList());
     }
 
     public ModelManager() {
@@ -84,7 +88,18 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        setAddressBookPerson(addressBook);
+        setAddressBookProject(addressBook);
+    }
+
+    @Override
+    public void setAddressBookPerson(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetPersonData(addressBook);
+    }
+
+    @Override
+    public void setAddressBookProject(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetProjectData(addressBook);
     }
 
     @Override
@@ -96,6 +111,12 @@ public class ModelManager implements Model {
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
+    }
+
+    @Override
+    public boolean hasEmployeeId(EmployeeId employeeId) {
+        requireNonNull(employeeId);
+        return addressBook.hasEmployeeId(employeeId);
     }
 
     @Override
@@ -117,9 +138,20 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getPersonList() {
+        return this.addressBook.getPersonList();
+    }
+
+    @Override
     public boolean hasProject(Project project) {
         requireNonNull(project);
         return addressBook.hasProject(project);
+    }
+
+    @Override
+    public boolean hasProjectId(ProjectId projectId) {
+        requireNonNull(projectId);
+        return addressBook.hasProjectId(projectId);
     }
 
     @Override
@@ -141,14 +173,42 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Project> getProjectList() {
+        return this.addressBook.getProjectList();
+    }
+
+    @Override
     public boolean hasAssignment(Assignment assignment) {
         requireNonNull(assignment);
         return addressBook.hasAssignment(assignment);
     }
 
     @Override
+    public boolean hasAssignment(AssignmentId assignmentId) {
+        requireNonNull(assignmentId);
+        return addressBook.hasAssignment(assignmentId);
+    }
+
+    @Override
+    public boolean hasAssignment(ProjectId projectId, EmployeeId employeeId) {
+        requireNonNull(projectId);
+        requireAllNonNull(employeeId);
+        return addressBook.hasAssignment(projectId, employeeId);
+    }
+
+    @Override
     public void deleteAssignment(Assignment target) {
         addressBook.removeAssignment(target);
+    }
+
+    @Override
+    public void deleteAssignment(AssignmentId targetId) {
+        addressBook.removeAssignment(targetId);
+    }
+
+    @Override
+    public void deleteAssignment(ProjectId targetProjectId, EmployeeId targetEmployeeId) {
+        addressBook.removeAssignment(targetProjectId, targetEmployeeId);
     }
 
     @Override
@@ -187,6 +247,23 @@ public class ModelManager implements Model {
     public void updateFilteredProjectList(Predicate<Project> predicate) {
         requireNonNull(predicate);
         filteredProjects.setPredicate(predicate);
+    }
+
+    //=========== Filtered Assignment List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Assignment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Assignment> getFilteredAssignmentList() {
+        return filteredAssignments;
+    }
+
+    @Override
+    public void updateFilteredAssignmentList(Predicate<Assignment> predicate) {
+        requireNonNull(predicate);
+        filteredAssignments.setPredicate(predicate);
     }
 
     @Override

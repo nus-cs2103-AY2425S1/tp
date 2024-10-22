@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -17,9 +16,6 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.project.Id;
-import seedu.address.model.project.Name;
-import seedu.address.model.project.Project;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private ProjectListPanel projectListPanel;
+    private AssignmentListPanel assignmentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane topPanelPlaceholder;
 
     @FXML
     private StackPane projectListPanelPlaceholder;
@@ -119,12 +116,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        topPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        // TODO: Fix logic.getFilteredProjectList() return empty ObservableArray bug
-        //projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
-        projectListPanel = new ProjectListPanel(FXCollections
-                .observableArrayList(new Project(new Name("Project Alpha"), new Id("A1234567"))));
+        projectListPanel = new ProjectListPanel(logic.getFilteredProjectList());
         projectListPanelPlaceholder.getChildren().add(projectListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -147,6 +141,26 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Shows the list of persons.
+     */
+    @FXML
+    public void handleShowPersons() {
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        PersonListPanel placeholder = personListPanel;
+        topPanelPlaceholder.getChildren().add(placeholder.getRoot());
+    }
+
+    /**
+     * Shows the list of assignments.
+     */
+    @FXML
+    public void handleShowAssignments() {
+        assignmentListPanel = new AssignmentListPanel(logic.getFilteredAssignmentList());
+        AssignmentListPanel placeholder = assignmentListPanel;
+        topPanelPlaceholder.getChildren().add(placeholder.getRoot());
     }
 
     /**
@@ -191,6 +205,14 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.getTopPanelDisplayType().equals(DisplayType.PERSON_LIST)) {
+                handleShowPersons();
+            }
+
+            if (commandResult.getTopPanelDisplayType().equals(DisplayType.ASSIGNMENT_LIST)) {
+                handleShowAssignments();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
