@@ -73,8 +73,8 @@ public class LogicManagerTest {
         Buyer expectedBuyer = new PersonBuilder(AMY).buildBuyer();
 
         // Adjust the expected message to match the actual message format
-        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: Date: , "
-                        + "From: , To: ; Tags: ",
+        String expectedMessage = String.format("New buyer added: %s; Phone: %s; Email: %s; Appointment: Date:  "
+                        + "(From:  To: ); Tags: ",
                 expectedBuyer.getName(), expectedBuyer.getPhone(), expectedBuyer.getEmail());
 
         model.addPerson(expectedBuyer);
@@ -94,11 +94,12 @@ public class LogicManagerTest {
                 .withAppointment("", "", "") // Empty appointment details
                 .withProperty("") // Empty property
                 .withTags() // No tags
-                .buildSeller();
+                .buildSeller()
+                ;
 
         // Construct the expected message based on the actual format produced by the application
-        String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: Date: ,"
-                        + " From: , To: ; Tags: ",
+        String expectedMessage = String.format("New seller added: %s; Phone: %s; Email: %s; Appointment: "
+                        + "Date:  (From:  To: ); Tags: ",
                 expectedSeller.getName(), expectedSeller.getPhone(), expectedSeller.getEmail());
 
         // Execute the command and check for success
