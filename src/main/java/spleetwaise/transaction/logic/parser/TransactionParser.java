@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 
 import spleetwaise.address.commons.core.LogsCenter;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
+import spleetwaise.commons.logic.commands.Command;
 import spleetwaise.transaction.logic.commands.AddCommand;
 import spleetwaise.transaction.logic.commands.ClearCommand;
-import spleetwaise.transaction.logic.commands.Command;
 import spleetwaise.transaction.logic.commands.FilterCommand;
 import spleetwaise.transaction.logic.commands.ListCommand;
 

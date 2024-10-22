@@ -10,15 +10,16 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import spleetwaise.address.commons.core.GuiSettings;
 import spleetwaise.address.commons.core.LogsCenter;
-import spleetwaise.address.logic.commands.CommandResult;
-import spleetwaise.address.logic.commands.exceptions.CommandException;
 import spleetwaise.address.logic.parser.AddressBookParser;
 import spleetwaise.address.logic.parser.exceptions.ParseException;
 import spleetwaise.address.model.ReadOnlyAddressBook;
 import spleetwaise.address.model.person.Person;
 import spleetwaise.address.storage.Storage;
-import spleetwaise.commons.CommonModel;
 import spleetwaise.commons.exceptions.SpleetWaiseCommandException;
+import spleetwaise.commons.logic.commands.Command;
+import spleetwaise.commons.logic.commands.CommandResult;
+import spleetwaise.commons.logic.commands.exceptions.CommandException;
+import spleetwaise.commons.model.CommonModel;
 import spleetwaise.transaction.logic.parser.TransactionParser;
 import spleetwaise.transaction.model.transaction.Transaction;
 
@@ -50,18 +51,31 @@ public class LogicManager implements Logic {
     public CommandResult execute(String commandText) throws ParseException, SpleetWaiseCommandException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
-        CommandResult commandResult;
-
-        spleetwaise.address.logic.commands.Command addressBookCommand = addressBookParser.parseCommand(commandText);
-        spleetwaise.transaction.logic.commands.Command transactionCommand = transactionParser.parseCommand(commandText);
-
-        if (addressBookCommand != null) {
-            return executeAddressBookCommand(addressBookCommand);
-        } else if (transactionCommand != null) {
-            return executeTransactionCommand(transactionCommand);
+        // Parse command
+        Command command;
+        command = addressBookParser.parseCommand(commandText);
+        if (command == null) {
+            command = transactionParser.parseCommand(commandText);
+        }
+        if (command == null) {
+            throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, commandText));
         }
 
-        throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, commandText));
+        // Execute command
+        CommandResult commandResult = command.execute();
+
+        // Update storage
+        try {
+            CommonModel model = CommonModel.getInstance();
+            storage.saveTransactionBook(model.getTransactionBook());
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (AccessDeniedException e) {
+            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
+        } catch (IOException ioe) {
+            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
+        }
+
+        return commandResult;
     }
 
     /**
@@ -72,7 +86,7 @@ public class LogicManager implements Logic {
      */
     public boolean isTransactionCommand(String commandText) {
         try {
-            spleetwaise.transaction.logic.commands.Command transactionCommand = transactionParser.parseCommand(
+            Command transactionCommand = transactionParser.parseCommand(
                     commandText);
             return transactionCommand != null;
         } catch (ParseException pe) {
@@ -108,38 +122,5 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Transaction> getFilteredTransactionList() {
         return CommonModel.getInstance().getFilteredTransactionList();
-    }
-
-    // TODO: We need to write both storages because AB commands might result in changes to TB data
-    private CommandResult executeAddressBookCommand(spleetwaise.address.logic.commands.Command addressBookCommand)
-            throws SpleetWaiseCommandException {
-        CommandResult commandResult = addressBookCommand.execute();
-
-        // Save AddressBook data
-        try {
-            storage.saveAddressBook(CommonModel.getInstance().getAddressBook());
-        } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-        }
-
-        return commandResult;
-    }
-
-    private CommandResult executeTransactionCommand(spleetwaise.transaction.logic.commands.Command transactionCommand)
-            throws SpleetWaiseCommandException {
-        CommandResult commandResult = transactionCommand.execute();
-
-        // Save TransactionBook data
-        try {
-            storage.saveTransactionBook(CommonModel.getInstance().getTransactionBook());
-        } catch (AccessDeniedException e) {
-            throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
-        } catch (IOException ioe) {
-            throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
-        }
-
-        return commandResult;
     }
 }
