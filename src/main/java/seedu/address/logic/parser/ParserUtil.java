@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -190,7 +191,7 @@ public class ParserUtil {
             }
             return parsedWeek;
         } catch (NumberFormatException e) {
-            throw new ParseException("Invalid week number. It must be a non-negative integer.");
+            throw new ParseException(Messages.MESSAGE_INVALID_WEEK);
         }
     }
 

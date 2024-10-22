@@ -7,7 +7,8 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "telegram": "@Alice",
     "tags" : [ "friends" ],
-    "github" : "Alice"
+    "github" : "Alice",
+    "attendance": [ ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -15,7 +16,8 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "telegram": "@Benson",
     "tags" : [ "owesMoney", "friends" ],
-    "github" : "Benson"
+    "github" : "Benson",
+    "attendance": [ ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -23,7 +25,8 @@
     "address" : "wall street",
     "telegram": "@Carl",
     "tags" : [ ],
-    "github" : "Carl"
+    "github" : "Carl",
+    "attendance": [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -31,7 +34,8 @@
     "address" : "10th street",
     "telegram": "@Daniel",
     "tags" : [ "friends" ],
-    "github" : "Daniel"
+    "github" : "Daniel",
+    "attendance": [ ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -39,7 +43,8 @@
     "address" : "michegan ave",
     "telegram": "@Elle",
     "tags" : [ ],
-    "github" : "Elle"
+    "github" : "Elle",
+    "attendance": [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -47,7 +52,8 @@
     "address" : "little tokyo",
     "telegram": "@Fiona",
     "tags" : [ ],
-    "github" : "Fiona"
+    "github" : "Fiona",
+    "attendance": [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "telegram": "@George",
     "tags" : [ "husband" ],
-    "github" : "George"
+    "github" : "George",
+    "attendance": [ ]
   } ]
 }

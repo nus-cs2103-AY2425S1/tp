@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +37,9 @@ public class PersonBuilder {
     private Set<Tag> tags;
     private Github github;
     private Assignment assignment;
+    private Set<Integer> attendance;
+
+
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,6 +53,7 @@ public class PersonBuilder {
         tags = new HashSet<>();
         github = new Github(DEFAULT_GITHUB);
         assignment = new Assignment(DEFAULT_ASSIGNMENT_NAME, DEFAULT_ASSIGNMENT_SCORE);
+        this.attendance = new HashSet<>();
     }
 
     /**
@@ -63,6 +68,8 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
         github = personToCopy.getGithub();
         assignment = personToCopy.getAssignment();
+        attendance = personToCopy.getWeeksPresent();
+
     }
 
     /**
@@ -128,6 +135,13 @@ public class PersonBuilder {
         this.assignment = new Assignment(assignment, score);
         return this;
     }
+    /**
+     * Sets the attendance of the {@code Person} being built.
+     */
+    public PersonBuilder withAttendance(Integer... weeks) {
+        this.attendance = new HashSet<>(Arrays.asList(weeks));
+        return this;
+    }
 
     public Person build() {
         return new Person(name, phone, email, address, telegram, tags, github);
@@ -135,6 +149,10 @@ public class PersonBuilder {
 
     public Person buildWithAssignment() {
         return new Person(name, phone, email, address, telegram, tags, github, assignment);
+    }
+
+    public Person buildWithAttendance() {
+        return new Person(name, phone, address, email, telegram, github, assignment, attendance, tags);
     }
 
 }

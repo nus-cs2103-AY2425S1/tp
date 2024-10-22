@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -26,7 +25,7 @@ public class MarkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the name as present for that particular "
             + "week.\n "
-            + "Parameters: " + PREFIX_NAME + "NAME" + PREFIX_WEEK + "WEEK NUMBER"
+            + "Parameters: " + PREFIX_NAME + "NAME " + PREFIX_WEEK + "WEEK NUMBER "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_WEEK + "1";
@@ -94,9 +93,6 @@ public class MarkCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("week", week)
-                .toString();
+        return String.format("MarkCommand{name=%s, week=%d}", name, week);
     }
 }

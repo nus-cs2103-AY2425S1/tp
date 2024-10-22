@@ -109,7 +109,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.assignment = assignment;
-        this.weeksPresent = weeksPresent;
+        this.weeksPresent = weeksPresent != null ? new HashSet<>(weeksPresent) : new HashSet<>();
     }
 
     public Name getName() {
@@ -226,6 +226,7 @@ public class Person {
                 .add("tags", tags)
                 .add("github", github)
                 .add("assignment", assignment)
+                .add("weeks present", weeksPresent)
                 .toString();
     }
 

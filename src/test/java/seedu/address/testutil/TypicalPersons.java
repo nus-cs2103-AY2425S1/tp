@@ -32,36 +32,44 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withTelegram("@Alice")
             .withTags("friends")
-            .withGithub("Alice").build();
+            .withGithub("Alice")
+            .withAttendance()
+            .buildWithAttendance();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTelegram("@Benson")
             .withTags("owesMoney", "friends")
-            .withGithub("Benson").build();
+            .withGithub("Benson")
+            .withAttendance(1).buildWithAttendance();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street")
             .withTelegram("@Carl")
-            .withGithub("Carl").build();
+            .withGithub("Carl")
+            .withAttendance().buildWithAttendance();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com")
             .withAddress("10th street").withTelegram("@Daniel")
             .withTags("friends")
-            .withGithub("Daniel").build();
+            .withGithub("Daniel")
+            .withAttendance(1, 2, 3).buildWithAttendance();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withTelegram("@Elle")
-            .withGithub("Elle").build();
+            .withGithub("Elle")
+            .withAttendance(1, 2).buildWithAttendance();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo")
             .withTelegram("@Fiona")
-            .withGithub("Fiona").build();
+            .withGithub("Fiona")
+            .withAttendance(1, 2).buildWithAttendance();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street")
             .withTelegram("@George")
             .withTags(VALID_TAG_HUSBAND)
-            .withGithub("George").build();
+            .withGithub("George")
+            .withAttendance(1, 2).buildWithAttendance();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")

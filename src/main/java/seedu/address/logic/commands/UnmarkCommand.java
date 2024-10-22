@@ -2,13 +2,15 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
+import static seedu.address.logic.Messages.MESSAGE_MARK_ALREADY_SUCCESS;
 import static seedu.address.logic.Messages.MESSAGE_UNMARK_SUCCESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -45,15 +47,32 @@ public class UnmarkCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Optional<Person> personToUnmark = model.getPerson(name);
-        if (!personToUnmark.isPresent()) {
+        Optional<Person> optionalPersonToUnmark = model.getPerson(name);
+        if (!optionalPersonToUnmark.isPresent()) {
             throw new CommandException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_NAME, name));
         }
 
-        Person person = personToUnmark.get();
-        person.unmarkWeekPresent(week);
+        Person personToUnmark = optionalPersonToUnmark.get();
+        Set<Integer> updatedWeeksPresent = new HashSet<>(personToUnmark.getWeeksPresent());
 
-        return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS, person.getName(), week));
+        if (!updatedWeeksPresent.remove(week)) {
+            return new CommandResult(String.format(MESSAGE_MARK_ALREADY_SUCCESS, name, week));
+        }
+
+        Person updatedPerson = new Person(
+                personToUnmark.getName(),
+                personToUnmark.getPhone(),
+                personToUnmark.getAddress(),
+                personToUnmark.getEmail(),
+                personToUnmark.getTelegram(),
+                personToUnmark.getGithub(),
+                personToUnmark.getAssignment(),
+                updatedWeeksPresent, // Updated weeks present
+                personToUnmark.getTags());
+
+        model.setPerson(personToUnmark, updatedPerson);
+
+        return new CommandResult(String.format(MESSAGE_UNMARK_SUCCESS, name, week));
     }
 
     @Override
@@ -73,9 +92,6 @@ public class UnmarkCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("name", name)
-                .add("week", week)
-                .toString();
+        return String.format("UnmarkCommand{name=%s, week=%d}", name, week);
     }
 }
