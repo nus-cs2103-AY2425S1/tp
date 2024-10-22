@@ -6,11 +6,11 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_FILTER_PARAM;
 
 import seedu.academyassist.logic.commands.exceptions.CommandException;
 import seedu.academyassist.model.Model;
+import seedu.academyassist.model.filter.FilterParam;
 import seedu.academyassist.model.person.PersonInYearPredicate;
 import seedu.academyassist.model.person.PersonTakeSubjectPredicate;
 import seedu.academyassist.model.person.Subject;
 import seedu.academyassist.model.person.YearGroup;
-import seedu.academyassist.model.sort.FilterParam;
 
 /**
  * Filters contacts based on year group or class.

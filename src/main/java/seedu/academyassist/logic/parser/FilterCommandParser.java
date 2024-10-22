@@ -8,9 +8,8 @@ import static seedu.academyassist.logic.parser.CliSyntax.PREFIX_YEARGROUP;
 import java.util.stream.Stream;
 
 import seedu.academyassist.logic.commands.FilterCommand;
-
 import seedu.academyassist.logic.parser.exceptions.ParseException;
-import seedu.academyassist.model.sort.FilterParam;
+import seedu.academyassist.model.filter.FilterParam;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
