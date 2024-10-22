@@ -52,7 +52,7 @@ public class MarkPaidCommand extends Command {
         Payment updatedPayment = calculatePayment(personToMarkPayment.getPayment(), fees);
         Person markedPerson = new Person(personToMarkPayment.getName(), personToMarkPayment.getPhone(),
                 personToMarkPayment.getEmail(), personToMarkPayment.getAddress(),
-                updatedPayment, personToMarkPayment.getAttendance(), personToMarkPayment.getTags());
+                updatedPayment, personToMarkPayment.getParticipation(), personToMarkPayment.getTags());
 
         model.setPerson(personToMarkPayment, markedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
