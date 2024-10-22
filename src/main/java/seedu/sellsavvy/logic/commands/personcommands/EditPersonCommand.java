@@ -92,6 +92,7 @@ public class EditPersonCommand extends Command {
         if (model.isSelectedPerson(personToEdit)) {
             model.updateSelectedPerson(editedPerson);
         }
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 
