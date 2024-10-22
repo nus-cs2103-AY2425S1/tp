@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INDUSTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_YEAR1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -55,6 +56,28 @@ public class EditCommandTest {
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editIndustryFieldForStudent_failure() {
+        Student studentToEdit = new StudentBuilder().build();
+        model.setPerson(model.getFilteredPersonList().get(0), studentToEdit);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withIndustry(VALID_INDUSTRY_BOB).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_CANNOT_EDIT_STUDENT_INDUSTRY);
+    }
+
+    @Test
+    public void execute_editStudentIdFieldForCompany_failure() {
+        Company companyToEdit = new CompanyBuilder().build();
+        model.setPerson(model.getFilteredPersonList().get(4), companyToEdit);
+
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withStudentID(VALID_STUDENTID_AMY).build();
+        EditCommand editCommand = new EditCommand(INDEX_FIFTH_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_CANNOT_EDIT_COMPANY_STUDENTID);
     }
 
     @Test

@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDUSTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -44,6 +46,8 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_STUDENTID + "STUDENTID] "
+            + "[" + PREFIX_INDUSTRY + "INDUSTRY] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -55,6 +59,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_CANNOT_EDIT_STUDENT_INDUSTRY =
+            "Industry field cannot be edited for a student contact.";
+    public static final String MESSAGE_CANNOT_EDIT_COMPANY_STUDENTID =
+            "Student ID field cannot be edited for a company contact.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -81,6 +89,17 @@ public class EditCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        // Check if the person to edit is a Student and if the industry field is being edited
+        if (personToEdit instanceof Student && editPersonDescriptor.getIndustry().isPresent()) {
+            throw new CommandException(MESSAGE_CANNOT_EDIT_STUDENT_INDUSTRY);
+        }
+
+        // Check if the person to edit is a Company and if the student id field is being edited
+        if (personToEdit instanceof Company && editPersonDescriptor.getStudentID().isPresent()) {
+            throw new CommandException(MESSAGE_CANNOT_EDIT_COMPANY_STUDENTID);
+        }
+
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
