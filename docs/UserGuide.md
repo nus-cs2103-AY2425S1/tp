@@ -237,6 +237,14 @@ Clears all entries from the address book.
 
 Format: `clear`
 
+### Exporting the contacts : `export`
+
+Exports contact info in file path `data/addressbook.json`.
+
+Format: `export`
+
+- Locate file `addressbook.json` under the folder `data` that will be added to the current folder of `addressbook.jar` upon executing `export`.
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -286,9 +294,10 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
 **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit John Doe n/James Lee e/jameslee@example.com` 
+**Export** | `export` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
 **Note**   | `note NAME [ap/APPOINTMENT] [m/MEDICATION] [r/REMARK]…`<br> e.g.,`note John Doe r/Allergic to XXX m/10mg Ibuprofen`
 **Help**   | `help`
 **List**   | `list` <br/>`list *` (to list starred contacts) 
-**Star** | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
+**Star**   | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
 **Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 
