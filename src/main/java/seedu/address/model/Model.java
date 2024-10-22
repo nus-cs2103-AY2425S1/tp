@@ -55,8 +55,10 @@ public interface Model {
 
     /**
      * Archives the address book.
+     * @param filename the name of the file to archive the address book to.
+     * @throws IOException if there was an error writing to the file.
      */
-    void archiveAddressBook() throws IOException;
+    void archiveAddressBook(String filename) throws IOException;
 
     /**
      * Undoes the previous command that modified the state or storage of the address book.

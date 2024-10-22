@@ -31,7 +31,7 @@ public class ArchiveCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(""), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -39,7 +39,7 @@ public class ArchiveCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(""), model, ArchiveCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ArchiveCommandTest {
         Model model = new ModelManagerStubThrowingIoException();
         Model expectedModel = new ModelManagerStubThrowingIoException();
 
-        assertCommandSuccess(new ArchiveCommand(), model, ArchiveCommand.MESSAGE_FAILURE, expectedModel);
+        assertCommandSuccess(new ArchiveCommand(""), model, ArchiveCommand.MESSAGE_FAILURE, expectedModel);
     }
 
     /**
@@ -55,7 +55,7 @@ public class ArchiveCommandTest {
      */
     private static class ModelManagerStubThrowingIoException extends ModelManager {
         @Override
-        public void archiveAddressBook() throws IOException {
+        public void archiveAddressBook(String filename) throws IOException {
             throw new IOException();
         }
     }

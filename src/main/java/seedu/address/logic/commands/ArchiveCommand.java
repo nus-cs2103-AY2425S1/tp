@@ -15,15 +15,21 @@ public class ArchiveCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Archives the address book.\n"
             + "Example: " + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Address book has been archived!";
+    public static final String MESSAGE_SUCCESS = "Address book has been archived successfully!";
     public static final String MESSAGE_FAILURE = "Address book failed to be archived. Please try again later.";
 
+    private final String filename;
+
+    public ArchiveCommand(String filename) {
+        this.filename = filename;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
+
         try {
-            model.archiveAddressBook();
+            model.archiveAddressBook(filename);
         } catch (IOException e) {
             return new CommandResult(MESSAGE_FAILURE);
         }

@@ -97,14 +97,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void archiveAddressBook() throws IOException {
+    public void archiveAddressBook(String filename) throws IOException {
         Path source = this.getAddressBookFilePath();
+        assert source != null : "Address book file path is null";
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
         String timestamp = LocalDateTime.now().format(formatter);
-        Path destination = Paths.get(source.getParent().toString(), "archive",
-                source.getFileName().toString().replace(".json", "") + "-"
-                        + timestamp + ".json");
+        String archiveFilename = source.getFileName().toString().replace(".json", "") + "-"
+                + timestamp + "-" + filename + ".json";
+        Path destination = Paths.get(source.getParent().toString(), "archive", archiveFilename);
 
         Files.createDirectories(destination.getParent());
         Files.copy(source, destination, REPLACE_EXISTING);

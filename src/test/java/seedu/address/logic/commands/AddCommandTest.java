@@ -119,7 +119,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void archiveAddressBook() {
+        public void archiveAddressBook(String filename) {
             throw new AssertionError("This method should not be called.");
         }
 
