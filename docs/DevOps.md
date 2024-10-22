@@ -15,17 +15,17 @@ This project uses Gradle for **build automation and dependency management**. **Y
 
 Given below are how to use Gradle for some important project tasks.
 
-* **`clean`**: Deletes the files created during the previous build tasks (e.g. files in the `build` folder).<br>
-  e.g. `./gradlew clean`
+* **`clean`**: Deletes the files created during the previous build tasks (e.g. files in the `build` folder).
+    e.g. `./gradlew clean`
 
-* **`shadowJar`**: Uses the ShadowJar plugin to creat a fat JAR file in the `build/lib` folder, *if the current file is outdated*.<br>
-  e.g. `./gradlew shadowJar`.
+* **`shadowJar`**: Uses the ShadowJar plugin to creat a fat JAR file in the `build/lib` folder, *if the current file is outdated*.
+    e.g. `./gradlew shadowJar`.
 
-* **`run`**: Builds and runs the application.<br>
-  **`runShadow`**: Builds the application as a fat JAR, and then runs it.
+* **`run`**: Builds and runs the application.
+  * **`runShadow`**: Builds the application as a fat JAR, and then runs it.
 
-* **`checkstyleMain`**: Runs the code style check for the main code base.<br>
-  **`checkstyleTest`**: Runs the code style check for the test code base.
+* **`checkstyleMain`**: Runs the code style check for the main code base.
+  * **`checkstyleTest`**: Runs the code style check for the test code base.
 
 * **`test`**: Runs all tests.
   * `./gradlew test` — Runs all tests
