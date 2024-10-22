@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -30,6 +31,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RenameTagCommand;
+import seedu.address.logic.commands.RestoreCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.ScheduleCommand.ScheduleDescriptor;
 import seedu.address.logic.commands.SocialMediaCommand;
@@ -149,6 +151,17 @@ public class AddressBookParserTest {
                 RenameTagCommand.COMMAND_WORD + " " + PREFIX_OLDTAG + "friends" + " " + PREFIX_NEWTAG
                         + "enemies");
         assertEquals(new RenameTagCommand("friends", "enemies"), command);
+    }
+
+    @Test
+    public void parseCommand_restore() throws Exception {
+        assertTrue(parser.parseCommand(RestoreCommand.COMMAND_WORD) instanceof RestoreCommand);
+        assertTrue(parser.parseCommand(RestoreCommand.COMMAND_WORD + " 3") instanceof RestoreCommand);
+    }
+    @Test
+    public void parseCommand_backup() throws Exception {
+        assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD) instanceof BackupCommand);
+        assertTrue(parser.parseCommand(BackupCommand.COMMAND_WORD + " 3") instanceof BackupCommand);
     }
 
     @Test
