@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.LocalDate;
@@ -65,6 +66,39 @@ class GetAttendanceByTgCommandTest {
         assertThrows(CommandException.class,
                 String.format(GetAttendanceByTgCommand.MESSAGE_NO_STUDENTS, emptyTutorialGroup), ()
                         -> command.execute(model));
+    }
+
+    @Test
+    public void equalsMethod() {
+        TutorialGroup tg1 = new TutorialGroup("A01");
+        TutorialGroup tg2 = new TutorialGroup("A02");
+
+        GetAttendanceByTgCommand command1 = new GetAttendanceByTgCommand(tg1);
+        GetAttendanceByTgCommand command2 = new GetAttendanceByTgCommand(tg1);
+        GetAttendanceByTgCommand command3 = new GetAttendanceByTgCommand(tg2);
+
+        // Same object
+        assertEquals(command1, command1);
+
+        // Different objects, same values
+        assertEquals(command1, command2);
+
+        // Different values
+        assertNotEquals(command1, command3);
+
+        // Different types
+        assertNotEquals(command1, new Object());
+
+        // Null
+        assertNotEquals(command1, null);
+    }
+
+    @Test
+    public void toStringMethod() {
+        TutorialGroup tg = new TutorialGroup("A01");
+        GetAttendanceByTgCommand command = new GetAttendanceByTgCommand(tg);
+        String expectedString = tg.toString();
+        assertEquals(expectedString, command.toString());
     }
 
     public class AttendanceWindowStub extends AttendanceWindow {
