@@ -22,7 +22,7 @@ public class Tutorial {
      * Every field must be present and not null.
      */
     public Tutorial(String subject) {
-        requireAllNonNull(subject);
+        requireAllNonNull(subject, participationList);
         this.subject = subject;
     }
 
