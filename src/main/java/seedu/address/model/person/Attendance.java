@@ -73,9 +73,5 @@ public class Attendance {
     public int hashCode() {
         return attendanceDate.hashCode();
     }
-
-    public Attendance getAttendance() {
-        return new Attendance(attendanceDate);
-    }
 }
 
