@@ -193,4 +193,12 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Sets a message in the result display area.
+     * @param message The message to be displayed.
+     */
+    public void setMessageBox(String message) {
+        resultDisplay.setFeedbackToUser(message);
+    }
 }
