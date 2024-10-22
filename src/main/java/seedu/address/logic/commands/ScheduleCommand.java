@@ -43,13 +43,8 @@ public class ScheduleCommand extends Command {
 
         @Override
         public int compare(Person p1, Person p2) {
-            // Handle null appointments
-            if (p1.getAppointment() == null && p2.getAppointment() == null) {
+            if (p1.getAppointment() == null || p2.getAppointment() == null) {
                 return 0;
-            } else if (p1.getAppointment() == null) {
-                return 1; // p1 is greater than p2 (null appointments come after non-null)
-            } else if (p2.getAppointment() == null) {
-                return -1; // p1 is less than p2 (null appointments come after non-null)
             } else {
                 // Compare appointment times
                 return p1.getAppointment().value.compareTo(p2.getAppointment().value);
