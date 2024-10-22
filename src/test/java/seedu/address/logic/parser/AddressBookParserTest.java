@@ -25,6 +25,7 @@ import seedu.address.logic.commands.AddAllergyCommand;
 import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DelAllergyCommand;
 import seedu.address.logic.commands.DeleteApptCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -156,5 +157,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_delAllergy() throws Exception {
+        String commandInput = DelAllergyCommand.COMMAND_WORD + " " + NRIC_DESC_AMY
+                + " " + PREFIX_ALLERGY + "Insulin";
+        DelAllergyCommand command = (DelAllergyCommand) parser.parseCommand(commandInput);
+        Set<Allergy> allergies = new HashSet<Allergy>();
+        allergies.add(new Allergy("Insulin"));
+        assertEquals(new DelAllergyCommand(new Nric(VALID_NRIC_AMY), allergies), command);
     }
 }

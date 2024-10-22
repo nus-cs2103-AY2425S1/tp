@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,46 +56,37 @@ public class DelAllergyCommand extends Command {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
                 .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
 
-        if (person.getNric().equals(this.nric)) {
-            Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
+        Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
 
-            // check if the allergies to delete exist in the current set
-            for (Allergy allergy : allergies) {
-                if (!updatedAllergySet.remove(allergy)) {
-                    throw new CommandException(String.format(MESSAGE_ALLERGY_NOT_FOUND, allergy.allergyName));
-                }
+        // check if the allergies to delete exist in the current set
+        for (Allergy allergy : allergies) {
+            if (!updatedAllergySet.remove(allergy)) {
+                throw new CommandException(String.format(MESSAGE_ALLERGY_NOT_FOUND, allergy.allergyName));
             }
-
-            // create an edited person with the updated allergies
-            Person editedPerson = new Person(
-                    person.getName(), person.getPhone(), person.getEmail(),
-                    person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                    person.getGender(), updatedAllergySet, person.getPriority(), person.getAppointments(),
-                    person.getMedCons());
-
-            model.setPerson(person, editedPerson);
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(generateSuccessMessage(editedPerson));
         }
-        throw new CommandException(PATIENT_DOES_NOT_EXIST);
+
+        // create an edited person with the updated allergies
+        Person editedPerson = new Person(
+                person.getName(), person.getPhone(), person.getEmail(),
+                person.getNric(), person.getAddress(), person.getDateOfBirth(),
+                person.getGender(), updatedAllergySet, person.getPriority(), person.getAppointments(),
+                person.getMedCons());
+
+        model.setPerson(person, editedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
+
 
     /**
      * Generates a command execution success message based on the removed medical conditions.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        StringBuilder allergiesString = new StringBuilder();
-        allergies.forEach(medCon -> allergiesString.append(medCon.allergyName).append(", "));
-
-        // Remove trailing comma and space, if any
-        if (allergiesString.length() > 0) {
-            allergiesString.setLength(allergiesString.length() - 2);
-        }
-
-        String resultAllergy = '[' + allergiesString.toString() + ']';
+        String resultAllergy = allergies.stream()
+                .map(medCon -> medCon.allergyName)
+                .collect(Collectors.joining(", ", "[", "]"));
 
         return String.format(MESSAGE_DELETE_ALLERGY_SUCCESS, resultAllergy, personToEdit.getNric().value);
-
     }
 
     @Override

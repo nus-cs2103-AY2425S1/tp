@@ -34,7 +34,7 @@ public class AddAllergyCommandParser implements Parser<AddAllergyCommand> {
 
         // Check if NRIC and allergy is provided
         if (!argMultimap.arePrefixesPresent(PREFIX_NRIC, PREFIX_ALLERGY) || !argMultimap.getPreamble().isEmpty()) {
-            logger.warning("NRIC and allergy not provided in AddAllergyCommand arguments.");
+            logger.warning("Unexpected preamble detected.");
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAllergyCommand.MESSAGE_USAGE));
         }
 

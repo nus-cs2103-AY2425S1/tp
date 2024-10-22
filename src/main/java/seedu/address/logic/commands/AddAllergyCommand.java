@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NRIC;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -54,39 +55,37 @@ public class AddAllergyCommand extends Command {
         Person person = model.fetchPersonIfPresent(new NricMatchesPredicate(nric))
                 .orElseThrow(() -> new CommandException(MESSAGE_PERSON_NRIC_NOT_FOUND));
 
-        if (person.getNric().equals(this.nric)) {
-            Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
-            // Check for duplicates
-            for (Allergy allergy : allergies) {
-                if (!updatedAllergySet.add(allergy)) {
-                    throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.allergyName));
-                }
-            }
-            Person editedPerson = new Person(
-                    person.getName(), person.getPhone(), person.getEmail(),
-                    person.getNric(), person.getAddress(), person.getDateOfBirth(),
-                    person.getGender(), updatedAllergySet, person.getPriority(), person.getAppointments(),
-                    person.getMedCons());
-            model.setPerson(person, editedPerson);
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(generateSuccessMessage(editedPerson));
+        // if the NRICs do not match, throw exception immediately.
+        if (!person.getNric().equals(this.nric)) {
+            throw new CommandException(PATIENT_DOES_NOT_EXIST);
         }
-        throw new CommandException(PATIENT_DOES_NOT_EXIST);
+
+        // add the allergies.
+        Set<Allergy> updatedAllergySet = new HashSet<>(person.getAllergies());
+        for (Allergy allergy : allergies) {
+            if (!updatedAllergySet.add(allergy)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_ALLERGY, allergy.allergyName));
+            }
+        }
+
+        Person editedPerson = new Person(
+                person.getName(), person.getPhone(), person.getEmail(),
+                person.getNric(), person.getAddress(), person.getDateOfBirth(),
+                person.getGender(), updatedAllergySet, person.getPriority(), person.getAppointments(),
+                person.getMedCons());
+
+        model.setPerson(person, editedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(generateSuccessMessage(editedPerson));
     }
 
     /**
      * Generates a command execution success message based on the added allergies.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        StringBuilder allergiesString = new StringBuilder();
-        allergies.forEach(allergy -> allergiesString.append(allergy.allergyName).append(", "));
-
-        // Remove trailing comma and space, if any
-        if (allergiesString.length() > 0) {
-            allergiesString.setLength(allergiesString.length() - 2);
-        }
-
-        String resultAllergies = '[' + allergiesString.toString() + ']';
+        String resultAllergies = allergies.stream()
+                .map(allergy -> allergy.allergyName)
+                .collect(Collectors.joining(", ", "[", "]"));
 
         return String.format(MESSAGE_ADD_ALLERGY_SUCCESS, resultAllergies, personToEdit.getNric().value);
     }
