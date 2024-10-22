@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
+import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TutUtil.TUTORIAL_SAMPLE;
 import static seedu.address.testutil.TutUtil.TUT_DATE;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
@@ -24,7 +24,7 @@ public class JsonAdaptedTutorialTest {
 
     private static final String INVALID_TUT_NAME = "";
     private static final String VALID_TUT_NAME = TUTORIAL_SAMPLE.getTutName().tutName;
-    private static final String VALID_TUTORIAL_CLASS = TUTORIAL_SAMPLE.getTutorialClass().toString();
+    private static final String VALID_TUTORIAL_CLASS = TUTORIAL_SAMPLE.getTutorialId().toString();
 
     private static final JsonAdaptedStudent VALID_STUDENT = new JsonAdaptedStudent(ALICE);
     private static final JsonAdaptedTutDate VALID_TUT_DATE = new JsonAdaptedTutDate(TUT_DATE);
@@ -32,7 +32,7 @@ public class JsonAdaptedTutorialTest {
     @Test
     public void toModelType_validTutDetails_returnsTut() throws Exception {
         // Using TUT_SAMPLE from TutUtil
-        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorial = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_ID);
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(tutorial);
         assertEquals(tutorial, tut.toModelType());
     }
@@ -41,7 +41,7 @@ public class JsonAdaptedTutorialTest {
     public void toModelType_invalidTutName_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with invalid tutorial name
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                INVALID_TUT_NAME, TUTORIAL_SAMPLE.getTutorialClass().toString(),
+                INVALID_TUT_NAME, TUTORIAL_SAMPLE.getTutorialId().toString(),
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
@@ -53,7 +53,7 @@ public class JsonAdaptedTutorialTest {
     public void toModelType_nullTutName_throwsIllegalValueException() {
         // Creating a JsonAdaptedTut with null tutorial name
         JsonAdaptedTutorial tut = new JsonAdaptedTutorial(
-                null, TUTORIAL_SAMPLE.getTutorialClass().toString(),
+                null, TUTORIAL_SAMPLE.getTutorialId().toString(),
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
@@ -69,7 +69,7 @@ public class JsonAdaptedTutorialTest {
                 List.of(VALID_STUDENT),
                 List.of(VALID_TUT_DATE)
         );
-        String expectedMessage = String.format(JsonAdaptedTutorial.MISSING_FIELD_MESSAGE_FORMAT, "tutorialClass");
+        String expectedMessage = String.format(JsonAdaptedTutorial.MISSING_FIELD_MESSAGE_FORMAT, "tutorialId");
         assertThrows(IllegalValueException.class, expectedMessage, tut::toModelType);
     }
 
@@ -115,7 +115,7 @@ public class JsonAdaptedTutorialTest {
 
         Tutorial tutorial = jsonTut.toModelType();
         assertEquals(VALID_TUT_NAME, tutorial.getTutName().tutName);
-        assertEquals(VALID_TUTORIAL_CLASS, tutorial.getTutorialClass().toString());
+        assertEquals(VALID_TUTORIAL_CLASS, tutorial.getTutorialId().toString());
         assertEquals(1, tutorial.getStudents().size());
     }
 

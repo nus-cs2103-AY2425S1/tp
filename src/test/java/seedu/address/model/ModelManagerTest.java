@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
+import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
@@ -21,7 +21,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
@@ -100,7 +100,7 @@ public class ModelManagerTest {
 
     @Test
     public void hasTutorial_tutorialInModel_returnsTrue() {
-        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialClass.of("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialId.of("1000"));
         modelManager.addTutorial(tutorial);
         assertTrue(modelManager.hasTutorial(tutorial));
     }
@@ -111,22 +111,22 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasTutorial_byTutorialClass_returnsTrue() {
-        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialClass.of("1000"));
+    public void hasTutorial_byTutorialId_returnsTrue() {
+        Tutorial tutorial = Tutorial.of(new TutName("Tut"), TutorialId.of("1000"));
         modelManager.addTutorial(tutorial);
-        assertTrue(modelManager.hasTutorial(TutorialClass.of("1000")));
+        assertTrue(modelManager.hasTutorial(TutorialId.of("1000")));
     }
 
     @Test
     public void assignTutorial_success() {
         modelManager.addTutorial(TUTORIAL2);
-        modelManager.assignStudent(ALICE, TUTORIAL_CLASS);
-        assertTrue(modelManager.hasTutorial(TUTORIAL_CLASS));
+        modelManager.assignStudent(ALICE, TUTORIAL_ID);
+        assertTrue(modelManager.hasTutorial(TUTORIAL_ID));
     }
 
     @Test
     public void assignTutorialTest_fail() {
-        assertThrows(TutNoFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_CLASS));
+        assertThrows(TutNoFoundException.class, () -> modelManager.assignStudent(ALICE, TUTORIAL_ID));
     }
 
     @Test
@@ -140,7 +140,7 @@ public class ModelManagerTest {
         TutorialList tutorialList = new TutorialList();
         modelManager = new ModelManager(addressBook, new UserPrefs(), new AssignmentList(), tutorialList);
 
-        Tutorial tutorial = Tutorial.of(new TutName("CS2103"), TutorialClass.of("1000"));
+        Tutorial tutorial = Tutorial.of(new TutName("CS2103"), TutorialId.of("1000"));
         tutorial.add(ALICE);
         tutorial.add(BENSON);
 
@@ -155,7 +155,7 @@ public class ModelManagerTest {
 
         assertFalse(modelManager.hasTutorial(tutorial));
 
-        TutorialClass noneTutorialClass = TutorialClass.none();
+        TutorialId noneTutorialClass = TutorialId.none();
         Student updatedStudent1 = modelManager.getAddressBook().getStudentList().stream()
                 .filter(s -> s.isSameStudent(ALICE))
                 .findFirst().orElse(null);
@@ -163,8 +163,8 @@ public class ModelManagerTest {
                 .filter(s -> s.isSameStudent(BENSON))
                 .findFirst().orElse(null);
 
-        assertEquals(updatedStudent1.getTutorialClass(), noneTutorialClass);
-        assertEquals(updatedStudent2.getTutorialClass(), noneTutorialClass);
+        assertEquals(updatedStudent1.getTutorialId(), noneTutorialClass);
+        assertEquals(updatedStudent2.getTutorialId(), noneTutorialClass);
     }
 
     @Test

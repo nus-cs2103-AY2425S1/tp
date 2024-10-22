@@ -39,7 +39,7 @@ public class Messages {
                 + "; Student ID: "
                 + student.getStudentId()
                 + "; Tutorial Class: "
-                + student.getTutorialClass();
+                + student.getTutorialId();
     }
 
 }

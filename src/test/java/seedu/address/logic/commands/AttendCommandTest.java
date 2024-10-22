@@ -27,7 +27,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 
@@ -38,7 +38,7 @@ public class AttendCommandTest {
 
     @Test
     public void constructor_nullStudentId_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AttendCommand(null, TutorialClass.of("1001"), new Date()));
+        assertThrows(NullPointerException.class, () -> new AttendCommand(null, TutorialId.of("1001"), new Date()));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class AttendCommandTest {
     @Test
     public void constructor_nullDate_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AttendCommand(new StudentId("1001"),
-                TutorialClass.of("1001"), null));
+                TutorialId.of("1001"), null));
     }
 
     @Test
@@ -57,11 +57,11 @@ public class AttendCommandTest {
         // Arrange
         ModelStubAcceptingAttendanceRecorded modelStub = new ModelStubAcceptingAttendanceRecorded();
         StudentId studentId = new StudentId("1001");
-        TutorialClass tutorialClass = TutorialClass.of("1001");
+        TutorialId tutorialId = TutorialId.of("1001");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = sdf.parse("2024/02/21");
 
-        AttendCommand attendCommand = new AttendCommand(studentId, tutorialClass, date);
+        AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
 
         // Act
         CommandResult commandResult = attendCommand.execute(modelStub);
@@ -69,7 +69,7 @@ public class AttendCommandTest {
         // Assert
         String expectedMessage = AttendCommand.MESSAGE_SUCCESS + "\n" + attendCommand;
         assertEquals(expectedMessage, commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(new AttendanceRecord(studentId, tutorialClass, date)),
+        assertEquals(Arrays.asList(new AttendanceRecord(studentId, tutorialId, date)),
                 modelStub.attendanceRecords);
     }
 
@@ -77,10 +77,10 @@ public class AttendCommandTest {
     public void execute_attendanceRecordingFails_throwsCommandException() {
         ModelStubWithoutTutorialClass modelStub = new ModelStubWithoutTutorialClass();
         StudentId studentId = new StudentId("1001");
-        TutorialClass tutorialClass = TutorialClass.of("1001");
+        TutorialId tutorialId = TutorialId.of("1001");
         Date date = new Date();
 
-        AttendCommand attendCommand = new AttendCommand(studentId, tutorialClass, date);
+        AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
 
         assertThrows(CommandException.class, AttendCommand.MESSAGE_FAILURE, () -> attendCommand.execute(modelStub));
     }
@@ -90,16 +90,16 @@ public class AttendCommandTest {
         // Arrange
         StudentId studentId1 = new StudentId("1001");
         StudentId studentId2 = new StudentId("1002");
-        TutorialClass tutorialClass1 = TutorialClass.of("1001");
-        TutorialClass tutorialClass2 = TutorialClass.of("1002");
+        TutorialId tutorialId1 = TutorialId.of("1001");
+        TutorialId tutorialId2 = TutorialId.of("1002");
         Date date1 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/21");
         Date date2 = new SimpleDateFormat("yyyy/MM/dd").parse("2024/02/22");
 
-        AttendCommand attendCommand1 = new AttendCommand(studentId1, tutorialClass1, date1);
-        AttendCommand attendCommand2 = new AttendCommand(studentId1, tutorialClass1, date1);
-        AttendCommand attendCommand3 = new AttendCommand(studentId2, tutorialClass1, date1);
-        AttendCommand attendCommand4 = new AttendCommand(studentId1, tutorialClass2, date1);
-        AttendCommand attendCommand5 = new AttendCommand(studentId1, tutorialClass1, date2);
+        AttendCommand attendCommand1 = new AttendCommand(studentId1, tutorialId1, date1);
+        AttendCommand attendCommand2 = new AttendCommand(studentId1, tutorialId1, date1);
+        AttendCommand attendCommand3 = new AttendCommand(studentId2, tutorialId1, date1);
+        AttendCommand attendCommand4 = new AttendCommand(studentId1, tutorialId2, date1);
+        AttendCommand attendCommand5 = new AttendCommand(studentId1, tutorialId1, date2);
 
         assertTrue(attendCommand1.equals(attendCommand1));
         assertTrue(attendCommand1.equals(attendCommand2));
@@ -114,16 +114,16 @@ public class AttendCommandTest {
     public void toString_test() throws Exception {
         // Arrange
         StudentId studentId = new StudentId("1001");
-        TutorialClass tutorialClass = TutorialClass.of("1001");
+        TutorialId tutorialId = TutorialId.of("1001");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         Date date = sdf.parse("2024/02/21");
 
-        AttendCommand attendCommand = new AttendCommand(studentId, tutorialClass, date);
+        AttendCommand attendCommand = new AttendCommand(studentId, tutorialId, date);
 
         // Act
         String expectedString = "Student: " + studentId + "\n"
                 + "Date: " + sdf.format(date) + "\n"
-                + "Tutorial ID: " + tutorialClass;
+                + "Tutorial ID: " + tutorialId;
 
         // Assert
         assertEquals(expectedString, attendCommand.toString());
@@ -181,7 +181,7 @@ public class AttendCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(TutorialClass tutorialClass) {
+        public boolean hasTutorial(TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -216,7 +216,7 @@ public class AttendCommandTest {
         }
 
         @Override
-        public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
+        public boolean setStudentAttendance(StudentId target, TutorialId tut, Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -236,7 +236,7 @@ public class AttendCommandTest {
         }
 
         @Override
-        public void assignStudent(Student student, TutorialClass tutorialClass) {
+        public void assignStudent(Student student, TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -288,11 +288,11 @@ public class AttendCommandTest {
         final ArrayList<AttendanceRecord> attendanceRecords = new ArrayList<>();
 
         @Override
-        public boolean setStudentAttendance(StudentId studentId, TutorialClass tutorialClass, Date date) {
+        public boolean setStudentAttendance(StudentId studentId, TutorialId tutorialId, Date date) {
             requireNonNull(studentId);
-            requireNonNull(tutorialClass);
+            requireNonNull(tutorialId);
             requireNonNull(date);
-            attendanceRecords.add(new AttendanceRecord(studentId, tutorialClass, date));
+            attendanceRecords.add(new AttendanceRecord(studentId, tutorialId, date));
             return true;
         }
     }
@@ -304,9 +304,9 @@ public class AttendCommandTest {
         private final List<Tutorial> tutorials = new ArrayList<>();
 
         @Override
-        public boolean setStudentAttendance(StudentId studentId, TutorialClass tutorialClass, Date date) {
+        public boolean setStudentAttendance(StudentId studentId, TutorialId tutorialId, Date date) {
             boolean isSuccess = tutorials.stream()
-                    .filter(s -> s.getTutorialClass().equals(tutorialClass))
+                    .filter(s -> s.getTutorialId().equals(tutorialId))
                     .findFirst()
                     .map(tutorial -> tutorial.setAttendance(date, studentId))
                     .orElse(false);
@@ -325,12 +325,12 @@ public class AttendCommandTest {
      */
     private class AttendanceRecord {
         private final StudentId studentId;
-        private final TutorialClass tutorialClass;
+        private final TutorialId tutorialId;
         private final Date date;
 
-        AttendanceRecord(StudentId studentId, TutorialClass tutorialClass, Date date) {
+        AttendanceRecord(StudentId studentId, TutorialId tutorialId, Date date) {
             this.studentId = studentId;
-            this.tutorialClass = tutorialClass;
+            this.tutorialId = tutorialId;
             this.date = date;
         }
 
@@ -344,7 +344,7 @@ public class AttendCommandTest {
             }
             AttendanceRecord otherRecord = (AttendanceRecord) other;
             return studentId.equals(otherRecord.studentId)
-                    && tutorialClass.equals(otherRecord.tutorialClass)
+                    && tutorialId.equals(otherRecord.tutorialId)
                     && date.equals(otherRecord.date);
         }
     }

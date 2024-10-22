@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package Storage as StoragePackage {
+
+    Class "<<interface>>\nStorage" as Storage
+
+    package "UserPrefs Storage" #F4F6F6 {
+        Class "<<interface>>\nUserPrefsStorage" as UserPrefsStorage
+        Class JsonUserPrefsStorage
+    }
+
+    package "AddressBook Storage" #F4F6F6 {
+        Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
+        Class JsonAddressBookStorage
+        Class JsonSerializableAddressBook
+        Class JsonAdaptedStudent
+    }
+
+    package "Assignment Storage" #F4F6F6 {
+        Class "<<interface>>\nAssignmentStorage" as AssignmentStorage
+        Class JsonAssignmentStorage
+        Class JsonSerializableAssignmentList
+        Class JsonAdaptedAssignment
+    }
+
+    package "Tutorial Storage" #F4F6F6 {
+        Class "<<interface>>\nTutorialStorage" as TutorialStorage
+        Class JsonTutorialStorage
+        Class JsonSerializableTutorialList
+        Class JsonAdaptedTutorial
+    }
+
+    Class StorageManager
+
+}
+
+Class HiddenOutside #FFFFFF
+HiddenOutside ..> Storage
+
+StorageManager .up.|> Storage
+Storage -left-|> UserPrefsStorage
+Storage -left-|> AddressBookStorage
+Storage -right-|> AssignmentStorage
+Storage -right-|> TutorialStorage
+
+StorageManager -down-> "1" UserPrefsStorage
+StorageManager -down-> "1" AddressBookStorage
+StorageManager -down-> "1" AssignmentStorage
+StorageManager -down-> "1" TutorialStorage
+
+JsonUserPrefsStorage .up.|> UserPrefsStorage
+JsonAddressBookStorage .up.|> AddressBookStorage
+JsonAssignmentStorage .up.|> AssignmentStorage
+JsonTutorialStorage .up.|> TutorialStorage
+
+JsonAddressBookStorage ..> JsonSerializableAddressBook
+JsonSerializableAddressBook --> "*" JsonAdaptedStudent
+
+JsonAssignmentStorage ..> JsonSerializableAssignmentList
+JsonSerializableAssignmentList --> "*" JsonAdaptedAssignment
+
+JsonTutorialStorage ..> JsonSerializableTutorialList
+JsonSerializableTutorialList --> "*" JsonAdaptedTutorial
+
+@enduml

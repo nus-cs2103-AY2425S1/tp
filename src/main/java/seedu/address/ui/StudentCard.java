@@ -35,7 +35,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label studentId;
     @FXML
-    private Label tutorialClass;
+    private Label tutorialId;
     @FXML
     private Label attendance;
 
@@ -48,7 +48,7 @@ public class StudentCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         studentId.setText(student.getStudentId().value);
-        tutorialClass.setText(student.getTutorialClass().toString());
+        tutorialId.setText(student.getTutorialId().toString());
         attendance.setText(student.getPresentDates().toString());
 
         // Listen for changes in the presentDates property

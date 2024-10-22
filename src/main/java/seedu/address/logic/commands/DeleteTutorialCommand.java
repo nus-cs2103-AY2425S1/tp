@@ -39,7 +39,7 @@ public class DeleteTutorialCommand extends Command {
 
         model.deleteTutorial(tutorial);
 
-        return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, tutorial.getTutorialClass()));
+        return new CommandResult(String.format(MESSAGE_DELETE_TUTORIAL_SUCCESS, tutorial.getTutorialId()));
     }
 
     @Override

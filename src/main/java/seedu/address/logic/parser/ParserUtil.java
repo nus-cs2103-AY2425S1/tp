@@ -14,7 +14,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.TutDate;
 import seedu.address.model.tut.TutName;
 import seedu.address.model.tut.Tutorial;
@@ -93,13 +93,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tutorialClass} is invalid.
      */
-    public static TutorialClass parseTutorialClass(String tutorialClass) throws ParseException {
-        requireNonNull(tutorialClass);
-        String trimmedTutorialClass = tutorialClass.trim();
-        if (!TutorialClass.isValidTutorialClass(trimmedTutorialClass)) {
-            throw new ParseException(TutorialClass.MESSAGE_CONSTRAINTS);
+    public static TutorialId parseTutorialId(String tutorialId) throws ParseException {
+        requireNonNull(tutorialId);
+        String trimmedTutorialId = tutorialId.trim();
+        if (!TutorialId.isValidTutorialClass(trimmedTutorialId)) {
+            throw new ParseException(TutorialId.MESSAGE_CONSTRAINTS);
         }
-        return TutorialClass.of(trimmedTutorialClass);
+        return TutorialId.of(trimmedTutorialId);
     }
 
     /**
@@ -109,11 +109,11 @@ public class ParserUtil {
      * @return an integer id of the tutorial.
      * @throws ParseException if the id is invalid.
      */
-    public static TutorialClass parseTutIndex(String id) throws ParseException {
+    public static TutorialId parseTutIndex(String id) throws ParseException {
         requireNonNull(id);
         String trimmedId = id.trim();
         checkArgument(checkUsingIsDigitMethod(trimmedId), Tutorial.MESSAGE_ID_CONSTRAINTS);
-        return TutorialClass.of(trimmedId);
+        return TutorialId.of(trimmedId);
     }
 
     static boolean checkUsingIsDigitMethod(String input) {

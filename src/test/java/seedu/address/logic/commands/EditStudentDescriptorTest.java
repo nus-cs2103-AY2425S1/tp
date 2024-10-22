@@ -49,7 +49,7 @@ public class EditStudentDescriptorTest {
                 + editStudentDescriptor.getPhone().orElse(null) + ", email="
                 + editStudentDescriptor.getEmail().orElse(null) + ", address="
                 + editStudentDescriptor.getEmail().orElse(null) + ", studentId="
-                + editStudentDescriptor.getEmail().orElse(null) + ", tutorialClass="
+                + editStudentDescriptor.getEmail().orElse(null) + ", tutorialId="
                 + editStudentDescriptor.getAddress().orElse(null) + ", tags="
                 + editStudentDescriptor.getTags().orElse(null) + ", attendance="
                 + editStudentDescriptor.getPresentDates().orElse(null) + "}";

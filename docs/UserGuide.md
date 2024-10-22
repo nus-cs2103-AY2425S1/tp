@@ -4,16 +4,128 @@ title: "User Guide"
 pageNav: 3
 ---
 
-# AB-3 User Guide
+# TrackMate User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+## Welcome to the TrackMate User Guide
 
-<!-- * Table of Contents -->
-<page-nav-print />
+Welcome to the **TrackMate User Guide** - your essential supplementary tools in your teaching journey as a SOC
+Teaching Assistant at National University of Singapore (NUS).
+
+In this comprehensive user guide, we will take you to experience a full journey with TrackMate step by step.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Table of Content
+
+[1. Introduction](#introduction)
+- [1.1 What is TrackMate-NUS](#what-is-trackmate)
+- [1.2 User Proficiency and Expectations](#user-proficiency-and-expectations)
+- [1.3 Why This Guide Matters](#why-this-guide-matters)
+
+[2. How to use this User Guide](#how-to-use-this-user-guide)
+- [2.1 Navigating the Document](#navigating-the-document)
+- [2.2 Sections](#sections)
+- [2.3 Icons](#icons)
+
+[3. Getting Started](#getting-started)
+- [3.1 Installation](#installation)
+- [3.2 Graphical User Interface Layout](#graphical-user-interface-layout)
+    - [3.2.1 User Interface Overview](#user-interface-overview)
+    - [3.2.2 Additional UI Components](#additional-ui-components)
+- [3.3 How to use TrackMate commands](#how-to-use-track-mate-nus-commands)
+    - [3.3.1 Parameter Prefixes](#parameter-prefixes)
+    - [3.3.2 Parameters](#parameters)
+    - [3.3.3 Command Format](#command-format)
+
+[4. Commands](#commands)
+- [4.1 Student Data Related Commands](#student-data-commands)
+    - [4.1.1 Adding a student: `add`](#adding-a-student-add)
+    - [4.1.2 Editing a student: `edit`](#editing-a-student-edit)
+    - [4.1.3 Deleting a student: `deleteStu`](#deleting-a-student-deleteStu)
+    - [4.1.4 Listing students: `listStu`](#listing-students-listStu)
+    - [4.1.5 Find Students by Name: `find`](#find-students-find)
+- [4.2 Tutorial Data Related Commands](#tutorial-data-commands)
+    - [4.2.1 Adding a tutorial: `addTut`](#adding-a-tutorial-addTut)
+    - [4.2.2 Deleting a tutorial: `deleteTut`](#deleting-a-tutorial-deleteTut)
+    - [4.2.3 Listing tutorials: `listTut`](#listing-tutorials-listTut)
+- [4.3 Assignment Data Related Commands](#assignment-data-commands)
+    - [4.3.1 Adding an assignment: `addAsg`](#adding-an-assigment-addAsg)
+    - [4.3.2 Deleting an assignment: `deleteTut`](#deleting-an-assignment-deleteAsg)
+    - [4.3.3 Listing assignments: `listAsg`](#listing-assignments-listAsg)
+    - [4.3.4 Marking an assignment: `markAsg`](#marking-an-assignment-markAsg)
+    - [4.3.5 Unmarking an assignment: `unmarkAsg`](#unmarking-an-assignment-unmarkAsg)
+    - [4.3.6 Checking an assignment: `checkAsg`](#checking-an-assignment-checkAsg)
+- [4.4 Attendance Data Related Commands](#attendance-data-commands)
+  - [4.4.1 Marking an attendance: `attend`](#adding-an-assigment-addAsg)
+  - [4.4.2 Unmarking an attendance: `TBC`](#deleting-an-assignment-deleteAsg)
+- [4.5 General Commands](#general-commands)
+    - [4.5.1 Viewing a Student on the Student Card](#viewing-a-student-on-the-student-card)
+    - [4.5.2 Clearing all entries: `clear`](#clearing-all-entries-clear)
+    - [4.5.3 Exiting the program: `exit`](#exiting-the-program-exit)
+    - [4.5.4 Viewing help: `help`](#viewing-help-help)
+- [4.6 Saving the Data](#saving-the-data)
+- [4.7 Editing the Data File](#editing-the-data-file)
+
+[5. FAQ](#faq)
+
+[6. Known issues](#known-issues)
+
+[7. Glossary](#glossary)
+
+[8. Command summary](#command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 1. Introduction
+<a id="introduction"></a>
+
+### 1.1 What is TrackMate
+<a id="what-is-trackmate"></a>
+
+TO BE DONE
+
+### 1.2 User Proficiency and Expectations
+<a id="user-proficiency-and-expectations"></a>
+
+TO BE DONE
+
+### 1.3 Why This Guide Matters
+<a id="why-this-guide-matters"></a>
+
+TO BE DONE
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 2. How to use this User Guide
+<a id="how-to-use-this-user-guide"></a>
+
+This section is designed to help users effectively navigate the User Guide for TrackMate. Below, you'll find 
+information on how to interpret icons, formatting, and instructions provided throughout the document.
+
+### 2.1 Navigating the Document:
+
+TO BE DONE
+
+### 2.2 Sections:
+<a id="sections"></a>
+
+Below is a detailed overview of the main sections within this User Guide and what can be expected from each section.
+
+TO BE DONE
+
+### 2.3 Icons:
+<a id="icons"></a>
+
+TO BE DONE
+
+--------------------------------------------------------------------------------------------------------------------
+## 3. Getting Started
+<a id="getting-started"></a>
+
+### 3.1 Installation
+<a id="installation"></a>
+
+TO BE CHANGED
 
 1. Ensure you have Java `17` or above installed on your Computer.
 
@@ -36,213 +148,261 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+### 3.2 Graphical User Interface Layout:
+<a id="graphical-user-interface-layout"></a>
 
-## Features
+#### 3.2.1 User Interface Overview:
+<a id="user-interface-overview"></a>
 
-<box type="info" seamless>
+TO BE DONE
+
+#### 3.2.2 Additional UI Components:
+<a id="additional-ui-components"></a>
+
+TO BE DONE
+
+### 3.3 How to use TrackMate commands:
+<a id="how-to-use-track-mate-commands"></a>
+
+TrackMate operates primarily through text-based commands. Before we explore the specific commands in detail in the 
+Commands section, let’s familiarize ourselves with the basic components and format of a command.
+
+#### 3.3.1 Parameter Prefixes:
+<a id="parameter-prefixes"></a>
+
+In TrackMate, a parameter prefix acts as a delimiter for specifying different types of parameters in commands. 
+Here's a reference table for common parameter prefixes and their corresponding parameters:
+
+TO BE DONE
+
+#### 3.3.2 Parameters:
+<a id="parameters"></a>
+
+In TrackMate, a parameter represents a placeholder where users input data. 
+Parameters typically follow immediately after their corresponding Parameter Prefixes. 
+Essentially they are to be supplied by the user.
+
+TO BE DONE
+
+#### 3.3.3 Command Format:
+<a id="command-format"></a>
+
+To understand how a full command is interpreted, we will utilise the following example.
+
+TO BE DONE
+
+**General Notes about TrackMate:**<br>
+
+TO BE DONE
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+TO BE DONE
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+**IMPORTANT !!!**<br>
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+TO BE DONE
 
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+--------------------------------------------------------------------------------------------------------------------
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+## 4. Commands
+<a id="commands"></a>
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-  </box>
+This section provides comprehensive guidance on how to use each command, detailing their functionalities and 
+usage scenarios. For specific constraints related to each parameter, please refer to the [Parameter](#parameters) 
+section for detailed information
 
-### Viewing help : `help`
+### 4.1 Student Data Commands:
+<a id="student-data-commands"></a>
 
-Shows a message explaining how to access the help page.
+#### 4.1.1 Adding a student: `add`
+<a id="adding-a-student-add"></a>
 
-![help message](images/helpMessage.png)
+> Adds a student to the TrackMate application.
 
-**Format:** `help`
+#### 4.1.2 Edit existing student detail: `edit`
+<a id="editing-a-student-edit"></a>
 
-### Adding a student: `add`
+> Edits an existing student details to the TrackMate application.
 
-Adds a student to the address book.
+#### 4.1.3 Delete a student: `deleteStu`
+<a id="deleting-a-student-deleteStu"></a>
 
-**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+> TO BE DONE
 
-<box type="tip" seamless>
+#### 4.1.4 Listing students: `listStu`
+<a id="listing-students-listStu"></a>
 
-**Tip:** A student can have any number of tags (including 0)
-</box>
+> TO BE DONE
 
-Examples:
+#### 4.1.5 Find Students by Name: `find`
+<a id="find-students-find"></a>
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+> TO BE DONE
 
-### Listing all students : `list`
+### 4.2 Tutorial Data Related Commands:
+<a id="tutorial-data-commands"></a>
 
-Shows a list of all students in the address book.
+#### 4.2.1 Adding a tutorial: `addTut`
+<a id="adding-a-tutorial-addTut"></a>
 
-**Format:** `list`
+> TO BE DONE
 
-### Editing a student : `edit`
+#### 4.2.2 Delete a tutorial: `deleteTut`
+<a id="deleting-a-tutorial-deleteTut"></a>
 
-Edits an existing student in the address book.
+> TO BE DONE
 
-**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+#### 4.2.3 List tutorials: `listTut`
+<a id="listing-tutorials-listTut"></a>
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​.
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the student will be removed (i.e. adding of tags is not cumulative).
-* You can remove all the student’s tags by typing `t/` without specifying any tags after it.
+> TO BE DONE
 
-Examples:
+### 4.3 Assignment Data Related Commands:
+<a id="assignment-data-commands"></a>
 
-* `edit 1 p/91234567 e/johndoe@example.com` : Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com`, respectively.
-* `edit 2 n/Betsy Crower t/` : Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
+#### 4.3.1 Adding an assignment: `addAsg`
+<a id="adding-an-assignment-add"></a>
 
-### Locating students by name: `find`
+> TO BE DONE
 
-Finds students whose names contain any of the given keywords.
+#### 4.3.2 Delete an assigment: `deleteAsg`
+<a id="deleting-an-assignment-deleteAsg"></a>
 
-**Format:** `find KEYWORD [MORE_KEYWORDS]`
+> TO BE DONE
 
-* The search is case-insensitive. e.g. `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
-* Only full words will be matched. e.g. `Han` will not match `Hans`.
-* Students matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+#### 4.3.3 List assignments: `listAsg`
+<a id="listing-assignments-listAsg"></a>
 
-Examples:
+> TO BE DONE
 
-* `find John` returns `john` and `John Doe`.
-* `find alex david` returns `Alex Yeoh`, `David Li`.  
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+#### 4.3.4 Mark an assignment: `markAsg`
+<a id="marking-an-assignment-markAsg"></a>
 
-### Deleting a student : `deleteStu`
+> TO BE DONE
 
-Deletes the specified student from the address book.
+#### 4.3.5 Unmark an assignment: `unmarkAsg`
+<a id="unmarking-an-assignment-unmarkAsg"></a>
 
-**Format:** `deleteStu INDEX`
+> TO BE DONE
 
-* Deletes the student at the specified `INDEX`.
-* The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …​.
+#### 4.3.6 Check an assignment: `checkAsg`
+<a id="checking-an-assignment-checkAsg"></a>
 
-Examples:
+> TO BE DONE
 
-* `list` followed by `delete 2` deletes the 2nd student in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+### 4.4 Attendance Data Related Commands:
+<a id="assignment-data-commands"></a>
 
-Easily configure tutorial sessions with simplified commands:
+#### 4.4.1 Marking an attendance: `attend`
+<a id="adding-an-attendance-add"></a>
 
-### Add Tutorial
+> TO BE DONE
 
-Add a new tutorial session with a specified name and ID.
+#### 4.4.2 Unmarking an attendance: `TBC`
+<a id="unmarking-an-attendance-add"></a>
 
-**Command format:** `addTut tn/TUTORIAL_NAME id/TUTORIAL_ID`  
-**Example:** `addTut tn/CS2103T id/1001`
+> TO BE DONE
 
-Maintain accurate records of student attendance across various tutorial classes:
+### 4.5 General Commands:
+<a id="general-commands"></a>
 
-### Record Attendance
+#### 4.5.1 Viewing a Student on the Student Card:
+<a id="viewing-a-student-on-the-student-card"></a>
 
-Record a student's attendance in a specific tutorial class, with an optional attendance date (defaults to today if not specified).
+> View a single student's details in a formatted and organized manner.
 
-**Command format:** `attend s/STUDENT_ID c/TUTORIAL_CLASS [d/ATTENDANCE_DATE]`
+**Method 1 -  Using GUI**: Left-click on a specific Student Panel Card within the Student List Panel of the TrackMate User Interface.
 
+**Method 2 -  Using CLI**: Navigate using the `UP` and `DOWN` arrow keys to switch between Student Panel Cards on the Student List Panel.
 
-Streamline the handling of assignments from creation to tracking:
+#### 4.5.2 Clearing all entries: `clear`
+<a id="clearing-all-entries-clear"></a>
 
-### Add Assignment
+> Clears all entries from the EduLink-NUS application.
 
-Create a new assignment with a defined name, due date, and time.
+Format: `clear`
 
-**Command format:** `addAsg n/ASSIGNMENT_NAME d/DUEDATETIME`
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
 
-### List All Current Assignments
+#### 4.5.3 Exiting the program: `exit`
+<a id="exiting-the-program-exit"></a>
 
-Display a list of all assignments.
+> Exits the TrackMate application.
 
-**Command format:** `listAsg`
+Format: `exit`
 
-### Mark and Unmark Assignments
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
 
-Toggle the completion status of an assignment.
+#### 4.5.4 Viewing help: `help`
+<a id="viewing-help-help"></a>
 
-**Command to mark as completed:** `markAsg <index> n/ASSIGNMENT_NAME`
+> Shows a message explaining how to access the help page.
 
-**Command to unmark as completed:** `unmarkAsg <index> n/ASSIGNMENT_NAME`
+Format: `help`
 
-### Check Assignment Completion Statuses
+Command Details & Constraints:
+* The command does not require any additional parameters; entered parameters will be disregarded.
+* The help message image provided offers clear instructions for users seeking assistance.
 
-Verify the completion status of specific assignments across all students.
 
-**Command format:** `checkAsg n/ASSIGNMENT_NAME`
+### 4.6 Saving the data
+<a id="saving-the-data"></a>
 
-### Delete Assignment
+TO BE DONE
 
-Remove an assignment from the system using its title name.
-
-**Command format:** `deleteAsg [title name]`
-
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-**Format:** `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-**Format:** `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
+### 4.7 Editing the data file
+<a id="editing-the-data-file"></a>
 
 AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
-
-**Caution:**  
-If your changes to the data file make its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+<b>Caution:</b>
+If your changes to the data file makes its format invalid, the TrackMate application will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the TrackMate to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+TO BE CHANGED
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 5. FAQ
+<a id="faq"></a>
 
-**Q**: How do I transfer my data to another computer?  
-**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
---------------------------------------------------------------------------------------------------------------------
-
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous EduLink-NUS home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 6 Known issues
+<a id="known-issues"></a>
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **`NAME` Parameter**, if you try to enter a name that contains `/` the application will show error message about invalid format for `NAME` but someone can have `/` in their legal name e.g `Prabhat S/O Radhe`, this limitation arises due to usage of `/` character for Internal use within the Application. The remedy is to use `|` i.e. pipe character in place of `/`. We Understand that this format doesn't comply with their Legal Names but Since Our Application identifies students based on their StudentID , this remedy doesn't limit the Capabilities of EduLink-NUS in any possible way.
+3. **Student List Panel doesn't move**, if you click `UP` or `DOWN` arrow key to view Student Details Card for students even though the details card are shown correctly and changes perfectly according to the input , the Student List Panel doesn't scroll down or up to align or match with the current Student Displayed in the Details Card. The remedy is to scroll down manually to the highlighted Student Card in the Panel to know which student which being currently displayed.
+
+--------------------------------------------------------------------------------------------------------------------
+## 7. Glossary
+<a id="glossary"></a>
+
+| Term                      | Definition and or Explanation                                                                                                                                                                                             |
+|---------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **CSV**                   | **Comma-Seperated Values** , a file format generally used to import data in Spreadsheets and Do analysis                                                                                                                  |
+| **JSON**                  | **JavaScript Object Notation**, a standard file format for data interchange                                                                                                                                               |
+| **NUS**                   | National University of Singapore , A University Located in Central Singapore                                                                                                                                              |
+| **Student ID**            | A particular format of ID followed in NUS, Starting with a Alphabet followed by 7 digits and ending with an Alphabet e.g A0252195L                                                                                        |
+| **GUI**                   | Graphical User Interface , all the part of the application which you can interact with your mouse                                                                                                                         |
+| **CLI**                   | Command Line Interface , part of application which can only be used with commands from the Keyboard                                                                                                                       |
+
+
+TO BE DONE
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 8. Command summary
+<a id="command-summary"></a>
 
 | Action            | Format, Examples                                                                                                                                                       |
 |-------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|

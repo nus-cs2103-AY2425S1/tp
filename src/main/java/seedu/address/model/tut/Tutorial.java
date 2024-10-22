@@ -9,7 +9,7 @@ import java.util.List;
 
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tut.exceptions.NoTutorialException;
 import seedu.address.model.tut.exceptions.TutDateNotFoundException;
@@ -23,7 +23,7 @@ public abstract class Tutorial {
             + " characters and spaces, "
             + "and it should not be blank.";
 
-    public static final String MESSAGE_ID_CONSTRAINTS = TutorialClass.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_ID_CONSTRAINTS = TutorialId.MESSAGE_CONSTRAINTS;
 
     /**
      * Adds a student to the tutorial.
@@ -107,7 +107,7 @@ public abstract class Tutorial {
      * @return The tutorial class.
      * @throws NoTutorialException if called on a None instance.
      */
-    public abstract TutorialClass getTutorialClass();
+    public abstract TutorialId getTutorialId();
 
     /**
      * Marks attendance for a specific student on a given tutorial date.
@@ -134,8 +134,8 @@ public abstract class Tutorial {
      */
     public abstract void deleteStudent(Student student);
 
-    private static Tutorial exist(TutName tutName, TutorialClass tutorialClass) {
-        return new Exist(tutName, tutorialClass);
+    private static Tutorial exist(TutName tutName, TutorialId tutorialId) {
+        return new Exist(tutName, tutorialId);
     }
 
     /**
@@ -151,16 +151,16 @@ public abstract class Tutorial {
      * Creates an instance of an existing tutorial.
      *
      * @param tutName The name of the tutorial.
-     * @param tutorialClass The class of the tutorial.
+     * @param tutorialId The class of the tutorial.
      * @return A new tutorial object.
      */
-    public static Tutorial of(TutName tutName, TutorialClass tutorialClass) {
+    public static Tutorial of(TutName tutName, TutorialId tutorialId) {
         requireNonNull(tutName);
-        requireNonNull(tutorialClass);
-        if (tutorialClass.equals(TutorialClass.none())) {
+        requireNonNull(tutorialId);
+        if (tutorialId.equals(TutorialId.none())) {
             return Tutorial.none();
         }
-        return Tutorial.exist(tutName, tutorialClass);
+        return Tutorial.exist(tutName, tutorialId);
     }
 
     /**
@@ -170,7 +170,7 @@ public abstract class Tutorial {
         private static final None none = new None();
 
         private final List<Student> students = new ArrayList<>();
-        private final TutorialClass tutorialClass = TutorialClass.none();
+        private final TutorialId tutorialId = TutorialId.none();
 
         public static None none() {
             return none;
@@ -226,8 +226,8 @@ public abstract class Tutorial {
         }
 
         @Override
-        public TutorialClass getTutorialClass() {
-            return tutorialClass;
+        public TutorialId getTutorialId() {
+            return tutorialId;
         }
 
         @Override
@@ -255,13 +255,13 @@ public abstract class Tutorial {
      */
     private static final class Exist extends Tutorial {
         private final TutName tutName;
-        private final TutorialClass tutorialClass;
+        private final TutorialId tutorialId;
         private final List<Student> students = new ArrayList<>();
         private final HashMap<Date, TutDate> tutDates = new HashMap<>();
 
-        public Exist(TutName tutName, TutorialClass tutorialClass) {
+        public Exist(TutName tutName, TutorialId tutorialId) {
             this.tutName = tutName;
-            this.tutorialClass = tutorialClass;
+            this.tutorialId = tutorialId;
         }
 
         @Override
@@ -324,8 +324,8 @@ public abstract class Tutorial {
         }
 
         @Override
-        public TutorialClass getTutorialClass() {
-            return tutorialClass;
+        public TutorialId getTutorialId() {
+            return tutorialId;
         }
 
         @Override
@@ -362,21 +362,21 @@ public abstract class Tutorial {
             if (other instanceof Exist) {
                 Exist exist = (Exist) other;
 
-                if (this.tutorialClass == exist.tutorialClass) {
+                if (this.tutorialId == exist.tutorialId) {
                     return true;
                 }
 
-                if (this.tutorialClass == null || exist.tutorialClass == null) {
+                if (this.tutorialId == null || exist.tutorialId == null) {
                     return false;
                 }
-                return tutorialClass.equals(exist.tutorialClass);
+                return tutorialId.equals(exist.tutorialId);
             }
 
             return false;
         }
         @Override
         public String toString() {
-            return tutName + ": Tutorial " + tutorialClass;
+            return tutName + ": Tutorial " + tutorialId;
         }
     }
 }

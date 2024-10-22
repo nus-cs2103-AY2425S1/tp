@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
+import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TutUtil.TUT_NAME;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class JsonTutorialStorageTest {
         JsonTutorialStorage jsonTutorialStorage = new JsonTutorialStorage(filePath);
 
         // Step 1: Create a tutorial sample
-        Tutorial tutorialSample = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_CLASS);
+        Tutorial tutorialSample = Tutorial.of(new TutName(TUT_NAME), TUTORIAL_ID);
         ArrayList<Tutorial> tutorials = new ArrayList<>();
         tutorials.add(tutorialSample);
         TutorialList originalTutorials = new TutorialList(tutorials);

@@ -20,7 +20,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
@@ -151,15 +151,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasTutorial(TutorialClass tutorialClass) {
-        requireNonNull(tutorialClass);
-        return tutorials.hasTutorial(tutorialClass);
+    public boolean hasTutorial(TutorialId tutorialId) {
+        requireNonNull(tutorialId);
+        return tutorials.hasTutorial(tutorialId);
     }
 
     @Override
-    public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
+    public boolean setStudentAttendance(StudentId target, TutorialId tut, Date date) {
         return tutorials.getTutorials().stream()
-                .filter(s -> s.getTutorialClass().equals(tut))
+                .filter(s -> s.getTutorialId().equals(tut))
                 .findFirst()
                 .map(tutorial -> tutorial.setAttendance(date, target))
                 .orElse(false);
@@ -175,7 +175,7 @@ public class ModelManager implements Model {
                         .forEach(s -> {
                             EditCommand.EditStudentDescriptor editStudentDescriptor =
                                     new EditCommand.EditStudentDescriptor();
-                            editStudentDescriptor.setTutorialClass(TutorialClass.none());
+                            editStudentDescriptor.setTutorialId(TutorialId.none());
                             Student editedStudent = createEditedStudent(s, editStudentDescriptor);
                             addressBook.setStudent(s, editedStudent);
                         }));
@@ -188,21 +188,21 @@ public class ModelManager implements Model {
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
-        TutorialClass updatedTutorialClass = editStudentDescriptor.getTutorialClass()
-                .orElse(studentToEdit.getTutorialClass());
+        TutorialId updatedTutorialClass = editStudentDescriptor.getTutorialId()
+                .orElse(studentToEdit.getTutorialId());
         PresentDates updatedDates = editStudentDescriptor.getPresentDates().orElse(studentToEdit.getPresentDates());
 
         return new Student(updatedName, updatedStudentId, updatedTutorialClass, updatedDates);
     }
 
     @Override
-    public void assignStudent(Student student, TutorialClass tutorialClass) {
+    public void assignStudent(Student student, TutorialId tutorialId) {
         requireNonNull(student);
-        requireNonNull(tutorialClass);
-        if (!tutorials.hasTutorial(tutorialClass)) {
+        requireNonNull(tutorialId);
+        if (!tutorials.hasTutorial(tutorialId)) {
             throw new TutNoFoundException();
         }
-        tutorials.assignStudent(student, tutorialClass);
+        tutorials.assignStudent(student, tutorialId);
     }
 
     //=========== Assignment ================================================================================

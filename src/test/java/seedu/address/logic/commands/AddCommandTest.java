@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
+import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 
 import java.nio.file.Path;
@@ -30,7 +30,7 @@ import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.StudentBuilder;
@@ -47,7 +47,7 @@ public class AddCommandTest {
         ModelStubAcceptingStudentAdded modelStub = new ModelStubAcceptingStudentAdded();
         Student validStudent = new StudentBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validStudent, TUTORIAL_CLASS).execute(modelStub);
+        CommandResult commandResult = new AddCommand(validStudent, TUTORIAL_ID).execute(modelStub);
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validStudent), modelStub.studentsAdded);
@@ -56,7 +56,7 @@ public class AddCommandTest {
     @Test
     public void execute_duplicateStudent_throwsCommandException() {
         Student validStudent = new StudentBuilder().build();
-        AddCommand addCommand = new AddCommand(validStudent, TUTORIAL_CLASS);
+        AddCommand addCommand = new AddCommand(validStudent, TUTORIAL_ID);
         ModelStub modelStub = new ModelStubWithStudent(validStudent);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_STUDENT, () -> addCommand.execute(modelStub));
@@ -66,7 +66,7 @@ public class AddCommandTest {
     public void execute_duplicateStudentId_throwsCommandException() {
         // Setup model with existing student having the same ID
         Student existingStudent = new StudentBuilder().withStudentId("1001").build();
-        AddCommand addCommand = new AddCommand(existingStudent, TUTORIAL_CLASS);
+        AddCommand addCommand = new AddCommand(existingStudent, TUTORIAL_ID);
 
         Student newStudent = new StudentBuilder().withName("Different name").withStudentId("1001").build();
         ModelStub modelStub = new ModelStubWithStudent(newStudent);
@@ -78,14 +78,14 @@ public class AddCommandTest {
 
     @Test
     public void execute_invalidTutorial_throwsCommandException() {
-        TutorialClass tutorialClass = TutorialClass.of("10000");
+        TutorialId tutorialId = TutorialId.of("10000");
         Student validStudent = new Student(new Name("ABC"), new StudentId("1999"),
-                TutorialClass.of("100"), null);
-        AddCommand addCommand = new AddCommand(validStudent, tutorialClass);
+                TutorialId.of("100"), null);
+        AddCommand addCommand = new AddCommand(validStudent, tutorialId);
         ModelStub modelStub = new ModelStubWithStudent(ALICE);
 
         assertThrows(CommandException.class,
-                AddCommand.MESSAGE_TUTORIAL_NOT_FOUND + tutorialClass, () -> addCommand.execute(modelStub));
+                AddCommand.MESSAGE_TUTORIAL_NOT_FOUND + tutorialId, () -> addCommand.execute(modelStub));
     }
 
 
@@ -93,14 +93,14 @@ public class AddCommandTest {
     public void equals() {
         Student alice = new StudentBuilder().withName("Alice").build();
         Student bob = new StudentBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice, TUTORIAL_CLASS);
-        AddCommand addBobCommand = new AddCommand(bob, TUTORIAL_CLASS);
+        AddCommand addAliceCommand = new AddCommand(alice, TUTORIAL_ID);
+        AddCommand addBobCommand = new AddCommand(bob, TUTORIAL_ID);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice, TUTORIAL_CLASS);
+        AddCommand addAliceCommandCopy = new AddCommand(alice, TUTORIAL_ID);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
@@ -115,7 +115,7 @@ public class AddCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddCommand addCommand = new AddCommand(ALICE, TUTORIAL_CLASS);
+        AddCommand addCommand = new AddCommand(ALICE, TUTORIAL_ID);
         String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
         assertEquals(expected, addCommand.toString());
     }
@@ -185,7 +185,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
+        public boolean setStudentAttendance(StudentId target, TutorialId tut, Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -226,7 +226,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(TutorialClass tutorialClass) {
+        public boolean hasTutorial(TutorialId tutorialClass) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -265,7 +265,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void assignStudent(Student student, TutorialClass tutorialClass) {
+        public void assignStudent(Student student, TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
 
         }
@@ -296,7 +296,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(TutorialClass tutorialClass) {
+        public boolean hasTutorial(TutorialId tutorialClass) {
             requireNonNull(tutorialClass);
             return false;
         }
@@ -328,13 +328,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void assignStudent(Student student, TutorialClass tutorialClass) {
+        public void assignStudent(Student student, TutorialId tutorialClass) {
             requireNonNull(student);
             requireNonNull(tutorialClass);
         }
 
         @Override
-        public boolean hasTutorial(TutorialClass tutorialClass) {
+        public boolean hasTutorial(TutorialId tutorialClass) {
             requireNonNull(tutorialClass);
             return true;
         }
