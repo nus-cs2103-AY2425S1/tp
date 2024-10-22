@@ -8,7 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CONSULT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
-import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -197,9 +196,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_export() throws Exception {
-        String filePath = "data/export.csv";
+        String fileName = "export";
         ExportCommand command = (ExportCommand) parser.parseCommand(
-                ExportCommand.COMMAND_WORD + " " + filePath);
-        assertEquals(new ExportCommand(Paths.get(filePath)), command);
+                ExportCommand.COMMAND_WORD + " " + fileName);
+        assertEquals(new ExportCommand(fileName, false), command);
     }
 }
