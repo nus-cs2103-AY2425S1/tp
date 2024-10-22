@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.Messages;
 import seedu.address.model.person.Transaction;
 
 /**
@@ -50,6 +51,6 @@ public class TransactionCard extends UiPart<Region> {
             amount.setText("Amount: $" + transaction.getAmount());
         }
         otherParty.setText("Other Party: " + transaction.getOtherParty());
-        date.setText("Date: " + transaction.getDate());
+        date.setText("Date: " + transaction.getDate().format(Messages.DEFAULT_DATE_FORMATTER));
     }
 }
