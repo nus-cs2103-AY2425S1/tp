@@ -21,7 +21,8 @@ public class SortIndividualCommand extends Command {
     public static final String COMMAND_WORD = "sorti";
     private static String order;
     private static String field;
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of properties based on input field.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the list of properties for each Person "
+            + "in the AddressBook based on input field.\n"
             + "Parameters: "
             + "INDEX (Must be a positive integer) "
             + PREFIX_FIELD + "[FIELD] "
