@@ -32,9 +32,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_DATEOFLASTVISIT);
 
-        if (!argMultimap.isOfSizeOne()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
+//        if (!argMultimap.isOfSizeOne()) {
+//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+//        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             return new SortCommand(PersonComparator.NAME,

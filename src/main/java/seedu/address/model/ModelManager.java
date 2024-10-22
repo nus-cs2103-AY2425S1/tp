@@ -150,9 +150,9 @@ public class ModelManager implements Model {
     @Override
     public void sortFilteredPersonList(String Parameter, boolean isAscending) throws CommandException {
         if (isAscending) {
-            filteredPersons.sort(new PersonComparator().getComparator(Parameter));
+            addressBook.sort(new PersonComparator().getComparator(Parameter));
         } else {
-            filteredPersons.sort(new PersonComparator().getComparator(Parameter).reversed());
+            addressBook.sort(new PersonComparator().getComparator(Parameter).reversed());
         }
     }
 
