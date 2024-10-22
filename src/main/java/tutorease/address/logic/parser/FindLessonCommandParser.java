@@ -20,6 +20,10 @@ public class FindLessonCommandParser implements Parser<FindLessonCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindLessonCommand parse(String args) throws ParseException {
+        if (args == null) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLessonCommand.MESSAGE_USAGE));
+        }
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
