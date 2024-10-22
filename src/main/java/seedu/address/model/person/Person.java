@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.ApptSorter;
 import seedu.address.model.healthservice.HealthService;
 
 /**
@@ -152,12 +153,23 @@ public class Person {
         return address;
     }
 
+    /**
+     * Adds an appointment to the person's list of appointments.
+     * The appointments will be sorted by date and time.
+     * @param appt
+     */
     public void addAppt(Appt appt) {
         appts.add(appt);
+        ApptSorter.sortAppointments(appts);
     }
 
+    /**
+     * Returns an immutable list of appointments.
+     * This list will not contain any duplicate appointments.
+     * @return List of appointments.
+     */
     public List<Appt> getAppts() {
-        return appts;
+        return Collections.unmodifiableList(appts);
     }
 
     /**
