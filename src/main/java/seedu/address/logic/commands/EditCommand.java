@@ -53,9 +53,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DATE_OF_BIRTH + "DATE_OF_BIRTH] "
-            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "[" + PREFIX_INCOME + "INCOME] "
+            + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -300,10 +300,10 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("priority", priority)
-                    .add("remark", remark)
                     .add("dateOfBirth", dateOfBirth)
+                    .add("priority", priority)
                     .add("income", income)
+                    .add("remark", remark)
                     .add("tags", tags)
                     .toString();
         }
