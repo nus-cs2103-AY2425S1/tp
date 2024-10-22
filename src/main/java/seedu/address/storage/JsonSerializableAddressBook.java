@@ -25,11 +25,11 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(@JsonProperty("events") List<JsonAdaptedEvent> events,
                                        @JsonProperty("persons") List<JsonAdaptedPerson> persons) {
         if (events != null) {
-            this.events.addAll(events); 
+            this.events.addAll(events);
         }
-        
+
         if (persons != null) {
-            this.persons.addAll(persons); 
+            this.persons.addAll(persons);
         }
     }
 
