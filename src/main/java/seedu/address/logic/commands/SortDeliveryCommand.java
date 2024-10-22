@@ -35,6 +35,7 @@ public class SortDeliveryCommand extends SortCommand {
         return new CommandResult(
                 String.format(Messages.MESSAGE_DELIVERY_SORTED_OVERVIEW,
                         model.getSortedDeliveryList().size(),
+                        comparator.toSortByString(),
                         comparator.toSortOrderString()));
     }
 

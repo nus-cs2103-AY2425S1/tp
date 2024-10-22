@@ -15,9 +15,9 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
         float delivery1Cost = Float.parseFloat(delivery1.getDeliveryCost().value);
         float delivery2Cost = Float.parseFloat(delivery2.getDeliveryCost().value);
         if (super.getIsSortByAscending()) {
-            return Float.compare(delivery2Cost, delivery1Cost);
-        } else {
             return Float.compare(delivery1Cost, delivery2Cost);
+        } else {
+            return Float.compare(delivery2Cost, delivery1Cost);
         }
     }
 
@@ -33,5 +33,10 @@ public class DeliverySortCostComparator extends DeliverySortComparator {
         }
 
         return super.equals(other);
+    }
+
+    @Override
+    public String toSortByString() {
+        return "cost";
     }
 }

@@ -73,7 +73,16 @@ public class DeliverySortBy {
 
     @Override
     public String toString() {
-        return sortBy.toString();
+        switch (sortBy) {
+        case C:
+            return "cost";
+        case D:
+            return "date time";
+        case S:
+            return "status";
+        default:
+            return "ERROR";
+        }
     }
 
     @Override

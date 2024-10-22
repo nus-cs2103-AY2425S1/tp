@@ -36,4 +36,9 @@ public class DeliverySortDateTimeComparator extends DeliverySortComparator {
 
         return super.equals(other);
     }
+
+    @Override
+    public String toSortByString() {
+        return "date time";
+    }
 }

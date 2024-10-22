@@ -65,4 +65,9 @@ public class DeliverySortStatusComparator extends DeliverySortComparator {
 
         return super.equals(other);
     }
+
+    @Override
+    public String toSortByString() {
+        return "status, followed by date time";
+    }
 }

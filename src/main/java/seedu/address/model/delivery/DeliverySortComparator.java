@@ -10,6 +10,7 @@ import seedu.address.logic.parser.SortOrder;
  */
 public abstract class DeliverySortComparator implements Comparator<Delivery> {
     private final SortOrder sortOrder;
+    public abstract String toSortByString();
 
     public DeliverySortComparator(SortOrder sortOrder) {
         this.sortOrder = sortOrder;
@@ -26,7 +27,6 @@ public abstract class DeliverySortComparator implements Comparator<Delivery> {
     public String toSortOrderString() {
         return this.sortOrder.toString();
     }
-
 
     @Override
     public String toString() {
