@@ -25,6 +25,7 @@ public class FindTaskCommand extends Command {
     private final Index targetIndex;
 
     public FindTaskCommand(Index targetIndex) {
+        assert targetIndex != null : "Target index cannot be null";
         this.targetIndex = targetIndex;
     }
 
