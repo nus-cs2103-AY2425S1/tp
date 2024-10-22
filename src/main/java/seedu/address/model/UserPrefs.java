@@ -58,14 +58,27 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    /**
+     * Sets the theme preference for the user.
+     *
+     * @param theme The theme to be set (e.g., "light" or "dark").
+     * @return The updated UserPrefs object with the new theme preference.
+     */
     public UserPrefs setTheme(String theme) {
         this.theme = theme;
         return this;
     }
 
+    /**
+     * Retrieves the current theme preference of the user.
+     * If the theme is not set (null), it defaults to "dark".
+     *
+     * @return The current theme preference as a String ("light" or "dark").
+     *         Defaults to "dark" if no theme has been set.
+     */
     @Override
     public String getTheme() {
-        return theme == null ? "dark" : theme;  // Default to "dark" if null
+        return theme == null ? "dark" : theme;
     }
 
     @Override

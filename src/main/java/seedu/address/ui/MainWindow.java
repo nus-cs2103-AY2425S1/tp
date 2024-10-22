@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -28,8 +27,10 @@ import seedu.address.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static final String DARK_THEME = "/view/DarkTheme.css";
-    private static final String LIGHT_THEME = "/view/LightTheme.css";
+    private static final String DARK_THEME = "dark";
+    private static final String LIGHT_THEME = "light";
+    private static final String DARK_THEME_PATH = "/view/DarkTheme.css";
+    private static final String LIGHT_THEME_PATH = "/view/LightTheme.css";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -71,13 +72,11 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Initialize scene
-        this.scene = primaryStage.getScene(); // Ensure scene is initialized
+        this.scene = primaryStage.getScene();
 
-        // Load user preferences to determine the initial theme
         ReadOnlyUserPrefs userPrefs = logic.getUserPrefs();
-        this.theme = userPrefs.getTheme();  // Load saved theme from user preferences
-
-        applyTheme();  // Apply the initial theme
+        this.theme = userPrefs.getTheme(); // Load saved theme from user preferences
+        applyTheme();
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -155,13 +154,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-//    public void postInit() {
-//        // Load user preferences to determine the initial theme
-//        ReadOnlyUserPrefs userPrefs = logic.getUserPrefs();
-//        String theme = userPrefs.getTheme();
-//        applyTheme(theme);
-//    }
-
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -194,45 +186,58 @@ public class MainWindow extends UiPart<Stage> {
         return clientListPanel;
     }
 
+    /**
+     * Applies the appropriate theme (light or dark) to the scene based on the current theme setting.
+     *
+     * If the theme is "light", the LIGHT_THEME stylesheet is applied.
+     * Otherwise, the DARK_THEME stylesheet is applied.
+     */
     public void applyTheme() {
-        scene.getStylesheets().clear();  // Clear any previously applied styles
-        if ("light".equalsIgnoreCase(theme)) {
-            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME).toExternalForm());
+        scene.getStylesheets().clear(); // Clear any previously applied styles
+
+        if (theme.equalsIgnoreCase(LIGHT_THEME)) {
+            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME_PATH).toExternalForm());
         } else {
-            scene.getStylesheets().add(getClass().getResource(DARK_THEME).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(DARK_THEME_PATH).toExternalForm());
         }
     }
 
+    /**
+     * Handles switching the theme from dark to light mode.
+     * If the theme is already set to light mode, it simply notifies the user without any changes.
+     */
     @FXML
     private void handleLightTheme() {
-        if (theme.equals("dark")) {
-            scene.getStylesheets().remove(getClass().getResource(DARK_THEME).toExternalForm());
-            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME).toExternalForm());
-            theme = "light"; // Set to light theme
+        if (theme.equals(DARK_THEME)) {
+            scene.getStylesheets().remove(getClass().getResource(DARK_THEME_PATH).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(LIGHT_THEME_PATH).toExternalForm());
+            theme = LIGHT_THEME;
 
             // Get user prefs, set the theme, and update
-            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs(); // Cast to UserPrefs
-            logic.setUserPrefs(updatedPrefs.setTheme("light")); // Update user prefs
+            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs();
+            logic.setUserPrefs(updatedPrefs.setTheme(LIGHT_THEME));
 
-            // Notify the user about the theme change
             resultDisplay.setFeedbackToUser("Theme changed to " + theme + " mode.");
         } else {
             resultDisplay.setFeedbackToUser("Theme is already set to " + theme + " mode.");
         }
     }
 
+    /**
+     * Handles switching the theme from light to dark mode.
+     * If the theme is already set to dark, it simply notifies the user without any changes.
+     */
     @FXML
     private void handleDarkTheme() {
-        if (theme.equals("light")) {
-            scene.getStylesheets().remove(getClass().getResource(LIGHT_THEME).toExternalForm());
-            scene.getStylesheets().add(getClass().getResource(DARK_THEME).toExternalForm());
-            theme = "dark"; // Set to dark theme
+        if (theme.equals(LIGHT_THEME)) {
+            scene.getStylesheets().remove(getClass().getResource(LIGHT_THEME_PATH).toExternalForm());
+            scene.getStylesheets().add(getClass().getResource(DARK_THEME_PATH).toExternalForm());
+            theme = DARK_THEME;
 
             // Get user prefs, set the theme, and update
-            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs(); // Cast to UserPrefs
-            logic.setUserPrefs(updatedPrefs.setTheme("dark")); // Update user prefs
+            UserPrefs updatedPrefs = (UserPrefs) logic.getUserPrefs();
+            logic.setUserPrefs(updatedPrefs.setTheme(DARK_THEME));
 
-            // Notify the user about the theme change
             resultDisplay.setFeedbackToUser("Theme changed to " + theme + " mode.");
         } else {
             resultDisplay.setFeedbackToUser("Theme is already set to " + theme + " mode.");
