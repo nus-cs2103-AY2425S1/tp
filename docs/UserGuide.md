@@ -72,11 +72,15 @@ Medicontact is a **desktop app for managing contacts, optimized for use via a  L
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows you a help window with useful resources which includes:
+- A URL to the User Guide displayed at the top. You can copy the URL directly to your clipboard by clicking the “Copy URL” button.
+- A command summary table below the URL, displaying available commands, their formats, and examples.
+- You can copy the command format or example from the table and paste it into the command box.
+- You can click on the table headers to sort commands in ascending or descending order.
 
 Format: `help`
+
+![helpwindow.png](images%2Fhelpwindow.png)
 
 
 ### Adding a person: `add`
@@ -263,5 +267,5 @@ Action     | Format, Examples
 **Delete** | `delete INDEX` or `delete NAME` <br> e.g., `delete 3`, `delete Alex Yeoh`
 **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
-**List**   | `list`
 **Help**   | `help`
+**List**   | `list`
