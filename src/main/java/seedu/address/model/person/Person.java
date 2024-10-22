@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -94,6 +95,23 @@ public class Person {
     }
 
     /**
+     * Returns an immutable group set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Group> getGroups() {
+        return Collections.unmodifiableSet(groups);
+    }
+
+    /**
+     * Adds a group to the group field of the person.
+     * @param group
+     */
+    public void addGroups(Group group) {
+        requireNonNull(group);
+        groups.add(group);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -112,13 +130,14 @@ public class Person {
         return name.equals(otherPerson.name)
                 && studentClass.equals(otherPerson.studentClass)
                 && phone.equals(otherPerson.phone)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && groups.equals(otherPerson.groups);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentClass, phone, tags);
+        return Objects.hash(name, studentClass, phone, tags, groups);
     }
 
     @Override
@@ -128,6 +147,7 @@ public class Person {
                 .add("studentClass", studentClass)
                 .add("phone", phone)
                 .add("tags", tags)
+                .add("groups", groups)
                 .toString();
     }
 
