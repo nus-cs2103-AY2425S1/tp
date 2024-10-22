@@ -38,6 +38,8 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label date;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -51,5 +53,6 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         tags.getChildren().add(new Label(person.getTag().tagName));
+        date.setText(person.getDate().value);
     }
 }
