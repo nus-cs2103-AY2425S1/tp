@@ -275,6 +275,28 @@ StaffSync is a **desktop app for managing potential hires and employees, optimiz
 </details>
 
 <br>
+<details>
+  <summary>&nbsp&nbsp<strong style="font-size:1.25em;">Sorting the list: <code>sort</code></strong></summary>
+
+>Sorts the list in ascending order by the given parameter.
+>
+>Format: `sort name` or `sort date`
+>
+>* Sorts the list by either the name of the contact or the contract end date.
+>* `name` will sort the list based on the names of the contacts in alphabetical order.
+>* Note that `name` will only sort the ***visible*** contents of the list.
+>* Contacts that have been filtered will not show up when `sort name` is called.
+>* `date` will sort the list based on the contract end dates of the employees in ascending order.
+>* Note that `date` will filter out potential hires from the list as they do not have a contract end date.
+>* `date` will show all employees and not just potential hires.
+>
+>Examples:
+>* `sort name` sorts all contacts by name.
+>* `sort date` shows all employees and sorts by contract end date.
+>
+</details>
+
+<br>
 <br>
 <br>
 
@@ -293,7 +315,7 @@ Action     | Format                                                             
 **List**   | `list all` <br> `list e` <br> `list ph`                                                       |
 **Potential Hire**| `potential n/NAME p/PHONE_NUMBER a/ADDRESS e/EMAIL d/DEPARTMENT r/ROLE​`                      | `potential n/Jun Kang p/81234567 a/21 Lower Kent Ridge Rd e/pohjunkang@gmail.com d/Department of communications and informatics r/Head of communications and Informatics`
 **Promote** | `promote INDEX CONTRACT_END_DATE`                                                             | `promote 2 2025-12-20`
-
+**Sort**   | `sort name` <br> `sort date`                                                                   |
 --------------------------------------------------------------------------------------------------------------------
 
 <br>
