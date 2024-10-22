@@ -136,6 +136,7 @@ public class HelpWindow extends UiPart<Stage> {
                                            + "e.g., note John Doe m/10mg Ibuprofen")
         );
 
+
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));
         formatColumn.setCellValueFactory(new PropertyValueFactory<>("format"));
 
