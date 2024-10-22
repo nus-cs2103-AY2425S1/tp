@@ -60,7 +60,7 @@ public class EditTaskCommandTest {
     @Test
     public void execute_invalidTaskIndex_throwsCommandException() {
         EditTaskCommand command = new EditTaskCommand(new GroupName(TEAM_FIVE), INVALID_INDEX_TASK, editTaskDescriptor);
-        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX, ()->command.execute(model));
+        assertThrows(CommandException.class, Messages.MESSAGE_INVALID_DISPLAYED_INDEX, ()->command.execute(model));
     }
 
     @Test

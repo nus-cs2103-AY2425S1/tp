@@ -76,7 +76,7 @@ public class EditTaskCommand extends Command {
         List<Task> lastShownList = group.getTasks().stream().toList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DISPLAYED_INDEX);
         }
 
         Task taskToEdit = lastShownList.get(index.getZeroBased());
