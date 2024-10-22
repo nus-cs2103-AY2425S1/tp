@@ -34,6 +34,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GitHubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ViewCommand;
@@ -44,6 +45,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.NonFunctionalBrowser;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
@@ -139,5 +141,14 @@ public class AddressBookParserTest {
     public void parseCommand_view() throws Exception {
         ViewCommand command = (ViewCommand) parser.parseCommand(ViewCommand.COMMAND_WORD + " n/Amy");
         assertEquals(command, new ViewCommand(new Name("Amy")));
+    }
+
+    @Test
+    public void parseCommand_githubCommand() throws ParseException {
+        NonFunctionalBrowser nonFunctionalBrowser = NonFunctionalBrowser.getDesktop();
+        String arguments = NAME_DESC_AMY;
+        GitHubCommand command = (GitHubCommand) parser.parseCommand(GitHubCommand.COMMAND_WORD + arguments);
+        Name validName = new Name(VALID_NAME_AMY);
+        assertEquals(command, new GitHubCommand(validName, nonFunctionalBrowser));
     }
 }
