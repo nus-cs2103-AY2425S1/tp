@@ -41,9 +41,11 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final String STATISTICS_COMMAND = "statistics\n";
 
+    private static final String SCHEME_COMMAND = "scheme INDEX\n";
+
     private static final String HELP_COMMAND = "help [COMMANDS]\n";
     private static final String[] COMMANDS = {ADD_COMMAND, CLEAR_COMMAND, DELETE_COMMAND, EDIT_COMMAND,
-        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, HELP_COMMAND, EXIT_COMMAND};
+        FIND_COMMAND, GET_COMMAND, LIST_COMMAND, STATISTICS_COMMAND, SCHEME_COMMAND, HELP_COMMAND, EXIT_COMMAND};
 
     @FXML
     private Button copyButton;
