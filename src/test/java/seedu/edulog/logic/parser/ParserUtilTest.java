@@ -13,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.edulog.commons.util.NumericUtil;
 import seedu.edulog.logic.parser.exceptions.ParseException;
 import seedu.edulog.model.student.Address;
 import seedu.edulog.model.student.Email;
@@ -43,12 +44,12 @@ public class ParserUtilTest {
 
     @Test
     public void testIsNumericValid() {
-        assertEquals(ParserUtil.isNumeric(VALID_NUMBER), true);
+        assertEquals(NumericUtil.isNumeric(VALID_NUMBER), true);
     }
 
     @Test
     public void testIsNumericInValid() {
-        assertEquals(ParserUtil.isNumeric(INVALID_NUMBER), false);
+        assertEquals(NumericUtil.isNumeric(INVALID_NUMBER), false);
     }
 
     @Test

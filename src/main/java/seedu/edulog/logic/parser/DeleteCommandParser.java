@@ -3,6 +3,7 @@ package seedu.edulog.logic.parser;
 import static seedu.edulog.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.edulog.commons.core.index.Index;
+import seedu.edulog.commons.util.NumericUtil;
 import seedu.edulog.logic.commands.DeleteCommand;
 import seedu.edulog.logic.commands.DeleteIndexCommand;
 import seedu.edulog.logic.commands.DeleteNameCommand;
@@ -21,7 +22,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         try {
-            if (ParserUtil.isNumeric(args)) {
+            if (NumericUtil.isNumeric(args)) {
                 Index index = ParserUtil.parseIndex(args);
                 return new DeleteIndexCommand(index);
             } else {
