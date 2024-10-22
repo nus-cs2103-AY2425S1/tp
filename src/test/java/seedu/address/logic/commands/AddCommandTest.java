@@ -42,6 +42,7 @@ public class AddCommandTest {
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(validPerson, modelStub.personDisplayed);
     }
 
     @Test
@@ -157,6 +158,16 @@ public class AddCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setPersonToDisplay(Person personToDisplay) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getPersonToDisplay() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -182,6 +193,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        private Person personDisplayed;
 
         @Override
         public boolean hasPerson(Person person) {
@@ -193,6 +205,7 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+            personDisplayed = person;
         }
 
         @Override
