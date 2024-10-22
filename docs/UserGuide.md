@@ -51,13 +51,13 @@ the constraints of each parameter when used in a command.
 
 |Parameter | Definition | Constraints | Examples |
 |-|-|-|
-|`NAME` | Name of the patient | - Only alphanumeric characters are allowed.<br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of`| :white_check_mark:`John Doe`<br>:x:`$ally`|
-|`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
-|`DOB` | Date of birth (DOB) of the patient. | - Must be in the format `YYYY-MM-DD`. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
+|`NAME` | Name of the patient | - Only alphanumeric characters are allowed.<br> - Should not be blank. <br> - Special characters are not allowed as `/` is used as a command delimiter. In the case where `s/o` should be used in a name, a simple workaround would be to use alternatives such as `s o` or `son of`| :white_check_mark:`John Doe`<br>:x:`$ally`|
+|`NRIC` | Singapore National Registration Identity Card (NRIC) number of the patient. It is unique for all patients. | - Case-insensitive. <br> - Should not be blank. <br> - Should start with a letter (S, F, G or M), followed by 7 digits, and end with a letter. | :white_check_mark:`S1234567A` <br> :white_check_mark:`t1234567b` <br> :x: `1234567A` |
+|`DOB` | Date of birth (DOB) of the patient. | - Should be in the format `YYYY-MM-DD`. <br> - Should not be blank. <br> - Cannot be a date in the future. | :white_check_mark:`2002-12-12` <br> :x:`2002/11/32` |
 |`GENDER` | Gender of the patient. | - Case-insensitive. <br> - Should only be either `M` (Male) or `F` (Female). | :white_check_mark:`m`<br>:white_check_mark:`F`<br>:x:`Male` |
-|`EMAIL` | Email address of the patient. | Must be in the format `local-part@domain`. | :white_check_mark:`techraj@gmail.com`<br>:x:`techraj@gmail` |
-|`ADDRESS` | Address of the patient. | Both alphanumeric and special characters are allowed. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
-|`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
+|`EMAIL` | Email address of the patient. | - Should be in the format `local-part@domain`. <br> - Should not be blank. | :white_check_mark:`techraj@gmail.com`<br>:x:`techraj@gmail` |
+|`ADDRESS` | Address of the patient. | - Any value is allowed. <br> - Should not be blank. | :white_check_mark:`Orchard Road, Block 124, #02-01` |
+|`PHONE_NUMBER` | Phone number of the patient. | - Should only contain numbers.<br> - Should be at least 3 digits long <br> - Should not be blank. <br> - Spaces and symbols are not allowed. | :white_check_mark:`98765432`<br>:x:`+65 9876 5432` |
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -66,15 +66,19 @@ the constraints of each parameter when used in a command.
 >
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 > e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
+
 > * Items in square brackets are optional.
 >  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
 >
 > * Items with `…` after them can be used multiple times.
 >  e.g. `c/CONDITION…` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
 >
-> * Parameters can be in any order.
+> * Parameters that have a prefix can be in any order.
 > e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 >
+> * Parameters that have no prefix must follow the specified order in the command format.
+> e.g. if the command specifies `NRIC n/NAME p/PHONE_NUMBER`, `NRIC` must take precedence over `n/NAME` and `p/PHONE_NUMBER`.
+> 
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.
 > e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
@@ -94,10 +98,10 @@ Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 {: .alert .alert-info}
 > :information_source: **Note:**
 > 
-> * All fields are compulsory.
-> * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case. 
-> * The new patient will be added to the end of the patient list in the GUI.
-> * Refer to the [Parameter Details](#Parameter-Details) section for more information on the constraints of each parameter.
+> * All fields are compulsory and must be non-empty.
+> * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case.
+> * The new patient will be added to the end of the Patient List Panel.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints of each parameter.
 
 Examples:
 * `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
@@ -106,44 +110,64 @@ Examples:
 {: .alert .alert-success}
 > :bulb: **Tip:**
 > 
-> Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
+> * Remember that `NRIC` and `GENDER` are case-insensitive!
+> E.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
+> * Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Editing a person : `edit`
+#### Deleting a patient : `delete`
 
-Edits an existing person in the address book.
+Deletes the specified patient and their details from MediBase3.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `delete NRIC`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> * Deletes the patient with the specified `NRIC` in MediBase3.
+> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. E.g. `S1234567A` and not `S123`.
+> * You can delete a patient even if they are not being currently displayed in the Patient List Panel.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Example:
+* `delete S1234567A` will delete the patient with the NRIC `S1234567A`.
+
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+> 
+> * Once a patient is deleted from MediBase3, you will be **unable to recover their information**.
+> Please ensure that you have provided the correct `NRIC` of the patient that you want to delete.
+> * Deleting a patient will also remove all their associated appointments from the Appointment List Panel.
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Editing a patient : `edit`
+
+Edits an existing patient details in MediBase3.
+
+Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> * Edits the patient with the specified `NRIC` in MediBase3.
+> * **At least one** of the optional fields must be provided. E.g. `edit S1234567A` is invalid.
+> * Existing values will be updated to the given input values.
+> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for each parameter.
+
+Example:
+*  `edit S1234567A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the patient with the NRIC`S1234567A`
+to `91234567` and `johndoe@example.com` respectively.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> Editing the patient's `NAME` or `NRIC` will also update their associated appointments in the Appointment List Panel to reflect the new change.
 
 [Back to Table of Contents](#table-of-contents)
 
-#### Deleting a person : `delete`
-
-Deletes the specified person from the address book.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-
-[Back to Table of Contents](#table-of-contents)
 
 ### Managing Appointments
 [To be filled up]
@@ -316,15 +340,19 @@ MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/
 
 ## Command summary
 
-| Action        | Format                                                                | Examples                                                                                                       |
-|---------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **Clear**     | `clear`                                                               |                                                                                                                |
-| **Delete**    | `delete INDEX`                                                        | `delete 3`                                                                                                     |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` | `edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| **Exit**      | `exit`
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
-| **FindNric**  | `findNric NRIC`| `findNric S1234567A`
-| **FindMedCon** | `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`
-| **List**      | `list`                                                                |                                                                                                                |
-| **Help**      | `help`                                                                |                                                                                                                |
+
+| Action     | Format                                                                | Examples                                                                                                       |
+|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
+| **Clear**  | `clear`                                                               | -                                                                                                              |
+| **Delete** | `delete NRIC`                                                         | `delete S1234567A`                                                                                             |
+| **Edit**   | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` | `edit S1234567A p/91234567 e/johndoe@example.com`                                                              |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
+| **FindNric**| `findNric NRIC`| `findNric S1234567A`                                                                                           |                                                                                                                                              |
+| **FindMedCon**| `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`                                                                                |                                                                                                           |
+| **List**   | `list`                                                                | -                                                                                                              |
+| **Help**   | `help`                                                                | -                                                                                                              |
+
+
+
+
