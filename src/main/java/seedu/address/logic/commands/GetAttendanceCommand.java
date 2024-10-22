@@ -16,7 +16,7 @@ import seedu.address.model.student.Student;
  * Retrieves the attendance of a student for a specific date.
  */
 public class GetAttendanceCommand extends Command {
-    public static final String COMMAND_WORD = "geta";
+    public static final String COMMAND_WORD = "getat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Retrieves the attendance of a student for a specific date.\n"
