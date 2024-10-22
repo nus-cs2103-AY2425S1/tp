@@ -133,7 +133,7 @@ public class ArchiveCommand extends Command {
     private static Delivery createArchivedDelivery(Delivery toArchive) {
         assert toArchive != null;
 
-        ItemName itemName = toArchive.getItemName();
+        Set<ItemName> items = toArchive.getItems();
         DeliveryId deliveryId = toArchive.getDeliveryId();
         Address address = toArchive.getAddress();
         Cost cost = toArchive.getCost();
@@ -144,7 +144,7 @@ public class ArchiveCommand extends Command {
 
         Archive updatedArchive = new Archive(true);
 
-        return new Delivery(deliveryId, itemName, address, cost, date, time, eta, status, updatedArchive);
+        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, updatedArchive);
     }
 
     /**

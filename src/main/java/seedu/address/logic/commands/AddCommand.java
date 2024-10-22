@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ETA;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEMS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -48,13 +49,14 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE_DELIVERY = COMMAND_WORD + ": Adds a delivery to the inspected person. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_ITEMS + "ITEM... "
             + PREFIX_ETA + "ETA "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COST + "COST "
             + PREFIX_STATUS + "STATUS\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Monitor "
+            + PREFIX_ITEMS + "Monitor "
+            + PREFIX_ITEMS + "Mouse "
             + PREFIX_ETA + "2020-02-02 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25, S120300 "
             + PREFIX_COST + "$100 "
