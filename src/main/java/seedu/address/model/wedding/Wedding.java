@@ -10,7 +10,7 @@ import seedu.address.model.person.PersonId;
  */
 public class Wedding {
     private final WeddingName name;
-    private final String date;
+    private final WeddingDate date;
     private final List<PersonId> assignees; //Stores a list of UserIDs
 
     /**
@@ -18,7 +18,7 @@ public class Wedding {
      * @param name
      * @param date
      */
-    public Wedding(WeddingName name, String date) {
+    public Wedding(WeddingName name, WeddingDate date) {
         this.name = name;
         this.date = date;
         this.assignees = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Wedding {
      * @param date
      * @param assignees
      */
-    public Wedding(WeddingName name, String date, List<PersonId> assignees) {
+    public Wedding(WeddingName name, WeddingDate date, List<PersonId> assignees) {
         this.name = name;
         this.date = date;
         this.assignees = assignees;
@@ -40,7 +40,7 @@ public class Wedding {
         return this.name;
     }
 
-    public String getWeddingDate() {
+    public WeddingDate getWeddingDate() {
         return this.date;
     }
 

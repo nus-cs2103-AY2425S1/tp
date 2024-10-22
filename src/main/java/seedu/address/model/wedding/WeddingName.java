@@ -4,6 +4,9 @@ package seedu.address.model.wedding;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Class for WeddingName
+ */
 public class WeddingName {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -24,14 +27,14 @@ public class WeddingName {
      */
     public WeddingName(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidWeddingName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidWeddingName(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

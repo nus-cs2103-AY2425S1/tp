@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.logic.parser.ParserUtil.parseWeddingDate;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.PersonId;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingDate;
 import seedu.address.model.wedding.WeddingName;
 
 /**
@@ -21,7 +24,8 @@ public class JsonAdaptedWedding {
     public static final String DATE_FIELD = "Date";
 
     private final String name;
-    private final String date;
+    private final String dateString;
+
     private final List<JsonAdaptedPersonId> assignees = new ArrayList<>();
 
     /**
@@ -29,10 +33,10 @@ public class JsonAdaptedWedding {
      */
     @JsonCreator
     public JsonAdaptedWedding(@JsonProperty("name") String name,
-                              @JsonProperty("date") String date,
+                              @JsonProperty("dateString") String date,
                               @JsonProperty("assignees") List<JsonAdaptedPersonId> assignees) {
         this.name = name;
-        this.date = date;
+        this.dateString = date;
         if (assignees != null) {
             this.assignees.addAll(assignees);
         }
@@ -43,7 +47,8 @@ public class JsonAdaptedWedding {
      */
     public JsonAdaptedWedding(Wedding source) {
         name = source.getWeddingName().fullName;
-        date = source.getWeddingDate();
+        dateString = source.getWeddingDate().fullDate.toString();
+
         assignees.addAll(source.getAssignees().stream()
                 .map(JsonAdaptedPersonId::new)
                 .collect(Collectors.toList()));
@@ -61,10 +66,10 @@ public class JsonAdaptedWedding {
         }
         final WeddingName modelName = new WeddingName(name);
 
-        if (date == null) {
+        if (dateString == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, DATE_FIELD));
         }
-        final String modelDate = date;
+        final WeddingDate modelDate = parseWeddingDate(dateString);
 
         final List<PersonId> modelAssignees = new ArrayList<>();
         for (JsonAdaptedPersonId assignee : assignees) {
