@@ -91,6 +91,7 @@ public class CountCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        assert other != null : "Object must not be null";
         if (other == this) {
             return true;
         }
