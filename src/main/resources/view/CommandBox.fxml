@@ -2,8 +2,13 @@
 
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ContextMenu?>
 
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here..."/>
+  <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="Enter command here...">
+    <contextMenu>
+      <ContextMenu fx:id="autoComplete" maxWidth="340" />
+    </contextMenu>
+  </TextField>
 </StackPane>
 
