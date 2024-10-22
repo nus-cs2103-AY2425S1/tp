@@ -65,4 +65,28 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true if {@code s} represents a non-zero unsigned integer which is not integer overflow
+     * e.g. 1, 2, 3, ..., up to 2147483647{@code Integer.MAX_VALUE} <br>
+     * Will return false for any other non-null string input
+     * e.g. empty string, "-1", "0", "+1", and " 2 " (untrimmed), "3 0" (contains whitespace), "1 a" (contains letters)
+     * @throws NullPointerException if {@code s} is null.
+     */
+    public static boolean isNotIntegerOverflow(String trimmedIndex) {
+        requireNonNull(trimmedIndex);
+
+        if (trimmedIndex.startsWith("-") || trimmedIndex.startsWith("+")) {
+            return true;
+        }
+        if (trimmedIndex.length() > 10) {
+            return false;
+        }
+        if (trimmedIndex.length() == 10) {
+            // lexicographically checks if index is less than max integer
+            return trimmedIndex.compareTo(String.valueOf(Integer.MAX_VALUE)) <= 0;
+        }
+        // checks for valid integer value if length is less than 10, which is checked by isNonZeroUnsignedInteger
+        return true;
+    }
 }

@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.group.Group;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Group}.
  */
-class JsonAdaptedTag {
+class JsonAdaptedGroup {
 
-    private final String tagName;
+    private final String groupName;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+    public JsonAdaptedGroup(String groupName) {
+        this.groupName = groupName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public JsonAdaptedGroup(Group source) {
+        groupName = source.groupName;
     }
 
     @JsonValue
-    public String getTagName() {
-        return tagName;
+    public String getGroupName() {
+        return groupName;
     }
 
     /**
@@ -38,11 +38,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Group toModelType() throws IllegalValueException {
+        if (!Group.isValidTagName(groupName)) {
+            throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Group(groupName);
     }
 
 }
