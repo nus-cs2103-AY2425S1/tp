@@ -20,12 +20,6 @@ public class FindConcertCommandParser implements Parser<FindConcertCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindConcertCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindConcertCommand.MESSAGE_USAGE));
-        }
-
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
