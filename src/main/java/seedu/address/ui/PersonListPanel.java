@@ -20,23 +20,19 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Person> personListView;
 
-    private final PersonCard.PersonSelectionHandler personSelectionHandler;
-
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList<Person>}
      * and a {@code PersonSelectionHandler} for handling user selections of a person.
-     *
-     * @param personList The {@code ObservableList<Person>} that contains the list of persons to be displayed.
-     * @param personSelectionHandler The {@code PersonSelectionHandler}
-     *                               to handle selection events when a person is clicked.
      */
-    public PersonListPanel(ObservableList<Person> personList,
-                           PersonCard.PersonSelectionHandler personSelectionHandler) {
+    public PersonListPanel(ObservableList<Person> personList, PersonDetailView personDetailView) {
         super(FXML);
-        this.personSelectionHandler = personSelectionHandler;
-
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
+        personListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                personDetailView.update(newValue);
+            }
+        });
     }
 
     /**
@@ -51,7 +47,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                PersonCard personCard = new PersonCard(person, getIndex() + 1, personSelectionHandler);
+                PersonCard personCard = new PersonCard(person, getIndex() + 1);
                 setGraphic(personCard.getRoot());
             }
         }
