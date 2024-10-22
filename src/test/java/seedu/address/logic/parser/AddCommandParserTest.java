@@ -185,7 +185,6 @@ public class AddCommandParserTest {
         // invalid class
         assertParseFailure(parser, validExpectedPersonString + INVALID_STUDENT_CLASS_DESC,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_STUDENT_CLASS));
-
     }
 
     @Test
