@@ -3,7 +3,12 @@ layout: page
 title: Documentation guide
 ---
 
-**Setting up and maintaining the project website:**
+## Table of Contents
+
+* Table of Contents
+{:toc}
+
+## Setting up and maintaining the project website
 
 * We use [**Jekyll**](https://jekyllrb.com/) to manage documentation.
 * The `docs/` folder is used for documentation.
@@ -14,16 +19,21 @@ title: Documentation guide
 * If you are using Intellij for editing documentation files, you can consider enabling 'soft wrapping' for `*.md` files, as explained in [_[se-edu/guides] **Intellij IDEA: Useful settings**_](https://se-education.org/guides/tutorials/intellijUsefulSettings.html#enabling-soft-wrapping)
 
 
-**Style guidance:**
+[Back to Table of Contents](#table-of-contents)
+## Style guidance
 
 * Follow the [**_Google developer documentation style guide_**](https://developers.google.com/style).
 
 * Also relevant is the [_[se-edu/guides] **Markdown coding standard**_](https://se-education.org/guides/conventions/markdown.html)
 
-**Diagrams:**
+[Back to Table of Contents](#table-of-contents)
+## Diagrams:
 
 * See the [_[se-edu/guides] **Using PlantUML**_](https://se-education.org/guides/tutorials/plantUml.html)
 
-**Converting a document to the PDF format:**
+[Back to Table of Contents](#table-of-contents)
+## Converting a document to the PDF format
 
 * See the guide [_[se-edu/guides] **Saving web documents as PDF files**_](https://se-education.org/guides/tutorials/savingPdf.html)
+  
+[Back to Table of Contents](#table-of-contents)
