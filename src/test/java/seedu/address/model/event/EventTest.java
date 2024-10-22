@@ -1,9 +1,6 @@
 package seedu.address.model.event;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -59,6 +56,7 @@ public class EventTest {
         assertFalse(event1.hashCode() == event2.hashCode());
     }
 
+    @Test
     public void isValidEvent_eventWithOnlySpaces_returnsFalse() {
         assertFalse(Event.isValidEvent("   "));
     }
@@ -72,5 +70,4 @@ public class EventTest {
     public void constructor_invalidEvent_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new Event(""));
     }
-
 }
