@@ -6,7 +6,6 @@ import seedu.hireme.commons.util.ToStringBuilder;
 import seedu.hireme.logic.Messages;
 import seedu.hireme.model.Model;
 import seedu.hireme.model.internshipapplication.InternshipApplication;
-import seedu.hireme.model.internshipapplication.NameContainsKeywordsPredicate;
 import seedu.hireme.model.internshipapplication.StatusPredicate;
 
 /**

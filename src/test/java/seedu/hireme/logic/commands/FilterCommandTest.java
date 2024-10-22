@@ -1,16 +1,5 @@
 package seedu.hireme.logic.commands;
 
-import seedu.hireme.model.Model;
-import seedu.hireme.model.ModelManager;
-import seedu.hireme.model.UserPrefs;
-import seedu.hireme.model.internshipapplication.InternshipApplication;
-import seedu.hireme.model.internshipapplication.StatusPredicate;
-
-import java.util.Arrays;
-import java.util.Collections;
-
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,9 +11,20 @@ import static seedu.hireme.testutil.TypicalInternshipApplications.CITIBANK;
 import static seedu.hireme.testutil.TypicalInternshipApplications.DELL;
 import static seedu.hireme.testutil.TypicalInternshipApplications.EY;
 import static seedu.hireme.testutil.TypicalInternshipApplications.FIGMA;
-import static seedu.hireme.testutil.TypicalInternshipApplications.GOOGLE;
 import static seedu.hireme.testutil.TypicalInternshipApplications.YAHOO;
 import static seedu.hireme.testutil.TypicalInternshipApplications.getTypicalAddressBook;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.hireme.model.Model;
+import seedu.hireme.model.ModelManager;
+import seedu.hireme.model.UserPrefs;
+import seedu.hireme.model.internshipapplication.InternshipApplication;
+import seedu.hireme.model.internshipapplication.StatusPredicate;
+
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterCommand}.
