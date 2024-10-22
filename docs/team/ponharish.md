@@ -13,7 +13,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to find a patient or caregiver based on the given NRIC [\#71](https://github.com/AY2425S1-CS2103T-T13-4/tp/issues/71)
   * What it does: allows the user to find 1 or more person by using their NRIC.
-  * Justification: This feature enables the doctor to quickly retrieve the records of a patient using their NRIC. 
+  * Justification: This feature enables the doctor to quickly retrieve the records of a patient using their NRIC.
   * Highlights: This is an enhancement to the already existing find feature which finds person based on their names. This addition features quicker retrieval by using a person's unique NRIC.
 
 * **Enhancements to existing features**:
@@ -29,7 +29,7 @@ Given below are my contributions to the project.
   * What it does: Provides a comprehensive list of details for the person being found
   * Justification: This feature enables the doctor to view all details of a patient or caregiver
   * Highlights: This is an enhancement to the existing list which provides brief details on all persons.
-  
+
 * **Community**:
   * PRs reviewed (with non-trivial review comments): [\#130](https://github.com/AY2425S1-CS2103T-T13-4/tp/pull/130)
 <!--
