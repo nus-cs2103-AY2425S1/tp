@@ -26,23 +26,26 @@ public class JsonAdaptedRemarkList {
     }
 
     /**
-     * Constructs a {@code JsonAdaptedRemarkList} with the given {@code remarkList}.
+     * Constructs a {@code JsonAdaptedRemarkList} from the model's {@code RemarkList}.
      */
     public JsonAdaptedRemarkList(RemarkList remarkList) {
         this.remarks = remarkList.getRemarks().stream()
-                .map(Remark::toString)
+                .map(Remark::getRemark)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted remark list object into the model's {@code RemarkList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted remark list.
      */
     public RemarkList toModelType() throws IllegalValueException {
         List<Remark> modelRemarks = new ArrayList<>();
-        for (String remarkStr : remarks) {
-            modelRemarks.add(new Remark(remarkStr));
+        for (String remark : remarks) {
+            if (remark == null || remark.trim().isEmpty()) {
+                throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
+            }
+            modelRemarks.add(new Remark(remark));
         }
         return new RemarkList(modelRemarks);
     }

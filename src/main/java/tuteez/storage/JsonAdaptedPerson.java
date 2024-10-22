@@ -17,6 +17,7 @@ import tuteez.model.person.Person;
 import tuteez.model.person.Phone;
 import tuteez.model.person.TelegramUsername;
 import tuteez.model.person.lesson.Lesson;
+import tuteez.model.remark.RemarkList;
 import tuteez.model.tag.Tag;
 
 /**
@@ -83,49 +84,59 @@ class JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
-        }
-        final List<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
-        }
 
+        final Name modelName = getModelName(name);
+
+        final Phone modelPhone = getModelPhone(phone);
+
+        final Email modelEmail = getModelEmail(email);
+
+        final Address modelAddress = getModelAddress(address);
+
+        TelegramUsername modelTelegramUsername = getModelTelegramUsername(telegramUsername);
+
+        final RemarkList modelRemarkList = getModelRemarkList(remarkList);
+
+        final Set<Tag> modelTags = getModelTags(tags);
+
+        final Set<Lesson> modelLessons = getModelLessons(lessons);
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTelegramUsername, modelTags,
+                modelLessons, modelRemarkList);
+    }
+
+    private Name getModelName(String name) throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        return new Name(name);
+    }
 
+    private Phone getModelPhone(String phone) throws IllegalValueException {
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        return new Phone(phone);
+    }
 
+    private Email getModelEmail(String email) throws IllegalValueException {
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        return new Email(email);
+    }
 
+    private Address getModelAddress(String address) throws IllegalValueException {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
-
-        TelegramUsername modelTelegramUsername = getModelTelegramUsername(telegramUsername);
-
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
-        final Set<Lesson> modelLessons = new HashSet<>(personLessons);
-
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTelegramUsername, modelTags,
-                modelLessons);
+        return new Address(address);
     }
 
     private TelegramUsername getModelTelegramUsername(String username) throws IllegalValueException {
@@ -136,6 +147,29 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(TelegramUsername.MESSAGE_CONSTRAINTS);
         }
         return TelegramUsername.of(username);
+    }
+
+    private Set<Tag> getModelTags(List<JsonAdaptedTag> tags) throws IllegalValueException {
+        final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
+        return new HashSet<>(personTags);
+    }
+
+    private Set<Lesson> getModelLessons(List<JsonAdaptedLesson> lessons) throws IllegalValueException {
+        final List<Lesson> personLessons = new ArrayList<>();
+        for (JsonAdaptedLesson lesson : lessons) {
+            personLessons.add(lesson.toModelType());
+        }
+        return new HashSet<>(personLessons);
+    }
+
+    private RemarkList getModelRemarkList(JsonAdaptedRemarkList remarkList) throws IllegalValueException {
+        if (remarkList == null) {
+            return new RemarkList();
+        }
+        return remarkList.toModelType();
     }
 
 }

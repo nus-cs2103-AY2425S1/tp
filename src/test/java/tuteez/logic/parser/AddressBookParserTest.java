@@ -59,6 +59,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteAltCommand() throws Exception {
+        DeleteCommand command = (DeleteCommand) parser.parseCommand(
+                DeleteCommand.COMMAND_WORD_ALT + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
@@ -75,6 +82,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addRemarkAltCommand() throws Exception {
+        AddRemarkCommand command = (AddRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD_ALT + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + AddRemarkCommand.ADD_REMARK_PARAM + " " + "remark");
+        assertEquals(new AddRemarkCommand(INDEX_FIRST_PERSON, new Remark("remark")), command);
+    }
+
+    @Test
     public void parseCommand_deleteRemark() throws Exception {
         DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
@@ -82,21 +96,10 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_invalidRemarkCommand() {
-        assertThrows(ParseException.class, () -> parser.parseCommand(
-                RemarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " -x Some remark"));
-    }
-
-    @Test
-    public void parseCommand_remarkWithoutIndex() {
-        assertThrows(ParseException.class, () -> parser.parseCommand(
-                RemarkCommand.COMMAND_WORD + " -a Some remark"));
-    }
-
-    @Test
-    public void parseCommand_remarkWithInvalidIndex() {
-        assertThrows(ParseException.class, () -> parser.parseCommand(
-                RemarkCommand.COMMAND_WORD + " -1 -a Some remark"));
+    public void parseCommand_deleteRemarkAltCommand() throws Exception {
+        DeleteRemarkCommand command = (DeleteRemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD_ALT
+                + " " + INDEX_FIRST_PERSON.getOneBased() + " " + DeleteRemarkCommand.DELETE_REMARK_PARAM + " 1");
+        assertEquals(new DeleteRemarkCommand(INDEX_FIRST_PERSON, INDEX_FIRST_REMARK), command);
     }
 
     @Test

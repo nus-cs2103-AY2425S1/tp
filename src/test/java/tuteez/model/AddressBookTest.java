@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import tuteez.model.person.Person;
 import tuteez.model.person.exceptions.DuplicatePersonException;
+import tuteez.model.person.lesson.LessonManager;
 import tuteez.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -94,6 +95,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final LessonManager lessonManager = new LessonManager();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -102,6 +104,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public LessonManager getLessonManager() {
+            return lessonManager;
         }
     }
 

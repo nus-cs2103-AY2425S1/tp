@@ -33,6 +33,10 @@ public class Remark {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
     @Override
     public String toString() {
         return remark;

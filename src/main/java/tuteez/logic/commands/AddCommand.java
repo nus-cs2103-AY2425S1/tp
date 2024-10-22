@@ -71,18 +71,13 @@ public class AddCommand extends Command {
 
         Set<Lesson> lessonSet = toAdd.getLessons();
         for (Lesson lesson: lessonSet) {
-            if (checkForClashingLesson(lesson)) {
+            if (model.isClashingWithExistingLesson(lesson)) {
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
         }
 
-        Lesson.addAllLesson(lessonSet);
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
-    }
-
-    public boolean checkForClashingLesson(Lesson lesson) {
-        return Lesson.isDuplicateLesson(lesson);
     }
 
     @Override

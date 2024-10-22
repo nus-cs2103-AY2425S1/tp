@@ -26,6 +26,7 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_TELEGRAM = "33user$";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_LESSON = "someday 0900-1000";
+    private static final JsonAdaptedRemarkList INVALID_REMARKLIST = new JsonAdaptedRemarkList(List.of("", "remark1"));
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -125,6 +126,13 @@ public class JsonAdaptedPersonTest {
                 INVALID_TELEGRAM, VALID_TAGS, VALID_LESSONS, VALID_REMARKLIST);
         String expectedMessage = TelegramUsername.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidRemarkList_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_TELEGRAM, VALID_TAGS, VALID_LESSONS, INVALID_REMARKLIST);
+        assertThrows(IllegalValueException.class, person::toModelType);
     }
 
 }

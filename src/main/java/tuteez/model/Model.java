@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import tuteez.commons.core.GuiSettings;
 import tuteez.model.person.Name;
 import tuteez.model.person.Person;
+import tuteez.model.person.lesson.Lesson;
 
 /**
  * The API of the Model component.
@@ -82,6 +83,8 @@ public interface Model {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
     void setPerson(Person target, Person editedPerson);
+
+    boolean isClashingWithExistingLesson(Lesson lesson);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

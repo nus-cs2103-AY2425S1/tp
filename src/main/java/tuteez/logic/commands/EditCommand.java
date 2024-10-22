@@ -97,22 +97,16 @@ public class EditCommand extends Command {
                     continue;
                 }
 
-                if (checkForClashingLesson(newLesson)) {
+                if (model.isClashingWithExistingLesson(newLesson)) {
                     throw new CommandException(MESSAGE_DUPLICATE_LESSON);
                     //return new CommandResult(MESSAGE_DUPLICATE_LESSON, false, false, false);
                 }
             }
         }
 
-        Lesson.removeAllLesson(personToEdit.getLessons());
-        Lesson.addAllLesson(editPersonDescriptor.getLessons().orElse(Collections.emptySet()));
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
-    }
-
-    public boolean checkForClashingLesson(Lesson lesson) {
-        return Lesson.isDuplicateLesson(lesson);
     }
 
     /**

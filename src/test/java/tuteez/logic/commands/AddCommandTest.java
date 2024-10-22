@@ -10,8 +10,6 @@ import static tuteez.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -49,21 +47,6 @@ public class AddCommandTest {
     }
 
     @Test
-    public void execute_personAddedWithLesson_correctlyPopulatesLessonSet() throws CommandException {
-        Person alice = new PersonBuilder().withName("Alice")
-                .withLessons("friday 1800-2000", "thursday 1500-1630").build();
-        ModelStub modelStub = new ModelStubAcceptingPersonAdded();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        addAliceCommand.execute(modelStub);
-        Lesson l1 = new Lesson("friday 1800-2000");
-        Lesson l2 = new Lesson("thursday 1500-1630");
-        HashSet<Lesson> expectedSet = new HashSet<>();
-        expectedSet.add(l1);
-        expectedSet.add(l2);
-        assertTrue(Lesson.containsAll(expectedSet));
-    }
-
-    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person validPerson = new PersonBuilder().build();
         AddCommand addCommand = new AddCommand(validPerson);
@@ -74,15 +57,10 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicateLesson_throwsCommandException() throws CommandException {
-        Lesson.clearLessonSet();
         Person alice = new PersonBuilder().withName("Alice").withLessons("friday 1800-2000").build();
-        Person bob = new PersonBuilder().withName("bob").withLessons("friday 1800-2000").build();
-        ModelStub modelStub = new ModelStubAcceptingPersonAdded();
+        ModelStub modelStub = new ModelStubPersonAcceptedButClashingLesson();
         AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-        addAliceCommand.execute(modelStub);
-        assertThrows(CommandException.class, () -> addBobCommand.execute(modelStub));
-        Lesson.clearLessonSet();
+        assertThrows(CommandException.class, () -> addAliceCommand.execute(modelStub));
     }
 
     @Test
@@ -187,6 +165,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean isClashingWithExistingLesson(Lesson lesson) {
+            return true;
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -222,6 +205,7 @@ public class AddCommandTest {
 
     /**
      * A Model stub that always accept the person being added.
+     * This implies there are no lesson clashes
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
@@ -242,26 +226,17 @@ public class AddCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
-    }
 
-    private static class LessonStub {
-        private static final HashSet<LessonStub> lessonSet = new HashSet<>();
-
-        public LessonStub(String lesson) {
-            requireNonNull(lesson);
-        }
-
-        /**
-         * Helper method to clear the lessonSet before every test
-         * Not available in {@code Lesson} class
-         */
-        public static void clearLessonSet() {
-            lessonSet.clear();
-        }
-
-        public static void addAllLesson(Set<LessonStub> newLessons) {
-            lessonSet.addAll(newLessons);
+        @Override
+        public boolean isClashingWithExistingLesson(Lesson lesson) {
+            return false;
         }
     }
 
+    private class ModelStubPersonAcceptedButClashingLesson extends ModelStubAcceptingPersonAdded {
+        @Override
+        public boolean isClashingWithExistingLesson(Lesson lesson) {
+            return true;
+        }
+    }
 }

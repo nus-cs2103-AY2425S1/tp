@@ -4,10 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tuteez.commons.core.GuiSettings;
@@ -39,6 +41,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private MenuBar menuBar;
+
+    @FXML
     private MenuItem helpMenuItem;
 
     @FXML
@@ -66,6 +71,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        setupMenuBarListener();
     }
 
     public Stage getPrimaryStage() {
@@ -133,6 +140,22 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    /**
+     * Sets up the event listeners for the menu bar.
+     */
+    private void setupMenuBarListener() {
+        menuBar.addEventFilter(MouseEvent.MOUSE_CLICKED, event -> handleMenuBarClick());
+    }
+
+    /**
+     * Handles the click event for the menu bar to transfer focus away from command box to resultDisplay.
+     * This method is necessary to ensure that when the up and down arrow keys are recorded,
+     * the menu bar does not interfere with the command box's input.
+     */
+    private void handleMenuBarClick() {
+        resultDisplayPlaceholder.requestFocus();
     }
 
     /**
