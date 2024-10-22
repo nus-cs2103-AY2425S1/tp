@@ -20,10 +20,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NewtagCommand;
 import seedu.address.logic.commands.NotRsvpListCommand;
-import seedu.address.logic.commands.RsvpCommand;
 import seedu.address.logic.commands.RsvpListCommand;
+import seedu.address.logic.commands.SetRsvpCommand;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.commands.UnRsvpCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -92,11 +91,8 @@ public class AddressBookParser {
         case NewtagCommand.COMMAND_WORD:
             return new NewtagCommandParser().parse(arguments);
 
-        case RsvpCommand.RSVP_COMMAND_WORD:
-            return new RsvpCommandParser().parse(arguments);
-
-        case UnRsvpCommand.UNRSVP_COMMAND_WORD:
-            return new UnRsvpCommandParser().parse(arguments);
+        case SetRsvpCommand.COMMAND_WORD:
+            return new SetRsvpCommandParser().parse(arguments);
 
         case UntagCommand.COMMAND_WORD:
             return new UntagCommandParser().parse(arguments);

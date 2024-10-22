@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 public class RsvpedPredicate implements Predicate<Person> {
 
     @Override
-    public boolean test(Person person) {
+    public RsvpStatus test(Person person) {
         return person.getRsvp();
     }
 

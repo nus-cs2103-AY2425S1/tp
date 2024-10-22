@@ -26,7 +26,7 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final boolean isRsvp;
+    private final RsvpStatus rsvpStatus;
     private final Set<Tag> tags = new HashSet<>();
 
 
@@ -34,13 +34,13 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, boolean isRsvp, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, RsvpStatus rsvpStatus, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.tags.addAll(tags);
-        this.isRsvp = isRsvp;
+        this.rsvpStatus = rsvpStatus;
     }
 
     public Name getName() {
@@ -55,8 +55,8 @@ public class Person {
         return email;
     }
 
-    public boolean getRsvp() {
-        return isRsvp;
+    public RsvpStatus getRsvp() {
+        return rsvpStatus;
     }
 
     /**
@@ -84,12 +84,9 @@ public class Person {
      * Returns the string to display the RSVP status on the UI.
      *
      */
+
     public String getRsvpStatusCard() {
-        if (isRsvp) {
-            return RSVPED_STATUS;
-        } else {
-            return NOT_YET_RSVPED_STATUS;
-        }
+        return rsvpStatus.getStatus();
     }
 
     /**
@@ -126,7 +123,7 @@ public class Person {
                 .add("name", name)
                 .add("phone", phone)
                 .add("email", email)
-                .add("isRsvp", isRsvp)
+                .add("rsvp", rsvpStatus)
                 .add("tags", tags)
                 .toString();
     }
