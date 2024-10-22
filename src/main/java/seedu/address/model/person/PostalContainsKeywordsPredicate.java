@@ -33,8 +33,4 @@ public class PostalContainsKeywordsPredicate implements Predicate<Person> {
         PostalContainsKeywordsPredicate otherPredicate = (PostalContainsKeywordsPredicate) other;
         return keywords.equals(otherPredicate.keywords);
     }
-    @Override
-    public int hashCode() {
-        return keywords.hashCode();
-    }
 }
