@@ -92,6 +92,11 @@ public class ChatWindow {
         case "goodbye":
         case "bye":
             return "Goodbye! Have a great day!";
+        case "thank":
+        case "thanks":
+        case "thank you":
+        case "thank u":
+            return "You're welcome! Always happy to help.";
         case "love":
             return "Love is not about possession; it's about appreciation of \n"
                     + "the journey we share together, hand in hand through \n"
