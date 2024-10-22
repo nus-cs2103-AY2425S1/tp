@@ -12,10 +12,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Person;
-
-
-
 
 /**
  * Marks the person identified by the index number to have made payment.
@@ -25,9 +23,10 @@ public class UnpaidCommand extends Command {
     public static final String COMMAND_WORD = "unpaid";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks the person identified by the index number to have not made payment.\n"
+            + ": Marks the person identified by the index number to have "
+            + "not made payment and updates the policy renewal frequency to zero.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_UNPAID_PERSON_SUCCESS = "Marked Person: %1$s";
 
@@ -44,7 +43,7 @@ public class UnpaidCommand extends Command {
         requireNonNull(unpaidPersonDescriptor);
 
         this.index = index;
-        this.unpaidPersonDescriptor = new UnpaidCommand.UnpaidPersonDescriptor(unpaidPersonDescriptor);
+        this.unpaidPersonDescriptor = new UnpaidPersonDescriptor(unpaidPersonDescriptor);
     }
 
     @Override
@@ -58,6 +57,7 @@ public class UnpaidCommand extends Command {
 
         Person originalPerson = lastShownList.get(index.getZeroBased());
         Person unpaidPerson = createUnpaidPerson(originalPerson, unpaidPersonDescriptor);
+        System.out.println(unpaidPerson);
 
         model.setPerson(originalPerson, unpaidPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -72,9 +72,11 @@ public class UnpaidCommand extends Command {
         assert personToPay != null;
 
         Boolean updatedHasNotPaid = false;
+        Frequency updatedFrequency = new Frequency("0");
 
         return new Person(personToPay.getName(), personToPay.getPhone(), personToPay.getEmail(),
-                personToPay.getAddress(), personToPay.getBirthday(), personToPay.getTags(), updatedHasNotPaid);
+                personToPay.getAddress(), personToPay.getBirthday(),
+                personToPay.getTags(), updatedHasNotPaid, updatedFrequency);
     }
 
     @Override
@@ -102,6 +104,7 @@ public class UnpaidCommand extends Command {
      */
     public static class UnpaidPersonDescriptor {
         private Boolean hasPaid;
+        private Frequency frequency;
 
         public UnpaidPersonDescriptor() {}
 
@@ -110,7 +113,8 @@ public class UnpaidCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public UnpaidPersonDescriptor(UnpaidPersonDescriptor toCopy) {
-            toCopy.setHasNotPaid();
+            setHasNotPaid();
+            setFrequencyToZero();
         }
 
         public void setHasNotPaid() {
@@ -120,6 +124,13 @@ public class UnpaidCommand extends Command {
         public Optional<Boolean> getHasPaid() {
             return Optional.ofNullable(hasPaid);
         }
+        public void setFrequencyToZero() {
+            this.frequency = new Frequency("0");
+        }
+        public Optional<Frequency> getFrequency() {
+            return Optional.ofNullable(frequency);
+        }
+
 
         @Override
         public boolean equals(Object other) {
@@ -134,13 +145,15 @@ public class UnpaidCommand extends Command {
 
             UnpaidCommand.UnpaidPersonDescriptor otherUnpaidPersonDescriptor =
                     (UnpaidCommand.UnpaidPersonDescriptor) other;
-            return Objects.equals(hasPaid, otherUnpaidPersonDescriptor.hasPaid);
+            return Objects.equals(hasPaid, otherUnpaidPersonDescriptor.hasPaid)
+                    && Objects.equals(frequency, otherUnpaidPersonDescriptor.frequency);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
                     .add("hasNotPaid", hasPaid)
+                    .add("frequency", frequency)
                     .toString();
         }
     }
