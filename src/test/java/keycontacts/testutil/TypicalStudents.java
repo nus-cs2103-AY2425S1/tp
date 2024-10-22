@@ -4,6 +4,8 @@ import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_GRADE_LEVEL_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GROUP_AMY;
+import static keycontacts.logic.commands.CommandTestUtil.VALID_GROUP_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
@@ -17,6 +19,7 @@ import keycontacts.model.StudentDirectory;
 import keycontacts.model.lesson.Date;
 import keycontacts.model.lesson.MakeupLesson;
 import keycontacts.model.lesson.Time;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Student;
 
 /**
@@ -40,13 +43,15 @@ public class TypicalStudents {
             new MakeupLesson(new Date("06-10-2021"), new Time("15:00"), new Time("17:00"));
 
     /**
-     * When editing any entry below, take note to change typicalStudentsStudentDirectory.json
+     * When editing any entry below, take note to change typicalStudentsStudentDirectory.json.
+     * All typical students are not in a group initially.
      */
     public static final Student ALICE = new StudentBuilder()
             .withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withPhone("94351253")
             .withGradeLevel("ABRSM 2")
+            .withGroup("Alice's Group")
             .withPianoPieces("Etude")
             .withRegularLesson("Monday", "12:00", "14:00")
             .withCancelledLessons("14-10-2024")
@@ -57,6 +62,7 @@ public class TypicalStudents {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withPhone("98765432")
             .withGradeLevel("RSL 3")
+            .withGroup("Benson's Group")
             .withPianoPieces("Sonata I. X. 1905 \"From the Street\"", "Waltz No. 2")
             .withRegularLesson("Tuesday", "13:00", "15:00")
             .withCancelledLessons("15-10-2024")
@@ -67,6 +73,7 @@ public class TypicalStudents {
             .withPhone("95352563")
             .withAddress("wall street")
             .withGradeLevel("ABRSM 1")
+            .withGroup("Carl's Group")
             .withPianoPieces("Clair de Lune", "Le Sapin Op. 75 No. 5")
             .withRegularLesson("Wednesday", "18:00", "19:00")
             .withMakeupLessons(MAKEUP_LESSON_3)
@@ -75,6 +82,7 @@ public class TypicalStudents {
             .withName("Daniel Meier")
             .withPhone("87652533")
             .withAddress("10th street")
+            .withGroup("Daniel's Group")
             .withGradeLevel("ABRSM 3")
             .withRegularLesson("Thursday", "09:00", "10:00")
             .withMakeupLessons(MAKEUP_LESSON_4)
@@ -83,6 +91,7 @@ public class TypicalStudents {
             .withName("Elle Meyer")
             .withPhone("9482224")
             .withAddress("michegan ave")
+            .withGroup(Group.NO_GROUP_STRING)
             .withGradeLevel("IMEB 1")
             .withRegularLesson("Friday", "11:00", "12:00")
             .withMakeupLessons(MAKEUP_LESSON_5)
@@ -91,6 +100,7 @@ public class TypicalStudents {
             .withName("Fiona Kunz")
             .withPhone("9482427")
             .withAddress("little tokyo")
+            .withGroup(Group.NO_GROUP_STRING)
             .withGradeLevel("RCM 2")
             .withRegularLesson("Saturday", "20:00", "21:00")
             .withMakeupLessons(MAKEUP_LESSON_6)
@@ -99,6 +109,7 @@ public class TypicalStudents {
             .withName("George Best")
             .withPhone("9482442")
             .withAddress("4th street")
+            .withGroup(Group.NO_GROUP_STRING)
             .withGradeLevel("LCM 3")
             .withRegularLesson("Sunday", "15:00", "17:00")
             .withMakeupLessons(MAKEUP_LESSON_7)
@@ -124,12 +135,14 @@ public class TypicalStudents {
             .withPhone(VALID_PHONE_AMY)
             .withAddress(VALID_ADDRESS_AMY)
             .withGradeLevel(VALID_GRADE_LEVEL_AMY)
+            .withGroup(VALID_GROUP_AMY)
             .build();
     public static final Student BOB = new StudentBuilder()
             .withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
             .withAddress(VALID_ADDRESS_BOB)
             .withGradeLevel(VALID_GRADE_LEVEL_BOB)
+            .withGroup(VALID_GROUP_BOB)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

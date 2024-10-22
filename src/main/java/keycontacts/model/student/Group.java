@@ -9,7 +9,7 @@ import static keycontacts.commons.util.AppUtil.checkArgument;
  */
 public class Group {
     public static final String NO_GROUP_STRING = "";
-    public static final String MESSAGE_CONSTRAINTS = "Group name should not be empty";
+    public static final String MESSAGE_CONSTRAINTS = "Group name must not begin with a whitespace";
     /*
      * Group name is either an empty string (representing no group), or
      * the first character of the group name must not be a whitespace,

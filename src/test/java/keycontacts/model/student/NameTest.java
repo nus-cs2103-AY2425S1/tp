@@ -64,6 +64,6 @@ public class NameTest {
         String testName = "Test name";
         Name name = new Name(testName);
 
-        assertEquals(name.hashCode(), testName.hashCode());
+        assertEquals(testName.hashCode(), name.hashCode());
     }
 }

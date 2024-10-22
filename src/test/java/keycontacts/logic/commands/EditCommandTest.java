@@ -50,7 +50,8 @@ public class EditCommandTest {
                 .withName(editedStudent.getName().toString())
                 .withPhone(editedStudent.getPhone().toString())
                 .withAddress(editedStudent.getAddress().toString())
-                .withGradeLevel(editedStudent.getGradeLevel().toString()).build();
+                .withGradeLevel(editedStudent.getGradeLevel().toString())
+                .withGroup(editedStudent.getGroup().toString()).build();
 
         expectedModel.setStudent(studentToEdit, expectedEditedStudent);
 

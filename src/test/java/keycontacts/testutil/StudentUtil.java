@@ -35,6 +35,7 @@ public class StudentUtil {
         sb.append(PREFIX_PHONE + student.getPhone().value + " ");
         sb.append(PREFIX_ADDRESS + student.getAddress().value + " ");
         sb.append(PREFIX_GRADE_LEVEL + student.getGradeLevel().value + " ");
+        sb.append(PREFIX_GROUP + student.getGroup().groupName + " ");
         return sb.toString();
     }
 

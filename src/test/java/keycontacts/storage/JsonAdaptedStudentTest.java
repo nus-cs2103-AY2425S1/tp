@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import keycontacts.commons.exceptions.IllegalValueException;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 
@@ -22,6 +23,7 @@ public class JsonAdaptedStudentTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_GRADE_LEVEL = "R0";
+    private static final String INVALID_GROUP = " ";
     private static final String INVALID_PIANO_PIECE = " ";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -98,6 +100,24 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
+    public void toModelType_nullAddress_throwsIllegalValueException() {
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, null, VALID_GRADE_LEVEL,
+                VALID_GROUP, VALID_PIANO_PIECES, VALID_REGULAR_LESSON, VALID_CANCELLED_LESSONS, VALID_MAKEUP_LESSONS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
+    }
+
+
+    @Test
+    public void toModelType_invalidPianoPieces_throwsIllegalValueException() {
+        List<JsonAdaptedPianoPiece> invalidPianoPieces = new ArrayList<>(VALID_PIANO_PIECES);
+        invalidPianoPieces.add(new JsonAdaptedPianoPiece(INVALID_PIANO_PIECE));
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_GRADE_LEVEL,
+                VALID_GROUP, invalidPianoPieces, VALID_REGULAR_LESSON, VALID_CANCELLED_LESSONS, VALID_MAKEUP_LESSONS);
+        assertThrows(IllegalValueException.class, student::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidGradeLevel_throwsIllegalValueException() {
         JsonAdaptedStudent student =
                 new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, INVALID_GRADE_LEVEL, VALID_GROUP,
@@ -115,21 +135,20 @@ public class JsonAdaptedStudentTest {
     }
 
     @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, null, VALID_GRADE_LEVEL,
-                VALID_GROUP, VALID_PIANO_PIECES, VALID_REGULAR_LESSON, VALID_CANCELLED_LESSONS, VALID_MAKEUP_LESSONS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+    public void toModelType_invalidGroup_throwsIllegalValueException() {
+        JsonAdaptedStudent student =
+                new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_GRADE_LEVEL, INVALID_GROUP,
+                        VALID_PIANO_PIECES, EMPTY_REGULAR_LESSON, VALID_CANCELLED_LESSONS, EMPTY_MAKEUP_LESSONS);
+        String expectedMessage = Group.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
-
     @Test
-    public void toModelType_invalidPianoPieces_throwsIllegalValueException() {
-        List<JsonAdaptedPianoPiece> invalidPianoPieces = new ArrayList<>(VALID_PIANO_PIECES);
-        invalidPianoPieces.add(new JsonAdaptedPianoPiece(INVALID_PIANO_PIECE));
+    public void toModelType_nullGroup_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_GRADE_LEVEL,
-                VALID_GROUP, invalidPianoPieces, VALID_REGULAR_LESSON, VALID_CANCELLED_LESSONS, VALID_MAKEUP_LESSONS);
-        assertThrows(IllegalValueException.class, student::toModelType);
+                null, VALID_PIANO_PIECES, EMPTY_REGULAR_LESSON, VALID_CANCELLED_LESSONS, EMPTY_MAKEUP_LESSONS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
 
     @Test

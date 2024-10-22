@@ -5,6 +5,8 @@ import static keycontacts.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.GRADE_LEVEL_DESC_AMY;
 import static keycontacts.logic.commands.CommandTestUtil.GRADE_LEVEL_DESC_BOB;
+import static keycontacts.logic.commands.CommandTestUtil.GROUP_DESC_AMY;
+import static keycontacts.logic.commands.CommandTestUtil.GROUP_DESC_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static keycontacts.logic.commands.CommandTestUtil.INVALID_GRADE_LEVEL_DESC;
 import static keycontacts.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -21,6 +23,7 @@ import static keycontacts.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static keycontacts.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_GRADE_LEVEL;
+import static keycontacts.logic.parser.CliSyntax.PREFIX_GROUP;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_NAME;
 import static keycontacts.logic.parser.CliSyntax.PREFIX_PHONE;
 import static keycontacts.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -33,6 +36,7 @@ import keycontacts.logic.Messages;
 import keycontacts.logic.commands.AddCommand;
 import keycontacts.model.student.Address;
 import keycontacts.model.student.GradeLevel;
+import keycontacts.model.student.Group;
 import keycontacts.model.student.Name;
 import keycontacts.model.student.Phone;
 import keycontacts.model.student.Student;
@@ -47,12 +51,21 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
-                        + ADDRESS_DESC_BOB + GRADE_LEVEL_DESC_BOB, new AddCommand(expectedStudent));
+                        + ADDRESS_DESC_BOB + GRADE_LEVEL_DESC_BOB + GROUP_DESC_BOB, new AddCommand(expectedStudent));
+    }
+
+    @Test
+    public void parse_optionalFieldsMissing_success() {
+        Student expectedStudent = new StudentBuilder(BOB).withGroup(Group.NO_GROUP_STRING).build();
+
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB
+                + ADDRESS_DESC_BOB + GRADE_LEVEL_DESC_BOB, new AddCommand(expectedStudent));
     }
 
     @Test
     public void parse_repeatedValue_failure() {
-        String validExpectedStudentString = NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + GRADE_LEVEL_DESC_BOB;
+        String validExpectedStudentString = NAME_DESC_BOB + PHONE_DESC_BOB + ADDRESS_DESC_BOB + GRADE_LEVEL_DESC_BOB
+                + GROUP_DESC_BOB;
 
         // multiple names
         assertParseFailure(parser, NAME_DESC_AMY + validExpectedStudentString,
@@ -70,12 +83,16 @@ public class AddCommandParserTest {
         assertParseFailure(parser, GRADE_LEVEL_DESC_AMY + validExpectedStudentString,
                         Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GRADE_LEVEL));
 
+        // multiple groups
+        assertParseFailure(parser, GROUP_DESC_AMY + validExpectedStudentString,
+                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_GROUP));
+
         // multiple fields repeated
         assertParseFailure(parser,
-                validExpectedStudentString + GRADE_LEVEL_DESC_AMY + PHONE_DESC_AMY + NAME_DESC_AMY
-                        + ADDRESS_DESC_AMY + validExpectedStudentString,
+                validExpectedStudentString + GROUP_DESC_AMY + GRADE_LEVEL_DESC_AMY + PHONE_DESC_AMY
+                        + NAME_DESC_AMY + ADDRESS_DESC_AMY + validExpectedStudentString,
                 Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE,
-                        PREFIX_GRADE_LEVEL));
+                        PREFIX_GRADE_LEVEL, PREFIX_GROUP));
 
         // invalid value followed by valid value
 

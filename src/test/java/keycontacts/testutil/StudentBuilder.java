@@ -26,7 +26,7 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_GRADE_LEVEL = "ABRSM 3";
-    public static final String DEFAULT_GROUP = Group.NO_GROUP_STRING;
+    public static final String DEFAULT_GROUP = "Amy's Group";
     public static final RegularLesson DEFAULT_REGULAR_LESSON = null;
     public static final Set<MakeupLesson> DEFAULT_MAKEUP_LESSONS = new HashSet<>();
 

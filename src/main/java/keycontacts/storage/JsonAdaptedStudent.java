@@ -143,6 +143,9 @@ public class JsonAdaptedStudent {
         final GradeLevel modelGradeLevel = new GradeLevel(gradeLevel);
 
         final Group modelGroup;
+        if (group == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
+        }
         if (!Group.isValidGroupName(group)) {
             throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
         }
