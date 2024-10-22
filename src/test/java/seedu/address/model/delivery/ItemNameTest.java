@@ -25,7 +25,7 @@ public class ItemNameTest {
     public void testToString() {
         String itemName = "Sample Item";
         ItemName item = new ItemName(itemName);
-        String expectedOutput = "Item: " + itemName;
+        String expectedOutput = itemName;
 
         String actualOutput = item.toString();
 

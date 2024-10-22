@@ -1,8 +1,11 @@
 package seedu.address.ui;
 
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.delivery.Delivery;
@@ -31,8 +34,6 @@ public class DeliveryCard extends UiPart<Region> {
     @FXML
     private Label deliveryId;
     @FXML
-    private Label itemName;
-    @FXML
     private Label address;
     @FXML
     private Label cost;
@@ -46,6 +47,8 @@ public class DeliveryCard extends UiPart<Region> {
     private Label status;
     @FXML
     private Label archive;
+    @FXML
+    private FlowPane items;
 
     /**
      * Creates a {@code DeliveryCard} with the given {@code Delivery} and index to display.
@@ -56,12 +59,14 @@ public class DeliveryCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         deliveryId.setText(delivery.getDeliveryId().toString());
         address.setText(delivery.getAddress().toString());
-        itemName.setText(delivery.getItemName().toString());
         cost.setText(delivery.getCost().toString());
         date.setText(delivery.getDate().toString());
         time.setText(delivery.getTime().toString());
         eta.setText(delivery.getEta().toString());
         status.setText(delivery.getStatus().toString());
+        delivery.getItems().stream()
+                .sorted(Comparator.comparing(item -> item.value))
+                .forEach(item -> items.getChildren().add(new Label(item.value)));
 
         //Can be removed
         archive.setText(delivery.getArchive().toString());

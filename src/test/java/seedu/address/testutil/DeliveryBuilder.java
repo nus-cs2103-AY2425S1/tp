@@ -1,5 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.model.delivery.Archive;
 import seedu.address.model.delivery.Cost;
 import seedu.address.model.delivery.Date;
@@ -30,7 +36,7 @@ public class DeliveryBuilder {
     private Date date;
     private Eta eta;
     private DeliveryId deliveryId;
-    private ItemName itemName;
+    private Set<ItemName> items;
     private Status status;
     private Time time;
     private Address address;
@@ -44,7 +50,7 @@ public class DeliveryBuilder {
         date = new Date(DEFAULT_DATE);
         eta = new Eta(DEFAULT_ETA);
         deliveryId = new DeliveryId();
-        itemName = new ItemName(DEFAULT_ITEM_NAME);
+        items = new HashSet<>(Arrays.asList(new ItemName(DEFAULT_ITEM_NAME)));
         status = new Status(DEFAULT_STATUS);
         time = new Time(DEFAULT_TIME);
         address = new Address(DEFAULT_ADDRESS);
@@ -60,7 +66,7 @@ public class DeliveryBuilder {
         date = deliveryToCopy.getDate();
         eta = deliveryToCopy.getEta();
         deliveryId = deliveryToCopy.getDeliveryId();
-        itemName = deliveryToCopy.getItemName();
+        items = deliveryToCopy.getItems();
         status = deliveryToCopy.getStatus();
         time = deliveryToCopy.getTime();
         address = deliveryToCopy.getAddress();
@@ -103,8 +109,8 @@ public class DeliveryBuilder {
     /**
      * Sets the {@code ItemName} of the {@code Delivery} that we are building.
      */
-    public DeliveryBuilder withItemName(String itemName) {
-        this.itemName = new ItemName(itemName);
+    public DeliveryBuilder withItems(List<ItemName> items) {
+        this.items = new HashSet<>(items);
         return this;
     }
 
@@ -146,7 +152,7 @@ public class DeliveryBuilder {
      * @return The built Delivery object.
      */
     public Delivery build() {
-        return new Delivery(deliveryId, itemName, address, cost, date, time, eta, status, archive);
+        return new Delivery(deliveryId, items, address, cost, date, time, eta, status, archive);
     }
 
 }
