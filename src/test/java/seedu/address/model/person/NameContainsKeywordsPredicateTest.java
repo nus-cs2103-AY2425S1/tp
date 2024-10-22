@@ -43,19 +43,19 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withIsEmployee(true).build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withIsEmployee(true).build()));
 
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withIsEmployee(true).build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice").withIsEmployee(true).build()));
 
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").withIsEmployee(true).build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Carol Lim").withIsEmployee(true).build()));
 
         // Mixed-case keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").withIsEmployee(true).build()));
+        assertTrue(predicate.test(new PersonBuilder().withName("Alice Lim").withIsEmployee(true).build()));
     }
 
     @Test

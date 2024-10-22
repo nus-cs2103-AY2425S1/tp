@@ -1,15 +1,19 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import java.util.Arrays;
-import java.util.List;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindEmployeeCommand;
 import seedu.address.logic.commands.FindPotentialCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PredicateContainer;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -22,27 +26,33 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                        PREFIX_DEPARTMENT, PREFIX_ROLE);
+
+        String typeOfPerson = argMultimap.getPreamble().trim();
+        if (typeOfPerson.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
-        String typeOfPerson = nameKeywords[0];
-        List<String> keywords = Arrays.asList(Arrays.copyOfRange(nameKeywords, 1, nameKeywords.length));
-        if (keywords.isEmpty()) {
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        if (argMultimap.hasNoFindCommandPrefix()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
-        } else if (typeOfPerson.equals(FindEmployeeCommand.ARGUMENT_WORD)) {
-            return new FindEmployeeCommand(new NameContainsKeywordsPredicate(keywords));
+        }
+
+        PredicateContainer predicateContainer = PredicateContainer.extractFromArgumentMultimap(argMultimap);
+
+        if (typeOfPerson.equals(FindEmployeeCommand.ARGUMENT_WORD)) {
+            return new FindEmployeeCommand(predicateContainer);
         } else if (typeOfPerson.equals(FindPotentialCommand.ARGUMENT_WORD)) {
-            return new FindPotentialCommand(new NameContainsKeywordsPredicate(keywords));
+            return new FindPotentialCommand(predicateContainer);
         } else if (typeOfPerson.equals(FindCommand.ARGUMENT_WORD)) {
-            return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+            return new FindCommand(predicateContainer);
         } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
     }
 

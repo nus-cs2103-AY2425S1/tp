@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -34,8 +36,10 @@ import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.SortNameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ContractEndDate;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PredicateContainer;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -91,21 +95,44 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        NameContainsKeywordsPredicate nameContainsKeywordsPredicate = new NameContainsKeywordsPredicate(keywords);
+        PredicateContainer predicateContainer = new PredicateContainer()
+                .addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate);
 
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + FindCommand.ARGUMENT_WORD + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        // FindCommand
+        FindCommand expected1 = new FindCommand(predicateContainer);
+        String input1 = FindCommand.COMMAND_WORD + " " + FindCommand.ARGUMENT_WORD + " " + PREFIX_NAME
+                + keywords.stream().collect(Collectors.joining(" "));
+        FindCommand actual1 = (FindCommand) parser.parseCommand(input1);
+        assertEquals(expected1, actual1);
 
-        FindEmployeeCommand employeeCommand = (FindEmployeeCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + FindEmployeeCommand.ARGUMENT_WORD + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindEmployeeCommand(new NameContainsKeywordsPredicate(keywords)), employeeCommand);
+        // FindEmployeeCommand
+        FindEmployeeCommand expected2 = new FindEmployeeCommand(predicateContainer);
+        String input2 = FindCommand.COMMAND_WORD + " " + FindEmployeeCommand.ARGUMENT_WORD + " " + PREFIX_NAME
+                + keywords.stream().collect(Collectors.joining(" "));
+        FindEmployeeCommand actual2 = (FindEmployeeCommand) parser.parseCommand(input2);
+        assertEquals(expected2, actual2);
 
-        FindPotentialCommand potentialCommand = (FindPotentialCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + FindPotentialCommand.ARGUMENT_WORD + " "
-                        + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindPotentialCommand(new NameContainsKeywordsPredicate(keywords)), potentialCommand);
+        // FindPotentialCommand
+        FindPotentialCommand expected3 = new FindPotentialCommand(predicateContainer);
+        String input3 = FindCommand.COMMAND_WORD + " " + FindPotentialCommand.ARGUMENT_WORD + " " + PREFIX_NAME
+                + keywords.stream().collect(Collectors.joining(" "));
+        FindPotentialCommand actual3 = (FindPotentialCommand) parser.parseCommand(input3);
+        assertEquals(expected3, actual3);
+
+        // Multiple Parameters
+        List<String> keywords2 = Arrays.asList("doo", "dar", "daz");
+        EmailContainsKeywordsPredicate emailContainsKeywordsPredicate = new EmailContainsKeywordsPredicate(keywords2);
+
+        PredicateContainer predicateContainer2 = new PredicateContainer()
+                .addNameContainsKeywordsPredicate(nameContainsKeywordsPredicate)
+                .addEmailContainsKeywordsPredicate(emailContainsKeywordsPredicate);
+        FindCommand expected4 = new FindCommand(predicateContainer2);
+        String input = FindCommand.COMMAND_WORD + " " + FindCommand.ARGUMENT_WORD + " "
+                + PREFIX_NAME + keywords.stream().collect(Collectors.joining(" ")) + " "
+                + PREFIX_EMAIL + keywords2.stream().collect(Collectors.joining(" "));
+        FindCommand actual4 = (FindCommand) parser.parseCommand(input);
+        assertEquals(expected4, actual4);
     }
 
     @Test
