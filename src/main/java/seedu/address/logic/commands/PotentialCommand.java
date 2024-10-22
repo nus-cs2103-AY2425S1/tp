@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTRACT_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEPARTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -21,21 +22,26 @@ public class PotentialCommand extends Command {
 
     public static final String COMMAND_WORD = "potential";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a potential hire to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+    public static final String MESSAGE_PURPOSE = "Adds a potential hire to the address book.";
+
+    public static final String MESSAGE_FORMAT = PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_DEPARTMENT + "DEPARTMENT "
-            + PREFIX_ROLE + "ROLE "
-            + "\nExample: " + COMMAND_WORD + " "
+            + PREFIX_ROLE + "ROLE ";
+
+    public static final String MESSAGE_EXAMPLE =  COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_DEPARTMENT + "IT "
             + PREFIX_ROLE + "SWE ";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
+            + "\nFormat: " + MESSAGE_FORMAT
+            + "\nExample: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New potential hire added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This potential hire already exists in the address book";

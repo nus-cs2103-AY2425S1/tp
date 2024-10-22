@@ -22,16 +22,17 @@ public class EmployeeCommand extends Command {
 
     public static final String COMMAND_WORD = "employee";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+    public static final String MESSAGE_PURPOSE = "Adds an employee to the address book.";
+
+    public static final String MESSAGE_FORMAT = PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE_NUMBER "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_DEPARTMENT + "DEPARTMENT "
             + PREFIX_ROLE + "ROLE "
-            + PREFIX_CONTRACT_END_DATE + "CONTRACT_END_DATE "
-            + "\nExample: " + COMMAND_WORD + " "
+            + PREFIX_CONTRACT_END_DATE + "CONTRACT_END_DATE ";
+
+    public static final String MESSAGE_EXAMPLE =  COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
@@ -39,6 +40,10 @@ public class EmployeeCommand extends Command {
             + PREFIX_DEPARTMENT + "IT "
             + PREFIX_ROLE + "SWE "
             + PREFIX_CONTRACT_END_DATE + "2024-10-09 ";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + MESSAGE_PURPOSE
+            + "\nFormat: " + MESSAGE_FORMAT
+            + "\nExample: " + MESSAGE_EXAMPLE;
 
     public static final String MESSAGE_SUCCESS = "New employee added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This employee already exists in the address book";
