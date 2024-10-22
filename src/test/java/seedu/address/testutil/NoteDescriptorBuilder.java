@@ -29,7 +29,7 @@ public class NoteDescriptorBuilder {
     public NoteDescriptorBuilder(Person person) {
         descriptor = new NoteDescriptor();
         descriptor.setAppointments(person.getNote().previousAppointments);
-        descriptor.setMedications(person.getNote().medication);
+        descriptor.setMedications(person.getNote().medications);
         descriptor.setRemarks(person.getNote().remarks);
     }
 
@@ -44,7 +44,7 @@ public class NoteDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code medication} into a {@code Set<String>} and set it to the {@code NoteDescriptor}
+     * Parses the {@code medications} into a {@code Set<String>} and set it to the {@code NoteDescriptor}
      * that we are building.
      */
     public NoteDescriptorBuilder withMedications(String... medications) {

@@ -82,7 +82,7 @@ public class CommandTestUtil {
     // non-alphanumeric characters not allowed for sexes
     public static final String INVALID_SEX_DESC = " " + PREFIX_SEX + "Fem@le";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    // '*' not allowed in appointments, medication, remarks
+    // '*' not allowed in appointments, medications, remarks
     public static final String INVALID_APPOINTMENT_DESC = " " + PREFIX_APPOINTMENT + "11/11/2025 0000*";
     public static final String INVALID_MEDICATION_DESC = " " + PREFIX_MEDICATION + "INVALID_MEDICATION";
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "INVALID_MEDICATION";

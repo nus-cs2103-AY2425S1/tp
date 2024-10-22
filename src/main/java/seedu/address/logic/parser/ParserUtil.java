@@ -184,7 +184,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String medication} into a {@code String}.
+     * Parses a {@code String medications} into a {@code String}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code Medication} is invalid.

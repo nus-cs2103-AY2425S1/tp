@@ -70,10 +70,10 @@ public class NoteCommandParserTest {
         assertParseFailure(parser, "Test" + INVALID_APPOINTMENT_DESC, Appointment.MESSAGE_CONSTRAINTS);
         // invalid remark
         assertParseFailure(parser, "Test" + INVALID_REMARK_DESC, Note.MESSAGE_CONSTRAINTS);
-        //invalid medication
+        //invalid medications
         assertParseFailure(parser, "Test" + INVALID_MEDICATION_DESC, Note.MESSAGE_CONSTRAINTS);
 
-        // invalid medication followed by valid appointment
+        // invalid medications followed by valid appointment
         assertParseFailure(parser, "Test" + INVALID_MEDICATION_DESC
                                    + APPOINTMENT_DESC_TWO, Note.MESSAGE_CONSTRAINTS);
 
@@ -150,7 +150,7 @@ public class NoteCommandParserTest {
         expectedCommand = new NoteCommand(targetName, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // medication
+        // medications
         userInput = targetName + MEDICATION_DESC_ONE;
         descriptor = new NoteDescriptorBuilder().withMedications(VALID_MEDICATION_ONE).build();
         expectedCommand = new NoteCommand(targetName, descriptor);

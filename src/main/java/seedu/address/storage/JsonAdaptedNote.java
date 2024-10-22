@@ -22,11 +22,11 @@ public class JsonAdaptedNote {
      * Constructs a {@code JsonAdaptedAppointment} with the given parameters
      * @param appointments A valid appointment
      * @param remark A valid remark
-     * @param medication A valid medication
+     * @param medication A valid medications
      */
     @JsonCreator
     public JsonAdaptedNote(
-            @JsonProperty("medication") List<String> medication,
+            @JsonProperty("medications") List<String> medication,
             @JsonProperty("appointments") List<String> appointments,
             @JsonProperty("remark") List<String> remark) {
         this.medication = medication != null ? medication : new ArrayList<>();
@@ -38,7 +38,7 @@ public class JsonAdaptedNote {
      * Converts a given {@code Note} into this class for Jackson use.
      */
     public JsonAdaptedNote(Note source) {
-        this.medication = new ArrayList<>(source.medication);
+        this.medication = new ArrayList<>(source.medications);
         this.appointments = new ArrayList<>(source.previousAppointments.stream().map(Appointment::toString).toList());
         this.remark = new ArrayList<>(source.remarks);
     }

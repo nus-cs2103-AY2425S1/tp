@@ -13,14 +13,14 @@ import seedu.address.model.appointment.Appointment;
  * Represents a Note in the address book.
  * Guarantees: immutable;
  *             appointment is valid as declared in Appointment class;
- *             note/medication is valid as declared in {@link #isValidString(String)};
+ *             note/medications is valid as declared in {@link #isValidString(String)};
  */
 public class Note {
     public static final String VALIDATION_REGEX = "^[a-zA-Z0-9. ]*$";
     public static final String MESSAGE_CONSTRAINTS = "Field should only contain alphanumerical characters";
     public final Set<Appointment> previousAppointments;
     public final Set<String> remarks;
-    public final Set<String> medication;
+    public final Set<String> medications;
 
 
     /**
@@ -29,24 +29,24 @@ public class Note {
     public Note() {
         previousAppointments = new HashSet<>();
         remarks = new HashSet<>();
-        medication = new HashSet<>();
+        medications = new HashSet<>();
     }
 
     /**
-     * Constructs a {@code Note} with the specified appointments, remarks, and medication.
+     * Constructs a {@code Note} with the specified appointments, remarks, and medications.
      *
      * @param appointments A set of previous appointments.
      * @param remarks A set of remarks.
-     * @param medication A set of medications.
+     * @param medications A set of medications.
      */
-    public Note(Set<Appointment> appointments, Set<String> remarks, Set<String> medication) {
+    public Note(Set<Appointment> appointments, Set<String> remarks, Set<String> medications) {
         requireNonNull(appointments);
         requireNonNull(remarks);
-        requireNonNull(medication);
+        requireNonNull(medications);
 
         this.previousAppointments = appointments;
         this.remarks = remarks;
-        this.medication = medication;
+        this.medications = medications;
     }
 
     /**
@@ -72,14 +72,14 @@ public class Note {
     }
 
     /**
-     * Adds new medication to medications hashset
+     * Adds new medications to medications hashset
      *
-     * @param medication A valid medication
+     * @param medication A valid medications
      */
     public void addMedication(String medication) {
         requireNonNull(medication);
         checkArgument(isValidString(medication), MESSAGE_CONSTRAINTS);
-        this.medication.add(medication);
+        this.medications.add(medication);
     }
 
     public static boolean isValidString(String test) {
@@ -103,20 +103,20 @@ public class Note {
         Note otherNote = (Note) other;
         return (previousAppointments.stream().sorted().toList())
                        .equals(otherNote.previousAppointments.stream().sorted().toList())
-               && medication.equals(otherNote.medication)
+               && medications.equals(otherNote.medications)
                && remarks.equals(otherNote.remarks);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(previousAppointments, remarks, medication);
+        return Objects.hash(previousAppointments, remarks, medications);
     }
 
     @Override
     public String toString() {
         String appointment = "Previous Appointments: "
             + String.join(", ", previousAppointments.stream().map(Appointment::toString).toList()) + "\n";
-        String medication = "Medications: " + String.join(", ", this.medication) + "\n";
+        String medication = "Medications: " + String.join(", ", this.medications) + "\n";
         String remarks = "Remarks: " + String.join(", ", this.remarks);
 
         return appointment + medication + remarks;

@@ -95,10 +95,10 @@ public class NoteCommand extends Command {
         }
 
         Set<String> updatedMedication = new HashSet<>(noteDescriptor.getMedications()
-                .orElse(personToEditNote.medication));
+                .orElse(personToEditNote.medications));
 
         if (!updatedMedication.isEmpty()) {
-            updatedMedication.addAll(personToEditNote.medication);
+            updatedMedication.addAll(personToEditNote.medications);
         }
 
         Set<String> updatedRemark = new HashSet<>(noteDescriptor.getRemarks()

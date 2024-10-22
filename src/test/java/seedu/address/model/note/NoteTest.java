@@ -80,12 +80,12 @@ public class NoteTest {
         Set<String> remarksSet = new HashSet<>();
         remarksSet.add("Test remark");
         Set<String> medicationSet = new HashSet<>();
-        medicationSet.add("Test medication");
+        medicationSet.add("Test medications");
 
         Note note = new Note(appointmentSet, remarksSet, medicationSet);
 
         String expectedString = "Previous Appointments: [01/01/2025 0000]\n"
-                                + "Medications: Test medication\n"
+                                + "Medications: Test medications\n"
                                 + "Remarks: Test remark";
 
         assertEquals(expectedString, note.toString());
