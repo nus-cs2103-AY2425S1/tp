@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.concert.Concert;
 
 /**
- * Deletes a concert indentified using it's displated index from the address book.
+ * Deletes a concert identified using it's displayed index from the address book.
  */
 public class DeleteConcertCommand extends Command {
 
@@ -26,6 +26,9 @@ public class DeleteConcertCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteConcertCommand to delete the specified {@code Concert} at the specified {@code targetIndex}.
+     */
     public DeleteConcertCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

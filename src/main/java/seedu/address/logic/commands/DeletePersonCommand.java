@@ -28,6 +28,9 @@ public class DeletePersonCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeletePersonCommand to delete the specified {@code Person} at the specified {@code targetIndex}.
+     */
     public DeletePersonCommand(Index targetIndex) {
         requireNonNull(targetIndex);
         this.targetIndex = targetIndex;

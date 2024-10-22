@@ -33,6 +33,9 @@ public class FindPersonCommand extends Command {
 
     private final Predicate<Person> predicate;
 
+    /**
+     * Creates a FindPersonCommand to find all persons who satisfy the {@code predicate}.
+     */
     public FindPersonCommand(Predicate<Person> predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
