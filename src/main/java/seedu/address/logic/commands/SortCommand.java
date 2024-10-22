@@ -2,12 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT;
+import static seedu.address.logic.parser.SortOption.SORT_HOURS;
 import static seedu.address.logic.parser.SortOption.SORT_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.SortOption;
 import seedu.address.model.Model;
 import seedu.address.model.person.comparators.NameComparator;
+import seedu.address.model.person.comparators.VolunteerComparator;
 
 /**
  * Sorts the person list based on the specified option.
@@ -47,6 +49,9 @@ public class SortCommand extends Command {
         switch (sortOption.toString()) {
         case SORT_NAME:
             model.updatePersonListSort(new NameComparator());
+            break;
+        case SORT_HOURS:
+            model.updatePersonListSort(new VolunteerComparator());
             break;
         default:
             // Defensive programming: This should not happen as SortOption validates input,

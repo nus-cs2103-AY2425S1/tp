@@ -2,6 +2,7 @@ package seedu.address.model.person.comparators;
 
 import java.util.Comparator;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -10,6 +11,10 @@ import seedu.address.model.person.Person;
 public class NameComparator implements Comparator<Person> {
     @Override
     public int compare(Person p1, Person p2) {
-        return p1.getName().compareToIgnoreCase(p2.getName());
+        return compareNamesIgnoreCase(p1.getName(), p2.getName());
+    }
+
+    public int compareNamesIgnoreCase(Name n1, Name n2) {
+        return n1.compareToIgnoreCase(n2);
     }
 }

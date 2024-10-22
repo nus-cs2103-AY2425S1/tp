@@ -11,10 +11,12 @@ import java.util.List;
  */
 public class SortOption {
     public static final String SORT_NAME = "name";
+    public static final String SORT_HOURS = "hours";
     // Add more sorting options if needed
 
     public static final List<String> VALID_SORT_OPTIONS = Arrays.asList(
-            SORT_NAME
+            SORT_NAME,
+            SORT_HOURS
             // Add other sorting options here
     );
 
