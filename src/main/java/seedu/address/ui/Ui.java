@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import javafx.stage.Stage;
+import javafx.sallergye.Sallergye;
 
 /**
  * API of UI component
@@ -8,6 +8,6 @@ import javafx.stage.Stage;
 public interface Ui {
 
     /** Starts the UI (and the App).  */
-    void start(Stage primaryStage);
+    void start(Sallergye primarySallergye);
 
 }

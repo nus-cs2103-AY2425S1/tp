@@ -99,7 +99,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, VALID_NRIC_AMY + INVALID_PHONE_DESC
                 + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_ALLERGY} alone will reset the tags of the {@code Person} being edited,
+        // while parsing {@code PREFIX_ALLERGY} alone will reset the allergies of the {@code Person} being edited,
         // parsing it together with a valid allergy results in error
         assertParseFailure(parser, VALID_NRIC_AMY + ALLERGY_DESC_MILK + ALLERGY_DESC_SOYBEANS
                 + ALLERGY_EMPTY, Allergy.MESSAGE_CONSTRAINTS);
@@ -120,7 +120,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withTags(VALID_ALLERGY_SOYBEANS, VALID_ALLERGY_MILK).build();
+                .withAllergies(VALID_ALLERGY_SOYBEANS, VALID_ALLERGY_MILK).build();
         EditCommand expectedCommand = new EditCommand(new NricMatchesPredicate(new Nric(VALID_NRIC_AMY)), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -164,9 +164,9 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
+        // allergies
         userInput = nric + ALLERGY_DESC_MILK;
-        descriptor = new EditPersonDescriptorBuilder().withTags(VALID_ALLERGY_MILK).build();
+        descriptor = new EditPersonDescriptorBuilder().withAllergies(VALID_ALLERGY_MILK).build();
         expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -174,7 +174,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_failure() {
         // More extensive testing of duplicate parameter detections is done in
-        // AddCommandParserTest#parse_repeatedNonTagValue_failure()
+        // AddCommandParserTest#parse_repeatedNonAllergyValue_failure()
 
         // valid followed by invalid
         Nric nric = new Nric(ALICE.getNric().value);
@@ -204,11 +204,11 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_resetTags_success() {
+    public void parse_resetAllergies_success() {
         Nric nric = new Nric(ALICE.getNric().value);
         String userInput = nric + ALLERGY_EMPTY;
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withTags().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withAllergies().build();
         EditCommand expectedCommand = new EditCommand(new NricMatchesPredicate(nric), descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

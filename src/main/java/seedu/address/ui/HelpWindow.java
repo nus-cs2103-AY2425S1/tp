@@ -7,13 +7,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.stage.Stage;
+import javafx.sallergye.Sallergye;
 import seedu.address.commons.core.LogsCenter;
 
 /**
  * Controller for a help page
  */
-public class HelpWindow extends UiPart<Stage> {
+public class HelpWindow extends UiPart<Sallergye> {
 
     public static final String USERGUIDE_URL = "https://ay2425s1-cs2103t-f12-3.github.io/tp/UserGuide.html";
     public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
@@ -30,9 +30,9 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Creates a new HelpWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Sallergye to use as the root of the HelpWindow.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Sallergye root) {
         super(FXML, root);
         helpMessage.setText(HELP_MESSAGE);
     }
@@ -41,7 +41,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Creates a new HelpWindow.
      */
     public HelpWindow() {
-        this(new Stage());
+        this(new Sallergye());
     }
 
     /**
@@ -55,10 +55,10 @@ public class HelpWindow extends UiPart<Stage> {
      *             if this method is called during animation or layout processing.
      *         </li>
      *         <li>
-     *             if this method is called on the primary stage.
+     *             if this method is called on the primary sallergye.
      *         </li>
      *         <li>
-     *             if {@code dialogStage} is already showing.
+     *             if {@code dialogSallergye} is already showing.
      *         </li>
      *     </ul>
      */

@@ -106,7 +106,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code allergies} into a {@code Set<Allergy>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... allergies) {
+    public EditPersonDescriptorBuilder withAllergies(String... allergies) {
         Set<Allergy> allergiesSet = Stream.of(allergies).map(Allergy::new).collect(Collectors.toSet());
         descriptor.setAllergies(allergiesSet);
         return this;
