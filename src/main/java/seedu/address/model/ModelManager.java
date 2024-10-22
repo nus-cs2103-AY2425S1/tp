@@ -167,6 +167,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setConcert(Concert target, Concert editedConcert) {
+        requireAllNonNull(target, editedConcert);
+
+        addressBook.setConcert(target, editedConcert);
+    }
+
+    @Override
     public void setConcertContact(ConcertContact target, ConcertContact editedConcertContact) {
         requireAllNonNull(target, editedConcertContact);
 
