@@ -2,8 +2,14 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a person identified using it's displayed index from the address book.
@@ -17,7 +23,8 @@ public class DeleteAppointmentCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Appointment from Person: %1$s";
+    public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted Appointment from Person: %1$s";
+    public static final String MESSAGE_NO_APPOINTMENT = "The Patient indicated does not have an appointment";
 
     private final Index targetIndex;
 
@@ -27,8 +34,30 @@ public class DeleteAppointmentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        //TODO: Implement logic behind execution of del_appt
-        return new CommandResult("Darryl todo");
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
+
+        if (personToEdit.getAppointment() == null) {
+            throw new CommandException(MESSAGE_NO_APPOINTMENT);
+        }
+
+        Person editedPerson = new Person(
+                personToEdit.getName(),
+                personToEdit.getId(),
+                personToEdit.getWard(),
+                personToEdit.getDiagnosis(),
+                personToEdit.getMedication(),
+                personToEdit.getNotes()
+        );
+
+        model.setPerson(personToEdit, editedPerson);
+
+        return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS, editedPerson));
     }
 
     @Override
