@@ -51,6 +51,10 @@ public class Event {
         return Collections.unmodifiableSet(attendees);
     }
 
+    public boolean isPersonAttending(Person person) {
+        return attendees.contains(person);
+    }
+
     /**
      * Returns true if both events have the same name and date.
      */

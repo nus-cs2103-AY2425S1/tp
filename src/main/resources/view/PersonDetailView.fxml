@@ -70,23 +70,21 @@
                 <Text styleClass="detail-sub-header"> Upcoming Events </Text>
 
                 <!-- GridPane for displaying events -->
-                <GridPane fx:id="gridPane" hgap="10" vgap="15" VBox.vgrow="ALWAYS">
+                <GridPane fx:id="eventsAttending" hgap="10" vgap="15" VBox.vgrow="ALWAYS">
                     <!-- Header Row -->
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="100"/>
-                        <ColumnConstraints percentWidth="80"/>
+                        <ColumnConstraints percentWidth="120"/>
                         <ColumnConstraints percentWidth="50"/>
                     </columnConstraints>
 
                     <children>
                         <Text styleClass="detail-grid-header" text="Name" GridPane.columnIndex="0" />
                         <Text styleClass="detail-grid-header" text="Date" GridPane.columnIndex="1" />
-                        <Text styleClass="detail-grid-header" text="Status" GridPane.columnIndex="2" />
                     </children>
 
                     <!-- Separator Line -->
                     <children>
-                        <Region GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="3"
+                        <Region GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2"
                                 style="-fx-background-color: #D3D3D3; -fx-min-height: 1px;"/>
                     </children>
                 </GridPane>
