@@ -11,6 +11,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.company.Industry;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,10 +38,13 @@ public class Student extends Person {
         this.studentID = studentID;
         attendance = 0;
     }
-
+    @Override
     public StudentID getStudentID() {
         return studentID;
     }
+
+    @Override
+    public Industry getIndustry() { return null; }
 
     public void incrementAttendance() {
         attendance++;

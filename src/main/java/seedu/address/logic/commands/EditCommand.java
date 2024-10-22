@@ -27,7 +27,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.company.Company;
+import seedu.address.model.person.company.Industry;
 import seedu.address.model.person.student.Student;
+import seedu.address.model.person.student.StudentID;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,7 +100,8 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        String updatedCategory = personToEdit.getCategoryDisplayName();
+        StudentID updatedID = editPersonDescriptor.getStudentID().orElse(personToEdit.getStudentID());
+        Industry updatedIndustry = editPersonDescriptor.getIndustry().orElse(personToEdit.getIndustry());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
@@ -109,7 +112,7 @@ public class EditCommand extends Command {
             Student studentToEdit = (Student) personToEdit;
             return new Student(
                     updatedName,
-                    studentToEdit.getStudentID(),
+                    updatedID,
                     updatedPhone,
                     updatedEmail,
                     updatedAddress,
@@ -119,7 +122,7 @@ public class EditCommand extends Command {
             Company companyToEdit = (Company) personToEdit;
             return new Company(
                     updatedName,
-                    companyToEdit.getIndustry(),
+                    updatedIndustry,
                     updatedPhone,
                     updatedEmail,
                     updatedAddress,
@@ -160,7 +163,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private String category;
+        private StudentID studentID;
+        private Industry industry;
         private Phone phone;
         private Email email;
         private Address address;
@@ -174,7 +178,8 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setCategory(toCopy.category);
+            setStudentID(toCopy.studentID);
+            setIndustry(toCopy.industry);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -185,7 +190,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, studentID, industry, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -196,13 +201,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setCategory(String category) {
-            this.category = category;
-        }
+        public void setStudentID(StudentID studentID) { this.studentID = studentID; }
 
-        public String getCategory() {
-            return category;
-        }
+        public Optional<StudentID> getStudentID() { return Optional.ofNullable(studentID); }
+
+        public void setIndustry(Industry industry) { this.industry = industry; }
+
+        public Optional<Industry> getIndustry() { return Optional.ofNullable(industry); }
 
         public void setPhone(Phone phone) {
             this.phone = phone;
@@ -258,6 +263,8 @@ public class EditCommand extends Command {
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
             return Objects.equals(name, otherEditPersonDescriptor.name)
+                    && Objects.equals(studentID, otherEditPersonDescriptor.studentID)
+                    && Objects.equals(industry, otherEditPersonDescriptor.industry)
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
@@ -268,6 +275,8 @@ public class EditCommand extends Command {
         public String toString() {
             return new ToStringBuilder(this)
                     .add("name", name)
+                    .add("studentid", studentID)
+                    .add("industry", industry)
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
