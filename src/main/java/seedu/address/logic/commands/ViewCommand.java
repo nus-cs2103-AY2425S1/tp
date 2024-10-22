@@ -9,7 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * View details of a contact.;
+ * View details of a contact.
  */
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
@@ -19,7 +19,7 @@ public class ViewCommand extends Command {
                     + ": Views details of a contact. "
                     + "Parameters: "
                     + PREFIX_NAME
-                    + "NAME "
+                    + "NAME\n"
                     + "Example: "
                     + COMMAND_WORD
                     + " "
