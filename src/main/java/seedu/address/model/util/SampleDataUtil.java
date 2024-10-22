@@ -23,6 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
+    public static final int ADDRESSBOOK_SIZE = 6; // size of number of Persons
+
     public static final Person PERSON_ALEX =
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Relationship("Father"));

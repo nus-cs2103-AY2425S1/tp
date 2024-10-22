@@ -12,12 +12,15 @@ import static seedu.address.testutil.EventBuilder.DEFAULT_NAME;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -28,6 +31,7 @@ import seedu.address.model.ReadOnlyEventBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.EventBuilder;
 
 public class EventCommandTest {
@@ -62,6 +66,18 @@ public class EventCommandTest {
 
         assertThrows(CommandException.class,
                 EventCommand.MESSAGE_DUPLICATE_EVENT, () -> eventCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_outOfBoundsIndex_throwsCommandException() {
+        Index index = Index.fromOneBased(SampleDataUtil.ADDRESSBOOK_SIZE + 1);
+        Set<Index> indexes = new HashSet<>();
+        indexes.add(index);
+        EventCommand eventCommand = new EventCommand(DEFAULT_NAME, DEFAULT_DATE, indexes);
+
+        ModelStubAcceptingEventAdded modelStub = new ModelStubAcceptingEventAdded();
+        assertThrows(CommandException.class,
+                Messages.MESSAGE_ATTENDEE_NOT_FOUND, () -> eventCommand.execute(modelStub));
     }
 
     @Test
@@ -254,7 +270,7 @@ public class EventCommandTest {
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            return SampleDataUtil.getSampleAddressBook();
         }
 
         @Override
