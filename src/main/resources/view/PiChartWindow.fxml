@@ -7,7 +7,7 @@
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
-        <Scene>
+        <Scene stylesheets="@PieChart.css">
             <HBox>
                 <PieChart fx:id="piChart" prefHeight="600.0" prefWidth="800.0" />
             </HBox>

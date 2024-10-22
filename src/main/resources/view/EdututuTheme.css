@@ -387,5 +387,7 @@
 }
 
 #saveLocationStatus {
-    -fx-text-fill: black; /* Change to your desired color */
+    -fx-text-fill: black;
 }
+
+
