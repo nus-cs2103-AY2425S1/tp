@@ -3,13 +3,10 @@ package seedu.internbuddy.logic.parser;
 import static seedu.internbuddy.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_APP_INDEX;
 import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_COMPANY_INDEX;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
-import static seedu.internbuddy.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
 import seedu.internbuddy.commons.core.index.Index;
-import seedu.internbuddy.logic.commands.ApplyCommand;
 import seedu.internbuddy.logic.commands.WithdrawCommand;
 import seedu.internbuddy.logic.parser.exceptions.ParseException;
 
@@ -29,10 +26,11 @@ public class WithdrawCommandParser implements Parser<WithdrawCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ApplyCommand.MESSAGE_USAGE));
+            System.out.println("hi");
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WithdrawCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_DESCRIPTION);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_COMPANY_INDEX, PREFIX_APP_INDEX);
         Index companyIndex;
         Index applicationIndex;
         try {

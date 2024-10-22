@@ -1,9 +1,13 @@
 package seedu.internbuddy.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.internbuddy.logic.commands.WithdrawCommand.getNewStatus;
 import static seedu.internbuddy.testutil.TypicalCompanies.getTypicalAddressBook;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_FIRST_COMPANY;
+import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_APPLICATION;
 import static seedu.internbuddy.testutil.TypicalIndexes.INDEX_SECOND_COMPANY;
 
 import java.util.ArrayList;
@@ -74,5 +78,32 @@ public class WithdrawCommandTest {
         } catch (CommandException e) {
             assertEquals(Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX, e.getMessage());
         }
+    }
+
+    @Test
+    public void equals() {
+        final WithdrawCommand standardCommand = new WithdrawCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_APPLICATION);
+
+        // same values -> return true
+        WithdrawCommand commandWithSameValue = new WithdrawCommand(
+                Index.fromOneBased(1), Index.fromOneBased(1));
+        assertTrue(standardCommand.equals(commandWithSameValue));
+
+        // same object -> return true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(new ClearCommand()));
+
+        // different values -> false
+        WithdrawCommand differentCompanyIndex = new WithdrawCommand(INDEX_SECOND_COMPANY, INDEX_FIRST_APPLICATION);
+        WithdrawCommand differentApplicationIndex = new WithdrawCommand(INDEX_FIRST_COMPANY, INDEX_SECOND_APPLICATION);
+        WithdrawCommand differntCommandValue = new WithdrawCommand(INDEX_SECOND_COMPANY, INDEX_SECOND_APPLICATION);
+        assertFalse(standardCommand.equals(differentCompanyIndex));
+        assertFalse(standardCommand.equals(differentApplicationIndex));
+        assertFalse(standardCommand.equals(differntCommandValue));
     }
 }

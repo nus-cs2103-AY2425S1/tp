@@ -77,4 +77,20 @@ public class WithdrawCommand extends Command {
             return companyToEdit.getStatus();
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof WithdrawCommand)) {
+            return false;
+        }
+
+        WithdrawCommand otherWithdrawCommand = (WithdrawCommand) other;
+        return companyIndex.equals(otherWithdrawCommand.companyIndex)
+                && applicationIndex.equals(otherWithdrawCommand.applicationIndex);
+    }
 }
