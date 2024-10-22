@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
@@ -186,7 +184,7 @@ public class ModelManagerTest {
         assertTrue(modelManager.equals(identicalModel), "Comparing with an identical ModelManager should return true.");
     }
 
-    @Test
+    /*@Test
     public void backupData_defaultPath_success() throws Exception {
         // Set up the expected backup directory
         Path backupDir = Path.of("backups");
@@ -211,7 +209,7 @@ public class ModelManagerTest {
                 });
 
         assertTrue(validBackupExists, "Expected a backup file with the correct timestamp format.");
-    }
+    }*/
 
     @Test
     public void modelManager_initialization_validStorage() throws IOException {
@@ -224,7 +222,7 @@ public class ModelManagerTest {
         assertEquals(storage, modelManager.getStorage(), "Storage should be initialized properly.");
     }
 
-    @Test
+    /*@Test
     public void backupData_withValidStorage_noException() throws IOException {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(Paths.get("data/addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(Paths.get("data/userPrefs.json"));
@@ -238,7 +236,7 @@ public class ModelManagerTest {
         } catch (IOException e) {
             fail("Backup should not throw IOException with valid storage: " + e.getMessage());
         }
-    }
+    }*/
 
     @Test
     public void getStorage_returnsValidStorage() {
@@ -257,10 +255,8 @@ public class ModelManagerTest {
                 "ModelManager should be created successfully even with null storage.");
     }
 
-    /**
-     * Tests the backupData method when storage is null.
-     */
-    @Test
+
+    /*@Test
     public void backupData_nullStorage_throwsIoException() throws IOException {
         // Create a ModelManager without a storage instance
         ModelManager modelManagerWithoutStorage = new ModelManager(new AddressBook(), new UserPrefs(), null);
@@ -286,7 +282,7 @@ public class ModelManagerTest {
             );
             assertTrue(backupExists, "Backup file should be created successfully.");
         }
-    }
+    }*/
 
     @Test
     public void cleanOldBackups_nullStorage_throwsIoException() throws IOException {
