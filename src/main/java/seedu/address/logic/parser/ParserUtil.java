@@ -9,8 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -66,35 +66,45 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String gender} into a {@code Gender}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code Gender} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Gender(trimmedGender);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String module} into a {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Module parseModule(String module) throws ParseException {
+        requireNonNull(module);
+        String trimmedModuleName = module.trim();
+        if (!Module.isValidModule(trimmedModuleName)) {
+            throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+        return new Module(trimmedModuleName);
     }
-
+    /**
+     * Parses {@code Collection<String> modules} into a {@code Set<Module>}.
+     */
+    public static Set<Module> parseModules(Collection<String> modules) throws ParseException {
+        requireNonNull(modules);
+        final Set<Module> moduleSet = new HashSet<>();
+        for (String module : modules) {
+            moduleSet.add(parseModule(module));
+        }
+        return moduleSet;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

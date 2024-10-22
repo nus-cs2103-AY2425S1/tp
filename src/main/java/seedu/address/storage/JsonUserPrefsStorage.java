@@ -20,6 +20,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
         this.filePath = filePath;
     }
 
+
     @Override
     public Path getUserPrefsFilePath() {
         return filePath;
