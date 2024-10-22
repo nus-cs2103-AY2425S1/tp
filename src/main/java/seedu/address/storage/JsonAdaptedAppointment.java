@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -19,7 +20,6 @@ public class JsonAdaptedAppointment {
     /**
      * Constructor to convert an Appointment object into JsonAdaptedAppointment
      */
-    @JsonCreator
     public JsonAdaptedAppointment(Appointment source) {
         if (source == null) {
             this.description = null;
@@ -30,6 +30,18 @@ public class JsonAdaptedAppointment {
             this.start = source.getStart();
             this.end = source.getEnd();
         }
+    }
+
+    /**
+     * Constructor for Jackson to use during deserialization
+     */
+    @JsonCreator
+    public JsonAdaptedAppointment(@JsonProperty("description") String description,
+                                  @JsonProperty("start") LocalDateTime start,
+                                  @JsonProperty("end") LocalDateTime end) {
+        this.description = description;
+        this.start = start;
+        this.end = end;
     }
 
     /**
