@@ -58,4 +58,21 @@ public class GetAttendanceByTgCommand extends Command {
         window.show(model);
         return new CommandResult("Attendance window opened for Tutorial Group: " + tutorialGroup.toString());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof GetAttendanceByTgCommand)) {
+            return false;
+        }
+        GetAttendanceByTgCommand otherCommand = (GetAttendanceByTgCommand) other;
+        return tutorialGroup.equals(otherCommand.tutorialGroup);
+    }
+
+    @Override
+    public String toString() {
+        return tutorialGroup.toString();
+    }
 }

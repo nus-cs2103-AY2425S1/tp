@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.time.LocalDate;
 import java.util.List;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.AttendanceRecord;
@@ -63,5 +64,26 @@ public class GetAttendanceCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_NO_ATTENDANCE, name, date));
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof GetAttendanceCommand)) {
+            return false;
+        }
+
+        GetAttendanceCommand otherCommand = (GetAttendanceCommand) other;
+        return name.equals(otherCommand.name) && date.equals(otherCommand.date);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name)
+                .add("date", date)
+                .toString();
     }
 }
