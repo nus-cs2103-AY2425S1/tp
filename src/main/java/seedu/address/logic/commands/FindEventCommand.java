@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.event.NameContainsKeywordsPredicate;
+import seedu.address.model.event.EventNameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all events in address book whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
  */
 public class FindEventCommand extends FindCommand {
 
@@ -20,8 +22,10 @@ public class FindEventCommand extends FindCommand {
             + "Parameters: " + PREFIX_EVENT + "KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + " alice bob charlie\n";
 
-    public FindEventCommand(NameContainsKeywordsPredicate predicate) {
-        super(predicate);
+    private final EventNameContainsKeywordsPredicate predicate;
+
+    public FindEventCommand(EventNameContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
     }
 
     @Override
@@ -45,5 +49,12 @@ public class FindEventCommand extends FindCommand {
 
         FindEventCommand otherFindCommand = (FindEventCommand) other;
         return predicate.equals(otherFindCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }

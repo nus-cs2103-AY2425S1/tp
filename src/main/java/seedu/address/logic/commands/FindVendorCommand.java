@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.vendor.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all vendors in address book whose name contains any of the argument keywords.
+ * Keyword matching is case insensitive.
  */
 public class FindVendorCommand extends FindCommand {
 
@@ -20,8 +22,11 @@ public class FindVendorCommand extends FindCommand {
             + "Parameters: " + PREFIX_VENDOR + "KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + " alice bob charlie\n";
 
+
+    private final NameContainsKeywordsPredicate predicate;
+
     public FindVendorCommand(NameContainsKeywordsPredicate predicate) {
-        super(predicate);
+        this.predicate = predicate;
     }
 
     @Override
@@ -45,5 +50,12 @@ public class FindVendorCommand extends FindCommand {
 
         FindVendorCommand otherFindCommand = (FindVendorCommand) other;
         return predicate.equals(otherFindCommand.predicate);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("predicate", predicate)
+                .toString();
     }
 }
