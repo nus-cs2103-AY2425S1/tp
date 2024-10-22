@@ -113,7 +113,9 @@ Examples:
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
->
+> 
+> * Remember that `NRIC` and `GENDER` are case-insensitive! <br>
+> E.g. `i/s1234567a` and `i/S1234567A` are both equivalent.
 > * Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
 
 [Back to Table of Contents](#table-of-contents)
@@ -295,8 +297,8 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | `delete NRIC`<br> e.g., `delete S1234567A`
+**Edit** | `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g. `edit S1234567A p/91234567 e/johndoe@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
