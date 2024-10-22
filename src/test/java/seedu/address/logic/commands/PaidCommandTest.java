@@ -13,10 +13,12 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Person;
 
 public class PaidCommandTest {
@@ -124,6 +126,49 @@ public class PaidCommandTest {
         assertEquals(expected, paidCommand.toString());
     }
 
+    @Test
+    public void paidPersonDescriptor_toString() {
+        PaidCommand.PaidPersonDescriptor descriptor = new PaidCommand.PaidPersonDescriptor();
+        descriptor.setHasPaid();
+        Frequency frequency = new Frequency("3");
+        descriptor.setFrequency(frequency);
+
+        String expected = new ToStringBuilder(descriptor)
+                .add("hasPaid", true)
+                .add("frequency", frequency)
+                .toString();
+
+        assertEquals(expected, descriptor.toString());
+    }
+
+    @Test
+    public void paidPersonDescriptor_equals() {
+        PaidCommand.PaidPersonDescriptor descriptor1 = new PaidCommand.PaidPersonDescriptor();
+        descriptor1.setHasPaid();
+        Frequency frequency = new Frequency("3");
+        descriptor1.setFrequency(frequency);
+
+        // same object -> returns true
+        assertTrue(descriptor1.equals(descriptor1));
+
+        // same values -> returns true
+        PaidCommand.PaidPersonDescriptor descriptor2 = new PaidCommand.PaidPersonDescriptor();
+        descriptor2.setHasPaid();
+        descriptor2.setFrequency(frequency);
+        assertTrue(descriptor1.equals(descriptor2));
+
+        // different types -> returns false
+        assertFalse(descriptor1.equals(1));
+
+        // null -> returns false
+        assertFalse(descriptor1.equals(null));
+
+        // different values -> returns false
+        PaidCommand.PaidPersonDescriptor descriptor3 = new PaidCommand.PaidPersonDescriptor();
+        descriptor3.setHasPaid();
+        descriptor3.setFrequency(new Frequency("6"));
+        assertFalse(descriptor1.equals(descriptor3));
+    }
 
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
