@@ -150,9 +150,11 @@ public class ModelManager implements Model {
 
     @Override
     public void redoAddressBook() throws CommandException {
+        /*
         ReadOnlyAddressBook nextAddressBook = addressBook.redo();
         setAddressBook(nextAddressBook);
         filteredPersons.setPredicate(addressBook.getCurrentPredicate());
+         */
     }
 
     //=========== Filtered Person List Accessors =============================================================
