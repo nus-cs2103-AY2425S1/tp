@@ -74,6 +74,7 @@ public class CalendarView extends UiPart<Region> {
     private void generateGrid() {
         for (int i = 0; i < NUM_ROWS; i++) {
             timeBlocks[i] = new ArrayList<>();
+            dayHBoxes.get(i).prefHeightProperty().bind(grid.heightProperty().divide(NUM_ROWS));
         }
     }
 
@@ -128,6 +129,16 @@ public class CalendarView extends UiPart<Region> {
         createBlock(0, LocalTime.of(3, 45, 0), LocalTime.of(5, 45, 0),
                 Color.SLATEBLUE);
         createBlock(0, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
+                Color.SLATEGRAY);
+        createBlock(1, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
+                Color.SLATEGRAY);
+        createBlock(3, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
+                Color.SLATEGRAY);
+        createBlock(4, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
+                Color.SLATEGRAY);
+        createBlock(5, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
+                Color.SLATEGRAY);
+        createBlock(6, LocalTime.of(2, 0, 0), LocalTime.of(3, 30, 0),
                 Color.SLATEGRAY);
     }
 
