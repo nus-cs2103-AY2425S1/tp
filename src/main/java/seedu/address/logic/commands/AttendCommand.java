@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCEDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.Date;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 
 /**
  * Records a student's attendance for a particular date and tutorial class.
@@ -25,32 +25,32 @@ public class AttendCommand extends Command {
             + "tutorial class. "
             + "Parameters: "
             + PREFIX_STUDENTID + "STUDENT_ID "
-            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS "
+            + PREFIX_TUTORIALID + "TUTORIAL_CLASS "
             + "[" + PREFIX_ATTENDANCEDATE + "ATTENDANCE DATE] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_STUDENTID + "1001 "
-            + PREFIX_TUTORIALCLASS + "1001 "
+            + PREFIX_TUTORIALID + "1001 "
             + PREFIX_ATTENDANCEDATE + "2024/02/21";
     public static final String MESSAGE_SUCCESS = "Attendance recorded";
     public static final String MESSAGE_FAILURE = "Tutorial Class doesn't exist or Student not in Tutorial Class!";
 
     private final StudentId studentId;
-    private final TutorialClass tutorialClass;
+    private final TutorialId tutorialId;
     private final Date tutDate;
 
     /**
      * Creates an AttendCommand to record a student's attendance.
      *
      * @param studentId The ID of the student whose attendance is being recorded.
-     * @param tutorialClass The tutorial class in which the student is attending.
+     * @param tutorialId The tutorial class in which the student is attending.
      * @param tutDate The date of the attendance record. Can be null if not specified.
      */
-    public AttendCommand(StudentId studentId, TutorialClass tutorialClass, Date tutDate) {
+    public AttendCommand(StudentId studentId, TutorialId tutorialId, Date tutDate) {
         requireNonNull(studentId);
-        requireNonNull(tutorialClass);
+        requireNonNull(tutorialId);
         requireNonNull(tutDate);
         this.studentId = studentId;
-        this.tutorialClass = tutorialClass;
+        this.tutorialId = tutorialId;
         this.tutDate = tutDate;
     }
 
@@ -58,7 +58,7 @@ public class AttendCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.setStudentAttendance(studentId, tutorialClass, tutDate)) {
+        if (!model.setStudentAttendance(studentId, tutorialId, tutDate)) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
@@ -69,7 +69,7 @@ public class AttendCommand extends Command {
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
         return "Student: " + studentId.toString() + "\n" + "Date: " + sdf.format(tutDate) + "\n"
-                + "Tutorial ID: " + tutorialClass.toString();
+                + "Tutorial ID: " + tutorialId.toString();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class AttendCommand extends Command {
         }
 
         return studentId.equals(otherAttendCommand.studentId)
-                && tutorialClass.equals(otherAttendCommand.tutorialClass)
+                && tutorialId.equals(otherAttendCommand.tutorialId)
                 && tutDate.equals(otherAttendCommand.tutDate);
     }
 }

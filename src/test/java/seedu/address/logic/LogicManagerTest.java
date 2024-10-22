@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_IND
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.STUDENTID_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.TUTORIALCLASS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TUTORIALID_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.AMY;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
@@ -178,7 +178,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
         model.addTutorial(TUTORIAL2);
         // Triggers the saveAddressBook method by executing an add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + STUDENTID_DESC_AMY + TUTORIALCLASS_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + STUDENTID_DESC_AMY + TUTORIALID_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addTutorial(TUTORIAL2);

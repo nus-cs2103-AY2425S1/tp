@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 
 import seedu.address.model.student.Student;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
 
@@ -59,11 +59,11 @@ public class TutorialList {
     /**
      * Check if the list contains a specified tutorial class.
      *
-     * @param tutorialClass The tutorial class to check for
+     * @param tutorialId The tutorial class to check for
      * @return True if list contains he tutorial, false otherwise.
      */
-    public boolean hasTutorial(TutorialClass tutorialClass) {
-        Tutorial tutorial = Tutorial.of(new TutName("ran"), tutorialClass);
+    public boolean hasTutorial(TutorialId tutorialId) {
+        Tutorial tutorial = Tutorial.of(new TutName("ran"), tutorialId);
         return this.tutorials.stream().anyMatch(x -> x.equals(tutorial));
     }
 
@@ -89,10 +89,10 @@ public class TutorialList {
      * Assign student to the tutorial class.
      *
      * @param student Student to be assigned
-     * @param tutorialClass Target tutorial
+     * @param tutorialId Target tutorial
      */
-    public void assignStudent(Student student, TutorialClass tutorialClass) {
-        Tutorial ran = Tutorial.of(new TutName("ran"), tutorialClass);
+    public void assignStudent(Student student, TutorialId tutorialId) {
+        Tutorial ran = Tutorial.of(new TutName("ran"), tutorialId);
         tutorials.stream()
                 .filter(t -> t.equals(ran))
                 .forEach(t -> t.add(student));

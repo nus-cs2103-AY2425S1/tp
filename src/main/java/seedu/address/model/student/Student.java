@@ -23,21 +23,21 @@ public class Student {
 
     // Data fields
     private final StudentId studentId;
-    private final TutorialClass tutorialClass;
+    private final TutorialId tutorialId;
     private final Set<Tag> tags = new HashSet<>();
     private final ObjectProperty<PresentDates> presentDates;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, StudentId studentId, TutorialClass tutorialClass, PresentDates presentDates) {
-        requireAllNonNull(name, studentId, tutorialClass);
+    public Student(Name name, StudentId studentId, TutorialId tutorialId, PresentDates presentDates) {
+        requireAllNonNull(name, studentId, tutorialId);
         this.name = name;
         this.tags.addAll(tags);
         this.presentDates = new
                 SimpleObjectProperty<>(presentDates != null ? presentDates : new PresentDates(new HashSet<>()));
         this.studentId = studentId;
-        this.tutorialClass = tutorialClass;
+        this.tutorialId = tutorialId;
     }
 
     public Name getName() {
@@ -51,8 +51,8 @@ public class Student {
         return studentId;
     }
 
-    public TutorialClass getTutorialClass() {
-        return tutorialClass;
+    public TutorialId getTutorialId() {
+        return tutorialId;
     }
 
     /**
@@ -102,13 +102,13 @@ public class Student {
         Student otherStudent = (Student) other;
         return name.equals(otherStudent.name)
                 && studentId.equals(otherStudent.studentId)
-                && tutorialClass.equals(otherStudent.tutorialClass);
+                && tutorialId.equals(otherStudent.tutorialId);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentId, tutorialClass);
+        return Objects.hash(name, studentId, tutorialId);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Student {
         return new ToStringBuilder(this)
                 .add("name", name)
                 .add("student id", studentId)
-                .add("tutorial class", tutorialClass)
+                .add("tutorial id", tutorialId)
                 .toString();
     }
 

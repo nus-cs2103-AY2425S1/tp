@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import java.util.stream.Stream;
 
@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -27,23 +27,21 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME,
-                        PREFIX_STUDENTID, PREFIX_TUTORIALCLASS);
+                        PREFIX_STUDENTID, PREFIX_TUTORIALID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENTID, PREFIX_TUTORIALCLASS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_STUDENTID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID, PREFIX_TUTORIALCLASS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_STUDENTID, PREFIX_TUTORIALID);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        StudentId studentId = argMultimap.getValue(PREFIX_STUDENTID).isPresent()
-                ? ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get())
-                : new StudentId("1001");
-        TutorialClass tutorialClass = argMultimap.getValue(PREFIX_TUTORIALCLASS).isPresent()
-                ? ParserUtil.parseTutorialClass(argMultimap.getValue(PREFIX_TUTORIALCLASS).get())
-                : TutorialClass.of("1001");
-        Student student = new Student(name, studentId, tutorialClass, null);
-        return new AddCommand(student, tutorialClass);
+        StudentId studentId = ParserUtil.parseStudentId(argMultimap.getValue(PREFIX_STUDENTID).get());
+        TutorialId tutorialId = argMultimap.getValue(PREFIX_TUTORIALID).isPresent()
+                ? ParserUtil.parseTutorialId(argMultimap.getValue(PREFIX_TUTORIALID).get())
+                : TutorialId.of("1001"); // waiting Jing Min for of("-1")
+        Student student = new Student(name, studentId, tutorialId, null);
+        return new AddCommand(student, tutorialId);
     }
 
     /**

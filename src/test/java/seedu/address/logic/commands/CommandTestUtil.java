@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -29,22 +29,22 @@ public class CommandTestUtil {
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_STUDENTID_AMY = "1001";
     public static final String VALID_STUDENTID_BOB = "1002";
-    public static final String VALID_TUTORIALCLASS_AMY = "1001";
-    public static final String VALID_TUTORIALCLASS_BOB = "1001";
+    public static final String VALID_TUTORIALID_AMY = "1001";
+    public static final String VALID_TUTORIALID_BOB = "1001";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String STUDENTID_DESC_AMY = " " + PREFIX_STUDENTID + VALID_STUDENTID_AMY;
     public static final String STUDENTID_DESC_BOB = " " + PREFIX_STUDENTID + VALID_STUDENTID_BOB;
-    public static final String TUTORIALCLASS_DESC_AMY = " " + PREFIX_TUTORIALCLASS + VALID_TUTORIALCLASS_AMY;
-    public static final String TUTORIALCLASS_DESC_BOB = " " + PREFIX_TUTORIALCLASS + VALID_TUTORIALCLASS_BOB;
+    public static final String TUTORIALID_DESC_AMY = " " + PREFIX_TUTORIALID + VALID_TUTORIALID_AMY;
+    public static final String TUTORIALID_DESC_BOB = " " + PREFIX_TUTORIALID + VALID_TUTORIALID_BOB;
 
     public static final String INVALID_NAME_DESC = " "
             + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_STUDENTID_DESC = " "
             + PREFIX_STUDENTID; // empty string not allowed for studentid
-    public static final String INVALID_TUTORIALCLASS_DESC = " "
-            + PREFIX_TUTORIALCLASS; // empty string not allowed for tutorial class
+    public static final String INVALID_TUTORIALID_DESC = " "
+            + PREFIX_TUTORIALID; // empty string not allowed for tutorial class
     // New constants for testing tutorials
     public static final String VALID_TUT_NAME = "CS2103T";
     public static final String VALID_TUT_ID = "1001";
@@ -67,11 +67,11 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withStudentId(VALID_STUDENTID_AMY)
-                .withTutorialClass(VALID_TUTORIALCLASS_AMY)
+                .withTutorialId(VALID_TUTORIALID_AMY)
                 .build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withStudentId(VALID_STUDENTID_BOB)
-                .withTutorialClass(VALID_TUTORIALCLASS_BOB)
+                .withTutorialId(VALID_TUTORIALID_BOB)
                 .build();
     }
 

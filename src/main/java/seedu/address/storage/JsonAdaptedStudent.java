@@ -10,7 +10,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.PresentDates;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -21,7 +21,7 @@ class JsonAdaptedStudent {
 
     private final String name;
     private final String studentId;
-    private final String tutorialClass;
+    private final String tutorialId;
     private final JsonAdaptedPresentDates presentDates;
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -30,10 +30,10 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name,
                               @JsonProperty("attendance") JsonAdaptedPresentDates presentDates,
                               @JsonProperty("studentId") String studentId,
-                              @JsonProperty("tutorialClass") String tutorialClass) {
+                              @JsonProperty("tutorialClass") String tutorialId) {
         this.name = name;
         this.studentId = studentId;
-        this.tutorialClass = tutorialClass;
+        this.tutorialId = tutorialId;
         this.presentDates = presentDates;
     }
 
@@ -43,7 +43,7 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
         studentId = source.getStudentId().value;
-        tutorialClass = source.getTutorialClass().toString();
+        tutorialId = source.getTutorialId().toString();
         presentDates = new JsonAdaptedPresentDates(source.getPresentDates());
     }
 
@@ -71,14 +71,14 @@ class JsonAdaptedStudent {
         }
         final StudentId modelStudentId = new StudentId(studentId);
 
-        if (tutorialClass == null) {
+        if (tutorialId == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TutorialClass.class.getSimpleName()));
+                    TutorialId.class.getSimpleName()));
         }
-        if (!TutorialClass.isValidTutorialClass(tutorialClass)) {
-            throw new IllegalValueException(TutorialClass.MESSAGE_CONSTRAINTS);
+        if (!TutorialId.isValidTutorialClass(tutorialId)) {
+            throw new IllegalValueException(TutorialId.MESSAGE_CONSTRAINTS);
         }
-        final TutorialClass modelTutorialClass = TutorialClass.of(tutorialClass);
+        final TutorialId modelTutorialClass = TutorialId.of(tutorialId);
 
         final PresentDates modelPresentDates;
 

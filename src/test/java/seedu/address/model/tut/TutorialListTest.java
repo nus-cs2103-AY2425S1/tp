@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TutUtil.TUTORIAL_CLASS;
+import static seedu.address.testutil.TutUtil.TUTORIAL_ID;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL1;
 import static seedu.address.testutil.TypicalTutorials.TUTORIAL2;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.exceptions.DuplicateTutorialException;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
 
@@ -28,10 +28,10 @@ public class TutorialListTest {
 
     @Test
     public void constructor_constructTutorialListSuccess() {
-        TutorialClass tutorialClass1 = TutorialClass.of("1000");
-        TutorialClass tutorialClass2 = TutorialClass.of("2000");
-        Tutorial tutorial1 = Tutorial.of(new TutName("Tut"), tutorialClass1);
-        Tutorial tutorial2 = Tutorial.of(new TutName("Tut1"), tutorialClass2);
+        TutorialId tutorialId1 = TutorialId.of("1000");
+        TutorialId tutorialId2 = TutorialId.of("2000");
+        Tutorial tutorial1 = Tutorial.of(new TutName("Tut"), tutorialId1);
+        Tutorial tutorial2 = Tutorial.of(new TutName("Tut1"), tutorialId2);
         ArrayList<Tutorial> tutorials = new ArrayList<>();
         tutorials.add(tutorial1);
         tutorials.add(tutorial2);
@@ -100,7 +100,7 @@ public class TutorialListTest {
     public void hasTutorialClassTest_success() {
         TutorialList tutorialList = new TutorialList();
         tutorialList.addTutorial(TUTORIAL2);
-        assertTrue(tutorialList.hasTutorial(TUTORIAL_CLASS));
+        assertTrue(tutorialList.hasTutorial(TUTORIAL_ID));
     }
 
 
@@ -108,7 +108,7 @@ public class TutorialListTest {
     public void assignTutorialTest_success() {
         TutorialList tutorialList = new TutorialList();
         tutorialList.addTutorial(TUTORIAL2);
-        tutorialList.assignStudent(ALICE, TUTORIAL_CLASS);
+        tutorialList.assignStudent(ALICE, TUTORIAL_ID);
         assertTrue(tutorialList.getTutorials().get(0).getStudents().contains(ALICE));
     }
 

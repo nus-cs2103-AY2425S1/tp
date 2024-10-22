@@ -17,7 +17,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.model.tut.exceptions.TutNoFoundException;
@@ -148,15 +148,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasTutorial(TutorialClass tutorialClass) {
-        requireNonNull(tutorialClass);
-        return tutorials.hasTutorial(tutorialClass);
+    public boolean hasTutorial(TutorialId tutorialId) {
+        requireNonNull(tutorialId);
+        return tutorials.hasTutorial(tutorialId);
     }
 
     @Override
-    public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
+    public boolean setStudentAttendance(StudentId target, TutorialId tut, Date date) {
         return tutorials.getTutorials().stream()
-                .filter(s -> s.getTutorialClass().equals(tut))
+                .filter(s -> s.getTutorialId().equals(tut))
                 .findFirst()
                 .map(tutorial -> tutorial.setAttendance(date, target))
                 .orElse(false);
@@ -169,13 +169,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void assignStudent(Student student, TutorialClass tutorialClass) {
+    public void assignStudent(Student student, TutorialId tutorialId) {
         requireNonNull(student);
-        requireNonNull(tutorialClass);
-        if (!tutorials.hasTutorial(tutorialClass)) {
+        requireNonNull(tutorialId);
+        if (!tutorials.hasTutorial(tutorialId)) {
             throw new TutNoFoundException();
         }
-        tutorials.assignStudent(student, tutorialClass);
+        tutorials.assignStudent(student, tutorialId);
     }
 
     //=========== Assignment ================================================================================

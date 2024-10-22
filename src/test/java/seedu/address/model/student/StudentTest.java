@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_STUDENTID_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALCLASS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIALID_BOB;
 import static seedu.address.testutil.TypicalStudents.ALICE;
 import static seedu.address.testutil.TypicalStudents.BOB;
 
@@ -25,7 +25,7 @@ public class StudentTest {
 
         // same name, all other attributes different -> returns true
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENTID_BOB)
-                .withTutorialClass(VALID_TUTORIALCLASS_BOB).build();
+                .withTutorialId(VALID_TUTORIALID_BOB).build();
         assertTrue(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns false
@@ -73,7 +73,7 @@ public class StudentTest {
     public void toStringMethod() {
         String expected = Student.class.getCanonicalName() + "{name=" + ALICE.getName()
                 + ", student id=" + ALICE.getStudentId()
-                + ", tutorial class=" + ALICE.getTutorialClass()
+                + ", tutorial id=" + ALICE.getTutorialId()
                 + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -25,7 +25,7 @@ import seedu.address.model.assignment.AssignmentList;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentId;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 import seedu.address.model.tut.Tutorial;
 import seedu.address.model.tut.TutorialList;
 import seedu.address.testutil.TypicalAssignments;
@@ -147,7 +147,7 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public boolean setStudentAttendance(StudentId target, TutorialClass tut, Date date) {
+        public boolean setStudentAttendance(StudentId target, TutorialId tut, Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -208,7 +208,7 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public boolean hasTutorial(TutorialClass tutorialClass) {
+        public boolean hasTutorial(TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -228,7 +228,7 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public void assignStudent(Student student, TutorialClass tutorialClass) {
+        public void assignStudent(Student student, TutorialId tutorialId) {
             throw new AssertionError("This method should not be called.");
         }
 

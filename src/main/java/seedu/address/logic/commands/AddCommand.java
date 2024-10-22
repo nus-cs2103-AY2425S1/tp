@@ -3,14 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
-import seedu.address.model.student.TutorialClass;
+import seedu.address.model.student.TutorialId;
 
 /**
  * Adds a student to the address book.
@@ -23,11 +23,11 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENTID + "STUDENT_ID "
-            + PREFIX_TUTORIALCLASS + "TUTORIAL_CLASS \n"
+            + PREFIX_TUTORIALID + "TUTORIAL_CLASS \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Samson "
             + PREFIX_STUDENTID + "1001 "
-            + PREFIX_TUTORIALCLASS + "1001 ";
+            + PREFIX_TUTORIALID + "1001 ";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book";
@@ -35,15 +35,15 @@ public class AddCommand extends Command {
     public static final String MESSAGE_TUTORIAL_NOT_FOUND = "The tutorial ID provided doesn't exist! \nTutorial ID: ";
 
     private final Student toAdd;
-    private final TutorialClass tutorialClass;
+    private final TutorialId tutorialId;
 
     /**
      * Creates an AddCommand to add the specified {@code Student}
      */
-    public AddCommand(Student student, TutorialClass tutorialClass) {
+    public AddCommand(Student student, TutorialId tutorialId) {
         requireNonNull(student);
         toAdd = student;
-        this.tutorialClass = tutorialClass;
+        this.tutorialId = tutorialId;
     }
 
     @Override
@@ -58,12 +58,16 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENTID + toAdd.getStudentId());
         }
 
-        if (!model.hasTutorial(tutorialClass)) {
-            throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + tutorialClass);
+        if (!model.hasTutorial(tutorialId)) {
+            throw new CommandException(MESSAGE_TUTORIAL_NOT_FOUND + tutorialId);
         }
 
-        model.assignStudent(toAdd, tutorialClass);
         model.addStudent(toAdd);
+
+        if (tutorialId != null) {
+            model.assignStudent(toAdd, tutorialId);
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
@@ -79,7 +83,15 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+
+        boolean haveTutorialId;
+        if (tutorialId != null) {
+            haveTutorialId = tutorialId.equals(otherAddCommand.tutorialId);
+        } else {
+            haveTutorialId = otherAddCommand.tutorialId == null;
+        }
+
+        return toAdd.equals(otherAddCommand.toAdd) && haveTutorialId;
     }
 
     @Override

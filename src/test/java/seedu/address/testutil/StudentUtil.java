@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENTID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALCLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIALID;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -27,7 +27,7 @@ public class StudentUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + student.getName().fullName + " ");
         sb.append(PREFIX_STUDENTID + student.getStudentId().value + " ");
-        sb.append(PREFIX_TUTORIALCLASS + student.getTutorialClass().toString() + " ");
+        sb.append(PREFIX_TUTORIALID + student.getTutorialId().toString() + " ");
         return sb.toString();
     }
 
@@ -39,7 +39,7 @@ public class StudentUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_STUDENTID)
                 .append(studentId.value).append(" "));
-        descriptor.getTutorialClass().ifPresent(tutorialClass -> sb.append(PREFIX_TUTORIALCLASS)
+        descriptor.getTutorialId().ifPresent(tutorialClass -> sb.append(PREFIX_TUTORIALID)
                 .append(tutorialClass.toString()).append(" "));
 
         return sb.toString();
