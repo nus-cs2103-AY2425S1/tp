@@ -66,7 +66,9 @@ Type the command in the command box and press Enter to execute it. e.g. typing *
 
    - `assign aid/1 pid/A03 id/1` : Assigns `John Doe` to `Project Charlie`.
 
-   - `unassign aid/1 ` : Undoes the previous assignment.
+   - `listassignments` : Lists all assignments.
+
+   - `unassign aid/1 ` : Undoes the assignment with Assignment ID 1.
 
    - `exit` : Exits the app.
 
@@ -326,7 +328,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Clear all project entries: `clearproject`
+### Clear all project entries : `clearproject`
 
 **Clears all project entries** from HRConnect.  
 <span style="color:red">This will delete all project records AND their assignments\!</span>
@@ -336,6 +338,57 @@ Format: `clearproject`
 Expected output:  
 - System message noting success
 - Displayed project list becomes empty
+
+[Return to Top](#table-of-contents)
+
+### Create Assignment : `assign`
+
+**Creates an assignment** between a Person and a Project.
+
+Format: `assign aid/ASSIGNMENT_ID pid/PROJECT_ID id/EMPLOYEE_ID`
+
+- The `PROJECT_ID` must belong to an existing project.
+- The `EMPLOYEE_ID` must belong to an existing person.
+
+Examples:
+
+- `assign aid/1 pid/A02 id/1`
+
+Expected output:
+
+- System message noting success and information about assignment added
+
+[Return to Top](#table-of-contents)
+
+### List Assignments : `listassignments`
+
+Shows a list of **all stored assignments**.
+
+Format: `listassignments`
+
+Expected output:
+
+- System message noting success
+- All assignments shown in the top display list
+
+[Return to Top](#table-of-contents)
+
+### Delete Assignment: `unassign`
+
+**Deletes an assignment** between a Person and a Project.   
+This does not delete the Person nor the Project.
+
+Format: `unassign aid/ASSIGNMENT_ID`
+
+- The `ASSIGNMENT_ID` must belong to an existing assignment.
+
+Examples:
+
+- `unassign aid/1`
+
+Expected output:
+
+- System message noting the `ASSIGNMENT_ID` of the assignment removed.
 
 [Return to Top](#table-of-contents)
 
