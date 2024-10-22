@@ -138,8 +138,8 @@ Format:
 
 Examples:
 * `find n/John` returns `john` and `John Doe`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find n/alex david'](images/findAlexDavidResult.png)
+* `find n/bernice n/charlotte` returns `Bernice Yu`, `Charlotte Oliveiro`<br>
+  ![result for 'find n/bernice n/charlotte'](images/findBerniceCharlotteResult.png)
 
 Disallowed examples:
 * `find n/John p/82345670` will not succeed as intended, as the command only searches on single fields. "`p/82345670`" will be treated as a keyword string.
