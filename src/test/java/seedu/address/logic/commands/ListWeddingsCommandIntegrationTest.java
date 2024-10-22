@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +13,7 @@ import seedu.address.model.UserPrefs;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
-public class ListCommandTest {
+public class ListWeddingsCommandIntegrationTest {
 
     private Model model;
     private Model expectedModel;
@@ -28,14 +26,9 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandResult actualCommandResult = new ListCommand().execute(model);
-        assertCommandSuccess(new ListCommand(), model, actualCommandResult, expectedModel);
+        CommandResult actualCommandResult = new ListWeddingsCommand().execute(model);
+        assertCommandSuccess(new ListWeddingsCommand(), model, actualCommandResult, expectedModel);
     }
 
-    @Test
-    public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        CommandResult actualCommandResult = new ListCommand().execute(model);
-        assertCommandSuccess(new ListCommand(), model, actualCommandResult, expectedModel);
-    }
+    // Todo: if wedding filtering is done in the wedding view, have tests for filtered list
 }
