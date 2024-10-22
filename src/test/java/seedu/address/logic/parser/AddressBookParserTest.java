@@ -4,12 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +28,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.edit.EditCommand;
 import seedu.address.logic.commands.edit.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ModuleRoleContainsKeywordsPredicate;
+import seedu.address.model.person.ModuleRoleMap;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -73,14 +78,28 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> nameKeywords = Arrays.asList("foo", "bar", "baz");
+        List<String> moduleRoleKeywords = Arrays.asList("CS2103T", "CS1231S-tutor");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " "
-                        + keywords.stream()
+                        + nameKeywords.stream()
                                 .map(k -> PREFIX_NAME + k)
                                 .collect(Collectors.joining(" "))
+                        + " "
+                        + moduleRoleKeywords.stream()
+                        .map(k -> PREFIX_MODULE + k)
+                        .collect(Collectors.joining(" "))
         );
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+
+        NameContainsKeywordsPredicate namePredicate = new NameContainsKeywordsPredicate(nameKeywords);
+        ModuleRoleMap moduleRoleMapKeywords = ParserUtil.parseModuleRolePairs(moduleRoleKeywords);
+        ModuleRoleContainsKeywordsPredicate modulePredicate =
+                new ModuleRoleContainsKeywordsPredicate(moduleRoleMapKeywords);
+        List<Predicate<Person>> expectedPredicates = new ArrayList<>();
+        expectedPredicates.add(namePredicate);
+        expectedPredicates.add(modulePredicate);
+
+        assertEquals(new FindCommand(expectedPredicates), command);
     }
 
     @Test

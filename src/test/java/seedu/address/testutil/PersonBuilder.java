@@ -115,6 +115,15 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ModuleRoleMap} of the {@code Person} that we are building to be empty.
+     */
+    public PersonBuilder withEmptyModuleRoleMap() {
+        HashMap<ModuleCode, RoleType> map = new HashMap<>();
+        this.moduleRoleMap = new ModuleRoleMap(map);
+        return this;
+    }
+
 
     /**
      * Sets the {@code Phone} of the {@code Person} that we are building.

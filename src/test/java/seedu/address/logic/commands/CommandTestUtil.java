@@ -50,15 +50,19 @@ public class CommandTestUtil {
     public static final String VALID_ADD_MODULE_ROLE = "+CS1101S-student";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+    public static final String NAME_DESC_ANDY = " " + PREFIX_NAME + VALID_NAME_ANDY;
     public static final String NAME_DESC_BETTY = " " + PREFIX_NAME + VALID_NAME_BETTY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+    public static final String PHONE_DESC_ANDY = " " + PREFIX_PHONE + VALID_PHONE_ANDY;
     public static final String PHONE_DESC_BETTY = " " + PREFIX_PHONE + VALID_PHONE_BETTY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
+    public static final String EMAIL_DESC_ANDY = " " + PREFIX_EMAIL + VALID_EMAIL_ANDY;
     public static final String EMAIL_DESC_BETTY = " " + PREFIX_EMAIL + VALID_EMAIL_BETTY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+    public static final String ADDRESS_DESC_ANDY = " " + PREFIX_ADDRESS + VALID_ADDRESS_ANDY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;

@@ -374,24 +374,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to search for contact(s) by inputting one or more of the following:
      * The name of the contact,
      * The module code (optionally including the role), or
-     * The category of the issue
+     * A combination of both
 2. ContactCS shows a list of matching contacts
 
     Use case ends.
 
 **Extensions**
 
-* 1a. Necessary input such as module code, or category of the issue is missing.
+* 1a. Necessary input of at least one keyword is missing.
 
-    * 1a1. ContactCS requests the user to provide the required information
+    * 1a1. ContactCS requests the user to input keyword
     * 1a2. User enters new input
     * Steps 1a1 - 1a2 are repeated until all required fields in the input are complete
 
       Use case resumes from step 2.
 
-* 1b. The given format is invalid.
+* 1b. The input format is invalid.
 
-    * 1b1. ContactCS requests the user to provide the correct format and shows the valid command format
+    * 1b1. ContactCS requests the user to provide the correct format and shows correct syntax, example
     * 1b2. User enters new input
     * Steps 1b1 - 1b2 are repeated until the format for the entered input is correct
 
@@ -425,8 +425,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to [list (UC03)](#uc03) the contacts or [search (UC02)](#uc02) for contact(s)
-2. User requests to delete a specific person in the list
-3. ContactCS deletes the person
+2. User requests to delete a person or multiple persons in the list
+3. ContactCS deletes the person(s)
 
     Use case ends.
 
