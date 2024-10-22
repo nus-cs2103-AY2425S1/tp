@@ -11,10 +11,10 @@ public class TransactionDateComparator implements Comparator<Transaction> {
      * @param t1 the first transaction to be compared.
      * @param t2 the second transaction to be compared.
      * @return  the comparator value which is a negative integer, zero, or a positive integer
-     *     as the date of t1 is less than, equal to, or greater than the date of t2.
+     *     as the date of t1 is more recent than, equal to, or less recent than the date of t2.
      */
     @Override
     public int compare(Transaction t1, Transaction t2) {
-        return t1.getDate().compareTo(t2.getDate());
+        return -t1.getDate().compareTo(t2.getDate());
     }
 }
