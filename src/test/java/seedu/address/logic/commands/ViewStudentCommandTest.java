@@ -17,7 +17,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.Student;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -100,12 +99,4 @@ public class ViewStudentCommandTest {
         assertEquals(expected, viewStudentCommand.toString());
     }
 
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoStudent(Model model) {
-        model.updateFilteredStudentList(p -> false);
-
-        assertTrue(model.getFilteredStudentList().isEmpty());
-    }
 }
