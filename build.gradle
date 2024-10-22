@@ -80,15 +80,12 @@ jacocoTestReport {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
     executionData.from files(jacocoTestReport.executionData)
-
     afterEvaluate {
         classDirectories.from files(classDirectories.files.collect {
             fileTree(dir: it, exclude: ['**/*.jar'])
         })
     }
-
     executionData(fileTree(dir: "$buildDir/jacoco", includes: ["**/*.exec"]))
-
     reports {
         html.required = true
         xml.required = true
@@ -99,11 +96,13 @@ jacocoTestReport {
         def osName = System.getProperty("os.name").toLowerCase()
 
         if (osName.contains("win")) {
+            // For Windows
             def path = reportFile.absolutePath
             def driveLetter = path.charAt(0).toLowerCase()
             def remainingPath = path.substring(2).replace('\\', '/')
             println "\nTest coverage report generated at: file:///${driveLetter}${remainingPath}"
         } else {
+            // For macOS/Linux
             println "\nTest coverage report generated at: file://${reportFile.absolutePath}"
         }
     }
