@@ -19,7 +19,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.person.Parent;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Parent} objects to be used in tests.
  */
 public class TypicalParents {
 
@@ -82,7 +82,7 @@ public class TypicalParents {
     } // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical parents.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
