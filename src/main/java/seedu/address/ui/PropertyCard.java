@@ -11,7 +11,7 @@ import seedu.address.model.property.Property;
  */
 public class PropertyCard extends UiPart<Region> {
 
-    private static final String FXML = "PropertyListCard.fxml";
+    private static final String FXML = "PropertyCard.fxml";
 
     public final Property property;
 
