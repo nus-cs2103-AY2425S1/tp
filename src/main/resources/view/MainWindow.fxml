@@ -46,7 +46,7 @@
           </padding>
         </StackPane>
 
-        <HBox fx:id="tagListPanelPlaceholder" styleClass="pane-with-border" spacing="10" minWidth="50" prefWidth="50" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+        <HBox fx:id="tagListPanelPlaceholder" styleClass="pane-with-border" spacing="10" minWidth="340" prefWidth="340" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
