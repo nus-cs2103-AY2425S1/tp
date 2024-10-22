@@ -13,7 +13,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Policy;
-
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -124,7 +123,7 @@ public class PersonBuilder {
         return this;
     }
 
-     /**
+    /**
      * Sets the {@code policies} of the {@code Person} that we are building.
      * Each policy is created with default values for description, coverage, and premium.
      *
@@ -134,7 +133,8 @@ public class PersonBuilder {
     public PersonBuilder withPolicies(String... policies) {
         this.policies = new ArrayList<>();
         for (String policy : policies) {
-            this.policies.add(new Policy("Policy", "2022-12-12", "2023-12-12", "2022-12-12 300"));
+            this.policies.add(new Policy("Policy", "2022-12-12",
+                    "2023-12-12", "2022-12-12 300"));
         }
         return this;
     }

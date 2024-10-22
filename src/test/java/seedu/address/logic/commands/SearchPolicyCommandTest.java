@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -100,8 +100,8 @@ public class SearchPolicyCommandTest {
             expectedModel.addPerson(alice);
             expectedModel.updateFilteredPersonList(person ->
                     person.getPolicies().stream()
-                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "").
-                                    equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
+                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "")
+                                    .equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
             );
 
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -140,8 +140,8 @@ public class SearchPolicyCommandTest {
             expectedModel.addPerson(bob);
             expectedModel.updateFilteredPersonList(person ->
                     person.getPolicies().stream()
-                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "").
-                                    equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
+                            .anyMatch(policy -> policy.getPolicyName().replaceAll("\\s+", "")
+                                    .equalsIgnoreCase(policyName.replaceAll("\\s+", "")))
             );
 
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
