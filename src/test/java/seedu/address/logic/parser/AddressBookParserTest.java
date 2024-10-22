@@ -30,6 +30,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
 import seedu.address.logic.commands.consultation.DeleteConsultCommand;
+import seedu.address.logic.commands.consultation.ListConsultsCommand;
 import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
@@ -125,6 +126,13 @@ public class AddressBookParserTest {
 
         // Assert that the parsed command is equal to the expected command
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_listconsults() throws Exception {
+        // Ensure the parser returns an instance of ListConsultsCommand when "listconsults" is input
+        assertTrue(parser.parseCommand(ListConsultsCommand.COMMAND_WORD) instanceof ListConsultsCommand);
+        assertTrue(parser.parseCommand(ListConsultsCommand.COMMAND_WORD + " extraArgs") instanceof ListConsultsCommand);
     }
 
     @Test
