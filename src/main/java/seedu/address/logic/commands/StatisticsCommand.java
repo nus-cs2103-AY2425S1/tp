@@ -101,7 +101,7 @@ public class StatisticsCommand extends Command {
     }
 
     /**
-     * Returns a message with number of people with monthly household income < 2500 in current list.
+     * Returns a message with number of people with monthly household income < 800 in current list.
      *
      * @param currList current list.
      * @return string message of number of people with monthly household income < 2500.
