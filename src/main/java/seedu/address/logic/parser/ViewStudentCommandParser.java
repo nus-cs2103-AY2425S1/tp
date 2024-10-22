@@ -7,13 +7,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
 /**
- * Parses input arguments and creates a new ViewCommand object.
+ * Parses input arguments and creates a new ViewStudentCommand object.
  */
 public class ViewStudentCommandParser implements Parser<ViewStudentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the ViewCommand
-     * and returns a ViewCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ViewStudentCommand
+     * and returns a ViewStudentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewStudentCommand parse(String args) throws ParseException {
