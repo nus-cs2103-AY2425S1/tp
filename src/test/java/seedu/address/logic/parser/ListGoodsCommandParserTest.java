@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ListGoodsCommand;
 import seedu.address.model.goods.GoodsCategories;
-import seedu.address.model.goodsReceipt.CategoryPredicate;
-import seedu.address.model.goodsReceipt.GoodsNamePredicate;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.CategoryPredicate;
+import seedu.address.model.goodsreceipt.GoodsNamePredicate;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 
 public class ListGoodsCommandParserTest {
     private final ListGoodsCommandParser parser = new ListGoodsCommandParser();

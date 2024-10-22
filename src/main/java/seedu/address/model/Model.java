@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.goodsReceipt.GoodsReceipt;
+import seedu.address.model.goodsreceipt.GoodsReceipt;
 import seedu.address.model.person.Person;
 
 /**
@@ -102,14 +102,14 @@ public interface Model {
      * TODO: Add ReadOnly Feature to the parameter
      * Replaces goods data with the data in {@code goodsReceipt}.
      */
-    void setGoods(List<GoodsReceipt> goodsReceiptList);
+    void setGoods(ReadOnlyReceiptLog goodsReceipts);
 
 
     /**
      * TODO: Add ReadOnly Feature to the parameter
      * Returns the goods list.
      */
-    List<GoodsReceipt> getGoods();
+    ReadOnlyReceiptLog getGoods();
 
     /**
      * Adds the given goods.

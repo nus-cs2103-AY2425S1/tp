@@ -1,4 +1,4 @@
-package seedu.address.model.goodsReceipt;
+package seedu.address.model.goodsreceipt;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -112,7 +112,9 @@ public class GoodsReceipt {
     /**
      * Returns if goods are delivered
      */
-    public boolean isDelivered() { return isDelivered; }
+    public boolean isDelivered() {
+        return isDelivered;
+    }
 
     /**
      * Returns goods.
@@ -145,4 +147,24 @@ public class GoodsReceipt {
         return String.format("[Quantity %d] %s (%s)", this.quantity, this.goods.toString(), deliveryStatus);
     }
 
+
+    /**
+     * Checks if receipt is the same (Logic may be different from hashcode)
+     * E.g. delivered variable is not checked here
+     */
+    public boolean isSameReceipt(GoodsReceipt otherReceipt) {
+        if (otherReceipt == this) {
+            return true;
+        }
+
+        return this.goods.equals(otherReceipt.goods)
+                &&
+                this.arrivalDate.equals(otherReceipt.arrivalDate)
+                &&
+                this.procurementDate.equals(otherReceipt.procurementDate)
+                &&
+                this.quantity == otherReceipt.quantity
+                &&
+                this.price == otherReceipt.price;
+    }
 }
