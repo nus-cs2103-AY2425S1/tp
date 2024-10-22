@@ -25,6 +25,13 @@ public class PersonTest {
     }
 
     @Test
+    public void changeId_personStillSame_success() {
+        Person person = new PersonBuilder().build();
+        Person changedPerson = person.changeId(person.getId() + 1);
+        assertEquals(changedPerson, person);
+    }
+
+    @Test
     public void isSamePerson() {
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));

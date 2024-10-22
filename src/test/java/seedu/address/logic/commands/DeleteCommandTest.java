@@ -17,6 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,6 +81,81 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_validName_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name nameToDelete = personToDelete.getName();
+        DeleteCommand deleteCommand = new DeleteCommand(nameToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validLowerCasedName_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name nameToDelete = personToDelete.getName();
+        String lowerCasedName = nameToDelete.toString().toLowerCase();
+        Name lowerCasedNameToDelete = new Name(lowerCasedName);
+        DeleteCommand deleteCommand = new DeleteCommand(lowerCasedNameToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validUpperCasedName_success() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name nameToDelete = personToDelete.getName();
+        String upperCasedName = nameToDelete.toString().toUpperCase();
+        Name upperCasedNameToDelete = new Name(upperCasedName);
+        DeleteCommand deleteCommand = new DeleteCommand(upperCasedNameToDelete);
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(personToDelete));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_partOfName_throwsCommandException() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name nameToDelete = personToDelete.getName();
+        String nameStringToDelete = nameToDelete.toString();
+        String partOfNameString = nameStringToDelete.substring(0, nameStringToDelete.length() - 1);
+        Name partOfNameToDelete = new Name(partOfNameString);
+
+        DeleteCommand deleteCommand = new DeleteCommand(partOfNameToDelete);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+    }
+
+    @Test
+    public void execute_noSpacingName_throwsCommandException() {
+        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Name nameToDelete = personToDelete.getName();
+        String nameStringToDelete = nameToDelete.toString();
+        String noSpacingNameString = nameStringToDelete.replaceAll(" ", "");
+        Name noSpacingNameToDelete = new Name(noSpacingNameString);
+
+        DeleteCommand deleteCommand = new DeleteCommand(noSpacingNameToDelete);
+
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
@@ -102,10 +178,18 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void toStringMethod() {
+    public void indexToStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
+        assertEquals(expected, deleteCommand.toString());
+    }
+
+    @Test
+    public void nameToStringMethod() {
+        Name targetName = new Name("Alice");
+        DeleteCommand deleteCommand = new DeleteCommand(targetName);
+        String expected = DeleteCommand.class.getCanonicalName() + "{targetName=" + targetName + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 

@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_END_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_START_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -54,6 +58,39 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    // Valid event details
+    public static final String VALID_EVENT_NAME_MEETING = "Team Meeting";
+    public static final String VALID_EVENT_NAME_WORKSHOP = "Workshop";
+    public static final String VALID_EVENT_DESCRIPTION_MEETING = "Discuss project updates";
+    public static final String VALID_EVENT_DESCRIPTION_WORKSHOP = "Learn new skills";
+    public static final String VALID_EVENT_FROM_DATE_1 = "2024-10-01";
+    public static final String VALID_EVENT_FROM_DATE_2 = "2024-10-02";
+    public static final String VALID_EVENT_TO_DATE_1 = "2024-10-10";
+    public static final String VALID_EVENT_TO_DATE_2 = "2024-10-11";
+
+    public static final String NAME_DESC_MEETING = " " + PREFIX_EVENT_NAME + VALID_EVENT_NAME_MEETING;
+    public static final String NAME_DESC_WORKSHOP = " " + PREFIX_EVENT_NAME + VALID_EVENT_NAME_WORKSHOP;
+    public static final String DESCRIPTION_DESC_MEETING = " " + PREFIX_EVENT_DESCRIPTION
+            + VALID_EVENT_DESCRIPTION_MEETING;
+    public static final String DESCRIPTION_DESC_WORKSHOP = " " + PREFIX_EVENT_DESCRIPTION
+            + VALID_EVENT_DESCRIPTION_WORKSHOP;
+    public static final String DURATION_DESC_MEETING = " " + PREFIX_EVENT_START_DATE + VALID_EVENT_FROM_DATE_1
+            + " " + PREFIX_EVENT_END_DATE + VALID_EVENT_TO_DATE_1;
+    public static final String DURATION_DESC_WORKSHOP = " " + PREFIX_EVENT_START_DATE + VALID_EVENT_FROM_DATE_2
+            + " " + PREFIX_EVENT_END_DATE + VALID_EVENT_TO_DATE_2;
+
+    // Invalid event details
+    public static final String INVALID_EVENT_NAME = "Team&Meeting"; // '&' not allowed in names
+    public static final String INVALID_EVENT_DESCRIPTION = ""; // empty string not allowed for descriptions
+    public static final String INVALID_EVENT_FROM_DATE = "2024-10-01";
+    public static final String INVALID_EVENT_TO_DATE = "2024-09-01"; // end date is before start date
+
+    public static final String INVALID_EVENT_NAME_DESC = " " + PREFIX_EVENT_NAME + INVALID_EVENT_NAME;
+    public static final String INVALID_EVENT_DESCRIPTION_DESC = " " + PREFIX_EVENT_DESCRIPTION
+            + INVALID_EVENT_DESCRIPTION;
+    public static final String INVALID_EVENT_DURATION_DESC = " " + PREFIX_EVENT_START_DATE + INVALID_EVENT_FROM_DATE
+            + " " + PREFIX_EVENT_END_DATE + INVALID_EVENT_TO_DATE;
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -92,6 +129,32 @@ public class CommandTestUtil {
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - the returned {@link CommandResult} matches {@code expectedCommandResult} <br>
+     * - the {@code actualModel} matches {@code expectedModel}
+     */
+    public static void assertEventCommandSuccess(Command command, Model actualModel,
+            CommandResult expectedCommandResult, Model expectedModel) {
+        try {
+            CommandResult result = command.execute(actualModel);
+            assertEquals(expectedCommandResult, result);
+            assertEquals(expectedModel, actualModel);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Convenience wrapper to {@link #assertEventCommandSuccess(Command, Model, CommandResult, Model)}
+     * that takes a string {@code expectedMessage}.
+     */
+    public static void assertEventCommandSuccess(Command command, Model actualModel, String expectedMessage,
+            Model expectedModel) {
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, true);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }
 

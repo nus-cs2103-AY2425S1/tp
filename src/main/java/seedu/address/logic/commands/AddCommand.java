@@ -42,6 +42,7 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
+     * Person added here will always have an ID of -1.
      */
     public AddCommand(Person person) {
         requireNonNull(person);
@@ -52,12 +53,14 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
-
-        model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        int newPersonId = model.generateNewPersonId();
+        Person updatedPerson = toAdd.changeId(newPersonId);
+        model.addPerson(updatedPerson);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(updatedPerson)));
     }
 
     @Override
