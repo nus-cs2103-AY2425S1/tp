@@ -74,9 +74,7 @@ CareConnect is a **CLI-first** **case management application** that enables soci
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Opens up your default browser and displays the CareConnect user guide webpage.
 
 Format: `help`
 
