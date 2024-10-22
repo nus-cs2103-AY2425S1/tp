@@ -181,19 +181,25 @@ public class MainWindow extends UiPart<Stage> {
     public void setPersonTab(CommandDetailChange commandDetailChange) {
         if (commandDetailChange == CommandDetailChange.DETAILED) {
             personListPanel.setDetailedView();
+            logger.info("Setting detailed view for Persons");
         } else if (commandDetailChange == CommandDetailChange.SIMPLIFIED) {
             personListPanel.setSimplifiedView();
+            logger.info("Setting simplified view for Persons");
         }
         tabPanePlaceholder.getSelectionModel().select(0);
+        logger.info("Switching to Persons tab");
     }
 
     public void setEventTab(CommandDetailChange commandDetailChange) {
         if (commandDetailChange == CommandDetailChange.DETAILED) {
             eventListPanel.setDetailedView();
+            logger.info("Setting detailed view for Events");
         } else if (commandDetailChange == CommandDetailChange.SIMPLIFIED) {
             eventListPanel.setSimplifiedView();
+            logger.info("Setting simplified view for Events");
         }
         tabPanePlaceholder.getSelectionModel().select(1);
+        logger.info("Switching to Events tab");
     }
 
     /**
