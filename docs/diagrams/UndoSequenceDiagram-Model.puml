@@ -14,6 +14,9 @@ Model -> VersionedAddressBook : undo()
 activate VersionedAddressBook
 
 VersionedAddressBook -> VersionedAddressBook :resetData(ReadOnlyAddressBook)
+activate VersionedAddressBook
+VersionedAddressBook --> VersionedAddressBook
+deactivate VersionedAddressBook
 VersionedAddressBook --> Model :
 deactivate VersionedAddressBook
 
