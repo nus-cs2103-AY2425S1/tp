@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
@@ -48,7 +47,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             String argsWithoutPrefix = argMultimap.getValue(PREFIX_VENDOR).get();
             String[] nameKeywords = processKeywords(argsWithoutPrefix);
             if (nameKeywords.length == 0) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindVendorCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindVendorCommand.MESSAGE_USAGE));
             }
             System.out.println(Arrays.asList(nameKeywords));
             return new FindVendorCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));

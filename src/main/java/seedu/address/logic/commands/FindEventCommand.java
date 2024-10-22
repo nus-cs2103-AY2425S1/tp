@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,7 +18,7 @@ public class FindEventCommand extends FindCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all events whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: " + PREFIX_EVENT + "KEYWORD [MORE_KEYWORDS]... \n"
+            + "Parameters: " + PREFIX_EVENT + " KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + " alice bob charlie\n";
 
     private final EventNameContainsKeywordsPredicate predicate;

@@ -24,7 +24,8 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
 
         // no prefix
-        assertParseFailure(parser, " Alice Bob", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " Alice Bob", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindCommand.MESSAGE_USAGE));
     }
 
     @Test
@@ -52,7 +53,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidPrefix_throwsParseException() {
         // invalid prefix
-        assertParseFailure(parser, " i/ string", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " i/ string", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindCommand.MESSAGE_USAGE));
 
         // multiple valid prefixes
         assertParseFailure(parser, " e/ string v/ string", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -66,7 +68,9 @@ public class FindCommandParserTest {
     @Test
     public void parse_emptyArgs_throwsParseException() {
         // invalid value
-        assertParseFailure(parser, " e/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindEventCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, " v/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindVendorCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " e/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindEventCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " v/ ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindVendorCommand.MESSAGE_USAGE));
     }
 }

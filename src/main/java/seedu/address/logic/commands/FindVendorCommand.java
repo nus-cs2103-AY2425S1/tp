@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VENDOR;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -19,7 +18,7 @@ public class FindVendorCommand extends FindCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all vendors whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: " + PREFIX_VENDOR + "KEYWORD [MORE_KEYWORDS]... \n"
+            + "Parameters: " + PREFIX_VENDOR + " KEYWORD [MORE_KEYWORDS]... \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VENDOR + " alice bob charlie\n";
 
 
