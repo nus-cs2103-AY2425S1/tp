@@ -5,6 +5,7 @@
     "email": "invalid@email!3e",
     "address": "4th street",
     "birthday" : "01 01 2002",
-    "hasPaid" : false
+    "hasPaid" : false,
+    "frequency": "2"
   } ]
 }

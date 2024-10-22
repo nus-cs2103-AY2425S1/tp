@@ -36,7 +36,7 @@ public class PaidCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person editedPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
                 personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
-                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true);
+                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true, personToMarkPaid.getFrequency());
 
         expectedModel.setPerson(personToMarkPaid, editedPerson);
 
@@ -69,7 +69,7 @@ public class PaidCommandTest {
 
         Person paidPerson = new Person(personToMarkPaid.getName(), personToMarkPaid.getPhone(),
                 personToMarkPaid.getEmail(), personToMarkPaid.getAddress(),
-                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true);
+                personToMarkPaid.getBirthday(), personToMarkPaid.getTags(), true, personToMarkPaid.getFrequency());
         expectedModel.setPerson(personToMarkPaid, paidPerson);
 
         assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
