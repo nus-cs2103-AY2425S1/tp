@@ -4,12 +4,45 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+#  UGTeach User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
+If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
 
 <!-- * Table of Contents -->
 <page-nav-print />
+
+## Table of Contents
+
+<table style="width: 100%; border-collapse: collapse;">
+  <tr style="background-color: #333; color: white;">
+    <th style="border: 1px solid #000; padding: 10px;">S/N</th>
+    <th style="border: 1px solid #000; padding: 10px;">Content</th>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td style="border: 1px solid #000; padding: 10px;"><b>1</b></td>
+    <td style="border: 1px solid #000; padding: 10px;"><a href="#quick-start">Quick start</a></td>
+  </tr>
+  <tr style="background-color: #ddd;">
+    <td style="border: 1px solid #000; padding: 10px;"><b>2</b></td>
+    <td style="border: 1px solid #000; padding: 10px;"><a href="#features">Features</a></td>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td style="border: 1px solid #000; padding: 10px;"><b>3</b></td>
+    <td style="border: 1px solid #000; padding: 10px;"><a href="#faq">FAQ</a></td>
+  </tr>
+  <tr style="background-color: #ddd;">
+    <td style="border: 1px solid #000; padding: 10px;"><b>4</b></td>
+    <td style="border: 1px solid #000; padding: 10px;"><a href="#known-issues">Known Issues</a></td>
+  </tr>
+  <tr style="background-color: #f2f2f2;">
+    <td style="border: 1px solid #000; padding: 10px;"><b>5</b></td>
+    <td style="border: 1px solid #000; padding: 10px;"><a href="#command-summary">Command Summary</a></td>
+  </tr>
+</table>
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
