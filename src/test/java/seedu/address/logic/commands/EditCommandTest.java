@@ -152,7 +152,6 @@ public class EditCommandTest {
 
     @Test
     public void execute_editScheduleWithClashes_success() {
-        // Arrange: setup an original student with a specific schedule and other students with clashing schedules
         Student studentToEdit = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
                 .withSchedule("Thursday-1800-1900") // Assume this new schedule clashes with others
@@ -167,7 +166,6 @@ public class EditCommandTest {
             throw new RuntimeException(e);
         }
 
-        // Assert: Check that the result message contains information about clashes
         assertTrue(result.getFeedbackToUser().contains("You have")
                 && result.getFeedbackToUser().contains("clashing schedule"));
     }

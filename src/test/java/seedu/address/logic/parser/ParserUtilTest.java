@@ -82,6 +82,7 @@ public class ParserUtilTest {
         assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
     }
 
+
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
@@ -168,6 +169,34 @@ public class ParserUtilTest {
         double expectedHour = Double.parseDouble(VALID_HOUR);
         assertEquals(expectedHour, ParserUtil.parseHour(hourWithWhitespace));
     }
+    @Test
+    public void parseAmount_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseAmount(null));
+    }
+
+    @Test
+    public void parseAmount_invalidValue_throwsParseException() {
+        // Invalid values: negative numbers, zero, and non-numeric values
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount("-10.00")); // negative number
+        assertThrows(ParseException.class, () -> ParserUtil.parseAmount("0")); // zero
+        assertThrows(NumberFormatException.class, () -> ParserUtil.parseAmount("abc")); // non-numeric value
+    }
+
+    @Test
+    public void parseAmount_validValueWithoutWhitespace_returnsAmount() throws Exception {
+        // Valid amount with no whitespace
+        double expectedAmount = 10.00;
+        assertEquals(expectedAmount, ParserUtil.parseAmount("10.00"), 0.001);
+    }
+
+    @Test
+    public void parseAmount_validValueWithWhitespace_returnsTrimmedAmount() throws Exception {
+        // Valid amount with leading and trailing whitespace
+        double expectedAmount = 10.00;
+        String amountWithWhitespace = "  10.00  ";
+        assertEquals(expectedAmount, ParserUtil.parseAmount(amountWithWhitespace), 0.001);
+    }
+
     @Test
     public void parseDay_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseDay((String) null));

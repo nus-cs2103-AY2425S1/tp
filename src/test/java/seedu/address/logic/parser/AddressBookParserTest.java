@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -28,6 +29,7 @@ import seedu.address.logic.commands.IncomeCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.OweCommand;
 import seedu.address.logic.commands.PayCommand;
+import seedu.address.logic.commands.SettleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.student.Days;
 import seedu.address.model.student.Student;
@@ -213,5 +215,33 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_settle() throws Exception {
+        // Example index and amount
+        double amount = 100.0; // Example amount
+
+        // Assuming the command format is "settle i/1 a/100.0"
+        SettleCommand command = (SettleCommand) parser.parseCommand(
+                SettleCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + PREFIX_AMOUNT + amount);
+
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
+    }
+
+    @Test
+    public void parseCommand_settleRandomCase() throws Exception {
+        // Example index and amount
+        double amount = 100.0; // Example amount
+
+        // Test for random case command
+        SettleCommand command = (SettleCommand) parser.parseCommand(
+                SettleCommand.COMMAND_WORD_RANDOM_CASE + " "
+                        + INDEX_FIRST_STUDENT.getOneBased() + " "
+                        + PREFIX_AMOUNT + amount);
+
+        assertEquals(new SettleCommand(INDEX_FIRST_STUDENT, amount), command);
     }
 }

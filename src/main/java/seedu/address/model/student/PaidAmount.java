@@ -29,6 +29,17 @@ public class PaidAmount extends Fee {
         return Fee.isValidFee(test);
     }
 
+    /**
+     * Returns a new {@code PaidAmount} with the updated value by adding the specified amount
+     * to the current paid amount.
+     *
+     * @param value The amount to be added to the current paid amount.
+     * @return A new {@code PaidAmount} object with the updated total amount.
+     */
+    public PaidAmount updateValue(double value) {
+        return new PaidAmount(Double.toString(super.value + value));
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

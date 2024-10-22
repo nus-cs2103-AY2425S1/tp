@@ -197,6 +197,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String amount} into an {@code double amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the {@code amount} is invalid.
+     */
+    public static double parseAmount(String amount) throws ParseException {
+        String trimmedAmount = amount.trim();
+        double amountDouble = Double.parseDouble(trimmedAmount);
+        if (amountDouble <= 0) {
+            throw new ParseException("Amount has to positive");
+        }
+        return amountDouble;
+    }
+
+    /**
      * Parses a {@code String hoursPaid} into a {@code double}.
      * Leading and trailing whitespaces will be trimmed.
      *
