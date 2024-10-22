@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -123,6 +124,14 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        // different focusedPerson -> returns false
+        Person defaultPerson = modelManager.getFocusedPerson().get();
+        modelManager.getFocusedPerson().set(ALICE);
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.getFocusedPerson().set(defaultPerson);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
