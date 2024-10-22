@@ -22,32 +22,55 @@ The user guide contains formatting to highlight important info. The standards us
 
 ---
 
-## Quick start
+## Table of Contents
 
-1. Ensure you have Java `17` or above installed in your Computer.
+---
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+## Quick Start
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+Start here if you are new to HRConnect.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+1. Ensure you have **Java 17 or above** installed in your computer.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+2. Download the latest .jar file from \[here\](https://github.com/AY2425S1-CS2103T-T15-4/tp/releases).
+
+3. Copy the file to the folder you want to use as the home folder for your AddressBook. **This folder will be used to store saved data and preferences.**
+
+4. **Double click the .jar file** in the folder you placed.
+
+A GUI similar to below should appear in a few seconds. Note how the app contains some sample data.
+
+![ui example](images/uiExample.png)
+
+**HRConnect keeps track of Employees, Projects and the assignments between them.** HRConnect commands are tailored for managing these three items easily.
+
+Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+### Some commands to get started:
 
    - `list` : Lists all contacts.
 
    - `add id/1 n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
-   - `delete 3` : Deletes the 3rd contact shown in the current list.
+   - `delete 3` : Deletes the 3rd contact in the displayed list.
 
    - `clear` : Deletes all contacts.
 
+   - `listproject`: Lists all projects.
+
+   - `addproject pid/A03 pn/Project Charlie`: Adds a project named `Project Charlie`.
+
+   - `deleteproject 3`: Deletes the 3rd project in the displayed project list.
+
+   - `clearproject` : Deletes all projects.
+
+   - `assign aid/1 pid/A03 id/1` : Assigns `John Doe` to `Project Charlie`.
+
+   - `unassign aid/1 ` : Undoes the previous assignment.
+
    - `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#features) below for details of each command.
 
 ---
 
