@@ -169,23 +169,70 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+{: .alert .alert-info} 
+> **:information_source: **Note:**
+> 
+> * The search is case-insensitive. e.g `hans` will match `Hans`
+> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * Only the name is searched.
+> * Only full words will be matched e.g. `Han` will not match `Hans`
+> * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+> * Returns an empty patient list panel if no matching patients with the given keywords are found.
+>
+> Examples:
+> * `find John` returns `john` and `John Doe`
+> * `find alex david` returns `Alex Yeoh`, `David Li`
+>  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`
+[Back to Table of Contents](#table-of-contents)
 
+#### Locating patients by medical condition: `findMedCon`
 
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Finds patients whose medical condition contain the given keywords.
+
+Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
+
+{: .alert .alert-info}
+> **:information_source: **Note:**
+>
+> * The search is case-insensitive. e.g `diabetes` will match `Diabetes`
+> * The order of the keywords does not matter. e.g. `diabetes arthritis` will match `arthritis` and `diabetes` 
+> * Only the medical condition is searched.
+> * Only full medical condition will be matched e.g. `diabetes` will not match `diabete`
+> * Patients matching at least one keyword will be returned (i.e. `OR` search).
+>    e.g. `diabetes` will return `Alex Yeoh`, `David Li`
+> * Returns an empty patient list panel if no matching patients with the given keywords are found.
+>
+> Examples:
+> * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Locating patient by NRIC: `findNric`
+
+Finds patients whose names contain the given NRIC.
+
+Format: `find NRIC`
+
+{: .alert .alert-info}
+> **:information_source: **Note:**
+> * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
+> * Only the NRIC is searched.
+> * Only full NRIC will be matched e.g. `S1234567a` will not match `T12345`
+> * Returns an empty patient list panel if no matching patients with the given `NRIC` are found.
+> * Patients NRIC follows the NRIC constraint mentioned in the [Parameter Details](#Parameter-Details) section.
+>
+> Examples:
+> * `findNric S1234567A` returns `Alex Yeoh`
 
 [Back to Table of Contents](#table-of-contents)
 
 ### General Features
+
+#### Command History
+
+You can navigate between previous successful commands and your current command by pressing the `UP` and `DOWN` arrow keys.
 
 #### Viewing help : `help`
 
@@ -195,13 +242,20 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+![help message](images/helpMessage.png)
+
 [Back to Table of Contents](#table-of-contents)
 
 #### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the MediBase3. 
 
 Format: `clear`
+
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+>
+> Using the clear command will **REMOVE** all your patient and appointment data from MediBase3. This action is irreversible.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -215,13 +269,13 @@ Format: `exit`
 
 #### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+MediBase3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediBase3 data are saved automatically as a JSON file `[JAR file location]/data/MediBase3.json`. Advanced users are welcome to update data directly by editing that data file.
 
 {: .alert .alert-warning}
 > :exclamation: **Caution:**
@@ -235,7 +289,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 ## FAQ
 
 #### **Q**: How do I transfer my data to another Computer?
- - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.
+ - **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediBase3 home folder.<br>
 
 #### **Q**: How do we open the command terminal?
  - **A**: Windows - Press `Win + R`, type `cmd` and press `Enter`.
@@ -259,14 +313,18 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
+
 ## Command summary
 
-| Action     | Format                                                                | Examples                                                                                                       |
-|------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
-| **Clear**  | `clear`                                                               |                                                                                                                |
-| **Delete** | `delete INDEX`                                                        | `delete 3`                                                                                                     |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` | `edit 2 n/James Lee e/jameslee@example.com`                                                                    |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
-| **List**   | `list`                                                                |                                                                                                                |
-| **Help**   | `help`                                                                |                                                                                                                |
+| Action        | Format                                                                | Examples                                                                                                       |
+|---------------|-----------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`   | `add n/John Doe i/S1234567A g/M d/2002-12-12 p/98765432 e/johnd@example.com a/Orchard Road, Block 124, #02-01` |
+| **Clear**     | `clear`                                                               |                                                                                                                |
+| **Delete**    | `delete INDEX`                                                        | `delete 3`                                                                                                     |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…` | `edit 2 n/James Lee e/jameslee@example.com`                                                                    |
+| **Exit**      | `exit`
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`                                        | `find James Jake`                                                                                              |
+| **FindNric**  | `findNric NRIC`| `findNric S1234567A`
+| **FindMedCon** | `findMedCon KEYWORD [MORE_KEYWORDS]` | `findMedCon diabetes arthritis`
+| **List**      | `list`                                                                |                                                                                                                |
+| **Help**      | `help`                                                                |                                                                                                                |
