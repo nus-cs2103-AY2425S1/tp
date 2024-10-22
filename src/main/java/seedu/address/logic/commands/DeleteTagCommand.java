@@ -32,6 +32,8 @@ public class DeleteTagCommand extends Command {
      * @param target the tag the user wants to delete.
      */
     public DeleteTagCommand(Index targetIndex, Tag target) {
+        assert targetIndex != null;
+        assert target != null;
         this.targetIndex = targetIndex;
         this.targetTag = target;
     }
@@ -48,6 +50,7 @@ public class DeleteTagCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(targetIndex.getZeroBased());
+        assert personToEdit != null;
         if (!personToEdit.hasTag(this.targetTag)) {
             throw new CommandException(Messages.MESSAGE_NO_TAG);
         }

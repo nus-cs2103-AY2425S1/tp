@@ -22,6 +22,7 @@ public class DeleteTagCommandParser implements Parser<DeleteTagCommand> {
      */
     public DeleteTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        assert !args.isEmpty();
         ArgumentMultimap argMultiMap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         Index index;
 
