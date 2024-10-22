@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Event objects.
@@ -14,10 +16,13 @@ public class EventBuilder {
 
     public static final String DEFAULT_NAME = "Event A";
     public static final LocalDate DEFAULT_DATE = LocalDate.of(2023, 10, 1);
+    public static final Set<Person> DEFAULT_ATTENDEES = SampleDataUtil.getSampleAttendees();
+    public static final Set<Index> DEFAULT_INDEXES = SampleDataUtil.getSampleIndexes();
 
     private String name;
     private LocalDate date;
     private Set<Person> attendees;
+    private Set<Index> indexes;
 
     /**
      * Creates a {@code EventBuilder} with the default details.
@@ -25,7 +30,8 @@ public class EventBuilder {
     public EventBuilder() {
         name = DEFAULT_NAME;
         date = DEFAULT_DATE;
-        attendees = new HashSet<>();
+        attendees = DEFAULT_ATTENDEES;
+        this.indexes = DEFAULT_INDEXES;
     }
 
     /**
@@ -63,5 +69,9 @@ public class EventBuilder {
 
     public Event build() {
         return new Event(name, date, attendees);
+    }
+
+    public Event buildWithNoAttendees() {
+        return new Event(name, date, new HashSet<>());
     }
 }

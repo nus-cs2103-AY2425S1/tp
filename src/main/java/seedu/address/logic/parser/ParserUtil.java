@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_INDEXES;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -34,6 +35,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndexes} into a {@code Set<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer) or there are duplicates.
+     */
+    public static Set<Index> parseIndexes(String oneBasedIndexes) throws ParseException {
+        String[] trimmedIndexArray = oneBasedIndexes.split("\\s+");
+        Set<Index> indexes = new HashSet<>();
+        for (String index : trimmedIndexArray) {
+            if (!StringUtil.isNonZeroUnsignedInteger(index)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            if (!indexes.add(Index.fromOneBased(Integer.parseInt(index)))) {
+                throw new ParseException(MESSAGE_DUPLICATE_INDEXES);
+            }
+        }
+
+        return indexes;
     }
 
     /**
