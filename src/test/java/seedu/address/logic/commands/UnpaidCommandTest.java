@@ -141,6 +141,8 @@ public class UnpaidCommandTest {
 
         // null -> returns false
         assertFalse(descriptor.equals(null));
+
+        assertFalse(descriptor.equals(new UnpaidCommand.UnpaidPersonDescriptor()));
     }
 
     @Test
