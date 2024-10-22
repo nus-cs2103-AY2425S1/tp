@@ -85,7 +85,6 @@ public class MainAppUiTest {
 
         assertNotNull(userPrefs);
     }
-    
     @Test
     public void init_configFileReadable_customConfigFileUsed() {
         Config config = new Config();
