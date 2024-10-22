@@ -31,6 +31,7 @@ public class ClearCommand extends Command implements Undoable {
         assert isExecuted : "This command has not been executed";
         requireNonNull(model);
         model.setAddressBook(initialAddressBook);
+        isExecuted = false;
         return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 }

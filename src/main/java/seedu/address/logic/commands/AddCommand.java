@@ -75,6 +75,7 @@ public class AddCommand extends Command implements Undoable {
         assert isExecuted : "This command has not been executed";
         requireNonNull(model);
         model.deletePerson(toAdd);
+        isExecuted = false;
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(toAdd)));
     }
 

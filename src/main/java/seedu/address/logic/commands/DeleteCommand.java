@@ -69,6 +69,7 @@ public class DeleteCommand extends Command implements Undoable {
         assert isExecuted : "This command has not been executed";
         requireNonNull(model);
         model.addPerson(personToDelete);
+        isExecuted = false;
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete)));
     }
 

@@ -114,6 +114,7 @@ public class EditCommand extends Command implements Undoable {
 
         model.setPerson(editedPerson, personToEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        isExecuted = false;
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToEdit)));
     }
 
