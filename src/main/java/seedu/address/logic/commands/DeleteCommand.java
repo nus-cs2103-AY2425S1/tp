@@ -11,7 +11,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameMatchesNamePredicate;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -34,14 +34,14 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     private final Index targetIndex;
-    private final String targetKeyword;
+    private final NameMatchesKeywordPredicate predicate;
 
     /**
      * Creates a Delete Command to delete the specified contact
      */
-    public DeleteCommand(Index targetIndex, String targetKeyword) {
+    public DeleteCommand(Index targetIndex, NameMatchesKeywordPredicate predicate) {
         this.targetIndex = targetIndex;
-        this.targetKeyword = targetKeyword;
+        this.predicate = predicate;
     }
 
     @Override
@@ -95,8 +95,7 @@ public class DeleteCommand extends Command {
      * @throws CommandException if the list filtered using {@code targetKeyword} is empty
      */
     public Person deleteWithKeyword(Model model) throws CommandException {
-        NameMatchesNamePredicate predicate = new NameMatchesNamePredicate(
-                Arrays.asList(this.targetKeyword));
+
         model.updateFilteredPersonList(predicate);
         List<Person> filteredList = model.getFilteredPersonList();
 
@@ -126,18 +125,18 @@ public class DeleteCommand extends Command {
         DeleteCommand otherDeleteCommand = (DeleteCommand) other;
 
         if (targetIndex == null && otherDeleteCommand.targetIndex == null
-                && targetKeyword == null && otherDeleteCommand.targetKeyword == null) {
+                && predicate == null && otherDeleteCommand.predicate == null) {
             return true;
         }
 
         if (targetIndex != null && otherDeleteCommand.targetIndex != null
-                && targetKeyword == null && otherDeleteCommand.targetKeyword == null) {
+                && predicate == null && otherDeleteCommand.predicate == null) {
             return targetIndex.equals(otherDeleteCommand.targetIndex);
         }
 
         if (targetIndex == null && otherDeleteCommand.targetIndex == null
-                && targetKeyword != null && otherDeleteCommand.targetKeyword != null) {
-            return targetKeyword.equals(otherDeleteCommand.targetKeyword);
+                && predicate != null && otherDeleteCommand.predicate != null) {
+            return predicate.equals(otherDeleteCommand.predicate);
         }
 
         return false;

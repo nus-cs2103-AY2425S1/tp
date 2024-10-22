@@ -5,6 +5,9 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.NameMatchesKeywordPredicate;
+
+import java.util.Arrays;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -29,7 +32,11 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 Index index = ParserUtil.parseIndex(trimmedArgs);
                 return new DeleteCommand(index, null);
             } else {
-                return new DeleteCommand(null, trimmedArgs);
+                String[] nameKeywords = trimmedArgs.split("\\s+");
+                NameMatchesKeywordPredicate predicate = new NameMatchesKeywordPredicate(
+                        Arrays.asList(nameKeywords));
+
+                return new DeleteCommand(null, predicate);
             }
         } catch (ParseException pe) {
             throw new ParseException(
