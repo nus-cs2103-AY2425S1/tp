@@ -27,11 +27,11 @@ import seedu.address.model.tag.Tag;
  */
 public class PersonFactory {
 
-    private static String MISSING_HOURS_MESSAGE = "Missing hours! For a Volunteer, you must specify hours contributed "
-            + "by the volunteer using the h/ prefix.";
-    private static String MISSING_DONATED_AMOUNT_MESSAGE = "Missing donated amount! "
+    private static final String MISSING_HOURS_MESSAGE = "Missing hours! For a Volunteer, you must specify hours "
+            + "contributed by the volunteer using the h/ prefix.";
+    private static final String MISSING_DONATED_AMOUNT_MESSAGE = "Missing donated amount! "
             + "For a Donor, you must specify a donated amount using the d/ prefix.";
-    private static String MISSING_END_DATE_MESSAGE = "Missing partnership end date! "
+    private static final String MISSING_END_DATE_MESSAGE = "Missing partnership end date! "
             + "For a Partner, you must specify a partnership end date using the ped/ prefix.";
     /**
      * Creates a {@code Person} instance based on the specified {@code Role}.
