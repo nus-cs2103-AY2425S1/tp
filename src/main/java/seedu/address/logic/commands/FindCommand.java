@@ -57,8 +57,6 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        System.out.println("predicate class : " + predicate.getClass());
-        System.out.println("other class : " + otherFindCommand.getClass());
 
         return predicate.equals(otherFindCommand.predicate);
     }
