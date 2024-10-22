@@ -12,14 +12,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-<<<<<<<< HEAD:src/main/java/seedu/address/logic/parser/editcommands/EditCommandParser.java
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.editcommands.EditCommand;
-import seedu.address.logic.commands.editcommands.EditCommand.EditPersonDescriptor;
-========
 import seedu.address.logic.commands.editcommands.EditStudentCommand;
 import seedu.address.logic.commands.editcommands.EditStudentCommand.EditPersonDescriptor;
->>>>>>>> upstream/master:src/main/java/seedu/address/logic/parser/editcommands/EditStudentCommandParser.java
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -36,6 +30,7 @@ public class EditStudentCommandParser implements Parser<EditStudentCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditStudentCommand parse(String args) throws ParseException {

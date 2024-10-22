@@ -30,7 +30,7 @@ public class EditGroupCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the group "
         + "by the group name used in the displayed student list. "
         + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: INDEX (must be a positive integer) "
+        + "Parameters: "
         + "[" + PREFIX_GROUP_NAME + "GROUP NAME]\n"
         + "Example: " + COMMAND_WORD
         + PREFIX_GROUP_NAME + "TEAM 1"
