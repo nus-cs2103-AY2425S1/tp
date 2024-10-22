@@ -29,7 +29,7 @@ public class BarChartCommand extends Command {
             assert monthsPaid != null : "monthsPaid set should not be null";
             monthsPaid.forEach(monthPaid -> {
                 assert monthPaid != null : "monthPaid should not be null";
-                String month = monthPaid.value;
+                String month = monthPaid.monthPaidValue;
                 distributionOfMonthsPaid.put(month, distributionOfMonthsPaid.getOrDefault(month, 0) + 1);
             });
         });
