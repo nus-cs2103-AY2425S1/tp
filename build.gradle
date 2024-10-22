@@ -70,7 +70,6 @@ tasks.register('uiTest', Test) {
 
 jacocoTestReport {
     dependsOn test
-    
     def disallowedOS = ['ubuntu', 'nux']
     def os = System.getProperty("os.name").toLowerCase()
     def isAllowed = disallowedOS.every { !os.contains(it) }
