@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
+import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.Model;
 
 /**
  * Exports addressbook.json into user's local device.

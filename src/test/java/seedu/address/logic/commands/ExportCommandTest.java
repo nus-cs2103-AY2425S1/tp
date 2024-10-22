@@ -3,15 +3,15 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 
 public class ExportCommandTest {
     private static final String ADDRESSBOOK_FILE_PATH = "data/addressbook.json";
