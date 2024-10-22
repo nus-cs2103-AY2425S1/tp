@@ -399,6 +399,81 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Edit a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. SocialBook shows a list of contacts
+3. User requests to edit a specific contact with specified field(s)
+4. SocialBook edits the contact
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given specified field is/are empty.
+
+  * 3a1. SocialBook shows an error message.
+  
+    Use case resumes at step 2.
+
+* 3b. The given index is invalid.
+
+    * 3b1. SocialBook shows an error message.
+
+      Use case resumes at step 2.
+  
+* 3c. There is an error in any of the specified fields.
+    
+  * 3c1. SocialBook shows an error message.
+      
+    Use case resumes at step 2.
+
+**Use case: Find a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. SocialBook shows a list of contacts
+3. User requests to find a specific contact with specified field(s)
+4. SocialBook displays the contact that matches the specified field(s)
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given specified field is/are empty.
+
+    * 3a1. SocialBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. There is an error in any of the specified fields.
+
+    * 3b1. SocialBook shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: Add remarks to a contact**
+
+**MSS**
+
+1. User requests to list contacts
+2. SocialBook shows a list of contacts
+3. User requests to add remarks to a specific contact
+4. SocialBook adds the remark to the specified contact
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SocialBook shows an error message.
+
+      Use case resumes at step 2.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
