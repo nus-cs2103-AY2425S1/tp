@@ -94,13 +94,17 @@ public class MarkAttendanceByStudentCommand extends Command {
         }
 
         MarkAttendanceByStudentCommand otherMarkAttendanceCommand = (MarkAttendanceByStudentCommand) other;
-        return targetIndex.equals(otherMarkAttendanceCommand.targetIndex);
+        return targetIndex.equals(otherMarkAttendanceCommand.targetIndex) &&
+                attendance.equals(otherMarkAttendanceCommand.attendance) &&
+                tutorial.equals(otherMarkAttendanceCommand.tutorial);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
+                .add("attendance", attendance)
+                .add("tutorial", tutorial)
                 .toString();
     }
 
