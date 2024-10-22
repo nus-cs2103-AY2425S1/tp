@@ -87,7 +87,7 @@ public class UniquePersonList implements Iterable<Person> {
     public Person findPerson(String toFind) throws PersonNotFoundException {
         Name name = new Name(toFind);
         for (int i = 0; i < internalList.size(); i++) {
-            if (internalList.get(i).getName().equals(name)) {
+            if (internalList.get(i).getName().isSameName(name)) {
                 return internalList.get(i);
             }
         }
