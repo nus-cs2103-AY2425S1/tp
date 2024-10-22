@@ -27,6 +27,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.consultation.AddConsultCommand;
 import seedu.address.logic.commands.consultation.AddToConsultCommand;
+import seedu.address.logic.commands.consultation.RemoveFromConsultCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.consultation.Consultation;
 import seedu.address.model.student.IsStudentOfCoursePredicate;
@@ -76,6 +77,19 @@ public class AddressBookParserTest {
 
         // Assert that the parsed command is equal to the expected command
         assertEquals(expectedCommand, command);
+    }
+
+    @Test
+    public void parseCommand_removeFromConsult() throws Exception {
+        Index index = Index.fromOneBased(1);
+        String input = " " + index.getOneBased() + " n/Alex Yeoh n/Harry Ng";
+
+        RemoveFromConsultCommand command = (RemoveFromConsultCommand) parser.parseCommand(
+                RemoveFromConsultCommand.COMMAND_WORD + input);
+
+        List<Name> expectedNames = List.of(new Name("Alex Yeoh"), new Name("Harry Ng"));
+
+        assertEquals(new RemoveFromConsultCommand(index, expectedNames), command);
     }
 
     @Test
