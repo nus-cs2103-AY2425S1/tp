@@ -11,28 +11,30 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.MarkAttendanceCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new MarkAttendanceCommand object
+ * Parses input arguments and creates a new UnmarkAttendanceCommand object.
  */
-public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand> {
+public class UnmarkAttendanceCommandParser implements Parser<UnmarkAttendanceCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the MarkAttendanceCommand
-     * and returns a MarkAttendanceCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * Parses the given {@code String} of arguments in the context of the UnmarkAttendanceCommand
+     * and returns an UnmarkAttendanceCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     @Override
-    public MarkAttendanceCommand parse(String userInput) throws ParseException {
+    public UnmarkAttendanceCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, PREFIX_EVENT, PREFIX_INDEX);
+
+
 
         if (!argMultimap.getValue(PREFIX_EVENT).isPresent() || !argMultimap.getValue(PREFIX_INDEX).isPresent()
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MarkAttendanceCommand.MESSAGE_USAGE));
+                    UnmarkAttendanceCommand.MESSAGE_USAGE));
         }
 
         String eventName = argMultimap.getValue(PREFIX_EVENT).get().trim();
@@ -59,7 +61,7 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
             throw new ParseException("Duplicate indices detected. Please specify each student only once.");
         }
 
-        return new MarkAttendanceCommand(eventName, indices);
+        return new UnmarkAttendanceCommand(eventName, indices);
     }
 
     private boolean hasDuplicateIndices(List<Index> indices) {
@@ -72,5 +74,4 @@ public class MarkAttendanceCommandParser implements Parser<MarkAttendanceCommand
         }
         return false;
     }
-
 }

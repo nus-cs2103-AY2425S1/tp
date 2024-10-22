@@ -193,6 +193,11 @@ public class AddCommandTest {
         public List<Person> getStudentsByAttendance(String eventName, boolean isPresent) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteAttendanceEvent(AttendanceEvent event) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

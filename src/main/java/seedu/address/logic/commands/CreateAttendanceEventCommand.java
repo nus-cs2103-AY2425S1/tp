@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.attendance.AttendanceEvent;
@@ -17,21 +19,34 @@ public class CreateAttendanceEventCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Created attendance event: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This attendance event already exists.";
 
-    private final String eventName;
+    private final List<String> eventNames;
 
-    public CreateAttendanceEventCommand(String eventName) {
-        this.eventName = eventName;
+    public CreateAttendanceEventCommand(List<String> eventNames) {
+        this.eventNames = eventNames;
     }
 
+    /**
+     * Executes the command to create a new attendance event.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} that describes the success of the command.
+     * @throws CommandException If an error occurs during command execution.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        if (model.getAttendanceEvent(eventName).isPresent()) {
-            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
+        for (String eventName : eventNames) {
+            if (model.getAttendanceEvent(eventName).isPresent()) {
+                throw new CommandException(String.format("Attendance event '%s' already exists.", eventName));
+            }
         }
 
-        AttendanceEvent event = new AttendanceEvent(eventName);
-        model.addAttendanceEvent(event);
+        for (String eventName : eventNames) {
+            AttendanceEvent event = new AttendanceEvent(eventName);
+            model.addAttendanceEvent(event);
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, eventName));
+        return new CommandResult(String.format("Created attendance events: %s",
+                String.join(", ", eventNames)));
     }
+
 }

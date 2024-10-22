@@ -101,4 +101,7 @@ public interface Model {
     ObservableList<AttendanceEvent> getAttendanceEventList();
 
     List<Person> getStudentsByAttendance(String eventName, boolean isPresent);
+
+    void deleteAttendanceEvent(AttendanceEvent event);
+
 }

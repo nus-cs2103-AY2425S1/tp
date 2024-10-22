@@ -30,6 +30,8 @@ public class ListAttendanceCommandParser implements Parser<ListAttendanceCommand
 
         String eventName = argMultimap.getValue(PREFIX_EVENT).get().trim();
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EVENT, PREFIX_STATUS);
+
         if (eventName.isEmpty()) {
             throw new ParseException("Event name cannot be empty.");
         }
@@ -47,25 +49,5 @@ public class ListAttendanceCommandParser implements Parser<ListAttendanceCommand
 
         return new ListAttendanceCommand(eventName, isPresent);
     }
-    //    @Override
-    //    public ListAttendanceCommand parse(String userInput) throws ParseException {
-    //        String[] parts = userInput.trim().split("\\s+");
-    //        if (parts.length != 2) {
-    //            throw new ParseException("Invalid command format. " + ListAttendanceCommand.MESSAGE_USAGE);
-    //        }
-    //
-    //        String eventName = parts[0];
-    //        String status = parts[1].toLowerCase();
-    //
-    //        boolean isPresent;
-    //        if (status.equals("present")) {
-    //            isPresent = true;
-    //        } else if (status.equals("absent")) {
-    //            isPresent = false;
-    //        } else {
-    //            throw new ParseException("Status must be 'present' or 'absent'.");
-    //        }
-    //
-    //        return new ListAttendanceCommand(eventName, isPresent);
-    //    }
+
 }
