@@ -275,7 +275,7 @@ public class ParserUtil {
         requireNonNull(meetingDate);
         String trimmedMeetingDate = meetingDate.trim();
         if (!MeetingDate.isValidMeetingDate(trimmedMeetingDate)) {
-            throw new ParseException(MeetingTitle.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MeetingDate.MESSAGE_CONSTRAINTS);
         }
         return new MeetingDate(trimmedMeetingDate);
     }

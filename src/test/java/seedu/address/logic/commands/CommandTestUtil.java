@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_BID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KEY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEETING_TITLE;
@@ -51,10 +52,10 @@ public class CommandTestUtil {
     public static final String VALID_UNIT_ADMIRALTY = "02-22";
     public static final String VALID_UNIT_BEDOK = "11-12";
     public static final String VALID_NOTFOUND_UNIT_CLEMENTI = "16-02";
-    public static final String VALID_MEETINGTITLE_ADMIRALTY = "Admiralty HDB Client Viewing";
-    public static final String VALID_MEETINGDATE_ADMIRALTY = "31-10-2024";
-    public static final String VALID_MEETINGTITLE_BEDOK = "Bedok Villa Finalizing Purchase Agreement";
-    public static final String VALID_MEETINGDATE_BEDOK = "11-06-2024";
+    public static final String VALID_MEETING_TITLE_ADMIRALTY = "Admiralty HDB Client Viewing";
+    public static final String VALID_MEETING_DATE_ADMIRALTY = "31-10-2024";
+    public static final String VALID_MEETING_TITLE_BEDOK = "Bedok Villa Finalizing Purchase Agreement";
+    public static final String VALID_MEETING_DATE_BEDOK = "11-06-2024";
     public static final String VALID_TYPE_HDB = "HDB";
     public static final String VALID_TYPE_CONDO = "CONDO";
     public static final String VALID_TYPE_LANDED = "LANDED";
@@ -98,10 +99,10 @@ public class CommandTestUtil {
     public static final String INVALID_TYPE_DESC = " " + PREFIX_TYPE + "PUBLIC"; //iNVALID TYPE
     public static final String INVALID_BID_DESC = " " + PREFIX_BID + "ONE THOUSAND";
     public static final String INVALID_ASK_DESC = " " + PREFIX_ASK + "TWO THOUSAND";
+    public static final String INVALID_MEETING_TITLE_DESC = " " + PREFIX_MEETING_TITLE + "Meeting @$#%&";
+    public static final String INVALID_MEETING_DATE_DESC = " " + PREFIX_MEETING_DATE + "123456";
 
-    public static final String VALID_MEETING_TITLE_ADMIRALTY = "Admiralty HDB Client Viewing";
     public static final String VALID_NOTFOUND_MEETING_TITLE = "Nonexistent Meeting";
-    public static final String VALID_MEETING_DATE_ADMIRALTY = "31-10-2024";
     public static final String VALID_NOTFOUND_MEETING_DATE = "31-12-2025";
     public static final String MEETING_TITLE_DESC_ADMIRALTY = " " + PREFIX_MEETING_TITLE
             + VALID_MEETING_TITLE_ADMIRALTY;
@@ -113,6 +114,16 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    // Valid static keys for commands
+    public static final String VALID_KEY_CLIENTS_DESC = " " + PREFIX_KEY + ListClientsCommand.KEY_WORD;
+    public static final String VALID_KEY_BUYERS_DESC = " " + PREFIX_KEY + ListBuyersCommand.KEY_WORD;
+    public static final String VALID_KEY_SELLERS_DESC = " " + PREFIX_KEY + ListSellersCommand.KEY_WORD;
+    public static final String VALID_KEY_PROPERTIES_DESC = " " + PREFIX_KEY + ListPropertiesCommand.KEY_WORD;
+    public static final String VALID_KEY_MEETINGS_DESC = " " + PREFIX_KEY + ListMeetingsCommand.KEY_WORD;
+    public static final String INVALID_KEY = "someRandomKey";
+    public static final String INVALID_KEY_DESC = " " + PREFIX_KEY + INVALID_KEY;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

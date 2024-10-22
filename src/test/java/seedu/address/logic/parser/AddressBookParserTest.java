@@ -6,8 +6,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MATCHINGPRICE_BEDOK;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGDATE_ADMIRALTY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETINGTITLE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_DATE_ADMIRALTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MEETING_TITLE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_POSTALCODE_ADMIRALTY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_HDB;
@@ -26,6 +26,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.DANIEL;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalMeetings.MEETING_ADMIRALTY;
 import static seedu.address.testutil.TypicalProperty.ADMIRALTY;
 
 import java.util.Arrays;
@@ -36,6 +37,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddMeetingCommand;
 import seedu.address.logic.commands.AddPropertyCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -51,12 +53,18 @@ import seedu.address.logic.commands.FilterClientCommand;
 import seedu.address.logic.commands.FilterPropertyCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListBuyersCommand;
+import seedu.address.logic.commands.ListClientsCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListMeetingsCommand;
+import seedu.address.logic.commands.ListPropertiesCommand;
+import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Buyer;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Seller;
+import seedu.address.model.meeting.Meeting;
 import seedu.address.model.meeting.MeetingDate;
 import seedu.address.model.meeting.MeetingTitle;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -68,6 +76,7 @@ import seedu.address.model.property.Type;
 import seedu.address.model.property.Unit;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.MeetingBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.PropertyBuilder;
@@ -199,13 +208,18 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
     }
 
-    //TODO: Update test to reflect new ListCommand @apollo-tan
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/buyers") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties") instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients") instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/buyers")
+                instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/sellers")
+                instanceof ListSellersCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/properties")
+                instanceof ListPropertiesCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/clients")
+                instanceof ListClientsCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " k/meetings")
+                instanceof ListMeetingsCommand);
     }
 
     @Test
@@ -216,12 +230,23 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_addMeeting() throws Exception {
+        Meeting meeting = new MeetingBuilder(MEETING_ADMIRALTY).build();
+        AddMeetingCommand command = (AddMeetingCommand) parser.parseCommand(
+                AddMeetingCommand.COMMAND_WORD + " " + PREFIX_MEETING_TITLE + MEETING_ADMIRALTY.getMeetingTitle()
+                        + " " + PREFIX_MEETING_DATE + MEETING_ADMIRALTY.getMeetingDate()
+        );
+
+        assertEquals(new AddMeetingCommand(meeting), command);
+    }
+
+    @Test
     public void parseCommand_deleteMeeting() throws Exception {
         DeleteMeetingCommand command = (DeleteMeetingCommand) parser.parseCommand(
             DeleteMeetingCommand.COMMAND_WORD + " " + PREFIX_MEETING_TITLE
-                    + VALID_MEETINGTITLE_ADMIRALTY + " " + PREFIX_MEETING_DATE + VALID_MEETINGDATE_ADMIRALTY);
+                    + VALID_MEETING_TITLE_ADMIRALTY + " " + PREFIX_MEETING_DATE + VALID_MEETING_DATE_ADMIRALTY);
         assertEquals(new DeleteMeetingCommand(
-                new MeetingTitle(VALID_MEETINGTITLE_ADMIRALTY), new MeetingDate(VALID_MEETINGDATE_ADMIRALTY)
+                new MeetingTitle(VALID_MEETING_TITLE_ADMIRALTY), new MeetingDate(VALID_MEETING_DATE_ADMIRALTY)
         ), command);
     }
 
