@@ -69,6 +69,17 @@ public class Person {
         return Collections.unmodifiableSet(emergencyContacts);
     }
 
+    public EmergencyContact getEmergencyContact(Index index) throws EmergencyContactNotFoundException {
+        int i = index.getZeroBased();
+        for (EmergencyContact emergencyContact : emergencyContacts) {
+            if (i == 0) {
+                return emergencyContact;
+            }
+            i = i - 1;
+        }
+        throw new EmergencyContactNotFoundException();
+    }
+
     public EmergencyContact getAndRemoveEmergencyContact(Index index) throws EmergencyContactNotFoundException {
         int i = index.getZeroBased();
         for (EmergencyContact emergencyContact : emergencyContacts) {

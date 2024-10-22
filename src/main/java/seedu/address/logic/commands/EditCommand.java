@@ -117,7 +117,7 @@ public class EditCommand extends Command {
                 throw new CommandException(Messages.MESSAGE_INVALID_EMERGENCY_CONTACT_DISPLAYED_INDEX);
             }
 
-            EmergencyContact emergencyContactToUpdate = personToEdit.getAndRemoveEmergencyContact(index);
+            EmergencyContact emergencyContactToUpdate = personToEdit.getEmergencyContact(index);
             EmergencyContact updatedEmergencyContact =
                     createEditedEmergencyContact(emergencyContactToUpdate, editPersonDescriptor);
 
@@ -139,10 +139,16 @@ public class EditCommand extends Command {
                                                                   Index index) {
         Set<EmergencyContact> updatedEmergencyContacts = new LinkedHashSet<>();
         int i = index.getZeroBased();
+
+        if (personEmergencyContacts.isEmpty()) {
+            updatedEmergencyContacts.add(updatedEmergencyContact);
+            return updatedEmergencyContacts;
+        }
+
         for (EmergencyContact emergencyContact : personEmergencyContacts) {
             if (i == 0) {
+                updatedEmergencyContacts.remove(emergencyContact);
                 updatedEmergencyContacts.add(updatedEmergencyContact);
-                updatedEmergencyContacts.add(emergencyContact);
             } else {
                 updatedEmergencyContacts.add(emergencyContact);
             }
