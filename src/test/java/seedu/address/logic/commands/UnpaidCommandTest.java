@@ -28,6 +28,7 @@ public class UnpaidCommandTest {
         Person personToMarkUnpaid = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
         descriptor.setHasNotPaid();
+        descriptor.setFrequencyToZero();
         UnpaidCommand unpaidCommand = new UnpaidCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(UnpaidCommand.MESSAGE_UNPAID_PERSON_SUCCESS,
@@ -36,7 +37,8 @@ public class UnpaidCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
-                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(), false);
+                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
+                false, personToMarkUnpaid.getFrequency());
 
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
@@ -69,7 +71,8 @@ public class UnpaidCommandTest {
 
         Person editedPerson = new Person(personToMarkUnpaid.getName(), personToMarkUnpaid.getPhone(),
                 personToMarkUnpaid.getEmail(), personToMarkUnpaid.getAddress(),
-                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(), false);
+                personToMarkUnpaid.getBirthday(), personToMarkUnpaid.getTags(),
+                false, personToMarkUnpaid.getFrequency());
         expectedModel.setPerson(personToMarkUnpaid, editedPerson);
 
         assertCommandSuccess(unpaidCommand, model, expectedMessage, expectedModel);
