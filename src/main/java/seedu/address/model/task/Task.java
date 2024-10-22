@@ -36,6 +36,17 @@ public class Task {
         this.groupsWithTask = groupsWithTask;
     }
 
+    /**
+     * Creates a defensive copy of the task
+     * @param otherTask  The task whose values are to be copied
+     */
+    public Task(Task otherTask) {
+        this.name = otherTask.name;
+        this.deadline = otherTask.getDeadline();
+        this.status = otherTask.getStatus();
+        this.groupsWithTask = otherTask.getGroupsWithTask();
+    }
+
     public TaskName getTaskName() {
         return name;
     }

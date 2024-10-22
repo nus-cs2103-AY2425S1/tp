@@ -12,6 +12,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -23,6 +24,7 @@ import seedu.address.model.student.StudentNumber;
 public class DeleteStudentFromGroupCommand extends Command {
     public static final String COMMAND_WORD = "del_s_g";
     public static final String COMMAND_WORD_ALIAS = "dsg";
+    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the student identified from the target group by the student number used.\n"
@@ -69,8 +71,10 @@ public class DeleteStudentFromGroupCommand extends Command {
         }
 
         model.deleteStudentFromGroup(targetGroup, studentToBeDeleted);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(targetGroup.getGroupName()));
+        model.setStateGroups();
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
-            Messages.format(targetStudentNo), Messages.format(targetGroupName)));
+            Messages.format(targetStudentNo), Messages.format(targetGroupName)), LIST_GROUP_MARKER);
     }
 
     @Override
@@ -95,5 +99,11 @@ public class DeleteStudentFromGroupCommand extends Command {
             .add("targetGroupName", targetGroupName)
             .add("targetStudentNumber", targetStudentNo)
             .toString();
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 }

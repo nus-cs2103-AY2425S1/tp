@@ -11,6 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Deadline;
@@ -24,6 +25,7 @@ public class AddTaskToGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "add_task_grp";
     public static final String COMMAND_WORD_ALIAS = "atg";
+    public static final int LIST_GROUP_TASK_MARKER = 3;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Adds a task to a group.\n"
@@ -77,9 +79,17 @@ public class AddTaskToGroupCommand extends Command {
         } else {
             model.increaseGroupWithTask(task);
         }
-
+        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.setStateGroupTask();
         return new CommandResult(String.format(MESSAGE_SUCCESS, task.getTaskName().toString(),
-            group.getGroupName().fullName));
+            group.getGroupName().fullName), LIST_GROUP_TASK_MARKER);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 
     @Override

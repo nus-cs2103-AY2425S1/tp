@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -51,6 +52,22 @@ public class Student {
         this.tags.addAll(tags);
         this.groupName = groupName;
         this.studentNumber = studentNumber;
+    }
+
+    /**
+     * Creates a defensive copy of the student
+     * @param otherStudent  The student whose values are to be copied
+     */
+    public Student(Student otherStudent) {
+        requireNonNull(otherStudent);
+        this.name = otherStudent.name;
+        this.email = otherStudent.email;
+        this.groupName = otherStudent.groupName;
+        this.studentNumber = otherStudent.studentNumber;
+        for (Tag tag: otherStudent.tags) {
+            Tag newTag = new Tag(tag.getTagName());
+            this.tags.add(newTag);
+        }
     }
 
     public Name getName() {

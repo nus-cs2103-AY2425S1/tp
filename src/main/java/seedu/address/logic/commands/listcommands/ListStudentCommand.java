@@ -8,6 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 
 /**
  * Lists all the students in the address book.
@@ -30,6 +31,11 @@ public class ListStudentCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.setStateStudents();
         return new CommandResult(MESSAGE_SUCCESS, LIST_STUDENT_MARKER);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        return versionHistory;
     }
 
     @Override

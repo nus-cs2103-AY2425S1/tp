@@ -10,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -20,6 +21,7 @@ import seedu.address.model.student.Student;
 public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "del_g";
     public static final String COMMAND_WORD_ALIAS = "dg";
+    public static final int LIST_GROUP_MARKER = 1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the group identified by the group name used.\n"
@@ -73,7 +75,14 @@ public class DeleteGroupCommand extends Command {
         }
         groupToBeDeleted.getTasks().forEach(x -> model.decreaseGroupWithTask(x));
         model.deleteGroup(groupToBeDeleted);
+        model.setStateGroups();
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, Messages.format(groupToBeDeleted),
-            studentsAffected));
+            studentsAffected), LIST_GROUP_MARKER);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 }

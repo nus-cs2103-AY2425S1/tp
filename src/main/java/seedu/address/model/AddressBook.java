@@ -86,6 +86,29 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTasks(newData.getTaskList());
     }
 
+    /**
+     * Creates a defensive copy of the T_Assistant
+     * @param newData  The data to be copied over.
+     * @return         Returns the new addressbook
+     */
+    public AddressBook duplicateCopy(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        AddressBook newAddressBook = new AddressBook();
+        for (Student student: newData.getStudentList()) {
+            Student newStudent = new Student(student);
+            newAddressBook.students.add(newStudent);
+        }
+        for (Group group: newData.getGroupList()) {
+            Group newGroup = new Group(group);
+            newAddressBook.groups.add(newGroup);
+        }
+        for (Task task: newData.getTaskList()) {
+            Task newTask = new Task(task);
+            newAddressBook.tasks.add(newTask);
+        }
+        return newAddressBook;
+    }
+
     //// student-level operations
 
     /**
@@ -237,7 +260,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void incrementTask(Task task) {
         tasks.forEach(x -> {
-            if (x.isSameTask(x)) {
+            if (x.isSameTask(task)) {
                 x.increaseGroupWithTask();
             }
         });
@@ -248,7 +271,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void decrementTask(Task task) {
         tasks.forEach(x -> {
-            if (x.isSameTask(x)) {
+            if (x.isSameTask(task)) {
                 x.decreaseGroupWithTask();
             }
         });

@@ -13,6 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Status;
@@ -25,6 +26,7 @@ public class MarkTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "mark_t";
     public static final String COMMAND_WORD_ALIAS = "mt";
+    public static final int LIST_GROUP_TASK_MARKER = 3;
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Changes the status of a task.\n"
         + "Parameters: "
@@ -70,7 +72,17 @@ public class MarkTaskCommand extends Command {
             taskToMark.getGroupsWithTask());
 
         model.setTask(taskToMark, editedTask, group);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus));
+        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.setStateGroupTask();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(taskToMark), changedStatus),
+                LIST_GROUP_TASK_MARKER);
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 
     @Override

@@ -14,6 +14,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.task.Task;
@@ -25,6 +26,7 @@ public class DeleteTaskFromGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_task_grp";
     public static final String COMMAND_WORD_ALIAS = "dtg";
+    public static final int LIST_GROUP_TASK_MARKER = 3;
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes a task from a group.\n"
         + "Parameters: "
@@ -64,8 +66,12 @@ public class DeleteTaskFromGroupCommand extends Command {
 
         model.deleteTaskFromGroup(task, group);
         model.decreaseGroupWithTask(task);
+        model.setMostRecentGroupTaskDisplay(group.getGroupName().fullName);
+        model.updateFilteredGroupList(x -> x.getGroupName().equals(group.getGroupName()));
+        model.setStateGroupTask();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(task), Messages.format(group)),
+                LIST_GROUP_TASK_MARKER);
     }
 
     @Override
@@ -89,5 +95,11 @@ public class DeleteTaskFromGroupCommand extends Command {
             .add("index", index)
             .add("toDeleteFrom", toDeleteFrom)
             .toString();
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 }

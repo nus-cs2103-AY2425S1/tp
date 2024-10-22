@@ -11,6 +11,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.VersionHistory;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.StudentNumber;
 
@@ -20,6 +21,7 @@ import seedu.address.model.student.StudentNumber;
 public class DeleteStudentCommand extends Command {
     public static final String COMMAND_WORD = "del_s";
     public static final String COMMAND_WORD_ALIAS = "ds";
+    public static final int LIST_STUDENT_MARKER = 0;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + "/" + COMMAND_WORD_ALIAS
         + ": Deletes the student identified by the student number used.\n"
@@ -63,7 +65,9 @@ public class DeleteStudentCommand extends Command {
                 studentToBeDeleted);
         }
         model.deletePerson(studentToBeDeleted);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToBeDeleted)));
+        model.setStateStudents();
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(studentToBeDeleted)),
+                LIST_STUDENT_MARKER);
     }
 
     public StudentNumber getTargetStudentNo() {
@@ -90,5 +94,11 @@ public class DeleteStudentCommand extends Command {
         return new ToStringBuilder(this)
             .add("targetStudentNumber", targetStudentNo)
             .toString();
+    }
+
+    @Override
+    public VersionHistory updateVersionHistory(VersionHistory versionHistory, Model model) throws CommandException {
+        versionHistory.addVersion(model);
+        return versionHistory;
     }
 }
