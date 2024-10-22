@@ -40,7 +40,7 @@ DLTbook is a **desktop app for managing contacts and DLT public addresses, optim
 
    * `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` : Adds a public address to a contact
 
-   * `retrievePublicAddress c/BTC n/Travis w/wallet1` : Retrieves the public address of a contact
+   * `retrievePublicAddress 1 pa/BTC l/wallet1` : Retrieves the public address of a contact
 
    * `deletePublicAddress c/BTC n/Travis w/wallet1` : Deletes the public address of a contact
 
@@ -182,19 +182,29 @@ Format: `addPublicAddress c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`
 Examples:
 * `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2` adds a public address to a contact named `Travis` with the wallet name `wallet1` and the public address `0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`.
 
-### Retrieving a public address of a contact : `retrievePublicAddress`
+### Retrieving public addresses of a contact : `retrievePublicAddress`
 
-Retrieves the public address of a contact.
+Retrieves the public addresses of a contact.
 
-Format: `retrievePublicAddress c/NETWORK n/NAME w/WALLET_NAME`
+Format: `retrievePublicAddress INDEX pa/NETWORK [l/WALLET_NAME]`
 
-* Retrieves the public address of a contact based on the NAME
-* The contact is identified by the `NAME` and `WALLET_NAME` provided.
-* The `NETWORK` parameter specifies the ticker name for each network and should be in all CAPS (e.g., `BTC`, `ETH`, `SOL`, `SUI`, etc.).
-* the `NAME` parameter specifies the name of the contact to which the public address belongs.
+* `INDEX`: **Positive integer** 1, 2, 3, ... corresponding to index number of desired contact shown in the displayed person list.
+* `NETWORK`: Ticker name of network of desired public address in **CAPS**.<br />
+  Allowed values: `BTC|ETH`.
 
-Examples:
-* `retrievePublicAddress c/BTC n/Travis w/wallet1` retrieves the public address of a contact named `Travis` with the wallet name `wallet1`.
+#### Options
+
+* `WALLET_NAME`: Part of the label of desired public address (**case-insensitive**).
+
+#### Examples
+
+* `retrievePublicAddress 3 pa/BTC`: retrieves all the BTC public addresses of the third contact.<br />
+  TODO: Example output
+* `retrievePublicAddress 3 pa/BTC l/Daily wal`: retrieves all the BTC public addresses of the third contact which label contains "daily wal" (case-insensitive).
+
+#### Exceptions
+
+* TODO: Link to exception
 
 ### Deleting a public address of a contact : `deletePublicAddress`
 
@@ -273,7 +283,7 @@ Action     | Format, Examples
 **Help**   | `help`
 **Exit**   | `exit`
 **Add Public Address** | `addPublicAddress c/NETWORK n/NAME w/WALLET_NAME pa/PUBLIC_ADDRESS`<br> e.g., `addPublicAddress c/ETH n/Travis w/wallet1 pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`
-**Retrieve Public Address** | `retrievePublicAddress c/NETWORK n/NAME w/WALLET_NAME`<br> e.g., `retrievePublicAddress c/BTC n/Travis w/wallet1`
+**Retrieve Public Address** | `retrievePublicAddress INDEX pa/NETWORK l/WALLET_NAME`<br> e.g., `retrievePublicAddress 3 pa/BTC l/Daily wallet`
 **Delete Public Address** | `deletePublicAddress c/NETWORK n/NAME w/WALLET_NAME`<br> e.g., `deletePublicAddress c/BTC n/Travis w/wallet1`
 **Public Address Search** | `searchPublicAddress pa/PUBLIC_ADDRESS`<br> e.g., `publicAddressSearch pa/0x28f91d6e72eaf4372892e6c6e45dc41b574163e9fcdf94f4997958b46d772fa2`
 
