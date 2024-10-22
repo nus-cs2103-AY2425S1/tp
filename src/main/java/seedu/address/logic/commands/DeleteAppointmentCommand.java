@@ -52,6 +52,13 @@ public class DeleteAppointmentCommand extends Command {
         Schedule appointment = lastShownList.get(index).getSchedules().iterator().next();
         Person appointmentToDelete = lastShownList.get(index);
         model.deleteAppointment(appointmentToDelete);
+
+        // if the person has no scheduled appointments and a reminder set, delete the reminder  
+        if (lastShownList.get(index).getSchedules().isEmpty()
+                && appointmentToDelete.getReminder() != null) {
+            model.deleteReminder(appointmentToDelete);
+        }
+
         return new CommandResult(String.format(MESSAGE_DELETE_APPOINTMENT_SUCCESS,
                 Messages.formatSchedule(appointmentToDelete, appointment)));
     }
