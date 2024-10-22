@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Sex;
+import seedu.address.model.person.StarredStatus;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -56,8 +57,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
         Set<Appointment> appointment = ParserUtil.parseAppointments(argMultimap.getAllValues(PREFIX_APPOINTMENT));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        StarredStatus starredStatus = new StarredStatus("false");
 
-        Person person = new Person(name, phone, email, address, age, sex, appointment, tagList);
+        Person person = new Person(name, phone, email, address, age, sex, appointment, tagList, starredStatus);
 
         return new AddCommand(person);
     }
