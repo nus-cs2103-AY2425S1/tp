@@ -11,7 +11,6 @@
 
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <Label text="Attendance"/>
-    <Label fx:id="week" styleClass="cell_small_label" text="\$current week"/>
-    <Label fx:id="dateRange" styleClass="cell_small_label" text="\$date range"/>
-    <VBox fx:id="attendanceList" />
+    <Label fx:id="subject" styleClass="cell_small_label" text="\$subject"/>
+    <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance"/>
 </VBox>

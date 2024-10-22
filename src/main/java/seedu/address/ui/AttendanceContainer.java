@@ -29,11 +29,18 @@ public class AttendanceContainer extends UiPart<Region> {
     private Label week;
     @FXML
     private Label dateRange;
+    @FXML
+    private VBox attendanceList;
 
     public AttendanceContainer(List<Participation> participationList) {
         super(FXML);
         this.participationList = participationList;
 
+        setDisplayDate();
+        setAttendanceList();
+    }
+
+    private void setDisplayDate() {
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(java.time.DayOfWeek.MONDAY));
         LocalDate endOfWeek = startOfWeek.plusDays(6);
@@ -41,7 +48,11 @@ public class AttendanceContainer extends UiPart<Region> {
 
         week.setText("week " + today.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR));
         dateRange.setText(startOfWeek.format(formatter) + " ~ " + endOfWeek.format(formatter));
+    }
 
-
+    private void setAttendanceList() {
+        participationList.forEach(participation -> attendanceList.getChildren()
+                .add(new AttendanceCard(participation.getTutorial().getSubject(),
+                        participation.getAttendanceList()).getRoot()));
     }
 }
