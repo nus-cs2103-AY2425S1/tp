@@ -77,9 +77,12 @@ the constraints of each parameter when used in a command.
 > * Items with `…`​ after them can be used multiple times.<br>
 >  e.g. `c/CONDITION…​` can be used as, `c/Knee Pain`, `c/Flu c/Fever` etc.
 >
-> * Parameters can be in any order for some commands.<br>
+> * Parameters that have a prefix can be in any order.<br>
 > e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 >
+> * Parameters that have no prefix must follow the specified order in the command format.<br>
+> e.g. if the command specifies `NRIC n/NAME p/PHONE_NUMBER`, `NRIC` must take precedence over `n/NAME` and `p/PHONE_NUMBER`.
+> 
 > * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
 > e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 >
@@ -100,8 +103,8 @@ Format: `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 > :information_source: **Note:**
 > 
 > * All fields are compulsory and must be non-empty.
-> * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case. 
-> * The new patient will be added to the end of the patient list in the GUI.
+> * A patient will not be added if the NRIC given is already associated with another patient in MediBase3. An error message will be displayed in this case.
+> * The new patient will be added to the end of the Patient List Panel.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints of each parameter.
 
 Examples:
@@ -110,8 +113,8 @@ Examples:
 
 {: .alert .alert-success}
 > :bulb: **Tip:**
-> 
-> Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
+>
+> * Made a mistake or a typo? You can use the [`edit` command](#editing-a-person--edit) to update the patient's details.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -123,35 +126,49 @@ Format: `delete NRIC`
 
 {: .alert .alert-info}
 > :information_source: **Note:**
-> * Deletes the patient with the specified `NRIC`.
-> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. E.g. `S1234567A` and not `S123`. 
-> * You can only delete one patient at a time.
+> 
+> * Deletes the patient with the specified `NRIC` in MediBase3.
+> * The `NRIC` provided must be the **full NRIC** of the patient to be deleted. E.g. `S1234567A` and not `S123`.
+> * You can delete a patient even if they are not being currently displayed in the Patient List Panel.
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for the `NRIC` parameter.
 
-Examples:
+Example:
 * `delete S1234567A` will delete the patient with the NRIC `S1234567A`.
 
-[Back to Table of Contents](#table-of-contents)
-
-#### Editing a person : `edit`
-
-Edits an existing person in the address book.
-
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+> 
+> * Once a patient is deleted from MediBase3, you will be **unable to recover their information**.
+> Please ensure that you have provided the correct `NRIC` of the patient that you want to delete.
+> * Deleting a patient will also remove all their associated appointments from the Appointment List Panel.
 
 [Back to Table of Contents](#table-of-contents)
 
+#### Editing a patient : `edit`
+
+Edits an existing patient details in MediBase3.
+
+Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> * Edits the patient with the specified `NRIC` in MediBase3.
+> * **At least one** of the optional fields must be provided. E.g. `edit S1234567A` is invalid.
+> * Existing values will be updated to the given input values.
+> * You can edit a patient's details even if they are not being currently displayed in the Patient List Panel.
+> * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for each parameter.
+
+Example:
+*  `edit S1234567A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the patient with the NRIC`S1234567A`<br>
+to `91234567` and `johndoe@example.com` respectively.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> Editing the patient's `NAME` or `NRIC` will also update their associated appointments in the Appointment List Panel to reflect the new change.
+
+[Back to Table of Contents](#table-of-contents)
 
 
 ### Managing Appointments
