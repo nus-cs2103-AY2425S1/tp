@@ -1,9 +1,13 @@
 package seedu.hireme.logic.parser;
 
-import seedu.hireme.commons.core.index.Index;
-import seedu.hireme.logic.commands.DeleteCommand;
+import seedu.hireme.commons.util.AppUtil;
+import seedu.hireme.logic.Messages;
 import seedu.hireme.logic.commands.FilterCommand;
+import seedu.hireme.logic.commands.exceptions.CommandException;
 import seedu.hireme.logic.parser.exceptions.ParseException;
+import seedu.hireme.logic.validator.StatusValidator;
+import seedu.hireme.model.internshipapplication.Email;
+import seedu.hireme.model.internshipapplication.Status;
 import seedu.hireme.model.internshipapplication.StatusPredicate;
 
 import static seedu.hireme.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -24,6 +28,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
+        if (!StatusValidator.of().validate(trimmedArgs)) {
+            throw new ParseException(Status.MESSAGE_CONSTRAINTS);
+        };
         return new FilterCommand(new StatusPredicate(trimmedArgs));
     }
 

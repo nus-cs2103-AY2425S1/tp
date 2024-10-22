@@ -12,10 +12,12 @@ import seedu.hireme.logic.validator.DateValidator;
 import seedu.hireme.logic.validator.EmailValidator;
 import seedu.hireme.logic.validator.NameValidator;
 import seedu.hireme.logic.validator.RoleValidator;
+import seedu.hireme.logic.validator.StatusValidator;
 import seedu.hireme.model.internshipapplication.Date;
 import seedu.hireme.model.internshipapplication.Email;
 import seedu.hireme.model.internshipapplication.Name;
 import seedu.hireme.model.internshipapplication.Role;
+import seedu.hireme.model.internshipapplication.Status;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
