@@ -24,6 +24,31 @@ The user guide contains formatting to highlight important info. The standards us
 
 ## Table of Contents
 
+- [Quick Start](#quick-start)
+- [Features](#features)
+  - [Viewing help](#viewing-help--help)
+  - [Adding a person](#adding-a-person-add)
+  - [Listing all persons](#listing-all-persons--list)
+  - [Editing a person](#editing-a-person--edit)
+  - [Editing a person](#editing-a-person--edit)
+  - [Filtering persons by skills](#filtering-persons-by-skills-filter)
+  - [Locating persons by name](#locating-persons-by-name-find)
+  - [Deleting a person](#deleting-a-person--delete)
+  - [Clearing all entries](#clearing-all-entries--clear)
+  - [Adding a project](#adding-a-project--addproject)
+  - [Listing all projects](#listing-all-projects--listproject)
+  - [Finding projects by name](#finding-projects-by-name--findproject)
+  - [Deleting a project](#deleting-a-project--deleteproject)
+  - [Clear all project entries](#clear-all-project-entries--clearproject)
+  - [Create Assignment](#create-assignment--assign)
+  - [List Assignments](#list-assignments--listassignments)
+  - [Delete Assignment](#delete-assignment-unassign)
+  - [Exiting the program](#exiting-the-program--exit)
+- [FAQ](#faq)
+- [Known Issues](#known-issues)
+- [Command Summary](#command-summary)
+- [Glossary](#glossary)
+
 ---
 
 ## Quick Start
@@ -172,7 +197,7 @@ Expected output:
 
 [Return to Top](#table-of-contents)
 
-### Filtering employees persons by skills: `filter`
+### Filtering persons by skills: `filter`
 
 Finds employees who has at least one skill or tag matching at least one of the search items.
 
@@ -438,7 +463,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
@@ -447,7 +472,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ---
 
-## Command summary
+## Command Summary
 
 | Action                      | Format, Examples                                                                                                                                                                                                         |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
