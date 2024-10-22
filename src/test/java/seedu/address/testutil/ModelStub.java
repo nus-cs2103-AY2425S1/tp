@@ -94,6 +94,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void deleteConsult(Consultation consult) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public boolean hasConsult(Consultation consult) {
         throw new AssertionError("This method should not be called.");
     }

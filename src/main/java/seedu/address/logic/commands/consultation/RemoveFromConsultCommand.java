@@ -20,6 +20,7 @@ import seedu.address.model.student.Student;
 public class RemoveFromConsultCommand extends Command {
 
     public static final String COMMAND_WORD = "removefromconsult";
+    public static final CommandType COMMAND_TYPE = CommandType.REMOVEFROMCONSULT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes students from the consultation identified by the index.\n"
@@ -52,7 +53,7 @@ public class RemoveFromConsultCommand extends Command {
      */
     @Override
     public CommandType getCommandType() {
-        return CommandType.REMOVEFROMCONSULT;
+        return COMMAND_TYPE;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class RemoveFromConsultCommand extends Command {
 
         return new CommandResult(
             String.format(MESSAGE_REMOVE_FROM_CONSULT_SUCCESS, consultationToEdit),
-            CommandType.REMOVEFROMCONSULT);
+            COMMAND_TYPE);
     }
 
     @Override

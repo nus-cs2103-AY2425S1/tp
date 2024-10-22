@@ -149,6 +149,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteConsult(Consultation consult) {
+        addressBook.removeConsult(consult);
+    }
+
+    @Override
     public boolean hasConsult(Consultation consult) {
         return addressBook.hasConsult(consult);
     }
@@ -167,6 +172,6 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredStudents.equals(otherModelManager.filteredStudents)
-                && filteredConsultations.equals(otherModelManager.filteredConsultations); // Include consultation list
+                && filteredConsultations.equals(otherModelManager.filteredConsultations);
     }
 }
