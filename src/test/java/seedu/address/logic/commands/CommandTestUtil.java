@@ -75,7 +75,9 @@ public class CommandTestUtil {
     public static final String EDIT_POLICY_LIFE_1 = " 1 "
             + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE + " "
             + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " "
-            + PREFIX_POLICY_END_DATE + VALID_DATE_2;
+            + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "
+            + PREFIX_NEXT_PAYMENT_DATE + VALID_INSURANCE_PAYMENT_DATE + " "
+            + PREFIX_PAYMENT_AMOUNT + VALID_INSURANCE_AMOUNT_DUE;
     public static final String VALID_EDIT_POLICY_LIFE = " " + PREFIX_POLICY + EDIT_POLICY_LIFE_1;
     public static final String VALID_ASSIGN_POLICY = " " + PREFIX_POLICY_NAME + VALID_POLICY_NAME_LIFE
             + PREFIX_POLICY_START_DATE + VALID_DATE_1 + " " + PREFIX_POLICY_END_DATE + VALID_DATE_2 + " "

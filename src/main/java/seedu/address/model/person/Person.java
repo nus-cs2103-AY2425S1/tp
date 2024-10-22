@@ -88,11 +88,14 @@ public class Person {
      * @return true if the policy was successfully added, false if the policy already exists
      */
     public boolean assignPolicy(Policy policy) {
-        if (policies.contains(policy)) {
-            return false;
+        for (Policy p : policies) {
+            if (p.isSamePolicy(policy)) {
+                return false;
+            }
         }
         policies.add(policy);
         return true;
+
     }
 
     public void removePolicy(Policy policy) {
@@ -106,8 +109,11 @@ public class Person {
      */
     public String getPoliciesString() {
         StringBuilder sb = new StringBuilder();
+        int count = 1;
         for (Policy policy : policies) {
+            sb.append(String.format("%s.", count));
             sb.append(policy.toString()).append("\n");
+            count++;
         }
         return sb.toString();
     }

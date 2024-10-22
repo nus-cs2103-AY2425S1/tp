@@ -68,7 +68,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("$%.2f due on %s", amount, paymentDueDate);
     }
 
     @Override

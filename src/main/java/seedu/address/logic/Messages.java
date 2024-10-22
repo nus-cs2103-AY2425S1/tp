@@ -21,6 +21,8 @@ public class Messages {
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_INVALID_POLICY_FORMAT = "Invalid policy format!";
     public static final String MESSAGE_INVALID_POLICY_DISPLAYED_INDEX = "The policy index provided is invalid";
+    public static final String MESSAGE_DUPLICATE_POLICY_NAME = "The policy name provided is duplicated";
+    public static final String MESSAGE_DUPLICATE_POLICY_INDEX = "Multiple identical policy index specified to edit";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
