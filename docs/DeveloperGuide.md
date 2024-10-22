@@ -297,19 +297,18 @@ List<Student> students = consult.getStudents(); // Returns unmodifiable list
 
 **3. Command Processing**
 
-The `addconsult` command follows this flow:
+The system supports these consultation management commands:
+- `addconsult`: Creates new consultation sessions
+- `addtoconsult`: Adds students to existing consultations
+- `deleteconsult`: Removes consultation sessions
+- `removefromconsults`: Removes students from consultations
 
-1. User enters command:
+Command examples:
 ```
 addconsult d/2024-10-20 t/14:00
-```
-
-2. System processes command:
-```java
-Date date = ParserUtil.parseDate(dateStr);
-Time time = ParserUtil.parseTime(timeStr);
-Consultation consult = new Consultation(date, time, List.of());
-return new AddConsultCommand(consult);
+addtoconsult 1 n/John Doe n/Harry Ng
+deleteconsult 1
+removefromconsult 1 n/John Doe
 ```
 
 #### Design Considerations
@@ -561,6 +560,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3b. Student already in consultation
     * 3b1. System shows error message that student is already registered
     * 3b2. Use case resumes from step 3
+
+**<u>Use case: UC8 - Delete Consultation</u>**
+
+**MSS**
+
+1. TA lists existing consultations
+2. TA enters command to delete specific consultation(s) by index
+3. System removes the consultation(s)
+4. Success message shown with deleted consultation details
+
+**Extensions**
+
+* 1a. No existing consultations
+    * 1a1. System shows message that no consultations are available
+    * 1a2. Use case ends
+
+* 2a. Invalid consultation index
+    * 2a1. System shows error message listing invalid indices
+    * 2a2. Use case resumes from step 2
+
+**<u>Use case: UC9 - Remove Students from Consultation</u>**
+
+**MSS**
+
+1. TA lists existing consultations
+2. TA selects consultation by index 
+3. TA specifies students to remove by name
+4. System validates student existence in consultation 
+5. System removes specified students from consultation 
+6. Success message shown
+
+**Extensions**
+
+* 2a. Invalid consultation index
+    * 2a1. System shows error message
+    * 2a2. Use case resumes from step 2
+
+* 3a. Student not found in system
+    * 3a1. System shows error message identifying missing student
+    * 3a2. Use case resumes from step 3
+
+* 4a. Student not in consultation
+    * 4a1. System shows error message that student is not in consultation
+    * 4a2. Use case resumes from step 3
 
 *{More to be added}*
 
