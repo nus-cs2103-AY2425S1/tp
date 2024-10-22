@@ -3,11 +3,11 @@ package seedu.ddd.model.contact.common;
 import static seedu.ddd.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
-//import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
-//import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
-//import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Arrays;
@@ -69,6 +69,24 @@ public class ContactPredicateBuilder {
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
             Id id = new Id(Integer.parseInt(argMultimap.getValue(PREFIX_ID).get()));
             combinedPredicate = combinedPredicate.and(new ContactIdPredicate(id));
+        }
+        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+            Phone phoneNumber = new Phone(argMultimap.getValue(PREFIX_PHONE).get());
+            combinedPredicate = combinedPredicate.and(new ContactPhonePredicate(phoneNumber));
+        }
+        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+            Email email = new Email(argMultimap.getValue(PREFIX_EMAIL).get());
+            combinedPredicate = combinedPredicate.and(new ContactEmailPredicate(email));
+        }
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            String trimmedArgs = argMultimap.getValue(PREFIX_ADDRESS).get().trim();
+            if (trimmedArgs.isEmpty()) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+            }
+            String[] addressKeywords = trimmedArgs.split("\\s+");
+            combinedPredicate = combinedPredicate.and(
+                    new AddressContainsKeywordsPredicate(Arrays.asList(addressKeywords)));
         }
 
         return combinedPredicate;
