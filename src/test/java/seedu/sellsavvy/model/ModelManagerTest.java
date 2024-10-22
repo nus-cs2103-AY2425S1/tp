@@ -232,5 +232,10 @@ public class ModelManagerTest {
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+
+        //different selectedPerson -> returns false
+        modelManager.updateSelectedPerson(ALICE);
+        assertFalse(modelManager.equals(modelManagerCopy));
+        assertFalse(modelManagerCopy.equals(modelManager));
     }
 }
