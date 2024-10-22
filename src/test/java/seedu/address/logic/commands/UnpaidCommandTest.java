@@ -13,10 +13,12 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Person;
 
 public class UnpaidCommandTest {
@@ -125,6 +127,31 @@ public class UnpaidCommandTest {
         UnpaidCommand unpaidCommand = new UnpaidCommand(targetIndex, descriptor);
         String expected = UnpaidCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, unpaidCommand.toString());
+    }
+
+    @Test
+    public void unpaidPersonDescriptor_equals() {
+        UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
+
+        // same object -> returns true
+        assertTrue(descriptor.equals(descriptor));
+
+        // different types -> returns false
+        assertFalse(descriptor.equals(1));
+
+        // null -> returns false
+        assertFalse(descriptor.equals(null));
+    }
+
+    @Test
+    public void unpaidPersonDescriptor_toString() {
+        UnpaidCommand.UnpaidPersonDescriptor descriptor = new UnpaidCommand.UnpaidPersonDescriptor();
+        descriptor.setHasNotPaid();
+        String expected = new ToStringBuilder(descriptor)
+                .add("hasNotPaid", false)
+                .add("frequency", new Frequency("0"))
+                .toString();
+        assertEquals(expected, descriptor.toString());
     }
 
     private void showNoPerson(Model model) {

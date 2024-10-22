@@ -106,7 +106,10 @@ public class UnpaidCommand extends Command {
         private Boolean hasPaid;
         private Frequency frequency;
 
-        public UnpaidPersonDescriptor() {}
+        public UnpaidPersonDescriptor() {
+            setHasNotPaid();
+            setFrequencyToZero();
+        }
 
         /**
          * Copy constructor.
