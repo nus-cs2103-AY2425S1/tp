@@ -56,6 +56,8 @@ public class AddressBookParser {
         commands.put(HelpCommand.COMMAND_WORD, arguments -> new HelpCommand());
         commands.put(FindTagCommand.COMMAND_WORD, arguments -> new FindTagCommandParser().parse(arguments));
         commands.put(RemarkCommand.COMMAND_WORD, arguments -> new RemarkCommandParser().parse(arguments));
+        commands.put(ShowCommand.COMMAND_WORD, arguments -> new ShowCommandParser().parse(arguments));
+        commands.put(ListingAddCommand.COMMAND_WORD_PREFIX, arguments -> new ListingCommandsParser().parse(arguments));
     }
 
     /**
