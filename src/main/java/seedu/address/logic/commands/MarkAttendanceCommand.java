@@ -25,12 +25,12 @@ public class MarkAttendanceCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE "
-            + PREFIX_PRESENT + "STATUS : Present or Absent (Case Insensitive)\n"
+            + PREFIX_PRESENT + "STATUS : 'p' or 'a'\n"
             + "Example: "
             + COMMAND_WORD + " "
             + PREFIX_NAME + " John Doe "
             + PREFIX_DATE + "2019-10-09 "
-            + PREFIX_PRESENT + " present";
+            + PREFIX_PRESENT + " p";
 
     public static final String MESSAGE_SUCCESS = "Attendance marked: %1$s from Tutorial Group: %2$s is %3$s on %4$s";
 
@@ -65,6 +65,6 @@ public class MarkAttendanceCommand extends Command {
 
         // Mark attendance
         student.markAttendance(date, attendance.value);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, name, tg, attendance.value, date));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, name, tg, attendance.toString(), date));
     }
 }
