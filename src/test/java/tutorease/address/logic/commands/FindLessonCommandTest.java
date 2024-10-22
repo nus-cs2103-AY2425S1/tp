@@ -17,6 +17,7 @@ import static tutorease.address.testutil.TypicalStudents.getTypicalTutorEase;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,6 +25,7 @@ import tutorease.address.logic.Messages;
 import tutorease.address.model.Model;
 import tutorease.address.model.ModelManager;
 import tutorease.address.model.UserPrefs;
+import tutorease.address.model.lesson.Lesson;
 import tutorease.address.model.lesson.LessonContainsNamesPredicate;
 
 /**
@@ -77,14 +79,16 @@ public class FindLessonCommandTest {
         FindLessonCommand command = new FindLessonCommand(predicate);
         expectedModel.updateFilteredLessonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(
+        List<Lesson> expectedLessons = Arrays.asList(
                 MATH_LESSON,
                 SCIENCE_LESSON,
                 ENGLISH_LESSON,
                 HISTORY_LESSON,
                 GEOGRAPHY_LESSON,
                 ART_LESSON,
-                MUSIC_LESSON), model.getFilteredLessonList());
+                MUSIC_LESSON);
+        expectedLessons.sort(Lesson::compareTo);
+        assertEquals(expectedLessons, model.getFilteredLessonList());
     }
 
     @Test
@@ -94,14 +98,16 @@ public class FindLessonCommandTest {
         FindLessonCommand command = new FindLessonCommand(predicate);
         expectedModel.updateFilteredLessonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(
+        List<Lesson> expectedLessons = Arrays.asList(
                 MATH_LESSON,
                 SCIENCE_LESSON,
                 ENGLISH_LESSON,
                 HISTORY_LESSON,
                 GEOGRAPHY_LESSON,
                 ART_LESSON,
-                MUSIC_LESSON), model.getFilteredLessonList());
+                MUSIC_LESSON);
+        expectedLessons.sort(Lesson::compareTo);
+        assertEquals(expectedLessons, model.getFilteredLessonList());
     }
 
     @Test
@@ -111,11 +117,13 @@ public class FindLessonCommandTest {
         FindLessonCommand command = new FindLessonCommand(predicate);
         expectedModel.updateFilteredLessonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(
+        List<Lesson> expectedLessons = Arrays.asList(
                 MATH_LESSON,
                 SCIENCE_LESSON,
                 HISTORY_LESSON,
-                GEOGRAPHY_LESSON), model.getFilteredLessonList());
+                GEOGRAPHY_LESSON);
+        expectedLessons.sort(Lesson::compareTo);
+        assertEquals(expectedLessons, model.getFilteredLessonList());
     }
 
     @Test
