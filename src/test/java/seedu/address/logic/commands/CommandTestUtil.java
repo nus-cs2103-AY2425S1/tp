@@ -60,7 +60,7 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENT_DATE_PHYSIO = "2024-01-01";
     public static final String VALID_APPOINTMENT_TIMEPERIOD_PHYSIO = "1235-1500";
     public static final String VALID_MEDCON_AMY = "Diabetes";
-    public static final String VALID_MEDCON_BOB = "Rabbies";
+    public static final String VALID_MEDCON_BOB = "Rabies";
 
     public static final String VALID_APPOINTMENT_NAME_AMY = VALID_APPOINTMENT_NAME_DENTAL;
     public static final String VALID_APPOINTMENT_DATE_AMY = VALID_APPOINTMENT_DATE_DENTAL;

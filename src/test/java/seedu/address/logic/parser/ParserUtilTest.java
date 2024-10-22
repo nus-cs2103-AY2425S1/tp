@@ -262,23 +262,23 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAllergys_null_throwsNullPointerException() {
+    public void parseAllergies_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseAllergies(null));
     }
 
     @Test
-    public void parseAllergys_collectionWithInvalidAllergies_throwsParseException() {
+    public void parseAllergies_collectionWithInvalidAllergies_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseAllergies(Arrays.asList(
                 VALID_ALLERGY_1, INVALID_ALLERGY)));
     }
 
     @Test
-    public void parseAllergys_emptyCollection_returnsEmptySet() throws Exception {
+    public void parseAllergies_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseAllergies(Collections.emptyList()).isEmpty());
     }
 
     @Test
-    public void parseAllergys_collectionWithValidAllergies_returnsAllergySet() throws Exception {
+    public void parseAllergies_collectionWithValidAllergies_returnsAllergySet() throws Exception {
         Set<Allergy> actualAllergySet = ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
         Set<Allergy> expectedAllergySet = new HashSet<Allergy>(Arrays.asList(
                 new Allergy(VALID_ALLERGY_1), new Allergy(VALID_ALLERGY_2)));
