@@ -15,6 +15,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    public static final String EXPANDED_STYLE_CLASS = "expanded-person";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -52,8 +53,18 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
-        address.setText(person.hasAddress() ? person.getAddress().get().value : "");
-        email.setText(person.hasEmail() ? person.getEmail().get().value : "");
+        if (person.hasAddress()) {
+            address.setText(person.getAddress().get().value);
+        } else {
+            address.setText("");
+            address.setManaged(false);
+        }
+        if (person.hasEmail()) {
+            email.setText(person.getEmail().get().value);
+        } else {
+            email.setText("");
+            email.setManaged(false);
+        }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
