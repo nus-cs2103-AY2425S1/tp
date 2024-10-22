@@ -87,10 +87,7 @@ public class FindPersonCard extends UiPart<Region> {
         person.getAppointments().stream()
                 .sorted(Comparator.comparing(appointment -> appointment.getStartTime()))
                 .forEach(appointment -> {
-                    String status = appointment.isCompleted() ? "Completed" : "Scheduled";
-                    Label appointmentLabel = new Label(" From: " + appointment.getStartTime()
-                            + "    To: " + appointment.getEndTime()
-                            + "    Status: " + status);
+                    Label appointmentLabel = new Label(appointment.getAppointmentDetails());
                     appointmentLabel.getStyleClass().add("appointmentLabel");
                     if (!appointment.isCompleted()) {
                         appointmentLabel.setStyle("-fx-text-fill: red;");
