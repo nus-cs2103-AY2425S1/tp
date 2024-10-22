@@ -13,7 +13,7 @@ public class SortOrder {
     /**
      * Sort order must be 'a' or 'd'.
      */
-    public static final String VALIDATION_REGEX = "^[a|d]$";
+    public static final String VALIDATION_REGEX = "^[ad]$";
     private final boolean isSortByAscending;
 
     /**
