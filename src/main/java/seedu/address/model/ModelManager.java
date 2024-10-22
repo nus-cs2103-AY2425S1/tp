@@ -260,12 +260,4 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
     }
-
-        if (!volunteer.getEvents().contains(event.getName().toString())) {
-            throw new CommandException(MESSAGE_NOT_ASSIGNED);
-        }
-
-        event.unassignVolunteer(volunteer.getName().toString());
-        volunteer.removeEvent(event.getName().toString());
-    }
 }
