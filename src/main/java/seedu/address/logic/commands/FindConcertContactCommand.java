@@ -41,7 +41,9 @@ public class FindConcertContactCommand extends Command {
     private final Index indexC;
 
     /**
-     * Creates an FindConcertContactCommand to find concertContacts that satisfy the {@code predicate}.
+     * Creates an FindConcertContactCommand to find concertContacts that are associated to
+     * the person at the specified {@code personIndex} and
+     * the concert at the specified {@code concertIndex}.
      */
     public FindConcertContactCommand(Index personIndex, Index concertIndex) {
         assert personIndex != null || concertIndex != null
