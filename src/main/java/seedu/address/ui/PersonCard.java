@@ -40,7 +40,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label remark;
     @FXML
-    private FlowPane assignedStatusAndTier;
+    private FlowPane assignedTier;
+    @FXML
+    private FlowPane assignedStatus;
     @FXML
     private VBox cardFields;
     /**
@@ -80,7 +82,7 @@ public class PersonCard extends UiPart<Region> {
         }
         if (tierLabel != null) {
             // Add the label to the FlowPane
-            assignedStatusAndTier.getChildren().add(tierLabel);
+            assignedTier.getChildren().add(tierLabel);
         }
     }
 
@@ -96,7 +98,7 @@ public class PersonCard extends UiPart<Region> {
         default -> statusLabel = null;
         }
         if (statusLabel != null) {
-            assignedStatusAndTier.getChildren().add(statusLabel);
+            assignedStatus.getChildren().add(statusLabel);
 
         }
     }

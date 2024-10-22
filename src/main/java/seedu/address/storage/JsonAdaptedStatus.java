@@ -14,7 +14,7 @@ class JsonAdaptedStatus {
     private final String status;
 
     /**
-     * Constructs a {@code JsonAdaptedTag} with the given {@code status}.
+     * Constructs a {@code JsonAdaptedStatus} with the given {@code status}.
      */
     @JsonCreator
     public JsonAdaptedStatus(String status) {
@@ -22,7 +22,7 @@ class JsonAdaptedStatus {
     }
 
     /**
-     * Converts a given {@code Status} into this class for Jackson use.
+     * Converts a given {@code Status} into a {@code JsonAdaptedStatus} for Jackson use.
      */
     public JsonAdaptedStatus(Status source) {
         status = source.toParsableString();
