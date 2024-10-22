@@ -24,18 +24,20 @@ public class TagListPanel extends UiPart<Region> {
      */
     public TagListPanel(ObservableList<Tag> tags) {
         super(FXML);
+        initialiseLabel();
         updateTagsDisplay(tags);
         setUpListener(tags);
     }
 
-    private void setUpListener(ObservableList<Tag> tags) {
-        tags.addListener((ListChangeListener<Tag>) c -> {
-            updateTagsDisplay(tags);
-        });
+    private void initialiseLabel() {
+        Label tagsTitleLabel = new Label("Tags: ");
+        tagsTitleLabel.getStyleClass().add("tags-title-label");
+        tagListFlowPane.getChildren().add(tagsTitleLabel);
     }
 
     private void updateTagsDisplay(ObservableList<Tag> tags) {
         tagListFlowPane.getChildren().clear();
+        initialiseLabel();
         tags.stream()
                 .sorted(Comparator.comparing(tag -> tag.getTagName().toLowerCase()))
                 .forEach(tag -> {
@@ -50,5 +52,11 @@ public class TagListPanel extends UiPart<Region> {
 
                     tagListFlowPane.getChildren().add(tagLabel);
                 });
+    }
+
+    private void setUpListener(ObservableList<Tag> tags) {
+        tags.addListener((ListChangeListener<Tag>) c -> {
+            updateTagsDisplay(tags);
+        });
     }
 }
