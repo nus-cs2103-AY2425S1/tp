@@ -2,6 +2,9 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.concurrent.TimeoutException;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxRobot;
@@ -17,7 +20,7 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ChatWindowTest extends ApplicationTest {
+public class ChatWindowUiTest extends ApplicationTest {
     private ChatWindow chatWindow;
     private TextField userInput;
     private TextArea chatArea;
@@ -35,8 +38,13 @@ public class ChatWindowTest extends ApplicationTest {
     }
 
     @BeforeEach
-    public void setup() throws Exception {
-        FxToolkit.registerStage(() -> new Stage());
+    public void setup() throws TimeoutException {
+        FxToolkit.registerPrimaryStage();
+    }
+
+    @AfterEach
+    public void stopApp() throws TimeoutException {
+        FxToolkit.cleanupStages();
     }
 
     @Test
@@ -45,6 +53,7 @@ public class ChatWindowTest extends ApplicationTest {
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hello"));
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hi"));
             assertEquals("Hi there! How can I assist you today?", chatWindow.getResponse("hey"));
+            System.out.println("test");
         });
     }
 
