@@ -105,6 +105,24 @@ class ScheduleTest {
     }
 
     @Test
+    public void isOn_sameDay_returnsTrue() {
+        Schedule schedule = new Schedule("Monday-0900-1100"); // Monday
+        assertTrue(schedule.isOn(Days.MONDAY), "A schedule should be on the day it is scheduled.");
+    }
+
+    @Test
+    public void isOn_differentDay_returnsFalse() {
+        Schedule schedule = new Schedule("Monday-0900-1100"); // Monday
+        for (Days day : Days.values()) {
+            if (day == Days.MONDAY) {
+                continue;
+            }
+            assertFalse(schedule.isOn(day), "This schedule is not on " + day + ".");
+        }
+
+    }
+
+    @Test
     public void isClash_sameSchedule_returnsTrue() {
         Schedule schedule = new Schedule("Monday-0900-1100"); // Monday
         assertTrue(schedule.isClash(schedule), "A schedule should clash with itself.");
