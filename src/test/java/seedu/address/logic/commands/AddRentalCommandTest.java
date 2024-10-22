@@ -204,6 +204,17 @@ public class AddRentalCommandTest {
         public void setLastViewedClient(Client client) {
             throw new AssertionError("This method should not be called.");
         }
+
+        //TODO: Winston - Tests for command history
+        @Override
+        public String getPreviousCommand() {
+            return null;
+        }
+
+        @Override
+        public String getNextCommand() {
+            return null;
+        }
     }
 
     /**

@@ -113,4 +113,8 @@ public interface Model {
      * Sets the last viewed client of this model.
      */
     void setLastViewedClient(Client client);
+
+    String getPreviousCommand();
+
+    String getNextCommand();
 }

@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.rentalinformation.RentalInformation;
+import seedu.address.storage.CommandHistoryStorage;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,6 +30,7 @@ public class ModelManager implements Model {
     private final FilteredList<Client> filteredClients;
     private final ObservableList<RentalInformation> visibleRentalInformationList;
     private final ObjectProperty<Client> lastViewedClient = new SimpleObjectProperty<>();
+    private final CommandHistoryStorage commandHistoryStorage = new CommandHistoryStorage();
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -88,6 +90,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        commandHistoryStorage.updateCommandHistoryLines();
     }
 
     @Override
@@ -104,19 +107,21 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Client target) {
         addressBook.removePerson(target);
+        commandHistoryStorage.updateCommandHistoryLines();
     }
 
     @Override
     public void addPerson(Client client) {
         addressBook.addPerson(client);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        commandHistoryStorage.updateCommandHistoryLines();
     }
 
     @Override
     public void setPerson(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-
         addressBook.setPerson(target, editedClient);
+        commandHistoryStorage.updateCommandHistoryLines();
     }
 
     @Override
@@ -147,11 +152,13 @@ public class ModelManager implements Model {
             updateVisibleRentalInformationList(List.of());
             setLastViewedClient(null);
         }
+        commandHistoryStorage.updateCommandHistoryLines();
     }
 
     //=========== Visible Rental Information =================================================================
     @Override
     public ObservableList<RentalInformation> getVisibleRentalInformationList() {
+        commandHistoryStorage.updateCommandHistoryLines();
         return visibleRentalInformationList;
     }
 
@@ -159,21 +166,35 @@ public class ModelManager implements Model {
     public void updateVisibleRentalInformationList(List<RentalInformation> rentalInformationList) {
         requireNonNull(rentalInformationList);
         visibleRentalInformationList.setAll(rentalInformationList);
+        commandHistoryStorage.updateCommandHistoryLines();
     }
 
     @Override
     public ObjectProperty<Client> getLastViewedClientAsObjectProperty() {
+        commandHistoryStorage.updateCommandHistoryLines();
         return lastViewedClient;
     }
 
     @Override
     public Client getLastViewedClient() {
+        commandHistoryStorage.updateCommandHistoryLines();
         return lastViewedClient.get();
     }
 
     @Override
     public void setLastViewedClient(Client client) {
         this.lastViewedClient.set(client);
+        commandHistoryStorage.updateCommandHistoryLines();
+    }
+
+    //=========== Command History =================================================================
+    @Override
+    public String getPreviousCommand() {
+        return commandHistoryStorage.getPreviousCommand();
+    }
+    @Override
+    public String getNextCommand() {
+        return commandHistoryStorage.getNextCommand();
     }
 
     @Override

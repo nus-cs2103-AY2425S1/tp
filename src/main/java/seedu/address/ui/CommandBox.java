@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -17,6 +19,8 @@ public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
     private final CommandExecutor commandExecutor;
+    private final String UP_COMMAND = "upCommand";
+    private final String DOWN_COMMAND = "downCommand";
     @FXML
     private TextField commandTextField;
 
@@ -33,13 +37,27 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void handleKeyPressed(KeyCode keyCode) {
+        String commandText;
         if (keyCode.isArrowKey() && keyCode == KeyCode.UP) {
-            //TODO: Navigate the previous command in history
-            System.out.println("UP IS PRESSED");
+            commandText = UP_COMMAND;
         } else if (keyCode.isArrowKey() && keyCode == KeyCode.DOWN) {
-            //TODO: Navigate the next command in history
-            System.out.println("DOWN IS PRESSED");
+            commandText = DOWN_COMMAND;
+        } else {
+            //Do nothing
+            return;
         }
+
+        try {
+            commandExecutor.execute(commandText);
+//            commandTextField.setText("");
+        } catch (CommandException | ParseException e) {
+            setStyleToIndicateCommandFailure();
+        }
+    }
+
+    public void setFeedbackToUser(String feedbackToUser) {
+        requireNonNull(feedbackToUser);
+        commandTextField.setText(feedbackToUser);
     }
 
     /**
