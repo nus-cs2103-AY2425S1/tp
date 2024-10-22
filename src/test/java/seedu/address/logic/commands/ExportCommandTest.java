@@ -9,6 +9,9 @@ import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_CSV;
 import static seedu.address.testutil.TypicalFileTypes.FILE_TYPE_VCF;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -31,8 +34,25 @@ public class ExportCommandTest {
     @Test
     public void toCsvStringMethod() {
         ExportCommand exportCommand = new ExportCommand(FILE_TYPE_CSV);
-        String expected = "Alice Pauline,94351253,alice@example.com,\"123, Jurong West Ave 6, #08-111\""
-            + ",\"friends\",\"High profile client, Likes dumplings\"";
+
+        // Preprocess the tags and notes to remove the square backets
+        List<String> tags = new ArrayList<>();
+        List<String> notes = new ArrayList<>();
+
+        tags.addAll(ALICE.getTags().stream()
+            .map((tag) -> tag.toString())
+            .toList());
+
+        notes.addAll(ALICE.getNotes().stream()
+            .map((note) -> note.toString())
+            .toList());
+
+        String tag = tags.toString().replaceAll("[\\[\\]]", "");
+        String note = notes.toString().replaceAll("[\\[\\]]", "");
+
+        String expected = ALICE.getName() + "," + ALICE.getPhone() + "," + ALICE.getEmail() + ",\""
+            + ALICE.getAddress() + "\",\"" + tag + "\",\"" + note + "\"";
+
         assertEquals(expected, exportCommand.toCsvString(ALICE));
     }
 

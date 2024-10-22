@@ -20,7 +20,7 @@ public class ExportCommandParserTest {
     }
 
     @Test
-    public void parse_nonInteger_throwsParseException() {
+    public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
     }
 

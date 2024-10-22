@@ -147,10 +147,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String fileType} into a {@code FileType}.
+     * Parses a {@code String fileType} into a valid {@code String FileType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code note} is invalid.
+     * @throws ParseException if the given {@code fileType} is invalid.
      */
     public static String parseFileType(String fileType) throws ParseException {
         requireNonNull(fileType);

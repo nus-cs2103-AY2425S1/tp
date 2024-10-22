@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FILE;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,18 +20,20 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Exports contact list to a csv format.
+ * Exports contact list to a csv file.
  */
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the whole contact list"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exports the whole contact list "
             + "to a specfied file type.\n"
-            + "Parameters: " + "FILETYPE\n"
-            + "Example: " + COMMAND_WORD + " f/csv";
+            + "Parameters: " + PREFIX_FILE + "FILETYPE\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_FILE + "csv";
 
     public static final String MESSAGE_SUCCESS = "Contact list successfully exported to a %1$s file";
     public static final String MESSAGE_FAILURE = "Unable to export contact list to a %1$s file";
+
+    public final String fileTypeCsv = "CSV";
 
     private final String csvHeaders = "Name,Phone No,Email,Address,Tags,Notes\n";
 
@@ -41,7 +44,7 @@ public class ExportCommand extends Command {
     /**
      * Creates an ExportCsvCommand.
      *
-     * @param fileType The file type to export the data into.
+     * @param fileType to export the data into.
      */
     public ExportCommand(String fileType) {
         requireNonNull(fileType);
@@ -53,26 +56,39 @@ public class ExportCommand extends Command {
         requireNonNull(model);
 
         try {
-            if (!Files.exists(exportCsvPath.getParent())) {
-                Files.createDirectories(exportCsvPath.getName(0));
+            if (fileType.equals(fileTypeCsv)) {
+                exportToCsv(model);
             }
-            // Create a csv file to save the tasks
-            File dataFile = new File(exportCsvPath.toString());
-            FileWriter fw = new FileWriter(dataFile);
-
-            fw.write(this.csvHeaders);
-
-            ObservableList<Person> personList = model.getFilteredPersonList();
-            for (Person person : personList) {
-                String personData = this.toCsvString(person);
-                fw.write(personData + "\n");
-            }
-            fw.close();
         } catch (IOException io) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileType));
+    }
+
+    /**
+     * Exports the contact list into a csv file.
+     * Iterate through every person, convert them to a csv format and
+     * write into the csv file.
+     *
+     * @throws IOException if an error occurs when creating the csv file.
+     */
+    private void exportToCsv(Model model) throws IOException {
+        if (!Files.exists(exportCsvPath.getParent())) {
+            Files.createDirectories(exportCsvPath.getName(0));
+        }
+        // Create a csv file to save the tasks
+        File dataFile = new File(exportCsvPath.toString());
+        FileWriter fw = new FileWriter(dataFile);
+
+        fw.write(this.csvHeaders);
+
+        ObservableList<Person> personList = model.getFilteredPersonList();
+        for (Person person : personList) {
+            String personData = this.toCsvString(person);
+            fw.write(personData + "\n");
+        }
+        fw.close();
     }
 
     /**
@@ -88,7 +104,7 @@ public class ExportCommand extends Command {
         sj.add(person.getPhone().value);
         sj.add(person.getEmail().value);
 
-
+        // Prevent excel from sepreating entries due to commas
         String address = "\"" + person.getAddress().value + "\"";
         sj.add(address);
 
@@ -115,7 +131,6 @@ public class ExportCommand extends Command {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof ExportCommand)) {
             return false;
         }
