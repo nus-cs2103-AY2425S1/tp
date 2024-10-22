@@ -84,14 +84,12 @@ public class TagCommand extends Command {
             return new Student(studentToEdit.getName(), studentToEdit.getStudentID(), studentToEdit.getPhone(),
                     studentToEdit.getEmail(), studentToEdit.getAddress(), updatedTags
             );
-        } else if (personToEdit instanceof Company) {
+        } else {
             Company companyToEdit = (Company) personToEdit;
             return new Company(companyToEdit.getName(), companyToEdit.getIndustry(), companyToEdit.getPhone(),
                     companyToEdit.getEmail(), companyToEdit.getAddress(), updatedTags
             );
         }
-
-        throw new IllegalArgumentException("Unsupported person type");
     }
 
     @Override

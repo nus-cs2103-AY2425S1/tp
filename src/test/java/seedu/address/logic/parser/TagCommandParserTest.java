@@ -34,4 +34,28 @@ public class TagCommandParserTest {
 
         assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_emptyTags_returnsOptionalEmpty() {
+        // No tags provided after t/
+        String userInput = "1";
+
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_blankTag_throwsParseException() {
+        // Tag is just a space
+        String userInput = "1 t/ ";
+
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_noTag_throwsParseException() {
+        // No tag after the prefix
+        String userInput = "1 t/";
+
+        assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
+    }
 }
