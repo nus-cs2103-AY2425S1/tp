@@ -6,9 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalOwners.AARON;
+import static seedu.address.testutil.TypicalOwners.BENSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPets.BELLA;
+import static seedu.address.testutil.TypicalPets.*;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -81,6 +83,23 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
             .build();
         assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void sortOwners_ownersGetArrangedAlphabetically() {
+        addressBook.addOwner(BENSON);
+        addressBook.addOwner(AARON);
+        assertTrue(addressBook.getOwnerList().get(0) == BENSON);
+        addressBook.sortOwners();
+        assertTrue(addressBook.getOwnerList().get(0) == AARON);
+    }
+
+    @Test
+    public void sortPets_petsGetArrangedAlphabetically() {
+        addressBook.addPet(BISON);
+        addressBook.addPet(AARFUL);
+        addressBook.sortPets();
+        assertTrue(addressBook.getPetList().get(0) == AARFUL);
     }
 
     @Test

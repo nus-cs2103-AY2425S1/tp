@@ -21,6 +21,9 @@ import seedu.address.model.owner.Owner;
  */
 public class TypicalOwners {
 
+    public static final Owner AARON = new OwnerBuilder().withName("Aaron Goh")
+            .withAddress("123, clementi West Ave 6, #08-111").withEmail("aaron@example.com")
+            .withPhone("94351253").build();
     public static final Owner ALICE = new OwnerBuilder().withName("Alice Pauline")
         .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
         .withPhone("94351253").build();

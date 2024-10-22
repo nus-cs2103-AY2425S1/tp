@@ -7,7 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_OWNERS;
 
 public class SortOwnerCommand extends SortCommand {
     /** The message displayed when the list of owners is successfully sorted. */
-    public static final String MESSAGE_SUCCESS = "Sorted all owners";
+    public static final String MESSAGE_SORT_OWNER_SUCCESS = "Sorted all owners";
 
     /**
      * Executes the sort pet command, updating the filtered list in the model
@@ -21,7 +21,7 @@ public class SortOwnerCommand extends SortCommand {
         requireNonNull(model);
         model.sortOwners();
         model.updateFilteredOwnerList(PREDICATE_SHOW_ALL_OWNERS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SORT_OWNER_SUCCESS);
     }
 
     @Override

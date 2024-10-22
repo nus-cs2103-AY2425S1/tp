@@ -23,6 +23,10 @@ import seedu.address.model.pet.Pet;
  */
 public class TypicalPets {
 
+    public static final Pet AARFUL = new PetBuilder().withName("Aarful")
+            .withSpecies("Dog").withBreed("Golden Retriever")
+            .withAge("8").withSex("M").build();
+
     public static final Pet MAX = new PetBuilder().withName("Max")
             .withSpecies("Dog").withBreed("Golden Retriever")
             .withAge("7").withSex("M").build();

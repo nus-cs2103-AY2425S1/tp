@@ -183,6 +183,16 @@ public class AddOwnerCommandTest {
         }
 
         @Override
+        public void sortOwners() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortPets() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePet(Pet target) {
             throw new AssertionError("This method should not be called.");
         }
