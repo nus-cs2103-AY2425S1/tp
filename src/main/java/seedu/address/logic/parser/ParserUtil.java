@@ -176,6 +176,15 @@ public class ParserUtil {
         return roleSet;
     }
 
+    /**
+     * Parses a {@code String input} into a {@code LocalDate}.
+     * The input string is expected to be in the format "dd/MM/yyyy".
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param input the date string to be parsed
+     * @return the parsed {@code LocalDate} object
+     * @throws ParseException if the input does not conform to the expected format
+     */
     public static LocalDate parseDate(String input) throws ParseException {
         String trimmedInput = input.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -186,6 +195,15 @@ public class ParserUtil {
         }
     }
 
+    /**
+     * Parses a {@code String input} into a {@code LocalTime}.
+     * The input string is expected to be in the format "HH:mm".
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param input the time string to be parsed
+     * @return the parsed {@code LocalTime} object
+     * @throws ParseException if the input does not conform to the expected format
+     */
     public static LocalTime parseTime(String input) throws ParseException {
         String trimmedInput = input.trim();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
