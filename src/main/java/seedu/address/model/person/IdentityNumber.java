@@ -19,7 +19,7 @@ public class IdentityNumber {
     public static final char[] IDENTITY_NUMBER_FIN_SUFFIX = {'X' , 'W', 'U', 'T', 'R', 'Q', 'P', 'N', 'M', 'L', 'K'};
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Message Constraints not yet Implemented";
+            "Message Constraints not yet Implementedz`";
 
     public final String identificationNumber;
 
