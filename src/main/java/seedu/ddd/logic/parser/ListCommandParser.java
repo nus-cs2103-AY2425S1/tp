@@ -5,6 +5,7 @@ import static seedu.ddd.logic.parser.CliFlags.FLAG_CLIENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_EVENT;
 import static seedu.ddd.logic.parser.CliFlags.FLAG_VENDOR;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.ddd.logic.parser.CliSyntax.PREFIX_DESC;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.ddd.logic.parser.CliSyntax.PREFIX_NAME;
@@ -30,7 +31,7 @@ public class ListCommandParser implements Parser<ListCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_TAG, FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DESC, FLAG_CLIENT, FLAG_VENDOR, FLAG_EVENT);
         if (argMultimap.getValue(FLAG_EVENT).isEmpty()) {
             ContactPredicateBuilder combinedPredicate = new ContactPredicateBuilder(argMultimap);
             return new ListCommand(combinedPredicate.build());

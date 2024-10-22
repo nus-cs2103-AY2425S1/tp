@@ -20,7 +20,7 @@ public class ListEventCommand extends ListCommand {
      * @param predicate comparing two events.
      */
     public ListEventCommand(Predicate<Event> predicate) {
-        //might not work as expected.
+        //I will never input a Predicate<Contact> if I have a ListEventCommand.
         super(null);
         this.predicate = predicate;
     }
