@@ -77,21 +77,6 @@ public class ViewCommandTest {
         assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
     }
 
-    //To do: Add this test case as I was not able to add
-    //    public void execute_noKeyword_noPersonFound() {
-    //        CommandResult expectedCommandResult = new CommandResult(
-    //                String.format(MESSAGE_PERSON_LISTED_OVERVIEW_FOR_VIEW +
-    //                        "\nPlease specify the name further to view.", 0),
-    //                false, false, false);
-    //        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-    //
-    //        System.out.println(predicate.toString());
-    //        ViewCommand command = new ViewCommand(predicate);
-    //        expectedModel.updateFilteredPersonList(predicate);
-    //        assertCommandSuccess(command, model, expectedCommandResult, expectedModel);
-    //        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
-    //    }
-
     @Test
     public void toStringMethod() {
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(List.of("Alice"));
