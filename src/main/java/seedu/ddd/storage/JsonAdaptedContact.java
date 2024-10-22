@@ -43,7 +43,7 @@ abstract class JsonAdaptedContact {
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedContact} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedContact(
