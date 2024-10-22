@@ -87,7 +87,7 @@ public class AddressBookParser {
             return new FilterContactTypeCommandParser().parse(arguments);
 
         case ModCommand.COMMAND_WORD:
-            return new ModCommand();
+            return new ModCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

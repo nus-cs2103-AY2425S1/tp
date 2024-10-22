@@ -37,6 +37,8 @@ public class CommandTestUtil {
     public static final String VALID_TELEHANDLE_BOB = "@bob321";
     public static final String VALID_CONTACTTYPE_AMY = "work";
     public static final String VALID_CONTACTTYPE_BOB = "personal";
+    public static final String VALID_MODNAME_AMY = "CS1101S";
+    public static final String VALID_MODNAME_BOB = "CS1231S";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
