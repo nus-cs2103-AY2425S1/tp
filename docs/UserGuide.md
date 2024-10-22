@@ -108,15 +108,23 @@ Format: `list`
 
 Edits an existing student in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
+**Format:** `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [f/FEE] [paid/PAID_AMOUNT] [owed/OWED_AMOUNT]`
 
-Examples:
+**Examples:**
+
 `edit 1 p/87438808 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `87438808` and `alexyeoh100@examnple.com` respectively.
-`edit 2 paid/1200.00 owed/0` Edits the paid amount of the 2nd student to be `Betsy $1200.00` and edits the owed amount to $0.00.
 
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
+`edit 2 paid/1200.00 owed/0` Edits the paid amount of the 2nd student to be `$1200.00` and edits the owed amount to be `$0.00`.
+
+<box type="important" header="##### Constraints">
+
+1. The <md>`INDEX`</md> refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
+
+2. At least one of the optional fields must be provided.
+
+3. Existing values will be updated to the input values.
+</box>
+
 
 
 
