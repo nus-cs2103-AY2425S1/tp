@@ -26,8 +26,8 @@ public class UniqueWeddingListTest {
 
     @BeforeEach
     public void setUp() {
-        w1 = new Wedding("w1", "date");
-        w2 = new Wedding("w2", "date");
+        w1 = new Wedding(new WeddingName("w1"), "date");
+        w2 = new Wedding(new WeddingName("w2"), "date");
         weddings.addWedding(w1);
     }
 
@@ -38,7 +38,7 @@ public class UniqueWeddingListTest {
 
     @Test
     public void contains_weddingDoesNotExist_false() {
-        Wedding w2 = new Wedding("w2", "date");
+        Wedding w2 = new Wedding(new WeddingName("w2"), "date");
         assertFalse(weddings.contains(w2));
     }
 
@@ -76,7 +76,7 @@ public class UniqueWeddingListTest {
 
     @Test
     public void setWedding_weddingDoesNotExist_throwsWeddingNotFoundException() {
-        Wedding w3 = new Wedding("w3", "date");
+        Wedding w3 = new Wedding(new WeddingName("w3"), "date");
         assertThrows(WeddingNotFoundException.class, () -> weddings.setWedding(w2, w3));
     }
 

@@ -20,8 +20,8 @@ public class WeddingTest {
     public void setUp() {
         ids = new PersonId[]{new PersonId()};
         assignees = List.of(ids);
-        wedding = new Wedding("Name", "Date", assignees);
-        otherWedding = new Wedding("Other", "Date");
+        wedding = new Wedding(new WeddingName("Name"), "Date", assignees);
+        otherWedding = new Wedding(new WeddingName("Other"), "Date");
     }
     @Test
     public void isSameWedding_sameObject_true() {
@@ -50,19 +50,19 @@ public class WeddingTest {
         assertFalse(wedding.equals(5));
 
         //different object, same name, date and assignees
-        Wedding equalWedding = new Wedding("Name", "Date", assignees);
+        Wedding equalWedding = new Wedding(new WeddingName("Name"), "Date", assignees);
         assertTrue(wedding.equals(equalWedding));
 
         //different object, different name, same date and assignees
-        Wedding diffName = new Wedding("Diff", "Date", assignees);
+        Wedding diffName = new Wedding(new WeddingName("Diff"), "Date", assignees);
         assertFalse(wedding.equals(diffName));
 
         //different object, same name, different date, same assignees
-        Wedding diffDate = new Wedding("Name", "diffDate", assignees);
+        Wedding diffDate = new Wedding(new WeddingName("Name"), "diffDate", assignees);
         assertFalse(wedding.equals(diffDate));
 
         //different object, same name, same date, different assignees
-        Wedding diffAssignees = new Wedding("Name", "Date");
+        Wedding diffAssignees = new Wedding(new WeddingName("Name"), "Date");
         assertFalse(wedding.equals(diffAssignees));
     }
 }

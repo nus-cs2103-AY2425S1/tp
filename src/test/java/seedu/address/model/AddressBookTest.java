@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.wedding.Wedding;
+import seedu.address.model.wedding.WeddingName;
 import seedu.address.model.wedding.exceptions.WeddingNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -90,7 +91,7 @@ public class AddressBookTest {
 
     @Test
     public void hasWedding_weddingNotFound_returnsFalse() {
-        Wedding w1 = new Wedding("w1", "date");
+        Wedding w1 = new Wedding(new WeddingName("w1"), "date");
         assertFalse(addressBook.hasWedding(w1));
     }
     @Test
@@ -105,7 +106,7 @@ public class AddressBookTest {
 
     @Test
     public void addWedding_validWedding_hasNewWedding() {
-        Wedding w1 = new Wedding("w1", "date");
+        Wedding w1 = new Wedding(new WeddingName("w1"), "date");
         addressBook.addWedding(w1);
         assertTrue(addressBook.hasWedding(w1));
     }
@@ -117,7 +118,7 @@ public class AddressBookTest {
 
     @Test
     public void removeWedding_weddingDoesNotExist_throwsWeddingNotFoundException() {
-        Wedding w1 = new Wedding("w1", "date");
+        Wedding w1 = new Wedding(new WeddingName("w1"), "date");
         assertThrows(WeddingNotFoundException.class, () -> addressBook.removeWedding(w1));
     }
 
@@ -128,7 +129,7 @@ public class AddressBookTest {
 
     @Test
     public void setWedding_weddingDoesNotExist_throwsWeddingDoesNotExistException() {
-        Wedding w1 = new Wedding("w1", "date");
+        Wedding w1 = new Wedding(new WeddingName("w1"), "date");
         assertThrows(WeddingNotFoundException.class, () -> addressBook.setWedding(w1, w1));
     }
 
