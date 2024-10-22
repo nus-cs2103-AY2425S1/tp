@@ -31,6 +31,7 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
    Some example commands you can try:
 
    * `list` : Lists all contacts.
+   
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the FART book and automatically marks them as unpaid.
 
