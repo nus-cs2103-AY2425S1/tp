@@ -71,6 +71,15 @@ public class Name {
         }
         return false;
     }
+
+    /**
+     * Compares the {@code fullName} of this Telegram object against another Telegram object.
+     * Comparison is done using String::CompareTo method.
+     */
+    public int compareTo(Name otherName) {
+        requireNonNull(otherName);
+        return this.fullName.toLowerCase().compareTo(otherName.fullName.toLowerCase());
+    }
     @Override
     public int hashCode() {
         return fullName.hashCode();

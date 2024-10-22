@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GITHUB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORTORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -46,6 +47,11 @@ public class CommandTestUtil {
     public static final String VALID_GITHUB_AMY = "Amy";
     public static final String VALID_ASSIGNMENT_ONE = "Ex01";
     public static final Float VALID_SCORE = 10f;
+    public static final String VALID_ORDER_ASC = "asc";
+    public static final String VALID_ORDER_DESC = "desc";
+    public static final String VALID_FIELD_NAME = "name";
+    public static final String VALID_FIELD_GITHUB = "github";
+    public static final String VALID_FIELD_TELEGRAM = "telegram";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -61,6 +67,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String ASSIGNMENT_DESC_ONE = " " + PREFIX_ASSIGNMENT + VALID_ASSIGNMENT_ONE;
     public static final String SCORE_DESC = " " + PREFIX_SCORE + VALID_SCORE;
+    public static final String ORDER_DESC_ASC = " " + PREFIX_SORTORDER + VALID_ORDER_ASC;
+    public static final String ORDER_DESC_DESC = " " + PREFIX_SORTORDER + VALID_ORDER_DESC;
 
 
     public static final String GITHUB_DESC_AMY = " " + PREFIX_GITHUB + VALID_GITHUB_AMY;
@@ -75,6 +83,7 @@ public class CommandTestUtil {
 
     public static final float INVALID_SCORE_BELOW_ZERO = -1f; //score that is <0
     public static final float INVALID_SCORE_ABOVE = 10000f; //score that is <0
+    public static final String INVALID_ORDER_DESC = " " + PREFIX_SORTORDER + "123";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

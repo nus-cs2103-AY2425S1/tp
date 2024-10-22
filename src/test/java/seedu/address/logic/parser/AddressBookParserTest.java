@@ -6,10 +6,12 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ASSIGNMENT_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.ORDER_DESC_ASC;
 import static seedu.address.logic.commands.CommandTestUtil.SCORE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ASSIGNMENT_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FIELD_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -37,12 +39,17 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GitHubCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.person.comparator.ComparatorManager;
+import seedu.address.model.person.comparator.PersonComparator;
+import seedu.address.model.person.comparator.SortField;
+import seedu.address.model.person.comparator.SortOrder;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.NonFunctionalBrowser;
@@ -105,6 +112,14 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_sort() throws Exception {
+        PersonComparator comparator = new ComparatorManager().getComparator(SortField.NAME, SortOrder.ASC);
+        SortCommand command = (SortCommand) parser.parseCommand(
+                SortCommand.COMMAND_WORD + " " + VALID_FIELD_NAME + ORDER_DESC_ASC);
+        assertEquals(new SortCommand(comparator), command);
     }
 
     @Test
