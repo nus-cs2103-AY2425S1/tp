@@ -15,8 +15,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.appointment.Appointment;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.Person;
 
 /**

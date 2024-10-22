@@ -35,7 +35,7 @@ import seedu.address.logic.commands.FindMedConCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.allergy.Allergy;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.AppointmentExistsPredicate;
 import seedu.address.model.person.MedConContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;

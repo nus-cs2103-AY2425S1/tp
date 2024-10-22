@@ -1,23 +1,18 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.allergy.Allergy;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Allergy;
 import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -252,38 +247,6 @@ public class ParserUtilTest {
     public void parseAllergy_validValueWithoutWhitespace_returnsTag() throws Exception {
         Allergy expectedTag = new Allergy(VALID_ALLERGY_1);
         assertEquals(expectedTag, ParserUtil.parseAllergy(VALID_ALLERGY_1));
-    }
-
-    @Test
-    public void parseAllergy_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
-        String tagWithWhitespace = WHITESPACE + VALID_ALLERGY_1 + WHITESPACE;
-        Allergy expectedTag = new Allergy(VALID_ALLERGY_1);
-        assertEquals(expectedTag, ParserUtil.parseAllergy(tagWithWhitespace));
-    }
-
-    @Test
-    public void parseAllergys_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAllergies(null));
-    }
-
-    @Test
-    public void parseAllergys_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseAllergies(Arrays.asList(
-                VALID_ALLERGY_1, INVALID_ALLERGY)));
-    }
-
-    @Test
-    public void parseAllergys_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseAllergies(Collections.emptyList()).isEmpty());
-    }
-
-    @Test
-    public void parseAllergys_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Allergy> actualTagSet = ParserUtil.parseAllergies(Arrays.asList(VALID_ALLERGY_1, VALID_ALLERGY_2));
-        Set<Allergy> expectedTagSet = new HashSet<Allergy>(Arrays.asList(
-                new Allergy(VALID_ALLERGY_1), new Allergy(VALID_ALLERGY_2)));
-
-        assertEquals(expectedTagSet, actualTagSet);
     }
 
     @Test

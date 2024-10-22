@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.allergy.Allergy;
+import seedu.address.model.person.Allergy;
 
 /**
  * Jackson-friendly version of {@link Allergy}.
