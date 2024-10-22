@@ -6,7 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "10-10-2024"
   }, {
@@ -16,7 +16,7 @@
     "address": "4th street",
     "tags": [ "friends" ],
     "projectStatus": "in progress",
-    "paymentStatus": "unpaid",
+    "paymentStatus": "pending",
     "clientStatus": "active",
     "deadline": "10-10-2024"
   } ]
