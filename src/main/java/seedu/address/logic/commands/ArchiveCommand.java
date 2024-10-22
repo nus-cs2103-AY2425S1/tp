@@ -81,7 +81,6 @@ public class ArchiveCommand extends Command {
         validateIndexes(inspectedPerson.getDeliveryListSize(), indexList);
 
         List<Delivery> deliveryToArchiveList = archiveDeliveries(inspectedPerson, deliveryList);
-        Collections.reverse(deliveryToArchiveList);
 
         return new CommandResult(String.format(
                 MESSAGE_ARCHIVED_DELIVERY_SUCCESS,
@@ -115,14 +114,26 @@ public class ArchiveCommand extends Command {
      */
     private List<Delivery> archiveDeliveries(Person inspectedPerson, DeliveryList deliveryList) {
         List<Delivery> deliveryToArchiveList = new ArrayList<>();
+        List<Delivery> deliveryToAddList = new ArrayList<>();
+
         for (Index targetIndex : indexList) {
             Delivery deliveryToArchive = deliveryList.asUnmodifiableObservableList().get(targetIndex.getZeroBased());
             Delivery archivedDelivery = createArchivedDelivery(deliveryToArchive);
+
             if (!deliveryToArchive.isArchived()) {
-                inspectedPerson.archiveDelivery(targetIndex, archivedDelivery);
+                inspectedPerson.deleteDelivery(targetIndex);
+                deliveryToAddList.add(archivedDelivery);
             }
             deliveryToArchiveList.add(archivedDelivery);
         }
+
+        Collections.reverse(deliveryToArchiveList);
+        Collections.reverse(deliveryToAddList);
+
+        for (Delivery deliveryToAdd : deliveryToAddList) {
+            inspectedPerson.addDelivery(deliveryToAdd);
+        }
+
         return deliveryToArchiveList;
     }
 

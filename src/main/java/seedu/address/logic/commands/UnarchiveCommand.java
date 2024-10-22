@@ -58,7 +58,7 @@ public class UnarchiveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         // Sort the indexList in descending order
-        indexList.sort(Comparator.comparing(Index::getZeroBased).reversed().reversed());
+        indexList.sort(Comparator.comparing(Index::getZeroBased));
 
         if (AddressBookParser.getInspect()) {
             return handleDeliveryUnarchive(model);
