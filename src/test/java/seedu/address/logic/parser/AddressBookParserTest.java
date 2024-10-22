@@ -103,7 +103,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_addCar() throws Exception {
         assertTrue(parser.parseCommand(AddCarCommand.COMMAND_WORD + " 2 vrn/SGX1234B "
-                + "vin/KMHGH4JH3EU073801 make/Crazy model/Taxi") instanceof AddCarCommand);
+                + "vin/KMHGH4JH3EU073801 make/Honda model/Civic") instanceof AddCarCommand);
     }
 
     @Test
