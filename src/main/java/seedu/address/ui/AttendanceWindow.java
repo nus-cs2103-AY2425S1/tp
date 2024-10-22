@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,7 @@ public class AttendanceWindow {
      * @param model The model containing the data to display.
      */
     public void show(Model model) {
+        Platform.runLater(() -> { });
         Stage stage = new Stage();
         stage.setTitle("Attendance for Tutorial Group: " + tutorialGroup.toString());
 

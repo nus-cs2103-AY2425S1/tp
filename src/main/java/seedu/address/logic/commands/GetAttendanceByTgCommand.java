@@ -44,7 +44,7 @@ public class GetAttendanceByTgCommand extends Command {
         List<Student> students = model.getStudentsByTutorialGroup(tutorialGroup);
 
         if (students.isEmpty()) {
-            return new CommandResult(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
+            throw new CommandException(String.format(MESSAGE_NO_STUDENTS, tutorialGroup));
         }
 
         StringBuilder attendanceRecords = new StringBuilder();
