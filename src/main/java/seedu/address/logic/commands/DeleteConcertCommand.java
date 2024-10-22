@@ -27,6 +27,7 @@ public class DeleteConcertCommand extends Command {
     private final Index targetIndex;
 
     public DeleteConcertCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
@@ -34,6 +35,7 @@ public class DeleteConcertCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Concert> lastShownList = model.getFilteredConcertList();
+        assert lastShownList != null : "Concert list must not be null";
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CONCERT_DISPLAYED_INDEX);

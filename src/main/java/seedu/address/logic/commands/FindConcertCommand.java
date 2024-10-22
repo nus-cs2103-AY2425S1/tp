@@ -27,6 +27,7 @@ public class FindConcertCommand extends Command {
     private final Predicate<Concert> predicate;
 
     public FindConcertCommand(NameContainsKeywordsPredicate<Concert> predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 

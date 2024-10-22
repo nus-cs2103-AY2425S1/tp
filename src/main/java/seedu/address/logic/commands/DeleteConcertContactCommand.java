@@ -35,6 +35,8 @@ public class DeleteConcertContactCommand extends Command {
      * Creates a DeleteConcertContactCommand to delete the specified {@code Person} from the specifed {@code Concert}.
      */
     public DeleteConcertContactCommand(Index personIndex, Index concertIndex) {
+        requireNonNull(personIndex);
+        requireNonNull(concertIndex);
         this.personIndex = personIndex;
         this.concertIndex = concertIndex;
     }
@@ -44,6 +46,8 @@ public class DeleteConcertContactCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Concert> lastShownConcertList = model.getFilteredConcertList();
+        assert lastShownPersonList != null : "Person list must not be null";
+        assert lastShownConcertList != null : "Concert list must not be null";
 
         if (personIndex.getZeroBased() >= lastShownPersonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

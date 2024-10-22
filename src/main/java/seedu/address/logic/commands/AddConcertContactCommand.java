@@ -52,6 +52,8 @@ public class AddConcertContactCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Concert> lastShownConcertList = model.getFilteredConcertList();
+        assert lastShownList != null : "Person list should not be null";
+        assert lastShownConcertList != null : "Concert list should not be null";
 
         if (indexP.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
