@@ -131,7 +131,9 @@ public class HelpWindow extends UiPart<Stage> {
                         + "[ap/APPOINTMENT] [t/TAG]\ne.g., edit John Doe n/Betsy Crower t/ ap/"),
                 new CommandSummary("Find", "find KEYWORD [MORE_KEYWORDS]\ne.g., find olive 87438"),
                 new CommandSummary("Help", "help"),
-                new CommandSummary("List", "list")
+                new CommandSummary("List", "list\nlist * (to list starred contacts)"),
+                new CommandSummary("Star", "star INDEX / star NAME\ne.g., star 3, star Alex Yeoh"),
+                new CommandSummary("Unstar", "unstar INDEX / unstar NAME\ne.g., unstar 3, unstar Alex Yeoh")
         );
 
         actionColumn.setCellValueFactory(new PropertyValueFactory<>("action"));

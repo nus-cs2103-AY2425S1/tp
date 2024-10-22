@@ -268,4 +268,6 @@ Action     | Format, Examples
 **Edit**   | `edit NAME [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/AGE] [s/SEX] [ap/APPOINTMENT] [t/TAG]…`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` 
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James 89127777`
 **Help**   | `help`
-**List**   | `list`
+**List**   | `list` <br/>`list *` (to list starred contacts) 
+**Star** | `star INDEX` or `star NAME` <br/> e.g., `star 3`, `star Alex Yeoh` 
+**Unstar** | `unstar INDEX` or `unstar NAME` <br/> e.g., `unstar 3`, `unstar Alex Yeoh` 
