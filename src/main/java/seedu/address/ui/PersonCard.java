@@ -8,8 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import seedu.address.model.person.Person;
 
@@ -43,6 +41,16 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label appointment;
 
+    /**
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
+     *
+     * <p>This constructor initializes the UI components with the details of the specified {@code Person},
+     * including the person's name, phone number, email, appointment, property, and tags.</p>
+     *
+     * @param person        The {@code Person} whose details are to be displayed in the card.
+     * @param displayedIndex The index of the person in the list, used for display purposes.
+     *                      This will be prefixed to the person's name in the UI.
+     */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
@@ -57,9 +65,9 @@ public class PersonCard extends UiPart<Region> {
         tags.getChildren().clear();
 
         if (person.getTags().isEmpty()) {
-            tags.setVisible(false);  // Hide tags section if no tags
+            tags.setVisible(false); // Hide tags section if no tags
         } else {
-            tags.setVisible(true);  // Show the tag section if there are tags
+            tags.setVisible(true); // Show the tag section if there are tags
 
             // Set FlowPane properties
             tags.setHgap(5);
@@ -80,13 +88,14 @@ public class PersonCard extends UiPart<Region> {
 
                         // Calculate padding based on text length
                         double minPadding = 5; // Constant padding for top, right, and bottom
-                        double dynamicLeftPadding = Math.max(minPadding, textWidth / 2); // Adjust the left padding based on text length
+                        // Adjust the left padding based on text length
+                        double dynamicLeftPadding = Math.max(minPadding, textWidth / 2);
 
                         // Apply padding
                         tagLabel.setStyle(String.format("-fx-padding: %.0fpx %.0fpx %.0fpx %.0fpx;",
-                                minPadding,  // top padding
+                                minPadding, // top padding
                                 minPadding, // right padding
-                                minPadding,  // bottom padding
+                                minPadding, // bottom padding
                                 dynamicLeftPadding)); // left padding
 
                         tags.getChildren().add(tagLabel);
