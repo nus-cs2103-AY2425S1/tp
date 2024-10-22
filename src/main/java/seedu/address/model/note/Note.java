@@ -87,7 +87,7 @@ public class Note {
     }
 
     public static boolean isValidString(String test) {
-        return test.matches(VALIDATION_REGEX) && !test.isEmpty();
+        return test.matches(VALIDATION_REGEX);
     }
 
     public static boolean isValidAppointment(Appointment appointment) {

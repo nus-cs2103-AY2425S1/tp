@@ -2,8 +2,14 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -94,8 +100,26 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
+
     public StarredStatus getStarredStatus() {
         return starredStatus;
+    }
+
+    public void handleDueAppointments() {
+        LocalDateTime todayMidnight = LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT);
+        DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
+
+        Set<Appointment> appointmentsToRemove = new HashSet<>();
+        List<Appointment> modifiableAppointments = new ArrayList<>(appointments);
+        for (Appointment appointment : modifiableAppointments) {
+            if (appointment.appointment.isBefore(todayMidnight)) {
+                appointmentsToRemove.add(appointment);
+                note.addAppointment(appointment.appointment.format(FORMATTER));
+            }
+        }
+        modifiableAppointments.removeAll(appointmentsToRemove);
+        appointments.clear();
+        appointments.addAll(modifiableAppointments);
     }
 
     /**

@@ -113,6 +113,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
+        persons.forEach(Person::handleDueAppointments);
         internalList.setAll(persons);
         sort();
     }
