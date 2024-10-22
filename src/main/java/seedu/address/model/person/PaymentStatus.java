@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class PaymentStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Payment Status should be 'paid', 'unpaid', 'p, 'u', '0' (for paid), '1' (for unpaid) (case insensitive)";
+            "Payment Status should be 'pending', 'partial', 'paid', 'late' (case insensitive)";
 
     private static final String LATE = "late";
     private static final String PAID = "paid";
