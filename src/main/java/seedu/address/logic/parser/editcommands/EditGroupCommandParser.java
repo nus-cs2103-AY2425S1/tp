@@ -6,15 +6,19 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.addcommands.AddGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand;
 import seedu.address.logic.commands.editcommands.EditGroupCommand.EditGroupDescriptor;
-import seedu.address.logic.commands.editcommands.EditTaskCommand;
-import seedu.address.logic.parser.*;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupName;
 
@@ -39,6 +43,10 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
 
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_GROUP_NAME);
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
+            || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
+        }
 
         List<String> groupNames = argMultimap.getAllValues(PREFIX_GROUP_NAME);
         if (groupNames.size() > 2) {
@@ -46,10 +54,6 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         }
         if (groupNames.size() == 1) {
             throw new ParseException(EditGroupCommand.MESSAGE_NOT_EDITED);
-        }
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP_NAME)
-            || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
         EditGroupDescriptor editGroupDescriptor = new EditGroupDescriptor();
@@ -62,7 +66,7 @@ public class EditGroupCommandParser implements Parser<EditGroupCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes)  {
+    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes) {
         for (Prefix prefix : invalidPreFixes) {
             if (arg.contains(prefix.getPrefix())) {
                 return false;

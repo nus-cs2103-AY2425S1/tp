@@ -3,7 +3,12 @@ package seedu.address.logic.parser.editcommands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_ILLEGAL_PREFIX_USED;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.ALL_PREFIX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_STATUS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,7 +84,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes)  {
+    private boolean containsInvalidPrefix(String arg, List<Prefix> invalidPreFixes) {
         for (Prefix prefix : invalidPreFixes) {
             if (arg.contains(prefix.getPrefix())) {
                 return false;
