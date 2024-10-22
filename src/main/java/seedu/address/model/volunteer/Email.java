@@ -63,11 +63,11 @@ public class Email {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof seedu.address.model.person.Email)) {
+        if (!(other instanceof seedu.address.model.volunteer.Email)) {
             return false;
         }
 
-        seedu.address.model.person.Email otherEmail = (seedu.address.model.person.Email) other;
+        seedu.address.model.volunteer.Email otherEmail = (seedu.address.model.volunteer.Email) other;
         return value.equals(otherEmail.value);
     }
 

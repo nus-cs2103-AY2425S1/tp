@@ -164,17 +164,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws DuplicateAssignException if the volunteer is already assigned to the event.
      */
     public void assignVolunteerToEvent(Volunteer v, Event e) throws DuplicateAssignException {
+        // Store the names to avoid duplication
+        String volunteerName = v.getName().fullName;
+        String eventName = e.getName().toString();
         // Check if the volunteer is already assigned to the event
-        if (e.getVolunteers().contains(v.getName().fullName)) {
+        if (e.getVolunteers().contains(volunteerName)) {
             throw new DuplicateAssignException();
         }
-
         // Check if the event is already in the volunteer's list
-        if (v.getEvents().contains(e.getName().toString())) {
+        if (v.getEvents().contains(eventName)) {
             throw new DuplicateAssignException();
         }
-        v.addEvent(e.getName().toString());
-        e.addParticipant(v.getName().toString());
+        // Add the event and volunteer association
+        v.addEvent(eventName);
+        e.addParticipant(volunteerName);
     }
 
     /**
@@ -184,15 +187,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @throws NotAssignedException if the volunteer is not assigned to the event.
      */
     public void unassignVolunteerFromEvent(Volunteer v, Event e) throws NotAssignedException {
+        // Store the names to avoid duplication
+        String volunteerName = v.getName().toString();
+        String eventName = e.getName().toString();
         // Check if the volunteer is not assigned to the event
-        if (!e.getVolunteers().contains(v.getName().toString())) {
+        if (!e.getVolunteers().contains(volunteerName)) {
             throw new NotAssignedException();
         }
-        if (!v.getEvents().contains(e.getName().toString())) {
+        if (!v.getEvents().contains(eventName)) {
             throw new NotAssignedException();
         }
-        v.removeEvent(e.getName().toString());
-        e.removeParticipant(v.getName().toString());
+        // Remove the volunteer and event association
+        v.removeEvent(eventName);
+        e.removeParticipant(volunteerName);
     }
 
     //// util methods

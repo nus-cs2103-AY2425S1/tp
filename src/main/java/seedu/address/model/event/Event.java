@@ -8,6 +8,7 @@ import java.util.Objects;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.event.exceptions.ChronologicalOrderException;
 
 /**
  * Represents an Event in the address book.
@@ -30,8 +31,13 @@ public class Event {
      * Every field must be present and not null.
      */
     public Event(EventName eventName, Location location, Date date,
-                 Time startTime, Time endTime, Description description, List<String> volunteers) {
+                 Time startTime, Time endTime, Description description, List<String> volunteers)
+                    throws ChronologicalOrderException {
         requireAllNonNull(eventName, location, date, startTime, endTime, description, volunteers);
+        if (!startTime.isBefore(endTime)) {
+            throw new ChronologicalOrderException();
+        }
+
         this.id = nextId;
         nextId++;
 
@@ -49,7 +55,7 @@ public class Event {
      * Uses an empty description and volunteer list by default.
      */
     public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime,
-                 Description description) {
+                 Description description) throws ChronologicalOrderException {
         this(eventName, location, date, startTime, endTime, description, FXCollections.observableArrayList());
     }
 
@@ -57,7 +63,8 @@ public class Event {
      * Constructs an {@code Event} object with the specified event name, location, date, start time, and end time.
      * Uses an empty description and volunteer list by default.
      */
-    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime) {
+    public Event(EventName eventName, Location location, Date date, Time startTime, Time endTime)
+            throws ChronologicalOrderException {
         this(eventName, location, date, startTime, endTime, new Description(), FXCollections.observableArrayList());
     }
 
@@ -97,7 +104,7 @@ public class Event {
      *
      * @param newVolunteer The volunteer to add.
      */
-    public void addParticipant(String newVolunteer) {
+    public void assignVolunteer(String newVolunteer) {
         volunteers.add(newVolunteer);
     }
 
@@ -109,13 +116,15 @@ public class Event {
     public void unassignVolunteer(String unassignedVolunteer) {
         volunteers.remove(unassignedVolunteer);
     }
+
     /**
-     * Removes a volunteer from the event's list of participants.
+     * Returns true if the event has the specified volunteer.
      *
-     * @param volunteerToRemove The volunteer to remove.
+     * @param volunteerName The name of the volunteer to check for.
+     * @return True if the volunteer is in the event's list of participants.
      */
-    public void removeParticipant(String volunteerToRemove) {
-        volunteers.remove(volunteerToRemove);
+    public boolean hasVolunteer(String volunteerName) {
+        return this.volunteers.contains(volunteerName);
     }
 
     /**
@@ -171,9 +180,5 @@ public class Event {
                 .add("endTime", endTime)
                 .add("description", description)
                 .toString();
-    }
-
-    public boolean hasParticipant(String volunteerName) {
-        return this.volunteers.contains(volunteerName);
     }
 }
