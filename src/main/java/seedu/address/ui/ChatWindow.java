@@ -79,7 +79,7 @@ public class ChatWindow {
      * @param message The user's input message.
      * @return The assistant's response as a String.
      */
-    private String getResponse(String message) {
+    public String getResponse(String message) {
         message = message.toLowerCase().trim();
 
         switch (message) {
