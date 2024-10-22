@@ -2,6 +2,7 @@ package seedu.address.model.predicate;
 
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 
@@ -17,11 +18,9 @@ public class StudentHasPaidPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        if (paymentUpToDate) {
-            return Integer.parseInt(person.getPayment().overdueAmount) <= 0;
-        } else {
-            return Integer.parseInt(person.getPayment().overdueAmount) > 0;
-        }
+        int overdueAmount = Integer.parseInt(person.getPayment().overdueAmount);
+
+        return paymentUpToDate ? overdueAmount <= 0 : overdueAmount > 0;
     }
 
     @Override
