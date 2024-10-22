@@ -4,12 +4,33 @@ title: User Guide
 ---
 
 This app is a desktop app for managing candidates and job roles, **optimized for use via a Command Line Interface (CLI)** while still providing the benefits of a Graphical User Interface (GUI). If you can type fast, this app can help you manage your candidates and job roles faster than traditional GUI apps.
-* Table of Contents
-{:toc}
+## Table of Contents
+
+- [Quick Start](#quick-start)
+- [Symbols and Tips](#symbols-and-tips)
+- [Features ✨](#features-✨)
+    - [Notes About the Command Format](#notes-about-the-command-format)
+    - [Viewing Help: `help`](#📖-viewing-help--help)
+    - [Adding a Person: `add`](#➕-adding-a-person-add)
+    - [Listing All Persons: `list`](#📃-listing-all-persons--list)
+    - [Editing a Person: `edit`](#✏️-editing-a-person--edit)
+    - [Finding Persons by Name: `find`](#🔍-finding-persons-by-name-find)
+    - [Deleting a Person: `delete`](#❌-deleting-a-person-delete)
+    - [Filtering Contacts by Status: `filter`](#🔎-filtering-contacts-by-status-filter)
+    - [Clearing All Entries: `clear`](#🧹-clearing-all-entries-clear)
+    - [Exiting the Program: `exit`](#🚪-exiting-the-program-exit)
+    - [Saving Data](#💾-saving-data)
+    - [Editing the Data File](#✏️-editing-the-data-file)
+    - [Archiving Data Files](#📦-archiving-data-files-coming-in-v20)
+- [FAQ ❓](#faq-❓)
+- [Known Issues 🐛](#known-issues-🐛)
+- [Command Summary 📝](#command-summary-📝)
+- [Glossary](#glossary)
+- [Feedback and Support](#feedback-and-support)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 🚀Quick start 
+## Quick start 🚀
 
 1. **Check Java Installation**: Ensure you have **Java 17** or above installed on your computer.
     - [Check Java version on Windows](https://www.wikihow.com/Check-Your-Java-Version-in-the-Windows-Command-Line)
@@ -20,15 +41,20 @@ This app is a desktop app for managing candidates and job roles, **optimized for
 
 2. **Download TalentSG**: Get the latest `.jar` file from [here](https://github.com/AY2425S1-CS2103T-T09-2/tp/releases/tag/v1.3).
 
-3. **Set Up Home Folder**: Copy the `.jar` file to the folder you want to use as the home folder for TalentSG.
+![downloadPage.png](images%2FdownloadPage.png)
+
+3. **Set Up Home Folder**: Copy the `TalentSG.jar` file to the Desktop to launch.
 
 4. **Run the Application**:
     - Open a command terminal.
+![locateTerminal.png](images%2FlocateTerminal.png)  
     - Navigate (`cd`) to the folder containing the `.jar` file.
+![locateAppFile.png](images%2FlocateAppFile.png)
     - Run the application with the command:
       ```
       java -jar TalentSg.jar
       ```
+![launch instruction.png](images%2Flaunch%20instruction.png)
       A GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data. 🎉
 
       ![Ui](images/Ui.png)
@@ -44,7 +70,7 @@ This app is a desktop app for managing candidates and job roles, **optimized for
     - `clear` : Deletes all contacts.
     - `exit` : Exits the app.
 
-7. **Explore Features**: Refer to the [Features](#features-✨) section for detailed information on each command.
+7. **Explore Features**: Refer to the [Features](#features) section for detailed information on each command.
 
 ---
 ## Symbols and Tips
@@ -78,12 +104,13 @@ TalentSG provides a variety of features to help you manage candidates and job ro
 ---
 
 ### 📖 Viewing help : `help`
+![img_1.png](helpOutput/img_1.png)
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
+
+![img_1.png](img_1.png)
 
 ---
 
@@ -285,3 +312,11 @@ _Details coming soon ..._
 | **Filter** | `filter st/STATUS`<br> e.g., `filter st/Shortlisted`                                                                                                                                                                        |
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+---
+
+### Glossary
+
+- **CLI**: Command Line Interface.
+- **GUI**: Graphical User Interface.
+- **Module**: A category or grouping for candidates, such as job roles or departments.
