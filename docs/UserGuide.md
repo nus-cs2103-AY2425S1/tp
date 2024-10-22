@@ -10,6 +10,65 @@ MediBase3 (MB3) is a **desktop app for doctors to manage their patients and appo
 * Table of Contents
 {:toc}
 
+## How to use this User Guide
+Our user guide is tailored to ensure you can fully unlock the potential of MediBase3, whether you're new to MediBase3 or have been using the application for quite some time.
+In this section, we aim to provide you with the necessary tools to effectively navigate and utilize the guide.
+
+### Navigating the User Guide
+Each aspect of MediBase3 is split into different sections, which are accessible via the Table of Contents above.
+
+**For new MediBase3 users:**
+1. We **recommend** that you finish reading this section to better understand the format of the user guide.
+1. Once you are done, do head to the [Quick Start](#quick-start) section to get started with setting up MediBase3.
+
+**For experienced MediBase3 users:**
+1. If you need a quick refresher on how to use a specific feature in MediBase3, you can navigate to the [Features](#features) section.
+1. You may also skip to the [Command Summary](#command-summary) section for a quick overview of all the commands available in MediBase3 and their formats.
+
+For any additional information or queries, you can refer to the [FAQ](#faq) section or the [Known Issues](#known-issues) section.
+
+### Glossary
+As you read the user guide, you might encounter some unfamiliar technical terms. The table below provides the definitions for the key terms we will be using throughout the guide.
+
+Term | Definition
+---- | ----------
+Command |An input that is given to the application to perform a specific action. Commands are typically entered via the command box in the application.
+CLI | Command Line Interface(CLI) is a type of text-based interface that is used to interact with software via commands.
+GUI | Graphical User Interface(GUI) is a type of interface that allows users to interact with electronic devices through graphical icons and visual indicators.
+JAR | Java ARchive(JAR) is a package file format typically used to aggregate many Java class files and associated metadata and resources into one file for distribution.
+JSON | JavaScript Object Notation(JSON) is a lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+Parameter | A parameter refers to a field that requires input from the user. For example, in the command `delete i/S1234567A`, `i/S1234567A` is a parameter.
+Prefix | A prefix is a keyword that is used to identify the type of parameter that follows it. For example, in the command `delete i/S1234567A`, `i/` is the prefix for the NRIC parameter.
+
+### Text Formatting Conventions
+We will be using different text formatting styles to help you better understand the content of the user guide.
+
+Format | Description
+------ | -----------
+[hyperlink](#how-to-use-this-user-guide) | Blue hyperlinks are used to bring you to external websites or another section of the User Guide for more information.
+**Bold** | Bold text is used to highlight important information or key points.
+`Monospace` | Text with a monospace font and a gray background is used to represent commands, parameters and code snippets.
+
+### Annotated Text-Box Conventions
+The following annotated text-boxes are used throught this guide to provide useful insights on MediBase3 and its features:
+
+{: .alert .alert-info}
+> :information_source: **Note:**
+> 
+> Provides additional information about MediBase3 that you should be aware of.
+
+{: .alert .alert-success}
+> :bulb: **Tip:**
+> 
+> Provides helpful tips or suggestions to improve your experience with MediBase3.
+
+{: .alert .alert-warning}
+> :exclamation: **Caution:**
+> 
+> Warns you about potential issues or errors that you might encounter while using MediBase3.
+
+[Back to Table of Contents](#table-of-contents)
+
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
@@ -63,10 +122,10 @@ the constraints of each parameter when used in a command.
 
 {: .alert .alert-info}
 > **:information_source: Notes about the command format:**
->
+> 
 > * Words in `UPPER_CASE` are the parameters to be supplied by the user.
 > e.g. in `add n/NAME i/NRIC g/GENDER d/DOB p/PHONE_NUMBER e/EMAIL a/ADDRESS`, `NAME` is a parameter which can be used as `n/John Doe`.
-
+>
 > * Items in square brackets are optional.
 >  e.g `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` can be used as `edit S1234567A n/John Lim g/M` or as `edit S1234567A g/M`.
 >
@@ -158,7 +217,7 @@ Format: `edit NRIC [n/NAME] [i/NRIC] [g/GENDER] [d/DOB] [p/PHONE_NUMBER] [e/EMAI
 > * Refer to the [Parameter Details](#parameter-details) section for more information on the constraints for each parameter.
 
 Example:
-*  `edit S1234567A p/91234567 e/johndoe@example.com` Edits the phone number and email address of the patient with the NRIC`S1234567A`
+*  `edit S1234567A p/91234567 e/johndoe@example.com` will edit the phone number and email address of the patient with the NRIC`S1234567A`
 to `91234567` and `johndoe@example.com` respectively.
 
 {: .alert .alert-success}
@@ -203,11 +262,12 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
->
-> Examples:
-> * `find John` returns `john` and `John Doe`
-> * `find alex david` returns `Alex Yeoh`, `David Li`
->  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`
+
+![result for 'find alex david'](images/findAlexDavidResult.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -218,7 +278,7 @@ Finds patients whose medical condition contain the given keywords.
 Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 
 {: .alert .alert-info}
-> **:information_source: **Note:**
+> :information_source: **Note:**
 >
 > * The search is case-insensitive. e.g `diabetes` will match `Diabetes`
 > * The order of the keywords does not matter. e.g. `diabetes arthritis` will match `arthritis` and `diabetes` 
@@ -227,9 +287,9 @@ Format: `findMedCon KEYWORD [MORE_KEYWORDS]`
 > * Patients matching at least one keyword will be returned (i.e. `OR` search).
 >    e.g. `diabetes` will return `Alex Yeoh`, `David Li`
 > * Returns an empty patient list panel if no matching patients with the given keywords are found.
->
-> Examples:
-> * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
+
+Example:
+ * `findMedCon diabetes arthritis` returns `Alex Yeoh` and `David Li`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -240,15 +300,15 @@ Finds patients whose names contain the given NRIC.
 Format: `find NRIC`
 
 {: .alert .alert-info}
-> **:information_source: **Note:**
+> :information_source: **Note:**
 > * The search is case-insensitive. e.g `S1234567a` will match `S1234567A`
 > * Only the NRIC is searched.
 > * Only full NRIC will be matched e.g. `S1234567a` will not match `T12345`
 > * Returns an empty patient list panel if no matching patients with the given `NRIC` are found.
 > * Patients NRIC follows the NRIC constraint mentioned in the [Parameter Details](#Parameter-Details) section.
->
-> Examples:
-> * `findNric S1234567A` returns `Alex Yeoh`
+
+Example:
+* `findNric S1234567A` returns `Alex Yeoh`
 
 [Back to Table of Contents](#table-of-contents)
 
