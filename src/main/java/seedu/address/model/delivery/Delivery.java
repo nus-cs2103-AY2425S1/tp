@@ -84,6 +84,10 @@ public class Delivery {
         return archive;
     }
 
+    public boolean isArchived() {
+        return archive.isArchived();
+    }
+
     /**
      * Returns an immutable item set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

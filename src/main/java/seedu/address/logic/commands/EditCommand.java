@@ -159,8 +159,10 @@ public class EditCommand extends Command {
         Person inspectedPerson = InspectWindow.getInspectedPerson();
 
         //Currently no filtered list for delivery
+
         List<Delivery> deliveryList = inspectedPerson.getUnmodifiableDeliveryList();
-        if (index.getZeroBased() >= deliveryList.size()) {
+        if (index.getZeroBased() >= deliveryList.size()
+                || index.getZeroBased() >= inspectedPerson.getFirstArchivedIndex().getZeroBased()) {
             throw new CommandException(Messages.MESSAGE_INVALID_DELIVERY_DISPLAYED_INDEX);
         }
 

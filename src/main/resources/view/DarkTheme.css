@@ -3,6 +3,13 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+/* Styles for archived delivery card */
+.delivery-card.archived {
+    -fx-background-color: derive(#383838, 80%); /* Lighten the background */
+    -fx-text-fill: derive(#555555, 50%); /* Darken the text color */
+    -fx-opacity: 0.2; /* Make it less visible */
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";

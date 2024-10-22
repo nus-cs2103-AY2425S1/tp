@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -118,7 +119,8 @@ public class AddCommand extends Command {
             // but we can get the inspected person with this method. And if we have the inspected person here,
             // we can directly add delivery to their delivery list.
             Person inspectedPerson = InspectWindow.getInspectedPerson();
-            inspectedPerson.addDelivery(this.deliveryToAdd);
+            Index targetIndex = inspectedPerson.getFirstArchivedIndex();
+            inspectedPerson.addDelivery(targetIndex, this.deliveryToAdd);
             return new CommandResult(MESSAGE_SUCCESS_DELIVERY + inspectedPerson.getName(), DeliveryAction.ADD);
         }
     }

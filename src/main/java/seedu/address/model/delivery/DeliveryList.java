@@ -31,12 +31,43 @@ public class DeliveryList {
     }
 
     /**
+     * Returns the number of delivery in the list.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
+    /**
      * Adds a delivery to the list.
      */
     public void add(Delivery toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
     }
+
+    /**
+     * Adds a delivery to the index of the list.
+     */
+    public void add(Index targetIndex, Delivery toAdd) {
+        requireAllNonNull(toAdd, targetIndex);
+        int index = targetIndex.getZeroBased();
+        internalList.add(index, toAdd);
+    }
+
+    /**
+     * Get the index of the first archived delivery in the list.
+     */
+    public Index getFirstArchivedIndex() {
+        for (int i = 0; i < size(); i++) {
+            Delivery delivery = internalList.get(i);
+            if (delivery.isArchived()) {
+                Index firstArchivedIndex = Index.fromZeroBased(i);
+                return firstArchivedIndex;
+            }
+        }
+        return Index.fromZeroBased(size());
+    }
+
 
     /**
      * Replaces the delivery {@code target} in the list with {@code editedDelivery}.
