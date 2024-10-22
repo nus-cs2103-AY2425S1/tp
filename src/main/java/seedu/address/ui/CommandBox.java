@@ -21,7 +21,12 @@ import seedu.address.model.person.Price;
 import seedu.address.model.person.UnitNumber;
 import seedu.address.model.tag.Tag;
 
+import static seedu.address.logic.Messages.MESSAGE_DUPLICATE_FIELDS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX;
+import static seedu.address.logic.Messages.MESSAGE_NO_PROPERTIES_TO_DELETE;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -112,7 +117,12 @@ public class CommandBox extends UiPart<Region> {
             break;
         case MESSAGE_INVALID_PERSON_DISPLAYED_INDEX:
             errorIndexStart = commandText.indexOf(" ") + 1;
-
+            break;
+        case MESSAGE_INVALID_PROPERTY_DISPLAYED_INDEX:
+            errorIndexStart = commandText.trim().lastIndexOf(" ") + 1;
+            break;
+        case MESSAGE_INVALID_PHONE_NUMBER_KEYWORDS:
+            errorIndexStart = commandText.indexOf("findp") + 6;
             break;
         default:
             errorIndexStart = commandText.length();
