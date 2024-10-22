@@ -54,7 +54,7 @@ public class RestoreCommand extends Command {
             } else {
                 // Restore from the second-most recent backup
                 backupPath = storage.restoreBackup().orElseThrow(() ->
-                        new CommandException("No second-most recent backup available."));
+                        new CommandException("Backup file not found or invalid"));
                 backupData = storage.readAddressBook(backupPath)
                         .orElseThrow(() -> new DataLoadingException(new Exception("Backup file not found or invalid")));
             }
