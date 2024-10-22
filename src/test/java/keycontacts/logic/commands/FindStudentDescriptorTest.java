@@ -3,6 +3,7 @@ package keycontacts.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
 import keycontacts.logic.commands.FindCommand.FindStudentDescriptor;
@@ -25,16 +26,16 @@ public class FindStudentDescriptorTest {
 
     @Test
     public void testParameterizedConstructor() {
-        FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "123 Street", "12345678", "Grade 10");
+        FindStudentDescriptor descriptor = new FindStudentDescriptor("John", "123 Street", "12345678", "ABRSM 5");
         assertEquals("John", descriptor.getName());
         assertEquals("123 Street", descriptor.getAddress());
         assertEquals("12345678", descriptor.getPhone());
-        assertEquals("Grade 10", descriptor.getGradeLevel());
+        assertEquals("ABRSM 5", descriptor.getGradeLevel());
     }
 
     @Test
     public void testCopyConstructor() {
-        FindStudentDescriptor original = new FindStudentDescriptor("John", "123 Street", "12345678", "Grade 10");
+        FindStudentDescriptor original = new FindStudentDescriptor("John", "123 Street", "12345678", "ABRSM 10");
         FindStudentDescriptor copy = new FindStudentDescriptor(original);
         assertEquals(original, copy);
     }
@@ -45,7 +46,7 @@ public class FindStudentDescriptorTest {
         descriptor.setName("John");
         descriptor.setAddress("123 Street");
         descriptor.setPhone("12345678");
-        descriptor.setGradeLevel("Grade 10");
+        descriptor.setGradeLevel("Trinity 10");
 
         assertEquals("John", descriptor.getName());
         assertEquals("123 Street", descriptor.getAddress());
@@ -67,7 +68,7 @@ public class FindStudentDescriptorTest {
         descriptor = new FindStudentDescriptor("", "", "12345678", "");
         assertTrue(descriptor.matches(student));
 
-        descriptor = new FindStudentDescriptor("", "", "", "Grade 10");
+        descriptor = new FindStudentDescriptor("", "", "", "ABRSM 3");
         assertTrue(descriptor.matches(student));
 
         descriptor = new FindStudentDescriptor("Jane", "", "", "");

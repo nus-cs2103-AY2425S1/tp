@@ -67,8 +67,6 @@ public class ScheduleCommandTest {
 
     @Test
     public void execute_lessonUnchanged_throwsCommandException() throws Exception {
-        Student studentToSchedule = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-
         ScheduleCommand scheduleCommand = new ScheduleCommand(INDEX_FIRST_STUDENT, regularLesson);
 
         assertCommandFailure(scheduleCommand, model, ScheduleCommand.MESSAGE_LESSON_UNCHANGED);
