@@ -55,7 +55,8 @@ public class AddConsultCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.addConsult(newConsult);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)), CommandType.ADDCONSULT);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(newConsult)),
+                COMMAND_TYPE);
     }
 
     @Override

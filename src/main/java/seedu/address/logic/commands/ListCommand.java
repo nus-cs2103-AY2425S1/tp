@@ -28,6 +28,6 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(MESSAGE_SUCCESS, CommandType.LISTSTUDENT);
+        return new CommandResult(MESSAGE_SUCCESS, COMMAND_TYPE);
     }
 }
