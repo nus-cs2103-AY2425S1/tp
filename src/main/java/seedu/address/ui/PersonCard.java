@@ -54,15 +54,12 @@ public class PersonCard extends UiPart<Region> {
 
         // Check the tags for "student" or "teacher"
         if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("student"))) {
-            cardPane.setStyle("-fx-background-color: #349beb;"); // Inline style for student
-            System.out.println("student");
+            cardPane.setStyle("-fx-background-color: #5a83a3;"); // Inline style for student
         } else if (person.getTags().stream().anyMatch(tag -> tag.tagName.equals("teacher"))) {
-            cardPane.setStyle("-fx-background-color: #269e2e;"); // Inline style for teacher
-            System.out.println("teacher");
+            cardPane.setStyle("-fx-background-color: #5aa366;"); // Inline style for teacher
         } else {
             // Optional: Set default style for other persons without "student" or "teacher" tags
             cardPane.setStyle("-fx-background-color: #494a46;"); // Default style
-            System.out.println("default");
         }
 
         // Set other UI components
