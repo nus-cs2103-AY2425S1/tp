@@ -32,6 +32,8 @@ public class MarkAttendanceByStudentCommand extends Command {
             + "Example: " + COMMAND_WORD + "20/10/2024";
 
     public static final String MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS = "Marked attendance of student: %1$s";
+    public static final String MESSAGE_INVALID_TUTORIAL_FOR_STUDENT =
+            "The student does not take %1$s tutorial";
 
     private final Index targetIndex;
     private final Attendance attendance;
@@ -57,18 +59,26 @@ public class MarkAttendanceByStudentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
-        Person markedPerson = new Person(
-                personToMarkAttendance.getName(), personToMarkAttendance.getPhone(),
-                personToMarkAttendance.getEmail(), personToMarkAttendance.getAddress(),
-                personToMarkAttendance.getPayment(), new ArrayList<Participation>(),
-                personToMarkAttendance.getTags());
+        Person studentToMarkAttendance = lastShownList.get(targetIndex.getZeroBased());
+        Participation tutorialAttended = getParticipationOfTutorial(
+                studentToMarkAttendance.getParticipation(), tutorial);
 
-        model.setPerson(personToMarkAttendance, markedPerson);
+        if (tutorialAttended == null) {
+            throw new CommandException(String.format(MESSAGE_INVALID_TUTORIAL_FOR_STUDENT, tutorial));
+        }
+        tutorialAttended.getAttendanceList().add(attendance);
+
+        Person markedStudent = new Person(
+                studentToMarkAttendance.getName(), studentToMarkAttendance.getPhone(),
+                studentToMarkAttendance.getEmail(), studentToMarkAttendance.getAddress(),
+                studentToMarkAttendance.getPayment(), studentToMarkAttendance.getParticipation(),
+                studentToMarkAttendance.getTags());
+
+        model.setPerson(studentToMarkAttendance, markedStudent);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(String.format(MESSAGE_MARK_ATTENDANCE_STUDENT_SUCCESS,
-                Messages.format(markedPerson)));
+                Messages.format(markedStudent)));
     }
 
     @Override
@@ -91,5 +101,14 @@ public class MarkAttendanceByStudentCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .toString();
+    }
+
+    private Participation getParticipationOfTutorial(List<Participation> participationList, String tutorial) {
+        for (Participation participation : participationList) {
+            if (participation.isParticipationOfTutorial(tutorial)) {
+                return participation;
+            }
+        }
+        return null;
     }
 }
