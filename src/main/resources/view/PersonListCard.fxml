@@ -34,5 +34,6 @@
       <Label fx:id="payment" styleClass="cell_small_label" text="\$payment" />
       <Label fx:id="attendance" styleClass="cell_small_label" text="\$attendance here" />
     </VBox>
+    <VBox fx:id="attendanceContainerPlaceholder" GridPane.columnIndex="1"/>
   </GridPane>
 </HBox>
