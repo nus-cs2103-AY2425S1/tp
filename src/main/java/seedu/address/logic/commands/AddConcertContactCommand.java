@@ -72,7 +72,7 @@ public class AddConcertContactCommand extends Command {
 
         model.addConcertContact(linkedPerson);
         return new CommandResult(String.format(MESSAGE_LINK_PERSON_SUCCESS, Messages.format(personToLink),
-                Messages.format(concert)));
+                Messages.format(concert)), false, false, true);
     }
 
     @Override
