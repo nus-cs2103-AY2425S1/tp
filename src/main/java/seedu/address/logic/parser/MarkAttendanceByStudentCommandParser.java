@@ -3,9 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkAttendanceByStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.participation.Participation;
 import seedu.address.model.person.Attendance;
 
 /**
@@ -30,16 +33,18 @@ public class MarkAttendanceByStudentCommandParser implements Parser<MarkAttendan
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE), pe);
         }
 
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
+
         if (argMultimap.getValue(PREFIX_ATTENDANCE).isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
         }
-
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ATTENDANCE);
+//        if (argMultimap.getValue(PREFIX_TUTORIAL).isEmpty()) {
+//            throw new ParseException(
+//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAttendanceByStudentCommand.MESSAGE_USAGE));
+//        }
 
         Attendance attendance = ParserUtil.parseAttendance(argMultimap.getValue(PREFIX_ATTENDANCE).get());
-
         return new MarkAttendanceByStudentCommand(index, attendance, "Math");
     }
-
 }
