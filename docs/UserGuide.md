@@ -4,9 +4,11 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+#  UGTeach User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+UGTeach is a **desktop app for managing your students' contacts** that aims to empower undergraduate private tutors to **efficiently manage payments and organize schedules**. It streamlines tutoring operations and ensures you stay organized.
+Whether you're a Command Line Interface (CLI) pro or new to command lines, **we've got you covered**. Our app offers both a **CLI interface for advanced users** and a **GUI for those who prefer a more visual experience**.
+If you can type fast, UGTeach can get your contact management tasks done **faster than traditional GUI apps**.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -30,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`: Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -76,27 +78,34 @@ Format: `help`
 
 Adds a student to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID] [owed/OWED]`
+**Format:** `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]`
 
-<box type="note" seamless>**NOTE:** 
-1. <b>SCHEDULE</b> must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
-* <b>DAY_OF_THE_WEEK</b> includes Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
-* <b>START_TIME</b> and <b>END_TIME</b> are represented as `HHmm`.
+**Example:**
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography r/100 paid/100 owed/0`
 
-2. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
+**Output:**
+![addResult.jpeg](images/addResult.jpeg)
 
-3. <b>SUBJECT</b> should only be:
-`economics` / `literature` / `music` / `biology` / `chemistry` / `science` / `english` / `chinese` / `malay` / `tamil` / `math` / `history` / `geography` / `physics` / `GP`
+<box type="important" header="#### Constraints">
 
-4. <b>FEE</b> is the tuition fee per hour.
+1. **SCHEDULE** must be in the format of `DAY_OF_THE_WEEK`-`START_TIME`-`END_TIME`
+2. **DAY_OF_THE_WEEK** includes `Monday` `Tuesday` `Wednesday` `Thursday` `Friday` `Saturday` `Sunday`
+3. **START_TIME** and <b>END_TIME</b> are represented as `HHmm`.
+4. **PHONE_NUMBER** should be 8 digits that starts with 6, 8 or 9.
+5. **RATE**, **PAID** and **OWED** must be at least 0 with at most 2 decimal places.
+      <i>Example: </i> `12.00`, `0.0` or `7`
+6. **SUBJECT** should only be:
+`Economics`  `Literature`  `Music`  `Biology`  `Chemistry`  `Science`  
+`English`  `Chinese`  `Malay` `Tamil`  `Math`  `History`  `Geography`  `Physics`  `GP`
 
-5. <b>FEE</b>, <b>PAID</b> and <b>OWED</b> must be at least 0 with at most 2 decimal places.
-<i>Example: </i> `12.00`, `0.0` or `7`
 </box>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Sunday-1000-1200 s/Geography f/100 paid/100 owed/0`
-* `add n/Betsy Crowe s/Math t/Saturday-1400-1600 e/betsycrowe@example.com a/Block 7 #02-02 Red Hill p/1234567 f/200 owed/200`
+<box type="tip" header="#### Tips">
+
+1. New clashing schedule will be informed so that you can modify using the [`edit` command](#editing-a-student--edit)
+2. <b>RATE</b> is the tuition fee per hour.
+    
+</box>
 
 ### Listing all students : `list`
 
@@ -246,7 +255,7 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT f/FEE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP f/300 paid/300`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS t/SCHEDULE s/SUBJECT r/RATE [paid/PAID] [owed/OWED]` <br> e.g., `add n/James Ho p/82224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Monday-0800-1000 s/GP r/300 paid/300`
 **Clear**  | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
