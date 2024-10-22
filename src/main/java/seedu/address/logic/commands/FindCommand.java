@@ -38,7 +38,14 @@ public class FindCommand extends Command {
 
     private final List<Predicate<Person>> predicates;
 
+    /**
+     * Creates a FindCommand to find persons that match the specified predicates.
+     *
+     * @param predicates A list of predicates that specify the conditions to match.
+     */
     public FindCommand(List<Predicate<Person>> predicates) {
+        // For now we only support 1 or 2 predicates
+        assert predicates.size() == 1 || predicates.size() == 2;
         this.predicates = predicates;
     }
 
@@ -90,9 +97,10 @@ public class FindCommand extends Command {
      */
     private String getAllKeywordsFromPredicates(List<Predicate<Person>> predicates) {
         return predicates.stream()
-                .flatMap(predicate -> extractKeywords(predicate).stream())
-                .map(kw -> "\"" + kw + "\"")
-                .collect(Collectors.joining(", "));
+                .map(this::extractKeywords)
+                .map(kws -> kws.stream().collect(Collectors.joining(" OR ")))
+                .map(kws -> "(" + kws + ")")
+                .collect(Collectors.joining(" AND "));
     }
 
     /**
