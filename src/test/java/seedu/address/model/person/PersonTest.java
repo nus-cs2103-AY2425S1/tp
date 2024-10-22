@@ -153,4 +153,25 @@ public class PersonTest {
                 + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hashCode_sameAttributes_sameHashCode() {
+        // Create two person objects with the same attributes
+        Person person1 = new PersonBuilder(ALICE).build();
+        Person person2 = new PersonBuilder(ALICE).build();
+
+        // Ensure that two objects with the same attributes have the same hashCode
+        assertEquals(person1.hashCode(), person2.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentAttributes_differentHashCode() {
+        // Create two person objects with different attributes
+        Person person1 = new PersonBuilder(ALICE).build();
+        Person person2 = new PersonBuilder(BOB).build();
+
+        // Ensure that two objects with different attributes have different hashCodes
+        assertFalse(person1.hashCode() == person2.hashCode());
+    }
+
 }
