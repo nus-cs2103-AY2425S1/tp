@@ -29,9 +29,12 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         String filename = trimmedArgs;
 
         // Check if force flag is present
-        if (trimmedArgs.startsWith(ExportCommand.FORCE_FLAG + " ")) {
+        if (trimmedArgs.equals(ExportCommand.FORCE_FLAG)
+                || trimmedArgs.startsWith(ExportCommand.FORCE_FLAG + " ")) {
             isForceExport = true;
-            filename = trimmedArgs.substring(ExportCommand.FORCE_FLAG.length()).trim();
+            // Extract filename after the force flag and space
+            filename = trimmedArgs.equals(ExportCommand.FORCE_FLAG) ? ""
+                    : trimmedArgs.substring(ExportCommand.FORCE_FLAG.length()).trim();
         }
 
         // Validate filename
