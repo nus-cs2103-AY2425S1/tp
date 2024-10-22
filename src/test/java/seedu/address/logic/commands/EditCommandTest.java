@@ -22,6 +22,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,6 +186,10 @@ public class EditCommandTest {
 
         List<Policy> expectedPolicyList = new ArrayList<>();
         expectedPolicyList.add(validPolicy);
+
+        expectedPolicyList.sort(Comparator.comparing(Policy::getPolicyPaymentDueDate));
+
+        personToEdit.setPolicies(expectedPolicyList);
 
         assertEquals(expectedPolicyList, EditCommand.editPolicies(personToEdit, policyMap));
     }

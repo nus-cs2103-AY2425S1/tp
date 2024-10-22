@@ -13,14 +13,21 @@ public class SortCommandParser implements Parser<SortCommand> {
     @Override
     public SortCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        String[] tokens = args.trim().split("\\s+");
-
-        if (tokens.length < 1 || tokens.length > 2) {
+        String[] splitArgs = args.trim().split(" ");
+        if (splitArgs.length != 2) {
             throw new ParseException(SortCommand.MESSAGE_USAGE);
         }
 
-        String parameter = tokens[0];
-        String order = tokens.length == 2 ? tokens[1] : "asc";
+        String parameter = splitArgs[0];
+        String order = splitArgs[1];
+
+        if (!SortCommand.isValidParameter(parameter)) {
+            throw new ParseException(SortCommand.MESSAGE_INVALID_PARAMETER);
+        }
+
+        if (!SortCommand.isValidOrder(order)) {
+            throw new ParseException(SortCommand.MESSAGE_INVALID_ORDER);
+        }
 
         return new SortCommand(parameter, order);
     }
