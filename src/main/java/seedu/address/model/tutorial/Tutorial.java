@@ -2,6 +2,7 @@ package seedu.address.model.tutorial;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,15 +16,14 @@ import seedu.address.model.participation.Participation;
 public class Tutorial {
 
     private final String subject;
-    private final List<Participation> participationList;
+    private final List<Participation> participationList = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Tutorial(String subject, List<Participation> participationList) {
+    public Tutorial(String subject) {
         requireAllNonNull(subject, participationList);
         this.subject = subject;
-        this.participationList = participationList;
     }
 
     public String getSubject() {
