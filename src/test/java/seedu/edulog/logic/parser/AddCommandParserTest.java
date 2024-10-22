@@ -8,6 +8,8 @@ import static seedu.edulog.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC_NUMERIC;
+import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_NAME_DESC_SYMBOL;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.edulog.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -164,9 +166,13 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        // invalid name - symbols
+        assertParseFailure(parser, INVALID_NAME_DESC_SYMBOL + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+
+        // invalid name - purely numerical name
+        assertParseFailure(parser, INVALID_NAME_DESC_NUMERIC + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
@@ -185,8 +191,8 @@ public class AddCommandParserTest {
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_NAME_DESC_SYMBOL + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + INVALID_ADDRESS_DESC, Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
