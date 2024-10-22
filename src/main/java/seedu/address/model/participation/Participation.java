@@ -3,7 +3,6 @@ package seedu.address.model.participation;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Address.VALIDATION_REGEX;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.person.Attendance;
@@ -41,7 +40,7 @@ public class Participation {
 
     /**
      * ensures the immutability of the class
-     * @return a new List<Attendance>
+     * @return a new List of attendance
      */
     public List<Attendance> getAttendanceList() {
         return attendanceList;
