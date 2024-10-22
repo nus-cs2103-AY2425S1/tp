@@ -14,9 +14,10 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
- * A default model stub that have all the methods failing.
+ * A default model stub that has all of the methods failing.
  */
 public class ModelStub implements Model {
+
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         throw new AssertionError("This method should not be called.");
