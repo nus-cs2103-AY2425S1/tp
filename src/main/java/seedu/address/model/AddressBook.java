@@ -97,12 +97,41 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    //// archive-related operations
+
+    /**
+     * Archives the given person by moving them to the archived list.
+     * The person must exist in the active person list.
+     */
+    public void archivePerson(Person person) {
+        requireNonNull(person);
+        persons.archivePerson(person, archivedPersons);
+    }
+
+    /**
+     * Unarchives the given person by moving them back to the active list.
+     * The person must exist in the archived list.
+     */
+    public void unarchivePerson(Person person) {
+        requireNonNull(person);
+        persons.unarchivePerson(person, archivedPersons); // Move from archived list to active list
+    }
+
+    /**
+     * Returns an unmodifiable view of the archived person list.
+     */
+    public ObservableList<Person> getArchivedPersonList() {
+        return archivedPersons.asUnmodifiableObservableList();
+    }
+
+
     //// util methods
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("persons", persons)
+                .add("archivedPersons", archivedPersons)
                 .toString();
     }
 
@@ -123,7 +152,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         AddressBook otherAddressBook = (AddressBook) other;
-        return persons.equals(otherAddressBook.persons);
+        return persons.equals(otherAddressBook.persons)
+                && archivedPersons.equals(otherAddressBook.archivedPersons);
     }
 
     @Override

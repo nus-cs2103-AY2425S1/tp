@@ -34,7 +34,31 @@ public class ArchiveCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        return null;
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList(); // Get the list of currently shown persons.
+
+        List<Person> peopleToArchive = new ArrayList<>();
+        for (Index index : targetIndices) {  // Assuming targetIndices is a list of indices to archive.
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);  // Handle invalid index.
+            }
+
+            Person personToArchive = lastShownList.get(index.getZeroBased());
+            peopleToArchive.add(personToArchive);
+        }
+
+        List<String> resultMessages = new ArrayList<>();
+        for (Person person : peopleToArchive) {
+            model.archivePerson(person);  // Archive the person by moving them to the archived list in the model.
+            resultMessages.add(Messages.format(person));  // Format the success message for each archived person.
+        }
+
+        if (resultMessages.size() == 1) {
+            return new CommandResult(String.format(MESSAGE_ARCHIVE_PERSON_SUCCESS, resultMessages.get(0)));
+        } else {
+            return new CommandResult(String.format(MESSAGE_ARCHIVE_PEOPLE_SUCCESS,
+                    String.join("\n", resultMessages)));
+        }
     }
 
     @Override
